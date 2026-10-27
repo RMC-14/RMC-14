@@ -18,16 +18,19 @@ public sealed partial class DialogComponent : Component
     [DataField, AutoNetworkedField]
     public List<DialogOption> Options = new();
 
-    [DataField, AutoNetworkedField]
+    // Server-side callback payload. The client only needs the rendered dialog data.
+    [DataField]
     public object? Event;
 
-    [DataField, AutoNetworkedField]
+    // Input callbacks stay server-side and are raised when the user submits the dialog.
+    [DataField]
     public DialogInputEvent? InputEvent;
 
     [DataField, AutoNetworkedField]
     public bool LargeInput;
 
-    [DataField, AutoNetworkedField]
+    // Confirm callbacks stay server-side for the same reason.
+    [DataField]
     public object? ConfirmEvent;
 
     [DataField, AutoNetworkedField]

@@ -1,0 +1,59 @@
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorMedic
+  access: [ CMAccessERT ]
+  name: rmc-job-name-contractor-medic
+  playTimeTracker: RMCJobContractorMedic
+  ranks:
+    RMCRankFLMedic: []
+  startingGear: RMCGearContractorMedic
+  icon: RMCJobIconFreelancerMedic
+  spawnMenuRoleName: VAI Contractor Medical Specialist
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorMedic
+  name: contractor ghost role medic
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorMedic
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-medic
+    job: RMCContractorMedic
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorMedic
+  equipment:
+    jumpsuit: RMCJumpsuitFreelancerGreenPants
+    outerClothing: CMArmorM3Light
+    eyes: RMCGlassesMedicalHUDGlasses
+    belt: CMBeltMedicBagFilled
+    suitstorage: WeaponRifleMAR40
+    pocket1: RMCPouchMedicalERT
+    pocket2: RMCPouchMagazineLarge
+  storage:
+    back:
+    - CMDefibrillator
+    - CMHealthAnalyzer
+    - CMRollerBedSpawnFolded
+    - CMCrowbar
+    - RMCMREWeYaPMC
+    - CMGrenadeSmoke
+    pocket2:
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40Ext
+
+- type: playTimeTracker
+  id: RMCJobContractorMedic

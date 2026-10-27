@@ -1,0 +1,87 @@
+- type: rmcERTCall
+  id: RMCERTCallTSE
+  name: rmc-ert-call-tse-name
+  organization: rmc-ert-organization-tse
+  npcFactions: [ RoyalMarines, TSE ]
+  iffFaction: FactionRoyalMarines
+  category: rmc-ert-category-foreign-military
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-tse
+  randomWeight: 15
+  allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with an exact TSE/Royal Marines squad shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_tse_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleTSE
+  shuttleSpawnMarker: RMCERTShuttleStartPadTSE
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: teamlead
+    name: rmc-ert-role-tse-teamlead
+    job: CMRoyalMarinesTeamlead
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesTeamlead
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: commando
+    name: rmc-ert-role-tse-commando
+    job: CMRoyalMarinesCommando
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesCommando
+      weight: 100
+    min: 1
+    max: 1
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-tse-medic
+    job: CMRoyalMarinesMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesMedic
+      weight: 100
+    min: 1
+    max: 1
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: breacher
+    name: rmc-ert-role-tse-breacher
+    job: CMRoyalMarinesBreacher
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesBreacher
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer, breacher ]
+    seatTags: [ engineer, troop ]
+  - id: heavy
+    name: rmc-ert-role-tse-heavy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesMarksman
+      weight: 50
+    - entity: RMCRandomHumanoidRoyalMarinesSGO
+      weight: 50
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ specialist, smartgunner, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      messages:
+      - rmc-ert-announcement-tse-arrival-patna
+      - rmc-ert-announcement-tse-arrival-thunderchild
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 6

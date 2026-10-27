@@ -7,6 +7,14 @@
   - type: AccessReader
     access: [ [ "CMAccessKitchen" ] ]
 
+- type: entity
+  parent: CMWindoor
+  id: CMWindoorERT
+  suffix: ERT, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessERT"]]
+
 # Secure
 - type: entity
   parent: CMWindoorSecure

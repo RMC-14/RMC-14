@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCSPPLeader
   name: rmc-job-name-spp-leader
@@ -9,6 +9,7 @@
   startingGear: RMCGearSPPLeader
   icon: "RMCJobIconSPPLeader"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colonist
   - HospitalCorpsman

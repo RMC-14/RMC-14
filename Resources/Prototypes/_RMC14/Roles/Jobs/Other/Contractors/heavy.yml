@@ -1,0 +1,92 @@
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorHeavy
+  access: [ CMAccessERT ]
+  name: rmc-job-name-contractor-heavy
+  playTimeTracker: RMCJobContractorHeavy
+  startingGear: RMCGearContractorHeavy
+  spawnMenuRoleName: VAI Contractor Machinegunner
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorHeavy
+  name: contractor ghost role heavy
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorHeavy
+
+- type: entity
+  parent: RMCRandomHumanoidContractorHeavy
+  id: RMCRandomHumanoidContractorHeavyMAR40LMG
+  suffix: Spawner, Player, Friendly, MAR40 LMG
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorHeavy
+
+- type: entity
+  parent: RMCRandomHumanoidContractorHeavy
+  id: RMCRandomHumanoidContractorHeavyM60
+  suffix: Spawner, Player, Friendly, M60
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorHeavyM60
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorHeavy
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-heavy
+    job: RMCContractorHeavy
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+
+- type: randomHumanoidSettings
+  parent: RMCContractorHeavy
+  id: RMCContractorHeavyM60
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-heavy
+    job: RMCContractorHeavyM60
+
+- type: job
+  parent: RMCContractorHeavy
+  id: RMCContractorHeavyM60
+  playTimeTracker: RMCJobContractorHeavy
+  startingGear: RMCGearContractorHeavyM60
+  spawnMenuRoleName: VAI Contractor Machinegunner (M60)
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorHeavy
+  equipment:
+    outerClothing: RMCArmorM3LightPadded
+    belt: RMCBeltMachineGunner
+    pocket1: RMCPouchExplosiveFilledHEDP
+    pocket2: RMCPouchMagazineLarge
+    suitstorage: RMCWeaponLMGM60
+  storage:
+    belt:
+    - RMCMagazineLMGM60
+    - RMCMagazineLMGM60
+    - RMCExplosiveBreachingCharge
+    pocket2:
+    - RMCMagazineLMGM60
+    - RMCMagazineLMGM60
+    back:
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - CMCrowbar
+    - RMCMREWeYaPMC
+
+- type: startingGear
+  parent: RMCGearContractorHeavy
+  id: RMCGearContractorHeavyM60
+  equipment:
+    suitstorage: RMCWeaponLMGM60
+
+- type: playTimeTracker
+  id: RMCJobContractorHeavy
