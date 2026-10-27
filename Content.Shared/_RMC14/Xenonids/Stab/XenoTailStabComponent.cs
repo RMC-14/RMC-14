@@ -58,4 +58,7 @@ public sealed partial class XenoTailStabComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool HitMobsOnly = false;
+
+    [DataField]
+    public float BonusDamageMult = 1.2f;
 }

@@ -75,7 +75,7 @@ public sealed class XenoFlurrySystem : EntitySystem
 
         //TODO RMC14 targets random limb
         var damage = new DamageSpecifier(xeno.Comp.Damage);
-        var ev = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
+        var ev = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier(), ref xeno.Comp.BonusDamageMult);
         RaiseLocalEvent(xeno, ref ev);
         damage += ev.Damage;
 
