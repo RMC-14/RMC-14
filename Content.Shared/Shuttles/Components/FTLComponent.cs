@@ -51,9 +51,9 @@ public sealed partial class FTLComponent : Component
     public ProtoId<TagPrototype>? PriorityTag;
 
     [ViewVariables(VVAccess.ReadWrite), DataField("soundTravel")]
-    public SoundSpecifier? TravelSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/hyperspace_progress.ogg")
+    public SoundSpecifier? TravelSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/dropship_travel.ogg") // RMC14 edit: "/Audio/Effects/Shuttle/hyperspace_progress.ogg" -> dropship_travel.ogg
     {
-        Params = AudioParams.Default.WithVolume(-3f).WithLoop(true)
+        Params = AudioParams.Default.WithVolume(5f).WithLoop(true) // RMC14 -3f -> 5f
     };
 
     [DataField]

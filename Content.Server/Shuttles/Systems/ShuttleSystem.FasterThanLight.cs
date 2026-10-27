@@ -41,12 +41,6 @@ public sealed partial class ShuttleSystem
     {
         Params = AudioParams.Default.WithVolume(6f),
     };
-
-    private readonly SoundSpecifier _travelSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/dropship_travel.ogg")
-    {
-        Params = AudioParams.Default.WithVolume(6f).WithLoop(true),
-    };
-
     private readonly SoundSpecifier _arrivalSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_landing.ogg")
     {
         Params = AudioParams.Default.WithVolume(5f),
@@ -448,7 +442,7 @@ public sealed partial class ShuttleSystem
 
         // Audio
         // RMC14
-        var sound = _travelSound;
+        var sound = comp.TravelSound;
         if (TryComp<RMCOverrideShuttleSoundsComponent>(entity, out var replacement))
             sound = replacement.TravelSound;
 
