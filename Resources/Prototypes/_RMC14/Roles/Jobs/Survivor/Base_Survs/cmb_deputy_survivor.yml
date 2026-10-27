@@ -7,7 +7,14 @@
   name: rmc-job-name-survivor-cmb-deputy
   description: cm-job-description-survivor
   ranks:
-    RMCRankCMBDeputy: []
+    RMCRankCMBCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 630000 # 175 hours
+    RMCRankCMBSeniorDeputy:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
   startingGear: RMCGearSurvivorCMBDeputy
   accessGroups:
   - ColonistCMBSurvivor
