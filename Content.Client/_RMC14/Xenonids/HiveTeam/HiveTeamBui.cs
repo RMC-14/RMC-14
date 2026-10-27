@@ -1,12 +1,9 @@
 using System.Linq;
-using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveTeam;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
-using Content.Shared.Mobs.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.HiveTeam;
@@ -17,67 +14,38 @@ public sealed class HiveTeamBui : BoundUserInterface
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
-    private readonly SharedXenoHiveSystem _hiveSystem;
-    private readonly MobStateSystem _mobState;
     private HiveTeamWindow? _window;
 
     public HiveTeamBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _sprite = EntMan.System<SpriteSystem>();
-        _hiveSystem = EntMan.System<SharedXenoHiveSystem>();
-        _mobState = EntMan.System<MobStateSystem>();
     }
 
     protected override void Open()
     {
         base.Open();
         _window = this.CreateWindow<HiveTeamWindow>();
-        Refresh();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        Refresh();
-    }
+        if (state is not HiveTeamBuiState s)
+            return;
 
-    public void Refresh()
-    {
         if (_window == null)
             return;
 
-        if (_hiveSystem.GetHive(Owner) is not { } hive)
-            return;
-
-        if (!EntMan.TryGetComponent(hive.Owner, out HiveTeamsComponent? teams))
-            return;
-
-        var allXenos = BuildAllXenos(hive.Owner);
-        var pickerXenos = BuildPickerXenos(allXenos, teams);
-        _window.UpdateState(teams, allXenos, pickerXenos, GetTexture, OnSetLeader, OnRemoveLeader, OnAddMember, OnRemoveMember, OnSetRole);
-    }
-
-    private List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> BuildAllXenos(EntityUid hiveOwner)
-    {
-        var result = new List<(NetEntity Entity, string Name, EntProtoId? ProtoId)>();
-        var query = EntMan.AllEntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
-        while (query.MoveNext(out var uid, out _, out var member, out var meta))
-        {
-            if (uid == Owner || member.Hive != hiveOwner)
-                continue;
-            if (_mobState.IsDead(uid))
-                continue;
-            result.Add((Entity: EntMan.GetNetEntity(uid), Name: meta.EntityName, ProtoId: meta.EntityPrototype?.ID));
-        }
-        result.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
-        return result;
+        var allXenos = s.AllXenos.Select(x => (x.Entity, x.Name, x.ProtoId)).ToList();
+        var pickerXenos = BuildPickerXenos(allXenos, s.Teams);
+        _window.UpdateState(s.Teams, allXenos, pickerXenos, GetTexture, OnSetLeader, OnRemoveLeader, OnAddMember, OnRemoveMember, OnSetRole);
     }
 
     private static List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> BuildPickerXenos(
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
-        HiveTeamsComponent teams)
+        List<HiveTeamEntryState> teams)
     {
         var assigned = new HashSet<NetEntity>();
-        foreach (var team in teams.Teams)
+        foreach (var team in teams)
         {
             if (team.Leader != null)
                 assigned.Add(team.Leader.Value);
