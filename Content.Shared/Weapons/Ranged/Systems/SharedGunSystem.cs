@@ -800,6 +800,10 @@ public abstract partial class SharedGunSystem : EntitySystem
                     if (ent != null)
                         _flamer.ShootFlamer((ent.Value, flamer), (gunUid, gun), user, fromCoordinates, toCoordinates);
                     break;
+                case RMCFlamerNozzleComponent nozzle:
+                    if (ent != null)
+                        _flamer.ShootNozzle((ent.Value, nozzle), (gunUid, gun), user, fromCoordinates, toCoordinates);
+                    break;
                 case RMCSprayAmmoProviderComponent spray:
                     if (ent != null)
                         _flamer.ShootSpray((ent.Value, spray), (gunUid, gun), user, fromCoordinates, toCoordinates);

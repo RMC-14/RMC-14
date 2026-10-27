@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.GameTicking;
+using Content.Server.RandomMetadata;
 using Content.Server.Spawners.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -99,7 +100,8 @@ public sealed partial class CMDistressSignalRuleSystem
         ev.MetaJobAssignments.Add(survAssignment);
 
         // TODO RMC14 this isn't the ideal place for this initialization work
-        OperationName ??= GetRandomOperationName();
+        if (OperationName == null && TryComp<RandomMetadataComponent>(rule, out var metadata) && metadata.NameSegments != null)
+            OperationName = MetaData(rule).EntityName;
 
         if (!InitializeXenoMap(rule, ruleComp))
             return;

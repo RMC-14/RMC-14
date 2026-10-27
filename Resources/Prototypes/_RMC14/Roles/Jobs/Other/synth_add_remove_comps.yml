@@ -1,0 +1,59 @@
+- type: entity
+  id: RMCSynthAddComponents
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+      params:
+        variation: 0.15
+        volume: -1
+    angle: 30
+    animation: WeaponArcFist
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 35
+  - type: CMArmorPiercing
+    ignoreXenoArmor: true
+  - type: NightVision
+    innate: true
+    state: half
+    onlyHalf: true
+    alert: SynthNightVision
+  - type: EyeProtection
+  - type: WoundableUntreatable
+  - type: Insulated
+  - type: ZombieImmune
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+  - type: ParalyzeImmuneFrom
+    whitelist:
+      tags:
+      - RMCSynthGrabbable
+  - type: InfectOnPullAttemptImmune
+  - type: RMCAllowSuitStorage
+  - type: DemoSpecWhitelist
+  - type: GrenadeSpecWhitelist
+  - type: ScoutWhitelist
+  - type: SniperWhitelist
+  - type: PyroWhitelist
+  - type: QYJWhitelist
+
+- type: entity
+  id: RMCSynthRemoveComponents
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CMSurgeryTarget
+  - type: Infectable
+  - type: Hunger
+  - type: Thirst
+  - type: Perishable
+  - type: ThermalRegulator
+  - type: Stamina
+  - type: DamageForceSay
+  - type: Dna
+  - type: InjectableSolution
+  - type: IVDripTarget
+  - type: RMCSuicide
+    damage: { }

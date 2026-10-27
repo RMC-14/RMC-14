@@ -1,0 +1,81 @@
+- type: job
+  parent: RMCSurvivorMilitary
+  id: RMCSurvivorTyrargoBase
+  name: rmc-job-name-tyrargo
+  description: rmc-job-description-tyrargo
+  ranks:
+    RMCRankPrivateFirstClass: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - ColonistEngi
+  joinNotifyCrew: false
+  startingGear: RMCGearTyrargoBase
+  hasIcon: true
+  greeting: rmc-job-greeting-tyrargo
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: UNMC Survivor (Tyrargo Rift Base)
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTyrargoBase
+  equipment:
+    jumpsuit: RMCJumpsuitMarineTyrargoWebbing
+    back: RMCSatchelTyrargoSurvivorFill
+    shoes: CMBootsBlackFilled
+    outerClothing: CMArmorM4TyrargoSurvivorFill
+    id: CMIDCardStandardDogtag
+    ears: RMCHeadsetTyrargo
+    gloves: CMHandsBlackMarine
+    pocket1: RMCPouchFirstAidInjectors # todo randomized med pouches?
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+
+- type: entity
+  id: RMCSurvivorPresetTyrargoSurvivorNoPrimary
+  name: tyrargo marine no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ RMCHeadCapFlippable, RMCGlassesTriMaxBlack ]
+    - [ RMCHeadBeretSquad, RMCGlassesTriMaxBlack ] # todo army beret
+    - [ RMCArmorHelmetTyrargo, RMCGogglesBallisticPolarizedBlue ]
+    - [ RMCArmorHelmetTyrargo, RMCGogglesBallisticPolarizedBlue ]
+    - [ RMCArmorHelmetTyrargo, RMCGogglesBallisticPolarizedBlue ]
+    randomGearOther:
+    -
+      - [ RMCCigarettePackLuckySloths ]
+      - [ CMDrinkCanBobdaClassic ]
+      - [ CMDrinkCanMountainWind ]
+    randomWeapon:
+    - [ RMCMK80BeltSurvivorFill ]
+    - [ RMCMK80BeltSurvivorFill ]
+    - [ RMCMK80BeltSurvivorFill ]
+    - [ RMCHolsterSMGPouchFilledSurvivor ]
+    - [ RMCHolsterSMGPouchFilledSurvivor ]
+    - [ RMCMotionDetector ]
+    tryEquipRandomWeapon: true
+
+- type: entity
+  parent: RMCSurvivorPresetTyrargoSurvivorNoPrimary
+  id: RMCSurvivorPresetTyrargoSurvivorFull
+  name: tyrargo marine survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons: # 1/5 M4SPR, 4/5 MK2
+    - [ RMCWeaponRifleM54CSurvivor, CMMagazineRifleM54C, RMCMagazineRifleM54CHEAPEmpty, RMCMagazineRifleM54CHEAPEmpty ]
+    - [ RMCWeaponRifleM54CSurvivor, CMMagazineRifleM54C, RMCMagazineRifleM54CHEAPEmpty, RMCMagazineRifleM54CHEAPEmpty ]
+    - [ RMCWeaponRifleM54CSurvivor, CMMagazineRifleM54C, RMCMagazineRifleM54CHEAPEmpty, RMCMagazineRifleM54CHEAPEmpty ]
+    - [ RMCWeaponRifleM54CSurvivor, CMMagazineRifleM54C, RMCMagazineRifleM54CHEAPEmpty, RMCMagazineRifleM54CHEAPEmpty ]
+    - [ WeaponRifleM4SPRSurvivor, CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, RMCMagazineRifleM4SPRHEAPEmpty ]
+    primaryWeaponChance: 1
+
+- type: entity
+  parent: RMCSurvivorPresetTyrargoSurvivorFull
+  id: RMCSurvivorPresetTyrargoSurvivorNoPistol
+  name: tyrargo marine survivor no pistol preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomWeapon:
+    - []

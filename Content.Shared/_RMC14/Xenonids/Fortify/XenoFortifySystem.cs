@@ -18,6 +18,7 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -41,6 +42,39 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    public bool IsFortified(EntityUid xeno)
+    {
+        return TryComp<XenoFortifyComponent>(xeno, out var fortify) && fortify.Fortified;
+    }
+
+    public bool TryBreakFortify(EntityUid xeno)
+    {
+        if (!TryComp<XenoFortifyComponent>(xeno, out var fortify) || !fortify.Fortified)
+            return false;
+
+        Unfortify((xeno, fortify));
+        return true;
+    }
+
+    public bool TryRelocateFortified(Entity<XenoFortifyComponent?> xeno, EntityCoordinates target)
+    {
+        if (!Resolve(xeno, ref xeno.Comp, false) || !xeno.Comp.Fortified)
+            return false;
+
+        var xform = Transform(xeno);
+
+        if (!xeno.Comp.CanMoveFortified && xform.Anchored)
+        {
+            _transform.Unanchor(xeno.Owner, xform);
+            _transform.SetCoordinates(xeno.Owner, xform, target);
+            _transform.AnchorEntity((xeno.Owner, xform));
+            return true;
+        }
+
+        _transform.SetCoordinates(xeno.Owner, xform, target);
+        return true;
+    }
 
     public override void Initialize()
     {

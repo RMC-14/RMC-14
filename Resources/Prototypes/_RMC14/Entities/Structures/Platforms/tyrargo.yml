@@ -1,0 +1,36 @@
+# Tyrargo Rock
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformTyrargoRock
+  name: rock edge
+  suffix: Tyrargo
+  description: A solid chunk of desolate rocks. Looks like you could climb it with some difficulty.
+  components:
+  - type: Sprite
+    state: tyrargo_rock_platform
+  - type: Construction
+    graph: RMCPlatformTyrargoRockDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformTyrargoRockBroken
+  name: destroyed rock edge
+  suffix: Tyrargo
+  description: A solid chunk of desolate rocks. Looks like you could climb it with some difficulty. It has been destroyed.
+  components:
+  - type: Sprite
+    state: tyrargo_rock_platform_broken
+  - type: Construction
+    graph: RMCPlatformTyrargoRockDestructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformTyrargoRockCornerSmall
+  name: rock corner
+  suffix: Tyrargo
+  description: A solid chunk of desolate rocks.
+  components:
+  - type: Sprite
+    state: tyrargo_rock_platform_deco

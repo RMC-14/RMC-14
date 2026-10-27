@@ -1,0 +1,68 @@
+- type: entity
+  parent: CMLockerBase
+  id: RMCClosetMedical
+  name: medical closet
+  description: Filled with medical items.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/medical_white.rsi
+
+- type: entity
+  parent: RMCClosetMedical
+  id: RMCClosetMedicalMedicine
+  name: medicine closet
+  suffix: Filled, Medical, Medicine
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCBoxSyringe
+      - id: RMCDropper
+      - id: RMCDropper
+      - id: CMBeaker
+      - id: CMBeaker
+      - id: CMBottleInaprovaline
+      - id: CMBottleDylovene
+      - id: RMCBoxPillCanister
+      - id: RMCBoxPillCanister
+
+- type: entity
+  parent: RMCClosetMedical
+  id: RMCClosetMedicalAnesthetic
+  name: anesthetic closet
+  description: Used to knock people out.
+  suffix: Filled, Medical, Anesthetic
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+  - type: StorageFill
+    contents:
+      - id: CMAnestheticTank
+      - id: CMAnestheticTank
+      - id: CMAnestheticTank
+      - id: CMMaskGasMedical
+      - id: CMMaskGasMedical
+      - id: CMMaskGasMedical
+
+- type: entity
+  parent: RMCClosetMedical
+  id: RMCClosetMedicalDoctors
+  name: medical doctor's locker
+  suffix: Filled, Medical, Doctor's
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMBeltMedicalFilled
+      - id: CMBeltMedicalFilled
+      - id: CMSatchelMarine
+      - id: CMScrubsGreen
+      - id: RMCPouchMedical
+      - id: RMCPouchMedical
+      - id: RMCPouchSyringe
+      - id: RMCPouchMedkit
+      - id: RMCPouchMedkit
+      - id: RMCPouchChem
+      - id: RMCPouchChem
+      - id: RMCPouchVialFill
+      - id: RMCPouchVialFill
+      - id: RMCPouchReagentCanister
+      - id: RMCPouchReagentCanister

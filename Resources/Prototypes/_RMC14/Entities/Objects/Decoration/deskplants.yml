@@ -1,0 +1,82 @@
+- type: entity
+  parent: BaseItem
+  id: RMCBaseDeskPlant
+  name: desk plant
+  description: A small desk plant in a similarly small pot.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/desk_plants.rsi
+    state: bonsai
+  - type: PhysicalComposition
+    materialComposition: # Same "plastic" as the ashtrays I guess?
+      CMSteel: 30
+      CMGlass: 30
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: RMCBaseDeskPlant
+  id: RMCDeskPlantBonsai
+  name: desk plant
+  suffix: Bonsai
+  description: Majestically commanding this austere ceramic pot is a diminutive maple tree, trained into bonsai form by means of meticulous pruning, trimming, and deadwood techniques. It glowers at you condescendingly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/desk_plants.rsi
+    state: bonsai
+
+- type: entity
+  parent: RMCBaseDeskPlant
+  id: RMCDeskPlantCactus
+  name: desk plant
+  suffix: Cactus
+  description: It's a miniature cactus, contained within a small terracotta pot capable of fitting on a desk without cluttering it unnecessarily. Though it may seem aggressive from the outside, it holds a sweet interior.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/desk_plants.rsi
+    state: cactus
+
+- type: entity
+  parent: RMCBaseDeskPlant
+  id: RMCDeskPlantDry
+  name: desk plant
+  suffix: Dry Grass
+  description: A humble plastic pot containing dry dirt and some grass desperately clinging to life, despite everything. Somehow, looking at it is almost inspiring.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/desk_plants.rsi
+    state: dry
+
+- type: entity
+  parent: RMCBaseDeskPlant
+  id: RMCDeskPlantHorizon
+  name: desk plant
+  suffix: Horizon
+  description: Some fake plastic flowers in New Horizon Day colors, rooted in fake plastic earth, in a fake plastic pot small enough to reasonably fit on a desk. Looking at it makes you feel like rubber.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/desk_plants.rsi
+    state: horizon
+
+- type: entity
+  parent: RMCBaseDeskPlant
+  id: RMCDeskPlantOrchid
+  name: desk plant
+  suffix: Orchid
+  description: Within the confines of this cracked terracotta pot, a solitary pink rock orchid blooms. It seems beauty blossoms even in broken vessels.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/desk_plants.rsi
+    state: orchid
+
+- type: entity
+  parent: RMCBaseDeskPlant
+  id: RMCDeskPlantPink
+  name: desk plant
+  suffix: Pink
+  description: A ceramic pot, uninteresting in almost every way. More interestingly, the plant inside looks like it's blushing. You can't help but wonder why it's so embarrassed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/desk_plants.rsi
+    state: pink

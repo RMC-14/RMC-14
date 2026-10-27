@@ -111,6 +111,43 @@
     - RMCWeaponRifleM4SPR
 
 - type: entity
+  parent: WeaponRifleM4SPRFilled
+  id: WeaponRifleM4SPRSurvivor
+  suffix: Tyrargo, Survivor
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS5RedDotSight
+        whitelist:
+          tags:
+          - RMCAttachmentB8SmartScope
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentAngledGrip
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentUnderbarrelExtinguisher
+
+- type: entity
   parent: WeaponRifleM4SPR
   name: M5SPR battle rifle
   id: WeaponRifleM5SPR
@@ -371,6 +408,13 @@
  #   bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
+  parent: RMCMagazineRifleM4SPRHEAP
+  id: RMCMagazineRifleM4SPRHEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: RMCEmptyMag
+
+- type: entity
   parent: CMMagazineRifleM4SPR
   id: CMMagazineRifleM4SPRAP
   name: M4SPR AP magazine (10x24mm)
@@ -508,6 +552,7 @@
 - type: entity
   parent: BulletRifleM5SPRHVP
   id: BulletRifleM5SPRHVHIP
+  categories: [ HideSpawnMenu ]
   components:
   - type: RMCStunOnHit
     stuns:

@@ -35,6 +35,25 @@
 
 - type: tile
   parent: CMPlanetBase
+  id: CMPlanetGrass1Weedable
+  name: tiles-cm-grass-weedable
+  sprite: /Textures/_RMC14/Tiles/planet/grass1/grass.png
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/planet/grass1/single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/grass1/single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/grass1/single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/grass1/single_edge.png
+    South: /Textures/_RMC14/Tiles/planet/grass1/double_edge.png
+    East: /Textures/_RMC14/Tiles/planet/grass1/double_edge.png
+    North: /Textures/_RMC14/Tiles/planet/grass1/double_edge.png
+    West: /Textures/_RMC14/Tiles/planet/grass1/double_edge.png
+  baseTurf: CMPlanetDirt
+  weedsSpreadable: true
+  semiWeedable: true
+
+- type: tile
+  parent: CMPlanetBase
   id: CMPlanetGrass2
   name: tiles-cm-grass
   sprite: /Textures/_RMC14/Tiles/planet/grass2/grass.png

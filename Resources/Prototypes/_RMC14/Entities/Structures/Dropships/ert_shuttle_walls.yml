@@ -1131,6 +1131,8 @@
     state: nightmare_spp_wall_16
   - type: Icon
     state: nightmare_spp_wall_16
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCERTShuttleWallNightmareSPP

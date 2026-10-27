@@ -76,6 +76,12 @@ namespace Content.Client.Actions
         {
             // TODO: Decouple this.
             ent.Comp.IconColor = _sharedCharges.GetCurrentCharges(ent.Owner) == 0 ? ent.Comp.DisabledIconColor : ent.Comp.OriginalIconColor;
+
+            //RMC14
+            if (!ent.Comp.Enabled)
+                ent.Comp.IconColor = ent.Comp.DisabledIconColor;
+            //RMC14
+
             base.UpdateAction(ent);
             if (_playerManager.LocalEntity != ent.Comp.AttachedEntity)
                 return;

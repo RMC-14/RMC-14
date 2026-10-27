@@ -1,5 +1,4 @@
 using System.Globalization;
-using System.Linq;
 using Content.Server.Administration;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared.Administration;
@@ -69,7 +68,7 @@ internal sealed class OrbitalDropCommand : LocalizedEntityCommands
     {
         return args.Length switch
         {
-            1 => CompletionResult.FromHintOptions(_entities.GetEntities().Select(e => e.ToString()), "<EntityUid>"),
+            1 => CompletionResult.FromHintOptions(CompletionHelper.NetEntities(args[0], _entities), "<EntityUid>"),
             2 => CompletionResult.FromHint("<x>"),
             3 => CompletionResult.FromHint("<y>"),
             4 => CompletionResult.FromHintOptions(CompletionHelper.MapIds(_entities), "[MapId]"),
