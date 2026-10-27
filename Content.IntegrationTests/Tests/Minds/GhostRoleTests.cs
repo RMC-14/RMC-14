@@ -125,7 +125,7 @@ public sealed class GhostRoleTests
         await server.WaitPost(() =>
         {
             var id = entMan.GetComponent<GhostRoleComponent>(ghostRole).Identifier;
-            entMan.EntitySysManager.GetEntitySystem<GhostRoleSystem>().Takeover(session, id);
+            entMan.EntitySysManager.GetEntitySystem<GhostRoleSystem>().Takeover(session, id, out _); // RMC14
         });
 
         // Check player got attached to ghost role.

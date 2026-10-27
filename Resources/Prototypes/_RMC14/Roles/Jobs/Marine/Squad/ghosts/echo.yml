@@ -3,7 +3,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidEchoCombatTech
   name: echo ghost role combat technician
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -20,7 +20,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidEchoFireteamLeader
   name: echo ghost role fireteam leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -37,7 +37,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidEchoHospitalCorpsman
   name: echo ghost role hospital corpsman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -54,7 +54,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidEchoRifleman
   name: echo ghost role rifleman
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -71,7 +71,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidEchoSmartGunOperator
   name: echo ghost role smart gun operator
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -88,7 +88,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidEchoSquadLeader
   name: echo ghost role squad leader
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
@@ -105,7 +105,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidEchoWeaponsSpecialist
   name: echo ghost role weapons specialist
-  suffix: Spawner, Player
+  suffix: Random, Spawner, Player
   components:
   - type: Sprite
     layers:
