@@ -42,6 +42,7 @@ public sealed partial class ShuttleSystem
         Params = AudioParams.Default.WithVolume(6f),
     };
     private readonly SoundSpecifier _arrivalSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_landing.ogg")
+
     {
         Params = AudioParams.Default.WithVolume(5f),
     };
