@@ -137,8 +137,10 @@
     drawdepth: Mobs
     noRot: true
     layers:
-    - state: defense_base
-    - state: omni_uad_sentry_on
+    - map: [ "base" ]
+      state: defense_base
+    - map: [ "sentry" ]
+      state: normal_uac_sentry_on
   - type: Gun
     fireRate: 2.5
   - type: BallisticAmmoProvider
@@ -180,3 +182,13 @@
     rotationSpeed: 180
     simple4DirMode: false
   - type: Turret
+  - type: Sentry
+    isLocked: true
+    upgrades: null
+    startingMagazine: null
+    containerSlotId: ""
+    magazineTag: null
+    maxDeviation: 360
+    mode: on
+  - type: Transform
+    anchored: true
