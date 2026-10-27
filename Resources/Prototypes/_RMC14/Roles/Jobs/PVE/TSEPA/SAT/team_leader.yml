@@ -1,0 +1,100 @@
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPASATTeamLeaderPVE
+  name: rmc-job-name-tsepa-pve-teamlead
+  description: rmc-job-description-tsepa-pve-teamlead
+  playTimeTracker: RMCJobSATTeamLeaderPVE
+  ranks:
+    RMCRankTSEPASergeant: []
+  startingGear: RMCGearSATTeamLeaderPVE
+  icon: "RMCJobIconSATTeamLeaderPVE"
+  joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-tsepa-inspector
+  accessGroups:
+  - SquadLeader
+  - ColonistTSEPABrig
+  spawnMenuRoleName: TSEPA SAT Team Leader (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 3
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 2
+        RMCSkillPolice: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillSpecialistWeapons: 1
+        RMCSkillSurgery: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/job_icons/TSE/TSEPA/base.rsi
+        state: tsepa_sergeant
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-pve-teamlead
+    - type: AssignSquad
+      squad: SquadTSEPA
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tsepa_sergeant
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_nspa
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSATTeamLeaderPVE
+  equipment:
+    head: RMCHeadBeretTSEPA
+    ears: RMCHeadsetTSEPASergeant
+    jumpsuit: RMCJumpsuitTSEPASAT
+    gloves: RMCHandsBlack
+    belt: RMCBeltHolsterPistolTSEFilledL54
+    shoes: CMBootsBlack
+    id: RMCIDTSEPASAT
+    back: RMCSatchelTSEPA
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSATTeamLeaderPVE
+  name: sat team leader spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPASATTeamLeaderPVE
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobSATTeamLeaderPVE
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSATTeamLeaderPVE
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA/base.rsi
+    state: tsepa_sergeant

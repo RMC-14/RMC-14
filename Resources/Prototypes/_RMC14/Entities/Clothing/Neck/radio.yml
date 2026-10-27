@@ -1,0 +1,28 @@
+# TSEPA Radio
+- type: entity
+  parent: ClothingNeckBase
+  id: RMCRadioTSEPA
+  name: TSE LX960 radio system
+  description: A proprietary radio system meant to help you stay in touch when comms are down. Fancy!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: RotaryPhone
+    category: Three Suns Empire
+    canDnd: true
+  - type: RotaryPhoneBackpack
+    slot: NECK
+  - type: UserInterface
+    interfaces:
+      enum.RMCTelephoneUiKey.Key:
+        type: RMCTelephoneBui
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno

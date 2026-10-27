@@ -10,6 +10,25 @@
     sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap.rsi
 
 - type: entity
+  parent: ArmorHelmetM10
+  id: RMCHeadHelmetTSEPA
+  name: M4H helmet
+  description: A low-cut ballistic helmet designed for protection in close quarters environments. Standard issue for the Three Suns Empire Policing Authority.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_helmet.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_helmet.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: CMArmor
+      bio: 10
+      explosionArmor: 20
+    - type: StorageFill
+      contents:
+      - id: RMCVisorTSEPA
+
+- type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretTSE
   name: tse beret

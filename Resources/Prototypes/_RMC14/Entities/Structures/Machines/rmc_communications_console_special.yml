@@ -78,3 +78,22 @@
   - type: Sprite
     overrideDir: South
     enableOverrideDir: false
+
+# TSEPA
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleTSEPA
+  suffix: TSEPA
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: TSEPA
+
+- type: entity
+  parent: RMCOverwatchConsoleTSEPA
+  id: RMCOverwatchConsoleTSEPARotating
+  suffix: TSEPA, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
