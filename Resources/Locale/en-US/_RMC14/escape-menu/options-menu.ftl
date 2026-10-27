@@ -15,6 +15,8 @@ ui-options-function-rmc-pick-up-dropped-items = Pick up dropped items
 ui-options-function-rmc-interact-with-other-hand = Interact with other hand
 ui-options-function-rmc-rest = Rest
 ui-options-function-rmc-resist = Resist
+ui-options-function-rmc-open-language-menu = Open language menu
+ui-options-function-rmc-cycle-language = Cycle language
 
 ui-options-header-rmc-xeno = Xenonid
 
