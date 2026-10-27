@@ -4,7 +4,7 @@
   name: rmc-job-name-para
   description: rmc-job-description-para
   ranks:
-    RMCRankParaPrivateSecondClass: []
+    RCMRankParamarine: []
   supervisors: cm-job-supervisors-royal-tl
   accessGroups:
     - Colonist
