@@ -1,4 +1,4 @@
-rmc-announcement-planet-lv = An automated distress signal has been received from the archaeological site of Lazarus Landing, on the exomoon of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate.
+rmc-announcement-planet-lv = An automated distress signal has been received from the archaeological site of Lazarus Landing, on the exomoon LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate.
 
 rmc-announcement-planet-solaris = Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada.
 
