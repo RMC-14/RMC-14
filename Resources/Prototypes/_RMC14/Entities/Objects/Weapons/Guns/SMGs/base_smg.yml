@@ -45,6 +45,11 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
       state: all
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-m63
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BaseCartridgeCaselessRifle
