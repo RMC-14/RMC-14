@@ -118,7 +118,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
         Dirty(gun, aimedShot);
 
         _audio.PlayPredicted(aimedShot.AimingSound, gun, user);
-        _targeting.Target(gun, user, target, laserDuration, targetEffect, showDirection);
+        _targeting.Target(gun, user, target, laserDuration, targetEffect, showDirection, rootUser: true);
     }
 
     /// <summary>
