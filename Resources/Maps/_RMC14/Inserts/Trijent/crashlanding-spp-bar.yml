@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/27/2026 21:30:17
+  time: 10/22/2026 22:13:02
   entityCount: 671
 maps: []
 grids:
@@ -321,15 +321,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-- proto: ArmorHelmetSPP
-  entities:
-  - uid: 346
-    components:
-    - type: Transform
-      pos: 7.4954777,-20.897343
-      parent: 1
-    - type: HideLayerClothing
-      slots: null
 - proto: BarbedWire15
   entities:
   - uid: 293
@@ -1056,66 +1047,6 @@ entities:
     - type: Transform
       pos: 0.5023465,-8.945605
       parent: 1
-- proto: CMSpawnPointSPPCrashlandMedic
-  entities:
-  - uid: 634
-    components:
-    - type: Transform
-      pos: 7.5,-6.5
-      parent: 1
-- proto: CMSpawnPointSPPCrashlandRifleman
-  entities:
-  - uid: 627
-    components:
-    - type: Transform
-      pos: 7.5,-8.5
-      parent: 1
-  - uid: 630
-    components:
-    - type: Transform
-      pos: 10.5,-7.5
-      parent: 1
-  - uid: 631
-    components:
-    - type: Transform
-      pos: 10.5,-8.5
-      parent: 1
-  - uid: 632
-    components:
-    - type: Transform
-      pos: 9.5,-9.5
-      parent: 1
-  - uid: 633
-    components:
-    - type: Transform
-      pos: 8.5,-9.5
-      parent: 1
-  - uid: 635
-    components:
-    - type: Transform
-      pos: 7.5,-7.5
-      parent: 1
-- proto: CMSpawnPointSPPCrashlandSapper
-  entities:
-  - uid: 629
-    components:
-    - type: Transform
-      pos: 10.5,-6.5
-      parent: 1
-- proto: CMSpawnPointSPPCrashlandSL
-  entities:
-  - uid: 628
-    components:
-    - type: Transform
-      pos: 8.5,-5.5
-      parent: 1
-- proto: CMSpawnPointSPPCrashlandSpec
-  entities:
-  - uid: 626
-    components:
-    - type: Transform
-      pos: 9.5,-5.5
-      parent: 1
 - proto: CMTableAlmayer
   entities:
   - uid: 231
@@ -1798,6 +1729,15 @@ entities:
     - type: Transform
       pos: 14.437447,-1.3396895
       parent: 1
+- proto: RMCArmorHelmetSPPSpetsnazAlt
+  entities:
+  - uid: 280
+    components:
+    - type: Transform
+      pos: 7.505444,-20.78401
+      parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: RMCAshtrayGlass
   entities:
   - uid: 651
@@ -2127,16 +2067,16 @@ entities:
     - type: Physics
       canCollide: False
       bodyType: Static
-- proto: RMCBoxPackFlare
+- proto: RMCBoxPackFlareR44
   entities:
-  - uid: 280
+  - uid: 281
     components:
     - type: Transform
       parent: 271
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 281
+  - uid: 346
     components:
     - type: Transform
       parent: 271
@@ -2186,16 +2126,16 @@ entities:
           showEnts: False
           occludes: True
           ents:
+          - 346
           - 281
-          - 280
-          - 272
           - 273
-          - 278
-          - 277
-          - 276
-          - 275
-          - 274
           - 279
+          - 274
+          - 275
+          - 276
+          - 277
+          - 278
+          - 272
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -3599,40 +3539,54 @@ entities:
     - type: Transform
       pos: 25.5,-5.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 439
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 25.5,-6.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 441
     components:
     - type: Transform
       pos: 26.5,-4.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 442
     components:
     - type: Transform
       pos: 27.5,-3.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 443
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 28.5,-3.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 444
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 27.5,-6.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 445
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 28.5,-5.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCGrassTallDesert
   entities:
   - uid: 447
@@ -3640,16 +3594,22 @@ entities:
     - type: Transform
       pos: 27.5,-4.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 448
     components:
     - type: Transform
       pos: 27.5,-5.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 449
     components:
     - type: Transform
       pos: 26.5,-5.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCGrassTallSidesDesert
   entities:
   - uid: 440
@@ -3658,12 +3618,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: 26.5,-6.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
   - uid: 446
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 28.5,-4.5
       parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCGraveCross
   entities:
   - uid: 295
@@ -4158,12 +4122,72 @@ entities:
     - type: Transform
       pos: 10.5,1.5
       parent: 1
+- proto: RMCSpawnPointSPPSpetsnazTrijentMedic
+  entities:
+  - uid: 634
+    components:
+    - type: Transform
+      pos: 7.5,-6.5
+      parent: 1
+- proto: RMCSpawnPointSPPSpetsnazTrijentOperator
+  entities:
+  - uid: 627
+    components:
+    - type: Transform
+      pos: 7.5,-8.5
+      parent: 1
+  - uid: 630
+    components:
+    - type: Transform
+      pos: 10.5,-7.5
+      parent: 1
+  - uid: 631
+    components:
+    - type: Transform
+      pos: 10.5,-8.5
+      parent: 1
+  - uid: 632
+    components:
+    - type: Transform
+      pos: 9.5,-9.5
+      parent: 1
+  - uid: 633
+    components:
+    - type: Transform
+      pos: 8.5,-9.5
+      parent: 1
+  - uid: 635
+    components:
+    - type: Transform
+      pos: 7.5,-7.5
+      parent: 1
+- proto: RMCSpawnPointSPPSpetsnazTrijentSapper
+  entities:
+  - uid: 629
+    components:
+    - type: Transform
+      pos: 10.5,-6.5
+      parent: 1
+- proto: RMCSpawnPointSPPSpetsnazTrijentSpec
+  entities:
+  - uid: 626
+    components:
+    - type: Transform
+      pos: 9.5,-5.5
+      parent: 1
 - proto: RMCStool
   entities:
   - uid: 350
     components:
     - type: Transform
       pos: 15.5,-2.5
+      parent: 1
+- proto: RMCSurvivorSPPSpetsnazTrijentSL
+  entities:
+  - uid: 628
+    components:
+    - type: Transform
+      pos: 8.5,-5.5
       parent: 1
 - proto: RMCTallFloodlight
   entities:

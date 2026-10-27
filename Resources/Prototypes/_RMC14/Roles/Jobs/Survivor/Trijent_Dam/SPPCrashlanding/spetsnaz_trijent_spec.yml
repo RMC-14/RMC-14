@@ -1,0 +1,60 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazTrijentBase
+  id: RMCSurvivorSPPSpetsnazTrijentSpec
+  name: rmc-job-name-spetsnaz-spec
+  startingGear: RMCGearSPPSpetsnazTrijentSpec
+  ranks:
+    RMCRankSPPStarshiySerzhant: []
+  icon: "RMCJobIconSPPSpetsnazSpec"
+  spawnMenuRoleName: SPP Spetsnaz D/SRU Specialist (Trijent Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPSpecialist
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-trijent-spetsnaz-spec
+    - type: QYJWhitelist
+    - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazTrijentBase
+  id: RMCGearSPPSpetsnazTrijentSpec
+  equipment:
+    back: RMCSatchelSPPSurvivorSpec
+    belt: RMCBeltHolsterPistolSPPT73
+    outerClothing: RMCArmorSPPSpetsnazHeavyAltSurvivorFill
+    head: ArmorHelmetSPPSpetsnazHeavy
+  inhand:
+  - RMCWeaponRifleType71Flamer
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazTrijentSpec
+  name: special survivor spp spetsnaz specialist spawn point
+  suffix: Trjient
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazSpec
+  - type: Sprite
+    state: surv_spp

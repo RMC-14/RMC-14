@@ -1548,3 +1548,13 @@ CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle
 #2026-09-22
 ChessBoard: RMCChessBoard
 CheckerBoard: RMCCheckerBoard
+
+# 2026-10-22
+RMCJumpsuitSPPSOF: RMCJumpsuitSPPSpetsnaz
+RMCArmorSPPSOF: RMCArmorSPPSpetsnaz
+RMCArmorSPPSOFHeavy: RMCArmorSPPSpetsnazHeavy
+RMCArmorSPPSOFPlated: RMCArmorSPPSpetsnazPlated
+RMCHeadCapSPPSOF: RMCHeadCapSPPSpetsnaz
+RMCArmorHelmetSPPSOF: RMCArmorHelmetSPPSpetsnaz
+RMCMapInsertSorokyneSPPSOF: RMCMapInsertSorokyneSPPSpetsnaz
+RMCMapInsertSorokyneSPPSOFAlt: RMCMapInsertSorokyneSPPSpetsnazAlt
