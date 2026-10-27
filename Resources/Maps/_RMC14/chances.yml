@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/27/2026 21:55:44
-  entityCount: 30961
+  time: 10/27/2026 23:13:16
+  entityCount: 30970
 maps:
 - 1
 grids:
@@ -4864,6 +4864,13 @@ entities:
             679: 18,-35
             695: -8,-7
             825: 71,50
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalBloodFloor7
+          decals:
+            4986: 28,66
+            4987: 31,68
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalBloodTrail1
@@ -46538,12 +46545,40 @@ entities:
     - type: Transform
       pos: 93.5,96.5
       parent: 1
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
+    - type: Weldable
+      isWelded: True
+      fuel: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.49,-0.49
+            - 0.49,-0.49
+            - 0.49,0.49
+            - -0.49,0.49
+          mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - InteractImpassable
+          layer:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          density: 100
+          hard: True
+          restitution: 0
+          friction: 0.4
     - type: Door
-      secondsUntilStateChange: -124214.734
-      state: Opening
+      state: Welded
+    - type: RMCWeldEffectActive
 - proto: CMAirlockMedicalLocked
   entities:
   - uid: 187
@@ -47115,6 +47150,20 @@ entities:
       parent: 1
     - type: HideLayerClothing
       slots: null
+- proto: CMArmorM3Light
+  entities:
+  - uid: 9570
+    components:
+    - type: Transform
+      pos: 25.5,50.5
+      parent: 1
+- proto: CMArmorM3Medium
+  entities:
+  - uid: 30878
+    components:
+    - type: Transform
+      pos: 27.5,56.5
+      parent: 1
 - proto: CMArmorM4
   entities:
   - uid: 29952
@@ -57254,7 +57303,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -111793.39
+      secondsUntilStateChange: -113672.21
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -57270,7 +57319,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -111793.39
+      secondsUntilStateChange: -113672.21
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -60272,6 +60321,13 @@ entities:
     components:
     - type: Transform
       pos: -69.654015,-38.552994
+      parent: 1
+- proto: CMHeadCapDrill
+  entities:
+  - uid: 30968
+    components:
+    - type: Transform
+      pos: 93.5142,93.73946
       parent: 1
 - proto: CMHeadsetColony
   entities:
@@ -82961,6 +83017,16 @@ entities:
     - type: Transform
       pos: 1.5,-46.5
       parent: 1
+- proto: PlushieHampter
+  entities:
+  - uid: 30970
+    components:
+    - type: MetaData
+      desc: "\"Sometimes it's better to hide, but only sometimes so don't be a coward and GO FIGHT!!\""
+      name: GySgt. Hamlet
+    - type: Transform
+      pos: 93.52902,93.48801
+      parent: 1
 - proto: PotatoSeeds
   entities:
   - uid: 30401
@@ -84110,11 +84176,18 @@ entities:
   entities:
   - uid: 6974
     components:
+    - type: MetaData
+      name: scarred M3-G4 grenadier armor
     - type: Transform
       pos: 28.469887,59.51029
       parent: 1
 - proto: RMCArmorM3MediumSmooth
   entities:
+  - uid: 9181
+    components:
+    - type: Transform
+      pos: 32.5,53.5
+      parent: 1
   - uid: 30118
     components:
     - type: Transform
@@ -84124,6 +84197,8 @@ entities:
   entities:
   - uid: 30080
     components:
+    - type: MetaData
+      name: weathered M3-S light armor
     - type: Transform
       pos: 37.5,48.5
       parent: 1
@@ -84240,10 +84315,26 @@ entities:
       parent: 1
 - proto: RMCBackpackRTO
   entities:
-  - uid: 6990
+  - uid: 6991
     components:
     - type: Transform
-      pos: -82.389015,42.055283
+      pos: 26.5,66.5
+      parent: 1
+- proto: RMCBackpackRTOSmall
+  entities:
+  - uid: 250
+    components:
+    - type: Transform
+      pos: -82.382286,42.023865
+      parent: 1
+- proto: RMCBackpackScout
+  entities:
+  - uid: 6976
+    components:
+    - type: MetaData
+      name: frayed M68 thermal cloak
+    - type: Transform
+      pos: 39.5,55.5
       parent: 1
     - type: GroupExamine
       group:
@@ -84261,18 +84352,6 @@ entities:
           priority: 0
           component: Armor
         title: null
-  - uid: 6991
-    components:
-    - type: Transform
-      pos: 26.5,66.5
-      parent: 1
-- proto: RMCBackpackScout
-  entities:
-  - uid: 6976
-    components:
-    - type: Transform
-      pos: 39.5,55.5
-      parent: 1
 - proto: RMCBarrelBlue
   entities:
   - uid: 6993
@@ -86548,10 +86627,10 @@ entities:
       parent: 1
 - proto: RMCBoxBulletsRifleEmpty
   entities:
-  - uid: 7284
+  - uid: 6990
     components:
     - type: Transform
-      pos: -82.5,39
+      pos: -82.49687,39.04508
       parent: 1
 - proto: RMCBoxBulletsSMG
   entities:
@@ -89331,10 +89410,10 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 2837
           - 2834
-          - 2835
           - 2836
+          - 2835
+          - 2837
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -89386,8 +89465,8 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 2846
           - 2847
+          - 2846
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -90040,7 +90119,7 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 39.00584
+        temperature: 20.85292
         moles:
         - 0
         - 0
@@ -90112,7 +90191,7 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 20.85292
+        temperature: 11.77646
         moles:
         - 0
         - 0
@@ -90132,8 +90211,8 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 5810
           - 7742
+          - 5810
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -92307,6 +92386,11 @@ entities:
     - type: Transform
       pos: -85.47771,4.376767
       parent: 1
+  - uid: 30969
+    components:
+    - type: Transform
+      pos: 93.5,94.5
+      parent: 1
 - proto: RMCDirtBandageProp7
   entities:
   - uid: 8016
@@ -92668,6 +92752,19 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 4.654136,-0.44886684
       parent: 1
+- proto: RMCEffectWeldingSparks
+  entities:
+  - uid: 30967
+    components:
+    - type: Transform
+      pos: 93.5,96.5
+      parent: 1
+    - type: TimedDespawn
+      lifetime: 3
+    - type: RMCSpriteOffsetAnimation
+      length: 3
+      endingOffset: -0,0.5
+      startingOffset: 0,-0.5
 - proto: RMCEmergencyOxygenTank
   entities:
   - uid: 30848
@@ -114422,6 +114519,13 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
+- proto: RMCHelmetGarbFeatherRed
+  entities:
+  - uid: 30879
+    components:
+    - type: Transform
+      pos: 30.819786,66.817604
+      parent: 1
 - proto: RMCHelmetGarbMovieTicket
   entities:
   - uid: 30658
@@ -114698,6 +114802,13 @@ entities:
     - type: Transform
       pos: 21.5,-90.5
       parent: 1
+- proto: RMCJumpsuitPilotAlt
+  entities:
+  - uid: 30880
+    components:
+    - type: Transform
+      pos: 32.5,66.5
+      parent: 1
 - proto: RMCJumpsuitRedPjs
   entities:
   - uid: 30710
@@ -114758,17 +114869,6 @@ entities:
     - type: Transform
       pos: -29.5,-38.5
       parent: 1
-- proto: RMCLadder
-  entities:
-  - uid: 9181
-    components:
-    - type: Transform
-      pos: 89.5,99.5
-      parent: 1
-    - type: Ladder
-      id: hatch
-    - type: Fixtures
-      fixtures: {}
 - proto: RMCLadderRope
   entities:
   - uid: 30702
@@ -114789,6 +114889,15 @@ entities:
       fixtures: {}
 - proto: RMCLadderUp
   entities:
+  - uid: 7284
+    components:
+    - type: Transform
+      pos: 89.5,99.5
+      parent: 1
+    - type: Ladder
+      id: hatch
+    - type: Fixtures
+      fixtures: {}
   - uid: 9182
     components:
     - type: Transform
@@ -209081,8 +209190,16 @@ entities:
   - uid: 30078
     components:
     - type: Transform
-      pos: 42.5,48.5
+      pos: 42.482044,48.54853
       parent: 1
+    - type: RMCWeaponAccuracy
+      modifiedAccuracyMultiplier: 0.5
+    - type: UseDelay
+      delays:
+        RMCWieldDelay:
+          endTime: 1154.9712861
+          startTime: 1757.5315758
+          length: 0.4
   - uid: 30214
     components:
     - type: Transform
