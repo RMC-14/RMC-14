@@ -38,6 +38,12 @@ public sealed partial class DropshipInnerButton : Button
         }
     }
 
+    public HAlignment TextHorizontalAlignment
+    {
+        get => Label.HorizontalAlignment;
+        set => Label.HorizontalAlignment = value;
+    }
+
     public DropshipInnerButton()
     {
         RobustXamlLoader.Load(this);

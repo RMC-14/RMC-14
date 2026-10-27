@@ -376,7 +376,8 @@ public sealed partial class CMDistressSignalRuleSystem
                     user: null,
                     startupTime: 1f,
                     hyperspaceTime: 1f,
-                    offset: true))
+                    offset: true,
+                    source: DropshipLaunchSource.RoundInit))
                 {
                     continue;
                 }
