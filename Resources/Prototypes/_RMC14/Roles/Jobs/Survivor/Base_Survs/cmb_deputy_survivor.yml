@@ -15,6 +15,7 @@
     - !type:RoleTimeRequirement
       role: CMJobSurvivorSecurity
       time: 252000 # 70 hours
+    RMCRankCMBDeputy: []
   startingGear: RMCGearSurvivorCMBDeputy
   accessGroups:
   - ColonistCMBSurvivor
