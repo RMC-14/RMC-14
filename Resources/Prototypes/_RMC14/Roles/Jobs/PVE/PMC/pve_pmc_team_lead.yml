@@ -58,6 +58,7 @@
   id: RMCJobPMCTeamLeadPVE
   equipment:
     id: RMCIDCardPMC
+    ears: RMCHeadsetPMCLeaderPVE
 
 - type: playTimeTracker
   id: CMJobPMCTeamLeadPVE
