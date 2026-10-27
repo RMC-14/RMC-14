@@ -114,14 +114,14 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         base.Dispose(disposing);
     }
 
-    public void Refresh()
+    public void Refresh(EntityUid? watchTargetUid = null, bool? liveUpdate = null)
     {
         if (Window == null)
             return;
 
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
         Window.Wrapper.SetLineLimit(lineLimit);
-        UpdateBlips();
+        UpdateBlips(watchTargetUid, liveUpdate);
         UpdateLabels();
 
         if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
@@ -145,7 +145,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         _refreshed = true;
     }
 
-    private void UpdateBlips()
+    private void UpdateBlips(EntityUid? watchTargetUid = null, bool? liveUpdate = null)
     {
         if (Window == null)
             return;
@@ -169,11 +169,46 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         Window.Wrapper.UpdateBlips(blips, entityIds);
 
-        int? localPlayerId = _player.LocalEntity != null
-            ? (int?)EntMan.GetNetEntity(_player.LocalEntity.Value)
+        UpdateLocationPings(watchTargetUid, liveUpdate);
+    }
+
+    private void UpdateLocationPings(EntityUid? watchTargetUid = null, bool? liveUpdate = null)
+    {
+        if (Window == null)
+            return;
+
+        NetEntity? localPlayerNetEntity = _player.LocalEntity != null
+            ? EntMan.GetNetEntity(_player.LocalEntity.Value)
             : null;
+        var localPlayerId = (int?)localPlayerNetEntity ?? null;
+
         Window.Wrapper.Map.SetLocalPlayerEntityId(localPlayerId);
         Window.Wrapper.Canvas.SetLocalPlayerEntityId(localPlayerId);
+
+        // EntityUid.Invalid is used to denote an Unwatch event, non-null means a Watch event
+        if (watchTargetUid == null)
+            return;
+
+        int? targetId = watchTargetUid != EntityUid.Invalid
+            ? (int?)EntMan.GetNetEntity(watchTargetUid)
+            : null;
+
+        Vector2i? indices = targetId != null
+            ? GetWatchingIndices(watchTargetUid.Value)
+            : null;
+
+        Window.Wrapper.Map.SetWatchingData(targetId, liveUpdate, indices);
+        Window.Wrapper.Canvas.SetWatchingData(targetId, liveUpdate, indices);
+    }
+
+    private Vector2i? GetWatchingIndices(EntityUid ent)
+    {
+        Vector2i indices = Vector2i.Zero;
+
+        EntMan.System<TacticalMapSystem>().HasValidPosition(
+            ent, ref indices);
+
+        return indices == Vector2i.Zero ? null : indices;
     }
 
     private void UpdateLabels()
