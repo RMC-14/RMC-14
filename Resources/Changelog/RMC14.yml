@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: The AP Type 71's on Sorokyne are now AP Type 71C's
-    type: Tweak
-  id: 3204
-  time: '2026-05-15T23:33:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9740
 - author: CyberTropic
   changes:
   - message: Map vote results readability improved.
@@ -4512,5 +4505,12 @@
   id: 3703
   time: '2026-10-27T19:50:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10893
+- author: CatAndHats
+  changes:
+  - message: Xenos can no longer player chess or checkers
+    type: Fix
+  id: 3704
+  time: '2026-10-27T19:51:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10880
 Name: RMC14
 Order: -1
