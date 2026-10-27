@@ -381,7 +381,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
     }
 
-    private bool ContainedCheckPopup(EntityUid xeno, bool doPopup = true)
+    public bool ContainedCheckPopup(EntityUid xeno, bool doPopup = true)
     {
         if (!_container.IsEntityInContainer(xeno))
             return true;
@@ -392,7 +392,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
-    private bool DamagedCheckPopup(EntityUid xeno, bool predicted = true, bool doPopup = true)
+    public bool DamagedCheckPopup(EntityUid xeno, bool predicted = true, bool doPopup = true)
     {
         if (!TryComp(xeno, out DamageableComponent? damageable) ||
             damageable.TotalDamage <= 1)
@@ -585,7 +585,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 existing++;
         }
 
-        if (total != 0 && existing / (float) total >= limit && (!slotCount.ContainsKey(newXeno) || slotCount[newXeno] <= 0))
+        if (total != 0 && existing / (float)total >= limit && (!slotCount.ContainsKey(newXeno) || slotCount[newXeno] <= 0))
             return false;
 
         return true;
@@ -829,7 +829,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             Dirty(cand);
             reserved[tier] = reservedForTier + 1;
             _popup.PopupEntity(
-                Loc.GetString(reason, ("seconds", (int) _raffleGracePeriod.TotalSeconds)),
+                Loc.GetString(reason, ("seconds", (int)_raffleGracePeriod.TotalSeconds)),
                 cand.Owner,
                 cand.Owner,
                 PopupType.LargeCaution);
@@ -1179,13 +1179,19 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return null;
         }
 
+        return DevolveInto(xeno, to);
+    }
+
+    /// Devolves a xeno into any prototype, without checking its <see cref="XenoDevolveComponent.DevolvesTo"/>.
+    public EntityUid DevolveInto(EntityUid xeno, EntProtoId to)
+    {
         var newXeno = TransferXeno(xeno, to);
         var ev = new XenoDevolvedEvent(xeno, newXeno);
         RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
 
-        Del(xeno.Owner);
+        Del(xeno);
 
         var afterEv = new AfterNewXenoEvolvedEvent();
         RaiseLocalEvent(newXeno, ref afterEv);

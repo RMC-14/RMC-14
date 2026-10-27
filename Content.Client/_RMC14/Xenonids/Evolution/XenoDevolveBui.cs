@@ -1,4 +1,5 @@
 ﻿using Content.Client._RMC14.Xenonids.UI;
+using Content.Shared._RMC14.Xenonids.Destrain;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
@@ -46,5 +47,29 @@ public sealed class XenoDevolveBui : BoundUserInterface
 
             _window.DevolutionsContainer.AddChild(control);
         }
+
+        AddDestrain();
+    }
+
+    private void AddDestrain()
+    {
+        if (_window == null ||
+            !EntMan.TryGetComponent(Owner, out XenoDestrainComponent? destrain) ||
+            !_prototype.TryIndex(destrain.DestrainTo, out var baseCaste))
+        {
+            return;
+        }
+
+        var control = new XenoChoiceControl();
+        var name = Loc.GetString("rmc-xeno-destrain-choice", ("caste", baseCaste.Name));
+        control.Set(name, _sprite.Frame0(baseCaste));
+
+        control.Button.OnPressed += _ =>
+        {
+            SendPredictedMessage(new XenoDestrainBuiMsg());
+            Close();
+        };
+
+        _window.DevolutionsContainer.AddChild(control);
     }
 }
