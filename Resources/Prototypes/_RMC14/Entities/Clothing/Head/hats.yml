@@ -191,74 +191,10 @@
 
 
 # Caps
+
 - type: entity
   parent: ClothingHeadBase
-  id: CMHeadCapMP
-  name: MP cap
-  description: A ball-cap worn by the more casual of the Marines' Military Police.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
-  - type: Tag
-    tags:
-    - ClothMade
-  - type: Storage
-    maxItemSize: Tiny
-    grid:
-    - 0,0,3,1 # 2 slots
-    whitelist:
-      components:
-      - RMCLighter
-      - HelmetAccessory
-      tags:
-      - Cigarette
-      - Matchstick
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: [ ]
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      components:
-      - HelmetAccessory
-  - type: HelmetAccessoryHolder
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
-
-- type: entity
-  parent: CMHeadCapMP
-  id: CMHeadCapWarden
-  name: warden cap
-  description: Smells like donuts.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/warden.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/warden.rsi
-
-- type: entity
-  parent: CMHeadCapMP
-  id: CMHeadCapCargo
-  name: cargo cap
-  description: It's a baseball hat in a tasteless yellow color.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap.rsi
-
-- type: entity
-  parent: CMHeadCapMP
-  id: CMHeadCap
+  id: RMCHeadCap
   name: cap
   description: Standard baseball cap.
   components:
@@ -268,7 +204,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap.rsi
 
 - type: entity
-  parent: CMHeadCapMP
+  parent: RMCHeadCap
   id: RMCHeadCapFlippable
   name: cap
   description: Standard baseball cap.
@@ -307,6 +243,91 @@
         unfoldedLayer:
           True: {visible: false}
           False: {visible: true}
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: CMHeadCapMP
+  name: MP cap
+  description: A ball-cap worn by the more casual of the Marines' Military Police.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,3,1 # 2 slots
+    whitelist:
+      components:
+      - RMCLighter
+      - HelmetAccessory
+      tags:
+      - Cigarette
+      - Matchstick
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - HelmetAccessory
+  - type: HelmetAccessoryHolder
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCHeadCap
+  id: CMHeadCapWarden
+  name: warden cap
+  description: Smells like donuts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/warden.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/warden.rsi
+
+- type: entity
+  parent: RMCHeadCap
+  id: CMHeadCapCargo
+  name: cargo cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap.rsi
+
+- type: entity
+  parent: RMCHeadCap
+  id: CMHeadCap
+  name: cap
+  description: Standard baseball cap.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap.rsi
 
 - type: entity
   parent: RMCHeadCapFlippable
@@ -489,7 +510,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
 
 - type: entity
-  parent: CMHeadCapMP
+  parent: RMCHeadCap
   id: CMHeadFlapCap
   name: UNMC expedition cap
   description: It's a cap, with flaps. A patch stitched across the front reads "UNS ALMAYER".
@@ -521,7 +542,7 @@
 # soft caps
 
 - type: entity
-  parent: CMHeadCapMP
+  parent: RMCHeadCap
   id: RMCHeadBlueSoftCap
   name: blue cap
   description: It's a baseball hat in a tasteless blue color.
