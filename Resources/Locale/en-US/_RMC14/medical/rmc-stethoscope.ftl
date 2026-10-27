@@ -17,6 +17,11 @@ rmc-stethoscope-dead = You can't hear anything at all, they must have kicked the
 rmc-stethoscope-verb-text = Stethoscope
 rmc-stethoscope-verb-message = Listen using the stethoscope.
 
+rmc-stethoscope-infected = You hear [color=purple]something moving[/color] inside the chest!
+rmc-stethoscope-infected-bursting = You hear [color=purple]the crunching of bones.[/color] Something is [color=red]eating its way out![/color]
+rmc-stethoscope-dead-infected = You hear a [color=purple]suspicious heartbeat[/color] and no respiration. They must have kicked the bucket.
+rmc-stethoscope-dead-infected-bursting = The only sound you hear is the [color=purple]crunching of bones.[/color] You should probably get clear.
+
 # Temporary until real organs are implemented. Delete when fully implemented.
 rmc-stethoscope-normal = You hear [color=green]normal heart beating patterns[/color] and [color=green]normal respiration sounds[/color] as well, {POSS-ADJ($target)} heart and lungs are [color=green]healthy[/color], probably.
 rmc-stethoscope-raggedy = You hear [color=yellow]small murmurs with each heart beat[/color] and [color=yellow]some crackles when {SUBJECT($target)} breathes[/color].
