@@ -50,7 +50,7 @@ public sealed partial class RequirementsSelector : BoxContainer
             Text = Loc.GetString("role-timer-locked"),
             Visible = true,
             HorizontalAlignment = HAlignment.Center,
-            StyleClasses = {StyleBase.StyleClassLabelSubText},
+            StyleClasses = { StyleBase.StyleClassLabelSubText },
         };
 
         _lockStripe = new StripeBack()
@@ -92,8 +92,11 @@ public sealed partial class RequirementsSelector : BoxContainer
         _guides = guides;
 
         TitleLabel.Text = title;
-        TitleLabel.MinSize = new Vector2(titleSize, 0f);
+        TitleContainer.SetWidth = titleSize;
         TitleLabel.ToolTip = description;
+        SubtitleLabel.Visible = false;
+        SubtitleLabel.Text = string.Empty;
+        SubtitleLabel.ToolTip = null;
 
         if (icon != null)
         {
@@ -103,6 +106,21 @@ public sealed partial class RequirementsSelector : BoxContainer
 
         OptionsContainer.AddChild(_options);
         OptionsContainer.AddChild(_lockStripe);
+    }
+
+    public void SetSubtitle(string? subtitle, string? tooltip = null)
+    {
+        if (string.IsNullOrWhiteSpace(subtitle))
+        {
+            SubtitleLabel.Visible = false;
+            SubtitleLabel.Text = string.Empty;
+            SubtitleLabel.ToolTip = null;
+            return;
+        }
+
+        SubtitleLabel.Visible = true;
+        SubtitleLabel.Text = subtitle;
+        SubtitleLabel.ToolTip = tooltip;
     }
 
     public void LockRequirements(FormattedMessage requirements)
