@@ -162,6 +162,8 @@ rmc-job-greeting-varadero = The stench of burning phoron still lingers in the sa
 
    You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
+rmc-job-prefix-survivor-varadero-rifleman = UNMC RFN
+
 rmc-job-name-survivor-commander-new-varadero = Base Commander
 rmc-job-prefix-survivor-varadero-commander = UNMC CDR
 
@@ -199,6 +201,8 @@ rmc-job-prefix-survivor-new-varadero-xenobiologist = WY XBIO
 
 rmc-job-name-survivor-new-varadero-rd = New Varadero Research Director
 rmc-job-prefix-survivor-new-varadero-rd = WY RD
+
+rmc-job-name-survivor-new-varadero-contractor = UN Civilian Contractor
 
 rmc-job-name-survivor-varadero-base-police = Peacekeeper
 

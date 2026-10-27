@@ -66,13 +66,13 @@
 - type: startingGear
   id: RMCGearSurvivorUNMCGroundCrewman
   equipment:
-    jumpsuit: JumpsuitMarine
     ears: RMCHeadsetMarineNV
     gloves: CMHandsInsulated
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill
-    back: CMSatchelMarineTech
-    shoes: CMBootsBlackFilled
+    back: RMCSatchelNV
+    shoes: CMBootsUrbanFilled
+    outerClothing: RMCArmorPDU
   storage:
     back:
       - CMSheetMetal20
@@ -85,9 +85,10 @@
   components:
     - type: EntityPreset
       randomOutfits:
-        - [ RMCHeadUNMCHeadset, RMCHazardVestBlue, CMSheetPlasteel20, RMCWeldingGoggles ]
-        - [ RMCHeadUNMCHeadset, RMCHazardVestYellow, CMSheetPlasteel10, RMCWeldingGoggles, RMCPouchToolsFill ]
-        - [ ClothingHeadHatWelding, RMCHazardVest, CMSheetPlasteel20, RMCPouchToolsFill ]
-        - [ CMBeltUtilityFilled, ClothingHeadHatWelding, RMCHazardVestBlue, CMSheetPlasteel10 ]
-        - [ RMCHeadCapFlippable, RMCHazardVest, CMBeltUtilityFilled, CMSheetPlasteel20, RMCWeldingGoggles ]
-        - [ RMCHardhatOrange, CMBeltUtilityFilled, RMCHazardVest, WeaponNailgun, CMSheetPlasteel10, RMCWeldingGoggles ]
+        - [ RMCHeadCapPatrolNV, RMCWeldingGoggles, RMCJumpsuitMarineNVEngi ]
+        - [ RMCArmorHelmetCF5Utility, RMCWeldingGoggles, RMCPouchToolsFill, RMCJumpsuitMarineNVEngi ]
+        - [ ClothingHeadHatWelding, RMCJumpsuitMarineNVUtility, RMCPouchToolsFill ]
+        - [ CMBeltUtilityFilled, RMCArmorHelmetCF5Utility, RMCJumpsuitMarineNVEngi ]
+        - [ CMBeltUtilityFilled, RMCArmorHelmetCF5UtilityRed, RMCJumpsuitMarineNVEngi ]
+        - [ RMCHeadCapPatrolNV, CMBeltUtilityFilled, RMCJumpsuitMarineNVUtility, RMCWeldingGoggles ]
+        - [ RMCHardhatOrange, CMBeltUtilityFilled, WeaponNailgun, RMCJumpsuitMarineNVEngi, RMCWeldingGoggles ]

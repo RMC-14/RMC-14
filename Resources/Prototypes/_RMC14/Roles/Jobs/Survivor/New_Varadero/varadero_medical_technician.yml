@@ -66,16 +66,18 @@
 - type: startingGear
   id: RMCGearSurvivorMedicalTechnician
   equipment:
-    jumpsuit: RMCJumpsuitCivilianGreen
+    jumpsuit: RMCJumpsuitMarineNVMedic
     ears: RMCHeadsetMarineNV
     gloves: CMHandsLatex
-    shoes: CMBootsBlackFilled
-    back: CMSatchelMedical
+    head: RMCHeadCapPatrolNV
+    shoes: CMBootsUrbanFilled
+    back: RMCSatchelNV
     pocket1: RMCPouchSurvivalFill
     id: CMIDCardColonistDoctor
   storage:
     back:
     - CMSheetMetal20
+    - CMAdvFirstAidKitFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -97,9 +99,9 @@
   components:
   - type: EntityPreset
     randomOutfits:
-    - [ RMCLabcoatBrown, CMHeadCapSurgBlue, CMMaskSterile ]
-    - [ RMCJacketWindbreakerFirstResponder, RMCHeadCapFlippable ]
-    - [ RMCHazardVestEMT, RMCBeltMedicalDefibAnalyzerFilled, RMCHeadCapFlippable ]
+    - [ RMCLabcoatBrown, CMMaskSterile, RMCArmorPDU ]
+    - [ RMCJacketWindbreakerFirstResponder ]
+    - [ RMCHazardVestEMT, RMCBeltMedicalDefibAnalyzerFilled ]
     randomGearOther:
     -
       - [ RMCPouchFirstAidSplintsGauzeOintment ]

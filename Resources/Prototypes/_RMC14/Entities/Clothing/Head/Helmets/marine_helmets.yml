@@ -576,3 +576,59 @@
     visorsToAdd:
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
+
+# CF5
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetCF5
+  name: CF5 pattern helmet
+  description: An uncommon sight in the Marine Corps, the CF5 notably lacks the extra padding of later-generation helmets like the M10 or the M12, as it was primarily designed for use by support units. Due to this, it can often be seen with makeshift armor attached, cannibalized from other, more protective helmets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCArmorHelmetCF5
+  id: RMCArmorHelmetCF5Medic
+  name: CF5 pattern medic helmet
+  components:
+  - type: IntegratedVisors
+    startToggled: true
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
+
+- type: entity
+  parent: RMCArmorHelmetCF5
+  id: RMCArmorHelmetCF5Utility
+  name: CF5-U pattern flight helmet
+  description: An uncommon sight in the Marine Corps, the CF5 notably lacks the extra padding of later-generation helmets like the M10 or the M12, as it was primarily designed for use by support units. Due to this, it can often be seen with makeshift armor attached, cannibalized from other, more protective helmets. The 'U' variant comes equipped with inbuilt hearing protection, and is often issued to air crews. This one has a green cover.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility.rsi
+
+- type: entity
+  parent: RMCArmorHelmetCF5Utility
+  id: RMCArmorHelmetCF5UtilityRed
+  description: An uncommon sight in the Marine Corps, the CF5 notably lacks the extra padding of later-generation helmets like the M10 or the M12, as it was primarily designed for use by support units. Due to this, it can often be seen with makeshift armor attached, cannibalized from other, more protective helmets. The 'U' variant comes equipped with inbuilt hearing protection, and is often issued to air crews. This one has a red cover.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_red.rsi
+
+- type: entity
+  parent: RMCArmorHelmetCF5Utility
+  id: RMCArmorHelmetCF5UtilityWhite
+  description: An uncommon sight in the Marine Corps, the CF5 notably lacks the extra padding of later-generation helmets like the M10 or the M12, as it was primarily designed for use by support units. Due to this, it can often be seen with makeshift armor attached, cannibalized from other, more protective helmets. The 'U' variant comes equipped with inbuilt hearing protection, and is often issued to air crews. This one has a white cover.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_white.rsi
