@@ -144,6 +144,9 @@ namespace Content.Shared.Stacks
                 return false;
 
             transferred = Math.Min(donorStack.Count, GetAvailableSpace(recipientStack));
+            if (transferred <= 0 || !CanMergeStacks(donor, recipient))
+                return false;
+
             SetCount(donor, donorStack.Count - transferred, donorStack);
             SetCount(recipient, recipientStack.Count + transferred, recipientStack);
             return transferred > 0;
@@ -372,10 +375,24 @@ namespace Content.Shared.Stacks
                 return false;
 
             var change = Math.Min(available, count);
+            if (change <= 0 || !CanMergeStacks(insertEnt, targetEnt))
+                return false;
 
             SetCount(targetEnt, targetStack.Count + change, targetStack);
             SetCount(insertEnt, insertStack.Count - change, insertStack);
             return true;
+        }
+
+        private bool CanMergeStacks(EntityUid donor, EntityUid recipient)
+        {
+            var donorAttempt = new StackMergeAttemptEvent(recipient);
+            RaiseLocalEvent(donor, ref donorAttempt);
+            if (donorAttempt.Cancelled)
+                return false;
+
+            var recipientAttempt = new StackMergeAttemptEvent(donor);
+            RaiseLocalEvent(recipient, ref recipientAttempt);
+            return !recipientAttempt.Cancelled;
         }
 
         private void OnStackStarted(EntityUid uid, StackComponent component, ComponentStartup args)

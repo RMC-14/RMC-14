@@ -1,0 +1,25 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadBandana
+  name: bandana
+  description: Typically worn by heavy-weapon operators, mercenaries, and scouts, the bandana serves as lightweight and comfortable headwear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/green.rsi
+  - type: Item
+    size: Small
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: RMCHeadBandana
+  id: RMCHeadBandanaTan
+  name: tan bandana
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/tan.rsi

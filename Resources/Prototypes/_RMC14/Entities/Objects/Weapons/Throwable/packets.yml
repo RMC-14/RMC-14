@@ -370,8 +370,62 @@
     - id: CMGrenadeFragOld
       amount: 3
 
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenadeM15Rubber
+  name: M15 rubber pellet grenade packet
+  description: It contains three M15 rubber pellet grenades, for riot control or combat exercises.
+  components:
+  - type: Sprite
+    layers:
+    - state: general_packet
+      map: [ "closedLayer" ]
+    - state: general_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeM15Rubber
+
+- type: entity
+  parent: RMCPacketGrenadeM15Rubber
+  id: RMCPacketGrenadeM15RubberFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeM15Rubber
+      amount: 3
+
+- type: entity
+  parent: CMPacketGrenadeFrag
+  id: RMCPacketGrenadeHEFAToy
+  name: toy HEFA grenade packet
+  description: These little packets of joy were distributed in the 100th (Season 2) Issue of the Boots! magazine as commemorative rewards for subscribers. Nobody knows how anyone, at any point, never asked 'wait, is this a terrible idea?' during the process.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeHEFAToy
+
+- type: entity
+  parent: RMCPacketGrenadeHEFAToy
+  id: RMCPacketGrenadeHEFAToyFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeHEFAToy
+      amount: 3
+
 - type: Tag
   id: RMCPacketGrenade
+
+- type: Tag
+  id: RMCGrenadeM15Rubber
+
+- type: Tag
+  id: RMCGrenadeHEFAToy
 
 - type: entity
   abstract: true

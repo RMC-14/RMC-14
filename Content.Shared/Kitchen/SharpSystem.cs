@@ -120,6 +120,8 @@ public sealed class SharpSystem : EntitySystem
         {
             // distribute the spawned items randomly in a small radius around the origin
             popupEnt = Spawn(proto, coords.Offset(_robustRandom.NextVector2(0.25f)));
+            var ev = new SpawnedFromEntityEvent(popupEnt);
+            RaiseLocalEvent(args.Args.Target.Value, ref ev);
         }
 
         var hasBody = TryComp<BodyComponent>(args.Args.Target.Value, out var body);
