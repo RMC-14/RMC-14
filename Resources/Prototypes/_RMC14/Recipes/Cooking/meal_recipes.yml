@@ -847,6 +847,21 @@
     FoodNoodlesBoiled: 1
 
 - type: microwaveMealRecipe
+  id: RecipeCoqAuVin
+  name: coq au vin recipe
+  result: RMCSoupXenokotsu
+  time: 15
+  group: Savory
+  reagents:
+    Wine: 5
+    Water: 5
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChickenCutlet: 1
+    FoodCarrot: 1
+    FoodMushroom: 1
+
+- type: microwaveMealRecipe
   id: RecipeToastGravy
   name: toast and gravy recipe
   result: RMCToastGravy
@@ -859,3 +874,4 @@
   solids:
     FoodBreadPlainSlice: 1
     FoodMeatSausage: 1
+

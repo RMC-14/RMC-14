@@ -893,3 +893,20 @@
     layers:
     - state: bowl
     - state: chicken-and-dumplings
+
+- type: entity
+  name: coq au vin
+  parent: FoodBowlBase
+  id: RMCSoupCoqAuVin
+  description: All it needs is a punch of salt.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - hearty
+    - chicken
+    - vegetables
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soup.rsi
+    layers:
+    - state: bowl
+    - state: coq-au-vin
