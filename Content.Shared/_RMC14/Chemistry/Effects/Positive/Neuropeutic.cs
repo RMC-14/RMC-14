@@ -18,7 +18,9 @@ public sealed partial class Neuropeutic : RMCChemicalEffect
         return "Treats brain damage. Forces species mutation to occur in plants.";
     }
 
-    // TODO RMC14: mob effect - heal brain damage, brain damage on critical overdose
+    // TODO RMC14: heal brain damage, brain damage on critical overdose
+    // heals 3 * potency brain damage per 2s tick,
+    // critical overdose deals 3 * potency brain damage per 2s tick
 
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
@@ -35,6 +37,6 @@ public sealed partial class Neuropeutic : RMCChemicalEffect
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var stun = args.EntityManager.System<SharedStunSystem>();
-        stun.TryStun(args.TargetEntity, TimeSpan.FromSeconds((float) potency * 0.1), true);
+        stun.TryStun(args.TargetEntity, TimeSpan.FromSeconds((float) potency * 2f), false);
     }
 }

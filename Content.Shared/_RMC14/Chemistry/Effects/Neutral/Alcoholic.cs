@@ -1,10 +1,12 @@
 using Content.Shared._RMC14.Chemistry.Effects.Positive;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Dizziness;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Drunk;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Speech.EntitySystems;
+using Content.Shared.StatusEffect;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -17,9 +19,10 @@ public sealed partial class Alcoholic : RMCChemicalEffect
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
     private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
 
-    private const string ConfusedStatus = "RMCStatusEffectConfused";
-    private const string DrowsinessStatus = "StatusEffectDrowsiness";
-    private const string ForcedSleepingStatus = "StatusEffectForcedSleeping";
+    private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
+    private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    private static readonly EntProtoId ForcedSleepingStatus = "StatusEffectForcedSleeping";
+    private static readonly ProtoId<StatusEffectPrototype> SlurredStatus = "SlurredSpeech";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -32,27 +35,19 @@ public sealed partial class Alcoholic : RMCChemicalEffect
         if (status.HasStatusEffect(args.TargetEntity, Neuroshielding.ResistNeuroStatus))
             return;
 
-        var drunk = args.EntityManager.System<SharedDrunkSystem>();
-        drunk.TryApplyDrunkenness(args.TargetEntity, (float) potency * 2f);
-
         var timing = IoCManager.Resolve<IGameTiming>();
         var actualPotency = (float) ActualPotency;
 
-        // dizziness in cm
-        drunk.TryApplyDrunkenness(args.TargetEntity, 0.1f * actualPotency, applySlur: false);
+        var dizziness = args.EntityManager.System<RMCDizzinessSystem>();
+        dizziness.AddDizzinessCapped(args.TargetEntity, 0.1f * actualPotency, 5f * actualPotency);
 
         ApplyCapped(status, timing, args.TargetEntity, DrowsinessStatus, 0.5f * actualPotency, 5f * actualPotency);
-
-        var random = IoCManager.Resolve<IRobustRandom>();
-        if (random.Prob(0.5f) || actualPotency >= 5f)
-            ApplyCapped(status, timing, args.TargetEntity, ConfusedStatus, 0.5f * actualPotency, 5f * actualPotency);
+        ApplyCapped(status, timing, args.TargetEntity, ConfusedStatus, actualPotency, 10f * actualPotency);
+        ApplySlurCapped(args.EntityManager, timing, args.TargetEntity, 0.5f * actualPotency, 10f * actualPotency);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var drunk = args.EntityManager.System<SharedDrunkSystem>();
-        drunk.TryApplyDrunkenness(args.TargetEntity, (float) potency * 4f);
-
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency * 0.5f);
         damage.DamageDict[AsphyxiationType] = potency;
@@ -63,13 +58,13 @@ public sealed partial class Alcoholic : RMCChemicalEffect
         var timing = IoCManager.Resolve<IGameTiming>();
         var actualPotency = (float) ActualPotency;
 
-        // dizziness in cm
-        drunk.TryApplyDrunkenness(args.TargetEntity, 0.25f * actualPotency, applySlur: false);
+        var dizziness = args.EntityManager.System<RMCDizzinessSystem>();
+        dizziness.AddDizzinessCapped(args.TargetEntity, 0.25f * actualPotency, 7.5f * actualPotency);
 
         ApplyCapped(status, timing, args.TargetEntity, DrowsinessStatus, actualPotency, 7.5f * actualPotency);
 
         if (random.Prob(0.02f))
-            ApplyCapped(status, timing, args.TargetEntity, ForcedSleepingStatus, 0.5f * actualPotency, 7.5f * actualPotency);
+            ApplyCapped(status, timing, args.TargetEntity, ForcedSleepingStatus, 2f * actualPotency, 15f * actualPotency);
 
         if (random.Prob(actualPotency * 0.02f))
         {
@@ -77,15 +72,12 @@ public sealed partial class Alcoholic : RMCChemicalEffect
             vomit.StartVomit(args.TargetEntity);
         }
 
-        if (random.Prob(0.75f) || actualPotency >= 5f)
-            ApplyCapped(status, timing, args.TargetEntity, ConfusedStatus, actualPotency, 7.5f * actualPotency);
+        ApplyCapped(status, timing, args.TargetEntity, ConfusedStatus, 2f * actualPotency, 15f * actualPotency);
+        ApplySlurCapped(args.EntityManager, timing, args.TargetEntity, actualPotency, 15f * actualPotency);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var drunk = args.EntityManager.System<SharedDrunkSystem>();
-        drunk.TryApplyDrunkenness(args.TargetEntity, (float) potency * 8f);
-
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency);
         damage.DamageDict[AsphyxiationType] = potency * 2f;
@@ -96,15 +88,16 @@ public sealed partial class Alcoholic : RMCChemicalEffect
         var random = IoCManager.Resolve<IRobustRandom>();
         var actualPotency = (float) ActualPotency;
 
-        // dizziness in cm
-        drunk.TryApplyDrunkenness(args.TargetEntity, 0.5f * actualPotency, applySlur: false);
+        var dizziness = args.EntityManager.System<RMCDizzinessSystem>();
+        dizziness.AddDizzinessCapped(args.TargetEntity, 0.5f * actualPotency, 10f * actualPotency);
 
-        ApplyCapped(status, timing, args.TargetEntity, ConfusedStatus, 2f * actualPotency, 10f * actualPotency);
+        ApplyCapped(status, timing, args.TargetEntity, ConfusedStatus, 4f * actualPotency, 20f * actualPotency);
         ApplyCapped(status, timing, args.TargetEntity, DrowsinessStatus, 2f * actualPotency, 10f * actualPotency);
+        ApplySlurCapped(args.EntityManager, timing, args.TargetEntity, 2f * actualPotency, 20f * actualPotency);
 
         var sleepChance = Math.Clamp(5f * actualPotency * 0.01f, 0f, 1f);
         if (random.Prob(sleepChance))
-            ApplyCapped(status, timing, args.TargetEntity, ForcedSleepingStatus, 0.5f * actualPotency, 10f * actualPotency);
+            ApplyCapped(status, timing, args.TargetEntity, ForcedSleepingStatus, 2f * actualPotency, 20f * actualPotency);
 
         var vomitChance = Math.Clamp(5f * actualPotency * 0.01f, 0f, 1f);
         if (random.Prob(vomitChance))
@@ -113,14 +106,14 @@ public sealed partial class Alcoholic : RMCChemicalEffect
             vomit.StartVomit(args.TargetEntity);
         }
 
-        // TODO RMC14: liver damage
+        // TODO RMC14: liver damage - 0.5 * potency liver damage per 2s tick
     }
 
     private static void ApplyCapped(
         SharedStatusEffectsSystem status,
         IGameTiming timing,
         EntityUid target,
-        string proto,
+        EntProtoId proto,
         float increment,
         float cap)
     {
@@ -140,5 +133,22 @@ public sealed partial class Alcoholic : RMCChemicalEffect
             return;
 
         status.TrySetStatusEffectDuration(target, proto, TimeSpan.FromSeconds(next));
+    }
+
+    private static void ApplySlurCapped(IEntityManager entMan, IGameTiming timing, EntityUid target, float increment, float cap)
+    {
+        var current = 0f;
+        if (entMan.System<StatusEffectsSystem>().TryGetTime(target, SlurredStatus, out var time))
+        {
+            var remaining = (float) (time.Value.Item2 - timing.CurTime).TotalSeconds;
+            if (remaining > 0f)
+                current = remaining;
+        }
+
+        var toAdd = Math.Min(current + increment, cap) - current;
+        if (toAdd <= 0f)
+            return;
+
+        entMan.System<SharedSlurredSystem>().DoSlur(target, TimeSpan.FromSeconds(toAdd));
     }
 }

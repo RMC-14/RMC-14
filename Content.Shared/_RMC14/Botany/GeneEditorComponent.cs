@@ -1,11 +1,10 @@
 using Robust.Shared.Audio;
-using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Botany;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[Access(typeof(GeneEditorSystem))]
 public sealed partial class GeneEditorComponent : Component
 {
     [DataField]
@@ -13,9 +12,6 @@ public sealed partial class GeneEditorComponent : Component
 
     [DataField]
     public string SeedSlotId = "gene_editor_seed";
-
-    public ContainerSlot DiscSlot = default!;
-    public ContainerSlot SeedSlot = default!;
 
     [DataField]
     public int EditCountAddMin = 5;
@@ -36,50 +32,14 @@ public sealed partial class GeneEditorComponent : Component
     public SoundSpecifier? EjectSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
 
     [AutoNetworkedField]
-    public bool HasDisc;
-
-    [AutoNetworkedField]
     public string? DiscSource;
 
     [AutoNetworkedField]
     public List<string> DiscGeneLabels = new();
 
     [AutoNetworkedField]
-    public bool HasSeed;
-
-    [AutoNetworkedField]
-    public string? SeedName;
-
-    [AutoNetworkedField]
     public int SeedEditCount;
 
     [AutoNetworkedField]
-    public NetEntity? SeedEntityNet;
-
-    [AutoNetworkedField]
-    public float SeedEndurance;
-
-    [AutoNetworkedField]
-    public float SeedLifespan;
-
-    [AutoNetworkedField]
-    public float SeedMaturation;
-
-    [AutoNetworkedField]
-    public float SeedProduction;
-
-    [AutoNetworkedField]
-    public int SeedYield;
-
-    [AutoNetworkedField]
-    public HarvestType SeedHarvestRepeat;
-
-    [AutoNetworkedField]
-    public bool SeedSeedless;
-
-    [AutoNetworkedField]
-    public float SeedPotency;
-
-    [AutoNetworkedField]
-    public bool SeedViable = true;
+    public RMCSeedStats? SeedStats;
 }

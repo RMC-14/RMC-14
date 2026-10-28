@@ -1,6 +1,10 @@
+using Content.Shared._RMC14.Chemistry.ChemEffectFlags;
+using Content.Shared._RMC14.Synth;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Humanoid;
+using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
 
@@ -13,16 +17,25 @@ public sealed partial class Neuroshielding : RMCChemicalEffect
         return "Protects the brain from neurological damage caused by toxins.";
     }
 
-    // TODO RMC14: liver organ damage
+    // TODO RMC14: liver organ damage - 0.5 * potency * delta_time (potency per 2s tick)
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        status.TryRemoveStatusEffect(args.TargetEntity, "Dazed");
-        status.TryAddStatusEffectDuration(args.TargetEntity, ResistNeuroStatus, TimeSpan.FromSeconds(2));
+        var entities = args.EntityManager;
+        if (!entities.HasComponent<HumanoidAppearanceComponent>(args.TargetEntity) ||
+            entities.HasComponent<SynthComponent>(args.TargetEntity))
+        {
+            return;
+        }
+
+        if (!entities.System<RMCChemEffectFlagsSystem>().TrySetFlag(args.TargetEntity, ResistNeuroStatus))
+            return;
+
+        entities.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-neuroshielding-thick-skull"), args.TargetEntity, args.TargetEntity);
+        entities.System<SharedStatusEffectsSystem>().TryRemoveStatusEffect(args.TargetEntity, "Dazed");
     }
 
-    // TODO RMC14: brain damage on critical overdose
+    // TODO RMC14: brain damage on critical overdose - 2 * potency brain damage per 2s tick
 
     public static readonly EntProtoId ResistNeuroStatus = "RMCStatusEffectResistNeuro";
 }

@@ -1,11 +1,10 @@
 using Robust.Shared.Audio;
-using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Botany;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[Access(typeof(LysisCentrifugeSystem))]
 public sealed partial class LysisCentrifugeComponent : Component
 {
     [DataField]
@@ -32,8 +31,7 @@ public sealed partial class LysisCentrifugeComponent : Component
     [DataField]
     public SoundSpecifier? FailSound = new SoundPathSpecifier("/Audio/Machines/buzz-two.ogg");
 
-    public ContainerSlot DiscSlot = default!;
-    public ContainerSlot SeedSlot = default!;
+    [AutoNetworkedField]
     public Dictionary<PlantGeneType, string> ObfuscationCodes = new();
 
     [AutoNetworkedField]
@@ -43,47 +41,8 @@ public sealed partial class LysisCentrifugeComponent : Component
     public string? GenomeName;
 
     [AutoNetworkedField]
-    public List<LysisCentrifugeGeneSlot> GeneSlots = new();
+    public RMCSeedStats? SeedStats;
 
-    [AutoNetworkedField]
-    public bool HasDisc;
-
-    [AutoNetworkedField]
-    public bool DiscFull;
-
-    [AutoNetworkedField]
-    public bool HasSeed;
-
-    [AutoNetworkedField]
-    public string? SeedPacketName;
-
-    [AutoNetworkedField]
-    public NetEntity? SeedEntityNet;
-
-    [AutoNetworkedField]
-    public float SeedEndurance;
-
-    [AutoNetworkedField]
-    public float SeedLifespan;
-
-    [AutoNetworkedField]
-    public float SeedMaturation;
-
-    [AutoNetworkedField]
-    public float SeedProduction;
-
-    [AutoNetworkedField]
-    public int SeedYield;
-
-    [AutoNetworkedField]
-    public HarvestType SeedHarvestRepeat;
-
-    [AutoNetworkedField]
-    public bool SeedSeedless;
-
-    [AutoNetworkedField]
-    public float SeedPotency;
-
-    [AutoNetworkedField]
-    public bool SeedViable = true;
+    [ViewVariables]
+    public List<IComponent>? LoadedSnapshot;
 }

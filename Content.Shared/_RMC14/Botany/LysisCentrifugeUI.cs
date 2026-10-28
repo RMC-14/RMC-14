@@ -9,12 +9,6 @@ public enum LysisCentrifugeUiKey : byte
 }
 
 [Serializable, NetSerializable]
-public readonly record struct LysisCentrifugeGeneSlot(
-    PlantGeneType GeneType,
-    string ObfuscatedCode,
-    bool AlreadyOnDisc);
-
-[Serializable, NetSerializable]
 public sealed class LysisCentrifugeExtractGeneBuiMsg(PlantGeneType geneType) : BoundUserInterfaceMessage
 {
     public readonly PlantGeneType GeneType = geneType;

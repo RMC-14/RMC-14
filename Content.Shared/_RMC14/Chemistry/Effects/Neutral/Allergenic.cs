@@ -29,6 +29,6 @@ public sealed partial class Allergenic : RMCChemicalEffect
             return;
 
         var emote = args.EntityManager.System<SharedRMCEmoteSystem>();
-        emote.TryEmoteWithChat(args.TargetEntity, random.Pick(Emotes), hideLog: true, ignoreActionBlocker: true, forceEmote: true);
+        emote.TryEmoteWithChat(args.TargetEntity, random.Pick(Emotes), hideLog: true, forceEmote: true);
     }
 }

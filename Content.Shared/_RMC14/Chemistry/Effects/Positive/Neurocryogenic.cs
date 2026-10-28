@@ -1,15 +1,11 @@
 using Content.Shared._RMC14.Chemistry.Buildup;
-using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared.Atmos.Rotting;
-using Content.Shared.Chemistry;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Prototypes;
@@ -21,7 +17,6 @@ public sealed partial class Neurocryogenic : RMCChemicalEffect
 {
     public override bool ReactsOnTouch => true;
 
-    // I hope this is actaully used somewhere
     private const float CryoLiquidThreshold = 210f;
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
@@ -31,39 +26,41 @@ public sealed partial class Neurocryogenic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (args.Method == ReactionMethod.Touch)
+        if (IsReaction(args))
         {
-            HandleTouch(args);
+            HandleReaction(args);
             return;
         }
 
         var entities = args.EntityManager;
         var target = args.TargetEntity;
 
-        if (entities.TryGetComponent(target, out MobStateComponent? mobStateComp) &&
-            entities.System<MobStateSystem>().IsDead(target, mobStateComp))
-        {
-            var rotting = entities.System<SharedRottingSystem>();
-            rotting.ReduceAccumulator(target, TimeSpan.FromSeconds((double) potency * 5));
-            return;
-        }
-
         var random = IoCManager.Resolve<IRobustRandom>();
         if (random.Prob(0.1f))
-            entities.System<SharedPopupSystem>().PopupEntity("You feel like you have the worst brain freeze ever!", target, target);
+            entities.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-neurocryogenic-brain-freeze"), target, target);
 
         var stun = entities.System<SharedStunSystem>();
-        stun.TryKnockdown(target, TimeSpan.FromSeconds(2), true);
-        stun.TryStun(target, TimeSpan.FromSeconds(2), true);
+        stun.TryKnockdown(target, TimeSpan.FromSeconds(40), true);
+        stun.TryStun(target, TimeSpan.FromSeconds(40), true);
     }
 
-    private void HandleTouch(EntityEffectReagentArgs args)
+    protected override bool TickDead(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
+    {
+        if (!args.EntityManager.HasComponent<HumanoidAppearanceComponent>(args.TargetEntity))
+            return false;
+
+        var unrevivable = args.EntityManager.System<RMCUnrevivableSystem>();
+        unrevivable.AddRevivableTime(args.TargetEntity, TimeSpan.FromSeconds((double) potency * 5));
+        return true;
+    }
+
+    private void HandleReaction(EntityEffectReagentArgs args)
     {
         var entities = args.EntityManager;
         var target = args.TargetEntity;
 
         var isXenoHuman = entities.HasComponent<XenoComponent>(target) ||
-            (entities.HasComponent<HumanoidAppearanceComponent>(target) && !entities.HasComponent<SynthComponent>(target));
+            entities.HasComponent<HumanoidAppearanceComponent>(target);
         if (!isXenoHuman)
             return;
 
@@ -80,5 +77,5 @@ public sealed partial class Neurocryogenic : RMCChemicalEffect
         temperature.ForceChangeTemperature(args.TargetEntity, newTemperature);
     }
 
-    // TODO RMC14: critical brain damage
+    // TODO RMC14: critical brain damage - 2.5 * potency * delta_time (5 * potency per 2s tick)
 }
