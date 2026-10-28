@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Power;
 using Content.Server.Chemistry.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
@@ -11,7 +12,7 @@ namespace Content.Server.Chemistry.EntitySystems;
 
 public sealed class SolutionHeaterSystem : EntitySystem
 {
-    [Dependency] private readonly PowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private readonly RMCPowerSystem _powerReceiver = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
