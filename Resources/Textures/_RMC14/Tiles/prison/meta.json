@@ -146,6 +146,9 @@
       "name": "sterile_white",
     },
     {
+      "name": "sterile_white_plate",
+    },
+    {
       "name": "whitegreen",
       "directions": 8
     },
