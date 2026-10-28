@@ -94,12 +94,9 @@ namespace Content.Shared.Body.Systems
 
                 _solutionContainerSystem.UpdateChemicals(stomach.Solution.Value);
 
-                foreach (var content in transferSolution.Contents.ToArray())                 // RMC14 intraveneouse
+                foreach (var content in transferSolution.Contents.ToArray()) // RMC14 intraveneouse
                 {
-                    if (!_rmcReagent.TryIndex(content.Reagent.Prototype, out var reagentProto))
-                        continue;
-
-                    if (Intravenous.IsNotIngestible(reagentProto))
+                    if (_rmcReagent.HasProperty<Intravenous>(content.Reagent.Prototype))
                         transferSolution.RemoveReagent(content);
                 }
 

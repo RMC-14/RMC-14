@@ -25,6 +25,8 @@ public sealed partial class Pneumopeutic : RMCChemicalEffect
     }
 
     // TODO RMC14: mob effect - heal lung organ damage, damages lungs on overdose
+    // heals 0.5 * potency lung damage per 2s tick
+    // overdose deals 2 * potency lung damage per 2s tick
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

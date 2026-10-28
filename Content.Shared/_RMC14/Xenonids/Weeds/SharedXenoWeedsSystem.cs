@@ -81,8 +81,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private EntityQuery<ResinSpeedupModifierComponent> _fastResinQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
-    private EntityQuery<HiveMemberComponent> _hiveMemberQuery;
-
 
     public override void Initialize()
     {
@@ -92,7 +90,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         _fastResinQuery = GetEntityQuery<ResinSpeedupModifierComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _blockWeedsQuery = GetEntityQuery<BlockWeedsComponent>();
-        _hiveMemberQuery = GetEntityQuery<HiveMemberComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnModifierShutdown);
@@ -212,6 +209,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private void OnWeedsMapInit(Entity<XenoWeedsComponent> ent, ref MapInitEvent args)
     {
+        if (_net.IsServer && _hive.GetHive(ent.Owner) == null && _hive.TryGetHiveBySlot(HiveSlots.Normal, out var normalHive))
+            _hive.SetHive(ent.Owner, normalHive);
+
         // Weedbound structures register themselves on their own MapInit/Startup.
         // Only do the expensive rebuild pass if we have serialized runtime bookkeeping to clear.
         if (ent.Comp.WeedboundStructures.Count > 0)
@@ -275,9 +275,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var speedResin = 0.0f;
         var isXeno = _xenoQuery.HasComp(ent);
         //Checks hive for applying slows now
-        //Weed speedup only effects xenos, but slowdown does not hurt hive mems
-        //Fast resin speedup only effect xenos, but sticky also doesn't hurt hive mems
-        _hiveMemberQuery.TryComp(ent, out var hive);
+        //Weed speedup only effects xenos, but slowdown does not hurt hive mems or allies
+        //Fast resin speedup only effect xenos, but sticky also doesn't hurt hive mems or allies
 
         var anyWeeds = false;
         var anySlowResin = false;
@@ -303,7 +302,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             if (_slowResinQuery.TryComp(contacting, out var slowResin))
             {
-                if (hive == null || !_hive.IsMember(contacting, hive.Hive))
+                var slowResinHive = _hive.GetHive(contacting)?.Owner;
+                if (!_hive.IsMemberOrAlly(ent.Owner, slowResinHive))
                 {
                     if (HasComp<RMCArmorSpeedTierUserComponent>(contacting))
                         speedResin += slowResin.OutsiderSpeedModifierArmor;
@@ -318,7 +318,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
             if (_fastResinQuery.TryComp(contacting, out var fastResin))
             {
-                if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+                var fastResinHive = _hive.GetHive(contacting)?.Owner;
+                if (isXeno && _hive.IsMemberOrAlly(ent.Owner, fastResinHive))
                 {
                     speedResin += fastResin.HiveSpeedModifier;
                     entriesResin++;
@@ -332,13 +333,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
             anyWeeds = true;
 
-            if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+            var weedsHive = _hive.GetHive(contacting)?.Owner;
+            if (isXeno && _hive.IsMemberOrAlly(ent.Owner, weedsHive))
             {
                 speedWeeds += weeds.SpeedMultiplierXeno;
                 friendlyWeeds = true;
                 entriesWeeds++;
             }
-            else if (hive == null || !_hive.IsMember(contacting, hive.Hive))
+            else if (!_hive.IsMemberOrAlly(ent.Owner, weedsHive))
             {
                 if (HasComp<RMCArmorSpeedTierUserComponent>(contacting))
                     speedWeeds += weeds.SpeedMultiplierOutsiderArmor;
@@ -474,12 +476,20 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             return false;
         }
 
-        var weeds = GetWeedsOnFloor((gridUid, grid), coordinates);
+        return IsOnFriendlyWeeds((gridUid, grid), coordinates, entity.Owner);
+    }
+
+    public bool IsOnFriendlyWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, EntityUid entity)
+    {
+        var weeds = GetWeedsOnFloor(grid, coordinates);
         if (weeds == null)
             return false;
 
-        if (!_hive.FromSameHive(entity.Owner, weeds.Value.Owner))
+        if (_hive.GetHive(weeds.Value.Owner) is not { } weedsHive ||
+            !_hive.IsMemberOrAlly(entity, weedsHive.Owner))
+        {
             return false;
+        }
 
         return true;
     }

@@ -196,6 +196,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
             ev.Ignite = false;
             ev.Immune = true;
+            ev.IgnorePenetration = true;
             return;
         }
     }

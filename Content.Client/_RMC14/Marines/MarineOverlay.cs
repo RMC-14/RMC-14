@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._RMC14.Hallucination;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stealth;
@@ -40,6 +41,7 @@ public sealed class MarineOverlay : Overlay
     private readonly EntityQuery<FireteamLeaderComponent> _fireteamLeaderQuery;
     private readonly EntityQuery<FireteamMemberComponent> _fireteamMemberQuery;
     private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
+    private readonly EntityQuery<RMCHallucinationDisguisedComponent> _disguisedQuery;
     private readonly EntityQuery<ShowMarineIconsComponent> _marineIconsQuery;
     private readonly EntityQuery<ParaDroppingComponent> _paraDroppingQuery;
     private readonly EntityQuery<CrashLandingComponent> _crashLandingQuery;
@@ -60,6 +62,7 @@ public sealed class MarineOverlay : Overlay
         _fireteamLeaderQuery = _entity.GetEntityQuery<FireteamLeaderComponent>();
         _fireteamMemberQuery = _entity.GetEntityQuery<FireteamMemberComponent>();
         _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
+        _disguisedQuery = _entity.GetEntityQuery<RMCHallucinationDisguisedComponent>();
         _marineIconsQuery = _entity.GetEntityQuery<ShowMarineIconsComponent>();
         _paraDroppingQuery = _entity.GetEntityQuery<ParaDroppingComponent>();
         _crashLandingQuery = _entity.GetEntityQuery<CrashLandingComponent>();
@@ -103,7 +106,7 @@ public sealed class MarineOverlay : Overlay
             if (_container.IsEntityOrParentInContainer(uid)) // prevent icons being visible inside containers
                 continue;
 
-            if (_invisQuery.HasComp(uid))
+            if (_invisQuery.HasComp(uid) || _disguisedQuery.HasComp(uid))
                 continue;
 
             var worldMatrix = Matrix3x2.CreateTranslation(worldPos);

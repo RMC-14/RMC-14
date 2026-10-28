@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
-using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerWindow;
+using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerColors;
 
 namespace Content.Client._RMC14.Xenonids.Biomass;
 
@@ -19,11 +19,14 @@ public sealed partial class RMCBiomassUpgradeRow : PanelContainer
     public EntProtoId<RMCBiomassUpgradeComponent>? UpgradeId;
     public Action<EntProtoId<RMCBiomassUpgradeComponent>, int>? OnPrint;
 
+    private readonly Button[] _printButtons;
+
     public RMCBiomassUpgradeRow()
     {
         RobustXamlLoader.Load(this);
 
-        foreach (var button in new[] { PrintButton, Print2Button, Print5Button, Print10Button })
+        _printButtons = [PrintButton, Print2Button, Print5Button, Print10Button];
+        foreach (var button in _printButtons)
         {
             button.ModulateSelfOverride = Color.White;
             button.StyleBoxOverride = new StyleBoxFlat { BackgroundColor = Amber, BorderColor = AmberDim, BorderThickness = new Thickness(2) };
@@ -38,12 +41,19 @@ public sealed partial class RMCBiomassUpgradeRow : PanelContainer
         Print10Button.OnPressed += _ => Print(10);
     }
 
+    public void SetDescription(string description)
+    {
+        foreach (var button in _printButtons)
+        {
+            button.ToolTip = description;
+        }
+    }
+
     public void SetClearanceMet(bool met)
     {
-        var tint = met ? Color.White : new Color(1f, 1f, 1f, 0.5f);
-        foreach (var button in new[] { PrintButton, Print2Button, Print5Button, Print10Button })
+        foreach (var button in _printButtons)
         {
-            button.Modulate = tint;
+            RMCBiomassAnalyzerWindow.SetButtonEnabled(button, met);
         }
     }
 

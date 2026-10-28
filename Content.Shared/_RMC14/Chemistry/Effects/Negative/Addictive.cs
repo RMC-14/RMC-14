@@ -23,7 +23,7 @@ public sealed partial class Addictive : RMCChemicalEffect
         addiction.TryExposeToAddictive(args.TargetEntity, args.Reagent.ID, ActualPotency);
     }
 
-    // TODO RMC14: brain damage on overdose
+    // TODO RMC14: brain damage on overdose - 0.5 * potency * delta_time (potency per 2s tick)
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

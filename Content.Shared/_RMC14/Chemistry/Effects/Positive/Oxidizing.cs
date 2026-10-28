@@ -12,16 +12,24 @@ public sealed partial class Oxidizing : RMCChemicalEffect
 {
     public override bool ReactsOnTouch => true;
 
+    private const int UTNapthalIntensity = 30;
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return "Increases the intensity of chemical fires, at the cost of burning fuel faster. On contact with a high enough potency, ignites the target.";
     }
 
-    public float IntensityDelta => 7f * Potency;
-    public float DurationDelta => -4f * Potency;
-    public FixedPoint2 IntensityModDelta => 0.2f * Potency;
-    public FixedPoint2 DurationModDelta => -0.1f * Potency;
-    public FixedPoint2 RadiusModDelta => -0.01f * Potency;
+    public override bool IsFireSupplement => true;
+
+    public override void ModifyFireStats(ref RMCFireStatsBuilder stats, float potency)
+    {
+        stats.Intensity += 7f * potency;
+        stats.Duration += -4f * potency;
+        stats.IntensityMod += 0.2f * potency;
+        stats.DurationMod += -0.1f * potency;
+        stats.RadiusMod += -0.01f * potency;
+        stats.HasFireProperty = true;
+    }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
@@ -39,6 +47,6 @@ public sealed partial class Oxidizing : RMCChemicalEffect
         if (ActualPotency <= 4f)
             return;
 
-        flammableSystem.Ignite((args.TargetEntity, flammable), (int) ActualPotency, (int) boost, null);
+        flammableSystem.Ignite((args.TargetEntity, flammable), UTNapthalIntensity, (int) flammable.FireStacks, null);
     }
 }

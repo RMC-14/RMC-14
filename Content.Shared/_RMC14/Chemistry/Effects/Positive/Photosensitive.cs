@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Botany;
+using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
@@ -19,7 +20,7 @@ public sealed partial class Photosensitive : RMCChemicalEffect
         if (!args.EntityManager.TryGetComponent<RMCPlantHarvestComponent>(plant.Owner, out var harvest) || harvest.HarvestRepeat == HarvestType.Repeat)
             return;
 
-        var amount = (float) ActualPotency * 2f * (float) args.Quantity;
+        var amount = (float) args.Quantity;
         var plantTray = args.EntityManager.System<SharedRMCPlantTraySystem>();
         if (plant.Comp.Tray is { } trayUid && GetTray(args.EntityManager, plant) is { } tray)
         {
@@ -49,5 +50,15 @@ public sealed partial class Photosensitive : RMCChemicalEffect
         popup.PopupEntity(Loc.GetString("plant-repeat-harvest-shimmer", ("name", Loc.GetString(plant.Comp.DisplayName))), args.TargetEntity);
     }
 
-    // TODO RMC14: migraine popup & brain organ damage
+    // TODO RMC14: brain organ damage - potency brain organ damage per 2s tick
+
+    protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
+    {
+        var random = IoCManager.Resolve<IRobustRandom>();
+        if (random.Prob(0.5f))
+        {
+            var popup = args.EntityManager.System<SharedPopupSystem>();
+            popup.PopupEntity(Loc.GetString("chem-photosensitive-migraine"), args.TargetEntity, args.TargetEntity, PopupType.SmallCaution);
+        }
+    }
 }

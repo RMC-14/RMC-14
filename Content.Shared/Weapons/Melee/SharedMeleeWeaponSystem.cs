@@ -626,7 +626,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
-        // RMC
+        // RMC14
         if (meleeUid == user && HasComp<XenoComponent>(user))
             modifiedDamage = _xeno.TryApplyXenoSlashDamageMultiplier(target.Value, modifiedDamage);
 
@@ -786,7 +786,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             RaiseLocalEvent(entity, attackedEvent);
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
-            // RMC
+            // RMC14
             if (meleeUid == user && HasComp<XenoComponent>(user))
                 modifiedDamage = _xeno.TryApplyXenoSlashDamageMultiplier(entity, modifiedDamage);
 

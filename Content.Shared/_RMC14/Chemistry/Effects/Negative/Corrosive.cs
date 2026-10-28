@@ -136,20 +136,18 @@ public sealed partial class Corrosive : RMCChemicalEffect
         }
 
         var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
-        DamageSpecifier damage;
         if (touch && isHuman && volume >= 10f)
         {
-            // TODO RMC14: head limb take_damage(4, 2)
+            // TODO RMC14: head limb take_damage(4, 2) - flat 4 brute + 2 burn to the head, once per touch of 10u+
 
             if (random.Prob(meltChance) && !entities.HasComponent<PainNumbnessComponent>(target))
-                entities.System<SharedRMCEmoteSystem>().TryEmoteWithChat(target, ScreamEmote, hideLog: true, ignoreActionBlocker: true, forceEmote: true);
+                entities.System<SharedRMCEmoteSystem>().TryEmoteWithChat(target, ScreamEmote, hideLog: true, forceEmote: true);
         }
         else
         {
-            damage = rmcDamageable.DistributeFreshDamage(BruteGroup, MathF.Min(6f, volume));
+            var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, MathF.Min(6f, volume));
+            damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
         }
-
-        damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
     }
 
     private void HandleTouchItem(EntityEffectReagentArgs args)

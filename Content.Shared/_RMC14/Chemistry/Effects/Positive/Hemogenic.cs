@@ -1,6 +1,7 @@
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared._RMC14.Botany;
+using Content.Shared._RMC14.Chemistry.SpeedModifier;
 using Content.Shared._RMC14.Damage;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -10,7 +11,6 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared._RMC14.Body;
-using Content.Shared._RMC14.Movement;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -59,16 +59,16 @@ public sealed partial class Hemogenic : RMCChemicalEffect
 
         hungerSystem.ModifyHunger(target, -(float) potency);
 
-        if (entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream))
-        {
-            var bloodstreamSystem = entityManager.System<SharedBloodstreamSystem>();
-            bloodstreamSystem.TryModifyBloodLevel((target, bloodstream), potency);
-        }
+        if (!entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream))
+            return;
+
+        var bloodstreamSystem = entityManager.System<SharedBloodstreamSystem>();
+        bloodstreamSystem.TryModifyBloodLevel((target, bloodstream), potency);
 
         var rmcBloodstreamSystem = entityManager.System<SharedRMCBloodstreamSystem>();
         var shouldApplyDamage = ActualPotency > 3 &&
                                 rmcBloodstreamSystem.TryGetBloodSolution(target, out var bloodSolution) &&
-                                bloodSolution.Volume > bloodSolution.MaxVolume + 10;
+                                bloodSolution.Volume > bloodstream.BloodMaxVolume + 10;
         if (!shouldApplyDamage)
             return;
         var rmcDamageable = entityManager.System<SharedRMCDamageableSystem>();
@@ -76,10 +76,8 @@ public sealed partial class Hemogenic : RMCChemicalEffect
         damage.DamageDict[AsphyxiationType] = potency * 2;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
 
-        var penalty = MathF.Max(1f - (float) potency * 0.05f, 0.1f);
-        var speed = entityManager.System<TemporarySpeedModifiersSystem>();
-        var modifiers = new List<TemporarySpeedModifierSet> { new(TimeSpan.FromSeconds(2), penalty, penalty) };
-        speed.ModifySpeed(target, modifiers);
+        var speedModifier = entityManager.System<RMCReagentSpeedModifierSystem>();
+        speedModifier.SetSpeedModifier(target, $"{args.Reagent?.ID}:{nameof(Hemogenic)}", ActualPotency);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

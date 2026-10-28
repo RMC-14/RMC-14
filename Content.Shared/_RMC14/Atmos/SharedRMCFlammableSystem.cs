@@ -80,6 +80,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
 
+    private const int WhiteFireIntensity = 50;
+
     private EntityQuery<BlockTileFireComponent> _blockTileFireQuery;
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<FlammableComponent> _flammableQuery;
@@ -251,7 +253,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!HasComp<PaperComponent>(args.Used))
             return;
 
-        if (!CanCraftMolotovPopup(ent, args.User, true, out var intensity, out var duration, out var firePenetrating))
+        if (!CanCraftMolotovPopup(ent, args.User, true, out var intensity, out _, out _))
             return;
 
         if (_net.IsClient)
@@ -262,17 +264,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         var tileFire = EnsureComp<TileFireOnTriggerComponent>(molotov);
         tileFire.Intensity = intensity.Int();
-        tileFire.Duration = duration.Int();
-        tileFire.FirePenetrating = firePenetrating;
-
-        // use reagent is actually in the bottle
-        if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.SolutionId, out _, out var molotovSolution) &&
-            molotovSolution.TryFirstOrNull(out var firstReagent) &&
-            _rmcReagent.TryIndex(firstReagent.Value.Reagent.Prototype, out var firstReagentProto))
-        {
-            tileFire.Spawn = firstReagentProto.FireEntity;
-            tileFire.FireColor = GetFireColor(firstReagentProto);
-        }
+        tileFire.Spawn = intensity >= ent.Comp.BlueFireIntensity
+            ? ent.Comp.BlueFire
+            : intensity <= ent.Comp.GreenFireIntensity
+                ? ent.Comp.GreenFire
+                : ent.Comp.DefaultFire;
 
         Dirty(molotov, tileFire);
 
@@ -309,9 +305,24 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return (comp.Range, comp.Intensity, comp.Duration, comp.FirePenetrating, comp.FireColor);
     }
 
-    public Color? GetFireColor(Reagent reagent)
+    public Color? GetFireColor(ReagentPrototype reagent)
     {
-        return reagent.Unknown ? reagent.SubstanceColor : null;
+        if (!reagent.Unknown)
+            return null;
+
+        var stats = EntityManager.System<SharedRMCFlamerSystem>().GetFireStats(reagent);
+        return GetBurnColor(reagent, stats);
+    }
+
+    public Color GetBurnColor(ReagentPrototype reagent, RMCFireStats stats)
+    {
+        if (!stats.HasFireProperty)
+            return reagent.BurnColor;
+
+        if (reagent.Unknown && stats.Intensity >= WhiteFireIntensity)
+            return Color.White;
+
+        return reagent.SubstanceColor;
     }
 
     private void OnDirectionTileFireTriggered(Entity<DirectionalTileFireOnTriggerComponent> ent,
@@ -787,10 +798,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!ent.Comp.ImmuneToDirectHits && args.DirectHit)
             return;
 
-        // cmss13's IgniteMob(): a fire_penetrating reagent bypasses FIRE_IMMUNITY_NO_IGNITE entirely
-        // (unless the target also has FIRE_IMMUNITY_IGNORE_PEN, e.g. the hive-buff immunity handled by
-        // HiveBoonSystem.OnGetTileFireIgnitionImmunity, which stays unconditional) - mirrored here by
-        // letting the fire bypass this immunity if it passes the whitelist (RMCFireImmunityBypass).
         if (args.Fire is { } fire && _entityWhitelist.IsWhitelistPass(ent.Comp.BypassWhitelist, fire))
             return;
 
@@ -1029,14 +1036,14 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     /// <param name="fireEntity">The fire entity (like a tile fire) that might deal damage</param>
     /// <param name="targetEntity">The entity that might have fire immunity</param>
     /// <returns>True if damage should be dealt, false if it should be blocked by immunity</returns>
-    private bool CanFireBypassImmunity(EntityUid fireEntity, EntityUid targetEntity)
+    public bool CanFireBypassImmunity(EntityUid fireEntity, EntityUid targetEntity)
     {
-        // If the fire has a bypass component, it can always bypass immunity
-        if (HasComp<RMCFireImmunityBypassComponent>(fireEntity))
-            return true;
-
         var tileEv = new RMCGetFireImmunityEvent(fireEntity);
         RaiseLocalEvent(targetEntity, ref tileEv);
+
+        // If the fire has a bypass component, it can always bypass immunity
+        if (!tileEv.IgnorePenetration && HasComp<RMCFireImmunityBypassComponent>(fireEntity))
+            return true;
 
         return !tileEv.Immune;
     }
@@ -1272,4 +1279,4 @@ public sealed class GetIgnitionImmunityEvent : EntityEventArgs, IInventoryRelayE
 }
 
 [ByRefEvent]
-public record struct RMCGetFireImmunityEvent(EntityUid? Fire, bool Ignite = true, bool Immune = false);
+public record struct RMCGetFireImmunityEvent(EntityUid? Fire, bool Ignite = true, bool Immune = false, bool IgnorePenetration = false);

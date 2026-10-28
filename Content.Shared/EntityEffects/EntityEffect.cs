@@ -133,6 +133,8 @@ public record class EntityEffectReagentArgs : EntityEffectBaseArgs
 
     public FixedPoint2 Scale;
 
+    public bool RMCProcessedDead; // RMC14
+
     public EntityEffectReagentArgs(EntityUid targetEntity, IEntityManager entityManager, EntityUid? organEntity, Solution? source, FixedPoint2 quantity, ReagentPrototype? reagent, ReactionMethod? method, FixedPoint2 scale) : base(targetEntity, entityManager)
     {
         OrganEntity = organEntity;

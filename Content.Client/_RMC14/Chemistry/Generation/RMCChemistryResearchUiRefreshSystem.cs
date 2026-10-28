@@ -1,5 +1,7 @@
+using Content.Client._RMC14.Xenonids.Biomass;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.UserInterface;
+using Content.Shared._RMC14.Xenonids.Biomass;
 
 namespace Content.Client._RMC14.Chemistry.Generation;
 
@@ -25,6 +27,12 @@ public sealed class RMCChemistryResearchUiRefreshSystem : EntitySystem
         while (simulators.MoveNext(out var uid, out _))
         {
             _rmcUI.RefreshUIs<RMCSynthesisSimulatorBui>(uid);
+        }
+
+        var analyzers = EntityQueryEnumerator<RMCBiomassAnalyzerMachineComponent>();
+        while (analyzers.MoveNext(out var uid, out _))
+        {
+            _rmcUI.RefreshUIs<RMCBiomassAnalyzerBui>(uid);
         }
     }
 

@@ -16,7 +16,9 @@ public sealed partial class Neuropathic : RMCChemicalEffect
         return "Activates the somatosensory system, causing neuropathic pain throughout the body.";
     }
 
-    // TODO RMC14: neuropathic pain
+    // TODO RMC14: neuropathic pain - +10 * potency pain per 2s tick,
+    // +20 * potency more while overdosed
+    // builds up until reagent leaves, then pain is recalculated from damage
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

@@ -1,30 +1,31 @@
 <controls:RMCBiomassUpgradeRow
     xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Xenonids.Biomass"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     HorizontalExpand="True">
     <controls:RMCBiomassUpgradeRow.PanelOverride>
-        <graphics:StyleBoxFlat BackgroundColor="#150E00" BorderColor="#8A6800" BorderThickness="0 0 0 2" />
+        <graphics:StyleBoxFlat BackgroundColor="{x:Static controls:RMCBiomassAnalyzerColors.AmberBlack}" BorderColor="{x:Static controls:RMCBiomassAnalyzerColors.AmberDim}" BorderThickness="0 0 0 2" />
     </controls:RMCBiomassUpgradeRow.PanelOverride>
     <BoxContainer Orientation="Horizontal" Margin="4" SeparationOverride="4">
-        <Label Name="NameLabel" Access="Public" MinWidth="330" MaxWidth="330" ClipText="True" FontColorOverride="#FFD21A" />
+        <Label Name="NameLabel" Access="Public" MinWidth="330" MaxWidth="330" ClipText="True" MouseFilter="Pass" FontColorOverride="{x:Static controls:RMCBiomassAnalyzerColors.Amber}" />
         <PanelContainer MinWidth="2" VerticalExpand="True">
             <PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BackgroundColor="#8A6800" />
+                <graphics:StyleBoxFlat BackgroundColor="{x:Static controls:RMCBiomassAnalyzerColors.AmberDim}" />
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
             <PanelContainer HorizontalAlignment="Left">
                 <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="#00000000" BorderColor="#FFD21A" BorderThickness="0 0 0 2" />
+                    <graphics:StyleBoxFlat BackgroundColor="#00000000" BorderColor="{x:Static controls:RMCBiomassAnalyzerColors.Amber}" BorderThickness="0 0 0 2" />
                 </PanelContainer.PanelOverride>
-                <Label Name="ClearanceLabel" Access="Public" FontColorOverride="#FFD21A" />
+                <Label Name="ClearanceLabel" Access="Public" FontColorOverride="{x:Static controls:RMCBiomassAnalyzerColors.Amber}" />
             </PanelContainer>
-            <Label Name="TrendLabel" Access="Public" FontColorOverride="#8A6800" />
+            <Label Name="TrendLabel" Access="Public" FontColorOverride="{x:Static controls:RMCBiomassAnalyzerColors.AmberDim}" />
         </BoxContainer>
         <PanelContainer MinWidth="2" VerticalExpand="True">
             <PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BackgroundColor="#8A6800" />
+                <graphics:StyleBoxFlat BackgroundColor="{x:Static controls:RMCBiomassAnalyzerColors.AmberDim}" />
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <BoxContainer Orientation="Vertical" MinWidth="140">

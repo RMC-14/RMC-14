@@ -22,4 +22,19 @@ public sealed partial class CraftsIntoMolotovComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId Spawns = "RMCGrenadeMolotov";
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 BlueFireIntensity = 40;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 GreenFireIntensity = 15;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId BlueFire = "RMCTileFireBlue";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId GreenFire = "RMCTileFireMolotovGreen";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId DefaultFire = "RMCTileFire";
 }

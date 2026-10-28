@@ -16,6 +16,8 @@ using Content.Shared.Fluids;
 using Content.Shared.Forensics.Components;
 using Content.Shared.HealthExaminable;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Rejuvenate;
@@ -45,6 +47,7 @@ public abstract class SharedBloodstreamSystem : EntitySystem
     // RMC14
     [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly HungerSystem _hunger = default!;
 
     public override void Initialize()
     {
@@ -82,9 +85,15 @@ public abstract class SharedBloodstreamSystem : EntitySystem
                 continue;
 
             // Adds blood to their blood level if it is below the maximum; Blood regeneration. Must be alive.
-            if (bloodSolution.Volume < bloodSolution.MaxVolume && !_mobStateSystem.IsDead(uid))
+            if (bloodSolution.Volume < bloodstream.BloodMaxVolume && !_mobStateSystem.IsDead(uid) && TryPayBloodRegenHunger((uid, bloodstream))) // RMC14
             {
                 TryModifyBloodLevel((uid, bloodstream), bloodstream.BloodRefreshAmount);
+            }
+            // RMC14 drain overfilled blood back down to normal at regen rate
+            else if (bloodSolution.Volume > bloodstream.BloodMaxVolume && !_mobStateSystem.IsDead(uid))
+            {
+                var excess = bloodSolution.Volume - bloodstream.BloodMaxVolume;
+                TryModifyBloodLevelQuiet((uid, bloodstream), -FixedPoint2.Min(bloodstream.BloodRefreshAmount, excess));
             }
 
             // Removes blood from the bloodstream based on bleed amount (bleed rate)
@@ -321,8 +330,11 @@ public abstract class SharedBloodstreamSystem : EntitySystem
     {
         TryModifyBleedAmount(ent.AsNullable(), -ent.Comp.BleedAmount);
 
-        if (SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var bloodSolution))
-            TryModifyBloodLevel(ent.AsNullable(), bloodSolution.AvailableVolume);
+        if (SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var bloodSolution) &&
+            bloodSolution.Volume < ent.Comp.BloodMaxVolume) // RMC14
+        {
+            TryModifyBloodLevel(ent.AsNullable(), ent.Comp.BloodMaxVolume - bloodSolution.Volume);
+        }
 
         if (SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.ChemicalSolutionName, ref ent.Comp.ChemicalSolution))
             SolutionContainer.RemoveAllSolution(ent.Comp.ChemicalSolution.Value);
@@ -339,7 +351,10 @@ public abstract class SharedBloodstreamSystem : EntitySystem
             return 0.0f;
         }
 
-        return bloodSolution.FillFraction;
+        // RMC14
+        return ent.Comp.BloodMaxVolume > FixedPoint2.Zero
+            ? bloodSolution.Volume.Float() / ent.Comp.BloodMaxVolume.Float()
+            : bloodSolution.FillFraction;
     }
 
     /// <summary>
@@ -432,7 +447,21 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         return true;
     }
 
-    /// RMC
+    // RMC14 cm13 BLOOD_NUTRITION_COST - entities without hunger (synths) regenerate for free
+    private bool TryPayBloodRegenHunger(Entity<BloodstreamComponent> ent)
+    {
+        if (ent.Comp.BloodRegenHungerCost <= 0f || !TryComp(ent, out HungerComponent? hunger))
+            return true;
+
+        var cost = ent.Comp.BloodRegenHungerCost * ent.Comp.BloodRefreshAmount.Float();
+        if (_hunger.GetHunger(hunger) < cost)
+            return false;
+
+        _hunger.ModifyHunger(ent, -cost, hunger);
+        return true;
+    }
+
+    // RMC14
     public bool TryModifyBloodLevelQuiet(Entity<BloodstreamComponent?> ent, FixedPoint2 amount)
     {
         if (!Resolve(ent, ref ent.Comp, logMissing: false)

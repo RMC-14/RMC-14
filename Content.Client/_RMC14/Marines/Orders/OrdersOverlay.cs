@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._RMC14.Hallucination;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Orders;
 using Robust.Client.GameObjects;
@@ -79,8 +80,8 @@ public sealed class OrdersOverlay : Overlay
         Matrix3x2 scaleMatrix,
         Matrix3x2 rotationMatrix)
     {
-        var (_, sprite, xform) = ent;
-        if (xform.MapID != args.MapId)
+        var (uid, sprite, xform) = ent;
+        if (xform.MapID != args.MapId || _entity.HasComponent<RMCHallucinationDisguisedComponent>(uid))
             return;
 
         var bounds = sprite.Bounds;

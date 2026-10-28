@@ -266,6 +266,11 @@ public sealed class DefibrillatorSystem : EntitySystem
             {
                 _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
                 dead = false;
+
+                // RMC14
+                _rmcDefibrillator.ApplyReviveEffects(target);
+                _popup.PopupEntity(Loc.GetString("rmc-defibrillator-revived"), target, target);
+                // TODO RMC14: defibs deal rand(3, 5) heart organ damage on every revive (0 for some variants)
             }
 
             if (_mind.TryGetMind(target, out _, out var mind) &&

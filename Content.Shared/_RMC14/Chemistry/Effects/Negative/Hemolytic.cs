@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Chemistry.MoveDelay;
+using Content.Shared._RMC14.Chemistry.SpeedModifier;
 using Content.Shared._RMC14.Emote;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -63,14 +63,14 @@ public sealed partial class Hemolytic : RMCChemicalEffect
         if (toAdd > TimeSpan.Zero)
             status.TryAddStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", toAdd);
 
-        var moveDelay = args.EntityManager.System<RMCReagentMoveDelaySystem>();
-        moveDelay.SetMoveDelay(args.TargetEntity, $"{args.Reagent?.ID}:{nameof(Hemolytic)}", ActualPotency);
+        var speedModifier = args.EntityManager.System<RMCReagentSpeedModifierSystem>();
+        speedModifier.SetSpeedModifier(args.TargetEntity, $"{args.Reagent?.ID}:{nameof(Hemolytic)}", ActualPotency);
 
         var random = IoCManager.Resolve<IRobustRandom>();
         if (random.Prob(0.05f))
         {
             var emote = args.EntityManager.System<SharedRMCEmoteSystem>();
-            emote.TryEmoteWithChat(args.TargetEntity, random.Pick(YawnGaspEmotes), hideLog: true, ignoreActionBlocker: true, forceEmote: true);
+            emote.TryEmoteWithChat(args.TargetEntity, random.Pick(YawnGaspEmotes), hideLog: true, forceEmote: true);
         }
     }
 

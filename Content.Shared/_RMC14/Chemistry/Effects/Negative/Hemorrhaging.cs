@@ -1,12 +1,10 @@
 using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.Chemistry.Buildup;
 using Content.Shared._RMC14.Emote;
-using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat.Prototypes;
-using Content.Shared.Chemistry;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
@@ -24,7 +22,7 @@ public sealed partial class Hemorrhaging : RMCChemicalEffect
     private const float HealingReductionDissipation = 0.4f;
     private const float HealingReductionMax = 50f;
 
-    private static readonly ProtoId<EmotePrototype> CoughEmote = "Cough";
+    private static readonly ProtoId<EmotePrototype> CoughBloodEmote = "RMCCoughBlood";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -41,39 +39,42 @@ public sealed partial class Hemorrhaging : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (args.Method == ReactionMethod.Touch)
+        if (IsReaction(args))
         {
-            TouchReaction(args);
+            HandleReaction(args);
             return;
         }
 
         if (!args.EntityManager.TryGetComponent<BloodstreamComponent>(args.TargetEntity, out var bloodstream))
             return;
 
-        var bloodstreamSystem = args.EntityManager.System<SharedBloodstreamSystem>();
-        bloodstreamSystem.TryModifyBleedAmount((args.TargetEntity, bloodstream), (float) potency);
-
         var random = IoCManager.Resolve<IRobustRandom>();
+        var bloodstreamSystem = args.EntityManager.System<SharedBloodstreamSystem>();
+
+        // TODO RMC14: internal bleeding wound to random limb at prob(VHIGH(5) * potency) per 2s tick skipped on robotic/synthskin limbs
+        // new internal bleed drains 0.5 blood per 2s tick until surgery,
+        // & a limb that already bleeds internally gets +0.25 instead
+
         if (random.Prob(MathF.Min(1f, (float) potency * 0.05f)))
         {
             var emoteSystem = args.EntityManager.System<SharedRMCEmoteSystem>();
             emoteSystem.TryEmoteWithChat(
                 args.TargetEntity,
-                CoughEmote,
+                CoughBloodEmote,
                 hideLog: true,
-                ignoreActionBlocker: true,
                 forceEmote: true
             );
+            bloodstreamSystem.TryModifyBloodLevel((args.TargetEntity, bloodstream), -10);
         }
     }
 
-    private void TouchReaction(EntityEffectReagentArgs args)
+    private void HandleReaction(EntityEffectReagentArgs args)
     {
         var entities = args.EntityManager;
         var target = args.TargetEntity;
 
         var isXenoHuman = entities.HasComponent<XenoComponent>(target) ||
-            (entities.HasComponent<HumanoidAppearanceComponent>(target) && !entities.HasComponent<SynthComponent>(target));
+            entities.HasComponent<HumanoidAppearanceComponent>(target);
         if (!isXenoHuman)
             return;
 
@@ -83,14 +84,9 @@ public sealed partial class Hemorrhaging : RMCChemicalEffect
         buildup.AddBuildup(target, magnitude, HealingReductionDissipation, HealingReductionMax);
     }
 
-    // TODO RMC14: organ damage on overdose
+    // TODO RMC14: organ damage on overdose - 0.5 * potency damage to a random organ in a random limb per 2s tick
 
-    protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
-    {
-        if (!args.EntityManager.TryGetComponent<BloodstreamComponent>(args.TargetEntity, out var bloodstream))
-            return;
-
-        var bloodstreamSystem = args.EntityManager.System<SharedBloodstreamSystem>();
-        bloodstreamSystem.TryModifyBleedAmount((args.TargetEntity, bloodstream), (float) potency * 4f);
-    }
+    // TODO RMC14: critical overdose - prob(10 * potency * delta_time) adds an internal_bleeding wound to a random
+    // limb (same wound as the normal) & custom_pain("You feel something burst in your [limb]!"), hidden while unconscious, numb or under
+    // heavy painkillers (pain reduction 40+, PAIN_REDUCTION_HEAVY, e.g. Painkilling at potency 1+)
 }

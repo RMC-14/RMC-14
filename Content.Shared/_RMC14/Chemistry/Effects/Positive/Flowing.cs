@@ -1,4 +1,3 @@
-using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
@@ -10,8 +9,14 @@ public sealed partial class Flowing : RMCChemicalEffect
         return "The opposite of viscous - tends to spill everywhere, expanding the radius of a chemical fire.";
     }
 
-    public float RadiusDelta => 2f * Potency;
-    public FixedPoint2 IntensityModDelta => -0.05f * Potency;
-    public FixedPoint2 DurationModDelta => -0.05f * Potency;
-    public FixedPoint2 RadiusModDelta => 0.05f * Potency;
+    public override bool IsFireSupplement => true;
+
+    public override void ModifyFireStats(ref RMCFireStatsBuilder stats, float potency)
+    {
+        stats.Radius += 2f * potency;
+        stats.IntensityMod += -0.05f * potency;
+        stats.DurationMod += -0.05f * potency;
+        stats.RadiusMod += 0.05f * potency;
+        stats.HasFireProperty = true;
+    }
 }

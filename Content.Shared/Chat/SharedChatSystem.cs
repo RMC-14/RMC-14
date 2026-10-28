@@ -37,7 +37,7 @@ public abstract class SharedChatSystem : EntitySystem
 
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCHivemindInterferenceSystem _hivemindInterference = default!;
+    [Dependency] private readonly RMCHivemindInterferenceSystem _hivemindInterference = default!; // RMC14
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
     // RMC14
@@ -59,7 +59,7 @@ public abstract class SharedChatSystem : EntitySystem
             CacheRadios();
     }
 
-    // RMC
+    // RMC14
     private bool IsHivemindChatBlocked(EntityUid source, bool quiet)
     {
         if (!_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))

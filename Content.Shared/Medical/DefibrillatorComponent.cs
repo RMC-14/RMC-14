@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared.Body.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -98,9 +97,6 @@ public sealed partial class DefibrillatorComponent : Component
 
     [DataField]
     public TimeSpan SkillMultiplierDuration = TimeSpan.FromSeconds(3);
-
-    [DataField]
-    public ProtoId<MetabolismGroupPrototype> MetabolismId = "Medicine";
     // RMC14
 }
 

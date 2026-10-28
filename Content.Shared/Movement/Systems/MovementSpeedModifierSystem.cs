@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization.Metadata;
 using Content.Shared.CCVar;
+using Content.Shared._RMC14.Movement; // RMC14
 using Content.Shared._RMC14.Standing;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
@@ -88,6 +89,11 @@ namespace Content.Shared.Movement.Systems
 
             var ev = new RefreshMovementSpeedModifiersEvent();
             RaiseLocalEvent(uid, ev);
+
+            // RMC14
+            var lateEv = new RMCLateRefreshMovementSpeedModifiersEvent(ev);
+            RaiseLocalEvent(uid, ref lateEv);
+            // RMC14
 
             if (TryComp(uid, out RMCRestComponent? rest) && rest.Resting)
             {

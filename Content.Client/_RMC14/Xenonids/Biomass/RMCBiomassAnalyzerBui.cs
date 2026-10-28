@@ -3,10 +3,9 @@ using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.UserInterface;
 using Content.Shared._RMC14.Xenonids.Biomass;
-using Content.Shared.Containers.ItemSlots;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerWindow;
+using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerColors;
 
 namespace Content.Client._RMC14.Xenonids.Biomass;
 
@@ -14,7 +13,7 @@ namespace Content.Client._RMC14.Xenonids.Biomass;
 public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
 {
     private readonly SharedRMCBiomassAnalyzerDataSystem _analyzerData;
-    private readonly ItemSlotsSystem _itemSlots;
+    private readonly SharedRMCBiomassAnalyzerMachineSystem _machine;
     private readonly SharedRMCChemistryResearchSystem _research;
 
     private RMCBiomassAnalyzerWindow? _window;
@@ -23,7 +22,7 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
     public RMCBiomassAnalyzerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _analyzerData = EntMan.System<SharedRMCBiomassAnalyzerDataSystem>();
-        _itemSlots = EntMan.System<ItemSlotsSystem>();
+        _machine = EntMan.System<SharedRMCBiomassAnalyzerMachineSystem>();
         _research = EntMan.System<SharedRMCChemistryResearchSystem>();
     }
 
@@ -35,7 +34,8 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
         BuildCategoryBox();
 
         _window.EjectOrganButton.OnPressed += _ => SendMessage(new RMCBiomassAnalyzerEjectOrganBuiMsg());
-        _window.ProcessOrganButton.OnPressed += _ => SendMessage(new RMCBiomassAnalyzerToggleAutoProcessBuiMsg());
+        _window.ProcessOrganButton.OnPressed += _ => SendMessage(new RMCBiomassAnalyzerProcessOrganBuiMsg());
+        _window.AutoProcessButton.OnPressed += _ => SendMessage(new RMCBiomassAnalyzerToggleAutoProcessBuiMsg());
         _window.ToggleQueueButton.OnPressed += _ => SendMessage(new RMCBiomassAnalyzerToggleQueueBuiMsg());
 
         Refresh();
@@ -72,22 +72,51 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
             return;
 
         var analyzer = analyzerEnt.Value.Comp;
-        var clearance = _research.TryGetResearch(out var research) ? research.Value.Comp.ClearanceLevel : 1;
-
         _window.PointsLabel.Text = $"Biological Matter: {analyzer.Points}";
 
-        var hasOrgan = _itemSlots.GetItemOrNull(Owner, machine.OrganSlotId) != null;
-        var busy = machine.PrintingUntil != null;
-        _window.EjectOrganButton.Disabled = !hasOrgan || busy;
-        _window.OrganStatusLabel.Text = hasOrgan
-            ? "Biomass accepted. Ready to analyze."
-            : "Receptacle is empty, analyzing is impossible!";
-        _window.OrganStatusLabel.FontColorOverride = hasOrgan ? Amber : AmberDim;
-
-        _window.ProcessOrganIcon.Label.Text = machine.AutoProcessOrgan ? "Auto: ON" : "Auto: OFF";
-
+        PopulateOrgan((Owner, machine));
         PopulateQueue(machine);
-        PopulateCategory(analyzer, clearance);
+        PopulateCategory(analyzer);
+    }
+
+    private void PopulateOrgan(Entity<RMCBiomassAnalyzerMachineComponent> ent)
+    {
+        var machine = ent.Comp;
+        var organ = _machine.GetFirstQueuedOrgan(ent);
+        EntMan.TryGetComponent(organ, out RMCBiomassOrganComponent? organComp);
+        var organCount = machine.Queue.Count(job => job.Organ != null);
+        var busy = machine.PrintingUntil != null;
+
+        _window!.EjectOrganIcon.Label.Text = organComp?.Caste is { } caste
+            ? $"Eject {caste} biomass"
+            : "Eject Biomass";
+        _window.ProcessOrganIcon.Label.Text = organComp != null
+            ? $"Process Biomass, Expected value : {organComp.Value}"
+            : "Process Biomass";
+        _window.AutoProcessIcon.Label.Text = machine.AutoProcessOrgan ? "Auto: ON" : "Auto: OFF";
+
+        RMCBiomassAnalyzerWindow.SetButtonEnabled(_window.EjectOrganButton, organ != null);
+        RMCBiomassAnalyzerWindow.SetButtonEnabled(_window.ProcessOrganButton, organComp != null && !busy);
+
+        if (busy)
+        {
+            _window.OrganStatusLabel.Text = machine.ProcessingValue > 0
+                ? $"Processing biomass, extracting {machine.ProcessingValue} biomass points..."
+                : "Printing upgrade...";
+            _window.OrganStatusLabel.FontColorOverride = Amber;
+        }
+        else if (organCount > 0)
+        {
+            _window.OrganStatusLabel.Text = organCount == 1
+                ? "1 biomass specimen queued. Ready to analyze."
+                : $"{organCount} biomass specimens queued. Ready to analyze.";
+            _window.OrganStatusLabel.FontColorOverride = Amber;
+        }
+        else
+        {
+            _window.OrganStatusLabel.Text = "Receptacle is empty, analyzing is impossible!";
+            _window.OrganStatusLabel.FontColorOverride = AmberDim;
+        }
     }
 
     private void PopulateQueue(RMCBiomassAnalyzerMachineComponent machine)
@@ -95,25 +124,47 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
         _window!.ToggleQueueIcon.SetIcon(machine.QueueProcessing ? RMCIcons.Stop : RMCIcons.Play);
         _window.ToggleQueueIcon.Label.Text = machine.QueueProcessing ? "STOP" : "START";
 
-        _window.QueueEmptyLabel.Visible = machine.PrintQueue.Count == 0;
+        _window.QueueEmptyLabel.Visible = machine.Queue.Count == 0;
 
-        _window.QueueBox.DisposeAllChildren();
-
+        var box = _window.QueueBox;
         var index = 0;
-        foreach (var upgradeId in machine.PrintQueue)
+        foreach (var job in machine.Queue)
         {
-            var entry = new RMCBiomassQueueEntry { Index = index };
-            entry.NameLabel.Text = _analyzerData.TryGetUpgrade(upgradeId, out var upgrade)
-                ? upgrade.Prototype.Name
-                : upgradeId.Id;
-            entry.OnCancel = i => SendMessage(new RMCBiomassAnalyzerRemoveFromQueueBuiMsg(i));
+            RMCBiomassQueueEntry entry;
+            if (index < box.ChildCount && box.GetChild(index) is RMCBiomassQueueEntry existing)
+            {
+                entry = existing;
+            }
+            else
+            {
+                entry = new RMCBiomassQueueEntry();
+                entry.OnCancel = i => SendMessage(new RMCBiomassAnalyzerRemoveFromQueueBuiMsg(i));
+                box.AddChild(entry);
+            }
 
-            _window.QueueBox.AddChild(entry);
+            entry.Index = index;
+            if (job.Organ is { } netOrgan)
+            {
+                EntMan.TryGetComponent(EntMan.GetEntity(netOrgan), out RMCBiomassOrganComponent? organ);
+                var caste = organ?.Caste is { } c ? $"{c} " : string.Empty;
+                entry.NameLabel.Text = $"Analyze {caste}biomass ({organ?.Value ?? 0})";
+                entry.ToolTip = "Click to eject this specimen.";
+            }
+            else
+            {
+                entry.NameLabel.Text = job.Upgrade is { } upgradeId && _analyzerData.TryGetUpgrade(upgradeId, out var upgrade)
+                    ? upgrade.Prototype.Name
+                    : job.Upgrade?.Id ?? string.Empty;
+                entry.ToolTip = "Click to cancel this print job.";
+            }
+
             index++;
         }
+
+        box.RemoveChildrenAfter(index);
     }
 
-    private void PopulateCategory(RMCBiomassAnalyzerComponent analyzer, int clearance)
+    private void PopulateCategory(RMCBiomassAnalyzerComponent analyzer)
     {
         var box = _window!.UpgradesBox;
         var upgrades = _analyzerData.Upgrades
@@ -121,6 +172,8 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
             .OrderBy(u => u.Comp.RequiredClearance)
             .ThenBy(u => u.Comp.Cost)
             .ToList();
+
+        _research.TryGetResearch(out var research);
 
         var index = 0;
         foreach (var upgrade in upgrades)
@@ -133,13 +186,20 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
             else
             {
                 row = new RMCBiomassUpgradeRow();
+                row.OnPrint = (id, amount) => SendMessage(new RMCBiomassAnalyzerEnqueuePrintBuiMsg(id, amount));
                 box.AddChild(row);
             }
 
             var cost = _analyzerData.GetCurrentCost(upgrade, analyzer);
+            var tier = upgrade.Comp.RequiredClearance;
+            var tierName = research is { } r && tier >= r.Comp.XAccessClearanceTier
+                ? $"{r.Comp.MaxClearanceLevel}X"
+                : tier.ToString();
 
             row.NameLabel.Text = upgrade.Prototype.Name;
-            row.ClearanceLabel.Text = $"Clearance {upgrade.Comp.RequiredClearance} Required";
+            row.NameLabel.ToolTip = upgrade.Prototype.Name;
+            row.SetDescription(upgrade.Prototype.Description);
+            row.ClearanceLabel.Text = $"Clearance {tierName} Required";
             row.TrendLabel.Text = upgrade.Comp.PriceChange switch
             {
                 0 => "This technology will not change its value with purchase.",
@@ -148,9 +208,8 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
             };
 
             row.PrintButtonLabel.Text = $"Print ({cost})";
-            row.SetClearanceMet(clearance >= upgrade.Comp.RequiredClearance);
+            row.SetClearanceMet(_research.HasSufficientClearance(tier));
             row.UpgradeId = upgrade.Id;
-            row.OnPrint = (id, amount) => SendMessage(new RMCBiomassAnalyzerEnqueuePrintBuiMsg(id, amount));
 
             index++;
         }

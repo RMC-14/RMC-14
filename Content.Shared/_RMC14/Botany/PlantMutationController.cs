@@ -1,25 +1,19 @@
+using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.EntityEffects.Effects.PlantMetabolism;
+namespace Content.Shared._RMC14.Botany;
 
 /// <summary>
-///     Sets named mutation controller slots in the plant's seed to enable or suppress specific mutations.
+///     Sets named mutation controller slots in the plants seed to enable or suppress specific mutations.
 /// </summary>
 public sealed partial class PlantMutationController : EventEntityEffect<PlantMutationController>
 {
     /// <summary>
-    ///     Mutation slot names to modify. Valid values:
-    ///     "Plant Cancer", "Gluttony", "Endurance", "Light Tolerance", "Toxin Tolerance",
-    ///     "Weed Tolerance", "Production", "Lifespan", "Potency", "Maturity",
-    ///     "Bioluminescence", "Flowers", "New Chems", "New Chems2", "New Chems3", "Mutate Species".
+    ///     Mutation slot names to modify.
     /// </summary>
     [DataField(required: true)]
     public List<string> Slots { get; private set; } = new();
 
-    /// <summary>
-    ///     Whether to enable (true) or suppress (false) the listed slots.
-    ///     Enable sets a slot to at least 1. Suppress sets a slot to at most -2.
-    /// </summary>
     [DataField]
     public bool Enable { get; private set; } = true;
 

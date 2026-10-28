@@ -847,6 +847,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         {
             ApplyFruitHaste((fruit.Owner, hasteComp), target);
         }
+
+        var cleanse = new XenoDebuffCleanseEvent();
+        RaiseLocalEvent(target, ref cleanse);
     }
 
     // Health regen (greater and unstable)

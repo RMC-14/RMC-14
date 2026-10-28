@@ -336,6 +336,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         EntityManager.RemoveComponents(target, args.ComponentsRemove);
 
+        var cleanse = new XenoDebuffCleanseEvent();
+        RaiseLocalEvent(target, ref cleanse);
+
         _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 
         if (TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) &&

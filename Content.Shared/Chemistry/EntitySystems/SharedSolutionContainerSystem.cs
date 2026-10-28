@@ -822,7 +822,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
                 .OrderByDescending(pair => pair.Value.Value)
                 .ThenBy(pair => pair.Key.LocalizedName);
 
-            // RMC
+            // RMC14
             var scanEvent = new SolutionScanEvent();
             RaiseLocalEvent(args.Examiner, scanEvent);
 
@@ -832,7 +832,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
             {
                 var proto = keyValuePair.Key;
                 if (!proto.Recognizable
-                && !scanEvent.CanScan) // RMC
+                && !scanEvent.CanScan) // RMC14
                 {
                     continue;
                 }

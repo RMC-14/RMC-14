@@ -4,7 +4,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Maths;
-using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerWindow;
+using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerColors;
 
 namespace Content.Client._RMC14.Xenonids.Biomass;
 

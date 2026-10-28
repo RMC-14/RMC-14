@@ -1,3 +1,4 @@
+using Content.Client._RMC14.Hallucination;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared.CCVar;
 using Content.Shared.Ghost;
@@ -77,6 +78,9 @@ public sealed class StatusIconSystem : SharedStatusIconSystem
         // Always show our icons to our entity
         if (viewer == ent.Owner)
             return true;
+
+        if (HasComp<RMCHallucinationDisguisedComponent>(ent)) // RMC14
+            return false;
 
         if (data.VisibleToGhosts && HasComp<GhostComponent>(viewer))
             return true;

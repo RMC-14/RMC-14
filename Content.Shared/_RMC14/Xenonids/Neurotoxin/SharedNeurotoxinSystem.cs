@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Deafness;
+using Content.Shared._RMC14.Dizziness;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
@@ -17,7 +18,6 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Drugs;
 using Content.Shared._RMC14.Drugs;
-using Content.Shared.Drunk;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
@@ -56,6 +56,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
     [Dependency] private readonly RMCDazedSystem _daze = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly RMCDizzinessSystem _dizziness = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!; //It's how this fakes movement
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
@@ -211,7 +212,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
             //Basic Effects
             _stamina.DoStaminaDamage(uid, neuro.StaminaDamagePerTick, visual: false);
-            _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrength, true);
+            _dizziness.MakeDizzy(uid, neuro.Dizziness);
 
             NeurotoxinNonStackingEffects(uid, neuro, time, out var coughChance, out var stumbleChance);
             NeurotoxinStackingEffects(uid, neuro, time);
@@ -231,7 +232,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("rmc-stumble"), uid, uid, PopupType.MediumCaution);
                 _daze.TryDaze(uid, neuro.DazeLength * 5, true, stutter: true);
                 _jitter.DoJitter(uid, neuro.StumbleJitterTime, true);
-                _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrengthOnStumble, true);
+                _dizziness.MakeDizzy(uid, neuro.DizzinessOnStumble);
                 var ev = new NeurotoxinEmoteEvent() { Emote = neuro.PainId };
                 RaiseLocalEvent(uid, ev);
             }

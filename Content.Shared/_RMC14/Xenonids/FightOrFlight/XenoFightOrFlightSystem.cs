@@ -70,6 +70,9 @@ public sealed class XenoFightOrFlightSystem : EntitySystem
 
             EntityManager.RemoveComponents(otherXeno, xeno.Comp.ComponentsRemove);
 
+            var cleanse = new XenoDebuffCleanseEvent();
+            RaiseLocalEvent(otherXeno, ref cleanse);
+
             _jitter.DoJitter(otherXeno, xeno.Comp.Jitter, true, 80, 8, true);
 
             if (_net.IsServer)

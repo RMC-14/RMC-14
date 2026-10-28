@@ -180,7 +180,7 @@ public abstract class SharedStunSystem : EntitySystem
         if (!_statusEffect.TryAddStatusEffect<StunnedComponent>(uid, "Stun", time, refresh, force: force))
             return false;
 
-        var ev = new StunnedEvent(time); //RMC
+        var ev = new StunnedEvent(time); // RMC14
         RaiseLocalEvent(uid, ref ev);
 
         _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} stunned for {time.Seconds} seconds");
@@ -361,7 +361,7 @@ public abstract class SharedStunSystem : EntitySystem
 ///     Raised directed on an entity when it is stunned.
 /// </summary>
 [ByRefEvent]
-public record struct StunnedEvent(TimeSpan Time = default); //RMC
+public record struct StunnedEvent(TimeSpan Time = default); // RMC14
 
 /// <summary>
 ///     Raised directed on an entity when it is knocked down.

@@ -17,11 +17,17 @@ public sealed partial class Fueling : RMCChemicalEffect
         return "Can be burned as fuel, expanding the burn time of a chemical fire. On contact, makes a target more flammable.";
     }
 
-    public float IntensityDelta => -3f * Potency;
-    public float DurationDelta => 7f * Potency;
-    public FixedPoint2 IntensityModDelta => -0.1f * Potency;
-    public FixedPoint2 DurationModDelta => 0.2f * Potency;
-    public FixedPoint2 RadiusModDelta => 0.01f * Potency;
+    public override bool IsFireSupplement => true;
+
+    public override void ModifyFireStats(ref RMCFireStatsBuilder stats, float potency)
+    {
+        stats.Intensity += -3f * potency;
+        stats.Duration += 7f * potency;
+        stats.IntensityMod += -0.1f * potency;
+        stats.DurationMod += 0.2f * potency;
+        stats.RadiusMod += 0.01f * potency;
+        stats.HasFireProperty = true;
+    }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
