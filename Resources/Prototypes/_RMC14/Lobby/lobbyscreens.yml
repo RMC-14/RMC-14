@@ -85,7 +85,11 @@
 - type: lobbyBackground
   id: CoveringPrivateVuloss
   background: /Textures/_RMC14/Lobby/Covering_Private_Vuloss_By_SampleTex.png
-  
+
 - type: lobbyBackground
   id: DontLetGo
   background: /Textures/_RMC14/Lobby/DontLetGo.png
+
+- type: lobbyBackground
+  id: CharlieGaming
+  background: /Textures/_RMC14/Lobby/CharlieGaming.png
