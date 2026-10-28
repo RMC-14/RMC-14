@@ -8,4 +8,9 @@ public sealed partial class FirePenetrating : RMCChemicalEffect
     {
         return "Gives the chemical an anomalous combustion chemistry, causing its flame to burn through flame-resistant material.";
     }
+
+    public override void ModifyFireStats(ref RMCFireStatsBuilder stats, float potency)
+    {
+        stats.FirePenetrating = true;
+    }
 }

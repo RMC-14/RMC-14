@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Antiaddictive : RMCChemicalEffect
 {
-    private static readonly EntProtoId<StatusEffectComponent> SeeingRainbows = "RMCStatusEffectSeeingRainbow";
+    private static readonly EntProtoId<StatusEffectComponent> Hallucination = "RMCStatusEffectHallucination";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -23,11 +23,11 @@ public sealed partial class Antiaddictive : RMCChemicalEffect
         addiction.TryReduceAddictions(args.TargetEntity, (float) potency);
     }
 
-    // TODO RMC14: brain damage on overdose
+    // TODO RMC14: brain damage on overdose - potency * delta_time (2 * potency per 2s tick)
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        status.TryAddStatusEffectDuration(args.TargetEntity, SeeingRainbows, TimeSpan.FromSeconds((float) potency));
+        status.TryUpdateStatusEffectDuration(args.TargetEntity, Hallucination, TimeSpan.FromSeconds(ActualPotency));
     }
 }

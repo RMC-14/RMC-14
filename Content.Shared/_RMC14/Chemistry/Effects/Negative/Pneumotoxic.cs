@@ -25,7 +25,7 @@ public sealed partial class Pneumotoxic : RMCChemicalEffect
         SuppressMutationSlot(args.EntityManager, plant, "Maturity", suppress);
     }
 
-    // TODO RMC14: damage lung
+    // TODO RMC14: damage lung - 0.5 * potency lung damage per 2s tick
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

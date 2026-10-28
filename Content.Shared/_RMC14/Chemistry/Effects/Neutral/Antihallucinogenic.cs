@@ -18,6 +18,7 @@ public sealed partial class Antihallucinogenic : RMCChemicalEffect
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
 
     private static readonly EntProtoId<StatusEffectComponent> SeeingRainbows = "RMCStatusEffectSeeingRainbow";
+    private static readonly EntProtoId<StatusEffectComponent> Hallucination = "RMCStatusEffectHallucination";
 
     private static readonly ProtoId<ReagentPrototype> MindbreakerToxin = "RMCMindbreakerToxin";
     private static readonly ProtoId<ReagentPrototype> SpaceDrugs = "RMCSpaceDrugs";
@@ -32,11 +33,12 @@ public sealed partial class Antihallucinogenic : RMCChemicalEffect
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
-        bloodstream.RemoveBloodstreamChemical(args.TargetEntity, MindbreakerToxin, 5f);
-        bloodstream.RemoveBloodstreamChemical(args.TargetEntity, SpaceDrugs, 5f);
+        bloodstream.RemoveBloodstreamChemical(args.TargetEntity, MindbreakerToxin, 2.5f);
+        bloodstream.RemoveBloodstreamChemical(args.TargetEntity, SpaceDrugs, 2.5f);
 
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        status.TryAddTime(args.TargetEntity, SeeingRainbows, TimeSpan.FromSeconds(PotencyPerSecond * -10)); // SeeingRainbows is M.druggy in cm
+        status.TryAddTime(args.TargetEntity, Hallucination, TimeSpan.FromSeconds(PotencyPerSecond * -10));
+        status.TryAddTime(args.TargetEntity, SeeingRainbows, TimeSpan.FromSeconds(PotencyPerSecond * -20));
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

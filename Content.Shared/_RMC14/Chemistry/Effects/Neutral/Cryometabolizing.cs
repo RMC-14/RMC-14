@@ -8,13 +8,13 @@ public sealed partial class Cryometabolizing : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return "Passively metabolized with no other effects at normal body temperature. Below freezing, metabolizes with increased effect.";
+        return "The chemical is passively metabolized with no other effects in temperatures above 210 kelvin. Below however, the chemical will metabolize with increased effect.";
     }
 
     protected override void ReagentBoost(EntityEffectReagentArgs args, ref float boost)
     {
         var temperature = args.EntityManager.System<SharedRMCTemperatureSystem>();
-        if (temperature.GetTemperature(args.TargetEntity) < 210f)
+        if (temperature.GetTemperature(args.TargetEntity) <= 210f)
             boost += Potency * 0.5f;
     }
 

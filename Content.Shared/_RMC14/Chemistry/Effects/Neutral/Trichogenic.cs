@@ -37,30 +37,46 @@ public sealed partial class Trichogenic : RMCChemicalEffect
         var appearance = args.EntityManager.System<SharedHumanoidAppearanceSystem>();
         var changed = false;
 
+        var hairColor = GetColor(humanoid, MarkingCategories.Hair);
+        var facialHairColor = GetColor(humanoid, MarkingCategories.FacialHair);
+        hairColor ??= facialHairColor;
+        facialHairColor ??= hairColor;
+
         var hairStyles = markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Hair, humanoid.Species).Keys.ToList();
         if (hairStyles.Count > 0)
         {
             humanoid.MarkingSet.RemoveCategory(MarkingCategories.Hair);
-            appearance.AddMarking(args.TargetEntity, random.Pick(hairStyles), forced: true, humanoid: humanoid);
+            appearance.AddMarking(args.TargetEntity, random.Pick(hairStyles), hairColor, forced: true, humanoid: humanoid);
             changed = true;
         }
 
-        if (humanoid.Sex)
+        var facialHairStyles = markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.FacialHair, humanoid.Species).Keys.ToList();
+        if (facialHairStyles.Count > 0)
         {
-            var facialHairStyles = markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.FacialHair, humanoid.Species).Keys.ToList();
-            if (facialHairStyles.Count > 0)
-            {
-                humanoid.MarkingSet.RemoveCategory(MarkingCategories.FacialHair);
-                appearance.AddMarking(args.TargetEntity, random.Pick(facialHairStyles), forced: true, humanoid: humanoid);
-                changed = true;
-            }
+            humanoid.MarkingSet.RemoveCategory(MarkingCategories.FacialHair);
+            appearance.AddMarking(args.TargetEntity, random.Pick(facialHairStyles), facialHairColor, forced: true, humanoid: humanoid);
+            changed = true;
         }
 
         if (!changed)
             return;
 
         var popup = args.EntityManager.System<SharedPopupSystem>();
-        popup.PopupEntity(Loc.GetString("chem-trichogenic-hair-change"), args.TargetEntity);
+        popup.PopupEntity(Loc.GetString("chem-trichogenic-hair-change"), args.TargetEntity, args.TargetEntity);
+    }
+
+    private static Color? GetColor(HumanoidAppearanceComponent humanoid, MarkingCategories category)
+    {
+        if (!humanoid.MarkingSet.TryGetCategory(category, out var markings))
+            return null;
+
+        foreach (var marking in markings)
+        {
+            if (marking.MarkingColors.Count > 0)
+                return marking.MarkingColors[0];
+        }
+
+        return null;
     }
 
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -94,6 +110,6 @@ public sealed partial class Trichogenic : RMCChemicalEffect
         if (IoCManager.Resolve<IRobustRandom>().Prob(0.5f))
             args.EntityManager.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-trichogenic-skull"), args.TargetEntity, args.TargetEntity, PopupType.MediumCaution);
 
-        // TODO RMC14: brain damage on critical overdose, "hair growing into brain"
+        // TODO RMC14: brain damage on critical overdose, "hair growing into brain" - 0.5 * potency * delta_time (potency per 2s tick)
     }
 }

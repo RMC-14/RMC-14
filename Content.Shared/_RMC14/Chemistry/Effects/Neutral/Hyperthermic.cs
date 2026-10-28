@@ -32,7 +32,7 @@ public sealed partial class Hyperthermic : RMCChemicalEffect
         if (random.Prob(0.05f))
         {
             var emote = args.EntityManager.System<SharedRMCEmoteSystem>();
-            emote.TryEmoteWithChat(args.TargetEntity, GaspEmote, hideLog: true, ignoreActionBlocker: true, forceEmote: true);
+            emote.TryEmoteWithChat(args.TargetEntity, GaspEmote, hideLog: true, forceEmote: true);
             args.EntityManager.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-hyperthermic-hot"), args.TargetEntity, args.TargetEntity, PopupType.MediumCaution);
         }
 
@@ -44,7 +44,7 @@ public sealed partial class Hyperthermic : RMCChemicalEffect
         {
             args.EntityManager.System<RMCDizzinessSystem>().MakeDizzy(args.TargetEntity, ActualPotency);
 
-            // TODO RMC14: pain (agony)
+            // TODO RMC14: pain (agony) - +potency halloss per 2s tick at potency 2+
         }
     }
 
@@ -54,7 +54,7 @@ public sealed partial class Hyperthermic : RMCChemicalEffect
         var newTemp = MathF.Min(MaxTemperature, temperature.GetTemperature(args.TargetEntity) + (float) potency * 5f);
         temperature.ForceChangeTemperature(args.TargetEntity, newTemp);
 
-        // TODO RMC14: pain (agony) on overdose
+        // TODO RMC14: pain (agony) on overdose - +2 * potency halloss per 2s tick
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

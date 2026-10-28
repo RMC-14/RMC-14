@@ -1,14 +1,13 @@
+using Content.Shared._RMC14.Chemistry.ChemEffectFlags;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Temperature;
+using Content.Shared._RMC14.Stun;
 using Content.Shared.Atmos;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.Stunnable;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -27,36 +26,30 @@ public sealed partial class Hypothermic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var temperature = args.EntityManager.System<SharedRMCTemperatureSystem>();
-        temperature.ForceChangeTemperature(args.TargetEntity, temperature.GetTemperature(args.TargetEntity) - (float) potency * 2f);
-
         var random = IoCManager.Resolve<IRobustRandom>();
         if (random.Prob(0.05f))
         {
             var emote = args.EntityManager.System<SharedRMCEmoteSystem>();
-            emote.TryEmoteWithChat(args.TargetEntity, "RMCShiver", hideLog: true, ignoreActionBlocker: true, forceEmote: true);
+            emote.TryEmoteWithChat(args.TargetEntity, "RMCShiver", hideLog: true, forceEmote: true);
         }
 
-        if (temperature.GetTemperature(args.TargetEntity) >= Atmospherics.T0C)
-            return;
+        var temperature = args.EntityManager.System<SharedRMCTemperatureSystem>();
+        var current = temperature.GetTemperature(args.TargetEntity);
 
-        if (args.Source is not { } source ||
-            (!source.ContainsPrototype(Cryoxadone) && !source.ContainsPrototype(Clonexadone)))
+        if (current < Atmospherics.T0C &&
+            args.Source is { } source &&
+            (source.ContainsPrototype(Cryoxadone) || source.ContainsPrototype(Clonexadone)))
         {
-            return;
+            args.EntityManager.System<RMCChemEffectFlagsSystem>().TrySetFlag(args.TargetEntity, RMCChemEffectFlagsSystem.NoBleedingFlag);
         }
 
-        if (args.EntityManager.TryGetComponent<BloodstreamComponent>(args.TargetEntity, out var bloodstream))
-        {
-            var bloodstreamSystem = args.EntityManager.System<SharedBloodstreamSystem>();
-            bloodstreamSystem.TryModifyBleedAmount((args.TargetEntity, bloodstream), -0.67f);
-        }
+        temperature.ForceChangeTemperature(args.TargetEntity, MathF.Max(0f, current - (float) potency * 2f));
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var temperature = args.EntityManager.System<SharedRMCTemperatureSystem>();
-        temperature.ForceChangeTemperature(args.TargetEntity, temperature.GetTemperature(args.TargetEntity) - (float) potency * 5f);
+        temperature.ForceChangeTemperature(args.TargetEntity, MathF.Max(0f, temperature.GetTemperature(args.TargetEntity) - (float) potency * 5f));
 
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
         var remaining = TimeSpan.Zero;
@@ -73,7 +66,7 @@ public sealed partial class Hypothermic : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var stun = args.EntityManager.System<SharedStunSystem>();
-        stun.TryParalyze(args.TargetEntity, TimeSpan.FromSeconds(2), true);
+        var knockOut = args.EntityManager.System<RMCSizeStunSystem>();
+        knockOut.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(40));
     }
 }

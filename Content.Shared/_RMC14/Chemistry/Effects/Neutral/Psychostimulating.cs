@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 public sealed partial class Psychostimulating : RMCChemicalEffect
 {
     private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
-    private static readonly EntProtoId<StatusEffectComponent> SeeingRainbows = "RMCStatusEffectSeeingRainbow";
+    private static readonly EntProtoId<StatusEffectComponent> Hallucination = "RMCStatusEffectHallucination";
     private static readonly TimeSpan ReductionDelay = TimeSpan.FromMinutes(5);
     private static readonly TimeSpan HallucinationCap = TimeSpan.FromSeconds(200);
 
@@ -63,20 +63,20 @@ public sealed partial class Psychostimulating : RMCChemicalEffect
             status.TryAddTime(target, ConfusedStatus, TimeSpan.FromSeconds(-2f * ActualPotency));
     }
 
-    // TODO RMC14: brain damage on overdose
+    // TODO RMC14: brain damage on overdose - 0.5 * potency * delta_time (potency per 2s tick)
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
         var timing = IoCManager.Resolve<IGameTiming>();
-        if (status.TryGetTime(args.TargetEntity, SeeingRainbows, out var time) &&
+        if (status.TryGetTime(args.TargetEntity, Hallucination, out var time) &&
             time.EndEffectTime is { } end &&
             end - timing.CurTime > HallucinationCap)
         {
-            status.TrySetStatusEffectDuration(args.TargetEntity, SeeingRainbows, HallucinationCap);
+            status.TrySetStatusEffectDuration(args.TargetEntity, Hallucination, HallucinationCap);
         }
 
-        // TODO RMC14: brain damage on critical overdose
+        // TODO RMC14: brain damage on critical overdose - 5 * potency brain damage per 2s tick
     }
 }
 

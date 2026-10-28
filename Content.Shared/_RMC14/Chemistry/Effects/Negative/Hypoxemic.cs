@@ -39,7 +39,6 @@ public sealed partial class Hypoxemic : RMCChemicalEffect
             args.TargetEntity,
             GaspEmote,
             hideLog: true,
-            ignoreActionBlocker: true,
             forceEmote: true
         );
     }

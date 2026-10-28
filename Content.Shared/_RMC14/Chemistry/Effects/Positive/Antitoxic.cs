@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Damage;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
-using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
@@ -42,17 +41,7 @@ public sealed partial class Antitoxic : RMCChemicalEffect
         bloodstream.RemoveBloodstreamToxins(args.TargetEntity, 0.125f);
     }
 
-    protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
-    {
-        // TODO RMC14: damge eye organ instead.
-        // this is to make up for the fact that damage is different for the eye system
-        var whole = RoundStochastic((float) potency);
-        if (whole <= 0)
-            return;
-
-        var blinding = args.EntityManager.System<BlindableSystem>();
-        blinding.AdjustEyeDamage(args.TargetEntity, whole);
-    }
+    // TODO RMC14: eye organ damage on overdose - 0.5 * potency * delta_time (potency eye damage per 2s tick)
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

@@ -17,31 +17,31 @@ public sealed partial class Neuroinhibiting : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var p = (float) potency;
+        var p = ActualPotency;
         var target = args.TargetEntity;
         var entities = args.EntityManager;
 
         if (entities.System<SharedStatusEffectsSystem>().HasStatusEffect(target, Neuroshielding.ResistNeuroStatus))
             return;
 
-        if (p > 0.5f)
+        if (p > 1f)
             entities.EnsureComponent<RMCBlindDisabilityComponent>(target);
         else
             entities.EnsureComponent<RMCNearsightedComponent>(target);
 
-        if (p > 1f)
+        if (p > 2f)
             entities.EnsureComponent<RMCDeafDisabilityComponent>(target);
 
-        if (p > 1.5f)
+        if (p > 3f)
             entities.EnsureComponent<RMCMuteDisabilityComponent>(target);
     }
 
-    // TODO RMC14: brain damage on overdose
+    // TODO RMC14: brain damage on overdose - 0.5 * potency * delta_time (potency per 2s tick)
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         args.EntityManager.EnsureComponent<RMCNervousComponent>(args.TargetEntity);
     }
 
-    // TODO RMC14: brain damage on critical overdose
+    // TODO RMC14: brain damage on critical overdose - 2 * potency brain damage per 2s tick
 }

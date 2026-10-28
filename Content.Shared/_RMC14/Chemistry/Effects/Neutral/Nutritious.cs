@@ -10,10 +10,11 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Nutritious : RMCChemicalEffect
 {
+    private float NutritionPerSecond => (NutrimentFactor + Potency) * Potency * 0.5f;
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var updatedFactor = NutrimentFactor + Potency;
-        return $"Restores [color=green]{updatedFactor * PotencyPerSecond}[/color] nutrients to the body and satiates hunger";
+        return $"Restores [color=green]{NutritionPerSecond}[/color] nutrients to the body and satiates hunger";
     }
 
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -38,7 +39,6 @@ public sealed partial class Nutritious : RMCChemicalEffect
             return;
 
         var hungerSys = args.EntityManager.System<HungerSystem>();
-        var updatedFactor = NutrimentFactor + Potency;
-        hungerSys.ModifyHunger(args.TargetEntity, updatedFactor * (float) potency);
+        hungerSys.ModifyHunger(args.TargetEntity, NutritionPerSecond);
     }
 }

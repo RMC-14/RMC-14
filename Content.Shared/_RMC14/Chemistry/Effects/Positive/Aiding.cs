@@ -2,12 +2,12 @@ using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.Chemistry.Disabilities;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.Stunnable;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
@@ -21,7 +21,7 @@ public sealed partial class Aiding : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return "Removes compounds modifying yield and mutation in plants.";
+        return "Fixes genetic defects, disfigurements and disabilities. In plants, removes compounds modifying yield and mutation.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -31,16 +31,16 @@ public sealed partial class Aiding : RMCChemicalEffect
 
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var scaled = (float) ActualPotency * 2f * (float) args.Quantity;
+        var scaled = Potency * (float) args.Quantity;
         var plantTray = args.EntityManager.System<SharedRMCPlantTraySystem>();
         plantTray.AdjustMutationMod((plant.Owner, plant.Comp), -4f * scaled);
-        plantTray.SetYieldMod((plant.Owner, plant.Comp), plant.Comp.YieldMod - (int) MathF.Round(4f * scaled));
+        AddYieldMod(args.EntityManager, plant, -4f * scaled);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        status.TrySetStatusEffectDuration(args.TargetEntity, ConfusedStatus, TimeSpan.FromSeconds((float) potency * 2f));
+        status.TryUpdateStatusEffectDuration(args.TargetEntity, ConfusedStatus, TimeSpan.FromSeconds(ActualPotency * 40f));
 
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency);
@@ -54,7 +54,7 @@ public sealed partial class Aiding : RMCChemicalEffect
         damage.DamageDict[CellularType] = potency * 3f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
 
-        var stun = args.EntityManager.System<SharedStunSystem>();
-        stun.TryParalyze(args.TargetEntity, TimeSpan.FromSeconds((float) potency * 2f), true);
+        var knockOut = args.EntityManager.System<RMCSizeStunSystem>();
+        knockOut.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(ActualPotency * 40f));
     }
 }

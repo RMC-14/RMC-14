@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Synth;
-using Content.Shared.Chemistry;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
@@ -38,9 +37,9 @@ public sealed partial class Toxic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (args.Method == ReactionMethod.Touch)
+        if (IsReaction(args))
         {
-            HandleTouch(damageable, args);
+            HandleReaction(damageable, args);
             return;
         }
 
@@ -49,7 +48,7 @@ public sealed partial class Toxic : RMCChemicalEffect
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
-    private void HandleTouch(DamageableSystem damageable, EntityEffectReagentArgs args)
+    private void HandleReaction(DamageableSystem damageable, EntityEffectReagentArgs args)
     {
         var entities = args.EntityManager;
         var target = args.TargetEntity;

@@ -59,7 +59,7 @@ public sealed partial class Hyperthrottling : RMCChemicalEffect
             args.EntityManager.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-hyperthrottling-dream"), args.TargetEntity, args.TargetEntity);
     }
 
-    // TODO RMC14: brain damage on overdose
+    // TODO RMC14: brain damage on overdose - 1.5 * potency * delta_time (3 * potency per 2s tick)
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

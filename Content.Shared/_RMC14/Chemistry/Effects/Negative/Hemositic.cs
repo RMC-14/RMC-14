@@ -30,7 +30,7 @@ public sealed partial class Hemositic : RMCChemicalEffect
 
         // this feels kinda jank :clueless:
         var wellFed = args.EntityManager.TryGetComponent<HungerComponent>(args.TargetEntity, out var hunger) &&
-                      args.EntityManager.System<HungerSystem>().GetHungerThreshold(hunger) >= HungerThreshold.Peckish;
+                      args.EntityManager.System<HungerSystem>().GetHunger(hunger) >= hunger.Thresholds[HungerThreshold.Peckish];
 
         var bloodstreamSystem = args.EntityManager.System<SharedBloodstreamSystem>();
         bloodstreamSystem.TryModifyBloodLevelQuiet((args.TargetEntity, bloodstream), wellFed ? -potency * 3f : -potency * 0.5f);

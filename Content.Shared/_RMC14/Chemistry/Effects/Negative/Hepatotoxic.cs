@@ -24,7 +24,7 @@ public sealed partial class Hepatotoxic : RMCChemicalEffect
         SuppressMutationSlot(args.EntityManager, plant, "Gluttony", suppress);
     }
 
-    // TODO RMC14: damage liver
+    // TODO RMC14: damage liver - 0.5 * potency liver damage per 2s tick
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();

@@ -22,8 +22,8 @@ public sealed partial class Oculotoxic : RMCChemicalEffect
         SuppressMutationSlot(args.EntityManager, plant, "Flowers", suppress);
     }
 
-    // TODO RMC14: damage eyes
-    // TODO RMC14: brain damage on critical overdose
+    // TODO RMC14: damage eyes - 0.5 * potency eye damage per 2s tick
+    // TODO RMC14: brain damage on critical overdose - 0.5 * potency brain damage per 2s tick
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

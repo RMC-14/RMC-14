@@ -24,6 +24,13 @@ public sealed partial class Crystallization : RMCChemicalEffect
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency * 0.5f);
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
+
+        var random = IoCManager.Resolve<IRobustRandom>();
+        if (random.Prob(0.5f))
+        {
+            var popup = args.EntityManager.System<SharedPopupSystem>();
+            popup.PopupEntity(Loc.GetString("chem-crystallization-blades"), args.TargetEntity, args.TargetEntity, PopupType.SmallCaution);
+        }
     }
 
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -31,7 +38,7 @@ public sealed partial class Crystallization : RMCChemicalEffect
         if (!args.EntityManager.TryGetComponent<RMCPlantHarvestComponent>(plant.Owner, out var harvest) || harvest.HarvestRepeat == HarvestType.Repeat)
             return;
 
-        var amount = (float) ActualPotency * 2f * (float) args.Quantity;
+        var amount = (float) args.Quantity;
         var plantTray = args.EntityManager.System<SharedRMCPlantTraySystem>();
         if (plant.Comp.Tray is { } trayUid && GetTray(args.EntityManager, plant) is { } tray)
         {
@@ -61,5 +68,5 @@ public sealed partial class Crystallization : RMCChemicalEffect
         popup.PopupEntity(Loc.GetString("plant-repeat-harvest-shimmer", ("name", Loc.GetString(plant.Comp.DisplayName))), args.TargetEntity);
     }
 
-    // TODO RMC14: liver organ damage
+    // TODO RMC14: liver organ damage - potency liver damage per 2s tick
 }

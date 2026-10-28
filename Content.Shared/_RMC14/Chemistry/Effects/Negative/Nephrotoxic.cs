@@ -20,11 +20,12 @@ public sealed partial class Nephrotoxic : RMCChemicalEffect
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var suppress = -Potency;
+        SuppressMutationSlot(args.EntityManager, plant, "Light Tolerance", suppress);
         SuppressMutationSlot(args.EntityManager, plant, "Weed Tolerance", suppress);
         SuppressMutationSlot(args.EntityManager, plant, "Toxin Tolerance", suppress);
     }
 
-    // TODO RMC14: damage kidney
+    // TODO RMC14: damage kidney - 0.5 * potency kidney damage per 2s tick
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

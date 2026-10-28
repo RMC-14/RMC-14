@@ -15,7 +15,7 @@ public sealed partial class Atrichogenic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return "Damages the hair follicles, causing extreme alopecia.";
+        return "Damages the hair follicles in the skin to disrupt the hair growth cycle, causing extreme alopecia, also referred to as baldness.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -36,7 +36,7 @@ public sealed partial class Atrichogenic : RMCChemicalEffect
         args.EntityManager.Dirty(args.TargetEntity, humanoid);
 
         var popup = args.EntityManager.System<SharedPopupSystem>();
-        popup.PopupEntity(Loc.GetString("chem-atrichogenic-hair-loss"), args.TargetEntity);
+        popup.PopupEntity(Loc.GetString("chem-atrichogenic-hair-loss"), args.TargetEntity, args.TargetEntity, PopupType.SmallCaution);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

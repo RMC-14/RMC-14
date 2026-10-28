@@ -18,7 +18,7 @@ public sealed partial class Organhealing : RMCChemicalEffect
         return "Regenerates all types of cell membranes, mending damage in all organs.";
     }
 
-    // TODO RMC14: mob effect - heals internal organ damage
+    // TODO RMC14: mob effect - heals internal organ damage - 0.5 * potency * delta_time (heals potency on every organ per 2s tick)
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

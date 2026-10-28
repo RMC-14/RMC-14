@@ -24,7 +24,7 @@ public sealed partial class Cardiotoxic : RMCChemicalEffect
         SuppressMutationSlot(args.EntityManager, plant, "New Chems3", suppress);
     }
 
-    // TODO RMC14: damage heart organ
+    // TODO RMC14: damage heart organ - 0.5 * potency heart damage per 2s tick
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
