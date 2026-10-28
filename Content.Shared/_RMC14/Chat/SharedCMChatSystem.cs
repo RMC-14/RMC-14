@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Chemistry.XenoTransformation;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids;
@@ -22,7 +23,7 @@ public abstract class SharedCMChatSystem : EntitySystem
 
     private void OnMarineGetPrefix(Entity<MarineComponent> ent, ref ChatGetPrefixEvent args)
     {
-        if (args.Channel?.ID == SharedChatSystem.HivemindChannel.Id)
+        if (args.Channel?.ID == SharedChatSystem.HivemindChannel.Id && !HasComp<RMCHumanHivemindComponent>(ent))
             args.Channel = null;
     }
 

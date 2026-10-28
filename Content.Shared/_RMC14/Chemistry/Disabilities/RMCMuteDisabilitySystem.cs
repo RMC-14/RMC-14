@@ -1,4 +1,4 @@
-using Content.Shared.Speech.Muting;
+using Content.Shared.Speech;
 
 namespace Content.Shared._RMC14.Chemistry.Disabilities;
 
@@ -8,17 +8,11 @@ public sealed class RMCMuteDisabilitySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCMuteDisabilityComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<RMCMuteDisabilityComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<RMCMuteDisabilityComponent, SpeakAttemptEvent>(OnSpeakAttempt);
     }
 
-    private void OnStartup(Entity<RMCMuteDisabilityComponent> ent, ref ComponentStartup args)
+    private void OnSpeakAttempt(Entity<RMCMuteDisabilityComponent> ent, ref SpeakAttemptEvent args)
     {
-        EnsureComp<MutedComponent>(ent.Owner);
-    }
-
-    private void OnShutdown(Entity<RMCMuteDisabilityComponent> ent, ref ComponentShutdown args)
-    {
-        RemCompDeferred<MutedComponent>(ent.Owner);
+        args.Cancel();
     }
 }

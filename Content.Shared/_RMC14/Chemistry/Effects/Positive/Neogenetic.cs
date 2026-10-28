@@ -1,6 +1,6 @@
 ﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared.Chemistry;
+using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
@@ -30,9 +30,9 @@ public sealed partial class Neogenetic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (args.Method == ReactionMethod.Touch)
+        if (IsReaction(args))
         {
-            HandleTouch(damageable, args);
+            HandleReaction(args);
             return;
         }
 
@@ -47,7 +47,7 @@ public sealed partial class Neogenetic : RMCChemicalEffect
         }
     }
 
-    private void HandleTouch(DamageableSystem damageable, EntityEffectReagentArgs args)
+    private void HandleReaction(EntityEffectReagentArgs args)
     {
         var entities = args.EntityManager;
         var target = args.TargetEntity;
@@ -60,9 +60,7 @@ public sealed partial class Neogenetic : RMCChemicalEffect
 
         var volume = (float) args.Quantity;
         var heal = FixedPoint2.New(ActualPotency * volume * 0.5f);
-        var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
-        var healing = rmcDamageable.DistributeHealingCached(target, BruteGroup, heal);
-        damageable.TryChangeDamage(target, healing, true, interruptsDoAfters: false);
+        entities.System<SharedXenoHealSystem>().Heal(target, heal);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

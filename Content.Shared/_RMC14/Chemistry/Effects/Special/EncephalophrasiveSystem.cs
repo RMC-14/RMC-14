@@ -30,10 +30,7 @@ public sealed class EncephalophrasiveSystem : EntitySystem
             EnsureComp<XenoPsychicCommunicationComponent>(uid);
             comp.Action = _actions.AddAction(uid, WhisperAction);
 
-            _popup.PopupEntity(
-                "A terrible headache manifests, and suddenly it feels as though your mind is outside of your skull.",
-                uid,
-                uid);
+            _popup.PopupEntity(Loc.GetString("chem-encephalophrasive-headache"), uid, uid);
         }
 
         comp.ExpiresAt = _timing.CurTime + GracePeriod;
@@ -62,7 +59,7 @@ public sealed class EncephalophrasiveSystem : EntitySystem
 
             RemCompDeferred<EncephalophrasiveComponent>(uid);
 
-            _popup.PopupEntity("The pain in your head subsides, and you are left feeling strangely alone.", uid, uid);
+            _popup.PopupEntity(Loc.GetString("chem-encephalophrasive-alone"), uid, uid);
         }
     }
 }

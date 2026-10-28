@@ -2,11 +2,14 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Chemistry.Addiction;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class RMCAddictedComponent : Component
 {
     [DataField, AutoNetworkedField]
     public List<RMCAddictionRecord> Addictions = new();
+
+    [DataField, AutoNetworkedField]
+    public float SpeedMultiplier = 1f;
 }
 
 [Serializable, DataDefinition]

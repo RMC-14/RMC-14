@@ -2,7 +2,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Special;
 
-public sealed partial class CipheringPredator : RMCChemicalEffect // TODO RMC14: Rename / remove
+public sealed partial class CipheringPredator : Ciphering // TODO RMC14: Rename / remove
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {

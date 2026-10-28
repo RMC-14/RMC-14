@@ -18,7 +18,7 @@ public sealed partial class Organstabilize : RMCChemicalEffect
         return "Stabilizes internal organ damage, stopping internal damage symptoms.";
     }
 
-    // TODO RMC14: mob effect - halts internal organ damage progression
+    // TODO RMC14: halts internal organ damage progression - cm13: sets CHEM_EFFECT_ORGAN_STASIS (humans only), which stops organ damage symptoms & ignores heart damage when working out blood volume
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

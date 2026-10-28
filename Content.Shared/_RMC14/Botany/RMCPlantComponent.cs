@@ -42,10 +42,10 @@ public sealed partial class RMCPlantComponent : Component
     public float MutationLevel;
 
     /// <summary>
-    /// Adjusts growth cycle speed
+    /// Added to the trays next growth cycle delay, then reset
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float MetabolismAdjust;
+    public TimeSpan MetabolismAdjust;
 
     [DataField, AutoNetworkedField]
     public float BlightProductionCounter;

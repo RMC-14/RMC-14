@@ -1,9 +1,9 @@
 using Content.Shared._RMC14.Chemistry.Buildup;
+using Content.Shared._RMC14.Chemistry.SpeedModifier;
 using Content.Shared._RMC14.Damage;
-using Content.Shared._RMC14.Movement;
-using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared.Chemistry;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
@@ -11,6 +11,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Nutrition.EntitySystems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
@@ -19,7 +20,14 @@ public sealed partial class Musclestimulating : RMCChemicalEffect
     public override bool ReactsOnTouch => true;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
-    private const float NutritionDrain = 0.5f * 0.05f;
+
+    private const float NutritionDrain = 0.5f * 0.05f * 0.5f;
+
+    private static readonly ProtoId<EmotePrototype>[] Emotes =
+    [
+        "RMCTwitch",
+        "RMCShiver",
+    ];
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -28,27 +36,32 @@ public sealed partial class Musclestimulating : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (args.Method == ReactionMethod.Touch)
+        if (IsReaction(args))
         {
-            HandleTouch(args);
+            HandleReaction(args);
             return;
         }
 
-        var boost = 1f + (float) PotencyPerSecond * 0.05f;
-        var speed = args.EntityManager.System<TemporarySpeedModifiersSystem>();
-        var modifiers = new List<TemporarySpeedModifierSet> { new(TimeSpan.FromSeconds(2), boost, boost) };
-        speed.ModifySpeed(args.TargetEntity, modifiers);
+        var speedModifier = args.EntityManager.System<RMCReagentSpeedModifierSystem>();
+        speedModifier.SetSpeedModifier(args.TargetEntity, $"{args.Reagent?.ID}:{nameof(Musclestimulating)}", -0.25f * ActualPotency);
 
         args.EntityManager.System<HungerSystem>().ModifyHunger(args.TargetEntity, -NutritionDrain);
+
+        var random = IoCManager.Resolve<IRobustRandom>();
+        if (random.Prob(0.05f * 2f / 3f))
+        {
+            var emote = args.EntityManager.System<SharedRMCEmoteSystem>();
+            emote.TryEmoteWithChat(args.TargetEntity, random.Pick(Emotes), hideLog: true, forceEmote: true);
+        }
     }
 
-    private void HandleTouch(EntityEffectReagentArgs args)
+    private void HandleReaction(EntityEffectReagentArgs args)
     {
         var entities = args.EntityManager;
         var target = args.TargetEntity;
 
         var isXenoHuman = entities.HasComponent<XenoComponent>(target) ||
-            (entities.HasComponent<HumanoidAppearanceComponent>(target) && !entities.HasComponent<SynthComponent>(target));
+            entities.HasComponent<HumanoidAppearanceComponent>(target);
         if (!isXenoHuman)
             return;
 
@@ -61,7 +74,7 @@ public sealed partial class Musclestimulating : RMCChemicalEffect
         buildup.AddBuildup(target, volume, 1f / potency, potency * volume, increaseSpeed: true);
     }
 
-    // TODO RMC14: heart organ damage on overdose
+    // TODO RMC14: heart organ damage on overdose - 0.5 * potency * delta_time (potency per 2s tick)
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

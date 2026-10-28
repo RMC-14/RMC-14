@@ -7,7 +7,8 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Special;
 
-public sealed partial class Ciphering : RMCChemicalEffect
+[Virtual]
+public partial class Ciphering : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -20,16 +21,22 @@ public sealed partial class Ciphering : RMCChemicalEffect
             return;
 
         var level = Math.Clamp((int) Potency, HiveSlots.Normal, HiveSlots.Delta);
-
-        var hives = args.EntityManager.EntityQueryEnumerator<HiveSlotComponent>();
-        while (hives.MoveNext(out var hiveUid, out var slot))
-        {
-            if (slot.Position != level)
-                continue;
-
-            var parasite = args.EntityManager.System<SharedXenoParasiteSystem>();
-            parasite.SetHive((args.TargetEntity, victim), hiveUid);
+        if (GetHiveBySlot(args.EntityManager, level) is not { } hive)
             return;
+
+        var parasite = args.EntityManager.System<SharedXenoParasiteSystem>();
+        parasite.SetHive((args.TargetEntity, victim), hive);
+    }
+
+    public static EntityUid? GetHiveBySlot(IEntityManager entities, int slot)
+    {
+        var hives = entities.EntityQueryEnumerator<HiveSlotComponent>();
+        while (hives.MoveNext(out var hiveUid, out var hiveSlot))
+        {
+            if (hiveSlot.Position == slot)
+                return hiveUid;
         }
+
+        return null;
     }
 }

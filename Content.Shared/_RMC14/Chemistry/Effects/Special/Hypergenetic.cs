@@ -2,7 +2,7 @@ using Content.Shared._RMC14.Chemistry.Buildup;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared.Chemistry;
+using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
@@ -30,9 +30,9 @@ public sealed partial class Hypergenetic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (args.Method == ReactionMethod.Touch)
+        if (IsReaction(args))
         {
-            HandleTouch(damageable, args);
+            HandleReaction(damageable, args);
             return;
         }
 
@@ -41,15 +41,19 @@ public sealed partial class Hypergenetic : RMCChemicalEffect
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
-    private void HandleTouch(DamageableSystem damageable, EntityEffectReagentArgs args)
+    // TODO RMC14: also heals internal organ damage - heals potency damage on every organ per 2s tick
+
+    private void HandleReaction(DamageableSystem damageable, EntityEffectReagentArgs args)
     {
         var entities = args.EntityManager;
         var target = args.TargetEntity;
 
         var isXeno = entities.HasComponent<XenoComponent>(target);
-        var isHuman = entities.HasComponent<HumanoidAppearanceComponent>(target) && !entities.HasComponent<SynthComponent>(target);
-        if (!isXeno && !isHuman)
+        var isHumanoid = entities.HasComponent<HumanoidAppearanceComponent>(target);
+        if (!isXeno && !isHumanoid)
             return;
+
+        var isHuman = isHumanoid && !entities.HasComponent<SynthComponent>(target);
 
         var potency = (float) ActualPotency;
         var volume = (float) args.Quantity;
@@ -57,19 +61,15 @@ public sealed partial class Hypergenetic : RMCChemicalEffect
         var reduction = entities.System<RMCHealingReductionSystem>();
         reduction.AddBuildup(target, -potency * volume * 0.5f, HealingReductionDissipation, HealingReductionMax);
 
-        var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
-        var damage = new DamageSpecifier();
         if (isHuman)
-            damage = rmcDamageable.DistributeHealingCached(target, BruteGroup, potency * volume * 0.5f, damage);
-
-        if (isXeno)
         {
-            var heal = potency * volume;
-            damage = rmcDamageable.DistributeHealingCached(target, BruteGroup, heal, damage);
-            damage = rmcDamageable.DistributeHealingCached(target, BurnGroup, heal, damage);
+            var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
+            var damage = rmcDamageable.DistributeHealingCached(target, BruteGroup, potency * volume * 0.5f);
+            damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
         }
 
-        damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
+        if (isXeno)
+            entities.System<SharedXenoHealSystem>().Heal(target, potency * volume);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

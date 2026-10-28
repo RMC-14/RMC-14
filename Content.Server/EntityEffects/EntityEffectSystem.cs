@@ -1,10 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server._RMC14.Botany;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
-using Content.Shared._RMC14.Botany;
+using Content.Server.Botany;
+using Content.Server.Botany.Components;
+using Content.Server.Botany.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Emp;
 using Content.Server.Explosion.EntitySystems;
@@ -59,11 +60,9 @@ public sealed class EntityEffectSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly RMCPlantMutationSystem _plantMutation = default!;
+    [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly NarcolepsySystem _narcolepsy = default!;
-    [Dependency] private readonly RMCPlantTraySystem _plantTray = default!;
-    [Dependency] private readonly RMCPlantGrowthSystem _plantGrowth = default!;
-    [Dependency] private readonly RMCPlantMetabolismSystem _plantMetabolism = default!;
+    [Dependency] private readonly PlantHolderSystem _plantHolder = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly RespiratorSystem _respirator = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -83,7 +82,6 @@ public sealed class EntityEffectSystem : EntitySystem
         SubscribeLocalEvent<CheckEntityEffectConditionEvent<TemperatureCondition>>(OnCheckTemperature);
         SubscribeLocalEvent<CheckEntityEffectConditionEvent<Breathing>>(OnCheckBreathing);
         SubscribeLocalEvent<CheckEntityEffectConditionEvent<OrganType>>(OnCheckOrganType);
-        SubscribeLocalEvent<ExecuteEntityEffectEvent<PlantMutationController>>(OnExecutePlantMutationController);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<PlantAdjustHealth>>(OnExecutePlantAdjustHealth);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<PlantAdjustMutationLevel>>(OnExecutePlantAdjustMutationLevel);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<PlantAdjustMutationMod>>(OnExecutePlantAdjustMutationMod);
@@ -187,133 +185,106 @@ public sealed class EntityEffectSystem : EntitySystem
     /// <param name="entityManager">The entity manager</param>
     /// <param name="mustHaveAlivePlant">Whether to check if it has an alive plant or not</param>
     /// <returns></returns>
-    /// <summary>
-    /// args.Args.TargetEntity is the plant entity (reagents are metabolized against the plant, not the
-    /// tray, since RMCPlantMetabolismSystem.UpdateReagents resolves the tray's contained plant before
-    /// calling ReactionPlant). A missing RMCPlantComponent already means "no plant" — no separate
-    /// null-seed check needed the way the old single-component model required.
-    /// </summary>
-    private bool CanMetabolizePlant(EntityUid plant, [NotNullWhen(true)] out RMCPlantComponent? plantComponent,
+    private bool CanMetabolizePlant(EntityUid plantHolder, [NotNullWhen(true)] out PlantHolderComponent? plantHolderComponent,
         bool mustHaveAlivePlant = true, bool mustHaveMutableSeed = false)
     {
-        plantComponent = null;
+        plantHolderComponent = null;
 
-        if (!TryComp(plant, out plantComponent))
+        if (!TryComp(plantHolder, out plantHolderComponent))
             return false;
 
-        if (mustHaveAlivePlant && plantComponent.Dead)
+        if (mustHaveAlivePlant && (plantHolderComponent.Seed == null || plantHolderComponent.Dead))
             return false;
 
-        if (mustHaveMutableSeed && (!TryComp(plant, out RMCPlantMutationComponent? mutation) || mutation.MutationTier == RMCPlantMutationTier.Immutable))
+        if (mustHaveMutableSeed && (plantHolderComponent.Seed == null || plantHolderComponent.Seed.Immutable))
             return false;
 
-        return true;
-    }
-
-    private bool TryGetTray(RMCPlantComponent plantComponent, out EntityUid trayUid, [NotNullWhen(true)] out RMCPlantTrayComponent? tray)
-    {
-        tray = null;
-        trayUid = default;
-
-        if (plantComponent.Tray is not { } uid || !TryComp(uid, out tray))
-            return false;
-
-        trayUid = uid;
         return true;
     }
 
     private void OnExecutePlantAdjustHealth(ref ExecuteEntityEffectEvent<PlantAdjustHealth> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        _plantTray.AdjustHealth((args.Args.TargetEntity, plantComp, null), args.Effect.Amount);
-
-        if (plantComp.Tray is { } tray && TryComp(tray, out RMCPlantTrayComponent? trayComp))
-            _plantTray.CheckHealth(tray, trayComp, args.Args.TargetEntity);
+        plantHolderComp.Health += args.Effect.Amount;
+        _plantHolder.CheckHealth(args.Args.TargetEntity, plantHolderComp);
     }
 
     private void OnExecutePlantAdjustMutationLevel(ref ExecuteEntityEffectEvent<PlantAdjustMutationLevel> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        _plantTray.AdjustMutationLevel((args.Args.TargetEntity, plantComp), args.Effect.Amount * plantComp.MutationMod);
+        plantHolderComp.MutationLevel += args.Effect.Amount * plantHolderComp.MutationMod;
     }
 
     private void OnExecutePlantAdjustMutationMod(ref ExecuteEntityEffectEvent<PlantAdjustMutationMod> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        _plantTray.AdjustMutationMod((args.Args.TargetEntity, plantComp), args.Effect.Amount);
+        plantHolderComp.MutationMod += args.Effect.Amount;
     }
 
     private void OnExecutePlantAdjustNutrition(ref ExecuteEntityEffectEvent<PlantAdjustNutrition> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp, mustHaveAlivePlant: false))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp, mustHaveAlivePlant: false))
             return;
 
-        if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantMetabolism.AdjustNutrient((trayUid, tray), args.Effect.Amount);
+        _plantHolder.AdjustNutrient(args.Args.TargetEntity, args.Effect.Amount, plantHolderComp);
     }
 
     private void OnExecutePlantAdjustPests(ref ExecuteEntityEffectEvent<PlantAdjustPests> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantTray.AdjustPestLevel((trayUid, tray), args.Effect.Amount);
+        plantHolderComp.PestLevel += args.Effect.Amount;
     }
 
     private void OnExecutePlantAdjustPotency(ref ExecuteEntityEffectEvent<PlantAdjustPotency> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantChemicalsComponent? chemicals))
+        if (plantHolderComp.Seed == null)
             return;
 
-        _plantTray.SetPotency((args.Args.TargetEntity, chemicals), Math.Max(chemicals.Potency + args.Effect.Amount, 1));
+        _plantHolder.EnsureUniqueSeed(args.Args.TargetEntity, plantHolderComp);
+        plantHolderComp.Seed.Potency = Math.Max(plantHolderComp.Seed.Potency + args.Effect.Amount, 1);
     }
 
     private void OnExecutePlantAdjustToxins(ref ExecuteEntityEffectEvent<PlantAdjustToxins> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantTray.AdjustToxins((trayUid, tray), args.Effect.Amount);
+        plantHolderComp.Toxins += args.Effect.Amount;
     }
 
     private void OnExecutePlantAdjustWater(ref ExecuteEntityEffectEvent<PlantAdjustWater> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp, mustHaveAlivePlant: false))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp, mustHaveAlivePlant: false))
             return;
 
-        if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantMetabolism.AdjustWater((trayUid, tray), args.Effect.Amount);
+        _plantHolder.AdjustWater(args.Args.TargetEntity, args.Effect.Amount, plantHolderComp);
     }
 
     private void OnExecutePlantAdjustWeeds(ref ExecuteEntityEffectEvent<PlantAdjustWeeds> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantTray.AdjustWeedLevel((trayUid, tray), args.Effect.Amount);
+        plantHolderComp.WeedLevel += args.Effect.Amount;
     }
 
     private void OnExecutePlantAffectGrowth(ref ExecuteEntityEffectEvent<PlantAffectGrowth> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantGrowthComponent? growth))
-            return;
-
-        _plantGrowth.AffectGrowth((args.Args.TargetEntity, plantComp, growth), (int) args.Effect.Amount);
+        _plantHolder.AffectGrowth(args.Args.TargetEntity, (int) args.Effect.Amount, plantHolderComp);
     }
 
     // Mutate reference 'val' between 'min' and 'max' by pretending the value
@@ -384,41 +355,23 @@ public sealed class EntityEffectSystem : EntitySystem
         val = valMutated;
     }
 
-    private static readonly Type[] PlantChangeStatComponentTypes =
-    {
-        typeof(RMCPlantGrowthComponent),
-        typeof(RMCPlantChemicalsComponent),
-        typeof(RMCPlantHarvestComponent),
-        typeof(RMCPlantAtmosphericComponent),
-        typeof(RMCPlantTraitsComponent),
-        typeof(RMCPlantMetabolismComponent),
-    };
-
     private void OnExecutePlantChangeStat(ref ExecuteEntityEffectEvent<PlantChangeStat> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out _))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        foreach (var type in PlantChangeStatComponentTypes)
+        if (plantHolderComp.Seed == null)
+            return;
+
+        var member = plantHolderComp.Seed.GetType().GetField(args.Effect.TargetValue);
+
+        if (member == null)
         {
-            if (!EntityManager.TryGetComponent(args.Args.TargetEntity, type, out var comp))
-                continue;
-
-            var member = comp.GetType().GetField(args.Effect.TargetValue);
-            if (member == null)
-                continue;
-
-            ApplyPlantChangeStat(args, comp, member);
-            DirtyField(args.Args.TargetEntity, (IComponentDelta)comp, member.Name);
+            _mutation.Log.Error(args.Effect.GetType().Name + " Error: Member " + args.Effect.TargetValue + " not found on " + plantHolderComp.Seed.GetType().Name + ". Did you misspell it?");
             return;
         }
 
-        Log.Error(args.Effect.GetType().Name + " Error: Member " + args.Effect.TargetValue + " not found on any plant component. Did you misspell it?");
-    }
-
-    private void ApplyPlantChangeStat(ExecuteEntityEffectEvent<PlantChangeStat> args, IComponent comp, System.Reflection.FieldInfo member)
-    {
-        var currentValObj = member.GetValue(comp);
+        var currentValObj = member.GetValue(plantHolderComp.Seed);
         if (currentValObj == null)
             return;
 
@@ -426,130 +379,120 @@ public sealed class EntityEffectSystem : EntitySystem
         {
             var floatVal = (float)currentValObj;
             MutateFloat(ref floatVal, args.Effect.MinValue, args.Effect.MaxValue, args.Effect.Steps);
-            member.SetValue(comp, floatVal);
+            member.SetValue(plantHolderComp.Seed, floatVal);
         }
         else if (member.FieldType == typeof(int))
         {
             var intVal = (int)currentValObj;
             MutateInt(ref intVal, (int)args.Effect.MinValue, (int)args.Effect.MaxValue, args.Effect.Steps);
-            member.SetValue(comp, intVal);
+            member.SetValue(plantHolderComp.Seed, intVal);
         }
         else if (member.FieldType == typeof(bool))
         {
             var boolVal = (bool)currentValObj;
             boolVal = !boolVal;
-            member.SetValue(comp, boolVal);
+            member.SetValue(plantHolderComp.Seed, boolVal);
         }
     }
 
     private void OnExecutePlantCryoxadone(ref ExecuteEntityEffectEvent<PlantCryoxadone> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantGrowthComponent? growth))
+        var deviation = 0;
+        var seed = plantHolderComp.Seed;
+        if (seed == null)
             return;
-
-        var deviation = plantComp.Age > growth.Maturation
-            ? (int) Math.Max(growth.Maturation - 1, plantComp.Age - _random.Next(7, 10))
-            : (int) (growth.Maturation / growth.GrowthStages);
-
-        _plantTray.AdjustAge((args.Args.TargetEntity, plantComp), -deviation);
-        _plantTray.SetLastProduce((args.Args.TargetEntity, growth), plantComp.Age);
-        _plantTray.AdjustSkipAging((args.Args.TargetEntity, plantComp), 1);
-
-        if (plantComp.Tray is { } tray && TryComp(tray, out RMCPlantTrayComponent? trayComp))
-            trayComp.ForceUpdate = true;
+        if (plantHolderComp.Age > seed.Maturation)
+            deviation = (int) Math.Max(seed.Maturation - 1, plantHolderComp.Age - _random.Next(7, 10));
+        else
+            deviation = (int) (seed.Maturation / seed.GrowthStages);
+        plantHolderComp.Age -= deviation;
+        plantHolderComp.LastProduce = plantHolderComp.Age;
+        plantHolderComp.SkipAging++;
+        plantHolderComp.ForceUpdate = true;
     }
 
     private void OnExecutePlantDestroySeeds(ref ExecuteEntityEffectEvent<PlantDestroySeeds> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out _, mustHaveMutableSeed: true))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp, mustHaveMutableSeed: true))
             return;
 
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantHarvestComponent? harvest))
-            return;
-
-        if (!harvest.Seedless)
+        if (plantHolderComp.Seed!.Seedless == false)
         {
+            _plantHolder.EnsureUniqueSeed(args.Args.TargetEntity, plantHolderComp);
             _popup.PopupEntity(
                 Loc.GetString("botany-plant-seedsdestroyed"),
                 args.Args.TargetEntity,
                 PopupType.SmallCaution
             );
-            harvest.Seedless = true;
-            DirtyField(args.Args.TargetEntity, harvest, nameof(RMCPlantHarvestComponent.Seedless));
+            plantHolderComp.Seed.Seedless = true;
         }
     }
 
     private void OnExecutePlantDiethylamine(ref ExecuteEntityEffectEvent<PlantDiethylamine> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out _, mustHaveMutableSeed: true))
-            return;
-
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantGrowthComponent? growth))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp, mustHaveMutableSeed: true))
             return;
 
         if (_random.Prob(0.1f))
-            _plantTray.SetLifespan((args.Args.TargetEntity, growth), growth.Lifespan + 1);
+        {
+            _plantHolder.EnsureUniqueSeed(args.Args.TargetEntity, plantHolderComp);
+            plantHolderComp.Seed!.Lifespan++;
+        }
 
         if (_random.Prob(0.1f))
-            _plantTray.SetEndurance((args.Args.TargetEntity, growth), growth.Endurance + 1);
+        {
+            _plantHolder.EnsureUniqueSeed(args.Args.TargetEntity, plantHolderComp);
+            plantHolderComp.Seed!.Endurance++;
+        }
     }
 
     private void OnExecutePlantPhalanximine(ref ExecuteEntityEffectEvent<PlantPhalanximine> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out _, mustHaveMutableSeed: true))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp, mustHaveMutableSeed: true))
             return;
 
-        if (TryComp(args.Args.TargetEntity, out RMCPlantGrowthComponent? growth))
-        {
-            growth.Viable = true;
-            DirtyField(args.Args.TargetEntity, growth, nameof(RMCPlantGrowthComponent.Viable));
-        }
+        plantHolderComp.Seed!.Viable = true;
     }
 
     private void OnExecutePlantRestoreSeeds(ref ExecuteEntityEffectEvent<PlantRestoreSeeds> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out _, mustHaveMutableSeed: true))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp, mustHaveMutableSeed: true))
             return;
 
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantHarvestComponent? harvest))
-            return;
-
-        if (harvest.Seedless)
+        if (plantHolderComp.Seed!.Seedless)
         {
+            _plantHolder.EnsureUniqueSeed(args.Args.TargetEntity, plantHolderComp);
             _popup.PopupEntity(Loc.GetString("botany-plant-seedsrestored"), args.Args.TargetEntity);
-            harvest.Seedless = false;
-            DirtyField(args.Args.TargetEntity, harvest, nameof(RMCPlantHarvestComponent.Seedless));
+            plantHolderComp.Seed.Seedless = false;
         }
     }
 
     private void OnExecuteRobustHarvest(ref ExecuteEntityEffectEvent<RobustHarvest> args)
     {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out _))
+        if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantHolderComp))
             return;
 
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantChemicalsComponent? chemicals)
-            || !TryComp(args.Args.TargetEntity, out RMCPlantHarvestComponent? harvest))
-        {
+        if (plantHolderComp.Seed == null)
             return;
-        }
 
-        if (chemicals.Potency < args.Effect.PotencyLimit)
+        if (plantHolderComp.Seed.Potency < args.Effect.PotencyLimit)
         {
-            _plantTray.SetPotency((args.Args.TargetEntity, chemicals),
-                Math.Min(chemicals.Potency + args.Effect.PotencyIncrease, args.Effect.PotencyLimit));
+            _plantHolder.EnsureUniqueSeed(args.Args.TargetEntity, plantHolderComp);
+            plantHolderComp.Seed.Potency = Math.Min(plantHolderComp.Seed.Potency + args.Effect.PotencyIncrease, args.Effect.PotencyLimit);
 
-            if (chemicals.Potency > args.Effect.PotencySeedlessThreshold)
+            if (plantHolderComp.Seed.Potency > args.Effect.PotencySeedlessThreshold)
             {
-                _plantTray.SetSeedless((args.Args.TargetEntity, harvest), true);
+                plantHolderComp.Seed.Seedless = true;
             }
         }
-        else if (harvest.Yield > 1 && _random.Prob(0.1f))
+        else if (plantHolderComp.Seed.Yield > 1 && _random.Prob(0.1f))
         {
             // Too much of a good thing reduces yield
-            _plantTray.SetYield((args.Args.TargetEntity, harvest), harvest.Yield - 1);
+            _plantHolder.EnsureUniqueSeed(args.Args.TargetEntity, plantHolderComp);
+            plantHolderComp.Seed.Yield--;
         }
     }
 
@@ -906,10 +849,12 @@ public sealed class EntityEffectSystem : EntitySystem
 
     private void OnExecutePlantMutateChemicals(ref ExecuteEntityEffectEvent<PlantMutateChemicals> args)
     {
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantChemicalsComponent? chemicalsComp))
+        var plantholder = Comp<PlantHolderComponent>(args.Args.TargetEntity);
+
+        if (plantholder.Seed == null)
             return;
 
-        var chemicals = chemicalsComp.Chemicals;
+        var chemicals = plantholder.Seed.Chemicals;
         var randomChems = _protoManager.Index(RandomPickBotanyReagent).Fills;
 
         // Add a random amount of a random chemical to this set of chemicals
@@ -933,36 +878,17 @@ public sealed class EntityEffectSystem : EntitySystem
             var potencyDivisor = (int)Math.Ceiling(100.0f / seedChemQuantity.Max);
             seedChemQuantity.PotencyDivisor = potencyDivisor;
             chemicals[chemicalId] = seedChemQuantity;
-            DirtyField(args.Args.TargetEntity, chemicalsComp, nameof(RMCPlantChemicalsComponent.Chemicals));
         }
     }
+
     private void OnExecutePlantMutateConsumeGasses(ref ExecuteEntityEffectEvent<PlantMutateConsumeGasses> args)
     {
-        if (!TryComp(args.Args.TargetEntity, out RMCConsumeExudeGasComponent? gasComp))
+        var plantholder = Comp<PlantHolderComponent>(args.Args.TargetEntity);
+
+        if (plantholder.Seed == null)
             return;
 
-        var gasses = gasComp.ExudeGasses;
-
-        float amount = _random.NextFloat(args.Effect.MinValue, args.Effect.MaxValue);
-        Gas gas = _random.Pick(Enum.GetValues(typeof(Gas)).Cast<Gas>().ToList());
-        if (gasses.ContainsKey(gas))
-        {
-            gasses[gas] += amount;
-        }
-        else
-        {
-            gasses.Add(gas, amount);
-        }
-
-        DirtyField(args.Args.TargetEntity, gasComp, nameof(RMCConsumeExudeGasComponent.ExudeGasses));
-    }
-
-    private void OnExecutePlantMutateExudeGasses(ref ExecuteEntityEffectEvent<PlantMutateExudeGasses> args)
-    {
-        if (!TryComp(args.Args.TargetEntity, out RMCConsumeExudeGasComponent? gasComp))
-            return;
-
-        var gasses = gasComp.ConsumeGasses;
+        var gasses = plantholder.Seed.ExudeGasses;
 
         // Add a random amount of a random gas to this gas dictionary
         float amount = _random.NextFloat(args.Effect.MinValue, args.Effect.MaxValue);
@@ -975,24 +901,62 @@ public sealed class EntityEffectSystem : EntitySystem
         {
             gasses.Add(gas, amount);
         }
+    }
 
-        DirtyField(args.Args.TargetEntity, gasComp, nameof(RMCConsumeExudeGasComponent.ConsumeGasses));
+    private void OnExecutePlantMutateExudeGasses(ref ExecuteEntityEffectEvent<PlantMutateExudeGasses> args)
+    {
+        var plantholder = Comp<PlantHolderComponent>(args.Args.TargetEntity);
+
+        if (plantholder.Seed == null)
+            return;
+
+        var gasses = plantholder.Seed.ConsumeGasses;
+
+        // Add a random amount of a random gas to this gas dictionary
+        float amount = _random.NextFloat(args.Effect.MinValue, args.Effect.MaxValue);
+        Gas gas = _random.Pick(Enum.GetValues(typeof(Gas)).Cast<Gas>().ToList());
+        if (gasses.ContainsKey(gas))
+        {
+            gasses[gas] += amount;
+        }
+        else
+        {
+            gasses.Add(gas, amount);
+        }
     }
 
     private void OnExecutePlantMutateHarvest(ref ExecuteEntityEffectEvent<PlantMutateHarvest> args)
     {
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantHarvestComponent? harvest))
+        var plantholder = Comp<PlantHolderComponent>(args.Args.TargetEntity);
+
+        if (plantholder.Seed == null)
             return;
 
-        if (harvest.HarvestRepeat == HarvestType.NoRepeat)
-            _plantTray.SetHarvestRepeat((args.Args.TargetEntity, harvest), HarvestType.Repeat);
-        else if (harvest.HarvestRepeat == HarvestType.Repeat)
-            _plantTray.SetHarvestRepeat((args.Args.TargetEntity, harvest), HarvestType.SelfHarvest);
+        if (plantholder.Seed.HarvestRepeat == HarvestType.NoRepeat)
+            plantholder.Seed.HarvestRepeat = HarvestType.Repeat;
+        else if (plantholder.Seed.HarvestRepeat == HarvestType.Repeat)
+            plantholder.Seed.HarvestRepeat = HarvestType.SelfHarvest;
     }
 
     private void OnExecutePlantSpeciesChange(ref ExecuteEntityEffectEvent<PlantSpeciesChange> args)
     {
-        _plantMutation.RandomSpeciesChange(args.Args.TargetEntity);
+        var plantholder = Comp<PlantHolderComponent>(args.Args.TargetEntity);
+        if (plantholder.Seed == null)
+            return;
+
+        if (plantholder.Seed.MutationPrototypes.Count == 0)
+            return;
+
+        var targetProto = _random.Pick(plantholder.Seed.MutationPrototypes);
+        _protoManager.TryIndex(targetProto, out SeedPrototype? protoSeed);
+
+        if (protoSeed == null)
+        {
+            Log.Error($"Seed prototype could not be found: {targetProto}!");
+            return;
+        }
+
+        plantholder.Seed = plantholder.Seed.SpeciesChange(protoSeed);
     }
 
     private void OnExecutePolymorph(ref ExecuteEntityEffectEvent<PolymorphEffect> args)
@@ -1009,33 +973,5 @@ public sealed class EntityEffectSystem : EntitySystem
                 return;
 
         _narcolepsy.AdjustNarcolepsyTimer(args.Args.TargetEntity, args.Effect.TimerReset);
-    }
-
-    private void OnExecutePlantMutationController(ref ExecuteEntityEffectEvent<PlantMutationController> args)
-    {
-        if (!CanMetabolizePlant(args.Args.TargetEntity, out _))
-            return;
-
-        if (!TryComp(args.Args.TargetEntity, out RMCPlantMutationComponent? mutation))
-            return;
-
-        var controller = mutation.Slots;
-
-        foreach (var slot in args.Effect.Slots)
-        {
-            var current = controller.GetValueOrDefault(slot, 0f);
-            if (args.Effect.Enable)
-            {
-                if (current < args.Effect.EnableValue)
-                    controller[slot] = args.Effect.EnableValue;
-            }
-            else
-            {
-                if (current > args.Effect.SuppressValue)
-                    controller[slot] = args.Effect.SuppressValue;
-            }
-        }
-
-        DirtyField(args.Args.TargetEntity, mutation, nameof(RMCPlantMutationComponent.Slots));
     }
 }

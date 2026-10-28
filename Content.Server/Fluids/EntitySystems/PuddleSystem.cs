@@ -4,6 +4,7 @@ using Content.Server.Fluids.Components;
 using Content.Server.Spreader;
 using Content.Shared.ActionBlocker;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Fluids;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -88,6 +89,14 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
     private void OnPuddleSpread(Entity<PuddleComponent> entity, ref SpreadNeighborsEvent args)
     {
+        // RMC14 only flammable puddles spread
+        if (!HasComp<RMCFlammableAreaEffectComponent>(entity))
+        {
+            RemCompDeferred<ActiveEdgeSpreaderComponent>(entity);
+            return;
+        }
+        // RMC14
+
         // Overflow is the source of the overflowing liquid. This contains the excess fluid above overflow limit (20u)
         var overflow = GetOverflowSolution(entity.Owner, entity.Comp);
 

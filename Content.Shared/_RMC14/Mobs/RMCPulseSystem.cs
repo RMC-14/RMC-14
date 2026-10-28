@@ -83,10 +83,10 @@ public sealed class RMCPulseSystem : EntitySystem
         }
 
         // Guard against division by zero for uninitialized solutions.
-        if (bloodSol.MaxVolume <= FixedPoint2.Zero)
+        if (blood.BloodMaxVolume <= FixedPoint2.Zero)
             return PulseState.Normal;
 
-        var bloodPercent = bloodSol.Volume / bloodSol.MaxVolume;
+        var bloodPercent = bloodSol.Volume / blood.BloodMaxVolume;
         return bloodPercent <= ThreadyBloodThreshold ? PulseState.Thready : PulseState.Normal;
     }
 

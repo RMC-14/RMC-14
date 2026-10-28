@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Sentry;
-using Content.Shared._RMC14.Synth;
 using Content.Shared.Chemistry;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -31,17 +30,11 @@ public sealed partial class Repairing : RMCChemicalEffect
         if (args.Method == ReactionMethod.Touch)
         {
             HealStructure(damageable, args);
-            HealSynthTouch(damageable, args);
             return;
         }
 
-        if (!args.EntityManager.HasComponent<SynthComponent>(args.TargetEntity))
-            return;
-
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeHealingCached(args.TargetEntity, BruteGroup, potency * 2f);
-        damage = rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, potency * 2f, damage);
-        damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
+        // TODO RMC14: pick random robot limb & heal it for MEDIUM(2)*potency - 2 * potency brute & 2 * potency
+        // burn per 2s tick on one random limb, only if that limb is robotic/synthskin
     }
 
     private void HealStructure(DamageableSystem damageable, EntityEffectReagentArgs args)
@@ -60,25 +53,14 @@ public sealed partial class Repairing : RMCChemicalEffect
 
         var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
         var specifier = rmcDamageable.DistributeHealing(args.TargetEntity, BruteGroup, heal);
-        rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, heal, specifier);
+        var leftover = heal + specifier.GetTotal();
+        if (leftover > FixedPoint2.Zero)
+            rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, leftover, specifier);
+
         damageable.TryChangeDamage(args.TargetEntity, specifier, true, interruptsDoAfters: false);
     }
 
-    private void HealSynthTouch(DamageableSystem damageable, EntityEffectReagentArgs args)
-    {
-        var entities = args.EntityManager;
-        if (!entities.HasComponent<SynthComponent>(args.TargetEntity))
-            return;
-
-        var heal = (float) ActualPotency * (float) args.Quantity;
-        if (heal <= 0f)
-            return;
-
-        var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeHealingCached(args.TargetEntity, BruteGroup, heal);
-        damage = rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, heal, damage);
-        damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
-    }
+    // TODO RMC14: heal every robotic/synthskin limb on touch for potency*volume brute+burn
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

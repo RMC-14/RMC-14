@@ -379,7 +379,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.weed_killer_disable_duration_minutes", 8, CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<int> RMCIntelPaperScraps =
-        CVarDef.Create("rmc.intel_paper_scraps", 45, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.intel_paper_scraps", 40, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCIntelProgressReports =
         CVarDef.Create("rmc.intel_progress_reports", 15, CVar.REPLICATED | CVar.SERVER);
@@ -403,13 +403,13 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.intel_experimental_devices", 15, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCIntelResearchPapers =
-        CVarDef.Create("rmc.intel_research_papers", 15, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.intel_research_papers", 8, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelResearchNotes =
+        CVarDef.Create("rmc.intel_research_notes", 15, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCIntelVialBoxes =
         CVarDef.Create("rmc.intel_vial_boxes", 20, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<int> RMCIntelChemGrantPapers =
-        CVarDef.Create("rmc.intel_chem_grant_papers", 15, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCIntelMaxProcessTimeMilliseconds =
         CVarDef.Create("rmc.intel_max_process_time_milliseconds", 2f, CVar.REPLICATED | CVar.SERVER);
@@ -527,6 +527,9 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
     public static readonly CVarDef<bool> RMCMarineEquipmentPreviews =
         CVarDef.Create("rmc.marine_equipment_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCAllowFlashingLights =
+        CVarDef.Create("rmc.allow_flashing_lights", false, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);

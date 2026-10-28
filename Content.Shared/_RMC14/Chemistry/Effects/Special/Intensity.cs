@@ -1,4 +1,3 @@
-using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Special;
@@ -10,6 +9,11 @@ public sealed partial class Intensity : RMCChemicalEffect
         return "Controls the intensity of a chemical fire, using unknown means.";
     }
 
-    public float IntensityDelta => Potency;
-    public FixedPoint2 IntensityModDelta => 0.1f * Potency;
+    public override bool IsFireSupplement => true;
+
+    public override void ModifyFireStats(ref RMCFireStatsBuilder stats, float potency)
+    {
+        stats.Intensity += potency;
+        stats.IntensityMod += 0.1f * potency;
+    }
 }

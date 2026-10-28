@@ -17,7 +17,14 @@ public readonly record struct HealthScanState(
     string Pulse,
     Solution? Chemicals,
     bool Bleeding,
-    HealthScanDetailLevel DetailLevel);
+    HealthScanDetailLevel DetailLevel,
+    List<HealthScanDisease>? Diseases = null);
+
+[DataRecord, Serializable, NetSerializable]
+public readonly record struct HealthScanDisease(LocId Name, LocId Type, LocId Cure, int Stage, int MaxStage);
+
+[ByRefEvent]
+public readonly record struct HealthScanGetDiseasesEvent(List<HealthScanDisease> Diseases);
 
 /// <summary>
 ///     Thin BUI wrapper around <see cref="HealthScanState"/> for the health analyzer live-update path.

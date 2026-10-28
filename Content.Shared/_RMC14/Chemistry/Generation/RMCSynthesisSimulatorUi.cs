@@ -1,3 +1,4 @@
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Chemistry.Generation;
@@ -20,6 +21,8 @@ public enum RMCSynthesisSimulatorVisualState : byte
     Idle,
     Running,
     Ready,
+    Reading,
+    Printing,
 }
 
 [Serializable, NetSerializable]
@@ -45,9 +48,9 @@ public sealed class RMCSynthesisSimulatorSetModeBuiMsg : BoundUserInterfaceMessa
 [Serializable, NetSerializable]
 public sealed class RMCSynthesisSimulatorSelectTargetPropertyBuiMsg : BoundUserInterfaceMessage
 {
-    public string? PropertyId;
+    public ProtoId<ChemGeneratorPropertyPrototype>? PropertyId;
 
-    public RMCSynthesisSimulatorSelectTargetPropertyBuiMsg(string? propertyId)
+    public RMCSynthesisSimulatorSelectTargetPropertyBuiMsg(ProtoId<ChemGeneratorPropertyPrototype>? propertyId)
     {
         PropertyId = propertyId;
     }
@@ -56,9 +59,9 @@ public sealed class RMCSynthesisSimulatorSelectTargetPropertyBuiMsg : BoundUserI
 [Serializable, NetSerializable]
 public sealed class RMCSynthesisSimulatorSelectReferencePropertyBuiMsg : BoundUserInterfaceMessage
 {
-    public string? PropertyId;
+    public ProtoId<ChemGeneratorPropertyPrototype>? PropertyId;
 
-    public RMCSynthesisSimulatorSelectReferencePropertyBuiMsg(string? propertyId)
+    public RMCSynthesisSimulatorSelectReferencePropertyBuiMsg(ProtoId<ChemGeneratorPropertyPrototype>? propertyId)
     {
         PropertyId = propertyId;
     }
