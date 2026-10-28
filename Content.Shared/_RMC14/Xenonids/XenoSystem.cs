@@ -131,7 +131,6 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, CheckMeleeTargetEvent>(OnXenoCheckMeleeTarget);
-        SubscribeLocalEvent<XenoComponent, CheckMeleeAttackerEvent>(OnXenoCheckMeleeAttacker);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
         SubscribeLocalEvent<XenoComponent, MeleeAttackAttemptEvent>(OnXenoMeleeAttackAttempt);
         SubscribeLocalEvent<XenoComponent, XenoHealAttemptEvent>(OnHealAttempt);
@@ -229,22 +228,25 @@ public sealed partial class XenoSystem : EntitySystem
         if (args.Skip)
             return;
 
-        // Xenos can only attack and tackle damageable things,
+        // Xenos can never attack or tackle themselves
+        if (xeno.Owner == args.Target)
+        {
+            args.Skip = true;
+            return;
+        }
+
+        // Xenos can only attack damageable things,
         // unless they're rotary phones they want to silence.
-        if (!_damageableQuery.HasComp(args.Target)
+        if (!args.Disarm
+            && !_damageableQuery.HasComp(args.Target)
             && !_rotaryPhoneQuery.HasComp(args.Target))
         {
             args.Skip = true;
-        }
-    }
-
-    private void OnXenoCheckMeleeAttacker(Entity<XenoComponent> xeno, ref CheckMeleeAttackerEvent args)
-    {
-        if (args.Skip)
             return;
+        }
 
-        // xenos can never attack themselves
-        if (xeno.Owner == args.Attacker)
+        // Xenos can only tackle mobs
+        if (args.Disarm && !_mobStateQuery.HasComp(args.Target))
         {
             args.Skip = true;
             return;
@@ -253,9 +255,11 @@ public sealed partial class XenoSystem : EntitySystem
         if (args.Defer)
             return;
 
-        // xenos try to attack/tackle things they aren't allied to first
-        if (_hive.FromSameHiveOrAlly(xeno.Owner, args.Attacker))
+        // Xenos prefer to attack or tackle non-allies.
+        if (_hive.FromSameHiveOrAlly(xeno.Owner, args.Target))
+        {
             args.Defer = true;
+        }
     }
 
     private void OnXenoAttackAttempt(Entity<XenoComponent> xeno, ref AttackAttemptEvent args)

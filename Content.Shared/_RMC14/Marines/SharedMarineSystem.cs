@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -24,6 +25,7 @@ public abstract class SharedMarineSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<DamageableComponent> _damageableQuery;
+    private EntityQuery<MobStateComponent> _mobStateQuery;
 
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _attackedFactions = [];
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _attackerFactions = [];
@@ -33,10 +35,10 @@ public abstract class SharedMarineSystem : EntitySystem
         base.Initialize();
 
         _damageableQuery = GetEntityQuery<DamageableComponent>();
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
-        SubscribeLocalEvent<MarineComponent, GetMarineIconEvent>(OnMarineGetIcon);
         SubscribeLocalEvent<MarineComponent, CheckMeleeTargetEvent>(OnMarineCheckMeleeTarget);
-        SubscribeLocalEvent<MarineComponent, CheckMeleeAttackerEvent>(OnMarineCheckMeleeAttacker);
+        SubscribeLocalEvent<MarineComponent, GetMarineIconEvent>(OnMarineGetIcon);
 
         SubscribeLocalEvent<GrantMarineIconsComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantMarineIconsComponent, GotUnequippedEvent>(OnGotUnequipped);
@@ -76,21 +78,9 @@ public abstract class SharedMarineSystem : EntitySystem
         if (args.Skip)
             return;
 
-        // Marines can only attack and disarm damageable things
-        if (!_damageableQuery.HasComp(args.Target))
+        // If you're trying to attack yourself, allow if if you have damage yourself enabled, otherwise don't allow it at all.
+        if (marine.Owner == args.Target)
         {
-            args.Skip = true;
-        }
-    }
-
-    private void OnMarineCheckMeleeAttacker(Entity<MarineComponent> marine, ref CheckMeleeAttackerEvent args)
-    {
-        if (args.Skip)
-            return;
-
-        if (marine.Owner == args.Attacker)
-        {
-            // If you're trying to attack yourself, allow if if you have damage yourself enabled, otherwise don't allow it at all.
             if (!TryComp<ActorComponent>(marine, out var actor)
                 || !_netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
             {
@@ -100,12 +90,27 @@ public abstract class SharedMarineSystem : EntitySystem
             return;
         }
 
+        // Marines can only attack damageable things
+        if (!args.Disarm && !_damageableQuery.HasComp(args.Target))
+        {
+            args.Skip = true;
+            return;
+        }
+
+        // Marines can only disarm mobs
+        if (args.Disarm && !_mobStateQuery.HasComp(args.Target))
+        {
+            args.Skip = true;
+            return;
+        }
+
         if (args.Defer)
             return;
 
-        // Defer attacks against entities that share an IFF faction with you
-        if (_gunIFF.TryGetFactions(args.Attacker, _attackerFactions)
-            && _gunIFF.TryGetFactions(marine.Owner, _attackedFactions)
+        // Marines prefer not to attack entities they share an IFF faction with
+        if (!args.Disarm
+            && _gunIFF.TryGetFactions(args.Target, _attackedFactions)
+            && _gunIFF.TryGetFactions(marine.Owner, _attackerFactions)
             && _attackerFactions.Overlaps(_attackedFactions))
         {
             args.Defer = true;
