@@ -18,7 +18,7 @@ public sealed partial class RMCPlantAnalyzerChemicalRow : BoxContainer
     public void SetChemical(RMCPlantAnalyzerChemical chem)
     {
         FlaskIcon.ModulateSelfOverride = chem.Color.WithAlpha(1f);
-        AmountLabel.Text = chem.Min == chem.Max ? $"{chem.Min}u" : $"{chem.Min}–{chem.Max}u";
+        AmountLabel.Text = $"{chem.Amount}u";
         NameLabel.Text = chem.Name;
     }
 }
