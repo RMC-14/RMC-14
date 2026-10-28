@@ -1,3 +1,5 @@
+using Content.Shared.Chemistry.Reagent;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Botany;
@@ -9,4 +11,4 @@ public enum RMCPlantAnalyzerUiKey : byte
 }
 
 [Serializable, NetSerializable]
-public readonly record struct RMCPlantAnalyzerChemical(string ReagentId, string Name, Color Color, int Min, int Max);
+public readonly record struct RMCPlantAnalyzerChemical(ProtoId<ReagentPrototype> ReagentId, string Name, Color Color, int Amount);

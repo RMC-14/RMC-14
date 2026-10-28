@@ -7,7 +7,4 @@ public sealed partial class RMCPlantTraitBioluminescentComponent : RMCPlantTrait
 {
     [DataField, AutoNetworkedField]
     public Color Color = Color.White;
-
-    [DataField, AutoNetworkedField]
-    public float Radius = 2f;
 }

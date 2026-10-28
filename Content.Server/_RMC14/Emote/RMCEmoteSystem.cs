@@ -43,7 +43,7 @@ public sealed class RMCEmoteSystem : SharedRMCEmoteSystem
             return;
         }
 
-        recently.Emotes[emote] = time + cooldown ?? recently.Cooldown;
+        recently.Emotes[emote] = time + (cooldown ?? recently.Cooldown);
         _chat.TryEmoteWithChat(
             source,
             emote,

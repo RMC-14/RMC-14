@@ -54,6 +54,9 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
             return true;
         }
 
+        if (comp.Age < growth.Maturation)
+            _plantTray.SetLastProduce((plant.Owner, growth), comp.Age);
+
         if (TryComp(plant.Owner, out RMCPlantHarvestComponent? harvest) && harvest.ProductPrototypes.Count > 0)
         {
             if (comp.Age > growth.Production && comp.Age - growth.LastProduce > growth.Production && !comp.Harvest)
@@ -94,7 +97,7 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
     /// </summary>
     public void ResetMetabolismAdjust(Entity<RMCPlantComponent> plant)
     {
-        _plantTray.SetMetabolismAdjust((plant.Owner, plant.Comp), 0f);
+        _plantTray.SetMetabolismAdjust((plant.Owner, plant.Comp), TimeSpan.Zero);
     }
 
     public void CheckLevelSanity(Entity<RMCPlantComponent, RMCPlantGrowthComponent> plant)

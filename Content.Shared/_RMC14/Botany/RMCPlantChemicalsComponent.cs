@@ -13,12 +13,6 @@ public partial struct SeedChemQuantity
     [DataField]
     public int Min;
 
-    /// <summary>
-    /// Max amount of chemical that can be produced after taking plant potency into account.
-    /// </summary>
-    [DataField]
-    public int Max;
-
     [DataField]
     public int PotencyDivisor;
 

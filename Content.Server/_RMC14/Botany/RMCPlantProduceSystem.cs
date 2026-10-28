@@ -25,6 +25,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly RMCPlantSeedSystem _plantSeed = default!;
+    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
@@ -113,6 +114,13 @@ public sealed class RMCPlantProduceSystem : EntitySystem
 
             ProduceGrown(entity, produce);
 
+            if (HasComp<RMCPlantTraitBioluminescentComponent>(entity))
+            {
+                var light = _pointLight.EnsureLight(entity);
+                _pointLight.SetRadius(entity, 1f, light);
+                _pointLight.SetEnabled(entity, true, light);
+            }
+
             _appearance.SetData(entity, RMCProduceVisuals.Potency, chemicals.Potency);
             if (chemicals.ProductColor is { } productColor)
                 _appearance.SetData(entity, RMCProduceVisuals.Color, productColor);
@@ -149,7 +157,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         if (!TryComp<RMCPlantChemicalsComponent>(uid, out var chemicals))
             return;
 
-        var maxProduceVolume = FixedPoint2.New(60);
+        var maxProduceVolume = FixedPoint2.New(50);
         solutionContainer.RemoveAllSolution();
         solutionContainer.MaxVolume = maxProduceVolume;
         foreach (var (chem, quantity) in chemicals.Chemicals)
@@ -158,10 +166,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
             if (available <= FixedPoint2.Zero)
                 break;
 
-            var amount = FixedPoint2.New(quantity.Min);
-            if (quantity.PotencyDivisor > 0 && chemicals.Potency > 0)
-                amount += FixedPoint2.New(chemicals.Potency / quantity.PotencyDivisor);
-            amount = FixedPoint2.New(MathHelper.Clamp(amount.Float(), quantity.Min, quantity.Max));
+            var amount = FixedPoint2.New(RMCPlantSeedSystem.GetChemicalAmount(quantity, chemicals.Potency));
             if (amount > available)
                 amount = available;
             solutionContainer.AddReagent(chem, amount);

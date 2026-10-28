@@ -1,7 +1,6 @@
-using Content.Server.Power.EntitySystems;
 using Content.Shared._RMC14.Armor.Plates;
 using Content.Shared._RMC14.Xenonids.Biomass;
-using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
@@ -14,21 +13,22 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCBiomassAnalyzerDataSystem _biomass = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, InteractUsingEvent>(OnInteractUsing, before: [typeof(ItemSlotsSystem)]);
+        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, BeforeActivatableUIOpenEvent>(OnBeforeUIOpen);
-        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, EntInsertedIntoContainerMessage>(OnOrganInserted);
         SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, EntRemovedFromContainerMessage>(OnOrganRemoved);
 
         Subs.BuiEvents<RMCBiomassAnalyzerMachineComponent>(RMCBiomassAnalyzerUi.Key,
             subs =>
             {
                 subs.Event<RMCBiomassAnalyzerEjectOrganBuiMsg>(OnEjectOrganMsg);
+                subs.Event<RMCBiomassAnalyzerProcessOrganBuiMsg>(OnProcessOrganMsg);
                 subs.Event<RMCBiomassAnalyzerToggleAutoProcessBuiMsg>(OnToggleAutoProcessMsg);
                 subs.Event<RMCBiomassAnalyzerEnqueuePrintBuiMsg>(OnEnqueuePrintMsg);
                 subs.Event<RMCBiomassAnalyzerToggleQueueBuiMsg>(OnToggleQueueMsg);
@@ -51,16 +51,15 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
         if (!isPlate && !isOrgan)
             return;
 
-        if (!this.IsPowered(ent, EntityManager))
+        args.Handled = true;
+        if (!IsMachinePowered(ent))
         {
             _popup.PopupCursor("This machine has no power!", args.User);
-            args.Handled = true;
             return;
         }
 
         if (isPlate)
         {
-            args.Handled = true;
             _biomass.AddPoints(recyclable!.RecyclableValue);
             _popup.PopupCursor($"You recycle the plate for {recyclable.RecyclableValue} biomass points.", args.User);
             _audio.PlayPvs(ent.Comp.NotifySound, ent);
@@ -68,51 +67,88 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
             return;
         }
 
-        if (_itemSlots.GetItemOrNull(ent, ent.Comp.OrganSlotId) != null)
-        {
-            _popup.PopupCursor("The analyzer's receptacle is already occupied!", args.User);
-            args.Handled = true;
-        }
+        TryQueueOrgan(ent, args.Used, args.User);
     }
 
-    private void OnOrganInserted(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void TryQueueOrgan(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid organ, EntityUid user)
     {
-        if (args.Container.ID != ent.Comp.OrganSlotId)
+        if (ent.Comp.Queue.Count >= ent.Comp.MaxQueueLength)
+        {
+            _popup.PopupCursor("The analyzer's queue is full!", user);
+            return;
+        }
+
+        var container = _container.EnsureContainer<Container>(ent, ent.Comp.OrganContainerId);
+        if (!_hands.TryDropIntoContainer(user, organ, container))
             return;
 
+        ent.Comp.Queue.Add(new RMCBiomassQueueJob(null, GetNetEntity(organ)));
+        if (ent.Comp.AutoProcessOrgan && !ent.Comp.QueueProcessing)
+        {
+            ent.Comp.QueueProcessing = true;
+            ent.Comp.NextQueueItemAt = null;
+        }
+
         Dirty(ent);
-        if (ent.Comp.AutoProcessOrgan)
-            TryStartProcessing(ent, null);
+        _popup.PopupCursor("You add the specimen to the analyzer's queue.", user);
+        _audio.PlayPvs(ent.Comp.InsertSound, ent);
     }
 
     private void OnOrganRemoved(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID == ent.Comp.OrganSlotId)
-            Dirty(ent);
+        if (args.Container.ID != ent.Comp.OrganContainerId)
+            return;
+
+        RemoveOrganJob(ent, args.Entity);
+    }
+
+    private void RemoveOrganJob(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid organ)
+    {
+        var netOrgan = GetNetEntity(organ);
+        if (ent.Comp.Queue.RemoveAll(job => job.Organ == netOrgan) == 0)
+            return;
+
+        if (ent.Comp.Queue.Count == 0)
+            ent.Comp.QueueProcessing = false;
+
+        Dirty(ent);
+    }
+
+    private void EjectOrgan(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid organ, EntityUid user)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.OrganContainerId, out var container) ||
+            !_container.Remove(organ, container))
+        {
+            return;
+        }
+
+        _hands.PickupOrDrop(user, organ);
+        _popup.PopupEntity("You eject the specimen from the analyzer.", ent, user);
+        _audio.PlayPvs(ent.Comp.EjectSound, ent);
     }
 
     private void OnEjectOrganMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerEjectOrganBuiMsg args)
     {
-        if (!_itemSlots.TryGetSlot(ent, ent.Comp.OrganSlotId, out var slot) || slot.Item == null)
-            return;
+        if (GetFirstQueuedOrgan(ent) is { } organ)
+            EjectOrgan(ent, organ, args.Actor);
+    }
 
+    private void OnProcessOrganMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerProcessOrganBuiMsg args)
+    {
         if (ent.Comp.PrintingUntil != null)
         {
             _popup.PopupEntity("The analyzer is busy!", ent, args.Actor);
             return;
         }
 
-        if (_itemSlots.TryEjectToHands(ent, slot, args.Actor))
-            _popup.PopupEntity("You eject the specimen from the analyzer.", ent, args.Actor);
+        if (GetFirstQueuedOrgan(ent) is { } organ)
+            TryStartProcessing(ent, organ, args.Actor);
     }
 
     private void OnToggleAutoProcessMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerToggleAutoProcessBuiMsg args)
     {
         ent.Comp.AutoProcessOrgan = !ent.Comp.AutoProcessOrgan;
         Dirty(ent);
-
-        if (ent.Comp.AutoProcessOrgan)
-            TryStartProcessing(ent, args.Actor);
     }
 
     private void OnEnqueuePrintMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerEnqueuePrintBuiMsg args)
@@ -132,13 +168,13 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
         var added = 0;
         for (var i = 0; i < args.Amount; i++)
         {
-            if (ent.Comp.PrintQueue.Count >= ent.Comp.MaxQueueLength)
+            if (ent.Comp.Queue.Count >= ent.Comp.MaxQueueLength)
             {
-                _popup.PopupEntity("The analyzer's print queue is full!", ent, args.Actor);
+                _popup.PopupEntity("The analyzer's queue is full!", ent, args.Actor);
                 break;
             }
 
-            ent.Comp.PrintQueue.Add(args.UpgradeId);
+            ent.Comp.Queue.Add(new RMCBiomassQueueJob(args.UpgradeId, null));
             added++;
         }
 
@@ -156,6 +192,15 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
 
     private void OnToggleQueueMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerToggleQueueBuiMsg args)
     {
+        if (!ent.Comp.QueueProcessing && ent.Comp.Queue.Count == 0)
+            return;
+
+        if (!ent.Comp.QueueProcessing && !IsMachinePowered(ent))
+        {
+            _popup.PopupEntity("This machine has no power!", ent, args.Actor);
+            return;
+        }
+
         ent.Comp.QueueProcessing = !ent.Comp.QueueProcessing;
         if (ent.Comp.QueueProcessing)
             ent.Comp.NextQueueItemAt = null;
@@ -165,27 +210,36 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
 
     private void OnRemoveFromQueueMsg(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassAnalyzerRemoveFromQueueBuiMsg args)
     {
-        if (args.Index < 0 || args.Index >= ent.Comp.PrintQueue.Count)
+        if (args.Index < 0 || args.Index >= ent.Comp.Queue.Count)
             return;
 
-        ent.Comp.PrintQueue.RemoveAt(args.Index);
+        if (ent.Comp.Queue[args.Index].Organ is { } netOrgan)
+        {
+            if (TryGetEntity(netOrgan, out var organ))
+                EjectOrgan(ent, organ.Value, args.Actor);
+
+            return;
+        }
+
+        ent.Comp.Queue.RemoveAt(args.Index);
+        if (ent.Comp.Queue.Count == 0)
+            ent.Comp.QueueProcessing = false;
+
         Dirty(ent);
     }
 
-    private bool TryStartProcessing(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid? actor)
+    private bool TryStartProcessing(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid organ, EntityUid? actor)
     {
-        if (ent.Comp.PrintingUntil != null)
+        if (ent.Comp.PrintingUntil != null || !IsMachinePowered(ent))
             return false;
 
-        if (_itemSlots.GetItemOrNull(ent, ent.Comp.OrganSlotId) is not { } organ ||
-            !TryComp(organ, out RMCBiomassOrganComponent? organComp))
-        {
+        if (!TryComp(organ, out RMCBiomassOrganComponent? organComp))
             return false;
-        }
 
+        RemoveOrganJob(ent, organ);
         ent.Comp.ProcessingValue = organComp.Value;
         QueueDel(organ);
-        StartPrintingAnimation(ent);
+        StartPrintingAnimation(ent, ent.Comp.PrintingDuration);
 
         var message = $"The analyzer processes the specimen, extracting {organComp.Value} biomass points.";
         if (actor is { } user)
@@ -199,27 +253,42 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
 
     private void FinishProcessingOrgan(Entity<RMCBiomassAnalyzerMachineComponent> ent)
     {
-        if (ent.Comp.ProcessingValue > 0)
-        {
-            _biomass.AddPoints(ent.Comp.ProcessingValue);
-            ent.Comp.ProcessingValue = 0;
-            Dirty(ent);
-        }
+        if (ent.Comp.ProcessingValue <= 0)
+            return;
 
-        if (ent.Comp.AutoProcessOrgan)
-            TryStartProcessing(ent, null);
+        _biomass.AddPoints(ent.Comp.ProcessingValue);
+        ent.Comp.ProcessingValue = 0;
+        Dirty(ent);
     }
 
     private void ProcessNextQueueItem(Entity<RMCBiomassAnalyzerMachineComponent> ent)
     {
-        if (ent.Comp.PrintQueue.Count == 0)
+        if (ent.Comp.Queue.Count == 0)
         {
             ent.Comp.QueueProcessing = false;
             Dirty(ent);
             return;
         }
 
-        var upgradeId = ent.Comp.PrintQueue[0];
+        var job = ent.Comp.Queue[0];
+        if (job.Organ is { } netOrgan)
+        {
+            if (!TryGetEntity(netOrgan, out var organ) || !TryStartProcessing(ent, organ.Value, null))
+            {
+                ent.Comp.Queue.RemoveAt(0);
+                Dirty(ent);
+            }
+
+            return;
+        }
+
+        if (job.Upgrade is not { } upgradeId)
+        {
+            ent.Comp.Queue.RemoveAt(0);
+            Dirty(ent);
+            return;
+        }
+
         var spawnAt = Transform(ent.Owner).Coordinates;
         if (!_biomass.TryPurchaseUpgrade(upgradeId, spawnAt, out _))
         {
@@ -229,13 +298,13 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
             return;
         }
 
-        ent.Comp.PrintQueue.RemoveAt(0);
+        ent.Comp.Queue.RemoveAt(0);
         ent.Comp.NextQueueItemAt = Timing.CurTime + ent.Comp.QueuePrintDelay;
 
-        if (ent.Comp.PrintQueue.Count == 0)
+        if (ent.Comp.Queue.Count == 0)
             ent.Comp.QueueProcessing = false;
 
-        Dirty(ent);
+        StartPrintingAnimation(ent, ent.Comp.QueuePrintDelay);
         _audio.PlayPvs(ent.Comp.NotifySound, ent);
     }
 
@@ -245,6 +314,22 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
         while (query.MoveNext(out var uid, out var comp))
         {
             var ent = (Entity<RMCBiomassAnalyzerMachineComponent>) (uid, comp);
+            UpdateAppearance(ent);
+
+            if (!IsMachinePowered(uid))
+            {
+                if (comp.PrintingUntil != null)
+                    comp.PrintingUntil += TimeSpan.FromSeconds(frameTime);
+
+                if (comp.QueueProcessing)
+                {
+                    comp.QueueProcessing = false;
+                    Dirty(uid, comp);
+                    _popup.PopupEntity("The analyzer loses power, halting the queue!", uid, PopupType.SmallCaution);
+                }
+
+                continue;
+            }
 
             if (comp.PrintingUntil is { } printingUntil && Timing.CurTime >= printingUntil)
             {
@@ -254,7 +339,7 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
                 FinishProcessingOrgan(ent);
             }
 
-            if (comp.QueueProcessing && comp.PrintQueue.Count > 0 &&
+            if (comp.PrintingUntil == null && comp.QueueProcessing && comp.Queue.Count > 0 &&
                 (comp.NextQueueItemAt is not { } nextAt || Timing.CurTime >= nextAt))
             {
                 ProcessNextQueueItem(ent);

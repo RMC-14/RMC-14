@@ -5,10 +5,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Chemistry.Disabilities;
 
-/// <summary>
-///     cm13 handle_disabilities(): NERVOUS mobs have a prob(10) chance to stutter roughly every
-///     SSmobs tick (2 seconds).
-/// </summary>
 public sealed class RMCNervousSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;

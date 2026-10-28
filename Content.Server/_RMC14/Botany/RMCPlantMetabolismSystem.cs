@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Random;
 
@@ -62,11 +63,20 @@ public sealed class RMCPlantMetabolismSystem : EntitySystem
         if (plant == null || solution.Volume <= 0)
             return;
 
-        var amt = FixedPoint2.New(1);
-        foreach (var entry in _solutionContainer.RemoveEachReagent(tray.SoilSolution.Value, amt))
+        var amt = FixedPoint2.Min(solution.Volume, _random.Next(3, 7));
+        foreach (var entry in _solutionContainer.SplitSolution(tray.SoilSolution.Value, amt))
         {
-            if (_rmcReagent.TryIndex(entry.Reagent.Prototype, out var reagentProto))
-                reagentProto.ReactionPlant(plant.Value, entry, solution);
+            if (!_rmcReagent.TryIndex(entry.Reagent.Prototype, out var reagentProto))
+                continue;
+
+            reagentProto.ReactionPlant(plant.Value, entry, solution);
+
+            var args = new EntityEffectReagentArgs(plant.Value, EntityManager, null, solution, entry.Quantity, reagentProto, null, 1f);
+            foreach (var property in _rmcReagent.GetProperties(reagentProto.ID))
+            {
+                if (property.ShouldApply(args, _random))
+                    property.Effect(args);
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Content.Server.Fluids.EntitySystems;
 /// </summary>
 public sealed class SmokeSystem : EntitySystem
 {
-    // RMC14 - smoke render at alpha 100/255 and fade to 0 over the final 20% of their lifetime.
+    // RMC14 - smoke render at alpha 100/255 & fade to 0 over final 20%
     private const float SmokeAlpha = 100f / 255f;
     private const float FadeFraction = 0.2f;
     private static readonly TimeSpan FadeUpdateInterval = TimeSpan.FromSeconds(0.25);
@@ -85,7 +85,7 @@ public sealed class SmokeSystem : EntitySystem
             SmokeReact(uid, smoke.SmokeEntity);
         }
 
-        // RMC14 - fade puffs out over the final 20% of their lifetime.
+        // RMC14 - fade puffs out over final 20% of lifetime.
         if (curTime < _nextFadeUpdate)
             return;
 
@@ -317,7 +317,6 @@ public sealed class SmokeSystem : EntitySystem
 
         // RMC14 start
         //breathing in chem smoke transfers up to 10 units total via reagents.copy_to(src, 10), split proportionally across whatever
-        // reagets the smoke holds not divided by how many distinct reagents are present.
         var cloneSolution = solution.Clone();
         var availableTransfer = FixedPoint2.Min(cloneSolution.Volume, 10);
         var transferAmount = FixedPoint2.Min(availableTransfer, chemSolution.AvailableVolume);

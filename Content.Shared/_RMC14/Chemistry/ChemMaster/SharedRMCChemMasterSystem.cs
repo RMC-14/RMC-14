@@ -430,10 +430,10 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             if (content.Quantity <= FixedPoint2.Zero)
                 continue;
 
-            var contentProto = _reagent.Index(content.Reagent.Prototype);
-            if (!Intravenous.IsNotIngestible(contentProto))
+            if (!_reagent.HasProperty<Intravenous>(content.Reagent.Prototype))
                 continue;
 
+            var contentProto = _reagent.Index(content.Reagent.Prototype);
             var notIngestibleMsg = Loc.GetString("rmc-chem-master-not-ingestible", ("reagent", contentProto.LocalizedName));
             _popup.PopupClient(notIngestibleMsg, args.Actor, PopupType.MediumCaution);
             return;

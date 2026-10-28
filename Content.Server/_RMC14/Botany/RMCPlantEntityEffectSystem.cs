@@ -62,12 +62,17 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
         return true;
     }
 
+    private static float PerUnit(EntityEffectBaseArgs args, float amount)
+    {
+        return args is EntityEffectReagentArgs reagentArgs ? amount * (float) reagentArgs.Quantity : amount;
+    }
+
     private void OnExecutePlantAdjustHealth(ref ExecuteEntityEffectEvent<PlantAdjustHealth> args)
     {
         if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
             return;
 
-        _plantTray.AdjustHealth((args.Args.TargetEntity, plantComp, null), args.Effect.Amount);
+        _plantTray.AdjustHealth((args.Args.TargetEntity, plantComp, null), PerUnit(args.Args, args.Effect.Amount));
 
         if (TryGetTray(plantComp, out var trayUid, out var tray))
             _plantTray.CheckHealth(trayUid, tray, args.Args.TargetEntity);
@@ -78,7 +83,7 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
         if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
             return;
 
-        _plantTray.AdjustMutationLevel((args.Args.TargetEntity, plantComp), args.Effect.Amount * plantComp.MutationMod);
+        _plantTray.AdjustMutationLevel((args.Args.TargetEntity, plantComp), PerUnit(args.Args, args.Effect.Amount) * plantComp.MutationMod);
     }
 
     private void OnExecutePlantAdjustMutationMod(ref ExecuteEntityEffectEvent<PlantAdjustMutationMod> args)
@@ -86,7 +91,7 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
         if (!CanMetabolizePlant(args.Args.TargetEntity, out var plantComp))
             return;
 
-        _plantTray.AdjustMutationMod((args.Args.TargetEntity, plantComp), args.Effect.Amount);
+        _plantTray.AdjustMutationMod((args.Args.TargetEntity, plantComp), PerUnit(args.Args, args.Effect.Amount));
     }
 
     private void OnExecutePlantAdjustNutrition(ref ExecuteEntityEffectEvent<PlantAdjustNutrition> args)
@@ -95,7 +100,7 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
             return;
 
         if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantTray.AdjustNutritionLevel((trayUid, tray), args.Effect.Amount);
+            _plantTray.AdjustNutritionLevel((trayUid, tray), PerUnit(args.Args, args.Effect.Amount));
     }
 
     private void OnExecutePlantAdjustPests(ref ExecuteEntityEffectEvent<PlantAdjustPests> args)
@@ -104,7 +109,7 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
             return;
 
         if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantTray.AdjustPestLevel((trayUid, tray), args.Effect.Amount);
+            _plantTray.AdjustPestLevel((trayUid, tray), PerUnit(args.Args, args.Effect.Amount));
     }
 
     private void OnExecutePlantAdjustPotency(ref ExecuteEntityEffectEvent<PlantAdjustPotency> args)
@@ -115,7 +120,7 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
         if (!TryComp(args.Args.TargetEntity, out RMCPlantChemicalsComponent? chemicals))
             return;
 
-        _plantTray.SetPotency((args.Args.TargetEntity, chemicals), Math.Max(chemicals.Potency + args.Effect.Amount, 1));
+        _plantTray.SetPotency((args.Args.TargetEntity, chemicals), Math.Max(chemicals.Potency + PerUnit(args.Args, args.Effect.Amount), 1));
     }
 
     private void OnExecutePlantAdjustToxins(ref ExecuteEntityEffectEvent<PlantAdjustToxins> args)
@@ -124,7 +129,7 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
             return;
 
         if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantTray.AdjustToxins((trayUid, tray), args.Effect.Amount);
+            _plantTray.AdjustToxins((trayUid, tray), PerUnit(args.Args, args.Effect.Amount));
     }
 
     private void OnExecutePlantAdjustWater(ref ExecuteEntityEffectEvent<PlantAdjustWater> args)
@@ -133,7 +138,7 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
             return;
 
         if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantTray.AdjustWaterLevel((trayUid, tray), args.Effect.Amount);
+            _plantTray.AdjustWaterLevel((trayUid, tray), PerUnit(args.Args, args.Effect.Amount));
     }
 
     private void OnExecutePlantAdjustWeeds(ref ExecuteEntityEffectEvent<PlantAdjustWeeds> args)
@@ -142,7 +147,7 @@ public sealed class RMCPlantEntityEffectSystem : EntitySystem
             return;
 
         if (TryGetTray(plantComp, out var trayUid, out var tray))
-            _plantTray.AdjustWeedLevel((trayUid, tray), args.Effect.Amount);
+            _plantTray.AdjustWeedLevel((trayUid, tray), PerUnit(args.Args, args.Effect.Amount));
     }
 
     private void OnExecutePlantAffectGrowth(ref ExecuteEntityEffectEvent<PlantAffectGrowth> args)

@@ -1,9 +1,11 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Botany;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
+[Access(typeof(RMCPlantAnalyzerSystem), Other = AccessPermissions.ReadExecute)]
 public sealed partial class RMCPlantAnalyzerComponent : Component
 {
     [DataField]
@@ -12,6 +14,19 @@ public sealed partial class RMCPlantAnalyzerComponent : Component
     [DataField]
     public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
 
+    [DataField]
+    public float SensitiveToleranceThreshold = 3f;
+
+    [DataField]
+    public float ResistantToleranceThreshold = 6f;
+
+    [DataField]
+    public float TrayLevelMax = 100f;
+
+    [DataField]
+    public float TrayHazardMax = 10f;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextUpdate;
 
     public EntityUid? User;

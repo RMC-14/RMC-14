@@ -19,7 +19,7 @@ public sealed partial class RMCPlantTrayComponent : Component
     /// Time between plant reagent consumption updates.
     /// </summary>
     [DataField]
-    public TimeSpan UpdateDelay = TimeSpan.FromSeconds(3);
+    public TimeSpan UpdateDelay = TimeSpan.FromSeconds(3.5);
 
     /// <summary>
     /// Time between plant growth updates.
@@ -37,7 +37,7 @@ public sealed partial class RMCPlantTrayComponent : Component
     public float WaterLevel = 100f;
 
     [DataField, AutoNetworkedField]
-    public float NutritionLevel = 10f;
+    public float NutritionLevel = 100f;
 
     [DataField, AutoNetworkedField]
     public float Toxins;

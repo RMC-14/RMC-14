@@ -3,18 +3,10 @@ using Content.Shared.Eye.Blinding.Systems;
 
 namespace Content.Shared._RMC14.Chemistry.Disabilities;
 
-/// <summary>
-///     Drives the shared <see cref="BlindableComponent"/> vision floor for the Blind and
-///     Nearsighted disabilities (cm13 prop_neutral.dm neuroinhibiting, prop_negative.dm oculotoxic).
-///     They're handled together because they compete for the same underlying floor - full
-///     blindness always wins over a nearsighted blur - rather than fighting over the field from two
-///     separate systems.
-/// </summary>
 public sealed class RMCVisionDisabilitySystem : EntitySystem
 {
     [Dependency] private readonly BlindableSystem _blinding = default!;
 
-    // cm13: nearsighted blur sits below the full-blindness threshold (BlindableComponent.MaxDamage)
     private const int NearsightedFloor = 4;
 
     public override void Initialize()
@@ -47,11 +39,6 @@ public sealed class RMCVisionDisabilitySystem : EntitySystem
         Apply(ent.Owner, blind: HasComp<RMCBlindDisabilityComponent>(ent.Owner), nearsighted: false);
     }
 
-    /// <summary>
-    ///     Recomputes the vision floor from explicit blind/nearsighted state rather than re-querying
-    ///     the component that's mid-Startup/Shutdown - HasComp on that component during its own
-    ///     lifecycle event isn't something to rely on, so the caller tells us what it's becoming.
-    /// </summary>
     private void Apply(EntityUid uid, bool blind, bool? nearsighted = null)
     {
         if (!TryComp<BlindableComponent>(uid, out var blindable))

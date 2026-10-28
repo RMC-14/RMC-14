@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Botany;
 using Content.Shared.Atmos;
 using Content.Shared.Random;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -18,6 +19,7 @@ public sealed class RMCPlantMutationSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly RMCPlantSeedSystem _plantSeed = default!;
     [Dependency] private readonly RMCPlantTraySystem _plantTray = default!;
 
     private static readonly Color[] BioluminescentColors =
@@ -93,7 +95,6 @@ public sealed class RMCPlantMutationSystem : EntitySystem
         {
             var targetProto = _robustRandom.Pick(mutation.MutationPrototypes);
             ChangeSpecies(plant, targetProto);
-            ResetController((plant, mutation));
             return;
         }
 
@@ -310,10 +311,6 @@ public sealed class RMCPlantMutationSystem : EntitySystem
     {
         var chemicals = plant.Comp;
 
-        // 60u chem cap - no mutations after
-        if (ChemOutputFull(chemicals))
-            return;
-
         if (chemicals.SpecialChemicals.Count > 0 && _robustRandom.Prob(0.4f))
         {
             var specialId = _robustRandom.Pick(chemicals.SpecialChemicals);
@@ -322,7 +319,6 @@ public sealed class RMCPlantMutationSystem : EntitySystem
                 chemicals.Chemicals[specialId] = new SeedChemQuantity
                 {
                     Min = 7,
-                    Max = 15,
                     PotencyDivisor = _robustRandom.Next(5, 9),
                     Inherent = false,
                 };
@@ -332,85 +328,68 @@ public sealed class RMCPlantMutationSystem : EntitySystem
             return;
         }
 
-        var fills = _prototype.Index(RandomPickBotanyReagent).Fills;
-        if (fills.Count == 0)
-            return;
-
-        var pick = _robustRandom.Pick(fills);
-        if (pick.Reagents.Count == 0)
-            return;
-
-        var chemicalId = _robustRandom.Pick(pick.Reagents);
-        var amount = _robustRandom.Next(1, (int)pick.Quantity + 1);
-
-        SeedChemQuantity seedChemQuantity;
-        if (chemicals.Chemicals.TryGetValue(chemicalId, out var existing))
-            seedChemQuantity = new SeedChemQuantity { Min = existing.Min, Max = existing.Max + amount, Inherent = existing.Inherent };
-        else
-            seedChemQuantity = new SeedChemQuantity { Min = 1, Max = 1 + amount, Inherent = false };
-
-        seedChemQuantity.PotencyDivisor = (int)Math.Ceiling(100.0 / seedChemQuantity.Max);
-        chemicals.Chemicals[chemicalId] = seedChemQuantity;
-        _plantTray.DirtyChemicals((plant.Owner, plant.Comp));
-    }
-
-    private static bool ChemOutputFull(RMCPlantChemicalsComponent chemicals)
-    {
-        var total = 0f;
-        foreach (var (_, q) in chemicals.Chemicals)
+        var (chemicalId, _) = _prototype.Index(RandomPickBotanyReagent).Pick(_robustRandom);
+        var added = chemicals.Chemicals.TryAdd(chemicalId, new SeedChemQuantity
         {
-            var amount = (float)q.Min;
-            if (q.PotencyDivisor > 0 && chemicals.Potency > 0)
-                amount += chemicals.Potency / q.PotencyDivisor;
-            total += Math.Clamp(amount, q.Min, q.Max);
-        }
+            Min = 1,
+            PotencyDivisor = _robustRandom.Next(1, 3),
+            Inherent = false,
+        });
 
-        return total >= 60f;
+        if (added)
+            _plantTray.DirtyChemicals((plant.Owner, plant.Comp));
     }
 
     private void ChangeSpecies(EntityUid plant, string targetProto)
     {
-        if (!_prototype.TryIndex<EntityPrototype>(targetProto, out var proto))
+        if (!_prototype.TryIndex<EntityPrototype>(targetProto, out var proto) ||
+            !TryComp(plant, out RMCPlantComponent? plantComp))
+        {
             return;
+        }
 
-        if (proto.TryGetComponent<RMCPlantComponent>(out var tempPlant, EntityManager.ComponentFactory) &&
-            TryComp(plant, out RMCPlantComponent? plantComp))
+        var oldMutation = CompOrNull<RMCPlantMutationComponent>(plant);
+        var slots = oldMutation != null ? new Dictionary<string, float>(oldMutation.Slots) : new Dictionary<string, float>();
+        var geneEditCount = oldMutation?.GeneEditCount ?? 0;
+        var oldChemicals = CompOrNull<RMCPlantChemicalsComponent>(plant);
+        var potencyCounter = oldChemicals?.PotencyCounter ?? 0f;
+        var chemAddCounter = oldChemicals?.ChemAddCounter ?? 0f;
+        var repeatHarvestCounter = CompOrNull<RMCPlantHarvestComponent>(plant)?.RepeatHarvestCounter ?? 0f;
+
+        _plantSeed.ApplyMutatedComponents(plant, _plantSeed.SnapshotPrototype(proto));
+
+        if (proto.TryGetComponent<RMCPlantComponent>(out var tempPlant, EntityManager.ComponentFactory))
             _plantTray.SetIdentity((plant, plantComp), tempPlant.Name, tempPlant.Noun, tempPlant.DisplayName, tempPlant.Mysterious);
 
-        if (proto.TryGetComponent<RMCPlantHarvestComponent>(out var tempHarvest, EntityManager.ComponentFactory) &&
-            TryComp(plant, out RMCPlantHarvestComponent? harvest))
-            _plantTray.SetHarvestProducts((plant, harvest), tempHarvest.PacketPrototype, new List<string>(tempHarvest.ProductPrototypes));
-
-        if (proto.TryGetComponent<RMCPlantGrowthComponent>(out var tempGrowth, EntityManager.ComponentFactory) &&
-            TryComp(plant, out RMCPlantGrowthComponent? growth))
-            _plantTray.SetGrowthStages((plant, growth), tempGrowth.GrowthStages);
-
-        if (proto.TryGetComponent<RMCPlantTraitsComponent>(out var tempTraits, EntityManager.ComponentFactory) &&
-            TryComp(plant, out RMCPlantTraitsComponent? traits))
-            _plantTray.SetTraitCosmetics((plant, traits), tempTraits.PlantRsi, tempTraits.PlantIconState, tempTraits.SplatPrototype);
-
-        if (proto.TryGetComponent<RMCPlantMutationComponent>(out var tempMutation, EntityManager.ComponentFactory) &&
-            TryComp(plant, out RMCPlantMutationComponent? mutation))
-            _plantTray.SetMutationPrototypes((plant, mutation), new List<string>(tempMutation.MutationPrototypes));
-
-        if (proto.TryGetComponent<RMCPlantChemicalsComponent>(out var tempChemicals, EntityManager.ComponentFactory) &&
-            TryComp(plant, out RMCPlantChemicalsComponent? chemicals))
+        if (TryComp(plant, out RMCPlantMutationComponent? mutation))
         {
-            chemicals.SpecialChemicals = new List<string>(tempChemicals.SpecialChemicals);
+            if (slots.GetValueOrDefault(Slot.MutateSpecies, 0f) > 0f)
+                slots[Slot.MutateSpecies] = 0f;
 
-            // Adding the new chemicals from the new species
-            foreach (var (chem, quantity) in tempChemicals.Chemicals)
-                chemicals.Chemicals.TryAdd(chem, quantity);
-
-            // Removing inherent chemicals from the old species. Leaving mutated/crossbred ones intact
-            foreach (var chem in chemicals.Chemicals.Keys.ToList())
-            {
-                if (!tempChemicals.Chemicals.ContainsKey(chem) && chemicals.Chemicals[chem].Inherent)
-                    chemicals.Chemicals.Remove(chem);
-            }
-
-            Dirty(plant, chemicals);
+            mutation.Slots = slots;
+            mutation.GeneEditCount = geneEditCount;
+            Dirty(plant, mutation);
         }
+
+        if (TryComp(plant, out RMCPlantChemicalsComponent? chemicals))
+        {
+            _plantTray.SetPotencyCounter((plant, chemicals), potencyCounter);
+            _plantTray.SetChemAddCounter((plant, chemicals), chemAddCounter);
+        }
+
+        if (TryComp(plant, out RMCPlantHarvestComponent? harvest))
+            _plantTray.SetRepeatHarvestCounter((plant, harvest), repeatHarvestCounter);
+
+        _plantTray.SetDead((plant, plantComp), false);
+        MutatePlant(plant, 1);
+
+        _plantTray.SetAge((plant, plantComp), 0);
+        _plantTray.SetHarvestReady((plant, plantComp), false);
+        if (TryComp(plant, out RMCPlantGrowthComponent? growth))
+            _plantTray.SetHealth((plant, plantComp), growth.Endurance);
+
+        if (plantComp.Tray is { } trayUid && TryComp(trayUid, out RMCPlantTrayComponent? tray))
+            _plantTray.SetWeedLevel((trayUid, tray), 0);
     }
 
     /// <summary>

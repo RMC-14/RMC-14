@@ -2,7 +2,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Botany;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class RMCPlantTraitFlowersComponent : RMCPlantTraitComponent
 {
     [DataField, AutoNetworkedField]

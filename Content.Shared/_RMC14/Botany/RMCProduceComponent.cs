@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Botany;
 public sealed partial class RMCProduceComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ProtoId<EntityPrototype>? PlantPrototype;
+    public EntProtoId? PlantPrototype;
 
     [DataField, AutoNetworkedField]
     public string Name = "";

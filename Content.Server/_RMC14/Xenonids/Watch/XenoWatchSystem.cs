@@ -1,11 +1,15 @@
 ﻿using Content.Server.Chat.Systems;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Chemistry.Buildup;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using static Content.Server.Chat.Systems.ChatSystem;
@@ -41,7 +45,49 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         SubscribeLocalEvent<XenoWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<XenoWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
 
+        SubscribeLocalEvent<RMCHivemindInterferenceComponent, ComponentStartup>(OnInterferenceStartup);
+
         SubscribeLocalEvent<ExpandICChatRecipientsEvent>(OnExpandRecipients);
+    }
+
+    private void OnInterferenceStartup(Entity<RMCHivemindInterferenceComponent> ent, ref ComponentStartup args)
+    {
+        if (TryComp(ent, out XenoWatchingComponent? watching) &&
+            watching.Watching != null &&
+            TryGetWatcherSession(ent, out var session))
+        {
+            Unwatch(ent.Owner, session);
+        }
+
+        if (!TryComp(ent, out XenoWatchedComponent? watched))
+            return;
+
+        foreach (var watcher in watched.Watching.ToArray())
+        {
+            if (TerminatingOrDeleted(watcher) || !TryGetWatcherSession(watcher, out var watcherSession))
+                continue;
+
+            _popup.PopupEntity(Loc.GetString("rmc-hivemind-interference-watch-target"), watcher, watcher, PopupType.MediumCaution);
+            Unwatch(watcher, watcherSession);
+        }
+    }
+
+    private bool TryGetWatcherSession(EntityUid watcher, [NotNullWhen(true)] out ICommonSession? session)
+    {
+        if (TryComp(watcher, out ActorComponent? actor))
+        {
+            session = actor.PlayerSession;
+            return true;
+        }
+
+        if (TryComp(watcher, out QueenEyeComponent? eye) && TryComp(eye.Queen, out ActorComponent? eyeActor))
+        {
+            session = eyeActor.PlayerSession;
+            return true;
+        }
+
+        session = null;
+        return false;
     }
 
     private void OnWatchedRemove<T>(Entity<XenoWatchedComponent> ent, ref T args)
@@ -106,6 +152,12 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         if (!HasQueenPopup(ent))
             return;
 
+        if (HasComp<RMCHivemindInterferenceComponent>(ent))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hivemind-interference-hive-status"), ent, ent, PopupType.MediumCaution);
+            return;
+        }
+
         _ui.OpenUi(ent.Owner, XenoWatchUIKey.Key, ent);
 
         var xenos = new List<Xeno>();
@@ -136,6 +188,18 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
         if (watcher.Owner == toWatch.Owner)
             return;
+
+        if (HasComp<RMCHivemindInterferenceComponent>(watcher))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hivemind-interference-watch-self"), watcher, watcher, PopupType.MediumCaution);
+            return;
+        }
+
+        if (HasComp<RMCHivemindInterferenceComponent>(toWatch))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hivemind-interference-watch-target"), watcher, watcher, PopupType.MediumCaution);
+            return;
+        }
 
         if (!_hive.FromSameHiveOrAlly((watcher, watcher.Comp1), toWatch))
             return;

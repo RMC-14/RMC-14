@@ -1,4 +1,5 @@
 using Content.Server.StatusEffectNew;
+using Content.Shared._RMC14.Drowsiness;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Drowsiness;
 using Content.Shared.StatusEffectNew;
@@ -32,6 +33,9 @@ public sealed class DrowsinessSystem : SharedDrowsinessSystem
         var query = EntityQueryEnumerator<DrowsinessStatusEffectComponent, StatusEffectComponent>();
         while (query.MoveNext(out var uid, out var drowsiness, out var statusEffect))
         {
+            if (HasComp<RMCDrowsinessStatusEffectComponent>(uid)) // RMC14
+                continue;
+
             if (_timing.CurTime < drowsiness.NextIncidentTime)
                 continue;
 

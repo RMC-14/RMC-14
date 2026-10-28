@@ -101,8 +101,7 @@ public sealed class RMCBiomassAnalyzerDataSystem : SharedRMCBiomassAnalyzerDataS
         analyzer.Comp.PurchaseCounts[id] = analyzer.Comp.PurchaseCounts.GetValueOrDefault(id) + 1;
         Dirty(analyzer);
 
-        if (upgrade.Comp.PrintedItem is { } printed)
-            Spawn(printed, spawnAt);
+        Spawn(upgrade.Comp.PrintedItem, spawnAt);
 
         return true;
     }

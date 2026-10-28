@@ -27,7 +27,7 @@ public sealed partial class RMCHandleVolatilesBehavior : IThresholdBehavior
             owner,
             solution,
             cause,
-            explosiveScale: fillFraction,
+            structuralExplosiveScale: fillFraction,
             triggerStructuralExplosive: true);
 
         system.PuddleSystem.TrySpillAt(coordinates, solution, out _);

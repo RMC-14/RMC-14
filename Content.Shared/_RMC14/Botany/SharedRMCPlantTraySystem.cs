@@ -9,7 +9,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Botany;
 
@@ -228,6 +227,24 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantComponent.Age));
     }
 
+    public void SetAge(Entity<RMCPlantComponent?> plant, int value)
+    {
+        if (!Resolve(plant.Owner, ref plant.Comp) || plant.Comp.Age == value)
+            return;
+
+        plant.Comp.Age = value;
+        DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantComponent.Age));
+    }
+
+    public void SetHealth(Entity<RMCPlantComponent?> plant, float value)
+    {
+        if (!Resolve(plant.Owner, ref plant.Comp) || plant.Comp.Health == value)
+            return;
+
+        plant.Comp.Health = value;
+        DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantComponent.Health));
+    }
+
     public void AdjustSkipAging(Entity<RMCPlantComponent?> plant, int amount)
     {
         if (!Resolve(plant.Owner, ref plant.Comp))
@@ -264,7 +281,7 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantComponent.YieldMod));
     }
 
-    public void SetMetabolismAdjust(Entity<RMCPlantComponent?> plant, float value)
+    public void SetMetabolismAdjust(Entity<RMCPlantComponent?> plant, TimeSpan value)
     {
         if (!Resolve(plant.Owner, ref plant.Comp))
             return;
@@ -402,17 +419,6 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantTraitsComponent.ToxinsTolerance));
     }
 
-    public void SetTraitCosmetics(Entity<RMCPlantTraitsComponent?> plant, ResPath plantRsi, string plantIconState, string? splatPrototype)
-    {
-        if (!Resolve(plant.Owner, ref plant.Comp))
-            return;
-
-        plant.Comp.PlantRsi = plantRsi;
-        plant.Comp.PlantIconState = plantIconState;
-        plant.Comp.SplatPrototype = splatPrototype;
-        Dirty(plant.Owner, plant.Comp);
-    }
-
     public void SetLifespan(Entity<RMCPlantGrowthComponent?> plant, float value)
     {
         if (!Resolve(plant.Owner, ref plant.Comp))
@@ -440,15 +446,6 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantGrowthComponent.LastProduce));
     }
 
-    public void SetGrowthStages(Entity<RMCPlantGrowthComponent?> plant, int value)
-    {
-        if (!Resolve(plant.Owner, ref plant.Comp))
-            return;
-
-        plant.Comp.GrowthStages = value;
-        DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantGrowthComponent.GrowthStages));
-    }
-
     public void SetSeedless(Entity<RMCPlantHarvestComponent?> plant, bool value)
     {
         if (!Resolve(plant.Owner, ref plant.Comp) || plant.Comp.Seedless == value)
@@ -467,16 +464,6 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantHarvestComponent.RepeatHarvestCounter));
     }
 
-    public void SetHarvestProducts(Entity<RMCPlantHarvestComponent?> plant, string packetPrototype, List<string> productPrototypes)
-    {
-        if (!Resolve(plant.Owner, ref plant.Comp))
-            return;
-
-        plant.Comp.PacketPrototype = packetPrototype;
-        plant.Comp.ProductPrototypes = productPrototypes;
-        Dirty(plant.Owner, plant.Comp);
-    }
-
     public void SetMutations(Entity<RMCPlantMutationComponent?> plant, List<RandomPlantMutation> value)
     {
         if (!Resolve(plant.Owner, ref plant.Comp))
@@ -484,15 +471,6 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
 
         plant.Comp.Mutations = value;
         DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantMutationComponent.Mutations));
-    }
-
-    public void SetMutationPrototypes(Entity<RMCPlantMutationComponent?> plant, List<string> value)
-    {
-        if (!Resolve(plant.Owner, ref plant.Comp))
-            return;
-
-        plant.Comp.MutationPrototypes = value;
-        DirtyField(plant.Owner, plant.Comp, nameof(RMCPlantMutationComponent.MutationPrototypes));
     }
 
     public void DirtyMutationSlots(Entity<RMCPlantMutationComponent?> plant)
@@ -669,7 +647,7 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
 
     public void CheckLevelSanity(EntityUid trayUid, RMCPlantTrayComponent tray)
     {
-        SetNutritionLevel((trayUid, tray), MathHelper.Clamp(tray.NutritionLevel, 0f, 10f));
+        SetNutritionLevel((trayUid, tray), MathHelper.Clamp(tray.NutritionLevel, 0f, 100f));
         SetWaterLevel((trayUid, tray), MathHelper.Clamp(tray.WaterLevel, 0f, 100f));
         SetPestLevel((trayUid, tray), MathHelper.Clamp(tray.PestLevel, 0f, 10f));
         SetWeedLevel((trayUid, tray), MathHelper.Clamp(tray.WeedLevel, 0f, 10f));
@@ -722,7 +700,7 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
             return;
 
         _appearance.SetData(trayUid, RMCPlantTrayVisuals.WaterLight, tray.WaterLevel <= 10, app);
-        _appearance.SetData(trayUid, RMCPlantTrayVisuals.NutritionLight, tray.NutritionLevel <= 2, app);
+        _appearance.SetData(trayUid, RMCPlantTrayVisuals.NutritionLight, tray.NutritionLevel <= 8, app);
         _appearance.SetData(trayUid, RMCPlantTrayVisuals.AlertLight,
             tray.WeedLevel >= 5 || tray.PestLevel >= 5 || tray.Toxins >= 5 || tray.ImproperHeat ||
             tray.ImproperPressure || tray.MissingGas > 0, app);
@@ -732,11 +710,12 @@ public abstract class SharedRMCPlantTraySystem : EntitySystem
 
     private void UpdateBioluminescence(EntityUid plant, bool enabled, RMCPlantTraitBioluminescentComponent? bioluminescent)
     {
-        if (enabled && bioluminescent != null)
+        var radius = MathF.Floor((CompOrNull<RMCPlantChemicalsComponent>(plant)?.Potency ?? 0f) / 10f);
+        if (enabled && bioluminescent != null && radius > 0f)
         {
             var light = _pointLight.EnsureLight(plant);
             _pointLight.SetColor(plant, bioluminescent.Color, light);
-            _pointLight.SetRadius(plant, bioluminescent.Radius, light);
+            _pointLight.SetRadius(plant, radius, light);
             _pointLight.SetEnergy(plant, 1f, light);
             _pointLight.SetEnabled(plant, true, light);
         }
