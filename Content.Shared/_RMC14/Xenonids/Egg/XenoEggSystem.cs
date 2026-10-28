@@ -796,18 +796,9 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnXenoEggReceivingMeleeAttackAttempt(Entity<XenoEggComponent> ent, ref CheckMeleeAttackerEvent args)
     {
-        // Eggs can't be tackled/disarmed
-        if (args.Disarm)
-        {
-            args.Skip = true;
-            return;
-        }
-
         // Unplanted eggs can't be damaged, but we can't cancel the attack because
         // we allow eggs to be picked up in combat mode.
-        // Additionally, defer attacking eggs of the same hive.
-        if (ent.Comp.State is XenoEggState.Item
-            || _hive.FromSameHiveOrAlly(ent.Owner, args.Attacker))
+        if (ent.Comp.State is XenoEggState.Item)
         {
             args.Defer = true;
         }

@@ -346,13 +346,6 @@ public sealed class SentrySystem : EntitySystem
 
     private void OnSentryReceivingMeleeAttackAttempt(Entity<SentryComponent> ent, ref CheckMeleeAttackerEvent args)
     {
-        // sentries can't be tackled/disarmed
-        if (args.Disarm)
-        {
-            args.Skip = true;
-            return;
-        }
-
         // item mode sentries can't be damaged, but we can't cancel the attack because
         // we allow sentries to be picked up in combat mode
         if (ent.Comp.Mode is SentryMode.Item)

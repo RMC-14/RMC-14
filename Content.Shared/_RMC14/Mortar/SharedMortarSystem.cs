@@ -109,13 +109,6 @@ public abstract class SharedMortarSystem : EntitySystem
 
     private void OnMortarReceivingMeleeAttackAttempt(Entity<MortarComponent> ent, ref CheckMeleeAttackerEvent args)
     {
-        // mortars can't be tackled/disarmed
-        if (args.Disarm)
-        {
-            args.Skip = true;
-            return;
-        }
-
         // undeployed mortars can't be damaged, but we can't cancel the attack because
         // we allow mortars to be picked up in combat mode
         if (ent.Comp.Deployed)
