@@ -1,12 +1,12 @@
 - type: job
   parent: CMSurvivorSecurity
-  id: CMSurvivorFiorinaWarden
+  id: RMCSurvivorFiorinaWarden
   name: cm-job-name-survivor-fiorina-warden
   description: cm-job-description-survivor
   playTimeTracker: RMCJobSurvivorCO
   startingGear: RMCGearSurvivorFiorinaWarden
   ranks:
-    RMCRankCMBWarden: []
+    RMCRankCMBMarshal: []
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: Fiorina Warden (Survivor Commander)
@@ -20,7 +20,7 @@
     - type: CommandAccent
     - type: InnateCommandSpeech
     - type: Skills
-      preset: RMCSkillPresetSurvivorFiorinaWarden
+      preset: RMCSkillPresetSurvivorMarshalCO
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -46,26 +46,22 @@
   parent: RMCGearSurvivorCMBDeputy
   id: RMCGearSurvivorFiorinaWarden
   equipment:
-    jumpsuit: CMJumpsuitWardenCorporateRSH9
-    outerClothing: RMCArmorPMCRiot
+    jumpsuit: RMCMarshalCMBUniform
+    belt: RMCBeltHolsterRevolverRSH9CustomFill
+    outerClothing: RMCArmorPMCRiotCMB
     head: ClothingHeadHatBeretWarden
     gloves: CMHandsBlackMarine
     shoes: RMCBootsPMCFilled
-    pocket2: RMCPouchMagazineLarge
+    pocket2: RMCPouchFirstAidInjectors
     eyes: RMCGlassesSecurityBlue
-  storage:
-    back:
-    - RMCSpeedLoaderRsh9
-    - RMCSpeedLoaderRsh9
-    - RMCSpeedLoaderRsh9
 
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorFiorinaWarden
-  name: survivor warden spawn point
+  name: survivor cmb warden spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorFiorinaWarden
+    job_id: RMCSurvivorFiorinaWarden
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
@@ -75,5 +71,5 @@
   parent: CMJobIconBase
   id: RMCJobIconFiorinaWarden
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
     state: cmb_ward

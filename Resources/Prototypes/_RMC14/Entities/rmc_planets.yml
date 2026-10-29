@@ -234,7 +234,7 @@
       scenarioProbability: 0.85
     survivorJobVariants:
       RMCSurvivorCommandingOfficer:
-      - CMSurvivorFiorinaWarden: 1
+      - RMCSurvivorFiorinaWarden: 1
       CMSurvivor:
       - CMSurvivor: -1
       - CMSurvivorISR: -1
@@ -258,6 +258,8 @@
         - CMSurvivorEngineer: 1
     survivorJobVariantScenarios:
       riot_in_progress: # Riot In Progress Riot Control team
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorFiorinaRiotInProgressCMBMarshal: 1
         CMSurvivorEngineer:
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician: 1
         CMSurvivorDoctor:
@@ -270,7 +272,6 @@
         CMSurvivorCorporate: CMSurvivor
         CMSurvivorScientist: CMSurvivorDoctor
         CMSurvivorSecurity: CMSurvivor
-        RMCSurvivorCommandingOfficer: CMSurvivor
 
 - type: entity
   id: RMCPlanetTrijent

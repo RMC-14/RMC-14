@@ -386,6 +386,10 @@ CMSurvivorFiorinaEngineer = Fiorina Engineer
 cm-job-name-survivor-fiorina-researcher = Fiorina Researcher
 CMSurvivorFiorinaResearcher = Fiorina Researcher
 
+cm-job-name-survivor-fiorina-warden = Fiorina Prison Warden
+CMSurvivorFiorinaWarden = Fiorina Warden
+cm-job-prefix-survivor-prison-warden = CMB PW
+
 cm-job-name-survivor-riot-officer = CMB Riot Control Officer
 CMSurvivorFiorinaRiotOfficer = CMB Riot Control Officer
 cm-job-prefix-survivor-riot-officer = CMB RCO
@@ -399,11 +403,17 @@ cm-job-prefix-survivor-fiorina-cmb-synth = CMB Syn
 cm-job-name-survivor-fiorina-cmb-riot-control-synth = CMB Riot Control Synthetic
 cm-job-prefix-survivor-fiorina-cmb-riot-control-synth = CMB RC Syn
 
-cm-job-name-survivor-fiorina-warden = Fiorina Prison Warden
-CMSurvivorFiorinaWarden = Fiorina Warden
-cm-job-prefix-survivor-prison-warden = CMB PW
-
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
+
+rmc-job-greeting-riot-in-progress-CMB-marshal = You are a CMB Marshal!
+
+  You are aware of the xenonid threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a CMB Marshal, overseeing a deployment as part of the Riot Control Unit of the Colony Marshal Bureau. The unit's dispatcher received a distress signal from the infamous Fiorina Orbital Penitentiary. You figured it was just another typical case of the prison dealing with a riot their understaffed security force couldn't handle, with more and more of its personnel getting dispatched elsewhere in the galaxy. This wasn't the first time Riot Control units were called in to assist, but unfortunately for you, this time it also wasn't the 'minor riot' you expected it to be. Loaded up with only beanbags and finding nobody to greet you on the LZ after being dropped off, the Team Leader led you towards the armory to speak to the Quartermaster, but only found corpses of both prisoners and security littered around on the way. Worried about armed prisoners, you were in the process of switching to lethals in the armory when some sort of huge alien jumped out from the shadows and snatched Jerry away while he was off praying. The thing dragged him off too fast to catch and his screams faded away down the halls, poor bastard. Now, you'll need to decide whether to look for more clues about what the hell happened here, hunt whatever's out there, or hold a position and hope someone else will respond to the distress signal before it's too late...
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 rmc-job-greeting-riot-in-progress-CMB-TL = You are a CMB Riot Control Team Leader!
 

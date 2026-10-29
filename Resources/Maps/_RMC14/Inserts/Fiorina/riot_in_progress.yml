@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/25/2026 04:04:24
-  entityCount: 549
+  time: 10/29/2026 19:42:03
+  entityCount: 550
 maps: []
 grids:
 - 1
@@ -2384,6 +2384,13 @@ entities:
     components:
     - type: Transform
       pos: 10.5,-5.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBMarshal
+  entities:
+  - uid: 550
+    components:
+    - type: Transform
+      pos: 11.5,0.5
       parent: 1
 - proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBOfficer
   entities:
