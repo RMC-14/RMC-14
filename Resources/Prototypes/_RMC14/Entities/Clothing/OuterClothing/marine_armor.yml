@@ -850,6 +850,9 @@
     components:
     - type: RMCImmuneToIgnition
       immuneToDirectHits: false
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
   - type: FirewalkArmor
     whitelist:
       components:

@@ -730,3 +730,24 @@
           Two: { state: dynamic_2 }
           Three: { state: dynamic_3 }
           Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireMolotovGreen
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: green_4
+  - type: PointLight
+    color: "#069420"
+  - type: RMCIgniteOnCollide
+    burnColor: "#00FF00"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: green_1 }
+          Two: { state: green_2 }
+          Three: { state: green_3 }
+          Four: { state: green_4 }

@@ -8,3 +8,5 @@ rmc-deaf-talk-others = Someone near talks but you cannot hear them.
 
 rmc-deaf-hear-self = You mutter something about... {$message}
 rmc-deaf-hear-others = ...You hear something about... {$message}
+
+rmc-deaf-radio-vibrate = [color=red]You feel your headset vibrate but can hear nothing from it![/color]

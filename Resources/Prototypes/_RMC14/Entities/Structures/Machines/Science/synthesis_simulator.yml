@@ -124,6 +124,8 @@
           Idle: { state: modifier }
           Running: { state: modifier_running }
           Ready: { state: modifier_ready }
+          Reading: { state: modifier_reading }
+          Printing: { state: modifier_printing }
   - type: ApcPowerReceiver
     powerLoad: 500
     needsPower: true

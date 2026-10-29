@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.Botany.Components;
 using Content.Shared._RMC14.Botany;
 using Content.Server.Materials.Components;
 using Content.Server.Power.EntitySystems;
@@ -28,11 +29,18 @@ public sealed class ProduceMaterialExtractorSystem : EntitySystem
         if (!this.IsPowered(ent, EntityManager))
             return;
 
-        if (!TryComp<RMCProduceComponent>(args.Used, out var produce))
+        // RMC14
+        string solutionName;
+        if (TryComp<RMCProduceComponent>(args.Used, out var rmcProduce))
+            solutionName = rmcProduce.SolutionName;
+        else if (TryComp<ProduceComponent>(args.Used, out var produce))
+            solutionName = produce.SolutionName;
+        else
             return;
 
-        if (!_solutionContainer.TryGetSolution(args.Used, produce.SolutionName, out var solution))
+        if (!_solutionContainer.TryGetSolution(args.Used, solutionName, out var solution))
             return;
+        // RMC14
 
         // Can produce even have fractional amounts? Does it matter if they do?
         // Questions man was never meant to answer.

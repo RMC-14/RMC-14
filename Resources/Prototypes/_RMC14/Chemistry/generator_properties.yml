@@ -69,7 +69,7 @@
 
 - type: chemGeneratorProperty
   id: Neuropathic
-  code: NPT
+  code: NPA
   effect: !type:Neuropathic {}
   description: "Activates the somatosensory system causing neuropathic pain all over the body. Unlike nociceptive pain, this is not caused to any tissue damage and is solely perceptive."
   category: Negative
@@ -303,6 +303,7 @@
   id: Unknown
   code: UNK
   effect: !type:Unknown {}
+  description: "The chemical has a unique property which can not be defined by the Synthesis Simulator. This property might no longer work if the chemical is modified."
   category: Neutral
   value: -1
   flags: [ Anomalous, Unadjustable, Disabled ]
@@ -769,7 +770,7 @@
   rarity: Rare
   value: 16
   maxLevel: 6
-  flags: [ Disabled ]
+  flags: [ Disabled, Anomalous ]
 
 - type: chemGeneratorProperty
   id: Encrypted
@@ -778,7 +779,7 @@
   description: "This extremely complex chemical structure contains a cipher that appears to be missing a few parts to complete the process."
   category: Positive
   value: 8
-  flags: [ Disabled ]
+  flags: [ Disabled, Anomalous ]
 
 - type: chemGeneratorProperty
   id: Nervestimulating
@@ -797,3 +798,124 @@
   category: Positive
   value: 1
   flags: [ Disabled ]
+
+# TODO RMC14: Remove / replace
+# - type: chemGeneratorProperty
+#   id: CipheringPredator
+#   code: PCI
+#   effect: !type:CipheringPredator {}
+#   description: "This extremely complex chemical structure represents some kind of biological cipher."
+#   category: Positive
+#   value: 16
+#   maxLevel: 6
+#   flags: [ Disabled, Anomalous ]
+
+- type: chemGeneratorProperty
+  id: Crossmetabolizing
+  code: XMB
+  effect: !type:Crossmetabolizing {}
+  description: "Can be metabolized in certain non-human species."
+  category: Neutral
+  value: 666
+  maxLevel: 2
+  flags: [ Disabled, Anomalous, Catalyst ]
+
+- type: chemGeneratorProperty
+  id: Curing
+  code: CUR
+  effect: !type:Curing {}
+  description: "Binds to and neutralizes specific microbiological organisms."
+  category: Positive
+  value: 666
+  maxLevel: 4
+  flags: [ Disabled, Anomalous ]
+
+- type: chemGeneratorProperty
+  id: DNADisintegrating
+  code: DDI
+  effect: !type:DNADisintegrating {}
+  description: "Immediately disintegrates the DNA of all organic cells it comes into contact with. This property is highly valued by WY."
+  category: Negative
+  value: 16
+  flags: [ Disabled, Anomalous ]
+
+- type: chemGeneratorProperty
+  id: Embryonic
+  code: MYO
+  effect: !type:Embryonic {}
+  description: "The chemical agent carries causes an infection of type REDACTED parasitic embryonic organism."
+  category: Negative
+  value: 666
+  flags: [ Disabled, Anomalous ]
+
+- type: chemGeneratorProperty
+  id: Encephalophrasive
+  code: ESP
+  effect: !type:Encephalophrasive {}
+  description: "Drastically increases the amplitude of Gamma and Beta brain waves, allowing the host to broadcast their mind."
+  category: Positive
+  value: 8
+  flags: [ Disabled ]
+
+- type: chemGeneratorProperty
+  id: Omnipotent
+  code: OMN
+  effect: !type:Omnipotent {}
+  description: "Fully revitalizes all bodily functions."
+  category: Positive
+  value: 666
+  flags: [ Disabled, Anomalous ]
+
+- type: chemGeneratorProperty
+  id: Organhealing
+  code: OHG
+  effect: !type:Organhealing {}
+  description: "Regenerates all types of cell membranes mending damage in all organs."
+  category: Positive
+  value: 8
+  flags: [ Disabled ]
+
+- type: chemGeneratorProperty
+  id: Ravening
+  code: RAV
+  effect: !type:Ravening {}
+  description: "The chemical agent carries the X-65 biological organism."
+  category: Negative
+  value: 666
+  flags: [ Disabled, Anomalous ]
+
+- type: chemGeneratorProperty
+  id: Transforming
+  code: HGN
+  effect: !type:Transforming {}
+  description: "The chemical agent carries REDACTED, altering the host psychologically and physically."
+  category: Negative
+  value: 666
+  flags: [ Disabled, Anomalous ]
+
+- type: chemGeneratorProperty
+  id: Radius
+  code: RAD
+  effect: !type:Radius {}
+  description: "Controls the radius of a fire, using unknown means."
+  category: Positive
+  value: 666
+  flags: [ Disabled, Unadjustable ]
+
+- type: chemGeneratorProperty
+  id: Intensity
+  code: INT
+  effect: !type:Intensity {}
+  description: "Controls the intensity of a fire, using unknown means."
+  category: Positive
+  value: 666
+  flags: [ Disabled, Unadjustable ]
+
+- type: chemGeneratorProperty
+  id: Duration
+  code: DUR
+  effect: !type:Duration {}
+  description: "Controls the duration of a fire, using unknown means."
+  category: Positive
+  value: 666
+  flags: [ Disabled, Unadjustable ]

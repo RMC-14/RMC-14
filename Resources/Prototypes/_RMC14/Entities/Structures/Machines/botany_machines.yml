@@ -24,16 +24,42 @@
         layer:
         - MachineLayer
   - type: LysisCentrifuge
+  - type: ItemSlots
+    slots:
+      centrifuge_disc:
+        name: Flora Data Disc
+        swap: false
+        insertSound: /Audio/Machines/terminal_insert_disc.ogg
+        ejectSound: /Audio/Machines/terminal_insert_disc.ogg
+        whitelist:
+          components:
+          - FloraDataDisc
+      centrifuge_seed:
+        name: Seed Packet
+        swap: false
+        insertSound: /Audio/Machines/id_insert.ogg
+        ejectSound: /Audio/Machines/id_insert.ogg
+        whitelist:
+          components:
+          - RMCPlantSeed
   - type: ContainerContainer
     containers:
       centrifuge_disc: !type:ContainerSlot
       centrifuge_seed: !type:ContainerSlot
   - type: ActivatableUI
     key: enum.LysisCentrifugeUiKey.Key
+  - type: ActivatableUIRequiresPower
   - type: UserInterface
     interfaces:
       enum.LysisCentrifugeUiKey.Key:
         type: LysisCentrifugeBui
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: ApcPowerReceiver
+    powerLoad: 200
+    needsPower: true
   - type: RMCPowerReceiver
     idleLoad: 5
     activeLoad: 200
@@ -68,6 +94,24 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: ItemSlots
+    slots:
+      gene_editor_disc:
+        name: Flora Data Disc
+        swap: false
+        insertSound: /Audio/Machines/terminal_insert_disc.ogg
+        ejectSound: /Audio/Machines/terminal_insert_disc.ogg
+        whitelist:
+          components:
+          - FloraDataDisc
+      gene_editor_seed:
+        name: Seed Packet
+        swap: false
+        insertSound: /Audio/Machines/id_insert.ogg
+        ejectSound: /Audio/Machines/id_insert.ogg
+        whitelist:
+          components:
+          - RMCPlantSeed
   - type: ContainerContainer
     containers:
       gene_editor_disc: !type:ContainerSlot
@@ -75,10 +119,18 @@
   - type: GeneEditor
   - type: ActivatableUI
     key: enum.GeneEditorUiKey.Key
+  - type: ActivatableUIRequiresPower
   - type: UserInterface
     interfaces:
       enum.GeneEditorUiKey.Key:
         type: GeneEditorBui
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: ApcPowerReceiver
+    powerLoad: 200
+    needsPower: true
   - type: RMCPowerReceiver
     idleLoad: 5
     activeLoad: 200
@@ -114,6 +166,9 @@
         layer:
         - MachineLayer
   - type: RMCSeedExtractor
+  - type: ApcPowerReceiver
+    powerLoad: 50
+    needsPower: true
   - type: RMCPowerReceiver
     idleLoad: 5
     activeLoad: 50

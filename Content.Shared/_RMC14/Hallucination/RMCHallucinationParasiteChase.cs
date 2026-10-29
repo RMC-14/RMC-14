@@ -12,10 +12,16 @@ public sealed class RMCHallucinationParasiteChase(
 {
     public RMCHallucinationParasitePhase Phase = RMCHallucinationParasitePhase.Running;
     public Vector2 Position = position;
-    public readonly TimeSpan GiveUpAt = giveUpAt;
+    public TimeSpan GiveUpAt = giveUpAt;
 
     private Vector2 _leapFrom;
     private TimeSpan _phaseStart;
+
+    public void Offset(TimeSpan by)
+    {
+        GiveUpAt += by;
+        _phaseStart += by;
+    }
 
     public bool Update(Vector2 target, TimeSpan time, float frameTime)
     {

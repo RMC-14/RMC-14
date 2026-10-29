@@ -13,6 +13,10 @@ rmc-health-analyzer-healthy = {$percent} healthy
 
 rmc-health-analyzer-unknown-reagents = [color=white][italic]Unknown reagents detected.[/italic][/color]
 
+rmc-health-analyzer-diseases = Diseases
+rmc-health-analyzer-disease-details = [bold]Type : {$type}, possible cure : {$cure}[/bold]
+rmc-health-analyzer-disease-stage = Stage:{$stage}/{$max}
+
 rmc-health-analyzer-advice-epinephrine = [color=#6bd43c][font="Emoji"]💉[/font][/color] Administer a single dose of epinephrine.
 rmc-health-analyzer-advice-defib = [color=yellow][font="Emoji"]⚡[/font][/color] Apply shock via defibrillator!
 rmc-health-analyzer-advice-defib-repeated = [color=yellow][font="Emoji"]⚡[/font][/color] Apply repeated shocks via defibrillator.

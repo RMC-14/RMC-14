@@ -303,7 +303,13 @@
   - type: ClothingGrantComponents
     components:
     - type: RMCImmuneToIgnition
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
     - type: RMCImmuneToFireTileDamage
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
   - type: Tag
     tags:
     - GasMask

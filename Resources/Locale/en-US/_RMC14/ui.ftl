@@ -113,9 +113,10 @@ rmc-tacmap-alert-no-area = Unknown area
 
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
 
+rmc-ui-options-allow-flashing-lights = Allow flashing lights
+
 rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads
 
 # Dialog input
 rmc-dialog-input-placeholder-default = Enter text
 rmc-dialog-input-placeholder-smart-check = More than 3 consecutive spaces will be trimmed
-rmc-dialog-countdown = Time left: { $seconds }s

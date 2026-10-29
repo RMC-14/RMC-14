@@ -334,7 +334,7 @@
 
 - type: entity
   parent: ClothingEyesBase
-  id: RMCGlassesMarineRpg # TODO make this actually prescription
+  id: RMCGlassesMarineRpg
   name: marine RPG glasses
   description: The Corps may call them Regulation Prescription Glasses but you know them as Rut Prevention Glasses.
   components:
@@ -619,9 +619,13 @@
 
 - type: entity
   parent: RMCGogglesBallistic
-  id: RMCGogglesPrescriptionBallistic # TODO make this actually prescription
+  id: RMCGogglesPrescriptionBallistic
   name: prescription marine ballistic goggles
   description: Standard issue UNMC goggles. Mostly used to decorate one's helmet. Contains prescription lenses in case you weren't sure if they were lame or not.
+  components:
+  - type: Tag
+    tags:
+    - RMCPrescriptionGlasses
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -728,6 +732,9 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm_rp.rsi
       state: hat-down
+  - type: Tag
+    tags:
+    - RMCPrescriptionGlasses
 
 - type: entity
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
@@ -784,6 +791,12 @@
   id: RMCPrescriptionSunglasses
   name: prescription sunglasses
   description: A mixture of coolness and the inherent nerdiness of a prescription. Somehow manages to conceal both.
+  components:
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - CorgiWearable
+    - RMCPrescriptionGlasses
 
 # Identical to upstream ones, sans the name and description
 - type: entity
@@ -974,6 +987,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hipster.rsi
       state: helmet
+  - type: Tag
+    tags:
+    - RMCPrescriptionGlasses
 
 # Hippie Glasses
 
@@ -1005,6 +1021,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
       state: helmet
+  - type: Tag
+    tags:
+    - WhitelistChameleon
 
 - type: entity
   parent: RMCHippieGlassesBloodred

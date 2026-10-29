@@ -46,31 +46,42 @@ public sealed partial class PuddleSystem
         if (args.Handled)
             return;
 
-        if (!_solutionContainerSystem.TryGetDrainableSolution(entity.Owner, out var soln, out var solution) ||
-            solution.Volume <= FixedPoint2.Zero)
-        {
-            args.Handled = entity.Comp.PreventMelee;
+        if (!_solutionContainerSystem.TryGetDrainableSolution(entity.Owner, out var soln, out var solution))
             return;
-        }
 
-        if (args.HitEntities.Count == 0)
-        {
-            // Swung and hit nothing (e.g. the floor) - don't dump the contents into a puddle.
+        var hitCount = args.HitEntities.Count;
+
+        // RMC14 splashes the whole contents
+        var totalSplit = solution.Volume;
+        // var totalSplit = FixedPoint2.Min(solution.MaxVolume * 0.25, solution.Volume);
+        // if (TryComp<SolutionTransferComponent>(entity, out var transfer))
+        // {
+        //     totalSplit = FixedPoint2.Min(transfer.TransferAmount, solution.Volume);
+        // }
+        //
+        // // a little lame, but reagent quantity is not very balanced and we don't want people
+        // // spilling like 100u of reagent on someone at once!
+        // totalSplit = FixedPoint2.Min(totalSplit, entity.Comp.MaxMeleeSpillAmount);
+        // RMC14
+
+        if (totalSplit == 0)
             return;
-        }
 
         // Optionally allow further melee handling occur
         args.Handled = entity.Comp.PreventMelee;
 
-        var hitCount = args.HitEntities.Count;
-        var totalSplit = solution.Volume;
+        foreach (var hit in args.HitEntities)
+        {
+            if (!HasComp<ReactiveComponent>(hit))
+                hitCount -= 1;
+        }
 
         foreach (var hit in args.HitEntities)
         {
-            var splitSolution = _solutionContainerSystem.SplitSolution(soln.Value, totalSplit / hitCount);
-
             if (!HasComp<ReactiveComponent>(hit))
                 continue;
+
+            var splitSolution = _solutionContainerSystem.SplitSolution(soln.Value, totalSplit / hitCount);
 
             _adminLogger.Add(LogType.MeleeHit, $"{ToPrettyString(args.User)} splashed {SharedSolutionContainerSystem.ToPrettyString(splitSolution):solution} from {ToPrettyString(entity.Owner):entity} onto {ToPrettyString(hit):target}");
             _reactive.DoEntityReaction(hit, splitSolution, ReactionMethod.Touch);

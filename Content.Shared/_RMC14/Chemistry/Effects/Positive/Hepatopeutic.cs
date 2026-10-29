@@ -23,7 +23,7 @@ public sealed partial class Hepatopeutic : RMCChemicalEffect
         EnableMutationSlot(args.EntityManager, plant, "Gluttony", 1f);
     }
 
-    // TODO RMC14: heal live, damages liver on overdose
+    // TODO RMC14: heal liver, damages liver on overdose - heals 0.5 * potency liver damage per 2s tick, overdose deals 2 * potency liver damage per 2s tick
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

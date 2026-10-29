@@ -38,9 +38,11 @@
   - type: Bloodstream
     bloodReagent: Blood
     bloodMaxVolume: 560
+    bloodOverfillVolume: 40
     maxBleedAmount: 50
     bleedReductionAmount: 0
     bloodRefreshAmount: 0.15
+    bloodRegenHungerCost: 2.5
     bloodlossDamage:
       types:
         Bloodloss: 0.5

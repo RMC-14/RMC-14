@@ -53,8 +53,8 @@ public sealed class DropshipMatrixSystem : EntitySystem
         Dirty(ent);
 
         _audio.PlayPredicted(ent.Comp.LockSound, ent, args.User);
-        var message = locking ? "rmc-dropship-matrix-locked" : "rmc-dropship-matrix-unlocked";
-        _popup.PopupClient(Loc.GetString(message), ent, args.User);
+        var message = locking ? "You lock the matrix assembly." : "You unlock the matrix assembly.";
+        _popup.PopupClient(message, ent, args.User);
     }
 
     private void TryInsertVial(Entity<DropshipMatrixComponent> ent, EntityUid vial, EntityUid user)
@@ -64,13 +64,13 @@ public sealed class DropshipMatrixSystem : EntitySystem
 
         if (solution.Volume < ent.Comp.RequiredVolume)
         {
-            _popup.PopupClient(Loc.GetString("rmc-dropship-matrix-vial-not-full"), ent, user, PopupType.SmallCaution);
+            _popup.PopupClient("The testing indicator lights up with red! The container requires to be fully filled!", ent, user, PopupType.SmallCaution);
             return;
         }
 
         if (solution.Contents.Count != 1)
         {
-            _popup.PopupClient(Loc.GetString("rmc-dropship-matrix-vial-not-pure"), ent, user, PopupType.SmallCaution);
+            _popup.PopupClient("The testing indicator lights up with red! The container requires a pure sample!", ent, user, PopupType.SmallCaution);
             return;
         }
 
@@ -83,7 +83,7 @@ public sealed class DropshipMatrixSystem : EntitySystem
         ent.Comp.State = DropshipMatrixState.Unlocked;
         Dirty(ent);
 
-        _popup.PopupClient(Loc.GetString("rmc-dropship-matrix-vial-added"), ent, user);
+        _popup.PopupClient("You add the vial to the matrix, and the testing indicator lights up with green.", ent, user);
     }
 
     private DropshipMatrixUpgrade GetUpgrade(string reagent)
@@ -110,12 +110,12 @@ public sealed class DropshipMatrixSystem : EntitySystem
         args.Handled = true;
         if (ent.Comp.State != DropshipMatrixState.Locked)
         {
-            _popup.PopupClient(Loc.GetString("rmc-dropship-matrix-incomplete"), target, args.User, PopupType.SmallCaution);
+            _popup.PopupClient("Matrix is not complete!", target, args.User, PopupType.SmallCaution);
             return;
         }
 
         _dropshipWeapon.SetMatrix((target, terminal), ent.Comp.Upgrade);
-        _popup.PopupClient(Loc.GetString("rmc-dropship-matrix-installed"), target, args.User);
+        _popup.PopupClient("You swap the matrix in the dropship guidance camera system, destroying the older part in the process.", target, args.User);
         PredictedQueueDel(ent.Owner);
     }
 
@@ -123,8 +123,8 @@ public sealed class DropshipMatrixSystem : EntitySystem
     {
         var message = ent.Comp.State switch
         {
-            DropshipMatrixState.Unlocked => "rmc-dropship-matrix-examine-unlocked",
-            DropshipMatrixState.Locked => "rmc-dropship-matrix-examine-locked",
+            DropshipMatrixState.Unlocked => "The vial is installed but is not screwed.",
+            DropshipMatrixState.Locked => "The vial is installed and screwed in place.",
             _ => null,
         };
 
@@ -133,7 +133,7 @@ public sealed class DropshipMatrixSystem : EntitySystem
 
         using (args.PushGroup(nameof(DropshipMatrixComponent)))
         {
-            args.PushMarkup(Loc.GetString(message));
+            args.PushMarkup(message);
         }
     }
 }

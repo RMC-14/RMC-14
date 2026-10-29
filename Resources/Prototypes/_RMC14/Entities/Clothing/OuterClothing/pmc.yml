@@ -255,6 +255,9 @@
     coolingCoefficient: 0.3
   - type: RMCImmuneToIgnition
     immuneToDirectHits: false
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass
 
 - type: entity
   parent: RMCBaseJacket

@@ -1,0 +1,156 @@
+- type: entity
+  abstract: true
+  id: RMCHallucinationEventBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCHallucinationEvent
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeHud
+  components:
+  - type: RMCHallucinationFakeHud
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeItem
+  components:
+  - type: RMCHallucinationFakeItem
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventDangerFlash
+  components:
+  - type: RMCHallucinationDangerFlash
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeBody
+  components:
+  - type: RMCHallucinationFakeBody
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeRadio
+  components:
+  - type: RMCHallucinationFakeRadio
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeAnnouncement
+  components:
+  - type: RMCHallucinationFakeAnnouncement
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventBodyMessage
+  components:
+  - type: RMCHallucinationBodyMessage
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventMotionBlips
+  components:
+  - type: RMCHallucinationMotionBlips
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventXenoSighting
+  components:
+  - type: RMCHallucinationXenoSighting
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeGrenade
+  components:
+  - type: RMCHallucinationFakeGrenade
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeParasite
+  components:
+  - type: RMCHallucinationFakeParasite
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventXenoDisguise
+  components:
+  - type: RMCHallucinationXenoDisguise
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeInfection
+  components:
+  - type: RMCHallucinationFakeInfection
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventStrangeSound
+  components:
+  - type: RMCHallucinationStrangeSound
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeAttacker
+  components:
+  - type: RMCHallucinationFakeAttacker
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeQueen
+  components:
+  - type: RMCHallucinationFakeQueen
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeOrbitalStrike
+  components:
+  - type: RMCHallucinationFakeOrbitalStrike
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeMortar
+  components:
+  - type: RMCHallucinationFakeMortar
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeCas
+  components:
+  - type: RMCHallucinationFakeCas
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventLightFlicker
+  components:
+  - type: RMCHallucinationLightFlicker
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventCallName
+  components:
+  - type: RMCHallucinationCallName
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventDoorPry
+  components:
+  - type: RMCHallucinationDoorPry
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeChestburst
+  components:
+  - type: RMCHallucinationFakeChestburst
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventEdgeLurker
+  components:
+  - type: RMCHallucinationEdgeLurker
+
+- type: entity
+  parent: RMCHallucinationEventBase
+  id: RMCHallucinationEventFakeWeeds
+  components:
+  - type: RMCHallucinationFakeWeeds

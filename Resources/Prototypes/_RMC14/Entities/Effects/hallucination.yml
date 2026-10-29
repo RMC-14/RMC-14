@@ -1,0 +1,218 @@
+- type: entity
+  abstract: true
+  id: RMCHallucinationBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: FloorObjects
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationC4
+  name: plastic explosive
+  components:
+  - type: Sprite
+    drawdepth: Objects
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+    state: active
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationBody
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+  - type: Clickable
+  - type: InteractionOutline
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationBlood
+  name: blood
+  components:
+  - type: Sprite
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor1
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationAttacker
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Damageable
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationItemRevolver
+  name: revolver
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
+    state: icon
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationItemC4
+  name: mysterious package
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+    state: icon
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationItemStunBaton
+  name: stun baton
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/stun_baton.rsi
+    state: stunbaton_off
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationItemEmag
+  name: cryptographic sequencer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/Hallucination/emag.rsi
+    state: icon
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationRunner
+  name: runner
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Mobs/Xenonids/Runner/runner.rsi
+    state: alive
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationDrone
+  name: drone
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
+    state: alive
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationLurker
+  name: lurker
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Mobs/Xenonids/Lurker/lurker.rsi
+    state: alive
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationGrenade
+  name: grenade
+  components:
+  - type: Sprite
+    drawdepth: Items
+    sprite: _RMC14/Objects/Weapons/Grenades/m40hedp.rsi
+    state: primed
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationParasite
+  name: parasite
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+    state: thrown
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationFire
+  name: fire
+  components:
+  - type: Sprite
+    drawdepth: WallTops
+    sprite: _RMC14/Effects/fire.rsi
+    state: red_2
+  - type: PointLight
+    radius: 5
+    color: "#bf6d02"
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationParasiteFace
+  name: parasite
+  components:
+  - type: Sprite
+    drawdepth: OverMobs
+    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+    state: equipped-MASK
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationItemSword
+  name: sword
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/katana.rsi
+    state: icon
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationItemFlashbang
+  name: flashbang
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/flashbang.rsi
+    state: primed
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationCasImpact
+  name: explosion
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/effects.rsi
+    state: explosion_particle
+  - type: PointLight
+    radius: 1
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationWeeds
+  name: weeds
+  description: Weird black weeds...
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    state: weed0
+
+- type: entity
+  parent: RMCHallucinationBase
+  id: RMCHallucinationWeedNode
+  name: weed node
+  description: A weird, pulsating node
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    layers:
+    - state: weed0
+    - state: constructionnode

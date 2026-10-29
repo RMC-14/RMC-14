@@ -22,9 +22,9 @@ public sealed class RMCXenoTransformationSystem : EntitySystem
     private void OnGetDiseases(Entity<RMCXenoTransformationComponent> ent, ref HealthScanGetDiseasesEvent args)
     {
         args.Diseases.Add(new HealthScanDisease(
-            "rmc-xeno-transformation-scan-name",
-            "rmc-xeno-transformation-scan-type",
-            "rmc-xeno-transformation-scan-cure",
+            "|D-ID Field Error|",
+            "SCANNER UNIT FAILURE",
+            "Please contact the nearest Weyland-Yutani Specialist Technician.",
             ent.Comp.Stage,
             ent.Comp.MaxStage));
     }

@@ -122,6 +122,15 @@ public sealed class TemporarySpeedModifiersSystem : EntitySystem
         // Apply the lowest of the two values.
         return Math.Min(currentSpeedModifier, baseSpeedModifier);
     }
+
+    public float? CalculateLateSpeedModifier(EntityUid uid, float currentModifier, float modifier, MovementSpeedModifierComponent? movement = null)
+    {
+        if (!Resolve(uid, ref movement) || movement.BaseSprintSpeed <= 0 || currentModifier <= 0)
+            return null;
+
+        var currentDelay = 10 / (movement.BaseSprintSpeed * currentModifier);
+        return currentDelay / Math.Max(currentDelay + modifier, Math.Min(currentDelay, MaxSpeedModifier));
+    }
 }
 
 [ByRefEvent]

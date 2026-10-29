@@ -1,5 +1,6 @@
+using Content.Shared._RMC14.Chemistry.ChemEffectFlags;
+using Content.Shared._RMC14.Damage;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
@@ -10,9 +11,9 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Hemostatic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
-    private static readonly ProtoId<DamageTypePrototype> HeatType = "Heat";
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
+    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
+    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
+    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -21,26 +22,25 @@ public sealed partial class Hemostatic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (!args.EntityManager.TryGetComponent<BloodstreamComponent>(args.TargetEntity, out var bloodstream))
+        if (!args.EntityManager.HasComponent<BloodstreamComponent>(args.TargetEntity))
             return;
 
-        var bloodstreamSystem = args.EntityManager.System<SharedBloodstreamSystem>();
-        bloodstreamSystem.TryModifyBleedAmount((args.TargetEntity, bloodstream), -0.67f);
+        args.EntityManager.System<RMCChemEffectFlagsSystem>().TrySetFlag(args.TargetEntity, RMCChemEffectFlagsSystem.NoBleedingFlag);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var damage = new DamageSpecifier();
-        damage.DamageDict[BluntType] = potency;
+        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
+        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency);
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var damage = new DamageSpecifier();
-        damage.DamageDict[BluntType] = potency * 9f;
-        damage.DamageDict[HeatType] = potency * 9f;
-        damage.DamageDict[PoisonType] = potency * 9f;
+        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
+        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency * 9f);
+        damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency * 9f, damage);
+        damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency * 9f, damage);
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 }
