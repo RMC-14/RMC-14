@@ -1,0 +1,75 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorFiorinaWarden
+  name: cm-job-name-survivor-fiorina-warden
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorCO
+  startingGear: RMCGearSurvivorFiorinaWarden
+  ranks:
+    RMCRankCMBMarshal: []
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: CMB Prison Warden (Fiorina Special Survivor)
+  icon: "RMCJobIconFiorinaWarden"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: Skills
+      preset: RMCSkillPresetSurvivorFiorinaWarden
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-prison-warden
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: warden
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorCMBDeputy
+  id: RMCGearSurvivorFiorinaWarden
+  equipment:
+    jumpsuit: RMCMarshalCMBUniform
+    belt: RMCBeltHolsterRevolverRSH9CustomFill
+    outerClothing: RMCArmorPMCRiotCMB
+    head: ClothingHeadHatBeretWarden
+    gloves: CMHandsBlackMarine
+    shoes: RMCBootsPMCFilled
+    pocket2: RMCPouchFirstAidInjectors
+    eyes: RMCGlassesSecurityBlue
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaWarden
+  name: survivor cmb warden spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaWarden
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconFiorinaWarden
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_ward
