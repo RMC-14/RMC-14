@@ -463,6 +463,13 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         _slotGroups.Remove(slotGroupName);
     }
 
+    // RMC14
+    public bool TryGetSlotButton(string slotGroup, string slotName, out SlotControl? button)
+    {
+        button = _slotGroups.GetValueOrDefault(slotGroup)?.GetButton(slotName);
+        return button != null;
+    }
+
     // Monkey Sees Action
     // Neuron Activation
     // Monkey copies code

@@ -270,14 +270,14 @@ public sealed class HealthScannerUiData
 
         foreach (var disease in uiState.Diseases)
         {
-            var name = Loc.GetString(disease.Name);
+            var name = disease.Name;
             if (name.Length > 0)
                 name = name.Substring(0, 1).ToUpperInvariant() + name.Substring(1);
 
             var details = new RichTextLabel { HorizontalExpand = true, MaxWidth = 480 };
             details.SetMarkupPermissive(Loc.GetString("rmc-health-analyzer-disease-details",
-                ("type", FormattedMessage.EscapeText(Loc.GetString(disease.Type))),
-                ("cure", FormattedMessage.EscapeText(Loc.GetString(disease.Cure)))));
+                ("type", FormattedMessage.EscapeText(disease.Type)),
+                ("cure", FormattedMessage.EscapeText(disease.Cure))));
 
             var stage = new ProgressBar
             {

@@ -428,15 +428,3 @@ reagent-effect-guidebook-plant-seeds-remove =
         [1] Removes the
         *[other] remove the
     } seeds of the plant
-
-reagent-effect-guidebook-plant-mutation-enable =
-    { $chance ->
-        [1] Enables
-        *[other] enable
-    } the following mutation slots: {$slots}
-
-reagent-effect-guidebook-plant-mutation-suppress =
-    { $chance ->
-        [1] Suppresses
-        *[other] suppress
-    } the following mutation slots: {$slots}

@@ -26,7 +26,7 @@ public sealed class RenegadeDefectionOfferSystem : EntitySystem
         _expiresAt = ev.ExpiresAt;
 
         _window = new RenegadeDefectionOfferWindow();
-        _window.MessageLabel.Text = Loc.GetString("rmc-xeno-renegade-defect-message", ("faction", ev.Faction));
+        _window.MessageLabel.Text = $"Our Queen has broken the alliance with the {ev.Faction}. The device inside our carapace begins to suppress our connection with the Hive. Do we remove it and follow the Queen?";
         UpdateCountdown();
 
         _window.DefectButton.OnPressed += _ =>
@@ -76,11 +76,11 @@ public sealed class RenegadeDefectionOfferSystem : EntitySystem
         var remaining = _expiresAt - _timing.CurTime.TotalSeconds;
         if (remaining <= 0)
         {
-            _window.CountdownLabel.Text = Loc.GetString("rmc-xeno-renegade-defect-timed-out");
+            _window.CountdownLabel.Text = "Offer expired.";
             return;
         }
 
-        _window.CountdownLabel.Text = Loc.GetString("rmc-dialog-countdown", ("seconds", (int) remaining));
+        _window.CountdownLabel.Text = $"{(int) remaining} seconds remaining";
     }
 
     private void SendChoice(bool defect)

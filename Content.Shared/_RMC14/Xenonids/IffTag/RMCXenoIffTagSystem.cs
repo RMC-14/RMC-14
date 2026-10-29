@@ -110,8 +110,7 @@ public sealed class RMCXenoIffTagSystem : EntitySystem
             TryComp(implantHive.Owner, out HiveSlotComponent? implantSlot) &&
             implantSlot.Position == HiveSlots.Renegade)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-renegade-instincts-changed",
-                ("factions", xeno.Comp.Factions.Count == 0 ? Loc.GetString("rmc-xeno-iff-tag-no-one") : string.Join(", ", xeno.Comp.Factions))),
+            _popup.PopupClient($"Your instincts have changed, you seem compelled to protect {(xeno.Comp.Factions.Count == 0 ? "no one" : string.Join(", ", xeno.Comp.Factions))}.",
                 xeno, xeno);
         }
 
@@ -123,7 +122,7 @@ public sealed class RMCXenoIffTagSystem : EntitySystem
 
     private void OnExamined(Entity<RMCXenoIffTagComponent> xeno, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("rmc-xeno-iff-tag-examine"));
+        args.PushMarkup("It has an IFF tag sticking out of its carapace.");
     }
 
     private void OnGetProtectsVerb(Entity<RMCXenoIffTagComponent> xeno, ref GetVerbsEvent<Verb> args)
@@ -133,13 +132,13 @@ public sealed class RMCXenoIffTagSystem : EntitySystem
 
         args.Verbs.Add(new Verb
         {
-            Text = Loc.GetString("rmc-xeno-iff-tag-check-protects"),
+            Text = "Check IFF Protection",
             Category = VerbCategory.Examine,
             Act = () =>
             {
                 var msg = xeno.Comp.Factions.Count == 0
-                    ? Loc.GetString("rmc-xeno-iff-tag-protects-none")
-                    : Loc.GetString("rmc-xeno-iff-tag-protects", ("factions", string.Join(", ", xeno.Comp.Factions)));
+                    ? "You are not obligated to protect anyone."
+                    : $"You seem compelled to protect {string.Join(", ", xeno.Comp.Factions)}.";
 
                 _popup.PopupClient(msg, xeno, xeno);
             },
@@ -187,7 +186,7 @@ public sealed class RMCXenoIffTagSystem : EntitySystem
         _popup.PopupClient($"You rip the IFF tag out of {Name(xeno)}'s carapace!", args.User, args.User);
 
         if (wasRenegade)
-            _popup.PopupClient(Loc.GetString("rmc-xeno-renegade-tag-removed"), xeno, xeno);
+            _popup.PopupClient("With the removal of the device, your instincts have returned to normal.", xeno, xeno);
     }
 
     public void TransferTag(EntityUid from, EntityUid to)
@@ -253,13 +252,13 @@ public sealed class RMCXenoIffTagSystem : EntitySystem
 
         var options = new List<DialogOption>
         {
-            new(Loc.GetString("rmc-xeno-iff-tag-reprogram-overwrite"), new RMCXenoIffTagReprogramChosenEvent(RMCXenoIffTagReprogramOption.Overwrite)),
-            new(Loc.GetString("rmc-xeno-iff-tag-reprogram-add"), new RMCXenoIffTagReprogramChosenEvent(RMCXenoIffTagReprogramOption.Add)),
-            new(Loc.GetString("rmc-xeno-iff-tag-reprogram-remove"), new RMCXenoIffTagReprogramChosenEvent(RMCXenoIffTagReprogramOption.Remove)),
+            new("Overwrite", new RMCXenoIffTagReprogramChosenEvent(RMCXenoIffTagReprogramOption.Overwrite)),
+            new("Add", new RMCXenoIffTagReprogramChosenEvent(RMCXenoIffTagReprogramOption.Add)),
+            new("Remove", new RMCXenoIffTagReprogramChosenEvent(RMCXenoIffTagReprogramOption.Remove)),
         };
 
-        _dialog.OpenOptions(xeno.Owner, args.User, Loc.GetString("rmc-xeno-iff-tag-reprogram-title"),
-            options, Loc.GetString("rmc-xeno-iff-tag-reprogram-message"));
+        _dialog.OpenOptions(xeno.Owner, args.User, "Xenonid IFF Tag",
+            options, "Reprogram this tag's protected factions using your own IFF settings.");
     }
 
     private void OnReprogramChosen(Entity<RMCXenoIffTagComponent> xeno, ref RMCXenoIffTagReprogramChosenEvent args)
@@ -299,14 +298,13 @@ public sealed class RMCXenoIffTagSystem : EntitySystem
             _gunIFF.AddUserFaction(xeno.Owner, faction);
         }
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-iff-tag-reprogram-done", ("xeno", xeno.Owner)), xeno, programmer, PopupType.Medium);
+        _popup.PopupEntity($"You reprogram {Name(xeno.Owner)}'s IFF tag.", xeno, programmer, PopupType.Medium);
 
         if (_hive.GetHive(xeno.Owner) is { } hive &&
             TryComp(hive.Owner, out HiveSlotComponent? slot) &&
             slot.Position == HiveSlots.Renegade)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-renegade-instincts-changed",
-                ("factions", xeno.Comp.Factions.Count == 0 ? Loc.GetString("rmc-xeno-iff-tag-no-one") : string.Join(", ", xeno.Comp.Factions))),
+            _popup.PopupEntity($"Your instincts have changed, you seem compelled to protect {(xeno.Comp.Factions.Count == 0 ? "no one" : string.Join(", ", xeno.Comp.Factions))}.",
                 xeno, xeno, PopupType.Medium);
         }
     }

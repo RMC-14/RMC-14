@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Effects.Step;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.Xenonids.Biomass;
 using Content.Shared._RMC14.Xenonids.Organs;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Interaction;
@@ -173,7 +174,13 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             QueueDel(entity.Owner);
         }
 
-        SpawnAtPosition(heart.Item, xform.Coordinates);
+        var organ = SpawnAtPosition(heart.Item, xform.Coordinates);
+        if (TryComp(organ, out RMCBiomassOrganComponent? biomass) && Prototype(args.Body) is { } caste)
+        {
+            biomass.Caste = caste.Name;
+            Dirty(organ, biomass);
+        }
+
         RemCompDeferred<RMCSurgeryXenoHeartComponent>(args.Body);
     }
 

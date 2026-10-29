@@ -186,8 +186,8 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
             tray.ForceUpdate = false;
         else
         {
-            var metabolismAdjust = plantUid != null ? Comp<RMCPlantComponent>(plantUid.Value).MetabolismAdjust : 0f;
-            var adjustedDelay = tray.CycleDelay + TimeSpan.FromSeconds(metabolismAdjust);
+            var metabolismAdjust = plantUid != null ? Comp<RMCPlantComponent>(plantUid.Value).MetabolismAdjust : TimeSpan.Zero;
+            var adjustedDelay = tray.CycleDelay + metabolismAdjust;
             if (curTime < (tray.LastCycle + adjustedDelay))
             {
                 if (tray.UpdateSpriteAfterUpdate)
@@ -218,13 +218,14 @@ public sealed class RMCPlantTraySystem : SharedRMCPlantTraySystem
         }
 
         var plant = plantUid.Value;
-        var growth = Comp<RMCPlantGrowthComponent>(plant);
 
         // Advance age
         _plantGrowth.TickAging((plant, plantComp), tray);
 
         // Process mutations
         TickMutation((plant, plantComp));
+
+        var growth = Comp<RMCPlantGrowthComponent>(plant);
 
         _plantMetabolism.Tick(plant, (uid, tray));
 

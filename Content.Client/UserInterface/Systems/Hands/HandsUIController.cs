@@ -230,6 +230,12 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
         throw new Exception("All attached hand hud containers were full!");
     }
 
+    // RMC14
+    public bool TryGetHandButton(string handName, out HandButton? button)
+    {
+        return _handLookup.TryGetValue(handName, out button);
+    }
+
     public bool TryGetHandContainer(string containerName, out HandsContainer? container)
     {
         container = null;

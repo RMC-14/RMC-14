@@ -447,7 +447,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             evolveSlot.Position == HiveSlots.Renegade)
         {
             if (doPopup)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-renegade"), xeno, xeno, PopupType.MediumCaution);
+                _popup.PopupEntity("We have no Queen to answer to anymore. We cannot evolve into one.", xeno, xeno, PopupType.MediumCaution);
             return false;
         }
 

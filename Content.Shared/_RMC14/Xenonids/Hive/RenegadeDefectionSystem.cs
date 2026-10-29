@@ -127,11 +127,11 @@ public sealed class RenegadeDefectionSystem : EntitySystem
 
         _hive.SetHive(xeno, renegadeHive);
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-renegade-defect-self"), xeno, xeno, PopupType.LargeCaution);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-renegade-defect-others", ("xeno", xeno)), xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
+        _popup.PopupEntity("You lost the connection with your Hive. Now you have no Queen, only your masters.", xeno, xeno, PopupType.LargeCaution);
+        _popup.PopupEntity($"{Name(xeno)} seems to have lost its connection to its Hive!", xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
 
         if (brokenFaction == MarineFaction)
-            _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-xeno-renegade-defect-announce"));
+            _marineAnnounce.AnnounceARES(null, "The advanced IFF Xenonid tagging technology has detected hostile intentions and successfully suppressed the psychic link of a lifeform. The collaborative lifeform is given designation Renegade. Full cooperation is to be expected.");
     }
 
     private void Stay(EntityUid xeno)
@@ -145,7 +145,7 @@ public sealed class RenegadeDefectionSystem : EntitySystem
         damage.DamageDict[TagRipDamage] = 50;
         _damageable.TryChangeDamage(xeno, damage, true, origin: xeno);
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-renegade-stay-self"), xeno, xeno, PopupType.LargeCaution);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-renegade-stay-others", ("xeno", xeno)), xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
+        _popup.PopupEntity("You rip the IFF tag out of your own carapace! For the Hive!", xeno, xeno, PopupType.LargeCaution);
+        _popup.PopupEntity($"{Name(xeno)} rips out its IFF tag!", xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
     }
 }
