@@ -148,8 +148,6 @@
   color: "#434b4d"
   boilingPoint: 2862.0
   meltingPoint: 1538.0
-  plantMetabolism:
-  - !type:Hemogenic {}
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -259,11 +257,6 @@
   color: "#00ff04"
   meltingPoint: 700.0
   boilingPoint: 1737.0
-  plantMetabolism:
-  - !type:Carcinogenic
-    potency: 4.0
-  - !type:Hemorrhaging
-    potency: 2.0
 
 - type: reagent
   id: Silicon

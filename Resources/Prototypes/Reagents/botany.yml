@@ -1,5 +1,6 @@
 - type: reagent
   id: EZNutrient
+  toxin: true # RMC14
   name: reagent-name-e-z-nutrient
   group: Botanical
   desc: reagent-desc-e-z-nutrient
@@ -19,6 +20,7 @@
 
 - type: reagent
   id: Left4Zed
+  toxin: true # RMC14
   name: reagent-name-left4-zed
   group: Botanical
   desc: reagent-desc-left4-zed
@@ -74,6 +76,7 @@
 
 - type: reagent
   id: PlantBGone
+  toxin: true # RMC14
   name: reagent-name-plant-b-gone
   group: Botanical
   desc: reagent-desc-plant-b-gone
@@ -102,14 +105,10 @@
         conditions:
         - !type:OrganType
           type: Plant
-    Poison:
-      metabolismRate: 0.1
-      effects:
-      - !type:Toxic
-        potency: 4
 
 - type: reagent
   id: RobustHarvest
+  toxin: true # RMC14
   name: reagent-name-robust-harvest
   group: Botanical
   desc: reagent-desc-robust-harvest

@@ -222,9 +222,6 @@
   physicalDesc: reagent-physical-desc-translucent
   flavor: medicine
   color: "#215263"
-  plantMetabolism:
-  - !type:Anticorrosive
-    potency: 6.0
   metabolisms:
     Medicine:
       effects:
@@ -456,9 +453,6 @@
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: medicine
   color: "#bf3d19"
-  plantMetabolism:
-  - !type:Anticorrosive
-    potency: 4.0
   metabolisms:
     Medicine:
       effects:
