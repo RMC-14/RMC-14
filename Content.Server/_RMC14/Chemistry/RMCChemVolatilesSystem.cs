@@ -151,7 +151,7 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
             var duration = Math.Clamp((int) aggregate.Duration, MinDuration, MaxDuration);
 
             // TODO RMC14: cm13 combust() switches to a star (8 lines of floor(1.5 * radius)) above 30 intensity, only reachable
-            // with a custom casing's higher max_fire_int - RMC has no custom chemical casings yet
+            // with custom casings higher max_fire_int
             _flammable.SpawnFireDiamond(ChemFireProto, coordinates, radius, intensity, duration, aggregate.FirePenetrating, aggregate.FireColor);
             handled = true;
 

@@ -174,7 +174,9 @@ public sealed class HealthScannerUiData
                 if (!_rmcReagent.TryIndex(reagent.Reagent, out var prototype))
                     continue;
 
-                if (prototype.Unknown && uiState.DetailLevel < HealthScanDetailLevel.BodyScan)
+                if (prototype.Unknown &&
+                    !_rmcReagent.IsGenerated(prototype.ID) &&
+                    uiState.DetailLevel < HealthScanDetailLevel.BodyScan)
                 {
                     // TODO RMC14 these shouldn't be getting sent to the client
                     anyUnknown = true;

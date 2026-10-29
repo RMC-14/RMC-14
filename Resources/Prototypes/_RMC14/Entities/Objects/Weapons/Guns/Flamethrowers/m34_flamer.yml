@@ -256,6 +256,18 @@
         reagents: [ ]
 
 - type: entity
+  parent: RMCCustomM34A1SmokeTankCase
+  id: RMCTankFlamerSmokeUpgraded
+  name: M34 large custom incinerator smoke tank
+  description: A tank holding powdered smoke that expands when exposed to an open flame and carries any chemicals along with it. This one has been outfitted with an upgraded internal compressor, allowing for larger capacity.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 150
+        reagents: [ ]
+
+- type: entity
   parent: RMCTankFlamer
   id: VehicleFlamerTankLZRN
   name: LZR-N flame tank

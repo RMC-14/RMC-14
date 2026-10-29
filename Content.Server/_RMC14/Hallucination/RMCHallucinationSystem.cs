@@ -77,6 +77,7 @@ public sealed partial class RMCHallucinationSystem : EntitySystem
 
     private readonly HashSet<Entity<HumanoidAppearanceComponent>> _humanoids = new();
     private readonly Dictionary<EntProtoId, EntityUid> _singletons = new();
+    private readonly List<TileRef> _floorTiles = new();
 
     public override void Initialize()
     {
@@ -101,6 +102,8 @@ public sealed partial class RMCHallucinationSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _singletons.Clear();
+        _attackerClones.Clear();
+        _attackerClonesRefreshAt = TimeSpan.Zero;
     }
 
     private void OnStrangeSound(Entity<RMCHallucinationStrangeSoundComponent> ent, ref RMCHallucinateEvent args)
@@ -505,27 +508,33 @@ public sealed partial class RMCHallucinationSystem : EntitySystem
         var center = _transform.GetWorldPosition(xform);
         var box = Box2.CenteredAround(center, new Vector2(range * 2 + 1, range * 2 + 1));
 
-        var candidates = new List<EntityCoordinates>();
+        _floorTiles.Clear();
         foreach (var tile in _map.GetTilesIntersecting(grid, gridComp, box))
         {
-            if (_turf.IsSpace(tile) || _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
+            if (_turf.IsSpace(tile))
+                continue;
+
+            if (minDistance > 0 && (_map.GridTileToLocal(grid, gridComp, tile.GridIndices).Position - victimPosition).Length() < minDistance)
+                continue;
+
+            _floorTiles.Add(tile);
+        }
+
+        _random.Shuffle(_floorTiles);
+        foreach (var tile in _floorTiles)
+        {
+            if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable))
                 continue;
 
             var tileCoords = _map.GridTileToLocal(grid, gridComp, tile.GridIndices);
-            if (minDistance > 0 && (tileCoords.Position - victimPosition).Length() < minDistance)
-                continue;
-
             if (!_examine.InRangeUnOccluded(uid, tileCoords, range + 1))
                 continue;
 
-            candidates.Add(tileCoords);
+            coords = tileCoords;
+            return true;
         }
 
-        if (candidates.Count == 0)
-            return false;
-
-        coords = _random.Pick(candidates);
-        return true;
+        return false;
     }
 
     private bool IsBlocked(Entity<MapGridComponent> grid, Vector2 position, Vector2 delta)

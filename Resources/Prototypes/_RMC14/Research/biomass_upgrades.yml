@@ -1,41 +1,44 @@
 
 # ---------------- Machinery ----------------
 
-- type: entity
-  id: RMCBiomassUpgradeAutodocInternalBleeding
-  name: AutoDoc Internal Bleeding Repair
-  description: A data and instruction set for the AutoDoc, making it capable of fixing internal bleeding nearly instantaneously.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RMCBiomassUpgrade
-    category: Machinery
-    cost: 100
-    requiredClearance: 1
-    printedItem: RMCResearchUpgradeAutodocInternalBleeding
+# TODO RMC14: internal bleeding
+# - type: entity
+#   id: RMCBiomassUpgradeAutodocInternalBleeding
+#   name: AutoDoc Internal Bleeding Repair
+#   description: A data and instruction set for the AutoDoc, making it capable of fixing internal bleeding nearly instantaneously.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: RMCBiomassUpgrade
+#     category: Machinery
+#     cost: 100
+#     requiredClearance: 1
+#     printedItem: RMCResearchUpgradeAutodocInternalBleeding
 
-- type: entity
-  id: RMCBiomassUpgradeAutodocBrokenBone
-  name: AutoDoc Bone Fracture Repair
-  description: A data and instruction set for the AutoDoc, making it capable of setting fractures and applying bonegel.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RMCBiomassUpgrade
-    category: Machinery
-    cost: 1500
-    requiredClearance: 3
-    printedItem: RMCResearchUpgradeAutodocBrokenBone
+# TODO RMC14: bone fractures
+# - type: entity
+#   id: RMCBiomassUpgradeAutodocBrokenBone
+#   name: AutoDoc Bone Fracture Repair
+#   description: A data and instruction set for the AutoDoc, making it capable of setting fractures and applying bonegel.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: RMCBiomassUpgrade
+#     category: Machinery
+#     cost: 1500
+#     requiredClearance: 3
+#     printedItem: RMCResearchUpgradeAutodocBrokenBone
 
-- type: entity
-  id: RMCBiomassUpgradeAutodocOrganDamage
-  name: AutoDoc Broken Organ Repair
-  description: A data and instruction set for the AutoDoc, making it capable of fixing organ damage.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RMCBiomassUpgrade
-    category: Machinery
-    cost: 1500
-    requiredClearance: 2
-    printedItem: RMCResearchUpgradeAutodocOrganDamage
+# TODO RMC14: organ damage
+# - type: entity
+#   id: RMCBiomassUpgradeAutodocOrganDamage
+#   name: AutoDoc Broken Organ Repair
+#   description: A data and instruction set for the AutoDoc, making it capable of fixing organ damage.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: RMCBiomassUpgrade
+#     category: Machinery
+#     cost: 1500
+#     requiredClearance: 2
+#     printedItem: RMCResearchUpgradeAutodocOrganDamage
 
 - type: entity
   id: RMCBiomassUpgradeAutodocLarvaExtraction
@@ -103,21 +106,20 @@
     minimumPrice: 100
     maximumPrice: 1000
 
-# TODO RMC14: smoke flamer thing
-# - type: entity
-#   id: RMCBiomassUpgradeSmokeTankCapacity
-#   name: Upgraded Incinerator Smoke Tank
-#   description: An upgraded incinerator smoke tank with a larger capacity.
-#   categories: [ HideSpawnMenu ]
-#   components:
-#   - type: RMCBiomassUpgrade
-#     category: Items
-#     cost: 100
-#     requiredClearance: 1
-#     printedItem: # required, none yet
-#     priceChange: 50
-#     minimumPrice: 100
-#     maximumPrice: 500
+- type: entity
+  id: RMCBiomassUpgradeSmokeTankCapacity
+  name: Upgraded Incinerator Smoke Tank
+  description: An upgraded incinerator smoke tank with a larger capacity.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Items
+    cost: 100
+    requiredClearance: 1
+    printedItem: RMCTankFlamerSmokeUpgraded
+    priceChange: 50
+    minimumPrice: 100
+    maximumPrice: 500
 
 - type: entity
   id: RMCBiomassUpgradeResearchContractReroll
@@ -132,18 +134,6 @@
     printedItem: RMCResearchRerollDisk
     priceChange: 200
     maximumPrice: 2000
-
-- type: entity
-  id: RMCBiomassUpgradeLaserScalpelTier2
-  name: Improved Laser Scalpel
-  description: Prints an improved laser scalpel for harvesting higher-tier xenomorph specimens.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RMCBiomassUpgrade
-    category: Items
-    cost: 1500
-    requiredClearance: 2
-    printedItem: CMScalpelLaserImproved
 
 - type: entity
   id: RMCBiomassUpgradeLaserScalpelTier3

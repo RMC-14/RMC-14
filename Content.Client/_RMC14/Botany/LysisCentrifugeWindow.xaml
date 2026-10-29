@@ -36,10 +36,8 @@
                                           VerticalAlignment="Center">
                                 <BoxContainer Name="SeedChips" Orientation="Horizontal" />
                                 <BoxContainer Orientation="Horizontal" SeparationOverride="4">
-                                    <Button Name="ProcessSeedButton" Access="Public" Text="Process Seed"
-                                            StyleClasses="OpenRight" />
-                                    <Button Name="EjectSeedButton" Access="Public" Text="Eject Seed"
-                                            StyleClasses="OpenLeft" />
+                                    <botany:RMCBotanyButton Name="ProcessSeedButton" Access="Public" Text="Process Seed" />
+                                    <botany:RMCBotanyButton Name="EjectSeedButton" Access="Public" Text="Eject Seed" />
                                 </BoxContainer>
                             </BoxContainer>
                         </BoxContainer>
@@ -79,8 +77,7 @@
                                 <Label Text="Genome:" MinWidth="100" FontColorOverride="#8E9AA6"
                                        VerticalAlignment="Center" />
                                 <Label Name="GenomeLabel" HorizontalExpand="True" VerticalAlignment="Center" />
-                                <Button Name="ClearBufferButton" Access="Public" Text="Clear Buffer"
-                                        StyleClasses="OpenBoth" VerticalAlignment="Center" />
+                                <botany:RMCBotanyButton Name="ClearBufferButton" Access="Public" Text="Clear Buffer" VerticalAlignment="Center" />
                             </BoxContainer>
                             <BoxContainer Orientation="Horizontal">
                                 <Label Text="Degradation:" MinWidth="100" FontColorOverride="#8E9AA6"
@@ -95,8 +92,7 @@
                                 <Label Text="Data Disc:" MinWidth="100" FontColorOverride="#8E9AA6"
                                        VerticalAlignment="Center" />
                                 <Label Name="DiscLabel" HorizontalExpand="True" VerticalAlignment="Center" />
-                                <Button Name="EjectDiscButton" Access="Public" Text="Eject Disc"
-                                        StyleClasses="OpenBoth" VerticalAlignment="Center" />
+                                <botany:RMCBotanyButton Name="EjectDiscButton" Access="Public" Text="Eject Disc" VerticalAlignment="Center" />
                             </BoxContainer>
                         </BoxContainer>
                     </BoxContainer>

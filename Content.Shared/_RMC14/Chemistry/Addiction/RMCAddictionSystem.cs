@@ -6,7 +6,6 @@ using Content.Shared._RMC14.Synth;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -33,7 +32,6 @@ public sealed class RMCAddictionSystem : EntitySystem
     [Dependency] private readonly RMCStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedStatusEffectsSystem _status = default!;
 
-    private static readonly ProtoId<SpeciesPrototype> HumanSpecies = "Human";
     private static readonly EntProtoId<StatusEffectComponent> Hallucination = "RMCStatusEffectHallucination";
 
     private static readonly ProtoId<EmotePrototype>[] HighEmotes = ["RMCTwitch", "RMCBlink", "RMCShiver"];
@@ -243,8 +241,8 @@ public sealed class RMCAddictionSystem : EntitySystem
                 if (_random.Prob(0.2f))
                 {
                     StaminaFloor(uid, MathF.Min(60, record.WithdrawalProgression * 1.5f));
-                    if (_random.Prob(0.5f))
-                        Craving(uid, record, StageThreeCravings);
+                    if (_random.Prob(0.75f))
+                        Craving(uid, record, StageThreeCravings, PopupType.MediumCaution);
 
                     if (_random.Prob(0.25f))
                         Emote(uid, StageThreeEmotes);
@@ -258,8 +256,7 @@ public sealed class RMCAddictionSystem : EntitySystem
                 if (_random.Prob(0.2f))
                 {
                     StaminaFloor(uid, MathF.Min(80, record.WithdrawalProgression * 2f));
-                    if (_random.Prob(0.5f))
-                        Craving(uid, record, StageFourCravings);
+                    Craving(uid, record, StageFourCravings, PopupType.LargeCaution);
 
                     if (_random.Prob(0.25f))
                         Emote(uid, StageFourEmotes);
@@ -289,14 +286,14 @@ public sealed class RMCAddictionSystem : EntitySystem
         _status.TryUpdateStatusEffectDuration(uid, Hallucination, TimeSpan.FromSeconds(seconds));
     }
 
-    private void Craving(EntityUid uid, RMCAddictionRecord record, string[] messages)
+    private void Craving(EntityUid uid, RMCAddictionRecord record, string[] messages, PopupType popup = PopupType.SmallCaution)
     {
         var reagent = _rmcReagent.TryIndex(record.ReagentId, out var proto)
             ? proto.LocalizedName
             : record.ReagentId;
 
         var message = string.Format(_random.Pick(messages), reagent, reagent.ToUpperInvariant());
-        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
+        _popup.PopupEntity(message, uid, uid, popup);
     }
 
     private void Emote(EntityUid uid, ProtoId<EmotePrototype>[] emotes)
@@ -308,8 +305,7 @@ public sealed class RMCAddictionSystem : EntitySystem
     {
         if (HasComp<RMCAddictionResistantComponent>(uid) ||
             _mobState.IsDead(uid) ||
-            !TryComp<HumanoidAppearanceComponent>(uid, out var humanoid) ||
-            humanoid.Species != HumanSpecies ||
+            !HasComp<HumanoidAppearanceComponent>(uid) ||
             HasComp<SynthComponent>(uid))
         {
             return;

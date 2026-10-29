@@ -167,6 +167,7 @@
   explosivePower: 0.12 # RMC14
   explosiveFalloff: -0.1 # RMC14
   reactiveEffects: {} # RMC14
+  fireProperties: # RMC14
   - !type:Fueling
     potency: 5
   - !type:Oxidizing

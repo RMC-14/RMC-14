@@ -41,6 +41,11 @@ public sealed partial class RMCHallucinationSystem
     private const float AttackerFootstepVolume = 1.5f;
     private const int AttackerLines = 10;
 
+    private static readonly TimeSpan AttackerClonesRefreshEvery = TimeSpan.FromSeconds(30);
+
+    private readonly List<EntityUid> _attackerClones = new();
+    private TimeSpan _attackerClonesRefreshAt;
+
     private void InitializeAttacker()
     {
         SubscribeLocalEvent<RMCHallucinationFakeAttackerComponent, RMCHallucinateEvent>(OnFakeAttacker);
@@ -94,25 +99,9 @@ public sealed partial class RMCHallucinationSystem
         if (Transform(ent).GridUid is not { } grid || !TryGetLocalPosition(ent, grid, out var position))
             return false;
 
-        var clones = new List<EntityUid>();
-        var query = EntityQueryEnumerator<HumanoidAppearanceComponent, MobStateComponent>();
-        while (query.MoveNext(out var uid, out _, out var mobState))
-        {
-            if (mobState.CurrentState != MobState.Alive ||
-                HasComp<SleepingComponent>(uid) ||
-                HasComp<RMCUnconsciousComponent>(uid) ||
-                Transform(uid).MapID == MapId.Nullspace)
-            {
-                continue;
-            }
-
-            clones.Add(uid);
-        }
-
-        if (clones.Count == 0)
+        if (PickAttackerClone() is not { } clone)
             return false;
 
-        var clone = _random.Pick(clones);
         EntityUid? weapon = null;
         foreach (var held in _hands.EnumerateHeld(clone))
         {
@@ -173,6 +162,52 @@ public sealed partial class RMCHallucinationSystem
         SendToVictim(ent, new RMCHallucinationAttackerSpawnEvent(attacker.Id, GetNetEntity(clone), GetNetCoordinates(new EntityCoordinates(grid, attacker.Position))));
 
         return true;
+    }
+
+    private EntityUid? PickAttackerClone()
+    {
+        var time = _timing.CurTime;
+        if (time >= _attackerClonesRefreshAt)
+        {
+            _attackerClonesRefreshAt = time + AttackerClonesRefreshEvery;
+            _attackerClones.Clear();
+
+            var query = EntityQueryEnumerator<HumanoidAppearanceComponent, MobStateComponent>();
+            while (query.MoveNext(out var uid, out _, out _))
+            {
+                _attackerClones.Add(uid);
+            }
+        }
+
+        var i = 0;
+        while (i < _attackerClones.Count)
+        {
+            var pick = _random.Next(i, _attackerClones.Count);
+            var uid = _attackerClones[pick];
+
+            if (TerminatingOrDeleted(uid) || !TryComp(uid, out MobStateComponent? mobState))
+            {
+                _attackerClones[pick] = _attackerClones[^1];
+                _attackerClones.RemoveAt(_attackerClones.Count - 1);
+                continue;
+            }
+
+            _attackerClones[pick] = _attackerClones[i];
+            _attackerClones[i] = uid;
+            i++;
+
+            if (mobState.CurrentState != MobState.Alive ||
+                HasComp<SleepingComponent>(uid) ||
+                HasComp<RMCUnconsciousComponent>(uid) ||
+                Transform(uid).MapID == MapId.Nullspace)
+            {
+                continue;
+            }
+
+            return uid;
+        }
+
+        return null;
     }
 
     private void MoveAttacker(Entity<RMCHallucinatingComponent> ent, RMCHallucinationAttacker attacker, float frameTime)

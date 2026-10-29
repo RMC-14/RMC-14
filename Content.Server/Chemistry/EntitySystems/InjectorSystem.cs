@@ -1,5 +1,5 @@
 using Content.Server.Body.Systems;
-using Content.Shared._RMC14.Xenonids.Blood; // RMC14
+using Content.Shared._RMC14.Xenonids.Blood;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;

@@ -45,10 +45,8 @@
                                 </BoxContainer>
                                 <BoxContainer Name="SeedChips" Orientation="Horizontal" />
                                 <BoxContainer Orientation="Horizontal" SeparationOverride="4">
-                                    <Button Name="ApplyButton" Access="Public" Text="Apply Genes"
-                                            StyleClasses="OpenRight" />
-                                    <Button Name="EjectButton" Access="Public" Text="Eject All"
-                                            StyleClasses="OpenLeft" />
+                                    <botany:RMCBotanyButton Name="ApplyButton" Access="Public" Text="Apply Genes" />
+                                    <botany:RMCBotanyButton Name="EjectButton" Access="Public" Text="Eject All" />
                                 </BoxContainer>
                             </BoxContainer>
                         </BoxContainer>
