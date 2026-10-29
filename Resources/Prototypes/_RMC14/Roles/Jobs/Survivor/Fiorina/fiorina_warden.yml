@@ -20,7 +20,7 @@
     - type: CommandAccent
     - type: InnateCommandSpeech
     - type: Skills
-      preset: RMCSkillPresetSurvivorMarshalCO
+      preset: RMCSkillPresetSurvivorFiorinaWarden
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
