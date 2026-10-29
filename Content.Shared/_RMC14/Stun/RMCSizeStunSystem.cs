@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stamina;
 using Content.Shared.Coordinates;
+using Content.Shared.Emoting;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Flash;
 using Content.Shared.Interaction;
@@ -70,6 +71,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
         SubscribeLocalEvent<RMCUnconsciousComponent, ComponentShutdown>(OnUnconsciousEnd);
         SubscribeLocalEvent<RMCUnconsciousComponent, StatusEffectEndedEvent>(OnUnconsciousUpdate);
         SubscribeLocalEvent<RMCUnconsciousComponent, PointAttemptEvent>(OnUnconsciousPointAttempt);
+        SubscribeLocalEvent<RMCUnconsciousComponent, EmoteAttemptEvent>(OnUnconsciousEmoteAttempt);
 
         SubscribeLocalEvent<RMCKnockOutOnCollideComponent, ProjectileHitEvent>(OnKnockOutCollideProjectileHit);
         SubscribeLocalEvent<RMCKnockOutOnCollideComponent, ThrowDoHitEvent>(OnKnockOutCollideThrowHit);
@@ -358,6 +360,12 @@ public sealed class RMCSizeStunSystem : EntitySystem
         EnsureComp<TemporaryBlindnessComponent>(ent);
         EnsureComp<MutedComponent>(ent);
         EnsureComp<DeafComponent>(ent);
+    }
+
+    private void OnUnconsciousEmoteAttempt(Entity<RMCUnconsciousComponent> ent, ref EmoteAttemptEvent args)
+    {
+        if (IsKnockedOut(ent))
+            args.Cancel();
     }
 
     private void OnUnconsciousPointAttempt(Entity<RMCUnconsciousComponent> ent, ref PointAttemptEvent args)

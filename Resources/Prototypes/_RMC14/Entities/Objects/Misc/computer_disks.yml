@@ -14,7 +14,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCResearchRerollDisk
-  name: research market disk
+  name: research market (reroll)
   description: A disk containing all the bits of data the analyzer could salvage. Insert this into a research computer to sell the data and immediately reroll the synthesis contracts.
   components:
   - type: Sprite

@@ -399,7 +399,7 @@
     max: 4
   - type: TileFireOnTrigger
     spawn: RMCTileFire
-    duration: 60
+    duration: 55
   - type: Tag
     tags:
     - Grenade

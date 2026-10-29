@@ -278,6 +278,9 @@
   description: A leaked Weston-Yamada document detailing a breakthrough chemical property combination.
   components:
   - type: IntelResearchPaper
+  - type: IntelDetectorTracked
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: RMCPaperWeYa
@@ -286,6 +289,19 @@
   description: A Weston-Yamada research grant notice, redeemable for credits at a research terminal.
   components:
   - type: IntelChemGrantPaper
+  - type: IntelDetectorTracked
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCPaperWeYa
+  id: RMCChemSynthesisNotes
+  name: synthesis notes
+  description: A leaked Weston-Yamada document detailing the synthesis of an experimental compound.
+  components:
+  - type: IntelDetectorTracked
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: RMCPaperWeYa

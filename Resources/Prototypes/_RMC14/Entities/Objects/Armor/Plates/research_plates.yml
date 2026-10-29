@@ -12,33 +12,34 @@
 - type: entity
   parent: RMCArmorPlateBase
   id: RMCArmorPlateCoagulator
-  name: coagulator research plate
-  description: An armor accessory plate that suppresses bleeding while worn.
+  name: experimental blood coagulator
+  description: A device that encourages clotting through the coordinated effort of multiple sensors and radiation emitters. The Surgeon General warns that continuous exposure to radiation may be hazardous to your health.
   components:
   - type: RMCArmorPlate
-    kind: Coagulator
-    magnitude: 100
+    wearerComponents:
+    - type: RMCCoagulatorPlateActive
+      cancelChance: 100
 
 - type: entity
   parent: RMCArmorPlateBase
   id: RMCArmorPlateEmergencyInjector
-  name: emergency-injector research plate
-  description: A single-use plate that injects an emergency chemical cocktail, with overdose protection, when the wearer enters critical condition.
+  name: emergency chemical plate
+  description: One-time disposable research plate packing all kinds of chemicals injected at the will of the user by pressing two buttons on the sides simultaneously. The injection is painless, instant and packs much more chemicals than your normal emergency injector. Features OD Protection in three modes.
   components:
   - type: RMCArmorPlate
-    kind: EmergencyInjector
-    magnitude: 15
+    wearerComponents:
+    - type: RMCEmergencyInjectorPlateActive
   - type: RMCEmergencyInjectorPlate
 
 - type: entity
   parent: RMCArmorPlateBase
   id: RMCArmorPlateCeramic
-  name: ceramic research plate
-  description: A destructible trauma plate that soaks bullets until it shatters. Ineffective against sharp objects.
+  name: ceramic plate
+  description: A strong trauma plate, able to protect the user from a large amount of bullets. Ineffective against sharp objects.
   components:
   - type: RMCArmorPlate
-    kind: Ceramic
-    magnitude: 10
+    wearerComponents:
+    - type: RMCCeramicPlateActive
   - type: RMCCeramicPlate
   - type: Sprite
     sprite: _RMC14/Objects/Armor/Plates/ceramic_plate.rsi
@@ -57,18 +58,19 @@
 - type: entity
   parent: RMCArmorPlateBase
   id: RMCArmorPlateAntiDecay
-  name: anti-decay research plate
-  description: A preservation plate that activates on death, slowing decay and extending the time you can be revived by four minutes.
+  name: experimental preservation plate
+  description: Preservation plate which activates once the user is dead, uses variety of different substances and sensors to slow down the decay and increase the time before the user is permanently dead to around 9 minutes instead of 5.
   components:
   - type: RMCArmorPlate
-    kind: AntiDecay
-    magnitude: 4
+    wearerComponents:
+    - type: RMCAntiDecayPlateActive
 
 - type: entity
   parent: RMCArmorPlateBase
   id: RMCArmorPlateTranslator
   name: experimental language translator
-  description: An armor accessory plate whose microphones translate any language heard by the wearer, without any linguistic input - even languages never heard before.
+  description: Translates any language heard by the microphones on the plate without any linguistical input, allowing to translate languages never heard before and known languages alike.
   components:
   - type: RMCArmorPlate
-    kind: Translator
+    wearerComponents:
+    - type: RMCTranslatorPlateActive

@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel.Detector;
@@ -70,6 +71,7 @@ public sealed class IntelSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCReagentPrototypeSyncSystem _reagentSync = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -126,6 +128,7 @@ public sealed class IntelSystem : EntitySystem
     private static readonly EntProtoId ResearchPaperProto = "RMCIntelResearchPaper";
     private static readonly EntProtoId VialBoxProto = "RMCIntelVialBox";
     private static readonly EntProtoId ChemGrantPaperProto = "RMCChemGrantNotes";
+    private static readonly EntProtoId ChemSynthesisPaperProto = "RMCChemSynthesisNotes";
 
     private static readonly EntProtoId[] ExperimentalDeviceProtos =
     [
@@ -188,17 +191,17 @@ public sealed class IntelSystem : EntitySystem
 
     private readonly Dictionary<IntelSpawnerType, float> _researchPaperChances = new()
     {
-        [Close] = 25, [Medium] = 20, [Far] = 5, [Science] = 50,
+        [Close] = 6, [Medium] = 6, [Far] = 5, [Science] = 7,
+    };
+
+    private readonly Dictionary<IntelSpawnerType, float> _researchNoteChances = new()
+    {
+        [Close] = 8, [Medium] = 5, [Far] = 8, [Science] = 8,
     };
 
     private readonly Dictionary<IntelSpawnerType, float> _vialBoxChances = new()
     {
-        [Close] = 15, [Medium] = 30, [Far] = 5, [Science] = 50,
-    };
-
-    private readonly Dictionary<IntelSpawnerType, float> _chemGrantPaperChances = new()
-    {
-        [Close] = 25, [Medium] = 20, [Far] = 5, [Science] = 50,
+        [Medium] = 1, [Far] = 5, [Science] = 4,
     };
 
     private int _paperScraps;
@@ -210,8 +213,8 @@ public sealed class IntelSystem : EntitySystem
     private int _safes;
     private int _experimentalDevices;
     private int _researchPapers;
+    private int _researchNotes;
     private int _vialBoxes;
-    private int _chemGrantPapers;
     private TimeSpan _maxProcessTime;
     private TimeSpan _announceEvery;
     private int _powerObjectiveWattsRequired;
@@ -301,8 +304,8 @@ public sealed class IntelSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCIntelSafes, v => _safes = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelExperimentalDevices, v => _experimentalDevices = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelResearchPapers, v => _researchPapers = v, true);
+        Subs.CVar(_config, RMCCVars.RMCIntelResearchNotes, v => _researchNotes = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelVialBoxes, v => _vialBoxes = v, true);
-        Subs.CVar(_config, RMCCVars.RMCIntelChemGrantPapers, v => _chemGrantPapers = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelMaxProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCIntelAnnounceEveryMinutes, v => _announceEvery = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCIntelPowerObjectiveWattsRequired, v => _powerObjectiveWattsRequired = v, true);
@@ -1392,6 +1395,7 @@ public sealed class IntelSystem : EntitySystem
 
     public void RunSpawners()
     {
+        _reagentSync.BeginBatch();
         try
         {
             var spawnerQuery = EntityQueryEnumerator<IntelSpawnerComponent>();
@@ -1423,9 +1427,9 @@ public sealed class IntelSystem : EntitySystem
             var dataTerminals = ActivateDataTerminalObjectives(_dataTerminals);
             var devices = SpawnIntel(ExperimentalDeviceProtos, _experimentalDevices, _experimentalDeviceChances, randomNumber: false);
             var safes = ActivateSafeObjectives(_safes);
-            SpawnIntel([ResearchPaperProto], _researchPapers, _researchPaperChances, randomNumber: false, onSpawn: SetupResearchPaper);
-            SpawnIntel([VialBoxProto], _vialBoxes, _vialBoxChances, randomNumber: false, onSpawn: SetupVialBox);
-            SpawnIntel([ChemGrantPaperProto], _chemGrantPapers, _chemGrantPaperChances, randomNumber: false, onSpawn: SetupChemGrantPaper);
+            SpawnResearchNotes(_researchNotes);
+            SpawnIntel([ResearchPaperProto], _researchPapers, _researchPaperChances, activePosition: false, randomNumber: false, onSpawn: SetupResearchPaper);
+            SpawnIntel([VialBoxProto], _vialBoxes, _vialBoxChances, activePosition: false, randomNumber: false, onSpawn: SetupVialBox);
 
             AddFolderDetails(folders);
             AddDocumentLabels(highs, true);
@@ -1473,6 +1477,7 @@ public sealed class IntelSystem : EntitySystem
         finally
         {
             _spawners.Clear();
+            _reagentSync.EndBatch();
         }
     }
 
@@ -1556,6 +1561,17 @@ public sealed class IntelSystem : EntitySystem
         _nameModifier.RefreshNameModifiers(diskId);
     }
 
+    private void SpawnResearchNotes(int count)
+    {
+        for (var i = 0; i < count; i++)
+        {
+            if (_random.Prob(0.7f))
+                SpawnIntel([ChemSynthesisPaperProto], 1, _researchNoteChances, activePosition: false, randomNumber: false, onSpawn: SetupChemSynthesisPaper);
+            else
+                SpawnIntel([ChemGrantPaperProto], 1, _researchNoteChances, activePosition: false, randomNumber: false, onSpawn: SetupChemGrantPaper);
+        }
+    }
+
     private void SetupVialBox(EntityUid boxId)
     {
         EnsureComp<IntelVialBoxComponent>(boxId);
@@ -1574,6 +1590,11 @@ public sealed class IntelSystem : EntitySystem
         Dirty(paperId, grant);
 
         _paper.SetContent(paperId, Loc.GetString("rmc-intel-chem-grant-paper", ("credits", grant.Grant)));
+    }
+
+    private void SetupChemSynthesisPaper(EntityUid paperId)
+    {
+        EnsureComp<IntelChemSynthesisPaperComponent>(paperId);
     }
 
     private List<EntityUid> ActivateDataTerminalObjectives(int count)
@@ -1897,39 +1918,15 @@ public sealed class IntelSystem : EntitySystem
         tree.Comp.Tree.PendingChemicals[reagentId] = name;
         Dirty(tree);
         UpdateTree(tree);
-        Log.Debug($"AddPendingChemical: {reagentId} (\"{name}\") - PendingChemicals.Count={tree.Comp.Tree.PendingChemicals.Count}");
     }
 
     public void RemovePendingChemical(string reagentId)
     {
-        if (!TryGetTechTree(out var tree))
-        {
-            Log.Debug($"RemovePendingChemical: {reagentId} - no tech tree singleton exists yet, nothing to remove");
+        if (!TryGetTechTree(out var tree) || !tree.Value.Comp.Tree.PendingChemicals.Remove(reagentId))
             return;
-        }
-
-        if (!tree.Value.Comp.Tree.PendingChemicals.Remove(reagentId))
-        {
-            Log.Debug($"RemovePendingChemical: {reagentId} - was not present in PendingChemicals");
-            return;
-        }
 
         Dirty(tree.Value);
         UpdateTree(tree.Value);
-        Log.Debug($"RemovePendingChemical: {reagentId} - removed, PendingChemicals.Count={tree.Value.Comp.Tree.PendingChemicals.Count}");
-    }
-
-    public void FlagRetrieveObjective(EntityUid uid, FixedPoint2 value)
-    {
-        var retrieve = EnsureComp<IntelRetrieveItemObjectiveComponent>(uid);
-        retrieve.State = IntelObjectiveState.Active;
-        retrieve.Value = value;
-        Dirty(uid, retrieve);
-        EnsureComp<ActiveIntelPositionComponent>(uid);
-
-        var tree = EnsureTechTree();
-        tree.Comp.Tree.RetrieveItems.Total++;
-        Dirty(tree);
     }
 
     public void UpdateTree(Entity<IntelTechTreeComponent> tree)

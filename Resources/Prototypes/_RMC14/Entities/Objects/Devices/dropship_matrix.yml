@@ -1,0 +1,18 @@
+- type: entity
+  parent: BaseItem
+  id: RMCDropshipMatrix
+  name: matrix frame
+  description: An assembly for the dropship camera matrix, installed into the weapons console. Has a complex series of lenses which allow light to pass through the fluid. Because the fluids of the vial are spread evenly inside, it cannot be removed after it has been inserted.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/dropship_matrix.rsi
+    state: matrix
+  - type: Item
+    size: Normal
+  - type: DropshipMatrix
+  - type: ContainerContainer
+    containers:
+      rmc_dropship_matrix_vial: !type:ContainerSlot
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 7500

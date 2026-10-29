@@ -24,6 +24,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThermalCloakSystem _cloak = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedRMCFlammableSystem _flammable = default!;
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -84,7 +85,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
         if (_hive.FromSameHive(ent.Owner, other))
             return;
 
-        if (ent.Comp.Fire && HasComp<RMCImmuneToFireTileDamageComponent>(other))
+        if (ent.Comp.Fire && !_flammable.CanFireBypassImmunity(ent, other))
             return;
 
         if (HasComp<UncloakOnHitComponent>(ent.Owner))

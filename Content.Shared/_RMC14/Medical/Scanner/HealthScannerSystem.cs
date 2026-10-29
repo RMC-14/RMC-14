@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Temperature;
+using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -153,6 +154,13 @@ public sealed class HealthScannerSystem : EntitySystem
         return true;
     }
 
+    public List<HealthScanDisease>? GetDiseases(EntityUid target)
+    {
+        var ev = new HealthScanGetDiseasesEvent(new List<HealthScanDisease>());
+        RaiseLocalEvent(target, ref ev);
+        return ev.Diseases.Count > 0 ? ev.Diseases : null;
+    }
+
     private void UpdateUI(Entity<HealthScannerComponent> scanner)
     {
         if (scanner.Comp.Target is not { } target)
@@ -175,7 +183,7 @@ public sealed class HealthScannerSystem : EntitySystem
         if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream))
         {
             blood = bloodstream.Volume;
-            maxBlood = bloodstream.MaxVolume;
+            maxBlood = TryComp(target, out BloodstreamComponent? bloodstreamComp) ? bloodstreamComp.BloodMaxVolume : bloodstream.MaxVolume;
         }
 
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
@@ -183,7 +191,7 @@ public sealed class HealthScannerSystem : EntitySystem
 
         var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
-        var state = new HealthScanState(GetNetEntity(target), blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
+        var state = new HealthScanState(GetNetEntity(target), blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel, GetDiseases(target));
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }

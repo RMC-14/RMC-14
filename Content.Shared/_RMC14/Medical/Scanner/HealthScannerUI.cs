@@ -21,7 +21,7 @@ public readonly record struct HealthScanState(
     List<HealthScanDisease>? Diseases = null);
 
 [DataRecord, Serializable, NetSerializable]
-public readonly record struct HealthScanDisease(LocId Name, LocId Type, LocId Cure, int Stage, int MaxStage);
+public readonly record struct HealthScanDisease(string Name, string Type, string Cure, int Stage, int MaxStage);
 
 [ByRefEvent]
 public readonly record struct HealthScanGetDiseasesEvent(List<HealthScanDisease> Diseases);

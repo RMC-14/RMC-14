@@ -10,6 +10,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -28,6 +29,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -41,6 +43,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
+
+    private readonly HashSet<Entity<CMSolutionRefillerComponent>> _refillers = new();
 
     public override void Initialize()
     {
@@ -150,6 +154,32 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         {
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
         }
+    }
+
+    public bool TryDrainRefiller(EntityCoordinates coords, float range, ProtoId<ReagentPrototype> reagent, FixedPoint2 amount, out FixedPoint2 drained)
+    {
+        drained = FixedPoint2.Zero;
+
+        _refillers.Clear();
+        _entityLookup.GetEntitiesInRange(coords, range, _refillers);
+        foreach (var refiller in _refillers)
+        {
+            if (!refiller.Comp.Reagents.Contains(reagent) || refiller.Comp.Current <= FixedPoint2.Zero)
+                continue;
+
+            var take = FixedPoint2.Min(refiller.Comp.Current, amount - drained);
+            if (take <= FixedPoint2.Zero)
+                continue;
+
+            refiller.Comp.Current -= take;
+            drained += take;
+            Dirty(refiller);
+
+            if (drained >= amount)
+                break;
+        }
+
+        return drained > FixedPoint2.Zero;
     }
 
     private void OnRefillSolutionOnStoreInserted(Entity<RMCRefillSolutionOnStoreComponent> ent, ref EntInsertedIntoContainerMessage args)

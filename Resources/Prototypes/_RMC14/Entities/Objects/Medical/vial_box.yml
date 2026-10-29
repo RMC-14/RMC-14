@@ -75,6 +75,7 @@
   id: RMCIntelVialBox
   components:
   - type: IntelVialBox
+  - type: IntelDetectorTracked
 
 - type: Tag
   id: VialBox
