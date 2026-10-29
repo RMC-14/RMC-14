@@ -9,7 +9,7 @@
     RMCRankCMBMarshal: []
   accessGroups:
   - ColonistSec
-  spawnMenuRoleName: Fiorina Warden (Survivor Commander)
+  spawnMenuRoleName: CMB Prison Warden (Fiorina Special Survivor)
   icon: "RMCJobIconFiorinaWarden"
   hasIcon: true
   special:
