@@ -5,6 +5,12 @@
   chatMessages: ["chat-emote-msg-rmcgiggle"]
 
 - type: emote
+  id: RMCChuckle
+  name: chat-emote-name-rmcchuckle
+  category: Vocal
+  chatMessages: ["chat-emote-msg-rmcchuckle"]
+
+- type: emote
   id: RMCTwitch
   name: chat-emote-name-rmctwitch
   chatMessages: ["chat-emote-msg-rmctwitch"]
@@ -35,3 +41,14 @@
   name: chat-emote-name-rmcsmile
   category: Vocal
   chatMessages: ["chat-emote-msg-rmcsmile"]
+
+- type: emote
+  id: RMCMoan
+  name: chat-emote-name-rmcmoan
+  category: Vocal
+  chatMessages: ["chat-emote-msg-rmcmoan"]
+
+- type: emote
+  id: RMCCollapse
+  name: chat-emote-name-rmccollapse
+  chatMessages: ["chat-emote-msg-rmccollapse"]

@@ -42,6 +42,7 @@
   name: drowsiness
   components:
   - type: DrowsinessStatusEffect
+  - type: RMCDrowsinessStatusEffect # RMC14
 
 # Adds drugs overlay
 - type: entity

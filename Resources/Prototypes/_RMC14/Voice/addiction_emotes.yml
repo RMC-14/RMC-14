@@ -1,0 +1,29 @@
+- type: emote
+  id: RMCWinceSlightly
+  name: chat-emote-name-rmcwinceslightly
+  chatMessages: ["chat-emote-msg-rmcwinceslightly"]
+
+- type: emote
+  id: RMCWince
+  name: chat-emote-name-rmcwince
+  chatMessages: ["chat-emote-msg-rmcwince"]
+
+- type: emote
+  id: RMCGrimace
+  name: chat-emote-name-rmcgrimace
+  chatMessages: ["chat-emote-msg-rmcgrimace"]
+
+- type: emote
+  id: RMCGroan
+  name: chat-emote-name-rmcgroan
+  chatMessages: ["chat-emote-msg-rmcgroan"]
+
+- type: emote
+  id: RMCGroanPainfully
+  name: chat-emote-name-rmcgroanpainfully
+  chatMessages: ["chat-emote-msg-rmcgroanpainfully"]
+
+- type: emote
+  id: RMCContortPain
+  name: chat-emote-name-rmccontortpain
+  chatMessages: ["chat-emote-msg-rmccontortpain"]

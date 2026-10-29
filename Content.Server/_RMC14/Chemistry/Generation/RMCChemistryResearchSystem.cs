@@ -218,17 +218,6 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         return TryGetResearch(out var research) && research.Value.Comp.ReachedXAccess;
     }
 
-    public bool HasSufficientClearance(int tier)
-    {
-        if (!TryGetResearch(out var research))
-            return false;
-
-        if (tier >= research.Value.Comp.XAccessClearanceTier)
-            return research.Value.Comp.ReachedXAccess;
-
-        return research.Value.Comp.ClearanceLevel >= tier;
-    }
-
     public bool TryRequestXAccess()
     {
         var research = EnsureResearch();

@@ -8,39 +8,21 @@
   flavor: bitter
   color: "#60A584"
   unknown: true
-  toxin: true
+  overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Narcotic:
       metabolismRate: 0.1
       effects:
+      - !type:Hallucinogenic
+        potency: 2
       - !type:Addictive
         potency: 1
-      - !type:Emote
-        emote: Laugh #TODO twitches, drools, moans.
-        showInChat: true
-        probability: 0.05
-      - !type:ModifyStatusEffect
-        effectProto: RMCStatusEffectSeeingRainbow
-        type: Add
-        time: 10 #0.5/s is too slow
-        refresh: true #10s cap
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
-          min: 30                #TODO RandomWalk at 30 OD
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold #TODO 0.5 brain damage/s at 50 OD
-          min: 50
-        key: Unconscious
-        component: RMCUnconscious
-        type: Add
-        time: 40
-        refresh: true
 
 - type: reagent
   parent: RMCSpaceDrugs
   id: RMCPsilocybin #Shrooms
+  chemClass: Rare
   name: reagent-name-rmcpsilocybin
   desc: reagent-desc-rmcpsilocybin
   color: "#E700E7"
@@ -48,25 +30,5 @@
     Narcotic:
       metabolismRate: 0.1
       effects:
-      - !type:Emote
-        emote: Laugh #TODO twitches, drools, moans.
-        showInChat: true
-        probability: 0.05
-      - !type:ModifyStatusEffect
-        effectProto: RMCStatusEffectSeeingRainbow
-        type: Add
-        time: 15 #0.75/s is too slow
-        refresh: true #15s cap
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
-          min: 30                #TODO RandomWalk at 30 OD
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold #TODO 0.75 brain damage/s 50 OD
-          min: 50
-        key: Unconscious
-        component: RMCUnconscious
-        type: Add
-        time: 40
-        refresh: true
+      - !type:Hallucinogenic
+        potency: 3

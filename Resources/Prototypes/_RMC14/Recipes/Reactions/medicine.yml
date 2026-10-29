@@ -68,14 +68,15 @@
 
 - type: reaction
   id: CMDexalin
+  quantized: true
   reactants:
     RMCOxygen:
       amount: 2
     RMCPhoron:
-      amount: 5.1
+      amount: 5
+      catalyst: true
   products:
     CMDexalin: 1
-    RMCPhoron: 5
 
 - type: reaction
   id: CMDexalinPlus

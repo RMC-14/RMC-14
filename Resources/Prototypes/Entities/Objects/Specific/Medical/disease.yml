@@ -14,7 +14,7 @@
     - Recyclable
     - Trash
   - type: BotanySwab
-  - type: RMCBotanySwab # RMC
+  - type: RMCBotanySwab # RMC14
   - type: GuideHelp
     guides:
   # - Virology (when it's back)
@@ -34,7 +34,7 @@
   - type: BallisticAmmoProvider
     whitelist:
       components:
-      - RMCBotanySwab
+      - RMCBotanySwab # RMC14
     proto: DiseaseSwab
     capacity: 30
   - type: GuideHelp

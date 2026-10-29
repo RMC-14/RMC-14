@@ -158,23 +158,27 @@
   boilingPoint: -84.7 # Acetylene. Close enough.
   meltingPoint: -80.7
   friction: 0.4
-  tileReactions:
+  tileReactions: #RMC14
   - !type:SpillTileReaction
-  intensity: 16 # <RMC14>
-  duration: 33
+  intensity: 10 #RMC14
+  duration: 10
   radius: 4
   fireEntity: RMCTileFireWeldingFuel
-  intensityMod: 0.1
-  durationMod: 0.7
-  radiusMod: -0.08
+  explosivePower: 0.12 # RMC14
+  explosiveFalloff: -0.1 # RMC14
+  reactiveEffects: {} # RMC14
+  - !type:Fueling
+    potency: 5
+  - !type:Oxidizing
+    potency: 3
+  - !type:Viscous
+    potency: 4
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
       - !type:Toxic
-        potency: 1
-      - !type:Explosive
-        potency: 0.0045 # </RMC14>
+        potency: 1 #RMC14
 
 - type: reagent
   id: Fluorosurfactant

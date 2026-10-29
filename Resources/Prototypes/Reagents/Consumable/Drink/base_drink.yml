@@ -46,12 +46,14 @@
   group: Drinks
   abstract: true
   alcohol: true # <RMC14>
-  intensity: 15
-  duration: 15
-  radius: 4
-  intensityMod: 0.2
-  durationMod: 0.2
-  radiusMod: 0.1
+  fireProperties:
+  - !type:Fueling
+    potency: 3
+  - !type:Oxidizing
+    potency: 3
+  - !type:Flowing
+    potency: 2
+  burnColorMod: 2
   fireEntity: RMCTileFireEthanol # </RMC14>
   slipData:
     requiredSlipSpeed: 3.5
@@ -64,11 +66,6 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.06
-  reactiveEffects:
-    Flammable:
-      methods: [ Touch ]
-      effects:
-      - !type:FlammableReaction
   tileReactions:
   - !type:FlammableTileReaction
     temperatureMultiplier: 1.35

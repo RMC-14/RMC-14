@@ -1,5 +1,6 @@
 using Content.Server._RMC14.Chat.Chat;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Chemistry.Disabilities;
 using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Prototypes;
@@ -199,7 +200,7 @@ public sealed partial class ChatSystem
 
             var listenerMessage = listener == source
                 ? speakerMessage
-                : _language.ObfuscateMessageForListener(listener, speakerMessage, language);
+                : ObfuscateForListener(listener, speakerMessage, language, visibleLanguage);
             var listenerName = FormattedMessage.EscapeText(GetSpeakerNameForListener(source, listener, transformedName));
             var listenerIdentityName = FormattedMessage.EscapeText(GetSpeakerNameForListener(source, listener, transformedIdentityName));
 
@@ -207,7 +208,7 @@ public sealed partial class ChatSystem
 
             if (data.Range <= WhisperClearRange)
             {
-                var hidePopup = visibleLanguage && !_language.CanUnderstand(listener, language);
+                var hidePopup = visibleLanguage && !CanUnderstandForListener(listener, language, visibleLanguage);
                 var useEmoteSpeechBubble = hidePopup;
                 actualWrappedMessage = hidePopup
                     ? Loc.GetString(
@@ -233,7 +234,7 @@ public sealed partial class ChatSystem
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
             {
                 var obfuscatedMessage = ObfuscateMessageReadability(listenerMessage, 0.2f);
-                var hidePopup = visibleLanguage && !_language.CanUnderstand(listener, language);
+                var hidePopup = visibleLanguage && !CanUnderstandForListener(listener, language, visibleLanguage);
                 var useEmoteSpeechBubble = hidePopup;
                 actualWrappedMessage = hidePopup
                     ? Loc.GetString(
@@ -337,14 +338,14 @@ public sealed partial class ChatSystem
 
             var listenerMessage = listener == source
                 ? message
-                : _language.ObfuscateMessageForListener(listener, message, language);
+                : ObfuscateForListener(listener, message, language, visibleLanguage);
             var listenerName = FormattedMessage.EscapeText(GetRadioSpeakerNameForListener(source, listener, transformedName, originalSpeaker));
 
             string actualWrappedMessage;
 
             if (data.Range <= WhisperClearRange)
             {
-                var hidePopup = visibleLanguage && !_language.CanUnderstand(listener, language);
+                var hidePopup = visibleLanguage && !CanUnderstandForListener(listener, language, visibleLanguage);
                 var useEmoteSpeechBubble = hidePopup;
                 actualWrappedMessage = hidePopup
                     ? Loc.GetString(
@@ -370,7 +371,7 @@ public sealed partial class ChatSystem
             else if (data.HasLOS)
             {
                 var obfuscatedMessage = ObfuscateMessageReadability(listenerMessage, 0.2f);
-                var hidePopup = visibleLanguage && !_language.CanUnderstand(listener, language);
+                var hidePopup = visibleLanguage && !CanUnderstandForListener(listener, language, visibleLanguage);
                 var useEmoteSpeechBubble = hidePopup;
                 actualWrappedMessage = hidePopup
                     ? Loc.GetString(
@@ -442,6 +443,22 @@ public sealed partial class ChatSystem
             ("originalName", originalSpeakerName));
     }
 
+    private bool CanUnderstandForListener(EntityUid listener, ProtoId<LanguagePrototype> language, bool visibleLanguage)
+    {
+        if (visibleLanguage && HasComp<RMCBlindDisabilityComponent>(listener))
+            return false;
+
+        return _language.CanUnderstand(listener, language);
+    }
+
+    private string ObfuscateForListener(EntityUid listener, string message, ProtoId<LanguagePrototype> language, bool visibleLanguage)
+    {
+        if (visibleLanguage && HasComp<RMCBlindDisabilityComponent>(listener))
+            return _language.ObfuscateMessage(message, language);
+
+        return _language.ObfuscateMessageForListener(listener, message, language);
+    }
+
     private void SendInVoiceRangeWithLanguage(
         ChatChannel channel,
         string speakerMessage,
@@ -470,10 +487,10 @@ public sealed partial class ChatSystem
             if (needsLos && !data.Observer && listener != source && !data.HasLOS)
                 continue;
 
-            var canUnderstand = _language.CanUnderstand(listener, language);
+            var canUnderstand = CanUnderstandForListener(listener, language, visibleLanguage);
             var listenerMessage = listener == source
                 ? speakerMessage
-                : _language.ObfuscateMessageForListener(listener, speakerMessage, language);
+                : ObfuscateForListener(listener, speakerMessage, language, visibleLanguage);
             var useEmoteSpeechBubble = visibleLanguage && !canUnderstand;
             var listenerName = FormattedMessage.EscapeText(GetSpeakerNameForListener(
                 source,

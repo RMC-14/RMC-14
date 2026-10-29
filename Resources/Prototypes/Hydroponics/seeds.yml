@@ -820,10 +820,6 @@
       Min: 5
       Max: 15
       PotencyDivisor: 10
-    RMCCornOil:
-      Min: 1
-      Max: 5
-      PotencyDivisor: 20
 
 - type: seed
   id: onion

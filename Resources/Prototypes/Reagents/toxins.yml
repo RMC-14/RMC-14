@@ -21,6 +21,7 @@
 
 - type: reagent
   id: CarpoToxin
+  toxin: true # RMC14
   name: reagent-name-carpotoxin
   group: Toxins
   desc: reagent-desc-carpotoxin
@@ -318,9 +319,6 @@
   desc: reagent-desc-lexorin
   physicalDesc: reagent-physical-desc-pungent
   color: "#6b0007"
-  plantMetabolism:
-  - !type:Biocidic
-    potency: 4.0
   metabolisms:
     Poison:
       effects:

@@ -7,6 +7,8 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#E71B00"
+  burnColor: "#e01e1e"
+  burnColorMod: 3
   toxin: true
   intensityMod: 0.4
   durationMod: -0.8
@@ -42,25 +44,18 @@
   fireEntity: RMCTileFireNapalmBase
   tileReactions:
   - !type:SpillTileReaction
+  fireProperties:
+  - !type:Oxidizing
+    potency: 6
+  - !type:Fueling
+    potency: 7
+  - !type:Flowing
+    potency: 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
-      effects:
-      - !type:Oxidizing
-        potency: 6
-      - !type:Fueling
-        potency: 7
-      - !type:Flowing
-        potency: 1
-  reactiveEffects:
-    Flammable:
-      methods: [ Touch ]
-      effects:
-      - !type:FlammableReaction
-      - !type:Oxidizing
-        potency: 6
-      - !type:Fueling
-        potency: 7
+      effects: []
+  reactiveEffects: {}
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
@@ -70,6 +65,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#f8e3b2"
+  burnColor: "#f8e3b2"
   intensityMod: -1.5
   durationMod: -5
   radiusMod: -0.5
@@ -93,6 +89,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#c51c1c"
+  burnColor: "#c51c1c"
   intensityMod: -4.5
   durationMod: -1
   radiusMod: -0.5
@@ -116,6 +113,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#DD9B00"
+  burnColor: "#EE6515"
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -135,6 +133,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#EE6515"
+  burnColor: "#EE6515"
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -173,6 +172,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#00dd00"
+  burnColor: "#00FF00"
   fireEntity: RMCTileFireGreen
   fireSpread: true
   metabolisms:
@@ -194,6 +194,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#00b8ff"
+  burnColor: "#00b8ff"
   specialist: true
   fireEntity: RMCTileFireBlue
   metabolisms:
@@ -215,6 +216,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#00dd00"
+  burnColor: "#00FF00"
   specialist: true
   fireEntity: RMCTileFireGreen
   fireSpread: true
@@ -237,6 +239,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#800080"
+  burnColor: "#800080"
   fireEntity: RMCTileFireNapalmE
   metabolisms:
     Poison:
@@ -258,6 +261,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#641dd6"
+  burnColor: "#641dd6"
   fireEntity: RMCTileFireNapalmEX
   metabolisms:
     Poison:
@@ -279,6 +283,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#ffe49c"
+  burnColor: "#ffe49c"
   fireEntity: RMCTileFireR189
   metabolisms:
     Poison:
@@ -301,6 +306,9 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#ff9300"
+  fireProperties:
+  - !type:Oxidizing
+    potency: 9
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -311,44 +319,31 @@
         potency: 6
       - !type:Igniting
         potency: 1
-      - !type:Oxidizing
-        potency: 9
-  reactiveEffects:
-    Flammable:
-      methods: [ Touch ]
-      effects:
-      - !type:FlammableReaction
-      - !type:Oxidizing
-        potency: 9
+  reactiveEffects: {}
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
   id: RMCMethane
   chemClass: Common
+  explosivePower: 0.15
   name: reagent-name-rmcmethane
   desc: reagent-desc-rmcmethane
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#0064C8"
-  toxin: true
   tileReactions:
   - !type:SpillTileReaction
+  fireProperties:
+  - !type:Flowing
+    potency: 3
+  - !type:Viscous
+    potency: 3
+  - !type:Fueling
+    potency: 2
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
       - !type:Toxic
         potency: 2
-      - !type:Flowing
-        potency: 3
-      - !type:Viscous
-        potency: 3
-      - !type:Fueling
-        potency: 2
-  reactiveEffects:
-    Flammable:
-      methods: [ Touch ]
-      effects:
-      - !type:FlammableReaction
-      - !type:Fueling
-        potency: 2
+  reactiveEffects: {}

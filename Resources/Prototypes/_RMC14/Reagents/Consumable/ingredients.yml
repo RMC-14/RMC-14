@@ -1,4 +1,4 @@
-﻿# Cherry Jelly
+# Cherry Jelly
 - type: reagent
   parent: BaseJuice
   id: RMCCherryJelly
@@ -8,9 +8,6 @@
   flavor: cherry
   color: "#801E28"
   recognizable: true
-  plantMetabolism:
-  - !type:Nutritious
-    potency: 8.0
   metabolisms:
     Food:
       metabolismRate: 0.1
@@ -48,9 +45,6 @@
   flavor: sweet
   color: "#FF00FF"
   recognizable: true
-  plantMetabolism:
-  - !type:Nutritious
-    potency: 8.0
   metabolisms:
     Food:
       metabolismRate: 0.1
@@ -91,7 +85,7 @@
   chemClass: Rare
   name: reagent-name-rmc-coco
   desc: reagent-desc-rmc-coco
-  physicalDesc: reagent-physical-desc-bitter
+  physicalDesc: reagent-physical-desc-powdery
   flavor: chocolate
   color: "#302000"
   recognizable: true

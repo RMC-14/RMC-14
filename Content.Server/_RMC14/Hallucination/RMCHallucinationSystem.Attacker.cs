@@ -355,10 +355,14 @@ public sealed partial class RMCHallucinationSystem
 
         var tile = _map.TileIndicesFor(grid, gridComp, Transform(ent).Coordinates);
         var time = _timing.CurTime;
-        if (ent.Comp.FakeBlood.TryGetValue((grid, tile), out var end) && time < end)
-            return;
+        ent.Comp.FakeBlood.RemoveAll(blood => time >= blood.End);
+        foreach (var blood in ent.Comp.FakeBlood)
+        {
+            if (blood.Grid == grid && blood.Tile == tile)
+                return;
+        }
 
-        ent.Comp.FakeBlood[(grid, tile)] = time + FakeBloodLifetime;
+        ent.Comp.FakeBlood.Add(new RMCHallucinationFakeBlood(grid, tile, time + FakeBloodLifetime));
         var coords = _map.GridTileToLocal(grid, gridComp, tile);
         SendToVictim(ent, new RMCHallucinationVisualEvent(BloodVisual, $"mfloor{_random.Next(1, 8)}", GetNetCoordinates(coords), FakeBloodLifetime));
     }

@@ -64,6 +64,7 @@
       - !type:AdjustReagent
         reagent: Nutriment
         amount: 0.5
+      - !type:CureNearsighted # RMC14
 
 - type: reagent
   id: JuiceGrape

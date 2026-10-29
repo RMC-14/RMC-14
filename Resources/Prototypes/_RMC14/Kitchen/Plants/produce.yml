@@ -502,6 +502,112 @@
     - Vegetable
 
 - type: entity
+  name: fly amanita
+  parent: FoodProduceBase
+  id: FoodAmanita
+  description: A stout, cream-colored mushroom cap. Its flesh carries a dangerous dose of amatoxin.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: RMCAmatoxin
+          Quantity: 2
+        - ReagentId: RMCPsilocybin
+          Quantity: 1
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/fly_amanita.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: tower cap
+  parent: FoodProduceBase
+  id: RMCFoodTowercap
+  description: A tough, fibrous mushroom log. Better suited for building than for eating.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/towercap.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: ambrosia deus
+  parent: FoodProduceBase
+  id: RMCFoodAmbrosiaDeus
+  description: A refined, potent strain of ambrosia. Its medicinal properties are far more concentrated.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 3
+        - ReagentId: RMCSpaceDrugs
+          Quantity: 2
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/ambrosia_deus.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: blue tomato
+  parent: FoodProduceBase
+  id: RMCFoodBlueTomato
+  description: A tomato with an unnatural blue tint.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/blue_tomato.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: blood tomato
+  parent: FoodProduceBase
+  id: RMCFoodBloodTomato
+  description: A tomato that oozes something that looks unsettlingly like blood.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Blood
+          Quantity: 2
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/blood_tomato.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
   parent: FoodApple
   id: RMCFoodPoisonApple
   name: poison apple

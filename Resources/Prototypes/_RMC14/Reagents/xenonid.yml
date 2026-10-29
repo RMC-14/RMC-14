@@ -161,6 +161,12 @@
   color: "#cf7551"
   overdose: 30
   criticalOverdose: 50
+  reactiveEffects:
+    RMCGenerated:
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:Musclestimulating
+        potency: 6
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -187,8 +193,7 @@
       effects:
       - !type:Hemositic
         potency: 4
-      - !type:Embryonic
-        potency: 1
+      - !type:XenoEggPlasmaEmbryo {}
 
 - type: reagent
   parent: CMReagent
@@ -243,14 +248,15 @@
   criticalOverdose: 50
   tileReactions:
   - !type:SpillTileReaction
+  fireProperties:
+  - !type:Fueling
+    potency: 1
+  - !type:Viscous
+    potency: 3
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:Fueling
-        potency: 1
-      - !type:Viscous
-        potency: 3
       - !type:Addictive
         potency: 4
       - !type:Nutritious
@@ -268,10 +274,8 @@
   overdose: 30
   criticalOverdose: 50
   plantMetabolism:
-  - !type:Biocidic
-    potency: 8
   - !type:Blighting
-    potency: 4
+    potency: 1
   metabolisms:
     Poison:
       metabolismRate: 0.1

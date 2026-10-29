@@ -369,11 +369,19 @@
         effectProto: StatusEffectDrowsiness
         time: 3
         type: Remove
+      # RMC14
       - !type:Jitter
         time: 20
       - !type:Hallucinogenic
         potency: 6
       # TODO RMC14: screen dizziness
+      # RMC14
+#    Poison:
+#      effects:
+#      - !type:HealthChange
+#        damage:
+#          types:
+#            Poison: 1
   fizziness: 0.5
 
 - type: reagent
@@ -470,6 +478,9 @@
   meltingPoint: 0.0
   friction: 0.4
   intensityMod: -3 # RMC14
+  plantMetabolism:
+  - !type:PlantAdjustWater
+    amount: 0.5
   metabolisms:
     Drink:
       effects:
@@ -538,24 +549,6 @@
       effects:
       - !type:SatiateHunger
         factor: 4
-
-- type: reagent
-  id: HellRamen
-  name: reagent-name-hell-ramen
-  parent: BaseDrink
-  desc: reagent-desc-hell-ramen
-  physicalDesc: reagent-physical-desc-wormy
-  flavor: cheapnoodles
-  color: "#664300"
-  metabolisms:
-    Food:
-      effects:
-      - !type:SatiateHunger
-        factor: 4
-    Poison:
-      effects:
-      - !type:Hyperthermic
-        potency: 4
 
 - type: reagent
   id: ArnoldPalmer

@@ -40,8 +40,7 @@ public sealed partial class Defibrillating : RMCChemicalEffect
     }
 
     // TODO RMC14: pain.apply_pain(PROPERTY_DEFIBRILLATING_PAIN_OD = 2) on overdose (a flat 2 pain per 2s tick that
-    // builds up), & pain.recalculate_pain()
-    // when the chemical leaves the body
+    // builds up), & pain.recalculate_pain() when the chemical leaves the body
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var damage = new DamageSpecifier();
@@ -49,7 +48,7 @@ public sealed partial class Defibrillating : RMCChemicalEffect
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
-    // TODO RMC14: mob effect - heart organ damage on critical overdose - 0.5 * potency * delta_time (potency per 2s tick)
+    // TODO RMC14: heart organ damage on critical overdose - 0.5 * potency * delta_time (potency per 2s tick)
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

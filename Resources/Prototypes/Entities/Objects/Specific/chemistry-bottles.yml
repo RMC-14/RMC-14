@@ -208,36 +208,6 @@
           Quantity: 30
 
 - type: entity
-  id: ChemistryBottleAmmonia
-  suffix: ammonia
-  parent: BaseChemistryBottleFilled
-  components:
-  - type: Label
-    currentLabel: reagent-name-ammonia
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Ammonia
-          Quantity: 30
-
-- type: entity
-  id: ChemistryBottleDiethylamine
-  suffix: diethylamine
-  parent: BaseChemistryBottleFilled
-  components:
-  - type: Label
-    currentLabel: reagent-name-diethylamine
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Diethylamine
-          Quantity: 30
-
-- type: entity
   id: ChemistryBottleUnstableMutagen
   suffix: unstable mutagen
   parent: BaseChemistryBottleFilled

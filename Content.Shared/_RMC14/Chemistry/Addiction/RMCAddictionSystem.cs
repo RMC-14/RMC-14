@@ -41,8 +41,43 @@ public sealed class RMCAddictionSystem : EntitySystem
     private static readonly ProtoId<EmotePrototype>[] StageThreeEmotes = ["RMCWince", "RMCGrimace", "RMCGroan"];
     private static readonly ProtoId<EmotePrototype>[] StageFourEmotes = ["RMCGroanPainfully", "RMCContortPain"];
 
+    private static readonly string[] StageOneCravings =
+    [
+        "You could use another hit of {0}.",
+        "More {0} would be nice.",
+        "Another dose of {0} would help.",
+        "One more dose of {0} wouldn't hurt.",
+        "Why not take one more {0}?",
+    ];
+
+    private static readonly string[] StageTwoCravings =
+    [
+        "It's just not the same without {0}.",
+        "You could use another hit of {0}.",
+        "You should take more {0}.",
+        "Just one more {0}.",
+        "Looks like you need more {0}.",
+    ];
+
+    private static readonly string[] StageThreeCravings =
+    [
+        "You need more {0}.",
+        "It's hard to go on like this without {0}.",
+        "You want more {0}. You need more.",
+        "Just take another hit of {0}. Now.",
+        "One more {0}.",
+    ];
+
+    private static readonly string[] StageFourCravings =
+    [
+        "You need another dose of {0}, now. NOW.",
+        "You can't stand it. You have to go back to {0}. You have to go back.",
+        "You need more {0}. YOU NEED MORE.",
+        "MORE {1}",
+        "TAKE MORE {1}.",
+    ];
+
     private const int MaxStage = 4;
-    private const int CravingMessageCount = 5;
     private const float ProgressionThreshold = 300f;
     private const float DecayPerTick = 0.383f;
 
@@ -185,7 +220,7 @@ public sealed class RMCAddictionSystem : EntitySystem
                 {
                     StaminaFloor(uid, MathF.Min(20, record.WithdrawalProgression * 0.5f));
                     if (_random.Prob(0.5f))
-                        Craving(uid, record, 1);
+                        Craving(uid, record, StageOneCravings);
                 }
 
                 return SlowdownToMultiplier(TimeSpan.FromSeconds(0.5));
@@ -194,7 +229,7 @@ public sealed class RMCAddictionSystem : EntitySystem
                 {
                     StaminaFloor(uid, MathF.Min(40, record.WithdrawalProgression));
                     if (_random.Prob(0.5f))
-                        Craving(uid, record, 2);
+                        Craving(uid, record, StageTwoCravings);
 
                     if (_random.Prob(0.25f))
                         Emote(uid, StageTwoEmotes);
@@ -209,7 +244,7 @@ public sealed class RMCAddictionSystem : EntitySystem
                 {
                     StaminaFloor(uid, MathF.Min(60, record.WithdrawalProgression * 1.5f));
                     if (_random.Prob(0.5f))
-                        Craving(uid, record, 3);
+                        Craving(uid, record, StageThreeCravings);
 
                     if (_random.Prob(0.25f))
                         Emote(uid, StageThreeEmotes);
@@ -224,7 +259,7 @@ public sealed class RMCAddictionSystem : EntitySystem
                 {
                     StaminaFloor(uid, MathF.Min(80, record.WithdrawalProgression * 2f));
                     if (_random.Prob(0.5f))
-                        Craving(uid, record, 4);
+                        Craving(uid, record, StageFourCravings);
 
                     if (_random.Prob(0.25f))
                         Emote(uid, StageFourEmotes);
@@ -254,15 +289,13 @@ public sealed class RMCAddictionSystem : EntitySystem
         _status.TryUpdateStatusEffectDuration(uid, Hallucination, TimeSpan.FromSeconds(seconds));
     }
 
-    private void Craving(EntityUid uid, RMCAddictionRecord record, int stage)
+    private void Craving(EntityUid uid, RMCAddictionRecord record, string[] messages)
     {
         var reagent = _rmcReagent.TryIndex(record.ReagentId, out var proto)
             ? proto.LocalizedName
             : record.ReagentId;
 
-        var message = Loc.GetString($"rmc-addiction-craving-stage-{stage}-{_random.Next(1, CravingMessageCount + 1)}",
-            ("reagent", reagent),
-            ("reagentCaps", reagent.ToUpperInvariant()));
+        var message = string.Format(_random.Pick(messages), reagent, reagent.ToUpperInvariant());
         _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
     }
 

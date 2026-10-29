@@ -27,6 +27,8 @@
   physicalDesc: reagent-physical-desc-crystalline
   flavor: bitter
   color: "#1C1300"
+  burnColor: "#ffd700"
+  burnColorMod: 3
   unknown: true
   durationMod: 1
   tileReactions:
@@ -51,9 +53,6 @@
   unknown: true
   overdose: 30
   criticalOverdose: 50
-  plantMetabolism:
-  - !type:Biocidic
-    potency: 4.0
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -94,9 +93,14 @@
   color: "#808080"
   overdose: 30
   criticalOverdose: 50
-  plantMetabolism:
-  - !type:Toxic
-    potency: 4.0
+  reactiveEffects:
+    RMCGenerated:
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:Neutralizing
+        potency: 1
+  tileReactions:
+  - !type:RMCNeutralizeTileReaction
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -105,14 +109,6 @@
         potency: 1
       - !type:Neutralizing
         potency: 1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Burn: 0.5
-            Toxin: 0.25
 
 - type: reagent
   parent: RMCReagentElement
@@ -135,15 +131,20 @@
   parent: RMCReagentElement
   id: RMCHydrogen
   chemClass: Basic
+  explosivePower: 0.15
   name: reagent-name-hydrogen
   group: Elements
   desc: reagent-desc-hydrogen
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  burnColorMod: 2
   durationMod: -0.5
   radiusMod: 0.2
   intensityMod: -0.5
+  fireProperties:
+  - !type:Fueling
+    potency: 1
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -163,8 +164,6 @@
   color: "#a19d94"
   overdose: 30
   criticalOverdose: 50
-  plantMetabolism:
-  - !type:Hemogenic {}
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -182,13 +181,12 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
   color: "#808080"
+  burnColorMod: 5
   unknown: true
-  intensity: 8
-  duration: -3
-  radius: 0
-  intensityMod: 0.2
-  durationMod: -0.1
-  radiusMod: -0.01
+  intensityMod: 0.15
+  fireProperties:
+  - !type:Oxidizing
+    potency: 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -217,9 +215,14 @@
   flavor: metallic
   color: "#484848"
   unknown: true
-  plantMetabolism:
-  - !type:Neurotoxic
-    potency: 16
+  reactiveEffects:
+    RMCGenerated:
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:Neurocryogenic
+        potency: 1
+      - !type:Disrupting
+        potency: 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -262,6 +265,8 @@
   physicalDesc: reagent-physical-desc-powdery
   flavor: metallic
   color: "#832828"
+  burnColor: "#ffdba4"
+  burnColorMod: 5
   unknown: true
   intensityMod: 1
   durationMod: 0.1
@@ -284,11 +289,6 @@
   flavor: metallic
   color: "#C7C7C7"
   unknown: true
-  plantMetabolism:
-  - !type:Carcinogenic
-    potency: 8.0
-  - !type:Hemorrhaging
-    potency: 4.0
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -384,9 +384,6 @@
   unknown: true
   tileReactions:
   - !type:SpillTileReaction
-  plantMetabolism:
-  - !type:Carcinogenic
-    potency: 8.0
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -403,6 +400,8 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  burnColor: "#58daff"
+  burnColorMod: 2
   unknown: true
   intensityMod: 0.75
   radiusMod: -0.08
@@ -443,48 +442,16 @@
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: alcohol
   color: "#404030"
+  overdose: 60
+  criticalOverdose: 100
   metabolisms:
     Alcohol:
       metabolismRate: 0.1
       effects:
-      - !type:Drunk
-        boozePower: 6.38
-      - !type:Drunk
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        boozePower: 9.69
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        damage:
-          groups:
-            Toxin: 0.625
-            Airloss: 1.25
-      - !type:ChemVomit
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        probability: 0.12
-      - !type:Drunk
-        conditions:
-        - !type:ReagentThreshold
-          min: 100
-        boozePower: 13.125
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 100
-        damage:
-          groups:
-            Toxin: 1.2
-            Airloss: 2.5
-      - !type:ChemVomit
-        conditions:
-        - !type:ReagentThreshold
-          min: 100
-        probability: 0.25 #TODO Liver damage
+      - !type:AlcoholOnset
+        boozePower: 5
+      - !type:Alcoholic
+        potency: 5
 
 - type: reagent
   parent: RMCReagentElement
@@ -498,9 +465,6 @@
   flavor: sweet
   color: white
   unknown: true # Yes a health analyzer can't detect sugar. How about that
-  plantMetabolism:
-  - !type:Nutritious
-    potency: 4.0
   metabolisms:
     Food:
       metabolismRate: 0.1
@@ -526,11 +490,6 @@
   color: "#DB5008"
   unknown: true
   toxin: true
-  plantMetabolism:
-  - !type:Toxic
-    potency: 4.0
-  - !type:Corrosive
-    potency: 12.0
   metabolisms:
     #TODO hurts on inject equal to amount
     Poison:

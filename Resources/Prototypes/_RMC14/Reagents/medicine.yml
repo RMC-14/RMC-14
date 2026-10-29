@@ -1,4 +1,4 @@
-﻿- type: reagent
+- type: reagent
   parent: [ CMReagentMedicine, Dylovene ]
   id: CMDylovene
   chemClass: Common
@@ -7,9 +7,6 @@
   color: "#3fc92a"
   overdose: 30
   criticalOverdose: 50
-  plantMetabolism:
-  - !type:Antitoxic
-    potency: 8.0
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -46,11 +43,6 @@
   color: "#3c8529"
   overdose: 15
   criticalOverdose: 25
-  plantMetabolism:
-  - !type:Antitoxic
-    potency: 4.0
-  - !type:Biocidic
-    potency: 4.0
   metabolisms:
     Medicine:
       metabolismRate: 0.03
@@ -86,6 +78,12 @@
   color: "#ffe043"
   overdose: 30
   criticalOverdose: 50
+  reactiveEffects:
+    RMCGenerated:
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:Musclestimulating
+        potency: 40
   metabolisms:
     Narcotic:
       metabolismRate: 0.0167
@@ -106,6 +104,12 @@
   color: "#d4d42b"
   overdose: 15
   criticalOverdose: 25
+  reactiveEffects:
+    RMCGenerated:
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:Musclestimulating
+        potency: 40
   metabolisms:
     Narcotic:
       metabolismRate: 0.0167
@@ -126,6 +130,12 @@
   color: "#7b23a9"
   overdose: 15
   criticalOverdose: 25
+  reactiveEffects:
+    RMCGenerated:
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:Nervestimulating
+        potency: 30
   metabolisms:
     Narcotic:
       metabolismRate: 0.0167
@@ -148,6 +158,12 @@
   color: "#219f74"
   overdose: 6
   criticalOverdose: 10
+  reactiveEffects:
+    RMCGenerated:
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:Musclestimulating
+        potency: 2
   metabolisms:
     Narcotic:
       metabolismRate: 0.0167
@@ -208,9 +224,6 @@
   color: "#e2972e"
   overdose: 15
   criticalOverdose: 25
-  plantMetabolism:
-  - !type:Anticorrosive
-    potency: 12.0
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -295,41 +308,18 @@
   color: "#fe33cb"
   overdose: 60
   criticalOverdose: 100
+  reactiveEffects:
+    RMCGenerated:
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:Cardiostabilizing
+        potency: 3
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
-        damage:
-          types:
-            Asphyxiation: -1
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        key: Unconscious
-        component: RMCUnconscious # Change to Knockdown+Stun refresh: true
-        time: 40
-        type: Add
-        refresh: true
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold #0.25 heart damage/s
-          min: 100               #5% chance emote twitch, blink_r, shiver
-        # TODO RMC14 Drowsiness. if drowsiness > 10 5% change to paralyze(knockout) for 10 seconds.
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: true
+      - !type:Cardiostabilizing
+        potency: 3
 
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]
@@ -340,9 +330,6 @@
   color: "#f5e123"
   overdose: 30
   criticalOverdose: 50
-  plantMetabolism:
-  - !type:Anticorrosive
-    potency: 8.0
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -375,11 +362,6 @@
   color: "#d87f2b"
   overdose: 30
   criticalOverdose: 50
-  plantMetabolism:
-  - !type:Anticorrosive
-    potency: 4.0
-  - !type:Antitoxic
-    potency: 4.0
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -469,7 +451,7 @@
       - !type:Neogenetic
         potency: 3
       - !type:Anticorrosive
-        potency: 3
+        potency: 4
       - !type:Antitoxic
         potency: 3
       - !type:Anticarcinogenic
@@ -693,9 +675,6 @@
   color: "#e9d191"
   overdose: 30
   criticalOverdose: 50
-  plantMetabolism:
-  - !type:Neuropeutic
-    potency: 8
   metabolisms:
     Medicine:
       metabolismRate: 0.1

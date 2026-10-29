@@ -11,7 +11,7 @@
     tags:
     - PlantSampleTaker
     - Wirecutter
-  - type: RMCPlantSampleTaker # RMC
+  - type: RMCPlantSampleTaker # RMC14
   - type: Sprite
     sprite: Objects/Tools/wirecutters.rsi
     layers:

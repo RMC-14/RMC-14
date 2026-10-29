@@ -16,6 +16,7 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -53,50 +54,50 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
     private static readonly ProtoId<LanguagePrototype> XenoLanguage = "Xeno";
 
-    private static readonly LocId[] Stage2Messages =
+    private static readonly string[] Stage2Messages =
     [
-        "rmc-xeno-transformation-scratchy",
-        "rmc-xeno-transformation-heart-faster",
-        "rmc-xeno-transformation-throat-catch",
+        "Your throat feels scratchy.",
+        "Your heart pumps a little faster.",
+        "Something catches in your throat.",
     ];
 
-    private static readonly LocId[] Stage3Thoughts =
+    private static readonly string[] Stage3Thoughts =
     [
-        "rmc-xeno-transformation-thought-one",
-        "rmc-xeno-transformation-thought-evolve",
-        "rmc-xeno-transformation-thought-capture",
-        "rmc-xeno-transformation-thought-perfect",
+        "Soon we will be one...",
+        "Must... evolve...",
+        "Capture...",
+        "We are perfect.",
     ];
 
-    private static readonly LocId[] Stage4Skin =
+    private static readonly string[] Stage4Skin =
     [
-        "rmc-xeno-transformation-skin-very-tight",
-        "rmc-xeno-transformation-blood-boils",
+        "Your skin feels very tight.",
+        "Your blood boils!",
     ];
 
-    private static readonly LocId[] Stage4Whispers =
+    private static readonly string[] Stage4Whispers =
     [
-        "rmc-xeno-transformation-whisper-one",
-        "rmc-xeno-transformation-whisper-evolve",
-        "rmc-xeno-transformation-whisper-capture",
-        "rmc-xeno-transformation-whisper-perfect",
+        "Soon we will be one...",
+        "Must... evolve...",
+        "Capture...",
+        "You are perfect.",
     ];
 
-    private static readonly LocId[] Stage5Whispers =
+    private static readonly string[] Stage5Whispers =
     [
-        "rmc-xeno-transformation-whisper-close",
-        "rmc-xeno-transformation-whisper-evolve-now",
-        "rmc-xeno-transformation-whisper-capture-all",
-        "rmc-xeno-transformation-whisper-more",
-        "rmc-xeno-transformation-whisper-hiss",
-        "rmc-xeno-transformation-whisper-clear",
+        "So close...",
+        "Evolve- EVOLVE- NOW!",
+        "Capture... them... all...",
+        "Just... a little... more...",
+        "Hsssshhhhh!",
+        "It's all so clear, now.",
     ];
 
-    private static readonly LocId[] Stage5Chest =
+    private static readonly string[] Stage5Chest =
     [
-        "rmc-xeno-transformation-emptiness",
-        "rmc-xeno-transformation-grieve",
-        "rmc-xeno-transformation-heart-painful",
+        "There's an emptiness inside of you.",
+        "The organelles in your chest grieve for what you aren't.",
+        "Your heart starts beating rapidly, and each beat is painful.",
     ];
 
     private readonly List<Entity<RMCXenoTransformationComponent>> _toAlienize = new();
@@ -155,7 +156,7 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
                 if (!comp.Started)
                 {
                     comp.Started = true;
-                    Popup(uid, "rmc-xeno-transformation-begun", PopupType.Small);
+                    Popup(uid, "Something has begun within you.", PopupType.Small);
                 }
                 break;
             case 2:
@@ -174,24 +175,24 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
 
                 if (_random.Prob(0.05f))
                 {
-                    Popup(uid, "rmc-xeno-transformation-something-throat", PopupType.MediumCaution);
+                    Popup(uid, "There's- something in your throat...", PopupType.MediumCaution);
                     Brute(uid, 1);
                 }
 
                 if (_random.Prob(0.08f))
                 {
-                    Popup(uid, "rmc-xeno-transformation-skin-tight", PopupType.MediumCaution);
+                    Popup(uid, "Your skin feels tight.", PopupType.MediumCaution);
                     Brute(uid, 2);
                 }
 
                 if (_random.Prob(0.04f))
                 {
-                    Popup(uid, "rmc-xeno-transformation-stabbing-head", PopupType.MediumCaution);
+                    Popup(uid, "You feel a stabbing pain in your head.", PopupType.MediumCaution);
                     _sizeStun.TryKnockOut(uid, TimeSpan.FromSeconds(4));
                 }
 
                 if (_random.Prob(0.04f))
-                    Popup(uid, "rmc-xeno-transformation-move-inside", PopupType.MediumCaution);
+                    Popup(uid, "You can feel something move...inside.", PopupType.MediumCaution);
 
                 if (_random.Prob(0.05f))
                     Popup(uid, _random.Pick(Stage3Thoughts), PopupType.Small);
@@ -207,14 +208,14 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
                     Whisper(uid, _random.Pick(Stage4Whispers));
 
                 if (_random.Prob(0.08f))
-                    Popup(uid, "rmc-xeno-transformation-something-inside", PopupType.MediumCaution);
+                    Popup(uid, "You can feel... something... inside you.", PopupType.MediumCaution);
                 break;
             case 5:
                 if (!HasComp<RMCUnconsciousComponent>(uid))
                 {
                     // TODO RMC14: pain, cm13 apply_pain(PAIN_CHESTBURST_WEAK)
-                    _popup.PopupEntity(Loc.GetString("rmc-xeno-transformation-shaking-others", ("target", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
-                    Popup(uid, "rmc-xeno-transformation-shaking-self", PopupType.LargeCaution);
+                    _popup.PopupEntity($"{Identity.Name(uid, EntityManager)} starts shaking uncontrollably!", uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
+                    Popup(uid, "There's- a screaming coming from inside us- a voice so loud our insides rush at the ends of our skin to make space for its light- it won't be long now...", PopupType.LargeCaution);
                     _sizeStun.TryKnockOut(uid, TimeSpan.FromSeconds(6));
                     _jitteriness.MakeJittery(uid, 105);
                     Brute(uid, 1);
@@ -225,7 +226,7 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
 
                 if (_random.Prob(0.1f))
                 {
-                    Popup(uid, "rmc-xeno-transformation-calloused", PopupType.MediumCaution);
+                    Popup(uid, "Your skin feels impossibly calloused...", PopupType.MediumCaution);
                     // TODO RMC14: pain, cm13 apply_pain(PAIN_CHESTBURST_WEAK)
                     Popup(uid, _random.Pick(Stage5Chest), PopupType.MediumCaution);
                     var damage = _rmcDamageable.DistributeFreshDamage(ToxinGroup, 10);
@@ -262,7 +263,7 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
     {
         var uid = ent.Owner;
         _dazed.TryDaze(uid, TimeSpan.FromSeconds(6), true);
-        Popup(uid, "rmc-xeno-transformation-mind-tears", PopupType.LargeCaution);
+        Popup(uid, "Something in your mind tears- and your thoughts don't sound the way they did before.", PopupType.LargeCaution);
 
         var understanding = EnsureComp<RMCUniversalUnderstandingComponent>(uid);
         understanding.ExpiresAt = TimeSpan.MaxValue;
@@ -303,7 +304,7 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
             _mind.UnVisit(mindId);
         }
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-transformation-perfection"), xeno, xeno, PopupType.Large);
+        _popup.PopupEntity("Our new form ripples with strength that confounds us. We are now... perfection.", xeno, xeno, PopupType.Large);
 
         _gib.ScatterInventoryItems(uid);
         _body.GibBody(uid);
@@ -324,14 +325,14 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
         return null;
     }
 
-    private void Popup(EntityUid uid, LocId message, PopupType type)
+    private void Popup(EntityUid uid, string message, PopupType type)
     {
-        _popup.PopupEntity(Loc.GetString(message), uid, uid, type);
+        _popup.PopupEntity(message, uid, uid, type);
     }
 
-    private void Whisper(EntityUid uid, LocId message)
+    private void Whisper(EntityUid uid, string message)
     {
-        _chat.TrySendInGameICMessage(uid, Loc.GetString(message), InGameICChatType.Whisper, false);
+        _chat.TrySendInGameICMessage(uid, message, InGameICChatType.Whisper, false);
     }
 
     private void Brute(EntityUid uid, float amount)

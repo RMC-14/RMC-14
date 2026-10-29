@@ -13,9 +13,7 @@
     healthMod: 0.05
     yieldMod: 0.01
     nutrientMod: 1
-    potency: 4
-  - !type:Toxic
-    potency: 2
+    potency: 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -39,7 +37,7 @@
     yieldMod: 0
     nutrientMod: 0.25
     lifespanMod: 0.2
-    potency: 4
+    potency: 1
 
 - type: reagent
   parent: CMReagent
@@ -56,7 +54,7 @@
     healthMod: -0.01
     yieldMod: 0.1
     nutrientMod: 0.5
-    potency: 4
+    potency: 1
 
 # ── Botany mutation special chems
 - type: reagent

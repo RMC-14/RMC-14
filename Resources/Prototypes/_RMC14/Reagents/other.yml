@@ -24,15 +24,11 @@
   physicalDesc: reagent-physical-desc-gaseous
   color: "#404030"
   plantMetabolism:
-  - !type:Nutritious
-    potency: 8
-  - !type:Toxic
-    potency: 12
   - !type:Fertilizing
     healthMod: 0.5
     yieldMod: 0.1
     nutrientMod: 2
-    potency: 4
+    potency: 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -55,20 +51,24 @@
   parent: [ CMReagent, Thermite ]
   id: RMCThermite
   chemClass: Uncommon
+  explosivePower: 0.5
+  explosiveFalloff: 1
   name: reagent-name-rmcthermite
   desc: reagent-desc-rmcthermite
   physicalDesc: reagent-physical-desc-powdery
   color: "#673910"
+  reactiveEffects: {}
+  fireProperties:
+  - !type:Fueling
+    potency: 7
+  - !type:Oxidizing
+    potency: 5
+  - !type:Viscous
+    potency: 4
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:Fueling
-        potency: 7
-      - !type:Oxidizing
-        potency: 5
-      - !type:Viscous
-        potency: 4
       - !type:Corrosive
         potency: 2
 
@@ -156,7 +156,7 @@
   color: "#604030"
   plantMetabolism:
   - !type:Fertilizing
-    potency: 4
+    potency: 1
 
 - type: reagent
   parent: CMReagent
@@ -186,12 +186,16 @@
   desc: reagent-desc-rmcoxidizingagent
   physicalDesc: reagent-physical-desc-gaseous
   color: "#c4c4c4"
+  burnColorMod: 2
+  intensityMod: 1
+  radiusMod: -0.12
+  fireProperties:
+  - !type:Oxidizing
+    potency: 6
   metabolisms:
     Poison:
       metabolismRate: 0.1
-      effects:
-      - !type:Oxidizing
-        potency: 6
+      effects: []
 
 # TODO RMC14: remove fingerpints idk if this an actual thing in cm
 - type: reagent
@@ -248,9 +252,6 @@
   physicalDesc: reagent-physical-desc-oily
   flavor: plastic
   color: "#CF3600"
-  plantMetabolism:
-  - !type:Toxic
-    potency: 4.0
   metabolisms:
     Poison:
       metabolismRate: 0.05

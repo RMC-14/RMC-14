@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
+using Content.Shared._RMC14.Dropship.Matrix;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Explosion;
@@ -825,6 +826,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     {
         if (_net.IsClient)
             return;
+
+        if (args.On && ent.Comp.Matrix != DropshipMatrixUpgrade.NightVision)
+        {
+            _popup.PopupEntity("The matrix is not upgraded with night vision.", ent, args.Actor, PopupType.SmallCaution);
+            return;
+        }
 
         ent.Comp.NightVision = args.On;
         if (EnsureTargetEye(ent, ent.Comp.Target) is { } target)
@@ -1769,6 +1776,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         eye = default;
         return false;
+    }
+
+    public void SetMatrix(Entity<DropshipTerminalWeaponsComponent> terminal, DropshipMatrixUpgrade matrix)
+    {
+        terminal.Comp.Matrix = matrix;
+        if (matrix != DropshipMatrixUpgrade.NightVision && terminal.Comp.NightVision)
+        {
+            terminal.Comp.NightVision = false;
+            if (EnsureTargetEye(terminal, terminal.Comp.Target) is { } eye)
+                _eye.SetDrawLight(eye, true);
+        }
+
+        Dirty(terminal);
+        RefreshWeaponsUI(terminal);
     }
 
     public void MakeTarget(EntityUid target, string abbreviation, bool targetableByWeapons)

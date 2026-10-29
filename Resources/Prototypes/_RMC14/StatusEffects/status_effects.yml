@@ -11,9 +11,16 @@
 - type: entity
   parent: MobStatusEffectBase
   id: RMCStatusEffectSeeingRainbow
-  name: hallucinations
+  name: drugged
   components:
   - type: RMCSeeingRainbowsStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: RMCStatusEffectHallucination
+  name: hallucinations
+  components:
+  - type: RMCHallucinationStatusEffect
 
 - type: entity
   parent: MobStatusEffectBase
@@ -26,6 +33,23 @@
   parent: MobStatusEffectBase
   id: RMCStatusEffectResistNeuro
   name: resisting neurological effects
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: RMCStatusEffectResistFracture
+  name: resisting fractures
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: RMCStatusEffectNoBleeding
+  name: not bleeding
+  components:
+  - type: RMCNoBleedingStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: RMCStatusEffectHyperThrottle
+  name: hyperthrottling
 
 - type: statusEffect
   id: Blinded

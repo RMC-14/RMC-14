@@ -68,6 +68,7 @@
 
 - type: reaction
   id: RMCIronSulfate
+  quantized: true
   reactants:
     RMCIron:
       amount: 1

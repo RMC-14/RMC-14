@@ -32,7 +32,7 @@
   - type: Tag
     tags:
     - PlantSampleTaker
-  - type: RMCPlantSampleTaker #RMC
+  - type: RMCPlantSampleTaker # RMC14
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/clippers.rsi
     state: icon

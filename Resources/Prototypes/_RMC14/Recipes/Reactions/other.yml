@@ -42,6 +42,7 @@
 
 - type: reaction
   id: RMCAmmonia
+  quantized: true
   reactants:
     RMCHydrogen:
       amount: 3

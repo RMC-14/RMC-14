@@ -128,7 +128,7 @@ public sealed partial class RMCHallucinationSystem
             TimeSpan.Zero,
             GrenadeThrowTime,
             GrenadeFuse,
-            true));
+            ent.Comp.GrenadeSpinSpeed));
 
         _audio.PlayStatic(ent.Comp.GrenadeSound, ent, landingCoords);
         AddStep(ent,
@@ -281,7 +281,14 @@ public sealed partial class RMCHallucinationSystem
 
         var duration = RandomTime(ent.Comp.LightsDurationMin, ent.Comp.LightsDurationMax);
         ent.Comp.LightsEnd = time + duration;
-        SendToVictim(ent, new RMCHallucinationLightsEvent(duration, ent.Comp.ViewRange + 2));
+        SendToVictim(ent, new RMCHallucinationLightsEvent(
+            duration,
+            ent.Comp.ViewRange + 2,
+            ent.Comp.LightsOnMin,
+            ent.Comp.LightsOnMax,
+            ent.Comp.LightsOffMin,
+            ent.Comp.LightsOffMax,
+            ent.Comp.LightsBrownoutDepth));
 
         if (_random.Prob(ent.Comp.LightsHissChance))
         {

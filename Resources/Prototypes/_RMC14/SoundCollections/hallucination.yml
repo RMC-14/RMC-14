@@ -1,0 +1,47 @@
+- type: soundCollection
+  id: RMCHallucinationExplosion
+  files:
+  - /Audio/_RMC14/Explosion/explosion1.ogg
+  - /Audio/_RMC14/Explosion/explosion2.ogg
+
+- type: soundCollection
+  id: RMCHallucinationCreepy
+  files:
+  - /Audio/_RMC14/Hallucinations/ghost.ogg
+  - /Audio/_RMC14/Hallucinations/ghost2.ogg
+  - /Audio/_RMC14/Hallucinations/heart_beat.ogg
+  - /Audio/_RMC14/Hallucinations/screech.ogg
+  - /Audio/_RMC14/Hallucinations/behind_you1.ogg
+  - /Audio/_RMC14/Hallucinations/behind_you2.ogg
+  - /Audio/_RMC14/Hallucinations/far_noise.ogg
+  - /Audio/_RMC14/Hallucinations/growl1.ogg
+  - /Audio/_RMC14/Hallucinations/growl2.ogg
+  - /Audio/_RMC14/Hallucinations/growl3.ogg
+  - /Audio/_RMC14/Hallucinations/im_here1.ogg
+  - /Audio/_RMC14/Hallucinations/im_here2.ogg
+  - /Audio/_RMC14/Hallucinations/i_see_you1.ogg
+  - /Audio/_RMC14/Hallucinations/i_see_you2.ogg
+  - /Audio/_RMC14/Hallucinations/look_up1.ogg
+  - /Audio/_RMC14/Hallucinations/look_up2.ogg
+  - /Audio/_RMC14/Hallucinations/over_here1.ogg
+  - /Audio/_RMC14/Hallucinations/over_here2.ogg
+  - /Audio/_RMC14/Hallucinations/over_here3.ogg
+  - /Audio/_RMC14/Hallucinations/turn_around1.ogg
+  - /Audio/_RMC14/Hallucinations/turn_around2.ogg
+  - /Audio/_RMC14/Hallucinations/veryfar_noise.ogg
+  - /Audio/_RMC14/Hallucinations/wail.ogg
+
+- type: soundCollection
+  id: RMCHallucinationWeaponHit
+  files:
+  - /Audio/_RMC14/Weapons/genhit1.ogg
+  - /Audio/_RMC14/Weapons/genhit2.ogg
+  - /Audio/_RMC14/Weapons/genhit3.ogg
+
+- type: soundCollection
+  id: RMCHallucinationPunch
+  files:
+  - /Audio/_RMC14/Hallucinations/punch1.ogg
+  - /Audio/_RMC14/Hallucinations/punch2.ogg
+  - /Audio/_RMC14/Hallucinations/punch3.ogg
+  - /Audio/_RMC14/Hallucinations/punch4.ogg

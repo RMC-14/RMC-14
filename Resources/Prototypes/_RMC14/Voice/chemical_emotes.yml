@@ -1,0 +1,4 @@
+- type: emote
+  id: RMCCoughBlood
+  name: chat-emote-name-rmccoughblood
+  chatMessages: ["chat-emote-msg-rmccoughblood"]
