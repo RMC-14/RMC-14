@@ -4,6 +4,7 @@
     <BoxContainer Orientation="Vertical">
         <Label Text="{Loc 'observe-warning-1'}"/>
         <Label Text="{Loc 'observe-warning-2'}"/>
+        <RichTextLabel Text="[color=red][bold]You will not be able to join xeno for the first 15 minutes of the round.[/color][/bold]"/>
         <BoxContainer Orientation="Horizontal">
             <Button Name="NevermindButton" Text="{Loc 'observe-nevermind'}" SizeFlagsStretchRatio="1"/>
             <Control HorizontalExpand="True" SizeFlagsStretchRatio="2" />

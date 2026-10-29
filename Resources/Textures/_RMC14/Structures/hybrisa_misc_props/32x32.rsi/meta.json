@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/hybrisa/misc_props.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "inertegg"
+    },
+    {
+      "name": "dogcatchersuitempty"
+    },
+    {
+      "name": "firehydrant_red"
+    },
+    {
+      "name": "firehydrant_blue"
+    },
+    {
+      "name": "firehydrant_white"
+    },
+    {
+      "name": "firehydrant_grey"
+    }
+]
+}

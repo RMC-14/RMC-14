@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi, ft4 based off previous made by yagwog (Github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hudsquad_ft1"
+    },
+    {
+      "name": "hudsquad_ft2"
+    },
+    {
+      "name": "hudsquad_ft3"
+    },
+      {
+      "name": "hudsquad_ft4"
+    },
+    {
+      "name": "hudsquad_ftl"
+    }
+  ]
+}

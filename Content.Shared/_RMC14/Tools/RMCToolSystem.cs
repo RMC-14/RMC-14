@@ -7,6 +7,7 @@ using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
+using Content.Shared.DoAfter;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
@@ -17,9 +18,9 @@ public sealed class RMCToolSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
 
     public override void Initialize()
     {
@@ -113,4 +114,20 @@ public sealed class RMCToolSystem : EntitySystem
 ///     Raised on a tool when it's being used to possibly alter the delay of it's action.
 /// </summary>
 [ByRefEvent]
-public record struct RMCToolUseEvent(EntityUid User, TimeSpan Delay, bool Handled = false);
+public record struct RMCToolUseEvent(EntityUid User, EntityUid? Target, TimeSpan Delay, bool Handled = false);
+
+public sealed class RMCToolDoAfterEvent(
+    EntityUid user,
+    EntityUid used,
+    EntityUid? target,
+    DoAfterId doAfter,
+    DoAfterEvent wrappedEvent,
+    bool cancelled) : EntityEventArgs
+{
+    public readonly EntityUid User = user;
+    public readonly EntityUid Used = used;
+    public readonly EntityUid? Target = target;
+    public readonly DoAfterId DoAfter = doAfter;
+    public readonly DoAfterEvent WrappedEvent = wrappedEvent;
+    public readonly bool Cancelled = cancelled;
+}

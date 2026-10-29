@@ -29,8 +29,11 @@ public sealed class RMCConstructionBui : BoundUserInterface
     {
         base.Open();
 
+        if (!EntMan.TryGetComponent(Owner, out MetaDataComponent? metaData))
+            return;
+
         _window = this.CreateWindow<RMCConstructionWindow>();
-        _window.Title = $"Construction using the {EntMan.GetComponent<MetaDataComponent>(Owner).EntityName}";
+        _window.Title = $"Construction using the {metaData.EntityName}";
 
         if (!EntMan.TryGetComponent(Owner, out RMCConstructionItemComponent? constructionItem))
             return;

@@ -3,6 +3,7 @@
   id: RMCBaseUniformAccessoryItemBase
   components:
   - type: UniformAccessoryHolder
+  - type: PDTBraceletHolderTarget
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:

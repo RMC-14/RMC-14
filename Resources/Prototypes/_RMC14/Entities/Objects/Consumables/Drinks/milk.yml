@@ -1,0 +1,36 @@
+- type: entity
+  parent: [DrinkCartonVisualsOpenable, DrinkCartonBaseFull]
+  id: RMCDrinkMilkCarton
+  name: milk
+  description: It's milk. White and nutritious goodness!
+  suffix: Full, RMC
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Milk
+          Quantity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/milk.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-LEFT
+      right:
+      - state: inhand-RIGHT
+
+- type: entity
+  parent: RMCDrinkMilkCarton
+  id: RMCDrinkSoyMilkCarton
+  name: soy milk
+  description: It's soy milk. White and nutritious goodness!
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: MilkSoy
+          Quantity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/milk_soy.rsi

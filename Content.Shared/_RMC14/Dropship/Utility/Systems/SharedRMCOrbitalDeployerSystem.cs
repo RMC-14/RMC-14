@@ -52,8 +52,11 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
 
         if (deployable.DeployBlacklist is { } blacklist)
         {
-            foreach (var defense in _entityLookup.GetEntitiesInRange(_transform.ToMapCoordinates(dropLocation), deployable.DefenseExclusionRange))
+            foreach (var defense in _entityLookup.GetEntitiesInRange(_transform.ToMapCoordinates(dropLocation), deployable.DefenseExclusionRange, LookupFlags.Uncontained))
             {
+                if (!Transform(defense).Anchored)
+                    continue;
+
                 if (!_whitelist.IsValid(blacklist, defense))
                     continue;
 

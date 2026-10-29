@@ -1,0 +1,39 @@
+﻿- type: entity
+  id: RMCNoticeBoard
+  name: notice board
+  description: A board for pinning important notices upon.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: WallMount
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/notice_board.rsi
+    layers:
+    - state: noticeboard
+    - state: notice-0
+    - map: ["enum.StorageFillLayers.Fill"]
+  - type: StorageFillVisualizer
+    maxFillLevels: 9
+    fillBaseName: notice
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Transform
+    anchored: true
+  - type: Storage
+    grid:
+    - 0,0,7,1
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - Folder
+      - Document
+      - Write
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container

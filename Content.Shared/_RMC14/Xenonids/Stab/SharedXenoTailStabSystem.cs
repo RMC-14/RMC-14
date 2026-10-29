@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Numerics;
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Stun;
@@ -18,12 +16,15 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Stab;
 
@@ -92,16 +93,20 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
             Dirty(stab, melee);
         }
 
+        TailStabStats stabStats = new(stab.Comp);
+        if (args.UseAltTailStab && TryComp<XenoAltTailStabComponent>(stab, out var altTailStab))
+            stabStats = new(altTailStab);
+
         // TODO RMC14 sounds
         // TODO RMC14 lag compensation
         var damaged = false;
-        var damage = new DamageSpecifier(stab.Comp.TailDamage);
+        var damage = new DamageSpecifier(stabStats.TailDamage);
         var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
         RaiseLocalEvent(stab, ref eve);
         damage += eve.Damage;
         if (args.Entity == null ||
             TerminatingOrDeleted(args.Entity) ||
-            !_xeno.CanAbilityAttackTarget(stab,args.Entity.Value, true))
+            !_xeno.CanAbilityAttackTarget(stab, args.Entity.Value, !stabStats.HitMobsOnly))
         {
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
             RaiseLocalEvent(stab, missEvent);
@@ -152,7 +157,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 RaiseLocalEvent(hit, attackedEv);
 
                 var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
-                var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab);
+                var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab, armorPiercing: stabStats.ArmorPiercing);
 
                 if (change?.GetTotal() > FixedPoint2.Zero)
                 {
@@ -162,14 +167,14 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
                 if (_net.IsServer)
                 {
-                    SpawnAttachedTo(stab.Comp.HitAnimationId, hit.ToCoordinates());
+                    SpawnAttachedTo(stabStats.HitAnimationId, hit.ToCoordinates());
 
                     if (_size.TryGetSize(stab, out var size))
                     {
                         if (size >= RMCSizes.Big)
-                            _daze.TryDaze(hit, stab.Comp.BigDazeTime, true);
+                            _daze.TryDaze(hit, stabStats.BigDazeTime, true);
                         else if (size == RMCSizes.Xeno)
-                            _daze.TryDaze(hit, stab.Comp.DazeTime, true);
+                            _daze.TryDaze(hit, stabStats.DazeTime, true);
                     }
                 }
 
@@ -247,7 +252,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 _rotate.RotateXeno(stab, angle.GetDir());
             }
 
-            var sound = args.Entity != null && damaged && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
+            var sound = args.Entity != null && damaged && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stabStats.SoundHit : stab.Comp.SoundMiss;
             _audio.PlayPvs(sound, stab);
         }
 
@@ -257,5 +262,48 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
     protected virtual void DoLunge(Entity<XenoTailStabComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
     {
+    }
+
+    //Ideally tail stab stuff would be in the action event
+    //But this would make it so every caste needs their own action
+    //So for now this exists
+
+    public struct TailStabStats
+    {
+        public EntProtoId HitAnimationId;
+
+        public DamageSpecifier TailDamage;
+
+        public SoundSpecifier SoundHit;
+
+        public TimeSpan DazeTime;
+
+        public TimeSpan BigDazeTime;
+
+        public int ArmorPiercing;
+
+        public bool HitMobsOnly;
+
+        public TailStabStats(XenoTailStabComponent stab)
+        {
+            HitAnimationId = stab.HitAnimationId;
+            TailDamage = stab.TailDamage;
+            SoundHit = stab.SoundHit;
+            DazeTime = stab.DazeTime;
+            BigDazeTime = stab.BigDazeTime;
+            ArmorPiercing = stab.ArmorPiercing;
+            HitMobsOnly = stab.HitMobsOnly;
+        }
+
+        public TailStabStats(XenoAltTailStabComponent stab)
+        {
+            HitAnimationId = stab.HitAnimationId;
+            TailDamage = stab.TailDamage;
+            SoundHit = stab.SoundHit;
+            DazeTime = stab.DazeTime;
+            BigDazeTime = stab.BigDazeTime;
+            ArmorPiercing = stab.ArmorPiercing;
+            HitMobsOnly = stab.HitMobsOnly;
+        }
     }
 }

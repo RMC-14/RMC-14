@@ -170,6 +170,7 @@
     nameLocId: cm-access-id-card-component-owner-name-job-title-text
     fullNameLocId: cm-access-id-card-component-owner-full-name-job-title-text
     canMicrowave: false
+  - type: RMCCryoUnavailableOnStore
   - type: StationRecordKeyStorage
   - type: Tag
     tags:

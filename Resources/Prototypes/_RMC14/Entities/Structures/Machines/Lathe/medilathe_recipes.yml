@@ -38,6 +38,13 @@
     CMGlass: 12500 # 10000
 
 - type: latheRecipe
+  id: RMCReagentJug
+  result: RMCReagentJug
+  completetime: 4
+  materials:
+    CMGlass: 37500 # 30000
+
+- type: latheRecipe
   id: CMBonesetter
   result: CMBonesetter
   completetime: 4

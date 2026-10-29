@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/almayer.dmi, other sprites and weya logo decals by github noctyrnal",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/almayer.dmi, dropshipone and dropshiptwo taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c816033eb33999a50e3280f758dd973f40977b87/icons/obj/structures/props/almayer/almayer_props96.dmi, other sprites and weya logo decals by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -72,6 +72,171 @@
     },
     {
       "name": "weya_3"
+    },
+    {
+      "name": "dropshipone1"
+    },
+    {
+      "name": "dropshipone2"
+    },
+    {
+      "name": "dropshipone3"
+    },
+    {
+      "name": "dropshipone4"
+    },
+    {
+      "name": "dropshipone5"
+    },
+    {
+      "name": "dropshipone6"
+    },
+    {
+      "name": "dropshiptwo1"
+    },
+    {
+      "name": "dropshiptwo2"
+    },
+    {
+      "name": "dropshiptwo3"
+    },
+    {
+      "name": "dropshiptwo4"
+    },
+    {
+      "name": "dropshiptwo5"
+    },
+    {
+      "name": "dropshiptwo6"
+    },
+    {
+      "name": "dropshiptwo7"
+    },
+    {
+      "name": "dropshiptwo8"
+    },
+    {
+      "name": "dropshiptwo9"
+    },
+    {
+      "name": "stairs_1_down"
+    },
+    {
+      "name": "stairs_2_down"
+    },
+    {
+      "name": "stairs_2_up"
+    },
+    {
+      "name": "stairs_3_up"
+    },
+    {
+      "name": "alpha_up_1"
+    },
+    {
+      "name": "alpha_up_2"
+    },
+    {
+      "name": "alpha_up_3"
+    },
+    {
+      "name": "alpha_down_1"
+    },
+    {
+      "name": "alpha_down_2"
+    },
+    {
+      "name": "alpha_down_3"
+    },
+    {
+      "name": "bravo_up_1"
+    },
+    {
+      "name": "bravo_up_2"
+    },
+    {
+      "name": "bravo_up_3"
+    },
+    {
+      "name": "bravo_down_1"
+    },
+    {
+      "name": "bravo_down_2"
+    },
+    {
+      "name": "bravo_down_3"
+    },
+    {
+      "name": "charlie_up_1"
+    },
+    {
+      "name": "charlie_up_2"
+    },
+    {
+      "name": "charlie_up_3"
+    },
+    {
+      "name": "charlie_down_1"
+    },
+    {
+      "name": "charlie_down_2"
+    },
+    {
+      "name": "charlie_down_3"
+    },
+    {
+      "name": "delta_up_1"
+    },
+    {
+      "name": "delta_up_2"
+    },
+    {
+      "name": "delta_up_3"
+    },
+    {
+      "name": "delta_down_1"
+    },
+    {
+      "name": "delta_down_2"
+    },
+    {
+      "name": "delta_down_3"
+    },
+    {
+      "name": "echo_left_1"
+    },
+    {
+      "name": "echo_left_2"
+    },
+    {
+      "name": "echo_left_3"
+    },
+    {
+      "name": "echo_right_1"
+    },
+    {
+      "name": "echo_right_2"
+    },
+    {
+      "name": "echo_right_3"
+    },
+    {
+      "name": "foxtrot_left_1"
+    },
+    {
+      "name": "foxtrot_left_2"
+    },
+    {
+      "name": "foxtrot_left_3"
+    },
+    {
+      "name": "foxtrot_right_1"
+    },
+    {
+      "name": "foxtrot_right_2"
+    },
+    {
+      "name": "foxtrot_right_3"
     }
   ]
 }

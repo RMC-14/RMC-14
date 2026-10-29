@@ -56,7 +56,7 @@
   - type: SolutionContainerManager
     solutions:
       tank:
-        maxVol: 600 # TODO RMC14 100 when welders are fixed
+        maxVol: 600
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 600

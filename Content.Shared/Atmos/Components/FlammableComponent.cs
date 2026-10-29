@@ -98,5 +98,8 @@ namespace Content.Shared.Atmos.Components
 
         [DataField, AutoNetworkedField]
         public DamageSpecifier? TileDamage;
+
+        [DataField, AutoNetworkedField]
+        public bool LastOnFire;
     }
 }

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from: https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi provost team lead by noctyrnal (github)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_pva"
+        },
+        {
+            "name": "hudsquad_pve"
+        },
+        {
+            "name": "hudsquad_pvi"
+        },
+        {
+            "name": "hudsquad_pvi2"
+        },
+        {
+            "name": "hudsquad_pvl"
+        },
+        {
+            "name": "hudsquad_pvm"
+        },
+        {
+            "name": "hudsquad_pvtml"
+        },
+        {
+            "name": "hudsquad_tisio"
+        },
+        {
+            "name": "hudsquad_tissa"
+        }
+    ]
+}

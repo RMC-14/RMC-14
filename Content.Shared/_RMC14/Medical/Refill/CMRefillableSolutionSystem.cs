@@ -307,7 +307,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             return;
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
-    !container.ContainedEntities.TryFirstOrNull(out var contained))
+            !container.ContainedEntities.TryFirstOrNull(out var contained))
         {
             return;
         }
@@ -330,7 +330,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             return;
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
-!container.ContainedEntities.TryFirstOrNull(out var contained))
+            !container.ContainedEntities.TryFirstOrNull(out var contained))
         {
             return;
         }
@@ -360,7 +360,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         args.Handled = true;
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
-!container.ContainedEntities.TryFirstOrNull(out var contained))
+            !container.ContainedEntities.TryFirstOrNull(out var contained))
         {
             return;
         }

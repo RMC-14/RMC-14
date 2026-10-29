@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 19:15:59
-  entityCount: 224
+  time: 06/16/2026 10:38:15
+  entityCount: 226
 maps: []
 grids:
 - 1
@@ -966,6 +966,18 @@ entities:
     components:
     - type: Transform
       pos: 3.5,4.5
+      parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 225
+    components:
+    - type: Transform
+      pos: 16.5,8.5
+      parent: 1
+  - uid: 226
+    components:
+    - type: Transform
+      pos: 15.5,8.5
       parent: 1
 - proto: RMCCandle
   entities:

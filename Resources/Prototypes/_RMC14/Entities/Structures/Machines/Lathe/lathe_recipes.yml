@@ -23,13 +23,6 @@
     CMSteel: 10000 # 8000
 
 - type: latheRecipe
-  id: RMCReagentJug
-  result: RMCReagentJug
-  completetime: 4
-  materials:
-    CMSteel: 10000 # 8000
-
-- type: latheRecipe
   id: RMCLightTube
   result: RMCLightTube
   completetime: 4
@@ -249,3 +242,11 @@
   completetime: 4
   materials:
     CMSteel: 15000 # 12000
+
+- type: latheRecipe
+  id: RMCUniversalRecorder
+  result: RMCUniversalRecorder
+  completetime: 4
+  materials:
+    CMSteel: 75 # 60
+    CMGlass: 37 # 30

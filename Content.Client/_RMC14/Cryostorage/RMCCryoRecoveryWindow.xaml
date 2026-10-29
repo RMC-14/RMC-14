@@ -1,0 +1,45 @@
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    MinSize="660 520">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BorderColor="#3A3A3A"
+                BorderThickness="1"
+                BackgroundColor="#1A1A1A" />
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="4">
+            <PanelContainer Margin="0 0 0 6">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BorderColor="#3A3A3A"
+                        BorderThickness="0 0 0 1"
+                        BackgroundColor="#252525" />
+                </PanelContainer.PanelOverride>
+
+                <BoxContainer Orientation="Horizontal" Margin="4">
+                    <Label Text="{Loc rmc-cryo-recovery-header}" StyleClasses="LabelKeyText" />
+                    <Control HorizontalExpand="True" />
+                    <Label Name="SummaryLabel" />
+                </BoxContainer>
+            </PanelContainer>
+
+            <LineEdit Name="SearchBar" HorizontalExpand="True" />
+
+            <cc:HSeparator Color="#4972A1" Margin="0 5" />
+
+            <BoxContainer Name="EmptyPanel" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+                <Control VerticalExpand="True" />
+                <Label Text="{Loc rmc-cryo-recovery-no-items}" Align="Center" StyleClasses="LabelBig" />
+                <Control VerticalExpand="True" />
+            </BoxContainer>
+
+            <ScrollContainer Name="ResultsScroll" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False" Visible="False">
+                <BoxContainer Name="PlayersContainer" Orientation="Vertical" />
+            </ScrollContainer>
+        </BoxContainer>
+    </PanelContainer>
+</DefaultWindow>

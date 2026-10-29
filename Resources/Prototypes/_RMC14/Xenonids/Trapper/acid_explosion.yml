@@ -1,0 +1,9 @@
+﻿- type: entity
+  id: XenoAcidExplosionEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_acid_explosion.rsi
+    state: acid_explosion
+  - type: TimedDespawn
+    lifetime: 0.6

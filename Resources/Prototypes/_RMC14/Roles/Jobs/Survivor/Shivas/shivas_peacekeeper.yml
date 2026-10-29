@@ -5,11 +5,11 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorShivasILRCPeacekeeper
-  spawnMenuRoleName: ILRC peacekeeper (Shivas Survivor)
+  spawnMenuRoleName: ILRC Peacekeeper (Shivas Survivor)
   camouflageStartingGear: null
 
 - type: startingGear
-  parent: RMCGearSurvivorILRCPeacekeeper
+  parent: RMCGearSurvivorSecurity
   id: RMCGearSurvivorShivasILRCPeacekeeper
   equipment:
     head: RMCHeadUshanka
@@ -17,6 +17,8 @@
     outerClothing: RMCCoatSnowSurvivorSecurity
     gloves: RMCHandsVeteran
     shoes: RMCBootsPMC
+    jumpsuit: RMCJumpsuitRiotControl
+
 
 - type: entity
   parent: CMSpawnPointJobBase

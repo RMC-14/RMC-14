@@ -13,14 +13,19 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+      preset: RMCSkillPresetSurvivorDoctor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMoHDoctor
     - type: RMCSurvivor

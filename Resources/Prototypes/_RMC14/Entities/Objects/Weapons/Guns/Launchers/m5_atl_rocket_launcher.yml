@@ -40,10 +40,6 @@
   - type: GunRequiresWield
   - type: RMCNameItemOnVend
     item: PrimaryGun
-  - type: OnShootTriggerAmmoTimer
-    delay: 0.2 # TODO RMC14 Make some way for rockets to explode when they stop, for shooting at the ground closer than max range.
-    # This is a temporary hack to guarantee it will always go off after stopping even if it doesn't collide with anything.
-    # Works for almost all gameplay purposes at least right now because even max range rockets are less than 0.2s and it's fast enough not matter.
   - type: ShootAtFixedPoint
     shootArcProj: false
   - type: WieldableSpeedModifiers
@@ -125,6 +121,8 @@
   categories: [ HideSpawnMenu ]
   description: Uh oh.
   components:
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -160,6 +158,7 @@
     - range: 7
       falloff: 10
   - type: DeleteOnTrigger
+  - type: IgnoreSwiftSteps
 
 - type: entity
   parent: RMCBaseProjectileRocket84mm
@@ -184,6 +183,8 @@
     radius: 3.5
     color: orange
     energy: 0.5
+  - type: VehicleDamageMultiplier
+    multiplier: 5
 
 # 84mm AP
 
@@ -242,6 +243,8 @@
     thresholds:
     - range: 6
       falloff: 10
+  - type: VehicleDamageMultiplier
+    multiplier: 8
 
 - type: entity
   parent: RMCRocket84mm
@@ -289,6 +292,7 @@
   - type: DeleteOnTrigger
   - type: SpawnOnTerminate
     spawn: RMCSmokeWhitePhosphorus
+    spawnOffset: -0.5
   - type: RMCAreaDamage
     damageArea: 3.5
     falloffDistance: 3.5

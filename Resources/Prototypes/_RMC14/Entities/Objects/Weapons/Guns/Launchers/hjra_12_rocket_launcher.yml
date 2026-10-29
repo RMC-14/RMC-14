@@ -242,6 +242,7 @@
     thresholds:
     - range: 7
       falloff: 10
+  - type: IgnoreSwiftSteps
 
 - type: Tag
   id: RMCRocketHJRA12

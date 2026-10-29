@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Medical.Sleeper;
 public sealed partial class InsideSleeperComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid? Sleeper;
+    public EntityUid? Chamber;
 }

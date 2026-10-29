@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.Mentor;
+using Content.Client._RMC14.Mobs.Ghosts;
 using Content.Client.Administration.Managers;
 using Content.Client.Chat;
 using Content.Client.Chat.Managers;
@@ -12,6 +13,7 @@ using Content.Client.Examine;
 using Content.Client.Gameplay;
 using Content.Client.Ghost;
 using Content.Client.Mind;
+using Content.Client.Popups;
 using Content.Client.Roles;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
@@ -71,6 +73,11 @@ public sealed partial class ChatUIController : UIController
     [UISystemDependency] private readonly TransformSystem? _transform = default;
     [UISystemDependency] private readonly MindSystem? _mindSystem = default!;
     [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
+
+    // RMC14
+    [UISystemDependency] private readonly CMGhostSystem? _cmGhost = default;
+    [UISystemDependency] private readonly PopupSystem? _popup = default!;
+    // RMC14
 
     private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
     private string[] _chatNameColors = default!;
@@ -141,6 +148,8 @@ public sealed partial class ChatUIController : UIController
     /// </summary>
     private readonly Dictionary<EntityUid, SpeechBubbleQueueData> _queuedSpeechBubbles
         = new();
+
+    private bool _speechBubblesSuppressed;
 
     private readonly HashSet<ChatBox> _chats = new();
     public IReadOnlySet<ChatBox> Chats => _chats;
@@ -448,7 +457,20 @@ public sealed partial class ChatUIController : UIController
         _speechBubbleRoot.Orphan();
         root.AddChild(_speechBubbleRoot);
         LayoutContainer.SetAnchorPreset(_speechBubbleRoot, LayoutContainer.LayoutPreset.Wide);
+        _speechBubbleRoot.Visible = !_speechBubblesSuppressed;
         _speechBubbleRoot.SetPositionLast();
+    }
+
+    public void SetSpeechBubblesSuppressed(bool suppressed)
+    {
+        if (_speechBubblesSuppressed == suppressed)
+            return;
+
+        _speechBubblesSuppressed = suppressed;
+        _speechBubbleRoot.Visible = !suppressed;
+
+        if (suppressed)
+            ClearSpeechBubbles();
     }
 
     private void OnAttachedChanged(EntityUid uid)
@@ -460,6 +482,9 @@ public sealed partial class ChatUIController : UIController
 
     private void AddSpeechBubble(ChatMessage msg, SpeechBubble.SpeechType speechType)
     {
+        if (_speechBubblesSuppressed)
+            return;
+
         var ent = EntityManager.GetEntity(msg.SenderEntity);
 
         if (!EntityManager.EntityExists(ent))
@@ -535,6 +560,22 @@ public sealed partial class ChatUIController : UIController
         {
             _activeSpeechBubbles.Remove(entityUid);
         }
+    }
+
+    private void ClearSpeechBubbles()
+    {
+        _queuedSpeechBubbles.Clear();
+
+        foreach (var bubbles in _activeSpeechBubbles.Values)
+        {
+            foreach (var bubble in bubbles)
+            {
+                bubble.OnDied -= SpeechBubbleDied;
+                bubble.Orphan();
+            }
+        }
+
+        _activeSpeechBubbles.Clear();
     }
 
     private void UpdateChannelPermissions()
@@ -663,6 +704,9 @@ public sealed partial class ChatUIController : UIController
 
     private void UpdateQueuedSpeechBubbles(FrameEventArgs delta)
     {
+        if (_speechBubblesSuppressed)
+            return;
+
         // Update queued speech bubbles.
         if (_queuedSpeechBubbles.Count == 0 || _examine == null)
         {
@@ -833,6 +877,25 @@ public sealed partial class ChatUIController : UIController
             text = $";{text}";
         }
 
+        // RMC14
+        if (MapLocalIfGhost(channel) == ChatSelectChannel.Dead &&
+            _player.LocalEntity is { } localEntity &&
+            _ent.HasComponent<RMCDeadChatMutedComponent>(localEntity))
+        {
+            var warning = Loc.GetString("rmc-ghost-dead-chat-send-blocked");
+            _popup?.PopupClient(warning, localEntity, localEntity);
+            return;
+        }
+
+        if (_cmGhost?.ShouldMutePostDeathChat((ChatChannel) channel) == true &&
+            _player.LocalEntity is { } postDeathMutedEntity)
+        {
+            var warning = Loc.GetString("rmc-ghost-post-death-chat-send-blocked");
+            _popup?.PopupClient(warning, postDeathMutedEntity, postDeathMutedEntity);
+            return;
+        }
+        // RMC14
+
         _manager.SendMessage(text, prefixChannel == 0 ? channel : prefixChannel);
     }
 
@@ -877,7 +940,16 @@ public sealed partial class ChatUIController : UIController
     private void OnChatMessage(MsgChatMessage message)
     {
         var msg = message.Message;
-        ProcessChatMessage(msg, !msg.HidePopup);
+
+        // RMC14
+        if (msg.Channel == ChatChannel.Dead &&
+            _player.LocalEntity is { } localEntity &&
+            _ent.HasComponent<RMCDeadChatMutedComponent>(localEntity))
+            return;
+
+        if (_cmGhost?.ShouldMutePostDeathChat(msg.Channel) != true)
+            ProcessChatMessage(msg, !msg.HidePopup || msg.UseEmoteSpeechBubble);
+        // RMC14
 
         if ((msg.Channel & ChatChannel.AdminRelated) == 0 ||
             _config.GetCVar(CCVars.ReplayRecordAdminChat))
@@ -956,11 +1028,15 @@ public sealed partial class ChatUIController : UIController
         switch (msg.Channel)
         {
             case ChatChannel.Local:
-                AddSpeechBubble(msg, SpeechBubble.SpeechType.Say);
+                // RMC14
+                AddSpeechBubble(msg, msg.UseEmoteSpeechBubble ? SpeechBubble.SpeechType.Emote : SpeechBubble.SpeechType.Say);
+                // RMC14
                 break;
 
             case ChatChannel.Whisper:
-                AddSpeechBubble(msg, SpeechBubble.SpeechType.Whisper);
+                // RMC14
+                AddSpeechBubble(msg, msg.UseEmoteSpeechBubble ? SpeechBubble.SpeechType.Emote : SpeechBubble.SpeechType.Whisper);
+                // RMC14
                 break;
 
             case ChatChannel.Dead:

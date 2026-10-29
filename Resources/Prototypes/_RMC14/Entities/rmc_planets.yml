@@ -5,7 +5,16 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/lv624.yml
     camouflage: Jungle
-    announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingLV624
+    announcements:
+    - text: rmc-announcement-planet-lv
+    #smallHostVariants:
+      #- RMCMobSmallHostFarwa
+      #- CMMobSmallHostMonkey
+      #- CMMobSmallHostKobold
+      #- RMCMobSmallHostNeaera
+      #- RMCMobSmallHostStok
     nightmareScenarios:
 #   - scenarioName: clf_ship
 #     scenarioProbability: 0.1
@@ -57,7 +66,6 @@
       asset_protection: # Corporate Dome Goons
         CMSurvivorScientist: CMSurvivorDoctor
 
-
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -65,22 +73,17 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
-    announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+    announcements:
+    - text: rmc-announcement-planet-solaris
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
+    #smallHostVariants:
+      #RMCMobSmallHostNeaera
     nightmareScenarios:
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
-    - scenarioName: solaris_surv_spawn_admin # 80% chance of regular surv. Reduce to 70% (0.14 each) once CLF survs are in.
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_bar
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_office
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_south_marshals
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_storage
-      scenarioProbability: 0.16
+    - scenarioName: none # 80% chance of regular surv. Reduce to 70% once CLF survs are in.
+      scenarioProbability: 0.8
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
@@ -157,7 +160,6 @@
       crashlanding_offices: # PMC
         CMSurvivorScientist: CMSurvivorDoctor
 
-
 - type: entity
   id: RMCPlanetShiva
   name: Shivas Snowball
@@ -165,12 +167,17 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
-    announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingShivas
+    announcements:
+    - text: rmc-announcement-planet-shiva
+    #smallHostVariants:
+      #RMCMobSmallHostYiren
     nightmareScenarios:
     - scenarioName: panic_room_hold
-      scenarioProbability: 0.1
-    - scenarioName: none # 90% chance of regular surv. Reduce to 80% (0.8) once CLF survs are in.
-      scenarioProbability: 0.9
+      scenarioProbability: 0.15
+    - scenarioName: none # 85% chance of regular surv. Reduce to 75% (0.75) once CLF survs are in.
+      scenarioProbability: 0.85
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
@@ -214,7 +221,12 @@
     map: /Maps/_RMC14/prison.yml
     camouflage: Classic
     minPlayers: 130
-    announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingFiorina
+    announcements:
+    - text: rmc-announcement-planet-fiorina
+    #smallHostVariants:
+      #RMCMobSmallHostFarwa
     nightmareScenarios:
     - scenarioName: riot_in_progress
       scenarioProbability: 0.15
@@ -227,6 +239,7 @@
       - CMSurvivor: -1
       - CMSurvivorISR: -1
       - CMSurvivorGangLeader: -1
+      - CMSurvivorPrisoner: -1
       CMSurvivorCorporate:
       - CMSurvivorFiorinaCorporateLiaison: 2
       CMSurvivorDoctor:
@@ -234,28 +247,30 @@
       CMSurvivorEngineer:
       - CMSurvivorFiorinaEngineer: 2
       CMSurvivorSecurity:
-      - CMSurvivorPrisoner: 2
       - CMSurvivorFiorinaPrisonGuard: 2
       - CMSurvivorFiorinaRiotOfficer: 2
       CMSurvivorScientist:
       - CMSurvivorFiorinaResearcher: 2
     survivorJobScenarios:
-      riot_in_progress: # Riot In Progress CMB Team. One as the main CMB RCTL, the rest as supporting officers.
-        - CMSurvivorSecurity: 1
+      riot_in_progress: # Riot In Progress CMB Team. One as the main CMB RCTL, two as specialized roles, the rest as supporting officers.
         - CMSurvivor: -1
+        - CMSurvivorDoctor: 1
+        - CMSurvivorEngineer: 1
     survivorJobVariantScenarios:
       riot_in_progress: # Riot In Progress Riot Control team
-        CMSurvivorSecurity:
-        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician: 1
         CMSurvivor:
-        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: -1
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
+        - RMCSurvivorFiorinaRiotInProgressCMBOfficer: -1
     survivorJobOverrideScenarios:
       riot_in_progress: # Riot In Progress job overrides.
         CMSurvivorCorporate: CMSurvivor
-        CMSurvivorEngineer: CMSurvivor
-        CMSurvivorDoctor: CMSurvivor
-        CMSurvivorScientist: CMSurvivor
-        RMCSurvivorCommandingOfficer: CMSurvivorSecurity
+        CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorSecurity: CMSurvivor
+        RMCSurvivorCommandingOfficer: CMSurvivor
 
 - type: entity
   id: RMCPlanetTrijent
@@ -265,16 +280,13 @@
     map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
     minPlayers: 130
-    announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    announcements:
+    - text: rmc-announcement-planet-trijent
+    #smallHostVariants:
+      #RMCMobSmallHostStok
     nightmareScenarios:
-    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF survivors are in
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_hospital
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_dam
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_tunneldorm
-      scenarioProbability: 0.15
+    - scenarioName: none # Reduce this to 0.5 once CLF survivors are in
+      scenarioProbability: 0.6
     - scenarioName: spp_bar
       scenarioProbability: 0.4
     survivorJobVariants:
@@ -295,7 +307,7 @@
       - CMSurvivorTrijentDamTech: 2
       - CMSurvivorTrijentTrucker: 2
       CMSurvivorSecurity:
-      - CMSurvivorTrijentGoon: 1
+      - RMCSurvivorTrijentGoon: 1
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
@@ -359,20 +371,35 @@
 
 - type: entity
   id: RMCPlanetVaradero
-  name: New Varadero
+  name: New Varadero Naval Base
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/varadero.yml
     camouflage: Jungle
-    announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
-      Designation: Island research station and mining facility
-
-      Population: 47
-      Current Temperature: 68F Interior, 97F Exterior
-      Outpost Commander: UN Rep. Steve Haifisch
-      Telecommunications Array: Repairs required
-
-      No further information available at this time."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingVaradero
+    announcements:
+    - text: rmc-announcement-planet-varadero
+    - text: rmc-announcement-planet-varadero-1
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 300 # 5 minutes
+    - text: rmc-announcement-planet-varadero-2
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 1200 # 20 minutes
+    - text: rmc-announcement-planet-varadero-3
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 2700 # 45 minutes
+    - text: rmc-announcement-planet-varadero-4
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 4800 # 80 minutes
+    - text: rmc-announcement-planet-varadero-5
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 7200 # 120 minutes
+    - text: rmc-announcement-planet-varadero-6
+      announcement: "rmc-announcement-ares-varadero"
+      delay: 9000 # 150 minutes
+    #smallHostVariants:
+      #CMMobSmallHostKobold
     nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
     - scenarioName: none
       scenarioProbability: 1
@@ -388,21 +415,25 @@
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
-      - CMSurvivor: -1
-      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorBeachBum: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
-      - CMSurvivorPriest: 1
+      - RMCSurvivorNewVaraderoChaplain: -1
       CMSurvivorCorporate:
-      - CMSurvivorVaraderoICB: 2
+      - RMCSurvivorNewVaraderoResearchDirector: 1
+      - RMCSurvivorNewVaraderoUNRepresentative: 1
       CMSurvivorDoctor:
       - CMSurvivorMedicalTechnician: 3
+      - RMCSurvivorAirportFirefighter: 3
       CMSurvivorEngineer:
-      - CMSurvivorTechnician: 2
-      - CMSurvivorCargoTechnician: 2
+      - RMCSurvivorUNMCPilot: 2
+      - RMCSurvivorUNMCVehicleCrewman: 2
+      - RMCSurvivorUNMCGroundCrewman: 2
       CMSurvivorSecurity:
-      - CMSurvivorILRCPeacekeeper: 2
+      - RMCSurvivorUNMCRifleman: 2
+      - RMCSurvivorUNMCVeteranRifleman: 2
       CMSurvivorScientist:
+      - RMCSurvivorNewVaraderoXenoarchaeologist: 2
+      - RMCSurvivorNewVaraderoXenobiologist: 2
       - RMCSurvivorNewVaraderoResearcher: 2
 
 - type: entity
@@ -412,7 +443,11 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
-    announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    announcements:
+    - text: rmc-announcement-planet-kutjevo
+    #smallHostVariants:
+      #RMCMobSmallHostNeaera
+      #RMCMobSmallHostStok
     nightmareScenarios:
     - scenarioName: none # Reduce this to 0.9 once CLF survivors are in at 0.1
       scenarioProbability: 1
@@ -442,7 +477,13 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/chances.yml
     camouflage: Classic
-    announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingChances
+    announcements:
+    - text: rmc-announcement-planet-chances
+    #smallHostVariants:
+      #RMCSmallHostMobNaera
+      #RMCSmallHostMobStok
     selectRandomSurvivorVariant: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
@@ -472,7 +513,12 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/hybrisa.yml
     camouflage: Urban
-    announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
+    announcements:
+    - text: rmc-announcement-planet-hybrisa
+    #smallHostVariants:
+      #CMMobSmallHostMonkey
     nightmareScenarios:
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
@@ -542,7 +588,13 @@
     map: /Maps/_RMC14/sorokyne.yml
     camouflage: Jungle
     minPlayers: 130
-    announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
+    announcements:
+    - text: rmc-announcement-planet-sorokyne
+    #smallHostVariants:
+      #RMCMobSmallHostStok
+      #CMMobSmallHostKobold
     nightmareScenarios:
     - scenarioName: spp_sof
       scenarioProbability: 0.4

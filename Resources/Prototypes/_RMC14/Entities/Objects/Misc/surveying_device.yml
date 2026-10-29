@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPropSurveyingDevice
+  name: surveying device
+  description: A small laser measuring tool and camera mounted on a tripod. Comes in a stark safety yellow.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/surveying_device.rsi
+    state: surveying
+  - type: Item
+    size: Large
+
+
+- type: entity
+  parent: RMCPropSurveyingDevice
+  id: RMCPropMeasuringDevice
+  name: measuring device
+  description: Some sort of doohickey that measures stuff.
+  components:
+  - type: Sprite
+    state: measuring

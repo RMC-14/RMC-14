@@ -191,6 +191,9 @@
     - type: Storage
       grid:
         - 0,0,7,1 # 4 slots
+    - type: Tag
+      tags:
+        - RMCSynthAllowedArmor
 
 - type: entity
   parent: RMCArmorParaSynthVest

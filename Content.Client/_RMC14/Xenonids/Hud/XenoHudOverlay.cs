@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared._RMC14.Xenonids.HiveTeam;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -61,6 +62,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
     private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
     private readonly EntityQuery<XenoComponent> _xenoQuery;
+    private readonly EntityQuery<HiveTeamMemberComponent> _hiveTeamMemberQuery;
 
     private readonly ShaderInstance _shader;
 
@@ -94,6 +96,7 @@ public sealed class XenoHudOverlay : Overlay
         _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
         _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
+        _hiveTeamMemberQuery = _entity.GetEntityQuery<HiveTeamMemberComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
         ZIndex = 1;
@@ -134,6 +137,7 @@ public sealed class XenoHudOverlay : Overlay
             DrawAcidStacks(in args, scaleMatrix, rotationMatrix);
             DrawMarkedIcons(in args, scaleMatrix, rotationMatrix);
             DrawRank(in args, scaleMatrix, rotationMatrix);
+            DrawHiveTeamNumbers(in args, scaleMatrix, rotationMatrix);
 
             DrawSlow(in args, scaleMatrix, rotationMatrix);
             DrawStun(in args, scaleMatrix, rotationMatrix);
@@ -147,6 +151,41 @@ public sealed class XenoHudOverlay : Overlay
 
         handle.UseShader(null);
         handle.SetTransform(Matrix3x2.Identity);
+    }
+
+    private void DrawHiveTeamNumbers(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
+    {
+        var handle = args.WorldHandle;
+        var query = _entity.AllEntityQueryEnumerator<HiveTeamMemberComponent, SpriteComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var member, out var sprite, out var xform))
+        {
+            if (xform.MapID != args.MapId)
+                continue;
+
+            if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            if (_invisQuery.HasComp(uid))
+                continue;
+
+            var texture = _sprite.Frame0(member.Icon);
+
+            var bounds = sprite.Bounds;
+            var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+
+            if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
+                continue;
+
+            var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+            var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
+            handle.SetTransform(matrix);
+
+            var offset = (float) texture.Height / EyeManager.PixelsPerMeter;
+            var yOffset = -(bounds.Height / 2f) - sprite.Offset.Y;
+            var xOffset = (bounds.Width / 2f) + sprite.Offset.X - (float) texture.Width / EyeManager.PixelsPerMeter;
+            handle.DrawTexture(texture, new Vector2(xOffset, yOffset), member.IconColor);
+        }
     }
 
     private void DrawBars(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
@@ -335,7 +374,7 @@ public sealed class XenoHudOverlay : Overlay
             var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
             handle.SetTransform(matrix);
 
-            var icon = new Rsi(_rsiPath, $"prae_tag");
+            var icon = new Rsi(_rsiPath, (comp.IsCriticalTag ? $"prae_tag_yellow" : $"prae_tag"));
             var texture = _sprite.GetFrame(icon, _timing.CurTime - comp.TimeAdded, false);
 
             var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter * bounds.Height;

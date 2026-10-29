@@ -44,12 +44,12 @@
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]
-    # todo walkman and casette
-    # todo deck of cards
+      - [ RMCPlayingCardDeck ]
+      - [ RMCCassettePlayer, RMCCassetteTapeCustom ] # It's supposed to be the indie cassette but I don't think we can use the sounds
     randomWeapon:
     - [ RMCM1911BeltFilledForecon ]
     - [ RMCM1911BeltFilledForecon ]
-    - [ RMCM1911BeltFilledForecon ]
+    - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCMotionDetector ]
     tryEquipRandomWeapon: true
@@ -61,8 +61,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
-    primaryWeapons:
+    primaryWeapons: # 1/3 M4SPR, 2/3 M54C
     - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
+    - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
     primaryWeaponChance: 1
 
 - type: entity

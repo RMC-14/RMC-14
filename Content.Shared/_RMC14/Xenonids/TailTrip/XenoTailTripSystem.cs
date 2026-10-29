@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Finesse;
 using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared.Coordinates;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -21,6 +22,7 @@ public sealed class XenoTailTripSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -35,16 +37,21 @@ public sealed class XenoTailTripSystem : EntitySystem
         if (!_rmcActions.TryUseAction(args))
             return;
 
-        args.Handled = true;
-
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.TailEffect, args.Target.ToCoordinates());
 
         EnsureComp<XenoSweepingComponent>(xeno);
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
 
-        if (HasComp<XenoMarkedComponent>(args.Target))
+        var criticalMark = false;
+
+        if (TryComp<XenoMarkedComponent>(args.Target, out var mark))
         {
+            criticalMark = mark.IsCriticalTag;
+
+            if (criticalMark)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-marked-critical-consumed"), args.Target, args.Target, PopupType.SmallCaution);
+
             if (!_size.TryGetSize(args.Target, out var size) || size < RMCSizes.Big)
                 _stun.TryParalyze(args.Target, xeno.Comp.MarkedStunTime, true);
 
@@ -57,5 +64,7 @@ public sealed class XenoTailTripSystem : EntitySystem
                 _stun.TryParalyze(args.Target, xeno.Comp.StunTime, true);
             _slow.TrySlowdown(args.Target, xeno.Comp.SlowTime, ignoreDurationModifier: true);
         }
+
+        args.Handled = !criticalMark;
     }
 }

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -9,11 +9,9 @@ namespace Content.Shared._RMC14.Xenonids.Impale;
 [Access(typeof(XenoImpaleSystem))]
 public sealed partial class XenoSecondImpaleComponent : Component
 {
+    //Time to Hit, Damage, and Origin
     [DataField]
-    public TimeSpan ImpaleAt;
-
-    [DataField]
-    public DamageSpecifier Damage;
+    public List<(TimeSpan ImpaleAt, DamageSpecifier Damage, EntityUid Origin)> ExtraImpales = new();
 
     [DataField]
     public EntProtoId Animation = "RMCEffectTailHit";
@@ -23,7 +21,4 @@ public sealed partial class XenoSecondImpaleComponent : Component
 
     [DataField]
     public int AP = 10;
-
-    [DataField]
-    public EntityUid Origin;
 }

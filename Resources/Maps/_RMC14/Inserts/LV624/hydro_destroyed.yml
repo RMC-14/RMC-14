@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 251.0.1
+  engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/20/2025 14:14:11
-  entityCount: 115
+  time: 08/19/2026 04:52:15
+  entityCount: 119
 maps: []
 grids:
 - 1
@@ -30,8 +30,8 @@ entities:
       chunks:
         0,0:
           ind: 0,0
-          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAxgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAxgAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-          version: 6
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAMYAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAABAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAMYAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAABAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAAAAAAEAAAAAAAABAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAABAAAAAAAAAgAAAAAAAAIAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAABAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAAIAAAAAAAACAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAABAAAAAAAAAQAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAABAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAAABAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAMYAAAAAAADGAAAAAAAAAQAAAAAAAAEAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
     - type: Broadphase
     - type: Physics
       bodyStatus: InAir
@@ -44,6 +44,7 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -148,6 +149,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - type: ImplicitRoof
 - proto: ArmorHelmetPMC
   entities:
   - uid: 50
@@ -155,11 +157,8 @@ entities:
     - type: Transform
       pos: 9.265739,9.759576
       parent: 1
-  - uid: 51
-    components:
-    - type: Transform
-      pos: 9.21883,6.7830133
-      parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: ArmorHelmetPMCOfficer
   entities:
   - uid: 49
@@ -167,6 +166,8 @@ entities:
     - type: Transform
       pos: 7.5,7.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: ClothingHandsGlovesLeather
   entities:
   - uid: 55
@@ -201,6 +202,33 @@ entities:
       rot: 3.141592653589793 rad
       pos: 3.5,9.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
+- proto: CMBarricadeFolding
+  entities:
+  - uid: 52
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,7.5
+      parent: 1
+  - uid: 110
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 116
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      pos: 8.5,5.5
+      parent: 1
 - proto: CMCrowbar
   entities:
   - uid: 45
@@ -219,6 +247,18 @@ entities:
     components:
     - type: Transform
       pos: 8.5,12.5
+      parent: 1
+- proto: CMFoldingBarricade
+  entities:
+  - uid: 117
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 118
+    components:
+    - type: Transform
+      pos: 7.5,7.5
       parent: 1
 - proto: CMGirder
   entities:
@@ -315,33 +355,6 @@ entities:
     components:
     - type: Transform
       pos: 9.5,7.5
-      parent: 1
-- proto: CMMagazineSMGM63
-  entities:
-  - uid: 62
-    components:
-    - type: Transform
-      pos: 6.362108,6.2205133
-      parent: 1
-  - uid: 63
-    components:
-    - type: Transform
-      pos: 6.4793825,6.7830133
-      parent: 1
-  - uid: 64
-    components:
-    - type: Transform
-      pos: 8.5,6.5
-      parent: 1
-  - uid: 65
-    components:
-    - type: Transform
-      pos: 8.5,6.5
-      parent: 1
-  - uid: 66
-    components:
-    - type: Transform
-      pos: 8.5,6.5
       parent: 1
 - proto: CMRack
   entities:
@@ -508,38 +521,6 @@ entities:
     - type: Transform
       pos: 10.5,5.5
       parent: 1
-- proto: HydroponicsToolHatchet
-  entities:
-  - uid: 41
-    components:
-    - type: Transform
-      pos: 6.6387854,2.6111383
-      parent: 1
-  - uid: 42
-    components:
-    - type: Transform
-      pos: 10.649582,7.697076
-      parent: 1
-- proto: HydroponicsToolMiniHoe
-  entities:
-  - uid: 39
-    components:
-    - type: Transform
-      pos: 6.4276905,2.4236383
-      parent: 1
-  - uid: 40
-    components:
-    - type: Transform
-      pos: 7.5,1.5
-      parent: 1
-- proto: HydroponicsToolSpade
-  entities:
-  - uid: 44
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 6.5,2.5
-      parent: 1
 - proto: PlantBGoneSpray
   entities:
   - uid: 57
@@ -637,12 +618,12 @@ entities:
       parent: 1
 - proto: RMCMagazineRifleSSG45
   entities:
-  - uid: 74
+  - uid: 61
     components:
     - type: Transform
       pos: 8.5,5.5
       parent: 1
-  - uid: 75
+  - uid: 62
     components:
     - type: Transform
       pos: 8.5,5.5
@@ -650,22 +631,17 @@ entities:
   - uid: 76
     components:
     - type: Transform
-      pos: 9.5,6.5
-      parent: 1
-  - uid: 79
-    components:
-    - type: Transform
-      pos: 8.5,5.5
+      pos: 7.5,5.5
       parent: 1
   - uid: 81
     components:
     - type: Transform
       pos: 6.5,7.5
       parent: 1
-  - uid: 110
+  - uid: 109
     components:
     - type: Transform
-      pos: 7.5,5.5
+      pos: 8.5,5.5
       parent: 1
   - uid: 115
     components:
@@ -678,6 +654,33 @@ entities:
     components:
     - type: Transform
       pos: 7.5,6.5
+      parent: 1
+- proto: RMCMagazineSMGFP9000
+  entities:
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 6.5,6.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 6.5,6.5
       parent: 1
 - proto: RMCMarkerAreaLabel
   entities:
@@ -723,7 +726,7 @@ entities:
       parent: 1
 - proto: RMCSpawnerCorpseWeYaManager
   entities:
-  - uid: 52
+  - uid: 51
     components:
     - type: Transform
       pos: 9.5,7.5
@@ -746,6 +749,62 @@ entities:
     components:
     - type: Transform
       pos: 7.5,6.5
+      parent: 1
+- proto: RMCToolHatchet
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 6.6387854,2.6111383
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 10.649582,7.697076
+      parent: 1
+- proto: RMCToolMiniHoe
+  entities:
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 6.4276905,2.4236383
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 7.5,1.5
+      parent: 1
+- proto: RMCToolSpade
+  entities:
+  - uid: 44
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,2.5
+      parent: 1
+- proto: RMCWeaponRifleSSG45NoLock
+  entities:
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 10.5,6.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+- proto: RMCWeaponSMGFP9000
+  entities:
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 6.5,6.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 7.5,8.5
       parent: 1
 - proto: RMCWindowFrameColony
   entities:
@@ -785,29 +844,5 @@ entities:
     components:
     - type: Transform
       pos: 0.5,8.5
-      parent: 1
-- proto: RMCWeaponRifleSSG45
-  entities:
-  - uid: 78
-    components:
-    - type: Transform
-      pos: 6.5,7.5
-      parent: 1
-  - uid: 109
-    components:
-    - type: Transform
-      pos: 10.5,6.5
-      parent: 1
-- proto: WeaponSMGM63
-  entities:
-  - uid: 60
-    components:
-    - type: Transform
-      pos: 7.5,8.5
-      parent: 1
-  - uid: 61
-    components:
-    - type: Transform
-      pos: 6.5,6.5
       parent: 1
 ...

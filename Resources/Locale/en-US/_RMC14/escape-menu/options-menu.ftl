@@ -14,8 +14,13 @@ ui-options-function-cm-holster-quaternary = Unholster quaternary
 ui-options-function-rmc-pick-up-dropped-items = Pick up dropped items
 ui-options-function-rmc-interact-with-other-hand = Interact with other hand
 ui-options-function-rmc-rest = Rest
+ui-options-function-rmc-resist = Resist
 
 ui-options-header-rmc-xeno = Xenonid
 
 ui-options-function-cm-xeno-wide-swing = Xenonid thrust attack
 ui-options-function-rmc-xeno-rest = Xenonid Rest
+
+ui-options-function-smart-equip-uniform = Smart-equip to uniform
+ui-options-function-smart-equip-armor = Smart-equip to armor
+ui-options-function-smart-equip-helmet = Smart-equip to helmet

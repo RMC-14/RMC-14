@@ -17,7 +17,7 @@
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg # TODO SMG HEAVY Sound
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type64.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -81,6 +81,8 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentRailFlashlight
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -91,9 +93,19 @@
     offsets:
       rmc-aslot-barrel: 0.8, 0.095
       rmc-aslot-rail: -0.125, 0.15
-      rmc-aslot-underbarrel: 0.475, -0.19
+      rmc-aslot-underbarrel: 0.43, -0.1885
   - type: GunDamageModifier
     multiplier: 1.2
+  - type: ItemMapper
+    mapLayers:
+      mag-0:
+        whitelist:
+          tags:
+          - RMCMagazineSMGType19
+      mag-1:
+        whitelist:
+          tags:
+          - RMCMagazineSMGType19Drum
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -125,6 +137,8 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  - type: Item
+    size: Small
 
 - type: entity
   parent: CMMagazineRifleBase

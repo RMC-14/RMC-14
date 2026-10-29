@@ -137,7 +137,7 @@
     primaryWeapons:
     - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]
     - [ RMCBeltMarineUZI, RMCWeaponSMGUZI ]
-    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunM12 ]
     - [ CMBeltMarineAR10, WeaponRifleAR10 ]
     primaryWeaponChance: 0.6
 

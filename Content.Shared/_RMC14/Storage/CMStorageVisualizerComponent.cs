@@ -23,4 +23,11 @@ public sealed partial class CMStorageVisualizerComponent : Component
     /// </summary>
     [DataField]
     public string? StorageEmpty;
+
+    /// <summary>
+    /// If true, the storage will still use its open/closed layers while empty instead of
+    /// short-circuiting to an empty-only presentation.
+    /// </summary>
+    [DataField]
+    public bool ShowOpenClosedWhenEmpty;
 }

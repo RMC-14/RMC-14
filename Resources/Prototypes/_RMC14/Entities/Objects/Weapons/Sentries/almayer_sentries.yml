@@ -49,6 +49,8 @@
   - type: UserIFF
     factions:
     - FactionMarine
+  - type: RMCHealthExaminable
+    speciesType: Mechanical
 
 - type: entity
   parent: BaseStructure

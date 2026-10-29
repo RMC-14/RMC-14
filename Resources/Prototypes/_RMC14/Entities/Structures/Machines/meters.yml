@@ -29,3 +29,10 @@
   components:
   - type: Sprite
     state: redmeter
+
+- type: entity
+  parent: RMCWallMeterBase
+  id: RMCWallMeterBroken
+  components:
+  - type: Sprite
+    state: brokenmeter

@@ -7,6 +7,7 @@
   name: radio headset
   description: An updated, modular intercom that fits over the head. Takes encryption keys.
   components:
+  - type: RMCCryoUnavailableOnStore
   - type: ContainerContainer
     containers:
       key_slots: !type:Container
@@ -408,6 +409,30 @@
     - WeYa
   - type: GrantSquadLeaderTracker
     defaultMode: DirectorPmc
+    trackerModes:
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
+
+- type: entity
+  parent: RMCHeadsetShip
+  id: RMCHeadsetExecutiveBodyguard
+  name: executive bodyguard radio headset
+  description: Used by the Executive Bodyguard to ensure the safety of the CL.
+  components:
+  - type: Sprite
+    state: we_ya_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyExecutiveBodyguard
+  - type: GrantMarineIcons
+    factions:
+    - UNMC
+    - WeYa
+  - type: GrantSquadLeaderTracker
+    defaultMode: CorporateLiaison
     trackerModes:
     - DirectorPmc
     - LeaderPmc

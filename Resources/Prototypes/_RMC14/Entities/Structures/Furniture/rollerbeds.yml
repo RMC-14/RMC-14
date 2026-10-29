@@ -76,6 +76,8 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: Strap
+    modifyBuckleDrawDepth: false
   - type: Foldable
     fitIntoEntityStorage: true
   - type: RMCStrapNoDrawDepthChange

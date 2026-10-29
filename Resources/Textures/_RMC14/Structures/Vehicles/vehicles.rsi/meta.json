@@ -8,178 +8,514 @@
   },
   "states": [
     {
-      "name": "mizutani_black"
+      "name": "miyahira_black"
     },
     {
-      "name": "mizutani_black_f"
+      "name": "miyahira_black_damaged1"
     },
     {
-      "name": "mizutani_black_damage"
+      "name": "miyahira_black_damaged1_f"
     },
     {
-      "name": "mizutani_black_damage_f"
+      "name": "miyahira_black_damaged2"
     },
     {
-      "name": "mizutani_blue"
+      "name": "miyahira_black_damaged2_f"
     },
     {
-      "name": "mizutani_blue_f"
+      "name": "miyahira_black_damaged3"
     },
     {
-      "name": "mizutani_blue_damage"
+      "name": "miyahira_black_damaged3_f"
     },
     {
-      "name": "mizutani_blue_damage_f"
+      "name": "miyahira_black_damaged4"
     },
     {
-      "name": "mizutani_brown"
+      "name": "miyahira_black_damaged4_f"
     },
     {
-      "name": "mizutani_brown_f"
+      "name": "miyahira_black_damaged5"
     },
     {
-      "name": "mizutani_brown_damage"
+      "name": "miyahira_black_damaged5_f"
     },
     {
-      "name": "mizutani_brown_damage_f"
+      "name": "miyahira_black_f"
     },
     {
-      "name": "mizutani_cop"
+      "name": "miyahira_blue"
     },
     {
-      "name": "mizutani_cop_f"
+      "name": "miyahira_blue_damaged1"
     },
     {
-      "name": "mizutani_cop_damage"
+      "name": "miyahira_blue_damaged1_f"
     },
     {
-      "name": "mizutani_cop_damage_f"
+      "name": "miyahira_blue_damaged2"
     },
     {
-      "name": "mizutani_desatblue"
+      "name": "miyahira_blue_damaged2_f"
     },
     {
-      "name": "mizutani_desatblue_f"
+      "name": "miyahira_blue_damaged3"
     },
     {
-      "name": "mizutani_desatblue_damage"
+      "name": "miyahira_blue_damaged3_f"
     },
     {
-      "name": "mizutani_desatblue_damage_f"
+      "name": "miyahira_blue_damaged4"
     },
     {
-      "name": "mizutani_green"
+      "name": "miyahira_blue_damaged4_f"
     },
     {
-      "name": "mizutani_green_f"
+      "name": "miyahira_blue_damaged5"
     },
     {
-      "name": "mizutani_green_damage"
+      "name": "miyahira_blue_damaged5_f"
     },
     {
-      "name": "mizutani_green_damage_f"
+      "name": "miyahira_blue_f"
     },
     {
-      "name": "mizutani_lightblue"
+      "name": "miyahira_brown"
     },
     {
-      "name": "mizutani_lightblue_f"
+      "name": "miyahira_brown_damaged1"
     },
     {
-      "name": "mizutani_lightblue_damage"
+      "name": "miyahira_brown_damaged1_f"
     },
     {
-      "name": "mizutani_lightblue_damage_f"
+      "name": "miyahira_brown_damaged2"
     },
     {
-      "name": "mizutani_orange"
+      "name": "miyahira_brown_damaged2_f"
     },
     {
-      "name": "mizutani_orange_f"
+      "name": "miyahira_brown_damaged3"
     },
     {
-      "name": "mizutani_orange_damage"
+      "name": "miyahira_brown_damaged3_f"
     },
     {
-      "name": "mizutani_orange_damage_f"
+      "name": "miyahira_brown_damaged4"
     },
     {
-      "name": "mizutani_pink"
+      "name": "miyahira_brown_damaged4_f"
     },
     {
-      "name": "mizutani_pink_f"
+      "name": "miyahira_brown_damaged5"
     },
     {
-      "name": "mizutani_pink_damage"
+      "name": "miyahira_brown_damaged5_f"
     },
     {
-      "name": "mizutani_pink_damage_f"
+      "name": "miyahira_brown_f"
     },
     {
-      "name": "mizutani_purple"
+      "name": "miyahira_cop"
     },
     {
-      "name": "mizutani_purple_f"
+      "name": "miyahira_cop_damaged1"
     },
     {
-      "name": "mizutani_purple_damage"
+      "name": "miyahira_cop_damaged1_f"
     },
     {
-      "name": "mizutani_purple_damage_f"
+      "name": "miyahira_cop_damaged2"
     },
     {
-      "name": "mizutani_red"
+      "name": "miyahira_cop_damaged2_f"
     },
     {
-      "name": "mizutani_red_f"
+      "name": "miyahira_cop_damaged3"
     },
     {
-      "name": "mizutani_red_damage"
+      "name": "miyahira_cop_damaged3_f"
     },
     {
-      "name": "mizutani_red_damage_f"
+      "name": "miyahira_cop_damaged4"
     },
     {
-      "name": "mizutani_shell"
+      "name": "miyahira_cop_damaged4_f"
     },
     {
-      "name": "mizutani_shell_f"
+      "name": "miyahira_cop_damaged5"
     },
     {
-      "name": "mizutani_taxi"
+      "name": "miyahira_cop_damaged5_f"
     },
     {
-      "name": "mizutani_taxi_f"
+      "name": "miyahira_cop_f"
     },
     {
-      "name": "mizutani_taxi_damage"
+      "name": "miyahira_desatblue"
     },
     {
-      "name": "mizutani_taxi_damage_f"
+      "name": "miyahira_desatblue_damaged1"
     },
     {
-      "name": "mizutani_turquoise"
+      "name": "miyahira_desatblue_damaged1_f"
     },
     {
-      "name": "mizutani_turquoise_f"
+      "name": "miyahira_desatblue_damaged2"
     },
     {
-      "name": "mizutani_turquoise_damage"
+      "name": "miyahira_desatblue_damaged2_f"
     },
     {
-      "name": "mizutani_turquoise_damage_f"
+      "name": "miyahira_desatblue_damaged3"
     },
     {
-      "name": "mizutani_wy"
+      "name": "miyahira_desatblue_damaged3_f"
     },
     {
-      "name": "mizutani_wy_f"
+      "name": "miyahira_desatblue_damaged4"
     },
     {
-      "name": "mizutani_wy_damage"
+      "name": "miyahira_desatblue_damaged4_f"
     },
     {
-      "name": "mizutani_wy_damage_f"
+      "name": "miyahira_desatblue_damaged5"
+    },
+    {
+      "name": "miyahira_desatblue_damaged5_f"
+    },
+    {
+      "name": "miyahira_desatblue_f"
+    },
+    {
+      "name": "miyahira_green"
+    },
+    {
+      "name": "miyahira_green_damaged1"
+    },
+    {
+      "name": "miyahira_green_damaged1_f"
+    },
+    {
+      "name": "miyahira_green_damaged2"
+    },
+    {
+      "name": "miyahira_green_damaged2_f"
+    },
+    {
+      "name": "miyahira_green_damaged3"
+    },
+    {
+      "name": "miyahira_green_damaged3_f"
+    },
+    {
+      "name": "miyahira_green_damaged4"
+    },
+    {
+      "name": "miyahira_green_damaged4_f"
+    },
+    {
+      "name": "miyahira_green_damaged5"
+    },
+    {
+      "name": "miyahira_green_damaged5_f"
+    },
+    {
+      "name": "miyahira_green_f"
+    },
+    {
+      "name": "miyahira_lightblue"
+    },
+    {
+      "name": "miyahira_lightblue_damaged1"
+    },
+    {
+      "name": "miyahira_lightblue_damaged1_f"
+    },
+    {
+      "name": "miyahira_lightblue_damaged2"
+    },
+    {
+      "name": "miyahira_lightblue_damaged2_f"
+    },
+    {
+      "name": "miyahira_lightblue_damaged3"
+    },
+    {
+      "name": "miyahira_lightblue_damaged3_f"
+    },
+    {
+      "name": "miyahira_lightblue_damaged4"
+    },
+    {
+      "name": "miyahira_lightblue_damaged4_f"
+    },
+    {
+      "name": "miyahira_lightblue_damaged5"
+    },
+    {
+      "name": "miyahira_lightblue_damaged5_f"
+    },
+    {
+      "name": "miyahira_lightblue_f"
+    },
+    {
+      "name": "miyahira_orange"
+    },
+    {
+      "name": "miyahira_orange_damaged1"
+    },
+    {
+      "name": "miyahira_orange_damaged1_f"
+    },
+    {
+      "name": "miyahira_orange_damaged2"
+    },
+    {
+      "name": "miyahira_orange_damaged2_f"
+    },
+    {
+      "name": "miyahira_orange_damaged3"
+    },
+    {
+      "name": "miyahira_orange_damaged3_f"
+    },
+    {
+      "name": "miyahira_orange_damaged4"
+    },
+    {
+      "name": "miyahira_orange_damaged4_f"
+    },
+    {
+      "name": "miyahira_orange_damaged5"
+    },
+    {
+      "name": "miyahira_orange_damaged5_f"
+    },
+    {
+      "name": "miyahira_orange_f"
+    },
+    {
+      "name": "miyahira_pink"
+    },
+    {
+      "name": "miyahira_pink_damaged1"
+    },
+    {
+      "name": "miyahira_pink_damaged1_f"
+    },
+    {
+      "name": "miyahira_pink_damaged2"
+    },
+    {
+      "name": "miyahira_pink_damaged2_f"
+    },
+    {
+      "name": "miyahira_pink_damaged3"
+    },
+    {
+      "name": "miyahira_pink_damaged3_f"
+    },
+    {
+      "name": "miyahira_pink_damaged4"
+    },
+    {
+      "name": "miyahira_pink_damaged4_f"
+    },
+    {
+      "name": "miyahira_pink_damaged5"
+    },
+    {
+      "name": "miyahira_pink_damaged5_f"
+    },
+    {
+      "name": "miyahira_pink_f"
+    },
+    {
+      "name": "miyahira_purple"
+    },
+    {
+      "name": "miyahira_purple_damaged1"
+    },
+    {
+      "name": "miyahira_purple_damaged1_f"
+    },
+    {
+      "name": "miyahira_purple_damaged2"
+    },
+    {
+      "name": "miyahira_purple_damaged2_f"
+    },
+    {
+      "name": "miyahira_purple_damaged3"
+    },
+    {
+      "name": "miyahira_purple_damaged3_f"
+    },
+    {
+      "name": "miyahira_purple_damaged4"
+    },
+    {
+      "name": "miyahira_purple_damaged4_f"
+    },
+    {
+      "name": "miyahira_purple_damaged5"
+    },
+    {
+      "name": "miyahira_purple_damaged5_f"
+    },
+    {
+      "name": "miyahira_purple_f"
+    },
+    {
+      "name": "miyahira_red"
+    },
+    {
+      "name": "miyahira_red_damaged1"
+    },
+    {
+      "name": "miyahira_red_damaged1_f"
+    },
+    {
+      "name": "miyahira_red_damaged2"
+    },
+    {
+      "name": "miyahira_red_damaged2_f"
+    },
+    {
+      "name": "miyahira_red_damaged3"
+    },
+    {
+      "name": "miyahira_red_damaged3_f"
+    },
+    {
+      "name": "miyahira_red_damaged4"
+    },
+    {
+      "name": "miyahira_red_damaged4_f"
+    },
+    {
+      "name": "miyahira_red_damaged5"
+    },
+    {
+      "name": "miyahira_red_damaged5_f"
+    },
+    {
+      "name": "miyahira_red_f"
+    },
+    {
+      "name": "miyahira_shell"
+    },
+    {
+      "name": "miyahira_shell_f"
+    },
+    {
+      "name": "miyahira_taxi"
+    },
+    {
+      "name": "miyahira_taxi_damaged1"
+    },
+    {
+      "name": "miyahira_taxi_damaged1_f"
+    },
+    {
+      "name": "miyahira_taxi_damaged2"
+    },
+    {
+      "name": "miyahira_taxi_damaged2_f"
+    },
+    {
+      "name": "miyahira_taxi_damaged3"
+    },
+    {
+      "name": "miyahira_taxi_damaged3_f"
+    },
+    {
+      "name": "miyahira_taxi_damaged4"
+    },
+    {
+      "name": "miyahira_taxi_damaged4_f"
+    },
+    {
+      "name": "miyahira_taxi_damaged5"
+    },
+    {
+      "name": "miyahira_taxi_damaged5_f"
+    },
+    {
+      "name": "miyahira_taxi_f"
+    },
+    {
+      "name": "miyahira_turquoise"
+    },
+    {
+      "name": "miyahira_turquoise_damaged1"
+    },
+    {
+      "name": "miyahira_turquoise_damaged1_f"
+    },
+    {
+      "name": "miyahira_turquoise_damaged2"
+    },
+    {
+      "name": "miyahira_turquoise_damaged2_f"
+    },
+    {
+      "name": "miyahira_turquoise_damaged3"
+    },
+    {
+      "name": "miyahira_turquoise_damaged3_f"
+    },
+    {
+      "name": "miyahira_turquoise_damaged4"
+    },
+    {
+      "name": "miyahira_turquoise_damaged4_f"
+    },
+    {
+      "name": "miyahira_turquoise_damaged5"
+    },
+    {
+      "name": "miyahira_turquoise_damaged5_f"
+    },
+    {
+      "name": "miyahira_turquoise_f"
+    },
+    {
+      "name": "miyahira_wy"
+    },
+    {
+      "name": "miyahira_wy_damaged1"
+    },
+    {
+      "name": "miyahira_wy_damaged1_f"
+    },
+    {
+      "name": "miyahira_wy_damaged2"
+    },
+    {
+      "name": "miyahira_wy_damaged2_f"
+    },
+    {
+      "name": "miyahira_wy_damaged3"
+    },
+    {
+      "name": "miyahira_wy_damaged3_f"
+    },
+    {
+      "name": "miyahira_wy_damaged4"
+    },
+    {
+      "name": "miyahira_wy_damaged4_f"
+    },
+    {
+      "name": "miyahira_wy_damaged5"
+    },
+    {
+      "name": "miyahira_wy_damaged5_f"
+    },
+    {
+      "name": "miyahira_wy_f"
     }
   ]
 }

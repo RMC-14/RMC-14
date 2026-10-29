@@ -352,6 +352,14 @@
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetEcho
@@ -366,14 +374,6 @@
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
-  - type: GrantSquadLeaderTracker
-    defaultMode: CommandingOfficer
-    trackerModes:
-    - CommandingOfficer
-    - ExecutiveOfficer
-    - SquadLeader
-    - FireteamLeader
-    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetEcho
@@ -429,6 +429,14 @@
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetFoxtrot
@@ -443,14 +451,6 @@
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
-  - type: GrantSquadLeaderTracker
-    defaultMode: CommandingOfficer
-    trackerModes:
-    - CommandingOfficer
-    - ExecutiveOfficer
-    - SquadLeader
-    - FireteamLeader
-    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetFoxtrot

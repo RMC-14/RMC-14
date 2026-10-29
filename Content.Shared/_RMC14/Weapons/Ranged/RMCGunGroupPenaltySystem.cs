@@ -3,6 +3,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -22,6 +23,8 @@ public sealed class RMCGunGroupPenaltySystem : EntitySystem
 
         SubscribeLocalEvent<GunGroupPenaltyComponent, GotEquippedHandEvent>(OnGroupSpreadPenaltyEquippedHand);
         SubscribeLocalEvent<GunGroupPenaltyComponent, GotUnequippedHandEvent>(OnGroupSpreadPenaltyUnequippedHand);
+        SubscribeLocalEvent<GunGroupPenaltyComponent, EntParentChangedMessage>(OnGroupSpreadPenaltyParentChanged);
+        SubscribeLocalEvent<GunGroupPenaltyComponent, EntGotInsertedIntoContainerMessage>(OnInsertedIntoContainer);
         SubscribeLocalEvent<GunGroupPenaltyComponent, GunRefreshModifiersEvent>(OnGroupSpreadPenaltyRefreshModifiers);
         SubscribeLocalEvent<GunGroupPenaltyComponent, AmmoShotEvent>(OnGroupSpreadPenaltyAmmoShot, before: [typeof(CMGunSystem)]);
     }
@@ -34,6 +37,25 @@ public sealed class RMCGunGroupPenaltySystem : EntitySystem
     private void OnGroupSpreadPenaltyUnequippedHand(Entity<GunGroupPenaltyComponent> ent, ref GotUnequippedHandEvent args)
     {
         RefreshGunHolderModifiers(ent);
+    }
+
+    private void OnGroupSpreadPenaltyParentChanged(Entity<GunGroupPenaltyComponent> ent, ref EntParentChangedMessage args)
+    {
+        if (args.OldParent == null)
+            return;
+
+        foreach (var held in _hands.EnumerateHeld(args.OldParent.Value))
+        {
+            _gun.RefreshModifiers(held);
+        }
+    }
+
+    private void OnInsertedIntoContainer(Entity<GunGroupPenaltyComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        foreach (var held in _hands.EnumerateHeld(args.Container.Owner))
+        {
+            _gun.RefreshModifiers(held);
+        }
     }
 
     private void OnGroupSpreadPenaltyRefreshModifiers(Entity<GunGroupPenaltyComponent> ent, ref GunRefreshModifiersEvent args)

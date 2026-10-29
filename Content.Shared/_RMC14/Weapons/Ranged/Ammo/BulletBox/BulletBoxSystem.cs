@@ -5,7 +5,9 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
@@ -36,7 +38,18 @@ public sealed class BulletBoxSystem : EntitySystem
     {
         using (args.PushGroup(nameof(BulletBoxComponent)))
         {
-            args.PushText(Loc.GetString("rmc-bullet-box-amount", ("amount", ent.Comp.Amount)));
+            var color = ((double) ent.Comp.Amount / ent.Comp.Max) switch
+            {
+                >= 1 => "#00c400",
+                >= 0.66 => "#c4c400",
+                >= 0.33 => "#c46400",
+                > 0 => "#c40000",
+                _ => "#808080",
+            };
+            args.PushText(Loc.GetString("rmc-bullet-box-amount", ("amount", ent.Comp.Amount), ("max", ent.Comp.Max), ("color", color)));
+
+            if (!string.IsNullOrWhiteSpace(ent.Comp.UsedIn))
+                args.PushText(Loc.GetString("rmc-bullet-box-used-in", ("vehicle", ent.Comp.UsedIn)));
         }
     }
 
@@ -130,7 +143,25 @@ public sealed class BulletBoxSystem : EntitySystem
                 return;
 
             transfer = Math.Min(transfer, used.Comp2.Count);
-            _gun.SetBallisticUnspawned((used, used.Comp2), used.Comp2.UnspawnedCount - transfer);
+
+            var fromUnspawned = Math.Min(transfer, used.Comp2.UnspawnedCount);
+            if (fromUnspawned > 0)
+                _gun.SetBallisticUnspawned((used, used.Comp2), used.Comp2.UnspawnedCount - fromUnspawned);
+
+            var remaining = transfer - fromUnspawned;
+            if (remaining > 0)
+            {
+                var taken = new List<(EntityUid? Entity, IShootable Shootable)>();
+                var takeEv = new TakeAmmoEvent(remaining, taken, Transform(usedId).Coordinates, user);
+                RaiseLocalEvent(usedId, takeEv);
+
+                foreach (var (round, _) in taken)
+                {
+                    if (round is { } roundId)
+                        PredictedDel(roundId);
+                }
+            }
+
             ent.Comp.Amount += transfer;
         }
         _popup.PopupClient(Loc.GetString("rmc-bullet-box-transfer-done", ("amount", transfer), ("used", ent)), ent, user);
@@ -191,5 +222,38 @@ public sealed class BulletBoxSystem : EntitySystem
         };
 
         _appearance.SetData(ent, BulletBoxLayers.Fill, visual);
+    }
+
+    public bool TryConsume(Entity<BulletBoxComponent> ent, int amount)
+    {
+        if (amount <= 0 || ent.Comp.Amount < amount)
+            return false;
+
+        ent.Comp.Amount -= amount;
+        Dirty(ent);
+        UpdateAppearance(ent);
+        return true;
+    }
+
+    public bool TryAdd(Entity<BulletBoxComponent> ent, int amount)
+    {
+        if (amount <= 0 || ent.Comp.Amount + amount > ent.Comp.Max)
+            return false;
+
+        ent.Comp.Amount += amount;
+        Dirty(ent);
+        UpdateAppearance(ent);
+        return true;
+    }
+
+    public bool TrySetAmount(Entity<BulletBoxComponent> ent, int amount)
+    {
+        if (amount < 0 || amount > ent.Comp.Max)
+            return false;
+
+        ent.Comp.Amount = amount;
+        Dirty(ent);
+        UpdateAppearance(ent);
+        return true;
     }
 }

@@ -51,8 +51,8 @@ public sealed class XenoRoleSystem : EntitySystem
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeLocalEvent<XenoComponent, PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<XenoComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
 
         SubscribeLocalEvent<ActorComponent, HiveChangedEvent>(OnHiveChanged);
 
@@ -77,21 +77,24 @@ public sealed class XenoRoleSystem : EntitySystem
         _toUpdate.Clear();
     }
 
-    private void OnPlayerAttached(Entity<XenoComponent> xeno, ref PlayerAttachedEvent args)
+    private void OnPlayerAttached(PlayerAttachedEvent args)
     {
-        RemCompDeferred<XenoDisconnectedComponent>(xeno);
-        _toUpdate.Add(xeno);
-    }
-
-    private void OnPlayerDetached(Entity<XenoComponent> xeno, ref PlayerDetachedEvent args)
-    {
-        if(TerminatingOrDeleted(xeno))
+        if (!TryComp<XenoComponent>(args.Entity, out var comp))
             return;
 
-        var disconnected = EnsureComp<XenoDisconnectedComponent>(xeno);
+        RemCompDeferred<XenoDisconnectedComponent>(args.Entity);
+        _toUpdate.Add((args.Entity, comp));
+    }
+
+    private void OnPlayerDetached(PlayerDetachedEvent args)
+    {
+        if(TerminatingOrDeleted(args.Entity) || !HasComp<XenoComponent>(args.Entity))
+            return;
+
+        var disconnected = EnsureComp<XenoDisconnectedComponent>(args.Entity);
         disconnected.At = _timing.CurTime;
 
-        if (_hive.GetHive(xeno.Owner) is {} hive)
+        if (_hive.GetHive(args.Entity) is {} hive)
             _pvsOverride.RemoveForceSend(hive, args.Player);
     }
 

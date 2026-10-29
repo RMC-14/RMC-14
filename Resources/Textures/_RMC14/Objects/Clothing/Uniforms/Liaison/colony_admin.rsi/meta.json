@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8f4b562dc63f7daa774d816082254b31f352aa92/icons/obj/items/clothing/uniforms/uniforms_by_faction/WY.dmi, https://github.com/cmss13-devs/cmss13/blob/8f4b562dc63f7daa774d816082254b31f352aa92/icons/mob/humans/onmob/clothing/uniforms/uniforms_by_faction/WY.dmi, jacket edited by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "sleeves-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    }
+  ]
+}

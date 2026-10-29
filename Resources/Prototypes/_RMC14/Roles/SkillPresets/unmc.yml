@@ -22,4 +22,19 @@
       RMCSkillPowerLoader: 2
       RMCSkillSmartGun: 1
       RMCSkillSurgery: 1
-      RMCSkillVehicles: 1
+      RMCSkillVehicles: 2
+
+# Survivor skills
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorRecruiter
+  name: Survivor UNMC Recruiter
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillLeadership: 1
+      RMCSkillFireman: 2
+      RMCSkillOverwatch: 1
+      RMCSkillVehicles: 2
