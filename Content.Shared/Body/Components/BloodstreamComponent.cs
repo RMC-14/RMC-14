@@ -213,4 +213,12 @@ public sealed partial class BloodstreamComponent : Component
     // RMC14
     [DataField, AutoNetworkedField]
     public bool SpillChemicals;
+
+    // RMC14 how far above BloodMaxVolume the blood solution can be filled
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 BloodOverfillVolume = FixedPoint2.Zero;
+
+    // RMC14 hunger spent per unit of blood regenerated, regen stops without it
+    [DataField, AutoNetworkedField]
+    public float BloodRegenHungerCost;
 }

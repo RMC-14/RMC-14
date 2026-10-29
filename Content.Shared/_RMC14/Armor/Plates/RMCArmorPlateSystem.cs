@@ -8,6 +8,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
@@ -17,6 +18,7 @@ using Content.Shared.Projectiles;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor.Plates;
 
@@ -34,6 +36,7 @@ public sealed class RMCArmorPlateSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -52,10 +55,71 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCEmergencyInjectorToggleOverdoseActionEvent>(OnEmergencyInjectorToggleOverdose);
         SubscribeLocalEvent<RMCCeramicPlateActiveComponent, DamageModifyEvent>(OnCeramicDamageModify);
         SubscribeLocalEvent<RMCTranslatorPlateActiveComponent, CanUnderstandLanguageEvent>(OnTranslatorCanUnderstand);
+
+        SubscribeLocalEvent<RMCArmorPlateComponent, ExaminedEvent>(OnPlateExamined);
+        SubscribeLocalEvent<RMCArmorPlateSlotComponent, ExaminedEvent>(OnSlotExamined);
+    }
+
+    private void OnPlateExamined(Entity<RMCArmorPlateComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(RMCArmorPlateSystem)))
+        {
+            args.PushText("To use it, attach it to your armor.");
+            PushPlateStatus(ent, args);
+        }
+    }
+
+    private void OnSlotExamined(Entity<RMCArmorPlateSlotComponent> ent, ref ExaminedEvent args)
+    {
+        if (!TryGetPlate(ent, out var plate))
+            return;
+
+        using (args.PushGroup(nameof(RMCArmorPlateSystem)))
+        {
+            args.PushText($"The {Name(plate)} is attached to it.");
+            PushPlateStatus(plate, args);
+        }
+    }
+
+    private void PushPlateStatus(EntityUid plate, ExaminedEvent args)
+    {
+        if (TryComp(plate, out RMCCeramicPlateComponent? ceramic))
+        {
+            var percentage = ceramic.MaxHealth > 0 ? (int) MathF.Floor(ceramic.Health / ceramic.MaxHealth * 100) : 0;
+            var status = percentage switch
+            {
+                <= 0 => "It is broken.",
+                < 20 => "It is crumbling apart!",
+                < 50 => "It is seriously damaged.",
+                < 80 => "It is moderately damaged.",
+                < 100 => "It is slightly damaged.",
+                _ => "It is in pristine condition.",
+            };
+
+            args.PushText(status);
+        }
+
+        if (TryComp(plate, out RMCEmergencyInjectorPlateComponent? injector))
+        {
+            var mode = injector.OverdoseProtection switch
+            {
+                RMCEmergencyInjectorOverdose.Strict => "STRICT",
+                RMCEmergencyInjectorOverdose.Dynamic => "DYNAMIC",
+                _ => "OFF",
+            };
+
+            args.PushText($"Overdose protection seems to be {mode}.");
+
+            if (injector.Used)
+                args.PushMarkup("[color=red]It is already used![/color]");
+        }
     }
 
     private void OnPlateInserted(Entity<RMCArmorPlateSlotComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (args.Container.ID != PlateSlotId || ent.Comp.Wearer is not { } wearer)
             return;
 
@@ -65,6 +129,9 @@ public sealed class RMCArmorPlateSystem : EntitySystem
 
     private void OnPlateRemoved(Entity<RMCArmorPlateSlotComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (args.Container.ID != PlateSlotId || ent.Comp.Wearer is not { } wearer)
             return;
 
@@ -74,6 +141,9 @@ public sealed class RMCArmorPlateSystem : EntitySystem
 
     private void OnSlotEquipped(Entity<RMCArmorPlateSlotComponent> ent, ref GotEquippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         ent.Comp.Wearer = args.Equipee;
         Dirty(ent);
 
@@ -83,6 +153,9 @@ public sealed class RMCArmorPlateSystem : EntitySystem
 
     private void OnSlotUnequipped(Entity<RMCArmorPlateSlotComponent> ent, ref GotUnequippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (TryGetPlate(ent, out var plate))
             RemovePlate(args.Equipee, plate);
 

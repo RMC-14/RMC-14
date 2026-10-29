@@ -16,7 +16,13 @@ public sealed partial class RMCFlamerTankComponent : Component
     public EntityWhitelist? RefillWhitelist;
 
     [DataField, AutoNetworkedField]
+    public int MinIntensity = 1;
+
+    [DataField, AutoNetworkedField]
     public int MaxIntensity = 40;
+
+    [DataField, AutoNetworkedField]
+    public int MinDuration = 3;
 
     [DataField, AutoNetworkedField]
     public int MaxDuration = 30;

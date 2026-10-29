@@ -21,7 +21,13 @@ public sealed partial class RMCFlamerChainComponent : Component
     public ProtoId<ReagentPrototype> Reagent = "RMCNapalmUT";
 
     [DataField, AutoNetworkedField]
+    public int MinIntensity = 1;
+
+    [DataField, AutoNetworkedField]
     public int MaxIntensity = 20;
+
+    [DataField, AutoNetworkedField]
+    public int MinDuration = 3;
 
     [DataField, AutoNetworkedField]
     public int MaxDuration = 24;

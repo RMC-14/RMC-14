@@ -1,8 +1,13 @@
 ﻿using Content.Shared._RMC14.Botany;
+using Content.Shared._RMC14.Chemistry.Alcohol;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Network;
 using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Chemistry.Effects;
@@ -35,6 +40,14 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
     public virtual bool ReactsOnTouch => false;
 
+    public virtual bool IsFireSupplement => false;
+
+    public virtual bool IsVolatile => false;
+
+    public virtual void ModifyFireStats(ref RMCFireStatsBuilder stats, float potency)
+    {
+    }
+
     public override void Effect(EntityEffectBaseArgs args)
     {
         if (args is not EntityEffectReagentArgs { Reagent: { } reagent } reagentArgs)
@@ -42,80 +55,121 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
         var damageable = args.EntityManager.System<DamageableSystem>();
         var scale = reagentArgs.Scale;
-        var boost = CalculateReagentBoost(reagentArgs);
-        _moddedPotency = Potency + boost;
+        var isPlant = args.EntityManager.TryGetComponent<RMCPlantComponent>(args.TargetEntity, out var plant);
+        var reaction = IsReaction(reagentArgs);
+        _moddedPotency = isPlant || reaction
+            ? Potency
+            : (Potency + CalculateReagentBoost(reagentArgs)) * CalculateReagentEffectiveness(reagentArgs);
         var scaledPotency = PotencyPerSecond * scale;
 
-        if (args.EntityManager.TryGetComponent<RMCPlantComponent>(args.TargetEntity, out var plant))
+        if (isPlant)
         {
-            TickHydroTray(new Entity<RMCPlantComponent>(args.TargetEntity, plant), scaledPotency, reagentArgs);
+            TickHydroTray(new Entity<RMCPlantComponent>(args.TargetEntity, plant!), scaledPotency, reagentArgs);
             return;
         }
 
-        if (IsCancelled(reagentArgs))
+        if (reaction && IoCManager.Resolve<INetManager>().IsClient)
             return;
 
-        Tick(damageable, scaledPotency, reagentArgs);
+        if (!reaction && IsCancelled(reagentArgs))
+            return;
 
-        var totalQuantity = FixedPoint2.Zero;
-        if (reagentArgs.Source != null)
-            totalQuantity = reagentArgs.Source.GetTotalPrototypeQuantity(reagent.ID);
+        if (!reaction && args.EntityManager.System<RMCAlcoholOnsetSystem>().IsPending(args.TargetEntity, reagent.ID))
+            return;
 
-        if (reagent.Overdose != null && totalQuantity >= reagent.Overdose && !IsRegulated(reagentArgs))
-            TickOverdose(damageable, scaledPotency, reagentArgs);
+        var dead = !reaction && IsDead(reagentArgs);
+        if (!dead || IsForcedWhenDead(reagentArgs))
+        {
+            Tick(damageable, scaledPotency, reagentArgs);
 
-        if (reagent.CriticalOverdose != null && totalQuantity >= reagent.CriticalOverdose && !IsRegulated(reagentArgs))
-            TickCriticalOverdose(damageable, scaledPotency, reagentArgs);
+            if (reaction)
+                return;
+
+            var totalQuantity = FixedPoint2.Zero;
+            if (reagentArgs.Source != null)
+                totalQuantity = reagentArgs.Source.GetTotalPrototypeQuantity(reagent.ID);
+
+            if (reagent.Overdose != null && totalQuantity > reagent.Overdose && !IsRegulated(reagentArgs))
+                TickOverdose(damageable, scaledPotency, reagentArgs);
+
+            if (reagent.CriticalOverdose != null && totalQuantity > reagent.CriticalOverdose && !IsRegulated(reagentArgs))
+                TickCriticalOverdose(damageable, scaledPotency, reagentArgs);
+        }
+
+        if (dead)
+        {
+            if (TickDead(damageable, scaledPotency, reagentArgs))
+                reagentArgs.RMCProcessedDead = true;
+        }
+    }
+
+    protected static bool IsReaction(EntityEffectReagentArgs args)
+    {
+        return args.Method != null;
+    }
+
+    private static bool IsDead(EntityEffectReagentArgs args)
+    {
+        return args.EntityManager.TryGetComponent<MobStateComponent>(args.TargetEntity, out var mobState) &&
+               args.EntityManager.System<MobStateSystem>().IsDead(args.TargetEntity, mobState);
+    }
+
+    private static IReadOnlyList<RMCChemicalEffect> GetSiblingProperties(EntityEffectReagentArgs args)
+    {
+        if (args.Reagent is not { } reagent)
+            return [];
+
+        return args.EntityManager.System<RMCReagentSystem>().GetProperties(reagent.ID);
+    }
+
+    private static bool HasSiblingProperty<T>(EntityEffectReagentArgs args) where T : RMCChemicalEffect
+    {
+        return args.Reagent is { } reagent && args.EntityManager.System<RMCReagentSystem>().HasProperty<T>(reagent.ID);
+    }
+
+    public static bool IsForcedWhenDead(EntityEffectReagentArgs args)
+    {
+        return HasSiblingProperty<Neutral.Thanatometabolizing>(args);
     }
 
     private static float CalculateReagentBoost(EntityEffectReagentArgs args)
     {
         var boost = 0f;
-        if (args.Reagent?.Metabolisms == null)
-            return boost;
-
-        foreach (var (_, entry) in args.Reagent.Metabolisms)
+        foreach (var property in GetSiblingProperties(args))
         {
-            foreach (var effect in entry.Effects)
-            {
-                if (effect is RMCChemicalEffect rmcEffect)
-                {
-                    rmcEffect.ReagentBoost(args, ref boost);
-                }
-            }
+            property.ReagentBoost(args, ref boost);
         }
+
         return boost;
+    }
+
+    private static float CalculateReagentEffectiveness(EntityEffectReagentArgs args)
+    {
+        var effectiveness = 1f;
+        foreach (var property in GetSiblingProperties(args))
+        {
+            property.ReagentEffectiveness(args, ref effectiveness);
+        }
+
+        return effectiveness;
+    }
+
+    public static bool IsMetabolismCancelled(EntityEffectReagentArgs args)
+    {
+        return !IsReaction(args) && IsCancelled(args);
     }
 
     private static bool IsRegulated(EntityEffectReagentArgs args)
     {
-        if (args.Reagent?.Metabolisms == null)
-            return false;
-
-        foreach (var (_, entry) in args.Reagent.Metabolisms)
-        {
-            foreach (var effect in entry.Effects)
-            {
-                if (effect is Special.Regulating)
-                    return true;
-            }
-        }
-
-        return false;
+        return HasSiblingProperty<Special.Regulating>(args);
     }
 
     private static bool IsCancelled(EntityEffectReagentArgs args)
     {
-        if (args.Reagent?.Metabolisms == null)
-            return false;
-
-        foreach (var (_, entry) in args.Reagent.Metabolisms)
+        foreach (var property in GetSiblingProperties(args))
         {
-            foreach (var effect in entry.Effects)
-            {
-                if (effect is RMCChemicalEffect { } rmcEffect && rmcEffect.ShouldCancel(args))
-                    return true;
-            }
+            if (property.ShouldCancel(args))
+                return true;
         }
 
         return false;
@@ -127,6 +181,10 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     }
 
     protected virtual void ReagentBoost(EntityEffectReagentArgs args, ref float boost)
+    {
+    }
+
+    protected virtual void ReagentEffectiveness(EntityEffectReagentArgs args, ref float effectiveness)
     {
     }
 
@@ -174,6 +232,15 @@ public abstract partial class RMCChemicalEffect : EntityEffect
         entityManager.System<SharedRMCPlantTraySystem>().DirtyMutationSlots((plant.Owner, mutation));
     }
 
+    protected static int RoundStochastic(float amount)
+    {
+        var whole = (int) MathF.Floor(amount);
+        if (IoCManager.Resolve<IRobustRandom>().Prob(amount - whole))
+            whole++;
+
+        return whole;
+    }
+
     protected virtual void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
     }
@@ -184,5 +251,10 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
     protected virtual void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
+    }
+
+    protected virtual bool TickDead(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
+    {
+        return false;
     }
 }

@@ -2,7 +2,9 @@ using Content.Shared._RMC14.Medical.Autodoc;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -103,6 +105,24 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField, AutoNetworkedField]
     public int CurrentStage = 0;
+
+    [DataField]
+    public float AntiparasiticCureFraction = 0.2f;
+
+    [DataField]
+    public bool ReachedAntiparasiticCureFraction;
+
+    [DataField]
+    public ProtoId<ReagentPrototype> NestedStabilizerReagent = "RMCHostStabilizer";
+
+    [DataField]
+    public FixedPoint2 NestedStabilizerMinimum = 1;
+
+    [DataField]
+    public FixedPoint2 NestedGeneratedDrain = 2;
+
+    [DataField]
+    public float NestedStabilizerMaxProgress = 0.8f;
 
     [DataField]
     public int InitialSymptomsStart = 2;

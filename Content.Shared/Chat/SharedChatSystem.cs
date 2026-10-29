@@ -37,7 +37,7 @@ public abstract class SharedChatSystem : EntitySystem
 
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCHivemindInterferenceSystem _hivemindInterference = default!; // RMC14
+    [Dependency] private readonly RMCHivemindInterferenceSystem _hivemindInterference = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
     // RMC14

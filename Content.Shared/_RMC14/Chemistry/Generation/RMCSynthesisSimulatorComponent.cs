@@ -57,11 +57,65 @@ public sealed partial class RMCSynthesisSimulatorComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ProcessDuration = TimeSpan.FromSeconds(6);
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan? ReadingUntil;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan? PrintingUntil;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ReadingDuration = TimeSpan.FromSeconds(0.8);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan PrintingDuration = TimeSpan.FromSeconds(0.8);
+
     [DataField, AutoNetworkedField]
     public SoundSpecifier? StartSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? FinishSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? FailSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/buzz_two.ogg");
+
+    [DataField, AutoNetworkedField]
+    public int TechtreeLevelMultiplier = 2;
+
+    [DataField, AutoNetworkedField]
+    public int MaxClearanceLevel = 5;
+
+    [DataField, AutoNetworkedField]
+    public int PropertyCostMax = 8;
+
+    [DataField, AutoNetworkedField]
+    public int AnomalousMultiplier = 5;
+
+    [DataField, AutoNetworkedField]
+    public int RareMultiplier = 3;
+
+    [DataField, AutoNetworkedField]
+    public int AddBulkMultiplier = 2;
+
+    [DataField, AutoNetworkedField]
+    public int AddValueMultiplier = 3;
+
+    [DataField, AutoNetworkedField]
+    public int AddBulkThreshold = 4;
+
+    [DataField, AutoNetworkedField]
+    public int AddValueThreshold = 7;
+
+    [DataField, AutoNetworkedField]
+    public int RelateAnomalousMultiplier = 10;
+
+    [DataField, AutoNetworkedField]
+    public int NonPositiveDiscount = 2;
+
+    [DataField]
+    public int RecipeCandidateCount = 3;
+
+    [DataField]
+    public int RecipeRollAttempts = 8;
 }
 
 [Serializable, DataDefinition]

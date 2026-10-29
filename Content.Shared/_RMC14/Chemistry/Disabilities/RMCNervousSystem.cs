@@ -1,4 +1,5 @@
 using Content.Shared.Speech.EntitySystems;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -9,10 +10,12 @@ public sealed class RMCNervousSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStutteringSystem _stuttering = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private static readonly TimeSpan CheckInterval = TimeSpan.FromSeconds(2);
+    private static readonly TimeSpan StutterTime = TimeSpan.FromSeconds(20);
 
     public override void Update(float frameTime)
     {
@@ -30,8 +33,16 @@ public sealed class RMCNervousSystem : EntitySystem
 
             comp.NextCheck = time + CheckInterval;
 
-            if (_random.Prob(0.1f))
-                _stuttering.DoStutter(uid, TimeSpan.FromSeconds(2), true);
+            if (!_random.Prob(0.1f))
+                continue;
+
+            if (_statusEffects.TryGetTime(uid, SharedStutteringSystem.StutterKey, out var stutter) &&
+                stutter.Value.Item2 - time >= StutterTime)
+            {
+                continue;
+            }
+
+            _stuttering.DoStutter(uid, StutterTime, true);
         }
     }
 }

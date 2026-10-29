@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.Dropship.Matrix;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
@@ -42,6 +43,12 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool NightVision;
+
+    [DataField, AutoNetworkedField]
+    public DropshipMatrixUpgrade Matrix;
+
+    [DataField]
+    public float WideMatrixCameraScale = 1.5f;
 
     [DataField, AutoNetworkedField]
     public TimeSpan LingeringCameraDuration = TimeSpan.FromSeconds(5);

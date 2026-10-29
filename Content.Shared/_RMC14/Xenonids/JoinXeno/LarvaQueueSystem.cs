@@ -211,7 +211,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         var hive = new Entity<HiveComponent>(hiveUid.Value, hiveComp);
         var session = actor.PlayerSession.UserId;
         var actorEntity = actor.PlayerSession.AttachedEntity;
-        var larvaWaitTime = _config.GetCVar(RMCCVars.RMCLarvaQueueWaitSeconds);
+        var larvaWaitTime = hiveComp.LarvaQueueWaitSecondsOverride ?? _config.GetCVar(RMCCVars.RMCLarvaQueueWaitSeconds);
 
         if (actorEntity == null)
             return;

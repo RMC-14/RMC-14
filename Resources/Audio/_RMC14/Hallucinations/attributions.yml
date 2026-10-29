@@ -1,0 +1,155 @@
+- files: ["Glassbr1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/effects/Glassbr1.ogg"
+
+- files: ["Glassbr2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/effects/Glassbr2.ogg"
+
+- files: ["Glassbr3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/effects/Glassbr3.ogg"
+
+- files: ["twobeep.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/machines/twobeep.ogg"
+
+- files: ["ghost.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/effects/ghost.ogg"
+
+- files: ["ghost2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/effects/ghost2.ogg"
+
+- files: ["heart_beat.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/effects/Heart%20Beat.ogg"
+
+- files: ["screech.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/effects/screech.ogg"
+
+- files: ["behind_you1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/behind_you1.ogg"
+
+- files: ["behind_you2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/behind_you2.ogg"
+
+- files: ["far_noise.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/far_noise.ogg"
+
+- files: ["growl1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/growl1.ogg"
+
+- files: ["growl2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/growl2.ogg"
+
+- files: ["growl3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/growl3.ogg"
+
+- files: ["i_see_you1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/i_see_you1.ogg"
+
+- files: ["i_see_you2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/i_see_you2.ogg"
+
+- files: ["im_here1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/im_here1.ogg"
+
+- files: ["im_here2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/im_here2.ogg"
+
+- files: ["look_up1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/look_up1.ogg"
+
+- files: ["look_up2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/look_up2.ogg"
+
+- files: ["over_here1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/over_here1.ogg"
+
+- files: ["over_here2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/over_here2.ogg"
+
+- files: ["over_here3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/over_here3.ogg"
+
+- files: ["turn_around1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/turn_around1.ogg"
+
+- files: ["turn_around2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/turn_around2.ogg"
+
+- files: ["veryfar_noise.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/veryfar_noise.ogg"
+
+- files: ["wail.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/hallucinations/wail.ogg"
+
+- files: ["punch1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/weapons/punch1.ogg"
+
+- files: ["punch2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/weapons/punch2.ogg"
+
+- files: ["punch3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/weapons/punch3.ogg"
+
+- files: ["punch4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e15629a092735ef15ead4ed48c461d1ebd51371/sound/weapons/punch4.ogg"
+

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization.Metadata;
 using Content.Shared.CCVar;
-using Content.Shared._RMC14.Movement; // RMC14
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Standing;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;

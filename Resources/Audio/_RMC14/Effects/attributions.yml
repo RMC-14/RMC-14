@@ -87,3 +87,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/1f56b68258df6c17f460c1e7777f2f0e50c236f0/sound/effects/metal_crash.ogg"
+
+- files: ["heart_beat_short.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/de5c69661f8d33425123894028702f64239f861b/sound/effects/heart_beat_short.ogg"

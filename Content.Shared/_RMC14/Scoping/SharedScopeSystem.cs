@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Events;
+using Content.Shared._RMC14.Dizziness;
 using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Vehicle;
@@ -29,6 +30,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
+    [Dependency] private readonly RMCDizzinessSystem _dizziness = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -208,6 +210,13 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (scope.Comp.Attachment && !TryGetActiveEntity(scope, out ent))
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-must-attach", ("scope", ent));
+            _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+
+        if (_dizziness.IsTooDizzyToFocus(user))
+        {
+            var msgError = Loc.GetString("rmc-dizziness-cannot-focus", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
             return false;
         }

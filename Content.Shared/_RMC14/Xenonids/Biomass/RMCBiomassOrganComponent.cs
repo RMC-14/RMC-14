@@ -7,4 +7,7 @@ public sealed partial class RMCBiomassOrganComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Value;
+
+    [DataField, AutoNetworkedField]
+    public string? Caste;
 }

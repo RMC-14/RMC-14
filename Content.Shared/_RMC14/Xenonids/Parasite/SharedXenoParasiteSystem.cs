@@ -1094,7 +1094,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (infected.IsBursting || infected.SpawnedLarva != null)
             return false;
 
-        if (infected.BurstAt - _timing.CurTime < infected.BurstDelay)
+        var progress = infected.BurstDelay - (infected.BurstAt - _timing.CurTime);
+        var cureProgress = infected.BurstDelay * infected.AntiparasiticCureFraction;
+        if (progress > cureProgress)
+        {
+            infected.ReachedAntiparasiticCureFraction = true;
+            return false;
+        }
+
+        if (progress > TimeSpan.Zero && !infected.ReachedAntiparasiticCureFraction)
             return false;
 
         CureInfection(victim);
@@ -1116,6 +1124,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-cured", ("victim", victim.Owner)), victim, Filter.PvsExcept(victim), true, PopupType.Medium);
 
         RemCompDeferred<VictimInfectedComponent>(victim);
+    }
+
+    public void Infect(EntityUid victim, EntityUid? hive)
+    {
+        var victimComp = EnsureComp<VictimInfectedComponent>(victim);
+        if (TryComp<ActorComponent>(victim, out var victimActor))
+            victimComp.VictimUserId = victimActor.PlayerSession.UserId;
+
+        SetHive((victim, victimComp), hive);
     }
 
     public void SetHive(Entity<VictimInfectedComponent> burst, EntityUid? hive)

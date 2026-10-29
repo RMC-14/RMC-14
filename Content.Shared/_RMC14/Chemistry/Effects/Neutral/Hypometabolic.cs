@@ -15,8 +15,9 @@ public sealed partial class Hypometabolic : RMCChemicalEffect
 
     protected override void TickHydroTray(Entity<RMCPlantComponent> plant, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var delta = Math.Clamp(20f * (float) ActualPotency, 0f, 130f);
+        var delta = Math.Clamp(2f * (float) ActualPotency, 0f, 13f);
+        var adjust = Math.Min(plant.Comp.MetabolismAdjust.TotalSeconds + delta, 13);
         args.EntityManager.System<SharedRMCPlantTraySystem>()
-            .SetMetabolismAdjust((plant.Owner, plant.Comp), MathF.Min(plant.Comp.MetabolismAdjust + delta, 130f));
+            .SetMetabolismAdjust((plant.Owner, plant.Comp), TimeSpan.FromSeconds(adjust));
     }
 }

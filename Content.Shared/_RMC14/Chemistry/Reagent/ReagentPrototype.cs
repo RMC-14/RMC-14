@@ -1,5 +1,6 @@
 ﻿// ReSharper disable CheckNamespace
 
+using Content.Shared._RMC14.Chemistry.Effects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
@@ -21,6 +22,9 @@ public partial class ReagentPrototype
 {
     [DataField]
     public bool Unknown;
+
+    [DataField]
+    public List<RMCChemicalEffect> FireProperties = new();
 
     [DataField]
     public ChemClass ChemClass = ChemClass.None;
@@ -59,10 +63,22 @@ public partial class ReagentPrototype
     public FixedPoint2 RadiusMod;
 
     [DataField]
+    public Color BurnColor = Color.FromHex("#f88818");
+
+    [DataField]
+    public float BurnColorMod = 1;
+
+    [DataField]
     public bool FireSpread;
 
     [DataField]
     public bool FirePenetrating;
+
+    [DataField]
+    public float ExplosivePower;
+
+    [DataField]
+    public float ExplosiveFalloff;
 
     [DataField]
     public bool Toxin;

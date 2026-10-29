@@ -391,6 +391,9 @@ public sealed class MotionDetectorSystem : EntitySystem
                 detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
             }
 
+            var scanEv = new MotionDetectorScanEvent(uid, range, detector.Blips);
+            RaiseLocalEvent(lastUser, ref scanEv);
+
             UpdateAppearance((uid, detector));
             if (detector.Blips.Count == 0)
             {

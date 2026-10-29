@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Chemistry.Generation;
 public sealed partial class RMCChemResearchReportComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ProtoId<ReagentPrototype> ReagentId;
+    public ProtoId<ReagentPrototype>? ReagentId;
 
     [DataField, AutoNetworkedField]
     public List<ChemReportProperty> Properties = new();
@@ -28,6 +28,15 @@ public sealed partial class RMCChemResearchReportComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SimulationFailed;
+
+    [DataField, AutoNetworkedField]
+    public bool SimulatorReport;
+
+    [DataField, AutoNetworkedField]
+    public int SampleNumber;
+
+    [DataField, AutoNetworkedField]
+    public bool SavedEmissionSpectrum;
 }
 
 [DataDefinition, Serializable, NetSerializable]

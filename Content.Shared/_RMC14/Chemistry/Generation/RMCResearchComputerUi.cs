@@ -27,63 +27,34 @@ public sealed class RMCResearchComputerTakeContractBuiMsg : BoundUserInterfaceMe
 [Serializable, NetSerializable]
 public sealed class RMCResearchComputerReadDocumentBuiMsg : BoundUserInterfaceMessage
 {
-    public string Category;
-    public string Title;
-    public bool Published;
-    public RMCResearchComputerReadDocumentBuiMsg(string category, string title, bool published)
-    {
-        Category = category;
-        Title = title;
-        Published = published;
-    }
+    public int Id;
+    public RMCResearchComputerReadDocumentBuiMsg(int id) => Id = id;
 }
 
 [Serializable, NetSerializable]
 public sealed class RMCResearchComputerPrintDocumentBuiMsg : BoundUserInterfaceMessage
 {
-    public string Category;
-    public string Title;
-    public bool Published;
-    public RMCResearchComputerPrintDocumentBuiMsg(string category, string title, bool published)
-    {
-        Category = category;
-        Title = title;
-        Published = published;
-    }
+    public int Id;
+    public RMCResearchComputerPrintDocumentBuiMsg(int id) => Id = id;
 }
 
 [Serializable, NetSerializable]
 public sealed class RMCResearchComputerPublishDocumentBuiMsg : BoundUserInterfaceMessage
 {
-    public string Category;
-    public string Title;
-    public RMCResearchComputerPublishDocumentBuiMsg(string category, string title)
-    {
-        Category = category;
-        Title = title;
-    }
+    public int Id;
+    public RMCResearchComputerPublishDocumentBuiMsg(int id) => Id = id;
 }
 
 [Serializable, NetSerializable]
 public sealed class RMCResearchComputerUnpublishDocumentBuiMsg : BoundUserInterfaceMessage
 {
-    public string Category;
-    public string Title;
-    public RMCResearchComputerUnpublishDocumentBuiMsg(string category, string title)
-    {
-        Category = category;
-        Title = title;
-    }
+    public int Id;
+    public RMCResearchComputerUnpublishDocumentBuiMsg(int id) => Id = id;
 }
 
 [Serializable, NetSerializable]
 public sealed class RMCResearchComputerAnnounceDocumentBuiMsg : BoundUserInterfaceMessage
 {
-    public string Category;
-    public string Title;
-    public RMCResearchComputerAnnounceDocumentBuiMsg(string category, string title)
-    {
-        Category = category;
-        Title = title;
-    }
+    public int Id;
+    public RMCResearchComputerAnnounceDocumentBuiMsg(int id) => Id = id;
 }

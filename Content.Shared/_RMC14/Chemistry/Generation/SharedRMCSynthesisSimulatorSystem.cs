@@ -20,17 +20,10 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
     [Dependency] protected readonly ItemSlotsSystem ItemSlots = default!;
     [Dependency] protected readonly INetManager Net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly IPrototypeManager Prototype = default!;
+    [Dependency] protected readonly IPrototypeManager ProtoManager = default!;
+    [Dependency] private readonly SharedRMCChemistryResearchSystem _research = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
-
-    public const int TechtreeLevelMultiplier = 2;
-    public const int MaxClearanceLevel = 5;
-    private const int PropertyCostMax = 8;
-    private const int AnomalousMultiplier = 5;
-    private const int RareMultiplier = 3;
-    private const int AddBulkMultiplier = 2;
-    private const int AddValueMultiplier = 3;
 
     public override void Initialize()
     {
@@ -62,11 +55,20 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
 
     protected void UpdateAppearance(Entity<RMCSynthesisSimulatorComponent> ent)
     {
-        var state = ent.Comp.Picking ? RMCSynthesisSimulatorVisualState.Ready :
+        var state = ent.Comp.PrintingUntil != null ? RMCSynthesisSimulatorVisualState.Printing :
+            ent.Comp.ReadingUntil != null ? RMCSynthesisSimulatorVisualState.Reading :
+            ent.Comp.Picking ? RMCSynthesisSimulatorVisualState.Ready :
             ent.Comp.Simulating ? RMCSynthesisSimulatorVisualState.Running :
             RMCSynthesisSimulatorVisualState.Idle;
 
         Appearance.SetData(ent, RMCSynthesisSimulatorVisuals.State, state);
+    }
+
+    protected void StartPrintingAnimation(Entity<RMCSynthesisSimulatorComponent> ent)
+    {
+        ent.Comp.PrintingUntil = Timing.CurTime + ent.Comp.PrintingDuration;
+        Dirty(ent);
+        UpdateAppearance(ent);
     }
 
     private void OnInsertAttempt(Entity<RMCSynthesisSimulatorComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -75,6 +77,12 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             return;
 
         if (ent.Comp.Simulating || ent.Comp.Picking || !HasComp<RMCChemResearchReportComponent>(args.Item))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (args.Slot.ID == ent.Comp.ReferenceSlotId && ent.Comp.Mode is not (SynthesisMode.Relate or SynthesisMode.Add))
             args.Cancelled = true;
     }
 
@@ -84,6 +92,12 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             return;
 
         ent.Comp.SimulationFailed = false;
+        if (Net.IsServer)
+        {
+            ent.Comp.ReadingUntil = Timing.CurTime + ent.Comp.ReadingDuration;
+            UpdateAppearance(ent);
+        }
+
         Dirty(ent);
         RefreshUIs(ent);
     }
@@ -113,7 +127,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         if (ent.Comp.Simulating || ent.Comp.Picking)
             return;
 
-        ent.Comp.TargetProperty = args.PropertyId is { } id ? new ProtoId<ChemGeneratorPropertyPrototype>(id) : (ProtoId<ChemGeneratorPropertyPrototype>?) null;
+        ent.Comp.TargetProperty = args.PropertyId;
         Dirty(ent);
         RefreshUIs(ent);
     }
@@ -123,7 +137,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         if (ent.Comp.Simulating || ent.Comp.Picking)
             return;
 
-        ent.Comp.ReferenceProperty = args.PropertyId is { } id ? new ProtoId<ChemGeneratorPropertyPrototype>(id) : (ProtoId<ChemGeneratorPropertyPrototype>?) null;
+        ent.Comp.ReferenceProperty = args.PropertyId;
         Dirty(ent);
         RefreshUIs(ent);
     }
@@ -133,7 +147,9 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         if (ent.Comp.Simulating || ent.Comp.Picking || !ItemSlots.TryGetSlot(ent, ent.Comp.TargetSlotId, out var slot))
             return;
 
-        ItemSlots.TryEjectToHands(ent, slot, args.Actor, true);
+        if (!ItemSlots.TryEjectToHands(ent, slot, args.Actor, true))
+            return;
+
         ent.Comp.TargetProperty = null;
         Dirty(ent);
         RefreshUIs(ent);
@@ -144,7 +160,9 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         if (ent.Comp.Simulating || ent.Comp.Picking || !ItemSlots.TryGetSlot(ent, ent.Comp.ReferenceSlotId, out var slot))
             return;
 
-        ItemSlots.TryEjectToHands(ent, slot, args.Actor, true);
+        if (!ItemSlots.TryEjectToHands(ent, slot, args.Actor, true))
+            return;
+
         ent.Comp.ReferenceProperty = null;
         Dirty(ent);
         RefreshUIs(ent);
@@ -170,8 +188,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
 
         if (!CheckReady(ent, out var reason))
         {
-            if (Timing.IsFirstTimePredicted)
-                _popup.PopupEntity(reason, ent, args.Actor, PopupType.MediumCaution);
+            _popup.PopupClient(reason, ent, args.Actor, PopupType.MediumCaution);
             return;
         }
 
@@ -180,7 +197,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         Dirty(ent);
         UpdateAppearance(ent);
         RefreshUIs(ent);
-        _audio.PlayPvs(ent.Comp.StartSound, ent);
+        _audio.PlayPredicted(ent.Comp.StartSound, ent, args.Actor);
     }
 
     private void OnPickRecipeMsg(Entity<RMCSynthesisSimulatorComponent> ent, ref RMCSynthesisSimulatorPickRecipeBuiMsg args)
@@ -218,6 +235,25 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCSynthesisSimulatorComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            var animationEnded = false;
+            if (comp.ReadingUntil is { } readingUntil && time >= readingUntil)
+            {
+                comp.ReadingUntil = null;
+                animationEnded = true;
+            }
+
+            if (comp.PrintingUntil is { } printingUntil && time >= printingUntil)
+            {
+                comp.PrintingUntil = null;
+                animationEnded = true;
+            }
+
+            if (animationEnded)
+            {
+                Dirty(uid, comp);
+                UpdateAppearance((uid, comp));
+            }
+
             if (!comp.Simulating || time < comp.FinishAt)
                 continue;
 
@@ -245,7 +281,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         var result = new List<(ChemGeneratorPropertyPrototype, int)>();
         foreach (var p in report.Properties)
         {
-            if (Prototype.TryIndex<ChemGeneratorPropertyPrototype>(p.PropertyId, out var proto))
+            if (ProtoManager.TryIndex<ChemGeneratorPropertyPrototype>(p.PropertyId, out var proto))
                 result.Add((proto, p.Level));
         }
 
@@ -264,7 +300,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             if (p.PropertyId != propertyId)
                 continue;
 
-            if (!Prototype.TryIndex<ChemGeneratorPropertyPrototype>(p.PropertyId, out var proto))
+            if (!ProtoManager.TryIndex<ChemGeneratorPropertyPrototype>(p.PropertyId, out var proto))
                 return false;
 
             property = proto;
@@ -275,22 +311,9 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         return false;
     }
 
-    public bool TryGetResearch(out RMCChemistryResearchComponent research)
-    {
-        var query = EntityQueryEnumerator<RMCChemistryResearchComponent>();
-        if (query.MoveNext(out _, out var comp))
-        {
-            research = comp;
-            return true;
-        }
-
-        research = default!;
-        return false;
-    }
-
     private bool HasUnregisteredComponents(string reagentId, RMCChemistryResearchComponent research)
     {
-        var recipe = Prototype.EnumeratePrototypes<ReactionPrototype>().FirstOrDefault(r => r.Products.ContainsKey(reagentId));
+        var recipe = ProtoManager.EnumeratePrototypes<ReactionPrototype>().FirstOrDefault(r => r.Products.ContainsKey(reagentId));
         if (recipe == null)
             return false;
 
@@ -331,11 +354,11 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             if (referenceProperty == null)
                 return 0;
 
-            cost = Math.Clamp(referenceLevel + referenceProperty.Value - 1, 1, PropertyCostMax);
-            if (targetProperties.Count > 4)
-                cost += AddBulkMultiplier;
-            if (targetTotalValue > 7)
-                cost += AddValueMultiplier;
+            cost = Math.Clamp(referenceLevel + referenceProperty.Value - 1, 1, comp.PropertyCostMax);
+            if (targetProperties.Count > comp.AddBulkThreshold)
+                cost += comp.AddBulkMultiplier;
+            if (targetTotalValue > comp.AddValueThreshold)
+                cost += comp.AddValueMultiplier;
         }
         else
         {
@@ -344,18 +367,18 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
 
             if (targetProperty.Flags.HasFlag(ChemPropertyType.Anomalous))
             {
-                cost = targetLevel * AnomalousMultiplier;
+                cost = targetLevel * comp.AnomalousMultiplier;
             }
             else
             {
                 cost = comp.Mode switch
                 {
-                    SynthesisMode.Amplify => Math.Clamp(targetLevel + targetProperty.Value - 1, 1, PropertyCostMax),
+                    SynthesisMode.Amplify => Math.Clamp(targetLevel + targetProperty.Value - 1, 1, comp.PropertyCostMax),
                     SynthesisMode.Suppress => 2,
                     SynthesisMode.Relate when referenceProperty != null =>
-                        referenceProperty.Flags.HasFlag(ChemPropertyType.Anomalous) ? targetLevel * 10 :
+                        referenceProperty.Flags.HasFlag(ChemPropertyType.Anomalous) ? targetLevel * comp.RelateAnomalousMultiplier :
                         referenceProperty.Rarity < ChemPropertyRarity.Rare ? targetLevel :
-                        targetLevel * RareMultiplier + targetProperty.Value,
+                        targetLevel * comp.RareMultiplier + targetProperty.Value,
                     SynthesisMode.Relate => targetLevel + targetProperty.Value,
                     _ => 0,
                 };
@@ -363,7 +386,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         }
 
         if (!allPositive)
-            cost = Math.Max(cost - 2, 1);
+            cost = Math.Max(cost - comp.NonPositiveDiscount, 1);
 
         return cost;
     }
@@ -402,22 +425,23 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             return false;
         }
 
-        if (!targetReport.IsGenerated)
+        if (!targetReport.IsGenerated || targetReport.ReagentId is not { } targetId)
         {
             reason = "Target chemical cannot be altered.";
             return false;
         }
 
-        if (!TryGetResearch(out var research))
-            research = new RMCChemistryResearchComponent();
+        var research = _research.TryGetResearch(out var researchEnt)
+            ? researchEnt.Value.Comp
+            : new RMCChemistryResearchComponent();
 
-        if (research.LockedIds.Contains(targetReport.ReagentId.Id))
+        if (research.LockedIds.Contains(targetId.Id))
         {
             reason = "Target chemical structure destroyed.";
             return false;
         }
 
-        if (HasUnregisteredComponents(targetReport.ReagentId.Id, research))
+        if (HasUnregisteredComponents(targetId.Id, research))
         {
             reason = "Unregistered components detected.";
             return false;
@@ -455,7 +479,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
 
             if (comp.Mode == SynthesisMode.Amplify)
             {
-                if (clearance < MaxClearanceLevel && targetLevel >= clearance * TechtreeLevelMultiplier + 2)
+                if (clearance < comp.MaxClearanceLevel && targetLevel >= clearance * comp.TechtreeLevelMultiplier + 2)
                 {
                     reason = "Clearance insufficient for amplification.";
                     return false;
@@ -483,7 +507,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
                 return false;
             }
 
-            if (research.LockedIds.Contains(referenceReport.ReagentId.Id))
+            if (referenceReport.ReagentId is { } referenceId && research.LockedIds.Contains(referenceId.Id))
             {
                 reason = "Reference chemical structure destroyed.";
                 return false;
