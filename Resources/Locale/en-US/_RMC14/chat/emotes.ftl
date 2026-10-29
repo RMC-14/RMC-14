@@ -46,14 +46,38 @@ rmc-patting-success-generic-target = {$user} pats you on the back.
 chat-emote-name-rmctwitch = Twitch
 chat-emote-name-rmcdrool = Drool
 chat-emote-name-rmcgiggle = Giggle
+chat-emote-name-rmcchuckle = Chuckle
 chat-emote-name-rmcgrin = Grin
 chat-emote-name-rmcsmile = Smile
 chat-emote-name-rmcblink = Blink
 chat-emote-name-rmcshiver = Shiver
+chat-emote-name-rmcmoan = Moan
+chat-emote-name-rmccollapse = Collapse
 chat-emote-msg-rmctwitch = twitches.
 chat-emote-msg-rmcdrool = drools.
 chat-emote-msg-rmcgiggle = giggles.
+chat-emote-msg-rmcchuckle = chuckles.
 chat-emote-msg-rmcgrin = grins.
 chat-emote-msg-rmcsmile = smiles.
 chat-emote-msg-rmcblink = blinks.
 chat-emote-msg-rmcshiver = shivers.
+chat-emote-msg-rmcmoan = moans.
+chat-emote-msg-rmccollapse = collapses!
+
+# Hemorrhaging
+chat-emote-name-rmccoughblood = Cough Up Blood
+chat-emote-msg-rmccoughblood = coughs up blood!
+
+# Addiction
+chat-emote-name-rmcwinceslightly = Wince Slightly
+chat-emote-name-rmcwince = Wince
+chat-emote-name-rmcgrimace = Grimace
+chat-emote-name-rmcgroan = Groan
+chat-emote-name-rmcgroanpainfully = Groan Painfully
+chat-emote-name-rmccontortpain = Contort With Pain
+chat-emote-msg-rmcwinceslightly = winces slightly.
+chat-emote-msg-rmcwince = winces.
+chat-emote-msg-rmcgrimace = grimaces.
+chat-emote-msg-rmcgroan = groans!
+chat-emote-msg-rmcgroanpainfully = groans painfully!
+chat-emote-msg-rmccontortpain = contorts with pain!

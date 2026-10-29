@@ -53,6 +53,9 @@
     isCorrodible: false
   - type: InteractionOutline
   - type: RMCBiomassAnalyzerMachine
+  - type: ContainerContainer
+    containers:
+      RMCBiomassOrganQueue: !type:Container
   - type: UserInterface
     interfaces:
       enum.RMCBiomassAnalyzerUi.Key:

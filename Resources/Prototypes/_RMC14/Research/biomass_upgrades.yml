@@ -1,218 +1,256 @@
 
 # ---------------- Machinery ----------------
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeAutodocInternalBleeding
-  category: Machinery
-  kind: AutodocInternalBleeding
-  cost: 100
-  requiredClearance: 1
-  name: AutoDoc - Internal Bleeding Treatment
-  description: Prints a research disk that installs automated treatment of internal bleeding into an AutoDoc console it's inserted into.
-  printedItem: RMCResearchUpgradeAutodocInternalBleeding
+  name: AutoDoc Internal Bleeding Repair
+  description: A data and instruction set for the AutoDoc, making it capable of fixing internal bleeding nearly instantaneously.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Machinery
+    cost: 100
+    requiredClearance: 1
+    printedItem: RMCResearchUpgradeAutodocInternalBleeding
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeAutodocBrokenBone
-  category: Machinery
-  kind: AutodocBrokenBone
-  cost: 1500
-  requiredClearance: 3
-  name: AutoDoc - Broken Bone Treatment
-  description: Prints a research disk that installs automated treatment of broken bones into an AutoDoc console it's inserted into.
-  printedItem: RMCResearchUpgradeAutodocBrokenBone
+  name: AutoDoc Bone Fracture Repair
+  description: A data and instruction set for the AutoDoc, making it capable of setting fractures and applying bonegel.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Machinery
+    cost: 1500
+    requiredClearance: 3
+    printedItem: RMCResearchUpgradeAutodocBrokenBone
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeAutodocOrganDamage
-  category: Machinery
-  kind: AutodocOrganDamage
-  cost: 1500
-  requiredClearance: 2
-  name: AutoDoc - Organ Damage Treatment
-  description: Prints a research disk that installs automated treatment of organ damage into an AutoDoc console it's inserted into.
-  printedItem: RMCResearchUpgradeAutodocOrganDamage
+  name: AutoDoc Broken Organ Repair
+  description: A data and instruction set for the AutoDoc, making it capable of fixing organ damage.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Machinery
+    cost: 1500
+    requiredClearance: 2
+    printedItem: RMCResearchUpgradeAutodocOrganDamage
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeAutodocLarvaExtraction
-  category: Machinery
-  kind: AutodocLarvaExtraction
-  cost: 4000
-  requiredClearance: 6
-  name: AutoDoc - Larva Extraction
-  description: Prints a research disk that installs automated larva extraction into an AutoDoc console it's inserted into.
-  printedItem: RMCResearchUpgradeAutodocLarvaExtraction
+  name: AutoDoc Embryo Removal
+  description: Data and instruction set for AutoDoc making it mildly proficient in removing parasites left by unknown organism.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Machinery
+    cost: 4000
+    requiredClearance: 6
+    printedItem: RMCResearchUpgradeAutodocLarvaExtraction
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeSleeper
-  category: Machinery
-  kind: SleeperUpgrade
-  cost: 500
-  requiredClearance: 1
   name: Sleeper Upgrade
-  description: Prints a research disk that installs a wider chemical spectrum and improved dialysis into a sleeper it's inserted into.
-  printedItem: RMCResearchUpgradeSleeper
+  description: Research upgrade for Sleeper system, technology on this disk is used on a sleeper to allow wider spectrum of chemicals to be administered, as well as upgrading dialysis software.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Machinery
+    cost: 500
+    requiredClearance: 1
+    printedItem: RMCResearchUpgradeSleeper
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeAutoHarvest
-  category: Machinery
-  kind: AutoHarvestUpgrade
-  cost: 250
-  requiredClearance: 2
   name: Auto-Harvest Botany Upgrade
-  description: Prints a hydroponics upgrade that automatically harvests a plant once it is ready.
-  printedItem: RMCAutoHarvestUpgrade
+  description: Research upgrade for hydroponics system, technology on this disk automatically shakes the plant once it is ready to be harvested.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Machinery
+    cost: 250
+    requiredClearance: 2
+    printedItem: RMCAutoHarvestUpgrade
 
 # TODO RMC14: reagent grinder upgrade
-# - type: rmcBiomassUpgrade
+# - type: entity
 #   id: RMCBiomassUpgradeReagentGrinder
-#   category: Machinery
-#   kind: ReagentGrinderUpgrade
-#   cost: 500
-#   requiredClearance: 2
 #   name: Reagent-Grinder Upgrade
-#   description: Prints a research disk that improves a reagent grinder's speed and product capacity.
-#   printedItem: # none yet
+#   description: Research upgrade for Reagent grinder, technology on this disk makes storing and grinding procedures more effective, increasing both speed and product capacity of the grinder.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: RMCBiomassUpgrade
+#     category: Machinery
+#     cost: 500
+#     requiredClearance: 2
+#     printedItem: # required, none yet
 
 # ---------------- Items ----------------
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeIncineratorTankCapacity
-  category: Items
-  kind: IncineratorTankCapacity
-  cost: 300
-  requiredClearance: 1
-  name: Incinerator Tank Capacity
-  description: Prints an upgraded incinerator fuel tank with a larger capacity and stronger fuel handling.
-  printedItem: RMCTankFlamerUpgraded
-  priceChange: 100
-  minimumPrice: 100
-  maximumPrice: 1000
+  name: Upgraded Incinerator Tank
+  description: An upgraded incinerator tank, with larger capacity and able to handle stronger fuels.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Items
+    cost: 300
+    requiredClearance: 1
+    printedItem: RMCTankFlamerUpgraded
+    priceChange: 100
+    minimumPrice: 100
+    maximumPrice: 1000
 
 # TODO RMC14: smoke flamer thing
-# - type: rmcBiomassUpgrade
+# - type: entity
 #   id: RMCBiomassUpgradeSmokeTankCapacity
-#   category: Items
-#   kind: SmokeTankCapacity
-#   cost: 100
-#   requiredClearance: 1
-#   name: Smoke Tank Capacity
-#   description: Prints an upgraded incinerator smoke tank with a larger capacity.
-#   printedItem: # none yet
-#   priceChange: 50
-#   minimumPrice: 100
-#   maximumPrice: 500
+#   name: Upgraded Incinerator Smoke Tank
+#   description: An upgraded incinerator smoke tank with a larger capacity.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: RMCBiomassUpgrade
+#     category: Items
+#     cost: 100
+#     requiredClearance: 1
+#     printedItem: # required, none yet
+#     priceChange: 50
+#     minimumPrice: 100
+#     maximumPrice: 500
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeResearchContractReroll
-  category: Items
-  kind: ResearchContractReroll
-  cost: 1000
-  requiredClearance: 4
   name: Research Contract Reroll
-  description: Prints a research market disk. Insert it into a research computer to sell the data and immediately reroll the current chemistry research contracts.
-  printedItem: RMCResearchRerollDisk
-  priceChange: 200
-  maximumPrice: 2000
+  description: Sell the data acquired to the nearest Weston-Yamada Science division team to request new contract chemicals.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Items
+    cost: 1000
+    requiredClearance: 4
+    printedItem: RMCResearchRerollDisk
+    priceChange: 200
+    maximumPrice: 2000
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeLaserScalpelTier2
-  category: Items
-  kind: LaserScalpelTier2
-  cost: 1500
-  requiredClearance: 2
   name: Improved Laser Scalpel
   description: Prints an improved laser scalpel for harvesting higher-tier xenomorph specimens.
-  printedItem: CMScalpelLaserImproved
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Items
+    cost: 1500
+    requiredClearance: 2
+    printedItem: CMScalpelLaserImproved
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeLaserScalpelTier3
-  category: Items
-  kind: LaserScalpelTier3
-  cost: 3000
-  requiredClearance: 3
   name: Advanced Laser Scalpel
-  description: Prints an advanced laser scalpel for harvesting Queen-tier xenomorph specimens.
-  printedItem: CMScalpelLaserAdvanced
+  description: An advanced, robust version of the normal scalpel, allowing it to pierce through thick skin and chitin alike with extreme ease.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Items
+    cost: 3000
+    requiredClearance: 3
+    printedItem: CMScalpelLaserAdvanced
 
 # TODO RMC14:incision management
-# - type: rmcBiomassUpgrade
+# - type: entity
 #   id: RMCBiomassUpgradeIncisionManagement
-#   category: Items
-#   kind: IncisionManagement
-#   cost: 1500
-#   requiredClearance: 3
 #   name: Incision Management System
-#   description: Prints an incision management system that instantly and completely prepares a surgical incision.
-#   printedItem: # none yet
+#   description: A true extension of the surgeon's body, this marvel instantly and completely prepares an incision, allowing for the immediate commencement of therapeutic steps.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: RMCBiomassUpgrade
+#     category: Items
+#     cost: 1500
+#     requiredClearance: 3
+#     printedItem: # required, none yet
 
 # TODO RMC14: splints
-# - type: rmcBiomassUpgrade
+# - type: entity
 #   id: RMCBiomassUpgradeNanosplints
-#   category: Items
-#   kind: Nanosplints
-#   cost: 800
-#   requiredClearance: 3
 #   name: Reinforced Fiber Splints
-#   description: Prints a stack of reinforced carbon-fiber splints.
-#   printedItem: # none yet
-#   priceChange: -100
-#   minimumPrice: 100
+#   description: A set of splints made from durable carbon fiber sheets reinforced with flexible titanium lattice, comes in a stack of five.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: RMCBiomassUpgrade
+#     category: Items
+#     cost: 800
+#     requiredClearance: 3
+#     printedItem: # required, none yet
+#     priceChange: -100
+#     minimumPrice: 100
 
 # ---------------- Armor ----------------
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeTranslatorPlate
-  category: Armor
-  kind: TranslatorPlate
-  cost: 2000
-  requiredClearance: 6
   name: Universal Translator Plate
-  description: Prints a uniform-attachable plate that translates any unknown language heard by the wearer.
-  printedItem: RMCArmorPlateTranslator
+  description: A uniform-attachable plate capable of translating any unknown language heard by the wearer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Armor
+    cost: 2000
+    requiredClearance: 6
+    printedItem: RMCArmorPlateTranslator
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeCoagulatorPlate
-  category: Armor
-  kind: CoagulatorPlate
-  cost: 1200
-  requiredClearance: 2
-  name: Coagulator Plate
-  description: Prints a coagulator research plate, which suppresses bleeding while worn.
-  printedItem: RMCArmorPlateCoagulator
-  priceChange: -200
-  minimumPrice: 200
+  name: Active Blood Coagulator Plate
+  description: A uniform-attachable plate capable of coagulating any bleeding wounds the user possesses.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Armor
+    cost: 1200
+    requiredClearance: 2
+    printedItem: RMCArmorPlateCoagulator
+    priceChange: -200
+    minimumPrice: 200
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeEmergencyInjectorPlate
-  category: Armor
-  kind: EmergencyInjectorPlate
-  cost: 250
-  requiredClearance: 1
-  name: Emergency-Injector Plate
-  description: Prints a single-use emergency-injector research plate, which injects an emergency chemical cocktail with overdose protection when the wearer enters critical condition.
-  printedItem: RMCArmorPlateEmergencyInjector
-  priceChange: -100
-  minimumPrice: 100
+  name: Medical Emergency Injector
+  description: A medical plate with two buttons on the sides and a hefty chemical tank. Attached to a uniform and on a simultaneous press, it injects an emergency dose of medical chemicals much larger than a normal emergency autoinjector. Single time use and is recycled in biomass printer. Features overdose protection.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Armor
+    cost: 250
+    requiredClearance: 1
+    printedItem: RMCArmorPlateEmergencyInjector
+    priceChange: -100
+    minimumPrice: 100
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeCeramicPlate
-  category: Armor
-  kind: CeramicPlate
-  cost: 500
-  requiredClearance: 2
-  name: Ceramic Plate
-  description: Prints a ceramic research plate, which soaks incoming bullets until it shatters.
-  printedItem: RMCArmorPlateCeramic
-  priceChange: -100
-  minimumPrice: 200
+  name: Ceramic Armor Plate
+  description: A strong trauma plate, able to protect the user from a large amount of bullets. Completely useless against sharp objects.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Armor
+    cost: 500
+    requiredClearance: 2
+    printedItem: RMCArmorPlateCeramic
+    priceChange: -100
+    minimumPrice: 200
 
-- type: rmcBiomassUpgrade
+- type: entity
   id: RMCBiomassUpgradeAntiDecayPlate
-  category: Armor
-  kind: AntiDecayPlate
-  cost: 500
-  requiredClearance: 4
-  name: Anti-Decay Plate
-  description: Prints an anti-decay research plate, which extends the time you can be revived after death.
-  printedItem: RMCArmorPlateAntiDecay
-  priceChange: -100
-  minimumPrice: 100
+  name: Death Preservation Plate
+  description: Preservation plate which activates once the user is dead, uses variety of different substances and sensors to slow down the decay and increase the time before the user is permanently dead, due to small tank of preservatives, it needs to be replaced on each death. Extends time to permadeath by around four minutes.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCBiomassUpgrade
+    category: Armor
+    cost: 500
+    requiredClearance: 4
+    printedItem: RMCArmorPlateAntiDecay
+    priceChange: -100
+    minimumPrice: 100
