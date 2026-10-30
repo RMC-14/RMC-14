@@ -2,109 +2,157 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Generation"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    Title="Chemical Simulator" MinSize="940 520">
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="Chemical Simulator" MinSize="940 470">
     <PanelContainer>
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#181C24" />
+            <graphics:StyleBoxFlat BackgroundColor="#1F2538" />
         </PanelContainer.PanelOverride>
+        <TextureRect TexturePath="/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
+                     ModulateSelfOverride="#FFFFFF18" Stretch="KeepCentered" MouseFilter="Ignore"
+                     HorizontalAlignment="Center" VerticalAlignment="Center" />
         <ScrollContainer HScrollEnabled="False" VScrollEnabled="True">
             <BoxContainer Orientation="Horizontal" Margin="4">
                 <!-- Left column: status, mode, actions -->
-                <BoxContainer Orientation="Vertical" MinWidth="260" HorizontalExpand="True" SizeFlagsStretchRatio="2" Margin="0 0 4 0">
-                    <PanelContainer Name="StatusHeader" Access="Public">
-                        <Label Text="Simulator status" FontColorOverride="#FFFFFF" Margin="6 2" />
-                    </PanelContainer>
-
-                    <PanelContainer Name="CreditsPanel" Access="Public" HorizontalExpand="True" Margin="0 3 0 0">
+                <BoxContainer Orientation="Vertical" MinWidth="260" HorizontalExpand="True" SizeFlagsStretchRatio="2" Margin="0 0 2 0">
+                    <PanelContainer Margin="0 0 0 4">
                         <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="#12141A" BorderColor="#B33A3A" BorderThickness="2" />
+                            <graphics:StyleBoxFlat BackgroundColor="#00000054" />
                         </PanelContainer.PanelOverride>
-                        <ProgressBar Name="CreditsBar" Access="Public" MinHeight="24" Margin="4" HorizontalExpand="True">
-                            <Label Name="CreditsLabel" Access="Public" Align="Right" FontColorOverride="#FFFFFF" Margin="0 0 6 0" />
-                        </ProgressBar>
-                    </PanelContainer>
-
-                    <PanelContainer Name="StatusPanel" Access="Public" Margin="0 3 0 0">
-                        <Label Name="StatusLabel" Access="Public" Margin="6 1" />
-                    </PanelContainer>
-
-                    <PanelContainer Margin="0 3 0 0">
-                        <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="#12141A" />
-                        </PanelContainer.PanelOverride>
-                        <BoxContainer Orientation="Vertical" Margin="6">
-                            <Label Name="ClearanceLabel" Access="Public" FontColorOverride="#C7CCD6" />
-                            <Label Name="CostLabel" Access="Public" FontColorOverride="#C7CCD6" />
-                            <Label Name="OverdoseLabel" Access="Public" FontColorOverride="#C7CCD6" />
+                        <BoxContainer Orientation="Vertical">
+                            <Label Text="Simulator Status" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                            <PanelContainer MinHeight="2">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat BackgroundColor="#000000" />
+                                </PanelContainer.PanelOverride>
+                            </PanelContainer>
+                            <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="2">
+                                <ProgressBar Name="CreditsBar" Access="Public" SetHeight="20" HorizontalExpand="True">
+                                    <Label Name="CreditsLabel" Access="Public" Align="Right" Margin="0 0 4 0" VerticalAlignment="Center" />
+                                </ProgressBar>
+                                <PanelContainer Name="StatusPanel" Access="Public">
+                                    <Label Name="StatusLabel" Access="Public" Margin="5 1" />
+                                </PanelContainer>
+                                <Label Name="ClearanceLabel" Access="Public" FontColorOverride="#7D8EA6" />
+                                <Label Name="CostLabel" Access="Public" FontColorOverride="#7D8EA6" />
+                                <Label Name="OverdoseLabel" Access="Public" FontColorOverride="#7D8EA6" />
+                            </BoxContainer>
                         </BoxContainer>
                     </PanelContainer>
 
-                    <PanelContainer Name="ModeHeader" Access="Public" Margin="0 6 0 0">
-                        <Label Text="Mode" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    <PanelContainer Margin="0 0 0 4">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#00000054" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical">
+                            <Label Text="Mode" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                            <PanelContainer MinHeight="2">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat BackgroundColor="#000000" />
+                                </PanelContainer.PanelOverride>
+                            </PanelContainer>
+                            <GridContainer Columns="2" HSeparationOverride="2" VSeparationOverride="2" Margin="6 4 6 5">
+                                <ui:RMCMachineButton Name="AmplifyButton" Access="Public" HorizontalExpand="True" />
+                                <ui:RMCMachineButton Name="SuppressButton" Access="Public" HorizontalExpand="True" />
+                                <ui:RMCMachineButton Name="AddButton" Access="Public" HorizontalExpand="True" />
+                                <ui:RMCMachineButton Name="RelateButton" Access="Public" HorizontalExpand="True" />
+                            </GridContainer>
+                        </BoxContainer>
                     </PanelContainer>
-                    <GridContainer Columns="2" HSeparationOverride="6" VSeparationOverride="6" Margin="0 3 0 0">
-                        <Button Name="AmplifyButton" Access="Public" Text="AMPLIFY" MinHeight="32" HorizontalExpand="True" ClipText="True" />
-                        <Button Name="SuppressButton" Access="Public" Text="SUPPRESS" MinHeight="32" HorizontalExpand="True" ClipText="True" />
-                        <Button Name="AddButton" Access="Public" Text="ADD" MinHeight="32" HorizontalExpand="True" ClipText="True" />
-                        <Button Name="RelateButton" Access="Public" Text="RELATE" MinHeight="32" HorizontalExpand="True" ClipText="True" />
-                    </GridContainer>
 
-                    <PanelContainer Name="ActionsHeader" Access="Public" Margin="0 6 0 0">
-                        <Label Text="Actions" FontColorOverride="#FFFFFF" Margin="6 2" />
+                    <PanelContainer>
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#00000054" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical">
+                            <Label Text="Actions" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                            <PanelContainer MinHeight="2">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat BackgroundColor="#000000" />
+                                </PanelContainer.PanelOverride>
+                            </PanelContainer>
+                            <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="2">
+                                <BoxContainer Name="SimulateCancelSlot" Access="Public">
+                                    <ui:RMCMachineButton Name="SimulateButton" Access="Public" HorizontalExpand="True" />
+                                    <ui:RMCMachineButton Name="CancelButton" Access="Public" HorizontalExpand="True" Visible="False" />
+                                </BoxContainer>
+                                <ui:RMCMachineButton Name="OverrideButton" Access="Public" HorizontalExpand="True" ToggleMode="True" />
+                                <ui:RMCMachineButton Name="EjectTargetButton" Access="Public" HorizontalExpand="True" />
+                                <ui:RMCMachineButton Name="EjectReferenceButton" Access="Public" HorizontalExpand="True" />
+                            </BoxContainer>
+                        </BoxContainer>
                     </PanelContainer>
-                    <BoxContainer Name="SimulateCancelSlot" Access="Public" Margin="0 3 0 0" MinSize="0 32">
-                        <Button Name="SimulateButton" Access="Public" Text="SIMULATE" HorizontalExpand="True" ClipText="True" />
-                        <Button Name="CancelButton" Access="Public" Text="CANCEL" HorizontalExpand="True" ClipText="True" Visible="False" />
-                    </BoxContainer>
-                    <Button Name="OverrideButton" Access="Public" Text="OVERRIDE" MinHeight="32" HorizontalExpand="True" ClipText="True" Margin="0 3 0 0" />
-                    <Button Name="EjectTargetButton" Access="Public" Text="EJECT TARGET" MinHeight="32" HorizontalExpand="True" ClipText="True" Margin="0 3 0 0" />
-                    <Button Name="EjectReferenceButton" Access="Public" Text="EJECT REFERENCE" MinHeight="32" HorizontalExpand="True" ClipText="True" Margin="0 3 0 0" />
                 </BoxContainer>
 
                 <!-- Right column: target, reference, recipe selection -->
-                <BoxContainer Orientation="Vertical" HorizontalExpand="True" MinWidth="420" SizeFlagsStretchRatio="3" Margin="4 0 0 0">
-                    <PanelContainer Name="TargetHeader" Access="Public">
-                        <Label Text="Target" FontColorOverride="#FFFFFF" Margin="6 2" />
-                    </PanelContainer>
-                    <PanelContainer Name="TargetStatusPanel" Access="Public" Margin="0 3 0 0">
-                        <BoxContainer Orientation="Horizontal" Margin="6 1">
-                            <SpriteView Name="TargetIcon" Access="Public" SetSize="24 24" Margin="0 0 6 0" />
-                            <Label Name="TargetNameLabel" Access="Public" VerticalAlignment="Center" />
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" MinWidth="420" SizeFlagsStretchRatio="3" Margin="2 0 0 0">
+                    <PanelContainer Margin="0 0 0 4">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#00000054" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical">
+                            <Label Text="Target" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                            <PanelContainer MinHeight="2">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat BackgroundColor="#000000" />
+                                </PanelContainer.PanelOverride>
+                            </PanelContainer>
+                            <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="4">
+                                <PanelContainer Name="TargetStatusPanel" Access="Public">
+                                    <BoxContainer Orientation="Horizontal" Margin="5 1">
+                                        <SpriteView Name="TargetIcon" Access="Public" SetSize="24 24" Margin="0 0 6 0" />
+                                        <Label Name="TargetNameLabel" Access="Public" VerticalAlignment="Center" />
+                                    </BoxContainer>
+                                </PanelContainer>
+                                <BoxContainer Name="TargetPropertiesPanel" Access="Public">
+                                    <BoxContainer Name="TargetPropertiesBox" Access="Public" Orientation="Vertical"
+                                                  HorizontalExpand="True" SeparationOverride="2" />
+                                </BoxContainer>
+                            </BoxContainer>
                         </BoxContainer>
                     </PanelContainer>
-                    <PanelContainer Name="TargetPropertiesPanel" Access="Public" Margin="0 3 0 0">
-                        <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="#12141A" />
-                        </PanelContainer.PanelOverride>
-                        <BoxContainer Name="TargetPropertiesBox" Access="Public" Orientation="Vertical" Margin="6" SeparationOverride="4" />
-                    </PanelContainer>
 
-                    <PanelContainer Name="ReferenceHeader" Access="Public" Margin="0 6 0 0">
-                        <Label Text="Reference" FontColorOverride="#FFFFFF" Margin="6 2" />
-                    </PanelContainer>
-                    <PanelContainer Name="ReferenceStatusPanel" Access="Public" Margin="0 3 0 0">
-                        <BoxContainer Orientation="Horizontal" Margin="6 1">
-                            <SpriteView Name="ReferenceIcon" Access="Public" SetSize="24 24" Margin="0 0 6 0" />
-                            <Label Name="ReferenceNameLabel" Access="Public" VerticalAlignment="Center" />
+                    <PanelContainer Name="ReferenceSection" Access="Public" Margin="0 0 0 4">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#00000054" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical">
+                            <Label Text="Reference" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                            <PanelContainer MinHeight="2">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat BackgroundColor="#000000" />
+                                </PanelContainer.PanelOverride>
+                            </PanelContainer>
+                            <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="4">
+                                <PanelContainer Name="ReferenceStatusPanel" Access="Public">
+                                    <BoxContainer Orientation="Horizontal" Margin="5 1">
+                                        <SpriteView Name="ReferenceIcon" Access="Public" SetSize="24 24" Margin="0 0 6 0" />
+                                        <Label Name="ReferenceNameLabel" Access="Public" VerticalAlignment="Center" />
+                                    </BoxContainer>
+                                </PanelContainer>
+                                <BoxContainer Name="ReferencePropertiesPanel" Access="Public">
+                                    <BoxContainer Name="ReferencePropertiesBox" Access="Public" Orientation="Vertical"
+                                                  HorizontalExpand="True" SeparationOverride="2" />
+                                </BoxContainer>
+                            </BoxContainer>
                         </BoxContainer>
                     </PanelContainer>
-                    <PanelContainer Name="ReferencePropertiesPanel" Access="Public" Margin="0 3 0 0">
-                        <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="#12141A" />
-                        </PanelContainer.PanelOverride>
-                        <BoxContainer Name="ReferencePropertiesBox" Access="Public" Orientation="Vertical" Margin="6" SeparationOverride="4" />
-                    </PanelContainer>
 
-                    <PanelContainer Name="RecipePickerHeader" Access="Public" Visible="False" Margin="0 6 0 0">
-                        <Label Text="Pick a recipe" FontColorOverride="#FFFFFF" Margin="6 2" />
-                    </PanelContainer>
-                    <PanelContainer Name="RecipePickerPanel" Access="Public" Visible="False" Margin="0 3 0 0">
+                    <PanelContainer Name="RecipePickerSection" Access="Public" Visible="False">
                         <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="#12141A" />
+                            <graphics:StyleBoxFlat BackgroundColor="#00000054" />
                         </PanelContainer.PanelOverride>
-                        <BoxContainer Orientation="Vertical" Margin="6">
-                            <BoxContainer Name="RecipeCandidatesBox" Access="Public" Orientation="Vertical" SeparationOverride="4" />
-                            <Button Name="FinalizeButton" Access="Public" Text="FINALIZE" MinHeight="32" Disabled="True" ClipText="True" Margin="0 4 0 0" />
+                        <BoxContainer Orientation="Vertical">
+                            <Label Text="Pick a recipe" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                            <PanelContainer MinHeight="2">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat BackgroundColor="#000000" />
+                                </PanelContainer.PanelOverride>
+                            </PanelContainer>
+                            <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="2">
+                                <BoxContainer Name="RecipeCandidatesBox" Access="Public" Orientation="Vertical" SeparationOverride="2" />
+                                <ui:RMCMachineButton Name="FinalizeButton" Access="Public" Disabled="True" Margin="0 2 0 0" />
+                            </BoxContainer>
                         </BoxContainer>
                     </PanelContainer>
                 </BoxContainer>

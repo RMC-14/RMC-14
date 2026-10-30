@@ -11,13 +11,21 @@
   name: biomass analyzer
   description: A machine that breaks down harvested xenomorph biomatter into biomass points, spent on research upgrades.
   components:
-  - type: WallMount
-    arc: 360
   - type: Transform
-    anchored: false
+    anchored: true
   - type: Physics
     bodyType: Static
-    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/Science/xeno_analyzer.rsi

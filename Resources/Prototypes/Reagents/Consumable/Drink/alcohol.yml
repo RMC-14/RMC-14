@@ -297,8 +297,6 @@
         amount: 0.05
     Poison:
       effects:
-      # TODO RMC14: cm13 escalates stutter/dizziness/hallucination/jitter in
-      # accumulated dose tiers & adds heart organ damage at its worst tier
       - !type:HealthChange
         damage:
           types:

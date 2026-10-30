@@ -5,7 +5,8 @@ using Content.Shared._RMC14.UserInterface;
 using Content.Shared._RMC14.Xenonids.Biomass;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerColors;
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Xenonids.Biomass;
 
@@ -72,7 +73,7 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
             return;
 
         var analyzer = analyzerEnt.Value.Comp;
-        _window.PointsLabel.Text = $"Biological Matter: {analyzer.Points}";
+        _window.SetPoints(analyzer.Points);
 
         PopulateOrgan((Owner, machine));
         PopulateQueue(machine);
@@ -91,31 +92,34 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
             ? $"Eject {caste} biomass"
             : "Eject Biomass";
         _window.ProcessOrganIcon.Label.Text = organComp != null
-            ? $"Process Biomass, Expected value : {organComp.Value}"
+            ? $"Process (+{organComp.Value})"
             : "Process Biomass";
+        _window.ProcessOrganButton.ToolTip = organComp != null
+            ? $"Process Biomass, Expected value : {organComp.Value}"
+            : null;
         _window.AutoProcessIcon.Label.Text = machine.AutoProcessOrgan ? "Auto: ON" : "Auto: OFF";
 
-        RMCBiomassAnalyzerWindow.SetButtonEnabled(_window.EjectOrganButton, organ != null);
-        RMCBiomassAnalyzerWindow.SetButtonEnabled(_window.ProcessOrganButton, organComp != null && !busy);
+        _window.EjectOrganButton.Disabled = organ == null;
+        _window.ProcessOrganButton.Disabled = organComp == null || busy;
 
         if (busy)
         {
             _window.OrganStatusLabel.Text = machine.ProcessingValue > 0
                 ? $"Processing biomass, extracting {machine.ProcessingValue} biomass points..."
                 : "Printing upgrade...";
-            _window.OrganStatusLabel.FontColorOverride = Amber;
+            _window.OrganStatusLabel.FontColorOverride = Color.White;
         }
         else if (organCount > 0)
         {
             _window.OrganStatusLabel.Text = organCount == 1
                 ? "1 biomass specimen queued. Ready to analyze."
                 : $"{organCount} biomass specimens queued. Ready to analyze.";
-            _window.OrganStatusLabel.FontColorOverride = Amber;
+            _window.OrganStatusLabel.FontColorOverride = Color.White;
         }
         else
         {
             _window.OrganStatusLabel.Text = "Receptacle is empty, analyzing is impossible!";
-            _window.OrganStatusLabel.FontColorOverride = AmberDim;
+            _window.OrganStatusLabel.FontColorOverride = RMCMachineUiStyle.LabelColor;
         }
     }
 
@@ -124,7 +128,10 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
         _window!.ToggleQueueIcon.SetIcon(machine.QueueProcessing ? RMCIcons.Stop : RMCIcons.Play);
         _window.ToggleQueueIcon.Label.Text = machine.QueueProcessing ? "STOP" : "START";
 
-        _window.QueueEmptyLabel.Visible = machine.Queue.Count == 0;
+        var empty = machine.Queue.Count == 0;
+        _window.QueueTitleLabel.Text = empty ? "Process Queue (empty)" : "Process Queue";
+        _window.QueueDivider.Visible = !empty;
+        _window.QueueContent.Visible = !empty;
 
         var box = _window.QueueBox;
         var index = 0;
@@ -176,44 +183,69 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
         _research.TryGetResearch(out var research);
 
         var index = 0;
+        int? currentTier = null;
+        var tierIndex = 0;
         foreach (var upgrade in upgrades)
         {
-            RMCBiomassUpgradeRow row;
-            if (index < box.ChildCount && box.GetChild(index) is RMCBiomassUpgradeRow existing)
-            {
-                row = existing;
-            }
-            else
-            {
-                row = new RMCBiomassUpgradeRow();
-                row.OnPrint = (id, amount) => SendMessage(new RMCBiomassAnalyzerEnqueuePrintBuiMsg(id, amount));
-                box.AddChild(row);
-            }
-
-            var cost = _analyzerData.GetCurrentCost(upgrade, analyzer);
             var tier = upgrade.Comp.RequiredClearance;
             var tierName = research is { } r && tier >= r.Comp.XAccessClearanceTier
                 ? $"{r.Comp.MaxClearanceLevel}X"
                 : tier.ToString();
+            var met = _research.HasSufficientClearance(tier);
 
+            if (tier != currentTier)
+            {
+                currentTier = tier;
+                tierIndex = 0;
+
+                var header = GetOrAdd(box, index++, CreateTierHeader);
+                header.Text = $"Clearance {tierName}";
+                header.FontColorOverride = met ? RMCMachineUiStyle.ButtonSelectedColor : RMCMachineUiStyle.LabelColor;
+            }
+
+            var row = GetOrAdd(box, index++, () => new RMCBiomassUpgradeRow
+            {
+                OnPrint = (id, amount) => SendMessage(new RMCBiomassAnalyzerEnqueuePrintBuiMsg(id, amount)),
+            });
+
+            var cost = _analyzerData.GetCurrentCost(upgrade, analyzer);
+
+            row.UpgradeId = upgrade.Id;
             row.NameLabel.Text = upgrade.Prototype.Name;
             row.NameLabel.ToolTip = upgrade.Prototype.Name;
+            row.SetItem(upgrade.Comp.PrintedItem);
+            row.SetAlternate(tierIndex++ % 2 == 1);
             row.SetDescription(upgrade.Prototype.Description);
-            row.ClearanceLabel.Text = $"Clearance {tierName} Required";
-            row.TrendLabel.Text = upgrade.Comp.PriceChange switch
-            {
-                0 => "This technology will not change its value with purchase.",
-                > 0 => $"This technology will increase in cost by {upgrade.Comp.PriceChange} each purchase.",
-                _ => $"This technology will decrease in cost by {-upgrade.Comp.PriceChange} each purchase.",
-            };
-
-            row.PrintButtonLabel.Text = $"Print ({cost})";
-            row.SetClearanceMet(_research.HasSufficientClearance(tier));
-            row.UpgradeId = upgrade.Id;
-
-            index++;
+            row.SetCost(cost, analyzer.Points >= cost);
+            row.SetTrend(upgrade.Comp.PriceChange);
+            row.SetClearance(tierName, met);
         }
 
         box.RemoveChildrenAfter(index);
+    }
+
+    private static Label CreateTierHeader()
+    {
+        return new Label
+        {
+            StyleClasses = { "LabelKeyText" },
+            Margin = new Thickness(4, 3, 4, 1),
+        };
+    }
+
+    private static T GetOrAdd<T>(BoxContainer box, int index, Func<T> create) where T : Control
+    {
+        if (index < box.ChildCount)
+        {
+            if (box.GetChild(index) is T existing)
+                return existing;
+
+            box.RemoveChild(index);
+        }
+
+        var control = create();
+        box.AddChild(control);
+        control.SetPositionInParent(index);
+        return control;
     }
 }

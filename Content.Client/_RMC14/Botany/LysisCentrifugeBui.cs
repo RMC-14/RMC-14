@@ -1,3 +1,4 @@
+using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.UserInterface;
 using Content.Shared.Containers.ItemSlots;
@@ -48,19 +49,19 @@ public sealed class LysisCentrifugeBui(EntityUid owner, Enum uiKey) : BoundUserI
         var shortName = seedName != null ? BotanyUiStyle.ShortSeedName(seedName) : "Unknown seed";
 
         if (seed == null)
-            window.SetSeedBanner("EMPTY", "No seed packet loaded.", BotanyUiStyle.StatusEmptyColor);
+            window.SetSeedBanner("EMPTY", "No seed packet loaded.", RMCMachineUiStyle.NoticeColor);
         else if (comp.SeedStats is { Viable: false })
-            window.SetSeedBanner("NON-VIABLE", shortName, BotanyUiStyle.StatusCriticalColor);
+            window.SetSeedBanner("NON-VIABLE", shortName, RMCMachineUiStyle.NoticeDangerColor);
         else
-            window.SetSeedBanner("LOADED", shortName, BotanyUiStyle.StatusStableColor);
+            window.SetSeedBanner("LOADED", shortName, RMCMachineUiStyle.NoticeSuccessColor);
 
         if (seed != null && comp.SeedStats is { } stats)
         {
             window.SetSeedChips(new (string, string, Color)[]
             {
-                ("Yield", $"{stats.Yield}", BotanyUiStyle.ValueGoodColor),
-                ("Potency", $"{stats.Potency:0.#}", BotanyUiStyle.ValueWarnColor),
-                ("Endurance", $"{stats.Endurance:0.#}", BotanyUiStyle.ValueBadColor),
+                ("Yield", $"{stats.Yield}", RMCMachineUiStyle.GoodColor),
+                ("Potency", $"{stats.Potency:0.#}", RMCMachineUiStyle.AverageColor),
+                ("Endurance", $"{stats.Endurance:0.#}", RMCMachineUiStyle.BadColor),
             });
 
             window.SetSeedTraitRows(new (string, string, Color)[]
@@ -70,7 +71,7 @@ public sealed class LysisCentrifugeBui(EntityUid owner, Enum uiKey) : BoundUserI
                 ("Production", $"{stats.Production:0.#}", Color.White),
                 ("Harvest", BotanyUiStyle.GetHarvestLabel(stats.HarvestRepeat), Color.White),
                 ("Seedless", stats.Seedless ? "Yes" : "No", Color.White),
-                ("Viable", stats.Viable ? "Yes" : "No", stats.Viable ? BotanyUiStyle.ValueGoodColor : BotanyUiStyle.ValueBadColor),
+                ("Viable", stats.Viable ? "Yes" : "No", stats.Viable ? RMCMachineUiStyle.GoodColor : RMCMachineUiStyle.BadColor),
             });
         }
         else
@@ -84,8 +85,8 @@ public sealed class LysisCentrifugeBui(EntityUid owner, Enum uiKey) : BoundUserI
 
         var ratio = comp.MaxDegradation > 0 ? comp.Degradation / (float) comp.MaxDegradation : 0f;
         var degradationColor = ratio >= 0.75f
-            ? BotanyUiStyle.ValueBadColor
-            : ratio >= 0.4f ? BotanyUiStyle.ValueWarnColor : BotanyUiStyle.ValueGoodColor;
+            ? RMCMachineUiStyle.BadColor
+            : ratio >= 0.4f ? RMCMachineUiStyle.AverageColor : RMCMachineUiStyle.GoodColor;
 
         window.SetGenome(comp.GenomeName != null ? BotanyUiStyle.ShortSeedName(comp.GenomeName) : null, degradationColor);
         window.SetDegradation(ratio, hasGenome ? $"{comp.Degradation} / {comp.MaxDegradation}" : "—", degradationColor);

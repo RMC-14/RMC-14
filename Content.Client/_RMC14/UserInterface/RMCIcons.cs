@@ -28,7 +28,6 @@ public static class RMCIcons
     public static readonly Color Idle = Color.Black;
     public static readonly Color Hover = Color.White;
     public static readonly Color Yellow = Color.FromHex("#FFD21A");
-
     public static RMCIconLabelRow AddIconLabel(
         this Button button,
         string path,

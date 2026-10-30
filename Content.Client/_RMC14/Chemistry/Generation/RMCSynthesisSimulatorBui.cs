@@ -12,6 +12,7 @@ using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using static Content.Client._RMC14.Chemistry.Generation.RMCSynthesisSimulatorWindow;
+using static Content.Client._RMC14.UserInterface.RMCMachineUiStyle;
 
 namespace Content.Client._RMC14.Chemistry.Generation;
 
@@ -55,7 +56,7 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         _window.OverrideButton.OnPressed += _ =>
         {
             _overrideSafety = _window.OverrideButton.Pressed;
-            Colored(_window.OverrideButton, _overrideSafety ? OverrideActiveColor : ActionColor);
+            _window.OverrideButton.Accent = _overrideSafety ? ButtonCautionColor : ButtonColor;
             Refresh();
         };
         _window.FinalizeButton.OnPressed += _ =>
@@ -110,11 +111,10 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         _window.TargetIcon.SetEntity(targetItem);
         _window.ReferenceIcon.SetEntity(referenceItem);
 
-        _window.TargetNameLabel.Text = targetName ?? "CHEMICAL DATA NOT INSERTED";
-        Row(_window.TargetStatusPanel, _window.TargetNameLabel, targetItem != null ? GreenColor : RedColor);
-
-        _window.ReferenceNameLabel.Text = referenceName ?? "CHEMICAL DATA NOT INSERTED";
-        Row(_window.ReferenceStatusPanel, _window.ReferenceNameLabel, referenceItem != null ? GreenColor : RedColor);
+        _window.SetNotice(_window.TargetStatusPanel, _window.TargetNameLabel, targetName ?? "CHEMICAL DATA NOT INSERTED",
+            targetItem != null ? NoticeColor : NoticeDangerColor);
+        _window.SetNotice(_window.ReferenceStatusPanel, _window.ReferenceNameLabel, referenceName ?? "CHEMICAL DATA NOT INSERTED",
+            referenceItem != null ? NoticeColor : NoticeDangerColor);
 
         var cost = _simulator.GetCost((Owner, comp));
         _window.CostLabel.Text = $"ESTIMATED SIMULATING COST: {(cost > 0 ? cost.ToString() : "NULL")}";
@@ -122,18 +122,17 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         var predictedOverdose = _simulator.GetPredictedOverdose((Owner, comp));
         _window.OverdoseLabel.Text = $"OVERDOSE LEVEL AFTER SIMULATION: {(predictedOverdose is { } od ? od.ToString() : "NULL")}";
 
-        var (statusText, statusColor) = comp.Simulating ? ("STATUS: SIMULATING", OrangeColor)
-            : comp.Picking ? ("STATUS: ANALYSIS READY - PICK A RECIPE", GreenColor)
-            : targetItem is null ? ("STATUS: NO TARGET INSERTED", RedColor)
-            : ("STATUS: READY", TanColor);
-        Row(_window.StatusPanel, _window.StatusLabel, statusText, statusColor);
+        var (statusText, statusColor) = comp.Simulating ? ("STATUS: SIMULATING", NoticeInfoColor)
+            : comp.Picking ? ("STATUS: ANALYSIS READY - PICK A RECIPE", NoticeSuccessColor)
+            : targetItem is null ? ("STATUS: NO TARGET INSERTED", NoticeDangerColor)
+            : ("STATUS: READY", NoticeColor);
+        _window.SetNotice(_window.StatusPanel, _window.StatusLabel, statusText, statusColor);
 
         var showReference = comp.Mode is SynthesisMode.Relate or SynthesisMode.Add;
 
         _window.TargetPropertiesPanel.Visible = targetItem != null;
-        _window.ReferenceHeader.Visible = showReference;
-        _window.ReferenceStatusPanel.Visible = showReference;
-        _window.ReferencePropertiesPanel.Visible = referenceItem != null && showReference;
+        _window.ReferenceSection.Visible = showReference;
+        _window.ReferencePropertiesPanel.Visible = referenceItem != null;
 
         var targetSelectable = comp.Mode != SynthesisMode.Add;
         PopulateProperties(_window.TargetPropertiesBox, targetItem, comp.TargetProperty?.Id, comp.ReferenceProperty?.Id,
@@ -147,8 +146,7 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
                     SendPredictedMessage(new RMCSynthesisSimulatorSelectReferencePropertyBuiMsg(id)));
         }
 
-        _window.RecipePickerHeader.Visible = comp.Picking;
-        _window.RecipePickerPanel.Visible = comp.Picking;
+        _window.RecipePickerSection.Visible = comp.Picking;
         if (comp.Picking && comp.RecipeCandidates is { } candidates)
             PopulateRecipeCandidates(candidates);
         else
@@ -199,7 +197,7 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         if (!report.Completed)
         {
             box.RemoveAllChildren();
-            box.AddChild(new Label { Text = "Analysis incomplete", FontColorOverride = Color.Red });
+            box.AddChild(new Label { Text = "Analysis incomplete", FontColorOverride = BadColor });
             return;
         }
 
@@ -208,16 +206,16 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         {
             var name = p.PropertyId;
             var description = string.Empty;
-            var categoryColor = Color.White;
+            string? categoryIcon = null;
             if (_prototype.TryIndex<ChemGeneratorPropertyPrototype>(p.PropertyId, out var proto))
             {
                 name = proto.ID;
                 description = proto.Description;
-                categoryColor = proto.Category switch
+                categoryIcon = proto.Category switch
                 {
-                    ChemPropertyCategory.Positive => PropertyPositiveColor,
-                    ChemPropertyCategory.Negative => PropertyNegativeColor,
-                    _ => Color.White,
+                    ChemPropertyCategory.Positive => RMCIcons.SquarePlus,
+                    ChemPropertyCategory.Negative => RMCIcons.SquareMinus,
+                    _ => null,
                 };
             }
 
@@ -230,11 +228,12 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
             }
             else
             {
-                button = new PropertyButton { HorizontalExpand = true, MinHeight = 28, ClipText = true };
+                button = new PropertyButton { HorizontalExpand = true, ClipText = true };
                 box.AddChild(button);
             }
 
-            button.Text = $"{name} (lvl {p.Level})";
+            var iconRow = button.SetIcon(categoryIcon ?? RMCIcons.SquarePlus, $"{name} (lvl {p.Level})");
+            iconRow.Icon.Visible = categoryIcon != null;
             button.ToggleMode = selectable;
             button.Pressed = p.PropertyId == selectedId;
             button.Disabled = selectable && conflicting && !_overrideSafety;
@@ -243,9 +242,7 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
             button.PropertyId = p.PropertyId;
             button.OnSelect = selectable ? onSelect : null;
 
-            var background = button.Disabled ? RedColor : button.Pressed ? GreenColor : DarkRowColor;
-            button.Label.FontColorOverride = button.Disabled || button.Pressed ? Color.White : categoryColor;
-            SetSelectableStyle(button, background);
+            button.Accent = button.Pressed ? ButtonSelectedColor : ButtonColor;
 
             index++;
         }
@@ -272,7 +269,7 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
             }
             else
             {
-                button = new RecipeButton { HorizontalExpand = true, MinHeight = 32, ClipText = true };
+                button = new RecipeButton { HorizontalExpand = true, ClipText = true };
                 box.AddChild(button);
             }
 
@@ -286,8 +283,7 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
                 Refresh();
             };
 
-            button.Label.FontColorOverride = Color.White;
-            SetSelectableStyle(button, button.Pressed ? GreenColor : DarkRowColor);
+            button.Accent = button.Pressed ? ButtonSelectedColor : ButtonColor;
         }
 
         box.RemoveChildrenAfter(candidates.Count);

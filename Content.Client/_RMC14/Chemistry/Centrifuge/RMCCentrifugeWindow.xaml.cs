@@ -16,30 +16,24 @@ public sealed partial class RMCCentrifugeWindow : DefaultWindow
 {
     private readonly Label _modeLabel;
     private readonly Label _sourceLabel;
-    private readonly Font _boldItalicFont;
+    private readonly Font _bannerFont;
 
     public RMCCentrifugeWindow()
     {
         RobustXamlLoader.Load(this);
+        RemoveWindowBorder(this);
 
-        _boldItalicFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-BoldItalic.ttf", 12);
+        _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        LabelEdit.StyleBoxOverride = Field();
 
-        Header(ControlsHeader);
-        Header(SettingsHeader);
+        _modeLabel = ModeButton.SetIcon(RMCIcons.ArrowsRotate, "Mode: split", 16).Label;
 
-        FilledButton(ModeButton, TanColor);
-        _modeLabel = ModeButton.AddIconLabel(RMCIcons.ArrowsRotate, "Mode: split", 16).Label;
+        _sourceLabel = SourceButton.SetIcon(RMCIcons.Flask, "Input: Container", 16).Label;
 
-        FilledButton(SourceButton, BlueColor);
-        _sourceLabel = SourceButton.AddIconLabel(RMCIcons.Flask, "Input: Container", 16).Label;
+        ConnectButton.SetIcon(RMCIcons.Link, "Connect a Turing Dispenser", 16);
 
-        FilledButton(ConnectButton, BlueColor);
-        ConnectButton.AddIconLabel(RMCIcons.Link, "Connect a Turing Dispenser", 16);
-
-        GreyButton(EjectInputButton);
-        EjectInputButton.AddIconLabel(RMCIcons.Eject, "Eject", 16);
-        GreyButton(EjectOutputButton);
-        EjectOutputButton.AddIconLabel(RMCIcons.Eject, "Eject", 16);
+        EjectInputButton.SetIcon(RMCIcons.Eject, "Eject", 16);
+        EjectOutputButton.SetIcon(RMCIcons.Eject, "Eject", 16);
     }
 
     public void SetMode(string text)
@@ -54,10 +48,11 @@ public sealed partial class RMCCentrifugeWindow : DefaultWindow
 
     public void SetConnection(bool connected)
     {
-        ConnectionLabel.Text = connected ? "Turing Dispenser connected!" : "No Turing Dispenser connected!";
-        ConnectionLabel.FontColorOverride = Color.White;
-        ConnectionLabel.FontOverride = _boldItalicFont;
-        ConnectionPanel.PanelOverride = Flat(connected ? BlueColor : RedColor);
+        Notice(ConnectionPanel,
+            ConnectionLabel,
+            connected ? "Turing Dispenser connected!" : "No Turing Dispenser connected!",
+            NoticeInfoColor,
+            _bannerFont);
     }
 
     public void SetLabel(string? label)

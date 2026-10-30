@@ -1,8 +1,9 @@
+using Content.Client._RMC14.UserInterface;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
-using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerColors;
+using static Content.Client._RMC14.UserInterface.RMCMachineUiStyle;
 
 namespace Content.Client._RMC14.Xenonids.Biomass;
 
@@ -10,6 +11,15 @@ public sealed class RMCBiomassCategoryOptionButton : OptionButton
 {
     public RMCBiomassCategoryOptionButton()
     {
+        ModulateSelfOverride = Color.White;
+        StyleBoxOverride = new RMCBevelStyleBox
+        {
+            BackgroundColor = ButtonColor,
+            ContentMarginLeftOverride = 8,
+            ContentMarginRightOverride = 8,
+            ContentMarginTopOverride = 3,
+            ContentMarginBottomOverride = 3,
+        };
         RecolorChildren(this);
     }
 
@@ -20,10 +30,10 @@ public sealed class RMCBiomassCategoryOptionButton : OptionButton
             switch (child)
             {
                 case Label label:
-                    label.FontColorOverride = AmberBlack;
+                    label.FontColorOverride = ButtonTextColor;
                     break;
                 case TextureRect triangle:
-                    triangle.Modulate = AmberBlack;
+                    triangle.Modulate = ButtonTextColor;
                     break;
                 default:
                     RecolorChildren(child);
@@ -40,10 +50,10 @@ public sealed class RMCBiomassCategoryOptionButton : OptionButton
         button.ModulateSelfOverride = Color.White;
         button.StyleBoxOverride = new StyleBoxFlat
         {
-            BackgroundColor = AmberBlack,
-            BorderColor = AmberDim,
-            BorderThickness = new Thickness(2),
+            BackgroundColor = WindowColor,
+            BorderColor = Color.Black,
+            BorderThickness = new Thickness(1),
         };
-        button.Label.FontColorOverride = Amber;
+        button.Label.FontColorOverride = Color.White;
     }
 }

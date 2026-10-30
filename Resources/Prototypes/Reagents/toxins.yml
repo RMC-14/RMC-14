@@ -21,7 +21,6 @@
 
 - type: reagent
   id: CarpoToxin
-  toxin: true # RMC14
   name: reagent-name-carpotoxin
   group: Toxins
   desc: reagent-desc-carpotoxin

@@ -1,10 +1,10 @@
 <PanelContainer xmlns="https://spacestation14.io"
-                xmlns:botany="clr-namespace:Content.Client._RMC14.Botany"
+                xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
                 HorizontalExpand="True">
     <BoxContainer Orientation="Horizontal" Margin="3 1" HorizontalExpand="True">
-        <Label Name="CodeLabel" MinWidth="60" FontColorOverride="#8E9AA6" VerticalAlignment="Center" />
+        <Label Name="CodeLabel" MinWidth="60" FontColorOverride="#7D8EA6" VerticalAlignment="Center" />
         <Label Name="GeneLabel" HorizontalExpand="True" VerticalAlignment="Center" />
-        <botany:RMCBotanyButton Name="ExtractButton" Access="Public" Text="Extract"
+        <ui:RMCMachineButton Name="ExtractButton" Access="Public" Text="Extract"
                 VerticalAlignment="Center" />
     </BoxContainer>
 </PanelContainer>

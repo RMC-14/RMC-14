@@ -4,7 +4,6 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Maths;
-using static Content.Client._RMC14.Xenonids.Biomass.RMCBiomassAnalyzerColors;
 
 namespace Content.Client._RMC14.Xenonids.Biomass;
 
@@ -20,10 +19,10 @@ public sealed partial class RMCBiomassQueueEntry : Button
 
         Modulate = Color.White;
         ModulateSelfOverride = Color.White;
-        StyleBoxOverride = new StyleBoxFlat { BackgroundColor = AmberBlack, BorderColor = AmberDim, BorderThickness = new Thickness(2) };
+        StyleBoxOverride = new StyleBoxFlat { BackgroundColor = Color.Black.WithAlpha(0.25f) };
 
         CancelIcon.SetIcon(RMCIcons.SquareMinus);
-        CancelIcon.IdleColor = RMCIcons.Yellow;
+        CancelIcon.IdleColor = RMCMachineUiStyle.LabelColor;
         CancelIcon.BindHover(this);
 
         OnPressed += _ => OnCancel?.Invoke(Index);

@@ -1,13 +1,17 @@
 <botany:LysisCentrifugeWindow
     xmlns="https://spacestation14.io"
     xmlns:botany="clr-namespace:Content.Client._RMC14.Botany"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     MinSize="380 120"
     MaxWidth="720">
     <PanelContainer>
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#16181B" />
+            <graphics:StyleBoxFlat BackgroundColor="#1F2538" />
         </PanelContainer.PanelOverride>
+        <TextureRect TexturePath="/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
+                     ModulateSelfOverride="#FFFFFF18" Stretch="KeepCentered" MouseFilter="Ignore"
+                     HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         <ScrollContainer Margin="4" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False"
                          ReturnMeasure="True">
@@ -15,7 +19,7 @@
                 <!-- seed -->
                 <PanelContainer Margin="0 0 0 4">
                     <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="#1F2327" />
+                        <graphics:StyleBoxFlat BackgroundColor="#00000054" />
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Vertical" Margin="6 5" SeparationOverride="4">
                         <PanelContainer Name="SeedBanner">
@@ -36,8 +40,8 @@
                                           VerticalAlignment="Center">
                                 <BoxContainer Name="SeedChips" Orientation="Horizontal" />
                                 <BoxContainer Orientation="Horizontal" SeparationOverride="4">
-                                    <botany:RMCBotanyButton Name="ProcessSeedButton" Access="Public" Text="Process Seed" />
-                                    <botany:RMCBotanyButton Name="EjectSeedButton" Access="Public" Text="Eject Seed" />
+                                    <ui:RMCMachineButton Name="ProcessSeedButton" Access="Public" Text="Process Seed" />
+                                    <ui:RMCMachineButton Name="EjectSeedButton" Access="Public" Text="Eject Seed" />
                                 </BoxContainer>
                             </BoxContainer>
                         </BoxContainer>
@@ -47,40 +51,40 @@
                 <!-- seed traits -->
                 <PanelContainer Name="SeedTraitsCard" Access="Public" Margin="0 0 0 4">
                     <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="#1F2327" />
+                        <graphics:StyleBoxFlat BackgroundColor="#00000054" />
                     </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical" Margin="0 4 0 5">
-                        <Label Text="Seed Traits" StyleClasses="LabelKeyText" Margin="6 0" />
-                        <PanelContainer MinHeight="2" Margin="0 3 0 4">
+                    <BoxContainer Orientation="Vertical">
+                        <Label Text="Seed Traits" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                        <PanelContainer MinHeight="2">
                             <PanelContainer.PanelOverride>
-                                <graphics:StyleBoxFlat BackgroundColor="#4972A1" />
+                                <graphics:StyleBoxFlat BackgroundColor="#000000" />
                             </PanelContainer.PanelOverride>
                         </PanelContainer>
-                        <BoxContainer Name="SeedTraitRows" Orientation="Vertical" Margin="8 0" SeparationOverride="2" />
+                        <BoxContainer Name="SeedTraitRows" Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="2" />
                     </BoxContainer>
                 </PanelContainer>
 
                 <!-- genome buffer + disc -->
                 <PanelContainer Margin="0 0 0 4">
                     <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="#1F2327" />
+                        <graphics:StyleBoxFlat BackgroundColor="#00000054" />
                     </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical" Margin="0 4 0 5">
-                        <Label Text="Genome Buffer" StyleClasses="LabelKeyText" Margin="6 0" />
-                        <PanelContainer MinHeight="2" Margin="0 3 0 4">
+                    <BoxContainer Orientation="Vertical">
+                        <Label Text="Genome Buffer" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                        <PanelContainer MinHeight="2">
                             <PanelContainer.PanelOverride>
-                                <graphics:StyleBoxFlat BackgroundColor="#4972A1" />
+                                <graphics:StyleBoxFlat BackgroundColor="#000000" />
                             </PanelContainer.PanelOverride>
                         </PanelContainer>
-                        <BoxContainer Orientation="Vertical" Margin="8 0" SeparationOverride="4">
+                        <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="4">
                             <BoxContainer Orientation="Horizontal">
-                                <Label Text="Genome:" MinWidth="100" FontColorOverride="#8E9AA6"
+                                <Label Text="Genome:" MinWidth="100" FontColorOverride="#7D8EA6"
                                        VerticalAlignment="Center" />
                                 <Label Name="GenomeLabel" HorizontalExpand="True" VerticalAlignment="Center" />
-                                <botany:RMCBotanyButton Name="ClearBufferButton" Access="Public" Text="Clear Buffer" VerticalAlignment="Center" />
+                                <ui:RMCMachineButton Name="ClearBufferButton" Access="Public" Text="Clear Buffer" VerticalAlignment="Center" />
                             </BoxContainer>
                             <BoxContainer Orientation="Horizontal">
-                                <Label Text="Degradation:" MinWidth="100" FontColorOverride="#8E9AA6"
+                                <Label Text="Degradation:" MinWidth="100" FontColorOverride="#7D8EA6"
                                        VerticalAlignment="Center" />
                                 <ProgressBar Name="DegradationBar" HorizontalExpand="True" SetHeight="22"
                                              VerticalAlignment="Center" MinValue="0" MaxValue="1">
@@ -89,10 +93,10 @@
                                 </ProgressBar>
                             </BoxContainer>
                             <BoxContainer Orientation="Horizontal">
-                                <Label Text="Data Disc:" MinWidth="100" FontColorOverride="#8E9AA6"
+                                <Label Text="Data Disc:" MinWidth="100" FontColorOverride="#7D8EA6"
                                        VerticalAlignment="Center" />
                                 <Label Name="DiscLabel" HorizontalExpand="True" VerticalAlignment="Center" />
-                                <botany:RMCBotanyButton Name="EjectDiscButton" Access="Public" Text="Eject Disc" VerticalAlignment="Center" />
+                                <ui:RMCMachineButton Name="EjectDiscButton" Access="Public" Text="Eject Disc" VerticalAlignment="Center" />
                             </BoxContainer>
                         </BoxContainer>
                     </BoxContainer>
@@ -101,16 +105,16 @@
                 <!-- gene sequences -->
                 <PanelContainer Name="GenesCard" Access="Public">
                     <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="#1F2327" />
+                        <graphics:StyleBoxFlat BackgroundColor="#00000054" />
                     </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical" Margin="0 4 0 5">
-                        <Label Text="Gene Sequences" StyleClasses="LabelKeyText" Margin="6 0" />
-                        <PanelContainer MinHeight="2" Margin="0 3 0 4">
+                    <BoxContainer Orientation="Vertical">
+                        <Label Text="Gene Sequences" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                        <PanelContainer MinHeight="2">
                             <PanelContainer.PanelOverride>
-                                <graphics:StyleBoxFlat BackgroundColor="#4972A1" />
+                                <graphics:StyleBoxFlat BackgroundColor="#000000" />
                             </PanelContainer.PanelOverride>
                         </PanelContainer>
-                        <BoxContainer Name="GeneRowsContainer" Access="Public" Orientation="Vertical" Margin="6 0" />
+                        <BoxContainer Name="GeneRowsContainer" Access="Public" Orientation="Vertical" Margin="6 4 6 5" />
                     </BoxContainer>
                 </PanelContainer>
             </BoxContainer>

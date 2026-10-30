@@ -15,58 +15,42 @@ namespace Content.Client._RMC14.Chemistry.TuringDispenser;
 [GenerateTypedNameReferences]
 public sealed partial class RMCTuringDispenserWindow : DefaultWindow
 {
-    private readonly Font _boldItalicFont;
+    private readonly Font _bannerFont;
     private readonly RMCIconLabelRow _autoRunIcon;
     private readonly Label _smartLinkLabel;
     private readonly Label _outputModeLabel;
 
-    public readonly FloatSpinBox MultiplierSpinBox;
-    public readonly FloatSpinBox CyclesSpinBox;
+    public readonly RMCMachineSpinBox MultiplierSpinBox;
+    public readonly RMCMachineSpinBox CyclesSpinBox;
 
     public RMCTuringDispenserWindow()
     {
         RobustXamlLoader.Load(this);
+        RemoveWindowBorder(this);
 
-        _boldItalicFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-BoldItalic.ttf", 12);
+        _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
 
-        Header(ControlsHeader);
-        Header(SettingsHeader);
-        Header(BeakerSelectorHeader);
-        Header(MemoryHeader);
-        Header(BoxHeader);
+        ClearMemoryButton.SetIcon(RMCIcons.Trash, "Clear memory");
+        RunProgramButton.SetIcon(RMCIcons.Play, "Run program");
+        SaveToMemoryButton.SetIcon(RMCIcons.FloppyDisk, "Save box to memory");
+        EjectBoxButton.SetIcon(RMCIcons.Eject, "Eject box");
+        DisposeBeakerButton.SetIcon(RMCIcons.Flask, "Flush beaker");
+        EjectBeakerButton.SetIcon(RMCIcons.Eject, "Eject beaker");
 
-        EnergyBar.ForegroundStyleBoxOverride = Flat(GreenColor);
+        _autoRunIcon = AutoRunButton.SetIcon(RMCIcons.Stop, "Autorun: disabled");
+        _smartLinkLabel = SmartLinkButton.SetIcon(RMCIcons.Link, "Smartlink: enabled").Label;
+        _outputModeLabel = OutputModeButton.SetIcon(RMCIcons.Flask, "Outputting to: CONTAINER").Label;
 
-        GreyButton(ClearMemoryButton);
-        ClearMemoryButton.AddIconLabel(RMCIcons.Trash, "Clear memory");
-        GreyButton(RunProgramButton);
-        RunProgramButton.AddIconLabel(RMCIcons.Play, "Run program");
-        GreyButton(SaveToMemoryButton);
-        SaveToMemoryButton.AddIconLabel(RMCIcons.FloppyDisk, "Save box to memory");
-        GreyButton(EjectBoxButton);
-        EjectBoxButton.AddIconLabel(RMCIcons.Eject, "Eject box");
-        GreyButton(DisposeBeakerButton);
-        DisposeBeakerButton.AddIconLabel(RMCIcons.Flask, "Flush beaker");
-        GreyButton(EjectBeakerButton);
-        EjectBeakerButton.AddIconLabel(RMCIcons.Eject, "Eject beaker");
-
-        FilledButton(AutoRunButton, TanColor);
-        _autoRunIcon = AutoRunButton.AddIconLabel(RMCIcons.Stop, "Autorun: disabled");
-        FilledButton(SmartLinkButton, TanColor);
-        _smartLinkLabel = SmartLinkButton.AddIconLabel(RMCIcons.Link, "Smartlink: enabled").Label;
-        FilledButton(OutputModeButton, TanColor);
-        _outputModeLabel = OutputModeButton.AddIconLabel(RMCIcons.Flask, "Outputting to: CONTAINER").Label;
-
-        MultiplierSpinBox = UIExtensions.CreateDialSpinBox(1);
+        MultiplierSpinBox = new RMCMachineSpinBox(1);
         MultiplierContainer.AddChild(MultiplierSpinBox);
 
-        CyclesSpinBox = UIExtensions.CreateDialSpinBox(1);
+        CyclesSpinBox = new RMCMachineSpinBox(1);
         CyclesContainer.AddChild(CyclesSpinBox);
     }
 
-    public void SetStatusRow(Control panel, Label label, string text, Color color)
+    public void SetBanner(PanelContainer panel, Label label, string text, Color color)
     {
-        StatusRow(panel, label, text, color, _boldItalicFont);
+        Notice(panel, label, text, color, _bannerFont);
     }
 
     public void SetAutoRun(bool enabled)
@@ -92,11 +76,5 @@ public sealed partial class RMCTuringDispenserWindow : DefaultWindow
 
         if (!CyclesSpinBox.HasKeyboardFocus())
             CyclesSpinBox.Value = cycles;
-    }
-
-    public static void SetBeakerRowSelected(RMCTuringDispenserBeakerRow row, bool selected)
-    {
-        row.StyleBoxOverride = Flat(selected ? GreenColor : DarkRowColor);
-        row.ModulateSelfOverride = Color.White;
     }
 }
