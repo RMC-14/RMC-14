@@ -14,6 +14,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMMilitaryPolice
+    - CMProvostInspector
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
