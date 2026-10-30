@@ -28,7 +28,9 @@ public sealed partial class RMCTuringDispenserWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         RemoveWindowBorder(this);
 
-        _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        var cache = IoCManager.Resolve<IResourceCache>();
+        _bannerFont = cache.GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        EnergyLabel.FontOverride = cache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 10);
 
         ClearMemoryButton.SetIcon(RMCIcons.Trash, "Clear memory");
         RunProgramButton.SetIcon(RMCIcons.Play, "Run program");

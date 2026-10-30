@@ -16,7 +16,11 @@ public sealed class RMCStripedStyleBox : StyleBox
     protected override void DoDraw(DrawingHandleScreen handle, UIBox2 box, float uiScale)
     {
         handle.DrawRect(box, BackgroundColor);
+        DrawStripes(handle, box, uiScale);
+    }
 
+    public static void DrawStripes(DrawingHandleScreen handle, UIBox2 box, float uiScale)
+    {
         var left = MathF.Floor(box.Left);
         var top = MathF.Floor(box.Top);
         var right = MathF.Ceiling(box.Right);

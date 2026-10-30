@@ -69,13 +69,8 @@ public static class RMCMachineUiStyle
 
     public static void Bar(ProgressBar bar, float ratio, Color color)
     {
-        bar.BackgroundStyleBoxOverride = new StyleBoxFlat
-        {
-            BackgroundColor = WindowColor,
-            BorderColor = color,
-            BorderThickness = new Thickness(1),
-        };
-        bar.ForegroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = color };
+        bar.BackgroundStyleBoxOverride = new RMCBarStyleBox { Track = true };
+        bar.ForegroundStyleBoxOverride = new RMCBarStyleBox { FillColor = color };
         bar.MinValue = 0;
         bar.MaxValue = 1;
         bar.Value = Math.Clamp(ratio, 0f, 1f);
