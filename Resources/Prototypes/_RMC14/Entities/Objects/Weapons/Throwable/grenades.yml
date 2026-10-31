@@ -86,8 +86,8 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     maxIntensity: 10
-    intensitySlope: 5.75
-    totalIntensity: 144
+    intensitySlope: 4.99
+    totalIntensity: 148
     canCreateVacuum: false
   - type: Ammo
   - type: CMExplosionEffect
@@ -246,9 +246,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
   - type: Explosive
-    maxIntensity: 8
-    intensitySlope: 1.05
-    totalIntensity: 47
+    maxIntensity: 4
+    intensitySlope: 21.1
+    totalIntensity: 101
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
@@ -277,9 +277,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m15frag.rsi
   - type: Explosive
-    maxIntensity: 11
-    intensitySlope: 2.75
-    totalIntensity: 396
+    maxIntensity: 97
+    intensitySlope: 2.1
+    totalIntensity: 466
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
@@ -306,9 +306,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m12blast.rsi
   - type: Explosive
-    maxIntensity: 18
-    intensitySlope: 4.05
-    totalIntensity: 396
+    maxIntensity: 20
+    intensitySlope: 6.07
+    totalIntensity: 605
   - type: Tag
     tags:
     - Grenade
@@ -469,8 +469,8 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     maxIntensity: 10
-    intensitySlope: 2.75
-    totalIntensity: 313
+    intensitySlope: 2.9
+    totalIntensity: 305
     canCreateVacuum: false
   - type: Ammo
   - type: CMExplosionEffect
