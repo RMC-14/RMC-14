@@ -31,7 +31,14 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         if (_timing.CurTick != _timing.LastRealTick)
             return;
 
-        _rmcUI.RefreshUIs<RequisitionsBui>(computer.Owner);
+        try
+        {
+            _rmcUI.RefreshUIs<RequisitionsBui>(computer.Owner);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing requisitions UI for {ToPrettyString(computer)}: {e}");
+        }
     }
 
     private void OnElevatorHandleState(Entity<RequisitionsElevatorComponent> elevator, ref AfterAutoHandleStateEvent args)
