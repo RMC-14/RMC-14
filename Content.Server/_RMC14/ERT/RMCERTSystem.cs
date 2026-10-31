@@ -83,6 +83,8 @@ public sealed partial class RMCERTSystem : EntitySystem
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRoles = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedAccessSystem _idAccess = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCards = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;

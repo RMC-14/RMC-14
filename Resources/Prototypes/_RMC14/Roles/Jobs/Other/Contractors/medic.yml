@@ -9,6 +9,24 @@
   startingGear: RMCGearContractorMedic
   icon: RMCJobIconFreelancerMedic
   spawnMenuRoleName: VAI Contractor Medical Specialist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - VAI
+    - type: Skills
+      skills:
+        RMCSkillSurgery: 1
+        RMCSkillMedical: 2
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-contractor-standard
 
 - type: entity
   parent: RMCRandomHumanoidContractorStandard

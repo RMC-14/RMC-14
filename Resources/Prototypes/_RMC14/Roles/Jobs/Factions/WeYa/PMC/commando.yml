@@ -6,6 +6,40 @@
   playTimeTracker: RMCJobWeYaCommando
   startingGear: RMCGearWeYaCommando
   spawnMenuRoleName: We-Ya Commando
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillMedical: 2
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 3
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 5
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-standard
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_gun
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
 
 - type: entity
   parent: RMCRandomHumanoidPMCStandardM63B2

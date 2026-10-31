@@ -3,6 +3,7 @@
   name: rmc-ert-call-provost-name
   organization: rmc-ert-organization-provost
   npcFactions: [ UNMC ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   category: rmc-ert-category-law
   enabled: true
   adminSelectable: true

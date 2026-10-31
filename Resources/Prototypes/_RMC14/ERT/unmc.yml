@@ -76,6 +76,7 @@
   name: rmc-ert-call-cbrn-name
   organization: rmc-ert-organization-unmc
   npcFactions: [ UNMC ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   iffFaction: FactionMarine
   category: rmc-ert-category-military
   enabled: true

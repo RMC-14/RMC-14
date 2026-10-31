@@ -3,6 +3,7 @@
   name: rmc-ert-call-tse-name
   organization: rmc-ert-organization-tse
   npcFactions: [ RoyalMarines, TSE ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   iffFaction: FactionRoyalMarines
   category: rmc-ert-category-foreign-military
   enabled: true

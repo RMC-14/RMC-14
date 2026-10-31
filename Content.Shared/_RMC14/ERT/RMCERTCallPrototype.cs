@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Access;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Audio;
@@ -54,6 +55,12 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     /// </summary>
     [DataField]
     public EntProtoId<IFFFactionComponent>? IffFaction;
+
+    /// <summary>
+    /// Additional access groups granted to every responder's ID for this call.
+    /// </summary>
+    [DataField]
+    public List<ProtoId<AccessGroupPrototype>> AccessGroups = [];
 
     /// <summary>
     /// Localization id for the admin UI category this call is grouped under.

@@ -474,7 +474,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         if (!TryComp(destination, out DockingComponent? destinationDock))
-            return true;
+            return CanLandAtCoordinates(computer, destination, out reason);
 
         return TryGetDockingTravelTarget(
             computer,
@@ -482,6 +482,48 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destinationDock,
             out _,
             out reason);
+    }
+
+    private bool CanLandAtCoordinates(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        if (Transform(computer).GridUid is not { } shuttle ||
+            !TryGetShuttleHardBoundsCenter(shuttle, out var center))
+        {
+            reason = Loc.GetString("rmc-dropship-invalid-docking-footprint");
+            return false;
+        }
+
+        var destinationXform = Transform(destination);
+        var coordinates = _transform.GetMoverCoordinates(destination, destinationXform);
+        var rotation = destinationXform.LocalRotation;
+        if (TryComp(destination, out RMCDropshipDestinationCoordinatesOverrideComponent? coordinatesOverride) &&
+            coordinatesOverride.Coordinates.MapId != MapId.Nullspace)
+        {
+            if (!_mapSystem.TryGetMap(coordinatesOverride.Coordinates.MapId, out var map))
+            {
+                reason = Loc.GetString("rmc-dropship-destination-unavailable");
+                return false;
+            }
+
+            coordinates = new EntityCoordinates(map.Value, coordinatesOverride.Coordinates.Position);
+            rotation = coordinatesOverride.Rotation;
+        }
+        else
+        {
+            coordinates = coordinates.Offset(-rotation.RotateVec(center));
+        }
+
+        if (TryGetRestrictedDockingObstacle(shuttle, coordinates.EntityId, destination, coordinates, rotation))
+        {
+            reason = Loc.GetString("rmc-dropship-destination-obstructed");
+            return false;
+        }
+
+        reason = string.Empty;
+        return true;
     }
 
     public void SetPlayerRouteLock(EntityUid shuttle, EntityUid? destination)
@@ -1084,6 +1126,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (!_fixturesQuery.TryComp(shuttle, out var fixtures))
             return false;
 
+        var targetXform = Transform(targetGrid);
+        var mapCoordinates = targetXform.MapUid == targetGrid;
         var transform = new Transform(coordinates.Position, angle);
         foreach (var fixture in fixtures.Fixtures.Values)
         {
@@ -1091,12 +1135,24 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 continue;
 
             _restrictedDockingObstacles.Clear();
-            _entityLookup.GetLocalEntitiesIntersecting(
-                targetGrid,
-                fixture.Shape,
-                transform,
-                _restrictedDockingObstacles,
-                flags: LookupFlags.Uncontained);
+            if (mapCoordinates)
+            {
+                _entityLookup.GetEntitiesIntersecting(
+                    targetXform.MapID,
+                    fixture.Shape,
+                    transform,
+                    _restrictedDockingObstacles,
+                    flags: LookupFlags.Uncontained);
+            }
+            else
+            {
+                _entityLookup.GetLocalEntitiesIntersecting(
+                    targetGrid,
+                    fixture.Shape,
+                    transform,
+                    _restrictedDockingObstacles,
+                    flags: LookupFlags.Uncontained);
+            }
 
             foreach (var ent in _restrictedDockingObstacles)
             {
@@ -1109,7 +1165,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 }
 
                 if (!_xformQuery.TryComp(ent, out var xform) ||
-                    xform.GridUid != targetGrid ||
+                    xform.GridUid == shuttle ||
+                    (!mapCoordinates && xform.GridUid != targetGrid) ||
                     !xform.Anchored)
                 {
                     continue;

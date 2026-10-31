@@ -3,6 +3,7 @@
   name: rmc-ert-call-spp-friendly-name
   organization: rmc-ert-organization-spp
   npcFactions: [ SPP ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   iffFaction: FactionSPP
   category: rmc-ert-category-foreign-military
   enabled: true

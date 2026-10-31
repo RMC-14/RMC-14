@@ -6,6 +6,22 @@
   playTimeTracker: RMCJobContractorHeavy
   startingGear: RMCGearContractorHeavy
   spawnMenuRoleName: VAI Contractor Machinegunner
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - VAI
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 2
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-contractor-standard
 
 - type: entity
   parent: RMCRandomHumanoidContractorStandard

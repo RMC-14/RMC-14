@@ -6,6 +6,44 @@
   playTimeTracker: RMCJobBureauRiotEngineer
   startingGear: RMCGearBureauRiotEngineer
   spawnMenuRoleName: CMB Riot Control Breaching Technician
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 3
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 3
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-deputy
+    - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
 
 - type: entity
   parent: RMCRandomHumanoidBureauDeputy

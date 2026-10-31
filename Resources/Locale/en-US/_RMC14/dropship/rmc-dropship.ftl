@@ -161,6 +161,7 @@ rmc-dropship-destination-invalid-class = This destination cannot receive the cur
 rmc-dropship-destination-invalid-tags = This destination is not valid for the current shuttle policy.
 rmc-dropship-destination-blocked-tags = This destination is blocked for the current shuttle policy.
 rmc-dropship-destination-occupied = This destination is already occupied.
+rmc-dropship-destination-obstructed = The landing zone is obstructed by a structure.
 rmc-dropship-invalid-docking-footprint = The shuttle does not have a valid docking footprint.
 rmc-dropship-no-compatible-docking-port = No compatible docking port is available for this shuttle.
 rmc-dropship-clearance-port = This shuttle extends past the port-side landing clearance ({$shuttleSize} required, {$destinationSize} available).

@@ -35,6 +35,7 @@
         RMCSkillConstruction: 2
         RMCSkillLeadership: 3
         RMCSkillOverwatch: 1
+        RMCSkillMedical: 2
         RMCSkillEngineer: 1
         RMCSkillFireman: 5
         RMCSkillFirearms: 2

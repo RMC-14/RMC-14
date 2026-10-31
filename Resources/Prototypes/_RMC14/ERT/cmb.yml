@@ -3,6 +3,7 @@
   name: rmc-ert-call-cmb-name
   organization: rmc-ert-organization-cmb
   npcFactions: [ Bureau ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   category: rmc-ert-category-law
   enabled: true
   adminSelectable: true
@@ -80,6 +81,7 @@
   name: rmc-ert-call-cmb-black-market-name
   organization: rmc-ert-organization-cmb
   npcFactions: [ Bureau ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   category: rmc-ert-category-law
   enabled: true
   adminSelectable: true
@@ -151,6 +153,7 @@
   name: rmc-ert-call-cmb-riot-name
   organization: rmc-ert-organization-cmb
   npcFactions: [ Bureau ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   category: rmc-ert-category-law
   enabled: true
   adminSelectable: true

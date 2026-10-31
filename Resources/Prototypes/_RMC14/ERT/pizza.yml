@@ -3,6 +3,7 @@
   name: rmc-ert-call-pizza-name
   organization: rmc-ert-organization-pizza
   npcFactions: [ Civilian ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   category: rmc-ert-category-civilian
   enabled: true
   adminSelectable: true

@@ -6,6 +6,22 @@
   playTimeTracker: RMCJobContractorEngineer
   startingGear: RMCGearContractorEngineer
   spawnMenuRoleName: VAI Contractor Engineering Specialist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - VAI
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-contractor-standard
 
 - type: entity
   parent: RMCRandomHumanoidContractorStandard

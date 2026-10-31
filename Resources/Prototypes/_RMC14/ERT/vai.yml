@@ -3,6 +3,7 @@
   name: rmc-ert-call-contractors-name
   organization: rmc-ert-organization-vai
   npcFactions: [ VAI ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   iffFaction: FactionVAI
   category: rmc-ert-category-corporate
   enabled: true
@@ -99,6 +100,7 @@
   name: rmc-ert-call-contractors-covert-name
   organization: rmc-ert-organization-vai
   npcFactions: [ VAI ]
+  accessGroups: [ ShipMasterAccess, RMCERT ]
   iffFaction: FactionVAI
   category: rmc-ert-category-corporate
   enabled: true

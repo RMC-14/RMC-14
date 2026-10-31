@@ -17,6 +17,7 @@
     - type: Skills
       skills:
         RMCSkillFirearms: 2
+        RMCSkillSpecialistWeapons: 1
         RMCSkillMedical: 1
         RMCSkillCqc: 1
         RMCSkillEngineer: 1

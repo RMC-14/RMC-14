@@ -6,6 +6,45 @@
   playTimeTracker: RMCJobBureauRiotMedic
   startingGear: RMCGearBureauRiotMedic
   spawnMenuRoleName: CMB Riot Control Medic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillSurgery: 1
+        RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 3
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-deputy
+    - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
 
 - type: entity
   parent: RMCRandomHumanoidBureauDeputy
