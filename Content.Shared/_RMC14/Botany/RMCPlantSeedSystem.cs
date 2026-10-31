@@ -18,6 +18,7 @@ public sealed class RMCPlantSeedSystem : EntitySystem
     [Dependency] private readonly ISerializationManager _serManager = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private static readonly Type[] MutableComponentTypes =
     {
@@ -59,8 +60,7 @@ public sealed class RMCPlantSeedSystem : EntitySystem
             harvest?.Yield ?? 0,
             harvest?.HarvestRepeat ?? HarvestType.NoRepeat,
             harvest?.Seedless ?? false,
-            chemicals?.Potency ?? 0f,
-            growth?.Viable ?? true);
+            chemicals?.Potency ?? 0f);
     }
 
     public EntityUid SpawnSeedPacket(EntityUid source, EntityCoordinates coords, EntityUid? user, float? healthOverride)
@@ -75,7 +75,7 @@ public sealed class RMCPlantSeedSystem : EntitySystem
         {
             name = plantComp.Name;
             noun = plantComp.Noun;
-            plantProtoId = MetaData(source).EntityPrototype?.ID;
+            plantProtoId = GetSpecies((source, plantComp));
         }
         else if (TryComp(source, out RMCProduceComponent? produceComp))
         {
@@ -92,13 +92,14 @@ public sealed class RMCPlantSeedSystem : EntitySystem
         var seedComp = EnsureComp<RMCPlantSeedComponent>(packet);
         seedComp.PlantPrototype = plantProtoId;
         seedComp.HealthOverride = healthOverride;
+        seedComp.Name = name;
+        seedComp.Noun = noun;
         Dirty(packet, seedComp);
 
         var mutation = EnsureComp<RMCPlantSeedMutationComponent>(packet);
         mutation.MutatedComponents = SnapshotMutableComponents(source);
 
-        var val = Loc.GetString("botany-seed-packet-name", ("seedName", Loc.GetString(name)), ("seedNoun", Loc.GetString(noun)));
-        _metaData.SetEntityName(packet, val);
+        UpdatePacketName((packet, seedComp));
 
         if (user != null)
             _hands.TryPickupAnyHand(user.Value, packet);
@@ -177,6 +178,41 @@ public sealed class RMCPlantSeedSystem : EntitySystem
         }
 
         return snapshot;
+    }
+
+    public string? GetSpecies(Entity<RMCPlantComponent?> plant)
+    {
+        if (Resolve(plant, ref plant.Comp, false) && plant.Comp.Species is { } species)
+            return species;
+
+        return MetaData(plant).EntityPrototype?.ID;
+    }
+
+    public void UpdatePacketName(Entity<RMCPlantSeedComponent?> packet)
+    {
+        if (!Resolve(packet, ref packet.Comp, false))
+            return;
+
+        var name = packet.Comp.Name;
+        var noun = packet.Comp.Noun;
+        if ((name == null || noun == null) &&
+            packet.Comp.PlantPrototype is { } plantProto &&
+            _prototype.Index(plantProto).TryGetComponent(out RMCPlantComponent? plant, _componentFactory))
+        {
+            name ??= plant.Name;
+            noun ??= plant.Noun;
+        }
+
+        if (name == null || noun == null)
+            return;
+
+        var seedName = Loc.GetString(name);
+        var modified = GetOrCreateSeedSnapshot(packet).OfType<RMCPlantMutationComponent>().FirstOrDefault()?.Modified ?? false;
+        if (modified)
+            seedName = Loc.GetString("rmc-botany-seed-modified-name", ("seedName", seedName));
+
+        var val = Loc.GetString("botany-seed-packet-name", ("seedName", seedName), ("seedNoun", Loc.GetString(noun)));
+        _metaData.SetEntityName(packet, val);
     }
 
     public bool CanHarvest(EntityUid plant, EntityUid? held = null)

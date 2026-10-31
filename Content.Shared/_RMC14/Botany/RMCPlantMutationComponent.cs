@@ -25,7 +25,7 @@ public sealed partial class RMCPlantMutationComponent : Component
     public Dictionary<string, float> Slots = new();
 
     [DataField, AutoNetworkedField]
-    public int GeneEditCount;
+    public bool Modified;
 
     [DataField, AutoNetworkedField]
     public List<RandomPlantMutation> Mutations = new();

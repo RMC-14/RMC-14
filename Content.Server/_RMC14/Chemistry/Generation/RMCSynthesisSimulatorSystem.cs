@@ -72,7 +72,7 @@ public sealed class RMCSynthesisSimulatorSystem : SharedRMCSynthesisSimulatorSys
 
         var overdose = GetPredictedOverdose(ent)!.Value;
 
-        var signature = _generator.ComputeSimulationSignature(properties, overdose);
+        var signature = _generator.ComputeSimulationSignature(_generator.GetRootId(targetId.Id), properties);
         if (_generator.TryGetSimulationResult(signature, out var existingId) && _rmcReagent.TryIndex(existingId, out var existingReagent))
         {
             comp.RecipeCandidates = null;
@@ -81,7 +81,7 @@ public sealed class RMCSynthesisSimulatorSystem : SharedRMCSynthesisSimulatorSys
             comp.PendingSignature = null;
             Dirty(ent);
             UpdateAppearance(ent);
-            _generator.PrintReport(Transform(ent).Coordinates, existingId, existingReagent, category: "Synthesis Simulations", simulatorReport: true);
+            _generator.PrintReport(Transform(ent).Coordinates, existingId, existingReagent, simulatorReport: true);
             StartPrintingAnimation(ent);
             _audio.PlayPvs(comp.FinishSound, ent);
             return;
@@ -92,31 +92,27 @@ public sealed class RMCSynthesisSimulatorSystem : SharedRMCSynthesisSimulatorSys
         var hasExistingRecipe = _generator.TryGetRecipeReactants(targetId.Id, out var existingReactants);
         var candidateCount = hasExistingRecipe ? comp.RecipeCandidateCount : 1;
 
-        var candidates = new List<List<RecipeCandidateIngredient>>();
+        var candidates = new List<List<(string Id, int Amount, bool Catalyst)>>();
         var newIngredientIds = new List<string?>();
 
         for (var i = 0; i < candidateCount; i++)
         {
-            var ingredients = new List<(string Id, int Amount, bool Catalyst)>();
-            string? newIngredientId = null;
-
             // retries to avoid rolling a duplicate rcipe
             for (var attempt = 0; attempt < comp.RecipeRollAttempts; attempt++)
             {
-                (ingredients, newIngredientId) = _generator.RollRecipeCandidate(targetId, tier, targetId.Id);
+                if (!_generator.TryRollRecipeCandidate(targetId, tier, out var ingredients, out var newIngredientId))
+                    continue;
 
-                var duplicatesExisting = hasExistingRecipe && _generator.IsDuplicateRecipe(ingredients, existingReactants);
-                var duplicatesCandidate = candidates.Any(c => _generator.IsDuplicateRecipe(ingredients, c.Select(x => (x.Id, x.Amount, x.Catalyst)).ToList()));
+                if (hasExistingRecipe && _generator.IsDuplicateRecipe(ingredients, existingReactants))
+                    continue;
 
-                if (!duplicatesExisting && !duplicatesCandidate)
-                    break;
+                if (candidates.Any(c => _generator.IsDuplicateRecipe(ingredients, c)))
+                    continue;
+
+                candidates.Add(ingredients);
+                newIngredientIds.Add(newIngredientId);
+                break;
             }
-
-            if (ingredients.Count == 0)
-                continue;
-
-            candidates.Add(ingredients.Select(c => new RecipeCandidateIngredient { Id = c.Id, Amount = c.Amount, Catalyst = c.Catalyst }).ToList());
-            newIngredientIds.Add(newIngredientId);
         }
 
         if (candidates.Count == 0)
@@ -135,7 +131,9 @@ public sealed class RMCSynthesisSimulatorSystem : SharedRMCSynthesisSimulatorSys
         comp.PendingProperties = properties.Select(p => new ChemReportProperty { PropertyId = p.Property.ID, Level = p.Level }).ToList();
         comp.PendingOverdose = overdose;
         comp.PendingTier = tier;
-        comp.RecipeCandidates = candidates;
+        comp.RecipeCandidates = candidates
+            .Select(c => c.Select(x => new RecipeCandidateIngredient { Id = x.Id, Amount = x.Amount, Catalyst = x.Catalyst }).ToList())
+            .ToList();
         comp.PendingNewIngredientIds = newIngredientIds;
         comp.PendingSignature = signature;
         Dirty(ent);
@@ -173,7 +171,7 @@ public sealed class RMCSynthesisSimulatorSystem : SharedRMCSynthesisSimulatorSys
             return;
         }
 
-        if (!_research.TrySpendCredits(GetCost(ent)))
+        if (!_research.TrySpendCredits(comp.PendingCost))
         {
             comp.RecipeCandidates = null;
             comp.PendingProperties = null;

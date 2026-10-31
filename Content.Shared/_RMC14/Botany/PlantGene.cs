@@ -208,10 +208,13 @@ public sealed class PlantGene
 
                 // Penalty for splicing in foreign chemistry (-15% vigour stats)
                 var growth = GetOrCreate(snapshot, () => new RMCPlantGrowthComponent());
-                growth.Endurance = MathF.Max(1f, growth.Endurance * 0.85f);
-                growth.Lifespan = MathF.Max(1f, growth.Lifespan * 0.85f);
+                if (growth.Endurance > 0)
+                    growth.Endurance = MathF.Max(1f, MathF.Floor(growth.Endurance * 0.85f));
+                if (growth.Lifespan > 0)
+                    growth.Lifespan = MathF.Max(1f, MathF.Floor(growth.Lifespan * 0.85f));
                 var harvestYield = GetOrCreate(snapshot, () => new RMCPlantHarvestComponent());
-                harvestYield.Yield = Math.Max(1, (int)(harvestYield.Yield * 0.85f));
+                if (harvestYield.Yield > 0)
+                    harvestYield.Yield = Math.Max(1, (int) MathF.Floor(harvestYield.Yield * 0.85f));
                 break;
 
             case PlantGeneType.Consumption:

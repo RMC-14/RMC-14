@@ -48,8 +48,6 @@ public sealed class GeneEditorBui(EntityUid owner, Enum uiKey) : BoundUserInterf
 
         if (seed == null)
             window.SetSeedBanner("EMPTY", "No seed packet loaded.", RMCMachineUiStyle.NoticeColor);
-        else if (comp.SeedStats is { Viable: false })
-            window.SetSeedBanner("NON-VIABLE", shortName, RMCMachineUiStyle.NoticeDangerColor);
         else if (editRatio >= 1f)
             window.SetSeedBanner("MAXED", shortName, RMCMachineUiStyle.NoticeWarningColor);
         else
@@ -83,7 +81,6 @@ public sealed class GeneEditorBui(EntityUid owner, Enum uiKey) : BoundUserInterf
                 ("Production", $"{stats.Production:0.#}", Color.White),
                 ("Harvest", BotanyUiStyle.GetHarvestLabel(stats.HarvestRepeat), Color.White),
                 ("Seedless", stats.Seedless ? "Yes" : "No", Color.White),
-                ("Viable", stats.Viable ? "Yes" : "No", stats.Viable ? RMCMachineUiStyle.GoodColor : RMCMachineUiStyle.BadColor),
             });
         }
         else

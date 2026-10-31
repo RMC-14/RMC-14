@@ -86,7 +86,6 @@ public sealed class RMCPlantAnalyzerBui(EntityUid owner, Enum uiKey) : BoundUser
                 ("Production", $"{comp.Production:0.#}", NeutralColor),
                 ("Harvest", BotanyUiStyle.GetHarvestLabel(comp.HarvestRepeat), NeutralColor),
                 ("Seedless", comp.Seedless ? "Yes" : "No", NeutralColor),
-                ("Viable", comp.Viable ? "Yes" : "No", comp.Viable ? GoodColor : BadColor),
                 ("Temperature", $"{comp.MinHeat:0.#}–{comp.MaxHeat:0.#} K", NeutralColor),
                 ("Pressure", $"{comp.MinPressure:0.#}–{comp.MaxPressure:0.#} kPa", NeutralColor),
             });
@@ -124,9 +123,7 @@ public sealed class RMCPlantAnalyzerBui(EntityUid owner, Enum uiKey) : BoundUser
 
         if (!comp.IsTray)
         {
-            return comp.Viable
-                ? ("SEEDS", comp.PlantName, InfoColor)
-                : ("NON-VIABLE", comp.PlantName, CriticalColor);
+            return ("SEEDS", comp.PlantName, InfoColor);
         }
 
         var healthRatio = comp.Endurance > 0f ? comp.Health / comp.Endurance : 1f;

@@ -86,9 +86,6 @@ public sealed partial class RMCPlantAnalyzerComponent : Component
     public bool Seedless;
 
     [AutoNetworkedField]
-    public bool Viable = true;
-
-    [AutoNetworkedField]
     public float WaterLevel;
 
     [AutoNetworkedField]

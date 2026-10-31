@@ -226,7 +226,6 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
             solution.GetTotalPrototypeQuantity(PolytrinicAcid) >= SpecialShardThreshold ||
             solution.GetTotalPrototypeQuantity(NeurotoxinPlasma) >= SpecialShardThreshold)
         {
-            // TODO RMC14: cm13 swaps to incendiary, hornet or neuro shrapnel (max shards halved) - RMC has none of those projectiles
             return;
         }
 

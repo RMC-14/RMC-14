@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Power;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -21,8 +22,12 @@ public sealed class LysisCentrifugeSystem : EntitySystem
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
+    private readonly Dictionary<PlantGeneType, string> _obfuscationCodes = new();
+
     public override void Initialize()
     {
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+
         SubscribeLocalEvent<LysisCentrifugeComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<LysisCentrifugeComponent, InteractUsingEvent>(OnInteractUsing, before: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<LysisCentrifugeComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
@@ -40,13 +45,32 @@ public sealed class LysisCentrifugeSystem : EntitySystem
         });
     }
 
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _obfuscationCodes.Clear();
+    }
+
     private void OnMapInit(Entity<LysisCentrifugeComponent> ent, ref MapInitEvent args)
     {
-        foreach (var type in Enum.GetValues<PlantGeneType>())
+        if (_net.IsClient)
+            return;
+
+        if (_obfuscationCodes.Count == 0)
         {
-            ent.Comp.ObfuscationCodes[type] = $"{_random.Next(0, 256):X2} {_random.Next(0, 256):X2}";
+            var used = new HashSet<string>();
+            foreach (var type in Enum.GetValues<PlantGeneType>())
+            {
+                string code;
+                do
+                {
+                    code = $"{_random.Next(0, 256):X2} {_random.Next(0, 256):X2}";
+                } while (!used.Add(code));
+
+                _obfuscationCodes[type] = code;
+            }
         }
 
+        ent.Comp.ObfuscationCodes = new Dictionary<PlantGeneType, string>(_obfuscationCodes);
         Dirty(ent);
     }
 
@@ -76,7 +100,13 @@ public sealed class LysisCentrifugeSystem : EntitySystem
             return;
         }
 
-        if (_net.IsServer && GetServerInsertError(args.Used) is { } error)
+        if (_net.IsClient)
+        {
+            args.Handled = true;
+            return;
+        }
+
+        if (GetServerInsertError(args.Used) is { } error)
         {
             _popup.PopupCursor(error, args.User);
             args.Handled = true;
@@ -181,23 +211,22 @@ public sealed class LysisCentrifugeSystem : EntitySystem
             return;
         }
 
-        var gene = PlantGene.FromSnapshot(snapshot, args.GeneType);
-        gene.DisplayLabel = comp.ObfuscationCodes.GetValueOrDefault(args.GeneType);
-        disc.Genes.Add(gene);
-        disc.GeneSource ??= comp.GenomeName;
-
         comp.Degradation += _random.Next(comp.DegradationMin, comp.DegradationMax + 1);
         if (comp.Degradation >= comp.MaxDegradation)
         {
             _audio.PlayPvs(comp.FailSound, ent);
             _popup.PopupCursor("The genetic buffer degraded beyond use and was wiped.", args.Actor, PopupType.MediumCaution);
             WipeBuffer(ent);
-        }
-        else
-        {
-            _audio.PlayPvs(comp.ExtractSound, ent);
+            Dirty(ent);
+            return;
         }
 
+        var gene = PlantGene.FromSnapshot(snapshot, args.GeneType);
+        gene.DisplayLabel = comp.ObfuscationCodes.GetValueOrDefault(args.GeneType);
+        disc.Genes.Add(gene);
+        disc.GeneSource ??= comp.GenomeName;
+
+        _audio.PlayPvs(comp.ExtractSound, ent);
         Dirty(ent);
         _itemSlots.TryEjectToHands(ent, discSlot, args.Actor);
     }

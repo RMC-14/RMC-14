@@ -3,6 +3,7 @@ using Content.Server.Ghost.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Ghost;
@@ -33,6 +34,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
@@ -165,10 +167,21 @@ public sealed class XenoEggRoleSystem : EntitySystem
 
         return true;
     }
+    public bool HiveAllowsPlayerParasites(EntityUid spawner)
+    {
+        return _hive.GetHive(spawner) is not { } hive || hive.Comp.AllowPlayerParasites;
+    }
+
     private bool SharedChecks(EntityUid ent, EntityUid user)
     {
         //TODO RMC14 parasite bans should be checked here
         _ui.CloseUi(ent, XenoParasiteGhostUI.Key);
+
+        if (_hive.GetHive(ent) is { } hive && !hive.Comp.AllowPlayerParasites)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-hive-cannot-support", ("hive", hive.Owner)), user, user, PopupType.MediumCaution);
+            return false;
+        }
 
         return UserCheck(user);
     }

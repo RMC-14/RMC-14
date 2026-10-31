@@ -82,6 +82,15 @@ public sealed partial class RMCChemistryResearchComponent : Component
     public TimeSpan AnnounceCooldown = TimeSpan.FromMinutes(4);
 
     [DataField, AutoNetworkedField]
+    public int AnnounceCharacterLimit = 400;
+
+    [DataField, AutoNetworkedField]
+    public int CategoryCharacterLimit = 50;
+
+    [DataField, AutoNetworkedField]
+    public string DefaultScanCategory = "Misc.";
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? NotifySound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
 
     [DataField, AutoNetworkedField]
@@ -124,4 +133,7 @@ public sealed partial class DocumentEntry
 
     [DataField]
     public TimeSpan Time;
+
+    [DataField]
+    public bool ManualScan;
 }

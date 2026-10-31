@@ -144,3 +144,5 @@ plant-acid-blood-sizzle = { CAPITALIZE($name) } sizzles and pops!
 plant-acid-blood-sputter = { CAPITALIZE($name) }'s sizzling sputters out, you smell { $chem }!
 plant-acid-blood-royal-new-chem = { CAPITALIZE($name) } flashes an eerie green, you smell { $chem }!
 plant-blighting-sway = { CAPITALIZE($name) } bristles and sways towards you!
+
+rmc-botany-seed-modified-name = modified {$seedName}

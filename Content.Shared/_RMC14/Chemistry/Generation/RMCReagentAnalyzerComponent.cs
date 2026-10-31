@@ -31,6 +31,12 @@ public sealed partial class RMCReagentAnalyzerComponent : Component
     public SoundSpecifier ProcessSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/fax.ogg");
 
     [DataField]
+    public TimeSpan ProcessSoundLead = TimeSpan.FromSeconds(4);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan? ProcessSoundTime;
+
+    [DataField]
     public SoundSpecifier FinishSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
 
     [DataField]

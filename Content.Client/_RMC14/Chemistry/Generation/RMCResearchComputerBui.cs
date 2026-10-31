@@ -1,9 +1,11 @@
 using System.Linq;
 using Content.Client._RMC14.UserInterface;
+using Content.Client.Paper.UI;
 using Content.Client.Resources;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.UserInterface;
+using Content.Shared.Paper;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
@@ -24,6 +26,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
 
     private RMCResearchComputerWindow? _window;
     private ConfirmationWindow? _confirm;
+    private PaperWindow? _paper;
 
     private enum SortColumn
     {
@@ -187,6 +190,36 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
         confirm.OpenCentered();
     }
 
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+        if (message is not RMCResearchComputerDocumentContentBuiMsg document)
+            return;
+
+        _paper?.Close();
+
+        var paper = new PaperWindow();
+        _paper = paper;
+        paper.BackgroundColor = document.Color;
+        paper.BorderColor = document.Color;
+        paper.BorderThickness = new Thickness(document.Thickness);
+        paper.DefaultTextColor = document.TextColor;
+
+        if (_prototype.TryIndex(document.Prototype, out var proto) &&
+            proto.TryGetComponent(out PaperVisualsComponent? visuals, EntMan.ComponentFactory))
+        {
+            paper.InitVisuals(Owner, visuals);
+        }
+
+        paper.Populate(new PaperComponent.PaperBoundUserInterfaceState(document.Content, document.StampedBy));
+        paper.OnClose += () =>
+        {
+            if (_paper == paper)
+                _paper = null;
+        };
+        paper.OpenCentered();
+    }
+
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
@@ -195,6 +228,8 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
 
         _confirm?.Close();
         _confirm = null;
+        _paper?.Close();
+        _paper = null;
     }
 
     private void PopulateContracts(RMCChemistryResearchComponent research)
@@ -261,9 +296,14 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
 
         if (hideOld)
         {
-            var seen = new HashSet<string>();
-            flattened = flattened.Where(x => seen.Add(x.Entry.Title)).ToList();
+            var newest = flattened
+                .GroupBy(x => (x.Category, GetCompoundName(x.Entry.Title)))
+                .Select(g => g.Max(x => x.Entry.Id))
+                .ToHashSet();
+            flattened = flattened.Where(x => newest.Contains(x.Entry.Id)).ToList();
         }
+
+        var mainTerminal = EntMan.TryGetComponent(Owner, out RMCResearchComputerComponent? computer) && computer.MainTerminal;
 
         emptyLabel.Visible = flattened.Count == 0;
 
@@ -289,6 +329,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
             row.Id = entry.Id;
             row.Published = rowPublished;
             row.PublishButton.Text = rowPublished ? "Unpublish" : "Publish";
+            row.PublishButton.Visible = mainTerminal;
             row.OnRead = id => SendMessage(new RMCResearchComputerReadDocumentBuiMsg(id));
             row.OnPrint = id => SendMessage(new RMCResearchComputerPrintDocumentBuiMsg(id));
             row.OnPublishToggle = (id, published) => SendMessage(published

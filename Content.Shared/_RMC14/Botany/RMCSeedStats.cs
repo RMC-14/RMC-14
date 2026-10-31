@@ -11,5 +11,4 @@ public readonly record struct RMCSeedStats(
     int Yield,
     HarvestType HarvestRepeat,
     bool Seedless,
-    float Potency,
-    bool Viable);
+    float Potency);

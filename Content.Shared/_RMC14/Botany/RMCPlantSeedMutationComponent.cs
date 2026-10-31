@@ -4,4 +4,6 @@ namespace Content.Shared._RMC14.Botany;
 public sealed partial class RMCPlantSeedMutationComponent : Component
 {
     public List<IComponent>? MutatedComponents;
+
+    public int GeneEditCount;
 }

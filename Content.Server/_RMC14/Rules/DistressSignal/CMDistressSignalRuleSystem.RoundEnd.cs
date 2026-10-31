@@ -16,16 +16,20 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Preferences;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
 
 public sealed partial class CMDistressSignalRuleSystem
 {
+    private static readonly ProtoId<NpcFactionPrototype> MarineFaction = "UNMC";
+
     private const int LastMarineEquipmentCooldownHours = 2;
 
     /// <summary>
@@ -97,7 +101,7 @@ public sealed partial class CMDistressSignalRuleSystem
         var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, MobStateComponent, TransformComponent>();
         while (xenos.MoveNext(out var xenoId, out _, out var xeno, out var mobState, out var xform))
         {
-            if (!xeno.ContributesToVictory)
+            if (!xeno.ContributesToVictory || !CanDelayRoundEnd(xenoId))
                 continue;
 
             if (HasComp<ThunderdomeMapComponent>(xform.MapUid) ||
@@ -214,9 +218,15 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
+    private bool CanDelayRoundEnd(EntityUid xeno)
+    {
+        return _hive.GetHive(xeno) is not { } hive ||
+               hive.Comp.CanDelayRoundEnd && !_hive.IsFactionAllied(hive, MarineFaction);
+    }
+
     private void CheckQueenDeath(CMDistressSignalRuleComponent distress)
     {
-        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1, e => CanDelayRoundEnd(e)))
         {
             distress.QueenDiedCheck = null;
             return;

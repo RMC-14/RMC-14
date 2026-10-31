@@ -350,13 +350,15 @@ public sealed class RMCPlantMutationSystem : EntitySystem
 
         var oldMutation = CompOrNull<RMCPlantMutationComponent>(plant);
         var slots = oldMutation != null ? new Dictionary<string, float>(oldMutation.Slots) : new Dictionary<string, float>();
-        var geneEditCount = oldMutation?.GeneEditCount ?? 0;
         var oldChemicals = CompOrNull<RMCPlantChemicalsComponent>(plant);
         var potencyCounter = oldChemicals?.PotencyCounter ?? 0f;
         var chemAddCounter = oldChemicals?.ChemAddCounter ?? 0f;
         var repeatHarvestCounter = CompOrNull<RMCPlantHarvestComponent>(plant)?.RepeatHarvestCounter ?? 0f;
 
         _plantSeed.ApplyMutatedComponents(plant, _plantSeed.SnapshotPrototype(proto));
+
+        plantComp.Species = proto.ID;
+        Dirty(plant, plantComp);
 
         if (proto.TryGetComponent<RMCPlantComponent>(out var tempPlant, EntityManager.ComponentFactory))
             _plantTray.SetIdentity((plant, plantComp), tempPlant.Name, tempPlant.Noun, tempPlant.DisplayName, tempPlant.Mysterious);
@@ -367,7 +369,6 @@ public sealed class RMCPlantMutationSystem : EntitySystem
                 slots[Slot.MutateSpecies] = 0f;
 
             mutation.Slots = slots;
-            mutation.GeneEditCount = geneEditCount;
             Dirty(plant, mutation);
         }
 

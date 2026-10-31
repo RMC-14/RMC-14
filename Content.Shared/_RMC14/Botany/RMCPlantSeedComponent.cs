@@ -9,6 +9,12 @@ public sealed partial class RMCPlantSeedComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId? PlantPrototype;
 
+    [DataField, AutoNetworkedField]
+    public string? Name;
+
+    [DataField, AutoNetworkedField]
+    public string? Noun;
+
     [DataField]
     public float? HealthOverride;
 }

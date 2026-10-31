@@ -91,7 +91,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         }
 
         var products = new List<EntityUid>();
-        var plantProtoId = MetaData(plant).EntityPrototype?.ID;
+        var plantProtoId = _plantSeed.GetSpecies(plant);
         var plantComp = Comp<RMCPlantComponent>(plant);
         var chemicals = Comp<RMCPlantChemicalsComponent>(plant);
 

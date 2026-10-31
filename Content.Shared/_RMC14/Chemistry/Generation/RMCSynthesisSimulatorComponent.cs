@@ -51,8 +51,14 @@ public sealed partial class RMCSynthesisSimulatorComponent : Component
     [DataField]
     public string? PendingSignature;
 
+    [DataField, AutoNetworkedField]
+    public int PendingCost;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan FinishAt;
+
+    [DataField]
+    public TimeSpan? UnpoweredRemaining;
 
     [DataField, AutoNetworkedField]
     public TimeSpan ProcessDuration = TimeSpan.FromSeconds(6);

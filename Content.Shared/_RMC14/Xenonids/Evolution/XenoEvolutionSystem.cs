@@ -152,7 +152,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
 
-        var state = new XenoEvolveBuiState(LackingOvipositor());
+        var state = new XenoEvolveBuiState(LackingOvipositor(xeno));
         _ui.SetUiState(xeno.Owner, XenoEvolutionUIKey.Key, state);
     }
 
@@ -320,11 +320,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var buiState = new XenoEvolveBuiState(LackingOvipositor());
         var xenos = EntityQueryEnumerator<ActorComponent, XenoEvolutionComponent>();
         while (xenos.MoveNext(out var uid, out _, out _))
         {
-            _ui.SetUiState(uid, XenoEvolutionUIKey.Key, buiState);
+            _ui.SetUiState(uid, XenoEvolutionUIKey.Key, new XenoEvolveBuiState(LackingOvipositor(uid)));
         }
     }
 
@@ -333,7 +332,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var buiState = new XenoEvolveBuiState(LackingOvipositor());
         var xenos = EntityQueryEnumerator<XenoEvolutionComponent>();
         while (xenos.MoveNext(out var uid, out var comp))
         {
@@ -344,7 +342,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
 
             if (HasComp<ActorComponent>(uid))
-                _ui.SetUiState(uid, XenoEvolutionUIKey.Key, buiState);
+                _ui.SetUiState(uid, XenoEvolutionUIKey.Key, new XenoEvolveBuiState(LackingOvipositor(uid)));
         }
     }
 
@@ -353,12 +351,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var buiState = new XenoEvolveBuiState(LackingOvipositor());
         var xenos = EntityQueryEnumerator<ActorComponent, XenoEvolutionComponent, HiveMemberComponent>();
         while (xenos.MoveNext(out var uid, out _, out _, out var member))
         {
             if (member.Hive == ent.Owner)
-                _ui.SetUiState(uid, XenoEvolutionUIKey.Key, buiState);
+                _ui.SetUiState(uid, XenoEvolutionUIKey.Key, new XenoEvolveBuiState(LackingOvipositor(uid)));
         }
     }
 
@@ -402,7 +399,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true)
     {
-        if (HasComp<XenoEvolutionLockedComponent>(xeno.Owner))
+        if (HasComp<XenoEvolutionLockedComponent>(xeno.Owner) ||
+            _xenoHive.GetHive(xeno.Owner) is { Comp.EvolutionLocked: true } &&
+            !(TryComp(xeno, out XenoComponent? xenoComp) && xenoComp.Tier == 0))
         {
             if (doPopup)
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-locked"), xeno, xeno, PopupType.MediumCaution);
@@ -442,9 +441,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         if (prototype.HasComponent<XenoEvolutionGranterComponent>(_compFactory) &&
-            _xenoHive.GetHive(xeno.Owner) is { } evolveHive &&
-            TryComp(evolveHive.Owner, out HiveSlotComponent? evolveSlot) &&
-            evolveSlot.Position == HiveSlots.Renegade)
+            _xenoHive.GetHive(xeno.Owner) is { Comp.AllowQueenEvolution: false })
         {
             if (doPopup)
                 _popup.PopupEntity("We have no Queen to answer to anymore. We cannot evolve into one.", xeno, xeno, PopupType.MediumCaution);
@@ -461,7 +458,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return false;
         }
 
-        if (!xeno.Comp.CanEvolveWithoutGranter && !HiveHasGranter(xeno.Owner))
+        if (!xeno.Comp.CanEvolveWithoutGranter && !HiveHasGranter(xeno.Owner) && !HiveAllowsNoQueenEvolution(xeno.Owner))
         {
             if (doPopup)
             {
@@ -680,9 +677,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             e => HasComp<XenoAttachedOvipositorComponent>(e) && _xenoHive.IsMember(e.Owner, hive));
     }
 
-    public bool LackingOvipositor()
+    public bool LackingOvipositor(EntityUid xeno)
     {
-        return NeedsOvipositor() && !HasOvipositor();
+        return NeedsOvipositor() && !HiveAllowsNoQueenEvolution(xeno) && !HiveHasOvipositor(xeno);
     }
 
     private bool MarinesHaveLanded()
@@ -707,6 +704,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private bool HiveHasOvipositor(EntityUid xeno)
     {
         return _xenoHive.GetHive(xeno) is { } hive && HasOvipositor(hive.Owner);
+    }
+
+    private bool HiveAllowsNoQueenEvolution(EntityUid xeno)
+    {
+        return _xenoHive.GetHive(xeno) is { } hive && hive.Comp.AllowNoQueenEvolution;
     }
 
     private bool HiveHasLivingQueen(EntityUid xeno)
@@ -770,6 +772,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)
     {
+        if (HasComp<XenoEvolutionLockedComponent>(xeno) ||
+            _xenoHive.GetHive(xeno.Owner) is { Comp.EvolutionLocked: true })
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-failed-locked"), xeno, xeno, PopupType.MediumCaution);
+            return;
+        }
+
         if (damagedCheck && !DamagedCheckPopup(xeno))
             return;
 
@@ -904,12 +913,19 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 _audio.PlayEntity(comp.EvolutionReadySound, uid, uid);
                 continue;
             }
-            var points = (_earlyEvoBoostBefore > _gameTicker.RoundDuration()) ? comp.EarlyPointsPerSecond : comp.PointsPerSecond;
+            var hive = _xenoHive.GetHive(uid);
+            var points = hive?.Comp.EvolutionPointsPerSecond ??
+                         (_earlyEvoBoostBefore > _gameTicker.RoundDuration() ? comp.EarlyPointsPerSecond : comp.PointsPerSecond);
             var gain = evoOverride ?? points + evoBonus;
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
-                if (needsOvipositor && comp.RequiresGranter && !HiveHasOvipositor(uid))
+                if (needsOvipositor &&
+                    comp.RequiresGranter &&
+                    hive?.Comp.AllowNoQueenEvolution != true &&
+                    !HiveHasOvipositor(uid))
+                {
                     continue;
+                }
 
                 SetPoints((uid, comp), comp.Points + gain);
             }

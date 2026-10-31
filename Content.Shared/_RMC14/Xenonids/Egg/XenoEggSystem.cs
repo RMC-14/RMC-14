@@ -429,7 +429,7 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnXenoEggStepTriggerAttempt(Entity<XenoEggComponent> egg, ref StepTriggerAttemptEvent args)
     {
-        if (CanTrigger(args.Tripper))
+        if (CanTrigger(egg, args.Tripper))
             args.Continue = true;
     }
 
@@ -466,12 +466,13 @@ public sealed class XenoEggSystem : EntitySystem
         args.Verbs.Add(parasiteVerb);
     }
 
-    private bool CanTrigger(EntityUid user)
+    private bool CanTrigger(EntityUid egg, EntityUid user)
     {
         return TryComp<InfectableComponent>(user, out var infected)
                && !infected.BeingInfected
                && !_mobState.IsDead(user)
-               && !HasComp<VictimInfectedComponent>(user);
+               && !HasComp<VictimInfectedComponent>(user)
+               && !_hive.FromSameHiveOrAlly(egg, user);
     }
 
     public bool Open(Entity<XenoEggComponent> egg, EntityUid? user, out EntityUid? spawned)
@@ -666,7 +667,7 @@ public sealed class XenoEggSystem : EntitySystem
     private bool TryTrigger(Entity<XenoEggComponent> egg, EntityUid tripper)
     {
         if (egg.Comp.State != XenoEggState.Grown ||
-            !CanTrigger(tripper))
+            !CanTrigger(egg, tripper))
         {
             return false;
         }

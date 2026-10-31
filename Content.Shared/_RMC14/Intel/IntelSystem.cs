@@ -1915,14 +1915,14 @@ public sealed class IntelSystem : EntitySystem
     public void AddPendingChemical(string reagentId, string name)
     {
         var tree = EnsureTechTree();
-        tree.Comp.Tree.PendingChemicals[reagentId] = name;
+        tree.Comp.Tree.Chemicals[reagentId] = name;
         Dirty(tree);
         UpdateTree(tree);
     }
 
-    public void RemovePendingChemical(string reagentId)
+    public void MarkChemicalAnalyzed(string reagentId)
     {
-        if (!TryGetTechTree(out var tree) || !tree.Value.Comp.Tree.PendingChemicals.Remove(reagentId))
+        if (!TryGetTechTree(out var tree) || !tree.Value.Comp.Tree.AnalyzedChemicals.Add(reagentId))
             return;
 
         Dirty(tree.Value);

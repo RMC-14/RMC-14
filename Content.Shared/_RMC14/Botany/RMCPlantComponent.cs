@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Botany;
 
@@ -64,6 +65,9 @@ public sealed partial class RMCPlantComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Mysterious;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? Species;
 
     [DataField]
     public bool UpdateSpriteAfterUpdate;

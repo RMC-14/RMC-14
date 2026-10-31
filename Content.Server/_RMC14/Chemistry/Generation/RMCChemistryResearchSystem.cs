@@ -1,13 +1,16 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking.Events;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Intel;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
@@ -15,19 +18,20 @@ using Content.Shared.Radio;
 using Robust.Server.GameStates;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Chemistry.Generation;
 
 public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly RMCChemicalGeneratorSystem _generator = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -47,8 +51,6 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
     private static readonly EntProtoId<RMCChemistryResearchComponent> ResearchProto = "RMCChemistryResearch";
     private static readonly EntProtoId ContractNotesProto = "RMCChemContractNotes";
 
-    private const string ManualScansCategory = "Manual Scans";
-
     private readonly Dictionary<int, ContractStats> _contractStats = new();
 
     public override void Initialize()
@@ -56,7 +58,6 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         base.Initialize();
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeLocalEvent<IntelChemSynthesisPaperComponent, MapInitEvent>(OnSynthesisPaperMapInit);
-        SubscribeLocalEvent<RMCResearchDocumentViewComponent, BoundUIClosedEvent>(OnDocumentViewClosed);
     }
 
     private void OnRoundStarting(RoundStartingEvent ev)
@@ -81,8 +82,6 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
 
     public override void Update(float frameTime)
     {
-        OpenPendingDocumentViews();
-
         if (!TryGetResearch(out var research))
             return;
 
@@ -131,7 +130,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         Dirty(research);
 
         _intel.AddAnalyzedChemical(points);
-        _intel.RemovePendingChemical(reagentId);
+        _intel.MarkChemicalAnalyzed(reagentId);
         RefreshArchivedReports();
     }
 
@@ -483,7 +482,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         return _rmcReagent.TryIndex(reagentId, out var reagent) ? reagent.LocalizedName : reagentId;
     }
 
-    public void SaveDocument(string category, EntityUid report, string title)
+    public void SaveDocument(string category, EntityUid report, string title, bool manualScan = false)
     {
         if (CopyDocument(report, null) is not { } archived)
             return;
@@ -498,6 +497,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
             Report = GetNetEntity(archived),
             Title = title,
             Time = _timing.CurTime,
+            ManualScan = manualScan,
         });
         Dirty(research);
     }
@@ -514,7 +514,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         if (published.Any(e => e.Id == id))
             return false;
 
-        published.Add(new DocumentEntry { Id = entry.Id, Report = entry.Report, Title = entry.Title, Time = entry.Time });
+        published.Add(new DocumentEntry { Id = entry.Id, Report = entry.Report, Title = entry.Title, Time = entry.Time, ManualScan = entry.ManualScan });
         Dirty(research);
         return true;
     }
@@ -586,14 +586,11 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
             return;
 
         var renamed = new Dictionary<int, string>();
-        foreach (var (category, list) in research.Value.Comp.Documents)
+        foreach (var list in research.Value.Comp.Documents.Values)
         {
-            if (category == ManualScansCategory)
-                continue;
-
             foreach (var entry in list)
             {
-                if (GetEntity(entry.Report) is not { Valid: true } report)
+                if (entry.ManualScan || GetEntity(entry.Report) is not { Valid: true } report)
                     continue;
 
                 var oldName = Name(report);
@@ -623,39 +620,59 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         Dirty(research.Value);
     }
 
-    public void AnnounceDocument(EntityUid computer, int id, EntityUid actor)
+    public void RequestAnnouncement(EntityUid computer, int id, EntityUid actor)
     {
-        if (!TryGetDocument(id, published: true, out _, out var entry))
-        {
-            _popup.PopupEntity("The document must be published to announce it.", computer, actor);
+        if (!TryGetAnnouncementName(computer, id, actor, out var name))
             return;
-        }
 
         var research = EnsureResearch();
-        if (_timing.CurTime < research.Comp.NextAnnounceAt)
-        {
-            _popup.PopupEntity("The announcement system is still recharging.", computer, actor);
+        var minutes = (int) research.Comp.AnnounceCooldown.TotalMinutes;
+        _dialog.OpenInput(
+            computer,
+            actor,
+            $"Type a message you want to announce to medical staff regarding {name}. Only personnel on the medical channel will hear it. There is a {minutes} minute cooldown to announce again.",
+            new RMCResearchComputerAnnounceInputEvent(GetNetEntity(actor), id),
+            largeInput: true,
+            characterLimit: research.Comp.AnnounceCharacterLimit);
+    }
+
+    public void AnnounceDocument(EntityUid computer, int id, EntityUid actor, string text)
+    {
+        text = text.Trim();
+        if (text.Length == 0 || !TryGetAnnouncementName(computer, id, actor, out var name))
             return;
-        }
 
-        if (GetEntity(entry.Report) is not { Valid: true } report ||
-            !TryComp(report, out RMCChemResearchReportComponent? reportComp) ||
-            reportComp.ReagentId is not { } reagentId)
-        {
-            return;
-        }
-
-        var name = GetReagentName(reagentId);
-        var properties = reportComp.Properties.Count > 0
-            ? string.Join(", ", reportComp.Properties.Select(p => $"{p.PropertyId} {p.Level}"))
-            : "none detected";
-
-        var message = $"Chemical Advisory: {name} has been identified. Notable properties: {properties}.";
-        _radio.SendRadioMessage(computer, message, MedicalAdvisoryChannel, computer);
+        _radio.SendRadioMessage(computer, $"Chemical Advisory: {name}. {text}", MedicalAdvisoryChannel, computer);
         _popup.PopupEntity("The terminal transmits a chemical advisory to the medical channel.", computer, actor);
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(actor):player} sent a chemical advisory announcement about {name}: {text}");
+        _chat.SendAdminAlert(actor, $"made a chemical announcement. Contents: ({FormattedMessage.EscapeText(text)})");
 
+        var research = EnsureResearch();
         research.Comp.NextAnnounceAt = _timing.CurTime + research.Comp.AnnounceCooldown;
         Dirty(research);
+    }
+
+    private bool TryGetAnnouncementName(EntityUid computer, int id, EntityUid actor, [NotNullWhen(true)] out string? name)
+    {
+        name = null;
+        if (!TryGetDocument(id, published: true, out _, out var entry))
+        {
+            _popup.PopupEntity("The document must be published to announce information to medical staff. Ask the Chief Medical Officer to publish it.", computer, actor);
+            return false;
+        }
+
+        if (_timing.CurTime < EnsureResearch().Comp.NextAnnounceAt)
+        {
+            _popup.PopupEntity("You can't announce about chemicals that quickly!", computer, actor);
+            return false;
+        }
+
+        name = GetEntity(entry.Report) is { Valid: true } report &&
+               TryComp(report, out RMCChemResearchReportComponent? reportComp) &&
+               reportComp.ReagentId is { } reagentId
+            ? GetReagentName(reagentId)
+            : GetCompoundName(entry.Title);
+        return true;
     }
 
     public bool TryPrintDocument(int id, EntityCoordinates spawnAt)
@@ -664,58 +681,31 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
                CopyDocument(original.Value, spawnAt) != null;
     }
 
-    public bool TryOpenReadingCopy(int id, EntityCoordinates spawnAt, EntityUid viewer)
+    public bool TrySendDocumentContent(EntityUid computer, int id, EntityUid actor)
     {
-        if (!TryGetArchivedReport(id, out var original) ||
-            CopyDocument(original.Value, spawnAt) is not { } copy)
+        if (!TryGetArchivedReport(id, out var report) ||
+            !TryComp(report, out PaperComponent? paper))
         {
             return false;
         }
 
-        var view = EnsureComp<RMCResearchDocumentViewComponent>(copy);
-        view.PendingViewer = viewer;
-        view.OpenAt = _timing.CurTime + view.OpenDelay;
+        var msg = new RMCResearchComputerDocumentContentBuiMsg(
+            MetaData(report.Value).EntityPrototype?.ID ?? ContractNotesProto.Id,
+            paper.Content,
+            new List<StampDisplayInfo>(paper.StampedBy),
+            paper.Color,
+            paper.TextColor,
+            paper.Thickness);
+        _ui.ServerSendUiMessage(computer, RMCResearchComputerUi.Key, msg, actor);
         return true;
     }
 
-    private void OpenPendingDocumentViews()
-    {
-        var time = _timing.CurTime;
-        var views = EntityQueryEnumerator<RMCResearchDocumentViewComponent>();
-        while (views.MoveNext(out var uid, out var view))
-        {
-            if (view.PendingViewer is not { } viewer || time < view.OpenAt)
-                continue;
-
-            view.PendingViewer = null;
-            if (!TerminatingOrDeleted(viewer))
-                _ui.OpenUi(uid, PaperComponent.PaperUiKey.Key, viewer);
-
-            if (!_ui.IsUiOpen(uid, PaperComponent.PaperUiKey.Key, viewer))
-                QueueDel(uid);
-        }
-    }
-
-    private void OnDocumentViewClosed(Entity<RMCResearchDocumentViewComponent> ent, ref BoundUIClosedEvent args)
-    {
-        if (!args.UiKey.Equals(PaperComponent.PaperUiKey.Key))
-            return;
-
-        if (_container.IsEntityInContainer(ent))
-        {
-            RemCompDeferred<RMCResearchDocumentViewComponent>(ent);
-            return;
-        }
-
-        QueueDel(ent);
-    }
-
-    public bool TrySaveManualScan(EntityUid item)
+    public bool TrySaveManualScan(EntityUid item, string category)
     {
         if (!HasComp<PaperComponent>(item) || MetaData(item).EntityPrototype == null)
             return false;
 
-        SaveDocument(ManualScansCategory, item, Name(item));
+        SaveDocument(category, item, Name(item), manualScan: true);
         return true;
     }
 

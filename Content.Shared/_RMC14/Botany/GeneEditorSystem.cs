@@ -15,7 +15,6 @@ public sealed class GeneEditorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCPlantSeedSystem _plantSeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -67,9 +66,15 @@ public sealed class GeneEditorSystem : EntitySystem
             return;
         }
 
-        if (_net.IsServer && IsIncompatibleSeed(args.Used))
+        if (_net.IsClient)
         {
-            _popup.PopupCursor("This seed is not compatible with our genetics technology.", args.User);
+            args.Handled = true;
+            return;
+        }
+
+        if (GetServerInsertError(args.Used) is { } error)
+        {
+            _popup.PopupCursor(error, args.User);
             args.Handled = true;
         }
     }
@@ -80,7 +85,7 @@ public sealed class GeneEditorSystem : EntitySystem
             return;
 
         if (!_power.IsPowered(ent) ||
-            _net.IsServer && IsIncompatibleSeed(args.Item))
+            _net.IsServer && GetServerInsertError(args.Item) != null)
         {
             args.Cancelled = true;
         }
@@ -136,13 +141,22 @@ public sealed class GeneEditorSystem : EntitySystem
         }
     }
 
-    private bool IsIncompatibleSeed(EntityUid item)
+    private string? GetServerInsertError(EntityUid item)
     {
+        if (TryComp(item, out FloraDataDiscComponent? disc))
+        {
+            return disc.Genes.Count == 0
+                ? "That disc does not have any gene data loaded."
+                : null;
+        }
+
         if (!HasComp<RMCPlantSeedComponent>(item))
-            return false;
+            return null;
 
         return _plantSeed.GetOrCreateSeedSnapshot(item).OfType<RMCPlantMutationComponent>().FirstOrDefault() is
-            { MutationTier: RMCPlantMutationTier.Immutable };
+            { MutationTier: RMCPlantMutationTier.Immutable }
+            ? "This seed is not compatible with our genetics technology."
+            : null;
     }
 
     private void SlotChanged(Entity<GeneEditorComponent> ent, string containerId)
@@ -165,8 +179,7 @@ public sealed class GeneEditorSystem : EntitySystem
             comp.SeedStats = null;
             if (_itemSlots.GetItemOrNull(ent, comp.SeedSlotId) is { } seed)
             {
-                var snapshot = _plantSeed.GetOrCreateSeedSnapshot(seed);
-                comp.SeedEditCount = snapshot.OfType<RMCPlantMutationComponent>().FirstOrDefault()?.GeneEditCount ?? 0;
+                comp.SeedEditCount = CompOrNull<RMCPlantSeedMutationComponent>(seed)?.GeneEditCount ?? 0;
                 comp.SeedStats = _plantSeed.GetSeedStats(seed);
             }
         }
@@ -205,53 +218,38 @@ public sealed class GeneEditorSystem : EntitySystem
             return;
         }
 
-        if (TryApplyGeneOnce(comp, disc, snapshot, mutation, out var failed))
-        {
-            _audio.PlayPvs(comp.ApplySound, ent);
-            _metaData.SetEntityName(seed, MetaData(seed).EntityName + "*");
-        }
-        else if (failed)
-        {
-            _audio.PlayPvs(comp.FailSound, ent);
-            _popup.PopupCursor("[color=red]Gene delivery failed! The seed can no longer be edited.[/color]", user);
-        }
-        else
+        var seedMutation = Comp<RMCPlantSeedMutationComponent>(seed);
+        if (seedMutation.GeneEditCount >= comp.MaxEditCount)
         {
             _popup.PopupCursor("This seed cannot accept any more gene edits.", user);
             return;
         }
 
-        if (_itemSlots.TryGetSlot(ent, comp.SeedSlotId, out var seedSlot))
-            _itemSlots.TryEjectToHands(ent, seedSlot, user);
-    }
+        if (!mutation.Modified)
+        {
+            mutation.Modified = true;
+            _plantSeed.UpdatePacketName(seed);
+        }
 
-    private bool TryApplyGeneOnce(
-        GeneEditorComponent comp,
-        FloraDataDiscComponent disc,
-        List<IComponent> snapshot,
-        RMCPlantMutationComponent mutation,
-        out bool failed)
-    {
-        failed = false;
-
-        if (mutation.GeneEditCount >= comp.MaxEditCount)
-            return false;
-
-        var failChance = Math.Clamp(mutation.GeneEditCount / 100f, 0f, 1f);
+        var failChance = Math.Clamp(seedMutation.GeneEditCount / (float) comp.MaxEditCount, 0f, 1f);
         if (_random.Prob(failChance))
         {
-            mutation.GeneEditCount = comp.MaxEditCount + 1;
-            failed = true;
-            return false;
+            seedMutation.GeneEditCount = comp.MaxEditCount + 1;
+            _audio.PlayPvs(comp.FailSound, ent);
+            _popup.PopupCursor("[color=red]Gene delivery failed! The seed can no longer be edited.[/color]", user);
         }
-
-        foreach (var gene in disc.Genes)
+        else
         {
-            gene.ApplyTo(snapshot);
-            mutation.GeneEditCount += _random.Next(comp.EditCountAddMin, comp.EditCountAddMax + 1);
+            foreach (var gene in disc.Genes)
+            {
+                gene.ApplyTo(snapshot);
+                seedMutation.GeneEditCount += _random.Next(comp.EditCountAddMin, comp.EditCountAddMax + 1);
+            }
+
+            _audio.PlayPvs(comp.ApplySound, ent);
         }
 
-        return true;
+        SlotChanged(ent, comp.SeedSlotId);
     }
 
     private void EjectAll(Entity<GeneEditorComponent> ent, EntityUid user)

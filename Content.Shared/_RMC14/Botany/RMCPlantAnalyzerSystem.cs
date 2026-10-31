@@ -221,7 +221,6 @@ public sealed class RMCPlantAnalyzerSystem : EntitySystem
         comp.ReadyToHarvest = plant?.Harvest ?? false;
         comp.Lifespan = growth?.Lifespan ?? 0f;
         comp.Production = growth?.Production ?? 0f;
-        comp.Viable = growth?.Viable ?? true;
 
         comp.Yield = harvest?.Yield ?? 0;
         comp.HarvestRepeat = harvest?.HarvestRepeat ?? HarvestType.NoRepeat;

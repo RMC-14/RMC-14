@@ -111,6 +111,9 @@ public sealed partial class FindParasiteSystem : EntitySystem
         foreach (var spawner in spawners)
         {
             var spawnerEnt = _entities.GetEntity(spawner);
+            if (!_parasiteRole.HiveAllowsPlayerParasites(spawnerEnt))
+                continue;
+
             var name = MetaData(spawnerEnt).EntityName;
             var areaName = Loc.GetString("xeno-ui-default-area-name");
             if (_areas.TryGetArea(spawnerEnt.ToCoordinates(), out var area, out _))

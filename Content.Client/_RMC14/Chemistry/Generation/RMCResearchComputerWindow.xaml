@@ -56,7 +56,7 @@
                 </BoxContainer>
 
                 <BoxContainer Name="ViewChemicalsTab" Access="Public" Orientation="Vertical">
-                    <Button Name="HideOldReportsButton" Access="Public" ToggleMode="True" Text="Hide Old Reports" Margin="0 0 0 4" Modulate="#FFFFFF" ModulateSelfOverride="#FFFFFF">
+                    <Button Name="HideOldReportsButton" Access="Public" ToggleMode="True" Pressed="True" Text="Hide Old Reports" Margin="0 0 0 4" Modulate="#FFFFFF" ModulateSelfOverride="#FFFFFF">
                         <Button.StyleBoxOverride>
                             <graphics:StyleBoxFlat BackgroundColor="#221801" BorderColor="#8A6800" BorderThickness="2" />
                         </Button.StyleBoxOverride>
