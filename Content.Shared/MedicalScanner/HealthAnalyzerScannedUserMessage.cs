@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Embeds;
+using Content.Shared._RMC14.Medical.Wounds;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.MedicalScanner;
@@ -16,8 +17,17 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
     public bool? Bleeding;
     public bool? Unrevivable;
     public readonly List<ForeignObjectEmbeddedEntry> EmbeddedObjectInBodyParts;
+    public readonly List<InternalBleedingEntry> InternalBleeds;
 
-    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, List<ForeignObjectEmbeddedEntry>? embeddedObjectInBodyParts = null)
+    public HealthAnalyzerScannedUserMessage(
+        NetEntity? targetEntity,
+        float temperature,
+        float bloodLevel,
+        bool? scanMode,
+        bool? bleeding,
+        bool? unrevivable,
+        List<ForeignObjectEmbeddedEntry>? embeddedObjectInBodyParts = null,
+        List<InternalBleedingEntry>? internalBleeds = null)
     {
         TargetEntity = targetEntity;
         Temperature = temperature;
@@ -26,6 +36,6 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
         Bleeding = bleeding;
         Unrevivable = unrevivable;
         EmbeddedObjectInBodyParts = embeddedObjectInBodyParts ?? new List<ForeignObjectEmbeddedEntry>();
+        InternalBleeds = internalBleeds ?? new List<InternalBleedingEntry>();
     }
 }
-

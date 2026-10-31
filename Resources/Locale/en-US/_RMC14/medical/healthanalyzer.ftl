@@ -22,7 +22,6 @@ rmc-health-analyzer-advice-larva-surgery = [color=purple][font="Emoji"]🐛[/fon
 
 rmc-health-analyzer-advice-brute-wounds = [color=green][font="Emoji"]🩹[/font][/color] Use trauma kits or surgical line to repair the lacerated areas.
 rmc-health-analyzer-advice-burn-wounds = [color=orange][font="Emoji"]🩹[/font][/color] Use burn kits or synth-graft to repair the burned areas.
-
 rmc-health-analyzer-advice-blood-pack = [color=red][font="Emoji"]🩸[/font][/color] Connect blood pack or IV to patient.
 rmc-health-analyzer-advice-food = [font="Emoji"]🍕[/font] Administer food or recommend that the patient eat.
 

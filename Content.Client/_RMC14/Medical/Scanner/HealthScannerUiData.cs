@@ -344,6 +344,18 @@ public sealed class HealthScannerUiData
             }
         }
 
+        if (uiState.InternalBleeds is { Count: > 0 })
+        {
+            foreach (var internalBleed in uiState.InternalBleeds)
+            {
+                AddAdvice(
+                    Loc.GetString(
+                        "health-analyzer-window-entity-internal-bleeding-text",
+                        ("bodyPart", GetBodyPartName(internalBleed.BodyPart, internalBleed.Symmetry))),
+                    window);
+            }
+        }
+
         // Wound related
         if (hasBruteWounds)
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-brute-wounds"), window);

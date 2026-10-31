@@ -1,11 +1,15 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Server.Body.Systems;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Medical.Stasis;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -17,6 +21,7 @@ public sealed class WoundsSystem : SharedWoundsSystem
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
 
     private readonly List<int> _toRemove = new();
     private DamageSpecifier _passiveDamage = new();
@@ -51,6 +56,13 @@ public sealed class WoundsSystem : SharedWoundsSystem
 
             var bleedEv = new CMBleedAttemptEvent();
             RaiseLocalEvent(uid, ref bleedEv);
+
+            if (TryComp<MobStateComponent>(uid, out var mobState) &&
+                mobState.CurrentState == MobState.Dead &&
+                _unrevivable.IsUnrevivable(uid))
+            {
+                comp.InternalBleeds.Clear();
+            }
 
             _damageableQuery.TryComp(uid, out var damageable);
             var damageableEnt = new Entity<DamageableComponent?>(uid, damageable);
@@ -90,6 +102,12 @@ public sealed class WoundsSystem : SharedWoundsSystem
                     bloodloss += wound.Bloodloss;
             }
 
+            if (!bleedEv.Cancelled && !HasComp<CMInStasisComponent>(uid))
+            {
+                foreach (var internalBleed in comp.InternalBleeds)
+                    bloodloss += GetInternalBleedingRate(internalBleed);
+            }
+
             if (toHeal > comp.PassiveHealing)
             {
                 _damageable.TryChangeDamage(uid, _passiveDamage, true, false, damageable, uid);
@@ -101,7 +119,7 @@ public sealed class WoundsSystem : SharedWoundsSystem
                 comp.Wounds.RemoveAt(remove);
             }
 
-            if (comp.Wounds.Count == 0)
+            if (comp.Wounds.Count == 0 && comp.InternalBleeds.Count == 0)
                 RemCompDeferred<WoundedComponent>(uid);
 
             if (_bloodstreamQuery.TryComp(uid, out var bloodstream))

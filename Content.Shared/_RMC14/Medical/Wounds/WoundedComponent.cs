@@ -1,4 +1,5 @@
-﻿using Content.Shared.Damage.Prototypes;
+using Content.Shared.Body.Part;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -21,6 +22,9 @@ public sealed partial class WoundedComponent : Component
     public List<Wound> Wounds = new();
 
     [DataField, AutoNetworkedField]
+    public List<InternalBleedingEntry> InternalBleeds = new();
+
+    [DataField, AutoNetworkedField]
     public FixedPoint2 PassiveHealing = FixedPoint2.New(-0.05f);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
@@ -41,6 +45,10 @@ public record struct Wound(
     WoundType Type,
     bool Treated
 );
+
+[DataRecord]
+[Serializable, NetSerializable]
+public record struct InternalBleedingEntry(BodyPartType BodyPart, BodyPartSymmetry Symmetry, int Severity);
 
 [Serializable, NetSerializable]
 public enum WoundType
