@@ -56,11 +56,13 @@ public enum RMCCrewMonitorUIKey : byte
     Key,
 }
 
+[Serializable, NetSerializable]
 public enum RMCCrewMonitorVisuals : byte
 {
     Broken,
 }
 
+[Serializable, NetSerializable]
 public enum RMCCrewMonitorVisualLayers : byte
 {
     Unpowered,
