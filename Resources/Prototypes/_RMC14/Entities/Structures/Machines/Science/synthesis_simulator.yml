@@ -9,7 +9,7 @@
   parent: CMBaseStructure
   id: RMCResearchComputer
   name: research data terminal
-  description: A terminal for accessing chemistry research data - manage synthesis contracts, review chemical analyses, publish findings, and broker a clearance level increase.
+  description: A terminal for accessing chemistry research data - manage synthesis contracts, review chemical analyses, and broker a clearance level increase.
   components:
   - type: WallMount
     arc: 360
@@ -50,6 +50,8 @@
     interfaces:
       enum.RMCResearchComputerUi.Key:
         type: RMCResearchComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: ActivatableUI
     key: enum.RMCResearchComputerUi.Key
   - type: RequiresSkill
@@ -63,6 +65,15 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: RMCResearchComputer
+  id: RMCResearchComputerMain
+  name: research main terminal
+  description: The main terminal for accessing chemistry research data - manage synthesis contracts, review chemical analyses, publish findings, and broker a clearance level increase.
+  components:
+  - type: RMCResearchComputer
+    mainTerminal: true
 
 - type: entity
   id: RMCSynthesisSimulator

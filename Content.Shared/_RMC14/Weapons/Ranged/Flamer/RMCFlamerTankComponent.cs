@@ -22,7 +22,7 @@ public sealed partial class RMCFlamerTankComponent : Component
     public int MaxIntensity = 40;
 
     [DataField, AutoNetworkedField]
-    public int MinDuration = 3;
+    public int MinDuration = 1;
 
     [DataField, AutoNetworkedField]
     public int MaxDuration = 30;

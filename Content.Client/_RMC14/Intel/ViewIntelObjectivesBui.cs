@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Intel;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -46,7 +47,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         if (_window.CluesSearchBar != null)
             _window.CluesSearchBar.Text = string.Empty;
 
-        PopulateChemicalsTab(comp.Tree.PendingChemicals.Values);
+        PopulateChemicalsTab(comp.Tree);
 
         _window.CluesContainer.DisposeAllChildren();
         if (comp.PersonalClues.Count > 0)
@@ -131,15 +132,14 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         return result.ToString();
     }
 
-    private void PopulateChemicalsTab(IEnumerable<string> pendingChemicals)
+    private void PopulateChemicalsTab(IntelTechTree tree)
     {
         if (_window is not { IsOpen: true })
             return;
 
         _window.ChemicalsContainer.DisposeAllChildren();
 
-        var names = pendingChemicals.OrderBy(n => n.ToLowerInvariant()).ToList();
-        if (names.Count == 0)
+        if (tree.Chemicals.Count == 0)
         {
             _window.ChemicalsContainer.AddChild(new RichTextLabel
             {
@@ -148,10 +148,15 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
             return;
         }
 
-        foreach (var name in names)
+        foreach (var (id, name) in tree.Chemicals.OrderBy(c => c.Value.ToLowerInvariant()))
         {
-            var (row, _) = BuildClueRow(name);
-            _window.ChemicalsContainer.AddChild(row);
+            var analyzed = tree.AnalyzedChemicals.Contains(id);
+            _window.ChemicalsContainer.AddChild(new Label
+            {
+                Text = $"{(analyzed ? "✔" : "☐")} {name}",
+                FontColorOverride = analyzed ? RMCMachineUiStyle.GoodColor : null,
+                Margin = new Thickness(2, 1, 2, 1),
+            });
         }
     }
 

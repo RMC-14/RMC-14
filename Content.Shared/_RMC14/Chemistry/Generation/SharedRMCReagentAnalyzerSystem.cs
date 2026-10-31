@@ -18,6 +18,20 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
     {
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, EntRemovedFromContainerMessage>(OnRemoved);
+        SubscribeLocalEvent<RMCReagentAnalyzerComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
+        SubscribeLocalEvent<RMCReagentAnalyzerComponent, ItemSlotEjectAttemptEvent>(OnEjectAttempt);
+    }
+
+    private void OnInsertAttempt(Entity<RMCReagentAnalyzerComponent> ent, ref ItemSlotInsertAttemptEvent args)
+    {
+        if (ent.Comp.Processing)
+            args.Cancelled = true;
+    }
+
+    private void OnEjectAttempt(Entity<RMCReagentAnalyzerComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    {
+        if (ent.Comp.Processing)
+            args.Cancelled = true;
     }
 
     private void OnInserted(Entity<RMCReagentAnalyzerComponent> ent, ref EntInsertedIntoContainerMessage args)
@@ -27,12 +41,10 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
 
         ent.Comp.Processing = true;
         ent.Comp.ProcessEndTime = Timing.CurTime + ent.Comp.ProcessDelay;
+        ent.Comp.ProcessSoundTime = ent.Comp.ProcessEndTime - ent.Comp.ProcessSoundLead;
         ent.Comp.VisualState = RMCReagentAnalyzerVisualState.Processing;
         Dirty(ent);
         UpdateAppearance(ent);
-
-        if (_net.IsServer)
-            _audio.PlayPvs(ent.Comp.ProcessSound, ent);
     }
 
     private void OnRemoved(Entity<RMCReagentAnalyzerComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -50,6 +62,13 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCReagentAnalyzerComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            if (comp.ProcessSoundTime is { } soundTime && Timing.CurTime >= soundTime)
+            {
+                comp.ProcessSoundTime = null;
+                if (_net.IsServer)
+                    _audio.PlayPvs(comp.ProcessSound, uid);
+            }
+
             if (!comp.Processing || comp.ProcessEndTime is not { } end || Timing.CurTime < end)
                 continue;
 

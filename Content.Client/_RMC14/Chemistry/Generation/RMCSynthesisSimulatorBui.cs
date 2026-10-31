@@ -81,9 +81,10 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
 
         var locked = comp.Simulating || comp.Picking;
         var canCancel = locked;
+        var ready = _simulator.CheckReady((Owner, comp), out var notReadyReason);
         _window.SimulateButton.Visible = !canCancel;
         _window.CancelButton.Visible = canCancel;
-        _window.SimulateButton.Disabled = locked;
+        _window.SimulateButton.Disabled = locked || !ready;
 
         _window.AmplifyButton.Disabled = locked;
         _window.SuppressButton.Disabled = locked;
@@ -124,7 +125,8 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
 
         var (statusText, statusColor) = comp.Simulating ? ("STATUS: SIMULATING", NoticeInfoColor)
             : comp.Picking ? ("STATUS: ANALYSIS READY - PICK A RECIPE", NoticeSuccessColor)
-            : targetItem is null ? ("STATUS: NO TARGET INSERTED", NoticeDangerColor)
+            : comp.SimulationFailed ? ("STATUS: CRITICAL FAILURE: NO POSSIBLE CHEMICAL COMBINATION", NoticeDangerColor)
+            : !ready ? ($"STATUS: {notReadyReason}", NoticeDangerColor)
             : ("STATUS: READY", NoticeColor);
         _window.SetNotice(_window.StatusPanel, _window.StatusLabel, statusText, statusColor);
 

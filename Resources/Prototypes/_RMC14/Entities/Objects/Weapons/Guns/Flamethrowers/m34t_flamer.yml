@@ -73,7 +73,7 @@
   - type: RMCFlamerTank
     maxIntensity: 80
     maxRange: 5
-    maxDuration: 24
+    maxDuration: 50
     specialist: true
   - type: Tag
     tags:

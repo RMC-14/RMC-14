@@ -1,8 +1,11 @@
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Power;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -22,13 +25,19 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly IPrototypeManager ProtoManager = default!;
     [Dependency] private readonly SharedRMCChemistryResearchSystem _research = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
+
+    private readonly List<EntityUid> _toDeactivate = new();
 
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCSynthesisSimulatorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RMCSynthesisSimulatorComponent, InteractUsingEvent>(OnInteractUsing, before: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<RMCSynthesisSimulatorComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
+        SubscribeLocalEvent<RMCSynthesisSimulatorComponent, ItemSlotEjectAttemptEvent>(OnEjectAttempt);
         SubscribeLocalEvent<RMCSynthesisSimulatorComponent, EntInsertedIntoContainerMessage>(OnSlotChanged);
         SubscribeLocalEvent<RMCSynthesisSimulatorComponent, EntRemovedFromContainerMessage>(OnSlotChanged);
 
@@ -51,6 +60,15 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.TargetSlotId);
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.ReferenceSlotId);
         UpdateAppearance(ent);
+
+        if (ent.Comp.Simulating || ent.Comp.ReadingUntil != null || ent.Comp.PrintingUntil != null)
+            MarkActive(ent);
+    }
+
+    private void MarkActive(EntityUid simulator)
+    {
+        if (Net.IsServer)
+            EnsureComp<RMCSynthesisSimulatorActiveComponent>(simulator);
     }
 
     protected void UpdateAppearance(Entity<RMCSynthesisSimulatorComponent> ent)
@@ -69,6 +87,21 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         ent.Comp.PrintingUntil = Timing.CurTime + ent.Comp.PrintingDuration;
         Dirty(ent);
         UpdateAppearance(ent);
+        MarkActive(ent);
+    }
+
+    private bool HasRequiredSkills(EntityUid simulator, EntityUid user)
+    {
+        return !TryComp(simulator, out RequiresSkillComponent? requires) || _skills.HasAllSkills(user, requires.Skills);
+    }
+
+    private void OnInteractUsing(Entity<RMCSynthesisSimulatorComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled || HasRequiredSkills(ent, args.User))
+            return;
+
+        args.Handled = true;
+        _popup.PopupClient("You have no idea how to use this.", ent, args.User, PopupType.SmallCaution);
     }
 
     private void OnInsertAttempt(Entity<RMCSynthesisSimulatorComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -76,13 +109,22 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (ent.Comp.Simulating || ent.Comp.Picking || !HasComp<RMCChemResearchReportComponent>(args.Item))
+        if (ent.Comp.Simulating ||
+            ent.Comp.Picking ||
+            !HasComp<RMCChemResearchReportComponent>(args.Item) ||
+            args.User is { } user && !HasRequiredSkills(ent, user))
         {
             args.Cancelled = true;
             return;
         }
 
         if (args.Slot.ID == ent.Comp.ReferenceSlotId && ent.Comp.Mode is not (SynthesisMode.Relate or SynthesisMode.Add))
+            args.Cancelled = true;
+    }
+
+    private void OnEjectAttempt(Entity<RMCSynthesisSimulatorComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    {
+        if (ent.Comp.Simulating || ent.Comp.Picking)
             args.Cancelled = true;
     }
 
@@ -96,6 +138,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         {
             ent.Comp.ReadingUntil = Timing.CurTime + ent.Comp.ReadingDuration;
             UpdateAppearance(ent);
+            MarkActive(ent);
         }
 
         Dirty(ent);
@@ -104,7 +147,11 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
 
     private void OnSlotChanged(Entity<RMCSynthesisSimulatorComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != ent.Comp.TargetSlotId && args.Container.ID != ent.Comp.ReferenceSlotId)
+        if (args.Container.ID == ent.Comp.TargetSlotId)
+            ent.Comp.TargetProperty = null;
+        else if (args.Container.ID == ent.Comp.ReferenceSlotId)
+            ent.Comp.ReferenceProperty = null;
+        else
             return;
 
         ent.Comp.SimulationFailed = false;
@@ -118,6 +165,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             return;
 
         ent.Comp.Mode = args.Mode;
+        ent.Comp.SimulationFailed = false;
         Dirty(ent);
         RefreshUIs(ent);
     }
@@ -128,6 +176,7 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             return;
 
         ent.Comp.TargetProperty = args.PropertyId;
+        ent.Comp.SimulationFailed = false;
         Dirty(ent);
         RefreshUIs(ent);
     }
@@ -138,34 +187,21 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             return;
 
         ent.Comp.ReferenceProperty = args.PropertyId;
+        ent.Comp.SimulationFailed = false;
         Dirty(ent);
         RefreshUIs(ent);
     }
 
     private void OnEjectTargetMsg(Entity<RMCSynthesisSimulatorComponent> ent, ref RMCSynthesisSimulatorEjectTargetBuiMsg args)
     {
-        if (ent.Comp.Simulating || ent.Comp.Picking || !ItemSlots.TryGetSlot(ent, ent.Comp.TargetSlotId, out var slot))
-            return;
-
-        if (!ItemSlots.TryEjectToHands(ent, slot, args.Actor, true))
-            return;
-
-        ent.Comp.TargetProperty = null;
-        Dirty(ent);
-        RefreshUIs(ent);
+        if (ItemSlots.TryGetSlot(ent, ent.Comp.TargetSlotId, out var slot))
+            ItemSlots.TryEjectToHands(ent, slot, args.Actor, true);
     }
 
     private void OnEjectReferenceMsg(Entity<RMCSynthesisSimulatorComponent> ent, ref RMCSynthesisSimulatorEjectReferenceBuiMsg args)
     {
-        if (ent.Comp.Simulating || ent.Comp.Picking || !ItemSlots.TryGetSlot(ent, ent.Comp.ReferenceSlotId, out var slot))
-            return;
-
-        if (!ItemSlots.TryEjectToHands(ent, slot, args.Actor, true))
-            return;
-
-        ent.Comp.ReferenceProperty = null;
-        Dirty(ent);
-        RefreshUIs(ent);
+        if (ItemSlots.TryGetSlot(ent, ent.Comp.ReferenceSlotId, out var slot))
+            ItemSlots.TryEjectToHands(ent, slot, args.Actor, true);
     }
 
     private void OnCancelSimulationMsg(Entity<RMCSynthesisSimulatorComponent> ent, ref RMCSynthesisSimulatorCancelSimulationBuiMsg args)
@@ -193,8 +229,12 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         }
 
         ent.Comp.Simulating = true;
+        ent.Comp.SimulationFailed = false;
+        ent.Comp.PendingCost = GetCost(ent);
         ent.Comp.FinishAt = Timing.CurTime + ent.Comp.ProcessDuration;
+        ent.Comp.UnpoweredRemaining = null;
         Dirty(ent);
+        MarkActive(ent);
         UpdateAppearance(ent);
         RefreshUIs(ent);
         _audio.PlayPredicted(ent.Comp.StartSound, ent, args.Actor);
@@ -232,33 +272,65 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             return;
 
         var time = Timing.CurTime;
-        var query = EntityQueryEnumerator<RMCSynthesisSimulatorComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        var query = EntityQueryEnumerator<RMCSynthesisSimulatorActiveComponent, RMCSynthesisSimulatorComponent>();
+        while (query.MoveNext(out var uid, out _, out var comp))
         {
-            var animationEnded = false;
-            if (comp.ReadingUntil is { } readingUntil && time >= readingUntil)
-            {
-                comp.ReadingUntil = null;
-                animationEnded = true;
-            }
+            ProcessActive((uid, comp), time);
 
-            if (comp.PrintingUntil is { } printingUntil && time >= printingUntil)
-            {
-                comp.PrintingUntil = null;
-                animationEnded = true;
-            }
-
-            if (animationEnded)
-            {
-                Dirty(uid, comp);
-                UpdateAppearance((uid, comp));
-            }
-
-            if (!comp.Simulating || time < comp.FinishAt)
-                continue;
-
-            DoSimulation((uid, comp));
+            if (!comp.Simulating && comp.ReadingUntil == null && comp.PrintingUntil == null)
+                _toDeactivate.Add(uid);
         }
+
+        foreach (var uid in _toDeactivate)
+        {
+            RemComp<RMCSynthesisSimulatorActiveComponent>(uid);
+        }
+
+        _toDeactivate.Clear();
+    }
+
+    private void ProcessActive(Entity<RMCSynthesisSimulatorComponent> ent, TimeSpan time)
+    {
+        var comp = ent.Comp;
+        var animationEnded = false;
+        if (comp.ReadingUntil is { } readingUntil && time >= readingUntil)
+        {
+            comp.ReadingUntil = null;
+            animationEnded = true;
+        }
+
+        if (comp.PrintingUntil is { } printingUntil && time >= printingUntil)
+        {
+            comp.PrintingUntil = null;
+            animationEnded = true;
+        }
+
+        if (animationEnded)
+        {
+            Dirty(ent);
+            UpdateAppearance(ent);
+        }
+
+        if (!comp.Simulating)
+            return;
+
+        if (!_rmcPower.IsPowered(ent))
+        {
+            comp.UnpoweredRemaining ??= comp.FinishAt > time ? comp.FinishAt - time : TimeSpan.Zero;
+            return;
+        }
+
+        if (comp.UnpoweredRemaining is { } remaining)
+        {
+            comp.UnpoweredRemaining = null;
+            comp.FinishAt = time + remaining;
+            Dirty(ent);
+        }
+
+        if (time < comp.FinishAt)
+            return;
+
+        DoSimulation(ent);
     }
 
     public bool TryGetSlotReport(Entity<RMCSynthesisSimulatorComponent> ent, string slotId, out EntityUid item, out RMCChemResearchReportComponent report)
@@ -311,26 +383,32 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         return false;
     }
 
-    private bool HasUnregisteredComponents(string reagentId, RMCChemistryResearchComponent research)
+    private string? GetUnregisteredComponentsReason(string reagentId, RMCChemistryResearchComponent research)
     {
         var recipe = ProtoManager.EnumeratePrototypes<ReactionPrototype>().FirstOrDefault(r => r.Products.ContainsKey(reagentId));
         if (recipe == null)
-            return false;
+            return null;
 
-        foreach (var componentId in recipe.Reactants.Keys)
+        var catalyst = false;
+        foreach (var (componentId, reactant) in recipe.Reactants)
         {
             if (!_rmcReagent.TryIndex(componentId, out var component))
                 continue;
 
-            if (component.ChemClass >= ChemClass.Special &&
-                component.ChemClass != ChemClass.Hydro &&
-                !research.IdentifiedIds.Contains(componentId))
+            if (component.ChemClass < ChemClass.Special ||
+                component.ChemClass == ChemClass.Hydro ||
+                research.IdentifiedIds.Contains(componentId))
             {
-                return true;
+                continue;
             }
+
+            if (!reactant.Catalyst)
+                return "UNREGISTERED COMPONENTS DETECTED";
+
+            catalyst = true;
         }
 
-        return false;
+        return catalyst ? "UNREGISTERED CATALYSTS DETECTED" : null;
     }
 
     public int GetCost(Entity<RMCSynthesisSimulatorComponent> ent)
@@ -407,27 +485,21 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
     {
         var comp = ent.Comp;
 
-        if (comp.SimulationFailed)
-        {
-            reason = "CRITICAL FAILURE: NO POSSIBLE CHEMICAL COMBINATION";
-            return false;
-        }
-
         if (!TryGetSlotReport(ent, comp.TargetSlotId, out _, out var targetReport))
         {
-            reason = "No target research report inserted.";
+            reason = "NO TARGET INSERTED";
             return false;
         }
 
         if (!targetReport.Completed)
         {
-            reason = "Incomplete data detected in target report.";
+            reason = "INCOMPLETE DATA DETECTED IN TARGET";
             return false;
         }
 
         if (!targetReport.IsGenerated || targetReport.ReagentId is not { } targetId)
         {
-            reason = "Target chemical cannot be altered.";
+            reason = "TARGET CAN NOT BE ALTERED";
             return false;
         }
 
@@ -437,20 +509,20 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
 
         if (research.LockedIds.Contains(targetId.Id))
         {
-            reason = "Target chemical structure destroyed.";
+            reason = "TARGET CHEMICAL STRUCTURE DESTROYED";
             return false;
         }
 
-        if (HasUnregisteredComponents(targetId.Id, research))
+        if (GetUnregisteredComponentsReason(targetId.Id, research) is { } unregistered)
         {
-            reason = "Unregistered components detected.";
+            reason = unregistered;
             return false;
         }
 
         var targetProperties = GetReportProperties(targetReport);
         if (targetProperties.Count < 2)
         {
-            reason = "Target complexity improper for simulation.";
+            reason = "TARGET COMPLEXITY IMPROPER FOR RELATION";
             return false;
         }
 
@@ -461,19 +533,19 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         {
             if (!TryGetProperty(targetReport, comp.TargetProperty, out var targetProperty, out var targetLevel))
             {
-                reason = "No target property selected.";
+                reason = "TARGET NOT SELECTED";
                 return false;
             }
 
             if (targetProperty.Flags.HasFlag(ChemPropertyType.Unadjustable))
             {
-                reason = "That property cannot be simulated.";
+                reason = "TARGET PROPERTY CAN NOT BE SIMULATED";
                 return false;
             }
 
             if (GetCost(ent) > credits)
             {
-                reason = "Insufficient research credits.";
+                reason = "INSUFFICIENT FUNDS";
                 return false;
             }
 
@@ -481,13 +553,13 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
             {
                 if (clearance < comp.MaxClearanceLevel && targetLevel >= clearance * comp.TechtreeLevelMultiplier + 2)
                 {
-                    reason = "Clearance insufficient for amplification.";
+                    reason = "CLEARANCE INSUFFICIENT FOR AMPLIFICATION";
                     return false;
                 }
 
                 if (targetLevel >= targetProperty.MaxLevel)
                 {
-                    reason = "Property cannot be amplified further.";
+                    reason = "PROPERTY CANNOT BE AMPLIFIED FURTHER";
                     return false;
                 }
             }
@@ -497,37 +569,31 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
         {
             if (!TryGetSlotReport(ent, comp.ReferenceSlotId, out _, out var referenceReport))
             {
-                reason = "No reference research report inserted.";
+                reason = "NO REFERENCE DATA DETECTED";
                 return false;
             }
 
             if (!referenceReport.Completed)
             {
-                reason = "Incomplete data detected in reference report.";
+                reason = "INCOMPLETE DATA DETECTED IN REFERENCE";
                 return false;
             }
 
             if (referenceReport.ReagentId is { } referenceId && research.LockedIds.Contains(referenceId.Id))
             {
-                reason = "Reference chemical structure destroyed.";
+                reason = "REFERENCE CHEMICAL STRUCTURE DESTROYED";
                 return false;
             }
 
             if (!TryGetProperty(referenceReport, comp.ReferenceProperty, out var referenceProperty, out var referenceLevel))
             {
-                reason = "No reference property selected.";
-                return false;
-            }
-
-            if (referenceProperty.Flags.HasFlag(ChemPropertyType.Unadjustable))
-            {
-                reason = "That property cannot be simulated.";
+                reason = "REFERENCE PROPERTY NOT SELECTED";
                 return false;
             }
 
             if (targetProperties.Any(p => p.Property.ID == referenceProperty.ID))
             {
-                reason = "Reference property already present in target.";
+                reason = "REFERENCE PROPERTY ALREADY IN TARGET";
                 return false;
             }
 
@@ -535,13 +601,19 @@ public abstract class SharedRMCSynthesisSimulatorSystem : EntitySystem
                 TryGetProperty(targetReport, comp.TargetProperty, out _, out var targetLevelForRelate) &&
                 targetLevelForRelate != referenceLevel)
             {
-                reason = "Reference and target property must be of equal levels.";
+                reason = "REFERENCE AND TARGET PROPERTY MUST BE OF EQUAL LEVELS";
+                return false;
+            }
+
+            if (referenceProperty.Flags.HasFlag(ChemPropertyType.Unadjustable))
+            {
+                reason = "REFERENCE PROPERTY CAN NOT BE SIMULATED";
                 return false;
             }
 
             if (comp.Mode == SynthesisMode.Add && GetCost(ent) > credits)
             {
-                reason = "Insufficient research credits.";
+                reason = "INSUFFICIENT FUNDS";
                 return false;
             }
         }

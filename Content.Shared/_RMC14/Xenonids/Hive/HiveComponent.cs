@@ -134,4 +134,22 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public int? LarvaQueueWaitSecondsOverride;
+
+    [DataField, AutoNetworkedField]
+    public bool AllowPlayerParasites = true;
+
+    [DataField, AutoNetworkedField]
+    public bool AllowNoQueenEvolution;
+
+    [DataField, AutoNetworkedField]
+    public bool AllowQueenEvolution = true;
+
+    [DataField, AutoNetworkedField]
+    public bool EvolutionLocked;
+
+    [DataField, AutoNetworkedField]
+    public bool CanDelayRoundEnd = true;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2? EvolutionPointsPerSecond;
 }

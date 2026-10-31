@@ -27,7 +27,7 @@ public sealed partial class RMCFlamerChainComponent : Component
     public int MaxIntensity = 20;
 
     [DataField, AutoNetworkedField]
-    public int MinDuration = 3;
+    public int MinDuration = 1;
 
     [DataField, AutoNetworkedField]
     public int MaxDuration = 24;

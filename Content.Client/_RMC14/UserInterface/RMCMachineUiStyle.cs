@@ -40,11 +40,11 @@ public static class RMCMachineUiStyle
         return cache.GetFont(ButtonFontPath, 12);
     }
 
-    public static void RemoveWindowBorder(DefaultWindow window)
+    public static void RemoveWindowBorder(DefaultWindow window, Color? background = null)
     {
         window.Contents.Margin = new Thickness(0);
         if (window.GetChild(0) is PanelContainer panel)
-            panel.PanelOverride = new StyleBoxFlat { BackgroundColor = WindowColor };
+            panel.PanelOverride = new StyleBoxFlat { BackgroundColor = background ?? WindowColor };
     }
 
     public static StyleBoxFlat Field()

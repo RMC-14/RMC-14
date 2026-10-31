@@ -1166,12 +1166,17 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         return aKeys.SequenceEqual(bKeys);
     }
 
-    public string ComputeSimulationSignature(List<(ChemGeneratorPropertyPrototype Property, int Level)> properties, int overdose)
+    public string GetRootId(string reagentId)
+    {
+        return _originalIds.TryGetValue(reagentId, out var originalId) ? originalId : reagentId;
+    }
+
+    public string ComputeSimulationSignature(string rootId, List<(ChemGeneratorPropertyPrototype Property, int Level)> properties)
     {
         var sorted = properties
             .OrderBy(p => p.Property.ID, StringComparer.Ordinal)
             .Select(p => $"{p.Property.ID}:{p.Level}");
-        return string.Join("|", sorted) + $"#{overdose}";
+        return $"{rootId}#" + string.Join("|", sorted);
     }
 
     public bool TryGetSimulationResult(string signature, out ProtoId<ReagentPrototype> reagentId) =>
@@ -1180,43 +1185,48 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
     public void RegisterSimulationResult(string signature, ProtoId<ReagentPrototype> reagentId) =>
         _simulationResults[signature] = reagentId;
 
-    public (List<(string Id, int Amount, bool Catalyst)> Ingredients, string? NewIngredientId) RollRecipeCandidate(string baseReagentId, int tier, string newId)
+    public bool TryRollRecipeCandidate(
+        string baseReagentId,
+        int tier,
+        out List<(string Id, int Amount, bool Catalyst)> ingredients,
+        out string? newIngredient)
     {
-        if (!_recipeReactantsCache.TryGetValue(baseReagentId, out var cachedReactants))
+        newIngredient = null;
+        if (!TryGetRecipeReactants(baseReagentId, out var existing))
         {
-            var existing = _prototype.EnumeratePrototypes<ReactionPrototype>()
-                .FirstOrDefault(r => r.Products.ContainsKey(baseReagentId));
-
-            if (existing == null || existing.Reactants.Count == 0)
-                return (PickRecipeIngredients(tier, newId), null);
-
-            cachedReactants = existing.Reactants.Select(kv => (Id: kv.Key, Amount: (int) kv.Value.Amount, kv.Value.Catalyst)).ToList();
+            ingredients = PickRecipeIngredients(tier, baseReagentId);
+            return ingredients.Count > 0;
         }
 
-        var reactants = new List<(string Id, int Amount, bool Catalyst)>(cachedReactants);
+        ingredients = new List<(string Id, int Amount, bool Catalyst)>(existing);
 
-        var swapTier = Math.Max(tier - 1, 1);
-        var pools = BuildClassPools([newId, ..reactants.Select(x => x.Id)]);
+        var pools = BuildClassPools([baseReagentId, ..existing.Select(x => x.Id)]);
         var allPool = pools.Where(p => p.Key != ChemClass.None).SelectMany(p => p.Value).Distinct().ToList();
-
-        string? newIngredient = null;
-        if (TryPickIngredient(pools, allPool, swapTier, new HashSet<string>(), out var picked))
+        if (!TryPickIngredient(pools, allPool, Math.Max(tier - 1, 1), new HashSet<string>(), out var picked) ||
+            !TryGetChemClass(picked, out var pickedClass) ||
+            pickedClass >= ChemClass.Special)
         {
-            newIngredient = picked;
-
-            var amount = _random.Next(0, 65) switch
-            {
-                < 30 => 1,
-                < 45 => 2,
-                < 60 => 3,
-                _ => 4,
-            };
-
-            var swapIndex = _random.Next(reactants.Count);
-            reactants[swapIndex] = (newIngredient, amount, reactants[swapIndex].Catalyst);
+            return false;
         }
 
-        return (reactants, newIngredient);
+        var required = ingredients.Where(i => !i.Catalyst).ToList();
+        if (required.Count > 2)
+            ingredients.Remove(_random.Pick(required));
+
+        var amount = _random.Next(0, 65) switch
+        {
+            < 30 => 1,
+            < 45 => 2,
+            < 60 => 3,
+            _ => 4,
+        };
+        ingredients.Add((picked, amount, false));
+
+        if (IsAllMedical(ingredients) || DuplicatesExistingReaction(ingredients))
+            return false;
+
+        newIngredient = picked;
+        return true;
     }
 
     public bool TryGetChemClass(string reagentId, out ChemClass chemClass)
@@ -1241,8 +1251,10 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         var suffix = string.Concat(newProperties.Select(p => $" {(string.IsNullOrEmpty(p.Property.Code) ? p.Property.ID : p.Property.Code)}{p.Level}"));
         var hash = Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(suffix)))[..2];
 
-        var name = $"{baseReagent.LocalizedName} {hash}";
-        var id = $"{baseReagent.ID}Variant{++_generatedCount}{hash}";
+        var rootId = GetRootId(baseReagent.ID);
+        var rootName = _rmcReagent.TryIndex(rootId, out var rootReagent) ? rootReagent.LocalizedName : baseReagent.LocalizedName;
+        var name = $"{rootName} {hash}";
+        var id = $"{rootId}Variant{++_generatedCount}{hash}";
         var color = baseReagent.SubstanceColor.ToHexNoAlpha();
 
         var criticalOverdose = Math.Max(Math.Min(newOverdose * 2, newOverdose + 30), 10);
@@ -1253,7 +1265,7 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         AppendToClassPoolCache(ChemClass.Rare, id);
         CacheRecipeReactants(id, ingredients);
         _generatedTiers[id] = tier;
-        _originalIds[id] = baseReagent.ID;
+        _originalIds[id] = rootId;
         _reactionIndicators[id] = indicator;
 
         return id;

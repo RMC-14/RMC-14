@@ -8,6 +8,9 @@ namespace Content.Shared._RMC14.Chemistry.Generation;
 public sealed partial class RMCResearchComputerComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public bool MainTerminal;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan PrintCooldown = TimeSpan.FromSeconds(2);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]

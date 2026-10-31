@@ -389,7 +389,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
             return;
         }
 
-        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1, e => CanDelayRoundEnd(e)))
             component.QueenDiedCheck = null;
 
         if (component.QueenDiedCheck == null)

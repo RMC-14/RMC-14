@@ -20,7 +20,7 @@ public sealed class RMCGenerateReagentCommand : IConsoleCommand
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public string Command => "rmcgeneratereagent";
-    public string Description => "Procedurally generates a new reagent with random properties, prints details, and spawns a filled bottle.";
+    public string Description => "Generates new reagent with random properties, prints details, & filled bottle";
     public string Help => "rmcgeneratereagent <tier 1-3>";
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)

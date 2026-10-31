@@ -1,3 +1,6 @@
+using Content.Shared._RMC14.Dialog;
+using Content.Shared.Paper;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Chemistry.Generation;
@@ -58,3 +61,48 @@ public sealed class RMCResearchComputerAnnounceDocumentBuiMsg : BoundUserInterfa
     public int Id;
     public RMCResearchComputerAnnounceDocumentBuiMsg(int id) => Id = id;
 }
+
+[Serializable, NetSerializable]
+public sealed class RMCResearchComputerDocumentContentBuiMsg : BoundUserInterfaceMessage
+{
+    public EntProtoId Prototype;
+    public string Content;
+    public List<StampDisplayInfo> StampedBy;
+    public Color Color;
+    public Color TextColor;
+    public int Thickness;
+
+    public RMCResearchComputerDocumentContentBuiMsg(
+        EntProtoId prototype,
+        string content,
+        List<StampDisplayInfo> stampedBy,
+        Color color,
+        Color textColor,
+        int thickness)
+    {
+        Prototype = prototype;
+        Content = content;
+        StampedBy = stampedBy;
+        Color = color;
+        TextColor = textColor;
+        Thickness = thickness;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed record RMCResearchComputerScanConfirmEvent(NetEntity User, NetEntity Paper);
+
+[Serializable, NetSerializable]
+public sealed record RMCResearchComputerScanExistingCategoryEvent(NetEntity User, NetEntity Paper);
+
+[Serializable, NetSerializable]
+public sealed record RMCResearchComputerScanNewCategoryEvent(NetEntity User, NetEntity Paper);
+
+[Serializable, NetSerializable]
+public sealed record RMCResearchComputerScanCategoryEvent(NetEntity User, NetEntity Paper, string Category);
+
+[Serializable, NetSerializable]
+public sealed record RMCResearchComputerScanCategoryInputEvent(NetEntity User, NetEntity Paper, string Message = "") : DialogInputEvent(Message);
+
+[Serializable, NetSerializable]
+public sealed record RMCResearchComputerAnnounceInputEvent(NetEntity User, int Id, string Message = "") : DialogInputEvent(Message);
