@@ -1,6 +1,5 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Dropship;
 
@@ -17,8 +16,11 @@ public sealed partial class DropshipAutopilotComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? LandingZone;
 
+    /// <summary>
+    /// Zero uses the server's default delay when the component initializes.
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(30);
+    public TimeSpan Delay;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? NextDepartureAt;
@@ -31,13 +33,6 @@ public sealed partial class DropshipAutopilotComponent : Component
 
     [DataField, AutoNetworkedField]
     public string StatusDetails = string.Empty;
-}
-
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class DropshipRemoteControlConsoleComponent : Component
-{
-    [DataField, AutoNetworkedField]
-    public EntityUid? LinkedLandingZone;
 }
 
 public enum DropshipAutopilotMode

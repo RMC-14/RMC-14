@@ -616,4 +616,10 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCDoAfterCancelMaxProcessTimeMilliseconds =
         CVarDef.Create("rmc.do_after_cancel_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCCrtThemeEnabled =
+        CVarDef.Create("rmc.crt_theme_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCCrtEffectsEnabled =
+        CVarDef.Create("rmc.crt_effects_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 }

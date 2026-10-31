@@ -9,38 +9,12 @@ public enum DropshipRemoteControlUiKey
 }
 
 [Serializable, NetSerializable]
-public sealed class DropshipRemoteControlBuiState(
-    bool planetside,
-    NetEntity? linkedLandingZone,
-    string linkedLandingZoneName,
-    List<DropshipRemoteControlDropshipEntry> dropships,
-    List<DropshipRemoteControlDestinationEntry> destinations,
-    List<DropshipRemoteControlDestinationEntry> hangars,
-    List<DropshipRemoteControlDestinationEntry> landingZones,
-    int defaultDelaySeconds,
-    int minDelaySeconds,
-    int maxDelaySeconds) : BoundUserInterfaceState
-{
-    public readonly bool Planetside = planetside;
-    public readonly NetEntity? LinkedLandingZone = linkedLandingZone;
-    public readonly string LinkedLandingZoneName = linkedLandingZoneName;
-    public readonly List<DropshipRemoteControlDropshipEntry> Dropships = dropships;
-    public readonly List<DropshipRemoteControlDestinationEntry> Destinations = destinations;
-    public readonly List<DropshipRemoteControlDestinationEntry> Hangars = hangars;
-    public readonly List<DropshipRemoteControlDestinationEntry> LandingZones = landingZones;
-    public readonly int DefaultDelaySeconds = defaultDelaySeconds;
-    public readonly int MinDelaySeconds = minDelaySeconds;
-    public readonly int MaxDelaySeconds = maxDelaySeconds;
-}
-
-[Serializable, NetSerializable]
 public readonly record struct DropshipRemoteControlDropshipEntry(
     NetEntity Computer,
     NetEntity Dropship,
     string Name,
     string Location,
     NetEntity? RouteHangar,
-    string RouteHangarName,
     NetEntity? LandingZone,
     DropshipAutopilotMode Mode,
     int DelaySeconds,

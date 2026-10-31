@@ -1,0 +1,7 @@
+<controls:DropshipDestinationButton xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship"
+    xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt">
+    <crt:RMCCrtActionButton Name="Button" Access="Public" Variant="Navigation" IconState="map"
+        ContentAlignment="Left" TextFontSize="10" MinHeight="28" HorizontalExpand="True"
+        IconSize="14" ContentMargin="7 3" ContentSeparation="6" />
+</controls:DropshipDestinationButton>
