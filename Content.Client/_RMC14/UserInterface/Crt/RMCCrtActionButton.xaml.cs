@@ -296,6 +296,7 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
         var palette = _context.Palette;
         Background.BorderThickness = Variant == RMCCrtButtonVariant.Flat ? 0 : 1;
         var isDanger = Tone == RMCCrtTone.Danger || Variant == RMCCrtButtonVariant.Danger;
+        var isDangerOutline = Variant == RMCCrtButtonVariant.DangerOutline;
         Background.Effects = isDanger ? RMCCrtEffects.None : RMCCrtEffects.HorizontalScanlines;
         Color background;
         Color border;
@@ -317,6 +318,17 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
             };
             border = palette.Danger;
             foreground = palette.Background;
+        }
+        else if (isDangerOutline)
+        {
+            background = Color.InterpolateBetween(palette.Background, palette.Danger, DrawMode switch
+            {
+                DrawModeEnum.Pressed => 0.32f,
+                DrawModeEnum.Hover => 0.24f,
+                _ => 0.14f,
+            });
+            border = Color.InterpolateBetween(palette.Background, palette.Danger, 0.65f);
+            foreground = Color.InterpolateBetween(palette.Danger, Color.White, 0.2f);
         }
         else if (Selected || Variant == RMCCrtButtonVariant.Filled)
         {
@@ -347,7 +359,7 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
             };
         }
 
-        if (DrawMode == DrawModeEnum.Hover && !isDanger)
+        if (DrawMode == DrawModeEnum.Hover && !isDanger && !isDangerOutline)
             border = palette.Foreground;
 
         Background.SetColorOverrides(background, border);
@@ -359,7 +371,8 @@ public sealed partial class RMCCrtActionButton : ContainerButton, IRMCCrtThemedC
     {
         AddStyleClass(ContainerButton.StyleClassButton);
         StyleBoxOverride = null;
-        var isDanger = Tone == RMCCrtTone.Danger || Variant == RMCCrtButtonVariant.Danger;
+        var isDanger = Tone == RMCCrtTone.Danger ||
+                       Variant is RMCCrtButtonVariant.Danger or RMCCrtButtonVariant.DangerOutline;
         if (isDanger)
             AddStyleClass(StyleBase.ButtonCaution);
         else

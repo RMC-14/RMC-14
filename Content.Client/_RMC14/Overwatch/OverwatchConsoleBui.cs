@@ -116,7 +116,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 int Sorting(OverwatchMarine marine)
                 {
                     if (squad.Leader == marine.Id)
-                        return 1000;
+                        return int.MinValue;
 
                     if (marine.Role is not { } role)
                         return 0;
@@ -536,6 +536,12 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
                 if (squad.Leader == marine.Id)
                 {
+                    row.Name.Panel.SetPositionFirst();
+                    row.Role.Panel.SetPositionFirst();
+                    row.State.Panel.SetPositionFirst();
+                    row.Location.Panel.SetPositionFirst();
+                    row.Distance.Panel.SetPositionFirst();
+                    row.Buttons.Container.SetPositionFirst();
                     row.Buttons.Hide.Visible = false;
                     row.Buttons.Promote.Visible = false;
                 }

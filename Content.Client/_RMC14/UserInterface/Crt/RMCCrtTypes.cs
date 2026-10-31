@@ -35,6 +35,7 @@ public enum RMCCrtPanelVariant
 public enum RMCCrtButtonVariant
 {
     Danger,
+    DangerOutline,
     Flat,
     Filled,
     Navigation,
@@ -117,7 +118,11 @@ public static class RMCCrtPalettes
             RMCCrtPalettePreset.Brown => Create("#AC8710", "#0F0F00", "#AC8710"),
             RMCCrtPalettePreset.Green => Create("#00EB4E", "#001000", "#00EB4E"),
             RMCCrtPalettePreset.Purple => Create("#C634D0", "#100302", "#C634D0"),
-            RMCCrtPalettePreset.Red => Create("#D03434", "#100302", "#D03434"),
+            RMCCrtPalettePreset.Red => new RMCCrtPalette(
+                Color.FromHex("#F4B8B8"), Color.FromHex("#14090B"), Color.FromHex("#82464E"),
+                Color.FromHex("#563039"), Color.FromHex("#FFE9E9"), Good, Warning,
+                Color.FromHex("#FF715B"), Color.FromHex("#C39298"),
+                Color.FromHex("#14090B"), Color.FromHex("#805E64")),
             RMCCrtPalettePreset.Spp => Create("#DBBF23", "#511814", "#DBBF23"),
             RMCCrtPalettePreset.White => Create("#CCCCCC", "#666666", "#CCCCCC"),
             RMCCrtPalettePreset.Yellow => Create("#FFD000", "#101000", "#FFD000"),

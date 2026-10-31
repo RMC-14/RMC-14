@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.GroundsideOperations;
 using Content.Shared.Audio;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.Popups;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -45,9 +46,16 @@ public sealed class GroundsideOperationsConsoleSystem : SharedGroundsideOperatio
         base.Initialize();
         SubscribeLocalEvent<GroundsideOperationsConsoleComponent, GroundsideOperationsHighCommandDialogEvent>(OnHighCommandDialog);
         SubscribeLocalEvent<RMCAlertLevelComponent, RMCAlertLevelChangedEvent>(OnAlertLevelChanged);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         Subs.CVar(_config, RMCCVars.RMCGroundsideOperationsGeneralQuartersCooldownMinutes,
             minutes => _generalQuartersCooldown = TimeSpan.FromMinutes(minutes), true);
         Subs.CVar(_config, Content.Shared.CCVar.CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _nextGeneralQuarters = default;
+        SyncGeneralQuartersCooldown();
     }
 
     protected override void TryOpenHighCommand(Entity<GroundsideOperationsConsoleComponent> ent, EntityUid actor)
