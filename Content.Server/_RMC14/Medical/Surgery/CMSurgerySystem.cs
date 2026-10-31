@@ -63,6 +63,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepEmoteEffectComponent, CMSurgeryStepEvent>(OnStepScreamComplete);
         SubscribeLocalEvent<RMCSurgeryStepSpawnEffectComponent, CMSurgeryStepEvent>(OnStepSpawnComplete);
         SubscribeLocalEvent<RMCSurgeryStepForeignObjectEffectComponent, CMSurgeryStepEvent>(OnStepForeignObjectComplete);
+        SubscribeLocalEvent<RMCSurgeryStepInternalBleedingEffectComponent, CMSurgeryStepEvent>(OnStepInternalBleedingComplete);
         SubscribeLocalEvent<RMCSurgeryStepLarvaEffectComponent, CMSurgeryStepEvent>(OnStepLarvaComplete);
         SubscribeLocalEvent<RMCSurgeryStepXenoHeartEffectComponent, CMSurgeryStepEvent>(OnStepXenoHeartComplete);
 
@@ -328,6 +329,14 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         }
 
         Dirty(args.Body, embedded);
+    }
+
+    private void OnStepInternalBleedingComplete(Entity<RMCSurgeryStepInternalBleedingEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        if (!TryComp(args.Part, out BodyPartComponent? part))
+            return;
+
+        _wounds.TryRepairInternalBleeding(args.Body, part.PartType, part.Symmetry);
     }
 
     private void OnStepLarvaComplete(Entity<RMCSurgeryStepLarvaEffectComponent> ent, ref CMSurgeryStepEvent args)

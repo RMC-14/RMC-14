@@ -3,6 +3,7 @@ using Content.Server.PowerCell;
 using Content.Server.Temperature.Components;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Embeds;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Chemistry.EntitySystems;
@@ -204,6 +205,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         var bleeding = false;
         var unrevivable = false;
         var embeddedObjectInBodyParts = new List<ForeignObjectEmbeddedEntry>();
+        var internalBleeds = new List<InternalBleedingEntry>();
 
         if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
             _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
@@ -219,6 +221,9 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         if (TryComp<ForeignObjectEmbeddedComponent>(target, out var embeddedComponent))
             embeddedObjectInBodyParts = ForeignObjectEmbeddedUtility.GetEmbeddedObjectInBodyParts(embeddedComponent);
 
+        if (TryComp<WoundedComponent>(target, out var wounded))
+            internalBleeds.AddRange(wounded.InternalBleeds);
+
         _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(
             GetNetEntity(target),
             bodyTemperature,
@@ -226,7 +231,8 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             scanMode,
             bleeding,
             unrevivable,
-            embeddedObjectInBodyParts
+            embeddedObjectInBodyParts,
+            internalBleeds
         ));
     }
 }

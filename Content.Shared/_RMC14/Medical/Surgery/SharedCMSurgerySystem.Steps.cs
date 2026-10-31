@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Effects.Step;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Body.Part;
 using Content.Shared.Buckle.Components;
@@ -23,6 +24,7 @@ public abstract partial class SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryCanPerformStepEvent>(OnToolCanPerform);
 
         SubscribeLocalEvent<RMCSurgeryStepForeignObjectEffectComponent, CMSurgeryStepCompleteCheckEvent>(OnForeignObjectStepCheck);
+        SubscribeLocalEvent<RMCSurgeryStepInternalBleedingEffectComponent, CMSurgeryStepCompleteCheckEvent>(OnInternalBleedingStepCheck);
 
         SubSurgery<CMSurgeryCutLarvaRootsStepComponent>(OnCutLarvaRootsStep, OnCutLarvaRootsCheck);
 
@@ -210,6 +212,20 @@ public abstract partial class SharedCMSurgerySystem
         {
             args.Cancelled = true;
         }
+    }
+
+    private void OnInternalBleedingStepCheck(Entity<RMCSurgeryStepInternalBleedingEffectComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
+    {
+        if (!TryComp(args.Body, out WoundedComponent? wounded) ||
+            !TryComp(args.Part, out BodyPartComponent? part))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (wounded.InternalBleeds.Any(entry =>
+                entry.BodyPart == part.PartType && entry.Symmetry == part.Symmetry))
+            args.Cancelled = true;
     }
 
     private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMsg args)
@@ -402,6 +418,7 @@ public abstract partial class SharedCMSurgerySystem
         {
             RMCSurgeryToolKind.Retractor => "a retractor",
             RMCSurgeryToolKind.Hemostat => "a hemostat",
+            RMCSurgeryToolKind.FixOVein => "a Fix-O-Vein",
             RMCSurgeryToolKind.Cautery => "a cautery",
             RMCSurgeryToolKind.Drill => "a surgical drill",
             RMCSurgeryToolKind.Scalpel => "a scalpel",
