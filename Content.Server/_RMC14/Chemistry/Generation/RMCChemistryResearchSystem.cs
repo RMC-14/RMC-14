@@ -677,8 +677,14 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
 
     public bool TryPrintDocument(int id, EntityCoordinates spawnAt)
     {
-        return TryGetArchivedReport(id, out var original) &&
-               CopyDocument(original.Value, spawnAt) != null;
+        if (!TryGetArchivedReport(id, out var original) ||
+            CopyDocument(original.Value, spawnAt) is not { } copy)
+        {
+            return false;
+        }
+
+        _audio.PlayPvs(EnsureResearch().Comp.FaxSound, copy);
+        return true;
     }
 
     public bool TrySendDocumentContent(EntityUid computer, int id, EntityUid actor)
