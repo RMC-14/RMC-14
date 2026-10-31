@@ -1,4 +1,6 @@
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -12,14 +14,25 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCReagentAnalyzerComponent, InteractUsingEvent>(OnInteractUsing, before: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, ItemSlotEjectAttemptEvent>(OnEjectAttempt);
+    }
+
+    private void OnInteractUsing(Entity<RMCReagentAnalyzerComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled || HasComp<VialComponent>(args.Used))
+            return;
+
+        args.Handled = true;
+        _popup.PopupClient($"{Name(ent)} only accepts samples in vials.", ent, args.User, PopupType.SmallCaution);
     }
 
     private void OnInsertAttempt(Entity<RMCReagentAnalyzerComponent> ent, ref ItemSlotInsertAttemptEvent args)

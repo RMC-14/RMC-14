@@ -65,9 +65,8 @@
       reagent_analyzer_sample_slot:
         name: Sample
         whitelist:
-          tags:
-          - GlassBeaker
-          - ChemDispensable
+          components:
+          - Vial
   - type: ContainerContainer
     containers:
       reagent_analyzer_sample_slot: !type:ContainerSlot
