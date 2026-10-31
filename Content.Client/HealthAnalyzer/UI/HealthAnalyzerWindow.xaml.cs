@@ -112,7 +112,10 @@ namespace Content.Client.HealthAnalyzer.UI
 
             // Alerts
 
-            var showAlerts = msg.Unrevivable == true || msg.Bleeding == true || msg.EmbeddedObjectInBodyParts.Count > 0;
+            var showAlerts = msg.Unrevivable == true ||
+                             msg.Bleeding == true ||
+                             msg.EmbeddedObjectInBodyParts.Count > 0 ||
+                             msg.InternalBleeds.Count > 0;
 
             AlertsDivider.Visible = showAlerts;
             AlertsContainer.Visible = showAlerts;
@@ -141,6 +144,18 @@ namespace Content.Client.HealthAnalyzer.UI
                 AlertsContainer.AddChild(new RichTextLabel
                 {
                     Text = Loc.GetString("health-analyzer-window-entity-embedded-text", ("bodyPart", GetBodyPartName(embeddedEntry.BodyPart, embeddedEntry.Symmetry))),
+                    Margin = new Thickness(0, 4),
+                    MaxWidth = 300
+                });
+            }
+
+            foreach (var internalBleed in msg.InternalBleeds)
+            {
+                AlertsContainer.AddChild(new RichTextLabel
+                {
+                    Text = Loc.GetString(
+                        "health-analyzer-window-entity-internal-bleeding-text",
+                        ("bodyPart", GetBodyPartName(internalBleed.BodyPart, internalBleed.Symmetry))),
                     Margin = new Thickness(0, 4),
                     MaxWidth = 300
                 });

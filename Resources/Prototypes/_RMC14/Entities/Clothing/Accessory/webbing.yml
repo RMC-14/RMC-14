@@ -1097,7 +1097,7 @@
   - type: FixedItemSizeStorage
   - type: StorageFill
     contents:
-    #- PICT System
+    - id: CMScalpelPICT
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
@@ -1107,7 +1107,7 @@
     - id: CMSurgicalDrill
     - id: CMBoneGel
     - id: CMBonesetter
-    #- FixOVein
+    - id: CMFixOVein
     #- Nanopaste
     - id: CMSurgicalLine
     - id: CMSynthGraft
@@ -1165,7 +1165,7 @@
   components:
   - type: StorageFill
     contents:
-#     - PICT System
+      - id: CMScalpelPICT
       - id: CMScalpel
       - id: CMHemostat
       - id: CMRetractor
@@ -1175,7 +1175,7 @@
       - id: CMSurgicalDrill
       - id: CMBoneGel
       - id: CMBonesetter
-#     - FixOVein
+      - id: CMFixOVein
 #     - Nanopaste
       - id: CMSurgicalLine
       - id: CMSynthGraft

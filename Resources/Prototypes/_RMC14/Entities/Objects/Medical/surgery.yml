@@ -83,6 +83,24 @@
     state: predator_hemostat
 
 
+# Fix-O-Vein
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMFixOVein
+  name: fix-o-vein
+  description: A surgical tool designed to repair damaged blood vessels.
+  components:
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: FixOVein
+      quality: Ideal
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/healing.rsi
+    state: fixovein
+  - type: Item
+    sprite: _RMC14/Objects/Medical/Surgery/healing.rsi
+
+
 
 # Cautery
 - type: entity

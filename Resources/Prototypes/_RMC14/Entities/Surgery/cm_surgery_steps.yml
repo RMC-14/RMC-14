@@ -257,6 +257,26 @@
 
 - type: entity
   parent: CMSurgeryStepBase
+  id: RMCSurgeryStepRepairInternalBleeding
+  name: Repair internal bleeding
+  components:
+  - type: CMSurgeryStep
+    skill: 1
+    tool:
+    - FixOVein
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/hemostat1.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/healing.rsi
+    state: fixovein
+  - type: RMCSurgeryStepInternalBleedingEffect
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 8
+
+- type: entity
+  parent: CMSurgeryStepBase
   id: RMCSelfStepExtractForeignObject
   name: Extract foreign object
   components:

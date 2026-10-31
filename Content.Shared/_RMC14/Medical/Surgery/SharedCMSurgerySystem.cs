@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids.Organs;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Body.Part;
@@ -63,6 +64,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
         SubscribeLocalEvent<CMSurgeryCloseIncisionConditionComponent, CMSurgeryValidEvent>(OnCloseIncisionValid);
         SubscribeLocalEvent<RMCSurgeryForeignObjectConditionComponent, CMSurgeryValidEvent>(OnForeignObjectValid);
+        SubscribeLocalEvent<RMCSurgeryInternalBleedingConditionComponent, CMSurgeryValidEvent>(OnInternalBleedingValid);
         SubscribeLocalEvent<CMSurgeryLarvaConditionComponent, CMSurgeryValidEvent>(OnLarvaValid);
         SubscribeLocalEvent<CMSurgeryPartConditionComponent, CMSurgeryValidEvent>(OnPartConditionValid);
         SubscribeLocalEvent<RMCSurgeryDeadConditionComponent, CMSurgeryValidEvent>(OnIsDead);
@@ -129,6 +131,17 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
         if (!embedded.Entries.Any(entry => entry.BodyPart == part.PartType && entry.Symmetry == part.Symmetry))
             args.Cancelled = true;
+    }
+
+    private void OnInternalBleedingValid(Entity<RMCSurgeryInternalBleedingConditionComponent> ent, ref CMSurgeryValidEvent args)
+    {
+        if (!TryComp(args.Body, out WoundedComponent? wounded) ||
+            !TryComp(args.Part, out BodyPartComponent? part) ||
+            !wounded.InternalBleeds.Any(entry =>
+                entry.BodyPart == part.PartType && entry.Symmetry == part.Symmetry))
+        {
+            args.Cancelled = true;
+        }
     }
 
     private void OnLarvaValid(Entity<CMSurgeryLarvaConditionComponent> ent, ref CMSurgeryValidEvent args)

@@ -5,6 +5,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Embeds;
 
+[DataDefinition]
 public sealed partial class ForeignObjectSelfExtractionAlertEvent : BaseAlertEvent;
 
 [Serializable, NetSerializable]

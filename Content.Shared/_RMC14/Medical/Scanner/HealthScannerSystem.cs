@@ -212,6 +212,8 @@ public sealed class HealthScannerSystem : EntitySystem
         if (TryComp<ForeignObjectEmbeddedComponent>(target, out var embeddedComponent))
             embeddedObjectInBodyParts = ForeignObjectEmbeddedUtility.GetEmbeddedObjectInBodyParts(embeddedComponent);
 
+        var internalBleeds = wound?.InternalBleeds ?? new List<InternalBleedingEntry>();
+
         var state = new HealthScanState(
             GetNetEntity(target),
             mobState,
@@ -225,7 +227,8 @@ public sealed class HealthScannerSystem : EntitySystem
             chemicals,
             bleeding,
             scanner.Comp.DetailLevel,
-            embeddedObjectInBodyParts);
+            embeddedObjectInBodyParts,
+            internalBleeds);
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }

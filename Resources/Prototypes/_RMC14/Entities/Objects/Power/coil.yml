@@ -49,6 +49,8 @@
     toolTypes:
     - kind: Hemostat
       quality: BadSubstitute
+    - kind: FixOVein
+      quality: BadSubstitute
 
 - type: entity
   parent: RMCCableCoil
