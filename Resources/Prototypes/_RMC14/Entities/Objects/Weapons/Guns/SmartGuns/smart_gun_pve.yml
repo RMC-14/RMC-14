@@ -61,15 +61,15 @@
     baseFireModes:
     - FullAuto
     recoilWielded: 0
-    scatterWielded: 2
+    scatterWielded: 0
     baseFireRate: 6
     burstScatterMult: 4
     modifiers:
       FullAuto:
-        maxScatterModifier: 4
+        maxScatterModifier: 0
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 80
+        shotsToMaxScatter: null
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.15
   - type: ContainerContainer
