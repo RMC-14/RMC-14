@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Stun;
 using Content.Shared.Access;
 using Content.Shared.DoAfter;
 using Content.Shared.PowerCell;
@@ -109,6 +110,24 @@ public sealed partial class RMCApcComponent : Component
     [DataField, AutoNetworkedField]
     public bool Broken;
 
+    [DataField]
+    public int XenoExposeWiresMinHits = 3;
+
+    [DataField]
+    public int XenoExposeWiresMaxHits = 4;
+
+    [DataField]
+    public RMCSizes XenoElectronicsDamageSize = RMCSizes.Big;
+
+    [DataField]
+    public SoundSpecifier XenoAttackSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/metal_crash.ogg");
+
+    [ViewVariables]
+    public int XenoHits;
+
+    [ViewVariables]
+    public bool XenoWiresDamaged;
+
     [DataField, AutoNetworkedField]
     public ProtoId<ToolQualityPrototype> RepairTool = "Screwing";
 
@@ -134,9 +153,6 @@ public sealed partial class RMCApcComponent : Component
     public EntProtoId ElectronicsPrototype = "CMAPCElectronics";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId FramePrototype = "CMAPCFrame";
-
-    [DataField, AutoNetworkedField]
     public TimeSpan InstallTerminalDelay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
@@ -152,10 +168,7 @@ public sealed partial class RMCApcComponent : Component
     public TimeSpan SecureElectronicsDelay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan RepairFrameDelay = TimeSpan.FromSeconds(5);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan DeconstructDelay = TimeSpan.FromSeconds(5);
+    public TimeSpan RepairFrameDelay = TimeSpan.FromSeconds(4);
 
     [DataField]
     public SoundSpecifier CrowbarSound = new SoundPathSpecifier("/Audio/Items/crowbar.ogg");
@@ -323,6 +336,3 @@ public sealed partial class RMCApcUnsecureElectronicsDoAfterEvent : SimpleDoAfte
 
 [Serializable, NetSerializable]
 public sealed partial class RMCApcRepairFrameDoAfterEvent : SimpleDoAfterEvent;
-
-[Serializable, NetSerializable]
-public sealed partial class RMCApcDeconstructDoAfterEvent : SimpleDoAfterEvent;

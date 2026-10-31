@@ -7,6 +7,7 @@ using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
+using Content.Server.Wires;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Power;
@@ -32,7 +33,7 @@ using System.Linq;
 
 namespace Content.Server._RMC14.Power;
 
-public sealed class RMCPowerSystem : SharedRMCPowerSystem
+public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
 {
     // CM13 power runs every two seconds and converts a power tick to cell charge with CELLRATE 0.006.
     // RMC power is delta-time based, so APCs convert their cells' legacy charge units at this boundary.
@@ -67,6 +68,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly WiresSystem _wires = default!;
 
     private readonly Dictionary<RMCPowerNetworkKey, EntityUid> _networkEntities = new();
     private readonly Dictionary<RMCPowerNetworkKey, RMCPowerNetworkStats> _networkStats = new();

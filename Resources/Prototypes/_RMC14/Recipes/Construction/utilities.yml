@@ -11,6 +11,7 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  interactionRange: 1.5
   conditions:
   - !type:WallmountCondition {}
   - !type:RMCApcConstructionAreaAvailable {}

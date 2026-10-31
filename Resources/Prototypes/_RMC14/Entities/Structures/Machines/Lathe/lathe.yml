@@ -124,7 +124,7 @@
   - RMCUniversalRecorder
   #    - Airlock electronics (50 metal, 50 glass)->(62, 62)
   #    - Fire alarm electronics (50 metal, 50 glass)->(62, 62)
-  #    - Power control module (50 metal, 50 glass)->(62, 62)
+  - CMAPCElectronics
   - RMCTablePartTan
   - RMCTablePartAlmayer
   - RMCTablePartReinforced

@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors;
@@ -41,7 +42,7 @@ using static Content.Shared.Popups.PopupType;
 
 namespace Content.Shared._RMC14.Power;
 
-public abstract class SharedRMCPowerSystem : EntitySystem
+public abstract partial class SharedRMCPowerSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
@@ -102,6 +103,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCApcComponent, ComponentRemove>(OnApcRemove);
         SubscribeLocalEvent<RMCApcComponent, EntityTerminatingEvent>(OnApcRemove);
         SubscribeLocalEvent<RMCApcComponent, BreakageEventArgs>(OnApcBreakage);
+        SubscribeLocalEvent<RMCApcComponent, BeforeDamageChangedEvent>(OnApcBeforeDamageChanged,
+            after: [typeof(SharedGodmodeSystem)]);
         SubscribeLocalEvent<RMCApcComponent, InteractUsingEvent>(OnApcInteractUsing);
         SubscribeLocalEvent<RMCApcComponent, InteractHandEvent>(OnApcInteractHand);
         SubscribeLocalEvent<RMCApcComponent, ActivatableUIOpenAttemptEvent>(OnApcActivatableUIOpenAttempt);
@@ -115,7 +118,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCApcComponent, RMCApcSecureElectronicsDoAfterEvent>(OnApcSecureElectronicsDoAfter);
         SubscribeLocalEvent<RMCApcComponent, RMCApcUnsecureElectronicsDoAfterEvent>(OnApcUnsecureElectronicsDoAfter);
         SubscribeLocalEvent<RMCApcComponent, RMCApcRepairFrameDoAfterEvent>(OnApcRepairFrameDoAfter);
-        SubscribeLocalEvent<RMCApcComponent, RMCApcDeconstructDoAfterEvent>(OnApcDeconstructDoAfter);
 
         SubscribeLocalEvent<RMCApcConstructionFrameComponent, ComponentStartup>(OnApcConstructionFrameStartup);
         SubscribeLocalEvent<RMCApcConstructionFrameComponent, MapInitEvent>(OnApcConstructionFrameUpdate);
@@ -379,6 +381,11 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
     private void OnApcBreakage(Entity<RMCApcComponent> ent, ref BreakageEventArgs args)
     {
+        BreakApc(ent);
+    }
+
+    private void BreakApc(Entity<RMCApcComponent> ent)
+    {
         ent.Comp.Broken = true;
         CloseApcWiresPanel(ent);
         ent.Comp.WiresExposed = true;
@@ -406,8 +413,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
         }
 
-        if (TryUseApcFrame(ent, user, used) ||
-            TryUseApcCrowbar(ent, user, used) ||
+        if (TryUseApcCrowbar(ent, user, used) ||
             TryUseApcCell(ent, user, used) ||
             TryUseApcAccess(ent, user, used) ||
             TryUseApcCable(ent, user, used) ||
@@ -478,6 +484,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             var markup = ent.Comp.State switch
             {
                 RMCApcState.Working => Loc.GetString("rmc-apc-examine-working"),
+                RMCApcState.WiresExposed when ent.Comp.MainPowerWireCut =>
+                    Loc.GetString("rmc-apc-examine-wires-damaged"),
                 RMCApcState.WiresExposed => Loc.GetString("rmc-apc-examine-wires-exposed"),
                 RMCApcState.CoverOpenBattery => Loc.GetString("rmc-apc-examine-cover-open-battery"),
                 RMCApcState.CoverOpenNoBattery => GetApcOpenNoBatteryExamine(ent),
@@ -508,7 +516,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
         }
 
-        if (args.Open)
+        if (args.Open || args.User == null)
             return;
 
         if (ent.Comp.Cover != RMCApcCover.Closed ||
@@ -522,6 +530,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     private void OnApcPanelChanged(Entity<RMCApcComponent> ent, ref PanelChangedEvent args)
     {
         ent.Comp.WiresExposed = args.Open;
+        if (!args.Open)
+            ResetApcXenoDamage(ent);
         Dirty(ent);
         UpdateApcAppearance(ent);
     }
@@ -665,20 +675,17 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (args.Cancelled || args.Handled || args.Used == null)
             return;
 
-        args.Handled = true;
-
         if (!ent.Comp.Broken ||
             ent.Comp.Cover == RMCApcCover.Closed ||
             ent.Comp.Electronics != RMCApcElectronics.Missing ||
             HasApcCell(ent) ||
-            !HasComp<RMCApcFrameComponent>(args.Used.Value))
+            !_tool.HasQuality(args.Used.Value, ent.Comp.WeldingTool) ||
+            !_skills.HasSkill(args.User, ent.Comp.Skill, ent.Comp.SkillLevel))
         {
             return;
         }
 
-        if (_net.IsServer)
-            QueueDel(args.Used.Value);
-
+        args.Handled = true;
         ent.Comp.Broken = false;
         ent.Comp.Cover = RMCApcCover.Open;
         ent.Comp.TerminalInstalled = false;
@@ -688,6 +695,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         ent.Comp.MainPowerWireCut = false;
         ent.Comp.MainPowerWirePulsed = false;
         ent.Comp.IdScannerWireCut = false;
+        SetApcWiresCut(ent, args.User, false);
+        ResetApcXenoDamage(ent);
 
         if (TryComp(ent, out DamageableComponent? damageable))
             _damageable.SetAllDamage(ent, damageable, FixedPoint2.Zero);
@@ -695,29 +704,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         Dirty(ent);
         UpdateApcAppearance(ent);
         ToUpdate.Add(ent);
-    }
-
-    private void OnApcDeconstructDoAfter(Entity<RMCApcComponent> ent, ref RMCApcDeconstructDoAfterEvent args)
-    {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (ent.Comp.Cover == RMCApcCover.Closed ||
-            ent.Comp.TerminalInstalled ||
-            ent.Comp.Electronics != RMCApcElectronics.Missing ||
-            HasApcCell(ent))
-        {
-            return;
-        }
-
-        if (_net.IsServer)
-        {
-            SpawnNextToOrDrop("CMSheetMetal1", ent);
-            SpawnNextToOrDrop("CMSheetMetal1", ent);
-            QueueDel(ent);
-        }
     }
 
     private bool TryForceOpenBrokenApc(Entity<RMCApcComponent> ent, EntityUid user, EntityUid used)
@@ -736,38 +722,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         UpdateApcAppearance(ent);
         _popup.PopupClient(Loc.GetString("rmc-apc-knock-cover-off", ("apc", ent)), ent, user);
         return true;
-    }
-
-    private bool TryUseApcFrame(Entity<RMCApcComponent> ent, EntityUid user, EntityUid used)
-    {
-        if (!HasComp<RMCApcFrameComponent>(used))
-            return false;
-
-        if (!ent.Comp.Broken)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-apc-repair-frame-not-needed", ("apc", ent)), ent, user, SmallCaution);
-            return true;
-        }
-
-        if (ent.Comp.Cover == RMCApcCover.Closed)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-apc-damaged-cover-in-way", ("apc", ent)), ent, user, SmallCaution);
-            return true;
-        }
-
-        if (ent.Comp.Electronics != RMCApcElectronics.Missing)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-apc-remove-damaged-electronics-first", ("apc", ent)), ent, user, SmallCaution);
-            return true;
-        }
-
-        if (HasApcCell(ent))
-        {
-            _popup.PopupClient(Loc.GetString("rmc-apc-remove-battery-first", ("apc", ent)), ent, user, SmallCaution);
-            return true;
-        }
-
-        return TryStartApcDoAfter(ent, user, used, ent.Comp.RepairFrameDelay, new RMCApcRepairFrameDoAfterEvent());
     }
 
     private bool TryUseApcCrowbar(Entity<RMCApcComponent> ent, EntityUid user, EntityUid used)
@@ -1050,8 +1004,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (!_tool.HasQuality(used, ent.Comp.WeldingTool))
             return false;
 
-        if (ent.Comp.Cover == RMCApcCover.Closed ||
-            ent.Comp.TerminalInstalled ||
+        if (!ent.Comp.Broken ||
+            ent.Comp.Cover == RMCApcCover.Closed ||
             ent.Comp.Electronics != RMCApcElectronics.Missing ||
             HasApcCell(ent))
         {
@@ -1062,9 +1016,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                 used,
                 user,
                 ent,
-                ent.Comp.DeconstructDelay,
+                ent.Comp.RepairFrameDelay,
                 new[] { ent.Comp.WeldingTool.Id },
-                new RMCApcDeconstructDoAfterEvent(),
+                new RMCApcRepairFrameDoAfterEvent(),
                 out _,
                 duplicateCondition: DuplicateConditions.SameTool))
         {
@@ -1255,6 +1209,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
 
         ent.Comp.MainPowerWireCut = cut;
+        if (!cut)
+            ResetApcXenoDamage((ent.Owner, ent.Comp));
         Dirty(ent);
         ToUpdate.Add(ent);
     }
@@ -2366,7 +2322,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
 
         var coordinates = xform.Coordinates.Offset(direction.ToVec());
-        _transform.SetCoordinates((uid, xform, MetaData(uid)), coordinates, xform.LocalRotation, unanchor: false);
+        _transform.SetCoordinates((uid, xform, MetaData(uid)), coordinates, xform.LocalRotation);
+        _transform.AnchorEntity((uid, xform));
     }
 
     private bool HasWallAtCoordinates(EntityCoordinates coordinates)

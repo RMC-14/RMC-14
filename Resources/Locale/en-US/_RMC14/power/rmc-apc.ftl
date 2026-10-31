@@ -4,6 +4,13 @@ rmc-apc-construction-area-occupied = [color=red]This area already has an APC. Co
 
 rmc-apc-skill-fail = You don't know how to use {$apc}'s interface.
 
+rmc-apc-xeno-already-broken = The APC's electronics are already destroyed.
+rmc-apc-xeno-too-small = You are not big enough to destroy the APC's electronics.
+rmc-apc-xeno-wires-exposed = You tear the APC's panel off, exposing the wires.
+rmc-apc-xeno-wires-cut = You tear the APC's wires apart.
+rmc-apc-xeno-electronics-destroyed = You smash the APC's electronics.
+rmc-apc-examine-wires-damaged = The APC's wires are damaged. Mend them with [color=cyan]wirecutters[/color] through the wiring panel, then close the panel with a [color=cyan]screwdriver[/color]. The electronics and battery are intact.
+
 rmc-apc-examine-working =
     Use:
     - An [color=cyan]engineering ID[/color] to lock or unlock the interface.
@@ -14,7 +21,7 @@ rmc-apc-examine-cover-open-battery = Use an [color=cyan]empty hand[/color] to re
 rmc-apc-examine-cover-removed-battery = Use an [color=cyan]empty hand[/color] to remove the battery.
 rmc-apc-examine-broken = The APC is broken. Hit it with a sturdy tool to knock the cover loose.
 rmc-apc-examine-broken-cover-removed-battery = The APC is broken. Remove the [color=cyan]battery[/color], then strip the damaged electronics.
-rmc-apc-examine-broken-cover-removed-no-battery = The APC is broken. Strip the damaged electronics, then use an [color=cyan]APC frame[/color] to repair the front assembly.
+rmc-apc-examine-broken-cover-removed-no-battery = The APC is broken. Strip the damaged electronics, then repair the front assembly with a [color=cyan]lit welder[/color] (base time: 4 seconds). Reconnect the cable and reinstall the electronics and battery afterwards.
 rmc-apc-examine-maintenance = The APC is incomplete. It needs [color=cyan]cable[/color], a [color=cyan]power control module[/color], and a [color=cyan]screwdriver[/color].
 rmc-apc-examine-connect-terminal = Use [color=cyan]{$amount} cable[/color] to connect the terminal.
 rmc-apc-examine-install-electronics = Use a [color=cyan]power control module[/color] to install the electronics.
