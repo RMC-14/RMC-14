@@ -23,7 +23,7 @@
     modifiers:
       FullAuto:
         maxScatterModifier: 12 # SCATTER_AMOUNT_TIER_5 (6) * 2
-        useBurstModifier: false
+        useBurstScatterMult: false
         unwieldedScatterMultiplier: 7 # SCATTER_AMOUNT_TIER_4 (7)
         shotsToMaxScatter: 20  # FULL_AUTO_SCATTER_PEAK_TIER_2 (20)
     baseFireModes:
@@ -47,7 +47,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m13.rsi
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1   # BASE_ACCURACY_MULT (1)
-    AccuracyMultiplierUnwielded: 0.8 # BASE_ACCURACY_MULT (1) - HIT_ACCURACY_MULT_TIER_4 (0.20)
+    accuracyMultiplierUnwielded: 0.8 # BASE_ACCURACY_MULT (1) - HIT_ACCURACY_MULT_TIER_4 (0.20)
   - type: ItemSlots
     slots:
       gun_magazine:
