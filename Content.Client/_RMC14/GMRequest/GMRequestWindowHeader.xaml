@@ -1,0 +1,43 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              HorizontalExpand="True"
+              VerticalExpand="True"
+              Orientation="Vertical"
+              SeparationOverride="0">
+    <BoxContainer Orientation="Horizontal" VerticalExpand="True" SeparationOverride="2" MinHeight="20">
+        <Label Name="Time"
+               Text="{Loc 'rmc-gm-request-window-header-time'}"
+               SizeFlagsStretchRatio="2"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+        <customControls:VSeparator/>
+        <Label Name="Username"
+               Text="{Loc 'rmc-gm-request-window-header-username'}"
+               SizeFlagsStretchRatio="3"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+        <customControls:VSeparator/>
+        <Label Name="Entity"
+               Text="{Loc 'rmc-gm-request-window-header-character'}"
+               SizeFlagsStretchRatio="3"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+        <customControls:VSeparator/>
+        <Label Name="Message"
+               Text="{Loc 'rmc-gm-request-window-header-message'}"
+               SizeFlagsStretchRatio="10"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+        <customControls:VSeparator/>
+        <Label Name="Claimant"
+               Text="{Loc 'rmc-gm-request-window-header-claimant'}"
+               SizeFlagsStretchRatio="3"
+               HorizontalExpand="True"
+               VerticalAlignment="Top"
+               ClipText="True"/>
+    </BoxContainer>
+</BoxContainer>

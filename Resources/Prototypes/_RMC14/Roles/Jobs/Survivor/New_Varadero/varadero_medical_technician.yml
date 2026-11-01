@@ -1,0 +1,121 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorMedicalTechnician
+  name: rmc-job-name-survivor-medical-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorDoctor
+  startingGear: RMCGearSurvivorMedicalTechnician
+  greeting: rmc-job-greeting-varadero
+  spawnMenuRoleName: UNMC Medical Technician (NV Survivor)
+  icon: "RMCJobIconSurvivorNVMedicalTechnician"
+  hasIcon: true
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorDoctor
+      time: 252000 # 70 hours
+    RMCRankCorporal: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMarineVaradero
+    - type: Skills
+      preset: RMCSkillPresetSurvivorDoctor
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-medical-technician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: field_doctor
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_unmc
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetMedicalTechnician
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
+
+- type: startingGear
+  id: RMCGearSurvivorMedicalTechnician
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianGreen
+    ears: RMCHeadsetMarineNV
+    gloves: CMHandsLatex
+    shoes: CMBootsBlackFilled
+    back: CMSatchelMedical
+    pocket1: RMCPouchSurvivalFill
+    id: CMIDCardColonistDoctor
+  storage:
+    back:
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorMedicalTechnician
+  name: survivor medical technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCGearSurvivorPresetMedicalTechnician
+  name: varadero medical technician preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ RMCLabcoatBrown, CMHeadCapSurgBlue, CMMaskSterile ]
+    - [ RMCJacketWindbreakerFirstResponder, RMCHeadCapFlippable ]
+    - [ RMCHazardVestEMT, RMCBeltMedicalDefibAnalyzerFilled, RMCHeadCapFlippable ]
+    randomGearOther:
+    -
+      - [ RMCPouchFirstAidSplintsGauzeOintment ]
+      - [ RMCPouchMedicalFill ]
+      - [ RMCPouchFirstAidInjectors ]
+      - [ RMCPouchFirstResponderFill ]
+      - [ RMCPouchMedkitFillAdvanced ]
+    -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorNVMedicalTechnician
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
+    state: hudsquad_nv_field_doctor

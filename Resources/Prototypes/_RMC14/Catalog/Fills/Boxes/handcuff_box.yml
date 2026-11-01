@@ -21,6 +21,16 @@
     contents:
       - id: RMCZipties
         amount: 10
+  - type: Storage
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - RMCZipties
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCZipties
+  - type: FixedItemSizeStorage
   - type: Item
     size: Small
     shape: null

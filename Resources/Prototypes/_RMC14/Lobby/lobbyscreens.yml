@@ -89,7 +89,3 @@
 - type: lobbyBackground
   id: DontLetGo
   background: /Textures/_RMC14/Lobby/DontLetGo.png
-  
-- type: lobbyBackground
-  id: UNMCposters
-  background: /Textures/_RMC14/Lobby/posters.png
