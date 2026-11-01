@@ -25,13 +25,12 @@
   ## Getting Started
   As a survivor, you will begin in a random location within the colony alongside the other survivors. [bold]If you are immediately lost or confused, follow someone else. Help them scavenge supplies and follow them to where you will be holding out.[/bold] 
 
-  All survivors begin with randomized equipment depending on their role. Most survivors are likely to spawn with a weapon and ammunition, but roles such as engineer survivor may instead spawn with a tool belt. All survivors begin with 20 metal sheets, a random sidearm, and a spare magazine in their backpack.
-
-  All survivors begin with a survival pouch.
+  All survivors begin with randomized equipment depending on their role. Most survivors are likely to spawn with a weapon and ammunition, while survivors such as engineer survivor may instead spawn with a tool belt. All survivors begin with 20 metal sheets, a random sidearm, and a spare magazine in their backpack.
 
   <Box>
     [color=#a88b5e][bold]Your Survival Pouch[/bold][/color]
   </Box>
+  <Box> All survivors begin with a survival pouch.</Box>
   <Box>
     <GuideEntityEmbed Entity="RMCPouchSurvival" Caption="Survival Pouch"/>
   </Box>
@@ -55,11 +54,11 @@
     [color=#a88b5e][bold]Inserts[/bold][/color]
   </Box>
   <Box> [bold]Inserts[/bold] are shorthand for [bold]nightmare inserts[/bold] and [bold]scenarios[/bold], both of which are map-altering events that are randomized every round. </Box>
-  - [bold]Nightmare inserts[/bold] change survivor roles, equipment, spawn location, and parts of the map. Survivors could be part of a different faction, often military.
+  - [bold]Nightmare inserts[/bold] change survivor roles, equipment, skills, spawn location, and parts of the map. Survivors could be part of a different faction, often military.
   - [bold]Scenarios[/bold] change the map, replacing one area with another, modifying an area, or modifying the loot in an area.
 
   ## Preparing for Survivor
-  Given that survivor is difficult to learn in the moment, its good to know the there are ways to prepare yourself for the expectations of the role.
+  While survivor is difficult to learn in the moment, there are ways to prepare yourself for the expectations of the role as a marine.
   - [bold]Familiarize yourself with map layouts.[/bold] As a survivor, you do not have a tactical map, nor any means of externally pinpointing your location. As a marine, learn how to navigate maps based on landmarks and structures.
   - [bold]Learn how to improvise.[/bold] As a survivor, you will need to work with what you have, even if it is not best suited for the situation. As a marine, try improvising with what you have or putting what you find groundside to use.
   - [bold]Know how to fight.[/bold] As a survivor, your strength is not in numbers. Your strength is in how proficient and equipped you are, next to how well you can improvise. As a marine, participate in small-scale engagements and learn how to hold your own.
@@ -199,26 +198,26 @@
 
   With [bold]contesting[/bold], you are fighting to stall the xenonid advance and buy time for the other survivors to reinforce the hold.
 
-  In order to properly [bold]contest[/bold], consider,
-  - [bold]Practicing trigger discipline.[/bold] It is very unlikely you will be able to recover quickly from friendly fire. Hold your fire if there is a likelihood you will hit another survivor.
-  - [bold]Improvising with what you have and doing so conservatively.[/bold] Put your weapons and ammunition to use. Use fire to deny advances and chamber armor-piercing to deter armored xenonids. Use what you have with purpose.
-  - [bold]Collectively focusing on a single target.[/bold] It is unlikely you will kill any xenonids by your lonesome. Collectively focusing on the most threatening xenonid closest to your hold can result in it's death before it can retreat. Work together.
-  - [bold]Shaking other survivors.[/bold] Xenonids are capable of stunning survivors for seconds at a time, which can create vulnerabilities or cause casualties. Shake your fellow survivors to keep them in the fight.
-  - [bold]Maintaining spacing.[/bold] Xenonids have an array of area-of-effect stuns that can easily cripple efforts to [bold]contest[/bold] if the survivors are too bunched together. Stay spaced enough for you to shake one another and for these stuns to be a non-issue.
-  - [bold]Knowing when to give ground.[/bold] Good [bold]contesting[/bold] will typically afford the holdout several lines of barricades. Do not hesitate to retreat if you believe the barricades you are currently holding are soon to collapse.
+  In order to properly [bold]contest[/bold],
+  - [bold]Practice trigger discipline.[/bold] It is very unlikely you will be able to recover quickly from friendly fire. Hold your fire if there is a likelihood you will hit another survivor.
+  - [bold]Improvise with what you have and doing so conservatively.[/bold] Put your weapons and ammunition to use. Use fire to deny advances and chamber armor-piercing to deter armored xenonids. Use what you have with purpose.
+  - [bold]Collectively focus on a single target.[/bold] It is unlikely you will kill any xenonids by your lonesome. Collectively focusing on the most threatening xenonid closest to your hold can result in it's death before it can retreat. Work together.
+  - [bold]Shake other survivors.[/bold] Xenonids are capable of stunning survivors for seconds at a time, which can create vulnerabilities or cause casualties. Shake your fellow survivors to keep them in the fight.
+  - [bold]Maintain spacing.[/bold] Xenonids have an array of area-of-effect stuns that can easily cripple efforts to [bold]contest[/bold] if the survivors are too bunched together. Stay spaced enough for you to shake one another and for these stuns to be a non-issue.
+  - [bold]Know when to give ground.[/bold] Good [bold]contesting[/bold] will typically afford the holdout several lines of barricades. Do not hesitate to retreat if you believe the barricades you are currently holding are soon to collapse.
 
-  If you are uncomfortable with contesting, there are other ways to contribute to the holdout, such as,
+  If you are uncomfortable with contesting, there are other ways to contribute to the holdout.
 
-  - [bold]Organizing loot.[/bold] Keeping the survivor hold organized can help your teammates find what they need as fast as possible.
-  - [bold]Supplying other survivors.[/bold] Those [bold]contesting[/bold] may have barricades between them and critical supplies. Throw them what they need, when they ask for it.
-  - [bold]Healing other survivors.[/bold] Use topical treatments on other survivors to stop their bleeding and treat their wounds, especially with medical kits. Be very careful when administering chemical treatments, as survivors may have used their own.
-  - [bold]Shaking other survivors.[/bold] Xenonids are capable of stunning survivors for seconds at a time, which can create vulnerabilities or cause casualties. Shake your fellow survivors to keep them in the fight.
+  - [bold]Organize loot.[/bold] Keeping the survivor hold organized can help your teammates find what they need as fast as possible.
+  - [bold]Supply other survivors.[/bold] Those [bold]contesting[/bold] may have barricades between them and critical supplies. Throw them what they need, when they ask for it.
+  - [bold]Heal other survivors.[/bold] Use topical treatments on other survivors to stop their bleeding and treat their wounds, especially with medical kits. Be very careful when administering chemical treatments, as survivors may have used their own.
+  - [bold]Shake other survivors.[/bold] Xenonids are capable of stunning survivors for seconds at a time, which can create vulnerabilities or cause casualties. Shake your fellow survivors to keep them in the fight.
   - [bold]Repair and construct barricades.[/bold] Put loose materials to use and construct more barricade lines. If there is a loose blowtorch, take it and use it to repair barricades, even if it incurs eye damage.
 
   ## Rescue
   If you can manage to stave off the xenonid menace for long enough, you may yet live to see the marines rescue you. Remember that, as a survivor, you are upheld to unique roleplay standards, which you can view [textlink="here" link="RMCSurvivorRoleplay"].
 
-  What happens after is up to you. Some of your options include,
+  What happens next is up to you. Some of your options include,
   - Redeploying or contracting to take back the colony.
   - Contracting to support the effort shipside.
   - Remaining shipside to roleplay.
