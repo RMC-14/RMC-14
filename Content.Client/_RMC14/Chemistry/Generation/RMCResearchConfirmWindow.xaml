@@ -1,0 +1,31 @@
+<controls:RMCResearchConfirmWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Generation"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    MinWidth="420" MaxWidth="420" Resizable="False">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#221801" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="4">
+            <PanelContainer>
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#221801" BorderColor="#FAC000" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <RichTextLabel Name="MessageLabel" Access="Public" Margin="8 6" />
+            </PanelContainer>
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4" Margin="0 4 0 0">
+                <Button Name="AcceptButton" Access="Public" HorizontalExpand="True" MinHeight="32" Modulate="#FFFFFF" ModulateSelfOverride="#FFFFFF">
+                    <Button.StyleBoxOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#FAC000" BorderColor="#8A6800" BorderThickness="2" />
+                    </Button.StyleBoxOverride>
+                </Button>
+                <Button Name="DenyButton" Access="Public" HorizontalExpand="True" MinHeight="32" Modulate="#FFFFFF" ModulateSelfOverride="#FFFFFF">
+                    <Button.StyleBoxOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#221801" BorderColor="#8A6800" BorderThickness="2" />
+                    </Button.StyleBoxOverride>
+                </Button>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCResearchConfirmWindow>

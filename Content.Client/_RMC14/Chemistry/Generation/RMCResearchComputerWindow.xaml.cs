@@ -36,6 +36,7 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        RMCMachineUiStyle.RemoveWindowBorder(this, AmberBlack);
 
         var resourceCache = IoCManager.Resolve<IResourceCache>();
         var smallFont = resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 8);

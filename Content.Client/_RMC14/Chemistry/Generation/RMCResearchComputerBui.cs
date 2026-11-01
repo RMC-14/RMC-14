@@ -25,7 +25,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
     private readonly SharedRMCChemistryResearchSystem _research;
 
     private RMCResearchComputerWindow? _window;
-    private ConfirmationWindow? _confirm;
+    private RMCResearchConfirmWindow? _confirm;
     private PaperWindow? _paper;
 
     private enum SortColumn
@@ -173,7 +173,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
     {
         _confirm?.Close();
 
-        var confirm = new ConfirmationWindow();
+        var confirm = new RMCResearchConfirmWindow();
         _confirm = confirm;
         confirm.Setup(title, text, "Confirm", "Cancel");
         confirm.AcceptButton.OnPressed += _ =>
