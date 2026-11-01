@@ -56,8 +56,6 @@
   reactants:
     Enzyme:
       amount: 1
-    RMCBlackGoo: # TODO RMC14 remove this later
-      amount: 0.5
     JuiceBerry:
       amount: 1
   products:
