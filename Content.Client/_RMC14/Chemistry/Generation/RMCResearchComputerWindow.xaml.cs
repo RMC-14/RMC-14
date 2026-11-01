@@ -31,6 +31,7 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
     public readonly Label BrokerClearanceLabel;
 
     private readonly List<RMCResearchTabButton> _tabButtons = new();
+    private readonly Dictionary<Button, RMCIconLabelRow> _sortRows = new();
 
     public RMCResearchComputerWindow()
     {
@@ -53,10 +54,22 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
                      PublishedSortTimeButton, PublishedSortCompoundButton,
                  })
         {
-            button.Label.FontColorOverride = AmberBright;
+            var row = button.AddIconLabel(RMCIcons.ArrowDown19, button.Text ?? string.Empty, 14, fontColor: AmberBright);
+            row.Icon.IdleColor = AmberBright;
+            row.Icon.Texture = null;
+            _sortRows[button] = row;
         }
 
         BuildTabBar();
+    }
+
+    public void SetSortIcon(Button button, string? icon)
+    {
+        var row = _sortRows[button];
+        if (icon == null)
+            row.Icon.Texture = null;
+        else
+            row.SetIcon(icon);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

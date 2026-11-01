@@ -14,7 +14,7 @@ namespace Content.Client._RMC14.Chemistry.Centrifuge;
 [GenerateTypedNameReferences]
 public sealed partial class RMCCentrifugeWindow : DefaultWindow
 {
-    private readonly Label _modeLabel;
+    private readonly RMCIconLabelRow _modeIcon;
     private readonly Label _sourceLabel;
     private readonly Font _bannerFont;
 
@@ -26,7 +26,7 @@ public sealed partial class RMCCentrifugeWindow : DefaultWindow
         _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
         LabelEdit.StyleBoxOverride = Field();
 
-        _modeLabel = ModeButton.SetIcon(RMCIcons.ArrowsRotate, "Mode: split", 16).Label;
+        _modeIcon = ModeButton.SetIcon(RMCIcons.ArrowsSplitUpAndLeft, "Mode: split", 16);
 
         _sourceLabel = SourceButton.SetIcon(RMCIcons.Flask, "Input: Container", 16).Label;
 
@@ -36,9 +36,10 @@ public sealed partial class RMCCentrifugeWindow : DefaultWindow
         EjectOutputButton.SetIcon(RMCIcons.Eject, "Eject", 16);
     }
 
-    public void SetMode(string text)
+    public void SetMode(bool split)
     {
-        _modeLabel.Text = text;
+        _modeIcon.Label.Text = split ? "Mode: split" : "Mode: distribute";
+        _modeIcon.SetIcon(split ? RMCIcons.ArrowsSplitUpAndLeft : RMCIcons.EqualsSign);
     }
 
     public void SetSource(string text)

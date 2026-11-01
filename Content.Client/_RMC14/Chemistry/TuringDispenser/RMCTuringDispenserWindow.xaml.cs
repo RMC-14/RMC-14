@@ -17,8 +17,8 @@ public sealed partial class RMCTuringDispenserWindow : DefaultWindow
 {
     private readonly Font _bannerFont;
     private readonly RMCIconLabelRow _autoRunIcon;
-    private readonly Label _smartLinkLabel;
-    private readonly Label _outputModeLabel;
+    private readonly RMCIconLabelRow _smartLinkIcon;
+    private readonly RMCIconLabelRow _outputModeIcon;
 
     public readonly RMCMachineSpinBox MultiplierSpinBox;
     public readonly RMCMachineSpinBox CyclesSpinBox;
@@ -36,12 +36,12 @@ public sealed partial class RMCTuringDispenserWindow : DefaultWindow
         RunProgramButton.SetIcon(RMCIcons.Play, "Run program");
         SaveToMemoryButton.SetIcon(RMCIcons.FloppyDisk, "Save box to memory");
         EjectBoxButton.SetIcon(RMCIcons.Eject, "Eject box");
-        DisposeBeakerButton.SetIcon(RMCIcons.Flask, "Flush beaker");
+        DisposeBeakerButton.SetIcon(RMCIcons.Trash, "Flush beaker");
         EjectBeakerButton.SetIcon(RMCIcons.Eject, "Eject beaker");
 
-        _autoRunIcon = AutoRunButton.SetIcon(RMCIcons.Stop, "Autorun: disabled");
-        _smartLinkLabel = SmartLinkButton.SetIcon(RMCIcons.Link, "Smartlink: enabled").Label;
-        _outputModeLabel = OutputModeButton.SetIcon(RMCIcons.Flask, "Outputting to: CONTAINER").Label;
+        _autoRunIcon = AutoRunButton.SetIcon(RMCIcons.DiceOne, "Autorun: disabled");
+        _smartLinkIcon = SmartLinkButton.SetIcon(RMCIcons.Link, "Smartlink: enabled");
+        _outputModeIcon = OutputModeButton.SetIcon(RMCIcons.Flask, "Outputting to: CONTAINER");
 
         MultiplierSpinBox = new RMCMachineSpinBox(1);
         MultiplierContainer.AddChild(MultiplierSpinBox);
@@ -58,17 +58,19 @@ public sealed partial class RMCTuringDispenserWindow : DefaultWindow
     public void SetAutoRun(bool enabled)
     {
         _autoRunIcon.Label.Text = enabled ? "Autorun: enabled" : "Autorun: disabled";
-        _autoRunIcon.SetIcon(enabled ? RMCIcons.ArrowsRotate : RMCIcons.Stop);
+        _autoRunIcon.SetIcon(enabled ? RMCIcons.Repeat : RMCIcons.DiceOne);
     }
 
     public void SetSmartLink(bool enabled)
     {
-        _smartLinkLabel.Text = enabled ? "Smartlink: enabled" : "Smartlink: disabled";
+        _smartLinkIcon.Label.Text = enabled ? "Smartlink: enabled" : "Smartlink: disabled";
+        _smartLinkIcon.SetIcon(enabled ? RMCIcons.Link : RMCIcons.LinkSlash);
     }
 
-    public void SetOutputMode(string text)
+    public void SetOutputMode(string text, string icon)
     {
-        _outputModeLabel.Text = text;
+        _outputModeIcon.Label.Text = text;
+        _outputModeIcon.SetIcon(icon);
     }
 
     public void SetSpinBoxValues(float multiplier, float cycles)

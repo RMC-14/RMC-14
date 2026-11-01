@@ -11,5 +11,5 @@
     <Button Name="ReadButton" Access="Public" MinWidth="90" />
     <Button Name="PrintButton" Access="Public" MinWidth="90" />
     <Button Name="AnnounceButton" Access="Public" MinWidth="90" />
-    <Button Name="PublishButton" Access="Public" MinWidth="80" Text="Publish" />
+    <Button Name="PublishButton" Access="Public" MinWidth="100" />
 </controls:RMCResearchDocumentRow>

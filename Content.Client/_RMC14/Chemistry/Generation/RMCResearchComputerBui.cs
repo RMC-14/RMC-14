@@ -95,11 +95,10 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
         return ascending ? ordered : ordered.Reverse();
     }
 
-    private static void UpdateSortButtonText(Button timeButton, Button compoundButton, string timeLabel, SortColumn column, bool ascending)
+    private void UpdateSortIcons(Button timeButton, Button compoundButton, SortColumn column, bool ascending)
     {
-        var arrow = ascending ? "▲" : "▼";
-        timeButton.Text = column == SortColumn.Time ? $"{timeLabel} {arrow}" : timeLabel;
-        compoundButton.Text = column == SortColumn.Compound ? $"Compound {arrow}" : "Compound";
+        _window!.SetSortIcon(timeButton, column == SortColumn.Time ? ascending ? RMCIcons.ArrowDown19 : RMCIcons.ArrowDown91 : null);
+        _window.SetSortIcon(compoundButton, column == SortColumn.Compound ? ascending ? RMCIcons.ArrowDownAZ : RMCIcons.ArrowDownZA : null);
     }
 
     public void Refresh()
@@ -281,7 +280,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
         var sortAscending = isPublishedTab ? _publishedSortAscending : _documentsSortAscending;
         var timeButton = isPublishedTab ? _window!.PublishedSortTimeButton : _window!.DocumentsSortTimeButton;
         var compoundButton = isPublishedTab ? _window!.PublishedSortCompoundButton : _window!.DocumentsSortCompoundButton;
-        UpdateSortButtonText(timeButton, compoundButton, isPublishedTab ? "Published" : "Scan Time", sortColumn, sortAscending);
+        UpdateSortIcons(timeButton, compoundButton, sortColumn, sortAscending);
 
         var hideOld = _window!.HideOldReportsButton.Pressed;
 
@@ -327,8 +326,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
             row.TypeLabel.Text = category;
             row.CompoundLabel.Text = GetCompoundName(entry.Title);
             row.Id = entry.Id;
-            row.Published = rowPublished;
-            row.PublishButton.Text = rowPublished ? "Unpublish" : "Publish";
+            row.SetPublished(rowPublished);
             row.PublishButton.Visible = mainTerminal;
             row.OnRead = id => SendMessage(new RMCResearchComputerReadDocumentBuiMsg(id));
             row.OnPrint = id => SendMessage(new RMCResearchComputerPrintDocumentBuiMsg(id));

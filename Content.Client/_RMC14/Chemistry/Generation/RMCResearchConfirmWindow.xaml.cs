@@ -9,20 +9,24 @@ namespace Content.Client._RMC14.Chemistry.Generation;
 [GenerateTypedNameReferences]
 public sealed partial class RMCResearchConfirmWindow : DefaultWindow
 {
+    private readonly RMCIconLabelRow _acceptRow;
+    private readonly RMCIconLabelRow _denyRow;
+
     public RMCResearchConfirmWindow()
     {
         RobustXamlLoader.Load(this);
         RMCMachineUiStyle.RemoveWindowBorder(this, AmberBlack);
 
-        AcceptButton.Label.FontColorOverride = AmberBlack;
-        DenyButton.Label.FontColorOverride = AmberBright;
+        _acceptRow = AcceptButton.AddIconLabel(RMCIcons.Check, string.Empty, 16, HAlignment.Center, AmberBlack);
+        _denyRow = DenyButton.AddIconLabel(RMCIcons.Ban, string.Empty, 16, HAlignment.Center, AmberBright);
+        _denyRow.Icon.IdleColor = AmberBright;
     }
 
     public void Setup(string title, string text, string accept, string deny)
     {
         Title = title;
         MessageLabel.SetMessage(text, defaultColor: AmberBright);
-        AcceptButton.Text = accept;
-        DenyButton.Text = deny;
+        _acceptRow.Label.Text = accept;
+        _denyRow.Label.Text = deny;
     }
 }

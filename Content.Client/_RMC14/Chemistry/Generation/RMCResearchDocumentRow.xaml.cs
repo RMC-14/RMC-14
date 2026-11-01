@@ -18,6 +18,8 @@ public sealed partial class RMCResearchDocumentRow : BoxContainer
     public Action<int, bool>? OnPublishToggle;
     public Action<int>? OnAnnounce;
 
+    private readonly RMCIconLabelRow _publishRow;
+
     public RMCResearchDocumentRow()
     {
         RobustXamlLoader.Load(this);
@@ -37,7 +39,8 @@ public sealed partial class RMCResearchDocumentRow : BoxContainer
 
         IconButton(ReadButton, RMCIcons.Book, "Read");
         IconButton(PrintButton, RMCIcons.Print, "Print");
-        IconButton(AnnounceButton, RMCIcons.Radiation, "Announce");
+        IconButton(AnnounceButton, RMCIcons.Exclamation, "Announce");
+        _publishRow = IconButton(PublishButton, RMCIcons.Upload, "Publish");
 
         ReadButton.OnPressed += _ => OnRead?.Invoke(Id);
         PrintButton.OnPressed += _ => OnPrint?.Invoke(Id);
@@ -45,10 +48,18 @@ public sealed partial class RMCResearchDocumentRow : BoxContainer
         PublishButton.OnPressed += _ => OnPublishToggle?.Invoke(Id, Published);
     }
 
-    private static void IconButton(Button button, string texturePath, string text)
+    public void SetPublished(bool published)
+    {
+        Published = published;
+        _publishRow.SetIcon(published ? RMCIcons.Xmark : RMCIcons.Upload);
+        _publishRow.Label.Text = published ? "Unpublish" : "Publish";
+    }
+
+    private static RMCIconLabelRow IconButton(Button button, string texturePath, string text)
     {
         var row = button.AddIconLabel(texturePath, text, 16, HAlignment.Center, AmberBlack);
         row.SeparationOverride = 4;
         row.Margin = new Thickness(4, 2);
+        return row;
     }
 }

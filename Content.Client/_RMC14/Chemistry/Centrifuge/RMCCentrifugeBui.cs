@@ -41,7 +41,7 @@ public sealed class RMCCentrifugeBui : BoundUserInterface, IRefreshableBui
         if (!EntMan.TryGetComponent(Owner, out RMCCentrifugeComponent? comp))
             return;
 
-        _window.SetMode(comp.Mode == CentrifugeMode.Split ? "Mode: split" : "Mode: distribute");
+        _window.SetMode(comp.Mode == CentrifugeMode.Split);
         _window.SetSource(comp.InputSource == CentrifugeInputSource.Turing
             ? "Input: Turing Dispenser"
             : "Input: Container");

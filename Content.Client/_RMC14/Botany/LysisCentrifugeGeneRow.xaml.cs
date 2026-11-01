@@ -18,7 +18,7 @@ public sealed partial class LysisCentrifugeGeneRow : PanelContainer
     {
         RobustXamlLoader.Load(this);
         GeneLabel.FontOverride = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
-        ExtractButton.SetIcon(RMCIcons.FloppyDisk);
+        ExtractButton.SetIcon(RMCIcons.Download);
     }
 
     public void SetGene(int index, string code, string name, string tooltip, string? extractTooltip)

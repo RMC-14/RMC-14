@@ -98,6 +98,8 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
         var canEjectReference = referenceItem != null && !locked;
         _window.EjectTargetButton.Disabled = !canEjectTarget;
         _window.EjectReferenceButton.Disabled = !canEjectReference;
+        _window.EjectTargetButton.SetIcon(canEjectTarget ? RMCIcons.Eject : RMCIcons.FileImport);
+        _window.EjectReferenceButton.SetIcon(canEjectReference ? RMCIcons.Eject : RMCIcons.FileImport);
 
         HighlightMode(comp.Mode);
 
@@ -209,15 +211,17 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
             var name = p.PropertyId;
             var description = string.Empty;
             string? categoryIcon = null;
+            Color? categoryColor = null;
             if (_prototype.TryIndex<ChemGeneratorPropertyPrototype>(p.PropertyId, out var proto))
             {
                 name = proto.ID;
                 description = proto.Description;
-                categoryIcon = proto.Category switch
+                (categoryIcon, categoryColor) = proto.Category switch
                 {
-                    ChemPropertyCategory.Positive => RMCIcons.SquarePlus,
-                    ChemPropertyCategory.Negative => RMCIcons.SquareMinus,
-                    _ => null,
+                    ChemPropertyCategory.Positive => (RMCIcons.CirclePlus, NoticeSuccessColor),
+                    ChemPropertyCategory.Negative => (RMCIcons.CircleMinus, NoticeDangerColor),
+                    ChemPropertyCategory.Neutral => (RMCIcons.CircleDot, ButtonTextColor),
+                    _ => ((string?) null, (Color?) null),
                 };
             }
 
@@ -234,8 +238,9 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
                 box.AddChild(button);
             }
 
-            var iconRow = button.SetIcon(categoryIcon ?? RMCIcons.SquarePlus, $"{name} (lvl {p.Level})");
+            var iconRow = button.SetIcon(categoryIcon ?? RMCIcons.CircleDot, $"{name} (lvl {p.Level})");
             iconRow.Icon.Visible = categoryIcon != null;
+            button.IconColor = categoryColor;
             button.ToggleMode = selectable;
             button.Pressed = p.PropertyId == selectedId;
             button.Disabled = selectable && conflicting && !_overrideSafety;
@@ -271,11 +276,11 @@ public sealed class RMCSynthesisSimulatorBui : BoundUserInterface, IRefreshableB
             }
             else
             {
-                button = new RecipeButton { HorizontalExpand = true, ClipText = true };
+                button = new RecipeButton { HorizontalExpand = true };
                 box.AddChild(button);
             }
 
-            button.Text = text;
+            button.SetRecipe(text);
             button.ToggleMode = true;
             button.Pressed = _selectedRecipeIndex == i;
             button.Index = i;

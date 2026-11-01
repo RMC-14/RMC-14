@@ -28,7 +28,7 @@ public sealed partial class GeneEditorWindow : DefaultWindow
 
         _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
 
-        ApplyButton.SetIcon(RMCIcons.Play);
+        ApplyButton.SetIcon(RMCIcons.Download);
         EjectSeedButton.SetIcon(RMCIcons.Eject);
         EjectDiscButton.SetIcon(RMCIcons.Eject);
     }

@@ -28,9 +28,9 @@ public sealed partial class LysisCentrifugeWindow : DefaultWindow
 
         _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
 
-        ProcessSeedButton.SetIcon(RMCIcons.Flask);
+        ProcessSeedButton.SetIcon(RMCIcons.Industry);
         EjectSeedButton.SetIcon(RMCIcons.Eject);
-        ClearBufferButton.SetIcon(RMCIcons.Trash);
+        ClearBufferButton.SetIcon(RMCIcons.Snowplow);
         EjectDiscButton.SetIcon(RMCIcons.Eject);
     }
 
