@@ -22,7 +22,8 @@ public sealed class GeneEditorBui(EntityUid owner, Enum uiKey) : BoundUserInterf
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? string.Empty;
 
         _window.ApplyButton.OnPressed += _ => SendPredictedMessage(new GeneEditorApplyBuiMsg());
-        _window.EjectButton.OnPressed += _ => SendPredictedMessage(new GeneEditorEjectBuiMsg());
+        _window.EjectSeedButton.OnPressed += _ => SendPredictedMessage(new GeneEditorEjectSeedBuiMsg());
+        _window.EjectDiscButton.OnPressed += _ => SendPredictedMessage(new GeneEditorEjectDiscBuiMsg());
 
         Refresh();
     }
@@ -90,7 +91,8 @@ public sealed class GeneEditorBui(EntityUid owner, Enum uiKey) : BoundUserInterf
         }
 
         window.ApplyButton.Disabled = seed == null || !hasDisc || comp.DiscGeneLabels.Count == 0;
-        window.EjectButton.Disabled = seed == null && !hasDisc;
+        window.EjectSeedButton.Disabled = seed == null;
+        window.EjectDiscButton.Disabled = !hasDisc;
 
         window.SetDisc(hasDisc, comp.DiscSource, comp.DiscGeneLabels);
     }

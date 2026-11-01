@@ -157,7 +157,7 @@ public sealed class RMCPlantProduceSystem : EntitySystem
         if (!TryComp<RMCPlantChemicalsComponent>(uid, out var chemicals))
             return;
 
-        var maxProduceVolume = FixedPoint2.New(50);
+        var maxProduceVolume = FixedPoint2.New(200);
         solutionContainer.RemoveAllSolution();
         solutionContainer.MaxVolume = maxProduceVolume;
         foreach (var (chem, quantity) in chemicals.Chemicals)

@@ -29,7 +29,7 @@ public sealed class RMCPlantGrowthSystem : EntitySystem
             _plantTray.AdjustSkipAging((plant.Owner, comp), -1);
         else
         {
-            if (tray.NutritionLevel > 0 && tray.WaterLevel > 0 && _random.Prob(0.3f))
+            if (tray.NutritionLevel > 0 && tray.WaterLevel > 0 && _random.Prob(0.6f))
                 _plantTray.AdjustAge((plant.Owner, comp), (int)(1 * HydroponicsSpeedMultiplier));
 
             comp.UpdateSpriteAfterUpdate = true;

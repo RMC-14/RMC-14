@@ -50,7 +50,7 @@
                                 <BoxContainer Name="SeedChips" Orientation="Horizontal" />
                                 <BoxContainer Orientation="Horizontal" SeparationOverride="4">
                                     <ui:RMCMachineButton Name="ApplyButton" Access="Public" Text="Apply Genes" />
-                                    <ui:RMCMachineButton Name="EjectButton" Access="Public" Text="Eject All" />
+                                    <ui:RMCMachineButton Name="EjectSeedButton" Access="Public" Text="Eject Seed" />
                                 </BoxContainer>
                             </BoxContainer>
                         </BoxContainer>
@@ -79,7 +79,11 @@
                         <graphics:StyleBoxFlat BackgroundColor="#00000054" />
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Vertical">
-                        <Label Text="Flora Data Disc" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF" Margin="6 3" />
+                        <BoxContainer Orientation="Horizontal" Margin="6 3">
+                            <Label Text="Flora Data Disc" StyleClasses="LabelKeyText" FontColorOverride="#FFFFFF"
+                                   HorizontalExpand="True" VerticalAlignment="Center" />
+                            <ui:RMCMachineButton Name="EjectDiscButton" Access="Public" Text="Eject Disc" VerticalAlignment="Center" />
+                        </BoxContainer>
                         <PanelContainer MinHeight="2">
                             <PanelContainer.PanelOverride>
                                 <graphics:StyleBoxFlat BackgroundColor="#000000" />

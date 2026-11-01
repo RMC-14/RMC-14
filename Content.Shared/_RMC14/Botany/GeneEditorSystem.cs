@@ -32,7 +32,8 @@ public sealed class GeneEditorSystem : EntitySystem
         Subs.BuiEvents<GeneEditorComponent>(GeneEditorUiKey.Key, subs =>
         {
             subs.Event<GeneEditorApplyBuiMsg>(OnApplyGenes);
-            subs.Event<GeneEditorEjectBuiMsg>(OnEjectAll);
+            subs.Event<GeneEditorEjectSeedBuiMsg>(OnEjectSeed);
+            subs.Event<GeneEditorEjectDiscBuiMsg>(OnEjectDisc);
         });
     }
 
@@ -106,9 +107,14 @@ public sealed class GeneEditorSystem : EntitySystem
         ApplyGenes(ent, args.Actor);
     }
 
-    private void OnEjectAll(Entity<GeneEditorComponent> ent, ref GeneEditorEjectBuiMsg args)
+    private void OnEjectSeed(Entity<GeneEditorComponent> ent, ref GeneEditorEjectSeedBuiMsg args)
     {
-        EjectAll(ent, args.Actor);
+        EjectSlot(ent, ent.Comp.SeedSlotId, args.Actor);
+    }
+
+    private void OnEjectDisc(Entity<GeneEditorComponent> ent, ref GeneEditorEjectDiscBuiMsg args)
+    {
+        EjectSlot(ent, ent.Comp.DiscSlotId, args.Actor);
     }
 
     private void OnGetAltVerbs(Entity<GeneEditorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -263,5 +269,15 @@ public sealed class GeneEditorSystem : EntitySystem
 
         if (ejected)
             _audio.PlayPredicted(ent.Comp.EjectSound, ent, user);
+    }
+
+    private void EjectSlot(Entity<GeneEditorComponent> ent, string slotId, EntityUid user)
+    {
+        if (_itemSlots.TryGetSlot(ent, slotId, out var slot) &&
+            slot.HasItem &&
+            _itemSlots.TryEjectToHands(ent, slot, user, true))
+        {
+            _audio.PlayPredicted(ent.Comp.EjectSound, ent, user);
+        }
     }
 }
