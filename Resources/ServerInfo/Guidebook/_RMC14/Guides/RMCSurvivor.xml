@@ -99,7 +99,7 @@
     <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorDoctor" Caption=""/>
     <GuideEntityEmbed Entity="RMCGuidebookRoleSurvivorScientist" Caption=""/>
   </Box>
-  [bold]Doctor survivors[/bold] and [bold]scientist survivors[/bold] are colonial doctors and researchers. In addition to standard survivor skills, they are capable of medicine and surgery. Scientist survivors are additionally capable of research, although this is not implemented yet. These survivors should prioritize finding medical supplies and providing treatment.
+  [bold]Doctor survivors[/bold] and [bold]scientist survivors[/bold] are colony doctors and researchers. In addition to standard survivor skills, they are capable of medicine and surgery. Scientist survivors are additionally capable of research, although this is not implemented yet. These survivors should prioritize finding medical supplies and providing treatment.
   - Doctor survivors appear as doctors, hospital workers, and paramedics.
   - Scientist survivors appear as archeologists, xenobiologists, and other scientific professions.
   - In inserts, doctor survivors and scientist survivors usually appear as the medic, or otherwise 'hospital corpsman,' of featured factions.
