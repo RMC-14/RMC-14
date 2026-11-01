@@ -144,8 +144,7 @@ public sealed partial class ChatSystem
         string? nameOverride,
         bool hideLog,
         bool ignoreActionBlocker,
-        ProtoId<LanguagePrototype> language,
-        bool ignoreXenos = false)
+        ProtoId<LanguagePrototype> language)
     {
         LanguagePrototype? languagePrototype = null;
         if (!_prototypeManager.TryIndex(language, out languagePrototype))
@@ -186,7 +185,7 @@ public sealed partial class ChatSystem
         var languageIcon = showLanguageName ? languagePrototype?.DisplayedLanguageIcon : null;
         var visibleLanguage = !(languagePrototype?.NeedsSpeech ?? true);
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
+        foreach (var (session, data) in GetRecipients(source, ChatChannel.Whisper, WhisperMuffledRange))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -308,7 +307,6 @@ public sealed partial class ChatSystem
         string message,
         ProtoId<LanguagePrototype> language,
         string? nameOverride = null,
-        bool ignoreXenos = false,
         EntityUid? originalSpeaker = null)
     {
         LanguagePrototype? languagePrototype = null;
@@ -324,7 +322,7 @@ public sealed partial class ChatSystem
         var visibleLanguage = !(languagePrototype?.NeedsSpeech ?? true);
         var transformedName = nameOverride ?? Identity.Name(source, EntityManager).Name;
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
+        foreach (var (session, data) in GetRecipients(source, ChatChannel.Whisper, WhisperMuffledRange))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -456,7 +454,7 @@ public sealed partial class ChatSystem
         string? transformedName = null,
         bool needsLos = false)
     {
-        foreach (var (session, data) in GetRecipients(source, VoiceRange))
+        foreach (var (session, data) in GetRecipients(source, channel, VoiceRange))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)

@@ -7,11 +7,14 @@
     RMCRankSyntheticColonist: []
   icon: "RMCJobIconSPPSynth"
   spawnMenuRoleName: SPP Airborne Synthetic (Trijent Special Survivor)
+  playTimeTracker: RMCJobSyntheticColony
   special:
   - !type:AddComponentSpecial
     components:
     - type: Language
-      preset: RMCLanguagePresetSynthColonist
+      preset: RMCLanguagePresetSynth
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: LanguageLearning
       preset: RMCLanguageLearningPresetSynthColonist
     - type: NpcFactionMember
