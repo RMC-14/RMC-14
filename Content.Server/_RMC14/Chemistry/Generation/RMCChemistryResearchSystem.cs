@@ -206,7 +206,10 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
 
             var reagentId = _generator.GenerateReagent(research.Comp.ClearanceLevel, ChemClass.Rare);
             if (_rmcReagent.TryIndex(reagentId, out var reagent))
-                _generator.PrintReport(spawnAt.Value, reagentId, reagent, category: "Clearance Grants");
+            {
+                var report = _generator.PrintReport(spawnAt.Value, reagentId, reagent, category: "Clearance Grants");
+                _audio.PlayPvs(research.Comp.FaxSound, report);
+            }
         }
 
         return true;
