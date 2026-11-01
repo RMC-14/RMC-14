@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Synth;
 using Content.Shared.Body.Components;
 using Content.Shared.Examine;
 using Content.Shared.Mobs.Systems;
@@ -14,6 +15,7 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private readonly SharedSynthSystem _synth = default!;
 
     public override void Initialize()
     {
@@ -50,7 +52,12 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
         LocId? stateText = null;
 
         if (_mobState.IsDead(ent))
-            stateText = _unrevivable.IsUnrevivable(ent) ? ent.Comp.UnrevivableText : ent.Comp.DeadText;
+        {
+            if (HasComp<SynthComponent>(ent) && _synth.TryGetDeadExamineText(ent.Owner, out var synthText))
+                stateText = synthText;
+            else
+                stateText = _unrevivable.IsUnrevivable(ent) ? ent.Comp.UnrevivableText : ent.Comp.DeadText;
+        }
         else if (_mobState.IsCritical(ent) || _sizeStun.IsKnockedOut(ent))
             stateText = ent.Comp.CritText;
 

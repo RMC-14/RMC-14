@@ -83,7 +83,7 @@ public sealed class HiveTeamSystem : EntitySystem
             {
                 var comp = EnsureComp<HiveTeamMemberComponent>(leaderUid.Value);
                 comp.TeamNumber = number;
-                comp.Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/marine_hud.rsi"), $"hudsquad_ft{number}");
+                comp.Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/fireteam.rsi"), $"hudsquad_ft{number}");
                 Dirty(leaderUid.Value, comp);
             }
 
@@ -93,7 +93,7 @@ public sealed class HiveTeamSystem : EntitySystem
                     continue;
                 var comp = EnsureComp<HiveTeamMemberComponent>(memberUid.Value);
                 comp.TeamNumber = number;
-                comp.Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/marine_hud.rsi"), $"hudsquad_ft{number}");
+                comp.Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/fireteam.rsi"), $"hudsquad_ft{number}");
                 Dirty(memberUid.Value, comp);
             }
         }

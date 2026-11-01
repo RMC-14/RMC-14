@@ -25,10 +25,21 @@
         shader: unshaded
     - type: Machine
       board: CMSMESMachineCircuitboard
+    - type: Construction
+      graph: CMMachineFrame
+      node: machine
+      containers:
+      - machine_parts
+      - machine_board
     - type: InteractedBlacklist
       blacklist:
         components:
         - Xeno
+    - type: Damageable
+      damageContainer: StructuralMarine
+      damageModifierSet: null
+    - type: Anchorable
+      flags: None
 
 
 # SMES' in use

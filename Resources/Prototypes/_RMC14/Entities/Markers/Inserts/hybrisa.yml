@@ -53,6 +53,7 @@
   suffix: Insert Hybrisa
   components:
   - type: MapInsert
+    clearDecals: false
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Hybrisa/surv_spawn_apartments.yml"
       probability: 0.33

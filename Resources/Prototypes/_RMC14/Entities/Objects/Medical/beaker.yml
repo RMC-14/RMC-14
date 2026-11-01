@@ -355,6 +355,23 @@
     fillBaseName: can
   - type: SolutionTransfer
     transferAmount: 100
+    maxTransferAmount: 480
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 20
+    - 25
+    - 30
+    - 40
+    - 60
+    - 80
+    - 95
+    - 100
+    - 120
+    - 240
+    - 480
   - type: StaticPrice
     price: 40
   - type: Tag
@@ -571,6 +588,25 @@
     solutions:
       beaker:
         maxVol: 500
+  - type: SolutionTransfer
+    transferAmount: 100
+    maxTransferAmount: 500
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 20
+    - 25
+    - 30
+    - 40
+    - 60
+    - 80
+    - 100
+    - 120
+    - 240
+    - 300
+    - 500
   - type: SolutionContainerVisuals
     fillBaseName: reagentjug-
     inHandsMaxFillLevels: 5

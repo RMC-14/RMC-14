@@ -67,5 +67,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaAssaultEngineer
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_engi

@@ -36,8 +36,8 @@
       prefix: rmc-job-prefix-soro-sof-sl
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: upp_sl_a
+        sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+        state: spp_sl_a
     - type: RMCTrackable
     - type: QYJWhitelist
     - type: AssignSquad

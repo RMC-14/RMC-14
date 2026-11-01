@@ -33,6 +33,10 @@ rmc-announcement-ares-map = [color=#CECECE][font size=16][bold]UNS Almayer[/bold
 
     {$message}[/bold][/font][/color]
 
+rmc-announcement-ares-varadero = [color=#CECECE][font size=16][bold]New Varadero, UNMC One-Way Emergency Relay[/bold][/font][/color][color=red][font size=14][bold]
+
+    {$message}[/bold][/font][/color]
+
 rmc-announcement-cooldown = Please allow at least {$seconds} seconds to pass between announcements
 
 rmc-announcement-dropship-message = [color=#CECECE][font size=16][bold]Dropship Alert[/bold][/font][/color][color=red][font size=16][bold]
