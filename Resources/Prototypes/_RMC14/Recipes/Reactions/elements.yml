@@ -10,3 +10,15 @@
       amount: 4
   products:
     RMCSulphuricAcid: 1
+
+- type: reaction
+  id: RMCEthanol
+  reactants:
+    RMCHydrogen:
+      amount: 6
+    RMCCarbon:
+      amount: 2
+    RMCOxygen:
+      amount: 1
+  products:
+    RMCEthanol: 1

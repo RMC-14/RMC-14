@@ -300,3 +300,23 @@
       amount: 1
   products:
     RMCInstantJuicePineapple: 6
+
+- type: reaction
+  id: RMCHotCocoa
+  reactants:
+    Water:
+      amount: 5
+    RMCCoco:
+      amount: 1
+  products:
+    RMCHotCocoa: 5
+
+- type: reaction
+  id: RMCSoysauce
+  reactants:
+    RMCSoyMilk:
+      amount: 4
+    RMCSulphuricAcid:
+      amount: 1
+  products:
+    RMCSoysauce: 5
