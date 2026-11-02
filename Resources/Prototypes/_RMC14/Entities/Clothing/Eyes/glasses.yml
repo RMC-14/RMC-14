@@ -216,6 +216,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+  - type: RMCChemicalAdvisoryReceiver
   - type: ItemToggle
     activated: true
     soundActivate:

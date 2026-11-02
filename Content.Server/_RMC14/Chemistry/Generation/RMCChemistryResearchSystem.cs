@@ -4,21 +4,24 @@ using System.Text;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking.Events;
-using Content.Server.Radio.EntitySystems;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Intel;
+using Content.Shared._RMC14.Visor;
+using Content.Shared.Chat;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
+using Content.Shared.Inventory;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
-using Content.Shared.Radio;
 using Robust.Server.GameStates;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -31,22 +34,20 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly RMCChemicalGeneratorSystem _generator = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-
-    // Its medhud wearers in CM but I'm lazy & this makes more sense :godo:
-    private static readonly ProtoId<RadioChannelPrototype> MedicalAdvisoryChannel = "MarineMedical";
 
     private static readonly EntProtoId<RMCChemistryResearchComponent> ResearchProto = "RMCChemistryResearch";
     private static readonly EntProtoId ContractNotesProto = "RMCChemContractNotes";
@@ -633,7 +634,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         _dialog.OpenInput(
             computer,
             actor,
-            $"Type a message you want to announce to medical staff regarding {name}. Only personnel on the medical channel will hear it. There is a {minutes} minute cooldown to announce again.",
+            $"Type a message you want to announce to medical staff regarding {name}. Only personnel with medical HUD will see it. There is a {minutes} minute cooldown to announce again.",
             new RMCResearchComputerAnnounceInputEvent(GetNetEntity(actor), id),
             largeInput: true,
             characterLimit: research.Comp.AnnounceCharacterLimit);
@@ -645,14 +646,50 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         if (text.Length == 0 || !TryGetAnnouncementName(computer, id, actor, out var name))
             return;
 
-        _radio.SendRadioMessage(computer, $"Chemical Advisory: {name}. {text}", MedicalAdvisoryChannel, computer);
-        _popup.PopupEntity("The terminal transmits a chemical advisory to the medical channel.", computer, actor);
+        var research = EnsureResearch();
+        var wearers = new HashSet<EntityUid>();
+        var receivers = EntityQueryEnumerator<RMCChemicalAdvisoryReceiverComponent>();
+        while (receivers.MoveNext(out var uid, out var receiver))
+        {
+            if (TryGetAdvisoryWearer((uid, receiver), out var wearer))
+                wearers.Add(wearer);
+        }
+
+        var filter = Filter.Empty().AddWhereAttachedEntity(wearers.Contains);
+
+        var message = $"[bold][color={research.Comp.AnnounceColor.ToHex()}]Chemical Advisory: {FormattedMessage.EscapeText(name)}[/color][/bold]\n{FormattedMessage.EscapeText(text)}";
+        _chat.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        _audio.PlayGlobal(research.Comp.AnnounceSound, filter, true);
+
+        _popup.PopupEntity("The terminal transmits a chemical advisory to medical HUDs.", computer, actor);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(actor):player} sent a chemical advisory announcement about {name}: {text}");
         _chat.SendAdminAlert(actor, $"made a chemical announcement. Contents: ({FormattedMessage.EscapeText(text)})");
 
-        var research = EnsureResearch();
         research.Comp.NextAnnounceAt = _timing.CurTime + research.Comp.AnnounceCooldown;
         Dirty(research);
+    }
+
+    private bool TryGetAdvisoryWearer(Entity<RMCChemicalAdvisoryReceiverComponent> receiver, out EntityUid wearer)
+    {
+        wearer = default;
+        var worn = receiver.Owner;
+        if (HasComp<VisorComponent>(worn))
+        {
+            if (!_container.TryGetContainingContainer((worn, null), out var visorContainer))
+                return false;
+
+            worn = visorContainer.Owner;
+        }
+
+        if (!_inventory.TryGetContainingSlot(worn, out var slot) ||
+            (slot.SlotFlags & receiver.Comp.Slots) == 0 ||
+            !_container.TryGetContainingContainer((worn, null), out var slotContainer))
+        {
+            return false;
+        }
+
+        wearer = slotContainer.Owner;
+        return true;
     }
 
     private bool TryGetAnnouncementName(EntityUid computer, int id, EntityUid actor, [NotNullWhen(true)] out string? name)

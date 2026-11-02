@@ -85,6 +85,12 @@ public sealed partial class RMCChemistryResearchComponent : Component
     public int AnnounceCharacterLimit = 400;
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier? AnnounceSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/radiostatic.ogg", AudioParams.Default.WithVolume(-8f));
+
+    [DataField, AutoNetworkedField]
+    public Color AnnounceColor = Color.FromHex("#13d182");
+
+    [DataField, AutoNetworkedField]
     public int CategoryCharacterLimit = 50;
 
     [DataField, AutoNetworkedField]

@@ -78,6 +78,18 @@
     skillsRequired:
       all:
         RMCSkillMedical: 2
+  - type: ComponentToggler
+    components:
+    - type: ShowHealthBars
+      damageContainers:
+      - Biological
+    - type: HolocardScanner
+    - type: ShowHealthIcons
+      damageContainers:
+      - Biological
+    - type: RMCChemicalAdvisoryReceiver
+      slots:
+      - HEAD
 # TODO RMC14 view publications action
 
 - type: entity
