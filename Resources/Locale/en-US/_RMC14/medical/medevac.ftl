@@ -9,3 +9,5 @@ rmc-medevac-no-target = No target found
 rmc-medevac-stretcher-examine-id = Tracking ID for CAS: {$id}.
 
 rmc-medevac-stretcher-failure = Target stretcher is not properly setup
+
+rmc-medevac-dropship-above-beacon = You move your dropship above the selected stretcher's beacon. You can now manually activate the medevac system to hoist the patient up.

@@ -288,9 +288,9 @@ public sealed class VisorSystem : EntitySystem
         }
 
         if (anyRemoved)
-            _popup.PopupClient("You remove the inserted visors", args.Target, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-visor-removed"), args.Target, args.User);
         else
-            _popup.PopupClient("There are no visors left to take out!", args.Target, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-visor-none-left"), args.Target, args.User);
 
         ent.Comp.CurrentVisor = null;
         Dirty(ent);

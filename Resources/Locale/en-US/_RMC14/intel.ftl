@@ -159,3 +159,5 @@ rmc-intel-tech-announcement-wake-troops = Additional troops are being taken out 
 rmc-intel-tech-announcement-wake-specialist = An additional specialist is being taken out of cryo.
 rmc-intel-tech-announcement-tier-4 = THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4. LEVEL 4 assets have been authorised to handle the situation.
 rmc-intel-tech-announcement-nuclear-device = The deployment of Nuclear Ordnance has been authorized and will be delivered to the Requisitions Department via ASRS.
+
+rmc-intel-tech-console-title = Tech Control Console

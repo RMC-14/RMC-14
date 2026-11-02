@@ -111,7 +111,7 @@ public sealed class SensorTowerSystem : EntitySystem
 
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
         {
-            _popup.PopupClient("You have no clue how this thing works...", ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-sensor-tower-no-skill"), ent, user, PopupType.SmallCaution);
             return;
         }
 
@@ -167,13 +167,13 @@ public sealed class SensorTowerSystem : EntitySystem
             {
                 var tool = ent.Comp.State switch
                 {
-                    SensorTowerState.Wrench => "a [color=cyan]Wrench[/color]",
-                    SensorTowerState.Wire => "[color=cyan]Wirecutters[/color]",
-                    SensorTowerState.Weld => "a [color=cyan]Welder[/color]",
+                    SensorTowerState.Wrench => "wrench",
+                    SensorTowerState.Wire => "wirecutters",
+                    SensorTowerState.Weld => "welder",
                     _ => throw new ArgumentOutOfRangeException(),
                 };
 
-                args.PushMarkup($"Use {tool} to repair it!");
+                args.PushMarkup(Loc.GetString("rmc-machine-repair-tool-examine", ("tool", tool)));
             }
         }
     }
@@ -269,7 +269,7 @@ public sealed class SensorTowerSystem : EntitySystem
     {
         if (tower.Comp.State == SensorTowerState.Weld)
         {
-            _popup.PopupClient("We stare at the experimental sensor tower cluelessly.", user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-sensor-tower-xeno-clueless"), user, user, PopupType.SmallCaution);
             return;
         }
 
@@ -281,7 +281,7 @@ public sealed class SensorTowerSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doAfter))
         {
-            _popup.PopupClient($"You start wrenching apart the {Name(tower)}'s panels and reaching inside it!", tower, user, PopupType.Medium);
+            _popup.PopupClient(Loc.GetString("rmc-sensor-tower-destroy-start", ("tower", Name(tower))), tower, user, PopupType.Medium);
         }
     }
 
@@ -310,12 +310,12 @@ public sealed class SensorTowerSystem : EntitySystem
 
             if (_random.Prob(0.75f))
             {
-                _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, PopupType.LargeCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-sensor-tower-destroyed-wrench", ("tower", Name(uid))), uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wrench;
             }
             else
             {
-                _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, PopupType.LargeCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-sensor-tower-destroyed-wire", ("tower", Name(uid))), uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wire;
             }
 

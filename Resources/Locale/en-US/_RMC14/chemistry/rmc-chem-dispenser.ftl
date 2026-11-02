@@ -1,0 +1,12 @@
+rmc-chem-dispenser-title = Chemical Dispenser
+rmc-chem-dispenser-status = [bold]Status[/bold]
+rmc-chem-dispenser-energy-label = Energy:
+rmc-chem-dispenser-energy = {$energy} energy
+rmc-chem-dispenser-dispense = [bold]Dispense[/bold]
+rmc-chem-dispenser-beaker-header = [bold]Beaker[/bold]
+rmc-chem-dispenser-beaker-label = Beaker:
+rmc-chem-dispenser-no-beaker = No beaker loaded!
+rmc-chem-dispenser-beaker-units = {$units}/{$max} units
+rmc-chem-dispenser-reagent-units = {$units} units of {$reagent}
+rmc-chem-dispenser-eject = Eject
+rmc-chem-dispenser-contents = Contents:

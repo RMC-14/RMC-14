@@ -85,7 +85,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
             if (ent.Comp.State != CommunicationsTowerState.Broken)
                 return;
 
-            args.PushMarkup("[color=red]It is damaged and needs a welder for repairs![/color]");
+            args.PushMarkup(Loc.GetString("rmc-comms-tower-damaged-examine"));
         }
     }
 
@@ -186,13 +186,13 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     {
         if (ent.Comp.State == CommunicationsTowerState.Broken)
         {
-            _popup.PopupClient($"{Name(ent)} needs repairs to be turned back on!", ent, args.User, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-comms-tower-needs-repair", ("tower", Name(ent))), ent, args.User, PopupType.MediumCaution);
             return;
         }
 
         if (!_rmcPower.IsPowered(ent))
         {
-            _popup.PopupClient($"{Name(ent)} makes a small plaintful beep, and nothing happens. It seems to be out of power.", ent, args.User, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-comms-tower-no-power", ("tower", Name(ent))), ent, args.User, PopupType.MediumCaution);
             return;
         }
 

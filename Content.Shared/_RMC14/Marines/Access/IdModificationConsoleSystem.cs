@@ -537,7 +537,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         {
             if (ent.Comp.DisallowSquadUnassignment.Contains(job.Id))
             {
-                _popup.PopupCursor($"You cannot unassign a {jobName}!", actor, PopupType.LargeCaution);
+                _popup.PopupCursor(Loc.GetString("rmc-id-console-cannot-unassign", ("job", jobName)), actor, PopupType.LargeCaution);
                 return;
             }
 
@@ -564,20 +564,20 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         if (!TryGetEntity(squadNetEnt, out var newSquadEnt))
         {
-            _popup.PopupCursor($"There was an error assigning {Name(marineId)}.", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-id-console-assign-error", ("id", Name(marineId))), actor, PopupType.LargeCaution);
             return;
         }
 
         if (TryComp(newSquadEnt, out SquadTeamComponent? newSquadComp) &&
             !_squad.HasSpaceForRole((newSquadEnt.Value, newSquadComp), job))
         {
-            _popup.PopupCursor($"{Name(newSquadEnt.Value)} can't have another {jobName}.", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-id-console-squad-full", ("squad", Name(newSquadEnt.Value)), ("job", jobName)), actor, PopupType.LargeCaution);
             return;
         }
 
         if (ent.Comp.EnlistmentRequirement is { } requirements && !_skills.HasAllSkills(marineId, requirements))
         {
-            _popup.PopupCursor("You cannot assign untrained civilians to squads!", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-id-console-untrained-civilian"), actor, PopupType.LargeCaution);
             return;
         }
 

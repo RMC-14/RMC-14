@@ -258,7 +258,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         var parent = Transform(laptop).ParentUid;
         if (!HasComp<PlaceableSurfaceComponent>(parent))
         {
-            _popup.PopupClient("Place the laptop on a table first!", laptop, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-sentry-laptop-place-on-table"), laptop, args.User);
             args.Cancel();
             return;
         }
@@ -456,13 +456,13 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     {
         if (!laptop.Comp.IsOpen)
         {
-            _popup.PopupClient("The laptop must be opened first!", laptop, user);
+            _popup.PopupClient(Loc.GetString("rmc-sentry-laptop-must-be-open"), laptop, user);
             return false;
         }
 
         if (GetLinkedSentries(laptop).Count >= laptop.Comp.MaxLinkedSentries)
         {
-            _popup.PopupClient($"The laptop can only control {laptop.Comp.MaxLinkedSentries} sentries at once!", laptop, user);
+            _popup.PopupClient(Loc.GetString("rmc-sentry-laptop-max-sentries", ("max", laptop.Comp.MaxLinkedSentries)), laptop, user);
             return false;
         }
 
@@ -484,7 +484,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
         InitializeSentryTargeting(sentry.Owner);
 
-        _popup.PopupEntity($"Successfully linked {Name(sentry)} to the laptop.", sentry, user);
+        _popup.PopupEntity(Loc.GetString("rmc-sentry-laptop-linked", ("sentry", Name(sentry))), sentry, user);
 
         if (laptop.Comp.LinkedSentries.Count == 1)
             SetPowered(laptop, true);

@@ -7,14 +7,14 @@
     <TabContainer Name="TabContainer" Access="Public" VerticalExpand="True" HorizontalExpand="True">
         <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" Margin="4">
-                <Label Name="PointsLabel" Access="Public" Text="Evolution points:"
+                <Label Name="PointsLabel" Access="Public" Text="{Loc 'rmc-xeno-ui-evolution-points-label'}"
                        StyleClasses="LabelBold" HorizontalExpand="True" HorizontalAlignment="Center" />
                 <RichTextLabel Name="OvipositorNeededLabel" Access="Public"
                                HorizontalExpand="True" HorizontalAlignment="Center" Margin="0 4" />
                 <BoxContainer Orientation="Vertical" Name="EvolutionsContainer" Access="Public" />
                 <userInterface:BlueHorizontalSeparator Name="Separator" Access="Public"
                                Visible="false" Margin="4 8" />
-                <Label Name="StrainsLabel" Access="Public" Text="Strains:"
+                <Label Name="StrainsLabel" Access="Public" Text="{Loc 'rmc-xeno-ui-strains-label'}"
                        StyleClasses="LabelBold" HorizontalExpand="True" HorizontalAlignment="Center" />
                 <BoxContainer Orientation="Vertical" Name="StrainsContainer" Access="Public" />
             </BoxContainer>

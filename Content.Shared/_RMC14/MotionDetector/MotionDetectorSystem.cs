@@ -144,7 +144,7 @@ public sealed class MotionDetectorSystem : EntitySystem
                 ent.Comp.Short = !ent.Comp.Short;
                 Dirty(ent);
                 _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
-                _popup.PopupClient($"You change the {Name(ent)} to {(ent.Comp.Short ? "short" : "long")} range mode", ent, user);
+                _popup.PopupClient(Loc.GetString("rmc-motion-detector-mode-changed", ("detector", Name(ent)), ("mode", ent.Comp.Short ? "short" : "long")), ent, user);
             },
         });
     }
@@ -170,7 +170,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         using (args.PushGroup(nameof(MotionDetectorComponent)))
         {
             var mode = ent.Comp.Short ? "short" : "long";
-            args.PushMarkup($"The motion detector is in [color=cyan]{mode}[/color] scanning mode.");
+            args.PushMarkup(Loc.GetString("rmc-motion-detector-mode-examine", ("mode", mode)));
         }
     }
 

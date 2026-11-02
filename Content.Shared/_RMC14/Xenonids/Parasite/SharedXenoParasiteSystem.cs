@@ -269,7 +269,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         if (HasComp<OnFireComponent>(args.User))
         {
-            _popup.PopupClient("Touching the parasite while you're on fire would burn it!", ent, args.User, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-touch-on-fire"), ent, args.User, PopupType.MediumCaution);
             args.Cancel();
             return;
         }
@@ -428,7 +428,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         var remaining = (int)(ent.Comp.MaxCount - ent.Comp.Count);
         var color = remaining > 0 ? "green" : "red";
-        args.PushMarkup($"It can take [color={color}]{remaining}[/color] more hit{(remaining == 1 ? "" : "s")}.");
+        args.PushMarkup(Loc.GetString("rmc-xeno-parasite-hits-left", ("color", color), ("remaining", remaining)));
     }
 
     private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
@@ -454,10 +454,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     private void OnVictimInfectedExamined(Entity<VictimInfectedComponent> victim, ref ExaminedEvent args)
     {
         if (HasComp<XenoComponent>(args.Examiner))
-            args.PushMarkup("This one is hosting a sister! She will emerge in time.");
+            args.PushMarkup(Loc.GetString("rmc-xeno-infected-examine-xeno"));
 
         else if (HasComp<GhostComponent>(args.Examiner))
-            args.PushMarkup("This creature is infected.");
+            args.PushMarkup(Loc.GetString("rmc-xeno-infected-examine-ghost"));
     }
 
     private void OnVictimInfectedRejuvenate(Entity<VictimInfectedComponent> victim, ref RejuvenateEvent args)

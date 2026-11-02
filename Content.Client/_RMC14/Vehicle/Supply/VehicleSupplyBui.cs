@@ -85,11 +85,11 @@ public sealed class VehicleSupplyBui : BoundUserInterface, IRefreshableBui
         if (_window == null)
             return;
 
-        var modeText = state.LiftMode?.ToString() ?? "No lift";
-        var activeText = string.IsNullOrWhiteSpace(state.ActiveVehicleId) ? "none" : state.ActiveVehicleId;
-        var busyText = state.Busy ? "busy" : "idle";
+        var modeText = state.LiftMode?.ToString() ?? Loc.GetString("rmc-vehicle-supply-no-lift");
+        var activeText = string.IsNullOrWhiteSpace(state.ActiveVehicleId) ? Loc.GetString("rmc-vehicle-supply-none") : state.ActiveVehicleId;
+        var busyText = Loc.GetString(state.Busy ? "rmc-vehicle-supply-busy" : "rmc-vehicle-supply-idle");
 
-        _window.StatusLabel.Text = $"Lift: {modeText} | Status: {busyText} | Active: {activeText}";
+        _window.StatusLabel.Text = Loc.GetString("rmc-vehicle-supply-status", ("mode", modeText), ("status", busyText), ("active", activeText));
 
         var raising = state.LiftMode == VehicleSupplyLiftMode.Raising;
         var lowering = state.LiftMode == VehicleSupplyLiftMode.Lowering;
@@ -171,7 +171,7 @@ public sealed class VehicleSupplyBui : BoundUserInterface, IRefreshableBui
             {
                 var copyToggle = new HardpointButton
                 {
-                    LabelText = _copyExpanded.Contains(vehicleId) ? "Copies v" : "Copies >",
+                    LabelText = Loc.GetString(_copyExpanded.Contains(vehicleId) ? "rmc-vehicle-supply-copies-expanded" : "rmc-vehicle-supply-copies-collapsed"),
                     MinSize = new Vector2(110, 0)
                 };
 
@@ -306,7 +306,7 @@ public sealed class VehicleSupplyBui : BoundUserInterface, IRefreshableBui
 
         var expanded = _copyExpanded.Contains(vehicleId);
         container.Visible = expanded;
-        toggle.LabelText = expanded ? "Copies v" : "Copies >";
+        toggle.LabelText = Loc.GetString(expanded ? "rmc-vehicle-supply-copies-expanded" : "rmc-vehicle-supply-copies-collapsed");
     }
 
     private static void ApplySelectionStyle(HardpointButton button, bool selected)

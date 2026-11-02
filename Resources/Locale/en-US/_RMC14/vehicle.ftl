@@ -125,3 +125,30 @@ rmc-vehicle-demolition-start = You start rigging the wreck with explosives...
 rmc-vehicle-demolition-no-skill = You do not know how to rig demolition charges.
 rmc-vehicle-too-small-to-damage = We're too small to do any significant damage to this vehicle!
 rmc-vehicle-demolition-armed = The charge is planted and is counting down!
+
+### Vehicle supply lift
+rmc-vehicle-supply-stored = Stored Vehicles
+rmc-vehicle-supply-vehicle = Vehicle
+rmc-vehicle-supply-preview = Vehicle Preview
+rmc-vehicle-supply-no-lift = No lift
+rmc-vehicle-supply-none = none
+rmc-vehicle-supply-busy = busy
+rmc-vehicle-supply-idle = idle
+rmc-vehicle-supply-status = Lift: {$mode} | Status: {$status} | Active: {$active}
+rmc-vehicle-supply-copies-expanded = Copies v
+rmc-vehicle-supply-copies-collapsed = Copies >
+
+### Vehicle hardpoints and weapons
+rmc-vehicle-hardpoint-title = Hardpoints
+rmc-vehicle-hardpoint-header = Vehicle Hardpoints
+rmc-vehicle-hardpoint-frame-integrity = Frame Integrity
+rmc-vehicle-hardpoint-open-slot = Open: {$slot}
+rmc-vehicle-ammo-loader-title = Ammo Loader
+rmc-vehicle-weapons-auto-turret = Auto Turret
+rmc-vehicle-weapons-stabilization = Stabilization
+rmc-vehicle-weapons-ammo-none = Ammo: --
+rmc-vehicle-weapons-ammo = Ammo: {$ammo}/{$max}
+rmc-vehicle-weapons-stored = Stored: {$stored}/{$max}
+
+rmc-vehicle-hardpoint-frame-finish-wrench = Finish tightening the frame with a wrench.
+rmc-vehicle-hardpoint-frame-weld-first = Weld the frame before tightening it.

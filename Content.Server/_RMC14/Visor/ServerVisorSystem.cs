@@ -60,7 +60,7 @@ public sealed class ServerVisorSystem : EntitySystem
                 }
             }
 
-            args.PushMarkup("Use a [color=cyan]screwdriver[/color] on this to take out any visors!");
+            args.PushMarkup(Loc.GetString("rmc-visor-remove-examine"));
         }
     }
 }

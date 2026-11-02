@@ -166,3 +166,45 @@ rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
     Ammo: {$current} / {$max}
 
 rmc-dropship-launch-alarm-xeno-shutdown = We slash at {$console}, silencing its squawking!
+
+### Flight computer
+rmc-dropship-nav-title = Flight Computer
+rmc-dropship-nav-flight-controls = Flight Controls
+rmc-dropship-nav-door-controls = Door Controls
+rmc-dropship-nav-remote-control = Remote Control:
+rmc-dropship-nav-launch-alarm = Launch Announcement Alarm
+rmc-dropship-nav-flyby = Flyby
+rmc-dropship-nav-destination-primary = {$name} (Primary)
+rmc-dropship-nav-launch-in-progress = Launch in progress
+rmc-dropship-nav-launching-in = Launching in T-{$time}s to {$destination}
+rmc-dropship-nav-in-flight = In flight: {$destination}
+rmc-dropship-nav-time-until-destination = Time until destination: T-{$time}s
+rmc-dropship-nav-final-approach = Final Approach: {$destination}
+rmc-dropship-nav-time-until-landing = Time until landing: T-{$time}s
+rmc-dropship-nav-refueling = Refueling in progress
+rmc-dropship-nav-ready-in = Ready to launch in T-{$time}s
+rmc-dropship-nav-enabled = Enabled
+rmc-dropship-nav-disabled = Disabled
+rmc-dropship-nav-cancel = Cancel
+rmc-dropship-nav-launch = Launch
+rmc-dropship-nav-lockdown = Lockdown
+rmc-dropship-nav-lift-lockdown = Lift Lockdown
+rmc-dropship-nav-lock-aft = Lock Aft
+rmc-dropship-nav-unlock-aft = Unlock Aft
+rmc-dropship-nav-lock-port = Lock Port
+rmc-dropship-nav-unlock-port = Unlock Port
+rmc-dropship-nav-lock-starboard = Lock Starboard
+rmc-dropship-nav-unlock-starboard = Unlock Starboard
+rmc-dropship-nav-start-alarm = Start Alarm
+rmc-dropship-nav-stop-alarm = Stop Alarm
+
+### Dropship terminal and hijack
+rmc-dropship-terminal-title = Dropship Terminal
+rmc-dropship-terminal-summon = Summon
+rmc-dropship-hijack-title = Dropship Hijack
+rmc-dropship-hijack-header = [bold]Where to 'land'?[/bold]
+
+### Weapons console equipment
+rmc-dropship-weapons-medevac = Medevac
+rmc-dropship-weapons-fulton = Fulton
+rmc-dropship-weapons-spotlight = Spotlight

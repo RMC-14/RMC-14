@@ -26,3 +26,5 @@ rmc-unstrippable = You can't take {THE($item)} off of {$owner}!
 
 rmc-no-visors-to-swap = There are no visors you can swap to!
 rmc-visor-down = {CAPITALIZE(THE($visor))} is flipped down.
+
+rmc-night-vision-while-scoping = You cannot use the night vision optic while using optics.

@@ -166,7 +166,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         var user = args.User;
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
         {
-            _popup.PopupClient($"You don't know how to use the {Name(ent)}'s interface.", ent, user, SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-power-no-skill", ("machine", Name(ent))), ent, user, SmallCaution);
             return;
         }
 
@@ -179,7 +179,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                 case RMCApcState.WiresExposed:
                     if (ent.Comp.CoverLockedButton)
                     {
-                        _popup.PopupClient("The cover is locked and cannot be opened.", user, user, MediumCaution);
+                        _popup.PopupClient(Loc.GetString("rmc-power-cover-locked"), user, user, MediumCaution);
                         return;
                     }
 
@@ -281,7 +281,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (!_skills.HasSkill(args.User, ent.Comp.Skill, ent.Comp.SkillLevel))
         {
             args.Cancel();
-            _popup.PopupClient($"You don't know how to use the {Name(ent)}'s interface.", ent, args.User, SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-power-no-skill", ("machine", Name(ent))), ent, args.User, SmallCaution);
             return;
         }
 
@@ -639,23 +639,21 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         {
             if (ent.Comp.State != RMCFusionReactorState.Working)
             {
-                // TODO: localize
                 var tool = ent.Comp.State switch
                 {
-                    RMCFusionReactorState.Wrench => "a [color=cyan]Wrench[/color]",
-                    RMCFusionReactorState.Wire => "[color=cyan]Wirecutters[/color]",
-                    RMCFusionReactorState.Weld => "a [color=cyan]Welder[/color]",
+                    RMCFusionReactorState.Wrench => "wrench",
+                    RMCFusionReactorState.Wire => "wirecutters",
+                    RMCFusionReactorState.Weld => "welder",
                     _ => throw new ArgumentOutOfRangeException(),
                 };
 
-                args.PushMarkup($"Use {tool} to repair it!");
+                args.PushMarkup(Loc.GetString("rmc-machine-repair-tool-examine", ("tool", tool)));
             }
 
             if (!_container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) ||
                 container.ContainedEntities.Count == 0)
             {
-                // TODO: localize
-                args.PushMarkup("It needs a [color=cyan]fuel cell[/color]!");
+                args.PushMarkup(Loc.GetString("rmc-fusion-reactor-needs-cell"));
             }
 
             var overload = new RMCFusionReactorOverloadStatusEvent(ent, args.Examiner);

@@ -135,7 +135,7 @@ public sealed class PlantableFlagSystem : EntitySystem
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = "Take Down",
+            Text = Loc.GetString("rmc-flag-verb-take-down"),
             Act = () =>
             {
                 var ev = new PlantableFlagRemoveDoAfterEvent();

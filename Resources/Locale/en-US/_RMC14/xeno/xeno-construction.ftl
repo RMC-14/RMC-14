@@ -121,3 +121,11 @@ rmc-xeno-designer-greater-surge-cooldown = We need to wait before using Greater 
 rmc-xeno-designer-greater-surge-none = There's no design nodes nearby.
 rmc-xeno-designer-greater-surge-success = We convert {$count} design nodes into reflective resin walls.
 rmc-xeno-designer-infuse-node = You infuse the node with plasma.
+
+rmc-xeno-area-unsuited-for-hive = This area is unsuited to host the hive!
+rmc-xeno-area-too-early = It's too early to spread the hive this far.
+rmc-xeno-weeds-node-already = There's a pod here already!
+rmc-xeno-weeds-too-strong = These weeds are too strong to plant a node on!
+rmc-xeno-weeds-need-nearby-node = We can only plant weed nodes near other weed nodes our hive owns!
+rmc-xeno-design-node-not-construct = This design node cannot be used to build walls.
+rmc-xeno-resin-whisperer-verb-open-door = Open Door

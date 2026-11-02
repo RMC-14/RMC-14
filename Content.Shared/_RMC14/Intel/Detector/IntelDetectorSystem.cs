@@ -149,7 +149,7 @@ public sealed class IntelDetectorSystem : EntitySystem
         using (args.PushGroup(nameof(IntelDetectorComponent)))
         {
             var mode = ent.Comp.Short ? "short" : "long";
-            args.PushMarkup($"The motion detector is in [color=cyan]{mode}[/color] scanning mode.");
+            args.PushMarkup(Loc.GetString("rmc-motion-detector-mode-examine", ("mode", mode)));
         }
     }
 
