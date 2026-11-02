@@ -31,8 +31,6 @@ public sealed class XenoBuildMarkSystem : EntitySystem
 
     private static readonly EntProtoId MarkId = "RMCXenoBuildMark";
     private static readonly TimeSpan CheckEvery = TimeSpan.FromSeconds(0.1);
-    private const int MaxAreaSize = 15;
-    private const int MaxAreaTiles = 50;
     private const float MovingVelocitySquared = 0.01f;
 
     private TimeSpan _nextCheck;
@@ -164,64 +162,6 @@ public sealed class XenoBuildMarkSystem : EntitySystem
         }
 
         return false;
-    }
-
-    public void GetArea(Vector2i start, Vector2i end, bool line, List<Vector2i> tiles)
-    {
-        if (line)
-        {
-            GetLine(start, end, tiles);
-            return;
-        }
-
-        var width = Math.Min(Math.Abs(end.X - start.X) + 1, MaxAreaSize);
-        var height = Math.Min(Math.Abs(end.Y - start.Y) + 1, MaxAreaSize);
-        while (width * height > MaxAreaTiles)
-        {
-            if (width >= height)
-                width--;
-            else
-                height--;
-        }
-
-        var dirX = end.X >= start.X ? 1 : -1;
-        var dirY = end.Y >= start.Y ? 1 : -1;
-        for (var y = 0; y < height; y++)
-        {
-            for (var x = 0; x < width; x++)
-            {
-                tiles.Add(new Vector2i(start.X + x * dirX, start.Y + y * dirY));
-            }
-        }
-    }
-
-    private static void GetLine(Vector2i start, Vector2i end, List<Vector2i> tiles)
-    {
-        var dx = Math.Abs(end.X - start.X);
-        var dy = -Math.Abs(end.Y - start.Y);
-        var stepX = end.X >= start.X ? 1 : -1;
-        var stepY = end.Y >= start.Y ? 1 : -1;
-        var error = dx + dy;
-        var current = start;
-        while (tiles.Count < MaxAreaSize)
-        {
-            tiles.Add(current);
-            if (current == end)
-                break;
-
-            var doubled = error * 2;
-            if (doubled >= dy)
-            {
-                error += dy;
-                current.X += stepX;
-            }
-
-            if (doubled <= dx)
-            {
-                error += dx;
-                current.Y += stepY;
-            }
-        }
     }
 
     public void PlaceMark(EntityUid xeno, EntityCoordinates coordinates, EntProtoId structure, bool busy)

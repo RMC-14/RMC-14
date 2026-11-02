@@ -6,4 +6,5 @@ public enum XenoSecreteTileResult
     Blocked,
     OutOfRange,
     Unsupported,
+    InsufficientPlasma,
 }

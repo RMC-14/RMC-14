@@ -12,6 +12,32 @@
     noRot: true
 
 - type: entity
+  id: RMCXenoBuildMark
+  name: psychic mark
+  description: A psychic node to mark future building spots.
+  categories: [ HideSpawnMenu ]
+  save: false
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_build_marks.rsi
+    state: wall
+    drawdepth: FloorObjects
+    noRot: true
+    visible: false
+  - type: XenoBuildMark
+    states:
+      DoorXenoResin: door
+      DoorXenoResinThick: door
+      XenoStickyResin: sticky
+      XenoFastResin: fast
+      XenoResinSpikes: spike
+      HiveAcidPillarXeno: pillar
+
+- type: entity
   id: RMCBaseEffectXenoStructure
   categories: [ HideSpawnMenu ]
   components:

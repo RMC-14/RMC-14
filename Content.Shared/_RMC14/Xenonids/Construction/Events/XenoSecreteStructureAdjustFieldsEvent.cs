@@ -11,4 +11,4 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 /// Raised during validation to allow dyanamic changes to the XenoConstructionComponet as needed
 /// </summary>
 [ByRefEvent]
-public record struct XenoSecreteStructureAdjustFields(EntityCoordinates TargetCoordinates);
+public record struct XenoSecreteStructureAdjustFields(EntityCoordinates TargetCoordinates, bool Popup = true);
