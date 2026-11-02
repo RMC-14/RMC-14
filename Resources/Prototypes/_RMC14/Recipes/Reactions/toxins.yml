@@ -45,6 +45,18 @@
     RMCPotassiumChloride: 2
 
 - type: reaction
+  id: RMCChloralhydrate
+  reactants:
+    RMCChlorine:
+      amount: 3
+    RMCEthanol:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    RMCChloralhydrate: 1
+
+- type: reaction
   id: RMCPotassiumChlorophoride
   reactants:
     RMCPotassiumChloride:
