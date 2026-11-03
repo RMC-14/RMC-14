@@ -137,6 +137,9 @@
   id: RMCEngineerKit
 
 - type: Tag
+  id: RMCReagentScanner
+
+- type: Tag
   id: RMCXenoLarva
 
 - type: Tag

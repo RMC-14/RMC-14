@@ -514,7 +514,7 @@
       - RMCWeldingGoggle
       # - TODO RMC14 RMCAnalyzer
       # - TODO RMC14 RMCDemoScanner
-      # - TODO RMC14 RMCReagentScanner
+      - RMCReagentScanner
       - CableCoil
       - PowerCell
       # - TODO RMC14 RMCAssembly
@@ -534,7 +534,7 @@
         - RMCWeldingGoggle
         # - TODO RMC14 RMCAnalyzer
         # - TODO RMC14 RMCDemoScanner
-        # - TODO RMC14 RMCReagentScanner
+        - RMCReagentScanner
         - CableCoil
         - PowerCell
         # - TODO RMC14 RMCAssembly
@@ -576,6 +576,7 @@
       - RMCExplosiveBreachingCharge
       - CMFireExtinguisherPortable
       - RMCCircuitboard
+      - RMCReagentScanner
       components:
       - Welder
       - ComputerBoard

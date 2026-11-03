@@ -193,6 +193,7 @@
       - RMCNailgunTactical
       - RMCCircuitboard
       - RMCSynthResetKey
+      - RMCReagentScanner
       components:
       - Welder
       - PowerCell
@@ -237,6 +238,7 @@
       - RMCNailgunTactical
       - RMCCircuitboard
       - RMCSynthResetKey
+      - RMCReagentScanner
       # TODO stock parts
       components:
       - Welder
@@ -304,6 +306,7 @@
       - RMCNailgunCompact
       - RMCNailgunTactical
       - RMCSynthResetKey
+      - RMCReagentScanner
       #      - # TODO analyzer
       components:
       - Welder
@@ -399,7 +402,7 @@
       - RMCMiniTank
       - RMCSyringeCase
       - CMSurgicalCase
-      #      - # TODO RMC14 reagent analyzer
+      - RMCReagentScanner
       #      - # TODO RMC14 plant analyzer
       components:
       - Hypospray
@@ -1541,7 +1544,7 @@
           - RMCPenlight
           - Flare
           - RMCMiniTank
-          #      - # TODO RMC14 reagent analyzer
+          - RMCReagentScanner
           #      - # TODO RMC14 plant analyzer
         components:
           - Hypospray

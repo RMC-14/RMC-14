@@ -138,15 +138,12 @@
     clue: rmc-intel-clue-experimental-device
 
 - type: entity
-  parent: RMCIntelRetrieveDeviceBase
+  parent: [RMCReagentScannerAdvanced, RMCIntelRetrieveDeviceBase]
   id: RMCIntelRetrieveReagentScanner
   name: advanced reagent scanner
   description: A hand-held reagent scanner which identifies chemical agents.
   suffix: Intel, Experimental Device
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Devices/experimental_devices.rsi
-    state: adv_spectrometer
   - type: IntelClues
     clue: rmc-intel-clue-experimental-device
 

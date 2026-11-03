@@ -51,7 +51,8 @@
       #Atmos scanner
       #Demo scanner
       #Meson scanner
-      #Reagent scanner
+      - id: RMCReagentScanner
+        amount: 2
       - id: CMTRayScanner
         amount: 2
     - name: Tools

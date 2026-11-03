@@ -1,0 +1,30 @@
+- type: entity
+  parent: BaseItem
+  id: RMCReagentScanner
+  name: reagent scanner
+  description: A hand-held reagent scanner which identifies chemical agents.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/reagent_scanner.rsi
+    state: spectrometer
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Devices/reagent_scanner.rsi
+  - type: RMCReagentScanner
+  - type: Tag
+    tags:
+    - RMCReagentScanner
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 30
+      CMGlass: 20
+
+- type: entity
+  parent: RMCReagentScanner
+  id: RMCReagentScannerAdvanced
+  name: advanced reagent scanner
+  components:
+  - type: Sprite
+    state: adv_spectrometer
+  - type: RMCReagentScanner
+    details: true

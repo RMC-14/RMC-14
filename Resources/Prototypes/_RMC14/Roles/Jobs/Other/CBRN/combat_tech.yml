@@ -101,7 +101,7 @@
   storage:
     back:
     - RMCGeigerCounter
-    # RMC TODO: reagent scanner 
+    - RMCReagentScanner
     # RMC TODO: gas/atmos analyzer 
     - RMCSprayBottleSpaceCleaner
     - CMBodyBagFolded
