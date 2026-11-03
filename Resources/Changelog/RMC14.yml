@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: All FORECON survivor roles now have Engineering 2 (1 -> 2) and JTAC 2
-      (1 -> 2)
-    type: Tweak
-  id: 3210
-  time: '2026-05-16T15:37:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9806
 - author: ExponentialWizard
   changes:
   - message: Signal Flares now have a blinking light when CAS is unblocked
@@ -4515,5 +4507,13 @@
   id: 3709
   time: '2026-11-03T13:12:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10437
+- author: Vermidia
+  changes:
+  - message: Fixed smoking injecting reagents that weren't nicotine (non-whitelisted
+      reagents get deleted when smoked).
+    type: Fix
+  id: 3710
+  time: '2026-11-03T16:24:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10862
 Name: RMC14
 Order: -1
