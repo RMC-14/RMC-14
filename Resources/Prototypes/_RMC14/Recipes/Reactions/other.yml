@@ -182,3 +182,23 @@
       amount: 1
   products:
     RMCAntiNeurotoxin: 1
+
+- type: reaction
+  id: RMCRoyalPlasma
+  reactants:
+    RMCEggPlasma:
+      amount: 1
+    RMCXenoBloodRoyal:
+      amount: 1
+  products:
+    RMCRoyalPlasma: 2
+
+- type: reaction
+  id: RMCEggPlasma
+  reactants:
+    Blood:
+      amount: 10
+    RMCEggPlasma:
+      amount: 1
+  products:
+    RMCEggPlasma: 2
