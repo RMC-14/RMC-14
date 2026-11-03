@@ -219,6 +219,8 @@
     skills:
       RMCSkillEngineer: 0
 
+- type: entity
+  parent: RMCSynthResetKey
   id: RMCSynthResetKeyHalcyon
   name: Halcyon synthetic reset key
   description: A Halcyon-pattern reset key for rebooting synthetic units after critical failure. It must be recharged after use.
