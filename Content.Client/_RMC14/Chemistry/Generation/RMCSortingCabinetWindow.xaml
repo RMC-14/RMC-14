@@ -1,0 +1,40 @@
+<controls:RMCSortingCabinetWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Generation"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="Automated Sorting Cabinet" SetSize="495 500" MinSize="420 300">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#1F2538" />
+        </PanelContainer.PanelOverride>
+        <TextureRect TexturePath="/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
+                     ModulateSelfOverride="#FFFFFF18" Stretch="KeepCentered" MouseFilter="Ignore"
+                     HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <BoxContainer Orientation="Vertical" Margin="4" SeparationOverride="4">
+            <LineEdit Name="SearchEdit" Access="Public" HorizontalExpand="True"
+                      PlaceHolder="Chemical name, Property code, Level, OD, etc..." />
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <ui:RMCMachineButton Name="SortValueButton" Access="Public" Text="Sort by Value" HorizontalExpand="True"
+                                     ToolTip="Sort by overall value of the chemical, including its OD level, properties and levels on it." />
+                <ui:RMCMachineButton Name="SortOverdoseButton" Access="Public" Text="Sort by OD" HorizontalExpand="True"
+                                     ToolTip="Sort by OD level of documents." />
+                <ui:RMCMachineButton Name="SortClassButton" Access="Public" Text="Sort by Class" HorizontalExpand="True"
+                                     ToolTip="Sort by types of papers: Contracts, Scans, Etc..." />
+                <ui:RMCMachineButton Name="OrderButton" Access="Public" MinWidth="40"
+                                     ToolTip="Switch between Ascending and Descending" />
+            </BoxContainer>
+            <PanelContainer MinHeight="2">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#000000" />
+                </PanelContainer.PanelOverride>
+            </PanelContainer>
+            <PanelContainer Name="EmptyPanel" Access="Public">
+                <Label Name="EmptyLabel" Access="Public" Margin="5 1" />
+            </PanelContainer>
+            <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                <BoxContainer Name="Documents" Access="Public" Orientation="Vertical" SeparationOverride="2" />
+            </ScrollContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCSortingCabinetWindow>

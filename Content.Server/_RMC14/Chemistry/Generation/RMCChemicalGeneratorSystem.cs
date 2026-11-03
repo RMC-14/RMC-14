@@ -898,9 +898,10 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         }
 
         sb.AppendLine();
-        var compositionKnown = AppendComposition(sb, reagentId, reagent);
+        var compositionKnown = AppendComposition(sb, reagentId, reagent, out var reagentsKnown);
 
         comp.Completed = !classified && (compositionKnown || (!isGenerated && reagent.ChemClass == ChemClass.Special));
+        comp.Valid = !classified && reagentsKnown;
         Dirty(report, comp);
 
         sb.AppendLine();
@@ -944,7 +945,7 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         return multiplier.ToString("0.##");
     }
 
-    private bool AppendComposition(StringBuilder sb, ProtoId<ReagentPrototype> reagentId, ReagentPrototype reagent)
+    private bool AppendComposition(StringBuilder sb, ProtoId<ReagentPrototype> reagentId, ReagentPrototype reagent, out bool reagentsKnown)
     {
         sb.AppendLine("[bold]Composition Details:[/bold]");
 
@@ -952,6 +953,7 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         if (reaction != null)
         {
             var known = AppendReactants(sb, reaction.Reactants.Where(kv => !kv.Value.Catalyst), isCatalyst: false);
+            reagentsKnown = known;
 
             var catalysts = reaction.Reactants.Where(kv => kv.Value.Catalyst).ToList();
             if (catalysts.Count > 0)
@@ -967,10 +969,12 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         if (reagent.ChemClass == ChemClass.Basic)
         {
             sb.AppendLine($"- {reagent.LocalizedName}");
+            reagentsKnown = true;
             return true;
         }
 
         sb.AppendLine("[italic]ERROR: Unable to analyze emission spectrum of sample.[/italic]");
+        reagentsKnown = false;
         return false;
     }
 

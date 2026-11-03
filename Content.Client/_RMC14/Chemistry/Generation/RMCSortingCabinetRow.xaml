@@ -1,0 +1,23 @@
+<controls:RMCSortingCabinetRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Generation"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Orientation="Vertical"
+    HorizontalExpand="True">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#00000054" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="4" Margin="2">
+            <ui:RMCMachineButton Name="ExpandButton" Access="Public" ToggleMode="True" MinWidth="28" />
+            <RichTextLabel Name="TitleLabel" Access="Public" HorizontalExpand="True" VerticalAlignment="Center" />
+            <ui:RMCMachineButton Name="TakeOutButton" Access="Public" MinWidth="28"
+                                 ToolTip="Take out the document from sorting array." />
+        </BoxContainer>
+    </PanelContainer>
+    <BoxContainer Name="Body" Access="Public" Orientation="Vertical" Visible="False" Margin="34 2 4 4">
+        <Label Name="OverdoseLabel" Access="Public" FontColorOverride="#7D8EA6" />
+        <Label Name="ValueLabel" Access="Public" FontColorOverride="#7D8EA6" />
+    </BoxContainer>
+</controls:RMCSortingCabinetRow>

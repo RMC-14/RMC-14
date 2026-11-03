@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Chemistry.Generation;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class RMCChemResearchReportComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -22,6 +22,9 @@ public sealed partial class RMCChemResearchReportComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Completed;
+
+    [DataField, AutoNetworkedField]
+    public bool Valid;
 
     [DataField, AutoNetworkedField]
     public bool IsGenerated;

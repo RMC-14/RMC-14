@@ -173,3 +173,66 @@
         - Document
         - Folder
         - Write
+
+- type: entity
+  parent: [ BaseStructureDynamic, BaseBagOpenClose ]
+  id: RMCSortingCabinet
+  name: automated sorting cabinet
+  description: Marvel of sorting technology. Automatically sorts any research document you place in it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/filing_cabinet.rsi
+    noRot: true
+    layers:
+    - state: chestdrawer
+    - state: chestdrawer-open
+      map: [ "openLayer" ]
+      visible: false
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.22,-0.26,0.22,0"
+        density: 210
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: RequireProjectileTarget
+  - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      rmc_sorting_cabinet: !type:Container
+  - type: RMCSortingCabinet
+  - type: ActivatableUI
+    key: enum.RMCSortingCabinetUi.Key
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: UserInterface
+    interfaces:
+      enum.RMCSortingCabinetUi.Key:
+        type: RMCSortingCabinetBui
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
