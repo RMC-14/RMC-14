@@ -49,7 +49,9 @@
       enum.RMCReagentAnalyzerVisuals.State:
         status:
           Idle: { state: base }
+          Sample: { state: sample }
           Processing: { state: processing }
+          Error: { state: error }
           Finished: { state: finished }
           Failed: { state: failed }
   - type: ApcPowerReceiver

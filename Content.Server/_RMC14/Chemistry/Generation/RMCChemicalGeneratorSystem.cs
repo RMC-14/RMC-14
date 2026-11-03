@@ -1007,18 +1007,19 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         comp.Completed = false;
         Dirty(report, comp);
 
-        _metaData.SetEntityName(report, "research report (ERROR)");
+        _metaData.SetEntityName(report, "Analysis of ERROR");
 
         var sb = new StringBuilder();
         RMCChemPaperFormat.AppendHeader(sb, "Official Weston-Yamada Document", "Reagent Analysis Print");
         sb.AppendLine();
         sb.AppendLine("[bold][head=3]Analysis ERROR[/head][/bold]");
         sb.AppendLine();
+        sb.AppendLine("[bold]Result:[/bold]");
         sb.AppendLine(sampleNumber > 0
-            ? $"Result: Analysis failed for sample #{sampleNumber}."
-            : "Result: Analysis failed.");
+            ? $"Analysis failed for sample #{sampleNumber}."
+            : "Analysis failed.");
         sb.AppendLine();
-        sb.AppendLine("Reason for error:");
+        sb.AppendLine("[bold]Reason for error:[/bold]");
         sb.AppendLine($"[italic]{reason}[/italic]");
         sb.AppendLine();
         RMCChemPaperFormat.AppendFooter(sb, "This report was automatically printed by the A-XRF Scanner.");

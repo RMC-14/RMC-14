@@ -34,7 +34,7 @@ public sealed class RMCReagentAnalyzerSystem : SharedRMCReagentAnalyzerSystem
         catch (Exception e)
         {
             Log.Error($"Error analyzing reagent sample on {ToPrettyString(ent)}: {e}");
-            Fail(ent, "The analyzer beeps: SAMPLE EMPTY.");
+            Fail(ent, "UNKNOWN.");
         }
     }
 
@@ -44,29 +44,28 @@ public sealed class RMCReagentAnalyzerSystem : SharedRMCReagentAnalyzerSystem
 
         var sample = GetSample(ent);
         if (sample is not { } sampleUid ||
-            !_solution.TryGetMixableSolution(sampleUid, out _, out var solution) ||
-            solution.Contents.Count == 0)
+            !_solution.TryGetMixableSolution(sampleUid, out _, out var solution))
         {
-            Fail(ent, "The analyzer beeps: SAMPLE EMPTY.");
-            return;
-        }
-
-        if (solution.Contents.Count > 1)
-        {
-            Fail(ent, "The analyzer beeps: SAMPLE CONTAMINATED. A pure sample is required for analysis.");
+            Fail(ent, "SAMPLE EMPTY.");
             return;
         }
 
         if (solution.Volume < comp.RequiredVolume)
         {
-            Fail(ent, $"The analyzer beeps: SAMPLE SIZE INSUFFICIENT. A sample size of {comp.RequiredVolume} units is required for analysis.");
+            Fail(ent, $"SAMPLE SIZE INSUFFICIENT;\n[italic]A sample size of {comp.RequiredVolume} units is required for analysis.[/italic]");
+            return;
+        }
+
+        if (solution.Contents.Count > 1)
+        {
+            Fail(ent, "SAMPLE CONTAMINATED;\n[italic]A pure sample is required for analysis.[/italic]");
             return;
         }
 
         var reagentId = solution.Contents[0].Reagent.Prototype;
         if (!_rmcReagent.TryIndex(reagentId, out var reagent))
         {
-            Fail(ent, "The analyzer beeps: SAMPLE EMPTY.");
+            Fail(ent, "UNKNOWN.");
             return;
         }
 

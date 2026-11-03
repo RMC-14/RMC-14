@@ -1,3 +1,4 @@
+using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -22,7 +23,10 @@ public sealed partial class RMCReagentAnalyzerComponent : Component
     public int SampleNumber = 1;
 
     [DataField]
-    public TimeSpan ProcessDelay = TimeSpan.FromSeconds(6);
+    public TimeSpan ConfigureDelay = TimeSpan.FromSeconds(1);
+
+    [DataField]
+    public TimeSpan ProcessDelay = TimeSpan.FromSeconds(10);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? ProcessEndTime;
@@ -54,6 +58,7 @@ public enum RMCReagentAnalyzerVisualState : byte
     Processing,
     Finished,
     Failed,
+    Error,
 }
 
 [Serializable, NetSerializable]
@@ -61,3 +66,6 @@ public enum RMCReagentAnalyzerVisuals : byte
 {
     State,
 }
+
+[Serializable, NetSerializable]
+public sealed partial class RMCReagentAnalyzerConfigureDoAfterEvent : SimpleDoAfterEvent;
