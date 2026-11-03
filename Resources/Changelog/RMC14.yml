@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: kleinerstation13
   changes:
-  - message: Changed Paramarine Commander to use their own parity skillset
-    type: Tweak
-  id: 3209
-  time: '2026-05-16T15:36:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9809
-- author: kleinerstation13
-  changes:
   - message: All FORECON survivor roles now have Engineering 2 (1 -> 2) and JTAC 2
       (1 -> 2)
     type: Tweak
@@ -4515,5 +4508,12 @@
   id: 3708
   time: '2026-11-03T09:25:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11035
+- author: SabreML
+  changes:
+  - message: Added muzzle flash variants for Pistols, SMGs, and Shotguns.
+    type: Add
+  id: 3709
+  time: '2026-11-03T13:12:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10437
 Name: RMC14
 Order: -1
