@@ -44,6 +44,8 @@
         RMCSkillMedical: 3
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
+    - type: CMVendorUser
+      points: 45
     - type: RMCUserBulkyArmorIncapable
     - type: NpcFactionMember
       factions:

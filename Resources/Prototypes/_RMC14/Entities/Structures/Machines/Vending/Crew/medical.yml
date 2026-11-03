@@ -23,7 +23,6 @@
       jobs:
       - CMDoctor
       - RMCFieldDoctor
-      - CMResearcher
       - CMCMO
       takeAll: CMMedicalSet
       entries:
@@ -35,11 +34,21 @@
       entries:
       - id: CMVendorBundleCrewMedicalEssentialsNurse
     - name: Standard Equipment
+      jobs:
+      - CMNurse
+      - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
       takeAll: CMStandard
       entries:
       - id: CMHandsLatex
       - id: CMHeadsetMedical
     - name: Eyewear
+      jobs:
+      - CMNurse
+      - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
       choices: { CMEyewear: 1 }
       entries:
       - id: RMCGlassesMedicalHUDGlasses
@@ -64,7 +73,6 @@
       - CMDoctor
       - RMCFieldDoctor
       - CMCMO
-      - CMResearcher
       entries:
       - id: CMScrubsBlue
         recommended: true
@@ -90,7 +98,6 @@
       - CMDoctor
       - RMCFieldDoctor
       - CMCMO
-      - CMResearcher
       choices: { CMSuit: 1 }
       entries:
       - id: RMCLabcoat
@@ -102,6 +109,201 @@
       - id: RMCLabcoatPharm
         recommended: true
       - id: RMCMedicalApron
+    - name: Research Set (Mandatory)
+      jobs:
+      - CMResearcher
+      takeAll: CMMedicalSet
+      entries:
+      - id: RMCVendorBundleCrewMedicalEssentialsResearcher
+    - name: Important Equipment
+      jobs:
+      - CMResearcher
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsLatex
+      - id: CMHeadsetResearcher
+    - name: Shoulder Patches
+      jobs:
+      - CMResearcher
+      choices: { CMMask: 1 }
+      entries:
+      - id: RMCPatchWeYaBlack
+        name: Weston-Yamada Round Patch, Black
+      - id: RMCPatchWeYaBlackSquare
+        name: Weston-Yamada Square Patch, Black
+      - id: RMCPatchWeYa
+        name: Weston-Yamada Round Patch, White
+    - name: Eyewear
+      jobs:
+      - CMResearcher
+      choices: { CMEyewear: 1 }
+      entries:
+      - id: RMCGlassesReagentHUDGlasses
+        recommended: true
+#      - id: Prescription Reagent Scanner HUD Goggles
+      - id: RMCGlassesMedicalHUDGlasses
+        recommended: true
+#      - id: Prescription Medical HUD Glasses
+    - name: Undersuit
+      jobs:
+      - CMResearcher
+      choices: { CMUniform: 1 }
+      entries:
+      - id: CMJumpsuitLiaisonBlack
+        recommended: true
+      - id: RMCJumpsuitLiaisonBlackSuitskirt
+        recommended: true
+      - id: CMJumpsuitLiaisonBlue
+      - id: CMJumpsuitLiaisonBrown
+      - id: CMJumpsuitLiaisonCorporateFormal
+      - id: RMCJumpsuitGreySuitPants
+      - id: RMCJumpsuitWornSuit
+      - id: RMCJumpsuitBlackPantsUniform
+      - id: RMCJumpsuitBluePantsUniform
+      - id: RMCJumpsuitLiaisonKhakiWorkwear
+      - id: RMCJumpsuitLiaisonPinkWorkwear
+      - id: RMCJumpsuitLiaisonGreenWorkwear
+      - id: RMCJumpsuitBlueWorkwear
+      - id: RMCJumpsuitCorrespondent
+        name: White Uniform
+      - id: RMCJumpsuitCorrespondentBlack
+        name: Black Uniform
+      - id: RMCJumpsuitCorrespondentOrange
+        name: Orange Uniform
+      - id: RMCJumpsuitCorrespondentRed
+        name: Red Uniform
+      - id: CMJumpsuitTShirtWhite
+        name: White T-Shirt and Brown Jeans
+        points: 12
+      - id: CMJumpsuitTShirtGray
+        name: Gray T-Shirt and Blue Jeans
+        points: 12
+      - id: CMJumpsuitTShirtRed
+        name: Red T-Shirt and Black Jeans
+        points: 12
+    - name: Suit
+      jobs:
+      - CMResearcher
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCLabcoat
+      - id: RMCLabcoatShort
+        name: High-Cut Labcoat
+      - id: RMCLabcoatLong
+        name: Low-Cut Labcoat
+      - id: RMCLabcoatScienceMedium
+        name: Brown Lab Coat
+      - id: RMCLabcoatScience
+        name: Brown Lab Coat, Short
+    - name: Shoes
+      jobs:
+      - CMResearcher
+      choices: { RMCShoes: 1 }
+      entries:
+      - id: RMCShoesLaceup
+      - id: RMCShoesLaceupBrown
+      - id: RMCShoesFancyLeather
+      - id: RMCShoesBlack
+        points: 12
+      - id: RMCShoesBlue
+        points: 12
+      - id: RMCShoesBrown
+        points: 12
+      - id: RMCShoesGreen
+        points: 12
+      - id: RMCShoesPurple
+        points: 12
+      - id: RMCShoesRed
+        points: 12
+      - id: RMCShoesWhite
+        points: 12
+      - id: RMCShoesYellow
+        points: 12
+#      - id: Rainbow Shoes
+    - name: Bag
+      jobs:
+      - CMResearcher
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelMedical
+        replaceSlot: back
+        recommended: true
+      - id: CMBackpackMedical
+        replaceSlot: back
+        recommended: true
+      - id: RMCSatchelBlue
+        name: Leather Blue Satchel
+        replaceSlot: back
+      - id: RMCSatchelBlack
+        name: Leather Black Satchel
+        replaceSlot: back
+      - id: CMSatchelMarine
+        name: satchel
+        replaceSlot: back
+      - id: CMBackpackMarine
+        name: backpack
+        replaceSlot: back
+    - name: Belt
+      jobs:
+      - CMResearcher
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
+        recommended: true
+      - id: RMCBeltUtilityGeneral
+        recommended: true
+    - name: Pouches
+      jobs:
+      - CMResearcher
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchVial
+        recommended: true
+      - id: RMCPouchChem
+        recommended: true
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+      #      - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+      #        recommended: true
+      #        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      - id: RMCPouchReagentCanisterTricordrazine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      # TODO RMC14 Pressurized Reagent Canister Pouch (Field Anesthetic), needs oxycodone
+      - id: RMCPouchReagentCanister
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+      - id: RMCPouchSling
+    - name: Accessories
+      jobs:
+      - CMResearcher
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+        recommended: true
+      - id: CMWebbingBrown
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
+      - id: RMCTieBlack
+      - id: RMCTieRed
+      - id: RMCTiePurple
+      - id: RMCTie
+      - id: RMCTieGreen
+      - id: RMCTieGold
+      - id: RMCTieHorrible
+        name: Special Tie
     - name: Snow gear (Snow use only)
       takeAll: CMMedicalSet
       entries:
@@ -129,7 +331,6 @@
       - CMDoctor
       - RMCFieldDoctor
       - CMCMO
-      - CMResearcher
       entries:
       - id: CMHeadCapSurgBlue
         recommended: true
@@ -144,6 +345,11 @@
       - id: CMHeadCapSurgWhite
       - id: CMHeadCapSurgBlack
     - name: Backpack
+      jobs:
+      - CMNurse
+      - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
@@ -159,6 +365,11 @@
         replaceSlot: back
         recommended: true
     - name: Belt
+      jobs:
+      - CMNurse
+      - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
@@ -168,6 +379,11 @@
         name: M276 pattern medical storage rig (Full)
         recommended: true
     - name: Pouches
+      jobs:
+      - CMNurse
+      - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchAutoinjector
@@ -202,6 +418,11 @@
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchSling
     - name: Accessories
+      jobs:
+      - CMNurse
+      - CMDoctor
+      - RMCFieldDoctor
+      - CMCMO
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown

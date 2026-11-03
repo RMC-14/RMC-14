@@ -295,8 +295,8 @@
 - type: entity
   parent: RMCLabcoat
   id: RMCLabcoatScience
-  name: researcher's labcoat
-  description: A high-quality labcoat, seemingly worn by scholars and researchers alike. It has a distinct leathery feel to it, and goads you towards adventure.
+  name: short, brown researcher's labcoat
+  description: A high-quality labcoat, seemingly worn by scholars and researchers alike. It has a distinct leathery feel to it, and goads you towards adventure. It is a little short.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/sciencecoat.rsi
@@ -308,6 +308,22 @@
 - type: entity
   parent: [RMCBaseJacketButtonableOpened, RMCLabcoatScience]
   id: RMCLabcoatScienceOpened
+  name: short, brown researcher's labcoat
+
+- type: entity
+  parent: RMCLabcoatScience
+  id: RMCLabcoatScienceMedium
+  name: researcher's labcoat
+  description: A high-quality labcoat, seemingly worn by scholars and researchers alike. It has a distinct leathery feel to it, and goads you towards adventure.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/sciencecoat_medium.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/sciencecoat_medium.rsi
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoatScienceMedium]
+  id: RMCLabcoatScienceMediumOpened
   name: researcher's labcoat
 
 - type: entity

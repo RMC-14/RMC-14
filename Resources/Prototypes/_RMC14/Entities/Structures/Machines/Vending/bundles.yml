@@ -184,6 +184,24 @@
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewMedicalEssentialsResearcher
+  name: essential research set
+  description: Contains a health analyzer, a first-aid kit, a reagent scanner and medical tools.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/reagent_scanner.rsi
+    state: spectrometer
+  - type: CMVendorBundle
+    bundle:
+    - CMHealthAnalyzer
+    - CMAdvFirstAidKitFilled
+    - RMCReagentScanner
+    - RMCStethoscope
+    - RMCFlashlightPen
+    - CMMaskSterile
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
   id: RMCCommandingOfficerEssentialsBundle
   name: Commanding Officer Essentials kit
   description: Contains a laser designator, whistle, and a disabler.
