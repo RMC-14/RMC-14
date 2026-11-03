@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: RangerXVII
-  changes:
-  - message: Xenonid chat highlights no longer highlight other xenonid's names with
-      the same caste as you.
-    type: Tweak
-  id: 3212
-  time: '2026-05-18T00:50:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9756
 - author: kleinerstation13
   changes:
   - message: Survivors now spawn together instead of separately on Sorokyne Strata.
@@ -4513,5 +4505,16 @@
   id: 3711
   time: '2026-11-03T22:23:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10475
+- author: PursuitinAshes
+  changes:
+  - message: (MLaw) Clarified how Third-Party Synthetics should be handled/processed.
+    type: Tweak
+  - message: (MLaw) The Chief MP or Commander may now declare Synthetics rogue if
+      they have been consistently detrimental to the operation, this should be used
+      as a last resort.
+    type: Tweak
+  id: 3712
+  time: '2026-11-03T22:44:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10625
 Name: RMC14
 Order: -1
