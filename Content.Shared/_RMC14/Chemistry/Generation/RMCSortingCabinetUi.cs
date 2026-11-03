@@ -9,8 +9,27 @@ public enum RMCSortingCabinetUi : byte
 }
 
 [Serializable, NetSerializable]
+public enum RMCSortingCabinetSort : byte
+{
+    None,
+    Value,
+    Overdose,
+    Class,
+}
+
+[Serializable, NetSerializable]
 public sealed class RMCSortingCabinetTakeOutBuiMsg : BoundUserInterfaceMessage
 {
     public NetEntity Document;
     public RMCSortingCabinetTakeOutBuiMsg(NetEntity document) => Document = document;
 }
+
+[Serializable, NetSerializable]
+public sealed class RMCSortingCabinetSetSortBuiMsg : BoundUserInterfaceMessage
+{
+    public RMCSortingCabinetSort Sort;
+    public RMCSortingCabinetSetSortBuiMsg(RMCSortingCabinetSort sort) => Sort = sort;
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCSortingCabinetToggleOrderBuiMsg : BoundUserInterfaceMessage;

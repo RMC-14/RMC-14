@@ -5,6 +5,7 @@ using Content.Shared._RMC14.UserInterface;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Containers;
+using Robust.Shared.Input;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -21,18 +22,8 @@ public sealed class RMCSortingCabinetBui : BoundUserInterface, IRefreshableBui
     private readonly RMCReagentSystem _rmcReagent;
 
     private RMCSortingCabinetWindow? _window;
-    private SortMode _sort = SortMode.None;
-    private bool _descending = true;
     private string _search = string.Empty;
     private readonly HashSet<EntityUid> _expanded = new();
-
-    private enum SortMode
-    {
-        None,
-        Value,
-        Overdose,
-        Class,
-    }
 
     private readonly record struct Entry(
         EntityUid Document,
@@ -61,21 +52,31 @@ public sealed class RMCSortingCabinetBui : BoundUserInterface, IRefreshableBui
             Refresh();
         };
 
-        _window.SortValueButton.OnPressed += _ => SetSort(SortMode.Value);
-        _window.SortOverdoseButton.OnPressed += _ => SetSort(SortMode.Overdose);
-        _window.SortClassButton.OnPressed += _ => SetSort(SortMode.Class);
+        _window.SearchEdit.OnKeyBindDown += args =>
+        {
+            if (args.Function != EngineKeyFunctions.TextReleaseFocus)
+                return;
+
+            _window.SearchEdit.Text = string.Empty;
+            _search = string.Empty;
+            Refresh();
+        };
+
+        _window.SortValueButton.OnPressed += _ => SetSort(RMCSortingCabinetSort.Value);
+        _window.SortOverdoseButton.OnPressed += _ => SetSort(RMCSortingCabinetSort.Overdose);
+        _window.SortClassButton.OnPressed += _ => SetSort(RMCSortingCabinetSort.Class);
         _window.OrderButton.OnPressed += _ =>
         {
-            _descending = !_descending;
+            SendPredictedMessage(new RMCSortingCabinetToggleOrderBuiMsg());
             Refresh();
         };
 
         Refresh();
     }
 
-    private void SetSort(SortMode sort)
+    private void SetSort(RMCSortingCabinetSort sort)
     {
-        _sort = sort;
+        SendPredictedMessage(new RMCSortingCabinetSetSortBuiMsg(sort));
         Refresh();
     }
 
@@ -87,10 +88,10 @@ public sealed class RMCSortingCabinetBui : BoundUserInterface, IRefreshableBui
             return;
         }
 
-        _window.SetSortButton(_window.SortValueButton, _sort == SortMode.Value);
-        _window.SetSortButton(_window.SortOverdoseButton, _sort == SortMode.Overdose);
-        _window.SetSortButton(_window.SortClassButton, _sort == SortMode.Class);
-        _window.SetDescending(_descending);
+        _window.SetSortButton(_window.SortValueButton, cabinet.Sort == RMCSortingCabinetSort.Value);
+        _window.SetSortButton(_window.SortOverdoseButton, cabinet.Sort == RMCSortingCabinetSort.Overdose);
+        _window.SetSortButton(_window.SortClassButton, cabinet.Sort == RMCSortingCabinetSort.Class);
+        _window.SetDescending(cabinet.Descending);
 
         var entries = new List<Entry>();
         if (_container.TryGetContainer(Owner, cabinet.ContainerId, out var container))
@@ -105,10 +106,10 @@ public sealed class RMCSortingCabinetBui : BoundUserInterface, IRefreshableBui
         _expanded.RemoveWhere(e => entries.All(entry => entry.Document != e));
         _window.EmptyPanel.Visible = entries.Count == 0;
 
-        IEnumerable<Entry> sorted = _sort switch
+        IEnumerable<Entry> sorted = cabinet.Sort switch
         {
-            SortMode.Value => entries.OrderBy(e => e.Value),
-            SortMode.Overdose => entries.OrderBy(e => e.Overdose),
+            RMCSortingCabinetSort.Value => entries.OrderBy(e => e.Value),
+            RMCSortingCabinetSort.Overdose => entries.OrderBy(e => e.Overdose),
             _ => entries.OrderBy(e => e.Type),
         };
 
@@ -116,7 +117,7 @@ public sealed class RMCSortingCabinetBui : BoundUserInterface, IRefreshableBui
         if (_search.Length > 0)
             sorted = sorted.Where(e => Matches(e, compact));
 
-        if (_descending)
+        if (cabinet.Descending)
             sorted = sorted.Reverse();
 
         var highlight = _search.Length >= 3 || StartsWithNumber(_search);

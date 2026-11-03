@@ -11,9 +11,15 @@ public sealed class RMCSortingCabinetUISystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCSortingCabinetComponent, AfterAutoHandleStateEvent>(OnCabinetState);
         SubscribeLocalEvent<RMCSortingCabinetComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<RMCSortingCabinetComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<RMCChemResearchReportComponent, AfterAutoHandleStateEvent>(OnReportState);
+    }
+
+    private void OnCabinetState(Entity<RMCSortingCabinetComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        _rmcUI.RefreshUIs<RMCSortingCabinetBui>(ent.Owner);
     }
 
     private void OnInserted(Entity<RMCSortingCabinetComponent> ent, ref EntInsertedIntoContainerMessage args)
