@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dalothis
-  changes:
-  - message: Added Doctor and CMO new-to-job popups
-    type: Add
-  id: 3208
-  time: '2026-05-16T00:32:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9354
 - author: kleinerstation13
   changes:
   - message: Changed Paramarine Commander to use their own parity skillset
@@ -4515,5 +4508,12 @@
   id: 3707
   time: '2026-11-03T09:05:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10904
+- author: CyberTropic
+  changes:
+  - message: Map inserts remove old tacmap labels, properly clear decals.
+    type: Fix
+  id: 3708
+  time: '2026-11-03T09:25:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11035
 Name: RMC14
 Order: -1
