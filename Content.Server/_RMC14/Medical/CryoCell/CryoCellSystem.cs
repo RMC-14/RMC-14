@@ -288,10 +288,11 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
                 // Upstream sleep status doesn't work well here. You stay blind and can walk around after being ejected.
                 _rmcSizeStun.TryKnockOut(occupant, cryoCell.Comp.UnconsciousDuration);
 
-                if (damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > 0)
+                var oxyDamage = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup);
+                if (oxyDamage > 0)
                 {
                     var oxyHeal = _rmcDamageable.DistributeHealingCached(occupant, AirlossGroup, 1);
-                    _damageable.TryChangeDamage(occupant, oxyHeal, ignoreResistances: true, interruptsDoAfters: false);
+                    _damageable.TryChangeDamage(occupant, oxyHeal, true, false);
                 }
 
                 // Severe damage heals slower without proper chemicals
@@ -302,7 +303,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
                     {
                         var bruteHealAmt = FixedPoint2.Min(1, 20 / bruteDamage);
                         var bruteHeal = _rmcDamageable.DistributeHealingCached(occupant, BruteGroup, bruteHealAmt);
-                        _damageable.TryChangeDamage(occupant, bruteHeal, ignoreResistances: true, interruptsDoAfters: false);
+                        _damageable.TryChangeDamage(occupant, bruteHeal, true, false);
                     }
 
                     var burnDamage = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup);
@@ -310,7 +311,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
                     {
                         var burnHealAmt = FixedPoint2.Min(1, 20 / burnDamage);
                         var burnHeal = _rmcDamageable.DistributeHealingCached(occupant, BurnGroup, burnHealAmt);
-                        _damageable.TryChangeDamage(occupant, burnHeal, ignoreResistances: true, interruptsDoAfters: false);
+                        _damageable.TryChangeDamage(occupant, burnHeal, true, false);
                     }
 
                     var toxinDamage = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup);
@@ -318,7 +319,7 @@ public sealed class CryoCellSystem : SharedCryoCellSystem
                     {
                         var toxinHealAmt = FixedPoint2.Min(1, 20 / toxinDamage);
                         var toxinHeal = _rmcDamageable.DistributeHealingCached(occupant, ToxinGroup, toxinHealAmt);
-                        _damageable.TryChangeDamage(occupant, toxinHeal, ignoreResistances: true, interruptsDoAfters: false);
+                        _damageable.TryChangeDamage(occupant, toxinHeal, true, false);
                     }
                 }
             }
