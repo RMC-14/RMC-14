@@ -151,7 +151,7 @@
   parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
   id: RMCSynthResetKey
   name: WeYa synthetic reset key
-  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
+  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/synth_reset_key.rsi
@@ -207,7 +207,7 @@
   parent: RMCSynthResetKey
   id: RMCSynthResetKeySMART
   name: SMART WeYa synthetic reset key
-  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset. This one has a microfunction AI and can be operated by anyone.
+  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use. This one has a microfunction AI and can be operated by anyone.
   components:
   - type: Sprite
     layers:
@@ -246,7 +246,7 @@
 - type: entity
   parent: RMCSynthResetKeySMART
   id: RMCSynthResetKeyMakeshift
-  name: makeshift synthetic sparker
+  name: Makeshift synthetic sparker
   description: A crude synthetic reboot device assembled from scavenged sparking electronics. It must be recharged after use.
   components:
   - type: Sprite
@@ -254,4 +254,4 @@
     - state: makeshift_key
     - state: makeshift_key_on
       map: [ "enum.ToggleableVisuals.Layer" ]
-      visible: falsex`
+      visible: false
