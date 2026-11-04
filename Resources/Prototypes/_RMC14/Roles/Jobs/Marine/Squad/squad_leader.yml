@@ -3,6 +3,7 @@
   id: CMSquadLeader
   name: cm-job-name-squad-leader
   description: cm-job-description-squad-leader
+  newToJobInfo: rmc-new-to-job-squad-leader
   playTimeTracker: CMJobSquadLeader
   requirements:
   - !type:RoleTimeRequirement

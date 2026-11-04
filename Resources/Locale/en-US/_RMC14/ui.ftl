@@ -4,6 +4,17 @@ rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
 rmc-ui-options-xeno-ability-previews = Show xeno ability previews
 rmc-ui-options-marine-equipment-previews = Show marine equipment previews
+rmc-ui-options-post-death-chat-mute = Mute chat briefly after death
+rmc-ui-options-post-death-chat-mute-confirmation-title = Disable post-death chat mute?
+rmc-ui-options-post-death-chat-mute-confirmation-text = Disabling this mute means you may immediately see the reaction of other characters after your character dies.
+  Remember to separate character interactions from player interactions, comments about your character are not necessarily directed at you.
+
+  If something upsets you, step away before responding, and use admin help for rule-breaking behavior.
+  Read the "Roleplay Setting Disclaimer" in the "Don't Antagonize/Harass Others" section of the rules.
+
+  By continuing, you acknowledge that you may see potentially upsetting post-death reactions and agree not to get upset at other players over in-character interactions.
+rmc-ui-options-post-death-chat-mute-confirmation-accept = I understand, disable
+rmc-ui-options-post-death-chat-mute-confirmation-deny = Keep chat mute enabled
 
 rmc-ui-voicelines = Voicelines
 rmc-ui-options-tab-voicelines = Voicelines

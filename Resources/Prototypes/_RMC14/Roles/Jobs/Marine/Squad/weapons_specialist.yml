@@ -3,6 +3,7 @@
   id: CMWeaponsSpecialist
   name: cm-job-name-weapons-specialist
   description: cm-job-description-weapons-specialist
+  newToJobInfo: rmc-new-to-job-weapons-specialist
   playTimeTracker: CMJobWeaponsSpecialist
   requirements:
   - !type:DepartmentTimeRequirement
