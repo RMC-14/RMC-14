@@ -1,0 +1,54 @@
+- type: entity
+  name: M79 grenade launcher
+  parent: [ RMCBaseSlideMagazineVisualsBallistic, RMCBaseWeaponGrenadeLauncher ]
+  id: RMCWeaponLauncherM79
+  description: A heavy, low-angle 40mm grenade launcher. Looks to be a hobbyist modification made to resemble a Vietnam War prop. This version has been modernized with an IFF enabled micro-computer. The wooden furniture is, in fact, made of painted hardened polykevlon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
+    layers:
+    - state: base
+      map: [ "enum.RMCMagazineVisuals.SlideOpen" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
+  - type: RMCSelectiveFire
+    baseFireRate: 0.833
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - LauncherCompatibleGrenade
+    capacity: 1
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m79_reload.ogg
+    proto: RMCBatonSlugHIRR
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM79Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM79Stock
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0, 0.093
+      rmc-aslot-stock: -0.56, 0.0
+  - type: Tag
+    tags:
+    - RMCWeaponLauncherM79
+
+- type: Tag
+  id: RMCWeaponLauncherM79
