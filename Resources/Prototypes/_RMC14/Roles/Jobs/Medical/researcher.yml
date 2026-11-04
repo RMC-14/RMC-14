@@ -29,7 +29,7 @@
   startingGear: CMGearResearcher
   icon: "CMJobIconResearcher"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-cmo
+  supervisors: rmc-job-supervisors-cmo-weya
   accessGroups:
   - Researcher
   roleWeight: 0.25
@@ -70,7 +70,9 @@
     jumpsuit: CMJumpsuitResearch
     shoes: RMCShoesLaceup
     id: CMIDCardResearcher # TODO ID has both Marine and WeYa IFF
-    # TODO RMC14 random chemical synthesis note, syringe,
+  storage:
+    back:
+    - RMCChemUniqueSynthesisNotesTierOne
 
 - type: startingGear
   id: CMGearResearcherEquipped

@@ -81,7 +81,14 @@
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetCorporate
   name: corporate colonist preset
-  categories: [ HideSpawnMenu ]   # TODO RMC14 random research notes
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomGearOther:
+    -
+      - [ RMCChemGrantNotesHigh ]
+      - [ RMCChemGrantNotes ]
+      - [ RMCChemUniqueSynthesisNotesTierThree ]
 
 - type: entity
   parent: MarkerBase

@@ -414,6 +414,36 @@
 
 - type: entity
   parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterPeridaxonRevival
+  suffix: Peridaxon - Revival
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 160
+        - ReagentId: CMInaprovaline
+          Quantity: 160
+        - ReagentId: RMCPeridaxon
+          Quantity: 160
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterOxycodone
+  suffix: Oxycodone
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: RMCOxycodone
+          Quantity: 480
+
+- type: entity
+  parent: RMCPressurizedCanister
   id: RMCPressurizedCanisterMeraBic
   suffix: MeraBic
   components:

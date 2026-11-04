@@ -59,7 +59,9 @@
     shoes: RMCShoesJackbootsFilled
     head: RMCHeadUshanka
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
-    # TODO RMC14: research_notes/grant
+  storage:
+    back:
+    - RMCChemGrantNotes
 
 - type: entity
   parent: CMSpawnPointJobBase

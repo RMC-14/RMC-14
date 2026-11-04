@@ -271,13 +271,15 @@
       - id: RMCPouchReagentCanisterTricordrazineRevival
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
-      #      - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
-      #        recommended: true
-      #        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      - id: RMCPouchReagentCanisterPeridaxonRevival
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
       - id: RMCPouchReagentCanisterTricordrazine
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
-      # TODO RMC14 Pressurized Reagent Canister Pouch (Field Anesthetic), needs oxycodone
+      - id: RMCPouchReagentCanisterOxycodone
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Field Anesthetic)
       - id: RMCPouchReagentCanister
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
@@ -407,12 +409,15 @@
       - id: RMCPouchReagentCanisterTricordrazineRevival
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
-      #      - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
-      #        recommended: true
-      #        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      - id: RMCPouchReagentCanisterPeridaxonRevival
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
       - id: RMCPouchReagentCanisterTricordrazine
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanisterOxycodone
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Field Anesthetic)
       - id: RMCPouchReagentCanister
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(EMPTY)

@@ -25,7 +25,7 @@
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaManager
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetCorporate
+      preset: RMCGearSurvivorPresetLV624CorporateDomeCL
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -62,3 +62,15 @@
   parent: RMCSurvivorPresetCorporate
   id: RMCGearSurvivorPresetLV624CorporateDomeCL
   name: lv624 colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomGearOther:
+    -
+      - [ RMCChemGrantNotesHigh ]
+      - [ RMCChemGrantNotes ]
+      - [ RMCChemUniqueSynthesisNotesTierThree ]
+    -
+      - [ RMCChemGrantNotesHigh ]
+      - [ RMCChemGrantNotes ]
+      - [ RMCChemUniqueSynthesisNotesTierThree ]

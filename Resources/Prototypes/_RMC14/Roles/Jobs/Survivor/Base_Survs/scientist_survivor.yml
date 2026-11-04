@@ -57,7 +57,7 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetScientist
-  name: scientist colonist preset # TODO RMC14 random research notes and vial
+  name: scientist colonist preset
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
@@ -67,6 +67,8 @@
       - [ RMCGrenadeCustomMetalFoam ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
+    -
+      - [ RMCChemUniqueSynthesisNotesTierThree ]
 
 - type: entity
   parent: MarkerBase

@@ -259,3 +259,17 @@
     contents:
     - id: RMCWelderIndustrialHighCapacity
     - id: CMPamphletEngineer
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelCorporateResearchLootFill
+  suffix: Corporate Research Loot, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCChemGrantNotesHigh
+      orGroup: ResearchLoot
+    - id: RMCChemGrantNotes
+      orGroup: ResearchLoot
+    - id: RMCChemUniqueSynthesisNotesTierThree
+      orGroup: ResearchLoot

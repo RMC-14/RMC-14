@@ -74,6 +74,14 @@
     randomGearOther:
     -
       - [ CMSheetMetal20, RMCSpaceCash1000, CMPenClicky, CMClipboard ]
+    -
+      - [ RMCChemGrantNotesHigh ]
+      - [ RMCChemGrantNotes ]
+      - [ RMCChemUniqueSynthesisNotesTierThree ]
+    -
+      - [ RMCChemGrantNotesHigh ]
+      - [ RMCChemGrantNotes ]
+      - [ RMCChemUniqueSynthesisNotesTierThree ]
     randomStartingGear:
       back:
       - CMSatchelSecureStandard

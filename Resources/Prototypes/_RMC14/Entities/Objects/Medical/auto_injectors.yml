@@ -555,6 +555,36 @@
 
 - type: entity
   parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorPeridaxonRevival15
+  suffix: Peridaxon - Revival
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 30
+        - ReagentId: CMInaprovaline
+          Quantity: 30
+        - ReagentId: RMCPeridaxon
+          Quantity: 30
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorOxycodone15
+  suffix: Oxycodone
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: RMCOxycodone
+          Quantity: 90
+
+- type: entity
+  parent: RMCMedicAutoInjector15
   id: RMCMedicAutoInjectorMeraBic15
   suffix: MeraBic
   components:

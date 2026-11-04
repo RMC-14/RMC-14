@@ -138,7 +138,7 @@
     back:
     - RMCRadioHandheldColonyOff
     - RMCMotionDetector
-#    # T3 research notes
+    - RMCChemUniqueSynthesisNotesTierThree
 
 - type: randomHumanoidSettings
   parent: RMCCorpse
@@ -285,7 +285,7 @@
   equipment:
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCArmorVest
-    back: CMSatchel # TODO lockable satchel
+    back: RMCSatchelCorporateResearchLootFill # TODO lockable satchel
     shoes: RMCShoesLaceup
     eyes: RMCGlassesAviators
     id: CMIDCardLiaisonColony
@@ -294,7 +294,6 @@
   storage:
     back:
     - RMCRadioHandheldColonyOff
-    # TODO random CL survivor notes
 
 - type: startingGear
   parent: RMCGearCorpseLiaison
@@ -488,10 +487,10 @@
       state: weya_execsuper
 
 - type: startingGear
-  id: RMCGearCorpseWeYaManager # TODO lockable satchel and random research notes
+  id: RMCGearCorpseWeYaManager # TODO lockable satchel
   equipment:
     ears: RMCHeadsetDistressWeYa
-    back: CMSatchel
+    back: RMCSatchelCorporateResearchLootFill
     head: RMCHeadCapManager
     jumpsuit: RMCJumpsuitLiaisonManager
     outerClothing: RMCJacketCorporateManager

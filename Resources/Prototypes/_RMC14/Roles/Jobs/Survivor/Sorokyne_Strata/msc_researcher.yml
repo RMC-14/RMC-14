@@ -89,4 +89,6 @@
       - [ RMCGrenadeCustomMetalFoam ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
+    -
+      - [ RMCChemUniqueSynthesisNotesTierThree ]
     tryEquipRandomOtherGear: false

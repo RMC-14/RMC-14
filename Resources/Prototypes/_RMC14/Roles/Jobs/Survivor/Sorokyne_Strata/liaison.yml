@@ -88,3 +88,8 @@
     randomOutfits:
     - [ RMCCoatBureauTrenchCoatBrown ]
     - [ RMCCoatBureauTrenchCoatGrey ]
+    randomGearOther:
+    -
+      - [ RMCChemGrantNotesHigh ]
+      - [ RMCChemGrantNotes ]
+      - [ RMCChemUniqueSynthesisNotesTierThree ]

@@ -31,7 +31,7 @@
     - type: CommandAccent
     - type: InnateCommandSpeech
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetPMCGun # TODO RMC14: CL Survivor Loot preset
+      preset: RMCSurvivorPresetSolarisCorporateSupervisor
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -61,7 +61,22 @@
     head: RMCHeadCapManager
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
-    # TODO RMC14: research_notes/grant
+  storage:
+    back:
+    - RMCChemGrantNotes
+
+- type: entity
+  parent: RMCGearSurvivorPresetPMCGun
+  id: RMCSurvivorPresetSolarisCorporateSupervisor
+  name: solaris corporate supervisor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomGearOther:
+    -
+      - [ RMCChemGrantNotesHigh ]
+      - [ RMCChemGrantNotes ]
+      - [ RMCChemUniqueSynthesisNotesTierThree ]
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -35,5 +35,5 @@
 - type: entity
   parent: RMCSurvivorPresetScientist
   id: RMCSurvivorPresetKutjevoResearcher
-  name: kutjevo researcher colonist preset # TODO RMC14 random research notes
+  name: kutjevo researcher colonist preset
   categories: [ HideSpawnMenu ]

@@ -268,9 +268,8 @@
         recommended: true
       - id: RMCPouchMedkit
         recommended: true
-#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
-#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
-#       recommended: true
+      - id: RMCPouchReagentCanisterPeridaxonRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterBicaridine
@@ -381,9 +380,9 @@
       - id: RMCPouchReagentCanisterTricordrazineRevival
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
         recommended: true
-#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
-#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
-#       recommended: true
+      - id: RMCPouchReagentCanisterPeridaxonRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+        recommended: true
       - id: RMCPouchMedkit
         recommended: true
       - id: RMCPouchAutoinjector
@@ -438,9 +437,9 @@
       - id: RMCPouchReagentCanisterTricordrazineRevival
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
         recommended: true
-#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
-#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
-#       recommended: true
+      - id: RMCPouchReagentCanisterPeridaxonRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+        recommended: true
       - id: RMCPouchMedkit
         recommended: true
       - id: RMCPouchAutoinjector
@@ -499,9 +498,9 @@
       - id: RMCPouchReagentCanisterTricordrazineRevival
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
         recommended: true
-#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
-#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
-#       recommended: true
+      - id: RMCPouchReagentCanisterPeridaxonRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+        recommended: true
       - id: RMCPouchMedkit
         recommended: true
       - id: RMCPouchAutoinjector

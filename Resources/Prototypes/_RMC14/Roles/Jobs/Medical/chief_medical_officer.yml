@@ -70,7 +70,7 @@
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
     ears: CMHeadsetCMO
-    # TODO RMC14 random chemical synthesis note
+    pocket1: RMCChemUniqueSynthesisNotesTierTwo
 
 - type: startingGear
   id: CMGearCMOEquipped

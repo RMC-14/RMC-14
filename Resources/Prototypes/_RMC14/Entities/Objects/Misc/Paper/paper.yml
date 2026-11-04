@@ -294,6 +294,15 @@
     isCorrodible: false
 
 - type: entity
+  parent: RMCChemGrantNotes
+  id: RMCChemGrantNotesHigh
+  suffix: High
+  components:
+  - type: IntelChemGrantPaper
+    minGrant: 4
+    maxGrant: 4
+
+- type: entity
   parent: RMCPaperWeYa
   id: RMCChemSynthesisNotes
   name: synthesis notes
@@ -302,6 +311,42 @@
   - type: IntelDetectorTracked
   - type: Corrodible
     isCorrodible: false
+
+- type: entity
+  parent: RMCChemSynthesisNotes
+  id: RMCChemUniqueSynthesisNotes
+  name: research notes
+  description: A Weston-Yamada document detailing the synthesis and tested properties of a unique experimental compound.
+  components:
+  - type: RMCChemSynthesisNotes
+    unique: true
+
+- type: entity
+  parent: RMCChemUniqueSynthesisNotes
+  id: RMCChemUniqueSynthesisNotesTierOne
+  suffix: Tier 1
+  components:
+  - type: RMCChemSynthesisNotes
+    unique: true
+    tier: 1
+
+- type: entity
+  parent: RMCChemUniqueSynthesisNotes
+  id: RMCChemUniqueSynthesisNotesTierTwo
+  suffix: Tier 2
+  components:
+  - type: RMCChemSynthesisNotes
+    unique: true
+    tier: 2
+
+- type: entity
+  parent: RMCChemUniqueSynthesisNotes
+  id: RMCChemUniqueSynthesisNotesTierThree
+  suffix: Tier 3
+  components:
+  - type: RMCChemSynthesisNotes
+    unique: true
+    tier: 3
 
 - type: entity
   parent: RMCPaperWeYa
