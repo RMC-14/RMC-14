@@ -405,7 +405,6 @@
 - type: reagent
   parent: CMReagent
   id: RMCSerotrotium
-  chemClass: Common
   name: reagent-name-rmcserotrotium
   desc: reagent-desc-rmcserotrotium
   physicalDesc: reagent-physical-desc-oily
