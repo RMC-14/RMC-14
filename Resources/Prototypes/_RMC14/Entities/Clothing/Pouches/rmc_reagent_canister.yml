@@ -141,6 +141,42 @@
 
 - type: entity
   parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterPeridaxonRevival
+  suffix: Peridaxon - Revival
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorPeridaxonRevival15
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterPeridaxonRevival
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterOxycodone
+  suffix: Oxycodone
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorOxycodone15
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterOxycodone
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
   id: RMCPouchReagentCanisterMeraBic
   suffix: MeraBic
   components:
