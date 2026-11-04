@@ -221,9 +221,9 @@
 
 - type: entity
   parent: RMCSynthResetKey
-  id: RMCSynthResetKeyHalcyon
-  name: Halcyon synthetic reset key
-  description: A Halcyon-pattern reset key for rebooting synthetic units after critical failure. It must be recharged after use.
+  id: RMCSynthResetKeyNovaris 
+  name: Novaris synthetic reset key
+  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use.
   components:
   - type: Sprite
     layers:
@@ -234,9 +234,9 @@
 
 - type: entity
   parent: RMCSynthResetKeySMART
-  id: RMCSynthResetKeyHalcyonSMART
-  name: SMART Halcyon synthetic reset key
-  description: A Halcyon-pattern reset key with a microfunction AI, allowing anyone to operate it. It must be recharged after use.
+  id: RMCSynthResetKeyNovarisSMART
+  name: SMART Novaris synthetic reset key
+  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use. This one has a micro-function AI and can be operated by anyone.
   components:
   - type: Sprite
     layers:
