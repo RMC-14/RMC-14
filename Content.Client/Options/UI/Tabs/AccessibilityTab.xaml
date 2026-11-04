@@ -26,6 +26,9 @@
                 <Label Text="{Loc 'ui-options-accessability-header-content'}"
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="CensorNudityCheckBox" Text="{Loc 'ui-options-censor-nudity'}" />
+                <!-- RMC14 -->
+                <CheckBox Name="RMCPostDeathChatMuteCheckBox" Text="{Loc 'rmc-ui-options-post-death-chat-mute'}" />
+                <!-- RMC14 -->
             </BoxContainer>
         </ScrollContainer>
         <ui:OptionsTabControlRow Name="Control" Access="Public" />

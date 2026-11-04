@@ -8,7 +8,15 @@
   },
   "states": [
     {
-      "name": "cotablet"
+      "name": "cotablet",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
     },
     {
       "name": "inhand-right",

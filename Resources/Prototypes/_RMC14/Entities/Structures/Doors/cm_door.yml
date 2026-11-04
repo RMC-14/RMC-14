@@ -159,6 +159,7 @@
   - type: VehicleSmashable
     damageOnHit: 1000
     requiresDoorUnpowered: true
+    minContinueWeightClass: Heavy
     smashSound:
       path: /Audio/_RMC14/Effects/metal_crash.ogg
   - type: RMCWallExplosionDeletable
