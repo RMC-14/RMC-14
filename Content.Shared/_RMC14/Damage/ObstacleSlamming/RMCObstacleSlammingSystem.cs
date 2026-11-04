@@ -120,7 +120,7 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
             if (other.AttachedEntity is not { } otherEnt)
                 continue;
 
-            var otherMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", user), ("object", Identity.Name(obstacle, EntityManager, otherEnt)));
+            var otherMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", Identity.Name(user, EntityManager, otherEnt)), ("object", Identity.Name(obstacle, EntityManager, otherEnt)));
             _popup.PopupEntity(otherMessage, user, otherEnt, PopupType.MediumCaution);
         }
 

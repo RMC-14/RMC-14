@@ -7,6 +7,7 @@
     RMCRankSyntheticColonist: []
   icon: "RMCJobIconSPPSynth"
   spawnMenuRoleName: SPP Airborne Synthetic (Trijent Special Survivor)
+  playTimeTracker: RMCJobSyntheticColony
   special:
   - !type:AddComponentSpecial
     components:
