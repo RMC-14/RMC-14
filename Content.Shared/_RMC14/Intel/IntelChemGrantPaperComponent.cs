@@ -8,4 +8,10 @@ public sealed partial class IntelChemGrantPaperComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Grant;
+
+    [DataField, AutoNetworkedField]
+    public int MinGrant = 2;
+
+    [DataField, AutoNetworkedField]
+    public int MaxGrant = 4;
 }

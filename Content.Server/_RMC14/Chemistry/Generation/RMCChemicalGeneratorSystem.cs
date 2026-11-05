@@ -917,6 +917,12 @@ public sealed class RMCChemicalGeneratorSystem : EntitySystem
         return string.Concat(properties.Select(p => $" {(string.IsNullOrEmpty(p.Property.Code) ? p.Property.ID : p.Property.Code)}{p.Level}"));
     }
 
+    public string GetIndicatorText(ProtoId<ReagentPrototype> reagentId)
+    {
+        var indicator = _reactionIndicators.TryGetValue(reagentId.Id, out var found) ? found : ReactionIndicator.Calm;
+        return GetIndicatorText(indicator);
+    }
+
     private static string GetIndicatorText(ReactionIndicator indicator)
     {
         return indicator switch

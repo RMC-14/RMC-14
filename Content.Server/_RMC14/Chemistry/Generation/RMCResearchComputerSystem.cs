@@ -91,6 +91,9 @@ public sealed class RMCResearchComputerSystem : SharedRMCResearchComputerSystem
         if (MetaData(args.Used).EntityPrototype == null)
             return;
 
+        if (TryComp(args.Used, out RMCChemSynthesisNotesComponent? notes))
+            _research.EnsureNotesGenerated((args.Used, notes));
+
         var ev = new RMCResearchComputerScanConfirmEvent(GetNetEntity(args.User), GetNetEntity(args.Used));
         _dialog.OpenConfirmation(ent, args.User, Name(ent), $"Do you want to save {Name(args.Used)} to the research database?", ev);
         args.Handled = true;

@@ -280,6 +280,7 @@ public sealed class IntelSystem : EntitySystem
         SubscribeLocalEvent<IntelCluesComponent, MapInitEvent>(OnIntelCluesMapInit, after: [typeof(AreaSystem)]);
 
         SubscribeLocalEvent<IntelDataDiskComponent, MapInitEvent>(OnDataDiskMapInit, after: [typeof(AreaSystem)]);
+        SubscribeLocalEvent<IntelChemGrantPaperComponent, MapInitEvent>(OnChemGrantPaperMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<IntelDataDiskComponent, RefreshNameModifiersEvent>(OnDataDiskRefreshName);
         SubscribeLocalEvent<IntelDataTerminalComponent, MapInitEvent>(OnDataTerminalMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<IntelDataTerminalComponent, InteractHandEvent>(OnDataTerminalInteractHand, before: [typeof(LockSystem)]);
@@ -1586,10 +1587,24 @@ public sealed class IntelSystem : EntitySystem
     private void SetupChemGrantPaper(EntityUid paperId)
     {
         var grant = EnsureComp<IntelChemGrantPaperComponent>(paperId);
-        grant.Grant = _random.Next(2, 5);
-        Dirty(paperId, grant);
+        if (grant.Grant <= 0)
+            RollChemGrant((paperId, grant));
+    }
 
-        _paper.SetContent(paperId, Loc.GetString("rmc-intel-chem-grant-paper", ("credits", grant.Grant)));
+    private void OnChemGrantPaperMapInit(Entity<IntelChemGrantPaperComponent> ent, ref MapInitEvent args)
+    {
+        if (_net.IsClient || ent.Comp.Grant > 0)
+            return;
+
+        RollChemGrant(ent);
+    }
+
+    private void RollChemGrant(Entity<IntelChemGrantPaperComponent> ent)
+    {
+        ent.Comp.Grant = _random.Next(ent.Comp.MinGrant, ent.Comp.MaxGrant + 1);
+        Dirty(ent);
+
+        _paper.SetContent(ent, Loc.GetString("rmc-intel-chem-grant-paper", ("credits", ent.Comp.Grant)));
     }
 
     private void SetupChemSynthesisPaper(EntityUid paperId)

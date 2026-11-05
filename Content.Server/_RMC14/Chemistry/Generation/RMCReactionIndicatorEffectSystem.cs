@@ -49,6 +49,8 @@ public sealed class RMCReactionIndicatorEffectSystem : EntitySystem
 
     private static readonly TimeSpan EndothermicDuration = TimeSpan.FromSeconds(2);
 
+    private readonly List<Entity<SolutionComponent>> _toReact = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<ExecuteEntityEffectEvent<RMCReactionIndicatorEffect>>(OnReactionIndicator);
@@ -57,14 +59,23 @@ public sealed class RMCReactionIndicatorEffectSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        _toReact.Clear();
         var query = EntityQueryEnumerator<RMCEndothermicLockoutComponent, SolutionComponent>();
         while (query.MoveNext(out var uid, out var lockout, out var solution))
         {
             if (_timing.CurTime < lockout.LockedUntil)
                 continue;
 
-            RemComp<RMCEndothermicLockoutComponent>(uid);
-            _reaction.FullyReactSolution((uid, solution));
+            _toReact.Add((uid, solution));
+        }
+
+        foreach (var ent in _toReact)
+        {
+            if (TerminatingOrDeleted(ent))
+                continue;
+
+            RemComp<RMCEndothermicLockoutComponent>(ent);
+            _reaction.FullyReactSolution(ent);
         }
     }
 

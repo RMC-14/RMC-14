@@ -16,6 +16,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
+using Content.Shared.UserInterface;
 using Robust.Server.GameStates;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
@@ -51,6 +52,8 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
 
     private static readonly EntProtoId<RMCChemistryResearchComponent> ResearchProto = "RMCChemistryResearch";
     private static readonly EntProtoId ContractNotesProto = "RMCChemContractNotes";
+    private static readonly EntProtoId ReportProto = "RMCChemResearchReport";
+    private static readonly EntProtoId UniqueNotesProto = "RMCChemUniqueSynthesisNotes";
 
     private readonly Dictionary<int, ContractStats> _contractStats = new();
 
@@ -59,6 +62,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         base.Initialize();
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeLocalEvent<IntelChemSynthesisPaperComponent, MapInitEvent>(OnSynthesisPaperMapInit);
+        SubscribeLocalEvent<RMCChemSynthesisNotesComponent, BeforeActivatableUIOpenEvent>(OnNotesBeforeUIOpen, before: [typeof(PaperSystem)]);
     }
 
     private void OnRoundStarting(RoundStartingEvent ev)
@@ -68,7 +72,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
 
     private void OnSynthesisPaperMapInit(Entity<IntelChemSynthesisPaperComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp(ent, out PaperComponent? paper))
+        if (!HasComp<PaperComponent>(ent))
             return;
 
         var reagentId = _generator.GenerateReagent(_random.Next(1, 3));
@@ -78,7 +82,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
             return;
         }
 
-        _paper.SetContent((ent.Owner, paper), FormatSynthesisNotes(reagentId, ingredients, _generator.GetProperties(reagent), contract: false));
+        WriteSynthesisNotes(ent, reagentId, ingredients, _generator.GetProperties(reagent), contract: false);
     }
 
     public override void Update(float frameTime)
@@ -205,12 +209,8 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         {
             _popup.PopupCoordinates($"Clearance access increased to level {research.Comp.ClearanceLevel} for {cost} credits.", spawnAt.Value, PopupType.Medium);
 
-            var reagentId = _generator.GenerateReagent(research.Comp.ClearanceLevel, ChemClass.Rare);
-            if (_rmcReagent.TryIndex(reagentId, out var reagent))
-            {
-                var report = _generator.PrintReport(spawnAt.Value, reagentId, reagent, category: "Clearance Grants");
-                _audio.PlayPvs(research.Comp.FaxSound, report);
-            }
+            if (SpawnUniqueSynthesisNotes(spawnAt.Value, research.Comp.ClearanceLevel) is { } notes)
+                _audio.PlayPvs(research.Comp.FaxSound, notes);
         }
 
         return true;
@@ -354,7 +354,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         research.Comp.NextReroll = _timing.CurTime + research.Comp.ContractRerollPicked;
 
         var notes = Spawn(ContractNotesProto, spawnAt);
-        _paper.SetContent(notes, FormatSynthesisNotes(reagentId, ingredients, properties, contract: true));
+        WriteSynthesisNotes(notes, reagentId, ingredients, properties, contract: true);
         _audio.PlayPvs(research.Comp.FaxSound, notes);
         research.Comp.LastPickedContractReagent = reagentId.Id;
 
@@ -425,7 +425,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         var properties = _generator.GetProperties(reagent);
 
         var notes = Spawn(ContractNotesProto, spawnAt);
-        _paper.SetContent(notes, FormatSynthesisNotes(reagentId, ingredients, properties, contract: true));
+        WriteSynthesisNotes(notes, reagentId, ingredients, properties, contract: true);
         _audio.PlayPvs(research.Comp.FaxSound, notes);
 
         return true;
@@ -434,15 +434,80 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
     private static readonly char[] ExperimentPrefixes = ['C', 'Q', 'V', 'W', 'X', 'Y', 'Z'];
     private static readonly char[] ExperimentSuffixes = ['a', 'b', 'c'];
 
-    private string FormatSynthesisNotes(
+    public EntityUid? SpawnUniqueSynthesisNotes(EntityCoordinates coords, int tier)
+    {
+        var notes = Spawn(UniqueNotesProto, coords);
+        if (TryGenerateUniqueNotes(notes, tier))
+            return notes;
+
+        Del(notes);
+        return null;
+    }
+
+    public override void EnsureNotesGenerated(Entity<RMCChemSynthesisNotesComponent> notes)
+    {
+        if (!notes.Comp.Unique || notes.Comp.ReagentId != null)
+            return;
+
+        TryGenerateUniqueNotes(notes, notes.Comp.Tier ?? EnsureResearch().Comp.ClearanceLevel);
+    }
+
+    private void OnNotesBeforeUIOpen(Entity<RMCChemSynthesisNotesComponent> ent, ref BeforeActivatableUIOpenEvent args)
+    {
+        EnsureNotesGenerated(ent);
+    }
+
+    private bool TryGenerateUniqueNotes(EntityUid notes, int tier)
+    {
+        var reagentId = _generator.GenerateReagent(tier, ChemClass.Rare);
+        if (!_rmcReagent.TryIndex(reagentId, out var reagent) ||
+            !_generator.TryGetRecipeReactants(reagentId.Id, out var ingredients))
+        {
+            return false;
+        }
+
+        WriteSynthesisNotes(notes, reagentId, ingredients, _generator.GetProperties(reagent), contract: false, fullReport: true);
+        return true;
+    }
+
+    private void WriteSynthesisNotes(
+        EntityUid notes,
         ProtoId<ReagentPrototype> reagentId,
         List<(string Id, int Amount, bool Catalyst)> ingredients,
         List<(ChemGeneratorPropertyPrototype Property, int Level)> properties,
-        bool contract)
+        bool contract,
+        bool fullReport = false)
+    {
+        var name = GetReagentName(reagentId);
+        var title = contract ? $"Contract for {name}" : $"Synthesis of {name}";
+        _paper.SetContent(notes, FormatSynthesisNotes(reagentId, title, ingredients, properties, fullReport));
+        _metaData.SetEntityName(notes, title);
+
+        var comp = EnsureComp<RMCChemSynthesisNotesComponent>(notes);
+        comp.ReagentId = reagentId;
+        comp.FullReport = fullReport;
+        comp.Properties = fullReport
+            ? properties.Select(p => new ChemReportProperty { PropertyId = p.Property.ID, Level = p.Level }).ToList()
+            : new List<ChemReportProperty>();
+
+        if (_rmcReagent.TryIndex(reagentId, out var reagent))
+        {
+            comp.Overdose = (int) (reagent.Overdose ?? FixedPoint2.Zero);
+            comp.CriticalOverdose = (int) (reagent.CriticalOverdose ?? FixedPoint2.Zero);
+        }
+
+        Dirty(notes, comp);
+    }
+
+    private string FormatSynthesisNotes(
+        ProtoId<ReagentPrototype> reagentId,
+        string title,
+        List<(string Id, int Amount, bool Catalyst)> ingredients,
+        List<(ChemGeneratorPropertyPrototype Property, int Level)> properties,
+        bool fullReport)
     {
         var name = GetReagentName(reagentId);
         var experimentId = $"{_random.Pick(ExperimentPrefixes)}{_random.Next(100, 1000)}{_random.Pick(ExperimentSuffixes)}";
-        var title = contract ? $"Contract for {name}" : $"Synthesis of {name}";
 
         var sb = new StringBuilder();
         RMCChemPaperFormat.AppendHeader(sb, "Official Weston-Yamada Document", "Experiment Notes");
@@ -467,7 +532,26 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         }
 
         sb.AppendLine();
-        sb.AppendLine("Testing for chemical properties is currently pending.");
+        if (fullReport && _rmcReagent.TryIndex(reagentId, out var reagent))
+        {
+            sb.AppendLine("Chemical has following reaction indicators:");
+            sb.AppendLine(_generator.GetIndicatorText(reagentId));
+            sb.AppendLine();
+            sb.AppendLine("The following properties have been discovered during tests:");
+
+            var description = _generator.IsGenerated(reagentId)
+                ? string.Join("\n\n", properties.Select(p => $"[bold]{p.Property.ID} Level {p.Level}[/bold] - {p.Property.Description}"))
+                : reagent.LocalizedDescription;
+            sb.AppendLine($"[font size={RMCChemPaperFormat.PropertiesFontSize}]{description}[/font]");
+
+            sb.AppendLine();
+            sb.AppendLine($"Overdoses at: {(int) (reagent.Overdose ?? FixedPoint2.Zero)} units");
+            sb.AppendLine($"Critically Overdoses at: {(int) (reagent.CriticalOverdose ?? FixedPoint2.Zero)} units");
+        }
+        else
+        {
+            sb.AppendLine("Testing for chemical properties is currently pending.");
+        }
 
         if (RMCChemPaperFormat.IsVolatile(properties))
         {
@@ -759,6 +843,18 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
     {
         if (!TryComp(original, out PaperComponent? paper))
             return null;
+
+        if (TryComp(original, out RMCChemSynthesisNotesComponent? notes))
+            EnsureNotesGenerated((original, notes));
+
+        if (notes is { ReagentId: not null })
+        {
+            var converted = spawnAt is { } reportCoordinates ? Spawn(ReportProto, reportCoordinates) : Spawn(ReportProto);
+            _paper.SetContent(converted, paper.Content);
+            _metaData.SetEntityName(converted, Name(original));
+            SetReportFromNotes(converted, notes);
+            return converted;
+        }
 
         var protoId = HasComp<IntelChemSynthesisPaperComponent>(original)
             ? ContractNotesProto.Id
