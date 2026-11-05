@@ -129,3 +129,10 @@ rmc-xeno-weeds-too-strong = These weeds are too strong to plant a node on!
 rmc-xeno-weeds-need-nearby-node = We can only plant weed nodes near other weed nodes our hive owns!
 rmc-xeno-design-node-not-construct = This design node cannot be used to build walls.
 rmc-xeno-resin-whisperer-verb-open-door = Open Door
+
+rmc-xeno-construction-thicken-free = We regurgitate some resin and thicken the {$structure} effortlessly.
+rmc-xeno-construction-thicken = We regurgitate some resin and thicken the {$structure}, using {$cost} plasma.
+rmc-xeno-construction-structure-limit = We've already built the maximum possible structures we can!
+rmc-xeno-construction-door-markers = We will now place door markers.
+rmc-xeno-construction-wall-markers = We will now place wall markers.
+rmc-xeno-construction-choose-cost = {$structure} ({$cost} plasma)

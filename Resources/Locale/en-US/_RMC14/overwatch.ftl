@@ -112,3 +112,5 @@ rmc-overwatch-console-input-ok = Ok
 rmc-overwatch-console-input-cancel = Cancel
 
 rmc-overwatch-console-busy-optics = You're too busy peering through optics.
+
+rmc-overwatch-console-promoted-squad-suffix = {" "}for {$squad}

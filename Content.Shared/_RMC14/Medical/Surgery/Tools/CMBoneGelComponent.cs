@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.Medical.Surgery.Tools;
 [Access(typeof(SharedCMSurgerySystem))]
 public sealed partial class CMBoneGelComponent : Component, ICMSurgeryToolComponent
 {
-    public string ToolName => "bone gel";
+    public string ToolName => Loc.GetString("rmc-surgery-tool-bone-gel");
 }

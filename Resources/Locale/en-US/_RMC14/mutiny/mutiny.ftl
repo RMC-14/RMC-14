@@ -20,3 +20,8 @@ rmc-mutiny-invite-rules = Read the Mutinies and Riots guidelines (Core Rules -> 
 
 rmc-mutiny-verb-make-mutineer = Make mutineer
 rmc-mutiny-verb-make-mutineer-leader = Make mutineer leader
+
+rmc-mutiny-admin-made-mutineer = Player {$player} was made a mutineer.
+rmc-mutiny-admin-removed-mutineer = Player {$player} is no longer a mutineer.
+rmc-mutiny-admin-made-leader = Player {$player} was made a mutineer leader.
+rmc-mutiny-admin-removed-leader = Player {$player} is no longer a mutineer leader.

@@ -131,7 +131,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
 
         if (_area.TryGetArea(ent, out _, out var areaProto))
-            _metaData.SetEntityName(ent, $"{areaProto.Name} APC");
+            _metaData.SetEntityName(ent, Loc.GetString("rmc-apc-name", ("area", areaProto.Name)));
 
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
         if (ent.Comp.StartingCell is { } startingCell)
@@ -298,13 +298,10 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         {
             var markup = ent.Comp.State switch
             {
-                RMCApcState.Working => "Use:\n" +
-                                       "- An [color=cyan]engineering ID[/color] to lock or unlock the interface.\n" +
-                                       "- A [color=cyan]crowbar[/color] to open the cover.\n" +
-                                       "- A [color=cyan]screwdriver[/color] to expose the wires.",
-                RMCApcState.WiresExposed => "Use a [color=cyan]screwdriver[/color] to unexpose the wires or a [color=cyan]crowbar[/color] to open the cover!",
-                RMCApcState.CoverOpenBattery => "Use an [color=cyan]empty hand[/color] to remove the battery or a [color=cyan]crowbar[/color] to close the cover!",
-                RMCApcState.CoverOpenNoBattery => "Use a [color=cyan]battery[/color] to put in a battery!",
+                RMCApcState.Working => Loc.GetString("rmc-apc-examine-working"),
+                RMCApcState.WiresExposed => Loc.GetString("rmc-apc-examine-wires-exposed"),
+                RMCApcState.CoverOpenBattery => Loc.GetString("rmc-apc-examine-cover-open-battery"),
+                RMCApcState.CoverOpenNoBattery => Loc.GetString("rmc-apc-examine-cover-open-no-battery"),
                 _ => null,
             };
 

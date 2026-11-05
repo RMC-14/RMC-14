@@ -679,7 +679,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         {
             if (popup)
             {
-                var msg = $"There's not enough flammable liquid in the {Name(ent)}!";
+                var msg = Loc.GetString("rmc-flammable-not-enough-liquid", ("container", Name(ent)));
                 _popup.PopupClient(msg, ent, user, PopupType.SmallCaution);
             }
 

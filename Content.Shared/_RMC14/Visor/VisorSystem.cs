@@ -392,13 +392,13 @@ public sealed class VisorSystem : EntitySystem
             var container = _container.EnsureContainer<ContainerSlot>(cycleable, id);
             if (_container.Insert(visor.Owner, container))
             {
-                msg = $"You connect the {Name(visor)} to {Name(cycleable)}.";
+                msg = Loc.GetString("rmc-visor-connected", ("visor", Name(visor)), ("helmet", Name(cycleable)));
                 _popup.PopupClient(msg, cycleable, user);
                 return true;
             }
         }
 
-        msg = $"{Name(cycleable)} has used all of its visor attachment sockets.";
+        msg = Loc.GetString("rmc-visor-no-sockets", ("helmet", Name(cycleable)));
         _popup.PopupClient(msg, cycleable, user, PopupType.SmallCaution);
         return true;
     }

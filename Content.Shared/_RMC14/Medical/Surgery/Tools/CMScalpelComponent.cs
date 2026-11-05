@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.Medical.Surgery.Tools;
 [Access(typeof(SharedCMSurgerySystem))]
 public sealed partial class CMScalpelComponent : Component, ICMSurgeryToolComponent
 {
-    public string ToolName => "a scalpel";
+    public string ToolName => Loc.GetString("rmc-surgery-tool-scalpel");
 }

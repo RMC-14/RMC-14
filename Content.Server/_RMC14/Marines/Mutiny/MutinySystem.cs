@@ -100,7 +100,7 @@ public sealed class MutinySystem : SharedMutinySystem
         if (TryComp<ActorComponent>(ent, out var actor))
         {
             _chatManager.DispatchServerMessage(actor.PlayerSession, Loc.GetString("mutineer-status-added"));
-            _chatManager.SendAdminAnnouncement($"Player {actor.PlayerSession.Name} was made a mutineer.");
+            _chatManager.SendAdminAnnouncement(Loc.GetString("rmc-mutiny-admin-made-mutineer", ("player", actor.PlayerSession.Name)));
         }
 
         Dirty(ent);
@@ -114,7 +114,7 @@ public sealed class MutinySystem : SharedMutinySystem
         if (TryComp<ActorComponent>(ent, out var actorComponent))
         {
             _chatManager.DispatchServerMessage(actorComponent.PlayerSession, Loc.GetString("mutineer-status-removed"));
-            _chatManager.SendAdminAnnouncement($"Player {actorComponent.PlayerSession.Name} is no longer a mutineer.");
+            _chatManager.SendAdminAnnouncement(Loc.GetString("rmc-mutiny-admin-removed-mutineer", ("player", actorComponent.PlayerSession.Name)));
         }
 
         Dirty(ent);
@@ -137,7 +137,7 @@ public sealed class MutinySystem : SharedMutinySystem
         if (TryComp<ActorComponent>(ent, out var actor))
         {
             _chatManager.DispatchServerMessage(actor.PlayerSession, Loc.GetString("mutineer-leader-status-added"));
-            _chatManager.SendAdminAnnouncement($"Player {actor.PlayerSession.Name} was made a mutineer leader.");
+            _chatManager.SendAdminAnnouncement(Loc.GetString("rmc-mutiny-admin-made-leader", ("player", actor.PlayerSession.Name)));
         }
         Dirty(ent);
     }
@@ -147,7 +147,7 @@ public sealed class MutinySystem : SharedMutinySystem
         if (TryComp<ActorComponent>(ent, out var actor))
         {
             _chatManager.DispatchServerMessage(actor.PlayerSession, Loc.GetString("mutineer-leader-status-removed"));
-            _chatManager.SendAdminAnnouncement($"Player {actor.PlayerSession.Name} is no longer a mutineer leader.");
+            _chatManager.SendAdminAnnouncement(Loc.GetString("rmc-mutiny-admin-removed-leader", ("player", actor.PlayerSession.Name)));
         }
         _actions.RemoveAction(ent.Owner, ent.Comp.RecruitActionEntity);
         Dirty(ent);

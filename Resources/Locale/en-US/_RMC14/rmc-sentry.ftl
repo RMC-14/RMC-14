@@ -82,3 +82,8 @@ rmc-sentry-laptop-place-on-table = Place the laptop on a table first!
 rmc-sentry-laptop-must-be-open = The laptop must be opened first!
 rmc-sentry-laptop-max-sentries = The laptop can only control {$max} sentries at once!
 rmc-sentry-laptop-linked = Successfully linked {$sentry} to the laptop.
+
+rmc-sentry-laptop-alert-low-ammo = {$sentry}: LOW AMMO ({$ammo}/{$maxAmmo})
+rmc-sentry-laptop-alert-critical-damage = {$sentry}: CRITICAL DAMAGE
+rmc-sentry-laptop-alert-damaged = {$sentry}: Taking damage! ({$percent}% health)
+rmc-sentry-laptop-alert-engaging = {$sentry}: Engaging {$target}

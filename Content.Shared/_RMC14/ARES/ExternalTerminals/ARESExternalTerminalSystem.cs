@@ -61,7 +61,7 @@ public sealed class ARESExternalTerminalSystem : EntitySystem
             !_core.PullARESLogs(ent.Comp.ARESCore.Value, args.Type, out var logs) || logs == null)
         {
             ent.Comp.LogsLength = 1;
-            ent.Comp.Logs.Add("No logs to display");
+            ent.Comp.Logs.Add(Loc.GetString("rmc-ares-log-empty"));
             Dirty(ent);
             return;
         }
@@ -113,7 +113,7 @@ public sealed class ARESExternalTerminalSystem : EntitySystem
 
         _core.CreateARESLog(ent.Comp.Faction,
             CoreLog,
-            $"{idCard.Comp.FullName}'s ID card was used to log into the ARES system.");
+            Loc.GetString("rmc-ares-log-login", ("name", idCard.Comp.FullName)));
 
         ent.Comp.LoggedIn = true;
         ent.Comp.Accesses = access.Tags;

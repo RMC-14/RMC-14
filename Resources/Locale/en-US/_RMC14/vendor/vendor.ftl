@@ -47,3 +47,5 @@ rmc-vendor-ui-take-one = {" "}(TAKE ONE)
 rmc-vendor-ui-choose = {" "}(CHOOSE {$amount})
 rmc-vendor-ui-search = Search
 rmc-vendor-ui-reagents = Reagents
+
+rmc-vendor-reagents-units = {$units} units

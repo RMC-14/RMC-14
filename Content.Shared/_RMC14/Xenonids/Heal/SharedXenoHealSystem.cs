@@ -91,7 +91,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         if (_xenos.Count == 0)
             return;
 
-        var msg = "We channel our plasma to heal our sisters' wounds around this area.";
+        var msg = Loc.GetString("rmc-xeno-heal-channel");
         _popup.PopupClient(msg, args.Target, ent, PopupType.Large);
 
         foreach (var xeno in _xenos)

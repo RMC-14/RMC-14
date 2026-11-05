@@ -498,7 +498,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             Pill bottle IDs: {string.Join(", ", ent.Comp.SelectedBottles):bottleIds}
             """);
 
-        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} created {ent.Comp.PillAmount} {(double)perPill}u pills with a solution of {Loc.GetString(originalSolutionNamed)}.");
+        _core.CreateARESLog(ent, LogCat, Loc.GetString("rmc-ares-log-pills-created", ("user", Name(args.Actor)), ("amount", ent.Comp.PillAmount), ("units", ((double) perPill).ToString()), ("solution", Loc.GetString(originalSolutionNamed))));
         Dirty(ent);
     }
 

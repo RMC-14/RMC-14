@@ -118,11 +118,11 @@ public sealed class SensorTowerSystem : EntitySystem
         ref var state = ref ent.Comp.State;
         var popup = state switch
         {
-            SensorTowerState.Weld => "Use a blowtorch, then wirecutters, then wrench to repair it.",
-            SensorTowerState.Wire => "Use some wirecutters, then wrench to repair it.",
-            SensorTowerState.Wrench => "Use a wrench to repair it.",
-            SensorTowerState.Off => $"The {Name(ent)} lights up.",
-            SensorTowerState.On => $"The {Name(ent)} goes dark.",
+            SensorTowerState.Weld => Loc.GetString("rmc-sensor-tower-repair-weld"),
+            SensorTowerState.Wire => Loc.GetString("rmc-sensor-tower-repair-wire"),
+            SensorTowerState.Wrench => Loc.GetString("rmc-sensor-tower-repair-wrench"),
+            SensorTowerState.Off => Loc.GetString("rmc-sensor-tower-turned-on", ("tower", Name(ent))),
+            SensorTowerState.On => Loc.GetString("rmc-sensor-tower-turned-off", ("tower", Name(ent))),
             _ => throw new ArgumentOutOfRangeException(),
         };
         _popup.PopupClient(popup, ent, user, PopupType.Medium);
@@ -151,14 +151,13 @@ public sealed class SensorTowerSystem : EntitySystem
 
         using (args.PushGroup(nameof(SensorTowerComponent)))
         {
-            // TODO: localize
             var text = ent.Comp.State switch
             {
-                SensorTowerState.Weld => "This one is heavily damaged. Use a blowtorch, wirecutters, then a wrench to repair it.",
-                SensorTowerState.Wire => "This one is heavily damaged. Use wirecutters, then a wrench to repair it.",
-                SensorTowerState.Wrench => "This one is heavily damaged. Use a wrench to repair it.",
-                SensorTowerState.Off => "It looks like it is offline.",
-                SensorTowerState.On => "It looks like it is online.",
+                SensorTowerState.Weld => Loc.GetString("rmc-sensor-tower-examine-weld"),
+                SensorTowerState.Wire => Loc.GetString("rmc-sensor-tower-examine-wire"),
+                SensorTowerState.Wrench => Loc.GetString("rmc-sensor-tower-examine-wrench"),
+                SensorTowerState.Off => Loc.GetString("rmc-sensor-tower-examine-offline"),
+                SensorTowerState.On => Loc.GetString("rmc-sensor-tower-examine-online"),
                 _ => throw new ArgumentOutOfRangeException(),
             };
             args.PushText(text);

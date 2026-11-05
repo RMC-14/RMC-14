@@ -94,7 +94,7 @@ public sealed class IntelDetectorSystem : EntitySystem
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = ent.Comp.Short ? "Change to long range mode" : "Change to short range mode",
+            Text = Loc.GetString("rmc-motion-detector-verb-mode", ("mode", ent.Comp.Short ? "long" : "short")),
             Act = () =>
             {
                 ent.Comp.Short = !ent.Comp.Short;

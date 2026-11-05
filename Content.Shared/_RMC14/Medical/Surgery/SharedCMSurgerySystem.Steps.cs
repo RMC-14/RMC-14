@@ -154,7 +154,7 @@ public abstract partial class SharedCMSurgerySystem
                     args.Invalid = StepInvalidReason.MissingTool;
 
                     if (reg.Component is ICMSurgeryToolComponent tool)
-                        args.Popup = $"You need {tool.ToolName} to perform this step!";
+                        args.Popup = Loc.GetString("rmc-surgery-missing-tool", ("tool", tool.ToolName));
 
                     return;
                 }

@@ -648,7 +648,7 @@ public sealed class IntelSystem : EntitySystem
             {
                 foreach (var faction in idCardIFF.Factions)
                 {
-                    _aresCore.CreateARESLog(faction, LogCat, (string)$"{Name(args.User)} processed {args.Amount} intel entries");
+                    _aresCore.CreateARESLog(faction, LogCat, Loc.GetString("rmc-ares-log-intel-processed", ("user", Name(args.User)), ("amount", args.Amount)));
                 }
             }
         }

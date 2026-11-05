@@ -491,8 +491,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return;
 
             var msg = hasBoost
-                ? "We regurgitate some resin and thicken the " + Name(upgradeable) + " effortlessly."
-                : $"We regurgitate some resin and thicken the {Name(upgradeable)}, using {cost} plasma.";
+                ? Loc.GetString("rmc-xeno-construction-thicken-free", ("structure", Name(upgradeable)))
+                : Loc.GetString("rmc-xeno-construction-thicken", ("structure", Name(upgradeable)), ("cost", cost));
             _popup.PopupClient(msg, upgradeable, xeno);
             _audio.PlayPredicted(xeno.Comp.BuildSound, Transform(upgradeable).Coordinates, xeno.Owner);
 
@@ -1490,7 +1490,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 if (popup)
                 {
                     _popup.PopupClient(
-                        "We've already built the maximum possible structures we can!",
+                        Loc.GetString("rmc-xeno-construction-structure-limit"),
                         target,
                         xeno,
                         PopupType.MediumCaution
@@ -2037,8 +2037,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _actions.SetToggled(args.Action.AsNullable(), ent.Comp.BuildDoorNodes);
 
         var msg = ent.Comp.BuildDoorNodes
-            ? "We will now place door markers."
-            : "We will now place wall markers.";
+            ? Loc.GetString("rmc-xeno-construction-door-markers")
+            : Loc.GetString("rmc-xeno-construction-wall-markers");
         _popup.PopupClient(msg, ent, ent, PopupType.Small);
 
         Dirty(ent);

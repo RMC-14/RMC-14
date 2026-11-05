@@ -103,8 +103,8 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
             {
                 var directionText = transferComp.Direction switch
                 {
-                    SolutionTransferDirection.Input => "Transfer mode: Drawing",
-                    SolutionTransferDirection.Output => "Transfer mode: Dispensing",
+                    SolutionTransferDirection.Input => Loc.GetString("rmc-solution-transfer-mode-drawing"),
+                    SolutionTransferDirection.Output => Loc.GetString("rmc-solution-transfer-mode-dispensing"),
                     _ => string.Empty,
                 };
 
@@ -137,7 +137,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         var dispensing = HasComp<DrainableSolutionComponent>(ent);
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = dispensing ? "Enable drawing" : "Enable dispensing",
+            Text = dispensing ? Loc.GetString("rmc-solution-transfer-verb-drawing") : Loc.GetString("rmc-solution-transfer-verb-dispensing"),
             Act = () =>
             {
                 dispensing = HasComp<DrainableSolutionComponent>(ent);

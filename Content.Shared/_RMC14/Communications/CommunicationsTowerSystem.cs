@@ -80,7 +80,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     {
         using (args.PushGroup(nameof(CommunicationsTowerComponent)))
         {
-            var msg = $"[color=cyan]If placed {(int) _hiveBoon.CommunicationTowerXenoTakeoverTime.TotalMinutes} minutes into the round, a hive cluster will turn into a hive pylon when its weeds take over this![/color]";
+            var msg = Loc.GetString("rmc-comms-tower-takeover-examine", ("minutes", (int) _hiveBoon.CommunicationTowerXenoTakeoverTime.TotalMinutes));
             args.PushMarkup(msg);
             if (ent.Comp.State != CommunicationsTowerState.Broken)
                 return;
@@ -113,10 +113,10 @@ public sealed class CommunicationsTowerSystem : EntitySystem
 
         var options = new List<DialogOption>
         {
-            new("Wipe communication frequencies"),
-            new("Add your faction's frequencies"),
+            new(Loc.GetString("rmc-comms-tower-dialog-wipe")),
+            new(Loc.GetString("rmc-comms-tower-dialog-add")),
         };
-        _dialog.OpenOptions(ent, args.User, "TC-3T comms tower", options);
+        _dialog.OpenOptions(ent, args.User, Loc.GetString("rmc-comms-tower-dialog-title"), options);
     }
 
     private void OnTowerDialogChosen(Entity<CommunicationsTowerComponent> ent, ref DialogChosenEvent args)
@@ -149,7 +149,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
             return;
 
         args.Handled = true;
-        var msg = $"You wipe the preexisting frequencies from the {Name(ent)}.";
+        var msg = Loc.GetString("rmc-comms-tower-wiped", ("tower", Name(ent)));
         _popup.PopupClient(msg, ent, args.User, PopupType.Medium);
     }
 
@@ -178,7 +178,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         }
 
         args.Handled = true;
-        var msg = $"You add your faction's communication frequencies to the {Name(ent)}'s comm list.";
+        var msg = Loc.GetString("rmc-comms-tower-added", ("tower", Name(ent)));
         _popup.PopupClient(msg, ent, args.User, PopupType.Medium);
     }
 

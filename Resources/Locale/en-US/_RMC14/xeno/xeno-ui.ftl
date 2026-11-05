@@ -70,3 +70,12 @@ rmc-xeno-ui-watch-burrowed-larva = Burrowed Larva: {$count}
 rmc-xeno-ui-watch-burrowed-larva-none = Burrowed Larva: 0
 rmc-xeno-ui-word-of-the-queen-title = Word of the Queen
 rmc-xeno-ui-word-of-the-queen-send = Send to the hive
+
+rmc-xeno-ui-hive-team-role-maim = Combat: Maim
+rmc-xeno-ui-hive-team-role-rip = Combat: Rip
+rmc-xeno-ui-hive-team-role-tear = Combat: Tear
+rmc-xeno-ui-hive-team-role-follow-queen = Follow Queen
+rmc-xeno-ui-hive-team-role-build = Build
+rmc-xeno-ui-hive-team-role-backline = Backline
+rmc-xeno-ui-hive-team-role-capture = Capture
+rmc-xeno-ui-hive-team-role-stall = Stall

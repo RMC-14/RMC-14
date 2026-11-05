@@ -55,7 +55,7 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
 
         RoleBox.Clear();
         for (var i = 0; i < HiveTeamsComponent.RoleNames.Length; i++)
-            RoleBox.AddItem(HiveTeamsComponent.RoleNames[i], i);
+            RoleBox.AddItem(Loc.GetString(HiveTeamsComponent.RoleNames[i]), i);
         RoleBox.SelectId(entry?.Role ?? 0);
         RoleBox.OnItemSelected += args => onSetRole(index, args.Id);
 

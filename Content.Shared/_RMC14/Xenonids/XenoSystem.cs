@@ -210,7 +210,7 @@ public sealed partial class XenoSystem : EntitySystem
 
     private void OnXenoHealthScannerAttemptTarget(Entity<XenoComponent> ent, ref HealthScannerAttemptTargetEvent args)
     {
-        args.Popup = "The scanner can't make sense of this creature.";
+        args.Popup = Loc.GetString("rmc-xeno-health-scanner-failed");
         args.Cancelled = true;
     }
 

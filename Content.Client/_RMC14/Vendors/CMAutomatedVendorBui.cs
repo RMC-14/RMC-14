@@ -354,7 +354,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window.ReagentsBar.MinValue = 0;
         _window.ReagentsBar.MaxValue = max.Int();
         _window.ReagentsBar.SetAsRatio((refiller.Current / refiller.Max).Float());
-        _window.ReagentsLabel.Text = $"{current.Int()} units";
+        _window.ReagentsLabel.Text = Loc.GetString("rmc-vendor-reagents-units", ("units", current.Int()));
     }
 
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)

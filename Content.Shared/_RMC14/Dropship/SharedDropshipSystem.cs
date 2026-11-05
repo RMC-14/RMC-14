@@ -331,11 +331,11 @@ public abstract class SharedDropshipSystem : EntitySystem
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-dropship-call-to-location"), user, user, PopupType.LargeCaution);
 
-                    var locationName = "Unknown";
+                    var locationName = Loc.GetString("rmc-dropship-xeno-call-unknown-location");
                     if (_areas.TryGetArea(closestDestination.Value, out _, out var areaProto))
                         locationName = areaProto.Name;
 
-                    _xenoAnnounce.AnnounceSameHiveDefaultSound(user, $"The Queen has commanded the metal bird to the hive at {locationName}");
+                    _xenoAnnounce.AnnounceSameHiveDefaultSound(user, Loc.GetString("rmc-dropship-xeno-call-announcement", ("location", locationName)));
                     return;
                 }
             }
@@ -526,7 +526,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         var grid = _transform.GetGrid((ent.Owner, Transform(ent.Owner)));
         if (grid != null)
-            _core.CreateARESLog(ent.Comp.Faction, LogCat, (string)$"{Name(args.Actor)} launched the {Name(grid.Value)} to {Name(destination.Value)}");
+            _core.CreateARESLog(ent.Comp.Faction, LogCat, Loc.GetString("rmc-ares-log-dropship-launched", ("user", Name(args.Actor)), ("dropship", Name(grid.Value)), ("destination", Name(destination.Value))));
     }
 
     private void OnDropshipNavigationCancelMsg(Entity<DropshipNavigationComputerComponent> ent,

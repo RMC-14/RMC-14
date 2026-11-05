@@ -208,3 +208,6 @@ rmc-dropship-hijack-header = [bold]Where to 'land'?[/bold]
 rmc-dropship-weapons-medevac = Medevac
 rmc-dropship-weapons-fulton = Fulton
 rmc-dropship-weapons-spotlight = Spotlight
+
+rmc-dropship-xeno-call-unknown-location = Unknown
+rmc-dropship-xeno-call-announcement = The Queen has commanded the metal bird to the hive at {$location}

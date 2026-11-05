@@ -22,3 +22,7 @@ rmc-laser-designator-switch-mode = Switch to {$mode} mode
 rmc-laser-designator-in-rangefinder-mode = {CAPITALIZE(THE($item))} is currently set to range finder mode.
 rmc-laser-designator-in-designator-mode = {CAPITALIZE(THE($item))} is currently set to CAS marking mode.
 rmc-laser-designator-to-switch = [color=cyan]Alt + Click designator to switch modes.[/color]
+
+rmc-rangefinder-supply-drop = Supply Drop
+rmc-rangefinder-mortar = Mortar
+rmc-rangefinder-close-air-support = Close Air Support

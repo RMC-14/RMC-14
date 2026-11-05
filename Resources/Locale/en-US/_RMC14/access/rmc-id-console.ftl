@@ -29,3 +29,11 @@ rmc-id-console-cannot-unassign = You cannot unassign a {$job}!
 rmc-id-console-assign-error = There was an error assigning {$id}.
 rmc-id-console-squad-full = {$squad} can't have another {$job}.
 rmc-id-console-untrained-civilian = You cannot assign untrained civilians to squads!
+
+rmc-id-console-civilian = Civilian
+rmc-id-console-unassigned-self = {$marine} has been unassigned.
+rmc-id-console-unassigned-target = You've been unassigned from your squad.
+rmc-id-console-assigned-self = {$marine} has been assigned to {$squad}.
+rmc-id-console-assigned-target = You've been transferred to {$squad}!
+
+rmc-id-console-missing-access = This id is missing the {$access}

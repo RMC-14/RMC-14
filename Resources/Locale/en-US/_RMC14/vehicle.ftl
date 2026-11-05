@@ -152,3 +152,21 @@ rmc-vehicle-weapons-stored = Stored: {$stored}/{$max}
 
 rmc-vehicle-hardpoint-frame-finish-wrench = Finish tightening the frame with a wrench.
 rmc-vehicle-hardpoint-frame-weld-first = Weld the frame before tightening it.
+
+### Hardpoint removal
+rmc-hardpoint-remove-cancelled = Hardpoint removal cancelled.
+rmc-hardpoint-remove-no-slots = Unable to access hardpoint slots.
+rmc-hardpoint-remove-empty-slot = No hardpoint is installed in that slot.
+rmc-hardpoint-remove-free-arm = Free your power loader's active arm before removing that hardpoint.
+rmc-hardpoint-remove-free-hand = Couldn't remove the hardpoint. Free a hand and try again.
+rmc-hardpoint-remove-loader-failed = Couldn't move the hardpoint into the power loader. Free the active arm and try again.
+rmc-hardpoint-remove-invalid-slot = Invalid hardpoint slot.
+rmc-hardpoint-remove-missing-slot = That hardpoint slot does not exist.
+rmc-hardpoint-remove-turret-attachments = Remove the turret attachments before removing the turret.
+rmc-hardpoint-remove-unfinished = Finish installing that hardpoint before removing it.
+rmc-hardpoint-remove-need-loader = You need to be operating a power loader to remove this hardpoint.
+rmc-hardpoint-remove-in-progress = That hardpoint is already being removed.
+rmc-hardpoint-remove-need-tool = You need a prying tool to remove this hardpoint.
+rmc-hardpoint-remove-start-failed = Couldn't start hardpoint removal.
+rmc-vehicle-flamer-slot-tank = Tank
+rmc-vehicle-flamer-slot-spare-tank = Spare Tank

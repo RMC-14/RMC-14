@@ -7,7 +7,17 @@ namespace Content.Shared._RMC14.Xenonids.HiveTeam;
 public sealed partial class HiveTeamsComponent : Component
 {
     public const int TeamCount = 4;
-    public static readonly string[] RoleNames = ["Combat: Maim", "Combat: Rip", "Combat: Tear", "Follow Queen", "Build", "Backline", "Capture", "Stall"];
+    public static readonly LocId[] RoleNames =
+    [
+        "rmc-xeno-ui-hive-team-role-maim",
+        "rmc-xeno-ui-hive-team-role-rip",
+        "rmc-xeno-ui-hive-team-role-tear",
+        "rmc-xeno-ui-hive-team-role-follow-queen",
+        "rmc-xeno-ui-hive-team-role-build",
+        "rmc-xeno-ui-hive-team-role-backline",
+        "rmc-xeno-ui-hive-team-role-capture",
+        "rmc-xeno-ui-hive-team-role-stall",
+    ];
 
     [DataField, AutoNetworkedField]
     public List<HiveTeamEntry> Teams = [];

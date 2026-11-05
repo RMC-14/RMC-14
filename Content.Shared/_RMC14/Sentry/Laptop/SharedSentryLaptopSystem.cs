@@ -119,7 +119,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
                 Dirty(sentry);
 
                 SendAlert(laptopUid, sentry, SentryAlertType.LowAmmo,
-                    $"{GetSentryDisplayName((laptopUid, laptop), sentry)}: LOW AMMO ({ammo}/{maxAmmo})");
+                    Loc.GetString("rmc-sentry-laptop-alert-low-ammo", ("sentry", GetSentryDisplayName((laptopUid, laptop), sentry)), ("ammo", ammo), ("maxAmmo", maxAmmo)));
             }
         }
     }
@@ -135,7 +135,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
                 Dirty(sentry);
 
                 SendAlert(laptopUid, sentry, SentryAlertType.CriticalHealth,
-                    $"{GetSentryDisplayName((laptopUid, laptop), sentry)}: CRITICAL DAMAGE");
+                    Loc.GetString("rmc-sentry-laptop-alert-critical-damage", ("sentry", GetSentryDisplayName((laptopUid, laptop), sentry))));
             }
         }
     }
@@ -163,7 +163,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
         var laptopEntity = laptop!.Value;
         SendAlert(laptopEntity.Owner, sentry, SentryAlertType.Damaged,
-            $"{GetSentryDisplayName(laptopEntity, sentry)}: Taking damage! ({healthPercent}% health)");
+            Loc.GetString("rmc-sentry-laptop-alert-damaged", ("sentry", GetSentryDisplayName(laptopEntity, sentry)), ("percent", healthPercent)));
     }
 
     private void OnSentryShot(Entity<SentryComponent> sentry, ref GunShotEvent args)
@@ -187,7 +187,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         var targetName = GetTargetDisplayName(gun.Target.Value);
         var laptopEntity = laptop!.Value;
         SendAlert(laptopEntity.Owner, sentry, SentryAlertType.TargetAcquired,
-            $"{GetSentryDisplayName(laptopEntity, sentry)}: Engaging {targetName}");
+            Loc.GetString("rmc-sentry-laptop-alert-engaging", ("sentry", GetSentryDisplayName(laptopEntity, sentry)), ("target", targetName)));
     }
 
     private void SendAlert(EntityUid laptop, EntityUid sentry, SentryAlertType alertType, string message)

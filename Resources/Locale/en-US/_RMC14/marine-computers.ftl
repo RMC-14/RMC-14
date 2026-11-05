@@ -33,3 +33,7 @@ rmc-job-icon-picker-search = Search...
 rmc-job-icon-picker-clear = Clear Icon
 
 rmc-marine-announce-no-skill = You are not trained in overwatch!
+
+rmc-marine-comms-echo-confirm-title = Confirm Activation
+rmc-marine-comms-echo-confirm-message = Confirm activation of Echo Squad for {$reason}
+rmc-marine-comms-echo-reason = What is the purpose of Echo Squad?

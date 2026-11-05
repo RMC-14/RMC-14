@@ -81,3 +81,16 @@ rmc-boon-king-announcement-hatch-marine = [color=#CECECE][font size=16][bold]ARE
 
     CAUTION IS ADVISED.
 rmc-boon-king-announcement-hatch-xeno = All hail the King.
+
+rmc-boon-fire-resistance-announcement-xeno = The Queen has imbued us with flame-resistant chitin for 5 minutes.
+rmc-boon-larva-surge-announcement-xeno = The Queen has awakened 5 extra burrowed larva to join the hive!
+rmc-boon-pylon-examine = [color=cyan]This will grant the hive 1 royal resin every {$minutes} minutes, allowing the Queen to obtain buffs![/color]
+rmc-boon-pylon-destroyed-announcement-xeno = We have lost our control of the tall's communication relay at {$area}.
+rmc-boon-cluster-examine = [color=cyan]If placed {$minutes} minutes into the round, this can turn into a hive pylon when its weeds take over a telecommunications tower![/color]
+rmc-boon-tower-entangled = The {$tower} is entangled in resin. Impossible to interact with.
+rmc-boon-king-vote-title = Choose a sister
+rmc-boon-king-vote-message = Vote for a sister you wish to become the King.
+rmc-boon-pylon-announcement-xeno = We have harnessed the tall's communication relay at {$area}.
+
+    We will now grow royal resin from this pylon. Hold it!
+rmc-boon-king-ready-announcement-xeno = The hive is now ready to begin hatching His Grace, the King, if we gain control of both tall hivemind towers.
