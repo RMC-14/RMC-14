@@ -50,3 +50,29 @@ rmc-hivemanagement-cant-deevolve-larva = You cannot deevolve xenonids to larva.
 rmc-hivemanagement-cant-deevolve-other-hive = You cannot deevolve a member of another hive!
 rmc-hivemanagement-manage-teams = Manage Hive Teams
 
+# Hive Permissions UI
+rmc-hivemanagement-permissions = Permissions
+rmc-hivemanagement-permissions-title = Hive Permissions
+rmc-hivemanagement-permissions-harming = Harming
+rmc-hivemanagement-permissions-construction = Construction
+rmc-hivemanagement-permissions-deconstruction = Deconstruction
+rmc-hivemanagement-permissions-unnesting = Unnesting
+rmc-hivemanagement-permissions-current = Current setting: { $value }
+rmc-hivemanagement-permissions-cooldown = You must wait { $seconds } more seconds before changing this again.
+rmc-hivemanagement-permissions-already-set = That is already the current setting.
+
+rmc-hivemanagement-permissions-harm-forbidden = Forbidden
+rmc-hivemanagement-permissions-harm-restricted = Restricted - Infected Hosts
+rmc-hivemanagement-permissions-harm-allowed = Allowed
+
+rmc-hivemanagement-permissions-level-queen = Queen Only
+rmc-hivemanagement-permissions-level-leaders = Queen and Leaders
+rmc-hivemanagement-permissions-level-anyone = Anyone
+
+rmc-hivemanagement-permissions-unnest-builders = Builder Castes Only
+
+rmc-hivemanagement-permissions-harm-announce = The Queen has set harming permissions to: { $value }
+rmc-hivemanagement-permissions-construction-announce = The Queen has set construction permissions to: { $value }
+rmc-hivemanagement-permissions-deconstruction-announce = The Queen has set deconstruction permissions to: { $value }
+rmc-hivemanagement-permissions-unnest-announce = The Queen has set unnesting permissions to: { $value }
+
