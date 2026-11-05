@@ -10,7 +10,6 @@ using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -46,8 +45,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Ghost
 {
-    // RMC
-    public sealed partial class GhostSystem : SharedGhostSystem
+    public sealed class GhostSystem : SharedGhostSystem
     {
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly IAdminLogManager _adminLog = default!;
@@ -74,6 +72,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
+        [Dependency] private readonly RMCGhostAppearanceSystem _rmcGhostAppearance = default!;
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -504,8 +503,9 @@ namespace Content.Server.Ghost
             // RMC
             if (appearanceSource is { } source)
             {
-                CopyDeathAppearance(source, ghost);
+                _rmcGhostAppearance.CopyDeathAppearance(source, ghost);
             }
+            // RMC
 
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".

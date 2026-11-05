@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.Shared._RMC14.Ghost;
-using Content.Shared._RMC14.Xenonids.Damage;
 using Robust.Client.GameObjects;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -11,12 +9,13 @@ namespace Content.Client._RMC14.Ghost;
 
 public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
 {
-    private const string BaseLayerKey = "ghost-non-humanoid-base";
+    public const string BaseLayerKey = "ghost-non-humanoid-base";
 
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
-    private readonly Dictionary<string, PrototypeSpriteData?> _prototypeSprites = new();
+    private readonly Dictionary<EntProtoId, PrototypeSpriteData?> _prototypeSprites = new();
 
     public override void Initialize()
     {
@@ -46,7 +45,7 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
         Entity<SpriteComponent?> spriteEnt = (ent.Owner, sprite);
 
         if (!_sprite.LayerMapTryGet(spriteEnt, BaseLayerKey, out _, false) && sprite.AllLayers.Any())
-            sprite[0].Visible = false;
+            _sprite.LayerSetVisible(spriteEnt, 0, false);
 
         var baseLayer = _sprite.LayerMapReserve(spriteEnt, BaseLayerKey);
         _sprite.LayerSetRsi((ent.Owner, sprite), baseLayer, baseSprite);
@@ -55,8 +54,8 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
         if (state != null)
             _sprite.LayerSetRsiState((ent.Owner, sprite), baseLayer, state);
 
-        var damageLayer = _sprite.LayerMapReserve(spriteEnt, RMCDamageVisualLayers.Base);
-        _sprite.LayerSetVisible((ent.Owner, sprite), damageLayer, false);
+        var ev = new GhostAppearanceLayersRefreshedEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnAppearanceShutdown(Entity<GhostNonHumanoidAppearanceComponent> ent, ref ComponentShutdown args)
@@ -66,10 +65,9 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
 
         Entity<SpriteComponent?> spriteEnt = (ent.Owner, sprite);
         _sprite.RemoveLayer(spriteEnt, BaseLayerKey, false);
-        _sprite.RemoveLayer(spriteEnt, RMCDamageVisualLayers.Base, false);
 
         if (sprite.AllLayers.Any())
-            sprite[0].Visible = true;
+            _sprite.LayerSetVisible(spriteEnt, 0, true);
     }
 
     private bool TryResolveSprite(
@@ -111,30 +109,22 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
         return true;
     }
 
-    private bool TryCachePrototypeSprite(string prototypeId, out PrototypeSpriteData? cached)
+    private bool TryCachePrototypeSprite(EntProtoId prototypeId, out PrototypeSpriteData? cached)
     {
         cached = default;
 
-        if (!_prototype.TryIndex<EntityPrototype>(prototypeId, out var prototype))
+        if (!_prototype.TryIndex(prototypeId, out var prototype))
             return false;
 
-        var dummy = Spawn(prototype.ID, MapCoordinates.Nullspace);
-        try
+        if (!prototype.TryGetComponent(out SpriteComponent? sprite, _compFactory))
         {
-            if (!TryComp(dummy, out SpriteComponent? sprite))
-            {
-                _prototypeSprites[prototypeId] = null;
-                return false;
-            }
+            _prototypeSprites[prototypeId] = null;
+            return false;
+        }
 
-            cached = ResolveVisibleSprite(sprite);
-            _prototypeSprites[prototypeId] = cached;
-            return true;
-        }
-        finally
-        {
-            Del(dummy);
-        }
+        cached = ResolveVisibleSprite(sprite);
+        _prototypeSprites[prototypeId] = cached;
+        return true;
     }
 
     private PrototypeSpriteData? ResolveVisibleSprite(SpriteComponent sprite)

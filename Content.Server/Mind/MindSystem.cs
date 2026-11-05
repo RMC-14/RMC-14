@@ -206,7 +206,16 @@ public sealed class MindSystem : SharedMindSystem
             // Transfer-to-null should just detach a mind.
             // If people want to create a ghost, that should be done explicitly via some TransferToGhost() method, not
             // not implicitly via optional arguments.
+
             // RMC
+            // var position = Deleted(mind.OwnedEntity)
+            //     ? _transform.ToMapCoordinates(_gameTicker.GetObserverSpawnPoint())
+            //     : _transform.GetMapCoordinates(mind.OwnedEntity.Value);
+            //
+            // entity = Spawn(GameTicker.ObserverPrototypeName, position);
+            // component = EnsureComp<MindContainerComponent>(entity.Value);
+            // var ghostComponent = Comp<GhostComponent>(entity.Value);
+            // _ghosts.SetCanReturnToBody((entity.Value, ghostComponent), false);
             var appearanceSource = mind.OwnedEntity;
             var position = Deleted(appearanceSource)
                 ? _gameTicker.GetObserverSpawnPoint()
@@ -214,7 +223,7 @@ public sealed class MindSystem : SharedMindSystem
 
             _ghosts.SpawnGhost((mindId, mind), position, false, appearanceSource);
             return;
-            // RMC end
+            // RMC
         }
 
         var oldEntity = mind.OwnedEntity;

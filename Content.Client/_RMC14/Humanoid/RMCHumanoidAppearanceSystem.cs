@@ -1,3 +1,5 @@
+// ReSharper disable CheckNamespace
+
 using Content.Shared._RMC14.Humanoid;
 using Robust.Client.GameObjects;
 

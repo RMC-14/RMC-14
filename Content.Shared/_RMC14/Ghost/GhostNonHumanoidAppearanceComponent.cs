@@ -1,9 +1,11 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Ghost;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
+[Access(typeof(RMCGhostAppearanceSystem))]
 public sealed partial class GhostNonHumanoidAppearanceComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -13,6 +15,6 @@ public sealed partial class GhostNonHumanoidAppearanceComponent : Component
     public string? State;
 
     [DataField, AutoNetworkedField]
-    public string? SourcePrototype;
+    public EntProtoId? SourcePrototype;
 
 }

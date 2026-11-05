@@ -1,10 +1,14 @@
-using Content.Shared._RMC14.Ghost;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Item;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Webbing;
+using Content.Shared._RMC14.Xenonids.Damage;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -12,18 +16,27 @@ using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Utility;
 
-namespace Content.Server.Ghost;
+namespace Content.Shared._RMC14.Ghost;
 
-public sealed partial class GhostSystem
+public sealed class RMCGhostAppearanceSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemCamouflageSystem _itemCamouflage = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
 
-    private void CopyDeathAppearance(EntityUid source, EntityUid ghost)
+    private static readonly ProtoId<DamageGroupPrototype> SynthDamageColorGroup = "Brute";
+
+    public void CopyDeathAppearance(EntityUid source, EntityUid ghost)
     {
+        CopyOverlayAppearance(source, ghost);
+
         if (!TryComp(source, out HumanoidAppearanceComponent? sourceHumanoid))
         {
             TryCopyNonHumanoidDeathAppearance(source, ghost);
@@ -42,6 +55,71 @@ public sealed partial class GhostSystem
             AppendGhostHeldItems(source, sourceHands, ghostAppearance);
 
         Dirty(ghost, ghostAppearance);
+    }
+
+    private void CopyOverlayAppearance(EntityUid source, EntityUid ghost)
+    {
+        if (Prototype(source) is not { } prototype)
+            return;
+
+        var fire = SnapshotFire(source);
+        var damage = HasComp<HumanoidAppearanceComponent>(source) ? SnapshotDamage(source) : null;
+        var xenoWound = SnapshotXenoWound(source);
+        if (fire == null && damage == null && xenoWound == null)
+            return;
+
+        var overlay = EnsureComp<GhostOverlayAppearanceComponent>(ghost);
+        overlay.SourcePrototype = prototype.ID;
+        overlay.Fire = fire;
+        overlay.Damage = damage;
+        overlay.XenoWound = xenoWound;
+        Dirty(ghost, overlay);
+    }
+
+    private GhostFireSnapshot? SnapshotFire(EntityUid source)
+    {
+        if (!TryComp(source, out FlammableComponent? flammable) || !flammable.OnFire)
+            return null;
+
+        return new GhostFireSnapshot
+        {
+            FireStacks = flammable.FireStacks,
+            Color = CompOrNull<RMCFireColorComponent>(source)?.Color,
+        };
+    }
+
+    private GhostDamageSnapshot? SnapshotDamage(EntityUid source)
+    {
+        if (!TryComp(source, out DamageableComponent? damageable) || damageable.TotalDamage <= 0)
+            return null;
+
+        var snapshot = new GhostDamageSnapshot();
+        foreach (var (group, amount) in damageable.DamagePerGroup)
+        {
+            snapshot.DamagePerGroup[group] = amount;
+        }
+
+        if (TryComp(source, out SynthComponent? synth))
+            snapshot.GroupColors[SynthDamageColorGroup] = Color.FromHex(synth.DamageVisualsColor);
+
+        return snapshot;
+    }
+
+    private GhostXenoWoundSnapshot? SnapshotXenoWound(EntityUid source)
+    {
+        if (!TryComp(source, out RMCXenoDamageVisualsComponent? visuals) ||
+            !_appearance.TryGetData(source, RMCDamageVisuals.State, out int level) ||
+            level <= 0)
+        {
+            return null;
+        }
+
+        return new GhostXenoWoundSnapshot
+        {
+            Prefix = visuals.Prefix,
+            States = visuals.States,
+            Level = level,
+        };
     }
 
     private void AppendGhostClothing(
@@ -65,14 +143,14 @@ public sealed partial class GhostSystem
                 EquippedState = clothing.EquippedState,
             };
 
-            if (TryComp(item, out MetaDataComponent? meta) && meta.EntityPrototype?.ID is { } protoId)
+            if (Prototype(item)?.ID is { } protoId)
                 snapshot.PrototypeId = protoId;
 
             if (TryComp(item, out ItemCamouflageComponent? camouflage) &&
                 camouflage.CamouflageVariations != null &&
                 camouflage.CamouflageVariations.TryGetValue(_itemCamouflage.CurrentMapCamouflage, out var camoClothingRsi))
             {
-                snapshot.ClothingRsiPath = camoClothingRsi.ToString();
+                snapshot.ClothingRsiPath = camoClothingRsi;
             }
 
             AppendAccessorySnapshots(item, slot.Name, snapshot);
@@ -95,12 +173,12 @@ public sealed partial class GhostSystem
                 continue;
             }
 
-            string? protoId = null;
-            if (TryComp(held.Value, out MetaDataComponent? meta) && meta.EntityPrototype?.ID is { } id)
+            EntProtoId? protoId = null;
+            if (Prototype(held.Value)?.ID is { } id)
                 protoId = id;
 
             string? heldPrefix = null;
-            string? itemRsiPath = null;
+            ResPath? itemRsiPath = null;
             if (TryComp(held.Value, out ItemComponent? heldItem))
             {
                 heldPrefix = heldItem.HeldPrefix;
@@ -110,7 +188,7 @@ public sealed partial class GhostSystem
                 heldCamouflage.CamouflageVariations != null &&
                 heldCamouflage.CamouflageVariations.TryGetValue(_itemCamouflage.CurrentMapCamouflage, out var camoItemRsi))
             {
-                itemRsiPath = camoItemRsi.ToString();
+                itemRsiPath = camoItemRsi;
             }
 
             ghostAppearance.HeldItems.Add(new GhostHeldItemSnapshot
@@ -237,22 +315,9 @@ public sealed partial class GhostSystem
         };
     }
 
-    private static DisplacementData? CopyDisplacement(DisplacementData? displacement)
+    private DisplacementData? CopyDisplacement(DisplacementData? displacement)
     {
-        if (displacement == null)
-            return null;
-
-        var copy = new DisplacementData
-        {
-            ShaderOverride = displacement.ShaderOverride,
-        };
-
-        foreach (var (size, layer) in displacement.SizeMaps)
-        {
-            copy.SizeMaps[size] = ClothingSystem.CopyLayer(layer);
-        }
-
-        return copy;
+        return displacement == null ? null : _serialization.CreateCopy(displacement, notNullableOverride: true);
     }
 
     private string GetUniformAccessoryKey(EntityUid uid, UniformAccessoryComponent component, int index)
@@ -274,17 +339,14 @@ public sealed partial class GhostSystem
 
     private bool TryCopyNonHumanoidDeathAppearance(EntityUid source, EntityUid ghost)
     {
-        if (TryComp(source, out MetaDataComponent? metaData) &&
-            metaData.EntityPrototype is { } prototype)
-        {
-            var ghostAppearance = EnsureComp<GhostNonHumanoidAppearanceComponent>(ghost);
-            ghostAppearance.Sprite = null;
-            ghostAppearance.State = null;
-            ghostAppearance.SourcePrototype = prototype.ID;
-            Dirty(ghost, ghostAppearance);
-            return true;
-        }
+        if (Prototype(source) is not { } prototype)
+            return false;
 
-        return false;
+        var ghostAppearance = EnsureComp<GhostNonHumanoidAppearanceComponent>(ghost);
+        ghostAppearance.Sprite = null;
+        ghostAppearance.State = null;
+        ghostAppearance.SourcePrototype = prototype.ID;
+        Dirty(ghost, ghostAppearance);
+        return true;
     }
 }

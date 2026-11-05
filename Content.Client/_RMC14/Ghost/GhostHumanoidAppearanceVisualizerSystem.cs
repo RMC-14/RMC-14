@@ -1,18 +1,18 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Client.DisplacementMap;
 using Content.Client.Humanoid;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Item;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Client._RMC14.Ghost;
@@ -21,12 +21,34 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly DisplacementMapSystem _displacement = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
-    private readonly Dictionary<string, CachedClothingData?> _clothingCache = new();
-    private readonly Dictionary<string, CachedItemData?> _itemCache = new();
+    private readonly Dictionary<EntProtoId, CachedClothingData?> _clothingCache = new();
+    private readonly Dictionary<EntProtoId, CachedItemData?> _itemCache = new();
+
+    private static readonly Dictionary<string, string> EquippedStateSlotMap = new()
+    {
+        {"head", "HELMET"},
+        {"eyes", "EYES"},
+        {"ears", "EARS"},
+        {"ears2", "EARS"},
+        {"mask", "MASK"},
+        {"outerClothing", "OUTERCLOTHING"},
+        {"jumpsuit", "INNERCLOTHING"},
+        {"neck", "NECK"},
+        {"back", "BACKPACK"},
+        {"belt", "BELT"},
+        {"gloves", "HAND"},
+        {"shoes", "FEET"},
+        {"id", "IDCARD"},
+        {"pocket1", "POCKET1"},
+        {"pocket2", "POCKET2"},
+        {"suitstorage", "SUITSTORAGE"},
+    };
 
     private static readonly object[] TemplateLayers =
     {
@@ -91,7 +113,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         ClearLayers((ent.Owner, sprite, visuals));
 
         if (sprite.AllLayers.Any())
-            sprite[0].Visible = false;
+            _sprite.LayerSetVisible((ent.Owner, sprite), 0, false);
 
         _humanoid.RefreshAppearance(ent.Owner, ent.Comp.Appearance, sprite);
 
@@ -108,7 +130,8 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
             AddHeldItemLayers((ent.Owner, sprite, visuals), heldItem, insertionIndices);
         }
 
-        RaiseLocalEvent(ent, new GhostHumanoidLayersRefreshedEvent());
+        var ev = new GhostAppearanceLayersRefreshedEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void AddClothingLayers(
@@ -134,10 +157,10 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         string? speciesId,
         Dictionary<string, int> insertionIndices)
     {
-        if (snapshot.PrototypeId == null)
+        if (snapshot.PrototypeId is not { } protoId)
             return;
 
-        var data = GetClothingData(snapshot.PrototypeId);
+        var data = GetClothingData(protoId);
         if (data == null)
             return;
 
@@ -146,26 +169,26 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
 
         var rsi = data.Rsi;
         var rsiPath = data.RsiPath;
-        if (snapshot.ClothingRsiPath != null)
+        if (snapshot.ClothingRsiPath is { } clothingRsiPath)
         {
-            rsiPath = snapshot.ClothingRsiPath;
+            rsiPath = clothingRsiPath.ToString();
             rsi = null;
-            if (_resourceCache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / rsiPath, out var overrideRes))
+            if (_resourceCache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / clothingRsiPath, out var overrideRes))
                 rsi = overrideRes.RSI;
         }
 
-        var resolution = ClothingSystem.ResolveEquippedVisuals(
-            data.ClothingVisuals,
-            effectiveEquippedPrefix,
-            effectiveEquippedState,
-            snapshot.Slot,
-            speciesId,
-            rsiPath,
-            state => rsi?.TryGetState(state, out _) == true,
-            out var layers);
-
-        if (resolution == ClothingVisualResolution.None || layers == null)
+        if (!TryResolveEquippedVisuals(
+                data.ClothingVisuals,
+                effectiveEquippedPrefix,
+                effectiveEquippedState,
+                snapshot.Slot,
+                speciesId,
+                rsiPath,
+                rsi,
+                out var layers))
+        {
             return;
+        }
 
         var i = 0;
         foreach (var layer in layers)
@@ -173,7 +196,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
             var key = layer.MapKeys?.FirstOrDefault() ?? $"{snapshot.Slot}-{i}";
             var renderKey = $"ghosthum-clothing-{snapshot.Slot}-{key}";
 
-            var layerCopy = ClothingSystem.CopyLayer(layer);
+            var layerCopy = _serialization.CreateCopy(layer, notNullableOverride: true);
             if (string.IsNullOrWhiteSpace(layerCopy.RsiPath))
                 layerCopy.RsiPath = rsiPath;
             layerCopy.Offset += snapshot.SlotOffset;
@@ -251,16 +274,16 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         GhostHeldItemSnapshot snapshot,
         Dictionary<string, int> insertionIndices)
     {
-        if (snapshot.PrototypeId == null)
+        if (snapshot.PrototypeId is not { } protoId)
             return;
 
-        var data = GetItemData(snapshot.PrototypeId);
+        var data = GetItemData(protoId);
         if (data == null)
             return;
 
         var effectiveHeldPrefix = snapshot.HeldPrefix ?? data.HeldPrefix;
 
-        var rsiPath = snapshot.ItemRsiPath ?? data.RsiPath;
+        var rsiPath = snapshot.ItemRsiPath?.ToString() ?? data.RsiPath;
 
         var locationKey = snapshot.Location.ToString().ToLowerInvariant();
         List<PrototypeLayerData> layers;
@@ -291,7 +314,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         var i = 0;
         foreach (var layer in layers)
         {
-            var layerCopy = ClothingSystem.CopyLayer(layer);
+            var layerCopy = _serialization.CreateCopy(layer, notNullableOverride: true);
             if (string.IsNullOrWhiteSpace(layerCopy.RsiPath))
                 layerCopy.RsiPath = rsiPath;
 
@@ -321,103 +344,112 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         }
     }
 
-    private CachedClothingData? GetClothingData(string protoId)
+    private CachedClothingData? GetClothingData(EntProtoId protoId)
     {
         if (_clothingCache.TryGetValue(protoId, out var cached))
             return cached;
 
-        if (!_prototype.TryIndex<EntityPrototype>(protoId, out _))
+        if (!_prototype.TryIndex(protoId, out var prototype) ||
+            !prototype.TryGetComponent(out ClothingComponent? clothing, _compFactory))
         {
             _clothingCache[protoId] = null;
             return null;
         }
 
-        var dummy = Spawn(protoId, MapCoordinates.Nullspace);
-        try
+        var rsi = GetPrototypeRsi(prototype, clothing.RsiPath);
+        var data = new CachedClothingData
         {
-            var clothing = CompOrNull<ClothingComponent>(dummy);
-            if (clothing == null)
-            {
-                _clothingCache[protoId] = null;
-                return null;
-            }
+            RsiPath = rsi?.Path.ToString(),
+            Rsi = rsi,
+            ClothingVisuals = clothing.ClothingVisuals,
+            EquippedPrefix = clothing.EquippedPrefix,
+            EquippedState = clothing.EquippedState,
+        };
 
-            RSI? rsi = null;
-            if (clothing.RsiPath != null &&
-                _resourceCache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / clothing.RsiPath, out var res))
-            {
-                rsi = res.RSI;
-            }
-            else
-            {
-                rsi = CompOrNull<SpriteComponent>(dummy)?.BaseRSI;
-            }
-
-            var data = new CachedClothingData
-            {
-                RsiPath = rsi?.Path.ToString(),
-                Rsi = rsi,
-                ClothingVisuals = clothing.ClothingVisuals,
-                EquippedPrefix = clothing.EquippedPrefix,
-                EquippedState = clothing.EquippedState,
-            };
-
-            _clothingCache[protoId] = data;
-            return data;
-        }
-        finally
-        {
-            Del(dummy);
-        }
+        _clothingCache[protoId] = data;
+        return data;
     }
 
-    private CachedItemData? GetItemData(string protoId)
+    private CachedItemData? GetItemData(EntProtoId protoId)
     {
         if (_itemCache.TryGetValue(protoId, out var cached))
             return cached;
 
-        if (!_prototype.TryIndex<EntityPrototype>(protoId, out _))
+        if (!_prototype.TryIndex(protoId, out var prototype) ||
+            !prototype.TryGetComponent(out ItemComponent? item, _compFactory))
         {
             _itemCache[protoId] = null;
             return null;
         }
 
-        var dummy = Spawn(protoId, MapCoordinates.Nullspace);
-        try
+        var rsi = GetPrototypeRsi(prototype, item.RsiPath);
+        var data = new CachedItemData
         {
-            var item = CompOrNull<ItemComponent>(dummy);
-            if (item == null)
-            {
-                _itemCache[protoId] = null;
-                return null;
-            }
+            RsiPath = rsi?.Path.ToString(),
+            Rsi = rsi,
+            InhandVisuals = item.InhandVisuals,
+            HeldPrefix = item.HeldPrefix,
+        };
 
-            RSI? rsi = null;
-            if (item.RsiPath != null &&
-                _resourceCache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / item.RsiPath, out var res))
-            {
-                rsi = res.RSI;
-            }
-            else
-            {
-                rsi = CompOrNull<SpriteComponent>(dummy)?.BaseRSI;
-            }
+        _itemCache[protoId] = data;
+        return data;
+    }
 
-            var data = new CachedItemData
-            {
-                RsiPath = rsi?.Path.ToString(),
-                Rsi = rsi,
-                InhandVisuals = item.InhandVisuals,
-                HeldPrefix = item.HeldPrefix,
-            };
-
-            _itemCache[protoId] = data;
-            return data;
-        }
-        finally
+    private RSI? GetPrototypeRsi(EntityPrototype prototype, string? rsiPath)
+    {
+        if (rsiPath != null &&
+            _resourceCache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / rsiPath, out var res))
         {
-            Del(dummy);
+            return res.RSI;
         }
+
+        return prototype.TryGetComponent(out SpriteComponent? sprite, _compFactory) ? sprite.BaseRSI : null;
+    }
+
+    private static bool TryResolveEquippedVisuals(
+        Dictionary<string, List<PrototypeLayerData>> clothingVisuals,
+        string? equippedPrefix,
+        string? equippedState,
+        string slot,
+        string? speciesId,
+        string? rsiPath,
+        RSI? rsi,
+        [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
+    {
+        if (speciesId != null && clothingVisuals.TryGetValue($"{slot}-{speciesId}", out layers))
+            return true;
+
+        if (clothingVisuals.TryGetValue(slot, out layers))
+            return true;
+
+        layers = null;
+        if (string.IsNullOrWhiteSpace(rsiPath) || rsi == null)
+            return false;
+
+        var correctedSlot = EquippedStateSlotMap.GetValueOrDefault(slot, slot);
+        var state = $"equipped-{correctedSlot}";
+
+        if (!string.IsNullOrEmpty(equippedPrefix))
+            state = $"{equippedPrefix}-equipped-{correctedSlot}";
+
+        if (equippedState != null)
+            state = equippedState;
+
+        if (speciesId != null && rsi.TryGetState($"{state}-{speciesId}", out _))
+            state = $"{state}-{speciesId}";
+        else if (!rsi.TryGetState(state, out _))
+            return false;
+
+        layers = new()
+        {
+            new PrototypeLayerData
+            {
+                RsiPath = rsiPath,
+                State = state,
+            },
+        };
+
+        return true;
     }
 
     private bool CanApplyLayer(PrototypeLayerData layer, RSI? knownRsi = null)
@@ -476,7 +508,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
                 _ => throw new ArgumentOutOfRangeException(nameof(key)),
             };
 
-            ent.Comp[index].Visible = false;
+            _sprite.LayerSetVisible(spriteEnt, index, false);
         }
     }
 
@@ -491,7 +523,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         ClearLayers((ent.Owner, sprite, visuals));
 
         if (sprite.AllLayers.Any())
-            sprite[0].Visible = true;
+            _sprite.LayerSetVisible((ent.Owner, sprite), 0, true);
 
         RemCompDeferred<GhostHumanoidAppearanceVisualsComponent>(ent);
     }

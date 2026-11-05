@@ -598,4 +598,10 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLightningMaxAmountLightNearbyEnabled =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_enabled", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCGhostBodyAlpha =
+        CVarDef.Create("rmc.ghost_body_alpha", 0x88 / 255f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCGhostClothingAlphaBoost =
+        CVarDef.Create("rmc.ghost_clothing_alpha_boost", 0.4f, CVar.REPLICATED | CVar.SERVER);
 }

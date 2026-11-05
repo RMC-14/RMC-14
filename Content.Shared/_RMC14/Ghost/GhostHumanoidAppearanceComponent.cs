@@ -3,12 +3,14 @@ using Content.Shared._RMC14.Humanoid;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Hands.Components;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Ghost;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
+[Access(typeof(RMCGhostAppearanceSystem))]
 public sealed partial class GhostHumanoidAppearanceComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -27,7 +29,7 @@ public sealed partial class GhostHumanoidAppearanceComponent : Component
 public sealed partial class GhostClothingSnapshot
 {
     [DataField]
-    public string? PrototypeId;
+    public EntProtoId? PrototypeId;
 
     [DataField(required: true)]
     public string Slot = string.Empty;
@@ -51,7 +53,7 @@ public sealed partial class GhostClothingSnapshot
     public string? EquippedState;
 
     [DataField]
-    public string? ClothingRsiPath;
+    public ResPath? ClothingRsiPath;
 }
 
 [DataDefinition]
@@ -60,7 +62,7 @@ public sealed partial class GhostClothingSnapshot
 public sealed partial class GhostHeldItemSnapshot
 {
     [DataField]
-    public string? PrototypeId;
+    public EntProtoId? PrototypeId;
 
     [DataField]
     public HandLocation Location;
@@ -72,7 +74,7 @@ public sealed partial class GhostHeldItemSnapshot
     public string? HeldPrefix;
 
     [DataField]
-    public string? ItemRsiPath;
+    public ResPath? ItemRsiPath;
 }
 
 [DataDefinition]
