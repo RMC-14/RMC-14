@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Souto promo on Fiorina has been renamed to Bobda promo!
-    type: Tweak
-  id: 3215
-  time: '2026-05-19T15:22:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9876
 - author: kleinerstation13
   changes:
   - message: Added CLF Ship insert for LV-624 with a 10% chance of occuring. Currently
@@ -4515,5 +4508,15 @@
   id: 3714
   time: '2026-11-04T09:45:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10841
+- author: Dalothis
+  changes:
+  - message: SPP PVE roles now have tacmap icons, the SPP Platoon Commander has a
+      HUD icon now.
+    type: Add
+  - message: The SPP Section Sergeant is now the SL of their squad by default.
+    type: Fix
+  id: 3715
+  time: '2026-11-05T17:15:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11011
 Name: RMC14
 Order: -1
