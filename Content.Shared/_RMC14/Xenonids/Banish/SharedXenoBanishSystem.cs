@@ -256,7 +256,6 @@ public abstract class SharedXenoBanishSystem : EntitySystem
     /// <summary>
     /// Checks the xenonid is still controlled by the player it was when the banish list was opened,
     /// so a different player who took over the body in the meantime doesn't get banished instead.
-    /// Server only, as the client doesn't know who controls other xenonids.
     /// </summary>
     private bool IsSamePlayerPopup(EntityUid manage, EntityUid target, NetUserId? player)
     {
