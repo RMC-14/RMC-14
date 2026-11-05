@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Popups;
@@ -20,6 +21,7 @@ public abstract class SharedXenoBanishSystem : EntitySystem
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -84,7 +86,8 @@ public abstract class SharedXenoBanishSystem : EntitySystem
             if (_mobState.IsCritical(uid) || _mobState.IsDead(uid))
                 continue;
 
-            options.Add(new DialogOption(Name(uid), new ManageHiveBanishChooseXenoEvent(GetNetEntity(uid))));
+            var player = _mind.GetMind(uid) is { } mindId ? CompOrNull<MindComponent>(mindId)?.UserId : null;
+            options.Add(new DialogOption(Name(uid), new ManageHiveBanishChooseXenoEvent(GetNetEntity(uid), player)));
         }
 
         if (options.Count == 0)
@@ -102,11 +105,14 @@ public abstract class SharedXenoBanishSystem : EntitySystem
         if (!TryGetEntity(args.Xeno, out var xeno))
             return;
 
-        if (!CanBanishTargetPopup(ent, xeno.Value))
+        if (!CanBanishTargetPopup(ent, xeno.Value) ||
+            !IsSamePlayerPopup(ent, xeno.Value, args.Player))
+        {
             return;
+        }
 
         var msg = Loc.GetString("rmc-banish-confirm", ("name", Name(xeno.Value)));
-        _dialog.OpenInput(ent, ent, msg, new ManageHiveBanishReasonEvent(args.Xeno), true, 200);
+        _dialog.OpenInput(ent, ent, msg, new ManageHiveBanishReasonEvent(args.Xeno, args.Player), true, 200);
     }
 
     private void OnManageHiveBanishReason(Entity<ManageHiveComponent> ent, ref ManageHiveBanishReasonEvent args)
@@ -117,8 +123,11 @@ public abstract class SharedXenoBanishSystem : EntitySystem
         if (!TryGetEntity(args.Xeno, out var xeno))
             return;
 
-        if (!CanBanishTargetPopup(ent, xeno.Value))
+        if (!CanBanishTargetPopup(ent, xeno.Value) ||
+            !IsSamePlayerPopup(ent, xeno.Value, args.Player))
+        {
             return;
+        }
 
         if (string.IsNullOrWhiteSpace(args.Message))
         {
@@ -242,6 +251,27 @@ public abstract class SharedXenoBanishSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    /// <summary>
+    /// Checks the xenonid is still controlled by the player it was when the banish list was opened,
+    /// so a different player who took over the body in the meantime doesn't get banished instead.
+    /// Server only, as the client doesn't know who controls other xenonids.
+    /// </summary>
+    private bool IsSamePlayerPopup(EntityUid manage, EntityUid target, NetUserId? player)
+    {
+        if (_net.IsClient)
+            return true;
+
+        if (player != null &&
+            _mind.GetMind(target) is { } mindId &&
+            CompOrNull<MindComponent>(mindId)?.UserId == player)
+        {
+            return true;
+        }
+
+        ErrorPopup(manage, Loc.GetString("rmc-banish-player-changed"));
+        return false;
     }
 
     private bool CanReadmitTargetPopup(Entity<ManageHiveComponent> manage, EntityUid target)
