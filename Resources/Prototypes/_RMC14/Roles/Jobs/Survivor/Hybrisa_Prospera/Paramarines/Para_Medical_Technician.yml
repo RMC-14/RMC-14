@@ -33,7 +33,7 @@
       - type: TacticalMapIcon
         icon:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
-          state: rmc_medic
+          state: rmc_para_medic
         background:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: background_para
