@@ -4,7 +4,6 @@ using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Pulling;
-using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -17,6 +16,7 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -28,7 +28,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.ParaDrop;
+namespace Content.Shared._RMC14.ParaDrop;
 
 public abstract partial class SharedParaDropSystem : EntitySystem
 {
@@ -65,6 +65,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         SubscribeLocalEvent<ParaDroppingComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
         SubscribeLocalEvent<ParaDroppingComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
         SubscribeLocalEvent<ParaDroppingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
+        SubscribeLocalEvent<ParaDroppingComponent, VehicleCanRunEvent>(OnVehicleCanRun);
         SubscribeLocalEvent<ParaDroppingComponent, NeurotoxinInjectAttemptEvent>(OnNeurotoxinInjectAttempt);
 
         SubscribeLocalEvent<SkyFallingComponent, ComponentShutdown>(OnComponentShutdown);
@@ -141,38 +142,22 @@ public abstract partial class SharedParaDropSystem : EntitySystem
 
     private void OnMapInit(Entity<ParaDroppingComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp(ent, out PhysicsComponent? physics) || !TryComp(ent, out FixturesComponent? fixtures))
-            return;
-
-        foreach (var fixture in fixtures.Fixtures)
-        {
-            ent.Comp.OriginalLayers.TryAdd(fixture.Key, fixture.Value.CollisionLayer);
-            ent.Comp.OriginalMasks.TryAdd(fixture.Key, fixture.Value.CollisionMask);
-
-            _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) CollisionGroup.None);
-            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, (int) CollisionGroup.None);
-        }
-
+        _crashLand.DisableFallingCollisions(ent, ent.Comp.OriginalLayers, ent.Comp.OriginalMasks);
         Dirty(ent);
     }
 
     private void OnComponentShutdown(Entity<ParaDroppingComponent> ent, ref ComponentShutdown args)
     {
-        if (!TryComp(ent, out PhysicsComponent? physics) || !TryComp(ent, out FixturesComponent? fixtures))
-            return;
-
-        foreach (var fixture in fixtures.Fixtures)
-        {
-            if (!ent.Comp.OriginalLayers.TryGetValue(fixture.Key, out var originalLayer) ||
-                !ent.Comp.OriginalMasks.TryGetValue(fixture.Key, out var originalMask))
-                continue;
-
-            _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, originalLayer);
-            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, originalMask);
-        }
+        _crashLand.RestoreFallingCollisions(ent, ent.Comp.OriginalLayers, ent.Comp.OriginalMasks);
 
         var ev = new ParaDropFinishedEvent();
         RaiseLocalEvent(ent, ref ev);
+
+        if (TryComp(ent, out ParaDroppableComponent? paraDroppable) &&
+            paraDroppable.RemoveComponentAfterDrop)
+        {
+            RemCompDeferred<ParaDroppableComponent>(ent);
+        }
     }
 
     private void OnComponentShutdown(Entity<SkyFallingComponent> ent, ref ComponentShutdown args)
@@ -219,6 +204,11 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         args.Cancel();
     }
 
+    private void OnVehicleCanRun(Entity<ParaDroppingComponent> ent, ref VehicleCanRunEvent args)
+    {
+        args.CanRun = false;
+    }
+
     private void OnNeurotoxinInjectAttempt(Entity<ParaDroppingComponent> ent, ref NeurotoxinInjectAttemptEvent args)
     {
         args.Cancelled = true;
@@ -241,7 +231,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         if (dropTarget == null)
         {
             EntityCoordinates? randomCoordinates = null;
-            if (_crashLand.TryGetCrashLandLocation(false, out var location))
+            if (_crashLand.TryGetCrashLandLocation(dropping, false, out var location))
                 randomCoordinates = location;
 
             // Cancel the jump if there is no viable target
@@ -271,23 +261,42 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         // Try crashing near the target location
         if (!TryComp(dropping, out ParaDroppableComponent? paraDroppable))
         {
-            if (TryGetParaDropLocation(dropCoordinates, CrashScatter, out var adjustedCrashCoordinates))
+            if (TryGetParaDropLocation(dropping, dropCoordinates, CrashScatter, out var adjustedCrashCoordinates))
                 dropCoordinates = adjustedCrashCoordinates;
 
             _crashLand.TryCrashLand(dropping, true, dropCoordinates);
             return false;
         }
 
+        // Paradrop near the target location.
+        if (TryGetParaDropLocation(dropping, dropCoordinates, paraDroppable.DropScatter, out var adjustedCoordinates))
+            dropCoordinates = adjustedCoordinates;
+
+        StartParaDrop(dropping, dropCoordinates, paraDroppable);
+        return true;
+    }
+
+    protected void StartPreparedParaDrop(EntityUid dropping, EntityCoordinates dropCoordinates, float skyFallDuration, float dropDuration)
+    {
+        if (!EnsureComp<ParaDroppableComponent>(dropping, out var paraDroppable))
+            paraDroppable.RemoveComponentAfterDrop = true;
+
+        paraDroppable.SkyFallDuration = skyFallDuration;
+        paraDroppable.DropScatter = 0;
+        paraDroppable.DropDuration = dropDuration;
+        Dirty(dropping, paraDroppable);
+
+        StartParaDrop(dropping, dropCoordinates, paraDroppable);
+    }
+
+    private void StartParaDrop(EntityUid dropping, EntityCoordinates dropCoordinates, ParaDroppableComponent paraDroppable)
+    {
         paraDroppable.LastParaDrop = _timing.CurTime;
         Dirty(dropping, paraDroppable);
 
         _rmcPulling.TryStopAllPullsFromAndOn(dropping);
         if (TryComp(dropping, out PhysicsComponent? physics))
             _physics.SetLinearVelocity(dropping, Vector2.Zero, body: physics);
-
-        // Paradrop near the target location.
-        if (TryGetParaDropLocation(dropCoordinates, paraDroppable.DropScatter, out var adjustedCoordinates))
-            dropCoordinates = adjustedCoordinates;
 
         var skyFalling = EnsureComp<SkyFallingComponent>(dropping);
         skyFalling.RemainingTime = paraDroppable.SkyFallDuration;
@@ -300,47 +309,44 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         Dirty(dropping, droppingComp);
 
         Blocker.UpdateCanMove(dropping);
-
-        return true;
     }
 
     /// <summary>
     ///     Get a new location near the target that can be paradropped to.
     /// </summary>
+    /// <param name="dropping">The entity that will be paradropped.</param>
     /// <param name="targetLocation">The paradrop target location.</param>
     /// <param name="dropScatter">The maximum distance from the target location that can be dropped on</param>
     /// <param name="adjustedLocation">The new location after the scatter was applied</param>
     /// <returns></returns>
-    private bool TryGetParaDropLocation(EntityCoordinates targetLocation, int dropScatter, out EntityCoordinates adjustedLocation)
+    public bool TryGetParaDropLocation(EntityUid dropping, EntityCoordinates targetLocation, int dropScatter, out EntityCoordinates adjustedLocation)
     {
         adjustedLocation = default;
-        var distressQuery = EntityQueryEnumerator<RMCPlanetComponent>();
-        while (distressQuery.MoveNext(out var grid, out _))
+        if (_transform.GetGrid(targetLocation) is not { } grid ||
+            !TryComp<MapGridComponent>(grid, out var gridComp))
         {
-            if (!TryComp<MapGridComponent>(grid, out var gridComp))
+            return false;
+        }
+
+        var position = _mapSystem.LocalToTile(grid, gridComp, targetLocation);
+        var dropArea = new Box2(position.X - dropScatter, position.Y - dropScatter, position.X + dropScatter, position.Y + dropScatter);
+        var enumerable = _mapSystem.GetTilesEnumerator(grid, gridComp, dropArea);
+
+        var viableTiles = new List<TileRef>();
+        while (enumerable.MoveNext(out var tileRef))
+        {
+            if (!_crashLand.TryGetLandableFootprint(dropping, (grid, gridComp), tileRef.GridIndices, false, out _))
                 continue;
 
-            var position = _mapSystem.LocalToTile(grid, gridComp, targetLocation);
-            var dropArea = new Box2(position.X - dropScatter, position.Y - dropScatter, position.X + dropScatter, position.Y + dropScatter);
-            var enumerable = _mapSystem.GetTilesEnumerator(grid, gridComp, dropArea);
-
-            var viableTiles = new List<TileRef>();
-            while (enumerable.MoveNext(out var tileRef))
-            {
-                if (!_crashLand.IsLandableTile((grid, gridComp), tileRef))
-                    continue;
-
-                viableTiles.Add(tileRef);
-            }
-
-            if (viableTiles.Count == 0)
-                return false;
-
-            var random = _random.Next(0, viableTiles.Count);
-            adjustedLocation = _mapSystem.GridTileToLocal(grid, gridComp, viableTiles[random].GridIndices);
-            return true;
+            viableTiles.Add(tileRef);
         }
-        return false;
+
+        if (viableTiles.Count == 0)
+            return false;
+
+        var random = _random.Next(0, viableTiles.Count);
+        adjustedLocation = _mapSystem.GridTileToLocal(grid, gridComp, viableTiles[random].GridIndices);
+        return true;
     }
 
     /// <summary>

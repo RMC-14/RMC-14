@@ -21,15 +21,13 @@
   name: deployed parachute
   components:
   - type: Sprite
+    drawdepth: Effects
     noRot: true
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/Parachute/parachute_deployed.rsi
     layers:
-    - drawdepth: overlay
     - state: cables
-      drawdepth: Overlay
       offset: 0.0, 0.3
     - state: chute_animated
-      drawdepth: Overlay
       offset: 0.0, 0.9
   - type: TimedDespawn
     lifetime: 3.5

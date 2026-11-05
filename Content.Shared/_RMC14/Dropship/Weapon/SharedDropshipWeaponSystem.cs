@@ -8,6 +8,8 @@ using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
+using Content.Shared._RMC14.PayloadDeployment.Components;
+using Content.Shared._RMC14.PayloadDeployment.Systems;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Explosion.Implosion;
 using Content.Shared._RMC14.Map;
@@ -15,6 +17,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.MedevacStretcher;
 using Content.Shared._RMC14.OnCollide;
+using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
@@ -34,7 +37,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
 using Content.Shared.NameModifier.EntitySystems;
-using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
@@ -91,7 +93,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
-    [Dependency] private readonly SharedRMCOrbitalDeployerSystem _rmcOrbitalDeployable = default!;
+    [Dependency] private readonly SharedRMCOrbitalDeploySystem _orbitalDeploy = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -1190,7 +1192,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!TryComp(selectedSystem, out RMCOrbitalDeployerComponent? deployer))
             return;
 
-        _rmcOrbitalDeployable.TryDeploy(selectedSystem.Value, target,  args.Actor, deployer);
+        _orbitalDeploy.TryDeployFromDeployer(selectedSystem.Value, Transform(selectedSystem.Value).ParentUid, target, args.Actor, deployer);
 
         RefreshWeaponsUI(ent);
     }

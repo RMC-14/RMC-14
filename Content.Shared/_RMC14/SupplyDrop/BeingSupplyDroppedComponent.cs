@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -13,8 +13,14 @@ public sealed partial class BeingSupplyDroppedComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan OpenAt;
 
-    [DataField, AutoNetworkedField]
-    public EntityUid? LandingEffect;
+    [DataField]
+    public TimeSpan OpenDelay;
+
+    [DataField]
+    public bool Landed;
+
+    [DataField]
+    public List<EntityUid> LandingEffects = [];
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier? LandingDamage;
