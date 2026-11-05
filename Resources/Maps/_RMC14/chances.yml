@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 06/24/2026 15:32:11
-  entityCount: 30250
+  entityCount: 30253
 maps:
 - 1
 grids:
@@ -46752,7 +46752,7 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
-  - uid: 30250
+  - uid: 30252
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -135761,6 +135761,29 @@ entities:
     - type: Transform
       pos: 46.5,-73.5
       parent: 1
+- proto: RMCVanWheel
+  entities:
+  - uid: 30251
+    components:
+    - type: Transform
+      pos: 64.5,-35.5
+      parent: 1
+    - type: HardpointIntegrity
+      integrity: 250
+  - uid: 30250
+    components:
+    - type: Transform
+      pos: 56.5,-35.5
+      parent: 1
+    - type: HardpointIntegrity
+      integrity: 250
+  - uid: 30253
+    components:
+    - type: Transform
+      pos: -37.5,24.5
+      parent: 1
+    - type: HardpointIntegrity
+      integrity: 250
 - proto: RMCVendorCigsWeYa
   entities:
   - uid: 2931

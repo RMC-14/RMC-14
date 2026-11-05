@@ -1114,18 +1114,18 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentHG3712Stock
-  name: HG3712 stock
-  description: The non-detachable stock of a HG 37-12 pump shotgun.
+  id: RMCAttachmentModel12Stock
+  name: Model 12 stock
+  description: The non-detachable stock of a Model 12 pump shotgun.
   components:
   - type: Sprite
-    state: hg3712_stock
+    state: model12_stock
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentHG3712Stock
+    - RMCAttachmentModel12Stock
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -1140,7 +1140,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentHG3712Stock
+    - RMCAttachmentHuntingStock
 
 - type: entity
   parent: RMCAttachableBase
@@ -1303,7 +1303,7 @@
     - RMCAttachmentL49Stock
 
 - type: Tag
-  id: RMCAttachmentHG3712Stock
+  id: RMCAttachmentModel12Stock
 
 - type: Tag
   id: RMCAttachmentStock

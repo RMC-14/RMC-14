@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: ColMarTechSurplus
   id: RMCFreelancerSurplusPVE
-  name: Freelancer Clothing Rack
+  name: freelancer clothing rack
   description: A mass-produced clothing rack containing a large amount of equipment for any .
   suffix: PVE, Freelancer
   components:

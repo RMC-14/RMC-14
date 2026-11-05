@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprited by noctyrnal (Github)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "free_med"
+        },
+        {
+            "name": "free_rfn"
+        },
+        {
+            "name": "free_sl"
+        }
+    ]
+}

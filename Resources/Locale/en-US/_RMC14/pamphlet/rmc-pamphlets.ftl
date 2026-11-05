@@ -5,4 +5,4 @@ rmc-pamphlets-reading = You read over the pamphlet a few times, learning a new s
 rmc-pamphlets-rifleman-warning = Only squad riflemen can use this.
 rmc-pamphlets-mp-warning = Only military police can use this.
 rmc-pamphlets-k9-warning = Only hospital corpsman and military police can use this.
-rmc-pamphlets-changes-job = [bold]This pamphlet changes your job and prevents you from reading other pamphlets that do the same.[/bold]
+rmc-pamphlets-changes-job = [italic][color=red]Prevents you from reading other pamphlets that change your job.[/italic][/color]

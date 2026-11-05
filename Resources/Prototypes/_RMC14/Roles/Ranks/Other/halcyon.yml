@@ -1,0 +1,65 @@
+- type: rank
+  id: RMCRankHalcyonTrainee
+  name: Trainee
+  prefix: Trn.
+  paygrade: HC1
+
+- type: rank
+  id: RMCRankHalcyonJuniorExecutive
+  name: Junior Executive
+  prefix: Jr. Exec.
+  paygrade: HC2
+
+- type: rank
+  id: RMCRankHalcyonExecutive
+  name: Executive
+  prefix: Exec.
+  paygrade: HC3
+
+- type: rank
+  id: RMCRankHalcyonSeniorExecutive
+  name: Senior Executive
+  prefix: Sr. Exec.
+  paygrade: HC4
+
+- type: rank
+  id: RMCRankHalcyonExecutiveSpecialist
+  name: Executive Specialist
+  prefix: Exec. Spc.
+  paygrade: HC5
+
+- type: rank
+  id: RMCRankHalcyonExecutiveSupervisor
+  name: Executive Supervisor
+  prefix: Exec. Spvsr.
+  paygrade: HC6
+
+- type: rank
+  id: RMCRankHalcyonAssistantManager
+  name: Assistant Manager
+  prefix: Assis. Mng.
+  paygrade: HC7
+
+- type: rank
+  id: RMCRankHalcyonDivisionManager
+  name: Division Manager
+  prefix: Div. Mng.
+  paygrade: HC8
+
+- type: rank
+  id: RMCRankHalcyonChiefExecutive
+  name: Chief Executive
+  prefix: Chief. Exec.
+  paygrade: HC9
+
+- type: rank
+  id: RMCRankHalcyonDeputyDirector
+  name: Deputy Director
+  prefix: Dep. Director
+  paygrade: HC10
+
+- type: rank
+  id: RMCRankHalcyonDirector
+  name: Director
+  prefix: Director
+  paygrade: HC11

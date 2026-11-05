@@ -17,7 +17,7 @@ public sealed partial class VehicleSoundComponent : Component
     public SoundSpecifier? CollisionSound;
 
     [DataField]
-    public float CollisionSoundCooldown = 0.25f;
+    public float CollisionSoundCooldown = 0.5f;
 
     [DataField]
     public SoundSpecifier? MobCollisionSound;
@@ -28,6 +28,12 @@ public sealed partial class VehicleSoundComponent : Component
     [DataField]
     public float HornCooldown = 1f;
 
+    [DataField]
+    public SoundSpecifier? CrashSound;
+
+    [DataField]
+    public float CrashSoundCooldown = 1f;
+
     [AutoNetworkedField]
     public TimeSpan NextRunningSound;
 
@@ -36,4 +42,7 @@ public sealed partial class VehicleSoundComponent : Component
 
     [AutoNetworkedField]
     public TimeSpan NextHornSound;
+
+    [AutoNetworkedField]
+    public TimeSpan NextCrashSound;
 }

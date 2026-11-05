@@ -20,7 +20,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_rifle.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_carbine.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
