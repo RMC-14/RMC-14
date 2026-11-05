@@ -45,6 +45,17 @@
     - type: SniperWhitelist
     - type: PyroWhitelist
     - type: QYJWhitelist
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+        state: spp_sl
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spp_sl_a
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_spp
   hidden: true
 
 - type: entity
