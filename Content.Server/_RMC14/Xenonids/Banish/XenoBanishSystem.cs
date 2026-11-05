@@ -3,9 +3,12 @@ using Content.Server.Administration.Managers;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared.Administration;
 using Content.Shared.Database;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Server.GameStates;
@@ -18,6 +21,7 @@ public sealed class XenoBanishSystem : SharedXenoBanishSystem
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly XenoAnnounceSystem _announce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
@@ -32,6 +36,24 @@ public sealed class XenoBanishSystem : SharedXenoBanishSystem
         SubscribeLocalEvent<XenoBanishComponent, HiveChangedEvent>(OnBanishedHiveChanged, after: [typeof(XenoRoleSystem)]);
         SubscribeLocalEvent<XenoBanishComponent, PlayerAttachedEvent>(OnBanishedPlayerAttached);
         SubscribeLocalEvent<XenoBanishComponent, PlayerDetachedEvent>(OnBanishedPlayerDetached);
+
+        // Before the larva queue so it sees the restored hive and offers the body
+        SubscribeLocalEvent<XenoBanishComponent, MindRemovedMessage>(OnBanishedMindRemoved, before: [typeof(LarvaQueueSystem)]);
+    }
+
+    /// <summary>
+    /// When the banished player ghosts or stays disconnected for too long, the body goes back to
+    /// the original hive so it can be taken over by someone else through the larva queue.
+    /// </summary>
+    private void OnBanishedMindRemoved(Entity<XenoBanishComponent> ent, ref MindRemovedMessage args)
+    {
+        if (TerminatingOrDeleted(ent) || _mobState.IsDead(ent))
+            return;
+
+        if (ent.Comp.OriginalHive is { } originalHive)
+            _hive.SetHive(ent.Owner, originalHive);
+
+        RemCompDeferred<XenoBanishComponent>(ent);
     }
 
     private void OnBanishedHiveChanged(Entity<XenoBanishComponent> ent, ref HiveChangedEvent args)
