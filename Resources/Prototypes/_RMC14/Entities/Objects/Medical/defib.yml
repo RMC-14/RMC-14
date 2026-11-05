@@ -211,8 +211,8 @@
   components:
   - type: Sprite
     layers:
-    - state: reset_key_ns
-    - state: reset_key_ns_on
+    - state: reset_key_sm
+    - state: reset_key_sm_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
   - type: RequiresSkill
@@ -227,8 +227,8 @@
   components:
   - type: Sprite
     layers:
-    - state: hyper_reset_key
-    - state: hyper_reset_key_on
+    - state: novaris_reset_key
+    - state: novaris_reset_key_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
 
@@ -240,8 +240,8 @@
   components:
   - type: Sprite
     layers:
-    - state: hyper_reset_ns_key
-    - state: hyper_reset_ns_key_on
+    - state: novaris_reset_sm_key
+    - state: novaris_reset_sm_key_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
 
