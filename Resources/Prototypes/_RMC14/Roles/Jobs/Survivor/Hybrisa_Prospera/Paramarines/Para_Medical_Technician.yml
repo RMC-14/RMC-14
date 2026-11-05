@@ -11,6 +11,15 @@
   special:
     - !type:AddComponentSpecial
       components:
+      - type: Language
+        spokenLanguages:
+        - Japanese
+        - English
+        understoodLanguages:
+        - Japanese
+        - English
+        currentLanguage: English
+        defaultLanguage: English
       - type: NpcFactionMember
         factions:
           - RoyalMarines

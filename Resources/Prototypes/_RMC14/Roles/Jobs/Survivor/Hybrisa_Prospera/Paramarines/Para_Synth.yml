@@ -11,6 +11,8 @@
   special:
     - !type:AddComponentSpecial
       components:
+        - type: Language
+          preset: RMCLanguagePresetSynthColonist
         - type: LanguageLearning
           learnableLanguages:
             - Xeno

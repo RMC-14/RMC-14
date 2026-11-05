@@ -25,6 +25,17 @@
         RMCSkillJtac: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: MarineOrders
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad

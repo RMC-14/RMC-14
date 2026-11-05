@@ -473,6 +473,15 @@
   - type: SkillPamphlet
     language: SignLanguage
 
+# gives scandinavian language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageScandinavian
+  name: Treatise of the Scandinavian Frontiers
+  description: This appears to be a record of the Scandinavian frontiers, a shadowy region that is the subject of much controversy from the conflict between the Socialist Progressive Peoples and its' separatists.
+  components:
+  - type: SkillPamphlet
+    language: Scandinavian
 
 # RESTRICTED LANGUAGES
 

@@ -72,7 +72,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
 
-    private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
@@ -369,17 +368,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         RemCompDeferred<OnFireComponent>(ent);
         RemCompDeferred<RMCFireBypassActiveComponent>(ent);
-    }
-
-    public void UpdateFireAlert(EntityUid ent)
-    {
-        var ev = new ShowFireAlertEvent();
-        RaiseLocalEvent(ent, ref ev);
-
-        if (ev.Show)
-            _alerts.ShowAlert(ent, FireAlert);
-        else
-            _alerts.ClearAlert(ent, FireAlert);
     }
 
     public bool IsOnFire(Entity<FlammableComponent?> ent)

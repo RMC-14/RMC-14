@@ -54,6 +54,7 @@
     outerClothing: RMCJacketWindbreakerForeconFilled
     back: RMCSatchelMarineForeconSurvivorCommanderFill
     id: CMIDCardGold
+    ears: RMCHeadsetForeconCommander
 
 - type: entity
   parent: CMSpawnPointJobBase
