@@ -15,7 +15,7 @@ rmc-job-prefix-nurse = Nurse
 CMJobNurse = Nurse
 
 rmc-job-name-researcher = Researcher
-rmc-job-description-researcher = Conduct research on what is sent to you. Create and analyze new chemicals, tools and objects.
+rmc-job-description-researcher = You've been contracted by Weston-Yamada to work onboard the ship. You are tasked with research and development, and you should be taking every opportunity this operation will throw at you to discover new things. Your role involves a lot of roleplaying, and you have the skills to work as a medical doctor if the situation requires. Any new discovery must be kept away from marine hands unless the distribution has been authorized by your supervisor. You do not answer to the Corporate Liaison.
 rmc-job-prefix-researcher = Rsr
 CMJobResearcher = Researcher
 

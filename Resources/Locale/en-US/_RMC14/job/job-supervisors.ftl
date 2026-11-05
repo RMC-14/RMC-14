@@ -4,6 +4,7 @@ cm-job-supervisors-aso = the Auxiliary Support Officer
 cm-job-supervisors-co = the Commanding Officer
 rmc-job-supervisors-commander = the current Commander
 cm-job-supervisors-cmo = the Chief Medical Officer
+rmc-job-supervisors-cmo-weya = the Chief Medical Officer and the Weston-Yamada Corporation
 cm-job-supervisors-ares = ARES and APOLLO
 cm-job-supervisors-po = the Dropship and Gunship Pilots
 cm-job-supervisors-marine-high-command = Marine High Command
