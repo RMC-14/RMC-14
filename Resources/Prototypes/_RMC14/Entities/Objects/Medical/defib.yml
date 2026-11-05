@@ -154,7 +154,7 @@
   description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Devices/synth_reset_key.rsi #TODO RMC: replace all placeholder reset key states with original sprites without Alien media logos.
+    sprite: _RMC14/Objects/Devices/reset_key.rsi #TODO RMC: replace placeholder reset key.
     layers:
     - state: reset_key
     - state: reset_key_on
@@ -197,7 +197,7 @@
         - Marine
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Devices/synth_reset_key.rsi
+    sprite: _RMC14/Objects/Devices/reset_key.rsi #TODO RMC: replace placeholder reset key.
     heldPrefix: null
   - type: Tag
     tags:
@@ -209,10 +209,10 @@
   name: SMART WeYa synthetic reset key
   description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use. This one has a microfunction AI and can be operated by anyone.
   components:
-  - type: Sprite
+  - type: Sprite #TODO RMC: replace placeholder reset key.
     layers:
-    - state: reset_key_sm
-    - state: reset_key_sm_on
+    - state: reset_key
+    - state: reset_key_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
   - type: RequiresSkill
@@ -225,10 +225,10 @@
   name: Novaris synthetic reset key
   description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use.
   components:
-  - type: Sprite
+  - type: Sprite #TODO RMC: replace placeholder reset key.
     layers:
-    - state: novaris_reset_key
-    - state: novaris_reset_key_on
+    - state: reset_key
+    - state: reset_key_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
 
@@ -238,10 +238,10 @@
   name: SMART Novaris synthetic reset key
   description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use. This one has a micro-function AI and can be operated by anyone.
   components:
-  - type: Sprite
+  - type: Sprite #TODO RMC: replace placeholder reset key.
     layers:
-    - state: novaris_reset_sm_key
-    - state: novaris_reset_sm_key_on
+    - state: reset_key
+    - state: reset_key_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
 
@@ -251,9 +251,9 @@
   name: Makeshift synthetic sparker
   description: A crude synthetic reboot device assembled from scavenged sparking electronics. It must be recharged after use.
   components:
-  - type: Sprite
+  - type: Sprite #TODO RMC: replace placeholder reset key.
     layers:
-    - state: makeshift_key
-    - state: makeshift_key_on
+    - state: reset_key
+    - state: reset_key_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
