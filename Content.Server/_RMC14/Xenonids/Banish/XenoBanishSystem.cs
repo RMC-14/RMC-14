@@ -8,6 +8,7 @@ using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Server.GameStates;
 using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Xenonids.Banish;
@@ -18,6 +19,7 @@ public sealed class XenoBanishSystem : SharedXenoBanishSystem
     [Dependency] private readonly XenoAnnounceSystem _announce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()
     {
@@ -25,6 +27,35 @@ public sealed class XenoBanishSystem : SharedXenoBanishSystem
 
         SubscribeLocalEvent<XenoBanishComponent, MobStateChangedEvent>(OnBanishedMobStateChanged);
         SubscribeLocalEvent<XenoBanishComponent, GetVerbsEvent<Verb>>(OnBanishedGetVerbs);
+
+        // Banished xenos will be hiveless, so make XenoRoleSystem no longer force sends them their hive.
+        SubscribeLocalEvent<XenoBanishComponent, HiveChangedEvent>(OnBanishedHiveChanged, after: [typeof(XenoRoleSystem)]);
+        SubscribeLocalEvent<XenoBanishComponent, PlayerAttachedEvent>(OnBanishedPlayerAttached);
+        SubscribeLocalEvent<XenoBanishComponent, PlayerDetachedEvent>(OnBanishedPlayerDetached);
+    }
+
+    private void OnBanishedHiveChanged(Entity<XenoBanishComponent> ent, ref HiveChangedEvent args)
+    {
+        if (args.Hive != null ||
+            ent.Comp.OriginalHive is not { } originalHive ||
+            !TryComp(ent, out ActorComponent? actor))
+        {
+            return;
+        }
+
+        _pvsOverride.AddForceSend(originalHive, actor.PlayerSession);
+    }
+
+    private void OnBanishedPlayerAttached(Entity<XenoBanishComponent> ent, ref PlayerAttachedEvent args)
+    {
+        if (ent.Comp.OriginalHive is { } originalHive)
+            _pvsOverride.AddForceSend(originalHive, args.Player);
+    }
+
+    private void OnBanishedPlayerDetached(Entity<XenoBanishComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (ent.Comp.OriginalHive is { } originalHive)
+            _pvsOverride.RemoveForceSend(originalHive, args.Player);
     }
 
     private void OnBanishedGetVerbs(Entity<XenoBanishComponent> ent, ref GetVerbsEvent<Verb> args)
