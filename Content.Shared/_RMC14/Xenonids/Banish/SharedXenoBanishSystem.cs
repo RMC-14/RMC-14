@@ -71,8 +71,8 @@ public abstract class SharedXenoBanishSystem : EntitySystem
             return;
 
         var options = new List<DialogOption>();
-        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, ActorComponent>();
-        while (query.MoveNext(out var uid, out _, out var member, out _))
+        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
+        while (query.MoveNext(out var uid, out _, out var member))
         {
             if (uid == ent.Owner)
                 continue;
@@ -86,7 +86,13 @@ public abstract class SharedXenoBanishSystem : EntitySystem
             if (_mobState.IsCritical(uid) || _mobState.IsDead(uid))
                 continue;
 
-            var player = _mind.GetMind(uid) is { } mindId ? CompOrNull<MindComponent>(mindId)?.UserId : null;
+            // Uses the mind instead of the session so disconnected players can still be banished
+            if (_mind.GetMind(uid) is not { } mindId ||
+                CompOrNull<MindComponent>(mindId)?.UserId is not { } player)
+            {
+                continue;
+            }
+
             options.Add(new DialogOption(Name(uid), new ManageHiveBanishChooseXenoEvent(GetNetEntity(uid), player)));
         }
 
