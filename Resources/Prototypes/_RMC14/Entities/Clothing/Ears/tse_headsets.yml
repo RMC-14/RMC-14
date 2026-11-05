@@ -61,3 +61,48 @@
     containers:
       key_slots:
       - RMCEncryptionKeyTSEPA
+
+- type: entity
+  parent: RMCHeadsetTSEPA
+  id: RMCHeadsetTSEPAConstable
+  suffix: PVE
+  name: TSEPA constable headset
+  description: A headset issued to TSEPA constables.
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: InspectorTSEPAPVE
+    trackerModes:
+    - InspectorTSEPAPVE
+    - SergeantTSEPAPVE
+    - SeniorConstableTSEPAPVE
+  - type: GrantTacMapAlert
+  
+- type: entity
+  parent: RMCHeadsetTSEPAConstable
+  id: RMCHeadsetTSEPASeniorConstable
+  suffix: PVE
+  name: TSEPA senior constable headset
+  description: A headset issued to TSEPA senior constables.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 1
+
+- type: entity
+  parent: RMCHeadsetTSEPAConstable
+  id: RMCHeadsetTSEPASergeant
+  suffix: PVE
+  name: TSEPA sergeant headset
+  description: A headset issued to TSEPA sergeants.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetTSEPAConstable
+  id: RMCHeadsetTSEPAInspector
+  suffix: PVE
+  name: TSEPA inspector headset
+  description: A headset issued to TSEPA inspectors.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3

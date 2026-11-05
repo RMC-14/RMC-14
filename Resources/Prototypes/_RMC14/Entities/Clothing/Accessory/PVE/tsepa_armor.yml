@@ -1,0 +1,35 @@
+- type: entity
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorPadsTSEPA
+  name: M4M pauldrons
+  description: Modular and supplementary padding for the M4M armor system. Designed to protect and deflect strikes to the upper half of the body.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/TSEPA/pauldrons.rsi
+
+- type: entity
+  parent: RMCPVEArmorGroinPlateBase
+  id: RMCPVEArmorGroinPlateTSEPA
+  name: M4M lap panel
+  description: Modular and supplementary padding for the M4M armor system. Designed to protect against pelvic and lower-abdominal attacks in close quarters environments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/TSEPA/lappanel.rsi
+
+- type: entity
+  parent: RMCPVEArmorShinGuardBase
+  id: RMCPVEArmorShinGuardTSEPA
+  name: M4M shin guards
+  description: Modular and supplementary padding for the M4M armor system. Designed to prevent impacts and lacerations, as well as intercept low-velocity shrapnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/TSEPA/greaves.rsi
+
+- type: entity
+  parent: RMCPVEArmorKneeGuardBase
+  id: RMCPVEArmorKneeGuardTSEPA
+  name: M4M kneepads
+  description: Modular and supplementary padding for the M4M armor system. Designed to distribute both impacts and the weight of the operator.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/TSEPA/pads.rsi

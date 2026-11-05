@@ -33,6 +33,12 @@
     - FactionTSE
 
 - type: entity
+  parent: RMCIDCardTSEPASilverGold
+  id: RMCIDCardTSEPASilverGoldAlt
+  name: TSEPA silver gold badge
+  description: The silver with gold accents badge which represents that the wearer is a TSEPA Sergeant. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+
+- type: entity
   parent: CMIDCardBase
   id: RMCIDCardTSEPAGold
   name: TSEPA gold badge
@@ -45,6 +51,15 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/tsepa_gold.rsi
+  - type: ItemIFF
+    factions:
+    - FactionTSE
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDTSEPASAT
+  name: special assault team dogtags
+  components:
   - type: ItemIFF
     factions:
     - FactionTSE

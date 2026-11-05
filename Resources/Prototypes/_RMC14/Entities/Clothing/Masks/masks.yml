@@ -352,7 +352,30 @@
       state: helmet-down
   - type: ItemToggle
     activated: true
-
+    
+- type: entity
+  parent: [CMBaseMask, RMCHelmetGarbToggleableBase]
+  id: RMCVisorTSEPA
+  name: M4H ballistic riot shield
+  description: A protective face shield designed to intercept ballistic projectiles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/swat_shield_gray.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/swat_shield_gray.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Mask/swat_shield_gray.rsi
+      state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Mask/swat_shield_gray.rsi
+      state: helmet-down
+  - type: ItemToggle
+    activated: true
 
 # Keffiyehs
 

@@ -3,7 +3,7 @@
   parent: CMJobBase
   id: RMCTSEPAInspector
   name: rmc-job-name-tsepa-inspector
-  description: rmc-job-description-tsepa-inspector
+  description: rmc-job-description-tsepa
   playTimeTracker: RMCJobTSEPAInspector
   ranks:
     RMCRankTSEPAInspector: []
@@ -72,5 +72,5 @@
   parent: CMJobIconBase
   id: RMCJobIconTSEPAInspector
   icon:
-    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi
-    state: tse_painspector
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA/base.rsi
+    state: tsepa_inspector
