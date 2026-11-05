@@ -246,6 +246,32 @@
       visible: false
 
 - type: entity
+  parent: RMCSynthResetKey
+  id: RMCSynthResetKeyJoe
+  name: Working Joe reset key
+  description: A WeYa reset key that is desinged to fix major glitches and programming errors of working joes, as well as being able to restart a working joe that has suffered critical failure. It must be recharged after use. It must be recharged after use.
+  components:
+  - type: Sprite #TODO RMC: replace placeholder reset key.
+    layers:
+    - state: reset_key
+    - state: reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+
+  - type: entity
+  parent: RMCSynthResetKeySMART
+  id: RMCSynthResetKeyJoeSMART
+  name: SMART Working Joe reset key
+  description: A WeYa reset key that is desinged to fix major glitches and programming errors of working joes, as well as being able to restart a working joe that has suffered critical failure. It must be recharged after use. This one has a micro-function AI and can be operated by anyone.
+  components:
+  - type: Sprite #TODO RMC: replace placeholder reset key.
+    layers:
+    - state: reset_key
+    - state: reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+
+- type: entity
   parent: RMCSynthResetKeySMART
   id: RMCSynthResetKeyMakeshift
   name: Makeshift synthetic sparker
