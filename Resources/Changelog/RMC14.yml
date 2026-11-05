@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Survivors now spawn together instead of separately on Sorokyne Strata.
-      Their holdout locations include Security, South Engineering and Aerodrom.
-    type: Tweak
-  id: 3213
-  time: '2026-05-19T15:14:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9870
-- author: kleinerstation13
-  changes:
-  - message: Fixes SPP SOF specialist not spawning in correctly
-    type: Fix
-  - message: Fixes SPP SOF composite helmet and beret using incorrect icon sprites
-    type: Fix
-  id: 3214
-  time: '2026-05-19T15:14:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9882
 - author: IceNoobXD
   changes:
   - message: Souto promo on Fiorina has been renamed to Bobda promo!
@@ -4516,5 +4499,21 @@
   id: 3712
   time: '2026-11-03T22:44:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10625
+- author: kleinerstation13
+  changes:
+  - message: Guaranteed the survivor flamethrower spawn on Sorokyne Strata, Solaris
+      Ridge, and Trijent Dam. The Solaris Ridge flamethrower can be found somewhere
+      in Engineering, and the Trijent flamethrower can be found in Tech/Tool Storage.
+    type: Tweak
+  id: 3713
+  time: '2026-11-05T00:47:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9951
+- author: ffxivsidehoes
+  changes:
+  - message: Changed scuttle roundend text for clarity.
+    type: Tweak
+  id: 3714
+  time: '2026-11-04T09:45:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10841
 Name: RMC14
 Order: -1
