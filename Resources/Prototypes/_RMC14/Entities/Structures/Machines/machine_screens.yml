@@ -30,8 +30,9 @@
     powerLoad: 250
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 5
-    activeLoad: 10
+    idleLoad: 0
+    activeLoad: 0
+    # CM13 multi-monitor variants are non-consuming props; RMC only gates their powered visual.
     channel: Equipment
   - type: GenericVisualizer
     visuals:

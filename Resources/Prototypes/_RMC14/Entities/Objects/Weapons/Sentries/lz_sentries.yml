@@ -34,7 +34,7 @@
     availableModes:
     - FullAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
-  # TODO: Power ammo provider?
+  # The spaceborne turret intentionally uses an internal magazine rather than the station power grid.
   - type: BallisticAmmoProvider
     cycleable: false
     proto: CMCartridgeSentry10x50mm

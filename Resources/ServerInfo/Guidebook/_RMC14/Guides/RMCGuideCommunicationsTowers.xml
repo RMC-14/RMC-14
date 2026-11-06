@@ -24,6 +24,8 @@ The location of the Telecommunication Towers vary between Operations. The CIC wi
 
 [bold]The Telecommunication Tower will not function if it is not powered[/bold], so you will also need to repair the local APC and potentially the Colony’s Power grid.
 
+For APC, generator, and network diagnosis, read [textlink="Power and APCs" link="RMCGuidePower"].
+
 Once the Telecommunication Tower is repaired, tuned, and powered, radio communications will resume. The Tower becoming destroyed or depowered in any way will halt communications until the problem is fixed.
 
 ##Sensor Tower
@@ -40,7 +42,7 @@ The location of the Sensor Tower is predetermined for each AO, remaining the sam
   -First, use a [bold]blowtorch[/bold] to weld the plates back together.
   -Next, use [bold]wire cutters[/bold] to repair the wires.
   -Then, use a [bold]wrench[/bold] to realign the tower properly.
-  -Finally, power the Sensor tower on to begin scanning.
+  -Finally, switch the Sensor Tower on to begin scanning. Unlike the Telecommunications Tower, it is self-powered and does not depend on the colony APC network.
 
   Once the Sensor Tower has been repaired, it will stay operational for a small while until it [bold]randomly breaks down[/bold]. When this happens, the Sensor Tower must be repaired again to continue tracking unknown biosignatures.
 

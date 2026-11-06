@@ -1,0 +1,19 @@
+- type: entity
+  parent: BaseItem
+  id: CMAPCFrame
+  name: APC frame
+  description: Used for repairing or building APCs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/apc.rsi
+    state: apc_frame
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Structures/Power/apc.rsi
+    storedSprite:
+      sprite: _RMC14/Structures/Power/apc.rsi
+      state: apc_frame
+  - type: RMCApcFrame
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 7500

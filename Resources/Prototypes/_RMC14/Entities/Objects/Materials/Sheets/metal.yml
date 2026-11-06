@@ -50,7 +50,7 @@
       - RMCMetalBarricadeFoldableBuild
       - RMCHandrailBuild
       # - RMCDividerConstruction
-      # APC frame
+      - RMCAPCFrameBuild
       # Fire alarm frame
       - RMCDividerConstruction
       - RMCFloorTileBuild

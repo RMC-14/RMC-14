@@ -4,6 +4,7 @@ using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.PowerLoader;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -28,6 +29,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
     [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -257,6 +259,13 @@ public sealed class DropshipFabricatorSystem : EntitySystem
                 continue;
             }
 
+            if (!_power.IsPowered(uid))
+            {
+                comp.PrintAt += TimeSpan.FromSeconds(frameTime);
+                Dirty(uid, comp);
+                continue;
+            }
+
             if (time < comp.PrintAt)
                 continue;
 
@@ -268,7 +277,9 @@ public sealed class DropshipFabricatorSystem : EntitySystem
             Dirty(uid, comp);
 
             if (!TryStartNextPrint((uid, comp)))
+            {
                 _appearance.SetData(uid, DropshipFabricatorVisuals.State, DropshipFabricatorState.Idle);
+            }
         }
 
         var pointsQuery = EntityQueryEnumerator<DropshipFabricatorPointsComponent>();

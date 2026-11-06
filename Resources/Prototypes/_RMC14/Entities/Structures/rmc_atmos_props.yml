@@ -147,6 +147,7 @@
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # CM13 radiators use an internal cell and do not draw APC power.
     channel: Equipment
   - type: InteractionOutline
   - type: Damageable

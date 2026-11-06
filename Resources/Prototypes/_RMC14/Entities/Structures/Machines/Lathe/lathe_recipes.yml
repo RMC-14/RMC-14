@@ -117,6 +117,14 @@
     CMSteel: 93 # 75
 
 - type: latheRecipe
+  id: CMAPCElectronics
+  result: CMAPCElectronics
+  completetime: 4
+  materials:
+    CMSteel: 62 # 50
+    CMGlass: 62 # 50
+
+- type: latheRecipe
   id: RMCFlashlight
   result: RMCFlashlight
   completetime: 4
