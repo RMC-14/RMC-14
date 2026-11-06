@@ -151,13 +151,13 @@
   parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
   id: RMCSynthResetKey
   name: WeYa synthetic reset key
-  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
+  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Devices/reset_key.rsi
+    sprite: _RMC14/Objects/Devices/reset_key.rsi #TODO RMC: replace placeholder reset key.
     layers:
-    - state: defib
-    - state: defib_on
+    - state: reset_key
+    - state: reset_key_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
   - type: PowerCellDraw
@@ -197,7 +197,7 @@
         - Marine
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Devices/reset_key.rsi
+    sprite: _RMC14/Objects/Devices/reset_key.rsi #TODO RMC: replace placeholder reset key.
     heldPrefix: null
   - type: Tag
     tags:
@@ -207,24 +207,79 @@
   parent: RMCSynthResetKey
   id: RMCSynthResetKeySMART
   name: SMART WeYa synthetic reset key
-  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset. This one has a microfunction AI and can be operated by anyone.
+  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use. This one has a microfunction AI and can be operated by anyone.
   components:
+  - type: Sprite #TODO RMC: replace placeholder reset key.
+    layers:
+    - state: reset_key
+    - state: reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
   - type: RequiresSkill
     skills:
       RMCSkillEngineer: 0
 
 - type: entity
   parent: RMCSynthResetKey
-  id: RMCSynthResetKeyNovaris # TODO RMC14 unique sprite for this
+  id: RMCSynthResetKeyNovaris 
   name: Novaris synthetic reset key
-  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
+  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use.
+  components:
+  - type: Sprite #TODO RMC: replace placeholder reset key.
+    layers:
+    - state: reset_key
+    - state: reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+
+- type: entity
+  parent: RMCSynthResetKeySMART
+  id: RMCSynthResetKeyNovarisSMART
+  name: SMART Novaris synthetic reset key
+  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use. This one has a micro-function AI and can be operated by anyone.
+  components:
+  - type: Sprite #TODO RMC: replace placeholder reset key.
+    layers:
+    - state: reset_key
+    - state: reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
 
 - type: entity
   parent: RMCSynthResetKey
-  id: RMCSynthResetKeyNovarisSMART # TODO RMC14 unique sprite for this
-  name: SMART Novaris synthetic reset key
-  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset. This one has a micro-function AI and can be operated by anyone.
+  id: RMCSynthResetKeyJoe
+  name: Working Joe reset key
+  description: A WeYa reset key that is desinged to fix major glitches and programming errors of working joes, as well as being able to restart a working joe that has suffered critical failure. It must be recharged after use. It must be recharged after use.
   components:
-  - type: RequiresSkill
-    skills:
-      RMCSkillEngineer: 0
+  - type: Sprite #TODO RMC: replace placeholder reset key.
+    layers:
+    - state: reset_key
+    - state: reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+
+  - type: entity
+  parent: RMCSynthResetKeySMART
+  id: RMCSynthResetKeyJoeSMART
+  name: SMART Working Joe reset key
+  description: A WeYa reset key that is desinged to fix major glitches and programming errors of working joes, as well as being able to restart a working joe that has suffered critical failure. It must be recharged after use. This one has a micro-function AI and can be operated by anyone.
+  components:
+  - type: Sprite #TODO RMC: replace placeholder reset key.
+    layers:
+    - state: reset_key
+    - state: reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+
+- type: entity
+  parent: RMCSynthResetKeySMART
+  id: RMCSynthResetKeyMakeshift
+  name: Makeshift synthetic sparker
+  description: A crude synthetic reboot device assembled from scavenged sparking electronics. It must be recharged after use.
+  components:
+  - type: Sprite #TODO RMC: replace placeholder reset key.
+    layers:
+    - state: reset_key
+    - state: reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
