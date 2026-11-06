@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Xenonids.AcidMine;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -17,10 +18,10 @@ public sealed partial class UserAcidedComponent : Component
     public int ArmorPiercing;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Duration = TimeSpan.FromSeconds(20);
+    public TimeSpan MaxDuration;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan ExpiresAt;
+    public TimeSpan? ExpiresAt;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextDamageAt;
@@ -29,19 +30,37 @@ public sealed partial class UserAcidedComponent : Component
     public TimeSpan DamageEvery = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public bool Combo;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan ResistDuration = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
-    public int ResistsNeeded = 1;
+    public int Tier;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan[] MultiplierThresholds;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? NextMultThreshold;
+
+    [DataField, AutoNetworkedField]
+    public int DamageMultiplier = 1;
 
     [DataField, AutoNetworkedField]
     public TimeSpan AllowVaporHitAfter;
 
     [DataField, AutoNetworkedField]
     public TimeSpan ExtinguishGracePeriod = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public UserAcidedEffects Appearance = UserAcidedEffects.Weak;
+
+    [DataField, AutoNetworkedField]
+    public int WeakenArmor = 0;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ExtinguishAmount = TimeSpan.FromSeconds(27);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? Upgrade;
 }
 
 [Serializable, NetSerializable]
@@ -54,6 +73,7 @@ public enum UserAcidedVisuals
 public enum UserAcidedEffects
 {
     None,
+    Weak,
     Normal,
-    Enhanced,
+    Strong
 }
