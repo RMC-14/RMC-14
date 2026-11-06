@@ -1,5 +1,7 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Wieldable.Components;
 using Content.Shared._RMC14.Wieldable.Events;
 using Content.Shared.Hands;
@@ -29,6 +31,9 @@ public sealed class RMCWieldableSystem : EntitySystem
 
     private const string WieldUseDelayId = "RMCWieldDelay";
     private static readonly EntProtoId<SkillDefinitionComponent> WieldSkill = "RMCSkillFirearms";
+    private static readonly int MinimumWieldSkill = 1;
+    private static readonly TimeSpan UnskilledWieldDelay = TimeSpan.FromSeconds(0.3);
+    private static readonly TimeSpan SkilledWieldDelayCoefficient = TimeSpan.FromSeconds(0.2);
 
     public override void Initialize()
     {
@@ -181,11 +186,21 @@ public sealed class RMCWieldableSystem : EntitySystem
 
     private void OnItemWieldedWithDelay(Entity<WieldDelayComponent> wieldable, ref ItemWieldedEvent args)
     {
-        // TODO RMC14 +0.5s if Dazed
         var skillModifiedDelay = wieldable.Comp.ModifiedDelay;
 
         if (_container.TryGetContainingContainer((wieldable, null), out var container))
-            skillModifiedDelay -= TimeSpan.FromSeconds(0.2) * _skills.GetSkill(container.Owner, WieldSkill);
+        {
+            var user = container.Owner;
+            var wieldSkillAmount = _skills.GetSkill(user, WieldSkill);
+
+            if (TryComp<RMCDazedComponent>(user, out var dazedComp))
+                skillModifiedDelay += dazedComp.WieldDelayAdditional;
+
+            if (wieldSkillAmount < MinimumWieldSkill && !HasComp<GunUnskilledUsableComponent>(wieldable)) // unskilled penalty
+                skillModifiedDelay += UnskilledWieldDelay;
+            else
+                skillModifiedDelay -= SkilledWieldDelayCoefficient * wieldSkillAmount;
+        }
 
         _useDelaySystem.SetLength(wieldable.Owner, skillModifiedDelay, WieldUseDelayId);
         _useDelaySystem.TryResetDelay(wieldable.Owner, id: WieldUseDelayId);

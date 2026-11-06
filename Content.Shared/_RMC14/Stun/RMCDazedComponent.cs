@@ -9,6 +9,12 @@ namespace Content.Shared._RMC14.Stun;
 [Access(typeof(RMCDazedSystem))]
 public sealed partial class RMCDazedComponent : Component
 {
+    /// <summary>
+    ///    How much extra wield delay to add when the mob is dazed.
+    /// </summary>
+    [DataField]
+    public TimeSpan WieldDelayAdditional = TimeSpan.FromSeconds(0.5);
+ 
     [DataField, AutoNetworkedField]
     public float VisionReduction = 0.5f;
 
