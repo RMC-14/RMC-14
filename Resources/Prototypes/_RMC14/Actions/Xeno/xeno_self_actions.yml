@@ -325,6 +325,21 @@
     event: !type:XenoDefensiveShieldActionEvent
 
 - type: entity
+  id: ActionXenoDefensiveShieldBloodQueen
+  parent: ActionXenoDefensiveShield
+  name: Brace (200)
+  description: Gain a temporary shield that blocks the next 200 damage that lasts 5 seconds. Any damage that impacts the shield is reduced by 5 before processing.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_empower
+    useDelay: 50
+  - type: InstantAction
+    event: !type:XenoDefensiveShieldActionEvent
+
+- type: entity
   parent: CMGuidebookActionXenoBase
   id: RMCGuidebookActionXenoDefensiveShield
   categories: [ HideSpawnMenu ]
