@@ -3,6 +3,7 @@
   id: CMAuxiliarySupportOfficer
   name: cm-job-name-aso
   description: cm-job-description-aso
+  newToJobInfo: rmc-new-to-job-auxiliary-support-officer
   playTimeTracker: CMJobAuxiliarySupportOfficer
   requirements:
   - !type:DepartmentTimeRequirement
@@ -10,12 +11,18 @@
     time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
-    time: 18000 # 5 hours
+    time: 3600 # 1 hour
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsDropshipPilot
     time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
@@ -24,11 +31,11 @@
     role: CMJobIntelOfficer
     time: 18000 # 5 hours
   ranks:
-    RMCRankCaptain:
+    RMCRankFirstLT:
     - !type:RoleTimeRequirement
       role: CMJobAuxiliarySupportOfficer
       time: 252000 # 70 hours
-    RMCRankFirstLT: []
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"
@@ -51,8 +58,8 @@
         RMCSkillFireman: 1
         RMCSkillIntel: 2
         RMCSkillJtac: 3
-        RMCSkillLeadership: 3
-        RMCSkillMedical: 2
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 3
         RMCSkillNavigations: 1
         RMCSkillOverwatch: 1
         RMCSkillPilot: 2
@@ -86,7 +93,7 @@
     outerClothing: CMCoatASO
     shoes: CMBootsBlack
     id: CMIDCardASO
-    ears: CMHeadsetSeniorCommand
+    ears: CMHeadsetASO
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchGeneralLarge
   storage:
