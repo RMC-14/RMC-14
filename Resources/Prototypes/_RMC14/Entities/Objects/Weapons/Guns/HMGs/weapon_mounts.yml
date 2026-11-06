@@ -285,6 +285,11 @@
     isLocked: true
   - type: Corrodible
     isCorrodible: true
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-m2c
+    whitelist:
+      components:
+      - Xeno
 
 - type: Tag
   id: ML66DMount

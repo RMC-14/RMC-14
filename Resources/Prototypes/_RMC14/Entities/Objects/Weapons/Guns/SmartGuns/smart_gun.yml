@@ -155,6 +155,11 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleSGO
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-smartgun
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSmartGunNoCamo
