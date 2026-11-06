@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Using the suicide verb with a flamethrower no longer deletes the flamethrower.
-    type: Fix
-  id: 3217
-  time: '2026-05-19T22:08:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9812
-- author: Vixting
-  changes:
-  - message: Girders are now full tiles.
-    type: Tweak
-  id: 3218
-  time: '2026-05-19T22:11:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9763
 - author: Vexerot
   changes:
   - message: Players can now press E to take their pistol out from their sidearm pouch.
@@ -4515,5 +4501,19 @@
   id: 3716
   time: '2026-11-06T00:12:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10204
+- author: Vermidia
+  changes:
+  - message: You can now fill up pill packets in the chemmaster.
+    type: Add
+  id: 3717
+  time: '2026-11-06T00:13:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10973
+- author: CatAndHats
+  changes:
+  - message: Nesting actions won't reveal people's names to the other faction anymore
+    type: Fix
+  id: 3718
+  time: '2026-11-06T00:14:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10674
 Name: RMC14
 Order: -1
