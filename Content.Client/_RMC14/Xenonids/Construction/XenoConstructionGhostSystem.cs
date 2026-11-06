@@ -90,11 +90,9 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             .Register<XenoConstructionGhostSystem>();
     }
 
-    private EntProtoId? GetMarkChoice(EntityUid player)
+    private EntProtoId? GetMarkChoice(XenoConstructionComponent? construction, bool isConstructionActive)
     {
-        var (_, isConstructionActive) = GetConstructionState(player);
         if (isConstructionActive &&
-            TryComp(player, out XenoConstructionComponent? construction) &&
             construction is { OrderConstructionTargeting: false, BuildChoice: { } choice } &&
             _buildMark.CanMark(choice))
         {
@@ -182,7 +180,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         var canUpgrade = hasQueenBuildingBoost || construction is { CanUpgrade: true };
         var upgradeable = canUpgrade ? GetUpgradeableStructureUnderMouse() : null;
         var upgradeUnderMouse = hasQueenBuildingBoost ? upgradeable : null;
-        var markChoice = GetMarkChoice(player.Value);
+        var markChoice = GetMarkChoice(construction, isConstructionActive);
 
         var overViewport = IsMouseOverViewport();
         if (mouseJustPressed)

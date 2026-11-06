@@ -24,17 +24,17 @@ public sealed class XenoBuildMarkVisualizerSystem : EntitySystem
 
     private void OnMarkStartup(Entity<XenoBuildMarkComponent> ent, ref ComponentStartup args)
     {
-        UpdateAppearance(ent);
+        TryUpdateAppearance(ent);
     }
 
     private void OnMarkState(Entity<XenoBuildMarkComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateAppearance(ent);
+        TryUpdateAppearance(ent);
     }
 
     private void OnMarkUpdated(Entity<XenoBuildMarkComponent> ent, ref XenoBuildMarkUpdatedEvent args)
     {
-        UpdateAppearance(ent);
+        TryUpdateAppearance(ent);
     }
 
     private void OnLocalPlayerAttached(LocalPlayerAttachedEvent args)
@@ -49,21 +49,27 @@ public sealed class XenoBuildMarkVisualizerSystem : EntitySystem
 
     private void UpdateAllAppearances()
     {
-        var query = EntityQueryEnumerator<XenoBuildMarkComponent>();
-        while (query.MoveNext(out var uid, out var mark))
+        var query = AllEntityQuery<XenoBuildMarkComponent, SpriteComponent>();
+        while (query.MoveNext(out var uid, out var mark, out var sprite))
         {
-            UpdateAppearance((uid, mark));
+            UpdateAppearance((uid, mark, sprite));
         }
     }
 
-    private void UpdateAppearance(Entity<XenoBuildMarkComponent> ent)
+    private void TryUpdateAppearance(Entity<XenoBuildMarkComponent> ent)
     {
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
+        if (TryComp(ent, out SpriteComponent? sprite))
+            UpdateAppearance((ent, ent.Comp, sprite));
+    }
 
+    private void UpdateAppearance(Entity<XenoBuildMarkComponent, SpriteComponent> ent)
+    {
+        var spriteEnt = (ent.Owner, ent.Comp2);
         var local = _player.LocalEntity;
-        _sprite.SetVisible((ent, sprite), local != null && ent.Comp.Planter == local);
-        _sprite.LayerSetRsiState((ent, sprite), 0, _buildMark.GetMarkState(ent.Comp));
-        _sprite.SetColor((ent, sprite), ent.Comp.Queued ? ent.Comp.QueuedColor : Color.White);
+        _sprite.SetVisible(spriteEnt, local != null && ent.Comp1.Planter == local);
+        _sprite.SetColor(spriteEnt, ent.Comp1.Queued ? ent.Comp1.QueuedColor : Color.White);
+
+        if (_sprite.LayerMapTryGet(spriteEnt, XenoBuildMarkLayers.Base, out var layer, false))
+            _sprite.LayerSetRsiState(spriteEnt, layer, _buildMark.GetMarkState(ent.Comp1));
     }
 }

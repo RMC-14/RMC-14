@@ -24,7 +24,9 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Effects/xeno_build_marks.rsi
-    state: wall
+    layers:
+    - state: wall
+      map: [ "enum.XenoBuildMarkLayers.Base" ]
     drawdepth: FloorObjects
     noRot: true
     visible: false
