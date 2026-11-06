@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
@@ -53,6 +54,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
@@ -829,11 +831,27 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void UpdateTracked(Entity<ActiveTacticalMapTrackedComponent> ent)
     {
-        if (!_transformQuery.TryComp(ent.Owner, out var xform) ||
-            xform.GridUid is not { } gridId ||
+        if (!_transformQuery.TryComp(ent.Owner, out var xform))
+        {
+            BreakTracking(ent);
+            return;
+        }
+
+        var trackedUid = ent.Owner;
+        var trackedXform = xform;
+        if ((xform.GridUid is not { } ownGridId || !_tacticalMapQuery.HasComp(ownGridId)) &&
+            _vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicle) &&
+            vehicle is { } vehicleUid &&
+            _transformQuery.TryComp(vehicleUid, out var vehicleXform))
+        {
+            trackedUid = vehicleUid;
+            trackedXform = vehicleXform;
+        }
+
+        if (trackedXform.GridUid is not { } gridId ||
             !_mapGridQuery.TryComp(gridId, out var gridComp) ||
             !_tacticalMapQuery.TryComp(gridId, out var tacticalMap) ||
-            !_transform.TryGetGridTilePosition((ent.Owner, xform), out var indices, gridComp))
+            !_transform.TryGetGridTilePosition((trackedUid, trackedXform), out var indices, gridComp))
         {
             BreakTracking(ent);
             return;
@@ -848,10 +866,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
-        if (ent.Comp.Map != xform.GridUid)
+        if (ent.Comp.Map != gridId)
         {
             BreakTracking(ent);
-            ent.Comp.Map = xform.GridUid;
+            ent.Comp.Map = gridId;
         }
 
         var status = TacticalMapBlipStatus.Alive;

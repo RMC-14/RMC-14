@@ -4,3 +4,8 @@ handheld-radio-component-on-state = on
 handheld-radio-component-off-state = off
 handheld-radio-component-channel-set = Channel set to {$channel}
 handheld-radio-component-chennel-examine = The current channel is {$channel}.
+
+# RMC14
+handheld-radio-component-state-examine = Radio is currently {$radioState}.
+handheld-radio-component-listen-only-state = listen only
+# RMC14

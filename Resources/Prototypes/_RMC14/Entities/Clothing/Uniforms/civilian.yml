@@ -83,3 +83,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/checkered.rsi
+
+# Chef uniform
+# TODO RMC14: Unique sprite
+- type: entity
+  parent: RMCUniformBase
+  id: RMCJumpsuitChef
+  name: chef uniform
+  description: Can't cook without this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Supply/chef.rsi

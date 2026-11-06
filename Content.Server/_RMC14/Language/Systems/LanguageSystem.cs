@@ -4,7 +4,7 @@ using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
-using Robust.Server.GameObjects;
+using Content.Shared.Chat;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Language.Systems;
@@ -14,13 +14,72 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     [Dependency] private readonly LanguageLearningSystem _learning = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
 
+    private EntityQuery<LanguageLearningComponent> _learningQuery;
+
+    private readonly Dictionary<ProtoId<LanguagePrototype>, EntityUid> _checkedLanguages = [];
+
     public override void Initialize()
     {
         base.Initialize();
 
+        _learningQuery = GetEntityQuery<LanguageLearningComponent>();
+
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnInitLanguageSpeaker);
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeNetworkEvent<LanguagesSetMessage>(OnClientSetLanguage);
+    }
+
+    /// <summary>
+    /// Check whether <paramref name="recipient"/> should be able to see <see cref="ChatChannel.IC"/> chat messages from
+    /// <paramref name="speaker"/> as a popup and in their chat box, based on the <see cref="LanguageComponent"/> of each.
+    /// <para>
+    /// This is primarily used to hide speech between different factions.
+    /// </para>
+    /// </summary>
+    /// <param name="recipient">The entity hearing the message.</param>
+    /// <param name="speaker">The entity that created the message.</param>
+    /// <returns>
+    /// <see langword="true"/> if both entities understand the same language, both understand a language with the same <see cref="LanguagePrototype.Category"/>,
+    /// or if one entity has <see cref="LanguageLearningComponent"/> and is able to learn a language known by the other. Otherwise <see langword="false"/>.
+    /// </returns>
+    /// <seealso cref="LanguageCategory"/>
+    public bool CanSeeICMessage(Entity<LanguageComponent?> recipient, Entity<LanguageComponent?> speaker)
+    {
+        // Always allow if there's no language barrier.
+        if (!Resolve(recipient, ref recipient.Comp, false) || !Resolve(speaker, ref speaker.Comp, false))
+            return true;
+
+        var recipientLearning = _learningQuery.CompOrNull(recipient);
+        var speakerLearning = _learningQuery.CompOrNull(speaker);
+
+        _checkedLanguages.Clear();
+        foreach (var language in recipient.Comp.UnderstoodLanguages)
+        {
+            _checkedLanguages.Add(language, recipient);
+
+            // If `speaker` is able to learn a language understood by `recipient`.
+            if (speakerLearning?.LearnableLanguages.Contains(language) == true)
+                return true;
+        }
+        foreach (var language in speaker.Comp.UnderstoodLanguages)
+        {
+            // If this language is already present in the dict from `recipient`.
+            if (!_checkedLanguages.TryAdd(language, speaker))
+                // both sides understand the language!
+                return true;
+
+            // If `recipient` is able to learn a language understood by `speaker`.
+            if (recipientLearning?.LearnableLanguages.Contains(language) == true)
+                return true;
+        }
+
+        // If neither side directly understand each other's languages and can't learn them either, check if either of them know any languages with the same `Category`.
+        // (E.g. English, German, Russian, etc. are all `LanguageCategory.Humanoid`, so should be visible to each other)
+        return _checkedLanguages
+            .Where(kvp => _prototypeManager.HasIndex(kvp.Key))
+            .ToLookup(kvp => _prototypeManager.Index(kvp.Key).Category, kvp => kvp.Value)
+            .Any(g => g.Count() > 1);
+        // Dict of `{Language ProtoId: Language "owner"}` -> Lookup of `{Language category: [List of language "owners"]}`, then check if any category has more than one match.
     }
 
     private void OnInitLanguageSpeaker(Entity<LanguageComponent> ent, ref MapInitEvent args)
