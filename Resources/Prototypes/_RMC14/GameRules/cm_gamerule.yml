@@ -12,3 +12,14 @@
     - RMCOperationSuffixes
     nameFormat: name-format-rmc-operation
   - type: CMDistressSignalRule
+
+- type: entity
+  id: RMCMutiny
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GameRule
+  - type: MutinyRule
+    faction: UNMC
+    iffFaction: FactionMarine
+    choiceDuration: 20
