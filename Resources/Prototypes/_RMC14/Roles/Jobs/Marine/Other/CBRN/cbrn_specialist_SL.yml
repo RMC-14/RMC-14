@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-marine-high-command
   marineAuthorityLevel: 2
+  access: [ CMAccessERT ]
   accessGroups:
   - ShipMasterAccess
   spawnMenuRoleName: CBRN Specialist Squad Leader

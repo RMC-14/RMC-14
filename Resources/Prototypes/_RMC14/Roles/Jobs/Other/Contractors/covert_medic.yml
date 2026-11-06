@@ -1,0 +1,39 @@
+- type: job
+  parent: RMCContractorMedic
+  id: RMCContractorCovertMedic
+  access: [ CMAccessERT ]
+  name: rmc-job-name-contractor-covert-medic
+  playTimeTracker: RMCJobContractorCovertMedic
+  startingGear: RMCGearContractorCovertMedic
+  spawnMenuRoleName: VAI Covert Contractor Medical Specialist
+
+- type: entity
+  parent: RMCRandomHumanoidContractorMedic
+  id: RMCRandomHumanoidContractorCovertMedic
+  name: covert contractor ghost role medic
+  suffix: Spawner, Player, Friendly, Covert
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertMedic
+
+- type: randomHumanoidSettings
+  parent: RMCContractorMedic
+  id: RMCContractorCovertMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-medic
+    job: RMCContractorCovertMedic
+
+- type: startingGear
+  parent: RMCGearContractorMedic
+  id: RMCGearContractorCovertMedic
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: playTimeTracker
+  id: RMCJobContractorCovertMedic

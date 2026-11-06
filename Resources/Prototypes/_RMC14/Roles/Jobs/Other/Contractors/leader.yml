@@ -1,0 +1,98 @@
+- type: job
+  parent: CMJobBase
+  id: RMCContractorLeader
+  name: rmc-job-name-contractor-leader
+  description: rmc-ghost-role-information-contractor-description
+  playTimeTracker: RMCJobContractorLeader
+  ranks:
+    RMCRankFLLeader: []
+  startingGear: RMCGearContractorLeader
+  icon: RMCJobIconFreelancerLeader
+  joinNotifyCrew: false
+  access: [ CMAccessERT ]
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: VAI Contractor Team Leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - VAI
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillMedical: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: JobPrefix
+      prefix: rmc-job-prefix-contractor-leader
+    - type: RMCPointing
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidContractorLeader
+  name: contractor ghost role leader
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: vai_headset
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCContractorLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-leader
+    description: rmc-ghost-role-information-contractor-description
+    rules: rmc-ghost-role-information-contractor-rules
+    reregister: false
+    job: RMCContractorLeader
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorLeader
+  equipment:
+    ears: RMCHeadsetDistressVAILeader
+    jumpsuit: RMCJumpsuitFreelancerBlackPants
+    outerClothing: RMCArmorM3LightCarrier
+    eyes: RMCGlassesHUDSecurity
+    suitstorage: RMCWeaponRifleM54CMK1
+  storage:
+    back:
+    - RMCRangefinder
+    - RMCMotionDetector
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - CMGrenadeSmoke
+    - RMCHandheldDistressBeaconWeYa
+    pocket2:
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+
+- type: playTimeTracker
+  id: RMCJobContractorLeader

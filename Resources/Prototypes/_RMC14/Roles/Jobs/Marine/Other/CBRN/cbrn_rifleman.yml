@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCCBRNRifleman
   name: cm-job-name-rifleman
@@ -10,6 +10,7 @@
   icon: "CMJobIconEmpty"
   hasIcon: false
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - ShipMasterAccess
   spawnMenuRoleName: CBRN Rifleman

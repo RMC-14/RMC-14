@@ -10,6 +10,7 @@
   startingGear: RMCGearICBLiaison
   icon: "RMCJobIconICBLiaison"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - RMCWeYaExecColony
   special:
@@ -68,8 +69,8 @@
     raffle:
       settings: short
     requirements:
-    - !type:RoleTimeRequirement
-      role: CMJobLiaison
+    - !type:TotalJobsTimeRequirement
+      group: RMCJobsCorporate
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
