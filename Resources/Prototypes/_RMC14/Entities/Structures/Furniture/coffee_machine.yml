@@ -36,13 +36,11 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeCircle
-          radius: 0.03
-        density: 155
+          !type:PhysShapeAabb
+          bounds: "-0.10,-0.10,0.10,0.10"
+        density: 500
         mask:
-        - MachineMask
-        layer:
-        - MobMask
+        - TabletopMachineMask
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
