@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/01/2026 21:06:55
-  entityCount: 39013
+  time: 09/28/2026 16:30:56
+  entityCount: 39014
 maps:
 - 1
 grids:
@@ -69568,7 +69568,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -56762.844
+      secondsUntilStateChange: -56522.855
       state: Opening
 - proto: CMAnestheticTank
   entities:
@@ -89078,20 +89078,6 @@ entities:
     - type: InsideEntityStorage
 - proto: CMSheetPlasteel1
   entities:
-  - uid: 3669
-    components:
-    - type: Transform
-      pos: 58.5,-60.5
-      parent: 1
-    - type: Stack
-      count: 15
-  - uid: 3670
-    components:
-    - type: Transform
-      pos: 59.5,-60.5
-      parent: 1
-    - type: Stack
-      count: 15
   - uid: 3671
     components:
     - type: Transform
@@ -89119,6 +89105,13 @@ entities:
     components:
     - type: Transform
       pos: 138.46432,-178.07841
+      parent: 1
+- proto: CMSheetPlasteel30
+  entities:
+  - uid: 3669
+    components:
+    - type: Transform
+      pos: 58.5,-60.5
       parent: 1
 - proto: CMShellShotgunBeanbag
   entities:
@@ -178593,43 +178586,31 @@ entities:
     - type: Transform
       pos: 51.5,-150.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18158
     components:
     - type: Transform
       pos: 50.5,-150.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18159
     components:
     - type: Transform
       pos: 56.5,-150.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18160
     components:
     - type: Transform
       pos: 55.5,-150.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18161
     components:
     - type: Transform
       pos: 50.5,-146.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18162
     components:
     - type: Transform
       pos: 50.5,-145.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18163
     components:
     - type: Transform
@@ -178663,29 +178644,21 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
-    missingComponents:
-    - AccessReader
   - uid: 18164
     components:
     - type: Transform
       pos: 204.5,-14.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18165
     components:
     - type: Transform
       pos: 209.5,-13.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18166
     components:
     - type: Transform
       pos: 207.5,-13.5
       parent: 1
-    missingComponents:
-    - AccessReader
   - uid: 18167
     components:
     - type: Transform
@@ -178719,8 +178692,6 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
-    missingComponents:
-    - AccessReader
   - uid: 18168
     components:
     - type: Transform
@@ -178754,8 +178725,6 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
-    missingComponents:
-    - AccessReader
   - uid: 18169
     components:
     - type: Transform
@@ -178789,8 +178758,6 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
-    missingComponents:
-    - AccessReader
 - proto: RMCLockerGunBase
   entities:
   - uid: 2114
@@ -178804,15 +178771,13 @@ entities:
           showEnts: False
           occludes: True
           ents:
+          - 2115
           - 2116
           - 2117
-          - 2115
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-    missingComponents:
-    - AccessReader
 - proto: RMCLockerHydro
   entities:
   - uid: 18170
@@ -186818,6 +186783,11 @@ entities:
       parent: 1
 - proto: RMCSpawnerRandomPowercell
   entities:
+  - uid: 3670
+    components:
+    - type: Transform
+      pos: 59.5,-60.5
+      parent: 1
   - uid: 19530
     components:
     - type: Transform
@@ -278417,6 +278387,13 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCWeaponFlamerColony
+  entities:
+  - uid: 39014
+    components:
+    - type: Transform
+      pos: 60.5,-65.5
+      parent: 1
 - proto: RMCWeaponLauncherM81
   entities:
   - uid: 37471
