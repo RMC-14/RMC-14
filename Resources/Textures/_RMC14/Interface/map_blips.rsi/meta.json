@@ -970,6 +970,12 @@
     },
     {
       "name": "goon_synth"
+    },
+    {
+      "name": "surgeon"
+    },
+    {
+      "name": "pharmacist"
     }
   ]
 }
