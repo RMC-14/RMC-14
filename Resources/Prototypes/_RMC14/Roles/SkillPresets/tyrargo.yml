@@ -1,0 +1,81 @@
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetTyrargoTrooper
+  name: UNMC Tyrargo Rifleman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 0
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillMedical: 1
+      RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetEngineeringTechnician
+  name: UNMC Tyrargo Engineering Technician
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 2
+      RMCSkillPowerLoader: 1
+
+- type: entity
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetTyrargoMedicalTechnician
+  name: UNMC Tyrargo Medical Technician
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 1
+
+- type: entity
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetTyrargoMarksman
+  name: UNMC Tyrargo Marksman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 2
+      RMCSkillFirearms: 2
+      RMCSkillJtac: 2
+      RMCSkillSpecialistWeapons: 1
+
+- type: entity
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetTyrargoHeavyGunner
+  name: UNMC Tyrargo Heavy Gunner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 2
+      RMCSkillFirearms: 2
+      RMCSkillSmartGun: 1
+
+- type: entity
+  parent: RMCSkillPresetTyrargoTrooper
+  id: RMCSkillPresetTyrargoSquadLeader
+  name: UNMC Tyrargo Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillFirearms: 2
+      RMCSkillMedical: 2
+      RMCSkillJtac: 3
+      RMCSkillSmartGun: 1
+      RMCSkillConstruction: 1
+      RMCSkillEngineer: 2
+      RMCSkillLeadership: 2

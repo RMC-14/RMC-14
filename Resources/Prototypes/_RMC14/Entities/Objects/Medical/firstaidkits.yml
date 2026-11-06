@@ -304,6 +304,8 @@
     - id: CMBicaridineAutoInjector
       amount: 2
 
+# PVE
+
 - type: entity
   parent: CMFirstAidKit
   id: RMCStandardAidKitPVE
@@ -312,11 +314,51 @@
   suffix: PVE
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Medical/ifak.rsi
     layers:
-    - state: softpack_basic
-    - state: softpack_empty
-      map: [ "openLayer" ]
+    - state: base
+    - state: pill
+      map: [ pill ]
       visible: false
+    - state: injector
+      map: [ injector ]
+      visible: false
+    - state: burn
+      map: [ burn ]
+      visible: false
+    - state: trauma
+      map: [ trauma ]
+      visible: false
+    - state: closed_generic
+      map: [ open ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        open:
+          True: { state: open_generic }
+          False: { state: closed_generic }
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Medical/ifak.rsi
+    heldPrefix: generic
+  - type: ItemMapper
+    mapLayers:
+      pill:
+        whitelist:
+          tags:
+          - PillCanister
+      injector:
+        whitelist:
+          tags:
+          - CMAutoInjector
+      burn:
+        whitelist:
+          tags:
+          - CMBurnKit
+      trauma:
+        whitelist:
+          tags:
+          - CMTraumaKit
 
 - type: entity
   parent: RMCStandardAidKitPVE
@@ -334,18 +376,40 @@
     - id: CMDexalinPlusAutoInjector
 
 - type: entity
-  parent: CMFirstAidKit
+  parent: RMCStandardAidKitPVE
   id: RMCBruteAidKitPVE
   name: brute first-aid pack
   description: A soft first-aid pack containing equipment for physical treatment in the field.
   suffix: PVE
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Medical/ifak.rsi
     layers:
-    - state: softpack_brute
-    - state: softpack_empty
-      map: [ "openLayer" ]
+    - state: base
+    - state: pill
+      map: [ pill ]
       visible: false
+    - state: injector
+      map: [ injector ]
+      visible: false
+    - state: burn
+      map: [ burn ]
+      visible: false
+    - state: trauma
+      map: [ trauma ]
+      visible: false
+    - state: closed_brute
+      map: [ open ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        open:
+          True: { state: open_brute }
+          False: { state: closed_brute }
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Medical/ifak.rsi
+    heldPrefix: brute
 
 - type: entity
   parent: RMCBruteAidKitPVE
@@ -363,18 +427,40 @@
     - id: CMBicaridineAutoInjector
 
 - type: entity
-  parent: CMFirstAidKit
+  parent: RMCStandardAidKitPVE
   id: RMCBurnAidKitPVE
   name: burn first-aid pack
   description: A soft first-aid pack containing equipment for burns treatment in the field.
   suffix: PVE
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Medical/ifak.rsi
     layers:
-    - state: softpack_burn
-    - state: softpack_empty
-      map: [ "openLayer" ]
+    - state: base
+    - state: pill
+      map: [ pill ]
       visible: false
+    - state: injector
+      map: [ injector ]
+      visible: false
+    - state: burn
+      map: [ burn ]
+      visible: false
+    - state: trauma
+      map: [ trauma ]
+      visible: false
+    - state: closed_burn
+      map: [ open ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        open:
+          True: { state: open_burn }
+          False: { state: closed_burn }
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Medical/ifak.rsi
+    heldPrefix: burn
 
 - type: entity
   parent: RMCBurnAidKitPVE

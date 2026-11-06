@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 
@@ -24,4 +24,11 @@ public enum RMCPillBottleColors
     Grey,
     Red,
     Black,
+}
+
+[Serializable, NetSerializable]
+public enum RMCPillColorVisuals
+{
+    Layer,
+    Color,
 }

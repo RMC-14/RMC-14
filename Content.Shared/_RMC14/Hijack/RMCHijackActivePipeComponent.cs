@@ -5,4 +5,7 @@ public sealed partial class RMCHijackActivePipeComponent : Component
 {
     [DataField]
     public EntityUid? Map;
+
+    [DataField]
+    public EntityUid? Warning;
 }

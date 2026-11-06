@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Chemistry.Containers.EntitySystems;
 using Content.Shared._RMC14.Chemistry.ChemMaster;
@@ -484,15 +484,29 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
     private void UpdatePillBottleFill(RMCChemMasterPillBottleRow row, EntityUid contained)
     {
-        if (!EntMan.TryGetComponent(contained, out StorageComponent? storage))
-            return;
-
         var total = 0;
-        if (storage.Grid.TryFirstOrNull(out var firstGrid))
-            total = firstGrid.Value.Width + 1;
+        var count = 0;
+        if (!EntMan.TryGetComponent(contained, out StorageComponent? storage))
+        {
+            if (!EntMan.TryGetComponent(contained, out ItemSlotsComponent? slots))
+                return;
+
+            total = slots.Slots.Count;
+            foreach (var slot in slots.Slots)
+            {
+                if (slot.Value.ContainerSlot != null && slot.Value.ContainerSlot.ContainedEntity != null)
+                    count++;
+            }
+        }
+        else
+        {
+            count = storage.StoredItems.Count;
+            if (storage.Grid.TryFirstOrNull(out var firstGrid))
+                total = firstGrid.Value.Width + 1;
+        }
 
         row.PillAmountLabel.Text = Loc.GetString("rmc-chem-master-pill-bottle-pills",
-            ("amount", storage.StoredItems.Count),
+            ("amount", count),
             ("total", total));
 
         row.ColorView.SetEntity(contained);

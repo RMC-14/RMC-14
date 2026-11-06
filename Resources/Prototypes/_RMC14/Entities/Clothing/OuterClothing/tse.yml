@@ -17,13 +17,6 @@
 - type: entity
   id: RMCBaseTSEArmor
   abstract: true
-  components:
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-tse-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformTSE
 
 - type: entity
   parent: [RMCBaseTSEArmor, RMCBaseMarineArmorLight]

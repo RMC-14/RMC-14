@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using System.Text;
 using Content.Shared._RMC14.Areas;
@@ -182,7 +182,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!_config.GetCVar(CCVars.GridFill))
+        if (!ent.Comp.IgnoreGridFill && !_config.GetCVar(CCVars.GridFill))
             return;
 
         if (_map == null)
@@ -213,6 +213,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
             _physics.SetBodyStatus(grid, physics, BodyStatus.OnGround);
             _physics.SetFixedRotation(grid, true, manager: fixtures, body: physics);
         }
+
+        var ev = new SpawnedGridEvent(result.Value);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnEvacuationDoorBeforeOpened(Entity<EvacuationDoorComponent> ent, ref BeforeDoorOpenedEvent args)
