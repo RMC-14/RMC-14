@@ -55,6 +55,10 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_mp
     - type: RMCTrackable
+    - type: AssignSquad
+      squad: SquadMP
+    - type: SquadNameOverride
+      name: cm-job-name-militarywarden
 
 - type: startingGear
   id: CMGearMilitaryWarden

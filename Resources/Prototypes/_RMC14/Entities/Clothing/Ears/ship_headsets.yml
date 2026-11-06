@@ -246,6 +246,7 @@
     - ChiefMilitaryPolice
     - MilitaryWarden
     - ProvostInspector
+    - FireteamLeader
 
 - type: entity
   parent: CMHeadsetMPO
@@ -262,6 +263,7 @@
     - ExecutiveOfficer
     - ChiefMilitaryPolice
     - MilitaryWarden
+    - FireteamLeader
 
 - type: entity
   parent: RMCHeadsetShip
@@ -294,6 +296,7 @@
     - AuxiliarySupportOfficer
     - MilitaryWarden
     - ProvostInspector
+    - FireteamLeader
 
 - type: entity
   parent: CMHeadsetCMP
@@ -309,6 +312,7 @@
     - AuxiliarySupportOfficer
     - ChiefMilitaryPolice
     - ProvostInspector
+    - FireteamLeader
 
 - type: entity
   parent: RMCHeadsetShip
