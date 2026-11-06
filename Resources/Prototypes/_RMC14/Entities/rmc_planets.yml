@@ -284,7 +284,7 @@
     nightmareScenarios:
     - scenarioName: none # Reduce this to 0.5 once CLF survivors are in
       scenarioProbability: 0.6
-    - scenarioName: spp_bar
+    - scenarioName: spp_spetsnaz_trijent
       scenarioProbability: 0.4
     survivorJobVariants:
       CMSurvivor:
@@ -309,24 +309,24 @@
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
     survivorJobScenarios:
-      spp_bar:
+      spp_spetsnaz_trijent:
       - CMSurvivorDoctor: 1
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
       - CMSurvivor: -1
     survivorJobVariantScenarios:
-      spp_bar:
+      spp_spetsnaz_trijent:
         CMSurvivorDoctor:
-        - RMCSurvivorSPPCrashlandMedic: 1
+        - RMCSurvivorSPPSpetsnazTrijentMedic: 1
         CMSurvivorEngineer:
-        - RMCSurvivorSPPCrashlandSapper: 1
+        - RMCSurvivorSPPSpetsnazTrijentSapper: 1
         CMSurvivorSecurity:
-        - RMCSurvivorSPPCrashlandSL: 1
-        - RMCSurvivorSPPCrashlandSpec: 1
+        - RMCSurvivorSPPSpetsnazTrijentSL: 1
+        - RMCSurvivorSPPSpetsnazTrijentSpec: 1
         CMSurvivor:
-        - RMCSurvivorSPPCrashlandSoldier: -1
+        - RMCSurvivorSPPSpetsnazTrijentOperator: -1
     survivorJobOverrideScenarios:
-      spp_bar:
+      spp_spetsnaz_trijent:
         CMSurvivorScientist: CMSurvivorDoctor
         CMSurvivorCorporate: CMSurvivor
 #    survivorJobVariantScenarios:
@@ -593,7 +593,7 @@
       #RMCMobSmallHostStok
       #CMMobSmallHostKobold
     nightmareScenarios:
-    - scenarioName: spp_sof
+    - scenarioName: spp_spetsnaz
       scenarioProbability: 0.4
     - scenarioName: none # reduce by 0.1 once clf survs are in
       scenarioProbability: 0.6
@@ -633,24 +633,24 @@
 #        CMSurvivorScientist:
 #        - : -1
     survivorJobScenarios:
-      spp_sof:
+      spp_spetsnaz:
       - CMSurvivorEngineer: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorSecurity: 2
       - CMSurvivor: -1
     survivorJobVariantScenarios:
-      spp_sof:
+      spp_spetsnaz:
         CMSurvivorSecurity:
-        - RMCSurvivorSPPSOFSpec: 1
-        - RMCSurvivorSPPSOFSL: 1
+        - RMCSurvivorSPPSpetsnazSpec: 1
+        - RMCSurvivorSPPSpetsnazSL: 1
         CMSurvivorDoctor:
-        - RMCSurvivorSPPSOFMedic: 1
+        - RMCSurvivorSPPSpetsnazMedic: 1
         CMSurvivorEngineer:
-        - RMCSurvivorSPPSOFSapper: 1
+        - RMCSurvivorSPPSpetsnazSapper: 1
         CMSurvivor:
-        - RMCSurvivorSPPSOFSoldier: -1
-    survivorJobOverrideScenarios: # Scientist rolls for SOF medic
-      spp_sof :
+        - RMCSurvivorSPPSpetsnazOperator: -1
+    survivorJobOverrideScenarios: # Scientist rolls for Spetsnaz medic
+      spp_spetsnaz :
         CMSurvivorScientist: CMSurvivorDoctor
         CMSurvivorCorporate: CMSurvivor
 

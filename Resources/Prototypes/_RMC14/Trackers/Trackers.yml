@@ -150,7 +150,7 @@
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
-  
+
 - type: trackerMode
   id: ParaTeamLeader
   job: RMCSurvivorParaTeamLeader
@@ -196,9 +196,9 @@
   job: CMMarineRaiderLeader
 
 - type: trackerMode
-  id: SPPAirborneSL
-  job: RMCSurvivorSPPCrashlandSL
-  alert: SquadTrackerAirborne
+  id: SPPSpetsnazSL
+  job: RMCSurvivorSPPSpetsnazTrijentSL
+  alert: SquadTrackerSpetsnaz
 
 # Humanoid component trackers
 

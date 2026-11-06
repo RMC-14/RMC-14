@@ -1,0 +1,104 @@
+- type: job
+  parent: RMCSurvivorMilitary
+  id: RMCSurvivorSPPSpetsnazTrijentBase
+  name: rmc-job-name-spetsnaz
+  description: rmc-job-description-trijent-spetsnaz
+  ranks:
+    RMCRankSPPMladshiySerzhant:
+    - !type:RoleTimeRequirement
+      role: RMCJobSurvivorMilitary
+      time: 252000 # 70 hours
+    RMCRankSPPEfreitor: []
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - Colonist
+  joinNotifyCrew: false
+  startingGear: RMCGearSPPSpetsnazTrijentBase
+  hasIcon: true
+  greeting: rmc-job-greeting-trijent-spetsnaz
+  spawnMenuRoleName: SPP Spetsnaz D/SRU (Trijent Special Survivor - Base)
+  abstract: true
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSPPSpetsnazTrijentBase
+  equipment:
+    jumpsuit: RMCJumpsuitSPPSpetsnaz
+    back: RMCSatchelSPPSurvivor
+    shoes: RMCBootsSPPFilled
+    gloves: RMCHandsVeteranSPP
+    id: RMCIDSPP
+    ears: RMCHeadsetSPPSpetsnazCrashlandTrijent
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchFlareR44Filled
+
+- type: entity
+  id: RMCSurvivorPresetSPPSpetsnazWeaponOnly
+  name: spp trijent spetsnaz survivor weapon only preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71C ]
+    - [ RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCWeaponShotgunType23 ]
+    - [ RMCMagazineSMGType64, RMCMagazineSMGType64, RMCWeaponSMGType64 ]
+    primaryWeaponChance: 1
+
+- type: entity
+  id: RMCSurvivorPresetSPPSpetsnazNoBelt
+  name: spp trijent spetsnaz survivor no belt preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71C ]
+    - [ RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCWeaponShotgunType23 ]
+    - [ RMCMagazineSMGType64, RMCMagazineSMGType64, RMCWeaponSMGType64 ]
+    primaryWeaponChance: 1
+    randomGearOther:
+    - # Armor
+      - [ RMCArmorSPPSpetsnazAltSurvivorFill, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
+      - [ RMCArmorSPPSpetsnazSupport ]
+    - # Headwear // TODO RMC14 implement random chance here in a less ugly way
+      - [ RMCArmorHelmetSPPSpetsnazAlt ] # 2/9 chance
+      - [ RMCHeadCapSPPSpetsnaz ] # 3/9 chance # RMC14: Cap on CM
+      - [ RMCHeadCapSPPSpetsnaz ] # 2/9 chance
+      - [ RMCHeadCapSPPSpetsnaz ] # 2/9 chance # RMC14: Ushanka on CM
+
+- type: entity
+  id: RMCSurvivorPresetSPPSpetsnaz
+  name: spp trijent spetsnaz survivor all random preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71C ]
+    - [ RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCWeaponShotgunType23 ]
+    - [ RMCMagazineSMGType64, RMCMagazineSMGType64, RMCWeaponSMGType64 ]
+    primaryWeaponChance: 1
+    randomGearOther:
+    - # Armor
+      - [ RMCArmorSPPSpetsnazAltSurvivorFill, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
+      - [ RMCArmorSPPSpetsnazSupport ]
+    - # Headwear // TODO RMC14 implement random chance here in a less ugly way
+      - [ RMCArmorHelmetSPPSpetsnazAlt ] # 2/9 chance
+      - [ RMCHeadCapSPPSpetsnaz ] # 3/9 chance # RMC14: Cap on CM
+      - [ RMCHeadCapSPPSpetsnaz ] # 2/9 chance
+      - [ RMCHeadCapSPPSpetsnaz ] # 2/9 chance # RMC14: Ushanka on CM
+    - # Belt
+      - [ RMCBeltHolsterPistolSPPNP92 ]
+      - [ RMCBeltHolsterPistolSPPNP92 ] # 2/4ths chance
+      - [ RMCBeltHolsterPistolSPPT73 ]
+      - [ RMCBeltSPPBrown ]
