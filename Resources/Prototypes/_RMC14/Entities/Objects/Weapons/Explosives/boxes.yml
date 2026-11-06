@@ -21,6 +21,7 @@
   - type: Tag
     tags:
     - RMCPacketGrenade
+    - RMCBoxStorage
 
 - type: entity
   parent: RMCBoxSmallBase

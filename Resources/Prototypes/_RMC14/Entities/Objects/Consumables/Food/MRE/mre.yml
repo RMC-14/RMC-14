@@ -1,4 +1,4 @@
-﻿- type: Tag
+- type: Tag
   id: MRE
 
 - type: entity
@@ -10,6 +10,7 @@
   - type: Tag
     tags:
     - MRE
+    - RMCBoxStorage
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/mre.rsi
     state: closed
@@ -204,6 +205,7 @@
   - type: Tag
     tags:
     - MRE
+    - RMCBoxStorage
   - type: Item
     size: Small
   - type: SpawnItemsOnUse
@@ -267,6 +269,7 @@
   - type: Tag
     tags:
     - MRE
+    - RMCBoxStorage
   - type: Item
     size: Tiny
   - type: SpawnItemsOnUse
