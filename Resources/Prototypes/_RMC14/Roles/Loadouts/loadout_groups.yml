@@ -732,11 +732,16 @@
   loadouts:
   - MatebaRMC
   - MatebaSpecialRMC
+  - Mateba2006MRMC
+  - M1911CRMC
   - HandcannonRMC
   - HandcannonPolishedRMC
   - SilverMatebaRMC
   - GoldMatebaRMC
   - GoldHandcannonRMC
+  - Mateba2006MRMCSilver
+  - Mateba2006MRMCGold
+  - Mateba2006MRMCBlackGold
 
 # Corporate Liaison
 - type: loadoutGroup
