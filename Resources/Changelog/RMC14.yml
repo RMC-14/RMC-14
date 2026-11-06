@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: Vexerot
-  changes:
-  - message: Fixed xenonids being able to use special characters other than numbers
-      in their postfix.
-    type: Fix
-  id: 3223
-  time: '2026-05-19T22:35:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9885
-- author: CrystalClover
-  changes:
-  - message: Helmets with Lights no longer hide accessories when the Light is On
-    type: Tweak
-  id: 3224
-  time: '2026-05-20T12:53:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9202
-- author: JustMyselfUwU
-  changes:
-  - message: Shiva survivor parkas can now hold magazines and has a slightly higher
-      balistic armor value
-    type: Fix
-  id: 3225
-  time: '2026-05-21T17:45:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9857
 - author: CatAndHats
   changes:
   - message: 'Removed two Communications Relay spawns on Fiorina: LZ2 Engi Rings Comms
@@ -4523,5 +4500,28 @@
   id: 3722
   time: '2026-11-06T23:07:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10949
+- author: Vermidia
+  changes:
+  - message: Small host spawn variants now differ between maps.
+    type: Add
+  id: 3723
+  time: '2026-11-06T23:09:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10325
+- author: Hank-Hill-Propane-Man
+  changes:
+  - message: The name and description of hornet grenade packets and starshell creates
+      were flipped to be correct
+    type: Fix
+  id: 3724
+  time: '2026-11-06T23:10:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11052
+- author: CatAndHats
+  changes:
+  - message: Obfuscated Fruit planting/feeding, Acid blood hitting someone, devouring,
+      and regurgitating popups so they no longer reveal names between factions
+    type: Fix
+  id: 3725
+  time: '2026-11-06T23:10:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10757
 Name: RMC14
 Order: -1
