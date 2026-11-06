@@ -7,6 +7,10 @@
   greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: New Varadero Research Director (NV Survivor)
   ranks:
+    RMCRankCivilianRegentsProfessor:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorScientist
+      time: 252000 # 70 hours
     RMCRankCivilianProfessor: []
   hasIcon: false
   accessGroups:
