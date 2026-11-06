@@ -133,9 +133,9 @@
     state: mortar_ammo_he
   - type: Explosive
     explosionType: RMCMortar
-    maxIntensity: 30.1 # max 150 brute, 150 burn
-    intensitySlope: 5
-    totalIntensity: 800
+    maxIntensity: 22
+    intensitySlope: 3.1
+    totalIntensity: 1539
     canCreateVacuum: false
   - type: CMExplosionEffect
   - type: RMCScorchEffect
