@@ -39,6 +39,7 @@
 # Job/Role pamphlets
 
 # Spotter
+# gives spotter skill / bypasses limit
 - type: entity
   parent: CMPamphlet
   id: CMPamphletSpotter
@@ -366,6 +367,22 @@
       RMCSkillVulture: 1
     skillCap:
       RMCSkillVulture: 1
+
+# gives fireman skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletFireman
+  name: fireman carry instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a figure carrying another person on their shoulders on it.
+  components:
+  - type: Sprite
+    state: pamphlet_fireman_carry
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFireman: 1
+    skillCap:
+      RMCSkillFireman: 2
+    bypassLimit: true
 
 # LANGUAGE / bypasses limit
 

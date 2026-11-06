@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1a48ce7b800dcac696ee6c70f8248a0071db864b/icons/obj/structures/props/furniture/chairs.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "couch_mid",
+      "directions": 4
+    },
+    {
+      "name": "couch_end",
+      "directions": 4
+    }
+  ]
+}

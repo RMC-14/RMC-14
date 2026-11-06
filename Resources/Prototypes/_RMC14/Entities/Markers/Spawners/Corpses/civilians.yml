@@ -152,3 +152,11 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseRussian
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUnfortunateCivilian
+  name: Corpse Spawner - Fire Protection Specialist - Unfortunate Firestation Civilian
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUnfortunateCivilian

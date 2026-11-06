@@ -309,6 +309,14 @@
     {
       "name": "tyrargo_rock_platform_broken",
       "directions": 4
+    },
+    {
+      "name": "hybrisadecoedging",
+      "directions": 4
+    },
+    {
+      "name": "hybrisadecoedging_corner",
+      "directions": 4
     }
   ]
 }

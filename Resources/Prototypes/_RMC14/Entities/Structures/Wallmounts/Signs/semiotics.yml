@@ -806,3 +806,12 @@
   components:
   - type: Sprite
     state: 9
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticFireStation
+  name: fire-station semiotic
+  description: "Semiotic Standard denoting the presecense of a fire-station nearby."
+  components:
+  - type: Sprite
+    state: firestation
