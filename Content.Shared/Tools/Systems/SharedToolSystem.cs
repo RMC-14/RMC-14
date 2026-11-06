@@ -193,6 +193,7 @@ public abstract partial class SharedToolSystem : EntitySystem
             NeedHand = tool != user,
             AttemptFrequency = fuel > 0 ? AttemptFrequency.EveryTick : AttemptFrequency.Never,
             DuplicateCondition = duplicateCondition,
+            RootEntity = true, // RMC14
         };
 
         _doAfterSystem.TryStartDoAfter(doAfterArgs, out id);
