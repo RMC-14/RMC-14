@@ -59,6 +59,9 @@
     id: CMIDCardLiaisonColony
     pocket1: RMCPouchSurvivalFill
     pocket2: CMClipboard # RMC14, replace with document pouch when fixed
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

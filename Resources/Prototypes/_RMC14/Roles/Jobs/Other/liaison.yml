@@ -67,6 +67,9 @@
     shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
