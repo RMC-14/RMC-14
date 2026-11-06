@@ -82,4 +82,12 @@ public abstract partial class SharedXenoEggRetrieverSystem : EntitySystem
         if (xeno.Comp.Active)
             ToggleProduceEggs(xeno, xeno.Comp);
     }
+
+    public void RemoveEggNoSpawn(Entity<XenoEggRetrieverComponent> xeno)
+    {
+        xeno.Comp.CurEggs--;
+        _appearance.SetData(xeno, XenoEggStorageVisuals.Number, xeno.Comp.CurEggs);
+
+        Dirty(xeno);
+    }
 }
