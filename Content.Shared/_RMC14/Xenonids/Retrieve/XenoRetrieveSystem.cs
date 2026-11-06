@@ -79,7 +79,8 @@ public sealed class XenoRetrieveSystem : EntitySystem
             size > xeno.Comp.SizeLimit &&
             _mobState.IsAlive(target) &&
             !HasComp<XenoRestingComponent>(target) &&
-            !_standing.IsDown(target))
+            !_standing.IsDown(target) &&
+            !HasComp<XenoRestingComponent>(target))
         {
             var msg = Loc.GetString("rmc-xeno-retrieve-too-big", ("target", target));
             _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
