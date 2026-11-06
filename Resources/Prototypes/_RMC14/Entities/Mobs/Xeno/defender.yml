@@ -114,6 +114,12 @@
   parent: CMXenoDefenderBase
   id: CMXenoDefender
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoToggleCrest ]
+      XenoPrimaryTwo: [ ActionXenoHeadbutt ]
+      XenoPrimaryThree: [ ActionXenoTailSweep ]
+      XenoPrimaryFour: [ ActionXenoFortify ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleDefender
@@ -143,6 +149,12 @@
   id: CMXenoDefenderSteelcrest
   suffix: Steelcrest
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoToggleCrest ]
+      XenoPrimaryTwo: [ ActionXenoHeadbutt ]
+      XenoPrimaryThree: [ ActionXenoSoak ]
+      XenoPrimaryFour: [ ActionXenoFortifySteelcrest ]
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Defender/steelcrest_defender.rsi
   - type: Xeno
