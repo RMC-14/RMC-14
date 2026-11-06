@@ -70,6 +70,9 @@ public sealed class OverwatchConsoleShowHiddenBuiMsg(bool show) : BoundUserInter
 public sealed class OverwatchConsoleTransferMarineBuiMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleInsubordinateMarineBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleWatchBuiMsg(NetEntity target) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
@@ -154,6 +157,13 @@ public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUse
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleSendMessageSquadLeaderBuiMsg(string message) : BoundUserInterfaceMessage
+{
+    public readonly string Message = message;
+}
+
+[Serializable, NetSerializable]
+public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader, bool CanSupplyDrop, SpriteSpecifier.Rsi LeaderIcon);
 public sealed class OverwatchConsoleOpenSquadObjectivesBuiMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
