@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed broken pipes on map inserts.
-    type: Fix
-  id: 3221
-  time: '2026-05-19T22:32:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9803
-- author: Drazamuffin
-  changes:
-  - message: The vendor bundle description for Combat Technician, Correspondent, and
-      Corpsman no longer lie about their contents.
-    type: Fix
-  id: 3222
-  time: '2026-05-19T22:33:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9553
 - author: Vexerot
   changes:
   - message: Fixed xenonids being able to use special characters other than numbers
@@ -4521,5 +4506,22 @@
   id: 3720
   time: '2026-11-06T23:03:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10950
+- author: MechanicaVII
+  changes:
+  - message: Xenos can now release a hosts from their nest early via the "Release
+      host" verb.
+    type: Add
+  id: 3721
+  time: '2026-11-06T23:06:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10660
+- author: Vermidia
+  changes:
+  - message: Fixed parasite resin traps spawning multiple parasites sometimes.
+    type: Fix
+  - message: Fixed resin traps being placeable next to other resin traps in some circumstances.
+    type: Fix
+  id: 3722
+  time: '2026-11-06T23:07:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10949
 Name: RMC14
 Order: -1
