@@ -170,6 +170,22 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return (uid, comp);
     }
 
+    /// <summary>
+    /// Gets the hive component either of the hive entity itself, or the hive of a hive member.
+    /// </summary>
+    /// <param name="uid">uid of the hive itself, or a member of a hive.</param>
+    public Entity<HiveComponent>? GetHiveOrSelf(EntityUid uid)
+    {
+        if (_query.TryComp(uid, out var comp))
+        {
+            return TerminatingOrDeleted(uid) ? null : (uid, comp);
+        }
+        else
+        {
+            return GetHive(uid);
+        }
+    }
+
     public Entity<HiveComponent>? GetHiveByName(string hiveName)
     {
         var query = EntityQueryEnumerator<HiveComponent>();
