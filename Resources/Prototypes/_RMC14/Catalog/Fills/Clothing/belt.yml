@@ -1100,7 +1100,7 @@
 - type: entity
   parent: RMCBeltHolsterRevolver
   id: RMCBeltHolsterRevolverSpearheadFill
-  suffix: Filled
+  suffix: Filled, Spearhead
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
@@ -1128,6 +1128,17 @@
     - id: RMCSpeedLoader357Hollowpoint
       amount: 3
     - id: RMCWeaponRevolverSpearhead
+
+- type: entity
+  parent: RMCBeltHolsterRevolverSpearheadFill
+  id: RMCBeltHolsterRevolverRSH9CustomFill
+  suffix: Filled, RSH-9
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderRsh9
+      amount: 5
+    - id: RMCWeaponRevolverRSh9Custom
 
 - type: entity
   parent: RMCBeltHolsterRevolver
