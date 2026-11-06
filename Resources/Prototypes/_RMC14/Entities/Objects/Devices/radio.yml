@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RadioHandheld
   id: RMCRadioHandheldColonyBase
@@ -23,6 +23,7 @@
     materialComposition:
       CMSteel: 75
       CMGlass: 25
+  - type: RMCRadioListenOnlyMode
 
 - type: entity
   parent: RMCRadioHandheldColonyBase
