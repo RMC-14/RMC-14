@@ -40,6 +40,22 @@ public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
     {
         args.Evasion += 1000; // Bullets need to always miss
     }
+
+    /// <summary>
+    ///     Grants an entity temporary invincibility (blocks damage and ignition, and makes projectiles miss) for the
+    ///     given duration. This is the single entry point all larva spawn/respawn paths use so the behavior stays
+    ///     consistent. Calling again refreshes the expiry; a duration of zero or less does nothing.
+    /// </summary>
+    public void GiveInvincibility(EntityUid uid, TimeSpan duration)
+    {
+        if (duration <= TimeSpan.Zero)
+            return;
+
+        var invincibility = EnsureComp<RMCTemporaryInvincibilityComponent>(uid);
+        invincibility.ExpiresAt = _timing.CurTime + duration;
+        Dirty(uid, invincibility);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
