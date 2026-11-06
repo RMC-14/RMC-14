@@ -6,6 +6,13 @@ namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 public enum RMCPillBottleVisuals
 {
     Color,
+    Broken,
+}
+
+[Serializable, NetSerializable]
+public enum RMCPillBottleLayers
+{
+    Broken,
 }
 
 [Serializable, NetSerializable]
