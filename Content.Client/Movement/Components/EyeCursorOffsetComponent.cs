@@ -16,4 +16,9 @@ public sealed partial class EyeCursorOffsetComponent : SharedEyeCursorOffsetComp
     /// The current positional offset being applied. Used to enable gradual panning.
     /// </summary>
     public Vector2 CurrentPosition = Vector2.Zero;
+
+    /// <summary>
+    /// When true, prevents offset panning towards the cursor's position in the game window.
+    /// </summary>
+    public bool DisableMouseOffset = false;
 }
