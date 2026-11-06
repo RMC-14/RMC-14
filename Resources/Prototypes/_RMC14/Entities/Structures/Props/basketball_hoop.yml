@@ -20,3 +20,95 @@
   components:
   - type: Sprite
     state: hoop_alt
+
+- type: entity
+  parent: Basketball
+  id: RMCBasketball
+  components:
+  - type: RMCBasketball
+
+- type: entity
+  parent: RMCBasketballHoop
+  id: RMCBasketballHoopLeft
+  components:
+  - type: Fixtures
+    fixtures:
+      basketball:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.2,0.35,0.2"
+        hard: false
+        mask:
+        - ItemMask
+        layer:
+        - HighImpassable
+  - type: RMCBasketballHoop
+    side: Left
+
+- type: entity
+  parent: RMCBasketballHoopAlt
+  id: RMCBasketballHoopRight
+  components:
+  - type: Fixtures
+    fixtures:
+      basketball:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.2,0.35,0.2"
+        hard: false
+        mask:
+        - ItemMask
+        layer:
+        - HighImpassable
+  - type: RMCBasketballHoop
+    side: Right
+
+- type: entity
+  id: RMCBasketballScoreboard
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/basketball_scoreboard.rsi
+    layers:
+    - state: scoreboard
+      map: [ "enum.RMCBasketballScoreboardLayers.Base" ]
+    - state: s0a
+      map: [ "enum.RMCBasketballScoreboardLayers.LeftTens" ]
+    - state: s0b
+      map: [ "enum.RMCBasketballScoreboardLayers.LeftOnes" ]
+    - state: s0c
+      map: [ "enum.RMCBasketballScoreboardLayers.RightTens" ]
+    - state: s0d
+      map: [ "enum.RMCBasketballScoreboardLayers.RightOnes" ]
+  - type: WallMount
+    arc: 360
+  - type: RMCBasketballScoreboard
+
+- type: entity
+  id: RMCBasketballReset
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/objects.rsi
+    layers:
+    - state: launcherbtt
+      map: [ "enum.RMCBasketballResetLayers.Base" ]
+  - type: WallMount
+    arc: 360
+  - type: RMCBasketballReset
