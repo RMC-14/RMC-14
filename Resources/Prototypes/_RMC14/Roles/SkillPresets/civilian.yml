@@ -153,3 +153,22 @@
       RMCSkillMedical: 1
       RMCSkillFireman: 2
       RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorTrijentDamSupervisor
+  name: Survivor Trijent Dam Supervisor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillPolice: 1
+      RMCSkillConstruction: 2
+      RMCSkillLeadership: 2
+      RMCSkillMedical: 2
+      RMCSkillEngineer: 3
+      RMCSkillFireman: 1
+      RMCSkillFirearms: 1
+      RMCSkillVehicles: 2
+      RMCSkillEndurance: 2
+      RMCSkillPowerLoader: 2
