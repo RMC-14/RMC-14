@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Inventory;
+﻿using Content.Shared._RMC14.Armor.Magnetic;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.MotionDetector;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
@@ -106,6 +107,9 @@ public sealed class IntelDetectorSystem : EntitySystem
 
     private void OnDisable<T>(Entity<IntelDetectorComponent> ent, ref T args)
     {
+        if (HasComp<RMCSlingPouchItemComponent>(ent))
+            return;
+
         ent.Comp.Enabled = false;
         Dirty(ent);
         UpdateAppearance(ent);
