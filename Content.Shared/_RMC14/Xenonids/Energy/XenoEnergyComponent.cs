@@ -31,9 +31,6 @@ public sealed partial class XenoEnergyComponent : Component
     public int GainAttackDowned = 50;
 
     [DataField, AutoNetworkedField]
-    public bool IgnoreLateInfected = false;
-
-    [DataField, AutoNetworkedField]
     public bool GainOnProjectiles = true;
 
     [DataField, AutoNetworkedField]
