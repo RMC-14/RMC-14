@@ -1,0 +1,15 @@
+<controls:RMCPortableCrewMonitorRadar
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Medical.CrewMonitoring"
+    xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+    MinSize="420 420"
+    HorizontalExpand="True"
+    VerticalExpand="True">
+    <controls:RMCPortableCrewMonitorRadarGrid Name="RadarGrid" Access="Public" />
+    <ui:DirectionIcon Name="DirectionArrow" Access="Public" MinSize="96 96" MaxSize="96 96" Visible="False" />
+    <Label Name="TargetName" Access="Public" StyleClasses="LabelKeyText" Align="Center" Margin="8 8" />
+    <Label Name="NoTarget" Access="Public" Text="{Loc rmc-portable-crew-monitor-select-target}"
+           StyleClasses="LabelHeading" Align="Center" />
+    <Label Name="SignalLost" Access="Public" Text="{Loc rmc-portable-crew-monitor-signal-lost}"
+           StyleClasses="LabelHeading" FontColorOverride="#FFB347" Align="Center" Visible="False" />
+</controls:RMCPortableCrewMonitorRadar>
