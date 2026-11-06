@@ -22,6 +22,7 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Designer;
 using Content.Shared._RMC14.Xenonids.Designer.Events;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
@@ -64,6 +65,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly XenoBuildMarkSystem _buildMark = default!;
@@ -535,6 +537,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!CanAttemptSecrete(xeno, args.Target))
             return;
 
+        if (!_buildMark.CanMark(choice))
+        {
+            if (CanSecreteOnTilePopup(xeno, choice, args.Target, true, true))
+                args.Handled = StartSecrete(xeno, choice, args.Target);
+
+            return;
+        }
+
         var secreting = _buildMark.IsSecreting(xeno);
         if (_buildMark.TryGetOwnMark(xeno, args.Target, out var ownMark))
         {
@@ -549,14 +559,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
 
             _buildMark.RemoveMark(ownMark, xeno);
-            return;
-        }
-
-        if (!_buildMark.CanMark(choice))
-        {
-            if (CanSecreteOnTilePopup(xeno, choice, args.Target, true, true))
-                args.Handled = StartSecrete(xeno, choice, args.Target);
-
             return;
         }
 
@@ -580,11 +582,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         RaiseLocalEvent(xeno, ref ev);
     }
 
-    public bool TryStartSecrete(Entity<XenoConstructionComponent> xeno, EntProtoId choice, EntityCoordinates target, bool popup)
+    public bool TryStartSecrete(Entity<XenoConstructionComponent> xeno, EntProtoId choice, EntityCoordinates target)
     {
-        AdjustForTarget(xeno, target, popup);
+        AdjustForTarget(xeno, target, false);
         return xeno.Comp.CanBuild.Contains(choice) &&
-               CanSecreteOnTilePopup(xeno, choice, target, true, true, popup) &&
+               _actionBlocker.CanInteract(xeno, null) &&
+               CanSecreteOnTilePopup(xeno, choice, target, true, true, false) &&
                CanAttemptSecrete(xeno, target) &&
                StartSecrete(xeno, choice, target);
     }
@@ -1033,8 +1036,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var snapped = target.SnapToGrid(EntityManager, _map);
+        var marking = !construction.OrderConstructionTargeting &&
+                      ent.Comp.CheckStructureSelected &&
+                      construction.BuildChoice is { } markChoice &&
+                      _buildMark.CanMark(markChoice);
 
-        AdjustForTarget(args.User, snapped);
+        AdjustForTarget(args.User, snapped, !marking);
 
         var hasBoost = _queenBoostQuery.HasComp(args.User);
 
@@ -1079,14 +1086,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (construction.BuildChoice is { } markChoice &&
-            ent.Comp.CheckStructureSelected &&
-            _buildMark.CanMark(markChoice))
+        if (marking)
         {
             if (_buildMark.TryGetOwnMark(args.User, target, out _))
                 return;
 
-            if (CheckSecreteOnTile((args.User, construction), markChoice, target, true, ent.Comp.CheckWeeds, true, true) == XenoSecreteTileResult.Blocked)
+            if (CheckSecreteOnTile((args.User, construction), construction.BuildChoice, target, true, ent.Comp.CheckWeeds, true, true) == XenoSecreteTileResult.Blocked)
                 args.Invalid = true;
 
             return;

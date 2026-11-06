@@ -30,10 +30,7 @@ public sealed class XenoBuildMarkSystem : EntitySystem
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
 
     private static readonly EntProtoId MarkId = "RMCXenoBuildMark";
-    private static readonly TimeSpan CheckEvery = TimeSpan.FromSeconds(0.1);
-    private const float MovingVelocitySquared = 0.01f;
 
-    private TimeSpan _nextCheck;
     private readonly List<MarkCandidate> _candidates = new();
 
     public override void Initialize()
@@ -117,7 +114,9 @@ public sealed class XenoBuildMarkSystem : EntitySystem
     public bool CanMark(EntProtoId structure)
     {
         return _prototype.TryIndex(structure, out var proto) &&
-               !proto.HasComponent<DesignNodeComponent>();
+               !proto.HasComponent<DesignNodeComponent>(_compFactory) &&
+               !proto.HasComponent<DesignerDeleteDesignNodeComponent>(_compFactory) &&
+               !proto.HasComponent<DesignerRemoteThickenResinComponent>(_compFactory);
     }
 
     public bool TryGetOwnMark(EntityUid xeno, EntityCoordinates coordinates, out Entity<XenoBuildMarkComponent> mark)
@@ -175,6 +174,9 @@ public sealed class XenoBuildMarkSystem : EntitySystem
         mark.RequiresSupport = RequiresSupport(structure);
         mark.Queued = HasComp<XenoAttachedOvipositorComponent>(xeno);
         Dirty(markId, mark);
+
+        var updated = new XenoBuildMarkUpdatedEvent();
+        RaiseLocalEvent(markId, ref updated);
 
         if (_net.IsClient)
             return;
@@ -237,27 +239,23 @@ public sealed class XenoBuildMarkSystem : EntitySystem
         return _transform.InRange(_transform.GetMoverCoordinates(xeno), _transform.GetMoverCoordinates(mark), GetFillRange(xeno));
     }
 
-    private bool TryBuildMark(Entity<XenoConstructionComponent> xeno, Entity<XenoBuildMarkComponent> mark, bool popup)
+    private bool TryBuildMark(Entity<XenoConstructionComponent> xeno, Entity<XenoBuildMarkComponent> mark)
     {
         if (TerminatingOrDeleted(mark) || EntityManager.IsQueuedForDeletion(mark))
             return false;
 
         return mark.Comp.Structure is { } structure &&
-               _xenoConstruction.TryStartSecrete(xeno, structure, _transform.GetMoverCoordinates(mark), popup);
+               _xenoConstruction.TryStartSecrete(xeno, structure, _transform.GetMoverCoordinates(mark));
     }
 
     private bool TryBuildCandidates(Entity<XenoConstructionComponent> xeno, bool queueOrder)
     {
         _candidates.Sort(queueOrder ? CompareQueued : CompareNearby);
 
-        var popup = true;
         foreach (var candidate in _candidates)
         {
-            if (TryBuildMark(xeno, (candidate.Uid, candidate.Mark), candidate.Entered && popup))
+            if (TryBuildMark(xeno, (candidate.Uid, candidate.Mark)))
                 return true;
-
-            if (candidate.Entered)
-                popup = false;
         }
 
         return false;
@@ -309,14 +307,14 @@ public sealed class XenoBuildMarkSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
-        if (time < _nextCheck)
-            return;
-
-        _nextCheck = time + CheckEvery;
-
         var query = EntityQueryEnumerator<XenoBuildMarkerComponent, XenoConstructionComponent>();
         while (query.MoveNext(out var uid, out var marker, out var construction))
         {
+            if (time < marker.NextCheck)
+                continue;
+
+            marker.NextCheck = time + marker.CheckEvery;
+
             if (time >= marker.NextSweep)
             {
                 marker.NextSweep = time + marker.SweepEvery;
@@ -336,7 +334,7 @@ public sealed class XenoBuildMarkSystem : EntitySystem
             return;
         }
 
-        if (IsBusy(uid) || IsMoving(uid))
+        if (IsBusy(uid) || IsMoving((uid, marker)))
             return;
 
         var xeno = new Entity<XenoConstructionComponent>(uid, construction);
@@ -348,7 +346,7 @@ public sealed class XenoBuildMarkSystem : EntitySystem
             for (var i = 0; i < marker.Marks.Count; i++)
             {
                 if (TryComp(marker.Marks[i], out XenoBuildMarkComponent? queued) && queued.Queued)
-                    _candidates.Add(new MarkCandidate(marker.Marks[i], queued, i, 0, false));
+                    _candidates.Add(new MarkCandidate(marker.Marks[i], queued, i, 0));
             }
 
             if (TryBuildCandidates(xeno, true))
@@ -393,17 +391,17 @@ public sealed class XenoBuildMarkSystem : EntitySystem
             if (!inRange || !entered && !retry && !chain)
                 continue;
 
-            _candidates.Add(new MarkCandidate(markId, mark, i, distance, entered));
+            _candidates.Add(new MarkCandidate(markId, mark, i, distance));
         }
 
         TryBuildCandidates(xeno, false);
     }
 
-    private readonly record struct MarkCandidate(EntityUid Uid, XenoBuildMarkComponent Mark, int Order, float Distance, bool Entered);
+    private readonly record struct MarkCandidate(EntityUid Uid, XenoBuildMarkComponent Mark, int Order, float Distance);
 
-    private bool IsMoving(EntityUid xeno)
+    private bool IsMoving(Entity<XenoBuildMarkerComponent> xeno)
     {
         return TryComp(xeno, out PhysicsComponent? physics) &&
-               physics.LinearVelocity.LengthSquared() > MovingVelocitySquared;
+               physics.LinearVelocity.LengthSquared() > xeno.Comp.MovingVelocity * xeno.Comp.MovingVelocity;
     }
 }

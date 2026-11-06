@@ -74,6 +74,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
     private bool _wasMouseDown;
     private bool _upgradeMode;
+    private bool _pressedInViewport;
     private bool _painting;
     private EntityCoordinates? _paintCoords;
 
@@ -183,15 +184,19 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         var upgradeUnderMouse = hasQueenBuildingBoost ? upgradeable : null;
         var markChoice = GetMarkChoice(player.Value);
 
+        var overViewport = IsMouseOverViewport();
         if (mouseJustPressed)
-            _upgradeMode = upgradeable != null;
+        {
+            _pressedInViewport = overViewport;
+            _upgradeMode = overViewport && upgradeable != null;
+        }
 
-        if (markChoice == null || !isMouseDown || _upgradeMode)
+        if (markChoice == null || !isMouseDown || _upgradeMode || !_pressedInViewport)
             _painting = false;
         else if (mouseJustPressed)
             StartMarkPaint();
         else if (_painting)
-            UpdateMarkPaint(player.Value);
+            UpdateMarkPaint(player.Value, overViewport);
 
         if (isMouseDown &&
             isConstructionActive &&
@@ -232,11 +237,13 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
     private void TryConstructionAtMousePosition(EntityUid player, Entity<XenoStructureUpgradeableComponent>? upgradeable)
     {
+        TryConstructionAt(player, SnapToGrid(_inputManager.MouseScreenPosition), upgradeable);
+    }
+
+    private void TryConstructionAt(EntityUid player, EntityCoordinates coords, Entity<XenoStructureUpgradeableComponent>? upgradeable)
+    {
         if (!TryComp(player, out XenoConstructionComponent? construction))
             return;
-
-        var mouseScreenPos = _inputManager.MouseScreenPosition;
-        var coords = SnapToGrid(mouseScreenPos);
 
         if (!coords.IsValid(EntityManager))
             return;
@@ -268,13 +275,17 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             if (construction.BuildChoice == null)
                 return;
 
-            if (_buildMark.TryGetOwnMark(player, coords, out _))
-                return;
-
             var choice = construction.BuildChoice.Value;
-            if (_buildMark.CanMark(choice)
-                    ? _xenoConstruction.CheckSecreteOnTile((player, construction), choice, coords, true, true, false, true) == XenoSecreteTileResult.Blocked
-                    : !_xenoConstruction.CanSecreteOnTilePopup((player, construction), choice, coords, true, true, false))
+            if (_buildMark.CanMark(choice))
+            {
+                if (_buildMark.TryGetOwnMark(player, coords, out _))
+                    return;
+
+                _xenoConstruction.AdjustForTarget(player, coords, false);
+                if (_xenoConstruction.CheckSecreteOnTile((player, construction), choice, coords, true, true, false, true) == XenoSecreteTileResult.Blocked)
+                    return;
+            }
+            else if (!_xenoConstruction.CanSecreteOnTilePopup((player, construction), choice, coords, true, true, false))
             {
                 return;
             }
@@ -474,23 +485,69 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         }
 
         if (TryComp(_currentGhost.Value, out SpriteComponent? sprite))
-            sprite.Color = GetGhostColor(player.Value, coords, IsBuilding(player.Value));
+            sprite.Color = GetGhostColor(player.Value, coords, _buildMark.IsSecreting(player.Value));
+    }
+
+    private bool IsMouseOverViewport()
+    {
+        return _uiManager.MouseGetControl(_inputManager.MouseScreenPosition) is IViewportControl;
     }
 
     private void StartMarkPaint()
     {
-        _painting = _uiManager.MouseGetControl(_inputManager.MouseScreenPosition) is IViewportControl;
+        _painting = true;
         _paintCoords = SnapToGrid(_inputManager.MouseScreenPosition);
     }
 
-    private void UpdateMarkPaint(EntityUid player)
+    private void UpdateMarkPaint(EntityUid player, bool overViewport)
     {
+        if (!overViewport)
+        {
+            _paintCoords = null;
+            return;
+        }
+
         var coords = SnapToGrid(_inputManager.MouseScreenPosition);
         if (!coords.IsValid(EntityManager) || coords.Equals(_paintCoords))
             return;
 
+        var last = _paintCoords;
         _paintCoords = coords;
-        TryConstructionAtMousePosition(player, null);
+
+        if (last is not { } from ||
+            _transform.GetGrid(from) is not { } gridUid ||
+            _transform.GetGrid(coords) != gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+        {
+            TryConstructionAt(player, coords, null);
+            return;
+        }
+
+        var start = _mapSystem.CoordinatesToTile(gridUid, grid, from);
+        var end = _mapSystem.CoordinatesToTile(gridUid, grid, coords);
+        var dx = Math.Abs(end.X - start.X);
+        var dy = -Math.Abs(end.Y - start.Y);
+        var stepX = start.X < end.X ? 1 : -1;
+        var stepY = start.Y < end.Y ? 1 : -1;
+        var error = dx + dy;
+        var tile = start;
+        while (tile != end)
+        {
+            var doubled = 2 * error;
+            if (doubled >= dy)
+            {
+                error += dy;
+                tile.X += stepX;
+            }
+
+            if (doubled <= dx)
+            {
+                error += dx;
+                tile.Y += stepY;
+            }
+
+            TryConstructionAt(player, _mapSystem.GridTileToLocal(gridUid, grid, tile), null);
+        }
     }
 
     private EntityCoordinates SnapToGrid(ScreenCoordinates screenCoords)

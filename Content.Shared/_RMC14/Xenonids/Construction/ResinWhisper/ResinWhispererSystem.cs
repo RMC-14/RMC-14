@@ -26,9 +26,20 @@ public sealed class ResinWhispererSystem : EntitySystem
 
         SubscribeLocalEvent<ResinDoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
 
+        SubscribeLocalEvent<ResinWhispererComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ResinWhispererComponent, XenoSecreteStructureAdjustFields>(OnRemoteSecreteStructure);
         SubscribeLocalEvent<ResinWhispererComponent, InRangeOverrideEvent>(OnInRangeOverride);
         SubscribeLocalEvent<ResinWhispererComponent, XenoBuildMarkFillRangeEvent>(OnBuildMarkFillRange);
+    }
+
+    private void OnMapInit(Entity<ResinWhispererComponent> ent, ref MapInitEvent args)
+    {
+        if (!TryComp(ent, out XenoConstructionComponent? construction))
+            return;
+
+        ent.Comp.StandardConstructDelay ??= construction.BuildDelay;
+        ent.Comp.MaxConstructDistance ??= construction.BuildRange;
+        Dirty(ent);
     }
 
     private void OnBuildMarkFillRange(Entity<ResinWhispererComponent> ent, ref XenoBuildMarkFillRangeEvent args)

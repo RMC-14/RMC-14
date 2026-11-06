@@ -28,6 +28,8 @@
     drawdepth: FloorObjects
     noRot: true
     visible: false
+  - type: Visibility
+    layer: 8192 # Xeno build mark
   - type: XenoBuildMark
     states:
       DoorXenoResin: door
