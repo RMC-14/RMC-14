@@ -200,6 +200,18 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool MarinesLanded;
 
     [DataField]
+    public TimeSpan FirstDeploymentAnnouncementDelay = TimeSpan.FromSeconds(5);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? FirstDeploymentAnnouncementAt;
+
+    [DataField]
+    public bool FirstDeploymentAnnouncementDone;
+
+    [DataField]
+    public string? FirstDeploymentWarshipName;
+
+    [DataField]
     public ProtoId<JobPrototype> QueenJob = "CMXenoQueen";
 
     [DataField]

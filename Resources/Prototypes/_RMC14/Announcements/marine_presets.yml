@@ -1,0 +1,678 @@
+- type: announcementPreset
+  id: MarineCommand
+  name: rmc-announcement-preset-name-marine-command
+  description: "Official announcements from Marine Command"
+  target: Marines
+  defaultPreference: Stylized
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 9
+  canInterrupt: true
+  canBeInterrupted: false
+  aliases:
+  - "command"
+  presentations:
+    stylized:
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#ffffff"
+          speakerNameFontSize: 14
+        sprite:
+          showSpriteBox: true
+          spriteBoxColor: "#0a1a2d"
+          spriteBoxBorderColor: "#4a9eff"
+          spriteBoxBorderThickness: 2
+          spriteBoxPadding: 18
+          spriteGlow: false
+          spriteGlowColor: "#4a9eff"
+          spriteGlowIntensity: 0.6
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-command
+          titleColor: "#4a9eff"
+          titleFontSize: 15
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 2
+    default:
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#ffffff"
+          speakerNameFontSize: 14
+        sprite:
+          showSpriteBox: true
+          spriteBoxColor: "#0a1a2d"
+          spriteBoxBorderColor: "#4a9eff"
+          spriteBoxBorderThickness: 2
+          spriteBoxPadding: 18
+          spriteBoxShader: RMCMarineAnnouncementGrid
+          spriteGlow: false
+          spriteGlowColor: "#4a9eff"
+          spriteGlowIntensity: 0.6
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-command
+          titleColor: "#4a9eff"
+          titleFontSize: 10
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+    simplified:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:NoneAnimationConfig
+          holdDuration: 8
+          flickerChance: 0
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 2
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.35
+          backgroundColor: "#0d1320"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 0.85
+        title:
+          showTitle: true
+          title: rmc-announcement-title-command
+          titleColor: "#4a9eff"
+          titleFontSize: 10
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineCommandNoPortrait
+  name: rmc-announcement-preset-name-marine-command
+  description: "Official announcements from Marine Command"
+  target: Marines
+  visibleInSettings: false
+  visibleInLayoutEditor: false
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 9
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-command
+          titleColor: "#4a9eff"
+          titleFontSize: 10
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatch
+  name: rmc-announcement-preset-name-marine-overwatch
+  description: "Overwatch squad announcements"
+  target: Marines
+  defaultPreference: Default
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  aliases:
+  - "overwatch"
+  - "marine_overwatch"
+  presentations:
+    default:
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#ffffff"
+          speakerNameFontSize: 14
+        sprite:
+          showSpriteBox: true
+          spriteBoxColor: "#0a1a2d"
+          spriteBoxBorderColor: "#4a9eff"
+          spriteBoxBorderThickness: 2
+          spriteBoxPadding: 18
+          spriteBoxShader: RMCMarineAnnouncementGrid
+          spriteGlow: false
+          spriteGlowColor: "#4a9eff"
+          spriteGlowIntensity: 0.6
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-overwatch
+          titleColor: "#4a9eff"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchAlpha
+  name: rmc-announcement-preset-name-alpha-overwatch
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  groupId: MarineOverwatch
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#E61919"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-alpha-overwatch
+          titleColor: "#E61919"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchBravo
+  name: rmc-announcement-preset-name-bravo-overwatch
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  groupId: MarineOverwatch
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#FFC32D"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-bravo-overwatch
+          titleColor: "#FFC32D"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchCharlie
+  name: rmc-announcement-preset-name-charlie-overwatch
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  groupId: MarineOverwatch
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#C864C8"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-charlie-overwatch
+          titleColor: "#C864C8"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchDelta
+  name: rmc-announcement-preset-name-delta-overwatch
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  groupId: MarineOverwatch
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#4148C8"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-delta-overwatch
+          titleColor: "#4148C8"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchEcho
+  name: rmc-announcement-preset-name-echo-overwatch
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  groupId: MarineOverwatch
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#67D692"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-echo-overwatch
+          titleColor: "#67D692"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchFoxtrot
+  name: rmc-announcement-preset-name-foxtrot-overwatch
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  groupId: MarineOverwatch
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#C47A50"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-foxtrot-overwatch
+          titleColor: "#C47A50"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchIntel
+  name: rmc-announcement-preset-name-intel-overwatch
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  groupId: MarineOverwatch
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#09662B"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: rmc-announcement-title-intel-overwatch
+          titleColor: "#09662B"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineFirstDeployment
+  name: rmc-announcement-preset-name-first-deployment
+  description: "Atmospheric title shown before the first deployment to the planet"
+  target: Marines
+  defaultPreference: Default
+  standalone: true
+  presentations:
+    default:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.1
+          holdDuration: 3
+          flickerChance: 0
+        layout:
+          position: BottomLeft
+          uIScale: 1
+        background:
+          showBackground: false
+        text:
+          primaryColor: "#FFFFFF"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 34
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+        title:
+          showTitle: false
+        scaling:
+          responsiveScaleFactor: 1
+          minScale: 0.75
+          maxScale: 1

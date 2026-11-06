@@ -1,0 +1,88 @@
+using Content.Shared._RMC14.Announce;
+using Robust.Shared.GameObjects;
+
+namespace Content.Server._RMC14.Announce.Core;
+
+public sealed class AnnouncementValidator
+{
+    private readonly IEntityManager _entityManager;
+
+    private const int MaxMessageLength = 1000;
+    private const int MaxLineCount = 10;
+
+    public AnnouncementValidator(IEntityManager entityManager)
+    {
+        _entityManager = entityManager;
+    }
+
+    public ValidationResult ValidateRequest(AnnouncementRequest request)
+    {
+        var result = new ValidationResult();
+
+        ValidateMessage(request.Message, result);
+        ValidateEntities(request, result);
+        ValidateParameters(request, result);
+
+        return result;
+    }
+
+    private void ValidateMessage(string message, ValidationResult result)
+    {
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            result.AddError("Message cannot be empty");
+            return;
+        }
+
+        if (message.Length > MaxMessageLength)
+            result.AddError($"Message too long. Maximum {MaxMessageLength} characters, got {message.Length}");
+
+        var lines = AnnouncementLineHelper.NormalizeAndSplit(message);
+        if (lines.Length > MaxLineCount)
+            result.AddError($"Too many lines. Maximum {MaxLineCount} lines, got {lines.Length}");
+    }
+
+    private void ValidateEntities(AnnouncementRequest request, ValidationResult result)
+    {
+        if (request.Route.Speaker.HasValue && !_entityManager.EntityExists(request.Route.Speaker.Value))
+            result.AddError($"Speaker entity {request.Route.Speaker.Value} does not exist");
+
+        if (request.Route.Source.HasValue && !_entityManager.EntityExists(request.Route.Source.Value))
+            result.AddError($"Source entity {request.Route.Source.Value} does not exist");
+    }
+
+    private void ValidateParameters(AnnouncementRequest request, ValidationResult result)
+    {
+        if (request.Route.Channels == AnnouncementChannels.None)
+            result.AddError("Announcement request must target at least one channel");
+
+        if (request.Sound?.Volume.HasValue == true)
+        {
+            var volume = request.Sound.Volume.Value;
+            if (volume < -60f || volume > 20f)
+                result.AddError($"Volume must be between -60.0 and 20.0 dB, got {volume}");
+        }
+
+        if (request.PriorityOverride.HasValue)
+        {
+            var priority = request.PriorityOverride.Value;
+            if (priority < 0f || priority > 10f)
+                result.AddError($"Priority must be between 0.0 and 10.0, got {priority}");
+        }
+    }
+}
+
+public sealed class ValidationResult
+{
+    private readonly List<string> _errors = new();
+    private readonly List<string> _warnings = new();
+
+    public bool IsValid => _errors.Count == 0;
+    public IReadOnlyList<string> Errors => _errors;
+    public IReadOnlyList<string> Warnings => _warnings;
+
+    public void AddError(string error) => _errors.Add(error);
+    public void AddWarning(string warning) => _warnings.Add(warning);
+
+    public string GetErrorSummary() => IsValid ? "Valid" : string.Join(", ", _errors);
+}
