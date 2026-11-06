@@ -137,3 +137,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a50253802b9d56391f7b857684e345119a207f43/sound/machines/vending_drop.ogg"
+
+- files: ["switch.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/a49e386aa82222508cacc8a40c351a96d9122bd3/sound/machines/switch.ogg"

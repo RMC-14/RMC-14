@@ -1,0 +1,17 @@
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionToggleChamberSwap
+  name: Toggle Chamber Swap
+  description: When enabled, switching shotgun tubes also swaps the chambered shell for one from the other tube. [color=red]You can also toggle this with your cycle firemode keybind![/color]
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_shotgun_actions.rsi
+      state: chamber_swap
+    iconOn:
+      sprite: _RMC14/Actions/marine_shotgun_actions.rsi
+      state: chamber_swap_off
+    useDelay: 0.25
+    itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:RMCToggleChamberSwapActionEvent
