@@ -174,10 +174,12 @@
   - type: XenoDestroy
     structureDamage:
       types:
-        Blunt: 1000
+        Blunt: 500
+        Heat: 500
     mobDamage:
       types:
-        Blunt: 1000
+        Blunt: 500
+        Heat: 500
     structures:
       tags:
       - Structure
