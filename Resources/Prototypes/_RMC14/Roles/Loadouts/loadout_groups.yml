@@ -981,7 +981,7 @@
   - WatchLiaisonRMC
 
 - type: loadoutGroup
-  id: WatchesCommandingOfficerRMC
+  id: WatchesCommandingOfficerRMC # Given to SEA and PvI aswell.
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
