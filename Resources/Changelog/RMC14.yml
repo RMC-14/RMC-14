@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vexerot
-  changes:
-  - message: Players can now press E to take their pistol out from their sidearm pouch.
-    type: Fix
-  id: 3219
-  time: '2026-05-19T22:10:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9846
 - author: BlueMoon059
   changes:
   - message: Adjusts the s8 4x telescopic scope description to no longer mention Armat.
@@ -4515,5 +4508,21 @@
   id: 3718
   time: '2026-11-06T00:14:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10674
+- author: Vixting
+  changes:
+  - message: T3 raffle winners now bypass the T2 limit, this will rarely happen but
+      prevents players from being worried about this happening
+    type: Add
+  - message: If xenos win the raffle but blocked due to health they now have 30s to
+      get into a condition where they're healing, as long as they continue healing
+      past this they won't be passed over & will evolve once at full health
+    type: Add
+  - message: The T3 raffle now only allows you to raffle T3 within your evolution
+      line (drone can still raffle for all because they can evolve into any T2 before
+      marines land)
+    type: Add
+  id: 3719
+  time: '2026-11-06T07:59:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10962
 Name: RMC14
 Order: -1
