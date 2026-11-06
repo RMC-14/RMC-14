@@ -1,0 +1,7 @@
+<crt:RMCCrtTextEdit xmlns="https://spacestation14.io"
+                    xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt">
+    <crt:RMCCrtPanel Variant="Inset">
+        <TextEdit Name="Input" Access="Public" HorizontalExpand="True" VerticalExpand="True"
+                  Margin="8" StyleClasses="RMCCrtInput" />
+    </crt:RMCCrtPanel>
+</crt:RMCCrtTextEdit>

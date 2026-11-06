@@ -1,0 +1,17 @@
+<crt:RMCCrtInputDialog xmlns="https://spacestation14.io"
+                       xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt">
+    <crt:RMCCrtThemeScope Name="ThemeScope" Access="Public">
+        <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
+            <crt:RMCCrtTextEdit Name="Multiline" HorizontalExpand="True" VerticalExpand="True" />
+            <crt:RMCCrtLineEdit Name="Line" HorizontalExpand="True" />
+            <crt:RMCCrtLabel Name="Counter" Tone="Muted" TextFontSize="10" />
+            <crt:RMCCrtLabel Name="Validation" Tone="Danger" TextFontSize="10" />
+            <BoxContainer SeparationOverride="8" MinHeight="32">
+                <crt:RMCCrtActionButton Name="Save" Access="Public" TextFontSize="10"
+                                        HorizontalExpand="True" MinHeight="32" Variant="Filled" />
+                <crt:RMCCrtActionButton Name="Cancel" Access="Public" TextFontSize="10"
+                                        HorizontalExpand="True" MinHeight="32" />
+            </BoxContainer>
+        </BoxContainer>
+    </crt:RMCCrtThemeScope>
+</crt:RMCCrtInputDialog>
