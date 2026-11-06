@@ -149,3 +149,27 @@
     drawFov: false
   - type: FTLSmashImmune
   - type: NoFTL
+
+- type: entity
+  id: RMCSurveillanceCameraProp
+  name: security camera
+  description: It's used to monitor rooms.
+  suffix: Prop
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: WallMount
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/camera.rsi
+    layers:
+    - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
+      state: camera
+      cycle: true

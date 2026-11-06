@@ -152,3 +152,15 @@
     - id: RMCShovel
     - id: RMCPickaxe
     # TODO: Add Meson Goggles, Analyzer, Orebag
+
+- type: entity
+  parent: CMLockerSuitStorageUnit
+  id: RMCLockerSuitStorageUnitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetMK50CompressionSuitUNMCHelmet
+    - id: RMCSuitMK50CompressionSuitUNMC
+    - id: RMCMaskBreath
+    - id: RMCGasTankOxygenFilled
