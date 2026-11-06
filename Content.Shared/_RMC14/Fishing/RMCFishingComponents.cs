@@ -132,7 +132,7 @@ public sealed partial class RMCFishComponent : Component
     };
 }
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCFishingSpearComponent : Component
 {
     [DataField]
