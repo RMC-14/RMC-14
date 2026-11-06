@@ -171,13 +171,6 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var time = Timing.CurTime;
-        if (!rule.ScuttleUnlocked &&
-            rule.ScuttleUnlockAt == null &&
-            !rule.ScuttleDetonated)
-        {
-            rule.ScuttleUnlockAt = time + rule.ScuttleUnlockDelay;
-        }
-
         if (!rule.HijackSongPlayed)
         {
             rule.HijackSongPlayed = true;
