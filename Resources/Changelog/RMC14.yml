@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: BlueMoon059
-  changes:
-  - message: Adjusts the s8 4x telescopic scope description to no longer mention Armat.
-    type: Tweak
-  - message: Adjusts the PVE variant of the M42A2 shotgun case to no longer mention
-      Armat Battlefield Systems.
-    type: Tweak
-  id: 3220
-  time: '2026-05-19T22:10:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9874
 - author: CyberTropic
   changes:
   - message: Fixed broken pipes on map inserts.
@@ -4524,5 +4514,12 @@
   id: 3719
   time: '2026-11-06T07:59:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10962
+- author: IceNoobXD
+  changes:
+  - message: Fixed Trijent's gun cabinet being access locked!
+    type: Fix
+  id: 3720
+  time: '2026-11-06T23:03:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10950
 Name: RMC14
 Order: -1
