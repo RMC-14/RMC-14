@@ -21,6 +21,32 @@
   - type: UsableWhileDevoured
 
 - type: entity
+  parent: CMM2132Machete
+  id: RMCDragonKatana
+  name: dragon katana
+  description: A finely made Japanese sword, with a cherry colored handle. The blade has been filed to a molecular edge, and is extremely deadly. This one seems to have been handcrafted.
+  suffix: RMC14
+  components:
+  - type: Tag
+    tags:
+    - RMCKatana
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/dragon_katana.rsi
+    state: icon
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Weapons/Melee/dragon_katana.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 45
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 4
+  - type: UsableWhileDevoured
+
+- type: entity
   parent: RMCKatana
   id: RMCKatanaDull
   name: replica katana
