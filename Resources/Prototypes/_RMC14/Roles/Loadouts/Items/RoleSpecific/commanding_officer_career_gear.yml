@@ -1,0 +1,87 @@
+# Commanding Officer career uniforms and starting gear
+- type: entity
+  parent: RMCJumpsuitCOUniform
+  id: RMCCOJumpsuitCareerEngineering
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbing
+
+- type: entity
+  parent: RMCJumpsuitCOUniform
+  id: RMCCOJumpsuitCareerLogistics
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbing
+
+# Career starting gear
+
+- type: startingGear
+  id: RMCGearCOCareerInfantry
+  equipment:
+    jumpsuit: RMCJumpsuitCOUniformGray
+    head: RMCHeadCapQuartermaster
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsBlack
+    outerClothing: RMCOuterClothingExternalWebbing
+    eyes: RMCSunglasses
+  inhand:
+  - RMCLaserDesignator
+
+- type: startingGear
+  id: RMCGearCOCareerEngineering
+  equipment:
+    jumpsuit: RMCCOJumpsuitCareerEngineering
+    head: CMHeadBeretEngineer
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsInsulated
+    outerClothing: CMUtilityVest
+
+- type: startingGear
+  id: RMCGearCOCareerMedical
+  equipment:
+    jumpsuit: RMCJumpsuitCOUniform
+    head: CMHeadBeretCOWhite
+    shoes: RMCShoesWhite
+    gloves: CMHandsWhite
+    outerClothing: RMCCoatCOPatchless
+
+- type: startingGear
+  id: RMCGearCOCareerIntel
+  equipment:
+    jumpsuit: CMJumpsuitCOFormalBlack
+    head: CMHeadBeretCOBlack
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsBlackMarine
+    outerClothing: CMUtilityVest
+    mask: RMCMaskScarfBlack
+
+- type: startingGear
+  id: RMCGearCOCareerLogistics
+  equipment:
+    jumpsuit: RMCCOJumpsuitCareerLogistics
+    head: CMHeadBeretTan
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsInsulated
+    outerClothing: RMCVestTan
+
+- type: startingGear
+  id: RMCGearCOCareerAviation
+  equipment:
+    jumpsuit: CMJumpsuitCOFormalBlack
+    head: CMHeadBeretCOBlack
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsBlack
+    outerClothing: RMCCoatPilot
+    eyes: RMCGlassesAviators
+
+- type: startingGear
+  id: RMCGearCOCareerTanker
+  equipment:
+    jumpsuit: CMJumpsuitOperations
+    head: RMCHeadCapQuartermaster
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsBlack
+    outerClothing: RMCJacketWindbreakerBrown
+    mask: RMCMaskScarfTan

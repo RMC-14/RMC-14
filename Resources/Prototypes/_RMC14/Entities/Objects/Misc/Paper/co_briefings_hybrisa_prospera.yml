@@ -1,0 +1,33 @@
+# Hybrisa Prospera
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingHybrisaUnaligned
+  suffix: Hybrisa Prospera, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-hybrisa-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingHybrisaHawks
+  suffix: Hybrisa Prospera, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-hybrisa-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingHybrisaDoves
+  suffix: Hybrisa Prospera, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-hybrisa-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingHybrisaMagpies
+  suffix: Hybrisa Prospera, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-hybrisa-magpies
