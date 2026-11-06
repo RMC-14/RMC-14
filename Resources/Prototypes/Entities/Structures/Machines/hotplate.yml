@@ -23,7 +23,7 @@
         layer:
         - TabletopMachineLayer
   - type: ApcPowerReceiver
-    powerLoad: 300
+    requiresPower: False
 
 - type: entity
   parent: BaseHeaterMachine

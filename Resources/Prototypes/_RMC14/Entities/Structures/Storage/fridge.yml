@@ -69,8 +69,8 @@
     contents:
     - id: ReagentContainerFlour
       amount: 4
-    - id: ReagentContainerSugar
-      amount: 1
+    - id: RMCCondimentSugar
+      amount: 2
 
 - type: entity
   parent: CMLockerFridge
