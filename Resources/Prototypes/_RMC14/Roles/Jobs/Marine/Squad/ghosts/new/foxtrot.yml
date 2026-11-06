@@ -1,0 +1,88 @@
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostCombatTech]
+  id: RMCNewGhostFoxtrotCombatTech
+  name: foxtrot ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotCombatTech
+
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostFireteamLeader]
+  id: RMCNewGhostFoxtrotFireteamLeader
+  name: foxtrot ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotFireteamLeader
+
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostHospitalCorpsman]
+  id: RMCNewGhostFoxtrotHospitalCorpsman
+  name: foxtrot ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotHospitalCorpsman
+
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostRecruit]
+  id: RMCNewGhostFoxtrotRecruit
+  name: foxtrot ghost role recruit
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotRecruit
+
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostRifleman]
+  id: RMCNewGhostFoxtrotRifleman
+  name: foxtrot ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotRifleman
+
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostSmartGunOperator]
+  id: RMCNewGhostFoxtrotSmartGunOperator
+  name: foxtrot ghost role smart gun operator
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotSmartGunOperator
+
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostSquadLeader]
+  id: RMCNewGhostFoxtrotSquadLeader
+  name: foxtrot ghost role squad leader
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotSquadLeader
+
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostWeaponsSpecialist]
+  id: RMCNewGhostFoxtrotWeaponsSpecialist
+  name: foxtrot ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: IgnoreSpecLimits
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotWeaponsSpecialist

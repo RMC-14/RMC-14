@@ -51,3 +51,15 @@
     job_id: RMCRecruit
   - type: Sprite
     state: recruit_spawn
+
+- type: entity
+  id: RMCNewGhostRecruit
+  abstract: true
+  components:
+  - type: GhostRole
+    name: rmc-job-name-recruit
+    description: rmc-job-description-recruit
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: default
+    job: RMCRecruit
