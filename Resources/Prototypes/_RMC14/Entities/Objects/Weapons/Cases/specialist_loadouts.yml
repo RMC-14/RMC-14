@@ -150,9 +150,9 @@
     - id: RMCMagazineRifleM4SPRA19
       amount: 4
     - id: RMCMagazineRifleM4SPRA19Incendiary
-      amount: 2
+      amount: 3
     - id: RMCMagazineRifleM4SPRA19Impact
-      amount: 2
+      amount: 3
     - id: RMCBackpackScout
     - id: RMCMK80
     - id: CMMagazinePistolMK80
