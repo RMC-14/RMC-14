@@ -44,6 +44,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly VehicleTurretSystem _turret = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly VehicleSystem _vehicle = default!;
+    [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
     [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
 
     public override void Initialize()
@@ -95,6 +96,8 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         }
 
         var vehicleUid = vehicle.Value;
+        _vehicleLock.SetFactionFromOccupant(vehicleUid, args.Buckle.Owner);
+
         var weapons = EnsureComp<VehicleWeaponsComponent>(vehicleUid);
         ClearOperatorSelections(weapons, args.Buckle.Owner);
         if (ent.Comp.IsPrimaryOperatorSeat)

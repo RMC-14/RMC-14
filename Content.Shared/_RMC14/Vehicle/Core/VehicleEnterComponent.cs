@@ -57,6 +57,12 @@ public sealed partial class VehicleEnterComponent : Component
     public float EnterDoAfter = 0f;
 
     [DataField]
+    public float XenoEnterDoAfter = 3f;
+
+    [DataField]
+    public float DragEnterDoAfter = 2f;
+
+    [DataField]
     public float ExitDoAfter = 0f;
 
     [DataField]
