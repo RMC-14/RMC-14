@@ -76,7 +76,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: flashlight-on
     actionName: Toggle Rail Flashlight
-    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+    actionDesc: Toggle on and off the Rail Flashlight.
   - type: AttachableVisuals
     showActive: true
   - type: AttachableToggleableSimpleActivate
@@ -254,7 +254,7 @@
   - type: AttachableVisuals
   - type: AttachableToggleable
     actionName: Look through the S8 4x Telescopic Scope
-    actionDesc: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You cannot move while looking through this scope, and will pull your eye away if you take a step.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -305,7 +305,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: slavicscope
     actionName: Look through the 4x Telescopic Scope
-    actionDesc: A slavic scope. Fixed at 4x zoom.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You cannot move while looking through this scope, and will pull your eye away if you take a step.
 
 - type: entity
   parent: RMCAttachmentScopeBase
@@ -326,7 +326,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: miniscope
     actionName: Look through the S4 2x Telescopic Mini-Scope
-    actionDesc: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You can move slowly while looking through this scope.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -376,7 +376,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: miniscope_fp9000
     actionName: Look through the FP9000 2x telescopic mini-scope
-    actionDesc: Fixed at a modest 2x zoom.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You can move slowly while looking through this scope.
   - type: AttachableToggleableSimpleActivate
 
 - type: entity
@@ -409,7 +409,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: miniscope-nsg23
     actionName: Look through WeYa S4 2x Advanced Telescopic Mini-Scope
-    actionDesc: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You can move freely while looking through this scope.
   - type: Scope
     zoomLevels:
     - zoom: 1
@@ -438,13 +438,13 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope
     actionName: Look through 2x Hunting Mini-Scope
-    actionDesc: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You can move slowly while looking through this scope.
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
   id: RMCAttachmentB8SmartScope
   name: B8 smart-scope
-  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle and the M44 Combat Revolver.
+  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this 2x scope has integrated IFF systems, allowing it to shoot past friendlies. It can only attach to the M4SPR Battle Rifle and the M44 Combat Revolver.
   components:
   - type: Sprite
     state: iffbarrel
@@ -458,7 +458,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope
     actionName: Look through B8 Smart-Scope
-    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You can move slowly while looking through this scope.
   - type: AttachableIFF
   - type: AttachableWeaponRangedMods
     modifiers:
@@ -491,7 +491,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: m96s-scope
     actionName: Look through M96S Integrated Scope
-    actionDesc: Lets you see further.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. In 2x mode you can move slowly while looking through the scope, but in 4x mode you will pull your eye away before moving.
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -540,7 +540,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: xm43e1_scope
     actionName: Look through the XM43E1's Integrated Scope
-    actionDesc: Lets you see further.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. In 2x mode you can move slowly while looking through the scope, but in 4x mode you will pull your eye away before moving.
 
 - type: entity
   parent: RMCM96SIntegratedScope
@@ -559,7 +559,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: type88_scope
     actionName: Look through the Type 88's Integrated Scope
-    actionDesc: Lets you see further.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. In 2x mode you can move slowly while looking through the scope, but in 4x mode you will pull your eye away before moving.
 
 - type: entity
   parent: RMCM96SIntegratedScope
@@ -580,7 +580,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
       state: l112_scope
     actionName: Look through the L112 Integrated Scope
-    actionDesc: Lets you see further.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. In 2x mode you can move slowly while looking through the scope, but in 4x mode you will pull your eye away before moving.
 
 - type: entity
   parent: RMCAttachmentScopeBase
@@ -602,7 +602,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: d_boomslang-scope
     actionName: Look through the XS-9 Scope
-    actionDesc: A mostly disabled XS-9, it still functions as a scope though.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You can move slowly while looking through this scope.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -656,7 +656,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
       state: sasos
     actionName: Look through SASOS
-    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You can move slowly while looking through this scope.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -700,7 +700,7 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: collisight
     actionName: Look through collimator sight
-    actionDesc: Lets you see further and rain down explosives on the enemy without hitting your fellow Marines.
+    actionDesc: Look through the scope to see further ahead of yourself and fire more accurately. You can move slowly while looking through this scope.
   - type: Scope
     zoomLevels:
     - zoom: 1
