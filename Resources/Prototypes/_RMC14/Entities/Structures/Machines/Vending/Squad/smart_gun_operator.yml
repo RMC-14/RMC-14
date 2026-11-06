@@ -86,8 +86,6 @@
         points: 5
       - id: RMCFulton20
         points: 5
-      - id: RMCPowerCellSmartgun
-        points: 15
     - name: Binoculars
       entries:
       - id: RMCBinoculars
@@ -142,6 +140,17 @@
       - id: CMVendorBundleRiflemanApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+    - name: Optional Headwear
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMHeadFlapCap
+      - id: CMHeadCap
+      - id: RMCBoonie
+      - id: RMCHeadDurag
+      - id: RMCHeadBandanaTan
+      - id: RMCHeadBeanieGray
+      - id: RMCHeadBandSquad
+      - id: RMCHeadSpecRag
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
