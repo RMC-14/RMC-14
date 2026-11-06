@@ -107,7 +107,13 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Dead # TODO RMC14 gib on death
+      200: Dead
+  - type: RMCGibOnDeath
+    gibChance: 1.0
+  - type: RMCSpawnEntitiesOnGib
+    entities:
+    - RMCDecalSpawnerGibsLesserDrone
+    - RMCGibEffectXenoLesserDrone
   - type: XenoConstruction
   - type: XenoNurturing
   - type: XenoParasiteThrower
