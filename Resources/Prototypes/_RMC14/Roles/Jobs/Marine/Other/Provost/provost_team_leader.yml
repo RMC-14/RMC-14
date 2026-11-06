@@ -78,11 +78,11 @@
 - type: startingGear
   id: RMCGearProvostTeamLeader
   equipment:
-    head: RMCHeadBeretProvostSenior
+    head: RMCHeadBeretProvostGold
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvostLead
     jumpsuit: CMJumpsuitProvostSenior
-    outerClothing: RMCArmorProvostSeniorFilled
+    outerClothing: RMCArmorProvostPauldronFilled
     gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     suitstorage: WeaponShotgunM890
