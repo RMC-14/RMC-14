@@ -1,0 +1,67 @@
+# Fax reply templates given to fax responders, so replies look the same no matter who sends them.
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperFaxTemplateWeYa
+  name: We-Ya fax reply template
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#d16d1f]█[/color][color=#eb7a23]▌[color=#FFFFFF]░░░░[/color]▄███▌[color=#25b266]▌▄[/color][color=#1c8a4e]█▀[/color]▄██████████[/color]    [bold]Communications[/bold]
+      [color=#d16d1f]█[/color][color=#eb7a23]▌[color=#FFFFFF]░░[/color]▄██[color=#d16d1f]██[/color]█▌[color=#1c8a4e]█▀[/color]▄██[color=#d16d1f]█▀[/color][/color]                        [bold]Division[/bold]
+      [color=#d16d1f]█[/color][color=#eb7a23]▌▄██[color=#d16d1f]█▀[/color][color=#1c8a4e]▄[/color][color=#d16d1f]▐[/color]█▌▄██[color=#d16d1f]█▀[/color][color=#EEEE]▄[/color]▐████████[/color]    [bold]Form: [/bold]3546
+      [color=#d16d1f]█[/color][color=#eb7a23]██[/color][color=#d16d1f]█▀[/color][color=#25b266]▄█[/color][color=#1c8a4e]█[/color][color=#d16d1f]▐[/color][color=#eb7a23]███[/color][color=#d16d1f]█▀[/color][color=#EEEEEE]▄█[/color][color=#DDDDDD]█[/color]                           [bold]Weston-Yamada[/bold]
+      [color=#d16d1f]██▀[/color][color=#25b266]▄█[/color][color=#1c8a4e]█▀[/color][color=#FFFFFF]░[/color][color=#d16d1f]▐██▀[/color][color=#EEEEEE]▄█[/color][color=#DDDDDD]█▀▐[/color][color=#eb7a23]▐████████[/color]    [bold]Correspondence[/bold]
+      [color=#383838]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+      [color=#eb7a23]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+      [bold]To:[/bold] [bold]Corporate Liaison's Office[/bold]|[color=#1b67a5][bold]UNS[/bold] [bolditalic]Almayer[/bolditalic][/color]
+      [head=3]From:[/head] [bolditalic]Communications Regional Office |[color=#cb0000] OCP-583[/color][/bolditalic]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bold]Corporate Liaison[/bold] [bolditalic][form][/bolditalic],
+      [italic][form][/italic]
+
+
+      [color=#1b67a5][bold][signature] | [bolditalic]Communications Executive[/bolditalic][/bold][/color]
+      [bold]Office of the Regional Manager|Communications Division[bold]
+      [color=#eb7a23][bolditalic]Weston-Yamada Orbital Communications Platform 583[/color]
+      [color=#383838]▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[/color]
+
+                                            [color=#a62d2d][head=3]CONFIDENTIAL[/head][/color]
+      [italic][color=#872a2a]Access to this document is restricted to designated departmental personnel. Unauthorized access, sharing, or reproduction of its contents will be treated as a breach of corporate policy and may result in immediate administrative and legal action.[/color][/italic]
+      [bullet][italic]Authenticity of this document and its contents is verified by means of an affixed Weston-Yamada Stamp.[/italic][/color]
+      [color=#383838]▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[/color]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperFaxTemplateFreePress
+  name: Free Press fax reply template
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#0000]██████[color=#26a]██████[color=#0000]██[color=#26a]██████[color=#0000]██[color=#26a]██████[color=#0000]██[color=#26a]██████[color=#0000]████
+      ██████[color=#26a]██[color=#0000]██████[color=#258]██████[color=#0000]██[color=#258]██[color=#0000]██████[color=#258]██[color=#0000]████████
+      ██████[color=#258]██████[color=#0000]██[color=#258]████[color=#0000]████[color=#258]██████[color=#0000]██[color=#258]██████[color=#0000]████
+      ██████[color=#147]██[color=#0000]██████[color=#147]██[color=#0000]██[color=#147]██[color=#0000]██[color=#147]██[color=#0000]██████[color=#147]██[color=#0000]████████
+      ██████[color=#147]██[color=#0000]██████[color=#147]██[color=#0000]██[color=#147]██[color=#0000]██[color=#147]██████[color=#0000]██[color=#147]██████[color=#0000]████
+      ████████████████████████████████████████
+      ██[color=#26a]██████[color=#0000]██[color=#26a]██████[color=#0000]██[color=#26a]██████[color=#0000]████[color=#26a]████[color=#0000]████[color=#26a]████
+      [color=#0000]██[color=#258]██[color=#0000]██[color=#26a]██[color=#0000]██[color=#258]████[color=#26a]██[color=#0000]██[color=#258]██[color=#0000]██████[color=#258]██[color=#0000]██████[color=#258]██[color=#0000]████
+      ██[color=#258]██████[color=#0000]██[color=#258]████[color=#0000]████[color=#258]██████[color=#0000]████[color=#258]██[color=#0000]██████[color=#258]██[color=#0000]██
+      ██[color=#147]██[color=#0000]██████[color=#147]██[color=#0000]██[color=#147]██[color=#0000]██[color=#147]██[color=#0000]██████████[color=#147]██[color=#0000]██████[color=#147]██
+      [color=#0000]██[color=#147]██[color=#0000]██████[color=#147]██[color=#0000]██[color=#147]██[color=#0000]██[color=#147]██████[color=#0000]██[color=#147]████[color=#0000]████[color=#147]████[color=#0000]██[/color][color=#000]
+                      [head=1]Free Press Correspondence[/head]
+      [color=#2E68AF]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+      [bolditalic]From: [/bolditalic][color=red][signature][/color]
+      [bolditalic]To: [/bolditalic][color=red][form], UNS Almayer[/color]
+      [bolditalic]Subject: [/bolditalic][color=red][form][/color]
+      [color=#2E68AF]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color][color=#000]
+      [italic]Hello [form],
+      [form]
+
+      Best Regards,[/italic]
+      [bold][color=#9d3737][signature][/color]
+      Free Press Offices, Culderon's Main, Zypheron Sector[/bold]
+      [color=#2E68AF]▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[/color]
+      [color=#acadad][bullet][italic]Authenticity of this document is to be confirmed by utilization of a Free Press Stamp.[/italic]

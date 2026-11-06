@@ -37,6 +37,9 @@
                                                FontColorOverride="{x:Static maths:Color.DarkGray}"
                                                StyleClasses="LabelBig" HorizontalExpand="True" />
                                         <!-- RMC14 -->
+                                        <Button Name="JoinFaxResponderButton" Access="Public"
+                                                Text="{Loc 'rmc-lobby-join-fax-responder'}"
+                                                StyleClasses="ButtonBig" MinWidth="137" Visible="False" />
                                         <Button Name="JoinXenoButton" Access="Public"
                                                 Text="{Loc 'rmc-lobby-join-xeno'}"
                                                 StyleClasses="ButtonBig" MinWidth="137" Visible="False" />
