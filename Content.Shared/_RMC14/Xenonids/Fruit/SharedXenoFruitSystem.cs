@@ -27,6 +27,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -492,9 +493,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             _adminLogs.Add(LogType.RMCXenoFruitPlant, $"Xeno {ToPrettyString(xeno.Owner):xeno} planted {ToPrettyString(entity):entity} at {coordinates}");
         }
 
-        var popupSelf = fruitOverflow ? Loc.GetString("rmc-xeno-fruit-plant-limit-exceeded")
+        var selfMessage = fruitOverflow ? Loc.GetString("rmc-xeno-fruit-plant-limit-exceeded")
             : Loc.GetString("rmc-xeno-fruit-plant-success-self");
-        _popup.PopupClient(popupSelf, xeno.Owner, xeno.Owner);
+        _popup.PopupClient(selfMessage, xeno.Owner, xeno.Owner);
 
         var others = Filter.PvsExcept(xeno.Owner).Recipients;
         foreach (var other in others)
