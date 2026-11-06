@@ -508,6 +508,7 @@
   id: JobCMDoctor
   points: 7
   groups:
+  - DoctorRoleSpecificRoleChangeRMC
   - MarineBackpack
   - HeadwearRMC
   - EyewearRMC
