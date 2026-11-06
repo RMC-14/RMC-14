@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Buffed Marine Service Jacket to have 10 ballistic protection
-    type: Tweak
-  - message: Renamed New Varadero 'Commander' to 'UNMC Commander'
-    type: Tweak
-  - message: Fixed New Varadero commander getting a M1984 belt instead of a M1911
-      belt
-    type: Fix
-  id: 3235
-  time: '2026-05-31T01:38:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9890
 - author: Vexerot
   changes:
   - message: Echo and Foxtrot SLs can now track the XO / CO.
@@ -4524,5 +4512,21 @@
   id: 3734
   time: '2026-11-06T23:24:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9824
+- author: Vixting
+  changes:
+  - message: Fixed xenos not being tracked on evolving / devolving inside vehicle
+      interior
+    type: Fix
+  - message: Fixed burrowed burrower blocking vehicles
+    type: Fix
+  - message: Fixed bug with sentry arc targetting
+    type: Fix
+  - message: Fixed being able to drag vendors, cades, emplacements into vehicle interiors
+    type: Fix
+  - message: Tweaked vehicle collision to make it navigate better
+    type: Tweak
+  id: 3735
+  time: '2026-11-06T23:26:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10932
 Name: RMC14
 Order: -1
