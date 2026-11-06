@@ -255,6 +255,8 @@
         crate: RMCCrateGearPackFlare
       - cost: 4000
         crate: RMCCrateGearMotionDetector
+      - cost: 2000
+        crate: RMCCrateGearOverwatchCameraTripod
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
       - cost: 2000

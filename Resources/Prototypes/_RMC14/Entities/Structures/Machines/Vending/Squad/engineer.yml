@@ -164,6 +164,8 @@
         points: 3
       - id: RMCMotionDetector
         points: 8
+      - id: RMCOverwatchCameraTripod
+        points: 5
       - id: RMCWhistle
         points: 3
       - id: RMCSynthResetKey
