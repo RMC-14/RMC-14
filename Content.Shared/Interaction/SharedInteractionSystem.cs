@@ -129,6 +129,8 @@ namespace Content.Shared.Interaction
             SubscribeLocalEvent<UnremoveableComponent, GotUnequippedHandEvent>(OnUnequipHand);
             SubscribeLocalEvent<UnremoveableComponent, DroppedEvent>(OnDropped);
 
+            SubscribeAllEvent<RMCTryGrabEvent>(OnTryGrab); // RMC14
+
             CommandBinds.Builder
                 .Bind(ContentKeyFunctions.AltActivateItemInWorld,
                     new PointerInputCmdHandler(HandleAltUseInteraction))
@@ -136,8 +138,9 @@ namespace Content.Shared.Interaction
                     new PointerInputCmdHandler(HandleUseInteraction))
                 .Bind(ContentKeyFunctions.ActivateItemInWorld,
                     new PointerInputCmdHandler(HandleActivateItemInWorld))
-                .Bind(ContentKeyFunctions.TryPullObject,
-                    new PointerInputCmdHandler(HandleTryPullObject))
+                // RMC14 removed
+                //.Bind(ContentKeyFunctions.TryPullObject,
+                //    new PointerInputCmdHandler(HandleTryPullObject))
                 .Register<SharedInteractionSystem>();
 
             _rateLimit.Register(RateLimitKey,
@@ -258,9 +261,14 @@ namespace Content.Shared.Interaction
                 PredictedQueueDel(uid);
         }
 
+        // RMC14
+        private void OnTryGrab(RMCTryGrabEvent ev, EntitySessionEventArgs args)
+        {
+            HandleTryPullObject(args.SenderSession, GetCoordinates(ev.Coords), GetEntity(ev.Target));
+        }
+
         private bool HandleTryPullObject(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
-            _rmcLagCompensation.SendLastRealTick();
             if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
                 Log.Info($"TryPullObject input validation failed");
@@ -1549,6 +1557,20 @@ namespace Content.Shared.Interaction
             AltInteract = altInteract;
         }
     }
+
+    // RMC14 start
+    /// <summary>
+    /// Raised when a player tries to grab something.
+    /// </summary>
+    /// <param name="coords"></param>
+    /// <param name="target"></param>
+    [Serializable, NetSerializable]
+    public sealed class RMCTryGrabEvent(NetCoordinates coords, NetEntity target) : EntityEventArgs
+    {
+        public NetCoordinates Coords = coords;
+        public NetEntity Target = target;
+    }
+    // RMC14 end
 
     /// <summary>
     ///     Raised directed by-ref on an entity to determine what item will be used in interactions.
