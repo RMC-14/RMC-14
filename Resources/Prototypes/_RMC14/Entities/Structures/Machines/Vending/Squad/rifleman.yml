@@ -82,6 +82,21 @@
       - id: RMCPouchGeneral
       - id: RMCPouchMagazinePistol
       - id: RMCPouchPistol
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingBlack
+        recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
+      - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -165,26 +180,6 @@
         points: 20
     - name: Clothing Items
       entries:
-      - id: CMWebbing
-        points: 10
-      - id: RMCWebbingBlackSmall
-        points: 10
-      - id: CMWebbingBrown
-        points: 15
-      - id: CMWebbingBlack
-        points: 15
-      - id: RMCWebbingLegPouch
-        points: 15
-      - id: RMCWebbingLegPouchBlack
-        points: 15
-      - id: RMCWebbingDropPouch
-        points: 15
-      - id: RMCWebbingDropPouchBlack
-        points: 15
-      - id: CMWebbingHolster
-        points: 15
-      - id: RMCWebbingHolsterBlack
-        points: 15
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
         points: 15
