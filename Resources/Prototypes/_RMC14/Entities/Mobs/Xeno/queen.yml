@@ -215,6 +215,9 @@
     addComponents:
     - type: XenoScreech
     - type: XenoToggleSpit
+    # Overwrites the immature order, so matured queens order their extra abilities correctly
+    - type: RMCActionOrder
+      id: CMXenoQueen
     addActions:
     - ActionXenoScreech
     - ActionXenoSpitQueen
@@ -290,12 +293,18 @@
     - type: Gibbable
     - type: CanBeLarvaQueued
 
+# Queens start immature, so this is the id their action bar order is saved under until they mature
+- type: entity
+  abstract: true
+  id: CMXenoQueenImmature
+
 - type: entity
   parent: RMCXenoQueenBase
   id: CMXenoQueen
   components:
+  # XenoMaturing moves this ordering onto CMXenoQueen once they mature
   - type: RMCActionOrder
-    id: CMXenoQueen
+    id: CMXenoQueenImmature
     #  - type: XenoEvolution #can be enabled for events like april fools.
     #    strains:
     #    - RMCXenoQueenMaid
@@ -325,6 +334,9 @@
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+  # Reskin of the queen with the same actions, so it shares her action bar order
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
   - type: XenoStrain
     name: rmc-xeno-maid-name
     description: rmc-xeno-maid-description
@@ -351,6 +363,9 @@
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+  # Reskin of the queen with the same actions, so it shares her action bar order
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
   - type: XenoStrain
     name: rmc-xeno-magicalgirl-name
     description: rmc-xeno-magicalgirl-description

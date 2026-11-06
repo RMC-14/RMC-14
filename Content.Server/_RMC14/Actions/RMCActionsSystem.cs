@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Linq;
 using Content.Server.Actions;
 using Content.Shared._RMC14.Actions;
@@ -13,6 +13,7 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
 {
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly RMCActionsManager _manager = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     private readonly HashSet<EntProtoId> _actionsPresent = new();
     private readonly Dictionary<(NetUserId User, EntProtoId Id), List<EntProtoId>> _toUpdate = new();
@@ -25,6 +26,7 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
 
         SubscribeNetworkEvent<RMCActionOrderChangeEvent>(OnActionOrder);
 
+        SubscribeLocalEvent<RMCActionOrderComponent, ComponentStartup>(OnOrderStartup);
         SubscribeLocalEvent<RMCActionOrderComponent, PlayerAttachedEvent>(OnOrderAttached);
     }
 
@@ -64,10 +66,27 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
         _toUpdate[(args.SenderSession.UserId, order.Id)] = msg.Actions;
     }
 
+    private void OnOrderStartup(Entity<RMCActionOrderComponent> ent, ref ComponentStartup args)
+    {
+        // Entities swap this component out to change which order they use, e.g. queen maturing into extra abilities.
+        if (_player.TryGetSessionByEntity(ent, out var player))
+            LoadOrder(ent, player);
+    }
+
     private void OnOrderAttached(Entity<RMCActionOrderComponent> ent, ref PlayerAttachedEvent args)
     {
-        ent.Comp.Order = _manager.GetOrder(args.Player.UserId, ent.Comp.Id);
+        LoadOrder(ent, args.Player);
+    }
+
+    private void LoadOrder(Entity<RMCActionOrderComponent> ent, ICommonSession player)
+    {
+        var order = _manager.GetOrder(player.UserId, ent.Comp.Id);
+        ent.Comp.Order = order;
         Dirty(ent);
+
+        // The actions saved under this id are not the ones the client sorted itself by, so make it sort again.
+        var ev = new RMCActionOrderLoadedEvent(order?.ToList() ?? new List<EntProtoId>());
+        RaiseNetworkEvent(ev, player);
     }
 
     private void OnLoaded(ICommonSession user, Dictionary<EntProtoId, ImmutableArray<EntProtoId>>? allActions)
