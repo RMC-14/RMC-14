@@ -24,6 +24,9 @@
   - type: Tag
     tags:
     - Catwalk
+  - type: Construction
+    graph: RMCCatwalkGraph
+    node: catwalkFinished
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
