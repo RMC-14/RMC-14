@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.ShakeStun;
+using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -44,6 +45,7 @@ public sealed class CPRSystem : EntitySystem
     // TODO RMC14 move these to a component
     [ValidatePrototypeId<DamageTypePrototype>]
     private const string HealType = "Asphyxiation";
+    private static readonly ProtoId<DamageGroupPrototype> Airloss = "Airloss";
 
     private static readonly TimeSpan CPRCooldownSeconds = TimeSpan.FromSeconds(7);
     private static readonly FixedPoint2 HealAmount = FixedPoint2.New(10);
@@ -177,7 +179,10 @@ public sealed class CPRSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_mobState.IsAlive(ent) ||
+        if (!((HasComp<RMCUnconsciousComponent>(ent) || _mobState.IsCritical(ent)) &&
+            TryComp<DamageableComponent>(ent, out var damage) &&
+            damage.DamagePerGroup.TryGetValue(Airloss, out var oxyDamage) &&
+            oxyDamage > 0) ||
             (_mobState.IsDead(ent) && _unrevivable.IsUnrevivable(ent)))
         {
             args.Cancelled = true;
