@@ -4,6 +4,7 @@ using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
@@ -440,7 +441,7 @@ public sealed partial class ChatSystem
             ("originalName", originalSpeakerName));
     }
 
-    private void SendInVoiceRangeWithLanguage(
+    public void SendInVoiceRangeWithLanguage(
         ChatChannel channel,
         string speakerMessage,
         string wrappedMessageTemplate,
@@ -452,7 +453,8 @@ public sealed partial class ChatSystem
         bool visibleLanguage = false,
         NetUserId? author = null,
         string? transformedName = null,
-        bool needsLos = false)
+        bool needsLos = false,
+        bool ignoreXenos = false)
     {
         foreach (var (session, data) in GetRecipients(source, channel, VoiceRange))
         {
@@ -463,6 +465,9 @@ public sealed partial class ChatSystem
             var entHideChat = entRange == MessageRangeCheckResult.HideChat;
 
             if (session.AttachedEntity is not { Valid: true } listener)
+                continue;
+
+            if (ignoreXenos && HasComp<XenoComponent>(listener))
                 continue;
 
             if (needsLos && !data.Observer && listener != source && !data.HasLOS)
