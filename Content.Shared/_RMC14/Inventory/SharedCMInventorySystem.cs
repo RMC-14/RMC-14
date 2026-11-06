@@ -73,6 +73,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SlotFlags.LEGS
     ];
 
+    private const string BackpackSlot = "back";
+
     private EntityQuery<RMCPickupDroppedItemsComponent> _pickupDroppedItemsQuery;
     private EntityQuery<TransformComponent> _xformQuery;
 
@@ -865,5 +867,16 @@ public abstract class SharedCMInventorySystem : EntitySystem
         {
             return system.HasComp<InventoryComponent>(user) || system.HasComp<HandsComponent>(user);
         }
+    }
+
+    public bool TryStoreInBackpack(EntityUid entity, EntityUid item)
+    {
+        if (!TryComp(entity,  out InventoryComponent? inventory) ||
+        !_inventory.TryGetSlotEntity(entity, BackpackSlot, out var backpack, inventoryComponent: inventory))
+        {
+            return false;
+        }
+
+        return _storage.Insert(backpack.Value, item, out _, playSound: false);
     }
 }
