@@ -1135,9 +1135,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
         builder.Append(line.AsSpan(0, Math.Min(line.Length, available)));
     }
 
-    private string FormatDuration(TimeSpan duration)
+    private static string FormatDuration(TimeSpan duration)
     {
         var totalMinutes = (int) duration.TotalMinutes;
-        return Loc.GetString("rmc-universal-recorder-duration", ("minutes", totalMinutes), ("seconds", duration.Seconds));
+        return Robust.Shared.Localization.Loc.GetString("rmc-universal-recorder-duration", ("minutes", totalMinutes), ("seconds", duration.Seconds));
     }
 }

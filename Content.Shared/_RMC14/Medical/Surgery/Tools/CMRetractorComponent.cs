@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.Medical.Surgery.Tools;
 [Access(typeof(SharedCMSurgerySystem))]
 public sealed partial class CMRetractorComponent : Component, ICMSurgeryToolComponent
 {
-    public string ToolName => Loc.GetString("rmc-surgery-tool-retractor");
+    public LocId ToolName => "rmc-surgery-tool-retractor";
 }

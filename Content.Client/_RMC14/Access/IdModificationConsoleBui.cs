@@ -67,12 +67,9 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             _window.SignInTargetName.Text = string.Empty;
         }
 
-        var currentTabText = _currenttab == string.Empty
-            ? string.Empty
-            : Loc.GetString($"rmc-id-console-tab-{_currenttab.ToLowerInvariant()}");
         foreach (var tab in tabs)
         {
-            if (tab.TabButton.Text != currentTabText)
+            if (tab.TabId != _currenttab)
                 tab.TabButton.Disabled = false;
         }
 
@@ -140,7 +137,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             SendPredictedMessage(new IdModificationConsoleSignInTargetBuiMsg());
         };
 
-        var tab1 = new IdModificationConsoleTabButton();
+        var tab1 = new IdModificationConsoleTabButton { TabId = "Access" };
         tab1.TabButton.Text = Loc.GetString("rmc-id-console-tab-access");
         tab1.TabButton.Disabled = true;
         tab1.TabButton.OnPressed += _ =>
@@ -210,7 +207,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
         DisplayAccessGroups(console);
 
         // Jobs
-        var tab2 = new IdModificationConsoleTabButton();
+        var tab2 = new IdModificationConsoleTabButton { TabId = "Jobs" };
         tab2.TabButton.Text = Loc.GetString("rmc-id-console-tab-jobs");
         tab2.TabButton.OnPressed += _ =>
         {
@@ -250,7 +247,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
         // _window.Tabs.AddChild(tab3);
 
         // Squads
-        var tab4 = new IdModificationConsoleTabButton();
+        var tab4 = new IdModificationConsoleTabButton { TabId = "Squads" };
         tab4.TabButton.Text = Loc.GetString("rmc-id-console-tab-squads");
         tab4.TabButton.OnPressed += _ =>
         {

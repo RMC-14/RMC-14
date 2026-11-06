@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.Medical.Surgery.Tools;
 [Access(typeof(SharedCMSurgerySystem))]
 public sealed partial class CMCauteryComponent : Component, ICMSurgeryToolComponent
 {
-    public string ToolName => Loc.GetString("rmc-surgery-tool-cautery");
+    public LocId ToolName => "rmc-surgery-tool-cautery";
 }

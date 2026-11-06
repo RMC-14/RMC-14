@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.Medical.Surgery.Tools;
 [Access(typeof(SharedCMSurgerySystem))]
 public sealed partial class CMBoneSawComponent : Component, ICMSurgeryToolComponent
 {
-    public string ToolName => Loc.GetString("rmc-surgery-tool-bone-saw");
+    public LocId ToolName => "rmc-surgery-tool-bone-saw";
 }
