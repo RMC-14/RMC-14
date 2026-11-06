@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: 'Removed two Communications Relay spawns on Fiorina: LZ2 Engi Rings Comms
-      and LZ1 Comms Relay Comms'
-    type: Remove
-  id: 3226
-  time: '2026-05-22T19:15:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9920
-- author: SharkSnake98
-  changes:
-  - message: Added the Avant Biomedical container
-    type: Add
-  - message: Changed the descriptions of the Hypospray, Blood Vendor, & Handheld cutting
-      torch to reference specific corporations
-    type: Tweak
-  - message: Changed the Novaris Logo
-    type: Tweak
-  - message: Changed the name of the "NanoMed" to "QuickMed"
-    type: Tweak
-  id: 3227
-  time: '2026-05-22T22:07:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9190
 - author: kleinerstation13
   changes:
   - message: Resprited the MP27
@@ -4523,5 +4501,26 @@
   id: 3725
   time: '2026-11-06T23:10:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10757
+- author: noctyrnal
+  changes:
+  - message: Changed the colour of Boilers, Sapper Boilers and CAS lasers to fit them
+      more accordingly.
+    type: Tweak
+  id: 3726
+  time: '2026-11-06T23:14:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10987
+- author: CatAndHats
+  changes:
+  - message: Fixed xeno names being revealed to marines for many abilities - Crusher
+      Hunker-Down, Valkyrie Hook, Ravager Empower, Hedgehog Shield, Vampire Headbite,
+      Steelcrest Soak, Gardener Fruit Planting and multiple Resin Surge actions, and
+      Healer Sacrifice.
+    type: Fix
+  - message: Changed the Valkyrie Hook text popup to only show at the end, not the
+      start and end, so it should now be more readable
+    type: Tweak
+  id: 3727
+  time: '2026-11-06T23:13:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10697
 Name: RMC14
 Order: -1
