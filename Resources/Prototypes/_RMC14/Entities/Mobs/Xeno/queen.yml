@@ -214,11 +214,10 @@
     deadThreshold: 1100
     addComponents:
     - type: XenoScreech
-    - type: XenoToggleSpit
     addActions:
     - ActionXenoScreech
-    - ActionXenoSpitQueen
-    - ActionXenoToggleSpitType
+    - ActionXenoQueenSpitNeuro
+    - ActionXenoQueenSpitAcid
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
@@ -251,9 +250,12 @@
   - type: XenoHeal
   - type: StunOnExplosionReceived
     weak: false
-  - type: XenoSpit
+  - type: XenoSlowingSpit
     projectileId: XenoQueenNeuroSpitProjectile
     plasmaCost: 50
+  - type: XenoSpit
+    projectileId: XenoChargedSpitProjectile
+    plasmaCost: 25
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen

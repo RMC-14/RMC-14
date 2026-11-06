@@ -11,8 +11,5 @@ public sealed partial class DrainOnHitComponent : Component
     public FixedPoint2 DrainAmount = FixedPoint2.New(2);
 
     [DataField]
-    public string TargetSolution = "chemicals";
-
-    [DataField]
     public string DrainGroup = "Medicine";
 }

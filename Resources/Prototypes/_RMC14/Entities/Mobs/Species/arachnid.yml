@@ -96,6 +96,9 @@
       sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
       state: hooked
       visible: false
+    - map: [ "enum.ParatoxinVisualLayers.Base" ]
+      sprite: "_RMC14/Effects/paratoxin_effect.rsi"
+      visible: false
     - map: [ "enum.NewPlayerLayers.Layer" ]
       visible: false
   - type: FixedIdentity

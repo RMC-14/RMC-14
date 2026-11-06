@@ -156,9 +156,6 @@
     damageIncreasePer:
       groups:
         Brute: 2
-    damageTailIncreasePer:
-      groups:
-        Brute: 2.4
     leapDamage:
       groups:
         Brute: 45

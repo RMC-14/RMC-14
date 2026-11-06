@@ -24,8 +24,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      550: Critical
+      650: Dead
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -36,11 +36,11 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailStabSentinel
     - ActionXenoAcidWeak
-    - ActionXenoSlowingSpit
-    - ActionXenoScatteredSpit
-    - ActionXenoParalyzingSlash
+    - ActionXenoParatoxinSpit
+    - ActionXenoParatoxinSlash
+    - ActionXenoDrainingBite
     - ActionXenoDevolve
     tier: 1
     hudOffset: -0.15,0.157
@@ -65,17 +65,41 @@
     evolvesToWithoutPoints:
     - CMXenoQueen
   - type: XenoAcid
-  - type: XenoParalyzingSlash
   - type: XenoSlowingSpit
-  - type: XenoScatteredSpit
+    plasmaCost: 30
+    projectileId: XenoParatoxinSpitProjectile 
   - type: MeleeWeapon
     damage:
       groups:
         Brute: 22.5
   - type: XenoTailStab
+    bonusDamageMult: 1
     tailDamage:
       groups:
-        Brute: 30
+        Brute: 25
+  - type: CatalyticTailStab
+    damagePerStack:
+      types:
+        Heat: 1.2
+  - type: XenoParatoxinSlashApply
+  - type: XenoDrainingBite
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.53
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.59
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.375
+      whitelist:
+        components:
+        - XenoHeavy
   - type: Tackle
     min: 4
     max: 4
