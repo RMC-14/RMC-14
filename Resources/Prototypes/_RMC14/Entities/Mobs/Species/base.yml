@@ -49,6 +49,7 @@
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
   - type: Woundable
+  - type: RMCBloodSplatterer
   - type: StatusEffects
     allowed:
     - Stun
