@@ -14,6 +14,7 @@
     deceleration: 12
     turnDelay: 0.25
     pushCooldown: 2
+    weightClass: Light
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
   - type: VehicleOvercharge
@@ -292,6 +293,8 @@
   description: A humvee configured for ARC interior layout.
   suffix: Drivable, Humvee, Base, ARC, Tracked
   components:
+  - type: GridVehicleMover
+    weightClass: Light
   - type: ItemSlots
     slots:
       turret:

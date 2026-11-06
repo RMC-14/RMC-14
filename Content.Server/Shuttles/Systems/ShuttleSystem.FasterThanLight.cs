@@ -6,6 +6,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Shuttles;
 using Content.Shared.Body.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -355,7 +356,13 @@ public sealed partial class ShuttleSystem
 
         component = AddComp<FTLComponent>(uid);
         component.State = FTLState.Starting;
-        var audio = _audio.PlayPvs(_startupSound, uid);
+        var sound = _startupSound;
+        // RMC14
+        if (TryComp<RMCOverrideShuttleSoundsComponent>(uid, out var replacement))
+            sound = replacement.StartupSound;
+
+        var audio = _audio.PlayPvs(sound, uid);
+        // RMC14
         _audio.SetGridAudio(audio);
         component.StartupStream = audio?.Entity;
 
@@ -395,8 +402,14 @@ public sealed partial class ShuttleSystem
         // Just so we don't clip
         if (fromMapUid != null && TryComp(comp.StartupStream, out AudioComponent? startupAudio))
         {
-            var clippedAudio = _audio.PlayStatic(_startupSound, Filter.Broadcast(),
+            //RMC14
+            var soundclip = _startupSound;
+            if (TryComp<RMCOverrideShuttleSoundsComponent>(entity, out var replacementclip))
+                soundclip = replacementclip.StartupSound;
+
+            var clippedAudio = _audio.PlayStatic(soundclip, Filter.Broadcast(),
                 new EntityCoordinates(fromMapUid.Value, _mapSystem.GetGridPosition(entity.Owner)), true, startupAudio.Params);
+            //RMC14
 
             _audio.SetPlaybackPosition(clippedAudio, entity.Comp1.StartupTime);
             if (clippedAudio != null)
@@ -429,7 +442,13 @@ public sealed partial class ShuttleSystem
         RaiseLocalEvent(uid, ref ev, true);
 
         // Audio
-        var wowdio = _audio.PlayPvs(comp.TravelSound, uid);
+        // RMC14
+        var sound = comp.TravelSound;
+        if (TryComp<RMCOverrideShuttleSoundsComponent>(entity, out var replacement))
+            sound = replacement.TravelSound;
+
+        var wowdio = _audio.PlayPvs(sound, uid);
+        // RMC14
         comp.TravelStream = wowdio?.Entity;
         _audio.SetGridAudio(wowdio);
         _dropship.RaiseUpdate(uid);
@@ -463,7 +482,11 @@ public sealed partial class ShuttleSystem
         _dropship.RaiseUpdate(entity);
 
         // RMC14
-        var audio = _audio.PlayPvs(_arrivalSound, entity.Owner);
+        var sound = _arrivalSound;
+        if (TryComp<RMCOverrideShuttleSoundsComponent>(entity, out var replacement))
+            sound = replacement.ArrivalSound;
+        // RMC14
+        var audio = _audio.PlayPvs(sound, entity.Owner);
         _audio.SetGridAudio(audio);
     }
 
@@ -626,6 +649,11 @@ public sealed partial class ShuttleSystem
     /// </summary>
     private void DoTheDinosaur(TransformComponent xform)
     {
+        // RMC14
+        if (HasComp<RMCPreventShuttleStunComponent>(xform.GridUid))
+            return;
+        // RMC14
+
         // Get enumeration exceptions from people dropping things if we just paralyze as we go
         var toKnock = new ValueList<EntityUid>();
         KnockOverKids(xform, ref toKnock);
