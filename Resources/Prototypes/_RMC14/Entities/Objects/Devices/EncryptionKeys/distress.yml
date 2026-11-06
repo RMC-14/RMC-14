@@ -29,6 +29,19 @@
   - type: Sprite
     state: cap_key
 
+# NV
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyMarineNV
+  name: marine colonial encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineSurvivor
+    defaultChannel: MarineSurvivor
+  - type: Sprite
+    state: cap_key
+
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyDukes

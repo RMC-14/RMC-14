@@ -49,3 +49,17 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_fisher.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+
+- type: entity # doesn't parent off the UNMC boonie because it's not toggleable
+  parent: CMHeadCap
+  id: RMCBoonieNV
+  name: UNMC patrol boonie
+  description: A floppy bush hat. Protects only from the sun and rain, but very comfortable. It comes with a protective neck flap to protect from sunburn.
+  suffix: Varadero
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_nv.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}

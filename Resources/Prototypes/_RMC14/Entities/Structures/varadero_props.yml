@@ -73,7 +73,7 @@
 - type: entity
   parent: RMCPropVaraderoAACannon
   id: RMCPropVaraderoAACannon3
-  name: M83 'Skysweeper
+  name: M83 'Skysweeper'
   description: An M83 anti-aircraft dual barreled flak cannon. The design features two rotary fire 80mm cannons, which typically fire proximity fuse HEAP rounds. This one appears to have been fried by some kind of electronic pulse...
   components:
   - type: Sprite

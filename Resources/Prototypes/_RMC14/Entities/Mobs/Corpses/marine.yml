@@ -256,7 +256,7 @@
     shoes: CMBootsBlackFilled
     id: CMDogtagUNMCPilot
     gloves: CMHandsInsulatedPilot
-    outerClothing: RMCCoatPilotFighter
+    outerClothing: RMCArmorPDU
 
 # Ground crew
 - type: randomHumanoidSettings
