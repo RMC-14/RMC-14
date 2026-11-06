@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added CLF Ship insert for LV-624 with a 10% chance of occuring. Currently
-      cannot spawn naturally.
-    type: Add
-  - message: Survivors now spawn together instead of separately on LV-624. Their holdout
-      locations include the Nexus Chapel and the Power Plant.
-    type: Tweak
-  id: 3216
-  time: '2026-05-19T20:30:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9880
 - author: Dygon
   changes:
   - message: Using the suicide verb with a flamethrower no longer deletes the flamethrower.
@@ -4518,5 +4507,13 @@
   id: 3715
   time: '2026-11-05T17:15:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11011
+- author: Ian321
+  changes:
+  - message: '[Admin] "unlockvehicle" command that adds the specified vehicle to the
+      vehicle supply lift.'
+    type: Add
+  id: 3716
+  time: '2026-11-06T00:12:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10204
 Name: RMC14
 Order: -1
