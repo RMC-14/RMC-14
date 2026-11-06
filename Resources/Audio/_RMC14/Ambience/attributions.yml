@@ -65,3 +65,33 @@
   license: "CC-BY-4.0"
   copyright: "Taken from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
   source: "https://pixabay.com/sound-effects/modern-war-129016/"
+
+- files: ["rainforest.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/ambience/rainforest.ogg"
+
+- files: ["varadero_storm.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/ambience/varadero_storm.ogg"
+
+- files: ["rainandthunderlong.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/ambience/rainandthunderlong.ogg"
+
+- files: ["strata_snow.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/ambience/strata/strata_snow.ogg"
+
+- files: ["strata_snowstorm.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/ambience/strata/strata_snowstorm.ogg"
+
+- files: ["strata_blizzard.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/ambience/strata/strata_blizzard.ogg"

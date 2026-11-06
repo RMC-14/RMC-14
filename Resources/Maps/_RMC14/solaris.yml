@@ -289,23 +289,36 @@ entities:
       data: {}
     - type: RMCWeatherCycle
       minTimeBetweenEvents: 1200
+      minTimeBetweenChecks: 900
+      minCheckVariance: 600
+      startChance: 0.3
       weatherEvents:
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
-        weatherType: RMCBigRedDust
+        fireSmotheringStrength: 1
+        cleansDecals: false
+        effectMessage: rmc-weather-effect-dust
+        weatherType: RMCSolarisDust
+        screenOverlay: Low
         duration: 600
         name: Duststorm
+        displayName: rmc-weather-name-duststorm
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
-        weatherType: RMCBigRedSand
+        fireSmotheringStrength: 2
+        cleansDecals: false
+        effectMessage: rmc-weather-effect-sand
+        weatherType: RMCSolarisSand
+        screenOverlay: Medium
         duration: 360
         name: Sandstorm
+        displayName: rmc-weather-name-sandstorm
     - type: RMCAmbientLightEffects
     - type: MapGrid
       chunks:

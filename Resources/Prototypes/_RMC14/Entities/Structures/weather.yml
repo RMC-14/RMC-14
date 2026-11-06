@@ -102,7 +102,7 @@
 
 - type: entity
   parent: RMCHybrisaRainLightProp
-  id: RMCBigRedDustProp
+  id: RMCSolarisDustProp
   name: duststorm
   description: It's dust, falling from the sky.
   suffix: prop, Solaris, weather
@@ -111,12 +111,12 @@
   components:
   - type: Sprite
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_dust
+    state: solaris_dust
     drawdepth: Effects
 
 - type: entity
   parent: RMCHybrisaRainLightProp
-  id: RMCBigRedSandProp
+  id: RMCSolarisSandProp
   name: sandstorm
   description: It's sand, falling from the sky.
   suffix: prop, Solaris, weather
@@ -125,12 +125,12 @@
   components:
   - type: Sprite
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_sand
+    state: solaris_sand
     drawdepth: Effects
 
 - type: entity
   parent: RMCHybrisaRainLightProp
-  id: RMCBigRedRocksProp
+  id: RMCSolarisRocksProp
   name: rockstorm
   description: It's rocks, falling from the sky.
   suffix: prop, Solaris, weather
@@ -139,7 +139,7 @@
   components:
   - type: Sprite
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_rocks
+    state: solaris_rocks
     drawdepth: Effects
 
 # Blizzard
