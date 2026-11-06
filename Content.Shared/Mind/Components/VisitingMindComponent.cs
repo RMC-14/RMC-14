@@ -7,6 +7,11 @@ namespace Content.Shared.Mind.Components
         public EntityUid? MindId;
     }
 
+    public sealed class MindVisitedMessage(EntityUid mindId) : EntityEventArgs
+    {
+        public EntityUid MindId { get; } = mindId;
+    }
+
     public sealed class MindUnvisitedMessage : EntityEventArgs
     {
     }

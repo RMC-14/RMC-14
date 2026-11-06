@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared.Coordinates;
 using Content.Shared.Fax.Components;
+using Content.Shared.GameTicking.Components;
 using Content.Shared.Roles;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -22,6 +23,28 @@ namespace Content.Server._RMC14.Rules.DistressSignal;
 
 public sealed partial class CMDistressSignalRuleSystem
 {
+    private void RaiseEndgameChanged(bool wasEndgame)
+    {
+        var isEndgame = IsDistressEndgameActive();
+        if (wasEndgame == isEndgame)
+            return;
+
+        var ev = new DistressSignalEndgameChangedEvent(isEndgame);
+        RaiseLocalEvent(ev);
+    }
+
+    private bool IsDistressEndgameActive()
+    {
+        var query = EntityQueryEnumerator<ActiveGameRuleComponent, CMDistressSignalRuleComponent>();
+        while (query.MoveNext(out _, out var distress))
+        {
+            if (distress.Hijack || distress.ForceEndAt != null)
+                return true;
+        }
+
+        return false;
+    }
+
     private const int FaxPowerLoadValue = 5;
 
     /// <summary>

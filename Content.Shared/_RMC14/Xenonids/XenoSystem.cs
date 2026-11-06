@@ -185,6 +185,9 @@ public sealed partial class XenoSystem : EntitySystem
 
         _eye.RefreshVisibilityMask(xeno.Owner);
         Dirty(xeno);
+
+        var ev = new XenoComponentChangedEvent(xeno);
+        RaiseLocalEvent(ref ev);
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
