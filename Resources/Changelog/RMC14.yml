@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added CLF Ship insert for LV-624 with a 10% chance of occuring. Currently
-      cannot spawn naturally.
-    type: Add
-  - message: Survivors now spawn together instead of separately on LV-624. Their holdout
-      locations include the Nexus Chapel and the Power Plant.
-    type: Tweak
-  id: 3216
-  time: '2026-05-19T20:30:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9880
-- author: Dygon
-  changes:
-  - message: Using the suicide verb with a flamethrower no longer deletes the flamethrower.
-    type: Fix
-  id: 3217
-  time: '2026-05-19T22:08:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9812
-- author: Vixting
-  changes:
-  - message: Girders are now full tiles.
-    type: Tweak
-  id: 3218
-  time: '2026-05-19T22:11:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9763
-- author: Vexerot
-  changes:
-  - message: Players can now press E to take their pistol out from their sidearm pouch.
-    type: Fix
-  id: 3219
-  time: '2026-05-19T22:10:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9846
 - author: BlueMoon059
   changes:
   - message: Adjusts the s8 4x telescopic scope description to no longer mention Armat.
@@ -4518,5 +4486,43 @@
   id: 3715
   time: '2026-11-05T17:15:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11011
+- author: Ian321
+  changes:
+  - message: '[Admin] "unlockvehicle" command that adds the specified vehicle to the
+      vehicle supply lift.'
+    type: Add
+  id: 3716
+  time: '2026-11-06T00:12:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10204
+- author: Vermidia
+  changes:
+  - message: You can now fill up pill packets in the chemmaster.
+    type: Add
+  id: 3717
+  time: '2026-11-06T00:13:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10973
+- author: CatAndHats
+  changes:
+  - message: Nesting actions won't reveal people's names to the other faction anymore
+    type: Fix
+  id: 3718
+  time: '2026-11-06T00:14:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10674
+- author: Vixting
+  changes:
+  - message: T3 raffle winners now bypass the T2 limit, this will rarely happen but
+      prevents players from being worried about this happening
+    type: Add
+  - message: If xenos win the raffle but blocked due to health they now have 30s to
+      get into a condition where they're healing, as long as they continue healing
+      past this they won't be passed over & will evolve once at full health
+    type: Add
+  - message: The T3 raffle now only allows you to raffle T3 within your evolution
+      line (drone can still raffle for all because they can evolve into any T2 before
+      marines land)
+    type: Add
+  id: 3719
+  time: '2026-11-06T07:59:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10962
 Name: RMC14
 Order: -1
