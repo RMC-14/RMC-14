@@ -1,0 +1,39 @@
+﻿- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCSuspendersBase
+  name: suspenders
+  description: An abstract pair of suspenders.
+  components:
+  - type: UniformAccessory
+    category: Suspenders
+    limit: 1
+    hiddenByJacketRolling: false
+
+- type: entity
+  parent: RMCSuspendersBase
+  id: RMCSuspendersBrown
+  name: brown suspenders
+  description: A pair of light-brown suspenders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Suspenders/brown_suspenders.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Suspenders/brown_suspenders.rsi
+      state: suspenders
+
+- type: entity
+  parent: RMCSuspendersBase
+  id: RMCSuspendersBlack
+  name: black suspenders
+  description: A pair of black suspenders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Suspenders/black_suspenders.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Suspenders/black_suspenders.rsi
+      state: suspenders
