@@ -151,11 +151,26 @@
     RMCPlastic: 2500 # 2000
 
 - type: latheRecipe
+  id: RMCPouchSmartTankAdapter
+  result: RMCPouchSmartTankAdapter
+  completetime: 4
+  materials:
+    CMGlass: 1250 # 1000
+    RMCPlastic: 1250 # 1000
+
+- type: latheRecipe
   id: RMCPressurizedCanister
   result: RMCPressurizedCanister
   completetime: 4
   materials:
     CMGlass: 2500 # 2000
+
+- type: latheRecipe
+  id: CMMiniTank
+  result: CMMiniTank
+  completetime: 4
+  materials:
+    CMGlass: 1250 # 1000
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ1
