@@ -744,12 +744,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         Dirty(weapon.Value, weaponComp);
 
         var spread = ev.Spread;
+        var originalCoords = coordinates;
         var targetCoords = coordinates;
         if (spread != 0)
             targetCoords = targetCoords.Offset(_random.NextVector2(-spread, spread + 1));
 
         if (ev.Explosion != null && HasNonDeletableWallOnTile(targetCoords))
-            targetCoords = FindAlternateLandingTile(targetCoords, 3);
+            targetCoords = FindAlternateLandingTile(targetCoords, originalCoords, (int)spread);
         var inFlight = Spawn(null, MapCoordinates.Nullspace);
         var inFlightComp = new AmmoInFlightComponent
         {
@@ -791,7 +792,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var spawnTarget = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager);
         if (ammo.Explosion != null && HasNonDeletableWallOnTile(spawnTarget))
-            spawnTarget = FindAlternateLandingTile(spawnTarget, 3);
+            spawnTarget = FindAlternateLandingTile(spawnTarget, spawnTarget, 3);
 
         var inFlight = Spawn(null, MapCoordinates.Nullspace);
         var inFlightComp = new AmmoInFlightComponent
@@ -1665,9 +1666,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         return foundWall;
     }
 
-    private EntityCoordinates FindAlternateLandingTile(EntityCoordinates desired, int maxRadius = 3)
+    private EntityCoordinates FindAlternateLandingTile(EntityCoordinates desired, EntityCoordinates original, int maxRadius = 3)
     {
         var origin = desired.SnapToGrid(EntityManager, _mapManager);
+        var maximumX = original.Position.X + maxRadius;
+        var maximumY = original.Position.Y + maxRadius;
+        var minimumX = original.Position.X - maxRadius;
+        var minimumY = original.Position.Y - maxRadius;
 
         for (var r = 1; r <= maxRadius; r++)
         {
@@ -1678,6 +1683,23 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     continue;
 
                 var candidate = origin.Offset(new Vector2i(x, y));
+                if (!(!(candidate.Position.X <= minimumX) && (candidate.Position.X <= maximumX) && !(candidate.Position.Y <= minimumY) && (candidate.Position.Y <= maximumY)))
+                    continue;
+
+                if (!HasNonDeletableWallOnTile(candidate))
+                    return candidate;
+            }
+        }
+
+        for (var r = 1; r <= maxRadius; r++)
+        {
+            for (var x = -r; x <= r; x++)
+            for (var y = -r; y <= r; y++)
+            {
+                if (Math.Abs(x) != r && Math.Abs(y) != r)
+                    continue;
+
+                var candidate = original.Offset(new Vector2i(x, y));
                 if (!HasNonDeletableWallOnTile(candidate))
                     return candidate;
             }
