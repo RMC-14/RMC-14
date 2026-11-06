@@ -723,7 +723,7 @@ public sealed class IntelSystem : EntitySystem
         if (!storeGlobal)
             return AddPersonalClue(user, target, clue);
 
-        _popup.PopupEntity(clue, target, user, PopupType.Medium);
+        _popup.PopupEntity(FormattedMessage.RemoveMarkupOrThrow(clue), target, user, PopupType.Medium);
 
         RemovePersonalClueFromAll(target);
 
