@@ -1156,13 +1156,27 @@ namespace Content.Client.Lobby.UI
                             Profile?.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out loadout);
                             loadout = loadout?.Clone();
 
+                            // RMC14
                             if (loadout == null)
                             {
                                 loadout = new RoleLoadout(roleLoadoutProto.ID);
                                 loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
                             }
+                            else
+                            {
+                                // Recalculate points from playtime and existing selections.
+                                if (Profile != null && _playerManager.LocalSession != null)
+                                {
+                                    loadout.EnsureValid(Profile, _playerManager.LocalSession, collection);
+                                }
+                                else
+                                {
+                                    _sawmill.Warning("Skipping RoleLoadout.EnsureValid because Profile or LocalSession is null");
+                                }
+                            }
 
                             OpenLoadout(job, loadout, roleLoadoutProto);
+                            // End RMC14
                         };
                     }
 
@@ -1257,6 +1271,9 @@ namespace Content.Client.Lobby.UI
             _loadoutWindow.OnLoadoutPressed += (loadoutGroup, loadoutProto) =>
             {
                 roleLoadout.AddLoadout(loadoutGroup, loadoutProto, _prototypeManager);
+                //RMC14 - Re-validate and recalculate points after changing the selected loadouts
+                roleLoadout.EnsureValid(Profile, session, collection);
+                //end RMC14 
                 _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
                 Profile = Profile?.WithLoadout(roleLoadout);
                 ReloadPreview();
@@ -1265,6 +1282,9 @@ namespace Content.Client.Lobby.UI
             _loadoutWindow.OnLoadoutUnpressed += (loadoutGroup, loadoutProto) =>
             {
                 roleLoadout.RemoveLoadout(loadoutGroup, loadoutProto, _prototypeManager);
+                //RMC14 - Re-validate and recalculate points after changing the selected loadouts
+                roleLoadout.EnsureValid(Profile, session, collection);
+                //end RMC14 
                 _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
                 Profile = Profile?.WithLoadout(roleLoadout);
                 ReloadPreview();

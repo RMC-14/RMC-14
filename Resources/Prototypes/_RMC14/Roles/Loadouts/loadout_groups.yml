@@ -86,7 +86,7 @@
   id: EyewearRMC
   name: rmc-loadout-group-eyewear
   minLimit: 0
-  maxLimit: 12
+  maxLimit: 2
   loadouts:
   - AviatorsRMC
   - EyepatchRMC
@@ -124,7 +124,7 @@
   id: EyewearRMCPVE
   name: rmc-loadout-group-eyewear
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 2
   loadouts:
   - AviatorsRMC
   - EyepatchRMC
@@ -166,7 +166,7 @@
   id: MasksRMC
   name: rmc-loadout-group-masks
   minLimit: 0
-  maxLimit: 21
+  maxLimit: 2
   loadouts:
   - BalaclavaRMC
   - BalaclavaGreenRMC
@@ -209,7 +209,7 @@
   id: MasksRMCPVE
   name: rmc-loadout-group-masks
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 2
   loadouts:
   - BalaclavaRMC
   - CoifRMC
@@ -266,7 +266,7 @@
   id: HeadwearRMC
   name: rmc-loadout-group-headwear
   minLimit: 0
-  maxLimit: 10
+  maxLimit: 2
   loadouts:
   - SquadBeretRMC
   - GreenBeretRMC
@@ -291,7 +291,7 @@
   id: HeadwearRMCPVE
   name: rmc-loadout-group-headwear
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 2
   loadouts:
   - BrownHeadbandRMC
   - GreenHeadbandRMC
@@ -320,7 +320,7 @@
   id: HelmetGarbsRMC
   name: rmc-loadout-group-helmet-garbs
   minLimit: 0
-  maxLimit: 10
+  maxLimit: 5
   loadouts:
   - FakeNVGRMC
   - FakeNVGPVERMC
@@ -413,7 +413,7 @@
   id: AccessoriesRMC
   name: rmc-loadout-group-accessories
   minLimit: 0
-  maxLimit: 10
+  maxLimit: 3
   loadouts:
   - UNMCSquadPatchRMC
   - SquadArmbandRMC
@@ -464,7 +464,7 @@
   id: PaperworkRMC
   name: rmc-loadout-group-paperwork
   minLimit: 0
-  maxLimit: 9
+  maxLimit: 5
   loadouts:
   - PenRMC
   - PenFountainRMC
@@ -482,7 +482,7 @@
   id: PlushiesRMC
   name: rmc-loadout-group-plushies
   minLimit: 0
-  maxLimit: 7
+  maxLimit: 2
   loadouts:
   - PlushieFarwaRMC
   - PlushieBarricadeRMC
@@ -501,7 +501,7 @@
   id: RecreationalRMC
   name: rmc-loadout-group-recreational
   minLimit: 0
-  maxLimit: 7
+  maxLimit: 3
   loadouts:
   - CassettePlayerRMC
   - MagazineBootsN54RMC
@@ -542,7 +542,7 @@
   id: WeaponsRMC
   name: rmc-loadout-group-weapons
   minLimit: 0
-  maxLimit: 7
+  maxLimit: 1
   loadouts:
   - HoldoutPistolRMC
   - CustomM1984RMC
@@ -576,7 +576,7 @@
   id: CannedDrinksRMC
   name: rmc-loadout-group-canned-drinks
   minLimit: 0
-  maxLimit: 14
+  maxLimit: 5
   loadouts:
   - BottledWaterRMC
   - GrapeJuiceRMC
@@ -599,7 +599,7 @@
   id: FlasksRMC
   name: rmc-loadout-group-flasks
   minLimit: 0
-  maxLimit: 2
+  maxLimit: 1
   loadouts:
   - CanteenRMC
   - MetalFlaskRMC
@@ -609,7 +609,7 @@
   id: SmokablesRMC
   name: rmc-loadout-group-smokables
   minLimit: 0
-  maxLimit: 11
+  maxLimit: 5
   loadouts:
   - LuckySlothsPackRMC
   - ArcturianAcePackRMC
@@ -635,7 +635,7 @@
   id: MiscellaneousRMC
   name: rmc-loadout-group-miscellaneous
   minLimit: 0
-  maxLimit: 7
+  maxLimit: 3
   loadouts:
   - StraightRazorRMC
   - BootsJungleFilledRMC
@@ -693,7 +693,7 @@
   id: RMCLoadoutGroupPins
   name: rmc-loadout-group-pins
   minLimit: 0
-  maxLimit: 13
+  maxLimit: 5
   loadouts:
   - RMCPinLGBT
   - RMCPinAromantic
@@ -998,7 +998,7 @@
   id: CivilianOnlyRMC
   name: rmc-loadout-group-civilian
   minLimit: 0
-  maxLimit: 7
+  maxLimit: 5
   loadouts:
   - PatchWeYaRMC
   - PatchWeYaRMCSquare
