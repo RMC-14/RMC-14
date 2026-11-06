@@ -57,12 +57,15 @@
       effects:
       - !type:SatiateThirst
         factor: 2
-      - !type:AdjustReagent
-        reagent: Oculine
-        amount: 0.5
-      - !type:AdjustReagent
-        reagent: Nutriment
-        amount: 0.5
+# RMC-14 - remove nutri and oculine, heal eye damage directly
+#
+#      - !type:AdjustReagent
+#        reagent: Oculine
+#        amount: 0.5
+#      - !type:AdjustReagent
+#        reagent: Nutriment
+#        amount: 0.5
+      - !type:ChemHealEyeDamage
 
 - type: reagent
   id: JuiceGrape
