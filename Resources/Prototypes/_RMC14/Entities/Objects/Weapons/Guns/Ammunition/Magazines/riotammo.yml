@@ -113,11 +113,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    damage:
-      types:
-        Blunt: 3
+    damage: {}
   - type: RMCStaminaDamageOnCollide
-    damage: 12.5
+    damage: 15
   - type: CMArmorPiercing
     amount: 5
   - type: RMCProjectileAccuracy
@@ -172,9 +170,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    damage:
-      types:
-        Blunt: 3
+    damage: {}
   - type: RMCStaminaDamageOnCollide
     damage: 10
   - type: CMArmorPiercing
@@ -260,11 +256,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    damage:
-      types:
-        Blunt: 3
+    damage: {}
   - type: RMCStaminaDamageOnCollide
-    damage: 10
+    damage: 25
 
 ## Tags
 

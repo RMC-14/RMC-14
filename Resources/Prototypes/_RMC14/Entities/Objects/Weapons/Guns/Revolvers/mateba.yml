@@ -104,6 +104,8 @@
     requiredSkills:
       RMCSkillLeadership: 3
   - type: RMCBattleExecute
+  - type: BlackMarketValue
+    value: 100
 
 - type: entity
   parent: RMCWeaponRevolverMateba

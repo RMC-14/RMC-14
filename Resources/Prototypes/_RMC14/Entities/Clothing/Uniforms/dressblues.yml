@@ -7,6 +7,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/enlisted.rsi
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -16,6 +18,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/senior.rsi
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -25,6 +29,5 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/general.rsi
-
-
-
+  - type: BlackMarketValue
+    value: 15

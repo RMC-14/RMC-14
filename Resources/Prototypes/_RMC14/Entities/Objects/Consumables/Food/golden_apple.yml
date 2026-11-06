@@ -13,3 +13,5 @@
           Quantity: 10
         - ReagentId: RMCGold
           Quantity: 2
+  - type: BlackMarketValue
+    value: 30

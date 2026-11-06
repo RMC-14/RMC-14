@@ -1,8 +1,7 @@
 - type: entity
   parent: BaseItem
-  id: RMCStunBatonDamaged
-  name: damaged stun baton
-  description: A stun baton for incapacitating people with. This one seems pretty broken and beat up, especially around the on/off switch..
+  id: RMCBaseStunBaton
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/stun_baton.rsi
@@ -20,13 +19,67 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-     enum.ToggleableVisuals.Enabled:
+      enum.ToggleableVisuals.Enabled:
         enum.ToggleableVisuals.Layer:
           True: {state: stunbaton_on}
           False: {state: stunbaton_off}
 
 - type: entity
-  parent: RMCStunBatonDamaged
+  parent: RMCBaseStunBaton
+  id: RMCStunBatonDamaged
+  name: damaged stun baton
+  description: A stun baton for incapacitating people with. This one seems pretty broken and beat up, especially around the on/off switch..
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 12
+    angle: 60
+    animation: WeaponArcThrust
+  - type: Stunbaton
+    energyPerUse: 50
+  - type: RMCStaminaDamageOnHit
+    damage: 100
+    jitterDuration: 2
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundDeactivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedDamage:
+      types:
+        Blunt: 0
+  - type: RMCStaminaDamageOnCollide
+    damage: 35
+  - type: LandAtCursor # it deals stamina damage when thrown
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: UseDelay
+  - type: DisarmMalus
+    malus: 0.225
+
+- type: entity
+  parent: RMCBaseStunBaton
   id: CMStunbaton
   name: stun baton
   description: A stun baton for incapacitating people with.
@@ -100,3 +153,70 @@
   components:
   - type: Item
     size: Small
+
+- type: entity
+  parent: BaseItem
+  id: RMCStunprod
+  name: stunprod
+  description: An improvised stun baton.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/stunprod.rsi
+    layers:
+    - state: icon
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Item
+    size: Normal
+  - type: Stunbaton
+    energyPerUse: 250
+  - type: RMCStaminaDamageOnHit
+    damage: 40
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundDeactivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedDamage:
+      types:
+        Blunt: 0
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 3
+    angle: 60
+    animation: WeaponArcThrust
+  - type: RMCStaminaDamageOnCollide
+    damage: 25
+  - type: LandAtCursor
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: UseDelay
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: icon }
+          False: { state: icon }
