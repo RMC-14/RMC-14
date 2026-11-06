@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
@@ -30,7 +31,7 @@ public sealed partial class Embryonic : RMCChemicalEffect
             return;
         }
 
-        var slot = Math.Min((int) Potency % 10, 5);
+        var slot = Math.Clamp((int) Potency, HiveSlots.Normal, HiveSlots.Delta);
         var hive = Ciphering.GetHiveBySlot(entities, slot);
         entities.System<SharedXenoParasiteSystem>().Infect(target, hive);
     }

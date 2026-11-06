@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
@@ -13,23 +12,19 @@ namespace Content.Shared._RMC14.Chemistry.Generation;
 
 public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-
-    private bool _inserting;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, InteractUsingEvent>(OnInteractUsing, before: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, InteractHandEvent>(OnInteractHand, before: [typeof(ItemSlotsSystem)]);
-        SubscribeLocalEvent<RMCReagentAnalyzerComponent, RMCReagentAnalyzerConfigureDoAfterEvent>(OnConfigureDoAfter);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<RMCReagentAnalyzerComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
@@ -41,10 +36,10 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
         var user = args.User;
-        if (ent.Comp.Processing)
+        if (IsProcessing(ent))
         {
+            args.Handled = true;
             _popup.PopupClient($"{Name(ent)} is still processing!", ent, user, PopupType.SmallCaution);
             return;
         }
@@ -52,39 +47,16 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
         if (TryComp(ent, out RequiresSkillComponent? requiresSkill) &&
             !_skills.HasAllSkills(user, requiresSkill.Skills))
         {
+            args.Handled = true;
             _popup.PopupClient("You have no idea how to use this.", ent, user, PopupType.SmallCaution);
             return;
         }
 
         if (!HasComp<VialComponent>(args.Used))
         {
+            args.Handled = true;
             _popup.PopupClient($"{Name(ent)} only accepts samples in vials.", ent, user, PopupType.SmallCaution);
-            return;
         }
-
-        if (!_itemSlots.TryGetSlot(ent, ent.Comp.SampleSlotId, out var slot))
-            return;
-
-        if (slot.HasItem)
-        {
-            _popup.PopupClient($"Something is already loaded into {Name(ent)}.", ent, user, PopupType.SmallCaution);
-            return;
-        }
-
-        _inserting = true;
-        var inserted = _itemSlots.TryInsertFromHand(ent, slot, user, excludeUserAudio: true);
-        _inserting = false;
-        if (!inserted)
-            return;
-
-        _popup.PopupClient($"You insert {Name(args.Used)} and start configuring {Name(ent)}.", ent, user);
-
-        var doAfter = new DoAfterArgs(EntityManager, user, ent.Comp.ConfigureDelay, new RMCReagentAnalyzerConfigureDoAfterEvent(), ent, ent)
-        {
-            BreakOnMove = true,
-            BreakOnDamage = true,
-        };
-        _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnInteractHand(Entity<RMCReagentAnalyzerComponent> ent, ref InteractHandEvent args)
@@ -94,7 +66,7 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
 
         args.Handled = true;
         var user = args.User;
-        if (ent.Comp.Processing)
+        if (IsProcessing(ent))
         {
             _popup.PopupClient($"{Name(ent)} is still processing!", ent, user, PopupType.SmallCaution);
             return;
@@ -112,81 +84,75 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
         _popup.PopupClient($"You remove {Name(sample)} from {Name(ent)}.", ent, user);
     }
 
-    private void OnConfigureDoAfter(Entity<RMCReagentAnalyzerComponent> ent, ref RMCReagentAnalyzerConfigureDoAfterEvent args)
+    private void OnInsertAttempt(Entity<RMCReagentAnalyzerComponent> ent, ref ItemSlotInsertAttemptEvent args)
     {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-        if (ent.Comp.Processing)
-            return;
-
-        if (GetSample(ent) is not { } sample)
+        if (IsProcessing(ent))
         {
-            _popup.PopupClient("Someone else removed the sample. Make up your mind!", ent, args.User, PopupType.SmallCaution);
+            args.Cancelled = true;
             return;
         }
 
-        ent.Comp.Processing = true;
-        ent.Comp.ProcessEndTime = Timing.CurTime + ent.Comp.ProcessDelay;
-        ent.Comp.ProcessSoundTime = ent.Comp.ProcessEndTime - ent.Comp.ProcessSoundLead;
-        ent.Comp.VisualState = IsValidSample(ent, sample)
-            ? RMCReagentAnalyzerVisualState.Processing
-            : RMCReagentAnalyzerVisualState.Error;
-        Dirty(ent);
-        UpdateAppearance(ent);
-    }
-
-    private void OnInsertAttempt(Entity<RMCReagentAnalyzerComponent> ent, ref ItemSlotInsertAttemptEvent args)
-    {
-        if (ent.Comp.Processing || !_inserting)
+        if (args.User is { } user &&
+            TryComp(ent, out RequiresSkillComponent? requiresSkill) &&
+            !_skills.HasAllSkills(user, requiresSkill.Skills))
+        {
             args.Cancelled = true;
+        }
     }
 
     private void OnEjectAttempt(Entity<RMCReagentAnalyzerComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
-        if (ent.Comp.Processing)
+        if (IsProcessing(ent))
             args.Cancelled = true;
     }
 
     private void OnInserted(Entity<RMCReagentAnalyzerComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != ent.Comp.SampleSlotId || ent.Comp.Processing)
+        if (_timing.ApplyingState || args.Container.ID != ent.Comp.SampleSlotId || IsProcessing(ent))
             return;
 
-        ent.Comp.VisualState = RMCReagentAnalyzerVisualState.Sample;
-        Dirty(ent);
-        UpdateAppearance(ent);
+        var processing = EnsureComp<RMCReagentAnalyzerProcessingComponent>(ent);
+        processing.EndTime = _timing.CurTime + ent.Comp.ProcessDelay;
+        processing.SoundTime = processing.EndTime - ent.Comp.ProcessSoundLead;
+        SetVisualState(ent, IsValidSample(ent, args.Entity)
+            ? RMCReagentAnalyzerVisualState.Processing
+            : RMCReagentAnalyzerVisualState.Error);
     }
 
     private void OnRemoved(Entity<RMCReagentAnalyzerComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != ent.Comp.SampleSlotId || ent.Comp.Processing)
+        if (args.Container.ID != ent.Comp.SampleSlotId || IsProcessing(ent))
             return;
 
-        ent.Comp.VisualState = RMCReagentAnalyzerVisualState.Idle;
-        Dirty(ent);
-        UpdateAppearance(ent);
+        SetVisualState(ent, RMCReagentAnalyzerVisualState.Idle);
     }
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<RMCReagentAnalyzerComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        var query = EntityQueryEnumerator<RMCReagentAnalyzerProcessingComponent, RMCReagentAnalyzerComponent>();
+        while (query.MoveNext(out var uid, out var processing, out var analyzer))
         {
-            if (comp.ProcessSoundTime is { } soundTime && Timing.CurTime >= soundTime)
+            if (processing.SoundTime is { } soundTime && time >= soundTime)
             {
-                comp.ProcessSoundTime = null;
-                if (_net.IsServer)
-                    _audio.PlayPvs(comp.ProcessSound, uid);
+                processing.SoundTime = null;
+                _audio.PlayPvs(analyzer.ProcessSound, uid);
             }
 
-            if (!comp.Processing || comp.ProcessEndTime is not { } end || Timing.CurTime < end)
+            if (time < processing.EndTime)
                 continue;
 
-            comp.ProcessEndTime = null;
-            DoAnalysis((uid, comp));
+            RemCompDeferred<RMCReagentAnalyzerProcessingComponent>(uid);
+            DoAnalysis((uid, analyzer));
         }
+    }
+
+    private bool IsProcessing(EntityUid analyzer)
+    {
+        return HasComp<RMCReagentAnalyzerProcessingComponent>(analyzer);
     }
 
     private bool IsValidSample(Entity<RMCReagentAnalyzerComponent> ent, EntityUid sample)
@@ -201,9 +167,9 @@ public abstract class SharedRMCReagentAnalyzerSystem : EntitySystem
         return _itemSlots.TryGetSlot(ent, ent.Comp.SampleSlotId, out var slot) ? slot.Item : null;
     }
 
-    protected void UpdateAppearance(Entity<RMCReagentAnalyzerComponent> ent)
+    protected void SetVisualState(EntityUid analyzer, RMCReagentAnalyzerVisualState state)
     {
-        _appearance.SetData(ent, RMCReagentAnalyzerVisuals.State, ent.Comp.VisualState);
+        _appearance.SetData(analyzer, RMCReagentAnalyzerVisuals.State, state);
     }
 
     protected virtual void DoAnalysis(Entity<RMCReagentAnalyzerComponent> ent)

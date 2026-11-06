@@ -23,10 +23,6 @@ public sealed class RMCReagentAnalyzerSystem : SharedRMCReagentAnalyzerSystem
 
     protected override void DoAnalysis(Entity<RMCReagentAnalyzerComponent> ent)
     {
-        var comp = ent.Comp;
-        comp.Processing = false;
-        Dirty(ent);
-
         try
         {
             AnalyzeSample(ent);
@@ -71,11 +67,10 @@ public sealed class RMCReagentAnalyzerSystem : SharedRMCReagentAnalyzerSystem
 
         _metaData.SetEntityName(sampleUid, $"vial ({reagent.LocalizedName})");
 
-        comp.VisualState = RMCReagentAnalyzerVisualState.Finished;
-        Dirty(ent);
-        UpdateAppearance(ent);
+        SetVisualState(ent, RMCReagentAnalyzerVisualState.Finished);
 
         _generator.PrintReport(Transform(ent).Coordinates, reagentId, reagent, comp.SampleNumber++, "XRF Scans");
+        Dirty(ent);
         _audio.PlayPvs(comp.FinishSound, ent);
 
         if (reagent.ChemClass >= ChemClass.Special && !_research.IsIdentified(reagentId))
@@ -94,11 +89,10 @@ public sealed class RMCReagentAnalyzerSystem : SharedRMCReagentAnalyzerSystem
     private void Fail(Entity<RMCReagentAnalyzerComponent> ent, string reason)
     {
         var comp = ent.Comp;
-        comp.VisualState = RMCReagentAnalyzerVisualState.Failed;
-        Dirty(ent);
-        UpdateAppearance(ent);
+        SetVisualState(ent, RMCReagentAnalyzerVisualState.Failed);
 
         _generator.PrintErrorReport(Transform(ent).Coordinates, reason, comp.SampleNumber++);
+        Dirty(ent);
         _audio.PlayPvs(comp.FailSound, ent);
     }
 }
