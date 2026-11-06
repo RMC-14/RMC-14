@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: BlueMoon059
-  changes:
-  - message: Fixed a small formatting error with the M74AGM grenade packets, to make
-      sure they match.
-    type: Fix
-  id: 3229
-  time: '2026-05-25T05:57:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9918
-- author: BlueMoon059
-  changes:
-  - message: The M804 Heavygunner Rig has had its whitelisted items adjusted to remove
-      unintended additions.
-    type: Fix
-  id: 3230
-  time: '2026-05-25T19:09:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9916
-- author: kleinerstation13
-  changes:
-  - message: Survivors now spawn together instead of separately on Fiorina. Their
-      holdout locations include the Lowsec Cellblock, Garden, Engineering Ring, and
-      Bobda Promo. Credit to Sharksnake98 for mapping the Engineering Ring insert.
-    type: Tweak
-  id: 3231
-  time: '2026-05-28T20:39:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9924
 - author: IceNoobXD
   changes:
   - message: Added the intact (10%) and flooded (20%) sand temple inserts to LV-624
@@ -4523,5 +4498,32 @@
   id: 3728
   time: '2026-11-06T23:15:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9531
+- author: kleinerstation13
+  changes:
+  - message: Provost inspectors now have access to the MP equipment vendor.
+    type: Tweak
+  - message: SOP and MLaw books are now in SecTech vendors, as well as being recommended
+      in the MP equipment vendor.
+    type: Tweak
+  id: 3729
+  time: '2026-11-06T23:19:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11048
+- author: Vermidia
+  changes:
+  - message: Added Xeno Last Stand. When there is one xeno left they get told this,
+      fully healed, and can no longer heal from any sources, unless they're a queen.
+    type: Add
+  id: 3730
+  time: '2026-11-06T23:18:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10409
+- author: Dalothis
+  changes:
+  - message: PVE headsets have been brought up to feature parity with each other.
+    type: Tweak
+  - message: PVE leadership roles now have headsets that enlarge their radio messages.
+    type: Tweak
+  id: 3731
+  time: '2026-11-06T23:20:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11024
 Name: RMC14
 Order: -1
