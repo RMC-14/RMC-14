@@ -354,6 +354,19 @@
   parent: RMCBoxMREEmpty
   name: box of WEYA-brand Ration Packs (x12)
   description: A box of Weston-Yamada Ration Packs. Often found on Company-owned colonies.
+  id: RMCBoxMREWEYAEmpty
+  suffix: Empty, WEYA
+  components:
+  - type: CMItemSlots
+    count: 12
+    slot:
+      name: WEYA
+      whitelist:
+        tags:
+        - MRE
+
+- type: entity
+  parent: RMCBoxMREWEYAEmpty
   id: RMCBoxMREWEYA
   suffix: Filled, WEYA
   components:

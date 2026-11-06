@@ -776,6 +776,48 @@
     supplyDrop: false
     minimapColor: '#5A4501E7'
 
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplex
+  id: RMCAreaKutjevoInteriorComplexNorthGarage
+  name: Kutjevo Complex - North Garage
+  components:
+  - type: Sprite
+    state: colony_int
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    paradropping: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+    minimapColor: '#A22D2DEE'
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplex
+  id: RMCAreaKutjevoInteriorComplexNorthwestCorporateOffice
+  name: Kutjevo Complex - Northwest Corporate Office
+  components:
+  - type: Sprite
+    state: colony_int
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    paradropping: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+    minimapColor: '#A22D2DEE'
+    landingZone: true
+
 # CLF insert areas
 - type: entity
   parent: RMCAreaKutjevoInteriorColony
