@@ -193,6 +193,8 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         {
             SelectedLoadouts.Remove(value);
         }
+
+        RecalculatePoints(protoManager); // RMC14 Loadout Fix
     }
 
     private void Apply(LoadoutPrototype loadoutProto)
@@ -205,6 +207,33 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         if (loadoutProto.Cost != null && Points != null)
             Points -= loadoutProto.Cost;
     }
+
+    // RMC14 Loadout Fix Start
+    public void RecalculatePoints(IPrototypeManager protoManager)
+    {
+        if (!protoManager.TryIndex(Role, out var roleProto) || roleProto.Points == null)
+        {
+            Points = null;
+            return;
+        }
+
+        var points = roleProto.Points.Value;
+
+        foreach (var (_, groupLoadouts) in SelectedLoadouts)
+        {
+            foreach (var selected in groupLoadouts)
+            {
+                if (!protoManager.TryIndex(selected.Prototype, out var loadoutProto))
+                    continue;
+
+                if (loadoutProto.Cost != null)
+                    points -= loadoutProto.Cost.Value;
+            }
+        }
+
+        Points = points;
+    }
+    // RMC14 Loadout Fix End
 
     /// <summary>
     /// Resets the selected loadouts to default if no data is present.
@@ -220,6 +249,8 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         var collection = IoCManager.Instance!;
         var roleProto = protoManager.Index(Role);
 
+        Points = roleProto.Points; // RMC14 Loadout Fix
+
         for (var i = roleProto.Groups.Count - 1; i >= 0; i--)
         {
             var group = roleProto.Groups[i];
@@ -233,7 +264,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             var loadouts = new List<Loadout>();
             SelectedLoadouts[group] = loadouts;
 
-            Points = roleProto.Points;
+            //Points = roleProto.Points; // RMC14 Loadout Fix
 
             if (groupProto.MinLimit > 0)
             {
@@ -261,6 +292,8 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
                 }
             }
         }
+
+        RecalculatePoints(protoManager); // RMC14 Loadout Fix
     }
 
     /// <summary>
@@ -340,6 +373,8 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             Prototype = selectedLoadout,
         });
 
+        RecalculatePoints(protoManager); // RMC14 Loadout Fix
+
         return true;
     }
 
@@ -360,6 +395,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
                 continue;
 
             groupLoadouts.RemoveAt(i);
+            RecalculatePoints(protoManager); // RMC14 Loadout Fix
             return true;
         }
 
