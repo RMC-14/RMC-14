@@ -19,6 +19,7 @@ public sealed class RMCInteractionSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<InteractedBlacklistComponent, GettingInteractedWithAttemptEvent>(OnBlacklistInteractionAttempt);
+        SubscribeLocalEvent<InteractedBlacklistComponent, CombatModeShouldHandInteractEvent>(OnBlacklistCombatInteractionAttempt);
         SubscribeLocalEvent<NoHandsInteractionBlockedComponent, GettingInteractedWithAttemptEvent>(OnNoHandsInteractionAttempt);
         SubscribeLocalEvent<InsertBlacklistComponent, ContainerIsInsertingAttemptEvent>(OnInsertBlacklistContainerIsInsertingAttempt);
         SubscribeLocalEvent<IgnoreInteractionRangeComponent, InRangeOverrideEvent>(OnInRangeOverride);
@@ -42,22 +43,41 @@ public sealed class RMCInteractionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnBlacklistInteractionAttempt(Entity<InteractedBlacklistComponent> ent, ref GettingInteractedWithAttemptEvent args)
+    private bool BlockInteraction(Entity<InteractedBlacklistComponent> ent, EntityUid user)
     {
-        if (args.Cancelled || ent.Comp.Blacklist == null)
-            return;
+        if (ent.Comp.Blacklist == null)
+            return false;
 
         if (!TryComp(ent, out TransformComponent? xform))
-            return;
+            return false;
 
         if (ent.Comp.AnchoredOnly && !xform.Anchored)
-            return;
+            return false;
 
+        // Allows xenos to disable flashlights, even though they normally can't interact with them.
         if (TryComp(ent, out HandheldLightComponent? handheldLight) && handheldLight.Activated)
+            return false;
+
+        if (_whitelist.IsValid(ent.Comp.Blacklist, user))
+            return true;
+
+        return false;
+    }
+
+    private void OnBlacklistInteractionAttempt(Entity<InteractedBlacklistComponent> ent, ref GettingInteractedWithAttemptEvent args)
+    {
+        if (args.Cancelled)
             return;
 
-        if (_whitelist.IsValid(ent.Comp.Blacklist, args.Uid))
-            args.Cancelled = true;
+        args.Cancelled = BlockInteraction(ent, args.Uid);
+    }
+
+    private void OnBlacklistCombatInteractionAttempt(Entity<InteractedBlacklistComponent> ent, ref CombatModeShouldHandInteractEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        args.Cancelled = BlockInteraction(ent, args.User);
     }
 
     private void OnInsertBlacklistContainerIsInsertingAttempt(Entity<InsertBlacklistComponent> ent, ref ContainerIsInsertingAttemptEvent args)

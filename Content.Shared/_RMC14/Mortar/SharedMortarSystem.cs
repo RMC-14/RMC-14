@@ -76,7 +76,6 @@ public abstract class SharedMortarSystem : EntitySystem
         SubscribeLocalEvent<MortarComponent, AnchorStateChangedEvent>(OnMortarAnchorStateChanged);
         SubscribeLocalEvent<MortarComponent, ExaminedEvent>(OnMortarExamined);
         SubscribeLocalEvent<MortarComponent, ActivatableUIOpenAttemptEvent>(OnMortarActivatableUIOpenAttempt);
-        SubscribeLocalEvent<MortarComponent, CombatModeShouldHandInteractEvent>(OnMortarShouldInteract);
         SubscribeLocalEvent<MortarComponent, DestructionEventArgs>(OnMortarDestruction);
         SubscribeLocalEvent<MortarComponent, BeforeDamageChangedEvent>(OnMortarBeforeDamageChanged);
         SubscribeLocalEvent<MortarComponent, LinkMortarLaserDesignatorDoAfterEvent>(OnMortarLinkLaserDesignatorDoAfter);
@@ -361,11 +360,6 @@ public abstract class SharedMortarSystem : EntitySystem
 
         if (!ent.Comp.Deployed)
             args.Cancel();
-    }
-
-    private void OnMortarShouldInteract(Entity<MortarComponent> ent, ref CombatModeShouldHandInteractEvent args)
-    {
-        args.Cancelled = true;
     }
 
     private void OnMortarCameraShellLand(Entity<MortarCameraShellComponent> ent, ref MortarShellLandEvent args)
