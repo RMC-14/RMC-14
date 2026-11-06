@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Roles;
+using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -46,4 +47,8 @@ public sealed partial class RankPrototype : IPrototype, IInheritingPrototype
     [AlwaysPushInheritance]
     [DataField]
     public string? Paygrade { get; set; }
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public ProtoId<JobIconPrototype>? JobIcon { get; set; }
 }
