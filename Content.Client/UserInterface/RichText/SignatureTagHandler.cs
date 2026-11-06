@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Robust.Client.UserInterface.RichText;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -17,11 +16,6 @@ public sealed class SignatureTagHandler : IMarkupTagHandler
 {
     public string Name => "signature";
     private static int _signatureCounter = 0;
-    
-    /// <summary>
-    /// Font line height set by PaperWindow to ensure buttons match text height
-    /// </summary>
-    public static float FontLineHeight { get; set; } = 16.0f; // Default fallback
 
     private static int GetSignatureIndex(MarkupNode node)
     {
@@ -89,15 +83,7 @@ public sealed class SignatureTagHandler : IMarkupTagHandler
     /// </summary>
     public bool TryCreateControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
     {
-        var btn = new Button
-        {
-            Text = "Sign",
-            MinSize = new Vector2(48, FontLineHeight + 4),
-            MaxSize = new Vector2(48, FontLineHeight + 4),
-            Margin = new Thickness(1, 2, 1, 2),
-            StyleClasses = { "ButtonSquare" },
-            TextAlign = Label.AlignMode.Center
-        };
+        var btn = new PaperTagButton(48) { Text = "Sign" };
 
         var signatureIndex = GetSignatureIndex(node);
         btn.Name = $"signature_{signatureIndex}";

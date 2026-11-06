@@ -56,11 +56,17 @@ namespace Content.Client.Paper.UI
             typeof(MonoTag),
             typeof(FormTagHandler),
             typeof(SignatureTagHandler),
-            typeof(CheckTagHandler)
+            typeof(CheckTagHandler),
+            typeof(DateTimeTagHandler),
+            typeof(TimeTagHandler),
+            typeof(OperationTagHandler),
+            typeof(PlanetTagHandler),
+            typeof(ShipTagHandler)
         };
 
         public event Action<string>? OnSaved;
         public event Action<int>? OnSignatureRequested;
+        public event Action<PaperComponent.PaperTimeStampType, int>? OnTimeStampRequested;
 
         private int _MaxInputLength = -1;
         public int MaxInputLength
@@ -235,10 +241,11 @@ namespace Content.Client.Paper.UI
             {
                 float fontLineHeight = font.GetLineHeight(1.0f);
 
-                // Set the font line height in tag handlers so buttons match text height
-                FormTagHandler.FontLineHeight = fontLineHeight;
-                SignatureTagHandler.FontLineHeight = fontLineHeight;
-                CheckTagHandler.FontLineHeight = fontLineHeight;
+                // Make inline tag buttons exactly one text line tall. The rich text label leaves taller
+                // buttons out of its measured height, so anything taller would spill off the paper.
+                // This matches the whole-pixel line height the label uses when drawing.
+                var linePixels = (int) font.GetLineHeight(UIScale);
+                PaperTagButton.SetLineHeight(linePixels / UIScale, WrittenTextLabel);
 
                 // Position the background texture so font baseline aligns with texture lines
                 _paperContentTex.ExpandMarginTop = font.GetDescent(UIScale);
@@ -270,6 +277,7 @@ namespace Content.Client.Paper.UI
             _currentState = state;
             _currentRawText = state.Text;
             var isEditing = state.Mode == PaperComponent.PaperAction.Write;
+            var wasEditing = InputContainer.Visible;
 
             // Show/hide UI elements based on edit mode
             InputContainer.Visible = isEditing;
@@ -280,13 +288,10 @@ namespace Content.Client.Paper.UI
 
             if (isEditing)
             {
-                // Reset margin to original when editing (no tag buttons visible)
                 PaperContent.Margin = _originalContentMargin;
 
-                // Initialize the text input field with server content if it's currently empty
-                // This allows editing existing documents while preserving any text the user has already typed
-                var shouldCopy = Input.TextLength == 0 && state.Text.Length > 0;
-                if (shouldCopy)
+                var shouldCopyText = Input.TextLength == 0 && state.Text.Length > 0;
+                if (!wasEditing || shouldCopyText)
                 {
                     // We can get repeated messages with state.Mode == Write if another
                     // player opens the UI for reading. In this case, don't update the
@@ -311,12 +316,7 @@ namespace Content.Client.Paper.UI
             var fm = new FormattedMessage();
             fm.AddMarkupPermissive(state.Text);
             WrittenTextLabel.SetMessage(fm, _allowedTags, DefaultTextColor);
-
-            // Add extra bottom margin based on tag count to prevent cutoff (only in read mode)
-            var tagCount = CountTags(state.Text);
-            var extraBottomMargin = tagCount * 3.0f; // 3 pixels per tag for extra height
-            PaperContent.Margin = new Thickness(_originalContentMargin.Left, _originalContentMargin.Top,
-                _originalContentMargin.Right, _originalContentMargin.Bottom + extraBottomMargin);
+            PaperContent.Margin = _originalContentMargin;
 
             // Add stamps that have been applied to this paper
             // Clear existing stamps first, then add all current ones
@@ -397,7 +397,10 @@ namespace Content.Client.Paper.UI
         /// <returns>Text with unfilled tags removed</returns>
         public static string CleanUnfilledTags(string text)
         {
-            return text.Replace("[form]", string.Empty).Replace("[signature]", string.Empty);
+            return text.Replace("[form]", string.Empty)
+                .Replace("[signature]", string.Empty)
+                .Replace("[date]", string.Empty)
+                .Replace("[time]", string.Empty);
         }
 
         /// <summary>
@@ -472,6 +475,14 @@ namespace Content.Client.Paper.UI
         public void SendSignatureRequest(int signatureIndex)
         {
             OnSignatureRequested?.Invoke(signatureIndex);
+        }
+
+        /// <summary>
+        /// Asks the server to fill the nth [date] or [time] tag with the current in-game date or time.
+        /// </summary>
+        public void SendTimeStampRequest(PaperComponent.PaperTimeStampType type, int index)
+        {
+            OnTimeStampRequested?.Invoke(type, index);
         }
 
         /// <summary>
@@ -729,32 +740,6 @@ namespace Content.Client.Paper.UI
 
             // Index not found, return original text unchanged
             return text;
-        }
-
-        /// <summary>
-        /// Counts the total number of interactive tags that create taller buttons.
-        /// </summary>
-        private static int CountTags(string text)
-        {
-            var formCount = CountOccurrences(text, "[form]");
-            var signatureCount = CountOccurrences(text, "[signature]");
-            var checkCount = CountOccurrences(text, "[check]");
-            return formCount + signatureCount + checkCount;
-        }
-
-        /// <summary>
-        /// Counts occurrences of a substring in text.
-        /// </summary>
-        private static int CountOccurrences(string text, string substring)
-        {
-            var count = 0;
-            var pos = 0;
-            while ((pos = text.IndexOf(substring, pos)) != -1)
-            {
-                count++;
-                pos += substring.Length;
-            }
-            return count;
         }
 
         public Color BackgroundColor
