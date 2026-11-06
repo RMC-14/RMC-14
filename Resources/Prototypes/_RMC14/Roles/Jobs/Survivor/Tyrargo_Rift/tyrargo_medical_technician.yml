@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: RMCSurvivorTyrargoBase
   id: RMCSurvivorTyrargoCMT
   name: rmc-job-name-tyrargo-cmt

@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: RMCSurvivorTyrargoBase
   id: RMCSurvivorTyrargoSynth
   name: rmc-job-name-forecon-synth

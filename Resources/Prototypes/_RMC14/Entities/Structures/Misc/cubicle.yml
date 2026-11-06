@@ -1,0 +1,64 @@
+﻿- type: entity
+  parent: WindowDirectional
+  id: RMCCubicleWall
+  name: cubicle wall
+  description: A plastic cubicle wall, used to separate offices.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.38"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: RotationDrawDepth
+    defaultDrawDepth: SmallMobs
+    southDrawDepth: OverMobs
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/cubicle.rsi
+    state: cubicle
+  - type: Icon
+    sprite: _RMC14/Structures/Props/cubicle.rsi
+    state: cubicle
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #Excess damage check.
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 25 #TODO RMC14: Proper damage values.
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCSheetPlastic:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: SpriteFade
+
+- type: entity
+  parent: RMCCubicleWall
+  id: RMCCubicleWallAltDrawDepth
+  suffix: Alt Drawdepth
+  components:
+  - type: Sprite
+    drawdepth: WallTops
