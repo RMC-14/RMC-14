@@ -37,7 +37,7 @@
         state: doctor
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_medical
+        state: background_officer
     - type: MutinyEligible
 
 - type: startingGear

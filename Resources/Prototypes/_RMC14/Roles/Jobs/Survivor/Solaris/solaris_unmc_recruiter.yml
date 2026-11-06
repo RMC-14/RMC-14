@@ -25,6 +25,12 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: recruiter
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_officer
   useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
