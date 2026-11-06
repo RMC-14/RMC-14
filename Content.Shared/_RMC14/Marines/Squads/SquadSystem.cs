@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Admin;
@@ -134,7 +134,7 @@ public sealed class SquadSystem : EntitySystem
             return;
 
         var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
-        var layer = $"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}";
+        var layer = $"squad_{nameof(SquadArmorLayers)}.{ent.Comp.Layer}";
         if (args.Layers.Any(l => l.Item1 == layer))
             return;
 
