@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 07/29/2026 11:33:32
-  entityCount: 2024
+  time: 11/07/2026 09:52:30
+  entityCount: 2025
 maps:
 - 1
 grids:
@@ -3566,13 +3566,6 @@ entities:
     components:
     - type: Transform
       pos: -5.821694,-3.2315395
-      parent: 2
-- proto: CMIV
-  entities:
-  - uid: 350
-    components:
-    - type: Transform
-      pos: -7.5,1.5
       parent: 2
 - proto: CMKelotaneAutoInjector
   entities:
@@ -12759,6 +12752,13 @@ entities:
     - type: Transform
       pos: 5.5,-11.5
       parent: 2
+- proto: RMCIVStand
+  entities:
+  - uid: 350
+    components:
+    - type: Transform
+      pos: -7.5,1.5
+      parent: 2
 - proto: RMCKitchenReagentGrinder
   entities:
   - uid: 925
@@ -13350,6 +13350,13 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
+- proto: RMCOxycodoneAutoInjector
+  entities:
+  - uid: 2025
+    components:
+    - type: Transform
+      pos: -5.193238,-3.481322
+      parent: 2
 - proto: RMCPortableGenerator2
   entities:
   - uid: 1006
