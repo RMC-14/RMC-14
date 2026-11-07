@@ -201,3 +201,10 @@ rmc-xeno-designer-popup = You are hive's designer, go and expand the hive beyond
 rmc-xeno-magicalgirl-name = Magical Girl
 rmc-xeno-magicalgirl-description = Receive your Plasma Wand from The Queen Mother and transform into your Magical Girl form to combat the forces of evil!
 rmc-xeno-magicalgirl-popup = With the power of Plasma and Resin! Transform!
+
+rmc-xeno-destrain-choice = Destrain: {$caste}
+rmc-xeno-destrain-success = We shed our specialization and return to our original form.
+rmc-xeno-destrain-cooldown = We lack the strength to reset our strain. We will be able to reset it in {$minutes} {$minutes ->
+    [one] minute
+   *[other] minutes
+}.

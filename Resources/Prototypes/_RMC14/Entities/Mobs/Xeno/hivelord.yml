@@ -205,6 +205,8 @@
     name: rmc-xeno-resin-whisperer-name
     description: rmc-xeno-resin-whisperer-description
     popup: rmc-xeno-resin-whisperer-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoHivelord
   - type: XenoHidden
   - type: RMCActionOrder
     id: CMXenoHivelordResinWhisperer
@@ -294,6 +296,8 @@
     name: rmc-xeno-designer-name
     description: rmc-xeno-designer-description
     popup: rmc-xeno-designer-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoHivelord
   - type: XenoHidden
   - type: RMCActionOrder
     id: CMXenoHivelordDesigner
