@@ -70,6 +70,20 @@
 
 - type: jobIcon
   parent: CMJobIconBase
+  id: RMCJobIconGenericColonistSynthetic
+  icon:
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
+    state: generic_colonist_synth
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonistCorporate
+  icon:
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
+    state: generic_colonist_corporate
+
+- type: jobIcon
+  parent: CMJobIconBase
   id: RMCJobIconReconSynthetic
   icon:
     sprite: _RMC14/Interface/job_icons/Misc/other.rsi
@@ -131,6 +145,13 @@
   icon:
     sprite: _RMC14/Interface/job_icons/We-Ya/liaison_ranks.rsi
     state: weya_director
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconColonyAdministrator
+  icon:
+    sprite: _RMC14/Interface/job_icons/We-Ya/other.rsi
+    state: weya_admin
 
 - type: jobIcon
   parent: CMJobIconBase
