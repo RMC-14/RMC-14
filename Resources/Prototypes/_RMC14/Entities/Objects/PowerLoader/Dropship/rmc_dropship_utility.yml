@@ -13,7 +13,7 @@
   - type: DropshipUtility
     skills:
       all:
-        RMCSkillPilot: 2
+        RMCSkillPilot: 1
   - type: PowerLoaderAttachable
     attachDelay: 7
     attachableTypes:
@@ -172,6 +172,9 @@
   - type: DropshipFabricatorPrintable
     cost: 200
   - type: DropshipUtility
+  #  skills:
+  #    all:
+  #      RMCSkillPilot: 2 #todo rmc14 fix skill check not working
   - type: DropshipAttachedSprite
     sprite:
       sprite: _RMC14/Objects/dropship_utility_attachments.rsi

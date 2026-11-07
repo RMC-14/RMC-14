@@ -863,6 +863,14 @@
   name: rmc-alerts-unconscious-name
   description: rmc-alerts-unconscious-desc
 
+- type: alert
+  id: DefenderCrest
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_abilities.rsi
+    state: defender_crest
+  name: rmc-alert-xeno-crest-lowered
+  description: rmc-alert-xeno-crest-lowered-desc
+
 - type: alertCategory
   id: SquadTracker
 

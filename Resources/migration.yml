@@ -1558,3 +1558,6 @@ RMCHeadCapSPPSOF: RMCHeadCapSPPSpetsnaz
 RMCArmorHelmetSPPSOF: RMCArmorHelmetSPPSpetsnaz
 RMCMapInsertSorokyneSPPSOF: RMCMapInsertSorokyneSPPSpetsnaz
 RMCMapInsertSorokyneSPPSOFAlt: RMCMapInsertSorokyneSPPSpetsnazAlt
+
+# 2026-10-25
+CMIV: RMCIVStand
