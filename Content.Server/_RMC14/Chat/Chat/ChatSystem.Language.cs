@@ -329,7 +329,9 @@ public sealed partial class ChatSystem
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
 
-            if (MessageRangeCheck(session, data, ChatTransmitRange.GhostRangeLimit) != MessageRangeCheckResult.Full)
+            // Global ghost hearing must not relay every radio speaker on the map to admins.
+            if (data.Range < 0 ||
+                MessageRangeCheck(session, data, ChatTransmitRange.GhostRangeLimit) != MessageRangeCheckResult.Full)
                 continue;
 
             if (needsLos && !data.Observer && listener != source && !data.HasLOS)
