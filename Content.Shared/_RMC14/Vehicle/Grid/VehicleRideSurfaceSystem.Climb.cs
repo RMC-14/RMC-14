@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -176,6 +177,58 @@ public sealed partial class VehicleRideSurfaceSystem
         var localPosition = WorldToLocal(targetPosition, current);
         _transform.SetMapCoordinates((user, userXform), new MapCoordinates(targetPosition, current.MapId));
 
+        SetRider(user, vehicle, localPosition);
+
+        var vehicleIdentity = Identity.Entity(vehicle, EntityManager);
+        var selfMessage = Loc.GetString("rmc-vehicle-ride-climb-self", ("vehicle", vehicleIdentity));
+        var othersMessage = Loc.GetString("rmc-vehicle-ride-climb-others", ("user", Identity.Entity(user, EntityManager)), ("vehicle", vehicleIdentity));
+
+        _popup.PopupPredicted(selfMessage, othersMessage, user, user);
+
+        return true;
+    }
+
+    public bool TryPlaceOnSurface(EntityUid user, EntityUid vehicle, Vector2 preferredPosition)
+    {
+        if (_net.IsClient)
+            return false;
+
+        if (!TryComp(vehicle, out VehicleRideSurfaceComponent? surface))
+            return false;
+
+        var current = GetRideSurfaceTransform(Transform(vehicle));
+        if (current.MapId == MapId.Nullspace ||
+            !CanRide(vehicle, surface, user, current.MapId, out _, requireSameMap: false))
+        {
+            return false;
+        }
+
+        var preferredLocal = WorldToLocal(preferredPosition, current);
+        if (!TryGetClosestSurfaceLocal(surface, preferredLocal, out _, out var surfaceBounds))
+            return false;
+
+        EntityUid? pulled = null;
+        if (TryComp(user, out PullerComponent? puller) &&
+            puller.Pulling is { } pulledUid &&
+            CanRide(vehicle, surface, pulledUid, current.MapId, out _, requireSameMap: false))
+        {
+            pulled = pulledUid;
+        }
+
+        var localPosition = surfaceBounds.Center;
+        var targetPosition = LocalToWorld(localPosition, current);
+        var targetCoordinates = new MapCoordinates(targetPosition, current.MapId);
+        _rmcTeleporter.HandlePulling(user, targetCoordinates);
+        SetRider(user, vehicle, localPosition);
+
+        if (pulled is { } validPulled)
+            SetRider(validPulled, vehicle, localPosition);
+
+        return true;
+    }
+
+    private void SetRider(EntityUid user, EntityUid vehicle, Vector2 localPosition)
+    {
         var rider = EnsureComp<VehicleRideSurfaceRiderComponent>(user);
         if (rider.Vehicle != vehicle)
             UntrackRider(user, rider.Vehicle);
@@ -188,16 +241,6 @@ public sealed partial class VehicleRideSurfaceSystem
         rider.EdgeClimbDownAt = null;
         Dirty(user, rider);
         TrackRider(vehicle, user);
-
-        var vehicleIdentity = Identity.Entity(vehicle, EntityManager);
-        var selfMessage = Loc.GetString("rmc-vehicle-ride-climb-self", ("vehicle", vehicleIdentity));
-        var othersMessage = Loc.GetString(
-            "rmc-vehicle-ride-climb-others",
-            ("user", Identity.Entity(user, EntityManager)),
-            ("vehicle", vehicleIdentity));
-        _popup.PopupPredicted(selfMessage, othersMessage, user, user);
-
-        return true;
     }
 
     private bool TryStopRiding(EntityUid user, EntityUid vehicle, VehicleRideSurfaceComponent surface)

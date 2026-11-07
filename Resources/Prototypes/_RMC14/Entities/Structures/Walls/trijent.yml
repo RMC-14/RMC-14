@@ -35,6 +35,25 @@
     base: bunker
 
 - type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallBunkerHull
+  name: superdense bunker wall
+  description: A huge chunk of reinforced metal used to separate rooms. This one appears to be specially reinforced.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/bunker.rsi
+    state: bunker
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/bunker.rsi
+    state: bunker
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: bunker
+
+- type: entity
   parent: RMCBaseWallReinforced
   id: RMCWallChigusa
   name: facility wall
