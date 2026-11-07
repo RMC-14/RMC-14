@@ -11,4 +11,7 @@ public sealed partial class RMCFlushableSolutionComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public TimeSpan FlushTime;
+
+    [DataField, AutoNetworkedField]
+    public bool CanFlush = true;
 }
