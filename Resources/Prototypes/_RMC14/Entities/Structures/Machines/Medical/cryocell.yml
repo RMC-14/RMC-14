@@ -43,7 +43,6 @@
     useVerbs: false # Stops Alt-Click from bypassing do-after
     entryDelay: 2
     delaySelfEntry: true
-  - type: NoStunOnExit
   - type: ContainerContainer
     containers:
       cryo_cell: !type:ContainerSlot {}

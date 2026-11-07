@@ -1,10 +1,8 @@
 using Content.Shared._RMC14.Movement;
-using Content.Shared._RMC14.Storage;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
-using Content.Shared.Stunnable;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -22,7 +20,6 @@ public abstract class SharedSleeperSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -170,9 +167,6 @@ public abstract class SharedSleeperSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-
-        if (sleeper.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(sleeper))
-            _stun.TryStun(occupant, sleeper.Comp.ExitStun, true);
 
         if (_net.IsClient)
             return;

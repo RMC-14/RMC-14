@@ -30,9 +30,6 @@ public sealed partial class BodyScannerComponent : Component
     public Vector2 ConsoleSpawnOffset = new(1, 0);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
-
-    [DataField, AutoNetworkedField]
     public EntityUid? LinkedConsole;
 
     [DataField]

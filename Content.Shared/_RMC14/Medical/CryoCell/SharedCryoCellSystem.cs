@@ -1,12 +1,10 @@
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Movement;
-using Content.Shared._RMC14.Storage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Power;
-using Content.Shared.Stunnable;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
@@ -28,7 +26,6 @@ public abstract class SharedCryoCellSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -164,9 +161,6 @@ public abstract class SharedCryoCellSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-
-        if (cryoCell.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(cryoCell))
-            _stun.TryStun(occupant, cryoCell.Comp.ExitStun, true);
 
         if (_net.IsServer)
             _audio.PlayPvs(cryoCell.Comp.EjectSound, cryoCell);

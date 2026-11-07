@@ -52,9 +52,6 @@ public sealed partial class CryoCellComponent : Component
     [DataField]
     public float BeakerTransferAmount = 5f;
 
-    [DataField, AutoNetworkedField]
-    public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
-
     /// <summary>
     /// 10 * GLOBAL_STATUS_MULTIPLIER = 200 deciseconds
     /// </summary>

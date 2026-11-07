@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Movement;
-using Content.Shared._RMC14.Storage;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Containers;
 using Content.Shared.Damage;
@@ -9,7 +8,6 @@ using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
-using Content.Shared.Stunnable;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -31,7 +29,6 @@ public abstract class SharedAutodocSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -231,9 +228,6 @@ public abstract class SharedAutodocSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-
-        if (autodoc.Comp.ExitStun > TimeSpan.Zero && HasComp<NoStunOnExitComponent>(autodoc))
-            _stun.TryStun(occupant, autodoc.Comp.ExitStun, true);
 
         if (_net.IsClient)
             return;
