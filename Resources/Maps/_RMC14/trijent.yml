@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/28/2026 16:30:56
+  time: 11/06/2026 22:32:15
   entityCount: 39014
 maps:
 - 1
@@ -67788,13 +67788,6 @@ entities:
     - type: Transform
       pos: 52.5,-183.5
       parent: 1
-- proto: ChessBoard
-  entities:
-  - uid: 104
-    components:
-    - type: Transform
-      pos: 19.5,-54.5
-      parent: 1
 - proto: CigaretteSpent
   entities:
   - uid: 105
@@ -69568,7 +69561,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -56522.855
+      secondsUntilStateChange: -56704.34
       state: Opening
 - proto: CMAnestheticTank
   entities:
@@ -127549,6 +127542,13 @@ entities:
     - type: Transform
       pos: 184.5,-153.5
       parent: 1
+- proto: RMCChessBoard
+  entities:
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 19.5,-54.5
+      parent: 1
 - proto: RMCCigarCase
   entities:
   - uid: 10316
@@ -178586,31 +178586,43 @@ entities:
     - type: Transform
       pos: 51.5,-150.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18158
     components:
     - type: Transform
       pos: 50.5,-150.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18159
     components:
     - type: Transform
       pos: 56.5,-150.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18160
     components:
     - type: Transform
       pos: 55.5,-150.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18161
     components:
     - type: Transform
       pos: 50.5,-146.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18162
     components:
     - type: Transform
       pos: 50.5,-145.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18163
     components:
     - type: Transform
@@ -178644,21 +178656,29 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
+    missingComponents:
+    - AccessReader
   - uid: 18164
     components:
     - type: Transform
       pos: 204.5,-14.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18165
     components:
     - type: Transform
       pos: 209.5,-13.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18166
     components:
     - type: Transform
       pos: 207.5,-13.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 18167
     components:
     - type: Transform
@@ -178692,6 +178712,8 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
+    missingComponents:
+    - AccessReader
   - uid: 18168
     components:
     - type: Transform
@@ -178725,6 +178747,8 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
+    missingComponents:
+    - AccessReader
   - uid: 18169
     components:
     - type: Transform
@@ -178758,6 +178782,8 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
+    missingComponents:
+    - AccessReader
 - proto: RMCLockerGunBase
   entities:
   - uid: 2114
@@ -178778,6 +178804,8 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+    missingComponents:
+    - AccessReader
 - proto: RMCLockerHydro
   entities:
   - uid: 18170

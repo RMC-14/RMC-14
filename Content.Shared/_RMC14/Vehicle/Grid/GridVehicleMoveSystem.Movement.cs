@@ -273,7 +273,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             travel,
             frameTime,
             out var blocked);
-        if (blocked)
+        if (blocked && !moved)
         {
             mover.CurrentSpeed = 0f;
             _rmcVehicles.DoInteriorCrashEffect(uid, speedBeforeMove, GetModifiedMaxSpeed(uid, mover));
@@ -709,14 +709,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var sampleSteps = (int) MathF.Ceiling(limit / step);
         var lookahead = Math.Max(1, mover.TileOffsetLookahead);
 
-        // test center & both extremes before committing to full scan
-        // reversed CanOccupyMoveLane loop, each probe costs 1 query when a wall
-        // is present (fails at the farthest lookahead tile immediately). A solid wall
-        // blocking all lateral positions is detected in 3 queries total
-        if (!CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, 0f, lookahead, ignoredEntities) &&
-            !CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, limit, lookahead, ignoredEntities) &&
-            !CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, -limit, lookahead, ignoredEntities))
+        if (mover.LaneSearchSkipSteps > 0 && mover.LaneSearchCacheDir == moveDir)
         {
+            mover.LaneSearchSkipSteps--;
             return false;
         }
 
@@ -758,8 +753,14 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         }
 
         if (!foundLane)
+        {
+            mover.LaneSearchCacheDir = moveDir;
+            mover.LaneSearchSkipSteps = 2;
             return false;
+        }
 
+        mover.LaneSearchSkipSteps = 0;
+        mover.LaneSearchCacheDir = Vector2i.Zero;
         laneOffset = bestOffset;
         return true;
     }
