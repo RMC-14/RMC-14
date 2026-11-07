@@ -130,6 +130,7 @@
     radius: 1.8
     softness: 1
     autoRot: true
+    color: "#cbff60"
   - type: RMCSize
     size: Big
   - type: XenoDeathcloud
@@ -239,6 +240,8 @@
     tailDamage:
       groups:
         Brute: 30
+  - type: PointLight
+    color: "#ffc357"
   - type: XenoAcidMine
   - type: XenoAcidShotgun
   - type: XenoDeployTraps

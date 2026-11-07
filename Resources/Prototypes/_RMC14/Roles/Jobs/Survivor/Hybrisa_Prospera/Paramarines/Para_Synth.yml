@@ -3,7 +3,7 @@
   id: RMCSurvivorParaSupportSynthetic
   name: rmc-job-name-para-synth
   ranks:
-    RMCRankSyntheticColonist: [ ]
+    RMCRankParaWarrantOfficerClass2: [ ]
   startingGear: RMCGearParaSupportSynthetic
   icon: RMCJobIconParaSupportSynthetic
   playTimeTracker: RMCJobSyntheticColony
@@ -12,7 +12,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Language
-      preset: RMCLanguagePresetSynthColonist
+      preset: RMCLanguagePresetSynth
     - type: LanguageLearning
       preset: RMCLanguageLearningPresetSynthColonist
     - type: NpcFactionMember
