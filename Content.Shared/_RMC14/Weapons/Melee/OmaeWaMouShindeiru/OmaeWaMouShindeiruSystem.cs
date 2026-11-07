@@ -67,16 +67,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         }
 
         if (!ent.Comp.DamageOnHit)
-        {
-            if (TryComp(ent.Owner, out MeleeWeaponComponent? meleeWeapon))
-                _audio.PlayPvs(meleeWeapon.HitSound ?? meleeWeapon.SwingSound, args.User);
-
-            // Raise a MeleeAttackEvent so animation/effects listeners still run.
-            var attackEv = new MeleeAttackEvent(ent.Owner);
-            RaiseLocalEvent(args.User, ref attackEv);
-
             args.Handled = true;
-        }
     }
 
     private void OmaeWaMouShindeiru(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
