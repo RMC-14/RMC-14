@@ -1548,3 +1548,6 @@ CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle
 #2026-09-22
 ChessBoard: RMCChessBoard
 CheckerBoard: RMCCheckerBoard
+
+# 2026-10-25
+CMIV: RMCIVStand
