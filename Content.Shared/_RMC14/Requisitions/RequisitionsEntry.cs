@@ -9,6 +9,15 @@ namespace Content.Shared._RMC14.Requisitions;
 [Serializable, NetSerializable]
 public sealed partial class RequisitionsEntry
 {
+    public RequisitionsOrderDetails? Request;
+
+    [DataField]
+    public bool Unit;
+
+    public bool NoReturnReward;
+
+    public List<RequisitionsDeliveryLine> RequestLines = new();
+
     [DataField]
     public LocId? Name;
 

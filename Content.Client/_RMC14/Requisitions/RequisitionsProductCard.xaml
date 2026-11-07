@@ -32,11 +32,9 @@
                             ToolTip="{Loc rmc-requisitions-remove-tooltip}"
                             StyleClasses="ButtonSquare"
                             MinWidth="32" />
-                    <Label Name="Quantity"
+                    <SpinBox Name="Quantity"
                            Access="Public"
-                           Text="0"
-                           Align="Center"
-                           MinWidth="32" />
+                           MinWidth="50" MaxWidth="65" />
                     <Button Name="AddButton"
                             Access="Public"
                             Text="+"
@@ -44,6 +42,7 @@
                             StyleClasses="ButtonSquare"
                             MinWidth="32" />
                 </BoxContainer>
+                <Label Name="Stock" Access="Public" Visible="False" />
             </BoxContainer>
         </BoxContainer>
     </PanelContainer>

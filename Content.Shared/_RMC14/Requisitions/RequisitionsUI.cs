@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared._RMC14.Requisitions.Components;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Requisitions;
@@ -41,6 +41,9 @@ public sealed class RequisitionsPendingOrder(RequisitionsEntry entry, int amount
 {
     public RequisitionsEntry Entry = entry;
     public int Amount = amount;
+    public int Fulfilled;
+    public int InTransit;
+    public int Remaining => Math.Max(0, Amount - Fulfilled - InTransit);
 }
 
 [Serializable, NetSerializable]

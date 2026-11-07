@@ -1,0 +1,10 @@
+- type: entity
+  parent: RMCCrateBase
+  id: RMCCrateRequisitionShipment
+  name: consolidated supply shipment
+  description: Individually ordered supplies packed for delivery through the ASRS.
+  components:
+  - type: EntityStorage
+    capacity: 20
+  - type: RequisitionsCrate
+    reward: 0

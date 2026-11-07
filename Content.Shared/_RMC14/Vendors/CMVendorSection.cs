@@ -15,6 +15,9 @@ public sealed partial class CMVendorSection
     public string Name = string.Empty;
 
     [DataField]
+    public LocId? RequisitionCategory;
+
+    [DataField]
     public (string Id, int Amount)? Choices;
 
     [DataField]

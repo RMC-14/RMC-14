@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared._RMC14.Scaling;
@@ -10,7 +12,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
-using System.Numerics;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsRailingMode;
 
 namespace Content.Shared._RMC14.Requisitions;
@@ -157,9 +158,14 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         computer.Comp.Full = full;
         computer.Comp.OrderCount = orderCount;
         computer.Comp.Capacity = capacity;
-        computer.Comp.BlackMarketBalance = blackMarketBalance;
-        computer.Comp.BlackMarketStatus = blackMarketStatus;
-        computer.Comp.PendingOrders = pendingOrders;
+        computer.Comp.BlackMarketBalance = computer.Comp.RequestOnly ? 0 : blackMarketBalance;
+        computer.Comp.BlackMarketStatus = computer.Comp.RequestOnly
+            ? RequisitionsBlackMarketStatus.LockedOut
+            : blackMarketStatus;
+        computer.Comp.PendingOrders = computer.Comp.RequestOnly ? new List<RequisitionsPendingOrder>() : pendingOrders;
+        computer.Comp.Requests = computer.Comp.RequestOnly || account == null
+            ? new List<RequisitionsRequest>()
+            : account.Requests.Where(request => !request.Closed && computer.Comp.InsertedRequests.Contains(request.Number)).ToList();
         Dirty(computer);
     }
 
@@ -207,6 +213,9 @@ public abstract class SharedRequisitionsSystem : EntitySystem
 
     private static bool SamePendingOrder(RequisitionsEntry a, RequisitionsEntry b)
     {
+        if (a.Request?.Number != b.Request?.Number || a.Request?.Account != b.Request?.Account)
+            return false;
+
         if (a.Crate != b.Crate ||
             a.Cost != b.Cost ||
             a.BlackMarket != b.BlackMarket ||
@@ -296,6 +305,28 @@ public abstract class SharedRequisitionsSystem : EntitySystem
     protected virtual void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _purchasesMap = null;
+        var query = EntityQueryEnumerator<RequisitionsAccountComponent>();
+        while (query.MoveNext(out _, out var account))
+        {
+            account.Requests.Clear();
+            account.NextRequestNumber = 1;
+        }
+        var computers = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            computer.Requests.Clear();
+            computer.PendingOrders.Clear();
+            computer.OrderCount = 0;
+            computer.InsertedRequests.Clear();
+            computer.Stock = new RequisitionsStock();
+            Dirty(uid, computer);
+        }
+        var elevators = EntityQueryEnumerator<RequisitionsElevatorComponent>();
+        while (elevators.MoveNext(out var uid, out var elevator))
+        {
+            elevator.Orders.Clear();
+            Dirty(uid, elevator);
+        }
     }
 
     public void CreateSpecialDelivery(EntProtoId proto)

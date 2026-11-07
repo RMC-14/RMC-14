@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Scaling;
+using Content.Shared._RMC14.Scaling;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -17,6 +17,13 @@ public enum RequisitionsBlackMarketStatus
 [Access(typeof(SharedRequisitionsSystem))]
 public sealed partial class RequisitionsAccountComponent : Component
 {
+    [DataField]
+    public int MaxRequests = 100;
+
+    public int NextRequestNumber = 1;
+
+    public readonly List<RequisitionsRequest> Requests = new();
+
     [DataField]
     [Access(typeof(SharedRequisitionsSystem), typeof(ScalingSystem))]
     public bool Started;

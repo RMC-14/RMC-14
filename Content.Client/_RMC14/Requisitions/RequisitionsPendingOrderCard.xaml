@@ -23,6 +23,7 @@
                                Access="Public"
                                HorizontalExpand="True"
                                VerticalAlignment="Top" />
+                <RichTextLabel Name="OrderDetails" Access="Public" HorizontalExpand="True" />
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                     <Label Name="Cost" Access="Public" />
                     <Control HorizontalExpand="True" />
