@@ -78,7 +78,7 @@ public sealed partial class RMCERTSystem
 
     private TimeSpan? GetAutoResolveAt(RMCERTAutoResolutionOptions? options)
     {
-        if (options == null || options.Delay <= TimeSpan.Zero)
+        if (options == null || options.Delay < TimeSpan.Zero)
             return null;
 
         return _timing.CurTime + options.Delay;
@@ -86,7 +86,7 @@ public sealed partial class RMCERTSystem
 
     private string GetAutoResolveActorName(RMCERTAutoResolutionOptions? options)
     {
-        if (options == null || options.Delay <= TimeSpan.Zero)
+        if (options == null || options.Delay < TimeSpan.Zero)
             return string.Empty;
 
         return !string.IsNullOrWhiteSpace(options.ActorName)
@@ -109,7 +109,8 @@ public sealed partial class RMCERTSystem
             ? request.AutoResolveActorName
             : Loc.GetString("rmc-ert-admin-actor-auto-resolve");
 
-        if (!_random.Prob(request.AutoApproveChance))
+        if (request.AutoApproveChance <= 0f ||
+            (request.AutoApproveChance < 1f && !_random.Prob(request.AutoApproveChance)))
         {
             DenyRequest(new RMCERTRequestActionArgs
             {
@@ -119,19 +120,20 @@ public sealed partial class RMCERTSystem
             return;
         }
 
-        var result = ApproveRequest(new RMCERTApproveRequestArgs
+        var approval = new RMCERTApproveRequestArgs
         {
             Request = request.Id,
             ActorName = actorName,
-        });
+        };
+        if (request.AllowSpecificSelection && request.AllowedCalls.Count == 1)
+            approval.Call = request.AllowedCalls[0];
+
+        var result = ApproveRequest(approval);
 
         if (!result.Success && TryGetPending(request.Id, out var pendingRequest))
         {
-            DenyRequest(new RMCERTRequestActionArgs
-            {
-                Request = pendingRequest.Id,
-                ActorName = actorName,
-            });
+            var error = string.IsNullOrWhiteSpace(result.Error) ? result.Warning : result.Error;
+            FailRequest(pendingRequest, error);
         }
     }
 

@@ -68,9 +68,16 @@ public sealed partial class RMCERTSystem
         Log.Warning($"ERT request {request.Id} failed: {error}. " +
                     $"State={request.State}, SelectedCall={request.SelectedCall?.Id}");
         request.State = RMCERTRequestState.Failed;
+        request.AutoResolveAt = null;
         request.LastError = error;
         request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
+        if (previousState == RMCERTRequestState.PendingAdmin &&
+            request.SourceEntity is { Valid: true } beacon &&
+            TryComp(beacon, out RMCERTDistressBeaconComponent? beaconComp))
+        {
+            beaconComp.LastUsed = null;
+        }
         CleanupRequestContent(request);
         UpdateSourceVisual(request, false);
         AddERTRequestLog(LogImpact.High,

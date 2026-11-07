@@ -251,6 +251,7 @@ public sealed partial class RMCERTSystem
             AllowedCalls = calls,
             AllowRandomSelection = true,
             AllowSpecificSelection = true,
+            AutoResolution = beacon.Comp.AutoResolution,
         });
 
         if (!result.Success && !string.IsNullOrWhiteSpace(result.Error))

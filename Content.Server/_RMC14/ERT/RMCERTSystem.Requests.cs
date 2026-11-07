@@ -61,10 +61,10 @@ public sealed partial class RMCERTSystem
 {
 
     /// <summary>
-    /// Creates a new pending ERT request for admin review.
+    /// Creates an ERT request and applies its optional automatic response policy.
     /// The caller supplies the already-prepared allowed call set and approval modes; this method materializes the internal request,
     /// checks for duplicate non-terminal requests from the same source entity when one exists,
-    /// announces the pending request, and returns its id.
+    /// announces the request, and returns its id and current state.
     /// </summary>
     /// <remarks>
     /// This method intentionally does not re-check prototype <c>AllowedSources</c>.
@@ -73,8 +73,9 @@ public sealed partial class RMCERTSystem
     /// </remarks>
     /// <param name="args">Creation parameters prepared by the caller.</param>
     /// <returns>
-    /// Success with the new request id and <see cref="RMCERTRequestState.PendingAdmin"/>, or failure with an error when the request
-    /// cannot be created.
+    /// Success with the new request id and state after any immediate automatic response,
+    /// or failure when creation or preflight fails.
+    /// Without an automatic response policy, the request remains <see cref="RMCERTRequestState.PendingAdmin"/>.
     /// </returns>
     public RMCERTRequestResult CreateRequest(RMCERTCreateRequestArgs args)
     {
@@ -118,11 +119,7 @@ public sealed partial class RMCERTSystem
             GetRequesterLogText(request),
             extra: $"allowedCalls=[{string.Join(", ", allowedCalls.Select(c => c.Id))}], allowRandom={request.AllowRandomSelection}, allowSpecific={request.AllowSpecificSelection}");
 
-        var text = BuildAdminRequestAnnouncement(request);
-        _chat.SendAdminAnnouncement(text);
         AnnounceRequestCreated(request, GetRequestAnnouncementCall(request));
-
-        NotifyAdminsOfRequest();
 
         if (request.Source == RMCERTRequestSource.Handheld)
             UpdateSourceVisual(request, true);
@@ -133,8 +130,17 @@ public sealed partial class RMCERTSystem
             _popup.PopupEntity(GetRequestSuccessText(popupSource, request.Source), popupSource, popupRequester, PopupType.Medium);
         }
 
+        TryAutoResolvePendingRequest(request);
+        if (request.State == RMCERTRequestState.PendingAdmin)
+        {
+            _chat.SendAdminAnnouncement(BuildAdminRequestAnnouncement(request));
+            NotifyAdminsOfRequest();
+        }
+
         DirtyState(request);
-        return ResultSuccess(request);
+        return request.State == RMCERTRequestState.Failed
+            ? ResultFailure(request.Id, request.State, request.LastError)
+            : ResultSuccess(request);
     }
 
     /// <summary>
@@ -297,6 +303,7 @@ public sealed partial class RMCERTSystem
         }
 
         request.State = RMCERTRequestState.PendingDispatch;
+        request.AutoResolveAt = null;
         request.SelectedCall = callId;
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
@@ -335,6 +342,7 @@ public sealed partial class RMCERTSystem
             return RequestUnavailable(args.Request);
 
         request.State = RMCERTRequestState.Denied;
+        request.AutoResolveAt = null;
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
 
@@ -375,6 +383,7 @@ public sealed partial class RMCERTSystem
             return RequestTerminal(request);
 
         request.State = RMCERTRequestState.Cancelled;
+        request.AutoResolveAt = null;
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
