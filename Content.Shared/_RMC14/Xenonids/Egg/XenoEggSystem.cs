@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Actions;
+﻿using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
@@ -9,7 +9,6 @@ using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
@@ -103,7 +102,6 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, ComponentRemove>(OnXenoAttachedRemove);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, XenoConstructionRangeEvent>(OnXenoConstructionRange);
-        SubscribeLocalEvent<XenoAttachedOvipositorComponent, XenoRestAttemptEvent>(OnXenoRest);
 
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
@@ -230,11 +228,6 @@ public sealed class XenoEggSystem : EntitySystem
         args.Range = 0;
     }
 
-    private void OnXenoRest(Entity<XenoAttachedOvipositorComponent> ent, ref XenoRestAttemptEvent args)
-    {
-        args.Cancelled = true;
-    }
-
     private void OnXenoEggAfterState(Entity<XenoEggComponent> egg, ref AfterAutoHandleStateEvent args)
     {
         var ev = new XenoEggStateChangedEvent();
@@ -268,13 +261,6 @@ public sealed class XenoEggSystem : EntitySystem
             if (_timing.IsFirstTimePredicted)
                 _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), args.ClickLocation, Filter.Local(), true);
 
-            return;
-        }
-
-        if (HasComp<VehicleInteriorOccupantComponent>(args.User))
-        {
-            var failMessage = Loc.GetString("rmc-xeno-egg-blocked-vehicle");
-            _popup.PopupClient(failMessage, args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
@@ -510,8 +496,6 @@ public sealed class XenoEggSystem : EntitySystem
             {
                 if (user != null)
                     _popup.PopupClient(Loc.GetString("cm-xeno-egg-clear"), egg, user.Value);
-
-                _audio.PlayPredicted(egg.Comp.ClearSound, Transform(egg).Coordinates, user);
 
                 if (_net.IsClient)
                     return true;

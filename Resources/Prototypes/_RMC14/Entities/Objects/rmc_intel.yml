@@ -198,9 +198,6 @@
     blacklist:
       components:
       - Xeno
-  - type: AccessReader
-    access: [ [ "RMCAccessCommand" ] ]
-  - type: ActivatableUIRequiresAccess
 
 - type: entity
   parent: RMCCommunicationsConsoleBase

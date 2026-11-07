@@ -1,0 +1,58 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMPVESectionSergeant
+  name: cm-job-name-section-sergeant
+  description: cm-job-description-section-sergeant
+  playTimeTracker: CMJobPVESectionSergeant
+  ranks:
+    RMCRankStaffSergeant: []
+  spawnMenuRoleName: Sun Rider Section Sergeant (PVE)
+  startingGear: RMCGearPVESectionSergeant
+  dummyStartingGear: CMGearSquadLeaderEquipped
+  icon: "CMJobIconSquadLeader"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-platco
+  marineAuthorityLevel: 2
+  accessGroups:
+  - SquadLeader
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetPVESectionSergeant
+    - type: SquadLeader
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-section-sergeant
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: RMCTrackable
+  hidden: true
+
+- type: playTimeTracker
+  id: CMJobPVESectionSergeant
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVESectionSergeant
+  equipment:
+    id: RMCDogtagPVESectionSergeant
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVESectionSergeant
+  name: PVE section sergeant spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPVESectionSergeant
+  - type: Sprite
+    state: leader_spawn

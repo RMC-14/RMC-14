@@ -47,5 +47,4 @@
 - type: entity
   parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetLV624MedicalTechnician
-  categories: [ HideSpawnMenu ]
   name: lv624 medical technician colonist preset

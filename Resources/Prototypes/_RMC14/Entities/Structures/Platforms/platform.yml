@@ -16,11 +16,6 @@
   - type: Tag
     tags:
     - Platform
-  - type: MeleeReceivedMultiplier
-    xenoDamage:
-      types:
-        Slash: 40
-    otherMultiplier: 1.2
 
 - type: entity
   abstract: true
@@ -45,6 +40,12 @@
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 110 # Excessive damage
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
       - trigger:
           !type:DamageTrigger
           damage: 90
@@ -99,7 +100,7 @@
     node: start
 
 - type: entity
-  parent: CMPlatformBase
+  parent: CMPlatformBaseDestructible
   id: CMPlatformCorner
   name: platform
   description: A square metal surface resting on four legs.
@@ -108,16 +109,6 @@
     snap:
     - Wall
   components:
-  - type: Damageable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 90
-        behaviors:
-          - !type:DoActsBehavior
-            acts: ["Destruction"]
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -154,7 +145,6 @@
     - Wall
   components:
   - type: Physics
-    canCollide: false
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -165,6 +155,14 @@
         behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 30
+        behaviors:
+          - !type:ChangeConstructionNodeBehavior
+            node: platformBroken
+          - !type:DoActsBehavior
+            acts: ["Breakage"]
   - type: Fixtures
     fixtures:
       fix1:
@@ -197,10 +195,18 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 90 # Excessive damage
+          damage: 135 # Excessive damage
         behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 110
+        behaviors:
+          - !type:ChangeConstructionNodeBehavior
+            node: platformBroken
+          - !type:DoActsBehavior
+            acts: ["Breakage"]
   - type: Fixtures
     fixtures:
       fix1:

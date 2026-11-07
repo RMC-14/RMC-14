@@ -152,7 +152,7 @@
   id: JobCMCommandingOfficer
   points: 7
   groups:
-  - MarineSecureBackpack
+  - MarineLeatherBackpack
   - CommandingOfficerIDRMC
   - CommandingOfficerWeaponRMC
   - CommandingOfficerRoleSpecificRMC
@@ -1096,7 +1096,6 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
-  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1111,7 +1110,6 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
-  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1126,7 +1124,6 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
-  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1141,7 +1138,6 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
-  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1156,7 +1152,6 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
-  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1170,7 +1165,6 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
-  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins

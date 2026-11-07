@@ -52,10 +52,3 @@
   - type: Sprite
     sprite: Objects/Misc/zipties.rsi
     state: cuff
-  - type: Tag
-    tags:
-    - RMCZipties
-
-- type: Tag
-  id: RMCZipties
-  

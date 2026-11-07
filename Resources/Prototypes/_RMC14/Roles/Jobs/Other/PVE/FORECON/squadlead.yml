@@ -1,0 +1,64 @@
+- type: job
+  parent: CMJobBase
+  id: RMCFORECONPVESquadLead
+  name: rmc-job-name-pve-forecon-squad-lead
+  description: cm-job-description-squad-leader
+  playTimeTracker: CMJobFORECONPVESquadLead
+  ranks:
+   RMCRankMasterSergeant: []
+  startingGear: RMCJobFORECONPVESquadLead
+  icon: "CMJobIconSquadLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - SquadLeader
+  spawnMenuRoleName: FORECON Squad Lead (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      preset: RMCSkillPresetPVESectionSergeant
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pve-forecon-squad-lead
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointFORECONPVESquadLead
+  name: forecon squad lead spawn point
+  suffix: PVE
+  components:
+  - type: Sprite
+    state: so_spawn
+  - type: SpawnPoint
+    job_id: RMCFORECONPVESquadLead
+
+- type: startingGear
+  id: RMCJobFORECONPVESquadLead
+  equipment:
+    id: CMDogtagRifleman
+    ears: RMCHeadsetMarine
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: CMJobFORECONPVESquadLead

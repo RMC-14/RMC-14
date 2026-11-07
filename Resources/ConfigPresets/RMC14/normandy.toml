@@ -14,4 +14,3 @@ name = "normandy"
 [rmc]
 planet_map_vote = false
 lobby_start_paused = true
-gm_request_enabled = true

@@ -1,4 +1,3 @@
-using Content.Shared.Whitelist;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -13,7 +12,4 @@ public sealed partial class VehicleFlamerTankSlotsComponent : Component
 
     [DataField]
     public EntProtoId? StartingItem;
-
-    [DataField]
-    public EntityWhitelist? Whitelist;
 }

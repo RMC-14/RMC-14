@@ -336,8 +336,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/medicalapron.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/medicalapron.rsi
-  - type: CMArmor
-    bio: 5
 
 - type: entity
   parent: RMCMedicalApron

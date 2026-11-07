@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSLGear
-  name: ASRS squad leader gear rack
+  name: ColMarTech squad leader gear rack
   description: An automated gear rack for Squad Leaders.
   components:
   - type: AccessReader
@@ -216,7 +216,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSLEquipment
-  name: ASRS squad leader equipment rack
+  name: ColMarTech squad leader equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Leader standard-issue equipment.
   components:
   - type: AccessReader
@@ -317,7 +317,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
-  categories: [ HideSpawnMenu ]
   name: essential SL kit
   description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
@@ -401,19 +400,14 @@
     - 0,0,11,1
   - type: Sprite
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
-    layers:
-    - state: closed
-      map: [ base ]
-    - state: flamer
-      map: [ label ]
   - type: Icon
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: StorageFill
     contents:
     - id: RMCBackpackFlamer
-    - id: RMCWeaponFlamerExtinguisher
+    - id: RMCWeaponFlamer
     - id: RMCTankFlamer
-      amount: 2
+      amount: 2 # TODO RMC14 projectile nozzle
     - id: RMCTankFlamerBGel
     - id: CMFireExtinguisherPortable
 

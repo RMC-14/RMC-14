@@ -8,15 +8,7 @@
   accessGroups:
   - ColonistSec
   ranks:
-    RMCRankCMBCorporal:
-    - !type:RoleTimeRequirement
-      role: CMJobSurvivorSecurity
-      time: 630000 # 175 hours
-    RMCRankCMBSeniorDeputy:
-    - !type:RoleTimeRequirement
-      role: CMJobSurvivorSecurity
-      time: 90000 # 25 hours
-    RMCRankCMBDeputy: []
+    RMCRankCMBRiotControlOfficer: []
   spawnMenuRoleName: Fiorina CMB Riot Officer (Survivor)
   icon: "RMCJobIconBureauRCO"
   hasIcon: true

@@ -192,11 +192,6 @@ public abstract class SharedOnCollideSystem : EntitySystem
         return refs;
     }
 
-    public DamageSpecifier GetCollideDamage(Entity<DamageOnCollideComponent> ent)
-    {
-        return ent.Comp.Damage;
-    }
-
     public void DisableDamageOnCollide(Entity<DamageOnCollideComponent?> ent)
     {
         if (!_damageOnCollideQuery.Resolve(ent, ref ent.Comp, false))

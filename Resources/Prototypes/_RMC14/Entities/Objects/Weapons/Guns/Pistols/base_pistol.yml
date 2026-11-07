@@ -129,7 +129,6 @@
   components:
   - type: CartridgeAmmo
     deleteOnSpawn: true
-    muzzleFlash: MuzzleFlashEffectPistol
 
 - type: entity
   abstract: true

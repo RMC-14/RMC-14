@@ -6,9 +6,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Physics
@@ -99,9 +96,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Sprite
@@ -115,9 +109,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Physics
@@ -362,9 +353,7 @@
   name: van background 1
   components:
   - type: Sprite
-    layers:
-    - state: background_1
-      map: [ "roof" ]
+    state: background_1
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0
@@ -386,9 +375,7 @@
   name: van background 3
   components:
   - type: Sprite
-    layers:
-    - state: background_3
-      map: [ "roof" ]
+    state: background_3
   - type: InteractionTransparency
 
 - type: entity
@@ -398,7 +385,6 @@
   components:
   - type: Sprite
     state: interior_door
-    drawdepth: BelowMobs
   - type: Clickable
   - type: InteractionOutline
   - type: RMCIgnoreGhostInteractionLimits
@@ -449,9 +435,7 @@
   name: van windshield top
   components:
   - type: Sprite
-    layers:
-    - state: windshield_viewport_top
-      map: [ "roof" ]
+    state: windshield_viewport_top
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0
@@ -463,9 +447,7 @@
   name: van windshield bottom
   components:
   - type: Sprite
-    layers:
-    - state: windshield_viewport_bottom
-      map: [ "roof" ]
+    state: windshield_viewport_bottom
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0

@@ -74,9 +74,8 @@
       Burned: btube-burned
 
 - type: entity
-  parent: [RMCLightFixtureBlueAlwaysPowered, RMCLightFixtureAlwaysPoweredOffset]
+  parent: [RMCLightFixtureAlwaysPoweredOffset, RMCLightFixtureBlueAlwaysPowered]
   id: RMCLightFixtureBlueAlwaysPoweredOffset
-  suffix: Always powered
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi

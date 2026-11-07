@@ -40,9 +40,6 @@ public sealed partial class XenoChargeComponent : Component
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg");
 
-    [DataField]
-    public DamageSpecifier VehicleDamage = new() { DamageDict = new() { { "Blunt", 100 } } };
-
     [DataField, AutoNetworkedField]
     public Vector2? Charge;
 

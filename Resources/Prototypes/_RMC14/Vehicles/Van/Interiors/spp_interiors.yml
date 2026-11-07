@@ -6,9 +6,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Physics
@@ -37,9 +34,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/sppvan.rsi
     drawdepth: Overdoors
@@ -53,9 +47,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/sppvan_chassis.rsi
     drawdepth: FloorTiles
@@ -150,7 +141,6 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
-    - type: Tag
 
 - type: entity
   parent: VehicleSPPVanViewportBase
@@ -262,6 +252,3 @@
     interfaces:
       enum.VehicleAmmoLoaderUiKey.Key:
         type: VehicleAmmoLoaderBoundUserInterface
-  - type: RemoveComponents
-    components:
-    - type: Tag

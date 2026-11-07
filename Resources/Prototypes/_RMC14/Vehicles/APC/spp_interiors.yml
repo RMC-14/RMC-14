@@ -6,9 +6,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
     drawdepth: Overdoors
@@ -21,9 +18,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Transform
     anchored: false
   - type: Physics
@@ -49,9 +43,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/sppapc_chassis.rsi
     drawdepth: FloorTiles
@@ -158,9 +149,6 @@
     state: exit_door
   - type: VehicleExit
   - type: RMCIgnoreGhostInteractionLimits
-  - type: RemoveComponents
-    components:
-    - type: Tag
 
 - type: entity
   abstract: true
@@ -268,6 +256,3 @@
     interfaces:
       enum.VehicleAmmoLoaderUiKey.Key:
         type: VehicleAmmoLoaderBoundUserInterface
-  - type: RemoveComponents
-    components:
-    - type: Tag

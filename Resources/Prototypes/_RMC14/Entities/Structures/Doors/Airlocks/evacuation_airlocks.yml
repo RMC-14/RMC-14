@@ -83,7 +83,7 @@
   - type: EvacuationDoor
   - type: RMCOpenOnEvacuation
   - type: Corrodible
-    isCorrodible: false
+    isCorrodible: true
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false

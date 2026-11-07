@@ -299,9 +299,5 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: healer
-  - type: AcidTrap
-    trapLevel: 1
-    cost: 70
-    spray: XenoAcidSprayTrapWeak
   - type: RMCActionOrder
     id: CMXenoDroneHealer

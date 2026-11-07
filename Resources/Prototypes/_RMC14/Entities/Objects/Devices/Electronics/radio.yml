@@ -24,7 +24,6 @@
     tags:
     - Radio
   - type: ChatRepeatIgnoreSender # RMC14
-  - type: RMCRadioListenOnlyMode # RMC14
   - type: InteractedBlacklist
     blacklist:
       components:

@@ -92,7 +92,7 @@
 - type: entity
   parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorComms1
-  name: New Varadero - Reception
+  name: New Varadero - Cargo Generator
   components:
   - type: Sprite
     state: comms1
@@ -103,7 +103,7 @@
 - type: entity
   parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorComms2
-  name: New Varadero - Hangar Auxiliary Storage
+  name: New Varadero - Communications Project Site
   components:
   - type: Sprite
     state: comms2
@@ -125,7 +125,7 @@
 - type: entity
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorComms4
-  name: New Varadero - Parking Lot
+  name: New Varadero - Walkway Extension
   components:
   - type: Sprite
     state: comms4
@@ -159,7 +159,7 @@
 - type: entity
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorLz1Console
-  name: New Varadero - LZ1 Cargo Auxiliary Landing Port
+  name: New Varadero - Pontoon Dock
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
@@ -169,7 +169,7 @@
 - type: entity
   parent: RMCAreaVaraderoExteriorLz1Console
   id: RMCAreaVaraderoExteriorLz1ConsoleTwo
-  name: New Varadero - LZ2 UNMC Base Port
+  name: New Varadero - Palm Airfield
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
@@ -177,7 +177,7 @@
 - type: entity
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorLz1Near
-  name: New Varadero - Cargo Auxiliary Airfield
+  name: New Varadero - Pontoon Airfield
   components:
   - type: Sprite
     state: lz1
@@ -189,7 +189,7 @@
 - type: entity
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorLz2Near
-  name: New Varadero - UNMC Base Airfield
+  name: New Varadero - Palm Airfield
   components:
   - type: Sprite
     state: lz2
@@ -201,18 +201,7 @@
 - type: entity
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorPontoonBeach
-  name: New Varadero - Hydrogenerator Beach
-  components:
-  - type: Sprite
-    state: varadero0
-  - type: Area
-    linkedLz: dropship_lz1, dropship_lz2
-    minimapColor: '#2B5B2BEE'
-
-- type: entity
-  parent: RMCAreaVaraderoExterior
-  id: RMCAreaVaraderoExteriorIslands
-  name: New Varadero - Islands # TODO RMC14: can't build on these
+  name: New Varadero - Rockabilly Beach
   components:
   - type: Sprite
     state: varadero0
@@ -231,7 +220,7 @@
 - type: entity
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorEastbeach
-  name: New Varadero - Eastern Runway
+  name: New Varadero - East Beach
   components:
   - type: Sprite
     state: varadero1
@@ -242,7 +231,7 @@
 - type: entity
   parent: RMCAreaVaraderoExterior
   id: RMCAreaVaraderoExteriorMonsoon
-  name: New Varadero - Southern Runway
+  name: New Varadero - Monsoon
   components:
   - type: Sprite
     state: varadero1
@@ -286,7 +275,7 @@
 - type: entity
   parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorBeachBar
-  name: New Varadero - Crashed AD-6C
+  name: New Varadero - Beach Bar
   components:
   - type: Sprite
     state: varadero4
@@ -427,11 +416,6 @@
   name: New Varadero - South Sec. Maintenance
 
 - type: entity
-  parent: RMCAreaVaraderoInteriorMaintenanceSecurity
-  id: RMCAreaVaraderoInteriorMaintenanceSecuritySouthHangar
-  name: New Varadero - Aerodrome
-
-- type: entity
   parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorResearch
   name: New Varadero - Research Offices
@@ -501,7 +485,7 @@
 - type: entity
   parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorLibrary
-  name: New Varadero - Armoury
+  name: New Varadero - Library
   components:
   - type: Sprite
     state: offices0
@@ -512,7 +496,7 @@
 - type: entity
   parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorRestaurant
-  name: New Varadero - Gallery
+  name: New Varadero - Restaurant
   components:
   - type: Sprite
     sprite: _RMC14/Areas/hybrisareas.rsi
@@ -544,7 +528,7 @@
 - type: entity
   parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorBunks
-  name: New Varadero - Barracks
+  name: New Varadero - Level 1 Quarters
   components:
   - type: Sprite
     state: req3
@@ -554,7 +538,7 @@
 - type: entity
   parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorSecurity
-  name: New Varadero - Base Police Office
+  name: New Varadero - Security Offices
   components:
   - type: Sprite
     state: offices0
@@ -626,7 +610,7 @@
 - type: entity
   parent: RMCAreaVaraderoInteriorProtectedCaves
   id: RMCAreaVaraderoInteriorProtectedCavesDigsite
-  name: New Varadero - Vessel Recovery Site
+  name: New Varadero - Dig Site
   components:
   - type: Sprite
     state: deepcaves3

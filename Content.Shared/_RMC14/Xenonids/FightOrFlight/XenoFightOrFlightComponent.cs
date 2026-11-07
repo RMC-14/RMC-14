@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Maths;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -10,10 +9,10 @@ namespace Content.Shared._RMC14.Xenonids.FightOrFlight;
 public sealed partial class XenoFightOrFlightComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float LowRange = RMCMathExtensions.CircleAreaFromSquareAbilityRange(4);
+    public int LowRange = 4;
 
     [DataField, AutoNetworkedField]
-    public float HighRange = RMCMathExtensions.CircleAreaFromSquareAbilityRange(6);
+    public int HighRange = 6;
 
     [DataField, AutoNetworkedField]
     public int FuryThreshold = 75;

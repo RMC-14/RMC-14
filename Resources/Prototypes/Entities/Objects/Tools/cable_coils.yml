@@ -85,7 +85,6 @@
 - type: entity
   parent: CableHVStack10
   id: CableHVStackLingering10
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 10
   components:
   - type: Stack
@@ -151,7 +150,6 @@
 - type: entity
   parent: CableMVStack10
   id: CableMVStackLingering10
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 10
   components:
   - type: Stack
@@ -216,7 +214,6 @@
 - type: entity
   parent: CableApcStack10
   id: CableApcStackLingering10
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 10
   components:
   - type: Stack

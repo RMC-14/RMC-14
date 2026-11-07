@@ -89,7 +89,6 @@
   parent: CMClipboard
   id: RMCProvostClipboard
   name: clipboard
-  suffix: Provost
   components:
   - type: ItemSlots
     slots:

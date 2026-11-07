@@ -1,6 +1,5 @@
-using Content.Shared.DoAfter;
+﻿using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -30,12 +29,6 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
     [DataField]
     public float ExpendableLightDps = 2.5f;
 
-    [DataField]
-    public float? VehicleDamage;
-
-    [DataField]
-    public SoundSpecifier AcidSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/acid_impact1.ogg", AudioParams.Default.WithVolume(-6f));
-
     public XenoCorrosiveAcidDoAfterEvent(XenoCorrosiveAcidEvent ev)
     {
         AcidId = ev.AcidId;
@@ -45,8 +38,6 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
         Dps = ev.Dps;
         ExpendableLightDps = ev.ExpendableLightDps;
         EnergyCost = ev.EnergyCost;
-        VehicleDamage = ev.VehicleDamage;
-        AcidSound = ev.AcidSound;
     }
 
     public override DoAfterEvent Clone()

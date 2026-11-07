@@ -36,7 +36,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
         SubscribeLocalEvent<EggMorpherComponent, ExaminedEvent>(OnExamineEvent);
 
-        SubscribeLocalEvent<EggMorpherComponent, ActivateInWorldEvent>(OnActivateInWorld);
+        SubscribeLocalEvent<EggMorpherComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<EggMorpherComponent, InteractUsingEvent>(OnInteractUsing);
 
 
@@ -60,7 +60,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
         }
     }
 
-    private void OnActivateInWorld(Entity<EggMorpherComponent> eggMorpher, ref ActivateInWorldEvent args)
+    private void OnInteractHand(Entity<EggMorpherComponent> eggMorpher, ref InteractHandEvent args)
     {
         if (_net.IsClient)
         {

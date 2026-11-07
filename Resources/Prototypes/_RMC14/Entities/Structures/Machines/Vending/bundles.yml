@@ -1,8 +1,8 @@
 - type: entity
   id: CMVendorBundleRiflemanApparel
-  categories: [ HideSpawnMenu ]
   name: Uniform, helmet, headset, gloves, boots
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -18,7 +18,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleFireteamLeaderApparel
-  categories: [ HideSpawnMenu ]
   name: standard marine apparel
   description: Contains a marine jumpsuit, a M12 helmet, a headset, and combat boots.
   components:
@@ -32,7 +31,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadMedicalApparel
-  categories: [ HideSpawnMenu ]
   name: standard marine apparel
   description: Contains a corpsman jumpsuit, a headset and combat boots.
   components:
@@ -45,7 +43,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadMedicalEssentials
-  categories: [ HideSpawnMenu ]
   name: essential medical set
   description: Contains a stasis bag, a defibrillator, a roller bed, medical tools, and two blood packs.
   components:
@@ -71,7 +68,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianApparel
-  categories: [ HideSpawnMenu ]
   name: standard marine apparel
   description: Contains a combat technician jumpsuit, a headset, and combat boots.
   components:
@@ -84,7 +80,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianEssentials
-  categories: [ HideSpawnMenu ]
   name: essential engineer set
   description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
   components:
@@ -106,7 +101,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadLeaderApparel
-  categories: [ HideSpawnMenu ]
   name: standard marine apparel
   description: Contains a marine jumpsuit, a M11 helmet, a headset, combat gloves and combat boots.
   components:
@@ -121,7 +115,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleWeaponsSpecialistApparel
-  categories: [ HideSpawnMenu ]
   name: standard marine apparel
   description: Contains a marine jumpsuit, a headset, combat gloves and combat boots.
   components:
@@ -136,7 +129,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparel
-  categories: [ HideSpawnMenu ]
   name: Essential Police Set
   description: Contains security HUD-glasses, a filled security belt and a M10 helmet.
   components:
@@ -152,7 +144,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCrewMedicalEssentialsNurse
-  categories: [ HideSpawnMenu ]
   name: essential medical set
   description: Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
   components:
@@ -174,7 +165,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewMedicalEssentialsDoctor
-  categories: [ HideSpawnMenu ]
   name: essential medical set
   description: Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
   components:
@@ -195,7 +185,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCCommandingOfficerEssentialsBundle
-  categories: [ HideSpawnMenu ]
   name: Commanding Officer Essentials kit
   description: Contains a laser designator, whistle, and a disabler.
   components:
@@ -213,7 +202,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewCombatCorrespondent
-  categories: [ HideSpawnMenu ]
   name: Essential Reporter's Set
   description: Contains a flashlight, binoculars, a clipboard, and a pen. #TODO a tape recorder, a notepad, and a pen
   components:
@@ -233,7 +221,6 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleRCMPVEAssaultEngi
   name: Essential Engineering Set
-  categories: [ HideSpawnMenu ]
   description: Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
   components:
   - type: Sprite
@@ -249,7 +236,6 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleRCMPVEMedic
-  categories: [ HideSpawnMenu ]
   name: Essential Medical Set
   description: Contains a surgical case, stethoscope, penlight, and assortment of medical tools to put people back together. Make use of that Navy training.
   components:

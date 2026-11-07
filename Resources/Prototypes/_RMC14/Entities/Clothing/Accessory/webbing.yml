@@ -45,8 +45,8 @@
 - type: entity
   parent: CMWebbingBase
   id: CMWebbing
-  name: brown magazine webbing
-  description: A sturdy mess of brown synthcotton belts and buckles, ready to share your burden. Able to hold three rifle magazines or small items.
+  name: webbing
+  description: A sturdy mess of synthcotton belts and buckles, ready to share your burden.
   components:
   - type: Sprite
     state: webbing
@@ -98,8 +98,8 @@
 - type: entity
   parent: CMWebbingBrown
   id: RMCWebbingLegPouch
-  name: camo leg pouch
-  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military. Able to hold five small items.
+  name: leg pouch
+  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
@@ -117,7 +117,7 @@
   parent: CMWebbingBrown
   id: RMCWebbingLegPouchBlack
   name: black leg pouch
-  description: A black leg pouch usually worn by hunters, military and people who dream of being military. Able to hold five small items.
+  description: A black leg pouch usually worn by hunters, military and people who dream of being military.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/black.rsi
@@ -177,8 +177,7 @@
 - type: entity
   parent: CMWebbing
   id: RMCWebbingBlackSmall
-  name: black magazine webbing
-  description: A sturdy mess of black synthcotton belts and buckles, ready to share your burden. Able to hold three rifle magazines or small items.
+  name: black webbing
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
@@ -191,8 +190,8 @@
 - type: entity
   parent: CMWebbingBase
   id: CMWebbingBlack
-  name: black pouch vest
-  description: Robust black synthcotton vest with lots of pockets to unload your hands. Able to hold five small items.
+  name: black webbing vest
+  description: Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
@@ -241,8 +240,8 @@
 - type: entity
   parent: CMWebbingBlack
   id: CMWebbingBrown
-  name: brown pouch vest
-  description: Worn brownish synthcotton vest with lots of pockets to unload your hands. Able to hold five small items.
+  name: brown webbing vest
+  description: Worn brownish synthcotton vest with lots of pockets to unload your hands.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
@@ -275,8 +274,8 @@
 - type: entity
   parent: CMWebbingBase
   id: CMWebbingHolster
-  name: brown shoulder holster
-  description: A brown handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  name: shoulder holster
+  description: A handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
@@ -395,17 +394,6 @@
 
 - type: entity
   parent: CMWebbingHolster
-  id: RMCWebbingHolsterM77Survivor
-  suffix: Firefighter, Survivor, Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCWeaponPistolM77
-    - id: CMMagazinePistolM77AP # TODO RMC14: WP magazines
-    - id: CMMagazinePistolM77AP
-
-- type: entity
-  parent: CMWebbingHolster
   id: RMCWebbingHolsterBlack
   name: black shoulder holster
   description: A black handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
@@ -487,8 +475,8 @@
 - type: entity
   parent: CMWebbingBase
   id: RMCWebbingDropPouch
-  name: brown drop pouch
-  description: A convenient pouch to carry loose items around. Able to fit medium items.
+  name: drop pouch
+  description: A convenient pouch to carry loose items around.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch.rsi
@@ -548,7 +536,7 @@
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchBlack
   name: black drop pouch
-  description: A convenient pouch to carry loose items around. Able to fit medium items.
+  description: A convenient pouch to carry loose items around.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
@@ -1049,17 +1037,6 @@
       - id: CMMarineFlask
       # - id: RMCFacepaint # TODO FACEPAINT
       - id: CMMRE
-
-- type: entity
-  parent: RMCWebbingDropPouchBlack
-  id: RMCWebbingPouchSurvivorPMCSynth
-  suffix: Filled, PMC Synthetic, Survivor
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMWEYAFlask
-    - id: RMCZipties
-    - id: CMScalpelManager
 
 - type: entity
   parent: CMWebbingBase

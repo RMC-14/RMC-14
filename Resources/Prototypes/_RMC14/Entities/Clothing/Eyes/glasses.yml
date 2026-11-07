@@ -153,7 +153,6 @@
       RMCSkillSmartGun: 1
     defaultState: half
   - type: ClothingRequireEquipped
-    handsValid: true
     whitelist:
       components:
       - SmartGun
@@ -327,10 +326,10 @@
   - type: Appearance
   - type: ItemToggleRequiresSkill
     skills:
-      RMCSkillResearch: 1
+      RMCSkillMedical: 1
   - type: ItemToggleDeactivateUnskilled
     skills:
-      RMCSkillResearch: 1
+      RMCSkillMedical: 1
     popup: rmc-skills-hud-toggle
 
 - type: entity

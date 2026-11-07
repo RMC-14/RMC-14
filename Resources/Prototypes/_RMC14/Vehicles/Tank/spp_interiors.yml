@@ -6,9 +6,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/spptank.rsi
     drawdepth: Walls
@@ -22,9 +19,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/spptank_chassis.rsi
     drawdepth: FloorTiles
@@ -98,7 +92,6 @@
     components:
     - type: Fixtures
     - type: Occluder
-    - type: Tag
   - type: Physics
     bodyType: Static
     canCollide: false
@@ -263,6 +256,3 @@
     interfaces:
       enum.VehicleAmmoLoaderUiKey.Key:
         type: VehicleAmmoLoaderBoundUserInterface
-  - type: RemoveComponents
-    components:
-    - type: Tag

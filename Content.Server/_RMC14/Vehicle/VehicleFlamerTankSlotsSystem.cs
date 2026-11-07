@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Whitelist;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 
@@ -26,11 +25,7 @@ public sealed class VehicleFlamerTankSlotsSystem : EntitySystem
         for (var i = 0; i < ent.Comp.MaxTanks; i++)
         {
             var slotId = GetSlotId(activeSlotId, i);
-            var slot = new ItemSlot
-            {
-                Name = i == 0 ? "Tank" : "Spare Tank",
-                Whitelist = ent.Comp.Whitelist
-            };
+            var slot = new ItemSlot { Name = i == 0 ? "Tank" : "Spare Tank" };
             _itemSlots.AddItemSlot(ent, slotId, slot);
 
             if (ent.Comp.StartingItem is { } startingItem)

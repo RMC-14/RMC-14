@@ -26,7 +26,6 @@
       steps:
       - tool: Welding
         doAfter: 4
-        fuel: 1
 
   - node: cabling
     entity: RMCFloodlightBroken

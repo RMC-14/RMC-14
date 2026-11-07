@@ -6,9 +6,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Sprite
@@ -24,9 +21,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Tag
-    tags:
-    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Physics
@@ -258,6 +252,12 @@
     fadeOnSharedGrid: true
     fadeLayers:
     - "roof"
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: VehicleAPCDoorBase
@@ -302,9 +302,6 @@
     state: exit_door
   - type: VehicleExit
   - type: RMCIgnoreGhostInteractionLimits
-  - type: RemoveComponents
-    components:
-    - type: Tag
 
 - type: entity
   parent: VehicleAPCWallBase
@@ -619,9 +616,6 @@
   - type: WallMount
     arc: 360
   - type: VehiclePortGunController
-  - type: RemoveComponents
-    components:
-    - type: Tag
 
 - type: entity
   parent: VehicleAPCM56FPWInterior
@@ -713,7 +707,6 @@
   components:
   - type: Sprite
     state: door_back
-    drawdepth: BelowMobs
   - type: Occluder
     enabled: false
   - type: Clickable

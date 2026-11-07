@@ -3,6 +3,7 @@
   id: CMSurvivorUNMC
   name: cm-job-name-survivor-unmc
   description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorUNMC
   spawnMenuRoleName: UNMC Remnant (Survivor)
   ranks:
     RMCRankPrivateFirstClass: []
@@ -49,3 +50,7 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorUNMC
+  isHumanoid: true

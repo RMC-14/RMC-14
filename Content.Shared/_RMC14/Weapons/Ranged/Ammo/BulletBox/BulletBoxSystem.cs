@@ -5,9 +5,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
@@ -143,25 +141,7 @@ public sealed class BulletBoxSystem : EntitySystem
                 return;
 
             transfer = Math.Min(transfer, used.Comp2.Count);
-
-            var fromUnspawned = Math.Min(transfer, used.Comp2.UnspawnedCount);
-            if (fromUnspawned > 0)
-                _gun.SetBallisticUnspawned((used, used.Comp2), used.Comp2.UnspawnedCount - fromUnspawned);
-
-            var remaining = transfer - fromUnspawned;
-            if (remaining > 0)
-            {
-                var taken = new List<(EntityUid? Entity, IShootable Shootable)>();
-                var takeEv = new TakeAmmoEvent(remaining, taken, Transform(usedId).Coordinates, user);
-                RaiseLocalEvent(usedId, takeEv);
-
-                foreach (var (round, _) in taken)
-                {
-                    if (round is { } roundId)
-                        PredictedDel(roundId);
-                }
-            }
-
+            _gun.SetBallisticUnspawned((used, used.Comp2), used.Comp2.UnspawnedCount - transfer);
             ent.Comp.Amount += transfer;
         }
         _popup.PopupClient(Loc.GetString("rmc-bullet-box-transfer-done", ("amount", transfer), ("used", ent)), ent, user);

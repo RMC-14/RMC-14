@@ -626,8 +626,7 @@ public sealed class VehicleTurretSystem : EntitySystem
     {
         var vehicleRot = _transform.GetWorldRotation(vehicle);
 
-        if (turret.StabilizedRotation && turret.RotationSpeed > 0f &&
-            (!_net.IsClient || IsLocallyOperatedTurret(turretUid) || IsVehiclePredictedForLocalPlayer(vehicle)))
+        if (turret.StabilizedRotation && turret.RotationSpeed > 0f && (!_net.IsClient || IsLocallyOperatedTurret(turretUid)))
         {
             var dirty = false;
 
@@ -948,13 +947,6 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         if (changed)
             Dirty(turretUid, turret);
-    }
-
-    private bool IsVehiclePredictedForLocalPlayer(EntityUid vehicle)
-    {
-        return _player.LocalEntity is { } local &&
-               TryComp(vehicle, out VehicleComponent? vehicleComp) &&
-               vehicleComp.Operator == local;
     }
 
     private bool IsLocallyOperatedTurret(EntityUid turretUid)

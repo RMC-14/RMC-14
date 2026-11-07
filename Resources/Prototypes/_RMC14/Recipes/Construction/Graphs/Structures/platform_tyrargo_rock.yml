@@ -1,8 +1,0 @@
-- type: constructionGraph
-  id: RMCPlatformTyrargoRockDestructible
-  start: start
-  graph:
-  - node: start
-
-  - node: platformBroken
-    entity: RMCPlatformTyrargoRockBroken

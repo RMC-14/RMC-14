@@ -8,7 +8,4 @@ public sealed partial class CMArmorPiercingComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Amount;
-
-    [DataField, AutoNetworkedField]
-    public bool IgnoreXenoArmor;
 }

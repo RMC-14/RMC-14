@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechEquipmentSEA
-  name: ASRS SEA equipment rack
+  name: ColMarTech SEA equipment rack
   description: An automated rack hooked up to a colossal storage of Senior Enlisted Advisor standard-issue equipment.
   suffix: SEA
   components:
@@ -20,9 +20,6 @@
       - id: CMBootsBlackFilled
       - id: CMMRE
       - id: RMCStampSEA
-      - id: RMCOuterClothingExternalWebbing      
-      - id: CMJumpsuitOperations
-        name: operations uniform
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
@@ -111,7 +108,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechGunsSEA
-  name: ASRS SEA weapon rack
+  name: ColMarTech SEA weapon rack
   description: An automated rack hooked up to a colossal storage of Senior Enlisted Advisor standard-issue equipment.
   suffix: SEA
   components:

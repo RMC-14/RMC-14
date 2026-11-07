@@ -1,3 +1,4 @@
+using Content.Shared.Damage;
 using Content.Shared.Whitelist;
 using JetBrains.Annotations;
 using Robust.Shared.GameStates;
@@ -14,6 +15,12 @@ public sealed partial class VehicleComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist? OperatorWhitelist;
+
+    [DataField, AutoNetworkedField]
+    public bool TransferDamage = true;
+
+    [DataField, AutoNetworkedField]
+    public DamageModifierSet? TransferDamageModifier;
 
     [DataField, AutoNetworkedField]
     public VehicleMovementKind MovementKind = VehicleMovementKind.Standard;

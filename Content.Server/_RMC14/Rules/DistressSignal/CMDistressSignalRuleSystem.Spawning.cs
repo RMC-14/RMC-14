@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Server.GameTicking;
-using Content.Server.RandomMetadata;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Bioscan;
@@ -51,8 +50,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         var comp = rule.Value.Comp;
 
-        if (OperationName == null && TryComp<RandomMetadataComponent>(rule.Value, out var metadata) && metadata.NameSegments != null)
-            OperationName = MetaData(rule.Value).EntityName;
+        OperationName ??= GetRandomOperationName();
 
         if (!InitializeXenoMap(rule.Value, comp))
             return;

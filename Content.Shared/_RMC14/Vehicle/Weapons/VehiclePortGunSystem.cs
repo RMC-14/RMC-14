@@ -104,10 +104,6 @@ public sealed class VehiclePortGunSystem : EntitySystem
         operatorComp.Controller = ent.Owner;
         Dirty(args.User, operatorComp);
 
-        var watching = EnsureComp<VehicleWatchingComponent>(args.User);
-        watching.Watching = vehicle;
-        Dirty(args.User, watching);
-
         if (HasComp<VehicleEnterComponent>(vehicle))
         {
             _eye.SetTarget(args.User, vehicle);
@@ -315,7 +311,6 @@ public sealed class VehiclePortGunSystem : EntitySystem
 
         var vehicle = operatorComp.Vehicle;
         RemCompDeferred<VehiclePortGunOperatorComponent>(user);
-        RemCompDeferred<VehicleWatchingComponent>(user);
 
         if (operatorComp.Controller != null)
             _viewToggle.DisableViewToggle(user, operatorComp.Controller.Value);

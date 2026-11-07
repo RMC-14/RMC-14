@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCColMarTechSurplusPMCPVE
-  name: PMC uniform vendor
+  name: PMC Uniform Vendor
   description: An automated rack hooked up to a small storage of standard PMC uniforms.
   suffix: PVE, PMC
   components:
@@ -120,7 +120,7 @@
   parent: ColMarTechBase
   id: RMCColMarTechUtilitiesPMCPVE
   suffix: PVE, PMC
-  name: PMC automated squad utilities vendor
+  name: PMC Automated Utilities Squad Vendor
   description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any PMC Operator.
   components:
   - type: Sprite

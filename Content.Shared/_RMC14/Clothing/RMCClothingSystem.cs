@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.UniformAccessories;
-using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
@@ -12,7 +11,6 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Clothing;
@@ -27,7 +25,6 @@ public sealed class RMCClothingSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<ClothingLimitComponent> _clothingLimitQuery;
 
@@ -39,7 +36,8 @@ public sealed class RMCClothingSystem : EntitySystem
 
         SubscribeLocalEvent<ClothingRequireEquippedComponent, BeingEquippedAttemptEvent>(OnRequireEquippedBeingEquippedAttempt);
 
-        SubscribeLocalEvent<ClothingComponent, ClothingGotUnequippedEvent>(OnClothingGotUnequipped);
+        // this is here so clothing with ClothingRequireEquippedComponent can drop when required clothing is unequipped
+        // ex: scout cloak should not stay on when they take off the armor required for it
         SubscribeLocalEvent<ClothingComponent, DroppedEvent>(OnDropped);
 
         SubscribeLocalEvent<NoClothingSlowdownComponent, ComponentStartup>(OnNoClothingSlowUpdate);
@@ -90,7 +88,7 @@ public sealed class RMCClothingSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (HasEquippedItemsWithinWhitelist(args.EquipTarget, ent.Comp.Whitelist, ent.Comp.HandsValid))
+        if (HasEquippedItemsWithinWhitelist(args.EquipTarget, ent.Comp.Whitelist))
             return;
 
         args.Cancel();
@@ -99,49 +97,30 @@ public sealed class RMCClothingSystem : EntitySystem
         _popup.PopupClient(denyReason, args.EquipTarget, args.EquipTarget, PopupType.SmallCaution);
     }
 
-    private void OnClothingGotUnequipped(Entity<ClothingComponent> ent, ref ClothingGotUnequippedEvent args)
-    {
-        AutoUnequipDependents(ent.Owner, args.Wearer);
-    }
-
     private void OnDropped(Entity<ClothingComponent> ent, ref DroppedEvent args)
     {
-        AutoUnequipDependents(ent.Owner, args.User);
-    }
-
-    private void AutoUnequipDependents(EntityUid item, EntityUid user)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        var slots = _inventory.GetSlotEnumerator(user);
+        var slots = _inventory.GetSlotEnumerator(args.User);
         while (slots.MoveNext(out var slot))
         {
             if (slot.ContainedEntity is not { } contained)
                 continue;
 
-            if (!TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) || !requiresEquipped.AutoUnequip)
-                continue;
+            if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.AutoUnequip && _whitelist.IsWhitelistPassOrNull(requiresEquipped.Whitelist, ent.Owner))
+            {
+                if (HasEquippedItemsWithinWhitelist(args.User, requiresEquipped.Whitelist))
+                    continue;
 
-            if (!_whitelist.IsWhitelistPassOrNull(requiresEquipped.Whitelist, item))
-                continue;
-
-            if (HasEquippedItemsWithinWhitelist(user, requiresEquipped.Whitelist, requiresEquipped.HandsValid))
-                continue;
-
-            _inventory.TryUnequip(user, slot.ID);
+                _inventory.TryUnequip(args.User, slot.ID);
+            }
         }
     }
 
-    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist? whitelist, bool handsValid = false)
+    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist? whitelist)
     {
-        if (handsValid)
+        foreach (var held in _hands.EnumerateHeld(uid))
         {
-            foreach (var held in _hands.EnumerateHeld(uid))
-            {
-                if (_whitelist.IsWhitelistPassOrNull(whitelist, held))
-                    return true;
-            }
+            if (_whitelist.IsWhitelistPassOrNull(whitelist, held))
+                return true;
         }
 
         var slots = _inventory.GetSlotEnumerator(uid);

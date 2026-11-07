@@ -157,6 +157,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return false;
 
         wallComp.PendingDirection = null;
+        _audio.PlayPvs(wallComp.HoleCreatedSound, wall);
         return true;
     }
 

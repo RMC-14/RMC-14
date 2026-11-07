@@ -103,7 +103,6 @@
 - type: entity
   parent: PartRodMetal
   id: PartRodMetalLingering0
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack
@@ -113,7 +112,6 @@
 - type: entity
   parent: FloorTileItemSteel
   id: FloorTileItemSteelLingering0
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack
@@ -123,7 +121,6 @@
 - type: entity
   parent: FloorTileItemWhite
   id: FloorTileItemWhiteLingering0
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack
@@ -133,7 +130,6 @@
 - type: entity
   parent: FloorTileItemDark
   id: FloorTileItemDarkLingering0
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack

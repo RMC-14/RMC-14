@@ -71,22 +71,14 @@ public sealed class CMSoundSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        var sound = _audio.PlayPvs(ent.Comp.Sound, ent)?.Entity;
-        ent.Comp.Entity = sound;
+        ent.Comp.Entity = _audio.PlayPvs(ent.Comp.Sound, ent)?.Entity;
         Dirty(ent);
-
-        if (sound is not { } soundUid)
-            return;
-
-        var soundComp = EnsureComp<SoundOnDeathSoundComponent>(soundUid);
-        soundComp.Parent = ent.Owner;
-        Dirty(soundUid, soundComp);
     }
 
     private void OnDeathMobTerminating(Entity<SoundOnDeathComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (ent.Comp.Entity is not { } sound ||
-            TerminatingOrDeleted(sound))
+        if (ent.Comp.Entity == null ||
+            TerminatingOrDeleted(ent.Comp.Entity))
         {
             return;
         }
@@ -95,14 +87,7 @@ public sealed class CMSoundSystem : EntitySystem
         if (TerminatingOrDeleted(coordinates.EntityId))
             return;
 
-        _transform.SetCoordinates(sound, coordinates);
-
-        if (TryComp(sound, out SoundOnDeathSoundComponent? soundComp))
-        {
-            soundComp.Parent = null;
-            Dirty(sound, soundComp);
-        }
-
+        _transform.SetCoordinates(ent.Comp.Entity.Value, coordinates);
         ent.Comp.Entity = null;
     }
 

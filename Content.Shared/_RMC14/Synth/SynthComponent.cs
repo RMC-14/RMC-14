@@ -32,9 +32,6 @@ public sealed partial class SynthComponent : Component
     public bool CanUseGuns = false;
 
     [DataField, AutoNetworkedField]
-    public bool CanWearArmor = false;
-
-    [DataField, AutoNetworkedField]
     public bool CanUseMeleeWeapons = true;
 
     /// <summary>

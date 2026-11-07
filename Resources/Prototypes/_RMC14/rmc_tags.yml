@@ -193,9 +193,6 @@
   id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
 
 - type: Tag
-  id: RMCSynthAllowedArmor # armor items synths are permitted to wear regardless of CanWearArmor
-
-- type: Tag
   id: RMCSentryLaptop
 
 - type: Tag

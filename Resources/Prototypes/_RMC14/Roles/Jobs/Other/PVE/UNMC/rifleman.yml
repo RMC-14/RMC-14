@@ -1,0 +1,43 @@
+- type: job
+  parent: CMRifleman
+  id: CMPVERifleman
+  playTimeTracker: CMJobPVERifleman
+  ranks:
+    RMCRankPrivate: []
+  spawnMenuRoleName: Sun Rider Rifleman (PVE)
+  supervisors: cm-job-supervisors-secserg
+  startingGear: RMCGearPVERifleman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetPVERifleman
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
+  hidden: true
+
+- type: playTimeTracker
+  id: CMJobPVERifleman
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVERifleman
+  equipment:
+    id: RMCDogtagPVERifleman
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVERifleman
+  name: PVE rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPVERifleman
+  - type: Sprite
+    state: marine_spawn

@@ -111,7 +111,6 @@
 - type: entity
   parent: SheetGlass
   id: SheetGlassLingering0
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack
@@ -201,7 +200,6 @@
 - type: entity
   parent: SheetRGlass
   id: SheetRGlassLingering0
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack
@@ -341,7 +339,6 @@
 - type: entity
   parent: SheetRPGlass
   id: SheetRPGlassLingering0
-  categories: [ HideSpawnMenu ] # RMC 14
   suffix: Lingering, 0
   components:
   - type: Stack

@@ -1,7 +1,5 @@
 using System.Numerics;
-using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Evasion;
-using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Examine;
@@ -14,7 +12,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Projectiles;
@@ -28,7 +25,6 @@ public sealed class RMCProjectileSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -247,24 +243,9 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         var spawn = SpawnAtPosition(ent.Comp.Spawn, coordinates);
         _hive.SetSameHive(ent.Owner, spawn);
-        if (HasComp<TileFireComponent>(spawn))
-        {
-            var fires = _rmcMap.GetAnchoredEntitiesEnumerator<TileFireComponent>(coordinates);
-            while (fires.MoveNext(out var fire))
-            {
-                if (fire != spawn)
-                    QueueDel(fire);
-            }
-        }
 
         if (ent.Comp.Popup is { } popup)
             _popup.PopupCoordinates(Loc.GetString(popup), coordinates, ent.Comp.PopupType ?? PopupType.Small);
-    }
-
-    public void SetSpawn(Entity<SpawnOnTerminateComponent> ent, EntProtoId spawn)
-    {
-        ent.Comp.Spawn = spawn;
-        Dirty(ent);
     }
 
     private void OnSpawnOnTerminateProjectileHit(Entity<SpawnOnTerminateComponent> ent, ref ProjectileHitEvent args)
@@ -294,15 +275,6 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         maxRange.Max = max;
         Dirty(projectile, maxRange);
-    }
-
-    public void ModifyDamage(EntityUid projectile, int multiplier)
-    {
-        if (!TryComp<ProjectileComponent>(projectile, out var comp))
-            return;
-
-        comp.Damage *= multiplier;
-        Dirty(projectile, comp);
     }
 
     private void StopProjectile(Entity<ProjectileMaxRangeComponent> ent)

@@ -17,7 +17,6 @@ chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-marine-sof = SOF
-chat-radio-marine-survivor = Marine Colonial
 
 chat-radio-colony = Colony
 chat-radio-WY = We-Ya

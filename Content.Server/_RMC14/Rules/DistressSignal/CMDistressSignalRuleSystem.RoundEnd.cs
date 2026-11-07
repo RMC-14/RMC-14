@@ -8,7 +8,6 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -127,9 +126,6 @@ public sealed partial class CMDistressSignalRuleSystem
             {
                 continue;
             }
-
-            if (HasComp<SynthComponent>(marineId))
-                continue;
 
             if (_containers.IsEntityInContainer(marineId))
                 continue;
@@ -259,6 +255,7 @@ public sealed partial class CMDistressSignalRuleSystem
         ResetSelectedPlanet();
         _spawnedDropships = false;
         OperationName = null;
+        _usingCustomOperationName = false;
         ActiveNightmareScenario = null;
         _config.SetCVar(CCVars.GameDisallowLateJoins, false);
 

@@ -621,9 +621,7 @@ public sealed class SquadSystem : EntitySystem
         var ev = new GetMarineSquadNameEvent();
         RaiseLocalEvent(marine, ref ev);
 
-        var title = $"{ev.SquadName} {ev.RoleName}".Trim();
-        if (title != string.Empty)
-            MarineSetTitle(marine, title);
+        MarineSetTitle(marine, $"{ev.SquadName} {ev.RoleName}");
     }
 
     public void MarineSetTitle(EntityUid marine, string title)

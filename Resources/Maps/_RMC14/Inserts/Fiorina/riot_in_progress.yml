@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/25/2026 04:04:24
-  entityCount: 549
+  time: 02/02/2026 23:09:29
+  entityCount: 544
 maps: []
 grids:
 - 1
@@ -140,36 +140,21 @@ entities:
     - type: Transform
       pos: 2.5,-7.5
       parent: 1
-    - type: HideLayerClothing
-      slots: null
   - uid: 403
     components:
     - type: Transform
       pos: 4.5,-8.5
       parent: 1
-    - type: HideLayerClothing
-      slots: null
   - uid: 404
     components:
     - type: Transform
       pos: 2.5,-9.5
       parent: 1
-    - type: HideLayerClothing
-      slots: null
   - uid: 514
     components:
     - type: Transform
       pos: 5.5,-11.5
       parent: 1
-    - type: HideLayerClothing
-      slots: null
-  - uid: 549
-    components:
-    - type: Transform
-      pos: 19.5,-6.5
-      parent: 1
-    - type: HideLayerClothing
-      slots: null
 - proto: CMAirlockMaint
   entities:
   - uid: 153
@@ -270,7 +255,7 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
-- proto: CMBarricadeFolding
+- proto: CMBarricadeMetal
   entities:
   - uid: 366
     components:
@@ -294,13 +279,13 @@ entities:
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 17.5,-8.5
+      pos: 17.5,-6.5
       parent: 1
   - uid: 371
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 17.5,-6.5
+      pos: 17.5,-8.5
       parent: 1
 - proto: CMBarricadeTurnstile
   entities:
@@ -315,13 +300,17 @@ entities:
   - uid: 449
     components:
     - type: Transform
-      pos: 7.5,-11.5
-      parent: 1
+      parent: 448
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 469
     components:
     - type: Transform
-      pos: 7.5,-10.5
-      parent: 1
+      parent: 467
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 520
     components:
     - type: Transform
@@ -451,9 +440,9 @@ entities:
       containers: {}
     missingComponents:
     - ApcPowerReceiver
-    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
+    - ActivatableUIRequiresPower
     - UserInterface
     - Faxecute
     - ItemSlots
@@ -518,18 +507,6 @@ entities:
     components:
     - type: Transform
       pos: 4.679985,-0.3544879
-      parent: 1
-- proto: CMFoldingBarricade
-  entities:
-  - uid: 547
-    components:
-    - type: Transform
-      pos: 11.5,-4.5
-      parent: 1
-  - uid: 548
-    components:
-    - type: Transform
-      pos: 2.5,-3.5
       parent: 1
 - proto: CMLockerPolice
   entities:
@@ -670,33 +647,45 @@ entities:
   - uid: 452
     components:
     - type: Transform
-      pos: 7.5,-11.5
-      parent: 1
+      parent: 448
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 455
     components:
     - type: Transform
-      pos: 7.5,-11.5
-      parent: 1
+      parent: 448
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 456
     components:
     - type: Transform
-      pos: 7.5,-11.5
-      parent: 1
+      parent: 448
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 470
     components:
     - type: Transform
-      pos: 7.5,-10.5
-      parent: 1
+      parent: 467
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 471
     components:
     - type: Transform
-      pos: 7.5,-10.5
-      parent: 1
+      parent: 467
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 472
     components:
     - type: Transform
-      pos: 7.5,-10.5
-      parent: 1
+      parent: 467
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: CMPaperBin10
   entities:
   - uid: 363
@@ -725,8 +714,10 @@ entities:
   - uid: 500
     components:
     - type: Transform
-      pos: 1.5,-9.5
-      parent: 1
+      parent: 499
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: CMPlatform
   entities:
   - uid: 262
@@ -1222,10 +1213,7 @@ entities:
   - uid: 465
     components:
     - type: Transform
-      pos: 7.5,-9.5
-      parent: 1
-    - type: HideLayerClothing
-      slots: null
+      parent: 457
     - type: CycleableVisor
       action: 466
     - type: ContainerContainer
@@ -1239,63 +1227,82 @@ entities:
           occludes: True
           ents:
           - 466
+    - type: Physics
+      canCollide: False
     - type: ActionsContainer
+    - type: InsideEntityStorage
   - uid: 529
     components:
     - type: Transform
       pos: 6.5,-9.5
       parent: 1
-    - type: HideLayerClothing
-      slots: null
 - proto: RMCArmorM4RMedium
   entities:
   - uid: 459
     components:
     - type: Transform
-      pos: 7.5,-9.5
-      parent: 1
+      parent: 457
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCArmorPMCRiot
   entities:
   - uid: 450
     components:
     - type: Transform
-      pos: 7.5,-11.5
-      parent: 1
+      parent: 448
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 474
     components:
     - type: Transform
-      pos: 7.5,-10.5
-      parent: 1
+      parent: 467
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 479
     components:
     - type: Transform
-      pos: 5.5,-10.5
-      parent: 1
+      parent: 476
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 488
     components:
     - type: Transform
-      pos: 4.5,-10.5
-      parent: 1
+      parent: 484
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 490
     components:
     - type: Transform
-      pos: 3.5,-9.5
-      parent: 1
+      parent: 489
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 495
     components:
     - type: Transform
-      pos: 3.5,-8.5
-      parent: 1
+      parent: 493
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 503
     components:
     - type: Transform
-      pos: 1.5,-10.5
-      parent: 1
+      parent: 502
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 507
     components:
     - type: Transform
-      pos: 1.5,-11.5
-      parent: 1
+      parent: 506
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 513
     components:
     - type: Transform
@@ -1387,8 +1394,10 @@ entities:
   - uid: 491
     components:
     - type: Transform
-      pos: 3.5,-9.5
-      parent: 1
+      parent: 489
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCBoxShellsBeanbagEmpty
   entities:
   - uid: 274
@@ -1413,43 +1422,59 @@ entities:
   - uid: 458
     components:
     - type: Transform
-      pos: 7.5,-9.5
-      parent: 1
+      parent: 457
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 463
     components:
     - type: Transform
-      pos: 7.5,-9.5
-      parent: 1
+      parent: 457
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 480
     components:
     - type: Transform
-      pos: 5.5,-10.5
-      parent: 1
+      parent: 476
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 481
     components:
     - type: Transform
-      pos: 5.5,-10.5
-      parent: 1
+      parent: 476
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 486
     components:
     - type: Transform
-      pos: 4.5,-10.5
-      parent: 1
+      parent: 484
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 487
     components:
     - type: Transform
-      pos: 4.5,-10.5
-      parent: 1
+      parent: 484
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 496
     components:
     - type: Transform
-      pos: 3.5,-8.5
-      parent: 1
+      parent: 493
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 497
     components:
     - type: Transform
-      pos: 3.5,-8.5
-      parent: 1
+      parent: 493
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCCableCoil30
   entities:
   - uid: 316
@@ -1582,38 +1607,52 @@ entities:
   - uid: 454
     components:
     - type: Transform
-      pos: 7.5,-11.5
-      parent: 1
+      parent: 448
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 468
     components:
     - type: Transform
-      pos: 7.5,-10.5
-      parent: 1
+      parent: 467
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 477
     components:
     - type: Transform
-      pos: 5.5,-10.5
-      parent: 1
+      parent: 476
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 492
     components:
     - type: Transform
-      pos: 3.5,-9.5
-      parent: 1
+      parent: 489
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 494
     components:
     - type: Transform
-      pos: 3.5,-8.5
-      parent: 1
+      parent: 493
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 505
     components:
     - type: Transform
-      pos: 1.5,-10.5
-      parent: 1
+      parent: 502
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 508
     components:
     - type: Transform
-      pos: 1.5,-11.5
-      parent: 1
+      parent: 506
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 512
     components:
     - type: Transform
@@ -1711,351 +1750,221 @@ entities:
     - type: Transform
       pos: 7.5,-11.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 453
+          - 452
+          - 451
+          - 450
+          - 449
+          - 454
+          - 455
+          - 456
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 457
     components:
     - type: Transform
       pos: 7.5,-9.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 465
+          - 464
+          - 463
+          - 462
+          - 461
+          - 460
+          - 459
+          - 458
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 467
     components:
     - type: Transform
       pos: 7.5,-10.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 468
+          - 469
+          - 470
+          - 471
+          - 472
+          - 473
+          - 474
+          - 475
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 476
     components:
     - type: Transform
       pos: 5.5,-10.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 477
+          - 478
+          - 479
+          - 480
+          - 481
+          - 482
+          - 483
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 484
     components:
     - type: Transform
       pos: 4.5,-10.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 485
+          - 486
+          - 487
+          - 488
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 489
     components:
     - type: Transform
       pos: 3.5,-9.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 490
+          - 491
+          - 492
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 493
     components:
     - type: Transform
       pos: 3.5,-8.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 494
+          - 495
+          - 496
+          - 497
+          - 498
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 499
     components:
     - type: Transform
       pos: 1.5,-9.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 501
+          - 500
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 502
     components:
     - type: Transform
       pos: 1.5,-10.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 503
+          - 504
+          - 505
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 506
     components:
     - type: Transform
       pos: 1.5,-11.5
       parent: 1
-    - type: Lock
-      locked: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      open: True
-      removedMasks: 20
-    - type: PlaceableSurface
-      isPlaceable: True
-    missingComponents:
-    - AccessReader
+    - type: AccessReader
+      access: []
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 507
+          - 508
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
 - proto: RMCLockerSecureSafe
   entities:
   - uid: 422
@@ -2068,8 +1977,10 @@ entities:
   - uid: 482
     components:
     - type: Transform
-      pos: 5.5,-10.5
-      parent: 1
+      parent: 476
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCMagazineRifleM16
   entities:
   - uid: 351
@@ -2101,8 +2012,10 @@ entities:
   - uid: 460
     components:
     - type: Transform
-      pos: 7.5,-9.5
-      parent: 1
+      parent: 457
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCPacketGrenadeFlashBang
   entities:
   - uid: 446
@@ -2167,28 +2080,38 @@ entities:
   - uid: 453
     components:
     - type: Transform
-      pos: 7.5,-11.5
-      parent: 1
+      parent: 448
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 473
     components:
     - type: Transform
-      pos: 7.5,-10.5
-      parent: 1
+      parent: 467
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 478
     components:
     - type: Transform
-      pos: 5.5,-10.5
-      parent: 1
+      parent: 476
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 485
     components:
     - type: Transform
-      pos: 4.5,-10.5
-      parent: 1
+      parent: 484
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 504
     components:
     - type: Transform
-      pos: 1.5,-10.5
-      parent: 1
+      parent: 502
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCRecharger
   entities:
   - uid: 310
@@ -2385,7 +2308,14 @@ entities:
     - type: Transform
       pos: 10.5,-5.5
       parent: 1
-- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBOfficer
+- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  entities:
+  - uid: 531
+    components:
+    - type: Transform
+      pos: 10.5,-0.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer
   entities:
   - uid: 532
     components:
@@ -2421,27 +2351,6 @@ entities:
     components:
     - type: Transform
       pos: 5.5,-2.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
-  entities:
-  - uid: 545
-    components:
-    - type: Transform
-      pos: 5.5,-0.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlMedicalTechnician
-  entities:
-  - uid: 546
-    components:
-    - type: Transform
-      pos: 3.5,-1.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
-  entities:
-  - uid: 531
-    components:
-    - type: Transform
-      pos: 10.5,-0.5
       parent: 1
 - proto: RMCStairs
   entities:
@@ -2495,8 +2404,10 @@ entities:
   - uid: 461
     components:
     - type: Transform
-      pos: 7.5,-9.5
-      parent: 1
+      parent: 457
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCTablePartAlmayer
   entities:
   - uid: 380
@@ -2831,8 +2742,10 @@ entities:
   - uid: 462
     components:
     - type: Transform
-      pos: 7.5,-9.5
-      parent: 1
+      parent: 457
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 528
     components:
     - type: Transform
@@ -3431,20 +3344,21 @@ entities:
   - uid: 501
     components:
     - type: Transform
-      pos: 1.5,-9.5
-      parent: 1
+      parent: 499
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 539
     components:
     - type: Transform
       pos: 3.5,-2.5
       parent: 1
-- proto: RMCWeaponShotgunM12
+- proto: RMCWeaponShotgunHG3712
   entities:
   - uid: 464
     components:
     - type: Transform
-      pos: 7.5,-9.5
-      parent: 1
+      parent: 457
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
@@ -3467,11 +3381,13 @@ entities:
           showEnts: False
           occludes: False
           ent: null
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 483
     components:
     - type: Transform
-      pos: 5.5,-10.5
-      parent: 1
+      parent: 476
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
@@ -3494,11 +3410,16 @@ entities:
           showEnts: False
           occludes: False
           ent: null
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 498
     components:
     - type: Transform
-      pos: 3.5,-8.5
-      parent: 1
+      parent: 493
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCWeaponTaser
   entities:
   - uid: 398
@@ -3716,11 +3637,15 @@ entities:
   - uid: 451
     components:
     - type: Transform
-      pos: 7.5,-11.5
-      parent: 1
+      parent: 448
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 475
     components:
     - type: Transform
-      pos: 7.5,-10.5
-      parent: 1
+      parent: 467
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 ...

@@ -90,13 +90,7 @@ public sealed partial class VehicleEnterDoAfterEvent : SimpleDoAfterEvent
 }
 
 [Serializable, NetSerializable]
-public sealed partial class VehicleExitDoAfterEvent : SimpleDoAfterEvent
-{
-    public override DoAfterEvent Clone()
-    {
-        return new VehicleExitDoAfterEvent();
-    }
-}
+public sealed partial class VehicleExitDoAfterEvent : SimpleDoAfterEvent;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(VehicleSystem))]

@@ -46,7 +46,10 @@ public sealed partial class XenoConstructionComponent : Component
     public TimeSpan OrderConstructionDelay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild", AudioParams.Default.WithVolume(-10f));
+    public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")
+    {
+        Params = AudioParams.Default.WithVolume(-10f),
+    };
 
     [DataField, AutoNetworkedField]
     public bool CanUpgrade;

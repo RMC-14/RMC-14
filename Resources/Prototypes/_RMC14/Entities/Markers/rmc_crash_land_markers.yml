@@ -1,7 +1,6 @@
 ﻿- type: entity
   parent: MarkerBase
   id: RMCBarrierBase
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:

@@ -353,7 +353,6 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: BulletRifle556x45mmHEAP
-  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -365,7 +364,6 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: BulletRifle556x45mmIncendiary
-  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

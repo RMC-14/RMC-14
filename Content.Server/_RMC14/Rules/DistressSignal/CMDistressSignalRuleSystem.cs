@@ -155,6 +155,10 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
 
+    private readonly HashSet<string> _operationNames = new();
+    private readonly HashSet<string> _operationPrefixes = new();
+    private readonly HashSet<string> _operationSuffixes = new();
+
     private float _marinesPerXeno;
     private bool _autoBalance;
     private float _autoBalanceStep;
@@ -173,6 +177,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     private float _hijackShipWeight;
     private int _hijackMinBurrowed;
     private int _xenosMinimum;
+    private bool _usingCustomOperationName;
     private bool _queenBuildingBoostEnabled;
     private TimeSpan _queenBoostDuration;
     private float _queenBoostSpeedMultiplier;
@@ -244,6 +249,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<LoadingMapsEvent>(OnMapLoading);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
              before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
@@ -289,6 +295,14 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostDurationMinutes, v => _queenBoostDuration = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostSpeedMultiplier, v => _queenBoostSpeedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostRemoteRange, v => _queenBoostRemoteRange = v, true);
+
+        ReloadPrototypes();
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        if (ev.WasModified<EntityPrototype>())
+            ReloadPrototypes();
     }
 
     private void OnMapLoading(LoadingMapsEvent ev)
@@ -337,18 +351,15 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
                 _marineAnnounce.AnnounceARESStaging(default, Loc.GetString("rmc-distress-signal-ares-online"), component.AresGreetingAudio,"rmc-announcement-ares-online");
         }
 
-        if (component.StartARESAnnouncements &&
-            SelectedPlanetMap != null &&
-            SelectedPlanetMap.Value.Comp.Announcements is { } announcements &&
-            component.AresAnnouncementIndex < announcements.Count)
+        if (!component.AresMapDone && announcementTime >= component.AresMapDelay)
         {
-            var announcement = announcements[component.AresAnnouncementIndex];
+            component.AresMapDone = true;
 
-            if (announcementTime >= announcement.Delay)
+            if (SelectedPlanetMap != null &&
+                component.StartARESAnnouncements &&
+                SelectedPlanetMap.Value.Comp.Announcement is { } announcement)
             {
-                component.AresAnnouncementIndex++;
-
-                _marineAnnounce.AnnounceARESStaging(default, Loc.GetString(announcement.Text), announcement: announcement.Announcement);
+                _marineAnnounce.AnnounceARESStaging(default, announcement, announcement: "rmc-announcement-ares-map");
             }
         }
 
@@ -401,6 +412,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     public void SetCustomOperationName(string customname)
     {
         OperationName = customname;
+        _usingCustomOperationName = true;
     }
 
     private void EndRoundForQueenDeath(CMDistressSignalRuleComponent component)

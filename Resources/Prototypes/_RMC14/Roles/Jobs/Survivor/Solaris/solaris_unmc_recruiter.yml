@@ -3,7 +3,7 @@
   id: CMSurvivorUNMCRecruiter
   name: rmc-job-name-survivor-unmc-recruiter
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorMilitary
+  playTimeTracker: CMJobSurvivorUNMCRecruiter
   spawnMenuRoleName: UNMC Recruiter (Solaris Survivor)
   ranks:
     RMCRankSergeant: []
@@ -50,3 +50,7 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorUNMCRecruiter
+  isHumanoid: true

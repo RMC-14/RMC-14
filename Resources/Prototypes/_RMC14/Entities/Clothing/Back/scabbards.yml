@@ -186,7 +186,6 @@
     - back
   - type: ClothingIgnoreBlockBackpack
   - type: ClothingRequireEquipped
-    handsValid: true
     whitelist:
       components:
       - SmartGun

@@ -12,6 +12,8 @@
   abstract: true
   components:
   - type: CanBuildThickFromConstructNode
+  - type: GhostRole
+    name: cm-job-name-xeno-carrier
   - type: MobState
     allowedStates:
     - Alive

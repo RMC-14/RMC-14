@@ -45,7 +45,6 @@
         doAfter: 4
       - tool: Welding
         doAfter: 5
-        fuel: 5
 
     - to: reinforcedWall
       completed:
@@ -64,7 +63,6 @@
         doAfter: 4
       - tool: Welding
         doAfter: 5
-        fuel: 5
 
   - node: wall
     entity: CMWallMetal
@@ -78,7 +76,6 @@
       - tool: Welding
         doAfter: 6
         duplicateConditions: All
-        fuel: 0
       - tool: Screwing
         doAfter: 6
         duplicateConditions: All
@@ -104,7 +101,6 @@
       - tool: Welding
         doAfter: 6
         duplicateConditions: All
-        fuel: 0
       - tool: Screwing
         doAfter: 6
         duplicateConditions: All

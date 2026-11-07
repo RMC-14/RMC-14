@@ -84,15 +84,6 @@ public sealed class RMCUpgradeSystem : EntitySystem
             return;
         }
 
-        if (!Transform(ent).Anchored)
-        {
-            var failPopup = Loc.GetString("rmc-construction-require-anchored", ("ent", ent));
-            _popup.PopupClient(failPopup, ent, user, PopupType.SmallCaution);
-
-            args.Handled = true;
-            return;
-        }
-
         if (downgradeItem != null && ent.Comp.Downgrade != null)
         {
             RemoveUpgrade(ent, user);

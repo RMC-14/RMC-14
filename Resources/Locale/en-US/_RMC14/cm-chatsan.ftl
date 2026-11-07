@@ -359,6 +359,7 @@ cm-chatsan-word-kitties = kitties
 cm-chatsan-word-kittens = kittens
 cm-chatsan-replacement-cats = felines
 
+cm-chatsan-word-fish = fish
 cm-chatsan-word-carp = carp
 cm-chatsan-replacement-fish = aquatic creature
 

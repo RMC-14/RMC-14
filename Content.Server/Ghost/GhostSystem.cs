@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Numerics;
-using Content.Server._RMC14.Mobs;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -73,10 +72,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
-
-        // RMC14
-        [Dependency] private readonly CMGhostSystem _cmGhost = default!;
-        // RMC14
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -515,10 +510,6 @@ namespace Content.Server.Ghost
             }
 
             SetCanReturnToBody((ghost, ghostComponent), canReturn);
-
-            // RMC14
-            _cmGhost.SetPostDeathChatMute(ghost, (mind.Owner, mind.Comp), mind.Comp.OwnedEntity);
-            // RMC14
 
             if (canReturn)
                 _minds.Visit(mind.Owner, ghost, mind.Comp);

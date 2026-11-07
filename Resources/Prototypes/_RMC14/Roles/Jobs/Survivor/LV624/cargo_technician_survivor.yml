@@ -22,7 +22,6 @@
   useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorTrucker
   id: RMCGearSurvivorLV624CargoTechnician
   equipment:
     jumpsuit: RMCJumpsuitKhakiWorkwearJacketless
@@ -42,13 +41,14 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite
+  - type: Sprite # TODO: Replace with landmark sprite
     layers:
-    - sprite: _RMC14/Markers/landmarks.rsi
-      state: surv
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
 
 - type: entity
-  parent: RMCSurvivorPresetTrucker
+  parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetLV624CargoTechnician
-  categories: [ HideSpawnMenu ]
-  name: lv624 cargo technician colonist preset
+  name: lv624 cargo technician colonist preset # TODO RMC14 random research notes

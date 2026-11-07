@@ -4,7 +4,7 @@
   name: cm-job-name-survivor-corporate
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorCorporate
-  icon: "RMCJobIconGenericColonistCorporate"
+  icon: "CMJobIconLiaison"
   hasIcon: true
   ranks:
     RMCRankWeYaExecutiveSpecialist:

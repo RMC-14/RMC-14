@@ -32,14 +32,6 @@
     foldedEntity: RMCWeaponLauncherDisposableFolded
 
 - type: entity
-  parent: RMCWeaponLauncherDisposable
-  id: RMCWeaponLauncherDisposableExpended
-  suffix: Expended
-  components:
-  - type: BallisticAmmoProvider
-    proto: null
-
-- type: entity
   parent: [BaseItem, RMCBaseMeleeWeapon]
   id: RMCWeaponLauncherDisposableFolded
   name: M5A1 SLAW

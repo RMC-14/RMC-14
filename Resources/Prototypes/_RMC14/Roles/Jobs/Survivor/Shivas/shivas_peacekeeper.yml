@@ -9,7 +9,7 @@
   camouflageStartingGear: null
 
 - type: startingGear
-  parent: RMCGearSurvivorSecurity
+  parent: RMCGearSurvivorILRCPeacekeeper
   id: RMCGearSurvivorShivasILRCPeacekeeper
   equipment:
     head: RMCHeadUshanka
@@ -17,8 +17,6 @@
     outerClothing: RMCCoatSnowSurvivorSecurity
     gloves: RMCHandsVeteran
     shoes: RMCBootsPMC
-    jumpsuit: RMCJumpsuitRiotControl
-
 
 - type: entity
   parent: CMSpawnPointJobBase
