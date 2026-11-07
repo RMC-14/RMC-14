@@ -123,9 +123,6 @@ public sealed partial class SleeperComponent : Component
     public bool AutoEjectDead;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
-
-    [DataField, AutoNetworkedField]
     public EntityUid? LinkedConsole;
 
     [DataField]

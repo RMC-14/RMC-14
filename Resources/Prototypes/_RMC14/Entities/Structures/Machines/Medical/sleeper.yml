@@ -39,9 +39,9 @@
     channel: Equipment
   - type: DragInsertContainer
     containerId: sleeper
+    useVerbs: false # Stops Alt-Click from bypassing do-after
     entryDelay: 2
     delaySelfEntry: true
-  - type: NoStunOnExit # Custom stun exit behavior + sound in SharedSleeperSystem
   - type: ContainerContainer
     containers:
       sleeper: !type:ContainerSlot {}

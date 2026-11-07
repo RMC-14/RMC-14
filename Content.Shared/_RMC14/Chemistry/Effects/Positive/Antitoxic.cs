@@ -14,7 +14,6 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 public sealed partial class Antitoxic : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
-    private static readonly ProtoId<DamageGroupPrototype> GeneticGroup = "Genetic";
 
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
 
@@ -30,9 +29,6 @@ public sealed partial class Antitoxic : RMCChemicalEffect
     {
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, ToxinGroup, potency * 2f);
-
-        // TODO RMC14 remove genetic heal once other meds are in for genetic damage
-        healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, GeneticGroup, potency * 2f, healing);
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
