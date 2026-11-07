@@ -1,0 +1,297 @@
+# CMB Deputy
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseDeputyShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseDeputyShiva ]
+  - type: VictimBurst
+  - type: Rank
+    rank: RMCRankCMBDeputy
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/job_icons/CMB.rsi
+      state: cmb_dep
+  - type: NpcFactionMember
+    factions:
+    - Bureau
+    - Civilian
+
+- type: startingGear
+  id: RMCGearCorpseDeputyShiva
+  equipment:
+    jumpsuit: RMCMarshalCMBUniform
+    back: CMSatchelSecurity
+    outerClothing: RMCCoatSnowSurvivorCMBDeputy
+    shoes: CMBootsBlackFilled
+    head: RMCHeadUshanka
+    mask: CMMaskCoif
+    eyes: CMGlassesSecurity
+    id: RMCIDCardCMBDeputySurvivor
+    ears: RMCHeadsetDistressBureauDamaged
+    belt: RMCBeltHolsterPistolHandcannonFilled
+    gloves: RMCHandsBlack
+
+# Colonist
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseColonistShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonistShiva ]
+
+- type: startingGear
+  id: RMCGearCorpseColonistShiva
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: RMCSatchelNorm
+    shoes: CMBootsBlackFilled
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+    outerClothing: RMCCoatSnowSurvivor
+    head: RMCHeadUshanka
+    mask: CMMaskCoif
+    gloves: RMCHandsBlack
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseColonistShiva
+  id: RMCCorpseColonistBurstShiva
+  components:
+  - type: VictimBurst
+
+# Scientist
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseScientistShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseScientistShiva ]
+  - type: VictimBurst
+  - type: Rank
+    rank: RMCRankCivilianDoctor
+
+- type: startingGear
+  id: RMCGearCorpseScientistShiva
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianVirologist
+    back: RMCSatchelChemistry
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsBlack
+    outerClothing: RMCCoatSnowSurvivorPurple
+    id: RMCIDCardColonistScientist
+    mask: CMMaskCoif
+    eyes: RMCGlassesReagentHUDGlasses
+    ears: CMHeadsetColony
+    head: RMCHeadUshanka
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+    - RMCMotionDetector
+#    # T3 research notes
+
+# Doctor
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseDoctorShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseDoctorShiva, RMCGearCorpseDoctorAltOneShiva, RMCGearCorpseDoctorAltTwoShiva ]
+  - type: VictimBurst
+  - type: Rank
+    rank: RMCRankCivilianDoctor
+
+- type: startingGear
+  id: RMCGearCorpseDoctorShiva
+  equipment:
+    jumpsuit: RMCJumpsuitDoctor
+    back: CMSatchelMedical
+    shoes: CMBootsBlackFilled
+    eyes: RMCGlassesMedicalHUDGlasses
+    gloves: RMCHandsBlack
+    id: CMIDCardColonistDoctor
+    ears: CMHeadsetColony
+    mask: CMMaskCoif
+    outerClothing: RMCCoatSnowSurvivorNavy
+    head: RMCHeadUshanka
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+- type: startingGear
+  parent: RMCGearCorpseDoctorShiva
+  id: RMCGearCorpseDoctorAltOneShiva
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+    - CMFirstAidKitFilledRobust
+
+- type: startingGear
+  parent: RMCGearCorpseDoctorShiva
+  id: RMCGearCorpseDoctorAltTwoShiva
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+    # - CMFirstAidKitFilledRobust Uncomment when surgery kit is added
+    # TODO Surgery kit
+
+# Engineer
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseEngineerShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseEngineerShiva ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseEngineerShiva
+  equipment:
+    jumpsuit: RMCJumpsuitKhakiWorkwear # Upstream engi suit on CM
+    back: CMSatchelEngineer
+    shoes: CMBootsBlackFilled
+    head: RMCHeadUshanka
+    eyes: RMCWeldingGoggles
+    gloves: RMCHandsBlack
+    outerClothing: RMCCoatSnowSurvivorYellow
+    id: CMIDCardColonistEngineer
+    ears: CMHeadsetColony
+    belt: CMBeltUtilityFilled
+    mask: CMMaskCoif
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+# Prisoner
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpsePrisonerShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpsePrisonerShiva ]
+
+- type: startingGear
+  id: RMCGearCorpsePrisonerShiva
+  equipment:
+    jumpsuit: RMCJumpsuitOrange
+    back: CMSatchel
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardPrisonerCorpse
+    mask: CMMaskCoif
+    gloves: RMCHandsBlack
+    head: RMCHeadUshanka
+    outerClothing: RMCCoatSnowSurvivor
+  storage:
+    back:
+    - RMCM5Bayonet
+    - RMCRadioHandheldColonyOff
+
+# Colonial Division Manager
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYa
+  id: RMCCorpseWeYaDivManagerShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaDivManagerShiva ]
+  - type: Rank
+    rank: RMCRankWeYaDivisionManager
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/job_icons/We-Ya/liaison_ranks.rsi
+      state: weya_divman
+
+- type: startingGear
+  id: RMCGearCorpseWeYaDivManagerShiva
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    back: CMSatchelSecureStandard
+    head: RMCHeadUshanka
+    jumpsuit: CMJumpsuitLiaisonIvy
+    outerClothing: RMCCoatSnowSurvivorNavy
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardColonialDivisionManager
+    mask: CMMaskCoif
+    eyes: RMCSunglasses
+    gloves: RMCHandsBlack
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+# Chef
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseChefShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseChefShiva ]
+
+- type: startingGear
+  id: RMCGearCorpseChefShiva
+  equipment:
+    jumpsuit: RMCJumpsuitChef
+    back: CMSatchel
+    id: RMCIDCardChefCorpse
+    ears: CMHeadsetColony
+    gloves: RMCHandsBlack
+    mask: CMMaskCoif
+    shoes: CMBootsBlackFilled
+    head: RMCHeadUshanka
+    outerClothing: RMCCoatSnowSurvivor
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+# Security
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseSecurityShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseSecurityShiva ]
+  - type: VictimBurst
+  - type: Rank
+    rank: RMCRankCivilianOfficer
+
+- type: startingGear
+  id: RMCGearCorpseSecurityShiva
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianSecurity
+    back: CMSatchelSecurity
+    eyes: CMGlassesSecurity
+    id: CMIDCardColonistSecurity
+    ears: CMHeadsetColony
+    belt: CMBeltSecurityMPFilled
+    gloves: RMCHandsBlack
+    mask: CMMaskCoif
+    shoes: CMBootsBlackFilled
+    head: RMCHeadUshanka
+    outerClothing: RMCCoatSnowSurvivorSecurity
+  storage:
+    back:
+    - RMCM5Bayonet
+    - RMCRadioHandheldColonyOff
+
+# Miner
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseMinerShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseMinerShiva ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseMinerShiva
+  equipment:
+    jumpsuit: RMCJumpsuitTMCC
+    back: CMSatchelEngineer
+    id: RMCIDCardMinerCorpse
+    ears: CMHeadsetColony
+    gloves: RMCHandsBlack
+    mask: CMMaskCoif
+    shoes: CMBootsBlackFilled
+    head: RMCHeadUshanka
+    outerClothing: RMCCoatSnowSurvivor
+  storage:
+    back:
+    - RMCFlashlightLantern
+    - RMCRadioHandheldColonyOff

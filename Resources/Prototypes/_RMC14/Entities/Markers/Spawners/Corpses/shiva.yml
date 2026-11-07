@@ -1,0 +1,94 @@
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseCMBDeputyShiva
+  name: Corpse Spawner - Shiva CMB Deputy
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseDeputyShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseColonistShiva
+  name: Corpse Spawner - Shiva Colonist
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseColonistShivaBurst
+  name: Corpse Spawner - Shiva Colonist
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistBurstShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseScientistShiva
+  name: Corpse Spawner - Shiva Scientist
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseScientistShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseDoctorShiva
+  name: Corpse Spawner - Shiva Doctor
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseDoctorShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseEngineerShiva
+  name: Corpse Spawner - Shiva Engineer
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseEngineerShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpsePrisonerShiva
+  name: Corpse Spawner - Shiva Prisoner
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpsePrisonerShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseShivaColonialDivisionManager
+  name: Corpse Spawner - Shiva Colonial Division Manager
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaDivManagerShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseChefShiva
+  name: Corpse Spawner - Shiva Chef
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseChefShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseMinerShiva
+  name: Corpse Spawner - Shiva Shaft Miner
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseMinerShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseSecurityShiva
+  name: Corpse Spawner - Shiva Security Officer
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseSecurityShiva
