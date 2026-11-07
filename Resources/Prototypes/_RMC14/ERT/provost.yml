@@ -48,7 +48,7 @@
       message: rmc-ert-announcement-provost-request
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 5
     maxSlots: 5

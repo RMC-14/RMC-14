@@ -71,7 +71,7 @@
       message: rmc-ert-announcement-cmb-inspection-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 3
     maxSlots: 5
@@ -236,7 +236,7 @@
       message: rmc-ert-announcement-cmb-riot-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 3
     maxSlots: 8

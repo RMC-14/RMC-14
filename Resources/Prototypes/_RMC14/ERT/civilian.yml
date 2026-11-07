@@ -22,7 +22,7 @@
     min: 2
     max: 8
   requirements:
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 2
     maxSlots: 8

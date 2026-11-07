@@ -90,7 +90,7 @@
       message: rmc-ert-announcement-contractors-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 3
     maxSlots: 7
@@ -187,7 +187,7 @@
       message: rmc-ert-announcement-contractors-covert-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 3
     maxSlots: 7
