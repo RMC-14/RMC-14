@@ -107,7 +107,7 @@
     suitstorage: RMCWeaponShotgunM3717
   storage:
     back:
-    - RMCHandheldDistressBeaconCMB
+    - RMCHandheldDistressBeaconCMBMarshal
     - RMCUniversalRecorder
 
 - type: playTimeTracker

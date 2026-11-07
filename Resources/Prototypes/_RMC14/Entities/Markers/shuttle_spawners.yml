@@ -144,6 +144,7 @@
   - type: Sprite
     state: green
   - type: RMCERTShuttleStartPad
+  - type: FTLSmashImmune
 
 - type: entity
   parent: RMCERTShuttleStartPad
