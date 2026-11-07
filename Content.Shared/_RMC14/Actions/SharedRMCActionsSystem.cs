@@ -186,7 +186,7 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
     private void OnHiveAllyCheckActionTarget(Entity<ActionTargetHiveAllyComponent> ent, ref CheckActionTargetEvent args)
     {
-        if (args.Skip || ent.Comp.Defer && args.Defer)
+        if (args.Skip || !ent.Comp.Skip && (!ent.Comp.Defer || args.Defer))
             return;
 
         if (_hive.FromSameHiveOrAlly(args.User, args.Target))
@@ -198,7 +198,7 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
     private void OnNonHiveAllyCheckActionTarget(Entity<ActionTargetNonHiveAllyComponent> ent, ref CheckActionTargetEvent args)
     {
-        if (args.Skip || ent.Comp.Defer && args.Defer)
+        if (args.Skip || !ent.Comp.Skip && (!ent.Comp.Defer || args.Defer))
             return;
 
         if (!_hive.FromSameHiveOrAlly(args.User, args.Target))
@@ -210,7 +210,7 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
     private void OnIFFCheckActionTarget(Entity<ActionTargetIFFComponent> ent, ref CheckActionTargetEvent args)
     {
-        if (args.Skip || ent.Comp.Defer && args.Defer)
+        if (args.Skip || !ent.Comp.Skip && (!ent.Comp.Defer || args.Defer))
             return;
 
         if (_gunIFF.TryGetFactions(args.User, _userFactions)
