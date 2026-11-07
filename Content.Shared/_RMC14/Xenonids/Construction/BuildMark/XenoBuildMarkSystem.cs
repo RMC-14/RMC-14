@@ -4,7 +4,9 @@ using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Designer;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
@@ -19,6 +21,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction.BuildMark;
 
 public sealed class XenoBuildMarkSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -28,6 +31,7 @@ public sealed class XenoBuildMarkSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private static readonly EntProtoId MarkId = "RMCXenoBuildMark";
 
@@ -54,8 +58,15 @@ public sealed class XenoBuildMarkSystem : EntitySystem
 
     private void OnMarkTerminating(Entity<XenoBuildMarkComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (TryComp(ent.Comp.Planter, out XenoBuildMarkerComponent? marker))
-            marker.Marks.Remove(ent);
+        if (ent.Comp.Planter is not { } planter ||
+            !TryComp(planter, out XenoBuildMarkerComponent? marker) ||
+            !marker.Marks.Remove(ent))
+        {
+            return;
+        }
+
+        if (marker.Marks.Count == 0)
+            RemComp(planter, marker);
     }
 
     private void OnMarkerTerminating(Entity<XenoBuildMarkerComponent> ent, ref EntityTerminatingEvent args)
@@ -77,7 +88,7 @@ public sealed class XenoBuildMarkSystem : EntitySystem
             return;
 
         TryComp(newXeno, out XenoConstructionComponent? construction);
-        var newMarker = EnsureComp<XenoBuildMarkerComponent>(newXeno);
+        XenoBuildMarkerComponent? newMarker = null;
         foreach (var markId in oldMarker.Marks)
         {
             if (!TryComp(markId, out XenoBuildMarkComponent? mark))
@@ -97,6 +108,7 @@ public sealed class XenoBuildMarkSystem : EntitySystem
             mark.Queued = false;
             mark.PlanterInRange = false;
             Dirty(markId, mark);
+            newMarker ??= EnsureComp<XenoBuildMarkerComponent>(newXeno);
             newMarker.Marks.Add(markId);
         }
 
@@ -250,12 +262,40 @@ public sealed class XenoBuildMarkSystem : EntitySystem
 
     private bool TryBuildCandidates(Entity<XenoConstructionComponent> xeno, bool queueOrder)
     {
+        if (_candidates.Count == 0 ||
+            !_actionBlocker.CanInteract(xeno, null) ||
+            !CanAffordAnyCandidate(xeno))
+        {
+            return false;
+        }
+
         _candidates.Sort(queueOrder ? CompareQueued : CompareNearby);
 
         foreach (var candidate in _candidates)
         {
             if (TryBuildMark(xeno, (candidate.Uid, candidate.Mark)))
                 return true;
+        }
+
+        return false;
+    }
+
+    private bool CanAffordAnyCandidate(EntityUid xeno)
+    {
+        if (HasComp<QueenBuildingBoostComponent>(xeno))
+            return true;
+
+        TryComp(xeno, out XenoPlasmaComponent? plasma);
+        foreach (var candidate in _candidates)
+        {
+            if (candidate.Mark.Structure is not { } structure)
+                continue;
+
+            if (_xenoConstruction.GetStructurePlasmaCost(structure) is not { } cost ||
+                plasma != null && _xenoPlasma.HasPlasma((xeno, plasma), cost))
+            {
+                return true;
+            }
         }
 
         return false;
