@@ -92,3 +92,19 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseSecurityShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseLiaisonShiva
+  name: Corpse Spawner - Shiva Corporate Liaison
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseLiaisonShiva
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseScientistAegisShiva
+  name: Corpse Spawner - Shiva Aegis Scientist
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseScientistAegisShiva

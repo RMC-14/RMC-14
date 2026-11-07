@@ -150,13 +150,16 @@
 - type: startingGear
   id: RMCGearCorpseScientistAegis
   equipment:
-    jumpsuit: ClothingUniformJumpsuitVirology
-    back: CMSatchelMedical
+    jumpsuit: RMCJumpsuitCivilianVirologist
+    back: RMCSatchelVirology
     shoes: CMBootsBlackFilled
     gloves: CMHandsLatex
-    outerClothing: ClothingOuterCoatLab
+    outerClothing: RMCLabcoat
     id: RMCIDCardAegisIntel
+    mask: CMMaskSterile
+    eyes: RMCGlassesReagentHUDGlasses
     ears: CMHeadsetColony
+    head: CMHeadCapSurgGreen
   storage:
     back:
     - RMCRadioHandheldColonyOff

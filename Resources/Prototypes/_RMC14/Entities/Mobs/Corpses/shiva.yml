@@ -89,6 +89,31 @@
     - RMCMotionDetector
 #    # T3 research notes
 
+# Aegis Scientist
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseScientistAegisShiva
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseScientistAegisShiva ]
+
+- type: startingGear
+  id: RMCGearCorpseScientistAegisShiva
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianVirologist
+    back: RMCSatchelChemistry
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsBlack
+    outerClothing: RMCCoatSnowSurvivorPurple
+    id: RMCIDCardAegisIntel
+    mask: CMMaskCoif
+    eyes: RMCGlassesReagentHUDGlasses
+    ears: CMHeadsetColony
+    head: RMCHeadUshanka
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
 # Doctor
 - type: randomHumanoidSettings
   parent: RMCCorpse
@@ -295,3 +320,58 @@
     back:
     - RMCFlashlightLantern
     - RMCRadioHandheldColonyOff
+
+# Corporate Liaison
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYa
+  id: RMCCorpseLiaisonShiva
+  components:
+  - type: Loadout
+    prototypes:
+    - RMCGearCorpseLiaisonShiva
+    - RMCGearCorpseLiaisonBlueShiva
+    - RMCGearCorpseLiaisonBrownShiva
+    - RMCGearCorpseLiaisonWhiteShiva
+  - type: VictimBurst
+  - type: Rank
+    rank: RMCRankWeYaExecutive
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/job_icons/We-Ya/liaison_ranks.rsi
+      state: hudsquad_liaison
+
+- type: startingGear
+  id: RMCGearCorpseLiaisonShiva
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBlack
+    back: CMSatchelSecureStandard
+    eyes: RMCGlassesAviators
+    id: CMIDCardLiaisonColony
+    ears: RMCHeadsetDistressWeYa
+    gloves: RMCHandsBlack
+    mask: CMMaskCoif
+    shoes: CMBootsBlackFilled
+    head: RMCHeadUshanka
+    outerClothing: RMCCoatSnowSurvivorNavy
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+    # TODO random CL survivor notes
+
+- type: startingGear
+  parent: RMCGearCorpseLiaisonShiva
+  id: RMCGearCorpseLiaisonBlueShiva
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBlue
+
+- type: startingGear
+  parent: RMCGearCorpseLiaisonShiva
+  id: RMCGearCorpseLiaisonBrownShiva
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBrown
+
+- type: startingGear
+  parent: RMCGearCorpseLiaisonShiva
+  id: RMCGearCorpseLiaisonWhiteShiva
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonCorporateFormal
