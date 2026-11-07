@@ -39,7 +39,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private readonly List<Entity<RMCChemicalDispenserComponent>> _dispensers = new();
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
-    private List<string> _reagentWatchlist = new List<string> { "RMCEthanol" };
+    private List<string> _reagentWatchlist = RMCCVars.RMCReagentWatchList.DefaultValue.Split(",").ToList();
 
     public override void Initialize()
     {

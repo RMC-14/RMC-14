@@ -633,5 +633,5 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<string> RMCReagentWatchList =
-            CVarDef.Create("rmc.reagent_watch_list", "RMCEthanol", CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
+            CVarDef.Create("rmc.reagent_watch_list", "RMCEthanol,RMCRadium,RMCMercury,RMCPotassium", CVar.SERVER | CVar.REPLICATED | CVar.NOTIFY);
 }

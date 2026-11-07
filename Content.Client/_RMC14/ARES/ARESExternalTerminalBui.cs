@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.ExternalTerminals;
 using Content.Shared._RMC14.ARES.Logs;
-using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.UserInterface;
 using Content.Shared.Access;
 using Robust.Client.UserInterface;
