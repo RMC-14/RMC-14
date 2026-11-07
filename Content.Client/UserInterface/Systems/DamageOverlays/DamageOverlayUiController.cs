@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Medical.Pain;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
@@ -10,6 +12,7 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Player;
+using Robust.Shared.Utility;
 
 namespace Content.Client.UserInterface.Systems.DamageOverlays;
 
@@ -29,6 +32,7 @@ public sealed class DamageOverlayUiController : UIController
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<MobThresholdChecked>(OnThresholdCheck);
+        SubscribeLocalEvent<DamageOverlayUpdateEvent>(OnUpdateRequest); // RMC14
     }
 
     private void OnPlayerAttach(LocalPlayerAttachedEvent args)
@@ -62,6 +66,15 @@ public sealed class DamageOverlayUiController : UIController
             return;
         UpdateOverlays(args.Target, args.MobState, args.Damageable, args.Threshold);
     }
+
+    // RMC14
+    private void OnUpdateRequest(ref DamageOverlayUpdateEvent args)
+    {
+        if (args.Ent != _playerManager.LocalEntity)
+            return;
+        UpdateOverlays(args.Ent, null);
+    }
+    // RMC14
 
     private void ClearOverlay()
     {
@@ -98,7 +111,23 @@ public sealed class DamageOverlayUiController : UIController
                 FixedPoint2 painLevel = 0;
                 _overlay.PainLevel = 0;
 
-                if (!EntityManager.HasComponent<PainNumbnessComponent>(entity))
+                // RMC14 Start
+                if (EntityManager.TryGetComponent<PainComponent>(entity, out var painComp))
+                {
+                    // Clamp the value between the currently active level's threshold and the next level's threshold, so that the pain overlay
+                    // updates per-level rather that independently of it by just using `PerceivedPain`.
+                    // (It's still allowed to change to any value within the min and max, just not go past them until the current pain level changes)
+                    var minOverlayPain = painComp.CurrentPainLevelIdx == 0
+                        ? FixedPoint2.Zero // First in the list, so clamp to (0, currentLevel.Threshold)
+                        : painComp.PainLevels[painComp.CurrentPainLevelIdx].Threshold;
+                    var maxOverlayPain = painComp.CurrentPainLevelIdx == painComp.PainLevels.Count - 1
+                        ? FixedPoint2.MaxValue // Last in the list, so clamp to (currentLevel.Threshold, MaxValue)
+                        : painComp.PainLevels[painComp.CurrentPainLevelIdx + 1].Threshold;
+
+                    var newOverlayPainLevel = (FixedPoint2.Clamp(painComp.PerceivedPain, minOverlayPain, maxOverlayPain) / 100).Float();
+                    _overlay.PainLevel = newOverlayPainLevel < 0.05f ? 0 : newOverlayPainLevel; // Don't show damage overlay if they're near enough to max.
+                }
+                else if (!EntityManager.HasComponent<PainNumbnessComponent>(entity)) // RMC14 End
                 {
                     foreach (var painDamageType in damageable.PainDamageGroups)
                     {
