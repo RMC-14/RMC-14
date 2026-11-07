@@ -291,11 +291,11 @@ rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Li
 
 # Sorokyne SPP special forces insert survs
 
-rmc-job-greeting-soro-spetsnaz = You are a member of the SPP Spetsnaz Special Reconnaissance Unit!
+rmc-job-greeting-soro-spetsnaz = You are a member of the SPP Spetsnaz Reconnaissance Unit!
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons.
 
-  You are part of the Group 'B' Special Reconnaissance Unit of the SPP Spetsnaz, deployed alongside the Ministry of Space Colonization to perform forward reconnaissance on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
+  You are part of the Group 'B' Spetsnaz Reconnaissance Unit of the SPP, deployed alongside the Ministry of Space Colonization to perform forward reconnaissance on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -303,26 +303,26 @@ rmc-job-greeting-soro-spetsnaz = You are a member of the SPP Spetsnaz Special Re
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-name-spetsnaz = SPP Spetsnaz SRU Survivor
+rmc-job-name-spetsnaz = SPP SRU Survivor
 
-rmc-job-description-soro-spetsnaz = You are a stranded SPP Spetsnaz Group 'B' SRU marine. Your team was sent to investigate a distress signal. Find out what happened to the colony.
+rmc-job-description-soro-spetsnaz = You are a stranded SPP Group 'B' SRU marine. Your team was sent to investigate a distress signal. Find out what happened to the colony.
 
-rmc-job-name-spetsnaz-sapper = Spetsnaz SRU Sapper
+rmc-job-name-spetsnaz-sapper = Spetsnaz Sapper
 rmc-job-prefix-soro-spetsnaz-sapper = B/SRU SAP
 
-rmc-job-name-spetsnaz-medic = Spetsnaz SRU Medic
+rmc-job-name-spetsnaz-medic = Spetsnaz Medic
 rmc-job-prefix-soro-spetsnaz-medic = B/SRU MED
 
-rmc-job-name-spetsnaz-sl = Spetsnaz SRU Squad Leader
+rmc-job-name-spetsnaz-sl = Spetsnaz Squad Leader
 rmc-job-prefix-soro-spetsnaz-sl = B/SRU SL
 
-rmc-job-name-spetsnaz-spec = Spetsnaz SRU Specialist
+rmc-job-name-spetsnaz-spec = Spetsnaz Specialist
 rmc-job-prefix-soro-spetsnaz-spec = B/SRU SPEC
 
-rmc-job-name-spetsnaz-operator = Spetsnaz SRU Operator
+rmc-job-name-spetsnaz-operator = Spetsnaz Operator
 rmc-job-prefix-soro-spetsnaz-operator = B/SRU OPR
 
-rmc-job-name-spetsnaz-synth = Spetsnaz SRU Support Synthetic
+rmc-job-name-spetsnaz-synth = Spetsnaz SRU Synthetic
 rmc-job-prefix-soro-spetsnaz-synth = B/SRU SYN
 
 # Trijent survs
@@ -346,11 +346,11 @@ CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
 # Trijent SPP special forces insert survs
 
-rmc-job-greeting-trijent-spetsnaz = You are a member of the SPP Spetsnaz Special Reconnaissance Unit!
+rmc-job-greeting-trijent-spetsnaz = You are a member of the SPP Spetsnaz Reconnaissance Unit!
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons.
 
-  You are part of the Group 'D' Special Reconnaissance Unit of the SPP Spetsnaz. Your orders were simple, recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
+  You are part of the Group 'D' Spetsnaz Reconnaissance Unit of the SPP. Your orders were simple, recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -358,7 +358,7 @@ rmc-job-greeting-trijent-spetsnaz = You are a member of the SPP Spetsnaz Special
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-description-trijent-spetsnaz = You are a stranded SPP Spetsnaz Group 'D' SRU marine. Your Mi-220 assault gunship crashed and you are stranded on the planet. Do what it takes to survive!
+rmc-job-description-trijent-spetsnaz = You are a stranded SPP Group 'D' SRU marine. Your Mi-220 assault gunship crashed and you are stranded on the planet. Do what it takes to survive!
 
 rmc-job-prefix-trijent-spetsnaz-sapper = D/SRU SAP
 
