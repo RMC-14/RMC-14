@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
@@ -13,4 +13,7 @@ public sealed partial class GridSpawnerComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2 Offset;
+
+    [DataField, AutoNetworkedField]
+    public bool IgnoreGridFill = false;
 }

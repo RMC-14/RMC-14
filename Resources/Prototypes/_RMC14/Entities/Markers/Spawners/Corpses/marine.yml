@@ -1,0 +1,55 @@
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNMCMarineUnarmed
+  name: Corpse Spawner - UNMC Marine Unarmed
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNMCUnarmed
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNMCMarineRandom
+  name: Corpse Spawner - UNMC Marine
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNMCRandom
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNMCMedicRandom
+  name: Corpse Spawner - UNMC Medic
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNMCMedicRandom
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNMCMedicalTechnicianRandom
+  name: Corpse Spawner - UNMC Medical Technician
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNMCMedicalTechnicianRandom
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNMCMilitaryPoliceRandom
+  name: Corpse Spawner - UNMC Base Police
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNMCMilitaryPoliceRandom
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNMCPilot
+  name: Corpse Spawner - UNMC Pilot
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNMCPilot
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNMCCrewman
+  name: Corpse Spawner - UNMC Crewman
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNMCCrewman

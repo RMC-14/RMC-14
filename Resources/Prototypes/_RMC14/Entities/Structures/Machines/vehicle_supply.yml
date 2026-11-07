@@ -89,10 +89,10 @@
     - name: tank
       vehicle: VehicleTank
       hardpoints:
-      - VehicleTankArmorBallistic
-      - VehicleTankArmorConcussive
-      - VehicleTankArmorCaustic
-      - VehicleTankArmorPaladin
+      # - VehicleTankArmorBallistic
+      # - VehicleTankArmorConcussive
+      # - VehicleTankArmorCaustic
+      # - VehicleTankArmorPaladin
       - VehicleTankSnowplow
       - VehicleTankLTAAAPMinigun
       # - VehicleTankLTBCannon parity :c
