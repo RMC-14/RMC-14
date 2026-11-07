@@ -65,7 +65,7 @@
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
-      - [ RMCArmorSPPSpetsnazSupport ]
+      - [ RMCArmorSPPSpetsnazSupportSurvivorFill ]
     - # Headwear // TODO RMC14 implement random chance here in a less ugly way
       - [ RMCArmorHelmetSPPSpetsnazAlt ] # 2/9 chance
       - [ RMCHeadCapSPPSpetsnaz ] # 3/9 chance # RMC14: Cap on CM
@@ -91,7 +91,7 @@
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
-      - [ RMCArmorSPPSpetsnazSupport ]
+      - [ RMCArmorSPPSpetsnazSupportSurvivorFill ]
     - # Headwear // TODO RMC14 implement random chance here in a less ugly way
       - [ RMCArmorHelmetSPPSpetsnazAlt ] # 2/9 chance
       - [ RMCHeadCapSPPSpetsnaz ] # 3/9 chance # RMC14: Cap on CM
