@@ -89,6 +89,29 @@ namespace Content.Client.LateJoin
             if (!_gameTicker.DisallowedLateJoin && _gameTicker.StationNames.Count == 0)
                 _sawmill.Warning("No stations exist, nothing to display in late-join GUI");
 
+            // RMC14
+            // Gives a helpful message to let people know why they can't join the round as a marine
+            if (_gameTicker.DisallowedLateJoin)
+                _base.AddChild(new BoxContainer()
+                    {
+                        Children =
+                        {
+                            new PanelContainer()
+                            {
+                                Children =
+                                {
+                                    new RichTextLabel()
+                                    {
+                                        StyleClasses = { "LabelBig" },
+                                        Text = $"{Loc.GetString("rmc-lobby-late-join-hijack-1")}\n\n{Loc.GetString("rmc-lobby-late-join-hijack-2")}",
+                                        HorizontalAlignment = HAlignment.Center,
+                                    },
+                                }
+                            }
+                        }
+                    });
+            // RMC14
+
             foreach (var (id, name) in _gameTicker.StationNames)
             {
                 var jobList = new BoxContainer

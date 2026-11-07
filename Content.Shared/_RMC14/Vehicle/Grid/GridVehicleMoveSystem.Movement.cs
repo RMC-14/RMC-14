@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared.Vehicle.Components;
 using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -129,7 +130,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             travel,
             frameTime,
             out var blocked);
-        if (blocked)
+        if (blocked && !moved)
             mover.CurrentSpeed = 0f;
 
         if (moved && hasInput && mover.PushCooldown > 0f)
@@ -146,6 +147,22 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Vector2i inputDir,
         float frameTime)
     {
+        if (mover.WeedsSpeedFactor < 1f)
+        {
+            var coords = Transform(uid).Coordinates;
+            if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coords, out _))
+                mover.CurrentSpeed *= MathF.Pow(mover.WeedsSpeedFactor, frameTime);
+        }
+
+        var waterCoords = Transform(uid).Coordinates;
+        if (_rmcMap.HasAnchoredEntityEnumerator<VehicleWaterSlowTileComponent>(waterCoords, out var waterTile) &&
+            _rmcWater.IsActiveWater(waterTile.Owner, uid) &&
+            waterTile.Comp.SpeedFactors.TryGetValue(mover.WeightClass, out var waterFactor) &&
+            waterFactor < 1f)
+        {
+            mover.CurrentSpeed *= MathF.Pow(waterFactor, frameTime);
+        }
+
         var hasInput = inputDir != Vector2i.Zero;
         var facing = mover.CurrentDirection;
         var hadFacing = facing != Vector2i.Zero;
@@ -245,6 +262,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ? mover.CurrentDirection
             : -mover.CurrentDirection;
         var rotation = DirectionToVehicleRotation(mover.CurrentDirection);
+        var speedBeforeMove = mover.CurrentSpeed;
         var moved = TryMoveWithLaneGuidance(
             uid,
             mover,
@@ -255,8 +273,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             travel,
             frameTime,
             out var blocked);
-        if (blocked)
+        if (blocked && !moved)
+        {
             mover.CurrentSpeed = 0f;
+            _rmcVehicles.DoInteriorCrashEffect(uid, speedBeforeMove, GetModifiedMaxSpeed(uid, mover));
+        }
 
         return moved;
     }
@@ -688,14 +709,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var sampleSteps = (int) MathF.Ceiling(limit / step);
         var lookahead = Math.Max(1, mover.TileOffsetLookahead);
 
-        // test center & both extremes before committing to full scan
-        // reversed CanOccupyMoveLane loop, each probe costs 1 query when a wall
-        // is present (fails at the farthest lookahead tile immediately). A solid wall
-        // blocking all lateral positions is detected in 3 queries total
-        if (!CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, 0f, lookahead, ignoredEntities) &&
-            !CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, limit, lookahead, ignoredEntities) &&
-            !CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, -limit, lookahead, ignoredEntities))
+        if (mover.LaneSearchSkipSteps > 0 && mover.LaneSearchCacheDir == moveDir)
         {
+            mover.LaneSearchSkipSteps--;
             return false;
         }
 
@@ -737,8 +753,14 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         }
 
         if (!foundLane)
+        {
+            mover.LaneSearchCacheDir = moveDir;
+            mover.LaneSearchSkipSteps = 2;
             return false;
+        }
 
+        mover.LaneSearchSkipSteps = 0;
+        mover.LaneSearchCacheDir = Vector2i.Zero;
         laneOffset = bestOffset;
         return true;
     }
@@ -1154,6 +1176,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private void ApplySmashSlowdown(EntityUid vehicle, GridVehicleMoverComponent mover, VehicleSmashableComponent smashable)
     {
         if (smashable.SlowdownDuration <= 0f || smashable.SlowdownMultiplier >= 1f)
+            return;
+
+        if (smashable.SlowdownBelowWeightClass is { } maxWeight && mover.WeightClass >= maxWeight)
             return;
 
         var now = _timing.CurTime;
