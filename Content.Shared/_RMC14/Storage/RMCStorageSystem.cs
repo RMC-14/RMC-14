@@ -236,7 +236,7 @@ public sealed class RMCStorageSystem : EntitySystem
             return;
 
         if (!HasComp<NoStunOnExitComponent>(args.Container.Owner))
-            _stun.TryStun(ent, _stunStorage, true);
+            _stun.TryStun(ent, CompOrNull<StunOnExitDurationComponent>(args.Container.Owner)?.StunDuration ?? _stunStorage, true);
 
         if (HasComp<SkyFallingComponent>(args.Container.Owner) || HasComp<CrashLandingComponent>(args.Container.Owner))
         {

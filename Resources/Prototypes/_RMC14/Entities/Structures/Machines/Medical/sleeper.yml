@@ -42,6 +42,8 @@
     useVerbs: false # Stops Alt-Click from bypassing do-after
     entryDelay: 2
     delaySelfEntry: true
+  - type: StunOnExitDuration
+    stunDuration: 2
   - type: ContainerContainer
     containers:
       sleeper: !type:ContainerSlot {}

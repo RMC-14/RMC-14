@@ -38,6 +38,8 @@
     channel: Equipment
   - type: DragInsertContainer
     containerId: body_scanner
+  - type: StunOnExitDuration
+    stunDuration: 2
   - type: ContainerContainer
     containers:
       body_scanner: !type:ContainerSlot {}
