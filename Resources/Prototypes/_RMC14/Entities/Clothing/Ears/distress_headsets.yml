@@ -125,7 +125,7 @@
   components:
   - type: RMCHeadset
     radioTextIncrease: 2
-    
+
 - type: entity
   parent: RMCHeadsetPMCPVE
   id: RMCHeadsetPMCLeaderPVE
@@ -442,8 +442,8 @@
 - type: entity
   parent: RMCHeadsetColonyIcons
   id: RMCHeadsetSPPSpetsnazCrashlandTrijent
-  name: SPP Spetsnaz D/SRU headset
-  description: A special headset used by the SPP Spetsnaz Group 'D' Special Recon Unit.
+  name: SPP D/SRU headset
+  description: A special headset used by the SPP Group 'D' Spetsnaz Recon Unit.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -471,8 +471,8 @@
 - type: entity
   parent: RMCHeadsetColonyIcons
   id: RMCHeadsetSPPSpetsnazCrashland
-  name: SPP Spetsnaz B/SRU headset
-  description: A special headset used by the SPP Spetsnaz Group 'B' Special Recon Unit.
+  name: SPP B/SRU headset
+  description: A special headset used by the SPP Group 'B' Spetsnaz Recon Unit.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -486,7 +486,7 @@
 - type: entity
   parent: RMCHeadsetSPPSpetsnazCrashland
   id: RMCHeadsetSPPSpetsnazCrashlandSL
-  name: SPP Spetsnaz B/SRU squad leader headset
+  name: SPP B/SRU squad leader headset
   components:
   - type: RMCHeadset
     radioTextIncrease: 2
