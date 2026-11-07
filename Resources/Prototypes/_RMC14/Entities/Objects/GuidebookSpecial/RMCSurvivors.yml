@@ -1,0 +1,71 @@
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorCivilian
+  name: Civilian Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_civilian
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorCorporate
+  name: Civilian Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_corporate
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorDoctor
+  name: Doctor Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_doctor
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorEngineer
+  name: Engineer Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_engineer
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorScientist
+  name: Scientist Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_scientist
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorSecurity
+  name: Security Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_security
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorCommander
+  name: Commander Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_commander
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSurvivorSynthetic
+  name: Synthetic Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor_synthetic

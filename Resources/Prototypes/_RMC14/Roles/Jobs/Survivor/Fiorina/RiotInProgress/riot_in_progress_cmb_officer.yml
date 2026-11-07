@@ -60,6 +60,7 @@
     id: RMCIDCardCMBDeputySurvivor
     back: CMSatchelSecuritySurvivorFill
     outerClothing: RMCArmorPMCRiotCMB
+    belt: CMBeltSecurityMPFilled
     ears: RMCHeadsetDistressBureauDamaged
     eyes: RMCGlassesSecurityBlue
     gloves: RMCHandsVeteran

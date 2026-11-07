@@ -153,7 +153,7 @@
   name: chat-radio-marine-survivor
   keycode: "@"
   frequency: 1724
-  color: "#349c30"
+  color: "#3b62a7"
   longRange: true
   tower: true
 

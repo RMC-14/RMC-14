@@ -1,32 +1,44 @@
 # Provost Inspector
+## Outerwear
 - type: loadout
   id: ProvostJacketFilledRMC
-  cost: 1
+  cost: 0
   equipment:
     outerClothing: RMCProvostJacketFilled
 
 - type: loadout
   id: ProvostCoatFilledRMC
-  cost: 1
+  cost: 0
   equipment:
     outerClothing: RMCProvostCoatFilled
 
 - type: loadout
-  id: RMCWeaponPistolHandcannon
-  cost: 0
-  dummyEntity: RMCWeaponPistolHandcannon
-  equipment:
-    belt: RMCBeltHolsterPistolHandcannonFilled
-
-- type: loadout
-  id: RMCWeaponPistolHandcannonProvost
+  id: RMCProvostJacketBlueFilled
   cost: 0
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: CMJobProvostInspector
-      time: 540000 # 150 hrs
-  dummyEntity: RMCWeaponPistolHandcannonProvost
+      time: 432000 # 120 hrs
   equipment:
-    belt: RMCBeltHolsterPistolHandcannonProvostFilled
+    outerClothing: RMCProvostJacketBlueFilled
+
+## Headwear
+- type: loadout
+  id: RMCHeadBeretProvostGold
+  cost: 0
+  equipment:
+    head: RMCHeadBeretProvostGold
+
+- type: loadout
+  id: RMCHeadBeretProvostBlue
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobProvostInspector
+      time: 432000 # 120 hrs
+  equipment:
+    head: RMCHeadBeretProvostBlue
