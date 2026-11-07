@@ -58,6 +58,18 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMAR50
+  name: MAR-50 light machine gun crate
+  description: Includes a MAR-50 light machine gun and three spare drum magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponMar50LMG
+    - id: RMCMagazineMar50LMG
+      amount: 3
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketHuntingRifle
   name: Basira-Armstrong bolt-action hunting rifle crate
   description: Includes a Basira-Armstrong bolt-action hunting rifle and five magazines.
@@ -470,7 +482,6 @@
     - id: ClothingBeltChampion
     - id: RMCClothingMaskLuchador
     - id: CMSoapDeluxe
-    # TODO RMC14: port K92 Maintenance Jack and add RMCMaintenanceJack here.
     - id: CMGrenadeSmoke
     - id: FoodCornTrash
     - id: RMCRolledPoster
@@ -481,15 +492,14 @@
     - id: FoodAmbrosiaVulgaris
     - id: RMCTieHorrible
     - id: CMBeltInflatable
-    # TODO RMC14: uncomment pamphlets once their black-market functionality is implemented.
-    # - id: CMPamphletPowerloader
-    # - id: CMPamphletLanguageRussian
-    # - id: CMPamphletLanguageJapanese
-    # - id: CMPamphletLanguageChinese
-    # - id: CMPamphletLanguageGerman
-    # - id: CMPamphletLanguageSpanish
-    # - id: CMPamphletLanguageScandinavian
-    # - id: CMPamphletLanguageFrench
+    - id: CMPamphletPowerloader
+    - id: CMPamphletLanguageRussian
+    - id: CMPamphletLanguageJapanese
+    - id: CMPamphletLanguageChinese
+    - id: CMPamphletLanguageGerman
+    - id: CMPamphletLanguageSpanish
+    - id: CMPamphletLanguageScandinavian
+    - id: CMPamphletLanguageFrench
 
 - type: entity
   parent: RMCCrateWoodenBuildable
@@ -793,6 +803,16 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMAR50
+  name: MAR-50 drum magazine box crate
+  description: Contains one box with three MAR-50 drum magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleMAR50
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketAmmoFP9000
   name: FN FP9000 magazine box crate
   description: Contains one FN FP9000 magazine box with 12 magazines.
@@ -875,7 +895,7 @@
   parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketAmmoType64
   name: Type 64 magazine box crate
-  description: Contains one Type 64 magazine box with 10 magazines.
+  description: Contains one Type 64 magazine box with 12 magazines.
   components:
   - type: StorageFill
     contents:
@@ -1278,3 +1298,23 @@
   - type: StorageFill
     contents:
     - id: RMCPottedPlantRandomUnanchored
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketPDT
+  name: PDT/L kit crate
+  description: Contains a PDT/L Battle Buddy kit with a paired locator, bracelet, and spare battery.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSparePDTLBattleBuddyKit
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketUrbanBoots
+  name: urban pattern combat boots crate
+  description: Contains one pair of urban pattern combat boots.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBootsUrban
