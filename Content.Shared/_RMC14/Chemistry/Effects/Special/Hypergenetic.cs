@@ -17,7 +17,9 @@ public sealed partial class Hypergenetic : RMCChemicalEffect
     public override bool ReactsOnTouch => true;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
-    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
+
+    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
+    private static readonly ProtoId<DamageTypePrototype> HeatType = "Heat";
     private static readonly ProtoId<DamageTypePrototype> CellularType = "Cellular";
 
     private const float HealingReductionDissipation = 0.4f;
@@ -81,9 +83,9 @@ public sealed partial class Hypergenetic : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency * 3f);
-        damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency * 3f, damage);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[BluntType] = potency * 3f;
+        damage.DamageDict[HeatType] = potency * 3f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 }

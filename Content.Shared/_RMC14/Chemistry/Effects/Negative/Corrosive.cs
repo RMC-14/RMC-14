@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Botany;
 using Content.Shared._RMC14.Chemistry.Buildup;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
@@ -25,8 +24,8 @@ public sealed partial class Corrosive : RMCChemicalEffect
 {
     public override bool ReactsOnTouch => true;
 
-    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
-    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
+    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
+    private static readonly ProtoId<DamageTypePrototype> CausticType = "Caustic";
     private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
     private static readonly EntProtoId MoltenItem = "RMCGooeyGreyMass";
 
@@ -45,8 +44,8 @@ public sealed partial class Corrosive : RMCChemicalEffect
             return;
         }
 
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[CausticType] = potency;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
@@ -135,7 +134,6 @@ public sealed partial class Corrosive : RMCChemicalEffect
             return;
         }
 
-        var rmcDamageable = entities.System<SharedRMCDamageableSystem>();
         if (touch && isHuman && volume >= 10f)
         {
             // TODO RMC14: head limb take_damage(4, 2) - flat 4 brute + 2 burn to the head, once per touch of 10u+
@@ -145,7 +143,8 @@ public sealed partial class Corrosive : RMCChemicalEffect
         }
         else
         {
-            var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, MathF.Min(6f, volume));
+            var damage = new DamageSpecifier();
+            damage.DamageDict[BluntType] = MathF.Min(6f, volume);
             damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
         }
     }
@@ -173,15 +172,15 @@ public sealed partial class Corrosive : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency * 2f);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[CausticType] = potency * 2f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency * 5f);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[CausticType] = potency * 5f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 

@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Chemistry.ChemEffectFlags;
-using Content.Shared._RMC14.Damage;
 using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -11,9 +10,9 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Hemostatic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
-    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
+    private static readonly ProtoId<DamageTypePrototype> HeatType = "Heat";
+    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -30,17 +29,17 @@ public sealed partial class Hemostatic : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[BluntType] = potency;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency * 9f);
-        damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency * 9f, damage);
-        damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency * 9f, damage);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[BluntType] = potency * 9f;
+        damage.DamageDict[HeatType] = potency * 9f;
+        damage.DamageDict[PoisonType] = potency * 9f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 }

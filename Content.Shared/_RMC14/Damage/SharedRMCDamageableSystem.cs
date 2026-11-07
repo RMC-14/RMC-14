@@ -394,19 +394,6 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return equal;
     }
 
-    public DamageSpecifier DistributeFreshDamage(ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
-    {
-        equal ??= new DamageSpecifier();
-        if (!_prototypes.TryIndex(groupId, out var group) || group.DamageTypes.Count == 0)
-            return equal;
-
-        var perType = amount / group.DamageTypes.Count;
-        foreach (var type in group.DamageTypes)
-            equal.DamageDict[type] = equal.DamageDict.GetValueOrDefault(type) + perType;
-
-        return equal;
-    }
-
     public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount)
     {
         if (amount > FixedPoint2.Zero)

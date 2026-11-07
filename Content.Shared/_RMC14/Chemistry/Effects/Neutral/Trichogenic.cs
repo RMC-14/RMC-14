@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Shared._RMC14.Botany;
-using Content.Shared._RMC14.Damage;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
@@ -16,7 +15,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Trichogenic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
+    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -100,8 +99,8 @@ public sealed partial class Trichogenic : RMCChemicalEffect
 
         args.EntityManager.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-trichogenic-itchy"), args.TargetEntity, args.TargetEntity, PopupType.SmallCaution);
 
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, ActualPotency);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[BluntType] = ActualPotency;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 

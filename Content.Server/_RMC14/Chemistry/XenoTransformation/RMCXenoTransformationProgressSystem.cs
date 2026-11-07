@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Effects.Special;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Chemistry.XenoTransformation;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Jittering;
 using Content.Shared._RMC14.Language.Components;
@@ -44,14 +43,13 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCXenoTransformationSystem _transformation = default!;
 
-    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
+    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
     private static readonly ProtoId<LanguagePrototype> XenoLanguage = "Xeno";
 
     private static readonly string[] Stage2Messages =
@@ -229,7 +227,8 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
                     Popup(uid, "Your skin feels impossibly calloused...", PopupType.MediumCaution);
                     // TODO RMC14: pain, cm13 apply_pain(PAIN_CHESTBURST_WEAK)
                     Popup(uid, _random.Pick(Stage5Chest), PopupType.MediumCaution);
-                    var damage = _rmcDamageable.DistributeFreshDamage(ToxinGroup, 10);
+                    var damage = new DamageSpecifier();
+                    damage.DamageDict[PoisonType] = 10;
                     _damageable.TryChangeDamage(uid, damage, true, interruptsDoAfters: false);
                 }
 
@@ -337,7 +336,8 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
 
     private void Brute(EntityUid uid, float amount)
     {
-        var damage = _rmcDamageable.DistributeFreshDamage(BruteGroup, amount);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[BluntType] = amount;
         _damageable.TryChangeDamage(uid, damage, true, interruptsDoAfters: false);
     }
 }

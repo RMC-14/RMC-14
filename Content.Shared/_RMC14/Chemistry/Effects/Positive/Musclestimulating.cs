@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Chemistry.Buildup;
 using Content.Shared._RMC14.Chemistry.SpeedModifier;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat.Prototypes;
@@ -19,7 +18,7 @@ public sealed partial class Musclestimulating : RMCChemicalEffect
 {
     public override bool ReactsOnTouch => true;
 
-    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
+    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
 
     private const float NutritionDrain = 0.5f * 0.05f * 0.5f;
 
@@ -78,8 +77,8 @@ public sealed partial class Musclestimulating : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[BluntType] = potency;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 }

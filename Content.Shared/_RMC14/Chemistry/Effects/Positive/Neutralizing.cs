@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Atmos;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Atmos.Components;
@@ -17,8 +16,8 @@ public sealed partial class Neutralizing : RMCChemicalEffect
 {
     public override bool ReactsOnTouch => true;
 
-    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly ProtoId<DamageTypePrototype> HeatType = "Heat";
+    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
 
     private const float PlasmaDrainMultiplier = 5f;
 
@@ -35,9 +34,9 @@ public sealed partial class Neutralizing : RMCChemicalEffect
             return;
         }
 
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency);
-        damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency * 0.5f, damage);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[HeatType] = potency;
+        damage.DamageDict[PoisonType] = potency * 0.5f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
@@ -75,9 +74,9 @@ public sealed partial class Neutralizing : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BurnGroup, potency * 2f);
-        damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency, damage);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[HeatType] = potency * 2f;
+        damage.DamageDict[PoisonType] = potency;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 

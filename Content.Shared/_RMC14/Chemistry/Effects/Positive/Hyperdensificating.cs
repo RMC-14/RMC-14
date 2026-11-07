@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Chemistry.ChemEffectFlags;
 using Content.Shared._RMC14.Chemistry.SpeedModifier;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Synth;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -15,7 +14,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Hyperdensificating : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
+    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -59,8 +58,8 @@ public sealed partial class Hyperdensificating : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(BruteGroup, potency * 3f);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[BluntType] = potency * 3f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 }

@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Body;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -15,7 +14,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Ketogenic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
 
     private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
     private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
@@ -82,8 +81,8 @@ public sealed partial class Ketogenic : RMCChemicalEffect
         var hungerSystem = entityManager.System<HungerSystem>();
         hungerSystem.ModifyHunger(target, PotencyPerSecond * -10);
 
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[PoisonType] = potency;
         damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
 
         var random = IoCManager.Resolve<IRobustRandom>();

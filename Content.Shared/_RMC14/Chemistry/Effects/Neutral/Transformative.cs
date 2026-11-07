@@ -11,7 +11,7 @@ public sealed partial class Transformative : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
 
     [DataField]
     public float HealAmount = 0.75f;
@@ -49,7 +49,7 @@ public sealed partial class Transformative : RMCChemicalEffect
         }
 
         if (byproduct > FixedPoint2.Zero)
-            damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, byproduct, damage);
+            damage.DamageDict[PoisonType] = byproduct;
 
         if (damage.DamageDict.Count == 0)
             return;
@@ -59,15 +59,15 @@ public sealed partial class Transformative : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, HealAmount * (float) potency * 0.5f);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[PoisonType] = HealAmount * (float) potency * 0.5f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, HealAmount * (float) potency * 2f);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[PoisonType] = HealAmount * (float) potency * 2f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 }

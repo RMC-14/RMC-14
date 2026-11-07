@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Chemistry.Effects.Positive;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Dizziness;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -16,7 +15,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Alcoholic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
     private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
 
     private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
@@ -48,8 +47,8 @@ public sealed partial class Alcoholic : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency * 0.5f);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[PoisonType] = potency * 0.5f;
         damage.DamageDict[AsphyxiationType] = potency;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
 
@@ -78,8 +77,8 @@ public sealed partial class Alcoholic : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var damage = rmcDamageable.DistributeFreshDamage(ToxinGroup, potency);
+        var damage = new DamageSpecifier();
+        damage.DamageDict[PoisonType] = potency;
         damage.DamageDict[AsphyxiationType] = potency * 2f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
 
