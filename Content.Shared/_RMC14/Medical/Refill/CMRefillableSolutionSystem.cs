@@ -71,7 +71,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         using (args.PushGroup(nameof(CMRefillableSolutionComponent)))
         {
-            args.PushMarkup("[color=cyan]This can be refilled by clicking on a medical vendor with it![/color]");
+            args.PushMarkup(Loc.GetString("cm-refillable-solution-examine"));
         }
     }
 

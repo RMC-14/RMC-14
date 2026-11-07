@@ -57,8 +57,8 @@ rmc-overwatch-console-longitude-short = LONG.
 rmc-overwatch-console-latitude-short = LAT.
 rmc-overwatch-console-comment = COMMENT
 rmc-overwatch-console-save-comment = Save Comment
-rmc-overwatch-console-no-crate-loaded = [color=red][bold][ NO CRATE LOADED ][/bold][/color]
-rmc-overwatch-console-crate-loaded = [color=green][bold][ CRATE LOADED ][/bold][/color]
+rmc-overwatch-console-no-crate-loaded = [color=red][bold] \[ NO CRATE LOADED \][/bold][/color]
+rmc-overwatch-console-crate-loaded = [color=green][bold] \[ CRATE LOADED \][/bold][/color]
 rmc-overwatch-console-ready = [color=green][bold][ READY ][/bold][/color]
 rmc-overwatch-console-not-ready = [color=red][bold][ NOT READY ][/bold][/color]
 rmc-overwatch-console-cooldown = [color=#D3B400][bold][ COOLDOWN - { $seconds } SECONDS ][/bold][/color]
@@ -104,3 +104,13 @@ rmc-overwatch-console-objective-updated = [bold][color=#7FFFD4]'{ $squadName }' 
 rmc-overwatch-console-objective-cancelled = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } '{ $objective }' [color=#FF0000]cancelled[/color].[/bold]
 rmc-overwatch-console-objectives = Your squad objectives:
     { $objectives }
+
+### Supply drop status
+rmc-overwatch-console-supply-ready = [color=green][bold] \[ READY \][/bold][/color]
+rmc-overwatch-console-supply-not-ready = [color=red][bold] \[ NOT READY \][/bold][/color]
+rmc-overwatch-console-input-ok = Ok
+rmc-overwatch-console-input-cancel = Cancel
+
+rmc-overwatch-console-busy-optics = You're too busy peering through optics.
+
+rmc-overwatch-console-promoted-squad-suffix = {" "}for {$squad}

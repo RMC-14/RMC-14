@@ -37,7 +37,7 @@ public sealed class XenoWatchBui : BoundUserInterface
             return;
 
         _window = EnsureWindow();
-        _window.BurrowedLarvaLabel.Text = $"Burrowed Larva: {s.BurrowedLarva}";
+        _window.BurrowedLarvaLabel.Text = Loc.GetString("rmc-xeno-ui-watch-burrowed-larva", ("count", s.BurrowedLarva));
         _window.XenoContainer.DisposeAllChildren();
 
         foreach (var xeno in s.Xenos)

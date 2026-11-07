@@ -17,8 +17,8 @@ public sealed partial class Electrogenetic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Heals [color=green]{HealAmount}[/color] brute, burn, and toxin damage when defibrillated.\n" +
-               $"Removes 1u of this chemical from the solution when defibrillated";
+        return Loc.GetString("rmc-reagent-effect-guidebook-electrogenetic",
+            ("healing", HealAmount.ToString()));
     }
 
     public DamageSpecifier CalculateHeal(DamageableSystem damageable, EntityUid target, IEntityManager entityManager)

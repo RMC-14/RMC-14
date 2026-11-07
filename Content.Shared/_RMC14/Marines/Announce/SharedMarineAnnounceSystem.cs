@@ -79,8 +79,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         _dialog.OpenConfirmation(
             ent,
             user.Value,
-            "Confirm Activation",
-            $"Confirm activation of Echo Squad for {args.Message}",
+            Loc.GetString("rmc-marine-comms-echo-confirm-title"),
+            Loc.GetString("rmc-marine-comms-echo-confirm-message", ("reason", args.Message)),
             ev
         );
     }
@@ -147,14 +147,14 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
             return;
 
         var ev = new EchoSquadReasonEvent(GetNetEntity(args.Actor));
-        _dialog.OpenInput(ent, args.Actor, "What is the purpose of Echo Squad?", ev);
+        _dialog.OpenInput(ent, args.Actor, Loc.GetString("rmc-marine-comms-echo-reason"), ev);
     }
 
     private void OnMarineCommunicationsOverwatchMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsOverwatchMsg args)
     {
         if (!_skills.HasSkill(args.Actor, ent.Comp.OverwatchSkill, ent.Comp.OverwatchSkillLevel))
         {
-            _popup.PopupClient("You are not trained in overwatch!", args.Actor, PopupType.LargeCaution);
+            _popup.PopupClient(Loc.GetString("rmc-marine-announce-no-skill"), args.Actor, PopupType.LargeCaution);
             return;
         }
 
@@ -269,7 +269,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (_idCard.TryFindIdCard(sender, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF))
             foreach (var faction in idCardIFF.Factions)
             {
-                _core.CreateARESLog(faction, LogCat, (string)$"{Name(sender)} sent an announcement: {message}");
+                _core.CreateARESLog(faction, LogCat, Loc.GetString("rmc-ares-log-announcement", ("user", Name(sender)), ("message", message)));
             }
     }
 

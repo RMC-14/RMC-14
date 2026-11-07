@@ -160,7 +160,7 @@ public sealed class LarvaQueueSystem : EntitySystem
                 RaiseNetworkEvent(new LarvaQueueOfferEvent
                 {
                     TargetEntity = pending.TargetLarva.HasValue ? GetNetEntity(pending.TargetLarva.Value) : null,
-                    TargetEntityName = pending.TargetLarva.HasValue ? Name(pending.TargetLarva.Value) : "Burrowed Larva",
+                    TargetEntityName = pending.TargetLarva.HasValue ? Name(pending.TargetLarva.Value) : Loc.GetString("rmc-larva-queue-burrowed-larva"),
                     ExpiresAt = pending.ExpiresAt,
                     HiveName = Name(pending.Hive),
                     OfferType = tier,
@@ -218,7 +218,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         if (TryRemoveFromQueue(session, hive))
         {
-            _popup.PopupEntity("You have been removed from the queue.", actorEntity.Value, actorEntity.Value);
+            _popup.PopupEntity(Loc.GetString("rmc-larva-queue-removed"), actorEntity.Value, actorEntity.Value);
             return;
         }
 
@@ -227,7 +227,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             Queue.GetOrNew(hive).AddLast(session);
             var position = GetQueuePosition(session, hive);
             _popup.PopupEntity(
-                $"You have been added to the queue at position {position}.",
+                Loc.GetString("rmc-larva-queue-added", ("position", position)),
                 actorEntity.Value, actorEntity.Value);
 
             TryOfferToQueue(hiveUid.Value);
@@ -237,7 +237,8 @@ public sealed class LarvaQueueSystem : EntitySystem
             PreQueue.GetOrNew(hive).Add(session, larvaWaitTime + ghost.TimeOfDeath.TotalSeconds);
             var timeLeft = TimeSpan.FromSeconds(larvaWaitTime) + ghost.TimeOfDeath - _gameTiming.CurTime;
             _popup.PopupEntity(
-                $"You died too recently, and will be added to the queue in {timeLeft.TotalSeconds:F0} seconds.",
+                Loc.GetString("rmc-larva-queue-died-recently",
+                    ("seconds", (int) Math.Round(timeLeft.TotalSeconds, MidpointRounding.AwayFromZero))),
                 actorEntity.Value, actorEntity.Value);
         }
     }
@@ -401,7 +402,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         RaiseNetworkEvent(new LarvaQueueOfferEvent
         {
             TargetEntity = targetLarva.HasValue ? GetNetEntity(targetLarva.Value) : null,
-            TargetEntityName = targetLarva.HasValue ? Name(targetLarva.Value) : "Burrowed Larva",
+            TargetEntityName = targetLarva.HasValue ? Name(targetLarva.Value) : Loc.GetString("rmc-larva-queue-burrowed-larva"),
             ExpiresAt = expiresAt,
             HiveName = Name(hive),
             OfferType = tier,
@@ -616,7 +617,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity != null)
             {
                 _popup.PopupEntity(
-                    $"You are now in position {pos} of the larva queue for ({Name(hive)}).",
+                    Loc.GetString("rmc-larva-queue-position-update", ("position", pos), ("hive", Name(hive))),
                     session.AttachedEntity.Value,
                     session.AttachedEntity.Value);
             }
@@ -736,7 +737,7 @@ public sealed class LarvaQueueSystem : EntitySystem
                 {
                     var pos = GetQueuePosition(userId, hive);
                     _popup.PopupEntity(
-                        $"You have been added to the queue at position {pos}.",
+                        Loc.GetString("rmc-larva-queue-added", ("position", pos)),
                         session.AttachedEntity.Value, session.AttachedEntity.Value);
                 }
             }

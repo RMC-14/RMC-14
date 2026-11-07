@@ -126,3 +126,48 @@ rmc-vehicle-demolition-start = You start rigging the wreck with explosives...
 rmc-vehicle-demolition-no-skill = You do not know how to rig demolition charges.
 rmc-vehicle-too-small-to-damage = We're too small to do any significant damage to this vehicle!
 rmc-vehicle-demolition-armed = The charge is planted and is counting down!
+
+### Vehicle supply lift
+rmc-vehicle-supply-stored = Stored Vehicles
+rmc-vehicle-supply-vehicle = Vehicle
+rmc-vehicle-supply-preview = Vehicle Preview
+rmc-vehicle-supply-no-lift = No lift
+rmc-vehicle-supply-none = none
+rmc-vehicle-supply-busy = busy
+rmc-vehicle-supply-idle = idle
+rmc-vehicle-supply-status = Lift: {$mode} | Status: {$status} | Active: {$active}
+rmc-vehicle-supply-copies-expanded = Copies v
+rmc-vehicle-supply-copies-collapsed = Copies >
+
+### Vehicle hardpoints and weapons
+rmc-vehicle-hardpoint-title = Hardpoints
+rmc-vehicle-hardpoint-header = Vehicle Hardpoints
+rmc-vehicle-hardpoint-frame-integrity = Frame Integrity
+rmc-vehicle-hardpoint-open-slot = Open: {$slot}
+rmc-vehicle-ammo-loader-title = Ammo Loader
+rmc-vehicle-weapons-auto-turret = Auto Turret
+rmc-vehicle-weapons-stabilization = Stabilization
+rmc-vehicle-weapons-ammo-none = Ammo: --
+rmc-vehicle-weapons-ammo = Ammo: {$ammo}/{$max}
+rmc-vehicle-weapons-stored = Stored: {$stored}/{$max}
+
+rmc-vehicle-hardpoint-frame-finish-wrench = Finish tightening the frame with a wrench.
+rmc-vehicle-hardpoint-frame-weld-first = Weld the frame before tightening it.
+
+### Hardpoint removal
+rmc-hardpoint-remove-cancelled = Hardpoint removal cancelled.
+rmc-hardpoint-remove-no-slots = Unable to access hardpoint slots.
+rmc-hardpoint-remove-empty-slot = No hardpoint is installed in that slot.
+rmc-hardpoint-remove-free-arm = Free your power loader's active arm before removing that hardpoint.
+rmc-hardpoint-remove-free-hand = Couldn't remove the hardpoint. Free a hand and try again.
+rmc-hardpoint-remove-loader-failed = Couldn't move the hardpoint into the power loader. Free the active arm and try again.
+rmc-hardpoint-remove-invalid-slot = Invalid hardpoint slot.
+rmc-hardpoint-remove-missing-slot = That hardpoint slot does not exist.
+rmc-hardpoint-remove-turret-attachments = Remove the turret attachments before removing the turret.
+rmc-hardpoint-remove-unfinished = Finish installing that hardpoint before removing it.
+rmc-hardpoint-remove-need-loader = You need to be operating a power loader to remove this hardpoint.
+rmc-hardpoint-remove-in-progress = That hardpoint is already being removed.
+rmc-hardpoint-remove-need-tool = You need a prying tool to remove this hardpoint.
+rmc-hardpoint-remove-start-failed = Couldn't start hardpoint removal.
+rmc-vehicle-flamer-slot-tank = Tank
+rmc-vehicle-flamer-slot-spare-tank = Spare Tank

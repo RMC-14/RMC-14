@@ -1,12 +1,12 @@
 <DefaultWindow xmlns="https://spacestation14.io"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-               Title="Set Job Icon"
+               Title="{Loc 'rmc-job-icon-picker-title'}"
                MinSize="400 360"
                SetSize="400 440">
     <BoxContainer Orientation="Vertical" SeparationOverride="3" Margin="2">
         <BoxContainer Orientation="Horizontal" SeparationOverride="4">
-            <LineEdit Name="SearchBar" PlaceHolder="Search..." HorizontalExpand="True" />
-            <Button Name="ClearButton" Text="Clear Icon" StyleClasses="ButtonColorRed" />
+            <LineEdit Name="SearchBar" PlaceHolder="{Loc 'rmc-job-icon-picker-search'}" HorizontalExpand="True" />
+            <Button Name="ClearButton" Text="{Loc 'rmc-job-icon-picker-clear'}" StyleClasses="ButtonColorRed" />
         </BoxContainer>
         <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" VerticalExpand="True">
             <GridContainer Name="IconGrid" Columns="8" Margin="0 0 10 0">

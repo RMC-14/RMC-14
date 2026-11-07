@@ -69,7 +69,7 @@ public sealed class HiveLeaderSquadBui : BoundUserInterface
             return;
 
         var roleName = myEntry.Role >= 0 && myEntry.Role < HiveTeamsComponent.RoleNames.Length
-            ? HiveTeamsComponent.RoleNames[myEntry.Role]
+            ? Loc.GetString(HiveTeamsComponent.RoleNames[myEntry.Role])
             : "?";
 
         var allXenos = BuildAllXenos(hive.Owner);

@@ -1,7 +1,7 @@
 <cc:HiveTeamWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.HiveTeam"
-    Title="Hive Teams"
+    Title="{Loc 'rmc-xeno-ui-hive-teams-title'}"
     MinSize="900 750">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True"

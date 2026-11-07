@@ -7,6 +7,8 @@ namespace Content.Client._RMC14.Access;
 [GenerateTypedNameReferences]
 public sealed partial class IdModificationConsoleTabButton : Control
 {
+    public string TabId = string.Empty;
+
     public IdModificationConsoleTabButton()
     {
         RobustXamlLoader.Load(this);

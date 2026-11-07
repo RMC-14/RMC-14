@@ -33,13 +33,13 @@ public sealed class MutineerInviteWindow : DefaultWindow
 
         layout.AddChild(new RichTextLabel()
         {
-            Text = "You are being asked to join a mutiny.",
+            Text = Loc.GetString("rmc-mutiny-invite-text"),
             VerticalExpand =  true,
             VerticalAlignment = VAlignment.Center,
         });
         layout.AddChild(new RichTextLabel()
         {
-            Text = "Read the Mutinies and Riots guidelines (Core Rules -> \"Mutinies, Riots\").",
+            Text = Loc.GetString("rmc-mutiny-invite-rules"),
             VerticalExpand =  true,
             VerticalAlignment = VAlignment.Center,
         });

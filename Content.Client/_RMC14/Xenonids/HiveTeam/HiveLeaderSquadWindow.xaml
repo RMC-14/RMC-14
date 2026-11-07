@@ -1,13 +1,13 @@
 <cc:HiveLeaderSquadWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.HiveTeam"
-    Title="My Hive Squad"
+    Title="{Loc 'rmc-xeno-ui-hive-squad-title'}"
     MinSize="500 600">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
         <PanelContainer Name="LeaderPanel" Access="Public" HorizontalExpand="True"
                         Margin="4 4 4 2">
             <BoxContainer Orientation="Vertical" Margin="4">
-                <Label Text="Hive Leader" HorizontalAlignment="Center"
+                <Label Text="{Loc 'rmc-xeno-ui-hive-team-leader'}" HorizontalAlignment="Center"
                        FontColorOverride="#aaaaaa" Margin="0 0 0 4" />
                 <BoxContainer Name="LeaderSlot" Access="Public"
                               Orientation="Vertical" HorizontalExpand="True"
@@ -17,22 +17,22 @@
         <PanelContainer Name="MembersPanel" Access="Public" HorizontalExpand="True"
                         VerticalExpand="True" Margin="4 2 4 0">
             <BoxContainer Orientation="Vertical" Margin="4" VerticalExpand="True">
-                <Label Text="Members" HorizontalAlignment="Center"
+                <Label Text="{Loc 'rmc-xeno-ui-hive-team-members'}" HorizontalAlignment="Center"
                        FontColorOverride="#aaaaaa" Margin="0 0 0 4" />
                 <ScrollContainer HScrollEnabled="False" HorizontalExpand="True"
                                  VerticalExpand="True">
                     <GridContainer Name="MembersSlot" Access="Public"
                                    Columns="2" HorizontalExpand="True" />
                 </ScrollContainer>
-                <Button Name="AddMemberButton" Access="Public" Text="+ Add Member"
+                <Button Name="AddMemberButton" Access="Public" Text="{Loc 'rmc-xeno-ui-hive-team-add-member'}"
                         HorizontalExpand="True" Margin="0 4 0 0"
                         StyleClasses="ButtonSquare" />
             </BoxContainer>
         </PanelContainer>
         <BoxContainer Orientation="Horizontal" Margin="4">
             <LineEdit Name="AnnounceBox" Access="Public" HorizontalExpand="True"
-                      PlaceHolder="Send announcement to your squad..." />
-            <Button Name="AnnounceButton" Access="Public" Text="Send"
+                      PlaceHolder="{Loc 'rmc-xeno-ui-hive-squad-announce-placeholder'}" />
+            <Button Name="AnnounceButton" Access="Public" Text="{Loc 'rmc-xeno-ui-hive-squad-send'}"
                     StyleClasses="ButtonSquare" Margin="4 0 0 0" />
         </BoxContainer>
     </BoxContainer>

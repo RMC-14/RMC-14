@@ -285,7 +285,7 @@ public sealed partial class HardpointMenu : FancyWindow
                 FontColorOverride = Color.FromHex("#E1EEFF")
             });
 
-            var slotLine = hardpoint.HasItem ? displaySlot : $"Open: {displaySlot}";
+            var slotLine = hardpoint.HasItem ? displaySlot : Loc.GetString("rmc-vehicle-hardpoint-open-slot", ("slot", displaySlot));
             if (parentSlot != null)
                 slotLine = $"{parentSlot} / {slotLine}";
 

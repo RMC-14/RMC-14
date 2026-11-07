@@ -7,3 +7,7 @@ rmc-hive-core-cooldown-over = The Hive has recovered from the destruction of its
 rmc-hive-supports-castes = The Hive can now support: {$castes}
 rmc-hive-supports-castes-human = You hear a distant screech and feel your insides freeze up...  something new is with you in this colony.
 rmc-hive-supports-castes-synth = You hear the distant call of an unknown bioform, it sounds like they're informing others to change form. You begin to analyze and decrypt the strange vocalization.
+
+rmc-xeno-announce-queen-mother = [bold][color=#7575F3][font size=24]Queen Mother Psychic Directive[/font][/color][/bold]
+
+    {"["}color=red][font size=14]{$message}[/font][/color]
