@@ -5,7 +5,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Evolution;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(XenoEvolutionSystem))]
 public sealed partial class XenoRaffleCandidateComponent : Component
 {
@@ -21,11 +21,17 @@ public sealed partial class XenoRaffleCandidateComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? GraceUntil;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan? LastFullBlockNotify;
+    [DataField]
+    public FixedPoint2 GraceDamage;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? GraceHealedAt;
 
     [DataField, AutoNetworkedField]
     public bool Evolving;
+
+    [DataField, AutoNetworkedField]
+    public bool Skipped;
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 RaffleCost;

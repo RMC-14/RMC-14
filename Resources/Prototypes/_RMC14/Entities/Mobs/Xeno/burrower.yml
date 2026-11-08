@@ -48,6 +48,8 @@
     - ActionXenoDevolve
     tier: 2
     hudOffset: -0.15,0.56
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 420 # 7 minutes
   - type: XenoLight
   - type: XenoDevolve

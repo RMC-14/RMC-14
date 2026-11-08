@@ -7,7 +7,7 @@
   ranks:
     RMCRankSyntheticColonist: []
   startingGear: RMCGearSyntheticColonist
-  icon: "RMCJobIconSynth"
+  icon: "RMCJobIconGenericColonistSynthetic"
   joinNotifyCrew: true
   whitelisted: true
   whitelistParent: RMCJobSynthetic
