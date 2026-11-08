@@ -14,7 +14,7 @@ public sealed partial class OmaeWaMouShindeiruComponent : Component
     public bool BypassResistances = true;
 
     [DataField, AutoNetworkedField]
-    public bool CanStunOnHit = true;
+    public bool CanStunOnKatanaClash = true;
 
     /// <summary>
     /// How long to wait before the cuts happen.

@@ -1,11 +1,11 @@
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
-using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -19,12 +19,12 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
+    private static readonly ProtoId<DamageTypePrototype> SlashType = "Slash";
     private static readonly ProtoId<TagPrototype> RMCKatanaTag = "RMCKatana";
 
     public override void Initialize()
@@ -49,7 +49,6 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
             if (_net.IsClient)
                 continue;
 
-            var damage = _melee.GetDamage(ent.Owner, args.User);
             if (HasKatana(target) && args.User != target)
             {
                 // TODO RMC14 make the target swing at the user to imitate sword clashing.
@@ -60,14 +59,15 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-target", ("user", MetaData(args.User).EntityName)), target, PopupType.Medium);
             }
 
-            if (ent.Comp.CanStunOnHit)
+            if (ent.Comp.CanStunOnKatanaClash)
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
 
-            OmaeWaMouShindeiru(ent, args.User, target, damage);
+            OmaeWaMouShindeiru(ent, args.User, target, args.BaseDamage + args.BonusDamage);
         }
 
+        var chipDamage = new DamageSpecifier { DamageDict = { [SlashType.Id] = 1 } };
         if (!ent.Comp.DamageOnHit)
-            args.Handled = true;
+            args.BonusDamage = -args.BaseDamage + chipDamage;
     }
 
     private void OmaeWaMouShindeiru(Entity<OmaeWaMouShindeiruComponent> ent, EntityUid user, EntityUid target, DamageSpecifier damage)
