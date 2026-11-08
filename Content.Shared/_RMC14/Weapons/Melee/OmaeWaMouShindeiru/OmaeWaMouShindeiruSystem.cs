@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Hands.EntitySystems;
@@ -6,6 +7,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -19,10 +21,12 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<DamageTypePrototype> SlashType = "Slash";
     private static readonly ProtoId<TagPrototype> RMCKatanaTag = "RMCKatana";
@@ -51,7 +55,8 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
             if (HasKatana(target) && args.User != target)
             {
-                // TODO RMC14 make the target swing at the user to imitate sword clashing.
+                CounterSwing(args.User, target);
+
                 _stun.TryStun(args.User, ent.Comp.KillDelay, true);
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
 
@@ -118,6 +123,27 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                     _damageable.TryChangeDamage(target, damage, ignoreResistances: ignoreRes, origin: user, tool: ent.Owner);
                 }
             });
+    }
+
+    private void CounterSwing(EntityUid user, EntityUid target)
+    {
+        EntityUid? katanaUid = null;
+        string? animation = null;
+        foreach (var held in _hands.EnumerateHeld(target))
+        {
+            if (_tag.HasTag(held, RMCKatanaTag) && TryComp(held, out MeleeWeaponComponent? katana))
+            {
+                katanaUid = held;
+                animation = katana.WideAnimation;
+                break;
+            }
+        }
+
+        var targetXform = Transform(target);
+        var userPos = _transform.GetWorldPosition(user);
+        var localPos = Vector2.Transform(userPos, _transform.GetInvWorldMatrix(targetXform));
+        localPos = targetXform.LocalRotation.RotateVec(localPos);
+        _melee.DoLunge(target, katanaUid ?? target, Angle.Zero, localPos, animation);
     }
 
     private bool HasKatana(EntityUid target)
