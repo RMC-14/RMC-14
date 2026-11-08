@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleRavager
-  - type: GhostRole
-    name: cm-job-name-xeno-ravager
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
     layers:
@@ -53,6 +51,8 @@
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.1
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 900 # 15 minutes
   - type: XenoRegen
     standHealingMultiplier: 0.66
@@ -164,6 +164,8 @@
     leapDamage:
       groups:
         Brute: 45
+  - type: VehicleDamageMultiplier
+    multiplier: 3
   - type: XenoScissorCut
     damage:
       types:
@@ -183,6 +185,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
+  - type: XenoCappedPheromones
+    cappedPheromones:
+      Frenzy: 2.9
   - type: Xeno
     actionIds:
     - ActionXenoRest

@@ -4,7 +4,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Charge;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(XenoChargeSystem))]
+[Access(typeof(XenoToggleChargingSystem))]
 public sealed partial class ActiveXenoToggleChargingComponent : Component
 {
     [DataField, AutoNetworkedField]

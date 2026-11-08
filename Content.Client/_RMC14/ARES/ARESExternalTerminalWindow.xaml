@@ -1,0 +1,166 @@
+<controls:ARESExternalTerminalWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.ARES"
+    xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="Maintenance Terminal"
+    MinSize="900 600">
+    <Control Name="LoginScreen" Access="Public">
+        <BoxContainer Orientation="Vertical" VerticalAlignment="Center">
+            <RichTextLabel Text="[font size= 20]ARES v3.2 Interface" HorizontalAlignment="Center"/>
+            <RichTextLabel Text="[font size= 15]We-Ya Management" HorizontalAlignment="Center"/>
+            <Control SetHeight="30"/>
+            <RichTextLabel Text="[font size= 15]Version 6.6.6" HorizontalAlignment="Center"/>
+            <Control SetHeight="30"/>
+            <Button Access="Public" Name="SignIn" HorizontalAlignment="Center" MinWidth="200" MinHeight="80" StyleClasses="chatSelectorOptionButton">
+                <RichTextLabel Text="[font size=20][bold]Login" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 1 0 0"/>
+            </Button>
+        </BoxContainer>
+
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+            <RichTextLabel Text="[color=Crimson]Contact your AI Service Technician for more information.[/color]" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        </BoxContainer>
+    </Control>
+
+    <Control Name="MainProgram" Access="Public">
+        <BoxContainer Orientation="Vertical">
+            <!-- Nav bar -->
+            <PanelContainer Name="NavBar" Access="Public" Margin="0 0 0 10">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BorderColor="#162838"
+                                           BorderThickness="2"/>
+                </PanelContainer.PanelOverride>
+                <PanelContainer>
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#162031" BorderColor="#162031"
+                                               BorderThickness="4" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Horizontal" MinHeight="10" HorizontalExpand="True">
+                        <Button Access="Public" Name="Back" Text="🡐" MinWidth="80" StyleClasses="chatSelectorOptionButton"/>
+                        <Button Access="Public" Name="Home" Text="🏠" MinWidth="40" MinHeight="40" StyleClasses="chatSelectorOptionButton"/>
+                        <RichTextLabel Text=" "/>
+                        <RichTextLabel Access="Public" Name="SignedInUser" Text="[font size= 15]Feronia Star ([color=gold]AI Service Chief Engineer[/color])" HorizontalExpand="True" VerticalAlignment="Center"/>
+                        <Button Access="Public" Name="LogOut" MinWidth="80" MinHeight="40" Text="Logout" StyleClasses="chatSelectorOptionButton"/>
+                    </BoxContainer>
+                </PanelContainer>
+            </PanelContainer>
+
+
+            <Control Name="HomeMenu" Access="Public" Visible="False">
+                <!-- Master -->
+                <PanelContainer Margin="0 0 0 10" Visible="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderColor="#162838"
+                                               BorderThickness="2"/>
+                    </PanelContainer.PanelOverride>
+                    <PanelContainer>
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#162031" BorderColor="#162031"
+                                                   BorderThickness="4" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical" Margin="0 10 0 0">
+                            <RichTextLabel Text="[font size= 20]Master Menu" Margin="0 0 0 10" HorizontalAlignment="Center"/>
+                            <userInterface:BlueHorizontalSeparator Margin="0 0 0 0"/>
+                                <BoxContainer Access="Public" Name="MasterMenu" Orientation="Vertical">
+                                    <controls:ARESExternalTerminalSection Access="Public" Name="LogCategory" SectionNameText="[font size= 15]Logs" Visible="False"/>
+
+                                    <Control Visible="False">
+                                        <RichTextLabel Text="[font size= 15]Security Procedures" Margin="0 10 0 5" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                                        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Text="Lockdown Overrides" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" ModulateSelfOverride="Maroon"/>
+                                            <Button Text="Ship Decontamination" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" ModulateSelfOverride="Maroon"/>
+                                        </BoxContainer>
+                                    </Control>
+
+                                    <Control Visible="False">
+                                        <RichTextLabel Text="[font size= 15]Core Access" Margin="0 10 0 5" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                                        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Text="Access Requests" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth"/>
+                                        </BoxContainer>
+                                    </Control>
+
+                                </BoxContainer>
+                        </BoxContainer>
+                    </PanelContainer>
+                </PanelContainer>
+
+                <!-- Core Security -->
+                <PanelContainer Margin="0 0 0 10" Visible="False">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderColor="#162838"
+                                               BorderThickness="2"/>
+                    </PanelContainer.PanelOverride>
+                    <PanelContainer>
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#4C0D0E" BorderColor="#4C0D0E"
+                                                   BorderThickness="4" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical" Margin="0 10 0 0">
+                            <RichTextLabel Text="[font size= 20]Core Security Protocols" Margin="0 0 0 10" HorizontalAlignment="Center"/>
+                                <BoxContainer Orientation="Vertical">
+                                    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Text="ASRS Logs" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
+                                        <Button Text="Announcement Logs" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
+                                        <Button Text="Medical Logs" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
+                                        <Button Text="ARES Logs" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
+                                    </BoxContainer>
+                                </BoxContainer>
+                        </BoxContainer>
+                    </PanelContainer>
+                </PanelContainer>
+
+                <!-- AIST -->
+                <!-- <PanelContainer Margin="0 0 0 10"> -->
+                <!--     <PanelContainer.PanelOverride> -->
+                <!--         <graphics:StyleBoxFlat BorderColor="#162838" -->
+                <!--                                BorderThickness="2"/> -->
+                <!--     </PanelContainer.PanelOverride> -->
+                <!--     <PanelContainer> -->
+                <!--         <PanelContainer.PanelOverride> -->
+                <!--             <graphics:StyleBoxFlat BackgroundColor="gold" BorderColor="gold" -->
+                <!--                                    BorderThickness="4" /> -->
+                <!--         </PanelContainer.PanelOverride> -->
+                <!--         <BoxContainer Orientation="Vertical" Margin="0 10 0 0"> -->
+                <!--             <RichTextLabel Text="[font size= 20][color=black]AI Service Technician" Margin="0 0 0 10" HorizontalAlignment="Center"/> -->
+                <!--             <BoxContainer Orientation="Vertical"> -->
+                <!--                 <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center"> -->
+                <!--                     <Button Text="Scan" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/> -->
+                <!--                     <Button Text="Maintenance Mode" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/> -->
+                <!--                     <Button Text="Revoke All Access" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/> -->
+                <!--                 </BoxContainer> -->
+                <!--             </BoxContainer> -->
+                <!--         </BoxContainer> -->
+                <!--     </PanelContainer> -->
+                <!-- </PanelContainer> -->
+            </Control>
+
+            <Control Name="LogMenu" Access="Public" Visible="False" VerticalExpand="True">
+                <PanelContainer Name="LogMenuMain" Access="Public" Margin="0 0 0 10" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderColor="#162838"
+                                               BorderThickness="2"/>
+                    </PanelContainer.PanelOverride>
+                    <PanelContainer VerticalExpand="True">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#162031" BorderColor="#162031"
+                                                   BorderThickness="4" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                            <RichTextLabel Name="LogsName" Access="Public" Text="[font size= 16]Logs: ERROR" Margin="0 10 0 0"/>
+                            <RichTextLabel Name="LogsDescription" Access="Public" Text="[font size= 12]Description: ERROR" Margin="0 0 0 10"/>
+                            <userInterface:BlueHorizontalSeparator Margin="0 0 0 7.5"/>
+                            <BoxContainer HorizontalAlignment="Center">
+                            <Button Name="LogLeft" Access="Public" Text="🠈" MaxHeight="30" MinWidth="40" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" HorizontalAlignment="Center"/>
+                            <RichTextLabel Name="LogNumber" Access="Public" Text="[font size= 16]1/1" Margin="2.5 0 2.5 2.5" VerticalAlignment="Center"/>
+                            <Button Name="LogRight" Access="Public" Text="🠊" MaxHeight="30" MinWidth="40" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" HorizontalAlignment="Center"/>
+                            </BoxContainer>
+                            <ScrollContainer VScrollEnabled="True" HScrollEnabled="False" VerticalExpand="True" MaxWidth="868">
+                                <GridContainer Name="LogsContainer" Access="Public" Columns="1"/>
+                            </ScrollContainer>
+                        </BoxContainer>
+                    </PanelContainer>
+                </PanelContainer>
+            </Control>
+        </BoxContainer>
+    </Control>
+</controls:ARESExternalTerminalWindow>

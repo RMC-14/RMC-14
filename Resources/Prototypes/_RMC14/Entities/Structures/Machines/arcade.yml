@@ -1,0 +1,123 @@
+﻿- type: entity
+  id: RMCArcadeBroken
+  description: A broken arcade cabinet. You won't be playing much computer with this thing.
+  name: broken arcade cabinet
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Sprite
+    sprite: Structures/Machines/arcade.rsi
+    layers:
+    - state: arcade
+  - type: Icon
+    sprite: Structures/Machines/arcade.rsi
+    state: arcade
+  - type: Anchorable
+  - type: Pullable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
+  - type: Corrodible
+    isCorrodible: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 2
+          RMCCableCoil1:
+            min: 2
+            max: 2
+          CMShardGlass:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCArcadeBroken
+  id: RMCArcade
+  description: An arcade cabinet.
+  name: arcade cabinet
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+  - type: PointLight
+    radius: 1.8
+    energy: 1.6
+    color: "#3db83b"
+  - type: LitOnPowered
+  - type: Sprite
+    sprite: Structures/Machines/arcade.rsi
+    layers:
+    - state: arcade
+    - state: screen_invaders
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Icon
+    sprite: Structures/Machines/arcade.rsi
+    state: arcade
+  - type: SpamEmitSoundRequirePower
+  - type: SpamEmitSound
+    minInterval: 30
+    maxInterval: 90
+    sound:
+      collection: ArcadeNoise
+      params:
+        volume: -8
+        maxDistance: 10
+        variation: 0.05
+
+- type: entity
+  parent: RMCArcade
+  id: RMCArcadeBlockGame
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/arcade.rsi
+    layers:
+    - state: arcade
+    - state: screen_blockgame
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  parent: RMCArcade
+  id: RMCArcadeSpaceVillain
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/arcade.rsi
+    layers:
+    - state: arcade
+    - state: screen_spacevillain
+      map: ["enum.PowerDeviceVisualLayers.Powered"]

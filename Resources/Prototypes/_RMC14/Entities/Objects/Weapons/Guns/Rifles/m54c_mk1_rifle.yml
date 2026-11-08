@@ -94,7 +94,7 @@
           tags:
           - RMCAttachmentMK1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.8425, 0.001
@@ -179,7 +179,7 @@
           tags:
           - RMCAttachmentMK1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -288,6 +288,13 @@
       color: "#9C9A19"
   - type: RefillableByBulletBox
     bulletType: null
+
+- type: entity
+  parent: RMCMagazineRifleM54CMK1HEAP
+  id: RMCMagazineRifleM54CMK1HEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: RMCEmptyMag
 
 - type: entity
   parent: CMMagazineRifleM54CMK1

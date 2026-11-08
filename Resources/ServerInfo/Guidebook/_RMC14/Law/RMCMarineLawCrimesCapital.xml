@@ -21,7 +21,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To escape, assist in an escape, attempt escape, or be willfully and knowingly broken out from a cell.
+        \- To escape, assist in an escape, attempt escape, or be willfully and knowingly broken out from a cell.
       </Box>
     </ColorBox>
 
@@ -33,7 +33,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Attempting to murder a person but failing to do so. If the evidence shows that the arrested person was clearly trying to kill someone with ill intent but failed in the action itself.
+        \- Attempting to murder a person but failing to do so. Applies if the evidence shows that the arrested person was clearly trying to kill someone with ill intent but failed in the action itself.
       </Box>
     </ColorBox>
 
@@ -44,8 +44,8 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Killing someone with malicious intent. This includes Synthetic units. The charge applies even if the victim is later revived. Executions are only authorized as outlined in the Execution Procedure.
-        \nThis also includes refusing or preventing to revive anyone not executed by the execution procedure.
+        \- Killing someone with malicious intent. This includes Synthetic units. The charge applies even if the victim is later revived.
+        \n\- Refusing or preventing to revive anyone not executed through provided execution procedures.
       </Box>
     </ColorBox>
 
@@ -56,10 +56,10 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To engage in actions or refuse to follow orders as to overthrow or usurp the legitimate command structure.
-        Creating a massive threat to the ship without the knowledge and approval of the [color=#008000][bold]Commander[/bold][/color] falls under sedition.
-        A [color=#90EE90][bold]Duty Officer[/bold][/color] is unable to approve actions that fall under this condition.
-        Proclaiming allegiance to, or acting on behalf of, the supposed CLF is an act of sedition against the UN.
+        \- To engage in actions or refuse to follow orders, in a way intended to overthrow or usurp the legitimate command structure.
+        \n\- Creating a code [bold][color=red]Red[/color][/bold] threat to the warship.
+        \n\- Proclaiming allegiance to, or acting on behalf of, the supposed CLF is an act of sedition against the UN.
+        \n\- In the event of a failed mutiny, the [color=#008000][bold]Commander[/bold][/color] may decide to deny treatment or revival of mutineers that have not surrendered, citing sedition by mutiny as the reason.
       </Box>
     </ColorBox>
 
@@ -70,18 +70,19 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Refusing to carry out the duties essential to one’s post or abandoning post unauthorized, without intent to return. (Retreating from the planet when the FOB is breached is not Desertion, refusing to return when ordered is).
+        \- Refusing to carry out the duties essential to one’s post or abandoning post unauthorized, without intent to return. (Retreating from the planet when the FOB is breached is not Desertion, refusing to return when ordered is).
       </Box>
     </ColorBox>
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Crimes against Sapience
+        Crimes against Interstellar Life
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To engage in actions that violate interstellar life rights or otherwise are heinous acts against interstellar life. Examples are torture, cannibalism and forced infection of any kind.
+        \- To engage in actions that violate the rights of interstellar life or otherwise are heinous acts against interstellar life.
+        \n\- Torture, cannibalism and forced infection of any kind.
       </Box>
     </ColorBox>
 

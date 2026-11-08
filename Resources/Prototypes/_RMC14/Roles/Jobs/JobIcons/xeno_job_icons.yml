@@ -1,0 +1,13 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconXenoQueen
+  icon:
+    sprite: _RMC14/Interface/job_icons/xeno.rsi
+    state: xeno_queen
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconXeno
+  icon:
+    sprite: _RMC14/Interface/job_icons/xeno.rsi
+    state: xeno_base

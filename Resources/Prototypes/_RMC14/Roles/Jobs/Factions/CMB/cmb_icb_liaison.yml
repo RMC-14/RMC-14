@@ -1,0 +1,102 @@
+# Bureau Liaison
+- type: job
+  parent: CMJobBase
+  id: CMICBLiaison
+  name: rmc-job-name-icb
+  description: rmc-ghost-role-information-icb-description
+  playTimeTracker: RMCJobICBLiaison
+  ranks:
+    RMCRankICBCorporateLiaison: [ ]
+  startingGear: RMCGearICBLiaison
+  icon: "RMCJobIconICBLiaison"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExecColony
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+    - type: Language
+      spokenLanguages:
+      - English
+      - Spanish
+      - Japanese
+      understoodLanguages:
+      - English
+      - Spanish
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-icb
+    - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: icc
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidICBLiaison
+  name: interstellar commerce bureau liaison ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCICBLiaison
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCICBLiaison
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-icb
+    description: rmc-ghost-role-information-icb-description
+    rules: rmc-ghost-role-information-bureau-rules
+    reregister: false
+    job: CMICBLiaison
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearICBLiaison
+  equipment:
+    eyes: RMCSunglasses
+    head: RMCHardhatWhite
+    ears: RMCHeadsetDistressICBLiaison # TODO RMC14 tape recorder
+    back: RMCSatchelICBLiaisonFill
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCHazardVestYellow
+    gloves: CMHandsInsulated
+    shoes: RMCBootsPMCFilled
+    id: RMCIDCardICBLiaison
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchGeneralLargeICBLiaison
+    suitStorage: RMCFlashlight
+  inhand:
+  - CMClipboard
+
+- type: playTimeTracker
+  id: RMCJobICBLiaison
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconICBLiaison
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_icc

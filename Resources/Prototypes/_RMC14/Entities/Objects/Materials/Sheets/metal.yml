@@ -32,6 +32,9 @@
         right:
         - state: inhand-right
     - type: Appearance
+    - type: GuideHelp
+      guides:
+      - RMCGuideRoleCombatTechnician
 
 - type: entity
   parent: CMSheetMetalBase

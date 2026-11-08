@@ -84,14 +84,8 @@
   - type: DeviceNetwork
   - type: DeviceLinkSink
     ports: [ SentryControl ]
-  - type: HealthExaminable
-    locPrefix: sentry
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
+  - type: RMCHealthExaminable
+    speciesType: Mechanical
   - type: ShortExamine
   - type: SentryTargeting
     targetedFactions:

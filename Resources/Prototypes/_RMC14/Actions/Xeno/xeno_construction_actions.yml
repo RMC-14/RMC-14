@@ -19,6 +19,8 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoPlantWeedsActionEvent
+  - type: SwappableAction
+    swappedActionProto: ActionXenoExpandWeeds
 
 - type: entity
   id: ActionXenoChooseStructure
@@ -264,6 +266,7 @@
     checkCanAccess: false
     range: -1
     deselectOnMiss: false
+    repeat: true
   - type: WorldTargetAction
     event: !type:XenoExpandWeedsActionEvent
 

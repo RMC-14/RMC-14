@@ -1,0 +1,45 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from CMSS13 https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/vehicles/interiors/upptank.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "locker"
+        },
+        {
+            "name": "locker_open"
+        },
+        {
+            "name": "hatch",
+            "directions": 4
+        },
+        {
+            "name": "storage_ammo"
+        },
+        {
+            "name": "storage_ammo_open"
+        },
+        {
+            "name": "small_locker"
+        },
+        {
+            "name": "small_locker_open"
+        },
+        {
+            "name": "small_locker1"
+        },
+        {
+            "name": "small_locker1_open"
+        },
+        {
+            "name": "weapons_loader"
+        },
+        {
+            "name": "prop0"
+        }
+    ]
+}

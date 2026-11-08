@@ -34,6 +34,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - RMCSynthAllowedArmor
 
 - type: entity
   abstract: True
@@ -317,6 +320,20 @@
   - type: CMArmor
     melee: 10
 
+# Tanker
+- type: entity
+  parent: [RMCBaseJacketButtonable, RMCBaseJacket]
+  id: RMCCoatTanker
+  name: tanker jacket
+  description: A comfortable jacket provided to anyone expected to operate near or inside heavy machinery. Special material within the arms jams up any machinery it gets caught up in, protecting the wearer from injury.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tanker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tanker.rsi
+  - type: CMArmor
+    melee: 10
+
 # Auxiliary Supply Officer
 - type: entity
   parent: RMCBaseJacket
@@ -411,6 +428,20 @@
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatPilotFighter
+  name: PDU-80 pilot mobility vest
+  description: The PDU-80 is an older-generation vest currently in use by Marine Aerofighter pilots. It is a combination of both a survival vest and a modular body armor system. The chestpiece can be worn alone to provide protection against fragmentation and smaller calibers while allowing the attachment of life preservers and additional armor inserts to suit the individual needs of the pilot.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
 
 # Commanding Officer
 - type: entity
@@ -614,6 +645,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
     melee: 10
+    bullet: 10
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
@@ -676,9 +708,9 @@
 
 - type: entity
   parent: CMCoatOfficer
-  id: RMCProvostCommandJacket
-  name: Provost Command Jacket
-  description: A crisp jacket with the Provost sigil.
+  id: RMCProvostJacketBlue # Playtime reward for PvIs
+  name: Provost Jacket
+  description: A crisp jacket with the Provost sigil. The blue mark symbolizes extensive service in their division.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provostci_jacket.rsi
@@ -696,8 +728,8 @@
     - id: RMCHandcuffs
 
 - type: entity
-  parent: RMCProvostCommandJacket
-  id: RMCProvostCommandJacketFilled
+  parent: RMCProvostJacketBlue
+  id: RMCProvostJacketBlueFilled
   suffix: Filled
   components:
   - type: StorageFill
@@ -998,11 +1030,30 @@
   name: robust snow suit
   description: A snow suit. It can protect the wearer from extreme cold. This one seems to have been modified somewhat, and can both holster a gun and fit magazines.
   components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - RMCMagazineShotgun
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi # TODO cool sprite
   - type: CMHardArmor
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 0
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897

@@ -72,3 +72,17 @@
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/athenaEvacBoat.yml"
     offset: 12.5,2.5
+
+- type: entity
+  parent: MarkerBase
+  id: RMCCrashLandingBlocker
+  name: crash landing blocker
+  description: Defines a location a pod or lifeboat can't crash onto.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: red
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: CrashLandingBlocked

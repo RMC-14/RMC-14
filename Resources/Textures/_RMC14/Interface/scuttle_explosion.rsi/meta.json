@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "by GrigoriyGalintano",
+  "size": {
+    "x": 1280,
+    "y": 720
+  },
+  "states": [
+    {
+      "name": "intro_ship"
+    },
+    {
+      "name": "intro_nuke",
+      "delays": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "ship_destroyed",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2,
+          0.2,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "summary_destroyed"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomComputerDisk
+  name: random computer disk spawner
+  components:
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+        - RMCIntelComputerDisk1
+        - RMCIntelComputerDisk2
+        - RMCIntelComputerDisk3
+        - RMCIntelComputerDisk4
+        - RMCIntelComputerDisk5
+        - RMCIntelComputerDisk6
+        - RMCIntelComputerDisk7
+        - RMCIntelComputerDisk8
+        - RMCIntelComputerDisk9
+        - RMCIntelComputerDisk10
+        - RMCIntelComputerDisk11
+        - RMCIntelComputerDisk12
+        - RMCIntelComputerDisk13
+        - RMCIntelComputerDisk14
+        - RMCIntelComputerDisk15

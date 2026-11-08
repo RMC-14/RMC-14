@@ -1,0 +1,669 @@
+meta:
+  format: 7
+  category: Map
+  engineVersion: 264.0.2-fix-physics
+  forkId: ""
+  forkVersion: ""
+  time: 03/20/2026 16:22:02
+  entityCount: 68
+maps:
+- 1
+grids:
+- 3
+orphans: []
+nullspace: []
+tilemap:
+  4: Space
+  10: RMCFloorVehicleInteriorDarkSterileGreen11
+  8: RMCFloorVehicleInteriorDarkSterileGreen12
+  9: RMCFloorVehicleInteriorDarkSterileGreen13
+  11: RMCFloorVehicleInteriorDarkSterileGreen14
+  2: RMCFloorVehicleInteriorFloor1_11
+  5: RMCFloorVehicleInteriorFloor1_12
+  0: RMCFloorVehicleInteriorFloor2
+  3: RMCFloorVehicleInteriorFloor3_11
+  6: RMCFloorVehicleInteriorFloor3_12
+  1: RMCFloorVehicleInteriorFloor3_4
+  7: RMCVoid
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: GridTree
+    - type: Broadphase
+    - type: OccluderTree
+  - uid: 3
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      pos: -3.6090617,-1.1084068
+      parent: 1
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: CAAAAAAAAAkAAAAAAAACAAAAAAAAAwAAAAAAAAcAAAAAAAAHAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABwAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAHAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAA==
+          version: 7
+        0,-1:
+          ind: 0,-1
+          tiles: BAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAHAAAAAAAABwAAAAAAAAcAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAACgAAAAAAAAsAAAAAAAAFAAAAAAAABgAAAAAAAAcAAAAAAAAHAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAA==
+          version: 7
+        -1,-1:
+          ind: -1,-1
+          tiles: BAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABwAAAAAAAAcAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAcAAAAAAAAHAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAHAAAAAAAABwAAAAAAAA==
+          version: 7
+        -1,0:
+          ind: -1,0
+          tiles: BAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAHAAAAAAAABwAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABwAAAAAAAAcAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAcAAAAAAAAHAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAHAAAAAAAABwAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: ImplicitRoof
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        -5,-4: RMCAreaVehicleSPPVanMedical
+        -4,-4: RMCAreaVehicleSPPVanMedical
+        -3,-4: RMCAreaVehicleSPPVanMedical
+        -2,-4: RMCAreaVehicleSPPVanMedical
+        -1,-4: RMCAreaVehicleSPPVanMedical
+        0,-4: RMCAreaVehicleSPPVanMedical
+        1,-4: RMCAreaVehicleSPPVanMedical
+        2,-4: RMCAreaVehicleSPPVanMedical
+        3,-4: RMCAreaVehicleSPPVanMedical
+        4,-4: RMCAreaVehicleSPPVanMedical
+        5,-4: RMCAreaVehicleSPPVanMedical
+        6,-4: RMCAreaVehicleSPPVanMedical
+        7,-4: RMCAreaVehicleSPPVanMedical
+        -5,-3: RMCAreaVehicleSPPVanMedical
+        -4,-3: RMCAreaVehicleSPPVanMedical
+        -3,-3: RMCAreaVehicleSPPVanMedical
+        -2,-3: RMCAreaVehicleSPPVanMedical
+        -1,-3: RMCAreaVehicleSPPVanMedical
+        0,-3: RMCAreaVehicleSPPVanMedical
+        1,-3: RMCAreaVehicleSPPVanMedical
+        2,-3: RMCAreaVehicleSPPVanMedical
+        3,-3: RMCAreaVehicleSPPVanMedical
+        4,-3: RMCAreaVehicleSPPVanMedical
+        5,-3: RMCAreaVehicleSPPVanMedical
+        6,-3: RMCAreaVehicleSPPVanMedical
+        7,-3: RMCAreaVehicleSPPVanMedical
+        -5,-2: RMCAreaVehicleSPPVanMedical
+        -4,-2: RMCAreaVehicleSPPVanMedical
+        -3,-2: RMCAreaVehicleSPPVanMedical
+        -2,-2: RMCAreaVehicleSPPVanMedical
+        -1,-2: RMCAreaVehicleSPPVanMedical
+        0,-2: RMCAreaVehicleSPPVanMedical
+        1,-2: RMCAreaVehicleSPPVanMedical
+        2,-2: RMCAreaVehicleSPPVanMedical
+        3,-2: RMCAreaVehicleSPPVanMedical
+        4,-2: RMCAreaVehicleSPPVanMedical
+        5,-2: RMCAreaVehicleSPPVanMedical
+        6,-2: RMCAreaVehicleSPPVanMedical
+        7,-2: RMCAreaVehicleSPPVanMedical
+        -5,-1: RMCAreaVehicleSPPVanMedical
+        -4,-1: RMCAreaVehicleSPPVanMedical
+        -3,-1: RMCAreaVehicleSPPVanMedical
+        -2,-1: RMCAreaVehicleSPPVanMedical
+        -1,-1: RMCAreaVehicleSPPVanMedical
+        0,-1: RMCAreaVehicleSPPVanMedical
+        1,-1: RMCAreaVehicleSPPVanMedical
+        2,-1: RMCAreaVehicleSPPVanMedical
+        3,-1: RMCAreaVehicleSPPVanMedical
+        4,-1: RMCAreaVehicleSPPVanMedical
+        5,-1: RMCAreaVehicleSPPVanMedical
+        6,-1: RMCAreaVehicleSPPVanMedical
+        7,-1: RMCAreaVehicleSPPVanMedical
+        -5,0: RMCAreaVehicleSPPVanMedical
+        -4,0: RMCAreaVehicleSPPVanMedical
+        -3,0: RMCAreaVehicleSPPVanMedical
+        -2,0: RMCAreaVehicleSPPVanMedical
+        -1,0: RMCAreaVehicleSPPVanMedical
+        0,0: RMCAreaVehicleSPPVanMedical
+        1,0: RMCAreaVehicleSPPVanMedical
+        2,0: RMCAreaVehicleSPPVanMedical
+        3,0: RMCAreaVehicleSPPVanMedical
+        4,0: RMCAreaVehicleSPPVanMedical
+        5,0: RMCAreaVehicleSPPVanMedical
+        6,0: RMCAreaVehicleSPPVanMedical
+        7,0: RMCAreaVehicleSPPVanMedical
+        -5,1: RMCAreaVehicleSPPVanMedical
+        -4,1: RMCAreaVehicleSPPVanMedical
+        -3,1: RMCAreaVehicleSPPVanMedical
+        -2,1: RMCAreaVehicleSPPVanMedical
+        -1,1: RMCAreaVehicleSPPVanMedical
+        0,1: RMCAreaVehicleSPPVanMedical
+        1,1: RMCAreaVehicleSPPVanMedical
+        2,1: RMCAreaVehicleSPPVanMedical
+        3,1: RMCAreaVehicleSPPVanMedical
+        4,1: RMCAreaVehicleSPPVanMedical
+        5,1: RMCAreaVehicleSPPVanMedical
+        6,1: RMCAreaVehicleSPPVanMedical
+        7,1: RMCAreaVehicleSPPVanMedical
+        -5,2: RMCAreaVehicleSPPVanMedical
+        -4,2: RMCAreaVehicleSPPVanMedical
+        -3,2: RMCAreaVehicleSPPVanMedical
+        -2,2: RMCAreaVehicleSPPVanMedical
+        -1,2: RMCAreaVehicleSPPVanMedical
+        0,2: RMCAreaVehicleSPPVanMedical
+        1,2: RMCAreaVehicleSPPVanMedical
+        2,2: RMCAreaVehicleSPPVanMedical
+        3,2: RMCAreaVehicleSPPVanMedical
+        4,2: RMCAreaVehicleSPPVanMedical
+        5,2: RMCAreaVehicleSPPVanMedical
+        6,2: RMCAreaVehicleSPPVanMedical
+        7,2: RMCAreaVehicleSPPVanMedical
+        -5,3: RMCAreaVehicleSPPVanMedical
+        -4,3: RMCAreaVehicleSPPVanMedical
+        -3,3: RMCAreaVehicleSPPVanMedical
+        -2,3: RMCAreaVehicleSPPVanMedical
+        -1,3: RMCAreaVehicleSPPVanMedical
+        0,3: RMCAreaVehicleSPPVanMedical
+        1,3: RMCAreaVehicleSPPVanMedical
+        2,3: RMCAreaVehicleSPPVanMedical
+        3,3: RMCAreaVehicleSPPVanMedical
+        4,3: RMCAreaVehicleSPPVanMedical
+        5,3: RMCAreaVehicleSPPVanMedical
+        6,3: RMCAreaVehicleSPPVanMedical
+        7,3: RMCAreaVehicleSPPVanMedical
+        -5,4: RMCAreaVehicleSPPVanMedical
+        -4,4: RMCAreaVehicleSPPVanMedical
+        -3,4: RMCAreaVehicleSPPVanMedical
+        -2,4: RMCAreaVehicleSPPVanMedical
+        -1,4: RMCAreaVehicleSPPVanMedical
+        0,4: RMCAreaVehicleSPPVanMedical
+        1,4: RMCAreaVehicleSPPVanMedical
+        2,4: RMCAreaVehicleSPPVanMedical
+        3,4: RMCAreaVehicleSPPVanMedical
+        4,4: RMCAreaVehicleSPPVanMedical
+        5,4: RMCAreaVehicleSPPVanMedical
+        6,4: RMCAreaVehicleSPPVanMedical
+        7,4: RMCAreaVehicleSPPVanMedical
+        -5,5: RMCAreaVehicleSPPVanMedical
+        -4,5: RMCAreaVehicleSPPVanMedical
+        -3,5: RMCAreaVehicleSPPVanMedical
+        -2,5: RMCAreaVehicleSPPVanMedical
+        -1,5: RMCAreaVehicleSPPVanMedical
+        0,5: RMCAreaVehicleSPPVanMedical
+        1,5: RMCAreaVehicleSPPVanMedical
+        2,5: RMCAreaVehicleSPPVanMedical
+        3,5: RMCAreaVehicleSPPVanMedical
+        4,5: RMCAreaVehicleSPPVanMedical
+        5,5: RMCAreaVehicleSPPVanMedical
+        6,5: RMCAreaVehicleSPPVanMedical
+        7,5: RMCAreaVehicleSPPVanMedical
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+      inherent: True
+      enabled: True
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            angle: 1.5707963267948966 rad
+            color: '#FFFFFFFF'
+            id: CMDecalStriped3
+          decals:
+            14: 2,-1
+        - node:
+            angle: 4.71238898038469 rad
+            color: '#FFFFFFFF'
+            id: CMDecalStriped3
+          decals:
+            13: 2,0
+        - node:
+            angle: 4.71238898038469 rad
+            color: '#FFFFFFFF'
+            id: TriageDir
+          decals:
+            11: 2,-1
+            12: 2,0
+    - type: MapAtmosphere
+      space: False
+      mixture:
+        volume: 2500
+        immutable: True
+        temperature: 293.15
+        moles:
+        - 21.824879
+        - 82.10312
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+- proto: CMIV
+  entities:
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 1.3089392,-0.38482797
+      parent: 3
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 1.1957777,1.0813464
+      parent: 3
+- proto: CMPortableSurgicalBed
+  entities:
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 1.4713006,0.57458115
+      parent: 3
+- proto: CMSeatPassenger
+  entities:
+  - uid: 43
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.469657,-0.37143576
+      parent: 3
+- proto: RMCBarricadeHandrail
+  entities:
+  - uid: 16
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,0.5
+      parent: 3
+- proto: RMCRollerBedHospitalSheet2
+  entities:
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 0.5481708,0.6937667
+      parent: 3
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 0.5481708,-0.34399092
+      parent: 3
+- proto: RMCSeatArmored
+  entities:
+  - uid: 15
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5451012,-0.114225745
+      parent: 3
+- proto: RMCSeatArmoredDriver
+  entities:
+  - uid: 49
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.375499,0.56760055
+      parent: 3
+    - type: PointLight
+      energy: 2
+      radius: 10
+- proto: VehicleExitArea
+  entities:
+  - uid: 40
+    components:
+    - type: Transform
+      pos: -0.5,-0.5
+      parent: 3
+  - uid: 41
+    components:
+    - type: Transform
+      pos: -0.5,0.5
+      parent: 3
+- proto: VehicleInteriorBloodVendor
+  entities:
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 1.026619,1.3054649
+      parent: 3
+- proto: VehicleInteriorExtinguisher
+  entities:
+  - uid: 59
+    components:
+    - type: Transform
+      pos: 3.3015993,1.221884
+      parent: 3
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+- proto: VehicleInteriorMedVendor
+  entities:
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 0.3408079,1.3054649
+      parent: 3
+- proto: VehicleInteriorNanomed
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 1.636384,1.5545635
+      parent: 3
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 3.6398478,1.2195121
+      parent: 3
+- proto: VehicleSPPVanChassisLogistics
+  entities:
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 2.2541947,0.25335085
+      parent: 3
+- proto: VehicleSPPVanExteriorDoorUnique
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 2.5086117,1.5218416
+      parent: 3
+    - type: VehicleExit
+      entryIndex: 1
+    missingComponents:
+    - InteractionTransparency
+- proto: VehicleSPPVanInteriorDoor
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 2.5,-0.5
+      parent: 3
+    - type: VehicleExit
+      entryIndex: 2
+    - type: Fixtures
+      fixtures: {}
+    missingComponents:
+    - InteractionTransparency
+- proto: VehicleSPPVanViewportSimpleFront
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 3.491043,1.4869711
+      parent: 3
+    missingComponents:
+    - InteractionTransparency
+- proto: RMCWallInvisibleBulletBlocker
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-1.5
+      parent: 3
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 3.3876042,2.2453423
+      parent: 3
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 2.1563978,2.2453423
+      parent: 3
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 2.7843304,2.2453423
+      parent: 3
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 0.79069924,2.2453423
+      parent: 3
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 1.5416272,2.2453423
+      parent: 3
+  - uid: 23
+    components:
+    - type: Transform
+      pos: -0.716239,2.4635797
+      parent: 3
+  - uid: 24
+    components:
+    - type: Transform
+      pos: -0.009784222,2.2453423
+      parent: 3
+  - uid: 25
+    components:
+    - type: Transform
+      pos: -0.7064042,1.6470695
+      parent: 3
+  - uid: 28
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,-1.5
+      parent: 3
+  - uid: 29
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,-1.5
+      parent: 3
+  - uid: 30
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,-1.5
+      parent: 3
+  - uid: 31
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.5,-1.5
+      parent: 3
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 4.5,-0.5
+      parent: 3
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 3
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 4.178675,2.2453423
+      parent: 3
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 3
+  - uid: 63
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5,2
+      parent: 3
+- proto: RMCWallInvisibleBulletLightBlocker
+  entities:
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 4.5,2.5
+      parent: 3
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 4.5,-1.5
+      parent: 3
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 5.5,-1.5
+      parent: 3
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 5.5,-0.5
+      parent: 3
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 3
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 3
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 5.5,2.5
+      parent: 3
+  - uid: 44
+    components:
+    - type: Transform
+      pos: -1.5,-1.5
+      parent: 3
+  - uid: 45
+    components:
+    - type: Transform
+      pos: -1.5,-0.5
+      parent: 3
+  - uid: 46
+    components:
+    - type: Transform
+      pos: -1.5,0.5
+      parent: 3
+  - uid: 47
+    components:
+    - type: Transform
+      pos: -1.5,1.5
+      parent: 3
+  - uid: 48
+    components:
+    - type: Transform
+      pos: -1.5,2.5
+      parent: 3
+  - uid: 50
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -1.5,-2.5
+      parent: 3
+  - uid: 51
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,-2.5
+      parent: 3
+  - uid: 52
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,-2.5
+      parent: 3
+  - uid: 53
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,-2.5
+      parent: 3
+  - uid: 54
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-2.5
+      parent: 3
+  - uid: 55
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.5,-2.5
+      parent: 3
+  - uid: 56
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,-2.5
+      parent: 3
+  - uid: 57
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,-2.5
+      parent: 3
+  - uid: 64
+    components:
+    - type: Transform
+      pos: -1.5,3.5
+      parent: 3
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 3
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 3
+  - uid: 67
+    components:
+    - type: Transform
+      pos: -0.5,3.5
+      parent: 3
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 3
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 3
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 3
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 3
+...

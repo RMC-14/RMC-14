@@ -16,6 +16,7 @@
     - CMAccessMedical
     - CMAccessChemistry
     - CMAccessResearch
+    - RMCAccessFieldDoctor
     - CMAccessPress
     # Resources/Prototypes/_RMC14/Access/colony_access.yml
     - CMAccessColonyPublic

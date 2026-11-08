@@ -46,6 +46,8 @@
   - type: DamageExaminable
   - type: RMCItemPickup
   - type: RMCMesonsNonviewable
+  - type: DestroyedByExplosion
+    isExplodable: false # Not parity, but we opt in for now instead of opt out.
 
 - type: entity
   name: "storage item"

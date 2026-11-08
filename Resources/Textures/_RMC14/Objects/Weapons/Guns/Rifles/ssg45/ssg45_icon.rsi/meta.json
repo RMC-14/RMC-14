@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprites by github noctyrnal",
+  "copyright": "Sprites by github noctyrnal. mag-1, mag-2 by kleinerstation13 (Github)",
   "size": {
     "x": 64,
     "y": 32
@@ -15,6 +15,12 @@
     },
     {
       "name": "mag-0"
+    },
+    {
+      "name": "mag-1"
+    },
+    {
+      "name": "mag-2"
     }
   ]
 }

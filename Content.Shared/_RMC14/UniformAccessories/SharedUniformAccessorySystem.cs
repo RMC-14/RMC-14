@@ -34,6 +34,8 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
 
+        SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(HolderRelayEvent);
+
         SubscribeLocalEvent<UniformAccessoryComponent, ExaminedEvent>(OnAccessoryExamined);
 
         Subs.BuiEvents<UniformAccessoryHolderComponent>(UniformAccessoriesUi.Key,
@@ -164,6 +166,19 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
 
         var ownerName = Name(owner.Value);
         args.PushMarkup(Loc.GetString("rmc-uniform-accessory-owner", ("owner", ownerName)));
+    }
+
+    private void HolderRelayEvent<T>(Entity<UniformAccessoryHolderComponent> holder, ref T args) where T : notnull
+    {
+        if (!_container.TryGetContainer(holder, holder.Comp.ContainerId, out var container))
+            return;
+
+        var ev = new AccessoryRelayedEvent<T>(args, holder.Owner);
+
+        foreach (var accessory in container.ContainedEntities)
+        {
+            RaiseLocalEvent(accessory, ev);
+        }
     }
 
     public void TryInsertInhandAccessories(EntityUid target)

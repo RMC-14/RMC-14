@@ -1,0 +1,102 @@
+# Instant drink powders
+- type: entity
+  abstract: true
+  parent: DrinkBase
+  id: RMCMREInstantPowderBase
+  components:
+  - type: Drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 5
+  - type: Item
+    size: Tiny
+  - type: Openable
+    sound:
+      collection: CMFoodRip
+  - type: SolutionTransfer
+    transferAmount: 5
+    canChangeTransferAmount: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_contents.rsi
+  - type: MREItem
+
+- type: entity
+  parent: RMCMREInstantPowderBase
+  id: RMCMREInstantPowderOrange
+  name: orange juice packet
+  description: A small packet of orange flavored drink mix, sweetened with sugar alcohols. For best results, mix with water instead of consuming standalone.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 5
+        reagents:
+        - ReagentId: RMCInstantJuicePowderOrange
+          Quantity: 5
+  - type: Sprite
+    state: ojpowder
+
+- type: entity
+  parent: RMCMREInstantPowderBase
+  id: RMCMREInstantPowderApple
+  name: apple juice packet
+  description: A small packet of apple flavored drink mix, sweetened with sugar alcohols. For best results, mix with water instead of consuming standalone.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 5
+        reagents:
+        - ReagentId: RMCInstantJuicePowderApple
+          Quantity: 5
+  - type: Sprite
+    state: ajpowder
+
+- type: entity
+  parent: RMCMREInstantPowderBase
+  id: RMCMREInstantPowderWatermelon
+  name: watermelon juice packet
+  description: A small packet of watermelon flavored drink mix, sweetened with sugar alcohols. For best results, mix with water instead of consuming standalone.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 5
+        reagents:
+        - ReagentId: RMCInstantJuicePowderWatermelon
+          Quantity: 5
+  - type: Sprite
+    state: wjpowder
+
+- type: entity
+  parent: RMCMREInstantPowderBase
+  id: RMCMREInstantPowderGrape
+  name: grape juice packet
+  description: A small packet of grape flavored drink mix, sweetened with sugar alcohols. For best results, mix with water instead of consuming standalone.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 5
+        reagents:
+        - ReagentId: RMCInstantJuicePowderGrape
+          Quantity: 5
+  - type: Sprite
+    state: gjpowder
+
+- type: entity
+  parent: RMCMREInstantPowderBase
+  id: RMCMREInstantPowderPineapple
+  name: pineapple juice packet
+  description: A small packet of pineapple flavored drink mix, sweetened with sugar alcohols. For best results, mix with water instead of consuming standalone.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 5
+        reagents:
+        - ReagentId: RMCInstantJuicePowderPineapple
+          Quantity: 5
+  - type: Sprite
+    state: pjpowder

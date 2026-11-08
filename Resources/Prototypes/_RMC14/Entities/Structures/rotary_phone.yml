@@ -89,6 +89,20 @@
     - RMCGuideRoleCombatTechnician
     - RMCGuideRoleMaintenanceTechnician
 
+- type: entity
+  parent: RMCTelephone
+  id: RMCTelephoneScout
+  name: helmet microphone
+  description: A small microphone attached to the helmet, used to communicate with the internal radio transmitter.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/phone.rsi
+    state: scout_microphone
+  - type: Item
+    size: Invalid
+    inhandVisuals:
+      left: []
+      right: []
 
 # Misc
 - type: entity
@@ -110,6 +124,11 @@
   parent: RMCRotaryPhone
   id: RMCRotaryPhoneMPTent
   name: Military Police Tent
+
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneCorrespondentTent
+  name: Correspondent Tent
 
 # Admin
 - type: entity

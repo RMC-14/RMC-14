@@ -18,12 +18,10 @@
   id: RMCJumpsuitMarineRoyal
   name: royal crown marine uniform
   description: The field uniform of the Royal Crown Marines, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  suffix: Filled, Royal
+  suffix: RCM
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
@@ -33,61 +31,56 @@
 
 - type: entity
   parent: RMCJumpsuitMarineRoyal
-  id: RMCJumpsuitMarineRoyalMK80
-  suffix: Filled, Royal, MK80
+  id: RMCJumpsuitMarineRoyalL189
+  suffix: RCM, Filled L189
   components:
   - type: WebbingClothing
-    startingWebbing: RMCShoulderHolsterMK80
+    startingWebbing: RMCWebbingHolsterRCML189
 
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalMedic
-  suffix: Filled, Royal, Medic
+  suffix: RCM, Filled Medic
   components:
   - type: WebbingClothing
-    startingWebbing: RMCWebbingSurgicalBlue
+    startingWebbing: RMCWebbingSurgicalRCMFilled
 
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalDropPouch
-  suffix: Filled, Royal, Drop Pouch
+  suffix: RCM, Filled Drop Pouch
   components:
   - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
+    startingWebbing: RMCWebbingDropPouchRCMFilled
 
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitMarineRoyalTeamlead
   name: royal crown marine team lead uniform
   description: The field uniform of Royal Crown Marine officers and NCOs, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  suffix: Filled, Royal, Teamlead
+  suffix: RCM, Team Lead, Filled Drop Pouch
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/team_lead.rsi
   - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyalTeamlead
+    startingWebbing: RMCWebbingDropPouchRCMFilledTeamlead
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
 
-# PVE RCM jumpsuit without webbings
+# PVE Whiskey Troop uniform
 
 - type: entity
-  parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
+  parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalPVE
-  name: royal crown marine uniform
-  description: The field uniform of the Royal Crown Marines, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  suffix: Royal, PVE
+  suffix: PVE, RCM
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
-  - type: ItemCamouflage
-    camouflageVariations: {}
+    - RMCPatchTSEWhiskey
 
 # RCM service uniform
 
@@ -98,19 +91,30 @@
   description: A formal service uniform worn by commissioned officers of the Royal Crown Marines. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
   suffix: Royal, Formal
   components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/service.rsi
-    - type: UniformAccessoryHolder
-      startingAccessories:
-        - RMCPatchTSE
-        - RMCPatchTSEMarines
-    - type: ItemCamouflage
-      camouflageVariations: {}
-    - type: Foldable
-      unfoldVerbText: rmc-sleeves-verb-unfold
-      foldVerbText: rmc-sleeves-verb-fold
-    - type: FoldableClothing
-      foldedEquippedPrefix: sleeves
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/service.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSE
+    - RMCPatchTSEMarines
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+
+- type: entity
+  parent: RMCJumpsuitMarineRoyalService
+  id: RMCJumpsuitMarineRoyalServicePVE
+  suffix: PVE, Royal, Formal
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+    - RMCPatchTSEWhiskey
 
 # RCM Paramarines
 - type: entity

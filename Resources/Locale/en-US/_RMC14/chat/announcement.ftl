@@ -33,6 +33,10 @@ rmc-announcement-ares-map = [color=#CECECE][font size=16][bold]UNS Almayer[/bold
 
     {$message}[/bold][/font][/color]
 
+rmc-announcement-ares-varadero = [color=#CECECE][font size=16][bold]New Varadero, UNMC One-Way Emergency Relay[/bold][/font][/color][color=red][font size=14][bold]
+
+    {$message}[/bold][/font][/color]
+
 rmc-announcement-cooldown = Please allow at least {$seconds} seconds to pass between announcements
 
 rmc-announcement-dropship-message = [color=#CECECE][font size=16][bold]Dropship Alert[/bold][/font][/color][color=red][font size=16][bold]
@@ -42,9 +46,9 @@ rmc-announcement-dropship-message = [color=#CECECE][font size=16][bold]Dropship 
 rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=#CECECE]EMERGENCY[/color][/bold][/font][font size=16][color=red]
   DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/color][/font]
 
-rmc-announcement-delta = [color=#CECECE][font size=16][bold]SELF-DESTRUCT SYSTEMS ACTIVE[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-delta = [color=#CECECE][font size=16][bold]EMERGENCY SCUTTLE AUTHORIZATION[/bold][/font][/color][color=red][font size=16][bold]
 
-     DANGER, THE EMERGENCY DESTRUCT SYSTEM IS NOW ACTIVATED. PROCEED TO THE SELF-DESTRUCT CHAMBER FOR CONTROL ROD INSERTION.[/bold][/font][/color]
+     DANGER, ARES has authorized emergency scuttle by Engineering reactor overload. Qualified engineers may configure active fusion reactors with a multitool.[/bold][/font][/color]
 
 rmc-announcement-general-quarters = ATTENTION! GENERAL QUARTERS. ALL HANDS, MAN YOUR BATTLESTATIONS.
 
@@ -56,7 +60,7 @@ rmc-announcement-ares-command = [color=#CECECE][font size=16][bold]ARES v3.2[/bo
 
     {$message}[/font][/color]
 
-rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Unidentifled lifesigns[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Unidentified lifesigns[/bold][/font][/color][color=red][font size=16][bold]
 
     Unidentified lifesigns ({$count}) detected onboard the dropship {$name}. Recommendation: lockdown of exterior access ports, including ducting and ventilation.[/bold][/font][/color]
 

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Created for RMC-14/RMC-14 by @TadJohnson00 (GitHub).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-front"
+    },
+    {
+      "name": "l49"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    },
+    {
+      "name": "high"
+    },
+    {
+      "name": "medium"
+    },
+    {
+      "name": "low"
+    }
+  ]
+}

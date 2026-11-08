@@ -1,5 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.IconLabel;
 using Content.Shared._RMC14.Storage;
@@ -23,6 +26,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 
@@ -32,6 +36,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -39,15 +44,18 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
     [Dependency] private readonly LabelSystem _label = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCReagentSystem _reagent = default!;
     [Dependency] private readonly SharedRMCIconLabelSystem _rmcIconLabel = default!;
     [Dependency] private readonly SharedRMCSmartFridgeSystem _rmcSmartFridge = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private readonly List<EntityUid> _toFill = new();
 
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCChemMasterComponent, InteractUsingEvent>(OnInteractUsing);
@@ -396,7 +404,27 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 continue;
 
             if (!TryComp(bottle, out StorageComponent? storage))
+            {
+                if (!TryComp<ItemSlotsComponent>(bottle, out var slots))
+                    continue;
+
+                var freeSlots = 0;
+                foreach (var slot in slots.Slots)
+                {
+                    if (slot.Value.ContainerSlot != null && slot.Value.ContainerSlot.ContainedEntity == null)
+                        freeSlots++;
+                }
+
+                if (freeSlots < ent.Comp.PillAmount)
+                {
+                    var msg = Loc.GetString("rmc-chem-master-pills-not-enough-space");
+                    _popup.PopupClient(msg, args.Actor, PopupType.MediumCaution);
+                    return;
+                }
+
+                _toFill.Add(bottle);
                 continue;
+            }
 
             var free = _rmcStorage.EstimateFreeColumns((bottle, storage));
             if (free < ent.Comp.PillAmount)
@@ -434,6 +462,10 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         var originalSolution = string.Join(", ",
             buffer.Value.Comp.Solution.Contents.Select(c => $"{c.Quantity}u {c.Reagent.Prototype}"));
+
+        var originalSolutionNamed = string.Join(", ",
+            buffer.Value.Comp.Solution.Contents.Select(c => $"{c.Quantity}u {_reagent.Index(c.Reagent.Prototype).LocalizedName}"));
+
         var coords = Transform(ent).Coordinates;
 
         var reagentsPerPill = buffer.Value.Comp.Solution.Contents
@@ -443,10 +475,35 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         foreach (var fill in _toFill)
         {
             var label = CompOrNull<LabelComponent>(fill)?.CurrentLabel;
+
+            // Null out whitelists to allow storing in packets or other limited storages
+            EntityWhitelist? storageWhitelist = null;
+            Dictionary<string, EntityWhitelist> slotWhitelists = new();
+            if (TryComp<StorageComponent>(fill, out var store) && store.Whitelist != null)
+            {
+                storageWhitelist = store.Whitelist;
+                store.Whitelist = null;
+            }
+
+            if (TryComp<ItemSlotsComponent>(fill, out var slots))
+            {
+                foreach (var slot in slots.Slots)
+                {
+                    if (slot.Value.Whitelist != null)
+                    {
+                        slotWhitelists.Add(slot.Key, slot.Value.Whitelist);
+                        slot.Value.Whitelist = null;
+                    }
+                }
+            }
+
+            //Coloring
+            _appearance.SetData(fill, RMCPillColorVisuals.Color, buffer.Value.Comp.Solution.GetColor(_proto));
+
             for (var i = 0; i < ent.Comp.PillAmount; i++)
             {
                 var pill = Spawn(ent.Comp.PillProto, coords);
-                if (!_storage.Insert(fill, pill, out _, user: args.Actor, playSound: false))
+                if (!_storage.Insert(fill, pill, out _, user: args.Actor, playSound: false) && !_itemSlots.TryInsertEmpty(fill, pill, null, true))
                 {
                     QueueDel(pill);
                     continue;
@@ -477,6 +534,23 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                         $"{ToPrettyString(args.Actor):player} transferred {SharedSolutionContainerSystem.ToPrettyString(pillSolution.Value.Comp.Solution)} to {ToPrettyString(pill):target}, which now contains {SharedSolutionContainerSystem.ToPrettyString(pillSolution.Value.Comp.Solution)}");
                 }
             }
+
+            // Reset whitelists
+            if (storageWhitelist != null && store != null)
+            {
+                store.Whitelist = storageWhitelist;
+            }
+
+            if (slotWhitelists != null && slots != null)
+            {
+                foreach (var slotWhitelist in slotWhitelists)
+                {
+                    if (!_itemSlots.TryGetSlot(fill, slotWhitelist.Key, out var slot))
+                        continue;
+
+                    slot.Whitelist = slotWhitelist.Value;
+                }
+            }
         }
 
         _solution.UpdateChemicals(buffer.Value);
@@ -487,6 +561,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             Pill bottle IDs: {string.Join(", ", ent.Comp.SelectedBottles):bottleIds}
             """);
 
+        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} created {ent.Comp.PillAmount} {(double)perPill}u pills with a solution of {Loc.GetString(originalSolutionNamed)}.");
         Dirty(ent);
     }
 

@@ -22,6 +22,7 @@
   - type: ExpendableLight
     spentName: expendable-light-spent-flare-name
     spentDesc: expendable-light-spent-flare-desc
+    usesOverlay: false
     glowDuration: 5
     phaseOneDuration: 45
     phaseTwoDuration: 525
@@ -32,6 +33,8 @@
     iconStateSpent: flare_spent
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
+    heldPrefixLit: null
+    heldPrefixUnlit: null
     litSound:
       path: /Audio/_RMC14/Machines/flare_activate_2.ogg
       params:
@@ -53,7 +56,21 @@
     state: icon
   - type: Item
     size: Small
-    heldPrefix: unlit
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#FFA7A7"
+      right:
+      - state: inhand-right-flame
+        color: "#FFA7A7"
   - type: Appearance
   - type: PointLight
     enabled: false
@@ -130,9 +147,28 @@
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: flare
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#A7FFA7"
+      right:
+      - state: inhand-right-flame
+        color: "#A7FFA7"
+  - type: Item
+    size: Small
+    heldPrefix: unlit
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
   - type: PointLight
     color: "#AACCAA"
   - type: FlareSignal
+  - type: GenericVisualizer
+    visuals:
+      enum.SignalFlareVisuals.BeaconState:
+        enum.ExpendableLightVisualLayers.Base:
+          True: { state: flare-on }
+          False: { state: flare }
   - type: ExpendableLight
     glowDuration: 5
     phaseOneDuration: 150
@@ -190,6 +226,8 @@
   - type: Eye
     zoom: 0.5, 0.5
     drawFov: false
+  - type: DestroyedByExplosion
+    isExplodable: true
 
 - type: entity
   parent: CMFlare
@@ -200,6 +238,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Misc/flares.rsi
     layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: starshell_ash
     - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
       sprite: _RMC14/Objects/Misc/flares.rsi
       state: starshell_ash-on
@@ -207,7 +247,7 @@
       visible: false
     - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
       sprite: _RMC14/Objects/Misc/flares.rsi
-      state: starshell_ash
+      state: overlay
   - type: Icon
     sprite: _RMC14/Objects/Misc/flares.rsi
     state: starshell_ash
@@ -372,6 +412,10 @@
       whitelist:
         tags:
         - RMCFlare
+  - type: BulletBox
+    amount: 8
+    max: 8
+    bulletType: RMCFlareBullet
   - type: Sprite
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
@@ -395,6 +439,53 @@
           Medium: { visible: false }
           High: { visible: false }
           Full: { visible: false }
+
+- type: entity
+  parent: CMPackFlareBase
+  id: CMPackFlareColonist
+  name: CK25 emergency flare pack
+  suffix: Colony, Filled
+  description: A packet of eight CK25 Emergency Flares. Issued to colonists to light dark areas in emergency situations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/boxes.rsi
+    layers:
+    - state: ck25_e
+      map: [ "emptyLayer" ]
+    - state: ck25
+      map: [ "fullLayer" ]
+  - type: CMItemSlots
+    startingItem: CMFlareColonist
+
+- type: entity
+  parent: CMFlare
+  id: CMFlareColonist
+  description: A commonly seen red flare issued to colonists in emergencies. There are some faded drawings on the side instructing the reader on how to ignite it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: flare_colony
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: flare_flame
+      color: "#ec4b4b"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      state: overlay
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#ec4b4b"
+      right:
+      - state: inhand-right-flame
+        color: "#ec4b4b"
+  - type: PointLight
+    color: "#FFCCCC"
+  - type: ExpendableLight
+    iconStateSpent: flare_colony_spent
 
 - type: entity
   parent: CMPackFlareBase
@@ -566,20 +657,20 @@
   - type: LightBehaviour
     behaviours:
       - !type:FadeBehaviour
-       id: turn_on
-       maxDuration: 5
-       startValue: 2.5
-       endValue: 5
+        id: turn_on
+        maxDuration: 5
+        startValue: 2.5
+        endValue: 5
       - !type:FadeBehaviour
         id: phase_1
         maxDuration: 145
         startValue: 5
         endValue: 5
       - !type:FadeBehaviour
-       id: fade_out
-       maxDuration: 30
-       startValue: 5
-       endValue: 1
+        id: fade_out
+        maxDuration: 30
+        startValue: 5
+        endValue: 1
   - type: PointLight
     color: "#A7FFA7"
     radius: 8.0
@@ -619,6 +710,15 @@
         visible: false
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
         state: overlay
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#C156C2"
+      right:
+      - state: inhand-right-flame
+        color: "#C156C2"
   - type: PointLight
     enabled: false
     color: "#C8BFE7"
@@ -712,6 +812,15 @@
         visible: false
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
         state: overlay
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#F7AD35"
+      right:
+      - state: inhand-right-flame
+        color: "#F7AD35"
   - type: PointLight
     enabled: false
     color: "#F5D5A2"
@@ -819,6 +928,15 @@
         visible: false
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
         state: overlay
+  - type: ToggleableVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        color: "#155FFF"
+      right:
+      - state: inhand-right-flame
+        color: "#155FFF"
   - type: PointLight
     enabled: false
     color: "#8EACED"

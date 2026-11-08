@@ -458,6 +458,9 @@ public partial class SharedBodySystem
         BodyComponent? body = null,
         MovementSpeedModifierComponent? movement = null)
     {
+        if (_timing.ApplyingState) // RMC14
+            return;
+
         if (!Resolve(bodyId, ref body, ref movement, logMissing: false)
             || body.RequiredLegs <= 0)
         {

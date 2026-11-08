@@ -3,7 +3,7 @@
 namespace Content.Shared._RMC14.Xenonids.Charge;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoChargeSystem))]
+[Access(typeof(XenoToggleChargingSystem))]
 public sealed partial class XenoToggleChargingParalyzeComponent : Component
 {
     [DataField, AutoNetworkedField]

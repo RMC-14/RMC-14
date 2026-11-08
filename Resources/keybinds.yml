@@ -256,6 +256,18 @@ binds:
   type: State
   key: E
   mod1: Shift
+- function: SmartEquipPocket1
+  type: State
+  key: N
+  mod1: Shift
+- function: SmartEquipPocket2
+  type: State
+  key: M
+  mod1: Shift
+- function: SmartEquipSuitStorage
+  type: State
+  key: H
+  mod1: Shift
 - function: OpenBackpack
   type: State
   key: V
@@ -476,6 +488,7 @@ binds:
 - function: OpenSandboxWindow
   type: State
   key: B
+  mod1: Control
 - function: TakeScreenshot
   type: State
   key: F2
@@ -682,3 +695,18 @@ binds:
   type: State
   key: R
   mod1: Shift
+- function: RMCResist
+  type: State
+  key: B
+- function: SmartEquipUniform
+  type: State
+  key: N
+  mod1: Alt
+- function: SmartEquipArmor
+  type: State
+  key: M
+  mod1: Alt
+- function: SmartEquipHelmet
+  type: State
+  key: H
+  mod1: Alt

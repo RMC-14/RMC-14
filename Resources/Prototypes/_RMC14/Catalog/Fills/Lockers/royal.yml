@@ -65,8 +65,6 @@
   id: RMCClosetRCMSapperFill
   table: !type:AllSelector
     children:
-    - id: RMCBoxShotgunBuckshot
-      amount: 4
     - id: RMCWeldingGoggles
       amount: 2
     - id: RMCWeaponRifleL90A2Breacher

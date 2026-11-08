@@ -9,11 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaOfficeWorker
     - type: RMCSurvivor
@@ -47,7 +43,7 @@
   name: hybrisa office worker preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCJacketCorporateBrown, RMCJumpsuitLiaisonStowaway, RMCShoesLaceupBrown, CMSatchel]
     - [ RMCJacketCorporateBlack, RMCJumsuitWhiteService, RMCShoesLaceup, RMCSatchelBlack]

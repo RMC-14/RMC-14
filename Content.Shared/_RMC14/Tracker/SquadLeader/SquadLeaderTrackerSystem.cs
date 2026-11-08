@@ -115,6 +115,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         var leaderTracker = EnsureComp<SquadLeaderTrackerComponent>(args.Equipee);
         leaderTracker.TrackerModes = ent.Comp.TrackerModes;
+        leaderTracker.ManualMode = false;
         SetMode((args.Equipee, leaderTracker), ent.Comp.DefaultMode);
         Dirty(args.Equipee, leaderTracker);
     }
@@ -204,6 +205,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             else
                 SetTarget(ent, null);
 
+            ent.Comp.ManualMode = true;
             SetMode(ent, args.Mode);
         }
         // There are multiple entities of the selected role, open a new ui window to choose which entity should be tracked.
@@ -238,6 +240,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
     private void OnLeaderTrackerSelectTargetEvent(Entity<SquadLeaderTrackerComponent> ent, ref LeaderTrackerSelectTargetEvent args)
     {
+        ent.Comp.ManualMode = true;
         SetTarget(ent, GetEntity(args.Target));
         SetMode(ent, args.Mode);
         Dirty(ent);
@@ -434,15 +437,15 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
             if (_squadLeaderTrackerQuery.TryComp(member, out var tempTracker))
             {
-                if (fireteam.Leader != null)
+                if (fireteam.Leader != null &&
+                    (!tempTracker.ManualMode || tempTracker.Mode == FireteamLeader))
                 {
                     if (TryGetEntity(fireteam?.Leader?.Id, out var fireteamLeaderUid))
                     {
                         if (fireteamLeaderUid != member)
                         {
-                            ProtoId<TrackerModePrototype> mode = "FireteamLeader";
                             SetTarget((member, tempTracker), fireteamLeaderUid);
-                            SetMode((member, tempTracker), mode);
+                            SetMode((member, tempTracker), FireteamLeader);
                         }
                     }
                 }
@@ -755,7 +758,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             if (!_squadLeaderTrackerQuery.TryComp(member, out var tracker))
                 continue;
 
-            _ui.SetUiState(member, SquadLeaderTrackerUI.Key, 
+            _ui.SetUiState(member, SquadLeaderTrackerUI.Key,
                 new SquadLeaderTrackerBoundUserInterfaceState(objectives));
         }
     }

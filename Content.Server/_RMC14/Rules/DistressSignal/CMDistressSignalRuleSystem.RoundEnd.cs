@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._RMC14.Armor.Ghillie;
@@ -8,9 +8,11 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.LastStand;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -27,6 +29,8 @@ public sealed partial class CMDistressSignalRuleSystem
 {
     private const int LastMarineEquipmentCooldownHours = 2;
 
+    private const int XenoLastStandMinNumber = 1;
+
     /// <summary>
     /// Performs all round end condition checks including hijack status, faction live counts,
     /// queen death timer, and last marine equipment effects.
@@ -38,6 +42,9 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         distress.NextCheck ??= Timing.CurTime + distress.CheckEvery;
+
+        if (distress.ScuttleFinalSequenceStarted || distress.ScuttleDetonated)
+            return;
 
         if (distress.ForceEndAt != null && Timing.CurTime >= distress.ForceEndAt)
         {
@@ -57,6 +64,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         ApplyLastMarineEffects(time);
         CheckQueenDeath(distress);
+        CheckLastXenoAlive();
     }
 
     private void UpdateHijackState(CMDistressSignalRuleComponent distress)
@@ -123,6 +131,9 @@ public sealed partial class CMDistressSignalRuleSystem
             {
                 continue;
             }
+
+            if (HasComp<SynthComponent>(marineId))
+                continue;
 
             if (_containers.IsEntityInContainer(marineId))
                 continue;
@@ -237,6 +248,7 @@ public sealed partial class CMDistressSignalRuleSystem
             DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
             DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
             DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
+            DistressSignalRuleResult.SelfDestruct => distress.SelfDestructAudio,
             _ => null,
         };
 
@@ -251,7 +263,6 @@ public sealed partial class CMDistressSignalRuleSystem
         ResetSelectedPlanet();
         _spawnedDropships = false;
         OperationName = null;
-        _usingCustomOperationName = false;
         ActiveNightmareScenario = null;
         _config.SetCVar(CCVars.GameDisallowLateJoins, false);
 
@@ -269,6 +280,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 DistressSignalRuleResult.MajorXenoVictory => 1,
                 DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die or timeout happens
                 DistressSignalRuleResult.AllDied => 0,
+                DistressSignalRuleResult.SelfDestruct => 0,
                 null => 0,
                 _ => throw new ArgumentOutOfRangeException(),
             };
@@ -318,7 +330,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 _rmcAmbientLight.SetColor((xenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
             }
 
-            var ares = _ares.EnsureARES();
+            var ares = _aresCore.EnsureMarineARES();
             _marineAnnounce.AnnounceRadio(ares,
                 Loc.GetString("rmc-distress-signal-bioscan-complete"),
                 rule.AllClearChannel);
@@ -419,6 +431,27 @@ public sealed partial class CMDistressSignalRuleSystem
             _chatManager.SendAdminAnnouncement(msg);
             _chatManager.DispatchServerAnnouncement(msg);
             ev.Cancel();
+        }
+    }
+
+    private void CheckLastXenoAlive()
+    {
+        //TODO RMC14 check main hive only
+        var xenoCount = _xenoEvolution.GetLiving<XenoComponent>(x => x.Comp.CountedInSlots);
+
+        if (xenoCount > XenoLastStandMinNumber)
+            return;
+
+        var xenos = EntityQueryEnumerator<ActorComponent, XenoLastStandableComponent, MobStateComponent, TransformComponent>();
+        while (xenos.MoveNext(out var xenoId, out _, out var xeno, out var mobState, out var xform))
+        {
+            if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                continue;
+
+            if (_mobState.IsDead(xenoId))
+                continue;
+
+            EnsureComp<XenoLastStandComponent>(xenoId);
         }
     }
 }

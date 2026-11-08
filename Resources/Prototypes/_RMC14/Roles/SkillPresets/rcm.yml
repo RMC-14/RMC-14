@@ -1,0 +1,123 @@
+# RCM Skills
+- type: entity
+  id: RMCSkillPresetRoyalRifleman
+  name: Royal Marine Rifleman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 1
+      RMCSkillCqc: 2
+      RMCSkillEndurance: 3
+      RMCSkillEngineer: 1
+      RMCSkillFirearms: 1 #Should be 2 post recoil changes
+      RMCSkillFireman: 2
+      RMCSkillJtac: 1
+      RMCSkillMedical: 2
+      RMCSkillPolice: 2
+      RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetRoyalRifleman
+  id: RMCSkillPresetRoyalMedic
+  name: Royal Marine Medic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+      RMCSkillFireman: 3
+
+- type: entity
+  parent: RMCSkillPresetRoyalRifleman
+  id: RMCSkillPresetRoyalBreacher
+  name: Royal Marine Breacher
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 3
+      RMCSkillPowerLoader: 1
+
+- type: entity
+  parent: RMCSkillPresetRoyalRifleman
+  id: RMCSkillPresetRoyalMarksman
+  name: Royal Marine Marksman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      #RMCSkillSpecialistWeapons: 1 #TODO give them WS skill for scout rifle
+      RMCSkillFirearms: 2 #Should be 3 post recoil changes
+
+- type: entity
+  parent: RMCSkillPresetRoyalRifleman
+  id: RMCSkillPresetRoyalSmartGunner
+  name: Royal Marine Smart Gun Operator
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillSmartGun: 1
+
+- type: entity
+  parent: RMCSkillPresetRoyalRifleman
+  id: RMCSkillPresetRoyalTeamLeader
+  name: Royal Marine Team Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillEngineer: 2
+      RMCSkillFireman: 3
+      RMCSkillJtac: 2
+      RMCSkillLeadership: 1
+      RMCSkillPilot: 1
+      RMCSkillIntel: 1
+      
+- type: entity
+  parent: RMCSkillPresetRoyalRifleman
+  id: RMCSkillPresetRoyalLieutenant
+  name: Royal Marine Lieutenant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillEngineer: 2
+      RMCSkillFireman: 3
+      RMCSkillJtac: 3
+      RMCSkillSurgery: 1
+      RMCSkillLeadership: 2
+      RMCSkillPowerLoader: 1
+      RMCSkillIntel: 1
+      RMCSkillOverwatch: 1
+      RMCSkillPilot: 1
+      RMCSkillVehicles: 2
+
+- type: entity
+  parent: RMCSkillPresetRoyalLieutenant
+  id: RMCSkillPresetRoyalCaptain
+  name: Royal Marine Captain
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillJtac: 4
+      RMCSkillMedical: 3
+      RMCSkillLeadership: 3
+      RMCSkillPowerLoader: 2
+      RMCSkillIntel: 2
+
+- type: entity
+  parent: RMCSkillPresetRoyalCaptain
+  id: RMCSkillPresetRoyalMajor
+  name: Royal Marine Major
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillSmartGun: 1
+      RMCSkillExecution: 1

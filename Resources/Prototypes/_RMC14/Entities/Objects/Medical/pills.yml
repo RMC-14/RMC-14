@@ -162,6 +162,26 @@
 
 - type: entity
   parent: CMPill
+  id: RMCPillUltrazineUnmarked
+  name: unmarked pill
+  description: An unknown pill.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: RMCUltrazine
+          Quantity: 5
+  - type: Sprite
+    layers:
+    - state: pill6
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-ultrazine
+
+- type: entity
+  parent: CMPill
   id: RMCPillRussianRed
   components:
   - type: SolutionContainerManager

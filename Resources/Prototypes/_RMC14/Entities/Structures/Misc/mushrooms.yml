@@ -1,0 +1,118 @@
+- type: entity
+  id: RMCGlowshroom
+  name: glowshroom
+  description: ""
+  components:
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    layers:
+    - state: glowshroomf
+      shader: unshaded
+  - type: Appearance
+  - type: PointLight
+    enabled: true
+    radius: 1.25
+    netsync: true
+    energy: 1
+    offset: "0,0"
+    color: "#cff593"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+
+- type: entity
+  parent: RMCGlowshroom
+  id: RMCGlowshroom1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    layers:
+    - state: glowshroom1
+      shader: unshaded
+
+- type: entity
+  parent: RMCGlowshroom
+  id: RMCGlowshroom0
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    layers:
+    - state: glowshroom0
+      shader: unshaded
+
+- type: entity
+  parent: RMCGlowshroom
+  id: RMCGlowshroom2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    layers:
+    - state: glowshroom2
+      shader: unshaded
+
+- type: entity
+  parent: RMCGlowshroom
+  id: RMCGlowshroom3
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    layers:
+    - state: glowshroom3
+      shader: unshaded
+
+- type: entity
+  id: RMCMushroom
+  name: fly amanita
+  description: "Amanita muscaria: A delicious-looking mushroom like you see in those cartoons."
+  suffix: Prop, RMC
+  components:
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    state: amanita
+  - type: Appearance
+
+- type: entity
+  parent: RMCMushroom
+  id: RMCMushroom1
+  name: plump-helmet
+  description: "Plumus Hellmus: Oh, SHUT UP about the BLOODY mushrooms already! MOVE IT, marines!"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    state: plumphelmet
+
+- type: entity
+  parent: RMCMushroom
+  id: RMCMushroom2
+  name: destroying angel
+  description: "Amanita bisporigera: Is this the edible kind? or am I mistaken?"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    state: angel
+
+- type: entity
+  parent: RMCMushroom
+  id: RMCMushroom3
+  name: chanterelle cluster
+  description: "Cantharellus Cibarius: These jolly yellow little shrooms sure look tasty!"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    state: chanterelle
+
+- type: entity
+  parent: RMCMushroom
+  id: RMCMushroom4
+  name: liberty cap
+  description: "Psilocybe semilanceata: Do NOT eat these. We mean it. Please. We're begging you."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/mushrooms.rsi
+    state: libertycap

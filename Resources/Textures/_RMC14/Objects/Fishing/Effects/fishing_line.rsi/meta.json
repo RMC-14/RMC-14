@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by OpenAI Codex for RMC-14, based on the CMSS13 fishing line and bobber visual layout.",
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "cast_north"
+    },
+    {
+      "name": "cast_south"
+    },
+    {
+      "name": "cast_east"
+    },
+    {
+      "name": "cast_west"
+    },
+    {
+      "name": "bite_north"
+    },
+    {
+      "name": "bite_south"
+    },
+    {
+      "name": "bite_east"
+    },
+    {
+      "name": "bite_west"
+    }
+  ]
+}

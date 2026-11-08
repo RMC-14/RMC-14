@@ -1,0 +1,69 @@
+# Survivor skills
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorWeYaManager
+  name: Survivor WeYa Manager
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillLeadership: 3
+      RMCSkillIntel: 2
+      RMCSkillMedical: 1
+      RMCSkillOverwatch: 1
+
+# Corpodome goons
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorGoon
+  name: Survivor Goon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillEngineer: 1
+      RMCSkillMedical: 1
+      RMCSkillCqc: 1
+      RMCSkillFirearms: 2
+      RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
+      RMCSkillFireman: 2
+      RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivorGoon
+  id: RMCSkillPresetSurvivorGoonMedic
+  name: Survivor Goon Medic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivorGoon
+  id: RMCSkillPresetSurvivorGoonTechnician
+  name: Survivor Goon Technician
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
+      RMCSkillFireman: 2
+      RMCSkillPowerLoader: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivorGoon
+  id: RMCSkillPresetSurvivorGoonLead
+  name: Survivor Goon Lead
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
+      RMCSkillFireman: 2
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
+      RMCSkillLeadership: 1

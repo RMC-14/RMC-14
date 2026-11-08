@@ -14,3 +14,9 @@ public sealed class DropshipFabricatorPrintMsg(EntProtoId id) : BoundUserInterfa
 {
     public readonly EntProtoId Id = id;
 }
+
+[Serializable, NetSerializable]
+public sealed class DropshipFabricatorCancelQueueMsg(int index) : BoundUserInterfaceMessage
+{
+    public readonly int Index = index;
+}

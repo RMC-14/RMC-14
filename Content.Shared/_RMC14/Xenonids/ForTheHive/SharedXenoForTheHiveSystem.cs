@@ -246,8 +246,8 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                         var smoke = SpawnAtPosition(active.AcidSmoke, _turf.GetTileCenter(turf));
                     }
 
-                    if (GetHiveCore(xeno, out var core))
-                        ForTheHiveRespawn(xeno, active.CoreSpawnTime);
+                    if (_hive.TryGetHiveCore(xeno, out var core))
+                        ForTheHiveRespawn(xeno, active.CoreSpawnTime, true, _transform.GetMoverCoordinates(core.Value));
                     else
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
 
@@ -257,25 +257,6 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                 }
             }
         }
-    }
-
-    protected bool GetHiveCore(EntityUid xeno, out EntityUid? core)
-    {
-        var cores = EntityQueryEnumerator<HiveCoreComponent, HiveMemberComponent>();
-        while (cores.MoveNext(out var uid, out var _, out var _))
-        {
-            if (!_hive.FromSameHive(xeno, uid))
-                continue;
-
-            if (_mob.IsDead(uid))
-                continue;
-
-            core = uid;
-            return true;
-        }
-
-        core = null;
-        return false;
     }
 
     protected virtual void ForTheHiveRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)

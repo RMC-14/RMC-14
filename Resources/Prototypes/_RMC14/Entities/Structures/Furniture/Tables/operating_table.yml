@@ -31,6 +31,7 @@
   - type: Strap
     position: Down
     rotation: -90
+    modifyBuckleDrawDepth: false
   - type: CMOperatingTable
   - type: BuckleClimbable
   - type: Corrodible

@@ -1,0 +1,4 @@
+- type: accessLevel
+  id: RMCAccessLogs
+  parent: RMCBaseARESAccess
+  name: ARES Logs

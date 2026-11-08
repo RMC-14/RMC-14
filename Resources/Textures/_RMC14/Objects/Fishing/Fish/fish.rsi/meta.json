@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/fishing_atoms.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "crab"
+    },
+    {
+      "name": "crab_gutted"
+    },
+    {
+      "name": "squid_whorl"
+    },
+    {
+      "name": "squid_whorl_gutted"
+    },
+    {
+      "name": "squid_sock"
+    },
+    {
+      "name": "squid_sock_gutted"
+    },
+    {
+      "name": "worm_redring"
+    },
+    {
+      "name": "worm_redring_gutted"
+    },
+    {
+      "name": "quadtopus"
+    },
+    {
+      "name": "quadtopus_gutted"
+    },
+    {
+      "name": "shell_clam"
+    },
+    {
+      "name": "shell_clam_gutted"
+    },
+    {
+      "name": "urchin_purple"
+    },
+    {
+      "name": "urchin_red"
+    },
+    {
+      "name": "bluegill"
+    },
+    {
+      "name": "bluegill_gutted"
+    },
+    {
+      "name": "bass"
+    },
+    {
+      "name": "bass_gutted"
+    },
+    {
+      "name": "catfish"
+    },
+    {
+      "name": "salmon"
+    },
+    {
+      "name": "salmon_gutted"
+    },
+    {
+      "name": "white_perch"
+    },
+    {
+      "name": "white_perch_gutted"
+    }
+  ]
+}

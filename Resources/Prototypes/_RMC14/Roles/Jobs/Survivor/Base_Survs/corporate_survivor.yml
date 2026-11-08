@@ -4,7 +4,7 @@
   name: cm-job-name-survivor-corporate
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorCorporate
-  icon: "CMJobIconLiaison"
+  icon: "RMCJobIconGenericColonistCorporate"
   hasIcon: true
   ranks:
     RMCRankWeYaExecutiveSpecialist:
@@ -55,7 +55,7 @@
     jumpsuit: CMJumpsuitLiaisonField
     outerClothing: RMCArmorVest
     shoes: RMCShoesLaceup
-    back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
+    back: CMSatchelLiaisonSecureFillSurvivor
     id: CMIDCardLiaisonColony
     pocket1: RMCPouchSurvivalFill
     pocket2: CMClipboard # RMC14, replace with document pouch when fixed

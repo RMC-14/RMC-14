@@ -16,6 +16,8 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared.Coordinates;
 using Content.Shared.Projectiles;
 using Content.Shared._RMC14.Xenonids.Sweep;
+using Content.Shared.IdentityManagement;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -171,14 +173,22 @@ public sealed class XenoShardSystem : EntitySystem
 
         Dirty(ent);
 
-        _shield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, ent.Comp.ShieldAmount);
+        _shield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, ent.Comp.ShieldAmount, visualState: ent.Comp.VisualState);
 
         // Show CM13-style messages
-        var selfMsg = Loc.GetString("rmc-spike-shield-self");
-        var othersMsg = Loc.GetString("rmc-spike-shield-others", ("user", ent));
-        _popup.PopupPredicted(selfMsg, othersMsg, ent, ent);
+        var selfMessage = Loc.GetString("rmc-spike-shield-self");
+        _popup.PopupClient(selfMessage, ent, ent);
+
+        var others = Filter.PvsExcept(ent).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+            continue;
+
+            var otherMessage = Loc.GetString("rmc-spike-shield-others", ("user", Identity.Name(ent, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, ent, otherEnt);
+        }
         _aura.GiveAura(ent, Color.Blue, ent.Comp.ShieldDuration, 2);
-        Spawn(ent.Comp.EffectId, ent.Owner.ToCoordinates());
 
         args.Handled = true;
     }

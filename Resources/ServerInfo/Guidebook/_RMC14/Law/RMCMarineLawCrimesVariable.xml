@@ -30,17 +30,17 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Damaging the ship or making any unauthorized modifications to it as outlined in Standard Operating Procedure.\nMaterials for repairs should be taken from maintenance storages.
+        \- Damaging the warship or making any unauthorized modifications to it as outlined in Standard Operating Procedure.\nMaterials for repairs should be taken from maintenance storages.
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Breaking a window, damaging a wall, etc.\n[bold]Return the ship to it's exact previous state, or serve 7.5 minutes if not possible.[/bold]
+        \- Breaking a window, damaging a wall, etc.\n[bold]Return the warship to it's exact previous state, or serve 7.5 minutes if not possible.[/bold]
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Breaking the law in a major manner includes breaking /dismantling walls or several windows.\n[bold]10 minutes.[/bold]
+        \- Breaking the law in a major manner includes breaking /dismantling walls or several windows.\n[bold]10 minutes.[/bold]
       </Box>
     </ColorBox>
 
@@ -51,7 +51,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow a lawful order from a superior person of rank or position, while under their command. \n[italic]This does not apply to orders made to a person with intent to arrest, which instead would be [bold]Resisting Arrest[/bold][/italic]
+        \- Failing to follow a lawful order from a superior person of rank or position, while under their command. \n[italic]This does not apply to orders made to a person with intent to arrest, which instead would be [bold]Resisting Arrest[/bold][/italic]
       </Box>
     </ColorBox>
     <ColorBox>
@@ -72,7 +72,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Interfering in a legal arrest being performed.
+        \- Interfering in a legal arrest being performed.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -93,7 +93,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        The unauthorized use of listening devices in violation of Standard Operating Procedures.
+        \- The unauthorized use of listening devices in violation of Standard Operating Procedures.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -114,7 +114,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To resist or refuse to comply with a lawful arrest, detainment, search, or NJP.
+        \- To resist or refuse to comply with a lawful arrest, detainment, search, or NJP.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -135,7 +135,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Assisting others in committing a crime, directly or indirectly, or encouraging them to commit one. Any person Aiding and Abetting is required to be told the crimes of the person they aided.
+        \- Assisting others in committing a crime, directly or indirectly, or encouraging them to commit one. Any person Aiding and Abetting is required to be told the crimes of the person they aided.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -156,7 +156,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To cause disruption in a significant manner while in Brig and under arrest. This can be added on to any charge.
+        \- To cause disruption in a significant manner while in Brig and under arrest. This can be added on to any charge.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -177,7 +177,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Making a false statement that accuses someone of having committed an offence. \nDoing anything intended to cause someone to be suspected of having committed an offence that the person has not committed. \nTo divert suspicion from themselves, reporting that an offence has been committed when it has not been committed. \nFalse statements relating to investigations are considered [bold]False Testimony[/bold].
+        \- Making a false statement that accuses someone of having committed an offence. \nDoing anything intended to cause someone to be suspected of having committed an offence that the person has not committed. \n\- To divert suspicion from themselves, reporting that an offence has been committed when it has not been committed. \n\- False statements relating to investigations are considered [bold]False Testimony[/bold].
       </Box>
     </ColorBox>
     <ColorBox>

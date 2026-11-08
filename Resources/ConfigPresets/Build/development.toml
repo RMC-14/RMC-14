@@ -46,6 +46,7 @@ see_own_notes = true
 [rmc]
 automatic_commander_promotion = false
 planet_map_vote = false
+dropship_initial_delay_minutes = 0
 
 [ic]
 # random_characters = true

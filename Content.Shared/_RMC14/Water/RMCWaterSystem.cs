@@ -1,6 +1,8 @@
 ﻿using Content.Shared._RMC14.Map;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Whitelist;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Water;
@@ -10,6 +12,7 @@ public sealed class RMCWaterSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -55,6 +58,43 @@ public sealed class RMCWaterSystem : EntitySystem
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Returns true for uncovered RMC water that should apply water contact effects.
+    /// </summary>
+    public bool IsActiveWater(EntityUid water, EntityUid user, RMCWaterComponent? component = null)
+    {
+        return IsActiveWater((water, component), user);
+    }
+
+    public bool IsActiveWater(Entity<RMCWaterComponent?> water, EntityUid user)
+    {
+        if (!Resolve(water, ref water.Comp, false))
+            return false;
+
+        return CanCollide(water, user);
+    }
+
+    /// <summary>
+    /// Checks current physics contacts for active RMC water.
+    /// </summary>
+    public bool IsInWater(EntityUid user, FixturesComponent? fixtures = null)
+    {
+        if (!Resolve(user, ref fixtures, false))
+            return false;
+
+        var contacts = _physics.GetContacts((user, fixtures));
+        while (contacts.MoveNext(out var contact))
+        {
+            if (!contact.IsTouching)
+                continue;
+
+            if (IsActiveWater(contact.OtherEnt(user), user))
+                return true;
+        }
+
+        return false;
     }
 
     public override void Update(float frameTime)

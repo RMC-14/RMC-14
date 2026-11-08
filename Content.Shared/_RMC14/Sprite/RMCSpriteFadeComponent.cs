@@ -31,4 +31,10 @@ public sealed partial class RMCSpriteFadeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<string> FadeLayers = new();
+
+    /// <summary>
+    /// If true, also fade when the local player shares the same grid (used for vehicle interiors).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool FadeOnSharedGrid;
 }

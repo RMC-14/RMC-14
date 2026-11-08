@@ -122,6 +122,9 @@ public sealed class RMCSuicideSystem : EntitySystem
 
         foreach (var (bullet, _) in ev.Ammo)
         {
+            if (HasComp<GunComponent>(bullet))
+                continue;
+
             QueueDel(bullet);
         }
 

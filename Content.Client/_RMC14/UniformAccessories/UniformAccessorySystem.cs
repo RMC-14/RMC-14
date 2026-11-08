@@ -20,6 +20,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly RMCHumanoidAppearanceSystem _rmcHumanoid = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public event Action? PlayerMedalUpdated;
 
@@ -38,8 +39,6 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
     {
         if (_rmcHumanoid.HidePlayerIdentities && HasComp<XenoComponent>(_player.LocalEntity))
             return;
-
-        var clothingSprite = CompOrNull<SpriteComponent>(ent);
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
@@ -65,12 +64,12 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             if (ent.Comp.HideAccessories && accessoryComp.HiddenByJacketRolling)
                 continue;
 
-            if (clothingSprite != null && accessoryComp.HasIconSprite)
+            if (accessoryComp.HasIconSprite)
             {
-                var clothingSpriteLayer = clothingSprite.LayerMapReserveBlank(clothingLayer);
-                clothingSprite.LayerSetVisible(clothingSpriteLayer, !accessoryComp.Hidden);
-                clothingSprite.LayerSetRSI(clothingSpriteLayer, sprite.RsiPath);
-                clothingSprite.LayerSetState(clothingSpriteLayer, sprite.RsiState);
+                _sprite.LayerMapReserve(ent.Owner, clothingLayer);
+                _sprite.LayerSetVisible(ent.Owner, clothingLayer, !accessoryComp.Hidden);
+                _sprite.LayerSetRsi(ent.Owner, clothingLayer, sprite.RsiPath);
+                _sprite.LayerSetRsiState(ent.Owner, clothingLayer, sprite.RsiState);
             }
 
             if (args.Layers.Any(t => t.Item1 == layer))
@@ -119,8 +118,8 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         // For items with hasIconSprite, use the same unique key format as when adding
         var clothingLayer = accessoryComp.HasIconSprite ? $"{layer}_{index}" : layer;
 
-        if (TryComp(ent.Owner, out SpriteComponent? clothingSprite) && clothingSprite.LayerMapTryGet(clothingLayer, out var clothingSpriteLayer))
-            clothingSprite.LayerSetVisible(clothingSpriteLayer, false);
+        if (_sprite.LayerMapTryGet(ent.Owner, clothingLayer, out var spriteLayer, false))
+            _sprite.LayerSetVisible(ent.Owner, spriteLayer, false);
 
         _item.VisualsChanged(ent);
     }
@@ -133,8 +132,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
 
-        if (!TryComp(args.Equipee, out SpriteComponent? sprite))
-            return;
+        var user = args.Equipee;
 
         var index = 0;
         foreach (var accessory in container.ContainedEntities)
@@ -146,8 +144,6 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             {
                 accessoryComp.PlayerSprite = new(accessorySprite.BaseRSI?.Path ?? new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
             }
-            
-            var key = GetKey(accessory, accessoryComp, index);
 
             if (accessoryComp.LayerKeys == null || accessoryComp.LayerKeys.Count == 0)
             {
@@ -155,24 +151,21 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
                 continue;
             }
 
-            if (!args.RevealedLayers.Contains(key))
-            {
-                index++;
-                continue;
-            }
+            var key = GetKey(accessory, accessoryComp, index);
 
-            if (!sprite.LayerMapTryGet(key, out var layer) ||
-                !sprite.TryGetLayer(layer, out var layerData))
+            if (!args.RevealedLayers.Contains(key) ||
+                !_sprite.LayerMapTryGet(user, key, out var layer, false) ||
+                !_sprite.TryGetLayer(user, layer, out var layerData, false))
             {
                 index++;
                 continue;
             }
 
             var data = layerData.ToPrototypeData();
-            sprite.RemoveLayer(layer);
+            _sprite.RemoveLayer(user, layer);
 
-            layer = sprite.LayerMapReserveBlank(key);
-            sprite.LayerSetData(layer, data);
+            layer = _sprite.LayerMapReserve(user, key);
+            _sprite.LayerSetData(user, layer, data);
 
             index++;
         }

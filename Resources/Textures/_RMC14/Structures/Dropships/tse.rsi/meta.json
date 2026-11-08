@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/41b3798435ee57263bb67fa694ea944d6698c062/icons/turf/twedropship.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/41b3798435ee57263bb67fa694ea944d6698c062/icons/turf/twedropship.dmi, corners and connectors edited by SharkSnake98 on GitHub",
   "size": {
     "x": 32,
     "y": 32
@@ -252,6 +252,30 @@
     },
     {
       "name": "82"
+    },
+    {
+      "name": "corner_right_south"
+    },
+    {
+      "name": "corner_left_south"
+    },
+    {
+      "name": "corner_right_north"
+    },
+    {
+      "name": "corner_left_north"
+    },
+    {
+      "name": "connector_1"
+    },
+    {
+      "name": "connector_2"
+    },
+    {
+      "name": "engine_1"
+    },
+    {
+      "name": "engine_2"
     }
   ]
 }

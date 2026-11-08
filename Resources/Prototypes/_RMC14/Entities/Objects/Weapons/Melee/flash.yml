@@ -30,3 +30,6 @@
   - type: MeleeRequiresSkill
     skills:
       RMCSkillPolice: 1
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice

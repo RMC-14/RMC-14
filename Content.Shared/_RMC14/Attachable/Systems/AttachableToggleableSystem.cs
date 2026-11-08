@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -21,11 +22,13 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
+using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -46,6 +49,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private const string AttachableToggleUseDelayId = "RMCAttachableToggle";
 
@@ -70,6 +74,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
         //SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<AttachableToggleableComponent, GrantAttachableActionsEvent>(OnGrantAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, RemoveAttachableActionsEvent>(OnRemoveAttachableActions);
+        SubscribeLocalEvent<AttachableToggleableComponent, GetVerbsEvent<ActivationVerb>>(OnGetActivationVerbs,
+            after: new[] { typeof(SharedHandheldLightSystem) });
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<HandDeselectedEvent>>(OnHandDeselected);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotEquippedHandEvent>>(OnGotEquippedHand);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotUnequippedHandEvent>>(OnGotUnequippedHand);
@@ -490,6 +496,18 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return false;
         }
 
+        if (!attachable.Comp.Active &&
+            attachable.Comp.InstantToggle == AttachableInstantToggleConditions.Brace &&
+            HasComp<VehicleRideSurfaceRiderComponent>(args.User))
+        {
+            if (!silent)
+                _popupSystem.PopupClient(
+                    Loc.GetString("rmc-attachable-activation-fail-on-vehicle", ("attachable", attachable)),
+                    args.User,
+                    args.User);
+            return false;
+        }
+
         return true;
     }
 
@@ -754,6 +772,18 @@ public sealed class AttachableToggleableSystem : EntitySystem
         }
 
         var exists = ent.Comp.Action != null;
+        if (exists &&
+            ent.Comp.Action is { } pending &&
+            Exists(pending) &&
+            actionsContainerComponent.Container?.Contains(pending) != true)
+        {
+            if (_net.IsServer)
+            {
+                ent.Comp.Action = null;
+                Dirty(ent);
+            }
+            return;
+        }
         _actionContainerSystem.EnsureAction(ent, ref ent.Comp.Action, ent.Comp.ActionId, actionsContainerComponent);
 
         if (ent.Comp.Action is not { } actionId)
@@ -783,7 +813,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void RelayAttachableActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
     {
-        if (attachable.Comp.ActionsToRelayWhitelist == null || !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent))
+        if (attachable.Comp.ActionsToRelayWhitelist == null ||
+            !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent) ||
+            actionsContainerComponent.Container is not { } container) // Your IDE lies, this CAN be null.
             return;
 
         foreach (var actionUid in actionsContainerComponent.Container.ContainedEntities)
@@ -820,7 +852,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void RemoveRelayedActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
     {
-        if (attachable.Comp.ActionsToRelayWhitelist == null || !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent))
+        if (attachable.Comp.ActionsToRelayWhitelist == null ||
+            !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent) ||
+            actionsContainerComponent.Container is not { } container) // Your IDE lies, this CAN be null.
             return;
 
         foreach (var actionUid in actionsContainerComponent.Container.ContainedEntities)
@@ -857,6 +891,14 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
             args.Handled = true;
+    }
+
+    private void OnGetActivationVerbs(Entity<AttachableToggleableComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        if (!ent.Comp.AttachedOnly || ent.Comp.Attached)
+            return;
+
+        args.Verbs.RemoveWhere(v => v.Text == Loc.GetString("verb-common-toggle-light"));
     }
 #endregion
 }

@@ -5,6 +5,7 @@
   name: table
   description: A square metal surface resting on four legs. Useful to put stuff on.
   components:
+  - type: VehicleSmashable
   - type: Corrodible
     timeToApply: 4
     structure: true
@@ -130,6 +131,14 @@
   - type: Construction
     graph: RMCTable
     node: Reinforced
+  - type: RMCWeldEffectSource
+    startingOffset: -0.35, -0.35
+    pathOffsets:
+    - -0.35, -0.35
+    - 0.35, -0.35
+    - 0.35, 0.35
+    - -0.35, 0.35
+    - -0.35, -0.35
   - type: XenoLeapDestroyOnPass
     spawnPrototype: CMRodMetal1 # TODO 50% to spawn 2, 50% to spawn 0
 
@@ -316,3 +325,156 @@
     sprite: _RMC14/Structures/Furniture/Tables/bar.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/bar.rsi
+
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: RMCTableVariantBase
+  name: table
+  description: A manually placed table variant.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: PlaceableSurface
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 55
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: SpriteFade
+  - type: Sprite
+  - type: Icon
+  - type: Climbable
+  - type: Bonkable
+    bonkDamage:
+      types:
+        Blunt: 4
+  - type: Clickable
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepHull
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+  - type: Tag
+    tags:
+    - ForceFixRotations
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableCloth
+  name: cloth-covered table
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothtable
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothtable
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableClothMiddle
+  name: cloth-covered table middle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothmiddle
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothmiddle
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableClothEnd
+  name: cloth-covered table end
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: cloth1tileendtable
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: cloth1tileendtable
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableClothThick
+  name: cloth-covered thick table
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: cloth1tilethick
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: cloth1tilethick
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableClothDir
+  name: cloth-covered table corner
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothdir
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothdir
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableClothDir2
+  name: cloth-covered table segment
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothdir2
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothdir2
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableClothDir3
+  name: cloth-covered table junction
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothdir3
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/cloth.rsi
+    state: clothdir3
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableTOCEast
+  name: tactical operations table east
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/toc.rsi
+    state: tocEtable
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/toc.rsi
+    state: tocEtable
+
+- type: entity
+  parent: RMCTableVariantBase
+  id: RMCTableTOCWest
+  name: tactical operations table west
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/toc.rsi
+    state: tocWtable
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/toc.rsi
+    state: tocWtable

@@ -1,6 +1,7 @@
 ﻿using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Dropship.Fabricator;
@@ -18,6 +19,12 @@ public sealed partial class DropshipFabricatorComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId<DropshipFabricatorPrintableComponent>? Printing;
 
+    [DataField, AutoNetworkedField]
+    public List<DropshipFabricatorQueueEntry> Queue = new();
+
+    [DataField, AutoNetworkedField]
+    public int MaxQueue = 6;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan PrintAt;
 
@@ -26,4 +33,24 @@ public sealed partial class DropshipFabricatorComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier RecycleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/fax.ogg");
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class DropshipFabricatorQueueEntry
+{
+    [DataField]
+    public EntProtoId<DropshipFabricatorPrintableComponent> Id;
+
+    [DataField]
+    public int Cost;
+
+    public DropshipFabricatorQueueEntry()
+    {
+    }
+
+    public DropshipFabricatorQueueEntry(EntProtoId<DropshipFabricatorPrintableComponent> id, int cost)
+    {
+        Id = id;
+        Cost = cost;
+    }
 }

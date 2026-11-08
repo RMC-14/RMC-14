@@ -12,8 +12,6 @@
   abstract: true
   components:
   - type: CanBuildThickFromConstructNode
-  - type: GhostRole
-    name: cm-job-name-xeno-carrier
   - type: MobState
     allowedStates:
     - Alive
@@ -28,6 +26,8 @@
     role: CMXenoCarrier
     tier: 2
     hudOffset: 0,0.19
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 300 # 5 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -132,6 +132,9 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
   - type: Xeno
     actionIds:

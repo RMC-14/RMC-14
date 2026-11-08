@@ -1309,3 +1309,27 @@
   sprites:
     - sprite: _RMC14/Mobs/Customization/human_hair.rsi
       state: hair_ponytail9
+
+- type: marking
+  id: RMCHumanHairShavedKnot
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: _RMC14/Mobs/Customization/human_hair.rsi
+      state: hair_shavedknot
+
+- type: marking
+  id: RMCHumanHairHolly
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: _RMC14/Mobs/Customization/human_hair.rsi
+      state: hair_holly
+
+- type: marking
+  id: RMCHumanHairHollyShaved
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: _RMC14/Mobs/Customization/human_hair.rsi
+      state: hair_hollyshaved

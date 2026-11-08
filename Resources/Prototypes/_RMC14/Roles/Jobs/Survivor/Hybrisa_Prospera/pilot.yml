@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorHybrisaCommercialPilot
   name: rmc-job-name-survivor-commercial-pilot
@@ -17,13 +17,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillPilot: 2
-        RMCSkillLeadership: 1
+      preset: RMCSkillPresetSurvivorCommercialPilot
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaCommercialPilot
     - type: RMCSurvivor
@@ -55,7 +49,7 @@
   name: hybrisa corporate liaison preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCGlassesAviators ]
     - [ RMCGlassesAviatorsSilver ]

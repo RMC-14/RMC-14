@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
@@ -16,6 +17,7 @@ using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Retrieve;
@@ -62,6 +64,12 @@ public sealed class XenoRetrieveSystem : EntitySystem
             return;
         }
 
+        if (_mobState.IsDead(target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-retrieve-dead", ("target", target)), xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
         if (Transform(target).Anchored)
         {
             var msg = Loc.GetString("rmc-xeno-retrieve-anchored");
@@ -98,10 +106,6 @@ public sealed class XenoRetrieveSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doAfter))
         {
-            var selfMsg = Loc.GetString("rmc-xeno-retrieve-start-self", ("target", target));
-            var othersMsg = Loc.GetString("rmc-xeno-retrieve-start-others", ("user", xeno), ("target", target));
-            _popup.PopupPredicted(selfMsg, othersMsg, xeno, xeno);
-
             foreach (var visual in xeno.Comp.Visuals)
             {
                 QueueDel(visual);
@@ -172,9 +176,26 @@ public sealed class XenoRetrieveSystem : EntitySystem
         _physics.ApplyLinearImpulse(target, impulse, body: physics);
         _physics.SetBodyStatus(target, physics, BodyStatus.InAir);
 
-        var selfMsg = Loc.GetString("rmc-xeno-retrieve-finish-user", ("target", target));
-        var othersMsg = Loc.GetString("rmc-xeno-retrieve-finish-others", ("user", xeno), ("target", target));
-        _popup.PopupPredicted(selfMsg, othersMsg, xeno, xeno);
+        var selfMessage = Loc.GetString("rmc-xeno-retrieve-finish-self", ("target", target));
+        _popup.PopupClient(selfMessage, xeno, xeno);
+
+        var others = Filter.PvsExcept(xeno).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            if (otherEnt == target)
+            {
+                var targetMessage = Loc.GetString("rmc-xeno-retrieve-finish-target", ("user", xeno));
+                _popup.PopupEntity(targetMessage, xeno, otherEnt);
+            }
+            else
+            {
+                var otherMessage = Loc.GetString("rmc-xeno-retrieve-finish-others", ("user", Identity.Name(xeno, EntityManager, otherEnt)), ("target", Identity.Name(target, EntityManager, otherEnt)));
+                _popup.PopupEntity(otherMessage, xeno, otherEnt);
+            }
+        }
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
     }
 

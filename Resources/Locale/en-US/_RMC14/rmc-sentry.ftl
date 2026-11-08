@@ -32,32 +32,5 @@ rmc-sentry-disassemble-finish-others = {$user} disassembles {THE($sentry)}.
 
 rmc-sentry-unanchor-is-on = {CAPITALIZE(THE($sentry))} is currently active. The motors will prevent you from unanchoring it safely.
 
-health-examinable-sentry-none = It is in pristine condition.
-
-health-examinable-sentry-Blunt-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} a few dents.[/color]
-health-examinable-sentry-Blunt-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} a bit beat up.[/color]
-health-examinable-sentry-Blunt-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} very caved in![/color]
-health-examinable-sentry-Blunt-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} barely holding together![/color]
-
-health-examinable-sentry-Slash-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} a few scratches.[/color]
-health-examinable-sentry-Slash-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} scratched up.[/color]
-health-examinable-sentry-Slash-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} covered in slash marks![/color]
-health-examinable-sentry-Slash-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} falling apart![/color]
-
-health-examinable-sentry-Piercing-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} a few holes.[/color]
-health-examinable-sentry-Piercing-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} quite a few holes.[/color]
-health-examinable-sentry-Piercing-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} littered with holes![/color]
-health-examinable-sentry-Piercing-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} about to collapse![/color]
-
-health-examinable-sentry-Heat-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} spots of corrosion.[/color]
-health-examinable-sentry-Heat-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} starting to corrode.[/color]
-health-examinable-sentry-Heat-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} almost melted![/color]
-health-examinable-sentry-Heat-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} barely recognizable![/color]
-
-health-examinable-sentry-Shock-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} a few scorch marks.[/color]
-health-examinable-sentry-Shock-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} lightly charred.[/color]
-health-examinable-sentry-Shock-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} letting off sparks![/color]
-health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} can barely function![/color]
-
 rmc-sentry-not-emergency = {CAPITALIZE(THE($deployer))} can only be activated in emergencies.
 rmc-sentry-deploy = You deploy {THE($spawned)}

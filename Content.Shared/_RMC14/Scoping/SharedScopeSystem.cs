@@ -2,6 +2,8 @@ using System.Numerics;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Vehicle.Viewport;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
@@ -101,6 +103,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void OnGetActions(Entity<ScopeComponent> ent, ref GetItemActionsEvent args)
     {
+        if (ent.Comp.Attachment && !TryGetActiveEntity(ent, out _))
+            return;
+
         if (ent.Comp.ScopingToggleAction != null)
             args.AddAction(ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
 
@@ -205,7 +210,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         var ent = scope.Owner;
         if (scope.Comp.Attachment && !TryGetActiveEntity(scope, out ent))
         {
-            var msgError = Loc.GetString("cm-action-popup-scoping-must-attach", ("scope", ent));
+            var msgError = Loc.GetString("cm-action-popup-scoping-must-attach", ("scope", scope.Owner));
             _popup.PopupClient(msgError, user, user);
             return false;
         }
@@ -244,6 +249,22 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (HasComp<OverwatchWatchingComponent>(user))
         {
             var msgError = Loc.GetString("rmc-action-popup-scoping-user-cannot-view-cameras", ("scope", ent));
+            _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+
+        if (HasComp<VehicleViewportUserComponent>(user))
+        {
+            var msgError = Loc.GetString("rmc-action-popup-scoping-user-cannot-viewport", ("scope", ent));
+            _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+
+        if (HasComp<GridVehicleOperatorComponent>(user) ||
+            HasComp<VehicleWeaponsOperatorComponent>(user) ||
+            HasComp<VehiclePortGunOperatorComponent>(user))
+        {
+            var msgError = Loc.GetString("rmc-action-popup-scoping-user-cannot-vehicle", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
             return false;
         }

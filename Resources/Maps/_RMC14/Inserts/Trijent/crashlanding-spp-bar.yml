@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/08/2026 16:27:33
+  time: 06/27/2026 21:30:17
   entityCount: 671
 maps: []
 grids:
@@ -960,12 +960,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: 8.5,-3.5
       parent: 1
+    missingComponents:
+    - Damageable
   - uid: 288
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 8.5,-1.5
       parent: 1
+    missingComponents:
+    - Damageable
 - proto: CMShardGlass
   entities:
   - uid: 647
@@ -1794,13 +1798,6 @@ entities:
     - type: Transform
       pos: 14.437447,-1.3396895
       parent: 1
-- proto: DrinkWineBottleFull
-  entities:
-  - uid: 636
-    components:
-    - type: Transform
-      pos: 15.267014,1.8017164
-      parent: 1
 - proto: RMCAshtrayGlass
   entities:
   - uid: 651
@@ -2434,6 +2431,13 @@ entities:
     components:
     - type: Transform
       pos: 11.55493,-22.658415
+      parent: 1
+- proto: RMCDrinkAlcoholPurpleWine
+  entities:
+  - uid: 636
+    components:
+    - type: Transform
+      pos: 15.267014,1.8017164
       parent: 1
 - proto: RMCDrinkAlcoholRum
   entities:
@@ -3810,7 +3814,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 17.5,-13.5
       parent: 1
-- proto: RMCMagazineRifleType71HEAP
+- proto: RMCMagazineRifleType71HEAPEmpty
   entities:
   - uid: 300
     components:

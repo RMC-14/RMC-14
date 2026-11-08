@@ -211,6 +211,14 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/bio_scientist.rsi
 
+- type: entity
+  parent: CMClosetBio
+  id: CMClosetBioMedical
+  suffix: Medical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/bio_medical.rsi
+
 # Gimmics
 - type: entity
   parent: CMClosetBase

@@ -1,6 +1,19 @@
-﻿# Kutjevo
+﻿# Kutjevo Base
 - type: entity
+  abstract: true
   parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoBase
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true
+
+
+# Sprinkles
+- type: entity
+  parent: RMCMapInsertKutjevoBase
   id: RMCMapInsertKutjevoCommunications
   name: SE Checkpoint
   suffix: Insert Kutjevo
@@ -9,12 +22,9 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/communications.yml"
       probability: 0.35
-    clearEntities: true
-    clearDecals: true
-    replaceAreas: true
 
 - type: entity
-  parent: RMCMapInsertBase
+  parent: RMCMapInsertKutjevoBase
   id: RMCMapInsertKutjevoCleaningProgBotany
   name: Cleaning Botany
   suffix: Insert Kutjevo
@@ -23,12 +33,10 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/cleaningprog_botany.yml"
       probability: 0.25
-    clearEntities: true
-    clearDecals: true
     replaceAreas: false
 
 - type: entity
-  parent: RMCMapInsertBase
+  parent: RMCMapInsertKutjevoBase
   id: RMCMapInsertKutjevoTrappedMonke
   name: Trapped Clown
   suffix: Insert Kutjevo
@@ -42,7 +50,7 @@
     replaceAreas: false
 
 - type: entity
-  parent: RMCMapInsertBase
+  parent: RMCMapInsertKutjevoBase
   id: RMCMapInsertSolarisPlinkingSpotNorthLZ
   name: Plinking Spot North LZ
   suffix: Insert Kutjevo
@@ -56,7 +64,30 @@
     replaceAreas: false
 
 - type: entity
-  parent: RMCMapInsertBase
+  parent: RMCMapInsertKutjevoBase
+  id: RMCMapInsertKutjevoLZ1Alternative
+  name: LZ1 Alternative
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/lz1alternative.yml"
+      probability: 0.6
+
+
+# Survivor Scenario Inserts
+- type: entity
+  abstract: true
+  parent: RMCMapInsertKutjevoBase
+  id: RMCMapInsertKutjevoBaseScenario
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    replaceAreas: false
+
+# CLF Smugglers
+- type: entity
+  parent: RMCMapInsertKutjevoBase
   id: RMCMapInsertKutjevoCLFSmugglers
   name: CLF Smugglers
   suffix: Insert Kutjevo
@@ -66,20 +97,32 @@
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/clfsmugglers.yml"
       probability: 1
       nightmareScenario: clfsmugglers
-    clearEntities: true
-    clearDecals: true
-    replaceAreas: true
-    
+
+# Regular Surv Spawns
 - type: entity
-  parent: RMCMapInsertBase
-  id: RMCMapInsertKutjevoLZ1Alternative
-  name: LZ1 Alternative
+  parent: RMCMapInsertKutjevoBaseScenario
+  id: RMCMapInsertKutjevoSurvSpawnTogether
+  name: Together Surv Spawn
   suffix: Insert Kutjevo
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/lz1alternative.yml"
-      probability: 0.6
-    clearEntities: true
-    clearDecals: true
-    replaceAreas: true
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_bar.yml"
+      probability: 0.2
+      nightmareScenario: none
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_medical.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: -30,-6
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_north_botany.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: -23,-35
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_south_botany.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: -19,-65
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_powerplant.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: 0,-44
