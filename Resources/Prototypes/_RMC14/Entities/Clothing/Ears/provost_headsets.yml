@@ -24,7 +24,6 @@
     trackerModes:
     - ProvostMarshal
     - ProvostDeputyMarshal
-    - ProvostChiefInspector
     - ProvostInspector
     - ProvostTeamLeader
     - ProvostAdvisor
