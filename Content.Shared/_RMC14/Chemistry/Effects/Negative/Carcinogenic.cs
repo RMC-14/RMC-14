@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Negative;
 
 public sealed partial class Carcinogenic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageTypePrototype> GeneticType = "Cellular";
+    private static readonly ProtoId<DamageTypePrototype> CellularType = "Cellular";
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
@@ -32,14 +32,14 @@ public sealed partial class Carcinogenic : RMCChemicalEffect
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var damage = new DamageSpecifier();
-        damage.DamageDict[GeneticType] = potency * 0.5f;
+        damage.DamageDict[CellularType] = potency * 0.5f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var damage = new DamageSpecifier();
-        damage.DamageDict[GeneticType] = potency * 2f;
+        damage.DamageDict[CellularType] = potency * 2f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 

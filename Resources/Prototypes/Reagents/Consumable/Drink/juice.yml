@@ -98,14 +98,15 @@
   physicalDesc: reagent-physical-desc-citric
   flavor: sour
   color: "#99bb43"
-  metabolisms:
+  metabolisms: # RMC
     Drink:
       effects:
-      - !type:HealthChange
+      - !type:SatiateThirst
+        factor: 3
+      - !type:EqualHealthChange
         probability: 0.2
         damage:
-          types:
-            Poison: -1
+        - Toxin: -1
 
 - type: reagent
   id: JuiceOrange
@@ -121,9 +122,11 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
-  metabolisms:
+  metabolisms: # RMC
     Drink:
       effects:
+      - !type:SatiateThirst
+        factor: 3
       - !type:HealthChange
         probability: 0.3
         damage:
@@ -156,14 +159,15 @@
   physicalDesc: reagent-physical-desc-saucey
   flavor: tomato
   color: "#731008"
-  metabolisms:
+  metabolisms: # RMC
     Drink:
       effects:
-      - !type:HealthChange
+      - !type:SatiateThirst
+        factor: 3
+      - !type:EqualHealthChange
         probability: 0.2
         damage:
-          types:
-            Heat: -1
+        - Burn: -1
 
 - type: reagent
   id: JuiceWatermelon

@@ -7,8 +7,8 @@
   flavor: coffee
   color: "#664300"
   recognizable: true
-  overdose: 30
-  criticalOverdose: 180
+  overdose: 30 # RMC
+  criticalOverdose: 180 # RMC
   metabolisms:
     Drink:
       effects:
@@ -21,13 +21,13 @@
       - !type:AdjustReagent
         reagent: Theobromine
         amount: 0.05
-      - !type:AdjustReagent
+      - !type:AdjustReagent # RMC
         reagent: FrostOil
         amount: -0.5
-      - !type:Jitter
-        time: 5
-      # TODO RMC14: paralzyes & heart damage
-      - !type:HealthChange
+      - !type:MakeJittery # RMC
+        amount: 2.5
+      # TODO RMC14: paralyzes & heart damage
+      - !type:HealthChange # RMC
         conditions:
         - !type:ReagentThreshold
           min: 180
@@ -279,12 +279,11 @@
       effects:
       - !type:SatiateThirst
         factor: 4
-      - !type:HealthChange
+      - !type:EqualHealthChange # RMC
         probability: 0.2
         damage:
-          groups:
-            Brute: -1
-      - !type:AdjustReagent
+        - Brute: -1
+      - !type:AdjustReagent # RMC
         reagent: Hotsauce
         amount: -0.5
 
@@ -370,11 +369,13 @@
         time: 3
         type: Remove
       # RMC14
-      - !type:Jitter
-        time: 20
-      - !type:Hallucinogenic
-        potency: 6
-      # TODO RMC14: screen dizziness
+      - !type:MakeJittery
+        amount: 10
+      - !type:ModifyStatusEffect
+        effectProto: RMCStatusEffectSeeingRainbow
+        time: 60
+      - !type:AddDizziness
+        amount: 2.5
       # RMC14
 #    Poison:
 #      effects:
@@ -435,11 +436,10 @@
       - !type:AdjustReagent
         reagent: Theobromine
         amount: 0.05
-      - !type:HealthChange
+      - !type:EqualHealthChange # RMC
         probability: 0.2
         damage:
-          types:
-            Poison: -1
+        - Toxin: -1
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/teaglass.rsi
     state: icon_empty
@@ -478,7 +478,7 @@
   meltingPoint: 0.0
   friction: 0.4
   intensityMod: -3 # RMC14
-  plantMetabolism:
+  plantMetabolism: # RMC
   - !type:PlantAdjustWater
     amount: 0.5
   metabolisms:
