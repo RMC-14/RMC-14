@@ -103,6 +103,7 @@
         # RMC14 TODO: Shock Shotgun 15p
         - id: RMCVendorBundleM54CWhiteNoLock
         - id: RMCVendorBundleSMGM63WhiteNoLock
+        - id: RMCVendorBundleSMGSSG45NoLockStripped
       - name: Sidearm
         choices: { RMCBeltHolsterPistol: 1 }
         entries:
@@ -127,6 +128,12 @@
         - id: CMMagazineRifleM54CExt
           points: 8
         - id: CMMagazineRifleM54CAP
+          points: 10
+        - id: RMCMagazineRifleSSG45
+          points: 6
+        - id: RMCMagazineRifleSSG45Extended
+          points: 8
+        - id: RMCMagazineRifleSSG45AP
           points: 10
       - name: Sidearm Ammunition
         entries:
