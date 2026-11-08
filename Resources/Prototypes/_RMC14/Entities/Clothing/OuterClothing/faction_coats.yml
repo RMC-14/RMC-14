@@ -70,9 +70,7 @@
     - type: StorageFill
       contents:
       - id: RMCBinoculars
-        amount: 1
       - id: RMCTelescopicBaton
-        amount: 1
 
 - type: entity
   parent: RMCCoatBureauDeputy
@@ -83,9 +81,7 @@
     - type: StorageFill
       contents:
       - id: RMCRangefinder
-        amount: 1
       - id: RMCTelescopicBaton
-        amount: 1
 
 # Fur coats
 - type: entity

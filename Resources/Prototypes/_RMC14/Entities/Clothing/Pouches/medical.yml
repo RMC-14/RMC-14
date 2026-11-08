@@ -80,7 +80,7 @@
   - type: StorageFill # TODO RMC14
     contents:
     - id: CMHealthAnalyzer
-    - id: CMTraumaKit10
+    - id: CMTraumaKit10 # TODO RMC14 Nano Splints
     - id: CMUpgradedTraumaKit10
     - id: CMUpgradedBurnKit10
     - id: CMBicaridineAutoInjector
