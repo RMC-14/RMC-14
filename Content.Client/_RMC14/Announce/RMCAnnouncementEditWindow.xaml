@@ -9,19 +9,10 @@
                     <Label Text="{Loc 'rmc-ui-options-announcements-layout-preview'}" StyleClasses="LabelKeyText" />
                     <OptionButton Name="PreviewPresetButton" Access="Public" />
                 </BoxContainer>
-                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True" SizeFlagsStretchRatio="0.35">
-                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-preview-variant'}" StyleClasses="LabelKeyText" />
-                    <OptionButton Name="PreviewVariantButton" Access="Public" />
-                </BoxContainer>
                 <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True" SizeFlagsStretchRatio="0.25">
                     <Label Text="{Loc 'rmc-ui-options-announcements-layout-scale'}" StyleClasses="LabelKeyText" />
                     <Label Name="ScaleValueLabel" Access="Public" />
                 </BoxContainer>
-            </BoxContainer>
-
-            <BoxContainer Orientation="Vertical" SeparationOverride="4">
-                <Label Text="{Loc 'rmc-ui-options-announcements-layout-preset-modes'}" StyleClasses="LabelKeyText" />
-                <Label Name="PresetModesLabel" Access="Public" />
             </BoxContainer>
 
             <CheckBox Name="GlobalCheckBox" Access="Public"
@@ -56,6 +47,9 @@
             </BoxContainer>
 
             <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <CheckBox Name="ShowAnnouncementCheckBox" Access="Public"
+                          HorizontalExpand="True"
+                          Text="{Loc 'rmc-ui-options-announcements-layout-show'}" />
                 <CheckBox Name="ShowTitleCheckBox" Access="Public"
                           HorizontalExpand="True"
                           Text="{Loc 'rmc-ui-options-announcements-layout-show-title'}" />

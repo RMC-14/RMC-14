@@ -12,11 +12,13 @@ public sealed class RMCAnnouncementDisplay
     public string? Title;
     public Color Accent;
     public string? SpeakerName;
+    public string? SpeakerJob;
     public NetEntity? Speaker;
     public EntityUid? Portrait;
-    public bool Effects = true;
     public RMCAnnouncementOverride Settings;
     public float Scale = 1;
+    public float ScreenScale = 1;
     public Vector2 Pivot;
+    public bool AvoidHud;
     public long Order;
 }

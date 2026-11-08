@@ -56,7 +56,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     /// <param name="sound"></param>
     /// <param name="popup"></param>
     /// <param name="needsQueen">Whether the message can only be sent if the hive has an active queen</param>
-    /// <param name="overlay">The on-screen overlay to show to the same recipients, if any</param>
+    /// <param name="overlay">The on screen overlay to show to the same recipients, if any</param>
     public virtual void Announce(EntityUid source,
         Filter filter,
         string message,

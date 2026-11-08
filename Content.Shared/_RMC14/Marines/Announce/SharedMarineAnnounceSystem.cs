@@ -266,12 +266,13 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
+        var overlayName = name;
+        author ??= Loc.GetString("rmc-announcement-author");
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
         RMCAnnouncementOverlay? announcementOverlay = overlay is { } preset
-            ? new RMCAnnouncementOverlay(preset, FormattedMessage.EscapeText(message), sender, name)
+            ? new RMCAnnouncementOverlay(preset, FormattedMessage.EscapeText(message), sender, overlayName)
             : null;
 
         AnnounceToMarines(wrappedMessage, sound, filter, announcementOverlay);

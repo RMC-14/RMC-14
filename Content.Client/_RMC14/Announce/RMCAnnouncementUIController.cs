@@ -3,9 +3,11 @@ using Content.Client.Gameplay;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Announce.Animations;
 using Content.Shared._RMC14.CCVar;
+using Robust.Client.Audio;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -24,6 +26,8 @@ public sealed class RMCAnnouncementUIController : UIController,
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    [UISystemDependency] private readonly AudioSystem? _audio = default!;
+
     public const int MinVisible = 1;
     public const int MaxVisible = 4;
     private const int MaxQueued = 32;
@@ -34,13 +38,12 @@ public sealed class RMCAnnouncementUIController : UIController,
     private bool _inGameplay;
     private long _nextOrder;
     private int _maxVisible = 2;
-    private RMCAnnouncementDisplayMode _mode;
     private Dictionary<string, RMCAnnouncementOverride> _overrides = new();
+    private RMCAnnouncementArea? _updatingArea;
 
     public override void Initialize()
     {
         base.Initialize();
-        _cfg.OnValueChanged(RMCCVars.RMCAnnouncementMode, OnModeChanged, true);
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementMaxVisible, OnMaxVisibleChanged, true);
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementOverrides, OnOverridesChanged, true);
     }
@@ -72,20 +75,6 @@ public sealed class RMCAnnouncementUIController : UIController,
         _inGameplay = false;
     }
 
-    public IEnumerable<SettingsGroup> GetSettingsGroups()
-    {
-        foreach (var prototype in _prototype.EnumeratePrototypes<EntityPrototype>())
-        {
-            if (!prototype.TryGetComponent(out RMCAnnouncementPresetComponent? preset, _compFactory) ||
-                preset.SettingsGroup is { } group && group.Id != prototype.ID)
-            {
-                continue;
-            }
-
-            yield return new SettingsGroup(prototype.ID, prototype.Name, preset);
-        }
-    }
-
     public static Vector2 GetDefaultPivot(RMCAnnouncementPosition position)
     {
         return position switch
@@ -101,11 +90,6 @@ public sealed class RMCAnnouncementUIController : UIController,
             RMCAnnouncementPosition.BottomRight => new Vector2(1, 1),
             _ => Vector2.Zero,
         };
-    }
-
-    private void OnModeChanged(RMCAnnouncementDisplayMode mode)
-    {
-        _mode = mode;
     }
 
     private void OnMaxVisibleChanged(int value)
@@ -138,8 +122,7 @@ public sealed class RMCAnnouncementUIController : UIController,
         }
 
         var settings = RMCAnnouncementOverrides.Resolve(_overrides, msg.Preset.Id, GetSettingsKey(msg.Preset, preset));
-        var mode = settings.Mode ?? _mode;
-        if (mode == RMCAnnouncementDisplayMode.Off)
+        if (settings.Show == false)
             return;
 
         var display = new RMCAnnouncementDisplay
@@ -147,15 +130,15 @@ public sealed class RMCAnnouncementUIController : UIController,
             PresetId = msg.Preset,
             Preset = preset,
             Text = msg.Text,
-            Title = msg.Title,
+            Title = GetTitle(preset, msg.Title),
             Accent = msg.Accent ?? preset.AccentColor,
             SpeakerName = msg.SpeakerName,
-            Speaker = mode == RMCAnnouncementDisplayMode.Full && settings.ShowPortrait != false ? msg.Portrait : null,
-            Effects = mode == RMCAnnouncementDisplayMode.Full,
+            SpeakerJob = msg.SpeakerJob,
+            Speaker = settings.ShowPortrait != false ? msg.Portrait : null,
             Order = _nextOrder++,
         };
 
-        ApplySettings(display, settings);
+        ApplySettings(display, settings, GetArea()?.ScreenScale ?? 1);
 
         if (GetArea() == null)
         {
@@ -194,15 +177,22 @@ public sealed class RMCAnnouncementUIController : UIController,
         var view = CreateView(display);
         var active = new ActiveAnnouncement(display, view, area, _timing.RealTime, GetRevealTime(display));
         _active.Add(active);
-        area.Add(view, display.Pivot);
+        area.Add(view, display.Pivot, display.AvoidHud);
         UpdateActive(active, _timing.RealTime);
     }
 
-    public static void ApplySettings(RMCAnnouncementDisplay display, RMCAnnouncementOverride settings)
+    public static string? GetTitle(RMCAnnouncementPresetComponent preset, string? title)
+    {
+        return title ?? (preset.Title is { } titleId ? Loc.GetString(titleId) : null);
+    }
+
+    public static void ApplySettings(RMCAnnouncementDisplay display, RMCAnnouncementOverride settings, float screenScale)
     {
         display.Settings = settings;
-        display.Scale = (settings.Scale ?? 1) * display.Preset.Scale;
+        display.ScreenScale = screenScale;
+        display.Scale = (settings.Scale ?? 1) * display.Preset.Scale * screenScale;
         display.Pivot = settings.Pivot ?? GetDefaultPivot(display.Preset.Position);
+        display.AvoidHud = settings.Pivot == null;
     }
 
     public static Control CreateView(RMCAnnouncementDisplay display)
@@ -224,22 +214,26 @@ public sealed class RMCAnnouncementUIController : UIController,
 
     private void RefreshActive()
     {
-        foreach (var active in _active)
+        for (var i = _active.Count - 1; i >= 0; i--)
         {
+            var active = _active[i];
             var display = active.Display;
-            var settings = RMCAnnouncementOverrides.Resolve(_overrides, display.PresetId.Id, GetSettingsKey(display.PresetId, display.Preset)) with
+            var settings = RMCAnnouncementOverrides.Resolve(_overrides, display.PresetId.Id, GetSettingsKey(display.PresetId, display.Preset));
+            if (settings.Show == false)
             {
-                Mode = display.Settings.Mode,
-            };
+                RemoveActive(i);
+                continue;
+            }
 
-            if (settings == display.Settings)
+            var screenScale = active.Area.ScreenScale;
+            if (settings == display.Settings && MathHelper.CloseTo(screenScale, display.ScreenScale))
                 continue;
 
-            ApplySettings(display, settings);
+            ApplySettings(display, settings, screenScale);
             active.Area.Remove(active.View);
             ((IRMCAnnouncementView) active.View).Setup(display);
-            ((IRMCAnnouncementView) active.View).SetBody(active.Shown);
-            active.Area.Add(active.View, display.Pivot);
+            ((IRMCAnnouncementView) active.View).SetBody(active.Shown, active.Fade, UsesCursor(display.Preset), active.CursorVisible);
+            active.Area.Add(active.View, display.Pivot, display.AvoidHud);
         }
     }
 
@@ -348,15 +342,11 @@ public sealed class RMCAnnouncementUIController : UIController,
 
     private static TimeSpan GetRevealTime(RMCAnnouncementDisplay display)
     {
-        return display.Effects
-            ? RMCAnnouncementOverlaySystem.GetRevealTime(display.Preset, display.Text.Length)
-            : TimeSpan.Zero;
+        return RMCAnnouncementOverlaySystem.GetRevealTime(display.Preset, display.Text.Length);
     }
 
-    public override void FrameUpdate(FrameEventArgs args)
+    private void OnAreaFrameUpdate(FrameEventArgs args)
     {
-        base.FrameUpdate(args);
-
         var time = _timing.RealTime;
         var finished = false;
         for (var i = _active.Count - 1; i >= 0; i--)
@@ -377,41 +367,120 @@ public sealed class RMCAnnouncementUIController : UIController,
         var display = active.Display;
         var preset = display.Preset;
         var elapsed = time - active.Start;
-        var holdEnd = active.RevealTime + preset.Hold;
+        var decrypt = display.Title != null && display.Settings.ShowTitle != false
+            ? preset.TitleDecrypt
+            : TimeSpan.Zero;
+        var textElapsed = elapsed - decrypt;
+        var holdEnd = decrypt + active.RevealTime + RMCAnnouncementOverlaySystem.GetHoldTime(preset, decrypt, active.RevealTime);
         if (elapsed >= holdEnd + preset.FadeOut)
             return false;
 
-        var text = display.Text;
-        var alpha = 1f;
-        if (elapsed < active.RevealTime)
+        var titleProgress = decrypt > TimeSpan.Zero ? Math.Clamp((float) (elapsed / decrypt), 0, 1) : 1;
+        if (titleProgress < 1 || active.TitleProgress < 1)
         {
-            var progress = (float) (elapsed / active.RevealTime);
+            active.TitleProgress = titleProgress;
+            ((IRMCAnnouncementView) active.View).SetTitleProgress(titleProgress);
+        }
+
+        var text = display.Text;
+        var fade = 0;
+        var alpha = 1f;
+        var power = 1f;
+        var typing = false;
+        if (preset.PowerOn > TimeSpan.Zero && elapsed < preset.PowerOn)
+            power = (float) (elapsed / preset.PowerOn);
+
+        if (textElapsed < TimeSpan.Zero && active.RevealTime > TimeSpan.Zero)
+        {
+            text = string.Empty;
+        }
+        else if (textElapsed < active.RevealTime)
+        {
+            var progress = (float) (textElapsed / active.RevealTime);
+            var revealed = (int) (text.Length * progress);
             switch (preset.Animation)
             {
                 case TypewriterAnimationConfig:
-                    text = text[..(int) (text.Length * progress)];
+                    text = text[..revealed];
+                    typing = true;
                     break;
                 case GlitchAnimationConfig glitch:
-                    text = Glitch(text[..(int) (text.Length * progress)], glitch.GlitchChance);
+                    text = Glitch(text[..revealed], glitch.GlitchChance);
+                    typing = true;
+                    break;
+                case WaveAnimationConfig wave:
+                    var head = (int) ((text.Length + wave.FadeChars) * progress);
+                    fade = Math.Min(wave.FadeChars, head);
+                    text = text[..Math.Clamp(head - wave.FadeChars, 0, text.Length)];
                     break;
                 case FadeAnimationConfig:
                     alpha = progress;
                     break;
             }
+
+            if (typing)
+                PlayTypingSound(active, revealed);
         }
         else if (elapsed > holdEnd && preset.FadeOut > TimeSpan.Zero)
         {
-            alpha = 1f - (float) ((elapsed - holdEnd) / preset.FadeOut);
+            var fadeOut = (float) ((elapsed - holdEnd) / preset.FadeOut);
+            power = 1f - Math.Clamp(fadeOut / 0.6f, 0, 1);
+            alpha = 1f - Math.Clamp((fadeOut - 0.4f) / 0.6f, 0, 1);
         }
 
-        if (text != active.Shown)
+        if (!MathHelper.CloseTo(power, active.Power))
+        {
+            active.Power = power;
+            ((IRMCAnnouncementView) active.View).SetPower(power);
+        }
+
+        var usesCursor = UsesCursor(preset);
+        var cursorVisible = usesCursor && elapsed <= holdEnd && (typing || (int) (elapsed.TotalSeconds * 2) % 2 == 0);
+        if (text != active.Shown || fade != active.Fade || cursorVisible != active.CursorVisible)
         {
             active.Shown = text;
-            ((IRMCAnnouncementView) active.View).SetBody(text);
+            active.Fade = fade;
+            active.CursorVisible = cursorVisible;
+            ((IRMCAnnouncementView) active.View).SetBody(text, fade, usesCursor, cursorVisible);
+        }
+
+        var pulse = 0f;
+        if (preset.PulseForever || elapsed < preset.PulseDuration)
+        {
+            pulse = 0.5f - 0.5f * MathF.Cos((float) elapsed.TotalSeconds * preset.PulseSpeed * MathF.Tau);
+            if (!preset.PulseForever)
+                pulse *= 1f - (float) (elapsed / preset.PulseDuration);
+
+            pulse *= preset.PulseStrength;
+        }
+
+        if (!MathHelper.CloseTo(pulse, active.Pulse))
+        {
+            active.Pulse = pulse;
+            ((IRMCAnnouncementView) active.View).SetPulse(pulse);
         }
 
         active.View.Modulate = Color.White.WithAlpha(Math.Clamp(alpha, 0, 1));
         return true;
+    }
+
+    private static bool UsesCursor(RMCAnnouncementPresetComponent preset)
+    {
+        return preset.Cursor && preset.Animation is TypewriterAnimationConfig or GlitchAnimationConfig;
+    }
+
+    private void PlayTypingSound(ActiveAnnouncement active, int revealed)
+    {
+        var preset = active.Display.Preset;
+        if (preset.TypingSound == null || _audio == null)
+            return;
+
+        var step = revealed / Math.Max(1, preset.TypingSoundInterval);
+        if (step <= active.SoundStep)
+            return;
+
+        active.SoundStep = step;
+        _audio.PlayGlobal(preset.TypingSound, Filter.Local(), false);
     }
 
     private string Glitch(string text, float chance)
@@ -433,13 +502,25 @@ public sealed class RMCAnnouncementUIController : UIController,
 
     public RMCAnnouncementArea? GetArea()
     {
-        if (!_inGameplay)
-            return null;
+        var area = _inGameplay ? UIManager.ActiveScreen?.GetOrAddWidget<RMCAnnouncementLayer>().Area : null;
+        if (area == _updatingArea)
+            return area;
 
-        return UIManager.ActiveScreen?.GetOrAddWidget<RMCAnnouncementLayer>().Area;
+        if (_updatingArea != null)
+        {
+            _updatingArea.FrameUpdated -= OnAreaFrameUpdate;
+            _updatingArea.ScreenScaleChanged -= RefreshActive;
+        }
+
+        _updatingArea = area;
+        if (area != null)
+        {
+            area.FrameUpdated += OnAreaFrameUpdate;
+            area.ScreenScaleChanged += RefreshActive;
+        }
+
+        return area;
     }
-
-    public readonly record struct SettingsGroup(string Id, string Name, RMCAnnouncementPresetComponent Preset);
 
     private sealed class ActiveAnnouncement(
         RMCAnnouncementDisplay display,
@@ -454,5 +535,11 @@ public sealed class RMCAnnouncementUIController : UIController,
         public readonly TimeSpan Start = start;
         public readonly TimeSpan RevealTime = revealTime;
         public string Shown = string.Empty;
+        public int Fade;
+        public float Pulse;
+        public bool CursorVisible;
+        public float Power = 1;
+        public float TitleProgress = 1;
+        public int SoundStep;
     }
 }

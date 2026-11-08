@@ -10,6 +10,7 @@ public sealed class RMCAnnouncementOverlayMsg(
     string? title,
     Color? accent,
     string? speakerName,
+    string? speakerJob,
     NetEntity? portrait) : EntityEventArgs
 {
     public readonly EntProtoId Preset = preset;
@@ -17,5 +18,6 @@ public sealed class RMCAnnouncementOverlayMsg(
     public readonly string? Title = title;
     public readonly Color? Accent = accent;
     public readonly string? SpeakerName = speakerName;
+    public readonly string? SpeakerJob = speakerJob;
     public readonly NetEntity? Portrait = portrait;
 }

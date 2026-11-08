@@ -1,18 +1,17 @@
 using System.Globalization;
 using System.Numerics;
 using System.Text;
-using Content.Shared._RMC14.Announce;
 
 namespace Content.Client._RMC14.Announce;
 
 public readonly record struct RMCAnnouncementOverride(
-    RMCAnnouncementDisplayMode? Mode = null,
     Vector2? Pivot = null,
     float? Scale = null,
     float? BodyScale = null,
     float? TitleScale = null,
     bool? ShowTitle = null,
     bool? ShowPortrait = null,
+    bool? Show = null,
     Color? TextColor = null,
     Color? TitleColor = null,
     Color? BackgroundColor = null,
@@ -22,23 +21,16 @@ public readonly record struct RMCAnnouncementOverride(
 {
     public bool IsEmpty => this == default;
 
-    public bool HasLayout => this with { Mode = null } != default;
-
-    public RMCAnnouncementOverride WithoutLayout()
-    {
-        return new RMCAnnouncementOverride(Mode);
-    }
-
     public RMCAnnouncementOverride Over(RMCAnnouncementOverride fallback)
     {
         return new RMCAnnouncementOverride(
-            Mode ?? fallback.Mode,
             Pivot ?? fallback.Pivot,
             Scale ?? fallback.Scale,
             BodyScale ?? fallback.BodyScale,
             TitleScale ?? fallback.TitleScale,
             ShowTitle ?? fallback.ShowTitle,
             ShowPortrait ?? fallback.ShowPortrait,
+            Show ?? fallback.Show,
             TextColor ?? fallback.TextColor,
             TitleColor ?? fallback.TitleColor,
             BackgroundColor ?? fallback.BackgroundColor,
@@ -59,7 +51,7 @@ public static class RMCAnnouncementOverrides
         string presetId,
         string groupId)
     {
-        var global = overrides.GetValueOrDefault(GlobalKey) with { Mode = null };
+        var global = overrides.GetValueOrDefault(GlobalKey);
         var group = overrides.GetValueOrDefault(groupId).Over(global);
         return presetId == groupId ? group : overrides.GetValueOrDefault(presetId).Over(group);
     }
@@ -87,13 +79,13 @@ public static class RMCAnnouncementOverrides
                 pivot = Vector2.Clamp(new Vector2(x, y), Vector2.Zero, Vector2.One);
 
             var parsed = new RMCAnnouncementOverride(
-                GetMode(fields),
                 pivot,
                 GetScale(fields, "scale"),
                 GetScale(fields, "body"),
                 GetScale(fields, "title"),
                 GetBool(fields, "showTitle"),
                 GetBool(fields, "showPortrait"),
+                GetBool(fields, "show"),
                 GetColor(fields, "text"),
                 GetColor(fields, "titleColor"),
                 GetColor(fields, "background"),
@@ -123,9 +115,6 @@ public static class RMCAnnouncementOverrides
             builder.Append('=');
 
             var fields = new List<string>();
-            if (value.Mode is { } mode)
-                fields.Add(Field("mode", ((int) mode).ToString(CultureInfo.InvariantCulture)));
-
             if (value.Pivot is { } pivot)
             {
                 fields.Add(Field("x", FormatFloat(pivot.X)));
@@ -137,6 +126,7 @@ public static class RMCAnnouncementOverrides
             AddFloat(fields, "title", value.TitleScale);
             AddBool(fields, "showTitle", value.ShowTitle);
             AddBool(fields, "showPortrait", value.ShowPortrait);
+            AddBool(fields, "show", value.Show);
             AddColor(fields, "text", value.TextColor);
             AddColor(fields, "titleColor", value.TitleColor);
             AddColor(fields, "background", value.BackgroundColor);
@@ -148,19 +138,6 @@ public static class RMCAnnouncementOverrides
         }
 
         return builder.ToString();
-    }
-
-    private static RMCAnnouncementDisplayMode? GetMode(Dictionary<string, string> fields)
-    {
-        if (fields.TryGetValue("mode", out var text) &&
-            int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value) &&
-            value >= 0 &&
-            value <= (int) RMCAnnouncementDisplayMode.Off)
-        {
-            return (RMCAnnouncementDisplayMode) value;
-        }
-
-        return null;
     }
 
     private static float? GetScale(Dictionary<string, string> fields, string key)

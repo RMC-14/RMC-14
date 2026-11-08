@@ -1,0 +1,39 @@
+light_mode unshaded;
+
+uniform highp vec2 size;
+uniform highp vec4 color;
+uniform highp float strength;
+uniform highp float speed;
+uniform highp float density;
+
+highp float hash(highp vec2 point)
+{
+    return fract(sin(dot(point, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+highp float valueNoise(highp vec2 point)
+{
+    highp vec2 cell = floor(point);
+    highp vec2 local = fract(point);
+    local = local * local * (3.0 - 2.0 * local);
+
+    highp float a = hash(cell);
+    highp float b = hash(cell + vec2(1.0, 0.0));
+    highp float c = hash(cell + vec2(0.0, 1.0));
+    highp float d = hash(cell + vec2(1.0, 1.0));
+    return mix(mix(a, b, local.x), mix(c, d, local.x), local.y);
+}
+
+void fragment()
+{
+    highp vec2 centered = (UV - 0.5) * 2.0;
+    highp float radial = 1.0 - smoothstep(0.3, 1.0, length(centered));
+
+    highp float t = TIME * speed;
+    highp vec2 point = UV * vec2(size.x / max(size.y, 1.0), 1.0) * density;
+    highp float organic = valueNoise(point + vec2(t, -t * 0.7)) * 0.6
+        + valueNoise(point * 2.1 - vec2(t * 0.5, t)) * 0.4;
+
+    highp float alpha = radial * (0.45 + 0.55 * organic) * strength;
+    COLOR = zTexture(UV) * vec4(color.rgb * 0.35, alpha);
+}

@@ -7,6 +7,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -16,18 +17,27 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
     private const float PortraitSpriteSize = 32;
     private const float PortraitZoom = 3;
     private const float PortraitVisibleHeight = 0.62f;
+    private const float FlickerOffAlpha = 0.15f;
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private Color _textColor;
+    private Color _titleColor;
+    private Color _shadowColor;
+    private string? _title;
+    private string _titleShown = string.Empty;
+    private float _pulse;
+    private bool _centered;
+    private string _text = string.Empty;
+    private readonly List<(int Start, int Length)> _lines = new();
+    private readonly List<RMCAnnouncementTextLabel> _lineLabels = new();
 
     public RMCAnnouncementCard()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        Portrait.OverrideDirection = Direction.South;
-        Portrait.Stretch = SpriteView.StretchMode.None;
     }
 
     public void Setup(RMCAnnouncementDisplay display)
@@ -35,76 +45,215 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
         var settings = display.Settings;
         var scale = display.Scale;
         var titleScale = scale * (settings.TitleScale ?? 1);
-        var titleColor = settings.TitleColor ?? display.Accent;
-        var bodyScale = scale * (settings.BodyScale ?? 1);
+        var bodyScale = scale * (settings.BodyScale ?? 1) * RMCAnnouncementText.GetLengthScale(display.Preset, display.Text.Length);
         var preset = display.Preset;
+        var shadow = MathF.Max(1, MathF.Round(scale));
 
         _textColor = settings.TextColor ?? preset.TextColor ?? display.Accent;
-        RMCAnnouncementText.SetFont(BodyLabel, _prototype, _resourceCache, preset.Font, ScaleFont(preset.FontSize, bodyScale));
+        _titleColor = settings.TitleColor ?? display.Accent;
+        _shadowColor = preset.ShadowColor ?? RMCAnnouncementTextLabel.DefaultShadowColor;
+        _pulse = 0;
 
         Background.PanelOverride = new StyleBoxFlat
         {
             BackgroundColor = settings.BackgroundColor ?? preset.BackgroundColor ?? Color.Transparent,
         };
 
+        BackgroundShader.SetShader(preset.BackgroundShader);
+        BackgroundShader.SetColorParameter("color", display.Accent);
+
+        BodyLabel.ShadowOffset = shadow;
+        BodyLabel.ShadowColor = _shadowColor;
+        BodyLabel.SetFont(_prototype, _resourceCache, preset.Font, ScaleFont(preset.FontSize, bodyScale));
         BodyLabel.MaxWidth = preset.MaxWidth * scale;
         SpeakerLabel.MaxWidth = preset.MaxWidth * scale;
         TitleLabel.MaxWidth = preset.MaxWidth * scale;
 
-        var title = settings.ShowTitle == false
-            ? null
-            : display.Title ?? (preset.Title is { } titleId ? Loc.GetString(titleId) : null);
+        _text = display.Text;
+        SetupBody(preset, scale, bodyScale, shadow);
 
-        TitleLabel.Visible = title != null;
-        TitleUnderline.Visible = title != null;
-        if (title != null)
+        var alignment = _centered ? HAlignment.Center : HAlignment.Stretch;
+        TitleLabel.HorizontalAlignment = alignment;
+        SpeakerLabel.HorizontalAlignment = alignment;
+
+        _title = settings.ShowTitle == false ? null : display.Title;
+        TitleLabel.Visible = _title != null;
+        TitleUnderline.Visible = _title != null;
+        if (_title != null)
         {
-            RMCAnnouncementText.SetFont(TitleLabel, _prototype, _resourceCache, preset.TitleFont, ScaleFont(preset.TitleFontSize, titleScale));
-            TitleLabel.SetMessage(RMCAnnouncementText.Build(title, titleColor));
+            TitleLabel.ShadowOffset = shadow;
+            TitleLabel.SetFont(_prototype, _resourceCache, preset.TitleFont, ScaleFont(preset.TitleFontSize, titleScale));
             TitleUnderline.MinHeight = MathF.Max(1, 2 * titleScale);
-            TitleUnderline.PanelOverride = new StyleBoxFlat { BackgroundColor = titleColor };
         }
 
         SpeakerLabel.Visible = preset.ShowSpeakerName && display.SpeakerName != null;
         if (SpeakerLabel.Visible)
         {
-            RMCAnnouncementText.SetFont(SpeakerLabel, _prototype, _resourceCache, preset.Font, ScaleFont(preset.FontSize * 0.75f, bodyScale));
-            SpeakerLabel.SetMessage(RMCAnnouncementText.Build(display.SpeakerName!, display.Accent));
+            var speakerLine = display.SpeakerJob is { } job
+                ? Loc.GetString("rmc-announcement-speaker-line", ("name", display.SpeakerName!), ("job", job))
+                : Loc.GetString("rmc-announcement-speaker-line-no-job", ("name", display.SpeakerName!));
+
+            SpeakerLabel.ShadowOffset = shadow;
+            SpeakerLabel.ShadowColor = _shadowColor;
+            SpeakerLabel.SetFont(_prototype, _resourceCache, preset.Font, ScaleFont(preset.FontSize * 0.75f, bodyScale));
+            SpeakerLabel.SetText(speakerLine, Color.InterpolateBetween(display.Accent, Color.Gray, 0.4f));
         }
 
-        Decal.Visible = preset.Decal != null;
-        if (preset.Decal is { } decal)
+        SetTitleProgress(1);
+        SetupDecal(display, scale);
+        SetupPortrait(display, scale);
+        SetPower(1);
+    }
+
+    private void SetupBody(RMCAnnouncementPresetComponent preset, float scale, float bodyScale, float shadow)
+    {
+        _centered = preset.CenterText;
+        BodyLabel.Visible = !_centered;
+        CenteredBody.Visible = _centered;
+        CenteredBody.RemoveAllChildren();
+        _lines.Clear();
+        _lineLabels.Clear();
+
+        if (!_centered)
+            return;
+
+        var bodySize = ScaleFont(preset.FontSize, bodyScale);
+        var font = RMCAnnouncementText.GetFont(_prototype, _resourceCache, preset.Font, bodySize);
+        var maxChars = (int) (preset.MaxWidth * scale / RMCAnnouncementText.GetAdvance(font, bodySize)) - 1;
+        _lines.AddRange(RMCAnnouncementText.WrapLines(_text, maxChars));
+        foreach (var _ in _lines)
         {
-            Decal.SetFromSpriteSpecifier(decal);
-            Decal.DisplayRect.TextureScale = new Vector2(preset.DecalScale * scale);
-        }
+            var line = new RMCAnnouncementTextLabel
+            {
+                HorizontalAlignment = HAlignment.Center,
+                ShadowOffset = shadow,
+                ShadowColor = _shadowColor,
+            };
 
+            line.SetFont(_prototype, _resourceCache, preset.Font, bodySize);
+            CenteredBody.AddChild(line);
+            _lineLabels.Add(line);
+        }
+    }
+
+    private void SetupDecal(RMCAnnouncementDisplay display, float scale)
+    {
+        var preset = display.Preset;
+        Decal.Visible = preset.Decal != null;
+        Decal.Modulate = Color.White;
+        if (preset.Decal is not { } decal)
+            return;
+
+        Decal.SetFromSpriteSpecifier(decal);
+        Decal.DisplayRect.TextureScale = new Vector2(preset.DecalScale * scale);
+    }
+
+    private void SetupPortrait(RMCAnnouncementDisplay display, float scale)
+    {
+        var preset = display.Preset;
+        var settings = display.Settings;
         var portrait = settings.ShowPortrait == false ? null : display.Portrait;
-        PortraitContainer.Visible = portrait != null;
+        var portraitBackground = settings.PortraitBackgroundColor ?? preset.PortraitBackgroundColor;
+        var crtTint = settings.CrtGlowColor ?? display.Accent;
+
+        PortraitFrame.Visible = portrait != null;
         Portrait.SetEntity(portrait);
         if (portrait != null)
         {
             var size = PortraitSpriteSize * PortraitZoom * scale;
-            Portrait.Scale = new Vector2(PortraitZoom * scale);
-            Portrait.SetSize = new Vector2(size, size);
-            PortraitClip.SetSize = new Vector2(size, size * PortraitVisibleHeight);
+            Portrait.Zoom = PortraitZoom * scale;
+            Portrait.SetSize = new Vector2(size, size * PortraitVisibleHeight);
+            Portrait.SetShader(preset.CrtPortrait);
+            Portrait.SetColorParameter("tint", crtTint);
             PortraitFrame.PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = settings.PortraitBackgroundColor ?? preset.PortraitBackgroundColor,
+                BackgroundColor = portraitBackground,
                 BorderColor = settings.PortraitBorderColor ?? display.Accent,
                 BorderThickness = new Thickness(MathF.Max(1, 2 * scale)),
             };
 
-            PortraitShader.SetShader(display.Effects ? preset.PortraitShader : null);
+            PortraitShader.SetShader(preset.PortraitShader);
         }
 
-        Crt.SetShader(display.Effects && portrait != null ? preset.Crt : null);
-        Crt.SetColorParameter("glowColor", settings.CrtGlowColor);
+        Crt.SetShader(portrait != null ? preset.Crt : null);
+        Crt.SetColorParameter("tint", crtTint);
+        Crt.SetColorParameter("offColor", portraitBackground);
+        Crt.SetFloatParameter("lineSpacing", PortraitZoom * scale, true);
     }
 
-    public void SetBody(string text)
+    public void SetTitleProgress(float progress)
     {
-        BodyLabel.SetMessage(RMCAnnouncementText.Build(text, _textColor));
+        if (_title == null)
+            return;
+
+        _titleShown = RMCAnnouncementText.Decrypt(_title, progress, _random);
+        RenderTitle();
+
+        if (progress >= 1)
+        {
+            TitleUnderline.HorizontalAlignment = HAlignment.Stretch;
+            TitleUnderline.SetWidth = float.NaN;
+            return;
+        }
+
+        TitleUnderline.HorizontalAlignment = _centered ? HAlignment.Center : HAlignment.Left;
+        TitleUnderline.SetWidth = MathF.Max(0, TitleLabel.Width * progress);
+    }
+
+    public void SetPulse(float pulse)
+    {
+        _pulse = pulse;
+        RenderTitle();
+    }
+
+    private void RenderTitle()
+    {
+        if (_title == null)
+            return;
+
+        var color = Color.InterpolateBetween(_titleColor, Color.White, _pulse);
+        TitleLabel.ShadowColor = _shadowColor.WithAlpha(MathF.Min(1, _shadowColor.A * (1 + _pulse)));
+        TitleLabel.SetText(_titleShown, color);
+        TitleUnderline.PanelOverride = new StyleBoxFlat { BackgroundColor = color };
+    }
+
+    public void SetPower(float power)
+    {
+        Crt.SetFloatParameter("power", power);
+        Portrait.SetFloatParameter("power", power);
+
+        if (!Decal.Visible)
+            return;
+
+        Decal.Modulate = power >= 1 || _random.Prob(power) ? Color.White : Color.White.WithAlpha(FlickerOffAlpha);
+    }
+
+    public void SetBody(string shown, int fade, bool cursor, bool cursorVisible)
+    {
+        var revealed = shown.Length;
+        var transparent = _textColor.WithAlpha(0);
+        var cursorColor = cursorVisible ? _textColor : transparent;
+        var cursorAt = RMCAnnouncementText.GetCursorIndex(_text, revealed, cursor);
+
+        if (!_centered)
+        {
+            var segments = RMCAnnouncementText.BuildRange(_text, shown, 0, _text.Length, fade, cursorAt, _textColor, cursorColor);
+            if (cursor)
+                segments.Add((RMCAnnouncementText.Cursor, revealed >= _text.Length ? cursorColor : transparent));
+
+            BodyLabel.SetSegments(segments);
+            return;
+        }
+
+        for (var i = 0; i < _lines.Count; i++)
+        {
+            var (start, length) = _lines[i];
+            var segments = RMCAnnouncementText.BuildRange(_text, shown, start, start + length, fade, cursorAt, _textColor, cursorColor);
+            if (cursor && i == _lines.Count - 1)
+                segments.Add((RMCAnnouncementText.Cursor, revealed >= _text.Length ? cursorColor : transparent));
+
+            _lineLabels[i].SetSegments(segments);
+        }
     }
 
     private static int ScaleFont(float size, float scale)

@@ -11,6 +11,8 @@ rmc-announcement-title-alert-level-green = ALERT LEVEL: GREEN
 rmc-announcement-title-alert-level-blue = ALERT LEVEL: BLUE
 rmc-announcement-title-alert-level-red = ALERT LEVEL: RED
 rmc-announcement-title-alert-level-delta = ALERT LEVEL: DELTA
+rmc-announcement-speaker-line = — {$name}, {$job}
+rmc-announcement-speaker-line-no-job = — {$name}
 
 rmc-announcement-first-deployment-message =
     {$time}

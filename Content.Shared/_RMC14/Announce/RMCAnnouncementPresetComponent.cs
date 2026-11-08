@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Announce.Animations;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -25,6 +26,9 @@ public sealed partial class RMCAnnouncementPresetComponent : Component
 
     [DataField]
     public bool ShowSpeakerName;
+
+    [DataField]
+    public bool CenterText;
 
     [DataField]
     public LocId? Title;
@@ -54,6 +58,12 @@ public sealed partial class RMCAnnouncementPresetComponent : Component
     public int TitleFontSize = 16;
 
     [DataField]
+    public int TextScaleReference = 80;
+
+    [DataField]
+    public float MinTextScale = 0.5f;
+
+    [DataField]
     public float MaxWidth = 520;
 
     [DataField]
@@ -64,6 +74,30 @@ public sealed partial class RMCAnnouncementPresetComponent : Component
 
     [DataField]
     public string? Crt;
+
+    [DataField]
+    public string? CrtPortrait;
+
+    [DataField]
+    public string? BackgroundShader;
+
+    [DataField]
+    public Color? ShadowColor;
+
+    [DataField]
+    public TimeSpan PulseDuration;
+
+    [DataField]
+    public bool PulseForever;
+
+    [DataField]
+    public float PulseSpeed = 2;
+
+    [DataField]
+    public float PulseStrength = 0.6f;
+
+    [DataField]
+    public TimeSpan PowerOn = TimeSpan.FromSeconds(0.35);
 
     [DataField]
     public string? PortraitShader;
@@ -78,7 +112,22 @@ public sealed partial class RMCAnnouncementPresetComponent : Component
     public TimeSpan MaxRevealTime = TimeSpan.FromSeconds(6);
 
     [DataField]
+    public TimeSpan TitleDecrypt = TimeSpan.FromSeconds(0.5);
+
+    [DataField]
+    public bool Cursor = true;
+
+    [DataField]
+    public SoundSpecifier? TypingSound;
+
+    [DataField]
+    public int TypingSoundInterval = 3;
+
+    [DataField]
     public TimeSpan Hold = TimeSpan.FromSeconds(10);
+
+    [DataField]
+    public TimeSpan? TotalTime;
 
     [DataField]
     public TimeSpan FadeOut = TimeSpan.FromSeconds(0.5);

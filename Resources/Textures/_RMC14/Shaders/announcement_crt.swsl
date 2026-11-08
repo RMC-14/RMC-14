@@ -1,28 +1,22 @@
 light_mode unshaded;
 
 uniform highp vec2 size;
-uniform highp vec4 effects;
-uniform highp vec4 scanline;
-uniform highp vec4 scanlineAnimation;
-uniform highp vec4 scanlineColor;
-uniform highp vec4 glitchColor;
-uniform highp float glitchChance;
-uniform highp vec4 noise;
-uniform highp float noiseUpdateFrequency;
-uniform highp vec4 staticSize;
-uniform highp vec2 staticEffect;
-uniform highp vec4 vignette;
-uniform highp vec2 vignetteEdges;
-uniform highp vec4 vignetteColor;
-uniform highp vec4 chromatic;
-uniform highp int chromaticCount;
-uniform highp vec2 chromaticAnimation;
-uniform highp vec4 flicker;
-uniform highp vec4 flickerColor;
-uniform highp vec4 glowColor;
-uniform highp float glowBrightness;
+uniform highp float power;
+uniform highp float lineSpacing;
+uniform highp vec4 tint;
+uniform highp vec4 offColor;
+uniform highp float scanlineAlpha;
+uniform highp float vignetteStrength;
+uniform highp float vignetteSize;
+uniform highp float cornerRadius;
+uniform highp float highlightAlpha;
+uniform highp float bandAlpha;
+uniform highp float bandPeriod;
+uniform highp float bandHeight;
+uniform highp float grainAlpha;
+uniform highp float glowAlpha;
 
-highp float randomValue(highp vec2 point)
+highp float hash(highp vec2 point)
 {
     return fract(sin(dot(point, vec2(12.9898, 78.233))) * 43758.5453);
 }
@@ -38,106 +32,49 @@ highp vec4 compositeOver(highp vec4 base, highp vec4 overlay)
     return vec4(color, alpha);
 }
 
-bool inRectangle(highp vec2 pixel, highp vec2 origin, highp vec2 dimensions)
-{
-    return pixel.x >= origin.x && pixel.y >= origin.y &&
-        pixel.x < origin.x + dimensions.x && pixel.y < origin.y + dimensions.y;
-}
-
 void fragment()
 {
     highp vec2 pixel = UV * size;
     highp vec4 effect = vec4(0.0);
-    highp float elapsed = TIME;
-    highp float frame = floor(elapsed * 60.0);
-    highp float noiseSeed = floor(elapsed / max(0.001, noiseUpdateFrequency));
-    highp float scanlineOffset = mod(elapsed * scanline.z * 60.0, scanline.x);
 
-    if (effects.x > 0.0)
-    {
-        highp float extent = min(size.x, size.y) * vignette.x;
-        highp float corner = extent * vignetteEdges.x;
-        highp float edge = extent * 0.3;
-        highp vec2 nearestEdge = min(pixel, size - pixel);
-        highp float alpha = vignette.y + sin(elapsed * vignette.z) * vignette.w;
-        if (nearestEdge.x < corner && nearestEdge.y < corner)
-            effect = compositeOver(effect, vec4(vignetteColor.rgb, alpha));
-        else if ((nearestEdge.x < edge && nearestEdge.y >= corner) ||
-                 (nearestEdge.y < edge && nearestEdge.x >= corner))
-            effect = compositeOver(effect, vec4(vignetteColor.rgb, alpha * vignetteEdges.y));
-    }
+    highp vec2 halfSize = size * 0.5;
+    highp vec2 corner = abs(pixel - halfSize) - (halfSize - vec2(cornerRadius));
+    highp float edge = length(max(corner, 0.0)) + min(max(corner.x, corner.y), 0.0) - cornerRadius;
 
-    if (effects.y > 0.0)
+    highp float vignette = 1.0 - smoothstep(0.0, vignetteSize * min(size.x, size.y), -edge);
+    effect = compositeOver(effect, vec4(0.0, 0.0, 0.0, vignette * vignette * vignetteStrength));
+
+    highp float scanline = fract(pixel.y / max(lineSpacing, 1.0));
+    effect = compositeOver(effect, vec4(0.0, 0.0, 0.0, scanlineAlpha * smoothstep(0.55, 1.0, scanline)));
+
+    effect = compositeOver(effect, vec4(tint.rgb, glowAlpha));
+
+    highp float bandPosition = fract(TIME / max(bandPeriod, 0.1)) * (size.y + bandHeight * 2.0) - bandHeight;
+    highp float band = 1.0 - smoothstep(0.0, max(bandHeight, 1.0), abs(pixel.y - bandPosition));
+    effect = compositeOver(effect, vec4(tint.rgb, band * bandAlpha));
+
+    highp float highlight = clamp(1.0 - (UV.x + UV.y) * 1.4, 0.0, 1.0);
+    effect = compositeOver(effect, vec4(1.0, 1.0, 1.0, highlight * highlight * highlightAlpha));
+
+    effect = compositeOver(effect, vec4(vec3(hash(pixel + vec2(TIME * 37.0, TIME * 11.0))), grainAlpha));
+
+    if (edge > 0.0)
+        effect = vec4(offColor.rgb, 1.0);
+
+    if (power < 1.0)
     {
-        highp float cellSize = max(0.1, noise.w);
-        highp vec2 cell = floor(pixel / cellSize);
-        highp vec2 seed = cell + vec2(noiseSeed * 17.0, noiseSeed * 31.0);
-        if (randomValue(seed) < noise.x * 0.001 * cellSize * cellSize)
+        highp float open = max(power, 0.02) * halfSize.y;
+        highp float fromCenter = abs(pixel.y - halfSize.y);
+        if (fromCenter > open)
         {
-            highp float particleSize = mix(noise.z, noise.w, randomValue(seed + vec2(1.0, 2.0)));
-            highp vec2 origin = cell * cellSize + vec2(
-                randomValue(seed + vec2(3.0, 4.0)), randomValue(seed + vec2(5.0, 6.0))) * max(0.0, cellSize - particleSize);
-            if (inRectangle(pixel, origin, vec2(particleSize)))
-            {
-                highp float brightness = randomValue(seed + vec2(7.0, 8.0)) > 0.7 ? 1.0 : 0.5;
-                highp float alpha = randomValue(seed + vec2(9.0, 10.0)) * noise.y;
-                effect = compositeOver(effect, vec4(vec3(brightness), alpha));
-            }
+            effect = vec4(offColor.rgb, 1.0);
         }
-
-        if (randomValue(vec2(noiseSeed, 11.0)) < staticEffect.x)
+        else
         {
-            highp vec2 origin = vec2(randomValue(vec2(noiseSeed, 12.0)), randomValue(vec2(noiseSeed, 13.0))) * size;
-            highp vec2 dimensions = vec2(
-                mix(staticSize.x, staticSize.y, randomValue(vec2(noiseSeed, 14.0))),
-                mix(staticSize.z, staticSize.w, randomValue(vec2(noiseSeed, 15.0))));
-            if (inRectangle(pixel, origin, dimensions))
-                effect = compositeOver(effect, vec4(1.0, 1.0, 1.0, staticEffect.y));
+            highp float glow = (1.0 - power) * (1.0 - smoothstep(0.0, max(open, 1.0), fromCenter));
+            effect = compositeOver(effect, vec4(mix(tint.rgb, vec3(1.0), 0.6), glow));
         }
     }
-
-    if (effects.z > 0.0)
-    {
-        highp float lineY = floor((pixel.y + scanlineOffset) / scanline.x) * scanline.x - scanlineOffset;
-        highp float wave = sin(lineY / size.y * 3.14159265 * scanlineAnimation.x + elapsed * 0.5) * scanlineAnimation.y;
-        if (lineY >= 0.0 && pixel.y - lineY < scanline.y &&
-            pixel.x >= max(0.0, wave) && pixel.x < min(size.x, size.x + wave))
-        {
-            highp float intensity = 1.0 - scanlineAnimation.z +
-                sin(lineY * 0.05 + elapsed * scanlineAnimation.w) * scanlineAnimation.z;
-            effect = compositeOver(effect, vec4(scanlineColor.rgb, scanline.w * intensity));
-        }
-
-        if (randomValue(vec2(frame, 21.0)) < glitchChance)
-        {
-            highp float glitchY = randomValue(vec2(frame, 22.0)) * size.y;
-            if (pixel.y >= glitchY && pixel.y < glitchY + scanline.y)
-                effect = compositeOver(effect, glitchColor);
-        }
-    }
-
-    if (effects.w > 0.0)
-    {
-        highp float offset = chromatic.x * (sin(elapsed * chromaticAnimation.y) * 0.5 + 0.5);
-        for (int i = 0; i < chromaticCount; i++)
-        {
-            highp vec2 seed = vec2(frame, float(i) + 30.0);
-            if (randomValue(seed) < chromaticAnimation.x)
-            {
-                highp vec2 origin = vec2(randomValue(seed + vec2(1.0, 0.0)), randomValue(seed + vec2(2.0, 0.0))) * size;
-                highp float particleSize = mix(chromatic.y, chromatic.z, randomValue(seed + vec2(3.0, 0.0)));
-                if (inRectangle(pixel, origin + vec2(offset, 0.0), vec2(particleSize)))
-                    effect = compositeOver(effect, vec4(1.0, 0.0, 0.0, chromatic.w));
-                if (inRectangle(pixel, origin - vec2(offset, 0.0), vec2(particleSize)))
-                    effect = compositeOver(effect, vec4(0.0, 0.0, 1.0, chromatic.w));
-            }
-        }
-    }
-
-    if (sin(elapsed * 5.0) * 0.5 + 0.5 > flicker.x && randomValue(vec2(frame, 41.0)) < flicker.y)
-        effect = compositeOver(effect, vec4(flickerColor.rgb, flicker.z));
-    if (randomValue(vec2(frame, 42.0)) < flicker.w)
-        effect = compositeOver(effect, vec4(glowColor.rgb, randomValue(vec2(frame, 43.0)) * glowBrightness));
 
     COLOR = zTexture(UV) * effect;
 }

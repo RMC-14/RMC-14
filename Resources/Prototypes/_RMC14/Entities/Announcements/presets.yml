@@ -12,7 +12,7 @@
   components:
   - type: RMCAnnouncementPreset
     position: TopLeft
-    scale: 2
+    scale: 1.5
     textColor: "#A8D6FF"
     accentColor: "#4A9EFF"
     portraitBackgroundColor: "#0A1A2D"
@@ -33,6 +33,7 @@
     priority: 9
     interruptible: false
     crt: RMCAnnouncementCRT
+    crtPortrait: RMCAnnouncementPortraitCRT
     title: rmc-announcement-title-command
 
 - type: entity
@@ -53,7 +54,7 @@
   components:
   - type: RMCAnnouncementPreset
     position: TopLeft
-    scale: 2
+    scale: 1.5
     accentColor: "#4A9EFF"
     fontSize: 16
     titleFontSize: 18
@@ -70,7 +71,8 @@
   components:
   - type: RMCAnnouncementPreset
     position: TopLeft
-    scale: 1.25
+    scale: 1.5
+    powerOn: 0.8
     fontSize: 18
     titleFontSize: 24
     decalScale: 2
@@ -121,6 +123,7 @@
   - type: RMCAnnouncementPreset
     accentColor: "#FF0000"
     title: rmc-announcement-title-alert-level-red
+    pulseDuration: 4
     decal:
       sprite: _RMC14/Structures/Machines/status_display.rsi
       state: redalert
@@ -134,6 +137,7 @@
     textColor: "#C43232"
     accentColor: "#8B0000"
     title: rmc-announcement-title-alert-level-delta
+    pulseDuration: 4
     decal:
       sprite: _RMC14/Structures/Machines/status_display.rsi
       state: evac
@@ -145,8 +149,11 @@
   components:
   - type: RMCAnnouncementPreset
     position: TopCenter
-    scale: 1.5
-    showSpeakerName: true
+    centerText: true
+    cursor: false
+    titleDecrypt: 0
+    scale: 1.25
+    showSpeakerName: false
     textColor: "#F1E6FF"
     accentColor: "#9D67FF"
     fontSize: 20
@@ -155,8 +162,14 @@
     priority: 8
     interruptible: false
     title: rmc-announcement-title-queen
-    animation: !type:TypewriterAnimationConfig
-      printSpeed: 0.018
+    shadowColor: "#5B2A9ACC"
+    backgroundShader: RMCAnnouncementHiveVignette
+    pulseForever: true
+    pulseSpeed: 0.35
+    pulseStrength: 0.35
+    animation: !type:WaveAnimationConfig
+      printSpeed: 0.02
+      fadeChars: 6
 
 - type: entity
   parent: RMCAnnouncementBase
@@ -174,6 +187,10 @@
     titleFontSize: 20
     maxWidth: 720
     maxRevealTime: 12
-    hold: 3
+    totalTime: 20
+    typingSound:
+      collection: Keyboard
+      params:
+        volume: -12
     animation: !type:TypewriterAnimationConfig
       printSpeed: 0.1

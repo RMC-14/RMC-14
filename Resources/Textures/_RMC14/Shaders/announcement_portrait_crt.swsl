@@ -1,0 +1,55 @@
+light_mode unshaded;
+
+uniform highp vec2 size;
+uniform highp float pixelSize;
+uniform highp float power;
+uniform highp vec4 tint;
+uniform highp float tintStrength;
+uniform highp float scanlineStrength;
+uniform highp float chromaPixels;
+uniform highp float bloomStrength;
+uniform highp float bloomThreshold;
+uniform highp float grain;
+uniform highp float flicker;
+uniform highp float tearStrength;
+
+highp float hash(highp vec2 point)
+{
+    return fract(sin(dot(point, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+void fragment()
+{
+    highp vec2 texel = 1.0 / size;
+    highp float spritePixel = max(pixelSize, 1.0);
+    highp vec2 uv = UV;
+
+    highp float row = floor(uv.y * size.y / spritePixel);
+    uv.x += (hash(vec2(row, floor(TIME * 30.0))) - 0.5) * tearStrength * (1.0 - power);
+
+    highp vec2 chroma = vec2(chromaPixels * texel.x, 0.0);
+    highp vec4 base = zTexture(uv);
+    highp vec4 red = zTexture(uv + chroma);
+    highp vec4 blue = zTexture(uv - chroma);
+    highp vec3 color = vec3(red.r, base.g, blue.b);
+    highp float alpha = max(base.a, max(red.a, blue.a) * 0.6);
+
+    highp vec2 neighbour = texel * spritePixel;
+    highp vec3 around = zTexture(uv + vec2(neighbour.x, 0.0)).rgb
+        + zTexture(uv - vec2(neighbour.x, 0.0)).rgb
+        + zTexture(uv + vec2(0.0, neighbour.y)).rgb
+        + zTexture(uv - vec2(0.0, neighbour.y)).rgb;
+    highp vec3 glow = max(around * 0.25 - vec3(bloomThreshold), vec3(0.0)) * bloomStrength * tint.rgb;
+    color += glow;
+    alpha = max(alpha, clamp(dot(glow, vec3(0.333)), 0.0, 1.0));
+
+    highp float scanline = fract(uv.y * size.y / spritePixel);
+    color *= 1.0 - scanlineStrength * smoothstep(0.55, 1.0, scanline);
+
+    color = mix(color, color * (vec3(0.6) + tint.rgb * 0.6), tintStrength);
+    color *= 1.0 + sin(TIME * 47.0) * flicker;
+    color += vec3(hash(UV * size + vec2(TIME * 61.0, TIME * 17.0)) - 0.5) * grain;
+    color *= 1.0 + (1.0 - power) * 1.5;
+
+    COLOR = vec4(clamp(color, 0.0, 1.0), alpha);
+}

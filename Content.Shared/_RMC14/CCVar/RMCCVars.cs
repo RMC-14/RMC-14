@@ -455,9 +455,6 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCUseAlternateSprites =
         CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
-    public static readonly CVarDef<RMCAnnouncementDisplayMode> RMCAnnouncementMode =
-        CVarDef.Create("rmc.announcement_mode", RMCAnnouncementDisplayMode.Full, CVar.ARCHIVE | CVar.CLIENTONLY);
-
     public static readonly CVarDef<int> RMCAnnouncementMaxVisible =
         CVarDef.Create("rmc.announcement_max_visible", 2, CVar.ARCHIVE | CVar.CLIENTONLY);
 

@@ -2,22 +2,20 @@
          xmlns:announce="clr-namespace:Content.Client._RMC14.Announce"
          MouseFilter="Ignore">
     <PanelContainer Name="Background" MouseFilter="Ignore">
+        <announce:RMCAnnouncementShaderRect Name="BackgroundShader"/>
         <BoxContainer Orientation="Horizontal" SeparationOverride="12" Margin="10 8 10 8" MouseFilter="Ignore">
             <AnimatedTextureRect Name="Decal" Visible="False" VerticalAlignment="Center" MouseFilter="Ignore"/>
-            <Control Name="PortraitContainer" Visible="False" VerticalAlignment="Top" MouseFilter="Ignore">
-                <PanelContainer Name="PortraitFrame" MouseFilter="Ignore">
-                    <announce:RMCAnnouncementShaderRect Name="PortraitShader"/>
-                    <Control Name="PortraitClip" RectClipContent="True" MouseFilter="Ignore">
-                        <SpriteView Name="Portrait" VerticalAlignment="Top" HorizontalAlignment="Center" MouseFilter="Ignore"/>
-                    </Control>
-                </PanelContainer>
+            <PanelContainer Name="PortraitFrame" Visible="False" VerticalAlignment="Top" MouseFilter="Ignore">
+                <announce:RMCAnnouncementShaderRect Name="PortraitShader"/>
+                <announce:RMCAnnouncementPortraitView Name="Portrait"/>
                 <announce:RMCAnnouncementShaderRect Name="Crt"/>
-            </Control>
+            </PanelContainer>
             <BoxContainer Orientation="Vertical" SeparationOverride="4" VerticalAlignment="Top" MouseFilter="Ignore">
-                <RichTextLabel Name="TitleLabel" Visible="False" MouseFilter="Ignore"/>
-                <PanelContainer Name="TitleUnderline" Visible="False" MinHeight="2" MouseFilter="Ignore"/>
-                <RichTextLabel Name="BodyLabel" MouseFilter="Ignore"/>
-                <RichTextLabel Name="SpeakerLabel" Visible="False" MouseFilter="Ignore"/>
+                <announce:RMCAnnouncementTextLabel Name="TitleLabel" Visible="False"/>
+                <PanelContainer Name="TitleUnderline" Visible="False" MinHeight="2" HorizontalAlignment="Left" MouseFilter="Ignore"/>
+                <announce:RMCAnnouncementTextLabel Name="BodyLabel"/>
+                <BoxContainer Name="CenteredBody" Orientation="Vertical" Visible="False" MouseFilter="Ignore"/>
+                <announce:RMCAnnouncementTextLabel Name="SpeakerLabel" Visible="False"/>
             </BoxContainer>
         </BoxContainer>
     </PanelContainer>

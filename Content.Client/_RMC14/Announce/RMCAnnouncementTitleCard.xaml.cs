@@ -4,6 +4,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -11,9 +12,13 @@ namespace Content.Client._RMC14.Announce;
 public sealed partial class RMCAnnouncementTitleCard : BoxContainer, IRMCAnnouncementView
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private Color _textColor;
+    private Color _titleColor;
+    private string? _title;
+    private string _text = string.Empty;
 
     public RMCAnnouncementTitleCard()
     {
@@ -26,30 +31,54 @@ public sealed partial class RMCAnnouncementTitleCard : BoxContainer, IRMCAnnounc
         var settings = display.Settings;
         var scale = display.Scale;
         var titleScale = scale * (settings.TitleScale ?? 1);
-        var bodyScale = scale * (settings.BodyScale ?? 1);
+        var bodyScale = scale * (settings.BodyScale ?? 1) * RMCAnnouncementText.GetLengthScale(display.Preset, display.Text.Length);
         var preset = display.Preset;
+        var shadow = MathF.Max(1, MathF.Round(scale));
 
+        _text = display.Text;
         _textColor = settings.TextColor ?? preset.TextColor ?? display.Accent;
-        RMCAnnouncementText.SetFont(BodyLabel, _prototype, _resourceCache, preset.Font, ScaleFont(preset.FontSize, bodyScale));
+        _titleColor = settings.TitleColor ?? display.Accent;
 
+        BodyLabel.ShadowOffset = shadow;
+        BodyLabel.SetFont(_prototype, _resourceCache, preset.Font, ScaleFont(preset.FontSize, bodyScale));
         BodyLabel.MaxWidth = preset.MaxWidth * scale;
         TitleLabel.MaxWidth = preset.MaxWidth * scale;
 
-        var title = settings.ShowTitle == false
-            ? null
-            : display.Title ?? (preset.Title is { } titleId ? Loc.GetString(titleId) : null);
-
-        TitleLabel.Visible = title != null;
-        if (title != null)
+        _title = settings.ShowTitle == false ? null : display.Title;
+        TitleLabel.Visible = _title != null;
+        if (_title != null)
         {
-            RMCAnnouncementText.SetFont(TitleLabel, _prototype, _resourceCache, preset.TitleFont, ScaleFont(preset.TitleFontSize, titleScale));
-            TitleLabel.SetMessage(RMCAnnouncementText.Build(title, settings.TitleColor ?? display.Accent));
+            TitleLabel.ShadowOffset = shadow;
+            TitleLabel.SetFont(_prototype, _resourceCache, preset.TitleFont, ScaleFont(preset.TitleFontSize, titleScale));
         }
+
+        SetTitleProgress(1);
     }
 
-    public void SetBody(string text)
+    public void SetTitleProgress(float progress)
     {
-        BodyLabel.SetMessage(RMCAnnouncementText.Build(text, _textColor));
+        if (_title != null)
+            TitleLabel.SetText(RMCAnnouncementText.Decrypt(_title, progress, _random), _titleColor);
+    }
+
+    public void SetPower(float power)
+    {
+    }
+
+    public void SetPulse(float pulse)
+    {
+    }
+
+    public void SetBody(string shown, int fade, bool cursor, bool cursorVisible)
+    {
+        var transparent = _textColor.WithAlpha(0);
+        var cursorColor = cursorVisible ? _textColor : transparent;
+        var cursorAt = RMCAnnouncementText.GetCursorIndex(_text, shown.Length, cursor);
+        var segments = RMCAnnouncementText.BuildRange(_text, shown, 0, _text.Length, fade, cursorAt, _textColor, cursorColor);
+        if (cursor)
+            segments.Add((RMCAnnouncementText.Cursor, shown.Length >= _text.Length ? cursorColor : transparent));
+
+        BodyLabel.SetSegments(segments);
     }
 
     private static int ScaleFont(float size, float scale)

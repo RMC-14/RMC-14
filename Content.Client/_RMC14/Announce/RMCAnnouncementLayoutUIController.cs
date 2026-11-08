@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared.Access.Systems;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -30,7 +31,6 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
     private RMCAnnouncementArea? _area;
     private int _index;
     private bool _editGlobal;
-    private RMCAnnouncementDisplayMode _previewMode = RMCAnnouncementDisplayMode.Full;
     private bool _populating;
 
     private RMCAnnouncementUIController Announcements => UIManager.GetUIController<RMCAnnouncementUIController>();
@@ -52,14 +52,14 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
             if (_editGlobal)
                 return default;
 
-            var global = _working.GetValueOrDefault(RMCAnnouncementOverrides.GlobalKey) with { Mode = null };
+            var global = _working.GetValueOrDefault(RMCAnnouncementOverrides.GlobalKey);
             return Preset.Id == Preset.GroupId
                 ? global
-                : _working.GetValueOrDefault(Preset.GroupId).Over(global) with { Mode = null };
+                : _working.GetValueOrDefault(Preset.GroupId).Over(global);
         }
     }
 
-    private RMCAnnouncementOverride Effective => Target.Over(Fallback) with { Mode = null };
+    private RMCAnnouncementOverride Effective => Target.Over(Fallback);
 
     public void OnStateExited(GameplayState state)
     {
@@ -84,7 +84,6 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
         _working = RMCAnnouncementOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementOverrides));
         _index = 0;
         _editGlobal = false;
-        _previewMode = RMCAnnouncementDisplayMode.Full;
 
         _window = UIManager.CreateWindow<RMCAnnouncementEditWindow>();
         _window.OnClose += OnWindowClosed;
@@ -97,13 +96,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
 
     public void ResetAll()
     {
-        var overrides = RMCAnnouncementOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementOverrides));
-        foreach (var (id, value) in overrides.ToArray())
-        {
-            overrides[id] = value.WithoutLayout();
-        }
-
-        _cfg.SetCVar(RMCCVars.RMCAnnouncementOverrides, RMCAnnouncementOverrides.Serialize(overrides));
+        _cfg.SetCVar(RMCCVars.RMCAnnouncementOverrides, string.Empty);
         _cfg.SaveToFile();
     }
 
@@ -151,20 +144,6 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
             Refresh();
         };
 
-        window.PreviewVariantButton.AddItem(Loc.GetString("rmc-ui-options-announcements-style-stylized"), (int) RMCAnnouncementDisplayMode.Full);
-        window.PreviewVariantButton.AddItem(Loc.GetString("rmc-ui-options-announcements-style-simplified"), (int) RMCAnnouncementDisplayMode.Simple);
-        window.PreviewVariantButton.OnItemSelected += args =>
-        {
-            window.PreviewVariantButton.SelectId(args.Id);
-            _previewMode = (RMCAnnouncementDisplayMode) args.Id;
-            ShowPreview();
-        };
-
-        window.PresetModesLabel.Text = Loc.GetString("rmc-ui-options-announcements-layout-preset-modes-value",
-            ("modes", string.Join(", ",
-                Loc.GetString("rmc-ui-options-announcements-style-stylized"),
-                Loc.GetString("rmc-ui-options-announcements-style-simplified"))));
-
         window.GlobalCheckBox.OnToggled += args =>
         {
             _editGlobal = args.Pressed;
@@ -185,6 +164,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
 
         window.ShowTitleCheckBox.OnToggled += args => Change(Target with { ShowTitle = args.Pressed });
         window.ShowPortraitCheckBox.OnToggled += args => Change(Target with { ShowPortrait = args.Pressed });
+        window.ShowAnnouncementCheckBox.OnToggled += args => Change(Target with { Show = args.Pressed });
 
         BindColor(window.BodyColorInput, window.BodyColorPicker, color => Target with { TextColor = color });
         BindColor(window.TitleColorInput, window.TitleColorPicker, color => Target with { TitleColor = color });
@@ -195,7 +175,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
 
         window.ResetTargetButton.OnPressed += _ =>
         {
-            Target = Target.WithoutLayout();
+            Target = default;
             Commit();
             Refresh();
         };
@@ -309,7 +289,6 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
         var accent = preset.AccentColor;
 
         _window.PreviewPresetButton.SelectId(_index);
-        _window.PreviewVariantButton.SelectId((int) _previewMode);
         _window.GlobalCheckBox.Pressed = _editGlobal;
 
         _window.ScaleValueLabel.Text = Loc.GetString("rmc-ui-options-announcements-layout-scale-value",
@@ -326,6 +305,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
         _window.ShowTitleCheckBox.Pressed = effective.ShowTitle ?? true;
         _window.ShowPortraitCheckBox.Disabled = !hasPortrait;
         _window.ShowPortraitCheckBox.Pressed = hasPortrait && (effective.ShowPortrait ?? true);
+        _window.ShowAnnouncementCheckBox.Pressed = effective.Show ?? true;
 
         var showCrt = _editGlobal || preset.Crt != null;
         var showBackground = _editGlobal || preset.BackgroundColor != null;
@@ -338,10 +318,10 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
         SetColor(_window.TitleColorInput, _window.TitleColorPicker, target.TitleColor, effective.TitleColor ?? accent);
         SetColor(_window.SpriteBoxColorInput, _window.SpriteBoxColorPicker, target.PortraitBackgroundColor, effective.PortraitBackgroundColor ?? preset.PortraitBackgroundColor);
         SetColor(_window.SpriteBoxBorderColorInput, _window.SpriteBoxBorderColorPicker, target.PortraitBorderColor, effective.PortraitBorderColor ?? accent);
-        SetColor(_window.CRTGlowColorInput, _window.CRTGlowColorPicker, target.CrtGlowColor, effective.CrtGlowColor ?? Color.White);
+        SetColor(_window.CRTGlowColorInput, _window.CRTGlowColorPicker, target.CrtGlowColor, effective.CrtGlowColor ?? accent);
         SetColor(_window.BackgroundColorInput, _window.BackgroundColorPicker, target.BackgroundColor, effective.BackgroundColor ?? preset.BackgroundColor ?? Color.Black);
 
-        _window.ResetTargetButton.Disabled = !target.HasLayout;
+        _window.ResetTargetButton.Disabled = target.IsEmpty;
         _window.PositionValueLabel.Text = target.Pivot is { } targetPivot
             ? Loc.GetString("rmc-ui-options-announcements-layout-position-value",
                 ("x", targetPivot.X.ToString("0.000", CultureInfo.InvariantCulture)),
@@ -368,34 +348,43 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
         _area = area;
 
         var preset = Preset;
-        var full = _previewMode == RMCAnnouncementDisplayMode.Full;
         var local = _player.LocalEntity;
         var text = string.Join('\n',
             Loc.GetString("rmc-ui-options-announcements-layout-preview-line-1", ("name", preset.Name)),
             Loc.GetString("rmc-ui-options-announcements-layout-preview-line-2"));
+
+        string? job = null;
+        if (local is { } localEntity &&
+            _entities.System<SharedIdCardSystem>().TryFindIdCard(localEntity, out var idCard) &&
+            !string.IsNullOrWhiteSpace(idCard.Comp.LocalizedJobTitle))
+        {
+            job = idCard.Comp.LocalizedJobTitle;
+        }
 
         var display = new RMCAnnouncementDisplay
         {
             PresetId = preset.Id,
             Preset = preset.Preset,
             Text = text,
+            Title = RMCAnnouncementUIController.GetTitle(preset.Preset, null),
             Accent = preset.Preset.AccentColor,
             SpeakerName = local is { } entity
                 ? _entities.GetComponent<MetaDataComponent>(entity).EntityName
                 : Loc.GetString("rmc-ui-options-announcements-layout-preview-speaker"),
-            Portrait = full && preset.Preset.Template == RMCAnnouncementTemplate.Portrait ? local : null,
-            Effects = full,
+            SpeakerJob = job,
+            Portrait = preset.Preset.Template == RMCAnnouncementTemplate.Portrait ? local : null,
         };
 
-        RMCAnnouncementUIController.ApplySettings(display, Effective);
+        RMCAnnouncementUIController.ApplySettings(display, Effective, area.ScreenScale);
 
         var view = RMCAnnouncementUIController.CreateView(display);
-        ((IRMCAnnouncementView) view).SetBody(display.Text);
+        ((IRMCAnnouncementView) view).SetBody(display.Text, 0, false, false);
 
         _frame = new RMCAnnouncementEditFrame(view);
         _frame.Dragged += OnDragged;
         _frame.Scrolled += OnScrolled;
-        area.Add(_frame, display.Pivot, true);
+        _frame.Modulate = Color.White.WithAlpha(Effective.Show == false ? 0.35f : 1f);
+        area.Add(_frame, display.Pivot, display.AvoidHud, exclusive: true);
     }
 
     private void OnDragged(Vector2 topLeft)

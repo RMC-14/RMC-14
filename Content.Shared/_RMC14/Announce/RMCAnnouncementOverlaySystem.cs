@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Announce.Animations;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared.Access.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -15,9 +17,11 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedPvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<ICommonSession> _expired = new();
@@ -47,10 +51,14 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
             return;
 
         var speakerName = announcement.SpeakerName;
+        string? speakerJob = null;
         NetEntity? portrait = null;
         if (announcement.Speaker is { } speaker && !TerminatingOrDeleted(speaker))
         {
-            speakerName ??= Name(speaker);
+            speakerName ??= _rank.GetSpeakerRankName(speaker) ?? Name(speaker);
+            if (_idCard.TryFindIdCard(speaker, out var idCard) && !string.IsNullOrWhiteSpace(idCard.Comp.LocalizedJobTitle))
+                speakerJob = idCard.Comp.LocalizedJobTitle;
+
             if (preset.Template == RMCAnnouncementTemplate.Portrait)
             {
                 portrait = GetNetEntity(speaker);
@@ -65,6 +73,7 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
             title,
             announcement.Accent,
             speakerName,
+            speakerJob,
             portrait);
 
         RaiseNetworkEvent(msg, filter);
@@ -83,6 +92,7 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
         {
             TypewriterAnimationConfig typewriter => typewriter.PrintSpeed * length,
             GlitchAnimationConfig glitch => glitch.PrintSpeed * length,
+            WaveAnimationConfig wave => wave.PrintSpeed * (length + wave.FadeChars),
             FadeAnimationConfig fade => fade.Duration,
             _ => TimeSpan.Zero,
         };
@@ -92,7 +102,17 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
 
     public static TimeSpan GetDisplayTime(RMCAnnouncementPresetComponent preset, int length)
     {
-        return GetRevealTime(preset, length) + preset.Hold + preset.FadeOut;
+        var reveal = GetRevealTime(preset, length);
+        return preset.TitleDecrypt + reveal + GetHoldTime(preset, preset.TitleDecrypt, reveal) + preset.FadeOut;
+    }
+
+    public static TimeSpan GetHoldTime(RMCAnnouncementPresetComponent preset, TimeSpan decrypt, TimeSpan reveal)
+    {
+        if (preset.TotalTime is not { } total)
+            return preset.Hold;
+
+        var hold = total - decrypt - reveal - preset.FadeOut;
+        return hold > TimeSpan.Zero ? hold : TimeSpan.Zero;
     }
 
     private void ShowPortrait(EntityUid speaker, Filter filter, TimeSpan displayTime)

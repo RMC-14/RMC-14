@@ -19,10 +19,3 @@ public enum RMCAnnouncementPosition : byte
     BottomCenter,
     BottomRight,
 }
-
-public enum RMCAnnouncementDisplayMode
-{
-    Full,
-    Simple,
-    Off,
-}

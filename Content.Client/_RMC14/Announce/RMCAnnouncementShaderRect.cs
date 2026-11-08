@@ -9,6 +9,7 @@ public sealed class RMCAnnouncementShaderRect : Control
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly Dictionary<string, Color> _colorParameters = new();
+    private readonly Dictionary<string, (float Value, bool UiScaled)> _floatParameters = new();
     private string? _shaderId;
     private ShaderInstance? _shader;
 
@@ -29,11 +30,18 @@ public sealed class RMCAnnouncementShaderRect : Control
     public void SetColorParameter(string name, Color? value)
     {
         if (value is { } color)
+        {
             _colorParameters[name] = color;
-        else
-            _colorParameters.Remove(name);
+            return;
+        }
 
-        ReleaseShader();
+        if (_colorParameters.Remove(name))
+            ReleaseShader();
+    }
+
+    public void SetFloatParameter(string name, float value, bool uiScaled = false)
+    {
+        _floatParameters[name] = (value, uiScaled);
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -43,6 +51,11 @@ public sealed class RMCAnnouncementShaderRect : Control
 
         _shader ??= _prototype.Index<ShaderPrototype>(_shaderId).InstanceUnique();
         _shader.SetParameter("size", (System.Numerics.Vector2) PixelSize);
+        foreach (var (name, (value, uiScaled)) in _floatParameters)
+        {
+            _shader.SetParameter(name, uiScaled ? value * UIScale : value);
+        }
+
         foreach (var (name, color) in _colorParameters)
         {
             _shader.SetParameter(name, color);
