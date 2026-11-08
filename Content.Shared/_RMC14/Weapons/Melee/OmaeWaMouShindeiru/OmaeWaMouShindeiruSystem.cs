@@ -43,11 +43,11 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         var damage = args.BaseDamage + args.BonusDamage;
         foreach (var target in args.HitEntities)
         {
-            if (!ent.Comp.PendingTargets.Add(target))
+            if (TryComp<MobStateComponent>(target, out var mobState) &&
+                mobState.CurrentState == MobState.Dead)
+            {
                 continue;
-
-            if (_net.IsClient)
-                continue;
+            }
 
             if (HasKatana(target) && args.User != target)
             {
@@ -78,6 +78,9 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (!ent.Comp.PendingTargets.Add(target))
+            return;
+
         var playStream = _audio.PlayPvs(ent.Comp.DeathImminentSound, target);
         if (playStream != null)
             ent.Comp.Streams[target] = playStream.Value.Entity;
@@ -93,10 +96,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 ent.Comp.PendingTargets.Remove(target);
 
                 if (ent.Comp.Streams.TryGetValue(target, out var stream))
-                {
                     _audio.Stop(stream);
-                    ent.Comp.Streams.Remove(target);
-                }
 
                 if (Deleted(target) || !Exists(target))
                     return;
