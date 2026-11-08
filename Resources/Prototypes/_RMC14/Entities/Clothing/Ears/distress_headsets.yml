@@ -96,7 +96,7 @@
 
 - type: entity
   parent: RMCHeadsetDistressWeYa
-  id: RMCHeadsetDistressPMCPVE
+  id: RMCHeadsetPMCPVE
   name: PMC headset
   description: A special headset used by corporate personnel.
   suffix: PVE
@@ -111,8 +111,11 @@
   - type: GrantSquadLeaderTracker
     defaultMode: LeaderPmcPVE
     trackerModes:
+    - CommandPmcPVE
     - LeaderPmcPVE
     - TeamLeaderPmcPVE
+    - PrimaryLandingZone
+  - type: GrantAreaInfo
 
 - type: entity
   parent: RMCHeadsetDistressPMC
@@ -122,6 +125,14 @@
   components:
   - type: RMCHeadset
     radioTextIncrease: 2
+    
+- type: entity
+  parent: RMCHeadsetPMCPVE
+  id: RMCHeadsetPMCLeaderPVE
+  suffix: PVE, Leader
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetDistressWeYa

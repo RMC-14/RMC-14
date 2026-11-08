@@ -44,6 +44,9 @@
   - type: VehicleFlamerTankSlots
     maxTanks: 2
     startingItem: VehicleFlamerTankLZRN
+    whitelist:
+      tags:
+      - VehicleFlamerTankLZRN
   - type: RMCFlamerAmmoProvider
   - type: GunFireArc
     arc: 120
