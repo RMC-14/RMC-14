@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: The buttons for choose structures have been restored to be more responsive,
-      and will immediately select the option you click on once again.
-    type: Fix
-  id: 3240
-  time: '2026-05-31T02:23:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9807
 - author: Vixting
   changes:
   - message: Add weld effect to welding
@@ -4528,5 +4520,17 @@
   id: 3739
   time: '2026-11-08T11:49:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11069
+- author: Thereisabear
+  changes:
+  - message: Scope attachments now only show its Action Bar button once attached to
+      appropriate gun.
+    type: Tweak
+  - message: Fixed the popup text when trying to use unattached scopes.
+    type: Fix
+  - message: Fixed being able to toggle Flashlight rail and grip via the verb.
+    type: Fix
+  id: 3740
+  time: '2026-11-08T11:55:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10471
 Name: RMC14
 Order: -1
