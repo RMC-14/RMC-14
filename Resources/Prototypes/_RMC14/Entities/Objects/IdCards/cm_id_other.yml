@@ -355,6 +355,15 @@
     job: RMCSurvivorUNMCPilot
 
 - type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagUNMCRecruiter
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionSurvivor
+    - FactionMarine
+
+- type: entity
   id: RMCIDCardAegis
   name: AEGIS Access Badge
   description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates.

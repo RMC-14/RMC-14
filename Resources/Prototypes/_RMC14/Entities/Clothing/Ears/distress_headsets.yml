@@ -411,8 +411,8 @@
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetMarineDistress
-  name: UNMC headset
-  description: A standard issue UNMC headset. This one is used by marines on colonial protection duties, and only comes equipped with civilian channels.
+  name: UNMC colony headset
+  description: A standard headset used by the UNMC. This one seems badly beat up, whatever extra frequencies it once had have been lost.
   components:
   - type: ContainerFill
     containers:
