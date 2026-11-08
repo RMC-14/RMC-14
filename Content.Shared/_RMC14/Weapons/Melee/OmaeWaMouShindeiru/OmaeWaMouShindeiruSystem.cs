@@ -96,7 +96,10 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 ent.Comp.PendingTargets.Remove(target);
 
                 if (ent.Comp.Streams.TryGetValue(target, out var stream))
+                {
                     _audio.Stop(stream);
+                    ent.Comp.Streams.Remove(target);
+                }
 
                 if (Deleted(target) || !Exists(target))
                     return;
