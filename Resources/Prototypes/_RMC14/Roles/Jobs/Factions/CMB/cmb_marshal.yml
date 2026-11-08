@@ -93,19 +93,16 @@
     # shoulder holster with revolver and two magazines
     eyes: CMGlassesSecurity
     ears: RMCHeadsetDistressBureau
-    back: CMSatchelSecurity
+    back: RMCSatchelCMBMarshalERTFilled
     gloves: RMCHandsVeteran
-    jumpsuit: RMCMarshalCMBUniform
-    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
+    jumpsuit: RMCMarshalCMBUniformSpearheadCustom
+    outerClothing: RMCCoatBureauMarshalFilledERT
     belt: CMBeltSecurityMarshalFilled
     shoes: RMCBootsPMCFilled
     id: RMCIDCardCMBMarshal
     pocket1: RMCPouchFirstAidERTFill
-    pocket2: RMCPouchShotgunLargeBuckshot
+    pocket2: RMCPouchShotgunLargeCMBMarshalERTFilled
     suitstorage: RMCWeaponShotgunM3717
-  storage:
-    back:
-    - RMCUniversalRecorder
 
 - type: playTimeTracker
   id: RMCJobBureauMarshal

@@ -61,6 +61,32 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
 
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatBureauDeputyFilledERT
+  suffix: Filled, Deputy, ERT
+  name: CMB marshal jacket
+  components:
+    - type: StorageFill
+      contents:
+      - id: RMCBinoculars
+        amount: 1
+      - id: RMCTelescopicBaton
+        amount: 1
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatBureauMarshalFilledERT
+  suffix: Filled, Marshal, ERT
+  name: CMB marshal jacket
+  components:
+    - type: StorageFill
+      contents:
+      - id: RMCRangefinder
+        amount: 1
+      - id: RMCTelescopicBaton
+        amount: 1
+
 # Fur coats
 - type: entity
   parent: RMCCoatBureauDeputy
