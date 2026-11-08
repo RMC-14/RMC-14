@@ -25,6 +25,11 @@ marking-RMCSpotsSkrellHairRight = Skrell Spots (Hair, Right)
 marking-RMCSpotsSkrellHairTiny = Skrell Tiny Spots
 
 marking-RMCEyesSkrellAxiori = Axiori Skrell Eyes
+marking-RMCEyesSkrellAbyssal = Abyssal Skrell Eyes
+marking-RMCEyesSkrellCruciform = Cruciform Skrell Eyes
+
+marking-RMCMouthSkrellPout = Pout Mouth
+marking-RMCMouthSkrellWide = Wide Mouth
 
 marking-RMCHeaddressSkrellFestive = Festive Headdress (Colorable)
 marking-RMCHeaddressSkrellGold = Headdress (Colorable)
@@ -62,7 +67,7 @@ marking-RMCHairSkrellMidBun-skrell_mid_bun = Primary
 marking-RMCHairSkrellMidBun-skrell_mid_bun_hairtie = Hairtie
 marking-RMCHairSkrellLongMidBun-skrell_long_mid_bun = Primary
 marking-RMCHairSkrellLongMidBun-skrell_mid_bun_hairtie = Hairtie
-marking-RMCHairSkrellLooseBraid-skrell_loose_braid = Primary 
+marking-RMCHairSkrellLooseBraid-skrell_loose_braid = Primary
 marking-RMCHairSkrellMullet-skrell_mullet = Primary
 marking-RMCHairSkrellShortTuux-skrell_short_tuux = Primary
 marking-RMCHairSkrellLongTuux-skrell_long_tuux = Primary
@@ -76,6 +81,11 @@ marking-RMCSpotsSkrellHairRight-spots-hair-right = Spots
 marking-RMCSpotsSkrellHairTiny-spots-hair-tiny = Spots
 
 marking-RMCEyesSkrellAxiori-skr-axiori-eyes = Eye
+marking-RMCEyesSkrellAbyssal-skr-abyssal-eyes = Eye
+marking-RMCEyesSkrellCruciform-skr-t-eyes = Eye
+
+marking-RMCMouthSkrellPout-skr-pout-mouth = Mouth
+marking-RMCMouthSkrellWide-skr-wide-mouth = Mouth
 
 marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_s = Headdress
 marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_gem_s = Gem

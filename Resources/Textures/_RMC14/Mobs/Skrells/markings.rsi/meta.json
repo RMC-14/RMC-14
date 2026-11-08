@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/5bcd1c9fb33c6360600bedbc42a8e3c914f04fc4/icons/mob/human_races/species/skrell/markings.dmi, spots-hair-tiny by Monotheonist, skr-axiori-eyes from Aurorastation at https://github.com/Aurorastation/Aurora.3/blob/7b43de3eaffdd9682d4cb072dea5525df6ce5a04/icons/mob/human_races/markings.dmi, recolored by Monotheonist",
+  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/5bcd1c9fb33c6360600bedbc42a8e3c914f04fc4/icons/mob/human_races/species/skrell/markings.dmi, spots-hair-tiny by Monotheonist, skr-axiori-eyes from Aurorastation at https://github.com/Aurorastation/Aurora.3/blob/7b43de3eaffdd9682d4cb072dea5525df6ce5a04/icons/mob/human_races/markings.dmi, recolored by Monotheonist, abyssal/t eyes and pout/wide mouths by SharkSnake98 on GitHub",
   "size": {
     "x": 32,
     "y": 32
@@ -29,6 +29,22 @@
     },
     {
       "name": "spots-hair-left",
+      "directions": 4
+    },
+    {
+      "name": "skr-abyssal-eyes",
+      "directions": 4
+    },
+    {
+      "name": "skr-t-eyes",
+      "directions": 4
+    },
+    {
+      "name": "skr-pout-mouth",
+      "directions": 4
+    },
+    {
+      "name": "skr-wide-mouth",
       "directions": 4
     }
   ]
