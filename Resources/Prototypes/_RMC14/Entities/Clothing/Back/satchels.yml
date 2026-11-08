@@ -1379,6 +1379,22 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
 
 - type: entity
+  parent: RMCSatchelMARSOC
+  id: RMCSatchelMARSOCFilled
+  name: UNMC SOF combat pack
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive # TODO RMC14 M40/2 HEDP grenade
+      amount: 3
+    - id: RMCGrenadeWhitePhosphorusCompound
+      amount: 3
+    - id: RMCMotionDetector
+    # TODO RMC14 cermaic plate
+    - id: RMCVisorNightVision # TODO RMC14 add removeable visior to helmet and remove this
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelRoyalMOLS
   name: L1 pattern MOLS day pack

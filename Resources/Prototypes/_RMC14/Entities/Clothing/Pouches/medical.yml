@@ -81,8 +81,8 @@
     contents:
     - id: CMHealthAnalyzer
     - id: CMTraumaKit10
-      amount: 2
-    - id: CMBurnKit10
+    - id: CMUpgradedTraumaKit10
+    - id: CMUpgradedBurnKit10
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     - id: CMEmergencyAutoInjector
