@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMCommand
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-combat
   name: department-CMCommand
   description: cm-department-Command-description
   color: "#334E6D"

@@ -1,0 +1,14 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:ui="clr-namespace:Content.Client.Options.UI"
+              Orientation="Vertical">
+    <ui:OptionDropDown Name="ModeDropDown" Title="{Loc 'rmc-ui-options-announcements-style'}"/>
+    <ui:OptionSlider Name="MaxVisibleSlider" Title="{Loc 'rmc-ui-options-announcements-max-visible'}"/>
+    <Label Text="{Loc 'rmc-ui-options-announcements-style-per-announcement'}" StyleClasses="LabelKeyText"/>
+    <BoxContainer Name="GroupsContainer" Orientation="Vertical"/>
+    <Label Text="{Loc 'rmc-ui-options-announcements-layout'}" StyleClasses="LabelKeyText"/>
+    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+        <Button Name="EditLayoutButton" Text="{Loc 'rmc-ui-options-announcements-layout-open-editor'}"/>
+        <Button Name="ResetLayoutButton" Text="{Loc 'rmc-ui-options-announcements-layout-reset-all'}"/>
+    </BoxContainer>
+    <RichTextLabel Name="LayoutSummaryLabel"/>
+</BoxContainer>

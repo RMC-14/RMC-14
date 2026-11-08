@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Rules;
@@ -76,11 +77,12 @@ public sealed partial class CMDistressSignalRuleSystem
         rule.ScuttleTotalReactors = CountMappedScuttleReactors();
 
         _alertLevelSystem.Set(RMCAlertLevels.Delta, null, true, false);
+        var unlockedText = Loc.GetString("rmc-distress-signal-scuttle-unlocked");
         _marineAnnounce.AnnounceARESStaging(
             default,
-            Loc.GetString("rmc-distress-signal-scuttle-unlocked"),
-            announcement: "rmc-announcement-ares-command");
-        _marineAnnounce.AnnounceAlertLevel(_alertLevelSystem.EnsureAlertAnnouncementPreset(RMCAlertLevels.Delta), Loc.GetString("rmc-announcement-delta"));
+            unlockedText,
+            announcement: "rmc-announcement-ares-command",
+            overlay: new RMCAnnouncementOverlay(_alertLevelSystem.GetOverlay(RMCAlertLevels.Delta), unlockedText));
     }
 
     private void StartScuttleFinalSequence(CMDistressSignalRuleComponent rule)

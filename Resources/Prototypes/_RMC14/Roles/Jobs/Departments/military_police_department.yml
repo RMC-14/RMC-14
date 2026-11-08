@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMMilitaryPolice
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-security
   name: department-CMMilitaryPolice
   description: cm-department-MilitaryPolice-description
   color: "#DE3A3A"

@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Content.Client.UserInterface.Controls;
+﻿using Content.Client.UserInterface.Controls;
 
 namespace Content.Client.UserInterface.Systems.Inventory.Controls;
 
@@ -22,10 +21,5 @@ public sealed class ItemSlotButtonContainer : ItemSlotUIContainer<SlotControl>
     public ItemSlotButtonContainer()
     {
         _inventoryController = UserInterfaceManager.GetUIController<InventoryUIController>();
-    }
-
-    internal Vector2 GetExpandedDesiredSize(Vector2 availableSize)
-    {
-        return ChildCount == 0 ? Vector2.Zero : base.MeasureOverride(availableSize);
     }
 }

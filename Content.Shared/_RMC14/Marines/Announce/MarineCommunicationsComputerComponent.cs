@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+﻿using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -37,7 +38,7 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
     public bool CanInitiateEvac;
 
     [DataField]
-    public bool SendAnnouncementOverlay = true;
+    public EntProtoId<RMCAnnouncementPresetComponent>? AnnouncementOverlay = "RMCAnnouncementMarineCommand";
 
     [DataField, AutoNetworkedField]
     public string? AnnounceName;

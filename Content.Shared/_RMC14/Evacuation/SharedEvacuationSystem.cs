@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Explosion;
@@ -33,6 +34,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -59,6 +61,8 @@ public abstract class SharedEvacuationSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+
+    private static readonly EntProtoId<RMCAnnouncementPresetComponent> EvacuationOverlay = "RMCAnnouncementAlertLevel";
 
     private EntityQuery<AreaComponent> _areaQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -502,12 +506,13 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
         if (progress.Enabled)
         {
+            var startText = Loc.GetString("rmc-evacuation-started");
             _marineAnnounce.AnnounceARESStaging(
                 null,
-                Loc.GetString("rmc-evacuation-started"),
-                startSound
+                startText,
+                startSound,
+                overlay: new RMCAnnouncementOverlay(EvacuationOverlay, startText)
             );
-            _marineAnnounce.AnnounceAlertLevel("MarineAlertLevel", Loc.GetString("rmc-evacuation-started"));
             var ev = new EvacuationEnabledEvent();
             RaiseLocalEvent(map.Value, ref ev, true);
         }

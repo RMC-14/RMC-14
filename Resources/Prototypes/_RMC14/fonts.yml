@@ -1,0 +1,7 @@
+- type: font
+  id: Cozette
+  path: /Fonts/Cozette/CozetteVector.ttf
+
+- type: font
+  id: CozetteBold
+  path: /Fonts/Cozette/CozetteVectorBold.ttf

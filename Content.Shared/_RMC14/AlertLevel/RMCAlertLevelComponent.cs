@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Announce;
+﻿using Content.Shared._RMC14.Announce;
 using Content.Shared.Radio;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -53,27 +53,15 @@ public sealed partial class RMCAlertLevelComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<RadioChannelPrototype> RadioChannel = "MarineCommon";
 
-    [DataField, AutoNetworkedField]
-    public ProtoId<AnnouncementPresetPrototype> GreenAnnouncementPreset = "MarineAlertGreen";
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent> GreenOverlay = "RMCAnnouncementAlertGreen";
 
-    [DataField, AutoNetworkedField]
-    public ProtoId<AnnouncementPresetPrototype> BlueAnnouncementPreset = "MarineAlertBlue";
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent> BlueOverlay = "RMCAnnouncementAlertBlue";
 
-    [DataField, AutoNetworkedField]
-    public ProtoId<AnnouncementPresetPrototype> RedAnnouncementPreset = "MarineAlertRed";
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent> RedOverlay = "RMCAnnouncementAlertRed";
 
-    [DataField, AutoNetworkedField]
-    public ProtoId<AnnouncementPresetPrototype> DeltaAnnouncementPreset = "MarineAlertDelta";
-
-    public ProtoId<AnnouncementPresetPrototype> GetAnnouncementPreset(RMCAlertLevels level)
-    {
-        return level switch
-        {
-            RMCAlertLevels.Green => GreenAnnouncementPreset,
-            RMCAlertLevels.Blue => BlueAnnouncementPreset,
-            RMCAlertLevels.Red => RedAnnouncementPreset,
-            RMCAlertLevels.Delta => DeltaAnnouncementPreset,
-            _ => GreenAnnouncementPreset,
-        };
-    }
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent> DeltaOverlay = "RMCAnnouncementAlertDelta";
 }

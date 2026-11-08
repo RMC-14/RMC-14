@@ -1,6 +1,7 @@
 <Control xmlns="https://spacestation14.io"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         xmlns:ui="clr-namespace:Content.Client.Options.UI">
+         xmlns:ui="clr-namespace:Content.Client.Options.UI"
+         xmlns:announce="clr-namespace:Content.Client._RMC14.Announce">
     <BoxContainer Orientation="Vertical">
         <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
             <BoxContainer Orientation="Vertical" Margin="8">
@@ -8,17 +9,9 @@
                         StyleClasses="LabelKeyText"/>
                 <CheckBox Name="RMCChatSquadColorModeCheckBox" Text="{Loc 'rmc-ui-options-chat-squad-color-mode'}" />
                 <CheckBox Name="RMCUseAlternateSpritesCheckBox" Text="{Loc 'rmc-ui-options-alternate-sprites'}" />
-                <ui:OptionSlider Name="AnnouncementMaxVisibleSlider" Title="{Loc 'rmc-ui-options-announcements-max-visible'}" />
-                <Label Name="AnnouncementPresetOverridesLabel" Text="{Loc 'rmc-ui-options-announcements-style-per-announcement'}"
-                        StyleClasses="LabelKeyText"/>
-                <BoxContainer Name="AnnouncementPresetOverridesContainer" Orientation="Vertical" />
-                <Label Text="{Loc 'rmc-ui-options-announcements-layout'}"
-                       StyleClasses="LabelKeyText"/>
-                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
-                    <Button Name="AnnouncementLayoutEditorButton" Text="{Loc 'rmc-ui-options-announcements-layout-open-editor'}" />
-                    <Button Name="AnnouncementLayoutResetButton" Text="{Loc 'rmc-ui-options-announcements-layout-reset-all'}" />
-                </BoxContainer>
-                <RichTextLabel Name="AnnouncementLayoutSummaryLabel" />
+                <!-- RMC14 -->
+                <announce:RMCAnnouncementOptions Name="RMCAnnouncementOptions" />
+                <!-- RMC14 -->
                 <Label Text="{Loc 'ui-options-accessability-header-visuals'}"
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="ReducedMotionCheckBox" Text="{Loc 'ui-options-reduced-motion'}" />

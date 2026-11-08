@@ -1,0 +1,179 @@
+- type: entity
+  abstract: true
+  id: RMCAnnouncementBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCAnnouncementPreset
+
+- type: entity
+  abstract: true
+  parent: RMCAnnouncementBase
+  id: RMCAnnouncementMarineBase
+  components:
+  - type: RMCAnnouncementPreset
+    position: TopLeft
+    scale: 2
+    textColor: "#A8D6FF"
+    accentColor: "#4A9EFF"
+    portraitBackgroundColor: "#0A1A2D"
+    portraitShader: RMCMarineAnnouncementGrid
+    fontSize: 16
+    titleFontSize: 18
+    animation: !type:TypewriterAnimationConfig
+      printSpeed: 0.025
+
+- type: entity
+  parent: RMCAnnouncementMarineBase
+  id: RMCAnnouncementMarineCommand
+  name: Marine Command
+  components:
+  - type: RMCAnnouncementPreset
+    template: Portrait
+    showSpeakerName: true
+    priority: 9
+    interruptible: false
+    crt: RMCAnnouncementCRT
+    title: rmc-announcement-title-command
+
+- type: entity
+  parent: RMCAnnouncementMarineCommand
+  id: RMCAnnouncementMarineCommandNoPortrait
+  name: Marine Command
+  components:
+  - type: RMCAnnouncementPreset
+    template: Banner
+    showSpeakerName: false
+    settingsGroup: RMCAnnouncementMarineCommand
+    showInLayoutEditor: false
+
+- type: entity
+  parent: RMCAnnouncementBase
+  id: RMCAnnouncementOverwatch
+  name: Marine Overwatch
+  components:
+  - type: RMCAnnouncementPreset
+    position: TopLeft
+    scale: 2
+    accentColor: "#4A9EFF"
+    fontSize: 16
+    titleFontSize: 18
+    priority: 8
+    interruptible: false
+    title: rmc-announcement-title-overwatch
+    animation: !type:TypewriterAnimationConfig
+      printSpeed: 0.025
+
+- type: entity
+  abstract: true
+  parent: RMCAnnouncementBase
+  id: RMCAnnouncementAlertBase
+  components:
+  - type: RMCAnnouncementPreset
+    position: TopLeft
+    scale: 1.25
+    fontSize: 18
+    titleFontSize: 24
+    decalScale: 2
+    priority: 8
+    settingsGroup: RMCAnnouncementAlertLevel
+    animation: !type:TypewriterAnimationConfig
+      printSpeed: 0.025
+
+- type: entity
+  parent: RMCAnnouncementAlertBase
+  id: RMCAnnouncementAlertLevel
+  name: Alert Levels
+  components:
+  - type: RMCAnnouncementPreset
+    textColor: "#C43232"
+    accentColor: "#8B0000"
+    title: rmc-announcement-title-alert-level
+    decal:
+      sprite: _RMC14/Structures/Machines/status_display.rsi
+      state: evac
+
+- type: entity
+  parent: RMCAnnouncementAlertBase
+  id: RMCAnnouncementAlertGreen
+  name: Green Alert
+  components:
+  - type: RMCAnnouncementPreset
+    accentColor: "#7CFC00"
+    title: rmc-announcement-title-alert-level-green
+
+- type: entity
+  parent: RMCAnnouncementAlertBase
+  id: RMCAnnouncementAlertBlue
+  name: Blue Alert
+  components:
+  - type: RMCAnnouncementPreset
+    accentColor: "#1E90FF"
+    title: rmc-announcement-title-alert-level-blue
+    decal:
+      sprite: _RMC14/Structures/Machines/status_display.rsi
+      state: bluealert
+
+- type: entity
+  parent: RMCAnnouncementAlertBase
+  id: RMCAnnouncementAlertRed
+  name: Red Alert
+  components:
+  - type: RMCAnnouncementPreset
+    accentColor: "#FF0000"
+    title: rmc-announcement-title-alert-level-red
+    decal:
+      sprite: _RMC14/Structures/Machines/status_display.rsi
+      state: redalert
+
+- type: entity
+  parent: RMCAnnouncementAlertBase
+  id: RMCAnnouncementAlertDelta
+  name: Delta Alert
+  components:
+  - type: RMCAnnouncementPreset
+    textColor: "#C43232"
+    accentColor: "#8B0000"
+    title: rmc-announcement-title-alert-level-delta
+    decal:
+      sprite: _RMC14/Structures/Machines/status_display.rsi
+      state: evac
+
+- type: entity
+  parent: RMCAnnouncementBase
+  id: RMCAnnouncementXenoQueen
+  name: Queen
+  components:
+  - type: RMCAnnouncementPreset
+    position: TopCenter
+    scale: 1.5
+    showSpeakerName: true
+    textColor: "#F1E6FF"
+    accentColor: "#9D67FF"
+    fontSize: 20
+    titleFontSize: 30
+    maxWidth: 640
+    priority: 8
+    interruptible: false
+    title: rmc-announcement-title-queen
+    animation: !type:TypewriterAnimationConfig
+      printSpeed: 0.018
+
+- type: entity
+  parent: RMCAnnouncementBase
+  id: RMCAnnouncementFirstDeployment
+  name: First Deployment
+  components:
+  - type: RMCAnnouncementPreset
+    template: TitleCard
+    position: BottomLeft
+    scale: 1.5
+    standalone: true
+    textColor: "#FFFFFF"
+    accentColor: "#FFFFFF"
+    fontSize: 20
+    titleFontSize: 20
+    maxWidth: 720
+    maxRevealTime: 12
+    hold: 3
+    animation: !type:TypewriterAnimationConfig
+      printSpeed: 0.1

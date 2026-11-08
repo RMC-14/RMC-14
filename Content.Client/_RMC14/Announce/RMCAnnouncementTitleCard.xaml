@@ -1,0 +1,7 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              Orientation="Vertical"
+              SeparationOverride="4"
+              MouseFilter="Ignore">
+    <RichTextLabel Name="TitleLabel" Visible="False" MouseFilter="Ignore"/>
+    <RichTextLabel Name="BodyLabel" MouseFilter="Ignore"/>
+</BoxContainer>

@@ -1,7 +1,6 @@
 light_mode unshaded;
 
 uniform highp vec2 size;
-uniform highp float elapsed;
 uniform highp vec4 effects;
 uniform highp vec4 scanline;
 uniform highp vec4 scanlineAnimation;
@@ -9,7 +8,7 @@ uniform highp vec4 scanlineColor;
 uniform highp vec4 glitchColor;
 uniform highp float glitchChance;
 uniform highp vec4 noise;
-uniform highp float noiseSeed;
+uniform highp float noiseUpdateFrequency;
 uniform highp vec4 staticSize;
 uniform highp vec2 staticEffect;
 uniform highp vec4 vignette;
@@ -21,6 +20,7 @@ uniform highp vec2 chromaticAnimation;
 uniform highp vec4 flicker;
 uniform highp vec4 flickerColor;
 uniform highp vec4 glowColor;
+uniform highp float glowBrightness;
 
 highp float randomValue(highp vec2 point)
 {
@@ -48,7 +48,10 @@ void fragment()
 {
     highp vec2 pixel = UV * size;
     highp vec4 effect = vec4(0.0);
+    highp float elapsed = TIME;
     highp float frame = floor(elapsed * 60.0);
+    highp float noiseSeed = floor(elapsed / max(0.001, noiseUpdateFrequency));
+    highp float scanlineOffset = mod(elapsed * scanline.z * 60.0, scanline.x);
 
     if (effects.x > 0.0)
     {
@@ -95,7 +98,7 @@ void fragment()
 
     if (effects.z > 0.0)
     {
-        highp float lineY = floor((pixel.y + scanline.z) / scanline.x) * scanline.x - scanline.z;
+        highp float lineY = floor((pixel.y + scanlineOffset) / scanline.x) * scanline.x - scanlineOffset;
         highp float wave = sin(lineY / size.y * 3.14159265 * scanlineAnimation.x + elapsed * 0.5) * scanlineAnimation.y;
         if (lineY >= 0.0 && pixel.y - lineY < scanline.y &&
             pixel.x >= max(0.0, wave) && pixel.x < min(size.x, size.x + wave))
@@ -134,7 +137,7 @@ void fragment()
     if (sin(elapsed * 5.0) * 0.5 + 0.5 > flicker.x && randomValue(vec2(frame, 41.0)) < flicker.y)
         effect = compositeOver(effect, vec4(flickerColor.rgb, flicker.z));
     if (randomValue(vec2(frame, 42.0)) < flicker.w)
-        effect = compositeOver(effect, vec4(glowColor.rgb, randomValue(vec2(frame, 43.0)) * glowColor.a));
+        effect = compositeOver(effect, vec4(glowColor.rgb, randomValue(vec2(frame, 43.0)) * glowBrightness));
 
     COLOR = zTexture(UV) * effect;
 }

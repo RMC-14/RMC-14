@@ -6,3 +6,4 @@
   - type: GameRule
     minPlayers: 1
   - type: CMDistressSignalRule
+  - type: RMCFirstDeployment

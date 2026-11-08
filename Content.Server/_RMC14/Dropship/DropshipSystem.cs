@@ -9,6 +9,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
@@ -507,8 +508,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 Audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
                 var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
-                _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
-                _marineAnnounce.AnnounceAlertLevel(_alertLevel.EnsureAlertAnnouncementPreset(RMCAlertLevels.Red), marineText);
+                _marineAnnounce.AnnounceARESStaging(
+                    dropshipId.Value,
+                    marineText,
+                    dropship.MarineHijackSound,
+                    new LocId("rmc-announcement-dropship-message"),
+                    new RMCAnnouncementOverlay(_alertLevel.GetOverlay(RMCAlertLevels.Red), marineText));
 
                 var generalQuartersText = Loc.GetString("rmc-announcement-general-quarters");
                 Timer.Spawn(TimeSpan.FromSeconds(10), () =>
@@ -825,8 +830,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 Dirty(uid, dropship);
 
                 var crashAnnouncement = Loc.GetString("rmc-announcement-emergency-dropship-crash");
-                _marineAnnounce.AnnounceToMarines(crashAnnouncement, dropship.CrashWarningSound);
-                _marineAnnounce.AnnounceAlertLevel(_alertLevel.EnsureAlertAnnouncementPreset(RMCAlertLevels.Delta), crashAnnouncement);
+                _marineAnnounce.AnnounceToMarines(
+                    crashAnnouncement,
+                    dropship.CrashWarningSound,
+                    overlay: new RMCAnnouncementOverlay(_alertLevel.GetOverlay(RMCAlertLevels.Delta), crashAnnouncement));
                 continue;
             }
 

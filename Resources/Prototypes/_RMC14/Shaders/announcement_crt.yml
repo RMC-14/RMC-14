@@ -2,3 +2,24 @@
   id: RMCAnnouncementCRT
   kind: source
   path: "/Textures/_RMC14/Shaders/announcement_crt.swsl"
+  params:
+    effects: 1, 1, 1, 0
+    scanline: 3, 2, 60, 0.8
+    scanlineAnimation: 3, 1.5, 0.5, 2
+    scanlineColor: "#000000"
+    glitchColor: "#00FF0026"
+    glitchChance: 0.02
+    noise: 0.5, 0.4, 0.5, 2
+    noiseUpdateFrequency: 0.08
+    staticSize: 1, 3, 3, 11
+    staticEffect: 0.09, 0.3
+    vignette: 0.15, 0.12, 1.5, 0.1
+    vignetteEdges: 0.7, 0.6
+    vignetteColor: "#000000"
+    chromatic: 2, 2, 6, 0.3
+    chromaticCount: 5
+    chromaticAnimation: 0.3, 2
+    flicker: 0.9, 0.05, 0.02, 0.01
+    flickerColor: "#FFFFFF"
+    glowColor: "#FFFFFF"
+    glowBrightness: 0.05

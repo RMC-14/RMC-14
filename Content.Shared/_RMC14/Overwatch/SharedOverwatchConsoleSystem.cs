@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
@@ -84,10 +85,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
-    private readonly Dictionary<EntityUid, TimeSpan> _nextSquadAnnouncement = new();
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
-    private static readonly TimeSpan SquadAnnouncementCooldown = TimeSpan.FromSeconds(8);
 
     public override void Initialize()
     {
@@ -106,7 +105,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSquadEvent>(OnTransferMarineSquad);
-        SubscribeLocalEvent<SquadTeamComponent, ComponentShutdown>(OnSquadShutdown);
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
@@ -152,25 +150,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             console.HasOrbital = hasOrbital;
             Dirty(uid, console);
         }
-    }
-
-    private void OnSquadShutdown(Entity<SquadTeamComponent> squad, ref ComponentShutdown args)
-    {
-        _nextSquadAnnouncement.Remove(squad.Owner);
-    }
-
-    protected bool TryStartSquadAnnouncementCooldown(EntityUid squad, TimeSpan time, out int remainingSeconds)
-    {
-        if (_nextSquadAnnouncement.TryGetValue(squad, out var nextAnnouncement) &&
-            time < nextAnnouncement)
-        {
-            remainingSeconds = Math.Max(1, (int) Math.Ceiling((nextAnnouncement - time).TotalSeconds));
-            return false;
-        }
-
-        _nextSquadAnnouncement[squad] = time + SquadAnnouncementCooldown;
-        remainingSeconds = 0;
-        return true;
     }
 
     private void OnOrbitalCannonLaunch(ref OrbitalCannonLaunchEvent ev)
@@ -581,17 +560,17 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         }
 
         if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
-            Prototype(squad.Value) is not { } squadProto)
+            Prototype(squad.Value) is not { } squadProto ||
+            !TryComp(squad.Value, out SquadTeamComponent? squadTeam))
         {
             SendOverwatchMessageResult(ent, args.Actor, false);
             return;
         }
 
-        var time = _timing.CurTime;
-        if (!TryStartSquadAnnouncementCooldown(squad.Value, time, out var remaining))
+        if (!_squad.TryStartAnnouncementCooldown((squad.Value, squadTeam), out var remaining))
         {
             _popup.PopupCursor(
-                Loc.GetString("rmc-overwatch-console-announcement-cooldown", ("seconds", remaining)),
+                Loc.GetString("rmc-overwatch-console-announcement-cooldown", ("seconds", (int) Math.Ceiling(remaining.TotalSeconds))),
                 args.Actor,
                 PopupType.SmallCaution);
             SendOverwatchMessageResult(ent, args.Actor, false);
@@ -601,19 +580,22 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad message: {args.Message}");
         _core.CreateARESLog(ent, LogCat, (string) $"{Name(args.Actor)} sent a squad announcement: {args.Message}");
 
-        if (TryComp(squad.Value, out SquadTeamComponent? squadComp))
-        {
-            _marineAnnounce.AnnounceOverwatchSquad(args.Actor, message, squad.Value);
-        }
-        else
-        {
-            _marineAnnounce.AnnounceSquad(
-                Loc.GetString("rmc-overwatch-console-announce-message",
-                    ("color", "#3C70FF"),
-                    ("operatorName", Name(args.Actor)),
-                    ("message", message)),
-                squadProto.ID);
-        }
+        var squadColor = squadTeam.AccessibleColor ?? squadTeam.Color;
+        var chatMessage = Loc.GetString("rmc-overwatch-console-announce-message",
+            ("color", squadColor.ToHex()),
+            ("operatorName", Name(args.Actor)),
+            ("message", message));
+
+        RMCAnnouncementOverlay? overlay = ent.Comp.AnnouncementOverlay is { } preset
+            ? new RMCAnnouncementOverlay(
+                preset,
+                FormattedMessage.EscapeText(message),
+                args.Actor,
+                Title: Loc.GetString("rmc-announcement-title-overwatch-squad", ("squad", Name(squad.Value).ToUpperInvariant())),
+                Accent: squadColor)
+            : null;
+
+        _marineAnnounce.AnnounceSquad(chatMessage, squad.Value, overlay: overlay);
 
         var coordinates = TransformSystem.GetMapCoordinates(ent);
         var players = Filter.Empty().AddInRange(coordinates, 12, Player, EntityManager);

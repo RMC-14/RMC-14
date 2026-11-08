@@ -68,7 +68,7 @@
       enum.DialogUiKey.Key:
         type: DialogBui
   - type: MarineCommunicationsComputer
-    sendAnnouncementOverlay: false
+    announcementOverlay: null
   - type: OverwatchConsole
     canMessageSquad: false
   - type: TacticalMapComputer
