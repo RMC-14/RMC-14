@@ -136,7 +136,7 @@
     id: CMIDCardColonistDoctor
     ears: CMHeadsetColony
     mask: CMMaskCoif
-    outerClothing: RMCCoatSnowSurvivorNavy
+    outerClothing: RMCCoatSnowSurvivorGreen
     head: RMCHeadUshanka
   storage:
     back:
