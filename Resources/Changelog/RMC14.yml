@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vexerot
-  changes:
-  - message: Echo and Foxtrot SLs can now track the XO / CO.
-    type: Fix
-  id: 3236
-  time: '2026-05-31T01:39:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9887
 - author: JustMyselfUwU
   changes:
   - message: Fixed the firerate of guns with an inactive bipod attached being too
@@ -4528,5 +4521,12 @@
   id: 3735
   time: '2026-11-06T23:26:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10932
+- author: Thereisabear
+  changes:
+  - message: Added new and redesigned playtime icons for xenonids made by thefairykings.
+    type: Add
+  id: 3736
+  time: '2026-11-08T11:46:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11068
 Name: RMC14
 Order: -1
