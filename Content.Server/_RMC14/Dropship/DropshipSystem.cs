@@ -165,11 +165,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             int xenoCount = 0;
             string dropshipName = string.Empty;
-            var dropship = EnsureComp<DropshipComponent>(_dropshipId);
             var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
             while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
             {
-                if (xform.GridUid == _dropshipId && mobState.CurrentState != MobState.Dead)
+                if (xform.GridUid == ent && mobState.CurrentState != MobState.Dead)
                 {
                     xenoCount++;
                     if (string.IsNullOrEmpty(dropshipName) && _area.TryGetArea(uid, out _, out var areaProto))
@@ -179,11 +178,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
             if (xenoCount > 0)
             {
-                _alertLevelSystem.Set(RMCAlertLevels.Red, _dropshipId, false, false);
+                _alertLevelSystem.Set(RMCAlertLevels.Red, ent, false, false);
                 _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
                     ("name", dropshipName),
                     ("count", xenoCount)),
-                    dropship.UnidentifledlifesignsSound);
+                    ent.Comp.UnidentifledlifesignsSound);
             }
         }
 
