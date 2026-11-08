@@ -83,8 +83,12 @@ rmc-xeno-evolution-raffle-won = The hive has chosen us!
 rmc-xeno-evolution-raffle-grace-health = A slot has opened for us, but we must be at full health! We have {$seconds} seconds.
 rmc-xeno-evolution-raffle-grace-location = A slot has opened for us, but we cannot evolve here! We have {$seconds} seconds.
 rmc-xeno-evolution-raffle-grace-weeds = A slot has opened for us, but we must be on weeds! We have {$seconds} seconds.
-rmc-xeno-evolution-raffle-missed = We were not ready in time and lost our place in the raffle.
-rmc-xeno-evolution-raffle-blocked-lower = A slot has opened for us, but the hive already has too many Tier {$tier} and higher sisters — one must fall or a Tier {$tier} slot open before we can ascend directly.
+rmc-xeno-evolution-raffle-missed = We were not ready in time. The hive passes over us for this slot, but we remain in the raffle.
+rmc-xeno-evolution-raffle-out-of-line = That caste is no longer within our evolution line. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-left-changed = Our new form cannot become that caste. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-left-closed = The hive has made its choice without us. We must evolve the usual way.
+rmc-xeno-evolution-raffle-left-crit = We are too wounded to be chosen. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-progress = {$name} - {$progress}/{$cost}
 rmc-xeno-evolution-tab-evolve = Evolve
 rmc-xeno-evolution-tab-raffle = Raffle
 
@@ -254,10 +258,9 @@ rmc-xeno-retrieve-anchored = That sister cannot move!
 rmc-xeno-retrieve-too-big = {$target} is too big to retrieve while standing up!
 rmc-xeno-retrieve-dead = {$target} is already dead!
 rmc-xeno-retrieve-blocked = We can't reach {$target} with our resin retrieval hook!
-rmc-xeno-retrieve-start-self = We prepare to fire our resin retrieval hook at {$target}!
-rmc-xeno-retrieve-start-others = {$user} prepares to fire its resin retrieval hook at {$target}!
-rmc-xeno-retrieve-finish-user = We fling {$target} over our head with our resin hook!
-rmc-xeno-retrieve-finish-target = We are pulled toward {$user}!
+rmc-xeno-retrieve-finish-self = We fling {$target} over our head with our resin hook!
+rmc-xeno-retrieve-finish-target = We are pulled over {$user}'s head!
+rmc-xeno-retrieve-finish-others = {$target} is pulled over {$user}'s head!
 
 # Aid
 rmc-xeno-aid-self = We cannot heal ourself!

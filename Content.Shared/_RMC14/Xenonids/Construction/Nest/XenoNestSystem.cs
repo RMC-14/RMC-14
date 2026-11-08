@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -22,6 +23,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Maps;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
@@ -32,6 +34,7 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Verbs;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -47,6 +50,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGhostSystem _ghost = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly OccluderSystem _occluder = default!;
@@ -61,6 +65,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
     private EntityQuery<OccluderComponent> _occluderQuery;
@@ -90,6 +95,8 @@ public sealed class XenoNestSystem : EntitySystem
 
         SubscribeLocalEvent<XenoNestComponent, ComponentRemove>(OnNestRemove);
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
+        SubscribeLocalEvent<XenoNestComponent, GetVerbsEvent<InteractionVerb>>(OnNestGetVerbs);
+        SubscribeLocalEvent<XenoNestComponent, XenoUnnestDoAfterEvent>(OnUnnestDoAfter);
 
         SubscribeLocalEvent<XenoNestableComponent, BeforeRangedInteractEvent>(OnNestableBeforeRangedInteract);
         SubscribeLocalEvent<XenoNestableComponent, ShouldHandleVirtualItemInteractEvent>(OnNestableShouldHandle);
@@ -143,6 +150,64 @@ public sealed class XenoNestSystem : EntitySystem
         DetachNested(ent, ent.Comp.Nested);
     }
 
+    private void OnNestGetVerbs(Entity<XenoNestComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        if (ent.Comp.Nested is null)
+            return;
+
+        if (!HasComp<XenoComponent>(args.User) || !_hive.FromSameHive(ent.Owner, args.User))
+            return;
+
+        var user = args.User;
+        var nest = ent.Owner;
+        args.Verbs.Add(new InteractionVerb
+        {
+            Text = Loc.GetString("rmc-xeno-nest-unnest-verb"),
+            Act = () => TryStartUnnest(user, nest),
+        });
+    }
+
+    public bool TryStartUnnest(EntityUid user, Entity<XenoNestComponent?> nest)
+    {
+        if (!Resolve(nest, ref nest.Comp, false) || nest.Comp.Nested is not { } nested)
+            return false;
+
+        var ev = new XenoUnnestDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, nest.Comp.UnnestDelay, ev, nest.Owner, nest.Owner)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var message = Loc.GetString("rmc-xeno-nest-unnest-start", ("target", Identity.Name(nested, EntityManager, user)));
+            _popup.PopupClient(message, user, user);
+        }
+
+        return true;
+    }
+
+    private void OnUnnestDoAfter(Entity<XenoNestComponent> ent, ref XenoUnnestDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (ent.Comp.Nested is not { } nested)
+            return;
+
+        args.Handled = true;
+
+        if (_net.IsClient)
+            return;
+
+        DetachNested(ent.Owner, nested);
+        _adminLog.Add(LogType.RMCXenoNest, $"{ToPrettyString(args.User):user} released {ToPrettyString(nested):victim} from nest {ToPrettyString(ent.Owner):nest}");
+    }
+
     private void OnNestableBeforeRangedInteract(Entity<XenoNestableComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (!args.CanReach || !TryComp(args.Target, out XenoNestSurfaceComponent? surface))
@@ -178,9 +243,12 @@ public sealed class XenoNestSystem : EntitySystem
             _standing.Down(ent, changeCollision: true);
 
         if (ent.Comp.GhostedId is { } id &&
+            !_unrevivable.IsUnrevivable(ent) &&
             _player.TryGetSessionById(id, out var player) &&
             player.AttachedEntity is { } ghost &&
-            HasComp<GhostComponent>(ghost))
+            HasComp<GhostComponent>(ghost) &&
+            _mind.TryGetMind(player, out _, out var mind) &&
+            mind.OwnedEntity == ghost)
         {
             _rmcChat.ChatMessageToOne("\n[font size=24][color=red]You have been freed from your nest and may go back to your body![/color][/font]\n", ghost);
 
@@ -188,7 +256,7 @@ public sealed class XenoNestSystem : EntitySystem
             returnTo.Target = ent;
             Dirty(ghost, returnTo);
 
-            _ghost.SetCanReturnToBody(ghost, true);
+            _ghost.SetCanReturnToBody((ghost, null), true);
         }
     }
 

@@ -74,6 +74,7 @@
   id: RMCJobSPPSectionLeadPVEGear
   equipment:
     id: RMCIDSPP
+    ears: RMCHeadsetSPPLeaderPVE
 
 - type: playTimeTracker
   id: RMCJobSPPSectionLeadPVE
