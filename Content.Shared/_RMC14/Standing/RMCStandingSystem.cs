@@ -30,7 +30,7 @@ public sealed class RMCStandingSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
-    private readonly HashSet<EntityUid> _rotationResync = new();
+    private readonly List<EntityUid> _rotationResync = new();
 
     public override void Initialize()
     {
@@ -224,11 +224,11 @@ public sealed class RMCStandingSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (_rotationResync.Count == 0)
-            return;
-
-        foreach (var uid in _rotationResync)
+        for (var i = _rotationResync.Count - 1; i >= 0; i--)
         {
+            var uid = _rotationResync[i];
+            _rotationResync.RemoveAt(i);
+
             if (!TryComp(uid, out StandingStateComponent? standing))
                 continue;
 
@@ -238,7 +238,5 @@ public sealed class RMCStandingSystem : EntitySystem
 
             _appearance.SetData(uid, RotationVisuals.RotationState, target);
         }
-
-        _rotationResync.Clear();
     }
 }
