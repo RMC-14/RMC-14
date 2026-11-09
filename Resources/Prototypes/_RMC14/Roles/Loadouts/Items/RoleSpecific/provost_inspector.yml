@@ -60,9 +60,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobProvostInspector
-      time: 540000 # 150 hrs
-  dummyEntity: RMCWeaponPistolHandcannonProvost
-  equipment:
+      time: 540000 # 120 hrs
     belt: RMCBeltHolsterPistolHandcannonProvostFilled
       time: 432000 # 120 hrs
   equipment:
