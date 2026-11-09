@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
@@ -38,10 +38,10 @@ public sealed partial class CMDistressSignalRuleSystem
     }
 
     /// <summary>
-    /// Handles the start of a dropship hijack: destroys xeno structures on the planet,
+    /// Handles the launch of a dropship hijack: destroys xeno structures on the planet,
     /// evacuates living xenos to the dropship, and calculates xeno surge based on marine weights.
     /// </summary>
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
+    private void OnDropshipHijackLaunched(ref DropshipHijackLaunchedEvent ev)
     {
         var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
         while (hiveStructures.MoveNext(out var id, out _, out var xform))
