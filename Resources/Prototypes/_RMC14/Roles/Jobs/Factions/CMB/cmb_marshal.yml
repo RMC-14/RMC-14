@@ -10,6 +10,7 @@
   startingGear: RMCGearBureauMarshal
   icon: "RMCJobIconBureauMarshal"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - ShipMasterAccess
   special:
@@ -34,6 +35,7 @@
         RMCSkillConstruction: 2
         RMCSkillLeadership: 3
         RMCSkillOverwatch: 1
+        RMCSkillMedical: 2
         RMCSkillEngineer: 1
         RMCSkillFireman: 5
         RMCSkillFirearms: 2
@@ -105,6 +107,7 @@
     suitstorage: RMCWeaponShotgunM3717
   storage:
     back:
+    - RMCHandheldDistressBeaconCMB
     - RMCUniversalRecorder
 
 - type: playTimeTracker

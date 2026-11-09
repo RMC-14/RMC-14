@@ -41,6 +41,62 @@
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/almayer_solid.rsi
 
 - type: entity
+  parent: RMCDoubleDoorAlmayerSolid
+  id: RMCShuttleExternalSideDoubleDoor
+  suffix: Shuttle, External Side
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+    reserved: true
+    landingClasses: [ external_side ]
+    landingTags: [ mainship, ert, external_side ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalSide ]
+    searchRadius: 5
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalSide
+
+- type: entity
+  parent: RMCDoubleDoorAlmayerSolid
+  id: RMCShuttleExternalHangarDoubleDoor
+  suffix: Shuttle, External Hangar
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
+    searchRadius: 8
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalHangar
+
+- type: entity
   parent: RMCDoubleDoorBase
   id: RMCDoubleDoorCommandGlass
   suffix: Almayer, Glass
@@ -129,6 +185,40 @@
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/personal_solid.rsi
   - type: Occluder
     boundingBox: "-0.5,-0.5,0.5,1.5"
+
+- type: entity
+  parent: RMCDoubleDoorPersonalSolid
+  id: RMCShuttleMobileDockDoubleDoorBase
+  abstract: true
+  components:
+  - type: Airlock
+    powered: true
+  - type: AccessReader
+    access: [["CMAccessERT"]]
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCShuttleMobileDock
+
+- type: entity
+  parent: RMCShuttleMobileDockDoubleDoorBase
+  id: RMCShuttleInternalDoubleDoor
+  suffix: Shuttle, Internal, Mobile Dock
+
+- type: entity
+  parent: RMCShuttleMobileDockDoubleDoorBase
+  id: RMCShuttleExternalSideMobileDockDoubleDoor
+  suffix: Shuttle, External Side, Mobile Dock
+
+- type: entity
+  parent: RMCShuttleMobileDockDoubleDoorBase
+  id: RMCShuttleExternalHangarMobileDockDoubleDoor
+  suffix: Shuttle, External Hangar, Mobile Dock
 
 - type: entity
   parent: RMCDoubleDoorBase

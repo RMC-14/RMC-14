@@ -1,0 +1,69 @@
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorEngineer
+  access: [ CMAccessERT ]
+  name: rmc-job-name-contractor-engineer
+  playTimeTracker: RMCJobContractorEngineer
+  startingGear: RMCGearContractorEngineer
+  spawnMenuRoleName: VAI Contractor Engineering Specialist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - VAI
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-contractor-standard
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorEngineer
+  name: contractor ghost role engineer
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorEngineer
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorEngineer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-engineer
+    job: RMCContractorEngineer
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorEngineer
+  equipment:
+    jumpsuit: RMCJumpsuitFreelancer
+    eyes: ClothingEyesGlassesMeson
+    back: RMCSatchelWelderPMC
+    belt: CMBeltUtilityCombatFilled
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchConstructionFillFull
+    suitstorage: WeaponRifleMAR40
+  storage:
+    back:
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    - RMCExplosivePlastic
+    - CMSheetMetal50
+    - CMSheetPlasteel30
+    - RMCMotionDetector
+    - CMCrowbar
+
+- type: playTimeTracker
+  id: RMCJobContractorEngineer

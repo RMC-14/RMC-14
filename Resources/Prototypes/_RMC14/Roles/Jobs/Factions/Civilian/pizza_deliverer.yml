@@ -10,6 +10,7 @@
   startingGear: RMCGearPizzaDeliveryBoy
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - CMPizzaDeliverer
   special:
