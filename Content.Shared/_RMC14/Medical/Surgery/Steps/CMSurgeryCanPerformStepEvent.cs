@@ -10,5 +10,5 @@ public record struct CMSurgeryCanPerformStepEvent(
     SlotFlags TargetSlots,
     string? Popup = null,
     StepInvalidReason Invalid = StepInvalidReason.None,
-    HashSet<EntityUid>? ValidTools = null
+    List<EntityUid>? ValidTools = null
 ) : IInventoryRelayEvent;

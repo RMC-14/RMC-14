@@ -1,8 +1,11 @@
 using System.Globalization;
+using System.Numerics;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client.Atmos.Rotting;
 using Content.Client.Message;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared.Body.Part;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Medical.HUD;
@@ -17,8 +20,11 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Temperature;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Graphics.RSI;
+using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -29,6 +35,7 @@ public sealed class HealthScannerUiData
 {
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     private HealthScannerWindow? _holocardWindow;
     private NetEntity _lastTarget;
@@ -75,18 +82,15 @@ public sealed class HealthScannerUiData
 
         window.PatientLabel.Text = Loc.GetString("rmc-health-analyzer-patient", ("name", Identity.Name(target, _entities, _player.LocalEntity)));
 
-        if (!_entities.TryGetComponent(target, out DamageableComponent? damageable))
-            return;
+        AddGroup(uiState.Damage, uiState.Wounds, uiState.WoundTypes, window.BruteLabel, Color.FromHex("#DF3E3E"), BruteGroup, Loc.GetString("rmc-health-analyzer-brute"));
+        AddGroup(uiState.Damage, uiState.Wounds, uiState.WoundTypes, window.BurnLabel, Color.FromHex("#FFB833"), BurnGroup, Loc.GetString("rmc-health-analyzer-burn"));
+        AddGroup(uiState.Damage, uiState.Wounds, uiState.WoundTypes, window.ToxinLabel, Color.FromHex("#25CA4C"), ToxinGroup, Loc.GetString("rmc-health-analyzer-toxin"));
+        AddGroup(uiState.Damage, uiState.Wounds, uiState.WoundTypes, window.OxygenLabel, Color.FromHex("#2E93DE"), AirlossGroup, Loc.GetString("rmc-health-analyzer-oxygen"));
 
-        var ent = new Entity<DamageableComponent>(target, damageable);
-        AddGroup(ent, window.BruteLabel, Color.FromHex("#DF3E3E"), BruteGroup, Loc.GetString("rmc-health-analyzer-brute"));
-        AddGroup(ent, window.BurnLabel, Color.FromHex("#FFB833"), BurnGroup, Loc.GetString("rmc-health-analyzer-burn"));
-        AddGroup(ent, window.ToxinLabel, Color.FromHex("#25CA4C"), ToxinGroup, Loc.GetString("rmc-health-analyzer-toxin"));
-        AddGroup(ent, window.OxygenLabel, Color.FromHex("#2E93DE"), AirlossGroup, Loc.GetString("rmc-health-analyzer-oxygen"));
-        if (damageable.DamagePerGroup.GetValueOrDefault(GeneticGroup) > 0)
+        if (uiState.Damage.DamageDict.GetValueOrDefault(GeneticGroup) > 0)
         {
             window.CloneBox.Visible = true;
-            AddGroup(ent, window.CloneLabel, Color.FromHex("#02c9c0"), GeneticGroup, Loc.GetString("rmc-health-analyzer-clone"));
+            AddGroup(uiState.Damage, uiState.Wounds, uiState.WoundTypes, window.CloneLabel, Color.FromHex("#02c9c0"), GeneticGroup, Loc.GetString("rmc-health-analyzer-clone"));
         }
         else
         {
@@ -97,7 +101,7 @@ public sealed class HealthScannerUiData
 
         if (_mobThresholds.TryGetIncapThreshold(target, out var threshold))
         {
-            var damage = threshold.Value - damageable.TotalDamage;
+            var damage = threshold.Value - uiState.Damage.GetTotal();
             window.HealthBar.MinValue = 0;
             window.HealthBar.MaxValue = 100;
 
@@ -241,7 +245,7 @@ public sealed class HealthScannerUiData
         {
             window.MedicalAdviceLabel.Visible = true;
             window.MedicalAdviceSeparator.Visible = true;
-            MedicalAdvice(ent, uiState, window);
+            MedicalAdvice(target, uiState, window);
             if (window.AdviceContainer.ChildCount == 0)
             {
                 window.MedicalAdviceLabel.Visible = false;
@@ -261,16 +265,16 @@ public sealed class HealthScannerUiData
             _entities.EntityNetManager.SendSystemNetworkMessage(new OpenHolocardFromScanEvent(target));
     }
 
-    private void AddGroup(Entity<DamageableComponent> damageable, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string labelStr)
+    private void AddGroup(DamageSpecifier damageSpec, List<Wound> wounds, Dictionary<ProtoId<DamageGroupPrototype>, WoundType> woundTypes, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string labelStr)
     {
         var msg = new FormattedMessage();
         msg.AddText($"{labelStr}: ");
         msg.PushColor(color);
 
-        var damage = damageable.Comp.DamagePerGroup.GetValueOrDefault(group)
+        var damage = damageSpec.GetDamagePerGroup(_protoManager).GetValueOrDefault(group)
             .Int()
             .ToString(CultureInfo.InvariantCulture);
-        msg.AddText(_wounds.HasUntreated(damageable.Owner, group)
+        msg.AddText(_wounds.HasUntreated(wounds, woundTypes, group)
             ? $"{{{damage}}}"
             : $"{damage}");
 
@@ -278,27 +282,26 @@ public sealed class HealthScannerUiData
         label.SetMessage(msg);
     }
 
-    private void MedicalAdvice(Entity<DamageableComponent> target, HealthScanState uiState, HealthScannerWindow window)
+    private void MedicalAdvice(EntityUid target, HealthScanState uiState, HealthScannerWindow window)
     {
-        _entities.TryGetComponent(target, out WoundedComponent? wounds);
         var hasBruteWounds = false;
         var hasBurnWounds = false;
 
-        if (wounds != null && _wounds.HasUntreated((target, wounds), wounds.BruteWoundGroup))
+        if (_wounds.HasUntreated(uiState.Wounds, uiState.WoundTypes, BruteGroup))
             hasBruteWounds = true;
 
-        if (wounds != null && _wounds.HasUntreated((target, wounds), wounds.BurnWoundGroup))
+        if (_wounds.HasUntreated(uiState.Wounds, uiState.WoundTypes, BurnGroup))
             hasBurnWounds = true;
 
         if (_player.LocalEntity is not { } viewer)
             return;
 
         // Defibrillation related
-        if (_mob.IsDead(target))
+        if (uiState.State == Shared.Mobs.MobState.Dead)
         {
             if (_mobThresholds.TryGetDeadThreshold(target, out var deadThreshold))
             {
-                if (deadThreshold + 30 < target.Comp.Damage.GetTotal() &&
+                if (deadThreshold + 30 < uiState.Damage.GetTotal() &&
                     uiState.Chemicals != null &&
                     !uiState.Chemicals.ContainsReagent("CMEpinephrine", null))
                 {
@@ -307,9 +310,9 @@ public sealed class HealthScannerUiData
                 else
                 {
                     var defib = string.Empty;
-                    if (deadThreshold - 20 <= target.Comp.Damage.GetTotal() && wounds != null && !hasBruteWounds && !hasBurnWounds)
+                    if (deadThreshold - 20 <= uiState.Damage.GetTotal() && !hasBruteWounds && !hasBurnWounds)
                         defib = Loc.GetString("rmc-health-analyzer-advice-defib-repeated");
-                    else if (deadThreshold > target.Comp.Damage.GetTotal())
+                    else if (deadThreshold > uiState.Damage.GetTotal())
                         defib = Loc.GetString("rmc-health-analyzer-advice-defib");
 
                     if (defib != string.Empty && !_skills.HasAllSkills(viewer, _defibSkill))
@@ -333,7 +336,28 @@ public sealed class HealthScannerUiData
             AddAdvice(larvaSurgery, window);
         }
 
-        // TODO RMC14 more surgery advice
+        if (uiState.EmbeddedObjectInBodyParts is { Count: > 0 })
+        {
+            foreach (var embeddedEntry in uiState.EmbeddedObjectInBodyParts)
+            {
+                AddAdvice(
+                    Loc.GetString("health-analyzer-window-entity-embedded-text", ("bodyPart", GetBodyPartName(embeddedEntry.BodyPart, embeddedEntry.Symmetry))),
+                    window,
+                    "XenoBoneChipsProjectile");
+            }
+        }
+
+        if (uiState.InternalBleeds is { Count: > 0 })
+        {
+            foreach (var internalBleed in uiState.InternalBleeds)
+            {
+                AddAdvice(
+                    Loc.GetString(
+                        "health-analyzer-window-entity-internal-bleeding-text",
+                        ("bodyPart", GetBodyPartName(internalBleed.BodyPart, internalBleed.Symmetry))),
+                    window);
+            }
+        }
 
         // Wound related
         if (hasBruteWounds)
@@ -361,13 +385,13 @@ public sealed class HealthScannerUiData
         // TODO RMC14 Pain related medical advice
 
         // Damage related
-        var brute = target.Comp.DamagePerGroup.GetValueOrDefault(BruteGroup);
-        var burn = target.Comp.DamagePerGroup.GetValueOrDefault(BurnGroup);
-        var toxin = target.Comp.DamagePerGroup.GetValueOrDefault(ToxinGroup);
-        var airloss = target.Comp.DamagePerGroup.GetValueOrDefault(AirlossGroup);
-        var genetic = target.Comp.DamagePerGroup.GetValueOrDefault(GeneticGroup);
+        var brute = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(BruteGroup);
+        var burn = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(BurnGroup);
+        var toxin = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(ToxinGroup);
+        var airloss = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(AirlossGroup);
+        var genetic = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(GeneticGroup);
 
-        if (airloss > 0 && !_mob.IsDead(target))
+        if (airloss > 0 && uiState.State != Shared.Mobs.MobState.Dead)
         {
             if (airloss > 10 && _mob.IsCritical(target))
                 AddAdvice(Loc.GetString("rmc-health-analyzer-advice-cpr-crit"), window);
@@ -379,7 +403,7 @@ public sealed class HealthScannerUiData
         if (brute > 30 &&
             uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMBicaridine", null) &&
-            !_mob.IsDead(target))
+            uiState.State != Shared.Mobs.MobState.Dead)
         {
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-bicaridine"), window);
         }
@@ -387,7 +411,7 @@ public sealed class HealthScannerUiData
         if (burn > 30 &&
             uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMKelotane", null) &&
-            !_mob.IsDead(target))
+            uiState.State != Shared.Mobs.MobState.Dead)
         {
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-kelotane"), window);
         }
@@ -396,7 +420,7 @@ public sealed class HealthScannerUiData
             uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMDylovene", null) &&
             !uiState.Chemicals.ContainsReagent("Inaprovaline", null) &&
-            !_mob.IsDead(target))
+            uiState.State != Shared.Mobs.MobState.Dead)
         {
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-dylovene"), window);
         }
@@ -404,10 +428,60 @@ public sealed class HealthScannerUiData
         // TODO RMC14 Clone damage advice
     }
 
-    private static void AddAdvice(string text, HealthScannerWindow window)
+    private void AddAdvice(string text, HealthScannerWindow window, string? iconPrototypeId = null)
     {
-        var label = new RichTextLabel();
+        var row = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            Margin = new Thickness(0, 2),
+        };
+
+        if (iconPrototypeId != null && IoCManager.Resolve<IPrototypeManager>().TryIndex(iconPrototypeId, out EntityPrototype? proto))
+        {
+            var iconRect = new TextureRect
+            {
+                Texture = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>().GetPrototypeIcon(proto).GetFrame(RsiDirection.South, 0),
+                Stretch = TextureRect.StretchMode.KeepAspectCentered,
+                MinSize = new Vector2(18, 18),
+                Margin = new Thickness(0, 0, 6, 0),
+            };
+            row.AddChild(iconRect);
+        }
+
+        var label = new RichTextLabel { MinSize = new Vector2(0, 18) };
         label.SetMarkupPermissive(text);
-        window.AdviceContainer.AddChild(label);
+        row.AddChild(label);
+
+        window.AdviceContainer.AddChild(row);
+    }
+
+    private static string GetBodyPartName(BodyPartType bodyPart, BodyPartSymmetry symmetry = BodyPartSymmetry.None)
+    {
+        var baseName = bodyPart switch
+        {
+            BodyPartType.Other => "Other",
+            BodyPartType.Torso => "Torso",
+            BodyPartType.Head => "Head",
+            BodyPartType.Arm => "Arm",
+            BodyPartType.Hand => "Hand",
+            BodyPartType.Leg => "Leg",
+            BodyPartType.Foot => "Foot",
+            BodyPartType.Tail => "Tail",
+            _ => bodyPart.ToString(),
+        };
+
+        if (bodyPart is BodyPartType.Arm or BodyPartType.Hand or BodyPartType.Leg or BodyPartType.Foot && symmetry != BodyPartSymmetry.None)
+        {
+            var sidePrefix = symmetry switch
+            {
+                BodyPartSymmetry.Left => "Left",
+                BodyPartSymmetry.Right => "Right",
+                _ => string.Empty,
+            };
+
+            return sidePrefix == string.Empty ? baseName : $"{sidePrefix} {baseName}";
+        }
+
+        return baseName;
     }
 }

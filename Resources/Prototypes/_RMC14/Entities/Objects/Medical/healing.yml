@@ -165,6 +165,10 @@
   - type: Tag
     tags:
     - CMSurgicalLine
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: FixOVein
+      quality: Substitute
   - type: Sprite
     state: line_brute
   - type: Item

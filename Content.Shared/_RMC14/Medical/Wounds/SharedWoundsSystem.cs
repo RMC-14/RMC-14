@@ -1,9 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.DoAfter;
+using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Body.Part;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -21,6 +26,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -28,6 +34,8 @@ namespace Content.Shared._RMC14.Medical.Wounds;
 
 public abstract class SharedWoundsSystem : EntitySystem
 {
+    private static readonly EntProtoId<SkillDefinitionComponent> EnduranceSkill = "RMCSkillEndurance";
+
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -39,6 +47,8 @@ public abstract class SharedWoundsSystem : EntitySystem
     [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStackSystem _stacks = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private float _bloodlossMultiplier = 1;
@@ -85,9 +95,93 @@ public abstract class SharedWoundsSystem : EntitySystem
 
         if (args.DamageIncreased)
         {
-            TryAddWound(ent, ent.Comp.BruteWoundGroup, args.DamageDelta, WoundType.Brute);
-            TryAddWound(ent, ent.Comp.BurnWoundGroup, args.DamageDelta, WoundType.Burn);
+            foreach (var woundGroup in ent.Comp.WoundGroups)
+            {
+                TryAddWound(ent, woundGroup.Key, args.DamageDelta, woundGroup.Value);
+
+                if (woundGroup.Value != WoundType.Brute ||
+                    !_net.IsServer ||
+                    args.Origin is null ||
+                    HasComp<WoundableUntreatableComponent>(ent) ||
+                    !_prototypes.TryIndex(woundGroup.Key, out var bruteGroup) ||
+                    !args.DamageDelta.TryGetDamageInGroup(bruteGroup, out var bruteDamage) ||
+                    bruteDamage <= FixedPoint2.New(10) ||
+                    !_random.Prob(GetInternalBleedingChance(ent, bruteDamage)))
+                    continue;
+
+                TryAddInternalBleeding(ent);
+            }
+
+            // TODO: Add fracture-movement injuries here once fracture mechanics are implemented.
         }
+    }
+
+    private float GetInternalBleedingChance(EntityUid body, FixedPoint2 bruteDamage)
+    {
+        var endurance = _skills.GetSkill(body, EnduranceSkill);
+        var baseChance = Math.Clamp(bruteDamage.Float() * (2f / 3f) / 100f, 0f, 1f);
+        return baseChance * MathF.Pow(0.91f, endurance);
+    }
+
+    public bool TryAddInternalBleeding(
+        EntityUid body,
+        BodyPartType? bodyPart = null,
+        BodyPartSymmetry? symmetry = null)
+    {
+        if (!HasComp<BloodstreamComponent>(body))
+            return false;
+
+        var candidates = _body.GetBodyChildren(body)
+            .Where(part => part.Component.PartType is not (BodyPartType.Other or BodyPartType.Tail or BodyPartType.Hand or BodyPartType.Foot))
+            .Where(part => bodyPart == null || part.Component.PartType == bodyPart)
+            .Where(part => symmetry == null || part.Component.Symmetry == symmetry)
+            .ToArray();
+
+        if (candidates.Length == 0)
+            return false;
+
+        var selected = candidates[_random.Next(candidates.Length)].Component;
+        var wounded = EnsureComp<WoundedComponent>(body);
+        var index = wounded.InternalBleeds.FindIndex(entry =>
+            entry.BodyPart == selected.PartType && entry.Symmetry == selected.Symmetry);
+
+        if (index >= 0)
+        {
+            var existing = wounded.InternalBleeds[index];
+            wounded.InternalBleeds[index] = existing with { Severity = Math.Min(existing.Severity + 1, 3) };
+        }
+        else
+        {
+            wounded.InternalBleeds.Add(new InternalBleedingEntry(selected.PartType, selected.Symmetry, 1));
+        }
+
+        Dirty(body, wounded);
+        return true;
+    }
+
+    public bool TryRepairInternalBleeding(EntityUid body, BodyPartType bodyPart, BodyPartSymmetry symmetry)
+    {
+        if (!TryComp(body, out WoundedComponent? wounded))
+            return false;
+
+        var index = wounded.InternalBleeds.FindIndex(entry =>
+            entry.BodyPart == bodyPart && entry.Symmetry == symmetry);
+
+        if (index < 0)
+            return false;
+
+        wounded.InternalBleeds.RemoveAt(index);
+        Dirty(body, wounded);
+
+        if (wounded.Wounds.Count == 0 && wounded.InternalBleeds.Count == 0)
+            RemCompDeferred<WoundedComponent>(body);
+
+        return true;
+    }
+
+    protected float GetInternalBleedingRate(InternalBleedingEntry entry)
+    {
+        return entry.Severity * 0.5f * _bloodlossMultiplier;
     }
 
     private void OnWoundableBleed(Entity<WoundableComponent> ent, ref CMBleedEvent args)
@@ -260,6 +354,14 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (!TryComp(target, out wounded) ||
             wounded.Wounds.Count == 0)
         {
+            if (wounded is { InternalBleeds.Count: > 0 })
+            {
+                if (doPopups)
+                    _popup.PopupClient(Loc.GetString("cm-wounds-internal-bleeding"), target, user, PopupType.SmallCaution);
+
+                return false;
+            }
+
             if (user == target)
             {
                 if (doPopups && treater.Comp.NoneSelfPopup is { } selfPopup)
@@ -337,6 +439,8 @@ public abstract class SharedWoundsSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("cm-wounds-open-cut", ("target", targetName), ("treater", treater.Owner)), target, user, PopupType.SmallCaution);
             else if (otherUntreated)
                 _popup.PopupClient(Loc.GetString("cm-wounds-cannot-treat", ("treater", treater.Owner)), target, user, PopupType.SmallCaution);
+            else if (wounded.InternalBleeds.Count > 0)
+                _popup.PopupClient(Loc.GetString("cm-wounds-internal-bleeding"), target, user, PopupType.SmallCaution);
             else
                 _popup.PopupClient(Loc.GetString("cm-wounds-already-treated", ("target", target)), target, user);
         }
@@ -419,8 +523,10 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (comp.Wounds.Count == 0)
             return;
 
-        HealOrRemove((uid, damageable, comp), comp.BruteWoundGroup, WoundType.Brute, damage, limit);
-        HealOrRemove((uid, damageable, comp), comp.BurnWoundGroup, WoundType.Burn, damage, limit);
+        foreach (var woundGroup in comp.WoundGroups)
+        {
+            HealOrRemove((uid, damageable, comp), woundGroup.Key, woundGroup.Value, damage, limit);
+        }
     }
 
     private void HealOrRemove(Entity<DamageableComponent, WoundedComponent> wounded,
@@ -513,8 +619,7 @@ public abstract class SharedWoundsSystem : EntitySystem
             }
         }
 
-        wounded.BruteWoundGroup = woundable.Comp.BruteWoundGroup;
-        wounded.BurnWoundGroup = woundable.Comp.BurnWoundGroup;
+        wounded.WoundGroups = woundable.Comp.WoundGroups;
 
         TimeSpan? newDuration = duration == TimeSpan.MaxValue ? null : time + duration;
         wounded.Wounds.Add(new Wound(total, FixedPoint2.Zero, bloodloss, newDuration, type, false));
@@ -542,13 +647,10 @@ public abstract class SharedWoundsSystem : EntitySystem
             return false;
         }
 
-        WoundType type;
-        if (group == wounded.Comp.BruteWoundGroup)
-            type = WoundType.Brute;
-        else if (group == wounded.Comp.BurnWoundGroup)
-            type = WoundType.Burn;
-        else
+        if (!wounded.Comp.WoundGroups.ContainsKey(group))
             return false;
+
+        WoundType type = wounded.Comp.WoundGroups[group];
 
         var wounds = CollectionsMarshal.AsSpan(wounded.Comp.Wounds);
         foreach (ref var wound in wounds)
@@ -558,5 +660,27 @@ public abstract class SharedWoundsSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public bool HasUntreated(List<Wound> woundsList, Dictionary<ProtoId<DamageGroupPrototype>, WoundType> woundTypes, ProtoId<DamageGroupPrototype> group)
+    {
+        if (woundsList.Count == 0)
+            return false;
+
+        if (!woundTypes.ContainsKey(group))
+            return false;
+
+        var type = woundTypes[group];
+
+        var wounds = CollectionsMarshal.AsSpan(woundsList);
+
+        foreach (ref var wound in wounds)
+        {
+            if (wound.Type == type && !wound.Treated)
+                return true;
+        }
+
+        return false;
+
     }
 }

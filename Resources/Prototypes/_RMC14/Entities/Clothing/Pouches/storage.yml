@@ -406,8 +406,6 @@
     - state: closed
       map: [ "fullLayer" ]
   - type: CMItemSlots
-    cooldown: 1
-    cooldownPopup: You need to wait before taking another flare!
     count: 16
     slot:
       name: Flare
