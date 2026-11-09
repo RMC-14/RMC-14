@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMSquad
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-combat
   name: department-CMSquad
   description: cm-department-Marine-description
   color: "#DE3A3A"

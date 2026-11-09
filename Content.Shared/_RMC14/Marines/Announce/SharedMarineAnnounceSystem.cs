@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
@@ -31,8 +32,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRankSystem _rankSystem = default!;
@@ -51,6 +52,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadReasonEvent>(OnEchoSquadReason);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadConfirmEvent>(OnEchoSquadConfirm);
 
@@ -79,8 +82,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         _dialog.OpenConfirmation(
             ent,
             user.Value,
-            "Confirm Activation",
-            $"Confirm activation of Echo Squad for {args.Message}",
+            Loc.GetString("rmc-announcement-echo-confirm-title"),
+            Loc.GetString("rmc-announcement-echo-confirm-message", ("message", args.Message)),
             ev
         );
     }
@@ -127,7 +130,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (text.Length > CharacterLimit)
             text = text[..CharacterLimit].Trim();
 
-        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName);
+        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName, overlay: ent.Comp.AnnouncementOverlay);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
@@ -147,14 +150,14 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
             return;
 
         var ev = new EchoSquadReasonEvent(GetNetEntity(args.Actor));
-        _dialog.OpenInput(ent, args.Actor, "What is the purpose of Echo Squad?", ev);
+        _dialog.OpenInput(ent, args.Actor, Loc.GetString("rmc-announcement-echo-reason-title"), ev);
     }
 
     private void OnMarineCommunicationsOverwatchMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsOverwatchMsg args)
     {
         if (!_skills.HasSkill(args.Actor, ent.Comp.OverwatchSkill, ent.Comp.OverwatchSkillLevel))
         {
-            _popup.PopupClient("You are not trained in overwatch!", args.Actor, PopupType.LargeCaution);
+            _popup.PopupClient(Loc.GetString("rmc-announcement-overwatch-untrained"), args.Actor, PopupType.LargeCaution);
             return;
         }
 
@@ -180,7 +183,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         EntityUid? source,
         string message,
         SoundSpecifier? sound = null,
-        LocId? announcement = null)
+        LocId? announcement = null,
+        RMCAnnouncementOverlay? overlay = null)
     {
     }
 
@@ -202,7 +206,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceSquad(
         string message,
         EntityUid squad,
-        SoundSpecifier? sound = null)
+        SoundSpecifier? sound = null,
+        RMCAnnouncementOverlay? overlay = null)
     {
     }
 
@@ -222,7 +227,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceToMarines(
         string message,
         SoundSpecifier? sound = null,
-        Filter? filter = null)
+        Filter? filter = null,
+        RMCAnnouncementOverlay? overlay = null)
     {
     }
 
@@ -254,23 +260,32 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         string? author = null,
         string? name = null,
         SoundSpecifier? sound = null,
-        Filter? filter = null)
+        Filter? filter = null,
+        EntProtoId<RMCAnnouncementPresetComponent>? overlay = null)
     {
         if (_net.IsClient)
             return;
 
-        author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
+        var overlayName = name;
+        author ??= Loc.GetString("rmc-announcement-author");
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
-        AnnounceToMarines(wrappedMessage, sound, filter);
+        RMCAnnouncementOverlay? announcementOverlay = overlay is { } preset
+            ? new RMCAnnouncementOverlay(preset, FormattedMessage.EscapeText(message), sender, overlayName)
+            : null;
+
+        AnnounceToMarines(wrappedMessage, sound, filter, announcementOverlay);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
 
-        if (_idCard.TryFindIdCard(sender, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF))
-            foreach (var faction in idCardIFF.Factions)
+        if (_idCard.TryFindIdCard(sender, out var idCard) &&
+            TryComp(idCard, out ItemIFFComponent? idCardIff))
+        {
+            foreach (var faction in idCardIff.Factions)
             {
-                _core.CreateARESLog(faction, LogCat, (string)$"{Name(sender)} sent an announcement: {message}");
+                _core.CreateARESLog(faction, LogCat, $"{Name(sender)} sent an announcement: {message}");
             }
+        }
     }
 
     public string FormatHighCommand(string? author, string message)

@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.ARES;
+﻿using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Doors;
 using Content.Shared._RMC14.Dropship;
@@ -22,6 +23,7 @@ namespace Content.Shared._RMC14.AlertLevel;
 public sealed class RMCAlertLevelSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly RMCAnnouncementOverlaySystem _announcementOverlay = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -68,6 +70,18 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         var uid = Spawn();
         var comp = EnsureComp<RMCAlertLevelComponent>(uid);
         return (uid, comp);
+    }
+
+    public EntProtoId<RMCAnnouncementPresetComponent> GetOverlay(RMCAlertLevels level)
+    {
+        var alert = EnsureAlertLevel();
+        return level switch
+        {
+            RMCAlertLevels.Blue => alert.Comp.BlueOverlay,
+            RMCAlertLevels.Red => alert.Comp.RedOverlay,
+            RMCAlertLevels.Delta => alert.Comp.DeltaOverlay,
+            _ => alert.Comp.GreenOverlay,
+        };
     }
 
     public RMCAlertLevels? Get()
@@ -144,12 +158,20 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         {
             if (announcement != null)
             {
-                _marineAnnounce.AnnounceToMarines(Loc.GetString(announcement));
+                var text = Loc.GetString(announcement);
+                _marineAnnounce.AnnounceToMarines(text, overlay: new RMCAnnouncementOverlay(GetOverlay(level), text));
             }
             else if (message != null)
             {
                 var ares = _aresCore.EnsureMarineARES();
-                _marineAnnounce.AnnounceRadio(ares, Loc.GetString(message.Value), ent.Comp.RadioChannel);
+                var text = Loc.GetString(message.Value);
+                _marineAnnounce.AnnounceRadio(ares, text, ent.Comp.RadioChannel);
+
+                var overlayFilter = Filter.Empty()
+                    .AddPlayers(filter.Recipients)
+                    .RemoveWhereAttachedEntity(e => !HasComp<MarineComponent>(e) && !_ghostQuery.HasComp(e));
+
+                _announcementOverlay.Show(new RMCAnnouncementOverlay(GetOverlay(level), text), overlayFilter);
             }
         }
 

@@ -2,6 +2,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Radio.EntitySystems;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Dropship;
@@ -24,6 +25,7 @@ namespace Content.Server._RMC14.Marines;
 public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
+    [Dependency] private readonly RMCAnnouncementOverlaySystem _announcementOverlay = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;
@@ -31,7 +33,6 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
 
@@ -82,30 +83,29 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         }
 
         _dropship.TryDesignatePrimaryLZ(user, lz.Value);
-        _core.CreateARESLog(computer, LogCat, (string)$"{Name(args.Actor)} designated Primary LZ as: {Name(lz.Value)}");
+        _core.CreateARESLog(computer, LogCat, $"{Name(args.Actor)} designated Primary LZ as: {Name(lz.Value)}");
     }
 
     private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
     {
-        var planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var operation = _distressSignal.OperationName ?? string.Empty;
-        var landingZones = new List<LandingZone>();
+        computer.Comp.Planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        computer.Comp.Operation = _distressSignal.OperationName ?? string.Empty;
+        computer.Comp.LandingZones.Clear();
 
         foreach (var (id, metaData) in _dropship.GetPrimaryLZCandidates())
         {
-            landingZones.Add(new LandingZone(GetNetEntity(id), metaData.EntityName));
+            computer.Comp.LandingZones.Add(new LandingZone(GetNetEntity(id), metaData.EntityName));
         }
 
-        landingZones.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
-
-        var state = new MarineCommunicationsComputerBuiState(planet, operation, landingZones);
-        _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
+        computer.Comp.LandingZones.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+        Dirty(computer);
     }
 
     public override void AnnounceToMarines(
         string message,
         SoundSpecifier? sound = null,
-        Filter? filter = null)
+        Filter? filter = null,
+        RMCAnnouncementOverlay? overlay = null)
     {
         filter ??= Filter.Empty()
             .AddWhereAttachedEntity(e =>
@@ -118,6 +118,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
+        _announcementOverlay.Show(overlay, filter);
     }
 
     public override void AnnounceHighCommand(
@@ -126,7 +127,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SoundSpecifier? sound = null)
     {
         var wrappedMessage = FormatHighCommand(author, message);
-        AnnounceToMarines(wrappedMessage);
+        AnnounceToMarines(wrappedMessage, sound);
     }
 
     public override void AnnounceRadio(
@@ -144,13 +145,14 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         EntityUid? source,
         string message,
         SoundSpecifier? sound = null,
-        LocId? announcement = null)
+        LocId? announcement = null,
+        RMCAnnouncementOverlay? overlay = null)
     {
-        base.AnnounceARESStaging(source, message, sound, announcement);
+        base.AnnounceARESStaging(source, message, sound, announcement, overlay);
 
         message = FormatARESStaging(announcement, message);
 
-        AnnounceToMarines(message, sound);
+        AnnounceToMarines(message, sound, overlay: overlay);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
     }
 
@@ -164,14 +166,19 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 
-    public override void AnnounceSquad(string message, EntityUid squad, SoundSpecifier? sound = null)
+    public override void AnnounceSquad(
+        string message,
+        EntityUid squad,
+        SoundSpecifier? sound = null,
+        RMCAnnouncementOverlay? overlay = null)
     {
-        base.AnnounceSquad(message, squad, sound);
+        base.AnnounceSquad(message, squad, sound, overlay);
 
         var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+        _announcementOverlay.Show(overlay, filter);
     }
 
     public override void AnnounceSingle(string message, EntityUid receiver, SoundSpecifier? sound = null)

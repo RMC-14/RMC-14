@@ -1,6 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMVehicleCrewman
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-engineering
   name: cm-job-name-vc
   description: cm-job-description-vc
   playTimeTracker: CMJobVehicleCrewman

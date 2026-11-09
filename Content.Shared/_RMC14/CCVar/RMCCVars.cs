@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.NightVision;
 using Robust.Shared;
 using Robust.Shared.Configuration;
@@ -453,6 +454,15 @@ public sealed partial class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> RMCUseAlternateSprites =
         CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCAnnouncementMaxVisible =
+        CVarDef.Create("rmc.announcement_max_visible", 2, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<string> RMCAnnouncementOverrides =
+        CVarDef.Create("rmc.announcement_overrides", string.Empty, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<float> RMCAnnouncementPortraitGrace =
+        CVarDef.Create("rmc.announcement_portrait_grace", 60f, CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSunsetDuration =
         CVarDef.Create("rmc.lighting_sunset_duration", 280, CVar.REPLICATED | CVar.SERVER);

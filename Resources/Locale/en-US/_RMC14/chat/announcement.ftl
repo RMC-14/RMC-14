@@ -2,6 +2,33 @@ rmc-announcement-author = Command
 rmc-announcement-author-shipside = Command Ship
 rmc-announcement-author-highcommand = UNMC High Command
 rmc-announcement-author-queen-mother = The Queen Mother
+rmc-announcement-title-command = >> COMMAND <<
+rmc-announcement-title-overwatch = >> OVERWATCH <<
+rmc-announcement-title-overwatch-squad = >> {$squad} OVERWATCH <<
+rmc-announcement-title-queen = >> QUEEN <<
+rmc-announcement-title-alert-level = ALERT LEVEL
+rmc-announcement-title-alert-level-green = ALERT LEVEL: GREEN
+rmc-announcement-title-alert-level-blue = ALERT LEVEL: BLUE
+rmc-announcement-title-alert-level-red = ALERT LEVEL: RED
+rmc-announcement-title-alert-level-delta = ALERT LEVEL: DELTA
+rmc-announcement-speaker-line = — {$name}, {$job}
+rmc-announcement-speaker-line-no-job = — {$name}
+
+rmc-announcement-first-deployment-message =
+    {$time}
+    {$planet}
+    {$assignment}
+rmc-announcement-first-deployment-time = {$time} HRS, {$date}
+rmc-announcement-first-deployment-operation = Operation {$name}
+rmc-announcement-first-deployment-assignment-combat = 2nd Company "Falling Falcons"
+rmc-announcement-first-deployment-assignment-flight-crew = Flight Crew, {$warship}
+rmc-announcement-first-deployment-assignment-security = Security, {$warship}
+rmc-announcement-first-deployment-assignment-engineering = Engineering, {$warship}
+rmc-announcement-first-deployment-assignment-medical = Medical, {$warship}
+rmc-announcement-first-deployment-assignment-logistics = Logistics, {$warship}
+rmc-announcement-first-deployment-assignment-liaison = Liaison, {$warship}
+rmc-announcement-first-deployment-assignment-crew = Crew, {$warship}
+
 rmc-announcement-message = [font size=16][bold][color=#CECECE]{$author} Announcement[/color][/bold][/font][font size=16][color=red]
 
     {$message}
@@ -65,3 +92,10 @@ rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Uni
     Unidentified lifesigns ({$count}) detected onboard the dropship {$name}. Recommendation: lockdown of exterior access ports, including ducting and ventilation.[/bold][/font][/color]
 
 rmc-announcement-shipside-header = Please write a message to announce to the crew
+rmc-announcement-echo-confirm-title = Confirm Activation
+rmc-announcement-echo-confirm-message = Confirm activation of Echo Squad for {$message}
+rmc-announcement-echo-reason-title = What is the purpose of Echo Squad?
+rmc-announcement-overwatch-untrained = You are not trained in overwatch!
+rmc-announcement-evacuation-confirm = Confirm?
+rmc-announcement-evacuation-cancel = Cancel Evacuation
+rmc-announcement-evacuation-initiate = Initiate Evacuation

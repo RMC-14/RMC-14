@@ -4,11 +4,12 @@ using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 [Access(typeof(SquadSystem))]
 [EntityCategory("Squads")]
 public sealed partial class SquadTeamComponent : Component
@@ -61,6 +62,12 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField]
     public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/job_icons/UNMC/marine.rsi"), "hudsquad_leader_a");
+
+    [DataField]
+    public TimeSpan AnnouncementCooldown = TimeSpan.FromSeconds(8);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextAnnouncement;
 
     /// <summary>
     /// Squad objectives assigned to this squad. Key is the objective type, value is the objective text.

@@ -1,6 +1,7 @@
 - type: job
   parent: CMJobBase
   id: CMSeniorEnlistedAdvisor
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-combat
   name: cm-job-name-senior-enlisted-advisor
   description: cm-job-description-senior-enlisted-advisor
   playTimeTracker: CMJobSeniorEnlistedAdvisor

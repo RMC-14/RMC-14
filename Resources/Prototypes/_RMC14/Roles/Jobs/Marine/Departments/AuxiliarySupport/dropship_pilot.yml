@@ -1,6 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMPilotDropship
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-flight-crew
   name: cm-job-name-dropship-pilot
   description: cm-job-description-dropship-pilot
   playTimeTracker: CMJobPilotDropship

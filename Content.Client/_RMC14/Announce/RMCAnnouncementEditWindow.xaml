@@ -1,0 +1,107 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               Title="{Loc 'rmc-ui-options-announcements-layout-window'}"
+               MinSize="760 500"
+               SetSize="760 460">
+    <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="10">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True" SizeFlagsStretchRatio="0.55">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-preview'}" StyleClasses="LabelKeyText" />
+                    <OptionButton Name="PreviewPresetButton" Access="Public" />
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True" SizeFlagsStretchRatio="0.25">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-scale'}" StyleClasses="LabelKeyText" />
+                    <Label Name="ScaleValueLabel" Access="Public" />
+                </BoxContainer>
+            </BoxContainer>
+
+            <CheckBox Name="GlobalCheckBox" Access="Public"
+                      Text="{Loc 'rmc-ui-options-announcements-layout-target-global-check'}" />
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-position-x'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="PositionXInput" Access="Public" HorizontalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-position-y'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="PositionYInput" Access="Public" HorizontalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-scale-input'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="ScaleInput" Access="Public" HorizontalExpand="True" />
+                </BoxContainer>
+            </BoxContainer>
+
+            <Slider Name="ScaleSlider" Access="Public" HorizontalExpand="True" MinValue="0.1" MaxValue="2.5" Value="1.0" />
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-body-scale'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="BodyScaleInput" Access="Public" HorizontalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-title-scale'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="TitleScaleInput" Access="Public" HorizontalExpand="True" />
+                </BoxContainer>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <CheckBox Name="ShowAnnouncementCheckBox" Access="Public"
+                          HorizontalExpand="True"
+                          Text="{Loc 'rmc-ui-options-announcements-layout-show'}" />
+                <CheckBox Name="ShowTitleCheckBox" Access="Public"
+                          HorizontalExpand="True"
+                          Text="{Loc 'rmc-ui-options-announcements-layout-show-title'}" />
+                <CheckBox Name="ShowPortraitCheckBox" Access="Public"
+                          HorizontalExpand="True"
+                          Text="{Loc 'rmc-ui-options-announcements-layout-show-portrait'}" />
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-body-color'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="BodyColorInput" Access="Public" HorizontalExpand="True" />
+                    <ColorSelectorSliders Name="BodyColorPicker" Access="Public" IsAlphaVisible="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-title-color'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="TitleColorInput" Access="Public" HorizontalExpand="True" />
+                    <ColorSelectorSliders Name="TitleColorPicker" Access="Public" IsAlphaVisible="True" />
+                </BoxContainer>
+            </BoxContainer>
+
+            <BoxContainer Name="SpriteBoxColorRow" Access="Public" Orientation="Horizontal" SeparationOverride="8">
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-sprite-box-color'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="SpriteBoxColorInput" Access="Public" HorizontalExpand="True" />
+                    <ColorSelectorSliders Name="SpriteBoxColorPicker" Access="Public" IsAlphaVisible="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-sprite-box-border-color'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="SpriteBoxBorderColorInput" Access="Public" HorizontalExpand="True" />
+                    <ColorSelectorSliders Name="SpriteBoxBorderColorPicker" Access="Public" IsAlphaVisible="True" />
+                </BoxContainer>
+            </BoxContainer>
+
+            <BoxContainer Name="ExtraColorRow" Access="Public" Orientation="Horizontal" SeparationOverride="8">
+                <BoxContainer Name="CRTGlowColorSection" Access="Public" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-crt-glow-color'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="CRTGlowColorInput" Access="Public" HorizontalExpand="True" />
+                    <ColorSelectorSliders Name="CRTGlowColorPicker" Access="Public" IsAlphaVisible="True" />
+                </BoxContainer>
+                <BoxContainer Name="BackgroundColorSection" Access="Public" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                    <Label Text="{Loc 'rmc-ui-options-announcements-layout-background-color'}" StyleClasses="LabelKeyText" />
+                    <LineEdit Name="BackgroundColorInput" Access="Public" HorizontalExpand="True" />
+                    <ColorSelectorSliders Name="BackgroundColorPicker" Access="Public" IsAlphaVisible="True" />
+                </BoxContainer>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <Button Name="ResetTargetButton" Access="Public" Text="{Loc 'rmc-ui-options-announcements-layout-reset-target'}" />
+                <Button Name="ResetAllButton" Access="Public" Text="{Loc 'rmc-ui-options-announcements-layout-reset-all'}" />
+                <Label Name="PositionValueLabel" Access="Public" HorizontalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+    </ScrollContainer>
+</DefaultWindow>

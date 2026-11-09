@@ -1,0 +1,49 @@
+- type: shader
+  id: RMCAnnouncementCRT
+  kind: source
+  path: "/Textures/_RMC14/Shaders/announcement_crt.swsl"
+  params:
+    power: 1
+    lineSpacing: 6
+    tint: "#4A9EFF"
+    offColor: "#000000"
+    scanlineAlpha: 0.4
+    scanlineWidth: 0.45
+    vignetteStrength: 0.45
+    vignetteSize: 0.18
+    cornerRadius: 6
+    highlightAlpha: 0.1
+    bandAlpha: 0.08
+    bandPeriod: 4
+    bandHeight: 10
+    grainAlpha: 0.035
+    glowAlpha: 0.04
+    lineWidth: 0.05
+    lineGlow: 0.9
+
+- type: shader
+  id: RMCAnnouncementPortraitCRT
+  kind: source
+  path: "/Textures/_RMC14/Shaders/announcement_portrait_crt.swsl"
+  params:
+    pixelSize: 6
+    power: 1
+    tint: "#4A9EFF"
+    tintStrength: 0.25
+    scanlineStrength: 0.35
+    chromaPixels: 1.5
+    bloomStrength: 0.6
+    bloomThreshold: 0.55
+    grain: 0.04
+    flicker: 0.015
+    tearStrength: 0.08
+
+- type: shader
+  id: RMCAnnouncementHiveVignette
+  kind: source
+  path: "/Textures/_RMC14/Shaders/announcement_hive.swsl"
+  params:
+    color: "#9D67FF"
+    strength: 0.55
+    speed: 0.15
+    density: 3

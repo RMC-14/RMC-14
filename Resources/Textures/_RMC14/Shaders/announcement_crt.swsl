@@ -1,0 +1,101 @@
+light_mode unshaded;
+
+uniform highp vec2 size;
+uniform highp float power;
+uniform highp float lineSpacing;
+uniform highp vec4 tint;
+uniform highp vec4 offColor;
+uniform highp float scanlineAlpha;
+uniform highp float scanlineWidth;
+uniform highp float vignetteStrength;
+uniform highp float vignetteSize;
+uniform highp float cornerRadius;
+uniform highp float highlightAlpha;
+uniform highp float bandAlpha;
+uniform highp float bandPeriod;
+uniform highp float bandHeight;
+uniform highp float grainAlpha;
+uniform highp float glowAlpha;
+uniform highp float lineWidth;
+uniform highp float lineGlow;
+
+highp float hash(highp vec2 point)
+{
+    return fract(sin(dot(point, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+highp vec4 compositeOver(highp vec4 base, highp vec4 overlay)
+{
+    overlay.a = clamp(overlay.a, 0.0, 1.0);
+    highp float alpha = overlay.a + base.a * (1.0 - overlay.a);
+    if (alpha <= 0.0)
+        return vec4(0.0);
+
+    highp vec3 color = (overlay.rgb * overlay.a + base.rgb * base.a * (1.0 - overlay.a)) / alpha;
+    return vec4(color, alpha);
+}
+
+void fragment()
+{
+    highp vec2 pixel = UV * size;
+    highp vec4 effect = vec4(0.0);
+
+    highp vec2 halfSize = size * 0.5;
+    highp vec2 corner = abs(pixel - halfSize) - (halfSize - vec2(cornerRadius));
+    highp float edge = length(max(corner, 0.0)) + min(max(corner.x, corner.y), 0.0) - cornerRadius;
+
+    highp float vignette = 1.0 - smoothstep(0.0, vignetteSize * min(size.x, size.y), -edge);
+    effect = compositeOver(effect, vec4(0.0, 0.0, 0.0, vignette * vignette * vignetteStrength));
+
+    highp float scanline = fract(pixel.y / max(lineSpacing, 1.0));
+    highp float scanlineDark = smoothstep(0.9 - scanlineWidth, 1.1 - scanlineWidth, scanline);
+    effect = compositeOver(effect, vec4(tint.rgb, scanlineAlpha * 0.25 * (1.0 - scanlineDark)));
+    effect = compositeOver(effect, vec4(0.0, 0.0, 0.0, scanlineAlpha * scanlineDark));
+
+    effect = compositeOver(effect, vec4(tint.rgb, glowAlpha));
+
+    highp float bandPosition = fract(TIME / max(bandPeriod, 0.1)) * (size.y + bandHeight * 2.0) - bandHeight;
+    highp float band = 1.0 - smoothstep(0.0, max(bandHeight, 1.0), abs(pixel.y - bandPosition));
+    effect = compositeOver(effect, vec4(tint.rgb, band * bandAlpha));
+
+    highp float highlight = clamp(1.0 - (UV.x + UV.y) * 1.4, 0.0, 1.0);
+    effect = compositeOver(effect, vec4(1.0, 1.0, 1.0, highlight * highlight * highlightAlpha));
+
+    effect = compositeOver(effect, vec4(vec3(hash(pixel + vec2(TIME * 37.0, TIME * 11.0))), grainAlpha));
+
+    if (edge > 0.0)
+        effect = vec4(offColor.rgb, 1.0);
+
+    highp vec3 lineColor = mix(tint.rgb, vec3(1.0), 0.9);
+    highp float lineHalf = max(2.0, lineWidth * halfSize.y);
+    highp float haloSize = lineHalf * 6.0;
+    if (power <= 0.0)
+    {
+        highp float squeeze = clamp((power + 0.75) / 0.75, 0.0, 1.0);
+        highp float dim = clamp((power + 1.0) / 0.25, 0.0, 1.0);
+        highp vec2 open = vec2(mix(lineHalf, halfSize.x, squeeze * squeeze), lineHalf);
+        highp float dist = length(max(abs(pixel - halfSize) - open, 0.0));
+        highp float core = 1.0 - smoothstep(0.0, lineHalf, dist);
+        highp float halo = exp(-dist / haloSize) * lineGlow;
+        effect = compositeOver(vec4(offColor.rgb, 1.0), vec4(lineColor, max(core, halo) * dim));
+    }
+    else if (power < 1.0)
+    {
+        highp float collapse = 1.0 - power;
+        highp float open = max(power * halfSize.y, lineHalf);
+        highp float fromCenter = abs(pixel.y - halfSize.y);
+        if (fromCenter > open)
+        {
+            highp float halo = exp(-(fromCenter - open) / haloSize) * lineGlow * collapse;
+            effect = compositeOver(vec4(offColor.rgb, 1.0), vec4(lineColor, halo));
+        }
+        else
+        {
+            highp float glow = collapse * (1.0 - smoothstep(0.0, open, fromCenter));
+            highp float core = collapse * (1.0 - smoothstep(0.0, lineHalf, fromCenter));
+            effect = compositeOver(effect, vec4(lineColor, max(glow, core)));
+        }
+    }
+
+    COLOR = zTexture(UV) * effect;
+}

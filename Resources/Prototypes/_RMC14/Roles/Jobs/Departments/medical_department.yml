@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMMedbay
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-medical
   name: department-CMMedbay
   description: cm-department-Medical-description
   color: "#008160"
