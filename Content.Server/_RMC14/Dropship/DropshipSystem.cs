@@ -164,16 +164,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (!ent.Comp.Crashed) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
         {
             int xenoCount = 0;
-            string dropshipName = string.Empty;
+            string dropshipName = Name(ent);
             var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
             while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
             {
                 if (xform.GridUid == ent && mobState.CurrentState != MobState.Dead)
-                {
                     xenoCount++;
-                    if (string.IsNullOrEmpty(dropshipName) && _area.TryGetArea(uid, out _, out var areaProto))
-                        dropshipName = areaProto.Name;
-                }
             }
 
             if (xenoCount > 0)
