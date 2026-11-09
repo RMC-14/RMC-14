@@ -102,7 +102,6 @@ rmc-xeno-deploy-traps-empower = We have tapped into our reserves to prepare a st
 rmc-xeno-deploy-traps-range-fail = That target is too far away!
 rmc-xeno-deploy-traps-see-fail = There's something in the way!
 
-
 # Acid Mine
 rmc-xeno-acid-mine-self = We coax a hidden mine to detonate!
 rmc-xeno-acid-mine-others = The sapper coaxes a hidden mine to detonate!
@@ -206,6 +205,7 @@ cm-xeno-plasma-transferred-to-self = {$target} has transferred {$plasma} plasma 
 cm-xeno-plasma-cannot-self = You can't transfer plasma to yourself!
 cm-xeno-plasma-other-max-zero = {CAPITALIZE(THE($target))} doesn't have any use for plasma!
 rmc-xeno-plasma-ovipositor = We can't transfer plasma to a queen mounted on her ovipositor.
+rmc-xeno-plasma-transfer-full = That xeno already has max plasma!
 
 # Watch
 cm-xeno-watch = Watch Xeno
@@ -490,5 +490,3 @@ rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE
 rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
 rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
 rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!
-
-rmc-xeno-plasma-transfer-full = That xeno already has max plasma!

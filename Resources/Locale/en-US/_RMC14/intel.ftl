@@ -77,7 +77,6 @@ rmc-intel-survivor-xeno-pull = Trying to take the {$thing} with me will only slo
 rmc-intel-survivor-corpse-pull = I can't save {$thing}, they'll only slow me down.
     I should focus on getting help first.
 
-
 ## Intel Objectives Window
 rmc-ui-intel-title = Marine Tech Tree Objectives
 rmc-ui-intel-header = [bold]Marine Tech Tree Objectives[/bold]
@@ -106,6 +105,7 @@ rmc-ui-intel-colony-status =
     }
 
 ## Tech Control Console
+rmc-intel-tech-console-title = Tech Control Console
 rmc-ui-tech-tier-header = [font size=14][bold]Tier: { $tier }[/bold][/font]
 rmc-ui-tech-points = [font size=14][bold]Points: { $points }[/bold][/font]
 rmc-ui-tech-points-value = Tech points: { $value }
@@ -159,7 +159,6 @@ rmc-intel-tech-announcement-wake-troops = Additional troops are being taken out 
 rmc-intel-tech-announcement-wake-specialist = An additional specialist is being taken out of cryo.
 rmc-intel-tech-announcement-tier-4 = THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4. LEVEL 4 assets have been authorised to handle the situation.
 rmc-intel-tech-announcement-nuclear-device = The deployment of Nuclear Ordnance has been authorized and will be delivered to the Requisitions Department via ASRS.
-rmc-intel-tech-console-title = Tech Control Console
 
 rmc-intel-detector-not-on = Turn the data detector on first.
 rmc-intel-detector-has-intel = The data detector has detected intelligence on your person.

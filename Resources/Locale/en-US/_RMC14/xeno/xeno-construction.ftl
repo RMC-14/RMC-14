@@ -19,6 +19,7 @@ rmc-xeno-construction-failed-cant-build-resin-hole = We sense this is not a suit
 rmc-xeno-construction-blocked-structure = There's something built here already.
 rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
 rmc-xeno-construction-dead-body = The body is in the way!
+rmc-xeno-construction-structure-limit = We've already built the maximum possible structures we can!
 
 rmc-xeno-construction-structure-destroyed = A {$structureName} has been {$destructionVerb} at {$location}!
 rmc-xeno-construction-resin-hole-destroyed = We sense one of our Hive's {$structureName} traps at {$location} has been {$destructionVerb}!
@@ -112,10 +113,15 @@ rmc-xeno-designer-delete-node-none = There's no design node here.
 rmc-xeno-designer-delete-node-not-owned = We can only delete our own design nodes.
 rmc-xeno-designer-use-node-wrong-hive = This node does not belong to your hive!
 rmc-xeno-designer-node-needs-weed = There are no weeds to create a connection!
+rmc-xeno-design-node-not-construct = This design node cannot be used to build walls.
+rmc-xeno-construction-door-markers = We will now place door markers.
+rmc-xeno-construction-wall-markers = We will now place wall markers.
 
 rmc-xeno-designer-thicken-none = There's no resin structure here to thicken.
 rmc-xeno-designer-thicken-weedbound = We can't thicken weedbound resin.
 rmc-xeno-designer-thicken-success = We thicken the resin.
+rmc-xeno-construction-thicken-free = We regurgitate some resin and thicken the {$structure} effortlessly.
+rmc-xeno-construction-thicken = We regurgitate some resin and thicken the {$structure}, using {$cost} plasma.
 
 rmc-xeno-designer-greater-surge-cooldown = We need to wait before using Greater Resin Surge again.
 rmc-xeno-designer-greater-surge-none = There's no design nodes nearby.
@@ -127,12 +133,6 @@ rmc-xeno-area-too-early = It's too early to spread the hive this far.
 rmc-xeno-weeds-node-already = There's a pod here already!
 rmc-xeno-weeds-too-strong = These weeds are too strong to plant a node on!
 rmc-xeno-weeds-need-nearby-node = We can only plant weed nodes near other weed nodes our hive owns!
-rmc-xeno-design-node-not-construct = This design node cannot be used to build walls.
 rmc-xeno-resin-whisperer-verb-open-door = Open Door
 
-rmc-xeno-construction-thicken-free = We regurgitate some resin and thicken the {$structure} effortlessly.
-rmc-xeno-construction-thicken = We regurgitate some resin and thicken the {$structure}, using {$cost} plasma.
-rmc-xeno-construction-structure-limit = We've already built the maximum possible structures we can!
-rmc-xeno-construction-door-markers = We will now place door markers.
-rmc-xeno-construction-wall-markers = We will now place wall markers.
 rmc-xeno-construction-choose-cost = {$structure} ({$cost} plasma)

@@ -8,6 +8,8 @@ rmc-vehicle-ride-climb-down-others = {$user} climbs down from {$vehicle}.
 rmc-hardpoint-remove-verb = Remove {$slot}
 rmc-hardpoint-repaired = Hardpoint repaired.
 rmc-hardpoint-intact = Hardpoint is already intact.
+rmc-vehicle-hardpoint-frame-finish-wrench = Finish tightening the frame with a wrench.
+rmc-vehicle-hardpoint-frame-weld-first = Weld the frame before tightening it.
 rmc-hardpoint-integrity-examine = Integrity: [color={$color}]{$current}/{$max} ({$percent}%)[/color]
 rmc-hardpoint-ammo-type-examine = Ammo type: {$type}
 rmc-hardpoint-armor-modifiers-examine = Damage modifiers: acid {$acid}, slash {$slash}, bullet {$bullet}, explosive {$explosive}, blunt {$blunt}
@@ -17,6 +19,10 @@ rmc-hardpoint-ui-integrity = {$current}/{$max} ({$percent}%)
 rmc-hardpoint-ui-no-integrity = No integrity data
 rmc-hardpoint-ui-remove = Remove
 rmc-hardpoint-ui-removing = Removing...
+rmc-vehicle-hardpoint-title = Hardpoints
+rmc-vehicle-hardpoint-header = Vehicle Hardpoints
+rmc-vehicle-hardpoint-frame-integrity = Frame Integrity
+rmc-vehicle-hardpoint-open-slot = Open: {$slot}
 rmc-hardpoint-disintegrates = {CAPITALIZE(THE($item))} disintegrates into a useless pile of scrap under the damage it suffered.
 rmc-vehicle-ammo-loader-no-vehicle = The loader isn't connected to a vehicle.
 rmc-vehicle-ammo-loader-no-hardpoint = No compatible hardpoint is installed.
@@ -29,6 +35,7 @@ rmc-vehicle-ammo-loader-box-full = {$box} is full.
 rmc-vehicle-ammo-loader-in-use = The loader is already in use.
 rmc-vehicle-ammo-loader-hold-ammo = You need to hold the ammo box to load it.
 rmc-vehicle-ammo-loader-not-enough = The ammo box doesn't have enough rounds for a magazine.
+rmc-vehicle-ammo-loader-title = Ammo Loader
 rmc-vehicle-ammo-loader-ui-ammo = Ammo: {$current}/{$max}
 rmc-vehicle-ammo-loader-ui-no-hardpoints = No compatible hardpoints.
 rmc-vehicle-ammo-loader-ui-slot = Slot: {$slot} ({$type})
@@ -64,6 +71,11 @@ rmc-vehicle-weapons-ui-integrity = Integrity: {$current}/{$max} ({$percent}%)
 rmc-vehicle-weapons-ui-no-integrity = Integrity: --
 rmc-vehicle-weapons-ui-cooldown-ready = READY
 rmc-vehicle-weapons-ui-cooldown-recharging = Reloading: {$seconds}s
+rmc-vehicle-weapons-auto-turret = Auto Turret
+rmc-vehicle-weapons-stabilization = Stabilization
+rmc-vehicle-weapons-ammo-none = Ammo: --
+rmc-vehicle-weapons-ammo = Ammo: {$ammo}/{$max}
+rmc-vehicle-weapons-stored = Stored: {$stored}/{$max}
 rmc-vehicle-portgun-need-seat = You need to be seated at the port gun.
 rmc-vehicle-portgun-no-vehicle = The port gun isn't connected to a vehicle.
 rmc-vehicle-portgun-no-gun = The port gun isn't installed.
@@ -72,6 +84,8 @@ rmc-vehicle-portgun-active = You are already operating the port gun.
 rmc-vehicle-portgun-examine-ammo = Ammo: {$current}/{$max}
 rmc-vehicle-portgun-eject = Eject magazine
 rmc-vehicle-turret-no-base = No compatible turret is installed.
+rmc-vehicle-flamer-slot-tank = Tank
+rmc-vehicle-flamer-slot-spare-tank = Spare Tank
 rmc-vehicle-deploy-not-driver = You need to be in the driver seat to deploy.
 rmc-vehicle-deploy-requires-turret = A turret must be installed to deploy.
 rmc-vehicle-deploy-start = Deployment started.
@@ -120,41 +134,6 @@ rmc-vehicle-key-examine-blank = [color=lightblue]This blank key can be imprinted
 rmc-vehicle-key-examine-duplicator = [color=lightblue]This blank key can copy an existing vehicle key by using it on that key.[/color]
 rmc-vehicle-key-examine-bound = [color=lightblue]This key is bound to a vehicle lock.[/color]
 rmc-hardpoint-remove-blocked = That hardpoint is fixed in place.
-rmc-vehicle-demolition-frame-intact = The vehicle frame is too intact to rig with charges. Destroy it first.
-rmc-vehicle-demolition-busy = Someone is already rigging this wreck.
-rmc-vehicle-demolition-start = You start rigging the wreck with explosives...
-rmc-vehicle-demolition-no-skill = You do not know how to rig demolition charges.
-rmc-vehicle-too-small-to-damage = We're too small to do any significant damage to this vehicle!
-rmc-vehicle-demolition-armed = The charge is planted and is counting down!
-
-### Vehicle supply lift
-rmc-vehicle-supply-stored = Stored Vehicles
-rmc-vehicle-supply-vehicle = Vehicle
-rmc-vehicle-supply-preview = Vehicle Preview
-rmc-vehicle-supply-no-lift = No lift
-rmc-vehicle-supply-none = none
-rmc-vehicle-supply-busy = busy
-rmc-vehicle-supply-idle = idle
-rmc-vehicle-supply-status = Lift: {$mode} | Status: {$status} | Active: {$active}
-rmc-vehicle-supply-copies-expanded = Copies v
-rmc-vehicle-supply-copies-collapsed = Copies >
-
-### Vehicle hardpoints and weapons
-rmc-vehicle-hardpoint-title = Hardpoints
-rmc-vehicle-hardpoint-header = Vehicle Hardpoints
-rmc-vehicle-hardpoint-frame-integrity = Frame Integrity
-rmc-vehicle-hardpoint-open-slot = Open: {$slot}
-rmc-vehicle-ammo-loader-title = Ammo Loader
-rmc-vehicle-weapons-auto-turret = Auto Turret
-rmc-vehicle-weapons-stabilization = Stabilization
-rmc-vehicle-weapons-ammo-none = Ammo: --
-rmc-vehicle-weapons-ammo = Ammo: {$ammo}/{$max}
-rmc-vehicle-weapons-stored = Stored: {$stored}/{$max}
-
-rmc-vehicle-hardpoint-frame-finish-wrench = Finish tightening the frame with a wrench.
-rmc-vehicle-hardpoint-frame-weld-first = Weld the frame before tightening it.
-
-### Hardpoint removal
 rmc-hardpoint-remove-cancelled = Hardpoint removal cancelled.
 rmc-hardpoint-remove-no-slots = Unable to access hardpoint slots.
 rmc-hardpoint-remove-empty-slot = No hardpoint is installed in that slot.
@@ -169,5 +148,20 @@ rmc-hardpoint-remove-need-loader = You need to be operating a power loader to re
 rmc-hardpoint-remove-in-progress = That hardpoint is already being removed.
 rmc-hardpoint-remove-need-tool = You need a prying tool to remove this hardpoint.
 rmc-hardpoint-remove-start-failed = Couldn't start hardpoint removal.
-rmc-vehicle-flamer-slot-tank = Tank
-rmc-vehicle-flamer-slot-spare-tank = Spare Tank
+rmc-vehicle-demolition-frame-intact = The vehicle frame is too intact to rig with charges. Destroy it first.
+rmc-vehicle-demolition-busy = Someone is already rigging this wreck.
+rmc-vehicle-demolition-start = You start rigging the wreck with explosives...
+rmc-vehicle-demolition-no-skill = You do not know how to rig demolition charges.
+rmc-vehicle-too-small-to-damage = We're too small to do any significant damage to this vehicle!
+rmc-vehicle-demolition-armed = The charge is planted and is counting down!
+
+rmc-vehicle-supply-stored = Stored Vehicles
+rmc-vehicle-supply-vehicle = Vehicle
+rmc-vehicle-supply-preview = Vehicle Preview
+rmc-vehicle-supply-no-lift = No lift
+rmc-vehicle-supply-none = none
+rmc-vehicle-supply-busy = busy
+rmc-vehicle-supply-idle = idle
+rmc-vehicle-supply-status = Lift: {$mode} | Status: {$status} | Active: {$active}
+rmc-vehicle-supply-copies-expanded = Copies v
+rmc-vehicle-supply-copies-collapsed = Copies >
