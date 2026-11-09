@@ -7,7 +7,8 @@
     lineSpacing: 6
     tint: "#4A9EFF"
     offColor: "#000000"
-    scanlineAlpha: 0.18
+    scanlineAlpha: 0.4
+    scanlineWidth: 0.45
     vignetteStrength: 0.45
     vignetteSize: 0.18
     cornerRadius: 6
@@ -17,6 +18,8 @@
     bandHeight: 10
     grainAlpha: 0.035
     glowAlpha: 0.04
+    lineWidth: 0.05
+    lineGlow: 0.9
 
 - type: shader
   id: RMCAnnouncementPortraitCRT

@@ -113,13 +113,17 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
     public static TimeSpan GetDisplayTime(RMCAnnouncementPresetComponent preset, int length)
     {
         var reveal = GetRevealTime(preset, length);
-        return preset.TitleDecrypt + reveal + GetHoldTime(preset, preset.TitleDecrypt, reveal) + preset.FadeOut;
+        return preset.TitleDecrypt + reveal + GetHoldTime(preset, preset.TitleDecrypt, reveal, length) + preset.FadeOut;
     }
 
-    public static TimeSpan GetHoldTime(RMCAnnouncementPresetComponent preset, TimeSpan decrypt, TimeSpan reveal)
+    public static TimeSpan GetHoldTime(RMCAnnouncementPresetComponent preset, TimeSpan decrypt, TimeSpan reveal, int length)
     {
         if (preset.TotalTime is not { } total)
-            return preset.Hold;
+        {
+            var perCharacter = preset.HoldPerCharacter * length;
+            var capped = perCharacter > preset.MaxHold ? preset.MaxHold : perCharacter;
+            return capped > preset.Hold ? capped : preset.Hold;
+        }
 
         var hold = total - decrypt - reveal - preset.FadeOut;
         return hold > TimeSpan.Zero ? hold : TimeSpan.Zero;

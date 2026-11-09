@@ -13,6 +13,8 @@ public sealed class RMCAnnouncementShaderRect : Control
     private string? _shaderId;
     private ShaderInstance? _shader;
 
+    public bool HasShader => _shaderId != null;
+
     public RMCAnnouncementShaderRect()
     {
         IoCManager.InjectDependencies(this);

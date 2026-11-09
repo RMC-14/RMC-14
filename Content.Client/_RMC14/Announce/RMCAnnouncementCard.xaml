@@ -10,7 +10,7 @@
                 <announce:RMCAnnouncementPortraitView Name="Portrait"/>
                 <announce:RMCAnnouncementShaderRect Name="Crt"/>
             </PanelContainer>
-            <BoxContainer Orientation="Vertical" SeparationOverride="4" VerticalAlignment="Top" MouseFilter="Ignore">
+            <BoxContainer Name="TextColumn" Orientation="Vertical" SeparationOverride="4" VerticalAlignment="Top" MouseFilter="Ignore">
                 <announce:RMCAnnouncementTextLabel Name="TitleLabel" Visible="False"/>
                 <PanelContainer Name="TitleUnderline" Visible="False" MinHeight="2" HorizontalAlignment="Left" MouseFilter="Ignore"/>
                 <announce:RMCAnnouncementTextLabel Name="BodyLabel"/>

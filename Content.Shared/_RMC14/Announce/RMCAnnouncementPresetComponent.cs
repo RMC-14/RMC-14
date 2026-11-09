@@ -127,6 +127,12 @@ public sealed partial class RMCAnnouncementPresetComponent : Component
     public TimeSpan Hold = TimeSpan.FromSeconds(10);
 
     [DataField]
+    public TimeSpan HoldPerCharacter = TimeSpan.FromSeconds(0.05);
+
+    [DataField]
+    public TimeSpan MaxHold = TimeSpan.FromSeconds(20);
+
+    [DataField]
     public TimeSpan? TotalTime;
 
     [DataField]

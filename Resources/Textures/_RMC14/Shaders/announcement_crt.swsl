@@ -6,6 +6,7 @@ uniform highp float lineSpacing;
 uniform highp vec4 tint;
 uniform highp vec4 offColor;
 uniform highp float scanlineAlpha;
+uniform highp float scanlineWidth;
 uniform highp float vignetteStrength;
 uniform highp float vignetteSize;
 uniform highp float cornerRadius;
@@ -15,6 +16,8 @@ uniform highp float bandPeriod;
 uniform highp float bandHeight;
 uniform highp float grainAlpha;
 uniform highp float glowAlpha;
+uniform highp float lineWidth;
+uniform highp float lineGlow;
 
 highp float hash(highp vec2 point)
 {
@@ -45,7 +48,9 @@ void fragment()
     effect = compositeOver(effect, vec4(0.0, 0.0, 0.0, vignette * vignette * vignetteStrength));
 
     highp float scanline = fract(pixel.y / max(lineSpacing, 1.0));
-    effect = compositeOver(effect, vec4(0.0, 0.0, 0.0, scanlineAlpha * smoothstep(0.55, 1.0, scanline)));
+    highp float scanlineDark = smoothstep(0.9 - scanlineWidth, 1.1 - scanlineWidth, scanline);
+    effect = compositeOver(effect, vec4(tint.rgb, scanlineAlpha * 0.25 * (1.0 - scanlineDark)));
+    effect = compositeOver(effect, vec4(0.0, 0.0, 0.0, scanlineAlpha * scanlineDark));
 
     effect = compositeOver(effect, vec4(tint.rgb, glowAlpha));
 
@@ -61,18 +66,34 @@ void fragment()
     if (edge > 0.0)
         effect = vec4(offColor.rgb, 1.0);
 
-    if (power < 1.0)
+    highp vec3 lineColor = mix(tint.rgb, vec3(1.0), 0.9);
+    highp float lineHalf = max(2.0, lineWidth * halfSize.y);
+    highp float haloSize = lineHalf * 6.0;
+    if (power <= 0.0)
     {
-        highp float open = max(power, 0.02) * halfSize.y;
+        highp float squeeze = clamp((power + 0.75) / 0.75, 0.0, 1.0);
+        highp float dim = clamp((power + 1.0) / 0.25, 0.0, 1.0);
+        highp vec2 open = vec2(mix(lineHalf, halfSize.x, squeeze * squeeze), lineHalf);
+        highp float dist = length(max(abs(pixel - halfSize) - open, 0.0));
+        highp float core = 1.0 - smoothstep(0.0, lineHalf, dist);
+        highp float halo = exp(-dist / haloSize) * lineGlow;
+        effect = compositeOver(vec4(offColor.rgb, 1.0), vec4(lineColor, max(core, halo) * dim));
+    }
+    else if (power < 1.0)
+    {
+        highp float collapse = 1.0 - power;
+        highp float open = max(power * halfSize.y, lineHalf);
         highp float fromCenter = abs(pixel.y - halfSize.y);
         if (fromCenter > open)
         {
-            effect = vec4(offColor.rgb, 1.0);
+            highp float halo = exp(-(fromCenter - open) / haloSize) * lineGlow * collapse;
+            effect = compositeOver(vec4(offColor.rgb, 1.0), vec4(lineColor, halo));
         }
         else
         {
-            highp float glow = (1.0 - power) * (1.0 - smoothstep(0.0, max(open, 1.0), fromCenter));
-            effect = compositeOver(effect, vec4(mix(tint.rgb, vec3(1.0), 0.6), glow));
+            highp float glow = collapse * (1.0 - smoothstep(0.0, open, fromCenter));
+            highp float core = collapse * (1.0 - smoothstep(0.0, lineHalf, fromCenter));
+            effect = compositeOver(effect, vec4(lineColor, max(glow, core)));
         }
     }
 

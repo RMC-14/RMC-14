@@ -10,5 +10,7 @@ public interface IRMCAnnouncementView
 
     void SetPower(float power);
 
+    void SetExit(float progress);
+
     void SetPulse(float pulse);
 }

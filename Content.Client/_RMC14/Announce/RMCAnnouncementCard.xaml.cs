@@ -18,6 +18,9 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
     private const float PortraitZoom = 3;
     private const float PortraitVisibleHeight = 0.62f;
     private const float FlickerOffAlpha = 0.15f;
+    private const float CrtTextFadeEnd = 0.3f;
+    private const float CrtCollapseEnd = 0.45f;
+    private const float CrtDotEnd = 0.85f;
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -53,6 +56,8 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
         _shadowColor = preset.ShadowColor ?? RMCAnnouncementTextLabel.DefaultShadowColor;
         _pulse = 0;
 
+        Background.Modulate = Color.White;
+        TextColumn.Modulate = Color.White;
         Background.PanelOverride = new StyleBoxFlat
         {
             BackgroundColor = settings.BackgroundColor ?? preset.BackgroundColor ?? Color.Transparent,
@@ -219,10 +224,31 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
         TitleUnderline.Modulate = color;
     }
 
+    public void SetExit(float progress)
+    {
+        if (Crt.Visible)
+        {
+            TextColumn.Modulate = Color.White.WithAlpha(1 - Math.Clamp(progress / CrtTextFadeEnd, 0, 1));
+            SetPower(progress < CrtCollapseEnd
+                ? 1 - progress / CrtCollapseEnd
+                : -Math.Clamp((progress - CrtCollapseEnd) / (CrtDotEnd - CrtCollapseEnd), 0, 1));
+
+            Background.Modulate = Color.White.WithAlpha(1 - Math.Clamp((progress - CrtDotEnd) / (1 - CrtDotEnd), 0, 1));
+            return;
+        }
+
+        SetPower(1 - Math.Clamp(progress / 0.6f, 0, 1));
+        Background.Modulate = Color.White.WithAlpha(1 - Math.Clamp((progress - 0.4f) / 0.6f, 0, 1));
+    }
+
     public void SetPower(float power)
     {
         Crt.SetFloatParameter("power", power);
-        Portrait.SetFloatParameter("power", power);
+        Portrait.SetFloatParameter("power", Math.Max(0, power));
+
+        var screenOn = power > 0 || !Crt.Visible;
+        Portrait.Visible = screenOn;
+        PortraitShader.Visible = screenOn && PortraitShader.HasShader;
 
         if (!Decal.Visible)
             return;

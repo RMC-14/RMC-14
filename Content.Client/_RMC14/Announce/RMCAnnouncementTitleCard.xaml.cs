@@ -40,6 +40,8 @@ public sealed partial class RMCAnnouncementTitleCard : BoxContainer, IRMCAnnounc
         _textColor = settings.TextColor ?? preset.TextColor ?? display.Accent;
         _titleColor = settings.TitleColor ?? display.Accent;
 
+        BodyLabel.Modulate = Color.White;
+        TitleLabel.Modulate = Color.White;
         BodyLabel.ShadowOffset = shadow;
         BodyLabel.ShadowColor = shadowColor;
         TitleLabel.ShadowColor = shadowColor;
@@ -70,6 +72,13 @@ public sealed partial class RMCAnnouncementTitleCard : BoxContainer, IRMCAnnounc
 
     public void SetPulse(float pulse)
     {
+    }
+
+    public void SetExit(float progress)
+    {
+        var alpha = Color.White.WithAlpha(1 - Math.Clamp((progress - 0.4f) / 0.6f, 0, 1));
+        TitleLabel.Modulate = alpha;
+        BodyLabel.Modulate = alpha;
     }
 
     public void SetBody(string shown, int fade, bool cursor, bool cursorVisible)

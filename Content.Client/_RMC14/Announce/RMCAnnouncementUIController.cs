@@ -245,6 +245,8 @@ public sealed class RMCAnnouncementUIController : UIController,
             active.Area.Remove(active.View);
             ((IRMCAnnouncementView) active.View).Setup(display);
             ((IRMCAnnouncementView) active.View).SetBody(active.Shown, active.Fade, UsesCursor(display.Preset), active.CursorVisible);
+            ((IRMCAnnouncementView) active.View).SetPower(active.Power);
+            ((IRMCAnnouncementView) active.View).SetExit(active.Exit);
             active.Area.Add(active.View, display.Pivot, display.AvoidHud);
         }
 
@@ -385,7 +387,7 @@ public sealed class RMCAnnouncementUIController : UIController,
             ? preset.TitleDecrypt
             : TimeSpan.Zero;
         var textElapsed = elapsed - decrypt;
-        var holdEnd = decrypt + active.RevealTime + RMCAnnouncementOverlaySystem.GetHoldTime(preset, decrypt, active.RevealTime);
+        var holdEnd = decrypt + active.RevealTime + RMCAnnouncementOverlaySystem.GetHoldTime(preset, decrypt, active.RevealTime, display.Text.Length);
         if (elapsed >= holdEnd + preset.FadeOut)
             return false;
 
@@ -435,17 +437,21 @@ public sealed class RMCAnnouncementUIController : UIController,
             if (typing)
                 PlayTypingSound(active, revealed);
         }
-        else if (elapsed > holdEnd && preset.FadeOut > TimeSpan.Zero)
-        {
-            var fadeOut = (float) ((elapsed - holdEnd) / preset.FadeOut);
-            power = 1f - Math.Clamp(fadeOut / 0.6f, 0, 1);
-            alpha = 1f - Math.Clamp((fadeOut - 0.4f) / 0.6f, 0, 1);
-        }
+
+        var exit = 0f;
+        if (elapsed > holdEnd && preset.FadeOut > TimeSpan.Zero)
+            exit = Math.Clamp((float) ((elapsed - holdEnd) / preset.FadeOut), 0, 1);
 
         if (!MathHelper.CloseTo(power, active.Power))
         {
             active.Power = power;
             ((IRMCAnnouncementView) active.View).SetPower(power);
+        }
+
+        if (!MathHelper.CloseTo(exit, active.Exit))
+        {
+            active.Exit = exit;
+            ((IRMCAnnouncementView) active.View).SetExit(exit);
         }
 
         var usesCursor = UsesCursor(preset);
@@ -572,6 +578,7 @@ public sealed class RMCAnnouncementUIController : UIController,
         public float Pulse;
         public bool CursorVisible;
         public float Power = 1;
+        public float Exit;
         public float TitleProgress = 1;
         public int SoundStep;
     }
