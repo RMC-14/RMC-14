@@ -60,6 +60,6 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobProvostInspector
-      time: 540000 # 120 hrs
+      time: 432000 # 120 hrs
   equipment:
     head: RMCHeadBeretProvostBlue
