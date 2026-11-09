@@ -33,6 +33,12 @@ public sealed class RMCAnnouncementTextLabel : Control
         }
     }
 
+    public void SetModulate(Color text, Color shadow)
+    {
+        _text.Modulate = text;
+        _shadow.Modulate = shadow;
+    }
+
     public void SetFont(IPrototypeManager prototype, IResourceCache resourceCache, string fontId, int size)
     {
         RMCAnnouncementText.SetFont(_shadow, prototype, resourceCache, fontId, size);

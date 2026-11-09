@@ -16,7 +16,28 @@ public static class RMCAnnouncementText
     private const string DecryptGlyphs = "!#$%&*+-/<=>?@0123456789ABCDEF";
     public const string Cursor = "_";
 
-    public static List<(string Text, Color Color)> BuildRange(
+    public static List<(string Text, Color Color)> BuildBody(
+        string text,
+        string shown,
+        int start,
+        int end,
+        int fade,
+        bool cursor,
+        bool cursorVisible,
+        bool trailingCursor,
+        Color color)
+    {
+        var transparent = color.WithAlpha(0);
+        var cursorColor = cursorVisible ? color : transparent;
+        var cursorAt = GetCursorIndex(text, shown.Length, cursor);
+        var segments = BuildRange(text, shown, start, end, fade, cursorAt, color, cursorColor);
+        if (cursor && trailingCursor)
+            segments.Add((Cursor, shown.Length >= text.Length ? cursorColor : transparent));
+
+        return segments;
+    }
+
+    private static List<(string Text, Color Color)> BuildRange(
         string text,
         string shown,
         int start,
@@ -60,7 +81,7 @@ public static class RMCAnnouncementText
         return segments;
     }
 
-    public static int GetCursorIndex(string text, int revealed, bool cursor)
+    private static int GetCursorIndex(string text, int revealed, bool cursor)
     {
         return cursor && revealed < text.Length && !char.IsWhiteSpace(text[revealed]) ? revealed : -1;
     }
@@ -134,14 +155,8 @@ public static class RMCAnnouncementText
         return new VectorFont(resourceCache.GetResource<FontResource>(font.Path), size);
     }
 
-    public static float GetAdvance(Font font, int size)
+    public static List<(int Start, int Length)> WrapLines(string text, Font font, int size, float maxWidth)
     {
-        return font.GetCharMetrics(new Rune('M'), 1f)?.Advance ?? size * 0.6f;
-    }
-
-    public static List<(int Start, int Length)> WrapLines(string text, int maxChars)
-    {
-        maxChars = Math.Max(1, maxChars);
         var lines = new List<(int Start, int Length)>();
         var paragraphStart = 0;
         while (paragraphStart <= text.Length)
@@ -151,19 +166,45 @@ public static class RMCAnnouncementText
                 paragraphEnd = text.Length;
 
             var start = paragraphStart;
-            while (paragraphEnd - start > maxChars)
+            var width = 0f;
+            var space = -1;
+            var i = start;
+            while (i < paragraphEnd)
             {
-                var limit = start + maxChars;
-                var space = text.LastIndexOf(' ', limit, limit - start);
-                if (space <= start)
+                var length = 1;
+                var advance = (float) size;
+                if (Rune.TryGetRuneAt(text, i, out var rune))
                 {
-                    lines.Add((start, maxChars));
-                    start = limit;
+                    length = rune.Utf16SequenceLength;
+                    if (font.GetCharMetrics(rune, 1f) is { } metrics)
+                        advance = metrics.Advance;
+                }
+
+                if (width + advance > maxWidth && i > start)
+                {
+                    var breakAt = text[i] == ' ' ? i : space;
+                    if (breakAt > start)
+                    {
+                        lines.Add((start, breakAt - start));
+                        start = breakAt + 1;
+                    }
+                    else
+                    {
+                        lines.Add((start, i - start));
+                        start = i;
+                    }
+
+                    i = start;
+                    width = 0;
+                    space = -1;
                     continue;
                 }
 
-                lines.Add((start, space - start));
-                start = space + 1;
+                if (text[i] == ' ')
+                    space = i;
+
+                width += advance;
+                i += length;
             }
 
             lines.Add((start, paragraphEnd - start));

@@ -38,6 +38,8 @@ public sealed class RMCAnnouncementArea : Control
 
     public float ScreenScale { get; private set; } = 1;
     private (UIBox2 Viewport, UIBox2 Actions, UIBox2 Inventory) _hud;
+    private (Control? Hotbar, int Children, Vector2 Size) _inventoryKey;
+    private Vector2 _inventoryExpanded;
 
     public RMCAnnouncementArea()
     {
@@ -205,10 +207,18 @@ public sealed class RMCAnnouncementArea : Control
     private UIBox2 GetInventoryBounds(UIBox2 bounds)
     {
         var inventory = UserInterfaceManager.ActiveScreen?.GetWidget<InventoryGui>();
-        if (inventory == null)
+        if (inventory is not { VisibleInTree: true })
             return default;
 
-        var expanded = inventory.InventoryHotbar.GetExpandedDesiredSize(bounds.Size);
+        var hotbar = inventory.InventoryHotbar;
+        var key = (hotbar, hotbar.ChildCount, bounds.Size);
+        if (key != _inventoryKey)
+        {
+            _inventoryKey = key;
+            _inventoryExpanded = hotbar.GetExpandedDesiredSize(bounds.Size);
+        }
+
+        var expanded = _inventoryExpanded;
         if (expanded.X <= 0 || expanded.Y <= 0)
             return default;
 

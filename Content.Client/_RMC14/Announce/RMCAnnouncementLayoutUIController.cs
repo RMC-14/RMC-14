@@ -4,7 +4,6 @@ using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared.Access.Systems;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -61,6 +60,12 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
 
     private RMCAnnouncementOverride Effective => Target.Over(Fallback);
 
+    public override void Initialize()
+    {
+        base.Initialize();
+        UIManager.OnScreenChanged += _ => _window?.Close();
+    }
+
     public void OnStateExited(GameplayState state)
     {
         _window?.Close();
@@ -96,7 +101,13 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
 
     public void ResetAll()
     {
-        _cfg.SetCVar(RMCCVars.RMCAnnouncementOverrides, string.Empty);
+        var overrides = RMCAnnouncementOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementOverrides));
+        foreach (var (id, value) in overrides.ToArray())
+        {
+            overrides[id] = value.WithoutLayout();
+        }
+
+        _cfg.SetCVar(RMCCVars.RMCAnnouncementOverrides, RMCAnnouncementOverrides.Serialize(overrides));
         _cfg.SaveToFile();
     }
 
@@ -175,7 +186,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
 
         window.ResetTargetButton.OnPressed += _ =>
         {
-            Target = default;
+            Target = Target.WithoutLayout();
             Commit();
             Refresh();
         };
@@ -321,7 +332,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
         SetColor(_window.CRTGlowColorInput, _window.CRTGlowColorPicker, target.CrtGlowColor, effective.CrtGlowColor ?? accent);
         SetColor(_window.BackgroundColorInput, _window.BackgroundColorPicker, target.BackgroundColor, effective.BackgroundColor ?? preset.BackgroundColor ?? Color.Black);
 
-        _window.ResetTargetButton.Disabled = target.IsEmpty;
+        _window.ResetTargetButton.Disabled = !target.HasLayout;
         _window.PositionValueLabel.Text = target.Pivot is { } targetPivot
             ? Loc.GetString("rmc-ui-options-announcements-layout-position-value",
                 ("x", targetPivot.X.ToString("0.000", CultureInfo.InvariantCulture)),
@@ -353,13 +364,10 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
             Loc.GetString("rmc-ui-options-announcements-layout-preview-line-1", ("name", preset.Name)),
             Loc.GetString("rmc-ui-options-announcements-layout-preview-line-2"));
 
+        var speakerName = Loc.GetString("rmc-ui-options-announcements-layout-preview-speaker");
         string? job = null;
-        if (local is { } localEntity &&
-            _entities.System<SharedIdCardSystem>().TryFindIdCard(localEntity, out var idCard) &&
-            !string.IsNullOrWhiteSpace(idCard.Comp.LocalizedJobTitle))
-        {
-            job = idCard.Comp.LocalizedJobTitle;
-        }
+        if (local is { } localEntity)
+            (speakerName, job) = _entities.System<RMCAnnouncementOverlaySystem>().GetSpeakerInfo(localEntity);
 
         var display = new RMCAnnouncementDisplay
         {
@@ -368,9 +376,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
             Text = text,
             Title = RMCAnnouncementUIController.GetTitle(preset.Preset, null),
             Accent = preset.Preset.AccentColor,
-            SpeakerName = local is { } entity
-                ? _entities.GetComponent<MetaDataComponent>(entity).EntityName
-                : Loc.GetString("rmc-ui-options-announcements-layout-preview-speaker"),
+            SpeakerName = speakerName,
             SpeakerJob = job,
             Portrait = preset.Preset.Template == RMCAnnouncementTemplate.Portrait ? local : null,
         };

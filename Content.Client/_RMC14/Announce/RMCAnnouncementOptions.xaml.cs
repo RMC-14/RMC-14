@@ -61,8 +61,8 @@ public sealed partial class RMCAnnouncementOptions : BoxContainer
     private void UpdateLayoutSummary(string serialized)
     {
         var overrides = RMCAnnouncementOverrides.Parse(serialized);
-        var global = !overrides.GetValueOrDefault(RMCAnnouncementOverrides.GlobalKey).IsEmpty;
-        var count = overrides.Count(pair => pair.Key != RMCAnnouncementOverrides.GlobalKey && !pair.Value.IsEmpty);
+        var global = overrides.GetValueOrDefault(RMCAnnouncementOverrides.GlobalKey).HasLayout;
+        var count = overrides.Count(pair => pair.Key != RMCAnnouncementOverrides.GlobalKey && pair.Value.HasLayout);
 
         LayoutSummaryLabel.Text = Loc.GetString(
             "rmc-ui-options-announcements-layout-summary",

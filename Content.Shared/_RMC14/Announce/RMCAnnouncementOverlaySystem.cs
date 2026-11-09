@@ -55,9 +55,9 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
         NetEntity? portrait = null;
         if (announcement.Speaker is { } speaker && !TerminatingOrDeleted(speaker))
         {
-            speakerName ??= _rank.GetSpeakerRankName(speaker) ?? Name(speaker);
-            if (_idCard.TryFindIdCard(speaker, out var idCard) && !string.IsNullOrWhiteSpace(idCard.Comp.LocalizedJobTitle))
-                speakerJob = idCard.Comp.LocalizedJobTitle;
+            var (name, job) = GetSpeakerInfo(speaker);
+            speakerName ??= name;
+            speakerJob = job;
 
             if (preset.Template == RMCAnnouncementTemplate.Portrait)
             {
@@ -77,6 +77,16 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
             portrait);
 
         RaiseNetworkEvent(msg, filter);
+    }
+
+    public (string Name, string? Job) GetSpeakerInfo(EntityUid speaker)
+    {
+        var name = _rank.GetSpeakerRankName(speaker) ?? Name(speaker);
+        string? job = null;
+        if (_idCard.TryFindIdCard(speaker, out var idCard) && !string.IsNullOrWhiteSpace(idCard.Comp.LocalizedJobTitle))
+            job = idCard.Comp.LocalizedJobTitle;
+
+        return (name, job);
     }
 
     public bool TryGetPreset(EntProtoId id, [NotNullWhen(true)] out RMCAnnouncementPresetComponent? preset)

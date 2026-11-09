@@ -46,6 +46,7 @@ public sealed class RMCAnnouncementUIController : UIController,
         base.Initialize();
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementMaxVisible, OnMaxVisibleChanged, true);
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementOverrides, OnOverridesChanged, true);
+        UIManager.OnScreenChanged += _ => FillSlots();
     }
 
     public void OnSystemLoaded(RMCAnnouncementOverlayUISystem system)
@@ -73,6 +74,7 @@ public sealed class RMCAnnouncementUIController : UIController,
 
         _queue.Clear();
         _inGameplay = false;
+        GetArea();
     }
 
     public static Vector2 GetDefaultPivot(RMCAnnouncementPosition position)
@@ -121,10 +123,6 @@ public sealed class RMCAnnouncementUIController : UIController,
             return;
         }
 
-        var settings = RMCAnnouncementOverrides.Resolve(_overrides, msg.Preset.Id, GetSettingsKey(msg.Preset, preset));
-        if (settings.Show == false)
-            return;
-
         var display = new RMCAnnouncementDisplay
         {
             PresetId = msg.Preset,
@@ -134,11 +132,12 @@ public sealed class RMCAnnouncementUIController : UIController,
             Accent = msg.Accent ?? preset.AccentColor,
             SpeakerName = msg.SpeakerName,
             SpeakerJob = msg.SpeakerJob,
-            Speaker = settings.ShowPortrait != false ? msg.Portrait : null,
+            Speaker = msg.Portrait,
             Order = _nextOrder++,
         };
 
-        ApplySettings(display, settings, GetArea()?.ScreenScale ?? 1);
+        if (ResolveSettings(display).Show == false)
+            return;
 
         if (GetArea() == null)
         {
@@ -170,6 +169,12 @@ public sealed class RMCAnnouncementUIController : UIController,
             Enqueue(display);
             return;
         }
+
+        var settings = ResolveSettings(display);
+        if (settings.Show == false)
+            return;
+
+        ApplySettings(display, settings, area.ScreenScale);
 
         if (_entities.TryGetEntity(display.Speaker, out var portrait))
             display.Portrait = portrait;
@@ -212,13 +217,20 @@ public sealed class RMCAnnouncementUIController : UIController,
         active.Area.Remove(active.View);
     }
 
+    private RMCAnnouncementOverride ResolveSettings(RMCAnnouncementDisplay display)
+    {
+        return RMCAnnouncementOverrides.Resolve(_overrides, display.PresetId.Id, GetSettingsKey(display.PresetId, display.Preset));
+    }
+
     private void RefreshActive()
     {
+        _queue.RemoveAll(display => ResolveSettings(display).Show == false);
+
         for (var i = _active.Count - 1; i >= 0; i--)
         {
             var active = _active[i];
             var display = active.Display;
-            var settings = RMCAnnouncementOverrides.Resolve(_overrides, display.PresetId.Id, GetSettingsKey(display.PresetId, display.Preset));
+            var settings = ResolveSettings(display);
             if (settings.Show == false)
             {
                 RemoveActive(i);
@@ -235,6 +247,8 @@ public sealed class RMCAnnouncementUIController : UIController,
             ((IRMCAnnouncementView) active.View).SetBody(active.Shown, active.Fade, UsesCursor(display.Preset), active.CursorVisible);
             active.Area.Add(active.View, display.Pivot, display.AvoidHud);
         }
+
+        FillSlots();
     }
 
     private void FillSlots()
@@ -390,7 +404,7 @@ public sealed class RMCAnnouncementUIController : UIController,
         if (preset.PowerOn > TimeSpan.Zero && elapsed < preset.PowerOn)
             power = (float) (elapsed / preset.PowerOn);
 
-        if (textElapsed < TimeSpan.Zero && active.RevealTime > TimeSpan.Zero)
+        if (textElapsed < TimeSpan.Zero)
         {
             text = string.Empty;
         }
@@ -519,7 +533,26 @@ public sealed class RMCAnnouncementUIController : UIController,
             area.ScreenScaleChanged += RefreshActive;
         }
 
+        MoveActive(area);
         return area;
+    }
+
+    private void MoveActive(RMCAnnouncementArea? area)
+    {
+        for (var i = _active.Count - 1; i >= 0; i--)
+        {
+            var active = _active[i];
+            active.Area.Remove(active.View);
+            if (area == null)
+            {
+                _active.RemoveAt(i);
+                Enqueue(active.Display);
+                continue;
+            }
+
+            active.Area = area;
+            area.Add(active.View, active.Display.Pivot, active.Display.AvoidHud);
+        }
     }
 
     private sealed class ActiveAnnouncement(
@@ -531,7 +564,7 @@ public sealed class RMCAnnouncementUIController : UIController,
     {
         public readonly RMCAnnouncementDisplay Display = display;
         public readonly Control View = view;
-        public readonly RMCAnnouncementArea Area = area;
+        public RMCAnnouncementArea Area = area;
         public readonly TimeSpan Start = start;
         public readonly TimeSpan RevealTime = revealTime;
         public string Shown = string.Empty;

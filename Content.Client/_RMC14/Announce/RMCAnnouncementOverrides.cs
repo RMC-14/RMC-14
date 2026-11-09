@@ -21,6 +21,13 @@ public readonly record struct RMCAnnouncementOverride(
 {
     public bool IsEmpty => this == default;
 
+    public bool HasLayout => this with { Show = null } != default;
+
+    public RMCAnnouncementOverride WithoutLayout()
+    {
+        return new RMCAnnouncementOverride(Show: Show);
+    }
+
     public RMCAnnouncementOverride Over(RMCAnnouncementOverride fallback)
     {
         return new RMCAnnouncementOverride(

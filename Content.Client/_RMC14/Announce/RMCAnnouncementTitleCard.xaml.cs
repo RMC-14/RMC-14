@@ -34,12 +34,15 @@ public sealed partial class RMCAnnouncementTitleCard : BoxContainer, IRMCAnnounc
         var bodyScale = scale * (settings.BodyScale ?? 1) * RMCAnnouncementText.GetLengthScale(display.Preset, display.Text.Length);
         var preset = display.Preset;
         var shadow = MathF.Max(1, MathF.Round(scale));
+        var shadowColor = preset.ShadowColor ?? RMCAnnouncementTextLabel.DefaultShadowColor;
 
         _text = display.Text;
         _textColor = settings.TextColor ?? preset.TextColor ?? display.Accent;
         _titleColor = settings.TitleColor ?? display.Accent;
 
         BodyLabel.ShadowOffset = shadow;
+        BodyLabel.ShadowColor = shadowColor;
+        TitleLabel.ShadowColor = shadowColor;
         BodyLabel.SetFont(_prototype, _resourceCache, preset.Font, ScaleFont(preset.FontSize, bodyScale));
         BodyLabel.MaxWidth = preset.MaxWidth * scale;
         TitleLabel.MaxWidth = preset.MaxWidth * scale;
@@ -71,14 +74,7 @@ public sealed partial class RMCAnnouncementTitleCard : BoxContainer, IRMCAnnounc
 
     public void SetBody(string shown, int fade, bool cursor, bool cursorVisible)
     {
-        var transparent = _textColor.WithAlpha(0);
-        var cursorColor = cursorVisible ? _textColor : transparent;
-        var cursorAt = RMCAnnouncementText.GetCursorIndex(_text, shown.Length, cursor);
-        var segments = RMCAnnouncementText.BuildRange(_text, shown, 0, _text.Length, fade, cursorAt, _textColor, cursorColor);
-        if (cursor)
-            segments.Add((RMCAnnouncementText.Cursor, shown.Length >= _text.Length ? cursorColor : transparent));
-
-        BodyLabel.SetSegments(segments);
+        BodyLabel.SetSegments(RMCAnnouncementText.BuildBody(_text, shown, 0, _text.Length, fade, cursor, cursorVisible, true, _textColor));
     }
 
     private static int ScaleFont(float size, float scale)

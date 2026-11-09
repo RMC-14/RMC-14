@@ -27,7 +27,6 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
     private Color _titleColor;
     private Color _shadowColor;
     private string? _title;
-    private string _titleShown = string.Empty;
     private float _pulse;
     private bool _centered;
     private string _text = string.Empty;
@@ -82,6 +81,8 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
         if (_title != null)
         {
             TitleLabel.ShadowOffset = shadow;
+            TitleLabel.ShadowColor = _shadowColor.WithAlpha(1);
+            TitleUnderline.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.White };
             TitleLabel.SetFont(_prototype, _resourceCache, preset.TitleFont, ScaleFont(preset.TitleFontSize, titleScale));
             TitleUnderline.MinHeight = MathF.Max(1, 2 * titleScale);
         }
@@ -119,13 +120,14 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
 
         var bodySize = ScaleFont(preset.FontSize, bodyScale);
         var font = RMCAnnouncementText.GetFont(_prototype, _resourceCache, preset.Font, bodySize);
-        var maxChars = (int) (preset.MaxWidth * scale / RMCAnnouncementText.GetAdvance(font, bodySize)) - 1;
-        _lines.AddRange(RMCAnnouncementText.WrapLines(_text, maxChars));
+        var maxWidth = preset.MaxWidth * scale;
+        _lines.AddRange(RMCAnnouncementText.WrapLines(_text, font, bodySize, maxWidth - shadow));
         foreach (var _ in _lines)
         {
             var line = new RMCAnnouncementTextLabel
             {
                 HorizontalAlignment = HAlignment.Center,
+                MaxWidth = maxWidth,
                 ShadowOffset = shadow,
                 ShadowColor = _shadowColor,
             };
@@ -186,8 +188,8 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
         if (_title == null)
             return;
 
-        _titleShown = RMCAnnouncementText.Decrypt(_title, progress, _random);
-        RenderTitle();
+        TitleLabel.SetText(RMCAnnouncementText.Decrypt(_title, progress, _random), Color.White);
+        ApplyTitleColor();
 
         if (progress >= 1)
         {
@@ -203,18 +205,18 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
     public void SetPulse(float pulse)
     {
         _pulse = pulse;
-        RenderTitle();
+        ApplyTitleColor();
     }
 
-    private void RenderTitle()
+    private void ApplyTitleColor()
     {
         if (_title == null)
             return;
 
         var color = Color.InterpolateBetween(_titleColor, Color.White, _pulse);
-        TitleLabel.ShadowColor = _shadowColor.WithAlpha(MathF.Min(1, _shadowColor.A * (1 + _pulse)));
-        TitleLabel.SetText(_titleShown, color);
-        TitleUnderline.PanelOverride = new StyleBoxFlat { BackgroundColor = color };
+        var shadow = Color.White.WithAlpha(MathF.Min(1, _shadowColor.A * (1 + _pulse)));
+        TitleLabel.SetModulate(color, shadow);
+        TitleUnderline.Modulate = color;
     }
 
     public void SetPower(float power)
@@ -230,29 +232,17 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
 
     public void SetBody(string shown, int fade, bool cursor, bool cursorVisible)
     {
-        var revealed = shown.Length;
-        var transparent = _textColor.WithAlpha(0);
-        var cursorColor = cursorVisible ? _textColor : transparent;
-        var cursorAt = RMCAnnouncementText.GetCursorIndex(_text, revealed, cursor);
-
         if (!_centered)
         {
-            var segments = RMCAnnouncementText.BuildRange(_text, shown, 0, _text.Length, fade, cursorAt, _textColor, cursorColor);
-            if (cursor)
-                segments.Add((RMCAnnouncementText.Cursor, revealed >= _text.Length ? cursorColor : transparent));
-
-            BodyLabel.SetSegments(segments);
+            BodyLabel.SetSegments(RMCAnnouncementText.BuildBody(_text, shown, 0, _text.Length, fade, cursor, cursorVisible, true, _textColor));
             return;
         }
 
         for (var i = 0; i < _lines.Count; i++)
         {
             var (start, length) = _lines[i];
-            var segments = RMCAnnouncementText.BuildRange(_text, shown, start, start + length, fade, cursorAt, _textColor, cursorColor);
-            if (cursor && i == _lines.Count - 1)
-                segments.Add((RMCAnnouncementText.Cursor, revealed >= _text.Length ? cursorColor : transparent));
-
-            _lineLabels[i].SetSegments(segments);
+            var last = i == _lines.Count - 1;
+            _lineLabels[i].SetSegments(RMCAnnouncementText.BuildBody(_text, shown, start, start + length, fade, cursor, cursorVisible, last, _textColor));
         }
     }
 
