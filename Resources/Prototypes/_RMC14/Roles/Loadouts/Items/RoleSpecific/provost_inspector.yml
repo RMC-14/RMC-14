@@ -61,7 +61,5 @@
       !type:RoleTimeRequirement
       role: CMJobProvostInspector
       time: 540000 # 120 hrs
-    belt: RMCBeltHolsterPistolHandcannonProvostFilled
-      time: 432000 # 120 hrs
   equipment:
     head: RMCHeadBeretProvostBlue
