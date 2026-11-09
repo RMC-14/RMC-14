@@ -154,7 +154,7 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-greeting-varadero = It's been days since the tunnel to New Varadero City was blown during the military's retreat from the naval base. Unable to make it to the rendezvous point, you were sealed inside with the xenonids. With no way off this island, you've had to run, hide, fight and band together with whoever you could to stay alive this long. You may have held the horde at bay for now, but it's only a matter of time before they come back.
+rmc-job-greeting-varadero = It's been days since the military's retreat from the naval base. Unable to make it to the rendezvous point, the tunnel to New Varadero City was blown, and you were sealed inside with the xenonids. With no way off this island, you've had to run, hide, fight and band together with whoever you could to stay alive this long. You may have held the horde at bay for now, but it's only a matter of time before they come back.
 
    You are aware of the xenonid threat.
 

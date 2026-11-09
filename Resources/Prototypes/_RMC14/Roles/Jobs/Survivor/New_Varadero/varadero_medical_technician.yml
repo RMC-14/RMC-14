@@ -99,8 +99,10 @@
   components:
   - type: EntityPreset
     randomOutfits:
-    - [ RMCLabcoatBrown, CMMaskSterile, RMCArmorPDU ]
-    - [ RMCJacketWindbreakerFirstResponder ]
+    - [ CMMaskSterile, RMCArmorPDU ]
+    - [ CMMaskSterile, RMCArmorPDU ]
+    - [ CMMaskSterile, RMCArmorPDU ]
+    - [ CMMaskSterile, RMCJacketWindbreakerFirstResponder ]
     - [ RMCHazardVestEMT, RMCBeltMedicalDefibAnalyzerFilled ]
     randomGearOther:
     -

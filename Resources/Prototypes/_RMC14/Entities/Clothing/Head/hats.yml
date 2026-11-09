@@ -418,7 +418,7 @@
   parent: CMHeadCap
   id: CMHeadCapOfficerNV
   name: UNMC peaked officer cap
-  description: A peaked service cap worn by officers of the United Nations Marine Corps, featuring an in-built headset. It features a gold UNMC emblem and a glossy black visor. Best avoid scuffing that visor unless you have some polish on you.
+  description: A peaked service cap worn by officers of the United Nations Marine Corps, featuring an in-built headset. It features a gold UNMC emblem and a glossy black visor. This one looks significantly worn.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer_nv.rsi

@@ -677,6 +677,7 @@
   parent: RMCJumpsuitMarinePatch
   id: RMCJumpsuitMarineNV
   suffix: Varadero
+  description: A standard-issue Marine uniform with moisture-wicking properties. It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/standard.rsi
@@ -687,7 +688,7 @@
   parent: RMCMarineUniformBase
   id: RMCJumpsuitMarineNVCommander
   name: UNMC Base Commander jumpsuit
-  description: Standard-issue Commanding Officer uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue Commanding Officer uniform . It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/commander.rsi
@@ -696,7 +697,7 @@
   parent: RMCJumpsuitMarineNVCommander
   id: RMCJumpsuitMarineNVSynth
   name: UNMC Support Synthetic jumpsuit
-  description: A standard-issue uniform worn by synthetics of the UNMC.
+  description: A standard-issue uniform worn by synthetics of the UNMC. IIt has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/synth.rsi
@@ -705,7 +706,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitMarineNVMedic
   name: UNMC Medical Technician jumpsuit
-  description: Standard-issue UNMC Medical Technician fatigues. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue UNMC Medical Technician fatigues. It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/medic.rsi
@@ -714,7 +715,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitMarineNVUtility
   name: UNMC utility jumpsuit
-  description: Standard-issue fatigues for UNMC maintenance personnel. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue fatigues for UNMC maintenance personnel. It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/req.rsi
@@ -723,7 +724,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitMarineNVEngi
   name: UNMC Engineer jumpsuit
-  description: Standard-issue fatigues for UNMC engineering personnel. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue fatigues for UNMC engineering personnel. It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/engineer.rsi

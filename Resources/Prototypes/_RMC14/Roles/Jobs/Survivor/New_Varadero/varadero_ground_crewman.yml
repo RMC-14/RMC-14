@@ -91,4 +91,4 @@
         - [ CMBeltUtilityFilled, RMCArmorHelmetCF5Utility, RMCJumpsuitMarineNVEngi ]
         - [ CMBeltUtilityFilled, RMCArmorHelmetCF5UtilityRed, RMCJumpsuitMarineNVEngi ]
         - [ RMCHeadCapPatrolNV, CMBeltUtilityFilled, RMCJumpsuitMarineNVUtility, RMCWeldingGoggles ]
-        - [ RMCHardhatOrange, CMBeltUtilityFilled, WeaponNailgun, RMCJumpsuitMarineNVEngi, RMCWeldingGoggles ]
+        - [ RMCArmorHelmetCF5Utility, CMBeltUtilityFilled, WeaponNailgun, RMCJumpsuitMarineNVEngi, RMCWeldingGoggles ]

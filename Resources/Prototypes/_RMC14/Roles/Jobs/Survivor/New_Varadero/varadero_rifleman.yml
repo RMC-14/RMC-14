@@ -85,7 +85,7 @@
         - [ RMCBoonieNV ]
         - [ RMCHeadCapPatrolNV ]
         - [ RMCArmorHelmetCF5 ]
-        - [ RMCHeadBeanieGray ]
+        - [ RMCHeadBeanie ]
 
 - type: entity
   id: RMCGearSurvivorPresetUNMC

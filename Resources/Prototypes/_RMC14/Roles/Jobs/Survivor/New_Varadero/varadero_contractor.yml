@@ -46,7 +46,8 @@
   name: varadero contractor preset
   suffix: survivor
   categories: [ HideSpawnMenu ]
-  components: # TODO RMC14: Variants
+  components: # TODO RMC14: More variants
   - type: EntityPreset
     randomOutfits:
-    - [ CMSheetMetal20, RMCSatchelNV, CMMaskSterile, RMCShoesJackboots, RMCHazardVestYellow, RMCJumpsuitCivilian, RMCEarmuffs  ]
+    - [ CMSheetMetal20, RMCSatchelNV, CMMaskSterile, RMCShoesJackboots, RMCHazardVestYellow, RMCJumpsuitCivilian, RMCEarmuffs  ] #generic
+    - [ CMSheetMetal20, RMCShoesJackboots, CMJumpsuitLiaisonBrown, RMCSatchelBlack ] # defense consultant

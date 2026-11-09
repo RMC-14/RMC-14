@@ -153,8 +153,8 @@
 - type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigNV
-  name: M276-SCTA2 pattern shotgun shell bandolier
-  description: The M276-SCTA2 is the bandolier configuration of the M276 shell load rig of the UNMC. Good for carrying around extra shells in the heat of the jungle. The A2 variant is specifically designed to fit the UNMC's needs for load-bearing equipment that was not reliant on inbuilt load bearings such as the leather straps of the M3 Pattern Chestplate.
+  name: M276-B pattern shotgun shell bandolier
+  description: The M276-B is the bandolier configuration of the M276 shell load rig of the UNMC. The M276-B series design was created due to a need for a cost-effective option for UNMC troops operating in densely forested and lush tropical areas, where a disposable belt with less overall bulk and a larger range of motion is often more important than a primary load-bearing mechanism with a larger carrying capacity.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/shotgun_nv.rsi
@@ -1523,8 +1523,8 @@
 - type: entity
   parent: RMCBeltSPPBrown
   id: RMCBeltNV
-  name: M276-BDA2 pattern ammo bandolier
-  description: The M276-BDA2 is the bandolier configuration of the M276 ammo load rig of the UNMC. Good for carrying around extra ammo in the heat of the jungle. The A2 variant is specifically designed to fit the UNMC's needs for load-bearing equipment that was not reliant on inbuilt load bearings such as the leather straps of the M3 Pattern Chestplate.
+  name: M276-B pattern ammo bandolier
+  description: The M276-B is the bandolier configuration of the M276 ammo load rig of the UNMC. The M276-B series design was created due to a need for a cost-effective option for troops operating in densely forested and tropical areas, where a disposable belt with less overall bulk and a larger range of motion is often more important than a primary load-bearing mechanism with a larger carrying capacity.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/ammobelt_nv.rsi

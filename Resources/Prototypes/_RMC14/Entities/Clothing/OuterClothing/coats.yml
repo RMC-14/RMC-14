@@ -652,7 +652,7 @@
   parent: CMCoatOfficer
   id: RMCCoatServiceNVCommander
   name: UNMC base commander bridge coat
-  description: A heavy coat, custom fitted for an UNMC Commander. Being based on a classical design, this coat is quite nice on cold nights in the air conditioned CIC or a miserable cold night on a barren world.
+  description: A heavy coat, custom fitted for an UNMC Commander. Quite an uncommon sight on the frontier, as officers on Zephyron are often issued lower quality equipment.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/nv_commander.rsi

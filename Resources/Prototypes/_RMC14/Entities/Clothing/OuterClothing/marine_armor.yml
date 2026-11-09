@@ -1016,7 +1016,7 @@
   parent: CMArmorM3Medium
   id: RMCArmorPDU
   name: PDU-80 modular vest
-  description: The PDU-80 is an older-generation vest currently in use by Marine ground crews and aerofighter pilots. It is a combination of both a flak vest and a modular body armor system. The chestpiece can be worn alone to provide protection against fragmentation and smaller calibers while allowing the attachment of life preservers and additional armor inserts to suit the individual needs of the user.
+  description: The PDU-80 is an older-generation vest currently in use by Marine ground crews and aerofighter pilots. It is a combination of both a flak vest and a modular body armor system. The chestpiece can be worn alone to provide protection against fragmentation and smaller firearm calibers while allowing the attachment of life preservers and additional armor inserts to suit the individual needs of the user.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot_fighter.rsi
