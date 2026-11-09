@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: JustMyselfUwU
-  changes:
-  - message: Fixed the QYJ not requiring a skill to use it, fixed some of its stats
-      and added its integrated bipod.
-    type: Fix
-  id: 3246
-  time: '2026-05-31T02:41:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9868
-- author: JustMyselfUwU
-  changes:
-  - message: Added a health indicator to the m2c and ml66d, you will now have a rough
-      idea of how damaged they are.
-    type: Add
-  - message: Fixed sentries missing most of their damage indicator text, you can once
-      again determine how much damage your sentry has.
-    type: Fix
-  - message: Changed xeno damage examines from 25, 50, and 75 damage to 100, 200,
-      and 300 damage.
-    type: Tweak
-  id: 3247
-  time: '2026-05-31T02:46:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9926
 - author: MidZik
   changes:
   - message: Leap, Pounce, Dash, Rush, Assault, and Headbutt no longer overshoot,
@@ -4529,5 +4507,25 @@
   id: 3745
   time: '2026-11-09T16:45:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10912
+- author: MidZik
+  changes:
+  - message: Xenos who try to move while resting will now wake up.
+    type: Add
+  id: 3746
+  time: '2026-11-09T21:43:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10770
+- author: Vermidia
+  changes:
+  - message: Fixed hijack deleting xenos/structures etc before the dropship goes into
+      FTL. These now trigger once it enters FTL.
+    type: Fix
+  - message: Fixed the dropship xeno alert happening on dropship launch. It now happens
+      when it arrives.
+    type: Fix
+  - message: Fixed dropship xeno alert saying "dropship Dropship [name]"
+    type: Fix
+  id: 3747
+  time: '2026-11-09T21:43:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11076
 Name: RMC14
 Order: -1
