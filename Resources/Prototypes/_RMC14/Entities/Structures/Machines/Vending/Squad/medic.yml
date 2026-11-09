@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechMedicalGear
-  name: ColMarTech squad medical gear rack
+  name: ASRS squad medical gear rack
   description: An automated gear rack for hospital corpsmen.
   components:
   - type: AccessReader
@@ -207,7 +207,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechMedicalEquipment
-  name: ColMarTech squad medical equipment rack
+  name: ASRS squad medical equipment rack
   description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
   components:
   - type: AccessReader
@@ -326,7 +326,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCColMarTechMedicalEquipmentPVE
-  name: ColMarTech squad medical equipment rack
+  name: ASRS squad medical equipment rack
   description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
   suffix: PVE
   components:
@@ -524,7 +524,7 @@
   parent: RMCColMarTechMedicalEquipmentPVE
   id: ColMarTechMedicalChemicalPVE
   suffix: PVE
-  name: ColMarTech squad medical chemical rack
+  name: ASRS squad medical chemical rack
   description: An automated gear rack for specialized chemicals for the hospital corpsman.
   components:
   - type: Sprite
@@ -561,11 +561,10 @@
         points: 40
       - id: RMCLargeBottleDexalinPlus
         points: 30
-    # TODO RMC14: the minitank is currently non functional
-    # - name: Injectors
-    #   entries:
-    #   - id: CMMiniTank
-    #     points: 40
+    - name: Injectors
+      entries:
+      - id: CMMiniTank
+        points: 40
 
 - type: entity
   parent: ColMarTechMedicalChemicalPVE
@@ -608,8 +607,7 @@
         points: 40
       - id: RMCLargeBottleDexalinPlus
         points: 30
-    # TODO RMC14: the minitank is currently non functional
-    # - name: Injectors
-    #   entries:
-    #   - id: CMMiniTank
-    #     points: 40
+    - name: Injectors
+      entries:
+      - id: CMMiniTank
+        points: 40

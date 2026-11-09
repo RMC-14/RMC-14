@@ -1,0 +1,53 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazBase
+  id: RMCSurvivorSPPSpetsnazOperator
+  name: rmc-job-name-spetsnaz-operator
+  icon: "RMCJobIconSPPSpetsnazOperator"
+  spawnMenuRoleName: SPP Spetsnaz B/SRU Operator (Sorokyne Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: RMCAllowSuitStorage
+    - type: RMCSurvivor
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPPrivate
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-spetsnaz-operator
+    - type: AssignSquad
+      squad: SquadSPP
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazOperator
+  name: special survivor spp spetsnaz operator spawn point
+  suffix: Sorokyne
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazOperator
+  - type: Sprite
+    state: surv_spp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSpetsnazOperator
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
+    state: spp_sptz_opr

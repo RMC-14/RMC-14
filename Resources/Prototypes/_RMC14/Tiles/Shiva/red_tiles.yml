@@ -1,4 +1,4 @@
-﻿- type: tile
+- type: tile
   abstract: true
   parent: CMTileBase
   id: CMFloorSteelShivaRedBase
@@ -68,6 +68,16 @@
   parent: CMFloorSteelShivaRedBase
   id: CMFloorSteelShivaRedFull0
   sprite: /Textures/_RMC14/Tiles/shiva/redfull_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaRedBase
+  id: CMFloorSteelShivaRedFull1
+  sprite: /Textures/_RMC14/Tiles/shiva/redfull_1.png
+
+- type: tile
+  parent: CMFloorSteelShivaRedBase
+  id: CMFloorSteelShivaRedFull2
+  sprite: /Textures/_RMC14/Tiles/shiva/redfull_2.png
 
 - type: tile
   parent: CMFloorSteelShivaRedBase

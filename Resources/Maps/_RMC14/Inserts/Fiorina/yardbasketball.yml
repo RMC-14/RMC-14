@@ -1,0 +1,359 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 264.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 05/30/2026 22:48:25
+  entityCount: 19
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  3: CMFloorSteelPlanetAstroGrass
+  4: CMFloorSteelPrisonPlate
+  2: CMFloorStrata3
+  1: CMPlanetWood
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+        -1,0:
+          ind: -1,0
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaZE4
+          decals:
+            19: 12,0
+            21: 12,2
+            23: 12,4
+            134: 12,1
+            135: 12,3
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaZN2
+          decals:
+            24: 0,4
+            26: 2,4
+            27: 4,4
+            28: 3,4
+            29: 5,4
+            30: 6,4
+            31: 7,4
+            32: 8,4
+            33: 9,4
+            34: 10,4
+            36: 12,4
+            99: 11,4
+            100: 1,4
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaZS3
+          decals:
+            1: 0,0
+            3: 2,0
+            4: 3,0
+            5: 4,0
+            6: 5,0
+            7: 6,0
+            8: 7,0
+            9: 8,0
+            10: 9,0
+            11: 10,0
+            13: 12,0
+            97: 1,0
+            98: 11,0
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaZW1
+          decals:
+            14: 0,0
+            18: 0,4
+            121: 0,2
+            126: 0,1
+            127: 0,3
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner0
+          decals:
+            87: 1,1
+            101: 8.439146,2.5005422
+            109: 5.432431,2.499379
+            111: 2.5802517,2.5002186
+            129: -0.4725021,2.490779
+            131: 11.466375,2.4969518
+        - node:
+            angle: -3.141592653589793 rad
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner1
+          decals:
+            128: -0.47558856,1.490779
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner1
+          decals:
+            92: 11,1
+            102: 9.439146,2.5005422
+            106: 6.432431,2.499379
+            112: 3.5771656,2.5002186
+            123: 0.5265291,2.489545
+            130: 12.466375,2.4969518
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner2
+          decals:
+            91: 11,3
+            103: 9.439146,1.5036285
+            107: 6.432431,1.5024652
+            113: 3.5771656,1.5002186
+            124: 0.5246855,1.489545
+            132: 12.469461,1.5062113
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner3
+          decals:
+            89: 1,3
+            104: 8.439146,1.5067148
+            108: 5.4355173,1.5024652
+            114: 2.5802517,1.5002186
+            133: 11.469461,1.5062113
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner4
+          decals:
+            72: 9,3
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner5
+          decals:
+            79: 3,3
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner6
+          decals:
+            80: 3,1
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeCorner7
+          decals:
+            71: 9,1
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeHorizontal0
+          decals:
+            76: 10,1
+            77: 11,1
+            78: 12,1
+            81: 2,1
+            82: 1,1
+            83: 0,1
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeHorizontal1
+          decals:
+            73: 10,3
+            74: 11,3
+            75: 12,3
+            84: 2,3
+            90: 1,3
+            136: 0,3
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeVertical0
+          decals:
+            37: 6,4
+            38: 6,3
+            39: 6,1
+            40: 6,0
+            93: 11,0
+            94: 11,4
+            105: 9,2
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalRoadEdgeVertical1
+          decals:
+            95: 1,0
+            96: 1,4
+            110: 5.8768754,1.0456753
+            115: 3,2
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: ImplicitRoof
+- proto: Basketball
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 6.5,2.5
+      parent: 1
+- proto: CigaretteSpent
+  entities:
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 5.6565647,2.1775646
+      parent: 1
+- proto: RMCAegisCorpseSpawner
+  entities:
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 1.5,2.5
+      parent: 1
+- proto: RMCAegisSpawner
+  entities:
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+- proto: RMCBasePropCasing7
+  entities:
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 8.559931,3.5326724
+      parent: 1
+- proto: RMCBasketballHoop
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 12.5,2.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 5
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,2.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 9.5,3.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 8.5,2.5
+      parent: 1
+- proto: RMCFoodPacketBarcaridineTrash
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 1.5456977,4.4867706
+      parent: 1
+- proto: RMCFoodPacketCHUNKTrash
+  entities:
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 4.429718,1.6243354
+      parent: 1
+- proto: RMCLampTripod
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 13.481939,2.5208335
+      parent: 1
+- proto: RMCMagazineSMGMAC15
+  entities:
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 7.587453,2.982621
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 7
+    components:
+    - type: MetaData
+      name: Garden
+    - type: Transform
+      pos: 6.5,2.5
+      parent: 1
+- proto: RMCSpaceCash100
+  entities:
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 9.16583,4.404044
+      parent: 1
+- proto: RMCSpawnerCorpseUNRiotOfficer
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 9.5,3.5
+      parent: 1
+- proto: RMCWeaponShotgunHG3712
+  entities:
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+- proto: WeaponSMGMAC15
+  entities:
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 7.789098,3.5118246
+      parent: 1
+...
