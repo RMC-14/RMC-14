@@ -23,7 +23,7 @@
       - id: RMCHandsVeteran
         name: Combat Gloves
         amount: 15
-      - id: RMCHeadsetDistressPMCPVE
+      - id: RMCHeadsetPMCPVE
         name: PMC Radio Headset
         amount: 15
       - id: RMCCameraGearPMC
