@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Add weld effect to welding
-    type: Add
-  - message: Single tile double doors will now both break if one is broken, both be
-      welded if one is welded.
-    type: Fix
-  id: 3241
-  time: '2026-05-31T02:31:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9905
 - author: Arykh
   changes:
   - message: Medbay's chemical dispensers now scale with the marine population. Scaling
@@ -4532,5 +4522,13 @@
   id: 3740
   time: '2026-11-08T11:55:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10471
+- author: IceNoobXD
+  changes:
+  - message: You can now click on yourself to perform a self-scan with the data detector,
+      as it no longer pings if the user has intel on themselves!
+    type: Add
+  id: 3741
+  time: '2026-11-09T05:09:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10524
 Name: RMC14
 Order: -1
