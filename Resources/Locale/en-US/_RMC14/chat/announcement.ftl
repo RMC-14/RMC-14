@@ -52,6 +52,8 @@ rmc-announcement-ares-lz-designated = Command Order Issued:
 
     {$name} has been designated as the primary landing zone.
 
+rmc-announcement-lz-designated-overlay = {$name} has been designated as the primary landing zone.
+
 rmc-announcement-ares-online = [color=#CECECE][font size=16][bold]ARES Online[/bold][/font][/color][color=red][font size=16][bold]
 
     {$message}[/bold][/font][/color]
