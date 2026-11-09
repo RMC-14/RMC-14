@@ -70,6 +70,9 @@
     pocket2: CMClipboard # TODO RMC14 notepad
   inhand:
   - RMCBriefcasePaperPen # TODO RMC14 secure briefcase
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: playTimeTracker
   id: RMCJobCorporateLegalSupervisor
@@ -149,6 +152,9 @@
     pocket2: CMClipboard # TODO RMC14 notepad
   inhand:
   - CMPaper
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: playTimeTracker
   id: RMCJobCorporateExecutiveSpecialist
@@ -220,6 +226,9 @@
     back: CMSatchel
     id: CMIDCardPMCExecutive
     ears: RMCHeadsetDistressWeYa
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: playTimeTracker
   id: RMCJobCorporateExecutiveSupervisor
@@ -301,6 +310,9 @@
     id: CMIDCardPMCExecutive
     ears: RMCHeadsetDistressPMCDirector
     head: RMCHeadCapManager
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: playTimeTracker
   id: RMCJobCorporateAssistantManager
@@ -523,6 +535,9 @@
     id: CMIDCardPMCExecutive
     ears: RMCHeadsetDistressPMCDirector
     head: ArmorHelmetPMCDirector
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: playTimeTracker
   id: RMCJobCorporateDeputyDirector
