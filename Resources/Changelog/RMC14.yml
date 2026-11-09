@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added parity boxes, donk pockets, and drink glasses
-    type: Add
-  id: 3245
-  time: '2026-05-31T02:42:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9928
 - author: JustMyselfUwU
   changes:
   - message: Fixed the QYJ not requiring a skill to use it, fixed some of its stats
@@ -4529,5 +4522,12 @@
   id: 3744
   time: '2026-11-09T16:22:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10888
+- author: Vermidia
+  changes:
+  - message: Fixed reagents reacting in the stomach.
+    type: Fix
+  id: 3745
+  time: '2026-11-09T16:45:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10912
 Name: RMC14
 Order: -1
