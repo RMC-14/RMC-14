@@ -13,14 +13,6 @@
     outerClothing: RMCProvostCoatFilled
 
 - type: loadout
-  id: RMCWeaponPistolHandcannon
-  cost: 0
-  dummyEntity: RMCWeaponPistolHandcannon
-  equipment:
-    belt: RMCBeltHolsterPistolHandcannonFilled
-
-- type: loadout
-  id: RMCWeaponPistolHandcannonProvost
   id: RMCProvostJacketBlueFilled
   cost: 0
   effects:
@@ -31,6 +23,27 @@
       time: 432000 # 120 hrs
   equipment:
     outerClothing: RMCProvostJacketBlueFilled
+
+## Sidearm
+- type: loadout
+  id: RMCWeaponPistolHandcannon
+  cost: 0
+  dummyEntity: RMCWeaponPistolHandcannon
+  equipment:
+    belt: RMCBeltHolsterPistolHandcannonFilled
+
+- type: loadout
+  id: RMCWeaponPistolHandcannonProvost
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobProvostInspector
+      time: 540000 # 150 hrs
+  dummyEntity: RMCWeaponPistolHandcannonProvost
+  equipment:
+    belt: RMCBeltHolsterPistolHandcannonProvostFilled
 
 ## Headwear
 - type: loadout
