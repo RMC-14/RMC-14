@@ -1,71 +1,4 @@
 ﻿Entries:
-- author: Vexerot
-  changes:
-  - message: Echo and Foxtrot SLs can now track the XO / CO.
-    type: Fix
-  id: 3236
-  time: '2026-05-31T01:39:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9887
-- author: JustMyselfUwU
-  changes:
-  - message: Fixed the firerate of guns with an inactive bipod attached being too
-      high
-    type: Fix
-  id: 3237
-  time: '2026-05-31T01:43:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9867
-- author: Shromply
-  changes:
-  - message: '[PVE] Added the Syracuse pump-action shotgun, a quick firing shotgun
-      with a capacity of five shells.'
-    type: Add
-  id: 3238
-  time: '2026-05-31T02:07:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9852
-- author: Vexerot
-  changes:
-  - message: Boiler bombard no longer exposes the Boiler's identity to marines.
-    type: Fix
-  id: 3239
-  time: '2026-05-31T02:19:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8932
-- author: Rainbeon
-  changes:
-  - message: The buttons for choose structures have been restored to be more responsive,
-      and will immediately select the option you click on once again.
-    type: Fix
-  id: 3240
-  time: '2026-05-31T02:23:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9807
-- author: Vixting
-  changes:
-  - message: Add weld effect to welding
-    type: Add
-  - message: Single tile double doors will now both break if one is broken, both be
-      welded if one is welded.
-    type: Fix
-  id: 3241
-  time: '2026-05-31T02:31:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9905
-- author: Arykh
-  changes:
-  - message: Medbay's chemical dispensers now scale with the marine population. Scaling
-      affects the recharge rate and max energy.
-    type: Add
-  id: 3242
-  time: '2026-05-31T02:35:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9044
-- author: SharkSnake98
-  changes:
-  - message: Added the RT-8000 bag phone, a radio-telephone satchel for the Liaison
-      and Correspondent available in their safe and vendor respectively
-    type: Add
-  - message: Added the T70 bag phone, a radio-telephone satchel for the Liaison available
-      as a gameplay reward unlocked at Senior Executive
-    type: Add
-  id: 3243
-  time: '2026-05-31T02:37:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9588
 - author: CatAndHats
   changes:
   - message: Fixed Hedgehog Ravager's resting while injured sprites
@@ -4528,5 +4461,73 @@
   id: 3735
   time: '2026-11-06T23:26:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10932
+- author: Thereisabear
+  changes:
+  - message: Added new and redesigned playtime icons for xenonids made by thefairykings.
+    type: Add
+  id: 3736
+  time: '2026-11-08T11:46:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11068
+- author: MidZik
+  changes:
+  - message: Using repeatable abilities, such as applying acid, on entities in a context
+      menu will no longer close the context menu.
+    type: Add
+  id: 3737
+  time: '2026-11-08T11:48:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10540
+- author: Thereisabear
+  changes:
+  - message: Fixed expand weeds cooldown not reading from prototype (1s -> 0.5s).
+      It no longer deselects on use by Vermidia.
+    type: Fix
+  id: 3738
+  time: '2026-11-08T11:47:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10473
+- author: Thereisabear
+  changes:
+  - message: B8 Smartscope do-after from 0.8 -> 0.4
+    type: Fix
+  id: 3739
+  time: '2026-11-08T11:49:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11069
+- author: Thereisabear
+  changes:
+  - message: Scope attachments now only show its Action Bar button once attached to
+      appropriate gun.
+    type: Tweak
+  - message: Fixed the popup text when trying to use unattached scopes.
+    type: Fix
+  - message: Fixed being able to toggle Flashlight rail and grip via the verb.
+    type: Fix
+  id: 3740
+  time: '2026-11-08T11:55:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10471
+- author: IceNoobXD
+  changes:
+  - message: You can now click on yourself to perform a self-scan with the data detector,
+      as it no longer pings if the user has intel on themselves!
+    type: Add
+  id: 3741
+  time: '2026-11-09T05:09:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10524
+- author: CyberTropic
+  changes:
+  - message: Fixed barricade downgrading being instant instead of taking 0.5 seconds.
+    type: Fix
+  - message: Fixed barricade downgrading returning all of the upgrade material instead
+      of only half.
+    type: Fix
+  id: 3742
+  time: '2026-11-09T05:23:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10947
+- author: Vermidia
+  changes:
+  - message: Health analyzers no longer update continuously if you are too far from
+      the scanned target, or if the user would require a doafter to use the analyzer.
+    type: Tweak
+  id: 3743
+  time: '2026-11-09T05:42:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10568
 Name: RMC14
 Order: -1
