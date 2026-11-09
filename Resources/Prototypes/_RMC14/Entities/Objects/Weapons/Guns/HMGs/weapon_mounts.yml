@@ -78,7 +78,7 @@
   - type: RMCHealthExaminable
     speciesType: Mechanical
   - type: RMCNightVisionVisible
-    priority: -1
+    priority: 1
 
 - type: entity
   parent: RMCBaseWeaponMount
