@@ -85,6 +85,7 @@
   - "Minirockets pack the most punch per cost as far as CAS weaponry is concerned."
   - "The underbarrel shotgun can instantly break down both resin doors and mechanical airlocks, and it's not bad at breaking walls down either."
   - "Requisitions may not grant you service if you are a 'pajamarine' (a marine in cryosleep attire). Be sure to dress up!"
+  - "Painkillers do not stack. Only the strongest has any effect."
   - "Don't underestimate the mortar! with ammo and proper communication it can hit surprisingly hard."
   - "You can shoot through tents, but they won't protect you much in return."
   - "Reqs doesn't have an infinite budget."
@@ -181,7 +182,6 @@
   #- You can check the landing zone as a marine in the status panel.
   #- Be careful! Barricades block grenades, and indeed all thrown items, from the front if they're barbed up.
   #- CAS Fire Missions doubles the accuracy of fired weapons, which can be substantial.
-  #- Painkillers do not stack. Only the strongest has any effect.
   #- Armor has a randomized reduction in effectiveness, and does not protect the digits. Take the wiki damage values as a best-case scenario.
   #- You can click on your Security Access Tuner (multitool) in your hand to locate the area's APC if there is one.
   #- Armor has insulative properties - taking it off will help you cool off and take less damage faster if you've been set on fire.
