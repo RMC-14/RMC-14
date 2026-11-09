@@ -8,6 +8,7 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -34,6 +35,7 @@ public sealed class XenoHeadbiteSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly ProtoId<StatusEffectPrototype> Unconsciousness = "Unconscious";
 
@@ -83,7 +85,8 @@ public sealed class XenoHeadbiteSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
+            if (_xeno.CanHeal(xeno))
+                SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
             SpawnAttachedTo(xeno.Comp.HeadbiteEffect, target.ToCoordinates());
             _emote.TryEmoteWithChat(xeno, xeno.Comp.Emote, cooldown: xeno.Comp.EmoteCooldown);
             _audio.PlayPvs(xeno.Comp.HitSound, xeno);
@@ -101,11 +104,18 @@ public sealed class XenoHeadbiteSystem : EntitySystem
 
         _rmcDamageable.DoLethalDamage(target, false, xeno);
 
-        var selfMsg = Loc.GetString("rmc-xeno-headbite-hit-self", ("xeno", xeno.Owner), ("target", target));
-        _popup.PopupClient(selfMsg, xeno, xeno, PopupType.Medium);
+        var selfMessage = Loc.GetString("rmc-xeno-headbite-hit-self", ("target", Identity.Name(target, EntityManager, xeno)));;
+        _popup.PopupClient(selfMessage, xeno, xeno, PopupType.Medium);
 
-        var othersMsg = Loc.GetString("rmc-xeno-headbite-hit-others", ("xeno", xeno.Owner), ("target", target));
-        _popup.PopupEntity(othersMsg, xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
+        var others = Filter.PvsExcept(xeno).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+            continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-headbite-hit-others", ("xeno", Identity.Name(xeno, EntityManager, otherEnt)), ("target", Identity.Name(target, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, xeno, otherEnt, PopupType.MediumCaution);
+        }
     }
 
     private bool CanHeadbite(EntityUid xeno, EntityUid target)

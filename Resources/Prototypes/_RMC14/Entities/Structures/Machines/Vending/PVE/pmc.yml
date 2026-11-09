@@ -26,7 +26,7 @@
       - id: RMCHandsVeteranPMC
         name: WeYa Combat Gloves
         amount: 15
-      - id: RMCHeadsetDistressPMCPVE
+      - id: RMCHeadsetPMCPVE
         name: PMC Radio Headset
         amount: 15
       - id: RMCCameraGearPMC

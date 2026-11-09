@@ -4,7 +4,7 @@
     children:
     - id: RMCBootsPMCFilled
     - id: RMCJumpsuitVeteranPMCNoWebbing
-    - id: RMCHeadsetDistressPMCPVE
+    - id: RMCHeadsetPMCPVE
 
 - type: entityTable
   id: RMCClosetPMCSLFill
