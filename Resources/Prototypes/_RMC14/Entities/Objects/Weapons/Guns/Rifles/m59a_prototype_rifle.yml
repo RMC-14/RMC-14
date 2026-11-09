@@ -185,3 +185,6 @@
       rmc-aslot-rail: 0.1, 0.09375
       rmc-aslot-stock: -0.78, 0.0325
       rmc-aslot-underbarrel: 0.374, -0.373
+
+- type: Tag
+  id: RMCWeaponRifleM59A
