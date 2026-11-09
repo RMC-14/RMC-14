@@ -345,7 +345,7 @@
       - type: RMCRooted
     priorityWhitelist:
       components:
-      - XenoComponent
+      - Xeno
   - type: ActionTargetNonHiveAlly
     defer: true
 
