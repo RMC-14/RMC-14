@@ -16,7 +16,7 @@ public sealed partial class HiveTeamMemberComponent : Component
     [DataField, AutoNetworkedField]
     public Color IconColor = Color.FromHex("#7B2FBE");
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntProtoId ViewActionId = "ActionXenoHiveTeamMemberView";
 
     [DataField, AutoNetworkedField]
