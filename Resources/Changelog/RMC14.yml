@@ -1,47 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Add weld effect to welding
-    type: Add
-  - message: Single tile double doors will now both break if one is broken, both be
-      welded if one is welded.
-    type: Fix
-  id: 3241
-  time: '2026-05-31T02:31:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9905
-- author: Arykh
-  changes:
-  - message: Medbay's chemical dispensers now scale with the marine population. Scaling
-      affects the recharge rate and max energy.
-    type: Add
-  id: 3242
-  time: '2026-05-31T02:35:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9044
-- author: SharkSnake98
-  changes:
-  - message: Added the RT-8000 bag phone, a radio-telephone satchel for the Liaison
-      and Correspondent available in their safe and vendor respectively
-    type: Add
-  - message: Added the T70 bag phone, a radio-telephone satchel for the Liaison available
-      as a gameplay reward unlocked at Senior Executive
-    type: Add
-  id: 3243
-  time: '2026-05-31T02:37:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9588
-- author: CatAndHats
-  changes:
-  - message: Fixed Hedgehog Ravager's resting while injured sprites
-    type: Fix
-  id: 3244
-  time: '2026-05-31T02:42:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9927
-- author: SharkSnake98
-  changes:
-  - message: Added parity boxes, donk pockets, and drink glasses
-    type: Add
-  id: 3245
-  time: '2026-05-31T02:42:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9928
 - author: JustMyselfUwU
   changes:
   - message: Fixed the QYJ not requiring a skill to use it, fixed some of its stats
@@ -4532,5 +4489,45 @@
   id: 3740
   time: '2026-11-08T11:55:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10471
+- author: IceNoobXD
+  changes:
+  - message: You can now click on yourself to perform a self-scan with the data detector,
+      as it no longer pings if the user has intel on themselves!
+    type: Add
+  id: 3741
+  time: '2026-11-09T05:09:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10524
+- author: CyberTropic
+  changes:
+  - message: Fixed barricade downgrading being instant instead of taking 0.5 seconds.
+    type: Fix
+  - message: Fixed barricade downgrading returning all of the upgrade material instead
+      of only half.
+    type: Fix
+  id: 3742
+  time: '2026-11-09T05:23:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10947
+- author: Vermidia
+  changes:
+  - message: Health analyzers no longer update continuously if you are too far from
+      the scanned target, or if the user would require a doafter to use the analyzer.
+    type: Tweak
+  id: 3743
+  time: '2026-11-09T05:42:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10568
+- author: kleinerstation13
+  changes:
+  - message: Removed the cooldown between taking flares out of a flare pouch
+    type: Tweak
+  id: 3744
+  time: '2026-11-09T16:22:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10888
+- author: Vermidia
+  changes:
+  - message: Fixed reagents reacting in the stomach.
+    type: Fix
+  id: 3745
+  time: '2026-11-09T16:45:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10912
 Name: RMC14
 Order: -1
