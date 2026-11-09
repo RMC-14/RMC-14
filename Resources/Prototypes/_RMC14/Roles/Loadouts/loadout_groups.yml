@@ -1042,7 +1042,6 @@
   - RMCWeaponPistolHandcannon
   - RMCWeaponPistolHandcannonProvost
 
-
 - type: loadoutGroup
   id: ProvostRoleSpecificHeadRMC
   name: rmc-loadout-group-provost-role-specific-headwear
