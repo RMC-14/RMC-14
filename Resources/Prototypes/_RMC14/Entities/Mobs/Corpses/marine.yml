@@ -111,7 +111,7 @@
   id: RMCCorpseUNMCMedicRandom
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic2, RMCGearCorpseUNMCMedic3, RMCGearCorpseUNMCMedic4 ] # TODO RMC14: M20A preset
+    prototypes: [ RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic2, RMCGearCorpseUNMCMedic3, RMCGearCorpseUNMCMedic4 ] # TODO RMC14: Better randomization than this
   - type: Rank
     rank: RMCRankLanceCorporal
 
