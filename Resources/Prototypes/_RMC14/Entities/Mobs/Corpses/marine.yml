@@ -111,36 +111,65 @@
   id: RMCCorpseUNMCMedicRandom
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic2 ] # TODO RMC14: Better randomization than this
+    prototypes: [ RMCGearCorpseUNMCMedic1, RMCGearCorpseUNMCMedic2, RMCGearCorpseUNMCMedic3, RMCGearCorpseUNMCMedic4 ] # TODO RMC14: M20A preset
   - type: Rank
     rank: RMCRankLanceCorporal
 
 - type: startingGear
+  id: RMCGearCorpseUNMCMedicBase
+  equipment:
+    jumpsuit: RMCJumpsuitMarineNV
+    head: RMCArmorHelmetCF5Medic
+    ears: RMCHeadsetMarineNV
+    shoes: CMBootsUrbanFilled
+    id: CMDogtagHospitalCorpsman
+    gloves: RMCHandsBrownMarine
+    belt: CMBeltMedical
+    outerClothing: RMCArmorPDU
+
+# 1
+- type: startingGear
+  parent: RMCGearCorpseUNMCMedicBase
   id: RMCGearCorpseUNMCMedic1
   equipment:
-    jumpsuit: JumpsuitMarine
-    back: CMSatchelMarineTech
-    head: CMArmorHelmetM10Medic
-    ears: CMHeadsetColony
-    shoes: CMBootsBlackFilled
-    id: CMDogtagHospitalCorpsman
-    gloves: CMHandsBlackMarine
-    belt: CMBeltMedical
-    outerClothing: RMCArmorAM2
+    belt: RMCBeltMedicBagNV
+    back: RMCBackpackNV
 
+# 2
 - type: startingGear
+  parent: RMCGearCorpseUNMCMedicBase
   id: RMCGearCorpseUNMCMedic2
   equipment:
-    jumpsuit: JumpsuitMarine
-    back: CMSatchelMarineTech
-    head: CMArmorHelmetM10Medic
-    ears: CMHeadsetColony
-    shoes: CMBootsBlackFilled
-    id: CMDogtagHospitalCorpsman
-    gloves: CMHandsBlackMarine
+    belt: RMCBeltMedicBagNV
+    back: RMCSatchelNV
+  storage:
+    belt:
+    - CMTraumaKit10
+
+# 3
+- type: startingGear
+  parent: RMCGearCorpseUNMCMedicBase
+  id: RMCGearCorpseUNMCMedic3
+  equipment:
+    belt: RMCBeltMedicBagNV
+    back: RMCSatchelNV
+  storage:
+    belt:
+    - CMTraumaKit10
+    - CMBurnKit10
+
+# 4
+- type: startingGear
+  parent: RMCGearCorpseUNMCMedicBase
+  id: RMCGearCorpseUNMCMedic4
+  equipment:
+    belt: RMCBeltMedicBagNVFilledPartial
+    back: RMCBackpackNV
     pocket2: RMCPouchMagazine
-    belt: RMCBeltMedicalDefibAnalyzerFilled
-    outerClothing: RMCArmorAM2
+  storage:
+    back:
+    - CMDefibrillator
+
 
 # Medtech
 - type: randomHumanoidSettings
@@ -155,40 +184,58 @@
 - type: startingGear
   id: RMCGearCorpseUNMCMedicalTechnicianBase
   equipment:
-    jumpsuit: RMCJumpsuitCivilianGreen
-    back: CMSatchelMarineTech
-    ears: CMHeadsetColony
+    jumpsuit: RMCJumpsuitMarineNVMedic
+    ears: RMCHeadsetMarineNV
+    shoes: CMBootsUrbanFilled
+    back: RMCSatchelNV
     eyes: RMCGlassesMedicalHUDGlasses
-    shoes: CMBootsBlackFilled
     id: CMIDCardMedicalTechnician
-    gloves: CMHandsBlackMarine
+    gloves: RMCHandsBrownMarine
     belt: CMBeltMedical
+    outerClothing: RMCArmorPDU
 
 - type: startingGear
   parent: RMCGearCorpseUNMCMedicalTechnicianBase
   id: RMCGearCorpseUNMCMedicalTechnician1
   equipment:
-    outerClothing: RMCArmorAM2
+    outerClothing: CMArmorM3VLBallistics
+    belt: RMCBeltMedicBagNV
+  storage:
+    belt:
+    - CMTraumaKit10
+    - CMBurnKit10
 
 - type: startingGear
   parent: RMCGearCorpseUNMCMedicalTechnicianBase
   id: RMCGearCorpseUNMCMedicalTechnician2
   equipment:
     outerClothing: RMCJacketWindbreaker
+    belt: RMCBeltMedicBagNV
+  storage:
+    belt:
+    - CMTraumaKit10
 
 - type: startingGear
   parent: RMCGearCorpseUNMCMedicalTechnicianBase
   id: RMCGearCorpseUNMCMedicalTechnician3
   equipment:
     outerClothing: RMCLabcoatBrown
+    belt: RMCBeltMedicBagNV
+  storage:
+    belt:
+    - CMTraumaKit10
+    - CMBurnKit10
 
 - type: startingGear
   parent: RMCGearCorpseUNMCMedicalTechnicianBase
   id: RMCGearCorpseUNMCMedicalTechnician4
   equipment:
-    outerClothing: RMCArmorAM2
-    belt: RMCBeltMedicalDefibAnalyzerFilled
-    head: ArmorHelmetM10
+    outerClothing: CMArmorM3VLBallistics
+    head: RMCArmorHelmetCF5UtilityWhite
+    belt: RMCBeltMedicBagNVFilledPartial
+  storage:
+    back:
+    - CMDefibrillator
 
 # Veteran Rifleman (MP on CM)
 - type: randomHumanoidSettings
@@ -229,8 +276,8 @@
     head: CMArmorHelmetHDU44
     jumpsuit: RMCJumpsuitPilotFighter
     back: RMCParachute
-    ears: CMHeadsetColony
-    shoes: CMBootsBlackFilled
+    ears: RMCHeadsetMarineNV
+    shoes: CMBootsUrbanFilled
     id: CMDogtagUNMCPilot
     gloves: CMHandsInsulatedPilot
     outerClothing: RMCArmorPDU
@@ -248,45 +295,47 @@
 - type: startingGear
   id: RMCGearCorpseUNMCCrewmanBase
   equipment:
-    jumpsuit: JumpsuitMarine
-    ears: CMHeadsetColony
-    shoes: CMBootsBlackFilled
+    ears: RMCHeadsetMarineNV
+    shoes: CMBootsUrbanFilled
     id: CMDogtagCrewman
-    gloves: CMHandsBlackMarine
-    outerClothing: RMCArmorVestFlak
+    gloves: CMHandsInsulated
+    back: RMCSatchelNV
 
 - type: startingGear
   parent: RMCGearCorpseUNMCCrewmanBase
   id: RMCGearCorpseUNMCCrewman1
   equipment:
-    head: RMCHeadCapFlippable
-    outerClothing: RMCHazardVest
+    jumpsuit: RMCJumpsuitMarineNVUtility
+    eyes: RMCSunglassesBig
+    head: RMCArmorHelmetCF5UtilityRed
+    outerClothing: RMCArmorPDU
     belt: CMFireExtinguisher
 
 - type: startingGear
   parent: RMCGearCorpseUNMCCrewmanBase
   id: RMCGearCorpseUNMCCrewman2
   equipment:
+    jumpsuit: RMCJumpsuitMarineNVEngi
     head: ClothingHeadHatWelding
-    outerClothing: RMCHazardVestYellow
+    outerClothing: RMCVestBrown
     belt: CMBeltUtility
-    ears: RMCEarmuffs
 
 - type: startingGear
   parent: RMCGearCorpseUNMCCrewmanBase
   id: RMCGearCorpseUNMCCrewman3
   equipment:
-    outerClothing: RMCHazardVestBlue
+    jumpsuit: RMCJumpsuitMarineNVEngi
+    outerClothing: RMCJumpsuitMarineNVEngi
     belt: CMBeltUtility
-    ears: RMCEarmuffs
+    head: RMCArmorHelmetCF5Utility
     pocket1: RMCPouchElectronics
 
 - type: startingGear
   parent: RMCGearCorpseUNMCCrewmanBase
   id: RMCGearCorpseUNMCCrewman4
   equipment:
-    head: RMCHeadBeanie
-    outerClothing: RMCHazardVestBlue
-    belt: CMBeltUtility
+    jumpsuit: RMCJumpsuitMarineNVEngi
+    head: RMCArmorHelmetCF5UtilityWhite
+    outerClothing: RMCVestBrown
     pocket1: RMCCigarettePackLuckySloths
     pocket2: RMCMatchboxFull

@@ -165,17 +165,6 @@
     sprite: _RMC14/Objects/Clothing/Belt/medicbag_pmc.rsi
 
 - type: entity
-  parent: RMCBeltMedicBagSPP
-  id: RMCBeltMedicBagNV
-  name: M276-B pattern lifesaver bag
-  description: The M276-B is a non-standard variant of the M276 pattern lifesaver rig used by the UNMC. The 'B' variant includes a light decrease in overall bulk due to a redesign of its' shape, and improved materials to prevent damage to the bag's contents while moving through dense foliage.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag_nv.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag_nv.rsi
-
-- type: entity
   parent: RMCBeltMedicBagPMC
   id: RMCBeltMedicBagPMCFilled
   suffix: Filled
@@ -199,3 +188,31 @@
     - id: CMHealthAnalyzer
     - id: RMCPillCanisterImidazoline # you're welcome, whoever was here last. fly high, mercenary
     # TODO RMC: alkysine pills
+
+
+- type: entity
+  parent: RMCBeltMedicBagSPP
+  id: RMCBeltMedicBagNV
+  name: M276-B pattern lifesaver bag
+  description: The M276-B is a non-standard variant of the M276 pattern lifesaver rig used by the UNMC. The 'B' variant includes a light decrease in overall bulk due to a redesign of its' shape, and improved materials to prevent damage to the bag's contents while moving through dense foliage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_nv.rsi
+
+- type: entity
+  parent: RMCBeltMedicBagNV
+  id: RMCBeltMedicBagNVFilledPartial
+  suffix: Filled, Partial
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMUpgradedTraumaKit10
+    - id: CMUpgradedBurnKit10
+    - id: CMPacketPillsTricordrazine
+    - id: CMHealthAnalyzer
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    # TODO RMC: tramadol pill bottle
+    # TODO RMC: splints
