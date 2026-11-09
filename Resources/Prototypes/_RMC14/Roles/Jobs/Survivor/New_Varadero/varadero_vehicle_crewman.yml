@@ -88,7 +88,7 @@
   components:
     - type: EntityPreset
       randomOutfits:
-        - [ RMCArmorHelmetCF5Utiltiy, RMCOuterClothingExternalWebbingNV ]
+        - [ RMCArmorHelmetCF5Utility, RMCOuterClothingExternalWebbingNV ]
         - [ RMCWeldingGoggles, RMCArmorPDU ]
         - [ RMCWeldingGoggles, RMCOuterClothingExternalWebbingNV ]
 
