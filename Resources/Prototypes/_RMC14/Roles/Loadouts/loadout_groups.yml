@@ -1031,6 +1031,7 @@
   loadouts:
   - ProvostJacketFilledRMC
   - ProvostCoatFilledRMC
+  - RMCProvostJacketBlueFilled
 
 - type: loadoutGroup
   id: ProvostWeaponRMC
@@ -1040,7 +1041,7 @@
   loadouts:
   - RMCWeaponPistolHandcannon
   - RMCWeaponPistolHandcannonProvost
-  - RMCProvostJacketBlueFilled
+
 
 - type: loadoutGroup
   id: ProvostRoleSpecificHeadRMC
