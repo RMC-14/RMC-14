@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Fixed Hedgehog Ravager's resting while injured sprites
-    type: Fix
-  id: 3244
-  time: '2026-05-31T02:42:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9927
 - author: SharkSnake98
   changes:
   - message: Added parity boxes, donk pockets, and drink glasses
@@ -4529,5 +4522,12 @@
   id: 3743
   time: '2026-11-09T05:42:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10568
+- author: kleinerstation13
+  changes:
+  - message: Removed the cooldown between taking flares out of a flare pouch
+    type: Tweak
+  id: 3744
+  time: '2026-11-09T16:22:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10888
 Name: RMC14
 Order: -1
