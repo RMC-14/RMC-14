@@ -39,6 +39,8 @@
   - type: CMArmor
     melee: 10 # CLOTHING_ARMOR_LOW
     bio: 10 # CLOTHING_ARMOR_LOW
+    coverage:
+    - Head
   - type: RemoveComponents
     components:
     - type: IngestionBlocker

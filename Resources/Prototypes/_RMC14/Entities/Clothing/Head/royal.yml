@@ -159,6 +159,8 @@
     bullet: 20
     bio: 10
     explosionArmor: 20
+    coverage:
+    - Head
     # armor_laser = 15
     # armor_energy = 15
     # armor_rad = 10
