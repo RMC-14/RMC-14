@@ -22,6 +22,17 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCRest = "RMCRest";
     public static readonly BoundKeyFunction RMCResist = "RMCResist";
 
+    // Target zones
+    public static readonly BoundKeyFunction RMCTargetHead = "RMCTargetHead";
+    public static readonly BoundKeyFunction RMCTargetRightArm = "RMCTargetRightArm";
+    public static readonly BoundKeyFunction RMCTargetChest = "RMCTargetChest";
+    public static readonly BoundKeyFunction RMCTargetLeftArm = "RMCTargetLeftArm";
+    public static readonly BoundKeyFunction RMCTargetRightLeg = "RMCTargetRightLeg";
+    public static readonly BoundKeyFunction RMCTargetAbdomen = "RMCTargetAbdomen";
+    public static readonly BoundKeyFunction RMCTargetLeftLeg = "RMCTargetLeftLeg";
+    public static readonly BoundKeyFunction RMCTargetNext = "RMCTargetNext";
+    public static readonly BoundKeyFunction RMCTargetPrevious = "RMCTargetPrevious";
+
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
     public static readonly BoundKeyFunction RMCXenoRest = "RMCXenoRest";

@@ -181,6 +181,17 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCRest);
             AddButton(CMKeyFunctions.RMCResist);
 
+            AddHeader("ui-options-header-rmc-target-zones");
+            AddButton(CMKeyFunctions.RMCTargetHead);
+            AddButton(CMKeyFunctions.RMCTargetRightArm);
+            AddButton(CMKeyFunctions.RMCTargetChest);
+            AddButton(CMKeyFunctions.RMCTargetLeftArm);
+            AddButton(CMKeyFunctions.RMCTargetRightLeg);
+            AddButton(CMKeyFunctions.RMCTargetAbdomen);
+            AddButton(CMKeyFunctions.RMCTargetLeftLeg);
+            AddButton(CMKeyFunctions.RMCTargetNext);
+            AddButton(CMKeyFunctions.RMCTargetPrevious);
+
             AddHeader("ui-options-header-rmc-xeno");
             AddButton(CMKeyFunctions.CMXenoWideSwing);
             AddButton(CMKeyFunctions.RMCXenoRest);
