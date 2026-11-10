@@ -94,7 +94,21 @@ public sealed class XenoEvolutionBui : BoundUserInterface
 
         var control = new XenoChoiceControl();
 
-        control.Set($"{target.Name} ({candidateCount})", _sprite.Frame0(target));
+        var name = $"{target.Name} ({candidateCount})";
+        if (queued &&
+            EntMan.TryGetComponent(Owner, out XenoRaffleCandidateComponent? candidate) &&
+            candidate.Leapfrog &&
+            candidate.RaffleCost > FixedPoint2.Zero)
+        {
+            var progress = candidate.RaffleProgress;
+            var cost = candidate.RaffleCost;
+            name = Loc.GetString("rmc-xeno-evolution-raffle-progress",
+                ("name", name),
+                ("progress", (int) Math.Floor(progress.Double())),
+                ("cost", (int) Math.Floor(cost.Double())));
+        }
+
+        control.Set(name, _sprite.Frame0(target));
 
         if (queued)
         {
