@@ -150,5 +150,10 @@
         ///     Admin Ghost
         /// </summary>
         AdminGhost = 1ul << 33,
+
+        /// <summary>
+        ///     Segmented Ban and Unban for finer permission control. Anyone with +UNBAN should have +BAN.
+        /// </summary>
+        Unban = 1ul << 34,
     }
 }

@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/21/2026 19:37:02
+  time: 10/01/2026 21:10:13
   entityCount: 103
 maps: []
 grids:
@@ -101,7 +101,7 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
-- proto: CMBarricadeMetal
+- proto: CMBarricadeFolding
   entities:
   - uid: 77
     components:
@@ -325,31 +325,43 @@ entities:
     - type: Transform
       pos: 1.5,5.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 47
     components:
     - type: Transform
       pos: 1.5,6.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 48
     components:
     - type: Transform
       pos: 1.5,1.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 49
     components:
     - type: Transform
       pos: 2.5,1.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 50
     components:
     - type: Transform
       pos: 6.5,1.5
       parent: 1
+    missingComponents:
+    - AccessReader
   - uid: 51
     components:
     - type: Transform
       pos: 7.5,1.5
       parent: 1
+    missingComponents:
+    - AccessReader
 - proto: RMCNanoMedLimited
   entities:
   - uid: 45
