@@ -260,7 +260,7 @@
 
 - type: entity
   parent: CMMobWiggles
-  id: CMMobCorgiPuppy
+  id: RMCMobCorgiPuppy
   name: corgi puppy
   suffix: RMC
   description: It's a corgi puppy.
@@ -562,7 +562,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-    - CMMobCorgiPuppy
+    - RMCMobCorgiPuppy
 
 - type: entity
   parent: MarkerBase
@@ -643,7 +643,6 @@
   parent: RMCSpawnMobButtons
   id: RMCSpawnMobKitten
   name: Kitten Spawner
-  suffix: RMC
   components:
   - type: ConditionalSpawner
     prototypes:

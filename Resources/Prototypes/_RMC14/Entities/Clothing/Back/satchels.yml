@@ -885,7 +885,6 @@
     grid:
     - 0,0,9,1 # 10
 
-
 - type: entity
   parent: RMCBackpackRTO
   id: RMCBackpackRTOPMC
