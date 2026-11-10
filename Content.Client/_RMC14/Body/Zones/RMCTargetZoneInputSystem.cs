@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Input;
 using Robust.Client.Player;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Body.Zones;
 
@@ -10,6 +11,7 @@ public sealed class RMCTargetZoneInputSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly RMCTargetZoneSystem _targetZone = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -35,7 +37,9 @@ public sealed class RMCTargetZoneInputSystem : EntitySystem
     {
         return InputCmdHandler.FromDelegate(_ =>
             {
-                if (_player.LocalEntity is not { } user ||
+                // input handlers run again every time the client re-predicts, only send the first time
+                if (!_timing.IsFirstTimePredicted ||
+                    _player.LocalEntity is not { } user ||
                     !HasComp<RMCTargetZoneComponent>(user))
                 {
                     return;
