@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Power;
+using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Biomass;
@@ -6,6 +7,7 @@ namespace Content.Shared._RMC14.Xenonids.Biomass;
 public abstract class SharedRMCBiomassAnalyzerMachineSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
 
@@ -25,19 +27,20 @@ public abstract class SharedRMCBiomassAnalyzerMachineSystem : EntitySystem
         return null;
     }
 
-    protected void StartPrintingAnimation(Entity<RMCBiomassAnalyzerMachineComponent> ent, TimeSpan duration)
+    protected void StartPrintingAnimation(Entity<RMCBiomassAnalyzerMachineComponent> ent, TimeSpan duration, RMCBiomassAnalyzerVisualState animation)
     {
         ent.Comp.PrintingUntil = Timing.CurTime + duration;
+        ent.Comp.Animation = animation;
+        ent.Comp.AnimationStart = Timing.CurTime;
         Dirty(ent);
-        UpdateAppearance(ent);
     }
 
     protected void UpdateAppearance(Entity<RMCBiomassAnalyzerMachineComponent> ent)
     {
-        var state = ent.Comp.PrintingUntil != null && IsMachinePowered(ent)
-            ? RMCBiomassAnalyzerVisualState.Printing
-            : RMCBiomassAnalyzerVisualState.Idle;
+        var loaded = IsMachinePowered(ent) &&
+                     _container.TryGetContainer(ent, ent.Comp.OrganContainerId, out var container) &&
+                     container.ContainedEntities.Count > 0;
 
-        _appearance.SetData(ent, RMCBiomassAnalyzerVisuals.State, state);
+        _appearance.SetData(ent, RMCBiomassAnalyzerVisuals.OrganLoaded, loaded);
     }
 }

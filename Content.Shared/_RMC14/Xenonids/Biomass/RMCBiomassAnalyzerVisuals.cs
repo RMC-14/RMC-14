@@ -5,17 +5,19 @@ namespace Content.Shared._RMC14.Xenonids.Biomass;
 [Serializable, NetSerializable]
 public enum RMCBiomassAnalyzerVisuals
 {
-    State,
+    OrganLoaded,
 }
 
 [Serializable, NetSerializable]
 public enum RMCBiomassAnalyzerVisualState
 {
     Idle,
+    Processing,
     Printing,
 }
 
 public enum RMCBiomassAnalyzerVisualLayers
 {
-    Printing,
+    Organ,
+    Animation,
 }

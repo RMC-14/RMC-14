@@ -1,20 +1,12 @@
-using System.Numerics;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Jittering;
-using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
-using Content.Shared.ActionBlocker;
 using Content.Shared.Chat.Prototypes;
-using Content.Shared.Cuffs;
-using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
-using Content.Shared.Throwing;
-using Robust.Shared.Containers;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -32,14 +24,6 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
         "RMCDrool",
         "RMCMoan",
         "RMCGiggle",
-    ];
-
-    private static readonly Vector2[] Cardinals =
-    [
-        new(0, 1),
-        new(0, -1),
-        new(1, 0),
-        new(-1, 0),
     ];
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
@@ -69,9 +53,7 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var random = IoCManager.Resolve<IRobustRandom>();
-        if (random.Prob(0.5f))
-            TryStumble(args.EntityManager, args.TargetEntity, random);
+        // TODO RMC14: random step. Tried to make this work but it just felt really awful
 
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
         status.TryAddStatusEffectDuration(args.TargetEntity, Hallucination, TimeSpan.FromSeconds(5));
@@ -85,28 +67,6 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
 
         var knockOut = args.EntityManager.System<RMCSizeStunSystem>();
         knockOut.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(40));
-    }
-
-    private static void TryStumble(IEntityManager entities, EntityUid target, IRobustRandom random)
-    {
-        if (entities.GetComponent<TransformComponent>(target).GridUid == null ||
-            entities.System<SharedContainerSystem>().IsEntityInContainer(target) ||
-            !entities.System<ActionBlockerSystem>().CanMove(target))
-        {
-            return;
-        }
-
-        if (entities.TryGetComponent(target, out CuffableComponent? cuffable) &&
-            entities.System<SharedCuffableSystem>().IsCuffed((target, cuffable)))
-        {
-            return;
-        }
-
-        entities.System<RMCPullingSystem>().TryStopPullsOn(target);
-        var physics = entities.System<SharedPhysicsSystem>();
-        physics.SetLinearVelocity(target, Vector2.Zero);
-        physics.SetAngularVelocity(target, 0f);
-        entities.System<ThrowingSystem>().TryThrow(target, random.Pick(Cardinals), animated: false, playSound: false, doSpin: false, compensateFriction: true, recoil: false);
     }
 
     private static void ApplyCapped(

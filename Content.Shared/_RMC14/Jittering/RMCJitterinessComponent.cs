@@ -1,8 +1,9 @@
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Jittering;
 
-[RegisterComponent, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(RMCJitterinessSystem))]
 public sealed partial class RMCJitterinessComponent : Component
 {
@@ -26,4 +27,16 @@ public sealed partial class RMCJitterinessComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextDecay;
+
+    [DataField]
+    public float JitterinessPerPixel = 100f;
+
+    [DataField]
+    public float MaxPixelAmplitude = 4f;
+
+    [DataField, AutoNetworkedField]
+    public int Amplitude;
+
+    [DataField]
+    public TimeSpan ShakeEvery = TimeSpan.FromSeconds(0.1);
 }

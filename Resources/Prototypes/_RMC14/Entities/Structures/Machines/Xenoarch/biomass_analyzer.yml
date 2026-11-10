@@ -34,7 +34,10 @@
       state: "xeno_analyzer_off"
     - map: ["enum.PowerDeviceVisualLayers.Powered"]
       state: "xeno_analyzer"
-    - map: ["enum.RMCBiomassAnalyzerVisualLayers.Printing"]
+    - map: ["enum.RMCBiomassAnalyzerVisualLayers.Organ"]
+      state: "xeno_analyzer_organ_on"
+      visible: false
+    - map: ["enum.RMCBiomassAnalyzerVisualLayers.Animation"]
       state: "xeno_analyzer_printing"
       visible: false
   - type: GenericVisualizer
@@ -43,10 +46,10 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
           False: { visible: false }
-      enum.RMCBiomassAnalyzerVisuals.State:
-        enum.RMCBiomassAnalyzerVisualLayers.Printing:
-          Printing: { visible: true }
-          Idle: { visible: false }
+      enum.RMCBiomassAnalyzerVisuals.OrganLoaded:
+        enum.RMCBiomassAnalyzerVisualLayers.Organ:
+          True: { visible: true }
+          False: { visible: false }
   - type: Appearance
   - type: ApcPowerReceiver
     powerLoad: 250

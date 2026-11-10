@@ -28,8 +28,6 @@ public sealed partial class Igniting : RMCChemicalEffect
         var target = args.TargetEntity;
         var flammableSystem = args.EntityManager.System<SharedRMCFlammableSystem>();
 
-        // cm13 igniting/process(): every tick while metabolizing, raises fire stacks by
-        // potency*30 (additive doubles existing stacks if already higher) & ignites
         var boost = MathF.Max(flammable.FireStacks, ActualPotency * 30f);
 
         if (flammable.OnFire)

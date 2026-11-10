@@ -1,22 +1,34 @@
 using Content.Shared._RMC14.Standing;
-using Content.Shared.Jittering;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.StatusEffect;
+using Content.Shared.Rejuvenate;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Jittering;
 
 public sealed class RMCJitterinessSystem : EntitySystem
 {
-    private static readonly ProtoId<StatusEffectPrototype> JitterStatus = "Jitter";
-
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<RMCJitterinessComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<RMCJitterinessComponent, RejuvenateEvent>(OnRejuvenate);
+    }
+
+    private void OnMobStateChanged(Entity<RMCJitterinessComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Dead)
+            ClearJitteriness(ent);
+    }
+
+    private void OnRejuvenate(Entity<RMCJitterinessComponent> ent, ref RejuvenateEvent args)
+    {
+        ClearJitteriness(ent);
+    }
 
     public void MakeJittery(EntityUid uid, float amount)
     {
@@ -29,7 +41,7 @@ public sealed class RMCJitterinessSystem : EntitySystem
             comp.NextDecay = _timing.CurTime + comp.DecayEvery;
 
         comp.Jitteriness = Math.Clamp(comp.Jitteriness + amount, 0f, comp.Max);
-        UpdateJitter((uid, comp));
+        UpdateAmplitude((uid, comp));
     }
 
     public float GetJitteriness(EntityUid uid)
@@ -54,6 +66,8 @@ public sealed class RMCJitterinessSystem : EntitySystem
         comp.Jitteriness = MathF.Max(comp.Jitteriness - amount, 0f);
         if (comp.Jitteriness <= 0f)
             RemCompDeferred<RMCJitterinessComponent>(uid);
+        else
+            UpdateAmplitude((uid, comp));
     }
 
     public void ClearJitteriness(EntityUid uid)
@@ -64,17 +78,17 @@ public sealed class RMCJitterinessSystem : EntitySystem
         RemCompDeferred<RMCJitterinessComponent>(uid);
     }
 
-    private void UpdateJitter(Entity<RMCJitterinessComponent> ent)
+    private void UpdateAmplitude(Entity<RMCJitterinessComponent> ent)
     {
-        if (ent.Comp.Jitteriness <= ent.Comp.VisibleThreshold)
+        var amplitude = ent.Comp.Jitteriness > ent.Comp.VisibleThreshold
+            ? (int) MathF.Min(ent.Comp.MaxPixelAmplitude, ent.Comp.Jitteriness / ent.Comp.JitterinessPerPixel)
+            : 0;
+
+        if (ent.Comp.Amplitude == amplitude)
             return;
 
-        var duration = ent.Comp.DecayEvery + TimeSpan.FromSeconds(0.5);
-        var time = _timing.CurTime;
-        if (_status.TryGetTime(ent, JitterStatus, out var existing) && existing.Value.Item2 - time >= duration)
-            return;
-
-        _jitter.DoJitter(ent, duration, true, ent.Comp.Jitteriness, forceValueChange: true);
+        ent.Comp.Amplitude = amplitude;
+        Dirty(ent);
     }
 
     public override void Update(float frameTime)
@@ -101,7 +115,7 @@ public sealed class RMCJitterinessSystem : EntitySystem
                 continue;
             }
 
-            UpdateJitter((uid, comp));
+            UpdateAmplitude((uid, comp));
         }
     }
 }

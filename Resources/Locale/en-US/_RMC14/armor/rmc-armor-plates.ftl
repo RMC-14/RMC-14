@@ -18,5 +18,6 @@ rmc-armor-plate-injector-mode-off = You toggle overdose protection to OVERRIDE. 
 rmc-armor-plate-injector-mode-dynamic = You toggle overdose protection to DYNAMIC. Overdose subsystems will inject chemicals but will not go above overdose levels.
 rmc-armor-plate-injector-mode-strict = You toggle overdose protection to STRICT. Overdose subsystems will refuse to inject if any of chemicals will overdose.
 
-rmc-armor-plate-recycle-interrupted = You were interrupted!
 rmc-armor-plate-recycle-invalid = You cannot recycle this type of plate.
+
+rmc-biomass-analyzer-interrupted = You were interrupted!

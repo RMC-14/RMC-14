@@ -26,7 +26,7 @@ public sealed partial class RMCBiomassAnalyzerMachineComponent : Component
     public SoundSpecifier? EjectSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg");
 
     [DataField, AutoNetworkedField]
-    public TimeSpan PrintingDuration = TimeSpan.FromSeconds(3);
+    public TimeSpan PrintingDuration = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public TimeSpan QueuePrintDelay = TimeSpan.FromSeconds(2);
@@ -36,6 +36,18 @@ public sealed partial class RMCBiomassAnalyzerMachineComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? PrintingUntil;
+
+    [DataField, AutoNetworkedField]
+    public RMCBiomassAnalyzerVisualState Animation;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan? AnimationStart;
+
+    [DataField]
+    public string ProcessingState = "xeno_analyzer_on_moving";
+
+    [DataField]
+    public string PrintingState = "xeno_analyzer_printing";
 
     [DataField, AutoNetworkedField]
     public int ProcessingValue;

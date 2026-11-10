@@ -7,8 +7,9 @@ public abstract partial class SharedCMSurgerySystem
 {
     private static readonly Dictionary<string, int> RequiredScalpelTierByHeart = new()
     {
-        ["RMCOrganXenoHeartT3"] = 2,
+        ["RMCOrganXenoHeartT3"] = 3,
         ["RMCOrganXenoHeartTQ"] = 3,
+        ["RMCOrganXenoHeartKing"] = 3,
     };
 
     private void InitializeLaserScalpelGate()
