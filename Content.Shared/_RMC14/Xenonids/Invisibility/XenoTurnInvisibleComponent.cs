@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Invisibility;
@@ -21,6 +21,13 @@ public sealed partial class XenoTurnInvisibleComponent : Component
 
     [DataField, AutoNetworkedField]
     public float Opacity = 0.1f;
+
+    /// <summary>
+    /// How dark the entity should become while invisible.
+    /// 0 = no change, 1 = every color becomes black
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float DarkFactor;
 
     [DataField, AutoNetworkedField]
     public float ManualRefundMultiplier = 0.9f;
