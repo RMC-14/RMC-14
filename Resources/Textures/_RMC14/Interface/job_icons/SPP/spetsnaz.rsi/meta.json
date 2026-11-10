@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "upp_pvt upp_sapper upp_sl upp_sl_a upp_spec upp_synth based on https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi edited by Sigma Draconis. Rename all previous UPP to SPP by PursuitinAshes (Github). Recolor of all icons from spp versions by kleinerstation13 (GIthub)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "spp_sptz_med"
+        },
+        {
+            "name": "spp_sptz_opr"
+        },
+        {
+            "name": "spp_sptz_sapper"
+        },
+        {
+            "name": "spp_sptz_sl"
+        },
+        {
+            "name": "spp_sptz_spec"
+        },
+        {
+            "name": "spp_sptz_synth"
+        }
+    ]
+}

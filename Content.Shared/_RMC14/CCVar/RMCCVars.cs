@@ -634,4 +634,6 @@ public sealed partial class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> RMCFaxRespondersEnabled =
         CVarDef.Create("rmc.fax_responders_enabled", true, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<bool> RMCGhostPropCalling =
+        CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 }

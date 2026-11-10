@@ -27,7 +27,7 @@
       - UNMC
       - Civilian
     - type: Language
-      preset: RMCLanguagePresetSynthColonist
+      preset: RMCLanguagePresetSynth
     - type: LanguageLearning
       preset: RMCLanguageLearningPresetSynthColonist
     - type: RMCAllowSuitStorage

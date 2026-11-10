@@ -62,6 +62,8 @@
     - ActionXenoDevolve
     tier: 3
     hudOffset: -0.15,0.05
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -130,6 +132,7 @@
     radius: 1.8
     softness: 1
     autoRot: true
+    color: "#cbff60"
   - type: RMCSize
     size: Big
   - type: XenoDeathcloud
@@ -239,6 +242,8 @@
     tailDamage:
       groups:
         Brute: 30
+  - type: PointLight
+    color: "#ffc357"
   - type: XenoAcidMine
   - type: XenoAcidShotgun
   - type: XenoDeployTraps
