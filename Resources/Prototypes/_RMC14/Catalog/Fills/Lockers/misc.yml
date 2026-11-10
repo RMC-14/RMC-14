@@ -160,7 +160,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCHelmetMK50CompressionSuitUNMCHelmet
-    - id: RMCSuitMK50CompressionSuitUNMC
+    - id: RMCHelmetCivilianCompressionSuit
+    - id: RMCSuitCivilianCompressionSuit
     - id: RMCMaskBreath
     - id: RMCGasTankOxygenFilled

@@ -212,9 +212,9 @@
 # Compression
 - type: entity
   parent: RMCBaseArmor
-  id: RMCSuitMK50CompressionSuitUNMC
-  name: MK.50 compression suit
-  description: A heavy, bulky civilian space suit, fitted with armored plates. This specific suit has found its way into the ragtag inventory of the UNMC's patrol boat requisitions system.
+  id: RMCSuitCivilianCompressionSuit
+  name: civilian-issued compression suit
+  description: A heavy, bulky civilian space suit, fitted with armored plates.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/compression.rsi
@@ -237,9 +237,9 @@
 
 - type: entity
   parent: RMCHelmetBase
-  id: RMCHelmetMK50CompressionSuitUNMCHelmet
-  name: MK.50 compression helmet
-  description: A heavy space helmet, designed to be coupled with the MK.50 compression suit, it bears UNMC styling. Feels like you could hotbox in here.
+  id: RMCHelmetCivilianCompressionSuit
+  name: civilian-issued compression helmet
+  description: A heavy space helmet, designed to be coupled with the civilian-issued compression suit. Feels like you could hotbox in here.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/compression.rsi

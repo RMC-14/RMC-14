@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/02/2026 22:34:52
-  entityCount: 30992
+  time: 11/10/2026 19:33:39
+  entityCount: 30987
 maps:
 - 1
 grids:
@@ -45260,15 +45260,6 @@ entities:
       container: 30854
 - proto: ArmorHelmetPMC
   entities:
-  - uid: 3
-    components:
-    - type: Transform
-      parent: 2
-    - type: HideLayerClothing
-      slots: null
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
   - uid: 11577
     components:
     - type: Transform
@@ -45716,6 +45707,12 @@ entities:
     - type: Transform
       pos: -55.5,1.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46028,6 +46025,12 @@ entities:
     - type: Transform
       pos: -4.5,-5.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46069,6 +46072,12 @@ entities:
     - type: Transform
       pos: -2.5,-5.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46111,6 +46120,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 1.5,-43.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46153,6 +46168,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 1.5,-41.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46595,6 +46616,12 @@ entities:
     - type: Transform
       pos: -48.5,-90.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46634,6 +46661,12 @@ entities:
     - type: Transform
       pos: -48.5,-85.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46695,6 +46728,12 @@ entities:
     - type: Transform
       pos: -33.5,-93.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46734,6 +46773,12 @@ entities:
     - type: Transform
       pos: -22.5,-93.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -46799,6 +46844,12 @@ entities:
     - type: Transform
       pos: -5.5,-92.5
       parent: 1
+    - type: Occluder
+      enabled: False
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Weldable
       isWelded: True
       fuel: 1
@@ -57286,6 +57337,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -67.5,-35.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -57328,6 +57383,10 @@ entities:
       rot: 4.71238898038469 rad
       pos: -66.5,-35.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -57429,6 +57488,10 @@ entities:
     - type: Transform
       pos: -57.5,-1.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -57474,6 +57537,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: -57.5,-2.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -57566,6 +57633,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -46.5,1.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -57608,6 +57679,10 @@ entities:
       rot: 4.71238898038469 rad
       pos: -45.5,1.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -57855,7 +57930,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -115245.58
+      secondsUntilStateChange: -116017.05
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -57871,7 +57946,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -115245.58
+      secondsUntilStateChange: -116017.05
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -58086,6 +58161,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -23.5,-30.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -58128,6 +58207,10 @@ entities:
       rot: 4.71238898038469 rad
       pos: -22.5,-30.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -58679,6 +58762,10 @@ entities:
     - type: Transform
       pos: 23.5,-34.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -58719,6 +58806,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: 23.5,-35.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -58788,6 +58879,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 26.5,0.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -58830,6 +58925,10 @@ entities:
       rot: 4.71238898038469 rad
       pos: 27.5,0.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -58870,6 +58969,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 26.5,10.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -58912,6 +59015,10 @@ entities:
       rot: 4.71238898038469 rad
       pos: 27.5,10.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -58968,6 +59075,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 27.5,-41.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -59010,6 +59121,10 @@ entities:
       rot: 4.71238898038469 rad
       pos: 28.5,-41.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -59050,6 +59165,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 27.5,-36.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -59092,6 +59211,10 @@ entities:
       rot: 4.71238898038469 rad
       pos: 28.5,-36.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Airtight
+      airBlocked: False
     - type: Door
       state: Welded
     - type: Weldable
@@ -61807,38 +61930,6 @@ entities:
     components:
     - type: Transform
       pos: 3.5,-36.5
-      parent: 1
-- proto: RMCLockerSuitStorageUnitFilled
-  entities:
-  - uid: 626
-    components:
-    - type: Transform
-      pos: 67.5,0.5
-      parent: 1
-  - uid: 27001
-    components:
-    - type: Transform
-      pos: -7.5,-82.5
-      parent: 1
-  - uid: 27002
-    components:
-    - type: Transform
-      pos: -8.5,-82.5
-      parent: 1
-  - uid: 30430
-    components:
-    - type: Transform
-      pos: 4.5,-23.5
-      parent: 1
-  - uid: 30431
-    components:
-    - type: Transform
-      pos: 9.5,-23.5
-      parent: 1
-  - uid: 30715
-    components:
-    - type: Transform
-      pos: -61.5,1.5
       parent: 1
 - proto: CMM96SSniperRifle
   entities:
@@ -80462,6 +80553,11 @@ entities:
       parent: 1
 - proto: CMWeaponPistolM1911
   entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 87.5,49.5
+      parent: 1
   - uid: 2829
     components:
     - type: Transform
@@ -80471,13 +80567,6 @@ entities:
     components:
     - type: Transform
       pos: -73.5,19.5
-      parent: 1
-- proto: CMWeaponPistolM1984
-  entities:
-  - uid: 6206
-    components:
-    - type: Transform
-      pos: 87.5,49.5
       parent: 1
 - proto: CMWebbingBlack
   entities:
@@ -92268,20 +92357,31 @@ entities:
     - type: Transform
       pos: -9.5,8.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 7939
-          - 7940
-          - 7941
-          - 7942
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.4,-0.4
+            - 0.4,-0.4
+            - 0.4,0.29
+            - -0.4,0.29
+          mask:
+          - Impassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - Opaque
+          density: 50
+          hard: True
+          restitution: 0
+          friction: 0.4
+    - type: EntityStorage
+      open: True
+      removedMasks: 20
+    - type: PlaceableSurface
+      isPlaceable: True
 - proto: RMCCrateWoodenBuildable
   entities:
   - uid: 7943
@@ -120383,6 +120483,38 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+- proto: RMCLockerSuitStorageUnitFilled
+  entities:
+  - uid: 626
+    components:
+    - type: Transform
+      pos: 67.5,0.5
+      parent: 1
+  - uid: 27001
+    components:
+    - type: Transform
+      pos: -7.5,-82.5
+      parent: 1
+  - uid: 27002
+    components:
+    - type: Transform
+      pos: -8.5,-82.5
+      parent: 1
+  - uid: 30430
+    components:
+    - type: Transform
+      pos: 4.5,-23.5
+      parent: 1
+  - uid: 30431
+    components:
+    - type: Transform
+      pos: 9.5,-23.5
+      parent: 1
+  - uid: 30715
+    components:
+    - type: Transform
+      pos: -61.5,1.5
+      parent: 1
 - proto: RMCM42A2ShotgunCase
   entities:
   - uid: 9898
@@ -120710,9 +120842,9 @@ entities:
     - type: Transform
       pos: 56.84372,13.277735
       parent: 1
-- proto: RMCMagazineSentry
+- proto: RMCMagazineSentryEmpty
   entities:
-  - uid: 9953
+  - uid: 5
     components:
     - type: Transform
       pos: 42.5,9.5
@@ -126296,17 +126428,6 @@ entities:
       id: Sec-Kitchen-Lockdown
     - type: Fixtures
       fixtures: {}
-  - uid: 10703
-    components:
-    - type: MetaData
-      name: Armoury Lockdown
-    - type: Transform
-      pos: -10.5,5.5
-      parent: 1
-    - type: RMCDoorButton
-      id: Sec-Armoury-Lockdown
-    - type: Fixtures
-      fixtures: {}
   - uid: 10704
     components:
     - type: MetaData
@@ -126342,6 +126463,18 @@ entities:
       fixtures: {}
 - proto: RMCPodDoorButtonBigRed
   entities:
+  - uid: 7940
+    components:
+    - type: MetaData
+      name: Armoury Lockdown
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -10.5,5.5
+      parent: 1
+    - type: RMCDoorButton
+      id: Sec-Armoury-Lockdown
+    - type: Fixtures
+      fixtures: {}
   - uid: 10707
     components:
     - type: Transform
@@ -128928,6 +129061,8 @@ entities:
   entities:
   - uid: 11004
     components:
+    - type: MetaData
+      name: United nations jacket
     - type: Transform
       pos: -79.5,40.5
       parent: 1
@@ -137879,15 +138014,17 @@ entities:
       parent: 1
 - proto: RMCSurgicalTray
   entities:
-  - uid: 12260
-    components:
-    - type: Transform
-      pos: -78.5,40.5
-      parent: 1
   - uid: 29645
     components:
     - type: Transform
       pos: 55.5,-11.5
+      parent: 1
+- proto: RMCSurgicalTrayEmpty
+  entities:
+  - uid: 6206
+    components:
+    - type: Transform
+      pos: -78.5,40.5
       parent: 1
 - proto: RMCSurveillanceCameraProp
   entities:
@@ -210415,6 +210552,11 @@ entities:
       parent: 1
 - proto: RMCWeldingKit
   entities:
+  - uid: 7939
+    components:
+    - type: Transform
+      pos: 21.318853,-32.984016
+      parent: 1
   - uid: 8066
     components:
     - type: Transform
@@ -213534,13 +213676,6 @@ entities:
       parent: 1
 - proto: TreasureCoinDiamond
   entities:
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 2
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
   - uid: 30565
     components:
     - type: Transform
@@ -213937,36 +214072,6 @@ entities:
     - type: Transform
       pos: 56.5,2.5
       parent: 1
-- proto: WeaponRifleM4SPRFilled
-  entities:
-  - uid: 7939
-    components:
-    - type: Transform
-      parent: 7938
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 7940
-    components:
-    - type: Transform
-      parent: 7938
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 7941
-    components:
-    - type: Transform
-      parent: 7938
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 7942
-    components:
-    - type: Transform
-      parent: 7938
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: WheatBushel
   entities:
   - uid: 10967

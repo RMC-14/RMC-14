@@ -32,6 +32,14 @@
   - type: Appearance
 
 - type: entity
+  parent: RMCMagazineSentry
+  id: RMCMagazineSentryEmpty
+  suffix: empty
+  components:
+  - type: RMCEmptyMag  
+
+
+- type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSentryShotgun
   name: "12g buckshot drum"
