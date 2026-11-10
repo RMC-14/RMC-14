@@ -119,6 +119,7 @@
     damage:
       types:
         Heat: 1
+  - type: RMCTargetZone
   - type: RMCRevivable
   - type: RMCMedicalExamine
   - type: FireVisuals
