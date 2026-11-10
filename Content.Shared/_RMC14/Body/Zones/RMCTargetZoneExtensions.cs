@@ -7,6 +7,10 @@ public static class RMCTargetZoneExtensions
     /// <summary>
     ///     the body part that takes the hit when this zone is aimed at
     /// </summary>
+    /// <remarks>
+    ///     upstream body parts are entities identified by type and side, there is no single left arm value,
+    ///     so use this when you need the body part entity itself, limb data can be keyed by the zone directly
+    /// </remarks>
     public static (BodyPartType Type, BodyPartSymmetry Symmetry) ToBodyPart(this RMCTargetZone zone)
     {
         return zone switch
