@@ -123,8 +123,11 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         if (args.Container.ID != PlateSlotId || ent.Comp.Wearer is not { } wearer)
             return;
 
-        if (TryComp(args.Entity, out RMCArmorPlateComponent? plate))
-            ApplyPlate(wearer, (args.Entity, plate));
+        if (!TryComp(args.Entity, out RMCArmorPlateComponent? plate))
+            return;
+
+        ApplyPlate(wearer, (args.Entity, plate));
+        PlatePopup(wearer, args.Entity, plate.AttachedPopup);
     }
 
     private void OnPlateRemoved(Entity<RMCArmorPlateSlotComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -135,8 +138,19 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         if (args.Container.ID != PlateSlotId || ent.Comp.Wearer is not { } wearer)
             return;
 
-        if (TryComp(args.Entity, out RMCArmorPlateComponent? plate))
-            RemovePlate(wearer, (args.Entity, plate));
+        if (!TryComp(args.Entity, out RMCArmorPlateComponent? plate))
+            return;
+
+        RemovePlate(wearer, (args.Entity, plate));
+        PlatePopup(wearer, args.Entity, plate.DetachedPopup);
+    }
+
+    private void PlatePopup(EntityUid wearer, EntityUid plate, LocId? popup)
+    {
+        if (popup == null || _net.IsClient)
+            return;
+
+        _popup.PopupEntity(Loc.GetString(popup.Value, ("plate", plate)), wearer, wearer);
     }
 
     private void OnSlotEquipped(Entity<RMCArmorPlateSlotComponent> ent, ref GotEquippedEvent args)
@@ -224,11 +238,7 @@ public sealed class RMCArmorPlateSystem : EntitySystem
 
     private void OnCoagulatorBleedAttempt(Entity<RMCCoagulatorPlateActiveComponent> ent, ref CMBleedAttemptEvent args)
     {
-        if (args.Cancelled)
-            return;
-
-        if (ent.Comp.CancelChance >= 100)
-            args.Cancelled = true;
+        args.Cancelled = true;
     }
 
     private void OnAntiDecayMobStateChanged(Entity<RMCAntiDecayPlateActiveComponent> ent, ref MobStateChangedEvent args)

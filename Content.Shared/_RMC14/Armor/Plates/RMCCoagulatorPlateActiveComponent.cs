@@ -2,10 +2,6 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Armor.Plates;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 [Access(typeof(RMCArmorPlateSystem))]
-public sealed partial class RMCCoagulatorPlateActiveComponent : Component
-{
-    [DataField, AutoNetworkedField]
-    public int CancelChance = 50;
-}
+public sealed partial class RMCCoagulatorPlateActiveComponent : Component;

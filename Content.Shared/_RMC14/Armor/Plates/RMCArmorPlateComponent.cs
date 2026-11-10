@@ -8,4 +8,10 @@ public sealed partial class RMCArmorPlateComponent : Component
 {
     [DataField(required: true)]
     public ComponentRegistry WearerComponents = new();
+
+    [DataField]
+    public LocId? AttachedPopup;
+
+    [DataField]
+    public LocId? DetachedPopup;
 }

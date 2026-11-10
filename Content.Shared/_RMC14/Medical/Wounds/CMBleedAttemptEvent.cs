@@ -1,4 +1,4 @@
 ﻿namespace Content.Shared._RMC14.Medical.Wounds;
 
 [ByRefEvent]
-public record struct CMBleedAttemptEvent(bool Cancelled);
+public record struct CMBleedAttemptEvent(bool Cancelled, float BloodlossReductionPerSecond = 0);

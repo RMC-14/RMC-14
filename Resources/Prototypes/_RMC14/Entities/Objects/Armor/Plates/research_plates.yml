@@ -18,7 +18,8 @@
   - type: RMCArmorPlate
     wearerComponents:
     - type: RMCCoagulatorPlateActive
-      cancelChance: 100
+    attachedPopup: rmc-armor-plate-coagulator-attached
+    detachedPopup: rmc-armor-plate-coagulator-detached
 
 - type: entity
   parent: RMCArmorPlateBase

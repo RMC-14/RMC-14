@@ -56,6 +56,7 @@ public sealed class WoundsSystem : SharedWoundsSystem
             var damageableEnt = new Entity<DamageableComponent?>(uid, damageable);
 
             var toHeal = comp.PassiveHealing;
+            var bloodlossReduction = bleedEv.BloodlossReductionPerSecond * (float) comp.UpdateCooldown.TotalSeconds;
             float bloodloss = 0;
             var wounds = CollectionsMarshal.AsSpan(comp.Wounds);
             for (var i = 0; i < wounds.Length; i++)
@@ -86,7 +87,13 @@ public sealed class WoundsSystem : SharedWoundsSystem
                     }
                 }
 
-                if (!bleedEv.Cancelled && !wound.Treated && time < wound.StopBleedAt)
+                if (wound.Treated || time >= wound.StopBleedAt)
+                    continue;
+
+                if (bloodlossReduction > 0)
+                    wound.Bloodloss = MathF.Max(0, wound.Bloodloss - bloodlossReduction);
+
+                if (!bleedEv.Cancelled)
                     bloodloss += wound.Bloodloss;
             }
 
