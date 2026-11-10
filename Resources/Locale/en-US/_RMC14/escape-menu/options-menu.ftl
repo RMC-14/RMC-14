@@ -16,6 +16,18 @@ ui-options-function-rmc-interact-with-other-hand = Interact with other hand
 ui-options-function-rmc-rest = Rest
 ui-options-function-rmc-resist = Resist
 
+ui-options-header-rmc-target-zones = Target Zones
+
+ui-options-function-rmc-target-head = Target: cycle head, eyes, mouth
+ui-options-function-rmc-target-right-arm = Target: right arm, hand
+ui-options-function-rmc-target-chest = Target: chest
+ui-options-function-rmc-target-left-arm = Target: left arm, hand
+ui-options-function-rmc-target-right-leg = Target: right leg, foot
+ui-options-function-rmc-target-groin = Target: groin
+ui-options-function-rmc-target-left-leg = Target: left leg, foot
+ui-options-function-rmc-target-next = Target: next
+ui-options-function-rmc-target-previous = Target: previous
+
 ui-options-header-rmc-xeno = Xenonid
 
 ui-options-function-cm-xeno-wide-swing = Xenonid thrust attack

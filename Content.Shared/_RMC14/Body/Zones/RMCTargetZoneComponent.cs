@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Body.Zones;
 [Access(typeof(RMCTargetZoneSystem))]
 public sealed partial class RMCTargetZoneComponent : Component
 {
-    // Nobody else needs to know where a player is aiming, so it is only networked to its owner.
+    // nobody else needs to know where a player is aiming, so it is only networked to its owner
     public override bool SendOnlyToOwner => true;
 
     [DataField, AutoNetworkedField]

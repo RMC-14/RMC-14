@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Body.Zones;
 public static class RMCTargetZoneExtensions
 {
     /// <summary>
-    ///     The body part that takes the hit when this zone is aimed at.
+    ///     the body part that takes the hit when this zone is aimed at
     /// </summary>
     public static (BodyPartType Type, BodyPartSymmetry Symmetry) ToBodyPart(this RMCTargetZone zone)
     {
@@ -28,10 +28,61 @@ public static class RMCTargetZoneExtensions
     }
 
     /// <summary>
-    ///     Collapses eyes and mouth into the head.
+    ///     collapses eyes and mouth into the head
     /// </summary>
     public static RMCTargetZone ToDamageZone(this RMCTargetZone zone)
     {
         return zone is RMCTargetZone.Eyes or RMCTargetZone.Mouth ? RMCTargetZone.Head : zone;
+    }
+
+    // same order as cmss13's DEFENSE_ZONES_LIVING
+    private static readonly RMCTargetZone[] CycleOrder =
+    [
+        RMCTargetZone.Head,
+        RMCTargetZone.Eyes,
+        RMCTargetZone.Mouth,
+        RMCTargetZone.Chest,
+        RMCTargetZone.Groin,
+        RMCTargetZone.LeftArm,
+        RMCTargetZone.LeftHand,
+        RMCTargetZone.RightArm,
+        RMCTargetZone.RightHand,
+        RMCTargetZone.LeftLeg,
+        RMCTargetZone.LeftFoot,
+        RMCTargetZone.RightLeg,
+        RMCTargetZone.RightFoot,
+    ];
+
+    public static RMCTargetZone Next(this RMCTargetZone zone)
+    {
+        var index = Array.IndexOf(CycleOrder, zone);
+        return CycleOrder[(index + 1) % CycleOrder.Length];
+    }
+
+    public static RMCTargetZone Previous(this RMCTargetZone zone)
+    {
+        var index = Array.IndexOf(CycleOrder, zone);
+        return CycleOrder[(index - 1 + CycleOrder.Length) % CycleOrder.Length];
+    }
+
+    /// <summary>
+    ///     head, then eyes, then mouth, then back to head
+    /// </summary>
+    public static RMCTargetZone CycleHead(this RMCTargetZone zone)
+    {
+        return zone switch
+        {
+            RMCTargetZone.Head => RMCTargetZone.Eyes,
+            RMCTargetZone.Eyes => RMCTargetZone.Mouth,
+            _ => RMCTargetZone.Head,
+        };
+    }
+
+    /// <summary>
+    ///     selects the limb, or its hand or foot if the limb is already selected
+    /// </summary>
+    public static RMCTargetZone CycleLimb(this RMCTargetZone zone, RMCTargetZone limb, RMCTargetZone extremity)
+    {
+        return zone == limb ? extremity : limb;
     }
 }
