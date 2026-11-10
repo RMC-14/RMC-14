@@ -1,5 +1,6 @@
 using Content.Client._RMC14.LinkAccount;
 using Content.Client._RMC14.Lobby;
+using Content.Shared._RMC14.CCVar;
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
 using Content.Client.LateJoin;
@@ -87,6 +88,7 @@ namespace Content.Client.Lobby
             Lobby.JoinXenoButton.OnPressed += _ =>
                 _userInterfaceManager.GetUIController<RMCLobbyUIController>().OpenJoinXenoWindow();
             Lobby.JoinXenoButton.AddStyleClass("OpenRight");
+            _cfg.OnValueChanged(RMCCVars.RMCFaxRespondersEnabled, OnFaxRespondersEnabledChanged);
         }
 
         protected override void Shutdown()
@@ -97,6 +99,7 @@ namespace Content.Client.Lobby
             _gameTicker.LobbyStatusUpdated -= LobbyStatusUpdated;
             _gameTicker.LobbyLateJoinStatusUpdated -= LobbyLateJoinStatusUpdated;
             _contentAudioSystem.LobbySoundtrackChanged -= UpdateLobbySoundtrackInfo;
+            _cfg.UnsubValueChanged(RMCCVars.RMCFaxRespondersEnabled, OnFaxRespondersEnabledChanged); // RMC14
 
             _voteManager.ClearPopupContainer();
 
@@ -189,6 +192,15 @@ namespace Content.Client.Lobby
             UpdateLobbyUi();
         }
 
+        // RMC14
+        private void OnFaxRespondersEnabledChanged(bool enabled)
+        {
+            if (Lobby == null)
+                return;
+
+            Lobby.JoinFaxResponderButton.Visible = enabled && _gameTicker.IsGameStarted;
+        }
+
         private void LobbyLateJoinStatusUpdated()
         {
             Lobby!.ReadyButton.Disabled = _gameTicker.DisallowedLateJoin;
@@ -207,7 +219,7 @@ namespace Content.Client.Lobby
 
                 // RMC14
                 Lobby.ReadyButton.AddStyleClass("OpenLeft");
-                Lobby.JoinFaxResponderButton.Visible = true;
+                Lobby.JoinFaxResponderButton.Visible = _cfg.GetCVar(RMCCVars.RMCFaxRespondersEnabled);
                 Lobby.JoinXenoButton.Visible = true;
             }
             else

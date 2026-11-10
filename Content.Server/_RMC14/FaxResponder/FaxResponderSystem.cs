@@ -2,10 +2,12 @@ using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Systems;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.FaxResponder;
 using Content.Shared._RMC14.GameTicking;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -14,6 +16,7 @@ namespace Content.Server._RMC14.FaxResponder;
 
 public sealed class FaxResponderSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
@@ -40,6 +43,9 @@ public sealed class FaxResponderSystem : EntitySystem
         SubscribeLocalEvent<RMCPlayerJoinedLobbyEvent>(OnPlayerJoinedLobby);
         SubscribeNetworkEvent<FaxResponderStatusRequest>(OnStatusRequest);
         SubscribeNetworkEvent<JoinFaxResponderRequest>(OnJoinRequest);
+
+        // Push the new status to everyone so open lobby windows update straight away
+        Subs.CVar(_config, RMCCVars.RMCFaxRespondersEnabled, _ => RaiseNetworkEvent(GetStatus()));
     }
 
     private void OnPlayerSpawning(PlayerSpawningEvent args)
@@ -101,6 +107,9 @@ public sealed class FaxResponderSystem : EntitySystem
     {
         var session = args.SenderSession;
 
+        if (!_config.GetCVar(RMCCVars.RMCFaxRespondersEnabled))
+            return;
+
         if (_gameTicker.RunLevel != GameRunLevel.InRound)
             return;
 
@@ -137,6 +146,9 @@ public sealed class FaxResponderSystem : EntitySystem
     private FaxResponderStatusEvent GetStatus()
     {
         var jobs = new List<FaxResponderJobStatus>();
+        if (!_config.GetCVar(RMCCVars.RMCFaxRespondersEnabled))
+            return new FaxResponderStatusEvent(jobs);
+
         foreach (var job in VisibleJobs)
         {
             if (!HasSpawnPoint(job))
