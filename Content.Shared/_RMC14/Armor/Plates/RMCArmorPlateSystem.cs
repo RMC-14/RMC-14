@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -10,6 +11,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
 using Content.Shared.NPC.Systems;
@@ -24,9 +26,7 @@ namespace Content.Shared._RMC14.Armor.Plates;
 
 public sealed class RMCArmorPlateSystem : EntitySystem
 {
-    public const string PlateSlotId = "rmc_armor_plate_slot";
-
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ReactiveSystem _reactive = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
@@ -40,10 +40,11 @@ public sealed class RMCArmorPlateSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCArmorPlateSlotComponent, EntInsertedIntoContainerMessage>(OnPlateInserted);
-        SubscribeLocalEvent<RMCArmorPlateSlotComponent, EntRemovedFromContainerMessage>(OnPlateRemoved);
-        SubscribeLocalEvent<RMCArmorPlateSlotComponent, GotEquippedEvent>(OnSlotEquipped);
-        SubscribeLocalEvent<RMCArmorPlateSlotComponent, GotUnequippedEvent>(OnSlotUnequipped);
+        SubscribeLocalEvent<RMCArmorPlateComponent, EntGotInsertedIntoContainerMessage>(OnPlateInserted);
+        SubscribeLocalEvent<RMCArmorPlateComponent, EntGotRemovedFromContainerMessage>(OnPlateRemoved);
+        SubscribeLocalEvent<RMCArmorPlateComponent, AccessoryRelayedEvent<GotEquippedEvent>>(OnPlateHolderEquipped);
+        SubscribeLocalEvent<RMCArmorPlateComponent, AccessoryRelayedEvent<GotUnequippedEvent>>(OnPlateHolderUnequipped);
+        SubscribeLocalEvent<RMCArmorPlateComponent, AccessoryRelayedEvent<ExaminedEvent>>(OnPlateHolderExamined);
 
         SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCArmorPlateAppliedEvent>(OnEmergencyInjectorApplied);
         SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCArmorPlateRemovedEvent>(OnEmergencyInjectorRemoved);
@@ -57,27 +58,23 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         SubscribeLocalEvent<RMCTranslatorPlateActiveComponent, CanUnderstandLanguageEvent>(OnTranslatorCanUnderstand);
 
         SubscribeLocalEvent<RMCArmorPlateComponent, ExaminedEvent>(OnPlateExamined);
-        SubscribeLocalEvent<RMCArmorPlateSlotComponent, ExaminedEvent>(OnSlotExamined);
     }
 
     private void OnPlateExamined(Entity<RMCArmorPlateComponent> ent, ref ExaminedEvent args)
     {
         using (args.PushGroup(nameof(RMCArmorPlateSystem)))
         {
-            args.PushText("To use it, attach it to your armor.");
+            args.PushText("To use it, attach it to your uniform.");
             PushPlateStatus(ent, args);
         }
     }
 
-    private void OnSlotExamined(Entity<RMCArmorPlateSlotComponent> ent, ref ExaminedEvent args)
+    private void OnPlateHolderExamined(Entity<RMCArmorPlateComponent> ent, ref AccessoryRelayedEvent<ExaminedEvent> args)
     {
-        if (!TryGetPlate(ent, out var plate))
-            return;
-
-        using (args.PushGroup(nameof(RMCArmorPlateSystem)))
+        using (args.Args.PushGroup(nameof(RMCArmorPlateSystem)))
         {
-            args.PushText($"The {Name(plate)} is attached to it.");
-            PushPlateStatus(plate, args);
+            args.Args.PushText($"The {Name(ent)} is attached to it.");
+            PushPlateStatus(ent, args.Args);
         }
     }
 
@@ -115,34 +112,43 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         }
     }
 
-    private void OnPlateInserted(Entity<RMCArmorPlateSlotComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnPlateInserted(Entity<RMCArmorPlateComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
         if (_timing.ApplyingState)
             return;
 
-        if (args.Container.ID != PlateSlotId || ent.Comp.Wearer is not { } wearer)
+        if (!TryGetWearer(args.Container, out var wearer))
             return;
 
-        if (!TryComp(args.Entity, out RMCArmorPlateComponent? plate))
-            return;
-
-        ApplyPlate(wearer, (args.Entity, plate));
-        PlatePopup(wearer, args.Entity, plate.AttachedPopup);
+        ApplyPlate(wearer, ent);
+        PlatePopup(wearer, ent, ent.Comp.AttachedPopup);
     }
 
-    private void OnPlateRemoved(Entity<RMCArmorPlateSlotComponent> ent, ref EntRemovedFromContainerMessage args)
+    private void OnPlateRemoved(Entity<RMCArmorPlateComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         if (_timing.ApplyingState)
             return;
 
-        if (args.Container.ID != PlateSlotId || ent.Comp.Wearer is not { } wearer)
+        if (!TryGetWearer(args.Container, out var wearer))
             return;
 
-        if (!TryComp(args.Entity, out RMCArmorPlateComponent? plate))
-            return;
+        RemovePlate(wearer, ent);
+        PlatePopup(wearer, ent, ent.Comp.DetachedPopup);
+    }
 
-        RemovePlate(wearer, (args.Entity, plate));
-        PlatePopup(wearer, args.Entity, plate.DetachedPopup);
+    private bool TryGetWearer(BaseContainer container, out EntityUid wearer)
+    {
+        wearer = default;
+        var holder = container.Owner;
+        if (!TryComp(holder, out UniformAccessoryHolderComponent? holderComp) ||
+            container.ID != holderComp.ContainerId ||
+            !_inventory.InSlotWithFlags(holder, SlotFlags.INNERCLOTHING))
+        {
+            return false;
+        }
+
+        wearer = Transform(holder).ParentUid;
+        return true;
     }
 
     private void PlatePopup(EntityUid wearer, EntityUid plate, LocId? popup)
@@ -153,28 +159,20 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString(popup.Value, ("plate", plate)), wearer, wearer);
     }
 
-    private void OnSlotEquipped(Entity<RMCArmorPlateSlotComponent> ent, ref GotEquippedEvent args)
+    private void OnPlateHolderEquipped(Entity<RMCArmorPlateComponent> ent, ref AccessoryRelayedEvent<GotEquippedEvent> args)
     {
-        if (_timing.ApplyingState)
+        if (_timing.ApplyingState || (args.Args.SlotFlags & SlotFlags.INNERCLOTHING) == 0)
             return;
 
-        ent.Comp.Wearer = args.Equipee;
-        Dirty(ent);
-
-        if (TryGetPlate(ent, out var plate))
-            ApplyPlate(args.Equipee, plate);
+        ApplyPlate(args.Args.Equipee, ent);
     }
 
-    private void OnSlotUnequipped(Entity<RMCArmorPlateSlotComponent> ent, ref GotUnequippedEvent args)
+    private void OnPlateHolderUnequipped(Entity<RMCArmorPlateComponent> ent, ref AccessoryRelayedEvent<GotUnequippedEvent> args)
     {
-        if (_timing.ApplyingState)
+        if (_timing.ApplyingState || (args.Args.SlotFlags & SlotFlags.INNERCLOTHING) == 0)
             return;
 
-        if (TryGetPlate(ent, out var plate))
-            RemovePlate(args.Equipee, plate);
-
-        ent.Comp.Wearer = null;
-        Dirty(ent);
+        RemovePlate(args.Args.Equipee, ent);
     }
 
     private void ApplyPlate(EntityUid wearer, Entity<RMCArmorPlateComponent> plate)
@@ -191,24 +189,6 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         RaiseLocalEvent(wearer, ref ev);
 
         EntityManager.RemoveComponents(wearer, plate.Comp.WearerComponents);
-    }
-
-    private bool TryGetPlate(Entity<RMCArmorPlateSlotComponent> ent, out Entity<RMCArmorPlateComponent> plate)
-    {
-        plate = default;
-
-        if (!_container.TryGetContainer(ent.Owner, PlateSlotId, out var container) ||
-            container.ContainedEntities.Count == 0)
-        {
-            return false;
-        }
-
-        var uid = container.ContainedEntities[0];
-        if (!TryComp(uid, out RMCArmorPlateComponent? comp))
-            return false;
-
-        plate = (uid, comp);
-        return true;
     }
 
     private void OnEmergencyInjectorApplied(Entity<RMCEmergencyInjectorPlateActiveComponent> ent, ref RMCArmorPlateAppliedEvent args)

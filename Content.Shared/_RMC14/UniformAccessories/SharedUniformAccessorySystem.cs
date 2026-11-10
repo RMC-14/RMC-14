@@ -34,6 +34,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
 
+        SubscribeLocalEvent<UniformAccessoryHolderComponent, GotUnequippedEvent>(HolderRelayEvent);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, ExaminedEvent>(HolderRelayEvent);
 
         SubscribeLocalEvent<UniformAccessoryComponent, ExaminedEvent>(OnAccessoryExamined);
@@ -77,6 +78,8 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
 
     private void OnHolderGotEquipped(Entity<UniformAccessoryHolderComponent> ent, ref GotEquippedEvent args)
     {
+        HolderRelayEvent(ent, ref args);
+
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
 

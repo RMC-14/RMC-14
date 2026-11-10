@@ -45,6 +45,7 @@
     - Poncho
     - Mask
     - Utility
+    - ChestArmor
 
 - type: entity
   abstract: true

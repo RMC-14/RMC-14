@@ -222,7 +222,6 @@
     containers:
       storagebase: !type:Container
         ents: [ ]
-      rmc_armor_plate_slot: !type:ContainerSlot
   - type: FixedItemSizeStorage
   - type: UserInterface
     interfaces:
@@ -230,14 +229,6 @@
         type: StorageBoundUserInterface
       enum.UniformAccessoriesUi.Key:
         type: UniformAccessoryBui
-  - type: RMCArmorPlateSlot
-  - type: ItemSlots
-    slots:
-      rmc_armor_plate_slot:
-        name: Research Plate
-        whitelist:
-          components:
-          - RMCArmorPlate
   - type: IgnoreContentsSize
     items:
       tags:

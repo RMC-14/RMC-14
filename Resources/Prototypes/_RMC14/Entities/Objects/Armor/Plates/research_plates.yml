@@ -1,8 +1,15 @@
 - type: entity
-  parent: BaseItem
+  parent: RMCBaseUniformAccessory
   id: RMCArmorPlateBase
   abstract: true
   components:
+  - type: UniformAccessory
+    category: ChestArmor
+    limit: 1
+    hidden: true
+    playerSprite:
+      sprite: _RMC14/Objects/Armor/Plates/research_plate.rsi
+      state: plate_research
   - type: Item
     size: Small
   - type: Sprite
