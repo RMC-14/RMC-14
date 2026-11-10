@@ -11,6 +11,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/bombsuit_helmet.rsi
   - type: CMArmor
     explosionArmor: 50
+    coverage:
+    - Head
   - type: RMCEarProtection
 
 - type: entity
