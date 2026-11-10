@@ -21,7 +21,7 @@ public sealed class RMCTargetZoneInputSystem : EntitySystem
             .Bind(CMKeyFunctions.RMCTargetChest, Handler(_ => RMCTargetZone.Chest))
             .Bind(CMKeyFunctions.RMCTargetLeftArm, Handler(zone => zone.CycleLimb(RMCTargetZone.LeftArm, RMCTargetZone.LeftHand)))
             .Bind(CMKeyFunctions.RMCTargetRightLeg, Handler(zone => zone.CycleLimb(RMCTargetZone.RightLeg, RMCTargetZone.RightFoot)))
-            .Bind(CMKeyFunctions.RMCTargetGroin, Handler(_ => RMCTargetZone.Groin))
+            .Bind(CMKeyFunctions.RMCTargetAbdomen, Handler(_ => RMCTargetZone.Abdomen))
             .Bind(CMKeyFunctions.RMCTargetLeftLeg, Handler(zone => zone.CycleLimb(RMCTargetZone.LeftLeg, RMCTargetZone.LeftFoot)))
             .Bind(CMKeyFunctions.RMCTargetNext, Handler(zone => zone.Next()))
             .Bind(CMKeyFunctions.RMCTargetPrevious, Handler(zone => zone.Previous()))

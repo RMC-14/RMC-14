@@ -732,7 +732,7 @@ binds:
 - function: RMCTargetRightLeg
   type: State
   key: NumpadNum1
-- function: RMCTargetGroin
+- function: RMCTargetAbdomen
   type: State
   key: NumpadNum2
 - function: RMCTargetLeftLeg

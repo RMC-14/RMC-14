@@ -162,7 +162,7 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCTargetChest);
             human.AddFunction(CMKeyFunctions.RMCTargetLeftArm);
             human.AddFunction(CMKeyFunctions.RMCTargetRightLeg);
-            human.AddFunction(CMKeyFunctions.RMCTargetGroin);
+            human.AddFunction(CMKeyFunctions.RMCTargetAbdomen);
             human.AddFunction(CMKeyFunctions.RMCTargetLeftLeg);
             human.AddFunction(CMKeyFunctions.RMCTargetNext);
             human.AddFunction(CMKeyFunctions.RMCTargetPrevious);

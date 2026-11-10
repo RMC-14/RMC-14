@@ -13,8 +13,8 @@ public static class RMCTargetZoneExtensions
         {
             RMCTargetZone.Head or RMCTargetZone.Eyes or RMCTargetZone.Mouth => (BodyPartType.Head, BodyPartSymmetry.None),
             RMCTargetZone.Chest => (BodyPartType.Torso, BodyPartSymmetry.None),
-            // TODO RMC14 groin body part
-            RMCTargetZone.Groin => (BodyPartType.Torso, BodyPartSymmetry.None),
+            // TODO RMC14 abdomen body part
+            RMCTargetZone.Abdomen => (BodyPartType.Torso, BodyPartSymmetry.None),
             RMCTargetZone.LeftArm => (BodyPartType.Arm, BodyPartSymmetry.Left),
             RMCTargetZone.RightArm => (BodyPartType.Arm, BodyPartSymmetry.Right),
             RMCTargetZone.LeftHand => (BodyPartType.Hand, BodyPartSymmetry.Left),
@@ -42,7 +42,7 @@ public static class RMCTargetZoneExtensions
         RMCTargetZone.Eyes,
         RMCTargetZone.Mouth,
         RMCTargetZone.Chest,
-        RMCTargetZone.Groin,
+        RMCTargetZone.Abdomen,
         RMCTargetZone.LeftArm,
         RMCTargetZone.LeftHand,
         RMCTargetZone.RightArm,

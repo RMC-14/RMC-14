@@ -63,7 +63,7 @@ public sealed partial class TargetDollGui : UIWidget
                 return x switch
                 {
                     >= 8 and <= 11 => RMCTargetZone.RightHand,
-                    >= 12 and <= 20 => RMCTargetZone.Groin,
+                    >= 12 and <= 20 => RMCTargetZone.Abdomen,
                     >= 21 and <= 24 => RMCTargetZone.LeftHand,
                     _ => null,
                 };

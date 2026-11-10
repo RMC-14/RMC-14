@@ -9,7 +9,7 @@ public enum RMCTargetZone : byte
     Head,
     Eyes,
     Mouth,
-    Groin,
+    Abdomen,
     LeftArm,
     RightArm,
     LeftHand,

@@ -187,7 +187,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCTargetChest);
             AddButton(CMKeyFunctions.RMCTargetLeftArm);
             AddButton(CMKeyFunctions.RMCTargetRightLeg);
-            AddButton(CMKeyFunctions.RMCTargetGroin);
+            AddButton(CMKeyFunctions.RMCTargetAbdomen);
             AddButton(CMKeyFunctions.RMCTargetLeftLeg);
             AddButton(CMKeyFunctions.RMCTargetNext);
             AddButton(CMKeyFunctions.RMCTargetPrevious);

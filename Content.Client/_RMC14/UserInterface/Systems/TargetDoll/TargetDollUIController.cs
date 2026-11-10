@@ -87,7 +87,7 @@ public sealed class TargetDollUIController : UIController
             RMCTargetZone.Head => "head",
             RMCTargetZone.Eyes => "eyes",
             RMCTargetZone.Mouth => "mouth",
-            RMCTargetZone.Groin => "groin",
+            RMCTargetZone.Abdomen => "abdomen",
             RMCTargetZone.LeftArm => "left_arm",
             RMCTargetZone.RightArm => "right_arm",
             RMCTargetZone.LeftHand => "left_hand",
