@@ -11,7 +11,7 @@
       sprite: _RMC14/Objects/Armor/Plates/research_plate.rsi
       state: plate_research
   - type: Item
-    size: Small
+    size: Normal
   - type: Sprite
     sprite: _RMC14/Objects/Armor/Plates/research_plate.rsi
     state: plate_research
@@ -82,3 +82,6 @@
   - type: RMCArmorPlate
     wearerComponents:
     - type: RMCTranslatorPlateActive
+    attachedPopup: rmc-armor-plate-translator-attached
+    detachedPopup: rmc-armor-plate-translator-detached
+    unequippedPopup: rmc-armor-plate-translator-unequipped

@@ -1,5 +1,6 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -29,6 +30,9 @@ public sealed partial class RMCEmergencyInjectorPlateComponent : Component
 
     [DataField]
     public int RecyclableValue = 100;
+
+    [DataField]
+    public SoundSpecifier InjectSound = new SoundPathSpecifier("/Audio/_RMC14/Medical/air_release.ogg");
 }
 
 [Serializable, Robust.Shared.Serialization.NetSerializable]

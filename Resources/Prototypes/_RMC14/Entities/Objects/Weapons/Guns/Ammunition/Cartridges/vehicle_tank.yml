@@ -131,6 +131,7 @@
   name: DRGN flame jet
   categories: [ HideSpawnMenu ]
   components:
+  - type: RMCArmorPlateBypass
   - type: DeleteOnFixedDistanceStop
   - type: TriggerOnCollide
     fixtureID: projectile
@@ -207,6 +208,7 @@
   name: DRGN flame jet
   categories: [ HideSpawnMenu ]
   components:
+  - type: RMCArmorPlateBypass
   - type: IgniteOnProjectileHit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
@@ -246,6 +248,7 @@
   name: tank flamer jet
   categories: [ HideSpawnMenu ]
   components:
+  - type: RMCArmorPlateBypass
   - type: IgniteOnProjectileHit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi

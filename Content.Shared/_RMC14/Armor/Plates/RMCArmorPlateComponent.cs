@@ -14,4 +14,7 @@ public sealed partial class RMCArmorPlateComponent : Component
 
     [DataField]
     public LocId? DetachedPopup;
+
+    [DataField]
+    public LocId? UnequippedPopup;
 }

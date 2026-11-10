@@ -1,3 +1,4 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -21,6 +22,12 @@ public sealed partial class RMCCeramicPlateComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Broken;
+
+    [DataField]
+    public SoundSpecifier HitSound = new SoundPathSpecifier("/Audio/_RMC14/Structures/metalhit.ogg", AudioParams.Default.WithVolume(-12f));
+
+    [DataField]
+    public SoundSpecifier BreakSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/ceramic_shatter.ogg", AudioParams.Default.WithVolume(-9f));
 }
 
 [Serializable, NetSerializable]

@@ -92,3 +92,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/de5c69661f8d33425123894028702f64239f861b/sound/effects/heart_beat_short.ogg"
+
+- files: ["ceramic_shatter.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6d05223b42746f0c6970965c849c4f3ca5bba2da/sound/effects/ceramic_shatter.ogg"

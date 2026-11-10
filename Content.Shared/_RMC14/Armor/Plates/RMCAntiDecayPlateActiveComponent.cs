@@ -8,4 +8,10 @@ public sealed partial class RMCAntiDecayPlateActiveComponent : Component
 {
     [DataField, AutoNetworkedField]
     public TimeSpan BonusTime = TimeSpan.FromMinutes(4);
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Plate;
+
+    [DataField, AutoNetworkedField]
+    public bool Preserving;
 }

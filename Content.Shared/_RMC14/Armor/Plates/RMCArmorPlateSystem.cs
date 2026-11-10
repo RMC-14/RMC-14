@@ -17,6 +17,7 @@ using Content.Shared.Mobs;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -26,6 +27,7 @@ namespace Content.Shared._RMC14.Armor.Plates;
 
 public sealed class RMCArmorPlateSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ReactiveSystem _reactive = default!;
@@ -49,12 +51,13 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCArmorPlateAppliedEvent>(OnEmergencyInjectorApplied);
         SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCArmorPlateRemovedEvent>(OnEmergencyInjectorRemoved);
         SubscribeLocalEvent<RMCCeramicPlateActiveComponent, RMCArmorPlateAppliedEvent>(OnCeramicApplied);
+        SubscribeLocalEvent<RMCAntiDecayPlateActiveComponent, RMCArmorPlateAppliedEvent>(OnAntiDecayApplied);
 
         SubscribeLocalEvent<RMCCoagulatorPlateActiveComponent, CMBleedAttemptEvent>(OnCoagulatorBleedAttempt);
         SubscribeLocalEvent<RMCAntiDecayPlateActiveComponent, MobStateChangedEvent>(OnAntiDecayMobStateChanged, after: [typeof(RMCUnrevivableSystem)]);
         SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCEmergencyInjectorInjectActionEvent>(OnEmergencyInjectorInject);
         SubscribeLocalEvent<RMCEmergencyInjectorPlateActiveComponent, RMCEmergencyInjectorToggleOverdoseActionEvent>(OnEmergencyInjectorToggleOverdose);
-        SubscribeLocalEvent<RMCCeramicPlateActiveComponent, DamageModifyEvent>(OnCeramicDamageModify);
+        SubscribeLocalEvent<RMCCeramicPlateActiveComponent, DamageModifyEvent>(OnCeramicDamageModify, after: [typeof(CMArmorSystem)]);
         SubscribeLocalEvent<RMCTranslatorPlateActiveComponent, CanUnderstandLanguageEvent>(OnTranslatorCanUnderstand);
 
         SubscribeLocalEvent<RMCArmorPlateComponent, ExaminedEvent>(OnPlateExamined);
@@ -173,6 +176,7 @@ public sealed class RMCArmorPlateSystem : EntitySystem
             return;
 
         RemovePlate(args.Args.Equipee, ent);
+        PlatePopup(args.Args.Equipee, ent, ent.Comp.UnequippedPopup);
     }
 
     private void ApplyPlate(EntityUid wearer, Entity<RMCArmorPlateComponent> plate)
@@ -211,6 +215,12 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnAntiDecayApplied(Entity<RMCAntiDecayPlateActiveComponent> ent, ref RMCArmorPlateAppliedEvent args)
+    {
+        ent.Comp.Plate = args.Plate;
+        Dirty(ent);
+    }
+
     private void OnTranslatorCanUnderstand(Entity<RMCTranslatorPlateActiveComponent> ent, ref CanUnderstandLanguageEvent args)
     {
         args.CanUnderstand = true;
@@ -226,10 +236,26 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (args.NewMobState != MobState.Dead)
+        if (args.NewMobState == MobState.Dead)
+        {
+            _unrevivable.AddRevivableTime(ent.Owner, ent.Comp.BonusTime);
+            ent.Comp.Preserving = true;
+            Dirty(ent);
+
+            if (ent.Comp.Plate is { } deathPlate)
+                _popup.PopupEntity(Loc.GetString("rmc-armor-plate-anti-decay-death", ("plate", deathPlate)), ent, ent);
+
+            return;
+        }
+
+        if (args.OldMobState != MobState.Dead || !ent.Comp.Preserving)
             return;
 
-        _unrevivable.AddRevivableTime(ent.Owner, ent.Comp.BonusTime);
+        ent.Comp.Preserving = false;
+        Dirty(ent);
+
+        if (ent.Comp.Plate is { } revivePlate)
+            _popup.PopupEntity(Loc.GetString("rmc-armor-plate-anti-decay-revive", ("plate", revivePlate)), ent, ent);
     }
 
     private void OnEmergencyInjectorInject(Entity<RMCEmergencyInjectorPlateActiveComponent> ent, ref RMCEmergencyInjectorInjectActionEvent args)
@@ -243,7 +269,7 @@ public sealed class RMCArmorPlateSystem : EntitySystem
 
         if (plate.Used)
         {
-            _popup.PopupEntity("The plate's reserve is empty - replace it.", wearer, wearer, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-armor-plate-injector-empty", ("plate", plateUid)), wearer, wearer, PopupType.SmallCaution);
             return;
         }
 
@@ -257,7 +283,7 @@ public sealed class RMCArmorPlateSystem : EntitySystem
                 if (_rmcReagent.TryIndex(reagent, out var proto) && proto.Overdose is { } od &&
                     solution.GetTotalPrototypeQuantity(reagent) + amount > od)
                 {
-                    _popup.PopupEntity("The plate buzzes and refuses to inject - overdose risk!", wearer, wearer, PopupType.MediumCaution);
+                    _popup.PopupEntity(Loc.GetString("rmc-armor-plate-injector-refuse"), wearer, wearer, PopupType.MediumCaution);
                     return;
                 }
             }
@@ -290,22 +316,21 @@ public sealed class RMCArmorPlateSystem : EntitySystem
                 toInject.AddReagent(reagent, add);
         }
 
-        if (toInject.Volume <= FixedPoint2.Zero)
-            return;
-
         plate.Used = true;
         Dirty(plateUid, plate);
 
-        _reactive.DoEntityReaction(wearer, toInject, ReactionMethod.Injection);
-        _solution.TryAddSolution(solutionEnt.Value, toInject);
+        if (toInject.Volume > FixedPoint2.Zero)
+        {
+            _reactive.DoEntityReaction(wearer, toInject, ReactionMethod.Injection);
+            _solution.TryAddSolution(solutionEnt.Value, toInject);
+        }
 
         if (overdosed)
-            _popup.PopupEntity("The plate injects the cocktail with a worrying beep - overdose!", wearer, wearer, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-armor-plate-injector-overdose"), wearer, wearer, PopupType.MediumCaution);
         else if (adjusted)
-            _popup.PopupEntity("The plate injects the cocktail with a relieving beep - amounts adjusted to prevent overdose.", wearer, wearer);
-        else
-            _popup.PopupEntity("The plate injects its emergency cocktail.", wearer, wearer);
+            _popup.PopupEntity(Loc.GetString("rmc-armor-plate-injector-adjusted"), wearer, wearer, PopupType.MediumCaution);
 
+        _audio.PlayPvs(plate.InjectSound, wearer);
         args.Handled = true;
     }
 
@@ -327,18 +352,18 @@ public sealed class RMCArmorPlateSystem : EntitySystem
 
         var text = plate.OverdoseProtection switch
         {
-            RMCEmergencyInjectorOverdose.Dynamic => "Overdose protection set to DYNAMIC - amounts capped to avoid overdose.",
-            RMCEmergencyInjectorOverdose.Strict => "Overdose protection set to STRICT - will refuse if any reagent would overdose.",
-            _ => "Overdose protection set to OFF - full dose regardless of overdose.",
+            RMCEmergencyInjectorOverdose.Dynamic => "rmc-armor-plate-injector-mode-dynamic",
+            RMCEmergencyInjectorOverdose.Strict => "rmc-armor-plate-injector-mode-strict",
+            _ => "rmc-armor-plate-injector-mode-off",
         };
-        _popup.PopupEntity(text, ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString(text), ent.Owner, ent.Owner);
 
         args.Handled = true;
     }
 
     private void OnCeramicDamageModify(Entity<RMCCeramicPlateActiveComponent> ent, ref DamageModifyEvent args)
     {
-        if (args.Tool is not { } tool || !HasComp<ProjectileComponent>(tool))
+        if (args.Tool is not { } tool || !HasComp<ProjectileComponent>(tool) || HasComp<RMCArmorPlateBypassComponent>(tool))
             return;
 
         if (ent.Comp.Plate is not { } plateUid || !TryComp(plateUid, out RMCCeramicPlateComponent? plate) || plate.Broken)
@@ -363,8 +388,11 @@ public sealed class RMCArmorPlateSystem : EntitySystem
         {
             plate.Health = 0;
             plate.Broken = true;
-            _popup.PopupEntity("Your ceramic plate shatters!", ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-armor-plate-break", ("plate", plateUid)), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _audio.PlayPvs(plate.BreakSound, ent.Owner);
         }
+
+        _audio.PlayPvs(plate.HitSound, ent.Owner);
 
         UpdateCeramicVisuals(plateUid, plate);
         Dirty(plateUid, plate);

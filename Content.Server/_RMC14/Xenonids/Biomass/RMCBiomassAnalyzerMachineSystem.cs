@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Armor.Plates;
 using Content.Shared._RMC14.Xenonids.Biomass;
+using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -14,6 +15,7 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCBiomassAnalyzerDataSystem _biomass = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -21,6 +23,7 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
     {
         base.Initialize();
         SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, RMCBiomassRecyclePlateDoAfterEvent>(OnRecyclePlateDoAfter);
         SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, BeforeActivatableUIOpenEvent>(OnBeforeUIOpen);
         SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, EntRemovedFromContainerMessage>(OnOrganRemoved);
 
@@ -46,12 +49,18 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
         if (args.Handled)
             return;
 
-        var isPlate = TryComp<RMCEmergencyInjectorPlateComponent>(args.Used, out var recyclable) && recyclable.RecyclableValue > 0;
+        var isPlate = HasComp<RMCArmorPlateComponent>(args.Used) && !HasComp<RMCCeramicPlateComponent>(args.Used);
         var isOrgan = HasComp<RMCBiomassOrganComponent>(args.Used);
         if (!isPlate && !isOrgan)
             return;
 
         args.Handled = true;
+        if (isPlate && (!TryComp(args.Used, out RMCEmergencyInjectorPlateComponent? recyclable) || recyclable.RecyclableValue <= 0))
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-armor-plate-recycle-invalid"), args.User);
+            return;
+        }
+
         if (!IsMachinePowered(ent))
         {
             _popup.PopupCursor("This machine has no power!", args.User);
@@ -60,14 +69,45 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
 
         if (isPlate)
         {
-            _biomass.AddPoints(recyclable!.RecyclableValue);
-            _popup.PopupCursor($"You recycle the plate for {recyclable.RecyclableValue} biomass points.", args.User);
-            _audio.PlayPvs(ent.Comp.NotifySound, ent);
-            QueueDel(args.Used);
+            var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.RecyclePlateDelay, new RMCBiomassRecyclePlateDoAfterEvent(), ent, ent, args.Used)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                BreakOnHandChange = true,
+                NeedHand = true,
+            };
+
+            _doAfter.TryStartDoAfter(doAfter);
             return;
         }
 
         TryQueueOrgan(ent, args.Used, args.User);
+    }
+
+    private void OnRecyclePlateDoAfter(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref RMCBiomassRecyclePlateDoAfterEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (args.Cancelled)
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-armor-plate-recycle-interrupted"), args.User);
+            return;
+        }
+
+        if (args.Used is not { } plate ||
+            !TryComp(plate, out RMCEmergencyInjectorPlateComponent? recyclable) ||
+            recyclable.RecyclableValue <= 0 ||
+            !IsMachinePowered(ent))
+        {
+            return;
+        }
+
+        args.Handled = true;
+        _biomass.AddPoints(recyclable.RecyclableValue);
+        _popup.PopupCursor($"You recycle the plate for {recyclable.RecyclableValue} biomass points.", args.User);
+        _audio.PlayPvs(ent.Comp.NotifySound, ent);
+        QueueDel(plate);
     }
 
     private void TryQueueOrgan(Entity<RMCBiomassAnalyzerMachineComponent> ent, EntityUid organ, EntityUid user)

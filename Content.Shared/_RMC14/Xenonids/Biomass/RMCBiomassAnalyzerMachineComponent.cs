@@ -31,6 +31,9 @@ public sealed partial class RMCBiomassAnalyzerMachineComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan QueuePrintDelay = TimeSpan.FromSeconds(2);
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan RecyclePlateDelay = TimeSpan.FromSeconds(3);
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? PrintingUntil;
 
