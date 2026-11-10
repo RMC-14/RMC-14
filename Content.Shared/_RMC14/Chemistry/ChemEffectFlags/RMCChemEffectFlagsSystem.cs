@@ -1,7 +1,5 @@
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -9,7 +7,6 @@ namespace Content.Shared._RMC14.Chemistry.ChemEffectFlags;
 
 public sealed class RMCChemEffectFlagsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedStatusEffectsSystem _status = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -17,6 +14,17 @@ public sealed class RMCChemEffectFlagsSystem : EntitySystem
 
     private static readonly TimeSpan ResetInterval = TimeSpan.FromSeconds(16);
     private static readonly TimeSpan MetabolismGrace = TimeSpan.FromSeconds(1);
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<WoundedComponent, CMBleedAttemptEvent>(OnWoundedBleedAttempt);
+    }
+
+    private void OnWoundedBleedAttempt(Entity<WoundedComponent> ent, ref CMBleedAttemptEvent args)
+    {
+        if (_status.HasEffectComp<RMCNoBleedingStatusEffectComponent>(ent))
+            args.Cancelled = true;
+    }
 
     public bool TrySetFlag(EntityUid target, EntProtoId flag)
     {
@@ -32,21 +40,5 @@ public sealed class RMCChemEffectFlagsSystem : EntitySystem
             return false;
 
         return _status.TrySetStatusEffectDuration(target, flag, flags.ResetAt - now + MetabolismGrace);
-    }
-
-    public override void Update(float frameTime)
-    {
-        var query = EntityQueryEnumerator<RMCNoBleedingStatusEffectComponent, StatusEffectComponent>();
-        while (query.MoveNext(out _, out _, out var effect))
-        {
-            if (effect.AppliedTo is not { } target ||
-                !TryComp(target, out BloodstreamComponent? bloodstream) ||
-                bloodstream.BleedAmount <= 0)
-            {
-                continue;
-            }
-
-            _bloodstream.TryModifyBleedAmount((target, bloodstream), -bloodstream.BleedAmount);
-        }
     }
 }
