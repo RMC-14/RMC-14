@@ -1,4 +1,5 @@
 using Content.Client._RMC14.UserInterface.Systems.TargetDoll.Widgets;
+using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared._RMC14.Body.Zones;
 using Content.Shared._RMC14.Xenonids;
 using Robust.Client.GameObjects;
@@ -16,6 +17,7 @@ public sealed class TargetDollUIController : UIController
     [Dependency] private readonly IPlayerManager _player = default!;
 
     [UISystemDependency] private readonly SpriteSystem? _sprite = default;
+    [UISystemDependency] private readonly RMCTargetZoneSystem? _targetZone = default;
 
     private static readonly ResPath Rsi = new("/Textures/_RMC14/Interface/target_doll.rsi");
 
@@ -23,6 +25,32 @@ public sealed class TargetDollUIController : UIController
     private RMCTargetZone? _lastZone;
 
     private TargetDollGui? UI => UIManager.GetActiveUIWidgetOrNull<TargetDollGui>();
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        var gameplayStateLoad = UIManager.GetUIController<GameplayStateLoadController>();
+        gameplayStateLoad.OnScreenLoad += OnScreenLoad;
+        gameplayStateLoad.OnScreenUnload += OnScreenUnload;
+    }
+
+    private void OnScreenLoad()
+    {
+        if (UI is { } ui)
+            ui.ZonePressed += OnZonePressed;
+    }
+
+    private void OnScreenUnload()
+    {
+        if (UI is { } ui)
+            ui.ZonePressed -= OnZonePressed;
+    }
+
+    private void OnZonePressed(RMCTargetZone zone)
+    {
+        _targetZone?.RequestZone(zone);
+    }
 
     // the zone can change from a key press, a click, or the server correcting a prediction,
     // so the doll just follows the component each frame and only redraws when something differs
