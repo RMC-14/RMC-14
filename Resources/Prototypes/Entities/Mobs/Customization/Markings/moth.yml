@@ -1111,3 +1111,71 @@
   sprites:
   - sprite: Mobs/Customization/Moth/moth_parts.rsi
     state: witchwing_r_arm
+
+# RMC Start - default marking copies for antennae and wings to allow 6 and 3 markings respectively without bricking everything due to required and default markings
+# Antennae
+- type: marking
+  id: MothAntennasDefault2
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [] # <- so it doesn't appear for players
+  sprites:
+  - sprite: Mobs/Customization/Moth/moth_antennas.rsi
+    state: default
+
+- type: marking
+  id: MothAntennasDefault3
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [] # <- so it doesn't appear for players
+  sprites:
+  - sprite: Mobs/Customization/Moth/moth_antennas.rsi
+    state: default
+
+- type: marking
+  id: MothAntennasDefault4
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [] # <- so it doesn't appear for players
+  sprites:
+  - sprite: Mobs/Customization/Moth/moth_antennas.rsi
+    state: default
+
+- type: marking
+  id: MothAntennasDefault5
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [] # <- so it doesn't appear for players
+  sprites:
+  - sprite: Mobs/Customization/Moth/moth_antennas.rsi
+    state: default
+
+- type: marking
+  id: MothAntennasDefault6
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [] # <- so it doesn't appear for players
+  sprites:
+  - sprite: Mobs/Customization/Moth/moth_antennas.rsi
+    state: default
+
+# Wings
+- type: marking
+  id: MothWingsDefault2
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [] # <- so it doesn't appear for players
+  sprites:
+  - sprite: Mobs/Customization/Moth/moth_wings.rsi
+    state: default
+
+- type: marking
+  id: MothWingsDefault3
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [] # <- so it doesn't appear for players
+  sprites:
+  - sprite: Mobs/Customization/Moth/moth_wings.rsi
+    state: default
+
+# RMC End
