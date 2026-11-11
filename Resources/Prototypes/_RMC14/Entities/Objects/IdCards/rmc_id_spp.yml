@@ -61,11 +61,11 @@
 
 - type: entity
   parent: CMIDCardGold
-  id: CMIDCardGoldSPPOfficer
+  id: RMCIDCardGoldSPPSpetsnazCommander
   description: A gold plated holo-badge which shows power and might.
   components:
   - type: PresetIdCard
-    job: RMCSurvivorSPPCrashlandCommander
+    job: RMCSurvivorSPPSpetsnazTrjientCommander
   - type: ItemIFF
     factions:
     - FactionSurvivor

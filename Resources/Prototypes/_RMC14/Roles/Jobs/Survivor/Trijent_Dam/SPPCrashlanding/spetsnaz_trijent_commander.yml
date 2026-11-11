@@ -1,14 +1,14 @@
 - type: job
-  parent: RMCSurvivorSPPCrashlandBase
-  id: RMCSurvivorSPPCrashlandCommander
-  name: rmc-job-name-crashland-officer
-  startingGear: RMCGearSPPCrashlandCommander
+  parent: RMCSurvivorSPPSpetsnazTrijentBase
+  id: RMCSurvivorSPPSpetsnazTrjientCommander
+  name: rmc-job-name-trijent-spetsnaz-commander
+  startingGear: RMCGearSPPSpetsnazTrijentCommander
   ranks:
     RMCRankSPPMayjor: []
-  icon: "RMCJobIconSurvivorSPPCrashlandCommander"
+  icon: "RMCJobIconSurvivorSPPSpetsnazTrjientCommander"
+  hasIcon: true
   playTimeTracker: RMCJobSurvivorCO
-  greeting: rmc-job-greeting-crashland-officer
-  spawnMenuRoleName: SPP Airborne Commander (Trijent Special Survivor)
+  spawnMenuRoleName: SPP Spetsnaz D/SRU Commander (Trijent Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -43,24 +43,23 @@
     - type: AssignSquad
       squad: SquadSPP
     - type: JobPrefix
-      prefix: rmc-job-prefix-crashland-officer
+      prefix: rmc-job-prefix-trijent-spetsnaz-commander
     - type: RMCTrackable
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSPPCrashlandWeaponOnly
+      preset: RMCSurvivorPresetSPPSpetsnazWeaponOnly
     - type: RMCSurvivor
     - type: RMCAllowSuitStorage
   hidden: true
 
 - type: startingGear
-  parent: RMCGearSPPCrashlandBase
-  id: RMCGearSPPCrashlandCommander
+  parent: RMCGearSPPSpetsnazTrijentBase
+  id: RMCGearSPPSpetsnazTrijentCommander
   equipment:
-    jumpsuit: CMJumpsuitSPPOfficer
-    ears: RMCHeadsetSPPCrashland
+    ears: RMCHeadsetSPPSpetsnazCrashlandTrijentSL
     back: CMSatchelSecureStandard
     belt: RMCBeltHolsterPistolSPP
     outerClothing: RMCCoatSPP
-    id: CMIDCardGoldSPPOfficer
+    id: RMCIDCardGoldSPPSpetsnazCommander
     head: CMHeadCapSPPPeaked
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchDocument
@@ -84,11 +83,12 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSPPCrashlandCommander
-  name: special survivor spp crashland commander spawn point
+  id: RMCSpawnPointSPPSpetsnazTrjientCommander
+  name: special survivor spp spetsnaz commander spawn point
+  suffix: Trijent
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSPPCrashlandCommander
+    job_id: RMCSurvivorSPPSpetsnazTrjientCommander
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
@@ -96,7 +96,7 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconSurvivorSPPCrashlandCommander
+  id: RMCJobIconSurvivorSPPSpetsnazTrjientCommander
   icon:
-    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
-    state: spp_co
+    sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
+    state: spp_sptz_co
