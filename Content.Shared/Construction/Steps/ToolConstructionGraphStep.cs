@@ -10,6 +10,7 @@ namespace Content.Shared.Construction.Steps
     [DataDefinition]
     public sealed partial class ToolConstructionGraphStep : ConstructionGraphStep
     {
+        [Dependency] private readonly IPrototypeManager _protoManager = default!;
         // Begin RMC14
         [DataField("tools", required:true, customTypeSerializer:typeof(PrototypeIdListSerializer<ToolQualityPrototype>))]
         public List<string> Tools { get; private set; } = new();
@@ -30,11 +31,9 @@ namespace Content.Shared.Construction.Steps
                 return;
             }
 
-            var prototype = IoCManager.Resolve<IPrototypeManager>();
-
             foreach (var tool in Tools)
             {
-                if (!prototype.TryIndex(tool, out ToolQualityPrototype? quality))
+                if (!_protoManager.TryIndex(tool, out ToolQualityPrototype? quality))
                     continue;
 
                 examinedEvent.PushMarkup(Loc.GetString("construction-use-tool-entity", ("toolName", Loc.GetString(quality.ToolName))));
@@ -45,7 +44,7 @@ namespace Content.Shared.Construction.Steps
         {
             var prototype = IoCManager.Resolve<IPrototypeManager>();
 
-            var qualities = Tools.Select(tool => prototype.Index<ToolQualityPrototype>(tool)).ToList();
+            var qualities = Tools.Select(tool => _protoManager.Index<ToolQualityPrototype>(tool)).ToList();
             
             var names = qualities.Select(quality => Loc.GetString(quality.ToolName)).ToList();
 
