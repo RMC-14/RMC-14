@@ -42,7 +42,9 @@ public abstract class SharedRMCBloodstreamSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
 
-    private static readonly TimeSpan MaxEyeBlurTime = TimeSpan.FromSeconds(5);
+    private static readonly TimeSpan MaxEyeBlurTime = TimeSpan.FromSeconds(100);
+
+    private static readonly TimeSpan EyeBlurTime = TimeSpan.FromSeconds(12);
     private readonly List<ReagentId> _reagentsToRemove = new();
 
     public override void Initialize()
@@ -289,7 +291,7 @@ public abstract class SharedRMCBloodstreamSystem : EntitySystem
             {
                 if (TryAddBlur(ent, curTime))
                 {
-                    var badBloodDamage = new DamageSpecifier(oxyDamage, 3);
+                    var badBloodDamage = new DamageSpecifier(oxyDamage, ent.Comp2.BadOxyLoss);
                     _damage.TryChangeDamage(ent, badBloodDamage, true, interruptsDoAfters: false);
                 }
 
@@ -316,7 +318,7 @@ public abstract class SharedRMCBloodstreamSystem : EntitySystem
                 {
                     if (_proto.TryIndex(ent.Comp2.ToxinDamage, out var toxDamage))
                     {
-                        var surviveBloodDamage = new DamageSpecifier(oxyDamage, 8) + new DamageSpecifier(toxDamage, 3);
+                        var surviveBloodDamage = new DamageSpecifier(oxyDamage, ent.Comp2.SurviveOxyloss) + new DamageSpecifier(toxDamage, ent.Comp2.SurviveToxin);
                         _damage.TryChangeDamage(ent, surviveBloodDamage, true, interruptsDoAfters: false);
                     }
                 }
@@ -358,7 +360,7 @@ public abstract class SharedRMCBloodstreamSystem : EntitySystem
             blur.Value.Item2 - curTime >= MaxEyeBlurTime)
             return false;
 
-        _status.TryAddStatusEffect<RMCBlindedComponent>(ent, "Blinded", TimeSpan.FromSeconds(12), false);
+        _status.TryAddStatusEffect<RMCBlindedComponent>(ent, "Blinded", EyeBlurTime, false);
         return true;
     }
 }

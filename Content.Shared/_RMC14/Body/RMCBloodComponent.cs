@@ -72,6 +72,15 @@ public sealed partial class RMCBloodComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 MaxVOxyloss = 100;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 BadOxyLoss = 3;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 SurviveOxyloss = 8;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 SurviveToxin = 3;
 }
 
 [Serializable, NetSerializable]
