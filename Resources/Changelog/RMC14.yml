@@ -1,78 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Add weld effect to welding
-    type: Add
-  - message: Single tile double doors will now both break if one is broken, both be
-      welded if one is welded.
-    type: Fix
-  id: 3241
-  time: '2026-05-31T02:31:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9905
-- author: Arykh
-  changes:
-  - message: Medbay's chemical dispensers now scale with the marine population. Scaling
-      affects the recharge rate and max energy.
-    type: Add
-  id: 3242
-  time: '2026-05-31T02:35:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9044
-- author: SharkSnake98
-  changes:
-  - message: Added the RT-8000 bag phone, a radio-telephone satchel for the Liaison
-      and Correspondent available in their safe and vendor respectively
-    type: Add
-  - message: Added the T70 bag phone, a radio-telephone satchel for the Liaison available
-      as a gameplay reward unlocked at Senior Executive
-    type: Add
-  id: 3243
-  time: '2026-05-31T02:37:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9588
-- author: CatAndHats
-  changes:
-  - message: Fixed Hedgehog Ravager's resting while injured sprites
-    type: Fix
-  id: 3244
-  time: '2026-05-31T02:42:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9927
-- author: SharkSnake98
-  changes:
-  - message: Added parity boxes, donk pockets, and drink glasses
-    type: Add
-  id: 3245
-  time: '2026-05-31T02:42:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9928
-- author: JustMyselfUwU
-  changes:
-  - message: Fixed the QYJ not requiring a skill to use it, fixed some of its stats
-      and added its integrated bipod.
-    type: Fix
-  id: 3246
-  time: '2026-05-31T02:41:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9868
-- author: JustMyselfUwU
-  changes:
-  - message: Added a health indicator to the m2c and ml66d, you will now have a rough
-      idea of how damaged they are.
-    type: Add
-  - message: Fixed sentries missing most of their damage indicator text, you can once
-      again determine how much damage your sentry has.
-    type: Fix
-  - message: Changed xeno damage examines from 25, 50, and 75 damage to 100, 200,
-      and 300 damage.
-    type: Tweak
-  id: 3247
-  time: '2026-05-31T02:46:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9926
-- author: MidZik
-  changes:
-  - message: Leap, Pounce, Dash, Rush, Assault, and Headbutt no longer overshoot,
-      undershoot, or miss the target position due to your movement at the moment you
-      used them.
-    type: Tweak
-  id: 3248
-  time: '2026-05-31T02:48:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9904
 - author: CatAndHats
   changes:
   - message: Changed the tactical map colour of Echo to their squad colour.
@@ -4532,5 +4458,73 @@
   id: 3740
   time: '2026-11-08T11:55:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10471
+- author: IceNoobXD
+  changes:
+  - message: You can now click on yourself to perform a self-scan with the data detector,
+      as it no longer pings if the user has intel on themselves!
+    type: Add
+  id: 3741
+  time: '2026-11-09T05:09:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10524
+- author: CyberTropic
+  changes:
+  - message: Fixed barricade downgrading being instant instead of taking 0.5 seconds.
+    type: Fix
+  - message: Fixed barricade downgrading returning all of the upgrade material instead
+      of only half.
+    type: Fix
+  id: 3742
+  time: '2026-11-09T05:23:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10947
+- author: Vermidia
+  changes:
+  - message: Health analyzers no longer update continuously if you are too far from
+      the scanned target, or if the user would require a doafter to use the analyzer.
+    type: Tweak
+  id: 3743
+  time: '2026-11-09T05:42:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10568
+- author: kleinerstation13
+  changes:
+  - message: Removed the cooldown between taking flares out of a flare pouch
+    type: Tweak
+  id: 3744
+  time: '2026-11-09T16:22:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10888
+- author: Vermidia
+  changes:
+  - message: Fixed reagents reacting in the stomach.
+    type: Fix
+  id: 3745
+  time: '2026-11-09T16:45:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10912
+- author: MidZik
+  changes:
+  - message: Xenos who try to move while resting will now wake up.
+    type: Add
+  id: 3746
+  time: '2026-11-09T21:43:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10770
+- author: Vermidia
+  changes:
+  - message: Fixed hijack deleting xenos/structures etc before the dropship goes into
+      FTL. These now trigger once it enters FTL.
+    type: Fix
+  - message: Fixed the dropship xeno alert happening on dropship launch. It now happens
+      when it arrives.
+    type: Fix
+  - message: Fixed dropship xeno alert saying "dropship Dropship [name]"
+    type: Fix
+  id: 3747
+  time: '2026-11-09T21:43:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11076
+- author: SaloEater
+  changes:
+  - message: You can no longer zoom while rested as a xeno, zoom will automatically
+      reenable when you are no longer resting.
+    type: Tweak
+  id: 3748
+  time: '2026-11-09T22:10:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9909
 Name: RMC14
 Order: -1
