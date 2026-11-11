@@ -449,8 +449,12 @@ public abstract class SharedBloodstreamSystem : EntitySystem
             return false;
 
         ent.Comp.BleedAmount += amount;
-        if(ent.Comp.MaxBleedAmount != null) //RMC14
+        //RMC14
+        if (ent.Comp.MaxBleedAmount != null)
             ent.Comp.BleedAmount = Math.Clamp(ent.Comp.BleedAmount, 0, ent.Comp.MaxBleedAmount.Value);
+        else
+            ent.Comp.BleedAmount = Math.Max(ent.Comp.BleedAmount, 0);
+        //RMC14
 
         DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmount));
 
