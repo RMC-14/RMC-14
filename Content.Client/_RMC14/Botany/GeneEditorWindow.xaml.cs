@@ -26,7 +26,7 @@ public sealed partial class GeneEditorWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         RMCMachineUiStyle.RemoveWindowBorder(this);
 
-        _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        _bannerFont = RMCMachineUiStyle.BoldFont(IoCManager.Resolve<IResourceCache>());
 
         ApplyButton.SetIcon(RMCIcons.Download);
         EjectSeedButton.SetIcon(RMCIcons.Eject);

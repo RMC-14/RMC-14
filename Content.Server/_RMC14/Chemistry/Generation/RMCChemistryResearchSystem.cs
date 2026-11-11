@@ -8,7 +8,6 @@ using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Intel;
-using Content.Shared._RMC14.Visor;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
@@ -205,11 +204,15 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         Dirty(research);
         RefreshArchivedReports();
 
+        var newHighest = research.Comp.ClearanceLevel > research.Comp.HighestClearanceLevel;
+        if (newHighest)
+            research.Comp.HighestClearanceLevel = research.Comp.ClearanceLevel;
+
         if (spawnAt != null)
         {
             _popup.PopupCoordinates($"Clearance access increased to level {research.Comp.ClearanceLevel} for {cost} credits.", spawnAt.Value, PopupType.Medium);
 
-            if (SpawnUniqueSynthesisNotes(spawnAt.Value, research.Comp.ClearanceLevel) is { } notes)
+            if (newHighest && SpawnUniqueSynthesisNotes(spawnAt.Value, research.Comp.ClearanceLevel) is { } notes)
                 _audio.PlayPvs(research.Comp.FaxSound, notes);
         }
 
@@ -425,7 +428,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         var properties = _generator.GetProperties(reagent);
 
         var notes = Spawn(ContractNotesProto, spawnAt);
-        WriteSynthesisNotes(notes, reagentId, ingredients, properties, contract: true);
+        WriteSynthesisNotes(notes, reagentId, ingredients, properties, contract: false);
         _audio.PlayPvs(research.Comp.FaxSound, notes);
 
         return true;
@@ -757,14 +760,6 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
     {
         wearer = default;
         var worn = receiver.Owner;
-        if (HasComp<VisorComponent>(worn))
-        {
-            if (!_container.TryGetContainingContainer((worn, null), out var visorContainer))
-                return false;
-
-            worn = visorContainer.Owner;
-        }
-
         if (!_inventory.TryGetContainingSlot(worn, out var slot) ||
             (slot.SlotFlags & receiver.Comp.Slots) == 0 ||
             !_container.TryGetContainingContainer((worn, null), out var slotContainer))
@@ -851,6 +846,7 @@ public sealed class RMCChemistryResearchSystem : SharedRMCChemistryResearchSyste
         {
             var converted = spawnAt is { } reportCoordinates ? Spawn(ReportProto, reportCoordinates) : Spawn(ReportProto);
             _paper.SetContent(converted, paper.Content);
+            _paper.CopyStamps((original, paper), converted);
             _metaData.SetEntityName(converted, Name(original));
             SetReportFromNotes(converted, notes);
             return converted;

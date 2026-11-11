@@ -32,7 +32,7 @@ public sealed partial class RMCSynthesisSimulatorWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         RemoveWindowBorder(this);
 
-        _noticeFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        _noticeFont = RMCMachineUiStyle.BoldFont(IoCManager.Resolve<IResourceCache>());
         CreditsLabel.FontOverride = _noticeFont;
 
         SimulateButton.SetIcon(RMCIcons.Radiation, "SIMULATE");

@@ -3,4 +3,5 @@
 namespace Content.Shared._RMC14.Botany;
 
 [RegisterComponent, NetworkedComponent]
+[Access(typeof(SharedRMCPlantTraySystem))]
 public sealed partial class RMCHoeToolComponent : Component { }

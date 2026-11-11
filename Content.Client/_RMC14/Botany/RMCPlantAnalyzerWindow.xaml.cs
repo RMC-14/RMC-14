@@ -22,7 +22,7 @@ public sealed partial class RMCPlantAnalyzerWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         RMCMachineUiStyle.RemoveWindowBorder(this, WindowBackgroundColor);
 
-        StatusBannerLabel.FontOverride = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        StatusBannerLabel.FontOverride = RMCMachineUiStyle.BoldFont(IoCManager.Resolve<IResourceCache>());
         HealthBar.BackgroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = BarBackgroundColor };
         GrowthBar.BackgroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = BarBackgroundColor };
     }

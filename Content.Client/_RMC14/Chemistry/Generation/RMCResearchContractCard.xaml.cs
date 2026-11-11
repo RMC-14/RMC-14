@@ -25,7 +25,7 @@ public sealed partial class RMCResearchContractCard : BoxContainer
 
         var resourceCache = IoCManager.Resolve<IResourceCache>();
         var smallFont = resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 8);
-        var boldFont = resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        var boldFont = RMCMachineUiStyle.BoldFont(resourceCache);
 
         RecipeHintLabel.FontOverride = smallFont;
         PropertyHintLabel.FontOverride = smallFont;

@@ -18,7 +18,7 @@ public sealed partial class RMCSortingCabinetWindow : DefaultWindow
 
         SearchEdit.StyleBoxOverride = Field();
 
-        var font = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        var font = RMCMachineUiStyle.BoldFont(IoCManager.Resolve<IResourceCache>());
         Notice(EmptyPanel, EmptyLabel, "Cabinet is empty!", NoticeInfoColor, font);
     }
 

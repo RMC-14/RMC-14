@@ -7,7 +7,7 @@ using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Chemistry.XenoTransformation;
 using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Jittering;
-using Content.Shared._RMC14.Language.Components;
+using Content.Shared._RMC14.Language.Systems;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -47,6 +47,7 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCXenoTransformationSystem _transformation = default!;
+    [Dependency] private readonly RMCUniversalUnderstandingSystem _universalUnderstanding = default!;
 
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
     private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
@@ -264,8 +265,7 @@ public sealed class RMCXenoTransformationProgressSystem : EntitySystem
         _dazed.TryDaze(uid, TimeSpan.FromSeconds(6), true);
         Popup(uid, "Something in your mind tears- and your thoughts don't sound the way they did before.", PopupType.LargeCaution);
 
-        var understanding = EnsureComp<RMCUniversalUnderstandingComponent>(uid);
-        understanding.ExpiresAt = TimeSpan.MaxValue;
+        _universalUnderstanding.GrantPermanent(uid);
 
         foreach (var language in new List<ProtoId<LanguagePrototype>>(_language.GetSpokenLanguages(uid)))
         {

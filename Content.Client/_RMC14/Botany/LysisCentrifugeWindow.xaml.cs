@@ -26,7 +26,7 @@ public sealed partial class LysisCentrifugeWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         RMCMachineUiStyle.RemoveWindowBorder(this);
 
-        _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        _bannerFont = RMCMachineUiStyle.BoldFont(IoCManager.Resolve<IResourceCache>());
 
         ProcessSeedButton.SetIcon(RMCIcons.Industry);
         EjectSeedButton.SetIcon(RMCIcons.Eject);

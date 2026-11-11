@@ -17,27 +17,6 @@ public sealed partial class RMCHallucinationSystem
     private static readonly EntProtoId ExplosionVisual = "CMExplosionEffectGrenade";
     private static readonly EntProtoId ExplosionShockWaveVisual = "RMCExplosionEffectGrenadeShockWave";
     private static readonly EntProtoId CasImpactVisual = "RMCHallucinationCasImpact";
-    private static readonly TimeSpan ExplosionTime = TimeSpan.FromSeconds(0.6);
-    private static readonly TimeSpan ExplosionShockWaveTime = TimeSpan.FromSeconds(0.5);
-    private static readonly TimeSpan GrenadeThrowTime = TimeSpan.FromSeconds(0.4);
-    private static readonly TimeSpan GrenadeFuse = TimeSpan.FromSeconds(4);
-
-    private static readonly TimeSpan OrbitalAlertDelay = TimeSpan.FromSeconds(2);
-    private static readonly TimeSpan OrbitalTravelDelay = TimeSpan.FromSeconds(12);
-    private static readonly TimeSpan OrbitalWarnTwoDelay = TimeSpan.FromSeconds(16);
-    private static readonly TimeSpan OrbitalWarnThreeDelay = TimeSpan.FromSeconds(20);
-    private static readonly TimeSpan OrbitalImpactDelay = TimeSpan.FromSeconds(24);
-    private const int OrbitalBlasts = 5;
-
-    private static readonly TimeSpan MortarImpactWarnDelay = TimeSpan.FromSeconds(2.5);
-    private static readonly TimeSpan MortarImpactDelay = TimeSpan.FromSeconds(4.5);
-
-    private static readonly TimeSpan CasFirstShotDelay = TimeSpan.FromSeconds(1.5);
-    private static readonly TimeSpan CasShotDelay = TimeSpan.FromSeconds(0.1);
-    private static readonly TimeSpan CasImpactTime = TimeSpan.FromSeconds(0.5);
-    private const int CasShots = 10;
-    private const int CasSoundEveryShots = 3;
-    private const float CasSpread = 3;
 
     private void InitializeDanger()
     {
@@ -56,22 +35,22 @@ public sealed partial class RMCHallucinationSystem
 
     private void OnFakeGrenade(Entity<RMCHallucinationFakeGrenadeComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeGrenade(args.Victim);
+        args.Handled = FakeGrenade(args.Victim, ent.Comp);
     }
 
     private void OnFakeOrbitalStrike(Entity<RMCHallucinationFakeOrbitalStrikeComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeOrbitalStrike(args.Victim);
+        args.Handled = FakeOrbitalStrike(args.Victim, ent.Comp);
     }
 
     private void OnFakeMortar(Entity<RMCHallucinationFakeMortarComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeMortar(args.Victim);
+        args.Handled = FakeMortar(args.Victim, ent.Comp);
     }
 
     private void OnFakeCas(Entity<RMCHallucinationFakeCasComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeCas(args.Victim);
+        args.Handled = FakeCas(args.Victim, ent.Comp);
     }
 
     private void OnLightFlicker(Entity<RMCHallucinationLightFlickerComponent> ent, ref RMCHallucinateEvent args)
@@ -102,7 +81,7 @@ public sealed partial class RMCHallucinationSystem
         return true;
     }
 
-    private bool FakeGrenade(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeGrenade(Entity<RMCHallucinatingComponent> ent, RMCHallucinationFakeGrenadeComponent grenade)
     {
         if (Transform(ent).GridUid is not { } grid ||
             !TryComp(grid, out MapGridComponent? gridComp) ||
@@ -126,19 +105,19 @@ public sealed partial class RMCHallucinationSystem
             GetNetCoordinates(new EntityCoordinates(grid, thrownFrom)),
             GetNetCoordinates(landingCoords),
             TimeSpan.Zero,
-            GrenadeThrowTime,
-            GrenadeFuse,
+            grenade.ThrowTime,
+            grenade.Fuse,
             ent.Comp.GrenadeSpinSpeed));
 
         _audio.PlayStatic(ent.Comp.GrenadeSound, ent, landingCoords);
         AddStep(ent,
-            GrenadeThrowTime + GrenadeFuse,
+            grenade.ThrowTime + grenade.Fuse,
             new RMCHallucinationStep { Sound = ent.Comp.ExplosionSound, Coordinates = landingCoords, Explosion = true });
 
         return true;
     }
 
-    private bool FakeOrbitalStrike(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeOrbitalStrike(Entity<RMCHallucinatingComponent> ent, RMCHallucinationFakeOrbitalStrikeComponent orbital)
     {
         if (_timing.CurTime < ent.Comp.StrikeEnd ||
             !HasComp<SquadMemberComponent>(ent) ||
@@ -150,9 +129,9 @@ public sealed partial class RMCHallucinationSystem
         }
 
         var target = OffsetFromVictim(ent, 4, 10);
-        ent.Comp.StrikeEnd = _timing.CurTime + OrbitalImpactDelay + TimeSpan.FromSeconds(2);
+        ent.Comp.StrikeEnd = _timing.CurTime + orbital.ImpactDelay + TimeSpan.FromSeconds(2);
 
-        AddStep(ent, OrbitalAlertDelay, new RMCHallucinationStep
+        AddStep(ent, orbital.AlertDelay, new RMCHallucinationStep
         {
             Sound = ent.Comp.OrbitalAlertSound,
             Message = Loc.GetString("rmc-ob-launch-detected"),
@@ -160,13 +139,13 @@ public sealed partial class RMCHallucinationSystem
 
         if (_area.TryGetArea(target, out _, out var area))
         {
-            AddStep(ent, OrbitalAlertDelay, new RMCHallucinationStep
+            AddStep(ent, orbital.AlertDelay, new RMCHallucinationStep
             {
                 Message = Loc.GetString("rmc-ob-launch-area", ("warhead", warhead.Name), ("area", area.Name)),
             });
         }
 
-        AddStep(ent, OrbitalTravelDelay, new RMCHallucinationStep
+        AddStep(ent, orbital.TravelDelay, new RMCHallucinationStep
         {
             Coordinates = target,
             Sound = ent.Comp.OrbitalTravelSound,
@@ -175,7 +154,7 @@ public sealed partial class RMCHallucinationSystem
             WarningChat = true,
         });
 
-        AddStep(ent, OrbitalWarnTwoDelay, new RMCHallucinationStep
+        AddStep(ent, orbital.WarnTwoDelay, new RMCHallucinationStep
         {
             Coordinates = target,
             Warning = "rmc-ob-warning-two",
@@ -183,7 +162,7 @@ public sealed partial class RMCHallucinationSystem
             WarningChat = true,
         });
 
-        AddStep(ent, OrbitalWarnThreeDelay, new RMCHallucinationStep
+        AddStep(ent, orbital.WarnThreeDelay, new RMCHallucinationStep
         {
             Coordinates = target,
             Warning = "rmc-ob-warning-three",
@@ -191,16 +170,16 @@ public sealed partial class RMCHallucinationSystem
             WarningChat = true,
         });
 
-        AddStep(ent, OrbitalImpactDelay, new RMCHallucinationStep
+        AddStep(ent, orbital.ImpactDelay, new RMCHallucinationStep
         {
             Coordinates = target,
             Sound = ent.Comp.BigExplosionSound,
             Explosion = true,
         });
 
-        for (var i = 1; i < OrbitalBlasts; i++)
+        for (var i = 1; i < orbital.Blasts; i++)
         {
-            AddStep(ent, OrbitalImpactDelay + TimeSpan.FromSeconds(0.15 * i), new RMCHallucinationStep
+            AddStep(ent, orbital.ImpactDelay + TimeSpan.FromSeconds(0.15 * i), new RMCHallucinationStep
             {
                 Coordinates = target.Offset(_random.NextAngle().ToVec() * _random.NextFloat(1.5f, 3f)),
                 Explosion = true,
@@ -210,7 +189,7 @@ public sealed partial class RMCHallucinationSystem
         return true;
     }
 
-    private bool FakeMortar(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeMortar(Entity<RMCHallucinatingComponent> ent, RMCHallucinationFakeMortarComponent mortar)
     {
         if (_timing.CurTime < ent.Comp.StrikeEnd || !_planet.IsOnPlanet(Transform(ent)))
             return false;
@@ -228,14 +207,14 @@ public sealed partial class RMCHallucinationSystem
                 WarningAbove = "rmc-mortar-shell-warning-above",
             });
 
-            AddStep(ent, start + MortarImpactWarnDelay, new RMCHallucinationStep
+            AddStep(ent, start + mortar.ImpactWarnDelay, new RMCHallucinationStep
             {
                 Coordinates = target,
                 Warning = "rmc-mortar-shell-impact-warning",
                 WarningAbove = "rmc-mortar-shell-impact-warning-above",
             });
 
-            AddStep(ent, start + MortarImpactDelay, new RMCHallucinationStep
+            AddStep(ent, start + mortar.ImpactDelay, new RMCHallucinationStep
             {
                 Coordinates = target,
                 Sound = ent.Comp.ExplosionSound,
@@ -245,11 +224,11 @@ public sealed partial class RMCHallucinationSystem
             start += RandomTime(1, 2);
         }
 
-        ent.Comp.StrikeEnd = _timing.CurTime + start + MortarImpactDelay;
+        ent.Comp.StrikeEnd = _timing.CurTime + start + mortar.ImpactDelay;
         return true;
     }
 
-    private bool FakeCas(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeCas(Entity<RMCHallucinatingComponent> ent, RMCHallucinationFakeCasComponent cas)
     {
         if (_timing.CurTime < ent.Comp.StrikeEnd || !_planet.IsOnPlanet(Transform(ent)))
             return false;
@@ -257,19 +236,19 @@ public sealed partial class RMCHallucinationSystem
         var target = OffsetFromVictim(ent, 4, 8);
         AddStep(ent, TimeSpan.Zero, new RMCHallucinationStep { Coordinates = target, Sound = ent.Comp.CasFireSound });
 
-        for (var i = 0; i < CasShots; i++)
+        for (var i = 0; i < cas.Shots; i++)
         {
-            var spread = new Vector2(_random.NextFloat(-CasSpread, CasSpread), _random.NextFloat(-CasSpread, CasSpread));
-            AddStep(ent, CasFirstShotDelay + CasShotDelay * i, new RMCHallucinationStep
+            var spread = new Vector2(_random.NextFloat(-cas.Spread, cas.Spread), _random.NextFloat(-cas.Spread, cas.Spread));
+            AddStep(ent, cas.FirstShotDelay + cas.ShotDelay * i, new RMCHallucinationStep
             {
                 Coordinates = target.Offset(spread),
-                Sound = i % CasSoundEveryShots == 0 ? ent.Comp.CasImpactSound : null,
+                Sound = i % cas.SoundEveryShots == 0 ? ent.Comp.CasImpactSound : null,
                 Visual = CasImpactVisual,
-                VisualDuration = CasImpactTime,
+                VisualDuration = cas.ImpactTime,
             });
         }
 
-        ent.Comp.StrikeEnd = _timing.CurTime + CasFirstShotDelay + CasShotDelay * CasShots;
+        ent.Comp.StrikeEnd = _timing.CurTime + cas.FirstShotDelay + cas.ShotDelay * cas.Shots;
         return true;
     }
 
@@ -305,7 +284,7 @@ public sealed partial class RMCHallucinationSystem
     private void FakeExplosion(Entity<RMCHallucinatingComponent> ent, EntityCoordinates coords)
     {
         var netCoords = GetNetCoordinates(coords);
-        SendToVictim(ent, new RMCHallucinationVisualEvent(ExplosionShockWaveVisual, null, netCoords, ExplosionShockWaveTime));
-        SendToVictim(ent, new RMCHallucinationVisualEvent(ExplosionVisual, null, netCoords, ExplosionTime));
+        SendToVictim(ent, new RMCHallucinationVisualEvent(ExplosionShockWaveVisual, null, netCoords, ent.Comp.ExplosionShockWaveTime));
+        SendToVictim(ent, new RMCHallucinationVisualEvent(ExplosionVisual, null, netCoords, ent.Comp.ExplosionTime));
     }
 }

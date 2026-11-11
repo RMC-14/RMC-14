@@ -24,7 +24,7 @@ public sealed partial class RMCBiomassAnalyzerWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         RemoveWindowBorder(this);
 
-        _noticeFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        _noticeFont = RMCMachineUiStyle.BoldFont(IoCManager.Resolve<IResourceCache>());
 
         EjectOrganIcon = EjectOrganButton.SetIcon(RMCIcons.Eject, "Eject Biomass");
         ProcessOrganIcon = ProcessOrganButton.SetIcon(RMCIcons.Flask, "Process Biomass");

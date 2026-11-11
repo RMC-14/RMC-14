@@ -8,6 +8,19 @@ public sealed class RMCAlcoholOnsetSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<RMCAlcoholOnsetComponent, EntityUnpausedEvent>(OnUnpaused);
+    }
+
+    private void OnUnpaused(Entity<RMCAlcoholOnsetComponent> ent, ref EntityUnpausedEvent args)
+    {
+        foreach (var onset in ent.Comp.Reagents.Values)
+        {
+            onset.LastUpdate += args.PausedTime;
+        }
+    }
+
     public bool Accumulate(EntityUid uid, ProtoId<ReagentPrototype> reagent, float amount, float threshold)
     {
         var comp = EnsureComp<RMCAlcoholOnsetComponent>(uid);

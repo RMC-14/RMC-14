@@ -1,17 +1,21 @@
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids.Biomass;
 using Robust.Client.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Biomass;
 
-public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMachineSystem
+public sealed class RMCBiomassAnalyzerVisualizerSystem : EntitySystem
 {
+    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void FrameUpdate(float frameTime)
     {
         base.FrameUpdate(frameTime);
 
-        var time = Timing.CurTime;
+        var time = _timing.CurTime;
         var query = EntityQueryEnumerator<RMCBiomassAnalyzerMachineComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out var comp, out var sprite))
         {
@@ -27,7 +31,7 @@ public sealed class RMCBiomassAnalyzerMachineSystem : SharedRMCBiomassAnalyzerMa
 
             if (state == null ||
                 comp.AnimationStart is not { } start ||
-                !IsMachinePowered(uid) ||
+                !_power.IsPowered(uid) ||
                 layer.ActualRsi is not { } rsi ||
                 !rsi.TryGetState(state, out var rsiState) ||
                 time - start >= TimeSpan.FromSeconds(rsiState.AnimationLength))

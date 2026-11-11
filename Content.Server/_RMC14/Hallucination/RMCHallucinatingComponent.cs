@@ -198,6 +198,12 @@ public sealed partial class RMCHallucinatingComponent : Component
     public SoundSpecifier ExplosionSound = new SoundCollectionSpecifier("CMExplosion", AudioParams.Default.WithVolume(-3));
 
     [DataField]
+    public TimeSpan ExplosionTime = TimeSpan.FromSeconds(0.6);
+
+    [DataField]
+    public TimeSpan ExplosionShockWaveTime = TimeSpan.FromSeconds(0.5);
+
+    [DataField]
     public SoundSpecifier C4BeepSound = new SoundPathSpecifier("/Audio/Effects/beep1.ogg");
 
     [DataField]

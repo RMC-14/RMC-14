@@ -11,6 +11,7 @@ public static class RMCMachineUiStyle
 {
     public const string WatermarkPath = "/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png";
     public const string ButtonFontPath = "/Fonts/RobotoMono/RobotoMono-Regular.ttf";
+    public const string BoldFontPath = "/Fonts/NotoSans/NotoSans-Bold.ttf";
 
     public static readonly Color WindowColor = Color.FromHex("#1F2538");
     public static readonly Color LabelColor = Color.FromHex("#7D8EA6");
@@ -38,6 +39,11 @@ public static class RMCMachineUiStyle
     public static Font ButtonFont(IResourceCache cache)
     {
         return cache.GetFont(ButtonFontPath, 12);
+    }
+
+    public static Font BoldFont(IResourceCache cache)
+    {
+        return cache.GetFont(BoldFontPath, 12);
     }
 
     public static void RemoveWindowBorder(DefaultWindow window, Color? background = null)

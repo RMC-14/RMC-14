@@ -14,7 +14,7 @@ namespace Content.Client._RMC14.Xenonids.Biomass;
 public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
 {
     private readonly SharedRMCBiomassAnalyzerDataSystem _analyzerData;
-    private readonly SharedRMCBiomassAnalyzerMachineSystem _machine;
+    private readonly RMCBiomassAnalyzerMachineSystem _machine;
     private readonly SharedRMCChemistryResearchSystem _research;
 
     private RMCBiomassAnalyzerWindow? _window;
@@ -23,7 +23,7 @@ public sealed class RMCBiomassAnalyzerBui : BoundUserInterface, IRefreshableBui
     public RMCBiomassAnalyzerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _analyzerData = EntMan.System<SharedRMCBiomassAnalyzerDataSystem>();
-        _machine = EntMan.System<SharedRMCBiomassAnalyzerMachineSystem>();
+        _machine = EntMan.System<RMCBiomassAnalyzerMachineSystem>();
         _research = EntMan.System<SharedRMCChemistryResearchSystem>();
     }
 

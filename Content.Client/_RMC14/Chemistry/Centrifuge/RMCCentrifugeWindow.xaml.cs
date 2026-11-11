@@ -23,7 +23,7 @@ public sealed partial class RMCCentrifugeWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         RemoveWindowBorder(this);
 
-        _bannerFont = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        _bannerFont = RMCMachineUiStyle.BoldFont(IoCManager.Resolve<IResourceCache>());
         LabelEdit.StyleBoxOverride = Field();
 
         _modeIcon = ModeButton.SetIcon(RMCIcons.ArrowsSplitUpAndLeft, "Mode: split", 16);

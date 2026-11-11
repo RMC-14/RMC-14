@@ -29,7 +29,7 @@ public sealed partial class RMCTuringDispenserWindow : DefaultWindow
         RemoveWindowBorder(this);
 
         var cache = IoCManager.Resolve<IResourceCache>();
-        _bannerFont = cache.GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 12);
+        _bannerFont = RMCMachineUiStyle.BoldFont(cache);
         EnergyLabel.FontOverride = cache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 10);
 
         ClearMemoryButton.SetIcon(RMCIcons.Trash, "Clear memory");

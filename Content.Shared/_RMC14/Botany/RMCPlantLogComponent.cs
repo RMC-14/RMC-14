@@ -3,6 +3,7 @@
 namespace Content.Shared._RMC14.Botany;
 
 [RegisterComponent]
+[Access(typeof(SharedRMCPlantTraySystem))]
 public sealed partial class RMCPlantLogComponent : Component
 {
     [DataField]

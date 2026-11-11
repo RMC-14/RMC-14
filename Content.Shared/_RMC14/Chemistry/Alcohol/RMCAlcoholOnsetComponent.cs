@@ -1,5 +1,6 @@
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Chemistry.Alcohol;
 
@@ -23,6 +24,6 @@ public sealed partial class RMCAlcoholOnset
     [DataField]
     public float Threshold;
 
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan LastUpdate;
 }

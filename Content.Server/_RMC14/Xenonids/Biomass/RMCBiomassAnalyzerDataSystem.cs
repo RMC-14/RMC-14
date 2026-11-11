@@ -1,6 +1,6 @@
-using Content.Server._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Xenonids.Biomass;
 using Content.Server.GameTicking.Events;
+using Content.Shared.UserInterface;
 using Robust.Server.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -9,7 +9,6 @@ namespace Content.Server._RMC14.Xenonids.Biomass;
 
 public sealed class RMCBiomassAnalyzerDataSystem : SharedRMCBiomassAnalyzerDataSystem
 {
-    [Dependency] private readonly RMCChemistryResearchSystem _chemResearch = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     private static readonly EntProtoId<RMCBiomassAnalyzerComponent> AnalyzerProto = "RMCBiomassAnalyzerData";
@@ -18,9 +17,15 @@ public sealed class RMCBiomassAnalyzerDataSystem : SharedRMCBiomassAnalyzerDataS
     {
         base.Initialize();
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
+        SubscribeLocalEvent<RMCBiomassAnalyzerMachineComponent, BeforeActivatableUIOpenEvent>(OnMachineBeforeUIOpen);
     }
 
     private void OnRoundStarting(RoundStartingEvent ev)
+    {
+        EnsureAnalyzer();
+    }
+
+    private void OnMachineBeforeUIOpen(Entity<RMCBiomassAnalyzerMachineComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         EnsureAnalyzer();
     }
@@ -37,7 +42,7 @@ public sealed class RMCBiomassAnalyzerDataSystem : SharedRMCBiomassAnalyzerDataS
         return (id, comp);
     }
 
-    public void AddPoints(int amount)
+    public override void AddPoints(int amount)
     {
         var analyzer = EnsureAnalyzer();
         analyzer.Comp.Points += amount;
@@ -63,17 +68,12 @@ public sealed class RMCBiomassAnalyzerDataSystem : SharedRMCBiomassAnalyzerDataS
         return analyzer.Comp.Points;
     }
 
-    public bool HasSufficientClearance(RMCBiomassUpgrade upgrade)
-    {
-        return _chemResearch.HasSufficientClearance(upgrade.Comp.RequiredClearance);
-    }
-
     public int GetCurrentCost(RMCBiomassUpgrade upgrade)
     {
         return GetCurrentCost(upgrade, TryGetAnalyzer(out var analyzer) ? analyzer.Value.Comp : null);
     }
 
-    public bool TryPurchaseUpgrade(EntProtoId<RMCBiomassUpgradeComponent> id, EntityCoordinates spawnAt, out string? failReason)
+    public override bool TryPurchaseUpgrade(EntProtoId<RMCBiomassUpgradeComponent> id, EntityCoordinates spawnAt, out string? failReason)
     {
         failReason = null;
 

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.UserInterface;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.NPC.Prototypes;
 using JetBrains.Annotations;
@@ -7,10 +8,8 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Xenonids.Hive;
 
 [UsedImplicitly]
-public sealed class HiveAllianceBui : BoundUserInterface
+public sealed class HiveAllianceBui : BoundUserInterface, IRefreshableBui
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-
     private readonly SharedXenoHiveSystem _hiveSystem;
     private HiveAllianceWindow? _window;
 
@@ -26,11 +25,6 @@ public sealed class HiveAllianceBui : BoundUserInterface
         Refresh();
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
-    {
-        Refresh();
-    }
-
     public void Refresh()
     {
         if (_window == null)
@@ -42,8 +36,7 @@ public sealed class HiveAllianceBui : BoundUserInterface
         var factions = new List<(ProtoId<NpcFactionPrototype> Id, string Name, bool Allied, bool Banned)>();
         foreach (var faction in HiveAlliableFactions.All)
         {
-            var name = _prototype.TryIndex(faction, out var proto) ? proto.ID : faction.Id;
-            factions.Add((faction, name, _hiveSystem.IsFactionAllied(hive, faction), _hiveSystem.IsFactionAllyBanned(hive, faction)));
+            factions.Add((faction, faction.Id, _hiveSystem.IsFactionAllied(hive, faction), _hiveSystem.IsFactionAllyBanned(hive, faction)));
         }
 
         var hives = new List<(NetEntity Entity, string Name, bool Allied, bool Banned)>();

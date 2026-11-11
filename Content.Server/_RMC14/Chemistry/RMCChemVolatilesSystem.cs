@@ -5,6 +5,7 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Chemistry.Effects.Positive;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.Chemistry.Reagent;
@@ -60,26 +61,7 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
     private static readonly ProtoId<ReagentPrototype> NeurotoxinPlasma = "RMCNeurotoxinPlasma";
     private static readonly ProtoId<ExplosionPrototype> ExplosionType = "RMC";
 
-    private const int MinRadius = 1;
-    private const int MaxRadius = 5;
-    private const int MinIntensity = 3;
-    private const int MaxIntensity = 20;
-    private const int MinDuration = 3;
-    private const int MaxDuration = 24;
-    private const float PhosphorusPerSmokeRadius = 10f;
-
-    public const float MaxExplosivePower = 175;
-    private const float BaseExplosiveFalloff = 75;
-    private const float MinExplosiveFalloff = 25;
-    private const float PowerPerIntensity = 5;
-
-    private const int BaseShards = 4;
-    private const int MaxShards = 32;
-    private const float SpecialShardThreshold = 10;
-    private const float ShardDirectHitChance = 0.15f;
-    private const float ShrapnelSpeed = 20f;
-
-    private static readonly TimeSpan ChemExplodedCooldown = TimeSpan.FromSeconds(2);
+    private static readonly RMCChemVolatilesComponent DefaultVolatiles = new();
 
     private readonly Dictionary<(EntityUid, Vector2i), TimeSpan> _chemExploded = new();
     private readonly List<(EntityUid, Vector2i)> _expiredChemExploded = new();
@@ -141,14 +123,15 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
         if (IsChemExploded(tileKey, time))
             return false;
 
+        var volatiles = CompOrNull<RMCChemVolatilesComponent>(owner) ?? DefaultVolatiles;
         var handled = false;
 
         var aggregate = _flamer.GetAggregateFireStats(solution);
         if (aggregate.Intensity >= 1)
         {
-            var radius = Math.Clamp((int) aggregate.Radius, MinRadius, MaxRadius);
-            var intensity = Math.Clamp((int) aggregate.Intensity, MinIntensity, MaxIntensity);
-            var duration = Math.Clamp((int) aggregate.Duration, MinDuration, MaxDuration);
+            var radius = Math.Clamp((int) aggregate.Radius, volatiles.MinFireRadius, volatiles.MaxFireRadius);
+            var intensity = Math.Clamp((int) aggregate.Intensity, volatiles.MinFireIntensity, volatiles.MaxFireIntensity);
+            var duration = Math.Clamp((int) aggregate.Duration, volatiles.MinFireDuration, volatiles.MaxFireDuration);
 
             // TODO RMC14: cm13 combust() switches to a star (8 lines of floor(1.5 * radius)) above 30 intensity, only reachable
             // with custom casings higher max_fire_int
@@ -158,13 +141,13 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
             var phosphorus = solution.GetTotalPrototypeQuantity(Phosphorus);
             if (phosphorus > FixedPoint2.Zero)
             {
-                var smokeRadius = Math.Clamp((int) (phosphorus.Float() / PhosphorusPerSmokeRadius), 1, MaxRadius - 1);
+                var smokeRadius = Math.Clamp((int) (phosphorus.Float() / volatiles.PhosphorusPerSmokeRadius), 1, volatiles.MaxFireRadius - 1);
                 _smoke.SpawnEvenSmoke(PhosphorusSmoke, coordinates, smokeRadius);
             }
         }
 
         var explosivePower = 0f;
-        var explosiveFalloff = BaseExplosiveFalloff;
+        var explosiveFalloff = volatiles.BaseExplosiveFalloff;
         foreach (var quantity in solution.Contents)
         {
             if (!_rmcReagent.TryIndex(quantity.Reagent.Prototype, out var reagent))
@@ -192,19 +175,19 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
 
         if (explosivePower > 0)
         {
-            explosivePower = MathF.Min(explosivePower, MaxExplosivePower);
-            explosiveFalloff = MathF.Max(explosiveFalloff, MinExplosiveFalloff);
+            explosivePower = MathF.Min(explosivePower, volatiles.MaxExplosivePower);
+            explosiveFalloff = MathF.Max(explosiveFalloff, volatiles.MinExplosiveFalloff);
 
             EnsureComp<CMExplosionEffectComponent>(owner);
             EnsureComp<RMCScorchEffectComponent>(owner);
 
-            var maxIntensity = explosivePower / PowerPerIntensity;
-            var slope = explosiveFalloff / PowerPerIntensity;
+            var maxIntensity = explosivePower / volatiles.PowerPerIntensity;
+            var slope = explosiveFalloff / volatiles.PowerPerIntensity;
             var totalIntensity = _explosion.RadiusToIntensity(maxIntensity / slope, slope, maxIntensity);
             var mapCoordinates = _transform.ToMapCoordinates(coordinates);
             _explosion.QueueExplosion(mapCoordinates, ExplosionType, totalIntensity, slope, maxIntensity, cause);
 
-            SpawnShrapnel(owner, coordinates, solution);
+            SpawnShrapnel(owner, coordinates, solution, volatiles);
 
             var ev = new CMExplosiveTriggeredEvent();
             RaiseLocalEvent(owner, ref ev);
@@ -213,23 +196,23 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
 
         if (exploded)
         {
-            _chemExploded[tileKey] = time + ChemExplodedCooldown;
+            _chemExploded[tileKey] = time + volatiles.ExplodedCooldown;
             handled = true;
         }
 
         return handled;
     }
 
-    private void SpawnShrapnel(EntityUid owner, EntityCoordinates coordinates, Solution solution)
+    private void SpawnShrapnel(EntityUid owner, EntityCoordinates coordinates, Solution solution, RMCChemVolatilesComponent volatiles)
     {
-        if (solution.GetTotalPrototypeQuantity(Phoron) >= SpecialShardThreshold ||
-            solution.GetTotalPrototypeQuantity(PolytrinicAcid) >= SpecialShardThreshold ||
-            solution.GetTotalPrototypeQuantity(NeurotoxinPlasma) >= SpecialShardThreshold)
+        if (solution.GetTotalPrototypeQuantity(Phoron) >= volatiles.SpecialShardThreshold ||
+            solution.GetTotalPrototypeQuantity(PolytrinicAcid) >= volatiles.SpecialShardThreshold ||
+            solution.GetTotalPrototypeQuantity(NeurotoxinPlasma) >= volatiles.SpecialShardThreshold)
         {
             return;
         }
 
-        var shards = Math.Min(BaseShards + (int) MathF.Floor(solution.GetTotalPrototypeQuantity(Iron).Float()), MaxShards);
+        var shards = Math.Min(volatiles.BaseShards + (int) MathF.Floor(solution.GetTotalPrototypeQuantity(Iron).Float()), volatiles.MaxShards);
 
         EntityUid? standing = null;
         EntityUid? lying = null;
@@ -257,9 +240,9 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
         var increment = 360f / shards;
         for (var i = 0; i < shards; i++)
         {
-            var directTarget = standing != null && _random.Prob(ShardDirectHitChance)
+            var directTarget = standing != null && _random.Prob(volatiles.ShardDirectHitChance)
                 ? standing
-                : lying != null && _random.Prob(ShardDirectHitChance)
+                : lying != null && _random.Prob(volatiles.ShardDirectHitChance)
                     ? lying
                     : null;
 
@@ -271,7 +254,7 @@ public sealed class RMCChemVolatilesSystem : EntitySystem
 
             var angle = Angle.FromDegrees(i * increment + _random.NextFloat(-increment / 2, increment / 2));
             var shard = Spawn(Shrapnel, coordinates);
-            _gun.ShootProjectile(shard, angle.ToVec(), Vector2.Zero, owner, standing, ShrapnelSpeed);
+            _gun.ShootProjectile(shard, angle.ToVec(), Vector2.Zero, owner, standing, volatiles.ShrapnelSpeed);
         }
     }
 
