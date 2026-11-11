@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared.Chat;
 using Content.Shared.Humanoid;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -15,11 +16,6 @@ namespace Content.Server._RMC14.Hallucination;
 
 public sealed partial class RMCHallucinationSystem
 {
-    private const int RadioLines = 11;
-    private const int OverwatchLines = 6;
-    private const int BodyLines = 8;
-    private const int CallLines = 6;
-
     private void InitializeComms()
     {
         SubscribeLocalEvent<RMCHallucinationFakeRadioComponent, RMCHallucinateEvent>(OnFakeRadio);
@@ -30,26 +26,26 @@ public sealed partial class RMCHallucinationSystem
 
     private void OnCallName(Entity<RMCHallucinationCallNameComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeCallName(args.Victim);
+        args.Handled = FakeCallName(args.Victim, ent.Comp);
     }
 
     private void OnFakeRadio(Entity<RMCHallucinationFakeRadioComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeRadio(args.Victim);
+        args.Handled = FakeRadio(args.Victim, ent.Comp);
     }
 
     private void OnFakeAnnouncement(Entity<RMCHallucinationFakeAnnouncementComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeAnnouncement(args.Victim);
+        args.Handled = FakeAnnouncement(args.Victim, ent.Comp);
     }
 
     private void OnBodyMessage(Entity<RMCHallucinationBodyMessageComponent> ent, ref RMCHallucinateEvent args)
     {
-        FakeBodyMessage(args.Victim);
+        FakeBodyMessage(args.Victim, ent.Comp);
         args.Handled = true;
     }
 
-    private bool FakeRadio(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeRadio(Entity<RMCHallucinatingComponent> ent, RMCHallucinationFakeRadioComponent fakeRadio)
     {
         if (!TryComp(ent, out ActorComponent? actor) ||
             !TryComp(ent, out SquadMemberComponent? member) ||
@@ -69,7 +65,7 @@ public sealed partial class RMCHallucinationSystem
             return false;
 
         var speaker = _random.Pick(speakers);
-        var message = Loc.GetString($"rmc-hallucination-radio-{_random.Next(1, RadioLines + 1)}", ("victim", Name(ent)));
+        var message = Loc.GetString(_random.Pick(_prototypes.Index(fakeRadio.Lines)), ("victim", Name(ent)));
         var verb = _chat.GetSpeechVerb(speaker, message);
         var wrapped = Loc.GetString(verb.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
             ("color", channel.Color),
@@ -85,7 +81,7 @@ public sealed partial class RMCHallucinationSystem
         return true;
     }
 
-    private bool FakeAnnouncement(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeAnnouncement(Entity<RMCHallucinatingComponent> ent, RMCHallucinationFakeAnnouncementComponent announcement)
     {
         if (!TryComp(ent, out SquadMemberComponent? member) || member.Squad is not { } squad)
             return false;
@@ -102,7 +98,7 @@ public sealed partial class RMCHallucinationSystem
         if (operators.Count == 0)
             return false;
 
-        var text = Loc.GetString($"rmc-hallucination-overwatch-{_random.Next(1, OverwatchLines + 1)}", ("victim", Name(ent)));
+        var text = Loc.GetString(_random.Pick(_prototypes.Index(announcement.OverwatchLines)), ("victim", Name(ent)));
         var overwatch = Loc.GetString("rmc-overwatch-console-announce-message",
             ("operatorName", _random.Pick(operators)),
             ("message", FormattedMessage.EscapeText(text)));
@@ -110,12 +106,12 @@ public sealed partial class RMCHallucinationSystem
         return true;
     }
 
-    private bool FakeCallName(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeCallName(Entity<RMCHallucinatingComponent> ent, RMCHallucinationCallNameComponent callName)
     {
         if (PickUnseenSpeaker(ent) is not { } speaker)
             return false;
 
-        var message = Loc.GetString($"rmc-hallucination-call-{_random.Next(1, CallLines + 1)}", ("victim", Name(ent)));
+        var message = Loc.GetString(_random.Pick(_prototypes.Index(callName.Lines)), ("victim", Name(ent)));
         var verb = _chat.GetSpeechVerb(speaker, message);
         var wrapped = Loc.GetString(verb.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
             ("entityName", FormattedMessage.EscapeText(Name(speaker))),
@@ -162,9 +158,9 @@ public sealed partial class RMCHallucinationSystem
                !_examine.InRangeUnOccluded(ent, speaker, ent.Comp.ViewRange + 1);
     }
 
-    private void FakeBodyMessage(Entity<RMCHallucinatingComponent> ent)
+    private void FakeBodyMessage(Entity<RMCHallucinatingComponent> ent, RMCHallucinationBodyMessageComponent bodyMessage)
     {
-        var message = Loc.GetString($"rmc-hallucination-body-{_random.Next(1, BodyLines + 1)}");
+        var message = Loc.GetString(_random.Pick(_prototypes.Index(bodyMessage.Lines)));
         _rmcChat.ChatMessageToOne($"[color=red]{message}[/color]", ent);
     }
 }

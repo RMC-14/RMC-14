@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Hallucination;
 using Content.Shared.Alert;
+using Content.Shared.Dataset;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -113,6 +114,42 @@ public sealed partial class RMCHallucinatingComponent : Component
 
     [DataField]
     public float AttackerSpeakRange = 7;
+
+    [DataField]
+    public ProtoId<LocalizedDatasetPrototype> AttackerLines = "RMCHallucinationAttackerLines";
+
+    [DataField]
+    public TimeSpan AttackerProcessEvery = TimeSpan.FromSeconds(0.5);
+
+    [DataField]
+    public TimeSpan AttackerLifetime = TimeSpan.FromSeconds(30);
+
+    [DataField]
+    public TimeSpan AttackerFade = TimeSpan.FromSeconds(1);
+
+    [DataField]
+    public TimeSpan AttackerSyncEvery = TimeSpan.FromSeconds(0.25);
+
+    [DataField]
+    public TimeSpan AttackerClonesRefreshEvery = TimeSpan.FromSeconds(30);
+
+    [DataField]
+    public float AttackerSpeed = 4f / 3f;
+
+    [DataField]
+    public float AttackerCrossRange = 0.5f;
+
+    [DataField]
+    public float AttackerHitBackRange = 1.5f;
+
+    [DataField]
+    public float AttackerSpawnDistance = 10;
+
+    [DataField]
+    public float AttackerFootstepVolume = 1.5f;
+
+    [DataField]
+    public TimeSpan FakeBloodLifetime = TimeSpan.FromSeconds(30);
 
     [DataField]
     public TimeSpan ParasiteKnockdown = TimeSpan.FromSeconds(4);
@@ -342,6 +379,9 @@ public sealed partial class RMCHallucinatingComponent : Component
 
     [DataField]
     public List<Vector2> FakeBlips = new();
+
+    [DataField]
+    public float FakeBlipStep = 0.75f;
 
     [DataField]
     public List<RMCHallucinationStep> Steps = new();

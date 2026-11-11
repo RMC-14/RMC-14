@@ -12,6 +12,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio;
@@ -27,21 +28,6 @@ namespace Content.Server._RMC14.Hallucination;
 public sealed partial class RMCHallucinationSystem
 {
     private static readonly ProtoId<StatusEffectPrototype> BlurStatus = "Blinded";
-
-    private static readonly TimeSpan AttackerProcessEvery = TimeSpan.FromSeconds(0.5);
-    private static readonly TimeSpan AttackerLifetime = TimeSpan.FromSeconds(30);
-    private static readonly TimeSpan AttackerFade = TimeSpan.FromSeconds(1);
-    private static readonly TimeSpan AttackerSyncEvery = TimeSpan.FromSeconds(0.25);
-    private static readonly TimeSpan FakeBloodLifetime = TimeSpan.FromSeconds(30);
-
-    private const float AttackerSpeed = 4f / 3f;
-    private const float AttackerCrossRange = 0.5f;
-    private const float AttackerHitBackRange = 1.5f;
-    private const float AttackerSpawnDistance = 10;
-    private const float AttackerFootstepVolume = 1.5f;
-    private const int AttackerLines = 10;
-
-    private static readonly TimeSpan AttackerClonesRefreshEvery = TimeSpan.FromSeconds(30);
 
     private readonly List<EntityUid> _attackerClones = new();
     private TimeSpan _attackerClonesRefreshAt;
@@ -79,7 +65,7 @@ public sealed partial class RMCHallucinationSystem
         }
 
         if (!TryGetLocalPosition(victim, attacker.Grid, out var victimPosition) ||
-            Vector2.Distance(victimPosition, attacker.Position) > AttackerHitBackRange)
+            Vector2.Distance(victimPosition, attacker.Position) > hallucinating.AttackerHitBackRange)
         {
             return;
         }
@@ -87,7 +73,7 @@ public sealed partial class RMCHallucinationSystem
         var force = (float) _melee.GetDamage(weapon, victim, melee).GetTotal();
         attacker.Health -= force;
 
-        BackOff(attacker, victimPosition);
+        BackOff(hallucinating, attacker, victimPosition);
 
         _popup.PopupEntity(Loc.GetString("rmc-hallucination-flails", ("user", victim)), victim, Filter.PvsExcept(victim), true, PopupType.SmallCaution);
         _audio.PlayGlobal(hallucinating.WeaponHitSound, victim);
@@ -99,7 +85,7 @@ public sealed partial class RMCHallucinationSystem
         if (Transform(ent).GridUid is not { } grid || !TryGetLocalPosition(ent, grid, out var position))
             return false;
 
-        if (PickAttackerClone() is not { } clone)
+        if (PickAttackerClone(ent.Comp) is not { } clone)
             return false;
 
         EntityUid? weapon = null;
@@ -140,11 +126,11 @@ public sealed partial class RMCHallucinationSystem
             FootstepSound = footstep,
             HasShoes = hasShoes,
             Grid = grid,
-            Position = position + _random.NextAngle().ToVec() * AttackerSpawnDistance,
+            Position = position + _random.NextAngle().ToVec() * ent.Comp.AttackerSpawnDistance,
             VictimInside = false,
-            End = time + AttackerLifetime,
-            NextProcess = time + AttackerProcessEvery,
-            NextSync = time + AttackerSyncEvery,
+            End = time + ent.Comp.AttackerLifetime,
+            NextProcess = time + ent.Comp.AttackerProcessEvery,
+            NextSync = time + ent.Comp.AttackerSyncEvery,
             NextSpeak = time + RandomTime(ent.Comp.AttackerSpeakMin, ent.Comp.AttackerSpeakMax),
         };
 
@@ -164,12 +150,12 @@ public sealed partial class RMCHallucinationSystem
         return true;
     }
 
-    private EntityUid? PickAttackerClone()
+    private EntityUid? PickAttackerClone(RMCHallucinatingComponent hallucinating)
     {
         var time = _timing.CurTime;
         if (time >= _attackerClonesRefreshAt)
         {
-            _attackerClonesRefreshAt = time + AttackerClonesRefreshEvery;
+            _attackerClonesRefreshAt = time + hallucinating.AttackerClonesRefreshEvery;
             _attackerClones.Clear();
 
             var query = EntityQueryEnumerator<HumanoidAppearanceComponent, MobStateComponent>();
@@ -235,7 +221,7 @@ public sealed partial class RMCHallucinationSystem
                 direction = Vector2.Normalize(victim - attacker.Position);
         }
 
-        var velocity = direction * AttackerSpeed;
+        var velocity = direction * ent.Comp.AttackerSpeed;
         attacker.Position += velocity * frameTime;
 
         if (velocity != Vector2.Zero)
@@ -244,7 +230,7 @@ public sealed partial class RMCHallucinationSystem
                 ? velocity.X > 0 ? Direction.East : Direction.West
                 : velocity.Y > 0 ? Direction.North : Direction.South;
 
-            attacker.StepProgress += AttackerSpeed * frameTime;
+            attacker.StepProgress += ent.Comp.AttackerSpeed * frameTime;
             if (attacker.StepProgress >= attacker.StepDistance)
             {
                 attacker.StepProgress -= attacker.StepDistance;
@@ -257,7 +243,7 @@ public sealed partial class RMCHallucinationSystem
         if (!changed && (velocity == Vector2.Zero || time < attacker.NextSync))
             return;
 
-        attacker.NextSync = time + AttackerSyncEvery;
+        attacker.NextSync = time + ent.Comp.AttackerSyncEvery;
         SendToVictim(ent, new RMCHallucinationAttackerMoveEvent(
             attacker.Id,
             GetNetCoordinates(new EntityCoordinates(attacker.Grid, attacker.Position)),
@@ -286,7 +272,7 @@ public sealed partial class RMCHallucinationSystem
             return;
 
         var audioParams = sound.Params
-            .WithVolume(sound.Params.Volume + AttackerFootstepVolume)
+            .WithVolume(sound.Params.Volume + ent.Comp.AttackerFootstepVolume)
             .WithVariation(sound.Params.Variation ?? attacker.FootstepVariation);
         _audio.PlayStatic(sound, ent, coords, audioParams);
     }
@@ -310,8 +296,8 @@ public sealed partial class RMCHallucinationSystem
 
         if (attacker.Health < 0)
         {
-            attacker.RemoveAt = time + AttackerFade;
-            SendToVictim(ent, new RMCHallucinationAttackerCollapseEvent(attacker.Id, AttackerFade));
+            attacker.RemoveAt = time + ent.Comp.AttackerFade;
+            SendToVictim(ent, new RMCHallucinationAttackerCollapseEvent(attacker.Id, ent.Comp.AttackerFade));
             return;
         }
 
@@ -321,7 +307,7 @@ public sealed partial class RMCHallucinationSystem
             AttackerSay(ent, attacker);
         }
 
-        var inside = Vector2.Distance(attacker.Position, victim) < AttackerCrossRange;
+        var inside = Vector2.Distance(attacker.Position, victim) < ent.Comp.AttackerCrossRange;
         if (inside && !attacker.VictimInside && _random.Prob(0.3f))
             _popup.PopupEntity(Loc.GetString("rmc-hallucination-stumbles", ("user", ent.Owner)), ent, Filter.PvsExcept(ent), true, PopupType.SmallCaution);
 
@@ -342,7 +328,7 @@ public sealed partial class RMCHallucinationSystem
             AttackerHit(ent, attacker);
 
         if (_random.Prob(0.15f))
-            BackOff(attacker, victim);
+            BackOff(ent.Comp, attacker, victim);
     }
 
     private void AttackerSay(Entity<RMCHallucinatingComponent> ent, RMCHallucinationAttacker attacker)
@@ -350,7 +336,7 @@ public sealed partial class RMCHallucinationSystem
         if (Deleted(attacker.Clone))
             return;
 
-        var message = Loc.GetString($"rmc-hallucination-attacker-say-{_random.Next(1, AttackerLines + 1)}", ("victim", Name(ent)));
+        var message = Loc.GetString(_random.Pick(_prototypes.Index(ent.Comp.AttackerLines)), ("victim", Name(ent)));
         var verb = _chat.GetSpeechVerb(attacker.Clone, message);
         var wrapped = Loc.GetString(verb.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
             ("entityName", FormattedMessage.EscapeText(attacker.Name)),
@@ -397,17 +383,17 @@ public sealed partial class RMCHallucinationSystem
                 return;
         }
 
-        ent.Comp.FakeBlood.Add(new RMCHallucinationFakeBlood(grid, tile, time + FakeBloodLifetime));
+        ent.Comp.FakeBlood.Add(new RMCHallucinationFakeBlood(grid, tile, time + ent.Comp.FakeBloodLifetime));
         var coords = _map.GridTileToLocal(grid, gridComp, tile);
-        SendToVictim(ent, new RMCHallucinationVisualEvent(BloodVisual, $"mfloor{_random.Next(1, 8)}", GetNetCoordinates(coords), FakeBloodLifetime));
+        SendToVictim(ent, new RMCHallucinationVisualEvent(BloodVisual, $"mfloor{_random.Next(1, 8)}", GetNetCoordinates(coords), ent.Comp.FakeBloodLifetime));
     }
 
-    private void BackOff(RMCHallucinationAttacker attacker, Vector2 victim)
+    private void BackOff(RMCHallucinatingComponent hallucinating, RMCHallucinationAttacker attacker, Vector2 victim)
     {
         if (ChebyshevDistance(attacker.Position, victim) > 2)
             return;
 
-        attacker.BackOffUntil = _timing.CurTime + TimeSpan.FromSeconds(1 / AttackerSpeed);
+        attacker.BackOffUntil = _timing.CurTime + TimeSpan.FromSeconds(1 / hallucinating.AttackerSpeed);
     }
 
     private void RemoveAttacker(Entity<RMCHallucinatingComponent> ent, RMCHallucinationAttacker attacker)

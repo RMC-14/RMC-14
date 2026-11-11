@@ -223,7 +223,7 @@ public sealed partial class RMCHallucinationSystem : EntitySystem
 
                 if (time >= attacker.NextProcess)
                 {
-                    attacker.NextProcess = time + AttackerProcessEvery;
+                    attacker.NextProcess = time + comp.AttackerProcessEvery;
                     ProcessAttacker(ent, attacker);
                 }
             }

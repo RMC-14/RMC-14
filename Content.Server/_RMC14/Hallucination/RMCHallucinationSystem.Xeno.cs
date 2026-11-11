@@ -35,8 +35,6 @@ public sealed partial class RMCHallucinationSystem
 
     private static readonly EntProtoId ParasiteVisual = "RMCHallucinationParasite";
     private static readonly EntProtoId ParasiteFaceVisual = "RMCHallucinationParasiteFace";
-    private static readonly TimeSpan ParasiteLeapDelay = TimeSpan.FromSeconds(0.5);
-    private static readonly TimeSpan ParasiteLeapTime = TimeSpan.FromSeconds(0.35);
 
     private static readonly EntProtoId LurkerVisual = "RMCHallucinationLurker";
     private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
@@ -44,12 +42,6 @@ public sealed partial class RMCHallucinationSystem
     private static readonly ProtoId<TagPrototype> SpreaderIgnoreTag = "SpreaderIgnore";
 
     private readonly HashSet<Entity<DoorComponent>> _doors = new();
-
-    private const float DoorPryMinDistance = 2;
-    private const float FakeBlipStep = 0.75f;
-    private const int XenoSightingMaxTiles = 10;
-    private const float ParasiteRunSpeed = 5;
-    private const float ParasiteLeapRange = 2;
 
     private void InitializeXeno()
     {
@@ -90,17 +82,17 @@ public sealed partial class RMCHallucinationSystem
 
     private void OnXenoSighting(Entity<RMCHallucinationXenoSightingComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeXenoSighting(args.Victim);
+        args.Handled = FakeXenoSighting(args.Victim, ent.Comp);
     }
 
     private void OnFakeParasite(Entity<RMCHallucinationFakeParasiteComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeParasite(args.Victim);
+        args.Handled = FakeParasite(args.Victim, ent.Comp);
     }
 
     private void OnDoorPry(Entity<RMCHallucinationDoorPryComponent> ent, ref RMCHallucinateEvent args)
     {
-        args.Handled = FakeDoorPry(args.Victim);
+        args.Handled = FakeDoorPry(args.Victim, ent.Comp);
     }
 
     private void OnFakeChestburst(Entity<RMCHallucinationFakeChestburstComponent> ent, ref RMCHallucinateEvent args)
@@ -118,7 +110,7 @@ public sealed partial class RMCHallucinationSystem
         args.Handled = FakeWeeds(args.Victim);
     }
 
-    private bool FakeDoorPry(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeDoorPry(Entity<RMCHallucinatingComponent> ent, RMCHallucinationDoorPryComponent doorPry)
     {
         var victim = _transform.GetMapCoordinates(ent);
         var doors = new List<EntityUid>();
@@ -127,7 +119,7 @@ public sealed partial class RMCHallucinationSystem
         foreach (var door in _doors)
         {
             if (door.Comp.State != DoorState.Closed ||
-                (_transform.GetMapCoordinates(door).Position - victim.Position).Length() < DoorPryMinDistance)
+                (_transform.GetMapCoordinates(door).Position - victim.Position).Length() < doorPry.MinDistance)
             {
                 continue;
             }
@@ -438,14 +430,14 @@ public sealed partial class RMCHallucinationSystem
 
             args.Blips.Add(new Blip(new MapCoordinates(center.Position + offset, center.MapId), false));
 
-            if (offset.Length() > FakeBlipStep + 1)
-                offset -= Vector2.Normalize(offset) * FakeBlipStep;
+            if (offset.Length() > ent.Comp.FakeBlipStep + 1)
+                offset -= Vector2.Normalize(offset) * ent.Comp.FakeBlipStep;
 
             ent.Comp.FakeBlips[i] = offset;
         }
     }
 
-    private bool FakeXenoSighting(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeXenoSighting(Entity<RMCHallucinatingComponent> ent, RMCHallucinationXenoSightingComponent sighting)
     {
         if (Transform(ent).GridUid is not { } grid ||
             !TryComp(grid, out MapGridComponent? gridComp) ||
@@ -463,7 +455,7 @@ public sealed partial class RMCHallucinationSystem
         side = Vector2.Normalize(side);
         var end = start.Position;
         var length = 0;
-        while (length < XenoSightingMaxTiles && !IsBlocked((grid, gridComp), end, side))
+        while (length < sighting.MaxTiles && !IsBlocked((grid, gridComp), end, side))
         {
             end += side;
             length++;
@@ -486,27 +478,27 @@ public sealed partial class RMCHallucinationSystem
         return true;
     }
 
-    private bool FakeParasite(Entity<RMCHallucinatingComponent> ent)
+    private bool FakeParasite(Entity<RMCHallucinatingComponent> ent, RMCHallucinationFakeParasiteComponent parasite)
     {
         if (ent.Comp.Parasite != null ||
             Transform(ent).GridUid is not { } grid ||
-            !TryPickFloorInView(ent, out var start, ParasiteLeapRange + 2))
+            !TryPickFloorInView(ent, out var start, parasite.LeapRange + 2))
         {
             return false;
         }
 
         var giveUpAt = _timing.CurTime + ent.Comp.ParasiteGiveUp;
         ent.Comp.ParasiteGrid = grid;
-        ent.Comp.Parasite = new RMCHallucinationParasiteChase(start.Position, ParasiteRunSpeed, ParasiteLeapRange, ParasiteLeapDelay, ParasiteLeapTime, giveUpAt);
+        ent.Comp.Parasite = new RMCHallucinationParasiteChase(start.Position, parasite.RunSpeed, parasite.LeapRange, parasite.LeapDelay, parasite.LeapTime, giveUpAt);
 
         _audio.PlayStatic(ent.Comp.SkitterSound, ent, start);
         SendToVictim(ent, new RMCHallucinationParasiteEvent(
             ParasiteVisual,
             GetNetCoordinates(start),
-            ParasiteRunSpeed,
-            ParasiteLeapRange,
-            ParasiteLeapDelay,
-            ParasiteLeapTime,
+            parasite.RunSpeed,
+            parasite.LeapRange,
+            parasite.LeapDelay,
+            parasite.LeapTime,
             ent.Comp.ParasiteGiveUp));
 
         return true;
