@@ -130,31 +130,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         RelayToMountedEntities(ent, args);
         RelayToDropshipDepartureLocation(ent, args);
 
-        if (!_hijack) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
+        if (ent.Comp.Crashed)
         {
-            int xenoCount = 0;
-            string dropshipName = string.Empty;
-            var dropship = EnsureComp<DropshipComponent>(_dropshipId);
-            var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
-            while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
-            {
-                if (xform.GridUid == _dropshipId && mobState.CurrentState != MobState.Dead)
-                {
-                    xenoCount++;
-                    if (string.IsNullOrEmpty(dropshipName) && _area.TryGetArea(uid, out _, out var areaProto))
-                        dropshipName = areaProto.Name;
-                }
-            }
-
-            if (xenoCount > 0)
-            {
-                _alertLevelSystem.Set(RMCAlertLevels.Red, _dropshipId, false, false);
-                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
-                    ("name", dropshipName),
-                    ("count", xenoCount)),
-                    dropship.UnidentifledlifesignsSound);
-            }
+            var ev = new DropshipHijackLaunchedEvent(ent);
+            RaiseLocalEvent(ref ev);
         }
+
     }
 
     private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)
@@ -179,6 +160,27 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         RelayToMountedEntities(ent, args);
         RelayToDropshipDestination(ent, args);
+
+        if (!ent.Comp.Crashed) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
+        {
+            int xenoCount = 0;
+            string dropshipName = Name(ent);
+            var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+            while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
+            {
+                if (xform.GridUid == ent && mobState.CurrentState != MobState.Dead)
+                    xenoCount++;
+            }
+
+            if (xenoCount > 0)
+            {
+                _alertLevelSystem.Set(RMCAlertLevels.Red, ent, false, false);
+                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
+                    ("name", dropshipName),
+                    ("count", xenoCount)),
+                    ent.Comp.UnidentifledlifesignsSound);
+            }
+        }
 
         ent.Comp.DepartureLocation = ent.Comp.Destination;
         Dirty(ent);

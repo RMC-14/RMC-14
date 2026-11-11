@@ -1,0 +1,57 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazTrijentBase
+  id: RMCSurvivorSPPSpetsnazTrijentMedic
+  name: rmc-job-name-spetsnaz-medic
+  startingGear: RMCGearSPPSpetsnazTrijentMedic
+  ranks:
+    RMCRankSPPSerzhant: []
+  icon: "RMCJobIconSPPSpetsnazMedic"
+  spawnMenuRoleName: SPP Spetsnaz D/SRU Medic (Sorokyne Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPMedic
+    - type: IntelRescueSurvivorObjective
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-trijent-spetsnaz-medic
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPSpetsnazNoBelt
+    - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazTrijentBase
+  id: RMCGearSPPSpetsnazTrijentMedic
+  equipment:
+    eyes: RMCGlassesMedicalHUDGlasses
+    belt: RMCBeltMedicBagSPPCrashland
+    back: RMCSatchelSPPMedicSurvivor
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazTrijentMedic
+  name: special survivor spp spetsnaz medic spawn point
+  suffix: Trijent
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazTrijentMedic
+  - type: Sprite
+    state: surv_spp

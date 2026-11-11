@@ -1,9 +1,9 @@
-using System.Linq;
 using Content.Server.StationRecords.Systems;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.RMCMedicalRecords;
 using Content.Shared._RMC14.Temperature;
@@ -14,7 +14,10 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server._RMC14.RMCMedicalRecords;
 
@@ -65,22 +68,32 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
     {
         var blood = default(FixedPoint2);
         var maxBlood = default(FixedPoint2);
-        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream))
+        if (_rmcBloodstream.TryGetBloodVolumes(target, out var curBlood, out var normalBlood))
         {
-            blood = bloodstream.Volume;
-            maxBlood = bloodstream.MaxVolume;
+            blood = curBlood;
+            maxBlood = normalBlood;
         }
 
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
         _rmcTemperature.TryGetCurrentTemperature(target, out var temperature);
+        _rmcBloodstream.TryGetBloodThresholds(target, out var bloodThresholds);
 
         var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
+        var damage = TryComp<DamageableComponent>(target, out var dam) ? dam.Damage : new();
+        var wounds = TryComp<WoundedComponent>(target, out var wound) ? wound.Wounds : new();
+        var woundTypes = wound != null ? wound.WoundGroups : new();
+        var state = TryComp<MobStateComponent>(target, out var mobState) ? mobState.CurrentState : MobState.Alive;
 
         return new HealthScanState(
             GetNetEntity(target),
+            state,
+            damage,
+            wounds,
+            woundTypes,
             blood,
             maxBlood,
+            bloodThresholds,
             temperature,
             pulse,
             chemicals,
@@ -115,7 +128,7 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 
         // TODO RMC14 Remove Shrapnel
 
-        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream) && bloodstream.Volume < bloodstream.MaxVolume)
+        if (_rmcBloodstream.TryGetBloodVolumes(target, out var blood, out var normalBlood) && blood < normalBlood)
             autodocData.Add(new RMCAutodocScanData(RMCAutodocProcedures.Blood, Loc.GetString("rmc-records-autodoc-blood")));
 
         if (_rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemSol))

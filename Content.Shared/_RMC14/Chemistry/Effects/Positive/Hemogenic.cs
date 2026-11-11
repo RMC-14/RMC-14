@@ -50,7 +50,8 @@ public sealed partial class Hemogenic : RMCChemicalEffect
         var rmcBloodstreamSystem = entityManager.System<SharedRMCBloodstreamSystem>();
         var shouldApplyDamage = ActualPotency > 3 &&
                                 rmcBloodstreamSystem.TryGetBloodSolution(target, out var bloodSolution) &&
-                                bloodSolution.Volume > 570; // TODO RMC14 Also check if they're not a Yautja.
+                                entityManager.TryGetComponent<RMCBloodComponent>(target, out var rmcBlood) &&
+                                bloodSolution.Volume > rmcBlood.BloodNormal + 10; // TODO RMC14 Also check if they're not a Yautja.
         if (!shouldApplyDamage)
             return;
         var damage = new DamageSpecifier();
