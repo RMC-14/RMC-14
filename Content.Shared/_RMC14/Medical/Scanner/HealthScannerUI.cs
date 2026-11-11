@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage;
@@ -22,6 +23,7 @@ public readonly record struct HealthScanState(
     Dictionary<ProtoId<DamageGroupPrototype>, WoundType> WoundTypes,
     FixedPoint2 Blood,
     FixedPoint2 MaxBlood,
+    Dictionary<RMCBloodThresholds, FixedPoint2> BloodThresholds,
     float? Temperature,
     string Pulse,
     Solution? Chemicals,

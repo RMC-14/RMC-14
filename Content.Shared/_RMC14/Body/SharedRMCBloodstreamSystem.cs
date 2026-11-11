@@ -177,6 +177,20 @@ public abstract class SharedRMCBloodstreamSystem : EntitySystem
         return true;
     }
 
+    public bool TryGetBloodThresholds(EntityUid ent, out Dictionary<RMCBloodThresholds, FixedPoint2> bloodThresholds)
+    {
+        bloodThresholds = new();
+        if (!TryComp<RMCBloodComponent>(ent, out var blood))
+            return false;
+
+        bloodThresholds.Add(RMCBloodThresholds.Normal, blood.BloodNormal);
+        bloodThresholds.Add(RMCBloodThresholds.Safe, blood.BloodSafe);
+        bloodThresholds.Add(RMCBloodThresholds.Okay, blood.BloodOkay);
+        bloodThresholds.Add(RMCBloodThresholds.Bad, blood.BloodBad);
+        bloodThresholds.Add(RMCBloodThresholds.Survive, blood.BloodSurvive);
+        return true;
+    }
+
     public void UpdateBlood(Entity<BloodstreamComponent, RMCBloodComponent> ent, TimeSpan curTime)
     {
         if (curTime >= ent.Comp2.NextBleedingUpdate)

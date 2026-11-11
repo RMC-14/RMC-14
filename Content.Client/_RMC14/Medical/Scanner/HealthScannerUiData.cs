@@ -342,8 +342,11 @@ public sealed class HealthScannerUiData
         // Blood related
         if (uiState.Blood < uiState.MaxBlood)
         {
-            var bloodPercent = uiState.Blood / uiState.MaxBlood;
-            if (bloodPercent < 0.85)
+            var safeLevel = uiState.BloodThresholds.TryGetValue(Shared._RMC14.Body.RMCBloodThresholds.Safe, out var safe) ? safe : (uiState.Blood / uiState.MaxBlood) * 0.9f;
+            var okayLevel = uiState.BloodThresholds.TryGetValue(Shared._RMC14.Body.RMCBloodThresholds.Okay, out var okay) ? okay : (uiState.Blood / uiState.MaxBlood) * 0.6f;
+            var surviveLevel = uiState.BloodThresholds.TryGetValue(Shared._RMC14.Body.RMCBloodThresholds.Survive, out var survive) ? survive : 0;
+
+            if (uiState.Blood < okayLevel)
             {
                 var bloodPack = Loc.GetString("rmc-health-analyzer-advice-blood-pack");
                 if (!_skills.HasAllSkills(viewer, _bloodPackSkill))
@@ -351,7 +354,7 @@ public sealed class HealthScannerUiData
                 AddAdvice(bloodPack, window);
             }
 
-            if (bloodPercent < 0.9 && uiState.Chemicals != null && !uiState.Chemicals.ContainsReagent("Nutriment", null))
+            if (uiState.Blood < safeLevel && uiState.Blood >= surviveLevel && uiState.Chemicals != null && !uiState.Chemicals.ContainsReagent("Nutriment", null))
                 AddAdvice(Loc.GetString("rmc-health-analyzer-advice-food"), window);
         }
 

@@ -2,6 +2,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Body;
 
@@ -71,4 +72,15 @@ public sealed partial class RMCBloodComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 MaxVOxyloss = 100;
+}
+
+[Serializable, NetSerializable]
+public enum RMCBloodThresholds
+{
+    Normal,
+    Safe,
+    Okay,
+    Bad,
+    Survive
+
 }

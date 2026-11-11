@@ -76,6 +76,7 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
         _rmcTemperature.TryGetCurrentTemperature(target, out var temperature);
+        _rmcBloodstream.TryGetBloodThresholds(target, out var bloodThresholds);
 
         var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
@@ -92,6 +93,7 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
             woundTypes,
             blood,
             maxBlood,
+            bloodThresholds,
             temperature,
             pulse,
             chemicals,
