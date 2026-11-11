@@ -65,10 +65,10 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
     {
         var blood = default(FixedPoint2);
         var maxBlood = default(FixedPoint2);
-        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream))
+        if (_rmcBloodstream.TryGetBloodVolumes(target, out var curBlood, out var normalBlood))
         {
-            blood = bloodstream.Volume;
-            maxBlood = bloodstream.MaxVolume;
+            blood = curBlood;
+            maxBlood = normalBlood;
         }
 
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
@@ -115,7 +115,7 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 
         // TODO RMC14 Remove Shrapnel
 
-        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream) && bloodstream.Volume < bloodstream.MaxVolume)
+        if (_rmcBloodstream.TryGetBloodVolumes(target, out var blood, out var normalBlood) && blood < normalBlood)
             autodocData.Add(new RMCAutodocScanData(RMCAutodocProcedures.Blood, Loc.GetString("rmc-records-autodoc-blood")));
 
         if (_rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemSol))

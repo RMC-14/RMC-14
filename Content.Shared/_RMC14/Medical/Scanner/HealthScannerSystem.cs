@@ -172,10 +172,10 @@ public sealed class HealthScannerSystem : EntitySystem
 
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;
-        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream))
+        if (_rmcBloodstream.TryGetBloodVolumes(target, out var bloodVol, out var normalBloodVol))
         {
-            blood = bloodstream.Volume;
-            maxBlood = bloodstream.MaxVolume;
+            blood = bloodVol;
+            maxBlood = normalBloodVol;
         }
 
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
