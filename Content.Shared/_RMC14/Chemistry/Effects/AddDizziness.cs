@@ -11,7 +11,7 @@ public sealed partial class AddDizziness : EntityEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return "Causes [color=yellow]dizziness[/color].";
+        return Loc.GetString("reagent-effect-guidebook-rmc-dizziness", ("chance", Probability));
     }
 
     public override void Effect(EntityEffectBaseArgs args)

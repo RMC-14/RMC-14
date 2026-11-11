@@ -16,6 +16,8 @@ public sealed partial class Hypnotic : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
     private static readonly ProtoId<EmotePrototype> YawnEmote = "Yawn";
+    private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
+    private static readonly EntProtoId ForcedSleepingStatus = "StatusEffectForcedSleeping";
     private const float ConfusedThresholdSeconds = 50f;
     private const float SleepingThresholdSeconds = 40f;
 
@@ -32,25 +34,25 @@ public sealed partial class Hypnotic : RMCChemicalEffect
         var timing = IoCManager.Resolve<IGameTiming>();
 
         var remaining = TimeSpan.Zero;
-        if (status.TryGetTime(target, "RMCStatusEffectConfused", out var time) && time.EndEffectTime is { } end)
+        if (status.TryGetTime(target, ConfusedStatus, out var time) && time.EndEffectTime is { } end)
             remaining = end - timing.CurTime;
 
         var sleepingRemaining = TimeSpan.Zero;
-        if (status.TryGetTime(target, "StatusEffectForcedSleeping", out var sleepTime) && sleepTime.EndEffectTime is { } sleepEnd)
+        if (status.TryGetTime(target, ForcedSleepingStatus, out var sleepTime) && sleepTime.EndEffectTime is { } sleepEnd)
             sleepingRemaining = sleepEnd - timing.CurTime;
 
         var delta = TimeSpan.FromSeconds(4f * (float) potency);
 
         if (remaining.TotalSeconds < ConfusedThresholdSeconds && sleepingRemaining.TotalSeconds < SleepingThresholdSeconds)
         {
-            status.TryAddStatusEffectDuration(target, "RMCStatusEffectConfused", delta);
+            status.TryAddStatusEffectDuration(target, ConfusedStatus, delta);
             remaining += delta;
         }
 
         if (remaining.TotalSeconds > ConfusedThresholdSeconds)
         {
-            status.TryAddStatusEffectDuration(target, "StatusEffectForcedSleeping", delta);
-            status.TryAddTime(target, "RMCStatusEffectConfused", -delta);
+            status.TryAddStatusEffectDuration(target, ForcedSleepingStatus, delta);
+            status.TryAddTime(target, ConfusedStatus, -delta);
         }
         else
         {

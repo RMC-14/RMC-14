@@ -17,6 +17,11 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 public sealed partial class Focusing : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
+    private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
+    private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    private static readonly ProtoId<StatusEffectPrototype> JitterStatus = "Jitter";
+    private static readonly ProtoId<StatusEffectPrototype> BlurStatus = "Blinded";
+    private static readonly ProtoId<StatusEffectPrototype> MutedStatus = "Muted";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -41,21 +46,21 @@ public sealed partial class Focusing : RMCChemicalEffect
         stutterSystem.DoRemoveStutterTime(args.TargetEntity, (float) potency * 4f);
 
         args.EntityManager.System<RMCJitterinessSystem>().ReduceJitteriness(args.TargetEntity, (float) potency * 2f);
-        args.EntityManager.System<StatusEffectsSystem>().TryRemoveTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds((float) potency * 4f / 3f));
+        args.EntityManager.System<StatusEffectsSystem>().TryRemoveTime(args.TargetEntity, JitterStatus, TimeSpan.FromSeconds((float) potency * 4f / 3f));
 
-        statusEffects.TryAddTime(args.TargetEntity, "RMCStatusEffectConfused", TimeSpan.FromSeconds((float) potency * -4f));
-        statusEffects.TryAddTime(args.TargetEntity, "StatusEffectDrowsiness", TimeSpan.FromSeconds((float) potency * -2f));
+        statusEffects.TryAddTime(args.TargetEntity, ConfusedStatus, TimeSpan.FromSeconds((float) potency * -4f));
+        statusEffects.TryAddTime(args.TargetEntity, DrowsinessStatus, TimeSpan.FromSeconds((float) potency * -2f));
 
         args.EntityManager.System<RMCDizzinessSystem>().ReduceDizziness(args.TargetEntity, (float) potency * 2f);
 
         var oldStatus = args.EntityManager.System<StatusEffectsSystem>();
-        oldStatus.TryRemoveTime(args.TargetEntity, "Blinded", TimeSpan.FromSeconds((float) potency * 4f));
+        oldStatus.TryRemoveTime(args.TargetEntity, BlurStatus, TimeSpan.FromSeconds((float) potency * 4f));
 
         if (!(ActualPotency >= 3))
             return;
 
         oldStatus.TryRemoveStatusEffect(args.TargetEntity, TemporaryBlindnessSystem.BlindingStatusEffect);
-        oldStatus.TryRemoveStatusEffect(args.TargetEntity, "Muted");
+        oldStatus.TryRemoveStatusEffect(args.TargetEntity, MutedStatus);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

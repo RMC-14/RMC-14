@@ -144,6 +144,7 @@ public sealed partial class Defibrillating : RMCChemicalEffect
 }
 
 [RegisterComponent, AutoGenerateComponentPause]
+[Access(typeof(Defibrillating), typeof(SharedRMCDefibrillatorSystem))]
 public sealed partial class RMCDefibrillatingReviveComponent : Component
 {
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
@@ -151,6 +152,7 @@ public sealed partial class RMCDefibrillatingReviveComponent : Component
 }
 
 [RegisterComponent, AutoGenerateComponentPause]
+[Access(typeof(Defibrillating))]
 public sealed partial class RMCDefibrillatingComponent : Component
 {
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]

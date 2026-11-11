@@ -21,6 +21,14 @@ public sealed partial class Nervestimulating : RMCChemicalEffect
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
     private static readonly ProtoId<DamageTypePrototype> HeatType = "Heat";
     private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
+    private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
+    private static readonly EntProtoId DazedStatus = "Dazed";
+    private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    private static readonly ProtoId<StatusEffectPrototype> BlurStatus = "Blinded";
+    private static readonly ProtoId<StatusEffectPrototype> JitterStatus = "Jitter";
+    private static readonly ProtoId<StatusEffectPrototype> KnockedDownStatus = "KnockedDown";
+    private static readonly ProtoId<StatusEffectPrototype> StunStatus = "Stun";
+    private static readonly ProtoId<StatusEffectPrototype> UnconsciousStatus = "Unconscious";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -39,9 +47,9 @@ public sealed partial class Nervestimulating : RMCChemicalEffect
         var knockdownReduction = TimeSpan.FromSeconds((double) potency * 1.5);
 
         var oldStatus = args.EntityManager.System<StatusEffectsSystem>();
-        oldStatus.TryRemoveTime(args.TargetEntity, "Stun", ScaleIncapacitation(args, "Stun", stunReduction));
-        oldStatus.TryRemoveTime(args.TargetEntity, "KnockedDown", ScaleIncapacitation(args, "KnockedDown", knockdownReduction));
-        oldStatus.TryRemoveTime(args.TargetEntity, "Unconscious", ScaleIncapacitation(args, "Unconscious", knockdownReduction));
+        oldStatus.TryRemoveTime(args.TargetEntity, StunStatus, ScaleIncapacitation(args, StunStatus, stunReduction));
+        oldStatus.TryRemoveTime(args.TargetEntity, KnockedDownStatus, ScaleIncapacitation(args, KnockedDownStatus, knockdownReduction));
+        oldStatus.TryRemoveTime(args.TargetEntity, UnconsciousStatus, ScaleIncapacitation(args, UnconsciousStatus, knockdownReduction));
 
         if (!(ActualPotency > 2))
             return;
@@ -52,13 +60,13 @@ public sealed partial class Nervestimulating : RMCChemicalEffect
         var perTickUnitReductionSeconds = 2f * reductionSeconds;
         stutter.DoRemoveStutterTime(args.TargetEntity, perTickUnitReductionSeconds);
 
-        oldStatus.TryRemoveTime(args.TargetEntity, "Blinded", TimeSpan.FromSeconds(perTickUnitReductionSeconds));
+        oldStatus.TryRemoveTime(args.TargetEntity, BlurStatus, TimeSpan.FromSeconds(perTickUnitReductionSeconds));
 
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        status.TryAddTime(args.TargetEntity, "RMCStatusEffectConfused", TimeSpan.FromSeconds(-perTickUnitReductionSeconds));
-        status.TryAddTime(args.TargetEntity, "StatusEffectDrowsiness", TimeSpan.FromSeconds(-reductionSeconds));
+        status.TryAddTime(args.TargetEntity, ConfusedStatus, TimeSpan.FromSeconds(-perTickUnitReductionSeconds));
+        status.TryAddTime(args.TargetEntity, DrowsinessStatus, TimeSpan.FromSeconds(-reductionSeconds));
         args.EntityManager.System<RMCJitterinessSystem>().ReduceJitteriness(args.TargetEntity, reductionSeconds);
-        oldStatus.TryRemoveTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(reductionSeconds * 2f / 3f));
+        oldStatus.TryRemoveTime(args.TargetEntity, JitterStatus, TimeSpan.FromSeconds(reductionSeconds * 2f / 3f));
 
         args.EntityManager.System<RMCDizzinessSystem>().ReduceDizziness(args.TargetEntity, reductionSeconds);
     }
@@ -81,11 +89,11 @@ public sealed partial class Nervestimulating : RMCChemicalEffect
             return;
 
         var oldStatus = entities.System<StatusEffectsSystem>();
-        oldStatus.TryRemoveStatusEffect(target, "Stun");
-        oldStatus.TryRemoveStatusEffect(target, "KnockedDown");
+        oldStatus.TryRemoveStatusEffect(target, StunStatus);
+        oldStatus.TryRemoveStatusEffect(target, KnockedDownStatus);
 
         var status = entities.System<SharedStatusEffectsSystem>();
-        status.TryRemoveStatusEffect(target, "Dazed");
+        status.TryRemoveStatusEffect(target, DazedStatus);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

@@ -13,6 +13,8 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Thermostabilizing : RMCChemicalEffect
 {
+    private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Stabilizes the temperature of the body to [color=green]{TemperatureHelpers.CelsiusToKelvin(Atmospherics.NormalBodyTemperature)}[/color] kelvins, by [color=green]{60f * PotencyPerSecond}[/color] K at a time.\n" +
@@ -47,7 +49,7 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
     {
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
         var remaining = TimeSpan.Zero;
-        if (status.TryGetTime(args.TargetEntity, "StatusEffectDrowsiness", out var time) && time.EndEffectTime is { } end)
+        if (status.TryGetTime(args.TargetEntity, DrowsinessStatus, out var time) && time.EndEffectTime is { } end)
         {
             var timing = IoCManager.Resolve<IGameTiming>();
             remaining = end - timing.CurTime;
@@ -55,6 +57,6 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
 
         var floor = TimeSpan.FromSeconds(30);
         if (remaining < floor)
-            status.TrySetStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", floor);
+            status.TrySetStatusEffectDuration(args.TargetEntity, DrowsinessStatus, floor);
     }
 }

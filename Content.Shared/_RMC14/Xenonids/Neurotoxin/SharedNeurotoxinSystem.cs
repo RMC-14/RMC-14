@@ -73,6 +73,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private static readonly EntProtoId ResistNeuroStatus = "RMCStatusEffectResistNeuro";
+    private static readonly EntProtoId SeeingRainbowStatus = "RMCStatusEffectSeeingRainbow";
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
@@ -446,7 +447,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 var ev = new NeurotoxinEmoteEvent() { Emote = neurotoxin.GiggleId };
                 RaiseLocalEvent(victim, ev);
                 //TODO RMC14 hallucination status - more in depth than neuro
-                _statusEffects.TryAddStatusEffect<RMCSeeingRainbowsStatusEffectComponent>(victim, "RMCStatusEffectSeeingRainbow", neurotoxin.RainbowDuration, true);
+                _statusEffect.TryUpdateStatusEffectDuration(victim, SeeingRainbowStatus, neurotoxin.RainbowDuration);
                 break;
             case NeuroHallucinations.Mortar:
                 position = HallucinationSoundOffset(victim, 7);

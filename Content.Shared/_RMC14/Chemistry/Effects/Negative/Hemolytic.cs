@@ -17,6 +17,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Negative;
 public sealed partial class Hemolytic : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
+    private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
 
     private static readonly ProtoId<EmotePrototype>[] YawnGaspEmotes =
     [
@@ -50,7 +51,7 @@ public sealed partial class Hemolytic : RMCChemicalEffect
         var actualPotency = (float) ActualPotency;
         var cap = TimeSpan.FromSeconds(15d * actualPotency);
         var remaining = TimeSpan.Zero;
-        if (status.TryGetTime(args.TargetEntity, "StatusEffectDrowsiness", out var time) && time.EndEffectTime is { } end)
+        if (status.TryGetTime(args.TargetEntity, DrowsinessStatus, out var time) && time.EndEffectTime is { } end)
         {
             var timing = IoCManager.Resolve<IGameTiming>();
             remaining = end - timing.CurTime;
@@ -61,7 +62,7 @@ public sealed partial class Hemolytic : RMCChemicalEffect
             toAdd = cap - remaining;
 
         if (toAdd > TimeSpan.Zero)
-            status.TryAddStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", toAdd);
+            status.TryAddStatusEffectDuration(args.TargetEntity, DrowsinessStatus, toAdd);
 
         var speedModifier = args.EntityManager.System<RMCReagentSpeedModifierSystem>();
         speedModifier.SetSpeedModifier(args.TargetEntity, $"{args.Reagent?.ID}:{nameof(Hemolytic)}", ActualPotency);

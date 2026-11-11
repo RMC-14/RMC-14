@@ -13,6 +13,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 public sealed partial class Antitoxic : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -46,6 +47,6 @@ public sealed partial class Antitoxic : RMCChemicalEffect
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
-        status.TryUpdateStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", TimeSpan.FromSeconds(30));
+        status.TryUpdateStatusEffectDuration(args.TargetEntity, DrowsinessStatus, TimeSpan.FromSeconds(30));
     }
 }

@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Atmos;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
@@ -18,6 +19,8 @@ public sealed partial class Hypothermic : RMCChemicalEffect
 {
     private static readonly ProtoId<ReagentPrototype> Cryoxadone = "CMCryoxadone";
     private static readonly ProtoId<ReagentPrototype> Clonexadone = "CMClonexadone";
+    private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    private static readonly ProtoId<EmotePrototype> ShiverEmote = "RMCShiver";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -30,7 +33,7 @@ public sealed partial class Hypothermic : RMCChemicalEffect
         if (random.Prob(0.05f))
         {
             var emote = args.EntityManager.System<SharedRMCEmoteSystem>();
-            emote.TryEmoteWithChat(args.TargetEntity, "RMCShiver", hideLog: true, forceEmote: true);
+            emote.TryEmoteWithChat(args.TargetEntity, ShiverEmote, hideLog: true, forceEmote: true);
         }
 
         var temperature = args.EntityManager.System<SharedRMCTemperatureSystem>();
@@ -53,7 +56,7 @@ public sealed partial class Hypothermic : RMCChemicalEffect
 
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
         var remaining = TimeSpan.Zero;
-        if (status.TryGetTime(args.TargetEntity, "StatusEffectDrowsiness", out var time) && time.EndEffectTime is { } end)
+        if (status.TryGetTime(args.TargetEntity, DrowsinessStatus, out var time) && time.EndEffectTime is { } end)
         {
             var timing = IoCManager.Resolve<IGameTiming>();
             remaining = end - timing.CurTime;
@@ -61,7 +64,7 @@ public sealed partial class Hypothermic : RMCChemicalEffect
 
         var floor = TimeSpan.FromSeconds(30);
         if (remaining < floor)
-            status.TrySetStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", floor);
+            status.TrySetStatusEffectDuration(args.TargetEntity, DrowsinessStatus, floor);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

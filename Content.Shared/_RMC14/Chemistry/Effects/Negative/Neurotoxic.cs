@@ -27,6 +27,8 @@ public sealed partial class Neurotoxic : RMCChemicalEffect
     public override bool ReactsOnTouch => true;
 
     private static readonly EntProtoId ResistNeuroStatus = "RMCStatusEffectResistNeuro";
+    private static readonly EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    private static readonly ProtoId<StatusEffectPrototype> KnockedDownStatus = "KnockedDown";
     private static readonly EntProtoId<SkillDefinitionComponent> EnduranceSkill = "RMCSkillEndurance";
     private static readonly ProtoId<EmotePrototype> DroolEmote = "RMCDrool";
 
@@ -110,7 +112,7 @@ public sealed partial class Neurotoxic : RMCChemicalEffect
 
         var status = args.EntityManager.System<SharedStatusEffectsSystem>();
         var drowsyRemaining = TimeSpan.Zero;
-        if (status.TryGetTime(args.TargetEntity, "StatusEffectDrowsiness", out var drowsyTime) && drowsyTime.EndEffectTime is { } drowsyEnd)
+        if (status.TryGetTime(args.TargetEntity, DrowsinessStatus, out var drowsyTime) && drowsyTime.EndEffectTime is { } drowsyEnd)
             drowsyRemaining = drowsyEnd - timing.CurTime;
 
         var drowsyToAdd = TimeSpan.FromSeconds((float) potency);
@@ -118,7 +120,7 @@ public sealed partial class Neurotoxic : RMCChemicalEffect
             drowsyToAdd = cap - drowsyRemaining;
 
         if (drowsyToAdd > TimeSpan.Zero)
-            status.TryAddStatusEffectDuration(args.TargetEntity, "StatusEffectDrowsiness", drowsyToAdd);
+            status.TryAddStatusEffectDuration(args.TargetEntity, DrowsinessStatus, drowsyToAdd);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -164,7 +166,7 @@ public sealed partial class Neurotoxic : RMCChemicalEffect
             return;
 
         var oldStatus = entities.System<StatusEffectsSystem>();
-        if (oldStatus.TryGetTime(target, "KnockedDown", out var knockdown) &&
+        if (oldStatus.TryGetTime(target, KnockedDownStatus, out var knockdown) &&
             knockdown.Value.Item2 - IoCManager.Resolve<IGameTiming>().CurTime >= TimeSpan.FromSeconds(10))
         {
             return;

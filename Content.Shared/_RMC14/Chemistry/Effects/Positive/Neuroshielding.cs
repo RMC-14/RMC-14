@@ -32,10 +32,11 @@ public sealed partial class Neuroshielding : RMCChemicalEffect
             return;
 
         entities.System<SharedPopupSystem>().PopupEntity(Loc.GetString("chem-neuroshielding-thick-skull"), args.TargetEntity, args.TargetEntity);
-        entities.System<SharedStatusEffectsSystem>().TryRemoveStatusEffect(args.TargetEntity, "Dazed");
+        entities.System<SharedStatusEffectsSystem>().TryRemoveStatusEffect(args.TargetEntity, DazedStatus);
     }
 
     // TODO RMC14: brain damage on critical overdose - 2 * potency brain damage per 2s tick
 
     public static readonly EntProtoId ResistNeuroStatus = "RMCStatusEffectResistNeuro";
+    private static readonly EntProtoId DazedStatus = "Dazed";
 }

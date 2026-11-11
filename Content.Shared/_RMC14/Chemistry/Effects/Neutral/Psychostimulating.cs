@@ -32,7 +32,6 @@ public sealed partial class Psychostimulating : RMCChemicalEffect
         var popup = entities.System<SharedPopupSystem>();
         var throttle = entities.EnsureComponent<PsychostimulatingThrottleComponent>(target);
 
-        // cm13 compares potency with ==, so only exactly 1, 2 & 3 get partial tiers
         var tier = ActualPotency switch
         {
             1f => "1",
@@ -55,7 +54,6 @@ public sealed partial class Psychostimulating : RMCChemicalEffect
         throttle.NextReduction[reagent.ID] = timing.CurTime + ReductionDelay;
         popup.PopupEntity(Loc.GetString($"chem-psychostimulating-stable-{tier}"), target, target);
 
-        // cm13 confused decays 1 per 2s tick, so 1 unit = 2s
         var status = entities.System<SharedStatusEffectsSystem>();
         if (tier == "max")
             status.TryRemoveStatusEffect(target, ConfusedStatus);
@@ -81,6 +79,7 @@ public sealed partial class Psychostimulating : RMCChemicalEffect
 }
 
 [RegisterComponent]
+[Access(typeof(Psychostimulating))]
 public sealed partial class PsychostimulatingThrottleComponent : Component
 {
     [DataField]
