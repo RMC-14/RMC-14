@@ -6,7 +6,6 @@
   ranks:
     RMCRankSPPMayjor: []
   icon: "RMCJobIconSurvivorSPPSpetsnazTrjientCommander"
-  hasIcon: true
   playTimeTracker: RMCJobSurvivorCO
   spawnMenuRoleName: SPP Spetsnaz D/SRU Commander (Trijent Special Survivor)
   special:
