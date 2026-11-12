@@ -1111,20 +1111,6 @@
 
 - type: entity
   parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFilledHighCommand
-  suffix: Filled, High Command
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCGrenadeWhitePhosphorusCompound
-    - id: RMCGrenadeFlashBang
-    - id: RMCTabletCO
-    - id: RMCLaserDesignator
-    - id: RMCArmorM3General
-    - id: CMArmorHelmetM11CGeneral
-
-- type: entity
-  parent: RMCSatchelLightpack
   id: RMCSatchelLightpackBlack
   components:
   - type: Sprite

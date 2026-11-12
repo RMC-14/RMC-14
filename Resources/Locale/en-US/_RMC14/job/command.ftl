@@ -28,8 +28,10 @@ rmc-job-prefix-forecon-co = Cmdr.
 cm-job-name-high-command = High Command
 
 # Admin only brig gen.
-rmc-job-name-unmc-brigadier-general = High Command
-rmc-job-description-unmc-brigadier-general = "High Command. Congrats, you're a Brigadier General!"
+rmc-job-name-unmc-general = UNMC General
+rmc-job-description-unmc-general = "High Command. Congrats, you're a General!"
+rmc-job-name-unmc-acmc = Assistant Commandant of the Marine Corps
+rmc-job-name-unmc-cmc = Commandant of the Marine Corps
 
 # admin spawn only high comm Adjutant
 rmc-job-name-unmc-adjutant = High Command Adjutant
