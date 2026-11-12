@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -18,7 +17,6 @@ namespace Content.Shared._RMC14.Marines;
 
 public abstract class SharedMarineSystem : EntitySystem
 {
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
@@ -26,9 +24,6 @@ public abstract class SharedMarineSystem : EntitySystem
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
-
-    private readonly HashSet<EntProtoId<IFFFactionComponent>> _attackedFactions = [];
-    private readonly HashSet<EntProtoId<IFFFactionComponent>> _attackerFactions = [];
 
     public override void Initialize()
     {
@@ -103,18 +98,6 @@ public abstract class SharedMarineSystem : EntitySystem
         {
             args.Skip = true;
             return;
-        }
-
-        if (args.Defer)
-            return;
-
-        // Marines prefer not to attack entities they share an IFF faction with
-        if (!args.Disarm
-            && _gunIFF.TryGetFactions(args.Target, _attackedFactions)
-            && _gunIFF.TryGetFactions(marine.Owner, _attackerFactions)
-            && _attackerFactions.Overlaps(_attackedFactions))
-        {
-            args.Defer = true;
         }
     }
 
