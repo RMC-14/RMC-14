@@ -26,6 +26,13 @@
         RMCSkillPolice: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-enforcer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
   hidden: true
 
 - type: entity

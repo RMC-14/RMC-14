@@ -39,7 +39,6 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_civillian
-  hasIcon: false
 
 - type: job
   parent: RMCJobRibbonBase
@@ -55,7 +54,7 @@
   ranks:
     RMCRankCorporal: []
   startingGear: CMGearCombatCorrespondent
-  icon: "RMCJobIconCorrespondent"
+  icon: "RMCJobIconCombatCorrespondent"
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-commander
   accessGroups:
@@ -79,8 +78,7 @@
         state: correspondent
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background
-  hasIcon: false
+        state: background_shipside
 
 - type: startingGear
   id: CMGearCorrespondent
