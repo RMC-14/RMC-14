@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 07/29/2026 11:33:32
-  entityCount: 2024
+  time: 11/12/2026 19:38:35
+  entityCount: 2023
 maps:
 - 1
 grids:
@@ -3566,13 +3566,6 @@ entities:
     components:
     - type: Transform
       pos: -5.821694,-3.2315395
-      parent: 2
-- proto: CMIV
-  entities:
-  - uid: 350
-    components:
-    - type: Transform
-      pos: -7.5,1.5
       parent: 2
 - proto: CMKelotaneAutoInjector
   entities:
@@ -12759,6 +12752,13 @@ entities:
     - type: Transform
       pos: 5.5,-11.5
       parent: 2
+- proto: RMCIVStand
+  entities:
+  - uid: 350
+    components:
+    - type: Transform
+      pos: -7.5,1.5
+      parent: 2
 - proto: RMCKitchenReagentGrinder
   entities:
   - uid: 925
@@ -13423,13 +13423,6 @@ entities:
     components:
     - type: Transform
       pos: 17.5,11.5
-      parent: 2
-- proto: RMCSpawnMobDoc
-  entities:
-  - uid: 1017
-    components:
-    - type: Transform
-      pos: 3.5,17.5
       parent: 2
 - proto: RMCSpawnPointExecutiveBodyguard
   entities:
