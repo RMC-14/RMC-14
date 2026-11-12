@@ -5,7 +5,13 @@
   description: cm-job-description-survivor
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: UNMC Recruiter (Solaris Survivor)
+  icon: "RMCJobIconSurvivorRecruiter"
+  hasIcon: true
   ranks:
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivor
+      time: 90000 # 25 hours
     RMCRankSergeant: []
   accessGroups:
   - Colonist
@@ -22,9 +28,17 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - UNMC
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: recruiter
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_shipside
   useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
@@ -32,17 +46,25 @@
   id: RMCGearSurvivorUNMCRecruiter
   equipment:
     jumpsuit: CMJumpsuitBO
+    id: RMCDogtagUNMCRecruiter
     outerClothing: RMCCoatService
     belt: RMCM1984BeltFilled
     shoes: CMBootsBlackFilled
     head: RMCHeadCapPatrol
+    ears: RMCHeadsetMarineDistress
     gloves: CMHandsBlackMarine
     pocket2: RMCPouchGeneralMedium
+  storage:
+    back:
+    - CMSheetMetal20
+    pocket2:
+    - CMClipboard
+    - CMPenFountain
 
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorUNMCRecruiter
-  name: survivor unmc recruiter spawn point
+  name: survivor solaris unmc recruiter spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivorUNMCRecruiter
@@ -50,3 +72,10 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorRecruiter
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
+    state: hudsquad_recruiter
