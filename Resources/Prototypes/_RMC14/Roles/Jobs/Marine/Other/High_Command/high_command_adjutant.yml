@@ -32,35 +32,6 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
-    - type: TacticalMapIcon
-      icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: general1
-      background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_hc_com
-    - type: Language
-      spokenLanguages:
-      - English
-      - French
-      - Japanese
-      - Russian
-      - Scandinavian
-      - German
-      - Chinese
-      - Spanish
-      understoodLanguages:
-      - English
-      - French
-      - Japanese
-      - Russian
-      - Scandinavian
-      - German
-      - Chinese
-      - Spanish
-      currentLanguage: English
-      defaultLanguage: English
-
   hidden: true
 
 - type: startingGear
