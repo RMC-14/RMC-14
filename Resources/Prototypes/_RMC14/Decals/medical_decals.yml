@@ -222,3 +222,327 @@
   sprite:
     sprite: _RMC14/Decals/medical_decals.rsi
     state: triage_bottom_left
+
+- type: decal
+  id: WhiteTriagedecalleftup
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_triagedecalleftup
+
+- type: decal
+  id: WhiteBrokenCryocell1decal
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_cryocell1decal
+
+- type: decal
+  id: WhiteBrokenCryocell4decal
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_cryocell4decal
+
+- type: decal
+  id: WhiteBrokenTriagedecal
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_triagedecal
+
+- type: decal
+  id: WhiteTriagedecaldir
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_triagedecaldir
+
+- type: decal
+  id: WhiteBrokenDocdecal2
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_docdecal2
+
+- type: decal
+  id: WhiteDocstriping
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_docstriping
+
+- type: decal
+  id: WhiteDocdecal3
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_docdecal3
+
+- type: decal
+  id: WhiteCryomid
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_cryomid
+
+- type: decal
+  id: WhiteBrokenTriagedecaldir
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_triagedecaldir
+
+- type: decal
+  id: WhiteCryotop
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_cryotop
+
+- type: decal
+  id: WhiteBrokenCryotop
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_cryotop
+
+- type: decal
+  id: WhiteBrokenTriagedecaltop
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_triagedecaltop
+
+- type: decal
+  id: WhiteBrokenTriagedecalbottomleft
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_triagedecalbottomleft
+
+- type: decal
+  id: WhiteBrokenDocdecal4
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_docdecal4
+
+- type: decal
+  id: WhiteTriagedecalleft
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_triagedecalleft
+
+- type: decal
+  id: WhiteBrokenTriagedecalleft
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_triagedecalleft
+
+- type: decal
+  id: WhiteBrokenCryomid
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_cryomid
+
+- type: decal
+  id: WhiteTriagedecaltop
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_triagedecaltop
+
+- type: decal
+  id: WhiteBrokenCryocell2deval
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_cryocell2deval
+
+- type: decal
+  id: WhiteBrokenDocdecal1
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_docdecal1
+
+- type: decal
+  id: WhiteBrokenCryocell3decal
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_cryocell3decal
+
+- type: decal
+  id: WhiteTriagedecal
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_triagedecal
+
+- type: decal
+  id: WhiteTriagedecalbottomright
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_triagedecalbottomright
+
+- type: decal
+  id: WhiteBrokenDocstriping
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_docstriping
+
+- type: decal
+  id: WhiteCryocell2deval
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_cryocell2deval
+
+- type: decal
+  id: WhiteBrokenTriagedecalleftup
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_triagedecalleftup
+
+- type: decal
+  id: WhiteCryocell4decal
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_cryocell4decal
+
+- type: decal
+  id: WhiteTriagedecalbottom
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_triagedecalbottom
+
+- type: decal
+  id: WhiteBrokenDocdecal3
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_docdecal3
+
+- type: decal
+  id: WhiteCryocell3decal
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_cryocell3decal
+
+- type: decal
+  id: WhiteDocdecal4
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_docdecal4
+
+- type: decal
+  id: WhiteDocdecal1
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_docdecal1
+
+- type: decal
+  id: WhiteCryocell1decal
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_cryocell1decal
+
+- type: decal
+  id: WhiteBrokenTriagedecalbottom
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_broken_triagedecalbottom
+
+- type: decal
+  id: WhiteDocdecal2
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: white_docdecal2

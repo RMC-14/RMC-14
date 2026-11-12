@@ -185,6 +185,18 @@
       - RMCTablePartAlmayer
       - RMCTablePartMetal
 
+- type: entity
+  parent: RMCTablePartWoodFancy
+  id: RMCTablePartWoodFancyBlack
+  description: A kit for a nicely crafted dark stained mahogany wood surface resting on four legs. Some assembly required.
+  components:
+  - type: Sprite
+    state: fbwood
+  - type: Tag
+    tags:
+      - RMCTablePartWoodFancyBlack
+      - RMCTablePartWoodPart
+
 - type: Tag
   id: RMCTablePartAlmayer
 
@@ -199,3 +211,6 @@
 
 - type: Tag
   id: RMCTablePartWoodCarpet
+
+- type: Tag
+  id: RMCTablePartWoodFancyBlack

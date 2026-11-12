@@ -62,6 +62,14 @@
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: almayer
             doAfter: 1
+        - to: FancyBlackWood
+          steps:
+          - tag: RMCTablePartWoodFancyBlack
+            name: fancy wooden table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: fbwood
+            doAfter: 1
 
     - node: Tan
       entity: CMTable
@@ -152,6 +160,19 @@
           completed:
             - !type:SpawnPrototype
               prototype: RMCTablePartAlmayer
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 5
+              duplicateConditions: All
+
+    - node: FancyBlackWood
+      entity: RMCTableWoodenFancyBlack
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCTablePartWoodFancyBlack
               amount: 1
           steps:
             - tool: Anchoring

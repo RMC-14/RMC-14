@@ -122,6 +122,38 @@
         - ReagentId: RMCNapalmEX
           Quantity: 300
 
+- type: entity # todo rmc14: unique sprites
+  parent: RMCWeaponFL3Flamer
+  id: RMCWeaponFL3FlamerColony
+  name: Flammenwerfer 3 Heavy DE-cineration Unit
+  description: A civilian modification of the heavy incineration unit produced by the Weston Corporation and later by Weston-Yamada Corporation. Normally, these would be found on frontier colonies, for burning down forests and foliage. In this case, this seems to be a reclaimed model used by the local firefighters.
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankFlamerFL3Colony
+        insertSound: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerFL3
+
+- type: entity
+  parent: RMCTankFlamerFL3
+  id: RMCTankFlamerFL3Colony
+  name: modified FW3 heavy incinerator tank
+  description: A heavy, high capacity tank utilized by the Flammenwerfer 3 Heavy Incineration Unit. Someone has done the due diligence of somehow scrubbing out the heat-resistant WeYa logo, and removing the complement propellant gas tank- massively reducing its internal capacity for most use-cases. No telling what's inside now...
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 150
+        reagents:
+        - ReagentId: RMCNapalmUT # todo rmc14: this uses stable metallic foam
+          Quantity: 150
+
 - type: Tag
   id: RMCWeaponIncineratorFL3
 
