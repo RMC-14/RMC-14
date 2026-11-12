@@ -13,6 +13,8 @@
       role: CMJobSurvivorDoctor
       time: 252000 # 70 hours
     RMCRankCorporal: []
+  icon: "RMCJobIconSurvivorNVFirefighter"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -116,3 +118,10 @@
       - [ CMFirstAidKitFilledRobust ]
       - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
       - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorNVFirefighter
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
+    state: hudsquad_nv_firefighter

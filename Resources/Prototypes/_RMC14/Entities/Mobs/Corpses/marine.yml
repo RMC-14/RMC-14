@@ -321,7 +321,7 @@
   id: RMCGearCorpseUNMCCrewman3
   equipment:
     jumpsuit: RMCJumpsuitMarineNVEngi
-    outerClothing: RMCJumpsuitMarineNVEngi
+    outerClothing: RMCVestBrown
     belt: CMBeltUtility
     head: RMCArmorHelmetCF5Utility
     pocket1: RMCPouchElectronics
