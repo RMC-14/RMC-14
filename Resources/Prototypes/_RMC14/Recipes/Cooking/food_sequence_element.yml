@@ -17,3 +17,27 @@
     state: produce
   tags:
   - Fruit
+
+- type: foodSequenceElement
+  id: RMCFoodMeatFishGrilled
+  scale: 0.9, 0.9
+  name: rmc-food-sequence-content-fish-grilled
+  sprites:
+  - sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: grilledfish
+  tags:
+  - Fish
+  - Meat
+  - Cooked
+
+- type: foodSequenceElement
+  id: RMCFoodMeatFishGrilledBurger
+  scale: 0.9, 0.9
+  name: rmc-food-sequence-burger-content-fish-grilled
+  sprites:
+  - sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: grilledfish
+  tags:
+  - Fish
+  - Meat
+  - Cooked

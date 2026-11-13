@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -15,7 +16,7 @@ public sealed partial class ShakeableSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-
+    [Dependency] private readonly SkillsSystem _skills = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -61,9 +62,11 @@ public sealed partial class ShakeableSystem : EntitySystem
         if (!CanShake(entity, user))
             return false;
 
+        float shakeTime = _skills.GetSkillDelayMultiplier(user, entity.Comp.ShakeSkill) * (float)entity.Comp.ShakeDuration.TotalSeconds;
+
         var doAfterArgs = new DoAfterArgs(EntityManager,
             user,
-            entity.Comp.ShakeDuration,
+            shakeTime,
             new ShakeDoAfterEvent(),
             eventTarget: entity,
             target: user,

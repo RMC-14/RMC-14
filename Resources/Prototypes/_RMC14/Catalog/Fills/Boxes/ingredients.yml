@@ -19,6 +19,46 @@
     - id: FoodMeat
       amount: 7
 
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxSausage
+  name: box of sausages
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodMeatSausage
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxBacon
+  name: box of bacon
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodMeatBacon
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxChicken
+  name: box of chicken
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodMeatChicken
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxCarp
+  name: box of carp
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodMeatFish
+      amount: 7
+
 # Milk
 - type: entity
   parent: RMCBoxCardboard
@@ -41,6 +81,17 @@
       amount: 7
 
 # Condiments
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxCornOil
+  name: box of corn oil bottles
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCondimentCornOil
+      amount: 7
+
 - type: entity
   parent: RMCBoxCardboard
   id: RMCBoxEnzyme
@@ -63,12 +114,42 @@
 
 - type: entity
   parent: RMCBoxCardboard
+  id: RMCBoxPepper
+  name: box of pepper mills
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCondimentSmallPepper
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxRice
+  name: box of rice bags
+  components:
+  - type: StorageFill
+    contents:
+    - id: ReagentContainerRice
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
   id: RMCBoxSugar
   name: box of sugar
   components:
   - type: StorageFill
     contents:
     - id: RMCCondimentSugar
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxSalt
+  name: box of salt shakers
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCondimentSmallSalt
       amount: 7
 
 # Fruit and Veg
@@ -164,6 +245,16 @@
 
 - type: entity
   parent: RMCBoxCardboard
+  id: RMCBoxGarlic
+  name: box of garlic
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodGarlic
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
   id: RMCBoxLemon
   name: box of lemons
   components:
@@ -184,6 +275,16 @@
 
 - type: entity
   parent: RMCBoxCardboard
+  id: RMCBoxOnion
+  name: box of onions
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodOnion
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
   id: RMCBoxOrange
   name: box of oranges
   components:
@@ -200,6 +301,16 @@
   - type: StorageFill
     contents:
     - id: FoodPotato
+      amount: 7
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxOnionRed
+  name: box of red onions
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodOnionRed
       amount: 7
 
 - type: entity
