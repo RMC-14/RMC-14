@@ -4,6 +4,9 @@
   description: A place to store your fragile vials when you are not using them.
   id: RMCVialBox
   components:
+  - type: Tag
+    tags:
+    - VialBox
   - type: Sprite
     sprite: _RMC14/Objects/Storage/vial_box.rsi
     layers:

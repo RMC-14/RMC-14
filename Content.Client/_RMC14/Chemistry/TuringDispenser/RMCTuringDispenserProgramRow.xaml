@@ -1,0 +1,12 @@
+<controls:RMCTuringDispenserProgramRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.TuringDispenser">
+    <BoxContainer Orientation="Horizontal">
+        <PanelContainer Margin="0 0 4 0" VerticalAlignment="Center">
+            <TextureRect Name="VialIcon" Access="Public" Stretch="KeepAspectCentered" />
+            <TextureRect Name="VialFillIcon" Access="Public" Stretch="KeepAspectCentered" />
+        </PanelContainer>
+        <Label Name="ReagentLabel" Access="Public" HorizontalExpand="True" />
+        <Label Name="AmountLabel" Access="Public" />
+    </BoxContainer>
+</controls:RMCTuringDispenserProgramRow>
