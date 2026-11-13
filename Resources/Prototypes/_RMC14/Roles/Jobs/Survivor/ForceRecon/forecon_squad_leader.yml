@@ -5,7 +5,6 @@
   ranks:
     RMCRankSecondLT: []
   icon: "CMJobIconSquadLeader"
-  roleWeight: 1
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobSquadLeader

@@ -565,8 +565,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return true;
 
         var existing = 0;
-        var total = Math.Sqrt(hive.Comp.BurrowedLarva * hive.Comp.BurrowedLarvaSlotFactor);
-        total = Math.Min(total, hive.Comp.BurrowedLarva);
+        var total = hive.Comp.BurrowedLarva;
 
         var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
         var slotCount = hive.Comp.FreeSlots.ToDictionary();

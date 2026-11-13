@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
 using Content.Shared._RMC14.Rules;
@@ -146,7 +146,7 @@ public sealed partial class CMDistressSignalRuleSystem
         int initialPlayerCount)
     {
         var priorities = Enum.GetValues<JobPriority>().Length;
-        var totalSurvivors = (int)Math.Clamp((int)Math.Round(initialPlayerCount / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
+        var totalSurvivors = GetRoundstartSurvLimit(initialPlayerCount);
         var selected = 0;
 
         for (var i = priorities - 1; i >= 0; i--)
