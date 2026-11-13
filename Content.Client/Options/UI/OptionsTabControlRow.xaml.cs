@@ -53,6 +53,10 @@ public sealed partial class OptionsTabControlRow : Control
 
     private ValueList<BaseOption> _options;
 
+    // RMC14
+    internal event Action? ValuesReset;
+    // RMC14
+
     public OptionsTabControlRow()
     {
         RobustXamlLoader.Load(this);
@@ -185,6 +189,9 @@ public sealed partial class OptionsTabControlRow : Control
             option.LoadValue();
         }
 
+        // RMC14
+        ValuesReset?.Invoke();
+        // RMC14
         UpdateButtonState();
     }
 
@@ -238,6 +245,9 @@ public sealed partial class OptionsTabControlRow : Control
             option.LoadValue();
         }
 
+        // RMC14
+        ValuesReset?.Invoke();
+        // RMC14
         UpdateButtonState();
     }
 
@@ -248,6 +258,9 @@ public sealed partial class OptionsTabControlRow : Control
             option.ResetToDefault();
         }
 
+        // RMC14
+        ValuesReset?.Invoke();
+        // RMC14
         UpdateButtonState();
     }
 

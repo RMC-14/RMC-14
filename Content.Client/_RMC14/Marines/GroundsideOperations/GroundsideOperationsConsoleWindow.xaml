@@ -1,0 +1,138 @@
+<controls:GroundsideOperationsConsoleWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.GroundsideOperations"
+    xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt"
+    Title="{Loc rmc-goc-title}"
+    MinSize="890 512"
+    SetSize="890 512">
+    <crt:RMCCrtThemeScope Palette="Blue" Effects="HorizontalScanlines" BorderThickness="2">
+        <BoxContainer Orientation="Vertical" Margin="4" SeparationOverride="4">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4" VerticalExpand="True">
+                <crt:RMCCrtPanel MinWidth="168" VerticalExpand="True">
+                    <BoxContainer Orientation="Vertical" Margin="4" SeparationOverride="2">
+                        <crt:RMCCrtActionButton Name="OpenOverwatchButton" Access="Public"
+                            Text="{Loc rmc-goc-open-overwatch}" IconState="heartbeat" Variant="Navigation" MinHeight="30"
+                            IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                        <crt:RMCCrtActionButton Name="ExecutiveNavigationButton" Access="Public"
+                            Text="{Loc rmc-goc-tab-executive}" IconState="id_card" Variant="Navigation" ToggleMode="True" MinHeight="30"
+                            IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                        <crt:RMCCrtActionButton Name="EmergencyNavigationButton" Access="Public"
+                            Text="{Loc rmc-goc-tab-emergency}" IconState="warning" Variant="Navigation" ToggleMode="True" MinHeight="30"
+                            IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                        <crt:RMCCrtActionButton Name="OrdnanceNavigationButton" Access="Public"
+                            Text="{Loc rmc-goc-tab-ordnance}" IconState="cog" Variant="Navigation" ToggleMode="True" MinHeight="30"
+                            IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                        <Control VerticalExpand="True" />
+                        <crt:RMCCrtLabel Text="{Loc rmc-goc-system-version}" Tone="Muted" TextFontSize="10"
+                            HorizontalAlignment="Center" />
+                    </BoxContainer>
+                </crt:RMCCrtPanel>
+
+                <crt:RMCCrtPanel HorizontalExpand="True" VerticalExpand="True">
+                    <BoxContainer Orientation="Vertical" Margin="6" HorizontalExpand="True" VerticalExpand="True">
+                        <crt:RMCCrtTwoColumnContainer Name="ExecutivePage" Access="Public"
+                            ColumnSeparation="6" VerticalExpand="True">
+                            <BoxContainer Orientation="Vertical" MinWidth="288" HorizontalExpand="True" VerticalExpand="True"
+                                Margin="7" SeparationOverride="4">
+                                <crt:RMCCrtLabel Text="{Loc rmc-goc-groundside-title}" Heading="True" TextFontSize="11" HorizontalAlignment="Center" />
+                                <crt:RMCCrtActionButton Name="GroundAnnouncementButton" Access="Public"
+                                    Text="{Loc rmc-goc-groundside-announce}" IconState="bullhorn" Variant="Filled" MinHeight="30"
+                                    IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                                <crt:RMCCrtActionButton Name="TacticalMapButton" Access="Public"
+                                    Text="{Loc rmc-goc-tactical-map}" IconState="map" Variant="Filled" MinHeight="30"
+                                    IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                                <crt:RMCCrtSeparator MinHeight="2" Margin="0 2" />
+                                <crt:RMCCrtActionButton Name="PrimaryLandingZoneButton" Access="Public"
+                                    Text="{Loc rmc-goc-primary-lz}" IconState="home" Variant="Filled" MinHeight="30"
+                                    IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                                <crt:RMCCrtActionButton Name="EchoButton" Access="Public"
+                                    Text="{Loc rmc-goc-activate-echo}" IconState="users" Variant="Filled" MinHeight="30"
+                                    IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                                <Control VerticalExpand="True" />
+                            </BoxContainer>
+
+                            <crt:RMCCrtSeparator Orientation="Vertical" MinWidth="2" MaxWidth="2" VerticalExpand="True" />
+
+                            <BoxContainer Orientation="Vertical" MinWidth="288" HorizontalExpand="True" VerticalExpand="True"
+                                Margin="7" SeparationOverride="4">
+                                <crt:RMCCrtLabel Text="{Loc rmc-goc-ship-control-title}" Heading="True" TextFontSize="11" HorizontalAlignment="Center" />
+                                <crt:RMCCrtActionButton Name="AlertButton" Access="Public"
+                                    Text="{Loc rmc-goc-change-alert}" IconState="warning" Variant="Filled" MinHeight="30"
+                                    IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                                <crt:RMCCrtPanel Variant="Inset">
+                                    <crt:RMCCrtLabel Name="AlertStatus" Access="Public"
+                                        HorizontalAlignment="Center" Margin="5 4" TextFontSize="10" />
+                                </crt:RMCCrtPanel>
+                                <crt:RMCCrtSeparator MinHeight="2" Margin="0 2" />
+                                <crt:RMCCrtActionButton Name="ShipAnnouncementButton" Access="Public"
+                                    Text="{Loc rmc-goc-ship-announce}" IconState="bullhorn" Variant="Filled" MinHeight="30"
+                                    IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                                <crt:RMCCrtActionButton Name="HighCommandButton" Access="Public"
+                                    Text="{Loc rmc-goc-high-command}" IconState="paper_plane" Variant="Filled" MinHeight="30"
+                                    IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                                <crt:RMCCrtActionButton Name="MedalsButton" Access="Public"
+                                    Text="{Loc rmc-goc-medals}" IconState="medal" Variant="Filled" MinHeight="30"
+                                    IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                                <Control VerticalExpand="True" />
+                            </BoxContainer>
+                        </crt:RMCCrtTwoColumnContainer>
+
+                        <BoxContainer Name="EmergencyPage" Access="Public" Orientation="Vertical" SeparationOverride="7" VerticalExpand="True" Visible="False">
+                            <crt:RMCCrtLabel Text="{Loc rmc-goc-emergency-title}" Heading="True" TextFontSize="11" HorizontalAlignment="Center" />
+                            <RichTextLabel Name="EmergencyDescription" Access="Public" Text="{Loc rmc-goc-emergency-description}" StyleClasses="RMCCrtCompactText"
+                                           HorizontalAlignment="Center" />
+                            <crt:RMCCrtActionButton Name="RedAlertButton" Access="Public"
+                                Text="{Loc rmc-goc-red-alert}" IconState="warning" MinHeight="34"
+                                IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                            <crt:RMCCrtActionButton Name="GeneralQuartersButton" Access="Public"
+                                Text="{Loc rmc-goc-general-quarters}" IconState="warning" MinHeight="32"
+                                IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                            <crt:RMCCrtLabel Name="GeneralQuartersStatus" Access="Public" Tone="Warning" TextFontSize="10"
+                                HorizontalAlignment="Center" />
+                            <crt:RMCCrtActionButton Name="EvacuationButton" Access="Public"
+                                IconState="door_open" Variant="Filled" MinHeight="32"
+                                IconSize="14" ContentMargin="7 4" ContentSeparation="6" TextFontSize="10" />
+                            <!-- TODO RMC14: restore distress/ERT only after a native workflow exists. -->
+                            <Control VerticalExpand="True" />
+                        </BoxContainer>
+
+                        <BoxContainer Name="OrdnancePage" Access="Public" Orientation="Vertical" SeparationOverride="7" VerticalExpand="True" Visible="False">
+                            <crt:RMCCrtLabel Text="{Loc rmc-goc-ordnance-title}" Heading="True" TextFontSize="11" HorizontalAlignment="Center" />
+                            <crt:RMCCrtPanel Variant="Inset">
+                                <BoxContainer Orientation="Horizontal" Margin="10" SeparationOverride="11">
+                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" SeparationOverride="6">
+                                        <crt:RMCCrtLabel Text="{Loc rmc-goc-orbital-subsystem}" TextFontSize="10" />
+                                        <RichTextLabel Name="OrbitalSubsystemStatus" Access="Public" StyleClasses="RMCCrtCompactText" />
+                                        <crt:RMCCrtLabel Text="{Loc rmc-goc-warhead-status}" TextFontSize="10" />
+                                        <RichTextLabel Name="WarheadStatus" Access="Public" StyleClasses="RMCCrtCompactText" />
+                                        <crt:RMCCrtLabel Text="{Loc rmc-goc-fuel-status}" TextFontSize="10" />
+                                        <RichTextLabel Name="FuelStatus" Access="Public" StyleClasses="RMCCrtCompactText" />
+                                        <crt:RMCCrtLabel Text="{Loc rmc-goc-cannon-status}" TextFontSize="10" />
+                                        <RichTextLabel Name="CannonStatus" Access="Public" StyleClasses="RMCCrtCompactText" />
+                                    </BoxContainer>
+                                    <crt:RMCCrtPanel MinWidth="220" Variant="Inset">
+                                        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+                                            <crt:RMCCrtLabel Text="{Loc rmc-goc-ob-safety-title}" TextFontSize="10" HorizontalAlignment="Center" />
+                                            <RichTextLabel Name="OrbitalSafetyStatus" Access="Public" StyleClasses="RMCCrtCompactText" HorizontalAlignment="Center" />
+                                            <crt:RMCCrtPanel Variant="Inset" MinHeight="30">
+                                                <BoxContainer Orientation="Horizontal" Align="Center" Margin="7 4"
+                                                    SeparationOverride="6" MouseFilter="Ignore">
+                                                    <crt:RMCCrtIcon IconState="ban" Tone="Muted" SetWidth="14" SetHeight="14"
+                                                        MouseFilter="Ignore" />
+                                                    <crt:RMCCrtLabel Text="{Loc rmc-goc-keycard-required}" Tone="Muted" TextFontSize="10"
+                                                        VerticalAlignment="Center" MouseFilter="Ignore" />
+                                                </BoxContainer>
+                                            </crt:RMCCrtPanel>
+                                            <Control VerticalExpand="True" />
+                                        </BoxContainer>
+                                    </crt:RMCCrtPanel>
+                                </BoxContainer>
+                            </crt:RMCCrtPanel>
+                            <Control VerticalExpand="True" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </crt:RMCCrtPanel>
+            </BoxContainer>
+        </BoxContainer>
+    </crt:RMCCrtThemeScope>
+</controls:GroundsideOperationsConsoleWindow>
