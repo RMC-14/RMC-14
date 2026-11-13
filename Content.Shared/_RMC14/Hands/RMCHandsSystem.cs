@@ -10,6 +10,7 @@ using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
@@ -31,6 +32,7 @@ public abstract class RMCHandsSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
 
@@ -45,6 +47,7 @@ public abstract class RMCHandsSystem : EntitySystem
         SubscribeLocalEvent<ClothingComponent, GetVerbsEvent<InteractionVerb>>(OnClothingGetInteractionVerbs, after: [typeof(SharedItemSystem)]);
         SubscribeLocalEvent<ClothingComponent, InteractHandEvent>(OnClothingInteractHand, before: [typeof(SharedItemSystem)]);
         SubscribeLocalEvent<ClothingComponent, ContainerGettingInsertedAttemptEvent>(OnClothingGettingInsertedAttempt);
+        SubscribeLocalEvent<HandsComponent, ContainerIsInsertingAttemptEvent>(OnHandsInsertingAttempt);
     }
 
     private void OnXenoHandsMapInit(Entity<GiveHandsComponent> ent, ref MapInitEvent args)
@@ -211,6 +214,18 @@ public abstract class RMCHandsSystem : EntitySystem
         }
 
         args.Cancel();
+    }
+
+    private void OnHandsInsertingAttempt(Entity<HandsComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!_hands.TryGetHand((ent.Owner, ent.Comp), args.Container.ID, out _))
+            return;
+
+        if (_standing.IsDown(ent.Owner))
+            args.Cancel();
     }
 
     private bool CanStartDelayedInventoryPickup(Entity<ClothingComponent> ent, EntityUid user, HandsComponent? hands = null)
