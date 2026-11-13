@@ -94,6 +94,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCFTLCrashLand =
         CVarDef.Create("rmc.ftl_crash_land", true, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCXenoPullBlockOverride =
+        CVarDef.Create("rmc.xeno_pull_block_override", true, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCDropshipInitialDelayMinutes =
         CVarDef.Create("rmc.dropship_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
