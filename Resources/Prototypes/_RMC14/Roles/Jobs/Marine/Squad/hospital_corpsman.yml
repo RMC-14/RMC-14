@@ -150,6 +150,22 @@
       role: CMJobHospitalCorpsman
       time: 1
 
+- type: entity
+  id: RMCNewGhostHospitalCorpsman
+  abstract: true
+  components:
+  - type: GhostRole
+    name: cm-job-name-hospital-corpsman
+    description: cm-job-description-hospital-corpsman
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: default
+    job: CMHospitalCorpsman
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 1
+
 # Guidebook
 - type: entity
   parent: CMGuidebookRole
