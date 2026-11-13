@@ -251,3 +251,9 @@
         amount: 1
       - id: RMCTieHorrible
         amount: 1
+    - name: Suspenders
+      entries:
+      - id: RMCSuspendersBrown
+        amount: 1
+      - id: RMCSuspendersBlack
+        amount: 1
