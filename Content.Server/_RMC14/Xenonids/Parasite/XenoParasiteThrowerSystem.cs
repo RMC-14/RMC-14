@@ -17,6 +17,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
@@ -36,6 +37,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -97,9 +99,22 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         if (_hands.GetActiveItem((xeno, null)) is { } heldEntity &&
             HasComp<XenoParasiteComponent>(heldEntity))
         {
+
+            if (xeno.Comp.NextThrow > _timing.CurTime)
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-throw-cooldown"), xeno, xeno, PopupType.SmallCaution);
+                return;
+            }
+
+            if (TryComp<ParasiteDropCooldownComponent>(xeno, out var cooldown))
+            {
+                cooldown.NextDropTime = TimeSpan.Zero;
+                Dirty(xeno, cooldown);
+            }
+
             _hands.TryDrop(xeno.Owner);
             var coords = _transform.GetMoverCoordinates(xeno);
-            // If throw distance would be more than 4, fix it to be exactly 4
+            // If throw distance would be more than ParasiteThrowDistance, fix it to be exactly ParasiteThrowDistance
             if (coords.TryDistance(EntityManager, target, out var dis) && dis > xeno.Comp.ParasiteThrowDistance)
             {
                 var fixedTrajectory = (target.Position - coords.Position).Normalized() * xeno.Comp.ParasiteThrowDistance;
@@ -107,18 +122,17 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             }
 
             _rmcObstacleSlamming.MakeImmune(heldEntity);
-            _throw.TryThrow(heldEntity, target, user: xeno);
+            _throw.TryThrow(heldEntity, target, user: xeno, baseThrowSpeed: 20);
 
             // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle.
-            // Should amount to about 10 seconds before they attempt a leap (10 seconds stunned)
-            // Average in parity is waiting 7.5 if you're lucky on idle time which would take 10 seconds still
             if (TryComp<ParasiteAIComponent>(heldEntity, out var ai) && !_mobState.IsDead(heldEntity))
             {
-                _stun.TryStun(heldEntity, xeno.Comp.ThrownParasiteStunDuration * 2, true);
+                _stun.TryStun(heldEntity, xeno.Comp.ThrownParasiteStunDuration, true);
                 _parasite.GoActive((heldEntity, ai));
             }
 
-            _action.SetUseDelay((args.Action, args.Action), xeno.Comp.ThrownParasiteCooldown);
+            xeno.Comp.NextThrow = _timing.CurTime + xeno.Comp.ThrownParasiteCooldown;
+            Dirty(xeno);
 
             return;
         }
@@ -138,12 +152,21 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             return;
         }
 
+        if (xeno.Comp.NextRetrieve > _timing.CurTime)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-throw-cooldown"), xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
         if (RemoveParasite(xeno) is not { } newParasite)
             return;
 
         _hive.SetSameHive(xeno.Owner, newParasite);
 
         _hands.TryPickupAnyHand(xeno, newParasite);
+
+        xeno.Comp.NextRetrieve = _timing.CurTime + xeno.Comp.RetrieveParasiteCooldown;
+        Dirty(xeno);
 
         var msg = Loc.GetString("cm-xeno-throw-parasite-unstash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
         _popup.PopupEntity(msg, xeno, xeno);
@@ -220,7 +243,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             _hive.SetHive(newParasite, hive);
             _transform.DropNextTo(newParasite, xeno.Owner);
             //So they don't eat eachother before they gloriously fly into the sunset
-            _stun.TryStun(newParasite, xeno.Comp.ThrownParasiteStunDuration, true);
+            _stun.TryStun(newParasite, xeno.Comp.DropParasiteStunDuration, true);
             _throw.TryThrow(newParasite, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
         }
 
