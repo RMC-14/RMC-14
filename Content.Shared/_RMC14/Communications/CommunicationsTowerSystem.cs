@@ -136,6 +136,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, args.Actor, delay, ev, ent)
         {
             BreakOnMove = true,
+            RootEntity = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
     }

@@ -97,6 +97,7 @@ public abstract class SharedBarbedSystem : EntitySystem
                 AttemptFrequency = AttemptFrequency.EveryTick,
                 CancelDuplicate = false,
                 DuplicateCondition = DuplicateConditions.SameTarget,
+                RootEntity = true,
             };
 
             if (_doAfterSystem.TryStartDoAfter(barbDoAfter))
@@ -137,6 +138,7 @@ public abstract class SharedBarbedSystem : EntitySystem
             BreakOnMove = true,
             BreakOnDamage = true,
             NeedHand = true,
+            RootEntity = true,
         };
         _doAfterSystem.TryStartDoAfter(cutDoAfter);
     }
