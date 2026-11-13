@@ -8,7 +8,15 @@
   accessGroups:
   - ColonistSec
   ranks:
-    RMCRankCMBRiotControlOfficer: []
+    RMCRankCMBCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 630000 # 175 hours
+    RMCRankCMBSeniorDeputy:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 90000 # 25 hours
+    RMCRankCMBDeputy: []
   spawnMenuRoleName: Fiorina CMB Riot Officer (Survivor)
   icon: "RMCJobIconBureauRCO"
   hasIcon: true
@@ -42,9 +50,9 @@
   parent: RMCGearSurvivorCMBDeputy
   id: RMCGearSurvivorFiorinaRiotOfficer
   equipment:
-    jumpsuit: RMCJumpsuitRiotControl
-    outerClothing: RMCArmorPMCRiot
-    head: ArmorHelmetPMCRiotShield
+    jumpsuit: RMCSwatCMBUniform
+    outerClothing: RMCArmorPMCRiotCMB
+    head: RMCArmorHelmetM10CMBVisorSWAT
     gloves: CMHandsBlackMarine
     shoes: RMCBootsPMCFilled
     pocket2: RMCPouchMagazineLarge

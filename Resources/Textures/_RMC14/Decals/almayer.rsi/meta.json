@@ -117,6 +117,126 @@
     },
     {
       "name": "dropshiptwo9"
+    },
+    {
+      "name": "stairs_1_down"
+    },
+    {
+      "name": "stairs_2_down"
+    },
+    {
+      "name": "stairs_2_up"
+    },
+    {
+      "name": "stairs_3_up"
+    },
+    {
+      "name": "alpha_up_1"
+    },
+    {
+      "name": "alpha_up_2"
+    },
+    {
+      "name": "alpha_up_3"
+    },
+    {
+      "name": "alpha_down_1"
+    },
+    {
+      "name": "alpha_down_2"
+    },
+    {
+      "name": "alpha_down_3"
+    },
+    {
+      "name": "bravo_up_1"
+    },
+    {
+      "name": "bravo_up_2"
+    },
+    {
+      "name": "bravo_up_3"
+    },
+    {
+      "name": "bravo_down_1"
+    },
+    {
+      "name": "bravo_down_2"
+    },
+    {
+      "name": "bravo_down_3"
+    },
+    {
+      "name": "charlie_up_1"
+    },
+    {
+      "name": "charlie_up_2"
+    },
+    {
+      "name": "charlie_up_3"
+    },
+    {
+      "name": "charlie_down_1"
+    },
+    {
+      "name": "charlie_down_2"
+    },
+    {
+      "name": "charlie_down_3"
+    },
+    {
+      "name": "delta_up_1"
+    },
+    {
+      "name": "delta_up_2"
+    },
+    {
+      "name": "delta_up_3"
+    },
+    {
+      "name": "delta_down_1"
+    },
+    {
+      "name": "delta_down_2"
+    },
+    {
+      "name": "delta_down_3"
+    },
+    {
+      "name": "echo_left_1"
+    },
+    {
+      "name": "echo_left_2"
+    },
+    {
+      "name": "echo_left_3"
+    },
+    {
+      "name": "echo_right_1"
+    },
+    {
+      "name": "echo_right_2"
+    },
+    {
+      "name": "echo_right_3"
+    },
+    {
+      "name": "foxtrot_left_1"
+    },
+    {
+      "name": "foxtrot_left_2"
+    },
+    {
+      "name": "foxtrot_left_3"
+    },
+    {
+      "name": "foxtrot_right_1"
+    },
+    {
+      "name": "foxtrot_right_2"
+    },
+    {
+      "name": "foxtrot_right_3"
     }
   ]
 }

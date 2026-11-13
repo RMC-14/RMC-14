@@ -15,6 +15,7 @@
     turnDelay: 0.4
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
+    weightClass: Light
   - type: VehicleOvercharge
     speedMultiplier: 1.4
     duration: 3

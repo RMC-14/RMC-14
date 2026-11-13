@@ -24,4 +24,21 @@ public sealed partial class SynthGenerationComponent : Component
 
     [DataField]
     public int Priority;
+
+    /// <summary>
+    /// Short description shown in the generation selection dialog.
+    /// </summary>
+    [DataField]
+    public string Description = string.Empty;
+
+    /// <summary>
+    /// Sets choices, else it defaults to Gens 1,2,3
+    /// </summary>
+    [DataField]
+    public List<EntProtoId<SynthGenerationComponent>> AvailableGenerations = new()
+    {
+        "RMCSynthGenOne",
+        "RMCSynthGenTwo",
+        "RMCSynthGenThree"
+    };
 }

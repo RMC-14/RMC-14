@@ -44,6 +44,11 @@
   job: CMSquadLeader
 
 - type: trackerMode
+  id: PlatoonCommander
+  job: CMPVEPlatoonCommander
+  alert: SquadTrackerSunRiders
+
+- type: trackerMode
   id: SectionSergeant
   job: CMPVESectionSergeant
   alert: SquadTrackerSunRiders
@@ -70,6 +75,11 @@
   id: LeaderPmc
   job: RMCPMCLeader
   alert: SquadTrackerTeamLeader
+
+- type: trackerMode
+  id: CommandPmcPVE
+  job: CMPMCForceCommandPVE
+  alert: SquadTrackerPMCForceLeader # RMC14 TODO make dedicated alert
 
 - type: trackerMode
   id: LeaderPmcPVE
@@ -115,10 +125,6 @@
   job: CMProvostDeputyMarshal
 
 - type: trackerMode
-  id: ProvostChiefInspector
-  job: CMProvostChiefInspector
-
-- type: trackerMode
   id: ProvostInspector
   job: CMProvostInspector
 
@@ -133,6 +139,18 @@
 - type: trackerMode
   id: LeaderSpp
   job: RMCSPPLeader
+
+- type: trackerMode
+  id: PlatoonCommanderSPP # RMC14 TODO unique tracker alerts
+  job: RMCSPPPlatCoPVE
+
+- type: trackerMode
+  id: SectionSergeantSPP
+  job: RMCSPPSectionLeadPVE
+
+- type: trackerMode
+  id: SquadLeaderSPP
+  job: RMCSPPSquadLeadPVE
 
 - type: trackerMode
   id: FreelancerLeader
@@ -150,7 +168,17 @@
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
-  
+
+- type: trackerMode
+  id: FORECONSquadLeaderPVE
+  job: RMCFORECONPVESquadLead
+  alert: SquadTrackerRecon
+
+- type: trackerMode
+  id: FORECONAssistantSquadLeader
+  job: RMCFORECONPVEAssistantSL
+  alert: SquadTrackerRecon
+
 - type: trackerMode
   id: ParaTeamLeader
   job: RMCSurvivorParaTeamLeader
@@ -196,9 +224,9 @@
   job: CMMarineRaiderLeader
 
 - type: trackerMode
-  id: SPPAirborneSL
-  job: RMCSurvivorSPPCrashlandSL
-  alert: SquadTrackerAirborne
+  id: SPPSpetsnazSL
+  job: RMCSurvivorSPPSpetsnazTrijentSL
+  alert: SquadTrackerSpetsnaz
 
 # Humanoid component trackers
 

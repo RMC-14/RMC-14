@@ -93,6 +93,12 @@
           RMCPowerCellAPC:
             min: 1
             max: 1
+          RMCCableCoil1: 
+            min: 1
+            max: 2
+          CMRodMetal1: 
+            min: 2
+            max: 2
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -100,7 +106,7 @@
 - type: entity
   id: RMCMechPowerLoaderWreckage
   name: LU-50 Power Loader wreckage
-  description: The wreckage of a LU-50 Power Loader.
+  description: Remains of some unfortunate Power Loader. Completely unrepairable.
   components:
   - type: Corrodible
     isCorrodible: true
@@ -111,17 +117,9 @@
     layers:
     - state: wreck
   - type: Clickable
-  - type: InputMover
   - type: InteractionOutline
   - type: Damageable
     damageContainer: Inorganic
-  - type: FootstepModifier
-    footstepSoundCollection:
-      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
-  - type: Strap
-    blacklist:
-      components:
-      - Xeno
   - type: Destructible
     thresholds:
     - trigger:
