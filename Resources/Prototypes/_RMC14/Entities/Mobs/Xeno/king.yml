@@ -56,7 +56,7 @@
   - type: CMArmor
     xenoArmor: 45
     explosionArmor: 70
-  - type: InnateCommandSpeech
+  - type: StaticCommandSpeech
   - type: XenoClaws
     clawType: VerySharp
   - type: MeleeWeapon
