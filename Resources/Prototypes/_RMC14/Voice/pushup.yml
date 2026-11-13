@@ -1,0 +1,12 @@
+- type: emote
+  id: RMCPushupRoutine
+  name: rmc-emote-name-pushups
+  category: Hands
+  icon: _RMC14/Actions/pushups.rsi/pushups.png
+  whitelist:
+    components:
+    - RMCPushup
+  chatTriggers:
+  - pushup
+  - pushups
+  - push-up
