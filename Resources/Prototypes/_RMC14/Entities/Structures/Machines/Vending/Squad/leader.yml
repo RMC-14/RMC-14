@@ -46,8 +46,8 @@
         points: 15
     - name: Utilities
       entries:
-      - id: RMCWhistle
-        points: 3
+#      - id: RMCWhistle
+#        points: 3
       - id: CMFireExtinguisherPortable
         points: 3
       - id: RMCMotionDetector
@@ -330,6 +330,7 @@
     - RMCPackFlareCAS
     - RMCLaserDesignator
     - CMFireExtinguisherPortable
+    - RMCWhistle
 
 - type: entity
   parent: RMCKitBase
