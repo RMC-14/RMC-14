@@ -173,6 +173,7 @@ public sealed class CMDoorSystem : EntitySystem
         button.Comp.LastUse = time;
         button.Comp.Used = true;
         Dirty(button);
+        _rmcPower.AddOneOffEnergy(button.Owner, button.Comp.OneOffEnergy);
 
         var buttonName = button.Comp.Id ?? Name(button);
         var buttonTransform = Transform(button);

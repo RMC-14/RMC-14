@@ -19,6 +19,8 @@
 
   Aboard the Almayer, power is supplied by the [bold]S-52 Fusion Reactors[/bold]. These start fully operational and powered at the beginning of each operation, and will be completely fine if left unattended in most cases.
 
+  For emergency diagnosis, APC and SMES operation, reactor repair, fuel-cell servicing, and portable generation, read [textlink="Power and APCs" link="RMCGuidePower"].
+
     #Reloading the Orbital Cannon
 
     The bow of the Almayer houses the devastating Orbital Cannon, used to rain hellfire upon the enemies of the UNMC. Maintenance Technicians are directly responsible for maintaining this on behalf of the CIC, which is accessible via the nearby Maintenance tunnels. This should be only conducted under direct orders from the Commander of the operation to ensure the correct bomb is chambered.

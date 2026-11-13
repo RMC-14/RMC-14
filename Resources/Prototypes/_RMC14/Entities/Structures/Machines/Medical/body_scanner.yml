@@ -95,11 +95,12 @@
         hard: false
   - type: BodyScannerConsole
   - type: ApcPowerReceiver
-    powerLoad: 0 # No power usage WOT THA SOD
+    powerLoad: 0
     needsPower: true
   - type: RMCPowerReceiver
     idleLoad: 0
     activeLoad: 0
+    # CM13's scanner console checks APC power but has no configured load.
     channel: Equipment
   - type: Appearance
   - type: GenericVisualizer

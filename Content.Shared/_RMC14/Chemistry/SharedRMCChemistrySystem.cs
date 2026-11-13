@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -24,6 +25,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
@@ -338,6 +340,10 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         var storages = EntityQueryEnumerator<RMCChemicalStorageComponent>();
         while (storages.MoveNext(out var storageId, out var storage))
         {
+            var needsRecharge = !storage.Updated || storage.Energy < storage.MaxEnergy;
+            if (needsRecharge && !_power.IsPowered(storageId))
+                continue;
+
             if (time < storage.RechargeAt)
                 continue;
 
@@ -378,6 +384,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
             else
             {
                 storage.Energy = FixedPoint2.Min(storage.MaxEnergy, storage.Energy + storage.Recharge);
+                _power.AddOneOffEnergy(storageId, storage.RechargeEnergy);
             }
 
             foreach (var dispenser in _dispensers)

@@ -1,0 +1,121 @@
+<controls:RMCSmesWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Power"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title=""
+    MinSize="560 500">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BackgroundColor="#141414"
+                BorderColor="#3A3A3A"
+                BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="8">
+            <PanelContainer Name="EmpPanel" Access="Public" HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BackgroundColor="#321A18"
+                        BorderColor="#CE3E31"
+                        BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <Label Name="EmpWarning" Access="Public"
+                       Text="{Loc rmc-smes-ui-emp}"
+                       FontColorOverride="#F06A5E"
+                       Align="Center"
+                       Margin="8 5" />
+            </PanelContainer>
+
+            <PanelContainer HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BackgroundColor="#1A1A1A"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="6">
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc rmc-smes-ui-stored-energy}" StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True" />
+                        <Label Name="FlowState" Access="Public" />
+                    </BoxContainer>
+                    <ui:BlueHorizontalSeparator />
+                    <ProgressBar Name="ChargeBar" Access="Public"
+                                 HorizontalExpand="True" MinHeight="34"
+                                 MinValue="0" MaxValue="1">
+                        <Label Name="ChargeLabel" Access="Public"
+                               HorizontalAlignment="Center" Margin="0 6" />
+                    </ProgressBar>
+                </BoxContainer>
+            </PanelContainer>
+
+            <PanelContainer HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BackgroundColor="#1A1A1A"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="6">
+                    <Label Text="{Loc rmc-smes-ui-input}" StyleClasses="LabelKeyText" />
+                    <ui:BlueHorizontalSeparator />
+                    <GridContainer Columns="2" HorizontalExpand="True">
+                        <Label Text="{Loc rmc-smes-ui-mode}" MinWidth="145" FontColorOverride="#7FAAD1" />
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                            <Button Name="InputButton" Access="Public" MinWidth="100" StyleClasses="OpenBoth"
+                                    ToggleMode="True" />
+                            <Control HorizontalExpand="True" />
+                            <Label Name="InputState" Access="Public" Margin="8 4 0 0" />
+                        </BoxContainer>
+
+                        <Label Text="{Loc rmc-smes-ui-target-input}" MinWidth="145" FontColorOverride="#7FAAD1" />
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                            <Button Name="InputMinButton" Access="Public" Text="{Loc rmc-smes-ui-min}" MinWidth="48" />
+                            <SpinBox Name="InputLimit" Access="Public" MinWidth="165" Margin="4 0" />
+                            <Label Text="kW" Margin="4 4 4 0" />
+                            <Button Name="InputMaxButton" Access="Public" Text="{Loc rmc-smes-ui-max}" MinWidth="48" />
+                        </BoxContainer>
+
+                        <Label Text="{Loc rmc-smes-ui-receiving}" MinWidth="145" FontColorOverride="#7FAAD1" />
+                        <Label Name="InputActual" Access="Public" />
+                    </GridContainer>
+                </BoxContainer>
+            </PanelContainer>
+
+            <PanelContainer HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BackgroundColor="#1A1A1A"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="6">
+                    <Label Text="{Loc rmc-smes-ui-output}" StyleClasses="LabelKeyText" />
+                    <ui:BlueHorizontalSeparator />
+                    <GridContainer Columns="2" HorizontalExpand="True">
+                        <Label Text="{Loc rmc-smes-ui-mode}" MinWidth="145" FontColorOverride="#7FAAD1" />
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                            <Button Name="OutputButton" Access="Public" MinWidth="100" StyleClasses="OpenBoth"
+                                    ToggleMode="True" />
+                            <Control HorizontalExpand="True" />
+                            <Label Name="OutputState" Access="Public" Margin="8 4 0 0" />
+                        </BoxContainer>
+
+                        <Label Text="{Loc rmc-smes-ui-target-output}" MinWidth="145" FontColorOverride="#7FAAD1" />
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                            <Button Name="OutputMinButton" Access="Public" Text="{Loc rmc-smes-ui-min}" MinWidth="48" />
+                            <SpinBox Name="OutputLimit" Access="Public" MinWidth="165" Margin="4 0" />
+                            <Label Text="kW" Margin="4 4 4 0" />
+                            <Button Name="OutputMaxButton" Access="Public" Text="{Loc rmc-smes-ui-max}" MinWidth="48" />
+                        </BoxContainer>
+
+                        <Label Text="{Loc rmc-smes-ui-delivering}" MinWidth="145" FontColorOverride="#7FAAD1" />
+                        <Label Name="OutputActual" Access="Public" />
+                    </GridContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCSmesWindow>
