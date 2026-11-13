@@ -27,6 +27,8 @@
         recommended: true
       - id: RMCTesla
       - id: RMCSentryFire
+      - id: RMCM271A2BruteLauncherRigFilled
+        name: M6H-BRUTE Breaching Launcher
     - name: Handheld Defense Upgrade
       choices: { CMHandheldDefenseUpgrade: 1 }
       entries:
