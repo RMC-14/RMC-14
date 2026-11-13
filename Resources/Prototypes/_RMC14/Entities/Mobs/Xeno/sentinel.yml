@@ -11,6 +11,11 @@
   name: Sentinel
   description: A slithery, spitting kind of alien.
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoSlowingSpit ]
+      XenoPrimaryTwo: [ ActionXenoScatteredSpit ]
+      XenoPrimaryThree: [ ActionXenoParalyzingSlash ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleSentinel
