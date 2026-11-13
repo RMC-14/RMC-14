@@ -1,11 +1,9 @@
 - type: job
-  parent: CMSurvivor
+  parent: CMSurvivorScientist
   id: CMJobSurvivorMSCResearcher
   name: rmc-job-name-survivor-msc-researcher
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
-  ranks:
-    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorMSCResearcher
   accessGroups:
   - ColonistMedical

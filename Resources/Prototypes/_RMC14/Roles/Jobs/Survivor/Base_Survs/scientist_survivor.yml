@@ -5,6 +5,22 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   ranks:
+    RMCRankCivilianRegentsProfessor:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorScientist
+      time: 630000 # 175 hours
+    RMCRankCivilianProfessor:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorScientist
+      time: 252000 # 70 hours
+    RMCRankCivilianAssociateProfessor:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorScientist
+      time: 90000 # 25 hours
+    RMCRankCivilianAssistantProfessor:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorScientist
+      time: 36000 # 10 hours
     RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorScientist
   icon: "RMCJobIconGenericColonistResearcher"
