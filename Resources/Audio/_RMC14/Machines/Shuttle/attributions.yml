@@ -17,3 +17,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13, edited by Arendian"
   source: "https://github.com/cmss13-devs/cmss13/blob/d3b00586c4c4141ce1390eaed8d97e8e06fe53fa/sound/vehicles/Dropships/single_alarm_brr_dropship_1.ogg"
+
+- files: ["dropship_travel.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original sound, jumbo.wav, made by gadzooks on freesound.org, modified by AvianMaiden (github) for RMC14"
+  source: "https://freesound.org/people/gadzooks/sounds/22855/"
