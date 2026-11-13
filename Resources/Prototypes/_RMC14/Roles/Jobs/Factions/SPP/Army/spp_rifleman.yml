@@ -1,4 +1,5 @@
-﻿- type: job
+﻿# Friendly
+- type: job
   parent: CMJobBase
   id: RMCSPPRifleman
   name: rmc-job-name-spp-rifleman
@@ -18,6 +19,37 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 1
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-rifleman
+  hidden: true
+
+# Hostile/Neutral
+- type: job
+  parent: RMCSPPRifleman
+  id: RMCSPPRiflemanHostile
+  spawnMenuRoleName: SPP Conscript (Hostile)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPPHostile
     - type: Language
       spokenLanguages:
       - Russian
@@ -69,7 +101,7 @@
     description: rmc-ghost-role-information-spp-hostile-description
     rules: rmc-ghost-role-information-spp-rules
     reregister: false
-    job: RMCSPPRifleman
+    job: RMCSPPRiflemanHostile
     raffle:
       settings: short
     requirements:
