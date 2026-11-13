@@ -9,7 +9,7 @@ cmd-rmcgivecommendation-help = Usage: rmcgivecommendation <giverName> <receiver>
   commendationType: a number (use tab completion to see available types)
   citation: the reason for the award (MUST be in quotes)
   roundId: round number, defaults to current round (optional)
-  
+
   Examples:
     rmcgivecommendation "UNMC High Command" PlayerName "John Doe" medal 1 "For exceptional bravery"
     rmcgivecommendation "The Queen Mother" XenoPlayer "XX-Alpha" jelly 2 "For defending the hive"
@@ -21,6 +21,8 @@ cmd-rmcgivecommendation-invalid-type = Invalid type! Must be 'medal' or 'jelly'.
 cmd-rmcgivecommendation-invalid-award-type = Invalid '{ $type }' type! Must be 1-{ $max }.
 cmd-rmcgivecommendation-empty-citation = Citation cannot be empty!
 cmd-rmcgivecommendation-player-not-found = Player '{ $player }' not found.
+cmd-rmcgivecommendation-player-never-joined = Player '{ $player }' has never joined this server, so they cannot receive a commendation.
+cmd-rmcgivecommendation-invalid-round = Round { $round } is invalid. Must be between 1 and the current round ({ $current }).
 
 # Success
 cmd-rmcgivecommendation-success = { $award } awarded to { $player }!

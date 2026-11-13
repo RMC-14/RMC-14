@@ -34,7 +34,7 @@
 - type: entity
   parent: RMCMedalBronze
   id: RMCMedalBronzeDistinguishedConduct
-  name: distinguished conduct medal
+  name: Distinguished Conduct Medal
   description: A bronze medal awarded for distinguished conduct. Whilst a great honor, this is the most basic award given by the UNMC.
   components:
   - type: Sprite
@@ -48,7 +48,7 @@
 - type: entity
   parent: RMCMedalBronze
   id: RMCMedalBronzeHeart
-  name: bronze heart medal
+  name: Bronze Heart Medal
   description: A bronze heart-shaped medal awarded for sacrifice. It is often awarded posthumously or for severe injury in the line of duty.
   components:
   - type: Sprite
@@ -82,7 +82,7 @@
 - type: entity
   parent: RMCMedalSilver
   id: RMCMedalSilverValor
-  name: medal of valor
+  name: Medal of Valor
   description: A silver medal awarded for acts of exceptional valor. Normally given to those who outstand themselves from the ranks, either it be in Leadership skills or actions crucial to the mission success.
   components:
   - type: Sprite
@@ -116,7 +116,7 @@
 - type: entity
   parent: RMCMedalGold
   id: RMCMedalGoldExceptionalHeroism
-  name: medal of exceptional heroism
+  name: Medal of Exceptional Heroism
   description: An extremely rare golden medal awarded only by the UNMC. To receive such a medal is the highest honor and as such, very few exist.
   components:
   - type: Sprite
@@ -130,7 +130,7 @@
 - type: entity
   parent: RMCMedalGold
   id: RMCMedalHighCommandHonor
-  name: UNMC High Command Medal of honor
+  name: UNMC High Command Medal of Honor
   description: A star-shaped golden medal bestowed solely by UNMC High Command. It is not earned through valor alone, but granted by command authority for deeds that transcend recognized heroism. As the UNMC’s ultimate distinction, it eclipses every other commendation. Its recipients are known to history, not statistics.
   components:
   - type: Sprite

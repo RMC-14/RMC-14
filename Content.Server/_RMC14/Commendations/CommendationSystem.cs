@@ -1,11 +1,14 @@
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared.Database;
+using Content.Server.Administration;
+using Content.Shared.Dataset;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -15,9 +18,12 @@ namespace Content.Server._RMC14.Commendations;
 public sealed class CommendationSystem : SharedCommendationSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly CommendationManager _commendation = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRankSystem _rank = default!;
 
     public override async void GiveCommendation(
@@ -119,6 +125,149 @@ public sealed class CommendationSystem : SharedCommendationSystem
         catch (Exception e)
         {
             Log.Error($"Error saving commendation to database, giver: {giverName}, receiver: {receiverName}, round: {round}:\n{e}");
+        }
+    }
+
+    public int GetMedalCount()
+    {
+        return GetAwardableMedalIds().Count + GetSpecialMedalIds().Count;
+    }
+
+    public int GetJellyCount()
+    {
+        var regular = _prototype.Index<LocalizedDatasetPrototype>(JellyDatasetId);
+        var special = _prototype.Index<LocalizedDatasetPrototype>(JellySpecialDatasetId);
+        return regular.Values.Count + special.Values.Count;
+    }
+
+    public bool TryGetAwardInfo(CommendationType type, int awardIndex, out string awardName, out EntProtoId? protoId)
+    {
+        if (type == CommendationType.Medal)
+        {
+            var medals = GetAwardableMedalIds();
+            var specials = GetSpecialMedalIds();
+            var total = medals.Count + specials.Count;
+
+            if (awardIndex < 1 || awardIndex > total)
+            {
+                awardName = string.Empty;
+                protoId = null;
+                return false;
+            }
+
+            // Regular awards first, then special awards
+            var medalId = awardIndex <= medals.Count
+                ? medals[awardIndex - 1]
+                : specials[awardIndex - medals.Count - 1];
+
+            protoId = medalId;
+            awardName = _prototype.Index<EntityPrototype>(medalId).Name;
+            return true;
+        }
+
+        if (type == CommendationType.Jelly)
+        {
+            var regular = _prototype.Index<LocalizedDatasetPrototype>(JellyDatasetId);
+            var special = _prototype.Index<LocalizedDatasetPrototype>(JellySpecialDatasetId);
+            var regularCount = regular.Values.Count;
+            var total = regularCount + special.Values.Count;
+
+            if (awardIndex < 1 || awardIndex > total)
+            {
+                awardName = string.Empty;
+                protoId = null;
+                return false;
+            }
+
+            var locId = awardIndex <= regularCount
+                ? regular.Values[awardIndex - 1]
+                : special.Values[awardIndex - regularCount - 1];
+
+            protoId = null;
+            awardName = Loc.GetString(locId);
+            return true;
+        }
+
+        awardName = string.Empty;
+        protoId = null;
+        return false;
+    }
+
+    // Admin commendation (used by the console command and UI)
+    public async Task<string?> AdminGiveCommendation(
+        Guid adminId,
+        string adminName,
+        string giverName,
+        string receiverNameOrId,
+        string receiverCharacterName,
+        CommendationType type,
+        string awardName,
+        EntProtoId? protoId,
+        string citation,
+        int? targetRound = null)
+    {
+        citation = citation.Trim();
+        if (string.IsNullOrWhiteSpace(citation))
+            return Loc.GetString("cmd-rmcgivecommendation-empty-citation");
+
+        // IPlayerLocator supports both username and Guid
+        var located = await _playerLocator.LookupIdByNameOrIdAsync(receiverNameOrId);
+        if (located == null)
+            return Loc.GetString("cmd-rmcgivecommendation-player-not-found", ("player", receiverNameOrId));
+
+        var receiverId = located.UserId.UserId;
+
+        if (await _db.GetPlayerRecordByUserId(located.UserId) == null)
+            return Loc.GetString("cmd-rmcgivecommendation-player-never-joined", ("player", located.Username));
+
+        var currentRound = _gameTicker.RoundId;
+        var actualRound = targetRound ?? currentRound;
+
+        if (actualRound < 1 || actualRound > currentRound)
+            return Loc.GetString("cmd-rmcgivecommendation-invalid-round", ("round", actualRound), ("current", currentRound));
+
+        try
+        {
+            // Save to database
+            await _db.AddCommendation(adminId, receiverId, giverName, receiverCharacterName, awardName, citation, type, actualRound);
+
+            var commendation = new Commendation(giverName, receiverCharacterName, awardName, citation, type, actualRound);
+            _commendation.CommendationAdded(new NetUserId(adminId), new NetUserId(receiverId), commendation);
+
+            // Add to round summary only if it's for the current round
+            if (actualRound == currentRound)
+            {
+                var entry = new RoundCommendationEntry(
+                    commendation,
+                    protoId,
+                    null,
+                    // Deliberately not linked to a player entity to avoid confusing admins when the player has changed roles.
+                    receiverId.ToString());
+                RoundCommendations.Add(entry);
+            }
+
+            // Logs It
+            var typeName = type == CommendationType.Medal ? "medal" : "jelly";
+            var receiverLogin = located.Username;
+
+            _adminLog.Add(LogType.RMCMedal,
+                $"admin {adminName} gave a {typeName} '{awardName}' to {receiverLogin} (character: {receiverCharacterName}) that reads:\n{citation}");
+
+            // Send admin announcement
+            _chat.SendAdminAnnouncement(Loc.GetString("cmd-rmcgivecommendation-admin-announcement",
+                ("admin", adminName),
+                ("type", typeName),
+                ("award", awardName),
+                ("receiver", receiverLogin),
+                ("character", receiverCharacterName),
+                ("round", actualRound)));
+
+            return null;
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error in AdminGiveCommendation: {e}");
+            return (e.InnerException ?? e).Message;
         }
     }
 
