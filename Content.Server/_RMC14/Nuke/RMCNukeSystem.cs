@@ -1,5 +1,4 @@
 using Content.Server._RMC14.Power;
-using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.Sensor;
@@ -7,7 +6,9 @@ using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Nuke;
 
@@ -15,16 +16,18 @@ public sealed class RMCNukeSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly RMCGibSystem _rmcGib = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SensorTowerSystem _sensorTower = default!;
     [Dependency] private readonly RMCPowerSystem _power = default!;
 
     private readonly DamageSpecifier _damage = new() { DamageDict = { ["Blunt"] = 1e5, ["Heat"] = 1e5 } };
+    private EntityQuery<RMCApcComponent> _apc;
     private EntityQuery<RMCRepairableComponent> _repairable;
 
     public override void Initialize()
     {
         base.Initialize();
+        _apc = GetEntityQuery<RMCApcComponent>();
         _repairable = GetEntityQuery<RMCRepairableComponent>();
     }
 
@@ -58,8 +61,6 @@ public sealed class RMCNukeSystem : EntitySystem
             AddNukeTarget(uid, toDamage, toDelete);
         }
 
-        toDelete.ExceptWith(toDamage);
-
         // Mobs and repairables go through damage so death/destruction events can run before the map cleanup.
         foreach (var uid in toDamage)
         {
@@ -68,7 +69,6 @@ public sealed class RMCNukeSystem : EntitySystem
 
         foreach (var uid in toDelete)
         {
-            _rmcGib.ScatterInventoryItems(uid);
             _entity.TryQueueDeleteEntity(uid);
         }
 
@@ -92,7 +92,10 @@ public sealed class RMCNukeSystem : EntitySystem
 
     private void AddNukeTarget(EntityUid uid, HashSet<EntityUid> toDamage, HashSet<EntityUid> toDelete)
     {
-        if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid))
+        if (_mobState.IsDead(uid))
+            return;
+
+        if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid) || _apc.HasComp(uid))
             toDamage.Add(uid);
         else
             toDelete.Add(uid);
@@ -100,7 +103,12 @@ public sealed class RMCNukeSystem : EntitySystem
 
     public void NukeMap(MapId mapId)
     {
-        for (var i = 0; i < 3; i++)
+        // Do it a second time in case the first run crashes.
+        Timer.Spawn(System.TimeSpan.FromSeconds(5), () =>
+        {
             KillEverythingOnMap(mapId);
+        });
+
+        KillEverythingOnMap(mapId);
     }
 }
