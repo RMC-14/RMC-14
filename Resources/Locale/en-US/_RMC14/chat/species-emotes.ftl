@@ -3,12 +3,14 @@ rmc-emote-name-meow = Meow
 rmc-emote-name-mew = Mew
 rmc-emote-name-growl = Growl
 rmc-emote-name-purr = Purr
+rmc-emote-name-giant-lizard-flick-tongue = Flick tongue
 
 rmc-emote-hiss = hisses.
 rmc-emote-meow = meows.
 rmc-emote-mew = mews.
 rmc-emote-growl = growls.
 rmc-emote-purr = purrs.
+rmc-emote-giant-lizard-flick-tongue = flicks its tongue.
 
 rmc-emote-name-bark = Bark
 rmc-emote-name-snarl = Snarl
