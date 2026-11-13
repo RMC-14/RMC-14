@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Power;
 
@@ -24,6 +24,16 @@ public sealed partial class RMCPowerReceiverComponent : Component
     [DataField, AutoNetworkedField]
     public RMCPowerChannel Channel;
 
+    /// <summary>
+    /// Actual mode after availability of power has been taken into account.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public RMCPowerMode Mode = RMCPowerMode.Off;
+
+    /// <summary>
+    /// Mode restored when power becomes available again.
+    /// Defaults to active to preserve existing receiver behavior.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public RMCPowerMode RequestedMode = RMCPowerMode.Active;
 }

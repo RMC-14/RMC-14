@@ -916,6 +916,36 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         };
     }
 
+    /// <summary>
+    /// Sets the load mode a receiver requests while powered.
+    /// </summary>
+    public void SetReceiverMode(Entity<RMCPowerReceiverComponent?> receiver, RMCPowerMode mode)
+    {
+        if (!_powerReceiverQuery.Resolve(receiver, ref receiver.Comp, false))
+            return;
+
+        if (mode == RMCPowerMode.Off)
+            mode = RMCPowerMode.Idle;
+
+        receiver.Comp.RequestedMode = mode;
+        receiver.Comp.Mode = IsPowered(receiver) ? mode : RMCPowerMode.Off;
+        Dirty(receiver);
+        ToUpdate.Add(receiver);
+    }
+
+    /// <summary>
+    /// Adds a transient load that is consumed by the next power update for this receiver's area.
+    /// </summary>
+    public bool TryUseOneOffPower(EntityUid receiver, int amount)
+    {
+        if (_net.IsClient || amount <= 0 || !TryGetPowerArea(receiver, out var area))
+            return false;
+
+        area.Comp.OneOffLoad += amount;
+        Dirty(area);
+        return true;
+    }
+
     protected HashSet<EntityUid> GetAreaReceivers(Entity<RMCAreaPowerComponent> area, RMCPowerChannel channel)
     {
         return channel switch
