@@ -462,7 +462,7 @@ namespace Content.Server.Lathe
                         LogImpact.Low,
                         $"{ToPrettyString(args.Actor):player} queued {count} {GetRecipeName(recipe)} at {ToPrettyString(uid):lathe}");
                     //RMC14
-                    _core.CreateARESLog(uid, LogCat, (string)$"{Name(args.Actor)} queued {count} {GetRecipeName(recipe)} at a lathe.");
+                    _core.CreateARESLog(uid, LogCat, Loc.GetString("rmc-ares-log-lathe-queued", ("user", Name(args.Actor)), ("count", count), ("recipe", GetRecipeName(recipe))));
                 }
             }
             TryStartProducing(uid, component);

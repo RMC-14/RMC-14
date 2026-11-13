@@ -5,29 +5,29 @@
 
     <BoxContainer Orientation="Horizontal">
         <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" MinSize="300 0">
-            <Label Text="Available Tunnels" StyleClasses="LabelHeading" Margin="0 4"/>
+            <Label Text="{Loc 'rmc-xeno-ui-tunnel-available'}" StyleClasses="LabelHeading" Margin="0 4"/>
             <ItemList Name="SelectableTunnels" Access="Public" SelectMode="Single"
                     VerticalExpand="True" Margin="0 4" MinSize="0 300"/>
 
             <BoxContainer Orientation="Vertical" Margin="0 8">
-                <Label Text="Selected Tunnel:" StyleClasses="LabelSubHeading"/>
-                <Label Name="SelectedTunnelLabel" Access="Public" Text="None selected"
+                <Label Text="{Loc 'rmc-xeno-ui-tunnel-selected-header'}" StyleClasses="LabelSubHeading"/>
+                <Label Name="SelectedTunnelLabel" Access="Public" Text="{Loc 'rmc-xeno-ui-tunnel-none-selected'}"
                        Margin="4 2" StyleClasses="LabelSecondary" ClipText="True"
-                       ToolTip="None selected"/>
-                <Label Name="CurrentTunnelLabel" Access="Public" Text="Current: Unknown"
+                       ToolTip="{Loc 'rmc-xeno-ui-tunnel-none-selected'}"/>
+                <Label Name="CurrentTunnelLabel" Access="Public" Text="{Loc 'rmc-xeno-ui-tunnel-current-unknown'}"
                        Margin="4 2" StyleClasses="LabelSecondary" ClipText="True"
-                       ToolTip="Current: Unknown"/>
+                       ToolTip="{Loc 'rmc-xeno-ui-tunnel-current-unknown'}"/>
             </BoxContainer>
 
             <Button Name="SelectButton" Access="Public" Margin="0 4"
-                    Text="Travel to Selected Tunnel" MinSize="0 40"/>
+                    Text="{Loc 'rmc-xeno-ui-tunnel-travel'}" MinSize="0 40"/>
         </BoxContainer>
 
 
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal" Margin="0 4">
-                <Label Text="Tunnel Network" StyleClasses="LabelHeading" HorizontalExpand="True"/>
-                <CheckBox Name="ShowOnlyTunnelsCheckbox" Access="Public" Text="Show Only Tunnels" Pressed="True" Margin="8 0"/>
+                <Label Text="{Loc 'rmc-xeno-ui-tunnel-network'}" StyleClasses="LabelHeading" HorizontalExpand="True"/>
+                <CheckBox Name="ShowOnlyTunnelsCheckbox" Access="Public" Text="{Loc 'rmc-xeno-ui-tunnel-show-only-tunnels'}" Pressed="True" Margin="8 0"/>
             </BoxContainer>
 
             <controls:TacticalMapWrapper Name="TacticalMapWrapper"

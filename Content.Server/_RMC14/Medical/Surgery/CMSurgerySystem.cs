@@ -92,13 +92,13 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
         if (!_skills.HasSkill(user, ent.Comp.SkillType, ent.Comp.Skill))
         {
-            _popup.PopupEntity("You don't know how to perform surgery!", user, user);
+            _popup.PopupEntity(Loc.GetString("rmc-surgery-no-skill"), user, user);
             return;
         }
 
         if (user == args.Target)
         {
-            _popup.PopupEntity("You can't perform surgery on yourself!", user, user);
+            _popup.PopupEntity(Loc.GetString("rmc-surgery-self"), user, user);
             return;
         }
 

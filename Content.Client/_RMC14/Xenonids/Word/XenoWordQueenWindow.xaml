@@ -1,10 +1,10 @@
 ﻿<controls:XenoWordQueenWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Xenonids.Word"
-    Title="Word of the Queen"
+    Title="{Loc 'rmc-xeno-ui-word-of-the-queen-title'}"
     MinSize="300 200">
     <BoxContainer Orientation="Vertical">
         <TextEdit Name="Text" Access="Public" HorizontalExpand="True" VerticalExpand="True"/>
-        <Button Name="SendButton" Access="Public" MinHeight="35" Text="Send to the hive" StyleClasses="OpenBoth" />
+        <Button Name="SendButton" Access="Public" MinHeight="35" Text="{Loc 'rmc-xeno-ui-word-of-the-queen-send'}" StyleClasses="OpenBoth" />
     </BoxContainer>
 </controls:XenoWordQueenWindow>

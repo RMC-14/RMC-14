@@ -76,7 +76,7 @@ public sealed class JoinXenoSystem : EntitySystem
         var denyQueuing = _config.GetCVar(RMCCVars.RMCLarvaQueueRoundstartDelaySeconds);
         if (_gameTicker.RoundDuration().TotalSeconds <= denyQueuing)
         {
-            _popup.PopupEntity($"Joining a hive while observing is disabled for the first {denyQueuing} seconds of the round.", args.Performer, args.Performer);
+            _popup.PopupEntity(Loc.GetString("rmc-join-xeno-observing-disabled", ("seconds", denyQueuing)), args.Performer, args.Performer);
             return;
         }
 
@@ -93,25 +93,27 @@ public sealed class JoinXenoSystem : EntitySystem
                 var pos = _larvaQueue.GetQueuePosition(actor.PlayerSession.UserId, hiveId);
                 if (pos > 0)
                 {
-                    optionText = $"Leave Larva Queue for ({Name(hiveId)})\n[Position: {pos}]";
+                    optionText = Loc.GetString("rmc-join-xeno-leave-queue-position", ("hive", Name(hiveId)), ("position", pos));
                 }
                 else
                 {
                     var remaining = _larvaQueue.GetPreQueueTimeRemaining(actor.PlayerSession.UserId, hiveId);
                     optionText = remaining.HasValue
-                        ? $"Leave Larva Queue for ({Name(hiveId)})\n[Waiting: {remaining.Value.TotalSeconds:F0}s remaining]"
-                        : $"Leave Larva Queue for ({Name(hiveId)})";
+                        ? Loc.GetString("rmc-join-xeno-leave-queue-waiting",
+                            ("hive", Name(hiveId)),
+                            ("seconds", (int) Math.Round(remaining.Value.TotalSeconds, MidpointRounding.AwayFromZero)))
+                        : Loc.GetString("rmc-join-xeno-leave-queue", ("hive", Name(hiveId)));
                 }
             }
             else
             {
-                optionText = $"Join Larva Queue for ({Name(hiveId)})";
+                optionText = Loc.GetString("rmc-join-xeno-join-queue", ("hive", Name(hiveId)));
             }
 
             options.Add(new DialogOption(optionText, new JoinLarvaQueueEvent(GetNetEntity(hiveId))));
         }
 
-        _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Hives");
+        _dialog.OpenOptions(ent, Loc.GetString("rmc-join-xeno-dialog-title"), options, Loc.GetString("rmc-join-xeno-dialog-description"));
     }
 
     public bool CanJoinXeno(EntityUid user)

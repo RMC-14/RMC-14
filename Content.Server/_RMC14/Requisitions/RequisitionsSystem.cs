@@ -132,7 +132,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
         _core.CreateARESLog(computer.Owner,
             LogCat,
-            (string)$"{Name(actor)} bought {prototype.Name} for {order.Cost}$");
+            Loc.GetString("rmc-ares-log-requisitions-bought", ("user", Name(actor)), ("item", prototype.Name), ("cost", order.Cost)));
     }
 
     private void OnPlatform(Entity<RequisitionsComputerComponent> computer, ref RequisitionsPlatformMsg args)
@@ -179,9 +179,9 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         Dirty(elevator);
 
         if (nextMode == Raising)
-            _core.CreateARESLog(computer.Owner, LogCat, (string)$"{Name(args.Actor)} raised the requisitions elevator");
+            _core.CreateARESLog(computer.Owner, LogCat, Loc.GetString("rmc-ares-log-requisitions-raised", ("user", Name(args.Actor))));
         if (nextMode == Lowering)
-            _core.CreateARESLog(computer.Owner, LogCat, (string)$"{Name(args.Actor)} lowered the requisitions elevator");
+            _core.CreateARESLog(computer.Owner, LogCat, Loc.GetString("rmc-ares-log-requisitions-lowered", ("user", Name(args.Actor))));
     }
 
     private Entity<RequisitionsAccountComponent> GetAccount()

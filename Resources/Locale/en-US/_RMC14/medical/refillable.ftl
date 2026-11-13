@@ -15,3 +15,5 @@ rmc-reagent-pouch-examine-contains = This {$target} contains: {$reagents}
 rmc-reagent-pouch-examine-empty = This {$target} contains: No reagents
 
 rmc-smart-refill-not-enough = {CAPITALIZE(THE($tank))} does not contain the required chemicals.
+
+cm-refillable-solution-examine = [color=cyan]This can be refilled by clicking on a medical vendor with it![/color]

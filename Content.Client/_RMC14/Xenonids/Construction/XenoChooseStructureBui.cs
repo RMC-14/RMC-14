@@ -58,12 +58,12 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
                         displayId = queenVariant;
                         displayName = queenStructure.Name;
                     }
-                    displayName += " (0 plasma)";
+                    displayName = Loc.GetString("rmc-xeno-construction-choose-cost", ("structure", displayName), ("cost", 0));
                 }
                 else
                 {
                     if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)
-                        displayName += $" ({cost} plasma)";
+                        displayName = Loc.GetString("rmc-xeno-construction-choose-cost", ("structure", displayName), ("cost", cost));
                 }
 
                 control.Set(displayName, _sprite.Frame0(_prototype.Index(displayId)));

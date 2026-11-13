@@ -1140,14 +1140,14 @@ public sealed partial class HardpointSystem : EntitySystem
 
         if (usedWelder && isFrame && ent.Comp.Integrity >= weldCap - ent.Comp.FrameRepairEpsilon)
         {
-            _popup.PopupClient("Finish tightening the frame with a wrench.", ent.Owner, args.User, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-vehicle-hardpoint-frame-finish-wrench"), ent.Owner, args.User, PopupType.SmallCaution);
             args.Handled = true;
             return;
         }
 
         if (usedWrench && ent.Comp.Integrity < weldCap - ent.Comp.FrameRepairEpsilon)
         {
-            _popup.PopupClient("Weld the frame before tightening it.", ent.Owner, args.User, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-vehicle-hardpoint-frame-weld-first"), ent.Owner, args.User, PopupType.SmallCaution);
             args.Handled = true;
             return;
         }

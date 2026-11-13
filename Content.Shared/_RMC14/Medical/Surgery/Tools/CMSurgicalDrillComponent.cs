@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.Medical.Surgery.Tools;
 [Access(typeof(SharedCMSurgerySystem))]
 public sealed partial class CMSurgicalDrillComponent : Component, ICMSurgeryToolComponent
 {
-    public string ToolName => "a surgical drill";
+    public LocId ToolName => "rmc-surgery-tool-surgical-drill";
 }

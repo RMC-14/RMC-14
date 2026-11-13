@@ -26,3 +26,18 @@ rmc-evacuation-xeno-progress-75 = The talls are three quarters of the way toward
 rmc-evacuation-xeno-progress-50 = The talls are half way towards their goals.
 rmc-evacuation-xeno-progress-25 = The talls are a quarter of the way towards their goals.
 rmc-evacuation-xeno-progress-disable = {$message} Disable the following areas: {$areas}
+
+### Escape pod console
+rmc-evacuation-computer-title = Escape Pod Controller
+rmc-evacuation-computer-information = [bold]Information display[/bold]
+rmc-evacuation-computer-controls = [bold]Pod controls[/bold]
+rmc-evacuation-computer-status-no-evacuation = Escape Pod Status: NO EVACUATION
+rmc-evacuation-computer-status-delayed = Escape Pod Status: DELAYED
+rmc-evacuation-computer-status-standing-by = Escape Pod Status: STANDING BY
+rmc-evacuation-computer-status-travelling = Escape Pod Status: TRAVELLING
+rmc-evacuation-computer-status-crashed = Escape Pod Status: CRASHED
+rmc-evacuation-computer-hatch-secured = Docking Hatch: SECURED
+rmc-evacuation-computer-hatch-unsecured = Docking Hatch: UNSECURED
+rmc-evacuation-computer-unlock-door = Unlock door
+rmc-evacuation-computer-manual-eject = Manual eject
+rmc-evacuation-computer-delay-launch = Delay launch

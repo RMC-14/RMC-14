@@ -1021,7 +1021,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
                 IncludeRangedXenoBlips(mapId, map, map.LastUpdateMarineBlips);
 
-                _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
+                _marineAnnounce.AnnounceARESStaging(user, Loc.GetString("rmc-tacmap-updated-marine"), sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
 
@@ -1031,7 +1031,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 map.XenoLabels = new Dictionary<Vector2i, string>(labels);
                 map.LastUpdateXenoBlips = map.XenoBlips.ToDictionary();
                 map.LastUpdateXenoStructureBlips = map.XenoStructureBlips.ToDictionary();
-                _xenoAnnounce.AnnounceSameHive(user, "The Xenonid tactical map has been updated.", sound);
+                _xenoAnnounce.AnnounceSameHive(user, Loc.GetString("rmc-tacmap-updated-xeno"), sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the xenonid tactical map for {ToPrettyString(mapId)}");
             }
 

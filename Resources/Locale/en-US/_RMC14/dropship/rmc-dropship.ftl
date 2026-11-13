@@ -1,6 +1,8 @@
 ﻿rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another {$minutes} minutes before trying again.
 rmc-dropship-pre-hijack = This terminal won't be operational for another {$minutes} minutes.
 rmc-dropship-invalid-hijack = Lights flash from the terminal but you can't comprehend their meaning.
+rmc-dropship-hijack-title = Dropship Hijack
+rmc-dropship-hijack-header = [bold]Where to 'land'?[/bold]
 rmc-dropship-terminal-clueless = You stare cluelessly at the {$terminal}.
 rmc-dropship-no-destinations-nearby = There are no dropship destinations near you!
 rmc-dropship-already-incoming = There is already a dropship coming here!
@@ -11,6 +13,10 @@ rmc-dropship-none-available = There are no available dropships! Wait a moment.
 rmc-dropship-no-remote-control = This dropship does not have remote-control enabled.
 rmc-dropship-busy = This dropship is currently busy. Please try again later.
 rmc-dropship-now-on-its-way = This dropship is now on its way.
+rmc-dropship-terminal-title = Dropship Terminal
+rmc-dropship-terminal-summon = Summon
+rmc-dropship-xeno-call-unknown-location = Unknown
+rmc-dropship-xeno-call-announcement = The Queen has commanded the metal bird to the hive at {$location}
 
 rmc-dropship-weapons-title = Weapons Console
 
@@ -59,6 +65,9 @@ rmc-dropship-weapons-disable = DISABLE
 rmc-dropship-weapons-deploy = DEPLOY
 rmc-dropship-weapons-retract = RETRACT
 rmc-dropship-weapons-auto-deploy = AUTO-DEPLOY
+rmc-dropship-weapons-medevac = Medevac
+rmc-dropship-weapons-fulton = Fulton
+rmc-dropship-weapons-spotlight = Spotlight
 
 rmc-dropship-weapons-offset-calibration = Camera
   Offset
@@ -166,3 +175,33 @@ rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
     Ammo: {$current} / {$max}
 
 rmc-dropship-launch-alarm-xeno-shutdown = We slash at {$console}, silencing its squawking!
+
+rmc-dropship-nav-title = Flight Computer
+rmc-dropship-nav-flight-controls = Flight Controls
+rmc-dropship-nav-door-controls = Door Controls
+rmc-dropship-nav-remote-control = Remote Control:
+rmc-dropship-nav-launch-alarm = Launch Announcement Alarm
+rmc-dropship-nav-flyby = Flyby
+rmc-dropship-nav-destination-primary = {$name} (Primary)
+rmc-dropship-nav-launch-in-progress = Launch in progress
+rmc-dropship-nav-launching-in = Launching in T-{$time}s to {$destination}
+rmc-dropship-nav-in-flight = In flight: {$destination}
+rmc-dropship-nav-time-until-destination = Time until destination: T-{$time}s
+rmc-dropship-nav-final-approach = Final Approach: {$destination}
+rmc-dropship-nav-time-until-landing = Time until landing: T-{$time}s
+rmc-dropship-nav-refueling = Refueling in progress
+rmc-dropship-nav-ready-in = Ready to launch in T-{$time}s
+rmc-dropship-nav-enabled = Enabled
+rmc-dropship-nav-disabled = Disabled
+rmc-dropship-nav-cancel = Cancel
+rmc-dropship-nav-launch = Launch
+rmc-dropship-nav-lockdown = Lockdown
+rmc-dropship-nav-lift-lockdown = Lift Lockdown
+rmc-dropship-nav-lock-aft = Lock Aft
+rmc-dropship-nav-unlock-aft = Unlock Aft
+rmc-dropship-nav-lock-port = Lock Port
+rmc-dropship-nav-unlock-port = Unlock Port
+rmc-dropship-nav-lock-starboard = Lock Starboard
+rmc-dropship-nav-unlock-starboard = Unlock Starboard
+rmc-dropship-nav-start-alarm = Start Alarm
+rmc-dropship-nav-stop-alarm = Stop Alarm

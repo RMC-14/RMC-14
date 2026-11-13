@@ -579,13 +579,13 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             if (oldWeeds.Comp.IsSource)
             {
-                _popup.PopupClient("There's a pod here already!", oldWeeds, xeno, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-node-already"), oldWeeds, xeno, PopupType.SmallCaution);
                 return false;
             }
 
             if (oldWeeds.Comp.BlockOtherWeeds)
             {
-                _popup.PopupClient("These weeds are too strong to plant a node on!",
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-too-strong"),
                     oldWeeds,
                     xeno,
                     PopupType.SmallCaution);
@@ -595,7 +595,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         if (limitDistance && !HasWeedsNearby(grid, coordinates))
         {
-            _popup.PopupClient("We can only plant weed nodes near other weed nodes our hive owns!",
+            _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-need-nearby-node"),
                 popupAt ?? xeno.ToCoordinates(),
                 xeno,
                 PopupType.SmallCaution);
