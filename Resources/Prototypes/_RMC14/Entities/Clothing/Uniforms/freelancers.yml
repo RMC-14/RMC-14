@@ -8,6 +8,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+  - type: Tag
+    tags:
+    - RMCUniformFreelancer
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -19,6 +22,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/blueshirt_tanpants.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/blueshirt_tanpants.rsi
+  - type: Tag
+    tags:
+    - RMCUniformFreelancer
 
 - type: entity
   parent: RMCJumpsuitFreelancerBluePants
