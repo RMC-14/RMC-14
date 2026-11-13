@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -28,13 +28,13 @@ public sealed partial class RMCChemicalDispenserComponent : Component
     public ProtoId<ReagentPrototype>[] Reagents =
     [
         "RMCAluminum", "RMCCarbon", "RMCChlorine", "RMCCopper", "RMCEthanol", "RMCFluorine",
-        "RMCHydrogen", "RMCIron", "RMCLithium", "RMCMercury", "RMCNitrogen", "RMCOxygen",
+        "RMCHydrogen", "RMCIron", "RMCLithium", "RMCMercury", "RMCNitrogen", "Nutriment", "RMCOxygen",
         "RMCPhosphorus", "RMCPotassium", "RMCRadium", "RMCSilicon", "RMCSodium", "RMCSugar",
         "RMCSulfur", "RMCSulphuricAcid", "Water",
     ];
 
     [DataField, AutoNetworkedField]
-    public HashSet<ProtoId<ReagentPrototype>> FreeReagents = ["Water"];
+    public HashSet<ProtoId<ReagentPrototype>> FreeReagents = ["Nutriment", "Water"];
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 DispenseSetting = 5;
