@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: CMProvostInspector
   name: rmc-job-name-corp-provost-inspector
@@ -75,7 +75,6 @@
     gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
-    belt: RMCBeltHolsterPistolHandcannonFilled
     pocket1: RMCUniversalRecorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
 
