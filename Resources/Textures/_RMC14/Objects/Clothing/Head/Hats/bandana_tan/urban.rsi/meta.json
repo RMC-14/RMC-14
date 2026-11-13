@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/cmss13-devs/cmss13/blob/090a692ce28563775eb087083d36cc51847448c2/icons/obj/items/clothing/hats/hats_by_map/urban.dmi, https://github.com/cmss13-devs/cmss13/blob/090a692ce28563775eb087083d36cc51847448c2/icons/mob/humans/onmob/clothing/head/hats_by_map/urban.dmi, south sprite modified by @IceNoobXD on Github",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    }
+  ]
+}

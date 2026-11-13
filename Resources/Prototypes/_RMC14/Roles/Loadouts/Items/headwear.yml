@@ -126,3 +126,27 @@
   storage:
     back:
     - RMCHeadRoyalHeadset
+
+- type: loadout
+  id: HeadDuragRMC
+  cost: 2
+  equipment:
+    head: RMCHeadDurag
+
+- type: loadout
+  id: HeadDuragBlackRMC
+  cost: 2
+  equipment:
+    head: RMCHeadDuragBlack
+
+- type: loadout
+  id: HeadBandanaRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBandana
+
+- type: loadout
+  id: HeadBandanaTanRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBandanaTan
