@@ -1,0 +1,26 @@
+using Content.Server._RMC14.Announce;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Egg;
+
+namespace Content.Server._RMC14.Xenonids.Ovipositor;
+
+public sealed class XenoOvipositorHiveNotifySystem : EntitySystem
+{
+    [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<XenoComponent, XenoOvipositorChangedEvent>(OnQueenChangedOvi);
+    }
+
+    private void OnQueenChangedOvi(Entity<XenoComponent> queen, ref XenoOvipositorChangedEvent args)
+    {
+        var message = args.Attached
+            ? "rmc-xeno-queen-attach-ovipositor"
+            : "rmc-xeno-queen-shed-ovipositor";
+
+        _xenoAnnounce.AnnounceSameHive(queen.Owner, Loc.GetString(message));
+    }
+}
