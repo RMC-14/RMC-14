@@ -1,7 +1,5 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
-using Content.Shared._RMC14.Atmos;
-using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
@@ -23,13 +21,11 @@ using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Inventory;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -43,7 +39,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
-public sealed class XenoSpitSystem : EntitySystem
+public sealed partial class XenoSpitSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
@@ -72,9 +68,6 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
-    private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
-    private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
-
     private EntityQuery<ProjectileComponent> _projectileQuery;
 
     public override void Initialize()
@@ -92,7 +85,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
         SubscribeLocalEvent<XenoActiveChargingSpitComponent, ComponentStartup>(OnActiveChargingSpitAdded);
         SubscribeLocalEvent<XenoActiveChargingSpitComponent, ComponentRemove>(OnActiveChargingSpitRemove);
-        SubscribeLocalEvent<XenoActiveChargingSpitComponent, CMGetArmorEvent>(OnActiveChargingSpitGetArmor);
+        SubscribeLocalEvent<XenoActiveChargingSpitComponent, CMGetArmorEvent>(OnActiveChargingSpitGetArmor, after: [typeof(CMArmorSystem)]);
         SubscribeLocalEvent<XenoActiveChargingSpitComponent, RefreshMovementSpeedModifiersEvent>(OnActiveChargingSpitRefreshSpeed);
         SubscribeLocalEvent<XenoActiveChargingSpitComponent, XenoGetSpitProjectileEvent>(OnActiveChargingSpitGetProjectile);
 
@@ -107,11 +100,7 @@ public sealed class XenoSpitSystem : EntitySystem
         SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, ProjectileHitEvent>(OnShieldOnHit, after: [typeof(CMClusterGrenadeSystem)]);
         SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, CMClusterSpawnedEvent>(OnShieldOnHitClusterSpawned);
 
-        SubscribeLocalEvent<UserAcidedComponent, MapInitEvent>(OnUserAcidedMapInit);
-        SubscribeLocalEvent<UserAcidedComponent, ComponentRemove>(OnUserAcidedRemove);
-        SubscribeLocalEvent<UserAcidedComponent, ShowFireAlertEvent>(OnUserAcidedShowFireAlert);
-        SubscribeLocalEvent<UserAcidedComponent, VaporHitEvent>(OnUserAcidedVaporHit);
-        SubscribeLocalEvent<UserAcidedComponent, MobStateChangedEvent>(OnUserAcidedMobStateChanged);
+        InitializeAcid();
 
         SubscribeLocalEvent<InventoryComponent, HitBySlowingSpitEvent>(_inventory.RelayEvent);
 
@@ -423,118 +412,6 @@ public sealed class XenoSpitSystem : EntitySystem
         }
     }
 
-    private void OnUserAcidedMapInit(Entity<UserAcidedComponent> ent, ref MapInitEvent args)
-    {
-        ent.Comp.ExpiresAt = _timing.CurTime + ent.Comp.Duration;
-        Dirty(ent);
-        UpdateAppearance(ent);
-
-        _alerts.ShowAlert(ent, FireAlert);
-    }
-
-    private void OnUserAcidedRemove(Entity<UserAcidedComponent> ent, ref ComponentRemove args)
-    {
-        _appearance.SetData(ent, UserAcidedVisuals.Acided, UserAcidedEffects.None);
-
-        if (TryComp(ent, out FlammableComponent? flammable) &&
-            flammable.FireStacks > 0)
-        {
-            return;
-        }
-
-        _alerts.ClearAlert(ent, FireAlert);
-    }
-
-    private void OnUserAcidedShowFireAlert(Entity<UserAcidedComponent> ent, ref ShowFireAlertEvent args)
-    {
-        args.Show = true;
-    }
-
-    private void OnUserAcidedVaporHit(Entity<UserAcidedComponent> ent, ref VaporHitEvent args)
-    {
-        if (ent.Comp.AllowVaporHitAfter > _timing.CurTime)
-            return;
-
-        var solEnt = args.Solution;
-        foreach (var (_, solution) in _solution.EnumerateSolutions((solEnt, solEnt)))
-        {
-            if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
-                continue;
-
-            if (--ent.Comp.ResistsNeeded <= 0)
-            {
-                RemCompDeferred<UserAcidedComponent>(ent);
-            }
-            else
-            {
-                ent.Comp.AllowVaporHitAfter = _timing.CurTime + ent.Comp.ExtinguishGracePeriod;
-                Dirty(ent);
-            }
-
-            break;
-        }
-    }
-
-    private void OnUserAcidedMobStateChanged(Entity<UserAcidedComponent> ent, ref MobStateChangedEvent args)
-    {
-        if (args.NewMobState == MobState.Dead)
-            RemCompDeferred<UserAcidedComponent>(ent);
-    }
-
-    public void SetAcidCombo(Entity<UserAcidedComponent?> acided, TimeSpan duration, DamageSpecifier? damage, TimeSpan paralyze, int resists)
-    {
-        if (!Resolve(acided, ref acided.Comp, false))
-            return;
-
-        if (acided.Comp.Combo)
-            return;
-
-        acided.Comp.Combo = true;
-
-        if (damage != null)
-            acided.Comp.Damage = damage;
-
-        if (duration != default)
-        {
-            var oldDuration = acided.Comp.Duration;
-            acided.Comp.Duration = duration;
-            acided.Comp.ExpiresAt = acided.Comp.ExpiresAt - oldDuration + duration;
-        }
-
-        if (paralyze != default)
-        {
-            _stun.TryParalyze(acided.Owner, paralyze, true);
-            acided.Comp.ResistsNeeded = resists;
-        }
-
-        Dirty(acided);
-        UpdateAppearance((acided, acided.Comp));
-    }
-
-    private void UpdateAppearance(Entity<UserAcidedComponent> acided)
-    {
-        var effect = acided.Comp.Combo ? UserAcidedEffects.Enhanced : UserAcidedEffects.Normal;
-        _appearance.SetData(acided, UserAcidedVisuals.Acided, effect);
-    }
-
-    public void Resist(Entity<UserAcidedComponent?> player)
-    {
-        if (!Resolve(player, ref player.Comp, false))
-            return;
-
-        if (!_actionBlocker.CanInteract(player, null))
-            return;
-
-        _stun.TryParalyze(player.Owner, player.Comp.ResistDuration, true);
-        if (--player.Comp.ResistsNeeded <= 0)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-acid-resist"), player, player);
-            RemCompDeferred<UserAcidedComponent>(player);
-        }
-        else
-            _popup.PopupEntity(Loc.GetString("rmc-acid-resist-partial"), player, player);
-    }
-
     private void ApplyAcidStacks(EntityUid target, int amount, int max, DamageSpecifier? damage, EntityWhitelist? whitelist)
     {
         if (!_entityWhitelist.IsWhitelistPassOrNull(whitelist, target))
@@ -600,21 +477,7 @@ public sealed class XenoSpitSystem : EntitySystem
             }
         }
 
-        var acidedQuery = EntityQueryEnumerator<UserAcidedComponent>();
-        while (acidedQuery.MoveNext(out var uid, out var acided))
-        {
-            if (time >= acided.ExpiresAt)
-            {
-                RemCompDeferred<UserAcidedComponent>(uid);
-                continue;
-            }
-
-            if (time < acided.NextDamageAt)
-                continue;
-
-            acided.NextDamageAt = time + acided.DamageEvery;
-            _damageable.TryChangeDamage(uid, acided.Damage, armorPiercing: acided.ArmorPiercing);
-        }
+        DoAcidTicks(time);
 
         var stacks = EntityQueryEnumerator<VictimXenoAcidStacksComponent>();
         while (stacks.MoveNext(out var uid, out var victim))
