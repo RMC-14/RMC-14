@@ -172,6 +172,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
             var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
             activeInvisibility.Opacity = comp.Opacity;
+            activeInvisibility.GreyFactor = comp.GreyFactor;
+            activeInvisibility.DarkFactor = comp.DarkFactor;
             activeInvisibility.DisableMobCollision = true;
             Dirty(user, activeInvisibility);
 

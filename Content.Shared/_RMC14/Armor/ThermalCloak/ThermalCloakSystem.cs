@@ -128,6 +128,8 @@ public sealed class ThermalCloakSystem : EntitySystem
         {
             var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
             activeInvisibility.Opacity = ent.Comp.Opacity;
+            activeInvisibility.GreyFactor = ent.Comp.GreyFactor;
+            activeInvisibility.DarkFactor = ent.Comp.DarkFactor;
             Dirty(user, activeInvisibility);
 
             ent.Comp.Enabled = true;
