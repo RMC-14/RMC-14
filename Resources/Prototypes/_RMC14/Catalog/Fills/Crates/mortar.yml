@@ -37,3 +37,13 @@
     contents:
     - id: RMCMortarShellFlare
       amount: 6
+
+- type: entity
+  parent: RMCCrateMortarAmmo
+  id: RMCCrateMortarShellFrag
+  name: M402 mortar shells crate (x6 Frag)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMortarShellFrag
+      amount: 6

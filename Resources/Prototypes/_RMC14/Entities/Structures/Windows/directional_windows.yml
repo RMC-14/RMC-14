@@ -28,6 +28,10 @@
     state: window
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: ExplosionResistance
+    worn: false
+    damageCoefficientOverrides:
+      RMCMortarFrag: 10
   - type: Destructible
     thresholds:
     - trigger:
