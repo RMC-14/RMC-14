@@ -629,6 +629,11 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCGMRequestSoundMuted =
         CVarDef.Create("rmc.gm_request_sound_muted", false,  CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    /// <summary>
+    ///     if players can join as a fax responder from the lobby
+    /// </summary>
+    public static readonly CVarDef<bool> RMCFaxRespondersEnabled =
+        CVarDef.Create("rmc.fax_responders_enabled", true, CVar.REPLICATED | CVar.SERVER);
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 }
