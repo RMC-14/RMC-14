@@ -1,6 +1,7 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Speech.Components;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
+using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
 
 namespace Content.Server.Speech.EntitySystems;
@@ -20,6 +21,11 @@ public sealed class ListeningSystem : EntitySystem
 
     private void OnSpeak(EntitySpokeEvent ev)
     {
+        // RMC14 - Direct intercom speech is routed by RMCIntercomSystem, not ambient microphones.
+        if (ev.Channel?.ID == RMCIntercomConstants.Channel.Id)
+            return;
+        // RMC14
+
         PingListeners(ev.Source, ev.Message, ev.ObfuscatedMessage);
     }
 
