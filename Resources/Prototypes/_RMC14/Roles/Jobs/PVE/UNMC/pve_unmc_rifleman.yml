@@ -3,6 +3,8 @@
   id: CMPVERifleman
   playTimeTracker: CMJobPVERifleman
   ranks:
+    RMCRankLanceCorporal: []
+    RMCRankPrivateFirstClass: []
     RMCRankPrivate: []
   spawnMenuRoleName: Sun Rider Rifleman (PVE)
   supervisors: cm-job-supervisors-secserg
