@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/cigarettes.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/cigarettes.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/smoking_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/smoking_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -22,14 +22,22 @@
     {
       "name": "matchbox-3"
     },
-	{
+    {
       "name": "matchbox-4"
     },
-	{
+    {
       "name": "matchbox-5"
     },
-	{
+    {
       "name": "matchbox-6"
+    },
+    {
+      "name": "matchbox-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "matchbox-inhand-left",
+      "directions": 4
     }
   ]
 }
