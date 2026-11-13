@@ -21,6 +21,9 @@
       time: 50 # seconds
       dps: 7.2
       expendableLightDps: 2.5
+    deferBlacklist:
+      components:
+      - MobState
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -36,16 +39,7 @@
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
   description: Melts down a structure or item over time.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
       strength: Weak
@@ -60,16 +54,7 @@
   name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
   description: Melts down a structure or item over time.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
@@ -84,16 +69,7 @@
   name: Strong Corrosive Acid (100 acid)
   description: Melts down barricades or items over time. You cannot melt structures.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
@@ -143,6 +119,8 @@
   - type: RMCDazeableAction
   - type: ActionInRangeUnobstructed
     range: 2.5
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoTailSlam
@@ -382,6 +360,8 @@
   - type: WorldTargetAction
     event: !type:XenoSlowingSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoScatteredSpit
@@ -403,6 +383,8 @@
   - type: WorldTargetAction
     event: !type:XenoScatteredSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -433,6 +415,8 @@
   - type: WorldTargetAction
     event: !type:XenoSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoSpitPraetorian
@@ -617,8 +601,14 @@
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
+    priorityWhitelist:
+      components:
+      - Xeno
+      - Marine   
   - type: WorldTargetAction
     event: !type:XenoBoneChipsActionEvent
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -747,6 +737,12 @@
     range: 2
   - type: EntityTargetAction
     event: !type:XenoGutActionEvent
+    whitelist:
+      components:
+      - Body
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: ActionXenoStomp
@@ -1079,6 +1075,7 @@
     ids:
     - ActionXenoCleaveFling
     cooldown: 12
+  - type: XenoOffensiveAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1112,6 +1109,7 @@
     ids:
     - ActionXenoCleaveRoot
     cooldown: 12
+  - type: XenoOffensiveAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1239,6 +1237,8 @@
   - type: WorldTargetAction
     event: !type:XenoTailSeizeActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
