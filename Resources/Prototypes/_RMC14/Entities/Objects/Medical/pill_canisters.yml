@@ -80,6 +80,7 @@
     nestedWhitelist:
       tags:
       - RMCBeltMedical
+      - RMCPouchMedical
   - type: RMCSmartFridgeInsertable
     category: Pills
   - type: PhysicalComposition
