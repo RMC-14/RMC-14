@@ -87,7 +87,9 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         if (_window?.HideAreasButton == null)
             return;
 
-        _window.HideAreasButton.Text = _hideAreas ? "Show Areas" : "Hide Areas";
+        _window.HideAreasButton.Text = Loc.GetString(_hideAreas
+            ? "rmc-ui-intel-show-areas"
+            : "rmc-ui-intel-hide-areas");
     }
 
     private void ApplyFilter(string query)
@@ -170,8 +172,8 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
             HorizontalExpand = true,
         };
 
-        const string separator = " in ";
-        var splitIndex = clue.LastIndexOf(separator, StringComparison.OrdinalIgnoreCase);
+        var separator = $" {Loc.GetString("rmc-ui-intel-clue-area-preposition")} ";
+        var splitIndex = clue.IndexOf(separator, StringComparison.OrdinalIgnoreCase);
 
         if (splitIndex < 0)
         {
