@@ -182,3 +182,60 @@
     unequipSound: /Audio/Mecha/mechmove03.ogg
 
 # RMC14 TODO: Port the other colored hardsuits (Orange, Yellow, Cyan, Red)
+
+# Compression
+- type: entity
+  parent: RMCBaseArmor
+  id: RMCSuitCivilianCompressionSuit
+  name: civilian-issued compression suit
+  description: A heavy, bulky civilian space suit, fitted with armored plates.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/compression.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/compression.rsi
+  - type: Tag
+    tags:
+    - Hardsuit
+  - type: CMArmor
+    bio: 50 # RMC14 TODO: 50 rads aswell
+    melee: 15
+    bullet: 15
+    explosionArmor: 15
+  - type: ClothingSpeedModifier
+    walkModifier: .5
+    sprintModifier: .5
+  - type: CMHardArmor
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+
+- type: entity
+  parent: RMCHelmetBase
+  id: RMCHelmetCivilianCompressionSuit
+  name: civilian-issued compression helmet
+  description: A heavy space helmet, designed to be coupled with the civilian-issued compression suit. Feels like you could hotbox in here.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/compression.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/compression.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: CMArmor
+    bio: 50
+    melee: 15
+    bullet: 15
+    explosionArmor: 15
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: IngestionBlocker
+  - type: RemoveComponents
+    components:
+    - type: Storage
+    - type: LimitedStorage
+
+

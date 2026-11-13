@@ -1,0 +1,11 @@
+- type: entity
+  parent: RMCPropBaseUnbreakable
+  id: RMCPropRemoteConsolePod
+  name: remote console pod
+  description: A drop pod used to launch remote piloting equipment to UNMC areas of operation.
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: _RMC14/Structures/Machines/drop_pod.rsi
+    state: techpod_open
+    offset: "0,-0.5"
