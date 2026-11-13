@@ -1,0 +1,8 @@
+- type: speechSounds
+  id: RMCMilitaryDog
+  saySound:
+    collection: VulpkaninBarks
+  askSound:
+    collection: VulpkaninBarks
+  exclaimSound:
+    collection: VulpkaninBarks
