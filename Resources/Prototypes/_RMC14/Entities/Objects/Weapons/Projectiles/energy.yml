@@ -1,0 +1,13 @@
+﻿- type: entity
+  parent: MuzzleFlashEffect
+  id: RMCMuzzleFlashEffectEnergy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    offset: 0.15, 0
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: _RMC14/Objects/Weapons/Guns/Projectiles/projectiles_energy.rsi
+      state: muzzle_energy
