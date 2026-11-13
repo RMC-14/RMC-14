@@ -1,10 +1,11 @@
-﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -26,6 +27,7 @@ public sealed class GunStacksSystem : EntitySystem
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<RMCAdjustableArmorValueComponent> _adjustableArmor;
+    private EntityQuery<TargetedProjectileComponent> _targetedProjectileQuery;
 
     public override void Initialize()
     {
@@ -34,6 +36,7 @@ public sealed class GunStacksSystem : EntitySystem
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
         _adjustableArmor = GetEntityQuery<RMCAdjustableArmorValueComponent>();
+        _targetedProjectileQuery = GetEntityQuery<TargetedProjectileComponent>();
         SubscribeLocalEvent<GunStacksComponent, AmmoShotEvent>(OnStacksAmmoShot);
 
         SubscribeLocalEvent<GunStacksActiveComponent, GetGunDamageModifierEvent>(OnStacksActiveGetGunDamageModifier);
@@ -100,6 +103,12 @@ public sealed class GunStacksSystem : EntitySystem
         }
 
         var target = args.Target;
+        if (!_targetedProjectileQuery.TryComp(ent, out var targeted) ||
+            targeted.Target != target)
+        {
+            return;
+        }
+
         if ((_xenoQuery.HasComp(target) || _marineQuery.HasComp(target) || _adjustableArmor.HasComp(target)) && !_mobState.IsDead(target))
         {
             if (!TryComp<GunStacksActiveComponent>(ent.Comp.Gun, out var gun))
