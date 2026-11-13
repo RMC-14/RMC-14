@@ -4,6 +4,9 @@ using Content.Shared.Interaction;
 using Content.Shared.Lock;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+// RMC14
+using Content.Shared.Access.Systems;
+// RMC14
 
 namespace Content.Server.DeviceLinking.Systems;
 
@@ -12,6 +15,9 @@ public sealed class SignalSwitchSystem : EntitySystem
     [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly LockSystem _lock = default!;
+    // RMC14
+    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    // RMC14
 
     public override void Initialize()
     {
@@ -33,6 +39,15 @@ public sealed class SignalSwitchSystem : EntitySystem
 
         if (_lock.IsLocked(uid))
             return;
+
+        // RMC14
+        var user = args.User;
+        Entity<SignalSwitchComponent> button = (uid, comp);
+        if (!_accessReader.IsAllowed(user, button))
+        {
+            return;
+        }
+        // RMC14
 
         comp.State = !comp.State;
         _deviceLink.InvokePort(uid, comp.State ? comp.OnPort : comp.OffPort);
