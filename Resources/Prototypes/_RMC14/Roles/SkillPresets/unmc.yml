@@ -24,6 +24,31 @@
       RMCSkillSurgery: 1
       RMCSkillVehicles: 2
 
+# High Command General 
+- type: entity
+  id: RMCSkillPresetHCGeneral
+  name: General
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillConstruction: 2
+      RMCSkillFirearms: 2
+      RMCSkillFireman: 2
+      RMCSkillEndurance: 5
+      RMCSkillEngineer: 2  
+      RMCSkillExecution: 1
+      RMCSkillIntel: 2
+      RMCSkillJtac: 4
+      RMCSkillLeadership: 4
+      RMCSkillMedical: 3
+      RMCSkillOverwatch: 1
+      RMCSkillPolice: 2
+      RMCSkillPowerLoader: 2
+      RMCSkillSmartGun: 1
+      RMCSkillVehicles: 2
+
 # Survivor skills
 
 - type: entity
