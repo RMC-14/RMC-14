@@ -158,6 +158,14 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCRest);
             human.AddFunction(CMKeyFunctions.RMCResist);
 
+            // Only while viewing overwatch cameras
+            var overwatch = contexts.New("overwatch", human);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustNorth);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustWest);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustSouth);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustEast);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraReset);
+
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");
             xenonid.AddFunction(CMKeyFunctions.CMXenoWideSwing);
