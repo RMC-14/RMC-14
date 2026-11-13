@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Mind;
@@ -50,6 +50,21 @@ public abstract class SharedXenoNameSystem : EntitySystem
             true);
     }
 
+    /// <summary>
+    /// Returns either the xeno's assigned prefix, or <see cref="DefaultPrefix"/> if they don't have one set.
+    /// </summary>
+    public string GetXenoPrefix(Entity<XenoNameComponent?> ent)
+    {
+        if (Resolve(ent, ref ent.Comp) && ent.Comp.Prefix.Length != 0)
+        {
+            return ent.Comp.Prefix;
+        }
+        else
+        {
+            return DefaultPrefix;
+        }
+    }
+
     private void OnNewXenoEvolved(ref NewXenoEvolvedEvent ev)
     {
         TransferName(ev.OldXeno, ev.NewXeno);
@@ -66,12 +81,8 @@ public abstract class SharedXenoNameSystem : EntitySystem
         if (rank.Length > 0)
             rank = $"{rank} ";
 
-        var prefix = ent.Comp.Prefix;
-        if (prefix.Length == 0)
-            prefix = DefaultPrefix;
-
+        var prefix = GetXenoPrefix(ent.Owner);
         var postfix = ent.Comp.Postfix;
-
         var number = ent.Comp.Number;
 
         if (HasComp<XenoOmitNumberComponent>(ent))
