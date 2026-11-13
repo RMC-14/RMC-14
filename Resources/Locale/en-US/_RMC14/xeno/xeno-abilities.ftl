@@ -47,6 +47,7 @@ cm-xeno-requires-more-plasma = {CAPITALIZE(THE($construction))} requires {$plasm
 cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
+rmc-xeno-build-mark-cleared = We clear the psychic mark from that location.
 rmc-xeno-construction-unique-exists = There's already a {$choice} built!
 rmc-xeno-construction-hive-limit-met = We have reached the limit of {$choice} the hive can support!
 rmc-xeno-construction-requires-hive-weeds = {$choice} must be built on hive weeds!

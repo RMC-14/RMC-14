@@ -11,19 +11,19 @@ namespace Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 /// <summary>
 /// Allows the entity to build resin structures at a distance. Depends on XenoConstructionComponent.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ResinWhispererComponent : Component
 {
     /// <summary>
     /// Normal Construction Delay from XenoConstructionComponent
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan? StandardConstructDelay = null;
 
     /// <summary>
     /// Normal Construction Max Distance from XenoConstructionComponent
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2? MaxConstructDistance = null;
 
     [DataField]
