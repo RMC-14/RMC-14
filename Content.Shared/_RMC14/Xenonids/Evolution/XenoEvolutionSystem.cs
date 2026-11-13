@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.JoinXeno;
@@ -245,6 +246,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
+        if (!BanishedCheckPopup(xeno, false))
+            return;
+
         if (!ContainedCheckPopup(xeno))
             return;
 
@@ -410,8 +414,27 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
+    private bool BanishedCheckPopup(EntityUid xeno, bool predicted = true, bool doPopup = true)
+    {
+        if (!HasComp<XenoBanishComponent>(xeno))
+            return true;
+
+        if (!doPopup)
+            return false;
+
+        if (predicted)
+            _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-failed-banished"), xeno, xeno, PopupType.MediumCaution);
+        else
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-banished"), xeno, xeno, PopupType.MediumCaution);
+
+        return false;
+    }
+
     private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true, bool ignoreEvolvesTo = false, List<XenoTierReservation>? reserved = null, bool ignoreFixable = false)
     {
+        if (!BanishedCheckPopup(xeno, false, doPopup))
+            return false;
+
         var isEarlyEvo = xeno.Comp.EarlyEvolvesTo.Contains(newXeno);
         if (!ignoreEvolvesTo &&
             !xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno) && !isEarlyEvo)
@@ -1318,6 +1341,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)
     {
+        if (!BanishedCheckPopup(xeno))
+            return;
+
         if (damagedCheck && !DamagedCheckPopup(xeno))
             return;
 

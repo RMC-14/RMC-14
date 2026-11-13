@@ -106,14 +106,14 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
                 contentContainer.RemoveChild(label);
                 textBox.AddChild(label);
 
-                var descLabel = new Label
+                // Wraps so long descriptions (like banish reasons) don't stretch the window,
+                // and is unformatted so player-written text can't use markup
+                var descLabel = new RichTextLabel
                 {
-                    Text = option.Description,
                     HorizontalExpand = true,
-                    FontColorOverride = Color.FromHex("#aaaaaa"),
-                    ClipText = false
+                    MaxWidth = 480
                 };
-                descLabel.AddStyleClass("CMAlignLeft");
+                descLabel.SetMessage(FormattedMessage.FromUnformatted(option.Description), defaultColor: Color.FromHex("#aaaaaa"));
                 textBox.AddChild(descLabel);
                 contentContainer.AddChild(textBox);
             }
