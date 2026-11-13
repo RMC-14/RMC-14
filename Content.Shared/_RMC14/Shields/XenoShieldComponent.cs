@@ -9,22 +9,7 @@ namespace Content.Shared._RMC14.Shields;
 public sealed partial class XenoShieldComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public XenoShieldSystem.ShieldType Shield = XenoShieldSystem.ShieldType.Generic;
-
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 ShieldAmount = 0;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan? Duration;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan ShieldDecayAt;
-
-    [DataField, AutoNetworkedField]
-    public double DecayPerSecond;
-
-    [DataField, AutoNetworkedField]
-    public bool Active = false;
+    public List<XenoShield> Shields = new();
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier ShieldBreak = new SoundPathSpecifier("/Audio/_RMC14/Bullets/shield_break_c1.ogg");
@@ -41,4 +26,36 @@ public enum RMCShieldVisuals
     Max,
     Active,
     Prefix
+}
+
+[DataDefinition]
+[Serializable, NetSerializable]
+public sealed partial class XenoShield
+{
+    [DataField]
+    public XenoShieldSystem.ShieldType Shield;
+
+    [DataField]
+    public FixedPoint2 ShieldAmount;
+
+    [DataField]
+    public FixedPoint2 ShieldInitialAmount;
+
+    [DataField]
+    public TimeSpan? ShieldDecayAt;
+
+    [DataField]
+    public double DecayPerSecond;
+
+    [DataField]
+    public string? Visual;
+
+    public XenoShield (XenoShieldSystem.ShieldType shield, FixedPoint2 shieldAmount, double decay, string? visual)
+    {
+        Shield = shield;
+        ShieldAmount = shieldAmount;
+        DecayPerSecond = decay;
+        Visual = visual;
+        ShieldInitialAmount = shieldAmount;
+    }
 }
