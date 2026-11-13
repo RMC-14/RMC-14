@@ -16,7 +16,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
     }
 
     public void UpdateState(
-        HiveTeamsComponent teams,
+        List<HiveTeamEntryState> teams,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> pickerXenos,
         Func<EntProtoId?, Texture?> getTexture,
@@ -31,7 +31,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
 
         for (var i = 0; i < HiveTeamsComponent.TeamCount; i++)
         {
-            HiveTeamEntry? entry = i < teams.Teams.Count ? teams.Teams[i] : null;
+            HiveTeamEntryState? entry = i < teams.Count ? teams[i] : null;
             var panel = new HiveTeamPanelControl();
             panel.HorizontalExpand = true;
             panel.VerticalExpand = true;
