@@ -519,6 +519,7 @@
   id: RMCAreaBigredv2CavesLambda
   components:
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -571,6 +572,7 @@
   - type: Sprite
     state: caves_lambda
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -775,12 +777,15 @@
   components:
   - type: Sprite
     state: bluenew
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaBigredv2Caves
   id: RMCAreaBigredv2CavesEta
   components:
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -1370,6 +1375,7 @@
   - type: Sprite
     state: caves_research
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -1390,6 +1396,7 @@
   - type: Sprite
     state: caves_se
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -1409,6 +1416,7 @@
   - type: Sprite
     state: caves_east
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
