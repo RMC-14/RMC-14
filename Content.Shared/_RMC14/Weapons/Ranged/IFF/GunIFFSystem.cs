@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -27,6 +27,7 @@ public sealed class GunIFFSystem : EntitySystem
         _userIFFQuery = GetEntityQuery<UserIFFComponent>();
 
         SubscribeLocalEvent<UserIFFComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);
+        SubscribeLocalEvent<UserIFFComponent, CheckMeleeTargetEvent>(OnUserIFFCheckMeleeTarget);
         SubscribeLocalEvent<InventoryComponent, GetIFFFactionEvent>(OnInventoryIFFGetFaction);
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
@@ -38,6 +39,27 @@ public sealed class GunIFFSystem : EntitySystem
     private void OnUserIFFGetFaction(Entity<UserIFFComponent> ent, ref GetIFFFactionEvent args)
     {
         args.Factions.UnionWith(ent.Comp.Factions);
+    }
+
+    private void OnUserIFFCheckMeleeTarget(Entity<UserIFFComponent> ent, ref CheckMeleeTargetEvent args)
+    {
+        if (args.Skip || args.Defer)
+            return;
+
+        // assigning new names to buffers just for clarity
+        var attackedFactions = _factionBuffer;
+        var attackerFactinos = _iffEventBuffer;
+        attackedFactions.Clear();
+        attackerFactinos.Clear();
+
+        // IFF users prefer not to melee entities they share an IFF faction with
+        if (!args.Disarm
+            && TryGetFactions(args.Target, attackedFactions)
+            && TryGetFactions(ent.Owner, attackerFactinos)
+            && attackerFactinos.Overlaps(attackedFactions))
+        {
+            args.Defer = true;
+        }
     }
 
     private void OnInventoryIFFGetFaction(Entity<InventoryComponent> ent, ref GetIFFFactionEvent args)
