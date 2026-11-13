@@ -57,7 +57,7 @@ public sealed class RMCDazedSystem : EntitySystem
         }
     }
 
-    public bool TryDaze(EntityUid uid, TimeSpan time, bool refresh = false, StatusEffectsComponent? status = null, bool stutter = false)
+    public bool TryDaze(EntityUid uid, TimeSpan time, bool refresh = true, StatusEffectsComponent? status = null, bool stutter = false)
     {
         if (!Resolve(uid, ref status, false))
             return false;
