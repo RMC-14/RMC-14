@@ -44,6 +44,24 @@
   - type: Appearance
 
 - type: entity
+  parent: RMCMarshalCMBUniform
+  id: RMCMarshalCMBUniformSpearhead
+  name: colony marshal uniform
+  suffix: Webbing, Filled, Spearhead
+  components:
+    - type: WebbingClothing
+      startingWebbing: RMCWebbingHolsterSpearhead
+
+- type: entity
+  parent: RMCMarshalCMBUniform
+  id: RMCMarshalCMBUniformSpearheadCustom
+  name: colony marshal uniform
+  suffix: Webbing, Filled, Spearhead custom
+  components:
+    - type: WebbingClothing
+      startingWebbing: RMCWebbingHolsterSpearheadCustom
+
+- type: entity
   parent: RMCSwatCMBUniform
   id: RMCSwatCMBUniformB92FS
   suffix: B92FS

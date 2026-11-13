@@ -353,6 +353,38 @@
     - id: CMShellShotgunBeanbag
       amount: 7
 
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeCMBDeputyERTFilled
+  suffix: CMB Deputy, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 4
+    - id : CMShellShotgunSlugs
+      amount: 2
+    - id: CMShellShotgunBeanbag
+      amount: 1
+
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeCMBMarshalERTFilled
+  suffix: CMB Marshal, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 3
+    - id: CMShellShotgunIncendiaryBuckshot
+      amount: 1
+    - id: CMShellShotgunIncendiary
+      amount: 1
+    - id : CMShellShotgunSlugs
+      amount: 1
+    - id: CMShellShotgunBeanbag
+      amount: 1
+
 # Large Documents Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]

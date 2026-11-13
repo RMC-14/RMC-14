@@ -802,6 +802,38 @@
     - id: CMCrowbar
 
 - type: entity
+  parent: CMSatchelSecurity
+  id: RMCSatchelCMBDeputyERTFilled
+  suffix: CMB Marshal, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHoldout
+    - id: RMCRadioHandheldColonyOff
+    - id: RMCFlashlight
+    # TODO RMC14 camera
+    - id: RMCUniversalRecorder
+    - id: CMCrowbar
+    - id: RMCZipties
+    - id: RMCGrenadeFlashBang
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: RMCSatchelCMBMarshalERTFilled
+  suffix: CMB Marshal, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHoldout
+    # TODO RMC14 rubber pallet grenade
+    # TODO RMC14 CMB handled distress beacon
+    - id: RMCRadioHandheldColonyOff
+    - id: RMCFlashlight
+    # TODO RMC14 camera
+    - id: RMCUniversalRecorder
+    - id: CMCrowbar
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelICBLiaisonFill
   suffix: Interstellar Commerce Bureau Liaison, Filled
@@ -1354,6 +1386,22 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+
+- type: entity
+  parent: RMCSatchelMARSOC
+  id: RMCSatchelMARSOCFilled
+  name: UNMC SOF combat pack
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive # TODO RMC14 M40/2 HEDP grenade
+      amount: 3
+    - id: RMCGrenadeWhitePhosphorusCompound
+      amount: 3
+    - id: RMCMotionDetector
+    # TODO RMC14 cermaic plate
+    - id: RMCVisorNightVision # TODO RMC14 add removeable visior to helmet and remove this
 
 - type: entity
   parent: CMSatchel

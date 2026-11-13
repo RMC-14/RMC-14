@@ -87,12 +87,9 @@
     suitstorage: RMCWeaponRifleXM40
     id: RMCDogtagMarineRaider
     belt: RMCWeaponShotgunXM38Filled
-    back: RMCSatchelMARSOC
+    back: RMCSatchelMARSOCFilled
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
     pocket2: RMCPouchToolsSocMarineRaiderFill
-  storage:
-    back:
-    - RMCVisorNightVision # TODO RMC14
 
 - type: playTimeTracker
   id: CMJobMarineRaider
