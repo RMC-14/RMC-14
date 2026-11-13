@@ -1,0 +1,42 @@
+﻿- type: entity
+  parent: BaseSign
+  id: RMCOverheadSemioticSign
+  name: overhead semiotic sign
+  description: A glowing sign, often hung above doorways to denote what's contained behind them; it features large English and smaller Japanese text, as well as one or more semiotic symbols.
+  components:
+  - type: SpriteFade
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/Lighting/semiotic_sign.rsi
+    state: overhead_semiotic_sign
+    snapCardinals: false
+    drawdepth: Overdoors
+  - type: PointLight
+    color: "#D2E3EC"
+    energy: 1
+    radius: 5
+    softness: 1
+    offset: "0, -0.5"
+
+- type: entity
+  parent: BaseSign
+  id: RMCSpaceflightTerminalSign
+  name: directions sign
+  description: A large sign containing your current location, as well as directions to other locals and the semiotic symbols associated with them. Has both English & Japanese text.
+  components:
+  - type: SpriteFade
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/ocp_signs.rsi
+    state: sign_spaceflight_terminal
+    snapCardinals: false
+    drawdepth: Overdoors
+
+- type: entity
+  parent: RMCSpaceflightTerminalSign
+  id: RMCMaintenanceDeckSign
+  name: directions sign
+  description: A large sign containing your current location, as well as directions to other locals and the semiotic symbols associated with them. Has both English & Japanese text.
+  components:
+  - type: SpriteFade
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/ocp_signs.rsi
+    state: sign_maintenance_deck

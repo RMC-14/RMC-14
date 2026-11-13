@@ -806,3 +806,75 @@
   components:
   - type: Sprite
     state: 9
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticAIRoom
+  name: AI interface semiotic
+  description: "Semiotic Standard denoting the presence of an Artificial Intelligence interface nearby."
+  components:
+  - type: Sprite
+    state: airoom
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticAlcoholStorage
+  name: alcoholic storage semiotic
+  description: "Semiotic Standard denoting the nearby presence of an alcoholic storage zone."
+  components:
+  - type: Sprite
+    state: alcoholstorage
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticBedroom
+  name: sleeping quarters semiotic
+  description: "Semiotic Standard denoting the nearby presence of sleeping quarters."
+  components:
+  - type: Sprite
+    state: bedroom
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticCommonArea
+  name: common area semiotic
+  description: "Semiotic Standard denoting the nearby presence of a common area."
+  components:
+  - type: Sprite
+    state: commonarea
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticDockingPort
+  name: docking port semiotic
+  description: "Semiotic Standard denoting the nearby presence of a docking port. Watch out for moving parts during coupling sequence."
+  components:
+  - type: Sprite
+    state: dockingport
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticHydroponics
+  name: hydroponics semiotic
+  description: "Semiotic Standard denoting the nearby presence of a hydroponics bay. Biological allergens may be present."
+  components:
+  - type: Sprite
+    state: hydroponics
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticReactor
+  name: reactor semiotic
+  description: "Semiotic Standard denoting the nearby presence of a reactor for power generation. Exercise extreme caution."
+  components:
+  - type: Sprite
+    state: reactor
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticShuttleBay
+  name: shuttle bay semiotic
+  description: "Semiotic Standard denoting the nearby presence of a shuttle bay, which likely contains a shuttle."
+  components:
+  - type: Sprite
+    state: shuttlebay
