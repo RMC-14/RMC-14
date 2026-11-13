@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Construction.EntitySystems;
@@ -101,11 +101,12 @@ public sealed class DeployableItemSystem : EntitySystem
         {
             if (ent.Comp.Position != DeployableItemPosition.None)
             {
-                args.PushMarkup(Loc.GetString("cm-magazine-box-examine-deployed-click"));
-                args.PushMarkup(Loc.GetString("cm-magazine-box-examine-deployed-drag"));
 
                 if (ent.Comp.MagazineExamine)
                 {
+                    args.PushMarkup(Loc.GetString("cm-magazine-box-examine-deployed-click"));
+                    if (!ent.Comp.LeftClickPickup)
+                        args.PushMarkup(Loc.GetString("cm-magazine-box-examine-deployed-drag"));
                     args.PushMarkup(Loc.GetString("cm-magazine-box-examine-magazines",
                         ("filled", filled),
                         ("total", total)));
