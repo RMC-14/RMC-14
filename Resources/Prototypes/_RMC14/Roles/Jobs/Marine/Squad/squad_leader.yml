@@ -31,6 +31,7 @@
   startingGear: CMGearSquadLeader
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
+  requireAdminNotify: true
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-commander
   marineAuthorityLevel: 2
