@@ -98,3 +98,14 @@
     anchored: false
   - type: Physics
     bodyType: Dynamic
+
+- type: entity
+  parent: CMLinenBin
+  id: CMLinenBinUnanchored
+  suffix: Empty, Unanchored
+  components:
+  - type: Anchorable
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
