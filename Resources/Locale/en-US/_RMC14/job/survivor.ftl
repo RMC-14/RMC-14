@@ -154,13 +154,15 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-greeting-varadero = The stench of burning phoron still lingers in the salty evening breeze of the ruined New Varadero Naval Base. The specter's dying cackle echoes through your mind as you realise that you're now one of just a handful of living people left standing on these battle worn shores. Through sheer cunning, grit, and United Nations fire power, you've managed to survive against both ceaseless tides of xenonids and a now slain lone specter... the cry of a new mother snaps you back to reality. It's only a matter of time before another acidic wave of those horrid things attempts to wash over you.
+rmc-job-greeting-varadero = It's been days since the military's retreat from the naval base. Unable to make it to the rendezvous point, the tunnel to New Varadero City was blown, and you were sealed inside with the xenonids. With no way off this island, you've had to run, hide, fight and band together with whoever you could to stay alive this long. You may have held the horde at bay for now, but it's only a matter of time before they come back.
 
    You are aware of the xenonid threat.
 
    Your primary objective is to survive the outbreak.
 
    You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-prefix-survivor-varadero-rifleman = UNMC RFN
 
 rmc-job-name-survivor-commander-new-varadero = Base Commander
 rmc-job-prefix-survivor-varadero-commander = UNMC CDR
@@ -200,7 +202,7 @@ rmc-job-prefix-survivor-new-varadero-xenobiologist = WY XBIO
 rmc-job-name-survivor-new-varadero-rd = New Varadero Research Director
 rmc-job-prefix-survivor-new-varadero-rd = WY RD
 
-rmc-job-name-survivor-varadero-base-police = Peacekeeper
+rmc-job-name-survivor-new-varadero-contractor = UN Civilian Contractor
 
 # Hybrisa Prospera Survs
 

@@ -1561,3 +1561,6 @@ RMCMapInsertSorokyneSPPSOFAlt: RMCMapInsertSorokyneSPPSpetsnazAlt
 
 # 2026-10-25
 CMIV: RMCIVStand
+  
+# 2026-11-09
+RMCSpawnerCorpseUNMCMilitaryPoliceRandom: RMCSpawnerCorpseUNMCVeteranRiflemanRandom

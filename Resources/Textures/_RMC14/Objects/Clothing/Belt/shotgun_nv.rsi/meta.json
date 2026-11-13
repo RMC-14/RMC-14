@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By patogrone (Discord). fill states by kleinerstation13 (Github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "sixth"
+    },
+    {
+      "name": "third"
+    },
+    {
+      "name": "half"
+    },
+    {
+      "name": "twothirds"
+    },
+    {
+      "name": "fivesixths"
+    },
+    {
+      "name": "full"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    }
+  ]
+}

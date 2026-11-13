@@ -50,10 +50,10 @@
   id: RMCGearSurvivorCommanderNewVaradero
   equipment:
     ears: RMCHeadsetMarineNV
-    jumpsuit: CMJumpsuitBO
-    head: RMCHeadCapFlippable
-    outerClothing: RMCCoatServiceFolded
-    shoes: CMBootsBlackFilled
+    jumpsuit: RMCJumpsuitMarineNVCommander
+    head: CMHeadCapOfficerNV
+    outerClothing: RMCCoatServiceNVCommander
+    shoes: CMBootsUrbanFilled
     back: CMSatchelLiaisonSecure
     belt: RMCMatebaBeltForeconFilled # TODO RMC14: M1911 CO Variant (PR #9863). Mateba for now since both guns are about equal in power
     id: CMIDCardGold

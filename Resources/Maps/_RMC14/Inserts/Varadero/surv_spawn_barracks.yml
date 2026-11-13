@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/25/2026 05:08:41
-  entityCount: 62
+  time: 11/09/2026 00:46:35
+  entityCount: 61
 maps: []
 grids:
 - 1
@@ -96,13 +96,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 9.5,3.5
-      parent: 1
-- proto: CMBeltMedical
-  entities:
-  - uid: 31
-    components:
-    - type: Transform
-      pos: 10.503994,2.749358
       parent: 1
 - proto: CMGirder
   entities:
@@ -290,13 +283,6 @@ entities:
     - type: Transform
       pos: 0.5,2.5
       parent: 1
-- proto: JumpsuitMarine
-  entities:
-  - uid: 7
-    components:
-    - type: Transform
-      pos: 1.4741402,3.3539443
-      parent: 1
 - proto: RMCBarricadeWireRailAltDrawdepth
   entities:
   - uid: 25
@@ -383,12 +369,12 @@ entities:
     - type: Transform
       pos: 7.660071,1.0611556
       parent: 1
-- proto: RMCBoonie
+- proto: RMCBeltMedicBagNV
   entities:
   - uid: 5
     components:
     - type: Transform
-      pos: 1.5640178,2.5825748
+      pos: 10.5,2.5
       parent: 1
 - proto: RMCCoatBomber
   entities:
@@ -397,12 +383,19 @@ entities:
     - type: Transform
       pos: 10.566494,2.4053688
       parent: 1
-- proto: RMCHeadCapPatrol
+- proto: RMCHeadCapPatrolNV
   entities:
-  - uid: 49
+  - uid: 31
     components:
     - type: Transform
-      pos: 1.3036885,2.520503
+      pos: 1.5,2.5
+      parent: 1
+- proto: RMCJumpsuitMarineNV
+  entities:
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 1.5,3.5
       parent: 1
 - proto: RMCMaskScarfGray
   entities:
