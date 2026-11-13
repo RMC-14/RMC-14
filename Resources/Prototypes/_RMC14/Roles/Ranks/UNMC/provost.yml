@@ -26,6 +26,13 @@
   prefix: PvDM.
   paygrade: O6
 
+# Admin
+- type: rank
+  id: RMCRankProvostOperative
+  name: Intelligence Operative
+  prefix: PvIO.
+  paygrade: O4
+  
 # Whitelisted
 - type: rank
   id: RMCRankProvostInspector
