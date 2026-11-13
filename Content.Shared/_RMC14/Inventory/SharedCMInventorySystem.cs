@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Marines.Skills;
@@ -83,6 +83,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         SubscribeLocalEvent<GunComponent, IsUnholsterableEvent>(AllowUnholster);
         SubscribeLocalEvent<MeleeWeaponComponent, IsUnholsterableEvent>(AllowUnholster);
+        SubscribeLocalEvent<RMCAllowHolsteringComponent, IsUnholsterableEvent>(AllowUnholster);
 
         SubscribeLocalEvent<CMItemSlotsComponent, MapInitEvent>(OnSlotsFillMapInit);
         SubscribeLocalEvent<CMItemSlotsComponent, AfterAutoHandleStateEvent>(OnSlotsComponentHandleState);
