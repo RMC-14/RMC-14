@@ -42,6 +42,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Vents;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
 
@@ -689,7 +690,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             }
 
             if (!damage.RestingStopsDamage ||
-                !HasComp<XenoRestingComponent>(uid))
+                !HasComp<XenoRestingComponent>(uid) ||
+                HasComp<VentCrawlingComponent>(uid))
             {
                 _damageable.TryChangeDamage(uid, damage.Damage, damageable: damageable);
             }
