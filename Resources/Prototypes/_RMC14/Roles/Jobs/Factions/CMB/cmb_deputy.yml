@@ -101,6 +101,7 @@
     suitstorage: RMCWeaponShotgunM3717
   storage:
     back:
+    - RMCBlackMarketTradebandDevice
     - RMCUniversalRecorder
 
 - type: playTimeTracker

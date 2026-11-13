@@ -25,6 +25,8 @@
           - ItemMask
         restitution: 0.3
         friction: 0.2
+  - type: BlackMarketValue
+    value: 5
 
 - type: entity
   parent: RMCOreBase
@@ -53,6 +55,8 @@
           Quantity: 0.1
   - type: Item
     heldPrefix: coal
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   parent: RMCCoal
@@ -81,6 +85,8 @@
           Quantity: 20
   - type: Item
     heldPrefix: diamonds
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: RMCOreBase
@@ -101,6 +107,8 @@
           Quantity: 10
   - type: Item
     heldPrefix: gold
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: RMCGoldOre
@@ -137,6 +145,8 @@
           Quantity: 10
   - type: Item
     heldPrefix: iron
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: RMCIronOre
@@ -170,6 +180,8 @@
           Quantity: 10
   - type: Item
     heldPrefix: plasma
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: RMCPlasmaOre
@@ -198,6 +210,8 @@
           Quantity: 10
   - type: Item
     heldPrefix: silver
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: RMCPlatinumOre
@@ -226,6 +240,8 @@
           Quantity: 10
   - type: Item
     heldPrefix: silver
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: RMCSilverOre
@@ -263,6 +279,8 @@
     heldPrefix: uranium
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-pitchblende
+  - type: BlackMarketValue
+    value: 35
 
 - type: entity
   parent: RMCUraniumOre

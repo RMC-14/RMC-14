@@ -301,6 +301,8 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/urban.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMArmorM3Medium
@@ -338,6 +340,8 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/urban.rsi
+  - type: BlackMarketValue
+    value: 20
 
 - type: entity
   parent: CMArmorM2MP
@@ -362,6 +366,8 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/urban.rsi
+  - type: BlackMarketValue
+    value: 35
 
 - type: entity
   parent: CMArmorM2MP
@@ -384,6 +390,8 @@
   - type: Item # Intentionally allows the armor to be stored in bags.
     size: Normal
     storedRotation: 0
+  - type: BlackMarketValue
+    value: 20
 
 - type: entity
   parent: CMArmorM3Medium
@@ -946,6 +954,8 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
+  - type: BlackMarketValue
+    value: 20
 
 - type: entity
   parent: CMArmorM3VLBallistics

@@ -11,6 +11,9 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleParasite
+  - type: BlackMarketValue
+    value: 20
+    deadValue: 0
   - type: GhostRole
     name: cm-job-name-xeno-parasite
     prob: 0
