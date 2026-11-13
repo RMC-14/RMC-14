@@ -51,6 +51,9 @@
     head: RMCHeadCapWestonYamadaDark
     pocket1: CMFolderBlue
     pocket2: CMPenClicky
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: playTimeTracker
   id: RMCJobCorporateColonyAdministrator
