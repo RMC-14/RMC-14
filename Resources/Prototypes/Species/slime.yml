@@ -42,7 +42,7 @@
       points: 1
       required: false
     Chest:
-      points: 2
+      points: 3
       required: false
     UndergarmentBottom:
       points: 1
