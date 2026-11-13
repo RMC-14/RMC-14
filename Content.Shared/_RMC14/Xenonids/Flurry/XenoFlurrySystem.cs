@@ -1,16 +1,19 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Fishing;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
+using Content.Shared.Fishing;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -33,6 +36,7 @@ public sealed class XenoFlurrySystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
+    [Dependency] private readonly SharedRMCFishingSystem _fishing = default!;
 
     private HashSet<Entity<MobStateComponent>> _result = new();
 
@@ -119,6 +123,24 @@ public sealed class XenoFlurrySystem : EntitySystem
 
         if (hitEnt != null)
             _rmcMelee.DoLunge(xeno, hitEnt.Value);
+        else
+        {
+            if (TryComp<XenoFishingComponent>(xeno, out var fishing))
+            {
+                // Center and near the edges
+                List<EntityCoordinates> fishingChecks = new() {
+                    xenoCoord.WithPosition(rot.Center),
+                    xenoCoord.WithPosition((rot.TopLeft + rot.BottomLeft) / 2),
+                    xenoCoord.WithPosition((rot.TopRight + rot.BottomRight) / 2)
+                };
+
+                foreach (var check in fishingChecks)
+                {
+                    if (_fishing.DoXenoFish((xeno, fishing), check, out var caught, pickup: false) && caught != null)
+                        _audio.PlayEntity(xeno.Comp.SlashSound, xeno, caught.Value);
+                }
+            }
+        }
 
         foreach (var tile in _map.GetTilesIntersecting(gridId, grid, worldBox))
         {
