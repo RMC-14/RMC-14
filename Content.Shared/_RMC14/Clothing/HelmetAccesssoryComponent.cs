@@ -22,4 +22,7 @@ public sealed partial class HelmetAccessoryComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2 Offset;
+
+    [DataField, AutoNetworkedField]
+    public int DrawOrder;
 }
