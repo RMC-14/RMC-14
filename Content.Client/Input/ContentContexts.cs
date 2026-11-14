@@ -162,6 +162,9 @@ namespace Content.Client.Input
             var xenonid = contexts.New("xenonid", "human");
             xenonid.AddFunction(CMKeyFunctions.CMXenoWideSwing);
             xenonid.AddFunction(CMKeyFunctions.RMCXenoRest);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoPheromonesRecovery);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoPheromonesWarding);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoPheromonesFrenzy);
         }
     }
 }

@@ -25,4 +25,7 @@ public sealed class CMKeyFunctions
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
     public static readonly BoundKeyFunction RMCXenoRest = "RMCXenoRest";
+    public static readonly BoundKeyFunction RMCXenoPheromonesRecovery = "RMCXenoPheromonesRecovery";
+    public static readonly BoundKeyFunction RMCXenoPheromonesWarding = "RMCXenoPheromonesWarding";
+    public static readonly BoundKeyFunction RMCXenoPheromonesFrenzy = "RMCXenoPheromonesFrenzy";
 }
