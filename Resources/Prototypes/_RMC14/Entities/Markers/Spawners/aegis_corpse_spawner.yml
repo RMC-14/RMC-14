@@ -11,3 +11,11 @@
       state: corpse_spawner
   - type: AegisCorpseSpawner  
     spawn: RMCCorpseScientistAegis
+
+- type: entity
+  parent: RMCAegisCorpseSpawner
+  id: RMCAegisCorpseSpawnerShiva
+  name: AEGIS corpse spawner - Shiva Scientist
+  components:
+  - type: AegisCorpseSpawner  
+    spawn: RMCCorpseScientistAegisShiva

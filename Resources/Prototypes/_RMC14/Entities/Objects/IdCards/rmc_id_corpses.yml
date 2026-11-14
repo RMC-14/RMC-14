@@ -89,3 +89,19 @@
   components:
   - type: PresetIdCard
     job: RMCSurvivorHybrisaTSEPAConstable
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardColonialDivisionManager
+  name: colonial division manager ID card
+  description: A corporate holo-badge. It's a unique Corporate orange and white.
+  components:
+  - type: IdCard
+    jobTitle: rmc-job-name-survivor-corpse-colonial-division-manager
+  - type: Sprite
+    state: corporate_liaison
+  - type: ItemIFF
+    factions:
+    - FactionWeYa
+    - FactionMarine
+    
