@@ -54,7 +54,7 @@ public sealed class RMCThrowingSystem : EntitySystem
     {
         if (_timing.CurTime < ent.Comp.CooldownEndsAt)
         {
-            if(ent.Comp.ItemsThrown < ent.Comp.ThrowLimit)
+            if (ent.Comp.ItemsThrown < ent.Comp.ThrowLimit)
                 ent.Comp.ItemsThrown++;
             else
                 args.Cancel();
