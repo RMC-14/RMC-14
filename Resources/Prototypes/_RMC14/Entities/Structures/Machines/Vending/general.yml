@@ -42,9 +42,9 @@
       entries:
       - id: RMCPlayingCardDeck
         amount: 10
-      - id: ChessBoard
+      - id: RMCChessBoard
         amount: 10
-      - id: CheckerBoard
+      - id: RMCCheckerBoard
         amount: 10
     - name: Magazines
       entries:

@@ -79,9 +79,9 @@
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
-        !type:RoleTimeRequirement
-        role: RMCJobSynthetic
-        time: 126000 # 35 hrs
+        !type:TotalJobsTimeRequirement
+        group: RMCGroupWhitelistedRoles
+        time: 180000 # 50 hours, inbetween Silver/Gold medals
   storage:
     back:
     - RMCWatchSynth
