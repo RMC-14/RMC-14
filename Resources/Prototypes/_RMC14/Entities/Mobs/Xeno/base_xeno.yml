@@ -375,6 +375,7 @@
     xenoVisible: true
   - type: CanBeLarvaQueued
   - type: XenoLastStandable
+  - type: RMCThrowCooldown
 
 - type: entity
   abstract: true

@@ -1,11 +1,13 @@
-﻿using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Components;
 using Content.Shared.Throwing;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Throwing;
 
 public sealed class RMCThrowingSystem : EntitySystem
 {
     [Dependency] private readonly ThrownItemSystem _thrown = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
 
@@ -17,6 +19,8 @@ public sealed class RMCThrowingSystem : EntitySystem
         SubscribeLocalEvent<ThrownLimitHitsComponent, ThrowDoHitEvent>(OnThrownLimitHitsDoHit);
         SubscribeLocalEvent<ThrownLimitHitsComponent, LandEvent>(OnThrownLimitHitsLand);
         SubscribeLocalEvent<ThrownLimitHitsComponent, StopThrowEvent>(OnThrownLimitHitsStopThrow);
+
+        SubscribeLocalEvent<RMCThrowCooldownComponent, ThrowAttemptEvent>(OnThrowCooldownThrowAttempt);
     }
 
     private void OnDamageOtherOnHitThrown(Entity<DamageOtherOnHitComponent> ent, ref ThrownEvent args)
@@ -44,5 +48,23 @@ public sealed class RMCThrowingSystem : EntitySystem
     private void OnThrownLimitHitsStopThrow(Entity<ThrownLimitHitsComponent> ent, ref StopThrowEvent args)
     {
         RemCompDeferred<ThrownLimitHitsComponent>(ent);
+    }
+
+    private void OnThrowCooldownThrowAttempt(Entity<RMCThrowCooldownComponent> ent, ref ThrowAttemptEvent args)
+    {
+        if (_timing.CurTime < ent.Comp.CooldownEndsAt)
+        {
+            if(ent.Comp.ItemsThrown < ent.Comp.ThrowLimit)
+                ent.Comp.ItemsThrown++;
+            else
+                args.Cancel();
+
+            Dirty(ent);
+            return;
+        }
+
+        ent.Comp.CooldownEndsAt = _timing.CurTime + ent.Comp.Duration;
+        ent.Comp.ItemsThrown = 1;
+        Dirty(ent);
     }
 }

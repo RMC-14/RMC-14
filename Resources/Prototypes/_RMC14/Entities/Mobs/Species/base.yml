@@ -341,6 +341,7 @@
   - type: RMCStripTimeSkill
   - type: RMCDisarm
   - type: RMCDisarmable
+  - type: RMCThrowCooldown
   - type: StunOnExplosionReceived
   - type: DeafenWhileCrit
   - type: RMCStopDropRollVisuals
