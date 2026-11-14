@@ -184,6 +184,9 @@ namespace Content.Client.Options.UI.Tabs
             AddHeader("ui-options-header-rmc-xeno");
             AddButton(CMKeyFunctions.CMXenoWideSwing);
             AddButton(CMKeyFunctions.RMCXenoRest);
+            AddButton(CMKeyFunctions.RMCXenoPheromonesRecovery);
+            AddButton(CMKeyFunctions.RMCXenoPheromonesWarding);
+            AddButton(CMKeyFunctions.RMCXenoPheromonesFrenzy);
 
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);

@@ -173,6 +173,7 @@ cm-pheromones-warding = Warding
 cm-pheromones-frenzy = Frenzy
 cm-xeno-pheromones-start = You start emitting {$pheromones} pheromones
 cm-xeno-pheromones-stop = You stop emitting pheromones
+rmc-xeno-pheromones-already = We are already emitting {$pheromones} pheromones!
 
 # Regurgitate
 cm-xeno-none-devoured = You haven't devoured anyone!
