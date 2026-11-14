@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Synth;
-using Content.Shared._RMC14.Xenonids.Paralyzing;
 using Content.Shared._RMC14.Xenonids.Paratoxin.ParatoxinSlashes;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared.Actions;
