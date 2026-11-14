@@ -52,7 +52,7 @@
     ears: RMCHeadsetMarineNV
     jumpsuit: RMCJumpsuitMarineNVCommander
     head: CMHeadCapOfficerNV
-    outerClothing: RMCCoatServiceNVCommander
+    outerClothing: RMCCoatService
     shoes: CMBootsUrbanFilled
     back: CMSatchelLiaisonSecure
     belt: RMCMatebaBeltForeconFilled # TODO RMC14: M1911 CO Variant (PR #9863). Mateba for now since both guns are about equal in power

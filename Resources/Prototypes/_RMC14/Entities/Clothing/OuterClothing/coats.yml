@@ -650,25 +650,6 @@
 
 - type: entity
   parent: CMCoatOfficer
-  id: RMCCoatServiceNVCommander
-  name: UNMC base commander bridge coat
-  description: A heavy coat, custom fitted for an UNMC Commander. Quite an uncommon sight on the frontier, as officers on Zephyron are often issued lower quality equipment.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/nv_commander.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/nv_commander.rsi
-  - type: CMArmor # RMC14 TODO: armor_energy = CLOTHING_ARMOR_LOW, flags_armor_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS
-    melee: 15
-    bullet: 15
-    bio: 10
-    explosionArmor: 10
-  - type: Appearance
-  - type: ItemCamouflage
-    camouflageVariations: {}
-
-- type: entity
-  parent: CMCoatOfficer
   id: RMCProvostCoat
   name: Provost Coat
   description: The crisp coat of a Provost Officer.
