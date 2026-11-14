@@ -164,6 +164,9 @@ public sealed class ParatoxinSystem : EntitySystem
         if ((amount <= 0 && !HasComp<ParatoxinAffectedComponent>(uid)) || !HasComp<MarineComponent>(uid))
             return false;
 
+        if (time == null)
+            time = _timing.CurTime;
+
         if (HasComp<SynthComponent>(uid) || HasComp<XenoComponent>(uid) || _skills.HasSkill(uid, ResistSkill, ResistLevel))
         {
             if (popup && source != null)
@@ -175,10 +178,10 @@ public sealed class ParatoxinSystem : EntitySystem
         }
 
         if (!EnsureComp<ParatoxinAffectedComponent>(uid, out var paratoxin))
-            paratoxin.NextEffectTime = _timing.CurTime + paratoxin.EffectEvery;
+            paratoxin.NextEffectTime = time.Value + paratoxin.EffectEvery;
 
         paratoxin.Stacks = Math.Min(paratoxin.Stacks + amount, paratoxin.MaxStacks);
-        paratoxin.NextDecrementTime = _timing.CurTime + (useGraceTime ? paratoxin.DecrementGraceTime : paratoxin.DecrementEvery);
+        paratoxin.NextDecrementTime = time.Value + (useGraceTime ? paratoxin.DecrementGraceTime : paratoxin.DecrementEvery);
         Dirty(uid, paratoxin);
 
         if (paratoxin.Stacks <= 0)
@@ -235,6 +238,7 @@ public sealed class ParatoxinSystem : EntitySystem
             }
 
             paratoxin.NextEffectTime = time + paratoxin.EffectEvery;
+            Dirty(uid, paratoxin);
 
             if (time < paratoxin.NextDecrementTime)
                 continue;

@@ -169,7 +169,7 @@
   parent: ActionXenoTailStabCorrosive
   id: ActionXenoTailStabSentinel
   name: Catalytic Tail Stab
-  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. Does additional burn damage if the target has paratoxin stacks, and if they have at least 10, gain a large speed and armor boost. Reduces paratoxin stacks by 1/3.
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. Does additional burn damage if the target has paratoxin stacks, and if they have at least 10, gain a large speed and armor boost. Reduces paratoxin stacks by half.
   components:
   - type: Action
     icon:
@@ -1742,7 +1742,7 @@
   parent: ActionXenoBase
   id: ActionXenoDrainingBite
   name: Draining Bite
-  description: Drain an enemy, stunning them and removing helpful chemicals from their system, scaling with paratoxin stacks.
+  description: Drain an enemy, stunning them and removing helpful chemicals from their system, scaling with paratoxin stacks. Reduces paratoxin stacks by 1/3.
   components:
   - type: Action
     itemIconStyle: NoItem

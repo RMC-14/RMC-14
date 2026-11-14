@@ -26,5 +26,5 @@ public sealed partial class XenoDrainingBiteComponent : Component
     public EntProtoId BiteEffect = "RMCEffectHeadbite";
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier HitSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_bite2.ogg");
+    public SoundSpecifier HitSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_bite2.ogg", AudioParams.Default.WithVolume(-5));
 }
