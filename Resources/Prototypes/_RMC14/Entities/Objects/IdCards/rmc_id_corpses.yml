@@ -91,14 +91,6 @@
     job: RMCSurvivorHybrisaTSEPAConstable
 
 - type: entity
-  parent: CMIDCardStandardDogtag
-  id: CMIDCardBasePolice
-  name: base police ID card
-  components:
-  - type: IdCard
-    jobTitle: rmc-job-name-survivor-varadero-base-police
-
-- type: entity
   parent: CMIDCardSilver
   id: RMCIDCardColonialDivisionManager
   name: colonial division manager ID card
@@ -112,4 +104,4 @@
     factions:
     - FactionWeYa
     - FactionMarine
-
+    

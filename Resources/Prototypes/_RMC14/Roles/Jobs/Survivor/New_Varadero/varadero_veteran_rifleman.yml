@@ -32,7 +32,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetUNMCVeteranRifleman
     - type: JobPrefix
-      prefix: cm-job-prefix-rifleman
+      prefix: rmc-job-prefix-survivor-varadero-rifleman
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -63,15 +63,15 @@
 - type: startingGear
   id: RMCGearSurvivorUNMCVeteranRifleman
   equipment:
-    jumpsuit: JumpsuitMarine
-    outerClothing: RMCCoatService
+    jumpsuit: RMCJumpsuitMarineNV
+    outerClothing: RMCOuterClothingExternalWebbingNV
     ears: RMCHeadsetMarineNV
-    belt: CMBeltMarine
-    gloves: RMCHandsVeteran
+    belt: RMCBeltNV
+    gloves: CMHandsBrown
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill
-    back: CMSatchelMarineTech
-    shoes: CMBootsBlackFilled
+    back: RMCSatchelNV
+    shoes: CMBootsUrbanFilled
   storage:
     back:
       - CMSheetMetal20
@@ -84,6 +84,6 @@
   components:
     - type: EntityPreset
       randomOutfits:
-        - [ ArmorHelmetM10 ]
-        - [ RMCHeadCapFlippable ]
-        - [ RMCBoonie ]
+        - [ RMCArmorHelmetCF5 ]
+        - [ RMCHeadCapPatrolNV ]
+        - [ RMCBoonieNV ]

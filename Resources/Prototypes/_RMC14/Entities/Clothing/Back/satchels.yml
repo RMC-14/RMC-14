@@ -770,11 +770,20 @@
   parent: RMCSatchelLightpack
   id: RMCSatchelTyrargo
   name: T13 MOLLE Satchel
-  suffix: UNMC
-  description: A tactical satchel manufactured by one of the Weston-Yamada subsidiaries. Very lightweight beltbag variant that utilizes UN standard MOLLE fastening systems. Can be often found in hands of colonial security and various private military groups.
+  description: A tactical satchel manufactured by Weston Yamada's R&D division. Very lightweight beltbag variant that utilizes UN standard MOLLE fastening systems. Can be often found in hands of colonial security and various private military groups.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/molle.rsi
+
+- type: entity
+  parent: RMCSatchelTyrargo
+  id: RMCSatchelNV
+  name: T14 MOLLE Satchel
+  suffix: UNMC
+  description: An UNMC standard-issue tactical satchel design manufactured on contract by Weston Yamada's R&D division in partnership with AEGIS Armaments. Very lightweight beltbag variant that utilizes UN standard MOLLE fastening systems.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/molle_nv.rsi
 
 - type: entity
   parent: CMSatchel

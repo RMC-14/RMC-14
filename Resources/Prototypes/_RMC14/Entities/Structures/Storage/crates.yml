@@ -117,6 +117,7 @@
   - type: AnimationPlayer
   - type: RMCMesonsNonviewable
   - type: EntityStorageCloseOnMapInit
+  - type: RMCEntityStorageLineBlockable
 
 - type: entity
   parent: RMCCrateBase

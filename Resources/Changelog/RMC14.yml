@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Changed the tactical map colour of Echo to their squad colour.
-    type: Tweak
-  id: 3249
-  time: '2026-05-31T03:07:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8593
 - author: kleinerstation13
   changes:
   - message: Fixed Shiva's Snowball Commando not having construction 1 skill
@@ -4526,5 +4519,12 @@
   id: 3748
   time: '2026-11-09T22:10:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9909
+- author: RerBreab
+  changes:
+  - message: Opened lockers no longer block projectiles or xeno abilities.
+    type: Fix
+  id: 3749
+  time: '2026-11-13T23:24:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10646
 Name: RMC14
 Order: -1

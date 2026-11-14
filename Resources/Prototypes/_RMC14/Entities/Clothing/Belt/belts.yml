@@ -151,6 +151,19 @@
           - RMCCartridge458SOCOM
 
 - type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigNV
+  name: M276-B pattern shotgun shell bandolier
+  description: The M276-B is the bandolier configuration of the M276 shell load rig of the UNMC. The M276-B series design was created due to a need for a cost-effective option for UNMC troops operating in densely forested and lush tropical areas, where a disposable belt with less overall bulk and a larger range of motion is often more important than a primary load-bearing mechanism with a larger carrying capacity.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun_nv.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltPMC
   name: M305 pattern ammo load rig
@@ -1504,6 +1517,19 @@
     sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltSPPBrown
+  id: RMCBeltNV
+  name: M276-B pattern ammo bandolier
+  description: The M276-B is the bandolier configuration of the M276 ammo load rig of the UNMC. The M276-B series design was created due to a need for a cost-effective option for troops operating in densely forested and tropical areas, where a disposable belt with less overall bulk and a larger range of motion is often more important than a primary load-bearing mechanism with a larger carrying capacity.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/ammobelt_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/ammobelt_nv.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
 
