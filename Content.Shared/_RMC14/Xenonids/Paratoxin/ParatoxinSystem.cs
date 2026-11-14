@@ -16,6 +16,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Rejuvenate;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -49,6 +50,7 @@ public sealed class ParatoxinSystem : EntitySystem
 
         SubscribeLocalEvent<ParatoxinAffectedComponent, MobStateChangedEvent>(OnParatoxinMobStateChanged);
         SubscribeLocalEvent<ParatoxinAffectedComponent, ComponentShutdown>(OnParatoxinRemoved);
+        SubscribeLocalEvent<ParatoxinAffectedComponent, RejuvenateEvent>(OnParatoxinRejuvenate);
 
         SubscribeLocalEvent<ParatoxinOnHitComponent, ProjectileHitEvent>(OnParatoxinOnHit, after: [typeof(CMClusterGrenadeSystem)]);
 
@@ -73,6 +75,11 @@ public sealed class ParatoxinSystem : EntitySystem
             return;
 
         _appearance.SetData(ent, ParatoxinVisuals.Stacks, 0);
+    }
+
+    private void OnParatoxinRejuvenate(Entity<ParatoxinAffectedComponent> ent, ref RejuvenateEvent args)
+    {
+        RemCompDeferred<ParatoxinAffectedComponent>(ent);
     }
 
     private void OnParatoxinOnHit(Entity<ParatoxinOnHitComponent> spit, ref ProjectileHitEvent args)
