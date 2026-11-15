@@ -1,5 +1,5 @@
 using Content.Shared.Access;
-using Content.Shared._RMC14.TacticalMap;
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -41,10 +41,10 @@ public sealed class IdModificationConsoleIFFChangeBuiMsg(bool revoke)
 }
 
 [Serializable] [NetSerializable]
-public sealed class IdModificationConsoleTacMapLayerChangeBuiMsg(ProtoId<TacticalMapLayerPrototype> layer, bool revoke)
+public sealed class IdModificationConsoleTacMapAccessBuiMsg(ProtoId<NpcFactionPrototype> faction, bool revoke)
     : BoundUserInterfaceMessage
 {
-    public readonly ProtoId<TacticalMapLayerPrototype> Layer = layer;
+    public readonly ProtoId<NpcFactionPrototype> Faction = faction;
     public readonly bool Revoke = revoke;
 }
 

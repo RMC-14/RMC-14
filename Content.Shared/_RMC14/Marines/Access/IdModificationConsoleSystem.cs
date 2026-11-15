@@ -62,7 +62,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 subs.Event<IdModificationConsoleSignInBuiMsg>(OnSignInMsg);
                 subs.Event<IdModificationConsoleSignInTargetBuiMsg>(OnSignInTargetMsg);
                 subs.Event<IdModificationConsoleIFFChangeBuiMsg>(OnIFFChangeMsg);
-                subs.Event<IdModificationConsoleTacMapLayerChangeBuiMsg>(OnTacMapLayerChangeMsg);
+                subs.Event<IdModificationConsoleTacMapAccessBuiMsg>(OnTacMapAccessMsg);
                 subs.Event<IdModificationConsoleJobChangeBuiMsg>(OnJobChangeMsg);
                 subs.Event<IdModificationConsoleTerminateConfirmBuiMsg>(OnTerminateConfirmMsg);
                 subs.Event<IdModificationConsoleAssignSquadMsg>(OnTerminalAssignSquadMsg);
@@ -206,34 +206,34 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnTacMapLayerChangeMsg(Entity<IdModificationConsoleComponent> ent,
-        ref IdModificationConsoleTacMapLayerChangeBuiMsg args)
+    private void OnTacMapAccessMsg(Entity<IdModificationConsoleComponent> ent,
+        ref IdModificationConsoleTacMapAccessBuiMsg args)
     {
-        if (!ent.Comp.Authenticated)
+        if (!ent.Comp.Authenticated || !ent.Comp.TacticalMapFactions.Contains(args.Faction))
             return;
 
         if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) || uid == null)
             return;
 
-        var access = EnsureComp<TacticalMapLayerAccessComponent>(uid.Value);
+        var access = EnsureComp<TacticalMapAccessComponent>(uid.Value);
         if (!args.Revoke)
         {
-            if (access.Layers.Add(args.Layer))
+            if (access.Factions.Add(args.Faction))
             {
                 Dirty(uid.Value, access);
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
-                    $"{ToPrettyString(args.Actor):player} has granted tactical map layer {args.Layer.Id} for {ToPrettyString(uid):entity}");
+                    $"{ToPrettyString(args.Actor):player} has granted {args.Faction.Id} tactical map access for {ToPrettyString(uid):entity}");
             }
         }
         else
         {
-            if (access.Layers.Remove(args.Layer))
+            if (access.Factions.Remove(args.Faction))
             {
                 Dirty(uid.Value, access);
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Low,
-                    $"{ToPrettyString(args.Actor):player} has revoked tactical map layer {args.Layer.Id} for {ToPrettyString(uid):entity}");
+                    $"{ToPrettyString(args.Actor):player} has revoked {args.Faction.Id} tactical map access for {ToPrettyString(uid):entity}");
             }
         }
     }
