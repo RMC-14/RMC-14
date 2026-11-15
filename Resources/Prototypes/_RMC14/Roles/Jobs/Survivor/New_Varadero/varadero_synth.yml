@@ -58,14 +58,14 @@
   id: RMCGearSurvivorUNMCSynthetic
   equipment:
     id: RMCIDCardSynth
-    back: RMCSatchelMarineLogisticsBig
-    jumpsuit: RMCJumpsuitCivilianGreen
-    shoes: CMBootsBlackFilled
+    back: RMCBackpackNV
+    jumpsuit: RMCJumpsuitMarineNVSynth
+    shoes: CMBootsUrbanFilled
     ears: RMCHeadsetMarineNV
     pocket1: RMCPouchToolsFill
     pocket2: RMCPouchSurvivalSynthFill
     belt: RMCBeltMedicalDefibAnalyzerFilled
-    outerClothing: RMCHazardVestEMTGreen
+    outerClothing: RMCOuterClothingExternalWebbingNV
   inhand:
   - RMCMotionDetector
   - CMFirstAidKitFilled
