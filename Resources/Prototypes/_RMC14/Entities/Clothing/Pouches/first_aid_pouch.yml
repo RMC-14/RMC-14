@@ -112,7 +112,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/wy_firstaid.rsi
 
-
 - type: entity
   parent: RMCPouchFirstAidPMC
   id: RMCPouchFirstAidPMCFill
