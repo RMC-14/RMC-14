@@ -1,0 +1,11 @@
+<widgets:TargetDollGui xmlns="https://spacestation14.io"
+                       xmlns:widgets="clr-namespace:Content.Client._RMC14.UserInterface.Systems.TargetDoll.Widgets"
+                       MinSize="64 64"
+                       MouseFilter="Stop"
+                       Visible="False">
+    <!-- widgets lay their children out in a row, so the two images sit in a plain control to overlap -->
+    <Control MinSize="64 64" MouseFilter="Ignore">
+        <TextureRect Name="Doll" Access="Public" TextureScale="2 2" Stretch="KeepCentered" MouseFilter="Ignore" />
+        <TextureRect Name="Zone" Access="Public" TextureScale="2 2" Stretch="KeepCentered" MouseFilter="Ignore" />
+    </Control>
+</widgets:TargetDollGui>

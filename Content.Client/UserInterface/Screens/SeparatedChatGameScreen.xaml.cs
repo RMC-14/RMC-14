@@ -26,6 +26,9 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
 
         // RMC14
         SetGrowVertical(Alerts, GrowDirection.Both);
+        SetAnchorAndMarginPreset(TargetDoll, LayoutPreset.BottomRight, margin: 5);
+        SetGrowHorizontal(TargetDoll, GrowDirection.Begin);
+        SetGrowVertical(TargetDoll, GrowDirection.Begin);
 
         ScreenContainer.OnSplitResizeFinished += () =>
             OnChatResized?.Invoke(new Vector2(ScreenContainer.SplitFraction, 0));

@@ -67,24 +67,31 @@ binds:
   type: State
   key: Space
 # Camera
+# RMC14 these need shift, target zones use the plain numpad keys
 - function: CameraRotateLeft
   type: State
   key: NumpadNum7
+  mod1: Shift
 - function: CameraRotateRight
   type: State
   key: NumpadNum9
+  mod1: Shift
 - function: CameraReset
   type: State
   key: NumpadNum8
+  mod1: Shift
 - function: ZoomOut
   type: State
   key: NumpadNum4
+  mod1: Shift
 - function: ZoomIn
   type: State
   key: NumpadNum6
+  mod1: Shift
 - function: ResetZoom
   type: State
   key: NumpadNum5
+  mod1: Shift
 # Misc
 - function: ShowEscapeMenu
   type: State
@@ -710,3 +717,30 @@ binds:
   type: State
   key: H
   mod1: Alt
+- function: RMCTargetHead
+  type: State
+  key: NumpadNum8
+- function: RMCTargetRightArm
+  type: State
+  key: NumpadNum4
+- function: RMCTargetChest
+  type: State
+  key: NumpadNum5
+- function: RMCTargetLeftArm
+  type: State
+  key: NumpadNum6
+- function: RMCTargetRightLeg
+  type: State
+  key: NumpadNum1
+- function: RMCTargetAbdomen
+  type: State
+  key: NumpadNum2
+- function: RMCTargetLeftLeg
+  type: State
+  key: NumpadNum3
+- function: RMCTargetNext
+  type: State
+  key: NumpadNum7
+- function: RMCTargetPrevious
+  type: State
+  key: NumpadNum9

@@ -23,6 +23,11 @@ public sealed partial class DefaultGameScreen : InGameScreen
         SetAnchorAndMarginPreset(Chat, LayoutPreset.TopRight, margin: 10);
         SetAnchorAndMarginPreset(Alerts, LayoutPreset.TopRight, margin: 10);
 
+        // RMC14
+        SetAnchorAndMarginPreset(TargetDoll, LayoutPreset.BottomRight, margin: 5);
+        SetGrowHorizontal(TargetDoll, GrowDirection.Begin);
+        SetGrowVertical(TargetDoll, GrowDirection.Begin);
+
         Chat.OnResized += ChatOnResized;
         Chat.OnChatResizeFinish += ChatOnResizeFinish;
 

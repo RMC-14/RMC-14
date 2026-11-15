@@ -37,6 +37,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> CMBleedTimeMultiplier =
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCLimbsCanBreak =
+        CVarDef.Create("rmc.limbs_can_break", true, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> CMMarinesPerXeno =
         CVarDef.Create("rmc.marines_per_xeno", 4f, CVar.SERVER | CVar.SERVERONLY);
 
