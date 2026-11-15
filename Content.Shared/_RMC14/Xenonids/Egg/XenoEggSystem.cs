@@ -94,7 +94,7 @@ public sealed class XenoEggSystem : EntitySystem
     {
         _stepTriggerQuery = GetEntityQuery<StepTriggerComponent>();
 
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
+        SubscribeLocalEvent<DropshipHijackLaunchedEvent>(OnDropshipHijackLaunch);
 
         SubscribeLocalEvent<XenoComponent, XenoGrowOvipositorActionEvent>(OnXenoGrowOvipositorAction);
         SubscribeLocalEvent<XenoComponent, XenoGrowOvipositorDoAfterEvent>(OnXenoGrowOvipositorDoAfter);
@@ -127,7 +127,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggSustainerComponent, MobStateChangedEvent>(OnEggSustainerDeath);
     }
 
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
+    private void OnDropshipHijackLaunch(ref DropshipHijackLaunchedEvent ev)
     {
         var query = EntityQueryEnumerator<XenoOvipositorCapableComponent>();
         while (query.MoveNext(out var uid, out _))

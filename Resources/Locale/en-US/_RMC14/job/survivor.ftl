@@ -154,13 +154,15 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-greeting-varadero = The stench of burning phoron still lingers in the salty evening breeze of the ruined New Varadero Naval Base. The specter's dying cackle echoes through your mind as you realise that you're now one of just a handful of living people left standing on these battle worn shores. Through sheer cunning, grit, and United Nations fire power, you've managed to survive against both ceaseless tides of xenonids and a now slain lone specter... the cry of a new mother snaps you back to reality. It's only a matter of time before another acidic wave of those horrid things attempts to wash over you.
+rmc-job-greeting-varadero = It's been days since the military's retreat from the naval base. Unable to make it to the rendezvous point, the tunnel to New Varadero City was blown, and you were sealed inside with the xenonids. With no way off this island, you've had to run, hide, fight and band together with whoever you could to stay alive this long. You may have held the horde at bay for now, but it's only a matter of time before they come back.
 
    You are aware of the xenonid threat.
 
    Your primary objective is to survive the outbreak.
 
    You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-prefix-survivor-varadero-rifleman = UNMC RFN
 
 rmc-job-name-survivor-commander-new-varadero = Base Commander
 rmc-job-prefix-survivor-varadero-commander = UNMC CDR
@@ -200,7 +202,7 @@ rmc-job-prefix-survivor-new-varadero-xenobiologist = WY XBIO
 rmc-job-name-survivor-new-varadero-rd = New Varadero Research Director
 rmc-job-prefix-survivor-new-varadero-rd = WY RD
 
-rmc-job-name-survivor-varadero-base-police = Peacekeeper
+rmc-job-name-survivor-new-varadero-contractor = UN Civilian Contractor
 
 # Hybrisa Prospera Survs
 
@@ -289,9 +291,13 @@ rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 
-# Sorokyne SOF insert survs
+# Sorokyne SPP special forces insert survs
 
-rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the Ministry of Space Colonization to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
+rmc-job-greeting-soro-spetsnaz = You are a member of the SPP Spetsnaz Reconnaissance Unit!
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons.
+
+  You are part of the Group 'B' Spetsnaz Reconnaissance Unit of the SPP, deployed alongside the Ministry of Space Colonization to perform forward reconnaissance on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -299,27 +305,27 @@ rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primar
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-name-soro-sof-base = SPP SOF Survivor
+rmc-job-name-spetsnaz = SPP SRU Survivor
 
-rmc-job-description-soro-sof = You are a stranded SPP SOF marine. Your team was sent to investigate a distress signal. Find out what happened to the colony.
+rmc-job-description-soro-spetsnaz = You are a stranded SPP Group 'B' SRU marine. Your team was sent to investigate a distress signal. Find out what happened to the colony.
 
-rmc-job-name-soro-sof-sapper = SOF Sapper
-rmc-job-prefix-soro-sof-sapper = 121/RECON SAP
+rmc-job-name-spetsnaz-sapper = Spetsnaz Sapper
+rmc-job-prefix-soro-spetsnaz-sapper = B/SRU SAP
 
-rmc-job-name-soro-sof-medic = SOF Medic
-rmc-job-prefix-soro-sof-medic = 121/RECON MED
+rmc-job-name-spetsnaz-medic = Spetsnaz Medic
+rmc-job-prefix-soro-spetsnaz-medic = B/SRU MED
 
-rmc-job-name-soro-sof-sl = SOF Squad Leader
-rmc-job-prefix-soro-sof-sl = 121/RECON SL
+rmc-job-name-spetsnaz-sl = Spetsnaz Squad Leader
+rmc-job-prefix-soro-spetsnaz-sl = B/SRU SL
 
-rmc-job-name-soro-sof-spec = SOF Specialist
-rmc-job-prefix-soro-sof-spec = 121/RECON SPEC
+rmc-job-name-spetsnaz-spec = Spetsnaz Specialist
+rmc-job-prefix-soro-spetsnaz-spec = B/SRU SPEC
 
-rmc-job-name-soro-sof-soldier = SOF Soldier
-rmc-job-prefix-soro-sof-soldier = 121/RECON SOL
+rmc-job-name-spetsnaz-operator = Spetsnaz Operator
+rmc-job-prefix-soro-spetsnaz-operator = B/SRU OPR
 
-rmc-job-name-soro-sof-synth = SOF Support Synthetic
-rmc-job-prefix-soro-sof-synth = 121/RECON SYN
+rmc-job-name-spetsnaz-synth = Spetsnaz SRU Synthetic
+rmc-job-prefix-soro-spetsnaz-synth = B/SRU SYN
 
 # Trijent survs
 
@@ -340,9 +346,13 @@ cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
-# Trijent crashland insert survs
+# Trijent SPP special forces insert survs
 
-rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons. Your orders were simple, recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
+rmc-job-greeting-trijent-spetsnaz = You are a member of the SPP Spetsnaz Reconnaissance Unit!
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons.
+
+  You are part of the Group 'D' Spetsnaz Reconnaissance Unit of the SPP. Your orders were simple, recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -350,27 +360,19 @@ rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primar
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-name-crashland-base = SPP Airborne Survivor
+rmc-job-description-trijent-spetsnaz = You are a stranded SPP Group 'D' SRU marine. Your Mi-220 assault gunship crashed and you are stranded on the planet. Do what it takes to survive!
 
-rmc-job-description-crashland = You are a stranded SPP Airborne marine. Your Mi-220 assault gunship crashed and you are stranded on the planet. Do what it takes to survive!
+rmc-job-prefix-trijent-spetsnaz-sapper = D/SRU SAP
 
-rmc-job-name-crashland-sapper = Airborne Sapper
-rmc-job-prefix-crashland-sapper = 173/RECON SAP
+rmc-job-prefix-trijent-spetsnaz-medic = D/SRU MED
 
-rmc-job-name-crashland-medic = Airborne Medic
-rmc-job-prefix-crashland-medic = 173/RECON MED
+rmc-job-prefix-trijent-spetsnaz-sl = D/SRU SL
 
-rmc-job-name-crashland-sl = Airborne Squad Leader
-rmc-job-prefix-crashland-sl = 173/RECON SL
+rmc-job-prefix-trijent-spetsnaz-spec = D/SRU SPEC
 
-rmc-job-name-crashland-spec = Airborne Specialist
-rmc-job-prefix-crashland-spec = 173/RECON SPEC
+rmc-job-prefix-trijent-spetsnaz-operator = D/SRU OPR
 
-rmc-job-name-crashland-soldier = Airborne Soldier
-rmc-job-prefix-crashland-soldier = 173/RECON SOL
-
-rmc-job-name-crashland-synth = Airborne Support Synthetic
-rmc-job-prefix-crashland-synth = 173/RECON SYN
+rmc-job-prefix-trijent-spetsnaz-synth = D/SRU SYN
 
 # Fiorina Science Annex Survs
 

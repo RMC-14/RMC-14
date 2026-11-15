@@ -65,6 +65,7 @@
   id: RMCGearRoyalSectionLeaderPVE
   equipment:
     id: RMCIDRoyalMarinesSectionLeaderPVE
+    ears: RMCHeadsetRoyalMarineLeaderPVE
 
 - type: entity
   parent: CMSpawnPointJobBase
