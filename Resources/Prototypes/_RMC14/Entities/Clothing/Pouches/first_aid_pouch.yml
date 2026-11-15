@@ -149,6 +149,7 @@
   parent: RMCPouchFirstAidSplintsGauzeOintment
   id: RMCPouchFirstAidRCMFirstAidSplintsGauzeOintment
   name: RCM first-aid pouch
+  suffix: Filled
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/rcm_firstaid.rsi
