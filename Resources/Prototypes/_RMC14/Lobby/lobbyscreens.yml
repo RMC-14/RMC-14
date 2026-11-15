@@ -99,5 +99,5 @@
   background: /Textures/_RMC14/Lobby/posters.png
 
 - type: lobbyBackground
-  id: SGOMothLobbyEnlist
-  background: /Textures/_RMC14/Lobby/SGOMothLobbyEnlist.png
+  id: MothSGOLobbyEnlist
+  background: /Textures/_RMC14/Lobby/MothSGOLobbyEnlist.png
