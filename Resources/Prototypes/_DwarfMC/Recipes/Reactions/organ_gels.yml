@@ -6,7 +6,7 @@
       amount: 1
     RMCCarbon:
       amount: 1
-    Water:
+    RMCPhosphorus:
       amount: 1
   products:
     DwarfBoneGel: 3
@@ -30,7 +30,7 @@
       amount: 1
     RMCOxygen:
       amount: 1
-    Water:
+    RMCNitrogen:
       amount: 1
   products:
     DwarfLungGel: 3
