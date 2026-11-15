@@ -419,6 +419,15 @@
   name: L96 flare pouch
   suffix: RCM
   description: A pouch designed to hold flares used by the Royal Crown Marines. Refillable with an L96 flare pack.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/flare_rcm.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
 
 - type: entity
   parent: RMCPouchFlare

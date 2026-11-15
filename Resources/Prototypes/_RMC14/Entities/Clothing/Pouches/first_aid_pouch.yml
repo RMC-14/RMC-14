@@ -112,6 +112,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/wy_firstaid.rsi
 
+
 - type: entity
   parent: RMCPouchFirstAidPMC
   id: RMCPouchFirstAidPMCFill
@@ -136,3 +137,19 @@
     - id: CMKelotaneAutoInjector
     #- id: CMTramadolAutoInjector
     - id: CMEmergencyAutoInjector
+
+- type: entity
+  parent: RMCPouchFirstAid
+  id: RMCPouchFirstAidRCM
+  name: RCM first-aid pouch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/rcm_firstaid.rsi
+
+- type: entity
+  parent: RMCPouchFirstAidSplintsGauzeOintment
+  id: RMCPouchFirstAidRCMFirstAidSplintsGauzeOintment
+  name: RCM first-aid pouch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/rcm_firstaid.rsi

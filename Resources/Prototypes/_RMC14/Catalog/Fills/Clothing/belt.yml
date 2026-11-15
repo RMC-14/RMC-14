@@ -723,6 +723,21 @@
     - id: RMCMK80RCM
 
 - type: entity
+  parent: RMCBeltUtilityRCM
+  id: RMCBeltUtilityRCMFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
+- type: entity
   parent: RMCBeltHolsterPistolWeYa
   id: RMCBeltHolsterPistolWeYaMK80Fill
   suffix: Filled

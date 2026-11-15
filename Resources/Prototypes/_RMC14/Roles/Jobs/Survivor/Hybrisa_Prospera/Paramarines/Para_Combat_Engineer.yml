@@ -49,7 +49,7 @@
   equipment:
     id: RMCIDRoyalParamarinesCombatEngineer
     eyes: RMCWeldingGoggles
-    belt: CMBeltUtilityFilled
+    belt: RMCBeltUtilityRCMFilled
     outerClothing: RMCArmorParaVest
     back: RMCSatchelLightpackFilledPara
 
