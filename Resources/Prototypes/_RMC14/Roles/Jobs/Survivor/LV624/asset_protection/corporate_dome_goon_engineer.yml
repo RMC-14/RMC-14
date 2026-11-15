@@ -38,10 +38,8 @@
   equipment:
     jumpsuit: RMCJumpsuitVeteranPMCCorporateEngineer
     head: ArmorHelmetPMCCorporateEngineer
-    back: RMCSatchelLightpackWeYa
+    back: RMCSatchelLightpackWelder
     belt: CMBeltUtilityFilled # they are supposed to start with the engi belt held and pistol belt worn, but i seriously expect people not to notice and drop it roundstart so i swapped them around
-    pocket1: RMCPouchSurvivalBlackFilled
-    pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:
     - CMStunbaton
