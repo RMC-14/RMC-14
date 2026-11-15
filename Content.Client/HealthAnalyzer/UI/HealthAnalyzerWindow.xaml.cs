@@ -1,9 +1,11 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Message;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared.Atmos;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Alert;
+using Content.Shared.Body.Part;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -110,7 +112,7 @@ namespace Content.Client.HealthAnalyzer.UI
 
             // Alerts
 
-            var showAlerts = msg.Unrevivable == true || msg.Bleeding == true;
+            var showAlerts = msg.Unrevivable == true || msg.Bleeding == true || msg.EmbeddedObjectInBodyParts.Count > 0;
 
             AlertsDivider.Visible = showAlerts;
             AlertsContainer.Visible = showAlerts;
@@ -134,6 +136,16 @@ namespace Content.Client.HealthAnalyzer.UI
                     MaxWidth = 300
                 });
 
+            foreach (var embeddedEntry in msg.EmbeddedObjectInBodyParts)
+            {
+                AlertsContainer.AddChild(new RichTextLabel
+                {
+                    Text = Loc.GetString("health-analyzer-window-entity-embedded-text", ("bodyPart", GetBodyPartName(embeddedEntry.BodyPart, embeddedEntry.Symmetry))),
+                    Margin = new Thickness(0, 4),
+                    MaxWidth = 300
+                });
+            }
+
             // Damage Groups
 
             var damageSortedGroups =
@@ -154,6 +166,36 @@ namespace Content.Client.HealthAnalyzer.UI
                 MobState.Dead => Loc.GetString("health-analyzer-window-entity-dead-text"),
                 _ => Loc.GetString("health-analyzer-window-entity-unknown-text"),
             };
+        }
+
+        private static string GetBodyPartName(BodyPartType bodyPart, BodyPartSymmetry symmetry = BodyPartSymmetry.None)
+        {
+            var baseName = bodyPart switch
+            {
+                BodyPartType.Other => "Other",
+                BodyPartType.Torso => "Torso",
+                BodyPartType.Head => "Head",
+                BodyPartType.Arm => "Arm",
+                BodyPartType.Hand => "Hand",
+                BodyPartType.Leg => "Leg",
+                BodyPartType.Foot => "Foot",
+                BodyPartType.Tail => "Tail",
+                _ => bodyPart.ToString(),
+            };
+
+            if (bodyPart is BodyPartType.Arm or BodyPartType.Hand or BodyPartType.Leg or BodyPartType.Foot && symmetry != BodyPartSymmetry.None)
+            {
+                var sidePrefix = symmetry switch
+                {
+                    BodyPartSymmetry.Left => "Left",
+                    BodyPartSymmetry.Right => "Right",
+                    _ => string.Empty,
+                };
+
+                return sidePrefix == string.Empty ? baseName : $"{sidePrefix} {baseName}";
+            }
+
+            return baseName;
         }
 
         private void DrawDiagnosticGroups(
