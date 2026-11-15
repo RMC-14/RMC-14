@@ -31,7 +31,7 @@
   - type: TacticalMapComputer
     allowedSquadGroups: [UNMC]
   - type: MarineControlComputer
-    canPrintCommendations: false
+    canPrintCommendations: true
   - type: Tag
     tags:
     - CommandTablet

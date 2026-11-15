@@ -9,6 +9,7 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -18,6 +19,7 @@ public sealed class HardpointSlotSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly HardpointSystem _hardpoints = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -364,6 +366,19 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (!ejected || ejectedItem == null)
         {
             SetErrorAndRefresh("Couldn't remove the hardpoint. Free a hand and try again.");
+            return;
+        }
+
+        if (TryComp(ejectedItem.Value, out HardpointIntegrityComponent? ejectedIntegrity) && ejectedIntegrity.Integrity <= 0f)
+        {
+            if (_net.IsServer)
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-hardpoint-disintegrates", ("item", ejectedItem.Value)), finalLocation.Owner, PopupType.MediumCaution);
+                QueueDel(ejectedItem.Value);
+            }
+
+            SetErrorAndRefresh(null);
+            _hardpoints.RefreshCanRun(ent.Owner);
             return;
         }
 

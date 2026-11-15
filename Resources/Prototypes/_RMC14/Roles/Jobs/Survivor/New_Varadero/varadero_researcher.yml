@@ -1,0 +1,86 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: RMCSurvivorNewVaraderoResearcher
+  name: rmc-job-name-survivor-new-varadero-researcher
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorScientist
+  startingGear: RMCGearSurvivorNewVaraderoResearcher
+  greeting: rmc-job-greeting-varadero
+  spawnMenuRoleName: New Varadero Researcher (NV Survivor)
+  accessGroups:
+  - ColonistMedical
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: RMCSkillPresetSurvivorResearcher
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+      - WeYa
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: researcher
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-new-varadero-researcher
+    - type: Language
+      spokenLanguages:
+      - Spanish
+      - English
+      understoodLanguages:
+      - Spanish
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNVResearcher
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorNewVaraderoResearcher
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    id: RMCIDCardColonistScientist
+    pocket1: RMCPouchSurvivalFill
+  storage:
+    back:
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorNewVaraderoResearcher
+  name: survivor new varadero researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorNewVaraderoResearcher
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCGearSurvivorPresetUNMC
+  id: RMCSurvivorPresetNVResearcher
+  name: varadero researcher preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ CMHandsLatex, RMCSatchelChemistry, CMUtilityVest, RMCJumpsuitCivilianScientist, RMCGlassesReagentHUDGlasses, RMCMaskSWAT, CMBootsBlackFilled ]
+    - [ CMHandsBrown, RMCLabcoatScience, CMJumpsuitResearch, CMMaskSterile, RMCGlassesReagentHUDGlasses, CMSatchel, CMBootsBlackFilled ]
+    - [ RMCWeldingGoggles, RMCSatchelLightpack5Slot, RMCLabcoatLong, RMCJumpsuitCivilianScientist, RMCBootsCBRN, RMCMaskSWAT ]
+    randomGearOther:
+    -
+      - [ RMCMotionDetector ]
+      - [ RMCGrenadeCustomMetalFoam ]
+      - [ RMCGrenadeCustomWeedkiller ]
+      - [ RMCThermalTarpV2Folded ]

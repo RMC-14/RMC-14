@@ -6,6 +6,7 @@ cm-xeno-egg-failed-must-hive-weeds = The egg must be planted on hive weeds.
 cm-xeno-egg-failed-plant-outside = Best not to plant this thing outside of a containment cell.
 cm-xeno-egg-failed-already-there = There's already an egg there.
 cm-xeno-egg-blocked = There's something built here already.
+rmc-xeno-egg-blocked-vehicle = The egg cannot be planted inside a vehicle.
 
 rmc-xeno-egg-dead-child = This child is dead.
 rmc-xeno-egg-has-child = This one is occupied with a child.

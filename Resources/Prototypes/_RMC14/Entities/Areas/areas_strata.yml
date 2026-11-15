@@ -198,7 +198,7 @@
   - type: Sprite
     state: marshcenter
   - type: Area
-    linkedLz: dropship_lz1
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
@@ -228,7 +228,7 @@
   - type: Sprite
     state: marshwater
   - type: Area
-    linkedLz: dropship_lz1
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataInterior
@@ -652,6 +652,7 @@
   - type: Sprite
     state: outpost_engi_4
   - type: Area
+    linkedLz: dropship_lz2
     CAS: true
     fulton: false
     mortarPlacement: false

@@ -24,4 +24,13 @@ public sealed partial class VehicleSmashableComponent : Component
 
     [DataField]
     public bool RequiresDoorUnpowered;
+
+    [DataField]
+    public VehicleWeightClass? MinDestroyWeightClass;
+
+    [DataField]
+    public VehicleWeightClass? MinContinueWeightClass;
+
+    [DataField]
+    public VehicleWeightClass? SlowdownBelowWeightClass;
 }

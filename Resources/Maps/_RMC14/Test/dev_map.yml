@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/15/2026 12:22:23
-  entityCount: 1479
+  time: 07/28/2026 23:25:13
+  entityCount: 1481
 maps:
 - 1
 grids:
@@ -3573,11 +3573,15 @@ entities:
     - type: Transform
       pos: 17.5,9.5
       parent: 2
+    - type: CMMedicalSupplyLink
+      connectedPort: True
   - uid: 228
     components:
     - type: Transform
       pos: 13.5,11.5
       parent: 2
+    - type: CMMedicalSupplyLink
+      connectedPort: True
   - uid: 231
     components:
     - type: Transform
@@ -3588,6 +3592,8 @@ entities:
     - type: Transform
       pos: 13.5,12.5
       parent: 2
+    - type: CMMedicalSupplyLink
+      connectedPort: True
   - uid: 246
     components:
     - type: Transform
@@ -3938,6 +3944,13 @@ entities:
     - type: Transform
       pos: -1.5,-1.5
       parent: 2
+- proto: CMSpawnPointCombatCorrespondent
+  entities:
+  - uid: 1478
+    components:
+    - type: Transform
+      pos: 0.5,-2.5
+      parent: 2
 - proto: CMSpawnPointCombatTech
   entities:
   - uid: 660
@@ -3958,13 +3971,6 @@ entities:
     components:
     - type: Transform
       pos: -0.5,-2.5
-      parent: 2
-- proto: CMSpawnPointCombatCorrespondent
-  entities:
-  - uid: 1478
-    components:
-    - type: Transform
-      pos: 0.5,-2.5
       parent: 2
 - proto: CMSpawnPointCrewman
   entities:
@@ -4000,6 +4006,13 @@ entities:
     components:
     - type: Transform
       pos: 0.5,1.5
+      parent: 2
+- proto: CMSpawnPointForeconSynth
+  entities:
+  - uid: 1480
+    components:
+    - type: Transform
+      pos: 3.5,2.5
       parent: 2
 - proto: CMSpawnPointHospitalCorpsman
   entities:
@@ -9244,23 +9257,6 @@ entities:
       anchored: False
       pos: -4,-17
       parent: 1
-- proto: RMCBeakerHighCapacity
-  entities:
-  - uid: 254
-    components:
-    - type: Transform
-      pos: 14.5,9.5
-      parent: 2
-  - uid: 255
-    components:
-    - type: Transform
-      pos: 15.5,9.5
-      parent: 2
-  - uid: 256
-    components:
-    - type: Transform
-      pos: 16.5,9.5
-      parent: 2
 - proto: RMCBoxBeaker
   entities:
   - uid: 23
@@ -10043,6 +10039,23 @@ entities:
     - type: Transform
       pos: -4.3179135,8.275752
       parent: 2
+- proto: RMCReagentJug
+  entities:
+  - uid: 254
+    components:
+    - type: Transform
+      pos: 14.5,9.5
+      parent: 2
+  - uid: 255
+    components:
+    - type: Transform
+      pos: 15.5,9.5
+      parent: 2
+  - uid: 256
+    components:
+    - type: Transform
+      pos: 16.5,9.5
+      parent: 2
 - proto: RMCSheetPlastic
   entities:
   - uid: 242
@@ -10084,6 +10097,20 @@ entities:
     components:
     - type: Transform
       pos: 0.5,3.5
+      parent: 2
+- proto: RMCSpawnPointSynth
+  entities:
+  - uid: 1477
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 2
+- proto: RMCSpawnPointTSEPASynthetic
+  entities:
+  - uid: 1481
+    components:
+    - type: Transform
+      pos: 3.5,1.5
       parent: 2
 - proto: RMCSurveillanceCameraAlmayer
   entities:

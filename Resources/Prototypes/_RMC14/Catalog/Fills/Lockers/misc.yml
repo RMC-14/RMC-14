@@ -123,11 +123,8 @@
       # ToDo: RMC14 Platinum Coin
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000
-    - id: CMWebbingHolster
-    - id: RMCWeaponPistolPK7
-    - id: RMCMagazinePistolPK7
-    - id: RMCMagazinePistolPK7
     - id: RMCBackpackRTOBagPhone
+    - id: RMCShoulderHolsterPK7
 
 - type: entity
   parent: RMCLockerFieldDoctor
