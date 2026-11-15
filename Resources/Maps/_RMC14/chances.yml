@@ -112143,7 +112143,8 @@ entities:
       pos: -72.5,-32.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 9110
@@ -112152,7 +112153,8 @@ entities:
       pos: -72.5,-33.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 9111
@@ -112161,7 +112163,8 @@ entities:
       pos: -69.5,-31.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 9112
@@ -112170,7 +112173,8 @@ entities:
       pos: -70.5,-31.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCGirderDisplaced

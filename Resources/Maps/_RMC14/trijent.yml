@@ -166952,7 +166952,8 @@ entities:
       pos: 115.5,-74.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16308
@@ -166961,7 +166962,8 @@ entities:
       pos: 117.5,-74.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16309
@@ -166970,7 +166972,8 @@ entities:
       pos: 115.5,-73.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16310
@@ -166979,7 +166982,8 @@ entities:
       pos: 117.5,-72.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16311
@@ -166988,7 +166992,8 @@ entities:
       pos: 117.5,-73.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16312
@@ -166997,7 +167002,8 @@ entities:
       pos: 127.5,-72.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16313
@@ -167006,7 +167012,8 @@ entities:
       pos: 129.5,-73.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16314
@@ -167015,7 +167022,8 @@ entities:
       pos: 129.5,-74.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16315
@@ -167024,7 +167032,8 @@ entities:
       pos: 121.5,-73.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16316
@@ -167033,7 +167042,8 @@ entities:
       pos: 127.5,-73.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16317
@@ -167042,7 +167052,8 @@ entities:
       pos: 127.5,-74.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16318
@@ -167051,7 +167062,8 @@ entities:
       pos: 129.5,-72.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16319
@@ -167060,7 +167072,8 @@ entities:
       pos: 123.5,-73.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16320
@@ -167069,7 +167082,8 @@ entities:
       pos: 123.5,-74.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16321
@@ -167078,7 +167092,8 @@ entities:
       pos: 123.5,-72.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16322
@@ -167087,7 +167102,8 @@ entities:
       pos: 121.5,-74.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 16323
@@ -167096,7 +167112,8 @@ entities:
       pos: 115.5,-72.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCGlassesMedicalHUDGlasses

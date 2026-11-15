@@ -149480,7 +149480,8 @@ entities:
       pos: 2.5,-94.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 20613
@@ -149489,7 +149490,8 @@ entities:
       pos: 2.5,-93.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 20614
@@ -149498,7 +149500,8 @@ entities:
       pos: 2.5,-92.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 20615
@@ -149507,7 +149510,8 @@ entities:
       pos: -2.5,-92.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 20616
@@ -149516,7 +149520,8 @@ entities:
       pos: 1.5,-91.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 20617
@@ -149525,7 +149530,8 @@ entities:
       pos: -2.5,-94.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 20618
@@ -149534,7 +149540,8 @@ entities:
       pos: -2.5,-93.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCGlassesMarineRpg
