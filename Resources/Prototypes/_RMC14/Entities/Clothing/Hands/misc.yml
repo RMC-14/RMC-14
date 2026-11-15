@@ -28,6 +28,10 @@
   - type: Tag
     tags:
     - RMCGlovesLatex
+  - type: CMArmor
+    bio: 15
+    coverage:
+    - Hands
 
 - type: Tag
   id: RMCGlovesLatex
@@ -48,3 +52,5 @@
     bullet: 15
     explosionArmor: 10
     #rad: 50
+    coverage:
+    - Hands
