@@ -32,6 +32,10 @@ public sealed class RMCLimbHealthSystem : EntitySystem
     private readonly List<RMCTargetZone> _neighbours = new();
     private readonly HashSet<RMCTargetZone> _visited = new();
     private readonly Dictionary<RMCTargetZone, float> _weights = new();
+    private readonly Stack<List<LimbChange>> _changePool = new();
+
+    // where limb changes get written while damage is split, null while re-syncing
+    private List<LimbChange>? _changes;
 
     private bool _limbsCanBreak;
 
@@ -40,6 +44,8 @@ public sealed class RMCLimbHealthSystem : EntitySystem
         Brute,
         Burn,
     }
+
+    private readonly record struct LimbChange(RMCTargetZone Zone, bool Healed, bool Spillover, FixedPoint2 Brute, FixedPoint2 Burn);
 
     public override void Initialize()
     {
@@ -72,14 +78,18 @@ public sealed class RMCLimbHealthSystem : EntitySystem
             return;
 
         var changed = false;
+        var hit = GetCurrentHit((ent, ent.Comp)) ?? RMCLimbHit.Random;
+        var changes = _changePool.Count > 0 ? _changePool.Pop() : new List<LimbChange>();
         if (args.DamageDelta is { } delta)
         {
-            var hit = GetCurrentHit((ent, ent.Comp)) ?? RMCLimbHit.Random;
             var (brute, burn) = GetBruteBurn(delta);
+            _changes = changes;
             changed |= ApplyChange(ent, hit, brute, burn);
+            _changes = null;
         }
 
         // damage set directly has no delta and splitting can round, so the limbs always catch up to the body
+        // this is bookkeeping rather than a hit so it raises no limb events
         var (bodyBrute, bodyBurn) = GetBruteBurn(args.Damageable.Damage);
         changed |= ApplyChange(ent,
             RMCLimbHit.Random,
@@ -88,6 +98,46 @@ public sealed class RMCLimbHealthSystem : EntitySystem
 
         if (changed)
             Dirty(ent);
+
+        // raised once everything is split so anything reacting never sees the limbs half done
+        foreach (var change in changes)
+        {
+            if (TerminatingOrDeleted(ent))
+                break;
+
+            if (change.Healed)
+            {
+                var healed = new RMCLimbHealedEvent(change.Zone, change.Brute, change.Burn, args.Origin, args.Tool);
+                RaiseLocalEvent(ent, ref healed);
+            }
+            else
+            {
+                var damaged = new RMCLimbDamagedEvent(change.Zone, change.Brute, change.Burn, hit, change.Spillover, args.Origin, args.Tool);
+                RaiseLocalEvent(ent, ref damaged);
+            }
+        }
+
+        changes.Clear();
+        _changePool.Push(changes);
+    }
+
+    // adds to an existing change for the same limb so each limb raises one event per damage change
+    private void RecordChange(RMCTargetZone zone, bool healed, bool spillover, FixedPoint2 brute, FixedPoint2 burn)
+    {
+        if (_changes == null || (brute == FixedPoint2.Zero && burn == FixedPoint2.Zero))
+            return;
+
+        for (var i = 0; i < _changes.Count; i++)
+        {
+            var change = _changes[i];
+            if (change.Zone != zone || change.Healed != healed || change.Spillover != spillover)
+                continue;
+
+            _changes[i] = change with { Brute = change.Brute + brute, Burn = change.Burn + burn };
+            return;
+        }
+
+        _changes.Add(new LimbChange(zone, healed, spillover, brute, burn));
     }
 
     /// <summary>
@@ -336,7 +386,14 @@ public sealed class RMCLimbHealthSystem : EntitySystem
         var limb = ent.Comp.Limbs.GetValueOrDefault(zone);
         var healed = FixedPoint2.Min(GetGroup(limb, group), amount);
         if (healed > FixedPoint2.Zero)
+        {
             SetLimb(ent, zone, WithGroup(limb, group, GetGroup(limb, group) - healed));
+            RecordChange(zone,
+                true,
+                false,
+                group == LimbGroup.Brute ? healed : FixedPoint2.Zero,
+                group == LimbGroup.Burn ? healed : FixedPoint2.Zero);
+        }
 
         return healed;
     }
@@ -368,6 +425,7 @@ public sealed class RMCLimbHealthSystem : EntitySystem
     private void AddLimbDamage(Entity<RMCLimbHealthComponent> ent, RMCTargetZone zone, FixedPoint2 brute, FixedPoint2 burn)
     {
         _visited.Clear();
+        var spillover = false;
         while (true)
         {
             var limb = ent.Comp.Limbs.GetValueOrDefault(zone);
@@ -376,6 +434,7 @@ public sealed class RMCLimbHealthSystem : EntitySystem
             if (!_limbsCanBreak || !ent.Comp.Definitions.TryGetValue(zone, out var definition))
             {
                 SetLimb(ent, zone, limb with { Brute = limb.Brute + brute, Burn = limb.Burn + burn });
+                RecordChange(zone, false, spillover, brute, burn);
                 return;
             }
 
@@ -390,12 +449,15 @@ public sealed class RMCLimbHealthSystem : EntitySystem
             if (overflow && TryPickSpillover(ent, zone, out var next))
             {
                 SetLimb(ent, zone, limb with { Brute = limb.Brute + fitBrute, Burn = limb.Burn + fitBurn });
+                RecordChange(zone, false, spillover, fitBrute, fitBurn);
                 zone = next;
+                spillover = true;
                 continue;
             }
 
             // nowhere left to go so the rest stays here since the body already took it
             SetLimb(ent, zone, limb with { Brute = limb.Brute + fitBrute + brute, Burn = limb.Burn + fitBurn + burn });
+            RecordChange(zone, false, spillover, fitBrute + brute, fitBurn + burn);
             return;
         }
     }
