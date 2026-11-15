@@ -16,21 +16,20 @@ public sealed partial class RMCLimbHealthComponent : Component
     [DataField, AutoNetworkedField]
     public Dictionary<RMCTargetZone, RMCLimb> Limbs = new();
 
-    // defaults are cmss13's limb max damage, parent limb and organ_rel_size
     [DataField]
     public Dictionary<RMCTargetZone, RMCLimbDefinition> Definitions = new()
     {
-        [RMCTargetZone.Chest] = new(200, null, 70),
-        [RMCTargetZone.Abdomen] = new(200, RMCTargetZone.Chest, 30),
-        [RMCTargetZone.Head] = new(60, RMCTargetZone.Chest, 15),
-        [RMCTargetZone.LeftArm] = new(35, RMCTargetZone.Chest, 25),
-        [RMCTargetZone.RightArm] = new(35, RMCTargetZone.Chest, 25),
-        [RMCTargetZone.LeftHand] = new(30, RMCTargetZone.LeftArm, 7),
-        [RMCTargetZone.RightHand] = new(30, RMCTargetZone.RightArm, 7),
-        [RMCTargetZone.LeftLeg] = new(35, RMCTargetZone.Abdomen, 25),
-        [RMCTargetZone.RightLeg] = new(35, RMCTargetZone.Abdomen, 25),
-        [RMCTargetZone.LeftFoot] = new(30, RMCTargetZone.LeftLeg, 10),
-        [RMCTargetZone.RightFoot] = new(30, RMCTargetZone.RightLeg, 10),
+        [RMCTargetZone.Chest] = new(200, null, 70, 0.4f),
+        [RMCTargetZone.Abdomen] = new(200, RMCTargetZone.Chest, 30, 0.4f),
+        [RMCTargetZone.Head] = new(60, RMCTargetZone.Chest, 15, 0.2f),
+        [RMCTargetZone.LeftArm] = new(35, RMCTargetZone.Chest, 25, 0.05f),
+        [RMCTargetZone.RightArm] = new(35, RMCTargetZone.Chest, 25, 0.05f),
+        [RMCTargetZone.LeftHand] = new(30, RMCTargetZone.LeftArm, 7, 0.05f),
+        [RMCTargetZone.RightHand] = new(30, RMCTargetZone.RightArm, 7, 0.05f),
+        [RMCTargetZone.LeftLeg] = new(35, RMCTargetZone.Abdomen, 25, 0.05f),
+        [RMCTargetZone.RightLeg] = new(35, RMCTargetZone.Abdomen, 25, 0.05f),
+        [RMCTargetZone.LeftFoot] = new(30, RMCTargetZone.LeftLeg, 10, 0.05f),
+        [RMCTargetZone.RightFoot] = new(30, RMCTargetZone.RightLeg, 10, 0.05f),
     };
 
     // set by SetNextHit right before a damage call and used up by it
