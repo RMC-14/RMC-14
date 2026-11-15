@@ -5,7 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   spawnMenuRoleName: We-Ya Goon Engineer (LV624 Special Survivor)
-  startingGear: RMCGearSurvivorGoon
+  startingGear: RMCGearSurvivorGoonEngineer
   icon: "RMCJobIconPMCGoonEngi"
   hasIcon: true
   ranks:
@@ -31,6 +31,25 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_goon
   greeting: rmc-job-greeting-corporate-dome-goon-engi
+
+- type: startingGear
+  parent: RMCGearSurvivorGoon
+  id: RMCGearSurvivorGoonEngineer
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCorporateEngineer
+    head: ArmorHelmetPMCCorporateEngineer
+    back: RMCSatchelLightpackWeYa
+    belt: CMBeltUtilityFilled # they are supposed to start with the engi belt held and pistol belt worn, but i seriously expect people not to notice and drop it roundstart so i swapped them around
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - CMSheetMetal50
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+  inhand:
+  - RMCM77BeltPMCFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

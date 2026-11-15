@@ -176,6 +176,24 @@
     foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
+  parent: RMCJumpsuitVeteranPMCCorporate
+  id: RMCJumpsuitVeteranPMCCorporateMedic
+  name: We-Ya corporate security medic uniform
+  description: An armored uniform worn by Weyland-Yutani corporate security members. This variant has a red armband denoting the wearer's medical purpose.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/corporate_medic.rsi
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCCorporate
+  id: RMCJumpsuitVeteranPMCCorporateEngineer
+  name: We-Ya corporate security engineer uniform
+  description: An armored uniform worn by Weyland-Yutani corporate security members. This variant has a yellow armband denoting the wearer's technical purpose.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/corporate_engineer.rsi
+
+- type: entity
   parent: [RMCVeteranUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitVeteranPMCCorporateLead
   name: We-Ya corporate security uniform
