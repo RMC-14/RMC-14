@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added a new double couch, 3 new couches, and 3 new sofas
-    type: Add
-  - message: Gave the single-direction couch sprites a back
-    type: Tweak
-  id: 3252
-  time: '2026-05-31T03:11:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9929
 - author: IceNoobXD
   changes:
   - message: Added inhand sprites for the computer disks and added them to the document
@@ -4524,5 +4515,12 @@
   id: 3751
   time: '2026-11-15T05:41:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11080
+- author: Vermidia
+  changes:
+  - message: Vanguard pierce + blitz no longer deselect on use.
+    type: Tweak
+  id: 3752
+  time: '2026-11-15T15:47:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10538
 Name: RMC14
 Order: -1
