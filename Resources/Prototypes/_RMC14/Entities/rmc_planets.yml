@@ -9,12 +9,12 @@
       Liaison: RMCPaperWeYaLiaisonBriefingLV624
     announcements:
     - text: rmc-announcement-planet-lv
-    #smallHostVariants:
-      #- RMCMobSmallHostFarwa
-      #- CMMobSmallHostMonkey
-      #- CMMobSmallHostKobold
-      #- RMCMobSmallHostNeaera
-      #- RMCMobSmallHostStok
+    smallHostVariants:
+    - RMCMobSmallHostFarwa
+    - CMMobSmallHostMonkey
+    - CMMobSmallHostKobold
+    - RMCMobSmallHostNeaera
+    - RMCMobSmallHostStok
     nightmareScenarios:
 #   - scenarioName: clf_ship
 #     scenarioProbability: 0.1
@@ -77,8 +77,8 @@
     - text: rmc-announcement-planet-solaris
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
-    #smallHostVariants:
-      #RMCMobSmallHostNeaera
+    smallHostVariants:
+    - RMCMobSmallHostNeaera
     nightmareScenarios:
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
@@ -171,8 +171,8 @@
       Liaison: RMCPaperWeYaLiaisonBriefingShivas
     announcements:
     - text: rmc-announcement-planet-shiva
-    #smallHostVariants:
-      #RMCMobSmallHostYiren
+    smallHostVariants:
+    - RMCMobSmallHostYiren
     nightmareScenarios:
     - scenarioName: panic_room_hold
       scenarioProbability: 0.15
@@ -225,8 +225,8 @@
       Liaison: RMCPaperWeYaLiaisonBriefingFiorina
     announcements:
     - text: rmc-announcement-planet-fiorina
-    #smallHostVariants:
-      #RMCMobSmallHostFarwa
+    smallHostVariants:
+    - RMCMobSmallHostFarwa
     nightmareScenarios:
     - scenarioName: riot_in_progress
       scenarioProbability: 0.15
@@ -279,12 +279,12 @@
     minPlayers: 130
     announcements:
     - text: rmc-announcement-planet-trijent
-    #smallHostVariants:
-      #RMCMobSmallHostStok
+    smallHostVariants:
+    - RMCMobSmallHostStok
     nightmareScenarios:
     - scenarioName: none # Reduce this to 0.5 once CLF survivors are in
       scenarioProbability: 0.6
-    - scenarioName: spp_bar
+    - scenarioName: spp_spetsnaz_trijent
       scenarioProbability: 0.4
     survivorJobVariants:
       CMSurvivor:
@@ -309,24 +309,24 @@
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
     survivorJobScenarios:
-      spp_bar:
+      spp_spetsnaz_trijent:
       - CMSurvivorDoctor: 1
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
       - CMSurvivor: -1
     survivorJobVariantScenarios:
-      spp_bar:
+      spp_spetsnaz_trijent:
         CMSurvivorDoctor:
-        - RMCSurvivorSPPCrashlandMedic: 1
+        - RMCSurvivorSPPSpetsnazTrijentMedic: 1
         CMSurvivorEngineer:
-        - RMCSurvivorSPPCrashlandSapper: 1
+        - RMCSurvivorSPPSpetsnazTrijentSapper: 1
         CMSurvivorSecurity:
-        - RMCSurvivorSPPCrashlandSL: 1
-        - RMCSurvivorSPPCrashlandSpec: 1
+        - RMCSurvivorSPPSpetsnazTrijentSL: 1
+        - RMCSurvivorSPPSpetsnazTrijentSpec: 1
         CMSurvivor:
-        - RMCSurvivorSPPCrashlandSoldier: -1
+        - RMCSurvivorSPPSpetsnazTrijentOperator: -1
     survivorJobOverrideScenarios:
-      spp_bar:
+      spp_spetsnaz_trijent:
         CMSurvivorScientist: CMSurvivorDoctor
         CMSurvivorCorporate: CMSurvivor
 #    survivorJobVariantScenarios:
@@ -395,8 +395,8 @@
     - text: rmc-announcement-planet-varadero-6
       announcement: "rmc-announcement-ares-varadero"
       delay: 9000 # 150 minutes
-    #smallHostVariants:
-      #CMMobSmallHostKobold
+    smallHostVariants:
+    - CMMobSmallHostKobold
     nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
     - scenarioName: none
       scenarioProbability: 1
@@ -442,9 +442,9 @@
     camouflage: Desert
     announcements:
     - text: rmc-announcement-planet-kutjevo
-    #smallHostVariants:
-      #RMCMobSmallHostNeaera
-      #RMCMobSmallHostStok
+    smallHostVariants:
+    - RMCMobSmallHostNeaera
+    - RMCMobSmallHostStok
     nightmareScenarios:
     - scenarioName: none # Reduce this to 0.9 once CLF survivors are in at 0.1
       scenarioProbability: 1
@@ -478,9 +478,9 @@
       Liaison: RMCPaperWeYaLiaisonBriefingChances
     announcements:
     - text: rmc-announcement-planet-chances
-    #smallHostVariants:
-      #RMCSmallHostMobNaera
-      #RMCSmallHostMobStok
+    smallHostVariants:
+    - RMCMobSmallHostNeaera
+    - RMCMobSmallHostStok
     selectRandomSurvivorVariant: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
@@ -514,8 +514,8 @@
       Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
     announcements:
     - text: rmc-announcement-planet-hybrisa
-    #smallHostVariants:
-      #CMMobSmallHostMonkey
+    smallHostVariants:
+    - CMMobSmallHostMonkey
     nightmareScenarios:
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
@@ -589,11 +589,11 @@
       Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
     announcements:
     - text: rmc-announcement-planet-sorokyne
-    #smallHostVariants:
-      #RMCMobSmallHostStok
-      #CMMobSmallHostKobold
+    smallHostVariants:
+    - RMCMobSmallHostStok
+    - CMMobSmallHostKobold
     nightmareScenarios:
-    - scenarioName: spp_sof
+    - scenarioName: spp_spetsnaz
       scenarioProbability: 0.4
     - scenarioName: none # reduce by 0.1 once clf survs are in
       scenarioProbability: 0.6
@@ -633,24 +633,24 @@
 #        CMSurvivorScientist:
 #        - : -1
     survivorJobScenarios:
-      spp_sof:
+      spp_spetsnaz:
       - CMSurvivorEngineer: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorSecurity: 2
       - CMSurvivor: -1
     survivorJobVariantScenarios:
-      spp_sof:
+      spp_spetsnaz:
         CMSurvivorSecurity:
-        - RMCSurvivorSPPSOFSpec: 1
-        - RMCSurvivorSPPSOFSL: 1
+        - RMCSurvivorSPPSpetsnazSpec: 1
+        - RMCSurvivorSPPSpetsnazSL: 1
         CMSurvivorDoctor:
-        - RMCSurvivorSPPSOFMedic: 1
+        - RMCSurvivorSPPSpetsnazMedic: 1
         CMSurvivorEngineer:
-        - RMCSurvivorSPPSOFSapper: 1
+        - RMCSurvivorSPPSpetsnazSapper: 1
         CMSurvivor:
-        - RMCSurvivorSPPSOFSoldier: -1
-    survivorJobOverrideScenarios: # Scientist rolls for SOF medic
-      spp_sof :
+        - RMCSurvivorSPPSpetsnazOperator: -1
+    survivorJobOverrideScenarios: # Scientist rolls for Spetsnaz medic
+      spp_spetsnaz :
         CMSurvivorScientist: CMSurvivorDoctor
         CMSurvivorCorporate: CMSurvivor
 
