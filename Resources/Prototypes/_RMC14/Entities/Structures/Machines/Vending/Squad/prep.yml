@@ -227,31 +227,42 @@
     - name: Backpack
       entries:
       - id: CMBackpackMarine
+        replaceSlot: back
         amount: 15
       - id: CMBackpackMarineTech
+        replaceSlot: back
         amount: 15
       - id: CMBackpackMedical
+        replaceSlot: back 
         amount: 15
       - id: CMSatchelMarine
         amount: 15
+        replaceSlot: back 
 #      - id: Marine Chestrig
 #        amount: 15
+#        replaceSlot: back 
       - id: CMSatchelMarineTech
         amount: 15
+        replaceSlot: back 
       - id: RMCSatchelWelderChestrig
         amount: 15
+        replaceSlot: back 
       - id: CMSatchelMedical
         amount: 15
+        replaceSlot: back 
       - id: RMCScabbardShotgun
         amount: 5
     - name: Restricted Backpacks
       entries:
       - id: CMBackpackWelder
         amount: 1
+        replaceSlot: back 
       - id: RMCSatchelWelder
         amount: 2
+        replaceSlot: back 
       - id: RMCBackpackRTO
         amount: 1
+        replaceSlot: back 
     - name: Belts
       entries:
       - id: CMBeltMarine

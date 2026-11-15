@@ -442,13 +442,25 @@
   parent: RMCHeadsetShip
   id: CMHeadsetReporter
   name: reporter radio headset
-  description: Used by the combat correspondent to get the scoop.
+  description: Used by the correspondent to get the scoop.
   components:
   - type: ContainerFill
     containers:
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyCorrespondent
+
+- type: entity
+  parent: RMCHeadsetShip
+  id: CMHeadsetCombatCorrespondent
+  name: combat correspondent radio headset
+  description: Used by the combat correspondent to get the scoop.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyCombatCorrespondent
 
 - type: entity
   parent: RMCHeadsetShip

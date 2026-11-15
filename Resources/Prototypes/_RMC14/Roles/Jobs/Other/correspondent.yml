@@ -102,7 +102,7 @@
     shoes: CMBootsBlackFilled
     head: RMCHeadCapCorrespondent
     id: CMDogtagCombatCorrespondent
-    ears: CMHeadsetReporter
+    ears: CMHeadsetCombatCorrespondent
     belt: RMCM1984BeltFilled
     back: CMSatchelMarine
     pocket1: RMCPouchGeneralMedium

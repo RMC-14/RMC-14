@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-fiorina-corporate-liaison
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorFiorinaCorporateLiaison
+  icon: "CMJobIconLiaison"
   accessGroups:
   - ColonistCorporate
   spawnMenuRoleName: Corporate Liaison (Fiorina Survivor)

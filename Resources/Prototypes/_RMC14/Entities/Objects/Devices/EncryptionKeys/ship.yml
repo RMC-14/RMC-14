@@ -450,7 +450,7 @@
   - type: Sprite
     state: cap_key
 
-# Combat Correspondent
+# Correspondent
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyCorrespondent
@@ -475,6 +475,33 @@
     - MarineCommand
     - MarineJTAC
     - MarineIntel
+    defaultChannel: MarineCommon
+  - type: Sprite
+    state: cap_key
+
+# Combat Correspondent
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyCombatCorrespondent
+  name: combat correspondent radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineCommon
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    readOnlyChannels:
+    - MarineCommand
     defaultChannel: MarineCommon
   - type: Sprite
     state: cap_key
