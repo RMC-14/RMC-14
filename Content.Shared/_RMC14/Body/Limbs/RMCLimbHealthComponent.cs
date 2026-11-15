@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Body.Zones;
 using Robust.Shared.GameStates;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Body.Limbs;
 
@@ -31,4 +32,18 @@ public sealed partial class RMCLimbHealthComponent : Component
         [RMCTargetZone.LeftFoot] = new(30, RMCTargetZone.LeftLeg, 10),
         [RMCTargetZone.RightFoot] = new(30, RMCTargetZone.RightLeg, 10),
     };
+
+    // set by SetNextHit right before a damage call and used up by it
+    [ViewVariables]
+    public RMCLimbHit? NextHit;
+
+    [ViewVariables]
+    public GameTick NextHitTick;
+
+    // where the damage being applied right now lands, decided before armour runs
+    [ViewVariables]
+    public RMCLimbHit? CurrentHit;
+
+    [ViewVariables]
+    public GameTick CurrentHitTick;
 }
