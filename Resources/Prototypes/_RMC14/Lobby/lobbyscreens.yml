@@ -97,3 +97,7 @@
 - type: lobbyBackground
   id: UNMCposters
   background: /Textures/_RMC14/Lobby/posters.png
+
+- type: lobbyBackground
+  id: SGOMothLobbyEnlist
+  background: /Textures/_RMC14/Lobby/SGOMothLobbyEnlist.png
