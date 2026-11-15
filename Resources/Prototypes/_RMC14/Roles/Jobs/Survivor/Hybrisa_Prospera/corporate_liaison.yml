@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorHybrisaCorporateLiaison
   name: cm-job-name-liaison
@@ -8,12 +8,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaCorporateLiaison
     - type: RMCSurvivor
@@ -24,6 +29,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cl
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
@@ -52,7 +64,7 @@
   name: hybrisa corporate liaison preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCJumpsuitLiaisonExpensiveSuit, RMCSunglassesBig ]
     - [ RMCJumpsuitLiaisonExpensiveSuitBrown, RMCSunglassesBig ]
@@ -64,8 +76,8 @@
       - [ CMSheetMetal20, RMCSpaceCash1000, CMPenClicky, CMClipboard ]
     randomStartingGear:
       back:
-      - CMSatchel # todo secure satchel
-      - RMCSatchelBlack
+      - CMSatchelSecureStandard
+      - RMCSatchelBlackSecure
       shoes:
       - RMCShoesLaceup
       - RMCShoesLaceupBrown

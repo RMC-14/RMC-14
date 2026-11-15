@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -52,4 +52,10 @@ public sealed partial class XenoTailStabComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool InjectNeuro = false;
+
+    [DataField]
+    public int ArmorPiercing = 0;
+
+    [DataField, AutoNetworkedField]
+    public bool HitMobsOnly = false;
 }

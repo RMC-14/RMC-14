@@ -96,5 +96,23 @@
                 </BoxContainer>
             </BoxContainer>
         </PanelContainer>
+
+        <PanelContainer Access="Public" Name="SquadContainer" Visible="False" VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#162031" BorderColor="#162031"
+                                       BorderThickness="4" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Access="Public" Orientation="Horizontal">
+                    <RichTextLabel Text="Squad List" HorizontalExpand="True" />
+                    <Button Name="SquadClear" Access="Public" HorizontalExpand="True" Text="Unassign"
+                            SetHeight="30" StyleClasses="ButtonSquare" />
+                </BoxContainer>
+                <userInterface:BlueHorizontalSeparator />
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                    <BoxContainer Name="Squads" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
     </BoxContainer>
 </controls:IdModificationConsoleWindow>

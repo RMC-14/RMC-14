@@ -143,7 +143,7 @@
   parent: RMCCoffeeCup
   id: RMCColonyLiberationFrontCup
   name: CLF mug
-  description: A tough, well-worn cup marked with the CLF sigil born from the defiance sparked by the Slaughter of Xibou.
+  description: A tough, well-worn cup marked with the CLF sigil born from the defiance sparked by the Fires of Kharis.
   components:
   - type: Sprite
     layers:

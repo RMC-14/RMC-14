@@ -28,6 +28,10 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
         if (EntMan.TryGetComponent<PaperComponent>(Owner, out var paper))
         {
             _window.MaxInputLength = paper.ContentSize;
+            _window.BackgroundColor = paper.Color;
+            _window.BorderColor = paper.Color;
+            _window.BorderThickness = new Thickness(paper.Thickness);
+            _window.DefaultTextColor = paper.TextColor;
         }
         if (EntMan.TryGetComponent<PaperVisualsComponent>(Owner, out var visuals))
         {

@@ -31,6 +31,27 @@
     - RMCGunCasePistolHG45Marina
 
 - type: loadout
+  id: L54CaseRMC
+  cost: 4
+  storage:
+    back:
+    - RMCGunCasePistolL54
+
+- type: loadout
+  id: CustomL14CaseRMC
+  cost: 4
+  storage:
+    back:
+    - RMCGunCasePistolL14Custom
+
+- type: loadout
+  id: WarwickMkVIISnubCaseRMC
+  cost: 4
+  storage:
+    back:
+    - RMCGunCaseRevolverWarwickMkVIISnub
+
+- type: loadout
   id: T73CaseRMC
   cost: 4
   inhand:

@@ -383,9 +383,26 @@ namespace Content.Server.Database
             CommendationType type,
             int round);
 
-        Task<List<RMCCommendation>> GetCommendationsReceived(Guid player);
+        Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, CommendationType? filterType = null, bool includePlayers = false);
 
-        Task<List<RMCCommendation>> GetCommendationsGiven(Guid player);
+        Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, CommendationType? filterType = null, bool includePlayers = false);
+
+        Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false);
+
+        Task<RMCCommendation?> GetCommendationById(int commendationId, bool includePlayers = false);
+
+        Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false);
+
+        Task<RMCCommendation?> DeleteCommendationById(int commendationId, Guid deletedBy, DateTimeOffset deletedAt, bool includePlayers = false);
+
+        Task<List<RMCCommendation>> DeleteCommendationsByRound(
+            int roundId,
+            CommendationType type,
+            Guid deletedBy,
+            DateTimeOffset deletedAt,
+            Guid? giverId = null,
+            Guid? receiverId = null,
+            bool includePlayers = false);
 
         Task IncreaseInfects(Guid player);
 
@@ -1248,16 +1265,53 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.AddCommendation(giver, receiver, giverName, receiverName, name, text, type, round));
         }
 
-        public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
+        public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetCommendationsReceived(player));
+            return RunDbCommand(() => _db.GetCommendationsReceived(player, filterType, includePlayers));
         }
 
-        public Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
+        public Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetCommendationsGiven(player));
+            return RunDbCommand(() => _db.GetCommendationsGiven(player, filterType, includePlayers));
+        }
+
+        public Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetLastCommendations(count, filterType, includePlayers));
+        }
+
+        public Task<RMCCommendation?> GetCommendationById(int commendationId, bool includePlayers = false)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCommendationById(commendationId, includePlayers));
+        }
+
+        public Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCommendationsByRound(roundId, filterType, includePlayers));
+        }
+
+        public Task<RMCCommendation?> DeleteCommendationById(int commendationId, Guid deletedBy, DateTimeOffset deletedAt, bool includePlayers = false)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCommendationById(commendationId, deletedBy, deletedAt, includePlayers));
+        }
+
+        public Task<List<RMCCommendation>> DeleteCommendationsByRound(
+            int roundId,
+            CommendationType type,
+            Guid deletedBy,
+            DateTimeOffset deletedAt,
+            Guid? giverId = null,
+            Guid? receiverId = null,
+            bool includePlayers = false)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCommendationsByRound(roundId, type, deletedBy, deletedAt, giverId, receiverId, includePlayers));
         }
 
         public Task IncreaseInfects(Guid player)

@@ -52,6 +52,10 @@
   - type: StaticPrice
     price: 500
   - type: RMCMesonsNonviewable
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCWaterCooler

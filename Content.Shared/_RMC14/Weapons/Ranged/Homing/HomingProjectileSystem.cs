@@ -1,5 +1,7 @@
 using System.Numerics;
 using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -15,6 +17,8 @@ public sealed class HomingProjectileSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<HomingShotsComponent, AmmoShotEvent>(OnAmmoShot);
+
         SubscribeLocalEvent<HomingProjectileComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<HomingProjectileComponent, PreventCollideEvent>(OnPreventCollide);
     }
@@ -39,6 +43,25 @@ public sealed class HomingProjectileSystem : EntitySystem
             return;
 
         RemComp<HomingProjectileComponent>(ent);
+    }
+
+    /// <summary>
+    ///     Makes the shot ammo homing if it was targeted at a specific entity.
+    /// </summary>
+    private void OnAmmoShot(Entity<HomingShotsComponent> ent, ref AmmoShotEvent args)
+    {
+        foreach (var projectile in args.FiredProjectiles)
+        {
+            if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
+                return;
+
+            var homing = EnsureComp<HomingProjectileComponent>(projectile);
+            if (TryComp(ent, out GunComponent? gun))
+                homing.ProjectileSpeed = gun.ProjectileSpeedModified;
+
+            homing.Target = targeted.Target;
+            Dirty(projectile, homing);
+        }
     }
 
     /// <summary>

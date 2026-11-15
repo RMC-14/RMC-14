@@ -120,6 +120,14 @@
     deleteOnSpawn: true
     proto: RMCAirBurstProjectileSmoke
 
+- type: entity
+  parent: RMC40MMGrenadeM74AGMS
+  id: RMC40MMGrenadeM74AGMSVehicle
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCAirBurstProjectileSmokeVehicle
+
 #PROJECTILES
 - type: entity
   abstract: true
@@ -138,7 +146,7 @@
   - type: Projectile
     deleteOnCollide: false
     impactEffect: BulletImpactEffect
-    maxFixedRange: 7
+    maxFixedRange: 8.463 #The result of CircleAreaFromSquareAbilityRange(7)
     damage:
       types:
         Piercing: 100
@@ -201,6 +209,9 @@
   - type: DirectionalTileFireOnTrigger
     range: 3
     spawn: RMCTileFire
+    sound: /Audio/_RMC14/Effects/hit_on_shattered_glass.ogg
+    intensity: 20
+    duration: 15
 
 - type: entity
   parent: RMCBaseAirBurstProjectile
@@ -273,10 +284,21 @@
       path: /Audio/Effects/gen_hit.ogg
   - type: SpawnOnTerminate
     spawn: RMCSmoke
-    projectileAdjust: false
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
+
+- type: entity
+  parent: RMCAirBurstProjectileSmoke
+  id: RMCAirBurstProjectileSmokeVehicle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: RMCAirBurstProjectileSmokeVehicle
+    count: 3
+    spread: 45
+  - type: TimedDespawn
+    lifetime: 2
 
 #Payload projectiles
 - type: entity

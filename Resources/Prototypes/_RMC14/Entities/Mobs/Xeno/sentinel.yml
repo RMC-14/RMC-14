@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleSentinel
-  - type: GhostRole
-    name: cm-job-name-xeno-sentinel
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Sentinel/sentinel.rsi
   - type: MobState
@@ -28,6 +26,10 @@
       0: Alive
       500: Critical
       600: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSentinel
     actionIds:

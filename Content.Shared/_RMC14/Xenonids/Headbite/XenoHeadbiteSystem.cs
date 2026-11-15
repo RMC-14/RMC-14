@@ -1,10 +1,10 @@
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
@@ -23,20 +23,18 @@ public sealed class XenoHeadbiteSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
 
-    private static readonly ProtoId<DamageTypePrototype> LethalDamageType = "Asphyxiation";
     private static readonly ProtoId<StatusEffectPrototype> Unconsciousness = "Unconscious";
 
     public override void Initialize()
@@ -101,13 +99,7 @@ public sealed class XenoHeadbiteSystem : EntitySystem
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
         }
 
-        if (_mobThresholds.TryGetDeadThreshold(target, out var mobThreshold) && TryComp<DamageableComponent>(target, out var damageable))
-        {
-            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
-            var type = _prototypeManager.Index<DamageTypePrototype>(LethalDamageType);
-            var damage = new DamageSpecifier(type, lethalAmountOfDamage);
-            _damage.TryChangeDamage(target, damage, true, origin: xeno);
-        }
+        _rmcDamageable.DoLethalDamage(target, false, xeno);
 
         var selfMsg = Loc.GetString("rmc-xeno-headbite-hit-self", ("xeno", xeno.Owner), ("target", target));
         _popup.PopupClient(selfMsg, xeno, xeno, PopupType.Medium);
@@ -118,7 +110,7 @@ public sealed class XenoHeadbiteSystem : EntitySystem
 
     private bool CanHeadbite(EntityUid xeno, EntityUid target)
     {
-        if (!_mobState.IsCritical(target) && !_status.HasStatusEffect(target, "Unconscious"))
+        if (!_mobState.IsCritical(target) && !_status.HasStatusEffect(target, Unconsciousness))
         {
             var failMsg = Loc.GetString("rmc-xeno-headbite-warning");
             _popup.PopupClient(failMsg, xeno, xeno, PopupType.SmallCaution);

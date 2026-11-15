@@ -1,11 +1,16 @@
+using System.Collections.Generic; //RMC
 using Content.Server.NPC.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems; //RMC
+using Content.Shared._RMC14.Weapons.Ranged.IFF; //RMC
+using Content.Shared.Inventory; //RMC
 using Content.Shared.Physics;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Prototypes; //RMC
 
 namespace Content.Server.NPC.Systems;
 
@@ -136,7 +141,12 @@ public sealed partial class NPCCombatSystem
 
                 // For consistency with NPC steering.
                 var collisionGroup = comp.UseOpaqueForLOSChecks ? CollisionGroup.Opaque : (CollisionGroup.Impassable | CollisionGroup.InteractImpassable);
-                comp.TargetInLOS = _interaction.InRangeUnobstructed(uid, comp.Target, distance + 0.1f, collisionGroup);
+                comp.TargetInLOS = _interaction.InRangeUnobstructed(
+                    uid,
+                    comp.Target,
+                    distance + 0.1f,
+                    collisionGroup,
+                    predicate: blocker => ShouldIgnoreLosBlocker(uid, comp.Target, blocker)); //RMC
             }
 
             if (!comp.TargetInLOS)
@@ -211,4 +221,41 @@ public sealed partial class NPCCombatSystem
             _gun.AttemptShoot(uid, gunUid, gun, targetCordinates);
         }
     }
+
+    // RMC begin
+    private bool ShouldIgnoreLosBlocker(EntityUid owner, EntityUid target, EntityUid blocker)
+    {
+        if (blocker == target || blocker == owner)
+            return false;
+
+        if (_mobState.IsDead(blocker))
+            return true;
+
+        if (SharesIff(owner, blocker))
+            return true;
+
+        return false;
+    }
+
+    private bool SharesIff(EntityUid owner, EntityUid other)
+    {
+        var factions = new HashSet<EntProtoId<IFFFactionComponent>>();
+
+        if (TryComp<UserIFFComponent>(owner, out var userIff))
+            factions.UnionWith(userIff.Factions);
+
+        var ev = new GetIFFFactionEvent(SlotFlags.IDCARD, new HashSet<EntProtoId<IFFFactionComponent>>());
+        RaiseLocalEvent(owner, ref ev);
+
+        factions.UnionWith(ev.Factions);
+
+        foreach (var faction in factions)
+        {
+            if (_gunIFF.IsInFaction(other, faction))
+                return true;
+        }
+
+        return false;
+    }
+    // RMC end
 }

@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleSpitter
-  - type: GhostRole
-    name: cm-job-name-xeno-spitter
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Spitter/spitter.rsi
   - type: MobState
@@ -28,6 +26,10 @@
       0: Alive
       550: Critical
       650: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSpitter
     actionIds:
@@ -56,7 +58,7 @@
   - type: XenoEvolution
     max: 500
     evolvesTo:
-    - CMXenoBoiler
+    - RMCXenoBoiler
     - CMXenoPraetorian
   - type: XenoSpit
   - type: XenoChargeSpit

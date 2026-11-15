@@ -236,6 +236,16 @@
   - type: AccessReader
     access: [ [ "CMAccessArmory" ] ]
 
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonFieldDoctor
+  name: button
+  description: A basic button locked to field doctors.
+  suffix: Locked, Field Doctor
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessFieldDoctor" ] ]
+
 # \Shipside Buttons
 
 - type: entity
@@ -437,6 +447,16 @@
   components:
   - type: AccessReader
     access: [ [ "CMAccessArmory" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedFieldDoctor
+  name: button
+  description: A basic button locked to field doctors.
+  suffix: Locked, Field Doctor
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessFieldDoctor" ] ]
 
 # \Shipside Buttons
 

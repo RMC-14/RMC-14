@@ -2,6 +2,7 @@
   parent: CMJobBase
   id: CMSPPResponder
   name: rmc-job-name-spp-responder
+  spawnMenuRoleName: SPP Communications Officer (Fax Responder)
   description: rmc-job-description-spp-responder
   playTimeTracker: CMJobSPPResponder
   ranks:

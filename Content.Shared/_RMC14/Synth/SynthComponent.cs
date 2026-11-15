@@ -8,11 +8,12 @@ using Content.Shared.StatusIcon;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared._RMC14.Synth;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedSynthSystem))]
+[Access(typeof(SharedSynthSystem), typeof(SharedSynthGenerationSystem))]
 public sealed partial class SynthComponent : Component
 {
     [DataField]
@@ -31,6 +32,9 @@ public sealed partial class SynthComponent : Component
     public bool CanUseGuns = false;
 
     [DataField, AutoNetworkedField]
+    public bool CanWearArmor = false;
+
+    [DataField, AutoNetworkedField]
     public bool CanUseMeleeWeapons = true;
 
     /// <summary>
@@ -47,12 +51,6 @@ public sealed partial class SynthComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId SpeciesName = "rmc-species-name-synth";
-
-    /// <summary>
-    /// I.E. 1st generation, 3rd generation.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public LocId Generation = "rmc-species-synth-generation-third";
 
     [DataField, AutoNetworkedField]
     public LocId FixedIdentityReplacement = "cm-chatsan-replacement-synth";
@@ -79,13 +77,13 @@ public sealed partial class SynthComponent : Component
     /// The time it takes to repair the synth.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan RepairTime = TimeSpan.FromSeconds(0);
+    public TimeSpan RepairTime = TimeSpan.FromSeconds(0.5);
 
     /// <summary>
     /// The time it takes to repair the synth, if you are the synth.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan SelfRepairTime = TimeSpan.FromSeconds(30);
+    public TimeSpan SelfRepairTime = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 CritThreshold = FixedPoint2.New(199);
@@ -124,5 +122,22 @@ public sealed partial class SynthComponent : Component
     public ProtoId<DamageGroupPrototype> CableCoilDamageGroup = "Burn";
 
     [DataField, AutoNetworkedField]
+    public LocId SynthRebootText = "rmc-species-synth-reset-key-needed";
+
+    [DataField, AutoNetworkedField]
+    public LocId SynthTooDamagedText = "rmc-species-synth-reset-key-too-damaged";
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<DamageGroupPrototype>> ResetKeyHealGroups = new() { "Brute", "Burn" };
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 ResetKeyHealPerGroup = 12;
+
+    [DataField, AutoNetworkedField]
     public string DamageVisualsColor = "#EEEEEE";
+
+    [DataField]
+    public TimeSpan NextUnableUsePopup;
+
 }
+

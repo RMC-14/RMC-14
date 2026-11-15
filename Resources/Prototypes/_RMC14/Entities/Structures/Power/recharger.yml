@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseRecharger
+  parent: [ BaseRecharger, RMCConstructibleMachine ]
   id: RMCRecharger
   name: recharger
   components:
@@ -31,8 +31,12 @@
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0 #15 kW
+    needsPower: true
+    powerLoad: 250
+  - type: RMCPowerReceiver
+    idleLoad: 4
+    activeLoad: 15000
+    channel: Equipment
   - type: Charger
     chargeRate: 1000
     chargeLevelSteps: 6
@@ -60,6 +64,14 @@
         whitelist:
           components:
             - Stunbaton
+  - type: Construction
+    graph: CMMachineFrame
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: Machine
+    board: RMCRechargerCircuitboard
 
 - type: entity
   parent: RMCRecharger

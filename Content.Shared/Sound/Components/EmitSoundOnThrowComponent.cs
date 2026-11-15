@@ -6,4 +6,11 @@ namespace Content.Shared.Sound.Components;
 /// Simple sound emitter that emits sound on ThrowEvent
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class EmitSoundOnThrowComponent : BaseEmitSoundComponent;
+public sealed partial class EmitSoundOnThrowComponent : BaseEmitSoundComponent
+{
+    [DataField]
+    public TimeSpan Last;
+
+    [DataField]
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(30);
+}

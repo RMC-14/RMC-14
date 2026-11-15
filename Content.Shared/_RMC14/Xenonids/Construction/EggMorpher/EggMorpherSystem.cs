@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
+using Content.Shared._RMC14.Synth;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -35,7 +36,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
         SubscribeLocalEvent<EggMorpherComponent, ExaminedEvent>(OnExamineEvent);
 
-        SubscribeLocalEvent<EggMorpherComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<EggMorpherComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<EggMorpherComponent, InteractUsingEvent>(OnInteractUsing);
 
 
@@ -59,7 +60,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
         }
     }
 
-    private void OnInteractHand(Entity<EggMorpherComponent> eggMorpher, ref InteractHandEvent args)
+    private void OnActivateInWorld(Entity<EggMorpherComponent> eggMorpher, ref ActivateInWorldEvent args)
     {
         if (_net.IsClient)
         {
@@ -68,6 +69,13 @@ public sealed partial class EggMorpherSystem : EntitySystem
         }
 
         var user = args.User;
+
+        if (HasComp<SynthComponent>(user))
+        {
+            args.Handled = true;
+            _popup.PopupEntity(Loc.GetString("rmc-species-synth-programming-prevents-use", ("user", user), ("tool", eggMorpher.Owner)), user, user, PopupType.SmallCaution);
+            return;
+        }
 
         if (HasComp<XenoParasiteComponent>(user))
         {

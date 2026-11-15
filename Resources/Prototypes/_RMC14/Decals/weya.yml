@@ -1,0 +1,71 @@
+﻿- type: decal
+  id: RMCDecalWeYaLargeTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/weya_large.rsi
+    state: wyfloor-1
+
+- type: decal
+  id: RMCDecalWeYaLargeTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/weya_large.rsi
+    state: wyfloor-2
+
+- type: decal
+  id: RMCDecalWeYaLargeTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/weya_large.rsi
+    state: wyfloor-3
+
+- type: decal
+  id: RMCDecalWeYaLargeTile4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/weya_large.rsi
+    state: wyfloor-4
+
+- type: decal
+  id: RMCDecalWeYaLargeTile5
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/weya_large.rsi
+    state: wyfloor-5
+
+- type: decal
+  id: RMCDecalWeYaLargeTile6
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/weya_large.rsi
+    state: wyfloor-6
+
+- type: decal
+  id: RMCDecalWeYaLargeTile7
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/weya_large.rsi
+    state: wyfloor-7
+
+- type: decal
+  id: RMCDecalWeYaLargeTile8
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/weya_large.rsi
+    state: wyfloor-8

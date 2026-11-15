@@ -1,9 +1,10 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: CMPlatformBase
   name: platform
   description: A square metal surface resting on four legs.
   components:
+  - type: VehicleSmashable
   - type: Transform
     anchored: true
   - type: Sprite
@@ -15,6 +16,11 @@
   - type: Tag
     tags:
     - Platform
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 40
+    otherMultiplier: 1.2
 
 - type: entity
   abstract: true
@@ -26,6 +32,7 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/platforms.rsi
+    drawdepth: HighFloorObjects
   - type: InteractionOutline
   - type: Clickable
 
@@ -40,13 +47,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 150 # Excessive damage
-        behaviors:
-          - !type:DoActsBehavior
-            acts: ["Destruction"]
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
+          damage: 90
         behaviors:
           - !type:ChangeConstructionNodeBehavior
             node: platformBroken
@@ -98,7 +99,7 @@
     node: start
 
 - type: entity
-  parent: CMPlatformBaseDestructible
+  parent: CMPlatformBase
   id: CMPlatformCorner
   name: platform
   description: A square metal surface resting on four legs.
@@ -107,6 +108,16 @@
     snap:
     - Wall
   components:
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 90
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -133,7 +144,7 @@
   - type: Climbable
 
 - type: entity
-  parent: CMPlatformBaseDestructible
+  parent: CMPlatformBase
   id: RMCPlatformCornerSmall
   name: platform
   description: A square metal surface resting on four legs.
@@ -143,6 +154,17 @@
     - Wall
   components:
   - type: Physics
+    canCollide: false
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 45 # Excessive damage
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
   - type: Fixtures
     fixtures:
       fix1:
@@ -169,6 +191,16 @@
     - Wall
   components:
   - type: Physics
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 90 # Excessive damage
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
   - type: Fixtures
     fixtures:
       fix1:

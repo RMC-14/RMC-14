@@ -30,10 +30,10 @@
     - RMCPatchTSE
 
 - type: loadout
-  id: PatchCECRMC
+  id: PatchMSCRMC
   cost: 1
   inhand:
-    - RMCPatchSPPCEC
+    - RMCPatchSPPMSC
 
 - type: loadout
   id: PatchCLFRMC
@@ -46,6 +46,18 @@
   cost: 1
   inhand:
   - RMCPatchOliveBranch
+
+- type: loadout
+  id: PatchNovaris
+  cost: 1
+  inhand:
+  - RMCPatchNovaris
+
+- type: loadout
+  id: PatchHalcyon
+  cost: 1
+  inhand:
+  - RMCPatchHalcyon
 
 # Shoes
 - type: loadout

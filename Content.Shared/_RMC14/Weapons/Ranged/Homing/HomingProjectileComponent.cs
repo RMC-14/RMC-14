@@ -15,5 +15,5 @@ public sealed partial class HomingProjectileComponent : Component
     ///     The speed of the homing projectile.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int ProjectileSpeed = 62;
+    public float ProjectileSpeed = 62;
 }

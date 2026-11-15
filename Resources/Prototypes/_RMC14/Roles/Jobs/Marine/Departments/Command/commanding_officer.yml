@@ -1,0 +1,121 @@
+﻿
+- type: job
+  parent: CMJobBase
+  id: CMCommandingOfficer
+  name: cm-job-name-commanding-officer
+  description: cm-job-description-commanding-officer
+  playTimeTracker: CMJobCommandingOfficer
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 126000 # 35 hours, any roles
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 54000 # 15 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 108000 # 30 hours
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 36000 # 10 hours, you need 5 to get CMP either way
+  - !type:RoleTimeRequirement
+    role: CMJobChiefMP
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 72000 # 20 hours, either in SO or XO
+  - !type:RoleTimeRequirement
+    role: CMJobExecutiveOfficer
+    time: 108000 # 30 hours, minimum time in an explicitly commander position
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankColonel:
+    - !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 630000 # 175 hours
+    RMCRankLieutenantColonel:
+    - !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 252000 # 70 hours
+    RMCRankMajor: []
+  weight: 10
+  startingGear: CMGearCommandingOfficer
+  icon: "CMJobIconCommandingOfficer"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  marineAuthorityLevel: 15
+  supervisors: cm-job-supervisors-marine-high-command
+  whitelisted: true
+  accessGroups:
+  - ShipMasterAccess
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetCommander
+    - type: MarineOrders
+    - type: CMVendorUser
+      id: CMCommandingOfficer
+      points: 120
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-commanding-officer
+    - type: CommendationGiver
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: co
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
+      maxRecommendations: 4
+    - type: SeeNewPlayers
+
+- type: startingGear
+  id: CMGearCommandingOfficer
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    shoes: CMShoesLaceupCommander
+    head: CMHeadBeretCO
+    outerClothing: RMCCoatService
+    ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchCommand
+    pocket2: RMCPouchGeneralLarge
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointCommandingOfficer
+  name: commanding officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMCommandingOfficer
+  - type: Sprite
+    state: co_spawn
+
+- type: playTimeTracker
+  id: CMJobCommandingOfficer
+  isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCO
+  name: The Commanding Officer
+  description: The Commanding Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: commanding_officer

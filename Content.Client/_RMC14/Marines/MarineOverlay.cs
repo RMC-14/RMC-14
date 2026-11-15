@@ -23,10 +23,10 @@ public sealed class MarineOverlay : Overlay
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private static readonly SpriteSpecifier.Rsi FireteamOneRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft1");
-    private static readonly SpriteSpecifier.Rsi FireteamTwoRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft2");
-    private static readonly SpriteSpecifier.Rsi FireteamThreeRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft3");
-    private static readonly SpriteSpecifier.Rsi FireteamLeaderRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ftl");
+    private static readonly SpriteSpecifier.Rsi FireteamOneRsi = new(new ResPath("_RMC14/Interface/fireteam.rsi"), "hudsquad_ft1");
+    private static readonly SpriteSpecifier.Rsi FireteamTwoRsi = new(new ResPath("_RMC14/Interface/fireteam.rsi"), "hudsquad_ft2");
+    private static readonly SpriteSpecifier.Rsi FireteamThreeRsi = new(new ResPath("_RMC14/Interface/fireteam.rsi"), "hudsquad_ft3");
+    private static readonly SpriteSpecifier.Rsi FireteamLeaderRsi = new(new ResPath("_RMC14/Interface/fireteam.rsi"), "hudsquad_ftl");
 
     private readonly NpcFactionSystem _npcFaction;
     private readonly ContainerSystem _container;
@@ -119,7 +119,8 @@ public sealed class MarineOverlay : Overlay
                 if (_npcFactionMemberQuery.TryComp(uid, out var factionMember))
                 {
                     // First faction is the entity's default faction
-                    if (factionIcons.TryGetValue(factionMember.Factions.First(), out var newIcon))
+                    if (factionMember.Factions.TryFirstOrNull(out var firstFaction) &&
+                        factionIcons.TryGetValue(firstFaction.Value, out var newIcon))
                     {
                         icon.Background = null;
                         icon.Icon = newIcon;
@@ -181,6 +182,7 @@ public sealed class MarineOverlay : Overlay
             }
         }
 
+        handle.SetTransform(Matrix3x2.Identity);
         handle.UseShader(null);
     }
 }

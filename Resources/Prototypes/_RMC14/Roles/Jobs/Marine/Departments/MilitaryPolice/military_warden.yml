@@ -1,0 +1,97 @@
+- type: job
+  parent: CMJobBase
+  id: CMMilitaryWarden
+  name: cm-job-name-militarywarden
+  description: cm-job-description-militarywarden
+  playTimeTracker: CMJobMilitaryWarden
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 36000 # 10 hours
+  ranks:
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryWarden
+      time: 252000 # 70 hours
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryWarden
+      time: 36000 # 10 hours
+    RMCRankSergeant: []
+  weight: 5
+  startingGear: CMGearMilitaryWarden
+  icon: "CMJobIconMilitaryWarden"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 4
+  supervisors: cm-job-supervisors-cmp
+  accessGroups:
+  - CMWarden
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-militarywarden
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: warden
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
+    - type: RMCTrackable
+
+- type: startingGear
+  id: CMGearMilitaryWarden
+  equipment:
+    jumpsuit: CMJumpsuitWarden
+    shoes: CMBootsBlackFilled
+    head: CMHeadCapWarden
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    id: CMIDCardMilitaryWarden
+    outerClothing: CMArmorM3Warden
+    ears: RMCHeadsetMW
+    belt: CMBeltSecurityMPFilled
+    pocket1: RMCUniversalRecorder
+    pocket2: RMCPouchGeneralLarge
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointMilitaryWarden
+  name: military warden spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMMilitaryWarden
+  - type: Sprite
+    state: wmp_spawn
+
+- type: playTimeTracker
+  id: CMJobMilitaryWarden
+  isHumanoid: true
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleMW
+  name: Military Warden
+  description: Military Warden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: warden

@@ -9,14 +9,18 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Localizations;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private void InitializeInteractions()
     {
@@ -112,7 +116,10 @@ public abstract partial class SharedHandsSystem : EntitySystem
         var newActiveIndex = (currentIndex + (reverse ? -1 : 1) + component.Hands.Count) % component.Hands.Count;
         var nextHand = component.SortedHands[newActiveIndex];
 
-        TrySetActiveHand((session.AttachedEntity.Value, component), nextHand);
+        // RMC14
+        if (_net.IsClient && _timing.IsFirstTimePredicted)
+            RaisePredictiveEvent(new RequestSetHandEvent(nextHand));
+        // TrySetActiveHand((session.AttachedEntity.Value, component), nextHand);
     }
 
     private bool DropPressed(ICommonSession? session, EntityCoordinates coords, EntityUid netEntity)

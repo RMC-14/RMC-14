@@ -115,6 +115,18 @@
   - type: InstantAction
     event: !type:RMCTelephoneActionEvent
 
+- type: entity
+  parent: RMCActionTelephone
+  id: RMCActionTelephoneScout
+  name: Use Helmet Microphone
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Objects/phone.rsi
+      state: scout_microphone
+    useDelay: 0.5
+
 - type: Tag
   id: RMCActionCycleZoomLevel
 
@@ -218,3 +230,31 @@
   - type: Action
   - type: InstantAction
     event: !type:RMCBroilerActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionDismount
+  name: Dismount
+  description: Stop using the weapon
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_emplacement_actions.rsi
+      state: cancel_view
+  - type: InstantAction
+    event: !type:DismountActionEvent
+
+# CBRN
+- type: entity
+  parent: BaseAction
+  id: ActionToggleCBRNHelmet
+  name: Toggle CBRN Mask
+  description: Raise or lower the integrated MOPP mask to toggle full fire protection.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_firewalk_actions.rsi
+      state: firewalk
+  - type: InstantAction
+    event: !type:ToggleClothingEvent { }

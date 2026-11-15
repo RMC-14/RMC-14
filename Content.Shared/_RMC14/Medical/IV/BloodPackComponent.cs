@@ -28,10 +28,10 @@ public sealed partial class BloodPackComponent : Component
     public string FillBaseName = "bloodpack";
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 TransferAmount = FixedPoint2.New(5);
+    public FixedPoint2 TransferAmount = FixedPoint2.New(3);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan TransferDelay = TimeSpan.FromSeconds(3);
+    public TimeSpan TransferDelay = TimeSpan.FromSeconds(2);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan TransferAt;

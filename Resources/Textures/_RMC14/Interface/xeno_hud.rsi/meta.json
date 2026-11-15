@@ -1,14 +1,14 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/daac1b70c46480c55b1e93b64f04529d364dd60f/icons/mob/hud/hud.dmi and ayou331 for hudxenoupgrade6",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/67a5981e191d9c049ff1e8db6ffce96ab2f968ae/icons/mob/hud/hud.dmi and ayou331 for hudxenoupgrade6, prae_tag_yellow modified by Vermidia.",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-        "name": "xeno_structure_node_indicator"
+      "name": "xeno_structure_node_indicator"
     },
     {
       "name": "plasma0"
@@ -467,18 +467,6 @@
       ]
     },
     {
-      "name": "prae_tag",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
-    {
       "name": "xeno_freeze",
       "delays": [
         [
@@ -662,6 +650,12 @@
     },
     {
       "name": "hudxenoupgrade6-ui"
+    },
+    {
+      "name": "prae_tag"
+    },
+    {
+      "name": "prae_tag_yellow"
     }
   ]
 }

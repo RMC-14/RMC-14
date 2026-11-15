@@ -40,7 +40,7 @@
     delay: 0.333
   - type: IconLabel
     textColor: White
-    storedOffset: 0, 12
+    storedOffset: -12, 12
   - type: RMCSmartFridgeInsertable
   - type: PhysicalComposition
     materialComposition:
@@ -63,9 +63,10 @@
   description: An autoinjector loaded with a special cocktail of chemicals, to be used in life-threatening situations. Doesn't require any training to use.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Medical/emergency_auto_injector.rsi
+    sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi
     layers:
-    - state: autoinjector
+    - state: empty_emergency
+      sprite: _RMC14/Objects/Medical/emergency_auto_injector.rsi
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -87,7 +88,6 @@
 #          Quantity: 19
   - type: SolutionContainerVisuals
     maxFillLevels: 1
-    changeColor: false
   - type: MedicallyUnskilledDoAfter
     min: 0
     doAfter: 0
@@ -183,6 +183,26 @@
       CMDexalinPlus: 3
   - type: IconLabel
     labelTextLocId: rmc-dexalin-plus-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: RMCDyloveneAutoInjector
+  name: dylovene autoinjector
+  description: An autoinjector loaded with 3 doses of 15u of Dylovene, a common toxin damage medicine. You can refill it at Weya-Med vending machines.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMDylovene
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMDylovene: 45
+  - type: IconLabel
+    labelTextLocId: rmc-dylovene-container-label-text
+
 # TODO RMC14 tramadol
 
 - type: entity
@@ -203,6 +223,7 @@
       CMBicaridine: 45
   - type: IconLabel
     labelTextLocId: rmc-bicaridine-container-label-text
+
 - type: entity
   parent: CMAutoInjector
   id: CMInaprovalineAutoInjector
@@ -346,6 +367,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#FFFFFF"
   - type: SolutionContainerManager
     solutions:
@@ -368,6 +390,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#DD95FF"
   - type: SolutionContainerManager
     solutions:
@@ -388,6 +411,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#1EF6FF"
   - type: SolutionContainerManager
     solutions:
@@ -408,6 +432,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#21A0FF"
   - type: SolutionContainerManager
     solutions:
@@ -428,6 +453,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#171DFF"
   - type: SolutionContainerManager
     solutions:
@@ -448,6 +474,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#00FF07"
   - type: SolutionContainerManager
     solutions:
@@ -468,6 +495,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
     - state: autoinjector_tag
+      sprite: _RMC14/Objects/Medical/auto_injectors.rsi
       color: "#E8FF00"
   - type: SolutionContainerManager
     solutions:
@@ -583,7 +611,7 @@
   components:
   - type: Sprite
     layers:
-    - state: autoinjector
+    - state: empty_research
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -604,7 +632,7 @@
   components:
   - type: Sprite
     layers:
-    - state: autoinjector
+    - state: empty_research
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -624,7 +652,7 @@
   components:
   - type: Sprite
     layers:
-    - state: autoinjector
+    - state: empty_research
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -644,7 +672,7 @@
   components:
   - type: Sprite
     layers:
-    - state: autoinjector
+    - state: empty_research
     - state: autoinjector1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false

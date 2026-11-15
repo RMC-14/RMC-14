@@ -1,0 +1,170 @@
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSEBomber
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: bomber
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSEGPMG
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: gpmg
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSEGunner
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: gunner
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSESapper
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: sapper
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSESectionLead
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: section
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSESniper
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: sniper
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSETeamLead
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: team
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSETroopCommander
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: commander
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSETroopSergeant
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: sergeant
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSERifleman
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: rifleman
+
+# large floor logo
+- type: decal
+  id: RMCDecalTSE1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_1
+
+- type: decal
+  id: RMCDecalTSE2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_2
+
+- type: decal
+  id: RMCDecalTSE3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_3
+
+- type: decal
+  id: RMCDecalTSE4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_4
+
+- type: decal
+  id: RMCDecalTSE5
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_5
+
+- type: decal
+  id: RMCDecalTSE6
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_6
+
+- type: decal
+  id: RMCDecalTSE7
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_7
+
+- type: decal
+  id: RMCDecalTSE8
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_8
+
+- type: decal
+  id: RMCDecalTSE9
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_9
+
+- type: decal
+  id: RMCDecalTSE10
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_10
+
+- type: decal
+  id: RMCDecalTSE11
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/tse_logo_4x3.rsi
+    state: tsefloorlogo_11
+

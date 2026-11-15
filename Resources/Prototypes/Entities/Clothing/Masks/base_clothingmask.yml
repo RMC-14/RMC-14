@@ -39,7 +39,7 @@
   - type: Butcherable
     butcheringType: Knife
     spawned:
-    - id: MaterialCloth1
+    - id: MaterialCotton1 # RMC14
       amount: 1
   - type: PhysicalComposition # 50% of the amount of cloth you'd obtain upon butchering
     materialComposition:

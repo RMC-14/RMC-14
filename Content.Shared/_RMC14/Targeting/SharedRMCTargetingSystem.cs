@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rangefinder.Spotting;
@@ -5,13 +6,19 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Targeting;
 
 public abstract class SharedRMCTargetingSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] protected readonly IGameTiming Timing = default!;
+
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -41,6 +48,11 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         {
             StopTargeting((targeting, targeting), targeting.Comp.Targets[0]);
         }
+
+        foreach (var session in _player.Sessions)
+        {
+            _rmcPvs.RemoveSessionOverride(targeting.Owner, session);
+        }
     }
 
     /// <summary>
@@ -48,6 +60,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// </summary>
     private void OnTargetingDropped<T>(Entity<TargetingComponent> targeting, ref T args)
     {
+        if (_net.IsClient)
+            return;
+
         var ev = new TargetingCancelledEvent();
         RaiseLocalEvent(targeting, ref ev);
 
@@ -59,6 +74,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
     private void OnTargetedRemove<T>(Entity<RMCTargetedComponent> ent, ref T args)
     {
+        if (_net.IsClient)
+            return;
+
         foreach (var targeting in ent.Comp.TargetedBy)
         {
             if (!TryComp(targeting, out TargetingComponent? targetingComp))
@@ -69,6 +87,11 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             targetingComp.OriginalLaserDurations.Remove(ent);
             Dirty(targeting, targetingComp);
         }
+
+        foreach (var session in _player.Sessions)
+        {
+            _rmcPvs.RemoveSessionOverride(ent, session);
+        }
     }
 
     /// <summary>
@@ -76,7 +99,6 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// </summary>
     /// <param name="targeting">The entity that is targeting</param>
     /// <param name="target">The entity being targeted</param>
-    /// <param name="targeting">The <see cref="TargetingComponent"/> belonging to the targing entity</param>
     public void StopTargeting(Entity<TargetingComponent?> targeting, EntityUid target)
     {
         if (!Resolve(targeting, ref targeting.Comp, false))
@@ -93,7 +115,6 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
         // Find the next target marker with the highest priority
         var highestMark = TargetedEffects.None;
-        var highestDirection = DirectionTargetedEffects.None;
         var spotters = false;
 
         // Check all active lasers currently targeting the target
@@ -105,19 +126,16 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             if (comp.LaserType > highestMark)
                 highestMark = comp.LaserType;
 
-            if (comp.DirectionEffect > highestDirection)
-                highestDirection = comp.DirectionEffect;
-
             if (comp.LaserType == TargetedEffects.Spotted)
                 spotters = true;
         }
 
+        targeted.TargetType = highestMark;
+        Dirty(target, targeted);
+
         // Remove the spotted component if none of the targeting lasers is a spotter
         if (!spotters)
             RemComp<SpottedComponent>(target);
-
-        // Update the target marker
-        UpdateTargetMarker(target, highestMark, highestDirection, true);
 
         if (targeted.TargetedBy.Count != 0)
             return;
@@ -138,17 +156,19 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// <param name="target">The entity being targeted</param>
     /// <param name="targetingDuration">How long the targeting should last if not interrupted</param>
     /// <param name="targetedEffect">The visualiser to apply on the entity being targeted</param>
-    /// <param name="directionEffect">The direction visualiser to apply on the entity being targeted</param>
-    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float targetingDuration, TargetedEffects targetedEffect = TargetedEffects.None, DirectionTargetedEffects directionEffect = DirectionTargetedEffects.None)
+    /// <param name="showDirection">If a direction indicator pointing towards the targeting entity should be displayed</param>
+    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float targetingDuration, TargetedEffects targetedEffect = TargetedEffects.None, bool showDirection = false)
     {
         // Change the laser and targeting effect if focused.
-        var ev = new TargetingStartedEvent(directionEffect, targetedEffect, target);
+        var ev = new TargetingStartedEvent(targetedEffect, target);
         RaiseLocalEvent(equipment, ref ev);
         targetedEffect = ev.TargetedEffect;
-        directionEffect = ev.DirectionEffect;
 
         var targeted = EnsureComp<RMCTargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
+        targeted.ShowDirection = showDirection;
+        if (targetedEffect > targeted.TargetType)
+            targeted.TargetType = targetedEffect;
         Dirty(target, targeted);
 
         var targeting = EnsureComp<TargetingComponent>(equipment);
@@ -163,36 +183,16 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         targeting.Origin = Transform(user).Coordinates;
         targeting.User = user;
         targeting.LaserType = targetedEffect;
-        targeting.DirectionEffect = directionEffect;
         Dirty(equipment, targeting);
 
-        var ev2 = new GotTargetedEvent();
-        RaiseLocalEvent(target, ref ev2);
+        foreach (var session in _player.Sessions)
+        {
+            if (session.AttachedEntity == null)
+                continue;
 
-        UpdateTargetMarker(target, targetedEffect, directionEffect);
-    }
-
-    /// <summary>
-    ///     Change the enabled visualiser on the target.
-    /// </summary>
-    /// <param name="target">The entity of which the visualiser should should change</param>
-    /// <param name="newMarker">The new visualiser state</param>
-    /// <param name="force">Should the new visualiser be applied, ignoring all conditions</param>
-    /// <param name="directionEffect">The direction targeted visualiser to apply to the target</param>
-    private void UpdateTargetMarker(EntityUid target, TargetedEffects newMarker,  DirectionTargetedEffects directionEffect, bool force = false)
-    {
-        //Get the currently active visualiser.
-        _appearance.TryGetData<TargetedEffects>(target, TargetedVisuals.Targeted, out var marker);
-
-        // Only apply the visualiser if forced, or it has a higher priority than the already existing one.
-        if (force || newMarker > marker)
-            _appearance.SetData(target, TargetedVisuals.Targeted, newMarker);
-
-        var directionVisual = directionEffect > DirectionTargetedEffects.None;
-        var directionVisualIntense = directionEffect > DirectionTargetedEffects.DirectionTargeted;
-
-        _appearance.SetData(target, TargetedVisuals.TargetedDirection, directionVisual && !directionVisualIntense);
-        _appearance.SetData(target, TargetedVisuals.TargetedDirectionIntense, directionVisual && directionVisualIntense);
+            _rmcPvs.AddSessionOverride(target, session);
+            _rmcPvs.AddSessionOverride(equipment, session);
+        }
     }
 
     /// <summary>
@@ -301,10 +301,4 @@ public record struct TargetingCancelledEvent(bool Handled = false);
 ///     Raised on an entity when it starts targeting.
 /// </summary>
 [ByRefEvent]
-public record struct TargetingStartedEvent(DirectionTargetedEffects DirectionEffect, TargetedEffects TargetedEffect, EntityUid Target);
-
-/// <summary>
-///     Raised on an entity when targeting has finished
-/// </summary>
-[ByRefEvent]
-public record struct GotTargetedEvent();
+public record struct TargetingStartedEvent(TargetedEffects TargetedEffect, EntityUid Target);

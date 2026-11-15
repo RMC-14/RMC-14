@@ -4,6 +4,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Light.Components;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -21,6 +22,15 @@ public sealed class RMCInteractionSystem : EntitySystem
         SubscribeLocalEvent<NoHandsInteractionBlockedComponent, GettingInteractedWithAttemptEvent>(OnNoHandsInteractionAttempt);
         SubscribeLocalEvent<InsertBlacklistComponent, ContainerIsInsertingAttemptEvent>(OnInsertBlacklistContainerIsInsertingAttempt);
         SubscribeLocalEvent<IgnoreInteractionRangeComponent, InRangeOverrideEvent>(OnInRangeOverride);
+        SubscribeLocalEvent<InteractedBlacklistComponent, StorageInteractAttemptEvent>(OnBlacklistStorageAttempt);
+    }
+    private void OnBlacklistStorageAttempt(Entity<InteractedBlacklistComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        if (args.Cancelled || ent.Comp.Blacklist == null)
+            return;
+
+        if (_whitelist.IsValid(ent.Comp.Blacklist, args.User))
+            args.Cancelled = true;
     }
 
     private void OnNoHandsInteractionAttempt(Entity<NoHandsInteractionBlockedComponent> ent, ref GettingInteractedWithAttemptEvent args)

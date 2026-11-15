@@ -1,4 +1,6 @@
+using Content.Shared.Tag;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
@@ -8,4 +10,7 @@ public sealed partial class RMCSmartRefillTankComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public string Solution = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<TagPrototype> OnlyFillThis = "CMAutoInjector";
 }

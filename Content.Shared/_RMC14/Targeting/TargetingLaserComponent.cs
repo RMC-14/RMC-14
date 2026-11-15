@@ -1,4 +1,6 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Targeting;
 
@@ -12,16 +14,10 @@ public sealed partial class TargetingLaserComponent : Component
     public bool ShowLaser = true;
 
     /// <summary>
-    ///     The original color of the laser.
+    ///     The laser type.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Color LaserColor = Color.Red;
-
-    /// <summary>
-    ///     The current color of the laser
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public Color CurrentLaserColor = Color.Red;
+    public TargetingLaserType LaserType;
 
     /// <summary>
     ///     The default alpha multiplier of any lasers originating from this entity.
@@ -34,4 +30,26 @@ public sealed partial class TargetingLaserComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool GradualAlpha = true;
+
+    /// <summary>
+    ///     The width of the laser.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float LaserWidth = 0.3f;
+
+    [DataField]
+    public ResPath RsiPath = new("/Textures/_RMC14/Effects/beam.rsi");
+
+    [DataField]
+    public string LaserState = "laser_beam";
+
+    [DataField]
+    public string LaserIntenseState = "laser_beam_intense";
+}
+
+[Serializable, NetSerializable]
+public enum TargetingLaserType
+{
+    Normal,
+    Intense,
 }

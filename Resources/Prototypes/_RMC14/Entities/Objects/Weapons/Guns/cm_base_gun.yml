@@ -53,6 +53,7 @@
       sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
       state: all
   - type: InteractionActivateOnClick
+  - type: GunSecondWind
 
 - type: entity
   parent: BaseBullet
@@ -76,6 +77,16 @@
     whitelist:
       components:
       - Xeno
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.35,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
 
 - type: entity
   abstract: true

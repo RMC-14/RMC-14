@@ -14,12 +14,21 @@
     description: roles-lesser-drone-description
     raffle:
       settings: short
+  - type: FiremanCarriable
+    canThrow: true
+    carrierWhitelist:
+      components:
+      - Synth
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
   - type: MobState
     allowedStates:
     - Alive
     - Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -119,3 +128,8 @@
   - type: RMCActionOrder
     id: CMXenoLesserDrone
   - type: ExcludedFromKingVote
+  - type: MindTakeoverBehavior
+    ejectFromLarvaQueues: false
+  - type: RemoveComponents
+    components:
+    - type: CanBeLarvaQueued

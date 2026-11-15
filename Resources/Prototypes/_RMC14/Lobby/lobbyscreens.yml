@@ -81,3 +81,7 @@
 - type: lobbyBackground
   id: HisHighness
   background: /Textures/_RMC14/Lobby/his_highness.png
+
+- type: lobbyBackground
+  id: CoveringPrivateVuloss
+  background: /Textures/_RMC14/Lobby/Covering_Private_Vuloss_By_SampleTex.png

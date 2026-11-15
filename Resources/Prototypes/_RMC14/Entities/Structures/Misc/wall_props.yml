@@ -130,3 +130,28 @@
   components:
   - type: Sprite
     state: pilotbody_decap2
+
+# Dead guys
+- type: entity
+  parent: RMCWallPropBase
+  id: RMCWallPropDeadTrooper
+  name: Unknown Trooper
+  description: What remains of a unknown trooper. May they rest in peace.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/dead_guys.rsi
+    state: army_guy
+
+- type: entity
+  parent: RMCWallPropDeadTrooper
+  id: RMCWallPropDeadTrooperCabinet
+  suffix: Cabinet
+  components:
+  - type: Sprite
+    state: major
+
+- type: entity
+  parent: RMCWallPropDeadTrooperCabinet
+  id: RMCWallPropDeadSteven
+  name: Rep. Steve Haifisch
+  description: "A card lays in his lap. \"Happy birthday, Steve. Here's to another fruitful year!\""

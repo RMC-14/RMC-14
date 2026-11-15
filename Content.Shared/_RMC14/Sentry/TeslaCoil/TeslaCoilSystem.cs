@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Stun;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Effects;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -28,6 +28,7 @@ public sealed class TeslaCoilSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly SentrySystem _sentrySystem = default!;
+    [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
 
 
     private readonly HashSet<EntityUid> _potentialTargets = new();
@@ -40,12 +41,12 @@ public sealed class TeslaCoilSystem : EntitySystem
 
         var time = _timing.CurTime;
         var teslaQuery =
-            EntityQueryEnumerator<RMCTeslaCoilComponent, SentryComponent, TransformComponent, UserIFFComponent>();
+            EntityQueryEnumerator<RMCTeslaCoilComponent, SentryComponent, TransformComponent, SentryTargetingComponent>();
         while (teslaQuery.MoveNext(out var uid,
                    out var teslaComp,
                    out var sentryComp,
                    out var xform,
-                   out var coilFactionComp))
+                   out var targetingComp))
         {
             if (sentryComp.Mode != SentryMode.On || !xform.Anchored)
                 continue;
@@ -55,8 +56,6 @@ public sealed class TeslaCoilSystem : EntitySystem
 
             _potentialTargets.Clear();
             _validTargets.Clear();
-
-            var coilFactionId = coilFactionComp.Faction;
 
             _entityLookup.GetEntitiesInRange(xform.Coordinates, teslaComp.Range, _potentialTargets, LookupFlags.Uncontained);
 
@@ -72,6 +71,9 @@ public sealed class TeslaCoilSystem : EntitySystem
                 if (!_interaction.InRangeUnobstructed(uid, targetUid, teslaComp.Range, popup: false))
                     continue;
 
+                if (!_targeting.IsValidTarget((uid, targetingComp), targetUid))
+                    continue;
+
                 var isValidTarget = false;
 
                 if (TryComp<SentryComponent>(targetUid, out var targetSentry))
@@ -82,12 +84,7 @@ public sealed class TeslaCoilSystem : EntitySystem
                 else if (TryComp<MobStateComponent>(targetUid, out var mobState) &&
                          _mobState.IsAlive(targetUid, mobState))
                 {
-                    var targetFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
-                    RaiseLocalEvent(targetUid, ref targetFactionEvent);
-                    var targetFactionId = targetFactionEvent.Faction;
-
-                    if (coilFactionId != null && (targetFactionId == null || targetFactionId != coilFactionId))
-                        isValidTarget = true;
+                    isValidTarget = true;
                 }
 
                 if (isValidTarget)

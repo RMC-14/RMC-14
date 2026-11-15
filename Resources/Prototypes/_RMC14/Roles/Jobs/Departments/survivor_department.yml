@@ -5,7 +5,7 @@
   description: cm-department-Survivor-description
   color: "#C38312"
   roles:
-  - RMCJobSyntheticColony
+  - RMCSyntheticColony
   - CMSurvivor
   - CMSurvivorDoctor
   - CMSurvivorEngineer

@@ -8,3 +8,101 @@
   - type: Sprite
     sprite: _RMC14/Structures/shiva_props.rsi
     state: small_wire
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCPropLawnFlamingoSnow
+  name: lawn flamingo
+  suffix: Snow
+  description: For ornamenting your suburban lawn... or your ice colony.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/shiva_props.rsi
+    state: flamingo_snow
+
+- type: entity
+  parent: RMCPropLawnFlamingoSnow
+  id: RMCPropLawnFlamingo
+  description: For ornamenting your suburban lawn.
+  components:
+  - type: Sprite
+    state: flamingo
+
+- type: entity
+  parent: RMCPropLawnFlamingoSnow
+  id: RMCPropLawnFlamingoFestive
+  name: festive lawn flamingo
+  description: For ornamenting your suburban lawn... or your ice colony during the festive season. Not that anyone has an Earth calendar out here.
+  components:
+  - type: Sprite
+    state: flamingo_santa
+
+- type: entity
+  id: RMCPropCocoonLarge1
+  name: cocoon
+  suffix: Large 1
+  description: Something wrapped in silky spider web.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/shiva_props.rsi
+    state: cocoon_large1
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCRemains:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Weapons/slash.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCPropCocoonLarge1
+  id: RMCPropCocoonLarge2
+  suffix: Large 2
+  components:
+  - type: Sprite
+    state: cocoon_large2
+
+- type: entity
+  parent: RMCPropCocoonLarge1
+  id: RMCPropCocoonLarge3
+  suffix: Large 3
+  components:
+  - type: Sprite
+    state: cocoon_large3
+
+- type: entity
+  parent: RMCPropCocoonLarge1
+  id: RMCPropCocoon1
+  suffix: 1
+  components:
+  - type: Sprite
+    state: cocoon1
+
+- type: entity
+  parent: RMCPropCocoonLarge1
+  id: RMCPropCocoon2
+  suffix: 2
+  components:
+  - type: Sprite
+    state: cocoon2
+
+- type: entity
+  parent: RMCPropCocoonLarge1
+  id: RMCPropCocoon3
+  suffix: 3
+  components:
+  - type: Sprite
+    state: cocoon3

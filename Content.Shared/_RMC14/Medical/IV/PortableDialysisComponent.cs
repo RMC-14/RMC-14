@@ -10,14 +10,14 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Medical.IV;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class PortableDialysisComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 ReagentRemovalAmount = FixedPoint2.New(1.5);
+    public FixedPoint2 DialysisAmount = FixedPoint2.New(1.5);
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 BloodRemovalCost = FixedPoint2.New(6);
+    public FixedPoint2 BloodCost = FixedPoint2.New(6);
 
     [DataField, AutoNetworkedField]
     public TimeSpan TransferDelay = TimeSpan.FromSeconds(1);
@@ -49,8 +49,8 @@ public sealed partial class PortableDialysisComponent : Component
     [DataField, AutoNetworkedField]
     public bool IsAttaching;
 
-    [DataField, AutoNetworkedField]
-    public bool IsDetaching;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan DetachingEnd;
 }
 
 [Serializable, NetSerializable]
@@ -65,13 +65,13 @@ public enum DialysisVisualLayers
 [Serializable, NetSerializable]
 public enum DialysisBatteryLevel : byte
 {
-    Empty,
-    VeryLow,
-    Low,
-    Medium,
-    High,
-    VeryHigh,
-    Full
+    Battery0,
+    Battery15,
+    Battery30,
+    Battery45,
+    Battery60,
+    Battery85,
+    Battery100
 }
 
 [Serializable, NetSerializable]

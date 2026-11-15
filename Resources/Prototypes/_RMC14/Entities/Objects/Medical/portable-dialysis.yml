@@ -23,13 +23,13 @@
     visuals:
       enum.DialysisVisuals.BatteryLevel:
         DialysisVisualLayers.Battery:
-          Empty: { state: battery0 }
-          VeryLow: { state: battery15 }
-          Low: { state: battery30 }
-          Medium: { state: battery45 }
-          High: { state: battery60 }
-          VeryHigh: { state: battery85 }
-          Full: { state: battery100 }
+          Battery0: { state: battery0 }
+          Battery15: { state: battery15 }
+          Battery30: { state: battery30 }
+          Battery45: { state: battery45 }
+          Battery60: { state: battery60 }
+          Battery85: { state: battery85 }
+          Battery100: { state: battery100 }
   - type: Item
     size: Normal
   - type: PortableDialysis

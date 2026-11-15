@@ -8,7 +8,7 @@ public sealed class ScopeSystem : SharedScopeSystem
 {
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
-    protected override Direction? StartScoping(Entity<ScopeComponent> scope, EntityUid user)
+    public override Direction? StartScoping(Entity<ScopeComponent> scope, EntityUid user)
     {
         if (base.StartScoping(scope, user) is not { } direction)
             return null;
@@ -26,7 +26,7 @@ public sealed class ScopeSystem : SharedScopeSystem
         return direction;
     }
 
-    protected override bool Unscope(Entity<ScopeComponent> scope)
+    public override bool Unscope(Entity<ScopeComponent> scope)
     {
         var user = scope.Comp.User;
         if (!base.Unscope(scope))

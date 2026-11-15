@@ -8,6 +8,7 @@
   - type: Pda
     id: CMIDCardHighCommand
   - type: HealthScanner
+    detailLevel: Full
     sound:
       path: "/Audio/_RMC14/Medical/healthanalyzer.ogg"
   - type: CartridgeLoader

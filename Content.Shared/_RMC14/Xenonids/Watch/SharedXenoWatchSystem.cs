@@ -55,7 +55,7 @@ public abstract class SharedXenoWatchSystem : EntitySystem
     {
     }
 
-    protected virtual void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
+    public virtual void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
     {
         if (!Resolve(watcher, ref watcher.Comp))
             return;

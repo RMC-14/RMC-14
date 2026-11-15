@@ -20,7 +20,7 @@
         mask:
         - MachineMask
         layer:
-        - MobMask
+        - MachineLayer
   - type: Clickable
   - type: InteractionOutline
   - type: Damageable
@@ -29,7 +29,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:PlaySoundBehavior
         sound:

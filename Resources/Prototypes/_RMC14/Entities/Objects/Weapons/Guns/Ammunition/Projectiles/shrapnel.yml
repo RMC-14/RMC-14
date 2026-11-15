@@ -35,8 +35,6 @@
     deleteOnCollide: true
   - type: CMArmorPiercing
     amount: 20
-  - type: TimedDespawn
-    lifetime: 0.25
   - type: RMCProjectileAccuracy
     accuracy: 100
     thresholds:

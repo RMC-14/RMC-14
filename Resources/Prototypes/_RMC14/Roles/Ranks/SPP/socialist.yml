@@ -18,6 +18,11 @@
   prefix: Strsh.
   paygrade: STRSH
 
+- type: rank
+  id: RMCRankSPPSynthetic
+  name: Synthetic
+  prefix: Syn.
+
 # Military
 
 - type: rank
@@ -101,12 +106,6 @@
   name: Mayjor
   prefix: May.
   paygrade: O4
-
-- type: rank
-  id: RMCRankSPPPoliticalCommissar
-  name: Political Commissar
-  prefix: Pol.
-  # This is a civilian rank, so it doesn't have a paygrade
 
 - type: rank
   id: RMCRankSPPPodpolkovnik

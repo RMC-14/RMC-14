@@ -151,8 +151,19 @@ public abstract class SharedEmitSoundSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnEmitSoundOnThrown(EntityUid uid, BaseEmitSoundComponent component, ref ThrownEvent args)
+    private void OnEmitSoundOnThrown(EntityUid uid, EmitSoundOnThrowComponent component, ref ThrownEvent args)
     {
+        // RMC14
+        if (component.Cooldown > TimeSpan.Zero)
+        {
+            var time = Timing.CurTime;
+            if (time < component.Last + component.Cooldown)
+                return;
+
+            component.Last = time;
+            Dirty(uid, component);
+        }
+
         TryEmitSound(uid, component, args.User, false);
     }
 

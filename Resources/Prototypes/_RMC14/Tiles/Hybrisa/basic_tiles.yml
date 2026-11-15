@@ -177,6 +177,7 @@
   id: RMCPlanetHybrisaAsphalt
   name: asphalt
   sprite: /Textures/_RMC14/Tiles/hybrisa/asphalt_old.png
+  isSubfloor: false
 
 - type: tile
   parent: RMCPlanetHybrisaAsphalt
@@ -223,6 +224,7 @@
   id: RMCPlanetHybrisaCement
   name: cement
   sprite: /Textures/_RMC14/Tiles/hybrisa/cement1.png
+  isSubfloor: false
 
 - type: tile
   parent: RMCPlanetHybrisaCement
@@ -239,6 +241,7 @@
   id: RMCPlanetHybrisaSidewalk
   name: sidewalk
   sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkfull.png
+  isSubfloor: false
 
 - type: tile
   parent: RMCPlanetHybrisaSidewalk
