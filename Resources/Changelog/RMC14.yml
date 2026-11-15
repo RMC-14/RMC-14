@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Fixed Shiva's Snowball Commando not having construction 1 skill
-    type: Fix
-  id: 3250
-  time: '2026-05-31T03:07:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9913
 - author: IceNoobXD
   changes:
   - message: Added medical, science, security, and virology biosuit variants!
@@ -4526,5 +4519,12 @@
   id: 3749
   time: '2026-11-13T23:24:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10646
+- author: SharkSnake98
+  changes:
+  - message: Added an RMC Version of the ally pin, available in the loadout and rec-vend
+    type: Add
+  id: 3750
+  time: '2026-11-15T04:38:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10456
 Name: RMC14
 Order: -1
