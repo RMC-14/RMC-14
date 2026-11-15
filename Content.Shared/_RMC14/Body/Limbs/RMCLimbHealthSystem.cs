@@ -1,10 +1,12 @@
 using Content.Shared._RMC14.Body.Zones;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -15,6 +17,7 @@ namespace Content.Shared._RMC14.Body.Limbs;
 public sealed class RMCLimbHealthSystem : EntitySystem
 {
     [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -25,7 +28,12 @@ public sealed class RMCLimbHealthSystem : EntitySystem
 
     private readonly List<RMCTargetZone> _limbs = new();
     private readonly List<RMCTargetZone> _picked = new();
+    private readonly List<RMCTargetZone> _present = new();
+    private readonly List<RMCTargetZone> _neighbours = new();
+    private readonly HashSet<RMCTargetZone> _visited = new();
     private readonly Dictionary<RMCTargetZone, float> _weights = new();
+
+    private bool _limbsCanBreak;
 
     private enum LimbGroup
     {
@@ -37,6 +45,8 @@ public sealed class RMCLimbHealthSystem : EntitySystem
     {
         SubscribeLocalEvent<RMCLimbHealthComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
         SubscribeLocalEvent<RMCLimbHealthComponent, DamageChangedEvent>(OnDamageChanged);
+
+        Subs.CVar(_config, RMCCVars.RMCLimbsCanBreak, v => _limbsCanBreak = v, true);
     }
 
     // decides where the damage lands before armour runs so armour can read it
@@ -66,14 +76,15 @@ public sealed class RMCLimbHealthSystem : EntitySystem
         {
             var hit = GetCurrentHit((ent, ent.Comp)) ?? RMCLimbHit.Random;
             var (brute, burn) = GetBruteBurn(delta);
-            changed |= ApplyChange(ent, hit, LimbGroup.Brute, brute);
-            changed |= ApplyChange(ent, hit, LimbGroup.Burn, burn);
+            changed |= ApplyChange(ent, hit, brute, burn);
         }
 
         // damage set directly has no delta and splitting can round, so the limbs always catch up to the body
         var (bodyBrute, bodyBurn) = GetBruteBurn(args.Damageable.Damage);
-        changed |= ApplyChange(ent, RMCLimbHit.Random, LimbGroup.Brute, bodyBrute - SumLimbs(ent, LimbGroup.Brute));
-        changed |= ApplyChange(ent, RMCLimbHit.Random, LimbGroup.Burn, bodyBurn - SumLimbs(ent, LimbGroup.Burn));
+        changed |= ApplyChange(ent,
+            RMCLimbHit.Random,
+            bodyBrute - SumLimbs(ent, LimbGroup.Brute),
+            bodyBurn - SumLimbs(ent, LimbGroup.Burn));
 
         if (changed)
             Dirty(ent);
@@ -209,36 +220,41 @@ public sealed class RMCLimbHealthSystem : EntitySystem
         return new System.Random(seed);
     }
 
-    private bool ApplyChange(Entity<RMCLimbHealthComponent> ent, RMCLimbHit hit, LimbGroup group, FixedPoint2 amount)
+    // damage lands brute and burn together so they fill and spill over the same limbs, heals come off each on its own
+    private bool ApplyChange(Entity<RMCLimbHealthComponent> ent, RMCLimbHit hit, FixedPoint2 brute, FixedPoint2 burn)
     {
-        if (amount > FixedPoint2.Zero)
-            DamageLimbs(ent, hit, group, amount);
-        else if (amount < FixedPoint2.Zero)
-            HealLimbs(ent, hit, group, -amount);
-        else
-            return false;
+        var damageBrute = FixedPoint2.Max(brute, FixedPoint2.Zero);
+        var damageBurn = FixedPoint2.Max(burn, FixedPoint2.Zero);
+        if (damageBrute > FixedPoint2.Zero || damageBurn > FixedPoint2.Zero)
+            DamageLimbs(ent, hit, damageBrute, damageBurn);
 
-        return true;
+        if (brute < FixedPoint2.Zero)
+            HealLimbs(ent, hit, LimbGroup.Brute, -brute);
+
+        if (burn < FixedPoint2.Zero)
+            HealLimbs(ent, hit, LimbGroup.Burn, -burn);
+
+        return brute != FixedPoint2.Zero || burn != FixedPoint2.Zero;
     }
 
-    private void DamageLimbs(Entity<RMCLimbHealthComponent> ent, RMCLimbHit hit, LimbGroup group, FixedPoint2 amount)
+    private void DamageLimbs(Entity<RMCLimbHealthComponent> ent, RMCLimbHit hit, FixedPoint2 brute, FixedPoint2 burn)
     {
         switch (hit.Mode)
         {
             case RMCLimbHitMode.Spread:
-                SpreadDamage(ent, group, amount, hit.SpreadChance);
+                SpreadDamage(ent, brute, burn, hit.SpreadChance);
                 break;
             case RMCLimbHitMode.Explosion:
-                ExplosionDamage(ent, hit.Zone, group, amount);
+                ExplosionDamage(ent, hit.Zone, brute, burn);
                 break;
             default:
-                AddLimbDamage(ent, hit.Zone ?? RandomLimb(ent, hit.Mode), group, amount);
+                AddLimbDamage(ent, hit.Zone ?? RandomLimb(ent, hit.Mode), brute, burn);
                 break;
         }
     }
 
     // every limb that isn't at max has a chance to take an equal share
-    private void SpreadDamage(Entity<RMCLimbHealthComponent> ent, LimbGroup group, FixedPoint2 amount, float chance)
+    private void SpreadDamage(Entity<RMCLimbHealthComponent> ent, FixedPoint2 brute, FixedPoint2 burn, float chance)
     {
         GetPresentOrAllLimbs(ent, _limbs);
         _picked.Clear();
@@ -252,18 +268,21 @@ public sealed class RMCLimbHealthSystem : EntitySystem
         if (_picked.Count == 0)
             _picked.AddRange(_limbs);
 
-        var share = amount / _picked.Count;
+        var shareBrute = brute / _picked.Count;
+        var shareBurn = burn / _picked.Count;
         for (var i = 0; i < _picked.Count; i++)
         {
             // the last limb takes what rounding left over so the total stays exact
-            var part = i == _picked.Count - 1 ? amount - share * (_picked.Count - 1) : share;
-            AddLimbDamage(ent, _picked[i], group, part);
+            var last = i == _picked.Count - 1;
+            var partBrute = last ? brute - shareBrute * (_picked.Count - 1) : shareBrute;
+            var partBurn = last ? burn - shareBurn * (_picked.Count - 1) : shareBurn;
+            AddLimbDamage(ent, _picked[i], partBrute, partBurn);
         }
     }
 
     // half on one limb then each limb's explosion weight of the other half on top
     // so the focus limb gets 1 part and every limb its weight in parts, mostly the chest abdomen and head
-    private void ExplosionDamage(Entity<RMCLimbHealthComponent> ent, RMCTargetZone? focus, LimbGroup group, FixedPoint2 amount)
+    private void ExplosionDamage(Entity<RMCLimbHealthComponent> ent, RMCTargetZone? focus, FixedPoint2 brute, FixedPoint2 burn)
     {
         var focusZone = focus ?? RandomLimb(ent, RMCLimbHitMode.Explosion);
         GetPresentOrAllLimbs(ent, _limbs);
@@ -273,23 +292,29 @@ public sealed class RMCLimbHealthSystem : EntitySystem
             total += ent.Comp.Definitions.GetValueOrDefault(limb).ExplosionWeight;
         }
 
-        var focused = amount / (1 + total);
-        AddLimbDamage(ent, focusZone, group, focused);
+        var focusedBrute = brute / (1 + total);
+        var focusedBurn = burn / (1 + total);
+        AddLimbDamage(ent, focusZone, focusedBrute, focusedBurn);
 
-        var rest = amount - focused;
+        var restBrute = brute - focusedBrute;
+        var restBurn = burn - focusedBurn;
         if (total <= 0)
         {
-            AddLimbDamage(ent, focusZone, group, rest);
+            AddLimbDamage(ent, focusZone, restBrute, restBurn);
             return;
         }
 
-        var given = FixedPoint2.Zero;
+        var givenBrute = FixedPoint2.Zero;
+        var givenBurn = FixedPoint2.Zero;
         for (var i = 0; i < _limbs.Count; i++)
         {
-            var weight = ent.Comp.Definitions.GetValueOrDefault(_limbs[i]).ExplosionWeight;
-            var part = i == _limbs.Count - 1 ? rest - given : rest * (weight / total);
-            given += part;
-            AddLimbDamage(ent, _limbs[i], group, part);
+            var share = ent.Comp.Definitions.GetValueOrDefault(_limbs[i]).ExplosionWeight / total;
+            var last = i == _limbs.Count - 1;
+            var partBrute = last ? restBrute - givenBrute : restBrute * share;
+            var partBurn = last ? restBurn - givenBurn : restBurn * share;
+            givenBrute += partBrute;
+            givenBurn += partBurn;
+            AddLimbDamage(ent, _limbs[i], partBrute, partBurn);
         }
     }
 
@@ -339,10 +364,66 @@ public sealed class RMCLimbHealthSystem : EntitySystem
         return true;
     }
 
-    private void AddLimbDamage(Entity<RMCLimbHealthComponent> ent, RMCTargetZone zone, LimbGroup group, FixedPoint2 amount)
+    // fills the limb up to its max brute first then burn and passes what doesn't fit on to a neighbouring limb
+    private void AddLimbDamage(Entity<RMCLimbHealthComponent> ent, RMCTargetZone zone, FixedPoint2 brute, FixedPoint2 burn)
     {
-        var limb = ent.Comp.Limbs.GetValueOrDefault(zone);
-        SetLimb(ent, zone, WithGroup(limb, group, GetGroup(limb, group) + amount));
+        _visited.Clear();
+        while (true)
+        {
+            var limb = ent.Comp.Limbs.GetValueOrDefault(zone);
+
+            // with limbs unable to break they just keep taking damage past their max
+            if (!_limbsCanBreak || !ent.Comp.Definitions.TryGetValue(zone, out var definition))
+            {
+                SetLimb(ent, zone, limb with { Brute = limb.Brute + brute, Burn = limb.Burn + burn });
+                return;
+            }
+
+            var room = FixedPoint2.Max(FixedPoint2.Zero, definition.MaxHealth - limb.Brute - limb.Burn);
+            var fitBrute = FixedPoint2.Min(brute, room);
+            var fitBurn = FixedPoint2.Min(burn, room - fitBrute);
+            brute -= fitBrute;
+            burn -= fitBurn;
+
+            _visited.Add(zone);
+            var overflow = brute > FixedPoint2.Zero || burn > FixedPoint2.Zero;
+            if (overflow && TryPickSpillover(ent, zone, out var next))
+            {
+                SetLimb(ent, zone, limb with { Brute = limb.Brute + fitBrute, Burn = limb.Burn + fitBurn });
+                zone = next;
+                continue;
+            }
+
+            // nowhere left to go so the rest stays here since the body already took it
+            SetLimb(ent, zone, limb with { Brute = limb.Brute + fitBrute + brute, Burn = limb.Burn + fitBurn + burn });
+            return;
+        }
+    }
+
+    // a random neighbour the damage hasn't passed through yet, either the limb this one hangs off or one hanging off it
+    private bool TryPickSpillover(Entity<RMCLimbHealthComponent> ent, RMCTargetZone zone, out RMCTargetZone next)
+    {
+        GetPresentOrAllLimbs(ent, _present);
+        ent.Comp.Definitions.TryGetValue(zone, out var current);
+
+        _neighbours.Clear();
+        foreach (var limb in _present)
+        {
+            if (_visited.Contains(limb) || !ent.Comp.Definitions.TryGetValue(limb, out var definition))
+                continue;
+
+            if (current.Parent == limb || definition.Parent == zone)
+                _neighbours.Add(limb);
+        }
+
+        if (_neighbours.Count == 0)
+        {
+            next = default;
+            return false;
+        }
+
+        next = _random.Pick(_neighbours);
+        return true;
     }
 
     // undamaged limbs drop their entry so only damaged limbs get sent to clients
