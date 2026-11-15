@@ -182,6 +182,7 @@
     useDelay: 0.2
   - type: InstantAction
     event: !type:XenoZoomActionEvent
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: CMGuidebookActionXenoBase

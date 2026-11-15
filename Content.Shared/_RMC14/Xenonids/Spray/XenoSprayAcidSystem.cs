@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
@@ -28,16 +29,18 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly LineSystem _line = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly VehicleWheelSystem _vehicleWheels = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
@@ -162,6 +165,25 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         Dirty(target, comp);
     }
 
+    private void TryAcidVehicleWheels(EntityUid splatter)
+    {
+        if (!TryComp(splatter, out DamageOnCollideComponent? onCollide))
+            return;
+
+        var damage = _onCollide.GetCollideDamage((splatter, onCollide)).GetTotal().Float();
+        if (damage <= 0f)
+            return;
+
+        var splatterMap = _transform.GetMapId(splatter);
+        var splatterAabb = _lookup.GetWorldAABB(splatter);
+        var vehicles = new HashSet<Entity<VehicleWheelSlotsComponent>>();
+        _lookup.GetEntitiesIntersecting(splatterMap, splatterAabb, vehicles);
+        foreach (var vehicle in vehicles)
+        {
+            _vehicleWheels.DamageWheels(vehicle, damage);
+        }
+    }
+
     public void CreateLine(EntityUid user, EntityCoordinates start, EntityCoordinates end, TimeSpan delay, float range, EntProtoId acid, bool ignoreBlocker = true)
     {
         var tiles = _line.DrawLine(start, end, delay, range, out var blocker);
@@ -196,6 +218,8 @@ public sealed class XenoSprayAcidSystem : EntitySystem
                 _hive.SetSameHive(uid, spawned);
                 splatter.Xeno = uid;
                 Dirty(spawned, splatter);
+
+                TryAcidVehicleWheels(spawned);
 
                 if (_xenoSprayAcidQuery.TryComp(uid, out var xenoSprayAcid))
                 {

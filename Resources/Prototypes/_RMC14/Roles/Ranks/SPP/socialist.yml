@@ -61,6 +61,12 @@
   prefix: StS.
   paygrade: E6
 
+- type: rank
+  id: RMCRankSPPWarrantOfficer
+  name: Praporshchik
+  prefix: Prs.
+  paygrade: W1
+
 # THE RANKS BELOW ARE USED FOR THE SPP DEATHSQUAD, PLEASE DON'T USE THEM FOR ANYTHING ELSE
 
 - type: rank

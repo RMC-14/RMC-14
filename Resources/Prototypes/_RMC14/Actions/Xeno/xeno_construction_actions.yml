@@ -20,8 +20,7 @@
   - type: InstantAction
     event: !type:XenoPlantWeedsActionEvent
   - type: SwappableAction
-    swappedEventTemplate: !type:XenoExpandWeedsActionEvent
-    originalEventTemplate: !type:XenoPlantWeedsActionEvent
+    swappedActionProto: ActionXenoExpandWeeds
   - type: RMCDazeableAction
 
 - type: entity
@@ -269,6 +268,7 @@
     checkCanAccess: false
     range: -1
     deselectOnMiss: false
+    repeat: true
   - type: WorldTargetAction
     event: !type:XenoExpandWeedsActionEvent
 
