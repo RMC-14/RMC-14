@@ -1109,7 +1109,7 @@
     - id: CMSurgicalDrill
     - id: DwarfGelInserter
     - id: CMBonesetter
-    #- FixOVein
+    - id: RMCFixOVein
     #- Nanopaste
     - id: CMSurgicalLine
     - id: CMSynthGraft
@@ -1179,7 +1179,7 @@
       - id: CMSurgicalDrill
       - id: DwarfGelInserter
       - id: CMBonesetter
-#     - FixOVein
+      - id: RMCFixOVein
 #     - Nanopaste
       - id: CMSurgicalLine
       - id: CMSynthGraft

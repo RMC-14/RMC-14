@@ -47,3 +47,5 @@
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 7500
+  - type: StaticPrice
+    price: 75

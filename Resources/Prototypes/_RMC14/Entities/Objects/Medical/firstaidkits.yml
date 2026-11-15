@@ -160,6 +160,8 @@
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
+    - id: DwarfGelInserter
+    - id: RMCFixOVein
 #    - id: CMOxycodoneAutoinjector # TODO RMC14
 #    - id: CMOxycodoneAutoinjector # TODO RMC14
 

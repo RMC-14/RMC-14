@@ -19,16 +19,16 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,5,1 # 3 slots
+    - 0,0,9,1 # 5 slots
     whitelist:
       components:
       - CMScalpel
       - CMHemostat
       - CMRetractor
+      - CMSurgeryTool
       tags:
       - CMSurgicalLine
       - CMSynthGraft
-      #TODO FixoVein
   - type: FixedItemSizeStorage
   - type: Tag
     tags:
@@ -61,6 +61,8 @@
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
+    - id: DwarfGelInserter
+    - id: RMCFixOVein
 
 - type: entity
   parent: CMSurgicalCase
@@ -71,7 +73,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,9,1 # 5 slots
+    - 0,0,13,1 # 7 slots
 
 - type: entity
   parent: RMCSurgicalCaseRCM
@@ -85,3 +87,5 @@
     - id: CMRetractor
     - id: CMSurgicalLine
     - id: CMSynthGraft
+    - id: DwarfGelInserter
+    - id: RMCFixOVein
