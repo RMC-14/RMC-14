@@ -52,6 +52,9 @@ public sealed class RMCThrowingSystem : EntitySystem
 
     private void OnThrowCooldownThrowAttempt(Entity<RMCThrowCooldownComponent> ent, ref ThrowAttemptEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (_timing.CurTime < ent.Comp.CooldownEndsAt)
         {
             if (ent.Comp.ItemsThrown < ent.Comp.ThrowLimit)
