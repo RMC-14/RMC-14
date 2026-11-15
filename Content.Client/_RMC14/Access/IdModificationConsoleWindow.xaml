@@ -55,9 +55,8 @@
                     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                         <Button Name="IFF" Access="Public" HorizontalExpand="True" Text="Grant IFF"
                                 ModulateSelfOverride="LimeGreen" SetHeight="30" StyleClasses="ButtonSquare" />
-                        <RichTextLabel Text="TacMap Layers" Margin="0 4 0 2" />
-                        <BoxContainer Name="TacMapLayers" Access="Public" Orientation="Vertical"
-                                      HorizontalExpand="True" />
+                        <BoxContainer Name="TacMapAccess" Access="Public" Orientation="Vertical"
+                                      HorizontalExpand="True" Margin="0 4 0 0" />
                         <BoxContainer Name="AccessGroups" Access="Public" Orientation="Vertical"
                                       HorizontalExpand="True" />
                     </BoxContainer>
