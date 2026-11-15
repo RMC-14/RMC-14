@@ -1,4 +1,3 @@
-using Content.Shared._DwarfMC.Medical.DwarfMed;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
@@ -25,7 +24,6 @@ namespace Content.Shared._RMC14.Medical.Scanner;
 public sealed class HealthScannerSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DwarfBodyPartScanSystem _dwarfBodyParts = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -209,7 +207,7 @@ public sealed class HealthScannerSystem : EntitySystem
         var woundTypes = wound != null ? wound.WoundGroups : new();
         var mobState = TryComp<MobStateComponent>(target, out var mob) ? mob.CurrentState : MobState.Alive;
 
-        var state = new HealthScanState(GetNetEntity(target), mobState, damage, wounds, woundTypes, blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel, _dwarfBodyParts.Build(target), _dwarfBodyParts.BuildOrgans(target));
+        var state = new HealthScanState(GetNetEntity(target), mobState, damage, wounds, woundTypes, blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }

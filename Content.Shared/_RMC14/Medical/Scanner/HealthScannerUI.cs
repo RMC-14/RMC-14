@@ -1,4 +1,3 @@
-using Content.Shared._DwarfMC.Medical.DwarfMed;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage;
@@ -27,9 +26,7 @@ public readonly record struct HealthScanState(
     string Pulse,
     Solution? Chemicals,
     bool Bleeding,
-    HealthScanDetailLevel DetailLevel,
-    List<DwarfBodyPartScan> Parts,
-    List<DwarfOrganScan> Organs);
+    HealthScanDetailLevel DetailLevel);
 
 /// <summary>
 ///     Thin BUI wrapper around <see cref="HealthScanState"/> for the health analyzer live-update path.

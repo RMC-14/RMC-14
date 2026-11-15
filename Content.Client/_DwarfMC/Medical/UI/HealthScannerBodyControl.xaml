@@ -1,6 +1,6 @@
 <widgets:HealthScannerBodyControl
     xmlns="https://spacestation14.io"
-    xmlns:widgets="clr-namespace:Content.Client._RMC14.Medical.Scanner"
+    xmlns:widgets="clr-namespace:Content.Client._DwarfMC.Medical.UI"
     MinSize="192 192">
     <Control Name="PartContainer" SetSize="192 192" />
 </widgets:HealthScannerBodyControl>

@@ -1,8 +1,8 @@
 using System.Globalization;
+using Content.Client._DwarfMC.Medical.UI;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client.Atmos.Rotting;
 using Content.Client.Message;
-using Content.Shared._DwarfMC.Medical.DwarfMed;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Defibrillator;
@@ -72,9 +72,6 @@ public sealed class HealthScannerUiData
     {
         if (_entities.GetEntity(uiState.Target) is not { Valid: true } target)
             return;
-
-        if (_lastTarget != uiState.Target)
-            window.SelectedDwarfPart = BodyZone.Chest;
 
         _lastTarget = uiState.Target;
 
@@ -255,120 +252,6 @@ public sealed class HealthScannerUiData
             window.MedicalAdviceLabel.Visible = false;
             window.MedicalAdviceSeparator.Visible = false;
         }
-
-        PopulateDwarfMedBody(window, uiState);
-    }
-
-    private void PopulateDwarfMedBody(HealthScannerWindow window, HealthScanState uiState)
-    {
-        var any = uiState.Parts.Count > 0 || uiState.Organs.Count > 0;
-        window.DwarfMedPartArea.Visible = any;
-        window.DwarfMedBodyColumn.Visible = any;
-        window.DwarfMedBodySeparator.Visible = any;
-
-        if (!any)
-        {
-            window.DwarfMedDebugLabel.Visible = false;
-            window.DwarfMedDebugSeparator.Visible = false;
-            window.DwarfMedDebugContainer.Visible = false;
-            return;
-        }
-
-        window.BodyControl.SetScan(uiState.Parts, uiState.Organs);
-        window.BodyControl.SetSelected(window.SelectedDwarfPart);
-        window.OnDwarfPartSelected = zone => PopulateDwarfMedPartStatus(window, uiState, zone);
-        PopulateDwarfMedPartStatus(window, uiState, window.SelectedDwarfPart);
-    }
-
-    private static void PopulateDwarfMedPartStatus(
-        HealthScannerWindow window,
-        HealthScanState uiState,
-        BodyZone zone)
-    {
-        window.DwarfMedDebugContainer.DisposeAllChildren();
-        window.DwarfMedDebugLabel.Visible = true;
-        window.DwarfMedDebugSeparator.Visible = true;
-        window.DwarfMedDebugContainer.Visible = true;
-        window.DwarfMedDebugLabel.Text = $"{DwarfPartStatus.GetDisplayName(zone)} Status";
-
-        DwarfBodyPartScan? part = null;
-        foreach (var candidate in uiState.Parts)
-        {
-            if (candidate.SlotId != zone.ToString())
-                continue;
-
-            part = candidate;
-            break;
-        }
-
-        if (part is not { } scan || scan.Severed)
-        {
-            window.DwarfMedDebugContainer.AddChild(new Label { Text = "MISSING" });
-        }
-        else
-        {
-            window.DwarfMedDebugContainer.AddChild(new Label
-            {
-                Text = $"Slash: {scan.SlashDamage.Int()} / {scan.SlashThreshold.Int()}",
-            });
-            window.DwarfMedDebugContainer.AddChild(new Label
-            {
-                Text = $"Brute: {scan.BruteDamage.Int()} / {scan.BruteThreshold.Int()}",
-            });
-            window.DwarfMedDebugContainer.AddChild(new Label
-            {
-                Text = $"Burn: {scan.BurnDamage.Int()} / {scan.BurnThreshold.Int()}",
-            });
-
-            var flags = new List<string>();
-            if (scan.Fractured)
-                flags.Add(scan.Splinted ? "[color=#FFB833][bold]FRACTURED (SPLINTED)[/bold][/color]" : "[color=#FF7A1A][bold]FRACTURED[/bold][/color]");
-            else if (scan.Splinted)
-                flags.Add("SPLINTED");
-
-            if (scan.StumpBleeding)
-                flags.Add("[color=#DF3E3E]STUMP BLEEDING[/color]");
-
-            if (scan.InternalBleeding)
-                flags.Add("[color=#DF3E3E]INTERNAL BLEEDING[/color]");
-
-            if (flags.Count > 0)
-            {
-                var label = new RichTextLabel();
-                label.SetMarkupPermissive(string.Join(", ", flags));
-                window.DwarfMedDebugContainer.AddChild(label);
-            }
-        }
-
-        var hasOrgans = false;
-        foreach (var organ in uiState.Organs)
-        {
-            if (organ.Zone != zone)
-                continue;
-
-            if (!hasOrgans)
-            {
-                window.DwarfMedDebugContainer.AddChild(new Label
-                {
-                    Text = "Organs:",
-                    Margin = new Thickness(0, 5, 0, 0),
-                });
-                hasOrgans = true;
-            }
-
-            var percent = organ.MaxDamage.Float() <= 0f
-                ? 0f
-                : organ.Damage.Float() / organ.MaxDamage.Float() * 100f;
-            var markup = $"{organ.OrganName}: {percent:F0}%";
-            if (organ.Ruptured)
-                markup += " [color=#DF3E3E]RUPTURED[/color]";
-            if (organ.Vital)
-                markup += " [color=#FFB833]VITAL[/color]";
-
-            var label = new RichTextLabel();
-            label.SetMarkupPermissive(markup);
-            window.DwarfMedDebugContainer.AddChild(label);
-        }
     }
 
     private void RequestOpenHolocardUi(NetEntity target)
@@ -517,6 +400,7 @@ public sealed class HealthScannerUiData
         }
 
         // TODO RMC14 Clone damage advice
+        DwarfHealthScannerUi.Populate(window, target, _entities);
     }
 
     private static void AddAdvice(string text, HealthScannerWindow window)

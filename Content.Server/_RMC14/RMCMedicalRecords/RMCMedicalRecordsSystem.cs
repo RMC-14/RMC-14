@@ -1,5 +1,5 @@
+using Content.Server._DwarfMC.Medical.DwarfMed;
 using Content.Server.StationRecords.Systems;
-using Content.Shared._DwarfMC.Medical.DwarfMed;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.Scanner;
@@ -29,7 +29,6 @@ namespace Content.Server._RMC14.RMCMedicalRecords;
 public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 {
     [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly DwarfBodyPartScanSystem _dwarfBodyParts = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
@@ -98,9 +97,7 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
             pulse,
             chemicals,
             bleeding,
-            detailLevel,
-            _dwarfBodyParts.Build(target),
-            _dwarfBodyParts.BuildOrgans(target));
+            detailLevel);
     }
 
     private List<RMCAutodocScanData> GenerateAutodocData(EntityUid target)
@@ -148,16 +145,8 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
             }
         }
 
-        var parts = _dwarfBodyParts.Build(target);
-        if (parts.Any(part => part.InternalBleeding))
-            autodocData.Add(new RMCAutodocScanData(RMCAutodocProcedures.InternalBleeding, Loc.GetString("rmc-records-autodoc-internal-bleeding")));
-
-        if (parts.Any(part => part.Fractured))
-            autodocData.Add(new RMCAutodocScanData(RMCAutodocProcedures.BrokenBone, Loc.GetString("rmc-records-autodoc-broken-bone")));
-
-        var organs = _dwarfBodyParts.BuildOrgans(target);
-        if (organs.Any(organ => organ.Damage > FixedPoint2.Zero || organ.Ruptured))
-            autodocData.Add(new RMCAutodocScanData(RMCAutodocProcedures.OrganDamage, Loc.GetString("rmc-records-autodoc-organ-damage")));
+        // TODO RMC-14 Internal Bleeding, Broken Bones, Organ Damage
+        DwarfAutodocScan.Append(target, autodocData, EntityManager);
 
         if (TryComp<VictimInfectedComponent>(target, out var infected) && !infected.IsBursting)
             autodocData.Add(new RMCAutodocScanData(RMCAutodocProcedures.Larva, Loc.GetString("rmc-records-autodoc-larva")));

@@ -1,14 +1,12 @@
 using System.Runtime.InteropServices;
+using Content.Server._DwarfMC.Medical.DwarfMed;
 using Content.Server.Body.Systems;
-using Content.Shared._DwarfMC.Medical.DwarfMed;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -97,19 +95,6 @@ public sealed class WoundsSystem : SharedWoundsSystem
                     bloodloss += wound.Bloodloss;
             }
 
-            var dwarfBleed = new DwarfBleedingEvent(0);
-            RaiseLocalEvent(uid, ref dwarfBleed);
-            if (!bleedEv.Cancelled)
-            {
-                bloodloss += dwarfBleed.Amount;
-            }
-            else if (HasComp<DwarfAnatomyComponent>(uid) &&
-                     TryComp<MobStateComponent>(uid, out var mobState) &&
-                     mobState.CurrentState == MobState.Dead)
-            {
-                bloodloss += dwarfBleed.Amount * 0.5f;
-            }
-
             if (toHeal > comp.PassiveHealing)
             {
                 _damageable.TryChangeDamage(uid, _passiveDamage, true, false, damageable, uid);
@@ -121,7 +106,7 @@ public sealed class WoundsSystem : SharedWoundsSystem
                 comp.Wounds.RemoveAt(remove);
             }
 
-            if (comp.Wounds.Count == 0 && dwarfBleed.Amount <= 0)
+            if (comp.Wounds.Count == 0 && !DwarfBleedingSystem.HasBleeding(uid, EntityManager))
                 RemCompDeferred<WoundedComponent>(uid);
 
             if (_bloodstreamQuery.TryComp(uid, out var bloodstream))

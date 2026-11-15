@@ -1,0 +1,23 @@
+<ui:DwarfHealthScannerPanel
+    xmlns="https://spacestation14.io"
+    xmlns:ui="clr-namespace:Content.Client._DwarfMC.Medical.UI"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Orientation="Horizontal"
+    HorizontalExpand="True"
+    Margin="0 20 0 0"
+    Visible="False">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+        <Label Name="StatusLabel" Access="Public" Text="Part Status" Visible="False" />
+        <cc:HSeparator Name="StatusSeparator" Access="Public" Color="#4972A1" Margin="0 0 0 5" Visible="False" />
+        <BoxContainer Name="StatusContainer" Access="Public" Orientation="Vertical" Visible="False" />
+    </BoxContainer>
+    <PanelContainer Name="BodySeparator" Access="Public" MinWidth="2" Margin="10 0">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#4972A1" />
+        </PanelContainer.PanelOverride>
+    </PanelContainer>
+    <BoxContainer Name="BodyColumn" Access="Public" Orientation="Vertical" MinWidth="192">
+        <ui:HealthScannerBodyControl Name="BodyControl" Access="Public" HorizontalAlignment="Center" />
+    </BoxContainer>
+</ui:DwarfHealthScannerPanel>

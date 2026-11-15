@@ -10,7 +10,7 @@ using Robust.Shared.IoC;
 using Robust.Shared.Maths;
 using Robust.Shared.Utility;
 
-namespace Content.Client._RMC14.Medical.Scanner;
+namespace Content.Client._DwarfMC.Medical.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class HealthScannerBodyControl : UIWidget

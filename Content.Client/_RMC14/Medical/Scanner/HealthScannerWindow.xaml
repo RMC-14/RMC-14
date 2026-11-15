@@ -53,12 +53,12 @@
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Text="Holocard:" MinWidth="80" Modulate="#5B88B0" />
-            <PanelContainer Name="HolocardPanel" Access="Public" Visible="True" Margin="2 5">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="#984A16" />
-                </PanelContainer.PanelOverride>
-                <Label Name="HolocardDescription" Access="Public" Align="Right" MinWidth="160" Margin="2 2"/>
-            </PanelContainer>
+			<PanelContainer Name="HolocardPanel" Access="Public" Visible="True" Margin="2 5">
+				<PanelContainer.PanelOverride>
+					<graphics:StyleBoxFlat BackgroundColor="#984A16" />
+				</PanelContainer.PanelOverride>
+				<Label Name="HolocardDescription" Access="Public" Align="Right" MinWidth="160" Margin="2 2"/>
+			</PanelContainer>
             <Button Name="ChangeHolocardButton" Access="Public" StyleClasses="OpenBoth" Margin="5 0 0 0" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
@@ -89,22 +89,6 @@
         <cc:HSeparator Name="MedicalAdviceSeparator" Access="Public" Color="#4972A1" Margin="0 0 0 5" />
         <BoxContainer Orientation="Vertical">
             <BoxContainer Name="AdviceContainer" Access="Public" Orientation="Vertical" />
-        </BoxContainer>
-        <BoxContainer Name="DwarfMedPartArea" Access="Public" Orientation="Horizontal"
-                      HorizontalExpand="True" Margin="0 20 0 0" Visible="False">
-            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <Label Name="DwarfMedDebugLabel" Access="Public" Text="Part Status" Visible="False" />
-                <cc:HSeparator Name="DwarfMedDebugSeparator" Access="Public" Color="#4972A1" Margin="0 0 0 5" Visible="False" />
-                <BoxContainer Name="DwarfMedDebugContainer" Access="Public" Orientation="Vertical" Visible="False" />
-            </BoxContainer>
-            <PanelContainer Name="DwarfMedBodySeparator" Access="Public" MinWidth="2" Margin="10 0" Visible="False">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="#4972A1" />
-                </PanelContainer.PanelOverride>
-            </PanelContainer>
-            <BoxContainer Name="DwarfMedBodyColumn" Access="Public" Orientation="Vertical" MinWidth="192" Visible="False">
-                <scanner:HealthScannerBodyControl Name="BodyControl" Access="Public" HorizontalAlignment="Center" />
-            </BoxContainer>
         </BoxContainer>
     </BoxContainer>
 </scanner:HealthScannerWindow>
