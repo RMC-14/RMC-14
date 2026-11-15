@@ -693,7 +693,7 @@
   id: RMCLoadoutGroupPins
   name: rmc-loadout-group-pins
   minLimit: 0
-  maxLimit: 13
+  maxLimit: 14
   loadouts:
   - RMCPinLGBT
   - RMCPinAromantic
@@ -708,6 +708,7 @@
   - RMCPinTransgender
   - RMCPinAutism
   - RMCPinAutismGold
+  - RMCPinAlly
 
 # Commanding Officer
 - type: loadoutGroup
@@ -981,7 +982,7 @@
   - WatchLiaisonRMC
 
 - type: loadoutGroup
-  id: WatchesCommandingOfficerRMC
+  id: WatchesCommandingOfficerRMC # Given to SEA and PvI aswell.
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
@@ -1026,8 +1027,18 @@
 - type: loadoutGroup
   id: ProvostRoleSpecificOuterwearRMC
   name: rmc-loadout-group-provost-role-specific-outerwear
-  minLimit: 0
+  minLimit: 1
   maxLimit: 1
   loadouts:
   - ProvostJacketFilledRMC
   - ProvostCoatFilledRMC
+  - RMCProvostJacketBlueFilled
+
+- type: loadoutGroup
+  id: ProvostRoleSpecificHeadRMC
+  name: rmc-loadout-group-provost-role-specific-headwear
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCHeadBeretProvostGold
+  - RMCHeadBeretProvostBlue

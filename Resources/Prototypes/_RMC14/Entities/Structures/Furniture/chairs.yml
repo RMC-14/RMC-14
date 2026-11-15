@@ -237,6 +237,16 @@
     state: comfychair_alpha
 
 - type: entity
+  parent: CMChairComfyAlpha
+  id: CMChairComfyAlphaFreeplace
+  suffix: RMC, Alpha, Briefing
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+
+- type: entity
   parent: CMChairComfy
   id: CMChairComfyBravo
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Bravo squad yellow. Certified fortified on all sides from enemy incursion.
@@ -244,6 +254,16 @@
   components:
   - type: Sprite
     state: comfychair_bravo
+
+- type: entity
+  parent: CMChairComfyBravo
+  id: CMChairComfyBravoFreeplace
+  suffix: RMC, Bravo, Briefing
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
 
 - type: entity
   parent: CMChairComfy
@@ -255,6 +275,16 @@
     state: comfychair_charlie
 
 - type: entity
+  parent: CMChairComfyCharlie
+  id: CMChairComfyCharlieFreeplace
+  suffix: RMC, Charlie, Briefing
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+
+- type: entity
   parent: CMChairComfy
   id: CMChairComfyDelta
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Delta squad blue. This chair is most likely to be the first to fight and first to die.
@@ -262,6 +292,16 @@
   components:
   - type: Sprite
     state: comfychair_delta
+
+- type: entity
+  parent: CMChairComfyDelta
+  id: CMChairComfyDeltaFreeplace
+  suffix: RMC, Delta, Briefing
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
 
 - type: entity
   parent: CMChairComfy
@@ -273,6 +313,16 @@
     state: comfychair_echo
 
 - type: entity
+  parent: CMChairComfyEcho
+  id: CMChairComfyEchoFreeplace
+  suffix: RMC, Echo, Briefing
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+
+- type: entity
   parent: CMChairComfy
   id: CMChairComfyFoxtrot
   description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Foxtrot squad orange. The perfect place to fall asleep during briefings.
@@ -280,6 +330,16 @@
   components:
   - type: Sprite
     state: comfychair_foxtrot
+
+- type: entity
+  parent: CMChairComfyFoxtrot
+  id: CMChairComfyFoxtrotFreeplace
+  suffix: RMC, Foxtrot, Briefing
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
 
 - type: entity
   parent: CMChairComfy

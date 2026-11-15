@@ -93,6 +93,7 @@ rmc-vehicle-enter-no-power-loader = The power loader doesn't fit through the veh
 rmc-vehicle-enter-xeno-full = There's no room for more xenos inside.
 rmc-vehicle-enter-passenger-full = There's no room for more passengers inside.
 rmc-vehicle-enter-pulled-full = There's no room for who you're dragging inside.
+rmc-vehicle-enter-pulled-forbidden = You can't drag {THE($pulled)} inside.
 rmc-vehicle-hull-destroyed = The vehicle's hull is destroyed.
 rmc-vehicle-exit-busy = Someone is already using this exit.
 rmc-vehicle-exit-blocked = The exit is blocked.
