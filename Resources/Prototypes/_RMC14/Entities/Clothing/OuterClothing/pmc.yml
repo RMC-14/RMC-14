@@ -88,7 +88,7 @@
 - type: entity
   parent: CMArmorM4PMCCorporate
   id: RMCArmorM4PMCCorporateMedic
-  description: A basic vest with a Weyland-Yutani badge on the right breast. This variant has a red badge, denoting the medical purpose of the wearer. At least in theory.
+  description: A basic vest with a Weston-Yamada badge on the right breast. This variant has a red badge, denoting the medical purpose of the wearer. At least in theory.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate_medic.rsi
