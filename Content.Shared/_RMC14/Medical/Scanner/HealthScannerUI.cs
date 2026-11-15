@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Embeds;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage;
@@ -26,7 +27,9 @@ public readonly record struct HealthScanState(
     string Pulse,
     Solution? Chemicals,
     bool Bleeding,
-    HealthScanDetailLevel DetailLevel);
+    HealthScanDetailLevel DetailLevel,
+    List<ForeignObjectEmbeddedEntry>? EmbeddedObjectInBodyParts = null,
+    List<InternalBleedingEntry>? InternalBleeds = null);
 
 /// <summary>
 ///     Thin BUI wrapper around <see cref="HealthScanState"/> for the health analyzer live-update path.

@@ -56,6 +56,32 @@
 
 - type: entity
   parent: CMSurgeryBase
+  id: RMCSurgeryForeignObjectRemoval
+  name: Foreign Object Removal
+  description: Removal of a Foreign object from the body.
+  components:
+  - type: CMSurgery
+    priority: -1
+    requirement: CMSurgeryOpenIncision
+    steps:
+    - RMCSurgeryStepExtractForeignObject
+  - type: RMCSurgeryForeignObjectCondition
+
+- type: entity
+  parent: CMSurgeryBase
+  id: RMCSurgeryInternalBleedingRepair
+  name: Internal Bleeding Repair
+  description: Locate and repair a damaged blood vessel.
+  components:
+  - type: CMSurgery
+    priority: -1
+    requirement: CMSurgeryOpenIncision
+    steps:
+    - RMCSurgeryStepRepairInternalBleeding
+  - type: RMCSurgeryInternalBleedingCondition
+
+- type: entity
+  parent: CMSurgeryBase
   id: RMCSurgeryAlienHeartRemoval
   name: Experimental Harvesting Surgery
   description: Harvest the heart of an deceased alien.

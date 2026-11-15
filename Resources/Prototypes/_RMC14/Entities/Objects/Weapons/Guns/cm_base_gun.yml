@@ -71,6 +71,11 @@
   - type: Projectile
     soundHit:
       path: /Audio/_RMC14/Bullets/bullet_impact1.ogg
+  - type: ShrapnelChanceProjectile
+    sourceId: bullet
+    embedChance: 0.1
+    count: 1
+    randomizeBodyPart: true
   - type: CauseEmoteOnProjectileHit
     emote: Hiss
     rareEmote: XenoRoar
