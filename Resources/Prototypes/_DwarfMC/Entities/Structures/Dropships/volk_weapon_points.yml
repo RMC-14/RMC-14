@@ -9,7 +9,7 @@
     layers:
     - state: "21"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
-      offset: 0.5, 0.5
+      offset: 0.5, 0.25
   - type: Icon
     state: "21"
   - type: Occluder
@@ -37,7 +37,7 @@
     layers:
     - state: "24"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
-      offset: 0.5, 0.5
+      offset: 0.5, 0.25
   - type: Icon
     state: "24"
   - type: Occluder
@@ -65,7 +65,7 @@
     layers:
     - state: "68"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
-      offset: 0.5, 0
+      offset: 0.5, 0.375
   - type: Icon
     state: "68"
   - type: Occluder
@@ -93,7 +93,7 @@
     layers:
     - state: "72"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
-      offset: 0.5, 0
+      offset: 0.5, 0.375
   - type: Icon
     state: "72"
   - type: Occluder

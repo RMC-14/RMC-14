@@ -10,10 +10,13 @@
     layers:
     - state: volk_engine_attatchment
       map: [ "enum.DropshipPointVisualsLayers.AttachedUtility" ]
-      rotation: 180
       visible: false
     - state: volk_engine_attatchment
       map: [ "enum.DropshipPointVisualsLayers.AttachmentBase" ]
+  - type: DropshipPointVisuals
+    attachedSprite:
+      sprite: _DwarfMC/Objects/Dropship/volk_engine.rsi
+      state: volk_engine_attatchment
   - type: Icon
     sprite: _DwarfMC/Objects/Dropship/volk_engine.rsi
     state: volk_engine_attatchment

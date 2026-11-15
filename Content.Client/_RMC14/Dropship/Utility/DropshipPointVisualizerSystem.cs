@@ -36,7 +36,8 @@ public sealed partial class DropshipPointVisualizerSystem : VisualizerSystem<Dro
             return;
         }
 
-        spriteComp.LayerSetSprite(attachedUtility, new SpriteSpecifier.Rsi(new ResPath(sprite), state));
+        spriteComp.LayerSetSprite(attachedUtility,
+            component.AttachedSprite ?? new SpriteSpecifier.Rsi(new ResPath(sprite), state));
 
         //if (Enum.TryParse<SpriteComponent.DirectionOffset>(component.DirOffset, true, out var dir))
         //spriteComp.LayerSetDirOffset(layer, dir);
