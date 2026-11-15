@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Added medical, science, security, and virology biosuit variants!
-    type: Add
-  - message: Added OT and security EOD suit variants!
-    type: Add
-  id: 3251
-  time: '2026-05-31T03:10:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9604
 - author: SharkSnake98
   changes:
   - message: Added a new double couch, 3 new couches, and 3 new sofas
@@ -4526,5 +4517,12 @@
   id: 3750
   time: '2026-11-15T04:38:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10456
+- author: noctyrn
+  changes:
+  - message: M2Cs and ML66Ds can be seen now in xeno vision.
+    type: Add
+  id: 3751
+  time: '2026-11-15T05:41:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11080
 Name: RMC14
 Order: -1
