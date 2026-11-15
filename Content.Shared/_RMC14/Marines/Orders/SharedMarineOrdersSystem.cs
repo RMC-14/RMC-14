@@ -7,6 +7,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Medical.Pain;
 
 namespace Content.Shared._RMC14.Marines.Orders;
 
@@ -20,6 +21,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PainSystem _pain = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
@@ -191,6 +193,9 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
 
         comp.Received.Add((multiplier, time + duration));
         comp.Received.Sort((a, b) => a.CompareTo(b));
+
+        if (comp is HoldOrderComponent hold && TryComp<PainComponent>(receiver, out var pain))
+            _pain.AddPainModifier((receiver, pain), duration, hold.PainModifier * multiplier, PainModifierType.PainReduction);
 
         _movementSpeed.RefreshMovementSpeedModifiers(receiver);
         _evasionSystem.RefreshEvasionModifiers(receiver);
