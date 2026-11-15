@@ -1,6 +1,6 @@
 - type: entity
   parent: [ClothingHandsBase, RMCBaseUniformAccessoryItemGloves]
-  id: CMHandsBlackMarine # TODO RMC14 armor
+  id: CMHandsBlackMarine
   name: marine combat gloves
   description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'."
   components:
@@ -22,10 +22,17 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/Hands/glove_overlays.rsi
       state: std-gloves
-
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 15
+    # armor_internaldamage = 10
+    coverage:
+    - Hands
 - type: entity
   parent: CMHandsBlackMarine
-  id: RMCHandsLatexMarine # TODO RMC14 armor
+  id: RMCHandsLatexMarine
   name: marine medical combat gloves
   description: Standard issue marine sterile gloves, offers regular protection whilst offering the user a better grip when performing medical work.
   components:
@@ -57,7 +64,7 @@
 
 - type: entity
   parent: CMHandsBlackMarine
-  id: RMCHandsM3G4
+  id: RMCHandsM3G4 #RMC14 TODO make unacidable
   name: M3-G4 grenadier gloves
   description: A pair of plated, but nimble, gloves.
   components:
@@ -69,6 +76,7 @@
     melee: 40
     bullet: 40
     explosionArmor: 50
+    # armor_internaldamage = 40
 
 - type: entity
   parent: CMHandsBlackMarine

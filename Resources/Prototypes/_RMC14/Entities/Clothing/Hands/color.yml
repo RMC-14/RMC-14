@@ -95,7 +95,14 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi
-
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 15
+    # armor_internaldamage = 10
+    coverage:
+    - Hands
 - type: entity
   parent: CMHandsWhite
   id: RMCHandsPurple
@@ -124,7 +131,7 @@
 
 - type: entity
   parent: RMCHandsBlack
-  id: RMCHandsLeatherBlack
+  id: RMCHandsLeatherBlack #RMC14 TODO These shouldn't inherit the armor of the parent
   name: black leather gloves
   description: Supple, black leather gloves crafted from the finest leather. Stylish, durable, and ready for work or play.
   components:

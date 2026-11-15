@@ -10,9 +10,10 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/veteran.rsi
   - type: CMArmor
-    melee: 40
-    bullet: 40
+    melee: 30
+    bullet: 30
     explosionArmor: 20
+    # armor_internaldamage = 30
   - type: Insulated
 
 # SPP
@@ -52,7 +53,7 @@
 # PMC Commando
 - type: entity
   parent: RMCHandsVeteranPMC
-  id: RMCHandsVeteranPMCCommandoSurvivor
+  id: RMCHandsVeteranPMCCommandoSurvivor # RMC14 TODO make unacidable
   name: We-Ya Commando gloves
   description: Standard issue kevlon fiber gloves manufactured for and by Weston-Yamada Commandos. They are insulated against electrical shock.
   components:
@@ -61,13 +62,13 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/gauntlets.rsi
   - type: CMArmor
-    melee: 30
     bullet: 40
+    bio: 30
     explosionArmor: 30
 
 - type: entity
   parent: RMCHandsVeteranPMC
-  id: RMCHandsVeteranPMCCommando
+  id: RMCHandsVeteranPMCCommando # RMC14 TODO make unacidable
   name: M5X gauntlets
   description: A pair of heavily armored gloves made to complete the M5X exoskeleton armor.
   components:
@@ -75,6 +76,11 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/gauntlets.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/gauntlets.rsi
+  - type: CMArmor
+    melee: 40
+    bullet: 15
+    bio: 40
+    explosionArmor: 15
 
 # PPO
 - type: entity
@@ -111,13 +117,17 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/cbrn.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/cbrn.rsi
+  - type: CMArmor
+    bio: 75
 
 - type: entity
   parent: RMCHandsVeteranCBRN
-  id: RMCHandsVeteranCBRNLessArmored
+  id: RMCHandsVeteranCBRNLessArmored # In parity these aren't insuls either
   suffix: Less Armored
   components:
   - type: CMArmor
     melee: 20
     bullet: 20
+    bio: 20
     explosionArmor: 15
+    # armor_internaldamage = 15
