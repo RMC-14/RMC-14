@@ -89,6 +89,8 @@
     - state: kit_empty
       map: [ "openLayer" ]
       visible: false
+  - type: Item
+    heldPrefix: bezerk
   - type: Storage
     maxItemSize: Small
     grid:
