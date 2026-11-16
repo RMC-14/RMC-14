@@ -84,6 +84,8 @@ public sealed class ParatoxinSystem : EntitySystem
     private void OnParatoxinOnHit(Entity<ParatoxinOnHitComponent> spit, ref ProjectileHitEvent args)
     {
         TryChangeStacks(args.Target, args.Shooter, spit.Comp.StacksToApply);
+
+        RaiseLocalEvent(new ParatoxinApplicationEvent(args.Target, spit.Comp.StacksToApply));
     }
 
     private void OnParatoxinSlashesHit(Entity<ParatoxinCoatedSlashesComponent> xeno, ref MeleeHitEvent args)
@@ -209,44 +211,47 @@ public sealed class ParatoxinSystem : EntitySystem
         var queryBuff = EntityQueryEnumerator<CatalyticBuffComponent>();
         while (queryBuff.MoveNext(out var uid, out var buff))
         {
-            if (time < buff.ExpiresAt)
+            if (!buff.Running || time < buff.ExpiresAt)
                 continue;
 
             RemCompDeferred<CatalyticBuffComponent>(uid);
             _armor.UpdateArmorValue(uid);
             _speed.RefreshMovementSpeedModifiers(uid);
-            if (_net.IsServer)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-catalytic-tail-stab-buff-expire"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-catalytic-tail-stab-buff-expire"), uid, uid, PopupType.SmallCaution);
         }
 
-        if (_net.IsClient)
-            return;
-
-        var query = EntityQueryEnumerator<ParatoxinAffectedComponent, DamageableComponent>();
-
-        while (query.MoveNext(out var uid, out var paratoxin, out var damage))
+        // Damage runs on server only, but has to run before shared predicted code that decrements stacks.
+        if (_net.IsServer)
         {
-            if (time < paratoxin.NextEffectTime)
-                continue;
-
-            if (!damage.DamagePerGroup.TryGetValue(paratoxin.DamageGroup, out var oxy))
-                continue;
-
-            var max = paratoxin.MaxDamageBase + (((float)paratoxin.Stacks / paratoxin.MaxStacks) * paratoxin.MaxDamageBonus);
-
-            if (oxy < max && _proto.TryIndex(paratoxin.DamageType, out var damageType))
+            var queryDamage = EntityQueryEnumerator<ParatoxinAffectedComponent, DamageableComponent>();
+            while (queryDamage.MoveNext(out var uid, out var paratoxin, out var damage))
             {
-                var damageAmount = FixedPoint2.Min([max - oxy, paratoxin.DamagePerStack * paratoxin.Stacks, paratoxin.MaxDamagePerEffect]);
+                if (!paratoxin.Running || time < paratoxin.NextEffectTime)
+                    continue;
 
-                var doDamage = new DamageSpecifier(damageType, damageAmount);
+                if (!damage.DamagePerGroup.TryGetValue(paratoxin.DamageGroup, out var oxy))
+                    continue;
 
-                _damage.TryChangeDamage(uid, doDamage, true);
+                var max = paratoxin.MaxDamageBase + (float)paratoxin.Stacks / paratoxin.MaxStacks * paratoxin.MaxDamageBonus;
+
+                if (oxy < max && _proto.TryIndex(paratoxin.DamageType, out var damageType))
+                {
+                    var damageAmount = FixedPoint2.Min(max - oxy, paratoxin.DamagePerStack * paratoxin.Stacks, paratoxin.MaxDamagePerEffect);
+
+                    var doDamage = new DamageSpecifier(damageType, damageAmount);
+
+                    _damage.TryChangeDamage(uid, doDamage, true);
+                }
+
+                paratoxin.NextEffectTime = time + paratoxin.EffectEvery;
+                Dirty(uid, paratoxin);
             }
+        }
 
-            paratoxin.NextEffectTime = time + paratoxin.EffectEvery;
-            Dirty(uid, paratoxin);
-
-            if (time < paratoxin.NextDecrementTime)
+        var query = EntityQueryEnumerator<ParatoxinAffectedComponent>();
+        while (query.MoveNext(out var uid, out var paratoxin))
+        {
+            if (!paratoxin.Running || time < paratoxin.NextDecrementTime)
                 continue;
 
             TryChangeStacks(uid, null, -1, time, false);
@@ -255,11 +260,17 @@ public sealed class ParatoxinSystem : EntitySystem
         var querySlashes = EntityQueryEnumerator<ParatoxinCoatedSlashesComponent>();
         while (querySlashes.MoveNext(out var uid, out var slashes))
         {
-            if (time < slashes.ExpiresAt)
+            if (!slashes.Running || time < slashes.ExpiresAt)
                 continue;
 
             RemCompDeferred<ParatoxinCoatedSlashesComponent>(uid);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-paratoxin-slashes-expire"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-paratoxin-slashes-expire"), uid, uid, PopupType.SmallCaution);
         }
     }
+}
+
+public sealed class ParatoxinApplicationEvent(EntityUid target, int stacksToApply) : EntityEventArgs
+{
+    public readonly EntityUid Target = target;
+    public readonly int StacksToApply = stacksToApply;
 }
