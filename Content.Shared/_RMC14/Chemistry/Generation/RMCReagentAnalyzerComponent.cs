@@ -38,7 +38,6 @@ public sealed partial class RMCReagentAnalyzerComponent : Component
 public enum RMCReagentAnalyzerVisualState : byte
 {
     Idle,
-    Sample,
     Processing,
     Finished,
     Failed,

@@ -6,6 +6,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Chemistry.ReagentScanner;
 
@@ -34,7 +35,7 @@ public sealed class RMCReagentScannerSystem : EntitySystem
         var user = args.User;
         if (!TryComp(target, out SolutionContainerManagerComponent? manager))
         {
-            _rmcChat.ChatMessageToOne($"No significant chemical agents found in {Name(target)}.", user);
+            _rmcChat.ChatMessageToOne($"No significant chemical agents found in {FormattedMessage.EscapeText(Name(target))}.", user);
             return;
         }
 
@@ -52,7 +53,7 @@ public sealed class RMCReagentScannerSystem : EntitySystem
 
         if (reagents.Count == 0 || total <= FixedPoint2.Zero)
         {
-            _rmcChat.ChatMessageToOne($"No active chemical agents found in {Name(target)}.", user);
+            _rmcChat.ChatMessageToOne($"No active chemical agents found in {FormattedMessage.EscapeText(Name(target))}.", user);
             return;
         }
 
@@ -60,7 +61,7 @@ public sealed class RMCReagentScannerSystem : EntitySystem
         foreach (var (id, quantity) in reagents)
         {
             var name = _rmcReagent.TryIndex(id, out var reagent) ? reagent.LocalizedName : id;
-            msg.Append($"\n    {name}");
+            msg.Append($"\n    {FormattedMessage.EscapeText(name)}");
 
             if (ent.Comp.Details)
                 msg.Append($": {(quantity.Float() / total.Float() * 100):0.####}%");

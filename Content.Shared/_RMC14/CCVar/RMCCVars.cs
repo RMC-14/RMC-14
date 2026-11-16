@@ -610,4 +610,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCDoAfterCancelMaxProcessTimeMilliseconds =
         CVarDef.Create("rmc.do_after_cancel_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCPuddleFireCheckIntervalSeconds =
+        CVarDef.Create("rmc.puddle_fire_check_interval_seconds", 1f, CVar.REPLICATED | CVar.SERVER);
 }

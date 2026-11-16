@@ -25,8 +25,14 @@ public sealed class RMCReagentSystem : EntitySystem
     [Dependency] private readonly ISerializationManager _serialization = default!;
 
     public static readonly ProtoId<MetabolismGroupPrototype> GeneratedMetabolismGroup = "Poison";
+    public static readonly EntProtoId GeneratedFireEntity = "RMCTileFireGenerated";
 
     private static readonly ProtoId<ReactiveGroupPrototype> GeneratedReactiveGroup = "RMCGenerated";
+    private static readonly ProtoId<ChemGeneratorPropertyPrototype> NeutralizingProperty = "Neutralizing";
+    private static readonly ProtoId<ChemGeneratorPropertyPrototype> FuelingProperty = "Fueling";
+    private static readonly ProtoId<ChemGeneratorPropertyPrototype> DefibrillatingProperty = "Defibrillating";
+    private static readonly ProtoId<ChemGeneratorPropertyPrototype> NeurocryogenicProperty = "Neurocryogenic";
+    private static readonly ProtoId<ChemGeneratorPropertyPrototype> ThanatometabolizingProperty = "Thanatometabolizing";
 
     private FrozenDictionary<string, Reagent> _reagents = FrozenDictionary<string, Reagent>.Empty;
     private FrozenDictionary<string, RMCChemicalEffect[]> _properties = FrozenDictionary<string, RMCChemicalEffect[]>.Empty;
@@ -174,13 +180,13 @@ public sealed class RMCReagentSystem : EntitySystem
         if (!string.IsNullOrEmpty(data.Color))
             node.Add("color", data.Color);
         node.Add("group", "Generated");
-        node.Add("fireEntity", "RMCTileFireGenerated");
+        node.Add("fireEntity", GeneratedFireEntity.Id);
 
         var tileReactions = new SequenceDataNode();
-        if (data.Properties.Any(p => p.PropertyId == "Neutralizing"))
+        if (HasGeneratedProperty(data, NeutralizingProperty))
             tileReactions.Add(new MappingDataNode { Tag = "!type:RMCNeutralizeTileReaction" });
 
-        if (data.Properties.Any(p => p.PropertyId == "Fueling"))
+        if (HasGeneratedProperty(data, FuelingProperty))
             tileReactions.Add(new MappingDataNode { Tag = "!type:SpillTileReaction" });
 
         if (tileReactions.Count > 0)
@@ -234,7 +240,7 @@ public sealed class RMCReagentSystem : EntitySystem
             }
         }
 
-        if (data.Properties.Any(p => p.PropertyId is "Defibrillating" or "Neurocryogenic" or "Thanatometabolizing"))
+        if (GeneratedWorksOnTheDead(data))
             reagent.WorksOnTheDead = true;
 
         if (effects.Count > 0)
@@ -283,6 +289,24 @@ public sealed class RMCReagentSystem : EntitySystem
             return ingredientReagent.Flavor;
 
         return null;
+    }
+
+    public static bool HasGeneratedProperty(RMCGeneratedReagentData data, ProtoId<ChemGeneratorPropertyPrototype> property)
+    {
+        foreach (var generated in data.Properties)
+        {
+            if (generated.PropertyId == property.Id)
+                return true;
+        }
+
+        return false;
+    }
+
+    public static bool GeneratedWorksOnTheDead(RMCGeneratedReagentData data)
+    {
+        return HasGeneratedProperty(data, DefibrillatingProperty) ||
+               HasGeneratedProperty(data, NeurocryogenicProperty) ||
+               HasGeneratedProperty(data, ThanatometabolizingProperty);
     }
 
     public Reagent Index(ProtoId<ReagentPrototype> id)

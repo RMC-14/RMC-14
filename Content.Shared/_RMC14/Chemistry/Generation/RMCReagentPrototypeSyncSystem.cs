@@ -18,6 +18,8 @@ public sealed class RMCReagentPrototypeSyncSystem : EntitySystem
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
+    private static readonly ProtoId<ChemGeneratorPropertyPrototype> OptimizedProperty = "Optimized";
+
     private readonly Dictionary<string, RMCGeneratedReagentData> _generated = new();
     private readonly List<RMCGeneratedReagentData> _roundGenerated = new();
     private readonly List<RMCGeneratedReagentData> _batch = new();
@@ -204,7 +206,7 @@ public sealed class RMCReagentPrototypeSyncSystem : EntitySystem
             "  creditReward: " + data.CreditReward,
             "  chemClass: " + data.ChemClass,
             "  unknown: true",
-            "  fireEntity: RMCTileFireGenerated",
+            "  fireEntity: " + RMCReagentSystem.GeneratedFireEntity.Id,
             "  overdose: " + data.Overdose,
             "  criticalOverdose: " + data.CriticalOverdose,
         };
@@ -212,13 +214,13 @@ public sealed class RMCReagentPrototypeSyncSystem : EntitySystem
         if (!string.IsNullOrEmpty(data.Color))
             lines.Add("  color: " + YamlString(data.Color));
 
-        if (data.Properties.Any(p => p.PropertyId is "Defibrillating" or "Neurocryogenic"))
+        if (RMCReagentSystem.GeneratedWorksOnTheDead(data))
             lines.Add("  worksOnTheDead: true");
 
         if (data.Properties.Count > 0)
         {
             lines.Add("  metabolisms:");
-            lines.Add("    Poison:");
+            lines.Add("    " + RMCReagentSystem.GeneratedMetabolismGroup.Id + ":");
             lines.Add("      metabolismRate: 0.1");
             lines.Add("      effects:");
             foreach (var property in data.Properties)
@@ -230,7 +232,7 @@ public sealed class RMCReagentPrototypeSyncSystem : EntitySystem
 
         if (data.Ingredients.Count > 0)
         {
-            var productAmount = data.Properties.Any(p => p.PropertyId == "Optimized")
+            var productAmount = RMCReagentSystem.HasGeneratedProperty(data, OptimizedProperty)
                 ? 3
                 : data.Ingredients.Where(i => !i.Catalyst).Sum(i => Math.Max(i.Amount, 1));
             if (productAmount <= 0)

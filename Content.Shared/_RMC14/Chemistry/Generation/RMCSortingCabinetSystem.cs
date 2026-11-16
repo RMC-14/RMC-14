@@ -110,6 +110,9 @@ public sealed class RMCSortingCabinetSystem : EntitySystem
             return;
         }
 
+        if (!_hands.CanDrop(user, notes))
+            return;
+
         var report = Spawn(ent.Comp.ReportProto, Transform(ent).Coordinates);
         if (TryComp(notes, out PaperComponent? paper))
         {
@@ -126,7 +129,7 @@ public sealed class RMCSortingCabinetSystem : EntitySystem
             return;
         }
 
-        Del(notes);
+        QueueDel(notes);
         _popup.PopupEntity($"You slot a document into a sorting tray, and the {Name(ent)} whirs to life.", ent, user);
         Open(ent);
     }

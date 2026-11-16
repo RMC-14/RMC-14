@@ -3,6 +3,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Drowsiness;
 
 [RegisterComponent, AutoGenerateComponentPause]
+[Access(typeof(RMCDrowsinessSystem))]
 public sealed partial class RMCDrowsinessStatusEffectComponent : Component
 {
     [DataField]

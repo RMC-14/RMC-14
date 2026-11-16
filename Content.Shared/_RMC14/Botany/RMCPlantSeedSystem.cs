@@ -230,15 +230,9 @@ public sealed class RMCPlantSeedSystem : EntitySystem
             return mutation.MutatedComponents;
 
         var seedComp = Comp<RMCPlantSeedComponent>(packet);
-        if (seedComp.PlantPrototype == null)
-        {
-            mutation.MutatedComponents = new List<IComponent>();
-            return mutation.MutatedComponents;
-        }
-
-        var temp = Spawn(seedComp.PlantPrototype.Value.Id, Transform(packet).Coordinates);
-        mutation.MutatedComponents = SnapshotMutableComponents(temp);
-        QueueDel(temp);
+        mutation.MutatedComponents = seedComp.PlantPrototype is { } plantId && _prototype.TryIndex(plantId, out var plantProto)
+            ? SnapshotPrototype(plantProto)
+            : new List<IComponent>();
 
         return mutation.MutatedComponents;
     }
