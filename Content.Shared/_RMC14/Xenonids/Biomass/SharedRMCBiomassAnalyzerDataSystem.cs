@@ -1,10 +1,13 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Chemistry.Generation;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Biomass;
 
 public abstract class SharedRMCBiomassAnalyzerDataSystem : EntitySystem
 {
+    [Dependency] private readonly SharedRMCChemistryResearchSystem _chemResearch = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
@@ -60,6 +63,21 @@ public abstract class SharedRMCBiomassAnalyzerDataSystem : EntitySystem
 
         upgrade = new RMCBiomassUpgrade(proto, comp);
         return true;
+    }
+
+    public bool HasSufficientClearance(RMCBiomassUpgrade upgrade)
+    {
+        return _chemResearch.HasSufficientClearance(upgrade.Comp.RequiredClearance);
+    }
+
+    public virtual void AddPoints(int amount)
+    {
+    }
+
+    public virtual bool TryPurchaseUpgrade(EntProtoId<RMCBiomassUpgradeComponent> id, EntityCoordinates spawnAt, out string? failReason)
+    {
+        failReason = null;
+        return false;
     }
 
     public int GetCurrentCost(RMCBiomassUpgrade upgrade, RMCBiomassAnalyzerComponent? analyzer)

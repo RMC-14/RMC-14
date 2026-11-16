@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Examine;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Watch;
@@ -296,6 +297,12 @@ namespace Content.Shared.Examine
             {
                 return message;
             }
+
+            // RMC14
+            var overrideEv = new RMCExamineTextOverrideEvent(entity);
+            RaiseLocalEvent(examiner.Value, ref overrideEv);
+            if (overrideEv.Message is { } overrideMessage)
+                return overrideMessage;
 
             var hasDescription = false;
             var metadata = MetaData(entity);

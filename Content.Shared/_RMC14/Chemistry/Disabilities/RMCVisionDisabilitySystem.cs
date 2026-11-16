@@ -1,6 +1,8 @@
 using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Clothing;
-using Content.Shared.Examine;
+using Content.Shared._RMC14.Examine;
+using Content.Shared._RMC14.Medical.Examine;
+using Content.Shared.DetailExaminable;
 using Content.Shared.Flash;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
@@ -8,18 +10,21 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Storage;
 using Content.Shared.Tag;
+using Content.Shared.Verbs;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Chemistry.Disabilities;
 
-// TODO RMC14: cm13 blindness also hides visible emotes & messages, disables smartgun aim assist,
-// stops penlight pupil checks & stops checking other people for injuries
+// TODO RMC14: cm13 blindness also hides visible emotes & messages, disables smartgun aim assist
+// & stops penlight pupil checks
 public sealed class RMCVisionDisabilitySystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly RMCMedicalExamineSystem _medicalExamine = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
@@ -41,7 +46,8 @@ public sealed class RMCVisionDisabilitySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCBlindDisabilityComponent, FlashAttemptEvent>(OnBlindFlashAttempt);
-        SubscribeLocalEvent<HumanoidAppearanceComponent, ExamineAttemptEvent>(OnHumanoidExamineAttempt);
+        SubscribeLocalEvent<RMCBlindDisabilityComponent, RMCExamineTextOverrideEvent>(OnBlindExamineTextOverride);
+        SubscribeLocalEvent<HumanoidAppearanceComponent, GetVerbsEvent<ExamineVerb>>(OnHumanoidGetExamineVerbs, after: [typeof(DetailExaminableSystem)]);
     }
 
     private void OnBlindFlashAttempt(Entity<RMCBlindDisabilityComponent> ent, ref FlashAttemptEvent args)
@@ -49,10 +55,35 @@ public sealed class RMCVisionDisabilitySystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnHumanoidExamineAttempt(Entity<HumanoidAppearanceComponent> ent, ref ExamineAttemptEvent args)
+    private void OnBlindExamineTextOverride(Entity<RMCBlindDisabilityComponent> ent, ref RMCExamineTextOverrideEvent args)
     {
-        if (HasComp<RMCBlindDisabilityComponent>(args.Examiner))
-            args.Cancel();
+        if (!HasComp<HumanoidAppearanceComponent>(args.Examined))
+            return;
+
+        var message = new FormattedMessage();
+        message.AddText("Something is there but you can't see it.");
+
+        if (args.Examined == ent.Owner && TryComp(ent, out RMCMedicalExamineComponent? medical))
+        {
+            var injuries = _medicalExamine.GetExamineText((ent.Owner, medical));
+            if (!injuries.IsEmpty)
+            {
+                message.PushNewline();
+                message.AddMessage(injuries);
+            }
+        }
+
+        message.TrimEnd();
+        args.Message = message;
+    }
+
+    private void OnHumanoidGetExamineVerbs(Entity<HumanoidAppearanceComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
+    {
+        if (!HasComp<RMCBlindDisabilityComponent>(args.User))
+            return;
+
+        var detailText = Loc.GetString("detail-examinable-verb-text");
+        args.Verbs.RemoveWhere(v => v.Text == detailText);
     }
 
     public void CarrotJuiceTick(EntityUid uid)
