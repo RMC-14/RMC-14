@@ -44,7 +44,6 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly VehicleTurretSystem _turret = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly VehicleSystem _vehicle = default!;
-    [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
     [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
 
     public override void Initialize()
