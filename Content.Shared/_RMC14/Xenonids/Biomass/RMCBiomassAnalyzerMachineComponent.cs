@@ -7,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Biomass;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
-[Access(typeof(SharedRMCBiomassAnalyzerMachineSystem))]
+[Access(typeof(RMCBiomassAnalyzerMachineSystem))]
 public sealed partial class RMCBiomassAnalyzerMachineComponent : Component
 {
     [DataField, AutoNetworkedField]

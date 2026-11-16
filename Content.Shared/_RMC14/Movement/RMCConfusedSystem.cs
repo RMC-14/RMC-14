@@ -1,19 +1,14 @@
 using System.Numerics;
-using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
 
 public sealed class RMCConfusedSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStatusEffectsSystem _status = default!;
-
-    private static readonly EntProtoId ConfusedStatus = "RMCStatusEffectConfused";
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private const uint RerollTicks = 30;
 
@@ -27,7 +22,7 @@ public sealed class RMCConfusedSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<InputMoverComponent, ConfusedMovementEvent>(OnConfusedMovement);
+        SubscribeLocalEvent<RMCConfusedComponent, ConfusedMovementEvent>(OnConfusedMovement);
 
         SubscribeLocalEvent<RMCConfusedStatusEffectComponent, StatusEffectAppliedEvent>(OnConfusedApplied);
         SubscribeLocalEvent<RMCConfusedStatusEffectComponent, StatusEffectRemovedEvent>(OnConfusedRemoved);
@@ -35,36 +30,36 @@ public sealed class RMCConfusedSystem : EntitySystem
 
     private void OnConfusedApplied(Entity<RMCConfusedStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
+        EnsureComp<RMCConfusedComponent>(args.Target);
         _popup.PopupEntity(Loc.GetString("rmc-confused-applied"), args.Target, args.Target);
     }
 
     private void OnConfusedRemoved(Entity<RMCConfusedStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
+        RemComp<RMCConfusedComponent>(args.Target);
         _popup.PopupEntity(Loc.GetString("rmc-confused-removed"), args.Target, args.Target);
     }
 
-    private void OnConfusedMovement(Entity<InputMoverComponent> ent, ref ConfusedMovementEvent args)
+    private void OnConfusedMovement(Entity<RMCConfusedComponent> ent, ref ConfusedMovementEvent args)
     {
         if (args.WishDir == Vector2.Zero)
             return;
 
-        if (!_status.HasStatusEffect(ent.Owner, ConfusedStatus))
-            return;
-
         var bucket = _timing.CurTick.Value / RerollTicks;
-
-        var netId = GetNetEntity(ent.Owner).Id;
-        int seed;
-        unchecked
-        {
-            seed = 17;
-            seed = seed * 31 + netId;
-            seed = seed * 31 + (int) bucket;
-        }
-
-        var random = new System.Random(seed);
-        var direction = CardinalDirections[random.Next(CardinalDirections.Length)];
+        var direction = CardinalDirections[PickDirection(GetNetEntity(ent.Owner).Id, bucket)];
 
         args.WishDir = direction * args.WishDir.Length();
+    }
+
+    private static int PickDirection(int netId, uint bucket)
+    {
+        unchecked
+        {
+            var hash = (uint) netId * 0x9E3779B1u ^ bucket * 0x85EBCA6Bu;
+            hash ^= hash >> 16;
+            hash *= 0x7FEB352Du;
+            hash ^= hash >> 15;
+            return (int) (hash % (uint) CardinalDirections.Length);
+        }
     }
 }
