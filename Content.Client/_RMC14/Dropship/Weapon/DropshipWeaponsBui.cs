@@ -1,16 +1,15 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using Content.Client._RMC14.TacticalMap;
+using Content.Client._RMC14.TacticalMap.UI;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
 using Content.Client.UserInterface.ControlExtensions;
-using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Dropship.Weapon;
-using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.ParaDrop;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
@@ -21,7 +20,6 @@ using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsScreen
 using static Robust.Client.UserInterface.Control;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using MedevacComponent = Content.Shared._RMC14.Dropship.Utility.Components.MedevacComponent;
-using Content.Client._RMC14.TacticalMap.UI;
 
 namespace Content.Client._RMC14.Dropship.Weapon;
 
@@ -36,8 +34,9 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
     private readonly TacticalMapSystem _tacticalMapSystem;
 
     private EntityUid? _oldEye;
-    private TacticalMapWrapper? _embeddedTacMapWrapperScreen1;
-    private TacticalMapWrapper? _embeddedTacMapWrapperScreen2;
+    private TacticalMapView? _embeddedTacMapScreen1;
+    private TacticalMapView? _embeddedTacMapScreen2;
+    private readonly List<TacticalMapViewBinder> _embeddedTacMapBinders = new();
 
     protected override DropshipWeaponsWindow? Window { get; set; }
 
@@ -100,16 +99,6 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         }
 
         RefreshButtons();
-
-        if (_embeddedTacMapWrapperScreen1 != null && terminal?.ScreenOne.State == TacMap)
-        {
-            RefreshEmbeddedTacMap(_embeddedTacMapWrapperScreen1);
-        }
-
-        if (_embeddedTacMapWrapperScreen2 != null && terminal?.ScreenTwo.State == TacMap)
-        {
-            RefreshEmbeddedTacMap(_embeddedTacMapWrapperScreen2);
-        }
     }
 
     private void RefreshButtons()
@@ -431,24 +420,21 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             case TacMap:
                 screen.ScreenLabel.Visible = false;
 
-                var currentWrapper = first ? _embeddedTacMapWrapperScreen1 : _embeddedTacMapWrapperScreen2;
+                var currentTacMap = first ? _embeddedTacMapScreen1 : _embeddedTacMapScreen2;
 
-                if (currentWrapper == null)
+                if (currentTacMap == null)
                 {
-                    currentWrapper = new TacticalMapWrapper();
-                    SetupEmbeddedTacMap(currentWrapper);
+                    currentTacMap = CreateEmbeddedTacMap();
 
                     if (first)
-                        _embeddedTacMapWrapperScreen1 = currentWrapper;
+                        _embeddedTacMapScreen1 = currentTacMap;
                     else
-                        _embeddedTacMapWrapperScreen2 = currentWrapper;
+                        _embeddedTacMapScreen2 = currentTacMap;
                 }
 
-                screen.Viewport.AddChild(currentWrapper);
+                screen.Viewport.AddChild(currentTacMap);
                 screen.Viewport.Visible = true;
                 screen.BottomRow.SetData(exit);
-
-                RefreshEmbeddedTacMap(currentWrapper);
                 break;
             case Medevac:
             {
@@ -613,53 +599,15 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         RefreshButtons();
     }
 
-    private void SetupEmbeddedTacMap(TacticalMapWrapper wrapper)
+    private TacticalMapView CreateEmbeddedTacMap()
     {
-        if (wrapper == null || !EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
-            return;
+        var view = new TacticalMapView();
+        view.Configure(true, false, false, _tacticalMapSystem.LineLimit, _tacticalMapSystem.LabelMaxLength);
 
-        wrapper.SetCanvasAccess(false);
-        wrapper.MapSelectionRow.Visible = false;
-
-        if (computer.Map != null && EntMan.TryGetComponent(computer.Map.Value, out AreaGridComponent? areaGrid))
-        {
-            wrapper.UpdateTexture((computer.Map.Value, areaGrid));
-        }
-
-        var lineLimit = _tacticalMapSystem.LineLimit;
-        wrapper.SetLineLimit(lineLimit);
-        wrapper.LastUpdateAt = computer.LastAnnounceAt;
-        wrapper.NextUpdateAt = computer.NextAnnounceAt;
-    }
-
-    private void RefreshEmbeddedTacMap(TacticalMapWrapper wrapper)
-    {
-        if (wrapper == null || !EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
-            return;
-
-        var blips = new TacticalMapBlip[computer.Blips.Count];
-        var i = 0;
-        foreach (var blip in computer.Blips.Values)
-        {
-            blips[i++] = blip;
-        }
-        wrapper.UpdateBlips(blips);
-
-        wrapper.Map.Lines.Clear();
-        var lines = EntMan.GetComponentOrNull<TacticalMapLinesComponent>(Owner);
-        if (lines != null)
-        {
-            wrapper.Map.Lines.AddRange(lines.Lines);
-        }
-
-        var labels = EntMan.GetComponentOrNull<TacticalMapLabelsComponent>(Owner);
-        if (labels != null)
-        {
-            wrapper.UpdateTacticalLabels(labels.Labels);
-        }
-
-        wrapper.LastUpdateAt = computer.LastAnnounceAt;
-        wrapper.NextUpdateAt = computer.NextAnnounceAt;
+        var binder = new TacticalMapViewBinder(view, Owner, null);
+        _embeddedTacMapBinders.Add(binder);
+        binder.Refresh(true);
+        return view;
     }
 
     private void ClearNames(DropshipWeaponsScreen screen)
@@ -823,11 +771,18 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
     {
         if (disposing)
         {
-            _embeddedTacMapWrapperScreen1?.Dispose();
-            _embeddedTacMapWrapperScreen1 = null;
+            foreach (var binder in _embeddedTacMapBinders)
+            {
+                binder.Dispose();
+            }
 
-            _embeddedTacMapWrapperScreen2?.Dispose();
-            _embeddedTacMapWrapperScreen2 = null;
+            _embeddedTacMapBinders.Clear();
+
+            _embeddedTacMapScreen1?.Dispose();
+            _embeddedTacMapScreen1 = null;
+
+            _embeddedTacMapScreen2?.Dispose();
+            _embeddedTacMapScreen2 = null;
 
             if (_oldEye != null)
                 _eyeLerping.RemoveEye(_oldEye.Value);
