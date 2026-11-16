@@ -21,6 +21,12 @@
   - RMCAccessDatabase
   - RMCAccessSeniorCommand
   - RMCAccessLogs
+  - CMAccessCombatTechPrep
+  - CMAccessFTLPrep
+  - CMAccessSpecPrep
+  - CMAccessMedPrep
+  - CMAccessSquadLeaderPrep
+  - CMAccessSmartPrep
 
 - type: accessGroup
   id: MP
@@ -41,6 +47,12 @@
   - CMAccessMaint
   - CMAccessOT
   - RMCAccessDatabase
+  - CMAccessCombatTechPrep
+  - CMAccessFTLPrep
+  - CMAccessSpecPrep
+  - CMAccessMedPrep
+  - CMAccessSquadLeaderPrep
+  - CMAccessSmartPrep
 
 - type: accessGroup
   id: CMWarden
@@ -63,3 +75,9 @@
   - CMAccessOT
   - RMCAccessDatabase
   - RMCAccessLogs
+  - CMAccessCombatTechPrep
+  - CMAccessFTLPrep
+  - CMAccessSpecPrep
+  - CMAccessMedPrep
+  - CMAccessSquadLeaderPrep
+  - CMAccessSmartPrep
