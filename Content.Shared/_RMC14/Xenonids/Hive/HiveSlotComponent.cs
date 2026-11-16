@@ -3,6 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedXenoHiveSystem))]
 public sealed partial class HiveSlotComponent : Component
 {
     [DataField, AutoNetworkedField]

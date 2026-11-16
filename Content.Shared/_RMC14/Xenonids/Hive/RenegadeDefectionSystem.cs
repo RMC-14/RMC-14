@@ -1,7 +1,7 @@
+using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Xenonids.IffTag;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
@@ -14,21 +14,23 @@ namespace Content.Shared._RMC14.Xenonids.Hive;
 public sealed class RenegadeDefectionSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly RMCXenoIffTagSystem _iffTag = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
-    private static readonly ProtoId<DamageTypePrototype> TagRipDamage = "Blunt";
     private static readonly ProtoId<NpcFactionPrototype> MarineFaction = "UNMC";
-    private static readonly TimeSpan ChoiceTimeout = TimeSpan.FromSeconds(10);
+
+    private readonly List<EntityUid> _toResolve = new();
 
     public override void Initialize()
     {
         SubscribeLocalEvent<HiveFactionAllyChangedEvent>(OnFactionAllyChanged);
-        SubscribeNetworkEvent<RenegadeDefectionChoiceEvent>(OnChoiceReceived);
+        SubscribeLocalEvent<RenegadeDefectionPendingComponent, RenegadeDefectionChosenEvent>(OnChosen);
     }
 
     private void OnFactionAllyChanged(ref HiveFactionAllyChangedEvent args)
@@ -46,7 +48,7 @@ public sealed class RenegadeDefectionSystem : EntitySystem
             return;
 
         var tags = EntityQueryEnumerator<RMCXenoIffTagComponent, ActorComponent>();
-        while (tags.MoveNext(out var uid, out _, out var actor))
+        while (tags.MoveNext(out var uid, out _, out _))
         {
             if (uid == hive.CurrentQueen)
                 continue;
@@ -60,72 +62,51 @@ public sealed class RenegadeDefectionSystem : EntitySystem
             if (!_iffTag.HasFaction(uid, iffFaction))
                 continue;
 
-            OfferDefection((uid, actor), args.Faction);
+            OfferDefection(uid, args.Faction);
         }
     }
 
-    private void OfferDefection(Entity<ActorComponent> xeno, ProtoId<NpcFactionPrototype> faction)
+    private void OfferDefection(EntityUid xeno, ProtoId<NpcFactionPrototype> faction)
     {
-        var pending = EnsureComp<RenegadeDefectionPendingComponent>(xeno.Owner);
+        var pending = EnsureComp<RenegadeDefectionPendingComponent>(xeno);
         pending.BrokenFaction = faction;
+        pending.ExpiresAt = _timing.CurTime + pending.ChoiceTimeout;
 
-        var expiresAt = _timing.CurTime + ChoiceTimeout;
-        RaiseNetworkEvent(new RenegadeDefectionOfferEvent
+        var options = new List<DialogOption>
         {
-            Xeno = GetNetEntity(xeno.Owner),
-            Faction = faction.Id,
-            ExpiresAt = expiresAt.TotalSeconds,
-        }, xeno.Comp.PlayerSession);
+            new("Obey the Queen", new RenegadeDefectionChosenEvent(false)),
+            new("Obey the talls", new RenegadeDefectionChosenEvent(true)),
+        };
 
-        Timer.Spawn(ChoiceTimeout, () => ResolveTimeout(xeno.Owner));
+        _dialog.OpenOptions(xeno,
+            "Alliance broken!",
+            options,
+            $"Our Queen has broken the alliance with the {faction.Id}. The device inside our carapace begins to suppress our connection with the Hive. Do we remove it and follow the Queen?");
     }
 
-    private void ResolveTimeout(EntityUid xeno)
-    {
-        if (_net.IsClient || !HasComp<RenegadeDefectionPendingComponent>(xeno))
-            return;
-
-        if (TryComp(xeno, out ActorComponent? actor))
-        {
-            RaiseNetworkEvent(new RenegadeDefectionOfferExpiredEvent
-            {
-                Xeno = GetNetEntity(xeno),
-            }, actor.PlayerSession);
-        }
-
-        Stay(xeno);
-    }
-
-    private void OnChoiceReceived(RenegadeDefectionChoiceEvent ev, EntitySessionEventArgs args)
+    private void OnChosen(Entity<RenegadeDefectionPendingComponent> ent, ref RenegadeDefectionChosenEvent args)
     {
         if (_net.IsClient)
             return;
 
-        var xeno = GetEntity(ev.Xeno);
-
-        if (!TryComp(xeno, out RenegadeDefectionPendingComponent? pending))
-            return;
-
-        if (!TryComp(xeno, out ActorComponent? actor) || actor.PlayerSession != args.SenderSession)
-            return;
-
-        if (ev.Defect)
-            Defect(xeno, pending.BrokenFaction);
+        if (args.Defect)
+            Defect(ent);
         else
-            Stay(xeno);
+            Stay(ent);
     }
 
-    private void Defect(EntityUid xeno, ProtoId<NpcFactionPrototype> brokenFaction)
+    private void Defect(Entity<RenegadeDefectionPendingComponent> xeno)
     {
+        var brokenFaction = xeno.Comp.BrokenFaction;
         RemComp<RenegadeDefectionPendingComponent>(xeno);
 
         if (!_hive.TryGetHiveBySlot(HiveSlots.Renegade, out var renegadeHive))
         {
-            Log.Error($"Tried to defect {ToPrettyString(xeno)} to the Renegade hive, but no Renegade hive slot exists.");
+            Log.Error($"Tried to defect {ToPrettyString(xeno.Owner)} to the Renegade hive, but no Renegade hive slot exists.");
             return;
         }
 
-        _hive.SetHive(xeno, renegadeHive);
+        _hive.SetHive(xeno.Owner, renegadeHive);
 
         _popup.PopupEntity("You lost the connection with your Hive. Now you have no Queen, only your masters.", xeno, xeno, PopupType.LargeCaution);
         _popup.PopupEntity($"{Name(xeno)} seems to have lost its connection to its Hive!", xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
@@ -134,18 +115,44 @@ public sealed class RenegadeDefectionSystem : EntitySystem
             _marineAnnounce.AnnounceARES(null, "The advanced IFF Xenonid tagging technology has detected hostile intentions and successfully suppressed the psychic link of a lifeform. The collaborative lifeform is given designation Renegade. Full cooperation is to be expected.");
     }
 
-    private void Stay(EntityUid xeno)
+    private void Stay(Entity<RenegadeDefectionPendingComponent> xeno)
     {
+        var ripDamage = xeno.Comp.RipDamage;
         RemComp<RenegadeDefectionPendingComponent>(xeno);
 
-        if (!_iffTag.RemoveTag(xeno))
+        if (!_iffTag.RemoveTag(xeno.Owner))
             return;
 
-        var damage = new DamageSpecifier();
-        damage.DamageDict[TagRipDamage] = 50;
-        _damageable.TryChangeDamage(xeno, damage, true, origin: xeno);
+        _damageable.TryChangeDamage(xeno.Owner, ripDamage, true, origin: xeno.Owner);
 
         _popup.PopupEntity("You rip the IFF tag out of your own carapace! For the Hive!", xeno, xeno, PopupType.LargeCaution);
         _popup.PopupEntity($"{Name(xeno)} rips out its IFF tag!", xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        _toResolve.Clear();
+
+        var query = EntityQueryEnumerator<RenegadeDefectionPendingComponent>();
+        while (query.MoveNext(out var uid, out var pending))
+        {
+            if (time < pending.ExpiresAt && _ui.IsUiOpen(uid, DialogUiKey.Key))
+                continue;
+
+            _toResolve.Add(uid);
+        }
+
+        foreach (var uid in _toResolve)
+        {
+            if (!TryComp(uid, out RenegadeDefectionPendingComponent? pending))
+                continue;
+
+            _ui.CloseUi(uid, DialogUiKey.Key);
+            Stay((uid, pending));
+        }
     }
 }
