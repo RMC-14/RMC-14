@@ -32,6 +32,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Sprite;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -1922,6 +1923,7 @@ public sealed class IntelSystem : EntitySystem
             terminal.Completed = true;
             Dirty(uid, terminal);
             CompleteUpload(uid, terminal.Value);
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_RMC14/Machines/screen_output1.ogg"), uid);
             _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-finished"), uid, terminalUser);
         }
 
@@ -1956,6 +1958,7 @@ public sealed class IntelSystem : EntitySystem
             Dirty(disk.Value);
             _nameModifier.RefreshNameModifiers(disk.Value.Owner);
             CompleteUpload(disk.Value.Owner, disk.Value.Comp.UploadValue);
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_RMC14/Machines/screen_output1.ogg"), uid);
 
             if (TryComp(disk.Value.Owner, out IntelRetrieveItemObjectiveComponent? retrieve) &&
                 retrieve.State == IntelObjectiveState.Inactive)

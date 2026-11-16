@@ -10,12 +10,14 @@
     hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
-    damageMultiplier: 0.125
+    damageMultiplier: 0.15
     repairRate: 0.01
   - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,30"
@@ -25,11 +27,12 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ltb_cannon_0
+    overlayDamagedState: ltb_cannon_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: ShootAtFixedPoint
   - type: Gun
-    fireRate: 0.0625
+    fireRate: 0.05
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -57,8 +60,10 @@
     offsetSouth: "0,-1"
     offsetWest: "-0.4,-1.9"
     useAimDirection: true
+    useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ltb_cannon_0
+    damagedVehicleState: ltb_cannon_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -72,7 +77,7 @@
     hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
-    damageMultiplier: 0.125
+    damageMultiplier: 0.15
     repairRate: 0.01
   - type: HardpointIntegrity
     maxIntegrity: 350
@@ -90,8 +95,15 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ltaaap_minigun_0
+    overlayDamagedState: ltaaap_minigun_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+  - type: UserIFF
+    factions:
+    - FactionMarine
   - type: Gun
     fireRate: 1.5
     selectedMode: FullAuto
@@ -100,9 +112,9 @@
     cameraRecoilScalar: 0
   - type: GunSpinup
     baseShotDelay: 0.7
-    baseScatter: 10
-    initialWindupDelay: 0.7
-    spinUpTime: 6
+    baseScatter: 18
+    initialWindupDelay: 0
+    spinUpTime: 10
     graceAfterStop: 2
     spinDownTime: 3
     minSpinLevel: 1
@@ -142,6 +154,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ltaaap_minigun_0
+    damagedVehicleState: ltaaap_minigun_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -155,12 +168,14 @@
     hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
-    damageMultiplier: 0.125
+    damageMultiplier: 0.15
     repairRate: 0.01
   - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     showOverlay: true
     useDirectionalOffsets: true
@@ -170,10 +185,11 @@
     pixelOffsetWest: "-30,0"
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ace_autocannon_0
+    overlayDamagedState: ace_autocannon_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 1
+    fireRate: 1.4286
     projectileSpeed: 50
     selectedMode: FullAuto
     availableModes:
@@ -206,6 +222,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ace_autocannon_0
+    damagedVehicleState: ace_autocannon_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -219,15 +236,18 @@
     hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
-    damageMultiplier: 0.125
+    damageMultiplier: 0.15
     repairRate: 0.01
   - type: HardpointIntegrity
     maxIntegrity: 400
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: drgn_flamer_0
+    overlayDamagedState: drgn_flamer_1
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,25"
@@ -236,7 +256,12 @@
     pixelOffsetWest: "-30,0"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+  - type: UserIFF
+    factions:
+    - FactionMarine
   - type: Gun
     fireRate: 0.5
     projectileSpeed: 20
@@ -272,4 +297,5 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: drgn_flamer_0
+    damagedVehicleState: drgn_flamer_1
 

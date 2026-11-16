@@ -87,6 +87,7 @@ rmc-job-name-pmc-corporate-goon-engi = We-Ya Corporate Security Technician
 rmc-job-name-pmc-corporate-goon-medic = We-Ya Corporate Security Medic
 rmc-job-name-pmc-corporate-goon-leader = We-Ya Corporate Security Lead
 rmc-job-name-pmc-corporate-goon-secguard = We-Ya Security Guard
+rmc-job-name-pmc-corporate-goon-synth = We-Ya Corporate Security Synthetic
 
 rmc-job-name-pmc-pve-team-leader = Team Leader
 rmc-job-prefix-pmc-pve-team-leader = TL
@@ -129,6 +130,8 @@ rmc-job-name-corp-dep-director = WE-YA Deputy Director
 
 rmc-ghost-name-corp-director = WE-YA Director (Neutral)
 rmc-job-name-corp-director = WE-YA Director
+
+rmc-job-name-corp-admin = Colony Administrator
 
 # CL Bodyguard
 rmc-job-name-executive-bodyguard = Executive Bodyguard

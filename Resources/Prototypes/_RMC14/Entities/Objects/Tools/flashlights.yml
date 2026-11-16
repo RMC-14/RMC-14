@@ -3,11 +3,6 @@
   parent: BaseItem
   id: RMCFlashlightBase
   components:
-  - type: MeleeWeapon
-    wideAnimationRotation: 90
-    damage:
-      types:
-        Blunt: 0
   - type: HandheldLight
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating

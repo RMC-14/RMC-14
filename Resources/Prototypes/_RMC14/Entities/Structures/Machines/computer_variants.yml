@@ -134,13 +134,17 @@
     state: elevator_handrailb
 
 - type: entity
-  parent: RMCOverwatchConsole
+  parent: RMCOverwatchConsoleBase
   id: RMCOverwatchConsoleTOCShuttle
   name: shuttle tactical operations console
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: toc_shuttle
+    layers:
+    - map: ["base"]
+      state: "toc_shuttle0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "toc_shuttle"
     overrideDir: West
     enableOverrideDir: true
 
@@ -172,13 +176,17 @@
     state: toc_shuttleb
 
 - type: entity
-  parent: RMCOverwatchConsole
+  parent: RMCOverwatchConsoleBase
   id: RMCOverwatchConsoleTOCMap
   name: tactical map operations console
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: toc_map
+    layers:
+    - map: ["base"]
+      state: "toc_map0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "toc_map"
     overrideDir: West
     enableOverrideDir: true
 
@@ -210,13 +218,17 @@
     state: toc_mapb
 
 - type: entity
-  parent: RMCOverwatchConsole
+  parent: RMCOverwatchConsoleBase
   id: RMCOverwatchConsoleTOCRailgun
   name: railgun tactical operations console
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: toc_railgun
+    layers:
+    - map: ["base"]
+      state: "toc_railgun0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "toc_railgun"
     overrideDir: West
     enableOverrideDir: true
 
@@ -248,13 +260,17 @@
     state: toc_railgunb
 
 - type: entity
-  parent: RMCOverwatchConsole
+  parent: RMCOverwatchConsoleBase
   id: RMCOverwatchConsoleTOCRailcannon
   name: railcannon tactical operations console
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: toc_railcannon
+    layers:
+    - map: ["base"]
+      state: "toc_railcannon0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "toc_railcannon"
     overrideDir: West
     enableOverrideDir: true
 

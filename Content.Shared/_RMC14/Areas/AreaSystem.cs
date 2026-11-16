@@ -128,6 +128,22 @@ public sealed class AreaSystem : EntitySystem
         EnsureAreaEntityExists(areaGrid, area);
     }
 
+    public void RefreshMinimap(EntityUid grid)
+    {
+        if (!_toRender.Contains(grid))
+            _toRender.Add(grid);
+    }
+
+    public bool SetAlwaysPowered(Entity<AreaComponent> area, bool alwaysPowered)
+    {
+        if (area.Comp.AlwaysPowered == alwaysPowered)
+            return false;
+
+        area.Comp.AlwaysPowered = alwaysPowered;
+        Dirty(area);
+        return true;
+    }
+
     public bool TryGetArea(
         Entity<MapGridComponent, AreaGridComponent?> grid,
         Vector2i indices,
@@ -432,6 +448,7 @@ public sealed class AreaSystem : EntitySystem
                 }
 
                 areaGrid.Colors.Clear();
+                areaGrid.Labels.Clear();
                 Dirty(ent, areaGrid);
 
                 var tiles = _map.GetAllTilesEnumerator(ent, mapGrid);

@@ -216,13 +216,8 @@ public sealed class CMGunSystem : EntitySystem
             if (!_physicsQuery.TryComp(projectile, out var physics))
                 continue;
 
-            // Preserve spread direction for multi-projectile shots. Single projectiles still snap to target.
-            var projectileDirection = normalized;
-            if (args.FiredProjectiles.Count > 1 && physics.LinearVelocity != Vector2.Zero)
-                projectileDirection = physics.LinearVelocity.Normalized();
-
-            // Calculate needed impulse to get to target direction, remove all velocity from projectile, then apply.
-            var impulse = projectileDirection * gun.ProjectileSpeedModified * physics.Mass;
+            // Calculate needed impulse to get to target, remove all velocity from projectile, then apply.
+            var impulse = normalized * gun.ProjectileSpeedModified * physics.Mass;
             _physics.SetLinearVelocity(projectile, Vector2.Zero, body: physics);
             _physics.ApplyLinearImpulse(projectile, impulse, body: physics);
             _physics.SetBodyStatus(projectile, physics, BodyStatus.InAir);
@@ -246,7 +241,6 @@ public sealed class CMGunSystem : EntitySystem
                 distance = distance > 0 ? Math.Min(normalProjectile.MaxFixedRange.Value, distance) : normalProjectile.MaxFixedRange.Value;
             }
             // Calculate travel time and equivalent distance based either on click location or calculated max range, whichever is shorter.
-            comp.TargetCoordinates = new MapCoordinates(from.Position + projectileDirection * distance, from.MapId);
             comp.FlyEndTime = time + TimeSpan.FromSeconds(distance / gun.ProjectileSpeedModified);
         }
 
@@ -654,9 +648,6 @@ public sealed class CMGunSystem : EntitySystem
         {
             if (time < comp.FlyEndTime)
                 continue;
-
-            if (comp.TargetCoordinates is { } targetCoords)
-                _transform.SetMapCoordinates(uid, targetCoords);
 
             StopProjectile((uid, comp));
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);

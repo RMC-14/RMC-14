@@ -233,6 +233,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, false);
                     UpdateApcChannel(apc, area, RMCPowerChannel.Lighting, false);
                     UpdateApcChannel(apc, area, RMCPowerChannel.Environment, false);
+                    _light.SetEnabled(apc, false);
                     continue;
                 }
 
@@ -296,6 +297,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                 }
 
                 _appearance.SetData(apc, RMCApcVisualsLayers.Power, apcComp.ChargeStatus);
+                _light.SetEnabled(apc, true);
                 _light.SetColor(apc,
                     apcComp.ChargeStatus switch
                     {
