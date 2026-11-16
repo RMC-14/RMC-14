@@ -1392,7 +1392,6 @@
       amount: 3
     - id: RMCMotionDetector
     # TODO RMC14 cermaic plate
-    - id: RMCVisorNightVision # TODO RMC14 add removeable visior to helmet and remove this
 
 - type: entity
   parent: CMSatchel
