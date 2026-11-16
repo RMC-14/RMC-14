@@ -21,7 +21,7 @@ public sealed partial class VehicleLockComponent : Component
     public string? KeyId;
 
     [DataField]
-    public List<ProtoId<AccessLevelPrototype>> Access = new() { "CMAccessCrewman", "RMCAccessCommand", "CMAccessBrig" };
+    public List<ProtoId<AccessLevelPrototype>> Access = new();
 
     [DataField, AutoNetworkedField]
     public HashSet<ProtoId<NpcFactionPrototype>> Factions = new();

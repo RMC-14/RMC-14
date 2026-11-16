@@ -5,6 +5,11 @@
   name: armored personnel carrier
   description: A rugged armored personnel carrier outfitted for battlefield support.
   components:
+  - type: VehicleLock
+    access:
+    - CMAccessCrewman
+    - RMCAccessCommand
+    - CMAccessBrig
   - type: WarpPoint
     follow: true
     location: APC

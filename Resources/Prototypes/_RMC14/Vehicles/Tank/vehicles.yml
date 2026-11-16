@@ -5,6 +5,11 @@
   name: tank
   description: A heavy armored tank built for battlefield dominance.
   components:
+  - type: VehicleLock
+    access:
+    - CMAccessCrewman
+    - RMCAccessCommand
+    - CMAccessBrig
   - type: WarpPoint
     follow: true
     location: Tank

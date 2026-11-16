@@ -44,18 +44,13 @@ public sealed class VehicleLockSystem : EntitySystem
 
         if (vehicle.Comp.Access.Count > 0)
         {
-            var hasAccess = false;
             foreach (var tag in _accessReader.FindAccessTags(user))
             {
-                if (!vehicle.Comp.Access.Contains(tag))
-                    continue;
-
-                hasAccess = true;
-                break;
+                if (vehicle.Comp.Access.Contains(tag))
+                    return true;
             }
 
-            if (!hasAccess)
-                return false;
+            return false;
         }
 
         return TryComp(user, out NpcFactionMemberComponent? member) &&
@@ -308,7 +303,7 @@ public sealed class VehicleLockSystem : EntitySystem
         }
 
         vehicleLock.Locked = !vehicleLock.Locked;
-        if (vehicleLock.Locked &&                          
+        if (vehicleLock.Locked &&
             TryComp(user, out NpcFactionMemberComponent? member) &&
             !vehicleLock.Factions.SetEquals(member.Factions))
         {
