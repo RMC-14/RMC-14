@@ -13,7 +13,6 @@ public sealed partial class ParatoxinAffectedComponent : Component
     [DataField, AutoNetworkedField]
     public int Stacks;
 
-
     [DataField, AutoNetworkedField]
     public int MaxStacks = 30;
 

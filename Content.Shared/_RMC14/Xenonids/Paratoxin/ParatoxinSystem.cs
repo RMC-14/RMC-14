@@ -83,7 +83,7 @@ public sealed class ParatoxinSystem : EntitySystem
 
     private void OnParatoxinOnHit(Entity<ParatoxinOnHitComponent> spit, ref ProjectileHitEvent args)
     {
-        TryChangeStacks(args.Target, args.Shooter, spit.Comp.StacksToApply);
+        TryChangeStacks(args.Target, args.Shooter, spit.Comp.StacksToApply, popup: spit.Comp.ShowPopup);
 
         RaiseLocalEvent(new ParatoxinApplicationEvent(args.Target, spit.Comp.StacksToApply));
     }
@@ -95,7 +95,7 @@ public sealed class ParatoxinSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
 
-            if (!TryChangeStacks(hit, xeno, xeno.Comp.StacksPerSlash))
+            if (!TryChangeStacks(hit, xeno, xeno.Comp.StacksPerSlash, popup: true))
                 continue;
 
             if (--xeno.Comp.NumberOfSlashes <= 0)
@@ -172,15 +172,14 @@ public sealed class ParatoxinSystem : EntitySystem
         if ((amount <= 0 && !HasComp<ParatoxinAffectedComponent>(uid)) || !HasComp<MarineComponent>(uid))
             return false;
 
-        if (time == null)
-            time = _timing.CurTime;
+        time ??= _timing.CurTime;
 
         if (HasComp<SynthComponent>(uid) || HasComp<XenoComponent>(uid) || _skills.HasSkill(uid, ResistSkill, ResistLevel))
         {
             if (popup && source != null)
             {
                 var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", Identity.Name(uid, EntityManager, source)));
-                _popup.PopupEntity(immuneMsg, uid, source.Value, PopupType.SmallCaution);
+                _popup.PopupClient(immuneMsg, uid, source.Value, PopupType.SmallCaution);
             }
             return false;
         }
