@@ -786,7 +786,7 @@
       takeAll: CMStandard
       entries:
       - id: CMHeadsetSeniorCommand
-      - id: CMMRE 
+      - id: CMMRE
 # TODO: - id: Trench Whistle
     - name: Uniform # TODO: Port this.
       jobs:
@@ -1189,7 +1189,7 @@
       - CMChiefEngineer
       choices: { CMCombatHelmet: 1 }
       entries:
-      - id: RMCArmorHelmetM10SO
+      - id: RMCArmorHelmetM10CELO
       - id: CMArmorHelmetM10Tech
     - name: Mask
       jobs:
@@ -1226,6 +1226,9 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: CMHandsInsulated
+      - id: CMJumpsuitQM
+      - id: CMSatchelMarineTech
       - id: RMCQuartermasterJacket
     - name: Gloves
       jobs:
@@ -1238,9 +1241,12 @@
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
+      - id: RMCHeadCapQuartermaster
+        recommended: true
       - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
+        name: Cargo Cap
     - name: Personal Sidearm
       jobs:
       - CMQuartermaster
@@ -1262,7 +1268,7 @@
       entries:
       - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
-      - id: RMCArmorHelmetM10SO
+      - id: RMCArmorHelmetM10CELO
       - id: CMBootsBlackFilled
     - name: Patches
       jobs:
@@ -1556,7 +1562,7 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineTech
-      - id: CMSatchel 
+      - id: CMSatchel
     - name: Personal Sidearm
       jobs:
       - CMAuxiliarySupportOfficer
