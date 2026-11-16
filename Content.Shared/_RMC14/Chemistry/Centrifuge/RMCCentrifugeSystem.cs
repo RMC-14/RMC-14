@@ -444,7 +444,7 @@ public sealed class RMCCentrifugeSystem : EntitySystem
                 else if (turingComp.Status != TuringDispenserStatus.Running)
                 {
                     _audio.PlayPvs(comp.RequestRunSound, ent);
-                    _turing.RequestRun((turingUid, turingComp));
+                    _turing.StartProgram((turingUid, turingComp));
                 }
 
                 continue;

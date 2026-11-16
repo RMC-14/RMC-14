@@ -5,6 +5,7 @@ using Content.Shared.EntityEffects.Effects;
 using Content.Server.Spreader;
 using Content.Shared.Body.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Smoke;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -31,12 +32,6 @@ namespace Content.Server.Fluids.EntitySystems;
 /// </summary>
 public sealed class SmokeSystem : EntitySystem
 {
-    // RMC14 - smoke render at alpha 100/255 & fade to 0 over final 20%
-    private const float SmokeAlpha = 100f / 255f;
-    private const float FadeFraction = 0.2f;
-    private static readonly TimeSpan FadeUpdateInterval = TimeSpan.FromSeconds(0.25);
-    private TimeSpan _nextFadeUpdate;
-
     // If I could do it all again this could probably use a lot more of puddles.
     [Dependency] private readonly IAdminLogManager _logger = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -50,6 +45,7 @@ public sealed class SmokeSystem : EntitySystem
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private readonly RMCSmokeFadeSystem _rmcSmokeFade = default!; // RMC14
 
     private EntityQuery<SmokeComponent> _smokeQuery;
     private EntityQuery<SmokeAffectedComponent> _smokeAffectedQuery;
@@ -83,20 +79,6 @@ public sealed class SmokeSystem : EntitySystem
 
             smoke.NextSecond += TimeSpan.FromSeconds(6); // RMC14 change smoke reaction rate
             SmokeReact(uid, smoke.SmokeEntity);
-        }
-
-        // RMC14 - fade puffs out over final 20% of lifetime.
-        if (curTime < _nextFadeUpdate)
-            return;
-
-        _nextFadeUpdate = curTime + FadeUpdateInterval;
-        var fadeQuery = EntityQueryEnumerator<SmokeComponent, TimedDespawnComponent>();
-        while (fadeQuery.MoveNext(out var uid, out var smokeComp, out var timer))
-        {
-            if (smokeComp.Duration <= 0 || timer.Lifetime / smokeComp.Duration >= FadeFraction)
-                continue;
-
-            UpdateVisuals((uid, smokeComp));
         }
     }
 
@@ -263,6 +245,7 @@ public sealed class SmokeSystem : EntitySystem
 
         var timer = EnsureComp<TimedDespawnComponent>(uid);
         timer.Lifetime = duration;
+        _rmcSmokeFade.SetLifetime(uid, duration); // RMC14
 
         // The tile reaction happens here because it only occurs once.
         ReactOnTile(uid, component);
@@ -406,17 +389,6 @@ public sealed class SmokeSystem : EntitySystem
             return;
 
         var color = solution.GetColor(_prototype);
-
-        // RMC14
-        var alpha = SmokeAlpha;
-        if (TryComp<TimedDespawnComponent>(smoke.Owner, out var timer) && smoke.Comp1.Duration > 0)
-        {
-            var remainingFraction = Math.Clamp(timer.Lifetime / smoke.Comp1.Duration, 0f, 1f);
-            if (remainingFraction < FadeFraction)
-                alpha *= remainingFraction / FadeFraction;
-        }
-
-        _appearance.SetData(smoke.Owner, SmokeVisuals.Color, color.WithAlpha(alpha), smoke.Comp2);
-        // RMC14
+        _appearance.SetData(smoke.Owner, SmokeVisuals.Color, color, smoke.Comp2);
     }
 }

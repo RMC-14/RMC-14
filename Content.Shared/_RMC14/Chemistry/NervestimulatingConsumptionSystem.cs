@@ -3,8 +3,10 @@ using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry;
 
@@ -12,6 +14,8 @@ public sealed class NervestimulatingConsumptionSystem : EntitySystem
 {
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+
+    private static readonly ProtoId<StatusEffectPrototype> StunStatus = "Stun";
 
     public override void Initialize()
     {
@@ -21,7 +25,7 @@ public sealed class NervestimulatingConsumptionSystem : EntitySystem
 
     private void OnStunned(Entity<BloodstreamComponent> ent, ref StunnedEvent args)
     {
-        var ev = new RMCStatusEffectTimeEvent("Stun", args.Time);
+        var ev = new RMCStatusEffectTimeEvent(StunStatus, args.Time);
         RaiseLocalEvent(ent, ref ev);
 
         var reduction = FixedPoint2.New(MathF.Min((float) ev.Duration.TotalSeconds, 10f));

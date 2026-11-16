@@ -12,6 +12,9 @@ public sealed partial class RMCChemistryResearchComponent : Component
     [DataField, AutoNetworkedField]
     public int ClearanceLevel = 1;
 
+    [DataField]
+    public int HighestClearanceLevel = 1;
+
     [DataField, AutoNetworkedField]
     public bool ReachedXAccess;
 

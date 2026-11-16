@@ -5,6 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Chemistry.Generation;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedRMCChemistryResearchSystem), typeof(RMCSortingCabinetSystem))]
 public sealed partial class RMCChemSynthesisNotesComponent : Component
 {
     [DataField, AutoNetworkedField]
