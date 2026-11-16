@@ -51,3 +51,9 @@ reagent-effect-guidebook-plant-mutation-suppress =
         [1] Suppresses
         *[other] suppress
     } the following mutation slots: {$slots}
+
+reagent-effect-guidebook-rmc-dizziness =
+    { $chance ->
+        [1] Causes
+        *[other] cause
+    } dizziness

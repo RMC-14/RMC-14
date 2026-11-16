@@ -104,9 +104,9 @@
       - !type:SatiateThirst
         factor: 3
       - !type:EqualHealthChange
-        probability: 0.2
+        probability: 0.1
         damage:
-        - Toxin: -1
+        - Toxin: -0.25
 
 - type: reagent
   id: JuiceOrange
@@ -128,7 +128,7 @@
       - !type:SatiateThirst
         factor: 3
       - !type:HealthChange
-        probability: 0.3
+        probability: 0.15
         damage:
           types:
             Asphyxiation: -1
@@ -165,7 +165,7 @@
       - !type:SatiateThirst
         factor: 3
       - !type:EqualHealthChange
-        probability: 0.2
+        probability: 0.1
         damage:
         - Burn: -1
 

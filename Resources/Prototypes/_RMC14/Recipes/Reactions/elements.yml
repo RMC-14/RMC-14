@@ -13,12 +13,13 @@
 
 - type: reaction
   id: RMCEthanol
+  priority: 5
   reactants:
-    RMCHydrogen:
-      amount: 6
     RMCCarbon:
       amount: 2
     RMCOxygen:
       amount: 1
+    RMCHydrogen:
+      amount: 6
   products:
     RMCEthanol: 1

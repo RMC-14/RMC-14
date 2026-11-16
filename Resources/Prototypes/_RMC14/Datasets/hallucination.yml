@@ -1,0 +1,29 @@
+- type: localizedDataset
+  id: RMCHallucinationRadioLines
+  values:
+    prefix: rmc-hallucination-radio-
+    count: 11
+
+- type: localizedDataset
+  id: RMCHallucinationOverwatchLines
+  values:
+    prefix: rmc-hallucination-overwatch-
+    count: 6
+
+- type: localizedDataset
+  id: RMCHallucinationBodyLines
+  values:
+    prefix: rmc-hallucination-body-
+    count: 8
+
+- type: localizedDataset
+  id: RMCHallucinationCallLines
+  values:
+    prefix: rmc-hallucination-call-
+    count: 6
+
+- type: localizedDataset
+  id: RMCHallucinationAttackerLines
+  values:
+    prefix: rmc-hallucination-attacker-say-
+    count: 10

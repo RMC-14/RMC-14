@@ -20,8 +20,7 @@
         layer:
         - MachineLayer
   - type: Corrodible
-    timeToApply: 4
-    structure: true
+    isCorrodible: false
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: null
@@ -80,11 +79,13 @@
     slots:
       turing_input_box_slot:
         name: Vial Box
+        swap: false
         whitelist:
           tags:
           - VialBox
       turing_output_beaker_slot:
         name: Output Beaker
+        swap: false
         whitelist:
           tags:
           - GlassBeaker

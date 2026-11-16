@@ -56,10 +56,10 @@
           types:
             Poison: 1
       - !type:MakeJittery
-        amount: 5
         conditions:
         - !type:ReagentThreshold
           min: 300
+        amount: 5
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/coffeeglass.rsi
     state: icon_empty
@@ -313,7 +313,7 @@
       - !type:SatiateThirst
         factor: 4
       - !type:EqualHealthChange # RMC
-        probability: 0.2
+        probability: 0.1
         damage:
         - Brute: -1
       - !type:AdjustReagent # RMC
@@ -475,7 +475,7 @@
         reagent: Theobromine
         amount: 0.05
       - !type:EqualHealthChange # RMC
-        probability: 0.2
+        probability: 0.1
         damage:
         - Toxin: -1
   metamorphicSprite:
