@@ -96,8 +96,6 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         }
 
         var vehicleUid = vehicle.Value;
-        _vehicleLock.SetFactionFromOccupant(vehicleUid, args.Buckle.Owner);
-
         var weapons = EnsureComp<VehicleWeaponsComponent>(vehicleUid);
         ClearOperatorSelections(weapons, args.Buckle.Owner);
         if (ent.Comp.IsPrimaryOperatorSeat)
