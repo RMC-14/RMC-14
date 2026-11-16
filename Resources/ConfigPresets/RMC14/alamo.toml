@@ -1,12 +1,12 @@
 ﻿[adminlogs]
-server_name = "alamo"
+server_name = "dwarf-alamo"
 
 [game]
 desc = "Join and play as a marine, responding to a mysterious distress signal, or a xenonid, building out your hive and defending it from the marines."
-hostname = "[EN][MRP] Rouny's Marine Corps Alamo [US East]"
+hostname = "[EN][MRP] Dwarf Marine Corps 14 Alamo [US East]"
 
 [hub]
 tags = "lang:en,region:am_n_e,rp:med"
 
 [loki]
-name = "alamo"
+name = "dwarf-alamo"

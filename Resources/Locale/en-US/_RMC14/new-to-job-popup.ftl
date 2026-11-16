@@ -1,4 +1,4 @@
-rmc-new-to-job-popup-title = RMC14 New to Job Popup
+rmc-new-to-job-popup-title = DwarfMC New to Job Popup
 rmc-new-to-job-popup-job-name = Welcome to {$name}!
 rmc-new-to-job-additional = If you are ever confused on what to do, you can ask your seniors for help or press F1 > Mentor Help to get in contact with dedicated mentors who can help you.
 rmc-new-to-job-popup-close-button = All ready!

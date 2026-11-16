@@ -1,18 +1,18 @@
-<p align="center"> <img alt="Space Station 14" width="400" height="400" src="https://github.com/user-attachments/assets/320ad459-8997-4e5b-9f7e-fc7e7d7dcb73" /></p>
+<p align="center"> <img alt="Dwarf Marine Corps 14" width="400" height="400" src="https://github.com/user-attachments/assets/320ad459-8997-4e5b-9f7e-fc7e7d7dcb73" /></p>
 
-RMC-14 is an asymmetric game, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox). It is inspired by [CMSS13](https://github.com/cmss13-devs/cmss13), [Space Station 13](https://spacestation13.com/).
+Dwarf Marine Corps 14 (DwarfMC) is an asymmetric game that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox). It is a fork of [RMC-14](https://github.com/RMC-14/RMC-14) and is inspired by [CMSS13](https://github.com/cmss13-devs/cmss13) and [Space Station 13](https://spacestation13.com/).
 
-This is the primary repo for RMC-14. To prevent people forking Robust Toolbox, a "content" pack is loaded by the client and server. This content pack contains everything needed to play the game on one specific server.
+This is the primary repo for DwarfMC. To prevent people forking Robust Toolbox, a "content" pack is loaded by the client and server. This content pack contains everything needed to play the game on one specific server.
 
-If you want to host or create content for RMC-14, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
+If you want to host or create content for DwarfMC, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
 
 ## Links
 
-[RMC-14 Community Wiki](https://wiki.rouny-ss14.com/) | [Discord](https://discord.gg/rouny) | [SS14 Steam Launcher](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Standalone Launcher Download](https://spacestation14.io/about/nightlies/)
+[SS14 Steam Launcher](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Standalone Launcher Download](https://spacestation14.io/about/nightlies/) | [DwarfMC Issues](https://github.com/0tito/DwarfMarineCorps/issues)
 
 ## Contributing
 
-We are happy to accept contributions from anybody. Get in Discord if you want to help. We've got a [list of issues](https://github.com/RMC-14/RMC-14/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
+We are happy to accept contributions from anybody. We've got a [list of issues](https://github.com/0tito/DwarfMarineCorps/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
 
 ## Contributing Requirements
 - Understanding how to contribute - Read this resource provided by SS14 and attempt to keep to it. [Pull Request and Changelog Guidelines](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html).
@@ -31,9 +31,11 @@ We are happy to accept contributions from anybody. Get in Discord if you want to
 
 ## License
 
-All RMC-14 specific code for the content repository is licensed under [MIT](https://github.com/space-wizards/space-station-14/blob/master/LICENSE.TXT).
+All DwarfMC-specific code for the content repository is licensed under [MIT](LICENSE.TXT).
 
-All [upstream code](https://github.com/space-wizards/space-station-14) is licensed under [MIT](https://github.com/space-wizards/space-station-14/blob/master/LICENSE-UPSTREAM.TXT).
+DwarfMC is a fork of RMC-14. Code inherited from RMC-14 remains under the [MIT license](LICENSE.TXT) with its original copyright notice.
+
+All [upstream code](https://github.com/space-wizards/space-station-14) is licensed under [MIT](LICENSE-UPSTREAM.TXT).
 
 Most assets are licensed under [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/) unless stated otherwise. Assets have their license and the copyright in the metadata file. [Example](https://github.com/space-wizards/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json).
 

@@ -1,4 +1,4 @@
-﻿rmc-guide-entry-rmc = RMC14 Guide
+﻿rmc-guide-entry-rmc = DwarfMC Guide
 rmc-guide-entry-rules = Rules
 rmc-guide-entry-rules-zero-tolerance = Zero Tolerance
 rmc-guide-entry-rules-language = Server Language

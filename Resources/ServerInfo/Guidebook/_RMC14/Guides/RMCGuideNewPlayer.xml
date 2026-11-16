@@ -3,7 +3,7 @@
   # New player guides
 
   - You can use the examine key [color=yellow][bold][keybind="ExamineEntity"][/bold][/color] to examine any entities in the guidebook.
-  - Make sure to set up your keybinds the way you like, and check out RMC14 specific keybinds!
+  - Make sure to set up your keybinds the way you like, and check out DwarfMC specific keybinds!
 
   ## Marine
   - [textlink="Your first day as a rifleman!" link="RMCGuideRoleRifleman"]
@@ -16,7 +16,7 @@
   <Box>You can change your keybinds at any time here:</Box>
   <Box Orientation="Vertical"><CommandButton Text="ui-options-tab-controls" Command="options 2"/></Box>
 
-  ## RMC-14 Special Keys
+  ## DwarfMC Special Keys
   - [color=yellow][bold][keybind="CMUniqueAction"][/bold][/color]: Weapon action (shotgun pumping, open grenade launchers)
   - [color=yellow][bold][keybind="CMXenoWideSwing"][/bold][/color]: Xenonid wide melee attack.
   - [color=yellow][bold][keybind="RMCActivateAttachableUnderbarrel"][/bold][/color]: Activate underbarrel attachment.

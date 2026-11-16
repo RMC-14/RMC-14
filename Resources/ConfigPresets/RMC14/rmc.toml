@@ -9,7 +9,7 @@ new_player_threshold = 600
 alert.explosion_min_intensity = -1
 
 [adminlogs]
-server_name = "rouny"
+server_name = "dwarf"
 
 [atmos]
 space_wind = false
@@ -63,14 +63,8 @@ flavor_text = true
 id_job_length = 50
 
 [infolinks]
-#appeal = "https://appeal.rouny-ss14.com"
-bug_report = "https://github.com/RMC-14/RMC-14/issues/new?assignees=&labels=&projects=&template=issue_report.md&title="
-discord = "https://discord.gg/rouny"
-#forum = "https://forum.rouny-ss14.com"
-github = "https://github.com/RMC-14/RMC-14"
-patreon = "https://www.patreon.com/RMC14"
-#website = ""
-wiki = "https://wiki.rouny-ss14.com"
+bug_report = "https://github.com/0tito/DwarfMarineCorps/issues/new?assignees=&labels=&projects=&template=issue_report.md&title="
+github = "https://github.com/0tito/DwarfMarineCorps"
 
 [net]
 tickrate = 25
@@ -95,9 +89,6 @@ max_uncompressed_size = 8388608
 auto_record_temp_dir = "recording"
 auto_record_name = "done/{year}_{month}_{day}-{hour}_{minute}-round_{round}.zip"
 
-[rmc]
-discord_account_linking_message_link = "https://discord.com/channels/1168210010233376858/1256765329002991679/1256767294839980132"
-
 [server]
 rules_file = "RMCOverview"
 default_guide = "RMC14"
@@ -118,7 +109,6 @@ auto_call_time = 0
 # The status server is the TCP side, used by the launcher to determine engine version, etc.
 # To be clear: Disabling it makes the launcher unable to connect!
 enabled = true
-privacy_policy_link = "https://wiki.rouny-ss14.com/wiki/Privacy_Policy"
 privacy_policy_identifier = "rmc14"
 privacy_policy_version = "2025-04-12"
 

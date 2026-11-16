@@ -1,4 +1,4 @@
-ui-options-header-rmc = RMC14
+ui-options-header-rmc = DwarfMC
 
 ui-options-function-rmc-activate-attachable-barrel = Activate barrel attachment
 ui-options-function-rmc-activate-attachable-rail = Activate rail attachment

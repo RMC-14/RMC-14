@@ -1,4 +1,4 @@
-﻿cm-ui-rmc14 = RMC14
+﻿cm-ui-rmc14 = DwarfMC
 
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:

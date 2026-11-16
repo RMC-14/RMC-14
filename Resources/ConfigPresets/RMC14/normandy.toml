@@ -1,15 +1,15 @@
 ﻿[adminlogs]
-server_name = "normandy"
+server_name = "dwarf-normandy"
 
 [game]
-desc = "Official RMC special PvE gamemode, run by a gamemaster."
-hostname = "[EN][HRP] PvE Rouny's Marine Corps Normandy [US East]"
+desc = "Official DwarfMC special PvE gamemode, run by a gamemaster."
+hostname = "[EN][HRP] PvE Dwarf Marine Corps 14 Normandy [US East]"
 
 [hub]
 tags = "lang:en,region:am_n_e,rp:high"
 
 [loki]
-name = "normandy"
+name = "dwarf-normandy"
 
 [rmc]
 planet_map_vote = false
