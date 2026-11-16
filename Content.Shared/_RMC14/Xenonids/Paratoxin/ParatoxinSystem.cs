@@ -217,8 +217,7 @@ public sealed class ParatoxinSystem : EntitySystem
             RemCompDeferred<CatalyticBuffComponent>(uid);
             _armor.UpdateArmorValue(uid);
             _speed.RefreshMovementSpeedModifiers(uid);
-            if (_net.IsServer)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-catalytic-tail-stab-buff-expire"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-catalytic-tail-stab-buff-expire"), uid, uid, PopupType.SmallCaution);
         }
 
         // Damage runs on server only, but has to run before shared predicted code that decrements stacks.
