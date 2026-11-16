@@ -308,6 +308,13 @@ public sealed class VehicleLockSystem : EntitySystem
         }
 
         vehicleLock.Locked = !vehicleLock.Locked;
+        if (vehicleLock.Locked &&                          
+            TryComp(user, out NpcFactionMemberComponent? member) &&
+            !vehicleLock.Factions.SetEquals(member.Factions))
+        {
+            SetFactionFromOccupant(vehicle, user);
+        }
+
         Dirty(vehicle, vehicleLock);
         RefreshLockAction(vehicle, vehicleLock);
         _popup.PopupEntity(
