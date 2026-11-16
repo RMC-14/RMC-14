@@ -211,7 +211,7 @@ public sealed class ParatoxinSystem : EntitySystem
         var queryBuff = EntityQueryEnumerator<CatalyticBuffComponent>();
         while (queryBuff.MoveNext(out var uid, out var buff))
         {
-            if (time < buff.ExpiresAt)
+            if (!buff.Running || time < buff.ExpiresAt)
                 continue;
 
             RemCompDeferred<CatalyticBuffComponent>(uid);
@@ -227,7 +227,7 @@ public sealed class ParatoxinSystem : EntitySystem
             var queryDamage = EntityQueryEnumerator<ParatoxinAffectedComponent, DamageableComponent>();
             while (queryDamage.MoveNext(out var uid, out var paratoxin, out var damage))
             {
-                if (time < paratoxin.NextEffectTime)
+                if (!paratoxin.Running || time < paratoxin.NextEffectTime)
                     continue;
 
                 if (!damage.DamagePerGroup.TryGetValue(paratoxin.DamageGroup, out var oxy))
@@ -252,7 +252,7 @@ public sealed class ParatoxinSystem : EntitySystem
         var query = EntityQueryEnumerator<ParatoxinAffectedComponent>();
         while (query.MoveNext(out var uid, out var paratoxin))
         {
-            if (time < paratoxin.NextDecrementTime)
+            if (!paratoxin.Running || time < paratoxin.NextDecrementTime)
                 continue;
 
             TryChangeStacks(uid, null, -1, time, false);
