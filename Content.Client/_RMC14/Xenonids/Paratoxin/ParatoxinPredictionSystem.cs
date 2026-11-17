@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared._RMC14.Xenonids.Paratoxin;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.GameTicking;
