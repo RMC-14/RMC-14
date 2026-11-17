@@ -8,25 +8,30 @@ using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.UserInterface;
 
-public sealed class RMCIconRect : TextureRect
+public sealed class RMCIconRect : Label
 {
+    private const float GlyphScale = 0.6f;
+
     private readonly IResourceCache _resourceCache;
 
     private Color _idleColor = RMCIcons.Idle;
     private Color _hoverColor = RMCIcons.Hover;
     private bool _hovered;
+    private float _iconSize;
 
     public RMCIconRect()
     {
         _resourceCache = IoCManager.Resolve<IResourceCache>();
-        Stretch = StretchMode.KeepAspectCentered;
+        Align = AlignMode.Center;
+        VAlign = VAlignMode.Center;
         VerticalAlignment = VAlignment.Center;
+        IconSize = 16;
         UpdateColor();
     }
 
-    public RMCIconRect(string path, float size) : this()
+    public RMCIconRect(string icon, float size) : this()
     {
-        SetIcon(path);
+        SetIcon(icon);
         IconSize = size;
     }
 
@@ -52,13 +57,18 @@ public sealed class RMCIconRect : TextureRect
 
     public float IconSize
     {
-        get => SetSize.X;
-        set => SetSize = new Vector2(value, value);
+        get => _iconSize;
+        set
+        {
+            _iconSize = value;
+            SetSize = new Vector2(value, value);
+            FontOverride = _resourceCache.GetFont(RMCIcons.FontPath, Math.Max(1, (int) MathF.Round(value * GlyphScale)));
+        }
     }
 
-    public void SetIcon(string path)
+    public void SetIcon(string icon)
     {
-        Texture = _resourceCache.GetTexture(path);
+        Text = icon;
     }
 
     public void SetHovered(bool hovered)
@@ -75,6 +85,6 @@ public sealed class RMCIconRect : TextureRect
 
     private void UpdateColor()
     {
-        ModulateSelfOverride = _hovered ? _hoverColor : _idleColor;
+        FontColorOverride = _hovered ? _hoverColor : _idleColor;
     }
 }
