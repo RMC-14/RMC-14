@@ -11,11 +11,26 @@ public static class RMCMachineUiStyle
 {
     public const string WatermarkPath = "/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png";
     public const string ButtonFontPath = "/Fonts/RobotoMono/RobotoMono-Regular.ttf";
+    public const string RegularFontPath = "/Fonts/NotoSans/NotoSans-Regular.ttf";
     public const string BoldFontPath = "/Fonts/NotoSans/NotoSans-Bold.ttf";
 
-    public static readonly Color WindowColor = Color.FromHex("#1F2538");
+    public const int TitleFontSize = 11;
+    public const int CloseFontSize = 16;
+
+    public static readonly Color WindowColor = Color.FromHex("#252832");
+    public static readonly Color WindowBorderColor = Color.FromHex("#171717");
     public static readonly Color LabelColor = Color.FromHex("#7D8EA6");
     public static readonly Color FieldColor = Color.FromHex("#171C2A");
+
+    public static readonly Color TitleBarColor = Color.FromHex("#1C1E25");
+    public static readonly Color TitleTextColor = Color.White.WithAlpha(0.75f);
+    public static readonly Color CloseTextColor = Color.White.WithAlpha(0.375f);
+    public static readonly Color CloseHoverColor = Color.FromHex("#CC0000");
+
+    public static readonly Color ScrollTrackColor = Color.FromHex("#1C1E25");
+    public static readonly Color ScrollThumbColor = Color.FromHex("#515769");
+    public static readonly Color ScrollThumbHoverColor = Color.FromHex("#6B7080");
+    public static readonly Color ScrollThumbGrabbedColor = Color.FromHex("#858996");
 
     public static readonly Color ButtonColor = Color.FromHex("#AE7F37");
     public static readonly Color ButtonSelectedColor = Color.FromHex("#E4C69A");
@@ -39,6 +54,11 @@ public static class RMCMachineUiStyle
     public static Font ButtonFont(IResourceCache cache)
     {
         return cache.GetFont(ButtonFontPath, 12);
+    }
+
+    public static Font RegularFont(IResourceCache cache, int size = 12)
+    {
+        return cache.GetFont(RegularFontPath, size);
     }
 
     public static Font BoldFont(IResourceCache cache)
