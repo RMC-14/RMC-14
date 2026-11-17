@@ -3,7 +3,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
 
-namespace Content.Client._RMC14.UserInterface;
+namespace Content.Client._RMC14.UserInterface.Machine;
 
 [Virtual]
 public class RMCMachineButton : Button

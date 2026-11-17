@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Maths;
 
-namespace Content.Client._RMC14.UserInterface;
+namespace Content.Client._RMC14.UserInterface.Machine;
 
 public static class RMCMachineUiStyle
 {
