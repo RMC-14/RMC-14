@@ -134,5 +134,4 @@
     state: oob
   - type: Area
     alwaysPowered: true
-    excludeFromTacMapBounds: true
-    excludeFromTacMapRender: true
+    excludeFromTacticalMap: true

@@ -37,8 +37,7 @@
     unweedable: true
     weatherEnabled: false
     alwaysPowered: true
-    excludeFromTacMapBounds: true
-    excludeFromTacMapRender: true
+    excludeFromTacticalMap: true
 
 - type: entity
   parent: RMCAreaStrata

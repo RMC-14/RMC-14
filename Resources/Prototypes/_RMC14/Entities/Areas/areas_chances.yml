@@ -68,8 +68,7 @@
     noTunnel: true
     unweedable: true
     weatherEnabled: false
-    excludeFromTacMapBounds: true
-    excludeFromTacMapRender: true
+    excludeFromTacticalMap: true
     alwaysPowered: true
 
 - type: entity

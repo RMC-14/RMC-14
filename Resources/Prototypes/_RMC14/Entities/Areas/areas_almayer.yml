@@ -1380,8 +1380,7 @@
     avoidBioscan: true
     noTunnel: true
     unweedable: false
-    excludeFromTacMapBounds: true
-    excludeFromTacMapRender: true
+    excludeFromTacticalMap: true
 
 - type: entity
   parent: RMCAreaAlmayerEngineering
