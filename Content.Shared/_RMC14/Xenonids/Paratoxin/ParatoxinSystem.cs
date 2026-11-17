@@ -85,7 +85,7 @@ public sealed class ParatoxinSystem : EntitySystem
     {
         TryChangeStacks(args.Target, args.Shooter, spit.Comp.StacksToApply, popup: spit.Comp.ShowPopup);
 
-        RaiseLocalEvent(new ParatoxinApplicationEvent(args.Target, spit.Comp.StacksToApply));
+        RaiseLocalEvent(new ParatoxinApplicationEvent(spit, args.Target, spit.Comp.StacksToApply));
     }
 
     private void OnParatoxinSlashesHit(Entity<ParatoxinCoatedSlashesComponent> xeno, ref MeleeHitEvent args)
@@ -268,8 +268,9 @@ public sealed class ParatoxinSystem : EntitySystem
     }
 }
 
-public sealed class ParatoxinApplicationEvent(EntityUid target, int stacksToApply) : EntityEventArgs
+public sealed class ParatoxinApplicationEvent(EntityUid shot, EntityUid target, int stacksToApply) : EntityEventArgs
 {
+    public readonly EntityUid Shot = shot;
     public readonly EntityUid Target = target;
     public readonly int StacksToApply = stacksToApply;
 }

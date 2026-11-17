@@ -1,6 +1,9 @@
 using Content.Shared._RMC14.Xenonids.Paratoxin;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.GameTicking;
+using Robust.Client.Player;
 using Robust.Client.Timing;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Paratoxin;
@@ -15,9 +18,10 @@ namespace Content.Client._RMC14.Xenonids.Paratoxin;
 public sealed class ParatoxinPredictionSystem : EntitySystem
 {
     [Dependency] private readonly ParatoxinSystem _paratoxinSystem = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IClientGameTiming _timing = default!;
 
-    private Queue<(GameTick Tick, EntityUid Target, int Stacks)> _predictedParatoxinApplications = new();
+    private readonly Queue<(GameTick Tick, EntityUid Target, int ShotId, int Stacks)> _predictedParatoxinApplications = new();
 
     public override void Initialize()
     {
@@ -25,6 +29,8 @@ public sealed class ParatoxinPredictionSystem : EntitySystem
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<ParatoxinApplicationEvent>(HandleParatoxinApplicationEvent);
+
+        UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
     public void OnRoundRestart(RoundRestartCleanupEvent ev)
@@ -34,9 +40,31 @@ public sealed class ParatoxinPredictionSystem : EntitySystem
 
     private void HandleParatoxinApplicationEvent(ParatoxinApplicationEvent msg)
     {
-        if (_timing.IsFirstTimePredicted)
+        var isClientShot = HasComp<XenoClientProjectileShotComponent>(msg.Shot);
+        var shot = CompOrNull<XenoProjectileShotComponent>(msg.Shot);
+        var shooter = shot?.ShooterEnt;
+        var shotId = shot?.Id ?? 0;
+
+        if (shooter != _player.LocalEntity)
+            return;
+
+        if (_timing.IsFirstTimePredicted && isClientShot)
         {
-            _predictedParatoxinApplications.Enqueue((_timing.CurTick, msg.Target, msg.StacksToApply));
+            _predictedParatoxinApplications.Enqueue((_timing.CurTick, msg.Target, shotId, msg.StacksToApply));
+        }
+        else if (!isClientShot)
+        {
+            // this is a real/non-predicted hit, remove the predicted application for this shot if there is one
+            var count = _predictedParatoxinApplications.Count;
+            for (var i = 0; i < count; ++i)
+            {
+                var item = _predictedParatoxinApplications.Dequeue();
+
+                if (shotId == item.ShotId)
+                    continue;
+
+                _predictedParatoxinApplications.Enqueue(item);
+            }
         }
     }
 
@@ -50,7 +78,10 @@ public sealed class ParatoxinPredictionSystem : EntitySystem
             _predictedParatoxinApplications.Dequeue();
         }
 
-        foreach (var (tick, target, stacks) in _predictedParatoxinApplications)
+        if (_timing.IsFirstTimePredicted)
+            return;
+
+        foreach (var (tick, target, _, stacks) in _predictedParatoxinApplications)
         {
             if (tick == _timing.CurTick)
             {
