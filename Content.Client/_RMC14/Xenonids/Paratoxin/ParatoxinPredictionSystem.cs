@@ -21,7 +21,7 @@ public sealed class ParatoxinPredictionSystem : EntitySystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IClientGameTiming _timing = default!;
 
-    private Queue<(GameTick Tick, EntityUid Target, EntityUid? Shooter, int ShotId, int Stacks)> _predictedParatoxinApplications = new();
+    private readonly Queue<(GameTick Tick, EntityUid Target, int ShotId, int Stacks)> _predictedParatoxinApplications = new();
 
     public override void Initialize()
     {
@@ -50,7 +50,7 @@ public sealed class ParatoxinPredictionSystem : EntitySystem
 
         if (_timing.IsFirstTimePredicted && isClientShot)
         {
-            _predictedParatoxinApplications.Enqueue((_timing.CurTick, msg.Target, shooter, shotId, msg.StacksToApply));
+            _predictedParatoxinApplications.Enqueue((_timing.CurTick, msg.Target, shotId, msg.StacksToApply));
         }
         else if (!isClientShot)
         {
@@ -59,10 +59,10 @@ public sealed class ParatoxinPredictionSystem : EntitySystem
             for (var i = 0; i < count; ++i)
             {
                 var item = _predictedParatoxinApplications.Dequeue();
-                if (shooter == item.Shooter && shotId == item.ShotId)
-                {
+
+                if (shotId == item.ShotId)
                     continue;
-                }
+
                 _predictedParatoxinApplications.Enqueue(item);
             }
         }
@@ -81,7 +81,7 @@ public sealed class ParatoxinPredictionSystem : EntitySystem
         if (_timing.IsFirstTimePredicted)
             return;
 
-        foreach (var (tick, target, _, _, stacks) in _predictedParatoxinApplications)
+        foreach (var (tick, target, _, stacks) in _predictedParatoxinApplications)
         {
             if (tick == _timing.CurTick)
             {
