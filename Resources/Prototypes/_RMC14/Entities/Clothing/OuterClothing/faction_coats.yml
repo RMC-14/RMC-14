@@ -8,8 +8,23 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_brown.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: jacket-icon
+      map: ["foldedLayer"]
+      visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_brown.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
 
 - type: entity
   parent: RMCCoatBureauTrenchCoatBrown
@@ -70,8 +85,23 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/FurCoat/fur_coat.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: jacket-icon
+      map: ["foldedLayer"]
+      visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/FurCoat/fur_coat.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
 
 - type: entity
   parent: RMCCoatExpensiveFur
