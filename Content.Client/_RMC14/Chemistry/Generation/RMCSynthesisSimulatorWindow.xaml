@@ -2,16 +2,13 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Generation"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:machine="clr-namespace:Content.Client._RMC14.UserInterface.Machine"
     Title="Chemical Simulator" MinSize="940 470">
     <PanelContainer>
-        <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#1F2538" />
-        </PanelContainer.PanelOverride>
         <TextureRect TexturePath="/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
                      ModulateSelfOverride="#FFFFFF18" Stretch="KeepCentered" MouseFilter="Ignore"
                      HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <ScrollContainer HScrollEnabled="False" VScrollEnabled="True">
+        <machine:RMCMachineScrollContainer HScrollEnabled="False" VScrollEnabled="True">
             <BoxContainer Orientation="Horizontal" Margin="4">
                 <!-- Left column: status, mode, actions -->
                 <BoxContainer Orientation="Vertical" MinWidth="260" HorizontalExpand="True" SizeFlagsStretchRatio="2" Margin="0 0 2 0">
@@ -52,10 +49,10 @@
                                 </PanelContainer.PanelOverride>
                             </PanelContainer>
                             <GridContainer Columns="2" HSeparationOverride="2" VSeparationOverride="2" Margin="6 4 6 5">
-                                <ui:RMCMachineButton Name="AmplifyButton" Access="Public" HorizontalExpand="True" />
-                                <ui:RMCMachineButton Name="SuppressButton" Access="Public" HorizontalExpand="True" />
-                                <ui:RMCMachineButton Name="AddButton" Access="Public" HorizontalExpand="True" />
-                                <ui:RMCMachineButton Name="RelateButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="AmplifyButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="SuppressButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="AddButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="RelateButton" Access="Public" HorizontalExpand="True" />
                             </GridContainer>
                         </BoxContainer>
                     </PanelContainer>
@@ -73,12 +70,12 @@
                             </PanelContainer>
                             <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="2">
                                 <BoxContainer Name="SimulateCancelSlot" Access="Public">
-                                    <ui:RMCMachineButton Name="SimulateButton" Access="Public" HorizontalExpand="True" />
-                                    <ui:RMCMachineButton Name="CancelButton" Access="Public" HorizontalExpand="True" Visible="False" />
+                                    <machine:RMCMachineButton Name="SimulateButton" Access="Public" HorizontalExpand="True" />
+                                    <machine:RMCMachineButton Name="CancelButton" Access="Public" HorizontalExpand="True" Visible="False" />
                                 </BoxContainer>
-                                <ui:RMCMachineButton Name="OverrideButton" Access="Public" HorizontalExpand="True" ToggleMode="True" />
-                                <ui:RMCMachineButton Name="EjectTargetButton" Access="Public" HorizontalExpand="True" />
-                                <ui:RMCMachineButton Name="EjectReferenceButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="OverrideButton" Access="Public" HorizontalExpand="True" ToggleMode="True" />
+                                <machine:RMCMachineButton Name="EjectTargetButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="EjectReferenceButton" Access="Public" HorizontalExpand="True" />
                             </BoxContainer>
                         </BoxContainer>
                     </PanelContainer>
@@ -151,12 +148,12 @@
                             </PanelContainer>
                             <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="2">
                                 <BoxContainer Name="RecipeCandidatesBox" Access="Public" Orientation="Vertical" SeparationOverride="2" />
-                                <ui:RMCMachineButton Name="FinalizeButton" Access="Public" Disabled="True" Margin="0 2 0 0" />
+                                <machine:RMCMachineButton Name="FinalizeButton" Access="Public" Disabled="True" Margin="0 2 0 0" />
                             </BoxContainer>
                         </BoxContainer>
                     </PanelContainer>
                 </BoxContainer>
             </BoxContainer>
-        </ScrollContainer>
+        </machine:RMCMachineScrollContainer>
     </PanelContainer>
 </controls:RMCSynthesisSimulatorWindow>

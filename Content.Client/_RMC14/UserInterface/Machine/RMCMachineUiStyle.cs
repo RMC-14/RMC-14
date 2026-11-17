@@ -5,17 +5,32 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Maths;
 
-namespace Content.Client._RMC14.UserInterface;
+namespace Content.Client._RMC14.UserInterface.Machine;
 
 public static class RMCMachineUiStyle
 {
     public const string WatermarkPath = "/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png";
     public const string ButtonFontPath = "/Fonts/RobotoMono/RobotoMono-Regular.ttf";
+    public const string RegularFontPath = "/Fonts/NotoSans/NotoSans-Regular.ttf";
     public const string BoldFontPath = "/Fonts/NotoSans/NotoSans-Bold.ttf";
 
-    public static readonly Color WindowColor = Color.FromHex("#1F2538");
+    public const int TitleFontSize = 11;
+    public const int CloseFontSize = 16;
+
+    public static readonly Color WindowColor = Color.FromHex("#252832");
+    public static readonly Color WindowBorderColor = Color.FromHex("#171717");
     public static readonly Color LabelColor = Color.FromHex("#7D8EA6");
     public static readonly Color FieldColor = Color.FromHex("#171C2A");
+
+    public static readonly Color TitleBarColor = Color.FromHex("#1C1E25");
+    public static readonly Color TitleTextColor = Color.White.WithAlpha(0.75f);
+    public static readonly Color CloseTextColor = Color.White.WithAlpha(0.375f);
+    public static readonly Color CloseHoverColor = Color.FromHex("#CC0000");
+
+    public static readonly Color ScrollTrackColor = Color.FromHex("#1C1E25");
+    public static readonly Color ScrollThumbColor = Color.FromHex("#515769");
+    public static readonly Color ScrollThumbHoverColor = Color.FromHex("#6B7080");
+    public static readonly Color ScrollThumbGrabbedColor = Color.FromHex("#858996");
 
     public static readonly Color ButtonColor = Color.FromHex("#AE7F37");
     public static readonly Color ButtonSelectedColor = Color.FromHex("#E4C69A");
@@ -39,6 +54,11 @@ public static class RMCMachineUiStyle
     public static Font ButtonFont(IResourceCache cache)
     {
         return cache.GetFont(ButtonFontPath, 12);
+    }
+
+    public static Font RegularFont(IResourceCache cache, int size = 12)
+    {
+        return cache.GetFont(RegularFontPath, size);
     }
 
     public static Font BoldFont(IResourceCache cache)
@@ -69,7 +89,7 @@ public static class RMCMachineUiStyle
     {
         panel.PanelOverride = new RMCStripedStyleBox { BackgroundColor = color };
         label.Text = text;
-        label.FontColorOverride = Luminance(color) > 0.35f ? Color.Black : Color.White;
+        label.FontColorOverride = color == NoticeColor ? Color.Black : Color.White;
         label.FontOverride = font;
     }
 
@@ -80,15 +100,5 @@ public static class RMCMachineUiStyle
         bar.MinValue = 0;
         bar.MaxValue = 1;
         bar.Value = Math.Clamp(ratio, 0f, 1f);
-    }
-
-    private static float Luminance(Color color)
-    {
-        static float Linear(float c)
-        {
-            return c <= 0.03928f ? c / 12.92f : MathF.Pow((c + 0.055f) / 1.055f, 2.4f);
-        }
-
-        return 0.2126f * Linear(color.R) + 0.7152f * Linear(color.G) + 0.0722f * Linear(color.B);
     }
 }

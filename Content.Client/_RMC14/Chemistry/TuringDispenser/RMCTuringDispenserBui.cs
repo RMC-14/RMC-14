@@ -16,7 +16,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
-using static Content.Client._RMC14.UserInterface.RMCMachineUiStyle;
+using static Content.Client._RMC14.UserInterface.Machine.RMCMachineUiStyle;
 
 namespace Content.Client._RMC14.Chemistry.TuringDispenser;
 

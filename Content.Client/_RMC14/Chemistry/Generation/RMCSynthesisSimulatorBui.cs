@@ -12,7 +12,7 @@ using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using static Content.Client._RMC14.Chemistry.Generation.RMCSynthesisSimulatorWindow;
-using static Content.Client._RMC14.UserInterface.RMCMachineUiStyle;
+using static Content.Client._RMC14.UserInterface.Machine.RMCMachineUiStyle;
 
 namespace Content.Client._RMC14.Chemistry.Generation;
 

@@ -2,12 +2,9 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Centrifuge"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:machine="clr-namespace:Content.Client._RMC14.UserInterface.Machine"
     Title="Chemical Centrifuge" MinSize="320 300">
     <PanelContainer>
-        <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#1F2538" />
-        </PanelContainer.PanelOverride>
         <TextureRect TexturePath="/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
                      ModulateSelfOverride="#FFFFFF18" Stretch="KeepCentered" MouseFilter="Ignore"
                      HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -28,9 +25,9 @@
                             <Label Text="Label:" MinWidth="60" FontColorOverride="#7D8EA6" VerticalAlignment="Center" />
                             <LineEdit Name="LabelEdit" Access="Public" PlaceHolder="No label" HorizontalExpand="True" />
                         </BoxContainer>
-                        <ui:RMCMachineButton Name="ModeButton" Access="Public" HorizontalExpand="True" Margin="0 2 0 0" />
-                        <ui:RMCMachineButton Name="SourceButton" Access="Public" HorizontalExpand="True" />
-                        <ui:RMCMachineButton Name="ConnectButton" Access="Public" HorizontalExpand="True" />
+                        <machine:RMCMachineButton Name="ModeButton" Access="Public" HorizontalExpand="True" Margin="0 2 0 0" />
+                        <machine:RMCMachineButton Name="SourceButton" Access="Public" HorizontalExpand="True" />
+                        <machine:RMCMachineButton Name="ConnectButton" Access="Public" HorizontalExpand="True" />
                         <PanelContainer Name="ConnectionPanel" Access="Public" Margin="0 2 0 0">
                             <Label Name="ConnectionLabel" Access="Public" Margin="5 1" />
                         </PanelContainer>
@@ -53,12 +50,12 @@
                         <BoxContainer Orientation="Horizontal">
                             <Label Text="Input:" MinWidth="60" FontColorOverride="#7D8EA6" VerticalAlignment="Center" />
                             <Label Name="InputStatusLabel" Access="Public" HorizontalExpand="True" VerticalAlignment="Center" />
-                            <ui:RMCMachineButton Name="EjectInputButton" Access="Public" Text="Eject" />
+                            <machine:RMCMachineButton Name="EjectInputButton" Access="Public" Text="Eject" />
                         </BoxContainer>
                         <BoxContainer Orientation="Horizontal">
                             <Label Text="Output:" MinWidth="60" FontColorOverride="#7D8EA6" VerticalAlignment="Center" />
                             <Label Name="OutputStatusLabel" Access="Public" HorizontalExpand="True" VerticalAlignment="Center" />
-                            <ui:RMCMachineButton Name="EjectOutputButton" Access="Public" Text="Eject" />
+                            <machine:RMCMachineButton Name="EjectOutputButton" Access="Public" Text="Eject" />
                         </BoxContainer>
                     </BoxContainer>
                 </BoxContainer>

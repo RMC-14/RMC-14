@@ -2,7 +2,7 @@ using System.Numerics;
 using Robust.Client.Graphics;
 using Robust.Shared.Maths;
 
-namespace Content.Client._RMC14.UserInterface;
+namespace Content.Client._RMC14.UserInterface.Machine;
 
 public sealed class RMCStripedStyleBox : StyleBox
 {

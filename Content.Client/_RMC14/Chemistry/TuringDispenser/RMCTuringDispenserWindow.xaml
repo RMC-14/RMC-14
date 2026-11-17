@@ -2,16 +2,13 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.TuringDispenser"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:machine="clr-namespace:Content.Client._RMC14.UserInterface.Machine"
     Title="Turing Dispenser" MinSize="560 600">
     <PanelContainer>
-        <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#1F2538" />
-        </PanelContainer.PanelOverride>
         <TextureRect TexturePath="/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
                      ModulateSelfOverride="#FFFFFF18" Stretch="KeepCentered" MouseFilter="Ignore"
                      HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <ScrollContainer HScrollEnabled="False" VScrollEnabled="True">
+        <machine:RMCMachineScrollContainer HScrollEnabled="False" VScrollEnabled="True">
             <BoxContainer Orientation="Horizontal" Margin="4">
                 <!-- Left column: controls -->
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="0 0 2 0">
@@ -34,18 +31,18 @@
                                 <PanelContainer Name="StatusPanel" Access="Public" Margin="0 2 0 0">
                                     <Label Name="StatusLabel" Access="Public" Margin="5 1" />
                                 </PanelContainer>
-                                <ui:RMCMachineButton Name="ClearMemoryButton" Access="Public" HorizontalExpand="True" Margin="0 2 0 0" />
-                                <ui:RMCMachineButton Name="RunProgramButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="ClearMemoryButton" Access="Public" HorizontalExpand="True" Margin="0 2 0 0" />
+                                <machine:RMCMachineButton Name="RunProgramButton" Access="Public" HorizontalExpand="True" />
                                 <PanelContainer Name="BoxAlertPanel" Access="Public" Margin="0 3 0 0">
                                     <Label Name="BoxStatusLabel" Access="Public" Margin="5 1" />
                                 </PanelContainer>
-                                <ui:RMCMachineButton Name="SaveToMemoryButton" Access="Public" HorizontalExpand="True" Margin="0 2 0 0" />
-                                <ui:RMCMachineButton Name="EjectBoxButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="SaveToMemoryButton" Access="Public" HorizontalExpand="True" Margin="0 2 0 0" />
+                                <machine:RMCMachineButton Name="EjectBoxButton" Access="Public" HorizontalExpand="True" />
                                 <PanelContainer Name="BeakerAlertPanel" Access="Public" Margin="0 3 0 0">
                                     <Label Name="BeakerStatusLabel" Access="Public" Margin="5 1" />
                                 </PanelContainer>
-                                <ui:RMCMachineButton Name="DisposeBeakerButton" Access="Public" HorizontalExpand="True" Margin="0 2 0 0" />
-                                <ui:RMCMachineButton Name="EjectBeakerButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="DisposeBeakerButton" Access="Public" HorizontalExpand="True" Margin="0 2 0 0" />
+                                <machine:RMCMachineButton Name="EjectBeakerButton" Access="Public" HorizontalExpand="True" />
                             </BoxContainer>
                         </BoxContainer>
                     </PanelContainer>
@@ -72,9 +69,9 @@
                                            VerticalAlignment="Center" />
                                     <Control Name="CyclesContainer" Access="Public" />
                                 </BoxContainer>
-                                <ui:RMCMachineButton Name="AutoRunButton" Access="Public" HorizontalExpand="True" Margin="0 3 0 0" />
-                                <ui:RMCMachineButton Name="SmartLinkButton" Access="Public" HorizontalExpand="True" />
-                                <ui:RMCMachineButton Name="OutputModeButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="AutoRunButton" Access="Public" HorizontalExpand="True" Margin="0 3 0 0" />
+                                <machine:RMCMachineButton Name="SmartLinkButton" Access="Public" HorizontalExpand="True" />
+                                <machine:RMCMachineButton Name="OutputModeButton" Access="Public" HorizontalExpand="True" />
                             </BoxContainer>
                         </BoxContainer>
                     </PanelContainer>
@@ -139,6 +136,6 @@
                     </PanelContainer>
                 </BoxContainer>
             </BoxContainer>
-        </ScrollContainer>
+        </machine:RMCMachineScrollContainer>
     </PanelContainer>
 </controls:RMCTuringDispenserWindow>

@@ -2,12 +2,9 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Xenonids.Biomass"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:machine="clr-namespace:Content.Client._RMC14.UserInterface.Machine"
     Title="Biomass Analyzer" MinSize="770 680" SetSize="950 740">
     <PanelContainer>
-        <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#1F2538" />
-        </PanelContainer.PanelOverride>
         <TextureRect TexturePath="/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
                      ModulateSelfOverride="#FFFFFF18" Stretch="KeepCentered" MouseFilter="Ignore"
                      HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -25,9 +22,9 @@
                     </PanelContainer>
                     <BoxContainer Orientation="Vertical" Margin="6 4 6 5" SeparationOverride="2">
                         <BoxContainer Orientation="Horizontal" SeparationOverride="4">
-                            <ui:RMCMachineButton Name="EjectOrganButton" Access="Public" HorizontalExpand="True" />
-                            <ui:RMCMachineButton Name="ProcessOrganButton" Access="Public" HorizontalExpand="True" />
-                            <ui:RMCMachineButton Name="AutoProcessButton" Access="Public" MinWidth="120" />
+                            <machine:RMCMachineButton Name="EjectOrganButton" Access="Public" HorizontalExpand="True" />
+                            <machine:RMCMachineButton Name="ProcessOrganButton" Access="Public" HorizontalExpand="True" />
+                            <machine:RMCMachineButton Name="AutoProcessButton" Access="Public" MinWidth="120" />
                         </BoxContainer>
                         <PanelContainer Name="PointsPanel" Access="Public">
                             <Label Name="PointsLabel" Access="Public" Margin="5 1" />
@@ -59,7 +56,7 @@
                     <BoxContainer Orientation="Horizontal" Margin="6 3">
                         <Label Name="QueueTitleLabel" Access="Public" Text="Process Queue" StyleClasses="LabelKeyText"
                                FontColorOverride="#FFFFFF" VerticalAlignment="Center" HorizontalExpand="True" />
-                        <ui:RMCMachineButton Name="ToggleQueueButton" Access="Public" MinWidth="90" />
+                        <machine:RMCMachineButton Name="ToggleQueueButton" Access="Public" MinWidth="90" />
                     </BoxContainer>
                     <PanelContainer Name="QueueDivider" Access="Public" MinHeight="2">
                         <PanelContainer.PanelOverride>
@@ -67,9 +64,9 @@
                         </PanelContainer.PanelOverride>
                     </PanelContainer>
                     <BoxContainer Name="QueueContent" Access="Public" Orientation="Vertical" Margin="6 4 6 5">
-                        <ScrollContainer MaxHeight="140" HScrollEnabled="False" ReturnMeasure="True">
+                        <machine:RMCMachineScrollContainer MaxHeight="140" HScrollEnabled="False" ReturnMeasure="True">
                             <BoxContainer Name="QueueBox" Access="Public" Orientation="Vertical" SeparationOverride="1" />
-                        </ScrollContainer>
+                        </machine:RMCMachineScrollContainer>
                     </BoxContainer>
                 </BoxContainer>
             </PanelContainer>
@@ -97,9 +94,9 @@
                             <Control MinWidth="1" />
                             <Label Text="Print" SetWidth="170" FontColorOverride="#7D8EA6" />
                         </BoxContainer>
-                        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                        <machine:RMCMachineScrollContainer VerticalExpand="True" HScrollEnabled="False">
                             <BoxContainer Name="UpgradesBox" Access="Public" Orientation="Vertical" />
-                        </ScrollContainer>
+                        </machine:RMCMachineScrollContainer>
                     </BoxContainer>
                 </BoxContainer>
             </PanelContainer>

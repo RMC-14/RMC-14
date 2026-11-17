@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Numerics;
 using Robust.Client.UserInterface.Controls;
 
-namespace Content.Client._RMC14.UserInterface;
+namespace Content.Client._RMC14.UserInterface.Machine;
 
 public sealed class RMCMachineSpinBox : BoxContainer
 {

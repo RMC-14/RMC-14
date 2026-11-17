@@ -1,9 +1,9 @@
-using Content.Client._RMC14.UserInterface;
+using Content.Client._RMC14.UserInterface.Machine;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
-using static Content.Client._RMC14.UserInterface.RMCMachineUiStyle;
+using static Content.Client._RMC14.UserInterface.Machine.RMCMachineUiStyle;
 
 namespace Content.Client._RMC14.Xenonids.Biomass;
 

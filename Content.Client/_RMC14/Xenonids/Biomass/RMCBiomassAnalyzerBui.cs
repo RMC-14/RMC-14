@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client._RMC14.UserInterface;
+using Content.Client._RMC14.UserInterface.Machine;
 using Content.Shared._RMC14.Chemistry.Generation;
 using Content.Shared._RMC14.UserInterface;
 using Content.Shared._RMC14.Xenonids.Biomass;
