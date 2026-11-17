@@ -25,7 +25,7 @@ public sealed class RMCIconRect : Label
         Align = AlignMode.Center;
         VAlign = VAlignMode.Center;
         VerticalAlignment = VAlignment.Center;
-        IconSize = 16;
+        IconSize = 18;
         UpdateColor();
     }
 

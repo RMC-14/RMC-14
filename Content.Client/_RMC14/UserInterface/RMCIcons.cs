@@ -8,15 +8,26 @@ public static class RMCIcons
 {
     public const string FontPath = "/Fonts/FontAwesome/Font Awesome 7 Free-Solid-900.otf";
 
+    public const string ArrowDown = "\uf063";
     public const string ArrowDown19 = "\uf162";
     public const string ArrowDown91 = "\uf886";
     public const string ArrowDownAZ = "\uf15d";
+    public const string ArrowDownLong = "\uf175";
     public const string ArrowDownZA = "\uf881";
     public const string ArrowLeft = "\uf060";
+    public const string ArrowLeftLong = "\uf177";
     public const string ArrowRight = "\uf061";
     public const string ArrowRightLong = "\uf178";
+    public const string ArrowUp = "\uf062";
+    public const string ArrowUp19 = "\uf163";
+    public const string ArrowUp91 = "\uf887";
+    public const string ArrowUpAZ = "\uf15e";
+    public const string ArrowUpLong = "\uf176";
+    public const string ArrowUpZA = "\uf882";
+    public const string ArrowsLeftRight = "\uf07e";
     public const string ArrowsRotate = "\uf021";
     public const string ArrowsSplitUpAndLeft = "\ue4bc";
+    public const string ArrowsUpDown = "\uf07d";
     public const string Ban = "\uf05e";
     public const string Bomb = "\uf1e2";
     public const string Book = "\uf02d";
@@ -24,6 +35,9 @@ public static class RMCIcons
     public const string Bullhorn = "\uf0a1";
     public const string Burst = "\ue4dc";
     public const string CaretDown = "\uf0d7";
+    public const string CaretLeft = "\uf0d9";
+    public const string CaretRight = "\uf0da";
+    public const string CaretUp = "\uf0d8";
     public const string Check = "\uf00c";
     public const string ChevronDown = "\uf078";
     public const string ChevronLeft = "\uf053";
@@ -77,6 +91,7 @@ public static class RMCIcons
     public const string Radiation = "\uf7b9";
     public const string Repeat = "\uf363";
     public const string RotateLeft = "\uf2ea";
+    public const string RotateRight = "\uf2f9";
     public const string Server = "\uf233";
     public const string ShieldHalved = "\uf3ed";
     public const string Skull = "\uf54c";
@@ -103,7 +118,7 @@ public static class RMCIcons
         this Button button,
         string icon,
         string text,
-        float size = 14,
+        float size = 16,
         Control.HAlignment alignment = Control.HAlignment.Left,
         Color? fontColor = null)
     {
