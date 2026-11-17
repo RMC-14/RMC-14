@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Updated pill packets to show pills.
-    type: Tweak
-  id: 3256
-  time: '2026-05-31T03:36:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9922
 - author: kleinerstation13
   changes:
   - message: All survivor variants (FORECON, SPP SOF) now have suit storage whitelist.
@@ -4520,5 +4513,12 @@
   id: 3755
   time: '2026-11-16T22:14:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10499
+- author: Vermidia
+  changes:
+  - message: Added Space Grunts, a TRPG, to the rec-vend.
+    type: Add
+  id: 3756
+  time: '2026-11-17T02:44:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10458
 Name: RMC14
 Order: -1
