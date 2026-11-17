@@ -33,6 +33,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanister
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -80,6 +81,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterBicaridine
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -98,6 +100,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterKelotane
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -116,6 +119,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterTricordrazineRevival
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -134,6 +138,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterTricordrazine
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -152,6 +157,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterMeraBic
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -170,6 +176,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterKeloDerm
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
