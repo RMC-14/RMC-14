@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Xenonids.Paratoxin;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.GameTicking;
+using Robust.Client.Player;
 using Robust.Client.Timing;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -17,6 +18,7 @@ namespace Content.Client._RMC14.Xenonids.Paratoxin;
 public sealed class ParatoxinPredictionSystem : EntitySystem
 {
     [Dependency] private readonly ParatoxinSystem _paratoxinSystem = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IClientGameTiming _timing = default!;
 
     private Queue<(GameTick Tick, EntityUid Target, EntityUid? Shooter, int ShotId, int Stacks)> _predictedParatoxinApplications = new();
@@ -39,19 +41,19 @@ public sealed class ParatoxinPredictionSystem : EntitySystem
     private void HandleParatoxinApplicationEvent(ParatoxinApplicationEvent msg)
     {
         var isClientShot = HasComp<XenoClientProjectileShotComponent>(msg.Shot);
+        var shot = CompOrNull<XenoProjectileShotComponent>(msg.Shot);
+        var shooter = shot?.ShooterEnt;
+        var shotId = shot?.Id ?? 0;
+
+        if (shooter != _player.LocalEntity)
+            return;
+
         if (_timing.IsFirstTimePredicted && isClientShot)
         {
-            var shot = CompOrNull<XenoProjectileShotComponent>(msg.Shot);
-            var shooter = shot?.ShooterEnt;
-            var shotId = shot?.Id ?? 0;
             _predictedParatoxinApplications.Enqueue((_timing.CurTick, msg.Target, shooter, shotId, msg.StacksToApply));
         }
         else if (!isClientShot)
         {
-            var shot = CompOrNull<XenoProjectileShotComponent>(msg.Shot);
-            var shooter = shot?.ShooterEnt;
-            var shotId = shot?.Id ?? 0;
-
             // this is a real/non-predicted hit, remove the predicted application for this shot if there is one
             var count = _predictedParatoxinApplications.Count;
             for (var i = 0; i < count; ++i)
