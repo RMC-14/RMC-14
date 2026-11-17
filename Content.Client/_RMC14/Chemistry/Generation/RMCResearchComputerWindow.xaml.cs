@@ -56,7 +56,7 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
         {
             var row = button.AddIconLabel(RMCIcons.ArrowDown19, button.Text ?? string.Empty, 14, fontColor: AmberBright);
             row.Icon.IdleColor = AmberBright;
-            row.Icon.Texture = null;
+            row.SetIcon(string.Empty);
             _sortRows[button] = row;
         }
 
@@ -66,10 +66,7 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
     public void SetSortIcon(Button button, string? icon)
     {
         var row = _sortRows[button];
-        if (icon == null)
-            row.Icon.Texture = null;
-        else
-            row.SetIcon(icon);
+        row.SetIcon(icon ?? string.Empty);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -107,11 +104,11 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
         Tabs.OnTabChanged += SetActiveTab;
     }
 
-    private void AddTabButton(string iconPath, string line1, string line2)
+    private void AddTabButton(string icon, string line1, string line2)
     {
         var index = _tabButtons.Count;
         var tab = new RMCResearchTabButton();
-        tab.Setup(iconPath, line1, line2);
+        tab.Setup(icon, line1, line2);
         tab.OnPressed += _ => Tabs.CurrentTab = index;
         TabBar.AddChild(tab);
         _tabButtons.Add(tab);
@@ -133,9 +130,9 @@ public sealed partial class RMCResearchComputerWindow : DefaultWindow
         box.BackgroundColor = canAfford ? AmberBright : disabledColor ?? Color.Transparent;
     }
 
-    private static Label Icon(Button button, string texturePath, string text)
+    private static Label Icon(Button button, string icon, string text)
     {
-        var row = button.AddIconLabel(texturePath, text, 16, HAlignment.Stretch);
+        var row = button.AddIconLabel(icon, text, 16, HAlignment.Stretch);
         row.Margin = new Thickness(10, 0, 6, 0);
         row.SeparationOverride = 8;
         return row.Label;

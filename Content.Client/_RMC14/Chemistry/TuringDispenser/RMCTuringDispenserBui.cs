@@ -56,8 +56,10 @@ public sealed class RMCTuringDispenserBui : BoundUserInterface, IRefreshableBui
             return;
 
         var autoRow = new RMCTuringDispenserBeakerRow { Id = null };
-        autoRow.Icon.Texture = _resourceCache.GetTexture(RMCIcons.ArrowsRotate);
-        autoRow.Icon.ModulateSelfOverride = ButtonTextColor;
+        autoRow.Icon.Visible = false;
+        autoRow.GlyphIcon.Visible = true;
+        autoRow.GlyphIcon.SetIcon(RMCIcons.ArrowsRotate);
+        autoRow.GlyphIcon.IdleColor = ButtonTextColor;
         autoRow.NameLabel.Text = "Auto (best fit)";
         autoRow.OnPressed += _ => SendPredictedMessage(new RMCTuringDispenserSetPreferredBeakerBuiMsg(null));
         _window.BeakerSelectorContainer.AddChild(autoRow);

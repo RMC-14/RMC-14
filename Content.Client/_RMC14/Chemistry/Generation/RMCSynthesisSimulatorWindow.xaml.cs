@@ -35,12 +35,12 @@ public sealed partial class RMCSynthesisSimulatorWindow : DefaultWindow
         _noticeFont = RMCMachineUiStyle.BoldFont(IoCManager.Resolve<IResourceCache>());
         CreditsLabel.FontOverride = _noticeFont;
 
-        SimulateButton.SetIcon(RMCIcons.Radiation, "SIMULATE");
-        CancelButton.SetIcon(RMCIcons.CircleXmark, "CANCEL");
+        SimulateButton.SetIcon(RMCIcons.Radiation, "SIMULATE").HorizontalAlignment = HAlignment.Left;
+        CancelButton.SetIcon(RMCIcons.CircleXmark, "CANCEL").HorizontalAlignment = HAlignment.Left;
         CancelButton.Accent = ButtonCautionColor;
-        OverrideButton.SetIcon(RMCIcons.HardDrive, "OVERRIDE");
-        EjectTargetButton.SetIcon(RMCIcons.FileImport, "EJECT TARGET");
-        EjectReferenceButton.SetIcon(RMCIcons.FileImport, "EJECT REFERENCE");
+        OverrideButton.SetIcon(RMCIcons.HardDrive, "OVERRIDE").HorizontalAlignment = HAlignment.Left;
+        EjectTargetButton.SetIcon(RMCIcons.FileImport, "EJECT TARGET").HorizontalAlignment = HAlignment.Left;
+        EjectReferenceButton.SetIcon(RMCIcons.FileImport, "EJECT REFERENCE").HorizontalAlignment = HAlignment.Left;
         AmplifyButton.SetIcon(RMCIcons.SquarePlus, "AMPLIFY");
         SuppressButton.SetIcon(RMCIcons.SquareMinus, "SUPPRESS");
         AddButton.SetIcon(RMCIcons.ArrowRight, "ADD");

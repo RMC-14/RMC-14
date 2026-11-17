@@ -1,8 +1,10 @@
 <controls:RMCTuringDispenserBeakerRow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.TuringDispenser">
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.TuringDispenser"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface">
     <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="6">
         <TextureRect Name="Icon" Access="Public" Stretch="KeepAspectCentered" VerticalAlignment="Center" />
+        <ui:RMCIconRect Name="GlyphIcon" Access="Public" IconSize="20" Visible="False" />
         <Label Name="NameLabel" Access="Public" HorizontalExpand="True" VerticalAlignment="Center" />
         <Label Name="StockLabel" Access="Public" VerticalAlignment="Center" />
     </BoxContainer>

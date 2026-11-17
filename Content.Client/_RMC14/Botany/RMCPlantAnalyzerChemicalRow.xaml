@@ -1,8 +1,8 @@
 <BoxContainer xmlns="https://spacestation14.io"
+              xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
               Orientation="Horizontal"
               HorizontalExpand="True">
-    <TextureRect Name="FlaskIcon" Stretch="KeepAspectCentered" SetSize="11 11" Margin="0 0 5 0"
-                 VerticalAlignment="Center" />
+    <ui:RMCIconRect Name="FlaskIcon" IconSize="11" Margin="0 0 5 0" />
     <Label Name="AmountLabel" Margin="0 0 4 0" />
     <Label Name="NameLabel" HorizontalExpand="True" />
 </BoxContainer>

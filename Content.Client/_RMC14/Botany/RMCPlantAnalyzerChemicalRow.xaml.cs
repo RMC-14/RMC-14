@@ -12,12 +12,12 @@ public sealed partial class RMCPlantAnalyzerChemicalRow : BoxContainer
     public RMCPlantAnalyzerChemicalRow()
     {
         RobustXamlLoader.Load(this);
-        FlaskIcon.TexturePath = RMCIcons.Flask;
+        FlaskIcon.SetIcon(RMCIcons.Flask);
     }
 
     public void SetChemical(RMCPlantAnalyzerChemical chem)
     {
-        FlaskIcon.ModulateSelfOverride = chem.Color.WithAlpha(1f);
+        FlaskIcon.IdleColor = chem.Color.WithAlpha(1f);
         AmountLabel.Text = $"{chem.Amount}u";
         NameLabel.Text = chem.Name;
     }

@@ -71,18 +71,18 @@ public class RMCMachineButton : Button
         }
     }
 
-    public RMCIconLabelRow SetIcon(string path, string? text = null, float size = 14)
+    public RMCIconLabelRow SetIcon(string icon, string? text = null, float size = 16)
     {
         if (_iconRow != null)
         {
-            _iconRow.SetIcon(path);
+            _iconRow.SetIcon(icon);
             if (text != null)
                 _iconRow.Label.Text = text;
 
             return _iconRow;
         }
 
-        _iconRow = this.AddIconLabel(path, text ?? Text ?? string.Empty, size, HAlignment.Center);
+        _iconRow = this.AddIconLabel(icon, text ?? Text ?? string.Empty, size, HAlignment.Center);
         _iconRow.Label.FontOverride = _font;
         UpdateStyle();
         return _iconRow;

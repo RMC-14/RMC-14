@@ -55,9 +55,9 @@ public sealed partial class RMCResearchDocumentRow : BoxContainer
         _publishRow.Label.Text = published ? "Unpublish" : "Publish";
     }
 
-    private static RMCIconLabelRow IconButton(Button button, string texturePath, string text)
+    private static RMCIconLabelRow IconButton(Button button, string icon, string text)
     {
-        var row = button.AddIconLabel(texturePath, text, 16, HAlignment.Center, AmberBlack);
+        var row = button.AddIconLabel(icon, text, 16, HAlignment.Center, AmberBlack);
         row.SeparationOverride = 4;
         row.Margin = new Thickness(4, 2);
         return row;

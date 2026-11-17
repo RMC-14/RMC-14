@@ -30,9 +30,9 @@ public sealed partial class RMCResearchTabButton : Button
         SetActive(false);
     }
 
-    public void Setup(string iconPath, string line1, string line2)
+    public void Setup(string icon, string line1, string line2)
     {
-        TabIcon.SetIcon(iconPath);
+        TabIcon.SetIcon(icon);
         Line1Label.Text = line1;
         Line2Label.Text = line2;
     }
