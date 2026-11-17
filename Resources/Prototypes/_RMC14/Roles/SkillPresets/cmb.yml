@@ -39,6 +39,25 @@
       RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
       RMCSkillFireman: 2
 
+- type: entity
+  id: RMCSkillPresetSurvivorFiorinaWarden
+  name: Survivor CMB Prison Warden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 1
+      RMCSkillCqc: 2
+      RMCSkillEndurance: 3
+      RMCSkillEngineer: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillMedical: 1
+      RMCSkillFirearms: 2
+      RMCSkillFireman: 2
+      RMCSkillLeadership: 1
+      RMCSkillOverwatch: 1
+      RMCSkillPolice: 2
+
 # Riot in Progress insert
 - type: entity
   parent: RMCSkillPresetSurvivorMarshal

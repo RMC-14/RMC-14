@@ -1,0 +1,31 @@
+- type: entity
+  parent: RMCWeaponRevolverRSh9
+  id: RMCWeaponRevolverRSh9Custom
+  name: RSh-9 'Peacekeeper' Revolver
+  description: The RSh-9 Assault Revolver is a highly unusual weapon, originally designed for CQB room clearing on request for counter-terrorism units. This particular revolver has had a number of aftermarket modifications made to the grip and barrel, at a great cost to its' ergonomics.
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentLaserSight
+  - type: RMCBattleExecute
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    doAfterBreakOnMove: false
+    ignoreRoof: true
+    shakeAmount: 3
+    requiredSkills:
+      RMCSkillEndurance: 3 # So only Fiorina warden can use the airshot
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/rsh9custom.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/rsh9custom.rsi

@@ -1,0 +1,81 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorFiorinaRiotInProgressCMBMarshal
+  name: rmc-job-name-survivor-bureau-marshal
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBMarshal
+  greeting: rmc-job-greeting-riot-in-progress-CMB-marshal
+  accessGroups:
+  - ColonistSec
+  ranks:
+    RMCRankCMBMarshal: []
+  spawnMenuRoleName: CMB Marshal (Fiorina Special Survivor)
+  icon: "RMCJobIconBureauMarshal"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      preset: RMCSkillPresetSurvivorMarshalCO
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: InnateCommandSpeech
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-cmb-marshal
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBMarshal
+  equipment:
+    id: RMCIDCardCMBMarshal
+    jumpsuit: RMCSwatLeaderCMBUniform
+    outerClothing: RMCArmorM4RMarshallMedium
+    head: CMHeadBeretCMB
+    back: RMCSatchelSecuritySurvivorFillCMBMarshal
+    belt: CMBeltSecurityMarshalFilled
+    eyes: RMCGlassesSecurityBlue
+    ears: RMCHeadsetDistressBureauDamaged
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMCFilled
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchMagazineLargeMP5
+    suitstorage: RMCWeaponSMGMP5Alt
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBMarshal
+  name: cmb marshal spawn point
+  suffix: special survivor, fiorina riot
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBMarshal
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
