@@ -1,0 +1,4 @@
+- files: ["crt_overlay.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 (icons/mob/hud/minimap_overlay.dmi)"
+  source: "https://github.com/cmss13-devs/cmss13/blob/bd741ea1ed05464750d4a5bd14190c0e3067cfc6/icons/mob/hud/minimap_overlay.dmi"
