@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ilysssa
-  changes:
-  - message: Light fixtures not offsetting while map is paused. They now offset without
-      running mapinit.
-    type: Fix
-  id: 3259
-  time: '2026-06-01T08:14:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9663
 - author: Drazamuffin
   changes:
   - message: You can now pick up pet cats and Mr. Wiggles
@@ -4515,5 +4507,17 @@
   id: 3758
   time: '2026-11-18T21:47:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11062
+- author: carccborg
+  changes:
+  - message: Added the M34-T2, an automatic version of the M34-T, for admin spawn
+    type: Add
+  - message: Fixed the firerate of most flamers being too high, from 0.333 to 0.286
+    type: Fix
+  - message: Fixed the firerate of the underbarrel flamer being too high, from 0.333
+      to 0.25
+    type: Tweak
+  id: 3759
+  time: '2026-11-18T21:57:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10783
 Name: RMC14
 Order: -1
