@@ -1,48 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added many different books, some guidebooks, others for decoration.
-    type: Add
-  - message: Added the WEYA Excavator, Laptops, and Notice Board.
-    type: Add
-  - message: Added La Voz, an SPP Magazine equivalent to Orrery and Boots!
-    type: Add
-  - message: Added Packaged samosas as an option in the Hot Foods vendor.
-    type: Add
-  id: 3262
-  time: '2026-06-02T18:50:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8323
-- author: CatAndHats
-  changes:
-  - message: Added CCDP Chemical Compound grenades to the weapon specialist vendor
-    type: Add
-  - message: Changed the contents of the weapon specialist and regular grenade belts.
-      They no longer feature HEFA grenades, and have lost some of their HEDP in exchange
-      for fragmentation and incendiary airburst grenades.
-    type: Tweak
-  - message: Fixed the filled grenade belt on Sorokyne Strata to now be a regular
-      grenade belt not a weapon specialist grenade belt.
-    type: Fix
-  id: 3263
-  time: '2026-06-02T18:52:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9964
-- author: monomethylhydrazine
-  changes:
-  - message: Added powdered instant drink mixes to MREs.
-    type: Add
-  id: 3264
-  time: '2026-06-02T19:12:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9577
-- author: MoonlightHollow
-  changes:
-  - message: Split the Flight Crew vendors
-    type: Tweak
-  - message: Added the M70 Flak Vest for both Pilot and DCC with it's storage. Added
-      M70B1 and Tactical Flight Suit for Pilots.
-    type: Add
-  id: 3265
-  time: '2026-06-03T10:03:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9903
 - author: JustMyselfUwU
   changes:
   - message: Fixed Not being able to melt radiators and extinguisher cabinets, and
@@ -4515,5 +4471,44 @@
   id: 3761
   time: '2026-11-18T22:00:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10975
+- author: kleinerstation13
+  changes:
+  - message: Added the advanced underbarrel flamethrower to the Type 71-F
+    type: Add
+  - message: The FP9000 now spawns with randomized attachments
+    type: Tweak
+  - message: Fixed KT-42, Type 73, Type 74 and NP92 firerates being incorrect
+    type: Tweak
+  - message: Fixed Type 64 magazines displaying the wrong caliber
+    type: Fix
+  id: 3762
+  time: '2026-11-18T22:03:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10749
+- author: MidZik
+  changes:
+  - message: Xenos can now use most no-target, self-target, or toggle-able actions
+      while inside a tunnel or vent.
+    type: Add
+  - message: Fixed xenos disconnecting inside tunnels or vents becoming stuck due
+      to resting and being unable to unrest.
+    type: Fix
+  id: 3763
+  time: '2026-11-18T22:03:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10769
+- author: kleinerstation13
+  changes:
+  - message: The LPO80 Incinerator Unit on Sorokyne can now also be loaded with M34
+      tanks
+    type: Tweak
+  id: 3764
+  time: '2026-11-18T22:05:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10898
+- author: MidZik
+  changes:
+  - message: Fixed lurkers' crippling strike not resetting their attack cooldown.
+    type: Fix
+  id: 3765
+  time: '2026-11-18T22:02:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10789
 Name: RMC14
 Order: -1
