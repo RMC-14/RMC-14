@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Meara1179
-  changes:
-  - message: An announcement is now made to the hive when the Queen calls down the
-      dropship for hijack.
-    type: Add
-  id: 3272
-  time: '2026-06-06T22:24:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9854
 - author: Thereisabear
   changes:
   - message: Fixed parasites not being able to walk through doors after colliding
@@ -4505,5 +4497,12 @@
   id: 3771
   time: '2026-11-18T22:13:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11028
+- author: SharkSnake98
+  changes:
+  - message: Changed it so the coffee machine can be anchored onto tables
+    type: Tweak
+  id: 3772
+  time: '2026-11-18T22:15:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10694
 Name: RMC14
 Order: -1
