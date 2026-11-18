@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Smoke reactions have been properly tuned and have been re-enabled. They
-      now inject 10 units divided by the amount of different agents in the solution,
-      every 6 seconds.
-    type: Tweak
-  id: 3258
-  time: '2026-06-01T08:11:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8671
 - author: Ilysssa
   changes:
   - message: Light fixtures not offsetting while map is paused. They now offset without
@@ -4517,5 +4508,12 @@
   id: 3757
   time: '2026-11-17T18:51:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10410
+- author: muratendmo
+  changes:
+  - message: Medbay's latex gloves can now take watches.
+    type: Tweak
+  id: 3758
+  time: '2026-11-18T21:47:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11062
 Name: RMC14
 Order: -1
