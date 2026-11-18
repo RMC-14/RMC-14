@@ -1,39 +1,4 @@
 ﻿Entries:
-- author: Pepsros
-  changes:
-  - message: Removed ghost boo ability.
-    type: Remove
-  id: 3274
-  time: '2026-06-06T22:31:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9709
-- author: Vixting
-  changes:
-  - message: Added examine text to damaged girders.
-    type: Add
-  - message: Fixed all walls becoming damaged girders when destroyed.
-    type: Fix
-  - message: Fixed acid holes not being blocked by objects.
-    type: Fix
-  - message: Breaking acid holes now spawns a damaged girder.
-    type: Tweak
-  id: 3275
-  time: '2026-06-06T22:31:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9750
-- author: MidZik
-  changes:
-  - message: Dead bodies no longer get hit by or block wide swings.
-    type: Fix
-  - message: Open containers (lockers, crates, etc) no longer get hit by or block
-      wide swings.
-    type: Fix
-  - message: Xenos no longer block each others' wide swings.
-    type: Tweak
-  - message: Wide swings now prioritize hitting mobs (xenos, marines, rats, etc) if
-      it is possible to hit them.
-    type: Tweak
-  id: 3276
-  time: '2026-06-06T22:35:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9677
 - author: Vixting
   changes:
   - message: Fix double resin wall stacking
@@ -4503,5 +4468,27 @@
   id: 3773
   time: '2026-11-18T22:21:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10632
+- author: sporkyz
+  changes:
+  - message: Fixed Oppressor Praetorian Abduct range being too low, from 6 tiles to
+      7 tiles
+    type: Fix
+  id: 3774
+  time: '2026-11-18T22:23:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10721
+- author: Vixting
+  changes:
+  - message: Fixed weeds blocking acid hole interaction
+    type: Fix
+  id: 3775
+  time: '2026-11-18T22:23:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10577
+- author: Vermidia
+  changes:
+  - message: '[PVE] Added body bag packs, which are small and hold 10 body bags.'
+    type: Add
+  id: 3776
+  time: '2026-11-18T22:22:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10779
 Name: RMC14
 Order: -1
