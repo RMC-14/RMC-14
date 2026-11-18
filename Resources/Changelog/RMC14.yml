@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Increased odds of Panic Room Hold scenario on Shiva's from 10% to 15%
-    type: Tweak
-  id: 3270
-  time: '2026-06-06T22:25:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9980
-- author: MidZik
-  changes:
-  - message: Fixed Burrowers being able to acid things while burrowed.
-    type: Fix
-  id: 3271
-  time: '2026-06-06T22:24:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9866
 - author: Meara1179
   changes:
   - message: An announcement is now made to the hive when the Queen calls down the
@@ -4501,5 +4487,23 @@
   id: 3769
   time: '2026-11-18T22:08:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10726
+- author: wheelwrightt
+  changes:
+  - message: Markup text no longer appears on clue popups when entering into the intel
+      computer
+    type: Fix
+  id: 3770
+  time: '2026-11-18T22:12:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10543
+- author: Vermidia
+  changes:
+  - message: Fixed some sources of daze stacking duration instead of refreshing (batons,
+      etc.). Clothesline still stacks daze duration.
+    type: Fix
+  - message: Fixed clothesline dazing marines even with < 2 rage.
+    type: Fix
+  id: 3771
+  time: '2026-11-18T22:13:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11028
 Name: RMC14
 Order: -1
