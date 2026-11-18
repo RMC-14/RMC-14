@@ -1,40 +1,4 @@
 ﻿Entries:
-- author: Drazamuffin
-  changes:
-  - message: M13 extended mags are now available to Intel Officers and Flight Crew
-    type: Add
-  - message: M13 AP ammo is no longer available
-    type: Remove
-  - message: The M13 now does slightly less damage (Was 32, Now 24)
-    type: Tweak
-  - message: The M13 no longer fits into regular pistol belts
-    type: Tweak
-  - message: The M13 belt now can only fit the gun and 3 additional magazines
-    type: Tweak
-  - message: M13 magazine boxes capacities are now consistent with other sidearm magazine
-      boxes
-    type: Tweak
-  id: 3267
-  time: '2026-06-06T22:10:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9744
-- author: CatAndHats
-  changes:
-  - message: Fixed being able to paradrop/fall into the credits room on Solaris
-    type: Fix
-  id: 3268
-  time: '2026-06-06T22:14:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9996
-- author: MidZik
-  changes:
-  - message: Xeno projectile abilities should hit their targets much more reliably.
-      (Spike Shed, Bone Spurs, Tail Seize, and all spit abilities.)
-    type: Fix
-  - message: Leap-like abilities should hit their targets more reliably. (Leap, Pounce,
-      Dash, Rush, Assault)
-    type: Fix
-  id: 3269
-  time: '2026-06-06T22:19:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9963
 - author: kleinerstation13
   changes:
   - message: Increased odds of Panic Room Hold scenario on Shiva's from 10% to 15%
@@ -4510,5 +4474,32 @@
   id: 3766
   time: '2026-11-18T22:06:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10974
+- author: CatAndHats
+  changes:
+  - message: Added four distillery machine props for mapping
+    type: Add
+  id: 3767
+  time: '2026-11-18T22:09:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10867
+- author: IceNoobXD
+  changes:
+  - message: Alt clicking a pressurized canister reagent pouch now ejects the canister
+      instead of flushing, you can still flush it via right clicking it!
+    type: Tweak
+  - message: Alt clicking a headset now opens the tune window again instead of the
+      medal recommendation window, you can still recommend people via right clicking
+      it!
+    type: Tweak
+  id: 3768
+  time: '2026-11-18T22:09:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11122
+- author: carccborg
+  changes:
+  - message: Open doors no longer block some mechanics, including Oppressor's Abduct
+      and the M34 incinerator
+    type: Fix
+  id: 3769
+  time: '2026-11-18T22:08:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10726
 Name: RMC14
 Order: -1
