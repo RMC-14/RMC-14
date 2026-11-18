@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Fixed parasites not being able to walk through doors after colliding
-      with barbed metal barricades.
-    type: Fix
-  id: 3273
-  time: '2026-06-06T22:26:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9765
 - author: Pepsros
   changes:
   - message: Removed ghost boo ability.
@@ -4504,5 +4496,12 @@
   id: 3772
   time: '2026-11-18T22:15:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10694
+- author: spanky-spanky
+  changes:
+  - message: Poppies can now be worn as a helmet accessory.
+    type: Add
+  id: 3773
+  time: '2026-11-18T22:21:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10632
 Name: RMC14
 Order: -1
