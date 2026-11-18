@@ -1,52 +1,4 @@
 ﻿Entries:
-- author: vixting
-  changes:
-  - message: fix interaction range being high than intended
-    type: Fix
-  id: 3284
-  time: '2026-06-06T22:48:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9600
-- author: SharkSnake98
-  changes:
-  - message: Added more CL Roundstart Map Briefings
-    type: Add
-  id: 3285
-  time: '2026-06-06T22:48:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9041
-- author: MarshesAndMeadows
-  changes:
-  - message: Added the Trapper boiler strain, a further specialized boiler focusing
-      on ambushes and rapidly chewing through marine static defenses.
-    type: Add
-  - message: Added the Deploy Traps ability, a rapid deployment of snaring traps to
-      snare prey, able to even be deployed right under their feet, though easily destroyed
-      by shooting or with a melee attack. Includes SFX for getting snared. Deploy
-      Traps can also be empowered by Insight, and will in turn empower Acid Mine when
-      cast this way.
-    type: Add
-  - message: Added the Acid Mine attack, a remote detonation of acid that has a short
-      delay before dealing damage. Deals increased damage to structures, includes
-      VFX and SFX. Also reduces the cooldown of Deploy Traps when you hit mobs.
-    type: Add
-  - message: Added the Acid Shotgun attack, a close range blast of acid that does
-      high damage, further increased if the victim is snared in a trap.
-    type: Add
-  - message: Added the Insight mechanic; hitting pellets of the Acid Shotgun grants
-      you Insight stacks, potentially empowering your next use of Deploy Traps
-    type: Add
-  - message: Added Adrenaline Surge, after getting hit, you get a speed boost for
-      a short duration.
-    type: Add
-  id: 3286
-  time: '2026-06-06T22:48:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9433
-- author: PursuitinAshes
-  changes:
-  - message: Removed OCP-583.
-    type: Remove
-  id: 3287
-  time: '2026-06-06T22:58:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9769
 - author: PursuitinAshes
   changes:
   - message: Organs will now cause 75 units of grey matter to appear in your system,
@@ -4471,5 +4423,35 @@
   id: 3783
   time: '2026-11-18T23:00:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10917
+- author: CatAndHats
+  changes:
+  - message: Obfuscated Egg, Parasite, and Larva Burst popups so they no longer reveal
+      names between factions
+    type: Fix
+  id: 3784
+  time: '2026-11-18T23:02:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10684
+- author: Vixting
+  changes:
+  - message: Fixed acid damaging the wall when creating the acid hole
+    type: Fix
+  id: 3785
+  time: '2026-11-18T23:01:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10801
+- author: SharkSnake98
+  changes:
+  - message: Changed the cost of watches to one point.
+    type: Tweak
+  id: 3786
+  time: '2026-11-18T23:03:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10598
+- author: Hank-Hill-Propane-Man
+  changes:
+  - message: You no longer need to open Pill Bottles in any Medical Pouch that fit
+      Pill Bottles to take out Pills from them.
+    type: Add
+  id: 3787
+  time: '2026-11-18T23:03:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10583
 Name: RMC14
 Order: -1
