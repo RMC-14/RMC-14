@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fix double resin wall stacking
-    type: Fix
-  id: 3277
-  time: '2026-06-06T22:38:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9592
 - author: SharkSnake98
   changes:
   - message: Added a CLF ERT Ship
@@ -4490,5 +4483,13 @@
   id: 3776
   time: '2026-11-18T22:22:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10779
+- author: kleinerstation13
+  changes:
+  - message: The scout now recieves one more incendiary and high impact magazine each
+      in both their kit and requisition crate purchases
+    type: Tweak
+  id: 3777
+  time: '2026-11-18T22:53:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10793
 Name: RMC14
 Order: -1
