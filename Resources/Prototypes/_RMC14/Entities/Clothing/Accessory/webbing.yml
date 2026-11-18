@@ -485,6 +485,29 @@
       amount: 2
 
 - type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingHolsterSpearhead
+  suffix: Filled, Spearhead
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearhead
+      amount: 1
+    - id: RMCSpeedLoader357
+      amount: 2
+
+- type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingHolsterSpearheadCustom
+  suffix: Spearhead custom, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearheadCustom
+    - id: RMCSpeedLoader357
+    - id: RMCSpeedLoader357
+
+- type: entity
   parent: CMWebbingBase
   id: RMCWebbingDropPouch
   name: brown drop pouch
