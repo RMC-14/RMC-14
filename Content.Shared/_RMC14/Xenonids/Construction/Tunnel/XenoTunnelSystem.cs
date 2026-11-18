@@ -841,7 +841,8 @@ public sealed class XenoTunnelSystem : EntitySystem
         var actions = _action.GetActions(ent);
         foreach (var action in actions)
         {
-            _action.SetEnabled(action.AsNullable(), newStatus);
+            if (!HasComp<RMCInContainerActionComponent>(action))
+                _action.SetEnabled(action.AsNullable(), newStatus);
         }
     }
 
