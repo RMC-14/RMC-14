@@ -16,11 +16,11 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: RMCOuterClothingExternalWebbing
       - id: CMSatchelSecureStandard
       - id: CMBootsBlackFilled
       - id: CMMRE
       - id: RMCStampSEA
+      - id: RMCOuterClothingExternalWebbing
       - id: CMJumpsuitOperations
         name: operations uniform
     - name: Gloves
