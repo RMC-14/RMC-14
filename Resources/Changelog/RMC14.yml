@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Rifleman can no longer be squadless.
-    type: Tweak
-  - message: The id console now respects titles granted by pamphlets.
-    type: Fix
-  id: 3289
-  time: '2026-06-06T22:59:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9997
 - author: J C Denton
   changes:
   - message: Fixed a lot of entities working off infinite inner power.
@@ -4453,5 +4444,13 @@
   id: 3788
   time: '2026-11-19T01:18:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9966
+- author: TadJohnson00
+  changes:
+  - message: Adjusted the sprites for most of the UNMC's peaked caps; they should
+      generally fit better on characters' heads.
+    type: Tweak
+  id: 3789
+  time: '2026-11-19T01:19:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9965
 Name: RMC14
 Order: -1
