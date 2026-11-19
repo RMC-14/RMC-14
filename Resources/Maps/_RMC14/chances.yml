@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/19/2026 16:50:01
-  entityCount: 30987
+  time: 11/19/2026 20:47:35
+  entityCount: 30880
 maps:
 - 1
 grids:
@@ -45689,46 +45689,6 @@ entities:
     - type: Transform
       pos: -55.5,1.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 65
     components:
     - type: MetaData
@@ -45747,6 +45707,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,-18.5
       parent: 1
   - uid: 68
@@ -45754,6 +45715,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,-15.5
       parent: 1
   - uid: 69
@@ -45761,6 +45723,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,-12.5
       parent: 1
   - uid: 70
@@ -45768,6 +45731,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,-9.5
       parent: 1
   - uid: 71
@@ -45775,6 +45739,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,-6.5
       parent: 1
   - uid: 72
@@ -45782,6 +45747,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,2.5
       parent: 1
   - uid: 73
@@ -45789,6 +45755,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,5.5
       parent: 1
   - uid: 74
@@ -45796,6 +45763,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,8.5
       parent: 1
   - uid: 75
@@ -45803,6 +45771,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,11.5
       parent: 1
   - uid: 76
@@ -45810,6 +45779,7 @@ entities:
     - type: MetaData
       name: Dormitories
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: -49.5,14.5
       parent: 1
   - uid: 77
@@ -46007,46 +45977,6 @@ entities:
     - type: Transform
       pos: -4.5,-5.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 103
     components:
     - type: MetaData
@@ -46054,46 +45984,6 @@ entities:
     - type: Transform
       pos: -2.5,-5.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 104
     components:
     - type: MetaData
@@ -46102,46 +45992,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 1.5,-43.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 105
     components:
     - type: MetaData
@@ -46150,46 +46000,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 1.5,-41.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 106
     components:
     - type: MetaData
@@ -46598,91 +46408,11 @@ entities:
     - type: Transform
       pos: -48.5,-90.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 167
     components:
     - type: Transform
       pos: -48.5,-85.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 168
     components:
     - type: Transform
@@ -46710,91 +46440,11 @@ entities:
     - type: Transform
       pos: -33.5,-93.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 173
     components:
     - type: Transform
       pos: -22.5,-93.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
   - uid: 174
     components:
     - type: Transform
@@ -46826,49 +46476,9 @@ entities:
     - type: Transform
       pos: -5.5,-92.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-    - type: RMCWeldEffectActive
   - uid: 179
     components:
     - type: Transform
@@ -46918,46 +46528,6 @@ entities:
     - type: Transform
       pos: 93.5,96.5
       parent: 1
-    - type: Occluder
-      enabled: False
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: Door
-      state: Welded
-    - type: RMCWeldEffectActive
 - proto: CMAirlockMedicalLocked
   entities:
   - uid: 187
@@ -57288,44 +56858,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -67.5,-35.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2052
     components:
     - type: MetaData
@@ -57334,42 +56866,6 @@ entities:
       rot: 4.71238898038469 rad
       pos: -66.5,-35.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
   - uid: 2053
     components:
     - type: MetaData
@@ -57439,47 +56935,6 @@ entities:
     - type: Transform
       pos: -57.5,-1.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2062
     components:
     - type: MetaData
@@ -57488,47 +56943,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -57.5,-2.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2063
     components:
     - type: MetaData
@@ -57584,44 +56998,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -46.5,1.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2070
     components:
     - type: MetaData
@@ -57630,42 +57006,6 @@ entities:
       rot: 4.71238898038469 rad
       pos: -45.5,1.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
   - uid: 2071
     components:
     - type: MetaData
@@ -57881,7 +57221,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -116424.086
+      secondsUntilStateChange: -116643.08
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -57897,7 +57237,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -116424.086
+      secondsUntilStateChange: -116643.08
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -58112,44 +57452,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -23.5,-30.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2126
     components:
     - type: MetaData
@@ -58158,42 +57460,6 @@ entities:
       rot: 4.71238898038469 rad
       pos: -22.5,-30.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
   - uid: 2127
     components:
     - type: MetaData
@@ -58713,42 +57979,6 @@ entities:
     - type: Transform
       pos: 23.5,-34.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
   - uid: 2198
     components:
     - type: MetaData
@@ -58757,44 +57987,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 23.5,-35.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2199
     components:
     - type: Transform
@@ -58830,44 +58022,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 26.5,0.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2204
     components:
     - type: MetaData
@@ -58876,42 +58030,6 @@ entities:
       rot: 4.71238898038469 rad
       pos: 27.5,0.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
   - uid: 2205
     components:
     - type: MetaData
@@ -58920,44 +58038,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 26.5,10.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2206
     components:
     - type: MetaData
@@ -58966,42 +58046,6 @@ entities:
       rot: 4.71238898038469 rad
       pos: 27.5,10.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
   - uid: 2207
     components:
     - type: MetaData
@@ -59026,44 +58070,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 27.5,-41.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2210
     components:
     - type: MetaData
@@ -59072,42 +58078,6 @@ entities:
       rot: 4.71238898038469 rad
       pos: 28.5,-41.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
   - uid: 2211
     components:
     - type: MetaData
@@ -59116,44 +58086,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 27.5,-36.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-      fuel: 1
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: RMCWeldEffectActive
   - uid: 2212
     components:
     - type: MetaData
@@ -59162,42 +58094,6 @@ entities:
       rot: 4.71238898038469 rad
       pos: 28.5,-36.5
       parent: 1
-    - type: Physics
-      canCollide: False
-    - type: Airtight
-      airBlocked: False
-    - type: Door
-      state: Welded
-    - type: Weldable
-      isWelded: True
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - Impassable
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
   - uid: 2213
     components:
     - type: MetaData
@@ -61032,7 +59928,7 @@ entities:
   - uid: 1951
     components:
     - type: MetaData
-      name: Weston-Yamada's classified intelligence folder
+      name: Weston-Yamada classified intelligence folder
     - type: Transform
       pos: 2.4611442,38.419106
       parent: 1
@@ -81329,77 +80225,77 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       renderOrder: 3000
-- proto: CMWindowShiva
+- proto: CMWindowShivaGrey
   entities:
   - uid: 6339
     components:
     - type: Transform
-      pos: -11.5,-17.5
+      pos: -15.5,-22.5
       parent: 1
   - uid: 6340
     components:
     - type: Transform
-      pos: -11.5,-19.5
+      pos: -14.5,-22.5
       parent: 1
   - uid: 6341
     components:
     - type: Transform
-      pos: -11.5,-21.5
+      pos: -13.5,-22.5
       parent: 1
   - uid: 6342
     components:
     - type: Transform
-      pos: -13.5,-22.5
+      pos: -11.5,-21.5
       parent: 1
   - uid: 6343
     components:
     - type: Transform
-      pos: -14.5,-22.5
+      pos: -11.5,-19.5
       parent: 1
   - uid: 6344
     components:
     - type: Transform
-      pos: -15.5,-22.5
+      pos: -11.5,-17.5
       parent: 1
   - uid: 6345
     components:
     - type: Transform
-      pos: -28.5,-75.5
+      pos: -28.5,-78.5
       parent: 1
   - uid: 6346
     components:
     - type: Transform
-      pos: -28.5,-76.5
+      pos: -28.5,-77.5
       parent: 1
   - uid: 6347
     components:
     - type: Transform
-      pos: -28.5,-77.5
+      pos: -28.5,-75.5
       parent: 1
   - uid: 6348
     components:
     - type: Transform
-      pos: -28.5,-78.5
+      pos: -28.5,-76.5
       parent: 1
   - uid: 6349
     components:
     - type: Transform
-      pos: -41.5,-75.5
+      pos: -41.5,-76.5
       parent: 1
   - uid: 6350
     components:
     - type: Transform
-      pos: -41.5,-76.5
+      pos: -41.5,-75.5
       parent: 1
   - uid: 6351
     components:
     - type: Transform
-      pos: -41.5,-77.5
+      pos: -41.5,-78.5
       parent: 1
   - uid: 6352
     components:
     - type: Transform
-      pos: -41.5,-78.5
+      pos: -41.5,-77.5
       parent: 1
 - proto: CMWirecutter
   entities:
@@ -93748,239 +92644,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 4.654136,-0.44886684
       parent: 1
-- proto: RMCEffectWeldingSparks
-  entities:
-  - uid: 30967
-    components:
-    - type: Transform
-      pos: 93.5,96.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30972
-    components:
-    - type: Transform
-      pos: -5.5,-92.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30973
-    components:
-    - type: Transform
-      pos: -22.5,-93.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30974
-    components:
-    - type: Transform
-      pos: -33.5,-93.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30976
-    components:
-    - type: Transform
-      pos: -48.5,-90.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30977
-    components:
-    - type: Transform
-      pos: -48.5,-85.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30978
-    components:
-    - type: Transform
-      pos: -55.5,1.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30979
-    components:
-    - type: Transform
-      pos: -46.5,1.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.5,-0.45
-      startingOffset: 0.5,0.45
-  - uid: 30980
-    components:
-    - type: Transform
-      pos: -57.5,-1.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.45,-0.5
-      startingOffset: -0.45,-0.5
-  - uid: 30981
-    components:
-    - type: Transform
-      pos: -57.5,-2.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.45,0.5
-      startingOffset: -0.45,0.5
-  - uid: 30982
-    components:
-    - type: Transform
-      pos: -67.5,-35.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.5,-0.45
-      startingOffset: 0.5,0.45
-  - uid: 30983
-    components:
-    - type: Transform
-      pos: -23.5,-30.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.5,-0.45
-      startingOffset: 0.5,0.45
-  - uid: 30984
-    components:
-    - type: Transform
-      pos: 23.5,-35.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.45,0.5
-      startingOffset: -0.45,0.5
-  - uid: 30985
-    components:
-    - type: Transform
-      pos: 27.5,-36.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.5,-0.45
-      startingOffset: 0.5,0.45
-  - uid: 30986
-    components:
-    - type: Transform
-      pos: 27.5,-41.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.5,-0.45
-      startingOffset: 0.5,0.45
-  - uid: 30987
-    components:
-    - type: Transform
-      pos: 1.5,-43.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0.5,3.061617E-17
-      startingOffset: 0.5,-3.061617E-17
-  - uid: 30988
-    components:
-    - type: Transform
-      pos: 1.5,-41.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0.5,3.061617E-17
-      startingOffset: 0.5,-3.061617E-17
-  - uid: 30989
-    components:
-    - type: Transform
-      pos: -4.5,-5.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30990
-    components:
-    - type: Transform
-      pos: -2.5,-5.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: -0,0.5
-      startingOffset: 0,-0.5
-  - uid: 30991
-    components:
-    - type: Transform
-      pos: 26.5,10.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.5,-0.45
-      startingOffset: 0.5,0.45
-  - uid: 30992
-    components:
-    - type: Transform
-      pos: 26.5,0.5
-      parent: 1
-    - type: TimedDespawn
-      lifetime: 3
-    - type: RMCSpriteOffsetAnimation
-      length: 3
-      endingOffset: 0.5,-0.45
-      startingOffset: 0.5,0.45
 - proto: RMCEmergencyOxygenTank
   entities:
   - uid: 30848
@@ -138132,667 +136795,6 @@ entities:
     - type: Transform
       pos: -78.5,40.5
       parent: 1
-- proto: RMCSurveillanceCameraProp
-  entities:
-  - uid: 611
-    components:
-    - type: Transform
-      pos: 45.5,-6.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 612
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 49.5,-3.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 613
-    components:
-    - type: Transform
-      pos: 57.5,-6.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 617
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 65.5,-13.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 618
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 63.5,-10.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 621
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 66.5,-9.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 623
-    components:
-    - type: Transform
-      pos: 64.5,-4.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 627
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 71.5,-3.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 8064
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -23.5,-77.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 8065
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -21.5,-92.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 9089
-    components:
-    - type: Transform
-      pos: 5.5,-61.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 10265
-    components:
-    - type: Transform
-      pos: -11.5,-64.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30077
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -3.5,-11.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30281
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 30.5,-79.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30282
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 18.5,-89.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30283
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 23.5,-91.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30284
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 17.5,-94.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30286
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 5.5,-96.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30316
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -1.5,-90.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30317
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -9.5,-90.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30320
-    components:
-    - type: Transform
-      pos: -9.5,-85.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30324
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -51.5,-93.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30325
-    components:
-    - type: Transform
-      pos: -58.5,-90.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30326
-    components:
-    - type: Transform
-      pos: -67.5,-89.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30327
-    components:
-    - type: Transform
-      pos: -71.5,-86.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30331
-    components:
-    - type: Transform
-      pos: -63.5,-84.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30332
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -55.5,-84.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30341
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -75.5,-45.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30345
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -65.5,-37.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30346
-    components:
-    - type: Transform
-      pos: -70.5,-31.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30373
-    components:
-    - type: Transform
-      pos: -39.5,-34.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30382
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -57.5,-37.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30392
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -28.5,-37.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30393
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -17.5,-34.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30403
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -30.5,-50.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30413
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -21.5,-55.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30414
-    components:
-    - type: Transform
-      pos: -24.5,-61.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30432
-    components:
-    - type: Transform
-      pos: 8.5,-23.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30435
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 6.5,-32.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30438
-    components:
-    - type: Transform
-      pos: 4.5,-41.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30445
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -1.5,-48.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30454
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,-32.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30456
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 22.5,-51.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30457
-    components:
-    - type: Transform
-      pos: 32.5,-41.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30459
-    components:
-    - type: Transform
-      pos: 40.5,-41.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30460
-    components:
-    - type: Transform
-      pos: 34.5,-37.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30461
-    components:
-    - type: Transform
-      pos: 25.5,-37.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30465
-    components:
-    - type: Transform
-      pos: 26.5,-32.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30466
-    components:
-    - type: Transform
-      pos: 31.5,-26.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30478
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 46.5,-32.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30483
-    components:
-    - type: Transform
-      pos: 64.5,-23.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30484
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 56.5,-36.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30491
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 57.5,-11.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30492
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 53.5,-13.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30494
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 38.5,-13.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30502
-    components:
-    - type: Transform
-      pos: 37.5,16.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30503
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 44.5,19.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30507
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 47.5,6.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30509
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 53.5,2.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30521
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 31.5,34.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30530
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 57.5,29.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30531
-    components:
-    - type: Transform
-      pos: 53.5,43.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30562
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 17.5,21.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30576
-    components:
-    - type: Transform
-      pos: 10.5,28.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30577
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 5.5,31.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30594
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.5,5.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30636
-    components:
-    - type: Transform
-      pos: -5.5,0.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30638
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -19.5,33.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30644
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -16.5,-3.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30646
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -23.5,-0.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30654
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -40.5,36.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30655
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -33.5,29.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30661
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -49.5,32.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30663
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -42.5,36.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30667
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -30.5,25.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30698
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -73.5,-1.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30703
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -53.5,-16.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30709
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -53.5,-9.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30711
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -53.5,-3.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30713
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -58.5,-4.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30732
-    components:
-    - type: Transform
-      pos: -38.5,-0.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30738
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -29.5,-12.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30739
-    components:
-    - type: Transform
-      pos: -34.5,-14.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30754
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -48.5,-11.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30772
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -48.5,13.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 30776
-    components:
-    - type: Transform
-      pos: -53.5,17.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
 - proto: RMCTablePartAlmayer
   entities:
   - uid: 12261
