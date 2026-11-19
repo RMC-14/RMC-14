@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the Corporate Bodyguard role and all their gear.
-    type: Add
-  - message: Added the Weston-Yamada Restricted Area sign for the CL's office.
-    type: Add
-  id: 3294
-  time: '2026-06-06T23:33:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8362
 - author: Vixting
   changes:
   - message: Added drones can now evolve to any tier 2 before marines drop (same restrictions)
@@ -4452,5 +4443,15 @@
   id: 3793
   time: '2026-11-19T10:11:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10449
+- author: SharkSnake98
+  changes:
+  - message: Removed the ability for desk-lamps to be stored in hats, belts, or on
+      suitstorage
+    type: Remove
+  - message: Changed it so desk-lamps can be stored inside of bags.
+    type: Tweak
+  id: 3794
+  time: '2026-11-19T10:22:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10695
 Name: RMC14
 Order: -1
