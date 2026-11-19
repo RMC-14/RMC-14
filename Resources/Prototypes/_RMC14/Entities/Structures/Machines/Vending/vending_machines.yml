@@ -590,6 +590,8 @@
     #Camera: 8
     #CameraFilm: 8
     RMCWhistle: 5
+    RMCGuidebookLawMarine: 2
+    RMCGuidebookSOP: 2
     RMCSunglasses: 2 #Contraband
     RMCBoxDonut: 2 #Contraband
 

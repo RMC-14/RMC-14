@@ -41,9 +41,9 @@
     gloves: RMCHandsVeteran
     head: ArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
-    back: RMCSatchelLightpack
+    back: RMCSatchelLightpackWeYa
     belt: RMCM77BeltPMCFilled
-    suitstorage: RMCWeaponRifleM54CWhite
+    suitstorage: RMCWeaponRifleM54CWhiteNoLock
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
   storage:
