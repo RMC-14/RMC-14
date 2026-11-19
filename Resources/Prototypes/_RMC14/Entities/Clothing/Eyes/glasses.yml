@@ -153,6 +153,7 @@
       RMCSkillSmartGun: 1
     defaultState: half
   - type: ClothingRequireEquipped
+    handsValid: true
     whitelist:
       components:
       - SmartGun

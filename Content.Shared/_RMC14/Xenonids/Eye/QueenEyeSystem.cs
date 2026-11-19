@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
@@ -7,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Eye;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
@@ -19,6 +19,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Threading;
 using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Eye;
 
@@ -77,6 +78,7 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoUnwatchEvent>(OnQueenEyeActionUnwatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
         SubscribeLocalEvent<QueenEyeActionComponent, HiveChangedEvent>(OnQueenHiveChanged);
+        SubscribeLocalEvent<QueenEyeActionComponent, DamageChangedEvent>(OnQueenDamage);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
         SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove);
@@ -154,6 +156,14 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         RemCompDeferred<XenoWatchingComponent>(eye);
+    }
+
+    private void OnQueenDamage(Entity<QueenEyeActionComponent> ent, ref DamageChangedEvent args)
+    {
+        if (!args.DamageIncreased)
+            return;
+
+        RemoveQueenEye(ent);
     }
 
     private void OnQueenEyeOvipositorChanged(Entity<QueenEyeActionComponent> ent, ref XenoOvipositorChangedEvent args)
@@ -453,10 +463,7 @@ public sealed class QueenEyeSystem : EntitySystem
 
     private void SwapPlantWeedsToWorldTarget(Entity<QueenEyeActionComponent> queen)
     {
-        _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(
-            queen.Owner,
-            Loc.GetString("rmc-xeno-queen-eye-expand-weeds-name"),
-            Loc.GetString("rmc-xeno-queen-eye-expand-weeds-desc"));
+        _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(queen.Owner);
     }
 
     private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)

@@ -62,6 +62,27 @@
       amount: 1
 
 - type: entity
+  parent: RMCBeltMedicBagPMC
+  id: RMCBeltMedicBagPMCFilledPartial
+  suffix: Filled, Partial
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMUpgradedBurnKit10
+      amount: 1
+    - id: CMUpgradedTraumaKit10
+      amount: 1
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    - id: CMHealthAnalyzer
+      amount: 1
+    # TODO RMC14 nanosplint, oxy hypospray, tramadol pill
+
+- type: entity
   parent: CMBeltMedicalFilled
   id: RMCBeltMedicalDefibAnalyzerFilled
   suffix: Filled, Better
@@ -276,6 +297,26 @@
   - type: StorageFill
     contents:
     - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: RMCBeltNV
+  id: RMCBeltNVFilledMK1
+  suffix: Filled, MK1
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: RMCBeltNV
+  id: RMCBeltNVFilledM16
+  suffix: Filled, M16
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
       amount: 5
 
 - type: entity
@@ -495,6 +536,20 @@
     - id: CMShellShotgunIncendiary
       amount: 3
     - id: CMShellShotgunIncendiaryBuckshot
+      amount: 3
+
+- type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigFillNV
+  suffix: Filled, NV
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 2
+    - id: CMShellShotgunSlugs
+      amount: 3
+    - id: CMShellShotgunFlechette
       amount: 3
 
 - type: entity
