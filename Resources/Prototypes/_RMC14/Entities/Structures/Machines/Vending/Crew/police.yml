@@ -14,6 +14,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMMilitaryPolice
+    - CMProvostInspector
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -94,9 +95,11 @@
       entries:
       - id: RMCGuidebookLawMarine
         amount: 10
+        recommended: true
       - id: RMCGuidebookSOP
         amount: 10
-        
+        recommended: true
+
 # WARDEN
 - type: entity
   parent: ColMarTechBase
@@ -194,5 +197,7 @@
       entries:
       - id: RMCGuidebookLawMarine
         amount: 10
+        recommended: true
       - id: RMCGuidebookSOP
         amount: 10
+        recommended: true

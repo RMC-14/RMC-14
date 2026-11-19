@@ -3,6 +3,7 @@
   id: CMSquadLeader
   name: cm-job-name-squad-leader
   description: cm-job-description-squad-leader
+  newToJobInfo: rmc-new-to-job-squad-leader
   playTimeTracker: CMJobSquadLeader
   requirements:
   - !type:RoleTimeRequirement
@@ -30,6 +31,7 @@
   startingGear: CMGearSquadLeader
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
+  requireAdminNotify: true
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-commander
   marineAuthorityLevel: 2
