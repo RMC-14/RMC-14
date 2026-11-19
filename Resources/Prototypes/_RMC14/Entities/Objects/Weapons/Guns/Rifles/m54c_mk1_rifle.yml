@@ -290,6 +290,13 @@
     bulletType: null
 
 - type: entity
+  parent: RMCMagazineRifleM54CMK1HEAP
+  id: RMCMagazineRifleM54CMK1HEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: RMCEmptyMag
+
+- type: entity
   parent: CMMagazineRifleM54CMK1
   id: RMCMagazineRifleM54CMK1WP
   name: "M54C MK1 WP magazine (10x24mm)"

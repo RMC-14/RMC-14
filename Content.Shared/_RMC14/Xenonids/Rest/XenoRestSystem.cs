@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
@@ -16,6 +16,7 @@ using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -29,6 +30,7 @@ public sealed class XenoRestSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -213,5 +215,42 @@ public sealed class XenoRestSystem : EntitySystem
     public bool IsResting(Entity<XenoRestingComponent?> ent)
     {
         return Resolve(ent, ref ent.Comp, false);
+    }
+
+    public bool TryRestAction(Entity<XenoComponent?> ent, bool ignoreCooldown = false, bool ignoreEnabled = false)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
+        foreach (var (actionId, actionComp) in _rmcActions.GetActionsWithEvent<XenoRestActionEvent>(ent))
+        {
+            if (actionComp.AttachedEntity != ent.Owner)
+                continue;
+
+            if (!ignoreEnabled && actionComp is not { Enabled: true })
+                continue;
+
+            if (!ignoreCooldown && actionComp.Cooldown.HasValue && actionComp.Cooldown.Value.End > _timing.CurTime)
+                continue;
+
+            _actions.PerformAction(ent.Owner, (actionId, actionComp));
+            return true;
+        }
+
+        // Xeno had no rest action for some reason.
+        return false;
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        // If a resting xeno tries to move while resting, unrest them if possible.
+        var query = EntityQueryEnumerator<XenoRestingComponent, InputMoverComponent>();
+        while (query.MoveNext(out var xeno, out var rest, out var mover))
+        {
+            if (rest.Running && mover.HasDirectionalMovement)
+                TryRestAction(xeno);
+        }
     }
 }
