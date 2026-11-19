@@ -41,6 +41,10 @@
                 <CheckBox Name="RMCEmotesRodentia" Text="{Loc 'rmc-ui-audio-emotes-rodentia'}" Margin="0 0 0 5" />
                 <CheckBox Name="RMCEmotesFeroxi" Text="{Loc 'rmc-ui-audio-emotes-feroxi'}" Margin="0 0 0 5" />
                 <CheckBox Name="RMCEmotesSkrell" Text="{Loc 'rmc-ui-audio-emotes-skrell'}" Margin="0 0 0 5" />
+                <Label Text="{Loc 'rmc-ui-sounds'}"
+                       FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                       StyleClasses="LabelKeyText"/>
+                <BoxContainer Name="RMCMutableSounds" Orientation="Vertical" />
             </BoxContainer>
         </ScrollContainer>
         <ui:OptionsTabControlRow Name="Control" Access="Public" />
