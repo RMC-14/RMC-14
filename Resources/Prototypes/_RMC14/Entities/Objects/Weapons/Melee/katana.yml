@@ -45,7 +45,6 @@
     size: Normal
   - type: MeleeWeapon
     attackRate: 10
-    autoAttack: true
     resistanceBypass: true
     damage:
       types:
