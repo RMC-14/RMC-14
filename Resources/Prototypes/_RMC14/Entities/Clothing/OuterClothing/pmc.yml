@@ -26,12 +26,6 @@
     - 0,0,3,1 # 2 slots
   - type: ItemCamouflage
     camouflageVariations: { }
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-pmc-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformPMC
 
 - type: entity
   parent: [RMCArmorM4PMCNoLight, RMCBasePMCArmorLight]
@@ -88,6 +82,16 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
+  - type: PointLight
+    color: "#FFEFD2"
+
+- type: entity
+  parent: CMArmorM4PMCCorporate
+  id: RMCArmorM4PMCCorporateMedic
+  description: A basic vest with a Weston-Yamada badge on the right breast. This variant has a red badge, denoting the medical purpose of the wearer. At least in theory.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate_medic.rsi
 
 - type: entity
   parent: CMArmorM3VLSynth
@@ -303,14 +307,6 @@
     bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 10 # CLOTHING_ARMOR_LOW
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
-  - type: RemoveComponents
-    components:
-    - type: ClothingRequireEquipped
-      autoUnequip: true
-      denyReason: rmc-armor-not-pmc-jumpsuit
-      whitelist:
-        tags:
-        - RMCUniformPMC
 
 - type: entity
   parent: CMArmorM4PMCLight
@@ -326,11 +322,3 @@
   - type: Storage
     grid:
     - 0,0,1,1 # 1 slot
-  - type: RemoveComponents
-    components:
-    - type: ClothingRequireEquipped
-      autoUnequip: true
-      denyReason: rmc-armor-not-pmc-jumpsuit
-      whitelist:
-        tags:
-        - RMCUniformPMC

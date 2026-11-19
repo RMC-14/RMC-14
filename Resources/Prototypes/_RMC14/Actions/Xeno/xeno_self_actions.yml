@@ -12,6 +12,7 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoRestActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -35,6 +36,7 @@
       state: watch_xeno
   - type: InstantAction
     event: !type:XenoWatchActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -59,6 +61,7 @@
     useDelay: 0.33
   - type: InstantAction
     event: !type:XenoPheromonesActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -84,6 +87,7 @@
     useDelay: 0.5
   - type: InstantAction
     event: !type:XenoHideActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -159,6 +163,7 @@
     useDelay: 0.25
   - type: InstantAction
     event: !type:XenoResinWalkerActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -181,6 +186,8 @@
     useDelay: 0.2
   - type: InstantAction
     event: !type:XenoZoomActionEvent
+  - type: ActionBlockIfResting
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -206,6 +213,7 @@
     event: !type:XenoWordQueenActionEvent
   - type: XenoWordQueenAction
   - type: RMCDazeableAction
+  - type: RMCInContainerAction
 
 - type: entity
   id: ActionXenoPsychic
@@ -225,6 +233,7 @@
   - type: WorldTargetAction
     event: !type:XenoPsychicActionEvent
   - type: RMCDazeableAction
+  - type: RMCInContainerAction
 
 - type: entity
   id: ActionXenoGrowOvipositor
@@ -264,6 +273,7 @@
       state: lurker_invisibility
   - type: InstantAction
     event: !type:XenoTurnInvisibleActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -287,6 +297,7 @@
     useDelay: 26
   - type: InstantAction
     event: !type:XenoDefensiveShieldActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -365,6 +376,7 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoReserveParasiteActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -387,6 +399,7 @@
     useDelay: 0.5
   - type: InstantAction
     event: !type:ManageHiveActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   id: ActionXenoDodge
@@ -402,6 +415,7 @@
     useDelay: 13
   - type: InstantAction
     event: !type:XenoDodgeActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
@@ -447,6 +461,7 @@
   - type: InstantAction
     event: !type:XenoSoakActionEvent
   - type: ActionBlockIfResting
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
@@ -484,6 +499,7 @@
       state: lay_egg
   - type: InstantAction
     event: !type:XenoGenerateEggsActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase

@@ -149,6 +149,7 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
       - id: CMVendorBundleSquadMedicalEssentials
+      - id: CMVendorBundleStaffOfficerEssentialLeaderSet
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -488,6 +489,11 @@
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
       - id: CMBootsBlackFilled
+    - name: Specialisation Kit
+      takeOne: CMBundle
+      entries:
+      - id: CMVendorBundleCombatTechnicianEssentials
+      - id: CMVendorBundleSquadMedicalEssentials
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

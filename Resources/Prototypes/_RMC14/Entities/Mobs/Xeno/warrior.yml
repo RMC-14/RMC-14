@@ -38,6 +38,8 @@
     - ActionXenoDevolve
     tier: 2
     hudOffset: -0.15,0.25
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 540 # 9 minutes
   - type: XenoRegen
     restHealMultiplier:  1.4

@@ -17,6 +17,7 @@ public sealed class VehicleEntranceItemSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleSystem _vehicle = default!;
+    [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
 
     public override void Initialize()
     {
@@ -55,12 +56,8 @@ public sealed class VehicleEntranceItemSystem : EntitySystem
         if (!IsPrimedHandGrenade(used))
             return false;
 
-        if (TryComp<VehicleLockComponent>(vehicle, out var vehicleLock) &&
-            vehicleLock.Locked &&
-            !vehicleLock.Broken)
-        {
+        if (!_vehicleLock.CanPassLock(vehicle, user))
             return false;
-        }
 
         if (!_vehicle.TryFindEntryPoint(vehicle, user, out var entryIndex))
             return false;
