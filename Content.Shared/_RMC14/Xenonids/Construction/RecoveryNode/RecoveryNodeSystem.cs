@@ -5,6 +5,8 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
@@ -47,6 +49,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<RecoveryNodeComponent, RecoveryNodeRecoverDoAfterEvent>(OnRecoveryDoAfter);
+        SubscribeLocalEvent<RecoveryNodeComponent, ExaminedEvent>(OnExamined);
     }
 
     public override void Update(float frameTime)
@@ -63,6 +66,15 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
             {
                 TryRecoverRandomXeno((ent, comp));
             }
+        }
+    }
+
+    private void OnExamined(Entity<RecoveryNodeComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Examiner) || HasComp<GhostComponent>(args.Examiner))
+        {
+            var nodeTypeText = Enum.GetName(ent.Comp.RecoveryType) ?? "";
+            args.PushMarkup(Loc.GetString("rmc-xeno-construction-recovery-node-xeno-examine", ("type", nodeTypeText)));
         }
     }
 

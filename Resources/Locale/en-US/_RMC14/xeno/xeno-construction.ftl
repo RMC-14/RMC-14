@@ -100,8 +100,13 @@ rmc-xeno-construction-egg-morpher-examine-next-spawn = A new child will grow in 
 
 rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
 rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.
-rmc-xeno-construction-recovery-node-xeno-examine = Recovers the [color=green]health[/color] of adjacent Xenonids.
-rmc-xeno-construction-plasma-tree-xeno-examine = Recovers the [color=cyan]plasma[/color] of adjacent Xenonids.
+rmc-xeno-construction-recovery-node-xeno-examine = Recovers the {-rmc-xeno-construction-recovery-node-type-text(type: $type)} of adjacent Xenonids.
+-rmc-xeno-construction-recovery-node-type-text =
+    { $type ->
+        [Health] [color=green]health[/color]
+        [Plasma] [color=cyan]plasma[/color]
+        *[other] [color=red]unknown[/color]
+    }
 
 rmc-xeno-construction-no-map-structure = The ground isn't solid.
 rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!
