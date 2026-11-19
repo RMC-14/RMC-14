@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/10/2026 19:33:39
+  time: 11/19/2026 16:50:01
   entityCount: 30987
 maps:
 - 1
@@ -45470,24 +45470,6 @@ entities:
     - type: Transform
       pos: 2.5,31.5
       parent: 1
-- proto: ChessBoard
-  entities:
-  - uid: 26997
-    components:
-    - type: Transform
-      pos: 66.4792,-41.558502
-      parent: 1
-  - uid: 30662
-    components:
-    - type: Transform
-      pos: -42.5,36.5
-      parent: 1
-  - uid: 30664
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -47.5,40.5
-      parent: 1
 - proto: Cigarette
   entities:
   - uid: 32
@@ -47586,37 +47568,6 @@ entities:
     components:
     - type: Transform
       pos: 11.5,-30.5
-      parent: 1
-  - uid: 254
-    components:
-    - type: MetaData
-      desc: Once used for squeezing produce into drinks, this machine has seen better days.
-      name: Defunct Squeezer
-    - type: Transform
-      pos: -35.5,-41.5
-      parent: 1
-  - uid: 255
-    components:
-    - type: Transform
-      pos: -22.5,-15.5
-      parent: 1
-  - uid: 256
-    components:
-    - type: Transform
-      pos: 12.5,-55.5
-      parent: 1
-  - uid: 257
-    components:
-    - type: Transform
-      pos: 11.5,-29.5
-      parent: 1
-  - uid: 258
-    components:
-    - type: MetaData
-      desc: Once used for squeezing produce into drinks, this machine has seen better days.
-      name: Defunct Squeezer
-    - type: Transform
-      pos: -21.5,-42.5
       parent: 1
 - proto: CMAutopsy
   entities:
@@ -57930,7 +57881,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -116017.05
+      secondsUntilStateChange: -116424.086
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -57946,7 +57897,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -116017.05
+      secondsUntilStateChange: -116424.086
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -61642,43 +61593,6 @@ entities:
       name: certified powerloader operator card
     - type: Transform
       pos: 4.6148863,-38.504627
-      parent: 1
-- proto: CMIV
-  entities:
-  - uid: 2788
-    components:
-    - type: Transform
-      pos: 42.5,-8.5
-      parent: 1
-  - uid: 2789
-    components:
-    - type: Transform
-      pos: 45.5,-0.5
-      parent: 1
-  - uid: 2790
-    components:
-    - type: Transform
-      pos: 49.5,-14.5
-      parent: 1
-  - uid: 2791
-    components:
-    - type: Transform
-      pos: 50.5,-14.5
-      parent: 1
-  - uid: 2792
-    components:
-    - type: Transform
-      pos: 52.5,0.5
-      parent: 1
-  - uid: 2793
-    components:
-    - type: Transform
-      pos: 54.5,-4.5
-      parent: 1
-  - uid: 2794
-    components:
-    - type: Transform
-      pos: 69.5,53.5
       parent: 1
 - proto: CMJanitorialCart
   entities:
@@ -88643,6 +88557,24 @@ entities:
     components:
     - type: Transform
       pos: 17.5,-6.5
+      parent: 1
+- proto: RMCChessBoard
+  entities:
+  - uid: 26997
+    components:
+    - type: Transform
+      pos: 66.4792,-41.558502
+      parent: 1
+  - uid: 30662
+    components:
+    - type: Transform
+      pos: -42.5,36.5
+      parent: 1
+  - uid: 30664
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -47.5,40.5
       parent: 1
 - proto: RMCCigarCase
   entities:
@@ -116006,6 +115938,43 @@ entities:
     - type: Transform
       pos: 31.5,64.5
       parent: 1
+- proto: RMCIVStand
+  entities:
+  - uid: 2788
+    components:
+    - type: Transform
+      pos: 42.5,-8.5
+      parent: 1
+  - uid: 2789
+    components:
+    - type: Transform
+      pos: 45.5,-0.5
+      parent: 1
+  - uid: 2790
+    components:
+    - type: Transform
+      pos: 49.5,-14.5
+      parent: 1
+  - uid: 2791
+    components:
+    - type: Transform
+      pos: 50.5,-14.5
+      parent: 1
+  - uid: 2792
+    components:
+    - type: Transform
+      pos: 52.5,0.5
+      parent: 1
+  - uid: 2793
+    components:
+    - type: Transform
+      pos: 54.5,-4.5
+      parent: 1
+  - uid: 2794
+    components:
+    - type: Transform
+      pos: 69.5,53.5
+      parent: 1
 - proto: RMCJumpsuitAthleticShortsBlack
   entities:
   - uid: 30569
@@ -116198,136 +116167,217 @@ entities:
     - type: Transform
       pos: -77.3125,-48.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9184
     components:
     - type: Transform
       pos: -60.75,-52.375
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9185
     components:
     - type: Transform
       pos: -60.3125,-50.40625
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9186
     components:
     - type: Transform
       pos: -57.75,-65.125
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9187
     components:
     - type: Transform
       pos: -56.75,-49.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9188
     components:
     - type: Transform
       pos: -43.5,-7.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9189
     components:
     - type: Transform
       pos: -33.5,15.90625
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9190
     components:
     - type: Transform
       pos: -28.5,11.6875
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9191
     components:
     - type: Transform
       pos: -26.15625,-38.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9192
     components:
     - type: Transform
       pos: -11.5,58.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9193
     components:
     - type: Transform
       pos: -2.5,8.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9194
     components:
     - type: Transform
       pos: -1.5,3.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9195
     components:
     - type: Transform
       pos: -1.3125,17.9375
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9196
     components:
     - type: Transform
       pos: 2.21875,-39.1875
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9197
     components:
     - type: Transform
       pos: 3.71875,-30.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9198
     components:
     - type: Transform
       pos: 3.5,4.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9199
     components:
     - type: Transform
       pos: 3.5,8.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9200
     components:
     - type: Transform
       pos: 3.6875,15.9375
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9201
     components:
     - type: Transform
       pos: 8.28125,31.96875
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9202
     components:
     - type: Transform
       pos: 17.25,43.8125
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9203
     components:
     - type: Transform
       pos: 22.625,28.9375
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9204
     components:
     - type: Transform
       pos: 31.15625,-39.1875
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9205
     components:
     - type: Transform
       pos: 38.0625,3.8125
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9206
     components:
     - type: Transform
       pos: 43.5,-91.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9207
     components:
     - type: Transform
       pos: 56.125,32.875
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9208
     components:
     - type: Transform
       pos: 60.5,-3.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9209
     components:
     - type: Transform
       pos: 62.21875,-44.1875
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLampGreen
   entities:
   - uid: 9210
@@ -116335,26 +116385,41 @@ entities:
     - type: Transform
       pos: -51.5,0.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9211
     components:
     - type: Transform
       pos: 2.59375,33.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9212
     components:
     - type: Transform
       pos: 20.65625,-90.125
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9213
     components:
     - type: Transform
       pos: 24.5,-30.4375
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9214
     components:
     - type: Transform
       pos: 24.5,-27.4375
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9215
     components:
     - type: Transform
@@ -116362,16 +116427,25 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       renderOrder: 3000
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9216
     components:
     - type: Transform
       pos: 37.5,-26.09375
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 9217
     components:
     - type: Transform
       pos: 38.5,-27.09375
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLampTripod
   entities:
   - uid: 9218
@@ -116379,6 +116453,9 @@ entities:
     - type: Transform
       pos: -82.38755,5.786193
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLaptopOff
   entities:
   - uid: 30810
@@ -120528,6 +120605,35 @@ entities:
     components:
     - type: Transform
       pos: 20.72865,-87.18768
+      parent: 1
+- proto: RMCMachineDistilleryMill
+  entities:
+  - uid: 255
+    components:
+    - type: Transform
+      pos: -22.5,-15.5
+      parent: 1
+  - uid: 257
+    components:
+    - type: Transform
+      pos: 11.5,-29.5
+      parent: 1
+- proto: RMCMachineDistillerySqueezer
+  entities:
+  - uid: 254
+    components:
+    - type: Transform
+      pos: -35.5,-41.5
+      parent: 1
+  - uid: 256
+    components:
+    - type: Transform
+      pos: 12.5,-55.5
+      parent: 1
+  - uid: 258
+    components:
+    - type: Transform
+      pos: -21.5,-42.5
       parent: 1
 - proto: RMCMagazineMar50LMG
   entities:
