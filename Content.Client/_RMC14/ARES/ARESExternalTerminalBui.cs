@@ -20,6 +20,7 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
     private Menu _previousMenu = Menu.HomeMenu;
     private int _logIndex = 0;
     private EntProtoId<ARESLogTypeComponent>? _logType;
+    private string _searchText = "";
 
     private enum Menu
     {
@@ -55,6 +56,14 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
         _window.LogsContainer.RemoveAllChildren();
         foreach (var log in component.Logs)
         {
+            if (_searchText != "")
+            {
+                if (!log.ToLower().Contains(_searchText.ToLower()))
+                {
+                    continue;
+                }
+            }
+
             var logLabel = new RichTextLabel();
             logLabel.Text = $"[font size= 12]{FormattedMessage.EscapeText(log)}[/font]";
             logLabel.Margin =  new Thickness(0, 0, 0,  (float)2.5);
@@ -130,6 +139,8 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
                     _menu = Menu.LogMenu;
                     _window.LogsName.Text = $"[font size=16]Logs: {logName}[/font]";
                     _window.LogsDescription.Text = $"[font size=12]Description: {proto.Description}[/font]";
+                    _window.LogSearchTextBox.Text = "";
+                    _searchText = "";
                     Refresh();
                 };
 
@@ -209,6 +220,17 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
             _window.LogCategory.ButtonContainer.RemoveAllChildren();
             _logIndex++;
             SendPredictedMessage(new RMCARESExternalShowLogs(_logType, _logIndex));
+            Refresh();
+        };
+
+        _window.LogSearchButton.OnPressed += _ =>
+        {
+            if (_window.LogSearchTextBox.Text != null)
+            {
+                _searchText = _window.LogSearchTextBox.Text;
+            }
+            else _searchText = "";
+
             Refresh();
         };
 
