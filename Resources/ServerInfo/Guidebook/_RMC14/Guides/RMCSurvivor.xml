@@ -165,7 +165,7 @@
   <Box> This begs the question: What should you scavenge for? </Box>
 
   <Box>
-    <GuideEntityEmbed Entity="WeaponSMGMP5" Caption="Weapons"/>
+    <GuideEntityEmbed Entity="RMCWeaponSMGPCAC5" Caption="Weapons"/>
     <GuideEntityEmbed Entity="WeaponShotgunCustomBuilt" Caption="Shotguns"/>
     <GuideEntityEmbed Entity="RMCBoxShotgunBuckshot" Caption="Ammo"/>
     <GuideEntityEmbed Entity="CMMagazinePistolM77AP" Caption="AP"/>
