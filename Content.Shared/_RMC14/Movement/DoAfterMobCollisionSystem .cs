@@ -11,9 +11,9 @@ public sealed class DoAfterMobCollisionSystem : EntitySystem
         SubscribeLocalEvent<ActiveDoAfterComponent, RMCAttemptMobPushedEvent>(OnAttemptMobPushed);
     }
 
-    private void OnAttemptMobPushed(EntityUid uid, ActiveDoAfterComponent component, ref RMCAttemptMobPushedEvent args)
+    private void OnAttemptMobPushed(Entity<ActiveDoAfterComponent> ent, ref RMCAttemptMobPushedEvent args)
     {
-        if (!TryComp<DoAfterComponent>(uid, out var doAfterComp))
+        if (!TryComp<DoAfterComponent>(ent, out var doAfterComp))
             return;
 
         foreach (var doAfter in doAfterComp.DoAfters.Values)
