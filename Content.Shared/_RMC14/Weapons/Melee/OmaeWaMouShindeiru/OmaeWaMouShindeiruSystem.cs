@@ -26,6 +26,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<DamageTypePrototype> SlashType = "Slash";
@@ -47,6 +48,9 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         var damage = args.BaseDamage + args.BonusDamage;
         foreach (var target in args.HitEntities)
         {
+            if (!_timing.IsFirstTimePredicted)
+                continue;
+
             if (TryComp<MobStateComponent>(target, out var mobState) &&
                 mobState.CurrentState == MobState.Dead)
             {
