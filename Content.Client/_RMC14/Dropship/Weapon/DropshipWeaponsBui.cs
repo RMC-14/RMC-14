@@ -602,7 +602,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
     private TacticalMapView CreateEmbeddedTacMap()
     {
         var view = new TacticalMapView();
-        view.Configure(true, false, false, _tacticalMapSystem.LineLimit, _tacticalMapSystem.LabelMaxLength);
+        view.Configure(false, false, _tacticalMapSystem.LineLimit, _tacticalMapSystem.LabelMaxLength);
 
         var binder = new TacticalMapViewBinder(view, Owner, null);
         _embeddedTacMapBinders.Add(binder);

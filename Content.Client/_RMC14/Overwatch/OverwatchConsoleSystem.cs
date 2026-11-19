@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Overwatch;
+﻿using Content.Client._RMC14.TacticalMap;
+using Content.Shared._RMC14.Overwatch;
 using Robust.Client.Audio;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -13,6 +14,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly TacticalMapSystem _tacticalMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly List<(Entity<AudioComponent, OverwatchRelayedSoundComponent> Audio, EntityCoordinates Position)> _toRelay = new();
@@ -30,6 +32,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     {
         try
         {
+            _tacticalMap.InvalidateViews();
             if (!TryComp(ent, out UserInterfaceComponent? ui))
                 return;
 

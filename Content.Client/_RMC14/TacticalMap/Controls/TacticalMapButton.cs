@@ -87,8 +87,6 @@ public sealed class TacticalMapButton : ContainerButton, ITacticalMapThemed
         }
     }
 
-    public bool TintIcon { get; set; }
-
     public bool Active
     {
         get => _active;
@@ -230,6 +228,5 @@ public sealed class TacticalMapButton : ContainerButton, ITacticalMapThemed
         _box.BorderThickness = new Thickness(thickness);
         _label.FontOverride = TacticalMapStyle.Font(theme, _textStyle);
         _label.FontColorOverride = text;
-        _icon.ModulateSelfOverride = TintIcon ? text : null;
     }
 }

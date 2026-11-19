@@ -13,9 +13,10 @@ public abstract class TacticalMapBui(EntityUid owner, Enum uiKey) : RMCPopOutBui
     {
         base.Open();
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
+        Window.RestorePosition();
 
         var system = EntMan.System<TacticalMapSystem>();
-        Window.View.Configure(false, true, true, system.LineLimit, system.LabelMaxLength);
+        Window.View.Configure(true, true, system.LineLimit, system.LabelMaxLength);
         _binder = new TacticalMapViewBinder(Window.View, Owner, SendMessage);
         _binder.Refresh(true);
     }
@@ -25,7 +26,7 @@ public abstract class TacticalMapBui(EntityUid owner, Enum uiKey) : RMCPopOutBui
         if (disposing && Window != null)
         {
             Window.View.SaveViewState();
-            Window.SaveSize();
+            Window.SaveBounds();
         }
 
         _binder?.Dispose();

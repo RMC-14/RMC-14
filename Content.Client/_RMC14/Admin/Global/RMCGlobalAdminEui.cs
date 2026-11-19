@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Client.Eui;
+using Content.Client._RMC14.TacticalMap;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Eui;
-using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
@@ -19,6 +20,7 @@ public sealed class RMCGlobalAdminEui : BaseEui
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private RMCGlobalAdminWindow _window = default!;
@@ -139,16 +141,33 @@ public sealed class RMCGlobalAdminEui : BaseEui
             _window.TacticalMapHistory.AddChild(lines);
         }
 
-        _window.TacticalMap.Lines.Clear();
-        if (s.TacticalMapLines == default)
+        if (s.TacticalMapLines is not { } history)
         {
             _window.TacticalMapLabel.Text = "Selected: None";
+            _window.TacticalMap.SetBaseMap(null);
+            _window.TacticalMap.SetLayers(Array.Empty<TacticalMapCanvasLayer>());
         }
         else
         {
-            _window.TacticalMapLabel.Text = $"Selected: Round {s.TacticalMapLines.RoundId} by {s.TacticalMapLines.Actor}";
-            _window.TacticalMap.Texture = Texture.Transparent;
-            _window.TacticalMap.Lines.AddRange(s.TacticalMapLines.Lines);
+            EntityUid? map = _entities.TryGetEntity(history.Map, out var mapUid) &&
+                             _entities.HasComponent<TacticalMapComponent>(mapUid)
+                ? mapUid
+                : null;
+
+            _window.TacticalMapLabel.Text = map == null
+                ? $"Selected: Round {history.RoundId} by {history.Actor} (map no longer exists)"
+                : $"Selected: Round {history.RoundId} by {history.Actor}";
+
+            _window.TacticalMap.SetBaseMap(map);
+            _window.TacticalMap.SetLayers(new[]
+            {
+                new TacticalMapCanvasLayer
+                {
+                    Name = history.Actor,
+                    Strokes = history.Strokes,
+                    Labels = history.Labels,
+                },
+            });
         }
 
         foreach (var (left, value) in s.Factions)
