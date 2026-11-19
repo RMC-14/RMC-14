@@ -27,6 +27,9 @@ public sealed partial class RMCResearchComputerWindow : RMCMachineWindow
 
     public TimeSpan CycleStart;
     public TimeSpan CycleEnd;
+    public TimeSpan NextAnnounceAt;
+
+    private bool? _announceReady;
 
     public readonly Label BrokerClearanceLabel;
 
@@ -69,9 +72,29 @@ public sealed partial class RMCResearchComputerWindow : RMCMachineWindow
         row.SetIcon(icon ?? string.Empty);
     }
 
+    public void UpdateAnnounceButtons()
+    {
+        var ready = _timing.CurTime >= NextAnnounceAt;
+        _announceReady = ready;
+        UpdateAnnounceButtons(DocumentsBox, ready);
+        UpdateAnnounceButtons(PublishedBox, ready);
+    }
+
+    private static void UpdateAnnounceButtons(BoxContainer box, bool ready)
+    {
+        foreach (var child in box.Children)
+        {
+            if (child is RMCResearchDocumentRow row)
+                row.AnnounceButton.Visible = row.CanAnnounce && ready;
+        }
+    }
+
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
+
+        if (_announceReady != _timing.CurTime >= NextAnnounceAt)
+            UpdateAnnounceButtons();
 
         if (CycleEnd <= CycleStart)
         {

@@ -13,6 +13,7 @@ public sealed partial class RMCResearchDocumentRow : BoxContainer
 {
     public int Id;
     public bool Published;
+    public bool CanAnnounce;
     public Action<int>? OnRead;
     public Action<int>? OnPrint;
     public Action<int, bool>? OnPublishToggle;

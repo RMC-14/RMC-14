@@ -145,6 +145,9 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
         PopulateContracts(research);
         PopulateDocuments(_window.DocumentsBox, _window.DocumentsEmptyLabel, research, research.Documents, isPublishedTab: false);
         PopulateDocuments(_window.PublishedBox, _window.PublishedEmptyLabel, research, research.Published, isPublishedTab: true);
+
+        _window.NextAnnounceAt = research.NextAnnounceAt;
+        _window.UpdateAnnounceButtons();
     }
 
     private void OnBrokerClearancePressed()
@@ -288,6 +291,10 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
             .SelectMany(kv => kv.Value.Select(e => (Category: kv.Key, Compound: GetCompoundName(e.Title))))
             .ToHashSet();
 
+        var publishedIds = research.Published
+            .SelectMany(kv => kv.Value.Select(e => e.Id))
+            .ToHashSet();
+
         var flattened = ApplySort(
             documents.SelectMany(kv => kv.Value.Select(entry => (Category: kv.Key, Entry: entry))),
             sortColumn,
@@ -327,6 +334,7 @@ public sealed class RMCResearchComputerBui : BoundUserInterface, IRefreshableBui
             row.CompoundLabel.Text = GetCompoundName(entry.Title);
             row.Id = entry.Id;
             row.SetPublished(rowPublished);
+            row.CanAnnounce = publishedIds.Contains(entry.Id);
             row.PublishButton.Visible = mainTerminal;
             row.OnRead = id => SendMessage(new RMCResearchComputerReadDocumentBuiMsg(id));
             row.OnPrint = id => SendMessage(new RMCResearchComputerPrintDocumentBuiMsg(id));
