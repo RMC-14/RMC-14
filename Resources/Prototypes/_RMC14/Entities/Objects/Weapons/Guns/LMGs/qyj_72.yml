@@ -101,7 +101,7 @@
   - type: GunUserWhitelist
     whitelist:
       components:
-      - QYJWhitelist
+      - SPPSpecWhitelist
 
 - type: entity
   parent: RMCMagazineLMGBase
