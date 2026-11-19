@@ -26,7 +26,7 @@ public static class ChemPropertyRelations
     public static readonly Dictionary<string, List<string>> Combines = new()
     {
         ["Defibrillating"] = new List<string> { "Musclestimulating", "Cardiopeutic" },
-        ["Thanatometabol"] = new List<string> { "Hypoxemic", "Cryometabolizing", "Neurocryogenic" },
+        ["Thanatometabolizing"] =new List<string> { "Hypoxemic", "Cryometabolizing", "Neurocryogenic" },
         ["Hyperdensificating"] = new List<string> { "Musclestimulating", "Bonemending", "Carcinogenic" },
         ["Hyperthrottling"] = new List<string> { "Psychostimulating", "Hallucinogenic" },
         ["Neuroshielding"] = new List<string> { "Alcoholic", "Atrichogenic" },
