@@ -14,6 +14,8 @@ rmc-storage-limit-grenades = You can't fit any more grenades!
 rmc-storage-limit-not-ziptie-box = That slot is reserved for a ziptie box!
 rmc-storage-nothing-left = {CAPITALIZE(THE($storage))} is empty. Nothing to grab.
 rmc-storage-limit-generic = The storage cannot hold more of that item!
+rmc-storage-limit-one-hypospray = That is already holding a hypospray!
+rmc-storage-limit-max-vials = You can't fit more vials in the belt!
 
 rmc-holster-verb = Unholster
 rmc-storage-webbing-remove-verb = Remove webbing
