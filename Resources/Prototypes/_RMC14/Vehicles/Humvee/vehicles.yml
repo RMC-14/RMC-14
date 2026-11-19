@@ -5,6 +5,11 @@
   name: humvee
   description: A fast armored utility vehicle outfitted for patrols and support.
   components:
+  - type: VehicleLock
+    access:
+    - CMAccessCrewman
+    - RMCAccessCommand
+    - CMAccessBrig
   - type: WarpPoint
     follow: true
     location: Humvee
@@ -324,7 +329,7 @@
     - HardpointTypeCannon
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_arc_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 5
     maxXenos: 2
