@@ -317,6 +317,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         args.Verbs.Add(new AlternativeVerb
         {
             Text = Loc.GetString("rmc-refillsolution-flush"),
+            Priority = -1,
             Act = () =>
             {
                 TryFlushContainer(ent, user);

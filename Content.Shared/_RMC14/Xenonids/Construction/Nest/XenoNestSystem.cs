@@ -677,7 +677,7 @@ public sealed class XenoNestSystem : EntitySystem
         }
 
         var position = xform.LocalPosition;
-        _transform.SetLocalPosition(nested, position + xform.LocalRotation.ToWorldVec() / 2);
+        _transform.SetLocalPosition(nested, position + xform.LocalRotation.ToWorldVec() / 5);
         _transform.AttachToGridOrMap(nested, xform);
 
         RemCompDeferred<XenoNestedComponent>(nested);

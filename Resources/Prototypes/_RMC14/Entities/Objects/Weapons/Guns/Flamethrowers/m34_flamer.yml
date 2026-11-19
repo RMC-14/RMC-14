@@ -27,7 +27,7 @@
     - Back
   - type: Gun
     cameraRecoilScalar: 0
-    fireRate: 0.333
+    fireRate: 0.286
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

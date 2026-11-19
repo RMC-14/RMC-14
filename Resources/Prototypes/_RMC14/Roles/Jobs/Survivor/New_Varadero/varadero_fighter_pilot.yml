@@ -59,7 +59,7 @@
     Emerald: RMCMedalEmeraldService
     Prismatic: RMCMedalPrismaticService
 
-- type: startingGear
+- type: startingGear # they are supposed to start with a parachute on CM, but that doesn't really make sense because here because spawntogethers exist
   id: RMCGearSurvivorUNMCPilot
   equipment:
     jumpsuit: RMCJumpsuitPilotFighter
@@ -69,14 +69,9 @@
     id: CMIDCardStandardDogtag
     pocket1: RMCPouchSurvivalFill
     belt: CMBeltUtilityFilled
-    outerClothing: RMCCoatPilotFighter
-    back: RMCSatchelLightpack5Slot
-    shoes: CMBootsBlackFilled
-  storage:
-    back:
-      - CMSheetMetal20
-      - CMSheetPlasteel10
-      - ClothingHeadHatWelding
+    outerClothing: RMCArmorPDU
+    back: RMCSatchelNV
+    shoes: CMBootsUrbanFilled
 
 - type: entity
   parent: RMCGearSurvivorPresetUNMC
