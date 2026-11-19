@@ -31,11 +31,13 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Areas;
 
 namespace Content.Shared._RMC14.Sentry;
 
 public sealed class SentrySystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -402,6 +404,12 @@ public sealed class SentrySystem : EntitySystem
         {
             var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", sentry));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (_area.TryGetArea(coordinates, out var area, out _) && !area.Value.Comp.Construction)
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-no-construction-area"), user, user, PopupType.SmallCaution);
             return false;
         }
 
