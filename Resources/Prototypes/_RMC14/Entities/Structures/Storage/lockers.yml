@@ -462,7 +462,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/engineer_atmo.rsi
   - type: AccessReader
-    access: [["CMAccessEngineering"]]
+    access: [["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
 
 # Squads
 - type: entity
