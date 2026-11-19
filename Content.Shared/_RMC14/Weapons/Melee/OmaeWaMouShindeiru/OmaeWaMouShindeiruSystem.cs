@@ -57,7 +57,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 continue;
             }
 
-            if (HasKatana(target) && args.User != target)
+            if (HasKatana(target) && args.User != target && _net.IsServer)
             {
                 CounterSwing(args.User, target);
 
