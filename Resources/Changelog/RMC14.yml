@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed a lot of entities working off infinite inner power.
-    type: Fix
-  id: 3290
-  time: '2026-06-06T23:20:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9975
 - author: kleinerstation13
   changes:
   - message: Security colonist job preference no longer rolls for Riot in Progress
@@ -4452,5 +4445,12 @@
   id: 3789
   time: '2026-11-19T01:19:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9965
+- author: Dygon
+  changes:
+  - message: Fixed the evacuation fuel progress sometimes permanently staying at 0%.
+    type: Fix
+  id: 3790
+  time: '2026-11-19T05:21:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10600
 Name: RMC14
 Order: -1
