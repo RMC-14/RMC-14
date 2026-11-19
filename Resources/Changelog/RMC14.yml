@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: kleinerstation13
   changes:
-  - message: Security colonist job preference no longer rolls for Riot in Progress
-      Riot Control Team Lead on Fiorina, that role is now picked randomly
-    type: Tweak
-  id: 3291
-  time: '2026-06-06T23:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9940
-- author: kleinerstation13
-  changes:
   - message: Fixed Type 64, UZI, Type 19, MP27, MAC15 and MP5 being the incorrect
       size, they are now small in inventories as intended
     type: Fix
@@ -4452,5 +4444,13 @@
   id: 3790
   time: '2026-11-19T05:21:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10600
+- author: SabreML
+  changes:
+  - message: Xeno weeds won't disappear naturally until every source node in range
+      is destroyed, rather than just the one which spawned them.
+    type: Add
+  id: 3791
+  time: '2026-11-19T05:45:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10357
 Name: RMC14
 Order: -1
