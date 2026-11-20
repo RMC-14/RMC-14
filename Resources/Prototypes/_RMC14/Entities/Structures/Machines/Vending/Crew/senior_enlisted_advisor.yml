@@ -20,7 +20,7 @@
       - id: CMBootsBlackFilled
       - id: CMMRE
       - id: RMCStampSEA
-      - id: RMCOuterClothingExternalWebbing      
+      - id: RMCOuterClothingExternalWebbing
       - id: CMJumpsuitOperations
         name: operations uniform
     - name: Gloves

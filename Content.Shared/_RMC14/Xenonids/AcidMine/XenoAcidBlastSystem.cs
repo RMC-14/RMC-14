@@ -1,10 +1,11 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Construction.DeployedTraps;
 using Content.Shared._RMC14.Xenonids.DeployTraps;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
@@ -33,6 +34,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly XenoSpitSystem _spit = default!;
 
     private readonly HashSet<EntityUid> _targets = new();
 
@@ -179,24 +181,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         }
 
         if (ent.Comp.Empowered)
-            ApplyOrExtendAcid(ent, target);
-    }
-
-    private void ApplyOrExtendAcid(Entity<XenoAcidBlastComponent> ent, EntityUid target)
-    {
-        if (TryComp(target, out UserAcidedComponent? existing))
-        {
-            existing.ExpiresAt += ent.Comp.AcidProlongDuration;
-            Dirty(target, existing);
-        }
-        else
-        {
-            var acided = EnsureComp<UserAcidedComponent>(target);
-            acided.Duration = ent.Comp.AcidDuration;
-            acided.Damage = ent.Comp.AcidDamage;
-            acided.ArmorPiercing = ent.Comp.AcidArmorPiercing;
-            Dirty(target, acided);
-        }
+            _spit.ApplyOrExtendAcid(target, ent.Comp.Acid);
     }
 
     private void RefreshCooldowns(EntityUid xeno, int hits, XenoAcidBlastComponent blast)

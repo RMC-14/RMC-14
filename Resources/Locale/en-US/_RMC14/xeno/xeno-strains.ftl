@@ -135,7 +135,7 @@ rmc-xeno-berserker-name = Berserker
 rmc-xeno-berserker-description = You lose:
   - Your empower, charge, and scissor cut.
   - Some health.
-  - The ability to fully benefit from 'strong' or better frenzy pheromones 
+  - The ability to fully benefit from 'strong' or better frenzy pheromones
   You gain:
   - Movement speed, a slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
   - The ability to heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
@@ -209,6 +209,9 @@ rmc-xeno-destrain-cooldown = We lack the strength to reset our strain. We will b
    *[other] minutes
 }.
 
+rmc-xeno-witch-name = Witch
+rmc-xeno-witch-description = You shall make a stew so wicked and shrew! Command your army of cursed children to turn talls into your greatest brew!
+rmc-xeno-witch-popup = Muwahahahah!
 rmc-xeno-bloodqueen-name = Blood Queen
 rmc-xeno-bloodqueen-description = You lose:
   - Your queen level pheromones are replaced with strong pheromones.
