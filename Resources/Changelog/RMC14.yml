@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed weld time not scaling with skill correctly
-    type: Fix
-  id: 3338
-  time: '2026-06-09T21:53:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10071
-- author: Vixting
-  changes:
-  - message: Fixed the blocked cade acid popup displaying even when the interaction
-      wasn't blocked
-    type: Fix
-  id: 3339
-  time: '2026-06-09T21:53:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10090
-- author: Vixting
-  changes:
-  - message: Fixed guns sometimes firing twice
-    type: Fix
-  - message: Disabled weapons that have full auto capability from using continuous
-      fire (no more laser beam)
-    type: Remove
-  id: 3340
-  time: '2026-06-09T21:52:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10079
 - author: MidZik
   changes:
   - message: Sensor towers will no longer break immediately after being turned on.
@@ -4447,5 +4422,44 @@
   id: 3837
   time: '2026-11-20T05:43:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10929
+- author: Vermidia
+  changes:
+  - message: Added ability previews for High Gallop, Scissor Cut, Tail Lash, and Flurry.
+    type: Add
+  - message: Fixed burrow landing preview being tile locked (the ability itself is
+      not).
+    type: Fix
+  - message: Fixed Vampire Lurker Flurry being a horizontal 1x2 instead of a vertical
+      1x3.
+    type: Fix
+  id: 3838
+  time: '2026-11-20T05:45:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10644
+- author: Vermidia
+  changes:
+  - message: You can now shake backpacks/satchels (its a verb) in hand or on your
+      back to remove the rightmost (or leftmost if storage draw mode is set to last)
+      item from them.
+    type: Add
+  id: 3839
+  time: '2026-11-20T05:46:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10870
+- author: Vermidia
+  changes:
+  - message: Fixed AI parasites having too high infect range (3 -> 1.5), taking too
+      long to check for jumps (5 -> 2.5s) having varying idle time (it's always 4s
+      now) and not trying enough jumps (5 max before going to dying mode).
+    type: Fix
+  - message: Fixed carrier's 'carrier's bond' action throw cooldown being too high,
+      and now retrieve also has a cooldown, both are seperate (0.5 seconds each).
+      Carrier also throws much faster now, and parasite stun is slightly lower. Range
+      is also higher at about 6~ tiles.
+    type: Fix
+  - message: Fixed dropping parasites not having a 2.5 second cooldown. This does
+      not effect the throw parasite action.
+    type: Fix
+  id: 3840
+  time: '2026-11-20T05:47:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10340
 Name: RMC14
 Order: -1
