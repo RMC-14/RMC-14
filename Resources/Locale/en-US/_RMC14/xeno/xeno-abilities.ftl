@@ -244,6 +244,10 @@ rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE(
 } available.
 rmc-xeno-throw-parasite-empty = We take children from {THE($morpher)} and carry them for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
 rmc-xeno-throw-parasite-empty-on-fire = Touching {THE($morpher)} while you're on fire would burn the children in it!
+rmc-xeno-throw-parasite-throw-cooldown = We must wait before throwing another child.
+rmc-xeno-throw-parasite-retrieve-cooldown = We must wait before retrieving another child.
+
+rmc-xeno-parasite-drop-cooldown = We must wait before dropping another child.
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
@@ -494,3 +498,29 @@ rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE
 rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
 rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
 rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!
+
+# Massacre
+rmc-xeno-massacre-no-targets = There's no dead to tear apart!
+rmc-xeno-massacre-start-self = We start ripping apart the dead!
+rmc-xeno-massacre-start-others = {CAPITALIZE(THE($user))} starts tearing apart the nearby bodies!
+rmc-xeno-massacre-end-self = We tear the dead apart!
+rmc-xeno-massacre-end-others = {CAPITALIZE(THE($user))} tears the nearby bodies apart!
+
+# Blood Drain
+rmc-xeno-blood-drain-target = {CAPITALIZE(THE($user))} is biting into you!
+rmc-xeno-blood-drain-no-blood = {CAPITALIZE(THE($target))} has no blood left!
+rmc-xeno-blood-drain-bad-blood = {CAPITALIZE(THE($target))} has terrible tasting blood!
+rmc-xeno-blood-drain-infected-blood = {CAPITALIZE(THE($target))} has sister blood flowing through them!
+rmc-xeno-blood-drain-pull = We need to pull {CAPITALIZE(THE($target))} to drain blood!
+rmc-xeno-blood-drain-down = We need to keep {CAPITALIZE(THE($target))} down to drain blood!
+
+# Paratoxin Slashes
+rmc-xeno-paratoxin-slashes-apply = Our next {$number ->
+[1] slash
+*[other] {$number} slashes
+} will apply paratoxin!
+rmc-xeno-paratoxin-slashes-expire = We have waited too long, our slashes will no longer apply paratoxin!
+
+# Catalytic Tail Stab
+rmc-xeno-catalytic-tail-stab-buff = We are faster and more armored for a short time!
+rmc-xeno-catalytic-tail-stab-buff-expire = We feel our speed and armor dissipate!
