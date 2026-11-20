@@ -74,6 +74,78 @@
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/lz1alternative.yml"
       probability: 0.6
 
+- type: entity
+  parent: RMCMapInsertKutjevoBase
+  id: RMCMapInsertKutjevoCaveHold
+  name: Cave Hold
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/cave_hold.yml"
+      probability: 0.1
+      offset: "1,-1"
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertKutjevoBase
+  id: RMCMapInsertKutjevoNorthroadGarage
+  name: Northroad Garage
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/northroad_garage.yml"
+      probability: 0.25
+
+- type: entity
+  parent: RMCMapInsertKutjevoBase
+  id: RMCMapInsertKutjevoFaceHuggerExamination
+  name: Facehugger Examination
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/facehugger_examination.yml"
+      probability: 0.3
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertKutjevoBase
+  id: RMCMapInsertKutjevoFlightcontrolExtension
+  name: Flightcontrol Extension
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/flightcontrol_extension.yml"
+      probability: 0.3
+      offset: "1,1"
+
+- type: entity
+  parent: RMCMapInsertKutjevoBase
+  id: RMCMapInsertKutjevoLZ2Containers
+  name: LZ2 Containers
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/lz2_containers.yml"
+      probability: 0.3
+      offset: "1,0"
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertKutjevoBase
+  id: RMCMapInsertKutjevoWYOffice
+  name: WY Office
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/wy_office.yml"
+      probability: 0.3
+      offset: "0,2"
 
 # Survivor Scenario Inserts
 - type: entity

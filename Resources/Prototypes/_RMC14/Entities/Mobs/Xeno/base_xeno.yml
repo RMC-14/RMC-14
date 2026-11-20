@@ -375,6 +375,7 @@
     xenoVisible: true
   - type: CanBeLarvaQueued
   - type: XenoLastStandable
+  # - type: RMCEquippedStorageOpenOnInteract - TODO RMC14 to use with xeno backpacks
 
 - type: entity
   abstract: true
