@@ -34,7 +34,7 @@ public sealed class RangefinderBui : BoundUserInterface
         _window = this.CreateWindow<RangefinderWindow>();
         _window.Header.SetMarkupPermissive(Loc.GetString("rmc-rangefinder-header"));
 
-        _window.CopyButton.OnPressed += _ => _clipboard.SetText($"Longitude ({_lastX}), Latitude ({_lastY})");
+        _window.CopyButton.OnPressed += _ => _clipboard.SetText($"X ({_lastX}), Y ({_lastY})");
 
         Refresh();
     }
