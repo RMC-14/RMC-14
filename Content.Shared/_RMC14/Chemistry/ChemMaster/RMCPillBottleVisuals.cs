@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 
@@ -6,6 +6,13 @@ namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 public enum RMCPillBottleVisuals
 {
     Color,
+    Broken,
+}
+
+[Serializable, NetSerializable]
+public enum RMCPillBottleLayers
+{
+    Broken,
 }
 
 [Serializable, NetSerializable]
@@ -24,4 +31,11 @@ public enum RMCPillBottleColors
     Grey,
     Red,
     Black,
+}
+
+[Serializable, NetSerializable]
+public enum RMCPillColorVisuals
+{
+    Layer,
+    Color,
 }

@@ -11,9 +11,9 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: RMCSkillPresetSurvivor
+      preset: RMCSkillPresetSurvivorPrisoner
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetBeachBum
+      preset: RMCGearSurvivorPresetUNMC
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -41,7 +41,7 @@
   equipment:
     jumpsuit: RMCJumpsuitRedShorts
     back: CMSatchelFillSurvivorBeachBum
-    head: RMCBoonie
+    head: RMCBoonieNV
     mask: RMCCigarette
     shoes: RMCShoesSandals
     gloves: CMHandsBrown
@@ -73,9 +73,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: entity
-  parent: RMCSurvivorPresetCivilian
-  id: RMCGearSurvivorPresetBeachBum
-  name: beach bum colonist preset
-  categories: [ HideSpawnMenu ]
