@@ -150,7 +150,7 @@ public sealed class GunAkimboSystem : EntitySystem
             if (_hands.GetHeldItem(user.AsNullable(), hand) is not { } held ||
                 held == gun.Owner ||
                 !TryComp(held, out GunDualWieldingComponent? dualWieldingComp) ||
-                dualWieldingComp.WeaponGroup != gun.Comp.WeaponGroup ||
+                dualWieldingComp.WeaponGroup == GunDualWieldingGroup.None ||
                 HasComp<GunRequiresWieldComponent>(held))
             {
                 continue;
