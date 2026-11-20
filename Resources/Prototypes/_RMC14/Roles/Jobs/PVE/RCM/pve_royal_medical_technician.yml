@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: CMRoyalMarinesMedicPVE
-  name: rmc-job-name-rcm-pve-medical-assistant
+  name: rmc-job-name-rcm-medic
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalMedicPVE
   requirements:
@@ -16,7 +16,7 @@
   supervisors: cm-job-supervisors-royal-tl
   accessGroups:
   - HospitalCorpsman
-  spawnMenuRoleName: RCM Medical Assistant (PVE)
+  spawnMenuRoleName: RCM Medical Technician (PVE)
   special:
   - !type:AddComponentSpecial
     components:
@@ -47,7 +47,7 @@
         RMCSkillPilot: 1
         RMCSkillSurgery: 2
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-pve-medical-assistant
+      prefix: cm-job-prefix-maint-tech
     - type: AssignSquad
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
@@ -69,8 +69,8 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointRCMPVEMedicalAssistant
-  name: RCM medical assistant spawn point
+  id: CMSpawnPointRCMPVEMedicalTechnician
+  name: RCM medical technician spawn point
   components:
   - type: SpawnPoint
     job_id: CMRoyalMarinesMedicPVE
