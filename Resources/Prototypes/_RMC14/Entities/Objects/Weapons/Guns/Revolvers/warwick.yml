@@ -18,6 +18,12 @@
     multiplier: 1.1
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.2
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.125
+      rmc-aslot-rail: -0.125, 0.185
+      rmc-aslot-stock: -0.75, -0.125
+      rmc-aslot-underbarrel: 0.45, -0.1875
 
 - type: entity
   parent: RMCWeaponRevolverWarwickMkVII
@@ -35,12 +41,33 @@
   id: RMCWeaponRevolverWarwickMkVIISnub
   name: Warwick MkVII snubnose revolver
   description: The L187 Warwick MkVII top-break revolver is the standard-issue service revolver of the RCM’s Paramarine regiments. This particular variant features a snubnose barrel and reduced profile grip, keeping the weapon compact and light.
-  suffix: RCM, Loadout
+  suffix: RCM, Loadout, Filled
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick_snub.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick_snub.rsi
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.55, 0.125
+      rmc-aslot-rail: -0.125, 0.185
 
 - type: Tag
   id: RMCWeaponRevolverWarwickMkVII

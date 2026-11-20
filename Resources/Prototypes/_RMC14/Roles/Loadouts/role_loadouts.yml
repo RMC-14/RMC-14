@@ -152,7 +152,7 @@
   id: JobCMCommandingOfficer
   points: 7
   groups:
-  - MarineLeatherBackpack
+  - MarineSecureBackpack
   - CommandingOfficerIDRMC
   - CommandingOfficerWeaponRMC
   - CommandingOfficerRoleSpecificRMC
@@ -609,12 +609,13 @@
   groups:
   - ProvostSecurityBackpack
   - ProvostRoleSpecificOuterwearRMC
+  - ProvostRoleSpecificHeadRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
   - AccessoriesRMC
-  - WatchesBasicRMC
+  - WatchesCommandingOfficerRMC
   - PaperworkRMC
   - RecreationalRMC
   - PlushiesRMC
@@ -1096,6 +1097,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1110,6 +1112,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1124,6 +1127,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1138,6 +1142,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1152,6 +1157,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -1165,6 +1171,7 @@
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
   - AccessoriesRMCPVE
+  - WatchesBasicRMC
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins

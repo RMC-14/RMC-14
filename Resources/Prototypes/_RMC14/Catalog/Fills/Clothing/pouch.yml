@@ -19,6 +19,7 @@
     - id: RMCCigarettePackWeYaGold
     - id: RMCZippo
     - id: RMCSpaceCash1000
+    - id: RMCSpaceCash1000
     - id: RMCUniversalRecorder
 
 - type: entity
@@ -29,7 +30,7 @@
   - type: StorageFill
     contents:
     - id: CMMagazineSMGM63AP
-    
+
 - type: entity
   parent: RMCPouchGeneralLarge
   id: RMCPouchGeneralLargeFillWheat
@@ -154,6 +155,16 @@
   - type: StorageFill
     contents:
     - id: RMCSpeedLoaderMatebaHIAP
+      amount: 4
+
+- type: entity
+  parent: RMCPouchMagazinePistol
+  id: RMCPouchMagazinePistolFilledM1911
+  suffix: Filled, M1911
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1911
       amount: 4
 
 # Shotgun Pouch

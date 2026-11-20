@@ -238,6 +238,7 @@
   - type: PointLight
     enabled: true
     radius: 3
+    color: "#67ff4f"
   - type: RMCNightVisionVisibleInView
   - type: FixedIdentity
     name: cm-chatsan-replacement-laser-range
@@ -266,6 +267,8 @@
     whitelist:
       components:
       - Xeno
+  - type: PointLight
+    color: "#ff5c5c"
 
 - type: entity
   parent: RMCRangefinderTarget

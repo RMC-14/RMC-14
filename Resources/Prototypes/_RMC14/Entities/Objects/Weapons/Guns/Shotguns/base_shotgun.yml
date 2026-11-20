@@ -133,6 +133,7 @@
   - type: CartridgeAmmo
     proto: CMPelletShotgunBuckshot
     deleteOnSpawn: true
+    muzzleFlash: MuzzleFlashEffectShotgun
     soundEject:
       collection: ShellEject
     soundInsert:
