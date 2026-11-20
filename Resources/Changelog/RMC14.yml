@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed AI parasites on the ground not being takeoverable by ghosts
-    type: Fix
-  - message: Changed the criteria for parasites that can be ghostrolable - they must
-      not be held/in a container, and recently ghosted parasites can also be taken
-      over now.
-    type: Tweak
-  id: 3361
-  time: '2026-06-11T22:28:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10034
-- author: Dygon
-  changes:
-  - message: Fixed the Sapper Boiler's view range increase from "Long Range Sight"
-      being too high, reduced it by 11.1%.
-    type: Fix
-  id: 3362
-  time: '2026-06-11T22:30:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10110
 - author: Dygon
   changes:
   - message: Fixed the reflective wall not having a build animation.
@@ -4483,5 +4464,20 @@
   id: 3860
   time: '2026-11-20T07:38:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10355
+- author: wheelwrightt
+  changes:
+  - message: Intel database computer that allows any user the view the current intel
+      tech tree objectives.
+    type: Add
+  id: 3861
+  time: '2026-11-20T07:42:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9480
+- author: TadJohnson00
+  changes:
+  - message: The HK MP5 has been renamed to the PCAC5 and received a new sprite.
+    type: Tweak
+  id: 3862
+  time: '2026-11-20T07:43:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9828
 Name: RMC14
 Order: -1
