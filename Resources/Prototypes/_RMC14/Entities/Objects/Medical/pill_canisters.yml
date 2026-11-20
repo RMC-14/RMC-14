@@ -86,6 +86,13 @@
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 500
+  - type: RMCBreakablePillBottle
+    breakWhitelist:
+      tags:
+      - Knife
+    repairWhitelist:
+      tags:
+      - Wirecutter
 
 - type: entity
   parent: RMCPillCanisterNoSkill
