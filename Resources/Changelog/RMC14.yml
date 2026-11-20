@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: BarteG44
-  changes:
-  - message: Most glasses work as helmet and hat garbs now
-    type: Tweak
-  id: 3364
-  time: '2026-06-11T22:31:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9983
-- author: Arykh
-  changes:
-  - message: Fixed getting stuck when exiting a Sleeper, Autodoc, or Body Scanner!
-    type: Fix
-  id: 3365
-  time: '2026-06-11T22:33:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10072
-- author: Arykh
-  changes:
-  - message: "Added the \u201Cresist\u201D keybind. Press B instead of clicking the\
-      \ fire icon to stop, drop and roll. Also unbuckles, remove cuffs, etc."
-    type: Add
-  id: 3366
-  time: '2026-06-11T22:33:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9734
 - author: Vermidia
   changes:
   - message: Fixed Impale and Tail Trip miss cooldowns being too long (1.5s -> 0.7s)
@@ -4483,5 +4461,35 @@
   id: 3863
   time: '2026-11-20T07:48:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10944
+- author: IceNoobXD
+  changes:
+  - message: Added another braincell to the intel UI, it will now no-longer reset
+      your tab and searchbar when a new clue gets added to the database!
+    type: Add
+  id: 3864
+  time: '2026-11-20T07:51:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10512
+- author: MidZik
+  changes:
+  - message: Xeno designated construction announcements work again.
+    type: Fix
+  id: 3865
+  time: '2026-11-20T07:50:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10372
+- author: SabreML
+  changes:
+  - message: Xenonid structures now show how damaged they are when examined.
+    type: Add
+  - message: Added extra examine text to egg morphers, recovery nodes, plasma trees,
+      and weedbound structures.
+    type: Add
+  - message: Examining Alacrit fruit now shows its speed boost as a percent increase
+      to your caste's base speed, rather than just its value of '0.2'.
+    type: Add
+  - message: Observers can now see tunnel names and egg morpher details.
+    type: Add
+  id: 3866
+  time: '2026-11-20T07:51:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10552
 Name: RMC14
 Order: -1
