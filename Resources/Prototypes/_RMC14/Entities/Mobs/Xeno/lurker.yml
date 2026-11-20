@@ -108,6 +108,11 @@
   id: CMXenoLurker
   suffix: Base
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoPounce ]
+      XenoPrimaryTwo: [ ActionXenoTurnInvisible ]
+      XenoPrimaryThree: [ ActionXenoCripplingStrike ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleLurker
@@ -141,6 +146,12 @@
   id: RMCXenoLurkerVampire
   suffix: Vampire
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoRush ]
+      XenoPrimaryTwo: [ ActionXenoFlurry ]
+      XenoPrimaryThree: [ ActionXenoTailJab ]
+      XenoPrimaryFour: [ ActionXenoHeadbite ]
   - type: GuideHelp
     guides:
     - RMCGuideRoleVampire

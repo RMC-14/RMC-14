@@ -305,6 +305,13 @@
   parent: RMCXenoQueenBase
   id: CMXenoQueen
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoHeal ]
+      XenoPrimaryTwo: [ ActionXenoTransferPlasmaQueen ]
+      XenoPrimaryThree: [ ActionXenoPlantWeeds ]
+      XenoPrimaryFour: [ ActionXenoChooseStructure ]
+      XenoPrimaryFive: [ ActionXenoSecreteStructure ]
   # XenoMaturing moves this ordering onto CMXenoQueen once they mature
   - type: RMCActionOrder
     id: CMXenoQueenImmature
