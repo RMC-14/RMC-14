@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed acid being extinguishable off of non-guns
-    type: Fix
-  id: 3337
-  time: '2026-06-09T16:48:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10082
 - author: Vixting
   changes:
   - message: Fixed weld time not scaling with skill correctly
@@ -4447,5 +4440,12 @@
   id: 3836
   time: '2026-11-20T05:42:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10575
+- author: Vermidia
+  changes:
+  - message: Fixed 50 or greater oxygen damage not causing marines to go unconscious.
+    type: Fix
+  id: 3837
+  time: '2026-11-20T05:43:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10929
 Name: RMC14
 Order: -1
