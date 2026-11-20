@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Fixed the PK7's Underbarrel Offset
-    type: Fix
-  id: 3359
-  time: '2026-06-11T22:24:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10108
 - author: Ian321
   changes:
   - message: The planetside dropship navigation computers should now work on all maps
@@ -4483,5 +4476,13 @@
   id: 3858
   time: '2026-11-20T06:31:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10967
+- author: '- Simon'
+  changes:
+  - message: Business cards added to the game, they work how you expect they would
+      work
+    type: Add
+  id: 3859
+  time: '2026-11-20T07:35:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10934
 Name: RMC14
 Order: -1
