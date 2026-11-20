@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Playing card actions are predicted now.
-    type: Fix
-  id: 3319
-  time: '2026-06-08T01:46:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10044
 - author: IceNoobXD
   changes:
   - message: Toxic water now respects catwalks!
@@ -4446,5 +4439,12 @@
   id: 3818
   time: '2026-11-20T02:11:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10762
+- author: SharkSnake98
+  changes:
+  - message: Changed the SFX of the SSG-45.
+    type: Tweak
+  id: 3819
+  time: '2026-11-20T02:21:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10795
 Name: RMC14
 Order: -1
