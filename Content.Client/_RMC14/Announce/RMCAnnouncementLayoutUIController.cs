@@ -179,6 +179,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
 
         BindColor(window.BodyColorInput, window.BodyColorPicker, color => Target with { TextColor = color });
         BindColor(window.TitleColorInput, window.TitleColorPicker, color => Target with { TitleColor = color });
+        BindColor(window.SpeakerColorInput, window.SpeakerColorPicker, color => Target with { SpeakerColor = color });
         BindColor(window.SpriteBoxColorInput, window.SpriteBoxColorPicker, color => Target with { PortraitBackgroundColor = color });
         BindColor(window.SpriteBoxBorderColorInput, window.SpriteBoxBorderColorPicker, color => Target with { PortraitBorderColor = color });
         BindColor(window.CRTGlowColorInput, window.CRTGlowColorPicker, color => Target with { CrtGlowColor = color });
@@ -321,12 +322,15 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
         var showCrt = _editGlobal || preset.Crt != null;
         var showBackground = _editGlobal || preset.BackgroundColor != null;
         _window.SpriteBoxColorRow.Visible = hasPortrait && effective.ShowPortrait != false;
+        _window.SpeakerColorRow.Visible = _editGlobal ||
+                                          preset.ShowSpeakerName && preset.Template != RMCAnnouncementTemplate.TitleCard;
         _window.CRTGlowColorSection.Visible = showCrt;
         _window.BackgroundColorSection.Visible = showBackground;
         _window.ExtraColorRow.Visible = showCrt || showBackground;
 
         SetColor(_window.BodyColorInput, _window.BodyColorPicker, target.TextColor, effective.TextColor ?? preset.TextColor ?? accent);
         SetColor(_window.TitleColorInput, _window.TitleColorPicker, target.TitleColor, effective.TitleColor ?? accent);
+        SetColor(_window.SpeakerColorInput, _window.SpeakerColorPicker, target.SpeakerColor, effective.SpeakerColor ?? RMCAnnouncementCard.GetDefaultSpeakerColor(accent));
         SetColor(_window.SpriteBoxColorInput, _window.SpriteBoxColorPicker, target.PortraitBackgroundColor, effective.PortraitBackgroundColor ?? preset.PortraitBackgroundColor);
         SetColor(_window.SpriteBoxBorderColorInput, _window.SpriteBoxBorderColorPicker, target.PortraitBorderColor, effective.PortraitBorderColor ?? accent);
         SetColor(_window.CRTGlowColorInput, _window.CRTGlowColorPicker, target.CrtGlowColor, effective.CrtGlowColor ?? accent);

@@ -147,6 +147,7 @@ rmc-ui-options-announcements-layout-show-title = Show title
 rmc-ui-options-announcements-layout-show-portrait = Show portrait
 rmc-ui-options-announcements-layout-body-color = Body color hex
 rmc-ui-options-announcements-layout-title-color = Title color hex
+rmc-ui-options-announcements-layout-speaker-color = Speaker name color hex
 rmc-ui-options-announcements-layout-sprite-box-color = Sprite box bg hex
 rmc-ui-options-announcements-layout-sprite-box-border-color = Sprite box border hex
 rmc-ui-options-announcements-layout-crt-glow-color = CRT glow color hex

@@ -71,6 +71,12 @@
                 </BoxContainer>
             </BoxContainer>
 
+            <BoxContainer Name="SpeakerColorRow" Access="Public" Orientation="Vertical" SeparationOverride="4">
+                <Label Text="{Loc 'rmc-ui-options-announcements-layout-speaker-color'}" StyleClasses="LabelKeyText" />
+                <LineEdit Name="SpeakerColorInput" Access="Public" HorizontalExpand="True" />
+                <ColorSelectorSliders Name="SpeakerColorPicker" Access="Public" IsAlphaVisible="True" />
+            </BoxContainer>
+
             <BoxContainer Name="SpriteBoxColorRow" Access="Public" Orientation="Horizontal" SeparationOverride="8">
                 <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
                     <Label Text="{Loc 'rmc-ui-options-announcements-layout-sprite-box-color'}" StyleClasses="LabelKeyText" />

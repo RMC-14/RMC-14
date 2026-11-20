@@ -17,7 +17,8 @@ public readonly record struct RMCAnnouncementOverride(
     Color? BackgroundColor = null,
     Color? PortraitBackgroundColor = null,
     Color? PortraitBorderColor = null,
-    Color? CrtGlowColor = null)
+    Color? CrtGlowColor = null,
+    Color? SpeakerColor = null)
 {
     public bool IsEmpty => this == default;
 
@@ -43,7 +44,8 @@ public readonly record struct RMCAnnouncementOverride(
             BackgroundColor ?? fallback.BackgroundColor,
             PortraitBackgroundColor ?? fallback.PortraitBackgroundColor,
             PortraitBorderColor ?? fallback.PortraitBorderColor,
-            CrtGlowColor ?? fallback.CrtGlowColor);
+            CrtGlowColor ?? fallback.CrtGlowColor,
+            SpeakerColor ?? fallback.SpeakerColor);
     }
 }
 
@@ -99,7 +101,8 @@ public static class RMCAnnouncementOverrides
                 GetColor(fields, "background"),
                 GetColor(fields, "portraitBackground"),
                 GetColor(fields, "portraitBorder"),
-                GetColor(fields, "glow"));
+                GetColor(fields, "glow"),
+                GetColor(fields, "speaker"));
 
             if (!parsed.IsEmpty)
                 overrides[id] = parsed;
@@ -141,6 +144,7 @@ public static class RMCAnnouncementOverrides
             AddColor(fields, "portraitBackground", value.PortraitBackgroundColor);
             AddColor(fields, "portraitBorder", value.PortraitBorderColor);
             AddColor(fields, "glow", value.CrtGlowColor);
+            AddColor(fields, "speaker", value.SpeakerColor);
 
             builder.Append(string.Join(',', fields));
         }

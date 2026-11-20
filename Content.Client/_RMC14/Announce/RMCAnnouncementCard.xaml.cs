@@ -102,7 +102,7 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
             SpeakerLabel.ShadowOffset = shadow;
             SpeakerLabel.ShadowColor = _shadowColor;
             SpeakerLabel.SetFont(_prototype, _resourceCache, preset.Font, ScaleFont(preset.FontSize * 0.75f, bodyScale));
-            SpeakerLabel.SetText(speakerLine, Color.InterpolateBetween(display.Accent, Color.Gray, 0.4f));
+            SpeakerLabel.SetText(speakerLine, settings.SpeakerColor ?? GetDefaultSpeakerColor(display.Accent));
         }
 
         SetTitleProgress(1);
@@ -270,6 +270,11 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
             var last = i == _lines.Count - 1;
             _lineLabels[i].SetSegments(RMCAnnouncementText.BuildBody(_text, shown, start, start + length, fade, cursor, cursorVisible, last, _textColor));
         }
+    }
+
+    public static Color GetDefaultSpeakerColor(Color accent)
+    {
+        return Color.InterpolateBetween(accent, Color.Gray, 0.4f);
     }
 
     private static int ScaleFont(float size, float scale)
