@@ -60,12 +60,13 @@
     mask: CMMaskSterile
     gloves: CMHandsLatex
     eyes: RMCGlassesReagentHUDGlasses
-    shoes: CMBootsBlackFilled
+    shoes: CMBootsUrbanFilled
   storage:
     back:
     - CMSheetMetal20
     - CMClipboard
     - CMPenClicky
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

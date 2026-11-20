@@ -1,0 +1,8 @@
+- type: entity
+  name: dripping water
+  id: RMCEffectPipeWater
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/pipewater.rsi
+    drawdepth: BlastDoors
+    state: "pipewater"
