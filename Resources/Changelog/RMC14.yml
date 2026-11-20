@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Hijack once again deletes any Xeno outside the dropship and adds them
-      to the burrowed count for the hive.
-    type: Fix
-  id: 3348
-  time: '2026-06-11T22:05:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10087
 - author: Dygon
   changes:
   - message: Shortwave radios and universal recorders no longer hear speech from nearby
@@ -4484,5 +4476,13 @@
   id: 3847
   time: '2026-11-20T05:58:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10928
+- author: Thereisabear
+  changes:
+  - message: Fixed character sprites staying prone after a knockdown/infection mispredict
+      rollback.
+    type: Fix
+  id: 3848
+  time: '2026-11-20T06:01:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10713
 Name: RMC14
 Order: -1
