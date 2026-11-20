@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: GrigoriyGalintano
-  changes:
-  - message: Delayed hijack pipe explosions until after the dropship crash stun ends.
-    type: Fix
-  id: 3371
-  time: '2026-06-11T22:37:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10126
 - author: Dygon
   changes:
   - message: Fixed the Boiler Sapper's "Acid Mine" ability damaging sentry guns and
@@ -4442,5 +4435,12 @@
   id: 3870
   time: '2026-11-20T07:55:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9743
+- author: MoonlightHollow
+  changes:
+  - message: Updated some of RCM ranks and jobs names to follow rest of the faction.
+    type: Tweak
+  id: 3871
+  time: '2026-11-20T07:58:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9896
 Name: RMC14
 Order: -1
