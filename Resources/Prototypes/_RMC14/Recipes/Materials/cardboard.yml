@@ -144,7 +144,7 @@
   - RMCBoxMagazineRifleM4SPRExtEmptyBuild
   - RMCDividerConstruction
   - RMCBoxBullets458EmptyBuild
-  - RMCBoxMagazineRifleM16EmptyBuild
+  - RMCBoxMagazineRifleCR16EmptyBuild
   - RMCBoxMagazineRifleSSG45EmptyBuild
   - RMCBoxMagazineRifleSSG45APEmptyBuild
 
@@ -192,9 +192,9 @@
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
-  id: RMCBoxMagazineRifleM16EmptyBuild
-  name: M16 magazine box
-  prototype: RMCBoxMagazineRifleM16Empty
+  id: RMCBoxMagazineRifleCR16EmptyBuild
+  name: CR16 magazine box
+  prototype: RMCBoxMagazineRifleCR16Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase

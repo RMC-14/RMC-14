@@ -77,14 +77,7 @@
     damage:
       types:
         Heat: 30 # TODO RMC14 damage fall-off and higher at close range
-  - type: ModifyTargetOnHit
-    add:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
-      duration: 20
+  - type: XenoAcidOnHit
     whitelist:
       components:
       - Marine
@@ -111,6 +104,21 @@
     max: 5
 
 - type: entity
+  id: XenoParatoxinSpitProjectile
+  parent: XenoSlowingSpitProjectile
+  name: paratoxin spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_paratoxin
+      shader: unshaded
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: ParatoxinOnHit
+
+- type: entity
   id: XenoQueenNeuroSpitProjectile
   parent: [ XenoSpitImpactSounds, XenoBaseProjectile ]
   name: neurotoxic spit
@@ -126,7 +134,7 @@
     slow: 0
     paralyze: 4
   - type: XenoProjectile
-    deleteOnFriendlyXeno: true
+    deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
     max: 4
   - type: RMCProjectileAccuracy
@@ -177,6 +185,8 @@
     deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
     max: 5
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
 
 - type: entity
   id: XenoBoneChipsProjectile
@@ -194,6 +204,7 @@
     slow: 5
     paralyze: 0
   - type: Projectile
+    ignoreResistances: true
     impactEffect: null
     damage:
       types:
@@ -204,6 +215,9 @@
     max: 4
   - type: RMCProjectileAccuracy
     accuracy: 135
+  - type: RMCBullet
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
 
 - type: entity
   parent: XenoBoneChipsProjectile # TODO one projectile out of the 8 spawned for fire spikes is this one
@@ -260,14 +274,7 @@
     slow: 0
     paralyze: 4
     armorResistsKnockdown: false
-  - type: ModifyTargetOnHit
-    add:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
-      duration: 20
+  - type: XenoAcidOnHit
     whitelist:
       components:
       - Marine
@@ -373,6 +380,8 @@
     accuracy: 110
   - type: ProjectileMaxRange
     max: 3
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
 
 - type: entity
   parent: XenoAcidBallSpitProjectile
@@ -475,6 +484,8 @@
     drawDepth: Effects # Draws above mobs
   - type: ProjectileMaxRange
     max: 3.5
+  - type: ProjectileCoverInteraction
+    stoppedByCover: true
   - type: PreventCollideWithDead
   - type: Projectile
     impactEffect: null
