@@ -32,5 +32,8 @@ public sealed partial class XenoCorrosiveAcidEvent : EntityTargetActionEvent
     public float ApplyTimeMultiplier = 1;
 
     [DataField]
+    public float? VehicleDamage;
+
+    [DataField]
     public SoundSpecifier AcidSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/acid_impact1.ogg", AudioParams.Default.WithVolume(-6f));
 }

@@ -97,8 +97,8 @@
 - type: entity
   parent: RMCBaseLandingSign
   id: RMCNewVaraderoSign
-  name: New Varadero landing sign
-  description: A large sign that reads 'New Varadero'. Its always sunny here!
+  name: UNMC New Varadero Base Sign
+  description: A large sign that reads 'UNMC - New Varadero Base' A graphic of a palm tree adorns the sign, as well as a warning for trespassers.
   components:
   - type: Sprite
     state: new_varadero

@@ -290,7 +290,7 @@
     size: Normal
   - type: Gun
     cameraRecoilScalar: 0
-    fireRate: 0.333
+    fireRate: 0.25
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -339,6 +339,41 @@
     solution: rmc_flamer_tank
     flushTime: 1.5
   - type: NoMixingReagents
+
+- type: entity
+  parent: RMCAttachmentMiniFlamethrower
+  id: RMCAttachmentMiniFlamethrowerAdvanced
+  name: advanced underbarrel flamethrower # TODO RMC14: No intensity switch on this one, remove the regular UBF as a parent once we get it
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMiniFlamethrowerAdvanced
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 50
+  - type: RMCFlamerAmmoProvider
+  - type: RMCFlamerTank
+    maxIntensity: 30
+    maxDuration: 20
+    maxRange: 6
+    reagentWhitelist:
+    - RMCNapalmUT
+    - WeldingFuel
+
+- type: entity
+  parent: RMCAttachmentMiniFlamethrowerAdvanced
+  id: RMCAttachmentMiniFlamethrowerAdvancedIntegrated
+  name: integrated flamethrower
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMiniFlamethrowerAdvancedIntegrated
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -463,6 +498,42 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
+
+- type: entity # locked to M20 rifle
+  parent: RMCAttachmentU7UnderbarrelShotgun
+  id: RMCAttachmentU3UnderbarrelShotgun
+  name: U3 underbarrel shotgun
+  description: An AEGIS U3 tactical shotgun. Integrated into the M20A Haimatsu rifle. Only capable of loading up to five buckshot shells. This one seems less effective at smashing down doors.
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentU3UnderbarrelShotgun
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
+    actionName: Switch to the U3 underbarrel shotgun
+    actionDesc: Switch to using the underbarrel shotgun.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: masterkey
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: masterkey-on
+  - type: AttachableVisuals
+    suffix: "_a_alt"
+  - type: GunDamageMultipliers
+    multipliers:
+      Turf: 1
+      Breaching: 1
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -1097,6 +1168,9 @@
   id: RMCAttachmentU7UnderbarrelShotgun
 
 - type: Tag
+  id: RMCAttachmentU3UnderbarrelShotgun
+
+- type: Tag
   id: RMCAttachmentU1GrenadeLauncher
 
 - type: Tag
@@ -1116,6 +1190,12 @@
 
 - type: Tag
   id: RMCAttachmentMiniFlamethrower
+
+- type: Tag
+  id: RMCAttachmentMiniFlamethrowerAdvanced
+
+- type: Tag
+  id: RMCAttachmentMiniFlamethrowerAdvancedIntegrated
 
 - type: Tag
   id: RMCAttachmentUnderbarrelExtinguisher

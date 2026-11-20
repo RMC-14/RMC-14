@@ -112,7 +112,7 @@
     - id: CMFolderWhite
     - id: CMPenClicky
     - id: RMCRadioHandheldColonyOff
-    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: RMCUniversalRecorder
     - id: CMCrowbar
 
 - type: entity
@@ -770,11 +770,20 @@
   parent: RMCSatchelLightpack
   id: RMCSatchelTyrargo
   name: T13 MOLLE Satchel
-  suffix: UNMC
-  description: A tactical satchel manufactured by one of the Weston-Yamada subsidiaries. Very lightweight beltbag variant that utilizes UN standard MOLLE fastening systems. Can be often found in hands of colonial security and various private military groups.
+  description: A tactical satchel manufactured by Weston Yamada's R&D division. Very lightweight beltbag variant that utilizes UN standard MOLLE fastening systems. Can be often found in hands of colonial security and various private military groups.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/molle.rsi
+
+- type: entity
+  parent: RMCSatchelTyrargo
+  id: RMCSatchelNV
+  name: T14 MOLLE Satchel
+  suffix: UNMC
+  description: An UNMC standard-issue tactical satchel design manufactured on contract by Weston Yamada's R&D division in partnership with AEGIS Armaments. Very lightweight beltbag variant that utilizes UN standard MOLLE fastening systems.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/molle_nv.rsi
 
 - type: entity
   parent: CMSatchel
@@ -793,7 +802,7 @@
     - id: CMCrowbar
 
 - type: entity
-  parent: CMSatchel
+  parent: CMSatchelLiaisonSecure
   id: RMCSatchelICBLiaisonFill
   suffix: Interstellar Commerce Bureau Liaison, Filled
   components:
@@ -859,6 +868,22 @@
 
 - type: entity
   parent: CMSatchel
+  id: RMCBackpackRTOBroken
+  name: broken UNMC radio telephone pack
+  description: A heavy-duty pack, used for telecommunications between central command. Commonly carried by RTOs. This one has had its' antenna damaged.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/broken.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+
+- type: entity
+  parent: CMSatchel
   id: RMCBackpackRTOPMCBroken
   name: broken We-Ya radio telephone pack
   description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada and internal systems seem to be completely fried and broken.
@@ -878,6 +903,15 @@
 
 - type: entity
   parent: RMCBackpackRTO
+  id: RMCBackpackRTOSmall
+  name: UNMC small radio telephone pack
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10
+
+- type: entity
+  parent: RMCBackpackRTO
   id: RMCBackpackRTOPMC
   name: We-Ya radio telephone pack
   description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada.
@@ -891,6 +925,15 @@
     category: Weston-Yamada
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCBackpackRTOPMC
+  id: RMCBackpackRTOPMCSmall
+  name: We-Ya small radio telephone pack
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10
 
 - type: entity
   parent: RMCBackpackRTO
@@ -909,6 +952,15 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCBackpackRTOSPP
+  id: RMCBackpackRTOSPPSmall
+  name: SPP small radio telephone pack
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10
+
+- type: entity
   parent: RMCBackpackRTO
   id: RMCBackpackRTOTSE
   name: TSE radio telephone pack
@@ -920,6 +972,15 @@
     category: Three Suns Empire
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCBackpackRTOTSE
+  id: RMCBackpackRTOTSESmall
+  name: TSE small radio telephone pack
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10
 
 - type: entity
   parent: RMCBackpackRTO
@@ -1189,8 +1250,8 @@
     contents:
     - id: RMCMRESPP
     - id: CMFireExtinguisherPortable
-    - id: CMPackFlare
-    - id: CMPackFlare
+    - id: RMCPackFlareR44
+    - id: RMCPackFlareR44
 
 - type: entity
   parent: RMCSatchelSPP

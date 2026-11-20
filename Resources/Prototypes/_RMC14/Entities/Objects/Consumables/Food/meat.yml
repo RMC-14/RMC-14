@@ -170,7 +170,7 @@
   - type: Food
     transferAmount: 5
   - type: Sprite
-    sprite: Objects/Consumable/Food/meals.rsi
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
     state: fishandchips
   - type: SolutionContainerManager
     solutions:
