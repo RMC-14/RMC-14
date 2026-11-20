@@ -346,8 +346,11 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.PullerUid != ent.Owner)
             return;
 
-        if (ent.Comp.NextAttack > _timing.CurTime)
+        if (!HasComp<XenoComponent>(ent) &&
+            ent.Comp.NextAttack > _timing.CurTime)
+        {
             args.Cancelled = true;
+        }
 
         var pulledUid = args.PulledUid;
         var attackEvent = new LightAttackEvent(GetNetEntity(pulledUid), GetNetEntity(ent), GetNetCoordinates(pulledUid.ToCoordinates()));

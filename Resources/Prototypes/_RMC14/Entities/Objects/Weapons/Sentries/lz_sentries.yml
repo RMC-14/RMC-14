@@ -82,7 +82,7 @@
   - type: RotatingLight
     speed: 90
   - type: Gun
-    fireRate: 15
+    fireRate: 2
     selectedMode: FullAuto
     availableModes:
     - FullAuto

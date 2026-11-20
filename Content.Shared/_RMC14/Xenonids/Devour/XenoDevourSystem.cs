@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Inventory;
-using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared._RMC14.Vents;
@@ -63,7 +62,6 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -583,15 +581,6 @@ public sealed class XenoDevourSystem : EntitySystem
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-buckled", ("strap", strap), ("target", targetName)), victim, xeno);
             }
-        }
-
-        if (!_rmcPulling.IsPulling(xeno, victim))
-        {
-            if (popup)
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-not-grabbed", ("target", targetName)), victim, xeno);
-            }
-            return false;
         }
 
         return true;
