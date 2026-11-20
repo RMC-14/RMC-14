@@ -279,6 +279,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 if (!_flurryQ.TryComp(player.Value, out var flurry))
                     return;
                 DrawFlurry(args, player.Value, xform, originMap, mousePos, flurry);
+                break;
 
             case XenoDigTunnelActionEvent tunnelEvent:
                 DrawTunnelableTiles(args, originMap, tunnelEvent);

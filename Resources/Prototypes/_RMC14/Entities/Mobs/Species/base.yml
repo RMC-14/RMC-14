@@ -346,6 +346,7 @@
   - type: RMCDisarm
   - type: RMCDisarmable
   - type: StunOnExplosionReceived
+  - type: RMCProneExplosionMult
   - type: DeafenWhileCrit
   - type: RMCStopDropRollVisuals
   - type: XenoToggleChargingDamage
@@ -361,6 +362,7 @@
       8: 8
   - type: XenoToggleChargingKnockback
   - type: XenoToggleChargingParalyze
+  - type: ParatoxinVisuals
   - type: RMCMobStateDrawDepth
     drawDepths:
       Dead: BelowMobs
@@ -375,6 +377,7 @@
       components:
       - Xeno
   - type: RMCHealthIcons
+  - type: RMCLightsOutOnDeath
   - type: RMCMesonsNonviewable
     xenoVisible: true
   - type: RMCActionOrder

@@ -513,3 +513,14 @@ rmc-xeno-blood-drain-bad-blood = {CAPITALIZE(THE($target))} has terrible tasting
 rmc-xeno-blood-drain-infected-blood = {CAPITALIZE(THE($target))} has sister blood flowing through them!
 rmc-xeno-blood-drain-pull = We need to pull {CAPITALIZE(THE($target))} to drain blood!
 rmc-xeno-blood-drain-down = We need to keep {CAPITALIZE(THE($target))} down to drain blood!
+
+# Paratoxin Slashes
+rmc-xeno-paratoxin-slashes-apply = Our next {$number ->
+[1] slash
+*[other] {$number} slashes
+} will apply paratoxin!
+rmc-xeno-paratoxin-slashes-expire = We have waited too long, our slashes will no longer apply paratoxin!
+
+# Catalytic Tail Stab
+rmc-xeno-catalytic-tail-stab-buff = We are faster and more armored for a short time!
+rmc-xeno-catalytic-tail-stab-buff-expire = We feel our speed and armor dissipate!
