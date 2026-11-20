@@ -1,51 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: In game ARES Logs
-    type: Add
-  id: 3308
-  time: '2026-06-07T02:07:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8493
-- author: J C Denton
-  changes:
-  - message: Added Riot Control jobs and ghost roles.
-    type: Add
-  id: 3309
-  time: '2026-06-07T02:12:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8819
-- author: Aurallianz
-  changes:
-  - message: crit xenos ghosting kills them
-    type: Fix
-  - message: vertical scroll bar for new to job popup
-    type: Fix
-  id: 3310
-  time: '2026-06-07T03:09:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10030
-- author: DrSmugleaf
-  changes:
-  - message: Fixed a source of server-side lag, specially in high pop.
-    type: Fix
-  - message: Fixed correspondents not getting universal recorders in their vendor
-      bundle.
-    type: Fix
-  - message: Fixed xenos being able to interact with M-6 folding barricades.
-    type: Fix
-  - message: Fixed not being able to open the storage UI on the scout helmet.
-    type: Fix
-  - message: Fixed dropship consoles, evacuation pod computers, and quickmeds being
-      unpowered.
-    type: Fix
-  - message: Fixed the Warden jumpsuit being invisible.
-    type: Fix
-  - message: Fixed nested contents within supply drop crates being destroyed upon
-      landing, such as shells inside shell boxes, or XM88 bullets inside their kits.
-    type: Fix
-  - message: Fixed Almayer hangar bay destinations not being named.
-    type: Fix
-  id: 3311
-  time: '2026-06-07T07:44:46.438058+00:00'
-  url: null
 - author: BlueMoon059
   changes:
   - message: The Executive Bodyguard gear locker new stocks EB headsets and not Liason
@@ -4474,5 +4427,38 @@
   id: 3807
   time: '2026-11-20T01:07:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10956
+- author: Vixting
+  changes:
+  - message: Added ability to break open pill containers with a knife, scattering
+      3- pills in the process. Doing so breaks the container requiring it to be fixed
+      by someone with surgery skill using a wirecutter
+    type: Add
+  id: 3808
+  time: '2026-11-20T01:23:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10913
+- author: Vixting
+  changes:
+  - message: Shaking now removes 12s instead of 6s
+    type: Fix
+  - message: Shaking is now scaled by endurance
+    type: Fix
+  id: 3809
+  time: '2026-11-20T01:24:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10905
+- author: Vixting
+  changes:
+  - message: On successful revive you are now paralyzed for 20 seconds scaled by your
+      endurance level
+    type: Add
+  id: 3810
+  time: '2026-11-20T01:24:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10903
+- author: NakataRin
+  changes:
+  - message: Added an announcement for xenos when queen enters/leaves ovi
+    type: Add
+  id: 3811
+  time: '2026-11-20T01:25:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10897
 Name: RMC14
 Order: -1
