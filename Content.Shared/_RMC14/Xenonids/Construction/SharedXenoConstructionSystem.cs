@@ -225,6 +225,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = false,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -1066,7 +1067,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var delay = xeno.AddPlasmaDelay;
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, user, node)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);

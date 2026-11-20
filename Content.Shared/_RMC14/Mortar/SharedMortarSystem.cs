@@ -464,6 +464,7 @@ public abstract class SharedMortarSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(args))
