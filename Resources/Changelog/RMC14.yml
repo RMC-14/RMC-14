@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed two large performance issues causing server rubberbanding during
-      hijack.
-    type: Fix
-  - message: Fixed server rubberbanding when large amounts of tile fire are present.
-    type: Fix
-  - message: Modified impenetrable resin to mention that it degrades into a vulnerable
-      form with time.
-    type: Tweak
-  id: 3333
-  time: '2026-06-08T02:13:16.310248+00:00'
-  url: null
 - author: MidZik
   changes:
   - message: Sapper traps no longer trigger on marines that were standing on them
@@ -4447,5 +4434,13 @@
   id: 3832
   time: '2026-11-20T05:34:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10215
+- author: butchcats
+  changes:
+  - message: Fixes an issue that allowed 'double-offsetting' CAS missiles, resulting
+      in missiles being offset up to 6 tiles away from the original CAS mark.
+    type: Fix
+  id: 3833
+  time: '2026-11-20T05:37:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10843
 Name: RMC14
 Order: -1
