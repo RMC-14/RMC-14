@@ -4,7 +4,7 @@
   name: rmc-job-name-survivor-lv624-corporate-liaison
   description: cm-job-description-survivor
   spawnMenuRoleName: Paranoid Corporate Liaison (LV624 Special Survivor)
-  startingGear: RMCGearSurvivorLV624CorporateLiaison
+  startingGear: RMCGearSurvivorLV624ParanoidCorporateLiaison
   icon: "CMJobIconExecSpec"
   ranks:
     RMCRankWeYaExecutiveSpecialist: []
@@ -44,6 +44,16 @@
         state: background_goon
   greeting: rmc-job-greeting-corporate-dome-cl
 
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorLV624ParanoidCorporateLiaison
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonField
+    eyes: RMCSunglasses
+    pocket2: RMCPouchDocument
+    belt: RMCM77BeltPMCFilled
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorLV624CorporateDomeCL
@@ -58,7 +68,7 @@
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv_wy
 
-- type: entity
+- type: entity # todo rmc14: double cl survivor loot
   parent: RMCSurvivorPresetCorporate
   id: RMCGearSurvivorPresetLV624CorporateDomeCL
   categories: [ HideSpawnMenu ]
