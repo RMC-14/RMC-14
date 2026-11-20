@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: MidZik
-  changes:
-  - message: Lessers do not remove you from the larva queue.
-    type: Fix
-  - message: Join larva queue dialog box makes it clear if you are joining or leaving
-      a queue.
-    type: Fix
-  - message: Fixed larva queue sometimes skipping people in the queue.
-    type: Fix
-  id: 3325
-  time: '2026-06-08T01:58:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10032
 - author: GrigoriyGalintano
   changes:
   - message: Fixed MB-6 folding barricades not fitting in the armor suit storage slot.
@@ -4458,5 +4446,12 @@
   id: 3824
   time: '2026-11-20T03:48:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11126
+- author: TadJohnson00
+  changes:
+  - message: Added external webbing to vendors for multiple shipside roles.
+    type: Add
+  id: 3825
+  time: '2026-11-20T03:53:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8901
 Name: RMC14
 Order: -1
