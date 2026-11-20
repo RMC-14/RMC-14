@@ -1,41 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Rechargers and other machines that require power will now be able to
-      be re-anchored and powered at different APC areas.
-    type: Fix
-  id: 3368
-  time: '2026-06-11T22:34:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10120
-- author: Vixting
-  changes:
-  - message: Larvae queue now offers priority to the burst victim provided they are
-      within their body when the burst occurs.
-    type: Add
-  - message: Larvae queue priotises a player parasite if they infected the victim
-      being burst (has to be within the queue)
-    type: Add
-  - message: Parasites / lessers will now be offered the larvae (don't have to be
-      a ghost)
-    type: Add
-  - message: Disconnected players now have a 5 minute grace period before being removed
-      from the queue
-    type: Add
-  - message: New popup & sound effect on queue being popped for you, accept / decline.
-      Follow button to see where you are spawning.
-    type: Add
-  - message: You can now see your position in queue in the menu.
-    type: Add
-  id: 3369
-  time: '2026-06-11T22:35:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10077
-- author: CyberTropic
-  changes:
-  - message: Fish are scaled based on length.
-    type: Add
-  id: 3370
-  time: '2026-06-11T22:36:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10119
 - author: GrigoriyGalintano
   changes:
   - message: Delayed hijack pipe explosions until after the dropship crash stun ends.
@@ -4457,5 +4420,27 @@
   id: 3867
   time: '2026-11-20T07:53:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11063
+- author: TadJohnson00
+  changes:
+  - message: Added the M276 'Sam Browne' duty belt, available in the the SecTech and
+      MP, SEA, and CO equipment vendors.
+    type: Add
+  id: 3868
+  time: '2026-11-20T07:54:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9995
+- author: SharkSnake98
+  changes:
+  - message: Added 2 Feroxi tails with varients and an Earless head option!
+    type: Add
+  id: 3869
+  time: '2026-11-20T07:55:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8154
+- author: JustSomeGalSS13
+  changes:
+  - message: Made the action buttons for scopes more descriptive of what they do.
+    type: Tweak
+  id: 3870
+  time: '2026-11-20T07:55:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9743
 Name: RMC14
 Order: -1
