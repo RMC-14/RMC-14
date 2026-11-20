@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
@@ -16,6 +16,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Tackle;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
 
@@ -68,6 +69,9 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
             RemComp<MeleeResetComponent>(ent);
             return;
         }
+
+        if (TryComp<RMCMeleeUserCooldownComponent>(ent, out var userCooldown))
+            userCooldown.NextAttack = _timing.CurTime;
 
         ent.Comp.OriginalTime = weapon.NextAttack;
         weapon.NextAttack = _timing.CurTime;
@@ -210,7 +214,12 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
             return;
 
         if (disarm)
-            weapon.NextAttack = reset.OriginalTime;
+        {
+            var ev = new BlockDisarmResetEvent();
+            RaiseLocalEvent(weaponUid, ref ev);
+            if (!ev.Cancelled)
+                weapon.NextAttack = reset.OriginalTime;
+        }
 
         RemComp<MeleeResetComponent>(weaponUid);
         Dirty(weaponUid, weapon);
@@ -292,4 +301,14 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(user, ref ev);
         return ev.Range;
     }
+    
+    public float GetUserDisarmRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
+    {
+        var ev = new RMCDisarmUserGetRangeEvent(target, melee.Range);
+        RaiseLocalEvent(user, ref ev);
+        return ev.Range;
+    }
 }
+
+[ByRefEvent]
+public record struct BlockDisarmResetEvent(bool Cancelled = false);
