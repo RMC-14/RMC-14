@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: MidZik
-  changes:
-  - message: The cooldown reduction effect of a spore fruit should be easier to see
-      now. (No mechanical changes.)
-    type: Tweak
-  id: 3347
-  time: '2026-06-11T22:02:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10018
 - author: Thereisabear
   changes:
   - message: Hijack once again deletes any Xeno outside the dropship and adds them
@@ -4476,5 +4468,21 @@
   id: 3846
   time: '2026-11-20T05:56:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10661
+- author: yagwog
+  changes:
+  - message: 'Hiveteams: Xenonids now properly get tracked through evolution and other
+      phases.'
+    type: Fix
+  - message: 'Hiveteams: Xenonids outside of ent load range will be visible if not
+      seen prior'
+    type: Fix
+  - message: 'Hiveteams: UI will now update live'
+    type: Fix
+  - message: Hiveteams window will now be accessible in a view only state to hive
+      team members so they can see who's in their team.
+    type: Add
+  id: 3847
+  time: '2026-11-20T05:58:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10928
 Name: RMC14
 Order: -1
