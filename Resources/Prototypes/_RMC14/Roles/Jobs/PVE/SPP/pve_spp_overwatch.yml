@@ -72,7 +72,7 @@
   id: RMCSPPPlatCoPVEGear
   equipment:
     id: RMCIDSPP
-    ears: RMCHeadsetSPP
+    ears: RMCHeadsetSPPLeaderPVE
     jumpsuit: CMJumpsuitSPPOfficer
     outerClothing: RMCCoatSPP
     head: CMHeadCapSPPBeret

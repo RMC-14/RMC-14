@@ -28,6 +28,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<string> CMOocWebhook =
         CVarDef.Create("rmc.ooc_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
+    public static readonly CVarDef<string> RMCMentorHelpWebhook =
+        CVarDef.Create("rmc.mentor_help_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
     public static readonly CVarDef<int> CMMaxHeavyAttackTargets =
         CVarDef.Create("rmc.max_heavy_attack_targets", 1, CVar.REPLICATED | CVar.SERVER);
 
@@ -591,7 +594,10 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.larva_queue_wait_seconds", 300, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCLarvaQueueOfferTimeoutSeconds =
-        CVarDef.Create("rmc.larva_queue_offer_timeout_seconds", 30, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.larva_queue_offer_timeout_seconds", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCLarvaQueueVictimPriorityEnabled =
+        CVarDef.Create("rmc.larva_queue_victim_priority_enabled", false, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
 
     public static readonly CVarDef<string> RMCChemMasterPresets =
         CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
@@ -628,4 +634,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCGMRequestSoundMuted =
         CVarDef.Create("rmc.gm_request_sound_muted", false,  CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> RMCGhostPropCalling =
+        CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 }

@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (Hybrisa Survivor)
   startingGear: RMCGearSurvivorHybrisaCorporateLiaison
+  icon: "CMJobIconLiaison"
   special:
   - !type:AddComponentSpecial
     components:

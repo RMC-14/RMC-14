@@ -20,8 +20,7 @@
   - type: InstantAction
     event: !type:XenoPlantWeedsActionEvent
   - type: SwappableAction
-    swappedEventTemplate: !type:XenoExpandWeedsActionEvent
-    originalEventTemplate: !type:XenoPlantWeedsActionEvent
+    swappedActionProto: ActionXenoExpandWeeds
 
 - type: entity
   id: ActionXenoChooseStructure
@@ -223,8 +222,13 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: build_tunnel
     useDelay: 300
-  - type: InstantAction
+  - type: TargetAction
+    range: 16
+    deselectOnMiss: true
+    checkCanAccess: false
+  - type: WorldTargetAction
     event: !type:XenoDigTunnelActionEvent
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -267,6 +271,7 @@
     checkCanAccess: false
     range: -1
     deselectOnMiss: false
+    repeat: true
   - type: WorldTargetAction
     event: !type:XenoExpandWeedsActionEvent
 
