@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared.Physics;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -20,6 +21,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Collections;
+using Content.Shared._RMC14.Xenonids.Rest;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -160,12 +162,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                     continue;
                 }
 
-                if (candidate.CollisionClass == VehicleCollisionClass.SoftMob &&
-                    candidate.MobState != null &&
-                    _standing.IsDown(candidate.Entity))
-                {
-                    continue;
-                }
+            if (candidate.CollisionClass == VehicleCollisionClass.SoftMob &&
+                candidate.MobState != null &&
+                (_standing.IsDown(candidate.Entity) || HasComp<XenoRestingComponent>(candidate.Entity)))
+            {
+                continue;
+            }
 
                 if (applyEffects && candidate.Door is { } door && !_net.IsClient &&
                     (candidate.CollisionClass == VehicleCollisionClass.Breakable || candidate.CollisionClass == VehicleCollisionClass.Ignore))
@@ -289,6 +291,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return false;
 
         if (!physicsQ.TryComp(other, out var otherBody) || !otherBody.CanCollide)
+            return false;
+
+        if (TryComp(other, out XenoBurrowComponent? burrow) && burrow.Active)
             return false;
 
         var hasDoor = TryComp(other, out DoorComponent? door);
@@ -1136,7 +1141,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!ShouldPredictVehicleInteractions(vehicle))
             return;
 
-        if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob))
+        if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob) || HasComp<XenoRestingComponent>(mob))
             return;
 
         if (TryComp(vehicle, out GridVehicleMoverComponent? vehicleMover) &&

@@ -22,3 +22,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/df1d568bcc9ef92e8e5b8a49ee844977076a9ef0/sound/items/component_pickup.ogg"
+
+- files: ["gun_burst_toggle.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/a49e386aa82222508cacc8a40c351a96d9122bd3/sound/weapons/handling/gun_burst_toggle.ogg"

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -24,7 +24,4 @@ public sealed partial class ForTheHiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier BaseDamage = new();
-
-    [DataField]
-    public ComponentRegistry? Acid;
 }

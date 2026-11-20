@@ -60,6 +60,7 @@
     id: RMCIDCardCMBDeputySurvivor
     back: CMSatchelSecuritySurvivorFill
     outerClothing: RMCArmorPMCRiotCMB
+    belt: CMBeltSecurityMPFilled
     ears: RMCHeadsetDistressBureauDamaged
     eyes: RMCGlassesSecurityBlue
     gloves: RMCHandsVeteran
@@ -94,6 +95,6 @@
     - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
     - [ RMCSwatCMBUniformMK45, RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCHeadCapBureau ]
     - [ RMCSwatCMBUniformM1984, RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, CMHeadBeretCMB ]
-    - [ RMCSwatCMBUniformMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMBVisorSWAT ]
-    - [ RMCSwatCMBUniformMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformMK45, RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A4, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformMK45, RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A4, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMBVisorSWAT ]
     primaryWeaponChance: 1
