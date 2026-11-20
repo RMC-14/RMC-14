@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the reflective wall not having a build animation.
-    type: Fix
-  id: 3363
-  time: '2026-06-11T22:30:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10113
 - author: BarteG44
   changes:
   - message: Most glasses work as helmet and hat garbs now
@@ -4479,5 +4472,16 @@
   id: 3862
   time: '2026-11-20T07:43:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9828
+- author: Vixting
+  changes:
+  - message: The following doafters are now rooted (preventing you getting pushed
+      whilst performing it) sniper aimed shot, spotter lasing, acid shroud, xeno construction
+      & repair, tool usage, construction, entrenching tool, sandbags, removing / placing
+      barbed wire, folding barricades, weld repairing, deploying weapon mounts, deploying
+      mortar, powerloader stuff, coms tower, ghillie suit, vendor hack,
+    type: Add
+  id: 3863
+  time: '2026-11-20T07:48:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10944
 Name: RMC14
 Order: -1
