@@ -34,5 +34,5 @@ public partial struct RMCExplosiveDamageOnHit()
     /// Override epicenter checks when not null. True = at epicenter. False = not at epicenter. Otherwise projectile is checked.
     /// </summary>
     [DataField]
-    public bool? IsAtEpicenter = false;
+    public bool? IsAtEpicenter = true;
 }
