@@ -56,8 +56,16 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         var citation = args[5];
 
         int? targetRound = null;
-        if (args.Length == 7 && int.TryParse(args[6], out var parsedRound))
+        if (args.Length == 7)
+        {
+            if (!int.TryParse(args[6], out var parsedRound))
+            {
+                shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-invalid-round-format", ("round", args[6])));
+                return;
+            }
+
             targetRound = parsedRound;
+        }
 
         CommendationType commendationType;
         switch (commendationTypeStr)
@@ -87,7 +95,7 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         var adminId = shell.Player?.UserId.UserId ?? Guid.Empty;
         var adminName = shell.Player?.Name ?? "Server";
 
-        var error = await cs.AdminGiveCommendation(
+        var result = await cs.AdminGiveCommendation(
             adminId,
             adminName,
             giverName,
@@ -99,10 +107,15 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
             citation,
             targetRound);
 
-        if (error != null)
-            shell.WriteError(error);
-        else
-            shell.WriteLine(Loc.GetString("cmd-rmcgivecommendation-success", ("award", awardName), ("player", receiverNameOrId)));
+        if (result.Error != null)
+        {
+            shell.WriteError(result.Error);
+            return;
+        }
+
+        shell.WriteLine(Loc.GetString("cmd-rmcgivecommendation-success",
+            ("award", awardName),
+            ("player", result.ReceiverUsername ?? receiverNameOrId)));
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

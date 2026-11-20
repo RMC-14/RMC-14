@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
@@ -114,7 +115,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
         var receiverLastPlayerId = receiverId.ToString();
         NetEntity? receiverEntity = receiver.HasValue ? GetNetEntity(receiver.Value.Owner) : null;
         var entry = new RoundCommendationEntry(commendation, commendationPrototypeId, receiverEntity, receiverLastPlayerId);
-        RoundCommendations.Add(entry);
+        AddRoundCommendation(entry);
         _commendation.CommendationAdded(giverId, new NetUserId(receiverId), commendation);
         _adminLog.Add(LogType.RMCMedal, $"{ToPrettyString(giver)} gave a medal to {receiverName} of type {type} {name} that reads:\n{text}");
 
@@ -128,73 +129,57 @@ public sealed class CommendationSystem : SharedCommendationSystem
         }
     }
 
-    public int GetMedalCount()
-    {
-        return GetAwardableMedalIds().Count + GetSpecialMedalIds().Count;
-    }
-
-    public int GetJellyCount()
-    {
-        var regular = _prototype.Index<LocalizedDatasetPrototype>(JellyDatasetId);
-        var special = _prototype.Index<LocalizedDatasetPrototype>(JellySpecialDatasetId);
-        return regular.Values.Count + special.Values.Count;
-    }
-
     public bool TryGetAwardInfo(CommendationType type, int awardIndex, out string awardName, out EntProtoId? protoId)
     {
-        if (type == CommendationType.Medal)
-        {
-            var medals = GetAwardableMedalIds();
-            var specials = GetSpecialMedalIds();
-            var total = medals.Count + specials.Count;
-
-            if (awardIndex < 1 || awardIndex > total)
-            {
-                awardName = string.Empty;
-                protoId = null;
-                return false;
-            }
-
-            // Regular awards first, then special awards
-            var medalId = awardIndex <= medals.Count
-                ? medals[awardIndex - 1]
-                : specials[awardIndex - medals.Count - 1];
-
-            protoId = medalId;
-            awardName = _prototype.Index<EntityPrototype>(medalId).Name;
-            return true;
-        }
-
-        if (type == CommendationType.Jelly)
-        {
-            var regular = _prototype.Index<LocalizedDatasetPrototype>(JellyDatasetId);
-            var special = _prototype.Index<LocalizedDatasetPrototype>(JellySpecialDatasetId);
-            var regularCount = regular.Values.Count;
-            var total = regularCount + special.Values.Count;
-
-            if (awardIndex < 1 || awardIndex > total)
-            {
-                awardName = string.Empty;
-                protoId = null;
-                return false;
-            }
-
-            var locId = awardIndex <= regularCount
-                ? regular.Values[awardIndex - 1]
-                : special.Values[awardIndex - regularCount - 1];
-
-            protoId = null;
-            awardName = Loc.GetString(locId);
-            return true;
-        }
-
         awardName = string.Empty;
         protoId = null;
-        return false;
+
+        var ids = GetAwardIds(type);
+        if (awardIndex < 1 || awardIndex > ids.Count)
+            return false;
+
+        return TryGetAwardInfo(type, ids[awardIndex - 1], out awardName, out protoId);
+    }
+
+    public bool TryGetAwardInfo(CommendationType type, string awardId, out string awardName, out EntProtoId? protoId)
+    {
+        awardName = string.Empty;
+        protoId = null;
+
+        if (!GetAwardIds(type).Contains(awardId))
+            return false;
+
+        if (type == CommendationType.Medal)
+        {
+            protoId = awardId;
+            awardName = _prototype.Index<EntityPrototype>(awardId).Name;
+        }
+        else
+        {
+            awardName = Loc.GetString(awardId);
+        }
+
+        return true;
+    }
+
+    // Medal prototype IDs or jelly loc IDs; regular awards first, then special awards.
+    private List<string> GetAwardIds(CommendationType type)
+    {
+        return type switch
+        {
+            CommendationType.Medal => GetAwardableMedalIds()
+                .Concat(GetSpecialMedalIds())
+                .Select(id => id.Id)
+                .ToList(),
+            CommendationType.Jelly => _prototype.Index<LocalizedDatasetPrototype>(JellyDatasetId).Values
+                .Concat(_prototype.Index<LocalizedDatasetPrototype>(JellySpecialDatasetId).Values)
+                .ToList(),
+            _ => new List<string>(),
+        };
     }
 
     // Admin commendation (used by the console command and UI)
-    public async Task<string?> AdminGiveCommendation(
+    public async Task<AdminCommendationResult> AdminGiveCommendation(
         Guid adminId,
         string adminName,
         string giverName,
@@ -208,23 +193,35 @@ public sealed class CommendationSystem : SharedCommendationSystem
     {
         citation = citation.Trim();
         if (string.IsNullOrWhiteSpace(citation))
-            return Loc.GetString("cmd-rmcgivecommendation-empty-citation");
+            return new AdminCommendationResult(Loc.GetString("cmd-rmcgivecommendation-empty-citation"), null);
 
         // IPlayerLocator supports both username and Guid
         var located = await _playerLocator.LookupIdByNameOrIdAsync(receiverNameOrId);
         if (located == null)
-            return Loc.GetString("cmd-rmcgivecommendation-player-not-found", ("player", receiverNameOrId));
+        {
+            return new AdminCommendationResult(
+                Loc.GetString("cmd-rmcgivecommendation-player-not-found", ("player", receiverNameOrId)),
+                null);
+        }
 
         var receiverId = located.UserId.UserId;
 
         if (await _db.GetPlayerRecordByUserId(located.UserId) == null)
-            return Loc.GetString("cmd-rmcgivecommendation-player-never-joined", ("player", located.Username));
+        {
+            return new AdminCommendationResult(
+                Loc.GetString("cmd-rmcgivecommendation-player-never-joined", ("player", located.Username)),
+                null);
+        }
 
         var currentRound = _gameTicker.RoundId;
         var actualRound = targetRound ?? currentRound;
 
         if (actualRound < 1 || actualRound > currentRound)
-            return Loc.GetString("cmd-rmcgivecommendation-invalid-round", ("round", actualRound), ("current", currentRound));
+        {
+            return new AdminCommendationResult(
+                Loc.GetString("cmd-rmcgivecommendation-invalid-round", ("round", actualRound), ("current", currentRound)),
+                null);
+        }
 
         try
         {
@@ -243,7 +240,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
                     null,
                     // Deliberately not linked to a player entity to avoid confusing admins when the player has changed roles.
                     receiverId.ToString());
-                RoundCommendations.Add(entry);
+                AddRoundCommendation(entry);
             }
 
             // Logs It
@@ -262,12 +259,12 @@ public sealed class CommendationSystem : SharedCommendationSystem
                 ("character", receiverCharacterName),
                 ("round", actualRound)));
 
-            return null;
+            return new AdminCommendationResult(null, receiverLogin);
         }
         catch (Exception e)
         {
             Log.Error($"Error in AdminGiveCommendation: {e}");
-            return (e.InnerException ?? e).Message;
+            return new AdminCommendationResult(Loc.GetString("cmd-rmcgivecommendation-database-error"), null);
         }
     }
 
@@ -283,3 +280,5 @@ public sealed class CommendationSystem : SharedCommendationSystem
         return rankName ?? Name(uid);
     }
 }
+
+public readonly record struct AdminCommendationResult(string? Error, string? ReceiverUsername);
