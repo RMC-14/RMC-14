@@ -12,6 +12,8 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/K9Synth/basic_harness.rsi
   - type: Item
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Civilians/standard.rsi
+  - type: RMCEquippedStorageOpenOnInteract
+    countSelf: True
   - type: Tag
     tags:
       - PetOnly
