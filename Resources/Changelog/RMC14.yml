@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed guns not always losing their dual wielding penalty after dropping
-      one of the guns.
-    type: Fix
-  id: 3336
-  time: '2026-06-09T10:16:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9847
 - author: Vermidia
   changes:
   - message: Fixed acid being extinguishable off of non-guns
@@ -4448,5 +4440,12 @@
   id: 3835
   time: '2026-11-20T05:40:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10571
+- author: Vermidia
+  changes:
+  - message: Fixed converted fragile eggs on hiveweeds still being called fragile.
+    type: Fix
+  id: 3836
+  time: '2026-11-20T05:42:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10575
 Name: RMC14
 Order: -1
