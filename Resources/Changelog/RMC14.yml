@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Hive Core or Queen being available will have an announcement now.
-    type: Fix
-  id: 3356
-  time: '2026-06-11T22:22:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10091
 - author: Dygon
   changes:
   - message: Fixed undeployed sentries and weapon mounts being damageable.
@@ -4473,5 +4466,14 @@
   id: 3855
   time: '2026-11-20T06:14:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10816
+- author: LeoKarz
+  changes:
+  - message: Strained xenos can now reset their strain from the De-Evolve menu. The
+      first reset is free, after that there is a 40-minute cooldown. Evolving or devolving
+      resets this cooldown.
+    type: Add
+  id: 3856
+  time: '2026-11-20T06:18:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10971
 Name: RMC14
 Order: -1
