@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Bagietens
-  changes:
-  - message: Fixed healer drone and acid runner sacrifices being taken by larva queue.
-    type: Fix
-  id: 3375
-  time: '2026-06-11T22:40:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10100
 - author: Dygon
   changes:
   - message: Dropship camera feeds now remain active for 5 seconds after the selected
@@ -4445,5 +4438,12 @@
   id: 3874
   time: '2026-11-20T08:10:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10972
+- author: TadJohnson00
+  changes:
+  - message: The M16 has been renamed to the CR16 and received a new sprite.
+    type: Tweak
+  id: 3875
+  time: '2026-11-20T18:18:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9953
 Name: RMC14
 Order: -1

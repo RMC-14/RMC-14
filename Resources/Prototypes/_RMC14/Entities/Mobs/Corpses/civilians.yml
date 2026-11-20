@@ -562,8 +562,8 @@
   id: RMCGearCorpseCLFM16
   equipment:
     head: RMCHeadMilitiaBucket
-    belt: CMBeltMarineM16
-    suitstorage: WeaponRifleM16
+    belt: RMCBeltMarineCR16
+    suitstorage: RMCWeaponRifleCR16
     outerClothing: RMCCoatMilitiaBrace
 
 - type: startingGear
