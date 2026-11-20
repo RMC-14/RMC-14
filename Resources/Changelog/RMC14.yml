@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Utmanarn
-  changes:
-  - message: Changed the playtime rank system to allow players to select a preference
-      for what type of playtime rank they want to use.
-    type: Tweak
-  id: 3297
-  time: '2026-06-06T23:53:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6306
 - author: Bagietens
   changes:
   - message: Fixed do-after bars not drawing over xeno and other sprites while using
@@ -4456,5 +4448,20 @@
   id: 3796
   time: '2026-11-20T00:06:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10826
+- author: Vermidia
+  changes:
+  - message: Fixed shields of different types not stacking together. Shields with
+      effects (King, vanguard, etc) will apply their effects when processing damage
+      in order, and will stop processing if damage taken would be 0 (aka if unstable
+      was active and hedgehog uses spike shield, spikes would not shoot out until
+      unstable shield runs out).
+    type: Fix
+  - message: Fixed vanguard shield not properly counting the vanguard's slashes as
+      being in combat, and not updating last combat time if the vanguard shield wasn't
+      present (It should no longer fail to regen sometimes).
+    type: Fix
+  id: 3797
+  time: '2026-11-20T00:16:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10994
 Name: RMC14
 Order: -1
