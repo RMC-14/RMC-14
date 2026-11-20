@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Kutjevo Corporation Liaison (Kutjevo Survivor)
   startingGear: RMCGearSurvivorKutjevoCorporate
+  icon: "CMJobIconLiaison"
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate

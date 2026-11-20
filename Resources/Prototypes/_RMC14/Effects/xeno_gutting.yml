@@ -1,0 +1,15 @@
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectGutting
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    offset: 0, 0.25
+    sprite: _RMC14/Effects/xeno_mass_gut.rsi
+    noRot: true
+    drawdepth: Effects
+    state: gutting
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu

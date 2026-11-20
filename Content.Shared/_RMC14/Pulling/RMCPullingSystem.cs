@@ -1,5 +1,7 @@
+using System.Numerics;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Crest;
@@ -28,7 +30,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -91,6 +92,9 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, PullStoppedMessage>(OnPullerPullStopped);
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
+
+        SubscribeLocalEvent<PullerComponent, RMCDisarmUserGetRangeEvent>(ExtendTacklingRangeToPullingTarget);
+        SubscribeLocalEvent<PullerComponent, RMCMeleeUserGetRangeEvent>(ExtendAttackingRangeToPullingTarget);
     }
 
     private void OnGetPullTarget(Entity<BuckleComponent> ent, ref RMCGetPullTargetEvent ev)
@@ -484,6 +488,23 @@ public sealed class RMCPullingSystem : EntitySystem
         return ev.Target;
     }
 
+
+    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCDisarmUserGetRangeEvent args)
+    {
+        if (args.Target == ent.Comp.Pulling && args.Target != null)
+        {
+            args.Range = 4.0f;
+        }
+    }
+
+    private void ExtendAttackingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCMeleeUserGetRangeEvent args)
+    {
+        if (args.Target == ent.Comp.Pulling && args.Target != null)
+        {
+            args.Range = 4.0f;
+        }
+    }
+    
     public override void Update(float frameTime)
     {
         var blockDeadActive = EntityQueryEnumerator<BlockPullingDeadActiveComponent, PullerComponent>();
