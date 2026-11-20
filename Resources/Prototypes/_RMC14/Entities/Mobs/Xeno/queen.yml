@@ -65,9 +65,7 @@
     - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoWordQueen
-    - ActionXenoPsychicWhisper
-    - ActionXenoPsychicRadiance
-    - ActionXenoGiveOrder
+    - ActionXenoPsychic
     - ActionXenoGut
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
@@ -194,6 +192,13 @@
       path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
       params:
         volume: -6
+  - type: SoundOnDrag
+    sound:
+      collection: XenoFootstepLarge
+      params:
+        volume: 0
+    downedSound:
+      path: /Audio/Effects/stonedoor_openclose.ogg
   - type: WhitelistPickup
     whitelist:
       components:
@@ -217,21 +222,17 @@
     addComponents:
     - type: XenoScreech
     - type: XenoToggleSpit
+    # Overwrites the immature order, so matured queens order their extra abilities correctly
+    - type: RMCActionOrder
+      id: CMXenoQueen
     addActions:
     - ActionXenoScreech
-    - ActionXenoSpitQueen
-    - ActionXenoToggleSpitType
+    - ActionXenoQueenSpitNeuro
+    - ActionXenoQueenSpitAcid
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
     prefix: queen
-  - type: PreventPulledWhileAlive
-    whitelist:
-      components:
-      - Xeno
-    exceptEffects:
-    - Stun
-    - KnockedDown
   - type: TacticalMapUser
     xenos: true
     canDraw: true
@@ -253,9 +254,12 @@
   - type: XenoHeal
   - type: StunOnExplosionReceived
     weak: false
-  - type: XenoSpit
+  - type: XenoSlowingSpit
     projectileId: XenoQueenNeuroSpitProjectile
     plasmaCost: 50
+  - type: XenoSpit
+    projectileId: XenoChargedSpitProjectile
+    plasmaCost: 25
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen
@@ -292,16 +296,23 @@
     - type: Gibbable
     - type: CanBeLarvaQueued
 
+# Queens start immature, so this is the id their action bar order is saved under until they mature
+- type: entity
+  abstract: true
+  id: CMXenoQueenImmature
+
 - type: entity
   parent: RMCXenoQueenBase
   id: CMXenoQueen
   components:
+  # XenoMaturing moves this ordering onto CMXenoQueen once they mature
   - type: RMCActionOrder
-    id: CMXenoQueen
+    id: CMXenoQueenImmature
     #  - type: XenoEvolution #can be enabled for events like april fools.
     #    strains:
     #    - RMCXenoQueenMaid
     #    - RMCXenoQueenMagical
+    #    - RMCXenoQueenWitch
 
 - type: entity
   id: XenoLeaderPheromoneRelay
@@ -327,6 +338,9 @@
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+  # Reskin of the queen with the same actions, so it shares her action bar order
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
   - type: XenoStrain
     name: rmc-xeno-maid-name
     description: rmc-xeno-maid-description
@@ -353,10 +367,36 @@
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+  # Reskin of the queen with the same actions, so it shares her action bar order
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
   - type: XenoStrain
     name: rmc-xeno-magicalgirl-name
     description: rmc-xeno-magicalgirl-description
     popup: rmc-xeno-magicalgirl-popup
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenWitch
+  suffix: Witch Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/witch_queen/witch_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/witch_queen/witch_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-witch-name
+    description: rmc-xeno-witch-description
+    popup: rmc-xeno-witch-popup
 
 - type: entity
   parent: RMCXenoQueenBase
@@ -378,9 +418,7 @@
     - ActionXenoAcidWeak
     - ActionXenoPheromones
     - ActionXenoWordQueen
-    - ActionXenoPsychicWhisper
-    - ActionXenoPsychicRadiance
-    - ActionXenoGiveOrder
+    - ActionXenoPsychic
     - ActionXenoMassacre
     - ActionXenoBloodDrain
     - ActionXenoManageHive
