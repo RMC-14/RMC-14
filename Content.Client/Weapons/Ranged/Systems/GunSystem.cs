@@ -94,6 +94,7 @@ public sealed partial class GunSystem : SharedGunSystem
     private bool _spreadOverlay;
     private bool _alternateAkimboLatched;
     private BoundKeyFunction? _alternateAkimboLatchedKey;
+    private TimeSpan? _alternateAkimboLatchedUntil;
 
     public override void Initialize()
     {
@@ -276,8 +277,8 @@ public sealed partial class GunSystem : SharedGunSystem
             requestedShot = true;
         }
 
-        if (alternateAkimbo && requestedShot && !ShouldRearmSemiAuto((gunUid, gun)))
-            LatchAlternateAkimbo(useKey);
+        if (alternateAkimbo && requestedShot)
+            LatchAlternateAkimbo(useKey, ShouldRearmSemiAuto((gunUid, gun)) ? gun.NextFire : null);
     }
 
     private bool ShouldRearmSemiAuto(Entity<GunComponent> gun)
@@ -329,20 +330,25 @@ public sealed partial class GunSystem : SharedGunSystem
         if (!_alternateAkimboLatched || _alternateAkimboLatchedKey is not { } key)
             return;
 
-        if (_inputSystem.CmdStates.GetState(key) != BoundKeyState.Down)
+        if (_inputSystem.CmdStates.GetState(key) != BoundKeyState.Down ||
+            _alternateAkimboLatchedUntil is { } until && Timing.CurTime >= until)
+        {
             ResetAlternateAkimboLatch();
+        }
     }
 
-    private void LatchAlternateAkimbo(BoundKeyFunction useKey)
+    private void LatchAlternateAkimbo(BoundKeyFunction useKey, TimeSpan? until)
     {
         _alternateAkimboLatched = true;
         _alternateAkimboLatchedKey = useKey;
+        _alternateAkimboLatchedUntil = until;
     }
 
     private void ResetAlternateAkimboLatch()
     {
         _alternateAkimboLatched = false;
         _alternateAkimboLatchedKey = null;
+        _alternateAkimboLatchedUntil = null;
     }
 
     protected override void Popup(string message, EntityUid? uid, EntityUid? user)
