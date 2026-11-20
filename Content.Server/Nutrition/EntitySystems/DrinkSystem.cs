@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.CCVar; //RMC14
 using Content.Server.Body.Systems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics;
@@ -24,6 +25,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration; //RMC14
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -36,6 +38,7 @@ public sealed class DrinkSystem : SharedDrinkSystem
     [Dependency] private readonly FoodSystem _food = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!; //RMC14
     [Dependency] private readonly OpenableSystem _openable = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly PuddleSystem _puddle = default!;
@@ -249,7 +252,9 @@ public sealed class DrinkSystem : SharedDrinkSystem
 
         _forensics.TransferDna(entity, args.Target.Value);
 
-        if (!forceDrink && solution.Volume > 0)
-            args.Repeat = true;
+        //RMC14
+        if (TryComp<ActorComponent>(args.User, out var actor))
+            args.Repeat = !forceDrink && solution.Volume > 0 && _netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCRepeatingFoodDoAfter);
+        //RMC14
     }
 }

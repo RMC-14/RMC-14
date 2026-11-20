@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.CCVar; //RMC14
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
@@ -26,6 +27,8 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration; //RMC14
+using Robust.Shared.Player; //RMC14
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Nutrition.EntitySystems;
@@ -38,6 +41,7 @@ public sealed class FoodSystem : EntitySystem
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly FlavorProfileSystem _flavorProfile = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!; //RMC14
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly OpenableSystem _openable = default!;
@@ -298,7 +302,10 @@ public sealed class FoodSystem : EntitySystem
             _utensil.TryBreak(utensil, args.User);
         }
 
-        args.Repeat = !forceFeed;
+        //RMC14
+        if (TryComp<ActorComponent>(args.User, out var actor))
+            args.Repeat = !forceFeed && _netConfig.GetClientCVar(actor.PlayerSession.Channel,RMCCVars.RMCRepeatingFoodDoAfter);
+        //RMC14
 
         if (TryComp<StackComponent>(entity, out var stack))
         {
