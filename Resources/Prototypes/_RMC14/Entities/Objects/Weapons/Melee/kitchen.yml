@@ -10,6 +10,7 @@
   - type: Item
     size: Small
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
