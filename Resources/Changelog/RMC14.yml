@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: wheelwrightt
-  changes:
-  - message: Correspondent, combat correspondent, liason and liason bodyguard now
-      have plushies in their loadout options.
-    type: Tweak
-  id: 3352
-  time: '2026-06-11T22:13:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10096
 - author: SharkSnake98
   changes:
   - message: Fixed the Executive Bodyguard not having medical 1 skill
@@ -4482,5 +4474,13 @@
   id: 3851
   time: '2026-11-20T06:05:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9611
+- author: sporkyz
+  changes:
+  - message: Parasites no longer get locked out of hiding permanently after attempting
+      a lunge under an airlock.
+    type: Fix
+  id: 3852
+  time: '2026-11-20T06:07:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10364
 Name: RMC14
 Order: -1
