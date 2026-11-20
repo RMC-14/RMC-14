@@ -274,6 +274,12 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (ent.Owner == args.RadioSource)
             return;
 
+        if (args.SpeakerRelays is { } relays)
+        {
+            relays.Add(ent.Owner);
+            return;
+        }
+
         var nameEv = new TransformSpeakerNameEvent(args.MessageSource, Name(args.MessageSource));
         RaiseLocalEvent(args.MessageSource, nameEv);
 

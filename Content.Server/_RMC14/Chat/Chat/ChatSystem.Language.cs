@@ -307,7 +307,8 @@ public sealed partial class ChatSystem
         string message,
         ProtoId<LanguagePrototype> language,
         string? nameOverride = null,
-        EntityUid? originalSpeaker = null)
+        EntityUid? originalSpeaker = null,
+        IReadOnlyDictionary<ICommonSession, ICChatRecipientData>? recipients = null)
     {
         LanguagePrototype? languagePrototype = null;
         if (!_prototypeManager.TryIndex(language, out languagePrototype))
@@ -322,7 +323,8 @@ public sealed partial class ChatSystem
         var visibleLanguage = !(languagePrototype?.NeedsSpeech ?? true);
         var transformedName = nameOverride ?? Identity.Name(source, EntityManager).Name;
 
-        foreach (var (session, data) in GetRecipients(source, ChatChannel.Whisper, WhisperMuffledRange))
+        recipients ??= GetRecipients(source, ChatChannel.Whisper, WhisperMuffledRange);
+        foreach (var (session, data) in recipients)
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
