@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: CMRoyalMarinesSmartgunnerPVE
-  name: rmc-job-name-rcm-pve-smart-gunner
+  name: cm-job-name-smart-gun-operator
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalSmartgunnerPVE
   ranks:
@@ -44,7 +44,7 @@
         RMCSkillSmartGun: 1
         RMCSkillSurgery: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-pve-smart-gunner
+      prefix: cm-job-prefix-gun-operator
     - type: AssignSquad
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon

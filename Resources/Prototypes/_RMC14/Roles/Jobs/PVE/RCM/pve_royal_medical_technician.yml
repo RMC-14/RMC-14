@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: CMRoyalMarinesMedicPVE
-  name: rmc-job-name-rcm-pve-medical-technician
+  name: rmc-job-name-rcm-medic
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalMedicPVE
   requirements:
@@ -47,7 +47,7 @@
         RMCSkillPilot: 1
         RMCSkillSurgery: 2
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-pve-medical-technician
+      prefix: cm-job-prefix-maint-tech
     - type: AssignSquad
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
