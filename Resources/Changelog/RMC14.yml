@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fix upgrading resin wall attached to sinle door causing door to delete
-    type: Fix
-  id: 3331
-  time: '2026-06-08T02:01:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10058
 - author: J C Denton
   changes:
   - message: Fixed dropships, evac pods and lifeboats having no areas and no power.
@@ -4439,5 +4432,12 @@
   id: 3830
   time: '2026-11-20T05:30:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10673
+- author: Vermidia
+  changes:
+  - message: Vanguard blitz is now lag compensated.
+    type: Fix
+  id: 3831
+  time: '2026-11-20T05:33:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10608
 Name: RMC14
 Order: -1
