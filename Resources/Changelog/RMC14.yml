@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added unique NVG sight variants for the PMC Sniper, RCM Marksman, and
-      UNMC Spotter
-    type: Add
-  - message: Infiltrator boots have their own sprite
-    type: Tweak
-  - message: Infiltrator boots now completely silence footsteps
-    type: Tweak
-  - message: Fixed PMC Sniper having some wrong equipment
-    type: Fix
-  id: 3318
-  time: '2026-06-08T01:44:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10064
 - author: Thereisabear
   changes:
   - message: Playing card actions are predicted now.
@@ -4450,5 +4436,15 @@
   id: 3817
   time: '2026-11-20T02:02:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10925
+- author: Vixting
+  changes:
+  - message: Getting your larvae from yourself bursting is now a setting. You no longer
+      have to remain in your body (can ghost). Only applies if your body is nested.
+    type: Tweak
+  - message: Reduced larvae offer time to 15s
+    type: Tweak
+  id: 3818
+  time: '2026-11-20T02:11:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10762
 Name: RMC14
 Order: -1
