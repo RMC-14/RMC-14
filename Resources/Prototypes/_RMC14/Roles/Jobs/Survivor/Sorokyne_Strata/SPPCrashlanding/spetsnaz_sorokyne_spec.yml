@@ -34,8 +34,7 @@
     - type: IntelRescueSurvivorObjective
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-spetsnaz-spec
-    - type: DemoSpecWhitelist
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: AssignSquad
       squad: SquadSPP
   hidden: true

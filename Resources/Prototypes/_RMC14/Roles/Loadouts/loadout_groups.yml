@@ -547,6 +547,7 @@
   - HoldoutPistolRMC
   - CustomM1984RMC
   - CustomM44RMC
+  - M48A4LoadoutRMC
   - HG45AguilaCaseRMC
   - HG45MarinaCaseRMC
 
@@ -1033,6 +1034,15 @@
   - ProvostJacketFilledRMC
   - ProvostCoatFilledRMC
   - RMCProvostJacketBlueFilled
+
+- type: loadoutGroup
+  id: ProvostWeaponRMC
+  name: rmc-loadout-group-provost-weapon
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCWeaponPistolHandcannon
+  - RMCWeaponPistolHandcannonProvost
 
 - type: loadoutGroup
   id: ProvostRoleSpecificHeadRMC
