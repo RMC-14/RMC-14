@@ -205,3 +205,17 @@ rmc-xeno-magicalgirl-popup = With the power of Plasma and Resin! Transform!
 rmc-xeno-witch-name = Witch
 rmc-xeno-witch-description = You shall make a stew so wicked and shrew! Command your army of cursed children to turn talls into your greatest brew!
 rmc-xeno-witch-popup = Muwahahahah!
+rmc-xeno-bloodqueen-name = Blood Queen
+rmc-xeno-bloodqueen-description = You lose:
+  - Your queen level pheromones are replaced with strong pheromones.
+  - The ability to attach an ovipositor.
+  - Your screech, order construction, secrete resin, plant weeds and spit-based abilities.
+  - Your normal acid is replaced with weak acid.
+  You gain:
+  - Increased speed, damage, health, and armor.
+  - Your slashes now do a slight AOE to enemies surrounding the target.
+  - Brace: Gives you a temporary shield for 5 seconds that reduces damage taken slightly.
+  - Doom: A terrifying roar that removes helpful chemicals and darkens lights.
+  - Massacre: Guts multiple dead bodies in an area. Gives a burrowed larva for each body gibbed.
+  - Blood Drain: Drain a pulled, downed, living target of blood, doing damage and giving your hive evolution points.
+rmc-xeno-bloodqueen-popup = This is no time to sit idle; The hive hungers for blood.
