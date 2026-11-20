@@ -224,9 +224,9 @@
   job: CMMarineRaiderLeader
 
 - type: trackerMode
-  id: SPPAirborneSL
-  job: RMCSurvivorSPPCrashlandSL
-  alert: SquadTrackerAirborne
+  id: SPPSpetsnazSL
+  job: RMCSurvivorSPPSpetsnazTrijentSL
+  alert: SquadTrackerSpetsnaz
 
 # Humanoid component trackers
 
