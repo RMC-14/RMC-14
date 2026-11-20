@@ -1,26 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Systems.Actions;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Smoke;
+using Content.Shared._RMC14.Xenonids.Abduct;
 using Content.Shared._RMC14.Xenonids.AcidMine;
 using Content.Shared._RMC14.Xenonids.Bombard;
 using Content.Shared._RMC14.Xenonids.Burrow;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.DeployTraps;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
+using Content.Shared._RMC14.Xenonids.Pierce;
 using Content.Shared._RMC14.Xenonids.ResinSurge;
 using Content.Shared._RMC14.Xenonids.Spray;
 using Content.Shared._RMC14.Xenonids.Weeds;
-using Content.Shared._RMC14.Xenonids.Abduct;
-using Content.Shared._RMC14.Xenonids.Pierce;
 using Content.Shared.Actions.Components;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
+using Content.Shared.Tag;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -29,14 +30,18 @@ using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
-using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
+using Robust.Shared.Utility;
+using Content.Shared._RMC14.Xenonids.HighGallop;
+using Content.Shared._RMC14.Xenonids.Tail_Lash;
+using Content.Shared._RMC14.Xenonids.Flurry;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Client._RMC14.Xenonids.Targeting;
 
@@ -54,6 +59,15 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private static readonly Color BlockerOutlineColor = new Color(0.65f, 0.65f, 0.65f);
     private static readonly Color AcidMineOutlineColor = new Color(0.6f, 0.9f, 0.2f);
     private static readonly Color DeployTrapsOutlineColor = new Color(0.8f, 0.6f, 0.2f);
+    private static readonly Color ScissorsOutlineColor = new Color(1f, 0f, 0f);
+    private static readonly Color HighGallopOutlineColor = new Color(0.5f, 0f, 0.5f);
+    private static readonly Color TailLashOutlineColor = new Color(0.8f, 0.67f, 0.28f);
+    private static readonly Color FlurryOutlineColor = new Color(1f, 0f, 0f);
+    private static readonly Color TunnelAllowedFillColor = Color.Green.WithAlpha(0.25f);
+    private static readonly Color TunnelAllowedOutlineColor = Color.Green.WithAlpha(0.5f);
+
+    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private const float OutlineAlpha = 0.8f;
     private const float OutlineThickness = 0.1f;
@@ -68,11 +82,17 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly IPrototypeManager _prototypes;
     private readonly IComponentFactory _componentFactory;
     private readonly IStateManager _stateManager;
+    private readonly AreaSystem _area;
+    private readonly LineSystem _line;
     private readonly SharedMapSystem _mapSystem;
     private readonly SharedPhysicsSystem _physics;
     private readonly SharedTransformSystem _transform;
-    private readonly LineSystem _line;
+    private readonly SpriteSystem _sprite;
+    private readonly TagSystem _tags;
+    private readonly TurfSystem _turf;
     private readonly EntityQuery<ActionsComponent> _actionsQ;
+    private readonly EntityQuery<AlmayerComponent> _almayerQ;
+    private readonly EntityQuery<BlockXenoConstructionComponent> _blockXenoConstructionQ;
     private readonly EntityQuery<TargetActionComponent> _targetActionQ;
     private readonly EntityQuery<WorldTargetActionComponent> _worldTargetQ;
     private readonly EntityQuery<XenoSprayAcidComponent> _sprayQ;
@@ -86,7 +106,14 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly EntityQuery<XenoWeedsComponent> _weedsQ;
     private readonly EntityQuery<XenoAbductComponent> _abductQ;
     private readonly EntityQuery<XenoPierceComponent> _pierceQ;
+    private readonly EntityQuery<XenoScissorCutComponent> _scissorsQ;
+    private readonly EntityQuery<XenoHighGallopComponent> _highGallopQ;
+    private readonly EntityQuery<XenoTailLashComponent> _tailLashQ;
+    private readonly EntityQuery<XenoFlurryComponent> _flurryQ;
     private readonly EntityQuery<TransformComponent> _xformQ;
+
+    private Box2Rotated? _lastWorldBounds;
+    private readonly HashSet<Vector2i> _tunnleableTileCache = [];
 
     public XenoAbilityPreviewOverlay(IEntityManager ents)
     {
@@ -99,11 +126,17 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _prototypes = IoCManager.Resolve<IPrototypeManager>();
         _componentFactory = IoCManager.Resolve<IComponentFactory>();
         _stateManager = IoCManager.Resolve<IStateManager>();
+        _area = ents.System<AreaSystem>();
+        _line = ents.System<LineSystem>();
         _mapSystem = ents.System<SharedMapSystem>();
         _physics = ents.System<SharedPhysicsSystem>();
+        _sprite = ents.System<SpriteSystem>();
+        _tags = ents.System<TagSystem>();
         _transform = ents.System<SharedTransformSystem>();
-        _line = ents.System<LineSystem>();
+        _turf = ents.System<TurfSystem>();
         _actionsQ = ents.GetEntityQuery<ActionsComponent>();
+        _almayerQ = ents.GetEntityQuery<AlmayerComponent>();
+        _blockXenoConstructionQ = ents.GetEntityQuery<BlockXenoConstructionComponent>();
         _targetActionQ = ents.GetEntityQuery<TargetActionComponent>();
         _worldTargetQ = ents.GetEntityQuery<WorldTargetActionComponent>();
         _sprayQ = ents.GetEntityQuery<XenoSprayAcidComponent>();
@@ -117,6 +150,10 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _weedsQ = ents.GetEntityQuery<XenoWeedsComponent>();
         _abductQ = ents.GetEntityQuery<XenoAbductComponent>();
         _pierceQ = ents.GetEntityQuery<XenoPierceComponent>();
+        _scissorsQ = ents.GetEntityQuery<XenoScissorCutComponent>();
+        _highGallopQ = ents.GetEntityQuery<XenoHighGallopComponent>();
+        _tailLashQ = ents.GetEntityQuery<XenoTailLashComponent>();
+        _flurryQ = ents.GetEntityQuery<XenoFlurryComponent>();
         _xformQ = ents.GetEntityQuery<TransformComponent>();
     }
 
@@ -219,6 +256,34 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                     return;
                 DrawPierce(args, player.Value, xform, originMap, mousePos, pierce);
                 break;
+
+            case XenoScissorCutActionEvent:
+                if (!_scissorsQ.TryComp(player.Value, out var scissors))
+                    return;
+                DrawScissors(args, player.Value, xform, originMap, mousePos, scissors);
+                break;
+
+            case XenoHighGallopActionEvent:
+                if (!_highGallopQ.TryComp(player.Value, out var highGallop))
+                    return;
+                DrawHighGallop(args, player.Value, xform, originMap, mousePos, highGallop);
+                break;
+
+            case XenoTailLashActionEvent:
+                if (!_tailLashQ.TryComp(player.Value, out var tailLash))
+                    return;
+                DrawTailLash(args, player.Value, xform, originMap, mousePos, tailLash);
+                break;
+
+            case XenoFlurryActionEvent:
+                if (!_flurryQ.TryComp(player.Value, out var flurry))
+                    return;
+                DrawFlurry(args, player.Value, xform, originMap, mousePos, flurry);
+                break;
+
+            case XenoDigTunnelActionEvent tunnelEvent:
+                DrawTunnelableTiles(args, originMap, tunnelEvent);
+                break;
         }
     }
 
@@ -274,7 +339,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             return;
 
         var center = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
-        var tileRadius = (int) MathF.Ceiling(radius);
+        var tileRadius = (int)MathF.Ceiling(radius);
         var tiles = new HashSet<Vector2i>();
         for (var x = -tileRadius; x <= tileRadius; x++)
         {
@@ -310,14 +375,14 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         // Convert the orthogonal world vector to a tile-space step
         // by seeing which tile neighbour it points most toward
         var orthoTile = new Vector2i(
-            (int) MathF.Round(ortho.X),
-            (int) MathF.Round(ortho.Y)
+            (int)MathF.Round(ortho.X),
+            (int)MathF.Round(ortho.Y)
         );
 
         if (orthoTile == Vector2i.Zero)
             orthoTile = new Vector2i(1, 0);
 
-        var radius = (int) deployTraps.DeployTrapsRadius;
+        var radius = (int)deployTraps.DeployTrapsRadius;
         var rangeSquared = deployTraps.Range * deployTraps.Range;
         var validTiles = new HashSet<Vector2i>();
         var invalidTiles = new HashSet<Vector2i>();
@@ -420,6 +485,71 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         DrawTileBorder(args.WorldHandle, gridUid, grid, aoeTiles, color);
     }
 
+    private void DrawTunnelableTiles(in OverlayDrawArgs args, MapCoordinates originMap, XenoDigTunnelActionEvent tunnelEvent)
+    {
+        if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
+            return;
+
+        bool updateTileCache;
+        // If `_lastWorldBounds` hasn't been set yet or the screen's rotation has changed, update the tile cache.
+        if (_lastWorldBounds is not { } lastWorldBounds ||
+            lastWorldBounds.Rotation.GetCardinalDir() != args.WorldBounds.Rotation.GetCardinalDir())
+        {
+            updateTileCache = true;
+        }
+        // Otherwise, only update if the screen has moved more than a quarter tile in any direction.
+        else
+        {
+            var quarterTile = grid.TileSize / 4;
+            var diff = System.Numerics.Vector4.Abs(lastWorldBounds.Box.AsVector4 - args.WorldBounds.Box.AsVector4);
+
+            updateTileCache = diff.X > quarterTile || diff.Y > quarterTile || diff.Z > quarterTile || diff.W > quarterTile;
+        }
+
+        if (updateTileCache)
+        {
+            _tunnleableTileCache.Clear();
+            _lastWorldBounds = args.WorldBounds;
+
+            if (_almayerQ.HasComp(gridUid))
+                return;
+
+            foreach (var tile in _mapSystem.GetTilesIntersecting(gridUid, grid, args.WorldBounds))
+            {
+                if (!_turf.GetContentTileDefinition(tile).CanPlaceTunnel)
+                    continue;
+
+                if (!_area.TryGetArea((gridUid, grid), tile.GridIndices, out var area, out _))
+                    continue;
+                if (area.Value.Comp.NoTunnel)
+                    continue;
+
+                if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable))
+                    continue;
+                if (_mapSystem.GetAnchoredEntities(gridUid, grid, tile.GridIndices)
+                    .Any(e => _blockXenoConstructionQ.HasComp(e) || _tags.HasAnyTag(e, AirlockTag, StructureTag)))
+                {
+                    continue;
+                }
+
+                _tunnleableTileCache.Add(tile.GridIndices);
+            }
+        }
+
+        // Filled and outlined overlay for all tunnelable tiles.
+        DrawTileFilled(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedFillColor);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, _tunnleableTileCache, TunnelAllowedOutlineColor);
+
+        // Little "ghost" tunnel sprite on the tile that it will be placed.
+        if (TryGetTileIndices(originMap, out var playerTile) && _tunnleableTileCache.Contains(playerTile.Indices))
+        {
+            var spritePosition = _mapSystem.TileToVector((gridUid, grid), playerTile.Indices);
+            var tunnelSprite = _sprite.GetPrototypeIcon(tunnelEvent.Prototype).TextureFor(Direction.South);
+
+            args.WorldHandle.DrawTexture(tunnelSprite, spritePosition, new Color(0f, 0f, 0f, 0.5f));
+        }
+    }
+
     private void DrawBurrowRange(
         in OverlayDrawArgs args,
         MapCoordinates originMap,
@@ -443,7 +573,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         var center = _mapSystem.CoordinatesToTile(gridUid, grid, originMap);
         var tileSize = grid.TileSize;
-        var maxTiles = (int) MathF.Ceiling(range / tileSize);
+        var maxTiles = (int)MathF.Ceiling(range / tileSize);
         var tiles = new HashSet<Vector2i>();
         for (var x = -maxTiles; x <= maxTiles; x++)
         {
@@ -474,7 +604,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             mousePos = originMap.Offset(direction.Normalized() * range);
 
         var color = BurrowOutlineColor.WithAlpha(OutlineAlpha);
-        DrawLandingTile(args, mousePos, color);
+        DrawLandingSquare(args, mousePos, color);
     }
 
     private static bool IsBurrowed(XenoBurrowComponent burrow)
@@ -520,6 +650,70 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         range = targetAction.Range;
         return true;
+    }
+
+    private void DrawScissors(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoScissorCutComponent scissors)
+    {
+        var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
+
+        var color = ScissorsOutlineColor.WithAlpha(OutlineAlpha);
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(1, scissors.Range)).Translated(new(0, (scissors.Range / 2) + 0.5f));
+        var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
+        DrawBorderFromBox2Rotated(args, rot, color);
+    }
+
+    private void DrawHighGallop(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoHighGallopComponent gallop)
+    {
+        var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
+
+        var color = HighGallopOutlineColor.WithAlpha(OutlineAlpha);
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(gallop.Width, gallop.Height)).Translated(new(0, (gallop.Height / 2) + 0.5f));
+        var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
+        DrawBorderFromBox2Rotated(args, rot, color);
+    }
+
+    private void DrawTailLash(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoTailLashComponent lash)
+    {
+        var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
+
+        var color = TailLashOutlineColor.WithAlpha(OutlineAlpha);
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(lash.Width, lash.Height)).Translated(new(0, (lash.Height / 2) + 0.5f));
+        var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
+        DrawBorderFromBox2Rotated(args, rot, color);
+    }
+
+    private void DrawFlurry(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoFlurryComponent flurry)
+    {
+        var direction = (mousePos.Position - originMap.Position).ToAngle() - Angle.FromDegrees(90);
+
+        var color = FlurryOutlineColor.WithAlpha(OutlineAlpha);
+        var box2 = Box2.CenteredAround(xform.Coordinates.Position, new(flurry.Range, 1)).Translated(new(0, 1f));
+        var rot = new Box2Rotated(box2, direction, xform.Coordinates.Position);
+        DrawBorderFromBox2Rotated(args, rot, color);
     }
 
     private void DrawLinePreview(
@@ -571,14 +765,26 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         }
     }
 
-    private void DrawLandingTile(in OverlayDrawArgs args, MapCoordinates target, Color color)
+    private void DrawBorderFromBox2Rotated(in OverlayDrawArgs args, Box2Rotated box, Color color)
+    {
+        var vertices = new HashSet<Vector2>
+        {
+            box.BottomLeft,
+            box.BottomRight,
+            box.TopRight,
+            box.TopLeft
+        };
+
+        DrawPolygonBorder(args.WorldHandle, vertices, color);
+    }
+
+    private void DrawLandingSquare(in OverlayDrawArgs args, MapCoordinates target, Color color)
     {
         if (!_mapManager.TryFindGridAt(target, out var gridUid, out var grid))
             return;
 
-        var indices = _mapSystem.CoordinatesToTile(gridUid, grid, target);
-        var tiles = new HashSet<Vector2i> { indices };
-        DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
+        var box = Box2.CenteredAround(target.Position, Vector2.One);
+        DrawBorderFromBox2Rotated(args, new Box2Rotated(box), color);
     }
 
     private bool TryGetResinSurgeDirectTarget(MapCoordinates mousePos, out TileInfo target)
@@ -688,25 +894,85 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             return;
 
         var tileSize = grid.TileSize;
-        var tileSizeVec = new Vector2(tileSize, tileSize);
+        var gridMatrix = _transform.GetWorldMatrix(gridUid);
 
         foreach (var indices in tiles)
         {
-            var baseLocal = new Vector2(indices.X * tileSize, indices.Y * tileSize);
-            var p00 = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, baseLocal)).Position;
-            var p10 = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, baseLocal + new Vector2(tileSize, 0f))).Position;
-            var p11 = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, baseLocal + tileSizeVec)).Position;
-            var p01 = _transform.ToMapCoordinates(new EntityCoordinates(gridUid, baseLocal + new Vector2(0f, tileSize))).Position;
+            var baseLocal = _mapSystem.TileToVector((gridUid, grid), indices);
+            var bottomLeft = Vector2.Transform(baseLocal, gridMatrix);
+            var bottomRight = Vector2.Transform(baseLocal + new Vector2(tileSize, 0f), gridMatrix);
+            var topLeft = Vector2.Transform(baseLocal + new Vector2(0f, tileSize), gridMatrix);
+            var topRight = Vector2.Transform(baseLocal + grid.TileSizeVector, gridMatrix);
 
             if (!tiles.Contains(new Vector2i(indices.X, indices.Y + 1)))
-                DrawEdge(handle, p01, p11, color);
+                DrawEdge(handle, topLeft, topRight, color);
             if (!tiles.Contains(new Vector2i(indices.X, indices.Y - 1)))
-                DrawEdge(handle, p00, p10, color);
+                DrawEdge(handle, bottomLeft, bottomRight, color);
             if (!tiles.Contains(new Vector2i(indices.X + 1, indices.Y)))
-                DrawEdge(handle, p10, p11, color);
+                DrawEdge(handle, bottomRight, topRight, color);
             if (!tiles.Contains(new Vector2i(indices.X - 1, indices.Y)))
-                DrawEdge(handle, p00, p01, color);
+                DrawEdge(handle, bottomLeft, topLeft, color);
         }
+    }
+
+    private void DrawTileFilled(DrawingHandleWorld handle, EntityUid gridUid, MapGridComponent grid, HashSet<Vector2i> tiles, Color color)
+    {
+        if (tiles.Count == 0)
+            return;
+
+        var halfTileSize = grid.TileSizeHalfVector;
+
+        // Overcommented to maybe help make the grid -> world stuff less confusing, because it certainly confused me.
+        // This is essentially the same as converting from grid-based `EntityCoordinates` to world-based `MapCoordinates`,
+        // just using raw `Vector2`s instead of the structs since they would fetch the grid's pos+rot for each tile rather than just once.
+        // (maybe a small optimisation, but this is potentially a lot of tiles updating every frame)
+
+        // This grid's position and rotation relative to the base world.
+        var (worldPos, worldRot) = _transform.GetWorldPositionRotation(gridUid);
+        // Transform matrix to quickly convert from grid-based coords to world coords.
+        var gridMatrix = Matrix3Helpers.CreateTransform(worldPos, worldRot);
+
+        foreach (var indices in tiles)
+        {
+            // Grid-based coords of the center point of this tile.
+            var localCenter = _mapSystem.TileCenterToVector(gridUid, grid, indices);
+            // "Real" world coords of the center point.
+            var worldCenter = Vector2.Transform(localCenter, gridMatrix);
+
+            // A tile-sized `Box2` centered around `worldCenter`.
+            var centeredBox = new Box2(worldCenter - halfTileSize, worldCenter + halfTileSize);
+            // `centeredBox` rotated to match the rotation of the grid, and thus the rotation of the tile.
+            var rotatedBox = new Box2Rotated(centeredBox, worldRot, worldCenter);
+
+            handle.DrawRect(rotatedBox, color);
+        }
+    }
+
+    private void DrawPolygonBorder(DrawingHandleWorld handle, HashSet<Vector2> vertices, Color color)
+    {
+        if (vertices.Count == 0)
+            return;
+
+        var isFirst = true;
+        Vector2? first = vertices.FirstOrNull();
+        Vector2? previous = first;
+
+        foreach (var vertex in vertices)
+        {
+            if (isFirst)
+            {
+                isFirst = false;
+                continue;
+            }
+
+            if (previous != null)
+                DrawEdge(handle, previous.Value, vertex, color);
+
+            previous = vertex;
+        }
+
+        if (previous != null && first != null)
+            DrawEdge(handle, previous.Value, first.Value, color);
     }
 
     private int GetBombardRadius(EntProtoId projectile)
@@ -754,7 +1020,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 return mask;
         }
 
-        return (int) (CollisionGroup.Impassable | CollisionGroup.BulletImpassable | CollisionGroup.XenoProjectileImpassable);
+        return (int)(CollisionGroup.Impassable | CollisionGroup.BulletImpassable | CollisionGroup.XenoProjectileImpassable);
     }
 
     private MapCoordinates AdjustProjectileImpact(EntProtoId projectile, MapCoordinates origin, MapCoordinates impact)
@@ -835,7 +1101,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         var length = delta.Length();
         var mid = (from + to) * 0.5f;
-        var angle = delta.ToWorldAngle();
+        var angle = delta.ToAngle();
         var rect = new Box2(-length / 2f, -half, length / 2f, half);
         var rotated = new Box2Rotated(rect.Translated(mid), angle, mid);
         handle.DrawRect(rotated, color);

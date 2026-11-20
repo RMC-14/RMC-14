@@ -56,6 +56,9 @@
     pocket2: RMCPouchDocument
   inhand:
     - CMStampWeYa
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMIDCardGold

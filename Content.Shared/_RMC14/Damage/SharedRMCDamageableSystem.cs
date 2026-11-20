@@ -38,6 +38,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Content.Shared.StatusEffect;
 
 namespace Content.Shared._RMC14.Damage;
 
@@ -60,6 +61,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -711,6 +713,26 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 _audio.PlayPvs(damage.Sound, user);
 
                 break;
+            }
+        }
+
+        var rmcapplyonthesholdquery = EntityQueryEnumerator<RMCApplyOnDamageThresholdComponent, DamageableComponent>();
+        while (rmcapplyonthesholdquery.MoveNext(out var uid, out var apply, out var damagable))
+        {
+            if (time < apply.NextCheck)
+                continue;
+
+            apply.NextCheck = time + apply.CheckEvery;
+
+            foreach (var thres in apply.Thresholds)
+            {
+                if (!damagable.DamagePerGroup.TryGetValue(thres.DamageType, out var damage))
+                    continue;
+
+                if (damage < thres.Threshold)
+                    continue;
+
+                _status.TryAddStatusEffect(uid, thres.StatusName, thres.Duration, true, thres.StatusComponent);
             }
         }
     }

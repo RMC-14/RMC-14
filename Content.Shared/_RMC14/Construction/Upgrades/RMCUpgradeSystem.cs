@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Damage;
@@ -128,6 +128,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
             BreakOnDamage = true,
             NeedHand = true,
             RootEntity = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         _doAfter.TryStartDoAfter(downgradeDoAfter);

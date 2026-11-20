@@ -20,6 +20,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 using Content.Shared._RMC14.Weapons.Ranged.Chamber;
+using Content.Shared._RMC14.Weapons.Ranged.DualTube;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access;
@@ -388,7 +389,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         var delay = ent.Comp.HackDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.HackSkill);
         var ev = new RMCAutomatedVendorHackDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, multitool);
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, multitool)
+        {
+            RootEntity = true,
+        };
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             _popup.PopupClient(Loc.GetString("rmc-vending-machine-hack-start", ("vendor", ent)), ent, user);
@@ -1480,6 +1484,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         // Check internal ammo
         if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticProvider) &&
             (ballisticProvider.UnspawnedCount > 0 || ballisticProvider.Entities.Count > 0))
+        {
+            return true;
+        }
+
+        if (TryComp<RMCDualTubeComponent>(gun, out var dualTube) &&
+            (dualTube.UnspawnedCount > 0 || dualTube.Entities.Count > 0))
         {
             return true;
         }
