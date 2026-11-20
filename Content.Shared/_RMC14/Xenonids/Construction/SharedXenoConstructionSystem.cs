@@ -11,8 +11,6 @@ using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
-using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
-using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Vehicle;
@@ -36,6 +34,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
@@ -104,8 +103,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<SentryComponent> _sentryQuery;
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
-    private EntityQuery<XenoEggComponent> _xenoEggQuery;
-    private EntityQuery<XenoTunnelComponent> _xenoTunnelQuery;
     private EntityQuery<QueenBuildingBoostComponent> _queenBoostQuery;
 
     private const string XenoStructuresAnimation = "RMCEffect";
@@ -128,8 +125,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _sentryQuery = GetEntityQuery<SentryComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
-        _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
-        _xenoTunnelQuery = GetEntityQuery<XenoTunnelComponent>();
         _queenBoostQuery = GetEntityQuery<QueenBuildingBoostComponent>();
 
         SubscribeLocalEvent<NewXenoEvolvedEvent>(OnNewXenoEvolved);
@@ -231,6 +226,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = false,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -1042,6 +1038,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
     {
+        if (!HasComp<XenoComponent>(args.Examiner) && !HasComp<GhostComponent>(args.Examiner))
+            return;
+
         var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
         args.PushMarkup(Loc.GetString("cm-xeno-construction-plasma-left", ("construction", node.Owner), ("plasma", plasmaLeft)));
     }
@@ -1072,7 +1071,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var delay = xeno.AddPlasmaDelay;
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, user, node)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -1482,8 +1482,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
 
             if (_xenoConstructQuery.HasComp(uid) ||
-                _xenoEggQuery.HasComp(uid) ||
-                _xenoTunnelQuery.HasComp(uid) ||
                 _sentryQuery.HasComp(uid) ||
                 _blockXenoConstructionQuery.HasComp(uid))
             {
@@ -1822,12 +1820,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var hasWeeds = false;
         while (anchored.MoveNext(out var uid))
         {
-            if (HasComp<XenoEggComponent>(uid))
-            {
-                popupType = "rmc-xeno-construction-blocked";
-                return false;
-            }
-
             if (_hiveConstructionNodeQuery.TryGetComponent(uid, out var node) &&
                 node.BlockOtherNodes)
             {
@@ -1838,7 +1830,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (HasComp<XenoConstructComponent>(uid) ||
                 _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag) ||
                 HasComp<StrapComponent>(uid) ||
-                _xenoTunnelQuery.HasComp(uid) ||
                 _sentryQuery.HasComp(uid) ||
                 _blockXenoConstructionQuery.HasComp(uid))
             {

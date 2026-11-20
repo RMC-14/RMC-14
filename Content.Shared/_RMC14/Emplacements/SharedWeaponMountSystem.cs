@@ -226,6 +226,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -275,6 +276,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
                     NeedHand = true,
                     BreakOnMove = true,
                     BreakOnHandChange = true,
+                    RootEntity = true,
                 };
 
                 _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -883,6 +885,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -909,6 +912,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -932,6 +936,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(undeployDoAfterArgs));
