@@ -1,8 +1,9 @@
-using Content.Shared._RMC14.Armor;
-using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Xenonids.Damage;
 using Content.Shared.Damage;
 using Content.Shared.Explosion;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -18,7 +19,9 @@ public sealed class VanguardShieldSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<VanguardShieldComponent, MapInitEvent>(OnVanguardShieldInit);
-        SubscribeLocalEvent<VanguardShieldComponent, DamageModifyAfterResistEvent>(OnVanguardShieldHit, before: [typeof(XenoShieldSystem)]);
+        SubscribeLocalEvent<VanguardShieldComponent, MeleeHitEvent>(OnVanguardShieldMelee);
+        SubscribeLocalEvent<VanguardShieldComponent, DamageChangedEvent>(OnVanguardShieldProjectile);
+        SubscribeLocalEvent<VanguardShieldComponent, XenoShieldHitEvent>(OnVanguardShieldHit);
         SubscribeLocalEvent<VanguardShieldComponent, GetExplosionResistanceEvent>(OnVanguardShieldGetResistance);
         SubscribeLocalEvent<VanguardShieldComponent, RemovedShieldEvent>(OnVanguardShieldRemoved);
     }
@@ -28,29 +31,41 @@ public sealed class VanguardShieldSystem : EntitySystem
         RegenShield(xeno);
     }
 
-    private void OnVanguardShieldHit(Entity<VanguardShieldComponent> xeno, ref DamageModifyAfterResistEvent args)
+    private void OnVanguardShieldProjectile(Entity<VanguardShieldComponent> xeno, ref DamageChangedEvent args)
     {
-        if (args.Damage.GetTotal() <= 0 || (!TryComp<XenoShieldComponent>(xeno, out var shield)) || shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
+        if (_net.IsClient || !HasComp<ProjectileComponent>(args.Tool))
             return;
 
+        xeno.Comp.LastTimeHit = _timing.CurTime;
+    }
+    private void OnVanguardShieldMelee(Entity<VanguardShieldComponent> xeno, ref MeleeHitEvent args)
+    {
+        if (_net.IsClient || args.HitEntities.Count <= 0)
+            return;
+
+        xeno.Comp.LastTimeHit = _timing.CurTime;
+    }
+
+    private void OnVanguardShieldHit(Entity<VanguardShieldComponent> xeno, ref XenoShieldHitEvent args)
+    {
         if (_net.IsServer)
             xeno.Comp.LastTimeHit = _timing.CurTime;
 
-        if (!xeno.Comp.WasHit && args.Damage.GetTotal() > xeno.Comp.DecayThreshold)
+        if (args.Event.Damage.GetTotal() <= 0 || args.Shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
+            return;
+
+        if (!xeno.Comp.WasHit && args.Event.Damage.GetTotal() > xeno.Comp.DecayThreshold)
         {
             xeno.Comp.WasHit = true;
             _popup.PopupEntity(Loc.GetString("rmc-xeno-shield-vanguard-hit"), xeno, xeno, PopupType.MediumCaution);
 
-            args.Damage.ClampMax(0);
+            args.Event.Damage.ClampMax(0);
         }
     }
 
     private void OnVanguardShieldGetResistance(Entity<VanguardShieldComponent> xeno, ref GetExplosionResistanceEvent args)
     {
-        if (!TryComp<XenoShieldComponent>(xeno, out var shield) || shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
-            return;
-
-        if (shield.ShieldAmount <= 0)
+        if (!_shield.TryGetShield(xeno.Owner, XenoShieldSystem.ShieldType.Vanguard, out var shield))
             return;
 
         var explosionResist = xeno.Comp.ExplosionResistance;
@@ -83,14 +98,15 @@ public sealed class VanguardShieldSystem : EntitySystem
             if (vanguardShield.LastRecharge <= vanguardShield.LastTimeHit && vanguardShield.LastTimeHit + vanguardShield.RechargeTime <= time)
                 RegenShield(uid);
 
-            if (!shield.Active || !vanguardShield.WasHit || vanguardShield.NextDecay > time)
+            if (!_shield.TryGetShield((uid, shield), XenoShieldSystem.ShieldType.Vanguard, out var xenoShield) || !vanguardShield.WasHit || vanguardShield.NextDecay > time)
                 continue;
 
             vanguardShield.NextDecay = time + vanguardShield.DecayEvery;
 
-            shield.ShieldAmount = Math.Max(0, ((shield.ShieldAmount * vanguardShield.DecayMult) - vanguardShield.DecaySub).Double());
+            xenoShield.ShieldAmount = Math.Max(0, ((xenoShield.ShieldAmount * vanguardShield.DecayMult) - vanguardShield.DecaySub).Double());
+            _shield.UpdateVisuals((uid, shield));
 
-            if (shield.ShieldAmount <= 0)
+            if (xenoShield.ShieldAmount <= 0)
                 _shield.RemoveShield(uid, XenoShieldSystem.ShieldType.Vanguard);
 
             Dirty(uid, shield);
@@ -100,10 +116,7 @@ public sealed class VanguardShieldSystem : EntitySystem
     //Returns whether something applies for the shield buff (for cleave)
     public bool ShieldBuff(EntityUid ent)
     {
-        if (!TryComp<XenoShieldComponent>(ent, out var shield))
-            return false;
-
-        if (shield.Shield == XenoShieldSystem.ShieldType.Vanguard && shield.Active)
+        if (_shield.TryGetShield(ent, XenoShieldSystem.ShieldType.Vanguard, out _))
             return true;
 
         if (TryComp<VanguardShieldComponent>(ent, out var vanguard) && vanguard.NextDecay + vanguard.BuffExtraTime > _timing.CurTime)
@@ -114,13 +127,13 @@ public sealed class VanguardShieldSystem : EntitySystem
 
     public void RegenShield(EntityUid ent)
     {
-        if (!TryComp<VanguardShieldComponent>(ent, out var vanguard) || !TryComp<XenoShieldComponent>(ent, out var shield))
+        if (!TryComp<VanguardShieldComponent>(ent, out var vanguard))
             return;
 
         vanguard.LastRecharge = _timing.CurTime;
         vanguard.WasHit = false;
 
-        if (!shield.Active && _net.IsServer)
+        if (!_shield.TryGetShield(ent, XenoShieldSystem.ShieldType.Vanguard, out _) && _net.IsServer)
             _popup.PopupEntity(Loc.GetString("rmc-xeno-shield-vanguard-regen"), ent, ent, PopupType.Medium);
 
         _shield.ApplyShield(ent, XenoShieldSystem.ShieldType.Vanguard, vanguard.RegenAmount, maxShield: vanguard.RegenAmount.Double());

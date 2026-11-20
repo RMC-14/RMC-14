@@ -36,6 +36,8 @@
       entries:
       - id: RMCCoatService
         recommended: true
+      - id: RMCCoatAllWeather # RMC Addition
+        recommended: true
     - name: Hat
       choices: { CMHat: 1 }
       entries:
@@ -149,6 +151,7 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
       - id: CMVendorBundleSquadMedicalEssentials
+      - id: CMVendorBundleStaffOfficerEssentialLeaderSet
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -415,6 +418,7 @@
       - id: CMJumpsuitCOFormalWhite
       - id: CMJumpsuitCOFormalBlack
       - id: RMCCoatService
+      - id: RMCCoatAllWeather # RMC Addition
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition
@@ -488,6 +492,11 @@
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
       - id: CMBootsBlackFilled
+    - name: Specialisation Kit
+      takeOne: CMBundle
+      entries:
+      - id: CMVendorBundleCombatTechnicianEssentials
+      - id: CMVendorBundleSquadMedicalEssentials
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -1081,6 +1090,7 @@
       - id: RMCHazardVest
       - id: RMCHazardVestYellow
       - id: RMCCoatService
+      - id: RMCCoatAllWeather # RMC Addition
     - name: Backpack
       jobs:
       - CMChiefEngineer

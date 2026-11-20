@@ -57,10 +57,10 @@
   equipment:
     ears: RMCHeadsetMarineNV
     id: CMIDCardStandardDogtag
-    jumpsuit: RMCJumpsuitCivilianGreen
+    jumpsuit: RMCJumpsuitMarineNV
     outerClothing: RMCClothingPriestRobes
     back: CMSatchel
-    shoes: RMCShoesLaceup
+    shoes: CMBootsUrbanFilled
     pocket2: RMCPouchGeneralLarge
   storage:
     back:

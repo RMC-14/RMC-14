@@ -50,10 +50,10 @@
   id: RMCGearSurvivorCommanderNewVaradero
   equipment:
     ears: RMCHeadsetMarineNV
-    jumpsuit: CMJumpsuitBO
-    head: RMCHeadCapFlippable
-    outerClothing: RMCCoatServiceFolded
-    shoes: CMBootsBlackFilled
+    jumpsuit: RMCJumpsuitMarineNVCommander
+    head: CMHeadCapOfficerNV
+    outerClothing: RMCCoatService
+    shoes: CMBootsUrbanFilled
     back: CMSatchelLiaisonSecure
     belt: RMCBeltHolsterPistol
     id: CMIDCardGold

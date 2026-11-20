@@ -300,6 +300,26 @@
       amount: 5
 
 - type: entity
+  parent: RMCBeltNV
+  id: RMCBeltNVFilledMK1
+  suffix: Filled, MK1
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: RMCBeltNV
+  id: RMCBeltNVFilledM16
+  suffix: Filled, M16
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
+      amount: 5
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltMarineMK2
   suffix: Filled, MK2
