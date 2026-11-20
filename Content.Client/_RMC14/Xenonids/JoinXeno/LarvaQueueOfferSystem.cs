@@ -20,6 +20,8 @@ public sealed class LarvaQueueOfferSystem : EntitySystem
 
     private LarvaQueueOfferWindow? _window;
     private LarvaQueueOfferEvent? _currentOffer;
+    private string _offeredEntityName = string.Empty;
+    private double _offerExpiredAt;
 
     public override void Initialize()
     {
@@ -29,8 +31,10 @@ public sealed class LarvaQueueOfferSystem : EntitySystem
 
     private void OnOfferReceived(LarvaQueueOfferEvent ev)
     {
-        _currentOffer = ev;
+        _offerExpiredAt = 0;
         CloseWindow();
+        _currentOffer = ev;
+        _offeredEntityName = ev.TargetEntityName;
 
         _window = new LarvaQueueOfferWindow();
 
@@ -73,18 +77,44 @@ public sealed class LarvaQueueOfferSystem : EntitySystem
         _audio.PlayGlobal(OfferSound, Filter.Local(), false);
     }
 
-    private void OnOfferExpired(LarvaQueueOfferExpiredEvent _)
+    private void OnOfferExpired(LarvaQueueOfferExpiredEvent ev)
     {
         _currentOffer = null;
-        CloseWindow();
+
+        if (_window == null || !_window.IsOpen)
+            return;
+
+        if (ev.LarvaDied)
+        {
+            _offerExpiredAt = _timing.CurTime.TotalSeconds;
+            _window.CountdownLabel.Text = $"{_offeredEntityName} died — you will remain in the queue";
+            _window.AcceptButton.Visible = false;
+            _window.DeclineButton.Visible = false;
+            _window.FollowButton.Visible = false;
+        }
+        else
+        {
+            CloseWindow();
+        }
     }
 
     public override void Update(float frameTime)
     {
-        if (_currentOffer == null || _window == null || !_window.IsOpen)
-            return;
+        if (_currentOffer != null && _window != null && _window.IsOpen)
+            UpdateCountdown();
 
-        UpdateCountdown();
+        if (_offerExpiredAt > 0)
+        {
+            if (_window == null || !_window.IsOpen)
+            {
+                _offerExpiredAt = 0;
+            }
+            else if (_timing.CurTime.TotalSeconds - _offerExpiredAt > 5.0)
+            {
+                _offerExpiredAt = 0;
+                CloseWindow();
+            }
+        }
     }
 
     private void UpdateCountdown()
@@ -107,7 +137,9 @@ public sealed class LarvaQueueOfferSystem : EntitySystem
         if (_window == null)
             return;
 
+        _offerExpiredAt = 0;
         _currentOffer = null;
+        _offeredEntityName = string.Empty;
         _window.Close();
         _window = null;
     }

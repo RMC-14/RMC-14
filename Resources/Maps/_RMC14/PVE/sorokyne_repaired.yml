@@ -50917,14 +50917,14 @@ entities:
   - uid: 899
     components:
     - type: MetaData
-      name: 'LZ2: Sorokyne Strata'
+      name: 'LZ2: Communications Landing Zone'
     - type: Transform
       pos: 46.5,18.5
       parent: 1
   - uid: 900
     components:
     - type: MetaData
-      name: 'LZ1: Sorokyne Strata'
+      name: 'LZ1: Mining Landing Zone'
     - type: Transform
       pos: 10.5,108.5
       parent: 1

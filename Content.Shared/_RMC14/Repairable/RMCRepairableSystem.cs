@@ -94,6 +94,7 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
+
         var hasReplace = TryComp(repairable, out RMCRepairableReplaceComponent? replace);
 
         if (!TryComp(repairable, out DamageableComponent? damageable))
@@ -136,6 +137,9 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (!UseFuel(args.Used, args.User, repairable.Comp.FuelUsed, true))
             return;
 
+        var toolUseAttempt = new ToolUseAttemptEvent(user, (float) repairable.Comp.FuelUsed);
+        RaiseLocalEvent(used, toolUseAttempt);
+
         var delay = hasReplace
             ? (float) repairable.Comp.Delay.TotalSeconds
             : GetWeldRepairDelaySeconds(repairable, user, damageable.TotalDamage);
@@ -145,7 +149,8 @@ public sealed class RMCRepairableSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -214,7 +219,13 @@ public sealed class RMCRepairableSystem : EntitySystem
 
     private void OnRepairableDoAfter(Entity<RMCRepairableComponent> repairable, ref RMCRepairableDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled)
+        {
+            _weldEffect.ClearActiveEffect(repairable.Owner);
+            return;
+        }
+
+        if (args.Handled)
             return;
 
         args.Handled = true;
@@ -275,7 +286,8 @@ public sealed class RMCRepairableSystem : EntitySystem
                 NeedHand = true,
                 BreakOnMove = true,
                 BlockDuplicate = true,
-                DuplicateCondition = DuplicateConditions.SameEvent
+                DuplicateCondition = DuplicateConditions.SameEvent,
+                RootEntity = true,
             };
 
             _doAfter.TryStartDoAfter(doAfter);

@@ -58,7 +58,7 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
             case ExpendableLightState.PhaseFive:
             case ExpendableLightState.Fading:
                 if (state != ExpendableLightState.PhaseOne)
-                    _audioSystem.Stop(comp.PlayingStream);
+                    comp.PlayingStream = _audioSystem.Stop(comp.PlayingStream);
 
                 if (state == ExpendableLightState.Lit)
                     comp.PlayingStream = _audioSystem.PlayPvs(comp.LoopedSound, uid)?.Entity;

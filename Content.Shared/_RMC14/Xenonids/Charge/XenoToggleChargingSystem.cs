@@ -583,7 +583,7 @@ public sealed class XenoToggleChargingSystem : EntitySystem
                 if (TerminatingOrDeleted(hit.Crusher) || TerminatingOrDeleted(hit.Target))
                     continue;
 
-                if (HasComp<XenoWeedsComponent>(hit.Target))
+                if (HasComp<XenoChargeDontHitComponent>(hit.Target))
                     continue;
 
                 if (_xenoToggleChargingRecentlyHitQuery.TryComp(hit.Target, out var recently) &&

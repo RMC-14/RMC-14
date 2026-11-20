@@ -1,6 +1,6 @@
 - type: entity
-  parent: MarkerBase
   id: RMCBlockerVehicle
+  parent: MarkerBase
   name: vehicle blocker
   suffix: RMC, Blocker
   components:
@@ -21,3 +21,51 @@
         - Vehicle
         layer:
         - Vehicle
+
+- type: entity
+  id: VehiclePeekAnchor
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+
+- type: entity
+  id: VehicleExitArea
+  name: vehicle exit marker
+  description: A clickable marker used for vehicle exits.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+  - type: Sprite
+    drawdepth: LowFloors
+    texture: /Textures/_RMC14/Tiles/floors/void.png
+  - type: VehicleExit
+  - type: Vehicle
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      marker:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque

@@ -171,6 +171,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
             AddButton(CMKeyFunctions.RMCFieldStripHeldItem);
             AddButton(CMKeyFunctions.RMCCycleFireMode);
+            AddButton(CMKeyFunctions.RMCToggleShotgunTube);
             AddButton(CMKeyFunctions.CMUniqueAction);
             AddButton(CMKeyFunctions.CMHolsterPrimary);
             AddButton(CMKeyFunctions.CMHolsterSecondary);
@@ -225,6 +226,14 @@ namespace Content.Client.Options.UI.Tabs
             AddHeader("ui-options-header-interaction-adv");
             AddButton(ContentKeyFunctions.SmartEquipBackpack);
             AddButton(ContentKeyFunctions.SmartEquipBelt);
+            AddButton(ContentKeyFunctions.SmartEquipPocket1);
+            AddButton(ContentKeyFunctions.SmartEquipPocket2);
+            AddButton(ContentKeyFunctions.SmartEquipSuitStorage);
+            //RMC14
+            AddButton(ContentKeyFunctions.SmartEquipUniform);
+            AddButton(ContentKeyFunctions.SmartEquipArmor);
+            AddButton(ContentKeyFunctions.SmartEquipHelmet);
+            //RMC14
             AddButton(ContentKeyFunctions.OpenBackpack);
             AddButton(ContentKeyFunctions.OpenBelt);
             AddButton(ContentKeyFunctions.ThrowItemInHand);

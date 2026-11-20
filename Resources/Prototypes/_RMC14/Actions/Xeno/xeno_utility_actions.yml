@@ -197,6 +197,22 @@
     useDelay: 1
   - type: InstantAction
     event: !type:HiveLeaderSquadActionEvent
+  - type: RMCInContainerAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHiveTeamMemberView
+  name: View My Fireteam
+  description: Opens a panel showing your fireteam leader and members.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_lead
+    useDelay: 1
+  - type: InstantAction
+    event: !type:HiveTeamMemberViewActionEvent
 
 - type: entity
   parent: ActionXenoBase
@@ -213,6 +229,7 @@
     useDelay: 3
   - type: InstantAction
     event: !type:HiveLeaderActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -271,7 +288,6 @@
   components:
   - type: Action
     itemIconStyle: NoItem
-    backgroundOn: null
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: apply_salve
@@ -280,7 +296,7 @@
     range: 2
   - type: EntityTargetAction
     event: !type:XenoApplySalveActionEvent
-  - type: RMCDazeableAction
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
@@ -290,7 +306,6 @@
   components:
   - type: Action
     itemIconStyle: NoItem
-    backgroundOn: null
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
@@ -372,6 +387,7 @@
     cost: 75
   - type: XenoActionPlasma
     cost: 300
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -412,6 +428,7 @@
     event: !type:ActionXenoSpikeShieldEvent
   - type: ActionBlockIfResting
   - type: RMCDazeableAction
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
@@ -427,12 +444,13 @@
     useDelay: 60
   - type: InstantAction
     event: !type:XenoBulwarkOfTheHiveActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoDoom
   name: Doom (50)
-  description: Turns off lights around you for 10 seconds, and slows, dazes, and drains hostiles as well.
+  description: Turns off lights around you for 10 seconds, and slows, dazes, and drains helpful chemicals from hostiles as well.
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -444,3 +462,29 @@
     event: !type:XenoDoomActionEvent
   - type: XenoActionPlasma
     cost: 50
+
+- type: entity
+  parent: ActionXenoDoom
+  id: ActionXenoDoomBloodQueen
+  name: Doom (250)
+  components:
+  - type: XenoActionPlasma
+    cost: 250
+
+- type: entity
+  id: ActionXenoBloodDrain
+  parent: ActionXenoBase
+  name: Blood Drain (50)
+  description: Drain blood from a pulled host, giving the hive evolution points and healing you slightly.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: headbite
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    event: !type:XenoBloodDrainActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoOffensiveAction
