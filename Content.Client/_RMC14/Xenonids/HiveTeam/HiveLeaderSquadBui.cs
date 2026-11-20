@@ -38,28 +38,6 @@ public sealed class HiveLeaderSquadBui : BoundUserInterface
         if (s.MyTeam == null)
             return;
 
-        var roleName = myEntry.Role >= 0 && myEntry.Role < HiveTeamsComponent.RoleNames.Length
-            ? Loc.GetString(HiveTeamsComponent.RoleNames[myEntry.Role])
-            : "?";
-
-        var allXenos = BuildAllXenos(hive.Owner);
-        var pickerXenos = BuildPickerXenos(allXenos, teams);
-        _window.UpdateState(myEntry, myIndex, roleName, allXenos, pickerXenos, GetTexture, OnAnnounce, OnAddMember, OnRemoveMember);
-    }
-
-    private List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> BuildAllXenos(EntityUid hiveOwner)
-    {
-        var result = new List<(NetEntity Entity, string Name, EntProtoId? ProtoId)>();
-        var query = EntMan.AllEntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
-        while (query.MoveNext(out var uid, out _, out var member, out var meta))
-        {
-            if (member.Hive != hiveOwner)
-                continue;
-            if (_mobState.IsDead(uid))
-                continue;
-            result.Add((Entity: EntMan.GetNetEntity(uid), Name: meta.EntityName, ProtoId: meta.EntityPrototype?.ID));
-        }
-        return result;
         var allXenos = s.AllXenos.Select(x => (x.Entity, x.Name, x.ProtoId)).ToList();
         var pickerXenos = BuildPickerXenos(allXenos, s.AllTeams);
         _window.UpdateState(s.MyTeam, s.TeamIndex, s.RoleName, allXenos, pickerXenos, GetTexture, OnAnnounce, OnAddMember, OnRemoveMember);

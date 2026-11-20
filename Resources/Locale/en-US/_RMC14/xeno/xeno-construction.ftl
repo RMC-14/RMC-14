@@ -144,4 +144,5 @@ rmc-xeno-weeds-need-nearby-node = We can only plant weed nodes near other weed n
 rmc-xeno-resin-whisperer-verb-open-door = Open Door
 
 rmc-xeno-construction-choose-cost = {$structure} ({$cost} plasma)
+
 rmc-xeno-weedbound-examined = You sense that this structure will collapse if the weeds it is merged with disappear.

@@ -78,7 +78,7 @@ public sealed class HiveTeamSystem : EntitySystem
     private static string GetRoleName(int role)
     {
         return role >= 0 && role < HiveTeamsComponent.RoleNames.Length
-            ? HiveTeamsComponent.RoleNames[role]
+            ? Robust.Shared.Localization.Loc.GetString(HiveTeamsComponent.RoleNames[role])
             : "?";
     }
 
@@ -466,10 +466,6 @@ public sealed class HiveTeamSystem : EntitySystem
                 recipients.Add(queenUid);
         }
 
-        var roleName = myEntry.Role >= 0 && myEntry.Role < HiveTeamsComponent.RoleNames.Length
-            ? Loc.GetString(HiveTeamsComponent.RoleNames[myEntry.Role])
-            : "?";
-        var message = $"{Name(xeno.Owner)} [{roleName}]: {args.Message}";
         var message = $"{Name(xeno.Owner)} [{GetRoleName(myEntry.Role)}]: {args.Message}";
         var escapedMessage = FormattedMessage.EscapeText(message);
         var wrapped = $"[color=#FFFFFF][font size=16][bold]{escapedMessage}[/bold][/font][/color]";
