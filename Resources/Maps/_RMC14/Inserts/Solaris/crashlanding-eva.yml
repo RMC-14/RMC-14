@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 10:34:00
-  entityCount: 364
+  time: 11/20/2026 16:17:41
+  entityCount: 370
 maps: []
 grids:
 - 1
@@ -458,18 +458,6 @@ entities:
     - type: Transform
       pos: 4.5,13.5
       parent: 1
-- proto: CMPackFlare
-  entities:
-  - uid: 208
-    components:
-    - type: Transform
-      pos: 1.5,20.5
-      parent: 1
-  - uid: 209
-    components:
-    - type: Transform
-      pos: 1.5,20.5
-      parent: 1
 - proto: CMRack
   entities:
   - uid: 36
@@ -706,17 +694,17 @@ entities:
       parent: 1
 - proto: CMSheetPlasteel1
   entities:
-  - uid: 110
+  - uid: 208
     components:
     - type: Transform
-      pos: 13.5,16.5
+      pos: 13.720091,16.456434
       parent: 1
 - proto: CMSheetPlasteel30
   entities:
-  - uid: 111
+  - uid: 209
     components:
     - type: Transform
-      pos: 11.653793,16.617561
+      pos: 11.636758,14.600979
       parent: 1
 - proto: CMTable
   entities:
@@ -772,6 +760,11 @@ entities:
       parent: 1
     - type: Stack
       count: 2
+  - uid: 366
+    components:
+    - type: Transform
+      pos: -2.319098,17.424503
+      parent: 1
 - proto: CMVendorComponent
   entities:
   - uid: 199
@@ -1312,7 +1305,27 @@ entities:
       parent: 1
 - proto: RMCBeltPMC
   entities:
+  - uid: 241
+    components:
+    - type: Transform
+      pos: 1.5,14.5
+      parent: 1
   - uid: 353
+    components:
+    - type: Transform
+      pos: 1.5,14.5
+      parent: 1
+  - uid: 368
+    components:
+    - type: Transform
+      pos: 1.5,14.5
+      parent: 1
+  - uid: 369
+    components:
+    - type: Transform
+      pos: 1.5,14.5
+      parent: 1
+  - uid: 370
     components:
     - type: Transform
       pos: 1.5,14.5
@@ -1381,6 +1394,8 @@ entities:
     - type: Transform
       pos: 3.5,19.5
       parent: 1
+    - type: BulletBox
+      amount: 145
 - proto: RMCComputerFrameUnfinished
   entities:
   - uid: 207
@@ -1431,12 +1446,12 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 234
           - 235
-          - 236
-          - 237
-          - 238
           - 239
+          - 238
+          - 237
+          - 236
+          - 234
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -1446,22 +1461,33 @@ entities:
     - type: Transform
       pos: 4.5,14.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 241
-          - 242
-          - 243
-          - 244
-          - 245
-          - 246
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
+    - type: Lock
+      locked: False
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.4,-0.4
+            - 0.4,-0.4
+            - 0.4,0.29
+            - -0.4,0.29
+          mask:
+          - Impassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - Opaque
+          density: 50
+          hard: True
+          restitution: 0
+          friction: 0.4
+    - type: EntityStorage
+      open: True
+      removedMasks: 20
+    - type: PlaceableSurface
+      isPlaceable: True
 - proto: RMCDecalSpawnerBloodSplatters
   entities:
   - uid: 268
@@ -1896,34 +1922,16 @@ entities:
       parent: 1
 - proto: RMCGrenadeBlastM12
   entities:
-  - uid: 241
-    components:
-    - type: Transform
-      parent: 240
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 243
-    components:
-    - type: Transform
-      parent: 240
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
   - uid: 244
     components:
     - type: Transform
-      parent: 240
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 4.5,14.5
+      parent: 1
   - uid: 245
     components:
     - type: Transform
-      parent: 240
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 4.5,14.5
+      parent: 1
 - proto: RMCGrenadeMolotov
   entities:
   - uid: 285
@@ -1985,6 +1993,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 10.5,10.5
+      parent: 1
+- proto: RMCLockerSuitStorageUnitFilled
+  entities:
+  - uid: 367
+    components:
+    - type: Transform
+      pos: 9.5,20.5
       parent: 1
 - proto: RMCMagazinePistolMK80Empty
   entities:
@@ -2191,6 +2206,25 @@ entities:
           showEnts: False
           occludes: False
           ent: null
+- proto: RMCMREWeYaPMC
+  entities:
+  - uid: 243
+    components:
+    - type: Transform
+      pos: 4.5,14.5
+      parent: 1
+- proto: RMCPackFlareC18
+  entities:
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 2.1638188,20.271273
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      pos: 2.122152,20.63611
+      parent: 1
 - proto: RMCPaperScrapProp
   entities:
   - uid: 341
@@ -2216,6 +2250,13 @@ entities:
     components:
     - type: Transform
       pos: 2.5,8.5
+      parent: 1
+- proto: RMCPlantedFlagWeYa
+  entities:
+  - uid: 365
+    components:
+    - type: Transform
+      pos: 4.5,14.5
       parent: 1
 - proto: RMCRackParts
   entities:
@@ -2378,7 +2419,8 @@ entities:
   - uid: 242
     components:
     - type: Transform
-      parent: 240
+      pos: 4.5,14.5
+      parent: 1
     - type: ContainerContainer
       containers:
         gun_magazine: !type:ContainerSlot
@@ -2393,25 +2435,30 @@ entities:
           showEnts: False
           occludes: False
           ent: null
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: RMCWeaponRifleSSG45NoLock
   entities:
   - uid: 246
     components:
     - type: Transform
-      parent: 240
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-- proto: RMCWeaponShotgunHG3712
+      pos: 4.5,14.5
+      parent: 1
+- proto: RMCWeaponShotgunM12
   entities:
   - uid: 283
     components:
     - type: Transform
       pos: -7.5,16.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        rmc_dual_tube: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
 - proto: RMCWindowFrameSolaris
   entities:
   - uid: 71
