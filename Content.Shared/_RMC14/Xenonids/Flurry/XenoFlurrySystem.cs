@@ -75,8 +75,33 @@ public sealed class XenoFlurrySystem : EntitySystem
         _result.Clear();
         _entityLookup.GetEntitiesIntersecting(map, worldBox, _result, LookupFlags.Dynamic | LookupFlags.Static);
 
+        foreach (var tile in _map.GetTilesIntersecting(gridId, grid, worldBox))
+        {
+            if (!_interaction.InRangeUnobstructed(xeno.Owner, _turf.GetTileCenter(tile), xeno.Comp.Range + 0.5f))
+                continue;
+
+            SpawnAtPosition(xeno.Comp.TelegraphEffect, _turf.GetTileCenter(tile));
+        }
+
         if (_result.Count <= 0)
+        {
+            if (TryComp<XenoFishingComponent>(xeno, out var fishing))
+            {
+                // Center and near the edges
+                List<EntityCoordinates> fishingChecks = new() {
+                    _transform.ToCoordinates(xeno.Owner, new MapCoordinates(worldBox.Center, map)),
+                    _transform.ToCoordinates(xeno.Owner, new MapCoordinates(((worldBox.TopLeft + worldBox.BottomLeft + worldBox.Center) / 3), map)),
+                    _transform.ToCoordinates(xeno.Owner, new MapCoordinates(((worldBox.TopRight + worldBox.BottomRight + worldBox.Center) / 3), map))
+                };
+
+                foreach (var check in fishingChecks)
+                {
+                    if (_fishing.DoXenoFish((xeno, fishing), check, out var caught, pickup: false) && caught != null)
+                        _audio.PlayEntity(xeno.Comp.SlashSound, xeno, caught.Value);
+                }
+            }
             return;
+        }
 
         //TODO RMC14 targets random limb
         var damage = new DamageSpecifier(xeno.Comp.Damage);
@@ -123,31 +148,5 @@ public sealed class XenoFlurrySystem : EntitySystem
 
         if (hitEnt != null)
             _rmcMelee.DoLunge(xeno, hitEnt.Value);
-        else
-        {
-            if (TryComp<XenoFishingComponent>(xeno, out var fishing))
-            {
-                // Center and near the edges
-                List<EntityCoordinates> fishingChecks = new() {
-                    xenoCoord.WithPosition(rot.Center),
-                    xenoCoord.WithPosition((rot.TopLeft + rot.BottomLeft) / 2),
-                    xenoCoord.WithPosition((rot.TopRight + rot.BottomRight) / 2)
-                };
-
-                foreach (var check in fishingChecks)
-                {
-                    if (_fishing.DoXenoFish((xeno, fishing), check, out var caught, pickup: false) && caught != null)
-                        _audio.PlayEntity(xeno.Comp.SlashSound, xeno, caught.Value);
-                }
-            }
-        }
-
-        foreach (var tile in _map.GetTilesIntersecting(gridId, grid, worldBox))
-        {
-            if (!_interaction.InRangeUnobstructed(xeno.Owner, _turf.GetTileCenter(tile), xeno.Comp.Range + 0.5f))
-                continue;
-
-            SpawnAtPosition(xeno.Comp.TelegraphEffect, _turf.GetTileCenter(tile));
-        }
     }
 }

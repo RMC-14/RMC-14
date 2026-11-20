@@ -90,7 +90,7 @@ public abstract class SharedRMCFishingSystem : EntitySystem
         if (_net.IsClient)
             return true;
 
-        caught = Spawn(loot, coords);
+        caught = SpawnAtPosition(loot, coords);
 
         if (pickup && _hands.TryPickupAnyHand(user, caught.Value))
         {
