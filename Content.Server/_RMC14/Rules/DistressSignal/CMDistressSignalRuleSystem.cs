@@ -163,10 +163,6 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
     [Dependency] private readonly ITaskManager _task = default!;
 
-    private readonly HashSet<string> _operationNames = new();
-    private readonly HashSet<string> _operationPrefixes = new();
-    private readonly HashSet<string> _operationSuffixes = new();
-
     private float _marinesPerXeno;
     private bool _autoBalance;
     private float _autoBalanceStep;
@@ -311,14 +307,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostSpeedMultiplier, v => _queenBoostSpeedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostRemoteRange, v => _queenBoostRemoteRange = v, true);
 
-        ReloadPrototypes();
         BeginPersistenceLoad();
-    }
-
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
-    {
-        if (ev.WasModified<EntityPrototype>())
-            ReloadPrototypes();
     }
 
     private void OnMapLoading(LoadingMapsEvent ev)
