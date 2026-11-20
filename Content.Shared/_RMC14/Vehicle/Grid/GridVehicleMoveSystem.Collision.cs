@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared.Physics;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -290,6 +291,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return false;
 
         if (!physicsQ.TryComp(other, out var otherBody) || !otherBody.CanCollide)
+            return false;
+
+        if (TryComp(other, out XenoBurrowComponent? burrow) && burrow.Active)
             return false;
 
         var hasDoor = TryComp(other, out DoorComponent? door);

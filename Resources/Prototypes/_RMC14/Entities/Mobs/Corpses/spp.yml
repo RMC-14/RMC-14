@@ -1,4 +1,4 @@
-# CMB Deputy
+# SPP soldier
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCCorpseSPPSoldier

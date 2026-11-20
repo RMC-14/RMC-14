@@ -1,0 +1,41 @@
+- type: entity
+  parent: MuzzleFlashEffect
+  id: MuzzleFlashEffectSMG
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    offset: 0.33, 0
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: _RMC14/Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_bullet_RMC
+
+- type: entity
+  parent: MuzzleFlashEffect
+  id: MuzzleFlashEffectPistol
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    offset: 0.26, 0
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: _RMC14/Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_bullet_low_RMC
+
+- type: entity
+  parent: MuzzleFlashEffect
+  id: MuzzleFlashEffectShotgun
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    offset: 0.33, 0
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: _RMC14/Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_bullet_shell_RMC
