@@ -1,12 +1,12 @@
 - type: job
   parent: [ RMCJobRibbonBase, CMSurvivorCorporate ] # Halcyon CL shouldn't spawn with WY badges
-  id: CMJobSurvivorHalcyonDynamicsLiaison
-  name: rmc-job-name-survivor-halcyon-dynamics-liaison
+  id: CMJobSurvivorHalcyonLiaison
+  name: rmc-job-name-survivor-halcyon-liaison
   description: cm-job-description-survivor
-  startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
+  startingGear: RMCGearSurvivorHalcyonLiaison
   accessGroups:
   - ColonistCorporate
-  spawnMenuRoleName: Halcyon Dynamics Liaison (Sorokyne Survivor)
+  spawnMenuRoleName: Halcyon Corporation Liaison (Sorokyne Survivor)
   icon: "RMCJobIconHalcyonExec"
   ranks:
     RMCRankHalcyonExecutiveSpecialist:
@@ -39,7 +39,7 @@
     - type: Skills
       preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetHalcyonDynamicsLiaison
+      preset: RMCGearSurvivorPresetHalcyonLiaison
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -52,7 +52,7 @@
 
 - type: startingGear
   parent: RMCGearSurvivorBase
-  id: RMCGearSurvivorHalcyonDynamicsLiaison
+  id: RMCGearSurvivorHalcyonLiaison
   equipment:
     id: RMCIDCardHalcyon
     jumpsuit: RMCJumpsuitLiaisonBrownTie
@@ -69,8 +69,8 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorHalcyonDynamicsLiaison
-  name: halcyon dynamics liaison spawn point
+  id: RMCSpawnPointSurvivorHalcyonLiaison
+  name: halcyon liaison spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -81,8 +81,8 @@
 
 - type: entity
   parent: RMCSurvivorPresetCivilian
-  id: RMCGearSurvivorPresetHalcyonDynamicsLiaison
-  name: halcyon dynamics liaison preset
+  id: RMCGearSurvivorPresetHalcyonLiaison
+  name: halcyon liaison preset
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityPreset
