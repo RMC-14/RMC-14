@@ -110,7 +110,7 @@ public abstract class SharedMortarSystem : EntitySystem
     {
         // undeployed mortars can't be damaged, but we can't cancel the attack because
         // we allow mortars to be picked up in combat mode
-        if (ent.Comp.Deployed)
+        if (!ent.Comp.Deployed)
             args.Defer = true;
     }
 
