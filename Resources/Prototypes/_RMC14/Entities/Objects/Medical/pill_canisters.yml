@@ -80,11 +80,19 @@
     nestedWhitelist:
       tags:
       - RMCBeltMedical
+      - RMCPouchMedical
   - type: RMCSmartFridgeInsertable
     category: Pills
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 500
+  - type: RMCBreakablePillBottle
+    breakWhitelist:
+      tags:
+      - Knife
+    repairWhitelist:
+      tags:
+      - Wirecutter
 
 - type: entity
   parent: RMCPillCanisterNoSkill

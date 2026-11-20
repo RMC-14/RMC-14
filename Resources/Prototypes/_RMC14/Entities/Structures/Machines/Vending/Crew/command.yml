@@ -19,6 +19,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMBootsBlackFilled
       - id: RMCHeadsetMarineCommand
       - id: CMMRE
@@ -35,6 +36,8 @@
       choices: { CMCoat: 1}
       entries:
       - id: RMCCoatService
+        recommended: true
+      - id: RMCCoatAllWeather # RMC Addition
         recommended: true
     - name: Hat
       choices: { CMHat: 1 }
@@ -149,6 +152,7 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
       - id: CMVendorBundleSquadMedicalEssentials
+      - id: CMVendorBundleStaffOfficerEssentialLeaderSet
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -415,6 +419,7 @@
       - id: CMJumpsuitCOFormalWhite
       - id: CMJumpsuitCOFormalBlack
       - id: RMCCoatService
+      - id: RMCCoatAllWeather # RMC Addition
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition
@@ -465,6 +470,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetSeniorCommand
       - id: CMMRE
     - name: Commanding Officer Essentials Kit
@@ -488,6 +494,11 @@
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
       - id: CMBootsBlackFilled
+    - name: Specialisation Kit
+      takeOne: CMBundle
+      entries:
+      - id: CMVendorBundleCombatTechnicianEssentials
+      - id: CMVendorBundleSquadMedicalEssentials
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -525,6 +536,7 @@
       - id: CMBeltUtilityCombat
       - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
+      - id: RMCBeltBrowne
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
@@ -780,6 +792,7 @@
       - CMExecutiveOfficer
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetSeniorCommand
       - id: CMMRE 
 # TODO: - id: Trench Whistle
@@ -952,6 +965,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltBrowne
     - name: Patches
       jobs:
       - CMChiefMP
@@ -1039,6 +1053,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetCE
       - id: RMCWeldingGoggles
       - id: RMCNailgunTactical
@@ -1077,6 +1092,7 @@
       - id: RMCHazardVest
       - id: RMCHazardVestYellow
       - id: RMCCoatService
+      - id: RMCCoatAllWeather # RMC Addition
     - name: Backpack
       jobs:
       - CMChiefEngineer
@@ -1221,6 +1237,7 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: RMCQuartermasterJacket
     - name: Gloves
       jobs:
@@ -1528,6 +1545,7 @@
       - CMAuxiliarySupportOfficer
       choices: { CMSuit: 1 }
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
