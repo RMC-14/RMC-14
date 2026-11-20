@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Microwaves can now store huge items.
-    type: Tweak
-  id: 3327
-  time: '2026-06-08T02:00:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10036
 - author: Dygon
   changes:
   - message: Air dropped sentries no longer target resin.
@@ -4449,5 +4442,12 @@
   id: 3826
   time: '2026-11-20T03:56:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10427
+- author: Sifb26
+  changes:
+  - message: All squad marines now have a CO and XO tracker
+    type: Add
+  id: 3827
+  time: '2026-11-20T04:01:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9721
 Name: RMC14
 Order: -1
