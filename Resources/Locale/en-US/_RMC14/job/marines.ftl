@@ -21,7 +21,7 @@ CMJobWeaponsSpecialist = Weapons Specialist
 
 cm-job-name-smart-gun-operator = Smart Gun Operator
 cm-job-description-smart-gun-operator = Support your Squad with heavy weaponry and give the enemy suppressing fire.
-cm-job-prefix-gun-operator = SGO
+cm-job-prefix-gun-operator = SG
 CMJobSmartGunOperator = Smart Gun Operator
 
 cm-job-name-hospital-corpsman = Hospital Corpsman
