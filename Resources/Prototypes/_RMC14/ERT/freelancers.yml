@@ -57,7 +57,7 @@
       message: rmc-ert-announcement-freelancers-friendly-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 3
     maxSlots: 8
@@ -120,7 +120,7 @@
       message: rmc-ert-announcement-freelancers-hostile-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 3
     maxSlots: 8

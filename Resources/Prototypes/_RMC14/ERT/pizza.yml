@@ -37,7 +37,7 @@
       message: rmc-ert-announcement-pizza-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 1
     maxSlots: 1

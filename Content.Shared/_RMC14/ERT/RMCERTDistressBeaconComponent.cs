@@ -16,6 +16,13 @@ public sealed partial class RMCERTDistressBeaconComponent : Component
     [DataField]
     public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
 
+    /// <summary>
+    /// Optional automatic response policy. Null requires an administrator's decision.
+    /// This setting is only used by the server.
+    /// </summary>
+    [DataField]
+    public RMCERTAutoResolutionOptions? AutoResolution;
+
     // This is only used server-side when building prompts and admin text.
     // The localized key itself does not need to go over component state.
     /// <summary>

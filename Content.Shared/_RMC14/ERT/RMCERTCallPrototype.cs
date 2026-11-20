@@ -407,7 +407,7 @@ public sealed partial class RMCERTRequirementSet
     /// Time ghost roles remain open before automatic launch or manual dispatch.
     /// </summary>
     [DataField]
-    public TimeSpan RecruitmentDuration = TimeSpan.FromSeconds(30);
+    public TimeSpan RecruitmentDuration = TimeSpan.FromMinutes(1);
 
     /// <summary>
     /// Maximum number of non-terminal requests for this call allowed in one round.

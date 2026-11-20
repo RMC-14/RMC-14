@@ -158,30 +158,7 @@ public sealed class RMCERTRequest
 }
 
 /// <summary>
-/// Optional settings for resolving a pending admin-review request when no admin has made a final decision in time.
-/// </summary>
-public sealed class RMCERTAutoResolutionOptions
-{
-    /// <summary>
-    /// How long the request may remain pending before automatic resolution runs.
-    /// A zero or negative delay disables automatic resolution.
-    /// </summary>
-    public TimeSpan Delay;
-
-    /// <summary>
-    /// Chance from 0.0 to 1.0 that automatic resolution approves the request.
-    /// Values outside the range are clamped by the ERT system.
-    /// </summary>
-    public float ApprovalChance;
-
-    /// <summary>
-    /// Optional display/log actor label used for the automatic approve or deny action.
-    /// </summary>
-    public string? ActorName;
-}
-
-/// <summary>
-/// Arguments for creating an ERT request that waits for admin approval.
+/// Arguments for creating an ERT request with manual or automatic resolution.
 /// </summary>
 public sealed class RMCERTCreateRequestArgs
 {
@@ -244,7 +221,7 @@ public sealed class RMCERTCreateRequestArgs
     public bool AllowSpecificSelection = true;
 
     /// <summary>
-    /// Optional automatic pending-review resolution. Leave null for fully manual admin approval/denial.
+    /// Optional automatic response policy. Leave null for manual administrator approval or denial.
     /// </summary>
     public RMCERTAutoResolutionOptions? AutoResolution;
 }

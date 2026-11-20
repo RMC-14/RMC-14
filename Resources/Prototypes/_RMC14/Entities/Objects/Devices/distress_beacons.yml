@@ -1,5 +1,8 @@
 # RMCERTDistressBeacon field guide:
 # - allowedCalls: explicit ERT call prototypes this beacon may request; empty means all enabled handheld calls.
+# - autoResolution: omit for admin approval; delay: 0s resolves immediately, positive delay allows admin review first.
+# - autoResolution.approvalChance: 0..1, default 1; 1 guarantees approval, intermediate values roll for a response.
+# - A single eligible call is selected directly; larger automatic pools use the calls' randomWeight values.
 # - requestTitle: loc id for the title shown in the reason prompt and admin request text.
 # - recipient: loc id for the authority or organization receiving the request.
 # - reasonRequired: whether the user must enter a non-empty reason.
@@ -50,6 +53,18 @@
     allowedCalls:
     - RMCERTCallCMB
     - RMCERTCallCMBRiot
+
+- type: entity
+  parent: RMCHandheldDistressBeaconCMB
+  id: RMCHandheldDistressBeaconCMBMarshal
+  name: CMB marshal distress beacon
+  description: An encrypted marshal transmitter that automatically authorizes a Bureau reinforcement request.
+  suffix: CMB, Automatic
+  components:
+  - type: RMCERTDistressBeacon
+    autoResolution:
+      delay: 0s
+      approvalChance: 1
 
 - type: entity
   parent: RMCHandheldDistressBeaconBase

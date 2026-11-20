@@ -50,7 +50,7 @@
       message: rmc-ert-announcement-xenos-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 3
     maxSlots: 7
@@ -139,7 +139,7 @@
       message: rmc-ert-announcement-feral-xenos-arrival
   requirements:
     cooldown: 10m
-    recruitmentDuration: 30s
+    recruitmentDuration: 1m
     maxCallsPerRound: 1
     minRequiredSlots: 1
     maxSlots: 8
