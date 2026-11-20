@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
@@ -51,6 +52,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private readonly XenoSpitSystem _spit = default!;
 
     public override void Initialize()
     {
@@ -97,7 +99,6 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
         hive.Duration = xeno.Comp.Duration;
         hive.TimeLeft = xeno.Comp.Duration;
         hive.BaseDamage = xeno.Comp.BaseDamage;
-        hive.MobAcid = xeno.Comp.Acid;
 
         ForTheHiveShout(xeno);
 
@@ -214,10 +215,9 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                             continue;
 
                         //Do the acid check here
-                        if (_interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
+                        if (active.MobAcid != null && _interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                         {
-                            if (active.MobAcid is { } add)
-                                EntityManager.AddComponents(mob, add);
+                            _spit.ApplyOrExtendAcid(mob.Owner, active.MobAcid.Value);
                         }
 
                         if (!_interaction.InRangeUnobstructed(xeno, mob.Owner, burnRange, collisionMask: CollisionGroup.Impassable))
@@ -246,8 +246,8 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                         var smoke = SpawnAtPosition(active.AcidSmoke, _turf.GetTileCenter(turf));
                     }
 
-                    if (GetHiveCore(xeno, out var core))
-                        ForTheHiveRespawn(xeno, active.CoreSpawnTime);
+                    if (_hive.TryGetHiveCore(xeno, out var core))
+                        ForTheHiveRespawn(xeno, active.CoreSpawnTime, true, _transform.GetMoverCoordinates(core.Value));
                     else
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
 
@@ -257,25 +257,6 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                 }
             }
         }
-    }
-
-    protected bool GetHiveCore(EntityUid xeno, out EntityUid? core)
-    {
-        var cores = EntityQueryEnumerator<HiveCoreComponent, HiveMemberComponent>();
-        while (cores.MoveNext(out var uid, out var _, out var _))
-        {
-            if (!_hive.FromSameHive(xeno, uid))
-                continue;
-
-            if (_mob.IsDead(uid))
-                continue;
-
-            core = uid;
-            return true;
-        }
-
-        core = null;
-        return false;
     }
 
     protected virtual void ForTheHiveRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)

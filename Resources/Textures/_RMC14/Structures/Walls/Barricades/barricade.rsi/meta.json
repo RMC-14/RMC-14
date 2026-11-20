@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5cf465e72efb6beccd2b78bf263072816a2a60ad/icons/obj/structures/barricades.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2f4c415e5681333e6de474f1f027087101452d31/icons/obj/structures/barricades.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -41,6 +41,38 @@
     },
     {
       "name": "folding_plasteel_closed",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_connection_1",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_connection_2",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_connection_4",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_connection_8",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_closed_connection_1",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_closed_connection_2",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_closed_connection_4",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_closed_connection_8",
       "directions": 4
     },
     {
@@ -176,6 +208,10 @@
     },
     {
       "name": "centerroadbarrier2",
+      "directions": 4
+    },
+    {
+      "name": "hesco",
       "directions": 4
     }
   ]

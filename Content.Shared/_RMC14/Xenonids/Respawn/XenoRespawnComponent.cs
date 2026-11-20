@@ -15,13 +15,21 @@ public sealed partial class XenoRespawnComponent : Component
     public TimeSpan RespawnAt;
 
     [DataField]
-    public bool RespawnAtCorpse = false;
+    public bool RespawnAtLocation = false;
 
     [DataField]
-    public EntityCoordinates? CorpseLocation;
+    public EntityCoordinates? Location;
 
     [DataField]
     public EntProtoId Larva = "CMXenoLarva";
+
+    /// <summary>
+    ///     How long the respawned larva is invincible for when it spawns at the corpse (the fallback when no hive core
+    ///     is available). Respawns that go through the hive instead use the per-location handles on <see cref="HiveComponent"/>.
+    ///     Set to zero or less to disable.
+    /// </summary>
+    [DataField]
+    public TimeSpan CorpseInvincibilityTime = TimeSpan.FromSeconds(5);
 
     [DataField]
     public SoundSpecifier CorpseSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/xeno_newlarva.ogg");

@@ -1,0 +1,90 @@
+- type: job
+  parent: CMJobBase
+  id: CMMilitaryPolice
+  name: cm-job-name-militarypolice
+  description: cm-job-description-militarypolice
+  newToJobInfo: rmc-new-to-job-military-police
+  playTimeTracker: CMJobMilitaryPolice
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 72000 # 20 hours
+  ranks:
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 252000 # 70 hours
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 36000 # 10 hours
+    RMCRankCorporal: []
+  weight: 5
+  startingGear: CMGearMilitaryPolice
+  icon: "CMJobIconMilitaryPolice"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 3
+  supervisors: cm-job-supervisors-cmp
+  accessGroups:
+  - MP
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: cm-job-prefix-militarypolice
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
+
+- type: startingGear
+  id: CMGearMilitaryPolice
+  equipment:
+    jumpsuit: CMJumpsuitMP
+    shoes: CMBootsBlackFilled
+    head: CMHeadBeretRed
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    id: CMIDCardMilitaryPolice
+    outerClothing: CMArmorM2MP
+    ears: CMHeadsetMPO
+    belt: CMBeltSecurityMPFilled
+    pocket1: RMCUniversalRecorder
+    pocket2: RMCPouchGeneralLarge
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointMilitaryPolice
+  name: military police spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMMilitaryPolice
+  - type: Sprite
+    state: mp_spawn
+
+- type: playTimeTracker
+  id: CMJobMilitaryPolice
+  isHumanoid: true
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleMP
+  name: Military Police
+  description: Military Police
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: military_police

@@ -17,7 +17,7 @@
       RMCSkillMedical: 1
       RMCSkillPolice: 0 #RMC Change: Should be 2
       RMCSkillVehicles: 1
-        
+
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaPilot
@@ -27,7 +27,7 @@
   - type: SkillPreset
     skills:
       RMCSkillPilot: 2
-        
+
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaEngineer
@@ -39,7 +39,7 @@
       RMCSkillConstruction: 2
       RMCSkillEngineer: 2
       RMCSkillPowerLoader: 1
-        
+
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaMedic
@@ -51,7 +51,7 @@
       RMCSkillFireman: 3
       RMCSkillMedical: 3
       RMCSkillSurgery: 2
-        
+
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaLeader
@@ -66,7 +66,7 @@
       RMCSkillLeadership: 1
       RMCSkillPilot: 1
       RMCSkillIntel: 1
-        
+
 - type: entity
   id: RMCSkillPresetParaSynth
   name: Royal Paramarine Synthetic
@@ -91,4 +91,29 @@
       RMCSkillJtac: 1
       RMCSkillIntel: 1
       RMCSkillDomestics: 2
-        
+
+- type: entity
+  parent: RMCSkillPresetParamarine
+  id: RMCSkillPresetParaCommander
+  name: Royal Paramarine Commander
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 2
+      RMCSkillConstruction: 2
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillEndurance: 3
+      RMCSkillEngineer: 2
+      RMCSkillExecution: 1
+      RMCSkillIntel: 2
+      RMCSkillJtac: 4
+      RMCSkillLeadership: 3
+      RMCSkillMedical: 3
+      RMCSkillNavigations: 1
+      RMCSkillOverwatch: 1
+      RMCSkillPolice: 2
+      RMCSkillPowerLoader: 2
+      RMCSkillSurgery: 1
+      RMCSkillVehicles: 2

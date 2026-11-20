@@ -58,6 +58,7 @@
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: RMCAllowStrapMovement
   - type: Strap
+    modifyBuckleDrawDepth: false
     buckleSound:
       path: /Audio/_RMC14/Mecha/powerloader_buckle.ogg
       params:
@@ -92,6 +93,12 @@
           RMCPowerCellAPC:
             min: 1
             max: 1
+          RMCCableCoil1: 
+            min: 1
+            max: 2
+          CMRodMetal1: 
+            min: 2
+            max: 2
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -99,7 +106,7 @@
 - type: entity
   id: RMCMechPowerLoaderWreckage
   name: LU-50 Power Loader wreckage
-  description: The wreckage of a LU-50 Power Loader.
+  description: Remains of some unfortunate Power Loader. Completely unrepairable.
   components:
   - type: Corrodible
     isCorrodible: true
@@ -110,17 +117,9 @@
     layers:
     - state: wreck
   - type: Clickable
-  - type: InputMover
   - type: InteractionOutline
   - type: Damageable
     damageContainer: Inorganic
-  - type: FootstepModifier
-    footstepSoundCollection:
-      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
-  - type: Strap
-    blacklist:
-      components:
-      - Xeno
   - type: Destructible
     thresholds:
     - trigger:
@@ -164,7 +163,7 @@
   parent: RMCMechBase
   id: RMCMechPowerLoader
   name: LU-50 Power loader
-  description: An old Fujin design refurbished by Weston-Yamada used in warehouses, constructions and military ships everywhere. # TODO RMC14 BETTER DESCRIPTION
+  description: An old design refurbished by Weston-Yamada used in warehouses, constructions and military ships everywhere. # TODO RMC14 BETTER DESCRIPTION
   components:
   - type: PowerLoader
     skills:
@@ -189,7 +188,7 @@
   parent: RMCMechPowerLoader
   id: RMCMechPowerLoaderGreen
   name: LU-43 Power loader
-  description: An really old but trusted design used in warehouses, constructions and military ships everywhere. This one has a signature green and yellow livery of Fujin. The label claims they make electronics and machinery, though you’ve never heard of them before. # TODO RMC14 BETTER DESCRIPTION
+  description: A really old but trusted design used in warehouses, constructions and military ships everywhere.
   components:
   - type: Sprite
     layers:
@@ -208,7 +207,7 @@
   parent: RMCMechPowerLoader
   id: RMCMechPowerLoaderBlue
   name: LU-52 Power loader
-  description: A modernized design made to outdo the older models once used in fancy ports and facilities. It was built by Ferret Heavy Industries before they went bankrupt, making these units surprisingly affordable. # TODO RMC14 BETTER DESCRIPTION
+  description: A modernized design made to outdo the older models, once used in fancy ports and facilities.
   components:
   - type: Sprite
     layers:

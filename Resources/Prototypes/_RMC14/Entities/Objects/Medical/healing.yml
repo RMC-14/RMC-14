@@ -16,6 +16,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: GuideHelp
+    guides:
+    - RMCMedical
 
 - type: entity
   parent: CMBaseHealingItem

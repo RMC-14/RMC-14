@@ -123,14 +123,12 @@
       # ToDo: RMC14 Platinum Coin
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000
-    - id: CMWebbingHolster
-    - id: RMCWeaponPistolPK7
-    - id: RMCMagazinePistolPK7
-    - id: RMCMagazinePistolPK7
+    - id: RMCBackpackRTOBagPhone
+    - id: RMCShoulderHolsterPK7
 
 - type: entity
-  parent: CMLockerBase
-  id: RMCLockerFieldDoctor
+  parent: RMCLockerFieldDoctor
+  id: RMCLockerFieldDoctorFilled
   suffix: Filled, Field Doctor
   components:
   - type: StorageFill
@@ -154,3 +152,15 @@
     - id: RMCShovel
     - id: RMCPickaxe
     # TODO: Add Meson Goggles, Analyzer, Orebag
+
+- type: entity
+  parent: CMLockerSuitStorageUnit
+  id: RMCLockerSuitStorageUnitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetCivilianCompressionSuit
+    - id: RMCSuitCivilianCompressionSuit
+    - id: RMCMaskBreath
+    - id: RMCGasTankOxygenFilled

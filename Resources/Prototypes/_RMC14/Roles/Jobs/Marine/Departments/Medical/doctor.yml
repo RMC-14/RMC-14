@@ -1,0 +1,83 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMDoctor
+  name: rmc-job-name-doctor
+  description: rmc-job-description-doctor
+  newToJobInfo: rmc-new-to-job-doctor
+  playTimeTracker: CMJobDoctor
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 3600 # 1 hour
+  ranks:
+    RMCRankSecondLT: []
+  startingGear: CMGearDoctor
+  icon: "CMJobIconDoctor"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-cmo
+  accessGroups:
+  - CMMedbay
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 1
+        RMCSkillFirearms: 0
+        RMCSkillFireman: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-doctor
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: doctor
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_medical
+    - type: MutinyEligible
+
+- type: startingGear
+  id: CMGearDoctor
+  equipment:
+    jumpsuit: CMScrubsBlue
+    shoes: ClothingShoesColorWhite
+    id: CMIDCardDoctor
+
+- type: startingGear
+  id: CMGearDoctorEquipped
+  equipment:
+    jumpsuit: CMScrubsBlue
+    outerClothing: RMCCoatService
+    gloves: CMHandsLatex
+    shoes: RMCShoesWhite
+    head: CMHeadCapSurgBlue
+    id: CMIDCardDoctor
+    ears: CMHeadsetMedical
+    belt: CMBeltMedicalFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointDoctor
+  name: doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMDoctor
+  - type: Sprite
+    state: doc_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleDoctor
+  name: Doctor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: doctor
+
+- type: playTimeTracker
+  id: CMJobDoctor
+  isHumanoid: true

@@ -480,6 +480,21 @@
       Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
 
 - type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM20Stock
+  name: M20A stock
+  description: The M20A's standard polymer stock.
+  components:
+  - type: Sprite
+    state: m20_stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM20Stock
+  - type: AttachableVisuals
+    suffix: "_a"
+
+- type: entity
   parent: RMCAttachmentM54CStockSolid
   id: RMCAttachmentM54CStockSolidMarksman
   name: M54C marksman stock
@@ -908,24 +923,25 @@
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
-  id: RMCAttachmentMP5AltStockCollapsible
-  name: MP5A5 folding stock
-  description: MP5A5 folding stock for Alternate MP5
+  id: RMCAttachmentStockPCAC5Collapsible
+  name: PCAC5 collapsible stock
+  description: Collapsible stock for the PCAC5A5 and PCAC5SD6.
   components:
   - type: Sprite
-    state: mp5_stock
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: pcac_collapsible
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentMP5AltStockCollapsible
+    - RMCAttachmentStockPCAC5Collapsible
   - type: AttachableToggleable
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-      state: mp5_stock
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: pcac_collapsible
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-      state: mp5_stock-on
-    actionName: Toggle Submachinegun Folding Stock
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: pcac_collapsible-on
+    actionName: Toggle PCAC5 Collapsible Stock
   - type: AttachableSizeMods
     modifiers:
     - conditions:
@@ -962,6 +978,8 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 2
+  - type: AttachableVisuals
+    suffix: ""
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
@@ -1114,18 +1132,18 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentHG3712Stock
-  name: HG3712 stock
-  description: The non-detachable stock of a HG 37-12 pump shotgun.
+  id: RMCAttachmentModel12Stock
+  name: Model 12 stock
+  description: The non-detachable stock of a Model 12 pump shotgun.
   components:
   - type: Sprite
-    state: hg3712_stock
+    state: model12_stock
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentHG3712Stock
+    - RMCAttachmentModel12Stock
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -1140,7 +1158,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentHG3712Stock
+    - RMCAttachmentHuntingStock
 
 - type: entity
   parent: RMCAttachableBase
@@ -1232,10 +1250,26 @@
     - RMCAttachmentL83A3Stock
 
 - type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentStockPCAC5Solid
+  name: PCAC5 solid stock
+  description: Collapsible stock for the PCAC5A4.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: pcac_solid
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentStockPCAC5Solid
+
+- type: entity
   parent: RMCAttachmentM54CStockCollapsible
-  id: RMCAttachmentAK4047StockCollapsible
-  name: AK-4047 folding stock
-  description: The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
+  id: RMCAttachmentType77StockCollapsible
+  name: Type 77 folding stock
+  description: The standard back end of any gun starting with 'AK'. Compatible with the Type 77 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
   components:
   - type: AttachableVisuals
     suffix: ""
@@ -1254,11 +1288,11 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
       state: ak4047_stock-on
-    actionName: Toggle AK-4047 Folding Stock
+    actionName: Toggle Type 77 Folding Stock
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentAK4047StockCollapsible
+    - RMCAttachmentType77StockCollapsible
 
 - type: entity
   parent: RMCAttachableBase
@@ -1303,7 +1337,7 @@
     - RMCAttachmentL49Stock
 
 - type: Tag
-  id: RMCAttachmentHG3712Stock
+  id: RMCAttachmentModel12Stock
 
 - type: Tag
   id: RMCAttachmentStock
@@ -1396,10 +1430,13 @@
   id: RMCAttachmentL24BStock
 
 - type: Tag
-  id: RMCAttachmentAK4047StockCollapsible
+  id: RMCAttachmentType77StockCollapsible
 
 - type: Tag
-  id: RMCAttachmentMP5AltStockCollapsible
+  id: RMCAttachmentStockPCAC5Collapsible
+
+- type: Tag
+  id: RMCAttachmentStockPCAC5Solid
 
 - type: Tag
   id: RMCAttachmentM54CE2Stock
@@ -1415,3 +1452,6 @@
 
 - type: Tag
   id: RMCAttachmentL49Stock
+
+- type: Tag
+  id: RMCAttachmentM20Stock

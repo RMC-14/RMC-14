@@ -25,7 +25,9 @@
   - CMAccessPress
   - CMAccessCrewman
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 - type: accessGroup
   id: Pilot
@@ -59,3 +61,14 @@
   - CMAccessMarinePrep
   - CMAccessCombatTechPrep
   - CMAccessColonyEngineering
+
+- type: accessGroup
+  id: VehicleCrewman
+  tags:
+  - CMAccessCrewman
+  - CMAccessAlpha
+  - CMAccessBravo
+  - CMAccessCharlie
+  - CMAccessDelta
+  - CMAccessMarinePrep
+  - RMCAccessVehicleCrew

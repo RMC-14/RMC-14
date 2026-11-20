@@ -23,3 +23,8 @@ cm-job-name-intel = Intelligence Officer
 cm-job-description-intel = Recover intelligence objects from groundside, process, and gain tech points to support the operation by OB warhead, dropship points or requisition supply.
 cm-job-prefix-intel = IO
 CMJobIntelOfficer = Intelligence Officer
+
+cm-job-name-vc = Vehicle Crewman
+cm-job-description-vc = Operate and maintain the ship's armored vehicles. Represent the armored presence during the operation, maintain and repair your vehicles.
+cm-job-prefix-vc = CRMN
+CMJobVehicleCrewman = Vehicle Crewman

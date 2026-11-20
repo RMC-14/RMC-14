@@ -17,13 +17,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillPilot: 2
-        RMCSkillLeadership: 1
+      preset: RMCSkillPresetSurvivorCommercialPilot
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaCommercialPilot
     - type: RMCSurvivor
@@ -44,10 +38,13 @@
     head: RMCHeadWeYaPilotCap
     ears: RMCHeadsetDistressWeYa
     back: RMCSatchelBlack
-    id: CMIDCardGold
+    id: RMCIDCardPilot
     shoes: RMCShoesLaceup
     jumpsuit: RMCJumpsuitLiaisonPilot
     outerClothing: RMCCoatWeYaPilot
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: RMCSurvivorPresetCorporate

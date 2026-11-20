@@ -26,6 +26,18 @@
     - RMCWeYaThermos
 
 - type: loadout
+  id: WEYABagPhoneSatchel
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 252000 # 70 hours
+  equipment:
+    back: RMCBackpackRTOWEYABagPhone
+
+- type: loadout
   id: RMCJacketWindbreakerWEYA
   cost: 1
   effects:
