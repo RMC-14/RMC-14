@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Air dropped sentries no longer target resin.
-    type: Fix
-  - message: You're no longer able to set the lowest rank of a role as your rank preference.
-    type: Fix
-  - message: Parasites no longer need to use the verb menu to enter tunnels, vents
-      or to pass through acid holes.
-    type: Fix
-  - message: The sniper overlay no longer shows on a different map than that of the
-      sniper.
-    type: Fix
-  - message: Imaginary friends now have new player vision.
-    type: Fix
-  - message: Imaginary friends can now always use LOOC chat.
-    type: Fix
-  id: 3328
-  time: '2026-06-08T01:59:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10039
 - author: Thereisabear
   changes:
   - message: Fixed Resin Spikes and Acid Pillar having no build animations.
@@ -4449,5 +4430,13 @@
   id: 3827
   time: '2026-11-20T04:01:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9721
+- author: SaloEater
+  changes:
+  - message: Hivelord designer can now replace her own design nodes without breaking
+      them first.
+    type: Add
+  id: 3828
+  time: '2026-11-20T05:24:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9908
 Name: RMC14
 Order: -1
