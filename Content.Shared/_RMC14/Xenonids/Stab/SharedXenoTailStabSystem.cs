@@ -105,8 +105,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         var damaged = false;
         var damage = new DamageSpecifier(stabStats.TailDamage);
 
-		EntityUid? fishingCatch = null;
-		var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier(), ref stab.Comp.BonusDamageMult);
+        EntityUid? fishingCatch = null;
+
+        var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier(), ref stab.Comp.BonusDamageMult);
         RaiseLocalEvent(stab, ref eve);
         damage += eve.Damage;
         if (args.Entity == null ||
