@@ -376,6 +376,7 @@
       components:
       - Xeno
   - type: RMCHealthIcons
+  - type: RMCLightsOutOnDeath
   - type: RMCMesonsNonviewable
     xenoVisible: true
   - type: RMCActionOrder
