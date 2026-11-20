@@ -10,7 +10,7 @@ public sealed class RMCAdminGiveCommendationMsg(
     string receiverNameOrId,
     string receiverCharacterName,
     CommendationType type,
-    int awardIndex,
+    string awardId,
     string citation,
     int? targetRound) : EuiMessageBase
 {
@@ -18,7 +18,7 @@ public sealed class RMCAdminGiveCommendationMsg(
     public readonly string ReceiverNameOrId = receiverNameOrId;
     public readonly string ReceiverCharacterName = receiverCharacterName;
     public readonly CommendationType Type = type;
-    public readonly int AwardIndex = awardIndex;
+    public readonly string AwardId = awardId;
     public readonly string Citation = citation;
     public readonly int? TargetRound = targetRound;
 }

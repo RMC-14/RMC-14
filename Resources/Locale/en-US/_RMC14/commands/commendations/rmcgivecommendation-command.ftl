@@ -23,6 +23,8 @@ cmd-rmcgivecommendation-empty-citation = Citation cannot be empty!
 cmd-rmcgivecommendation-player-not-found = Player '{ $player }' not found.
 cmd-rmcgivecommendation-player-never-joined = Player '{ $player }' has never joined this server, so they cannot receive a commendation.
 cmd-rmcgivecommendation-invalid-round = Round { $round } is invalid. Must be between 1 and the current round ({ $current }).
+cmd-rmcgivecommendation-invalid-round-format = '{ $round }' is not a valid round number.
+cmd-rmcgivecommendation-database-error = Failed to save the commendation. Check the server log for details.
 
 # Success
 cmd-rmcgivecommendation-success = { $award } awarded to { $player }!
