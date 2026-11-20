@@ -13,6 +13,8 @@ public sealed class RMCAdminCommendationEui : BaseEui
     [Dependency] private readonly IEntitySystemManager _systems = default!;
     [Dependency] private readonly ILogManager _log = default!;
 
+    private bool _processing;
+
     public RMCAdminCommendationEui()
     {
         IoCManager.InjectDependencies(this);
@@ -24,37 +26,52 @@ public sealed class RMCAdminCommendationEui : BaseEui
         {
             base.HandleMessage(msg);
 
+            if (IsShutDown)
+                return;
+
             if (!_admin.HasAdminFlag(Player, AdminFlags.Commendations))
             {
                 Close();
                 return;
             }
 
-            if (msg is not RMCAdminGiveCommendationMsg give)
+            if (msg is not RMCAdminGiveCommendationMsg give || _processing)
                 return;
 
             var cs = _systems.GetEntitySystem<CommendationSystem>();
 
-            if (!cs.TryGetAwardInfo(give.Type, give.AwardIndex, out var awardName, out var protoId))
+            if (!cs.TryGetAwardInfo(give.Type, give.AwardId, out var awardName, out var protoId))
             {
                 SendMessage(new RMCAdminGiveCommendationErrorMsg(Loc.GetString("rmc-give-commendation-error-invalid-award")));
                 return;
             }
 
-            var error = await cs.AdminGiveCommendation(
-                Player.UserId.UserId,
-                Player.Name,
-                give.GiverName,
-                give.ReceiverNameOrId,
-                give.ReceiverCharacterName,
-                give.Type,
-                awardName,
-                protoId,
-                give.Citation,
-                give.TargetRound);
+            AdminCommendationResult result;
+            _processing = true;
+            try
+            {
+                result = await cs.AdminGiveCommendation(
+                    Player.UserId.UserId,
+                    Player.Name,
+                    give.GiverName,
+                    give.ReceiverNameOrId,
+                    give.ReceiverCharacterName,
+                    give.Type,
+                    awardName,
+                    protoId,
+                    give.Citation,
+                    give.TargetRound);
+            }
+            finally
+            {
+                _processing = false;
+            }
 
-            if (error != null)
-                SendMessage(new RMCAdminGiveCommendationErrorMsg(error));
+            if (IsShutDown)
+                return;
+
+            if (result.Error != null)
+                SendMessage(new RMCAdminGiveCommendationErrorMsg(result.Error));
             else
                 Close();
         }

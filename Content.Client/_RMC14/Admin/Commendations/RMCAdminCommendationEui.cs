@@ -20,10 +20,13 @@ namespace Content.Client._RMC14.Admin.Commendations;
 [UsedImplicitly]
 public sealed class RMCAdminCommendationEui : BaseEui
 {
+    private readonly record struct AwardEntry(string Id, string Name);
+
     private RMCAdminCommendationWindow? _window;
-    private readonly Dictionary<int, string> _awardNames = new();
+    private RMCAdminCommendationPreviewWindow? _previewWindow;
     private readonly List<PlayerInfo> _onlinePlayers = new();
     private bool _suppressSuggestions;
+    private CommendationsManager _commendations = default!;
     private IEntityManager _entities = default!;
     private SharedRankSystem _rank = default!;
 
@@ -32,34 +35,30 @@ public sealed class RMCAdminCommendationEui : BaseEui
         var prototype = IoCManager.Resolve<IPrototypeManager>();
         var systems = IoCManager.Resolve<IEntitySystemManager>();
         var cs = systems.GetEntitySystem<CommendationSystem>();
+        _commendations = IoCManager.Resolve<CommendationsManager>();
         _entities = IoCManager.Resolve<IEntityManager>();
         _rank = systems.GetEntitySystem<SharedRankSystem>();
 
-        var medals = cs.GetAwardableMedalIds().Concat(cs.GetSpecialMedalIds()).ToList();
-        var medalItems = medals.Select((id, i) => (Name: prototype.Index<EntityPrototype>(id).Name, Index: i + 1)).ToList();
+        var medalItems = cs.GetAwardableMedalIds()
+            .Concat(cs.GetSpecialMedalIds())
+            .Select(id => new AwardEntry(id.Id, prototype.Index<EntityPrototype>(id).Name))
+            .ToList();
 
         var regularJellies = prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellyDatasetId).Values;
         var specialJellies = prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellySpecialDatasetId).Values;
         var jellyItems = regularJellies.Concat(specialJellies)
-            .Select((locId, i) => (Name: Loc.GetString(locId), Index: i + 1))
+            .Select(locId => new AwardEntry(locId, Loc.GetString(locId)))
             .ToList();
 
         _window = new RMCAdminCommendationWindow();
+        _window.OnClose += () => SendMessage(new CloseEuiMessage());
         _window.CitationEdit.Placeholder = new Rope.Leaf(Loc.GetString("rmc-give-commendation-citation-placeholder"));
 
         var highCommand = Loc.GetString("rmc-announcement-author-highcommand");
         var queenMother = Loc.GetString("rmc-announcement-author-queen-mother");
 
-        _window.HighCommandButton.OnPressed += _ =>
-        {
-            _window.GiverEdit.Text = highCommand;
-            UpdatePreview();
-        };
-        _window.QueenMotherButton.OnPressed += _ =>
-        {
-            _window.GiverEdit.Text = queenMother;
-            UpdatePreview();
-        };
+        _window.HighCommandButton.OnPressed += _ => _window.GiverEdit.Text = highCommand;
+        _window.QueenMotherButton.OnPressed += _ => _window.GiverEdit.Text = queenMother;
 
         _window.MedalButton.OnPressed += args =>
         {
@@ -68,7 +67,6 @@ public sealed class RMCAdminCommendationEui : BaseEui
 
             _window.JellyButton.Pressed = false;
             PopulateAwards(medalItems);
-            UpdatePreview();
         };
 
         _window.JellyButton.OnPressed += args =>
@@ -78,31 +76,21 @@ public sealed class RMCAdminCommendationEui : BaseEui
 
             _window.MedalButton.Pressed = false;
             PopulateAwards(jellyItems);
-            UpdatePreview();
         };
 
-        _window.GiverEdit.OnTextChanged += _ => UpdatePreview();
-        _window.ReceiverNameEdit.OnTextChanged += _ => UpdatePreview();
-        _window.AwardOption.OnItemSelected += args =>
-        {
-            _window.AwardOption.SelectId(args.Id);
-            UpdatePreview();
-        };
+        _window.AwardOption.OnItemSelected += args => _window.AwardOption.SelectId(args.Id);
 
         var admin = systems.GetEntitySystem<AdminSystem>();
         _onlinePlayers.AddRange(admin.PlayerList.Where(p => p.Connected).OrderBy(p => p.Username));
         _window.ReceiverEdit.OnTextChanged += OnReceiverTextChanged;
 
-        _window.SubmitButton.OnPressed += _ => OnSubmit();
+        _window.PreviewButton.OnPressed += _ => OnPreview();
 
-        UpdatePreview();
         _window.OpenCentered();
     }
 
     private void OnReceiverTextChanged(LineEdit.LineEditEventArgs args)
     {
-        UpdatePreview();
-
         if (_window == null || _suppressSuggestions)
             return;
 
@@ -134,7 +122,7 @@ public sealed class RMCAdminCommendationEui : BaseEui
                 ? player.Username
                 : $"{player.Username} ({player.CharacterName})";
 
-            var button = new Button { Text = label, StyleClasses = { "OpenBoth" } };
+            var button = new Button { Text = label, StyleClasses = { "OpenBoth", CMStyleClasses.RMCButtonDarkGold } };
             button.OnPressed += _ => SelectPlayer(player);
             suggestions.AddChild(button);
         }
@@ -156,8 +144,6 @@ public sealed class RMCAdminCommendationEui : BaseEui
 
         _window.PlayerSuggestions.DisposeAllChildren();
         _window.PlayerSuggestions.Visible = false;
-
-        UpdatePreview();
     }
 
     private string GetReceiverName(PlayerInfo player)
@@ -182,42 +168,20 @@ public sealed class RMCAdminCommendationEui : BaseEui
         return player.CharacterName;
     }
 
-    private void UpdatePreview()
-    {
-        if (_window == null)
-            return;
-
-        var awardName = _window.AwardOption.ItemCount > 0 &&
-                        _awardNames.TryGetValue(_window.AwardOption.SelectedId, out var name)
-            ? name
-            : string.Empty;
-
-        var giver = _window.GiverEdit.Text;
-        var receiver = _window.ReceiverNameEdit.Text;
-
-        _window.PreviewTitle.SetMessage(FormattedMessage.FromMarkupOrThrow(
-            Loc.GetString("rmc-give-commendation-preview-title", ("name", awardName))));
-        _window.PreviewDescription.SetMessage(FormattedMessage.FromMarkupOrThrow(
-            Loc.GetString("rmc-give-commendation-preview-description",
-                ("receiver", receiver),
-                ("giver", giver))));
-    }
-
-    private void PopulateAwards(IEnumerable<(string Name, int Index)> items)
+    private void PopulateAwards(IEnumerable<AwardEntry> items)
     {
         if (_window == null)
             return;
 
         _window.AwardOption.Clear();
-        _awardNames.Clear();
-        foreach (var (name, index) in items)
+        foreach (var award in items)
         {
-            _window.AwardOption.AddItem(name, index);
-            _awardNames[index] = name;
+            _window.AwardOption.AddItem(award.Name);
+            _window.AwardOption.SetItemMetadata(_window.AwardOption.ItemCount - 1, award);
         }
     }
 
-    private void OnSubmit()
+    private void OnPreview()
     {
         if (_window == null)
             return;
@@ -230,30 +194,72 @@ public sealed class RMCAdminCommendationEui : BaseEui
             return;
         }
 
-        if (_window.AwardOption.ItemCount == 0)
+        if (_window.AwardOption.ItemCount == 0 ||
+            _window.AwardOption.SelectedMetadata is not AwardEntry award)
         {
             _window.ErrorLabel.Text = Loc.GetString("rmc-give-commendation-error-no-award");
             return;
         }
 
         var type = _window.MedalButton.Pressed ? CommendationType.Medal : CommendationType.Jelly;
-        var awardIndex = _window.AwardOption.SelectedId;
 
         int? targetRound = null;
-        if (!string.IsNullOrWhiteSpace(_window.RoundEdit.Text) &&
-            int.TryParse(_window.RoundEdit.Text, out var parsedRound))
+        var roundText = _window.RoundEdit.Text.Trim();
+        if (roundText.Length > 0)
         {
+            if (!int.TryParse(roundText, out var parsedRound))
+            {
+                _window.ErrorLabel.Text = Loc.GetString("rmc-give-commendation-error-invalid-round");
+                return;
+            }
+
             targetRound = parsedRound;
         }
 
-        SendMessage(new RMCAdminGiveCommendationMsg(
-            _window.GiverEdit.Text,
+        var giver = _window.GiverEdit.Text;
+        var receiverName = _window.ReceiverNameEdit.Text;
+        var citation = Rope.Collapse(_window.CitationEdit.TextRope);
+
+        var message = new RMCAdminGiveCommendationMsg(
+            giver,
             _window.ReceiverEdit.Text,
-            _window.ReceiverNameEdit.Text,
+            receiverName,
             type,
-            awardIndex,
-            Rope.Collapse(_window.CitationEdit.TextRope),
-            targetRound));
+            award.Id,
+            citation,
+            targetRound);
+
+        var commendation = new Commendation(giver, receiverName, award.Name, citation.Trim(), type, targetRound ?? 0);
+        OpenPreview(message, commendation);
+    }
+
+    private void OpenPreview(RMCAdminGiveCommendationMsg message, Commendation commendation)
+    {
+        _previewWindow?.Close();
+
+        var container = _commendations.CreateCommendationContainer(commendation);
+        if (message.TargetRound == null)
+        {
+            container.Title.Text = Loc.GetString("rmc-commendation-title",
+                ("round", Loc.GetString("rmc-give-commendation-preview-current-round")),
+                ("name", commendation.Name));
+        }
+
+        var preview = new RMCAdminCommendationPreviewWindow();
+        preview.PreviewContainer.AddChild(container);
+        preview.CancelButton.OnPressed += _ => preview.Close();
+        preview.ConfirmButton.OnPressed += _ =>
+        {
+            if (_window != null)
+                _window.PreviewButton.Disabled = true;
+
+            SendMessage(message);
+            preview.Close();
+        };
+        preview.OnClose += () => _previewWindow = null;
+
+        _previewWindow = preview;
+        preview.OpenCentered();
     }
 
     public override void HandleMessage(EuiMessageBase msg)
@@ -261,12 +267,16 @@ public sealed class RMCAdminCommendationEui : BaseEui
         if (_window == null)
             return;
 
-        if (msg is RMCAdminGiveCommendationErrorMsg error)
-            _window.ErrorLabel.Text = error.Message;
+        if (msg is not RMCAdminGiveCommendationErrorMsg error)
+            return;
+
+        _window.ErrorLabel.Text = error.Message;
+        _window.PreviewButton.Disabled = false;
     }
 
     public override void Closed()
     {
+        _previewWindow?.Close();
         _window?.Close();
     }
 }
