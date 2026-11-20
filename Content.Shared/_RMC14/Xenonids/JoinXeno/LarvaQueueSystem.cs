@@ -32,9 +32,6 @@ public sealed class LarvaQueueSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     [ViewVariables]
-    public static readonly Dictionary<EntityUid, HashSet<NetUserId>> InfectorSet = new();
-
-    [ViewVariables]
     public static readonly Dictionary<EntityUid, LinkedList<NetUserId>> Queue = new();
 
     [ViewVariables]
@@ -51,6 +48,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         public required EntityUid? TargetLarva;
         public required Entity<HiveComponent> Hive;
         public required double ExpiresAt;
+        public required string Tier;
     }
 
     private int _offerTimeoutSeconds;
@@ -145,16 +143,13 @@ public sealed class LarvaQueueSystem : EntitySystem
         {
             if (_pendingOffers.TryGetValue(ev.Player.UserId, out var pending))
             {
-                var tier = InfectorSet.TryGetValue(pending.Hive.Owner, out var iqSet2) && iqSet2.Contains(ev.Player.UserId)
-                    ? "Infector"
-                    : "Normal";
                 RaiseNetworkEvent(new LarvaQueueOfferEvent
                 {
                     TargetEntity = pending.TargetLarva.HasValue ? GetNetEntity(pending.TargetLarva.Value) : null,
                     TargetEntityName = pending.TargetLarva.HasValue ? Name(pending.TargetLarva.Value) : "Burrowed Larva",
                     ExpiresAt = pending.ExpiresAt,
                     HiveName = Name(pending.Hive),
-                    OfferType = tier,
+                    OfferType = pending.Tier,
                     QueuePosition = GetQueuePosition(ev.Player.UserId, pending.Hive.Owner),
                 }, ev.Player);
                 return;
@@ -163,8 +158,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             var hives = EntityQueryEnumerator<HiveComponent>();
             while (hives.MoveNext(out var hiveId, out _))
             {
-                if (InfectorSet.TryGetValue(hiveId, out var iqSet) && iqSet.Contains(ev.Player.UserId)
-                    || Queue.TryGetValue(hiveId, out var nq) && nq.Contains(ev.Player.UserId))
+                if (Queue.TryGetValue(hiveId, out var nq) && nq.Contains(ev.Player.UserId))
                 {
                     TryOfferToQueue(hiveId);
                 }
@@ -177,7 +171,6 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnCleanup(RoundRestartCleanupEvent ev)
     {
-        InfectorSet.Clear();
         Queue.Clear();
         PreQueue.Clear();
         _pendingOffers.Clear();
@@ -383,6 +376,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             TargetLarva = targetLarva,
             Hive = hive,
             ExpiresAt = expiresAt,
+            Tier = tier,
         };
 
         RaiseNetworkEvent(new LarvaQueueOfferEvent
@@ -435,11 +429,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private bool HasAnyQueued(EntityUid hive)
     {
-        if (InfectorSet.TryGetValue(hive, out var iqSet) && iqSet.Count > 0)
-            return true;
-        if (Queue.TryGetValue(hive, out var nq) && nq.Count > 0)
-            return true;
-        return false;
+        return Queue.TryGetValue(hive, out var nq) && nq.Count > 0;
     }
 
     private bool TryPopNextSessionForOffer(
@@ -474,73 +464,14 @@ public sealed class LarvaQueueSystem : EntitySystem
             _larvaInfector.Remove(larvaId.Value);
         }
 
-        InfectorSet.TryGetValue(hive, out var iqSet);
-        Queue.TryGetValue(hive, out var nq);
-
-        if (iqSet != null && TryPopFromSet(iqSet, out nextSession))
-        {
-            tier = "Infector";
-            position = 1;
+        if (Queue.TryGetValue(hive, out var nq) && TryPopFromList(nq, out nextSession, out position))
             return true;
-        }
-
-        var iqCount = iqSet?.Count ?? 0;
-
-        if (nq != null && TryPopFromList(nq, iqCount, out nextSession, out position))
-        {
-            tier = "Normal";
-            return true;
-        }
 
         return false;
     }
 
-    private bool TryPopFromSet(
-        HashSet<NetUserId> set,
-        [NotNullWhen(true)] out ICommonSession? session)
-    {
-        session = null;
-        List<NetUserId>? reembodied = null;
-
-        foreach (var netId in set)
-        {
-            if (_pendingOffers.ContainsKey(netId))
-                continue;
-
-            if (!_player.TryGetSessionById(netId, out var s) || s.AttachedEntity == null)
-            {
-                if (!_disconnectExpiresAt.ContainsKey(netId))
-                    _disconnectExpiresAt[netId] = _gameTiming.CurTime + _disconnectGracePeriod;
-                continue;
-            }
-
-            if (!HasComp<GhostComponent>(s.AttachedEntity.Value))
-            {
-                if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
-                {
-                    session = s;
-                    break;
-                }
-
-                reembodied ??= new List<NetUserId>();
-                reembodied.Add(netId);
-                continue;
-            }
-
-            session = s;
-            break;
-        }
-
-        if (reembodied != null)
-            foreach (var id in reembodied)
-                set.Remove(id);
-
-        return session != null;
-    }
-
     private bool TryPopFromList(
         LinkedList<NetUserId> list,
-        int offset,
         [NotNullWhen(true)] out ICommonSession? session,
         out int absolutePosition)
     {
@@ -572,7 +503,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             {
                 if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
                 {
-                    absolutePosition = offset + indexInList;
+                    absolutePosition = indexInList;
                     session = s;
                     return true;
                 }
@@ -582,7 +513,7 @@ public sealed class LarvaQueueSystem : EntitySystem
                 continue;
             }
 
-            absolutePosition = offset + indexInList;
+            absolutePosition = indexInList;
             session = s;
             return true;
         }
@@ -600,11 +531,6 @@ public sealed class LarvaQueueSystem : EntitySystem
     {
         if (PreQueue.TryGetValue(hive, out var pq) && pq.Remove(netUserId))
             return true;
-        if (InfectorSet.TryGetValue(hive, out var iqSet) && iqSet.Remove(netUserId))
-        {
-            NotifyQueuePositions(hive);
-            return true;
-        }
         if (Queue.TryGetValue(hive, out var nq) && nq.Remove(netUserId))
         {
             NotifyQueuePositions(hive);
@@ -615,11 +541,10 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void NotifyQueuePositions(Entity<HiveComponent> hive)
     {
-        var iqCount = InfectorSet.TryGetValue(hive, out var iqSet) ? iqSet.Count : 0;
         if (!Queue.TryGetValue(hive, out var nq))
             return;
 
-        var pos = iqCount + 1;
+        var pos = 1;
         foreach (var userId in nq)
         {
             if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity != null)
@@ -646,8 +571,6 @@ public sealed class LarvaQueueSystem : EntitySystem
     {
         if (PreQueue.TryGetValue(hiveId, out var pq) && pq.ContainsKey(userId))
             return true;
-        if (InfectorSet.TryGetValue(hiveId, out var iqSet) && iqSet.Contains(userId))
-            return true;
         if (Queue.TryGetValue(hiveId, out var nq) && nq.Contains(userId))
             return true;
         return false;
@@ -664,16 +587,9 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     public int GetQueuePosition(NetUserId userId, EntityUid hiveId)
     {
-        InfectorSet.TryGetValue(hiveId, out var iqSet);
-
-        if (iqSet != null && iqSet.Contains(userId))
-            return 1;
-
-        var iqCount = iqSet?.Count ?? 0;
-
         if (Queue.TryGetValue(hiveId, out var nq))
         {
-            var pos = iqCount + 1;
+            var pos = 1;
             foreach (var id in nq)
             {
                 if (id == userId) return pos;
