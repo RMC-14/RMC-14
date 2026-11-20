@@ -32,7 +32,7 @@
       squad: SquadSPP
     - type: JobPrefix
       prefix: rmc-job-prefix-trijent-spetsnaz-spec
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: RMCSurvivor
     - type: RMCAllowSuitStorage
   hidden: true
