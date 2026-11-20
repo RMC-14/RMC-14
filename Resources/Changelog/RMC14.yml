@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Fixed Resin Spikes and Acid Pillar having no build animations.
-    type: Fix
-  id: 3329
-  time: '2026-06-08T02:01:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10047
 - author: Ian321
   changes:
   - message: Escape pods and lifeboats should no longer crash land on top of each
@@ -4438,5 +4431,13 @@
   id: 3828
   time: '2026-11-20T05:24:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9908
+- author: SabreML
+  changes:
+  - message: Added an overlay for the 'Dig Tunnel' ability to highlight all valid
+      tiles.
+    type: Add
+  id: 3829
+  time: '2026-11-20T05:29:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10759
 Name: RMC14
 Order: -1
