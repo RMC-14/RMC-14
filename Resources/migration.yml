@@ -1579,6 +1579,7 @@ RMCWeaponRifleM16A5: RMCWeaponRifleCR16A5
 RMCMagazineRifleM16: RMCMagazineRifleCR16
 CMBeltMarineM16: RMCBeltMarineCR16
 RMCM17BeltFilled: RMCBeltMarineCR16
+RMCBeltNVFilledM16: RMCBeltNVFilledCR16
 RMCPouchMagazineFilledM16: RMCPouchMagazineFilledCR16
 RMCBoxMagazineRifleM16Empty: RMCBoxMagazineRifleCR16Empty
 RMCBoxMagazineRifleM16: RMCBoxMagazineRifleCR16

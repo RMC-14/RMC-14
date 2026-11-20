@@ -311,12 +311,12 @@
 
 - type: entity
   parent: RMCBeltNV
-  id: RMCBeltNVFilledM16
-  suffix: Filled, M16
+  id: RMCBeltNVFilledCR16
+  suffix: Filled, CR16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleCR16
       amount: 5
 
 - type: entity
