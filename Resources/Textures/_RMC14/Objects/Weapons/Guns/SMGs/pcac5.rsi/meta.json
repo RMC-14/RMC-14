@@ -8,25 +8,10 @@
   },
   "states": [
     {
-      "name": "icon"
-    },
-    {
       "name": "base"
     },
     {
       "name": "bolt-open"
-<<<<<<< HEAD:Resources/Textures/_RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi/meta.json
-    },
-    {
-      "name": "cover-closed"
-    },
-    {
-      "name": "cover-open"
-    },
-    {
-      "name": "mag-0"
-=======
->>>>>>> upstream/master:Resources/Textures/_RMC14/Objects/Weapons/Guns/SMGs/pcac5.rsi/meta.json
     },
     {
       "name": "equipped-BACKPACK",
