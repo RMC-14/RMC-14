@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Overwatch chat no longer gets sent to the chatbox (chat bubble still
-      visible)
-    type: Tweak
-  id: 3358
-  time: '2026-06-11T22:24:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10109
 - author: SharkSnake98
   changes:
   - message: Fixed the PK7's Underbarrel Offset
@@ -4484,5 +4476,12 @@
   id: 3857
   time: '2026-11-20T06:24:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10530
+- author: Vermidia
+  changes:
+  - message: Made ravager super empowered outline clearer.
+    type: Tweak
+  id: 3858
+  time: '2026-11-20T06:31:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10967
 Name: RMC14
 Order: -1
