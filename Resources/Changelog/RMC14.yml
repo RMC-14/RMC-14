@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added an option to disable "Marine Equipment Previews" (the flamer overlay)
-      in the Accessibility options
-    type: Add
-  id: 3346
-  time: '2026-06-11T22:01:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9897
 - author: MidZik
   changes:
   - message: The cooldown reduction effect of a spore fruit should be easier to see
@@ -4473,5 +4465,16 @@
   id: 3845
   time: '2026-11-20T05:52:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10548
+- author: Vermidia
+  changes:
+  - message: Fixed explosions not doing half damage to prone targets (including targets
+      right on the epicenter)
+    type: Fix
+  - message: Fixed various actions (PBs, ammo stuns, retrieve, vehicle colliding &
+      running over, etc) not counting xeno resting as prone.
+    type: Fix
+  id: 3846
+  time: '2026-11-20T05:56:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10661
 Name: RMC14
 Order: -1
