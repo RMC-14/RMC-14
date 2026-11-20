@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: MidZik
-  changes:
-  - message: Sapper traps no longer trigger on marines that were standing on them
-      when they were created.
-    type: Fix
-  - message: Sapper trap radius reduced to prevent odd behavior with the above change.
-    type: Fix
-  id: 3334
-  time: '2026-06-08T02:22:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10067
 - author: DrSmugleaf
   changes:
   - message: Fixed Sapper Boilers not getting a popup when they are empowered.
@@ -4442,5 +4432,14 @@
   id: 3833
   time: '2026-11-20T05:37:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10843
+- author: Vixting
+  changes:
+  - message: Cades now block projectiles based on distance
+    type: Add
+  - message: You can now target cades with projectiles
+    type: Add
+  id: 3834
+  time: '2026-11-20T05:39:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10756
 Name: RMC14
 Order: -1
