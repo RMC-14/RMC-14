@@ -58,7 +58,7 @@ public sealed class XenoFlurrySystem : EntitySystem
         var xenoPos = _transform.GetWorldPosition(xeno);
         var direction = (targetPos - xenoPos).Normalized().ToAngle() - Angle.FromDegrees(90);
 
-        var worldArea = Box2.CenteredAround(xenoPos, new(1, xeno.Comp.Range)).Translated(new(0, xeno.Comp.Range / 2 + 0.5f));
+        var worldArea = Box2.CenteredAround(xenoPos, new(xeno.Comp.Range, 1)).Translated(new(0, 1f));
         var worldBox = new Box2Rotated(worldArea, direction, xenoPos);
 
         var map = Transform(xeno).MapID;
