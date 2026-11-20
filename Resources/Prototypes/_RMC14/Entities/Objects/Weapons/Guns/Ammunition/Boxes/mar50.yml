@@ -1,0 +1,20 @@
+- type: entity
+  parent: RMCBoxMagazineRifleMAR30Empty
+  id: RMCBoxMagazineRifleMAR50Empty
+  name: drum magazine box (MAR-50 x 3)
+  description: A box for three 100-round MAR-50 drum magazines.
+  components:
+  - type: CMItemSlots
+    count: 3
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineMar50LMG
+
+- type: entity
+  parent: RMCBoxMagazineRifleMAR50Empty
+  id: RMCBoxMagazineRifleMAR50
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineMar50LMG

@@ -68,7 +68,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vendors;
 
-public abstract class SharedCMAutomatedVendorSystem : EntitySystem
+public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
@@ -474,6 +474,14 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
     {
+        VendFromMenu(vendor, ref args);
+    }
+
+    private void VendFromMenu(
+        Entity<CMAutomatedVendorComponent> vendor,
+        ref CMVendorVendBuiMsg args,
+        bool autoGrab = true)
+    {
         _audio.PlayPredicted(vendor.Comp.Sound, vendor, args.Actor);
         _rmcAnimation.TryFlick(vendor.Owner, vendor.Comp.AnimationSprite, vendor.Comp.BaseSprite);
 
@@ -767,12 +775,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 {
                     // Only apply partial stack to the specific item that has it
                     var bundledPartialAmount = bundled == currentPartialItemId ? currentPartialAmount : null;
-                    Vend(vendor, actor, bundled, offset, bundledPartialAmount, entry.ReplaceSlot);
+                    Vend(vendor, actor, bundled, offset, bundledPartialAmount, entry.ReplaceSlot, autoGrab);
                 }
             }
             else
             {
-                Vend(vendor, actor, entry.Id, offset, currentPartialAmount, entry.ReplaceSlot);
+                Vend(vendor, actor, entry.Id, offset, currentPartialAmount, entry.ReplaceSlot, autoGrab);
             }
         }
 
@@ -783,7 +791,14 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
     }
 
-    private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset, int? partialStackAmount = null, SlotFlags? replaceSlot = null)
+    private void Vend(
+        EntityUid vendor,
+        EntityUid player,
+        EntProtoId toVend,
+        Vector2 offset,
+        int? partialStackAmount = null,
+        SlotFlags? replaceSlot = null,
+        bool autoGrab = true)
     {
         if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo, _compFactory))
         {
@@ -816,7 +831,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 _stack.SetCount(spawn, partialStackAmount.Value, stack);
             }
 
-            AfterVend(spawn, player, vendor, offset, true, replaceSlot);
+            AfterVend(spawn, player, vendor, offset, true, replaceSlot, autoGrab);
         }
         else
         {
@@ -826,11 +841,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 _stack.SetCount(spawn, partialStackAmount.Value, stack);
             }
 
-            AfterVend(spawn, player, vendor, offset, replaceSlot: replaceSlot);
+            AfterVend(spawn, player, vendor, offset, replaceSlot: replaceSlot, autoGrab: autoGrab);
         }
     }
 
-    private void AfterVend(EntityUid spawn, EntityUid player, EntityUid vendor, Vector2 offset, bool vended = false, SlotFlags? replaceSlot = null)
+    private void AfterVend(
+        EntityUid spawn,
+        EntityUid player,
+        EntityUid vendor,
+        Vector2 offset,
+        bool vended = false,
+        SlotFlags? replaceSlot = null,
+        bool autoGrab = true)
     {
         var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
@@ -847,7 +869,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!vended)
         {
-            var grabbed = Grab(player, spawn, replaceSlot);
+            var grabbed = autoGrab && Grab(player, spawn, replaceSlot);
             if (!grabbed && TryComp(spawn, out TransformComponent? xform))
                 _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
         }

@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
     xmlns:uiControls="clr-namespace:Content.Client.UserInterface.Controls"
     Title="{Loc rmc-requisitions-window-title}"
-    SetSize="900 650"
+    SetSize="900 600"
     MinSize="780 560">
     <BoxContainer Orientation="Horizontal" Margin="10" HorizontalExpand="True" VerticalExpand="True">
         <PanelContainer Name="CategoryPanel"
@@ -44,11 +44,12 @@
                           HorizontalExpand="True"
                           VerticalExpand="True">
                 <BoxContainer Name="ProductsTab"
+                              Access="Public"
                               Orientation="Vertical"
                               Margin="8 8 8 8"
                               HorizontalExpand="True"
                               VerticalExpand="True">
-                    <ScrollContainer HorizontalExpand="True"
+                    <ScrollContainer Name="ProductsScroll" Access="Public" HorizontalExpand="True"
                                      VerticalExpand="True"
                                      HScrollEnabled="False">
                         <BoxContainer Name="ProductsContainer"
@@ -56,8 +57,19 @@
                                       Orientation="Vertical"
                                       HorizontalExpand="True" />
                     </ScrollContainer>
+                    <BoxContainer Name="ProductPages" Access="Public" Orientation="Horizontal"
+                                  HorizontalAlignment="Center" Margin="0 6 0 0" SeparationOverride="6">
+                        <Button Name="PreviousProductPage" Access="Public" Text="‹"
+                                ToolTip="{Loc rmc-requisitions-page-previous}" MinWidth="32" />
+                        <Label Text="{Loc rmc-requisitions-page}" />
+                        <SpinBox Name="ProductPageNumber" Access="Public" MinWidth="55" MaxWidth="70" />
+                        <Label Name="ProductPageCount" Access="Public" />
+                        <Button Name="NextProductPage" Access="Public" Text="›"
+                                ToolTip="{Loc rmc-requisitions-page-next}" MinWidth="32" />
+                    </BoxContainer>
                 </BoxContainer>
                 <BoxContainer Name="CartTab"
+                              Access="Public"
                               Orientation="Vertical"
                               Margin="8 8 8 8"
                               HorizontalExpand="True"
@@ -88,7 +100,20 @@
                                                   MinWidth="120" />
                     </BoxContainer>
                 </BoxContainer>
+                <BoxContainer Name="RequestsTab"
+                              Access="Public"
+                              Orientation="Vertical"
+                              Margin="8"
+                              HorizontalExpand="True"
+                              VerticalExpand="True">
+                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+                        <BoxContainer Name="RequestsContainer" Access="Public"
+                                      Orientation="Vertical" HorizontalExpand="True" />
+                    </ScrollContainer>
+                    <RichTextLabel Name="RequestsStatus" Access="Public" />
+                </BoxContainer>
                 <BoxContainer Name="PendingTab"
+                              Access="Public"
                               Orientation="Vertical"
                               Margin="8 8 8 8"
                               HorizontalExpand="True"
@@ -104,6 +129,13 @@
                     <RichTextLabel Name="PendingStatusLabel" Access="Public" />
                 </BoxContainer>
             </TabContainer>
+            <BoxContainer Name="RequestReasonPanel" Access="Public" Orientation="Vertical"
+                          Visible="False" Margin="0 6 0 0">
+                <Label Text="{Loc rmc-requisitions-request-reason}" />
+                <LineEdit Name="RequestReason" Access="Public"
+                          PlaceHolder="{Loc rmc-requisitions-request-reason-placeholder}" />
+            </BoxContainer>
+            <RichTextLabel Name="RequestFeedback" Access="Public" Margin="0 4 0 0" />
         </BoxContainer>
     </BoxContainer>
 </controls:RequisitionsWindow>

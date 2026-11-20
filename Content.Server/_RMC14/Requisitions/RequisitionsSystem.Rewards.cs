@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Labels.Components;
@@ -16,11 +17,22 @@ namespace Content.Server._RMC14.Requisitions
         [Dependency] private readonly ItemSlotsSystem _slots = default!;
         [Dependency] private readonly MetaDataSystem _metaSystem = default!;
 
-        private void PrintInvoice(EntityUid requisitionOrder, EntityCoordinates coordinates, string paperwork)
+        private void PrintInvoice(
+            EntityUid requisitionOrder,
+            EntityCoordinates coordinates,
+            string paperwork,
+            RequisitionsOrderDetails? request = null,
+            bool noReward = false)
         {
             // Create a sheet of paper to write the order details on
             // Order information sprinkled with flavor text
             var printedPaper = EntityManager.SpawnEntity(paperwork, coordinates);
+
+            if (noReward && TryComp(printedPaper, out RequisitionsInvoiceComponent? invoice))
+            {
+                invoice.Reward = 0;
+                Dirty(printedPaper, invoice);
+            }
 
             if (!TryComp<PaperComponent>(printedPaper, out var paper))
                 return;
@@ -81,13 +93,25 @@ namespace Content.Server._RMC14.Requisitions
             _metaSystem.SetEntityName(printedPaper, Loc.GetString(
                 "requisition-paper-print-name", ("name", orderName)));
 
-            _paperSystem.SetContent((printedPaper, paper), Loc.GetString(
+            var manifest = Loc.GetString(
                 "requisition-paper-print-manifest",
                 ("containerName", orderName.ToUpper()),
                 ("content", contentList.ToMarkup()),
                 ("weight", weight),
                 ("lot", lotNum),
-                ("serialNumber", $"{serialNum:000000}")));
+                ("serialNumber", $"{serialNum:000000}"));
+
+            if (request != null)
+            {
+                var details = Loc.GetString("rmc-requisitions-request-manifest",
+                    ("number", request.Number),
+                    ("requester", FormattedMessage.EscapeText(request.RequestedBy)),
+                    ("approver", FormattedMessage.EscapeText(request.ApprovedBy)));
+                manifest = Loc.GetString("rmc-requisitions-request-invoice-header", ("details", details)) +
+                           "\n\n" + manifest;
+            }
+
+            _paperSystem.SetContent((printedPaper, paper), manifest);
 
             // attempt to attach the label to the item
             if (TryComp<PaperLabelComponent>(requisitionOrder, out var label))

@@ -1,0 +1,13 @@
+- type: entity
+  parent: CMPaper
+  id: RMCPaperRequisitionForm
+  name: supply requisition form
+  description: A request for supplies awaiting approval by Requisitions.
+  components:
+  - type: Paper
+    editingDisabled: true
+    contentSize: 30000
+  - type: PaperVisuals
+    backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
+    backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+    contentMargin: 12.0, 8.0, 12.0, 8.0

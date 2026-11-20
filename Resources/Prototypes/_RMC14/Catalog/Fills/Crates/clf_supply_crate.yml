@@ -1,0 +1,140 @@
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateBlackMarketCLF
+  name: unmarked CLF supply crate
+  description: What's in the box? Only one way to find out!
+  components:
+  - type: BlackMarketUnsellable
+  - type: RandomLoot
+    generateOnDestruction: true
+    replaceSpawnOnTerminate: true
+    primedPopup: rmc-black-market-clf-trap
+    outcomes:
+    - weight: 5
+      popup: rmc-black-market-clf-materials
+      contents: !type:NestedSelector
+        tableId: RMCBlackMarketCLFMaterials
+        rolls: 5
+      stackAmount: 10,20
+    - weight: 5
+      popup: rmc-black-market-clf-elite-gear
+      contents: !type:NestedSelector
+        tableId: RMCBlackMarketCLFEliteGear
+        rolls: 3
+    - weight: 5
+      popup: rmc-black-market-clf-pistols
+      contents: !type:AllSelector
+        children:
+        - id: RMCWeaponSMGType64
+        - id: RMCMagazineSMGType64
+          amount: 3
+        - id: RMCWeaponRevolverWarwickMkVII
+        - id: RMCSpeedLoaderM44
+          amount: 3
+    - weight: 5
+      popup: rmc-black-market-clf-smgs
+      contents: !type:AllSelector
+        children:
+        - id: RMCBlackMarketType19Drum
+        - id: RMCMagazineSMGType19Drum
+          amount: 3
+        - id: RMCBlackMarketMAC15Extended
+        - id: RMCMagazineSMGMAC15Ext
+          amount: 3
+    - weight: 4
+      popup: rmc-black-market-clf-rations
+      contents: !type:AllSelector
+        children:
+        - id: CMMRE
+        - id: RMCMRETSE
+        - id: RMCMREWeYa
+        - id: RMCMREWeYaPMC
+        - id: RMCMRESPP
+    - weight: 6
+      popup: rmc-black-market-clf-grenades
+      contents: !type:NestedSelector
+        tableId: RMCBlackMarketCLFGrenades
+        rolls: 6
+      primeChance: 0.5
+    - weight: 5
+      popup: rmc-black-market-clf-molotovs
+      contents: !type:AllSelector
+        children:
+        - id: RMCGrenadeMolotov
+          amount: 2
+        - id: CMPaperBin30
+        - id: RMCDrinkAlcoholWhiskey
+        - id: RMCDrinkAlcoholKahlua
+        - id: RMCDrinkAlcoholRum
+    - weight: 5
+      popup: rmc-black-market-clf-clf-gear
+      contents: !type:NestedSelector
+        tableId: RMCBlackMarketCLFCLFGear
+    - weight: 5
+      popup: rmc-black-market-clf-junk
+      contents: !type:NestedSelector
+        tableId: RMCBlackMarketCLFBonus
+        rolls: 5
+    - weight: 20
+      popup: rmc-black-market-clf-parts
+      contents: !type:AllSelector
+        children:
+        - !type:NestedSelector
+          tableId: RMCBlackMarketCLFBombParts
+          rolls: 2
+        - !type:NestedSelector
+          tableId: RMCBlackMarketCLFToolboxes
+        - !type:NestedSelector
+          tableId: RMCBlackMarketCLFTools
+          rolls: 2
+        - !type:NestedSelector
+          tableId: RMCBlackMarketCLFAttachments
+        - !type:GroupSelector
+          children:
+          - !type:NestedSelector
+            tableId: RMCBlackMarketCLFSupplyKits
+            weight: 33
+          - !type:NestedSelector
+            tableId: RMCBlackMarketCLFAttachments
+            weight: 67
+    - weight: 5
+      popup: rmc-black-market-clf-corpse
+      corpse: RMCCorpseCLF
+      corpseName: rmc-black-market-clf-corpse-name
+      popupType: LargeCaution
+    - weight: 15
+      popup: rmc-black-market-clf-junk
+      contents: !type:AllSelector
+        children:
+        - !type:NestedSelector
+          tableId: RMCBlackMarketCLFTools
+          rolls: 2
+        - !type:NestedSelector
+          tableId: RMCBlackMarketCLFTech
+          rolls: 3
+        - !type:NestedSelector
+          tableId: RMCBlackMarketCLFToys
+          rolls: 3
+    - weight: 5
+      popup: rmc-black-market-clf-trap
+      contents:
+        id: RMCExplosiveClaymoreMineArmed
+        amount: !type:RangeNumberSelector
+          range: 4,6
+      popupType: LargeCaution
+      scatter: 3
+    - weight: 1
+      popup: rmc-black-market-clf-super-trap
+      contents: !type:AllSelector
+        rolls: 3
+        children:
+        - id: RMCExplosiveClaymoreMineArmed
+          amount: !type:RangeNumberSelector
+            range: 4,6
+      popupType: LargeCaution
+      scatter: 3
+    - weight: 5
+      popup: rmc-black-market-clf-explosives
+      contents: !type:NestedSelector
+        tableId: RMCBlackMarketCLFGrenades
+        rolls: 6

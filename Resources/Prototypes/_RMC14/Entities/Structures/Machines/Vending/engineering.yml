@@ -99,8 +99,8 @@
 #       amount: 2
 #     - id: RMCSecurityRecordsCircuitboard
 #       amount: 2
-#     - id: RMCSupplyOrderingCircuitboard
-#       amount: 2
+      - id: RMCSupplyOrderingCircuitboard
+        amount: 2
 #     - id: RMCReserachDataTerminalCircuitboard
 #       amount: 2
 #     - id: RMCPacmanGeneratorCircuitboard

@@ -59,6 +59,13 @@
           entity: RMCWeaponRifleMAR30
       - cost: 0
         blackMarket: true
+        blackMarketCost: 100
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMAR50
+        icon:
+          entity: RMCWeaponMar50LMG
+      - cost: 0
+        blackMarket: true
         blackMarketCost: 5
         blackMarketHeat: 5
         crate: RMCCrateBlackMarketHuntingRifle
@@ -390,6 +397,13 @@
           entity: RMCBoxMagazineRifleMAR30
       - cost: 0
         blackMarket: true
+        blackMarketCost: 50
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMAR50
+        icon:
+          entity: RMCBoxMagazineRifleMAR50
+      - cost: 0
+        blackMarket: true
         blackMarketCost: 35
         blackMarketHeat: 5
         crate: RMCCrateBlackMarketAmmoFP9000
@@ -602,8 +616,13 @@
         crate: RMCCrateBlackMarketDeepStorageUNMCBoonieHat
         icon:
           entity: RMCBoonie
-      # TODO RMC14: Port CMSS PDT/L Kit behavior before enabling this Deep Storage entry.
-      # TODO RMC14: PDT/L Kit, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketPDT
+        icon:
+          entity: CMSparePDTLBattleBuddyKit
       - cost: 0
         blackMarket: true
         blackMarketCost: 5
@@ -620,6 +639,13 @@
         crate: RMCCrateBlackMarketDeepStorageJungleBoots
         icon:
           entity: CMBootsJungle
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketUrbanBoots
+        icon:
+          entity: CMBootsUrban
       - cost: 0
         blackMarket: true
         blackMarketCost: 10
@@ -675,8 +701,13 @@
           entity: RMCPottedPlantRandomUnanchored
       # TODO RMC14: Port cargo tug behavior before enabling this Miscellaneous entry.
       # TODO RMC14: Cargo Tug Crate, cost 50, heat 0.
-      # TODO RMC14: Port unmarked CLF supply crate behavior before enabling this Miscellaneous entry.
-      # TODO RMC14: Unmarked CLF Supply Crate, cost 40, heat 25.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 25
+        crate: RMCCrateBlackMarketCLF
+        icon:
+          entity: RMCCrateBlackMarketCLF
     categories:
     - name: rmc-requisitions-category-ammo
       entries:

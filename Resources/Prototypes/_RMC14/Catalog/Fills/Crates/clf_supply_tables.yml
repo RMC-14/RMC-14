@@ -1,0 +1,362 @@
+- type: entityTable
+  id: RMCBlackMarketCLFTools
+  table: !type:GroupSelector
+    children:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWrench
+    - id: RMCFlashlight
+
+- type: entityTable
+  id: RMCBlackMarketCLFToolboxes
+  table: !type:GroupSelector
+    children:
+    - id: RMCToolboxMechanicalFilled
+    - id: RMCToolboxMechanicalFilled
+    - id: RMCToolboxMechanicalFilled
+    - id: RMCToolboxElectricalFilled
+    - id: RMCToolboxElectricalFilled
+    - id: RMCToolboxMechanicalGreenFilled
+    - id: RMCToolboxMechanicalGreenFilled
+    - id: RMCToolboxEmergencyFilled
+
+- type: entityTable
+  id: RMCBlackMarketCLFBombParts
+  table: !type:GroupSelector
+    children:
+    - id: RMCTimerTrigger
+    - id: CMMultitool
+    - id: RMCM40GrenadeCasing
+    - id: RMCM15GrenadeCasing
+    - id: RMCM20MineCasing
+    - id: RMCC4PlasticCasing
+    - id: RMC80mmMortarShell
+    - id: RMC80mmMortarWarhead
+    - id: RMC80mmMortarCameraWarhead
+
+- type: entityTable
+  id: RMCBlackMarketCLFTech
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: RMCBlackMarketHackingDevice
+      - id: RMCBlackMarketHackingDevice
+    - !type:GroupSelector
+      children:
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMTRayScanner
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMRadioHandheld
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: CMHealthAnalyzer
+      - id: RMCBlackMarketHackingDevice
+      - id: RMCBlackMarketHackingDevice
+    - !type:NestedSelector
+      tableId: RMCBlackMarketCLFBombParts
+    - !type:NestedSelector
+      tableId: RMCBlackMarketCLFBombParts
+    - !type:GroupSelector
+      children:
+      - !type:GroupSelector
+        children:
+        - id: RMCPowerCellCrap
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellSuper
+        weight: 0.99
+      - !type:GroupSelector
+        children:
+        - id: RMCPowerCellHyper
+        weight: 0.01
+    - !type:GroupSelector
+      children:
+      - !type:GroupSelector
+        children:
+        - id: RMCPowerCellCrap
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellSuper
+        weight: 0.99
+      - !type:GroupSelector
+        children:
+        - id: RMCPowerCellHyper
+        weight: 0.01
+    - !type:GroupSelector
+      children:
+      - !type:GroupSelector
+        children:
+        - id: RMCPowerCellCrap
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCell
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellHigh
+        - id: RMCPowerCellSuper
+        weight: 0.99
+      - !type:GroupSelector
+        children:
+        - id: RMCPowerCellHyper
+        weight: 0.01
+    - id: CMFireExtinguisher
+    - id: CMHandsInsulated
+    - id: RMCCableCoil
+    - id: RMCCableCoil
+    - id: RMCCableCoil
+    - !type:GroupSelector
+      children:
+      - id: RMCToolboxMechanicalFilled
+      - id: RMCToolboxMechanicalFilled
+      - id: RMCToolboxMechanicalFilled
+      - id: RMCToolboxElectricalFilled
+      - id: RMCToolboxElectricalFilled
+      - id: RMCToolboxMechanicalGreenFilled
+      - id: RMCToolboxMechanicalGreenFilled
+      - id: RMCToolboxEmergencyFilled
+    - !type:GroupSelector
+      children:
+      - id: RMCToolboxMechanicalFilled
+      - id: RMCToolboxMechanicalFilled
+      - id: RMCToolboxMechanicalFilled
+      - id: RMCToolboxElectricalFilled
+      - id: RMCToolboxElectricalFilled
+      - id: RMCToolboxMechanicalGreenFilled
+      - id: RMCToolboxMechanicalGreenFilled
+      - id: RMCToolboxEmergencyFilled
+    - id: CMBeltUtility
+    - id: CMBeltUtility
+    - !type:GroupSelector
+      children:
+      - id: CMScrewdriver
+      - id: CMWirecutter
+      - id: CMWelder
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: RMCFlashlight
+    - !type:GroupSelector
+      children:
+      - id: CMScrewdriver
+      - id: CMWirecutter
+      - id: CMWelder
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: RMCFlashlight
+    - !type:GroupSelector
+      children:
+      - id: CMScrewdriver
+      - id: CMWirecutter
+      - id: CMWelder
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: RMCFlashlight
+    - !type:GroupSelector
+      children:
+      - id: CMScrewdriver
+      - id: CMWirecutter
+      - id: CMWelder
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: RMCFlashlight
+    - !type:GroupSelector
+      children:
+      - id: CMScrewdriver
+      - id: CMWirecutter
+      - id: CMWelder
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: RMCFlashlight
+
+- type: entityTable
+  id: RMCBlackMarketCLFAttachments
+  table: !type:GroupSelector
+    children:
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCAttachmentS5RedDotSight
+    - id: RMCAttachmentS5RedDotSight
+    - id: RMCAttachmentS5RedDotSight
+    - id: RMCAttachmentExtendedBarrel
+    - id: RMCAttachmentExtendedBarrel
+    - id: RMCAttachmentExtendedBarrel
+    - id: RMCAttachmentMagneticHarness
+    - id: RMCAttachmentMagneticHarness
+    - id: RMCAttachmentMagneticHarness
+    - id: RMCAttachmentFlashlightGrip
+    - id: RMCAttachmentFlashlightGrip
+    - id: RMCAttachmentSuppressor
+    - id: RMCAttachmentSuppressor
+    - id: RMCAttachmentBurstFireAssembly
+    - id: RMCAttachmentBurstFireAssembly
+    - id: RMCAttachmentRecoilCompensator
+    - id: RMCAttachmentRecoilCompensator
+    - id: RMCAttachmentB8SmartScope
+    - id: RMCAttachmentBarrelCharger
+    - id: RMCAttachmentS42xTelescopicMiniscope
+
+- type: entityTable
+  id: RMCBlackMarketCLFBonus
+  table: !type:GroupSelector
+    children:
+    - id: RMCCigarettePackExecutiveSelect
+    - id: CMMatchBook
+    - id: RMCCrayonBox
+    - id: RMCDrinkAlcoholWhiskey
+    - id: RMCTieHorrible
+    - id: RMCFoodSnackHUNK
+    - id: RMCFlashlight
+
+- type: entityTable
+  id: RMCBlackMarketCLFToys
+  table: !type:GroupSelector
+    children:
+    - id: CMPlushieFarwa
+    - id: RMCSpinningToy
+
+- type: entityTable
+  id: RMCBlackMarketCLFSupplyKits
+  table: !type:GroupSelector
+    children:
+    - id: RMCSupplyKitPursuit
+    - id: RMCSupplyKitPursuit
+    - id: RMCSupplyKitPursuit
+    - id: RMCSupplyKitSelfDefense
+    - id: RMCSupplyKitSelfDefense
+    - id: RMCSupplyKitSelfDefense
+    - id: RMCSupplyKitMiniMedic
+    - id: RMCSupplyKitMiniMedic
+    - id: RMCSupplyKitMiniMedic
+    - id: RMCSupplyKitMOU53
+    - id: RMCSupplyKitMOU53
+    - id: RMCSupplyKitHeavySupport
+
+- type: entityTable
+  id: RMCBlackMarketCLFMaterials
+  table: !type:GroupSelector
+    children:
+    - id: CMSheetMetal1
+    - id: CMSheetPlasteel1
+    - id: RMCSheetPlastic1
+    - id: CMSheetGlass1
+    - id: CMSheetPhoron1
+    - id: RMCGoldOre1
+    - id: RMCDiamondOre1
+
+- type: entityTable
+  id: RMCBlackMarketCLFEliteGear
+  table: !type:GroupSelector
+    children:
+    - id: RMCJumpsuitMercenaryMiner
+    - id: RMCArmorMercenaryMiner
+    - id: RMCArmorHelmetMercenaryMiner
+    - id: RMCJumpsuitMercenaryHeavy
+    - id: RMCArmorMercenary
+    - id: RMCArmorHelmetMercenary
+    - id: RMCJumpsuitMercenaryHeavy
+    - id: RMCArmorMercenaryEngineer
+    - id: RMCArmorHelmetMercenaryEngineer
+
+- type: entityTable
+  id: RMCBlackMarketCLFGrenades
+  table: !type:GroupSelector
+    children:
+    - id: RMCGrenadeIED
+    - id: RMCGrenadeMolotov
+    - id: RMCGrenadeIncendiary
+    - id: RMCGrenadeWhitePhosphorus
+    - id: CMGrenadeSmoke
+    - id: CMGrenadeFragOld
+
+- type: entityTable
+  id: RMCBlackMarketCLFCLFGear
+  table: !type:AllSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: RMCShoesBrown
+      - id: CMBootsBlack
+      - id: CMBootsJungle
+    - id: RMCJumpsuitCLFSoldier
+    - !type:GroupSelector
+      children:
+      - id: RMCCoatMilitia
+      - id: RMCCoatMilitiaVest
+    - !type:GroupSelector
+      children:
+      - id: CMHandsBlackMarine
+      - id: RMCHandsVeteran
+    - !type:GroupSelector
+      children:
+      - id: RMCHeadMilitiaHood
+      - id: RMCHeadMilitiaBucket
+    - !type:GroupSelector
+      children:
+      - id: CMBeltMarine
+      - id: CMBeltUtility

@@ -746,7 +746,7 @@
     slot:
       whitelist:
         tags:
-        - RMCSpeedLoaderM37
+        - RMCSpeedLoader38
 
 
 - type: entity

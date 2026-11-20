@@ -16,9 +16,9 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
-using Robust.Shared.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -100,6 +100,8 @@ public sealed partial class RequisitionsSystem
     protected override void OnRoundRestartCleanup(RoundRestartCleanupEvent args)
     {
         base.OnRoundRestartCleanup(args);
+        _stockDirty = false;
+        _nextStockRefresh = TimeSpan.Zero;
         _pendingMendozaDeathAftermath.Clear();
         _activeBlackMarketScanners.Clear();
         _finishedBlackMarketScanners.Clear();
@@ -126,7 +128,10 @@ public sealed partial class RequisitionsSystem
 
     private void TryBuyBlackMarketCart(Entity<RequisitionsComputerComponent> computer, EntityUid actor, List<RequisitionsCartItem> items)
     {
-        if (items.Count == 0 ||
+        if (!CanManageRequisitions(computer, actor))
+            return;
+
+        if (items == null || items.Count == 0 ||
             !computer.Comp.BlackMarketUnlocked)
         {
             return;
@@ -153,7 +158,7 @@ public sealed partial class RequisitionsSystem
 
         foreach (var item in items)
         {
-            if (item.Amount <= 0)
+            if (item == null || item.Amount <= 0)
                 return;
 
             if (item.Category < 0 || item.Category >= computer.Comp.BlackMarketCategories.Count)
@@ -254,6 +259,10 @@ public sealed partial class RequisitionsSystem
 
     private void OnBlackMarketInteractUsing(Entity<RequisitionsComputerComponent> computer, ref InteractUsingEvent args)
     {
+        OnInsertForm(computer, ref args);
+        if (args.Handled || computer.Comp.RequestOnly)
+            return;
+
         if (HasComp<CashComponent>(args.Used))
         {
             args.Handled = true;

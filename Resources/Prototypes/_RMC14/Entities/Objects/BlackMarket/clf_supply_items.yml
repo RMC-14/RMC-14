@@ -1,0 +1,19 @@
+- type: entity
+  parent: RMCWeaponSMGType19
+  id: RMCBlackMarketType19Drum
+  suffix: Drum magazine
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: RMCMagazineSMGType19Drum
+
+- type: entity
+  parent: WeaponSMGMAC15
+  id: RMCBlackMarketMAC15Extended
+  suffix: Extended magazine
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: RMCMagazineSMGMAC15Ext
