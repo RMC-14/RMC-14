@@ -28,6 +28,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<string> CMOocWebhook =
         CVarDef.Create("rmc.ooc_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
+    public static readonly CVarDef<string> RMCMentorHelpWebhook =
+        CVarDef.Create("rmc.mentor_help_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
     public static readonly CVarDef<int> CMMaxHeavyAttackTargets =
         CVarDef.Create("rmc.max_heavy_attack_targets", 1, CVar.REPLICATED | CVar.SERVER);
 
