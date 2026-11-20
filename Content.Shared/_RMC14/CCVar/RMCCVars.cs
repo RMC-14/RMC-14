@@ -28,6 +28,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<string> CMOocWebhook =
         CVarDef.Create("rmc.ooc_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
+    public static readonly CVarDef<string> RMCMentorHelpWebhook =
+        CVarDef.Create("rmc.mentor_help_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
     public static readonly CVarDef<int> CMMaxHeavyAttackTargets =
         CVarDef.Create("rmc.max_heavy_attack_targets", 1, CVar.REPLICATED | CVar.SERVER);
 
@@ -50,7 +53,21 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.auto_balance_min", 3f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
-        CVarDef.Create("rmc.auto_balance_max", 6.5f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.auto_balance_max", 5.5f, CVar.SERVER | CVar.SERVERONLY);
+
+    /// <summary>
+    /// An automatically adjusted CVar that tracks the last adjustment to CMMarinesPerXeno. To make the autobalance
+    /// only adjust when there is a streak, CMMarinesPerXeno will only be adjusted if the desired adjustment matches
+    /// the previous adjustment. In other words, only adjust CMMarinesPerXeno if there is a win streak.
+    /// </summary>
+    public static readonly CVarDef<int> RMCAutoBalanceLastAdjustment =
+        CVarDef.Create("rmc.auto_balance_last_adjustment", 0, CVar.SERVER | CVar.SERVERONLY);
+
+    /// <summary>
+    /// Enables or disables the autobalance only adjusting on streaks.
+    /// </summary>
+    public static readonly CVarDef<bool> RMCAutoBalanceStreakOnly =
+        CVarDef.Create("rmc.auto_balance_streak_only", false, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -224,7 +241,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.power_load_multiplier", 0.01f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCMarinesPerSurvivor =
-        CVarDef.Create("rmc.marines_per_survivor", 18, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_survivor", 16, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSurvivorsMinimum =
         CVarDef.Create("rmc.survivors_minimum", 2, CVar.REPLICATED | CVar.SERVER);
@@ -250,14 +267,23 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCBrandNewPlayerTimeJobHours =
         CVarDef.Create("rmc.brand_new_player_time_job_hours", 1, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedAdjustmentThresholdMinutes =
+        CVarDef.Create("rmc.late_joins_per_burrowed_adjustment_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarly =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early", 7.5f, CVar.SERVER | CVar.SERVERONLY);
+    /// <summary>
+    /// How many more (or less if negative) marine late joins are needed
+    /// per burrowed larva after the threshold time has passed.<br/>
+    /// Set to 0 to disable adjustment.
+    /// </summary>
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedAdjustment =
+        CVarDef.Create("rmc.late_joins_per_burrowed_adjustment", -1.5f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarva =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva", 7f, CVar.SERVER | CVar.SERVERONLY);
+    /// <summary>
+    /// The minimum amount of late joins required for one burrowed larva. Prevents the adjustment
+    /// from adjusting the late join requirement too low.
+    /// </summary>
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedMinimum =
+        CVarDef.Create("rmc.late_joins_per_burrowed_minimum", 2.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTime =
         CVarDef.Create("rmc.late_joins_burrowed_larva_death_time", 2.5f, CVar.REPLICATED | CVar.SERVER);
@@ -551,6 +577,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCGhostCanBoo =
         CVarDef.Create("rmc.ghosts_can_boo", false, CVar.SERVER | CVar.SERVERONLY);
 
+    public static readonly CVarDef<bool> RMCPostDeathChatMute =
+        CVarDef.Create("rmc.post_death_chat_mute", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCPostDeathChatMuteTimeSeconds =
+        CVarDef.Create("rmc.post_death_chat_mute_time_seconds", 10, CVar.SERVER | CVar.SERVERONLY);
+
     public static readonly CVarDef<int> RMCRoyalResinEveryMinutes =
         CVarDef.Create("rmc.royal_resin_every_minutes", 5, CVar.REPLICATED | CVar.SERVER);
 
@@ -585,11 +617,17 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.larva_queue_wait_seconds", 300, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCLarvaQueueOfferTimeoutSeconds =
-        CVarDef.Create("rmc.larva_queue_offer_timeout_seconds", 30, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.larva_queue_offer_timeout_seconds", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCLarvaQueueVictimPriorityEnabled =
+        CVarDef.Create("rmc.larva_queue_victim_priority_enabled", false, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
 
     public static readonly CVarDef<string> RMCChemMasterPresets =
         CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCLoadoutLowestRankSelectable =
+        CVarDef.Create("rmc.loadout_lowest_rank_selectable", false, CVar.REPLICATED | CVar.SERVER);
+        
     public static readonly CVarDef<int> RMCLightningMaxAmountLightNearbyCount =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_count", 6, CVar.CLIENT | CVar.ARCHIVE);
 
@@ -607,4 +645,28 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCDoAfterCancelMaxProcessTimeMilliseconds =
         CVarDef.Create("rmc.do_after_cancel_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCGMRequestEnabled =
+        CVarDef.Create("rmc.gm_request_enabled", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCGMRequestMaxLength =
+        CVarDef.Create("rmc.gm_request_max_length", 300,  CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCGMRequestCooldownSeconds =
+        CVarDef.Create("rmc.gm_request_cooldown_seconds", 10, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<string> RMCGMRequestSound =
+        CVarDef.Create("rmc.gm_request_sound", "/Audio/_RMC14/Effects/Admin/gmrequest.ogg", CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> RMCGMRequestSoundMuted =
+        CVarDef.Create("rmc.gm_request_sound_muted", false,  CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<float> RMCGhostBodyAlpha =
+        CVarDef.Create("rmc.ghost_body_alpha", 0x88 / 255f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCGhostClothingAlphaBoost =
+        CVarDef.Create("rmc.ghost_clothing_alpha_boost", 0.4f, CVar.REPLICATED | CVar.SERVER);
+        
+    public static readonly CVarDef<bool> RMCGhostPropCalling =
+        CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 }

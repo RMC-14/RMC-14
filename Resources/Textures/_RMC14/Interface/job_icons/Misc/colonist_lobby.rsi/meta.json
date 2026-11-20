@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "generic_colonist/co/doctor/mp/engi/researcher by @IceNoobXD on Github,",
+  "copyright": "generic_colonist/co/doctor/mp/engi/researcher by @IceNoobXD on Github, generic_colonist_synth/corporate by Ozehk (Github).",
   "size": {
     "x": 16,
     "y": 16
@@ -24,6 +24,12 @@
         },
         {
             "name": "generic_colonist_researcher"
+        },
+        {
+            "name": "generic_colonist_synth"
+        },
+        {
+            "name": "generic_colonist_corporate"
         }
     ]
 }
