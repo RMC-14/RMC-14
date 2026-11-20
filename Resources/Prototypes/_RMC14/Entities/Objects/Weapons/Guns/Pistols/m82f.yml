@@ -2,7 +2,7 @@
   parent: [ BaseItem, RMCBaseSlideMagazineVisualsBallistic, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: RMCWeaponPistolM82F
   name: M82-F flare gun
-  description: A flare gun issued to JTAC operators to use with flares. Comes with a miniscope. One shot, one... life saved?
+  description: The M82-F is a flare gun often issued to JTAC operators and UNMC ground troops that fires flares a short distance. It has an integrated non-removable sight allowing the wielder to fire flares slightly further.
   components:
   - type: AmmoCounter
   - type: Sprite
@@ -69,10 +69,11 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS42xTelescopicMiniscope
+        locked: true
+        startingAttachable: RMCAttachmentM82FSight
         whitelist:
           tags:
-          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentM82FSight
   - type: GunIFF
     enabled: true
   - type: GunIgnorePrediction
