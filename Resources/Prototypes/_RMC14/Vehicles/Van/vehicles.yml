@@ -8,6 +8,7 @@
   - type: VehicleLock
     access: []
   - type: RequireProjectileTarget
+  - type: VehicleWeak
   - type: WarpPoint
     follow: true
     location: Van
