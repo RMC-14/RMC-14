@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -74,6 +75,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         SubscribeLocalEvent<RMCExplosiveDamageOnHitComponent, ProjectileHitEvent>(OnExplosiveDamageOnHitProjectileHit);
         SubscribeLocalEvent<RMCExplosiveDamageOnHitComponent, MeleeHitEvent>(OnExplosiveDamageOnMeleeHit);
+
+        SubscribeLocalEvent<RMCProneExplosionMultComponent, BeforeExplosionRecievedEvent>(OnProneMultBeforeExplosionReceived);
     }
 
     private void OnExplosionEffectTriggered(Entity<CMExplosionEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
@@ -120,10 +123,6 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         var damage = args.Damage.GetTotal();
         var factor = Math.Round(damage.Double() * 0.05) / 2;
         factor = Math.Min(20, factor);
-
-        // TODO RMC14 don't reduce if explosion is on same tile
-        if (_standing.IsDown(ent))
-            factor *= 0.5;
 
         _sizeStun.TryGetSize(ent, out var size);
 
@@ -313,6 +312,20 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         var exv = new ExplosionReceivedEvent(explosionType, _transform.ToMapCoordinates(origin.ToCoordinates()), dam);
         RaiseLocalEvent(target, ref exv);
+    }
+
+    private void OnProneMultBeforeExplosionReceived(Entity<RMCProneExplosionMultComponent> ent, ref BeforeExplosionRecievedEvent args)
+    {
+        if (args.HasDirectionOverride == null)
+        {
+            var distance = (_transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Position - args.Epicenter.Position).Length();
+            if (distance <= ent.Comp.NoMultCenterRadius || (!_standing.IsDown(ent) && !HasComp<XenoRestingComponent>(ent)))
+                return;
+        }
+        else if (!args.HasDirectionOverride.Value)
+            return;
+
+        args.Damage *= ent.Comp.ProneMultiplier;
     }
 
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)

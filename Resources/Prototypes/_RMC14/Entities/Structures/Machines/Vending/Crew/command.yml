@@ -19,6 +19,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMBootsBlackFilled
       - id: RMCHeadsetMarineCommand
       - id: CMMRE
@@ -469,6 +470,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetSeniorCommand
       - id: CMMRE
     - name: Commanding Officer Essentials Kit
@@ -789,6 +791,7 @@
       - CMExecutiveOfficer
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetSeniorCommand
       - id: CMMRE 
 # TODO: - id: Trench Whistle
@@ -1048,6 +1051,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetCE
       - id: RMCWeldingGoggles
       - id: RMCNailgunTactical
@@ -1231,6 +1235,7 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: RMCQuartermasterJacket
     - name: Gloves
       jobs:
@@ -1538,6 +1543,7 @@
       - CMAuxiliarySupportOfficer
       choices: { CMSuit: 1 }
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
