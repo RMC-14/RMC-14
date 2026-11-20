@@ -266,6 +266,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        // grab before defaulting
         var overlayName = name;
         author ??= Loc.GetString("rmc-announcement-author");
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);

@@ -535,6 +535,7 @@ public sealed class RMCAnnouncementUIController : UIController,
         _updatingArea = area;
         if (area != null)
         {
+            // animate from the control, UIController FrameUpdate runs after layout & draws text unwrapped for a frame
             area.FrameUpdated += OnAreaFrameUpdate;
             area.ScreenScaleChanged += RefreshActive;
         }

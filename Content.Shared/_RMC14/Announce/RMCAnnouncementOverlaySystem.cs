@@ -47,6 +47,7 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
             .Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
         var text = string.Join('\n', lines);
+        // only drops the overlay, chat already went out
         if (lines.Length == 0 || lines.Length > preset.MaxLines || text.Length > preset.MaxLength)
             return;
 
@@ -116,6 +117,7 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
         return preset.TitleDecrypt + reveal + GetHoldTime(preset, preset.TitleDecrypt, reveal, length) + preset.FadeOut;
     }
 
+    // fixed total time if set, otherwise per character between Hold & MaxHold
     public static TimeSpan GetHoldTime(RMCAnnouncementPresetComponent preset, TimeSpan decrypt, TimeSpan reveal, int length)
     {
         if (preset.TotalTime is not { } total)
@@ -129,6 +131,8 @@ public sealed class RMCAnnouncementOverlaySystem : EntitySystem
         return hold > TimeSpan.Zero ? hold : TimeSpan.Zero;
     }
 
+    // portrait is the real speaker, who may be out of pvs range
+    // grace covers time spent in the client queue
     private void ShowPortrait(EntityUid speaker, Filter filter, TimeSpan displayTime)
     {
         var until = _timing.CurTime + displayTime + _portraitGrace;

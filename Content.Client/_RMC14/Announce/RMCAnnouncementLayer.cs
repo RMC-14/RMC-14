@@ -156,8 +156,10 @@ public sealed class RMCAnnouncementArea : Control
         {
             var size = Vector2.Min(stack.Box.DesiredSize, bounds.Size);
             Vector2 position;
+            // only default positions avoid the hud
             if (stack.AvoidHud)
             {
+                // top corners get extra room
                 var topMargin = stack.Pivot.Y == 0 && !MathHelper.CloseTo(stack.Pivot.X, 0.5f)
                     ? DefaultCornerTopMargin
                     : DefaultSideMargin;

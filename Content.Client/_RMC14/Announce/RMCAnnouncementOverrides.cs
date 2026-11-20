@@ -53,6 +53,7 @@ public static class RMCAnnouncementOverrides
     public const float MinScale = 0.1f;
     public const float MaxScale = 2.5f;
 
+    // preset > settings group > global "*"
     public static RMCAnnouncementOverride Resolve(
         Dictionary<string, RMCAnnouncementOverride> overrides,
         string presetId,

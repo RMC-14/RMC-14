@@ -73,12 +73,15 @@ public sealed class RMCAnnouncementPortraitView : Control
                 nameof(RMCAnnouncementPortraitView));
         }
 
+        // speaker may be off screen, so their sprite wouldnt update otherwise
         _entities.System<SpriteSystem>().ForceUpdate(uid);
 
+        // x for y on purpose, crops to upper body
         var center = new Vector2(size.X / 2f, size.X / 2f);
         var scale = new Vector2(Zoom * UIScale);
         handle.RenderInRenderTarget(_target, () =>
         {
+            // DrawEntity adds the control offset again otherwise
             handle.SetTransform(Matrix3x2.Identity);
             handle.DrawEntity(uid, center, scale, Angle.Zero, Angle.Zero, Direction.South, sprite);
         }, Color.Transparent);
