@@ -84,7 +84,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public TimeSpan? ScuttleNextHeatPulseAt;
 
     [DataField]
-    public TimeSpan ScuttleUnlockDelay = TimeSpan.FromSeconds(15);
+    public TimeSpan ScuttleUnlockDelay = TimeSpan.FromSeconds(8);
 
     [DataField]
     public TimeSpan ScuttleMinDuration = TimeSpan.FromMinutes(5);

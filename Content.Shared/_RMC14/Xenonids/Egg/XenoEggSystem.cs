@@ -2,10 +2,12 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Mortar;
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
-using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -22,6 +24,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -116,6 +119,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, BeforeDamageChangedEvent>(OnXenoEggBeforeDamageChanged);
+        SubscribeLocalEvent<XenoEggComponent, CheckMeleeAttackerEvent>(OnXenoEggReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
         SubscribeLocalEvent<XenoEggComponent, DestructionEventArgs>(OnDestruction);
 
@@ -299,7 +303,18 @@ public sealed class XenoEggSystem : EntitySystem
             RootEntity = true
         };
 
-        _popup.PopupPredicted(Loc.GetString("rmc-xeno-egg-plant-self"), Loc.GetString("rmc-xeno-egg-plant", ("user", args.User)), egg, args.User);
+        var selfMessage = Loc.GetString("rmc-xeno-egg-plant-self");
+        _popup.PopupClient(selfMessage, args.User, args.User);
+
+        var others = Filter.PvsExcept(args.User).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-egg-plant", ("user", Identity.Name(args.User, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, args.User, otherEnt, PopupType.MediumCaution);
+        }
 
         _doAfter.TryStartDoAfter(doAfter);
     }
@@ -427,8 +442,18 @@ public sealed class XenoEggSystem : EntitySystem
         if (!CanReturnParasitePopup(args.User, used, egg))
             return;
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-user"), args.User, args.User);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return", ("user", args.User), ("parasite", args.Used)), egg, Filter.PvsExcept(args.User), true);
+        var selfMessage = Loc.GetString("rmc-xeno-egg-return-user");
+        _popup.PopupEntity(selfMessage, args.User, args.User);
+
+        var others = Filter.PvsExcept(args.User).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-egg-return", ("user", Identity.Name(args.User, EntityManager, otherEnt)), ("parasite", Identity.Name(args.Used.Value, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, egg, otherEnt, PopupType.MediumCaution);
+        }
 
         SetEggState(egg, XenoEggState.Grown);
         QueueDel(args.Used);
@@ -791,6 +816,16 @@ public sealed class XenoEggSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private void OnXenoEggReceivingMeleeAttackAttempt(Entity<XenoEggComponent> ent, ref CheckMeleeAttackerEvent args)
+    {
+        // Unplanted eggs can't be damaged, but we can't cancel the attack because
+        // we allow eggs to be picked up in combat mode.
+        if (ent.Comp.State is XenoEggState.Item)
+        {
+            args.Defer = true;
+        }
+    }
+
     private void RemoveOvipositorActions(Entity<XenoOvipositorCapableComponent?> capable)
     {
         if (!Resolve(capable, ref capable.Comp, false))
@@ -829,6 +864,10 @@ public sealed class XenoEggSystem : EntitySystem
         }
         if (TryComp<XenoEggComponent>(ent, out var egg))
             SetEggSprite((ent, egg), egg.NormalSprite);
+
+        ent.Comp.ApplyNameModifier = false;
+        Dirty(ent);
+
         _nameModifier.RefreshNameModifiers(ent.Owner);
     }
 
@@ -840,7 +879,7 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnFragileRefreshModifier(Entity<XenoFragileEggComponent> ent, ref RefreshNameModifiersEvent args)
     {
-        if (!TerminatingOrDeleted(ent))
+        if (!TerminatingOrDeleted(ent) && ent.Comp.ApplyNameModifier)
             args.AddModifier("rmc-xeno-fragile-egg-prefix");
     }
 

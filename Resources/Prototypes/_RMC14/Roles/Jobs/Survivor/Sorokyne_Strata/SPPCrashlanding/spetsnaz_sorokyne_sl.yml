@@ -39,10 +39,9 @@
         sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
         state: spp_sptz_sl
     - type: RMCTrackable
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: AssignSquad
       squad: SquadSPP
-    #- type: SPPSpecWhitelist TODO RMC14: SPP special weapons whitelist
   hidden: true
 
 - type: startingGear

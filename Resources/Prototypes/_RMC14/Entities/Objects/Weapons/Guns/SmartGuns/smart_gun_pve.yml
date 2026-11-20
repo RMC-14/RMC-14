@@ -286,7 +286,7 @@
 - type: entity
   parent: RMCSmartGunPVENoCamo
   id: RMCSmartGunRCMPVE
-  name: ML66C general purpose machine gun
+  name: ML66C 'royal' heavy support gun
   description: A heavy, mobile machinegun used by the Royal Crown Marines. Heavily modified from the UN's ML66A platform, it fires 10x30mm holotargeting rounds. # In parity this is 10x28 HT but I don't want to make more unnecessary duplicate gear
   suffix: PVE, RCM
   components:
@@ -295,19 +295,19 @@
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_royal.rsi
     layers:
     - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_royal.rsi
     - state: mag-0
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_royal.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_royal.rsi
   - type: ItemSlots
     slots:
       gun_magazine:
