@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
@@ -20,6 +21,7 @@ public abstract class SharedSleeperSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -93,11 +95,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         UpdateSleeperVisuals(sleeper);
 
         if (!_timing.ApplyingState)
-        {
-            var inside = EnsureComp<InsideSleeperComponent>(args.Entity);
-            inside.Sleeper = sleeper;
-            Dirty(args.Entity, inside);
-        }
+            EnsureComp<InsideSleeperComponent>(args.Entity).Chamber = sleeper;
     }
 
     private void OnSleeperEntRemoved(Entity<SleeperComponent> sleeper, ref EntRemovedFromContainerMessage args)
@@ -115,6 +113,7 @@ public abstract class SharedSleeperSystem : EntitySystem
 
         UpdateSleeperVisuals(sleeper);
         RemCompDeferred<InsideSleeperComponent>(args.Entity);
+        _rmcMovement.SuppressCollisionOnExit(args.Entity, sleeper.Owner);
     }
 
     private void OnSleeperInteractHand(Entity<SleeperComponent> sleeper, ref InteractHandEvent args)
@@ -171,14 +170,15 @@ public abstract class SharedSleeperSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-        if (_net.IsServer)
-            _audio.PlayPvs(sleeper.Comp.EjectSound, sleeper);
 
         if (sleeper.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(sleeper))
             _stun.TryStun(occupant, sleeper.Comp.ExitStun, true);
 
-        if (_net.IsServer)
-            _popup.PopupEntity(Loc.GetString("rmc-sleeper-ejected", ("entity", occupant)), sleeper);
+        if (_net.IsClient)
+            return;
+
+        _audio.PlayPvs(sleeper.Comp.EjectSound, sleeper);
+        _popup.PopupEntity(Loc.GetString("rmc-sleeper-ejected", ("entity", occupant)), sleeper);
     }
 
     private void UpdateSleeperVisuals(Entity<SleeperComponent> sleeper)
@@ -226,7 +226,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (ent.Comp.Sleeper is not { } sleeperId)
+        if (ent.Comp.Chamber is not { } sleeperId)
             return;
 
         if (!TryComp<SleeperComponent>(sleeperId, out var sleeper))

@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleSpitter
-  - type: GhostRole
-    name: cm-job-name-xeno-spitter
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Spitter/spitter.rsi
   - type: MobState
@@ -46,6 +44,8 @@
     - ActionXenoDevolve
     tier: 2
     hudOffset: -0.15,0.025
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 540 # 9 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -60,7 +60,7 @@
   - type: XenoEvolution
     max: 500
     evolvesTo:
-    - CMXenoBoiler
+    - RMCXenoBoiler
     - CMXenoPraetorian
   - type: XenoSpit
   - type: XenoChargeSpit

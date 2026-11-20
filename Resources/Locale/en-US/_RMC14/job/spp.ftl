@@ -79,6 +79,9 @@ rmc-job-prefix-spp-squadlead = SL
 rmc-ghost-name-spp-squadlead = SPP Squad Lead
 rmc-job-description-spp-squadlead = Follow the section sergeant's orders and command your squad. 
 
+rmc-job-name-spp-synth = Support Synthetic
+rmc-job-prefix-spp-synth = SYN.
+
 rmc-job-name-spp-so= Staff Officer
 rmc-job-prefix-spp-so = SO
 rmc-ghost-name-spp-so= SPP SO

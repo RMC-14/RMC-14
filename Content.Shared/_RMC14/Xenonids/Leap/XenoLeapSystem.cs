@@ -9,15 +9,11 @@ using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Xenonids.Construction;
-using Content.Shared._RMC14.Xenonids.Egg;
-using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Spray;
-using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -83,6 +79,13 @@ public sealed class XenoLeapSystem : EntitySystem
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<FixturesComponent> _fixturesQuery;
 
+    private bool _logPrediction = false;
+
+    private HashSet<EntityUid> _colliding = new();
+    // TODO RMC14 not sure how many points are actually needed here to be safe, but this is a very small
+    // data structure so overallocating should not cause problems.
+    private Vector2[] _points = new Vector2[16];
+
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
@@ -126,7 +129,7 @@ public sealed class XenoLeapSystem : EntitySystem
                 return;
 
             _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
-            if (!_rmcLagCompensation.Collides(target, ent, args.SenderSession))
+            if (!_rmcLagCompensation.Collides(target, ent, args.SenderSession, msg.Substep))
                 return;
         }
 
@@ -204,6 +207,8 @@ public sealed class XenoLeapSystem : EntitySystem
         var target = _transform.ToMapCoordinates(args.Coordinates);
         var direction = target.Position - origin.Position;
 
+        leaping.Direction = direction;
+
         if (direction == Vector2.Zero)
             return;
 
@@ -218,6 +223,11 @@ public sealed class XenoLeapSystem : EntitySystem
         leaping.LeapEndTime = _timing.CurTime + TimeSpan.FromSeconds(direction.Length() / xeno.Comp.Strength);
 
         _obstacleSlamming.MakeImmune(xeno, 0.5f);
+
+        // Prevent leap from having longer/shorter range or skewed direction
+        // based on the xeno's movement when using it.
+        _physics.ResetDynamics(xeno, physics);
+
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
         _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
 
@@ -231,8 +241,42 @@ public sealed class XenoLeapSystem : EntitySystem
             _physics.SetCollisionMask(xeno, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ collisionGroup);
         }
 
+        var contacts = _physics.GetContacts((xeno, fixtures));
+        _colliding.Clear();
+
         //Handle close-range or same-tile leaps
-        foreach (var ent in _physics.GetContactingEntities(xeno.Owner, physics))
+        while (contacts.MoveNext(out var contact))
+        {
+            // Approximate contacts don't count.
+            if (!contact.IsTouching)
+                continue;
+
+            var otherEnt = contact.OtherEnt(xeno);
+            if (_colliding.Contains(otherEnt))
+                continue;
+
+            // Ignore fixtures that can contact but should be ignored.
+            if (leaping.IgnoreFixtureIds.Contains(contact.FixtureAId)
+                || leaping.IgnoreFixtureIds.Contains(contact.FixtureBId))
+                continue;
+
+            // If the leaper is trying to move AWAY from the contact, ignore it.
+            if (contact.Manifold.PointCount > 0 && contact.Manifold.PointCount <= _points.Length)
+            {
+                contact.GetWorldManifold(
+                    _physics.GetPhysicsTransform(contact.EntityA),
+                    _physics.GetPhysicsTransform(contact.EntityB),
+                    out _,
+                    _points);
+                var toContact = _points[0] - origin.Position;
+                if (Vector2.Dot(direction, toContact) < 0)
+                    continue;
+            }
+
+            _colliding.Add(otherEnt);
+        }
+
+        foreach (var ent in _colliding)
         {
             if (_hive.FromSameHive(xeno.Owner, ent))
                 continue;
@@ -282,6 +326,19 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
     {
+        // Ignore collision if colliding with ignored fixture
+        if (xeno.Comp.IgnoreFixtureIds.Contains(args.OurFixtureId)
+            || xeno.Comp.IgnoreFixtureIds.Contains(args.OtherFixtureId))
+            return;
+
+        // Ignore collision if moving away from the collision point.
+        if (args.PointCount > 0)
+        {
+            var toContact = args.WorldPoints[0] - _transform.GetWorldPosition(xeno);
+            if (Vector2.Dot(xeno.Comp.Direction, toContact) < 0)
+                return;
+        }
+
         ApplyLeapingHitEffects(xeno, args.OtherEntity);
     }
 
@@ -500,7 +557,7 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
         }
 
-        if (_standing.IsDown(target))
+        if (_standing.IsDown(target) || HasComp<XenoRestingComponent>(target))
             return false;
 
         if (HasComp<LeapIncapacitatedComponent>(target))
@@ -597,7 +654,29 @@ public sealed class XenoLeapSystem : EntitySystem
 
         if (_net.IsClient)
         {
-            var predictedEv = new XenoLeapPredictedHitEvent(GetNetEntity(target), _rmcLagCompensation.GetLastRealTick(null));
+            if (_logPrediction)
+            {
+                // Leap code causes this to spam the console a bit
+                TryComp(xeno, out TransformComponent? leaperTransform);
+                TryComp(target, out TransformComponent? targetTransform);
+                Log.Debug($"""
+                    SENDING PREDICTED LEAP HIT!!
+                      CurTick:        {_timing.CurTick}
+                      LastRealTick:   {_rmcLagCompensation.GetLastRealTick(null)}
+                      Phys Substep:   {_rmcLagCompensation.GetCurrentSubstep()}
+                      In simulation?  {_timing.InSimulation}
+                      ApplyingState?  {_timing.ApplyingState}
+                      FirstTimePred?  {_timing.IsFirstTimePredicted}
+                      Substep:        {_rmcLagCompensation.GetClientSubstep()}
+                      Leaper Coords:  {leaperTransform?.Coordinates}
+                      Target Coords:  {targetTransform?.Coordinates}
+                    """);
+            }
+
+            var predictedEv = new XenoLeapPredictedHitEvent(
+                GetNetEntity(target),
+                _rmcLagCompensation.GetLastRealTick(null),
+                _rmcLagCompensation.GetClientSubstep());
             RaiseNetworkEvent(predictedEv);
             if (_timing.InPrediction && _timing.IsFirstTimePredicted)
             {

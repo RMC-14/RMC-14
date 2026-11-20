@@ -3,7 +3,6 @@
   id: CMSurvivorISR
   name: cm-job-name-survivor-isr
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorISR
   spawnMenuRoleName: Interstellar Life Rights Observer (Survivor)
   icon: "RMCJobIconBureauObserver"
   hasIcon: true
@@ -16,11 +15,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
@@ -61,7 +56,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorISR
-  isHumanoid: true

@@ -144,6 +144,9 @@ public abstract partial class SharedRMCLandmineSystem : EntitySystem
     {
         if (HasComp<ProjectileComponent>(args.Source))
             args.Cancelled = true;
+
+        if (!ent.Comp.Armed)
+            args.Cancelled = true;
     }
 
     private void OnShouldInteract(Entity<RMCLandmineComponent> ent, ref CombatModeShouldHandInteractEvent args)

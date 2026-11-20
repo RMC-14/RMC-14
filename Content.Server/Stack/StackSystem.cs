@@ -42,6 +42,10 @@ namespace Content.Server.Stack
         /// </summary>
         public EntityUid? Split(EntityUid uid, int amount, EntityCoordinates spawnPosition, StackComponent? stack = null)
         {
+            // #RMC Prevent splitting stacksin acid
+            if (IsAcidicStack(uid))
+                return null;
+
             if (!Resolve(uid, ref stack))
                 return null;
 
@@ -168,6 +172,10 @@ namespace Content.Server.Stack
         private void OnStackAlternativeInteract(EntityUid uid, StackComponent stack, GetVerbsEvent<AlternativeVerb> args)
         {
             if (!args.CanAccess || !args.CanInteract || args.Hands == null || stack.Count == 1)
+                return;
+
+            // #RMC Hide split verbs for acided stacks
+            if (IsAcidicStack(uid))
                 return;
 
             AlternativeVerb halve = new()

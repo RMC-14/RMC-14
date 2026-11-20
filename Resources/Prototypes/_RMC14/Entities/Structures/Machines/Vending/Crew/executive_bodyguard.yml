@@ -1,0 +1,166 @@
+
+  #Clothes Rack
+- type: entity
+  parent: ColMarTechWardrobeCorp
+  id: ColMarTechWardrobeExecutiveBodyguard
+  name: executive bodyguard clothes rack
+  description: An automated rack hooked up to a colossal storage of Security Division standard-issue clothing.
+  components:
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCWeYaExecutiveBodyguard
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: RMCBootsPMCFilled
+      - id: RMCHeadsetExecutiveBodyguard
+      - id: RMCGlassesSecurityBlue
+      # RMC14 TODO: Blue SecHud Perscription
+    - name: Uniforms
+      choices: { CMUniform: 5 }
+      entries:
+      - id: CMJumpsuitLiaisonBlack
+      - id: RMCJumpsuitLiaisonBlackSuitskirt
+      - id: CMJumpsuitLiaisonBlue
+      - id: CMJumpsuitLiaisonBrown
+      - id: CMJumpsuitLiaisonCorporateFormal
+    - name: Jackets
+      choices: { CMSuit: 5 }
+      entries:
+      - id: RMCJacketCorporateBlack
+      - id: RMCJacketCorporateBlue
+      - id: RMCJacketCorporateBrown
+      - id: RMCJacketCorporateFormal
+      - id: RMCCoatBureauTrenchCoatBeige
+      - id: RMCCoatBureauTrenchCoatBrown
+      - id: RMCCoatBureauTrenchCoatGrey
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelBlack
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+      - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechGearRackExecutiveBodyguard
+  name: executive bodyguard gear rack
+  description: An automated rack hooked up to a colossal storage of Security Division standard-issue gear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+      - RMCWeYaExecutiveBodyguard
+    sections:
+      - name: Headgear
+        choices: { CMHelmet: 1 }
+        entries:
+        - id: RMCHeadCapExecutiveBodyguard
+        - id: RMCArmorHelmetExecutiveBodyguard
+      - name: Mask
+        choices: { CMMask: 1 }
+        entries:
+        - id: CMMaskGas
+        - id: RMCMaskRebreather
+      - name: Armor
+        choices: { CMArmor: 1 }
+        entries:
+        - id: RMCArmorM1ExecutiveBodyguard
+        - id: RMCArmorM4ExecutiveBodyguard
+      - name: Backpack
+        choices: { CMBackpack: 1 }
+        entries:
+        - id: RMCSatchelBlack
+      - name: Gloves
+        choices: { CMHands: 1 }
+        entries:
+        - id: RMCHandsVeteranExecutiveBodyguard
+      - name: Pouches
+        choices: { CMPouches: 2 }
+        entries:
+        - id: RMCPouchFirstAidInjectors
+          name: first-aid pouch (refillable injectors)
+        - id: RMCPouchFirstAidSplintsGauzeOintment
+          name: first-aid pouch (gauze, ointment)
+        - id: RMCPouchFirstAidPills
+          name: first-aid pouch (pills)
+        - id: RMCPouchMagazine
+        - id: RMCPouchGeneralMedium
+      - name: Primary
+        choices: { CMVendorBundleRiflemanApparel: 1 }
+        entries:
+        # RMC14 TODO: Shock Shotgun 15p
+        - id: RMCVendorBundleM54CWhiteNoLock
+        - id: RMCVendorBundleSMGM63WhiteNoLock
+        - id: RMCVendorBundleSMGSSG45NoLockStripped
+      - name: Sidearm
+        choices: { RMCBeltHolsterPistol: 1 }
+        entries:
+        - id: RMCBeltHolsterPistolWeYaPK7Fill
+          name: PK-7 electrostatic pistol
+        - id: RMCBeltHolsterPistolWeYaM77Fill
+          name: M77 combat pistol
+        - id: RMCBeltHolsterPistolWeYaMK80Fill
+          points: 8
+          name: MK80 pistol
+      - name: Primary Ammunition
+        entries:
+        #RMC14 TODO: Shock Shotgun lethal 15p & Stun shells 10p
+        - id: CMMagazineSMGM63
+          points: 6
+        - id: CMMagazineSMGM63Ext
+          points: 8
+        - id: CMMagazineSMGM63AP
+          points: 10
+        - id: CMMagazineRifleM54C
+          points: 6
+        - id: CMMagazineRifleM54CExt
+          points: 8
+        - id: CMMagazineRifleM54CAP
+          points: 10
+        - id: RMCMagazineRifleSSG45
+          points: 6
+        - id: RMCMagazineRifleSSG45Extended
+          points: 8
+        - id: RMCMagazineRifleSSG45AP
+          points: 10
+      - name: Sidearm Ammunition
+        entries:
+        - id: RMCMagazinePistolPK7
+          points: 4
+        - id: CMMagazinePistolMK80
+          points: 6
+        - id: CMMagazinePistolM77AP
+          points: 4
+      - name: Attachments
+        choices: { RMCAttachableBase: 2 }
+        entries:
+        - id: RMCAttachmentS5RedDotSight
+        - id: RMCAttachmentS6ReflexSight
+        - id: RMCAttachmentS42xTelescopicMiniscope
+        - id: RMCAttachmentMagneticHarness
+        - id: RMCAttachmentLaserSight
+        - id: RMCAttachmentAngledGrip
+        - id: RMCAttachmentVerticalGrip
+        - id: RMCAttachmentExtendedBarrel
+        - id: RMCAttachmentSuppressor
+      - name: Spare Equipment
+        entries:
+        - id: CMFlash
+          points: 2
+        # RMC14 TODO: Pepper Spray
+        - id: CMStunbaton
+          points: 4
+        - id: RMCZipties
+          points: 1

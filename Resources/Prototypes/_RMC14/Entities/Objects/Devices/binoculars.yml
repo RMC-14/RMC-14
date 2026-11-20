@@ -13,6 +13,7 @@
     state: binoculars
   - type: Scope
     useInHand: true
+    scopedHeldSuffix: _eyes
     zoomLevels:
     - zoom: 1.6
       offset: 14
@@ -212,6 +213,7 @@
   - type: PointLight
     enabled: true
     radius: 3
+    color: "#67ff4f"
   - type: RMCNightVisionVisibleInView
 
 - type: entity
@@ -223,6 +225,15 @@
     sprite: _RMC14/Effects/laser.rsi
     state: laser_target2
   - type: LaserDesignatorTarget
+  - type: RMCCamera
+    id: null
+    rename: false
+  - type: RMCStaticZoomLevel
+  - type: Eye
+    zoom: 0.5, 0.5
+    drawFov: false
+  - type: PointLight
+    color: "#ff5c5c"
 
 - type: entity
   parent: RMCRangefinderTarget

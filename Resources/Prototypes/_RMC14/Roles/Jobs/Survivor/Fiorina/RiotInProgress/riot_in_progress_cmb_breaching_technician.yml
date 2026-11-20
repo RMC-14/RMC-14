@@ -1,0 +1,84 @@
+- type: job
+  parent: CMSurvivorFiorinaRiotOfficer
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
+  name: rmc-job-name-bureau-riot-control-breaching-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBBreachingTechnician
+  accessGroups:
+  - ColonistSec
+  ranks:
+    RMCRankCMBSergeant:
+      - !type:RoleTimeRequirement
+        role: CMJobSurvivorSecurity
+        time: 252000 # 70 hours
+    RMCRankCMBCorporal: []
+  spawnMenuRoleName: CMB Breaching Technician (Fiorina Special Survivor)
+  icon: "RMCJobIconCMBRiotInProgressBreachingTechnician"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      preset: RMCSkillPresetSurvivorRiotControlBreachingTechnician
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetRiotInProgressCMB
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-riot-control-breaching-technician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: engi
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  greeting: rmc-job-greeting-riot-in-progress-CMB
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBBreachingTechnician
+  equipment:
+    id: RMCIDCardCMBDeputySurvivor
+    back: CMSatchelSecuritySurvivorFill
+    outerClothing: RMCArmorPMCRiotCMB
+    ears: RMCHeadsetDistressBureauDamaged
+    shoes: RMCBootsPMCFilled
+    pocket1: RMCPouchSurvivalBlackFilled
+    belt: CMBeltUtilityFilled
+    eyes: RMCWeldingGoggles
+    gloves: RMCHandsVeteran
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
+  name: cmb riot control breaching technician spawn point
+  suffix: special survivor, fiorina riot
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlBreachingTechnician
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBRiotInProgressBreachingTechnician
+  icon:
+    sprite: _RMC14/Interface/job_icons/CMB.rsi
+    state: cmb_brch

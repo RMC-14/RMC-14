@@ -44,7 +44,7 @@
   name: tmcc miner preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
     - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]

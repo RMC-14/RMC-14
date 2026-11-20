@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -20,12 +20,14 @@ public sealed class GunIFFSystem : EntitySystem
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _factionBuffer = new();
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _iffEventBuffer = new();
 
     public override void Initialize()
     {
         _userIFFQuery = GetEntityQuery<UserIFFComponent>();
 
         SubscribeLocalEvent<UserIFFComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);
+        SubscribeLocalEvent<UserIFFComponent, CheckMeleeTargetEvent>(OnUserIFFCheckMeleeTarget);
         SubscribeLocalEvent<InventoryComponent, GetIFFFactionEvent>(OnInventoryIFFGetFaction);
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
@@ -37,6 +39,27 @@ public sealed class GunIFFSystem : EntitySystem
     private void OnUserIFFGetFaction(Entity<UserIFFComponent> ent, ref GetIFFFactionEvent args)
     {
         args.Factions.UnionWith(ent.Comp.Factions);
+    }
+
+    private void OnUserIFFCheckMeleeTarget(Entity<UserIFFComponent> ent, ref CheckMeleeTargetEvent args)
+    {
+        if (args.Skip || args.Defer)
+            return;
+
+        // assigning new names to buffers just for clarity
+        var attackedFactions = _factionBuffer;
+        var attackerFactinos = _iffEventBuffer;
+        attackedFactions.Clear();
+        attackerFactinos.Clear();
+
+        // IFF users prefer not to melee entities they share an IFF faction with
+        if (!args.Disarm
+            && TryGetFactions(args.Target, attackedFactions)
+            && TryGetFactions(ent.Owner, attackerFactinos)
+            && attackerFactinos.Overlaps(attackedFactions))
+        {
+            args.Defer = true;
+        }
     }
 
     private void OnInventoryIFFGetFaction(Entity<InventoryComponent> ent, ref GetIFFFactionEvent args)
@@ -129,20 +152,16 @@ public sealed class GunIFFSystem : EntitySystem
     public bool TryGetFactions(Entity<UserIFFComponent?> user, HashSet<EntProtoId<IFFFactionComponent>> factions, SlotFlags slots = SlotFlags.IDCARD)
     {
         factions.Clear();
-        if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
-            return false;
+        _userIFFQuery.Resolve(user, ref user.Comp, false);
+        if (user.Comp != null)
+            factions.UnionWith(user.Comp.Factions);
 
-        factions.UnionWith(user.Comp.Factions);
-
-        var ev = new GetIFFFactionEvent(slots, new HashSet<EntProtoId<IFFFactionComponent>>());
+        _iffEventBuffer.Clear();
+        var ev = new GetIFFFactionEvent(slots, _iffEventBuffer);
         RaiseLocalEvent(user, ref ev);
-
         factions.UnionWith(ev.Factions);
 
-        if (factions.Count == 0)
-            return false;
-
-        return true;
+        return factions.Count > 0;
     }
 
     public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
@@ -246,9 +265,7 @@ public sealed class GunIFFSystem : EntitySystem
             return;
         }
 
-        if (!_userIFFQuery.TryComp(owner, out var ownerIFF))
-            return;
-
+        _userIFFQuery.TryComp(owner, out var ownerIFF);
         _factionBuffer.Clear();
         if (!TryGetFactions((owner, ownerIFF), _factionBuffer, SlotFlags.IDCARD))
             return;
@@ -291,6 +308,13 @@ public sealed class GunIFFSystem : EntitySystem
 
         projectileIFFComponent.Enabled = enabled && projectileIFFComponent.Factions.Count > 0;
         Dirty(uid, projectileIFFComponent);
+    }
+
+    public bool HasFaction(EntityUid uid, EntProtoId<IFFFactionComponent> faction)
+    {
+        if (!TryComp<ItemIFFComponent>(uid, out var itemIff))
+            return false;
+        return itemIff.Factions.Contains(faction);
     }
 }
 

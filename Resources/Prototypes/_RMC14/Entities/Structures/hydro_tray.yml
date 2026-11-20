@@ -4,6 +4,9 @@
   id: CMHydroponicsTray
   description: Used for growing plants.
   components:
+  - type: VehicleSmashable
+    minDestroyWeightClass: Light
+  - type: Corrodible
   - type: Fixtures
     fixtures:
       fix1:
@@ -16,6 +19,13 @@
         - MachineMask
         layer:
         - MachineLayer
+  # - type: ApcPowerReceiver  TODO RMC14 power figure out the unpowered visuals
+  #   powerLoad: 250
+  #   needsPower: true
+  # - type: RMCPowerReceiver
+  #   idleLoad: 0
+  #   activeLoad: 0
+  #   channel: Equipment
   - type: Anchorable
   - type: Pullable
   - type: Destructible

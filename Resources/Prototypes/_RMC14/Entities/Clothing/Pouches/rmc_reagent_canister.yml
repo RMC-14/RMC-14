@@ -14,9 +14,12 @@
       map: [ "closedLayer" ]
     - state: loaded
       map: [ "loaded" ]
-    - state: reagent
-      map: [ "enum.SolutionContainerStoreVisuals.Base" ]
+    - state: pressurized_reagent_canister4
+      map: [ "enum.SolutionContainerLayers.Fill" ]
       visible: false
+    - state: glass
+      map: [ "glass" ]
+      color: "#FFFFFF40"
   - type: Storage
     whitelist:
       tags:
@@ -33,6 +36,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanister
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -40,6 +44,10 @@
   - type: ItemMapper
     mapLayers:
       loaded:
+        whitelist:
+          tags:
+          - PressurizedCanister
+      glass:
         whitelist:
           tags:
           - PressurizedCanister
@@ -66,6 +74,11 @@
       RMCPlastic: 2000
   - type: StaticPrice
     price: 24
+  - type: RMCConnectedContainer
+    containerId: pressurized_reagent_canister
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: pressurized_reagent_canister
 
 - type: entity
   parent: RMCPouchReagentCanister
@@ -80,6 +93,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterBicaridine
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -98,6 +112,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterKelotane
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -116,6 +131,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterTricordrazineRevival
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -134,6 +150,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterTricordrazine
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -152,6 +169,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterMeraBic
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister
@@ -170,6 +188,7 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterKeloDerm
+        priority: 1
         whitelist:
           tags:
           - PressurizedCanister

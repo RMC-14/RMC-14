@@ -15,13 +15,13 @@
 - type: rank
   id: RMCRankSPPPoliticalSrBattalionKommissar
   name: Senior Battalion Kommissar
-  prefix: Sr. Batt. Pol.
+  prefix: Sr. Batt. Kom.
   paygrade: P4
 
 - type: rank
   id: RMCRankSPPPoliticalRegimentalKommissar
   name: Regimental Kommissar
-  prefix: Reg. Pol.
+  prefix: Reg. Kom.
   paygrade: P5
 
 - type: rank

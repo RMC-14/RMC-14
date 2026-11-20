@@ -13,6 +13,13 @@
   name: cm-job-name-messtech
 
 
+#vehicles
+- type: accessLevel
+  id: RMCAccessVehicleCrew
+  parent: RMCBaseMarineAccess
+  name: Vehicle Bay
+
+
 #engineering
 - type: accessLevel
   id: CMAccessEngineering
@@ -54,6 +61,10 @@
   parent: RMCBaseMedicalAccess
   name: rmc-job-name-researcher
 
+- type: accessLevel
+  id: RMCAccessFieldDoctor
+  parent: RMCBaseMedicalAccess
+  name: rmc-job-name-field-doctor
 
 # correspondent
 - type: accessLevel

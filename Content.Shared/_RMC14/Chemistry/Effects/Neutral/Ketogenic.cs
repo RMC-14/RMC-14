@@ -55,10 +55,10 @@ public sealed partial class Ketogenic : RMCChemicalEffect
         damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
 
         var random = IoCManager.Resolve<IRobustRandom>();
-        if (!random.Prob(0.025f * ActualPotency))
-            return;
-        var vomitEvent = new RMCVomitEvent(target);
-        entityManager.EventBus.RaiseEvent(EventSource.Local, ref vomitEvent);
+        if (random.Prob(0.025f * ActualPotency))
+        {
+            entityManager.System<RMCVomitSystem>().StartVomit(target);
+        }
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

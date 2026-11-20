@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
@@ -42,6 +43,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
         SubscribeLocalEvent<DamageOnCollideComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<DamageOnCollideComponent, EndCollideEvent>(OnEndCollide);
+        SubscribeLocalEvent<DamageOnCollideComponent, ComponentShutdown>(OnShutdown);
     }
 
     private void OnStartCollide(Entity<DamageOnCollideComponent> ent, ref StartCollideEvent args)
@@ -58,8 +60,19 @@ public abstract class SharedOnCollideSystem : EntitySystem
             Dirty(ent);
     }
 
+    private void OnShutdown(Entity<DamageOnCollideComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp.Chain is not { } chain || TerminatingOrDeleted(chain))
+            return;
+
+        CleanupChain(chain, ent.Owner);
+    }
+
     private void OnCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)
     {
+        if (ent.Comp.Disabled)
+            return;
+
         if (ent.Comp.Damaged.Contains(other))
             return;
 
@@ -81,10 +94,21 @@ public abstract class SharedOnCollideSystem : EntitySystem
         ent.Comp.Damaged.Add(other);
         Dirty(ent);
 
+        var bonusDamage = false;
+
+        if (ent.Comp.AcidComboDamage != null && ent.Comp.AcidComboDamageChain != null && _xenoSpit.EnhanceAcid(other, ent.Comp.AcidComboMaxTier))
+        {
+            _stun.TryParalyze(other, ent.Comp.AcidComboParalyze, true);
+            bonusDamage = true;
+        }
+
         var didEmote = false;
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
             var damage = ent.Comp.Damage;
+            if (bonusDamage && ent.Comp.AcidComboDamage != null)
+                damage += ent.Comp.AcidComboDamage;
+
             if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
             _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances, armorPiercing: ent.Comp.ArmorPenetration);
@@ -94,14 +118,16 @@ public abstract class SharedOnCollideSystem : EntitySystem
         else
         {
             var damage = ent.Comp.ChainDamage;
+
+            if (bonusDamage && ent.Comp.AcidComboDamageChain != null)
+                damage += ent.Comp.AcidComboDamageChain;
+
             if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
             _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
         }
 
-        _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze, ent.Comp.AcidComboResists);
-
-        if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
+        if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && !HasComp<XenoRestingComponent>(ent) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
         {
             _stun.TryParalyze(other, ent.Comp.Paralyze, true);
 
@@ -143,7 +169,54 @@ public abstract class SharedOnCollideSystem : EntitySystem
         if (!_damageOnCollideQuery.Resolve(ent, ref ent.Comp, false))
             return;
 
+        if (ent.Comp.Chain is { } oldChain &&
+            oldChain != chain &&
+            !TerminatingOrDeleted(oldChain))
+        {
+            CleanupChain(oldChain, ent.Owner);
+        }
+
         ent.Comp.Chain = chain;
+        Dirty(ent);
+    }
+
+    public void CleanupChain(EntityUid? chain, EntityUid? skip = null)
+    {
+        if (chain == null || TerminatingOrDeleted(chain.Value))
+            return;
+
+        var refs = GetRemainingChainRefs(chain.Value, skip);
+        if (refs.Count == 0)
+            Del(chain.Value);
+    }
+
+    private List<string> GetRemainingChainRefs(EntityUid chain, EntityUid? skip = null)
+    {
+        var refs = new List<string>();
+        var query = EntityQueryEnumerator<DamageOnCollideComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if ((skip != null && uid == skip) || TerminatingOrDeleted(uid))
+                continue;
+
+            if (comp.Chain == chain)
+                refs.Add(ToPrettyString(uid));
+        }
+
+        return refs;
+    }
+
+    public DamageSpecifier GetCollideDamage(Entity<DamageOnCollideComponent> ent)
+    {
+        return ent.Comp.Damage;
+    }
+
+    public void DisableDamageOnCollide(Entity<DamageOnCollideComponent?> ent)
+    {
+        if (!_damageOnCollideQuery.Resolve(ent, ref ent.Comp, false))
+            return;
+
+        ent.Comp.Disabled = true;
         Dirty(ent);
     }
 

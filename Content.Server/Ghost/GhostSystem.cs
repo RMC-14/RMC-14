@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.Mobs;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -8,6 +9,8 @@ using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
+using Content.Shared._RMC14.Mentor.ImaginaryFriend;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -70,12 +73,18 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
+        [Dependency] private readonly RMCGhostAppearanceSystem _rmcGhostAppearance = default!;
+
+        // RMC14
+        [Dependency] private readonly CMGhostSystem _cmGhost = default!;
+        // RMC14
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
+        private static readonly ProtoId<DamageTypePrototype> BluntDamageType = "Blunt";
 
         public override void Initialize()
         {
@@ -116,7 +125,7 @@ namespace Content.Server.Ghost
             // If component not deleting they can see ghosts.
             if (ent.Comp.LifeStage <= ComponentLifeStage.Running)
             {
-                args.VisibilityMask |= (int)VisibilityFlags.Ghost;
+                args.VisibilityMask |= (int)VisibilityFlags.Ghost | (int)VisibilityFlags.ImaginaryFriend; // RMC14
             }
         }
 
@@ -239,6 +248,10 @@ namespace Content.Server.Ghost
 
         private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)
         {
+            // RMC14
+            if (HasComp<ImaginaryFriendComponent>(uid))
+                return;
+
             var timeSinceDeath = _gameTiming.RealTime.Subtract(component.TimeOfDeath);
             var deathTimeInfo = timeSinceDeath.Minutes > 0
                 ? Loc.GetString("comp-ghost-examine-time-minutes", ("minutes", timeSinceDeath.Minutes))
@@ -444,7 +457,8 @@ namespace Content.Server.Ghost
             bool canReturn = false)
         {
             _transformSystem.TryGetMapOrGridCoordinates(targetEntity, out var spawnPosition);
-            return SpawnGhost(mind, spawnPosition, canReturn);
+            // RMC
+            return SpawnGhost(mind, spawnPosition, canReturn, targetEntity);
         }
 
         private bool IsValidSpawnPosition(EntityCoordinates? spawnPosition)
@@ -464,8 +478,10 @@ namespace Content.Server.Ghost
             return true;
         }
 
+        // RMC begin
         public EntityUid? SpawnGhost(Entity<MindComponent?> mind, EntityCoordinates? spawnPosition = null,
-            bool canReturn = false)
+            bool canReturn = false, EntityUid? appearanceSource = null)
+        // RMC end
         {
             if (!Resolve(mind, ref mind.Comp))
                 return null;
@@ -489,6 +505,13 @@ namespace Content.Server.Ghost
             var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
 
+            // RMC
+            if (appearanceSource is { } source)
+            {
+                _rmcGhostAppearance.CopyDeathAppearance(source, ghost);
+            }
+            // RMC
+
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".
             // However, that should rarely happen.
@@ -503,6 +526,10 @@ namespace Content.Server.Ghost
             }
 
             SetCanReturnToBody((ghost, ghostComponent), canReturn);
+
+            // RMC14
+            _cmGhost.SetPostDeathChatMute(ghost, (mind.Owner, mind.Comp), mind.Comp.OwnedEntity);
+            // RMC14
 
             if (canReturn)
                 _minds.Visit(mind.Owner, ghost, mind.Comp);
@@ -596,6 +623,11 @@ namespace Content.Server.Ghost
 
                     DamageSpecifier damage = new(_prototypeManager.Index(AsphyxiationDamageType), dealtDamage);
 
+                    if (HasComp<XenoComponent>(playerEntity))
+                    {
+                        damage = new(_prototypeManager.Index(BluntDamageType), dealtDamage);
+                    }
+
                     _damageable.TryChangeDamage(playerEntity, damage, true);
                 }
             }
@@ -603,7 +635,8 @@ namespace Content.Server.Ghost
             if (playerEntity != null)
                 _adminLog.Add(LogType.Mind, $"{ToPrettyString(playerEntity.Value):player} ghosted{(!canReturn ? " (non-returnable)" : "")}");
 
-            var ghost = SpawnGhost((mindId, mind), position, canReturn);
+            // RMC
+            var ghost = SpawnGhost((mindId, mind), position, canReturn, playerEntity);
 
             if (ghost == null)
                 return false;
