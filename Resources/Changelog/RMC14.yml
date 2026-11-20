@@ -1,161 +1,4 @@
 ﻿Entries:
-- author: PursuitinAshes
-  changes:
-  - message: Organs will now cause 75 units of grey matter to appear in your system,
-      best to avoid eating them now.
-    type: Tweak
-  id: 3288
-  time: '2026-06-06T22:57:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9931
-- author: Ian321
-  changes:
-  - message: Rifleman can no longer be squadless.
-    type: Tweak
-  - message: The id console now respects titles granted by pamphlets.
-    type: Fix
-  id: 3289
-  time: '2026-06-06T22:59:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9997
-- author: J C Denton
-  changes:
-  - message: Fixed a lot of entities working off infinite inner power.
-    type: Fix
-  id: 3290
-  time: '2026-06-06T23:20:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9975
-- author: kleinerstation13
-  changes:
-  - message: Security colonist job preference no longer rolls for Riot in Progress
-      Riot Control Team Lead on Fiorina, that role is now picked randomly
-    type: Tweak
-  id: 3291
-  time: '2026-06-06T23:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9940
-- author: kleinerstation13
-  changes:
-  - message: Fixed Type 64, UZI, Type 19, MP27, MAC15 and MP5 being the incorrect
-      size, they are now small in inventories as intended
-    type: Fix
-  id: 3292
-  time: '2026-06-06T23:24:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9990
-- author: kleinerstation13
-  changes:
-  - message: Replaced mention of 'xenomorph' with 'xenonid' in survivor briefings
-    type: Tweak
-  id: 3293
-  time: '2026-06-06T23:23:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9878
-- author: SharkSnake98
-  changes:
-  - message: Added the Corporate Bodyguard role and all their gear.
-    type: Add
-  - message: Added the Weston-Yamada Restricted Area sign for the CL's office.
-    type: Add
-  id: 3294
-  time: '2026-06-06T23:33:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8362
-- author: Vixting
-  changes:
-  - message: Added drones can now evolve to any tier 2 before marines drop (same restrictions)
-    type: Add
-  - message: Fixed queen evo option no longer displays if she is still alive
-    type: Fix
-  id: 3295
-  time: '2026-06-06T23:37:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9998
-- author: Thereisabear
-  changes:
-  - message: Added Playing cards!
-    type: Add
-  id: 3296
-  time: '2026-06-06T23:51:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9173
-- author: Utmanarn
-  changes:
-  - message: Changed the playtime rank system to allow players to select a preference
-      for what type of playtime rank they want to use.
-    type: Tweak
-  id: 3297
-  time: '2026-06-06T23:53:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6306
-- author: Bagietens
-  changes:
-  - message: Fixed do-after bars not drawing over xeno and other sprites while using
-      xeno night vision.
-    type: Fix
-  id: 3298
-  time: '2026-06-06T23:55:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10022
-- author: Aurallianz
-  changes:
-  - message: Added Larva Queue, players will not be able to ghost and join Xeno from
-      round start until after 15 minutes. You must have been dead for at least 5 minutes
-      before you can join the queue.
-    type: Add
-  id: 3299
-  time: '2026-06-07T00:38:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8788
-- author: Dygon
-  changes:
-  - message: Explosion now have a chance to destroy signal flares.
-    type: Fix
-  id: 3300
-  time: '2026-06-07T00:47:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9559
-- author: Vermidia
-  changes:
-  - message: Fixed Janibuckets and Mop buckets not being huge.
-    type: Fix
-  - message: Fixed Janibuckets storing too much (500u->300u)
-    type: Fix
-  - message: High-Capacity Beakers have been replaced with Reagent Jugs
-    type: Tweak
-  - message: Fixed Reagent Jugs storing too little (300u->500u), costs being wrong
-      (2.6~ metal sheets -> 10 glass sheets), and being printable in normal lathes
-      instead of the medilathe
-    type: Fix
-  id: 3301
-  time: '2026-06-07T00:48:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8316
-- author: MoonlightHollow
-  changes:
-  - message: Added 25 & 50 options for dispensing materials
-    type: Add
-  id: 3302
-  time: '2026-06-07T00:50:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9984
-- author: kleinerstation13
-  changes:
-  - message: Added sprites for alternate magazines on the AK-4047, PDW90, L57 SMG
-      and SSG45
-    type: Add
-  id: 3303
-  time: '2026-06-07T00:49:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9959
-- author: BreakpointDebug1234
-  changes:
-  - message: Added an alert for xenonids when no queen has been picked and the hive
-      is close to collapse
-    type: Add
-  id: 3304
-  time: '2026-06-07T01:32:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9235
-- author: Vixting
-  changes:
-  - message: Can now hold down left click to continually melee / fire. Can be disabled
-      in settings. (ported from upstream)
-    type: Add
-  id: 3305
-  time: '2026-06-07T01:33:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9141
-- author: BreakpointDebug1234
-  changes:
-  - message: Guidebook links to various items and structures
-    type: Add
-  id: 3306
-  time: '2026-06-07T01:47:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9387
 - author: Tuna224
   changes:
   - message: Made Parasite Infects not Cancelable via Double Click
@@ -4453,5 +4296,183 @@
   id: 3787
   time: '2026-11-18T23:03:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10583
+- author: TadJohnson00
+  changes:
+  - message: Adds the marine all-weather coat, a new outerwear item. Available in
+      vendors where service jackets are stocked.
+    type: Add
+  id: 3788
+  time: '2026-11-19T01:18:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9966
+- author: TadJohnson00
+  changes:
+  - message: Adjusted the sprites for most of the UNMC's peaked caps; they should
+      generally fit better on characters' heads.
+    type: Tweak
+  id: 3789
+  time: '2026-11-19T01:19:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9965
+- author: Dygon
+  changes:
+  - message: Fixed the evacuation fuel progress sometimes permanently staying at 0%.
+    type: Fix
+  id: 3790
+  time: '2026-11-19T05:21:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10600
+- author: SabreML
+  changes:
+  - message: Xeno weeds won't disappear naturally until every source node in range
+      is destroyed, rather than just the one which spawned them.
+    type: Add
+  id: 3791
+  time: '2026-11-19T05:45:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10357
+- author: Hank-Hill-Propane-Man
+  changes:
+  - message: Added M276 G8-A general utility pouch compatibility to Suit Storage for
+      External Webbing
+    type: Add
+  id: 3792
+  time: '2026-11-19T10:11:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10863
+- author: BreakpointDebug1234
+  changes:
+  - message: ICB liasion (ERT) now gets a recorder and an sidearm.
+    type: Add
+  id: 3793
+  time: '2026-11-19T10:11:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10449
+- author: SharkSnake98
+  changes:
+  - message: Removed the ability for desk-lamps to be stored in hats, belts, or on
+      suitstorage
+    type: Remove
+  - message: Changed it so desk-lamps can be stored inside of bags.
+    type: Tweak
+  id: 3794
+  time: '2026-11-19T10:22:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10695
+- author: ThataKat
+  changes:
+  - message: '[PVE] PMC Vendor contents have been tweaked. They now contain more WeYa
+      affiliated gear and more general utilities.'
+    type: Tweak
+  id: 3795
+  time: '2026-11-19T16:00:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10881
+- author: IceNoobXD
+  changes:
+  - message: Chance's Claim is also a victim of the map parity passover! It added
+      vehicle blockers to the reactor entrances, made the pipes appear below the planet
+      tiles, replaced the full m34 fuel tank and nailgun magazine boxes with empty
+      ones, replaced a few of the lathes with non-functional once and added way more
+      props!
+    type: Tweak
+  id: 3796
+  time: '2026-11-20T00:06:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10826
+- author: Vermidia
+  changes:
+  - message: Fixed shields of different types not stacking together. Shields with
+      effects (King, vanguard, etc) will apply their effects when processing damage
+      in order, and will stop processing if damage taken would be 0 (aka if unstable
+      was active and hedgehog uses spike shield, spikes would not shoot out until
+      unstable shield runs out).
+    type: Fix
+  - message: Fixed vanguard shield not properly counting the vanguard's slashes as
+      being in combat, and not updating last combat time if the vanguard shield wasn't
+      present (It should no longer fail to regen sometimes).
+    type: Fix
+  id: 3797
+  time: '2026-11-20T00:16:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10994
+- author: zuedev
+  changes:
+  - message: The mentorhelp rate limit is now enforced.
+    type: Fix
+  id: 3798
+  time: '2026-11-20T00:21:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10909
+- author: MidZik
+  changes:
+  - message: Doors, your own sprite, and other unpullable things no longer interfere
+      with trying to grab something under them.
+    type: Fix
+  id: 3799
+  time: '2026-11-20T00:22:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10951
+- author: kleinerstation13
+  changes:
+  - message: Added the M20 Assault Rifle, currently admin spawn only
+    type: Add
+  id: 3800
+  time: '2026-11-20T00:31:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10853
+- author: Jawel722
+  changes:
+  - message: The guidebook window can now be resized horizontally by dragging its
+      side edges.
+    type: Tweak
+  id: 3801
+  time: '2026-11-20T00:34:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10442
+- author: MidZik
+  changes:
+  - message: Fixed marines not being able to pick up undeployed sentries while in
+      combat mode.
+    type: Fix
+  - message: Fixed xenos not being able to attack certain items, like potted plants.
+    type: Fix
+  id: 3802
+  time: '2026-11-20T00:40:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10955
+- author: MidZik
+  changes:
+  - message: Open doors will no longer block melees/tackles against entities under
+      their sprite.
+    type: Fix
+  - message: Tile fires no longer block melee attacks against walls.
+    type: Fix
+  - message: Fixed some props/items blocking melee attacks or tackles, such as puddles
+      or undeployed sentries.
+    type: Fix
+  - message: Fixed xeno sound spam with rotary phones.
+    type: Fix
+  - message: Xenos will no longer be blocked by friendly xenos when trying to tackle
+      or melee enemy marines.
+    type: Tweak
+  - message: Marines will no longer be blocked by allied marines when trying to melee
+      xenos, weeds, or resin.
+    type: Tweak
+  id: 3803
+  time: '2026-11-20T00:51:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10952
+- author: Vermidia
+  changes:
+  - message: Carriers can now use Retrieve Egg/Carrier's Bond to add/remove parasites
+      from eggmorphers.
+    type: Add
+  - message: Fixed Retrieve Egg & Carrier's Bond requiring you to specifically click
+      an egg/parasite to mass collect them (it works as long as the click was close
+      enough).
+    type: Fix
+  id: 3804
+  time: '2026-11-20T00:52:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10341
+- author: Vermidia
+  changes:
+  - message: Fixed marines not attempting CPR on unconscious marines that have oxygen
+      damage.
+    type: Fix
+  id: 3805
+  time: '2026-11-20T00:57:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10935
+- author: Bagietens
+  changes:
+  - message: Added three-quarter night vision for xenos and ghosts
+    type: Add
+  id: 3806
+  time: '2026-11-20T00:58:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10715
 Name: RMC14
 Order: -1
