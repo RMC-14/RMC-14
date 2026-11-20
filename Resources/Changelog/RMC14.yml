@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Dropship camera feeds now remain active for 5 seconds after the selected
-      target disappears, instead of cutting out instantly.
-    type: Tweak
-  id: 3376
-  time: '2026-06-11T22:41:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10125
 - author: Vermidia
   changes:
   - message: Xenos grabbing a pulled target now starts devouring them.
@@ -4445,5 +4437,21 @@
   id: 3875
   time: '2026-11-20T18:18:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9953
+- author: IceNoobXD
+  changes:
+  - message: Changed the job icons from a lot of UNMC jobs to be more in line with
+      their cmss13 counterpart!
+    type: Tweak
+  - message: SEA's border is now grey. They are not officers, so should not have brown
+      borders. They do have a colored 'A', though.
+    type: Tweak
+  - message: Adds TacMap Icons Provost roles!
+    type: Add
+  - message: Added unique hudsquad icons for the seperate correspondent roles and
+      made them show next to their sprites in-game!
+    type: Tweak
+  id: 3876
+  time: '2026-11-20T23:12:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10655
 Name: RMC14
 Order: -1
