@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added sprites for alternate magazines on the AK-4047, PDW90, L57 SMG
-      and SSG45
-    type: Add
-  id: 3303
-  time: '2026-06-07T00:49:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9959
-- author: BreakpointDebug1234
-  changes:
-  - message: Added an alert for xenonids when no queen has been picked and the hive
-      is close to collapse
-    type: Add
-  id: 3304
-  time: '2026-06-07T01:32:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9235
 - author: Vixting
   changes:
   - message: Can now hold down left click to continually melee / fire. Can be disabled
@@ -4457,5 +4441,38 @@
   id: 3802
   time: '2026-11-20T00:40:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10955
+- author: MidZik
+  changes:
+  - message: Open doors will no longer block melees/tackles against entities under
+      their sprite.
+    type: Fix
+  - message: Tile fires no longer block melee attacks against walls.
+    type: Fix
+  - message: Fixed some props/items blocking melee attacks or tackles, such as puddles
+      or undeployed sentries.
+    type: Fix
+  - message: Fixed xeno sound spam with rotary phones.
+    type: Fix
+  - message: Xenos will no longer be blocked by friendly xenos when trying to tackle
+      or melee enemy marines.
+    type: Tweak
+  - message: Marines will no longer be blocked by allied marines when trying to melee
+      xenos, weeds, or resin.
+    type: Tweak
+  id: 3803
+  time: '2026-11-20T00:51:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10952
+- author: Vermidia
+  changes:
+  - message: Carriers can now use Retrieve Egg/Carrier's Bond to add/remove parasites
+      from eggmorphers.
+    type: Add
+  - message: Fixed Retrieve Egg & Carrier's Bond requiring you to specifically click
+      an egg/parasite to mass collect them (it works as long as the click was close
+      enough).
+    type: Fix
+  id: 3804
+  time: '2026-11-20T00:52:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10341
 Name: RMC14
 Order: -1
