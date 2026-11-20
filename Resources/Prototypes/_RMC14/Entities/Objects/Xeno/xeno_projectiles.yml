@@ -189,6 +189,7 @@
     slow: 5
     paralyze: 0
   - type: Projectile
+    ignoreResistances: true
     impactEffect: null
     damage:
       types:
@@ -199,6 +200,7 @@
     max: 4
   - type: RMCProjectileAccuracy
     accuracy: 135
+  - type: RMCBullet
   - type: ProjectileCoverInteraction
     stoppedByCover: true
 
