@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed dropships, evac pods and lifeboats having no areas and no power.
-    type: Fix
-  id: 3332
-  time: '2026-06-08T02:03:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10043
 - author: DrSmugleaf
   changes:
   - message: Fixed two large performance issues causing server rubberbanding during
@@ -4439,5 +4432,20 @@
   id: 3831
   time: '2026-11-20T05:33:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10608
+- author: Vermidia
+  changes:
+  - message: Fixed how spitter/acider/etc lingering acid works. Acid of all tiers
+      now does the same damage, that is multiplied by 2x, x3, and x4 at 21, 30, and
+      50 respectively. Higher acid tiers have a longer max duration instead, and now
+      acid applying moves generally prolong the duration of the acid instead of replacing
+      it. Attempting to extinguish acid removes 27 seconds from the duration instead
+      of having a resist count. Sprites have changed slightly.
+    type: Fix
+  - message: Fixed non-spitter sprays enhancing acid. Spitter acid spray now does
+      25 extra damage on successful enhancing/duration prolonging.
+    type: Fix
+  id: 3832
+  time: '2026-11-20T05:34:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10215
 Name: RMC14
 Order: -1
