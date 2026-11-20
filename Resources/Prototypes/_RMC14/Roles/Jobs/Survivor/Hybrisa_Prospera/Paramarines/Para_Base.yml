@@ -4,7 +4,7 @@
   name: rmc-job-name-para
   description: rmc-job-description-para
   ranks:
-    RMCRankParaPrivateSecondClass: []
+    RCMRankParamarine: []
   supervisors: cm-job-supervisors-royal-tl
   accessGroups:
     - Colonist
@@ -13,7 +13,7 @@
   hasIcon: true
   greeting: rmc-job-greeting-para
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Royal Paramarine Survivor (Base)
+  spawnMenuRoleName: Royal Paramarine (Hybrisa Special Survivor)
   abstract: true
   hidden: true
 

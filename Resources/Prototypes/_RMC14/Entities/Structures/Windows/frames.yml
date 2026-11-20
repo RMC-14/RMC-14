@@ -46,6 +46,10 @@
               CMSheetMetal1:
                 min: 2
                 max: 2
+  - type: VehicleSmashable
+    deleteOnHit: true
+    minDestroyWeightClass: Light
+    minContinueWeightClass: Medium
   - type: InteractionOutline
   - type: Clickable
   - type: Climbable
@@ -69,6 +73,8 @@
       types:
         Blunt: 80
   - type: XenoCrusherChargable
+    instantDestroy: True
+    passOnDestroy: True
   - type: RMCMesonsNonviewable
   - type: Tag
     tags:

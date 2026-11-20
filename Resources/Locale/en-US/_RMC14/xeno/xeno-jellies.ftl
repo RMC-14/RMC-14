@@ -48,4 +48,5 @@ rmc-hivemanagement-must-overwatch = You must overwatch the xeno you want to de-e
 rmc-hivemanagement-cant-be-devolved = { $name } can't be devolved!
 rmc-hivemanagement-cant-deevolve-larva = You cannot deevolve xenonids to larva.
 rmc-hivemanagement-cant-deevolve-other-hive = You cannot deevolve a member of another hive!
+rmc-hivemanagement-manage-teams = Manage Hive Teams
 

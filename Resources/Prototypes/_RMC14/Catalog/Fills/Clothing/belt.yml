@@ -62,6 +62,27 @@
       amount: 1
 
 - type: entity
+  parent: RMCBeltMedicBagPMC
+  id: RMCBeltMedicBagPMCFilledPartial
+  suffix: Filled, Partial
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMUpgradedBurnKit10
+      amount: 1
+    - id: CMUpgradedTraumaKit10
+      amount: 1
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    - id: CMHealthAnalyzer
+      amount: 1
+    # TODO RMC14 nanosplint, oxy hypospray, tramadol pill
+
+- type: entity
   parent: CMBeltMedicalFilled
   id: RMCBeltMedicalDefibAnalyzerFilled
   suffix: Filled, Better
@@ -152,12 +173,13 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeHighExplosive
-      amount: 5
-    - id: CMGrenadeFrag
-      amount: 1
+      amount: 3
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 2
     - id: RMCGrenadeIncendiary
       amount: 2
-    # TODO Original is 3 HEDP, 2 HIDP incen, 2 airburst frag, 1 airburst incen
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 1
 
 - type: entity
   parent: RMCBeltGrenadeLarge
@@ -167,12 +189,13 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeHighExplosive
-      amount: 12
-    - id: CMGrenadeFrag
-      amount: 3
+      amount: 6
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 6
     - id: RMCGrenadeIncendiary
       amount: 3
-    # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 3
 
 - type: entity
   parent: RMCBeltGrenadeLarge
@@ -258,12 +281,12 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: CMBeltMarineMP5
-  suffix: Filled, MP5
+  id: RMCBeltMarinePCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 5
 
 - type: entity
@@ -274,6 +297,26 @@
   - type: StorageFill
     contents:
     - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: RMCBeltNV
+  id: RMCBeltNVFilledMK1
+  suffix: Filled, MK1
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: RMCBeltNV
+  id: RMCBeltNVFilledM16
+  suffix: Filled, M16
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
       amount: 5
 
 - type: entity
@@ -392,7 +435,7 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolHandcannonFilled
-  suffix: Filled, Handcannon
+  suffix: Filled, Peregrine
   components:
   - type: StorageFill
     contents:
@@ -400,6 +443,17 @@
       amount: 6
     - id: RMCWeaponPistolHandcannon
 
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id:  RMCBeltHolsterPistolHandcannonProvostFilled
+  suffix: Filled, Provost Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 6
+    - id: RMCWeaponPistolHandcannonProvost
+   
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCM77BeltFilled
@@ -445,6 +499,39 @@
     - id: RMCMK80
 
 - type: entity
+  parent: RMCBeltHolsterPistolWeYa
+  id: RMCBeltHolsterPistolWeYaM77Fill
+  suffix: Filled, M77
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolWeYa
+  id: RMCBeltHolsterPistolWeYaPK7Fill
+  suffix: Filled, PK7
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolPK7
+      amount: 6
+    - id: RMCWeaponPistolPK7
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCMK80BeltSurvivorFill
+  suffix: Filled, MK80, Tyrargo, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 3
+    - id: RMCMK80Survivor
+
+- type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigFill
   suffix: Filled
@@ -460,6 +547,20 @@
     - id: CMShellShotgunIncendiary
       amount: 3
     - id: CMShellShotgunIncendiaryBuckshot
+      amount: 3
+
+- type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigFillNV
+  suffix: Filled, NV
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 2
+    - id: CMShellShotgunSlugs
+      amount: 3
+    - id: CMShellShotgunFlechette
       amount: 3
 
 - type: entity
@@ -488,6 +589,17 @@
     - id: CMWeaponPistolM1911
 
 - type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolSurvivorFilled
+  suffix: Filled, Tyrargo, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 2
+    - id: RMCWeaponPistolM77Survivor
+
+- type: entity
   parent: RMCBeltHolsterSMGPouch
   id: RMCHolsterSMGPouchFilledExtended
   suffix: Filled, Extended Mag
@@ -499,9 +611,20 @@
     - id: RMCWeaponSMGM63ExtendedFilled
 
 - type: entity
+  parent: RMCBeltHolsterSMGPouch
+  id: RMCHolsterSMGPouchFilledSurvivor
+  suffix: Filled, Tyrargo, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63
+      amount: 2
+    - id: RMCWeaponSMGM63FilledSurvivor
+
+- type: entity
   parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilled
-  suffix: Filled
+  suffix: Filled, Golden
   components:
   - type: StorageFill
     contents:
@@ -510,12 +633,11 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMatebaGold
-    - id: RMCMatebaCustomizationCaseLuxury
 
 - type: entity
   parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilledWEYA
-  suffix: Filled, WEYA Director
+  suffix: Filled, Golden, WEYA Director
   components:
   - type: StorageFill
     contents:
@@ -526,6 +648,19 @@
     - id: RMCSpeedLoaderMatebaHE
       amount: 2
     - id: RMCWeaponRevolverMatebaGold
+
+- type: entity
+  parent: RMCMatebaBeltLuxurious
+  id: RMCMatebaBeltLuxuriousFilledSilver
+  suffix: Filled, Silver
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMatebaSilver
 
 - type: entity
   parent: RMCMatebaBelt
@@ -542,7 +677,7 @@
 - type: entity
   parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
-  suffix: Filled, Mateba
+  suffix: Filled, Mateba Custom
   components:
   - type: StorageFill
     contents:
@@ -551,6 +686,19 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMateba
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltSpecialFilled
+  suffix: Filled, Mateba Special
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMatebaSpecial
 
 - type: entity
   parent: RMCMatebaBelt
@@ -675,8 +823,8 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCD50WinterWyvernBeltFilledAmmo
-  suffix: Filled, Winter Wyvern Ammo
+  id: RMCPeregrineHandcannonBeltFilledAmmo
+  suffix: Filled, Peregrine Ammo
   components:
   - type: StorageFill
     contents:
@@ -687,8 +835,8 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCD50WinterWyvernBeltFilled
-  suffix: Filled, Winter Wyvern
+  id: RMCPeregrineHandcannonBeltFilled
+  suffix: Filled, Custom Peregrine
   components:
   - type: StorageFill
     contents:
@@ -696,12 +844,12 @@
       amount: 4
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
-    - id: RMCWeaponPistolHandcannonWinterWyvern
+    - id: RMCWeaponPistolHandcannonCustom
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: GoldHandcannonBeltFilled
-  suffix: Filled, Gold Handcannon
+  id: RMCGoldHandcannonBeltFilled
+  suffix: Filled, Gold Peregrine
   components:
   - type: StorageFill
     contents:
@@ -710,6 +858,19 @@
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
     - id: RMCWeaponPistolHandcannonGold
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCPolishedHandcannonBeltFilled
+  suffix: Filled, Polished Peregrine
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+    - id: RMCWeaponPistolHandcannonPolished
 
 - type: entity
   parent: CMBeltMarine
@@ -834,7 +995,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleType77
       amount: 2
 
 - type: entity

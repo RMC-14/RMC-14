@@ -18,6 +18,11 @@
       settings: parasiteTimeRequirement
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+  - type: FiremanCarriable
+    canThrow: true
+    carrierWhitelist:
+      components:
+      - Synth
   - type: MobState
     allowedStates:
     - Alive
@@ -38,6 +43,8 @@
     - ActionXenoLeap
     tier: 0
     hudOffset: -0.1,0.1
+    hudRankIconScale: 0.85
+    hudRankIconOffset: 0.06,0.15
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
@@ -136,15 +143,23 @@
       3: rmc-xeno-elder-parasite
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
+      6: rmc-xeno-prime-parasite
+      7: rmc-xeno-prime-parasite
+      8: rmc-xeno-prime-parasite
+      9: rmc-xeno-prime-parasite
   - type: FixedIdentity
     name: cm-job-name-xeno-parasite
   - type: VentCrawler
     ventCrawlIcon: parasite
   - type: Unshieldable
   - type: ExcludedFromKingVote
+  - type: MindTakeoverBehavior
+    ejectFromLarvaQueues: false
   - type: RemoveComponents
     components:
     - type: ComplexInteraction
+    - type: CanBeLarvaQueued
+    - type: XenoLastStandable
 
 - type: entity
   parent: CMXenoParasiteBase

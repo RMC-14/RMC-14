@@ -9,10 +9,13 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleDrone
-  - type: GhostRole
-    name: cm-job-name-xeno-larva
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
+  - type: FiremanCarriable
+    canThrow: true
+    carrierWhitelist:
+      components:
+      - Synth
   - type: MobState
     allowedStates:
     - Alive
@@ -30,6 +33,8 @@
     - ActionXenoWatch
     - ActionXenoHide
     hudOffset: -0.1,0.25
+    hudRankIconScale: 0.85
+    hudRankIconOffset: 0.06,0.15
     tier: 0
     unlockAt: 0
     emoteSounds: Larva
@@ -96,8 +101,12 @@
       0: rmc-xeno-young-larva
       2: rmc-xeno-mature-larva
       3: rmc-xeno-elder-larva
-      4: rmc-xeno-elder-larva
-      5: rmc-xeno-elder-larva
+      4: rmc-xeno-ancient-larva
+      5: rmc-xeno-prime-larva
+      6: rmc-xeno-prime-larva
+      7: rmc-xeno-prime-larva
+      8: rmc-xeno-prime-larva
+      9: rmc-xeno-prime-larva
   - type: FixedIdentity
     name: cm-job-name-xeno-larva
   - type: VentCrawler

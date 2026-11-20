@@ -18,6 +18,7 @@ rmc-shoot-use-delay = You need to wait {$seconds} seconds before shooting {THE($
 
 rmc-shoot-harness-required = Harness required
 rmc-wear-smart-gun-required = You must have your smart gun equipped to wear these.
+rmc-gun-arc-blocked = You cannot fire outside of the weapon's firing arc.
 
 rmc-shoot-id-lock-unauthorized = Trigger locked. Unauthorized user.
 rmc-id-lock-unauthorized = Action denied. Unauthorized user.

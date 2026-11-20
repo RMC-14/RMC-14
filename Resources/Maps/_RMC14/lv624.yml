@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/20/2026 14:18:43
-  entityCount: 24019
+  time: 06/27/2026 14:35:00
+  entityCount: 24084
 maps:
 - 1
 grids:
@@ -41611,11 +41611,10 @@ entities:
   - uid: 5
     components:
     - type: Transform
-      parent: 4
+      pos: -23.5,-76.5
+      parent: 1
     - type: HideLayerClothing
       slots: null
-    - type: Physics
-      canCollide: False
     - type: InsideEntityStorage
 - proto: BeachBall
   entities:
@@ -42781,6 +42780,14 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
+  - uid: 24082
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -58.5,-82.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
 - proto: CMApcNoPower
   entities:
   - uid: 143
@@ -42949,6 +42956,14 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.5,-1.5
+  - uid: 24083
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 49.5,-87.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
 - proto: CMAutolathe
   entities:
   - uid: 164
@@ -44834,7 +44849,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 3891.1294422
     - type: Door
-      secondsUntilStateChange: -32751.262
+      secondsUntilStateChange: -34832.777
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -44852,7 +44867,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 3891.1294422
     - type: Door
-      secondsUntilStateChange: -32751.262
+      secondsUntilStateChange: -34832.777
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -55575,6 +55590,8 @@ entities:
     - type: Transform
       pos: -7.5,-33.5
       parent: 1
+    - type: CMMedicalSupplyLink
+      connectedPort: True
 - proto: CMMicrowave
   entities:
   - uid: 2487
@@ -56637,11 +56654,15 @@ entities:
       rot: 3.141592653589793 rad
       pos: 35.5,35.5
       parent: 1
+    missingComponents:
+    - Damageable
   - uid: 2691
     components:
     - type: Transform
       pos: 32.5,35.5
       parent: 1
+    missingComponents:
+    - Damageable
 - proto: CMSemioticAnalysis_lab
   entities:
   - uid: 2692
@@ -58814,8 +58835,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 16.5,-68.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
     - type: ContainerContainer
       containers:
         rmc_vent_container: !type:Container
@@ -58827,8 +58846,6 @@ entities:
     - type: Transform
       pos: 16.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
     - type: ContainerContainer
       containers:
         rmc_vent_container: !type:Container
@@ -58840,8 +58857,6 @@ entities:
     - type: Transform
       pos: 20.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
     - type: ContainerContainer
       containers:
         rmc_vent_container: !type:Container
@@ -58854,8 +58869,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 39.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
     - type: ContainerContainer
       containers:
         rmc_vent_container: !type:Container
@@ -58867,8 +58880,6 @@ entities:
     - type: Transform
       pos: 40.5,-61.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
     - type: ContainerContainer
       containers:
         rmc_vent_container: !type:Container
@@ -58881,8 +58892,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 46.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
     - type: ContainerContainer
       containers:
         rmc_vent_container: !type:Container
@@ -58895,8 +58904,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 21.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
     - type: ContainerContainer
       containers:
         rmc_vent_container: !type:Container
@@ -58908,8 +58915,6 @@ entities:
     - type: Transform
       pos: 46.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
     - type: ContainerContainer
       containers:
         rmc_vent_container: !type:Container
@@ -58922,8 +58927,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 44.5,-68.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
 - proto: CMVinesHeavy
   entities:
   - uid: 3099
@@ -137040,28 +137043,6 @@ entities:
     - type: Transform
       pos: 34.5,-67.5
       parent: 1
-- proto: FoodDonkpocket
-  entities:
-  - uid: 18677
-    components:
-    - type: Transform
-      pos: 37.36409,-83.554825
-      parent: 1
-  - uid: 18678
-    components:
-    - type: Transform
-      pos: 37.629715,-83.38295
-      parent: 1
-  - uid: 18679
-    components:
-    - type: Transform
-      pos: 37.92659,-83.242325
-      parent: 1
-  - uid: 18680
-    components:
-    - type: Transform
-      pos: 40.5,-61.5
-      parent: 1
 - proto: FoodMeat
   entities:
   - uid: 18681
@@ -140082,6 +140063,278 @@ entities:
     components:
     - type: Transform
       pos: 38.5,-7.5
+      parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 24028
+    components:
+    - type: Transform
+      pos: -37.5,-13.5
+      parent: 1
+  - uid: 24029
+    components:
+    - type: Transform
+      pos: -37.5,-12.5
+      parent: 1
+  - uid: 24030
+    components:
+    - type: Transform
+      pos: -54.5,-0.5
+      parent: 1
+  - uid: 24031
+    components:
+    - type: Transform
+      pos: -37.5,-7.5
+      parent: 1
+  - uid: 24032
+    components:
+    - type: Transform
+      pos: -37.5,-6.5
+      parent: 1
+  - uid: 24033
+    components:
+    - type: Transform
+      pos: -54.5,0.5
+      parent: 1
+  - uid: 24034
+    components:
+    - type: Transform
+      pos: -54.5,2.5
+      parent: 1
+  - uid: 24035
+    components:
+    - type: Transform
+      pos: -54.5,3.5
+      parent: 1
+  - uid: 24036
+    components:
+    - type: Transform
+      pos: -54.5,1.5
+      parent: 1
+  - uid: 24037
+    components:
+    - type: Transform
+      pos: -38.5,7.5
+      parent: 1
+  - uid: 24038
+    components:
+    - type: Transform
+      pos: -36.5,7.5
+      parent: 1
+  - uid: 24039
+    components:
+    - type: Transform
+      pos: -37.5,7.5
+      parent: 1
+  - uid: 24040
+    components:
+    - type: Transform
+      pos: -35.5,7.5
+      parent: 1
+  - uid: 24041
+    components:
+    - type: Transform
+      pos: 14.5,21.5
+      parent: 1
+  - uid: 24042
+    components:
+    - type: Transform
+      pos: 14.5,22.5
+      parent: 1
+  - uid: 24043
+    components:
+    - type: Transform
+      pos: 14.5,23.5
+      parent: 1
+  - uid: 24044
+    components:
+    - type: Transform
+      pos: 18.5,34.5
+      parent: 1
+  - uid: 24045
+    components:
+    - type: Transform
+      pos: 19.5,34.5
+      parent: 1
+  - uid: 24046
+    components:
+    - type: Transform
+      pos: 20.5,34.5
+      parent: 1
+  - uid: 24047
+    components:
+    - type: Transform
+      pos: 21.5,34.5
+      parent: 1
+  - uid: 24048
+    components:
+    - type: Transform
+      pos: 47.5,26.5
+      parent: 1
+  - uid: 24049
+    components:
+    - type: Transform
+      pos: 46.5,26.5
+      parent: 1
+  - uid: 24050
+    components:
+    - type: Transform
+      pos: 45.5,26.5
+      parent: 1
+  - uid: 24051
+    components:
+    - type: Transform
+      pos: 44.5,26.5
+      parent: 1
+  - uid: 24052
+    components:
+    - type: Transform
+      pos: 50.5,25.5
+      parent: 1
+  - uid: 24053
+    components:
+    - type: Transform
+      pos: 50.5,24.5
+      parent: 1
+  - uid: 24054
+    components:
+    - type: Transform
+      pos: 50.5,23.5
+      parent: 1
+  - uid: 24055
+    components:
+    - type: Transform
+      pos: 57.5,19.5
+      parent: 1
+  - uid: 24056
+    components:
+    - type: Transform
+      pos: 59.5,19.5
+      parent: 1
+  - uid: 24057
+    components:
+    - type: Transform
+      pos: 58.5,19.5
+      parent: 1
+  - uid: 24058
+    components:
+    - type: Transform
+      pos: 61.5,19.5
+      parent: 1
+  - uid: 24059
+    components:
+    - type: Transform
+      pos: 60.5,19.5
+      parent: 1
+  - uid: 24060
+    components:
+    - type: Transform
+      pos: 57.5,7.5
+      parent: 1
+  - uid: 24061
+    components:
+    - type: Transform
+      pos: 58.5,7.5
+      parent: 1
+  - uid: 24062
+    components:
+    - type: Transform
+      pos: 59.5,7.5
+      parent: 1
+  - uid: 24063
+    components:
+    - type: Transform
+      pos: 60.5,7.5
+      parent: 1
+  - uid: 24064
+    components:
+    - type: Transform
+      pos: 61.5,7.5
+      parent: 1
+  - uid: 24065
+    components:
+    - type: Transform
+      pos: 69.5,6.5
+      parent: 1
+  - uid: 24066
+    components:
+    - type: Transform
+      pos: 70.5,6.5
+      parent: 1
+  - uid: 24067
+    components:
+    - type: Transform
+      pos: 71.5,6.5
+      parent: 1
+  - uid: 24068
+    components:
+    - type: Transform
+      pos: 72.5,6.5
+      parent: 1
+  - uid: 24069
+    components:
+    - type: Transform
+      pos: 72.5,5.5
+      parent: 1
+  - uid: 24070
+    components:
+    - type: Transform
+      pos: 74.5,19.5
+      parent: 1
+  - uid: 24071
+    components:
+    - type: Transform
+      pos: 76.5,19.5
+      parent: 1
+  - uid: 24072
+    components:
+    - type: Transform
+      pos: 77.5,19.5
+      parent: 1
+  - uid: 24073
+    components:
+    - type: Transform
+      pos: 75.5,19.5
+      parent: 1
+  - uid: 24074
+    components:
+    - type: Transform
+      pos: 78.5,19.5
+      parent: 1
+  - uid: 24075
+    components:
+    - type: Transform
+      pos: 61.5,27.5
+      parent: 1
+  - uid: 24076
+    components:
+    - type: Transform
+      pos: 61.5,26.5
+      parent: 1
+  - uid: 24077
+    components:
+    - type: Transform
+      pos: 62.5,26.5
+      parent: 1
+  - uid: 24078
+    components:
+    - type: Transform
+      pos: 64.5,26.5
+      parent: 1
+  - uid: 24079
+    components:
+    - type: Transform
+      pos: 63.5,26.5
+      parent: 1
+  - uid: 24080
+    components:
+    - type: Transform
+      pos: 66.5,25.5
+      parent: 1
+  - uid: 24081
+    components:
+    - type: Transform
+      pos: 66.5,24.5
       parent: 1
 - proto: RMCBookcase
   entities:
@@ -143888,9 +144141,8 @@ entities:
   - uid: 6
     components:
     - type: Transform
-      parent: 4
-    - type: Physics
-      canCollide: False
+      pos: -23.5,-76.5
+      parent: 1
     - type: InsideEntityStorage
 - proto: RMCCigarette
   entities:
@@ -146691,6 +146943,15 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 35.432106,-8.650699
       parent: 1
+- proto: RMCFloorSafe
+  entities:
+  - uid: 21563
+    components:
+    - type: MetaData
+      name: safe
+    - type: Transform
+      pos: 19.5,-90.5
+      parent: 1
 - proto: RMCFloorShallowWaterEntityBelowPipes
   entities:
   - uid: 20224
@@ -148006,7 +148267,7 @@ entities:
     - type: Transform
       pos: 34.5,36.5
       parent: 1
-- proto: RMCFogWallWeed30
+- proto: RMCFogWallWeed
   entities:
   - uid: 20429
     components:
@@ -148102,6 +148363,28 @@ entities:
     components:
     - type: Transform
       pos: -21.5,7.5
+      parent: 1
+- proto: RMCFoodDonkpocket
+  entities:
+  - uid: 18677
+    components:
+    - type: Transform
+      pos: 37.36409,-83.554825
+      parent: 1
+  - uid: 18678
+    components:
+    - type: Transform
+      pos: 37.629715,-83.38295
+      parent: 1
+  - uid: 18679
+    components:
+    - type: Transform
+      pos: 37.92659,-83.242325
+      parent: 1
+  - uid: 18680
+    components:
+    - type: Transform
+      pos: 40.5,-61.5
       parent: 1
 - proto: RMCFoodPacketBarcaridineTrash
   entities:
@@ -148244,1303 +148527,930 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 21.5,-63.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NWBend
   - uid: 20457
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 21.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: SEBend
-  - uid: 20458
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 20.5,-66.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NWBend
   - uid: 20459
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 18.5,-66.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: SEBend
   - uid: 20460
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 18.5,-72.5
+      pos: 20.5,-66.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NWBend
   - uid: 20461
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 17.5,-72.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: SEBend
   - uid: 20462
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 17.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NEBend
   - uid: 20463
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 31.5,-76.5
+      rot: 3.141592653589793 rad
+      pos: 30.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NWBend
-  - uid: 20464
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 40.5,-62.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NWBend
-  - uid: 20465
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 36.5,-69.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NWBend
   - uid: 20466
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 36.5,-68.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: SEBend
-  - uid: 20467
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 30.5,-78.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NEBend
   - uid: 20468
     components:
     - type: Transform
       pos: 47.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
   - uid: 20469
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 47.5,-87.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NWBend
   - uid: 20470
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 46.5,-87.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: SEBend
   - uid: 20471
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 37.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: SEBend
   - uid: 20472
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 37.5,-94.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NWBend
   - uid: 20473
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,-94.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NEBend
-  - uid: 20474
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 26.5,-90.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-      travelDirection: NEBend
   - uid: 20475
     components:
     - type: Transform
       pos: 26.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: SWBend
-- proto: RMCGasPipeStraight
-  entities:
-  - uid: 20476
+  - uid: 20477
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 18.5,-72.5
+      parent: 1
+  - uid: 20526
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 40.5,-62.5
+      parent: 1
+  - uid: 20530
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 36.5,-69.5
+      parent: 1
+  - uid: 20577
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 17.5,-75.5
+      pos: 26.5,-90.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-  - uid: 20477
+  - uid: 20603
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 31.5,-76.5
+      parent: 1
+- proto: RMCGasPipeStraight
+  entities:
+  - uid: 20458
+    components:
+    - type: Transform
+      pos: 17.5,-73.5
+      parent: 1
+  - uid: 20464
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 32.5,-62.5
+      parent: 1
+  - uid: 20465
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 35.5,-69.5
+      parent: 1
+  - uid: 20467
+    components:
+    - type: Transform
+      pos: 30.5,-77.5
+      parent: 1
+  - uid: 20474
+    components:
+    - type: Transform
+      pos: 26.5,-89.5
+      parent: 1
+  - uid: 20476
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 17.5,-74.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20478
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 17.5,-73.5
+      pos: 17.5,-75.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20479
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,-70.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20480
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,-69.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20481
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,-68.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20482
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,-67.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20483
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 19.5,-66.5
+      pos: 20.5,-64.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20484
     components:
     - type: Transform
       pos: 20.5,-65.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20485
     components:
     - type: Transform
-      pos: 20.5,-64.5
+      rot: -1.5707963267948966 rad
+      pos: 19.5,-66.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20486
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 22.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20487
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 23.5,-62.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20488
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 24.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20489
+  - uid: 20488
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 25.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
+  - uid: 20489
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 23.5,-62.5
+      parent: 1
   - uid: 20490
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 26.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20491
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 27.5,-62.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20492
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
+  - uid: 20492
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 30.5,-62.5
+      parent: 1
   - uid: 20493
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 28.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20494
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 18.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20495
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 19.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20496
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 20.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20497
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 21.5,-76.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20498
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 22.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20499
+  - uid: 20498
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
+  - uid: 20499
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 21.5,-76.5
+      parent: 1
   - uid: 20500
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 24.5,-76.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20501
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 25.5,-76.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20502
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 26.5,-76.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20503
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 27.5,-76.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20504
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 28.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20505
+  - uid: 20501
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20506
+  - uid: 20502
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 31.5,-75.5
+      rot: -1.5707963267948966 rad
+      pos: 27.5,-76.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-  - uid: 20507
+  - uid: 20503
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 24.5,-76.5
+      parent: 1
+  - uid: 20504
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 25.5,-76.5
+      parent: 1
+  - uid: 20505
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 26.5,-76.5
+      parent: 1
+  - uid: 20506
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,-74.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
+  - uid: 20507
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,-75.5
+      parent: 1
   - uid: 20508
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,-73.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20509
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,-72.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20510
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,-71.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20511
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,-70.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20512
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 31.5,-68.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-  - uid: 20513
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 31.5,-67.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-  - uid: 20514
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 31.5,-66.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-  - uid: 20515
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 31.5,-65.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-  - uid: 20516
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,-64.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-  - uid: 20517
+  - uid: 20513
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,-63.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
+  - uid: 20514
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,-65.5
+      parent: 1
+  - uid: 20515
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,-66.5
+      parent: 1
+  - uid: 20516
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,-67.5
+      parent: 1
+  - uid: 20517
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,-68.5
+      parent: 1
   - uid: 20518
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 30.5,-62.5
+      pos: 27.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20519
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 32.5,-62.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20520
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 33.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20521
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,-62.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20522
+  - uid: 20520
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 35.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20523
+  - uid: 20521
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 36.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
+  - uid: 20522
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,-62.5
+      parent: 1
+  - uid: 20523
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 39.5,-62.5
+      parent: 1
   - uid: 20524
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 37.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20525
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 38.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20526
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 39.5,-62.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20527
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 32.5,-69.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20528
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 33.5,-69.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20529
+  - uid: 20528
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 34.5,-69.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20530
+  - uid: 20529
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 37.5,-68.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20531
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 38.5,-68.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20532
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 39.5,-68.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20533
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 40.5,-68.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20534
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 41.5,-68.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20535
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 42.5,-68.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20536
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 43.5,-68.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20537
+  - uid: 20532
     components:
     - type: Transform
-      pos: 30.5,-77.5
+      rot: 1.5707963267948966 rad
+      pos: 42.5,-68.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
+  - uid: 20533
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 41.5,-68.5
+      parent: 1
+  - uid: 20534
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 40.5,-68.5
+      parent: 1
+  - uid: 20535
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 39.5,-68.5
+      parent: 1
+  - uid: 20536
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 38.5,-68.5
+      parent: 1
   - uid: 20538
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-79.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20539
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-80.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20540
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-81.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20541
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-82.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20542
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-83.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20543
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-84.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20544
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-85.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20545
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 32.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20546
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 33.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20547
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 34.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20548
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 35.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20549
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 36.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20550
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 37.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20551
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 38.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20552
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 39.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20553
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 40.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20554
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 41.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20555
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 42.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20556
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 43.5,-78.5
+      rot: 1.5707963267948966 rad
+      pos: 44.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20557
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 44.5,-78.5
+      rot: 1.5707963267948966 rad
+      pos: 43.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20558
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 45.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20559
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 46.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20560
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 47.5,-79.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20561
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 47.5,-80.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20562
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 47.5,-81.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20563
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 47.5,-82.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20564
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 47.5,-83.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20565
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 47.5,-84.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20566
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 47.5,-85.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20567
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 47.5,-86.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20568
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 17.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20569
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 18.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20570
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 19.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20571
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 20.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20572
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 21.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20573
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 22.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20574
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20575
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 24.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20576
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 25.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20577
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 26.5,-89.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20578
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 28.5,-90.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20579
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 29.5,-90.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
-  - uid: 20580
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 30.5,-90.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
+  - uid: 20579
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 28.5,-90.5
+      parent: 1
+  - uid: 20580
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,-90.5
+      parent: 1
   - uid: 20581
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-89.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20582
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-88.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20583
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-87.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20584
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-86.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20585
     components:
     - type: Transform
-      pos: 31.5,-92.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-  - uid: 20586
-    components:
-    - type: Transform
+      rot: 3.141592653589793 rad
       pos: 31.5,-91.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
   - uid: 20587
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 30.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20588
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 29.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20589
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 28.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20590
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 27.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20591
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 26.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20592
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 25.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20593
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 24.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20594
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 23.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20595
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 22.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20596
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 32.5,-94.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20597
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 33.5,-94.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20598
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 34.5,-94.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20599
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 35.5,-94.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20600
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 36.5,-94.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
   - uid: 20601
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 38.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Longitudinal
-      travelDirection: Lateral
+  - uid: 20608
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,-92.5
+      parent: 1
+  - uid: 24020
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 18.5,-71.5
+      parent: 1
+  - uid: 24021
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 32.5,-69.5
+      parent: 1
+  - uid: 24022
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 27.5,-90.5
+      parent: 1
 - proto: RMCGasPipeTJunction
   entities:
+  - uid: 20537
+    components:
+    - type: Transform
+      pos: 30.5,-76.5
+      parent: 1
+  - uid: 20586
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 31.5,-90.5
+      parent: 1
   - uid: 20602
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 20.5,-63.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: TSouth
-      travelDirection: TEast
-  - uid: 20603
-    components:
-    - type: Transform
-      pos: 30.5,-76.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: TSouth
   - uid: 20604
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 31.5,-69.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: TSouth
-      travelDirection: TEast
   - uid: 20605
     components:
     - type: Transform
       pos: 31.5,-62.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: TSouth
   - uid: 20606
     components:
     - type: Transform
       pos: 31.5,-78.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: TSouth
   - uid: 20607
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 31.5,-90.5
-      parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: TSouth
-      travelDirection: TWest
-  - uid: 20608
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 31.5,-93.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: TSouth
-      travelDirection: TWest
 - proto: RMCGasTankPhoronFilled
   entities:
   - uid: 20609
@@ -153601,7 +153511,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCHeadCapFerret
+- proto: RMCHeadCapGrey
   entities:
   - uid: 21259
     components:
@@ -153916,6 +153826,30 @@ entities:
     components:
     - type: Transform
       pos: 36.5,26.5
+      parent: 1
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 34.5,32.5
+      parent: 1
+  - uid: 24023
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 19.5,-91.5
+      parent: 1
+  - uid: 24024
+    components:
+    - type: Transform
+      pos: -5.5,-47.5
+      parent: 1
+  - uid: 24026
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -56.5,-96.5
       parent: 1
 - proto: RMCItemPoolBuckshot
   entities:
@@ -154353,9 +154287,8 @@ entities:
   - uid: 7
     components:
     - type: Transform
-      parent: 4
-    - type: Physics
-      canCollide: False
+      pos: -23.5,-76.5
+      parent: 1
     - type: InsideEntityStorage
 - proto: RMCKitchenKnife
   entities:
@@ -155313,41 +155246,16 @@ entities:
       parent: 1
 - proto: RMCLockerSecureSafe
   entities:
-  - uid: 4
+  - uid: 24025
     components:
     - type: Transform
       pos: -23.5,-76.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 6
-          - 8
-          - 7
-          - 5
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 21563
+  - uid: 24027
     components:
     - type: Transform
       pos: -56.5,-97.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 21564
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
 - proto: RMCM276ShotgunShellLoadingRig
   entities:
   - uid: 21565
@@ -157790,9 +157698,8 @@ entities:
   - uid: 21564
     components:
     - type: Transform
-      parent: 21563
-    - type: Physics
-      canCollide: False
+      pos: -56.5,-97.5
+      parent: 1
     - type: InsideEntityStorage
   - uid: 21920
     components:
@@ -162830,10 +162737,16 @@ entities:
   - uid: 8
     components:
     - type: Transform
-      parent: 4
-    - type: Physics
-      canCollide: False
+      pos: -23.5,-76.5
+      parent: 1
     - type: InsideEntityStorage
+- proto: VehicleVan
+  entities:
+  - uid: 24084
+    components:
+    - type: Transform
+      pos: -39,-82
+      parent: 1
 - proto: VoiceTrigger
   entities:
   - uid: 22836
@@ -165778,11 +165691,6 @@ entities:
     - type: Transform
       pos: 65.5,79.5
       parent: 1
-  - uid: 23420
-    components:
-    - type: Transform
-      pos: 66.5,25.5
-      parent: 1
   - uid: 23421
     components:
     - type: Transform
@@ -166310,6 +166218,11 @@ entities:
       parent: 1
 - proto: WallXenoResinImpenetrable
   entities:
+  - uid: 23420
+    components:
+    - type: Transform
+      pos: 66.5,25.5
+      parent: 1
   - uid: 23526
     components:
     - type: Transform

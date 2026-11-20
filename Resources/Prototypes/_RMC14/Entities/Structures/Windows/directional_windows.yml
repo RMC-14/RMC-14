@@ -18,9 +18,9 @@
         layer:
         - GlassLayer
   - type: RotationDrawDepth
+    defaultDrawDepth: SmallObjects
     southDrawDepth: OverMobs
   - type: Sprite
-    drawdepth: Mobs
     sprite: _RMC14/Structures/Windows/directional.rsi
     state: window
   - type: Icon

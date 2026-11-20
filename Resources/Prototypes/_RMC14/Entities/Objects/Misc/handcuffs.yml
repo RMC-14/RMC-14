@@ -21,6 +21,9 @@
   - type: MeleeRequiresSkill
     skills:
       RMCSkillPolice: 1
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 - type: entity
   parent: RMCHandcuffs
@@ -49,3 +52,10 @@
   - type: Sprite
     sprite: Objects/Misc/zipties.rsi
     state: cuff
+  - type: Tag
+    tags:
+    - RMCZipties
+
+- type: Tag
+  id: RMCZipties
+  

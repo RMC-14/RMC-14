@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Medical.BodyScanner;
 public sealed partial class InsideBodyScannerComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid? BodyScanner;
+    public EntityUid? Chamber;
 }

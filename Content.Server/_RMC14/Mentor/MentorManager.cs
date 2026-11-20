@@ -1,12 +1,15 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
+using Content.Server.Discord;
 using Content.Server.Players.RateLimiting;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Mentor;
 using Content.Shared.Administration;
+using Content.Shared.Database;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Roles;
 using Robust.Server.Player;
@@ -22,14 +25,17 @@ namespace Content.Server._RMC14.Mentor;
 public sealed class MentorManager : IPostInjectInit
 {
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
+    [Dependency] private readonly DiscordWebhook _discord = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     private const string RateLimitKey = "MentorHelp";
     private static readonly ProtoId<JobPrototype> MentorJob = "CMSeniorEnlistedAdvisor";
@@ -39,6 +45,8 @@ public sealed class MentorManager : IPostInjectInit
     private readonly Dictionary<NetUserId, (TimeSpan Timestamp, bool Typing)> _typingUpdateTimestamps = new();
     private readonly Dictionary<NetUserId, List<NetUserId>> _destinationClaims = new();
     private readonly Dictionary<NetUserId, HashSet<NetUserId>> _mentorClaims = new();
+    private bool _rateLimitRegistered;
+    private WebhookIdentifier? _webhookId;
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
     {
@@ -130,6 +138,10 @@ public sealed class MentorManager : IPostInjectInit
         if (!_player.TryGetSessionById(message.MsgChannel.UserId, out var author))
             return;
 
+        // CountAction throws if the key was never registered (see PostInject).
+        if (_rateLimitRegistered && _rateLimit.CountAction(author, RateLimitKey) != RateLimitStatus.Allowed)
+            return;
+
         SendMentorMessage(author.UserId, author.Name, author, author.Name, message.Message, message.MsgChannel);
     }
 
@@ -189,8 +201,17 @@ public sealed class MentorManager : IPostInjectInit
         };
 
         var isAdmin = false;
+        var title = "Mentor";
         if (_player.TryGetSessionById(author.UserId, out var authorSession))
-            isAdmin = _admin.IsAdmin(authorSession);
+        {
+            var data = _admin.GetAdminData(authorSession);
+
+            if (data != null)
+            {
+                isAdmin = true;
+                title = data.Title ?? "Admin";
+            }
+        }
 
         var mentorMsg = new MentorMessage(
             destination,
@@ -201,7 +222,8 @@ public sealed class MentorManager : IPostInjectInit
             DateTime.Now,
             true,
             isAdmin,
-            true
+            true,
+            title
         );
         var messages = new List<MentorMessage> { mentorMsg };
         var receive = new MentorMessagesReceivedMsg { Messages = messages };
@@ -257,6 +279,26 @@ public sealed class MentorManager : IPostInjectInit
         }
     }
 
+    private void OnMentorTeleport(MentorClientTeleportMsg message)
+    {
+        var author = message.MsgChannel;
+        if (!_player.TryGetSessionById(author.UserId, out var authorSession) ||
+            !_activeMentors.Contains(authorSession))
+        {
+            return;
+        }
+
+        if (authorSession.AttachedEntity is not { } mentorEntity)
+            return;
+
+        var destination = new NetUserId(message.Destination);
+        if (!_player.TryGetSessionById(destination, out var targetSession) || targetSession.AttachedEntity is not { } targetEntity)
+            return;
+
+        var ev = new MentorFollowEvent(_entMan.GetNetEntity(mentorEntity), _entMan.GetNetEntity(targetEntity));
+        _entMan.EventBus.RaiseLocalEvent(mentorEntity, ref ev);
+    }
+
     private void Unclaim(INetChannel author, NetUserId destination, bool disconnect)
     {
         if (!_destinationClaims.TryGetValue(destination, out var claims))
@@ -279,8 +321,17 @@ public sealed class MentorManager : IPostInjectInit
         };
 
         var isAdmin = false;
+        var title = "Mentor";
         if (_player.TryGetSessionById(author.UserId, out var authorSession))
-            isAdmin = _admin.IsAdmin(authorSession);
+        {
+            var data = _admin.GetAdminData(authorSession);
+
+            if (data != null)
+            {
+                isAdmin = true;
+                title = data.Title ?? "Admin";
+            }
+        }
 
         var mentorMsg = new MentorMessage(
             destination,
@@ -291,7 +342,8 @@ public sealed class MentorManager : IPostInjectInit
             DateTime.Now,
             true,
             isAdmin,
-            true
+            true,
+            title
         );
         var messages = new List<MentorMessage> { mentorMsg };
         var receive = new MentorMessagesReceivedMsg { Messages = messages };
@@ -348,7 +400,18 @@ public sealed class MentorManager : IPostInjectInit
             recipients.Add(active.Channel);
         }
 
-        var isAdmin = author != null && _admin.IsAdmin(author);
+        var isAdmin = false;
+        var title = "Mentor";
+        if (author != null && _player.TryGetSessionById(author.UserId, out var authorSession))
+        {
+            var data = _admin.GetAdminData(authorSession);
+
+            if (data != null)
+            {
+                isAdmin = true;
+                title = data.Title ?? "Admin";
+            }
+        }
         var mentorMsg = new MentorMessage(
             destination,
             destinationName,
@@ -358,10 +421,21 @@ public sealed class MentorManager : IPostInjectInit
             DateTime.Now,
             isMentor,
             isAdmin,
-            create
+            create,
+            title
         );
         var messages = new List<MentorMessage> { mentorMsg };
         var receive = new MentorMessagesReceivedMsg { Messages = messages };
+
+        if (author != null)
+        {
+            _adminLog.Add(LogType.RMCMentorHelp,
+                LogImpact.Low,
+                $"Mentor help {(isMentor ? "reply" : "message")} from {author:Player} in {destinationName} ({destination}) ticket: {message}");
+
+            _ = SendWebhook(authorName ?? author.Name, destinationName, message);
+        }
+
         foreach (var recipient in recipients)
         {
             try
@@ -376,6 +450,26 @@ public sealed class MentorManager : IPostInjectInit
 
         if (author != null)
             SendTypingUpdate(author.Channel, destination, false);
+    }
+
+    private async Task SendWebhook(string author, string destination, string message)
+    {
+        if (_webhookId is not { } webhookId)
+            return;
+
+        try
+        {
+            var content = $"MHELP ({destination}): **{author}:** {message}";
+            if (content.Length > 2000)
+                content = content[..2000];
+
+            var payload = new WebhookPayload { Content = content };
+            await _discord.CreateMessage(webhookId, payload);
+        }
+        catch (Exception e)
+        {
+            _log.RootSawmill.Error($"Error sending mentor help webhook:\n{e}");
+        }
     }
 
     private void SendTypingUpdate(INetChannel author, Guid destination, bool typing)
@@ -453,6 +547,7 @@ public sealed class MentorManager : IPostInjectInit
         _net.RegisterNetMessage<MentorClientUnclaimMsg>(OnClientUnclaim);
         _net.RegisterNetMessage<MentorClaimMsg>();
         _net.RegisterNetMessage<MentorUnclaimMsg>();
+        _net.RegisterNetMessage<MentorClientTeleportMsg>(OnMentorTeleport);
 
         _net.Connected += OnConnected;
         _net.Disconnect += OnDisconnected;
@@ -472,8 +567,21 @@ public sealed class MentorManager : IPostInjectInit
                     _ => { }
                 )
             );
+            _rateLimitRegistered = true;
         }
 
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
+
+        if (_config.IsCVarRegistered(RMCCVars.RMCMentorHelpWebhook.Name))
+        {
+            _config.OnValueChanged(RMCCVars.RMCMentorHelpWebhook,
+                value =>
+                {
+                    _webhookId = null;
+                    if (!string.IsNullOrWhiteSpace(value))
+                        _discord.GetWebhook(value, data => _webhookId = data.ToIdentifier());
+                },
+                true);
+        }
     }
 }

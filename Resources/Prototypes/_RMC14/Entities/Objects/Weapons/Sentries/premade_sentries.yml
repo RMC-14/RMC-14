@@ -147,7 +147,7 @@
     capacity: 600
   - type: HTN
     rootTask:
-      task: RMCTurretCompound
+      task: RMCSentryCompound
     blackboard:
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg

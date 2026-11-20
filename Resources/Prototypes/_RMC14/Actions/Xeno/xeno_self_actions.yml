@@ -12,6 +12,7 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoRestActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -35,6 +36,7 @@
       state: watch_xeno
   - type: InstantAction
     event: !type:XenoWatchActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -59,6 +61,7 @@
     useDelay: 0.33
   - type: InstantAction
     event: !type:XenoPheromonesActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -84,6 +87,7 @@
     useDelay: 0.5
   - type: InstantAction
     event: !type:XenoHideActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -107,6 +111,7 @@
     useDelay: 2
   - type: InstantAction
     event: !type:XenoToggleCrestActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -159,6 +164,7 @@
     useDelay: 0.25
   - type: InstantAction
     event: !type:XenoResinWalkerActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -181,6 +187,8 @@
     useDelay: 0.2
   - type: InstantAction
     event: !type:XenoZoomActionEvent
+  - type: ActionBlockIfResting
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -206,11 +214,32 @@
     event: !type:XenoWordQueenActionEvent
   - type: XenoWordQueenAction
   - type: RMCDazeableAction
+  - type: RMCInContainerAction
+
+- type: entity
+  id: ActionXenoPsychic
+  parent: ActionXenoBase
+  name: Psychic Communication
+  description: Harness your psychic power to communicate to either a host, everyone around you or a xenonid via targeting either target or the floor for radiance.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: psychic_whisper
+    useDelay: 10
+  - type: TargetAction
+    range: 12
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoPsychicActionEvent
+  - type: RMCDazeableAction
+  - type: RMCInContainerAction
 
 - type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
-  name: Grow Ovipositor (700) # TODO RMC14 proper plasma costs
+  name: Grow Ovipositor (500)
   description: Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
   components:
   - type: Action
@@ -221,12 +250,13 @@
   - type: InstantAction
     event: !type:XenoGrowOvipositorActionEvent
   - type: XenoGrowOvipositorAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
   id: RMCGuidebookActionXenoGrowOvipositor
   name: Grow Ovipositor
-  description: Become immobile and start laying eggs which will produce parasites.
+  description: Become immobile and start laying eggs which will produce children.
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -245,6 +275,7 @@
       state: lurker_invisibility
   - type: InstantAction
     event: !type:XenoTurnInvisibleActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -268,6 +299,23 @@
     useDelay: 26
   - type: InstantAction
     event: !type:XenoDefensiveShieldActionEvent
+  - type: RMCInContainerAction
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoDefensiveShieldBloodQueen
+  parent: ActionXenoDefensiveShield
+  name: Brace (200)
+  description: Gain a temporary shield that blocks the next 200 damage that lasts 5 seconds. Any damage that impacts the shield is reduced by 5 before processing.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_empower
+    useDelay: 50
+  - type: InstantAction
+    event: !type:XenoDefensiveShieldActionEvent
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -281,7 +329,7 @@
   id: ActionXenoRetrieveEgg
   parent: ActionXenoBase
   name: Retrieve Egg
-  description: Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage.
+  description: Retrieves an egg from your storage if you have an empty hand. Using near an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage. Using near an eggmorpher will transfer your eggs as children into it.
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -308,7 +356,7 @@
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
   name: Carrier's Bond
-  description: Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
+  description: Retrieves a child from your storage if you have an empty hand. Using this near child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 6 tiles away, where the child will be stunned for 4 seconds. Using a child in hand will add it to your storage. Using near an eggmorpher will take as many possible children from it to put into your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -346,6 +394,7 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoReserveParasiteActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -368,21 +417,25 @@
     useDelay: 0.5
   - type: InstantAction
     event: !type:ManageHiveActionEvent
+  - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoDodge
   parent: ActionXenoBase
-  name: Dodge (200)
-  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. Your speed is doubled near standing enemies.
+  name: Dodge
+  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. You dodge every 3rd projectile that could hit you [color=red]excluding sniper bullets and rockets[/color]. Can be toggled off early to stop dodging, cooldown is equal to twice the duration used.
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_dodge
-    useDelay: 19
+    useDelay: 13
   - type: InstantAction
     event: !type:XenoDodgeActionEvent
+  - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -428,6 +481,8 @@
   - type: InstantAction
     event: !type:XenoSoakActionEvent
   - type: ActionBlockIfResting
+  - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -443,6 +498,7 @@
   - type: InstantAction
     event: !type:XenoEmpowerActionEvent
   - type: ActionBlockIfResting
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -465,6 +521,7 @@
       state: lay_egg
   - type: InstantAction
     event: !type:XenoGenerateEggsActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase

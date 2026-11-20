@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: RMCContainerBase
   name: cargo container
@@ -455,6 +455,79 @@
 
 - type: entity
   parent: RMCContainerBase
+  id: RMCContainerGrafLeft
+  suffix: Graffiti, Left
+  name: Cargo Container
+  description: "A huge industrial shipping container.\nThis one has been turned into a canvas for street art."
+  components:
+  - type: Sprite
+    state: grafcontain_l
+
+- type: entity
+  parent: RMCContainerGrafLeft
+  id: RMCContainerGrafMiddle
+  suffix: Graffiti, Middle
+  components:
+  - type: Sprite
+    state: grafcontain_rm
+
+- type: entity
+  parent: RMCContainerGrafLeft
+  id: RMCContainerGrafRight
+  suffix: Graffiti, Right
+  components:
+  - type: Sprite
+    state: grafcontain_r
+
+- type: entity
+  parent: RMCContainerGrafLeft
+  id: RMCContainerGraf2Left
+  suffix: Graffiti, Left
+  components:
+  - type: Sprite
+    state: grafcontain2_l
+
+- type: entity
+  parent: RMCContainerGraf2Left
+  id: RMCContainerGraf2Middle
+  suffix: Graffiti, Middle
+  components:
+  - type: Sprite
+    state: grafcontain2_rm
+
+- type: entity
+  parent: RMCContainerGraf2Left
+  id: RMCContainerGraf2Right
+  suffix: Graffiti, Right
+  components:
+  - type: Sprite
+    state: grafcontain2_r
+
+- type: entity
+  parent: RMCContainerGrafLeft
+  id: RMCContainerGraf3Left
+  suffix: Graffiti, Left
+  components:
+  - type: Sprite
+    state: grafcontain3_l
+- type: entity
+  parent: RMCContainerGraf3Left
+  id: RMCContainerGraf3Middle
+  suffix: Graffiti, Middle
+  components:
+  - type: Sprite
+    state: grafcontain3
+
+- type: entity
+  parent: RMCContainerGraf3Left
+  id: RMCContainerGraf3Right
+  suffix: Graffiti, Right
+  components:
+  - type: Sprite
+    state: grafcontain3_r
+
+- type: entity
+  parent: RMCContainerBase
   id: RMCContainerAvantLeft
   name: Avant Biomedical Cargo Container
   description: "A huge industrial shipping container. This one is from Avant Biomedical, a producer of biotechnology and medical goods. Despite being renowned for making high-quality products, rumors of shady projects seem to follow them."
@@ -478,6 +551,131 @@
   components:
   - type: Sprite
     state: avantcontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerHalcyonDynamicsLeft
+  name: Halcyon Dynamics Corporation Cargo Container
+  description: "A huge industrial shipping container. This one is owned by the Halcyon Dynamics Corporation, producer of starship parts, military-grade weaponry, and prosthetic limbs. Despite their close relationship with the SPP, you suspect they love money as much as any other Megacorp."
+  suffix: Halcyon, Left
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/containers_2.rsi
+    state: halcyoncontainerleft
+
+- type: entity
+  parent: RMCContainerHalcyonDynamicsLeft
+  id: RMCContainerHalcyonDynamicsMiddle
+  suffix: Halcyon, Middle
+  components:
+  - type: Sprite
+    state: halcyoncontainermiddle
+
+- type: entity
+  parent: RMCContainerHalcyonDynamicsLeft
+  id: RMCContainerHalcyonDynamicsRight
+  suffix: Halcyon, Right
+  components:
+  - type: Sprite
+    state: halcyoncontainerright
+
+- type: entity
+  parent: RMCContainerHalcyonDynamicsLeft
+  id: RMCContainerHalcyonDynamicsLeftAlt
+  suffix: Halcyon, Left, Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/containers_2.rsi
+    state: halcyoncontainerleft_alt
+
+- type: entity
+  parent: RMCContainerHalcyonDynamicsLeft
+  id: RMCContainerHalcyonDynamicsMiddleAlt
+  suffix: Halcyon, Middle, Alt
+  components:
+  - type: Sprite
+    state: halcyoncontainermiddle_alt
+
+- type: entity
+  parent: RMCContainerHalcyonDynamicsLeft
+  id: RMCContainerHalcyonDynamicsRightAlt
+  suffix: Halcyon, Right, Alt
+  components:
+  - type: Sprite
+    state: halcyoncontainerright_alt
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerWEYAFuelLeft
+  name: Weston-Yamada Fuel Container
+  description: "A huge industrial shipping container for fuel. This one is owned by the Weston-Yamada Corporation, and evidently contains a large amount of flammable materials. On the side, it reads 'The Future is Now' in Japanese."
+  suffix: WEYA, Fuel, Left
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/containers_2.rsi
+    state: weyafuelcontainerleft
+
+- type: entity
+  parent: RMCContainerWEYAFuelLeft
+  id: RMCContainerWEYAFuelMiddle
+  suffix: WEYA, Fuel, Middle
+  components:
+  - type: Sprite
+    state: weyafuelcontainermiddle
+
+- type: entity
+  parent: RMCContainerWEYAFuelLeft
+  id: RMCContainerWEYAFuelRight
+  suffix: WEYA, Fuel, Right
+  components:
+  - type: Sprite
+    state: weyafuelcontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTartarusLargeLeft
+  name: Tartarus Mining Container
+  description: "A huge industrial shipping container belonging to the Tartarus Mining corporation, a subsidary of Weston-Yamada. It's probably full of precious minerals! Or boring mining equipment."
+  suffix: Tartarus, Left
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/containers_2.rsi
+    state: tartaruscontainerleft
+
+- type: entity
+  parent: RMCContainerTartarusLargeLeft
+  id: RMCContainerTartarusLargeMiddle
+  suffix: Tartarus, Middle
+  components:
+  - type: Sprite
+    state: tartaruscontainermiddle
+
+- type: entity
+  parent: RMCContainerTartarusLargeLeft
+  id: RMCContainerTartarusLargeRight
+  suffix: Tartarus, Right
+  components:
+  - type: Sprite
+    state: tartaruscontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerMiyahiraLargeMiddle
+  name: Miyahira Container
+  description: "A huge industrial shipping container belonging to the Miyahira corporation, a subsidary of Weston-Yamada. They produce all sorts of domestic vehicles, including the famed Mono-Supron. While it would be nice if this container had a new car, it's probably just full of spare parts."
+  suffix: Miyahira, Middle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/containers_2.rsi
+    state: miyahiracontainermiddle
+
+- type: entity
+  parent: RMCContainerMiyahiraLargeMiddle
+  id: RMCContainerMiyahiraLargeRight
+  suffix: Miyahira, Right
+  components:
+  - type: Sprite
+    state: miyahiracontainerright
 
 # Small
 
@@ -581,7 +779,7 @@
     state: spp1left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPPRight
   suffix: SPP, 1, Right
   components:
@@ -589,7 +787,7 @@
     state: spp1right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP2Left
   suffix: SPP, 2, Left
   components:
@@ -597,7 +795,7 @@
     state: spp2left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP2Right
   suffix: SPP, 2, Right
   components:
@@ -605,7 +803,7 @@
     state: spp2right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP3Left
   suffix: SPP, 3, Left
   components:
@@ -613,7 +811,7 @@
     state: spp3left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP3Right
   suffix: SPP, 3, Right
   components:
@@ -621,7 +819,7 @@
     state: spp3right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP4Left
   suffix: SPP, 4, Left
   components:
@@ -629,7 +827,7 @@
     state: spp4left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP4Right
   suffix: SPP, 4, Right
   components:
@@ -637,7 +835,7 @@
     state: spp4right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP5Left
   suffix: SPP, 5, Left
   components:
@@ -645,7 +843,7 @@
     state: spp5left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP5Right
   suffix: SPP, 5, Right
   components:
@@ -653,7 +851,7 @@
     state: spp5right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP6Left
   suffix: SPP, 6, Left
   components:
@@ -661,7 +859,7 @@
     state: spp6left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP6Right
   suffix: SPP, 6, Right
   components:
@@ -669,7 +867,7 @@
     state: spp6right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP7Left
   suffix: SPP, 7, Left
   components:
@@ -677,7 +875,7 @@
     state: spp7left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP7Right
   suffix: SPP, 7, Right
   components:
@@ -685,7 +883,7 @@
     state: spp7right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP8Left
   suffix: SPP, 8, Left
   components:
@@ -693,7 +891,7 @@
     state: spp8left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP8Right
   suffix: SPP, 8, Right
   components:
@@ -701,7 +899,7 @@
     state: spp8right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP9Left
   suffix: SPP, 9, Left
   components:
@@ -709,7 +907,7 @@
     state: spp9left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP9Right
   suffix: SPP, 9, Right
   components:
@@ -717,7 +915,7 @@
     state: spp9right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP10Left
   suffix: SPP, 10, Left
   components:
@@ -725,7 +923,7 @@
     state: spp10left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP10Right
   suffix: SPP, 10, Right
   components:
@@ -733,7 +931,7 @@
     state: spp10right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP11Left
   suffix: SPP, 11, Left
   components:
@@ -741,7 +939,7 @@
     state: spp11left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP11Right
   suffix: SPP, 11, Right
   components:
@@ -749,7 +947,7 @@
     state: spp11right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP12Left
   suffix: SPP, 12, Left
   components:
@@ -757,7 +955,7 @@
     state: spp12left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP12Right
   suffix: SPP, 12, Right
   components:
@@ -765,7 +963,7 @@
     state: spp12right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP13Left
   suffix: SPP, 13, Left
   components:
@@ -773,7 +971,7 @@
     state: spp13left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP13Right
   suffix: SPP, 13, Right
   components:
@@ -781,7 +979,7 @@
     state: spp13right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP14Left
   suffix: SPP, 14, Left
   components:
@@ -789,7 +987,7 @@
     state: spp14left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP14Right
   suffix: SPP, 14, Right
   components:
@@ -797,7 +995,7 @@
     state: spp14right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP15Left
   suffix: SPP, 15, Left
   components:
@@ -805,7 +1003,7 @@
     state: spp15left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP15Right
   suffix: SPP, 15, Right
   components:
@@ -813,7 +1011,7 @@
     state: spp15right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP16Left
   suffix: SPP, 16, Left
   components:
@@ -821,7 +1019,7 @@
     state: spp16left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP16Right
   suffix: SPP, 16, Right
   components:
@@ -829,7 +1027,7 @@
     state: spp16right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP17Left
   suffix: SPP, 17, Left
   components:
@@ -837,7 +1035,7 @@
     state: spp17left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP17Right
   suffix: SPP, 17, Right
   components:
@@ -845,7 +1043,7 @@
     state: spp17right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP18Left
   suffix: SPP, 18, Left
   components:
@@ -853,7 +1051,7 @@
     state: spp18left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP18Right
   suffix: SPP, 18, Right
   components:
@@ -861,7 +1059,7 @@
     state: spp18right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP19Left
   suffix: SPP, 19, Left
   components:
@@ -869,7 +1067,7 @@
     state: spp19left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP19Right
   suffix: SPP, 19, Right
   components:
@@ -877,7 +1075,7 @@
     state: spp19right
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP20Left
   suffix: SPP, 20, Left
   components:
@@ -885,7 +1083,7 @@
     state: spp20left
 
 - type: entity
-  parent: RMCContainerTartarusLeft
+  parent: RMCContainerShortSPPLeft
   id: RMCContainerShortSPP20Right
   suffix: SPP, 20, Right
   components:
@@ -973,6 +1171,71 @@
   components:
   - type: Sprite
     state: amsright
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerMedicalLeft
+  name: medical cargo container
+  description: A huge industrial shipping container. This one belongs to Avant Biomedical, a company that produces medical supplies and pharmaceuticals.
+  suffix: Medical, Left
+  components:
+  - type: Sprite
+    state: medical_left
+
+- type: entity
+  parent: RMCContainerMedicalLeft
+  id: RMCContainerMedicalEmptyRight
+  suffix: Medical, Empty, Right
+  description: A small piece of a huge industrial shipping container.
+  components:
+  - type: Sprite
+    state: medical_empty_right
+  - type: Fixtures
+    fixtures: {}
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCContainerMedicalLeft
+  id: RMCContainerMedicalRight
+  suffix: Medical, Right
+  components:
+  - type: Sprite
+    state: medical_right
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortHalcyonLeft
+  suffix: Halcyon, Left
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/containers_2.rsi
+    state: halcyon_l
+
+- type: entity
+  parent: RMCContainerShortHalcyonLeft
+  id: RMCContainerShortHalcyonRight
+  suffix: Halcyon, Right
+  components:
+  - type: Sprite
+    state: halcyon_r
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortNovarisLeft
+  suffix: Novaris, Left
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/containers_2.rsi
+    state: novaris_l
+
+- type: entity
+  parent: RMCContainerShortNovarisLeft
+  id: RMCContainerShortNovarisRight
+  suffix: Novaris, Right
+  components:
+  - type: Sprite
+    state: novaris_r
 
 # Vertical
 

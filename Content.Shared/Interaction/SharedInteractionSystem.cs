@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.CombatMode;
+using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.ActionBlocker;
@@ -128,6 +129,8 @@ namespace Content.Shared.Interaction
             SubscribeLocalEvent<UnremoveableComponent, GotUnequippedHandEvent>(OnUnequipHand);
             SubscribeLocalEvent<UnremoveableComponent, DroppedEvent>(OnDropped);
 
+            SubscribeAllEvent<RMCTryGrabEvent>(OnTryGrab); // RMC14
+
             CommandBinds.Builder
                 .Bind(ContentKeyFunctions.AltActivateItemInWorld,
                     new PointerInputCmdHandler(HandleAltUseInteraction))
@@ -135,8 +138,9 @@ namespace Content.Shared.Interaction
                     new PointerInputCmdHandler(HandleUseInteraction))
                 .Bind(ContentKeyFunctions.ActivateItemInWorld,
                     new PointerInputCmdHandler(HandleActivateItemInWorld))
-                .Bind(ContentKeyFunctions.TryPullObject,
-                    new PointerInputCmdHandler(HandleTryPullObject))
+                // RMC14 removed
+                //.Bind(ContentKeyFunctions.TryPullObject,
+                //    new PointerInputCmdHandler(HandleTryPullObject))
                 .Register<SharedInteractionSystem>();
 
             _rateLimit.Register(RateLimitKey,
@@ -257,9 +261,14 @@ namespace Content.Shared.Interaction
                 PredictedQueueDel(uid);
         }
 
+        // RMC14
+        private void OnTryGrab(RMCTryGrabEvent ev, EntitySessionEventArgs args)
+        {
+            HandleTryPullObject(args.SenderSession, GetCoordinates(ev.Coords), GetEntity(ev.Target));
+        }
+
         private bool HandleTryPullObject(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
-            _rmcLagCompensation.SendLastRealTick();
             if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
                 Log.Info($"TryPullObject input validation failed");
@@ -434,17 +443,24 @@ namespace Content.Shared.Interaction
                 return;
             }
 
-            if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, target))
+            // RMC14
+            var ignoreGhostInteractionLimits =
+                target != null &&
+                HasComp<GhostComponent>(user) &&
+                HasComp<RMCIgnoreGhostInteractionLimitsComponent>(target.Value);
+
+            if (checkCanInteract && !ignoreGhostInteractionLimits && !_actionBlockerSystem.CanInteract(user, target))
                 return;
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
             // Also checks if the item is accessible via some storage UI (e.g., open backpack)
-            if (checkAccess && target != null && !IsAccessible(user, target.Value))
+            if (checkAccess && target != null && !ignoreGhostInteractionLimits && !IsAccessible(user, target.Value))
                 return;
 
             var inRangeUnobstructed = target == null
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
-                : !checkAccess || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
+                : !checkAccess || ignoreGhostInteractionLimits || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
+            // RMC14
 
             // empty-hand interactions
             // combat mode hand interactions will always be true here -- since
@@ -769,8 +785,12 @@ namespace Content.Shared.Interaction
             bool popup = false,
             bool overlapCheck = true)
         {
-            if (_net.IsServer)
+            if (_net.IsServer &&
+                Resolve(other, ref other.Comp, false) &&
+                !_transform.InRange(otherCoordinates, other.Comp.Coordinates, 0.01f))
+            {
                 range += _rmcLagCompensation.MarginTiles;
+            }
 
             if (origin.Owner == other.Owner && Resolve(other, ref other.Comp, false))
             {
@@ -1192,16 +1212,22 @@ namespace Content.Shared.Interaction
             if (checkUseDelay && delayComponent != null && _useDelay.IsDelayed((used, delayComponent)))
                 return false;
 
-            if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, used))
+            // RMC14
+            var ignoreGhostInteractionLimits =
+                HasComp<GhostComponent>(user) &&
+                HasComp<RMCIgnoreGhostInteractionLimitsComponent>(used);
+
+            if (checkCanInteract && !ignoreGhostInteractionLimits && !_actionBlockerSystem.CanInteract(user, used))
                 return false;
 
-            if (checkAccess && !InRangeUnobstructed(user, used))
+            if (checkAccess && !ignoreGhostInteractionLimits && !InRangeUnobstructed(user, used))
                 return false;
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
             // This is bypassed IF the interaction happened through an item slot (e.g., backpack UI)
-            if (checkAccess && !IsAccessible(user, used))
+            if (checkAccess && !ignoreGhostInteractionLimits && !IsAccessible(user, used))
                 return false;
+            // RMC14
 
             complexInteractions ??= _actionBlockerSystem.CanComplexInteract(user);
             var activateMsg = new ActivateInWorldEvent(user, used, complexInteractions.Value);
@@ -1371,6 +1397,9 @@ namespace Content.Shared.Interaction
         /// <inheritdoc cref="CanAccessViaStorage(Robust.Shared.GameObjects.EntityUid,Robust.Shared.GameObjects.EntityUid)"/>
         public bool CanAccessViaStorage(EntityUid user, EntityUid target, BaseContainer container)
         {
+            if (HasComp<RMCEquippedStorageOpenOnInteractComponent>(container.Owner) || HasComp<RMCEquippedStorageOpenOnInteractComponent>(target)) // RMC14 - so accessing equipped stuff works, may be a better way to do this
+                return true;
+
             if (StorageComponent.ContainerId != container.ID)
                 return false;
 
@@ -1531,6 +1560,20 @@ namespace Content.Shared.Interaction
             AltInteract = altInteract;
         }
     }
+
+    // RMC14 start
+    /// <summary>
+    /// Raised when a player tries to grab something.
+    /// </summary>
+    /// <param name="coords"></param>
+    /// <param name="target"></param>
+    [Serializable, NetSerializable]
+    public sealed class RMCTryGrabEvent(NetCoordinates coords, NetEntity target) : EntityEventArgs
+    {
+        public NetCoordinates Coords = coords;
+        public NetEntity Target = target;
+    }
+    // RMC14 end
 
     /// <summary>
     ///     Raised directed by-ref on an entity to determine what item will be used in interactions.

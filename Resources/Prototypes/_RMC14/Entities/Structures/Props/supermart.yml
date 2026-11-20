@@ -1,0 +1,212 @@
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropSupermartBasketEmpty
+  name: basket
+  suffix: empty
+  description: A basket.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: supermarketbasketempty
+    drawdepth: Overdoors 
+
+- type: entity
+  parent: RMCPropSupermartBasketEmpty
+  id: RMCPropSupermartBasketOranges
+  suffix: Oranges
+  description: A basket full of oranges.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: supermarketbasket1
+
+- type: entity
+  parent: RMCPropSupermartBasketEmpty
+  id: RMCPropSupermartBasketPears
+  suffix: Pears
+  description: A basket full of pears.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: supermarketbasket2
+
+- type: entity
+  parent: RMCPropSupermartBasketEmpty
+  id: RMCPropSupermartBasketCarrots
+  suffix: Carrots
+  description: A basket full of carrots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: supermarketbasket3
+
+- type: entity
+  parent: RMCPropSupermartBasketEmpty
+  id: RMCPropSupermartBasketMelons
+  suffix: Melons
+  description: A basket full of melons.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: supermarketbasket4
+
+- type: entity
+  parent: RMCPropSupermartBasketEmpty
+  id: RMCPropSupermartBasketApples
+  suffix: Apples
+  description: A basket full of apples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: supermarketbasket5
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropSupermartShelfEmpty
+  suffix: Empty
+  name: shelf
+  description: A long empty shelf.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: longrackempty
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 2
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 20
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: PlaceableSurface
+
+- type: entity
+  parent: RMCPropSupermartShelfEmpty
+  id: RMCPropSupermartShelf1
+  suffix: 1
+  description: A long shelf filled with various foodstuffs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: longrack1
+
+- type: entity
+  parent: RMCPropSupermartShelf1
+  id: RMCPropSupermartShelf2
+  suffix: 2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: longrack2
+
+- type: entity
+  parent: RMCPropSupermartShelf1
+  id: RMCPropSupermartSodaRack
+  suffix: Soda
+  name: Bobda cans rack
+  description: A rack filled with Bobda cans of various flavors.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: soda_rack
+
+- type: entity
+  parent: RMCPropSupermartSodaRack
+  id: RMCPropSupermartSodaStack
+  name: stacked Bobda cans
+  description: A large stack of "Bobda-Classic" cans.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: soda_can_stack
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropSupermartSodaMan
+  name: Bobda Man mannequin
+  description: A mannequin of the famous "Bobda-Man", Party like it's 1999!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: soda_man_prop
+  - type: Transform
+    anchored: false
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropSupermartFreezerLeft
+  name: commercial freezer
+  suffix: Upper
+  description: A commercial grade freezer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: freezerleft
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 2
+            max: 4
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: PlaceableSurface
+
+- type: entity
+  parent: RMCPropSupermartFreezerLeft
+  id: RMCPropSupermartFreezerRight
+  suffix: Mid, Lower
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/supermart.rsi
+    state: freezerright
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 20
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
