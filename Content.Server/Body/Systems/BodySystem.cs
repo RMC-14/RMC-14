@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Ghost;
 using Content.Server.Humanoid;
+using Content.Shared._RMC14.Gibbing;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Body.Part;
@@ -117,6 +118,11 @@ public sealed class BodySystem : SharedBodySystem
         var xform = Transform(bodyId);
         if (xform.MapUid is null)
             return new HashSet<EntityUid>();
+
+        // RMC
+        var beforeEv = new RMCBeforeBodyGibbedEvent();
+        RaiseLocalEvent(bodyId, ref beforeEv);
+        // RMC
 
         var gibs = base.GibBody(bodyId, gibOrgans, body, launchGibs: launchGibs,
             splatDirection: splatDirection, splatModifier: splatModifier, splatCone:splatCone);

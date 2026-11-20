@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Robust.Client.UserInterface.RichText;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -15,11 +14,6 @@ public sealed class CheckTagHandler : IMarkupTagHandler
 {
     public string Name => "check";
     private static int _checkCounter = 0;
-    
-    /// <summary>
-    /// Font line height set by PaperWindow to ensure buttons match text height
-    /// </summary>
-    public static float FontLineHeight { get; set; } = 16.0f; // Default fallback
 
     private static int GetCheckIndex(MarkupNode node)
     {
@@ -82,15 +76,7 @@ public sealed class CheckTagHandler : IMarkupTagHandler
     /// </summary>
     public bool TryCreateControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
     {
-        var btn = new Button
-        {
-            Text = "☐",
-            MinSize = new Vector2(FontLineHeight + 2, FontLineHeight + 2),
-            MaxSize = new Vector2(FontLineHeight + 2, FontLineHeight + 2),
-            Margin = new Thickness(1, 0, 1, 0),
-            StyleClasses = { "ButtonSquare" },
-            TextAlign = Label.AlignMode.Center
-        };
+        var btn = new PaperTagButton { Text = "☐" };
 
         var checkIndex = GetCheckIndex(node);
         btn.Name = $"check_{checkIndex}";
