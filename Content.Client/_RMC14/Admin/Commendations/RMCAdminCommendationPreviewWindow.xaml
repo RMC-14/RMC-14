@@ -1,0 +1,22 @@
+<controls:RMCAdminCommendationPreviewWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.Commendations"
+    Title="{Loc rmc-give-commendation-preview-title}"
+    StyleClasses="RMCWindowDark"
+    MinSize="400 200"
+    SetSize="700 350">
+    <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8">
+        <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+            <BoxContainer Name="PreviewContainer" Access="Public" Orientation="Vertical"
+                          HorizontalExpand="True" />
+        </ScrollContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" SeparationOverride="4">
+            <Button Name="CancelButton" Access="Public"
+                    Text="{Loc rmc-give-commendation-preview-cancel}"
+                    StyleClasses="OpenRight" />
+            <Button Name="ConfirmButton" Access="Public"
+                    Text="{Loc rmc-give-commendation-submit}"
+                    StyleClasses="OpenLeft" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCAdminCommendationPreviewWindow>
