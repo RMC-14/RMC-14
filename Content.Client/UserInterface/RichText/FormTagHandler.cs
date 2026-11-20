@@ -1,4 +1,3 @@
-using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Client.UserInterface.RichText;
 using Robust.Client.UserInterface.Controls;
@@ -24,11 +23,6 @@ public sealed class FormTagHandler : IMarkupTagHandler
     private static int _formCounter = 0;
     private static readonly Dictionary<string, int> _formPositions = new();
     private static string _lastText = "";
-    
-    /// <summary>
-    /// Font line height set by PaperWindow to ensure buttons match text height
-    /// </summary>
-    public static float FontLineHeight { get; set; } = 16.0f; // Default fallback
 
     private static int GetFormIndex(MarkupNode node)
     {
@@ -110,15 +104,7 @@ public sealed class FormTagHandler : IMarkupTagHandler
     /// </summary>
     public bool TryCreateControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
     {
-        var btn = new Button
-        {
-            Text = "Fill",
-            MinSize = new Vector2(32, FontLineHeight + 2),
-            MaxSize = new Vector2(32, FontLineHeight + 2),
-            Margin = new Thickness(1, 0, 1, 0),
-            StyleClasses = { "ButtonSquare" },
-            TextAlign = Label.AlignMode.Center
-        };
+        var btn = new PaperTagButton(32) { Text = "Fill" };
 
         var formIndex = GetFormIndex(node);
         btn.Name = $"form_{formIndex}";

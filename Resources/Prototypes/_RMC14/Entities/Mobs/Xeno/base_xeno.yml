@@ -374,6 +374,7 @@
   - type: RMCMesonsNonviewable
     xenoVisible: true
   - type: CanBeLarvaQueued
+  - type: XenoLastStandable
 
 - type: entity
   abstract: true
