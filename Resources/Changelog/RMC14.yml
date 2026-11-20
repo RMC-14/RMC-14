@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Shortwave radios and universal recorders no longer hear speech from nearby
-      imaginary friends.
-    type: Fix
-  - message: The patreon ghost color no longer gets applied to imaginary friends.
-    type: Fix
-  id: 3349
-  time: '2026-06-11T22:06:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10083
-- author: ExponentialWizard
-  changes:
-  - message: Added charge indicator lights to defibs
-    type: Add
-  id: 3350
-  time: '2026-06-11T22:08:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8287
-- author: Dygon
-  changes:
-  - message: You no longer occasionally hear in-game sound effects while in the lobby.
-    type: Fix
-  id: 3351
-  time: '2026-06-11T22:09:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10085
 - author: wheelwrightt
   changes:
   - message: Correspondent, combat correspondent, liason and liason bodyguard now
@@ -4484,5 +4460,27 @@
   id: 3848
   time: '2026-11-20T06:01:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10713
+- author: TheFairyKings
+  changes:
+  - message: Added Witch Queen
+    type: Add
+  id: 3849
+  time: '2026-11-20T06:04:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10808
+- author: MidZik
+  changes:
+  - message: Queen and king can be dragged by xenos. They make sounds while being
+      dragged.
+    type: Tweak
+  id: 3850
+  time: '2026-11-20T06:06:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9944
+- author: Vixting
+  changes:
+  - message: Queen eye is now visible to xenonids in the same hive & ghosts.
+    type: Add
+  id: 3851
+  time: '2026-11-20T06:05:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9611
 Name: RMC14
 Order: -1
