@@ -61,7 +61,7 @@
   parent: XenoEnergyBase
   id: XenoEnergyHealer
   name: Total Healing Done
-  description: If full, you'll revive after using the sacrifice ability.
+  description: If full, you'll respawn as a larva after using the sacrifice ability.
 
 - type: alert
   parent: XenoEnergyBase
