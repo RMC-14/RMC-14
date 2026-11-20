@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Janibuckets and Mop buckets not being huge.
-    type: Fix
-  - message: Fixed Janibuckets storing too much (500u->300u)
-    type: Fix
-  - message: High-Capacity Beakers have been replaced with Reagent Jugs
-    type: Tweak
-  - message: Fixed Reagent Jugs storing too little (300u->500u), costs being wrong
-      (2.6~ metal sheets -> 10 glass sheets), and being printable in normal lathes
-      instead of the medilathe
-    type: Fix
-  id: 3301
-  time: '2026-06-07T00:48:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8316
 - author: MoonlightHollow
   changes:
   - message: Added 25 & 50 options for dispensing materials
@@ -4461,5 +4446,13 @@
   id: 3800
   time: '2026-11-20T00:31:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10853
+- author: Jawel722
+  changes:
+  - message: The guidebook window can now be resized horizontally by dragging its
+      side edges.
+    type: Tweak
+  id: 3801
+  time: '2026-11-20T00:34:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10442
 Name: RMC14
 Order: -1
