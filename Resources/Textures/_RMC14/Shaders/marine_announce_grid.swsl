@@ -6,6 +6,7 @@ uniform lowp vec4 grid_color;
 uniform highp float scroll_speed;
 
 void fragment() {
+    // only draw where the panel is
     lowp vec4 base = zTexture(UV);
     if (base.a <= 0.0) {
         COLOR = vec4(0.0);
@@ -17,11 +18,13 @@ void fragment() {
     highp float frac = fract(tileCoord);
     highp float ty = line_thickness / spacing;
 
+    // keep lines at least a pixel thick when scaled down
 #ifdef HAS_DFDX
     highp float fw = fwidth(tileCoord);
     ty = max(ty, fw * 0.5);
 #endif
 
+    // line at both edges of each tile
     highp float lineY = step(frac, ty) + step(1.0 - frac, ty);
     highp float mask = clamp(lineY, 0.0, 1.0);
 

@@ -6,11 +6,13 @@ uniform highp float strength;
 uniform highp float speed;
 uniform highp float density;
 
+// cheap pseudo random 0..1
 highp float hash(highp vec2 point)
 {
     return fract(sin(dot(point, vec2(127.1, 311.7))) * 43758.5453);
 }
 
+// smooth value noise
 highp float valueNoise(highp vec2 point)
 {
     highp vec2 cell = floor(point);
@@ -26,9 +28,11 @@ highp float valueNoise(highp vec2 point)
 
 void fragment()
 {
+    // strongest in middle, fading out towards edges
     highp vec2 centered = (UV - 0.5) * 2.0;
     highp float radial = 1.0 - smoothstep(0.3, 1.0, length(centered));
 
+    // 2 layers of noise scrolling in different directions
     highp float t = TIME * speed;
     highp vec2 point = UV * vec2(size.x / max(size.y, 1.0), 1.0) * density;
     highp float organic = valueNoise(point + vec2(t, -t * 0.7)) * 0.6
