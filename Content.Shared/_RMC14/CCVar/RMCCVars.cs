@@ -670,12 +670,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 
-    public static readonly CVarDef<int> BurrowedLarvaHiveCoreInvincibilityTimeSeconds =
-        CVarDef.Create("rmc.burrowed_larva_hive_core_invincibility_time_seconds", 1, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<float> BurrowedLarvaHiveCoreInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_hive_core_invincibility_time_seconds", 1f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<int> BurrowedLarvaQueenInvincibilityTimeSeconds =
-        CVarDef.Create("rmc.burrowed_larva_queen_invincibility_time_seconds", 5, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<float> BurrowedLarvaQueenInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_queen_invincibility_time_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<int> BurrowedLarvaFallbackInvincibilityTimeSeconds =
-        CVarDef.Create("rmc.burrowed_larva_fallback_invincibility_time_seconds", 5, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<float> BurrowedLarvaFallbackInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_fallback_invincibility_time_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
 }
