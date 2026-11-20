@@ -27,7 +27,7 @@
                     </PanelContainer>
                     <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
                         <Label Name="CharCount" Margin="0 0 8 0"/>
-                        <Button Name="SaveButton" Text="Save"/>
+                        <Button Name="SaveButton" Text="{Loc 'rmc-business-card-save'}"/>
                     </BoxContainer>
                 </BoxContainer>
             </BoxContainer>

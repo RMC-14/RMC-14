@@ -66,6 +66,9 @@ rmc-xeno-ui-hive-team-role-stall = Stall
 rmc-xeno-ui-hive-squad-announce-placeholder = Send announcement to your squad...
 rmc-xeno-ui-hive-squad-announce-to = Announce to {$role}...
 rmc-xeno-ui-hive-squad-send = Send
+rmc-xeno-ui-fireteam-title = My Fireteam
+rmc-xeno-ui-fireteam-title-team = Fireteam {$number}: {$role}
+rmc-xeno-ui-fireteam-leader = Leader
 rmc-xeno-ui-xeno-picker-title = Select Xenonid
 rmc-xeno-ui-search-placeholder = Search...
 
