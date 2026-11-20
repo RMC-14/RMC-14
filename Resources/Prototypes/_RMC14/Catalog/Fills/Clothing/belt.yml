@@ -62,6 +62,27 @@
       amount: 1
 
 - type: entity
+  parent: RMCBeltMedicBagPMC
+  id: RMCBeltMedicBagPMCFilledPartial
+  suffix: Filled, Partial
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMUpgradedBurnKit10
+      amount: 1
+    - id: CMUpgradedTraumaKit10
+      amount: 1
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    - id: CMHealthAnalyzer
+      amount: 1
+    # TODO RMC14 nanosplint, oxy hypospray, tramadol pill
+
+- type: entity
   parent: CMBeltMedicalFilled
   id: RMCBeltMedicalDefibAnalyzerFilled
   suffix: Filled, Better
@@ -260,12 +281,12 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: CMBeltMarineMP5
-  suffix: Filled, MP5
+  id: RMCBeltMarinePCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 5
 
 - type: entity
@@ -276,6 +297,26 @@
   - type: StorageFill
     contents:
     - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: RMCBeltNV
+  id: RMCBeltNVFilledMK1
+  suffix: Filled, MK1
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: RMCBeltNV
+  id: RMCBeltNVFilledCR16
+  suffix: Filled, CR16
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleCR16
       amount: 5
 
 - type: entity
@@ -290,12 +331,12 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: CMBeltMarineM16
-  suffix: Filled, M16
+  id: RMCBeltMarineCR16
+  suffix: Filled, CR16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleCR16
       amount: 5
 
 - type: entity
@@ -404,6 +445,17 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id:  RMCBeltHolsterPistolHandcannonProvostFilled
+  suffix: Filled, Provost Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 6
+    - id: RMCWeaponPistolHandcannonProvost
+   
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCM77BeltFilled
   suffix: Filled, M77
   components:
@@ -495,6 +547,20 @@
     - id: CMShellShotgunIncendiary
       amount: 3
     - id: CMShellShotgunIncendiaryBuckshot
+      amount: 3
+
+- type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigFillNV
+  suffix: Filled, NV
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 2
+    - id: CMShellShotgunSlugs
+      amount: 3
+    - id: CMShellShotgunFlechette
       amount: 3
 
 - type: entity
@@ -805,16 +871,6 @@
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
     - id: RMCWeaponPistolHandcannonPolished
-
-- type: entity
-  parent: CMBeltMarine
-  id: RMCM17BeltFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCMagazineRifleM16
-      amount: 5
 
 - type: entity
   parent: CMBeltMarine

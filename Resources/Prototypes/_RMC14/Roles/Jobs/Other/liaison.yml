@@ -68,6 +68,9 @@
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
     pocket1: RMCHandheldDistressBeaconWeYa
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
