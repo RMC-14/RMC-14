@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
@@ -38,10 +38,10 @@ public sealed partial class CMDistressSignalRuleSystem
     }
 
     /// <summary>
-    /// Handles the start of a dropship hijack: destroys xeno structures on the planet,
+    /// Handles the launch of a dropship hijack: destroys xeno structures on the planet,
     /// evacuates living xenos to the dropship, and calculates xeno surge based on marine weights.
     /// </summary>
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
+    private void OnDropshipHijackLaunched(ref DropshipHijackLaunchedEvent ev)
     {
         var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
         while (hiveStructures.MoveNext(out var id, out _, out var xform))
@@ -81,6 +81,8 @@ public sealed partial class CMDistressSignalRuleSystem
                 if (comp.CountedInSlots)
                     larva++;
 
+                RemComp<CanBeLarvaQueuedComponent>(xeno);
+
                 //Ghost player and send message
                 if (TryComp(xeno, out ActorComponent? actor))
                 {
@@ -100,7 +102,7 @@ public sealed partial class CMDistressSignalRuleSystem
                     _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
 
                     if (comp.CountedInSlots && _hive.GetHive(xeno) is { } hive)
-                        _larvaQueue.AddToLarvaQueueFront(hive, actor.PlayerSession.UserId);
+                        _larvaQueue.AddToLarvaQueueFront(hive, session.UserId);
                 }
 
                 QueueDel(xeno);
@@ -169,13 +171,6 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var time = Timing.CurTime;
-        if (!rule.ScuttleUnlocked &&
-            rule.ScuttleUnlockAt == null &&
-            !rule.ScuttleDetonated)
-        {
-            rule.ScuttleUnlockAt = time + rule.ScuttleUnlockDelay;
-        }
-
         if (!rule.HijackSongPlayed)
         {
             rule.HijackSongPlayed = true;

@@ -28,6 +28,7 @@ public static class RMCKeybindCatalog
             CMKeyFunctions.RMCActivateAttachableUnderbarrel,
             CMKeyFunctions.RMCFieldStripHeldItem,
             CMKeyFunctions.RMCCycleFireMode,
+            CMKeyFunctions.RMCToggleShotgunTube,
             CMKeyFunctions.CMUniqueAction,
             CMKeyFunctions.RMCMarineSpecialistOne,
             CMKeyFunctions.RMCMarineSpecialistTwo,

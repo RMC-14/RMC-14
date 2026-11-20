@@ -32,6 +32,7 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCResist = "RMCResist";
     public static readonly BoundKeyFunction RMCToggleAutoEject = "RMCToggleAutoEject";
     public static readonly BoundKeyFunction RMCToggleIff = "RMCToggleIff";
+    public static readonly BoundKeyFunction RMCToggleShotgunTube = "RMCToggleShotgunTube";
     public static readonly BoundKeyFunction RMCUnloadWeapon = "RMCUnloadWeapon";
 
     // Xeno

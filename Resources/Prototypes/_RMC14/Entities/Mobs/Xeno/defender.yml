@@ -31,6 +31,8 @@
     role: CMXenoDefender
     tier: 1
     hudOffset: -0.1,0.2
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 240 # 4 minutes
   - type: XenoLight
   - type: XenoDevolve
@@ -172,6 +174,8 @@
     name: rmc-xeno-steelcrest-name
     description: rmc-xeno-steelcrest-description
     popup: rmc-xeno-steelcrest-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoDefender
   - type: MeleeWeapon
     damage:
       groups:

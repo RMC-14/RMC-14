@@ -24,6 +24,8 @@
   - type: Xeno
     tier: 2
     hudOffset: -0.1,0.1
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 180 # 3 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -218,6 +220,8 @@
     name: rmc-xeno-resin-whisperer-name
     description: rmc-xeno-resin-whisperer-description
     popup: rmc-xeno-resin-whisperer-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoHivelord
   - type: XenoHidden
   - type: RMCActionOrder
     id: CMXenoHivelordResinWhisperer
@@ -314,6 +318,8 @@
     name: rmc-xeno-designer-name
     description: rmc-xeno-designer-description
     popup: rmc-xeno-designer-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoHivelord
   - type: XenoHidden
   - type: RMCActionOrder
     id: CMXenoHivelordDesigner

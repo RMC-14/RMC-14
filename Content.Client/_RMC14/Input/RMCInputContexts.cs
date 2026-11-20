@@ -33,6 +33,7 @@ public static class RMCInputContexts
         CMKeyFunctions.RMCResist,
         CMKeyFunctions.RMCToggleAutoEject,
         CMKeyFunctions.RMCToggleIff,
+        CMKeyFunctions.RMCToggleShotgunTube,
         CMKeyFunctions.RMCUnloadWeapon,
     ];
 

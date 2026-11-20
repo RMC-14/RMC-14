@@ -15,6 +15,7 @@ rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
 rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.
 rmc-xeno-construction-blocked = We can't make this here.
 rmc-xeno-construction-blocked-resin-hole = There's something built here already.
+rmc-xeno-construction-failed-cant-build-resin-hole = We sense this is not a suitable area for creating a resin hole.
 rmc-xeno-construction-blocked-structure = There's something built here already.
 rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
 rmc-xeno-construction-dead-body = The body is in the way!
@@ -73,7 +74,7 @@ rmc-xeno-construction-default-tunnel-name = {$areaName} ({$coordX}, {$coordY}) {
 rmc-xeno-construction-default-area-name = Unknown
 
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
-rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
+rmc-xeno-construction-tunnel-examine = The pheromone scent reads: '{$tunnelName}'
 rmc-xeno-construction-tunnel-examine-not-xeno-empty = [color=purple][italic]It's a dark abyss...[/italic][/color]
 rmc-xeno-construction-tunnel-examine-not-xeno = [color=purple][italic]It's a dark abyss with a few little...lights...almost like something is watching.[/italic][/color]
 
@@ -94,10 +95,18 @@ rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already ful
 
 rmc-xeno-egg-morpher-return-self = {CAPITALIZE($parasite)} crawls into the egg morpher.
 
-rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} children.
+rmc-xeno-construction-egg-morpher-examine-count = Sheltering: {$cur_paras}/{$max_paras} children.
+rmc-xeno-construction-egg-morpher-examine-next-spawn = A new child will grow in [bold]{$time_left}[/bold] seconds.
 
 rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
 rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.
+rmc-xeno-construction-recovery-node-xeno-examine = Recovers the {-rmc-xeno-construction-recovery-node-type-text(type: $type)} of adjacent Xenonids.
+-rmc-xeno-construction-recovery-node-type-text =
+    { $type ->
+        [Health] [color=green]health[/color]
+        [Plasma] [color=cyan]plasma[/color]
+        *[other] [color=red]unknown[/color]
+    }
 
 rmc-xeno-construction-no-map-structure = The ground isn't solid.
 rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!
@@ -120,3 +129,5 @@ rmc-xeno-designer-greater-surge-cooldown = We need to wait before using Greater 
 rmc-xeno-designer-greater-surge-none = There's no design nodes nearby.
 rmc-xeno-designer-greater-surge-success = We convert {$count} design nodes into reflective resin walls.
 rmc-xeno-designer-infuse-node = You infuse the node with plasma.
+
+rmc-xeno-weedbound-examined = You sense that this structure will collapse if the weeds it is merged with disappear.
