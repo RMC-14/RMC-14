@@ -28,20 +28,20 @@
         useBurstScatterMult: true
         shotsToMaxScatter: 5
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
     layers:
     - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
     - state: bolt-open
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
     - state: cover-closed
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
   - type: Tag
     tags:
     - RMCWeaponLMGL58GPMG

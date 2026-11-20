@@ -306,8 +306,6 @@
     - state: mag-0
       sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_royal.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
-    - state: cover-closed
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_royal.rsi
   - type: ItemSlots
@@ -328,7 +326,3 @@
         whitelist:
           components:
           - SmartGunBattery
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-rail: 0.25, 0
-      rmc-aslot-harness: 0.35, 0.065
