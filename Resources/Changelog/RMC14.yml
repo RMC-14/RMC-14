@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MoonlightHollow
-  changes:
-  - message: Added 25 & 50 options for dispensing materials
-    type: Add
-  id: 3302
-  time: '2026-06-07T00:50:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9984
 - author: kleinerstation13
   changes:
   - message: Added sprites for alternate magazines on the AK-4047, PDW90, L57 SMG
@@ -4454,5 +4447,15 @@
   id: 3801
   time: '2026-11-20T00:34:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10442
+- author: MidZik
+  changes:
+  - message: Fixed marines not being able to pick up undeployed sentries while in
+      combat mode.
+    type: Fix
+  - message: Fixed xenos not being able to attack certain items, like potted plants.
+    type: Fix
+  id: 3802
+  time: '2026-11-20T00:40:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10955
 Name: RMC14
 Order: -1
