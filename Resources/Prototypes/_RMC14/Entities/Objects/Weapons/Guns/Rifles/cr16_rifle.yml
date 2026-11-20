@@ -10,8 +10,16 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: ItemMapper
+    mapLayers:
+      mag-0:
+        whitelist:
+          tags:
+            - RMCMagazineRifleCR16
+      mag-1:
+        whitelist:
+          tags:
+            - RMCMagazineRifleCR16Ext
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/cr16.rsi
   - type: Gun
@@ -60,6 +68,7 @@
         whitelist:
           tags:
           - RMCMagazineRifleCR16
+          - RMCMagazineRifleCR16Ext
   - type: GunDamageModifier
     multiplier: 1.3
   - type: AttachableHolder
@@ -123,21 +132,37 @@
         - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.0325
-      rmc-aslot-rail: -0.285, 0.1575
+      rmc-aslot-barrel: 0.81, 0.0625
+      rmc-aslot-rail: -0.285, 0.185
       rmc-aslot-stock: -0.5625, 0
-      rmc-aslot-underbarrel: 0.19, -0.28
+      rmc-aslot-underbarrel: 0.135, -0.275
 
 - type: entity
   parent: RMCWeaponRifleCR16
   id: RMCWeaponRifleCR16A5
   name: CR16A5 Rifle
+  suffix: Filled
   description: A modernised version of the Combat Rifle, Model 16. Chambered in 5.56x45mm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/cr16a5.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/cr16a5.rsi
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.685, 0.0625
+      rmc-aslot-rail: -0.25, 0.125
+      rmc-aslot-stock: -0.59, 0
+      rmc-aslot-underbarrel: 0.135, -0.275
 
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleCR16
-  name: "CR16 Magazine (5.56x45mm)"
+  name: "CR16 magazine (5.56x45mm)"
+  description: A twenty-round magazine of 5.56x45mm cartridges, machined to fit CR16-pattern rifles.
   components:
   - type: Tag
     tags:
@@ -160,9 +185,35 @@
   - type: Appearance
 
 - type: entity
+  parent: RMCMagazineRifleCR16
+  id: RMCMagazineRifleCR16Ext
+  name: "CR16 extended magazine (5.56x45mm)"
+  description: A thirty-round extended magazine of 5.56x45mm cartridges, machined to fit CR16-pattern rifles.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleCR16Ext
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleCR16
+    proto: RMCCartridgeRifleCR16
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/cr16ext.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleCR16
-  name: Cartridge (5.56x45)
+  name: cartridge (5.56x45)
   description: A 5.56x45 rifle cartridge
   components:
   - type: Tag
@@ -186,6 +237,9 @@
 
 - type: Tag
   id: RMCMagazineRifleCR16
+
+- type: Tag
+  id: RMCMagazineRifleCR16Ext
 
 - type: Tag
   id: RMCCartridgeRifleCR16
