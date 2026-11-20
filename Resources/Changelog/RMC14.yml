@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Sapper Boilers not getting a popup when they are empowered.
-    type: Fix
-  - message: Fixed Sapper Boiler acid mine damaging and destroying items in your inventory
-      such as sentries and anything contained within closets or crates.
-    type: Fix
-  id: 3335
-  time: '2026-06-08T02:35:02.002310+00:00'
-  url: null
 - author: Dygon
   changes:
   - message: Fixed guns not always losing their dual wielding penalty after dropping
@@ -4441,5 +4431,22 @@
   id: 3834
   time: '2026-11-20T05:39:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10756
+- author: '- Simon'
+  changes:
+  - message: '[date] tag to show current round date into paperwork!'
+    type: Add
+  - message: '[time] tag to show current time into paperwork'
+    type: Add
+  - message: '[operation] tag to show what''s the name of the operation in paperwork'
+    type: Add
+  - message: '[ship] tag to paste the name of the ship into paperwork'
+    type: Add
+  - message: '[planet] tag to paste the name of the planet in paperwork'
+    type: Add
+  - message: changed behavior when viewing other peoples documents in edit mode.
+    type: Fix
+  id: 3835
+  time: '2026-11-20T05:40:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10571
 Name: RMC14
 Order: -1
