@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed fire rate being slightly lower with high fire rate weapons using
-      continuous fire
-    type: Fix
-  id: 3313
-  time: '2026-06-08T01:15:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10041
 - author: Ian321
   changes:
   - message: The scuttle explosion should now correctly kill everything.
@@ -4452,5 +4444,14 @@
   id: 3812
   time: '2026-11-20T01:47:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7855
+- author: Vexerot
+  changes:
+  - message: Larva spawning on the hive core or queen, or respawning from a healer
+      drone's sacrifice or an acid runner's detonation, now get a brief window of
+      invulnerability.
+    type: Add
+  id: 3813
+  time: '2026-11-20T01:57:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10310
 Name: RMC14
 Order: -1
