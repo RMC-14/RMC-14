@@ -209933,7 +209933,7 @@ entities:
     - type: Transform
       pos: 131.5,-68.5
       parent: 1
-- proto: RMCToxicWaterDeep
+- proto: RMCNonToxicToxicWaterDeep
   entities:
   - uid: 1552
     components:
