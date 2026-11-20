@@ -15,18 +15,12 @@
     },
     {
       "name": "bolt-open"
-<<<<<<< HEAD:Resources/Textures/_RMC14/Objects/Weapons/Guns/SmartGuns/royal_gpmg.rsi/meta.json
     },
     {
       "name": "cover-closed"
     },
     {
       "name": "cover-open"
-    },
-    {
-      "name": "mag-0"
-=======
->>>>>>> upstream/master:Resources/Textures/_RMC14/Objects/Weapons/Guns/SMGs/pcac5.rsi/meta.json
     },
     {
       "name": "equipped-BACKPACK",
@@ -48,15 +42,15 @@
       "directions": 4
     },
     {
+      "name": "mag-0"
+    },
+    {
       "name": "wielded-inhand-left",
       "directions": 4
     },
     {
       "name": "wielded-inhand-right",
       "directions": 4
-    },
-    {
-      "name": "mag-0"
     }
   ]
 }
