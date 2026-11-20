@@ -9,7 +9,7 @@
     state: icon
   - type: SpawnItemsOnUse
     items:
-      # EMPTY ROLL
+      # TRASH ROLL
       - id: RMCPropTrashFull
         orGroup: MarineGift
         weight: 5.0
@@ -22,7 +22,7 @@
       # REAL WEAPONS & ATTACHMENTS
       - id: RMCWeaponRevolverMateba
         orGroup: MarineGift
-        weight: 0.5
+        weight: 0.1
       - id: RMCWeaponPistolHandcannon
         orGroup: MarineGift
         weight: 1.0
@@ -31,7 +31,7 @@
         weight: 1.0
       - id: RMCEnergySword
         orGroup: MarineGift
-        weight: 0.5
+        weight: 0.3
       - id: RMCAttachmentBarrelCharger
         orGroup: MarineGift
         weight: 1.0
@@ -43,7 +43,87 @@
         weight: 1.0
       - id: RMCTrollWSToken
         orGroup: MarineGift
-        weight: 0.5
+        weight: 0.01
+
+      # FACTIONS COSMETICS
+      - id: RMCCLFArmband
+        orGroup: MarineGift
+        weight: 1
+      - id: RMCJumpsuitCLFSoldier
+        orGroup: MarineGift
+        weight: 1
+      - id: CMHeadBandRebel
+        orGroup: MarineGift
+        weight: 1
+      - id: RMCColonyLiberationFrontCup
+        orGroup: MarineGift
+        weight: 1
+      - id: RMCPatchCLF
+        orGroup: MarineGift
+        weight: 1
+      - id: RMCHeadRoyalCapPeaked
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCHeadCapTSEPAPeaked
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCHeadCapTSEPAPeakedGoldSilver
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCHeadCapTSEPAPeakedGold
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchTSE
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCBackpackRTOTSE
+        orGroup: MarineGift
+        weight: 1.5
+      - id: RMCThreeSunEmpireCup
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchTSEMarines
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchTSEPara
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchSPPMSC
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchSPPNavalAlt
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchSPPVDVAlt
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCSocialistPPCup
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchSPPAlt
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapSPPUshankaCivilian
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapSPPUshanka
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapSPPPeakedPolice
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCHeadCapSPPPolKomWhite
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapSPPPeaked
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapCav
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCJumpsuitMarineTyrargo
+        orGroup: MarineGift
+        weight: 2
 
       # STANDARD ROLL
       - id: SnapPopBox
@@ -178,6 +258,42 @@
       - id: RMCPlushieGnarpGnarp
         orGroup: MarineGift
         weight: 3
+      - id: RMCMaskNeckerchiefFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCMaskScarfFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: CMHeadBandFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCFoxtrotArmband
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCHeadBeretSquadFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCPatchFallingFalconsFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCMaskNeckerchiefEcho
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCMaskScarfEcho
+        orGroup: MarineGift
+        weight: 3
+      - id: CMHeadBandEcho
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCEchoArmband
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCHeadBeretSquadEcho
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCPatchFallingFalconsEcho
+        orGroup: MarineGift
+        weight: 3
     sound:
       path: /Audio/Effects/unwrap.ogg
   - type: Tag
@@ -191,7 +307,7 @@
   parent: RMCKitBase
   id: RMCFoamCrossbowCase
   name: crossbow kit
-  description: Contains the equipment needed for having with a crossbow.
+  description: Contains the equipment needed for having fun with a crossbow.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/procase_mini.rsi

@@ -24,7 +24,6 @@
         RMCSkillFireman: 2
         RMCSkillEndurance: 3
         RMCSkillExecution: 1
-        RMCSkillMedical: 3
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillVehicles: 1
@@ -36,7 +35,7 @@
       - Russian
       - Scandinavian
       - German
-      -  Chinese
+      - Chinese
       - Spanish
       understoodLanguages:
       - English

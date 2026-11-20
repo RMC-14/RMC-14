@@ -290,6 +290,7 @@
     - Sidearm
     - RMCRevolver
     - RMCMatebaFesteba
+  - type: GunIDLock
 
 - type: entity
   id: RMCBaseSpeedLoaderMateba
@@ -389,7 +390,7 @@
 
 - type: entity
   parent: RMCBaseSpeedLoaderMateba
-  id: RMCSpeedLoaderMatebaHE #High Explosive (Brig gen+ people only like commander of the marine corps)
+  id: RMCSpeedLoaderMatebaHE #High Explosive (ONLY admin roles should have this as it uses SADAR HE rocket stats which means it's just a pocket sadar) RMC14 TODO: Use parity stats
   name: Mateba explosive speed loader (.454).
   description: A formidable .454 speedloader, made exclusively for the Mateba autorevolver. There's an impact charge built into the bullet tip. Firing this at anything will result in a powerful explosion. Use with EXTREME caution.
   components:
