@@ -20,7 +20,7 @@
       - id: CMBootsBlackFilled
       - id: CMMRE
       - id: RMCStampSEA
-      - id: RMCOuterClothingExternalWebbing      
+      - id: RMCOuterClothingExternalWebbing
       - id: CMJumpsuitOperations
         name: operations uniform
     - name: Gloves
@@ -64,6 +64,7 @@
       choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
+      - id: RMCCoatAllWeather
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:

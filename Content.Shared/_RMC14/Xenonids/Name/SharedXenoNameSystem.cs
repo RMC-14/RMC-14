@@ -48,6 +48,21 @@ public abstract class SharedXenoNameSystem : EntitySystem
             true);
     }
 
+    /// <summary>
+    /// Returns either the xeno's assigned prefix, or <see cref="DefaultPrefix"/> if they don't have one set.
+    /// </summary>
+    public string GetXenoPrefix(Entity<XenoNameComponent?> ent)
+    {
+        if (Resolve(ent, ref ent.Comp) && ent.Comp.Prefix.Length != 0)
+        {
+            return ent.Comp.Prefix;
+        }
+        else
+        {
+            return DefaultPrefix;
+        }
+    }
+
     private void OnNewXenoEvolved(ref NewXenoEvolvedEvent ev)
     {
         TransferName(ev.OldXeno, ev.NewXeno);
@@ -64,12 +79,8 @@ public abstract class SharedXenoNameSystem : EntitySystem
         if (rank.Length > 0)
             rank = $"{rank} ";
 
-        var prefix = ent.Comp.Prefix;
-        if (prefix.Length == 0)
-            prefix = DefaultPrefix;
-
+        var prefix = GetXenoPrefix(ent.Owner);
         var postfix = ent.Comp.Postfix;
-
         var number = ent.Comp.Number;
 
         if (HasComp<XenoOmitNumberComponent>(ent))
@@ -135,12 +146,21 @@ public abstract class SharedXenoNameSystem : EntitySystem
     public int GetMaxXenoPostfixLength(ICommonSession player)
     {
         var time = GetXenoPlaytime(player);
-        if (time > _xenoPostfixTwoTime)
+
+        if (time > _xenoPostfixTime)
             return 2;
-        else if (time > _xenoPostfixTime)
-            return 1;
 
         return 0;
+    }
+
+    public bool AllowPostfixLetterEnding(ICommonSession player)
+    {
+        var time = GetXenoPlaytime(player);
+
+        if (time <= _xenoPostfixTwoTime)
+            return false;
+
+        return true;
     }
 
     private void TransferName(EntityUid oldXeno, EntityUid newXeno)
