@@ -279,12 +279,12 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             if (_entityWhitelist.IsWhitelistFail(explosion.Whitelist, target))
                 continue;
 
-            DoDirectExplosionDamage(ent, target, user, explosion.ExplosionType, explosion.Damage, explosion.ArmorPiercing, explosion.OverrideDirection);
+            DoDirectExplosionDamage(ent, target, user, explosion.ExplosionType, explosion.Damage, explosion.ArmorPiercing, explosion.IsAtEpicenter);
         }
     }
 
     public void DoDirectExplosionDamage(EntityUid origin, EntityUid target, EntityUid? user,
-        ProtoId<ExplosionPrototype> explosionType, DamageSpecifier damage, int armorPiercing = 0, bool? hasDirectionOverride = null)
+        ProtoId<ExplosionPrototype> explosionType, DamageSpecifier damage, int armorPiercing = 0, bool? isAtEpicenter = null)
     {
         var ev = new GetExplosionResistanceEvent(explosionType);
         RaiseLocalEvent(target, ref ev);
@@ -303,7 +303,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);
 
-        var bev = new BeforeExplosionRecievedEvent(explosionType, _transform.GetMapCoordinates(origin), damage, hasDirectionOverride);
+        var bev = new BeforeExplosionRecievedEvent(explosionType, _transform.GetMapCoordinates(origin), damage, isAtEpicenter);
         RaiseLocalEvent(target, ref bev);
         var finalDamage = bev.Damage;
 
