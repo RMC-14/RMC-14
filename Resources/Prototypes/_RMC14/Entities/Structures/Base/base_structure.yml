@@ -66,6 +66,8 @@
     damage:
       types:
         Heat: 4.8
+  - type: ExaminableDamage
+    messages: XenoStructureMessages
 
 - type: entity
   id: CMCorrodible

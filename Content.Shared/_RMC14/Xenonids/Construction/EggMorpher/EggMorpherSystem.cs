@@ -1,10 +1,12 @@
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
-using Content.Shared._RMC14.Synth;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
@@ -12,6 +14,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Verbs;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -29,6 +32,9 @@ public sealed partial class EggMorpherSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedXenoEggRetrieverSystem _eggRetriever = default!;
+    [Dependency] private readonly SharedXenoParasiteThrowerSystem _thrower = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -36,7 +42,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
         SubscribeLocalEvent<EggMorpherComponent, ExaminedEvent>(OnExamineEvent);
 
-        SubscribeLocalEvent<EggMorpherComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<EggMorpherComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<EggMorpherComponent, InteractUsingEvent>(OnInteractUsing);
 
 
@@ -45,22 +51,24 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
         SubscribeLocalEvent<EggMorpherComponent, StepTriggerAttemptEvent>(OnEggMorpherStepAttempt);
         SubscribeLocalEvent<EggMorpherComponent, StepTriggeredOffEvent>(OnEggMorpherStepTriggered);
+
+        SubscribeLocalEvent<EggMorpherComponent, EggMorpherFillDoafterEvent>(OnEggMorpherFill);
     }
 
     private void OnExamineEvent(Entity<EggMorpherComponent> eggMorpher, ref ExaminedEvent args)
     {
-        if (!HasComp<XenoComponent>(args.Examiner))
-        {
+        if (!HasComp<XenoComponent>(args.Examiner) && !HasComp<GhostComponent>(args.Examiner))
             return;
-        }
 
         using (args.PushGroup(nameof(EggMorpherComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-xeno-construction-egg-morpher-examine", ("cur_paras", eggMorpher.Comp.CurParasites), ("max_paras", eggMorpher.Comp.MaxParasites)));
+            args.PushMarkup(Loc.GetString("rmc-xeno-construction-egg-morpher-examine-count", ("cur_paras", eggMorpher.Comp.CurParasites), ("max_paras", eggMorpher.Comp.MaxParasites)));
+            if (eggMorpher.Comp.NextSpawnAt is { } nextSpawnAt && eggMorpher.Comp.CurParasites < eggMorpher.Comp.GrowMaxParasites)
+                args.PushMarkup(Loc.GetString("rmc-xeno-construction-egg-morpher-examine-next-spawn", ("time_left", (int)(nextSpawnAt - _time.CurTime).TotalSeconds)));
         }
     }
 
-    private void OnInteractHand(Entity<EggMorpherComponent> eggMorpher, ref InteractHandEvent args)
+    private void OnActivateInWorld(Entity<EggMorpherComponent> eggMorpher, ref ActivateInWorldEvent args)
     {
         if (_net.IsClient)
         {
@@ -149,6 +157,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
         args.Handled = true;
         QueueDel(used);
         eggMorpher.Comp.CurParasites++;
+        Dirty(eggMorpher);
         _appearance.SetData(eggMorpher, EggmorpherOverlayVisuals.Number, eggMorpher.Comp.CurParasites);
     }
 
@@ -231,6 +240,58 @@ public sealed partial class EggMorpherSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private void OnEggMorpherFill(Entity<EggMorpherComponent> eggMorpher, ref EggMorpherFillDoafterEvent args)
+    {
+        if (!TryComp<XenoEggRetrieverComponent>(args.User, out var retrieve))
+            return;
+
+        if (args.Handled)
+            return;
+
+        if (args.Cancelled)
+        {
+            if (args.Transfered)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-retrieve-egg-fill-finish", ("morpher", eggMorpher), ("cur_eggs", retrieve.CurEggs), ("max_eggs", retrieve.MaxEggs)), args.User, args.User);
+            return;
+        }
+
+        args.Handled = true;
+
+        if (retrieve.CurEggs <= 0 || eggMorpher.Comp.CurParasites >= eggMorpher.Comp.MaxParasites)
+            return;
+
+        _eggRetriever.RemoveEggNoSpawn((args.User, retrieve));
+        eggMorpher.Comp.CurParasites++;
+        _appearance.SetData(eggMorpher, EggmorpherOverlayVisuals.Number, eggMorpher.Comp.CurParasites);
+        args.Transfered = true;
+
+        if (_net.IsServer)
+            _audio.PlayEntity(eggMorpher.Comp.EggFillSound, args.User, eggMorpher);
+
+        // Check again for a repeat
+        if (retrieve.CurEggs <= 0 || eggMorpher.Comp.CurParasites >= eggMorpher.Comp.MaxParasites)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-retrieve-egg-fill-finish", ("morpher", eggMorpher), ("cur_eggs", retrieve.CurEggs), ("max_eggs", retrieve.MaxEggs)), args.User, args.User);
+            args.Repeat = false;
+        }
+        else
+            args.Repeat = true;
+
+    }
+
+    public void EggMorpherEmpty(Entity<EggMorpherComponent> eggMorpher, Entity<XenoParasiteThrowerComponent> xeno)
+    {
+        var transfer = Math.Min(eggMorpher.Comp.CurParasites, xeno.Comp.CurParasites + xeno.Comp.MaxParasites);
+
+        _thrower.AddParasites(xeno, transfer);
+        eggMorpher.Comp.CurParasites -= transfer;
+        _appearance.SetData(eggMorpher, EggmorpherOverlayVisuals.Number, eggMorpher.Comp.CurParasites);
+        Dirty(eggMorpher);
+
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-empty", ("morpher", eggMorpher), ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites)), xeno, PopupType.Medium);
+        _appearance.SetData(eggMorpher, EggmorpherOverlayVisuals.Number, eggMorpher.Comp.CurParasites);
     }
 
     public override void Update(float frameTime)

@@ -6,6 +6,7 @@ ui-options-function-rmc-activate-attachable-stock = Activate stock attachment
 ui-options-function-rmc-activate-attachable-underbarrel = Activate underbarrel attachment
 ui-options-function-rmc-field-strip-held-item = Field strip held item
 ui-options-function-rmc-cycle-fire-mode = Cycle firemode
+ui-options-function-rmc-toggle-shotgun-tube = Toggle shotgun tube
 ui-options-function-cm-unique-action = Unique action
 ui-options-function-cm-holster-primary = Unholster
 ui-options-function-cm-holster-secondary = Unholster secondary

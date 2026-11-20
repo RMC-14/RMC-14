@@ -17,7 +17,7 @@
     - CMBeltUtilityFilled
     - CMMultitool
     - RMCFlashlight
-    - FoodDonkpocket
+    - RMCFoodDonkpocket
     - CMGrenadeSmoke
     - DoorElectronics
     - CMWirecutter
@@ -113,7 +113,7 @@
     - RMCWeaponRifleL42A: RMCMagazineRifleL42A
     - RMCWeaponSMGType19: RMCMagazineSMGType19
     - RMCWeaponRifleABR40: RMCMagazineRifleABR40
-    - WeaponSMGMP5: CMMagazineSMGMP5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
     - WeaponRifleM16: RMCMagazineRifleM16
     - WeaponRifleAR10: RMCMagazineRifleAR10
     - RMCWeaponRifleType71: RMCMagazineRifleType71
@@ -399,7 +399,7 @@
     - id: RMCSmallFloodlightUnanchored
       amount: 4
   - type: SpawnOnTerminate
-    spawn: FoodDonkpocket
+    spawn: RMCFoodDonkpocket
 
 - type: entity
   parent: RMCSecureCaseStrapped #Floodlights (funny drag stuff)
@@ -751,6 +751,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -888,6 +889,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:

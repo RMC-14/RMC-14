@@ -16,6 +16,7 @@ public sealed class VehicleViewportSystem : EntitySystem
     private static readonly EntProtoId VehiclePeekAnchor = "VehiclePeekAnchor";
 
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VehicleSystem _vehicles = default!;
     [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
@@ -27,6 +28,7 @@ public sealed class VehicleViewportSystem : EntitySystem
         SubscribeLocalEvent<VehicleViewportComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<VehicleEnterComponent, GetVerbsEvent<AlternativeVerb>>(OnVehicleEnterVerbs);
         SubscribeLocalEvent<VehicleViewportUserComponent, MoveInputEvent>(OnUserMove);
+        SubscribeLocalEvent<VehicleViewportUserComponent, MoveEvent>(OnUserMoved);
     }
 
     private void OnActivate(Entity<VehicleViewportComponent> ent, ref ActivateInWorldEvent args)
@@ -45,6 +47,18 @@ public sealed class VehicleViewportSystem : EntitySystem
     {
         if (_net.IsClient || !args.HasDirectionalMovement)
             return;
+
+        CloseViewport(ent.Owner, ent.Comp);
+    }
+
+    private void OnUserMoved(Entity<VehicleViewportUserComponent> ent, ref MoveEvent args)
+    {
+        if (_net.IsClient ||
+            ent.Comp.Source is not { } source ||
+            _interaction.InRangeUnobstructed(ent.Owner, source))
+        {
+            return;
+        }
 
         CloseViewport(ent.Owner, ent.Comp);
     }
@@ -106,6 +120,10 @@ public sealed class VehicleViewportSystem : EntitySystem
             userState.PreviousTarget = newEye.Target;
         userState.Source = source;
 
+        var watching = EnsureComp<VehicleWatchingComponent>(user);
+        watching.Watching = vehicle;
+        Dirty(user, watching);
+
         _eye.SetTarget(user, vehicle);
         _viewToggle.EnableViewToggle(user, vehicle, source, userState.PreviousTarget, isOutside: true);
         return true;
@@ -133,6 +151,10 @@ public sealed class VehicleViewportSystem : EntitySystem
         userState.Source = vehicle;
         userState.PeekTarget = Spawn(VehiclePeekAnchor, peekCoords);
 
+        var watching = EnsureComp<VehicleWatchingComponent>(user);
+        watching.Watching = vehicle;
+        Dirty(user, watching);
+
         _eye.SetTarget(user, userState.PeekTarget);
         Dirty(user, userState);
         return true;
@@ -154,5 +176,6 @@ public sealed class VehicleViewportSystem : EntitySystem
             QueueDel(peekTarget);
 
         RemCompDeferred<VehicleViewportUserComponent>(user);
+        RemCompDeferred<VehicleWatchingComponent>(user);
     }
 }
