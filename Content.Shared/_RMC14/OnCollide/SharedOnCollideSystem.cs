@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
@@ -126,7 +127,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
             _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
         }
 
-        if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
+        if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && !HasComp<XenoRestingComponent>(ent) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
         {
             _stun.TryParalyze(other, ent.Comp.Paralyze, true);
 
