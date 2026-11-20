@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed undeployed sentries and weapon mounts being damageable.
-    type: Fix
-  id: 3357
-  time: '2026-06-11T22:25:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10092
 - author: Vixting
   changes:
   - message: Overwatch chat no longer gets sent to the chatbox (chat bubble still
@@ -4475,5 +4468,21 @@
   id: 3856
   time: '2026-11-20T06:18:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10971
+- author: MidZik
+  changes:
+  - message: Burrowed larva now fully count for the purposes of determining T2 and
+      T3 slots. For example, 30 burrowed larva now give 6 T3 slots, instead of ~2.2
+      T3 slots.
+    type: Tweak
+  - message: Late joining marines in the first 15 minutes now give the same amount
+      of burrowed larva as if they had readied up. After the first 15 minutes, they
+      give significantly more burrowed larva, based on the autobalance value.
+    type: Tweak
+  - message: Slightly reduced survivor counts at some player counts. In effect, about
+      25% of rounds with player counts between 45-120 will have one less survivor.
+    type: Tweak
+  id: 3857
+  time: '2026-11-20T06:24:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10530
 Name: RMC14
 Order: -1
