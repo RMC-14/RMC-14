@@ -68,9 +68,6 @@ public sealed class GunAkimboSystem : EntitySystem
 
     private void HandleAlternateHands(Entity<GunDualWieldingComponent> gun)
     {
-        if (_net.IsClient && !_timing.IsFirstTimePredicted)
-            return;
-
         if (gun.Comp.WeaponGroup == GunDualWieldingGroup.None ||
             !TryComp(gun.Owner, out GunComponent? gunComp) ||
             !_cmGun.TryGetGunUser(gun.Owner, out var user) ||

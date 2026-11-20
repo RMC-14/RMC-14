@@ -254,12 +254,7 @@ public sealed partial class GunSystem : SharedGunSystem
             if (requestedGun.Owner != gunUid && !_akimbo.HasPendingOffHandShot(entity, requestedGun.Owner))
                 continue;
 
-            // RMC rearm instead of treating every held-fire request as continuous fire.
-            var rearmSemiAuto =
-                _cfg.GetCVar(CCVars.ControlHoldToAttackRanged) &&
-                requestedGun.Comp.SelectedMode == SelectiveFire.SemiAuto &&
-                !HasComp<GunClickToFireComponent>(requestedGun.Owner) &&
-                (requestedGun.Comp.AvailableModes & SelectiveFire.FullAuto) == 0;
+            var rearmSemiAuto = ShouldRearmSemiAuto(requestedGun);
             var projectiles = _gunPrediction.ShootRequested(
                 GetNetEntity(requestedGun.Owner),
                 GetNetCoordinates(coordinates),
@@ -281,8 +276,16 @@ public sealed partial class GunSystem : SharedGunSystem
             requestedShot = true;
         }
 
-        if (alternateAkimbo && requestedShot)
+        if (alternateAkimbo && requestedShot && !ShouldRearmSemiAuto((gunUid, gun)))
             LatchAlternateAkimbo(useKey);
+    }
+
+    private bool ShouldRearmSemiAuto(Entity<GunComponent> gun)
+    {
+        return _cfg.GetCVar(CCVars.ControlHoldToAttackRanged) &&
+               gun.Comp.SelectedMode == SelectiveFire.SemiAuto &&
+               !HasComp<GunClickToFireComponent>(gun.Owner) &&
+               (gun.Comp.AvailableModes & SelectiveFire.FullAuto) == 0;
     }
 
     private List<Entity<GunComponent>> GetRequestedGuns(EntityUid user, Entity<GunComponent> activeGun)
