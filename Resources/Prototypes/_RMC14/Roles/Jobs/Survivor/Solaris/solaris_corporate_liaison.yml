@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (Solaris Survivor)
   startingGear: RMCGearSurvivorSolarisCorporateLiaison
+  icon: "CMJobIconLiaison"
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate
