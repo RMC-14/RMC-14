@@ -24,34 +24,9 @@
   - !type:AddComponentSpecial
     components:
     - type: Language
-      spokenLanguages:
-      - English
-      - French
-      - Japanese
-      - Russian
-      - Scandinavian
-      - German
-      - Chinese
-      - Spanish
-      understoodLanguages:
-      - English
-      - French
-      - Japanese
-      - Russian
-      - Scandinavian
-      - German
-      - Chinese
-      - Spanish
-      currentLanguage: English
-      defaultLanguage: English
+      preset: RMCLanguagePresetSynth
     - type: LanguageLearning
-      learnableLanguages:
-      - Xeno
-      firstContactLanguages:
-      - Xeno
-      comprehensionThreshold: 0.8
-      learningRange: 8.0
-      baseWordLearningRate: 0.05
+      preset: RMCLanguageLearningPresetSynth
     - type: CMVendorUser
       id: RMCJobSynthetic
       points: 45
