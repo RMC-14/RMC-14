@@ -75,8 +75,22 @@ rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-failed-marines-dropped = The sky talls have already landed, we can no longer evolve into this form.
 rmc-xeno-evolution-failed-queen-exists = The hive already has a Queen!
+rmc-xeno-evolution-failed-not-enough-points = We need more evolution material.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
+rmc-xeno-evolution-raffle-entered = We put ourselves forward to become a {$caste}. The hive will decide when a slot opens.
+rmc-xeno-evolution-raffle-won = The hive has chosen us!
+rmc-xeno-evolution-raffle-grace-health = A slot has opened for us, but we must be at full health! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-grace-location = A slot has opened for us, but we cannot evolve here! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-grace-weeds = A slot has opened for us, but we must be on weeds! We have {$seconds} seconds.
+rmc-xeno-evolution-raffle-missed = We were not ready in time. The hive passes over us for this slot, but we remain in the raffle.
+rmc-xeno-evolution-raffle-out-of-line = That caste is no longer within our evolution line. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-left-changed = Our new form cannot become that caste. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-left-closed = The hive has made its choice without us. We must evolve the usual way.
+rmc-xeno-evolution-raffle-left-crit = We are too wounded to be chosen. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-progress = {$name} - {$progress}/{$cost}
+rmc-xeno-evolution-tab-evolve = Evolve
+rmc-xeno-evolution-tab-raffle = Raffle
 
 # Insight
 rmc-xeno-insight-empower = We have gained sufficient insight in our prey to empower our next Deploy Traps!
@@ -104,6 +118,7 @@ cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
 cm-xeno-fortify-cant-rest = We can't rest while fortifying!
 cm-xeno-fortify-cant-tail-sweep = We can't tail sweep while fortifying!
 cm-xeno-fortify-cant-toggle-crest = We can't lower our crest while fortifying!
+cm-xeno-fortify-cant-vehicle = The vehicle blocks us from foritifying
 
 # Headbutt
 rmc-xeno-headbutt-too-far = We can't headbutt from this distance with our crest lowered!
@@ -182,6 +197,8 @@ rmc-xeno-rest-cant = You can't do that while resting!
 cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!
 cm-xeno-toggle-crest-cant-rest = You can't rest while your crest is lowered!
 cm-xeno-toggle-crest-cant-tail-sweep = You can't tail sweep while your crest is lowered!
+rmc-alert-xeno-crest-lowered = Crest Lowered
+rmc-alert-xeno-crest-lowered-desc = Your armor is [color=green]increased[/color], but movement speed is [color=red]reduced[/color].
 
 # Transfer Plasma
 cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {$target}. You now have {$total}
@@ -212,6 +229,8 @@ cm-xeno-retrieve-egg-too-many-eggs = We can't carry more eggs!
 cm-xeno-retrieve-egg-stash-egg = We store the egg for safekeeping. Now holding: {$cur_eggs}/{$max_eggs}.
 cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding: {$cur_eggs}/{$max_eggs}.
 rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
+rmc-xeno-retrieve-egg-fill = We start filling {THE($morpher)} with our children.
+rmc-xeno-retrieve-egg-fill-finish = We slide our children out of eggs into {THE($morpher)}. Now holding: {$cur_eggs}/{$max_eggs}.
 
 # Throw Parasite
 cm-xeno-throw-parasite-no-parasites = We don't have any children stored!
@@ -223,6 +242,8 @@ rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE(
    [one] role
    *[other] roles
 } available.
+rmc-xeno-throw-parasite-empty = We take children from {THE($morpher)} and carry them for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
+rmc-xeno-throw-parasite-empty-on-fire = Touching {THE($morpher)} while you're on fire would burn the children in it!
 rmc-xeno-throw-parasite-throw-cooldown = We must wait before throwing another child.
 rmc-xeno-throw-parasite-retrieve-cooldown = We must wait before retrieving another child.
 
@@ -245,10 +266,9 @@ rmc-xeno-retrieve-anchored = That sister cannot move!
 rmc-xeno-retrieve-too-big = {$target} is too big to retrieve while standing up!
 rmc-xeno-retrieve-dead = {$target} is already dead!
 rmc-xeno-retrieve-blocked = We can't reach {$target} with our resin retrieval hook!
-rmc-xeno-retrieve-start-self = We prepare to fire our resin retrieval hook at {$target}!
-rmc-xeno-retrieve-start-others = {$user} prepares to fire its resin retrieval hook at {$target}!
-rmc-xeno-retrieve-finish-user = We fling {$target} over our head with our resin hook!
-rmc-xeno-retrieve-finish-target = We are pulled toward {$user}!
+rmc-xeno-retrieve-finish-self = We fling {$target} over our head with our resin hook!
+rmc-xeno-retrieve-finish-target = We are pulled over {$user}'s head!
+rmc-xeno-retrieve-finish-others = {$target} is pulled over {$user}'s head!
 
 # Aid
 rmc-xeno-aid-self = We cannot heal ourself!
