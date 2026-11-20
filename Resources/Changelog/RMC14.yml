@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The amount of light emitted in small areas is now limited.
-    type: Tweak
-  id: 3374
-  time: '2026-06-11T22:41:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9827
 - author: Bagietens
   changes:
   - message: Fixed healer drone and acid runner sacrifices being taken by larva queue.
@@ -4444,5 +4437,13 @@
   id: 3873
   time: '2026-11-20T08:02:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10074
+- author: stuff3541
+  changes:
+  - message: Engi skill now multiplies attachment and detachment speed of dropship
+      parts.
+    type: Fix
+  id: 3874
+  time: '2026-11-20T08:10:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10972
 Name: RMC14
 Order: -1
