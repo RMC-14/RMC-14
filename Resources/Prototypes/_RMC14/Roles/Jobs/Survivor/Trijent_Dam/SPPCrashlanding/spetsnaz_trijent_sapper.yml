@@ -1,0 +1,57 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazTrijentBase
+  id: RMCSurvivorSPPSpetsnazTrijentSapper
+  name: rmc-job-name-spetsnaz-sapper
+  startingGear: RMCGearSPPSpetsnazTrijentSapper
+  ranks:
+    RMCRankSPPSerzhant: []
+  icon: "RMCJobIconSPPSpetsnazSapper"
+  spawnMenuRoleName: SPP Spetsnaz D/SRU Sapper (Trijent Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPSapper
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-trijent-spetsnaz-sapper
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPSpetsnazNoBelt
+    - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazTrijentBase
+  id: RMCGearSPPSpetsnazTrijentSapper
+  equipment:
+    eyes: RMCWeldingGoggles
+    gloves: CMHandsInsulated
+    belt: CMBeltUtilityFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazTrijentSapper
+  name: special survivor spp spetsnaz sapper spawn point
+  suffix: Trjient
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazTrijentSapper
+  - type: Sprite
+    state: surv_spp
