@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
@@ -68,13 +69,19 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
         if (storage.Container == null)
             return;
 
-        var index = 0;
+        var accessories = new List<(EntityUid Uid, HelmetAccessoryComponent Comp)>();
         foreach (var item in storage.Container.ContainedEntities)
         {
-            var layer = $"helmetaccessory_{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}{index}_{Name(ent.Owner)}";
+            if (_accessoryQuery.TryComp(item, out var comp))
+                accessories.Add((item, comp));
+        }
 
-            if (!_accessoryQuery.TryComp(item, out var accessoryComp))
-                continue;
+        // Lower DrawOrder is drawn first (underneath).
+        // so accessories with the same DrawOrder keep their insertion order.
+        var index = 0;
+        foreach (var (item, accessoryComp) in accessories.OrderBy(a => a.Comp.DrawOrder))
+        {
+            var layer = $"helmetaccessory_{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}{index}_{Name(ent.Owner)}";
 
             var rsi = _itemToggle.IsActivated(item) && accessoryComp.ToggledRsi != null
                 ? (ent.Comp.IsHat && accessoryComp.HatToggledRsi != null ? accessoryComp.HatToggledRsi : accessoryComp.ToggledRsi)

@@ -494,6 +494,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 ? "We regurgitate some resin and thicken the " + Name(upgradeable) + " effortlessly."
                 : $"We regurgitate some resin and thicken the {Name(upgradeable)}, using {cost} plasma.";
             _popup.PopupClient(msg, upgradeable, xeno);
+            _audio.PlayPredicted(xeno.Comp.BuildSound, Transform(upgradeable).Coordinates, xeno.Owner);
 
             if (_net.IsClient)
                 return;

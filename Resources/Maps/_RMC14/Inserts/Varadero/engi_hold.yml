@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/11/2026 22:51:41
-  entityCount: 225
+  time: 08/18/2026 22:10:16
+  entityCount: 223
 maps: []
 grids:
 - 1
@@ -103,11 +103,15 @@ entities:
   entities:
   - uid: 224
     components:
+    - type: MetaData
+      name: Underground Technical Storage
     - type: Transform
       pos: 5.5,0.5
       parent: 1
   - uid: 225
     components:
+    - type: MetaData
+      name: Underground Technical Storage
     - type: Transform
       pos: 7.5,0.5
       parent: 1
@@ -115,12 +119,16 @@ entities:
   entities:
   - uid: 221
     components:
+    - type: MetaData
+      name: Underground Maintenance
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 11.5,10.5
       parent: 1
   - uid: 222
     components:
+    - type: MetaData
+      name: Underground Maintenance
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 11.5,3.5
@@ -129,6 +137,8 @@ entities:
   entities:
   - uid: 223
     components:
+    - type: MetaData
+      name: Underground Secure Technical Storage
     - type: Transform
       pos: 6.5,6.5
       parent: 1
@@ -185,11 +195,6 @@ entities:
     components:
     - type: Transform
       pos: 4.5,1.5
-      parent: 1
-  - uid: 76
-    components:
-    - type: Transform
-      pos: 6.5,1.5
       parent: 1
   - uid: 77
     components:
@@ -329,11 +334,6 @@ entities:
     - type: Transform
       pos: 2.8960733,0.5638573
       parent: 1
-  - uid: 47
-    components:
-    - type: Transform
-      pos: 6.4741983,0.5482323
-      parent: 1
   - uid: 48
     components:
     - type: Transform
@@ -389,11 +389,6 @@ entities:
     components:
     - type: Transform
       pos: 10.5,0.5
-      parent: 1
-  - uid: 45
-    components:
-    - type: Transform
-      pos: 6.5,0.5
       parent: 1
 - proto: CMTable
   entities:
@@ -505,6 +500,46 @@ entities:
       parent: 1
 - proto: CMWallMetal
   entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 0.5,10.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
   - uid: 23
     components:
     - type: Transform
@@ -530,28 +565,13 @@ entities:
     - type: Transform
       pos: 10.5,6.5
       parent: 1
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
 - proto: CMWallReinforced
   entities:
-  - uid: 2
-    components:
-    - type: Transform
-      pos: 0.5,1.5
-      parent: 1
-  - uid: 3
-    components:
-    - type: Transform
-      pos: 0.5,0.5
-      parent: 1
-  - uid: 4
-    components:
-    - type: Transform
-      pos: 1.5,0.5
-      parent: 1
-  - uid: 5
-    components:
-    - type: Transform
-      pos: 11.5,0.5
-      parent: 1
   - uid: 6
     components:
     - type: Transform
@@ -592,16 +612,6 @@ entities:
     - type: Transform
       pos: 0.5,12.5
       parent: 1
-  - uid: 14
-    components:
-    - type: Transform
-      pos: 0.5,11.5
-      parent: 1
-  - uid: 15
-    components:
-    - type: Transform
-      pos: 0.5,10.5
-      parent: 1
   - uid: 16
     components:
     - type: Transform
@@ -612,30 +622,77 @@ entities:
     - type: Transform
       pos: 3.5,12.5
       parent: 1
-  - uid: 18
+  - uid: 22
     components:
     - type: Transform
-      pos: 0.5,8.5
+      pos: 5.5,6.5
       parent: 1
-  - uid: 19
+  - uid: 31
     components:
     - type: Transform
-      pos: 0.5,7.5
+      pos: 11.5,5.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 11.5,2.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 1.5,12.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 5.5,12.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 6.5,12.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 8.5,12.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 10.5,12.5
+      parent: 1
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 11.5,11.5
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 11.5,7.5
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 11.5,8.5
+      parent: 1
+- proto: CMWallReinforcedHeavy
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 11.5,0.5
       parent: 1
   - uid: 20
     components:
     - type: Transform
       pos: 0.5,6.5
-      parent: 1
-  - uid: 21
-    components:
-    - type: Transform
-      pos: 0.5,5.5
-      parent: 1
-  - uid: 22
-    components:
-    - type: Transform
-      pos: 5.5,6.5
       parent: 1
 - proto: CMWindowWhiteColonyReinforced
   entities:
@@ -648,66 +705,6 @@ entities:
     components:
     - type: Transform
       pos: 0.5,4.5
-      parent: 1
-  - uid: 80
-    components:
-    - type: Transform
-      pos: 11.5,5.5
-      parent: 1
-  - uid: 81
-    components:
-    - type: Transform
-      pos: 11.5,2.5
-      parent: 1
-  - uid: 96
-    components:
-    - type: Transform
-      pos: 0.5,9.5
-      parent: 1
-  - uid: 97
-    components:
-    - type: Transform
-      pos: 1.5,12.5
-      parent: 1
-  - uid: 98
-    components:
-    - type: Transform
-      pos: 4.5,12.5
-      parent: 1
-  - uid: 99
-    components:
-    - type: Transform
-      pos: 5.5,12.5
-      parent: 1
-  - uid: 100
-    components:
-    - type: Transform
-      pos: 6.5,12.5
-      parent: 1
-  - uid: 101
-    components:
-    - type: Transform
-      pos: 8.5,12.5
-      parent: 1
-  - uid: 102
-    components:
-    - type: Transform
-      pos: 10.5,12.5
-      parent: 1
-  - uid: 103
-    components:
-    - type: Transform
-      pos: 11.5,11.5
-      parent: 1
-  - uid: 104
-    components:
-    - type: Transform
-      pos: 11.5,7.5
-      parent: 1
-  - uid: 105
-    components:
-    - type: Transform
-      pos: 11.5,8.5
       parent: 1
   - uid: 110
     components:
@@ -953,6 +950,11 @@ entities:
       parent: 1
 - proto: RMCDecalSpawnerXenoSplatters
   entities:
+  - uid: 105
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
   - uid: 145
     components:
     - type: Transform
@@ -1206,16 +1208,16 @@ entities:
     - type: Transform
       pos: 5.6522884,5.652348
       parent: 1
-- proto: RMCSpawnerCorpseEngineer
+- proto: RMCSpawnerCorpseUNMCCrewman
   entities:
-  - uid: 165
+  - uid: 102
     components:
     - type: Transform
       pos: 5.5,8.5
       parent: 1
-- proto: RMCSpawnerCorpseSecurity
+- proto: RMCSpawnerCorpseUNMCMarineUnarmed
   entities:
-  - uid: 151
+  - uid: 103
     components:
     - type: Transform
       pos: 4.5,3.5
@@ -1391,11 +1393,6 @@ entities:
     - type: Transform
       pos: 4.5,0.5
       parent: 1
-  - uid: 31
-    components:
-    - type: Transform
-      pos: 6.5,0.5
-      parent: 1
   - uid: 32
     components:
     - type: Transform
@@ -1415,6 +1412,11 @@ entities:
     components:
     - type: Transform
       pos: 0.5,3.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 0.5,9.5
       parent: 1
 - proto: RMCZippo
   entities:
