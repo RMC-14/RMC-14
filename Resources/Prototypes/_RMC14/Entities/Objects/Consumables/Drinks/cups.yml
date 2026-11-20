@@ -127,8 +127,8 @@
 - type: entity
   parent: RMCCoffeeCup
   id: RMCHalcyonCup
-  name: Halcyon Dynamics mug
-  description: A well-crafted, brutal mug adorned with the logo of the Halcyon Dynamics corporation. Made for those who pursue relentless progress and industry.
+  name: Halcyon mug
+  description: A well-crafted, brutal mug adorned with the logo of the Halcyon corporation. Made for those who pursue relentless progress and industry.
   components:
   - type: Sprite
     layers:

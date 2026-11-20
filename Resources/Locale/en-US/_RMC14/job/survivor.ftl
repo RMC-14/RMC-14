@@ -253,7 +253,7 @@ rmc-job-prefix-fire-protection-specialist = FPPB
 
 rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
-rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
+rmc-job-name-survivor-halcyon-liaison = Halcyon - Corporate Liaison
 
 # Sorokyne SOF insert survs
 
