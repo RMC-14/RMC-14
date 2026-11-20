@@ -1,5 +1,6 @@
 using Content.Server._RMC14.Power;
 using Content.Shared._RMC14.Gibbing;
+using Content.Shared._RMC14.Nuke;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.Sensor;
@@ -21,14 +22,16 @@ public sealed class RMCNukeSystem : EntitySystem
 
     private readonly DamageSpecifier _damage = new() { DamageDict = { ["Blunt"] = 1e5, ["Heat"] = 1e5 } };
     private EntityQuery<RMCRepairableComponent> _repairable;
+    private EntityQuery<RMCNukeShelterComponent> _shelter;
 
     public override void Initialize()
     {
         base.Initialize();
         _repairable = GetEntityQuery<RMCRepairableComponent>();
+        _shelter = GetEntityQuery<RMCNukeShelterComponent>();
     }
 
-    private void KillEverythingOnMap(MapId mapId)
+    private void KillEverythingOnMap(MapId mapId, bool spareShelters)
     {
         var toDamage = new HashSet<EntityUid>();
         var toDelete = new HashSet<EntityUid>();
@@ -39,6 +42,9 @@ public sealed class RMCNukeSystem : EntitySystem
         while (living.MoveNext(out var uid, out var _, out var transform))
         {
             if (transform.MapID != mapId)
+                continue;
+
+            if (spareShelters && IsSheltered(uid, transform))
                 continue;
 
             AddNukeTarget(uid, toDamage, toDelete);
@@ -90,6 +96,11 @@ public sealed class RMCNukeSystem : EntitySystem
         }
     }
 
+    private bool IsSheltered(EntityUid uid, TransformComponent transform)
+    {
+        return _shelter.HasComp(uid) || _shelter.HasComp(transform.ParentUid);
+    }
+
     private void AddNukeTarget(EntityUid uid, HashSet<EntityUid> toDamage, HashSet<EntityUid> toDelete)
     {
         if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid))
@@ -98,9 +109,9 @@ public sealed class RMCNukeSystem : EntitySystem
             toDelete.Add(uid);
     }
 
-    public void NukeMap(MapId mapId)
+    public void NukeMap(MapId mapId, bool spareShelters = false)
     {
         for (var i = 0; i < 3; i++)
-            KillEverythingOnMap(mapId);
+            KillEverythingOnMap(mapId, spareShelters);
     }
 }

@@ -147,7 +147,7 @@
 - type: entity
   parent: RMCCrateExplosives
   id: RMCCrateGrenadesAirburstStarShell
-  name: M74 AGM-H 40mm Starshell grenades crate (x6)
+  name: M74 AGM-S 40mm Starshell grenades crate (x6)
   components:
   - type: StorageFill
     contents:

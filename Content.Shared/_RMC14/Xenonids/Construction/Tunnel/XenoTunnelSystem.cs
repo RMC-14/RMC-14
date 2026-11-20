@@ -839,7 +839,8 @@ public sealed class XenoTunnelSystem : EntitySystem
         var actions = _action.GetActions(ent);
         foreach (var action in actions)
         {
-            _action.SetEnabled(action.AsNullable(), newStatus);
+            if (!HasComp<RMCInContainerActionComponent>(action))
+                _action.SetEnabled(action.AsNullable(), newStatus);
         }
     }
 
@@ -932,7 +933,7 @@ public sealed class SelectDestinationTunnelInterfaceState(Dictionary<string, Net
     public Dictionary<string, NetEntity> HiveTunnels = hiveTunnels;
 }
 
-public sealed partial class XenoDigTunnelActionEvent : InstantActionEvent
+public sealed partial class XenoDigTunnelActionEvent : WorldTargetActionEvent
 {
     [DataField]
     public EntProtoId Prototype = "XenoTunnel";
