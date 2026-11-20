@@ -59,6 +59,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 
 public sealed class CMGunSystem : EntitySystem
 {
+    [Dependency] private readonly GunAkimboSystem _akimbo = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -347,8 +348,8 @@ public sealed class CMGunSystem : EntitySystem
                 TryGetGunUser(weapon.Owner, out var user) &&
                 TryGetOtherDualWieldedGun(user, (weapon.Owner, dualWielding), out _))
             {
-                var seed = (long) t << 32 | (uint) netId;
-                var akimboRandom = new Xoroshiro64S(seed);
+                var shotSeed = TryComp(weapon.Owner, out GunComponent? gun) ? gun.NextFire.Ticks : 0;
+                var akimboRandom = new Xoshiro128P((long) t << 32 | (uint) netId, shotSeed);
                 var penalty = FixedPoint2.New(0.1f * (5 + akimboRandom.Next() % 3));
                 accuracyMultiplier = FixedPoint2.Max(0.1f, accuracyMultiplier - penalty);
             }
@@ -777,23 +778,8 @@ public sealed class CMGunSystem : EntitySystem
     private bool TryGetOtherDualWieldedGun(EntityUid user, Entity<GunDualWieldingComponent> gun, out Entity<GunDualWieldingComponent> otherGun)
     {
         otherGun = default;
-
-        if (!TryComp(user, out HandsComponent? handsComp))
-            return false;
-
-        foreach (var hand in handsComp.Hands.Keys)
-        {
-            if (_hands.GetHeldItem(user, hand) is { } held &&
-                held != gun.Owner &&
-                TryComp(held, out GunDualWieldingComponent? dualWieldingComp) &&
-                dualWieldingComp.WeaponGroup != GunDualWieldingGroup.None)
-            {
-                otherGun = (held, dualWieldingComp);
-                return true;
-            }
-        }
-
-        return false;
+        return TryComp(user, out HandsComponent? hands) &&
+               _akimbo.TryGetOtherDualWieldedGun((user, hands), gun, out otherGun, out _);
     }
 
     public bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)

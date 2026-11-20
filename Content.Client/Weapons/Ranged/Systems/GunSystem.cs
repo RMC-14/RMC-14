@@ -216,17 +216,7 @@ public sealed partial class GunSystem : SharedGunSystem
         if (alternateAkimbo && _alternateAkimboLatched)
             return;
 
-        var canShoot = false;
-        foreach (var requestedGun in guns)
-        {
-            if (requestedGun.Comp.NextFire <= Timing.CurTime)
-            {
-                canShoot = true;
-                break;
-            }
-        }
-
-        if (!canShoot)
+        if (gun.NextFire > Timing.CurTime)
             return;
 
         var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
@@ -259,6 +249,9 @@ public sealed partial class GunSystem : SharedGunSystem
         foreach (var requestedGun in guns)
         {
             if (requestedGun.Comp.NextFire > Timing.CurTime)
+                continue;
+
+            if (requestedGun.Owner != gunUid && !_akimbo.HasPendingOffHandShot(entity, requestedGun.Owner))
                 continue;
 
             // RMC rearm instead of treating every held-fire request as continuous fire.
@@ -296,7 +289,7 @@ public sealed partial class GunSystem : SharedGunSystem
     {
         var guns = new List<Entity<GunComponent>> { activeGun };
 
-        if (_akimbo.GetAkimboMode(user) != GunAkimboMode.FireBoth ||
+        if (_akimbo.GetAkimboMode(user, activeGun.Comp) != GunAkimboMode.FireBoth ||
             !TryComp(activeGun, out GunDualWieldingComponent? dualWielding) ||
             dualWielding.WeaponGroup == GunDualWieldingGroup.None ||
             !TryComp(user, out HandsComponent? hands) ||
@@ -314,13 +307,14 @@ public sealed partial class GunSystem : SharedGunSystem
     {
         foreach (var gun in guns)
         {
-            RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gun.Owner) });
+            if (gun.Comp.ShotCounter != 0)
+                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gun.Owner) });
         }
     }
 
     private bool IsAlternateAkimbo(EntityUid user, Entity<GunComponent> activeGun)
     {
-        return _akimbo.GetAkimboMode(user) == GunAkimboMode.AlternateHands &&
+        return _akimbo.GetAkimboMode(user, activeGun.Comp) == GunAkimboMode.AlternateHands &&
                TryComp(activeGun.Owner, out GunDualWieldingComponent? dualWielding) &&
                dualWielding.WeaponGroup != GunDualWieldingGroup.None &&
                TryComp(user, out HandsComponent? hands) &&

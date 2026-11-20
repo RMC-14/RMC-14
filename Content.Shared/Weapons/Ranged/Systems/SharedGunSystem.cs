@@ -26,7 +26,6 @@ using Content.Shared.Effects;
 using Content.Shared.Examine;
 using Content.Shared.Gravity;
 using Content.Shared.Hands;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -97,6 +96,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     // RMC14
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
+    [Dependency] private readonly GunAkimboSystem _akimbo = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
     [Dependency] private readonly VehicleWeaponsSystem _rmcVehicleWeapons = default!;
     [Dependency] private readonly RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
@@ -179,6 +179,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         StopShooting(gunUid, gun);
     }
 
+    // RMC14
     private bool CanStopGun(EntityUid user, EntityUid gunUid, GunComponent gun)
     {
         if (TryGetGun(user, out _, out var activeGun) &&
@@ -187,8 +188,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             return true;
         }
 
-        return TryComp(user, out HandsComponent? hands) &&
-               _hands.IsHolding((user, hands), gunUid);
+        return _akimbo.IsHeldDualWieldGun(user, gunUid);
     }
 
     public bool CanShoot(GunComponent component)
@@ -294,6 +294,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShotCounter = 0;
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
+
+    // RMC14
+    public void EndBurst(EntityUid uid, GunComponent gun)
+    {
+        if (!gun.BurstActivated && gun.BurstShotsCount == 0)
+            return;
+
+        gun.BurstActivated = false;
+        gun.BurstShotsCount = 0;
+        DirtyField(uid, gun, nameof(GunComponent.BurstActivated));
+    }
+    // RMC14
 
     // RMC14 Needed to check if the attempted shot actually shot any projectiles.
     /// <summary>
