@@ -556,7 +556,7 @@
 
 - type: startingGear
   parent: RMCGearCorpseCLFBase
-  id: RMCGearCorpseCLFCR16
+  id: RMCGearCorpseCLFM16
   equipment:
     head: RMCHeadMilitiaBucket
     belt: RMCBeltMarineCR16
