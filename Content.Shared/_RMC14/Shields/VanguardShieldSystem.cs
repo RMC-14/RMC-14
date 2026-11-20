@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Xenonids.Damage;
 using Content.Shared.Damage;
 using Content.Shared.Explosion;
@@ -116,7 +117,7 @@ public sealed class VanguardShieldSystem : EntitySystem
 
     private void OnVanguardShieldGetArmor(Entity<VanguardShieldComponent> xeno, ref CMGetArmorEvent args)
     {
-        if (!TryComp<XenoShieldComponent>(xeno, out var shield) || shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
+        if (!TryComp<XenoShieldComponent>(xeno, out var shieldComp) || !_shield.TryGetShield((xeno, shieldComp), XenoShieldSystem.ShieldType.Vanguard, out var shield))
             return;
 
         if (shield.ShieldAmount <= 0)
