@@ -315,9 +315,6 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void TryOfferQueuedEntities(Entity<HiveComponent> hive)
     {
-        if (!HasAnyQueued(hive.Owner))
-            return;
-
         var larva = EntityQueryEnumerator<LarvaQueuedComponent>();
         while (larva.MoveNext(out var ent, out _))
         {
@@ -334,17 +331,13 @@ public sealed class LarvaQueueSystem : EntitySystem
             if (_reservedBurstLarva.Contains(ent))
                 continue;
 
-            if (!HasAnyQueued(hive.Owner))
-                break;
+            if (!_larvaInfector.ContainsKey(ent) && !HasAnyQueued(hive.Owner))
+                continue;
 
             if (TryPopNextSessionForOffer(hive, ent, out var session, out var tier, out var pos))
             {
                 _reservedBurstLarva.Add(ent);
                 SendOffer(session, ent, hive, tier, pos);
-            }
-            else
-            {
-                break; // no more players in queue
             }
         }
     }
@@ -379,10 +372,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (_pendingOffers.TryGetValue(session.UserId, out var existing))
         {
             if (existing.TargetLarva is { } existingLarva)
-            {
                 _reservedBurstLarva.Remove(existingLarva);
-                _larvaInfector.Remove(existingLarva);
-            }
             else
                 DecrementPendingBurrowed(existing.Hive);
         }
@@ -419,10 +409,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         _pendingOffers.Remove(userId);
 
         if (offer.TargetLarva is { } larvaEnt)
-        {
             _reservedBurstLarva.Remove(larvaEnt);
-            _larvaInfector.Remove(larvaEnt);
-        }
         else
             DecrementPendingBurrowed(offer.Hive);
 
@@ -468,7 +455,8 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         if (larvaId.HasValue && _larvaInfector.TryGetValue(larvaId.Value, out var infectorId))
         {
-            if (_player.TryGetSessionById(infectorId, out var infectorSession)
+            if (IsAlreadyQueued(infectorId, hive)
+                && _player.TryGetSessionById(infectorId, out var infectorSession)
                 && infectorSession?.AttachedEntity != null)
             {
                 var isGhost = HasComp<GhostComponent>(infectorSession.AttachedEntity.Value);
