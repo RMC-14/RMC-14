@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.ShakeStun;
 public sealed partial class StunShakeableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan DurationRemoved = TimeSpan.FromSeconds(6);
+    public TimeSpan DurationRemoved = TimeSpan.FromSeconds(12);
 
     /// <summary>
     /// Sound to play when the player is shaked.

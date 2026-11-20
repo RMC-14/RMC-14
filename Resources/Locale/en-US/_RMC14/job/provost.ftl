@@ -10,10 +10,6 @@ rmc-ghost-name-corp-provost-advisor = Provost Advisor (Friendly)
 rmc-job-name-corp-provost-advisor = Provost Advisor
 rmc-job-prefix-provost-advisor = PvA
 
-rmc-ghost-name-corp-provost-chief = Provost Chief Inspector (Friendly)
-rmc-job-name-corp-provost-chief = Provost Chief Inspector
-rmc-job-prefix-provost-chief = PvCI
-
 rmc-ghost-name-corp-provost-deputy-marshal = Provost Deputy Marshal (Friendly)
 rmc-job-name-corp-provost-deputy-marshal = Provost Deputy Marshal
 rmc-job-prefix-provost-deputy-marshal = PvDM

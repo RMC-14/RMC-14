@@ -73,6 +73,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
+        [Dependency] private readonly RMCGhostAppearanceSystem _rmcGhostAppearance = default!;
 
         // RMC14
         [Dependency] private readonly CMGhostSystem _cmGhost = default!;
@@ -456,7 +457,8 @@ namespace Content.Server.Ghost
             bool canReturn = false)
         {
             _transformSystem.TryGetMapOrGridCoordinates(targetEntity, out var spawnPosition);
-            return SpawnGhost(mind, spawnPosition, canReturn);
+            // RMC
+            return SpawnGhost(mind, spawnPosition, canReturn, targetEntity);
         }
 
         private bool IsValidSpawnPosition(EntityCoordinates? spawnPosition)
@@ -476,8 +478,10 @@ namespace Content.Server.Ghost
             return true;
         }
 
+        // RMC begin
         public EntityUid? SpawnGhost(Entity<MindComponent?> mind, EntityCoordinates? spawnPosition = null,
-            bool canReturn = false)
+            bool canReturn = false, EntityUid? appearanceSource = null)
+        // RMC end
         {
             if (!Resolve(mind, ref mind.Comp))
                 return null;
@@ -500,6 +504,13 @@ namespace Content.Server.Ghost
 
             var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
+
+            // RMC
+            if (appearanceSource is { } source)
+            {
+                _rmcGhostAppearance.CopyDeathAppearance(source, ghost);
+            }
+            // RMC
 
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".
@@ -624,7 +635,8 @@ namespace Content.Server.Ghost
             if (playerEntity != null)
                 _adminLog.Add(LogType.Mind, $"{ToPrettyString(playerEntity.Value):player} ghosted{(!canReturn ? " (non-returnable)" : "")}");
 
-            var ghost = SpawnGhost((mindId, mind), position, canReturn);
+            // RMC
+            var ghost = SpawnGhost((mindId, mind), position, canReturn, playerEntity);
 
             if (ghost == null)
                 return false;

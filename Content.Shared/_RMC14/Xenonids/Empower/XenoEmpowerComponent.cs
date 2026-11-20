@@ -45,9 +45,6 @@ public sealed partial class XenoEmpowerComponent : Component
     [DataField, AutoNetworkedField]
     public DamageSpecifier DamageIncreasePer = new();
 
-    [DataField, AutoNetworkedField]
-    public DamageSpecifier DamageTailIncreasePer = new();
-
     [DataField]
     public TimeSpan ShieldDecayTime = TimeSpan.FromSeconds(15);
 
@@ -58,7 +55,7 @@ public sealed partial class XenoEmpowerComponent : Component
     public TimeSpan SuperEmpowerPartialDuration = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public Color SuperEmpowerColor = Color.FromHex("#FF000046");
+    public Color SuperEmpowerColor = Color.FromHex("#D42C2CFF");
 
     [DataField]
     public EntProtoId TargetEffect = "RMCEffectXenoTelegraphRedEmpower";

@@ -1,7 +1,11 @@
 using Content.Shared._RMC14.Stamina;
 using Content.Shared._RMC14.Standing;
+using Content.Shared._RMC14.StatusEffect;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
@@ -24,10 +28,11 @@ public sealed class StunShakeableSystem : EntitySystem
     [Dependency] private readonly RMCStandingSystem _rmcStanding = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
     private static readonly ProtoId<StatusEffectPrototype> KnockedDown = "KnockedDown";
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
+    private static readonly ProtoId<DamageGroupPrototype> Airloss = "Airloss";
 
     public override void Initialize()
     {
@@ -58,6 +63,14 @@ public sealed class StunShakeableSystem : EntitySystem
             return;
         }
 
+        if ((_mobState.IsCritical(target) || HasComp<RMCUnconsciousComponent>(target)) &&
+            TryComp<DamageableComponent>(target, out var damage) &&
+            damage.DamagePerGroup.TryGetValue(Airloss, out var oxyDamage) &&
+            oxyDamage > 0)
+        {
+            return;
+        }
+
         args.Handled = true;
 
         var time = _timing.CurTime;
@@ -76,9 +89,9 @@ public sealed class StunShakeableSystem : EntitySystem
 
         _rmcStanding.SetRest(target, false);
 
-        _statusEffects.TryRemoveTime(target, Stun, ent.Comp.DurationRemoved);
-        _statusEffects.TryRemoveTime(target, KnockedDown, ent.Comp.DurationRemoved);
-        _statusEffects.TryRemoveTime(target, Unconscious, ent.Comp.DurationRemoved);
+        RemoveScaledTime(target, Stun, ent.Comp.DurationRemoved);
+        RemoveScaledTime(target, KnockedDown, ent.Comp.DurationRemoved);
+        RemoveScaledTime(target, Unconscious, ent.Comp.DurationRemoved);
         RemCompDeferred<TackledRecentlyByComponent>(target);
 
         var userPopup = Loc.GetString("rmc-shake-awake-user", ("target", target));
@@ -95,5 +108,12 @@ public sealed class StunShakeableSystem : EntitySystem
         _popup.PopupEntity(othersPopup, target, others, true);
 
         _adminLogs.Add(LogType.RMCStunShake, $"{ToPrettyString(user)} shook {target} out of a stun.");
+    }
+
+    private void RemoveScaledTime(EntityUid target, string key, TimeSpan time)
+    {
+        var ev = new RMCStatusEffectTimeEvent(key, time);
+        RaiseLocalEvent(target, ref ev);
+        _statusEffects.TryRemoveTime(target, key, ev.Duration);
     }
 }

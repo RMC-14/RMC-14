@@ -52,7 +52,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
