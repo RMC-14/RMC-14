@@ -4,6 +4,9 @@
   name: snow barricade
   description: A mound of snow shaped into a sloped wall. Statistically better than thin air as cover.
   components:
+  - type: VehicleSmashable
+    minDestroyWeightClass: Light
+    minContinueWeightClass: Medium
   - type: Sprite
     drawdepth: WallTops
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi

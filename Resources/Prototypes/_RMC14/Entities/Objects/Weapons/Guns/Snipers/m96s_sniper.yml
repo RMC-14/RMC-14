@@ -129,6 +129,13 @@
 
 - type: entity
   parent: CMMagazineSniperM96S
+  id: CMMagazineSniperM96SEmpty
+  suffix: empty
+  components:
+    - type: RMCEmptyMag
+
+- type: entity
+  parent: CMMagazineSniperM96S
   id: CMMagazineSniperM96SIncendiary
   name: "M96S incendiary magazine (10x28mm)"
   description: A magazine of sniper rifle ammo. An aimed shot with it will temporarily blind the targe and kindle the blaze further.
