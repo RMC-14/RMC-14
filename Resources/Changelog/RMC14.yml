@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Bagietens
-  changes:
-  - message: Fixed do-after bars not drawing over xeno and other sprites while using
-      xeno night vision.
-    type: Fix
-  id: 3298
-  time: '2026-06-06T23:55:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10022
 - author: Aurallianz
   changes:
   - message: Added Larva Queue, players will not be able to ghost and join Xeno from
@@ -4463,5 +4455,12 @@
   id: 3797
   time: '2026-11-20T00:16:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10994
+- author: zuedev
+  changes:
+  - message: The mentorhelp rate limit is now enforced.
+    type: Fix
+  id: 3798
+  time: '2026-11-20T00:21:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10909
 Name: RMC14
 Order: -1
