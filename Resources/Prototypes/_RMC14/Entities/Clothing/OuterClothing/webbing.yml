@@ -20,6 +20,7 @@
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
       - RMCBeltHolsterM13
+      - RMCG8Pouch
       - Flashlight
       - DiscreteHealthAnalyzer
       - Pen
@@ -48,6 +49,14 @@
       - PillCanister
       - CMSurgicalCase
       - RMCSyringeCase
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingNV
+  suffix: Varadero
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_nv.rsi
 
 - type: entity
   parent: RMCOuterClothingExternalWebbing

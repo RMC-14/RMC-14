@@ -3,7 +3,7 @@
   id: RMCSurvivorParaPilot
   name: rmc-job-name-para-pilot
   ranks:
-    RMCRankParaCorporal: [ ]
+    RMCRankTSECorporal: [ ]
   startingGear: RMCGearParaPilot
   icon: RMCJobIconParaPilot
   playTimeTracker: RMCJobSurvivorMilitary

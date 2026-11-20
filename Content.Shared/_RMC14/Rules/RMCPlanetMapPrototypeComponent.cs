@@ -89,6 +89,12 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     public Dictionary<string, EntProtoId<PaperComponent>>? SpecialFaxes;
 
     /// <summary>
+    /// Which small hosts types should spawn on the planet
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<EntProtoId>? SmallHostVariants;
+
+    /// <summary>
     /// Round-start operational briefings sent to the Commanding Officer, keyed by their affiliation preference.
     /// </summary>
     [DataField, AutoNetworkedField]
