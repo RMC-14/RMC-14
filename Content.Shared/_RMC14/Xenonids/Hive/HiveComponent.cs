@@ -99,5 +99,4 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<GibbedXenoInfo> GibbedXenos = new();
-    
 }
