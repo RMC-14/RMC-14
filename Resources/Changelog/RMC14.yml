@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tuna224
-  changes:
-  - message: Made Parasite Infects not Cancelable via Double Click
-    type: Tweak
-  id: 3307
-  time: '2026-06-07T02:08:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9832
 - author: Aurallianz
   changes:
   - message: In game ARES Logs
@@ -4474,5 +4467,12 @@
   id: 3806
   time: '2026-11-20T00:58:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10715
+- author: SabreML
+  changes:
+  - message: Added chat highlights for Xenonid prefix+postfix names, and Marine nicknames.
+    type: Add
+  id: 3807
+  time: '2026-11-20T01:07:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10956
 Name: RMC14
 Order: -1
