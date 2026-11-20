@@ -1,0 +1,26 @@
+- type: entity
+  id: RMCLanguagePresetAllEarth
+  name: All earth Languages
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: LanguagePreset
+    spokenLanguages:
+    - English
+    - French
+    - Japanese
+    - Russian
+    - Scandinavian
+    - German
+    - Chinese
+    - Spanish
+    understoodLanguages:
+    - English
+    - French
+    - Japanese
+    - Russian
+    - Scandinavian
+    - German
+    - Chinese
+    - Spanish
+    currentLanguage: English
+    defaultLanguage: English
