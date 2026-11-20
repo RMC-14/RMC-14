@@ -1,21 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Fixed the Boiler Sapper's "Acid Mine" ability damaging sentry guns and
-      weapon mounts.
-    type: Fix
-  id: 3372
-  time: '2026-06-11T22:38:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10129
-- author: ThataKat
-  changes:
-  - message: '[PVE] The PVE variant of the Type 71 gun rack now functions properly'
-    type: Fix
-  id: 3373
-  time: '2026-06-11T22:38:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10128
-- author: Dygon
-  changes:
   - message: The amount of light emitted in small areas is now limited.
     type: Tweak
   id: 3374
@@ -4442,5 +4427,22 @@
   id: 3871
   time: '2026-11-20T07:58:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9896
+- author: Ian321
+  changes:
+  - message: Motion and data detectors stay on when they are attached to a sling strap.
+    type: Tweak
+  - message: Items can now be holstered into the sling strap.
+    type: Tweak
+  id: 3872
+  time: '2026-11-20T08:01:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9273
+- author: ThataKat
+  changes:
+  - message: '[PVE] Sun Riders'' roles now have rank preference options, chosen in
+      the jobs tab.'
+    type: Add
+  id: 3873
+  time: '2026-11-20T08:02:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10074
 Name: RMC14
 Order: -1
