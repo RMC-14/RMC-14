@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Escape pods and lifeboats should no longer crash land on top of each
-      other.
-    type: Fix
-  id: 3330
-  time: '2026-06-08T02:02:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9943
 - author: Vixting
   changes:
   - message: Fix upgrading resin wall attached to sinle door causing door to delete
@@ -4439,5 +4431,13 @@
   id: 3829
   time: '2026-11-20T05:29:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10759
+- author: Vexerot
+  changes:
+  - message: Queen now differentiates between immature and mature to properly persist
+      ability bar ordering.
+    type: Fix
+  id: 3830
+  time: '2026-11-20T05:30:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10673
 Name: RMC14
 Order: -1
