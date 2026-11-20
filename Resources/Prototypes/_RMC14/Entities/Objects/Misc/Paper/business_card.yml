@@ -1,0 +1,72 @@
+# Business Cards - small paper for sharing contact information
+- type: entity
+  parent: CMBasePaper
+  id: RMCBusinessCard
+  name: business card
+  description: A small card for sharing contact information.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/billboards.rsi
+    scale: 0.25, 0.25
+    layers:
+    - state: billboard_bigger_8
+    # PaperVisuals toggles these when the card is written on or stamped, and logs an error if they're missing
+    - state: billboard_bigger_8
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - sprite: _RMC14/Objects/Misc/paper.rsi
+      state: paper_stamped
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: Paper
+    contentSize: 5000
+  - type: Tag
+    tags:
+    - Document
+    - Trash
+    - Paper
+    - RMCBusinessCard
+  - type: ActivatableUI
+    key: enum.PaperUiKey.Key
+    requiresComplex: false
+  - type: UserInterface
+    interfaces:
+      enum.PaperUiKey.Key:
+        type: BusinessCardBoundUserInterface
+
+- type: Tag
+  id: RMCBusinessCard
+
+# Holds 10 cards in the same space as one
+- type: entity
+  parent: BaseStorageItem
+  id: RMCBusinessCardHolder
+  name: business card holder
+  description: A slim case for keeping business cards neat and ready to hand out.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/playing_cards.rsi # TODO RMC14 placeholder sprite
+    state: deck
+  - type: Item
+    size: Tiny
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10 cards
+    maxItemSize: Tiny
+    whitelist:
+      tags:
+      - RMCBusinessCard
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCBusinessCardHolder
+  id: RMCBusinessCardHolderFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBusinessCard
+      amount: 10
