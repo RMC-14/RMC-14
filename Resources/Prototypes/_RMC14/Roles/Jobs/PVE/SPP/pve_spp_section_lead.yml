@@ -1,0 +1,80 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPSectionLeadPVE
+  name: rmc-job-name-spp-sectionsergeant
+  description: rmc-job-description-spp-sectionsergeant
+  playTimeTracker: RMCJobSPPSectionLeadPVE
+  ranks:
+    RMCRankSPPStarshiySerzhant: []
+  startingGear: RMCJobSPPSectionLeadPVEGear
+  icon: "RMCJobIconSPPLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - SquadLeader
+  spawnMenuRoleName: SPP Section Sergeant (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetPVESectionSergeant
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-sectionsergeant
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: QYJWhitelist
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+        state: spp_sl
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spp_sl_a
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_spp
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSectionLeadPVE
+  name: spp section lead spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCSPPSectionLeadPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+
+- type: startingGear
+  id: RMCJobSPPSectionLeadPVEGear
+  equipment:
+    id: RMCIDSPP
+    ears: RMCHeadsetSPPLeaderPVE
+
+- type: playTimeTracker
+  id: RMCJobSPPSectionLeadPVE

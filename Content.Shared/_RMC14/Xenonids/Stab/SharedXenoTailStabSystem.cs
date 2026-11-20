@@ -104,10 +104,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         // TODO RMC14 lag compensation
         var damaged = false;
         var damage = new DamageSpecifier(stabStats.TailDamage);
-        var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
 
-        EntityUid? fishingCatch = null;
-
+		EntityUid? fishingCatch = null;
+		var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier(), ref stab.Comp.BonusDamageMult);
         RaiseLocalEvent(stab, ref eve);
         damage += eve.Damage;
         if (args.Entity == null ||
@@ -249,6 +248,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", userName), ("target", hitName));
                     _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
                 }
+
+                var afterEv = new XenoAfterTailStabEvent(hit);
+                RaiseLocalEvent(stab, ref afterEv);
             }
         }
 

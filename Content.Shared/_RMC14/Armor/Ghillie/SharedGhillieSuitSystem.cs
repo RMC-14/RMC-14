@@ -13,6 +13,9 @@ using Content.Shared.Inventory.Events;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Pulling;
+using Content.Shared.Buckle.Components;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
@@ -27,6 +30,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {
@@ -41,6 +45,9 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPassiveStealthComponent, VaporHitEvent>(OnVaporHit);
         SubscribeLocalEvent<RMCPassiveStealthComponent, MoveInputEvent>(OnMove);
+        SubscribeLocalEvent<RMCPassiveStealthComponent, MoveEvent>(OnGhilliePulledMove);
+        SubscribeLocalEvent<BeingFiremanCarriedComponent, ComponentStartup>(OnGhillieFiremanCarriedStartup);
+        SubscribeLocalEvent<RMCPassiveStealthComponent, BuckledEvent>(OnGhillieBuckled);
 
         SubscribeLocalEvent<GunComponent, GunShotEvent>(OnGunShot);
     }
@@ -222,6 +229,24 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         }
 
         return null;
+    }
+
+    private void OnGhilliePulledMove(Entity<RMCPassiveStealthComponent> ent, ref MoveEvent args)
+    {
+        if (!_rmcPulling.IsBeingPulled(ent.Owner, out _))
+            return;
+
+        TryToggleInvisibility(ent.Owner, false);
+    }
+
+    private void OnGhillieFiremanCarriedStartup(Entity<BeingFiremanCarriedComponent> ent, ref ComponentStartup args)
+    {
+        TryToggleInvisibility(ent.Owner, false);
+    }
+
+    private void OnGhillieBuckled(Entity<RMCPassiveStealthComponent> ent, ref BuckledEvent args)
+    {
+        TryToggleInvisibility(ent.Owner, false);
     }
 
     private void OnVaporHit(Entity<RMCPassiveStealthComponent> ent, ref VaporHitEvent args)
