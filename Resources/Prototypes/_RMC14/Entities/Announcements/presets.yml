@@ -165,7 +165,6 @@
     interruptible: false
     title: rmc-announcement-title-queen
     shadowColor: "#5B2A9ACC"
-    backgroundShader: RMCAnnouncementHiveVignette
     pulseForever: true
     pulseSpeed: 0.35
     pulseStrength: 0.35
