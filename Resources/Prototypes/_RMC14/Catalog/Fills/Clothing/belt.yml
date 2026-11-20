@@ -444,6 +444,7 @@
     - id: RMCWeaponPistolHandcannon
 
 - type: entity
+  id: RMCM1911CBeltFilled
   parent: RMCBeltHolsterPistol
   suffix: M1911C, CO, Filled
   components:
