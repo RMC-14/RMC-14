@@ -73,7 +73,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private TimeSpan _mapUpdateEvery;
     private TimeSpan _forceMapUpdateEvery;
     private TimeSpan _nextForceMapUpdate = TimeSpan.FromSeconds(30);
-    private TimeSpan _objectiveUpdateInterval = TimeSpan.FromSeconds(5);
+    private TimeSpan _objectiveUpdateInterval = TimeSpan.FromSeconds(15);
     private TimeSpan _nextObjectiveUpdate;
 
     public override void Initialize()
@@ -1048,16 +1048,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             _toUpdate.Clear();
         }
 
-        if (_net.IsServer)
+        if (_net.IsServer && _timing.CurTime >= _nextObjectiveUpdate)
         {
-            if (_timing.CurTime >= _nextObjectiveUpdate)
+            _nextObjectiveUpdate = _timing.CurTime + _objectiveUpdateInterval;
+            var activeUsers = EntityQueryEnumerator<ActiveTacticalMapUserComponent, TacticalMapUserComponent>();
+            while (activeUsers.MoveNext(out var uid, out _, out var user))
             {
-                _nextObjectiveUpdate = _timing.CurTime + _objectiveUpdateInterval;
-                var activeUsers = EntityQueryEnumerator<ActiveTacticalMapUserComponent, TacticalMapUserComponent>();
-                while (activeUsers.MoveNext(out var uid, out _, out var user))
-                {
-                    UpdateTacticalMapState((uid, user));
-                }
+                UpdateTacticalMapState((uid, user));
             }
         }
 
