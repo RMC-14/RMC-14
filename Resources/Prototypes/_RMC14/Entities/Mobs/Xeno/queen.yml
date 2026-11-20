@@ -418,9 +418,7 @@
     - ActionXenoAcidWeak
     - ActionXenoPheromones
     - ActionXenoWordQueen
-    - ActionXenoPsychicWhisper
-    - ActionXenoPsychicRadiance
-    - ActionXenoGiveOrder
+    - ActionXenoPsychic
     - ActionXenoMassacre
     - ActionXenoBloodDrain
     - ActionXenoManageHive

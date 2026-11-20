@@ -38,7 +38,7 @@
   - type: ScoutWhitelist
   - type: SniperWhitelist
   - type: PyroWhitelist
-  - type: QYJWhitelist
+  - type: SPPSpecWhitelist
 
 - type: entity
   id: RMCSynthRemoveComponents

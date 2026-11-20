@@ -46,7 +46,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -80,7 +80,7 @@
 
 - type: playTimeTracker
   id: RMCJobSPPPlatCoPVE
-  
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconSPPPlatoonCommanderPVE

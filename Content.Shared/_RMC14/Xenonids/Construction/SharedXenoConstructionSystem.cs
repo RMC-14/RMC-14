@@ -34,6 +34,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
@@ -225,6 +226,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = false,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -1036,6 +1038,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
     {
+        if (!HasComp<XenoComponent>(args.Examiner) && !HasComp<GhostComponent>(args.Examiner))
+            return;
+
         var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
         args.PushMarkup(Loc.GetString("cm-xeno-construction-plasma-left", ("construction", node.Owner), ("plasma", plasmaLeft)));
     }
@@ -1066,7 +1071,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var delay = xeno.AddPlasmaDelay;
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, user, node)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
