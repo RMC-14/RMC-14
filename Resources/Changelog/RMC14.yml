@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: GrigoriyGalintano
-  changes:
-  - message: Fixed MB-6 folding barricades not fitting in the armor suit storage slot.
-    type: Fix
-  - message: Fixed MB-6 folding barricades missing their worn and inhand sprites.
-    type: Fix
-  - message: Fixed folding barricades needing to be collapsed one by one.
-    type: Fix
-  id: 3326
-  time: '2026-06-08T01:57:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10046
 - author: Vermidia
   changes:
   - message: Microwaves can now store huge items.
@@ -4453,5 +4442,12 @@
   id: 3825
   time: '2026-11-20T03:53:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8901
+- author: kleinerstation13
+  changes:
+  - message: Added the M48A4 service pistol for marine loadouts
+    type: Add
+  id: 3826
+  time: '2026-11-20T03:56:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10427
 Name: RMC14
 Order: -1
