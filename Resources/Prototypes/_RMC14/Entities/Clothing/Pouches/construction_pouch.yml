@@ -8,6 +8,8 @@
     sprite: _RMC14/Objects/Clothing/Pouches/construction.rsi
   - type: Storage
     maxItemSize: Normal
+    quickInsert: true
+    quickInsertCooldown: 0
     grid:
     - 0,0,5,1 #3 slots
     whitelist:

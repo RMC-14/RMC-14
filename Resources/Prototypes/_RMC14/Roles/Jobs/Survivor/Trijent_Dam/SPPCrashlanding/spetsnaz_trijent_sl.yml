@@ -1,0 +1,68 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazTrijentBase
+  id: RMCSurvivorSPPSpetsnazTrijentSL
+  name: rmc-job-name-spetsnaz-sl
+  startingGear: RMCGearSPPSpetsnazTrijentSL
+  ranks:
+    RMCRankSPPMladshiyLeytenant: []
+  icon: "RMCJobIconSPPSpetsnazSL"
+  spawnMenuRoleName: SPP Spetsnaz D/SRU Squad Leader (Trijent Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPLeader
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - German
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-trijent-spetsnaz-sl
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
+        state: spp_sptz_sl
+    - type: RMCTrackable
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPSpetsnazWeaponOnly
+    - type: QYJWhitelist
+    - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazTrijentBase
+  id: RMCGearSPPSpetsnazTrijentSL
+  equipment:
+    ears: RMCHeadsetSPPSpetsnazCrashlandTrijentSL
+    back: RMCSatchelSPPSurvivor
+    belt: RMCBeltHolsterRevolverZHNK72Fill
+    outerClothing: RMCArmorSPPSpetsnazAltSurvivorFill
+    head: RMCHeadCapSPPSpetsnaz
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSurvivorSPPSpetsnazTrijentSL
+  name: special survivor spp spetsnaz squad leader spawn point
+  suffix: Trijent
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazSL
+  - type: Sprite
+    state: surv_spp
