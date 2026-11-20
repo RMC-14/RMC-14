@@ -1,34 +1,6 @@
 ﻿Entries:
 - author: Ian321
   changes:
-  - message: The scuttle explosion should now correctly kill everything.
-    type: Fix
-  id: 3314
-  time: '2026-06-08T01:39:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10060
-- author: CatAndHats
-  changes:
-  - message: Fixed some podlocks on Fiorina being openable allowing access into space
-    type: Fix
-  id: 3315
-  time: '2026-06-08T01:40:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10063
-- author: Simon
-  changes:
-  - message: Fixed incorrect populating method
-    type: Fix
-  - message: Members keep their hiveteam when evolving/devolving
-    type: Fix
-  - message: Queen Panels and Hiveleader Panels more uniform and slightly cleaner
-    type: Fix
-  - message: Hiveleader UI now will correctly de-populate dead or removed xenonids
-      from their panel.
-    type: Fix
-  id: 3316
-  time: '2026-06-08T01:41:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10061
-- author: Ian321
-  changes:
   - message: Fultoned creates and bodies no longer get renamed.
     type: Fix
   id: 3317
@@ -4453,5 +4425,29 @@
   id: 3813
   time: '2026-11-20T01:57:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10310
+- author: IceNoobXD
+  changes:
+  - message: Added new insert to Kutjevo Refinery! Cave Hold (10%), Northroad Garage
+      with a fixable van (25%), LZ2 Containers(30%), an Flightcontrol extension (30%),
+      Parasite examination (30%), WeYa Office (30%)!
+    type: Add
+  id: 3814
+  time: '2026-11-20T02:00:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10865
+- author: sporkyz
+  changes:
+  - message: Defender Tailsweep is now lag compensated
+    type: Fix
+  id: 3815
+  time: '2026-11-20T01:59:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10607
+- author: Vermidia
+  changes:
+  - message: Fixed crusher charge not stunning for enough time (2s -> 4s) and not
+      having frontal armor on the windup.
+    type: Fix
+  id: 3816
+  time: '2026-11-20T02:00:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10709
 Name: RMC14
 Order: -1
