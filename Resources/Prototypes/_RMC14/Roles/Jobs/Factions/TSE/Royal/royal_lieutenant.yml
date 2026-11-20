@@ -1,0 +1,74 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesLieutenant
+  name: rmc-job-name-rcm-lieutenant
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalLieutenant
+  ranks:
+    RMCRankTSESecondLieutenant: [ ]
+  startingGear: RMCGearRoyalLieutenant
+  icon: "RMCJobIconRoyalLieutenant"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-captain
+  spawnMenuRoleName: RCM Lieutenant
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      preset: RMCSkillPresetRoyalLieutenant
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: ViewIntelObjectives
+    - type: SquadLeader
+      icon:
+       sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+       state: rcm_lieutenant
+    - type: RMCTrackable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-lieutenant
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_lieutenant
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
+  hidden: true
+
+# This lieutenant role is NOT part of the ERT. Omitting ghostrole functionality
+
+- type: startingGear # There's also a staff officer role with equivalent skills n shit but noncombatant gear that I don't feel like porting
+  id: RMCGearRoyalLieutenant
+  equipment:
+    head: RMCHeadRoyalBeretLead
+    eyes: RMCGlassesMedicalHUDGlasses
+    ears: RMCHeadsetRoyalMarineOfficer
+    jumpsuit: RMCJumpsuitMarineRoyalTeamlead
+    outerClothing: RMCArmorRoyalPaddedFilled
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL24
+    id: RMCIDRoyalMarines
+    belt: RMCBeltHolsterPistolRCML54
+    back: RMCBackpackRCMSmallPVPLieutenant
+    pocket1: RMCPouchToolsFilledRCM
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: RMCJobRoyalLieutenant
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalLieutenant
+  icon:
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
+    state: rcm_lieutenant

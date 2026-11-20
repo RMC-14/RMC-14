@@ -1,0 +1,143 @@
+using Content.Shared._RMC14.BlurredVision;
+using Content.Shared._RMC14.Body;
+using Content.Shared._RMC14.Chemistry.Effects;
+using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Stun;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Damage;
+using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
+using Content.Shared.Medical;
+using Content.Shared.StatusEffect;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
+
+namespace Content.Shared._RMC14.Medical.Defibrillator;
+
+public abstract class SharedRMCDefibrillatorSystem : EntitySystem
+{
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    private static readonly ProtoId<EmotePrototype> GaspEmote = "Gasp";
+    private static readonly ProtoId<StatusEffectPrototype> BlurredKey = "Blinded";
+    private static readonly TimeSpan ReviveKnockOut = TimeSpan.FromSeconds(20);
+    private static readonly TimeSpan ReviveBlur = TimeSpan.FromSeconds(20);
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<DefibrillatorComponent, RMCDefibrillatorDamageModifyEvent>(OnDefibrillatorDamageModify);
+        SubscribeLocalEvent<RMCDefibrillatorAudioComponent, EntityTerminatingEvent>(OnDefibrillatorAudioTerminating);
+        SubscribeLocalEvent<RMCDefibrillatorBlockedComponent, ExaminedEvent>(OnNoDefibExamine);
+    }
+
+    private void OnDefibrillatorDamageModify(Entity<DefibrillatorComponent> ent, ref RMCDefibrillatorDamageModifyEvent args)
+    {
+        if (ent.Comp.RMCZapDamage != null)
+        {
+            foreach (var (group, amount) in ent.Comp.RMCZapDamage)
+            {
+                args.Heal = _rmcDamageable.DistributeDamageCached(args.Target, group, amount, args.Heal);
+            }
+        }
+
+        if (!_rmcBloodstream.TryGetChemicalSolution(args.Target, out var solutionEnt, out _))
+            return;
+
+        (Reagent Reagent, FixedPoint2 Heal, Electrogenetic Electrogenetic)? highest = null;
+        foreach (var quantity in solutionEnt.Comp.Solution.Contents)
+        {
+            if (!_rmcReagent.TryIndex(quantity.Reagent.Prototype, out var reagent))
+                continue;
+
+            if (reagent.Metabolisms == null ||
+                !reagent.Metabolisms.TryGetValue(ent.Comp.MetabolismId, out var effects))
+            {
+                continue;
+            }
+
+            foreach (var effect in effects.Effects)
+            {
+                if (effect is not Electrogenetic electrogenetic)
+                    continue;
+
+                if (highest == null || electrogenetic.HealAmount > highest.Value.Heal)
+                    highest = (reagent, electrogenetic.HealAmount, electrogenetic);
+            }
+        }
+
+        if (highest == null)
+            return;
+
+        args.Heal += highest.Value.Electrogenetic.CalculateHeal(_damageable, args.Target, EntityManager);
+        _solutionContainer.RemoveReagent(solutionEnt, highest.Value.Reagent.ID, 1);
+    }
+
+    public void ApplyReviveEffects(EntityUid target)
+    {
+        _rmcEmote.TryEmoteWithChat(target, GaspEmote, hideLog: true, ignoreActionBlocker: true, forceEmote: true);
+        _sizeStun.TryKnockOut(target, ReviveKnockOut);
+
+        if (!_statusEffects.TryGetTime(target, BlurredKey, out var blur) ||
+            blur.Value.Item2 - _timing.CurTime < ReviveBlur)
+        {
+            _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(target, BlurredKey, ReviveBlur, true);
+        }
+    }
+
+    private void OnNoDefibExamine(Entity<RMCDefibrillatorBlockedComponent> ent, ref ExaminedEvent args)
+    {
+        if (!ent.Comp.ShowOnExamine)
+            return;
+
+        args.PushMarkup(Loc.GetString(ent.Comp.Examine, ("victim", ent)));
+    }
+
+    private void OnDefibrillatorAudioTerminating(Entity<RMCDefibrillatorAudioComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (TryComp(ent.Comp.Defibrillator, out DefibrillatorComponent? defibrillator))
+            defibrillator.ChargeSoundEntity = null;
+    }
+
+    public void StopChargingAudio(Entity<DefibrillatorComponent> defib)
+    {
+        _audio.Stop(defib.Comp.ChargeSoundEntity);
+        QueueDel(defib.Comp.ChargeSoundEntity);
+        defib.Comp.ChargeSoundEntity = null;
+    }
+}
+
+[Serializable, NetSerializable]
+public enum DefibrillatorChargeVisuals
+{
+    Empty,
+    Low,
+    Half,
+    Full
+}
+
+[Serializable, NetSerializable]
+public enum DefibrillatorVisuals
+{
+    DefibrillatorCharge
+}
+
+[Serializable, NetSerializable]
+public enum DefibrillatorVisualLayers
+{
+    Base,
+    Overlay
+}

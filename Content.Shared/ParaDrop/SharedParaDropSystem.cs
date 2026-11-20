@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -59,6 +60,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         SubscribeLocalEvent<ParaDroppingComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ParaDroppingComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<ParaDroppingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
+        SubscribeLocalEvent<ParaDroppingComponent, CheckMeleeAttackerEvent>(OnParaDroppingReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<ParaDroppingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
         SubscribeLocalEvent<ParaDroppingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
         SubscribeLocalEvent<ParaDroppingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -181,9 +183,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             return;
 
         _transform.SetMapCoordinates(ent, _transform.ToMapCoordinates(ent.Comp.TargetCoordinates.Value));
-
-        if (TryComp(ent, out ParaDroppableComponent? paraDroppable))
-            _audio.PlayPvs(paraDroppable.DropSound, ent);
+        _audio.PlayPvs(ent.Comp.DropSound, ent);
     }
 
     private void OnIgniteAttempt(Entity<ParaDroppingComponent> ent, ref RMCIgniteAttemptEvent args)
@@ -199,6 +199,11 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     private void OnAttemptMobTargetCollide(Entity<ParaDroppingComponent> ent, ref AttemptMobTargetCollideEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnParaDroppingReceivingMeleeAttackAttempt(Entity<ParaDroppingComponent> ent, ref CheckMeleeAttackerEvent args)
+    {
+        args.Skip = true;
     }
 
     private void OnGettingAttacked(Entity<ParaDroppingComponent> ent, ref GettingAttackedAttemptEvent args)
@@ -243,7 +248,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         if (dropTarget == null)
         {
             EntityCoordinates? randomCoordinates = null;
-            if (_crashLand.TryGetCrashLandLocation(out var location))
+            if (_crashLand.TryGetCrashLandLocation(false, out var location))
                 randomCoordinates = location;
 
             // Cancel the jump if there is no viable target
@@ -294,6 +299,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         var skyFalling = EnsureComp<SkyFallingComponent>(dropping);
         skyFalling.RemainingTime = paraDroppable.SkyFallDuration;
         skyFalling.TargetCoordinates = dropCoordinates;
+        skyFalling.DropSound = paraDroppable.DropSound;
         Dirty(dropping, skyFalling);
 
         var droppingComp = EnsureComp<ParaDroppingComponent>(dropping);

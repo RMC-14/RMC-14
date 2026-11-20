@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Ice sprites based off of Fridge's from https://github.com/cmss13-devs/cmss13/blob/8d0e113dfafcc590812ff4d55bc002b9b93ece67/icons/turf/ice.dmi modified by Drazamuffin, Drone and Larva sprites by Drazamuffin based off sprites by @aleksh and @.sigma_draconis. Elsa, Caveman, Para, and Pallet sprites by Drazamuffin",
+  "size": {
+    "x": 96,
+    "y": 128
+  },
+  "states": [
+    {
+      "name": "icechunk"
+    },
+    {
+      "name": "icechunk_pallet"
+    },
+    {
+      "name": "elsa"
+    },
+    {
+      "name": "para"
+    },
+    {
+      "name": "drolar"
+    },
+    {
+      "name": "caveman"
+    }
+  ]
+}

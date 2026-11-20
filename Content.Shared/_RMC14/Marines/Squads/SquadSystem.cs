@@ -318,6 +318,15 @@ public sealed class SquadSystem : EntitySystem
 
     private void OnAssignSquadPlayerSpawnComplete(Entity<AssignSquadComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
+        if (ent.Comp.Squad is { } squadId)
+        {
+            if (TryEnsureSquad(squadId, out var squad))
+            {
+                AssignSquad(ent, (squad.Owner, squad.Comp), args.JobId);
+                return;
+            }
+        }
+
         var query = EntityQueryEnumerator<SquadTeamComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -379,10 +388,8 @@ public sealed class SquadSystem : EntitySystem
 
             if (TryComp<ClothingComponent>(newItem, out var clothing))
             {
-                if (!_cmInventory.TryEquipClothing(user, (newItem, clothing)))
-                {
+                if (!_cmInventory.TryEquipClothing(user, (newItem, clothing), false))
                     _hands.TryPickupAnyHand(user, newItem);
-                }
             }
         }
 
@@ -614,7 +621,9 @@ public sealed class SquadSystem : EntitySystem
         var ev = new GetMarineSquadNameEvent();
         RaiseLocalEvent(marine, ref ev);
 
-        MarineSetTitle(marine, $"{ev.SquadName} {ev.RoleName}");
+        var title = $"{ev.SquadName} {ev.RoleName}".Trim();
+        if (title != string.Empty)
+            MarineSetTitle(marine, title);
     }
 
     public void MarineSetTitle(EntityUid marine, string title)

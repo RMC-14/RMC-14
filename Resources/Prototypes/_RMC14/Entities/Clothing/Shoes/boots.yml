@@ -38,6 +38,7 @@
   name: marine combat boots
   description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
+  - type: RMCCryoUnavailableOnStore
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
     layers:
@@ -86,14 +87,18 @@
 - type: entity
   parent: CMBootsBlackFilled
   id: RMCScoutShoes
-  name: infiltrator boots # Could probably use it's own sprite
+  name: infiltrator boots
   description: A modified pair of combat boots, including several trimmed down areas and padded with cloth alongside some form of leather.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
   - type: FootstepModifier
     footstepSoundCollection:
-      collection: FootstepCatwalk #I dunno what a better sound effect would be, catwalk stands out so it's there to alert xenos if scout moves while they are close
+      collection: FootstepCatwalk
       params:
-        volume: -8
+        volume: -100
         maxDistance: 0
 
 - type: entity

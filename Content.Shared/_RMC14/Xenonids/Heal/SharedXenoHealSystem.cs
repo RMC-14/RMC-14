@@ -1,10 +1,8 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
-using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Announce;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -16,6 +14,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs;
@@ -23,9 +22,11 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -47,6 +48,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly QueenEyeSystem _queenEye = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedStatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
@@ -55,6 +57,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoStrainSystem _xenoStrain = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -305,7 +308,18 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         SacrificialHealShout(ent);
         _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-sacrifice-heal-target-announcement", ("healer_xeno", ent), ("target_xeno", target)), popup:PopupType.Large);
-        _popup.PopupPredicted(Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), target, ent, PopupType.Medium);
+
+        var others = Filter.Pvs(ent).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+            continue;
+
+            var healerXeno = ("healer_xeno", Identity.Name(ent, EntityManager, otherEnt));
+            var targetXeno = ("target_xeno", Identity.Name(target, EntityManager, otherEnt));
+            var healMessage = Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", healerXeno, targetXeno);
+            _popup.PopupEntity(healMessage, target, otherEnt, PopupType.Medium);
+        }
 
         // Heal from crit
         var targetTotalDamage = targetDamageComp.TotalDamage;
@@ -327,6 +341,10 @@ public abstract class SharedXenoHealSystem : EntitySystem
             _status.TryRemoveStatusEffect(target, status);
         }
 
+        foreach (var status in args.AilmentsRemoveNew)
+        {
+            _statusEffect.TryRemoveStatusEffect(target, status);
+        }
 
         EntityManager.RemoveComponents(target, args.ComponentsRemove);
 
@@ -337,8 +355,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
         {
             var corpsePosition = _transform.GetMoverCoordinates(ent);
 
-            if (GetHiveCore(ent))
-                SacrificialHealRespawn(ent, args.RespawnDelay);
+            if (_hive.TryGetHiveCore(ent, out var core))
+                SacrificialHealRespawn(ent, args.RespawnDelay, true, _transform.GetMoverCoordinates(core.Value));
             else
                 SacrificialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
         }
@@ -356,6 +374,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
     public void Heal(EntityUid target, FixedPoint2 amount)
     {
+        if (!_xeno.CanHeal(target))
+            return;
+
         var damage = _rmcDamageable.DistributeDamageCached(target, BruteGroup, amount);
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;
@@ -382,22 +403,6 @@ public abstract class SharedXenoHealSystem : EntitySystem
         heal.ParallizeHealing = true;
     }
 
-    private bool GetHiveCore(EntityUid xeno)
-    {
-        var cores = EntityQueryEnumerator<HiveCoreComponent, HiveMemberComponent>();
-        while (cores.MoveNext(out var uid, out _, out _))
-        {
-            if (!_hive.FromSameHive(xeno, uid))
-                continue;
-
-            if (_mobState.IsDead(uid))
-                continue;
-
-            return true;
-        }
-
-        return false;
-    }
 
     protected virtual void SacrificialHealShout(EntityUid xeno)
     {

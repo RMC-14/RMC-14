@@ -80,10 +80,17 @@ public sealed class FoldableClothingSystem : EntitySystem
             if (ent.Comp.FoldedHeldPrefix != null)
                 _itemSystem.SetHeldPrefix(ent.Owner, null, false, itemComp);
 
-            // TODO CLOTHING fix this.
-            if (ent.Comp.UnfoldedHideLayers.Count != 0 &&
-                TryComp<HideLayerClothingComponent>(ent.Owner, out var hideLayerComp))
+            // RMC14 fix unfolded layers with nothing not changing the hide layer slots
+            if (!TryComp<HideLayerClothingComponent>(ent.Owner, out var hideLayerComp))
+                return;
+
+            if (ent.Comp.UnfoldedHideLayers.Count != 0)
                 hideLayerComp.Slots = ent.Comp.UnfoldedHideLayers;
+            else
+                hideLayerComp.Slots = null;
+
+            Dirty(ent.Owner, hideLayerComp);
+            // RMC14 end
         }
     }
 }

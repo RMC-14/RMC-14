@@ -11,7 +11,7 @@
       "name": "icon"
     },
     {
-      "name": "icon-up",
+      "name": "primed",
       "delays": [
         [
           0.1,
@@ -24,7 +24,7 @@
       "directions": 4
     },
     {
-      "name": "up-equipped-HELMET",
+      "name": "primed-equipped-HELMET",
       "directions": 4,
       "delays": [
         [

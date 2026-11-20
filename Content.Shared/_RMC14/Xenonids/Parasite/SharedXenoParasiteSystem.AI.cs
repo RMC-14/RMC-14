@@ -39,7 +39,8 @@ public abstract partial class SharedXenoParasiteSystem
         SubscribeLocalEvent<ParasiteAIComponent, ExaminedEvent>(OnAIExamined);
         SubscribeLocalEvent<ParasiteAIComponent, DroppedEvent>(OnAIDropPickup);
         SubscribeLocalEvent<ParasiteAIComponent, EntGotInsertedIntoContainerMessage>(OnAIDropPickup);
-        SubscribeLocalEvent<ParasiteAIComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
+
+        SubscribeLocalEvent<XenoParasiteComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
 
         SubscribeLocalEvent<TrapParasiteComponent, ComponentStartup>(OnTrapAdded);
         SubscribeLocalEvent<TrapParasiteComponent, PlayerAttachedEvent>(OnStopTrap);
@@ -220,7 +221,7 @@ public abstract partial class SharedXenoParasiteSystem
         if (HasComp<TrapParasiteComponent>(para))
             RemCompDeferred<TrapParasiteComponent>(para);
 
-        para.Comp.NextActiveTime = _timing.CurTime + TimeSpan.FromSeconds(_random.Next(para.Comp.MinIdleTime, para.Comp.MaxIdleTime + 1));
+        para.Comp.NextActiveTime = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(para.Comp.MinIdleTime, para.Comp.MaxIdleTime + 1));
 
         Dirty(para);
     }
@@ -327,7 +328,7 @@ public abstract partial class SharedXenoParasiteSystem
         args.State = MobState.Dead;
     }
 
-    private void OnGetVerbs(Entity<ParasiteAIComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
+    private void OnGetVerbs(Entity<XenoParasiteComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
     {
         var uid = args.User;
 
@@ -335,7 +336,8 @@ public abstract partial class SharedXenoParasiteSystem
         if (!HasComp<ActorComponent>(uid) || !HasComp<GhostComponent>(uid))
             return;
 
-        if (!_mobState.IsAlive(ent))
+        if (!_mobState.IsAlive(ent) || _container.IsEntityInContainer(ent) ||
+            !(HasComp<ParasiteAIComponent>(ent) || HasComp<ParasiteAIDelayAddComponent>(ent)))
             return;
 
 

@@ -84,6 +84,9 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: RMCGunChamber
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg
 
 - type: entity
   abstract: true
@@ -117,6 +120,10 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true
@@ -125,6 +132,7 @@
   components:
   - type: CartridgeAmmo
     deleteOnSpawn: true
+    muzzleFlash: MuzzleFlashEffectPistol
 
 - type: entity
   abstract: true

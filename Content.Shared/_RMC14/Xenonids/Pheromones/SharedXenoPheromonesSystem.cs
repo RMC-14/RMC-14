@@ -198,7 +198,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void OnFrenzyGetTailStabDamage(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RMCGetTailStabBonusDamageEvent args)
     {
         //1.2 = tailstab attack mult
-        args.Damage += new DamageSpecifier(_protoManager.Index(frenzy.Comp.DamageGroup), frenzy.Comp.AttackDamageAddPerMult * frenzy.Comp.Multiplier * 1.2);
+        args.Damage += new DamageSpecifier(_protoManager.Index(frenzy.Comp.DamageGroup), frenzy.Comp.AttackDamageAddPerMult * frenzy.Comp.Multiplier * args.DamageMult);
     }
 
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)
@@ -223,6 +223,13 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void AssignMaxMultiplier(ref FixedPoint2 a, FixedPoint2 b)
     {
         a = FixedPoint2.Max(a, b);
+    }
+
+    private void MaybeCapPheromones(ref FixedPoint2 multiplier, EntityUid ent, XenoPheromones pheros)
+    {
+        if (TryComp<XenoCappedPheromonesComponent>(ent, out var capped) &&
+            capped.CappedPheromones.ContainsKey(pheros))
+            multiplier = FixedPoint2.Min(multiplier, capped.CappedPheromones[pheros]);
     }
 
     public void DeactivatePheromones(Entity<XenoPheromonesComponent?> xeno)
@@ -395,6 +402,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         oldRecovery.Remove(receiver);
                         var recovery = EnsureComp<XenoRecoveryPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref recovery.Multiplier, pheromones.PheromonesMultiplier);
+
+                        MaybeCapPheromones(ref recovery.Multiplier, receiver, XenoPheromones.Recovery);
                     }
 
                     break;
@@ -410,6 +419,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         oldWarding.Remove(receiver);
                         var warding = EnsureComp<XenoWardingPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref warding.Multiplier, pheromones.PheromonesMultiplier);
+
+                        MaybeCapPheromones(ref warding.Multiplier, receiver, XenoPheromones.Warding);
                     }
 
                     break;
@@ -426,6 +437,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         var frenzy = EnsureComp<XenoFrenzyPheromonesComponent>(receiver);
                         var old = frenzy.Multiplier;
                         AssignMaxMultiplier(ref frenzy.Multiplier, pheromones.PheromonesMultiplier);
+
+                        MaybeCapPheromones(ref frenzy.Multiplier, receiver, XenoPheromones.Frenzy);
 
                         if (frenzy.Multiplier != old)
                             _refreshSpeeds.Add(receiver);

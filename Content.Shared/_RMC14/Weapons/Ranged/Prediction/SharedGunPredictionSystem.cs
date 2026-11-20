@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.CombatMode;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -16,6 +17,8 @@ public abstract class SharedGunPredictionSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly VehicleRideSurfaceSystem _rideSurface = default!;
 
     public bool GunPrediction { get; private set; }
 
@@ -24,7 +27,7 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCGunPrediction, v => GunPrediction = v, true);
     }
 
-    public List<EntityUid>? ShootRequested(NetEntity netGun, NetCoordinates coordinates, NetEntity? target, List<int>? projectiles, ICommonSession session)
+    public List<EntityUid>? ShootRequested(NetEntity netGun, NetCoordinates coordinates, NetEntity? target, List<int>? projectiles, ICommonSession session, bool rearmSemiAuto = false)
     {
         var user = session.AttachedEntity;
         var gunUid = GetEntity(netGun);
@@ -37,10 +40,22 @@ public abstract class SharedGunPredictionSystem : EntitySystem
             return null;
         }
 
+        var shootCoordinates = GetCoordinates(coordinates);
+        var targetUid = GetEntity(target);
+        if (targetUid is { } clickedTarget)
+        {
+            var mapCoordinates = _transform.ToMapCoordinates(shootCoordinates);
+            if (_rideSurface.TryGetRiderAtCoordinates(clickedTarget, mapCoordinates, out var rider))
+                targetUid = rider;
+        }
+
 #pragma warning disable RA0002
-        gun.ShootCoordinates = GetCoordinates(coordinates);
-        gun.Target = GetEntity(target);
+        gun.ShootCoordinates = shootCoordinates;
+        gun.Target = targetUid;
 #pragma warning restore RA0002
+        if (rearmSemiAuto)
+            _gun.ResetShotCounter(gunUid, gun);
+
         return _gun.AttemptShoot(user.Value, gunUid, gun, projectiles, session);
     }
 

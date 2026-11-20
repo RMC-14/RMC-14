@@ -1,0 +1,170 @@
+﻿- type: entity
+  parent: RMCArmorSPP
+  id: CMArmorFreelancer
+  name: freelancer cuirass
+  description: An armored protective chestplate scrapped together from various plates. It keeps up remarkably well, as the craftsmanship is solid, and the design mirrors such armors in the SPP and the UNMC. The many skilled craftsmen in the freelancers ranks produce these vests at a rate about one a month.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/freelancer.rsi
+  - type: CMArmor
+    melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25
+    bio: 15
+    explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
+    maxItemSize: Small
+
+- type: entity
+  parent: RMCArmorVestXLBase
+  id: RMCArmorFreelancerVestBlack
+  name: black plate carrier vest
+  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
+  suffix: No lamp
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/platecarrier_black.rsi
+  - type: CMArmor
+    melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25
+    bio: 15
+    explosionArmor: 20
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: RMCMagneticArmor
+  - type: Clothing
+    equipDelay: 2
+    unequipDelay: 2
+    equippedPrefix: off
+    clothingVisuals:
+      outerClothing:
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/platecarrier_black.rsi
+        state: equipped-OUTERCLOTHING
+
+- type: entity
+  parent: RMCArmorFreelancerVestBlack
+  id: RMCArmorFreelancerVestBlackLamp
+  suffix: Lamp
+  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, two pouches on the front. This one has had a lamp attached to the back.
+  components:
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      outerClothing:
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: lamp-on
+  - type: ItemTogglePointLight
+  - type: Sprite
+    layers:
+    - state: icon
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: lamp-off
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: lamp-on
+      visible: false
+      map: [ "light" ]
+  - type: Clothing
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: lamp-off
+  - type: RMCSuitLight
+  - type: PointLight
+    enabled: false
+    radius: 5
+    offset: 0,-0.85
+    rotation: 90
+    softness: 5
+    autoRot: true
+    netsync: false
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+  - type: PointLightRotation
+    rotation: 90
+  - type: HandheldLight
+    addPrefix: true
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+    turnOffSound:
+      path: /Audio/_RMC14/Handling/suitlight_crank.ogg
+    turnOnSound:
+      path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: NoHandsInteractionBlocked
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 600
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2
+
+- type: entity
+  parent: RMCArmorFreelancerVestBlack
+  id: RMCArmorFreelancerVestBeige
+  name: beige plate carrier vest
+  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
+  suffix: No lamp
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/platecarrier_beige.rsi
+  - type: CMArmor
+    melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25
+    bio: 15
+    explosionArmor: 20
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: RMCMagneticArmor
+  - type: Clothing
+    clothingVisuals:
+      outerClothing:
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/platecarrier_beige.rsi
+        state: equipped-OUTERCLOTHING
+
+- type: entity
+  parent: RMCArmorFreelancerVestBlackLamp
+  id: RMCArmorFreelancerVestBeigeLamp
+  name: beige plate carrier vest
+  suffix: Lamp
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/platecarrier_beige.rsi
+  - type: Clothing
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: lamp-off

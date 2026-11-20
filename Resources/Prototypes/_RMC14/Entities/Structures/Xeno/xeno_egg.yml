@@ -82,7 +82,8 @@
     allowed:
     - Electrocution
   - type: DeletedByWeedKiller
-
+  - type: XenoChargeDontHit
+  - type: BlockXenoConstruction
 
 - type: entity
   parent: BaseItem
@@ -149,6 +150,7 @@
   - type: WhitelistPickupBy
   - type: DestroyedXenoEgg
   - type: RMCMesonsNonviewable
+  - type: XenoChargeDontHit
 
 - type: entity
   parent: XenoEggDestroyed

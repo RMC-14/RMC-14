@@ -20,7 +20,7 @@
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: on
-    layers: [ ]
+    layers: []
   - type: Clickable
   - type: Corrodible
     isCorrodible: false
@@ -68,6 +68,7 @@
 - type: entity
   parent: RMCCashRegisterBase
   id: RMCCashRegisterOff
+  suffix: off
   components:
   - type: Sprite
     state: register_off
@@ -79,6 +80,7 @@
 - type: entity
   parent: RMCCashRegisterBase
   id: RMCCashRegisterOn
+  suffix: on
   components:
   - type: Sprite
     state: register_on

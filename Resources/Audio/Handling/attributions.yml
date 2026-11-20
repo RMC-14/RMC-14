@@ -1,0 +1,4 @@
+- files: ["taperecorder_pickup.ogg", "taperecorder_drop.ogg", "tape_pickup.ogg", "tape_drop.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from CMSS13"
+  source: "https://github.com/cmss13-devs/cmss13/tree/cb2431347031d174f929226c61c8fb3a8519f34a/sound/handling"

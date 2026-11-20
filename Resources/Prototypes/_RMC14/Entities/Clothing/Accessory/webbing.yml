@@ -45,8 +45,8 @@
 - type: entity
   parent: CMWebbingBase
   id: CMWebbing
-  name: webbing
-  description: A sturdy mess of synthcotton belts and buckles, ready to share your burden.
+  name: brown magazine webbing
+  description: A sturdy mess of brown synthcotton belts and buckles, ready to share your burden. Able to hold three rifle magazines or small items.
   components:
   - type: Sprite
     state: webbing
@@ -98,8 +98,8 @@
 - type: entity
   parent: CMWebbingBrown
   id: RMCWebbingLegPouch
-  name: leg pouch
-  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military.
+  name: camo leg pouch
+  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military. Able to hold five small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
@@ -117,16 +117,68 @@
   parent: CMWebbingBrown
   id: RMCWebbingLegPouchBlack
   name: black leg pouch
-  description: A black leg pouch usually worn by hunters, military and people who dream of being military.
+  description: A black leg pouch usually worn by hunters, military and people who dream of being military. Able to hold five small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/black.rsi
     state: webbing
 
 - type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingRCM
+  name: MOLS leg webbing
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a number of leg pouches, capable of fitting several small items within.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_rcm.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,7,1 # 4 slots
+    blacklist:
+      tags:
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,7,1 # 4 slots
+      blacklist:
+        tags:
+        - CMMagazineSmg
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
+        - RMCSyringeCase
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
   parent: CMWebbing
   id: RMCWebbingBlackSmall
-  name: black webbing
+  name: black magazine webbing
+  description: A sturdy mess of black synthcotton belts and buckles, ready to share your burden. Able to hold three rifle magazines or small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
@@ -139,8 +191,8 @@
 - type: entity
   parent: CMWebbingBase
   id: CMWebbingBlack
-  name: black webbing vest
-  description: Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands.
+  name: black pouch vest
+  description: Robust black synthcotton vest with lots of pockets to unload your hands. Able to hold five small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
@@ -189,8 +241,8 @@
 - type: entity
   parent: CMWebbingBlack
   id: CMWebbingBrown
-  name: brown webbing vest
-  description: Worn brownish synthcotton vest with lots of pockets to unload your hands.
+  name: brown pouch vest
+  description: Worn brownish synthcotton vest with lots of pockets to unload your hands. Able to hold five small items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
@@ -223,8 +275,8 @@
 - type: entity
   parent: CMWebbingBase
   id: CMWebbingHolster
-  name: shoulder holster
-  description: A handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  name: brown shoulder holster
+  description: A brown handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
@@ -343,6 +395,17 @@
 
 - type: entity
   parent: CMWebbingHolster
+  id: RMCWebbingHolsterM77Survivor
+  suffix: Firefighter, Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolM77
+    - id: CMMagazinePistolM77AP # TODO RMC14: WP magazines
+    - id: CMMagazinePistolM77AP
+
+- type: entity
+  parent: CMWebbingHolster
   id: RMCWebbingHolsterBlack
   name: black shoulder holster
   description: A black handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
@@ -350,6 +413,28 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster_black.rsi
     state: holster
+
+- type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingHolsterRCM
+  name: MOLS waist holster
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a waist holster, capable of fitting a sidearm and two spare magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster_rcm.rsi
+    state: holster
+
+- type: entity
+  parent: RMCWebbingHolsterRCM
+  id: RMCWebbingHolsterRCML189
+  suffix: RCM, Filled L189
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK80RCM
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
 
 - type: entity
   parent: RMCWebbingHolsterBlack
@@ -402,8 +487,8 @@
 - type: entity
   parent: CMWebbingBase
   id: RMCWebbingDropPouch
-  name: drop pouch
-  description: A convenient pouch to carry loose items around.
+  name: brown drop pouch
+  description: A convenient pouch to carry loose items around. Able to fit medium items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch.rsi
@@ -417,7 +502,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     components:
     - type: Storage
@@ -429,7 +514,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
@@ -449,10 +534,21 @@
     - id: CMMagazinePistolMK80
 
 - type: entity
+  parent: CMWebbingHolster
+  id: RMCShoulderHolsterPK7
+  suffix: PK7
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolPK7
+    - id: RMCMagazinePistolPK7
+    - id: RMCMagazinePistolPK7
+
+- type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchBlack
   name: black drop pouch
-  description: A convenient pouch to carry loose items around.
+  description: A convenient pouch to carry loose items around. Able to fit medium items.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
@@ -466,7 +562,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
@@ -481,13 +577,24 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
     - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingDropPouchRCM
+  name: MOLS drop pouch
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a drop pouch, capable of fitting loose objects within.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_rcm.rsi
+    state: webbing
 
 - type: entity
   parent: CMWebbingBase
@@ -507,7 +614,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     components:
     - type: Storage
@@ -519,7 +626,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
@@ -646,16 +753,27 @@
 
 - type: entity
   parent: RMCToolWebbingSmall
-  id: RMCToolWebbingSmallFilledRCMPVEAssaultEngi
-  suffix: Filled, RCM, PVE
+  id: RMCToolWebbingSmallRoyal
+  name: MOLS tool harness
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a harness and belt, with many pouches to fit engineering tools.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_tool_rcm.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCToolWebbingSmallRoyal
+  id: RMCToolWebbingSmallRoyalFilled
+  suffix: Filled, Royal
   components:
   - type: StorageFill
     contents:
     - id: CMScrewdriver
     - id: CMWrench
     - id: RMCWelderIndustrial
-    - id: CMCrowbar
-    - id: RMCCableCoil30
+    - id: RMCTacticalPrybar
+    - id: CMWirecutter
     - id: CMMultitool
 
 - type: entity
@@ -680,6 +798,7 @@
       - RMCNailgunTactical
       - RMCSynthResetKey
       - RodMetal1
+      - LightReplacer
       components:
       - Welder
       - PowerCell
@@ -899,24 +1018,24 @@
       amount: 5
 
 - type: entity
-  parent: RMCWebbingDropPouch
-  id: RMCWebbingDropPouchRoyal
-  suffix: Filled, Royal
+  parent: RMCWebbingDropPouchRCM
+  id: RMCWebbingDropPouchRCMFilled
+  suffix: RCM, Filled
   components:
   - type: StorageFill
     contents:
-      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCMaskGasRCM
       - id: RMCHeadRoyalBeret
       - id: RMCMRETSE
 
 - type: entity
-  parent: RMCWebbingDropPouch
-  id: RMCWebbingDropPouchRoyalTeamlead
-  suffix: Filled, Royal Team Leader
+  parent: RMCWebbingDropPouchRCM
+  id: RMCWebbingDropPouchRCMFilledTeamlead
+  suffix: RCM, Filled Teamlead
   components:
   - type: StorageFill
     contents:
-      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCMaskGasRCM
       - id: RMCHeadRoyalHelmetBallistic
       - id: RMCMRETSE
 
@@ -930,6 +1049,17 @@
       - id: CMMarineFlask
       # - id: RMCFacepaint # TODO FACEPAINT
       - id: CMMRE
+
+- type: entity
+  parent: RMCWebbingDropPouchBlack
+  id: RMCWebbingPouchSurvivorPMCSynth
+  suffix: Filled, PMC Synthetic, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMWEYAFlask
+    - id: RMCZipties
+    - id: CMScalpelManager
 
 - type: entity
   parent: CMWebbingBase
@@ -996,6 +1126,65 @@
     state: webbing
 
 - type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingSurgicalRCM
+  name: MOLS medical carry harness
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a harness and webbing capable of fitting a wide variety of surgical equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_rcm.rsi
+    state: webbing
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,13,3 # 14 slots
+      whitelist:
+        tags:
+        - CMTraumaKit
+        - CMSurgicalLine
+        - CMSynthGraft
+        components:
+        - CMSurgeryTool
+    - type: FixedItemSizeStorage
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - CMTraumaKit
+      - CMSurgicalLine
+      - CMSynthGraft
+      components:
+      - CMSurgeryTool
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCWebbingSurgicalRCM
+  id: RMCWebbingSurgicalRCMFilled
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+#     - PICT System
+      - id: CMScalpel
+      - id: CMHemostat
+      - id: CMRetractor
+      - id: CMTraumaKit10
+      - id: CMCautery
+      - id: CMCircularSaw
+      - id: CMSurgicalDrill
+      - id: CMBoneGel
+      - id: CMBonesetter
+#     - FixOVein
+#     - Nanopaste
+      - id: CMSurgicalLine
+      - id: CMSynthGraft
+
+- type: entity
   parent: CMWebbing
   id: RMCWebbingSPPCommandFilled
   suffix: Filled
@@ -1005,3 +1194,50 @@
     - id: RMCMagazineRifleType71AP
     - id: RMCMagazineRifleType71AP
     - id: RMCMagazineRifleType71AP
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCBRNHedp
+  suffix: CBRN, Filled, 2 HEDP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+    - id: CMGrenadeHighExplosive
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCBRNFTL
+  suffix: CBRN, Filled, FTL
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBinoculars
+    - id: CMGrenadeHighExplosive
+    - id: CMGrenadeHighExplosive
+    - id: RMCGrenadeIncendiary
+    - id: RMCGrenadeIncendiary
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCBRNSL
+  suffix: CBRN, Filled, SL
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBottleAntiZed
+    - id: RMCBottleAntiZed
+    - id: RMCBoxSyringeCBRN
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCBRNMedic
+  suffix: CBRN, Filled, Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMGrenadeHighExplosive
+    - id: RMCGrenadeIncendiary
+    - id: CMSurgicalLine
+    - id: CMSynthGraft

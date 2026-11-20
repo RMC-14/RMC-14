@@ -1,0 +1,15 @@
+﻿- type: reagent
+  id: RMCDrinkBase
+  parent: CMReagent
+  group: Drinks
+  abstract: true
+  color: "#E78108"
+  unknown: true
+  metabolisms:
+    Drink:
+      metabolismRate: 0.2
+      effects:
+      - !type:SatiateHunger
+        factor: 0.125
+      - !type:SatiateThirst #Unparity but as long as we have thirst might as well - half as effective as water
+        factor: 0.4

@@ -1,10 +1,12 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Abduct;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Tail_Lash;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -29,6 +31,7 @@ public sealed class XenoDislocateSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
@@ -61,7 +64,8 @@ public sealed class XenoDislocateSystem : EntitySystem
                          HasComp<RMCSuperSlowdownComponent>(targetId) ||
                          HasComp<RMCRootedComponent>(targetId) ||
                          HasComp<StunnedComponent>(targetId) ||
-                         _standing.IsDown(targetId);
+                         _standing.IsDown(targetId) ||
+                         HasComp<XenoRestingComponent>(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, ignoreResistances: isDebuffed, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
@@ -82,6 +86,7 @@ public sealed class XenoDislocateSystem : EntitySystem
                 _rmcMelee.DoLunge(xeno, targetId);
                 _obstacleSlamming.MakeImmune(targetId);
                 _sizeStun.KnockBack(targetId, origin, xeno.Comp.FlingRange, xeno.Comp.FlingRange, 10);
+                _rmcDamageable.DoLethalDamage(targetId, origin: xeno);
 
                 SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
             }

@@ -1,13 +1,23 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorHybrisaCorporateLiaison
   name: cm-job-name-liaison
   description: cm-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (Hybrisa Survivor)
   startingGear: RMCGearSurvivorHybrisaCorporateLiaison
+  icon: "CMJobIconLiaison"
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      understoodLanguages:
+      - Japanese
+      - English
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
@@ -55,7 +65,7 @@
   name: hybrisa corporate liaison preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCJumpsuitLiaisonExpensiveSuit, RMCSunglassesBig ]
     - [ RMCJumpsuitLiaisonExpensiveSuitBrown, RMCSunglassesBig ]
@@ -64,11 +74,11 @@
     - [ RMCJumpsuitLiaisonExpensiveSuitJacketOnly, RMCSunglasses ]
     randomGearOther:
     -
-      - [ CMSheetMetal20, RMCSpaceCash1000, CMPenClicky, CMClipboard ]
+      - [ CMSheetMetal20, RMCSpaceCash1000, CMPenClicky, CMClipboard, RMCBusinessCardHolderFilled ]
     randomStartingGear:
       back:
-      - CMSatchel # todo secure satchel
-      - RMCSatchelBlack
+      - CMSatchelSecureStandard
+      - RMCSatchelBlackSecure
       shoes:
       - RMCShoesLaceup
       - RMCShoesLaceupBrown
