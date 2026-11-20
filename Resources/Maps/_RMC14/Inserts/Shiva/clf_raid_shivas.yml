@@ -4495,7 +4495,7 @@ entities:
     - type: Transform
       pos: 12.210311,7.433268
       parent: 1
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 437
     components:
@@ -5609,7 +5609,7 @@ entities:
           occludes: True
           ent: 740
     - type: VehicleLock
-- proto: WeaponRifleM16
+- proto: RMCWeaponRifleCR16
   entities:
   - uid: 452
     components:
