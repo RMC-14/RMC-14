@@ -1,0 +1,245 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCWeaponRifleCR16 # TODO: Make the M16 grenadier rifle when impact nades exist
+  name: CR16 rifle
+  description: The Combat Rifle, Model 16 - an old but reliable design that still finds use across the colonies by security forces and rebels alike. Chambered in 5.56x45mm.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/cr16.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: ItemMapper
+    mapLayers:
+      mag-0:
+        whitelist:
+          tags:
+            - RMCMagazineRifleCR16
+      mag-1:
+        whitelist:
+          tags:
+            - RMCMagazineRifleCR16Ext
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/cr16.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m16.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilUnwielded: 3
+    scatterWielded: 2
+    scatterUnwielded: 20
+    baseFireRate: 4
+    burstScatterMult: 2
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0
+        maxScatterModifier: 13
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.35
+    accuracyMultiplierUnwielded: 0.65
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleCR16
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m16_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m16_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleCR16
+          - RMCMagazineRifleCR16Ext
+  - type: GunDamageModifier
+    multiplier: 1.3
+  - type: AttachableHolder
+    randomAttachmentChance: 0.42
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+        random:
+        - RMCAttachmentSuppressor
+        - RMCM5Bayonet
+        - RMCAttachmentRecoilCompensator
+        - RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+        random:
+        - RMCAttachmentS5RedDotSight
+        - RMCAttachmentS6ReflexSight
+        - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentCR16Stock
+        whitelist:
+          tags:
+          - RMCAttachmentCR16Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower # TODO RMC14 advanced flamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentLaserSight
+          - RMCAttachmentM203GrenadeLauncher
+        random:
+        - RMCAttachmentAngledGrip
+        - RMCAttachmentVerticalGrip
+        - RMCAttachmentGyroscopicStabilizer
+        - RMCAttachmentBurstFireAssembly
+        - RMCAttachmentBipod
+        - RMCAttachmentUnderbarrelExtinguisher
+        - RMCAttachmentU7UnderbarrelShotgun
+        - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.0625
+      rmc-aslot-rail: -0.285, 0.185
+      rmc-aslot-stock: -0.5625, 0
+      rmc-aslot-underbarrel: 0.135, -0.275
+
+- type: entity
+  parent: RMCWeaponRifleCR16
+  id: RMCWeaponRifleCR16A5
+  name: CR16A5 Rifle
+  suffix: Filled
+  description: A modernised version of the Combat Rifle, Model 16. Chambered in 5.56x45mm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/cr16a5.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/cr16a5.rsi
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.685, 0.0625
+      rmc-aslot-rail: -0.25, 0.125
+      rmc-aslot-stock: -0.59, 0
+      rmc-aslot-underbarrel: 0.135, -0.275
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleCR16
+  name: "CR16 magazine (5.56x45mm)"
+  description: A twenty-round magazine of 5.56x45mm cartridges, machined to fit CR16-pattern rifles.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleCR16
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleCR16
+    proto: RMCCartridgeRifleCR16
+    capacity: 20
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/cr16.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleCR16
+  id: RMCMagazineRifleCR16Ext
+  name: "CR16 extended magazine (5.56x45mm)"
+  description: A thirty-round extended magazine of 5.56x45mm cartridges, machined to fit CR16-pattern rifles.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleCR16Ext
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleCR16
+    proto: RMCCartridgeRifleCR16
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/cr16ext.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleCR16
+  name: cartridge (5.56x45)
+  description: A 5.56x45 rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleCR16
+  - type: CartridgeAmmo
+    proto: BulletRifle556x45mm
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle556x45mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 5
+
+- type: Tag
+  id: RMCMagazineRifleCR16
+
+- type: Tag
+  id: RMCMagazineRifleCR16Ext
+
+- type: Tag
+  id: RMCCartridgeRifleCR16

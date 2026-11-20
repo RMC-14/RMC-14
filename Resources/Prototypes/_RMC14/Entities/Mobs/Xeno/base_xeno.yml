@@ -209,6 +209,8 @@
         type: HiveTeamBui
       enum.HiveLeaderSquadUIKey.Key:
         type: HiveLeaderSquadBui
+      enum.HiveTeamMemberUIKey.Key:
+        type: HiveTeamMemberBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:
@@ -296,6 +298,7 @@
     color: "#459A62"
   - type: ExplosionResistance
     damageCoefficient: 2
+  - type: RMCProneExplosionMult
   - type: NpcFactionMember
     factions:
     - RMCXeno
@@ -375,6 +378,7 @@
     xenoVisible: true
   - type: CanBeLarvaQueued
   - type: XenoLastStandable
+  # - type: RMCEquippedStorageOpenOnInteract - TODO RMC14 to use with xeno backpacks
 
 - type: entity
   abstract: true

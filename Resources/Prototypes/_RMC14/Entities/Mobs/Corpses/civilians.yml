@@ -559,8 +559,8 @@
   id: RMCGearCorpseCLFM16
   equipment:
     head: RMCHeadMilitiaBucket
-    belt: CMBeltMarineM16
-    suitstorage: WeaponRifleM16
+    belt: RMCBeltMarineCR16
+    suitstorage: RMCWeaponRifleCR16
     outerClothing: RMCCoatMilitiaBrace
 
 - type: startingGear
@@ -568,8 +568,8 @@
   id: RMCGearCorpseCLFMP5
   equipment:
     head: RMCHelmetWelding
-    belt: CMBeltMarineMP5
-    suitstorage: WeaponSMGMP5
+    belt: RMCBeltMarinePCAC5
+    suitstorage: RMCWeaponSMGPCAC5A4
     outerClothing: RMCCoatMilitiaBrace
 
 # Russian

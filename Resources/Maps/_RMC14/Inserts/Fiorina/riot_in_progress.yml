@@ -628,7 +628,7 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
-- proto: CMMagazineSMGMP5
+- proto: RMCMagazineSMGPCAC5
   entities:
   - uid: 452
     components:
@@ -2018,7 +2018,7 @@ entities:
     - type: Transform
       pos: 5.5,-10.5
       parent: 1
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 351
     components:
@@ -3700,14 +3700,14 @@ entities:
     - type: Transform
       pos: 9.5,-23.5
       parent: 1
-- proto: WeaponRifleM16
+- proto: RMCWeaponRifleCR16
   entities:
   - uid: 519
     components:
     - type: Transform
       pos: 2.5,-11.5
       parent: 1
-- proto: WeaponSMGMP5
+- proto: RMCWeaponSMGPCAC5A4
   entities:
   - uid: 451
     components:

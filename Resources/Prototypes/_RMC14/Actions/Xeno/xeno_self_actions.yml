@@ -111,6 +111,7 @@
     useDelay: 2
   - type: InstantAction
     event: !type:XenoToggleCrestActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -216,10 +217,10 @@
   - type: RMCInContainerAction
 
 - type: entity
-  id: ActionXenoPsychicWhisper
+  id: ActionXenoPsychic
   parent: ActionXenoBase
-  name: Psychic Whisper
-  description: Whisper a psychic message to a nearby mind.
+  name: Psychic Communication
+  description: Harness your psychic power to communicate to either a host, everyone around you or a xenonid via targeting either target or the floor for radiance.
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -228,48 +229,10 @@
       state: psychic_whisper
     useDelay: 10
   - type: TargetAction
-    range: 7
-  - type: EntityTargetAction
-    event: !type:XenoPsychicWhisperActionEvent
-    canTargetSelf: false
-    toggleOutline: false
-    whitelist:
-      components:
-      - MobState
-  - type: RMCDazeableAction
-  # - type: RMCInContainerAction # RMC 14 TODO can't target mobs from inside tunnels but this would be nice to have in the future
-
-- type: entity
-  id: ActionXenoPsychicRadiance
-  parent: ActionXenoBase
-  name: Psychic Radiance (100)
-  description: Radiate a psychic message to nearby minds.
-  components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: psychic_radiance
-    useDelay: 10
-  - type: InstantAction
-    event: !type:XenoPsychicRadianceActionEvent
-  - type: RMCDazeableAction
-  - type: RMCInContainerAction
-
-- type: entity
-  id: ActionXenoGiveOrder
-  parent: ActionXenoBase
-  name: Give Order (100)
-  description: Send a psychic order to the xenonid you are watching.
-  components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: queen_order
-    useDelay: 10
-  - type: InstantAction
-    event: !type:XenoGiveOrderActionEvent
+    range: 12
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoPsychicActionEvent
   - type: RMCDazeableAction
   - type: RMCInContainerAction
 
@@ -287,6 +250,7 @@
   - type: InstantAction
     event: !type:XenoGrowOvipositorActionEvent
   - type: XenoGrowOvipositorAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -336,6 +300,7 @@
   - type: InstantAction
     event: !type:XenoDefensiveShieldActionEvent
   - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoDefensiveShieldBloodQueen
@@ -391,7 +356,7 @@
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
   name: Carrier's Bond
-  description: Retrieves a child from your storage if you have an empty hand. Using this near child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. Using near an eggmorpher will take as many possible children from it to put into your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
+  description: Retrieves a child from your storage if you have an empty hand. Using this near child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 6 tiles away, where the child will be stunned for 4 seconds. Using a child in hand will add it to your storage. Using near an eggmorpher will take as many possible children from it to put into your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -453,6 +418,7 @@
   - type: InstantAction
     event: !type:ManageHiveActionEvent
   - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoDodge
@@ -469,6 +435,7 @@
   - type: InstantAction
     event: !type:XenoDodgeActionEvent
   - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -515,6 +482,7 @@
     event: !type:XenoSoakActionEvent
   - type: ActionBlockIfResting
   - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -530,6 +498,7 @@
   - type: InstantAction
     event: !type:XenoEmpowerActionEvent
   - type: ActionBlockIfResting
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase

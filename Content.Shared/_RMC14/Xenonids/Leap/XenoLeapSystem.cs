@@ -13,6 +13,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -556,7 +557,7 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
         }
 
-        if (_standing.IsDown(target))
+        if (_standing.IsDown(target) || HasComp<XenoRestingComponent>(target))
             return false;
 
         if (HasComp<LeapIncapacitatedComponent>(target))

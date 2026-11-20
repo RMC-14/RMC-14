@@ -202,6 +202,16 @@ rmc-xeno-magicalgirl-name = Magical Girl
 rmc-xeno-magicalgirl-description = Receive your Plasma Wand from The Queen Mother and transform into your Magical Girl form to combat the forces of evil!
 rmc-xeno-magicalgirl-popup = With the power of Plasma and Resin! Transform!
 
+rmc-xeno-destrain-choice = Destrain: {$caste}
+rmc-xeno-destrain-success = We shed our specialization and return to our original form.
+rmc-xeno-destrain-cooldown = We lack the strength to reset our strain. We will be able to reset it in {$minutes} {$minutes ->
+    [one] minute
+   *[other] minutes
+}.
+
+rmc-xeno-witch-name = Witch
+rmc-xeno-witch-description = You shall make a stew so wicked and shrew! Command your army of cursed children to turn talls into your greatest brew!
+rmc-xeno-witch-popup = Muwahahahah!
 rmc-xeno-bloodqueen-name = Blood Queen
 rmc-xeno-bloodqueen-description = You lose:
   - Your queen level pheromones are replaced with strong pheromones.
