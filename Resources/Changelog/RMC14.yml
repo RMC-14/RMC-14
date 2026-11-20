@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Can now hold down left click to continually melee / fire. Can be disabled
-      in settings. (ported from upstream)
-    type: Add
-  id: 3305
-  time: '2026-06-07T01:33:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9141
-- author: BreakpointDebug1234
-  changes:
-  - message: Guidebook links to various items and structures
-    type: Add
-  id: 3306
-  time: '2026-06-07T01:47:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9387
 - author: Tuna224
   changes:
   - message: Made Parasite Infects not Cancelable via Double Click
@@ -4474,5 +4459,20 @@
   id: 3804
   time: '2026-11-20T00:52:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10341
+- author: Vermidia
+  changes:
+  - message: Fixed marines not attempting CPR on unconscious marines that have oxygen
+      damage.
+    type: Fix
+  id: 3805
+  time: '2026-11-20T00:57:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10935
+- author: Bagietens
+  changes:
+  - message: Added three-quarter night vision for xenos and ghosts
+    type: Add
+  id: 3806
+  time: '2026-11-20T00:58:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10715
 Name: RMC14
 Order: -1
