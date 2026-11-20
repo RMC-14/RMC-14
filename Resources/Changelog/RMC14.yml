@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The planetside dropship navigation computers should now work on all maps
-      again.
-    type: Fix
-  id: 3360
-  time: '2026-06-11T22:27:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10098
 - author: Vermidia
   changes:
   - message: Fixed AI parasites on the ground not being takeoverable by ghosts
@@ -4484,5 +4476,12 @@
   id: 3859
   time: '2026-11-20T07:35:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10934
+- author: Vixting
+  changes:
+  - message: Your ghost sprite will now use the sprite you died / ghosted as
+    type: Add
+  id: 3860
+  time: '2026-11-20T07:38:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10355
 Name: RMC14
 Order: -1
