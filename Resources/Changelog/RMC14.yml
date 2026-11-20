@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: Added Larva Queue, players will not be able to ghost and join Xeno from
-      round start until after 15 minutes. You must have been dead for at least 5 minutes
-      before you can join the queue.
-    type: Add
-  id: 3299
-  time: '2026-06-07T00:38:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8788
 - author: Dygon
   changes:
   - message: Explosion now have a chance to destroy signal flares.
@@ -4462,5 +4453,13 @@
   id: 3798
   time: '2026-11-20T00:21:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10909
+- author: MidZik
+  changes:
+  - message: Doors, your own sprite, and other unpullable things no longer interfere
+      with trying to grab something under them.
+    type: Fix
+  id: 3799
+  time: '2026-11-20T00:22:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10951
 Name: RMC14
 Order: -1
