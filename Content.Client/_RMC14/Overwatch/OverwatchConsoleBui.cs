@@ -328,7 +328,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 row.Distance.Panel.Orphan();
                 row.Buttons.Container.Orphan();
 
-                _rows.Remove(id);
+                squadRows.Remove(id);
             }
 
             foreach (var marine in marines)
@@ -474,12 +474,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     if (marine.Role != null && squadRows.TryFirstOrNull(r => r.Key != marine.Id && r.Value.RoleId == marine.Role, out var first))
                     {
                         var position = first.Value.Value.Name.Panel.GetPositionInParent() + 1;
-                        row.Name.Panel.SetPositionInParent(position);
-                        row.Role.Panel.SetPositionInParent(position);
-                        row.State.Panel.SetPositionInParent(position);
-                        row.Location.Panel.SetPositionInParent(position);
-                        row.Distance.Panel.SetPositionInParent(position);
-                        row.Buttons.Container.SetPositionInParent(position);
+                        row.SetPosition(position);
                     }
                 }
 
@@ -534,18 +529,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     row.Buttons.Hide.ToolTip = Loc.GetString("rmc-overwatch-console-hide-marine");
                 }
 
-                if (squad.Leader == marine.Id)
-                {
-                    row.Name.Panel.SetPositionFirst();
-                    row.Role.Panel.SetPositionFirst();
-                    row.State.Panel.SetPositionFirst();
-                    row.Location.Panel.SetPositionFirst();
-                    row.Distance.Panel.SetPositionFirst();
-                    row.Buttons.Container.SetPositionFirst();
-                    row.Buttons.Hide.Visible = false;
-                    row.Buttons.Promote.Visible = false;
-                }
+                var isLeader = squad.Leader == marine.Id;
+                row.Buttons.Hide.Visible = !isLeader;
+                row.Buttons.Promote.Visible = !isLeader;
             }
+
+            if (squad.Leader is { } leaderId && squadRows.TryGetValue(leaderId, out var leaderRow))
+                leaderRow.SetPosition(0);
 
             var rolesList = new List<(string Role, HashSet<OverwatchMarine> Deployed, HashSet<OverwatchMarine> Alive, HashSet<OverwatchMarine> All, bool DisplayName, int Priority)>();
             foreach (var (id, (deployed, alive, all)) in roles)
@@ -1030,6 +1020,16 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         (PanelContainer Panel, RichTextLabel Label) State,
         (PanelContainer Panel, RichTextLabel Label) Location,
         (PanelContainer Panel, Label Label) Distance,
-        (BoxContainer Container, Button Hide, Button Promote) Buttons
-    );
+        (BoxContainer Container, Button Hide, Button Promote) Buttons)
+    {
+        public void SetPosition(int position)
+        {
+            Name.Panel.SetPositionInParent(position);
+            Role.Panel.SetPositionInParent(position);
+            State.Panel.SetPositionInParent(position);
+            Location.Panel.SetPositionInParent(position);
+            Distance.Panel.SetPositionInParent(position);
+            Buttons.Container.SetPositionInParent(position);
+        }
+    }
 }
