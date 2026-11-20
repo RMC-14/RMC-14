@@ -6,6 +6,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Sprite
@@ -21,6 +24,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Transform
     anchored: true
   - type: Physics
@@ -266,6 +272,7 @@
     components:
     - type: Fixtures
     - type: Occluder
+    - type: Tag
   - type: Transform
     anchored: false
   - type: Physics

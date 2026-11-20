@@ -23,6 +23,7 @@
   supervisors: cm-job-supervisors-nobody
   accessGroups:
   - Colonist
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:

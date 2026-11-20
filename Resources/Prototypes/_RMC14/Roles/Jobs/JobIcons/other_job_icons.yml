@@ -60,12 +60,27 @@
   icon:
     sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
     state: generic_colonist_mp
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistResearcher
   icon:
     sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
     state: generic_colonist_researcher
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonistSynthetic
+  icon:
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
+    state: generic_colonist_synth
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonistCorporate
+  icon:
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
+    state: generic_colonist_corporate
 
 - type: jobIcon
   parent: CMJobIconBase

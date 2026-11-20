@@ -135,7 +135,7 @@ rmc-xeno-berserker-name = Berserker
 rmc-xeno-berserker-description = You lose:
   - Your empower, charge, and scissor cut.
   - Some health.
-  - The ability to fully benefit from 'strong' or better frenzy pheromones 
+  - The ability to fully benefit from 'strong' or better frenzy pheromones
   You gain:
   - Movement speed, a slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
   - The ability to heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
@@ -201,3 +201,28 @@ rmc-xeno-designer-popup = You are hive's designer, go and expand the hive beyond
 rmc-xeno-magicalgirl-name = Magical Girl
 rmc-xeno-magicalgirl-description = Receive your Plasma Wand from The Queen Mother and transform into your Magical Girl form to combat the forces of evil!
 rmc-xeno-magicalgirl-popup = With the power of Plasma and Resin! Transform!
+
+rmc-xeno-destrain-choice = Destrain: {$caste}
+rmc-xeno-destrain-success = We shed our specialization and return to our original form.
+rmc-xeno-destrain-cooldown = We lack the strength to reset our strain. We will be able to reset it in {$minutes} {$minutes ->
+    [one] minute
+   *[other] minutes
+}.
+
+rmc-xeno-witch-name = Witch
+rmc-xeno-witch-description = You shall make a stew so wicked and shrew! Command your army of cursed children to turn talls into your greatest brew!
+rmc-xeno-witch-popup = Muwahahahah!
+rmc-xeno-bloodqueen-name = Blood Queen
+rmc-xeno-bloodqueen-description = You lose:
+  - Your queen level pheromones are replaced with strong pheromones.
+  - The ability to attach an ovipositor.
+  - Your screech, order construction, secrete resin, plant weeds and spit-based abilities.
+  - Your normal acid is replaced with weak acid.
+  You gain:
+  - Increased speed, damage, health, and armor.
+  - Your slashes now do a slight AOE to enemies surrounding the target.
+  - Brace: Gives you a temporary shield for 5 seconds that reduces damage taken slightly.
+  - Doom: A terrifying roar that removes helpful chemicals and darkens lights.
+  - Massacre: Guts multiple dead bodies in an area. Gives a burrowed larva for each body gibbed.
+  - Blood Drain: Drain a pulled, downed, living target of blood, doing damage and giving your hive evolution points.
+rmc-xeno-bloodqueen-popup = This is no time to sit idle; The hive hungers for blood.
