@@ -44,7 +44,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/job_icons/SPP/standard.rsi

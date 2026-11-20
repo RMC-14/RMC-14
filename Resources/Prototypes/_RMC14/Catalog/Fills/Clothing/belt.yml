@@ -281,12 +281,12 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: CMBeltMarineMP5
-  suffix: Filled, MP5
+  id: RMCBeltMarinePCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 5
 
 - type: entity
@@ -445,7 +445,6 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCM1911CBeltFilled
   suffix: M1911C, CO, Filled
   components:
   - type: StorageFill
@@ -455,6 +454,17 @@
     - id: RMCMagazinePistolM1911HIAP
       amount: 2
     - id: RMCWeaponPistolM1911C
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id:  RMCBeltHolsterPistolHandcannonProvostFilled
+  suffix: Filled, Provost Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 6
+    - id: RMCWeaponPistolHandcannonProvost
 
 - type: entity
   parent: RMCBeltHolsterPistol
