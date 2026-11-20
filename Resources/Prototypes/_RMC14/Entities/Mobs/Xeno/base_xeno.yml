@@ -209,6 +209,8 @@
         type: HiveTeamBui
       enum.HiveLeaderSquadUIKey.Key:
         type: HiveLeaderSquadBui
+      enum.HiveTeamMemberUIKey.Key:
+        type: HiveTeamMemberBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:
