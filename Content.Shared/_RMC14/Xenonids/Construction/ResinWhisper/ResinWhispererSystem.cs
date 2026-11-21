@@ -26,8 +26,26 @@ public sealed class ResinWhispererSystem : EntitySystem
 
         SubscribeLocalEvent<ResinDoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
 
+        SubscribeLocalEvent<ResinWhispererComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ResinWhispererComponent, XenoSecreteStructureAdjustFields>(OnRemoteSecreteStructure);
         SubscribeLocalEvent<ResinWhispererComponent, InRangeOverrideEvent>(OnInRangeOverride);
+        SubscribeLocalEvent<ResinWhispererComponent, XenoBuildMarkFillRangeEvent>(OnBuildMarkFillRange);
+    }
+
+    private void OnMapInit(Entity<ResinWhispererComponent> ent, ref MapInitEvent args)
+    {
+        if (!TryComp(ent, out XenoConstructionComponent? construction))
+            return;
+
+        ent.Comp.StandardConstructDelay ??= construction.BuildDelay;
+        ent.Comp.MaxConstructDistance ??= construction.BuildRange;
+        Dirty(ent);
+    }
+
+    private void OnBuildMarkFillRange(Entity<ResinWhispererComponent> ent, ref XenoBuildMarkFillRangeEvent args)
+    {
+        if (_weeds.IsOnFriendlyWeeds(ent.Owner))
+            args.Range = Math.Max(args.Range, ent.Comp.MaxRemoteConstructDistance);
     }
 
     private void OnDoorAltVerb(Entity<ResinDoorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -107,13 +125,17 @@ public sealed class ResinWhispererSystem : EntitySystem
 
         if (!TileIsVisible(ent, args.TargetCoordinates))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-line-of-sight"), ent, ent);
+            if (args.Popup)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-line-of-sight"), ent, ent);
+
             return;
         }
 
         if (!_weeds.IsOnFriendlyWeeds(ent.Owner))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), ent, ent);
+            if (args.Popup)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), ent, ent);
+
             return;
         }
 
