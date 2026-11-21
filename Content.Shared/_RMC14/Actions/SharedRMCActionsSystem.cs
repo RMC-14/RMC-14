@@ -39,8 +39,6 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
         SubscribeLocalEvent<ActionReducedUseDelayComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
 
-        SubscribeLocalEvent<ActionReducedUseDelayComponent, StartUseDelayEvent>(OnReducedStartUseDelay);
-
         SubscribeLocalEvent<EntityTargetActionComponent, CheckActionTargetEvent>(OnCheckActionTarget);
         SubscribeLocalEvent<ActionTargetHiveAllyComponent, CheckActionTargetEvent>(OnHiveAllyCheckActionTarget);
         SubscribeLocalEvent<ActionTargetNonHiveAllyComponent, CheckActionTargetEvent>(OnNonHiveAllyCheckActionTarget);
