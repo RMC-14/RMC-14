@@ -8,10 +8,10 @@
   },
   "states": [
     {
-      "name": "defib_on"
+      "name": "reset_key_on"
     },
     {
-      "name": "defib"
+      "name": "reset_key"
     }
   ]
 }
