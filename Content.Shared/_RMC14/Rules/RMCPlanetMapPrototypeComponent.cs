@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Item;
+using Content.Shared._RMC14.Marines.Command;
 using Content.Shared.Paper;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
@@ -92,6 +93,12 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<EntProtoId>? SmallHostVariants;
+
+    /// <summary>
+    /// Round-start operational briefings sent to the Commanding Officer, keyed by their affiliation preference.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<CommandingOfficerAffiliation, EntProtoId<PaperComponent>>? CommandingOfficerBriefings;
 }
 
 [DataDefinition]

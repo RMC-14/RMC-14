@@ -46,6 +46,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
     [UISystemDependency] private readonly CMArmorSystem _armorSystem = default!;
+    [UISystemDependency] private readonly LoadoutSystem _loadout = default!; // RMC14
 
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
@@ -371,9 +372,11 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
                 if (!_prototypeManager.TryIndex(loadout.Prototype, out var loadoutProto))
                     continue;
 
-                _spawn.EquipStartingGear(uid, loadoutProto);
+                _spawn.EquipStartingGear(uid, loadoutProto, raiseEvent: false);
             }
         }
+
+        _loadout.GearEquipped(uid);// RMC14
     }
 
     /// <summary>

@@ -124,6 +124,16 @@
 
 - type: entity
   parent: CMFax
+  id: RMCFaxCommandingOfficer
+  suffix: Commanding Officer
+  components:
+  - type: FaxMachine
+    name: "Commanding Officer"
+  - type: SpecialFax
+    faxId: CommandingOfficer
+
+- type: entity
+  parent: CMFax
   suffix: Correspondent
   id: CMFaxPressTent
   components:

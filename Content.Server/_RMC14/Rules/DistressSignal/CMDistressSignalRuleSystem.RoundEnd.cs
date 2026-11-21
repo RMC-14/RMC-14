@@ -262,6 +262,7 @@ public sealed partial class CMDistressSignalRuleSystem
         StartPlanetVote();
         ResetSelectedPlanet();
         _spawnedDropships = false;
+        _commandingOfficerBriefingScheduled = false;
         OperationName = null;
         ActiveNightmareScenario = null;
         _config.SetCVar(CCVars.GameDisallowLateJoins, false);
