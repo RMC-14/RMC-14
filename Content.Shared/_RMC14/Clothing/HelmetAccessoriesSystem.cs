@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
@@ -81,7 +81,7 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
         var index = 0;
         foreach (var (item, accessoryComp) in accessories.OrderBy(a => a.Comp.DrawOrder))
         {
-            var layer = $"enum.{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}{index}_{Name(ent.Owner)}";
+            var layer = $"helmetaccessory_{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}{index}_{Name(ent.Owner)}";
 
             var rsi = _itemToggle.IsActivated(item) && accessoryComp.ToggledRsi != null
                 ? (ent.Comp.IsHat && accessoryComp.HatToggledRsi != null ? accessoryComp.HatToggledRsi : accessoryComp.ToggledRsi)
