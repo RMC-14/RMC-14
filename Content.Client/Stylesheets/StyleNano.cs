@@ -1870,7 +1870,11 @@ namespace Content.Client.Stylesheets
                 {
                     new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
                 }),
-            }).ToList());
+            })
+            // RMC14
+            .Concat(CMStyleClasses.GetStyleRules())
+            // RMC14
+            .ToList());
         }
     }
 }
