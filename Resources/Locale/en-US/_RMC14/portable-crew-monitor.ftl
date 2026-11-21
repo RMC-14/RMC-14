@@ -1,0 +1,9 @@
+rmc-portable-crew-monitor-title = Crew Monitor
+rmc-portable-crew-monitor-search = Search name or job...
+rmc-portable-crew-monitor-scan = Scan
+rmc-portable-crew-monitor-scanning = Scanning...
+rmc-portable-crew-monitor-scan-prompt = Press Scan to search for personnel signals.
+rmc-portable-crew-monitor-empty = No matching personnel signals found.
+rmc-portable-crew-monitor-select-target = Select a signal to begin tracking.
+rmc-portable-crew-monitor-signal-lost = Signal Lost
+rmc-portable-crew-monitor-unknown-target = Unknown signal
