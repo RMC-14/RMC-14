@@ -20,9 +20,10 @@ public sealed partial class Anticorrosive : RMCChemicalEffect
         if (ActualPotency > 2)
             healing += PotencyPerSecond * 0.5f;
 
-        return $"Heals [color=green]{healing}[/color] burn damage.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond}[/color] brute and [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] brute and [color=red]{PotencyPerSecond * 5}[/color] toxin damage";
+        return Loc.GetString("rmc-reagent-effect-guidebook-anticorrosive",
+            ("healing", healing.ToString()),
+            ("potency", PotencyPerSecond.ToString()),
+            ("potencyX5", (PotencyPerSecond * 5).ToString()));
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

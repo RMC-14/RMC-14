@@ -129,7 +129,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
         Dirty(ent);
         TryStartNextPrint(ent);
 
-        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} printed {proto.Name} for {printable.Cost} points at the dropship lathe");
+        _core.CreateARESLog(ent, LogCat, Loc.GetString("rmc-ares-log-dropship-fabricated", ("user", Name(args.Actor)), ("item", proto.Name), ("cost", printable.Cost)));
     }
 
     private void OnCancelQueueMsg(Entity<DropshipFabricatorComponent> ent, ref DropshipFabricatorCancelQueueMsg args)

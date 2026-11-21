@@ -12,7 +12,7 @@
             <PanelContainer Name="LeaderPanel" Access="Public" HorizontalExpand="True"
                             Margin="0 0 0 4">
                 <BoxContainer Orientation="Vertical" Margin="4">
-                    <Label Text="Hive Leader" HorizontalAlignment="Center"
+                    <Label Text="{Loc 'rmc-xeno-ui-hive-team-leader'}" HorizontalAlignment="Center"
                            FontColorOverride="#aaaaaa" Margin="0 0 0 4" />
                     <BoxContainer Name="LeaderSlot" Access="Public"
                                   Orientation="Vertical" HorizontalExpand="True"
@@ -22,14 +22,14 @@
             <PanelContainer Name="MembersPanel" Access="Public" HorizontalExpand="True"
                             VerticalExpand="True" Margin="0 0 0 4">
                 <BoxContainer Orientation="Vertical" Margin="4" VerticalExpand="True">
-                    <Label Text="Members" HorizontalAlignment="Center"
+                    <Label Text="{Loc 'rmc-xeno-ui-hive-team-members'}" HorizontalAlignment="Center"
                            FontColorOverride="#aaaaaa" Margin="0 0 0 4" />
                     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True"
                                      VerticalExpand="True">
                         <GridContainer Name="MembersGrid" Access="Public"
                                        Columns="2" HorizontalExpand="True" />
                     </ScrollContainer>
-                    <Button Name="AddMemberButton" Access="Public" Text="+ Add Member"
+                    <Button Name="AddMemberButton" Access="Public" Text="{Loc 'rmc-xeno-ui-hive-team-add-member'}"
                             HorizontalExpand="True" Margin="0 4 0 0"
                             StyleClasses="ButtonSquare" />
                 </BoxContainer>

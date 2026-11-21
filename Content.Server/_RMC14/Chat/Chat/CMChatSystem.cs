@@ -307,7 +307,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
             timeLeft.Value > TimeSpan.Zero)
         {
             _popup.PopupEntity(
-                $"You've used the multi-broadcast system too recently, wait {timeLeft.Value.TotalSeconds:F0} more seconds.",
+                Loc.GetString("rmc-chat-multi-broadcast-cooldown", ("seconds", (int) Math.Round(timeLeft.Value.TotalSeconds, MidpointRounding.AwayFromZero))),
                 source,
                 source,
                 PopupType.MediumCaution

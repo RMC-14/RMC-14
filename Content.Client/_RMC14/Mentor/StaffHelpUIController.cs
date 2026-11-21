@@ -489,7 +489,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             if (message.IsAdmin)
                 author = $"[bold][color=red]({message.Title}) {author}[/color][/bold]";
             else if (message.IsMentor)
-                author = $"[bold][color=orange](Mentor) {author}[/color][/bold]";
+                author = Loc.GetString("rmc-mentor-help-author-mentor", ("author", author ?? string.Empty));
 
             text = $"{message.Time:HH:mm} {author}: {FormattedMessage.EscapeText(message.Text)}";
         }
@@ -543,14 +543,14 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             return;
 
         _mentorWindow.ClaimButton.Visible = _mentorWindow.SelectedPlayer != default;
-        _mentorWindow.ClaimButton.Text = "Claim";
+        _mentorWindow.ClaimButton.Text = Loc.GetString("rmc-mentor-help-claim");
 
         _claims.TryGetValue(destination, out var claims);
         if (claims != null &&
             _player.LocalSession != null &&
             claims.Contains(_player.LocalSession.Name))
         {
-            _mentorWindow.ClaimButton.Text = "Unclaim";
+            _mentorWindow.ClaimButton.Text = Loc.GetString("rmc-mentor-help-unclaim");
         }
 
         if (_mentorWindow.SelectedPlayer != destination)
@@ -562,7 +562,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             return;
         }
 
-        _mentorWindow.ClaimIndicator.Text = $"Claimed by {string.Join(", ", claims)}";
+        _mentorWindow.ClaimIndicator.Text = Loc.GetString("rmc-mentor-help-claimed-by", ("names", string.Join(", ", claims)));
     }
 
     private void UpdatePlayerButton(NetUserId player)

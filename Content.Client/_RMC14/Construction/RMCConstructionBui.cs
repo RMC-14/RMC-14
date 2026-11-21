@@ -33,7 +33,7 @@ public sealed class RMCConstructionBui : BoundUserInterface
             return;
 
         _window = this.CreateWindow<RMCConstructionWindow>();
-        _window.Title = $"Construction using the {metaData.EntityName}";
+        _window.Title = Loc.GetString("rmc-construction-window-title-using", ("item", metaData.EntityName));
 
         if (!EntMan.TryGetComponent(Owner, out RMCConstructionItemComponent? constructionItem))
             return;
@@ -149,6 +149,6 @@ public sealed class RMCConstructionBui : BoundUserInterface
             return;
 
         if (EntMan.TryGetComponent(Owner, out StackComponent? stack))
-            _window.MaterialLabel.Text = $"Amount Left: {stack.Count}";
+            _window.MaterialLabel.Text = Loc.GetString("rmc-construction-window-amount-left", ("amount", stack.Count));
     }
 }

@@ -30,7 +30,7 @@
                 </PanelContainer.PanelOverride>
 
                 <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="10" HorizontalExpand="True" VerticalExpand="True">
-                    <Label Text="Stored Vehicles" FontColorOverride="#C7D7EA"/>
+                    <Label Text="{Loc 'rmc-vehicle-supply-stored'}" FontColorOverride="#C7D7EA"/>
                     <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
                         <BoxContainer Name="AvailableRows" Access="Public" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True" />
                     </ScrollContainer>
@@ -46,7 +46,7 @@
                     </PanelContainer.PanelOverride>
 
                     <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="8" HorizontalExpand="True" VerticalExpand="True">
-                        <Label Name="PreviewTitle" Access="Public" Text="Vehicle" FontColorOverride="#C7D7EA"/>
+                        <Label Name="PreviewTitle" Access="Public" Text="{Loc 'rmc-vehicle-supply-vehicle'}" FontColorOverride="#C7D7EA"/>
                         <PanelContainer Name="VehiclePreviewContainer" HorizontalExpand="True" VerticalExpand="True">
                             <ui:EntityPrototypeView Name="VehiclePreview"
                                                     MinSize="120 120"

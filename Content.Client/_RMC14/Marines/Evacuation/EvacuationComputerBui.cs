@@ -32,21 +32,21 @@ public sealed class EvacuationComputerBui(EntityUid owner, Enum uiKey) : BoundUs
         switch (computer.Mode)
         {
             case EvacuationComputerMode.Disabled:
-                _window.StatusLabel.Text = "Escape Pod Status: DELAYED";
-                _window.HatchLabel.Text = "Docking Hatch: UNSECURED";
+                _window.StatusLabel.Text = Loc.GetString("rmc-evacuation-computer-status-delayed");
+                _window.HatchLabel.Text = Loc.GetString("rmc-evacuation-computer-hatch-unsecured");
                 break;
             case EvacuationComputerMode.Ready:
-                _window.StatusLabel.Text = "Escape Pod Status: STANDING BY";
-                _window.HatchLabel.Text = "Docking Hatch: SECURED";
+                _window.StatusLabel.Text = Loc.GetString("rmc-evacuation-computer-status-standing-by");
+                _window.HatchLabel.Text = Loc.GetString("rmc-evacuation-computer-hatch-secured");
                 break;
             case EvacuationComputerMode.Travelling:
                 // TODO RMC14 launching
-                _window.StatusLabel.Text = "Escape Pod Status: TRAVELLING";
-                _window.HatchLabel.Text = "Docking Hatch: SECURED";
+                _window.StatusLabel.Text = Loc.GetString("rmc-evacuation-computer-status-travelling");
+                _window.HatchLabel.Text = Loc.GetString("rmc-evacuation-computer-hatch-secured");
                 break;
             case EvacuationComputerMode.Crashed:
-                _window.StatusLabel.Text = "Escape Pod Status: CRASHED";
-                _window.HatchLabel.Text = "Docking Hatch: UNSECURED";
+                _window.StatusLabel.Text = Loc.GetString("rmc-evacuation-computer-status-crashed");
+                _window.HatchLabel.Text = Loc.GetString("rmc-evacuation-computer-hatch-unsecured");
                 break;
         }
     }

@@ -18,7 +18,10 @@ public sealed partial class ConvertToReagent : EntityEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Converts to {TargetReagent} at {PercentRate * 100}% or {MinimumRate}u per second while in the body";
+        return Loc.GetString("rmc-reagent-effect-guidebook-convert-to-reagent",
+            ("reagent", TargetReagent.ToString()),
+            ("percent", (PercentRate * 100).ToString()),
+            ("minimum", MinimumRate.ToString()));
     }
 
     public override void Effect(EntityEffectBaseArgs args)

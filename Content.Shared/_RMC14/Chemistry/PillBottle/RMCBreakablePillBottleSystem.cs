@@ -61,8 +61,8 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
 
         using (args.PushGroup(nameof(RMCBreakablePillBottleComponent)))
         {
-            args.PushMarkup("[color=red]The top has been broken open. It is unusable like this.[/color]");
-            args.PushMarkup("[color=cyan]If you have the know-how, you'd probably be able to bend the top back into place with something that can pinch it.[/color]");
+            args.PushMarkup(Loc.GetString("rmc-pill-bottle-broken-examine"));
+            args.PushMarkup(Loc.GetString("rmc-pill-bottle-broken-examine-repair"));
         }
     }
 
@@ -89,13 +89,13 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
     {
         if (!_hands.IsHolding(user, ent))
         {
-            _popup.PopupClient($"The {Name(ent)} must be in your hand to do that.", ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-pill-bottle-must-hold", ("bottle", Name(ent))), ent, user, PopupType.SmallCaution);
             return;
         }
 
         if (ent.Comp.Broken)
         {
-            _popup.PopupClient($"The {Name(ent)} has already been broken open!", ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-pill-bottle-already-broken", ("bottle", Name(ent))), ent, user, PopupType.SmallCaution);
             return;
         }
 
@@ -109,12 +109,12 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
         if (!_doAfter.TryStartDoAfter(args))
             return;
 
-        var selfMsg = $"You place the tip of the {Name(used)} underneath the lid of the {Name(ent)} and begin torquing the lid off";
-        selfMsg += CanOpenNormally(ent, user) ? ", though you could probably just open it normally." : ".";
+        var selfMsg = Loc.GetString("rmc-pill-bottle-break-start-self",
+            ("tool", Name(used)), ("bottle", Name(ent)), ("canOpen", CanOpenNormally(ent, user) ? "yes" : "no"));
 
         _popup.PopupPredicted(
             selfMsg,
-            $"{Identity.Name(user, EntityManager)} places the tip of the {Name(used)} underneath the lid of the {Name(ent)} and begins torquing the lid off...",
+            Loc.GetString("rmc-pill-bottle-break-start-others", ("user", Identity.Name(user, EntityManager)), ("tool", Name(used)), ("bottle", Name(ent))),
             ent,
             user);
 
@@ -130,7 +130,7 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
         var user = args.User;
         if (args.Cancelled)
         {
-            _popup.PopupClient($"You stop forcing the lid off of the {Name(ent)}.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-pill-bottle-break-cancel", ("bottle", Name(ent))), ent, user);
             return;
         }
 
@@ -144,8 +144,8 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
         if (TryComp(ent, out StorageComponent? storage) && storage.Container.ContainedEntities.Count > 0)
         {
             _popup.PopupPredicted(
-                $"You pop the lid off of the {Name(ent)}, spilling some of its contents everywhere!",
-                $"{userName} pops the lid off of the {Name(ent)}, spilling some of its contents everywhere!",
+                Loc.GetString("rmc-pill-bottle-break-spill-self", ("bottle", Name(ent))),
+                Loc.GetString("rmc-pill-bottle-break-spill-others", ("user", userName), ("bottle", Name(ent))),
                 ent,
                 user,
                 PopupType.SmallCaution);
@@ -158,8 +158,8 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
         else
         {
             _popup.PopupPredicted(
-                $"You pop the lid off of the {Name(ent)}, breaking it in the process.",
-                $"{userName} pops the lid off of the {Name(ent)}.",
+                Loc.GetString("rmc-pill-bottle-break-self", ("bottle", Name(ent))),
+                Loc.GetString("rmc-pill-bottle-break-others", ("user", userName), ("bottle", Name(ent))),
                 ent,
                 user);
         }
@@ -194,20 +194,20 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
     {
         if (!_hands.IsHolding(user, ent))
         {
-            _popup.PopupClient($"The {Name(ent)} must be in your hand to do that.", ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-pill-bottle-must-hold", ("bottle", Name(ent))), ent, user, PopupType.SmallCaution);
             return;
         }
 
         if (!ent.Comp.Broken)
         {
-            _popup.PopupClient($"The {Name(ent)} isn't broken, there's no need to fix it.", ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-pill-bottle-not-broken", ("bottle", Name(ent))), ent, user, PopupType.SmallCaution);
             return;
         }
 
         var skill = _skills.GetSkill(user, ent.Comp.RepairSkill);
         if (skill < 1 || ent.Comp.RepairDelays.Count == 0)
         {
-            _popup.PopupClient("You have no idea how to fix this thing.", ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-pill-bottle-repair-no-skill"), ent, user, PopupType.SmallCaution);
             return;
         }
 
@@ -224,14 +224,16 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
             return;
 
         var userName = Identity.Name(user, EntityManager);
+        var bottleName = Name(ent);
+        var toolName = Name(used);
         var (selfMsg, othersMsg) = tier switch
         {
-            1 => ($"After fiddling with it for a moment, you grip the end of the bent lid of the {Name(ent)} with the {Name(used)} and begin bending the plastic rim into useable form.",
-                $"{userName} fiddles with the {Name(ent)} for a moment, before bending the rim back into place with the {Name(used)}."),
-            2 => ($"You precisely place the tip of the {Name(used)} on the bent rim of the {Name(ent)} and begin bending it back into place.",
-                $"{userName} calmly grips the {Name(ent)} with the tip of the {Name(used)}, and begins bending the rim back into place."),
-            _ => ($"In one smooth motion, you grip the rim of the {Name(ent)} with the {Name(used)} and bend it back into place.",
-                $"In one smooth motion, {userName} grips the bent rim of the {Name(ent)} with the {Name(used)} and bends it back into place."),
+            1 => (Loc.GetString("rmc-pill-bottle-repair-start-self-1", ("bottle", bottleName), ("tool", toolName)),
+                Loc.GetString("rmc-pill-bottle-repair-start-others-1", ("user", userName), ("bottle", bottleName), ("tool", toolName))),
+            2 => (Loc.GetString("rmc-pill-bottle-repair-start-self-2", ("bottle", bottleName), ("tool", toolName)),
+                Loc.GetString("rmc-pill-bottle-repair-start-others-2", ("user", userName), ("bottle", bottleName), ("tool", toolName))),
+            _ => (Loc.GetString("rmc-pill-bottle-repair-start-self-3", ("bottle", bottleName), ("tool", toolName)),
+                Loc.GetString("rmc-pill-bottle-repair-start-others-3", ("user", userName), ("bottle", bottleName), ("tool", toolName))),
         };
 
         _popup.PopupPredicted(selfMsg, othersMsg, ent, user);
@@ -248,7 +250,7 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
         var user = args.User;
         if (args.Cancelled)
         {
-            _popup.PopupClient($"You stop fixing the {Name(ent)}.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-pill-bottle-repair-cancel", ("bottle", Name(ent))), ent, user);
             return;
         }
 
@@ -257,8 +259,8 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
 
         SetBroken(ent, false);
         _popup.PopupPredicted(
-            $"You succeed in fixing the {Name(ent)}.",
-            $"{Identity.Name(user, EntityManager)} successfully bends the rim of the {Name(ent)} back into place, fixing it.",
+            Loc.GetString("rmc-pill-bottle-repair-self", ("bottle", Name(ent))),
+            Loc.GetString("rmc-pill-bottle-repair-others", ("user", Identity.Name(user, EntityManager)), ("bottle", Name(ent))),
             ent,
             user);
     }
@@ -293,7 +295,7 @@ public sealed class RMCBreakablePillBottleSystem : EntitySystem
 
     private void PopupBroken(Entity<RMCBreakablePillBottleComponent> ent, EntityUid user)
     {
-        _popup.PopupClient($"The {Name(ent)} is broken...", ent, user, PopupType.SmallCaution);
+        _popup.PopupClient(Loc.GetString("rmc-pill-bottle-broken", ("bottle", Name(ent))), ent, user, PopupType.SmallCaution);
     }
 
     private bool CanOpenNormally(EntityUid bottle, EntityUid user)

@@ -78,7 +78,7 @@ public sealed class HiveTeamSystem : EntitySystem
     private static string GetRoleName(int role)
     {
         return role >= 0 && role < HiveTeamsComponent.RoleNames.Length
-            ? HiveTeamsComponent.RoleNames[role]
+            ? Robust.Shared.Localization.Loc.GetString(HiveTeamsComponent.RoleNames[role])
             : "?";
     }
 

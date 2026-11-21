@@ -7,7 +7,8 @@ public sealed partial class Boosting : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Boosts the potency of all other properties in this chemical by [color=yellow]{Potency * 0.5f}[/color]";
+        return Loc.GetString("rmc-reagent-effect-guidebook-boosting",
+            ("boost", (Potency * 0.5f).ToString()));
     }
 
     protected override void ReagentBoost(EntityEffectReagentArgs args, ref float boost)

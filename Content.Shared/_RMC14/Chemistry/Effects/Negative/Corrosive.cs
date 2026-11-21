@@ -13,9 +13,10 @@ public sealed partial class Corrosive : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Deals [color=red]{PotencyPerSecond}[/color] burn damage.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond * 2}[/color] burn damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] burn damage";
+        return Loc.GetString("rmc-reagent-effect-guidebook-corrosive",
+            ("potency", PotencyPerSecond.ToString()),
+            ("potencyX2", (PotencyPerSecond * 2).ToString()),
+            ("potencyX5", (PotencyPerSecond * 5).ToString()));
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

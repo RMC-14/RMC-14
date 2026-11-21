@@ -3,22 +3,22 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.ARES"
     xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    Title="Maintenance Terminal"
+    Title="{Loc 'rmc-ares-terminal-title'}"
     MinSize="900 600">
     <Control Name="LoginScreen" Access="Public">
         <BoxContainer Orientation="Vertical" VerticalAlignment="Center">
-            <RichTextLabel Text="[font size= 20]ARES v3.2 Interface" HorizontalAlignment="Center"/>
-            <RichTextLabel Text="[font size= 15]We-Ya Management" HorizontalAlignment="Center"/>
+            <RichTextLabel Text="{Loc 'rmc-ares-terminal-interface'}" HorizontalAlignment="Center"/>
+            <RichTextLabel Text="{Loc 'rmc-ares-terminal-management'}" HorizontalAlignment="Center"/>
             <Control SetHeight="30"/>
-            <RichTextLabel Text="[font size= 15]Version 6.6.6" HorizontalAlignment="Center"/>
+            <RichTextLabel Text="{Loc 'rmc-ares-terminal-version'}" HorizontalAlignment="Center"/>
             <Control SetHeight="30"/>
             <Button Access="Public" Name="SignIn" HorizontalAlignment="Center" MinWidth="200" MinHeight="80" StyleClasses="chatSelectorOptionButton">
-                <RichTextLabel Text="[font size=20][bold]Login" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 1 0 0"/>
+                <RichTextLabel Text="{Loc 'rmc-ares-terminal-login'}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 1 0 0"/>
             </Button>
         </BoxContainer>
 
         <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-            <RichTextLabel Text="[color=Crimson]Contact your AI Service Technician for more information.[/color]" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <RichTextLabel Text="{Loc 'rmc-ares-terminal-contact-technician'}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </BoxContainer>
     </Control>
 
@@ -40,7 +40,7 @@
                         <Button Access="Public" Name="Home" Text="🏠" MinWidth="40" MinHeight="40" StyleClasses="chatSelectorOptionButton"/>
                         <RichTextLabel Text=" "/>
                         <RichTextLabel Access="Public" Name="SignedInUser" Text="[font size= 15]Feronia Star ([color=gold]AI Service Chief Engineer[/color])" HorizontalExpand="True" VerticalAlignment="Center"/>
-                        <Button Access="Public" Name="LogOut" MinWidth="80" MinHeight="40" Text="Logout" StyleClasses="chatSelectorOptionButton"/>
+                        <Button Access="Public" Name="LogOut" MinWidth="80" MinHeight="40" Text="{Loc 'rmc-ares-terminal-logout'}" StyleClasses="chatSelectorOptionButton"/>
                     </BoxContainer>
                 </PanelContainer>
             </PanelContainer>
@@ -59,23 +59,23 @@
                                                    BorderThickness="4" />
                         </PanelContainer.PanelOverride>
                         <BoxContainer Orientation="Vertical" Margin="0 10 0 0">
-                            <RichTextLabel Text="[font size= 20]Master Menu" Margin="0 0 0 10" HorizontalAlignment="Center"/>
+                            <RichTextLabel Text="{Loc 'rmc-ares-terminal-master-menu'}" Margin="0 0 0 10" HorizontalAlignment="Center"/>
                             <userInterface:BlueHorizontalSeparator Margin="0 0 0 0"/>
                                 <BoxContainer Access="Public" Name="MasterMenu" Orientation="Vertical">
-                                    <controls:ARESExternalTerminalSection Access="Public" Name="LogCategory" SectionNameText="[font size= 15]Logs" Visible="False"/>
+                                    <controls:ARESExternalTerminalSection Access="Public" Name="LogCategory" SectionNameText="{Loc 'rmc-ares-terminal-section-logs'}" Visible="False"/>
 
                                     <Control Visible="False">
-                                        <RichTextLabel Text="[font size= 15]Security Procedures" Margin="0 10 0 5" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                                        <RichTextLabel Text="{Loc 'rmc-ares-terminal-security-procedures'}" Margin="0 10 0 5" HorizontalAlignment="Center" HorizontalExpand="True"/>
                                         <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Text="Lockdown Overrides" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" ModulateSelfOverride="Maroon"/>
-                                            <Button Text="Ship Decontamination" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" ModulateSelfOverride="Maroon"/>
+                                            <Button Text="{Loc 'rmc-ares-terminal-lockdown-overrides'}" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" ModulateSelfOverride="Maroon"/>
+                                            <Button Text="{Loc 'rmc-ares-terminal-ship-decontamination'}" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth" ModulateSelfOverride="Maroon"/>
                                         </BoxContainer>
                                     </Control>
 
                                     <Control Visible="False">
-                                        <RichTextLabel Text="[font size= 15]Core Access" Margin="0 10 0 5" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                                        <RichTextLabel Text="{Loc 'rmc-ares-terminal-core-access'}" Margin="0 10 0 5" HorizontalAlignment="Center" HorizontalExpand="True"/>
                                         <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Text="Access Requests" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth"/>
+                                            <Button Text="{Loc 'rmc-ares-terminal-access-requests'}" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 2.5" StyleClasses="OpenBoth"/>
                                         </BoxContainer>
                                     </Control>
 
@@ -96,13 +96,13 @@
                                                    BorderThickness="4" />
                         </PanelContainer.PanelOverride>
                         <BoxContainer Orientation="Vertical" Margin="0 10 0 0">
-                            <RichTextLabel Text="[font size= 20]Core Security Protocols" Margin="0 0 0 10" HorizontalAlignment="Center"/>
+                            <RichTextLabel Text="{Loc 'rmc-ares-terminal-core-security'}" Margin="0 0 0 10" HorizontalAlignment="Center"/>
                                 <BoxContainer Orientation="Vertical">
                                     <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <Button Text="ASRS Logs" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
-                                        <Button Text="Announcement Logs" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
-                                        <Button Text="Medical Logs" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
-                                        <Button Text="ARES Logs" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
+                                        <Button Text="{Loc 'rmc-ares-terminal-asrs-logs'}" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
+                                        <Button Text="{Loc 'rmc-ares-terminal-announcement-logs'}" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
+                                        <Button Text="{Loc 'rmc-ares-terminal-medical-logs'}" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
+                                        <Button Text="{Loc 'rmc-ares-terminal-ares-logs'}" SetHeight="30" SetWidth="200" Margin="2.5 0 2.5 0" StyleClasses="OpenBoth"/>
                                     </BoxContainer>
                                 </BoxContainer>
                         </BoxContainer>

@@ -3,6 +3,8 @@ rmc-overwatch-console = Overwatch
 rmc-overwatch-console-tactical-map = Tactical Map
 rmc-overwatch-console-stop-overwatch = Stop Overwatch
 rmc-overwatch-console-squad-message-title = Squad Message
+rmc-overwatch-console-input-ok = Ok
+rmc-overwatch-console-input-cancel = Cancel
 rmc-overwatch-console-message-squad = Message Squad
 rmc-overwatch-console-squad-objectives = Squad Objectives
 rmc-overwatch-console-show-squad-info = Show Squad Info
@@ -57,10 +59,12 @@ rmc-overwatch-console-longitude-short = LONG.
 rmc-overwatch-console-latitude-short = LAT.
 rmc-overwatch-console-comment = COMMENT
 rmc-overwatch-console-save-comment = Save Comment
-rmc-overwatch-console-no-crate-loaded = [color=red][bold][ NO CRATE LOADED ][/bold][/color]
-rmc-overwatch-console-crate-loaded = [color=green][bold][ CRATE LOADED ][/bold][/color]
+rmc-overwatch-console-no-crate-loaded = [color=red][bold] \[ NO CRATE LOADED \][/bold][/color]
+rmc-overwatch-console-crate-loaded = [color=green][bold] \[ CRATE LOADED \][/bold][/color]
 rmc-overwatch-console-ready = [color=green][bold][ READY ][/bold][/color]
 rmc-overwatch-console-not-ready = [color=red][bold][ NOT READY ][/bold][/color]
+rmc-overwatch-console-supply-ready = [color=green][bold] \[ READY \][/bold][/color]
+rmc-overwatch-console-supply-not-ready = [color=red][bold] \[ NOT READY \][/bold][/color]
 rmc-overwatch-console-cooldown = [color=#D3B400][bold][ COOLDOWN - { $seconds } SECONDS ][/bold][/color]
 rmc-overwatch-console-no-warhead-loaded = [color=red][bold]No warhead loaded[/bold][/color]
 
@@ -80,6 +84,7 @@ rmc-overwatch-console-choose-marine-transfer = Choose marine to transfer
 
 # Console messages
 rmc-overwatch-console-pain-kicked-out = The pain kicked you out of the console!
+rmc-overwatch-console-busy-optics = You're too busy peering through optics.
 
 # Squad message announcements
 rmc-overwatch-console-announce-message = [color=#3C70FF][bold]Overwatch:[/bold] { $operatorName } transmits: [font size=16][bold]{ $message }[/bold][/font][/color]
@@ -89,6 +94,7 @@ rmc-overwatch-console-squad-message-sent = [bold][color=#6685F5]'{ $squadName }'
 rmc-overwatch-console-marine-unfit-to-lead = { $marineName } is unfit to lead!
 rmc-overwatch-console-marine-is-kia-exclamation = { $marineName } is KIA!
 rmc-overwatch-console-promoted-to-leader = Overwatch: You've been promoted to 'ACTING SQUAD LEADER'{ $squadStr }. Your headset has access to the command channel (:v).
+rmc-overwatch-console-promoted-squad-suffix = {" "}for {$squad}
 rmc-overwatch-console-new-squad-leader-announce = Attention: A new Squad Leader has been set: { $leaderName }
 rmc-overwatch-console-new-squad-leader-popup = { $leaderName } is { $squadName }'s new leader!
 

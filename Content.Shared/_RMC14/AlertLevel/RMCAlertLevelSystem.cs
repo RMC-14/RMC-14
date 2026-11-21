@@ -116,7 +116,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         {
             foreach (var almayer in almayers)
             {
-                _aresCore.CreateARESLog(almayer, LogCat, (string)$"{Name(user.Value)} set the alert level to: {level}");
+                _aresCore.CreateARESLog(almayer, LogCat, Loc.GetString("rmc-ares-log-alert-level", ("user", Name(user.Value)), ("level", level.ToString())));
             }
         }
 

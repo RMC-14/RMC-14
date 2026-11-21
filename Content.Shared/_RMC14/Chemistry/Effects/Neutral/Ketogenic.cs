@@ -19,10 +19,10 @@ public sealed partial class Ketogenic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Removes [color=red]{PotencyPerSecond * 5}[/color] nutrients, causing hunger over time.\n" +
-               $"Increases alcohol metabolism rate by [color=green]{PotencyPerSecond}[/color] units.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond * 5}[/color] nutrition loss, [color=red]{PotencyPerSecond}[/color] toxin damage, and a [color=red]{ActualPotency * 2.5}%[/color] chance of vomiting.\n" +
-               $"Critical overdoses will knock you unconscious for [color=red]10[/color] seconds";
+        return Loc.GetString("rmc-reagent-effect-guidebook-ketogenic",
+            ("potencyX5", (PotencyPerSecond * 5).ToString()),
+            ("potency", PotencyPerSecond.ToString()),
+            ("vomitChance", (ActualPotency * 2.5).ToString()));
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

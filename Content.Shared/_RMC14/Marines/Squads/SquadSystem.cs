@@ -784,7 +784,7 @@ public sealed class SquadSystem : EntitySystem
         var squad = toPromote.Comp?.Squad;
         if (TryComp(toPromote, out ActorComponent? actor))
         {
-            var squadStr = Exists(squad) ? $" for {Name(squad.Value)}" : string.Empty;
+            var squadStr = Exists(squad) ? Loc.GetString("rmc-overwatch-console-promoted-squad-suffix", ("squad", Name(squad.Value))) : string.Empty;
             var message = Loc.GetString("rmc-overwatch-console-promoted-to-leader", ("squadStr", squadStr));
             _rmcChat.ChatMessageToOne(ChatChannel.Local, message, message, default, false, actor.PlayerSession.Channel, Color.FromHex("#0084FF"), true);
         }

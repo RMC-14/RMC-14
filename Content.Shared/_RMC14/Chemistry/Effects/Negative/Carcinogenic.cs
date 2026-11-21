@@ -14,9 +14,9 @@ public sealed partial class Carcinogenic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Deals [color=red]{PotencyPerSecond * 0.5}[/color] genetic damage.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond * 2}[/color] genetic damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 2}[/color] brute damage";
+        return Loc.GetString("rmc-reagent-effect-guidebook-carcinogenic",
+            ("potencyHalf", (PotencyPerSecond * 0.5).ToString()),
+            ("potencyX2", (PotencyPerSecond * 2).ToString()));
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

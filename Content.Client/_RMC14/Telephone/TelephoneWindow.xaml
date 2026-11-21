@@ -1,7 +1,7 @@
 <controls:TelephoneWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Telephone"
-    Title="Telephone" MinSize="600 400">
+    Title="{Loc 'rmc-telephone-title'}" MinSize="600 400">
     <BoxContainer Orientation="Vertical">
         <TabContainer Name="Tabs" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
         <BoxContainer Name="Buttons" Access="Public" Orientation="Vertical" />

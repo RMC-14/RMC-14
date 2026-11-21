@@ -40,13 +40,13 @@ public sealed class LarvaQueueOfferSystem : EntitySystem
 
         _window.OfferTypeLabel.Text = ev.OfferType switch
         {
-            "Burst Victim" => "Burst Victim Priority",
-            "Infector"     => "Infector Priority",
-            _              => "Larva Available",
+            "Burst Victim" => Loc.GetString("rmc-larva-queue-offer-burst-victim"),
+            "Infector"     => Loc.GetString("rmc-larva-queue-offer-infector"),
+            _              => Loc.GetString("rmc-larva-queue-offer-available"),
         };
 
-        _window.PositionLabel.Text = $"Queue Position: {ev.QueuePosition}";
-        _window.HiveLabel.Text = $"Hive: {ev.HiveName}";
+        _window.PositionLabel.Text = Loc.GetString("rmc-larva-queue-offer-position", ("position", ev.QueuePosition));
+        _window.HiveLabel.Text = Loc.GetString("rmc-larva-queue-offer-hive", ("hive", ev.HiveName));
         UpdateCountdown();
 
         _window.AcceptButton.OnPressed += _ =>
@@ -87,7 +87,7 @@ public sealed class LarvaQueueOfferSystem : EntitySystem
         if (ev.LarvaDied)
         {
             _offerExpiredAt = _timing.CurTime.TotalSeconds;
-            _window.CountdownLabel.Text = $"{_offeredEntityName} died — you will remain in the queue";
+            _window.CountdownLabel.Text = Loc.GetString("rmc-larva-queue-offer-larva-died", ("larva", _offeredEntityName));
             _window.AcceptButton.Visible = false;
             _window.DeclineButton.Visible = false;
             _window.FollowButton.Visible = false;
@@ -125,11 +125,12 @@ public sealed class LarvaQueueOfferSystem : EntitySystem
         var remaining = _currentOffer.ExpiresAt - _timing.CurTime.TotalSeconds;
         if (remaining <= 0)
         {
-            _window.CountdownLabel.Text = "Offer expired.";
+            _window.CountdownLabel.Text = Loc.GetString("rmc-larva-queue-offer-expired");
             return;
         }
 
-        _window.CountdownLabel.Text = $"Time remaining: {remaining:F0}s";
+        _window.CountdownLabel.Text = Loc.GetString("rmc-larva-queue-offer-time-remaining",
+            ("seconds", (int) Math.Round(remaining, MidpointRounding.AwayFromZero)));
     }
 
     private void CloseWindow()

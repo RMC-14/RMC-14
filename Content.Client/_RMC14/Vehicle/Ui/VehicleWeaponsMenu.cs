@@ -347,10 +347,10 @@ public sealed partial class VehicleWeaponsMenu : FancyWindow
         if (selected.HasAmmo)
         {
             var max = selected.MagazineSize > 0 ? selected.MagazineSize : selected.AmmoCapacity;
-            parts.Add($"Ammo: {selected.AmmoCount}/{max}");
+            parts.Add(Loc.GetString("rmc-vehicle-weapons-ammo", ("ammo", selected.AmmoCount), ("max", max)));
         }
         if (selected.HasMagazineData && selected.MaxStoredMagazines > 0)
-            parts.Add($"Stored: {selected.StoredMagazines}/{selected.MaxStoredMagazines}");
+            parts.Add(Loc.GetString("rmc-vehicle-weapons-stored", ("stored", selected.StoredMagazines), ("max", selected.MaxStoredMagazines)));
 
         return string.Join(" | ", parts);
     }

@@ -28,7 +28,7 @@ public sealed class VehicleFlamerTankSlotsSystem : EntitySystem
             var slotId = GetSlotId(activeSlotId, i);
             var slot = new ItemSlot
             {
-                Name = i == 0 ? "Tank" : "Spare Tank",
+                Name = i == 0 ? "rmc-vehicle-flamer-slot-tank" : "rmc-vehicle-flamer-slot-spare-tank",
                 Whitelist = ent.Comp.Whitelist
             };
             _itemSlots.AddItemSlot(ent, slotId, slot);

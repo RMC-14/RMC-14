@@ -14,3 +14,14 @@ mutineer-leader-status-removed = You are no longer the leader of the mutiny.
 mutineer-invite-title = Mutiny Invitation
 mutineer-invite-accept = Join
 mutineer-invite-deny = Decline
+
+rmc-mutiny-invite-text = You are being asked to join a mutiny.
+rmc-mutiny-invite-rules = Read the Mutinies and Riots guidelines (Core Rules -> "Mutinies, Riots").
+
+rmc-mutiny-verb-make-mutineer = Make mutineer
+rmc-mutiny-verb-make-mutineer-leader = Make mutineer leader
+
+rmc-mutiny-admin-made-mutineer = Player {$player} was made a mutineer.
+rmc-mutiny-admin-removed-mutineer = Player {$player} is no longer a mutineer.
+rmc-mutiny-admin-made-leader = Player {$player} was made a mutineer leader.
+rmc-mutiny-admin-removed-leader = Player {$player} is no longer a mutineer leader.

@@ -17,9 +17,9 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Stabilizes the temperature of the body to [color=green]{TemperatureHelpers.CelsiusToKelvin(Atmospherics.NormalBodyTemperature)}[/color] kelvins, by [color=green]{40f * PotencyPerSecond * 1.5f}[/color] K at a time.\n" +
-               $"Overdoses cause [color=red]10[/color] seconds of unconsciousness.\n" +
-               $"Critical overdoses cause [color=red]5[/color] seconds of unconsciousness with a [color=red]5%[/color] chance";
+        return Loc.GetString("rmc-reagent-effect-guidebook-thermostabilizing",
+            ("temperature", (TemperatureHelpers.CelsiusToKelvin(Atmospherics.NormalBodyTemperature)).ToString()),
+            ("change", (40f * PotencyPerSecond * 1.5f).ToString()));
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

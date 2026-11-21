@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.Medical.Surgery.Tools;
 [Access(typeof(SharedCMSurgerySystem))]
 public sealed partial class CMHemostatComponent : Component, ICMSurgeryToolComponent
 {
-    public string ToolName => "a hemostat";
+    public LocId ToolName => "rmc-surgery-tool-hemostat";
 }
