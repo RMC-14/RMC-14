@@ -447,6 +447,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
     {
         victim.Comp.BurstAt = _timing.CurTime + victim.Comp.BurstDelay;
+        var ev = new VictimInfectedChangedEvent(victim);
+        RaiseLocalEvent(ref ev);
     }
 
     private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
@@ -456,6 +458,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             _status.TryRemoveStatusEffect(victim, "Unconscious");
         }
         _standing.Stand(victim);
+
+        var ev = new VictimInfectedChangedEvent(victim);
+        RaiseLocalEvent(ref ev);
     }
 
     private void OnVictimInfectedCancel<T>(Entity<VictimInfectedComponent> victim, ref T args) where T : CancellableEntityEventArgs

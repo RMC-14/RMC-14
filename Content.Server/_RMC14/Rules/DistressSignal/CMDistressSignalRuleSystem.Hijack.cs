@@ -173,12 +173,14 @@ public sealed partial class CMDistressSignalRuleSystem
         var time = Timing.CurTime;
         if (!rule.HijackSongPlayed)
         {
+            var wasEndgame = IsDistressEndgameActive();
             rule.HijackSongPlayed = true;
             var song = _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
             if (song?.Entity is { } songEnt)
                 EnsureComp<RMCHijackSongComponent>(songEnt);
 
             rule.ForceEndAt = time + _forceEndHijackTime;
+            RaiseEndgameChanged(wasEndgame);
         }
 
         var didCameraShake = false;

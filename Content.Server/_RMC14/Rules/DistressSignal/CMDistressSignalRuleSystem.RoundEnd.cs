@@ -69,6 +69,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void UpdateHijackState(CMDistressSignalRuleComponent distress)
     {
+        var wasEndgame = IsDistressEndgameActive();
         var hijack = false;
         var dropshipQuery = EntityQueryEnumerator<DropshipComponent>();
         while (dropshipQuery.MoveNext(out var dropship))
@@ -82,6 +83,7 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             distress.Hijack = true;
             distress.AbandonedAt ??= time + distress.AbandonedDelay;
+            RaiseEndgameChanged(wasEndgame);
         }
     }
 
@@ -369,6 +371,13 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void OnCompRemove<T>(Entity<T> ent, ref ComponentRemove args) where T : IComponent?
     {
+        CheckRoundShouldEnd();
+    }
+
+    private void OnXenoComponentRemoved(Entity<XenoComponent> ent, ref ComponentRemove args)
+    {
+        var ev = new XenoComponentChangedEvent(ent);
+        RaiseLocalEvent(ref ev);
         CheckRoundShouldEnd();
     }
 
