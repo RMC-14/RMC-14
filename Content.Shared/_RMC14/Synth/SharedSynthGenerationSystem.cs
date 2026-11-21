@@ -6,7 +6,9 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
+using Content.Shared.Movement.Components;
 using Content.Shared.Prototypes;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -17,11 +19,11 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 {
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
 
     public override void Initialize()
     {
@@ -29,6 +31,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 
         SubscribeLocalEvent<SynthGenerationComponent, GenerationSelectActionEvent>(OnGenerationSelectAction);
         SubscribeLocalEvent<SynthGenerationComponent, GenerationSelectedActionEvent>(OnGenerationSelectedAction);
+        SubscribeLocalEvent<SynthGenerationComponent, GenerationConfirmedEvent>(OnGenerationConfirmed);
         SubscribeLocalEvent<SynthGenerationComponent, MapInitEvent>(OnGenerationMapInit);
         SubscribeLocalEvent<SynthGenerationComponent, PlayerAttachedEvent>(OnGenerationPlayerAttached);
         SubscribeLocalEvent<SynthGenerationComponent, PlayerSpawnCompleteEvent>(OnGenerationSpawnComplete);
@@ -41,6 +44,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         if (comp.Generation != null)
         {
             ApplyGenerationModifier((ent.Owner, comp));
+
             return;
         }
 
@@ -70,31 +74,15 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         if (!HasComp<RMCAdminSpawnedComponent>(ent))
             return;
 
-        ClearGeneration(ent);
         GenerationPopup(ent);
     }
 
-    private void ClearGeneration(Entity<SynthGenerationComponent> ent)
-    {
-        if (ent.Comp.Generation is { } current && _prototype.TryIndex(current, out var proto))
-        {
-            var keep = _compFactory.GetComponentName(typeof(SynthGenerationComponent));
-            foreach (var (name, _) in proto.Components)
-            {
-                if (name == keep)
-                    continue;
-
-                EntityManager.RemoveComponent(ent.Owner, _compFactory.GetRegistration(name).Type);
-            }
-        }
-
-        ent.Comp.Generation = null;
-        Dirty(ent);
-        _actions.AddAction(ent.Owner, ref ent.Comp.SelectGenerationActionEntity, ent.Comp.GenerationAction);
-    }
 
     private void OnGenerationSelectAction(Entity<SynthGenerationComponent> ent, ref GenerationSelectActionEvent args)
     {
+        if (ent.Comp.Generation != null)
+            return;
+
         GenerationPopup(ent);
     }
 
@@ -117,25 +105,58 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
             return;
 
         var options = new List<DialogOption>();
-        HashSet<EntProtoId<SynthGenerationComponent>> synthTypes = [];
+        var synthTypes = new List<(EntityPrototype Proto, int Priority)>();
 
-        foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
+        if (ent.Comp.AvailableGenerations.Count > 0)
         {
-            if (proto.HasComponent<SynthGenerationComponent>())
-                synthTypes.Add(proto.ID);
+            foreach (var id in ent.Comp.AvailableGenerations)
+            {
+                if (_prototype.TryIndex(id, out var proto) &&
+                    proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                    synthTypes.Add((proto, gen.Priority));
+            }
+        }
+        else
+        {
+            foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
+            {
+                if (proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                    synthTypes.Add((proto, gen.Priority));
+            }
         }
 
-        foreach (var synth in synthTypes)
+        synthTypes.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+
+        foreach (var (proto, _) in synthTypes)
         {
-            if (!_prototype.TryIndex(synth, out var proto))
-                continue;
-            options.Add(new DialogOption($"{proto.Name}", new GenerationSelectedActionEvent(synth)));
+            var desc = proto.TryGetComponent(out SynthGenerationComponent? genComp, _compFactory)
+                ? genComp.Description
+                : string.Empty;
+            options.Add(new DialogOption(proto.Name, new GenerationSelectedActionEvent(proto.ID), description: desc));
         }
 
-        _dialog.OpenOptions(ent.Owner, "Select a Generation", options, "Available Generations");
+        _dialog.OpenOptions(ent.Owner, "Select a Generation", options, "Available Generations", enableSearch: false);
     }
 
     private void OnGenerationSelectedAction(Entity<SynthGenerationComponent> ent, ref GenerationSelectedActionEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (ent.Comp.Generation != null)
+            return;
+
+        if (!_prototype.TryIndex(args.Generation, out var proto))
+            return;
+
+        _dialog.OpenConfirmation(
+            ent.Owner,
+            "Confirm Generation",
+            $"Please confirm {proto.Name} selection.",
+            new GenerationConfirmedEvent(args.Generation));
+    }
+
+    private void OnGenerationConfirmed(Entity<SynthGenerationComponent> ent, ref GenerationConfirmedEvent args)
     {
         if (ent.Comp.Generation != null)
             return;
@@ -146,11 +167,24 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
             return;
         }
 
+        var actionEntity = ent.Comp.SelectGenerationActionEntity ?? FindGenerationActionEntity(ent);
+
         EntityManager.AddComponents(ent, proto);
 
         if (TryComp<SynthGenerationComponent>(ent, out var gen))
             ApplyGenerationModifier((ent.Owner, gen));
 
-        _actions.RemoveAction(ent.Owner, ent.Comp.SelectGenerationActionEntity);
+        _actions.RemoveAction(ent.Owner, actionEntity);
+    }
+
+    private EntityUid? FindGenerationActionEntity(Entity<SynthGenerationComponent> ent)
+    {
+        foreach (var action in _actions.GetActions(ent.Owner))
+        {
+            if (Prototype(action.Owner) is { } proto && proto.ID == ent.Comp.GenerationAction)
+                return action.Owner;
+        }
+
+        return null;
     }
 }

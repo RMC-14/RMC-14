@@ -11,6 +11,7 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCActivateAttachableUnderbarrel = "RMCActivateAttachableUnderbarrel";
     public static readonly BoundKeyFunction RMCFieldStripHeldItem = "RMCFieldStripHeldItem";
     public static readonly BoundKeyFunction RMCCycleFireMode = "RMCCycleFireMode";
+    public static readonly BoundKeyFunction RMCToggleShotgunTube = "RMCToggleShotgunTube";
     public static readonly BoundKeyFunction CMUniqueAction = "CMUniqueAction";
     public static readonly BoundKeyFunction CMHolsterPrimary = "CMHolsterPrimary";
     public static readonly BoundKeyFunction CMHolsterSecondary = "CMHolsterSecondary";
@@ -25,4 +26,7 @@ public sealed class CMKeyFunctions
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
     public static readonly BoundKeyFunction RMCXenoRest = "RMCXenoRest";
+    public static readonly BoundKeyFunction RMCXenoPheromonesRecovery = "RMCXenoPheromonesRecovery";
+    public static readonly BoundKeyFunction RMCXenoPheromonesWarding = "RMCXenoPheromonesWarding";
+    public static readonly BoundKeyFunction RMCXenoPheromonesFrenzy = "RMCXenoPheromonesFrenzy";
 }
