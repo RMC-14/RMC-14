@@ -2,7 +2,7 @@
   id: SecurityIcon
   abstract: true
   priority: 3
-  offset: 1
+  offset: 8
   locationPreference: Right
   isShaded: true
 
