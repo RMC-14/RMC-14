@@ -56,7 +56,6 @@
       - id: RMCBeltHolsterSMGPouch
       - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
-      - id: CMBeltUtility
       - id: RMCBeltUtilityGeneral
       - id: RMCBeltGrenade
     - name: Pouches
