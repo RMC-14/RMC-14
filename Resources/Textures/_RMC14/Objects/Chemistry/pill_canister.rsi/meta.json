@@ -56,6 +56,9 @@
       "name": "closed"
     },
     {
+      "name": "broken"
+    },
+    {
       "name": "inhand-left",
       "directions": 4
     },
