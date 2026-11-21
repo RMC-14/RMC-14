@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Crusher and Charger Crusher charge colliding with hive ordered
-      structures, eggs, fast and sticky resin, resin spikes, Gardener Drone fruits,
-      resin traps.
-    type: Fix
-  id: 3395
-  time: '2026-06-13T00:40:38.866409+00:00'
-  url: null
 - author: IceNoobXD
   changes:
   - message: The edges of the coagulation pits on trijent dam are now unbreakable!
@@ -4451,5 +4442,12 @@
   id: 3894
   time: '2026-11-21T23:27:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9911
+- author: kleinerstation13
+  changes:
+  - message: Resprited the Basira rifle and gave it new firing sounds
+    type: Tweak
+  id: 3895
+  time: '2026-11-21T23:30:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10013
 Name: RMC14
 Order: -1
