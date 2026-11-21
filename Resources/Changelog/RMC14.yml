@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Flares no longer play their "ignition" sound multiple times.
-    type: Fix
-  - message: Fixed flares extinguishing too soon.
-    type: Fix
-  id: 3385
-  time: '2026-06-12T05:41:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10136
 - author: DrSmugleaf
   changes:
   - message: Fixed Charger Crusher colliding with weeds on the floor.
@@ -4431,5 +4422,19 @@
   id: 3884
   time: '2026-11-21T04:15:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10169
+- author: MidZik
+  changes:
+  - message: Xeno actions/abilties should have fewer mispredicts and hit their targets
+      more reliably.
+    type: Fix
+  - message: Ghost/fake actions should no longer occur.
+    type: Fix
+  - message: Melee hits and interactions (shaking, patting, pulling) should be more
+      reliable. In particular, meleeing or interacting with entities moving towards
+      you should be more reliable.
+    type: Fix
+  id: 3885
+  time: '2026-11-21T04:47:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10103
 Name: RMC14
 Order: -1
