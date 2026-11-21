@@ -63,7 +63,7 @@
       required: true
       defaultMarkings: [ ArachnidCheliceraeDownwards ]
     Chest:
-      points: 2
+      points: 3
       required: false
     UndergarmentTop:
       points: 1

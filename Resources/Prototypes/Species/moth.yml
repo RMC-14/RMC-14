@@ -50,21 +50,21 @@
       points: 0
       required: false
     Tail:
-      points: 1
+      points: 3
       required: true
-      defaultMarkings: [ MothWingsDefault ]
+      defaultMarkings: [ MothWingsDefault, MothWingsDefault2, MothWingsDefault3, ] # RMC - Don't mind this this is so it even allows 3 markings
     Snout:
       points: 1
       required: false
     HeadTop:
-      points: 1
+      points: 6
       required: true
-      defaultMarkings: [ MothAntennasDefault ]
+      defaultMarkings: [ MothAntennasDefault, MothAntennasDefault2, MothAntennasDefault3, MothAntennasDefault4, MothAntennasDefault5, MothAntennasDefault6 ] # RMC - Don't mind this this is so it even allows 6 markings
     HeadSide:
       points: 1
       required: false
     Head:
-      points: 1
+      points: 2
       required: false
     UndergarmentTop:
       points: 1
@@ -75,7 +75,7 @@
       required: true
       defaultMarkings: [ RMCUnderwearBoxersBlue ]
     Chest:
-      points: 2
+      points: 3
       required: false
     Legs:
       points: 2
