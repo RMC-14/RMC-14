@@ -310,12 +310,15 @@
       - CMSurvivorTrijentResearcher: 2
     survivorJobScenarios:
       spp_spetsnaz_trijent:
+      - RMCSurvivorCommandingOfficer: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
       - CMSurvivor: -1
     survivorJobVariantScenarios:
       spp_spetsnaz_trijent:
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorSPPSpetsnazTrjientCommander: 1
         CMSurvivorDoctor:
         - RMCSurvivorSPPSpetsnazTrijentMedic: 1
         CMSurvivorEngineer:

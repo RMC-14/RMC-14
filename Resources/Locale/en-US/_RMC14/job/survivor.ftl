@@ -374,6 +374,9 @@ rmc-job-prefix-trijent-spetsnaz-operator = D/SRU OPR
 
 rmc-job-prefix-trijent-spetsnaz-synth = D/SRU SYN
 
+rmc-job-name-trijent-spetsnaz-commander = Spetsnaz Commander
+rmc-job-prefix-trijent-spetsnaz-commander = D/SRU CDR
+
 # Fiorina Science Annex Survs
 
 cm-job-name-survivor-fiorina-corporate-liaison = Fiorina Corporate Liaison

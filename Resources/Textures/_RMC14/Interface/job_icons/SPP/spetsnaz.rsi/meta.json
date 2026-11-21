@@ -24,6 +24,9 @@
         },
         {
             "name": "spp_sptz_synth"
+        },
+        {
+            "name": "spp_sptz_co"
         }
     ]
 }
