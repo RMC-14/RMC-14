@@ -22,8 +22,10 @@ namespace Content.Server._RMC14.Xenonids.Parasite;
 
 public sealed class XenoEggRoleSystem : EntitySystem
 {
-    private ProtoId<JobPrototype> _parasiteJob = "CMXenoParasite";
+    private readonly ProtoId<JobPrototype> _parasiteJob = "CMXenoParasite";
     private TimeSpan _parasiteSpawnDelay;
+    private int _parasiteSpawnMinimum;
+    private int _parasiteSpawnScale;
 
     [Dependency] private readonly ActorSystem _actor = default!;
     [Dependency] private readonly XenoEggSystem _eggSystem = default!;
@@ -63,6 +65,8 @@ public sealed class XenoEggRoleSystem : EntitySystem
         });
 
         Subs.CVar(_config, RMCCVars.RMCParasiteSpawnInitialDelayMinutes, v => _parasiteSpawnDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCParasiteSpawnMinimum, v => _parasiteSpawnMinimum = v, true);
+        Subs.CVar(_config, RMCCVars.RMCParasiteSpawnScale, v => _parasiteSpawnScale = v, true);
     }
 
     private void OnXenoEggGhostBuiChosen(Entity<XenoEggComponent> ent, ref XenoParasiteGhostBuiMsg args)
@@ -159,7 +163,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
         // Limit the amount of player controlled parasites.
         var livingParasites = _evolutionSystem.GetLiving<XenoComponent>(x => x.Comp.Role == _parasiteJob && TryComp<ActorComponent>(x, out var actor) && actor.PlayerSession != null);
         var livingXenos = _evolutionSystem.GetLiving<XenoComponent>(x => x.Comp.CountedInSlots);
-        var max = Math.Max(2, livingXenos / 4);
+        var max = Math.Max(_parasiteSpawnMinimum, livingXenos / _parasiteSpawnScale);
         if (livingParasites >= max)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-too-many"), user, user, PopupType.MediumCaution);
