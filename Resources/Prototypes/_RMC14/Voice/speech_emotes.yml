@@ -83,6 +83,25 @@
     - growled
 
 - type: emote
+  id: RMCGiantLizardFlickTongue
+  name: rmc-emote-name-giant-lizard-flick-tongue
+  category: General
+  whitelist:
+    components:
+    - RMCGiantLizard
+  blacklist:
+    components:
+    - BorgChassis
+  available: false
+  icon: _RMC14/Actions/xeno_emotes.rsi/hiss.png
+  chatMessages: ["rmc-emote-giant-lizard-flick-tongue"]
+  chatTriggers:
+    - flicktongue
+    - flicks tongue
+    - flick tongue
+    - flicks its tongue
+
+- type: emote
   id: Purr
   name: rmc-emote-name-purr
   category: Vocal
