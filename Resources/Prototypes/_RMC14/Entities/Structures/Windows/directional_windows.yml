@@ -28,6 +28,8 @@
     state: window
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: RMCBruteStructureDamageMultiplier
+    multiplier: 10
   - type: Destructible
     thresholds:
     - trigger:

@@ -235,6 +235,8 @@
         crate: RMCCrateGrenadesBatonSlug
       - cost: 3000
         crate: RMCCrateExplosiveClaymoreMine
+      - cost: 3000
+        crate: RMCCrateM6HBruteRockets
       - cost: 4000
         crate: RMCCrateExplosivesSurplus
     - name: Food
