@@ -19,6 +19,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCAutoPunctuate =
         CVarDef.Create("rmc.auto_punctuate", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCChatPreview =
+        CVarDef.Create("rmc.chat_preview", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<bool> RMCAutoEjectMagazines =
         CVarDef.Create("rmc.auto_eject_magazines", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
@@ -452,8 +455,14 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCParasiteSpawnInitialDelayMinutes =
         CVarDef.Create("rmc.parasite_spawn_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCParasiteSpawnMinimum =
+        CVarDef.Create("rmc.parasite_spawn_minimum", 2, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCParasiteSpawnScale =
+        CVarDef.Create("rmc.parasite_spawn_scale", 4, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCXenoSpawnInitialMuteDurationSeconds =
-        CVarDef.Create("rmc.xeno_spawn_initial_mute_duration_seconds", 180f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.xeno_spawn_initial_mute_duration_seconds", 60f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCXenoEarlyEvoPointBoostBeforeMinutes =
         CVarDef.Create("rmc.evolution_early_evo_point_boost_minutes", 15, CVar.REPLICATED | CVar.SERVER);
@@ -554,6 +563,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCMarineEquipmentPreviews =
         CVarDef.Create("rmc.marine_equipment_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<int> RMCNightVisionColor =
+        CVarDef.Create("rmc.night_vision_color", (int) NightVisionColor.Green, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
@@ -627,7 +639,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLoadoutLowestRankSelectable =
         CVarDef.Create("rmc.loadout_lowest_rank_selectable", false, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<int> RMCLightningMaxAmountLightNearbyCount =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_count", 6, CVar.CLIENT | CVar.ARCHIVE);
 
@@ -666,7 +678,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCGhostClothingAlphaBoost =
         CVarDef.Create("rmc.ghost_clothing_alpha_boost", 0.4f, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 }

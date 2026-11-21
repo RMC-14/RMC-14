@@ -311,12 +311,12 @@
 
 - type: entity
   parent: RMCBeltNV
-  id: RMCBeltNVFilledM16
-  suffix: Filled, M16
+  id: RMCBeltNVFilledCR16
+  suffix: Filled, CR16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleCR16
       amount: 5
 
 - type: entity
@@ -331,12 +331,12 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: CMBeltMarineM16
-  suffix: Filled, M16
+  id: RMCBeltMarineCR16
+  suffix: Filled, CR16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleCR16
       amount: 5
 
 - type: entity
@@ -799,6 +799,21 @@
     - id: RMCMK80RCM
 
 - type: entity
+  parent: RMCBeltUtilityRCM
+  id: RMCBeltUtilityRCMFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
+- type: entity
   parent: RMCBeltHolsterPistolWeYa
   id: RMCBeltHolsterPistolWeYaMK80Fill
   suffix: Filled
@@ -936,16 +951,6 @@
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
     - id: RMCWeaponPistolHandcannonPolished
-
-- type: entity
-  parent: CMBeltMarine
-  id: RMCM17BeltFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCMagazineRifleM16
-      amount: 5
 
 - type: entity
   parent: CMBeltMarine
