@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Changed backpack sprites to layer above hair
-    type: Tweak
-  id: 3378
-  time: '2026-06-11T22:43:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9948
 - author: Vermidia
   changes:
   - message: Fixed Designer Hivelord pheromones not being strong enough (3 -> 3.5)
@@ -4453,5 +4446,12 @@
   id: 3877
   time: '2026-11-21T00:52:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10536
+- author: wheelwrightt
+  changes:
+  - message: Tacmap UI now correctly updates new objectives when the UI is open.
+    type: Fix
+  id: 3878
+  time: '2026-11-21T01:10:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9311
 Name: RMC14
 Order: -1
