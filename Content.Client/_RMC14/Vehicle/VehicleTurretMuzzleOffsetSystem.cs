@@ -14,6 +14,7 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
     [Dependency] private readonly GunMuzzleOffsetSystem _gunMuzzleOffset = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleTurretMuzzleSystem _turretMuzzle = default!;
+    [Dependency] private readonly VehicleTurretVisualSystem _turretVisual = default!;
 
     public override void Initialize()
     {
@@ -56,8 +57,11 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
         if (!TryComp(weaponUid, out VehicleTurretComponent? turret))
             return false;
 
-        origin = _transform.GetMoverCoordinates(weaponUid);
-        rotation = _transform.GetWorldRotation(weaponUid);
+        if (!_turretVisual.TryGetRenderedPose(weaponUid, out origin, out rotation))
+        {
+            origin = _transform.GetMoverCoordinates(weaponUid);
+            rotation = _transform.GetWorldRotation(weaponUid);
+        }
 
         EntityCoordinates? aimTarget = target;
         if (aimTarget == null &&

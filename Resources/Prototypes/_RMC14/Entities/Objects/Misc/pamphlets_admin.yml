@@ -568,14 +568,14 @@
 
 - type: entity
   parent: RMCPamphletAdmin
-  id: RMCPamphletAdminWeaponsSpecialistQYJ
-  name: QYJ specialist instructional pamphlet
+  id: RMCPamphletAdminWeaponsSpecialistSPPSpecialist
+  name: SPP special training instructional pamphlet
   components:
   - type: SkillPamphlet
     addSkills:
       RMCSkillSpecialistWeapons: 1
     addComps:
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
 
 - type: entity
   parent: RMCPamphletAdmin

@@ -167,3 +167,29 @@
   - 1.0
   - 1.0
   edgeSpritePriority: 7
+
+- type: tile # I didn't port snow1b and snow3b because I think they're literally exactly the same as the blue ones
+  parent: CMPlanetBase
+  id: RMCPlanetSnow1Brown
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2b/snow_1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 4
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/planet/snow2/snow_single_edge_se.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/snow2/snow_single_edge_ne.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/snow2/snow_single_edge_nw.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/snow2/snow_single_edge_sw.png
+    South: /Textures/_RMC14/Tiles/planet/snow2/snow_double_edge_s.png
+    East: /Textures/_RMC14/Tiles/planet/snow2/snow_double_edge_e.png
+    North: /Textures/_RMC14/Tiles/planet/snow2/snow_double_edge_n.png
+    West: /Textures/_RMC14/Tiles/planet/snow2/snow_double_edge_w.png

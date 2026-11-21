@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Loadout;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -87,6 +88,14 @@ public abstract class SharedStationSpawningSystem : EntitySystem
 
     public void EquipStartingGear(EntityUid entity, LoadoutPrototype loadout, bool raiseEvent = true)
     {
+        //RMC14
+        if (loadout.ComponentsAdd)
+        {
+            var ev = new LoadoutComponentAddEvent(entity, loadout);
+            RaiseLocalEvent(ref ev);
+            return;
+        }
+        //RMC14
         EquipStartingGear(entity, loadout.StartingGear, raiseEvent);
         EquipStartingGear(entity, (IEquipmentLoadout) loadout, raiseEvent);
     }

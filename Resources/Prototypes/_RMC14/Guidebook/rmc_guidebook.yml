@@ -438,7 +438,7 @@
   parent: RMC
   id: RMCGuideRoleSapper
   priority: 4
-  name: "Trapper Guide"
+  name: "Sapper Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleSapper.xml"
 
 - type: guideEntry

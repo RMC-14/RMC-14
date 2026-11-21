@@ -207,7 +207,7 @@ public abstract class SharedChatSystem : EntitySystem
         var foundChannel = _channelLookup.TryGetValue(lookupKey, out channel);
         output = SanitizeMessageCapital(input[2..].TrimStart());
 
-        if (!foundChannel && isDefaultChannel)
+        if (isDefaultChannel)
         {
             var ev = new GetDefaultRadioChannelEvent();
             RaiseLocalEvent(source, ev);
@@ -232,6 +232,17 @@ public abstract class SharedChatSystem : EntitySystem
             var msg = Loc.GetString("chat-manager-no-such-channel", ("key", channelKey));
             _popup.PopupEntity(msg, source, source);
         }
+
+        // RMC14
+        if (channel?.ID == HivemindChannel.Id &&
+            !_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+        {
+            if (!quiet)
+                _popup.PopupEntity(Loc.GetString("rmc-no-queen-hivemind-chat"), source, source, PopupType.LargeCaution);
+
+            return false;
+        }
+        // RMC14
 
         var prefixEv = new ChatGetPrefixEvent(channel);
         RaiseLocalEvent(source, ref prefixEv);
