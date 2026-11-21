@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Medical staff vendors now stock a wide variety of new clothing options!
-    type: Add
-  - message: XOs can now find a new beret in their vendor!
-    type: Add
-  id: 3394
-  time: '2026-06-12T23:32:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10144
 - author: DrSmugleaf
   changes:
   - message: Fixed Crusher and Charger Crusher charge colliding with hive ordered
@@ -4452,5 +4443,13 @@
   id: 3893
   time: '2026-11-21T23:24:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11159
+- author: Ian321
+  changes:
+  - message: The amount of player controlled parasites is now limited to a fourth
+      of living xenos, or 2, whichever is larger.
+    type: Tweak
+  id: 3894
+  time: '2026-11-21T23:27:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9911
 Name: RMC14
 Order: -1
