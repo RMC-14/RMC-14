@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/obj/bodybag.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/obj/bodybag.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi, provost tarps are the scout tarp recolored by BramvanZijp",
   "size": {
     "x": 32,
     "y": 32
@@ -90,6 +90,33 @@
     },
     {
       "name": "scouttarp_closed2",
+      "delays": [
+        [
+          1,
+          1,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.1,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "provosttarp_folded"
+    },
+    {
+      "name": "provosttarp_open"
+    },
+    {
+      "name": "provosttarp_closed"
+    },
+    {
+      "name": "provosttarp_closed1"
+    },
+    {
+      "name": "provosttarp_closed2",
       "delays": [
         [
           1,
