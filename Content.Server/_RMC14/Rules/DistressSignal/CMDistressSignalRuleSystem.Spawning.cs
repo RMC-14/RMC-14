@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.RandomMetadata;
+using Content.Server.Spawners.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Bioscan;
@@ -29,6 +30,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
 
@@ -38,24 +40,77 @@ public sealed partial class CMDistressSignalRuleSystem
     private static readonly EntProtoId VehicleHumveeArcUnlock = "VehicleHumveeARC";
     private static readonly EntProtoId VehicleTankUnlock = "VehicleTank";
 
-    /// <summary>
-    /// Main handler for player spawning during the distress signal round.
-    /// Initializes the xeno map, sets up survivor jobs, applies job slot scaling,
-    /// selects and spawns xenos, and initializes dropships.
-    /// </summary>
-    private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
+    private List<EntityUid> _xenoSpawnPoints = new List<EntityUid>();
+    private List<EntityUid> _xenoLeaderSpawnPoints = new List<EntityUid>();
+    private Dictionary<ProtoId<JobPrototype>, List<EntityUid>> _survivorSpawners = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
+
+    private void OnRMCPlayerSpawning(RMCPlayerSpawningEvent ev)
     {
-        var rule = TryGetActiveRuleEntity();
-        if (!rule.HasValue)
+        var player = ev.Player;
+        var assignment = player.AssignedJob;
+        var session = player.Session;
+
+        if (assignment == null)
             return;
 
-        var comp = rule.Value.Comp;
-
-        if (OperationName == null && TryComp<RandomMetadataComponent>(rule.Value, out var metadata) && metadata.NameSegments != null)
-            OperationName = MetaData(rule.Value).EntityName;
-
-        if (!InitializeXenoMap(rule.Value, comp))
+        var rule = TryGetActiveRule();
+        if (rule is not { } comp)
             return;
+
+        if (assignment.JobID == comp.XenoSelectableJob.Id)
+        {
+            var xenoEnt = SpawnXenoEnt(comp.LarvaEnt, session, true, comp, _xenoSpawnPoints, _xenoLeaderSpawnPoints);
+
+            if (!_mind.TryGetMind(session.UserId, out var mind))
+                mind = _mind.CreateMind(session.UserId);
+
+            _mind.TransferTo(mind.Value, xenoEnt);
+        }
+        else if (assignment.JobID == comp.QueenJob.Id)
+        {
+            var xenoEnt = SpawnXenoEnt(comp.QueenEnt, session, false, comp, _xenoSpawnPoints, _xenoLeaderSpawnPoints);
+
+            if (!_mind.TryGetMind(session.UserId, out var mind))
+                mind = _mind.CreateMind(session.UserId);
+
+            _mind.TransferTo(mind.Value, xenoEnt);
+        }
+        else if (comp.SurvivorJobs.Any(item => item.Job == assignment.JobID)
+            || comp.IgnoreMaximumSurvivorJobs.Contains(assignment.JobID))
+        {
+            SpawnSurvivor(player, comp);
+        }
+        else
+        {
+            return;
+        }
+
+        ev.Handled = true;
+    }
+
+    private void OnInitializingAssignments(InitializingAssignmentsEvent ev)
+    {
+        if (TryGetActiveRuleEntity() is not { } rule)
+            return;
+
+        var ruleComp = rule.Comp;
+        var spawnComp = EnsureComp<CMDistressSignalSpawningComponent>(rule);
+
+        var survAssignment = spawnComp.SurvivorAssignment;
+        ev.MetaJobAssignments.Add(survAssignment);
+
+        // TODO RMC14 this isn't the ideal place for this initialization work
+        if (OperationName == null && TryComp<RandomMetadataComponent>(rule, out var metadata) && metadata.NameSegments != null)
+            OperationName = MetaData(rule).EntityName;
+
+        if (!InitializeXenoMap(rule, ruleComp))
+            return;
+
+        if (!_spawnedDropships)
+        {
+            _spawnedDropships = true;
+            InitializeDropships(ruleComp);
+        }
 
         var roundInfoEnt = Spawn(null, MapCoordinates.Nullspace);
         var roundInfo = EnsureComp<RMCRoundInfoComponent>(roundInfoEnt);
@@ -65,17 +120,76 @@ public sealed partial class CMDistressSignalRuleSystem
         _pvs.AddGlobalOverride(roundInfoEnt);
         Log.Info($"RoundInfo set: op='{roundInfo.OperationName}' planet='{roundInfo.PlanetName}'");
 
-        SetupSurvivorJobs(comp);
-        ApplyJobSlotScaling(comp, ev);
+        // survivor assignments
+        SetupSurvivorJobs(ruleComp);
+        foreach (var (job, count) in ruleComp.SurvivorJobs)
+        {
+            if (!_prototypes.TryIndex(job, out var jobProto))
+                continue;
+            var assignment = new JobAssignment(jobProto, null);
+            assignment.AssignmentLimit = count > -1 ? count : null;
+            survAssignment.Assignments.Add(assignment);
+            ev.JobAssignments[job] = new List<JobAssignment> { assignment };
+        }
+        foreach (var job in ruleComp.IgnoreMaximumSurvivorJobs)
+        {
+            if (!_prototypes.TryIndex(job, out var jobProto))
+                continue;
+            var assignment = new JobAssignment(jobProto, null);
+            assignment.AssignmentLimit = 1;
+            ev.JobAssignments[job] = new List<JobAssignment> { assignment };
+        }
 
-        var initialPlayerCount = ev.PlayerPool.Count;
-        SelectAndSpawnXenos(comp, ev, initialPlayerCount);
-        SpawnSurvivors(comp, ev, initialPlayerCount);
+        // xeno assignments
+        ev.JobAssignments[ruleComp.XenoSelectableJob] = new List<JobAssignment> {
+                new JobAssignment(_prototypes.Index(ruleComp.XenoSelectableJob), null)
+            };
 
-        if (_spawnedDropships) return;
+        var queenAssignment = new JobAssignment(_prototypes.Index(ruleComp.QueenJob), null)
+        {
+            AssignmentLimit = 1
+        };
+        ev.JobAssignments[ruleComp.QueenJob] = new List<JobAssignment> {
+                queenAssignment
+            };
+    }
 
-        _spawnedDropships = true;
-        InitializeDropships(comp);
+    private void OnCollectingAssignments(CollectingAssignmentsEvent ev)
+    {
+        if (TryGetActiveRuleEntity() is not { } rule)
+            return;
+
+        var ruleComp = rule.Comp;
+        var spawnComp = EnsureComp<CMDistressSignalSpawningComponent>(rule);
+
+        var survAssignment = spawnComp.SurvivorAssignment;
+
+        var roleWeights = GetRoleWeights(ev.ProcessedPlayers);
+
+        // surv limit
+        survAssignment.AssignmentLimit = GetRoundstartSurvCount(roleWeights);
+
+        // xeno limit
+        ev.JobAssignments[ruleComp.XenoSelectableJob][0].AssignmentLimit = GetRoundstartXenoCount(roleWeights).XenoCount;
+
+        // marine slot modifications
+        // marine slots use station job slots. StationJobsSystem is responsible for converting
+        // job slots into assignments. Thus this system must handle the event before StationJobsSystem.
+        ApplyJobSlotScaling(ruleComp, roleWeights.MarineWeight, roleWeights.AssignedCount);
+    }
+
+    private void OnReplaceJob(ref ReplaceJobEvent ev)
+    {
+        if (TryGetActiveRule() is not { } rule)
+            return;
+
+        if (rule.SurvivorJobOverrides != null
+            && rule.SurvivorJobOverrides.TryGetValue(ev.JobId, out var replacementJob))
+        {
+            Log.Debug($"Replacing {ev.JobId} preference with {replacementJob}");
+            // replace original survivor job with the overriden one
+            ev.JobId = replacementJob;
+        }
     }
 
     private bool InitializeXenoMap(Entity<CMDistressSignalRuleComponent> rule, CMDistressSignalRuleComponent comp)
@@ -103,6 +217,28 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             var bioscan = Spawn(null, MapCoordinates.Nullspace);
             EnsureComp<BioscanComponent>(bioscan);
+        }
+
+        _xenoSpawnPoints.Clear();
+        var spawnQuery = AllEntityQuery<XenoSpawnPointComponent>();
+        while (spawnQuery.MoveNext(out var spawnUid, out _))
+        {
+            _xenoSpawnPoints.Add(spawnUid);
+        }
+
+        _xenoLeaderSpawnPoints.Clear();
+        var leaderSpawnQuery = AllEntityQuery<XenoLeaderSpawnPointComponent>();
+        while (leaderSpawnQuery.MoveNext(out var spawnUid, out _))
+        {
+            _xenoLeaderSpawnPoints.Add(spawnUid);
+        }
+
+        _survivorSpawners.Clear();
+        var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
+        while (spawnerQuery.MoveNext(out var spawnId, out var spawnComp))
+        {
+            if (spawnComp.Job is { } job)
+                _survivorSpawners.GetOrNew(job).Add(spawnId);
         }
 
         return true;
@@ -138,9 +274,12 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
     {
-        var totalPlayers = ev.PlayerPool.Count;
+        ApplyJobSlotScaling(comp, ev.PlayerPool.Count, ev.PlayerPool.Count);
+    }
+
+    private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, float marines, float players)
+    {
         var vehicleThreshold = _config.GetCVar(RMCCVars.RMCVehicleRoundstartThresholdPlayers);
-        var marines = GetRoundstartMarineMinimum(totalPlayers);
         var roundstartTank = _player.Sessions.Count() >= vehicleThreshold;
         var crewmanSlots = roundstartTank ? 2 : 0;
 
@@ -162,7 +301,7 @@ public sealed partial class CMDistressSignalRuleSystem
                         ? vehicleThreshold
                         : scaling.MinimumPlayers;
 
-                    var slots = minimumPlayers > 0 && totalPlayers < minimumPlayers
+                    var slots = minimumPlayers > 0 && players < minimumPlayers
                         ? 0
                         : _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
 
@@ -208,100 +347,6 @@ public sealed partial class CMDistressSignalRuleSystem
 
         if (roundstartTank)
             RaiseLocalEvent(new TechUnlockVehicleEvent(VehicleTankUnlock));
-    }
-
-    /// <summary>
-    /// Selects xeno players based on job priorities and spawns them as queen or larva.
-    /// </summary>
-    /// <param name="comp">The distress signal rule component.</param>
-    /// <param name="ev">The rule player spawning event.</param>
-    private void SelectAndSpawnXenos(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev, int initialPlayerCount)
-    {
-        if (!comp.SpawnXenos)
-            return;
-
-        var xenoSpawnPoints = new List<EntityUid>();
-        var spawnQuery = AllEntityQuery<XenoSpawnPointComponent>();
-        while (spawnQuery.MoveNext(out var spawnUid, out _))
-        {
-            xenoSpawnPoints.Add(spawnUid);
-        }
-
-        var xenoLeaderSpawnPoints = new List<EntityUid>();
-        var leaderSpawnQuery = AllEntityQuery<XenoLeaderSpawnPointComponent>();
-        while (leaderSpawnQuery.MoveNext(out var spawnUid, out _))
-        {
-            xenoLeaderSpawnPoints.Add(spawnUid);
-        }
-
-        NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent, bool doBurst = false)
-        {
-            var playerId = _random.PickAndTake(list);
-            if (!_player.TryGetSessionById(playerId, out var player))
-            {
-                Log.Error($"Failed to find player with id {playerId} during xeno selection.");
-                return null;
-            }
-
-            ev.PlayerPool.Remove(player);
-            GameTicker.PlayerJoinGame(player);
-            var xenoEnt = SpawnXenoEnt(ent, player, doBurst, comp, xenoSpawnPoints, xenoLeaderSpawnPoints);
-
-            if (!_mind.TryGetMind(playerId, out var mind))
-                mind = _mind.CreateMind(playerId);
-
-            _mind.TransferTo(mind.Value, xenoEnt);
-            return playerId;
-        }
-
-        var totalXenos = GetRoundstartXenoLimit(initialPlayerCount);
-        var priorities = Enum.GetValues<JobPriority>().Length;
-        var xenoCandidates = new List<NetUserId>[priorities];
-        for (var i = 0; i < priorities; i++)
-        {
-            xenoCandidates[i] = new();
-        }
-
-        foreach (var (id, profile) in ev.Profiles)
-        {
-            if (IsJobAllowed(id, comp.QueenJob) && profile.JobPriorities.TryGetValue(comp.QueenJob, out var p) && p > JobPriority.Never)
-                xenoCandidates[(int)p].Add(id);
-        }
-
-        NetUserId? queenSelected = null;
-        for (var i = priorities - 1; i >= 0; i--)
-        {
-            while (xenoCandidates[i].Count > 0)
-            {
-                queenSelected = SpawnXeno(xenoCandidates[i], comp.QueenEnt);
-                if (queenSelected != null) break;
-            }
-            if (queenSelected != null)
-            {
-                totalXenos--;
-                break;
-            }
-        }
-
-        for (var i = 0; i < priorities; i++)
-        {
-            xenoCandidates[i].Clear();
-        }
-
-        foreach (var (id, profile) in ev.Profiles)
-        {
-            if (id != queenSelected && IsJobAllowed(id, comp.XenoSelectableJob) && profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var p) && p > JobPriority.Never)
-                xenoCandidates[(int)p].Add(id);
-        }
-
-        var selectedXenos = 0;
-        for (var i = priorities - 1; i >= 0; i--)
-        {
-            while (xenoCandidates[i].Count > 0 && selectedXenos < totalXenos)
-            {
-                if (SpawnXeno(xenoCandidates[i], comp.LarvaEnt, true) != null) selectedXenos++;
-            }
-        }
     }
 
     private EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst,
