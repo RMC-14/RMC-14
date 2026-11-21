@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Areas;
@@ -62,6 +63,8 @@ public abstract class SharedDropshipSystem : EntitySystem
     private TimeSpan _hijackInitialDelay;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabDropshipLogs";
+    private static readonly EntProtoId<RMCAnnouncementPresetComponent> LZDesignatedOverlay = "RMCAnnouncementMarineCommand";
+    private static readonly EntProtoId<RMCAnnouncementPresetComponent> LZDesignatedAutoOverlay = "RMCAnnouncementMarineCommandNoPortrait";
 
     public override void Initialize()
     {
@@ -768,7 +771,12 @@ public abstract class SharedDropshipSystem : EntitySystem
         RefreshUI();
 
         var message = Loc.GetString("rmc-announcement-ares-lz-designated", ("name", Name(lz)));
-        _marineAnnounce.AnnounceARESStaging(actor, message);
+        var overlayText = Loc.GetString("rmc-announcement-lz-designated-overlay", ("name", Name(lz)));
+        var overlay = Exists(actor)
+            ? new RMCAnnouncementOverlay(LZDesignatedOverlay, overlayText, actor)
+            : new RMCAnnouncementOverlay(LZDesignatedAutoOverlay, overlayText);
+
+        _marineAnnounce.AnnounceARESStaging(actor, message, overlay: overlay);
 
         return true;
     }
