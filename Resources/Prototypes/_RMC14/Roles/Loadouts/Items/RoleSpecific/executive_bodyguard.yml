@@ -20,7 +20,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: RMCJobWeYaExecutiveBodyguard
-      time: 252000 # 70 hours
+      time: 90000 # 25 hours
   storage:
     back:
     - RMCWeYaCanteen

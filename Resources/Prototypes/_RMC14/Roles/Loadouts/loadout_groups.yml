@@ -758,7 +758,7 @@
   id: BodyguardRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 4
+  maxLimit: 3
   loadouts:
   - RMCPatchWeYaSecurityDivision
   - RMCWeYaCanteen
