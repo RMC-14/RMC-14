@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Examining a gun now displays its currently equipped attachments per slot
-      in the tooltip!
-    type: Add
-  - message: Added a new QoL feature that displays all compatible attachments for
-      each slot when examining a gun!
-    type: Add
-  id: 3392
-  time: '2026-06-12T23:29:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9850
 - author: Vermidia
   changes:
   - message: Fixed Dancer Praetorian's critical mark spreading not being predicted
@@ -4453,5 +4442,12 @@
   id: 3891
   time: '2026-11-21T23:03:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10526
+- author: SabreML
+  changes:
+  - message: Made the larva queue popup remain open when the escape key is pressed.
+    type: Tweak
+  id: 3892
+  time: '2026-11-21T23:18:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10681
 Name: RMC14
 Order: -1
