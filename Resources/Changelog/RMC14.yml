@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Designer Hivelord pheromones not being strong enough (3 -> 3.5)
-    type: Fix
-  id: 3379
-  time: '2026-06-11T22:45:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10094
 - author: MarshesAndMeadows
   changes:
   - message: FIxed crusher charge sometimes phasing through barricades. It should
@@ -4453,5 +4446,13 @@
   id: 3878
   time: '2026-11-21T01:10:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9311
+- author: GrigoriyGalintano
+  changes:
+  - message: Completed intel objectives no longer reappear or remain stuck in the
+      Marine Tech Tree Objectives UI.
+    type: Fix
+  id: 3879
+  time: '2026-11-21T03:07:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10453
 Name: RMC14
 Order: -1
