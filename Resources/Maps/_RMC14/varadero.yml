@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/09/2026 00:43:36
-  entityCount: 34110
+  time: 11/15/2026 19:26:41
+  entityCount: 34111
 maps:
 - 1
 grids:
@@ -153224,7 +153224,7 @@ entities:
       pos: 68.5,53.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -157574.69
+      secondsUntilStateChange: -159043.06
       state: Opening
   - uid: 20158
     components:
@@ -153547,7 +153547,7 @@ entities:
       pos: 159.5,41.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -87439.93
+      secondsUntilStateChange: -88908.31
       state: Opening
   - uid: 20219
     components:
@@ -156823,7 +156823,7 @@ entities:
       parent: 1
     - type: HideLayerClothing
       slots: null
-- proto: RMCArmorHelmetSPPSOF
+- proto: RMCArmorHelmetSPPSpetsnaz
   entities:
   - uid: 21728
     components:
@@ -156895,7 +156895,7 @@ entities:
     - type: Transform
       pos: 118.5,58.5
       parent: 1
-- proto: RMCArmorSPPSOFPlated
+- proto: RMCArmorSPPSpetsnazPlated
   entities:
   - uid: 25019
     components:
@@ -166627,7 +166627,7 @@ entities:
       pos: 73.5,59.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -397419.16
+      secondsUntilStateChange: -398887.53
       state: Opening
   - uid: 21932
     components:
@@ -186985,7 +186985,7 @@ entities:
     - type: Transform
       pos: 90.5,78.5
       parent: 1
-- proto: RMCJumpsuitSPPSOF
+- proto: RMCJumpsuitSPPSpetsnaz
   entities:
   - uid: 34099
     components:
@@ -191333,6 +191333,13 @@ entities:
     components:
     - type: Transform
       pos: 46.5,68.5
+      parent: 1
+- proto: RMCMapInsertVaraderoPoolParty
+  entities:
+  - uid: 34111
+    components:
+    - type: Transform
+      pos: 74.5,77.5
       parent: 1
 - proto: RMCMapInsertVaraderoSurvSpawnTogether
   entities:
