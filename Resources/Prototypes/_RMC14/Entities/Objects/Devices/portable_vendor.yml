@@ -92,8 +92,6 @@
       #  points: 1
       - id: CMClipboard
         points: 1
-      - id: CMHandLabeler
-        points: 10
     - name: Misc
       entries:
       - id: RMCHollowCane

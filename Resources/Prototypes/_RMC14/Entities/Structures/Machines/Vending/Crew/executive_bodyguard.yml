@@ -165,7 +165,3 @@
           points: 4
         - id: RMCZipties
           points: 1
-        - id: CMFireExtinguisherPortable
-          points: 2
-        - id: CMHealthAnalyzer
-          points: 2

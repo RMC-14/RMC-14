@@ -26,18 +26,6 @@
     - RMCWeYaCanteen
 
 - type: loadout
-  id: RMCJacketWindbreakerWEYASecurity
-  cost: 1
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: RMCJobWeYaExecutiveBodyguard
-      time: 630000 # 175 hours
-  equipment:
-    outerClothing: RMCJacketWindbreakerWEYASecurity
-
-- type: loadout
   id: RMCJumpsuitLiaisonBlueSecurityExecutiveBodyguard
   cost: 1
   effects:
@@ -45,6 +33,6 @@
     requirement:
       !type:RoleTimeRequirement
       role: RMCJobWeYaExecutiveBodyguard
-      time: 630000 # 175 hours
+      time: 252000 # 70 hours
   equipment:
     jumpsuit: RMCJumpsuitLiaisonBlueSecurityExecutiveBodyguard
