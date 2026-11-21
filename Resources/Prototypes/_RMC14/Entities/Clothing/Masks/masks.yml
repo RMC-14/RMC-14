@@ -159,6 +159,20 @@
   - type: Item
     size: Small
 
+- type: entity
+  parent: RMCMaskGasSPP
+  id: RMCMaskGasCivilian
+  name: CPG-3 gas mask
+  description: A fairly common ICB-approved gas-mask designed for civilian use on the frontier, from biohazard cleanup details to personal protection and PPE.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/gas_civilian.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/gas_civilian.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
+
 # Coifs
 - type: entity
   parent: [ClothingMaskBase, BaseFoldable]
