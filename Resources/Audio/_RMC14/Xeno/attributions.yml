@@ -432,3 +432,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/085faa829b8e86366f180a5cc9d45dda0d9e4e0b/sound/effects/deep_alien_screech2.ogg"
+
+- files: ["alien_queen_xmas.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/95ae559e042140dc2ec9a1929c7c3895f8f2f75f/sound/voice/alien_queen_xmas.ogg"
+
+- files: ["alien_queen_xmas_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/95ae559e042140dc2ec9a1929c7c3895f8f2f75f/sound/voice/alien_queen_xmas_2.ogg"

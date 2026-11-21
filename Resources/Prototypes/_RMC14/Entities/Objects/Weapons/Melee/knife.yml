@@ -355,6 +355,18 @@
 
 - type: entity
   parent: CMM2132Machete
+  id: RMCCombatSword
+  name: combat sword
+  description: A dusty sword commonly seen in historical museums. Where you got this is a mystery, for sure. Only a mercenary would be nuts enough to carry one of these. Sharpened to deal massive damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/sword.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Melee/sword.rsi
+    size: Large
+
+- type: entity
+  parent: CMM2132Machete
   id: RMCRoyalMachete
   name: L225 Kukri
   suffix: PVE, Royal

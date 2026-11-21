@@ -324,3 +324,23 @@
   components:
   - type: Sprite
     state: crow
+
+- type: entity
+  parent: BikeHorn
+  id: RMCBikeHorn
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/bikehorn.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Fun/bikehorn.rsi
+    size: Tiny
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall

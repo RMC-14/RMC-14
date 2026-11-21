@@ -557,3 +557,27 @@
   components:
   - type: Sprite
     state: tyrargo_treestump01
+
+- type: entity
+  parent: BaseTreeConifer
+  id: RMCFloraTreeChristmas
+  suffix: RMC Presents
+  name: christmas tree
+  components:
+  - type: Sprite
+    state: treechristmas02
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,0,0.5,0.75"
+        density: 4500
+        layer:
+        - WallLayer
+  - type: LimitedItemGiver
+    spawnEntries:
+      - id: RMCMarinePresent
+    receivedPopup: christmas-tree-got-gift
+    deniedPopup: christmas-tree-no-gift
+    requiredHoliday: FestiveSeason

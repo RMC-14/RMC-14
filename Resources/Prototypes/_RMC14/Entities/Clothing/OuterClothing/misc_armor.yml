@@ -18,3 +18,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC_alt.rsi
+
+- type: entity
+  parent: RMCArmorVestXLBase
+  id: RMCArmorSantaSuit
+  name: santa's suit
+  description: Festive!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/santas_suit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/santas_suit.rsi

@@ -1,0 +1,377 @@
+- type: entity
+  parent: BaseItem
+  id: RMCMarinePresent
+  name: standard-issue UNMC present
+  description: One, standard issue UNMC Present. Opening it might bring joy, or disappointment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/xmas_present.rsi
+    state: icon
+  - type: SpawnItemsOnUse
+    items:
+      # TRASH ROLL
+      - id: RMCPropTrashFull
+        orGroup: MarineGift
+        weight: 5.0
+
+      # HEFA's
+      - id: CMPacketGrenadeFragFilled
+        orGroup: MarineGift
+        weight: 2.5
+
+      # REAL WEAPONS & ATTACHMENTS
+      - id: RMCWeaponRevolverMateba
+        orGroup: MarineGift
+        weight: 0.1
+      - id: RMCWeaponPistolHandcannon
+        orGroup: MarineGift
+        weight: 1.0
+      - id: RMCCombatSword
+        orGroup: MarineGift
+        weight: 1.0
+      - id: RMCEnergySword
+        orGroup: MarineGift
+        weight: 0.3
+      - id: RMCAttachmentBarrelCharger
+        orGroup: MarineGift
+        weight: 1.0
+      - id: RMCAttachmentExtendedBarrel
+        orGroup: MarineGift
+        weight: 1.0
+      - id: RMCAttachmentBurstFireAssembly
+        orGroup: MarineGift
+        weight: 1.0
+      - id: RMCTrollWSToken
+        orGroup: MarineGift
+        weight: 0.01
+
+      # FACTIONS COSMETICS
+      - id: RMCCLFArmband
+        orGroup: MarineGift
+        weight: 1
+      - id: RMCJumpsuitCLFSoldier
+        orGroup: MarineGift
+        weight: 1
+      - id: CMHeadBandRebel
+        orGroup: MarineGift
+        weight: 1
+      - id: RMCColonyLiberationFrontCup
+        orGroup: MarineGift
+        weight: 1
+      - id: RMCPatchCLF
+        orGroup: MarineGift
+        weight: 1
+      - id: RMCHeadRoyalCapPeaked
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCHeadCapTSEPAPeaked
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCHeadCapTSEPAPeakedGoldSilver
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCHeadCapTSEPAPeakedGold
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchTSE
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCBackpackRTOTSE
+        orGroup: MarineGift
+        weight: 1.5
+      - id: RMCThreeSunEmpireCup
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchTSEMarines
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchTSEPara
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchSPPMSC
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchSPPNavalAlt
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchSPPVDVAlt
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCSocialistPPCup
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchSPPAlt
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapSPPUshankaCivilian
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapSPPUshanka
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapSPPPeakedPolice
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCHeadCapSPPPolKomWhite
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapSPPPeaked
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadCapCav
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCJumpsuitMarineTyrargo
+        orGroup: MarineGift
+        weight: 2
+
+      # STANDARD ROLL
+      - id: SnapPopBox
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCCrayonBox
+        orGroup: MarineGift
+        weight: 3
+      - id: ClothingBeltChampion
+        orGroup: MarineGift
+        weight: 3
+      - id: CMSoapDeluxe
+        orGroup: MarineGift
+        weight: 3
+      - id: CMGrenadeSmoke
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCBikeHorn
+        orGroup: MarineGift
+        weight: 3
+      - id: BeachBall
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCFoamCrossbowCase
+        orGroup: MarineGift
+        weight: 3
+      - id: RevolverCapGun
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCKatanaDull
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyDeathRipley
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyDurand
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyFireRipley
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyGygax
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyHonk
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyMarauder
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyMauler
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyOdysseus
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyPhazon
+        orGroup: MarineGift
+        weight: 3
+      - id: ToyRipley
+        orGroup: MarineGift
+        weight: 3
+      - id: ToySeraph
+        orGroup: MarineGift
+        weight: 3
+      - id: SingularityToy
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCTieHorrible
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCShoesSlippers
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCShoesSlippersWorn
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCSuperTopHat
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentSuppressor
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCM5Bayonet
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentS5RedDotSight
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentVerticalGrip
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentAngledGrip
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentRailFlashlight
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentBipod
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentMagneticHarness
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentM54CStockSolid
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCAttachmentS84xTelescopicScope
+        orGroup: MarineGift
+        weight: 3
+      - id: CMPlushieFarwa
+        orGroup: MarineGift
+        weight: 3
+      - id: CMPlushieBarricade
+        orGroup: MarineGift
+        weight: 3
+      - id: CMPlushieBee
+        orGroup: MarineGift
+        weight: 3
+      - id: CMPlushieRock
+        orGroup: MarineGift
+        weight: 3
+      - id: CMPlushieTherapy
+        orGroup: MarineGift
+        weight: 3
+      - id: CMPlushieRunnerBeret
+        orGroup: MarineGift
+        weight: 3
+      - id: RCMPlushieRounyLizard
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCPlushieGnarpGnarp
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCMaskNeckerchiefFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCMaskScarfFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: CMHeadBandFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCFoxtrotArmband
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCHeadBeretSquadFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCPatchFallingFalconsFoxtrot
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCMaskNeckerchiefEcho
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCMaskScarfEcho
+        orGroup: MarineGift
+        weight: 3
+      - id: CMHeadBandEcho
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCEchoArmband
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCHeadBeretSquadEcho
+        orGroup: MarineGift
+        weight: 3
+      - id: RMCPatchFallingFalconsEcho
+        orGroup: MarineGift
+        weight: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: Tag
+    tags:
+    - RMCMarinePresent 
+
+- type: Tag
+  id: RMCMarinePresent
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCFoamCrossbowCase
+  name: crossbow kit
+  description: Contains the equipment needed for having fun with a crossbow.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: pursuit
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,5,1
+  - type: RemoveOnlyStorage
+  - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: StorageFill
+    contents:
+    - id: FoamCrossbow
+      amount: 2
+    - id: BoxDonkSoftBox
+
+- type: entity
+  parent: BaseItem
+  id: RMCTrollWSToken
+  name: Weapons Specialist's token
+  suffix: Joke Item
+  description: |
+    ⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⡤⢤⣤⣤⣤⣤⣤⣄⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⣠⣿⡿⣟⠯⡒⢯⣽⣓⣒⢾⣯⣭⣿⣿⠿⠭⠭⣯⣷⣦⡀⠀⠀⠀
+    ⠀⠀⠀⠀⣰⣿⣯⣞⣕⣽⠾⠿⠿⠿⢿⣏⣿⣿⣿⡗⣽⣿⣿⣷⡝⣿⣿⡆⠀⠀
+    ⠀⠀⠀⣀⣛⠛⢿⣛⢝⢁⣀⣀⣀⠓⠶⠈⣿⣿⡿⠗⠉⠁⢀⣀⣹⣛⣛⣳⢄⠀
+    ⠀⡔⡾⢁⣴⡆⢦⣬⣙⣛⣋⣤⣿⣿⣷⣾⣿⣿⣿⡆⢿⣿⡟⠻⠛⡉⣍⣲⢱⠁
+    ⠀⣇⣇⢸⣉⡀⢦⣌⡙⠻⠿⣯⣭⣥⠡⡤⠿⢿⣿⣿⡆⠉⡻⢿⣿⠇⢻⣟⠼⠀
+    ⠀⠈⠪⣴⣿⣧⡀⢉⠛⠘⢶⣦⣬⠉⣀⠓⠿⠿⠯⢉⣴⠿⠿⠓⡁⡄⠀⣿⠃⠀
+    ⠀⠀⠀⠙⣿⣿⣷⣌⠻⢠⣤⣀⠉⠐⠛⠿⠿⠰⠶⠦⠰⠶⠇⠘⠃⠁⠀⣿⠀⠀
+    ⠀⠀⠀⠀⠘⢿⣿⣿⣷⣌⠻⢿⠇⣼⣶⣦⡄⣄⣀⡀⢀⡀⢀⡀⡀⠀⢠⣿⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠙⠯⣛⠭⣻⠶⣬⣉⣛⠛⠃⠿⠿⠃⠿⠃⠚⣀⣁⣤⣾⣿⡀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠒⠯⣶⣋⡽⢛⣿⣯⣿⣭⣭⡿⢿⣿⣻⣾⢟⣿⡇⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⠿⣶⣾⣿⣿⣿⣭⣭⣭⣶⣿⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠛⠋⠁⠀⠀⠀
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/coins.rsi
+    state: coin_gold
+  - type: Item
+    sprite: Objects/Misc/coins.rsi
+    size: Tiny
+  - type: EmitSoundOnUse
+    sound:
+      collection: ClownRecorder
+  - type: EmitSoundOnActivate
+    sound:
+      collection: ClownRecorder
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: ClownRecorder
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall
+  - type: UseDelay
+    delay: 120
