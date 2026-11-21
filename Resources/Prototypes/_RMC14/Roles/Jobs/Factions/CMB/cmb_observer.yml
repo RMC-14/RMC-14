@@ -10,6 +10,7 @@
   startingGear: RMCGearBureauObserver
   icon: "RMCJobIconBureauObserver"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colonist
   special:

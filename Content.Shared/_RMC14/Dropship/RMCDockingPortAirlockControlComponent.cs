@@ -1,0 +1,27 @@
+using Content.Shared.Tag;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared._RMC14.Dropship;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class RMCDockingPortAirlockControlComponent : Component
+{
+    [DataField]
+    public List<ProtoId<TagPrototype>> AirlockTags = [];
+
+    [DataField]
+    public float SearchRadius = 4f;
+
+    [DataField]
+    public bool OpenOnDock = true;
+
+    [DataField]
+    public bool CloseOnUndock = true;
+
+    [DataField]
+    public bool FallbackToNearbyDoors;
+
+    [DataField]
+    public bool WarnIfMissing = true;
+}

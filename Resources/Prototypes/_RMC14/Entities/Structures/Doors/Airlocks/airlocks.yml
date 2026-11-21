@@ -37,6 +37,13 @@
     isCorrodible: false
 
 - type: entity
+  parent: CMAirlockShuttle
+  id: RMCAirlockShuttleMobileDock
+  suffix: Shuttle, Mobile Dock
+  components:
+  - type: RMCShuttleMobileDock
+
+- type: entity
   parent: CMAirlock
   id: CMAirlockCommand
   name: command airlock
@@ -112,6 +119,186 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/secure_door.rsi
+
+- type: entity
+  parent: CMAirlockSecure
+  id: RMCShuttleExternalSideAirlock
+  name: shuttle external side airlock
+  suffix: Shuttle, External Side
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+    reserved: true
+    landingClasses: [ external_side ]
+    landingTags: [ mainship, ert, external_side ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalSide ]
+    searchRadius: 5
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalSide
+
+- type: entity
+  parent: CMAirlockSecure
+  id: RMCShuttleInternalAirlock
+  name: shuttle internal airlock
+  suffix: Shuttle, Internal
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+    reserved: true
+    landingClasses: [ internal ]
+    landingTags: [ mainship, ert, internal ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: Docking
+  - type: DockingSignalControl
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockInternal
+
+- type: entity
+  parent: CMAirlock
+  id: RMCShuttleInternalBasicAirlock
+  name: shuttle internal airlock
+  suffix: Shuttle, Internal, Basic
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+    reserved: true
+    landingClasses: [ internal ]
+    landingTags: [ mainship, ert, internal ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: Docking
+  - type: DockingSignalControl
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockInternal
+
+- type: entity
+  parent: CMAirlock
+  id: RMCShuttleExternalSideBasicAirlock
+  name: shuttle external side airlock
+  suffix: Shuttle, External Side, Basic
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+    reserved: true
+    landingClasses: [ external_side ]
+    landingTags: [ mainship, ert, external_side ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalSide ]
+    searchRadius: 5
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalSide
+
+- type: entity
+  parent: CMAirlockSecure
+  id: RMCShuttleExternalHangarAirlock
+  name: shuttle external hangar airlock
+  suffix: Shuttle, External Hangar
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
+    searchRadius: 8
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalHangar
+
+- type: entity
+  parent: CMAirlock
+  id: RMCShuttleExternalHangarBasicAirlock
+  name: shuttle external hangar airlock
+  suffix: Shuttle, External Hangar, Basic
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
+    searchRadius: 8
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalHangar
 
 - type: entity
   parent: CMAirlock

@@ -37,6 +37,12 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
     public bool CanInitiateEvac;
 
     [DataField, AutoNetworkedField]
+    public bool CanTransmitDistress = true;
+
+    [DataField, AutoNetworkedField]
+    public int DistressReasonLimit = 200;
+
+    [DataField, AutoNetworkedField]
     public string? AnnounceName;
 
     /*

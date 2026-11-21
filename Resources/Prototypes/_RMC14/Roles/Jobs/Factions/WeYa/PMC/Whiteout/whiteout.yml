@@ -12,7 +12,7 @@
   accessGroups:
   - ShipMasterAccess
   - Synth
-  spawnMenuRoleName: WEYA Whiteout Combat Unit
+  spawnMenuRoleName: We-Ya Whiteout Combat Unit
   special:
   - !type:AddComponentSpecial
     components:

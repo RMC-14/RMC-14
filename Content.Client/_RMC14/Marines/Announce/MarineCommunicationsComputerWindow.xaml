@@ -20,6 +20,8 @@
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <Button Name="EchoButton" Access="Public" Text="Designate Echo Squad" StyleClasses="OpenBoth" />
         <cc:HSeparator Name="EchoSeparator" Access="Public" Color="#4972A1" Margin="0 5" />
+        <Button Name="DistressButton" Access="Public" Text="Transmit Distress Beacon" StyleClasses="OpenBoth" />
+        <cc:HSeparator Name="DistressSeparator" Access="Public" Color="#4972A1" Margin="0 5" />
         <Button Name="EvacuationButton" Access="Public" HorizontalExpand="True"
                 StyleClasses="OpenBoth" TextAlign="Left" />
         <cc:HSeparator Color="#4972A1" Margin="0 5" />

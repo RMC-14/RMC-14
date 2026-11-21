@@ -1,0 +1,96 @@
+- type: job
+  parent: RMCPMCGunner
+  id: RMCWeYaCommandoGunner
+  access: [ CMAccessERT ]
+  name: rmc-job-name-weya-commando-gunner
+  playTimeTracker: RMCJobWeYaCommandoGunner
+  startingGear: RMCGearWeYaCommandoGunner
+  spawnMenuRoleName: We-Ya Commando Heavy Gunner
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillMedical: 2
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSmartGun: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 1
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-gunner
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sg
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+
+- type: entity
+  parent: RMCRandomHumanoidPMCGunner
+  id: RMCRandomHumanoidWeYaCommandoGunner
+  name: we-ya commando ghost role gunner
+  suffix: Spawner, Player, Low Threat
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaCommandoGunner
+
+- type: randomHumanoidSettings
+  parent: RMCPMCGunner
+  id: RMCWeYaCommandoGunner
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-weya-commando-gunner
+    job: RMCWeYaCommandoGunner
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 18000 # 5 Hours
+
+- type: startingGear
+  id: RMCGearWeYaCommandoGunner
+  equipment:
+    id: CMIDCardCommando
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCSmartGunHarnessCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    shoes: RMCBootsPMCCommandoFilled
+    mask: RMCMaskCoifPMC
+    eyes: RMCGlassesSmartGunSight
+    back: RMCSatchelPMCCommandoFilled
+    belt: RMCBeltSmartGunOperatorPistolPMCFilled
+    pocket1: RMCPouchMedicalSocFill
+    pocket2: RMCPouchDrumPMC
+    suitstorage: RMCSmartGunPMC
+  storage:
+    back:
+    - RMCMotionDetector
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - RMCHandheldDistressBeaconWeYa
+    pocket2:
+    - RMCMagazineSmartGun
+    - RMCMagazineSmartGun
+
+- type: playTimeTracker
+  id: RMCJobWeYaCommandoGunner
