@@ -1,0 +1,41 @@
+- type: entity
+  abstract: true
+  id: RMCWeatherSirenBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/weather_siren.rsi
+    state: loudspeaker
+    drawdepth: WallMountedItems
+    noRot: false
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WallMount
+    arc: 360
+  - type: RMCWeatherSiren
+    kind: Weather
+    warningSound: !type:SoundPathSpecifier
+      path: /Audio/_RMC14/Effects/weather_warning.wav
+    warningMessage: rmc-weather-siren-message
+
+- type: entity
+  parent: RMCWeatherSirenBase
+  id: RMCWeatherSiren
+  name: Weather Siren
+  description: A siren used to play weather warnings for the colony.
+
+- type: entity
+  parent: RMCWeatherSirenBase
+  id: RMCStormSiren
+  name: storm siren
+  description: A siren used to announce storm warnings for the colony.
+  components:
+  - type: RMCWeatherSiren
+    kind: Storm
+    warningSound: !type:SoundPathSpecifier
+      path: /Audio/_RMC14/Effects/weather_warning_varadero.wav
+    warningMessage: rmc-storm-siren-message

@@ -1,39 +1,39 @@
 # Solaris
 
 - type: weather
-  id: RMCBigRedDust
+  id: RMCSolarisDust
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_dust
+    state: solaris_dust
   sound:
-    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    path: /Audio/_RMC14/Ambience/strata_snow.ogg
     params:
       loop: true
       volume: -6
 
 - type: weather
-  id: RMCBigRedSand
+  id: RMCSolarisSand
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_sand
+    state: solaris_sand
   sound:
-    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    path: /Audio/_RMC14/Ambience/strata_snowstorm.ogg
     params:
       loop: true
       volume: -6
 
 - type: weather
-  id: RMCBigRedRocks
+  id: RMCSolarisRocks
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_rocks
+    state: solaris_rocks
   sound:
-    path: /Audio/Effects/Weather/snowstorm.ogg
+    path: /Audio/_RMC14/Ambience/strata_blizzard.ogg
     params:
       loop: true
       volume: -6
 
-# Strata
+# Strata snow / clear sky
 
 - type: weather
   id: RMCStrataClearsky
@@ -68,13 +68,15 @@
       loop: true
       volume: -6
 
+# Strata rain, default CM rainforest ambience
+
 - type: weather
   id: RMCStrataStorm
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: strata_storm
   sound:
-    collection: Rain
+    path: /Audio/_RMC14/Ambience/rainforest.ogg
     params:
       loop: true
       volume: -6
@@ -85,7 +87,7 @@
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: strata_storm_light
   sound:
-    collection: Rain
+    path: /Audio/_RMC14/Ambience/rainforest.ogg
     params:
       loop: true
       volume: -6
@@ -96,7 +98,88 @@
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: strata_storm_very_light
   sound:
-    collection: Rain
+    path: /Audio/_RMC14/Ambience/rainforest.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataStormTropical
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_tropical
+  sound:
+    path: /Audio/_RMC14/Ambience/rainforest.ogg
+    params:
+      loop: true
+      volume: -6
+
+# Sorokyne / Hybrisa rain-and-thunder ambience
+
+- type: weather
+  id: RMCStrataStormRainAndThunder
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm
+  sound:
+    path: /Audio/_RMC14/Ambience/rainandthunderlong.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataStormLightRainAndThunder
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_light
+  sound:
+    path: /Audio/_RMC14/Ambience/rainandthunderlong.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataStormVeryLightRainAndThunder
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_sorokyne_light
+  sound:
+    path: /Audio/_RMC14/Ambience/rainandthunderlong.ogg
+    params:
+      loop: true
+      volume: -6
+
+# Varadero monsoon ambience
+
+- type: weather
+  id: RMCStrataStormVaradero
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_monsoon
+  sound:
+    path: /Audio/_RMC14/Ambience/varadero_storm.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataStormLightVaradero
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_light
+  sound:
+    path: /Audio/_RMC14/Ambience/varadero_storm.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataStormVeryLightVaradero
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_very_light
+  sound:
+    path: /Audio/_RMC14/Ambience/varadero_storm.ogg
     params:
       loop: true
       volume: -6
@@ -109,7 +192,7 @@
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: hybrisa_rain
   sound:
-    collection: Rain
+    path: /Audio/_RMC14/Ambience/rainandthunderlong.ogg
     params:
       loop: true
       volume: -6
@@ -120,31 +203,31 @@
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: hybrisa_rain_light
   sound:
-    collection: Rain
+    path: /Audio/_RMC14/Ambience/rainandthunderlong.ogg
     params:
       loop: true
       volume: -6
-      
+
 - type: weather
   id: RMCHybrisaRainVeryLight
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: hybrisa_rain_very_light
   sound:
-    collection: Rain
+    path: /Audio/_RMC14/Ambience/rainandthunderlong.ogg
     params:
       loop: true
       volume: -6
 
 # Trijent
+
 - type: weather
   id: RMCTrijentRainLight
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: trijent_rain_light
   sound:
-    collection: Rain
+    path: /Audio/_RMC14/Ambience/rainforest.ogg
     params:
       loop: true
       volume: -6
-
