@@ -48,7 +48,7 @@
     head: ClothingHeadHatChef
     outerClothing: RMCChefApron
     id: RMCIDCardChefCorpse
-    ears: RMCHeadsetSPP
+    ears: RMCHeadsetDistressSPP
   storage:
     back:
     - RMCRadioHandheldColonyOff
