@@ -48,3 +48,20 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/bench.rsi
     state: bench_right
+
+- type: entity
+  parent: RMCBenchLeft
+  id: RMCBenchLeftAlt
+  suffix: Left, Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bench_alt.rsi
+    state: bench_left
+
+- type: entity
+  parent: RMCBenchLeftAlt
+  id: RMCBenchRightAlt
+  suffix: Right, Alt
+  components:
+  - type: Sprite
+    state: bench_right
