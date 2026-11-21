@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Examining gloves with a watch now also shows the time.
-    type: Tweak
-  id: 3387
-  time: '2026-06-12T23:25:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10146
-- author: Arykh
-  changes:
-  - message: Left clicking no longer restocks medical vendors, use alt+left-click
-      or right-click verb menu instead. For all my left-click spamming chemists out
-      there. <3
-    type: Tweak
-  id: 3388
-  time: '2026-06-12T23:26:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10143
 - author: Vixting
   changes:
   - message: Larva queue, if the larvae dies before you can accept it you will no
@@ -4447,5 +4431,31 @@
   id: 3886
   time: '2026-11-21T04:54:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9700
+- author: PursuitInAshes
+  changes:
+  - message: Removed the LV-624 MMI.
+    type: Remove
+  id: 3887
+  time: '2026-11-21T04:59:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11131
+- author: MidZik
+  changes:
+  - message: Fixed being unable to use abilities on targets under your own sprite.
+    type: Fix
+  - message: Fixed being unable to use abilities on targets under irrelevant entities,
+      such as doors or potted plants.
+    type: Fix
+  - message: Fixed some unmissable abilities becoming unselected when clicking an
+      invalid target.
+    type: Fix
+  - message: Xenos should no longer be blocked by friendly xenos when trying to use
+      offensive abilities on enemies under them.
+    type: Tweak
+  - message: Xenos should no longer be blocked by enemies when trying to use friendly
+      abilities on allied xenos under them.
+    type: Tweak
+  id: 3888
+  time: '2026-11-21T04:59:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10959
 Name: RMC14
 Order: -1
