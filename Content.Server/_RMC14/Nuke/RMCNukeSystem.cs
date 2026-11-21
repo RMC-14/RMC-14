@@ -1,4 +1,5 @@
 using Content.Server._RMC14.Power;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Nuke;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Repairable;
@@ -9,6 +10,7 @@ using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Utility;
 
@@ -16,6 +18,7 @@ namespace Content.Server._RMC14.Nuke;
 
 public sealed class RMCNukeSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -27,7 +30,7 @@ public sealed class RMCNukeSystem : EntitySystem
     private EntityQuery<RMCRepairableComponent> _repairable;
     private EntityQuery<RMCNukeShelterComponent> _shelter;
 
-    private readonly int _chunkSize = 1000;
+    private int _chunkSize;
     private readonly List<(MapId, bool)> _currentlyNuking = [];
     private readonly List<EntityUid> _toDamage = [];
     private readonly List<EntityUid> _toDelete = [];
@@ -36,6 +39,8 @@ public sealed class RMCNukeSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnCleanup);
+        Subs.CVar(_config, RMCCVars.RMCNukeChunkSize, v => _chunkSize = v, true);
+
         _apc = GetEntityQuery<RMCApcComponent>();
         _repairable = GetEntityQuery<RMCRepairableComponent>();
         _shelter = GetEntityQuery<RMCNukeShelterComponent>();

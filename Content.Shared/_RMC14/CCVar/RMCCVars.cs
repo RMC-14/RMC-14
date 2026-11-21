@@ -633,7 +633,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLoadoutLowestRankSelectable =
         CVarDef.Create("rmc.loadout_lowest_rank_selectable", false, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<int> RMCLightningMaxAmountLightNearbyCount =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_count", 6, CVar.CLIENT | CVar.ARCHIVE);
 
@@ -672,7 +672,13 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCGhostClothingAlphaBoost =
         CVarDef.Create("rmc.ghost_clothing_alpha_boost", 0.4f, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
+
+    /// <summary>
+    /// How many entities to damage/delete per tick after nukemap/scuttle.
+    /// </summary>
+    public static readonly CVarDef<int> RMCNukeChunkSize =
+        CVarDef.Create("rmc.nukemap_chunk_size", 1024, CVar.SERVER | CVar.SERVERONLY);
 }
