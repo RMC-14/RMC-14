@@ -1,0 +1,31 @@
+- type: entity
+  parent: BaseItem
+  id: RMCBlackMarketTradebandDevice
+  name: CMB Tradeband Compliance Device
+  description: A device used to reset any tampering done to trading devices' signal range. Occasionally used to fix any signal chips damaged in an accident, but often for malpractice in trading. Use this with caution, as it will also reset any evidence of potential illicit trade. Created to fulfill a joint-organization requirement for CMB-ICC teams on the frontier, where tampered machinery was difficult to move and refurbish. Smugglers beware.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/black_market_tradeband.rsi
+    layers:
+    - state: cmb_scanner
+      map: ["enum.RMCBlackMarketTradebandLayers.Base"]
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Devices/black_market_tradeband.rsi
+    storedRotation: 0
+  - type: RMCBlackMarketTradebandDevice
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCBlackMarketTradebandVisuals.Active:
+        enum.RMCBlackMarketTradebandLayers.Base:
+          True: { state: cmb_scanner_on }
+          False: { state: cmb_scanner }
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - belt
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+      CMGlass: 20

@@ -55,6 +55,8 @@
   - type: MeleeRequiresSkill
     skills:
       RMCSkillPolice: 2
+  - type: BlackMarketValue
+    value: 20
   - type: GuideHelp
     guides:
     - RMCGuideRoleMilitaryPolice

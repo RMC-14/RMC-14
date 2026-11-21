@@ -405,6 +405,8 @@
           Quantity: 15
         - ReagentId: RMCSugar
           Quantity: 9
+  - type: BlackMarketValue
+    value: 10
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -425,6 +427,8 @@
           Quantity: 15
         - ReagentId: RMCSugar
           Quantity: 9
+  - type: BlackMarketValue
+    value: 10
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -445,6 +449,8 @@
           Quantity: 15
         - ReagentId: RMCSugar
           Quantity: 9
+  - type: BlackMarketValue
+    value: 10
 
 # Empty Tray
 

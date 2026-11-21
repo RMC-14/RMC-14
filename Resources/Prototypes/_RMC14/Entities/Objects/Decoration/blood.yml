@@ -1,0 +1,123 @@
+- type: entity
+  abstract: true
+  id: RMCBlackMarketMendozaBloodBase
+  name: blood
+  description: A pool of blood.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCNightVisionVisible
+    priority: 1
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor1
+    drawdepth: Items
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaHumanBlood1
+  components:
+  - type: Sprite
+    state: mfloor1
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaHumanBlood2
+  components:
+  - type: Sprite
+    state: mfloor2
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaHumanBlood3
+  components:
+  - type: Sprite
+    state: mfloor3
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaHumanBlood4
+  components:
+  - type: Sprite
+    state: mfloor4
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaHumanBlood5
+  components:
+  - type: Sprite
+    state: mfloor5
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaHumanBlood6
+  components:
+  - type: Sprite
+    state: mfloor6
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaHumanBlood7
+  components:
+  - type: Sprite
+    state: mfloor7
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaXenoBlood1
+  name: xeno blood
+  components:
+  - type: Sprite
+    state: xfloor1
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaXenoBlood2
+  name: xeno blood
+  components:
+  - type: Sprite
+    state: xfloor2
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaXenoBlood3
+  name: xeno blood
+  components:
+  - type: Sprite
+    state: xfloor3
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaXenoBlood4
+  name: xeno blood
+  components:
+  - type: Sprite
+    state: xfloor4
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaXenoBlood5
+  name: xeno blood
+  components:
+  - type: Sprite
+    state: xfloor5
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaXenoBlood6
+  name: xeno blood
+  components:
+  - type: Sprite
+    state: xfloor6
+
+- type: entity
+  parent: RMCBlackMarketMendozaBloodBase
+  id: RMCBlackMarketMendozaXenoBlood7
+  name: xeno blood
+  components:
+  - type: Sprite
+    state: xfloor7

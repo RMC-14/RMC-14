@@ -86,6 +86,9 @@
     whitelist:
       components:
       - Xeno
+  - type: BlackMarketValue
+    value: 25
+    deadValue: 0
 
 - type: entity
   parent: RMCSimpleMob

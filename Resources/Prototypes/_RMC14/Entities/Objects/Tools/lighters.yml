@@ -83,6 +83,8 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/execzippo.rsi
       state: helmet
+  - type: BlackMarketValue
+    value: 40
 
 - type: entity
   name: golden zippo lighter
@@ -96,6 +98,8 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/goldzippo.rsi
       state: helmet
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   name: cheap lighter

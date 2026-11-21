@@ -9,6 +9,12 @@
     sprite: _RMC14/Markers/landmarks.rsi
     layers:
     - state: random_toolbox
+  - type: EntityTableSpawner
+    deleteSpawnerAfterSpawn: false
+    offset: 0
+    table: !type:EntSelector
+      id: RMCBlackMarketHackingDevice
+      prob: 0.0001
   - type: RandomSpawner
     offset: 0
     chance: 1.0
@@ -314,6 +320,7 @@
   parent: RMCCrateLarge
   id: RMCCrateBlackmarketConfiscatedEquipment # TODO crate heat 10 and dollar cost 70
   name: seized foreign equipment crate
+  description: A crate of random confiscated foreign equipment.
   components:
   - type: SpawnOnTerminate
     spawn: RMCSpawnerRandomConfiscatedEquipment
@@ -322,6 +329,7 @@
   parent: RMCCrateLarge
   id: RMCCrateBlackmarketConfiscatedWeaponry # TODO crate heat 15 and dollar cost 45
   name: seized foreign weaponry crate
+  description: A crate of random confiscated foreign weaponry.
   components:
   - type: SpawnOnTerminate
     spawn: RMCSpawnerRandomConfiscatedWeaponry

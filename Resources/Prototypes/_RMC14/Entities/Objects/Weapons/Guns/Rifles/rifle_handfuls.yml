@@ -37,3 +37,98 @@
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/xm88.rsi, state: SOCOM1 }
   spawn: RMCCartridge458SOCOM
   maxCount: 9
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCCartridge4570
+  name: handful of 45-70 rounds
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/lever_action.rsi
+    layers:
+    - state: rounds-1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCBullet4570
+  - type: Stack
+    count: 9
+    stackType: RMCCartridge4570
+    baseLayer: base
+    layerStates:
+    - rounds-1
+    - rounds-1
+    - rounds-2
+    - rounds-3
+    - rounds-4
+    - rounds-5
+    - rounds-6
+    - rounds-7
+    - rounds-8
+    - rounds-9
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCCartridge4570
+
+- type: entity
+  parent: RMCCartridge4570
+  id: RMCCartridge4570Training
+  name: handful of 45-70 blanks
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/lever_action.rsi
+    layers:
+    - state: training-rounds-1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCBullet4570Training
+  - type: Stack
+    stackType: RMCCartridge4570Training
+    layerStates:
+    - training-rounds-1
+    - training-rounds-1
+    - training-rounds-2
+    - training-rounds-3
+    - training-rounds-4
+    - training-rounds-5
+    - training-rounds-6
+    - training-rounds-7
+    - training-rounds-8
+    - training-rounds-9
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCCartridge4570
+    - RMCCartridge4570Training
+
+- type: entity
+  parent: RMCCartridge4570
+  id: RMCCartridge4570Three
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: RMCCartridge4570Training
+  id: RMCCartridge4570TrainingThree
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: stack
+  id: RMCCartridge4570
+  name: handful of 45-70 rounds
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/lever_action.rsi, state: rounds-1 }
+  spawn: RMCCartridge4570
+  maxCount: 9
+
+- type: stack
+  id: RMCCartridge4570Training
+  name: handful of 45-70 blanks
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/lever_action.rsi, state: training-rounds-1 }
+  spawn: RMCCartridge4570Training
+  maxCount: 9

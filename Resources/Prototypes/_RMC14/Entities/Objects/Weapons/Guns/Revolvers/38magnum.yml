@@ -68,6 +68,19 @@
     - null
 
 - type: entity
+  parent: RMCWeaponRevolver38Magnum
+  id: RMCWeaponRevolverM37
+  name: "M37 .38 revolver"
+  description: A lean .38 service revolver. A timeless classic, from antiquity to the future. This specific model is known to be wildly inaccurate, yet extremely lethal.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolver38Magnum
+    - RMCWeaponRevolverM37
+
+- type: entity
   id: RMCBaseSpeedLoader38
   name: "Speed loader (.38)"
   parent: BaseItem
@@ -114,6 +127,11 @@
   - type: Appearance
 
 - type: entity
+  parent: RMCSpeedLoader38
+  id: RMCSpeedLoaderM37
+  name: "M37 speed loader (.38)"
+
+- type: entity
   id: RMCCartridgeRevolver38
   name: cartridge (.38)
   parent: CMCartridgePistolBase
@@ -149,7 +167,13 @@
   id: RMCWeaponRevolver38Magnum
 
 - type: Tag
+  id: RMCWeaponRevolverM37
+
+- type: Tag
   id: RMCSpeedLoader38
+
+- type: Tag
+  id: RMCSpeedLoaderM37
 
 - type: Tag
   id: RMCCartridgeRevolver38

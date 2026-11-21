@@ -1,12 +1,21 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sausage taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/92da8f20ca971cc524f39c6ea560bf08a6a16479/icons/obj/items/food/meat.dmi, modified into cooked sprite by SurfinNinja",
+  "copyright": "Meat, xenomeat, and monkey's delight taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/icons/obj/items/food/meat.dmi. Sausage taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/92da8f20ca971cc524f39c6ea560bf08a6a16479/icons/obj/items/food/meat.dmi, modified into cooked sprite by SurfinNinja",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
+      {
+          "name": "meat"
+      },
+      {
+          "name": "xenomeat"
+      },
+      {
+          "name": "monkeysdelight"
+      },
       {
           "name": "sausage"
       },

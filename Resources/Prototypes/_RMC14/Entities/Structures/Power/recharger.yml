@@ -16,6 +16,8 @@
     emptyState: "recharger"
     occupiedState: "recharger"
     chargeLevelState: "recharger-{0}"
+  - type: BlackMarketValue
+    value: 35
   - type: Fixtures
     fixtures:
       fix1:

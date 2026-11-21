@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: RMCSupplyOrderingCircuitboard
+  name: supply ordering console circuit board
+  description: A printed circuit board for a supply ordering console.
+  components:
+  - type: Sprite
+    state: cpu_supply
+  - type: ComputerBoard
+    prototype: RMCSupplyOrderingConsole

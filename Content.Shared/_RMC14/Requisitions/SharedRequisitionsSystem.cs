@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared._RMC14.Scaling;
@@ -10,7 +12,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
-using System.Numerics;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsRailingMode;
 
 namespace Content.Shared._RMC14.Requisitions;
@@ -22,7 +23,6 @@ public abstract class SharedRequisitionsSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
 
     public int Starting { get; private set; }
@@ -111,12 +111,16 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         }
     }
 
-    public void ChangeBudget(int amount)
+    public void ChangeBudget(int amount, RequisitionsBudgetAccount account = RequisitionsBudgetAccount.Cargo)
     {
         var accountQuery = EntityQueryEnumerator<RequisitionsAccountComponent>();
         while (accountQuery.MoveNext(out var uid, out var comp))
         {
-            comp.Balance += amount;
+            if (account == RequisitionsBudgetAccount.Cargo)
+                comp.Balance += amount;
+            else if (account == RequisitionsBudgetAccount.BlackMarket)
+                comp.BlackMarketBalance += amount;
+
             Dirty(uid, comp);
         }
 
@@ -137,11 +141,101 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         var elevator = GetElevator(computer);
         var mode = elevator?.Comp.NextMode ?? elevator?.Comp.Mode;
         var busy = elevator?.Comp.Busy ?? false;
-        var balance = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account)?.Balance ?? 0;
-        var full = elevator != null && IsFull(elevator.Value);
+        var account = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account);
+        var balance = account?.Balance ?? 0;
+        var blackMarketBalance = account?.BlackMarketBalance ?? 0;
+        var blackMarketStatus = GetBlackMarketStatus(account);
+        var orderCount = elevator?.Comp.Orders.Count ?? 0;
+        var capacity = elevator != null ? GetElevatorCapacity(elevator.Value) : 0;
+        var full = elevator != null && orderCount >= capacity;
+        var pendingOrders = elevator != null
+            ? GetPendingOrders(elevator.Value.Comp.Orders)
+            : new List<RequisitionsPendingOrder>();
 
-        var state = new RequisitionsBuiState(mode, busy, balance, full);
-        _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
+        computer.Comp.PlatformLowered = mode;
+        computer.Comp.Busy = busy;
+        computer.Comp.Balance = balance;
+        computer.Comp.Full = full;
+        computer.Comp.OrderCount = orderCount;
+        computer.Comp.Capacity = capacity;
+        computer.Comp.BlackMarketBalance = computer.Comp.RequestOnly ? 0 : blackMarketBalance;
+        computer.Comp.BlackMarketStatus = computer.Comp.RequestOnly
+            ? RequisitionsBlackMarketStatus.LockedOut
+            : blackMarketStatus;
+        computer.Comp.PendingOrders = computer.Comp.RequestOnly ? new List<RequisitionsPendingOrder>() : pendingOrders;
+        computer.Comp.Requests = computer.Comp.RequestOnly || account == null
+            ? new List<RequisitionsRequest>()
+            : account.Requests.Where(request => !request.Closed && computer.Comp.InsertedRequests.Contains(request.Number)).ToList();
+        Dirty(computer);
+    }
+
+    protected static RequisitionsBlackMarketStatus GetBlackMarketStatus(RequisitionsAccountComponent? account)
+    {
+        if (account == null)
+            return RequisitionsBlackMarketStatus.Available;
+
+        if (account.BlackMarketLockedOut)
+            return RequisitionsBlackMarketStatus.LockedOut;
+
+        if (account.BlackMarketMendozaDead)
+            return RequisitionsBlackMarketStatus.MendozaDead;
+
+        return RequisitionsBlackMarketStatus.Available;
+    }
+
+    protected static bool CanUseBlackMarket(RequisitionsAccountComponent account)
+    {
+        return GetBlackMarketStatus(account) == RequisitionsBlackMarketStatus.Available;
+    }
+
+    private static List<RequisitionsPendingOrder> GetPendingOrders(List<RequisitionsEntry> orders)
+    {
+        var pendingOrders = new List<RequisitionsPendingOrder>();
+        foreach (var order in orders)
+        {
+            var found = false;
+            foreach (var pending in pendingOrders)
+            {
+                if (!SamePendingOrder(pending.Entry, order))
+                    continue;
+
+                pending.Amount++;
+                found = true;
+                break;
+            }
+
+            if (!found)
+                pendingOrders.Add(new RequisitionsPendingOrder(order, 1));
+        }
+
+        return pendingOrders;
+    }
+
+    private static bool SamePendingOrder(RequisitionsEntry a, RequisitionsEntry b)
+    {
+        if (a.Request?.Number != b.Request?.Number || a.Request?.Account != b.Request?.Account)
+            return false;
+
+        if (a.Crate != b.Crate ||
+            a.Cost != b.Cost ||
+            a.BlackMarket != b.BlackMarket ||
+            a.BlackMarketCost != b.BlackMarketCost ||
+            a.BlackMarketHeat != b.BlackMarketHeat ||
+            a.Name != b.Name ||
+            a.Description != b.Description ||
+            !Equals(a.Icon, b.Icon) ||
+            a.Entities.Count != b.Entities.Count)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < a.Entities.Count; i++)
+        {
+            if (a.Entities[i] != b.Entities[i])
+                return false;
+        }
+
+        return true;
     }
 
     protected bool IsFull(Entity<RequisitionsElevatorComponent> elevator)
@@ -208,9 +302,31 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         Dirty(account);
     }
 
-    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    protected virtual void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _purchasesMap = null;
+        var query = EntityQueryEnumerator<RequisitionsAccountComponent>();
+        while (query.MoveNext(out _, out var account))
+        {
+            account.Requests.Clear();
+            account.NextRequestNumber = 1;
+        }
+        var computers = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            computer.Requests.Clear();
+            computer.PendingOrders.Clear();
+            computer.OrderCount = 0;
+            computer.InsertedRequests.Clear();
+            computer.Stock = new RequisitionsStock();
+            Dirty(uid, computer);
+        }
+        var elevators = EntityQueryEnumerator<RequisitionsElevatorComponent>();
+        while (elevators.MoveNext(out var uid, out var elevator))
+        {
+            elevator.Orders.Clear();
+            Dirty(uid, elevator);
+        }
     }
 
     public void CreateSpecialDelivery(EntProtoId proto)
