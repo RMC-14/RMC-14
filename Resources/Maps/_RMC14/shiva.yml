@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/28/2026 13:37:02
-  entityCount: 18738
+  time: 11/19/2026 19:40:19
+  entityCount: 18733
 maps:
 - 1
 grids:
@@ -38077,6 +38077,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 104.5,157.5
       parent: 1
+    - type: DoorBolt
+      boltsDown: True
   - uid: 152
     components:
     - type: Transform
@@ -46065,33 +46067,6 @@ entities:
     components:
     - type: Transform
       pos: 36.5,35.5
-      parent: 1
-- proto: CMIV
-  entities:
-  - uid: 1570
-    components:
-    - type: Transform
-      pos: 208.5,130.5
-      parent: 1
-  - uid: 1571
-    components:
-    - type: Transform
-      pos: 208.5,131.5
-      parent: 1
-  - uid: 1572
-    components:
-    - type: Transform
-      pos: 197.5,138.5
-      parent: 1
-  - uid: 1573
-    components:
-    - type: Transform
-      pos: 217.5,150.5
-      parent: 1
-  - uid: 1574
-    components:
-    - type: Transform
-      pos: 216.5,150.5
       parent: 1
 - proto: CMJanitorialCart
   entities:
@@ -54824,7 +54799,7 @@ entities:
       pos: 198.5,44.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -6517.1714
+      secondsUntilStateChange: -7290.8457
       state: Opening
   - uid: 3195
     components:
@@ -55138,7 +55113,7 @@ entities:
     - type: Occluder
       enabled: False
     - type: Door
-      secondsUntilStateChange: -16017.277
+      secondsUntilStateChange: -16790.951
       state: Denying
   - uid: 3256
     components:
@@ -107530,7 +107505,7 @@ entities:
     - type: Transform
       pos: 116.55853,56.606167
       parent: 1
-- proto: RMCAegisCorpseSpawner
+- proto: RMCAegisCorpseSpawnerShiva
   entities:
   - uid: 13322
     components:
@@ -119350,6 +119325,33 @@ entities:
     - type: Transform
       pos: 198.5,87.5
       parent: 1
+- proto: RMCIVStand
+  entities:
+  - uid: 1570
+    components:
+    - type: Transform
+      pos: 208.5,130.5
+      parent: 1
+  - uid: 1571
+    components:
+    - type: Transform
+      pos: 208.5,131.5
+      parent: 1
+  - uid: 1572
+    components:
+    - type: Transform
+      pos: 197.5,138.5
+      parent: 1
+  - uid: 1573
+    components:
+    - type: Transform
+      pos: 217.5,150.5
+      parent: 1
+  - uid: 1574
+    components:
+    - type: Transform
+      pos: 216.5,150.5
+      parent: 1
 - proto: RMCJumpsuitBluePjs
   entities:
   - uid: 15041
@@ -119464,56 +119466,89 @@ entities:
     - type: Transform
       pos: 117.5,70.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15059
     components:
     - type: Transform
       pos: 113.5,71.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15060
     components:
     - type: Transform
       pos: 120.5,134.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15061
     components:
     - type: Transform
       pos: 139.5,127.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15062
     components:
     - type: Transform
       pos: 134.5,127.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15063
     components:
     - type: Transform
       pos: 207.5,25.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15064
     components:
     - type: Transform
       pos: 151.5,141.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15065
     components:
     - type: Transform
       pos: 155.5,143.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15066
     components:
     - type: Transform
       pos: 166.5,119.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15067
     components:
     - type: Transform
       pos: 162.5,119.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15068
     components:
     - type: Transform
       pos: 107.5,69.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLampGreen
   entities:
   - uid: 15069
@@ -119521,46 +119556,73 @@ entities:
     - type: Transform
       pos: 176.31894,39.856533
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15070
     components:
     - type: Transform
       pos: 215.5,31.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15071
     components:
     - type: Transform
       pos: 215.5,28.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15072
     components:
     - type: Transform
       pos: 217.5,16.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15073
     components:
     - type: Transform
       pos: 217.5,21.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15074
     components:
     - type: Transform
       pos: 207.5,19.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15075
     components:
     - type: Transform
       pos: 212.5,19.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15076
     components:
     - type: Transform
       pos: 200.5,19.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15077
     components:
     - type: Transform
       pos: 195.5,19.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLampTripod
   entities:
   - uid: 15078
@@ -119568,46 +119630,73 @@ entities:
     - type: Transform
       pos: 101.5,92.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15079
     components:
     - type: Transform
       pos: 106.5,49.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15080
     components:
     - type: Transform
       pos: 111.5,53.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15081
     components:
     - type: Transform
       pos: 97.5,97.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15082
     components:
     - type: Transform
       pos: 94.5,100.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15083
     components:
     - type: Transform
       pos: 179.5,105.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15084
     components:
     - type: Transform
       pos: 168.5,102.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15085
     components:
     - type: Transform
       pos: 170.5,99.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15086
     components:
     - type: Transform
       pos: 166.5,99.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLampTripodGrey
   entities:
   - uid: 15087
@@ -119615,61 +119704,97 @@ entities:
     - type: Transform
       pos: 94.5,155.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15088
     components:
     - type: Transform
       pos: 12.5,104.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15089
     components:
     - type: Transform
       pos: 42.5,69.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15090
     components:
     - type: Transform
       pos: 67.5,74.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15091
     components:
     - type: Transform
       pos: 64.5,79.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15092
     components:
     - type: Transform
       pos: 61.5,81.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15093
     components:
     - type: Transform
       pos: 98.5,109.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15094
     components:
     - type: Transform
       pos: 10.5,101.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15095
     components:
     - type: Transform
       pos: 16.5,101.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15096
     components:
     - type: Transform
       pos: 33.5,76.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15097
     components:
     - type: Transform
       pos: 172.5,13.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 15098
     components:
     - type: Transform
       pos: 50.5,102.5
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLighter
   entities:
   - uid: 15099
@@ -119815,12 +119940,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 195.5,19.5
-      parent: 1
-  - uid: 15119
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 98.5,142.5
       parent: 1
 - proto: RMCLightFixtureDoubleOffset
   entities:
@@ -121417,44 +121536,14 @@ entities:
       rot: 3.141592653589793 rad
       pos: 54.5,61.5
       parent: 1
-- proto: RMCLightFixtureOffset
-  entities:
   - uid: 15397
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 44.5,47.5
+      pos: 99.5,142.5
       parent: 1
-  - uid: 15398
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 44.5,45.5
-      parent: 1
-  - uid: 15399
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,45.5
-      parent: 1
-  - uid: 15400
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,47.5
-      parent: 1
-  - uid: 15401
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,43.5
-      parent: 1
-  - uid: 15402
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 44.5,43.5
-      parent: 1
+- proto: RMCLightFixtureOffset
+  entities:
   - uid: 15403
     components:
     - type: Transform
@@ -121491,41 +121580,41 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 67.5,45.5
       parent: 1
-  - uid: 15409
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 67.5,43.5
-      parent: 1
-  - uid: 15410
+  - uid: 17144
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 69.5,45.5
+      pos: 46.5,43.5
       parent: 1
-  - uid: 15411
+  - uid: 17145
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 69.5,43.5
+      pos: 46.5,45.5
       parent: 1
-  - uid: 15412
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 67.5,47.5
-      parent: 1
-  - uid: 15413
+  - uid: 17146
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 69.5,47.5
+      pos: 46.5,47.5
       parent: 1
-  - uid: 15414
+  - uid: 17147
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 67.5,45.5
+      pos: 44.5,47.5
+      parent: 1
+  - uid: 17148
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 44.5,45.5
+      parent: 1
+  - uid: 17149
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 44.5,43.5
       parent: 1
 - proto: RMCLightFixtureSmallOffset
   entities:
@@ -131843,148 +131932,162 @@ entities:
     - type: Transform
       pos: 62.5,124.5
       parent: 1
-- proto: RMCSpawnerCorpseChef
+- proto: RMCSpawnerCorpseChefShiva
   entities:
-  - uid: 17126
+  - uid: 15398
     components:
     - type: Transform
       pos: 127.5,47.5
       parent: 1
-- proto: RMCSpawnerCorpseColonist
+- proto: RMCSpawnerCorpseCMBDeputyShiva
   entities:
-  - uid: 17127
-    components:
-    - type: Transform
-      pos: 53.5,41.5
-      parent: 1
-  - uid: 17128
-    components:
-    - type: Transform
-      pos: 63.5,48.5
-      parent: 1
-  - uid: 17129
-    components:
-    - type: Transform
-      pos: 105.5,157.5
-      parent: 1
-  - uid: 17130
-    components:
-    - type: Transform
-      pos: 112.5,151.5
-      parent: 1
-  - uid: 17131
-    components:
-    - type: Transform
-      pos: 115.5,150.5
-      parent: 1
-  - uid: 17132
-    components:
-    - type: Transform
-      pos: 118.5,151.5
-      parent: 1
-- proto: RMCSpawnerCorpseColonistBust
-  entities:
-  - uid: 17135
-    components:
-    - type: Transform
-      pos: 95.5,93.5
-      parent: 1
-  - uid: 17136
-    components:
-    - type: Transform
-      pos: 131.5,136.5
-      parent: 1
-- proto: RMCSpawnerCorpseDoctor
-  entities:
-  - uid: 17137
-    components:
-    - type: Transform
-      pos: 101.5,67.5
-      parent: 1
-  - uid: 17138
-    components:
-    - type: Transform
-      pos: 205.5,125.5
-      parent: 1
-- proto: RMCSpawnerCorpseEngineer
-  entities:
-  - uid: 17139
-    components:
-    - type: Transform
-      pos: 67.5,58.5
-      parent: 1
   - uid: 17140
-    components:
-    - type: Transform
-      pos: 152.5,58.5
-      parent: 1
-  - uid: 17141
-    components:
-    - type: Transform
-      pos: 175.5,138.5
-      parent: 1
-  - uid: 17142
-    components:
-    - type: Transform
-      pos: 141.5,87.5
-      parent: 1
-- proto: RMCSpawnerCorpseMiner
-  entities:
-  - uid: 17143
-    components:
-    - type: Transform
-      pos: 98.5,101.5
-      parent: 1
-  - uid: 17144
-    components:
-    - type: Transform
-      pos: 203.5,118.5
-      parent: 1
-- proto: RMCSpawnerCorpsePrisoner
-  entities:
-  - uid: 17145
-    components:
-    - type: Transform
-      pos: 160.5,126.5
-      parent: 1
-- proto: RMCSpawnerCorpseScientist
-  entities:
-  - uid: 17146
-    components:
-    - type: Transform
-      pos: 176.5,37.5
-      parent: 1
-  - uid: 17147
-    components:
-    - type: Transform
-      pos: 197.5,134.5
-      parent: 1
-  - uid: 17148
-    components:
-    - type: Transform
-      pos: 200.5,132.5
-      parent: 1
-  - uid: 17149
-    components:
-    - type: Transform
-      pos: 208.5,25.5
-      parent: 1
-- proto: RMCSpawnerCorpseSecurity
-  entities:
-  - uid: 17150
-    components:
-    - type: Transform
-      pos: 150.5,143.5
-      parent: 1
-  - uid: 17151
     components:
     - type: Transform
       pos: 108.5,97.5
       parent: 1
-  - uid: 17152
+- proto: RMCSpawnerCorpseColonistShiva
+  entities:
+  - uid: 15399
+    components:
+    - type: Transform
+      pos: 53.5,41.5
+      parent: 1
+  - uid: 15400
+    components:
+    - type: Transform
+      pos: 63.5,48.5
+      parent: 1
+  - uid: 15401
+    components:
+    - type: Transform
+      pos: 105.5,157.5
+      parent: 1
+  - uid: 15402
+    components:
+    - type: Transform
+      pos: 112.5,151.5
+      parent: 1
+  - uid: 15409
+    components:
+    - type: Transform
+      pos: 118.5,151.5
+      parent: 1
+  - uid: 15410
+    components:
+    - type: Transform
+      pos: 115.5,150.5
+      parent: 1
+- proto: RMCSpawnerCorpseColonistShivaBurst
+  entities:
+  - uid: 15411
+    components:
+    - type: Transform
+      pos: 95.5,93.5
+      parent: 1
+  - uid: 15412
+    components:
+    - type: Transform
+      pos: 131.5,136.5
+      parent: 1
+- proto: RMCSpawnerCorpseDoctorShiva
+  entities:
+  - uid: 15413
+    components:
+    - type: Transform
+      pos: 101.5,67.5
+      parent: 1
+  - uid: 15414
+    components:
+    - type: Transform
+      pos: 205.5,125.5
+      parent: 1
+- proto: RMCSpawnerCorpseEngineerShiva
+  entities:
+  - uid: 17126
+    components:
+    - type: Transform
+      pos: 67.5,58.5
+      parent: 1
+  - uid: 17127
+    components:
+    - type: Transform
+      pos: 152.5,58.5
+      parent: 1
+  - uid: 17128
+    components:
+    - type: Transform
+      pos: 175.5,138.5
+      parent: 1
+  - uid: 17129
+    components:
+    - type: Transform
+      pos: 141.5,87.5
+      parent: 1
+- proto: RMCSpawnerCorpseMinerShiva
+  entities:
+  - uid: 17130
+    components:
+    - type: Transform
+      pos: 98.5,101.5
+      parent: 1
+  - uid: 17131
+    components:
+    - type: Transform
+      pos: 203.5,118.5
+      parent: 1
+- proto: RMCSpawnerCorpsePrisonerShiva
+  entities:
+  - uid: 17132
+    components:
+    - type: Transform
+      pos: 160.5,126.5
+      parent: 1
+- proto: RMCSpawnerCorpseScientistShiva
+  entities:
+  - uid: 17135
+    components:
+    - type: Transform
+      pos: 176.5,37.5
+      parent: 1
+  - uid: 17136
+    components:
+    - type: Transform
+      pos: 197.5,134.5
+      parent: 1
+  - uid: 17137
+    components:
+    - type: Transform
+      pos: 200.5,132.5
+      parent: 1
+  - uid: 17138
+    components:
+    - type: Transform
+      pos: 208.5,25.5
+      parent: 1
+- proto: RMCSpawnerCorpseSecurityShiva
+  entities:
+  - uid: 17139
+    components:
+    - type: Transform
+      pos: 150.5,143.5
+      parent: 1
+  - uid: 17141
     components:
     - type: Transform
       pos: 112.5,82.5
+      parent: 1
+- proto: RMCSpawnerCorpseShivaColonialDivisionManager
+  entities:
+  - uid: 17142
+    components:
+    - type: Transform
+      pos: 85.5,93.5
+      parent: 1
+  - uid: 17143
+    components:
+    - type: Transform
+      pos: 109.5,68.5
       parent: 1
 - proto: RMCSpawnerCorpseWeYaGoon
   entities:
@@ -131997,16 +132100,6 @@ entities:
     components:
     - type: Transform
       pos: 53.5,22.5
-      parent: 1
-  - uid: 17153
-    components:
-    - type: Transform
-      pos: 85.5,93.5
-      parent: 1
-  - uid: 17154
-    components:
-    - type: Transform
-      pos: 109.5,68.5
       parent: 1
   - uid: 17155
     components:
@@ -138296,6 +138389,13 @@ entities:
     components:
     - type: Transform
       pos: 6.5,10.5
+      parent: 1
+- proto: VehicleInvisibleWall
+  entities:
+  - uid: 15119
+    components:
+    - type: Transform
+      pos: 104.5,157.5
       parent: 1
 - proto: VendingMachineCondiments
   entities:
