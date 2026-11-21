@@ -455,6 +455,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCParasiteSpawnInitialDelayMinutes =
         CVarDef.Create("rmc.parasite_spawn_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCParasiteSpawnMinimum =
+        CVarDef.Create("rmc.parasite_spawn_minimum", 2, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCParasiteSpawnScale =
+        CVarDef.Create("rmc.parasite_spawn_scale", 4, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCXenoSpawnInitialMuteDurationSeconds =
         CVarDef.Create("rmc.xeno_spawn_initial_mute_duration_seconds", 60f, CVar.REPLICATED | CVar.SERVER);
 
@@ -633,7 +639,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLoadoutLowestRankSelectable =
         CVarDef.Create("rmc.loadout_lowest_rank_selectable", false, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<int> RMCLightningMaxAmountLightNearbyCount =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_count", 6, CVar.CLIENT | CVar.ARCHIVE);
 
@@ -672,7 +678,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCGhostClothingAlphaBoost =
         CVarDef.Create("rmc.ghost_clothing_alpha_boost", 0.4f, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 }
