@@ -63,6 +63,15 @@
     },
     {
       "name": "smartgun_harness_a-on"
+    },
+    {
+      "name": "cr16_collapsible"
+    },
+    {
+      "name": "cr16_collapsible-on"
+    },
+    {
+      "name": "cr16_solid"
     }
   ]
 }

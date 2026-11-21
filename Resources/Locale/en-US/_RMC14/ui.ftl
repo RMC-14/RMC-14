@@ -1,4 +1,4 @@
-﻿cm-ui-rmc14 = RMC14
+cm-ui-rmc14 = RMC14
 
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
@@ -102,6 +102,7 @@ rmc-ui-patreon = Patreon
 
 rmc-other-credits-tab = Other
 
+rmc-ui-chat-preview = Show typed messages as a centred preview in the middle of the screen
 rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
@@ -164,6 +165,13 @@ rmc-ui-options-announcements-layout-preview-line-1 = {$name} preview
 rmc-ui-options-announcements-layout-preview-line-2 = Drag to reposition. Scale is local.
 rmc-ui-options-announcements-layout-preview-speaker = Speaker
 rmc-ui-options-announcements-layout-no-presets = No announcement presets are available for layout editing.
+rmc-ui-options-night-vision-color = Night vision visor color
+rmc-ui-options-night-vision-color-green = Green
+rmc-ui-options-night-vision-color-orange = Orange
+rmc-ui-options-night-vision-color-white = White
+rmc-ui-options-night-vision-color-yellow = Yellow
+rmc-ui-options-night-vision-color-red = Red
+rmc-ui-options-night-vision-color-blue = Blue
 
 # Dialog input
 rmc-dialog-input-placeholder-default = Enter text

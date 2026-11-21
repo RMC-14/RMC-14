@@ -12,6 +12,7 @@
                 <!-- RMC14 -->
                 <announce:RMCAnnouncementOptions Name="RMCAnnouncementOptions" />
                 <!-- RMC14 -->
+                <ui:OptionDropDown Name="RMCNightVisionColorDropDown" Title="{Loc 'rmc-ui-options-night-vision-color'}" />
                 <Label Text="{Loc 'ui-options-accessability-header-visuals'}"
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="ReducedMotionCheckBox" Text="{Loc 'ui-options-reduced-motion'}" />
