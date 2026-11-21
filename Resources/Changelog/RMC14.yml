@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Charger Crusher colliding with weeds on the floor.
-    type: Fix
-  id: 3386
-  time: '2026-06-12T05:44:26.046587+00:00'
-  url: null
 - author: Vermidia
   changes:
   - message: Examining gloves with a watch now also shows the time.
@@ -4436,5 +4429,23 @@
   id: 3885
   time: '2026-11-21T04:47:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10103
+- author: MidZik
+  changes:
+  - message: Smoke grenade smoke spreads out about 10x faster.
+    type: Tweak
+  - message: Boiler clouds spread out about 2x faster.
+    type: Tweak
+  - message: Boiler acid gas deals significantly less damage on the edges, the same
+      damage next to the center, and more damage exactly at the center.
+    type: Tweak
+  - message: Multiple damage-over-time gasses can affect you at the same time now.
+      For each category of damage, you get damaged by the most damaging one.
+    type: Fix
+  - message: Instant-spread smokes (e.g. phosphorus from sentries) no longer spread
+      onto walls.
+    type: Fix
+  id: 3886
+  time: '2026-11-21T04:54:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9700
 Name: RMC14
 Order: -1
