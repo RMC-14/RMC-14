@@ -161,7 +161,7 @@
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardColonistSecurity
-    ears: RMCHeadsetSPP
+    ears: RMCHeadsetDistressSPP
     belt: CMBeltSecurityMPFilled
   storage:
     back:
