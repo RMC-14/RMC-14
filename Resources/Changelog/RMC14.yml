@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Simon
-  changes:
-  - message: Add Member UI only shows xenonids not in your or others teams.
-    type: Fix
-  - message: Xenonids should now show up fully in the add member window.
-    type: Fix
-  - message: Fixed another way entities were possibly being missed by the UI update
-      and FT updating.
-    type: Fix
-  id: 3383
-  time: '2026-06-11T23:47:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10134
 - author: IceNoobXD
   changes:
   - message: Added three new jackets to the correspondent vendor!
@@ -4435,5 +4423,13 @@
   id: 3882
   time: '2026-11-21T03:40:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10277
+- author: wheelwrightt
+  changes:
+  - message: Different color options for the nightvision visor (can be set in the
+      options menu)
+    type: Add
+  id: 3883
+  time: '2026-11-21T03:58:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10242
 Name: RMC14
 Order: -1
