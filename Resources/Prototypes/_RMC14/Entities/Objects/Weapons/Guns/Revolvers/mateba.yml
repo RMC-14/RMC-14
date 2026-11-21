@@ -242,7 +242,6 @@
     color: "#FF3333"
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
-    color: "#FF3333"
   - type: Gun
     soundGunshot:
       collection: RMCSoundFestebaGunshot
