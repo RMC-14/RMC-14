@@ -1,11 +1,11 @@
 # Jelly Types
-rmc-jelly-1 = Royal jelly of slaughter
-rmc-jelly-2 = Royal jelly of resilience
-rmc-jelly-3 = Royal jelly of sabotage
-rmc-jelly-4 = Royal jelly of proliferation
-rmc-jelly-5 = Royal jelly of rejuvenation
+rmc-jelly-1 = Royal Jelly of Slaughter
+rmc-jelly-2 = Royal Jelly of Resilience
+rmc-jelly-3 = Royal Jelly of Sabotage
+rmc-jelly-4 = Royal Jelly of Proliferation
+rmc-jelly-5 = Royal Jelly of Rejuvenation
 
-rmc-jelly-special-1 = Queen Mother Royal jelly of supremacy
+rmc-jelly-special-1 = Queen Mother's Exalted Jelly of Supremacy
 
 # Jelly UI
 rmc-jelly-recipient = Jelly Recipient

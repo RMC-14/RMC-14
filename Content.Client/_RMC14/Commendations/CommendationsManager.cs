@@ -99,57 +99,59 @@ public sealed class CommendationsManager : IPostInjectInit
             return;
         }
 
-        // Build medals info lazily on first window open
+        window = new CommendationsWindow();
+        window.OnClose += onClose;
+        window.OpenCentered();
+
+        foreach (var commendation in commendations)
+        {
+            window.AddCommendation(commendation.Type, CreateCommendationContainer(commendation));
+        }
+    }
+
+    public CommendationContainer CreateCommendationContainer(Commendation commendation)
+    {
         if (!_medalsInfoBuilt)
         {
             BuildMedalsInfo();
             _medalsInfoBuilt = true;
         }
 
-        window = new CommendationsWindow();
-        window.OnClose += onClose;
-        window.OpenCentered();
-
         var spriteSystem = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
 
-        foreach (var commendation in commendations)
+        var container = new CommendationContainer();
+        container.Title.Text = Loc.GetString("rmc-commendation-title",
+            ("round", commendation.Round),
+            ("name", commendation.Name));
+        container.Description.Text = Loc.GetString("rmc-commendation-description",
+            ("receiver", commendation.Receiver),
+            ("giver", commendation.Giver),
+            ("text", commendation.Text));
+
+        if (TryGetMedalInfo(commendation.Name, out var medalInfo))
         {
-            var container = new CommendationContainer();
-            container.Title.Text = Loc.GetString("rmc-commendation-title",
-                ("round", commendation.Round),
-                ("name", commendation.Name));
-            container.Description.Text = Loc.GetString("rmc-commendation-description",
-                ("receiver", commendation.Receiver),
-                ("giver", commendation.Giver),
-                ("text", commendation.Text));
+            var texture = spriteSystem.Frame0(medalInfo.Icon);
+            var tooltipText = $"[bold]{medalInfo.Name}[/bold]\n[font size=10]{medalInfo.Description}[/font]";
 
-            if (TryGetMedalInfo(commendation.Name, out var medalInfo))
+            container.Icon.Texture = texture;
+            container.Icon.Visible = true;
+            container.Icon.MouseFilter = Control.MouseFilterMode.Pass;
+            container.Icon.TooltipDelay = 0f;
+
+            container.Icon.TooltipSupplier = _ =>
             {
-                var texture = spriteSystem.Frame0(medalInfo.Icon);
-                var tooltipText = $"[bold]{medalInfo.Name}[/bold]\n[font size=10]{medalInfo.Description}[/font]";
+                var label = new RichTextLabel { MaxWidth = 400 };
+                label.SetMessage(FormattedMessage.FromMarkupOrThrow(tooltipText));
 
-                container.Icon.Texture = texture;
-                container.Icon.Visible = true;
-                container.Icon.MouseFilter = Control.MouseFilterMode.Pass;
-                container.Icon.TooltipDelay = 0f;
+                var tooltip = new Tooltip();
+                tooltip.GetChild(0).Children.Clear();
+                tooltip.GetChild(0).Children.Add(label);
 
-                // Set up formatted tooltip
-                container.Icon.TooltipSupplier = _ =>
-                {
-                    var label = new RichTextLabel { MaxWidth = 400 };
-                    label.SetMessage(FormattedMessage.FromMarkupOrThrow(tooltipText));
-
-                    var tooltip = new Tooltip();
-                    tooltip.GetChild(0).Children.Clear();
-                    tooltip.GetChild(0).Children.Add(label);
-
-                    return tooltip;
-                };
-            }
-
-            // Add container to appropriate tab based on commendation type
-            window.AddCommendation(commendation.Type, container);
+                return tooltip;
+            };
         }
+
+        return container;
     }
 
     public void OpenReceivedWindow()
