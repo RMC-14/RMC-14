@@ -432,8 +432,6 @@
         amount: 5
     - name: Special ammunition
       entries:
-      - id: RMCPowerCellSmartgun
-        amount: 4
       - id: RMCMagazineSmartGun
         amount: 4
       #- id: M44 Heavy Speed Loader (.44)

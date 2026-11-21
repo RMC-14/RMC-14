@@ -77,11 +77,20 @@
 
   For more ammo, visit [bold]requisitions[/bold], where you can request up to [bold]two (2) additional drums[/bold]. The [bold]LO[/bold] may approve extra requests, but do not count on it—ammo is limited, and resupply groundside will take time and coordination.
 
+  Extra batteries are available through requisitions as a battery crate. Remove a depleted battery through [bold]Eject → Power cell[/bold] in the weapon's context menu and recharge it in a recharger. Your starting kit includes one battery inside the gun and one spare.
+
   ### Helmet Slots:
   Most [bold]Commanders enforce helmet use[/bold] for Specialist Marines. While this limits fashionable expression, it grants two additional slots for [bold]auto-injectors, a canteen, or personal items[/bold].
 
   ## How to Smartgun
   You've geared up, grabbed a quick meal, and nodded through the briefing. Now, you're sprinting to the [bold]dropship[/bold] with a cigarette between your lips, asking yourself: [italic]"Now what?"[/italic]
+
+  ### Aim Assist:
+  Accuracy improvement and recoil compensation are built into your weapon. Enable [bold]Aim Assist[/bold] to redirect your shots to a visible enemy within two tiles of your cursor. You still need to fire the weapon yourself.
+
+  Conscious enemies take priority over critically injured enemies. IFF excludes friendlies while enabled. Walls, obscuring smoke, and blindness prevent target acquisition.
+
+  Redirected shots receive a [bold]25% accuracy penalty[/bold]; directly clicking your target avoids this penalty. Helmets do not affect it. Aim assist consumes enough power to exhaust a full battery in roughly [bold]750 rounds[/bold], so use it when needed and conserve your batteries.
 
   ### Landing and Positioning:
   1. [bold]Rally on your Squad Leader (SL)[/bold] and follow their commands.
