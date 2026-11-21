@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.Sleeper;
 using Content.Shared._RMC14.Mobs;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
@@ -27,6 +28,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
@@ -289,6 +291,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var sleepers = EntityQueryEnumerator<SleeperComponent>();
         while (sleepers.MoveNext(out var uid, out var sleeper))
         {
+            _power.SetPowerMode(uid, sleeper.Occupant != null ? RMCPowerMode.Active : RMCPowerMode.Idle);
             if (sleeper.Occupant == null)
                 continue;
 
@@ -301,7 +304,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 continue;
             }
 
-            if (!sleeper.IsFiltering)
+            if (!sleeper.IsFiltering || !_power.IsPowered(uid))
                 continue;
 
             if (time < sleeper.NextDialysisTick)
