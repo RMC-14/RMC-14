@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Dropship.Utility.Components;
+using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Coordinates;
 using Content.Shared.Popups;
@@ -54,7 +55,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
         {
             foreach (var defense in _entityLookup.GetEntitiesInRange(_transform.ToMapCoordinates(dropLocation), deployable.DefenseExclusionRange, LookupFlags.Uncontained))
             {
-                if (!Transform(defense).Anchored)
+                if (TryComp<SentryComponent>(defense, out var comp) && !Transform(defense).Anchored)
                     continue;
 
                 if (!_whitelist.IsValid(blacklist, defense))
@@ -114,6 +115,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             arrivingSound,
             deployerComp.DropScatter,
             deployable.UseParachute);
+
 
         return true;
     }
