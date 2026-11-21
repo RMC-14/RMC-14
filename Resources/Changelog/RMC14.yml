@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Drazamuffin
-  changes:
-  - message: The M85's rate of fire is now on par with the Grenadier Specialist's
-      M83
-    type: Tweak
-  id: 3382
-  time: '2026-06-11T23:36:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9632
 - author: Simon
   changes:
   - message: Add Member UI only shows xenonids not in your or others teams.
@@ -4435,5 +4427,13 @@
   id: 3881
   time: '2026-11-21T03:36:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10293
+- author: Vixting
+  changes:
+  - message: Added a option to enabled centred chat window to the options menu, showing
+      a preview of the message you are writing.
+    type: Add
+  id: 3882
+  time: '2026-11-21T03:40:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10277
 Name: RMC14
 Order: -1
