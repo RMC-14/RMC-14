@@ -1,0 +1,75 @@
+- type: entity
+  parent: RMCPodDoorHybrisaIndestructible
+  id: RMCElevatorDoor
+  name: elevator door
+  suffix: Base
+  components:
+  - type: RMCElevatorDoor
+    openAtIds:
+    - all
+  - type: DoorBolt
+    boltUpSound:
+      path: /Audio/Machines/boltsup.ogg
+      params:
+        volume: -20
+    boltDownSound:
+      path: /Audio/Machines/boltsdown.ogg
+      params:
+        volume: -20
+
+- type: entity
+  parent: RMCElevatorDoor
+  id: RMCElevatorDoorNorth
+  suffix: North
+  components:
+  - type: RMCElevatorDoor
+    openAtIds:
+    - all
+    - north
+
+- type: entity
+  parent: RMCElevatorDoor
+  id: RMCElevatorDoorSouth
+  suffix: South
+  components:
+  - type: RMCElevatorDoor
+    openAtIds:
+    - all
+    - south
+
+- type: entity
+  parent: RMCElevatorDoor
+  id: RMCElevatorDoorEast
+  suffix: East
+  components:
+  - type: RMCElevatorDoor
+    openAtIds:
+    - all
+    - east
+
+- type: entity
+  parent: RMCElevatorDoor
+  id: RMCElevatorDoorWest
+  suffix: West
+  components:
+  - type: RMCElevatorDoor
+    openAtIds:
+    - all
+    - west
+
+- type: entity
+  parent: RMCPodDoorHybrisaIndestructible
+  id: RMCElevatorEntranceDoor
+  name: elevator entrance door
+  components:
+  - type: RMCElevatorDestinationDoor
+  - type: DoorBolt
+    boltUpSound:
+      path: /Audio/Machines/boltsup.ogg
+      params:
+        volume: -20
+    boltDownSound:
+      path: /Audio/Machines/boltsdown.ogg
+      params:
+        volume: -20
+  - type: FTLSmashImmune

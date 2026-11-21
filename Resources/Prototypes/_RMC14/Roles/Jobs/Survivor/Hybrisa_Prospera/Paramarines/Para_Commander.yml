@@ -3,7 +3,7 @@
   id: RMCSurvivorParaCommander
   name: rmc-job-name-para-commander
   ranks:
-    RMCRankParaLieutenantColonel: [ ]
+    RMCRankTSELieutenantColonel: [ ]
   accessGroups:
   - ColonistAllAccessNoArmory
   startingGear: RMCGearParaCommander
@@ -78,5 +78,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaCommander
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_commander_alt

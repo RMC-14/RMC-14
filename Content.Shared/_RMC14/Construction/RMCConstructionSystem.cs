@@ -122,6 +122,9 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (_net.IsClient)
             return false;
 
+        if (amount <= 0)
+            return false;
+
         if (!_prototype.TryIndex<RMCConstructionPrototype>(protoID, out var proto))
             return false;
 
@@ -183,7 +186,8 @@ public sealed class RMCConstructionSystem : EntitySystem
             BreakOnDamage = false,
             MovementThreshold = 0.5f,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            CancelDuplicate = true
+            CancelDuplicate = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);

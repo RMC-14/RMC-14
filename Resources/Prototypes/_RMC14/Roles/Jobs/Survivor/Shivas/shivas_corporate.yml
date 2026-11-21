@@ -6,6 +6,7 @@
   startingGear: RMCGearSurvivorShivasCorporateLiaison
   spawnMenuRoleName: Corporate Liaison (Shivas Survivor)
   camouflageStartingGear: null
+  icon: "CMJobIconLiaison"
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate

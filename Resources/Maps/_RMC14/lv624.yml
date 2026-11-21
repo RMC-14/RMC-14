@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 06/27/2026 14:35:00
-  entityCount: 24083
+  entityCount: 24084
 maps:
 - 1
 grids:
@@ -162740,6 +162740,13 @@ entities:
       pos: -23.5,-76.5
       parent: 1
     - type: InsideEntityStorage
+- proto: VehicleVan
+  entities:
+  - uid: 24084
+    components:
+    - type: Transform
+      pos: -39,-82
+      parent: 1
 - proto: VoiceTrigger
   entities:
   - uid: 22836

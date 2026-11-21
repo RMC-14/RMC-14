@@ -38,10 +38,13 @@
     head: RMCHeadWeYaPilotCap
     ears: RMCHeadsetDistressWeYa
     back: RMCSatchelBlack
-    id: CMIDCardGold
+    id: RMCIDCardPilot
     shoes: RMCShoesLaceup
     jumpsuit: RMCJumpsuitLiaisonPilot
     outerClothing: RMCCoatWeYaPilot
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: RMCSurvivorPresetCorporate
