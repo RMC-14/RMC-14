@@ -17,6 +17,7 @@ chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-marine-sof = SOF
+chat-radio-marine-survivor = Marine Colonial
 
 chat-radio-colony = Colony
 chat-radio-WY = We-Ya
@@ -28,7 +29,7 @@ chat-radio-spp = SPP
 chat-radio-spp-engi = SPP Engi
 chat-radio-spp-med = SPP Med
 chat-radio-spp-cct = SPP CCT
-chat-radio-halcyon = Halcyon Dynamics
+chat-radio-halcyon = Halcyon
 
 chat-radio-royal-marine = Royal Marine
 chat-radio-tse = TSE

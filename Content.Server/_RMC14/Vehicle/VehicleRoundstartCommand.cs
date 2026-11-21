@@ -63,7 +63,7 @@ public sealed class VehicleRoundstartCommand : ToolshedCommand
         string tankResult;
         if (tankReady)
         {
-            tankResult = vehicleSupply.DebugEnsureVehicleOnAnyLift(VehicleTankUnlock, true, out var reason)
+            tankResult = vehicleSupply.DebugEnsureVehicleOnAnyLift(VehicleTankUnlock, out var reason)
                 ? "ensured on vehicle lift"
                 : reason ?? "failed to ensure on vehicle lift";
         }

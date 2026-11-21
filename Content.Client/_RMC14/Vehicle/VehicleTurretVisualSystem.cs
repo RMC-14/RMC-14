@@ -22,6 +22,7 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         UpdatesAfter.Add(typeof(VehicleTurretSystem));
         SubscribeLocalEvent<VehicleTurretVisualComponent, ComponentInit>(OnVisualInit);
         SubscribeLocalEvent<VehicleTurretVisualComponent, AfterAutoHandleStateEvent>(OnVisualState);
+        SubscribeLocalEvent<HardpointIntegrityComponent, AfterAutoHandleStateEvent>(OnIntegrityState);
     }
 
     public override void FrameUpdate(float frameTime)
@@ -29,6 +30,9 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         var query = EntityQueryEnumerator<VehicleTurretVisualComponent>();
         while (query.MoveNext(out var uid, out var visual))
         {
+            if (!visual.SpriteInitialized)
+                UpdateVisual((uid, visual));
+
             if (!TryGetEntity(visual.Turret, out var turretUid))
                 continue;
 
@@ -85,6 +89,14 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         UpdateVisual(ent);
     }
 
+    private void OnIntegrityState(Entity<HardpointIntegrityComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (!HasComp<VehicleTurretComponent>(ent.Owner))
+            return;
+
+        RefreshLinkedVisuals(ent.Owner);
+    }
+
     private void UpdateVisual(Entity<VehicleTurretVisualComponent> ent)
     {
         if (!TryComp(ent.Owner, out SpriteComponent? sprite))
@@ -97,13 +109,14 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
             !string.IsNullOrWhiteSpace(turret.OverlayState))
         {
             SetOverlayDepth((EntityUid) turretUid, sprite);
-            var overlayState = turret.OverlayState;
+            var overlayState = ResolveOverlayState((EntityUid) turretUid, turret);
             if (!string.IsNullOrWhiteSpace(turret.OverlayRsi))
                 sprite.LayerSetState(0, overlayState, turret.OverlayRsi);
             else
                 sprite.LayerSetState(0, overlayState);
 
             sprite.LayerSetVisible(0, true);
+            ent.Comp.SpriteInitialized = true;
             return;
         }
 
@@ -118,6 +131,7 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         sprite.LayerSetRSI(0, turretSprite.BaseRSI);
         sprite.LayerSetState(0, state);
         sprite.LayerSetVisible(0, true);
+        ent.Comp.SpriteInitialized = true;
     }
 
     private void SetOverlayDepth(EntityUid turretUid, SpriteComponent sprite)
@@ -128,6 +142,31 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
 
         if (sprite.DrawDepth != depth)
             sprite.DrawDepth = depth;
+    }
+
+    private string ResolveOverlayState(EntityUid turretUid, VehicleTurretComponent turret)
+    {
+        if (!TryComp(turretUid, out HardpointIntegrityComponent? integrity) ||
+            integrity.Integrity > 0f ||
+            string.IsNullOrWhiteSpace(turret.OverlayDamagedState))
+        {
+            return turret.OverlayState;
+        }
+
+        return turret.OverlayDamagedState;
+    }
+
+    private void RefreshLinkedVisuals(EntityUid turretUid)
+    {
+        var netTurret = GetNetEntity(turretUid);
+        var query = EntityQueryEnumerator<VehicleTurretVisualComponent>();
+        while (query.MoveNext(out var uid, out var visual))
+        {
+            if (visual.Turret != netTurret)
+                continue;
+
+            UpdateVisual((uid, visual));
+        }
     }
 
     private bool TryComputeRenderedTransform(
