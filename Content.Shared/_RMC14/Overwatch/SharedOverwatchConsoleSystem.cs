@@ -1,5 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.AntiAir;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
@@ -47,6 +48,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly RMCShipAntiAirSystem _antiAir = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;
@@ -98,6 +100,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<OrbitalCannonChangedEvent>(OnOrbitalCannonChanged);
         SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
+        SubscribeLocalEvent<RMCShipAntiAirChangedEvent>(OnAntiAirChanged);
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
@@ -156,6 +159,24 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         {
             console.NextOrbitalLaunch = _timing.CurTime + ev.Cooldown;
             Dirty(uid, console);
+        }
+    }
+
+    private void OnAntiAirChanged(ref RMCShipAntiAirChangedEvent ev)
+    {
+        if (_net.IsClient)
+            return;
+
+        var consoles = EntityQueryEnumerator<OverwatchConsoleComponent>();
+        while (consoles.MoveNext(out var uid, out var console))
+        {
+            if (!console.ShowAntiAirStatus)
+                continue;
+
+            if (!_ui.IsUiOpen(uid, OverwatchConsoleUI.Key))
+                continue;
+
+            _ui.SetUiState(uid, OverwatchConsoleUI.Key, GetOverwatchBuiState((uid, console)));
         }
     }
 
@@ -688,10 +709,10 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private OverwatchConsoleBuiState GetOverwatchBuiState(Entity<OverwatchConsoleComponent> console)
     {
-        return GetOverwatchBuiState(console.Comp);
+        return GetOverwatchBuiState(console.Owner, console.Comp);
     }
 
-    private OverwatchConsoleBuiState GetOverwatchBuiState(OverwatchConsoleComponent console)
+    private OverwatchConsoleBuiState GetOverwatchBuiState(EntityUid owner, OverwatchConsoleComponent console)
     {
         var squads = new List<OverwatchSquad>();
         var marines = new Dictionary<NetEntity, List<OverwatchMarine>>();
@@ -714,7 +735,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             squads.Add(squad);
         }
 
-        return new OverwatchConsoleBuiState(squads, marines);
+        var antiAir = console.ShowAntiAirStatus
+            ? _antiAir.GetStatus(owner)
+            : default;
+
+        return new OverwatchConsoleBuiState(squads, marines, antiAir);
     }
 
     public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)
@@ -850,15 +875,13 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         _nextUpdateTime = time + _updateEvery;
 
-        OverwatchConsoleBuiState? state = null;
         var query = EntityQueryEnumerator<OverwatchConsoleComponent>();
         while (query.MoveNext(out var uid, out var console))
         {
             if (!_ui.IsUiOpen(uid, OverwatchConsoleUI.Key))
                 continue;
 
-            state ??= GetOverwatchBuiState(console);
-            _ui.SetUiState(uid, OverwatchConsoleUI.Key, state);
+            _ui.SetUiState(uid, OverwatchConsoleUI.Key, GetOverwatchBuiState((uid, console)));
         }
     }
 
