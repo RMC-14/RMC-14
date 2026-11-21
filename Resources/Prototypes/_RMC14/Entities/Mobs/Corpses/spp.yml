@@ -123,7 +123,7 @@
     id: RMCIDCardColonistScientist
     mask: CMMaskSterile
     eyes: RMCGlassesReagentHUDGlasses
-    ears: RMCHeadsetSPP
+    ears: RMCHeadsetDistressSPP
     head: CMHeadCapSurgGreen
   storage:
     back:
