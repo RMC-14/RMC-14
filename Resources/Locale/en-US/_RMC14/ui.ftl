@@ -49,6 +49,9 @@ rmc-ui-audio-emotes-rodentia = Play emotes for rodentias
 rmc-ui-audio-emotes-feroxi = Play emotes for feroxis
 rmc-ui-audio-emotes-skrell = Play emotes for skrells
 
+rmc-ui-sounds = Sounds
+rmc-ui-audio-sounds-play = Play {$sound} sounds
+
 cm-ui-roadmap = Roadmap
 rmc-ui-roadmap-orbital-bombardment = Orbital bombardment
 
