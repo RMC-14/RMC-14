@@ -158,6 +158,56 @@
     - popup: rmc-pamphlets-mp-warning
       jobProto: CMMilitaryPolice
 
+# Surgeon
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletSurgeon
+  name: surgical practice manual
+  description: "An authorized guide published by the United Nations Medical Service covering emergency operations, triage, and rapid incisions. Skimming the required compliance chapters grants you the official title of Surgeon, though a disclaimer states that the UN Medical Service takes no responsibility for any pizza related medical malpractice."
+  components:
+  - type: Sprite
+    state: pamphlet_surgeon
+  - type: SkillPamphlet
+    bypassSkill: true
+    bypassLimit: false
+    giveJobTitle: rmc-job-name-surgeon
+    givePrefix: rmc-job-prefix-surgeon
+    isAppendPrefix: false
+    giveIcon:
+      sprite: _RMC14/Interface/job_icons/UNMC/medical.rsi
+      state: hudsquad_surgeon
+    giveMapBlip:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: surgeon
+    jobWhitelists:
+    - popup: rmc-pamphlets-doctor-warning
+      jobProto: CMDoctor
+
+# Pharmaceutical Physician
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletPharma
+  name: pharmaceutical physician manual
+  description: "A heavy reference manual packed with chemical formulas, dosage charts, and rapid-synthesis guides. Reading it grants you the official title of Pharmaceutical Physician, proving you know your way around a chemical dispenser."
+  components:
+  - type: Sprite
+    state: pamphlet_pharma
+  - type: SkillPamphlet
+    bypassSkill: true
+    bypassLimit: false
+    giveJobTitle: rmc-job-name-pharmacist 
+    givePrefix: rmc-job-prefix-pharmacist
+    isAppendPrefix: false
+    giveIcon:
+      sprite: _RMC14/Interface/job_icons/UNMC/medical.rsi
+      state: hudsquad_pharmacist
+    giveMapBlip:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: pharmacist
+    jobWhitelists:
+    - popup: rmc-pamphlets-doctor-warning
+      jobProto: CMDoctor
+
 # K9 Handler - not implemented yet
 - type: entity
   parent: CMPamphlet
