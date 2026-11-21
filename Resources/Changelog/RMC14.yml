@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Simon
-  changes:
-  - message: Add Member UI was erroneously showing dead xenos in the window, it is
-      fixed now.
-    type: Fix
-  id: 3390
-  time: '2026-06-12T23:27:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10139
 - author: Dygon
   changes:
   - message: Fixed the sniper targeting visual appearing on a different map.
@@ -4454,5 +4446,12 @@
   id: 3889
   time: '2026-11-21T22:52:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9618
+- author: TwistedCicrularConvexLens
+  changes:
+  - message: Flares now correctly let you know when they're spent on examination.
+    type: Fix
+  id: 3890
+  time: '2026-11-21T23:02:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9094
 Name: RMC14
 Order: -1
