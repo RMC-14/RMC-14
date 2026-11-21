@@ -84,6 +84,11 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-pistol
+    whitelist:
+      components:
+      - Xeno
   - type: RMCGunChamber
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg

@@ -44,6 +44,11 @@
   - type: RequiresSkill
     skills:
       RMCSkillEngineer: 1
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-c4
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCExplosiveBreachingCharge
