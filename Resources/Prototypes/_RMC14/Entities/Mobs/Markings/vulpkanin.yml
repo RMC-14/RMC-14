@@ -282,7 +282,7 @@
       state: m_snout_fscanidalt3_FRONT_secondary
     - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
       state: m_snout_fscanidalt3_FRONT_tertiary
-  
+
 - type: marking
   id: VulpSnoutWolf
   bodyPart: Snout
@@ -946,3 +946,12 @@
   sprites:
     - sprite: _RMC14/Mobs/Vulpkanin/straight_tail.rsi
       state: m_tail_straighttail_primary_wag
+
+  type: marking
+  id: VulpTailFluffyAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
+  - state: fluffy_wag
