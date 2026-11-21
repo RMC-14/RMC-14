@@ -273,6 +273,18 @@
   iconColor: "#727e90"
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Magazine Box (M44 Heavy)
+  id: RMCBoxMagazineRevolverM44HeavyEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazineRevolverM44HeavyEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding many heavy speedloaders with a carrying handle.
+  iconColor: "#727e90"
+  objectType: Item
+
 # M13
 - type: construction
   parent: RMC
@@ -771,6 +783,11 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
+    - to: RMCBoxMagazineRevolverM44HeavyEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
 
     # M34 Incinerator
     - to: RMCBoxFlamerTankEmpty
@@ -956,6 +973,8 @@
     entity: RMCBoxMagazineRevolverM44Empty
   - node: RMCBoxMagazineRevolverM44MarksmanEmpty
     entity: RMCBoxMagazineRevolverM44MarksmanEmpty
+  - node: RMCBoxMagazineRevolverM44HeavyEmpty
+    entity: RMCBoxMagazineRevolverM44HeavyEmpty
 
   # Nailgun
   - node: RMCBoxMagazineSMGNailgunEmpty
