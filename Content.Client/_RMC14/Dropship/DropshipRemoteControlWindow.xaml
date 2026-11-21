@@ -1,0 +1,92 @@
+<controls:DropshipRemoteControlWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship"
+    xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt"
+    Title="{Loc rmc-dropship-remote-ui-title}" MinSize="840 440" SetSize="880 452">
+    <crt:RMCCrtThemeScope Palette="Custom" Effects="HorizontalScanlines" ScanlineOpacity="0.05"
+        CustomForeground="#A3D9AF" CustomBackground="#0A1510" CustomBorder="#456C53"
+        CustomFill="#28543B" CustomFillForeground="#E2F5E6" CustomMuted="#71947C"
+        CustomGood="#8FCC9D" CustomWarning="#D4BB7A"
+        CustomDisabledBackground="#0E1A13" CustomDisabledForeground="#55715F" BorderThickness="1">
+        <BoxContainer Orientation="Horizontal" Margin="5" SeparationOverride="6">
+            <crt:RMCCrtPanel MinWidth="300" MaxWidth="300" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="6">
+                    <crt:RMCCrtLabel Text="{Loc rmc-dropship-remote-ui-dropships}"
+                        Heading="True" TextFontSize="11" />
+                    <crt:RMCCrtOptionButton Name="Dropships" Access="Public" HorizontalExpand="True"
+                        PlaceholderText="{Loc rmc-dropship-no-ships}" />
+                    <crt:RMCCrtLabel Name="Location" Access="Public" TextFontSize="10" />
+                    <crt:RMCCrtLabel Name="Status" Access="Public" TextFontSize="10" />
+                    <crt:RMCCrtLabel Name="StatusDetails" Access="Public" Tone="Muted" TextFontSize="10" />
+                    <crt:RMCCrtLabel Name="LinkedLandingZone" Access="Public"
+                        Tone="Muted" TextFontSize="10" Visible="False" />
+                    <crt:RMCCrtSeparator MinHeight="1" Margin="0 3" />
+                    <crt:RMCCrtLabel Text="{Loc rmc-dropship-manual-flight}"
+                        Heading="True" TextFontSize="11" />
+                    <crt:RMCCrtLabel Text="{Loc rmc-dropship-remote-ui-destinations}" TextFontSize="10" />
+                    <crt:RMCCrtOptionButton Name="Destinations" Access="Public" HorizontalExpand="True"
+                        PlaceholderText="{Loc rmc-dropship-no-destinations}" />
+                    <crt:RMCCrtActionButton Name="ManualLaunchButton" Access="Public" IconState="paper_plane"
+                        Text="{Loc rmc-dropship-remote-ui-launch-selected}" MinHeight="32"
+                        IconSize="14" ContentMargin="7 4" TextFontSize="10" />
+                    <Control VerticalExpand="True" />
+                    <crt:RMCCrtLabel Text="{Loc rmc-dropship-manual-override-hint}"
+                        Tone="Warning" TextFontSize="10" />
+                </BoxContainer>
+            </crt:RMCCrtPanel>
+
+            <crt:RMCCrtPanel HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="9" SeparationOverride="7">
+                    <crt:RMCCrtLabel Text="{Loc rmc-dropship-remote-ui-autopilot}"
+                        Heading="True" TextFontSize="11" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+                        <crt:RMCCrtActionButton Name="CycleButton" Access="Public" Variant="Navigation"
+                            Text="{Loc rmc-dropship-remote-ui-cycle}" TextFontSize="10" MinHeight="30"
+                            ToolTip="{Loc rmc-dropship-cycle-description}"
+                            ContentMargin="7 4" HorizontalExpand="True" />
+                        <crt:RMCCrtActionButton Name="RecallOnlyButton" Access="Public" Variant="Navigation"
+                            Text="{Loc rmc-dropship-remote-ui-recall-only}" TextFontSize="10" MinHeight="30"
+                            ToolTip="{Loc rmc-dropship-recall-description}"
+                            ContentMargin="7 4" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <crt:RMCCrtTwoColumnContainer ColumnSeparation="6" HorizontalExpand="True">
+                        <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                            <crt:RMCCrtLabel Text="{Loc rmc-dropship-remote-ui-hangar}" TextFontSize="10" />
+                            <crt:RMCCrtOptionButton Name="Hangars" Access="Public" HorizontalExpand="True"
+                                PlaceholderText="{Loc rmc-dropship-no-destinations}" />
+                        </BoxContainer>
+                        <crt:RMCCrtSeparator Orientation="Vertical" MinWidth="1" MaxWidth="1" />
+                        <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                            <crt:RMCCrtLabel Text="{Loc rmc-dropship-remote-ui-landing-zones}" TextFontSize="10" />
+                            <crt:RMCCrtOptionButton Name="LandingZones" Access="Public" HorizontalExpand="True"
+                                PlaceholderText="{Loc rmc-dropship-no-destinations}" />
+                        </BoxContainer>
+                    </crt:RMCCrtTwoColumnContainer>
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <crt:RMCCrtLabel Text="{Loc rmc-dropship-remote-ui-delay}"
+                            TextFontSize="10" VerticalAlignment="Center" />
+                        <crt:RMCCrtLineEdit Name="DelayEdit" Access="Public" MinWidth="60" MaxWidth="72" />
+                        <crt:RMCCrtLabel Name="DelayHint" Access="Public" Tone="Muted"
+                            TextFontSize="10" VerticalAlignment="Center" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <crt:RMCCrtActionButton Name="ApplyButton" Access="Public" IconState="cog" Variant="Filled"
+                        Text="{Loc rmc-dropship-apply-route}" MinHeight="32"
+                        IconSize="14" ContentMargin="7 4" TextFontSize="10" />
+                    <crt:RMCCrtSeparator MinHeight="1" Margin="0 2" />
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+                        <crt:RMCCrtActionButton Name="LaunchNowButton" Access="Public" IconState="paper_plane"
+                            Text="{Loc rmc-dropship-remote-ui-autopilot-launch}" MinHeight="30"
+                            IconSize="14" ContentMargin="7 4" TextFontSize="10" HorizontalExpand="True" />
+                        <crt:RMCCrtActionButton Name="RecallNowButton" Access="Public" IconState="home"
+                            Text="{Loc rmc-dropship-remote-ui-recall-now}" MinHeight="30"
+                            IconSize="14" ContentMargin="7 4" TextFontSize="10" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <Control VerticalExpand="True" />
+                    <crt:RMCCrtActionButton Name="DisableButton" Access="Public" IconState="ban" Variant="Danger"
+                        Text="{Loc rmc-dropship-remote-ui-disable}" MinHeight="30"
+                        IconSize="14" ContentMargin="7 4" TextFontSize="10" />
+                </BoxContainer>
+            </crt:RMCCrtPanel>
+        </BoxContainer>
+    </crt:RMCCrtThemeScope>
+</controls:DropshipRemoteControlWindow>

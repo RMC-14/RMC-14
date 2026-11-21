@@ -42,3 +42,8 @@
     light_boost: 4.0
     light_gamma: 1.0
     light_whitepoint: 1.0
+
+- type: shader
+  id: RMCCrtUiEffects
+  kind: source
+  path: "/Textures/_RMC14/Shaders/crt_ui.swsl"

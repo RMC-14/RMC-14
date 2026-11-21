@@ -1,0 +1,12 @@
+<crt:RMCCrtOptionButton xmlns="https://spacestation14.io"
+                       xmlns:crt="clr-namespace:Content.Client._RMC14.UserInterface.Crt">
+    <crt:RMCCrtActionButton Name="Button" ContentAlignment="Left" ContentMargin="8 5"
+                            TextFontSize="10" HorizontalExpand="True" MinHeight="30" />
+    <Popup Name="OptionsPopup">
+        <crt:RMCCrtPanel BackgroundOpacity="1">
+            <ScrollContainer Name="Scroll" HScrollEnabled="False" MaxHeight="280" ReturnMeasure="True">
+                <BoxContainer Name="Options" Orientation="Vertical" />
+            </ScrollContainer>
+        </crt:RMCCrtPanel>
+    </Popup>
+</crt:RMCCrtOptionButton>

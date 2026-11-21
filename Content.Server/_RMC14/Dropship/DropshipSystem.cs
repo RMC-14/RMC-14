@@ -22,7 +22,6 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Administration.Logs;
-using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
@@ -43,10 +42,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Dropship;
 
-public sealed class DropshipSystem : SharedDropshipSystem
+public sealed partial class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoorSystem _door = default!;
@@ -56,17 +57,15 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly PointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+    [Dependency] private readonly RMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
-    [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly RMCPvsSystem _rmcPvs = default!;
-    [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
 
     private EntityQuery<DockingComponent> _dockingQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -80,10 +79,15 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private bool _hijack;
 
     private const float DepartureLocationSearchRange = 12;
+    private const float DropshipStartupTimeSeconds = 10;
+    private const float DropshipTravelTimeSeconds = 100;
+    private const float DropshipPrearrivalTimeSeconds = 10;
+    private const float DropshipRechargeTimeSeconds = 120;
 
     public override void Initialize()
     {
         base.Initialize();
+        InitializeAutopilot();
 
         _dockingQuery = GetEntityQuery<DockingComponent>();
         _doorQuery = GetEntityQuery<DoorComponent>();
@@ -107,8 +111,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             subs =>
             {
                 subs.Event<DropshipLockdownMsg>(OnDropshipNavigationLockdownMsg);
-                subs.Event<DropshipRemoteControlToggleMsg>(OnDropshipRemoteControlToggleMsg);
                 subs.Event<DropshipLaunchAlarmToggleMsg>(OnDropshipLaunchAlarmToggleMsg);
+                subs.Event<DropshipNavigationAutopilotDisableMsg>(OnDropshipNavigationAutopilotDisableMsg);
             });
 
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
@@ -198,6 +202,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         RefreshUI();
+        RefreshRemoteControlConsoles();
     }
 
     private void OnBeforeFTLStarted(Entity<DropshipComponent> ent, ref BeforeFTLStartedEvent args)
@@ -208,6 +213,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
     {
         RefreshUI();
+        RefreshRemoteControlConsoles();
     }
 
     private void OnFtlRequested<T>(Entity<DropshipComponent> ent, ref T args)
@@ -259,13 +265,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
         OnRefreshUI((grid, dropship), ref args);
     }
 
-    private void OnDropshipRemoteControlToggleMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipRemoteControlToggleMsg args)
-    {
-        ent.Comp.RemoteControl = !ent.Comp.RemoteControl;
-        Dirty(ent, ent.Comp);
-        RefreshUI();
-    }
-
     private void OnDropshipLaunchAlarmToggleMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipLaunchAlarmToggleMsg args)
     {
         if (!TryGetGridDropship(ent, out var dropship))
@@ -299,7 +298,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void OnNavigationLockout(Entity<DropshipNavigationComputerComponent> ent, ref DropshipLockoutDoAfterEvent args)
     {
         ent.Comp.LockedOutUntil = _timing.CurTime + ent.Comp.LockoutDuration;
-        ent.Comp.RemoteControl = false;
         Dirty(ent);
 
         _ui.CloseUis(ent.Owner);
@@ -377,9 +375,17 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
     }
 
-    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null, bool offset = false)
+    public override bool FlyTo(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        EntityUid? user,
+        bool hijack = false,
+        float? startupTime = null,
+        float? hyperspaceTime = null,
+        bool offset = false,
+        DropshipLaunchSource source = DropshipLaunchSource.ManualNavigation)
     {
-        base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
+        base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime, offset, source);
 
         _hijack = hijack;
         var dropshipId = Transform(computer).GridUid;
@@ -415,10 +421,26 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
             EnsureComp<DropshipInFlyByComponent>(dropshipId.Value);
         }
-        else if (!hijack && newDestination != null && newDestination.Ship != null)
+        else if (!hijack &&
+                 newDestination != null &&
+                 newDestination.Ship != null &&
+                 newDestination.Ship != dropshipId.Value)
         {
             Log.Warning($"{ToPrettyString(user)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");
+            return false;
         }
+
+        var autopilot = EnsureComp<DropshipAutopilotComponent>(dropshipId.Value);
+        if (source == DropshipLaunchSource.RoundInit &&
+            newDestination != null &&
+            ResolveDestinationKind((destination, newDestination)) == DropshipDestinationKind.Hangar)
+        {
+            autopilot.RouteHangar ??= destination;
+            autopilot.Delay = ClampAutopilotDelay(autopilot.Delay == TimeSpan.Zero ? _autopilotDefaultDelay : autopilot.Delay);
+            Dirty(dropshipId.Value, autopilot);
+        }
+
+        DisableAutopilotForManualOverride((dropshipId.Value, dropship), autopilot, source, user);
 
         if (TryComp(dropship.Destination, out DropshipDestinationComponent? oldDestination))
         {
@@ -431,6 +453,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
             newDestination.Ship = dropshipId;
             Dirty(destination, newDestination);
         }
+
+        if (!hijack)
+            startupTime ??= DropshipStartupTimeSeconds;
 
         if (hyperspaceTime == null)
         {
@@ -451,12 +476,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 }
                 else
                 {
-                    hyperspaceTime = _shuttle.DefaultTravelTime;
+                    hyperspaceTime = DropshipTravelTimeSeconds;
                     if (hasSkill)
                         hyperspaceTime *= computer.Comp.SkillTravelMultiplier;
                 }
 
-                dropship.RechargeTime = TimeSpan.FromSeconds(_config.GetCVar(CCVars.FTLCooldown) * rechargeMultiplier);
+                dropship.RechargeTime = TimeSpan.FromSeconds(DropshipRechargeTimeSeconds * rechargeMultiplier);
 
                 foreach (var point in dropship.AttachmentPoints)
                 {
@@ -479,7 +504,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                     }
                 }
 
-                hyperspaceTime += _config.GetCVar(CCVars.FTLArrivalTime);
+                hyperspaceTime += DropshipPrearrivalTimeSeconds;
             }
         }
 
@@ -528,6 +553,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _adminLog.Add(LogType.RMCDropshipLaunch,
             $"{ToPrettyString(user):player} {(hijack ? "hijacked" : "launched")} {ToPrettyString(dropshipId):dropship} to {ToPrettyString(destination):destination}");
 
+        RefreshUI(computer);
+        RefreshRemoteControlConsoles();
         return true;
     }
 
@@ -540,6 +567,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             return;
 
         var doorLockStatus = GetDoorLockStatus(grid);
+        computer.Comp.DoorLockStatus = doorLockStatus;
+        computer.Comp.Autopilot = GetNavigationAutopilotStatus(grid);
 
         if (!TryComp(grid, out FTLComponent? ftl) ||
             !ftl.Running ||
@@ -566,8 +595,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destinations.Add(destination);
             }
 
-            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, doorLockStatus, computer.Comp.RemoteControl, computer.Comp.LaunchAlarmStatus);
-            _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
+            computer.Comp.FlyBy = flyBy;
+            computer.Comp.Destinations = destinations;
+            computer.Comp.TravelState = null;
+            Dirty(computer);
             return;
         }
 
@@ -588,8 +619,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
             }
         }
 
-        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName, doorLockStatus, computer.Comp.RemoteControl, computer.Comp.LaunchAlarmStatus);
-        _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
+        computer.Comp.TravelState = ftl.State;
+        computer.Comp.TravelTime = ftl.StateTime;
+        computer.Comp.TravelDestination = destinationName;
+        computer.Comp.TravelDeparture = departureName;
+        Dirty(computer);
     }
 
     protected override bool IsShuttle(EntityUid dropship)
@@ -851,6 +885,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 continue;
             }
         }
+
+        UpdateAutopilots(time);
 
         if (Count<PrimaryLandingZoneComponent>() > 0)
             return;
