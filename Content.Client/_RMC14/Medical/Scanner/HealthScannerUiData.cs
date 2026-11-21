@@ -200,7 +200,7 @@ public sealed class HealthScannerUiData
         window.ChemicalContentsSeparator.Visible = anyChemicals;
         window.ChemicalsContainer.Visible = anyChemicals;
 
-        window.BloodTypeLabel.Text = "Blood:";
+        window.BloodTypeLabel.Text = Loc.GetString("rmc-health-analyzer-blood");
         var bloodMsg = new FormattedMessage();
         bloodMsg.PushColor(Color.FromHex("#25B732"));
 
@@ -211,7 +211,7 @@ public sealed class HealthScannerUiData
         window.BloodAmountLabel.SetMessage(bloodMsg);
 
         if (uiState.Bleeding)
-            window.Bleeding.SetMarkup(" [bold][color=#DF3E3E]\\[Bleeding\\][/color][/bold]");
+            window.Bleeding.SetMarkup(Loc.GetString("rmc-health-analyzer-bleeding"));
         else
             window.Bleeding.SetMessage(string.Empty);
 
@@ -224,7 +224,7 @@ public sealed class HealthScannerUiData
         }
         else
         {
-            temperatureMsg.AddText("None");
+            temperatureMsg.AddText(Loc.GetString("rmc-health-analyzer-temperature-none"));
         }
 
         window.BodyTemperatureLabel.SetMessage(temperatureMsg);

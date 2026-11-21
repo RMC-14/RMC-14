@@ -1,0 +1,9 @@
+rmc-armor-adjust-title = Armor Values
+rmc-armor-adjust-bullet = Bullet Armor
+rmc-armor-adjust-bullet-placeholder = Enter bullet armor value
+rmc-armor-adjust-melee = Melee Armor
+rmc-armor-adjust-melee-placeholder = Enter melee armor value
+rmc-armor-adjust-explosion = Explosion Armor
+rmc-armor-adjust-explosion-placeholder = Enter explosion armor value
+rmc-armor-adjust-bio = Bio Armor
+rmc-armor-adjust-bio-placeholder = Enter bio armor value

@@ -134,7 +134,7 @@ public sealed class AegisLobbyEventSystem : EntitySystem
         AegisSharedAnnouncement.AnnounceToBoth(systemManager, _scheduledMessage);
 
         // Send fax to Marine High Command
-        if (!SendCICFax(systemManager, entityManager, _scheduledMessage, "RMCPaperAegisLobbyInfoFax", "UNS Oberon"))
+        if (!SendCICFax(systemManager, entityManager, _scheduledMessage, "RMCPaperAegisLobbyInfoFax", Loc.GetString("rmc-aegis-fax-sender")))
             Log.Info("AEGIS event failed to send any faxes!");
 
         _req.CreateSpecialDelivery("RMCCrateAegisLobby");

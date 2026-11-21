@@ -20,3 +20,5 @@ rmc-gm-request-command-ui-too-many-arguments-error = Too many arguments.
 
 rmc-gm-request-log-entity-default = Unknown
 rmc-gm-request-log-entity-ghost = Observer
+
+rmc-gm-request-sent = REQUEST <{$sender}> has sent a request!

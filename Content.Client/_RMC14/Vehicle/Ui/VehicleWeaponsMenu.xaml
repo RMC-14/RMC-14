@@ -21,13 +21,13 @@
         </ScrollContainer>
 
         <BoxContainer Orientation="Horizontal" SeparationOverride="0" HorizontalExpand="True">
-            <CheckBox Name="AutoTurretToggle" Access="Public" ToggleMode="True" Text="Auto Turret"/>
-            <CheckBox Name="StabilizationToggle" Access="Public" ToggleMode="True" Text="Stabilization"/>
+            <CheckBox Name="AutoTurretToggle" Access="Public" ToggleMode="True" Text="{Loc 'rmc-vehicle-weapons-auto-turret'}"/>
+            <CheckBox Name="StabilizationToggle" Access="Public" ToggleMode="True" Text="{Loc 'rmc-vehicle-weapons-stabilization'}"/>
         </BoxContainer>
 
         <Label Name="AmmoCounter"
                Access="Public"
-               Text="Ammo: --"
+               Text="{Loc 'rmc-vehicle-weapons-ammo-none'}"
                FontColorOverride="#C7D9ED"
                HorizontalExpand="True"
                ClipText="True"/>

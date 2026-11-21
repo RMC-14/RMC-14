@@ -23,3 +23,7 @@ rmc-construction-name = construction
 rmc-construction-non-anchorable =  It cannot be anchored nor unanchored.
 
 rmc-construction-vehicle = You can't build inside a vehicle!
+
+rmc-construction-window-title = Construction
+rmc-construction-window-title-using = Construction using the {$item}
+rmc-construction-window-amount-left = Amount Left: {$amount}

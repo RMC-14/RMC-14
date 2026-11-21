@@ -2,5 +2,5 @@
 
 public interface ICMSurgeryToolComponent
 {
-    public string ToolName { get; }
+    public LocId ToolName { get; }
 }

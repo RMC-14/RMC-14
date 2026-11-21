@@ -219,7 +219,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         using (args.PushGroup(nameof(CraftsIntoMolotovComponent)))
         {
-            args.PushMarkup("[color=cyan]You can turn this into a molotov with a piece of paper![/color]");
+            args.PushMarkup(Loc.GetString("rmc-flammable-molotov-examine"));
         }
     }
 
@@ -351,11 +351,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         Pat(ent.Owner, patter.Stacks);
 
         _audio.PlayPredicted(patter.Sound, user, user);
-        _popup.PopupClient($"You try to put out the fire on {Name(ent)}!", ent, user, PopupType.SmallCaution);
-        _popup.PopupEntity($"{Name(user)} tries to put out the fire on you!", ent, ent, PopupType.SmallCaution);
+        _popup.PopupClient(Loc.GetString("rmc-flammable-pat-fire-user", ("target", Name(ent))), ent, user, PopupType.SmallCaution);
+        _popup.PopupEntity(Loc.GetString("rmc-flammable-pat-fire-target", ("user", Name(user))), ent, ent, PopupType.SmallCaution);
 
         var others = Filter.PvsExcept(ent).RemoveWhereAttachedEntity(e => e == user || e == ent.Owner);
-        _popup.PopupEntity($"{Name(user)} tries to put out the fire on {Name(ent)}!", ent, others, true);
+        _popup.PopupEntity(Loc.GetString("rmc-flammable-pat-fire-others", ("user", Name(user)), ("target", Name(ent))), ent, others, true);
 
     }
 
@@ -661,7 +661,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             solution.Volume <= FixedPoint2.Zero)
         {
             if (popup)
-                _popup.PopupClient($"The {Name(ent)} is empty...", ent, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("rmc-flammable-empty", ("item", Name(ent))), ent, user, PopupType.SmallCaution);
 
             return false;
         }
@@ -679,7 +679,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         {
             if (popup)
             {
-                var msg = $"There's not enough flammable liquid in the {Name(ent)}!";
+                var msg = Loc.GetString("rmc-flammable-not-enough-liquid", ("container", Name(ent)));
                 _popup.PopupClient(msg, ent, user, PopupType.SmallCaution);
             }
 

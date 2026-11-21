@@ -134,7 +134,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         // Only construct-type nodes can be interacted with to build walls
         if (node.Comp.NodeType != DesignNodeType.Construct)
         {
-            _popup.PopupClient("This design node cannot be used to build walls.", node, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-design-node-not-construct"), node, user, PopupType.SmallCaution);
             return;
         }
 

@@ -142,7 +142,7 @@ public abstract class RMCHandsSystem : EntitySystem
 
         AlternativeVerb unequipVerb = new()
         {
-            Text = "Unequip",
+            Text = Loc.GetString("rmc-hands-verb-unequip"),
             Act = () =>
             {
                 if (_inventory.TryGetContainingSlot(ent.Owner, out slot) &&

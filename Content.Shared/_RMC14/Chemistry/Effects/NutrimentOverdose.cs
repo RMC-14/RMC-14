@@ -24,8 +24,10 @@ public sealed partial class NutrimentOverdose : EntityEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Causes [color=yellow]vomiting[/color] and [color=red]slowdown[/color] above [color=yellow]{Overdose}u[/color].\n" +
-               $"Removes [color=green]{PercentRate * 100}%[/color] or [color=green]{MinimumRate}u[/color] of Nutriment per second while above [color=yellow]{Overdose}u[/color]";
+        return Loc.GetString("rmc-reagent-effect-guidebook-nutriment-overdose",
+            ("overdose", Overdose.ToString()),
+            ("percent", (PercentRate * 100).ToString()),
+            ("minimum", MinimumRate.ToString()));
     }
 
     public override void Effect(EntityEffectBaseArgs args)

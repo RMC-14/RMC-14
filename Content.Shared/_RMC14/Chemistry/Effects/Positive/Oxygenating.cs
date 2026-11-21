@@ -21,12 +21,15 @@ public sealed partial class Oxygenating : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var healing = ActualPotency >= 3
-            ? $"Heals [color=green]all[/color] airloss damage and removes [color=green]{PotencyPerSecond}[/color] Lexorin from the bloodstream."
-            : $"Heals [color=green]{PotencyPerSecond}[/color] airloss damage and removes [color=green]{PotencyPerSecond}[/color] Lexorin from the bloodstream.";
+            ? Loc.GetString("rmc-reagent-effect-guidebook-oxygenating-heal-all", ("potency", PotencyPerSecond.ToString()))
+            : Loc.GetString("rmc-reagent-effect-guidebook-oxygenating-heal", ("potency", PotencyPerSecond.ToString()));
 
-        return $"{healing}\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond * 0.5}[/color] toxin damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] brute and [color=red]{PotencyPerSecond * 2}[/color] toxin damage";
+        var overdose = Loc.GetString("rmc-reagent-effect-guidebook-oxygenating-overdose",
+            ("potency", PotencyPerSecond.ToString()),
+            ("potencyX2", (PotencyPerSecond * 2).ToString()),
+            ("potencyHalf", (PotencyPerSecond * 0.5).ToString()));
+
+        return $"{healing}\n{overdose}";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

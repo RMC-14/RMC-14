@@ -45,15 +45,15 @@ public sealed partial class SelectDestinationTunnelWindow : DefaultWindow
     {
         if (selectedTunnelName == null)
         {
-            SelectedTunnelLabel.Text = "None selected";
-            SelectedTunnelLabel.ToolTip = "None selected";
+            SelectedTunnelLabel.Text = Loc.GetString("rmc-xeno-ui-tunnel-none-selected");
+            SelectedTunnelLabel.ToolTip = Loc.GetString("rmc-xeno-ui-tunnel-none-selected");
             SelectedTunnelLabel.StyleClasses.Clear();
             SelectedTunnelLabel.StyleClasses.Add("LabelSecondary");
             SelectButton.Disabled = true;
         }
         else
         {
-            var displayText = $"Selected: {selectedTunnelName}";
+            var displayText = Loc.GetString("rmc-xeno-ui-tunnel-selected", ("name", selectedTunnelName));
             SelectedTunnelLabel.Text = displayText;
             SelectedTunnelLabel.ToolTip = displayText;
             SelectedTunnelLabel.StyleClasses.Clear();
@@ -65,8 +65,8 @@ public sealed partial class SelectDestinationTunnelWindow : DefaultWindow
     public void UpdateCurrentTunnelDisplay(string? currentTunnelName)
     {
         var displayText = currentTunnelName != null
-            ? $"Current: {currentTunnelName}"
-            : "Current: Unknown";
+            ? Loc.GetString("rmc-xeno-ui-tunnel-current", ("name", currentTunnelName))
+            : Loc.GetString("rmc-xeno-ui-tunnel-current-unknown");
         CurrentTunnelLabel.Text = displayText;
         CurrentTunnelLabel.ToolTip = displayText;
     }

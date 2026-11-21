@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    Title="Dropship Terminal"
+    Title="{Loc 'rmc-dropship-terminal-title'}"
     MinSize="400 200">
     <PanelContainer>
         <PanelContainer.PanelOverride>
@@ -17,7 +17,7 @@
                     <controls:DropshipButton Name="SummonButton" Access="Public"
                                              Margin="1" BackgroundColor="#004E25"
                                              BorderColor="#02E74E" BorderThickness="1"
-                                             Text="Summon" Disabled="True" />
+                                             Text="{Loc 'rmc-dropship-terminal-summon'}" Disabled="True" />
                 </BoxContainer>
             </BoxContainer>
             <cc:HSeparator Color="#02E74E" />

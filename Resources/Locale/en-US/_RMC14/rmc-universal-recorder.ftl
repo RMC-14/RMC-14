@@ -58,3 +58,5 @@ rmc-universal-recorder-tape-popup-unwind = You pull out all the tape!
 rmc-universal-recorder-tape-popup-respool-start = You start winding the tape back in...
 rmc-universal-recorder-tape-popup-respool-cancel = You stop rewinding the tape.
 rmc-universal-recorder-tape-popup-respool-finish = You wind the tape back in.
+
+rmc-universal-recorder-duration = {$minutes}m {$seconds}s

@@ -33,7 +33,7 @@ public sealed partial class HiveTeamMemberWindow : DefaultWindow
 
     public void UpdateState(HiveTeamMemberBuiState state, Func<EntProtoId?, Texture?> getTexture)
     {
-        Title = $"Fireteam {state.TeamNumber}: {state.RoleName}";
+        Title = Loc.GetString("rmc-xeno-ui-fireteam-title-team", ("number", state.TeamNumber), ("role", state.RoleName));
         TeamLabel.Text = state.RoleName;
 
         LeaderSlot.DisposeAllChildren();
@@ -49,7 +49,7 @@ public sealed partial class HiveTeamMemberWindow : DefaultWindow
         {
             LeaderSlot.AddChild(new Label
             {
-                Text = "No leader assigned",
+                Text = Loc.GetString("rmc-xeno-ui-hive-team-no-leader"),
                 HorizontalAlignment = HAlignment.Center,
                 FontColorOverride = Color.FromHex("#666666"),
             });
@@ -60,7 +60,7 @@ public sealed partial class HiveTeamMemberWindow : DefaultWindow
         {
             MembersSlot.AddChild(new Label
             {
-                Text = "No members assigned",
+                Text = Loc.GetString("rmc-xeno-ui-hive-team-no-members"),
                 HorizontalAlignment = HAlignment.Center,
                 FontColorOverride = Color.FromHex("#666666"),
             });

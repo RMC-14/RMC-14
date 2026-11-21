@@ -1,10 +1,10 @@
 <cc:XenoPickerWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.HiveTeam"
-    Title="Select Xenonid"
+    Title="{Loc 'rmc-xeno-ui-xeno-picker-title'}"
     SetSize="300 400">
     <BoxContainer Orientation="Vertical">
-        <LineEdit Name="SearchBar" Access="Public" PlaceHolder="Search..." />
+        <LineEdit Name="SearchBar" Access="Public" PlaceHolder="{Loc 'rmc-xeno-ui-search-placeholder'}" />
         <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Name="Container" Access="Public" Orientation="Vertical" />
         </ScrollContainer>
