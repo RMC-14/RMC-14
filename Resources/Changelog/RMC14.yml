@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed grenade launchers not having enough range, increased from 7 to
-      8.463.
-    type: Fix
-  - message: Increased the firerate of the Grenadier's M83 grenade launcher from 0.3125
-      to 0.675
-    type: Tweak
-  id: 3381
-  time: '2026-06-11T23:37:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10135
 - author: Drazamuffin
   changes:
   - message: The M85's rate of fire is now on par with the Grenadier Specialist's
@@ -4435,5 +4424,16 @@
   id: 3880
   time: '2026-11-21T03:11:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10435
+- author: Vixting
+  changes:
+  - message: Ported ghost chat watch from upstream, can be disabled in the settings.
+      Adds a button to messages to move your ghost to the author.
+    type: Add
+  - message: Added xeno hivemind messages will now have a (w) button attached to them
+      allowing you to watch that xeno through xeno watch system.
+    type: Add
+  id: 3881
+  time: '2026-11-21T03:36:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10293
 Name: RMC14
 Order: -1
