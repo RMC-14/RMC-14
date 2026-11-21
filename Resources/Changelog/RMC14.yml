@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Larva queue, if the larvae dies before you can accept it you will no
-      longer be removed from the queue
-    type: Tweak
-  - message: Pre queue time is now displayed
-    type: Add
-  id: 3389
-  time: '2026-06-12T23:26:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10138
 - author: Simon
   changes:
   - message: Add Member UI was erroneously showing dead xenos in the window, it is
@@ -4457,5 +4447,12 @@
   id: 3888
   time: '2026-11-21T04:59:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10959
+- author: Tuna224
+  changes:
+  - message: Changed Parasite and Lesser Drone mute from three minutes to one.
+    type: Tweak
+  id: 3889
+  time: '2026-11-21T22:52:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9618
 Name: RMC14
 Order: -1
