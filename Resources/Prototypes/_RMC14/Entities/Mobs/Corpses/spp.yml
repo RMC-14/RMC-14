@@ -86,7 +86,7 @@
     eyes: RMCGlassesMedicalHUDGlasses
     gloves: CMHandsLatex
     id: CMIDCardColonistDoctor
-    ears: RMCHeadsetSPP
+    ears: RMCHeadsetDistressSPP
     mask: CMMaskSterile
     outerClothing: RMCMedicalApron
   storage:
