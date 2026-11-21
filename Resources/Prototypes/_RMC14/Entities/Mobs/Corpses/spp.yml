@@ -141,7 +141,7 @@
     head: RMCHardhatRedTMCC
     outerClothing: RMCArmorTMCCAlt
     id: RMCIDCardMinerCorpse
-    ears: RMCHeadsetSPP
+    ears: RMCHeadsetDistressSPP
     pocket1: RMCPouchToolsFill
     gloves: RMCHandsCombat
   storage:
