@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Xenos grabbing a pulled target now starts devouring them.
-    type: Tweak
-  id: 3377
-  time: '2026-06-11T22:42:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10127
 - author: Vixting
   changes:
   - message: Changed backpack sprites to layer above hair
@@ -4453,5 +4446,12 @@
   id: 3876
   time: '2026-11-20T23:12:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10655
+- author: wheelwrightt
+  changes:
+  - message: Coordinates can now be copied to clipboard when using rangefinder.
+    type: Add
+  id: 3877
+  time: '2026-11-21T00:52:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10536
 Name: RMC14
 Order: -1
