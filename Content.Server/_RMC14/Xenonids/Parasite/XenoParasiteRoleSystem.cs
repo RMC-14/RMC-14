@@ -1,28 +1,34 @@
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
 using Robust.Server.Containers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
 public sealed class XenoEggRoleSystem : EntitySystem
 {
+    private ProtoId<JobPrototype> _parasiteJob = "CMXenoParasite";
     private TimeSpan _parasiteSpawnDelay;
 
     [Dependency] private readonly ActorSystem _actor = default!;
     [Dependency] private readonly XenoEggSystem _eggSystem = default!;
     [Dependency] private readonly XenoParasiteThrowerSystem _throwerSystem = default!;
+    [Dependency] private readonly XenoEvolutionSystem _evolutionSystem = default!;
     [Dependency] private readonly EggMorpherSystem _eggMorpherSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -147,6 +153,16 @@ public sealed class XenoEggRoleSystem : EntitySystem
         if (_gameTicker.RoundDuration() <= _parasiteSpawnDelay)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-need-time-round", ("seconds", (int)(_parasiteSpawnDelay.TotalSeconds - _gameTicker.RoundDuration().TotalSeconds))), user, user, PopupType.MediumCaution);
+            return false;
+        }
+
+        // Limit the amount of player controlled parasites.
+        var livingParasites = _evolutionSystem.GetLiving<XenoComponent>(x => x.Comp.Role == _parasiteJob && TryComp<ActorComponent>(x, out var actor) && actor.PlayerSession != null);
+        var livingXenos = _evolutionSystem.GetLiving<XenoComponent>(x => x.Comp.CountedInSlots);
+        var max = Math.Max(2, livingXenos / 4);
+        if (livingParasites >= max)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-too-many"), user, user, PopupType.MediumCaution);
             return false;
         }
 
