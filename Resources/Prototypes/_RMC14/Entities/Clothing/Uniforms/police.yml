@@ -22,6 +22,28 @@
     - RMCUniformMP
 
 - type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMPService
+  name: military police service uniform
+  description: A service uniform worn by the Military Police of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/service/classic.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/service/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/MP/service/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/MP/service/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/MP/service/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/MP/service/urban.rsi
+  - type: Tag
+    tags:
+    - RMCUniformMarine
+    - RMCUniformMP
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitMPCorporate
   name: corporate security officer's jumpsuit
@@ -107,6 +129,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/jungle.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Uniforms/MP/wo/jungle.rsi
