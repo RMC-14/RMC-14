@@ -122,6 +122,16 @@ public sealed partial class InjectorComponent : Component
     public float MovementThreshold = 0.1f;
 
     #endregion
+
+    // RMC14
+    [DataField, AutoNetworkedField]
+    public bool CanRemoveBloodChemicals = false;
+
+    [DataField, AutoNetworkedField]
+    public bool CanDirectInjectIntoBlood = true;
+
+    [DataField]
+    public DoAfterId? DoAfterId;
 }
 
 /// <summary>
