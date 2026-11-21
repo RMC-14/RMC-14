@@ -412,7 +412,7 @@
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
-      sprite:  sprite: _RMC14/Mobs/Xenonids/Extras/christmas_queen/christmas_ovipositor.rsi
+      sprite: _RMC14/Mobs/Xenonids/Extras/christmas_queen/christmas_ovipositor.rsi
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
