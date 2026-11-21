@@ -67,6 +67,7 @@
         choices: { CMHelmet: 1 }
         entries:
         - id: RMCHeadCapExecutiveBodyguard
+        - id: RMCArmorHelmetPMCBlack
         - id: RMCArmorHelmetExecutiveBodyguard
       - name: Mask
         choices: { CMMask: 1 }
@@ -164,3 +165,7 @@
           points: 4
         - id: RMCZipties
           points: 1
+        - id: CMFireExtinguisherPortable
+          points: 2
+        - id: CMHealthAnalyzer
+          points: 2
