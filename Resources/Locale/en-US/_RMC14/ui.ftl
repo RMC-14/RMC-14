@@ -1,4 +1,4 @@
-﻿cm-ui-rmc14 = RMC14
+cm-ui-rmc14 = RMC14
 
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
@@ -102,11 +102,13 @@ rmc-ui-patreon = Patreon
 
 rmc-other-credits-tab = Other
 
+rmc-ui-chat-preview = Show typed messages as a centred preview in the middle of the screen
 rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
 rmc-ui-hive-leader-tackle-xenos = Tackle other xenos as hive leader.
 rmc-ui-show-new-player-icons = Show new player icons as mentor or department head roles
+rmc-ui-larva-queue-victim-priority = Get priority to burst your own larva when nested
 rmc-ui-xeno-night-vision-default = Xeno night vision default
 rmc-ui-xeno-night-vision-default-off = Off
 rmc-ui-xeno-night-vision-default-half = Half light
@@ -126,6 +128,13 @@ rmc-tacmap-alert-no-area = Unknown area
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
 
 rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads
+rmc-ui-options-night-vision-color = Night vision visor color
+rmc-ui-options-night-vision-color-green = Green
+rmc-ui-options-night-vision-color-orange = Orange
+rmc-ui-options-night-vision-color-white = White
+rmc-ui-options-night-vision-color-yellow = Yellow
+rmc-ui-options-night-vision-color-red = Red
+rmc-ui-options-night-vision-color-blue = Blue
 
 # Dialog input
 rmc-dialog-input-placeholder-default = Enter text
