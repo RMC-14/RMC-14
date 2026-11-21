@@ -62,12 +62,17 @@ public sealed partial class MiscTab : Control
         Control.AddOptionCheckBox(CCVars.OpaqueStorageWindow, OpaqueStorageWindowCheckBox);
         Control.AddOptionCheckBox(CCVars.ChatEnableFancyBubbles, FancySpeechBubblesCheckBox);
         Control.AddOptionCheckBox(CCVars.ChatFancyNameBackground, FancyNameBackgroundsCheckBox);
+        Control.AddOptionCheckBox(CCVars.InterfaceChatFollowButton, ChatFollowButton);
         Control.AddOptionCheckBox(CCVars.StaticStorageUI, StaticStorageUI);
 
+        // RMC14
+        Control.AddOptionCheckBox(RMCCVars.RMCChatPreview, RMCChatPreview);
         Control.AddOptionCheckBox(RMCCVars.RMCAutoPunctuate, RMCAutoPunctuate);
         Control.AddOptionCheckBox(RMCCVars.RMCAutoEjectMagazines, RMCAutoEjectMagazines);
         Control.AddOptionCheckBox(RMCCVars.RMCDamageYourself, RMCDamageYourself);
+        Control.AddOptionCheckBox(RMCCVars.RMCHiveLeaderTackleXenos, RMCHiveLeaderTackleXenos);
         Control.AddOptionCheckBox(RMCCVars.RMCShowNewPlayerIcons, RMCShowNewPlayerIcons);
+        Control.AddOptionCheckBox(RMCCVars.RMCLarvaQueueVictimPriorityEnabled, RMCLarvaQueueVictimPriority);
         Control.AddOptionDropDown(RMCCVars.RMCXenoDefaultNightVision, RMCXenoNightVisionDefault, xenoNightVisionEntries);
 
         Control.Initialize();
