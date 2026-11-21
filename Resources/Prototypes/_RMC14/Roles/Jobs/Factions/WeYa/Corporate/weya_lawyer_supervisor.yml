@@ -66,6 +66,7 @@
     - CMClipboard
     - CMPenClicky
     - RMCSpaceCash1000 # TODO RMC14 counterfiet
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: MarkerBase

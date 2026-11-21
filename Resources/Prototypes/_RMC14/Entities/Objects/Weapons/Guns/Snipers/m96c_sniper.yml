@@ -172,6 +172,8 @@
       buildup: true
   - type: AimedShotEffect
     extraHits: 2
+  - type: ProjectileCoverInteraction
+    ignoreCover: true
 
 - type: Tag
   id: CMM96CSniperRifle
