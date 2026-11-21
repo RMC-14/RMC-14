@@ -1,0 +1,22 @@
+# CLF coordinator
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorCLFCoordinator
+  name: Survivor CLF Coordinator
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillFirearms: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 2
+        RMCSkillVehicles: 2
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 1
+        RMCSkillCqc: 2
+        RMCSkillOverwatch: 1
+        RMCSkillSurgery: 1
