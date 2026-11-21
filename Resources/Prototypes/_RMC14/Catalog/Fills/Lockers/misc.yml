@@ -67,7 +67,9 @@
   - type: StorageFill
     contents:
       - id: RMCKitHonorGuard
-      - id: RMCKitHonorGuard
+        amount: 2
+      - id: RMCKitRifleM14Ceremonial
+        amount: 4
 
 - type: entity
   parent: CMLockerStaff
