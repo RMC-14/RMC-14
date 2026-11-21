@@ -105,7 +105,7 @@
     gloves: CMHandsInsulated
     outerClothing: RMCHazardVest
     id: CMIDCardColonistEngineer
-    ears: RMCHeadsetSPPEngineer
+    ears: RMCHeadsetDistressSPP
     belt: CMBeltUtilityFilled
   storage:
     back:
