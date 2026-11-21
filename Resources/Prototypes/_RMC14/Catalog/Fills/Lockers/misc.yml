@@ -60,6 +60,19 @@
       - id: CMPackFlare
 
 - type: entity
+  id: RMCWallClosetFireSafetyFilled
+  parent: RMCWallClosetFireSafety
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCHardhatRed
+      - id: RMCSuitFirefighter
+      - id: RMCReagentGasTankOxygen
+      - id: CMFireExtinguisher
+      - id: CMPackFlare
+
+- type: entity
   parent: CMLockerCommanderSecure
   id: CMLockerCommanderSecureFilled
   suffix: Filled
