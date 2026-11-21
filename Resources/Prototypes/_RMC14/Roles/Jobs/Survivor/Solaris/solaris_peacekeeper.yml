@@ -19,7 +19,7 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetILRCPeacekeeper
+      preset: RMCSurvivorPresetSecurity
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear

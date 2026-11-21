@@ -21,6 +21,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
+using Content.Shared._RMC14.Weapons.Melee;
 
 namespace Content.Shared._RMC14.Doors;
 
@@ -56,8 +57,8 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
 
         SubscribeLocalEvent<DoorComponent, RMCDoorPryEvent>(OnDoorPry);
-
         SubscribeLocalEvent<DoorComponent, RMCBeforePryEvent>(OnBeforePry);
+        SubscribeLocalEvent<DoorComponent, CheckMeleeAttackerEvent>(OnDoorReceivingMeleeAttackAttempt);
 
         SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
 
@@ -235,6 +236,16 @@ public sealed class CMDoorSystem : EntitySystem
 
         if (_rmcPower.IsPowered(ent))
             args.Cancelled = true;
+    }
+
+    private void OnDoorReceivingMeleeAttackAttempt(Entity<DoorComponent> ent, ref CheckMeleeAttackerEvent args)
+    {
+        if (args.Skip || args.Defer)
+            return;
+
+        // Prevent open doors from interfering with attacking or disarming entities under them.
+        if (ent.Comp.State is DoorState.Opening or DoorState.Open or DoorState.Closing)
+            args.Defer = true;
     }
 
     private void OnDoorPry(Entity<DoorComponent> ent, ref RMCDoorPryEvent args)

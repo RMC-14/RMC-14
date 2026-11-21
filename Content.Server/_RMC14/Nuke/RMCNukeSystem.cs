@@ -1,4 +1,5 @@
 using Content.Server._RMC14.Power;
+using Content.Shared._RMC14.Nuke;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.Sensor;
@@ -8,7 +9,6 @@ using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Nuke;
 
@@ -23,15 +23,17 @@ public sealed class RMCNukeSystem : EntitySystem
     private readonly DamageSpecifier _damage = new() { DamageDict = { ["Blunt"] = 1e5, ["Heat"] = 1e5 } };
     private EntityQuery<RMCApcComponent> _apc;
     private EntityQuery<RMCRepairableComponent> _repairable;
+    private EntityQuery<RMCNukeShelterComponent> _shelter;
 
     public override void Initialize()
     {
         base.Initialize();
         _apc = GetEntityQuery<RMCApcComponent>();
         _repairable = GetEntityQuery<RMCRepairableComponent>();
+        _shelter = GetEntityQuery<RMCNukeShelterComponent>();
     }
 
-    private void KillEverythingOnMap(MapId mapId)
+    private void KillEverythingOnMap(MapId mapId, bool spareShelters)
     {
         var toDamage = new HashSet<EntityUid>();
         var toDelete = new HashSet<EntityUid>();
@@ -42,6 +44,9 @@ public sealed class RMCNukeSystem : EntitySystem
         while (living.MoveNext(out var uid, out var _, out var transform))
         {
             if (transform.MapID != mapId)
+                continue;
+
+            if (spareShelters && IsSheltered(uid, transform))
                 continue;
 
             AddNukeTarget(uid, toDamage, toDelete);
@@ -90,6 +95,11 @@ public sealed class RMCNukeSystem : EntitySystem
         }
     }
 
+    private bool IsSheltered(EntityUid uid, TransformComponent transform)
+    {
+        return _shelter.HasComp(uid) || _shelter.HasComp(transform.ParentUid);
+    }
+
     private void AddNukeTarget(EntityUid uid, HashSet<EntityUid> toDamage, HashSet<EntityUid> toDelete)
     {
         if (_mobState.IsDead(uid))
@@ -101,14 +111,9 @@ public sealed class RMCNukeSystem : EntitySystem
             toDelete.Add(uid);
     }
 
-    public void NukeMap(MapId mapId)
+    public void NukeMap(MapId mapId, bool spareShelters = false)
     {
-        // Do it a second time in case the first run crashes.
-        Timer.Spawn(System.TimeSpan.FromSeconds(5), () =>
-        {
-            KillEverythingOnMap(mapId);
-        });
-
-        KillEverythingOnMap(mapId);
+        for (var i = 0; i < 3; i++)
+            KillEverythingOnMap(mapId, spareShelters);
     }
 }

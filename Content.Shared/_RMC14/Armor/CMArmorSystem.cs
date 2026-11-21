@@ -1,8 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
@@ -277,6 +278,7 @@ public sealed class CMArmorSystem : EntitySystem
     private void OnPiercingGetArmor(Entity<CMArmorPiercingComponent> piercing, ref CMGetArmorPiercingEvent args)
     {
         args.Piercing += piercing.Comp.Amount;
+        args.IgnoreXenoArmor |= piercing.Comp.IgnoreXenoArmor;
     }
 
     private void OnBlockBackpackEquippedAttempt(Entity<ClothingBlockBackpackComponent> ent, ref BeingEquippedAttemptEvent args)
@@ -331,11 +333,13 @@ public sealed class CMArmorSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         var armorPiercing = args.ArmorPiercing;
+        var ignoreXenoArmor = false;
         if (args.Tool is { } tool && Exists(tool))
         {
             var piercingEv = new CMGetArmorPiercingEvent(ent);
             RaiseLocalEvent(tool, ref piercingEv);
             armorPiercing += piercingEv.Piercing;
+            ignoreXenoArmor = piercingEv.IgnoreXenoArmor;
         }
 
         var immuneToAP = TryComp<CMArmorComponent>(ent, out var armorComp) && armorComp.ImmuneToAP;
@@ -384,6 +388,9 @@ public sealed class CMArmorSystem : EntitySystem
             }
         }
 
+        if (ignoreXenoArmor && !immuneToAP)
+            ev.XenoArmor = 0;
+
         //Default modifier
         var mod = EnsureComp<RMCArmorModifierComponent>(ent);
 
@@ -403,6 +410,7 @@ public sealed class CMArmorSystem : EntitySystem
         else
         {
             Resist(args.Damage, ev.XenoArmor, ArmorGroup, mod.RangedArmorModifier);
+            Resist(args.Damage, ev.XenoArmor, BioGroup, mod.RangedArmorModifier);
         }
     }
 
@@ -413,7 +421,8 @@ public sealed class CMArmorSystem : EntitySystem
             return;
 
         var resist = Math.Pow(1.1, armor / 5.0);
-        var types = _prototypes.Index(group).DamageTypes;
+        var damGroup = _prototypes.Index(group);
+        var types = damGroup.DamageTypes;
 
         foreach (var type in types)
         {
@@ -424,7 +433,7 @@ public sealed class CMArmorSystem : EntitySystem
             }
         }
 
-        var newDamage = damage.GetTotal();
+        var newDamage = damage.TryGetDamageInGroup(damGroup, out var damTotal) ? damTotal : damage.GetTotal();
         if (newDamage != FixedPoint2.Zero && newDamage < armor * 2)
         {
 
