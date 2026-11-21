@@ -101,3 +101,7 @@
 - type: lobbyBackground
   id: MothSGOLobbyEnlist
   background: /Textures/_RMC14/Lobby/MothSGOLobbyEnlist.png
+
+- type: lobbyBackground
+  id: YourfriendlyMP
+  background: /Textures/_RMC14/Lobby/YourfriendlyMP.png
