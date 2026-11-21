@@ -74,7 +74,7 @@
     back: CMSatchel
     shoes: CMBootsBlack
     id: CMIDCardColonist
-    ears: RMCHeadsetSPP
+    ears: RMCHeadsetDistressSPP
 
 # Doctor job
 - type: startingGear
