@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Dancer Praetorian's critical mark spreading not being predicted
-      and not prioritizing nearest targets to the dancer first.
-    type: Fix
-  - message: Fixed Tail Trip having no cooldown when used off a normal mark or no
-      mark.
-    type: Fix
-  id: 3393
-  time: '2026-06-12T23:28:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10140
 - author: IceNoobXD
   changes:
   - message: Medical staff vendors now stock a wide variety of new clothing options!
@@ -4449,5 +4438,19 @@
   id: 3892
   time: '2026-11-21T23:18:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10681
+- author: Thereisabear
+  changes:
+  - message: Fixed daze duration against Xenonids being too high, it is now scaled
+      by its intended 0.667x. This makes a baton against the Queen only lock her abilities
+      for 2.7 seconds, instead of 4 seconds.
+    type: Fix
+  - message: Fixed slowing modifiers for Xenonids being slightly too high. (0.75 ->
+      0.7)
+    type: Fix
+  - message: Fixed barricade leap stuns being too low (2 -> 2.6 seconds)
+    type: Fix
+  id: 3893
+  time: '2026-11-21T23:24:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11159
 Name: RMC14
 Order: -1
