@@ -1,4 +1,4 @@
-﻿using Content.Server._RMC14.Medical.Wounds;
+using Content.Server._RMC14.Medical.Wounds;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Medical.Surgery.Effects.Step;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.Medical.Surgery.Effects;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Organs;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -66,6 +67,8 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         SubscribeLocalEvent<RMCSurgeryStepInternalBleedingEffectComponent, CMSurgeryStepEvent>(OnStepInternalBleedingComplete);
         SubscribeLocalEvent<RMCSurgeryStepLarvaEffectComponent, CMSurgeryStepEvent>(OnStepLarvaComplete);
         SubscribeLocalEvent<RMCSurgeryStepXenoHeartEffectComponent, CMSurgeryStepEvent>(OnStepXenoHeartComplete);
+        SubscribeLocalEvent<RMCSurgeryEscharEffectComponent, CMSurgeryStepEvent>(OnStepEscharComplete);
+        SubscribeLocalEvent<RMCSurgeryEscharGraftEffectComponent, CMSurgeryStepEvent>(OnStepEscharGraftComplete);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -337,6 +340,21 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             return;
 
         _wounds.TryRepairInternalBleeding(args.Body, part.PartType, part.Symmetry);
+    }
+
+    private void OnStepEscharComplete(Entity<RMCSurgeryEscharEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        EnsureComp<EscharExposedComponent>(args.Part);
+        // TODO: Future pain work: exposed eschar has not yet relieved pain.
+    }
+
+    private void OnStepEscharGraftComplete(Entity<RMCSurgeryEscharGraftEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        _wounds.RemoveEschar(args.Body, args.Part);
+        RemComp<EscharExposedComponent>(args.Part);
+        EnsureComp<EscharGraftedComponent>(args.Part);
+        RemComp<EscharExposedComponent>(args.Part);
+        // TODO: Future pain work: removing the grafted eschar should remove 10 pain.
     }
 
     private void OnStepLarvaComplete(Entity<RMCSurgeryStepLarvaEffectComponent> ent, ref CMSurgeryStepEvent args)

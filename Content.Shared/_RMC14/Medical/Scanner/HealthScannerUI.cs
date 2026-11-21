@@ -29,7 +29,8 @@ public readonly record struct HealthScanState(
     bool Bleeding,
     HealthScanDetailLevel DetailLevel,
     List<ForeignObjectEmbeddedEntry>? EmbeddedObjectInBodyParts = null,
-    List<InternalBleedingEntry>? InternalBleeds = null);
+    List<InternalBleedingEntry>? InternalBleeds = null,
+    List<EscharEntry>? Eschars = null);
 
 /// <summary>
 ///     Thin BUI wrapper around <see cref="HealthScanState"/> for the health analyzer live-update path.

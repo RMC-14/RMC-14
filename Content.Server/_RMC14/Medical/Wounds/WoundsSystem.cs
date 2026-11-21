@@ -114,7 +114,17 @@ public sealed class WoundsSystem : SharedWoundsSystem
 
             if (toHeal > comp.PassiveHealing)
             {
-                _damageable.TryChangeDamage(uid, _passiveDamage, true, false, damageable, uid);
+                var threshold = GetEscharHealingThreshold(uid);
+                if (threshold > FixedPoint2.Zero &&
+                    damageable != null &&
+                    damageable.DamagePerGroup.TryGetValue("Burn", out var burnDamage) &&
+                    burnDamage <= threshold)
+                {
+                    _passiveDamage.DamageDict.Clear();
+                }
+
+                if (_passiveDamage.DamageDict.Count > 0)
+                    _damageable.TryChangeDamage(uid, _passiveDamage, true, false, damageable, uid);
             }
 
             for (var i = _toRemove.Count - 1; i >= 0; i--)

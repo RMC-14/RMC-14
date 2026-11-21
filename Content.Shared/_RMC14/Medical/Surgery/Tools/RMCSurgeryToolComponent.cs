@@ -86,6 +86,7 @@ public enum RMCSurgeryToolKind : byte
     LaserScalpel,
     PictSystem,
     FixOVein,
+    Graft,
 }
 
 [Serializable, NetSerializable]

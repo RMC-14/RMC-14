@@ -5,6 +5,8 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Temperature;
+using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -214,6 +216,14 @@ public sealed class HealthScannerSystem : EntitySystem
 
         var internalBleeds = wound?.InternalBleeds ?? new List<InternalBleedingEntry>();
 
+        var eschars = new List<EscharEntry>();
+        var bodySystem = EntityManager.System<SharedBodySystem>();
+        foreach (var (part, partComp) in bodySystem.GetBodyChildren(target))
+        {
+            if (HasComp<EscharComponent>(part))
+                eschars.Add(new EscharEntry(partComp.PartType, partComp.Symmetry));
+        }
+
         var state = new HealthScanState(
             GetNetEntity(target),
             mobState,
@@ -228,7 +238,8 @@ public sealed class HealthScannerSystem : EntitySystem
             bleeding,
             scanner.Comp.DetailLevel,
             embeddedObjectInBodyParts,
-            internalBleeds);
+            internalBleeds,
+            eschars);
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }

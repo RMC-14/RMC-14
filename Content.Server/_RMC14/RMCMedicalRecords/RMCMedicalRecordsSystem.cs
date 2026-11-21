@@ -94,6 +94,13 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
         if (TryComp<WoundedComponent>(target, out var wounded))
             internalBleeds.AddRange(wounded.InternalBleeds);
 
+        var eschars = new List<EscharEntry>();
+        foreach (var (part, partComp) in _body.GetBodyChildren(target))
+        {
+            if (HasComp<EscharComponent>(part))
+                eschars.Add(new EscharEntry(partComp.PartType, partComp.Symmetry));
+        }
+
         return new HealthScanState(
             GetNetEntity(target),
             state,
@@ -108,7 +115,8 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
             bleeding,
             detailLevel,
             embeddedObjectInBodyParts,
-            internalBleeds);
+            internalBleeds,
+            eschars);
     }
 
     private List<RMCAutodocScanData> GenerateAutodocData(EntityUid target)

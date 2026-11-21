@@ -1,5 +1,6 @@
-﻿using Content.Shared._RMC14.Embeds;
+using Content.Shared._RMC14.Embeds;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
+using Content.Shared._RMC14.Medical.Surgery.Effects;
 using Content.Shared._RMC14.Medical.Surgery.Effects.Step;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
@@ -25,6 +26,8 @@ public abstract partial class SharedCMSurgerySystem
 
         SubscribeLocalEvent<RMCSurgeryStepForeignObjectEffectComponent, CMSurgeryStepCompleteCheckEvent>(OnForeignObjectStepCheck);
         SubscribeLocalEvent<RMCSurgeryStepInternalBleedingEffectComponent, CMSurgeryStepCompleteCheckEvent>(OnInternalBleedingStepCheck);
+        SubscribeLocalEvent<EscharExposedComponent, CMSurgeryStepCompleteCheckEvent>(OnEscharExposedStepCheck);
+        SubscribeLocalEvent<EscharGraftedComponent, CMSurgeryStepCompleteCheckEvent>(OnEscharGraftedStepCheck);
 
         SubSurgery<CMSurgeryCutLarvaRootsStepComponent>(OnCutLarvaRootsStep, OnCutLarvaRootsCheck);
 
@@ -195,6 +198,18 @@ public abstract partial class SharedCMSurgerySystem
 
         // The larva is bursting
         if (infected != null && infected.IsBursting)
+            args.Cancelled = true;
+    }
+
+    private void OnEscharExposedStepCheck(Entity<EscharExposedComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
+    {
+        if (!HasComp<EscharExposedComponent>(args.Part))
+            args.Cancelled = true;
+    }
+
+    private void OnEscharGraftedStepCheck(Entity<EscharGraftedComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
+    {
+        if (!HasComp<EscharGraftedComponent>(args.Part))
             args.Cancelled = true;
     }
 
@@ -427,6 +442,7 @@ public abstract partial class SharedCMSurgerySystem
             RMCSurgeryToolKind.ScalpelManager => "an incision management system",
             RMCSurgeryToolKind.LaserScalpel => "a laser scalpel",
             RMCSurgeryToolKind.PictSystem => "a PICT system",
+            RMCSurgeryToolKind.Graft => "a skin graft",
             _ => "an appropriate tool",
         };
     }

@@ -63,6 +63,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         SubscribeLocalEvent<CMSurgeryTargetComponent, CMSurgeryDoAfterEvent>(OnTargetDoAfter);
 
         SubscribeLocalEvent<CMSurgeryCloseIncisionConditionComponent, CMSurgeryValidEvent>(OnCloseIncisionValid);
+        SubscribeLocalEvent<RMCSurgeryEscharConditionComponent, CMSurgeryValidEvent>(OnEscharValid);
         SubscribeLocalEvent<RMCSurgeryForeignObjectConditionComponent, CMSurgeryValidEvent>(OnForeignObjectValid);
         SubscribeLocalEvent<RMCSurgeryInternalBleedingConditionComponent, CMSurgeryValidEvent>(OnInternalBleedingValid);
         SubscribeLocalEvent<CMSurgeryLarvaConditionComponent, CMSurgeryValidEvent>(OnLarvaValid);
@@ -118,6 +119,12 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         {
             args.Cancelled = true;
         }
+    }
+
+    private void OnEscharValid(Entity<RMCSurgeryEscharConditionComponent> ent, ref CMSurgeryValidEvent args)
+    {
+        if (!HasComp<EscharComponent>(args.Part))
+            args.Cancelled = true;
     }
 
     private void OnForeignObjectValid(Entity<RMCSurgeryForeignObjectConditionComponent> ent, ref CMSurgeryValidEvent args)

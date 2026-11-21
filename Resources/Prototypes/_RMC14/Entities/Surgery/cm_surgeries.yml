@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMSurgeryBase
   categories: [ HideSpawnMenu ]
 
@@ -24,6 +24,20 @@
     - CMSurgeryStepCloseBones
     - CMSurgeryStepMendRibcage
     - CMSurgeryStepCloseIncision
+
+- type: entity
+  parent: CMSurgeryBase
+  id: RMCSurgeryEscharRemoval
+  name: Eschar Removal
+  description: Remove hardened burn tissue and apply a graft.
+  components:
+  - type: CMSurgery
+    priority: 1
+    requirement: CMSurgeryOpenIncision
+    steps:
+    - RMCSurgeryStepRemoveEschar
+    - RMCSurgeryStepGraftEschar
+  - type: RMCSurgeryEscharCondition
 
 - type: entity
   parent: CMSurgeryBase

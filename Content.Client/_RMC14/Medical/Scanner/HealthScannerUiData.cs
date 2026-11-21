@@ -22,6 +22,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Temperature;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Graphics.RSI;
 using Robust.Shared.Maths;
@@ -36,6 +37,7 @@ public sealed class HealthScannerUiData
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private HealthScannerWindow? _holocardWindow;
     private NetEntity _lastTarget;
@@ -347,6 +349,19 @@ public sealed class HealthScannerUiData
             }
         }
 
+        if (uiState.Eschars is { Count: > 0 })
+        {
+            foreach (var eschar in uiState.Eschars)
+            {
+                AddAdvice(
+                        Loc.GetString(
+                        "health-analyzer-window-entity-eschar-text",
+                        ("bodyPart", GetBodyPartName(eschar.BodyPart, eschar.Symmetry))),
+                    window,
+                    _resourceCache.GetResource<TextureResource>("/Textures/Interface/Alerts/Fire/fire.png"));
+            }
+        }
+
         if (uiState.InternalBleeds is { Count: > 0 })
         {
             foreach (var internalBleed in uiState.InternalBleeds)
@@ -447,6 +462,29 @@ public sealed class HealthScannerUiData
             };
             row.AddChild(iconRect);
         }
+
+        var label = new RichTextLabel { MinSize = new Vector2(0, 18) };
+        label.SetMarkupPermissive(text);
+        row.AddChild(label);
+
+        window.AdviceContainer.AddChild(row);
+    }
+
+    private void AddAdvice(string text, HealthScannerWindow window, Texture icon)
+    {
+        var row = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            Margin = new Thickness(0, 2),
+        };
+
+        row.AddChild(new TextureRect
+        {
+            Texture = icon,
+            Stretch = TextureRect.StretchMode.KeepAspectCentered,
+            MinSize = new Vector2(18, 18),
+            Margin = new Thickness(0, 0, 6, 0),
+        });
 
         var label = new RichTextLabel { MinSize = new Vector2(0, 18) };
         label.SetMarkupPermissive(text);

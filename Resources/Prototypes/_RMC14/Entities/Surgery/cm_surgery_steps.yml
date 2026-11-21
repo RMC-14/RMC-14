@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMSurgeryStepBase
   categories: [ HideSpawnMenu ]
   components:
@@ -205,6 +205,52 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 10
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepRemoveEschar
+  name: Separate Eschar
+  components:
+  - type: CMSurgeryStep
+    tool:
+    - Scalpel
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel2.ogg
+  - type: RMCSurgeryEscharEffect
+  - type: EscharExposed
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel
+  - type: RMCSurgeryComplicationEffects
+    failureDirectDamage:
+      types:
+        Blunt: 10
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepGraftEschar
+  name: Apply Graft
+  components:
+  - type: CMSurgeryStep
+    tool:
+    - Graft
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/hemostat1.ogg
+    remove:
+    - type: CMSkinRetracted
+    - type: CMBleedersClamped
+    - type: CMIncisionOpen
+  - type: RMCSurgeryEscharGraftEffect
+  - type: EscharGrafted
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/medical.rsi
+    state: line_burn
   - type: RMCSurgeryComplicationEffects
     failureDirectDamage:
       types:
