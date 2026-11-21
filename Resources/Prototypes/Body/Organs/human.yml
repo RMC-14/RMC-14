@@ -6,9 +6,9 @@
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
   - type: Organ
-  - type: Food
-  - type: Extractable
-    grindableSolutionName: organ
+  #- type: Food
+  #- type: Extractable
+  #  grindableSolutionName: organ
   - type: SolutionContainerManager
     solutions:
       organ:
@@ -22,12 +22,12 @@
           Quantity: 5
         - ReagentId: GreyMatter # RMC14 - Add Grey Matter to all organs to mechanically discourage eating organs.
           Quantity: 75 # This is enough to deal 150 clone damage, along vomiting/tox this will either place them just barely into crit or just below it.
-  - type: FlavorProfile
-    flavors:
-      - people
-  - type: Tag
-    tags:
-      - Meat
+  #- type: FlavorProfile
+  #  flavors:
+  #    - people
+  #- type: Tag
+  #  tags:
+  #    - Meat
 
 - type: entity
   id: BaseHumanOrgan
@@ -51,10 +51,10 @@
   - type: InputMover
   - type: Examiner
   - type: BlockMovement
-  - type: BadFood
-  - type: Tag
-    tags:
-      - Meat
+  #- type: BadFood
+  #- type: Tag
+  #  tags:
+  #    - Meat
   - type: SolutionContainerManager
     solutions:
       organ:
@@ -66,13 +66,13 @@
         reagents:
         - ReagentId: GreyMatter
           Quantity: 75 # RMC14 Increase to match parent and prevent overwrite.
-  - type: FlavorProfile
-    flavors:
-      - people
-  - type: FoodSequenceElement
-    entries:
-      Burger: Brain
-      Taco: Brain
+  #- type: FlavorProfile
+  #  flavors:
+  #    - people
+  #- type: FoodSequenceElement
+  #  entries:
+  #    Burger: Brain
+  #    Taco: Brain
   - type: Item
     size: Small
     heldPrefix: brain
