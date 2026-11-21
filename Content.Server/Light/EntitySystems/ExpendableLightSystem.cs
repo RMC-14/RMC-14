@@ -204,9 +204,11 @@ namespace Content.Server.Light.EntitySystems
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, string.Empty, appearance);
                     // RMC14
                     if (TryComp<CartridgeAmmoComponent>(ent, out var cartridge))
+                    {
                         cartridge.Spent = true;
                         Dirty(ent,cartridge);
-
+                    }
+                    // RMC14
                     var ignite = new IgnitionEvent(false);
                     RaiseLocalEvent(ent, ref ignite);
                     break;
