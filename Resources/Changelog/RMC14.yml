@@ -1,129 +1,4 @@
 ﻿Entries:
-- author: Bagietens
-  changes:
-  - message: Fixed healer drone and acid runner sacrifices being taken by larva queue.
-    type: Fix
-  id: 3375
-  time: '2026-06-11T22:40:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10100
-- author: Dygon
-  changes:
-  - message: Dropship camera feeds now remain active for 5 seconds after the selected
-      target disappears, instead of cutting out instantly.
-    type: Tweak
-  id: 3376
-  time: '2026-06-11T22:41:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10125
-- author: Vermidia
-  changes:
-  - message: Xenos grabbing a pulled target now starts devouring them.
-    type: Tweak
-  id: 3377
-  time: '2026-06-11T22:42:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10127
-- author: Vixting
-  changes:
-  - message: Changed backpack sprites to layer above hair
-    type: Tweak
-  id: 3378
-  time: '2026-06-11T22:43:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9948
-- author: Vermidia
-  changes:
-  - message: Fixed Designer Hivelord pheromones not being strong enough (3 -> 3.5)
-    type: Fix
-  id: 3379
-  time: '2026-06-11T22:45:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10094
-- author: MarshesAndMeadows
-  changes:
-  - message: FIxed crusher charge sometimes phasing through barricades. It should
-      now stop at the barricade and still deal damage. Keep an eye out and report
-      it if the bug returns.
-    type: Fix
-  - message: Fixed handrails being treated like barricades for crushers charge.
-    type: Fix
-  - message: Fixed crushers charge stopping when hitting friendly hive structures
-      like recovery nodes, clusters and so on.
-    type: Fix
-  - message: Fixed crushers charge not dealing damage to many very specific objects
-      (Wey-Ya vendors, certain machines, directional windows, many more)
-    type: Fix
-  - message: Fixed crushers charge stopping on the first table it hits, it now continues
-      through tables while destroying them.
-    type: Fix
-  - message: Fixed crushers charge dealing lower damage than intended to walls and
-      Rwalls, it now deals the correct 750 structural damage.
-    type: Fix
-  - message: "Fixed crushers knockback not matching parity (1\xBD -> 3 tiles)"
-    type: Fix
-  - message: Fixed crusher charge not being targetable, causing it to always travel
-      the full length, regardless of targeting.
-    type: Fix
-  - message: Fixed crusher charge range being longer than it should be.
-    type: Fix
-  - message: Fixed crusher charge not correctly destroying window frames.
-    type: Fix
-  - message: Added a fallback damage logic path to Charger that should catch interactions
-      that otherwise would take no damage.
-    type: Add
-  id: 3380
-  time: '2026-06-11T23:03:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9541
-- author: Dygon
-  changes:
-  - message: Fixed grenade launchers not having enough range, increased from 7 to
-      8.463.
-    type: Fix
-  - message: Increased the firerate of the Grenadier's M83 grenade launcher from 0.3125
-      to 0.675
-    type: Tweak
-  id: 3381
-  time: '2026-06-11T23:37:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10135
-- author: Drazamuffin
-  changes:
-  - message: The M85's rate of fire is now on par with the Grenadier Specialist's
-      M83
-    type: Tweak
-  id: 3382
-  time: '2026-06-11T23:36:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9632
-- author: Simon
-  changes:
-  - message: Add Member UI only shows xenonids not in your or others teams.
-    type: Fix
-  - message: Xenonids should now show up fully in the add member window.
-    type: Fix
-  - message: Fixed another way entities were possibly being missed by the UI update
-      and FT updating.
-    type: Fix
-  id: 3383
-  time: '2026-06-11T23:47:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10134
-- author: IceNoobXD
-  changes:
-  - message: Added three new jackets to the correspondent vendor!
-    type: Add
-  id: 3384
-  time: '2026-06-12T00:56:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10093
-- author: Dygon
-  changes:
-  - message: Flares no longer play their "ignition" sound multiple times.
-    type: Fix
-  - message: Fixed flares extinguishing too soon.
-    type: Fix
-  id: 3385
-  time: '2026-06-12T05:41:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10136
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Charger Crusher colliding with weeds on the floor.
-    type: Fix
-  id: 3386
-  time: '2026-06-12T05:44:26.046587+00:00'
-  url: null
 - author: Vermidia
   changes:
   - message: Examining gloves with a watch now also shows the time.
@@ -4445,5 +4320,132 @@
   id: 3874
   time: '2026-11-20T08:10:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10972
+- author: TadJohnson00
+  changes:
+  - message: The M16 has been renamed to the CR16 and received a new sprite.
+    type: Tweak
+  id: 3875
+  time: '2026-11-20T18:18:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9953
+- author: IceNoobXD
+  changes:
+  - message: Changed the job icons from a lot of UNMC jobs to be more in line with
+      their cmss13 counterpart!
+    type: Tweak
+  - message: SEA's border is now grey. They are not officers, so should not have brown
+      borders. They do have a colored 'A', though.
+    type: Tweak
+  - message: Adds TacMap Icons Provost roles!
+    type: Add
+  - message: Added unique hudsquad icons for the seperate correspondent roles and
+      made them show next to their sprites in-game!
+    type: Tweak
+  id: 3876
+  time: '2026-11-20T23:12:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10655
+- author: wheelwrightt
+  changes:
+  - message: Coordinates can now be copied to clipboard when using rangefinder.
+    type: Add
+  id: 3877
+  time: '2026-11-21T00:52:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10536
+- author: wheelwrightt
+  changes:
+  - message: Tacmap UI now correctly updates new objectives when the UI is open.
+    type: Fix
+  id: 3878
+  time: '2026-11-21T01:10:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9311
+- author: GrigoriyGalintano
+  changes:
+  - message: Completed intel objectives no longer reappear or remain stuck in the
+      Marine Tech Tree Objectives UI.
+    type: Fix
+  id: 3879
+  time: '2026-11-21T03:07:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10453
+- author: Dygon
+  changes:
+  - message: Praetorian acid ball projectiles no longer disappear when hitting friendly
+      xeno structures.
+    type: Fix
+  - message: Praetorian acid ball projectiles now stop when hitting xenos or marines.
+    type: Fix
+  - message: Shooting an acid ball against a wall no longer makes all payload projectiles
+      hit the wall.
+    type: Fix
+  - message: Acid ball payload projectiles no longer disappear when hitting friendly
+      xenos.
+    type: Fix
+  id: 3880
+  time: '2026-11-21T03:11:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10435
+- author: Vixting
+  changes:
+  - message: Ported ghost chat watch from upstream, can be disabled in the settings.
+      Adds a button to messages to move your ghost to the author.
+    type: Add
+  - message: Added xeno hivemind messages will now have a (w) button attached to them
+      allowing you to watch that xeno through xeno watch system.
+    type: Add
+  id: 3881
+  time: '2026-11-21T03:36:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10293
+- author: Vixting
+  changes:
+  - message: Added a option to enabled centred chat window to the options menu, showing
+      a preview of the message you are writing.
+    type: Add
+  id: 3882
+  time: '2026-11-21T03:40:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10277
+- author: wheelwrightt
+  changes:
+  - message: Different color options for the nightvision visor (can be set in the
+      options menu)
+    type: Add
+  id: 3883
+  time: '2026-11-21T03:58:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10242
+- author: MidZik
+  changes:
+  - message: Fixed spore fruit not applying its cooldown reduction to some abilities.
+    type: Fix
+  id: 3884
+  time: '2026-11-21T04:15:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10169
+- author: MidZik
+  changes:
+  - message: Xeno actions/abilties should have fewer mispredicts and hit their targets
+      more reliably.
+    type: Fix
+  - message: Ghost/fake actions should no longer occur.
+    type: Fix
+  - message: Melee hits and interactions (shaking, patting, pulling) should be more
+      reliable. In particular, meleeing or interacting with entities moving towards
+      you should be more reliable.
+    type: Fix
+  id: 3885
+  time: '2026-11-21T04:47:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10103
+- author: MidZik
+  changes:
+  - message: Smoke grenade smoke spreads out about 10x faster.
+    type: Tweak
+  - message: Boiler clouds spread out about 2x faster.
+    type: Tweak
+  - message: Boiler acid gas deals significantly less damage on the edges, the same
+      damage next to the center, and more damage exactly at the center.
+    type: Tweak
+  - message: Multiple damage-over-time gasses can affect you at the same time now.
+      For each category of damage, you get damaged by the most damaging one.
+    type: Fix
+  - message: Instant-spread smokes (e.g. phosphorus from sentries) no longer spread
+      onto walls.
+    type: Fix
+  id: 3886
+  time: '2026-11-21T04:54:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9700
 Name: RMC14
 Order: -1
