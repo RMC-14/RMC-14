@@ -739,7 +739,7 @@
     access:
     - [ "CMAccessRequisitions" ]
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing_surplus.rsi
   - type: CMAutomatedVendor
     canManualRestock: true
     sections:
