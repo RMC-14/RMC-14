@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vixting
   changes:
-  - message: Fix weld effect not being cleared on doafter cancel for rmcrepairable
-    type: Fix
-  id: 3397
-  time: '2026-06-16T01:49:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10161
-- author: Vixting
-  changes:
   - message: Xenonids can hold down left click to continually build / upgrade.
     type: Add
   id: 3398
@@ -4450,5 +4443,14 @@
   id: 3896
   time: '2026-11-21T23:33:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9547
+- author: Vixting
+  changes:
+  - message: Added the akimbo duel wielding, allowing you to switch between firing
+      both guns, alternating hands, or single fire. Can be adjusted from the options
+      menu.
+    type: Add
+  id: 3897
+  time: '2026-11-22T00:51:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9614
 Name: RMC14
 Order: -1
