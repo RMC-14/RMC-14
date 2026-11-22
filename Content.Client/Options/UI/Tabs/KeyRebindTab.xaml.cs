@@ -179,6 +179,11 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.CMHolsterQuaternary);
             AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
             AddButton(CMKeyFunctions.RMCInteractWithOtherHand);
+            // RMC14 start
+            AddButton(CMKeyFunctions.RMCPushup);
+            AddButton(CMKeyFunctions.RMCPushupRoutine);
+            AddButton(CMKeyFunctions.RMCWeakPushup);
+            // RMC14 end
             AddButton(CMKeyFunctions.RMCRest);
             AddButton(CMKeyFunctions.RMCResist);
             AddButton(CMKeyFunctions.RMCOpenLanguageMenu);

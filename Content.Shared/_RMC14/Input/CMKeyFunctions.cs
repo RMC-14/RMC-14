@@ -20,8 +20,11 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCPickUpDroppedItems = "RMCPickUpDroppedItems";
     public static readonly BoundKeyFunction RMCFocusMentorChat = "RMCFocusMentorChat";
     public static readonly BoundKeyFunction RMCInteractWithOtherHand = "RMCInteractWithOtherHand";
+    public static readonly BoundKeyFunction RMCPushup = "RMCPushup";
+    public static readonly BoundKeyFunction RMCPushupRoutine = "RMCPushupRoutine";
     public static readonly BoundKeyFunction RMCRest = "RMCRest";
     public static readonly BoundKeyFunction RMCResist = "RMCResist";
+    public static readonly BoundKeyFunction RMCWeakPushup = "RMCWeakPushup";
     public static readonly BoundKeyFunction RMCOpenLanguageMenu = "RMCOpenLanguageMenu";
     public static readonly BoundKeyFunction RMCCycleLanguage = "RMCCycleLanguage";
 
