@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added M56D and M2C ammo entries to the FOB Supplies Vendor(Requisitions
-      tent vendor).
-    type: Add
-  - message: Tries to fix items being deleted when you restock them into a vendor.
-    type: Fix
-  id: 3399
-  time: '2026-06-16T01:48:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10157
 - author: Dygon
   changes:
   - message: You no longer hear in-game sounds while in the lobby(for real this time).
@@ -4452,5 +4442,13 @@
   id: 3898
   time: '2026-11-22T00:54:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9886
+- author: wheelwrightt
+  changes:
+  - message: The language tab can be opened and languages themselves can be cycled
+      via a settable keybind in the options menu.
+    type: Add
+  id: 3899
+  time: '2026-11-22T03:17:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10205
 Name: RMC14
 Order: -1
