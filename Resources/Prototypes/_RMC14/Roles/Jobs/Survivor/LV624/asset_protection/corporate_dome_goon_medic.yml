@@ -4,7 +4,7 @@
   name: rmc-job-name-pmc-corporate-goon-medic
   description: cm-job-description-survivor
   spawnMenuRoleName: We-Ya Goon Medic (LV624 Special Survivor)
-  startingGear: RMCGearSurvivorGoon
+  startingGear: RMCGearSurvivorGoonMedic
   icon: "RMCJobIconPMCGoonMedic"
   hasIcon: true
   ranks:
@@ -44,6 +44,25 @@
       state: green
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv_wy
+
+- type: startingGear
+  parent: RMCGearSurvivorGoon
+  id: RMCGearSurvivorGoonMedic
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCorporateMedic
+    outerClothing: RMCArmorM4PMCCorporateMedic
+    eyes: RMCGlassesMedicalHUDGlasses
+    head: ArmorHelmetPMCCorporateMedic
+    suitstorage: RMCWeaponSMGM63WhiteNoLock
+  storage:
+    back:
+    - CMStunbaton
+    - CMSheetMetal50
+    - CMMagazineSMGM63
+    - CMMagazineSMGM63
+    - CMDefibrillator
+  inhand:
+  - CMFirstAidKitFilledRobust
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

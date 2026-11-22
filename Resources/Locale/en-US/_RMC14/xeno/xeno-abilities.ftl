@@ -21,7 +21,6 @@ rmc-xeno-psychic-radiance-message = Radiate a psychic message.
 rmc-xeno-psychic-radiance-no-targets = There are no nearby minds to radiate to.
 rmc-xeno-psychic-radiance-sent = We radiate our thoughts to {$count} nearby minds.
 rmc-xeno-psychic-give-order-message = Give an order to {$target}.
-rmc-xeno-psychic-give-order-must-watch = We must be watching a sister to give an order.
 rmc-xeno-psychic-give-order-sent = We give an order to {$target}.
 rmc-xeno-psychic-target-invalid = That mind is no longer within our reach.
 rmc-xeno-psychic-message-xeno = [color=#921992][font size=14][bold]The voice of {$queen} resonates in your head:[/bold] "{$message}"[/font][/color]
@@ -173,6 +172,7 @@ cm-pheromones-warding = Warding
 cm-pheromones-frenzy = Frenzy
 cm-xeno-pheromones-start = You start emitting {$pheromones} pheromones
 cm-xeno-pheromones-stop = You stop emitting pheromones
+rmc-xeno-pheromones-already = We are already emitting {$pheromones} pheromones!
 
 # Regurgitate
 cm-xeno-none-devoured = You haven't devoured anyone!
@@ -229,6 +229,8 @@ cm-xeno-retrieve-egg-too-many-eggs = We can't carry more eggs!
 cm-xeno-retrieve-egg-stash-egg = We store the egg for safekeeping. Now holding: {$cur_eggs}/{$max_eggs}.
 cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding: {$cur_eggs}/{$max_eggs}.
 rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
+rmc-xeno-retrieve-egg-fill = We start filling {THE($morpher)} with our children.
+rmc-xeno-retrieve-egg-fill-finish = We slide our children out of eggs into {THE($morpher)}. Now holding: {$cur_eggs}/{$max_eggs}.
 
 # Throw Parasite
 cm-xeno-throw-parasite-no-parasites = We don't have any children stored!
@@ -240,6 +242,12 @@ rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE(
    [one] role
    *[other] roles
 } available.
+rmc-xeno-throw-parasite-empty = We take children from {THE($morpher)} and carry them for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
+rmc-xeno-throw-parasite-empty-on-fire = Touching {THE($morpher)} while you're on fire would burn the children in it!
+rmc-xeno-throw-parasite-throw-cooldown = We must wait before throwing another child.
+rmc-xeno-throw-parasite-retrieve-cooldown = We must wait before retrieving another child.
+
+rmc-xeno-parasite-drop-cooldown = We must wait before dropping another child.
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
@@ -490,3 +498,29 @@ rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE
 rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
 rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
 rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!
+
+# Massacre
+rmc-xeno-massacre-no-targets = There's no dead to tear apart!
+rmc-xeno-massacre-start-self = We start ripping apart the dead!
+rmc-xeno-massacre-start-others = {CAPITALIZE(THE($user))} starts tearing apart the nearby bodies!
+rmc-xeno-massacre-end-self = We tear the dead apart!
+rmc-xeno-massacre-end-others = {CAPITALIZE(THE($user))} tears the nearby bodies apart!
+
+# Blood Drain
+rmc-xeno-blood-drain-target = {CAPITALIZE(THE($user))} is biting into you!
+rmc-xeno-blood-drain-no-blood = {CAPITALIZE(THE($target))} has no blood left!
+rmc-xeno-blood-drain-bad-blood = {CAPITALIZE(THE($target))} has terrible tasting blood!
+rmc-xeno-blood-drain-infected-blood = {CAPITALIZE(THE($target))} has sister blood flowing through them!
+rmc-xeno-blood-drain-pull = We need to pull {CAPITALIZE(THE($target))} to drain blood!
+rmc-xeno-blood-drain-down = We need to keep {CAPITALIZE(THE($target))} down to drain blood!
+
+# Paratoxin Slashes
+rmc-xeno-paratoxin-slashes-apply = Our next {$number ->
+[1] slash
+*[other] {$number} slashes
+} will apply paratoxin!
+rmc-xeno-paratoxin-slashes-expire = We have waited too long, our slashes will no longer apply paratoxin!
+
+# Catalytic Tail Stab
+rmc-xeno-catalytic-tail-stab-buff = We are faster and more armored for a short time!
+rmc-xeno-catalytic-tail-stab-buff-expire = We feel our speed and armor dissipate!

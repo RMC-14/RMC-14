@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "novaris_1"
+    },
+    {
+      "name": "novaris_2"
+    },
+    {
+      "name": "novaris_3"
+    },
+    {
+      "name": "novaris_4"
+    },
+    {
+      "name": "novaris_5"
+    },
+    {
+      "name": "novaris_6"
+    },
+    {
+      "name": "novaris_7"
+    },
+    {
+      "name": "novaris_8"
+    }
+  ]
+}
