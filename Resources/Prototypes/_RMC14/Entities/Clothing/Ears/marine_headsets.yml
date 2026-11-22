@@ -490,7 +490,7 @@
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetIntel
-  name: marine intel radio headset
+  name: marine intel squad radio headset
   description: This is used by Intel squad members.
   components:
   - type: Sprite

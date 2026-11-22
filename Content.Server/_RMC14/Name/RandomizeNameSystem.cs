@@ -14,7 +14,7 @@ public sealed class RandomizeNameSystem : EntitySystem
         SubscribeLocalEvent<RandomizeNameComponent, ComponentStartup>(OnStartup);
     }
 
-    public void OnStartup(Entity<RandomizeNameComponent> ent, ref ComponentStartup args)
+    private void OnStartup(Entity<RandomizeNameComponent> ent, ref ComponentStartup args)
     {
         if (TryComp<HumanoidAppearanceComponent>(ent, out var appearance))
         {
