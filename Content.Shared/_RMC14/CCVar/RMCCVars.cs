@@ -698,4 +698,10 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
+
+    /// <summary>
+    /// How many entities to damage/delete per tick after nukemap/scuttle.
+    /// </summary>
+    public static readonly CVarDef<int> RMCNukeChunkSize =
+        CVarDef.Create("rmc.nukemap_chunk_size", 1024, CVar.SERVER | CVar.SERVERONLY);
 }
