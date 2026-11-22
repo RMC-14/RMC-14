@@ -14,6 +14,13 @@
   path: "/Textures/_RMC14/Shaders/invisible.swsl"
 
 - type: shader
+  id: RMCGhostAlpha
+  kind: source
+  path: "/Textures/_RMC14/Shaders/ghost_alpha.swsl"
+  params:
+    opacity: 1.0
+
+- type: shader
   id: RMCNightVision
   kind: source
   path: "/Textures/_RMC14/Shaders/night_vision.swsl"
