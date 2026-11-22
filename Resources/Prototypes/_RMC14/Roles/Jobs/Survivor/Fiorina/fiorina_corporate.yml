@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: CMSurvivorFiorinaCorporateLiaison
   name: cm-job-name-survivor-fiorina-corporate-liaison
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorFiorinaCorporateLiaison
   accessGroups:
   - ColonistCorporate

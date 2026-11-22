@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: RMCSurvivorHybrisaEngineer
   name: rmc-job-name-survivor-hybrisa-engineer
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaEngineer
   spawnMenuRoleName: Electrical Engineer (Hybrisa Survivor)
   special:

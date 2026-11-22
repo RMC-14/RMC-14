@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: CMSurvivorSolarisILRCPeacekeeper
   name: cm-job-name-survivor-un-peacekeeper
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorSolarisILRCPeacekeeper
   spawnMenuRoleName: ILRC Peacekeeper (Solaris Survivor)

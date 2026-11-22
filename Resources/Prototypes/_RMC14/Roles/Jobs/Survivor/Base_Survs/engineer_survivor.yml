@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMSurvivorEngineer
   name: cm-job-name-survivor-engineer
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor-engineer
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorEngineer
   icon: "RMCJobIconGenericColonistEngi"

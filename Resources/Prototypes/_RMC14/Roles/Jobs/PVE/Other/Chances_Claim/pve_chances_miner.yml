@@ -2,7 +2,7 @@
   parent: CMSurvivorMiner
   id: CMSurvivorChancesMiner
   name: rmc-job-name-colonist-chances-miner
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorChancesMiner
   startingGear: RMCGearSurvivorChancesMiner
   spawnMenuRoleName: Mining Surveyor (PVE Chances Colonist)

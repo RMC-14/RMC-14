@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMJobSurvivorReactorTechnician
   name: rmc-job-name-survivor-reactor-technician
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorReactorTechnician
   accessGroups:

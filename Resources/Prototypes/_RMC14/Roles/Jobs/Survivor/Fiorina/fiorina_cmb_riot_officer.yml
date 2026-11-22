@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: CMSurvivorFiorinaRiotOfficer
   name: cm-job-name-survivor-riot-officer
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaRiotOfficer
   accessGroups:

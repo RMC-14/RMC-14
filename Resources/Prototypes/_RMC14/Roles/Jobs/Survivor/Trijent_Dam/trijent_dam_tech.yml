@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: CMSurvivorTrijentDamTech
   name: cm-job-name-survivor-trijent-dam-tech
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorTrijentDamTech
   spawnMenuRoleName: Dam Maintenance Technician (Trijent Survivor)
   special:

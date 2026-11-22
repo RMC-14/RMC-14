@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: RMCSurvivorHybrisaEMTParamedic
   name: rmc-job-name-survivor-emt-paramedic
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaEMTParamedic
   spawnMenuRoleName: EMT Paramedic (Hybrisa Survivor)
   special:

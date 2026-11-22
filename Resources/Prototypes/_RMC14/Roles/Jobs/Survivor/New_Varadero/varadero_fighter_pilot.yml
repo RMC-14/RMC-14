@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: RMCSurvivorUNMCPilot
   name: rmc-job-name-survivor-pilot
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorUNMCPilot
   greeting: rmc-job-greeting-varadero

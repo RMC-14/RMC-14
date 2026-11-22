@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: RMCSurvivorHybrisaCivilian
   name: rmc-job-name-survivor-hybrisa-civilian
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaCivilian
   spawnMenuRoleName: Civilian (Hybrisa Survivor)
   special:

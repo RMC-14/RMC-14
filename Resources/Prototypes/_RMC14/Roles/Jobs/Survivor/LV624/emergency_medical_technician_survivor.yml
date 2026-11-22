@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: CMSurvivorLV624MedicalTechnician
   name: rmc-job-name-survivor-lv624-medical-technician
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorLV624MedicalTechnician
   spawnMenuRoleName: Medical Technician (LV624 Survivor)
   special:

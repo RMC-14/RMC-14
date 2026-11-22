@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: CMSurvivorChancesEnvironmentalResearcher
   name: rmc-job-name-colonist-environmental-researcher
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorChancesEnvironmentalResearcher
   startingGear: RMCGearSurvivorChancesEnvironmentalResearcher
   spawnMenuRoleName: Environmental Researcher (PVE Chances Colonist)

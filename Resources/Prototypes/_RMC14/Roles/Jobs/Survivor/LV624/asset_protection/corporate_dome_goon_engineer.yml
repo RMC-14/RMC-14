@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: CMSurvivorLV624CorporateDomeGoonEngineer
   name: rmc-job-name-pmc-corporate-goon-engi
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   spawnMenuRoleName: We-Ya Goon Engineer (LV624 Special Survivor)
   startingGear: RMCGearSurvivorGoonEngineer
@@ -30,7 +30,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_goon
-  greeting: rmc-job-greeting-corporate-dome-goon-engi
+  greeting: rmc-job-greeting-corporate-dome-security
 
 - type: startingGear
   parent: RMCGearSurvivorGoon

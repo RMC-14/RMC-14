@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: RMCSurvivorKutjevoEngineer
   name: rmc-job-name-survivor-kutjevo-engineer
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoEngineer
   spawnMenuRoleName: Kutjevo Engineer (Kutjevo Survivor)
   special:

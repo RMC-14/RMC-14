@@ -2,7 +2,7 @@
   parent: CMSurvivorTrucker
   id: CMSurvivorTrijentTrucker
   name: cm-job-name-survivor-trijent-trucker
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorTrijentTrucker
   spawnMenuRoleName: Trijent Heavy Vehicle Operator (Trijent Survivor)
   special:

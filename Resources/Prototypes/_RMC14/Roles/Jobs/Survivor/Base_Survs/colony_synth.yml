@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: RMCSyntheticColony
   name: rmc-job-name-synth-colony
-  description: rmc-job-description-synth-colony
+  description: rmc-job-description-survivor-synth
   playTimeTracker: RMCJobSyntheticColony
   ranks:
     RMCRankSyntheticColonist: []

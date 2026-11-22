@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: CMSurvivorLV624CorporateDomeGoonMedic
   name: rmc-job-name-pmc-corporate-goon-medic
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: We-Ya Goon Medic (LV624 Special Survivor)
   startingGear: RMCGearSurvivorGoonMedic
   icon: "RMCJobIconPMCGoonMedic"
@@ -29,7 +29,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_goon
-  greeting: rmc-job-greeting-corporate-dome-goon-medic
+  greeting: rmc-job-greeting-corporate-dome-security
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMSurvivorMiner
   name: cm-job-name-survivor-miner
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorMiner
   special:

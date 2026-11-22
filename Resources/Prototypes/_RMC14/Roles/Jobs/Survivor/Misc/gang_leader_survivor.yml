@@ -3,7 +3,7 @@
   parent: CMSurvivor
   id: CMSurvivorGangLeader
   name: cm-job-name-survivor-gang-leader
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorGangLeader
   spawnMenuRoleName: Gang Leader (Survivor)

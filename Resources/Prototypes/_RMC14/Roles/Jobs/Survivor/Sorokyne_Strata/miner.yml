@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMJobSurvivorSoroMiner
   name: rmc-job-name-survivor-soro-miner
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorSoroMiner
   spawnMenuRoleName: Miner (Sorokyne Survivor)

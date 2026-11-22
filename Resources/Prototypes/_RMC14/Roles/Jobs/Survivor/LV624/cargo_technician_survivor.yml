@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: CMSurvivorLV624CargoTechnician
   name: rmc-job-name-survivor-lv624-cargo-technician
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorLV624CargoTechnician
   spawnMenuRoleName: Cargo Technician (LV624 Survivor)
   special:

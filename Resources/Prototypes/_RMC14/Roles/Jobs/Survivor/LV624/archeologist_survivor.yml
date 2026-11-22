@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: CMSurvivorLV624Archeologist
   name: rmc-job-name-survivor-lv624-archeologist
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorLV624Archeologist
   spawnMenuRoleName: Archeologist (LV624 Survivor)
   special:

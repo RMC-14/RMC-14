@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: RMCSurvivorVaraderoContractor
   name: rmc-job-name-survivor-new-varadero-contractor
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorUNMCContractor
   greeting: rmc-job-greeting-varadero

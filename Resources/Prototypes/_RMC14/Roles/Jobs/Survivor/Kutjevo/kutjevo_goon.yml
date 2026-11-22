@@ -2,7 +2,7 @@
   parent: CMSurvivorGoon
   id: RMCSurvivorKutjevoGoon
   name: rmc-job-name-pmc-corporate-goon
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoGoon
   hasIcon: true
   spawnMenuRoleName: We-Ya Goon (Kutjevo Survivor)

@@ -2,7 +2,7 @@
   parent: RMCJobRibbonBase
   id: CMSurvivor
   name: cm-job-name-survivor
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor-civilian
   playTimeTracker: CMJobSurvivor
   requirements:
   - !type:DepartmentTimeRequirement

@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMSurvivorFlightOperator
   name: cm-job-name-survivor-flight-control-operator
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorFlightOperator
   spawnMenuRoleName: Flight Control Operator (Survivor)
   access:

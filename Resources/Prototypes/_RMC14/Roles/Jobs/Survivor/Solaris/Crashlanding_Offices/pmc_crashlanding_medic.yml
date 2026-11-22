@@ -9,7 +9,7 @@
   - ColonistPMC
   startingGear: RMCGearSurvivorPMCMedic
   icon: RMCJobIconPMCMedic
-  greeting: rmc-job-greeting-solaris-pmc-medic
+  greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: PMC Medic (Solaris Special Survivor)
   special:

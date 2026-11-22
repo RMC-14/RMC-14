@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: RMCSurvivorNewVaraderoResearchDirector
   name: rmc-job-name-survivor-new-varadero-rd
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorNewVaraderoResearchDirector
   greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: New Varadero Research Director (NV Survivor)

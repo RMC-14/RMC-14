@@ -3,14 +3,14 @@
   parent: CMSurvivorFiorinaRiotOfficer
   id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlSynth
   name: cm-job-name-survivor-fiorina-cmb-riot-control-synth
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: RMCJobSyntheticColony
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlSynth
   icon: "RMCJobIconCMBRiotSynthetic"
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: CMB Riot Control Synthetic (Fiorina Special Survivor)
-  greeting: rmc-job-greeting-riot-in-progress-CMB-riot-synth
+  greeting: rmc-job-greeting-riot-in-progress
   ranks:
     RMCRankCMBSergeant:
     - !type:RoleTimeRequirement

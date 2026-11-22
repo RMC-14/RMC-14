@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMJobSurvivorArmyReservist
   name: rmc-job-name-survivor-army-reservist
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
     RMCRankSPPEfreitor:

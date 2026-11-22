@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMJobSurvivorMSCResearcher
   name: rmc-job-name-survivor-msc-researcher
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   ranks:
     RMCRankCivilianDoctor: []

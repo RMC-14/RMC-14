@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: RMCSurvivorHybrisaMaterialReprocessingTechnician
   name: rmc-job-name-survivor-material-reprocessing-technician
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaMaterialReprocessingTechnician
   spawnMenuRoleName: Civilian - Material Reprocessing Technician (Hybrisa Survivor)
   special:

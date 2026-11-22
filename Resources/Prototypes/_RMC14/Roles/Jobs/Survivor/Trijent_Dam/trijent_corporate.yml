@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: CMSurvivorTrijentCorporate
   name: cm-job-name-survivor-trijent-corporate
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: Trijent Corporation Liaison (Trijent Survivor)
   startingGear: RMCGearSurvivorTrijentCorporate
   icon: "CMJobIconLiaison"

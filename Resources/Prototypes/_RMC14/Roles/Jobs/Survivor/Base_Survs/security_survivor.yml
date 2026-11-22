@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMSurvivorSecurity
   name: cm-job-name-survivor-security
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor-security
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
     RMCRankCivilianSeniorOfficer:

@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: RMCSurvivorAirportFirefighter
   name: rmc-job-name-survivor-varadero-firefighter
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorAirportFirefighter
   greeting: rmc-job-greeting-varadero

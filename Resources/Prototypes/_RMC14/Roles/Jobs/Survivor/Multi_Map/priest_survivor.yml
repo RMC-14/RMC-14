@@ -3,7 +3,7 @@
   parent: CMSurvivor
   id: CMSurvivorPriest
   name: cm-job-name-surivor-priest
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorPriest
   spawnMenuRoleName: Chaplain (Survivor)

@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: CMSurvivorChancesParamedic
   name: rmc-job-name-colonist-chances-paramedic
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorChancesParamedic
   startingGear: RMCGearSurvivorChancesParamedic
   spawnMenuRoleName: Chance's Claim Paramedic (PVE Chances Colonist)

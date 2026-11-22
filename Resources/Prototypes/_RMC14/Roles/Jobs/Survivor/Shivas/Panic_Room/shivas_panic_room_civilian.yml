@@ -4,6 +4,7 @@
   name: cm-job-name-survivor
   spawnMenuRoleName: Civilian (Shivas Special Survivor)
   playTimeTracker: CMJobSurvivor
+  greeting: rmc-job-greeting-shivas-panic-room-colonist
 
 - type: entity
   parent: CMSpawnPointSurvivor

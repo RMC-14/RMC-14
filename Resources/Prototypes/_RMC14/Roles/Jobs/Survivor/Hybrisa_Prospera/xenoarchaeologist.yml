@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: RMCSurvivorHybrisaXenoarchaeologist
   name: rmc-job-name-survivor-xenoarchaeologist
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaXenoarchaeologist
   spawnMenuRoleName: Xenoarchaeologist (Hybrisa Survivor)
   special:

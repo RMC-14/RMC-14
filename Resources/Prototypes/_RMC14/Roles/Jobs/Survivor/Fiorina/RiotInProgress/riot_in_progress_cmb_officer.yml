@@ -2,7 +2,7 @@
   parent: CMSurvivorFiorinaRiotOfficer
   id: RMCSurvivorFiorinaRiotInProgressCMBOfficer
   name: cm-job-name-survivor-riot-officer
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBOfficer
   accessGroups:
@@ -52,7 +52,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_cmb
-  greeting: rmc-job-greeting-riot-in-progress-CMB
+  greeting: rmc-job-greeting-riot-in-progress
 
 - type: startingGear
   id: RMCGearSurvivorFiorinaRiotInProgressCMBOfficer

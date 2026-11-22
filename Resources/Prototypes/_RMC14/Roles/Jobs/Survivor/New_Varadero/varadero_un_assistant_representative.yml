@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: RMCSurvivorNewVaraderoUNRepresentative
   name: rmc-job-name-survivor-varadero-un-asst-rep
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorUNRepresentative
   spawnMenuRoleName: UN Assistant Representative (NV Survivor)
   greeting: rmc-job-greeting-varadero

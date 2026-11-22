@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: CMSurvivorICB
   name: cm-job-name-survivor-icb
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (Survivor)
   icon: "RMCJobIconICBLiaison"
   ranks:

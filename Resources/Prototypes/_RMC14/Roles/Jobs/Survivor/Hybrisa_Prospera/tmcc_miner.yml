@@ -2,7 +2,7 @@
   parent: CMSurvivorMiner
   id: RMCSurvivorHybrisaTMCCMiner
   name: rmc-job-name-survivor-tmcc-miner
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaTMCCMiner
   spawnMenuRoleName: TMCC Miner (Hybrisa Survivor)
   special:

@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: RMCSurvivorNewVaraderoXenoarchaeologist
   name: rmc-job-name-survivor-new-varadero-xenoarchaeologist
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorNewVaraderoXenoarchaeologist
   greeting: rmc-job-greeting-varadero

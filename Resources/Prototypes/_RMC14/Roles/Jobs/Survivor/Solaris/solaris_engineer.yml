@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: CMSurvivorSolarisEngineer
   name: rmc-job-name-survivor-solaris-engineer
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorSolarisEngineer
   spawnMenuRoleName: Solaris Engineer (Solaris Survivor)
   special:

@@ -2,7 +2,7 @@
   parent: RMCSurvivorMilitary
   id: CMSurvivorUNMC
   name: cm-job-name-survivor-unmc
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: UNMC Remnant (Survivor)
   ranks:
     RMCRankPrivateFirstClass: []

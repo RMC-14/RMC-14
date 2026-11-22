@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: CMSurvivorLV624CorporateDomeCL
   name: rmc-job-name-survivor-lv624-corporate-liaison
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: Paranoid Corporate Liaison (LV624 Special Survivor)
   startingGear: RMCGearSurvivorLV624ParanoidCorporateLiaison
   icon: "CMJobIconExecSpec"
@@ -42,7 +42,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_goon
-  greeting: rmc-job-greeting-corporate-dome-cl
+  greeting: rmc-job-greeting-corporate-dome-executive
 
 
 - type: startingGear
