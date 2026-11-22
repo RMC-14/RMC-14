@@ -66,6 +66,9 @@
       sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
       state: hooked
       visible: false
+    - map: [ "enum.ParatoxinVisualLayers.Base" ]
+      sprite: "_RMC14/Effects/paratoxin_effect.rsi"
+      visible: false
     - map: [ "enum.NewPlayerLayers.Layer" ]
       visible: false
   - type: DamageVisuals
@@ -227,6 +230,8 @@
     - AnomalyHost
   - type: MobGibbedByExplosionType
   - type: RMCCanBeFultoned
+  - type: ExplosionResistance
+    damageCoefficient: 1.2  # TODO RMC14: won't be necessary once limb damage is implemented to mimic parity
 
 - type: entity
   save: false

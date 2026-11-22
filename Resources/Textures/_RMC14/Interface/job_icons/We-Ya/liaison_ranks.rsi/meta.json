@@ -36,6 +36,9 @@
         },
         {
             "name": "weya_seniorexec"
+        },
+        {
+            "name": "weya_trainee"
         }
     ]
 }

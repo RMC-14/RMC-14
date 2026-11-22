@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: CMRoyalMarinesRiflemanPVE
-  name: rmc-job-name-rcm-pve-rifleman
+  name: rmc-job-name-rcm-commando
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalRiflemanPVE
   ranks:
@@ -40,7 +40,7 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillSurgery: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-pve-rifleman
+      prefix: rmc-job-prefix-rcm-commando
     - type: AssignSquad
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon

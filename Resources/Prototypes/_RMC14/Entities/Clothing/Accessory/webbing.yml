@@ -525,7 +525,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     components:
     - type: Storage
@@ -537,7 +537,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
@@ -585,7 +585,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
@@ -600,7 +600,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
@@ -637,7 +637,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     components:
     - type: Storage
@@ -649,7 +649,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
