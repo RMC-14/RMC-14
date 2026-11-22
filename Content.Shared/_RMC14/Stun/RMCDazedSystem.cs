@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Actions;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
@@ -33,7 +34,7 @@ public sealed class RMCDazedSystem : EntitySystem
     /// <seealso cref="RMCDazeableActionComponent"/>
     private void OnDazed(Entity<RMCDazedComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        foreach (var (actionId, _) in _actions.GetActions(ent))
+        foreach (var (actionId, _) in _actions.GetActions(args.Target))
         {
             if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {
@@ -47,7 +48,7 @@ public sealed class RMCDazedSystem : EntitySystem
 
     private void OnDazedEnd(Entity<RMCDazedComponent> ent, ref StatusEffectRemovedEvent args)
     {
-        foreach (var (actionId, _) in _actions.GetActions(ent))
+        foreach (var (actionId, _) in _actions.GetActions(args.Target))
         {
             if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {
@@ -57,10 +58,14 @@ public sealed class RMCDazedSystem : EntitySystem
         }
     }
 
-    public bool TryDaze(EntityUid uid, TimeSpan time, bool refresh = false, StatusEffectsComponent? status = null, bool stutter = false)
+    public bool TryDaze(EntityUid uid, TimeSpan time, bool refresh = true, StatusEffectsComponent? status = null, bool stutter = false)
     {
         if (!Resolve(uid, ref status, false))
             return false;
+
+        var ev = new RMCStatusEffectTimeEvent(StatusEffectDazed.Id, time);
+        RaiseLocalEvent(uid, ref ev);
+        time = ev.Duration;
 
         if (time <= TimeSpan.Zero)
             return false;
@@ -68,8 +73,8 @@ public sealed class RMCDazedSystem : EntitySystem
         var appliedEffect = false;
         if (refresh)
         {
-            _statusEffect.TryUpdateStatusEffectDuration(uid, StatusEffectDazed, time);
-            appliedEffect = true;
+            if (_statusEffect.TryUpdateStatusEffectDuration(uid, StatusEffectDazed, time))
+                appliedEffect = true;
         }
         else if (_statusEffect.TryAddStatusEffectDuration(uid, StatusEffectDazed, time))
             appliedEffect = true;
@@ -77,6 +82,6 @@ public sealed class RMCDazedSystem : EntitySystem
         if (appliedEffect && stutter)
             _stutter.DoStutter(uid, time, true, status);
 
-        return false;
+        return appliedEffect;
     }
 }

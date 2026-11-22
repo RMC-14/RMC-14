@@ -25,10 +25,12 @@ using Content.Shared.Doors.Components;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.Hands;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Jittering;
@@ -85,6 +87,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly RMCTemporaryInvincibilitySystem _invincibility = default!;
 
     private const CollisionGroup LeapCollisionGroup = CollisionGroup.InteractImpassable;
     private const CollisionGroup ThrownCollisionGroup = CollisionGroup.InteractImpassable | CollisionGroup.BarricadeImpassable;
@@ -114,6 +117,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, XenoLeapStoppedEvent>(OnParasiteLeapStopped);
         SubscribeLocalEvent<XenoParasiteComponent, ThrownEvent>(OnParasiteThrown);
         SubscribeLocalEvent<XenoParasiteComponent, LandEvent>(OnParasiteLand);
+        SubscribeLocalEvent<XenoParasiteComponent, DroppedEvent>(OnParasiteDrop);
 
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
@@ -253,7 +257,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             !HasComp<InfectableComponent>(args.PullerUid) &&
             !HasComp<SynthComponent>(args.PullerUid))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", ent)), ent, args.PullerUid, PopupType.SmallCaution);
+            var selfMessage = Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", Identity.Name(ent, EntityManager, args.PullerUid)));
+            _popup.PopupClient(selfMessage, ent, args.PullerUid, PopupType.SmallCaution);
             args.Cancelled = true;
         }
     }
@@ -262,7 +267,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         if (!HasComp<ParasiteAIComponent>(ent))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", ent)), ent, args.User, PopupType.SmallCaution);
+            var selfMessage = Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", Identity.Name(ent, EntityManager, args.User)));
+            _popup.PopupClient(selfMessage, ent, args.User, PopupType.SmallCaution);
             args.Cancel();
             return;
         }
@@ -323,6 +329,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-leap-blocked"), Transform(ent).Coordinates, ent);
                 args.Cancelled = true;
+                _tagSystem.RemoveTag(ent, ParasiteIsPreparingLeapProtoID);
+                _rmcSprite.UpdateDrawDepth(ent);
+
+                foreach (var action in _rmcActions.GetActionsWithEvent<XenoHideActionEvent>(ent))
+                {
+                    _action.SetEnabled(action.AsNullable(), true);
+                }
                 return;
             }
         }
@@ -530,8 +543,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         if (!IsInfectable(parasite, victim))
         {
+            var selfMessage = Loc.GetString("rmc-xeno-failed-cant-infect", ("target", Identity.Name(victim, EntityManager, user)));
             if (popup)
-                _popup.PopupClient(Loc.GetString("rmc-xeno-failed-cant-infect", ("target", victim)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(selfMessage, victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -541,8 +555,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             && TryComp(victim, out StandingStateComponent? standing)
             && !_standing.IsDown(victim, standing))
         {
+            var selfMessage = Loc.GetString("rmc-xeno-failed-cant-reach", ("target", Identity.Name(victim, EntityManager, user)));
             if (popup)
-                _popup.PopupClient(Loc.GetString("rmc-xeno-failed-cant-reach", ("target", victim)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(selfMessage, victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -760,8 +775,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
             {
                 SpawnLarva((uid, infected), out var spawnedLarva);
+                var burstVictimUserId = HasComp<XenoNestedComponent>(uid) ? infected.VictimUserId : null;
                 var priorityEv = new XenoBurstPriorityEvent(
-                    infected.VictimUserId,
+                    burstVictimUserId,
                     infected.InfectorUserId,
                     GetNetEntity(infected.Hive),
                     GetNetEntity(spawnedLarva));
@@ -880,7 +896,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_container.TryGetContainingContainer(victim, out var container) && HasComp<RMCHideParasiteInfectionContainerPopupComponent>(container.Owner))
             return;
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
+        var others = Filter.PvsExcept(victim).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherMessage = Loc.GetString("rmc-xeno-infection-shakes", ("victim", Identity.Name(victim, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, victim, otherEnt, PopupType.MediumCaution);
+        }
     }
 
     private void OnTryMove(Entity<BursterComponent> burster, ref MoveInputEvent args)
@@ -914,8 +938,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             BreakOnDamage = false,
             BreakOnMove = false,
             BreakOnRest = false,
+            RequireCanInteract = false,
+            RangeCheck = false,
             Hidden = true,
-            CancelDuplicate = true,
             BlockDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent
         };
@@ -937,13 +962,22 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             EnsureComp<VictimBurstComponent>(burstFrom);
             _appearance.SetData(burstFrom.Owner, BurstVisuals.Visuals, VictimBurstState.Bursting);
 
-            var shakeFilter = Filter.PvsExcept(victim);
-            shakeFilter.RemoveWhereAttachedEntity(HasComp<BursterComponent>); // not visible the larva
-
             if (_net.IsServer)
             {
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
+
+                var others = Filter.PvsExcept(victim).Recipients;
+                foreach (var other in others)
+                {
+                    if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                    if (otherEnt != spawnedLarva) // not visible to the larva
+                    {
+                        var otherMessage = Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", Identity.Name(victim, EntityManager, otherEnt)));
+                        _popup.PopupEntity(otherMessage, victim, otherEnt, PopupType.LargeCaution);
+                    }
+                }
                 _jitter.DoJitter(victim, comp.JitterTime / 1.2, true, 14f, 5f, true); // violent jitter
             }
 
@@ -973,9 +1007,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             foreach (var larva in container.ContainedEntities)
             {
                 RemCompDeferred<BursterComponent>(larva);
-                var invc = EnsureComp<RMCTemporaryInvincibilityComponent>(larva);
-                invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
-                Dirty(larva, invc);
+                _invincibility.GiveInvincibility(larva, ent.Comp.LarvaInvincibilityTime);
             }
 
             _container.EmptyContainer(container, destination: coords);
@@ -1012,8 +1044,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
                     if (_net.IsServer && doPopup)
                     {
-                        var popupMessage = Loc.GetString("rmc-xeno-infect-fail", ("target", victim), ("clothing", containedEntity));
-                        _popup.PopupEntity(popupMessage, victim, PopupType.SmallCaution);
+                        var others = Filter.Pvs(victim).Recipients;
+                        foreach (var other in others)
+                        {
+                            if (other.AttachedEntity is not { } otherEnt)
+                                continue;
+
+                            var popupMessage = Loc.GetString("rmc-xeno-infect-fail", ("target", Identity.Name(victim, EntityManager, otherEnt)), ("clothing", containedEntity));
+                            _popup.PopupEntity(popupMessage, victim, otherEnt, PopupType.SmallCaution);
+                        }
                     }
 
                     return false;
@@ -1028,8 +1067,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         if (_net.IsServer && doPopup && rippedOffItem != null)
         {
-            var popupMessage = Loc.GetString("rmc-xeno-infect-success", ("target", victim), ("clothing", rippedOffItem));
-            _popup.PopupEntity(popupMessage, victim, PopupType.MediumCaution);
+            var others = Filter.Pvs(victim).Recipients;
+            foreach (var other in others)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                var popupMessage = Loc.GetString("rmc-xeno-infect-success", ("target", Identity.Name(victim, EntityManager, otherEnt)), ("clothing", rippedOffItem));
+                _popup.PopupEntity(popupMessage, victim, otherEnt, PopupType.MediumCaution);
+            }
         }
 
         return true;
@@ -1093,6 +1139,16 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         EnsureComp<BursterComponent>(spawned, out var burster);
         burster.BurstFrom = victim.Owner;
         Dirty(spawned, burster);
+    }
+
+    private void OnParasiteDrop(Entity<XenoParasiteComponent> ent, ref DroppedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.User))
+            return;
+
+        var cooldown = EnsureComp<ParasiteDropCooldownComponent>(args.User);
+        cooldown.NextDropTime = _timing.CurTime + ent.Comp.DropCooldown;
+        Dirty(args.User, cooldown);
     }
 }
 

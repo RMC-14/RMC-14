@@ -21,7 +21,9 @@
     edges:
     - to: rmcFenceBroken
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 1.0
 
   - node: rmcFenceBroken
@@ -34,7 +36,9 @@
         amount: 10
       - !type:DeleteEntity
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 5.0
     - to: fenceMetal
       steps:
@@ -47,7 +51,9 @@
     edges:
     - to: gateBroken
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 1.0
 
   - node: gateBroken
@@ -60,9 +66,63 @@
         amount: 10
       - !type:DeleteEntity
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 5.0
     - to: gate
+      steps:
+      - material: BarbedWire
+        amount: 2
+        doAfter: 3.0
+
+  - node: gateSPP
+    entity: RMCFenceDoorSPP
+    edges:
+    - to: gateBrokenSPP
+      steps:
+      - tool: Cutting
+        doAfter: 1.0
+
+  - node: gateBrokenSPP
+    entity: RMCFenceDoorBrokenSPP
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 10
+      - !type:DeleteEntity
+      steps:
+      - tool: Cutting
+        doAfter: 5.0
+    - to: gateSPP
+      steps:
+      - material: BarbedWire
+        amount: 2
+        doAfter: 3.0
+
+  - node: gateDark
+    entity: RMCFenceDoorDark
+    edges:
+    - to: gateBrokenDark
+      steps:
+      - tool: Cutting
+        doAfter: 1.0
+
+  - node: gateBrokenDark
+    entity: RMCFenceDoorBrokenDark
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 10
+      - !type:DeleteEntity
+      steps:
+      - tool: Cutting
+        doAfter: 5.0
+    - to: gateDark
       steps:
       - material: BarbedWire
         amount: 2

@@ -6,6 +6,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
     drawdepth: Overdoors
@@ -67,6 +70,7 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
+    - type: Tag
   - type: VehicleAmmoLoader
   - type: UserInterface
     interfaces:
@@ -83,6 +87,9 @@
   - type: Strap
     position: Stand
     buckleOffset: "0,-0.05"
+  - type: RemoveComponents
+    components:
+    - type: Tag
 
 - type: entity
   parent: VehicleInteriorGeneralBase
@@ -94,6 +101,9 @@
   - type: Strap
     position: Stand
     buckleOffset: "0,-0.05"
+  - type: RemoveComponents
+    components:
+    - type: Tag
 
 - type: entity
   parent: VehicleInteriorGeneralBase
@@ -105,6 +115,9 @@
   - type: Strap
     position: Stand
     buckleOffset: "0,-0.05"
+  - type: RemoveComponents
+    components:
+    - type: Tag
 
 - type: entity
   parent: VehicleInteriorGeneralBase
@@ -116,6 +129,9 @@
   - type: Strap
     position: Stand
     buckleOffset: "0,-0.05"
+  - type: RemoveComponents
+    components:
+    - type: Tag
 
 - type: entity
   parent: VehicleInteriorGeneralBase
@@ -326,6 +342,9 @@
         type: CMAutomatedVendorBui
   - type: ActivatableUI
     key: enum.CMAutomatedVendorUI.Key
+  - type: RemoveComponents
+    components:
+    - type: Tag
   - type: CMAutomatedVendor
     baseSprite:
       sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
@@ -461,6 +480,9 @@
         type: CMAutomatedVendorBui
   - type: ActivatableUI
     key: enum.CMAutomatedVendorUI.Key
+  - type: RemoveComponents
+    components:
+    - type: Tag
   - type: CMAutomatedVendor
     baseSprite:
       sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
