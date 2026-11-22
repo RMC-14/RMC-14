@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Fishing;
 using Content.Shared._RMC14.Map;
@@ -7,6 +6,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Directions;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Fishing;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -25,29 +25,22 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Numerics;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Server._RMC14.Fishing;
 
-public sealed class RMCFishingSystem : EntitySystem
+public sealed class RMCFishingSystem : SharedRMCFishingSystem
 {
     private const string FishingLineVisualPrototypePrefix = "RMCFishingLineVisual";
 
-    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCWaterSystem _water = default!;
+
 
     private readonly Dictionary<EntityUid, EntityUid> _lineVisuals = new();
 
@@ -71,7 +64,6 @@ public sealed class RMCFishingSystem : EntitySystem
         SubscribeLocalEvent<RMCFishComponent, InteractUsingEvent>(OnFishInteractUsing);
 
         SubscribeLocalEvent<RMCFishingSpearComponent, AfterInteractEvent>(OnSpearAfterInteract);
-        SubscribeLocalEvent<RMCFishingSpearComponent, RMCFishingSpearDoAfterEvent>(OnSpearDoAfter);
     }
 
     public override void Update(float frameTime)
@@ -459,82 +451,6 @@ public sealed class RMCFishingSystem : EntitySystem
         return IsFishableWater(adjacent, user) && IsFishableWater(target, user);
     }
 
-    private bool IsFishableWater(EntityCoordinates coordinates, EntityUid user)
-    {
-        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(coordinates);
-        while (anchored.MoveNext(out var uid))
-        {
-            if (!TryComp(uid, out RMCWaterComponent? water))
-                continue;
-
-            return _water.CanCollide((uid, water), user);
-        }
-
-        return false;
-    }
-
-    private bool TryPickLoot(
-        EntityCoordinates coordinates,
-        ProtoId<RMCFishingLootPrototype> fallback,
-        int commonWeight,
-        int uncommonWeight,
-        int rareWeight,
-        int ultraRareWeight,
-        RMCFishBaitComponent? bait,
-        out EntProtoId loot)
-    {
-        loot = default;
-        var tableId = fallback;
-        if (_area.TryGetArea(coordinates, out var areaEnt, out _) &&
-            areaEnt.Value.Comp.FishingLoot is { } areaLoot)
-        {
-            tableId = areaLoot;
-        }
-
-        if (!_prototype.TryIndex(tableId, out var table))
-            return false;
-
-        var common = ClampChance(commonWeight + (bait?.CommonModifier ?? 0));
-        var uncommon = ClampChance(uncommonWeight + (bait?.UncommonModifier ?? 0));
-        var rare = ClampChance(rareWeight + (bait?.RareModifier ?? 0));
-        var ultraRare = ClampChance(ultraRareWeight + (bait?.UltraRareModifier ?? 0));
-
-        // CMSS13 used sequential prob() checks, so these chances intentionally do not normalize.
-        if (_random.Prob(common) && TryPick(table.Common, out loot))
-            return true;
-        if (_random.Prob(uncommon) && TryPick(table.Uncommon, out loot))
-            return true;
-        if (_random.Prob(rare) && TryPick(table.Rare, out loot))
-            return true;
-        if (_random.Prob(ultraRare) && TryPick(table.UltraRare, out loot))
-            return true;
-
-        return TryPick(table.Common, out loot);
-    }
-
-    private bool TryPick(IReadOnlyList<EntProtoId> entries, out EntProtoId picked)
-    {
-        picked = default;
-        if (entries.Count == 0)
-            return false;
-
-        picked = entries[_random.Next(entries.Count)];
-        return true;
-    }
-
-    private static float ClampChance(int chance)
-    {
-        return Math.Clamp(chance, 0, 100) / 100f;
-    }
-
-    private TimeSpan RandomTime(TimeSpan min, TimeSpan max)
-    {
-        if (max <= min)
-            return min;
-
-        return TimeSpan.FromSeconds(_random.NextDouble(min.TotalSeconds, max.TotalSeconds));
-    }
-
     private void OnFishMapInit(Entity<RMCFishComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.Length <= 0)
@@ -632,42 +548,5 @@ public sealed class RMCFishingSystem : EntitySystem
             ent.Comp.Busy = false;
             Dirty(ent);
         }
-    }
-
-    private void OnSpearDoAfter(Entity<RMCFishingSpearComponent> ent, ref RMCFishingSpearDoAfterEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-        ent.Comp.Busy = false;
-        Dirty(ent);
-
-        if (args.Cancelled)
-            return;
-
-        var coordinates = GetCoordinates(args.Coordinates);
-        if (!IsFishableWater(coordinates, args.User))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-fishing-invalid-water"), args.User, args.User, PopupType.SmallCaution);
-            return;
-        }
-
-        if (_random.Prob(ent.Comp.FailChance) ||
-            !TryPickLoot(coordinates, ent.Comp.Loot, ent.Comp.CommonWeight, ent.Comp.UncommonWeight, ent.Comp.RareWeight, ent.Comp.UltraRareWeight, null, out var loot))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-fishing-spear-fail"), args.User, args.User, PopupType.SmallCaution);
-            return;
-        }
-
-        var caught = Spawn(loot, coordinates);
-        if (_hands.TryPickupAnyHand(args.User, caught))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-fishing-spear-success-hand", ("item", caught)), args.User, args.User);
-            return;
-        }
-
-        _throwing.TryThrow(caught, _transform.GetMoverCoordinates(args.User), 2f, args.User, compensateFriction: true);
-        _popup.PopupEntity(Loc.GetString("rmc-fishing-spear-success-water", ("item", caught)), args.User, args.User);
     }
 }

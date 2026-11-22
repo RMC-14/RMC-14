@@ -133,6 +133,7 @@ public sealed class XenoFortifySystem : EntitySystem
 
         args.XenoArmor += xeno.Comp.Armor;
         args.FrontalArmor += xeno.Comp.FrontalArmor;
+        args.ExplosionArmor += xeno.Comp.ExplosionArmor;
     }
 
     private void OnXenoFortifyBeforeStatusAdded(Entity<XenoFortifyComponent> xeno, ref BeforeStatusEffectAddedEvent args)
@@ -150,7 +151,7 @@ public sealed class XenoFortifySystem : EntitySystem
             if (armor <= 0)
                 return;
 
-            var resist = (float)Math.Pow(1.1, armor / 5.0);
+            var resist = (float)Math.Pow(1.1, armor / 10.0);
             args.DamageCoefficient /= resist;
         }
     }

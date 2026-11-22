@@ -47,3 +47,13 @@
   id: RMCWeatherPersonalOverlay
   kind: source
   path: "/Textures/_RMC14/Shaders/weather_personal_overlay.swsl"
+
+- type: shader
+  id: RMCMarineAnnouncementGrid
+  kind: source
+  path: "/Textures/_RMC14/Shaders/marine_announce_grid.swsl"
+  params:
+    tile_size: 3, 3
+    line_thickness: 0.5
+    grid_color: "#4A9EFF66"
+    scroll_speed: 12.0

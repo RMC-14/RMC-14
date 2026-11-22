@@ -179,8 +179,6 @@ rmc-new-to-job-combat-correspondent = As a Combat Correspondent, you are embedde
 
 rmc-new-to-job-executive-bodyguard = Your job as an Executive Bodyguard is to ensure the safety of the shipside Liaison, as well as roleplaying with them over the course of a round.
 
-                                             To preform your duties, your vendors should have both clothing and gear; at first, the items avalible to you are limited, but will expand as you gain experience and time in the role.
-
                                              You are not an antagonist; work with the shipside Military Police when needed, and don't interfere in their duties, even if it's arresting the Liaison. Personnel detained in the office for trespassing or for attacks on the CL are to be transferred over to the Military Police.
 
                                              Whenever possible, attempt to verbally discourage the Liaison from taking antagonistic action against the ship, causing trouble for other players, or being excessively rude without IC reason. You are also encouraged to report any illegal action the CL commits to the MPs, and detain them and transfer them to the MPs if they are an active threat to other players.

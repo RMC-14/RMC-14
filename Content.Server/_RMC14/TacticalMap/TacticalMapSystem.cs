@@ -5,6 +5,7 @@ using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
@@ -33,6 +34,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -79,6 +81,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private TimeSpan _mapUpdateEvery;
     private TimeSpan _forceMapUpdateEvery;
     private TimeSpan _nextForceMapUpdate = TimeSpan.FromSeconds(30);
+    private TimeSpan _objectiveUpdateInterval = TimeSpan.FromSeconds(15);
+    private TimeSpan _nextObjectiveUpdate;
+
+    private static readonly EntProtoId<RMCAnnouncementPresetComponent> UpdatedOverlay = "RMCAnnouncementMarineCommandNoPortrait";
 
     public override void Initialize()
     {
@@ -164,6 +170,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             RMCCVars.RMCTacticalMapForceUpdateEverySeconds,
             v => _forceMapUpdateEvery = TimeSpan.FromSeconds(v),
             true);
+
+        _nextObjectiveUpdate = _timing.CurTime + _objectiveUpdateInterval;
     }
 
     private void OnOvipositorChanged(ref XenoOvipositorChangedEvent ev)
@@ -1021,7 +1029,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
                 IncludeRangedXenoBlips(mapId, map, map.LastUpdateMarineBlips);
 
-                _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
+                var updatedText = "The UNMC tactical map has been updated.";
+                _marineAnnounce.AnnounceARESStaging(user, updatedText, sound, overlay: new RMCAnnouncementOverlay(UpdatedOverlay, updatedText));
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
 
@@ -1103,6 +1112,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             _toInit.Clear();
             _toUpdate.Clear();
+        }
+
+        if (_net.IsServer && _timing.CurTime >= _nextObjectiveUpdate)
+        {
+            _nextObjectiveUpdate = _timing.CurTime + _objectiveUpdateInterval;
+            var activeUsers = EntityQueryEnumerator<ActiveTacticalMapUserComponent, TacticalMapUserComponent>();
+            while (activeUsers.MoveNext(out var uid, out _, out var user))
+            {
+                UpdateTacticalMapState((uid, user));
+            }
         }
 
         try
