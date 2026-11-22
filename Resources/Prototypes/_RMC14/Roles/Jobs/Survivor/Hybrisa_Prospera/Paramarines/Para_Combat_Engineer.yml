@@ -3,14 +3,23 @@
   id: RMCSurvivorParaAssaultEngineer
   name: rmc-job-name-para-engineer
   ranks:
-    RMCRankParaLanceCorporal: [ ]
+    RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearParaAssaultEngineer
   icon: RMCJobIconParaAssaultEngineer
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Royal Paramarine Assault Engineer (Survivor)
+  spawnMenuRoleName: Royal Paramarine Assault Engineer (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
+      - type: Language
+        spokenLanguages:
+        - Japanese
+        - English
+        understoodLanguages:
+        - Japanese
+        - English
+        currentLanguage: English
+        defaultLanguage: English
       - type: NpcFactionMember
         factions:
           - RoyalMarines
@@ -40,7 +49,7 @@
   equipment:
     id: RMCIDRoyalParamarinesCombatEngineer
     eyes: RMCWeldingGoggles
-    belt: CMBeltUtilityFilled
+    belt: RMCBeltUtilityRCMFilled
     outerClothing: RMCArmorParaVest
     back: RMCSatchelLightpackFilledPara
 
@@ -58,5 +67,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaAssaultEngineer
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_engi

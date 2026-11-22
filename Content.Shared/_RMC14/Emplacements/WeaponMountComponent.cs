@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Placement;
 using Content.Shared.Item;
 using Content.Shared.Tools;
 using Content.Shared.Whitelist;
@@ -10,7 +11,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Shared._RMC14.Emplacements;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true, true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 [Access(typeof(SharedWeaponMountSystem))]
 public sealed partial class WeaponMountComponent : Component
 {
@@ -103,6 +104,12 @@ public sealed partial class WeaponMountComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int BarricadeExclusionAreaSize;
+
+    /// <summary>
+    ///     Anchored entities that prevent this mount from being deployed nearby.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<RMCPlacementRestriction> PlacementRestrictions = new();
 
     /// <summary>
     ///     The action prototype to stop using the mount.

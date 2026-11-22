@@ -4,6 +4,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using System.Collections.Generic;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
@@ -16,7 +17,7 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 // - Designers can remotely thicken walls/doors within range of their nodes every 60 seconds.
 // - Greater Resin Surge: Converts all nearby nodes into reflective resin.
 [Access(typeof(SharedXenoConstructionSystem), typeof(DesignerGreaterResinSurgeSystem), typeof(DesignerNodeBindingSystem))]
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DesignerStrainComponent : Component
 {
     // Runtime bookkeeping for placed design nodes.
@@ -55,4 +56,7 @@ public sealed partial class DesignerStrainComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId GreaterResinSurgeWallPrototype = "WallXenoResinReflectiveUnstable";
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier RemoteThickenSound = new SoundCollectionSpecifier("RMCResinBuild", AudioParams.Default.WithVolume(-10f));
 }

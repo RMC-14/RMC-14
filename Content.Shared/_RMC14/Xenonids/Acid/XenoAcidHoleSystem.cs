@@ -15,7 +15,6 @@ using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
@@ -48,7 +47,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     [Dependency] private readonly OccluderSystem _occluder = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
@@ -67,7 +65,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private EntityQuery<XenoAcidHoleWallComponent> _holeWallQuery;
 
     private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
-    private static readonly ProtoId<DamageGroupPrototype> AcidHoleDamage = "Brute";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly EntProtoId DamagedGirderPrototype = "RMCGirderDamaged";
     private const CollisionGroup HoleBlockMask = CollisionGroup.Impassable |
@@ -103,6 +100,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidHoleWallComponent, RMCRepairableTargetAttemptEvent>(OnWallRepairAttempt);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, EntityTerminatingEvent>(OnWallTerminating);
 
+        SubscribeLocalEvent<XenoWallWeedsComponent, ActivateInWorldEvent>(OnWeededWallActivateInWorld);
         SubscribeLocalEvent<XenoWallWeedsComponent, InteractHandEvent>(OnWeededWallInteractHand, before: [typeof(XenoNestSystem)]);
         SubscribeLocalEvent<XenoWallWeedsComponent, InteractUsingEvent>(OnWeededWallInteractUsing, before: [typeof(XenoNestSystem)]);
     }
@@ -144,20 +142,11 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return true;
         }
 
-        if (_damageableQuery.TryComp(wall, out var damageable) &&
-            _receiverClawsQuery.TryComp(wall, out var receiver))
-        {
-            var targetDamage = FixedPoint2.New(receiver.MaxHealth * 0.9f);
-            if (damageable.TotalDamage < targetDamage)
-                SetWallDamage((wall, damageable), targetDamage);
-        }
-
         var direction = wallComp.PendingDirection ?? Direction.South;
         if (!TryCreateHole((wall, wallComp), direction))
             return false;
 
         wallComp.PendingDirection = null;
-        _audio.PlayPvs(wallComp.HoleCreatedSound, wall);
         return true;
     }
 
@@ -666,12 +655,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         return true;
     }
 
-    private void SetWallDamage(Entity<DamageableComponent> wall, FixedPoint2 damage)
-    {
-        var damageSpecifier = new DamageSpecifier(_prototype.Index(AcidHoleDamage), damage);
-        _damageable.SetDamage(wall.Owner, wall.Comp, damageSpecifier);
-    }
-
     private void ReplaceWallWithDamagedGirder(Entity<XenoAcidHoleWallComponent> wall)
     {
         ClearHole(wall, deleteHole: true);
@@ -761,6 +744,19 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return;
 
         TryStartCrawl(args.User, hole);
+    }
+
+    private void OnWeededWallActivateInWorld(Entity<XenoWallWeedsComponent> weeds, ref ActivateInWorldEvent args)
+    {
+        if (args.Handled ||
+            !TryGetWeededWallWithActiveHole(weeds.Owner, out var wall))
+        {
+            return;
+        }
+
+        var ev = new ActivateInWorldEvent(args.User, wall.Owner, args.Complex);
+        RaiseLocalEvent(wall.Owner, ev);
+        args.Handled = ev.Handled;
     }
 
     private void OnWeededWallInteractHand(Entity<XenoWallWeedsComponent> weeds, ref InteractHandEvent args)

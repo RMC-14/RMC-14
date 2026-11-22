@@ -52,7 +52,7 @@ public sealed class RMCCombatModeUISystem : EntitySystem
             return;
         }
 
-        _crosshairCursor ??= _clyde.CreateCursor(new Image<Rgba32>(16, 16), new Vector2i(8, 8));
+        _crosshairCursor ??= _clyde.CreateCursor(new Image<Rgba32>(1, 1), Vector2i.One);
         _ui.CurrentlyHovered.CustomCursorShape = _crosshairCursor;
     }
 }

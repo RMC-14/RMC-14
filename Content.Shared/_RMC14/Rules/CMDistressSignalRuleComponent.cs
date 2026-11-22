@@ -84,7 +84,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public TimeSpan? ScuttleNextHeatPulseAt;
 
     [DataField]
-    public TimeSpan ScuttleUnlockDelay = TimeSpan.FromSeconds(15);
+    public TimeSpan ScuttleUnlockDelay = TimeSpan.FromSeconds(8);
 
     [DataField]
     public TimeSpan ScuttleMinDuration = TimeSpan.FromMinutes(5);
@@ -305,10 +305,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool AresPreflightDone;
 
     [DataField]
-    public TimeSpan AresMapDelay = TimeSpan.FromSeconds(20);
-
-    [DataField]
-    public bool AresMapDone;
+    public int AresAnnouncementIndex;
 
     [DataField]
     public TimeSpan? StartTime;
@@ -366,7 +363,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool DoJobSlotScaling = true;
 
     [DataField]
-    public bool AutoEnd = false;
+    public bool AutoEnd = true;
 
     [DataField]
     public bool StartARESAnnouncements = true;

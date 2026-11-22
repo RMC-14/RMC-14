@@ -13,7 +13,7 @@ namespace Content.Shared.Configurable
     /// <remarks>
     /// If you want a more detailed description ask the original coder.
     /// </remarks>
-    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
     public sealed partial class ConfigurationComponent : Component
     {
         /// <summary>
