@@ -277,11 +277,13 @@
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentMiniFlamethrower
-  name: underbarrel flamethrower # TODO RMC14 intensity toggle
+  name: underbarrel flamethrower
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
   components:
   - type: Sprite
-    state: flamethrower
+    layers:
+    - state: flamethrower
+      map: [ "enum.IntenseVisuals.Intense" ]
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
@@ -290,7 +292,7 @@
     size: Normal
   - type: Gun
     cameraRecoilScalar: 0
-    fireRate: 0.333
+    fireRate: 0.25
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -307,6 +309,7 @@
   - type: RMCFlamerTank
     maxIntensity: 10
     maxDuration: 10
+    maxRange: 5
     reagentWhitelist:
     - RMCNapalmUT
     - WeldingFuel
@@ -331,6 +334,7 @@
       state: flamethrower-on
   - type: AttachableVisuals
     offset: -0.125, 0.245
+    redrawOnAppearanceChange: true
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
@@ -339,6 +343,66 @@
     solution: rmc_flamer_tank
     flushTime: 1.5
   - type: NoMixingReagents
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.IntenseVisuals.Intense:
+        enum.IntenseVisuals.Intense:
+          True: { state: flamethrower_intense }
+          False: { state: flamethrower }
+  - type: UniqueAction
+  - type: RMCFlamerReagentOverride
+    intensity: 10
+    duration: 10
+    range: 5
+    reagent: WeldingFuel
+  - type: RMCFlamerIntenseMode
+    normalIntensity: 10
+    normalDuration: 10
+    normalRange: 5
+    normalFireCost: 1
+    normalFireReagent: WeldingFuel
+    intenseIntensity: 30
+    intenseDuration: 20
+    intenseRange: 2
+    intenseFireCost: 5
+    intenseFireReagent: RMCNapalmUT
+    hasIntenseVisuals: true
+
+- type: entity
+  parent: RMCAttachmentMiniFlamethrower
+  id: RMCAttachmentMiniFlamethrowerAdvanced
+  name: advanced underbarrel flamethrower # TODO RMC14: No intensity switch on this one, remove the regular UBF as a parent once we get it
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMiniFlamethrowerAdvanced
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 50
+  - type: RMCFlamerAmmoProvider
+  - type: RMCFlamerTank
+    maxIntensity: 30
+    maxDuration: 20
+    maxRange: 6
+    reagentWhitelist:
+    - RMCNapalmUT
+    - WeldingFuel
+
+- type: entity
+  parent: RMCAttachmentMiniFlamethrowerAdvanced
+  id: RMCAttachmentMiniFlamethrowerAdvancedIntegrated
+  name: integrated flamethrower
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMiniFlamethrowerAdvancedIntegrated
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -463,6 +527,42 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
+
+- type: entity # locked to M20 rifle
+  parent: RMCAttachmentU7UnderbarrelShotgun
+  id: RMCAttachmentU3UnderbarrelShotgun
+  name: U3 underbarrel shotgun
+  description: An AEGIS U3 tactical shotgun. Integrated into the M20A Haimatsu rifle. Only capable of loading up to five buckshot shells. This one seems less effective at smashing down doors.
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentU3UnderbarrelShotgun
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
+    actionName: Switch to the U3 underbarrel shotgun
+    actionDesc: Switch to using the underbarrel shotgun.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: masterkey
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: masterkey-on
+  - type: AttachableVisuals
+    suffix: "_a_alt"
+  - type: GunDamageMultipliers
+    multipliers:
+      Turf: 1
+      Breaching: 1
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -690,12 +790,16 @@
   parent: RMCAttachmentU1GrenadeLauncher
   id: RMCAttachmentM203GrenadeLauncher
   name: M203 grenade launcher
-  description: An antique underbarrel grenade launcher. Adopted in 1969 for the M16, it was made obsolete centuries ago; how its ended up here is a mystery to you. Holds only one propriatary 40mm grenade, does not have modern IFF systems, it won't pass through your friends.
+  description: An antique underbarrel grenade launcher. Originally designed for the CR16, it since fell out of production; how it ended up here is a mystery. Holds only one proprietary 40mm grenade, lacks modern IFF systems, and won't pass through your friends.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     layers:
-      - state: grenade-m203
+      - state: grenade-cr16
         map: [ "enum.BreechVisuals.Open" ]
+  - type: AttachableVisuals
+    suffix: ""
+    offset: -0.1, 0.218
   - type: GunIFF
     enabled: false
   - type: BallisticAmmoProvider
@@ -708,18 +812,16 @@
     visuals:
       enum.BreechVisuals.Open:
         enum.BreechVisuals.Open:
-          True: { state: grenade-m203-open }
-          False: { state: grenade-m203 }
+          True: { state: grenade-cr16-open }
+          False: { state: grenade-cr16 }
   - type: AttachableToggleable
     actionName: Switch to the MK1 Underslung Grenade Launcher
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-m203
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: grenade-cr16
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-m203-on
-  - type: AttachableVisuals
-    offset: -0.1, 0.218
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: grenade-cr16-on
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
@@ -1036,7 +1138,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-    state: flamer-l90
+    layers:
+    - state: flamer-l90
+      map: [ "enum.IntenseVisuals.Intense" ]
   - type: AttachableToggleable
     actionName: Switch to the L90U2 underbarrel flamethrower.
     actionDesc: Switch to using the L90U2 underbarrel flamethrower.
@@ -1046,6 +1150,12 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: flamer-l90-on
+  - type: GenericVisualizer
+    visuals:
+      enum.IntenseVisuals.Intense:
+        enum.IntenseVisuals.Intense:
+          True: { state: flamer-l90_intense }
+          False: { state: flamer-l90 }
   - type: AttachableVisuals
     offset: 0, 0
   - type: Tag
@@ -1097,6 +1207,9 @@
   id: RMCAttachmentU7UnderbarrelShotgun
 
 - type: Tag
+  id: RMCAttachmentU3UnderbarrelShotgun
+
+- type: Tag
   id: RMCAttachmentU1GrenadeLauncher
 
 - type: Tag
@@ -1116,6 +1229,12 @@
 
 - type: Tag
   id: RMCAttachmentMiniFlamethrower
+
+- type: Tag
+  id: RMCAttachmentMiniFlamethrowerAdvanced
+
+- type: Tag
+  id: RMCAttachmentMiniFlamethrowerAdvancedIntegrated
 
 - type: Tag
   id: RMCAttachmentUnderbarrelExtinguisher

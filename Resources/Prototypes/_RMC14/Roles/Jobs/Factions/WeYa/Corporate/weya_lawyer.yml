@@ -63,6 +63,7 @@
     back:
     - CMClipboard
     - CMPenClicky
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: MarkerBase

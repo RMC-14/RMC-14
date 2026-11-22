@@ -31,6 +31,8 @@
     role: CMXenoDefender
     tier: 1
     hudOffset: -0.1,0.2
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 240 # 4 minutes
   - type: XenoLight
   - type: XenoDevolve
@@ -109,6 +111,8 @@
     name: cm-job-name-xeno-defender
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT1
+  - type: XenoFishing
+    failChance: 0.9 # They are not stabbing fish
 
 - type: entity
   parent: CMXenoDefenderBase
@@ -160,6 +164,8 @@
     name: rmc-xeno-steelcrest-name
     description: rmc-xeno-steelcrest-description
     popup: rmc-xeno-steelcrest-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoDefender
   - type: MeleeWeapon
     damage:
       groups:

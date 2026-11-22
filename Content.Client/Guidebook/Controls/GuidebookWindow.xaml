@@ -6,7 +6,7 @@
                 MinSize="100 200"
                 Resizable="True"
                 Title="{Loc 'guidebook-window-title'}">
-    <SplitContainer Orientation="Horizontal" HorizontalExpand="True" Name="Split">
+    <SplitContainer Orientation="Horizontal" HorizontalExpand="True" Name="Split" Margin="6 0">
         <!-- Guide select -->
         <BoxContainer Orientation="Horizontal" Name="TreeBox">
             <fancyTree:FancyTree Name="Tree" VerticalExpand="True" HorizontalExpand="True" Access="Public"/>

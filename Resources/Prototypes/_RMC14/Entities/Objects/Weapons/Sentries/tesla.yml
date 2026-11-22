@@ -185,12 +185,13 @@
     factions:
     - FactionMarine
   - type: Sentry
-    deployDelay: 0.75
-    undeployDelay: 0.75
     upgrades: null
   - type: RMCTeslaCoil
     dazeDuration: 0
     fireDelay: 1
+  - type: RMCDeployableEquipment
+    deployDelay: 0.75
+    undeployDelay: 0.75
 
 - type: entity
   parent: RMCTesla

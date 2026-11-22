@@ -50,7 +50,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-commando
   hidden: true
