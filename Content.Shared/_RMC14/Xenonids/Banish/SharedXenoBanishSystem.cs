@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.ManageHive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Administration.Logs;
@@ -21,6 +22,7 @@ public abstract class SharedXenoBanishSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -338,15 +340,21 @@ public abstract class SharedXenoBanishSystem : EntitySystem
 
     private void Banish(EntityUid banisher, EntityUid banished, NetUserId player, string reason)
     {
+        var originalHive = _hive.GetHive(banished);
         var comp = EnsureComp<XenoBanishComponent>(banished);
         comp.BanishedAt = _timing.CurTime;
         comp.Reason = reason;
-        comp.OriginalHive = _hive.GetHive(banished)?.Owner;
+        comp.OriginalHive = originalHive?.Owner;
         Dirty(banished, comp);
 
-        // kept on the hive so leaving the body doesn't let the player rejoin as a lesser or parasite
-        if (comp.OriginalHive is { } originalHive)
-            EnsureComp<HiveBanishedPlayersComponent>(originalHive).Players.Add(player);
+        if (originalHive is { } hive)
+        {
+            // kept on the hive so leaving the body doesn't let the player rejoin as a lesser or parasite
+            EnsureComp<HiveBanishedPlayersComponent>(hive).Players.Add(player);
+
+            // lessers and parasites keep their place in the larva queue, so they'd be offered a larva straight away
+            _larvaQueue.RemoveFromQueue(player, hive);
+        }
 
         // Before removing them from the hive so the banished xenonid also gets the announcement
         OnBanished(banisher, (banished, comp));
