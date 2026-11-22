@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.GameTicking;
+using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Player;
 
@@ -37,15 +38,14 @@ public sealed partial class MutinyRuleSystem
         }
     }
 
-    private void OnMindAdded(Entity<MindContainerComponent> body, ref MindAddedMessage args)
+    private void OnMindGotAdded(Entity<MindComponent> mind, ref MindGotAddedEvent args)
     {
-        HandleBodyAvailable(body.Owner);
+        HandleBodyAvailable(args.Container.Owner);
     }
 
-    private void OnMindRemoved(Entity<MindContainerComponent> body, ref MindRemovedMessage args)
+    private void OnMindGotRemoved(Entity<MutinyMindComponent> mind, ref MindGotRemovedEvent args)
     {
-        if (TryComp(args.Mind.Owner, out MutinyMindComponent? mutinyMind))
-            RemoveProjection(body.Owner, mutinyMind.Rule);
+        RemoveProjection(args.Container.Owner, mind.Comp.Rule);
     }
 
     private void HandleBodyAvailable(EntityUid body)

@@ -22,8 +22,13 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCInteractWithOtherHand = "RMCInteractWithOtherHand";
     public static readonly BoundKeyFunction RMCRest = "RMCRest";
     public static readonly BoundKeyFunction RMCResist = "RMCResist";
+    public static readonly BoundKeyFunction RMCOpenLanguageMenu = "RMCOpenLanguageMenu";
+    public static readonly BoundKeyFunction RMCCycleLanguage = "RMCCycleLanguage";
 
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
     public static readonly BoundKeyFunction RMCXenoRest = "RMCXenoRest";
+    public static readonly BoundKeyFunction RMCXenoPheromonesRecovery = "RMCXenoPheromonesRecovery";
+    public static readonly BoundKeyFunction RMCXenoPheromonesWarding = "RMCXenoPheromonesWarding";
+    public static readonly BoundKeyFunction RMCXenoPheromonesFrenzy = "RMCXenoPheromonesFrenzy";
 }

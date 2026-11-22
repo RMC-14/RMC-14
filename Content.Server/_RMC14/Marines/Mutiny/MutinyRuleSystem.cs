@@ -65,8 +65,8 @@ public sealed partial class MutinyRuleSystem : GameRuleSystem<MutinyRuleComponen
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeLocalEvent<MindContainerComponent, MindAddedMessage>(OnMindAdded);
-        SubscribeLocalEvent<MindContainerComponent, MindRemovedMessage>(OnMindRemoved);
+        SubscribeLocalEvent<MindComponent, MindGotAddedEvent>(OnMindGotAdded);
+        SubscribeLocalEvent<MutinyMindComponent, MindGotRemovedEvent>(OnMindGotRemoved);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
     }
 

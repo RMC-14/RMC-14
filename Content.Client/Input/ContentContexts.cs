@@ -158,11 +158,16 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
             human.AddFunction(CMKeyFunctions.RMCRest);
             human.AddFunction(CMKeyFunctions.RMCResist);
+            human.AddFunction(CMKeyFunctions.RMCOpenLanguageMenu);
+            human.AddFunction(CMKeyFunctions.RMCCycleLanguage);
 
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");
             xenonid.AddFunction(CMKeyFunctions.CMXenoWideSwing);
             xenonid.AddFunction(CMKeyFunctions.RMCXenoRest);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoPheromonesRecovery);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoPheromonesWarding);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoPheromonesFrenzy);
         }
     }
 }
