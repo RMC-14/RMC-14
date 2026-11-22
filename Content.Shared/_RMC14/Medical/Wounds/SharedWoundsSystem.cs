@@ -521,8 +521,12 @@ public abstract class SharedWoundsSystem : EntitySystem
         wounded.WoundGroups = woundable.Comp.WoundGroups;
 
         TimeSpan? newDuration = duration == TimeSpan.MaxValue ? null : time + duration;
-        wounded.Wounds.Add(new Wound(total, FixedPoint2.Zero, bloodloss, newDuration, type, false));
+        var newWound = new Wound(total, FixedPoint2.Zero, bloodloss, newDuration, type, false);
+        wounded.Wounds.Add(newWound);
         Dirty(woundable, wounded);
+
+        var ev = new RMCWoundAddedEvent(newWound);
+        RaiseLocalEvent(woundable, ref ev);
     }
 
     public void RemoveWounds(Entity<WoundedComponent?> wounded, WoundType type)
@@ -583,3 +587,6 @@ public abstract class SharedWoundsSystem : EntitySystem
 
     }
 }
+
+[ByRefEvent]
+public record struct RMCWoundAddedEvent(Wound Wound);

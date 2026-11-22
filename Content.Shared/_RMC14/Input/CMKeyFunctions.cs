@@ -34,6 +34,8 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCToggleIff = "RMCToggleIff";
     public static readonly BoundKeyFunction RMCToggleShotgunTube = "RMCToggleShotgunTube";
     public static readonly BoundKeyFunction RMCUnloadWeapon = "RMCUnloadWeapon";
+    public static readonly BoundKeyFunction RMCOpenLanguageMenu = "RMCOpenLanguageMenu";
+    public static readonly BoundKeyFunction RMCCycleLanguage = "RMCCycleLanguage";
 
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";

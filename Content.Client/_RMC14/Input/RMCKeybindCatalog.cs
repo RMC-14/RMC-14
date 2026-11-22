@@ -19,6 +19,8 @@ public static class RMCKeybindCatalog
             CMKeyFunctions.RMCMarineCycleHelmetHud,
             CMKeyFunctions.RMCToggleAutoEject,
             CMKeyFunctions.RMCToggleIff,
+            CMKeyFunctions.RMCOpenLanguageMenu,
+            CMKeyFunctions.RMCCycleLanguage,
         ]),
         new("ui-options-header-rmc-combat",
         [

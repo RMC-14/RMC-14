@@ -2,11 +2,13 @@ using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.CriticalGrace;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -19,6 +21,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Collections;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -30,22 +33,23 @@ namespace Content.Shared._RMC14.Xenonids.Pheromones;
 
 public abstract class SharedXenoPheromonesSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IParallelManager _parallel = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(1);
 
@@ -68,7 +72,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
         SubscribeLocalEvent<XenoPheromonesComponent, PlayerDetachedEvent>(OnXenoPheromonesDetached);
-        SubscribeNetworkEvent<XenoPheromonesKeybindEvent>(OnXenoPheromonesKeybind);
 
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
             after: [typeof(MobThresholdSystem)]);
@@ -89,6 +92,21 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         {
             subs.Event<XenoPheromonesChosenBuiMsg>(OnXenoPheromonesChosenBui);
         });
+
+        CommandBinds.Builder
+            .Bind(CMKeyFunctions.RMCXenoPheromonesRecovery,
+                InputCmdHandler.FromDelegate(session => OnPheromonesKeybind(session, XenoPheromones.Recovery), handle: false))
+            .Bind(CMKeyFunctions.RMCXenoPheromonesWarding,
+                InputCmdHandler.FromDelegate(session => OnPheromonesKeybind(session, XenoPheromones.Warding), handle: false))
+            .Bind(CMKeyFunctions.RMCXenoPheromonesFrenzy,
+                InputCmdHandler.FromDelegate(session => OnPheromonesKeybind(session, XenoPheromones.Frenzy), handle: false))
+            .Register<SharedXenoPheromonesSystem>();
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        CommandBinds.Unregister<SharedXenoPheromonesSystem>();
     }
 
     private void OnActiveMobStateChanged(Entity<XenoActivePheromonesComponent> ent, ref MobStateChangedEvent args)
@@ -111,32 +129,54 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnXenoPheromonesChosenBui(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesChosenBuiMsg args)
     {
-        TrySetPheromones(xeno, args.Pheromones);
+        if (!Enum.IsDefined(args.Pheromones))
+            return;
+
+        TryActivatePheromones(xeno, args.Pheromones);
     }
 
-    private void OnXenoPheromonesKeybind(XenoPheromonesKeybindEvent args, EntitySessionEventArgs session)
+    private void OnPheromonesKeybind(ICommonSession? session, XenoPheromones pheromones)
     {
-        if (_net.IsClient ||
-            session.SenderSession.AttachedEntity is not { } user ||
-            !TryComp(user, out XenoPheromonesComponent? pheromones))
+        if (session?.AttachedEntity is not { } ent ||
+            !TryComp(ent, out XenoPheromonesComponent? comp) ||
+            !CanUsePheromonesAction(ent))
         {
             return;
         }
 
-        TrySetPheromones((user, pheromones), args.Pheromones, closeUi: false);
+        if (TryComp(ent, out XenoActivePheromonesComponent? active) && active.Pheromones == pheromones)
+        {
+            var popup = Loc.GetString("rmc-xeno-pheromones-already", ("pheromones", pheromones.ToString()));
+            _popup.PopupClient(popup, ent, ent);
+            return;
+        }
+
+        TryActivatePheromones((ent, comp), pheromones);
     }
 
-    public bool TrySetPheromones(
-        Entity<XenoPheromonesComponent> xeno,
-        XenoPheromones pheromones,
-        bool closeUi = true)
+    private bool CanUsePheromonesAction(EntityUid xeno)
     {
-        if (!Enum.IsDefined(pheromones) ||
-            !_mobState.IsAlive(xeno.Owner) ||
-            !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PheromonesPlasmaCost))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoPheromonesActionEvent>(xeno))
         {
-            return false;
+            if (!_actions.ValidAction(action))
+                continue;
+
+            if (action.Comp.CheckConsciousness && !_actionBlocker.CanConsciouslyPerformAction(xeno))
+                return false;
+
+            if (action.Comp.CheckCanInteract && !_actionBlocker.CanInteract(xeno, null))
+                return false;
+
+            return true;
         }
+
+        return false;
+    }
+
+    private void TryActivatePheromones(Entity<XenoPheromonesComponent> xeno, XenoPheromones pheromones)
+    {
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PheromonesPlasmaCost))
+            return;
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoPheromonesActionEvent>(xeno))
         {
@@ -146,11 +186,10 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var popup = Loc.GetString("cm-xeno-pheromones-start", ("pheromones", pheromones.ToString()));
         _popup.PopupClient(popup, xeno, xeno);
 
-        if (closeUi)
-            _ui.CloseUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
+        _ui.CloseUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
 
         if (_net.IsClient)
-            return true;
+            return;
 
         xeno.Comp.NextPheromonesPlasmaUse = _timing.CurTime + _pheromonePlasmaUseDelay;
         Dirty(xeno);
@@ -163,7 +202,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         RaiseLocalEvent(xeno, ref ev);
 
         _entityLookup.GetEntitiesInRange(xeno.Owner.ToCoordinates(), xeno.Comp.PheromonesRange, active.Receivers);
-        return true;
     }
 
     private void OnWardingUpdateMobState(Entity<XenoWardingPheromonesComponent> warding, ref UpdateMobStateEvent args)

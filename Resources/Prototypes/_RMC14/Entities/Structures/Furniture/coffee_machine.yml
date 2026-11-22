@@ -15,6 +15,7 @@
         whitelist:
           tags:
           - DrinkGlass
+          - DrinkCup
   - type: ContainerContainer
     containers:
       coffee_machine_slot: !type:ContainerSlot {}

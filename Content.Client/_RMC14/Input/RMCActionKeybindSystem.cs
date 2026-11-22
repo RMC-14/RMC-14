@@ -2,7 +2,6 @@ using Content.Client.Actions;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Actions;
 using Content.Shared._RMC14.Input;
-using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Actions.Components;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -88,18 +87,6 @@ public sealed class RMCActionKeybindSystem : EntitySystem
             .Bind(CMKeyFunctions.RMCXenoPheromones,
                 InputCmdHandler.FromDelegate(
                     session => TryTrigger(session?.AttachedEntity, RMCKeybindActionSlot.XenoPheromones),
-                    handle: true))
-            .Bind(CMKeyFunctions.RMCXenoPheromonesFrenzy,
-                InputCmdHandler.FromDelegate(
-                    _ => RaiseNetworkEvent(new XenoPheromonesKeybindEvent(XenoPheromones.Frenzy)),
-                    handle: true))
-            .Bind(CMKeyFunctions.RMCXenoPheromonesRecovery,
-                InputCmdHandler.FromDelegate(
-                    _ => RaiseNetworkEvent(new XenoPheromonesKeybindEvent(XenoPheromones.Recovery)),
-                    handle: true))
-            .Bind(CMKeyFunctions.RMCXenoPheromonesWarding,
-                InputCmdHandler.FromDelegate(
-                    _ => RaiseNetworkEvent(new XenoPheromonesKeybindEvent(XenoPheromones.Warding)),
                     handle: true))
             .Bind(CMKeyFunctions.RMCXenoPurchaseStrain,
                 InputCmdHandler.FromDelegate(

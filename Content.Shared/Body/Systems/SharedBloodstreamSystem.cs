@@ -211,6 +211,7 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
+        // RMC14
         var ev = new CMBleedEvent(args);
         RaiseLocalEvent(ent, ref ev);
         if (ev.Handled)

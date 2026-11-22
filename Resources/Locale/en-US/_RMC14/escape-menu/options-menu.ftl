@@ -18,6 +18,8 @@ ui-options-function-rmc-pick-up-dropped-items = Pick up dropped items
 ui-options-function-rmc-interact-with-other-hand = Interact with other hand
 ui-options-function-rmc-rest = Rest
 ui-options-function-rmc-resist = Resist
+ui-options-function-rmc-open-language-menu = Open language menu
+ui-options-function-rmc-cycle-language = Cycle language
 ui-options-function-rmc-marine-issue-order = Issue order
 ui-options-function-rmc-marine-issue-order-move = Issue move order
 ui-options-function-rmc-marine-issue-order-hold = Issue hold order
@@ -56,6 +58,8 @@ ui-options-function-rmc-xeno-purchase-strain = Purchase strain
 
 ui-options-description-rmc-rest = Lie down or stand up.
 ui-options-description-rmc-resist = Resist fire, restraints, buckling, snares, and pulling.
+ui-options-description-rmc-open-language-menu = Open the language selection menu.
+ui-options-description-rmc-cycle-language = Switch to the next available language.
 ui-options-description-rmc-marine-issue-order = Choose an available marine order from a radial menu.
 ui-options-description-rmc-marine-issue-order-move = Immediately issue the Move order.
 ui-options-description-rmc-marine-issue-order-hold = Immediately issue the Hold order.
