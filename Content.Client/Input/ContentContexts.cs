@@ -158,6 +158,8 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
             human.AddFunction(CMKeyFunctions.RMCRest);
             human.AddFunction(CMKeyFunctions.RMCResist);
+            human.AddFunction(CMKeyFunctions.RMCOpenLanguageMenu);
+            human.AddFunction(CMKeyFunctions.RMCCycleLanguage);
 
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");
