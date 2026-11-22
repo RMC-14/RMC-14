@@ -712,7 +712,7 @@ binds:
   priority: 1
 - function: RMCVehicleSafety
   type: State
-  key: Shift
+  key: C
   priority: 1
 - function: SmartEquipUniform
   type: State

@@ -18,8 +18,7 @@ public sealed class VehicleSafetySystem : EntitySystem
         if (_net.IsClient)
         {
             CommandBinds.Builder
-                .Bind(CMKeyFunctions.RMCVehicleSafety, new VehicleOperatorInputCmdHandler(_rmcVehicles,
-                    vehicle => RaisePredictiveEvent(new VehicleSafetyToggleRequestEvent(GetNetEntity(vehicle)))))
+                .Bind(CMKeyFunctions.RMCVehicleSafety, new VehicleOperatorInputCmdHandler(_rmcVehicles, RequestToggle))
                 .Register<VehicleSafetySystem>();
         }
 
@@ -47,6 +46,11 @@ public sealed class VehicleSafetySystem : EntitySystem
 
         safety.Enabled = !safety.Enabled;
         Dirty(vehicle.Value, safety);
+    }
+
+    public void RequestToggle(EntityUid vehicle)
+    {
+        RaisePredictiveEvent(new VehicleSafetyToggleRequestEvent(GetNetEntity(vehicle)));
     }
 
     public bool IsEnabled(Entity<VehicleSafetyComponent?> vehicle)
