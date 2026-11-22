@@ -96,6 +96,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     // RMC14
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
+    [Dependency] private readonly GunAkimboSystem _akimbo = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
     [Dependency] private readonly VehicleWeaponsSystem _rmcVehicleWeapons = default!;
     [Dependency] private readonly RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
@@ -166,16 +167,28 @@ public abstract partial class SharedGunSystem : EntitySystem
         var gunUid = GetEntity(ev.Gun);
 
         if (args.SenderSession.AttachedEntity == null ||
-            !TryComp<GunComponent>(gunUid, out var gun) ||
-            !TryGetGun(args.SenderSession.AttachedEntity.Value, out _, out var userGun))
+            !TryComp<GunComponent>(gunUid, out var gun))
         {
             return;
         }
 
-        if (userGun != gun)
+        var user = args.SenderSession.AttachedEntity.Value;
+        if (!CanStopGun(user, gunUid, gun))
             return;
 
         StopShooting(gunUid, gun);
+    }
+
+    // RMC14
+    private bool CanStopGun(EntityUid user, EntityUid gunUid, GunComponent gun)
+    {
+        if (TryGetGun(user, out _, out var activeGun) &&
+            activeGun == gun)
+        {
+            return true;
+        }
+
+        return _akimbo.IsHeldDualWieldGun(user, gunUid);
     }
 
     public bool CanShoot(GunComponent component)
@@ -268,6 +281,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
 
+    public void StopShooting(Entity<GunComponent> gun)
+    {
+        StopShooting(gun.Owner, gun.Comp);
+    }
+
     public void ResetShotCounter(EntityUid uid, GunComponent gun)
     {
         if (gun.ShotCounter == 0)
@@ -276,6 +294,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShotCounter = 0;
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
+
+    // RMC14
+    public void EndBurst(EntityUid uid, GunComponent gun)
+    {
+        if (!gun.BurstActivated && gun.BurstShotsCount == 0)
+            return;
+
+        gun.BurstActivated = false;
+        gun.BurstShotsCount = 0;
+        DirtyField(uid, gun, nameof(GunComponent.BurstActivated));
+    }
+    // RMC14
 
     // RMC14 Needed to check if the attempted shot actually shot any projectiles.
     /// <summary>
