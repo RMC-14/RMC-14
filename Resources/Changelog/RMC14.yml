@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: You no longer hear in-game sounds while in the lobby(for real this time).
-    type: Fix
-  id: 3400
-  time: '2026-06-16T01:46:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10154
-- author: Thereisabear
-  changes:
-  - message: Fixed burrowers being able to create a tunnel on water tiles.
-    type: Fix
-  id: 3401
-  time: '2026-06-16T01:47:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10163
 - author: x5tink
   changes:
   - message: Returned light blue outfit to CMO/Doc vendor
@@ -4450,5 +4436,19 @@
   id: 3899
   time: '2026-11-22T03:17:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10205
+- author: BreakpointDebug1234
+  changes:
+  - message: Purchased OBs now come in an crate containing solid fuel.
+    type: Tweak
+  id: 3900
+  time: '2026-11-22T03:18:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10400
+- author: kleinerstation13
+  changes:
+  - message: Resprited flare packs
+    type: Tweak
+  id: 3901
+  time: '2026-11-22T03:19:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10107
 Name: RMC14
 Order: -1
