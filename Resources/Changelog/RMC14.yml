@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: GrigoriyGalintano
-  changes:
-  - message: Added data disks, SIGINT disk upload, data terminals, safe cracking,
-      and experimental device retrieve objectives for Intelligence Officers.
-    type: Add
-  - message: Added personal intel clues and expanded the intel objectives UI.
-    type: Add
-  - message: Added computer disk, experimental device, and floor safe sprites.
-    type: Add
-  - message: Reworked intel clue progression to guide IOs from documents into disks,
-      safes, terminals, and retrieve objectives.
-    type: Tweak
-  id: 3411
-  time: '2026-06-16T04:58:59.953817+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9950
 - author: kukurua
   changes:
   - message: The M276 medical belt will be able to store syringe and surgical cases.
@@ -4403,5 +4388,13 @@
   id: 3910
   time: '2026-11-22T03:44:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10439
+- author: wheelwrightt
+  changes:
+  - message: Pressing tab will now go to the next input box in UIs like the mortar,
+      supply drop and overwatch windows
+    type: Tweak
+  id: 3911
+  time: '2026-11-22T03:46:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10537
 Name: RMC14
 Order: -1
