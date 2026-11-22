@@ -95,11 +95,11 @@
     - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
     - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
     - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
-    - WeaponRifleM16: RMCMagazineRifleM16
-    - WeaponRifleM16: RMCMagazineRifleM16
-    - WeaponRifleM16: RMCMagazineRifleM16
-    - WeaponRifleM16: RMCMagazineRifleM16
-    - WeaponRifleM16: RMCMagazineRifleM16
+    - RMCWeaponRifleCR16: RMCMagazineRifleCR16
+    - RMCWeaponRifleCR16: RMCMagazineRifleCR16
+    - RMCWeaponRifleCR16: RMCMagazineRifleCR16
+    - RMCWeaponRifleCR16: RMCMagazineRifleCR16
+    - RMCWeaponRifleCR16: RMCMagazineRifleCR16
     - WeaponRifleMAR40: RMCMagazineRifleMAR40
     - WeaponRifleMAR40: RMCMagazineRifleMAR40
     - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
@@ -222,10 +222,10 @@
     minMagazines: 1
     maxMagazines: 5
     prototypes: # Weighted
-    - WeaponSMGMP5: CMMagazineSMGMP5
-    - WeaponSMGMP5: CMMagazineSMGMP5
-    - WeaponSMGMP5: CMMagazineSMGMP5
-    - WeaponSMGMP5: CMMagazineSMGMP5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
@@ -470,14 +470,14 @@
     - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponShotgunM12: RMCSpawnerRandomShotgunBoxes
-    - WeaponSMGMP5: CMMagazineSMGMP5
-    - WeaponSMGMP5: CMMagazineSMGMP5
-    - WeaponSMGMP5: CMMagazineSMGMP5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponShotgunM3717: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponSMGMP5Alt: CMMagazineSMGMP5
+    - RMCWeaponSMGPCAC5A5: RMCMagazineSMGPCAC5
     - RMCWeaponRevolverSpearheadCustom: RMCSpeedLoader357
 
 - type: entity
