@@ -160,6 +160,9 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCResist);
             human.AddFunction(CMKeyFunctions.RMCOpenLanguageMenu);
             human.AddFunction(CMKeyFunctions.RMCCycleLanguage);
+            human.AddFunction(CMKeyFunctions.RMCVehicleHorn);
+            human.AddFunction(CMKeyFunctions.RMCVehicleOvercharge);
+            human.AddFunction(CMKeyFunctions.RMCVehicleSpotlight);
 
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");

@@ -31,4 +31,9 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCXenoPheromonesRecovery = "RMCXenoPheromonesRecovery";
     public static readonly BoundKeyFunction RMCXenoPheromonesWarding = "RMCXenoPheromonesWarding";
     public static readonly BoundKeyFunction RMCXenoPheromonesFrenzy = "RMCXenoPheromonesFrenzy";
+
+    // Vehicle
+    public static readonly BoundKeyFunction RMCVehicleHorn = "RMCVehicleHorn";
+    public static readonly BoundKeyFunction RMCVehicleOvercharge = "RMCVehicleOvercharge";
+    public static readonly BoundKeyFunction RMCVehicleSpotlight = "RMCVehicleSpotlight";
 }
