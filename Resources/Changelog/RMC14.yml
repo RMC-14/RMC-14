@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Security Colonists can no longer become Prisoners, you must now roll
-      Civilian Colonist to become one
-    type: Tweak
-  id: 3418
-  time: '2026-06-16T20:00:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10177
 - author: CatAndHats
   changes:
   - message: Added the proper Surplus Boxes of Ingredients crate to Requisitions for
@@ -4395,5 +4387,13 @@
   id: 3917
   time: '2026-11-22T04:12:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10848
+- author: Ozehk
+  changes:
+  - message: Added a Military Police squad, with a unique overwatch console usable
+      by the entire department to overwatch it.
+    type: Add
+  id: 3918
+  time: '2026-11-22T04:13:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10874
 Name: RMC14
 Order: -1
