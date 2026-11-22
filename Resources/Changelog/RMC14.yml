@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Charger Crusher colliding with Sapper Boiler traps and wall weeds.
-    type: Fix
-  id: 3410
-  time: '2026-06-16T04:58:59.943817+00:00'
-  url: null
 - author: GrigoriyGalintano
   changes:
   - message: Added data disks, SIGINT disk upload, data terminals, safe cracking,
@@ -4401,5 +4394,14 @@
   id: 3909
   time: '2026-11-22T03:43:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9059
+- author: Ian321
+  changes:
+  - message: The scuttle explosion should now hopefully kill everyone.
+    type: Fix
+  - message: The scuttle explosion now disables APCs and pumps.
+    type: Fix
+  id: 3910
+  time: '2026-11-22T03:44:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10439
 Name: RMC14
 Order: -1
