@@ -26,6 +26,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
+using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -103,8 +104,8 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<DistressSignalEndgameChangedEvent>(OnDistressEndgameChanged);
 
-        SubscribeLocalEvent<MindContainerComponent, MindAddedMessage>(OnMindAdded);
-        SubscribeLocalEvent<MindContainerComponent, MindRemovedMessage>(OnMindRemoved);
+        SubscribeLocalEvent<MindComponent, MindGotAddedEvent>(OnMindGotAdded);
+        SubscribeLocalEvent<MindComponent, MindGotRemovedEvent>(OnMindGotRemoved);
         SubscribeLocalEvent<RMCGhostTargetTrackedComponent, RoleAddedEvent>(OnTrackedRoleChanged);
         SubscribeLocalEvent<RMCGhostTargetTrackedComponent, RoleRemovedEvent>(OnTrackedRoleChanged);
         SubscribeLocalEvent<RMCGhostTargetTrackedComponent, MobStateChangedEvent>(OnTrackedStateChanged);
@@ -357,15 +358,16 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             UpsertRecord(store, uid);
     }
 
-    private void OnMindAdded(Entity<MindContainerComponent> ent, ref MindAddedMessage args)
+    private void OnMindGotAdded(Entity<MindComponent> mind, ref MindGotAddedEvent args)
     {
-        EnsureComp<RMCGhostTargetTrackedComponent>(ent);
-        RefreshTarget(ent);
+        var body = args.Container.Owner;
+        EnsureComp<RMCGhostTargetTrackedComponent>(body);
+        RefreshTarget(body);
     }
 
-    private void OnMindRemoved(Entity<MindContainerComponent> ent, ref MindRemovedMessage args)
+    private void OnMindGotRemoved(Entity<MindComponent> mind, ref MindGotRemovedEvent args)
     {
-        RefreshTarget(ent);
+        RefreshTarget(args.Container.Owner);
     }
 
     private void OnTrackedRoleChanged<T>(Entity<RMCGhostTargetTrackedComponent> ent, ref T args)
