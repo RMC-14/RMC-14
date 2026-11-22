@@ -1,6 +1,6 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._RMC14.Ghost;
+namespace Content.Server._RMC14.Ghost.Roles;
 
 [RegisterComponent]
 [Access(typeof(RMCGhostRoleSystem))]
