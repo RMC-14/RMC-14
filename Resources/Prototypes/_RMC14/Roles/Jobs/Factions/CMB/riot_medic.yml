@@ -86,7 +86,7 @@
     id: RMCIDCardCMBDeputy
     pocket1: RMCPouchMedicalERT
     pocket2: RMCPouchMagazineLarge
-    suitstorage: RMCWeaponSMGMP5Alt
+    suitstorage: RMCWeaponSMGPCAC5A5
   storage:
     back:
     - RMCGrenadeFlashBang
@@ -95,9 +95,9 @@
     - CMCrowbar
     - RMCHandheldDistressBeaconCMB
     pocket2:
-    - CMMagazineSMGMP5
-    - CMMagazineSMGMP5
-    - CMMagazineSMGMP5
+    - RMCMagazineSMGPCAC5
+    - RMCMagazineSMGPCAC5
+    - RMCMagazineSMGPCAC5
 
 - type: playTimeTracker
   id: RMCJobBureauRiotMedic

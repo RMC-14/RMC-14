@@ -85,7 +85,7 @@
     id: RMCIDCardCMBDeputy
     pocket1: RMCPouchToolsFill
     pocket2: RMCPouchConstructionFillFull
-    suitstorage: RMCWeaponRifleM16A5
+    suitstorage: RMCWeaponRifleCR16A5
   storage:
     back:
     - RMCExplosiveBreachingChargeRubber

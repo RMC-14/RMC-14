@@ -148,14 +148,14 @@
   parent: RMCGearBureauRiotOfficerBase
   id: RMCGearBureauRiotOfficerSMG
   equipment:
-    suitstorage: WeaponSMGMP5
+    suitstorage: RMCWeaponSMGPCAC5A4
     pocket2: RMCPouchMagazineLarge
   storage:
     pocket2:
-    - CMMagazineSMGMP5
-    - CMMagazineSMGMP5
-    - CMMagazineSMGMP5
-    - CMMagazineSMGMP5
+    - RMCMagazineSMGPCAC5
+    - RMCMagazineSMGPCAC5
+    - RMCMagazineSMGPCAC5
+    - RMCMagazineSMGPCAC5
 
 - type: playTimeTracker
   id: RMCJobBureauRiotOfficer

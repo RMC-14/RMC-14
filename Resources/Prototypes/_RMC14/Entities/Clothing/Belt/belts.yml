@@ -863,6 +863,7 @@
           tags:
           - CMWeaponPistolM1984
           - CMWeaponPistolM1911
+          - RMCWeaponPistolM1911C
       mk80_fill:
         whitelist:
           tags:
@@ -1714,6 +1715,17 @@
       sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
     - type: ItemCamouflage
       camouflageVariations: {}
+
+- type: entity
+  parent: CMBeltUtility
+  id: RMCBeltUtilityRCM
+  name: L55 pattern toolbelt rig
+  description: The L55 is the standard load-bearing equipment of the Royal Crown Marines. It consists of a modular belt with various clips. This version features two ergonomic pouches intended to carry various tools into combat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/rcm_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/rcm_utility.rsi
 
 - type: entity
   parent: CMBeltBaseStorage

@@ -1,6 +1,7 @@
 ﻿- type: job
   parent: RMCJobNametagBase
   id: RMCWeYaExecutiveBodyguard
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-liaison
   name: rmc-job-name-executive-bodyguard
   description: rmc-job-description-executive-bodyguard
   newToJobInfo: rmc-new-to-job-executive-bodyguard

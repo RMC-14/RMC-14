@@ -8,7 +8,9 @@ namespace Content.Shared._RMC14.Xenonids.Leap;
 public sealed partial class RMCGrantLeapProtectionComponent : Component
 {
     /// <summary>
-    ///     How long the leaping entity should be stunned for when blocked.
+    ///     NOT actual duration.
+    ///     This value is CM's apply_effect(value) x 2
+    ///     Actual duration = StunDuration x the appropriate factor in RMCStatusEffectSystem.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan StunDuration = TimeSpan.FromSeconds(2);

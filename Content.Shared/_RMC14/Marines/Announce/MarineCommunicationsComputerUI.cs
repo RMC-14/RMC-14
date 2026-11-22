@@ -33,17 +33,4 @@ public sealed class MarineCommunicationsDesignatePrimaryLZMsg(NetEntity lz) : Bo
 }
 
 [Serializable, NetSerializable]
-public sealed class MarineCommunicationsComputerBuiState(
-    string planet,
-    string operation,
-    List<LandingZone> landingZones,
-    bool distressBeaconEnabled) : BoundUserInterfaceState
-{
-    public readonly string Planet = planet;
-    public readonly string Operation = operation;
-    public readonly List<LandingZone> LandingZones = landingZones;
-    public readonly bool DistressBeaconEnabled = distressBeaconEnabled;
-}
-
-[Serializable, NetSerializable]
 public readonly record struct LandingZone(NetEntity Id, string Name);
