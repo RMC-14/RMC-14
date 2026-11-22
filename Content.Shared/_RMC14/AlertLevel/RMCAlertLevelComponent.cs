@@ -1,4 +1,5 @@
-﻿using Content.Shared.Radio;
+﻿using Content.Shared._RMC14.Announce;
+using Content.Shared.Radio;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -51,4 +52,16 @@ public sealed partial class RMCAlertLevelComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<RadioChannelPrototype> RadioChannel = "MarineCommon";
+
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent> GreenOverlay = "RMCAnnouncementAlertGreen";
+
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent> BlueOverlay = "RMCAnnouncementAlertBlue";
+
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent> RedOverlay = "RMCAnnouncementAlertRed";
+
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent> DeltaOverlay = "RMCAnnouncementAlertDelta";
 }

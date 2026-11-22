@@ -160,6 +160,12 @@ public sealed class OverwatchConsoleSendLeaderMessageBuiMsg(string message) : Bo
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleSendMessageResultBuiMsg(bool sent) : BoundUserInterfaceMessage
+{
+    public readonly bool Sent = sent;
+}
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleOpenSquadObjectivesBuiMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
