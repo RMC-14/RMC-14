@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Returned light blue outfit to CMO/Doc vendor
-    type: Fix
-  id: 3402
-  time: '2026-06-16T01:50:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10160
 - author: kleinerstation13
   changes:
   - message: Added random supply kits - They spawn in the colony and contain assorted
@@ -4450,5 +4443,14 @@
   id: 3901
   time: '2026-11-22T03:19:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10107
+- author: kleinerstation13
+  changes:
+  - message: Added M1911C service pistol and Mateba 2006M CO sidearm options
+    type: Add
+  - message: Added M1911 HI and HIAP ammo and magazines
+    type: Add
+  id: 3902
+  time: '2026-11-22T03:27:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9863
 Name: RMC14
 Order: -1
