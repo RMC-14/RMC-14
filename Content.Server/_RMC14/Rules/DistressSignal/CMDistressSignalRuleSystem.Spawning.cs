@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.RandomMetadata;
@@ -57,11 +57,19 @@ public sealed partial class CMDistressSignalRuleSystem
         if (!InitializeXenoMap(rule.Value, comp))
             return;
 
+        var roundInfoEnt = Spawn(null, MapCoordinates.Nullspace);
+        var roundInfo = EnsureComp<RMCRoundInfoComponent>(roundInfoEnt);
+        roundInfo.OperationName = OperationName ?? string.Empty;
+        roundInfo.PlanetName = SelectedPlanetMapName ?? string.Empty;
+        Dirty(roundInfoEnt, roundInfo);
+        _pvs.AddGlobalOverride(roundInfoEnt);
+        Log.Info($"RoundInfo set: op='{roundInfo.OperationName}' planet='{roundInfo.PlanetName}'");
+
         SetupSurvivorJobs(comp);
         ApplyJobSlotScaling(comp, ev);
 
         var initialPlayerCount = ev.PlayerPool.Count;
-        SelectAndSpawnXenos(comp, ev);
+        SelectAndSpawnXenos(comp, ev, initialPlayerCount);
         SpawnSurvivors(comp, ev, initialPlayerCount);
 
         if (_spawnedDropships) return;
@@ -132,10 +140,7 @@ public sealed partial class CMDistressSignalRuleSystem
     {
         var totalPlayers = ev.PlayerPool.Count;
         var vehicleThreshold = _config.GetCVar(RMCCVars.RMCVehicleRoundstartThresholdPlayers);
-        var totalXenos = (int) Math.Round(Math.Max(1, totalPlayers / _marinesPerXeno));
-        // TODO RMC14 dont count survivors
-        var totalSurvivors = (int) Math.Clamp((int) Math.Round(totalPlayers / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
-        var marines = totalPlayers - totalXenos - totalSurvivors;
+        var marines = GetRoundstartMarineMinimum(totalPlayers);
         var roundstartTank = _player.Sessions.Count() >= vehicleThreshold;
         var crewmanSlots = roundstartTank ? 2 : 0;
 
@@ -207,11 +212,10 @@ public sealed partial class CMDistressSignalRuleSystem
 
     /// <summary>
     /// Selects xeno players based on job priorities and spawns them as queen or larva.
-    /// Handles burrowed larva calculation if there aren't enough xeno players.
     /// </summary>
     /// <param name="comp">The distress signal rule component.</param>
     /// <param name="ev">The rule player spawning event.</param>
-    private void SelectAndSpawnXenos(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
+    private void SelectAndSpawnXenos(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev, int initialPlayerCount)
     {
         if (!comp.SpawnXenos)
             return;
@@ -250,7 +254,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return playerId;
         }
 
-        var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
+        var totalXenos = GetRoundstartXenoLimit(initialPlayerCount);
         var priorities = Enum.GetValues<JobPriority>().Length;
         var xenoCandidates = new List<NetUserId>[priorities];
         for (var i = 0; i < priorities; i++)
@@ -298,9 +302,6 @@ public sealed partial class CMDistressSignalRuleSystem
                 if (SpawnXeno(xenoCandidates[i], comp.LarvaEnt, true) != null) selectedXenos++;
             }
         }
-
-        if (totalXenos - selectedXenos > 0)
-            _hive.ChangeBurrowedLarva(totalXenos - selectedXenos);
     }
 
     private EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst,
@@ -464,6 +465,17 @@ public sealed partial class CMDistressSignalRuleSystem
                 xform.GridUid != null)
             {
                 EnsureComp<AlmayerComponent>(xform.GridUid.Value);
+
+                var rule = TryGetActiveRuleEntity();
+                if (rule.HasValue)
+                {
+                    var roundInfoQuery = EntityQueryEnumerator<RMCRoundInfoComponent>();
+                    if (roundInfoQuery.MoveNext(out var roundInfoEnt, out var roundInfo) && roundInfo.ShipName == string.Empty)
+                    {
+                        roundInfo.ShipName = MetaData(xform.GridUid.Value).EntityName;
+                        Dirty(roundInfoEnt, roundInfo);
+                    }
+                }
             }
 
             if (comp.SetHunger && TryComp(ev.SpawnResult, out HungerComponent? hunger))

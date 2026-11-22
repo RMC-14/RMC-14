@@ -50,19 +50,21 @@ public sealed class RMCSlowSystem : EntitySystem
 
     public bool TrySlowdown(EntityUid ent, TimeSpan duration, bool refresh = true, bool ignoreDurationModifier = false)
     {
+        if (_timing.ApplyingState)
+            return false;
+
         if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow))
             return false;
 
-        var expire = _timing.CurTime + duration * (ignoreDurationModifier ? 1 : slow.DurationMultiplier);
-
         var slowdown = EnsureComp<RMCSlowdownComponent>(ent);
 
-        if (refresh && expire > slowdown.ExpiresAt)
-            slowdown.ExpiresAt = expire;
-        else if (!refresh)
+        if (!ignoreDurationModifier)
+            duration *= slow.DurationMultiplier;
+
+        if (TryUpdateExpirationTime(slowdown.ExpiresAt, duration, refresh, out var newExpiresAt))
         {
-            var baseline = slowdown.ExpiresAt > _timing.CurTime ? slowdown.ExpiresAt : _timing.CurTime;
-            slowdown.ExpiresAt = baseline + duration;
+            slowdown.ExpiresAt = newExpiresAt;
+            Dirty(ent, slowdown);
         }
 
         return true;
@@ -76,28 +78,32 @@ public sealed class RMCSlowSystem : EntitySystem
         if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow))
             return false;
 
-        var expire = _timing.CurTime + duration * (ignoreDurationModifier ? 1 : slow.DurationMultiplier);
-
         var slowdown = EnsureComp<RMCSuperSlowdownComponent>(ent);
 
-        if (refresh && expire > slowdown.ExpiresAt)
-            slowdown.ExpiresAt = expire;
-        else if (!refresh) // Stacks
-            slowdown.ExpiresAt += duration;
+        if (!ignoreDurationModifier)
+            duration *= slow.DurationMultiplier;
+
+        if (TryUpdateExpirationTime(slowdown.ExpiresAt, duration, refresh, out var newExpiresAt))
+        {
+            slowdown.ExpiresAt = newExpiresAt;
+            Dirty(ent, slowdown);
+        }
 
         return true;
     }
 
     public bool TryRoot(EntityUid ent, TimeSpan duration, bool refresh = true)
     {
-        var expire = _timing.CurTime + duration;
+        if (_timing.ApplyingState)
+            return false;
 
         var slowdown = EnsureComp<RMCRootedComponent>(ent);
 
-        if (refresh && expire > slowdown.ExpiresAt)
-            slowdown.ExpiresAt = expire;
-        else if (!refresh) // Stacks
-            slowdown.ExpiresAt += duration;
+        if (TryUpdateExpirationTime(slowdown.ExpiresAt, duration, refresh, out var newExpiresAt))
+        {
+            slowdown.ExpiresAt = newExpiresAt;
+            Dirty(ent, slowdown);
+        }
 
         return true;
     }
@@ -233,6 +239,31 @@ public sealed class RMCSlowSystem : EntitySystem
             RemCompDeferred<XenoImmobileVisualsComponent>(ent);
         else if ((args.Key == "KnockedDown" || !_standing.IsDown(ent)) && HasComp<StunnedComponent>(ent))
             EnsureComp<XenoImmobileVisualsComponent>(ent);
+    }
+
+    /// <summary>
+    /// Calculates a new expiration time from the parameters.
+    /// </summary>
+    /// <param name="refresh">True if the duration should be applied to the current time and ignore the current expiration time.
+    ///     False if it should stack on top of the current expiration time.</param>
+    /// <returns>True if the new expiration is later than the current expiration. False if it's the same.</returns>
+    private bool TryUpdateExpirationTime(TimeSpan currentExpiration, TimeSpan duration, bool refresh, out TimeSpan newExpiration)
+    {
+        var baseline = _timing.CurTime;
+
+        if (!refresh && currentExpiration > baseline)
+            baseline = currentExpiration;
+
+        var candidate = baseline + duration;
+
+        if (candidate <= currentExpiration)
+        {
+            newExpiration = currentExpiration;
+            return false;
+        }
+
+        newExpiration = candidate;
+        return true;
     }
 
     public override void Update(float frameTime)

@@ -59,6 +59,9 @@ namespace Content.Client.ContextMenu.UI
 
         private bool _updating;
 
+        // RMC14
+        public bool HandlingContextMenuInput { get; private set; }
+
         /// <summary>
         ///     This maps the currently displayed entities to the actual GUI elements.
         /// </summary>
@@ -157,7 +160,9 @@ namespace Content.Client.ContextMenu.UI
                 var session = _playerManager.LocalSession;
                 if (session != null)
                 {
+                    HandlingContextMenuInput = true; // RMC14
                     inputSys.HandleInputCommand(session, func, message);
+                    HandlingContextMenuInput = false; // RMC14
                 }
 
                 // RMC start
