@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Xenonids can hold down left click to continually build / upgrade.
-    type: Add
-  id: 3398
-  time: '2026-06-16T01:49:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8519
 - author: Arykh
   changes:
   - message: Added M56D and M2C ammo entries to the FOB Supplies Vendor(Requisitions
@@ -4452,5 +4445,12 @@
   id: 3897
   time: '2026-11-22T00:51:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9614
+- author: CyberTropic
+  changes:
+  - message: Added blood spill decals when wounded.
+    type: Add
+  id: 3898
+  time: '2026-11-22T00:54:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9886
 Name: RMC14
 Order: -1
