@@ -6,6 +6,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Popups;
@@ -38,6 +39,26 @@ public abstract class SharedXenoBanishSystem : EntitySystem
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveReadmitConfirmEvent>(OnManageHiveReadmitConfirm);
 
         SubscribeLocalEvent<XenoBanishComponent, AttackAttemptEvent>(OnBanishedAttackAttempt, before: [typeof(XenoSystem)]);
+
+        SubscribeLocalEvent<HiveMemberComponent, MindAddedMessage>(OnHiveMemberMindAdded);
+    }
+
+    /// <summary>
+    /// lessers and parasites are blocked for banished players, so getting into a living xenonid of the hive
+    /// means they came back through the larva queue and aren't banished from it anymore
+    /// </summary>
+    private void OnHiveMemberMindAdded(Entity<HiveMemberComponent> ent, ref MindAddedMessage args)
+    {
+        if (_net.IsClient ||
+            ent.Comp.Hive is not { } hive ||
+            args.Mind.Comp.UserId is not { } player ||
+            _mobState.IsDead(ent) ||
+            !TryComp(hive, out HiveBanishedPlayersComponent? banished))
+        {
+            return;
+        }
+
+        banished.Players.Remove(player);
     }
 
     private void OnManageHiveBanish(Entity<ManageHiveComponent> ent, ref ManageHiveBanishEvent args)
@@ -130,7 +151,8 @@ public abstract class SharedXenoBanishSystem : EntitySystem
             return;
 
         if (!CanBanishTargetPopup(ent, xeno.Value) ||
-            !IsSamePlayerPopup(ent, xeno.Value, args.Player))
+            !IsSamePlayerPopup(ent, xeno.Value, args.Player) ||
+            args.Player is not { } player)
         {
             return;
         }
@@ -144,7 +166,7 @@ public abstract class SharedXenoBanishSystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(ent.Owner, ent.Comp.BanishPlasmaCost, false))
             return;
 
-        Banish(ent.Owner, xeno.Value, args.Message);
+        Banish(ent.Owner, xeno.Value, player, args.Message);
     }
 
     private void OnManageHiveReadmit(Entity<ManageHiveComponent> ent, ref ManageHiveReadmitEvent args)
@@ -314,13 +336,17 @@ public abstract class SharedXenoBanishSystem : EntitySystem
         return timeLeft > TimeSpan.Zero ? timeLeft : null;
     }
 
-    private void Banish(EntityUid banisher, EntityUid banished, string reason)
+    private void Banish(EntityUid banisher, EntityUid banished, NetUserId player, string reason)
     {
         var comp = EnsureComp<XenoBanishComponent>(banished);
         comp.BanishedAt = _timing.CurTime;
         comp.Reason = reason;
         comp.OriginalHive = _hive.GetHive(banished)?.Owner;
         Dirty(banished, comp);
+
+        // kept on the hive so leaving the body doesn't let the player rejoin as a lesser or parasite
+        if (comp.OriginalHive is { } originalHive)
+            EnsureComp<HiveBanishedPlayersComponent>(originalHive).Players.Add(player);
 
         // Before removing them from the hive so the banished xenonid also gets the announcement
         OnBanished(banisher, (banished, comp));
@@ -336,13 +362,45 @@ public abstract class SharedXenoBanishSystem : EntitySystem
             return;
 
         if (banish.OriginalHive is { } originalHive)
+        {
             _hive.SetHive(readmitted, originalHive);
+
+            if (TryComp(originalHive, out HiveBanishedPlayersComponent? banished) &&
+                _mind.GetMind(readmitted) is { } mindId &&
+                CompOrNull<MindComponent>(mindId)?.UserId is { } player)
+            {
+                banished.Players.Remove(player);
+            }
+        }
 
         OnReadmitted(readmitter, (readmitted, banish));
 
         RemCompDeferred<XenoBanishComponent>(readmitted);
 
         _adminLog.Add(LogType.RMCXenoReadmit, $"{ToPrettyString(readmitter)} readmitted {ToPrettyString(readmitted)}");
+    }
+
+    public bool IsBanishedFrom(NetUserId player, EntityUid hive)
+    {
+        return TryComp(hive, out HiveBanishedPlayersComponent? banished) && banished.Players.Contains(player);
+    }
+
+    /// <summary>
+    /// checks the player isn't banished from the hive they would join by taking this lesser drone or parasite,
+    /// telling them why if they are
+    /// </summary>
+    public bool CanJoinHivePopup(ICommonSession player, EntityUid joining)
+    {
+        if (_hive.GetHive(joining) is not { } hive ||
+            !IsBanishedFrom(player.UserId, hive))
+        {
+            return true;
+        }
+
+        if (player.AttachedEntity is { } user)
+            _popup.PopupEntity(Loc.GetString("rmc-banish-cannot-join", ("hive", Name(hive))), user, user, PopupType.MediumCaution);
+
+        return false;
     }
 
     protected virtual void OnBanished(EntityUid banisher, Entity<XenoBanishComponent> banished)

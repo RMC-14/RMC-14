@@ -1,4 +1,5 @@
 using Content.Server._RMC14.Announce;
+using Content.Server._RMC14.Ghost.Roles;
 using Content.Server.Administration.Managers;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Banish;
@@ -39,6 +40,15 @@ public sealed class XenoBanishSystem : SharedXenoBanishSystem
 
         // Before the larva queue so it sees the restored hive and offers the body
         SubscribeLocalEvent<XenoBanishComponent, MindRemovedMessage>(OnBanishedMindRemoved, before: [typeof(LarvaQueueSystem)]);
+
+        // covers lesser drone spawners and lesser bodies left behind, including the banished player's own
+        SubscribeLocalEvent<HiveMemberComponent, RMCTakeGhostRoleAttemptEvent>(OnHiveMemberTakeGhostRoleAttempt);
+    }
+
+    private void OnHiveMemberTakeGhostRoleAttempt(Entity<HiveMemberComponent> ent, ref RMCTakeGhostRoleAttemptEvent args)
+    {
+        if (!args.Cancelled && !CanJoinHivePopup(args.Player, ent))
+            args.Cancelled = true;
     }
 
     /// <summary>

@@ -18,6 +18,7 @@ rmc-banish-not-xeno = Target is not a xenonid.
 rmc-banish-crit = You cannot banish a xenonid that is in critical condition.
 rmc-banish-no-reason = You must provide a reason for the banishment.
 rmc-banish-player-changed = This xenonid is no longer controlled by the same mind.
+rmc-banish-cannot-join = You are banished from {$hive} and can only return through the larva queue.
 
 # Readmit System
 rmc-readmit-title = Readmission
