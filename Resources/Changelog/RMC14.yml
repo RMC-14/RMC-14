@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: '[SOP] SOs may deploy anywhere while remaining in the ARC'
-    type: Add
-  id: 3423
-  time: '2026-06-16T21:47:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10179
 - author: Vixting
   changes:
   - message: Adds languages. Languages can be selected from the traits section. If
@@ -4392,5 +4385,12 @@
   id: 3922
   time: '2026-11-22T22:15:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11166
+- author: GrigoriyGalintano
+  changes:
+  - message: Added proper and knee pushups for organic humanoids and synthetics.
+    type: Add
+  id: 3923
+  time: '2026-11-22T22:21:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10794
 Name: RMC14
 Order: -1
