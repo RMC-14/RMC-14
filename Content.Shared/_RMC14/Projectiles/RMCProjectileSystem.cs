@@ -321,6 +321,9 @@ public sealed class RMCProjectileSystem : EntitySystem
     {
         if (ent.Comp.Delete)
         {
+            var ev = new BeforeProjectileMaxRangeDeleteEvent();
+            RaiseLocalEvent(ent, ref ev);
+
             if (_net.IsServer || IsClientSide(ent))
                 QueueDel(ent);
         }
@@ -380,3 +383,6 @@ public sealed class RMCProjectileSystem : EntitySystem
 
 [ByRefEvent]
 public record struct ProjectileShotEvent(EntityUid? Shooter, bool Predicted = true);
+
+[ByRefEvent]
+public record struct BeforeProjectileMaxRangeDeleteEvent();

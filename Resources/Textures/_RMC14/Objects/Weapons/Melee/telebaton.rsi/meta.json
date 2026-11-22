@@ -8,25 +8,25 @@
   },
   "states": [
     {
-      "name": "telebaton_off"
+      "name": "telebaton-icon"
     },
     {
-      "name": "telebaton_on"
+      "name": "telebaton-on"
     },
     {
-      "name": "on-inhand-right",
+      "name": "inhand-right-on",
       "directions": 4
     },
     {
-      "name": "off-inhand-right",
+      "name": "telebaton-inhand-right",
       "directions": 4
     },
     {
-      "name": "off-inhand-left",
+      "name": "telebaton-inhand-left",
       "directions": 4
     },
     {
-      "name": "on-inhand-left",
+      "name": "inhand-left-on",
       "directions": 4
     }
   ]

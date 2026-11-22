@@ -30,11 +30,13 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Areas;
 
 namespace Content.Shared._RMC14.Sentry;
 
 public sealed class SentrySystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;

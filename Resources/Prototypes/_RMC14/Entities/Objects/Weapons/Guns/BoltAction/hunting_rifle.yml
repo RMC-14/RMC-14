@@ -19,7 +19,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_boltaction.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_basira.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -90,6 +90,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: GunRequiresWield
+  - type: GunUnskilledUsable
 
 - type: entity
   parent: CMMagazineRifleBase
