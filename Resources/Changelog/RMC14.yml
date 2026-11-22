@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Fixed Xenos being able to collapse the MB-6 folding barricade.
-    type: Fix
-  id: 3420
-  time: '2026-06-16T20:13:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10170
 - author: AlexisMoonlight
   changes:
   - message: (Law) Added definitions for recorders and listening devices.
@@ -4393,5 +4386,13 @@
   id: 3919
   time: '2026-11-22T04:15:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10665
+- author: carccborg
+  changes:
+  - message: HE mortar shells have been adjusted to use values to produce explosions
+      which more closely resemble their intended damage.
+    type: Tweak
+  id: 3920
+  time: '2026-11-22T04:19:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10717
 Name: RMC14
 Order: -1
