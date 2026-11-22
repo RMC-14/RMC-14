@@ -87,6 +87,9 @@
     - CMAccessResearch
     - RMCAccessFieldDoctor
     - CMAccessCE
+    - RMCAccessVehicleCrew
+    - RMCAccessEcho
+    - RMCAccessFoxtrot
     accessGroups:
     - RMCBaseMarineAccess
     - RMCBaseMPAccess

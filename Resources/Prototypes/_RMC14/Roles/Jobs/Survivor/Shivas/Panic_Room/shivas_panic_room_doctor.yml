@@ -4,7 +4,7 @@
   name: rmc-job-name-survivor-shivas-doctor
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorShivasDoctor
-  spawnMenuRoleName: Doctor (Shivas Panic Room Special Survivor)
+  spawnMenuRoleName: Doctor (Shivas Special Survivor)
   greeting: rmc-job-greeting-shivas-panic-room-doctor
 
 - type: entity

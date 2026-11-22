@@ -27,7 +27,8 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
     private const float SlotButtonHeight = 86f;
     private const float BaseWindowWidth = 270f;
     private const float WindowWidthPerHardpoint = 86f;
-    private const float MinWindowWidth = 460f;
+    private const float MinWindowWidth = 520f;
+    private const float MinWindowHeight = 240f;
     private const float MaxWindowWidth = 940f;
 
     public event Action<VehicleSlotPath, int, VehicleAmmoLoaderSlotAction>? OnSlotSelected;
@@ -38,7 +39,7 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
     public VehicleAmmoLoaderMenu()
     {
         RobustXamlLoader.Load(this);
-        SetSize = new Vector2(MinWindowWidth, 240);
+        SetSize = new Vector2(MinWindowWidth, 280);
     }
 
     public void Update(
@@ -118,23 +119,12 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
                 HorizontalExpand = true
             };
 
-            var header = Loc.GetString(
-                "rmc-vehicle-ammo-loader-ui-slot",
-                ("slot", hardpoint.SlotPath.ToCompositeId()),
-                ("type", hardpoint.HardpointType));
-
-            var nameText = hardpoint.InstalledName ?? header;
+            var nameText = hardpoint.InstalledName ?? hardpoint.HardpointType;
 
             centerColumn.AddChild(new Label
             {
                 Text = nameText,
                 FontColorOverride = primaryText
-            });
-
-            centerColumn.AddChild(new Label
-            {
-                Text = header,
-                FontColorOverride = secondaryText
             });
 
             var ammoSlots = new BoxContainer
@@ -220,15 +210,6 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
             Margin = new Thickness(5, 4),
             MouseFilter = Control.MouseFilterMode.Ignore
         };
-
-        var header = new Label
-        {
-            Text = ammoSlot.Label,
-            HorizontalAlignment = Control.HAlignment.Center,
-            FontColorOverride = ammoSlot.IsReadySlot ? Color.FromHex("#E1EEFF") : Color.FromHex("#8FA7C2"),
-            MouseFilter = Control.MouseFilterMode.Ignore
-        };
-        column.AddChild(header);
 
         var iconHolder = new Control
         {
@@ -318,8 +299,8 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
             (hardpointCount - 1) * WindowWidthPerHardpoint,
             MinWindowWidth,
             MaxWindowWidth);
-        var height = Math.Clamp(126f + hardpointCount * 108f, 190f, 560f);
-        MinSize = new Vector2(MinWindowWidth, 190);
+        var height = Math.Clamp(126f + hardpointCount * 108f, MinWindowHeight, 560f);
+        MinSize = new Vector2(MinWindowWidth, MinWindowHeight);
         SetSize = new Vector2(width, height);
     }
 

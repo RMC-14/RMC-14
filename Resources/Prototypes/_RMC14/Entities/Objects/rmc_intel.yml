@@ -198,6 +198,9 @@
     blacklist:
       components:
       - Xeno
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ] ]
+  - type: ActivatableUIRequiresAccess
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -249,8 +252,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: medlaptop
-    layers: []
+    layers:
+    - map: ["base"]
+      state: "medlaptop0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "medlaptop"
   - type: InteractionOutline
   - type: ApcPowerReceiver
     powerLoad: 250
@@ -264,6 +270,28 @@
       enum.DialogUiKey.Key:
         type: DialogBui
   - type: IntelDataTerminalCandidate
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCComputerIntelDatabase
+  name: intel database computer
+  description: A UNMC intel computer used for consulting the current intel database.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal1_old
+    layers: []
+  - type: ActivatableUI
+    key: enum.ViewIntelObjectivesUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
+  - type: ViewIntelObjectives
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: RMCIntelTechTree
@@ -345,7 +373,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadExplosive
+            object: RMCCrateOBHE
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-he
@@ -359,7 +387,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadIncendiary
+            object: RMCCrateOBIncendiary
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-incendiary
@@ -373,7 +401,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadCluster
+            object: RMCCrateOBCluster
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-cluster
@@ -445,7 +473,6 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: nuke
-  - type: VehicleSupplyTech
 - type: Tag
   id: RMCIntelItem
 

@@ -50,9 +50,9 @@
     capacity: 8
     spreadAngle: 25
   - type: RMCProjectileAccuracy
-    accuracy: 110
+    accuracy: 100
     thresholds:
-    - range: 8
+    - range: 32
       falloff: 10
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Projectiles/projectiles.rsi

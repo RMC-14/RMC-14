@@ -396,6 +396,17 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/xippy_hat.rsi
 
 - type: entity
+  parent: CMHeadCap
+  id: CMHeadCapCav
+  name: UN cavalry hat
+  description: Also known as Cavalry Stetson, this hat is a symbol of tradition and remembrance of heroism that is ongoing from as far as 19th century. Even though the Corps had cashed in its horses for choppers, choppers for dropships, and gone tear-assing around space, looking for the shit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cav_hat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cav_hat.rsi
+
+- type: entity
   parent: RMCHeadCapFlippable
   id: CMHeadCapOfficer
   name: UNMC officer cap
@@ -415,6 +426,20 @@
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
 
 - type: entity
+  parent: CMHeadCap
+  id: CMHeadCapOfficerNV
+  name: UNMC peaked officer cap
+  description: A peaked service cap worn by officers of the United Nations Marine Corps, featuring an in-built headset. It features a gold UNMC emblem and a glossy black visor. This one looks significantly worn.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer_nv.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: RMCHeadCapFlippable
   id: RMCHeadCapASO
   name: UNMC ASO cap
@@ -432,6 +457,17 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapPeakedCO
+  name: marine commanding officer peaked cap
+  description: A peaked cap with the commanding officer's insignia emblazoned on it. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap_peaked_co.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap_peaked_co.rsi
 
 - type: entity
   parent: CMHeadCap
@@ -813,9 +849,10 @@
 
 - type: entity
   parent: CMHeadBeret
-  id: RMCProvostCommandBeret
-  name: UNMC provost command beret
-  description: A beret with the UNMC Military Police insignia emblazoned on it.
+  id: RMCHeadBeretProvostBlue
+  name: UNMC provost beret # Playtime reward for PvIs
+  suffix: Blue
+  description: A beret with the UNMC Military Police insignia emblazoned on it. The blue mark symbolizes extensive service in their division.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
@@ -952,9 +989,17 @@
   description: An improvised head wrap made out of a standard issue neckerchief. Great for keeping the sweat out of your eyes and protecting your hair.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/durag/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/durag/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/durag/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/durag/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/durag/urban.rsi
   - type: HideLayerClothing
     slots:
     - Hair
@@ -962,12 +1007,63 @@
 - type: entity
   parent: RMCHeadDurag
   id: RMCHeadDuragBlack
+  name: black durag
   description: An improvised head wrap made out of a black neckerchief. Great for keeping the sweat out of your eyes and protecting your hair.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/durag_black/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/durag_black/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/durag_black/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/durag_black/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/durag_black/urban.rsi
+
+# Bandana
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadBandana
+  name: bandana
+  suffix: RMC
+  description: Typically worn by heavy-weapon operators, mercenaries and scouts, the bandana serves as a lightweight and comfortable hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/bandana/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/bandana/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/bandana/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/bandana/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/bandana/urban.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: RMCHeadBandana
+  id: RMCHeadBandanaTan
+  name: tan bandana
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/bandana_tan/urban.rsi
 
 # Civilian
 
@@ -1023,6 +1119,25 @@
   name: patrol cap
   description: A casual cap issued as part of the non-combat uniform. While it only protects from the sun, it's much more comfortable than a helmet.
   components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/cap/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/cap/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapPatrolNV
+  name: patrol cap
+  suffix: Varadero
+  description: A casual cap issued as part of the non-combat uniform. It comes with a protective neck flap to protect from sunburn.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_nv.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
 

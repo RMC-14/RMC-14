@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
-using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
-using Robust.Shared.GameObjects;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(VehicleWeaponsSystem))]
 public sealed partial class VehicleWeaponsComponent : Component
 {
@@ -95,7 +91,7 @@ public sealed partial class VehicleTurretComponent : Component
     public float MaxShotCurvatureDegrees = 0f;
 
     [DataField, AutoNetworkedField]
-    public bool StabilizedRotation = false;
+    public bool StabilizedRotation = true;
 
     [DataField, AutoNetworkedField]
     public float RotationSpeed = 0f;
@@ -120,6 +116,9 @@ public sealed partial class VehicleTurretComponent : Component
 
     [DataField, AutoNetworkedField]
     public string OverlayState = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public string OverlayDamagedState = string.Empty;
 
     [DataField, AutoNetworkedField]
     public bool UseDirectionalOffsets = false;
@@ -156,4 +155,10 @@ public sealed partial class VehicleTurretComponent : Component
 
     [NonSerialized]
     public int LastAppliedDirectionSign = 0;
+
+    [AutoNetworkedField]
+    public Angle LastVehicleRotation;
+
+    [AutoNetworkedField]
+    public bool LastVehicleRotationValid;
 }

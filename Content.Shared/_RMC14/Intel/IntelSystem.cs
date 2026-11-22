@@ -32,6 +32,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Sprite;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -243,6 +244,7 @@ public sealed class IntelSystem : EntitySystem
 
         SubscribeLocalEvent<ViewIntelObjectivesComponent, MapInitEvent>(OnViewIntelObjectivesMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, ViewIntelObjectivesActionEvent>(OnViewIntelObjectivesAction);
+        SubscribeLocalEvent<ViewIntelObjectivesComponent, BoundUIOpenedEvent>(OnViewIntelObjectivesUIOpened);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, InteractHandEvent>(OnViewIntelObjectivesInteractHand, before: [typeof(LockSystem)]);
 
         SubscribeLocalEvent<IntelHasUnlockedComponent, RefreshNameModifiersEvent>(OnHasUnlockedRefreshName);
@@ -509,6 +511,16 @@ public sealed class IntelSystem : EntitySystem
         _ui.OpenUi(ent.Owner, ViewIntelObjectivesUI.Key, actor);
     }
 
+    private void OnViewIntelObjectivesUIOpened(Entity<ViewIntelObjectivesComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        if (_net.IsServer && args.UiKey.Equals(ViewIntelObjectivesUI.Key))
+        {
+            var tree = EnsureTechTree().Comp.Tree;
+            ent.Comp.Tree = tree;
+            Dirty(ent);
+        }
+    }
+
     private void OnHasUnlockedRefreshName(Entity<IntelHasUnlockedComponent> ent, ref RefreshNameModifiersEvent args)
     {
         args.AddModifier("rmc-intel-unlocked", extraArgs: ("unlocked", string.Join(", ", ent.Comp.Unlocked)));
@@ -717,12 +729,15 @@ public sealed class IntelSystem : EntitySystem
 
     private bool ShowClue(EntityUid target, IntelCluesComponent clues, EntityUid user, bool storeGlobal)
     {
+        if (IsClueResolved(target))
+            return false;
+
         var clue = GetClueMessage(target, clues);
 
         if (!storeGlobal)
             return AddPersonalClue(user, target, clue);
 
-        _popup.PopupEntity(clue, target, user, PopupType.Medium);
+        _popup.PopupEntity(FormattedMessage.RemoveMarkupOrThrow(clue), target, user, PopupType.Medium);
 
         RemovePersonalClueFromAll(target);
 
@@ -737,6 +752,29 @@ public sealed class IntelSystem : EntitySystem
         Dirty(tree);
         UpdateTree(tree);
         return true;
+    }
+
+    private bool IsClueResolved(EntityUid target)
+    {
+        if (TryComp(target, out IntelReadObjectiveComponent? read) &&
+            read.State == IntelObjectiveState.Complete)
+        {
+            return true;
+        }
+
+        if (TryComp(target, out IntelRetrieveItemObjectiveComponent? retrieve) &&
+            retrieve.State == IntelObjectiveState.Complete)
+        {
+            return true;
+        }
+
+        if (TryComp(target, out IntelDataDiskComponent? disk) && disk.Completed)
+            return true;
+
+        if (TryComp(target, out IntelDataTerminalComponent? terminal) && terminal.Completed)
+            return true;
+
+        return TryComp(target, out IntelSafeObjectiveComponent? safe) && safe.Completed;
     }
 
     private Dictionary<NetEntity, string> GetPersonalClues(EntityUid user)
@@ -1922,6 +1960,7 @@ public sealed class IntelSystem : EntitySystem
             terminal.Completed = true;
             Dirty(uid, terminal);
             CompleteUpload(uid, terminal.Value);
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_RMC14/Machines/screen_output1.ogg"), uid);
             _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-finished"), uid, terminalUser);
         }
 
@@ -1956,6 +1995,7 @@ public sealed class IntelSystem : EntitySystem
             Dirty(disk.Value);
             _nameModifier.RefreshNameModifiers(disk.Value.Owner);
             CompleteUpload(disk.Value.Owner, disk.Value.Comp.UploadValue);
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_RMC14/Machines/screen_output1.ogg"), uid);
 
             if (TryComp(disk.Value.Owner, out IntelRetrieveItemObjectiveComponent? retrieve) &&
                 retrieve.State == IntelObjectiveState.Inactive)

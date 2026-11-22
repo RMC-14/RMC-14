@@ -1,15 +1,18 @@
 - type: entity
+  parent: RMCVehicleBase
   id: VehicleAPCBase
   abstract: true
   name: armored personnel carrier
   description: A rugged armored personnel carrier outfitted for battlefield support.
   components:
-  - type: Vehicle
-    movementKind: Grid
-  - type: LagCompensation
-  - type: Clickable
-  - type: RMCIgnoreGhostInteractionLimits
-  - type: RequireProjectileTarget
+  - type: VehicleLock
+    access:
+    - CMAccessCrewman
+    - RMCAccessCommand
+    - CMAccessBrig
+  - type: WarpPoint
+    follow: true
+    location: APC
   - type: GridVehicleMover
     maxSpeed: 5
     acceleration: 4
@@ -17,24 +20,16 @@
     turnDelay: 0.4
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
+    weightClass: Light
   - type: VehicleOvercharge
     speedMultiplier: 1.4
     duration: 3
     cooldown: 15
     overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
-  - type: VehicleSound
-    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
-    runningSoundCooldown: 2
-    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
-    hornCooldown: 1
-    collisionSoundCooldown: 0.5
-    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: VehicleSpotlight
     radius: 7
     energy: 3
     softness: 2
-  - type: Physics
-    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       world:
@@ -64,8 +59,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: VehicleFrameAPC
-  - type: InteractionOutline
+    damageModifierSet: VehicleFrameAPC # APC damage modifier
   - type: Sprite
     drawdepth: Mobs
     sprite: _RMC14/Structures/Vehicles/apc.rsi
@@ -86,13 +80,6 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: SpriteMovement
-    movementLayers:
-      rmc-wheels:
-        state: wheels_0
-    noMovementLayers:
-      rmc-wheels:
-        state: wheels_1
   - type: PointLight
     enabled: false
     radius: 12
@@ -100,18 +87,7 @@
     softness: 2
     autoRot: true
     offset: "0,0.9"
-  - type: Corrodible
-    isCorrodible: false
-  - type: DoAfter
-  - type: UserInterface
-    interfaces:
-      enum.HardpointUiKey.Key:
-        type: HardpointBoundUserInterface
-      enum.VehicleWeaponsUiKey.Key:
-        type: VehicleWeaponsBoundUserInterface
-  - type: VehicleWeapons
   - type: VehicleHardpointVisuals
-  - type: InputMover
   - type: ItemSlots
     slots:
       port-gun-north:
@@ -159,16 +135,9 @@
       hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
-  - type: VehicleWheelSlots
-    slotCount: 1
-  - type: HardpointIntegrity
-    maxIntegrity: 1000
-    repairFuelCost: 15
-    bypassEntryOnZero: true
-  - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 10
     maxXenos: 3
@@ -183,10 +152,11 @@
 - type: entity
   parent: VehicleAPCBase
   id: VehicleAPC
+  suffix: Drivable, APC, Base
   components:
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 18
     maxXenos: 3
@@ -207,10 +177,23 @@
       interiorCoords: 1.55,-1.2
 
 - type: entity
-  parent: VehicleAPCBase
+  parent: VehicleAPC
+  id: VehicleAPCTracked
+  suffix: Drivable, APC, Base, Tracked
+  components:
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: apc
+
+- type: entity
+  parent: VehicleAPCTracked
   id: VehicleAPCMed
   name: armored personnel carrier (medical)
   description: A medical-configured APC outfitted with triage markings.
+  suffix: Drivable, APC, Base, Medical, Tracked
   components:
   - type: Sprite
     layers:
@@ -232,7 +215,7 @@
       state: wheels_1
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_medical_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 11
     maxXenos: 3
@@ -262,10 +245,11 @@
       interiorCoords: 0.25,-1
 
 - type: entity
-  parent: VehicleAPCBase
+  parent: VehicleAPCTracked
   id: VehicleAPCCommand
   name: armored personnel carrier (command)
   description: A command-configured APC bristling with sensors and comms gear.
+  suffix: Drivable, APC, Base, Command, Tracked
   components:
   - type: Sprite
     layers:
@@ -287,7 +271,7 @@
       state: wheels_1
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_command_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 12
     maxXenos: 3
@@ -317,12 +301,17 @@
       radius: 0.85
       interiorCoords: 0.25,-1
 
+## SPP
+
 - type: entity
   parent: VehicleAPCBase
   id: VehicleSPPAPC
   name: SPP armored personnel carrier
   description: An armored personnel carrier configured for SPP forces.
+  suffix: Drivable, APC, Base, SPP
   components:
+  - type: VehicleLock
+    access: []
   - type: GridVehicleMover
     maxSpeed: 5
     acceleration: 2.0
@@ -397,7 +386,7 @@
       insertDelay: 1.5
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/spp_apc_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 14
     maxXenos: 4
