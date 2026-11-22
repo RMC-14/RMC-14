@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added the proper Surplus Boxes of Ingredients crate to Requisitions for
-      purchase, and it will be randomly given by ASRS on the goods lift
-    type: Add
-  - message: Added RMC-specific Milk and Soy Milk cartons
-    type: Add
-  id: 3419
-  time: '2026-06-16T19:59:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9985
 - author: Thereisabear
   changes:
   - message: Fixed Xenos being able to collapse the MB-6 folding barricade.
@@ -4395,5 +4385,13 @@
   id: 3918
   time: '2026-11-22T04:13:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10874
+- author: carccborg
+  changes:
+  - message: Attached bayonets, combat knives, and machetes now have the proper tool
+      qualities
+    type: Fix
+  id: 3919
+  time: '2026-11-22T04:15:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10665
 Name: RMC14
 Order: -1
