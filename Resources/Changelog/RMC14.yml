@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Tuna224
-  changes:
-  - message: Fixed a small grammar mistake in the stethoscopes inspect on wounded
-      patients.
-    type: Fix
-  id: 3406
-  time: '2026-06-16T01:52:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10162
-- author: x5tink
-  changes:
-  - message: Plushie Duplication in loadouts screen
-    type: Fix
-  id: 3407
-  time: '2026-06-16T01:51:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10149
 - author: Vixting
   changes:
   - message: Added missing items to the Doctor's medical locker.
@@ -4460,5 +4445,27 @@
   id: 3905
   time: '2026-11-22T03:38:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9883
+- author: GNUtopia
+  changes:
+  - message: The underbarrel flamer can now switch to an intense firing mode with
+      the unique action key
+    type: Add
+  - message: The underbarrel flamer in standard mode now always has 5 range
+    type: Tweak
+  id: 3906
+  time: '2026-11-22T03:41:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9314
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Firearms 2 now reduces scatter as intended.
+    type: Tweak
+  - message: Being dazed or unskilled will apply a wield delay penalty.
+    type: Tweak
+  - message: Marines with Firearms 0 using civilian-usable weapons (such as SMGs or
+      pistols) will have less-harsh scatter penalties
+    type: Tweak
+  id: 3907
+  time: '2026-11-22T03:40:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8876
 Name: RMC14
 Order: -1
