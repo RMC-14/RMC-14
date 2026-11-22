@@ -947,11 +947,11 @@
     - sprite: _RMC14/Mobs/Vulpkanin/straight_tail.rsi
       state: m_tail_straighttail_primary_wag
 
-  type: marking
+- type: marking
   id: VulpTailFluffyAnimated
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: []
   sprites:
-  - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
-  - state: fluffy_wag
+    - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
+      state: fluffy_wag
