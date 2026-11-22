@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Fixed mapped empty magazines from firing non-existent bullets if reloaded
-      from a spam can.
-    type: Fix
-  id: 3405
-  time: '2026-06-16T01:51:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10164
 - author: Tuna224
   changes:
   - message: Fixed a small grammar mistake in the stethoscopes inspect on wounded
@@ -4461,5 +4453,12 @@
   id: 3904
   time: '2026-11-22T03:37:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9670
+- author: InspectorJele
+  changes:
+  - message: Semiotics recieved new sprites
+    type: Add
+  id: 3905
+  time: '2026-11-22T03:38:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9883
 Name: RMC14
 Order: -1
