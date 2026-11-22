@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Destrain;
 using Content.Shared.Actions.Components;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -8,7 +9,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Evolution;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
-[Access(typeof(XenoEvolutionSystem))]
+[Access(typeof(XenoEvolutionSystem), typeof(XenoDestrainSystem))]
 public sealed partial class XenoEvolutionComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -64,4 +65,8 @@ public sealed partial class XenoEvolutionComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan EvolutionJitterDuration = TimeSpan.FromSeconds(10);
+
+    /// When this xeno last reset its strain into this caste. Passed on to the next strain it picks.
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan? LastDestrainAt;
 }
