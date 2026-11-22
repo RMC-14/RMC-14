@@ -91,19 +91,13 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     private void OnRefillerInteractUsing(Entity<CMSolutionRefillerComponent> ent, ref InteractUsingEvent args)
     {
         var fillable = args.Used;
-        if (TryComp<RMCHyposprayComponent>(args.Used, out var hypo) &&
-            _container.TryGetContainer(args.Used, hypo.SlotId, out var container) &&
-            container.ContainedEntities.Count != 0)
-        {
-            fillable = container.ContainedEntities[0];
-        }
 
         if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable))
             return;
 
+        args.Handled = true;
         if (!_whitelist.IsValid(ent.Comp.Whitelist, fillable))
         {
-            args.Handled = true;
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
             return;
         }
@@ -117,9 +111,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-full", ("target", fillable)), args.User, args.User);
             return;
         }
-
-        // handle the event to prevent restocking empty bottles/autoinjectors
-        args.Handled = true;
 
         var anyRefilled = false;
         foreach (var (reagent, amount) in refillable.Reagents)
@@ -176,9 +167,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         {
             return;
         }
-
-        if (sol != null)
-            _appearance.SetData(ent, SolutionContainerStoreVisuals.Color, sol.GetColor(_proto));
 
         if (!TryGetStorageFillableSolution(args.Entity, out var refillable, out _))
         {
@@ -310,7 +298,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             return;
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
-    !container.ContainedEntities.TryFirstOrNull(out var contained))
+            !container.ContainedEntities.TryFirstOrNull(out var contained))
         {
             return;
         }
@@ -320,6 +308,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         args.Verbs.Add(new AlternativeVerb
         {
             Text = Loc.GetString("rmc-refillsolution-flush"),
+            Priority = -1,
             Act = () =>
             {
                 TryFlushContainer(ent, user);
@@ -333,7 +322,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             return;
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
-!container.ContainedEntities.TryFirstOrNull(out var contained))
+            !container.ContainedEntities.TryFirstOrNull(out var contained))
         {
             return;
         }
@@ -348,7 +337,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameTarget,
-
+            RootEntity = true,
         });
     }
 
@@ -363,7 +352,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         args.Handled = true;
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
-!container.ContainedEntities.TryFirstOrNull(out var contained))
+            !container.ContainedEntities.TryFirstOrNull(out var contained))
         {
             return;
         }
@@ -384,6 +373,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        if (!ent.Comp.CanFlush)
+            return;
+
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
@@ -398,6 +390,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     private void TryFlushSolution(Entity<RMCFlushableSolutionComponent> ent, EntityUid user)
     {
         //TODO RMC immovable
+
         _popup.PopupClient(Loc.GetString("rmc-refillsolution-flush-start", ("time", ent.Comp.FlushTime.TotalSeconds)), user, user, PopupType.SmallCaution);
         _doafter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, ent.Comp.FlushTime, new ContainerFlushDoAfterEvent(), ent, target: ent)
         {

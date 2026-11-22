@@ -83,10 +83,11 @@
     color: "#C47A50"
     radio: MarineFoxtrot
     accessLevels:
-    - CMAccessAlpha
+    - CMAccessAlpha # TODO RMC14 - Remove extra access from squad once this squad has been made into a proper roundstart squad
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    - RMCAccessFoxtrot
     minimapBackground:
      sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_foxtrot
@@ -101,10 +102,11 @@
     color: "#67D692"
     radio: MarineEcho
     accessLevels:
-    - CMAccessAlpha
+    - CMAccessAlpha # TODO RMC14 - Remove extra access from squad once this squad has been made into a proper roundstart squad
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    - RMCAccessEcho
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_echo
@@ -378,6 +380,45 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadMP
+  name: Military Police
+  components:
+  - type: SquadTeam
+    color: "#b1152b"
+    background:
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: MarineMilitaryPolice
+    minimapBackground:
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     state: background_mp
+    canSupplyDrop: false
+    group: MP
+    maxRoles:
+      CMRifleman: 0
+      CMCombatTech: 0
+      CMHospitalCorpsman: 0
+      CMSmartGunOperator: 0
+      CMWeaponsSpecialist: 0
+      CMFireteamLeader: 0
+      CMSquadLeader: 0
+    leaderIcon:
+      sprite: _RMC14/Interface/job_icons/UNMC/military_police.rsi
+      state: hudsquad_cmp
+  - type: Tag
+    tags:
+    - RMCSquadMP
+
+- type: Tag
+  id: RMCSquadMP
+
+- type: entity
+  parent: SquadBase
   id: SquadFORECON
   name: Recon
   components:
@@ -400,6 +441,55 @@
 
 - type: Tag
   id: RMCSquadFORECON
+
+- type: entity
+  parent: SquadBase
+  id: RMCSquadUNMC
+  name: UNMC
+  components:
+  - type: SquadTeam
+    color: "#3b62a7"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: MarineSurvivor
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_unmc
+    canSupplyDrop: false
+    group: UNMC
+  - type: Tag
+    tags:
+    - RMCSquadUNMC
+
+- type: Tag
+  id: RMCSquadUNMC
+
+- type: entity
+  parent: SquadBase
+  id: RMCSquadMarineVaradero
+  name: Varadero Garrison - # the hyphen is intentional
+  components:
+  - type: SquadTeam
+    color: "#3b62a7" # Shares the same color as the generic UNMC squad for now
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: MarineSurvivor
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_unmc
+    canSupplyDrop: false
+  - type: Tag
+    tags:
+    - RMCSquadMarineVaradero
+
+- type: Tag
+  id: RMCSquadMarineVaradero
 
 - type: entity
   parent: SquadBase

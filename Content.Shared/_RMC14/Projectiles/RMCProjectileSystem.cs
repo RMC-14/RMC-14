@@ -1,5 +1,7 @@
 using System.Numerics;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Evasion;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Examine;
@@ -12,6 +14,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Projectiles;
@@ -25,6 +28,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -148,28 +152,9 @@ public sealed class RMCProjectileSystem : EntitySystem
             if (!TryComp(args.OtherEntity, out EvasionComponent? evasionComponent))
                 return;
 
-            var accuracy = projectile.Comp.Accuracy;
             var targetCoords = _transform.GetMoverCoordinates(args.OtherEntity);
             var distance = (targetCoords.Position - projectile.Comp.ShotFrom.Value.Position).Length();
-
-            foreach (var threshold in projectile.Comp.Thresholds)
-            {
-                var pastRange = distance - threshold.Range;
-
-                if (threshold.Buildup)
-                {
-                    if (pastRange >= 0)
-                        continue;
-
-                    accuracy += threshold.Falloff * pastRange;
-                    continue;
-                }
-
-                if (pastRange <= 0)
-                    continue;
-
-                accuracy -= threshold.Falloff * pastRange;
-            }
+            var accuracy = ApplyAccuracyFalloff(projectile.Comp, distance);
 
             if (!_examine.InRangeUnOccluded(_transform.ToMapCoordinates(projectile.Comp.ShotFrom.Value), _transform.ToMapCoordinates(targetCoords), distance, null))
                 accuracy += (int)AccuracyModifiers.TargetOccluded;
@@ -191,6 +176,37 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         projectile.Comp.Dodged.Add(netOther);
         Dirty(projectile);
+    }
+
+    private FixedPoint2 ApplyAccuracyFalloff(RMCProjectileAccuracyComponent comp, float distance)
+    {
+        var accuracy = comp.Accuracy;
+        foreach (var threshold in comp.Thresholds)
+        {
+            var pastRange = distance - threshold.Range;
+
+            if (threshold.Buildup)
+            {
+                if (pastRange >= 0)
+                    continue;
+
+                accuracy += threshold.Falloff * pastRange;
+                continue;
+            }
+
+            if (pastRange <= 0)
+                continue;
+
+            accuracy -= threshold.Falloff * pastRange;
+        }
+
+        return accuracy;
+    }
+
+    public FixedPoint2 GetEffectiveAccuracy(Entity<RMCProjectileAccuracyComponent> projectile, float distance)
+    {
+        var accuracy = ApplyAccuracyFalloff(projectile.Comp, distance);
+        return accuracy > projectile.Comp.MinAccuracy ? accuracy : projectile.Comp.MinAccuracy;
     }
 
     private bool IsProjectileTargetFriendly(EntityUid projectile, EntityUid target)
@@ -243,9 +259,24 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         var spawn = SpawnAtPosition(ent.Comp.Spawn, coordinates);
         _hive.SetSameHive(ent.Owner, spawn);
+        if (HasComp<TileFireComponent>(spawn))
+        {
+            var fires = _rmcMap.GetAnchoredEntitiesEnumerator<TileFireComponent>(coordinates);
+            while (fires.MoveNext(out var fire))
+            {
+                if (fire != spawn)
+                    QueueDel(fire);
+            }
+        }
 
         if (ent.Comp.Popup is { } popup)
             _popup.PopupCoordinates(Loc.GetString(popup), coordinates, ent.Comp.PopupType ?? PopupType.Small);
+    }
+
+    public void SetSpawn(Entity<SpawnOnTerminateComponent> ent, EntProtoId spawn)
+    {
+        ent.Comp.Spawn = spawn;
+        Dirty(ent);
     }
 
     private void OnSpawnOnTerminateProjectileHit(Entity<SpawnOnTerminateComponent> ent, ref ProjectileHitEvent args)
@@ -277,10 +308,22 @@ public sealed class RMCProjectileSystem : EntitySystem
         Dirty(projectile, maxRange);
     }
 
+    public void ModifyDamage(EntityUid projectile, int multiplier)
+    {
+        if (!TryComp<ProjectileComponent>(projectile, out var comp))
+            return;
+
+        comp.Damage *= multiplier;
+        Dirty(projectile, comp);
+    }
+
     private void StopProjectile(Entity<ProjectileMaxRangeComponent> ent)
     {
         if (ent.Comp.Delete)
         {
+            var ev = new BeforeProjectileMaxRangeDeleteEvent();
+            RaiseLocalEvent(ent, ref ev);
+
             if (_net.IsServer || IsClientSide(ent))
                 QueueDel(ent);
         }
@@ -340,3 +383,6 @@ public sealed class RMCProjectileSystem : EntitySystem
 
 [ByRefEvent]
 public record struct ProjectileShotEvent(EntityUid? Shooter, bool Predicted = true);
+
+[ByRefEvent]
+public record struct BeforeProjectileMaxRangeDeleteEvent();

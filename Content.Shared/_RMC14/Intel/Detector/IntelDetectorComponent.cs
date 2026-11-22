@@ -51,6 +51,12 @@ public sealed partial class IntelDetectorComponent : Component, IDetectorCompone
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextSelfCheckAt;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SelfCheckCooldown = TimeSpan.FromSeconds(5);
 }
 
 [Serializable, NetSerializable]

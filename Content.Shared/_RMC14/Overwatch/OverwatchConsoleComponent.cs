@@ -1,4 +1,6 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.Announce;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
@@ -34,9 +36,6 @@ public sealed partial class OverwatchConsoleComponent : Component
     [DataField, AutoNetworkedField]
     public OverwatchSavedLocation?[] SavedOrbitalLocations = new OverwatchSavedLocation?[MaxSavedLocationCount];
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastMessage;
-
     [DataField, AutoNetworkedField]
     public TimeSpan MessageCooldown = TimeSpan.FromSeconds(0.5);
 
@@ -45,6 +44,9 @@ public sealed partial class OverwatchConsoleComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanMessageSquad = true;
+
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent>? AnnouncementOverlay = "RMCAnnouncementOverwatch";
 
     [DataField, AutoNetworkedField]
     public bool HasOrbital;

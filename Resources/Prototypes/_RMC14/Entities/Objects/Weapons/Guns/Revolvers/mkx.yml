@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverMkX
   name: Warwick MkX TBR
-  suffix: DO NOT MAP
+  suffix: PVE, RCM, CO, Filled
   description: "For centuries, throughout peacetime and war, the Warwick has been the choice sidearm of the TSE's armed forces. The Mark 10 top-break revolver, chambered in .454, carries the Warwick's legacy into the modern age."
   components:
   - type: Sprite
@@ -62,11 +62,36 @@
     requiredSkills:
       RMCSkillLeadership: 3
   - type: RMCBattleExecute
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+       whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.825, 0.25
+      rmc-aslot-rail: -0.125, 0.285
+      rmc-aslot-underbarrel: 0.475, -0.125
 
 - type: entity
   parent: RMCWeaponRevolverMkX
   id: RMCWeaponRevolverMkXEmpty
-  suffix: Empty
+  suffix: PVE, RCM, CO, Empty
   components:
   - type: RevolverAmmoProvider
     proto: null
