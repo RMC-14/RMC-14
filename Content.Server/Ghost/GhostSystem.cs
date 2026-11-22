@@ -521,10 +521,7 @@ namespace Content.Server.Ghost
             var ghostComponent = Comp<GhostComponent>(ghost);
 
             // RMC
-            if (appearanceSource is { } source)
-            {
-                _rmcGhostAppearance.CopyDeathAppearance(source, ghost);
-            }
+            _rmcGhostAppearance.ApplyDeathAppearance(ghost, mind.Owner, appearanceSource);
             // RMC
 
             // Try setting the ghost entity name to either the character name or the player name.
