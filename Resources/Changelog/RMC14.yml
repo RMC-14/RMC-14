@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kukurua
-  changes:
-  - message: The M276 medical belt will be able to store syringe and surgical cases.
-    type: Add
-  id: 3412
-  time: '2026-06-16T08:08:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9954
 - author: carccborg
   changes:
   - message: The SU-6 Smart Pistol can no longer be used with hold-to-fire.
@@ -4396,5 +4389,17 @@
   id: 3911
   time: '2026-11-22T03:46:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10537
+- author: IceNoobXD
+  changes:
+  - message: Executive Bodyguard, Halcyon Liaison, and Corporate Liaison job icons
+      now change depending on their rank. You can always change your rank in the loadout
+      menu! (The TacMap icon does not change, so as not to add more confusion about
+      what job/role that is.)
+    type: Add
+  - message: Added all missing Halcyon job icons!
+    type: Add
+  id: 3912
+  time: '2026-11-22T03:49:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10648
 Name: RMC14
 Order: -1
