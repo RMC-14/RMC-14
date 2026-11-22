@@ -9,6 +9,7 @@
     role: CMJobExecutiveOfficer
     time: 10800 # 3 hours
   ranks:
+    RMCRankFirstLT: []
     RMCRankSecondLT: []
   spawnMenuRoleName: Sun Rider Platoon Commander (PVE)
   startingGear: RMCGearPVEPlatoonCommander

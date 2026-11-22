@@ -649,6 +649,27 @@
   suffix: Unbuttoned
 
 - type: entity
+  parent: [CMCoatOfficer, RMCBaseJacketButtonable]
+  id: RMCCoatAllWeather
+  name: marine all-weather coat
+  description: A water-resistant trench coat issued to marines not expected to see frontline combat. You think you remember hearing something about these bleeding orange into the wash.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/allweather.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/allweather.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCCoatAllWeather]
+  id: RMCCoatAllWeatherFolded
+  name: marine all-weather coat
+  description: A water-resistant trench coat issued to marines not expected to see frontline combat. You think you remember hearing something about these bleeding orange into the wash.
+  suffix: Folded
+
+- type: entity
   parent: CMCoatOfficer
   id: RMCProvostCoat
   name: Provost Coat
@@ -966,6 +987,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatOveralls
+  name: blue coveralls
+  description: A pair of denim overalls. With a large pocket in the front these overalls are popular with workers of all kinds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/overalls.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/overalls.rsi
+
 # Chance's Claim
 
 - type: entity
@@ -1043,6 +1075,7 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
+  - type: MoveOrderArmor
 
 - type: entity
   parent: RMCCoatSnowSurvivor
