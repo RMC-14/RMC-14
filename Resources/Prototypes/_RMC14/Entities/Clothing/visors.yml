@@ -68,7 +68,11 @@
   id: RMCVisorMedicalIntegrated
   suffix: Integrated
   components:
-    - type: UnremovableVisor
+  - type: UnremovableVisor
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: med_sight_left
 
 - type: entity
   parent: RMCVisorMedical
