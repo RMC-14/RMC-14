@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added MB-6 folding composite barricades, ponchos, M1911s (replacing M1984s),
-      and decks of cards to Chance's Claim
-    type: Add
-  - message: Fixed an area filled with metal foam on Chance's Claim that was set as
-      Out Of Bounds area instead of the correct mining area
-    type: Fix
-  - message: Fixed two rooms on Chance's Claim not being connected to the pipe net
-    type: Fix
-  id: 3417
-  time: '2026-06-16T19:57:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10080
 - author: kleinerstation13
   changes:
   - message: Security Colonists can no longer become Prisoners, you must now roll
@@ -4401,5 +4388,12 @@
   id: 3916
   time: '2026-11-22T04:03:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10590
+- author: IceNoobXD
+  changes:
+  - message: Added a few more gear options to the loadouts!
+    type: Add
+  id: 3917
+  time: '2026-11-22T04:12:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10848
 Name: RMC14
 Order: -1
