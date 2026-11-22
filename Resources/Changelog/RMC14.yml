@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed gibbed xenos not being selectable when giving royal jellies.
-    type: Fix
-  id: 3404
-  time: '2026-06-16T01:47:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10156
 - author: Thereisabear
   changes:
   - message: Fixed mapped empty magazines from firing non-existent bullets if reloaded
@@ -4451,5 +4444,22 @@
   id: 3903
   time: '2026-11-22T03:30:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9826
+- author: Ilysssa
+  changes:
+  - message: Minor redesign and recolour of Executive Selects.
+    type: Tweak
+  - message: Executive select packs now comes with their black phosphor cigarettes.
+    type: Add
+  - message: Executive select minis are now back in stock.
+    type: Add
+  - message: Sprites for Zippos.
+    type: Add
+  - message: Fixed some cig packs having unfiltered cigs.
+    type: Fix
+  - message: Cheap Lighter in-hand sprite.
+    type: Fix
+  id: 3904
+  time: '2026-11-22T03:37:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9670
 Name: RMC14
 Order: -1
