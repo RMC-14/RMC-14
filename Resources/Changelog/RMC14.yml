@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: AlexisMoonlight
-  changes:
-  - message: (Law) Added definitions for recorders and listening devices.
-    type: Add
-  - message: (SOP/MLaw) Added SOP on the use of recorders by MPs. MPs can use recorders
-      freely as long as they remain in MP's possession.
-    type: Add
-  - message: (SOP) CMP approves use of listening devices instead of Commander.
-    type: Tweak
-  id: 3421
-  time: '2026-06-16T20:39:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10081
 - author: JustMyselfUwU
   changes:
   - message: Fixed barricades and mounted weapons not blinding you when welding them
@@ -4394,5 +4382,13 @@
   id: 3920
   time: '2026-11-22T04:19:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10717
+- author: Vermidia
+  changes:
+  - message: Epinephrine is now cream-colored, many other med chemical colors have
+      been desaturated.
+    type: Tweak
+  id: 3921
+  time: '2026-11-22T04:21:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10640
 Name: RMC14
 Order: -1
