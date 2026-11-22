@@ -32,6 +32,7 @@ ui-options-header-rmc-vehicle = Vehicle
 ui-options-function-rmc-vehicle-horn = Sound horn
 ui-options-function-rmc-vehicle-overcharge = Overcharge
 ui-options-function-rmc-vehicle-spotlight = Toggle spotlight
+ui-options-function-rmc-vehicle-safety = Toggle safety mode
 
 ui-options-function-smart-equip-uniform = Smart-equip to uniform
 ui-options-function-smart-equip-armor = Smart-equip to armor

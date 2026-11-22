@@ -489,7 +489,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return CollisionHandlingResult.Blocked;
         }
 
-        if (smashable.MinDestroyWeightClass is { } minDestroy && mover.WeightClass < minDestroy)
+        if ((smashable.MinDestroyWeightClass is { } minDestroy && mover.WeightClass < minDestroy) ||
+            _vehicleSafety.IsEnabled(vehicle))
         {
             if (applyEffects)
             {

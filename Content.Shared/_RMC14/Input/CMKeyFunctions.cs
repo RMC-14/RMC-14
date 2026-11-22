@@ -36,4 +36,5 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCVehicleHorn = "RMCVehicleHorn";
     public static readonly BoundKeyFunction RMCVehicleOvercharge = "RMCVehicleOvercharge";
     public static readonly BoundKeyFunction RMCVehicleSpotlight = "RMCVehicleSpotlight";
+    public static readonly BoundKeyFunction RMCVehicleSafety = "RMCVehicleSafety";
 }

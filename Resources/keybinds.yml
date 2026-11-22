@@ -710,6 +710,10 @@ binds:
   type: State
   key: F
   priority: 1
+- function: RMCVehicleSafety
+  type: State
+  key: Shift
+  priority: 1
 - function: SmartEquipUniform
   type: State
   key: N
