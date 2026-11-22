@@ -42,7 +42,7 @@
         blackMarketHeat: 5
         crate: RMCCrateBlackMarketM16
         icon:
-          entity: WeaponRifleM16
+          entity: RMCWeaponRifleCR16
       - cost: 0
         blackMarket: true
         blackMarketCost: 40
@@ -105,7 +105,7 @@
         blackMarketHeat: 5
         crate: RMCCrateBlackMarketMP5
         icon:
-          entity: WeaponSMGMP5
+          entity: RMCWeaponSMGPCAC5A4
       - cost: 0
         blackMarket: true
         blackMarketCost: 10
@@ -352,7 +352,7 @@
         blackMarketHeat: 5
         crate: RMCCrateBlackMarketAmmoM16
         icon:
-          entity: RMCBoxMagazineRifleM16
+          entity: RMCBoxMagazineRifleCR16
       - cost: 0
         blackMarket: true
         blackMarketCost: 115
@@ -522,7 +522,7 @@
         blackMarketHeat: -5
         crate: RMCCrateBlackMarketDeepStorageXM43E1
         icon:
-          entity: RMCHelmetGarbBulletPipe
+          entity: RMCHelmetGarbXM43E1
       - cost: 0
         blackMarket: true
         blackMarketCost: 10
@@ -550,7 +550,7 @@
         blackMarketHeat: -5
         crate: RMCCrateBlackMarketDeepStorageRabbitFoot
         icon:
-          entity: RMCHelmetGarbRabbitFoot
+          entity: RMCHelmetGarbRabbitsFoot
       - cost: 0
         blackMarket: true
         blackMarketCost: 10

@@ -16,11 +16,16 @@ ui-options-function-rmc-pick-up-dropped-items = Pick up dropped items
 ui-options-function-rmc-interact-with-other-hand = Interact with other hand
 ui-options-function-rmc-rest = Rest
 ui-options-function-rmc-resist = Resist
+ui-options-function-rmc-open-language-menu = Open language menu
+ui-options-function-rmc-cycle-language = Cycle language
 
 ui-options-header-rmc-xeno = Xenonid
 
 ui-options-function-cm-xeno-wide-swing = Xenonid thrust attack
 ui-options-function-rmc-xeno-rest = Xenonid Rest
+ui-options-function-rmc-xeno-pheromones-recovery = Emit Recovery pheromones
+ui-options-function-rmc-xeno-pheromones-warding = Emit Warding pheromones
+ui-options-function-rmc-xeno-pheromones-frenzy = Emit Frenzy pheromones
 
 ui-options-function-smart-equip-uniform = Smart-equip to uniform
 ui-options-function-smart-equip-armor = Smart-equip to armor

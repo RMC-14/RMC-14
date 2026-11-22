@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/clothing/helmet_garb.dmi and https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/clothing/helmet_garb/misc.dmi",
+  "copyright": "https://github.com/cmss13-devs/cmss13/blob/090a692ce28563775eb087083d36cc51847448c2/icons/obj/items/clothing/helmet_garb.dmi, https://github.com/cmss13-devs/cmss13/blob/090a692ce28563775eb087083d36cc51847448c2/icons/mob/humans/onmob/clothing/helmet_garb/misc.dmi",
   "size": {
     "x": 32,
     "y": 32

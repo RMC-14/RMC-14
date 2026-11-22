@@ -1,6 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMDropshipCrewChief
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-flight-crew
   name: cm-job-name-dcc
   description: cm-job-description-dcc
   newToJobInfo: rmc-new-to-job-dcc

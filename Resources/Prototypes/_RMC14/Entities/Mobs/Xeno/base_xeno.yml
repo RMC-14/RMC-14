@@ -348,7 +348,7 @@
   - type: BlockIdExamine
   - type: NoStunOnExit
   - type: RMCSpeciesSlowdownModifier
-    slowModifier: 0.75
+    slowModifier: 0.7
     superSlowModifier: 1.5
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
@@ -498,6 +498,7 @@
       groups:
         Brute: 30
     tailRange: 2.5
+  - type: XenoFishing
 
 - type: entity
   abstract: true

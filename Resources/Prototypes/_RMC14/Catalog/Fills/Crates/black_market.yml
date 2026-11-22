@@ -23,13 +23,13 @@
 - type: entity
   parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketM16
-  name: M16 rifle crate
-  description: Includes an M16 rifle and four magazines.
+  name: CR16 rifle crate
+  description: Includes a CR16 rifle and four magazines.
   components:
   - type: StorageFill
     contents:
-    - id: WeaponRifleM16
-    - id: RMCMagazineRifleM16
+    - id: RMCWeaponRifleCR16
+    - id: RMCMagazineRifleCR16
       amount: 4
 
 - type: entity
@@ -130,13 +130,13 @@
 - type: entity
   parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketMP5
-  name: MP5 submachine gun crate
-  description: Includes an MP5 submachine gun and five magazines.
+  name: PCAC5A4 submachine gun crate
+  description: Includes a PCAC5A4 submachine gun and five magazines.
   components:
   - type: StorageFill
     contents:
-    - id: WeaponSMGMP5
-    - id: CMMagazineSMGMP5
+    - id: RMCWeaponSMGPCAC5A4
+    - id: RMCMagazineSMGPCAC5
       amount: 5
 
 - type: entity
@@ -734,12 +734,12 @@
 - type: entity
   parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketAmmoM16
-  name: M16 magazine box crate
-  description: Contains one M16 magazine box with 12 magazines.
+  name: CR16 magazine box crate
+  description: Contains one CR16 magazine box with 12 magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineRifleM16
+    - id: RMCBoxMagazineRifleCR16
 
 - type: entity
   parent: RMCCrateWoodenBuildable
@@ -979,7 +979,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCHelmetGarbBulletPipe
+    - id: RMCHelmetGarbXM43E1
 
 - type: entity
   parent: RMCCrateWoodenBuildable
@@ -1026,7 +1026,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCHelmetGarbRabbitFoot
+    - id: RMCHelmetGarbRabbitsFoot
 
 - type: entity
   parent: RMCCrateWoodenBuildable

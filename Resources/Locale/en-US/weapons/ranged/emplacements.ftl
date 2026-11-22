@@ -12,6 +12,8 @@ emplacement-mount-need-hands-free = You need both hands free to grab the handles
 emplacement-mount-too-far = You are too far from the handles to man the {$mount}!
 emplacement-mount-rotate-fail = You can't rotate it that way!
 
+emplacement-no-construction-area = You can't place this here!
+
 mountable-weapon-no-free-hands = You need both hands free to operate the weapon.
 
 emplacement-mount-RMCSmartGunMounted-name = ML66D mount
