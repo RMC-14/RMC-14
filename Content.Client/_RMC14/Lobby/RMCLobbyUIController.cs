@@ -14,7 +14,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Lobby;
 
-public sealed class RMCLobbyUIController : UIController
+public sealed class RMCLobbyUIController : UIController, IOnSystemChanged<FaxResponderSystem>
 {
     [Dependency] private readonly JobRequirementsManager _jobRequirements = default!;
     [Dependency] private readonly IClientPreferencesManager _preferences = default!;
@@ -27,7 +27,16 @@ public sealed class RMCLobbyUIController : UIController
     {
         SubscribeLocalEvent<BurrowedLarvaChangedEvent>(OnBurrowedLarvaChanged);
         SubscribeLocalEvent<FaxResponderStatusChangedEvent>(OnFaxResponderStatusChanged);
+    }
+
+    public void OnSystemLoaded(FaxResponderSystem system)
+    {
         _jobRequirements.Updated += OnJobRequirementsUpdated;
+    }
+
+    public void OnSystemUnloaded(FaxResponderSystem system)
+    {
+        _jobRequirements.Updated -= OnJobRequirementsUpdated;
     }
 
     // Xeno
@@ -93,7 +102,7 @@ public sealed class RMCLobbyUIController : UIController
         system.RequestStatus();
     }
 
-    private void OnFaxResponderStatusChanged(FaxResponderStatusChangedEvent ev)
+    private void OnFaxResponderStatusChanged(ref FaxResponderStatusChangedEvent ev)
     {
         RefreshFaxResponderWindow(ev.Jobs);
     }

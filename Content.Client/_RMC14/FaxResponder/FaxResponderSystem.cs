@@ -23,7 +23,7 @@ public sealed class FaxResponderSystem : EntitySystem
     {
         Jobs = ev.Jobs;
         var changedEv = new FaxResponderStatusChangedEvent(ev.Jobs);
-        RaiseLocalEvent(changedEv);
+        RaiseLocalEvent(ref changedEv);
     }
 
     private void OnRulesReceived(FaxResponderRulesEvent ev)
