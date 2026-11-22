@@ -377,7 +377,8 @@ public sealed class XenoLeapSystem : EntitySystem
         var ev = new XenoLeapStoppedEvent();
         RaiseLocalEvent(ent, ref ev);
 
-        _fixtures.DestroyFixture(ent, LeapSensorFixtureId);
+        if (_fixturesQuery.TryGetComponent(ent, out var fixtures))
+            _fixtures.DestroyFixture(ent, LeapSensorFixtureId, manager: fixtures);
 
         StopLeap(ent);
     }
