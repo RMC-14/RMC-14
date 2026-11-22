@@ -31,18 +31,18 @@ rmc-announcement-planet-varadero = An automated distress signal has been receive
 
                                            No further information available at this time.
 
-rmc-announcement-planet-varadero-1 = Mayday, Mayday, Mayday. UNS Almayer, we are detecting you on approach. This is Lieutenant #%-#^-@%#, authorization code Lima Alfa Sierra Niner, broadcasting on all stations. Stand by for a situation report.
+rmc-announcement-planet-varadero-1 = Mayday, Mayday, Mayday. UNS Almayer, we are detecting you on approach. This is Lieutenant Morrison, authorization code Lima Alfa Sierra Niner, broadcasting on all stations. Stand by for a situation report.
 
 
                                              The base has been overrun by xenonid lifeforms at this time. What’s left of our forces has retreated through the tunnel to New Varadero City and collapsed it behind us. If you’re here to render aid, your best course of action would be to cut the infestation off from the source and secure the base itself. We’ll focus on keeping the city secure.
 
 
-                                             Our dropships will be unable to take off and assist you due to the monsoon weather, and we’ve sealed the only land connection left to the island, so you’re on your own unless this weather clears up. Out.
+                                             Our dropships are unable to take off and assist you due to the monsoon weather, and we’ve sealed the only land connection left to the island, so you’re on your own until this weather clears up. Good luck, Falcons. Out.
 
-rmc-announcement-planet-varadero-2 = Almayer, do you read? Our two-way comms towers are too weak, the only thing with a transceiver strong enough to work through the weather is this relay station.
+rmc-announcement-planet-varadero-2 = Almayer, do you read? We're trying to reach you, but our two-way comms towers are too weak. The only thing with a transceiver strong enough to work through the weather is this relay station.
 
 
-                                             The local law enforcement is helping us establish a quarantine around the island. We’ll try to keep them busy until you are able to secure the base. Out.
+                                             The local CMB precinct is helping us establish a quarantine around the island. We’ll try to keep them busy until you are able to secure the base. Out.
 
 rmc-announcement-planet-varadero-3 = Almayer, heads up. Our forces are pulling back from the coast and setting up positions outside the suburbs, we have a new plan.
 
@@ -52,7 +52,7 @@ rmc-announcement-planet-varadero-3 = Almayer, heads up. Our forces are pulling b
 
                                              The weather's getting worse, so we might lose contact temporarily. We'll update you once it clears up. Out.
 
-rmc-announcement-planet-varadero-4 = Almayer, do you hear me? I repeat, do you hear me? The trap was unsuccessful, our position is untenable. We're being forced to withdraw deeper into the city.
+rmc-announcement-planet-varadero-4 = Almayer, do you hear me? I repeat, do you hear me? The trap was unsuccessful, they got through. Our position is untenable, we're being forced to withdraw deeper into the city.
 
 
                                              I have designated Saint Ferrier's Hospital as the official evacuation point. The city's defenses will be consolidated there, and peacekeepers are working to move as many civilians as possible underground.
