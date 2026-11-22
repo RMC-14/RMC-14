@@ -8,6 +8,13 @@
     - RMCPatchFallingFalconsSquad
 
 - type: loadout
+  id: FieldMedicPatchRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPatchMedic
+
+- type: loadout
   id: SquadArmbandRMC
   cost: 1
   storage:
