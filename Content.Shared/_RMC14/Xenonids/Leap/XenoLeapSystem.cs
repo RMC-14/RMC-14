@@ -722,7 +722,8 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void StopLeap(Entity<XenoLeapingComponent> leaping)
     {
-        if (_physicsQuery.TryGetComponent(leaping, out var physics))
+        if (_physicsQuery.TryGetComponent(leaping, out var physics)
+            && physics.BodyStatus != BodyStatus.OnGround)
         {
             _physics.SetLinearVelocity(leaping, Vector2.Zero, body: physics);
             _physics.SetBodyStatus(leaping, physics, BodyStatus.OnGround);
