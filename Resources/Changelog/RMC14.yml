@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: XO now has vehicles 2
-    type: Tweak
-  - message: New locker sprites from Noctyrnal
-    type: Add
-  id: 3414
-  time: '2026-06-16T19:53:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10175
-- author: CatAndHats
-  changes:
-  - message: Fixed LV624 central cave inserts not having invincible resin
-    type: Fix
-  id: 3415
-  time: '2026-06-16T19:55:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10172
-- author: CatAndHats
-  changes:
-  - message: Added some items to Shiva's like wheelchairs, sleeper pods, scanner pods,
-      MB-6 folding cade, some couches.
-    type: Add
-  - message: Fixed a spot on Shiva's where invincible resin fog was placed instead
-      of invincible resin doors, and two spots where invincible resin doors were doubled/tripled
-      on the same tile.
-    type: Fix
-  id: 3416
-  time: '2026-06-16T19:58:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10075
 - author: CatAndHats
   changes:
   - message: Added MB-6 folding composite barricades, ponchos, M1911s (replacing M1984s),
@@ -4402,5 +4374,32 @@
   id: 3913
   time: '2026-11-22T03:53:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10647
+- author: Vermidia
+  changes:
+  - message: Xenos can now fish using tailstab on water (this only triggers on a tail
+      stab miss). Additionally tail seize can also be used to fish, if it fails to
+      hit anyone. Flurry can also be used to fish somewhat. Defender tail slam can
+      fish, but is much worse than other xenos' tail stabs.
+    type: Add
+  id: 3914
+  time: '2026-11-22T04:04:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10593
+- author: carccborg
+  changes:
+  - message: Grenades have been adjusted to use values to produce explosions which
+      more closely resemble their intended damage.
+    type: Tweak
+  id: 3915
+  time: '2026-11-22T04:03:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10650
+- author: carccborg
+  changes:
+  - message: Explosion armor now uses the correct equation
+    type: Fix
+  - message: Humanoids now use the correct explosive damage coefficient
+    type: Fix
+  id: 3916
+  time: '2026-11-22T04:03:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10590
 Name: RMC14
 Order: -1
