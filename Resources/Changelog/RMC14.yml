@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: carccborg
-  changes:
-  - message: The SU-6 Smart Pistol can no longer be used with hold-to-fire.
-    type: Tweak
-  id: 3413
-  time: '2026-06-16T13:52:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10130
 - author: Vixting
   changes:
   - message: XO now has vehicles 2
@@ -4401,5 +4394,13 @@
   id: 3912
   time: '2026-11-22T03:49:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10648
+- author: carccborg
+  changes:
+  - message: CAS missiles have been adjusted to use values to produce explosions which
+      more closely resemble their intended damage.
+    type: Tweak
+  id: 3913
+  time: '2026-11-22T03:53:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10647
 Name: RMC14
 Order: -1
