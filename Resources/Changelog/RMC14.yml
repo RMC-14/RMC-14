@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: JustMyselfUwU
-  changes:
-  - message: Fixed barricades and mounted weapons not blinding you when welding them
-    type: Fix
-  id: 3422
-  time: '2026-06-16T21:48:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9930
 - author: Whisper
   changes:
   - message: '[SOP] SOs may deploy anywhere while remaining in the ARC'
@@ -4390,5 +4383,14 @@
   id: 3921
   time: '2026-11-22T04:21:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10640
+- author: Vixting
+  changes:
+  - message: Ghost visibility has been adjusted
+    type: Tweak
+  - message: Ghost appearance is now saved & restored on reconnecting
+    type: Add
+  id: 3922
+  time: '2026-11-22T22:15:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11166
 Name: RMC14
 Order: -1
