@@ -152,6 +152,18 @@ namespace Content.Client.Options.UI.Tabs
                 KeybindsContainer.AddChild(newCheckBox);
             }
 
+            void AddToggleCvarCheckBox(string checkBoxName, CVarDef<bool> cvar)
+            {
+                CheckBox newCheckBox = new CheckBox() { Text = Loc.GetString(checkBoxName) };
+                newCheckBox.Pressed = _cfg.GetCVar(cvar);
+                newCheckBox.OnToggled += (e) =>
+                {
+                    _cfg.SetCVar(cvar, e.Pressed);
+                    _cfg.SaveToFile();
+                };
+                KeybindsContainer.AddChild(newCheckBox);
+            }
+
             AddHeader("ui-options-header-rmc");
             AddButton(CMKeyFunctions.RMCActivateAttachableBarrel);
             AddButton(CMKeyFunctions.RMCActivateAttachableRail);
@@ -159,6 +171,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
             AddButton(CMKeyFunctions.RMCFieldStripHeldItem);
             AddButton(CMKeyFunctions.RMCCycleFireMode);
+            AddButton(CMKeyFunctions.RMCToggleShotgunTube);
             AddButton(CMKeyFunctions.CMUniqueAction);
             AddButton(CMKeyFunctions.CMHolsterPrimary);
             AddButton(CMKeyFunctions.CMHolsterSecondary);
@@ -167,13 +180,19 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
             AddButton(CMKeyFunctions.RMCInteractWithOtherHand);
             AddButton(CMKeyFunctions.RMCRest);
+            AddButton(CMKeyFunctions.RMCResist);
 
             AddHeader("ui-options-header-rmc-xeno");
             AddButton(CMKeyFunctions.CMXenoWideSwing);
             AddButton(CMKeyFunctions.RMCXenoRest);
+            AddButton(CMKeyFunctions.RMCXenoPheromonesRecovery);
+            AddButton(CMKeyFunctions.RMCXenoPheromonesWarding);
+            AddButton(CMKeyFunctions.RMCXenoPheromonesFrenzy);
 
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
+            AddToggleCvarCheckBox("ui-options-hold-to-attack-melee", CCVars.ControlHoldToAttackMelee);
+            AddToggleCvarCheckBox("ui-options-hold-to-attack-ranged", CCVars.ControlHoldToAttackRanged);
 
             AddHeader("ui-options-header-movement");
             AddButton(EngineKeyFunctions.MoveUp);
@@ -210,6 +229,14 @@ namespace Content.Client.Options.UI.Tabs
             AddHeader("ui-options-header-interaction-adv");
             AddButton(ContentKeyFunctions.SmartEquipBackpack);
             AddButton(ContentKeyFunctions.SmartEquipBelt);
+            AddButton(ContentKeyFunctions.SmartEquipPocket1);
+            AddButton(ContentKeyFunctions.SmartEquipPocket2);
+            AddButton(ContentKeyFunctions.SmartEquipSuitStorage);
+            //RMC14
+            AddButton(ContentKeyFunctions.SmartEquipUniform);
+            AddButton(ContentKeyFunctions.SmartEquipArmor);
+            AddButton(ContentKeyFunctions.SmartEquipHelmet);
+            //RMC14
             AddButton(ContentKeyFunctions.OpenBackpack);
             AddButton(ContentKeyFunctions.OpenBelt);
             AddButton(ContentKeyFunctions.ThrowItemInHand);

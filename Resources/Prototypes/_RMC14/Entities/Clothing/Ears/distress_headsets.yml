@@ -96,7 +96,7 @@
 
 - type: entity
   parent: RMCHeadsetDistressWeYa
-  id: RMCHeadsetDistressPMCPVE
+  id: RMCHeadsetPMCPVE
   name: PMC headset
   description: A special headset used by corporate personnel.
   suffix: PVE
@@ -111,8 +111,11 @@
   - type: GrantSquadLeaderTracker
     defaultMode: LeaderPmcPVE
     trackerModes:
+    - CommandPmcPVE
     - LeaderPmcPVE
     - TeamLeaderPmcPVE
+    - PrimaryLandingZone
+  - type: GrantAreaInfo
 
 - type: entity
   parent: RMCHeadsetDistressPMC
@@ -122,6 +125,14 @@
   components:
   - type: RMCHeadset
     radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetPMCPVE
+  id: RMCHeadsetPMCLeaderPVE
+  suffix: PVE, Leader
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetDistressWeYa
@@ -251,7 +262,100 @@
     trackerModes:
     - SquadLeader
     - FORECONCommandingOfficer
-      
+
+- type: entity
+  parent: RMCHeadsetForecon
+  id: RMCHeadsetForeconSL
+  name: UNMC SOF squad leader headset
+  suffix: Survivor, Recon SL
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSOF
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetForecon
+  id: RMCHeadsetForeconCommander
+  name: UNMC SOF commander headset
+  suffix: Survivor, Recon Commander
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSOF
+    radioTextIncrease: 3
+
+# Tyrargo/Varadero survs
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetTyrargo
+  name: UNMC headset
+  description: Issued to UNMC Marines.
+  suffix: Survivor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: soc_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSurvivor
+  - type: GrantSquadLeaderTracker
+    defaultMode: SquadLeader
+    trackerModes:
+    - SquadLeader
+
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetTyrargoLeader
+  name: UNMC leader headset
+  suffix: Survivor
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetTyrargoCommander
+  name: UNMC commander headset
+  suffix: Survivor
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+    radioTextIncrease: 3
+
+# without tracker
+- type: entity
+  parent: RMCHeadsetTyrargo
+  id: RMCHeadsetMarineNV
+  name: UNMC headset
+  description: A headset used by Marine personnel and private contractors working on UNMC vessels and installations. All the text written on it seems to be written in Spanish and Portuguese.
+  suffix: Survivor, Varadero
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: ro_headset # Placeholder on CM
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+      - RMCEncryptionKeyMarineNV
+  - type: RMCHeadset
+    channels:
+    - MarineSurvivor
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSurvivor
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara
@@ -289,7 +393,7 @@
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
       defaultMode: ParaCommander
-          
+
 - type: entity
   parent: RMCHeadsetPara
   id: RMCHeadsetParaOfficer
@@ -334,20 +438,56 @@
     trackerModes:
     - MARSOCLeader
 
-# For Trijent SPP Airborne
+# For Trijent SPP Spetsnaz
 
 - type: entity
   parent: RMCHeadsetColonyIcons
-  id: RMCHeadsetSPPCrashland
-  name: SPP 173/Airborne headset 
-  description: A headset used by members of the 173rd Airborne Reconnaissance unit.
+  id: RMCHeadsetSPPSpetsnazCrashlandTrijent
+  name: SPP D/SRU headset
+  description: A special headset used by the SPP Group 'D' Spetsnaz Recon Unit.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: sptz_headset
   - type: ContainerFill
     containers:
       key_slots:
       - RMCEncryptionKeySPP
       - CMEncryptionKeyColony
   - type: GrantSquadLeaderTracker
-    defaultMode: SPPAirborneSL
+    defaultMode: SPPSpetsnazSL
     trackerModes:
-    - SPPAirborneSL
+    - SPPSpetsnazSL
+
+- type: entity
+  parent: RMCHeadsetSPPSpetsnazCrashlandTrijent
+  id: RMCHeadsetSPPSpetsnazCrashlandTrijentSL
+  name: SPP Spetsnaz D/SRU squad leader headset
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+# For Sorokyne SPP Spetsnaz
+
+- type: entity
+  parent: RMCHeadsetColonyIcons
+  id: RMCHeadsetSPPSpetsnazCrashland
+  name: SPP B/SRU headset
+  description: A special headset used by the SPP Group 'B' Spetsnaz Recon Unit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: vai_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetSPPSpetsnazCrashland
+  id: RMCHeadsetSPPSpetsnazCrashlandSL
+  name: SPP B/SRU squad leader headset
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2

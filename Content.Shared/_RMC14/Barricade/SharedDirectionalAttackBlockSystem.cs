@@ -1,22 +1,37 @@
+using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
+using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Barricade;
 
 public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
 {
+    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<MobStateComponent, MeleeAttackAttemptEvent>(OnMeleeAttackAttempt);
+        SubscribeLocalEvent<ProjectileCoverComponent, PreventCollideEvent>(OnBarricadePreventCollide);
     }
 
     private void OnMeleeAttackAttempt(Entity<MobStateComponent> ent, ref MeleeAttackAttemptEvent args)
@@ -46,6 +61,107 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
             }
             break;
         }
+    }
+
+    private void OnBarricadePreventCollide(Entity<ProjectileCoverComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!TryComp(args.OtherEntity, out ProjectileComponent? projectile))
+            return;
+
+        var barricadeNet = GetNetEntity(ent.Owner);
+
+        if (TryComp(args.OtherEntity, out ProjectileCoverPassedComponent? passed) && passed.Barricades.Contains(barricadeNet))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        // Shots aimed at barricade hit it
+        if (TryComp(args.OtherEntity, out TargetedProjectileComponent? targeted) && targeted.Target == ent.Owner)
+            return;
+
+        if (TryComp(args.OtherEntity, out ProjectileCoverInteractionComponent? interaction) && interaction.IgnoreCover)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+            return;
+        }
+
+        if (!TryComp(args.OtherEntity, out RMCProjectileAccuracyComponent? accuracy) || accuracy.ShotFrom is not { } shotFrom)
+            return;
+
+        var facingVec = _transform.GetWorldRotation(ent.Owner).GetDir().ToVec();
+        var velocity = _transform.GetWorldRotation(Transform(args.OtherEntity).ParentUid).RotateVec(args.OtherBody.LinearVelocity);
+        var alongFacing = Vector2.Dot(velocity, facingVec);
+        if (MathF.Abs(alongFacing) <= 0.001f * velocity.Length())
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+            return;
+        }
+
+        var facing = alongFacing < 0;
+
+        if (facing && interaction is { StoppedByCover: true })
+            return;
+
+        var tiles = GetTileDistance(ent.Owner, shotFrom);
+        var distance = facing ? tiles - 1 : tiles;
+
+        if (!facing && distance > 3)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+            return;
+        }
+
+        if (distance < 1)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+            return;
+        }
+
+        var accuracyValue = (float) _rmcProjectile.GetEffectiveAccuracy((args.OtherEntity, accuracy), tiles);
+        var coverage = (float) ent.Comp.Coverage;
+        var hitChance = Math.Min(coverage, coverage * distance / 6f + 50f * (1f - accuracyValue / 100f));
+
+        var tick = _timing.CurTick.Value;
+        var barricadeId = (long) barricadeNet.Id;
+        var roll = new Xoshiro128P(accuracy.GunSeed, ((long) tick << 32) | barricadeId).NextFloat(0, 100);
+
+        if (roll >= hitChance)
+        {
+            args.Cancelled = true;
+            MarkPassed(args.OtherEntity, barricadeNet);
+        }
+    }
+
+    private int GetTileDistance(EntityUid barricade, EntityCoordinates shotFrom)
+    {
+        var xform = Transform(barricade);
+        if (xform.GridUid is { } gridUid &&
+            TryComp(gridUid, out MapGridComponent? grid) &&
+            _transform.GetMapId(shotFrom) == xform.MapID)
+        {
+            var barricadeTile = _map.TileIndicesFor(gridUid, grid, xform.Coordinates);
+            var shotFromTile = _map.TileIndicesFor(gridUid, grid, shotFrom);
+            var diff = barricadeTile - shotFromTile;
+            return Math.Max(Math.Abs(diff.X), Math.Abs(diff.Y));
+        }
+
+        var barricadePos = _transform.GetMapCoordinates(barricade).Position;
+        var shotFromPos = _transform.ToMapCoordinates(shotFrom).Position;
+        return (int) MathF.Round((barricadePos - shotFromPos).Length());
+    }
+
+    private void MarkPassed(EntityUid projectile, NetEntity barricadeNet)
+    {
+        var passed = EnsureComp<ProjectileCoverPassedComponent>(projectile);
+        passed.Barricades.Add(barricadeNet);
     }
 
     /// <summary>
@@ -123,5 +239,21 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing (135 degree cone).
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the South-West, South, or South-East of the blocker.
         return relativeDiff is 3 or 4 or 5; // Opposite directions
+    }
+
+    public bool IsDirectionBlocked(EntityUid origin, AtmosDirection cardinal, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
+    {
+        return IsDirectionBlocked(origin, (Vector2)cardinal.CardinalToIntVec(), checkRange, collisionGroup);
+    }
+
+    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
+    {
+        if (direction == Vector2.Zero)
+            return false;
+
+        var originPosition = _transform.GetMoverCoordinates(origin).Position;
+        var ray = new CollisionRay(originPosition, direction, (int)collisionGroup);
+        var intersect = _physics.IntersectRayWithPredicate(Transform(origin).MapID, ray, checkRange, e => !Transform(e).Anchored);
+        return intersect.Any();
     }
 }

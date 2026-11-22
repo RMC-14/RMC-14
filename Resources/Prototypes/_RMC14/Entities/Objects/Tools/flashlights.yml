@@ -3,11 +3,6 @@
   parent: BaseItem
   id: RMCFlashlightBase
   components:
-  - type: MeleeWeapon
-    wideAnimationRotation: 90
-    damage:
-      types:
-        Blunt: 0
   - type: HandheldLight
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
@@ -169,8 +164,18 @@
       - state: lamp-on
         visible: false
         map: [ "light" ]
+  - type: RemoveComponents
+    components:
+    - type: Clothing
+      quickEquip: false
+      slots:
+      - belt
+      - suitstorage
+    - type: Tag
+      tags:
+      - Flashlight
   - type: Item
-    size: Large
+    size: Normal
 
 - type: entity
   parent: RMCLamp
@@ -228,6 +233,8 @@
         map: [ "light" ]
   - type: PointLight
     radius: 6
+  - type: Item
+    size: Large
 
 - type: entity
   parent: RMCLampTripod

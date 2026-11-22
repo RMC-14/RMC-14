@@ -19,7 +19,8 @@
     - id: RMCCigarettePackWeYaGold
     - id: RMCZippo
     - id: RMCSpaceCash1000
-    - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
+    - id: RMCSpaceCash1000
+    - id: RMCUniversalRecorder
 
 - type: entity
   parent: RMCPouchGeneralLarge
@@ -29,7 +30,7 @@
   - type: StorageFill
     contents:
     - id: CMMagazineSMGM63AP
-    
+
 - type: entity
   parent: RMCPouchGeneralLarge
   id: RMCPouchGeneralLargeFillWheat
@@ -77,22 +78,22 @@
 # Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledMP5
-  suffix: Filled, MP5
+  id: RMCPouchMagazineFilledPCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 3
 
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledM16
-  suffix: Filled, M16
+  id: RMCPouchMagazineFilledCR16
+  suffix: Filled, CR16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleCR16
       amount: 3
 
 - type: entity
@@ -128,12 +129,12 @@
 # Large Magazine Pouch
 - type: entity
   parent: RMCPouchMagazineLarge
-  id: RMCPouchMagazineLargeMP5
-  suffix: Filled, MP5
+  id: RMCPouchMagazineLargePCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 4
 
 - type: entity
@@ -154,6 +155,16 @@
   - type: StorageFill
     contents:
     - id: RMCSpeedLoaderMatebaHIAP
+      amount: 4
+
+- type: entity
+  parent: RMCPouchMagazinePistol
+  id: RMCPouchMagazinePistolFilledM1911
+  suffix: Filled, M1911
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1911
       amount: 4
 
 # Shotgun Pouch

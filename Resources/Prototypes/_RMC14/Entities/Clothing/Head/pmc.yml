@@ -30,8 +30,8 @@
 - type: entity
   parent: [ArmorHelmetPMC, RMCMarineHelmetWithLightBase]
   id: RMCArmorHelmetPMCTactical
-  name: tactical helmet
-  description: A contender for service with the Royal Crown Marines, it is presently, exclusively, field tested by Weston-Yamada mercenaries. Features a ballistic mask and integrated display connected to the visor.
+  name: PMC helmet
+  description: A contender for service with the Royal Crown Marines, it is presently, exclusively, field tested by Weston-Yamada PMC's. Features a ballistic mask and integrated display connected to the visor.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
@@ -200,6 +200,31 @@
 
 - type: entity
   parent: ArmorHelmetPMCCorporate
+  id: ArmorHelmetPMCCorporateMedic
+  description: A basic skull-helm worn by corporate security assets. This variant lacks a visor, granting the wearer a better view of any potential patients.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/corporate_medic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/corporate_medic.rsi
+
+- type: entity
+  parent: ArmorHelmetPMCCorporate
+  id: ArmorHelmetPMCCorporateEngineer
+  name: We-Ya corporate security technician helmet
+  description: A basic skull-helm worn by corporate security assets. This variant comes equipped with a standard-issue integrated welding visor. Prone to fogging up over prolonged use.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/corporate_engineer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/corporate_engineer.rsi
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorWeldingIntegrated # TODO RMC14: goon welding visor
+
+- type: entity
+  parent: ArmorHelmetPMCCorporate
   id: ArmorHelmetPMCCorporateLead
   description: A basic skull-helm worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
   components:
@@ -356,3 +381,26 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/weya_beret.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/weya_beret.rsi
+
+# PPO
+- type: entity
+  parent: ArmorHelmetPMC
+  id: RMCHeadCapExecutiveBodyguard
+  name: executive bodyguard cap
+  description: A protective cap made from flexible reinforced fiber. Standard issue for most security firms in the place of a helmet.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/ppo_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/ppo_cap.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: RMCArmorHelmetExecutiveBodyguard
+  name: We-Ya executive bodyguard helmet
+  description: A basic skull-helm worn by Security Division assets, graded to protect your head from an unruly scientist armed with a crowbar.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/ppo_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/ppo_helmet.rsi

@@ -232,6 +232,17 @@ public sealed class HiveTrackerSystem : EntitySystem
         _alerts.ShowAlert(ent.Owner, alert, severity);
     }
 
+    public void SetTrackerTarget(EntityUid uid, EntityUid? target, ProtoId<TrackerModePrototype>? mode = null)
+    {
+        if (!TryComp(uid, out HiveTrackerComponent? tracker))
+            return;
+
+        tracker.Target = target;
+        if (mode != null)
+            tracker.Mode = mode;
+        Dirty(uid, tracker);
+    }
+
     private void OnRequestTrackableName(Entity<RMCTrackableComponent> ent, ref RequestTrackableNameEvent args)
     {
         if (args.Handled)

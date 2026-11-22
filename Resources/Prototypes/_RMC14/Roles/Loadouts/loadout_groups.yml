@@ -18,6 +18,22 @@
   - MarineLeatherSatchel
 
 - type: loadoutGroup
+  id: MarineSecureBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - MarineSecureSatchel
+
+- type: loadoutGroup
+  id: LiaisonBackpackRMC
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LiaisonSecureSatchel
+
+- type: loadoutGroup
   id: MarineTechnicianBackpack
   name: rmc-loadout-group-backpack
   minLimit: 1
@@ -48,6 +64,14 @@
   hidden: true
   loadouts:
   - ProvostSecuritySatchel
+
+- type: loadoutGroup
+  id: ExecutiveSecurityGuardBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - ExecutiveSecurityGuardSatchel
 
 - type: loadoutGroup
   id: RoyalBackpack
@@ -399,6 +423,7 @@
   - PonchoUrbanRMC
   - PonchoSnowRMC
   - PatchPeaceRMC
+  - PDTLKitRMC
 
 - type: loadoutGroup
   id: AccessoriesRMCPVE
@@ -522,6 +547,7 @@
   - HoldoutPistolRMC
   - CustomM1984RMC
   - CustomM44RMC
+  - M48A4LoadoutRMC
   - HG45AguilaCaseRMC
   - HG45MarinaCaseRMC
 
@@ -668,7 +694,7 @@
   id: RMCLoadoutGroupPins
   name: rmc-loadout-group-pins
   minLimit: 0
-  maxLimit: 13
+  maxLimit: 14
   loadouts:
   - RMCPinLGBT
   - RMCPinAromantic
@@ -683,6 +709,7 @@
   - RMCPinTransgender
   - RMCPinAutism
   - RMCPinAutismGold
+  - RMCPinAlly
 
 # Commanding Officer
 - type: loadoutGroup
@@ -706,7 +733,10 @@
   name: rmc-loadout-group-role-specific-weapon
   loadouts:
   - MatebaRMC
+  - MatebaSpecialRMC
   - HandcannonRMC
+  - HandcannonPolishedRMC
+  - SilverMatebaRMC
   - GoldMatebaRMC
   - GoldHandcannonRMC
 
@@ -907,13 +937,22 @@
   - NeckerchiefWhiteRMC
   - NeckerchiefRedRMC
 
+- type: loadoutGroup
+  id: SynthGenRMC
+  name: rmc-loadout-group-synth
+  maxLimit: 1
+  minLimit: 1
+  loadouts:
+  - RMCSynthGenOne
+  - RMCSynthGenTwo
+  - RMCSynthGenThree
 # Watches
 - type: loadoutGroup
   id: WatchesBasicRMC
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -936,7 +975,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -944,11 +983,11 @@
   - WatchLiaisonRMC
 
 - type: loadoutGroup
-  id: WatchesCommandingOfficerRMC
+  id: WatchesCommandingOfficerRMC # Given to SEA and PvI aswell.
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -984,24 +1023,32 @@
   - ShoesYellowRMC
   - ShoesRedRMC
   - ShoesPurpleRMC
-  - PlushieFarwaRMC
-  - PlushieBarricadeRMC
-  - PlushieBeeRMC
-  - PlushieSharkGreyRMC
-  - PlushieSharkBlueRMC
-  - PlushieSharkPinkRMC
-  - PlushieMothRMC
-  - PlushieRockRMC
-  - PlushieTherapyRMC
-  - PlushieGnarpGnarpRMC
-  - PlushieGnarpGnarpAltRMC
 
 # Provost Inspector
 - type: loadoutGroup
   id: ProvostRoleSpecificOuterwearRMC
   name: rmc-loadout-group-provost-role-specific-outerwear
-  minLimit: 0
+  minLimit: 1
   maxLimit: 1
   loadouts:
   - ProvostJacketFilledRMC
   - ProvostCoatFilledRMC
+  - RMCProvostJacketBlueFilled
+
+- type: loadoutGroup
+  id: ProvostWeaponRMC
+  name: rmc-loadout-group-provost-weapon
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCWeaponPistolHandcannon
+  - RMCWeaponPistolHandcannonProvost
+
+- type: loadoutGroup
+  id: ProvostRoleSpecificHeadRMC
+  name: rmc-loadout-group-provost-role-specific-headwear
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCHeadBeretProvostGold
+  - RMCHeadBeretProvostBlue

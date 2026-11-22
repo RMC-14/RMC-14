@@ -1,11 +1,13 @@
 using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rangefinder.Spotting;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Targeting;
@@ -16,6 +18,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -29,6 +32,30 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
         SubscribeLocalEvent<RMCTargetedComponent, ComponentRemove>(OnTargetedRemove);
         SubscribeLocalEvent<RMCTargetedComponent, EntityTerminatingEvent>(OnTargetedRemove);
+
+        SubscribeLocalEvent<RMCTargetingRootedComponent, RMCAttemptMobPushedEvent>(OnRootedAttemptMobPushed);
+    }
+
+    private void OnRootedAttemptMobPushed(Entity<RMCTargetingRootedComponent> ent, ref RMCAttemptMobPushedEvent args)
+    {
+        if (ent.Comp.Equipment is not { } equipment ||
+            !TryComp(equipment, out TargetingComponent? targeting) ||
+            targeting.User != ent.Owner ||
+            targeting.LaserDurations.Count == 0)
+        {
+            return;
+        }
+
+        args.Cancelled = true;
+    }
+
+    private void ReleaseRootedUser(Entity<TargetingComponent> targeting)
+    {
+        if (TryComp(targeting.Comp.User, out RMCTargetingRootedComponent? rooted) &&
+            rooted.Equipment == targeting.Owner)
+        {
+            RemComp<RMCTargetingRootedComponent>(targeting.Comp.User);
+        }
     }
 
     /// <summary>
@@ -47,7 +74,12 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             StopTargeting((targeting, targeting), targeting.Comp.Targets[0]);
         }
 
-        _rmcPvs.RemoveGlobalOverride(targeting);
+        foreach (var session in _player.Sessions)
+        {
+            _rmcPvs.RemoveSessionOverride(targeting.Owner, session);
+        }
+
+        ReleaseRootedUser(targeting);
     }
 
     /// <summary>
@@ -55,6 +87,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// </summary>
     private void OnTargetingDropped<T>(Entity<TargetingComponent> targeting, ref T args)
     {
+        if (_net.IsClient)
+            return;
+
         var ev = new TargetingCancelledEvent();
         RaiseLocalEvent(targeting, ref ev);
 
@@ -66,6 +101,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
     private void OnTargetedRemove<T>(Entity<RMCTargetedComponent> ent, ref T args)
     {
+        if (_net.IsClient)
+            return;
+
         foreach (var targeting in ent.Comp.TargetedBy)
         {
             if (!TryComp(targeting, out TargetingComponent? targetingComp))
@@ -77,7 +115,10 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             Dirty(targeting, targetingComp);
         }
 
-        _rmcPvs.RemoveGlobalOverride(ent);
+        foreach (var session in _player.Sessions)
+        {
+            _rmcPvs.RemoveSessionOverride(ent, session);
+        }
     }
 
     /// <summary>
@@ -92,6 +133,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
         targeting.Comp.Targets.Remove(target);
         Dirty(targeting);
+
+        if (targeting.Comp.Targets.Count == 0)
+            ReleaseRootedUser((targeting, targeting.Comp));
 
         if (!TryComp(target, out RMCTargetedComponent? targeted))
             return;
@@ -143,7 +187,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// <param name="targetingDuration">How long the targeting should last if not interrupted</param>
     /// <param name="targetedEffect">The visualiser to apply on the entity being targeted</param>
     /// <param name="showDirection">If a direction indicator pointing towards the targeting entity should be displayed</param>
-    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float targetingDuration, TargetedEffects targetedEffect = TargetedEffects.None, bool showDirection = false)
+    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float targetingDuration, TargetedEffects targetedEffect = TargetedEffects.None, bool showDirection = false, bool rootUser = false)
     {
         // Change the laser and targeting effect if focused.
         var ev = new TargetingStartedEvent(targetedEffect, target);
@@ -171,8 +215,21 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         targeting.LaserType = targetedEffect;
         Dirty(equipment, targeting);
 
-        _rmcPvs.AddGlobalOverride(target);
-        _rmcPvs.AddGlobalOverride(equipment);
+        if (rootUser)
+        {
+            var rooted = EnsureComp<RMCTargetingRootedComponent>(user);
+            rooted.Equipment = equipment;
+            Dirty(user, rooted);
+        }
+
+        foreach (var session in _player.Sessions)
+        {
+            if (session.AttachedEntity == null)
+                continue;
+
+            _rmcPvs.AddSessionOverride(target, session);
+            _rmcPvs.AddSessionOverride(equipment, session);
+        }
     }
 
     /// <summary>

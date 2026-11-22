@@ -1,7 +1,14 @@
-﻿using System.Numerics;
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Content.Shared.Eye;
+using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
@@ -9,8 +16,10 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Player;
 using Robust.Shared.Threading;
 using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Eye;
 
@@ -18,13 +27,17 @@ public sealed class QueenEyeSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
+    [Dependency] private readonly SwappableActionSystem _swappableAction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedVisibilitySystem _visibility = default!;
+    [Dependency] private readonly SharedViewSubscriberSystem _viewSubscriber = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
 
     private SeedJob _seedJob;
@@ -33,6 +46,11 @@ public sealed class QueenEyeSystem : EntitySystem
     private readonly HashSet<Entity<QueenEyeVisionComponent>> _seeds = new();
 
     private readonly HashSet<Vector2i> _singleTiles = new();
+
+    private readonly HashSet<Entity<XenoWeedsComponent>> _nearbyWeeds = new();
+    private readonly HashSet<Entity<XenoWeedsComponent>> _anchorWeeds = new();
+
+    private bool _isRevertingMove;
 
     public override void Initialize()
     {
@@ -59,8 +77,13 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoWatchEvent>(OnQueenEyeActionWatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoUnwatchEvent>(OnQueenEyeActionUnwatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
+        SubscribeLocalEvent<QueenEyeActionComponent, HiveChangedEvent>(OnQueenHiveChanged);
+        SubscribeLocalEvent<QueenEyeActionComponent, DamageChangedEvent>(OnQueenDamage);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
+        SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove);
+        SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
     }
 
     private void OnQueenEyeActionMapInit(Entity<QueenEyeActionComponent> ent, ref MapInitEvent args)
@@ -83,6 +106,9 @@ public sealed class QueenEyeSystem : EntitySystem
         if (RemoveQueenEye(ent))
             return;
 
+        if (HasComp<XenoAttachedOvipositorComponent>(ent.Owner))
+            SwapPlantWeedsToWorldTarget(ent);
+
         if (_net.IsClient)
             return;
 
@@ -95,6 +121,9 @@ public sealed class QueenEyeSystem : EntitySystem
         var eyeComp = EnsureComp<QueenEyeComponent>(ent.Comp.Eye.Value);
         eyeComp.Queen = ent;
         Dirty(ent.Comp.Eye.Value, eyeComp);
+        _hive.SetSameHive(ent.Owner, ent.Comp.Eye.Value);
+        _visibility.SetLayer(ent.Comp.Eye.Value, (ushort) (ent.Comp.Visibility | VisibilityFlags.Ghost));
+        ReconcileAllViewersToActiveEyes();
 
         _eye.SetPvsScale((ent, eye), ent.Comp.EyePvsScale);
         _eye.SetTarget(ent, ent.Comp.Eye, eye);
@@ -110,7 +139,7 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
         }
 
-        args.VisibilityMask |= (int) ent.Comp.Visibility;
+        args.VisibilityMask |= (int)ent.Comp.Visibility;
     }
 
     private void OnQueenEyeActionWatch(Entity<QueenEyeActionComponent> ent, ref XenoWatchEvent args)
@@ -129,6 +158,14 @@ public sealed class QueenEyeSystem : EntitySystem
         RemCompDeferred<XenoWatchingComponent>(eye);
     }
 
+    private void OnQueenDamage(Entity<QueenEyeActionComponent> ent, ref DamageChangedEvent args)
+    {
+        if (!args.DamageIncreased)
+            return;
+
+        RemoveQueenEye(ent);
+    }
+
     private void OnQueenEyeOvipositorChanged(Entity<QueenEyeActionComponent> ent, ref XenoOvipositorChangedEvent args)
     {
         if (_timing.ApplyingState)
@@ -140,12 +177,207 @@ public sealed class QueenEyeSystem : EntitySystem
         RemoveQueenEye(ent);
     }
 
+    private void OnQueenHiveChanged(Entity<QueenEyeActionComponent> ent, ref HiveChangedEvent args)
+    {
+        if (!_net.IsServer || ent.Comp.Eye is not { } queenEye)
+            return;
+
+        _hive.SetHive(queenEye, args.Hive?.Owner);
+        ReconcileAllViewersToActiveEyes();
+    }
+
     private void OnQueenEyeUnwatch(Entity<QueenEyeComponent> ent, ref XenoUnwatchEvent args)
     {
         if (ent.Comp.Queen is not { } queen)
             return;
 
         _eye.SetTarget(queen, ent);
+    }
+
+    private void OnPlayerAttached(PlayerAttachedEvent args)
+    {
+        ReconcileViewerToActiveEyes(args.Entity);
+    }
+
+    private void OnPlayerDetached(PlayerDetachedEvent args)
+    {
+        RemoveViewerFromActiveEyes(args.Player);
+    }
+
+    private void ReconcileAllViewersToActiveEyes()
+    {
+        if (!_net.IsServer)
+            return;
+
+        var actors = EntityQueryEnumerator<ActorComponent>();
+        while (actors.MoveNext(out var uid, out _))
+        {
+            ReconcileViewerToActiveEyes(uid);
+        }
+    }
+
+    public void ReconcileViewerToActiveEyes(EntityUid viewer)
+    {
+        if (!_net.IsServer)
+            return;
+
+        if (!TryComp<ActorComponent>(viewer, out var actor))
+            return;
+
+        if (HasComp<GhostComponent>(viewer))
+        {
+            var eyes = EntityQueryEnumerator<QueenEyeComponent>();
+            while (eyes.MoveNext(out var queenEye, out _))
+            {
+                _viewSubscriber.AddViewSubscriber(queenEye, actor.PlayerSession);
+            }
+
+            return;
+        }
+
+        if (!HasComp<XenoComponent>(viewer))
+        {
+            var eyes = EntityQueryEnumerator<QueenEyeComponent>();
+            while (eyes.MoveNext(out var queenEye, out _))
+            {
+                _viewSubscriber.RemoveViewSubscriber(queenEye, actor.PlayerSession);
+            }
+            return;
+        }
+
+        var xenoEyes = EntityQueryEnumerator<QueenEyeComponent>();
+        while (xenoEyes.MoveNext(out var queenEye, out _))
+        {
+            var sameHive = _hive.FromSameHive(viewer, queenEye);
+
+            if (sameHive)
+                _viewSubscriber.AddViewSubscriber(queenEye, actor.PlayerSession);
+            else
+                _viewSubscriber.RemoveViewSubscriber(queenEye, actor.PlayerSession);
+        }
+    }
+
+    private void RemoveViewerFromActiveEyes(ICommonSession player)
+    {
+        if (!_net.IsServer)
+            return;
+
+        var eyes = EntityQueryEnumerator<QueenEyeComponent>();
+        while (eyes.MoveNext(out var queenEye, out _))
+        {
+            _viewSubscriber.RemoveViewSubscriber(queenEye, player);
+        }
+    }
+
+    private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (_isRevertingMove)
+            return;
+
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        if (!args.NewPosition.IsValid(EntityManager))
+            return;
+
+        var newCoords = args.NewPosition;
+        var soft = ent.Comp.SoftWeedDistance;
+        var max = ent.Comp.MaxWeedDistance;
+
+        var haveAnchor = ent.Comp.AnchorWeed is { } anchor && HasComp<XenoWeedsComponent>(anchor);
+        if (haveAnchor)
+        {
+            var anchorCoords = Transform(ent.Comp.AnchorWeed!.Value).Coordinates;
+            if (anchorCoords.TryDistance(EntityManager, _transform, newCoords, out var distance) &&
+                distance <= soft)
+            {
+                return;
+            }
+        }
+
+        _nearbyWeeds.Clear();
+        _entityLookup.GetEntitiesInRange(newCoords, soft, _nearbyWeeds);
+
+        if (_nearbyWeeds.Count != 0)
+        {
+            ent.Comp.AnchorWeed = GetClosestWeed(newCoords, _nearbyWeeds);
+            return;
+        }
+
+        var newWorldPos = _transform.ToMapCoordinates(newCoords).Position;
+        var oldWorldPos = _transform.ToMapCoordinates(args.OldPosition).Position;
+
+        Vector2 pivot;
+        var anchorPos = Vector2.Zero;
+        if (haveAnchor)
+            anchorPos = _transform.GetWorldPosition(ent.Comp.AnchorWeed!.Value);
+
+        if (haveAnchor && Vector2.DistanceSquared(oldWorldPos, anchorPos) <= max * max + 0.01f)
+        {
+            pivot = anchorPos;
+        }
+        else
+        {
+            _anchorWeeds.Clear();
+            _entityLookup.GetEntitiesInRange(args.OldPosition, max, _anchorWeeds);
+            if (_anchorWeeds.Count == 0)
+            {
+                ent.Comp.AnchorWeed = null;
+                if (ent.Comp.Queen is { } queen &&
+                    !TerminatingOrDeleted(queen) &&
+                    TryComp(queen, out QueenEyeActionComponent? queenAction))
+                {
+                    RemoveQueenEye((queen, queenAction));
+                }
+
+                return;
+            }
+
+            ent.Comp.AnchorWeed = GetClosestWeed(args.OldPosition, _anchorWeeds);
+            pivot = _transform.GetWorldPosition(ent.Comp.AnchorWeed!.Value);
+        }
+
+        var offset = newWorldPos - pivot;
+        var dist = offset.Length();
+        if (dist > soft)
+        {
+            var denom = max - soft;
+            var t = denom > 0f ? Math.Clamp((dist - soft) / denom, 0f, 1f) : 1f;
+            var dampedDist = soft + denom * t * t;
+
+            _isRevertingMove = true;
+            try
+            {
+                _transform.SetWorldPosition(ent, pivot + offset / dist * dampedDist);
+            }
+            finally
+            {
+                _isRevertingMove = false;
+            }
+        }
+    }
+
+    private EntityUid? GetClosestWeed(EntityCoordinates origin, HashSet<Entity<XenoWeedsComponent>> weeds)
+    {
+        EntityUid? closest = null;
+        var closestDist = float.MaxValue;
+        foreach (var weed in weeds)
+        {
+            var weedCoords = Transform(weed).Coordinates;
+            if (!origin.TryDistance(EntityManager, _transform, weedCoords, out var distance))
+                continue;
+
+            if (distance >= closestDist)
+                continue;
+
+            closestDist = distance;
+            closest = weed.Owner;
+        }
+
+        return closest;
     }
 
     /// <param name="expansionSize">How much to expand the bounds before to find vision intersecting it. Makes this the largest vision size + 1 tile.</param>
@@ -221,10 +453,22 @@ public sealed class QueenEyeSystem : EntitySystem
 
         RemComp<RelayInputMoverComponent>(ent);
 
+        SwapPlantWeedsToInstant(ent);
+
         var ev = new QueenEyeActionUpdated(ent);
         RaiseLocalEvent(ent, ref ev);
 
         return true;
+    }
+
+    private void SwapPlantWeedsToWorldTarget(Entity<QueenEyeActionComponent> queen)
+    {
+        _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(queen.Owner);
+    }
+
+    private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)
+    {
+        _swappableAction.SwapAllToInstant(queen.Owner);
     }
 
     public bool IsInQueenEye(Entity<QueenEyeActionComponent?> queen)

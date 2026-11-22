@@ -21,6 +21,9 @@
       time: 50 # seconds
       dps: 7.2
       expendableLightDps: 2.5
+    deferBlacklist:
+      components:
+      - MobState
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -36,16 +39,7 @@
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
   description: Melts down a structure or item over time.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
       strength: Weak
@@ -60,16 +54,7 @@
   name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
   description: Melts down a structure or item over time.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
@@ -84,16 +69,7 @@
   name: Strong Corrosive Acid (100 acid)
   description: Melts down barricades or items over time. You cannot melt structures.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
@@ -103,6 +79,7 @@
       time: 20 # seconds
       dps: 18
       expendableLightDps: 35
+      vehicleDamage: 50
 
 - type: entity
   id: ActionXenoRegurgitate
@@ -118,12 +95,13 @@
   - type: InstantAction
     event: !type:XenoRegurgitateActionEvent
   - type: RMCDazeableAction
+  - type: RMCInContainerAction
 
 - type: entity
   id: ActionXenoTailStab
   parent: ActionXenoBase
   name: Tail Stab
-  description: Launches an attack towards a given direction. The cooldown is faster if you miss.
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss.
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -142,6 +120,8 @@
   - type: RMCDazeableAction
   - type: ActionInRangeUnobstructed
     range: 2.5
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoTailSlam
@@ -152,7 +132,7 @@
   parent: ActionXenoTailStab
   id: ActionXenoTailStabCorrosive
   name: Corrosive Tail Stab
-  description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
   components:
   - type: Action
     icon:
@@ -163,7 +143,58 @@
   parent: ActionXenoTailStabCorrosive
   id: ActionXenoTailStabBoiler
   name: Corrosive Tail Stab
-  description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
+
+- type: entity
+  parent: ActionXenoTailStabCorrosive
+  id: ActionXenoTailStabSentinel
+  name: Catalytic Tail Stab
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. Does additional burn damage if the target has paratoxin stacks, and if they have at least 10, gain a large speed and armor boost. Reduces paratoxin stacks by half.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_attack_acid
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTailStabSentinel
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: tail_attack_acid
+
+- type: entity
+  id: ActionXenoTailStabLance
+  parent: ActionXenoTailStab
+  name: Tail Lance Stab
+  components:
+  - type: ActionSharedCooldown
+    id: ActionXenoTailStabLance
+    ids:
+    - ActionXenoTailStabLanceAlt
+    cooldown: 10
+
+- type: entity
+  id: ActionXenoTailStabLanceAlt
+  parent: ActionXenoTailStabLance
+  name: Tail Lance Slam
+  description: Strikes the targeted enemy, doing low armor-piercing damage. The cooldown is faster if you miss.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_attack
+    useDelay: 3
+  - type: WorldTargetAction
+    event: !type:XenoTailStabEvent
+      useAltTailStab: True
+  - type: ActionSharedCooldown
+    id: ActionXenoTailStabLanceAlt
+    ids:
+    - ActionXenoTailStabLance
+    cooldown: 3
 
 - type: entity
   id: ActionXenoLeap
@@ -182,7 +213,6 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoLeapActionEvent
-  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoRush
@@ -214,7 +244,6 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoLeapActionEvent
-  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -339,7 +368,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: xeno_spit
+      state: xeno_spit_neuro
     useDelay: 2
   - type: TargetAction
     repeat: true
@@ -349,6 +378,25 @@
   - type: WorldTargetAction
     event: !type:XenoSlowingSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
+
+- type: entity
+  id: ActionXenoParatoxinSpit
+  parent: ActionXenoSlowingSpit
+  name: Paratoxin Spit (30)
+  description: Launches a damageless projectile that goes over allies and will slow the first enemy that it hits, then paralyze them if they have no armor. It'll also drain helpful substances from their body and apply 5 paratoxin stacks. [color=yellow]Paratoxin stacks do oxygen damage over time, and max out at 30 stacks.[/color]
+  components:
+  - type: Action
+    useDelay: 1
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoParatoxinSpit
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: xeno_spit_neuro
 
 - type: entity
   id: ActionXenoScatteredSpit
@@ -370,6 +418,8 @@
   - type: WorldTargetAction
     event: !type:XenoScatteredSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -400,6 +450,41 @@
   - type: WorldTargetAction
     event: !type:XenoSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
+
+- type: entity
+  id: ActionXenoQueenSpitAcid
+  parent: ActionXenoSpit
+  name: Acid Spit (25)
+  description: Launches a projectile that will deal damage to the first enemy that it hits and coat them in acid.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_xeno_acid
+  - type: ActionSharedCooldown
+    id: ActionXenoQueenSpitAcid
+    ids:
+    - ActionXenoQueenSpitNeuro
+    cooldown: 2.5
+
+- type: entity
+  id: ActionXenoQueenSpitNeuro
+  parent: ActionXenoSlowingSpit
+  name: Neurotoxin Spit (50)
+  description: Launches a projectile that goes over allies and stuns the first enemy that it hits.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_neurotoxin
+    useDelay: 2.5
+  - type: ActionSharedCooldown
+    id: ActionXenoQueenSpitNeuro
+    ids:
+    - ActionXenoQueenSpitAcid
+    cooldown: 2.5
 
 - type: entity
   id: ActionXenoSpitPraetorian
@@ -432,6 +517,7 @@
     event: !type:XenoChargeSpitActionEvent
   - type: XenoActionPlasma
     cost: 50
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -455,6 +541,7 @@
     useDelay: 8
   - type: TargetAction
     range: 15
+    checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoSprayAcidActionEvent
   - type: ActionBlockIfResting
@@ -541,6 +628,24 @@
     event: !type:XenoParalyzingSlashActionEvent
   - type: XenoActionPlasma
     cost: 50
+  - type: RMCInContainerAction
+
+- type: entity
+  id: ActionXenoParatoxinSlash
+  parent: ActionXenoBase
+  name: Paratoxin Slashes (100)
+  description: Coat your claws and tail with paratoxin, applying 10 paratoxin stacks for your next 3 slashes. Lasts 5 seconds. [color=yellow]Paratoxin stacks do oxygen damage over time, and max out at 30 stacks.[/color]
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: lurker_inject_neuro
+    useDelay: 10
+  - type: InstantAction
+    event: !type:XenoParatoxinSlashActionEvent
+  - type: XenoActionPlasma
+    cost: 100
 
 - type: entity
   parent: ActionXenoBase
@@ -558,6 +663,7 @@
     event: !type:XenoCripplingStrikeActionEvent
   - type: XenoActionPlasma
     cost: 20
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -581,9 +687,16 @@
     useDelay: 12
   - type: TargetAction
     range: 15
+    checkCanAccess: false
   - type: EntityTargetAction
+    priorityWhitelist:
+      components:
+      - Xeno
+      - Marine   
   - type: WorldTargetAction
     event: !type:XenoBoneChipsActionEvent
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -640,7 +753,6 @@
     event: !type:XenoFlingActionEvent
     toggleOutline: false
   - type: XenoOffensiveAction
-  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -670,7 +782,6 @@
   - type: WorldTargetAction
     event: !type:XenoLungeActionEvent
   - type: XenoOffensiveAction
-  - type: RMCDazeableAction
   - type: RMCCooldownOnMiss
 
 - type: entity
@@ -712,6 +823,12 @@
     range: 2
   - type: EntityTargetAction
     event: !type:XenoGutActionEvent
+    whitelist:
+      components:
+      - Body
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: ActionXenoStomp
@@ -727,6 +844,7 @@
     useDelay: 18
   - type: InstantAction
     event: !type:XenoStompActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -750,6 +868,7 @@
     useDelay: 12
   - type: InstantAction
     event: !type:XenoStompActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoCharge
@@ -764,7 +883,7 @@
       state: ready_charge
     useDelay: 14
   - type: TargetAction
-    range: 9
+    range: 7
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoChargeActionEvent
@@ -791,6 +910,8 @@
     useDelay: 0.25
   - type: InstantAction
     event: !type:XenoToggleChargingActionEvent
+  - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoFling
@@ -856,6 +977,7 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoGasToggleActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -886,6 +1008,7 @@
     - ActionXenoSprayAcidBoiler
     cooldown: 30
     onPerform: false
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -909,6 +1032,7 @@
     useDelay: 30
   - type: InstantAction
     event: !type:XenoStompActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -936,7 +1060,7 @@
   parent: ActionXenoBase
   id: ActionXenoImpale
   name: Impale (80)
-  description: Impales an adjacent enemy with your tail. Hits twice on a marked target and removes the mark. Pierces some armor.
+  description: Impales an adjacent enemy with your tail. Hits twice on a marked target and removes the mark. Pierces some armor. [color=green]Attacking or using Impale on an enemy with a critical mark refunds cooldown.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -945,8 +1069,9 @@
       state: prae_impale
     useDelay: 13
   - type: TargetAction
-    range: 1.5
+    range: 2
     deselectOnMiss: false
+    repeat: true
   - type: EntityTargetAction
     event: !type:XenoImpaleActionEvent
   - type: XenoOffensiveAction
@@ -954,12 +1079,13 @@
   - type: XenoActionPlasma
     cost: 80
   - type: RMCCooldownOnMiss
+    missCooldown: 0.7
 
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoTailTrip
   name: Tail Trip (30)
-  description: Disarms and dazes an unmarked enemy. Stuns and dazes for longer on a marked target, and removes the mark.
+  description: Disarms and dazes an unmarked enemy. Stuns and dazes for longer on a marked target, and removes the mark. [color=green]Attacking or using Tail Trip on an enemy with a critical mark refunds cooldown.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -970,6 +1096,7 @@
   - type: TargetAction
     range: 2
     deselectOnMiss: false
+    repeat: true
   - type: EntityTargetAction
     event: !type:XenoTailTripActionEvent
   - type: XenoOffensiveAction
@@ -977,6 +1104,7 @@
     cost: 30
   - type: ActionBlockIfResting
   - type: RMCCooldownOnMiss
+    missCooldown: 0.7
 
 - type: entity
   parent: ActionXenoBase
@@ -993,6 +1121,7 @@
   - type: TargetAction
     range: 15
     checkCanAccess: false
+    repeat: true
   - type: WorldTargetAction
     event: !type:XenoPierceActionEvent
   - type: ActionBlockIfResting
@@ -1015,6 +1144,8 @@
   components:
   - type: Action
     useDelay: 0
+  - type: TargetAction
+    repeat: true
   - type: ActionBlockIfResting
 
 - type: entity
@@ -1040,6 +1171,7 @@
     ids:
     - ActionXenoCleaveFling
     cooldown: 12
+  - type: XenoOffensiveAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1073,6 +1205,7 @@
     ids:
     - ActionXenoCleaveRoot
     cooldown: 12
+  - type: XenoOffensiveAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1123,6 +1256,7 @@
       state: shift_spit_xeno_acid
   - type: InstantAction
     event: !type:XenoSpitToggleActionEvent
+  - type: RMCInContainerAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1200,6 +1334,8 @@
   - type: WorldTargetAction
     event: !type:XenoTailSeizeActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1390,6 +1526,8 @@
   - type: InstantAction
     event: !type:XenoCripplingStrikeActionEvent
   - type: ActionBlockIfResting
+  - type: RMCInContainerAction
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1406,7 +1544,6 @@
   - type: InstantAction
     event: !type:XenoEviscerateActionEvent
   - type: ActionBlockIfResting
-  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1426,7 +1563,6 @@
   - type: EntityTargetAction
     event: !type:XenoFlingActionEvent
   - type: XenoOffensiveAction
-  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1506,6 +1642,7 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 50
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -1524,3 +1661,127 @@
     deselectOnMiss: false
   - type: WorldTargetAction
     event: !type:XenoDestroyActionEvent
+
+# Trapper Actions
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAcidMine
+  name: Acid Mine (40)
+  description: Cause an acid explosion at the targeted location. Each hit reduces Deploy Traps' cooldown. Empowered mines deal more damage and coat enemies in acid.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_mine
+    useDelay: 5.5
+  - type: XenoAcidMine
+    actionIconEmpowered:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_mine_empowered
+  - type: TargetAction
+    deselectOnMiss: false
+    checkCanAccess: false
+    repeat: true
+    range: 14 #Actual range on the AcidMine component.
+  - type: WorldTargetAction
+    event: !type:XenoAcidMineActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoAcidMine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: acid_mine
+
+- type: entity
+  id: ActionXenoAcidShotgun
+  parent: ActionXenoBase
+  name: Acid Shotgun (40)
+  description: Launches multiple acid projectiles that deal increased damage to trapped targets. Each hit grants a stack of insight that can empower Deploy Traps. Hitting a trapped target grants 10 stacks.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_shotgun
+    useDelay: 13
+  - type: TargetAction
+    range: 15
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoAcidShotgunActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 40
+
+- type: entity
+  id: ActionXenoDeployTraps
+  parent: ActionXenoBase
+  name: Deploy Traps (60)
+  description: Deploys a line of snaring traps. Becomes empowered at 10 stacks of insight. Empowered traps snare longer and empower your Acid Mine.
+  components:
+  - type: Action
+    useDelay: 20.5
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gas_mine
+  - type: XenoDeployTraps
+    actionIconEmpowered:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gas_mine_empowered
+  - type: TargetAction
+    checkCanAccess: false
+    deselectOnMiss: false
+    repeat: true
+    range: 14
+  - type: WorldTargetAction
+    event: !type:XenoDeployTrapsActionEvent
+  - type: XenoActionPlasma
+    cost: 60
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDeployTraps
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: gas_mine
+
+- type: entity
+  id: ActionXenoMassacre
+  parent: ActionXenoBase
+  name: Massacre (300)
+  description: Gibs dead enemies in an area. Gives a burrowed larva for each enemy gibbed.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gut
+  - type: TargetAction
+    range: 2
+  - type: WorldTargetAction
+    event: !type:XenoMassacreActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDrainingBite
+  name: Draining Bite
+  description: Drain an enemy, stunning them and removing helpful chemicals from their system, scaling with paratoxin stacks. Reduces paratoxin stacks by 1/3.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: headbite
+    useDelay: 12
+  - type: TargetAction
+    range: 1.5
+    deselectOnMiss: false
+  - type: EntityTargetAction
+    event: !type:XenoDrainingBiteActionEvent
+  - type: XenoOffensiveAction

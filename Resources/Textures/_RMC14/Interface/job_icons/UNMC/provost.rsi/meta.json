@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from: https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi, provost team lead by noctyrnal (github) and turned into a shield by @IceNoobXD on github",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_pva"
+        },
+        {
+            "name": "hudsquad_pve"
+        },
+        {
+            "name": "hudsquad_pvi"
+        },
+        {
+            "name": "hudsquad_pvi2"
+        },
+        {
+            "name": "hudsquad_pvl"
+        },
+        {
+            "name": "hudsquad_pvm"
+        },
+        {
+            "name": "hudsquad_pvtml"
+        },
+        {
+            "name": "hudsquad_tisio"
+        },
+        {
+            "name": "hudsquad_tissa"
+        }
+    ]
+}

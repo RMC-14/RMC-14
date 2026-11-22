@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 03/10/2026 21:49:28
-  entityCount: 485
+  time: 06/16/2026 10:14:39
+  entityCount: 487
 maps: []
 grids:
 - 2
@@ -469,6 +469,13 @@ entities:
     components:
     - type: Transform
       pos: 18.5,4.5
+      parent: 2
+- proto: CMFoldingBarricade
+  entities:
+  - uid: 486
+    components:
+    - type: Transform
+      pos: 20.5,5.5
       parent: 2
 - proto: CMJanitorialCart
   entities:
@@ -2023,6 +2030,13 @@ entities:
     - type: Transform
       pos: 18.5,14.8
       parent: 2
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 487
+    components:
+    - type: Transform
+      pos: 18.5,5.5
+      parent: 2
 - proto: RMCItemPoolBuckshot
   entities:
   - uid: 294
@@ -2308,7 +2322,7 @@ entities:
     - type: Transform
       pos: 6.5,7.5
       parent: 2
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 67
     components:
@@ -3099,7 +3113,7 @@ entities:
     - type: Transform
       pos: 10.5,7.5
       parent: 2
-- proto: WeaponRifleM16
+- proto: RMCWeaponRifleCR16
   entities:
   - uid: 82
     components:

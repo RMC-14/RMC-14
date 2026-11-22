@@ -77,7 +77,7 @@ public sealed class VisorSystem : EntitySystem
             if (!TryComp<VisorComponent>(currentContainer.ContainedEntities.FirstOrDefault(), out var visorComp))
                 return;
 
-            if (ent.Comp.Action is { } action)
+            if (ent.Comp.Action is { } action && Exists(action))
                 _actions.SetIcon(action, visorComp.OnIcon);
         }
     }
@@ -116,7 +116,7 @@ public sealed class VisorSystem : EntitySystem
             Visible = true,
         }));
 
-        if (ent.Comp.Action is { } action)
+        if (ent.Comp.Action is { } action && Exists(action))
             _actions.SetIcon(action, visorComp.OnIcon);
     }
 
@@ -189,7 +189,7 @@ public sealed class VisorSystem : EntitySystem
         if (startedNull && current == null)
             _popup.PopupClient(Loc.GetString("rmc-no-visors-to-swap"), ent, args.Performer, PopupType.SmallCaution);
 
-        if (ent.Comp.Action is { } action && current == null)
+        if (ent.Comp.Action is { } action && Exists(action) && current == null)
             _actions.SetIcon(action, ent.Comp.OffIcon);
 
         _item.VisualsChanged(ent);
@@ -226,7 +226,7 @@ public sealed class VisorSystem : EntitySystem
 
                 current = null;
                 _item.VisualsChanged(ent);
-                if (ent.Comp.Action is { } action)
+                if (ent.Comp.Action is { } action && Exists(action))
                     _actions.SetIcon(action, ent.Comp.OffIcon);
 
                 _popup.PopupClient(Loc.GetString("rmc-skills-no-training", ("target", newContained)), args.Equipee, args.Equipee, PopupType.SmallCaution);
@@ -323,7 +323,7 @@ public sealed class VisorSystem : EntitySystem
 
     private void OnVisorActivate(Entity<VisorComponent> ent, ref ActivateVisorEvent args)
     {
-        if (args.CycleableVisor.Comp.Action is { } action)
+        if (args.CycleableVisor.Comp.Action is { } action && Exists(action))
             _actions.SetIcon(action, ent.Comp.OnIcon);
 
         if (!HasComp<PowerCellSlotComponent>(ent))

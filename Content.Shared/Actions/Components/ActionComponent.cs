@@ -1,4 +1,7 @@
 using Content.Shared.Actions;
+// RMC14
+using Content.Shared._RMC14.Vehicle;
+// RMC14
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -11,7 +14,9 @@ namespace Content.Shared.Actions.Components;
 /// <summary>
 /// Component all actions are required to have.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem))]
+// RMC14
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem), typeof(VehicleViewToggleSystem))]
+// RMC14
 [AutoGenerateComponentState(true, true)]
 [EntityCategory("Actions")]
 public sealed partial class ActionComponent : Component
@@ -194,6 +199,14 @@ public sealed partial class ActionComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? Sound;
+
+    /// RMC14
+    /// <summary>
+    ///     If true, the client will not predict the action out-of-simulation.
+    ///     The predicted action will be delayed until the next update loop.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool InSimulationOnly;
 }
 
 [DataRecord, Serializable, NetSerializable]
