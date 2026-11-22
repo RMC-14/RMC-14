@@ -1,0 +1,78 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazBase
+  id: RMCSurvivorSPPSpetsnazSynth
+  name: rmc-job-name-spetsnaz-synth
+  startingGear: RMCGearSPPSpetsnazSynth
+  ranks:
+    RMCRankSPPWarrantOfficer: []
+  icon: "RMCJobIconSPPSpetsnazSynth"
+  spawnMenuRoleName: SPP Spetsnaz B/SRU Synthetic (Sorokyne Special Survivor)
+  playTimeTracker: RMCJobSyntheticColony
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Language
+      preset: RMCLanguagePresetSynth
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: RMCSurvivor
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-spetsnaz-synth
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazBase
+  id: RMCGearSPPSpetsnazSynth
+  equipment:
+    belt: RMCBeltMedicBagSPP
+    outerClothing: RMCArmorSPPSpetsnazSynth
+    head: RMCHeadCapSPPSpetsnaz
+    suitstorage: RMCFlashlight
+    pocket1: RMCPouchToolsSocFilledSPPSynthetic
+    pocket2: RMCPouchSurvivalSynthFill
+  storage:
+    back:
+    - RMCArmorHelmetSPPSpetsnaz
+    - CMSheetMetal20
+    - CMRollerBedSpawnFolded
+    - CMMultitool
+    - RMCCableCoil
+    - CMHealthAnalyzer
+    - RMCSynthResetKeyNovaris
+    belt:
+    - CMUpgradedTraumaKit10
+    - CMUpgradedTraumaKit10
+    - CMUpgradedBurnKit10
+    - CMUpgradedBurnKit10
+    # - RMCSplint
+    # - RMCHyposprayOxycodone
+    - CMPillCanisterBicaridine
+    - CMPillCanisterKelotane
+    - CMPillCanisterInaprovaline
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazSynth
+  name: special survivor spp spetsnaz synthetic spawn point
+  suffix: Sorokyne
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazSynth
+  - type: Sprite
+    state: surv_spp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSpetsnazSynth
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
+    state: spp_sptz_synth

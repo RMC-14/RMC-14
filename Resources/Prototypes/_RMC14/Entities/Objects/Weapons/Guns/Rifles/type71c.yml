@@ -82,10 +82,8 @@
         whitelist:
           tags:
           - RMCAttachmentFlashlightGrip
-          - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
           - RMCAttachmentUnderbarrelExtinguisher
-          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
     offsets:

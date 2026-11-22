@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -93,10 +94,14 @@ public sealed class XenoWordQueenSystem : EntitySystem
         text = _cmChat.SanitizeMessageReplaceWords(queen, text);
         var headerText = Loc.GetString("rmc-xeno-words-of-the-queen-header");
         var wrapped = FormattedMessage.EscapeText(text);
-        var header = $"{_xenoAnnounce.WrapHive(headerText)}";
+        var header = $"{_xenoAnnounce.WrapHive(headerText)}\n";
         var message = $"{header}[color=red][font size=14][bold]{wrapped}[/bold][/font][/color]";
 
-        _xenoAnnounce.Announce(queen, xenos, text, message, queen.Comp.Sound);
+        RMCAnnouncementOverlay? overlay = queen.Comp.AnnouncementOverlay is { } preset
+            ? new RMCAnnouncementOverlay(preset, wrapped, queen)
+            : null;
+
+        _xenoAnnounce.Announce(queen, xenos, text, message, queen.Comp.Sound, overlay: overlay);
 
         foreach (var (actionId, _) in _actions.GetActions(queen))
         {

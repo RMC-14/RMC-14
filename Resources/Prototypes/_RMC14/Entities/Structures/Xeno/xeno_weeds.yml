@@ -405,6 +405,7 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
+  - type: XenoChargeDontHit
 
 # Gardener's weeds
 - type: entity # TODO RMC14 sound

@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Intel;
 public sealed partial class IntelHasUnlockedComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public List<int> Unlocked = new();
+    public List<string> Unlocked = new();
 }

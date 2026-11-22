@@ -79,6 +79,7 @@
   name: plastic explosives
   description: Used to put holes in specific areas without too much extra hole.
   components:
+  - type: RMCVehicleDemolitionCharge
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
   - type: Explosive

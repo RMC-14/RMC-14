@@ -281,6 +281,8 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+      params:
+        volume: -3
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -441,6 +443,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    drawdepth: OverMobs
     layers:
     - state: bullet
       shader: unshaded

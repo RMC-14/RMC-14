@@ -53,6 +53,10 @@
   - type: ExaminableDamage
     messages: WindowMessages
   - type: Destructible
+  - type: VehicleSmashable
+    damageOnHit: 1000
+    requiresDoorUnpowered: true
+    minContinueWeightClass: Heavy
   - type: ContainerFill
     containers:
       board: [ DoorElectronics ]

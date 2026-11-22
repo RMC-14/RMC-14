@@ -27,6 +27,9 @@
       - PillPacket
       components:
       - Hypospray
+  - type: Tag
+    tags:
+    - RMCPouchMedical
 
 - type: entity
   parent: RMCPouchMedicalSoc
@@ -132,6 +135,9 @@
       components:
       - Hypospray
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCPouchMedical
 
 - type: entity
   parent: RMCPouchFirstResponder

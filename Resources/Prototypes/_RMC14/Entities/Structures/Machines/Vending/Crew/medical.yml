@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewMedicalEquipment
-  name: ColMarTech medical equipment rack
+  name: ASRS medical equipment rack
   description: An automated equipment vendor for the Medical Department.
   components:
   - type: AccessReader
@@ -49,8 +49,6 @@
       jobs:
       - CMNurse
       entries:
-      - id: RMCScrubsLightBlue
-        recommended: true
       - id: RMCScrubsPharm
       - id: CMScrubsPurple
       - id: RMCScrubsOlive
@@ -66,8 +64,6 @@
       - CMCMO
       - CMResearcher
       entries:
-      - id: CMScrubsBlue
-        recommended: true
       - id: CMScrubsGreen
         recommended: true
       - id: RMCScrubsPharm
@@ -78,6 +74,7 @@
       - id: RMCScrubsBrown
       - id: RMCScrubsWhite
       - id: RMCScrubsBlack
+      - id: RMCScrubsLightBlue
     - name: Suit
       jobs:
       - CMNurse
@@ -147,9 +144,6 @@
       entries:
       - id: CMBackpackMarine
         name: backpack
-        replaceSlot: back
-      - id: CMSatchelMarine
-        name: satchel
         replaceSlot: back
       - id: CMBackpackMedical
         replaceSlot: back

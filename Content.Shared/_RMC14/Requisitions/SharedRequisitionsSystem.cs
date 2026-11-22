@@ -5,6 +5,7 @@ using Content.Shared.Climbing.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.StepTrigger.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
@@ -18,6 +19,7 @@ public abstract class SharedRequisitionsSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -98,6 +100,15 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         Dirty(railing);
 
         UpdateRailing(railing);
+    }
+
+    public void UpdateRailingsInRange(MapCoordinates coordinates, float radius, RequisitionsRailingMode mode)
+    {
+        var railings = _lookup.GetEntitiesInRange<RequisitionsRailingComponent>(coordinates, radius);
+        foreach (var railing in railings)
+        {
+            SetRailingMode(railing, mode);
+        }
     }
 
     public void ChangeBudget(int amount)

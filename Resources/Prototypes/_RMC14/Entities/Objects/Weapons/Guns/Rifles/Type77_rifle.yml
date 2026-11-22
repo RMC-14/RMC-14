@@ -201,8 +201,7 @@
   id: RMCMagazineRifleType77Empty
   suffix: Empty
   components:
-  - type: BallisticAmmoProvider
-    proto: null
+  - type: RMCEmptyMag
 
 - type: entity
   parent: RMCMagazineRifleType77
