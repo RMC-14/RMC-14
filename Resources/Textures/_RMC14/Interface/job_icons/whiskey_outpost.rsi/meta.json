@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_hg"
+        },
+        {
+            "name": "hudsquad_hgalt"
+        },
+        {
+            "name": "hudsquad_hgsl"
+        },
+        {
+            "name": "hudsquad_hgspec"
+        },
+        {
+            "name": "hudsquad_vhg"
+        },
+        {
+            "name": "hudsquad_wo_chemist"
+        },
+        {
+            "name": "hudsquad_wo_cmo"
+        },
+        {
+            "name": "hudsquad_wo_co"
+        },
+        {
+            "name": "hudsquad_wo_doctor"
+        },
+        {
+            "name": "hudsquad_wo_mcrew"
+        },
+        {
+            "name": "hudsquad_wo_ro"
+        },
+        {
+            "name": "hudsquad_wo_xo"
+        }
+    ]
+}

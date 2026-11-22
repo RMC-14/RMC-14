@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "coin_platinum"
+    },
+    {
+      "name": "coin_silver"
+    },
+    {
+      "name": "coin_diamond"
+    },
+    {
+      "name": "coin_iron"
+    },
+    {
+      "name": "coin_chitin"
+    },
+    {
+      "name": "coin_uranium"
+    },
+    {
+      "name": "coin_gold"
+    },
+    {
+      "name": "coin_copper"
+    },
+    {
+      "name": "coin_phoron"
+    },
+    {
+      "name": "moneybag"
+    }
+  ]
+}

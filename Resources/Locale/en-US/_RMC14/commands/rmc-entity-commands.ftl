@@ -2,7 +2,11 @@ cmd-fixpower-desc = Force the RMCPowerSystem to recalculate all power related en
 cmd-fixpower-help = Usage: fixpower
 
 cmd-nukemap-desc = Kills and destroys everything on a map!
-cmd-nukemap-help = nukemap <mapID>
+cmd-nukemap-help = nukemap <mapID> [spareShelters=true]
 
 cmd-orbitaldrop-desc = Puts an entity in a drop pod and supply drops it to the given coordinates.
 cmd-orbitaldrop-help = orbitaldrop <entity> <x> <y> <mapId> [dropDelay=5] [dropDuration=3] [timeToOpen=2] [scatter=0] [useParachute=true]
+
+cmd-unlockvehicle-desc = Adds the vehicle to the vehicle lift.
+cmd-unlockvehicle-help = unlockvehicle <entity>
+cmd-unlockvehicle-hint = Entities that are valid vehicles.

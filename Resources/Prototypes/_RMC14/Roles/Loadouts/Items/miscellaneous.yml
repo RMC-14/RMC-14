@@ -47,3 +47,10 @@
   storage:
     back:
     - RMCHandsBrownMarine
+
+- type: loadout
+  id: PestSprayRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbPestSpray
