@@ -154,13 +154,15 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-greeting-varadero = The stench of burning phoron still lingers in the salty evening breeze of the ruined New Varadero Naval Base. The specter's dying cackle echoes through your mind as you realise that you're now one of just a handful of living people left standing on these battle worn shores. Through sheer cunning, grit, and United Nations fire power, you've managed to survive against both ceaseless tides of xenonids and a now slain lone specter... the cry of a new mother snaps you back to reality. It's only a matter of time before another acidic wave of those horrid things attempts to wash over you.
+rmc-job-greeting-varadero = It's been days since the military's retreat from the naval base. Unable to make it to the rendezvous point, the tunnel to New Varadero City was blown, and you were sealed inside with the xenonids. With no way off this island, you've had to run, hide, fight and band together with whoever you could to stay alive this long. You may have held the horde at bay for now, but it's only a matter of time before they come back.
 
    You are aware of the xenonid threat.
 
    Your primary objective is to survive the outbreak.
 
    You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-prefix-survivor-varadero-rifleman = UNMC RFN
 
 rmc-job-name-survivor-commander-new-varadero = Base Commander
 rmc-job-prefix-survivor-varadero-commander = UNMC CDR
@@ -200,7 +202,7 @@ rmc-job-prefix-survivor-new-varadero-xenobiologist = WY XBIO
 rmc-job-name-survivor-new-varadero-rd = New Varadero Research Director
 rmc-job-prefix-survivor-new-varadero-rd = WY RD
 
-rmc-job-name-survivor-varadero-base-police = Peacekeeper
+rmc-job-name-survivor-new-varadero-contractor = UN Civilian Contractor
 
 # Hybrisa Prospera Survs
 
@@ -239,7 +241,7 @@ rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
 rmc-job-greeting-para = You are a member of the RCM's 24th Paramarine Regiment!
 
-  Outpost Souter was your final posting before withdrawal. With Weston-Yamada buying out Hybrisa, the TSE began pulling its forces off-world. Your regiment was standing down, preparing to hand over control during the transition. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
+  Outpost Souter was your most recent posting. Although it was going to be purchased and turned into an office complex by Weston-Yamada, recent CLF activity prompted the TSE to renovate the base to prevent insurgent activity. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -287,7 +289,7 @@ rmc-job-prefix-fire-protection-specialist = FPPB
 
 rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
-rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
+rmc-job-name-survivor-halcyon-liaison = Halcyon - Corporate Liaison
 
 # Sorokyne SPP special forces insert survs
 

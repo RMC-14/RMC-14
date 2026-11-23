@@ -338,16 +338,17 @@
   parent: RMCHeadsetTyrargo
   id: RMCHeadsetMarineNV
   name: UNMC headset
-  description: A standard issue UNMC headset.
+  description: A headset used by Marine personnel and private contractors working on UNMC vessels and installations. All the text written on it seems to be written in Spanish and Portuguese.
   suffix: Survivor, Varadero
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
-    state: generic_headset
+    state: ro_headset # Placeholder on CM
   - type: ContainerFill
     containers:
       key_slots:
       - CMEncryptionKeyColony
+      - RMCEncryptionKeyMarineNV
   - type: RMCHeadset
     channels:
     - MarineSurvivor
@@ -411,8 +412,8 @@
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetMarineDistress
-  name: UNMC headset
-  description: A standard issue UNMC headset. This one is used by marines on colonial protection duties, and only comes equipped with civilian channels.
+  name: UNMC colony headset
+  description: A standard headset used by the UNMC. This one seems badly beat up, whatever extra frequencies it once had have been lost.
   components:
   - type: ContainerFill
     containers:
