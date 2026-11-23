@@ -1,0 +1,36 @@
+<ui:BusinessCardWindow xmlns="https://spacestation14.io"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.Paper"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    MouseFilter="Stop"
+    SetSize="650 430">
+
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+        <!-- Close button outside the card -->
+        <PanelContainer StyleClasses="AngleRect" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"/>
+        </PanelContainer>
+
+        <!-- Card background -->
+        <PanelContainer Name="CardBackground" HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="White" />
+            </PanelContainer.PanelOverride>
+
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                <!-- Read mode: display text -->
+                <RichTextLabel Name="ContentLabel" HorizontalExpand="True" VerticalAlignment="Top" Margin="4"/>
+
+                <!-- Write mode: text input -->
+                <BoxContainer Name="InputContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Visible="False">
+                    <PanelContainer HorizontalExpand="True" VerticalExpand="True" Margin="4">
+                        <TextEdit Name="Input" HorizontalExpand="True" VerticalExpand="True" StyleClasses="BusinessCardEdit"/>
+                    </PanelContainer>
+                    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
+                        <Label Name="CharCount" Margin="0 0 8 0"/>
+                        <Button Name="SaveButton" Text="Save"/>
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</ui:BusinessCardWindow>

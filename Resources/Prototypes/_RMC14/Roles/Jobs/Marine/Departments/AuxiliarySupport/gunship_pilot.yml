@@ -1,6 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMPilotGunship
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-flight-crew
   name: cm-job-name-gunship-pilot
   description: cm-job-description-gunship-pilot
   playTimeTracker: CMJobPilotGunship
@@ -56,7 +57,7 @@
         state: gp
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_command
+        state: background_officer
     - type: MutinyEligible
 
 - type: startingGear

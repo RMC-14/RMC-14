@@ -1,14 +1,12 @@
 using Content.Shared._RMC14.Xenonids.Egg;
-using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
-using Content.Shared.Mobs;
-using Content.Shared.StatusEffect;
-using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
@@ -17,6 +15,7 @@ public abstract class SharedXenoParasiteThrowerSystem : EntitySystem
     [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] protected readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -95,5 +94,54 @@ public abstract class SharedXenoParasiteThrowerSystem : EntitySystem
         };
 
         args.Verbs.Add(parasiteVerb);
+    }
+
+    public void AddParasites(Entity<XenoParasiteThrowerComponent> xeno, int count)
+    {
+        xeno.Comp.CurParasites = Math.Min(xeno.Comp.MaxParasites, xeno.Comp.CurParasites + count);
+
+        UpdateParasiteClingers(xeno); // Dirties count
+    }
+
+    private List<int> GetVisualIndexes(bool[] bools, bool visible)
+    {
+        List<int> visualIndexes = new();
+        for (int i = 0; i < bools.Length; i++)
+        {
+            if (bools[i] == visible)
+                visualIndexes.Add(i);
+        }
+        return visualIndexes;
+    }
+
+    protected void UpdateParasiteClingers(Entity<XenoParasiteThrowerComponent> xeno)
+    {
+        var parasiteNumber = Math.Min(Math.Ceiling((((double)xeno.Comp.CurParasites / xeno.Comp.MaxParasites) * xeno.Comp.NumPositions)), xeno.Comp.NumPositions);
+
+        var overlayNumbers = xeno.Comp.VisiblePositions.Count(position => position == true);
+
+        if (overlayNumbers > parasiteNumber)
+        {
+            var visibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, true);
+            for (var i = 0; i < overlayNumbers - parasiteNumber; i++)
+            {
+                var index = _random.PickAndTake(visibleIndexes);
+                xeno.Comp.VisiblePositions[index] = false;
+            }
+        }
+        else
+        {
+            var invisibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, false);
+            for (var i = 0; i < parasiteNumber - overlayNumbers; i++)
+            {
+                var index = _random.PickAndTake(invisibleIndexes);
+                xeno.Comp.VisiblePositions[index] = true;
+            }
+        }
+
+        Dirty(xeno);
+
+        //Need to clone the array for it to dirty properly
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
     }
 }
