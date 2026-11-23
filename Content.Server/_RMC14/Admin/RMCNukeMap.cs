@@ -17,14 +17,19 @@ public sealed class RMCNukeMap : LocalizedEntityCommands
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        if (args.Length != 1)
+        if (args.Length != 1 && args.Length != 2)
         {
             shell.WriteError("Wrong number of args.");
             return;
         }
 
-        var arg = args[0];
-        var mapId = new MapId(int.Parse(arg, CultureInfo.InvariantCulture));
+        var mapId = new MapId(int.Parse(args[0], CultureInfo.InvariantCulture));
+
+        var spareShelters = true;
+        if (args.Length == 2)
+        {
+            spareShelters = bool.Parse(args[1]);
+        }
 
         if (!_mapSystem.MapExists(mapId))
         {
@@ -32,6 +37,6 @@ public sealed class RMCNukeMap : LocalizedEntityCommands
             return;
         }
 
-        _nuke.NukeMap(mapId);
+        _nuke.NukeMap(mapId, spareShelters);
     }
 }
