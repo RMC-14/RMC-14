@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MoonlightHollow
-  changes:
-  - message: Update and clean up RCM skills
-    type: Tweak
-  id: 3428
-  time: '2026-06-19T17:21:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9895
 - author: ffxivsidehoes
   changes:
   - message: Fixed typo in white M54C's description.
@@ -4391,5 +4384,13 @@
   id: 3927
   time: '2026-11-23T03:51:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8576
+- author: kleinerstation13
+  changes:
+  - message: FORECON Commander now has a random chance to spawn with either a Mateba,
+      Custom Peregrine Handcannon or M1911C service pistol
+    type: Tweak
+  id: 3928
+  time: '2026-11-23T19:03:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11167
 Name: RMC14
 Order: -1
