@@ -174,7 +174,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
         if (HasComp<InfectionSuccessComponent>(user))
             return true;
 
-        var timeSinceDeath = _gameTiming.CurTime.Subtract(ghostComp.TimeOfDeath);
+        var timeSinceDeath = _gameTiming.RealTime.Subtract(ghostComp.TimeOfDeath);
 
         // Must have been dead for 3 minutes
         if (timeSinceDeath < TimeSpan.FromMinutes(3))

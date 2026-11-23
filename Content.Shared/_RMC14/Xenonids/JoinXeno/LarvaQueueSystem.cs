@@ -223,7 +223,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             return;
         }
 
-        if ((_gameTiming.CurTime - ghost.TimeOfDeath).TotalSeconds >= larvaWaitTime)
+        if ((_gameTiming.RealTime - ghost.TimeOfDeath).TotalSeconds >= larvaWaitTime)
         {
             Queue.GetOrNew(hive).AddLast(session);
             var position = GetQueuePosition(session, hive);
@@ -236,7 +236,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         else
         {
             PreQueue.GetOrNew(hive).Add(session, larvaWaitTime + ghost.TimeOfDeath.TotalSeconds);
-            var timeLeft = TimeSpan.FromSeconds(larvaWaitTime) + ghost.TimeOfDeath - _gameTiming.CurTime;
+            var timeLeft = TimeSpan.FromSeconds(larvaWaitTime) + ghost.TimeOfDeath - _gameTiming.RealTime;
             _popup.PopupEntity(
                 $"You died too recently, and will be added to the queue in {timeLeft.TotalSeconds:F0} seconds.",
                 actorEntity.Value, actorEntity.Value);
@@ -650,7 +650,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (!PreQueue.TryGetValue(hiveId, out var pq) || !pq.TryGetValue(userId, out var promotionTime))
             return null;
 
-        var remaining = promotionTime - _gameTiming.CurTime.TotalSeconds;
+        var remaining = promotionTime - _gameTiming.RealTime.TotalSeconds;
         return TimeSpan.FromSeconds(remaining > 0 ? remaining : 0);
     }
 
@@ -701,6 +701,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             return;
 
         var time = _gameTiming.CurTime;
+        var realTime = _gameTiming.RealTime;
 
         var expiredDisconnected = new List<NetUserId>();
         foreach (var (userId, expiry) in _disconnectExpiresAt)
@@ -724,7 +725,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             var toPromote = new List<NetUserId>();
             foreach (var (userId, userTime) in hivePreQueue)
             {
-                if (userTime <= time.TotalSeconds)
+                if (userTime <= realTime.TotalSeconds)
                     toPromote.Add(userId);
             }
 
