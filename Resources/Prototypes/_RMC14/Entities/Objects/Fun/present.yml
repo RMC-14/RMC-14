@@ -316,6 +316,8 @@
       map: [ base ]
     - state: pursuit
       map: [ label ]
+  - type: Item
+    size: Ginormous
   - type: Storage
     maxItemSize: Ginormous
     grid:
