@@ -57,15 +57,15 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 continue;
             }
 
-            if (HasKatana(target) && args.User != target && _net.IsServer)
+            if (HasKatana(target) && args.User != target)
             {
                 CounterSwing(args.User, target);
 
                 _stun.TryStun(args.User, ent.Comp.KillDelay, true);
                 _stun.TryStun(target, ent.Comp.KillDelay, true);
 
-                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-user", ("target", MetaData(target).EntityName)), args.User, PopupType.Medium);
-                _popup.PopupEntity(Loc.GetString("rmc-katana-cross-blades-target", ("user", MetaData(args.User).EntityName)), target, PopupType.Medium);
+                _popup.PopupPredicted(Loc.GetString("rmc-katana-cross-blades-user", ("target", MetaData(target).EntityName)), args.User, null, PopupType.Medium);
+                _popup.PopupPredicted(Loc.GetString("rmc-katana-cross-blades-target", ("user", MetaData(args.User).EntityName)), target, null, PopupType.Medium);
             }
 
             if (ent.Comp.CanStunOnKatanaClash)
@@ -131,6 +131,9 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
 
     private void CounterSwing(EntityUid user, EntityUid target)
     {
+        if (_net.IsServer)
+            return;
+
         EntityUid? katanaUid = null;
         string? animation = null;
         foreach (var held in _hands.EnumerateHeld(target))
