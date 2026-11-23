@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/22/2026 23:30:49
-  entityCount: 459
+  time: 11/23/2026 19:16:21
+  entityCount: 463
 maps: []
 grids:
 - 1
@@ -1774,6 +1774,30 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -4.5,12.5
+      parent: 1
+  - uid: 460
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 461
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 462
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,3.5
+      parent: 1
+  - uid: 463
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,4.5
       parent: 1
 - proto: RMCBedBunkBrown
   entities:

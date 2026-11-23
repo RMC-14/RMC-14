@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/20/2026 16:03:44
-  entityCount: 59595
+  time: 11/23/2026 19:21:57
+  entityCount: 59604
 maps:
 - 1
 grids:
@@ -75473,8 +75473,8 @@ entities:
     - type: Transform
       parent: 39
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 39
+      originalIconColor: '#FFFFFFFF'
 - proto: ActionToggleLight
   entities:
   - uid: 42
@@ -75484,8 +75484,8 @@ entities:
     - type: Transform
       parent: 41
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 41
+      originalIconColor: '#FFFFFFFF'
   - uid: 44
     mapInit: true
     paused: true
@@ -75493,8 +75493,8 @@ entities:
     - type: Transform
       parent: 43
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 43
+      originalIconColor: '#FFFFFFFF'
   - uid: 46
     mapInit: true
     paused: true
@@ -75502,8 +75502,8 @@ entities:
     - type: Transform
       parent: 45
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 45
+      originalIconColor: '#FFFFFFFF'
   - uid: 48
     mapInit: true
     paused: true
@@ -75511,8 +75511,8 @@ entities:
     - type: Transform
       parent: 47
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 47
+      originalIconColor: '#FFFFFFFF'
   - uid: 50
     mapInit: true
     paused: true
@@ -75520,8 +75520,8 @@ entities:
     - type: Transform
       parent: 49
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 49
+      originalIconColor: '#FFFFFFFF'
   - uid: 52
     mapInit: true
     paused: true
@@ -75529,8 +75529,8 @@ entities:
     - type: Transform
       parent: 51
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 51
+      originalIconColor: '#FFFFFFFF'
 - proto: ArmorHelmetPMCCorporate
   entities:
   - uid: 54
@@ -79047,8 +79047,8 @@ entities:
     - type: Transform
       parent: 776
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 776
+      originalIconColor: '#FFFFFFFF'
   - uid: 779
     mapInit: true
     paused: true
@@ -79056,8 +79056,8 @@ entities:
     - type: Transform
       parent: 778
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 778
+      originalIconColor: '#FFFFFFFF'
   - uid: 781
     mapInit: true
     paused: true
@@ -79065,8 +79065,8 @@ entities:
     - type: Transform
       parent: 780
     - type: Action
-      originalIconColor: '#FFFFFFFF'
       container: 780
+      originalIconColor: '#FFFFFFFF'
 - proto: CMAdvFirstAidKitFilled
   entities:
   - uid: 782
@@ -101334,7 +101334,7 @@ entities:
       containers:
       - drink
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.24290329
+      sprayFizzinessThresholdRoll: 0.20745055
     - type: MeleeWeapon
       nextAttack: -8152.2251811
     - type: EmitSoundOnCollide
@@ -103351,16 +103351,25 @@ entities:
     - type: Transform
       pos: -76.5,-74.5
       parent: 1
+    - type: ActiveRadio
+      channels:
+      - Colony
   - uid: 5089
     components:
     - type: Transform
       pos: -127.5,-61.5
       parent: 1
+    - type: ActiveRadio
+      channels:
+      - Colony
   - uid: 5090
     components:
     - type: Transform
       pos: -148.5,-66.5
       parent: 1
+    - type: ActiveRadio
+      channels:
+      - Colony
 - proto: CMJanitorialCart
   entities:
   - uid: 5141
@@ -105242,7 +105251,7 @@ entities:
       pos: -202.5,-33.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -43757.746
+      secondsUntilStateChange: -43906.527
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -138975,18 +138984,6 @@ entities:
     - type: Transform
       pos: -186.5,-146.5
       parent: 1
-- proto: CryoPod
-  entities:
-  - uid: 11702
-    components:
-    - type: Transform
-      pos: -72.5,-21.5
-      parent: 1
-  - uid: 11703
-    components:
-    - type: Transform
-      pos: -70.5,-21.5
-      parent: 1
 - proto: CyborgEndoskeleton
   entities:
   - uid: 11704
@@ -143771,18 +143768,6 @@ entities:
     - type: Transform
       pos: -18.5,-136.5
       parent: 1
-- proto: LockerAtmospherics
-  entities:
-  - uid: 12542
-    components:
-    - type: Transform
-      pos: -82.5,-73.5
-      parent: 1
-  - uid: 12543
-    components:
-    - type: Transform
-      pos: -83.5,-73.5
-      parent: 1
 - proto: MaterialCloth1
   entities:
   - uid: 12544
@@ -144333,7 +144318,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -168342.44
+      secondsUntilStateChange: -168491.22
       state: Opening
   - uid: 12644
     components:
@@ -145277,7 +145262,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCAttachmentM16StockCollapsible
+- proto: RMCAttachmentCR16StockCollapsible
   entities:
   - uid: 12817
     components:
@@ -162524,13 +162509,11 @@ entities:
   - uid: 15856
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -50.5,-37.5
       parent: 1
   - uid: 15857
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -45.5,-37.5
       parent: 1
   - uid: 15858
@@ -180969,6 +180952,18 @@ entities:
     - type: Transform
       pos: -101.18761,-42.875446
       parent: 1
+- proto: RMCCryoCell
+  entities:
+  - uid: 11703
+    components:
+    - type: Transform
+      pos: -70.5,-21.5
+      parent: 1
+  - uid: 44712
+    components:
+    - type: Transform
+      pos: -72.5,-21.5
+      parent: 1
 - proto: RMCCurtainBlack
   entities:
   - uid: 18937
@@ -181064,7 +181059,7 @@ entities:
       pos: -215.5,-133.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -111115.625
+      secondsUntilStateChange: -111264.41
       state: Opening
 - proto: RMCCurtainRed
   entities:
@@ -181257,7 +181252,7 @@ entities:
       pos: -37.5,-24.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -84717.37
+      secondsUntilStateChange: -84866.15
       state: Opening
   - uid: 18991
     components:
@@ -203987,6 +203982,17 @@ entities:
       rot: 3.141592653589793 rad
       pos: -183.5,-190.5
       parent: 1
+  - uid: 28041
+    components:
+    - type: Transform
+      pos: -73.5,-21.5
+      parent: 1
+  - uid: 36073
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -69.5,-22.5
+      parent: 1
 - proto: RMCGasPipeFourway
   entities:
   - uid: 23253
@@ -203996,6 +204002,12 @@ entities:
       parent: 1
 - proto: RMCGasPipeStraight
   entities:
+  - uid: 11702
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -70.5,-21.5
+      parent: 1
   - uid: 23254
     components:
     - type: Transform
@@ -220718,6 +220730,18 @@ entities:
       rot: 3.141592653589793 rad
       pos: -182.5,-186.5
       parent: 1
+  - uid: 44711
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -69.5,-21.5
+      parent: 1
+  - uid: 59604
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -72.5,-21.5
+      parent: 1
 - proto: RMCGasPipeTJunction
   entities:
   - uid: 26150
@@ -222547,6 +222571,30 @@ entities:
     components:
     - type: Transform
       pos: -183.5,-187.5
+      parent: 1
+  - uid: 28042
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -73.5,-22.5
+      parent: 1
+  - uid: 28043
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -72.5,-22.5
+      parent: 1
+  - uid: 28044
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -71.5,-22.5
+      parent: 1
+  - uid: 28136
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -70.5,-22.5
       parent: 1
 - proto: RMCGasTankOxygenFilled
   entities:
@@ -239082,6 +239130,18 @@ entities:
     - type: Transform
       pos: -10.5,-6.5
       parent: 1
+- proto: RMCLockerEngineerAtmos
+  entities:
+  - uid: 12542
+    components:
+    - type: Transform
+      pos: -82.5,-73.5
+      parent: 1
+  - uid: 12543
+    components:
+    - type: Transform
+      pos: -83.5,-73.5
+      parent: 1
 - proto: RMCLockerGunRed
   entities:
   - uid: 1468
@@ -241312,7 +241372,7 @@ entities:
     - type: Transform
       pos: -70.18459,-143.15448
       parent: 1
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 29389
     components:
@@ -398233,6 +398293,18 @@ entities:
           endTime: 20731.2799492
           startTime: 20741.9459247
           length: 0.4
+- proto: RMCWeaponRifleCR16
+  entities:
+  - uid: 59505
+    components:
+    - type: Transform
+      pos: -70.455414,-145.16516
+      parent: 1
+  - uid: 59506
+    components:
+    - type: Transform
+      pos: -70.43493,-145.45132
+      parent: 1
 - proto: RMCWeaponRifleM54CWhite
   entities:
   - uid: 58085
@@ -405993,18 +406065,6 @@ entities:
     components:
     - type: Transform
       pos: -70.33136,-143.42627
-      parent: 1
-- proto: WeaponRifleM16
-  entities:
-  - uid: 59505
-    components:
-    - type: Transform
-      pos: -70.455414,-145.16516
-      parent: 1
-  - uid: 59506
-    components:
-    - type: Transform
-      pos: -70.43493,-145.45132
       parent: 1
 - proto: WeaponRifleMAR40
   entities:

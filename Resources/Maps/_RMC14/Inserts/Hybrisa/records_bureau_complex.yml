@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/22/2026 23:59:06
-  entityCount: 1155
+  time: 11/23/2026 19:18:55
+  entityCount: 1161
 maps: []
 grids:
 - 1
@@ -2836,6 +2836,26 @@ entities:
     - type: Transform
       pos: 13.5875225,21.427643
       parent: 1
+  - uid: 1030
+    components:
+    - type: Transform
+      pos: 42.44392,18.583961
+      parent: 1
+  - uid: 1031
+    components:
+    - type: Transform
+      pos: 44.55313,19.555305
+      parent: 1
+  - uid: 1034
+    components:
+    - type: Transform
+      pos: 44.4073,22.576138
+      parent: 1
+  - uid: 1035
+    components:
+    - type: Transform
+      pos: 45.45938,15.522861
+      parent: 1
 - proto: CMSemioticAirlock
   entities:
   - uid: 411
@@ -3384,11 +3404,12 @@ entities:
     - type: Transform
       pos: 40.5,18.5
       parent: 1
-- proto: RMCBarrelGreen
+- proto: RMCBarrelBrown
   entities:
   - uid: 409
     components:
     - type: Transform
+      rot: 1.5707963267948966 rad
       pos: 43.5,23.5
       parent: 1
 - proto: RMCBarrelYellow
@@ -4214,6 +4235,11 @@ entities:
     - type: Transform
       pos: 43.5,22.5
       parent: 1
+  - uid: 1033
+    components:
+    - type: Transform
+      pos: 44.5,19.5
+      parent: 1
 - proto: RMCCigaretteSpent
   entities:
   - uid: 157
@@ -4661,7 +4687,7 @@ entities:
       pos: 13.5,9.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -7.765993
+      secondsUntilStateChange: -152.68402
       state: Opening
 - proto: RMCFenceHybrisa
   entities:
@@ -5438,6 +5464,11 @@ entities:
     - type: Transform
       pos: 48.43946,15.480885
       parent: 1
+  - uid: 1029
+    components:
+    - type: Transform
+      pos: 43.469646,23.859955
+      parent: 1
 - proto: RMCIntelDataTerminal
   entities:
   - uid: 957
@@ -5453,6 +5484,9 @@ entities:
     - type: Transform
       pos: 34.560802,19.70634
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLampGreen
   entities:
   - uid: 543
@@ -5460,51 +5494,81 @@ entities:
     - type: Transform
       pos: 31.465828,14.5725765
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 634
     components:
     - type: Transform
       pos: 29.480387,24.788752
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 635
     components:
     - type: Transform
       pos: 32.62622,24.694937
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 636
     components:
     - type: Transform
       pos: 35.428234,24.726208
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 715
     components:
     - type: Transform
       pos: 21.551292,11.790356
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 822
     components:
     - type: Transform
       pos: 24.287294,12.5882225
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 845
     components:
     - type: Transform
       pos: 25.366665,8.450976
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 859
     components:
     - type: Transform
       pos: 17.577196,12.563736
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 868
     components:
     - type: Transform
       pos: 17.362612,8.540109
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 1068
     components:
     - type: Transform
       pos: 37.336796,16.76057
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLampTripod
   entities:
   - uid: 408
@@ -5512,11 +5576,17 @@ entities:
     - type: Transform
       pos: 44.478584,23.573753
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
   - uid: 474
     components:
     - type: Transform
       pos: 45.535603,13.492808
       parent: 1
+    missingComponents:
+    - Tag
+    - Clothing
 - proto: RMCLightFixtureBlueOffset
   entities:
   - uid: 969
