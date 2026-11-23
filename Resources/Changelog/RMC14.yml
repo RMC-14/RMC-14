@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Heavy vehicle operator survivors now spawn with wheels inhand
-    type: Add
-  id: 3426
-  time: '2026-06-16T22:57:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10183
 - author: kleinerstation13
   changes:
   - message: Fixed the Bobda vending machine bag being meltable and strippable
@@ -4387,5 +4380,15 @@
   id: 3925
   time: '2026-11-23T03:19:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10686
+- author: GrigoriyGalintano
+  changes:
+  - message: Added intercom functionality. Use `:i`, `.i`, or `#i` next to an intercom
+      to broadcast over its selected channel.
+    type: Add
+  - message: Changed the SPP medical radio prefix from `:i` to `#m`.
+    type: Tweak
+  id: 3926
+  time: '2026-11-23T03:48:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10653
 Name: RMC14
 Order: -1
