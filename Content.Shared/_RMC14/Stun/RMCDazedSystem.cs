@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Actions;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
@@ -62,14 +63,18 @@ public sealed class RMCDazedSystem : EntitySystem
         if (!Resolve(uid, ref status, false))
             return false;
 
+        var ev = new RMCStatusEffectTimeEvent(StatusEffectDazed.Id, time);
+        RaiseLocalEvent(uid, ref ev);
+        time = ev.Duration;
+
         if (time <= TimeSpan.Zero)
             return false;
 
         var appliedEffect = false;
         if (refresh)
         {
-            _statusEffect.TryUpdateStatusEffectDuration(uid, StatusEffectDazed, time);
-            appliedEffect = true;
+            if (_statusEffect.TryUpdateStatusEffectDuration(uid, StatusEffectDazed, time))
+                appliedEffect = true;
         }
         else if (_statusEffect.TryAddStatusEffectDuration(uid, StatusEffectDazed, time))
             appliedEffect = true;
@@ -77,6 +82,6 @@ public sealed class RMCDazedSystem : EntitySystem
         if (appliedEffect && stutter)
             _stutter.DoStutter(uid, time, true, status);
 
-        return false;
+        return appliedEffect;
     }
 }

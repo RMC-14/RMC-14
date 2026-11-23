@@ -380,6 +380,8 @@
     accuracy: 110
   - type: ProjectileMaxRange
     max: 3
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
   - type: ProjectileCoverInteraction
     stoppedByCover: true
 
@@ -435,7 +437,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.1,0.1,0.1"
+          bounds: "-0.15,-0.15,0.15,0.15"
         hard: false
         mask:
         - Impassable
@@ -444,11 +446,12 @@
       fix2:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.1,0.1,0.1"
+          bounds: "-0.15,-0.15,0.15,0.15"
         hard: true
         mask:
         - Impassable
         - BarricadeImpassable
+        - HighImpassable
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_acid_ball.rsi
     layers:
@@ -471,6 +474,9 @@
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
+  - type: XenoProjectile
+    stopOnFriendlyXeno: true
+    stopOnCollide: true
 
 - type: entity
   parent: XenoBaseProjectile

@@ -625,6 +625,21 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// takes the player out of this hive's queue and cancels any larva it offered them,
+    /// which then goes to the next player in line
+    /// </summary>
+    public void RemoveFromQueue(NetUserId userId, Entity<HiveComponent> hive)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (_pendingOffers.TryGetValue(userId, out var offer) && offer.Hive.Owner == hive.Owner)
+            ExpireOffer(userId, notifyPlayer: true);
+        else
+            TryRemoveFromQueue(userId, hive);
+    }
+
     private void RemoveFromAllQueues(NetUserId netUserId)
     {
         var hives = EntityQueryEnumerator<HiveComponent>();
