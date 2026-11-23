@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ffxivsidehoes
-  changes:
-  - message: Fixed typo in white M54C's description.
-    type: Fix
-  id: 3429
-  time: '2026-06-20T23:39:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10230
 - author: BarteG44
   changes:
   - message: Added tacmap icons for UNMC vehicles
@@ -4392,5 +4385,13 @@
   id: 3928
   time: '2026-11-23T19:03:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11167
+- author: TadJohnson00
+  changes:
+  - message: Added in-hand and fill sprites for faction mugs. Now you can rep your
+      respective factions. Cheers/prost/geonbae/kanpai/et cetera!
+    type: Add
+  id: 3929
+  time: '2026-11-23T21:45:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10595
 Name: RMC14
 Order: -1
