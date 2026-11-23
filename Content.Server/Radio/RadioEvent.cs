@@ -17,8 +17,10 @@ public readonly record struct RadioReceiveEvent(
     RadioChannelPrototype Channel,
     EntityUid RadioSource,
     MsgChatMessage ChatMsg,
-    ProtoId<LanguagePrototype> Language
-);
+    ProtoId<LanguagePrototype> Language)
+{
+    public List<EntityUid>? SpeakerRelays { get; init; }
+}
 // RMC14
 
 /// <summary>

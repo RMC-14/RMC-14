@@ -37,6 +37,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Squads;
@@ -63,6 +64,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly SharedAwardRecommendationSystem _awardRecommendation = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
     private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";
@@ -678,6 +680,20 @@ public sealed class SquadSystem : EntitySystem
             return false;
 
         return member.Comp.Squad is { } memberSquad && memberSquad == squad;
+    }
+
+    public bool TryStartAnnouncementCooldown(Entity<SquadTeamComponent> squad, out TimeSpan remaining)
+    {
+        var time = _timing.CurTime;
+        if (time < squad.Comp.NextAnnouncement)
+        {
+            remaining = squad.Comp.NextAnnouncement - time;
+            return false;
+        }
+
+        squad.Comp.NextAnnouncement = time + squad.Comp.AnnouncementCooldown;
+        remaining = TimeSpan.Zero;
+        return true;
     }
 
     public void PromoteSquadLeader(Entity<SquadMemberComponent?> toPromote, EntityUid user, SpriteSpecifier.Rsi icon)
