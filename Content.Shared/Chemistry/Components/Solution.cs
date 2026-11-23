@@ -202,7 +202,7 @@ namespace Content.Shared.Chemistry.Components
             DebugTools.Assert(Contents.Select(x => x.Reagent).ToHashSet().Count == Contents.Count);
 
             // If it isn't flagged as dirty, check heat capacity is correct.
-            if (!_heatCapacityDirty)
+            if (!_heatCapacityDirty && IoCManager.Instance != null) // RMC14
             {
                 var cur = _heatCapacity;
                 _heatCapacityDirty = true;
