@@ -96,6 +96,7 @@ namespace Content.Client.Lobby
             if(_preferences.ServerDataLoaded)
                 UpdateReadyAllowed();
             _preferences.OnServerDataLoaded += UpdateReadyAllowed;
+            _preferences.OnPreferencesUpdated += UpdateReadyAllowed; // RMC14
         }
 
         private string GetReadyButtonTooltipText()
@@ -124,6 +125,7 @@ namespace Content.Client.Lobby
             _gameTicker.LobbyStatusUpdated -= LobbyStatusUpdated;
             _gameTicker.LobbyLateJoinStatusUpdated -= LobbyLateJoinStatusUpdated;
             _contentAudioSystem.LobbySoundtrackChanged -= UpdateLobbySoundtrackInfo;
+            _preferences.OnPreferencesUpdated -= UpdateReadyAllowed; // RMC14
 
             _voteManager.ClearPopupContainer();
 
@@ -347,7 +349,7 @@ namespace Content.Client.Lobby
             if (!_preferences.ServerDataLoaded)
                 return;
 
-            _readyPossibleWithCharacters = (_preferences.Preferences?.JobPrioritiesFiltered().Count ?? 0) != 0;
+            _readyPossibleWithCharacters = (_preferences.Preferences?.GetPlayableJobPriorities(_protoMan).Count ?? 0) != 0; // RMC14
 
             if (Lobby is null)
                 return;

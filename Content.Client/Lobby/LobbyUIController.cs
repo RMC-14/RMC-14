@@ -74,6 +74,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         base.Initialize();
         _prototypeManager.PrototypesReloaded += OnProtoReload;
         _preferencesManager.OnServerDataLoaded += PreferencesDataLoaded;
+        _preferencesManager.OnPreferencesUpdated += PreferencesUpdated; // RMC14
         _requirements.Updated += OnRequirementsUpdated;
         OnAnyCharacterOrJobChange += RefreshLobbyPreview;
 
@@ -136,6 +137,24 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             }
         }
         OnAnyCharacterOrJobChange?.Invoke();
+    }
+
+    // RMC14
+    private void PreferencesUpdated()
+    {
+        if (_stateManager.CurrentState is not LobbyState)
+            return;
+
+        RefreshLobbyPreview();
+
+        if (_characterSetup == null)
+            return;
+
+        var showingJobPriorities = _jobPriorityEditor?.Visible == true && _profileEditor?.Visible != true;
+        _characterSetup.ReloadCharacterPickers(selectJobPriorities: showingJobPriorities);
+
+        if (_jobPriorityEditor is { } jobPriorityEditor && !jobPriorityEditor.IsDirty())
+            jobPriorityEditor.LoadJobPriorities();
     }
 
     private void PreferencesDataLoaded()
@@ -236,6 +255,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private void SaveJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities)
     {
         _preferencesManager.UpdateJobPriorities(newJobPriorities);
+        if (_jobPriorityEditor != null)
+            _preferencesManager.UpdatePlayerSettings(_jobPriorityEditor.SelectedSettings); // RMC14
         OnAnyCharacterOrJobChange?.Invoke();
         _profileEditor?.RefreshPreviewForPriorityUpdate();
         _jobPriorityEditor?.LoadJobPriorities();
@@ -387,24 +408,6 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             _characterSetup?.ReloadCharacterPickers();
         };
 
-        _characterSetup.OverrideJobPriorities += slot =>
-        {
-            if (!_preferencesManager.Preferences!.TryGetHumanoidInSlot(slot, out var humanoid) ||
-                humanoid == null)
-            {
-                return;
-            }
-
-            var priorities = humanoid.JobPriorities
-                .Where(kvp => kvp.Value != JobPriority.Never)
-                .ToDictionary();
-            _preferencesManager.UpdateJobPriorities(priorities);
-            OnAnyCharacterOrJobChange?.Invoke();
-            _profileEditor?.RefreshPreviewForPriorityUpdate();
-            _jobPriorityEditor?.LoadJobPriorities();
-            _characterSetup?.ReloadCharacterPickers(selectJobPriorities: false);
-        };
-
         if (_stateManager.CurrentState is LobbyState lobby)
         {
             lobby.Lobby?.CharacterSetupState.AddChild(_characterSetup);
@@ -471,7 +474,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
     private JobPrototype? GetPreferredJob(HumanoidCharacterProfile profile)
     {
-        var globalPriorities = _preferencesManager.Preferences?.JobPriorities ?? [];
+        IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> globalPriorities = _preferencesManager.Preferences?.JobPriorities ?? new Dictionary<ProtoId<JobPrototype>, JobPriority>(); // RMC14
         var candidates = profile.JobPreferences
             .Where(jobId => _prototypeManager.HasIndex<JobPrototype>(jobId))
             .Select(jobId => _prototypeManager.Index<JobPrototype>(jobId))
@@ -482,13 +485,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         JobPriority GetEffectivePriority(JobPrototype job)
         {
-            if (globalPriorities.TryGetValue(job.ID, out var globalPriority))
-                return globalPriority;
-
-            if (profile.JobPriorities.TryGetValue(job.ID, out var profilePriority))
-                return profilePriority;
-
-            return JobPriority.Never;
+            return globalPriorities.GetValueOrDefault(job.ID, JobPriority.Never);
         }
 
         candidates.Sort((a, b) =>

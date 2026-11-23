@@ -110,7 +110,7 @@ namespace Content.Client.Lobby.UI
 
         private List<SpeciesPrototype> _species = new();
 
-        private List<(ProtoId<JobPrototype> JobId, RequirementsSelector PrioritySelector, bool IsToggle)> _jobPriorities = new();
+        private List<(ProtoId<JobPrototype> JobId, RequirementsSelector PrioritySelector)> _jobPriorities = new(); // RMC14
 
         private List<(string JobId, OptionButton Button, List<ProtoId<RankPrototype>?> RankIds)> _rankPriorities = new();
 
@@ -192,7 +192,12 @@ namespace Content.Client.Lobby.UI
 
             ResetButton.OnPressed += args =>
             {
-                SetProfile((HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter, _preferencesManager.Preferences?.SelectedCharacterIndex);
+                // RMC14
+                if (CharacterSlot is { } slot)
+                    SetProfile(slot);
+                else
+                    ResetToDefault();
+                // RMC14
             };
 
             SaveButton.OnPressed += args =>
@@ -454,33 +459,6 @@ namespace Content.Client.Lobby.UI
 
             #endregion SquadPreference
 
-            #region PlaytimePerks
-
-            PlaytimePerksButton.OnPressed += args =>
-            {
-                SetPlaytimePerks(args.Button.Pressed);
-            };
-
-            #endregion
-
-            #region Xeno Prefix
-
-            XenoPrefix.OnTextChanged += args =>
-            {
-                SetXenoPrefix(args.Text);
-            };
-
-            #endregion
-
-            #region Xeno Postfix
-
-            XenoPostfix.OnTextChanged += args =>
-            {
-                SetXenoPostfix(args.Text);
-            };
-
-            #endregion
-
             #region Eyes
 
             EyeColorPicker.OnEyeColorPicked += newColor =>
@@ -500,21 +478,6 @@ namespace Content.Client.Lobby.UI
             #region Jobs
 
             TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-jobs-tab"));
-
-            PreferenceUnavailableButton.AddItem(
-                Loc.GetString("humanoid-profile-editor-preference-unavailable-stay-in-lobby-button"),
-                (int) PreferenceUnavailableMode.StayInLobby);
-            PreferenceUnavailableButton.AddItem(
-                Loc.GetString("humanoid-profile-editor-preference-unavailable-spawn-as-overflow-button",
-                              ("overflowJob", Loc.GetString(SharedGameTicker.FallbackOverflowJobName))),
-                (int) PreferenceUnavailableMode.SpawnAsOverflow);
-
-            PreferenceUnavailableButton.OnItemSelected += args =>
-            {
-                PreferenceUnavailableButton.SelectId(args.Id);
-                Profile = Profile?.WithPreferenceUnavailable((PreferenceUnavailableMode) args.Id);
-                SetDirty();
-            };
 
             _jobCategories = new Dictionary<string, BoxContainer>();
 
@@ -843,7 +806,7 @@ namespace Content.Client.Lobby.UI
                 selector.Select(Profile?.AntagPreferences.Contains(antag.ID) == true ? 0 : 1);
 
                 var requirements = _entManager.System<SharedRoleSystem>().GetAntagRequirement(antag);
-                if (!_requirements.CheckRoleRequirements(requirements, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+                if (!_requirements.CheckRoleRequirements(requirements, Profile, out var reason)) // RMC14
                 {
                     selector.LockRequirements(reason);
                     Profile = Profile?.WithAntagPreference(antag.ID, false);
@@ -877,7 +840,11 @@ namespace Content.Client.Lobby.UI
         private void SetDirty()
         {
             // If it equals default then reset the button.
-            if (Profile == null || _preferencesManager.Preferences?.SelectedCharacter.MemberwiseEquals(Profile) == true)
+            // RMC14
+            if (Profile == null ||
+                CharacterSlot is { } slot &&
+                _preferencesManager.Preferences?.TryGetHumanoidInSlot(slot, out var saved) == true &&
+                saved.MemberwiseEquals(Profile))
             {
                 IsDirty = false;
                 return;
@@ -967,9 +934,6 @@ namespace Content.Client.Lobby.UI
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
-            UpdatePlaytimePerks();
-            UpdateXenoPrefix();
-            UpdateXenoPostfix();
 
             RefreshAntags();
             RefreshJobs();
@@ -978,11 +942,6 @@ namespace Content.Client.Lobby.UI
             RefreshTraits();
             RefreshFlavorText();
             ReloadPreview();
-
-            if (Profile != null)
-            {
-                PreferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
-            }
         }
 
         public void SetProfile(int slot)
@@ -1060,13 +1019,13 @@ namespace Content.Client.Lobby.UI
 
             departments.Sort(DepartmentUIComparer.Instance);
 
+            // RMC14
             var items = new[]
             {
-                ("humanoid-profile-editor-job-priority-never-button", (int) JobPriority.Never),
-                ("humanoid-profile-editor-job-priority-low-button", (int) JobPriority.Low),
-                ("humanoid-profile-editor-job-priority-medium-button", (int) JobPriority.Medium),
-                ("humanoid-profile-editor-job-priority-high-button", (int) JobPriority.High),
+                ("rmc-humanoid-profile-editor-job-no-button", (int) JobPriority.Never),
+                ("rmc-humanoid-profile-editor-job-yes-button", (int) JobPriority.Low),
             };
+            // RMC14
             var survivorVariantJobs = new Dictionary<ProtoId<JobPrototype>, List<SurvivorVariantJobPreferences.MapVariantJobs>>();
             var compFactory = IoCManager.Resolve<IComponentFactory>();
             if (_prototypeManager.HasIndex(SurvivorVariantJobPreferences.SurvivorDepartment))
@@ -1124,12 +1083,18 @@ namespace Content.Client.Lobby.UI
 
                 var departmentJobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
                     .Where(job => job.SetPreference)
-                    .Where(job => !job.Hidden);
+                    .Where(job => !job.Hidden)
+                    .Where(job => !PlayerPreferences.IsCharacterlessJob(job.ID, _prototypeManager)); // RMC14
 
                 if (department.ID == SurvivorVariantJobPreferences.SurvivorDepartment)
                     departmentJobs = departmentJobs.Where(job => !survivorVariantJobIds.Contains(job.ID));
 
                 var jobs = departmentJobs.ToArray();
+
+                // RMC14
+                if (jobs.Length == 0)
+                    category.Visible = false;
+                // RMC14
 
                 Array.Sort(jobs, JobUIComparer.Instance);
                 var titleSize = GetJobSelectorTitleSize(jobs);
@@ -1549,12 +1514,16 @@ namespace Content.Client.Lobby.UI
                 if (prefs == null)
                     return;
 
-                var profilesToShow = new Dictionary<int, HumanoidCharacterProfile>(prefs.GetAllProfilesForJob(job));
+                var profilesToShow = new Dictionary<int, HumanoidCharacterProfile>();
+                foreach (var (slot, profile) in prefs.GetCharactersForJob(job.ID, includeDisabled: true))
+                {
+                    profilesToShow[slot] = profile;
+                }
 
                 if (CharacterSlot.HasValue)
                 {
                     if (Profile is HumanoidCharacterProfile editedHumanoid &&
-                        editedHumanoid.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) > JobPriority.Never)
+                        editedHumanoid.JobPreferences.Contains(job.ID))
                         profilesToShow[CharacterSlot.Value] = editedHumanoid;
                     else
                         profilesToShow.Remove(CharacterSlot.Value);
@@ -1578,14 +1547,14 @@ namespace Content.Client.Lobby.UI
 
             void UpdateStyle()
             {
-                var active = (Profile?.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) ?? JobPriority.Never) > JobPriority.Never;
+                var active = Profile?.JobPreferences.Contains(job.ID) ?? false;
                 if (active)
                     prioritizeBtn.StyleClasses.Add(StyleNano.StyleClassButtonColorGreen);
                 else
                     prioritizeBtn.StyleClasses.Remove(StyleNano.StyleClassButtonColorGreen);
             }
 
-            if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter, out var reason))
+            if (!_requirements.IsAllowed(job, Profile, out var reason)) // RMC14
             {
                 prioritizeBtn.Disabled = true;
                 var tooltip = new Tooltip();
@@ -1596,10 +1565,9 @@ namespace Content.Client.Lobby.UI
             {
                 prioritizeBtn.OnPressed += _ =>
                 {
-                    var current = Profile?.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) ?? JobPriority.Never;
-                    var next = current > JobPriority.Never ? JobPriority.Never : JobPriority.Low;
-                    Profile = Profile?.WithJobPriority(job.ID, next);
-                    JobOverride = next > JobPriority.Never ? job : null;
+                    var next = !(Profile?.JobPreferences.Contains(job.ID) ?? false);
+                    Profile = Profile?.WithJobPreference(job.ID, next);
+                    JobOverride = next ? job : null;
 
                     UpdateStyle();
                     RefreshSprites();
@@ -1644,7 +1612,6 @@ namespace Content.Client.Lobby.UI
             (string, int)[] items,
             Thickness? margin = null,
             int titleSize = 200,
-            bool isToggle = false,
             bool showLoadout = true,
             string? titleOverride = null)
         {
@@ -1669,7 +1636,7 @@ namespace Content.Client.Lobby.UI
             icon.Texture = _sprite.Frame0(jobIcon.Icon);
             selector.Setup(items, titleOverride ?? job.LocalizedName, titleSize, job.LocalizedDescription, icon, job.Guides);
 
-            if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+            if (!_requirements.IsAllowed(job, Profile, out var reason)) // RMC14
             {
                 selector.LockRequirements(reason);
             }
@@ -1678,41 +1645,27 @@ namespace Content.Client.Lobby.UI
                 selector.UnlockRequirements();
             }
 
+            // RMC14 begin
             selector.OnSelected += selectedPrio =>
             {
-                var selectedJobPrio = isToggle && selectedPrio != (int) JobPriority.Never
-                    ? JobPriority.Low
-                    : (JobPriority) selectedPrio;
-                Profile = Profile?.WithJobPriority(job.ID, selectedJobPrio);
+                var enabled = selectedPrio != (int) JobPriority.Never;
+                Profile = Profile?.WithJobPreference(job.ID, enabled);
 
-                foreach (var (jobId, other, otherIsToggle) in _jobPriorities)
+                foreach (var (jobId, other) in _jobPriorities)
                 {
                     // Sync other selectors with the same job in case of multiple department jobs
                     if (jobId == job.ID)
-                    {
-                        other.Select(isToggle ? (int) selectedJobPrio : selectedPrio);
-                        continue;
-                    }
-
-                    if (isToggle || otherIsToggle)
-                        continue;
-
-                    if (selectedJobPrio != JobPriority.High || (JobPriority) other.Selected != JobPriority.High)
-                        continue;
-
-                    // Lower any other high priorities to medium.
-                    other.Select((int)JobPriority.Medium);
-                    Profile = Profile?.WithJobPriority(jobId, JobPriority.Medium);
+                        other.Select(selectedPrio);
                 }
 
-                // TODO: Only reload on high change (either to or from).
+                JobOverride = enabled ? job : null;
                 ReloadPreview();
-
                 UpdateJobPriorities();
                 SetDirty();
             };
+            // RMC14 end
 
-            _jobPriorities.Add((job.ID, selector, isToggle));
+            _jobPriorities.Add((job.ID, selector));
             jobContainer.AddChild(selector);
 
             if (!showLoadout)
@@ -2096,24 +2049,6 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        private void SetPlaytimePerks(bool playtimePerks)
-        {
-            Profile = Profile?.WithPlaytimePerks(playtimePerks);
-            SetDirty();
-        }
-
-        private void SetXenoPrefix(string prefix)
-        {
-            Profile = Profile?.WithXenoPrefix(prefix);
-            SetDirty();
-        }
-
-        private void SetXenoPostfix(string postfix)
-        {
-            Profile = Profile?.WithXenoPostfix(postfix);
-            SetDirty();
-        }
-
         public bool IsDirty
         {
             get => _isDirty;
@@ -2150,13 +2085,11 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         private void UpdateJobPriorities()
         {
-            foreach (var (jobId, prioritySelector, isToggle) in _jobPriorities)
+            // RMC14
+            foreach (var (jobId, prioritySelector) in _jobPriorities)
             {
-                var priority = Profile?.JobPriorities.GetValueOrDefault(jobId, JobPriority.Never) ?? JobPriority.Never;
-                if (isToggle && priority > JobPriority.Never)
-                    priority = JobPriority.Low;
-
-                prioritySelector.Select((int) priority);
+                var enabled = Profile?.JobPreferences.Contains(jobId) ?? false;
+                prioritySelector.Select((int) (enabled ? JobPriority.Low : JobPriority.Never));
             }
 
             foreach (var (_, updateStyle) in _survivorVariantPriorityButtons)
@@ -2482,21 +2415,6 @@ namespace Content.Client.Lobby.UI
             NamedItems.Helmet.Text = Profile?.NamedItems.HelmetName ?? string.Empty;
             NamedItems.Armor.Text = Profile?.NamedItems.ArmorName ?? string.Empty;
             NamedItems.Sentry.Text = Profile?.NamedItems.SentryName ?? string.Empty;
-        }
-
-        private void UpdatePlaytimePerks()
-        {
-            PlaytimePerksButton.Pressed = Profile?.PlaytimePerks ?? true;
-        }
-
-        private void UpdateXenoPrefix()
-        {
-            XenoPrefix.Text = Profile?.XenoPrefix ?? string.Empty;
-        }
-
-        private void UpdateXenoPostfix()
-        {
-            XenoPostfix.Text = Profile?.XenoPostfix ?? string.Empty;
         }
 
         private void UpdateSaveButton()

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Content.Server.Database.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteServerDbContext))]
-    [Migration("20260306090216_ProfileEnabled")]
-    partial class ProfileEnabled
+    [Migration("20261122084559_RMCMultiCharacterCleanup")]
+    partial class RMCMultiCharacterCleanup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -600,6 +600,31 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("connection_log", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.DisabledInsert", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("disabled_insert_id");
+
+                    b.Property<string>("InsertName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("insert_name");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_disabled_insert");
+
+                    b.HasIndex("ProfileId", "InsertName")
+                        .IsUnique();
+
+                    b.ToTable("disabled_insert", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
                 {
                     b.Property<int>("Id")
@@ -795,10 +820,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("char_name");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("enabled");
-
                     b.Property<string>("EyeColor")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -838,12 +859,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
-                    b.Property<bool>("PlaytimePerks")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(true)
-                        .HasColumnName("playtime_perks");
-
                     b.Property<int>("PreferenceId")
                         .HasColumnType("INTEGER")
                         .HasColumnName("preference_id");
@@ -874,20 +889,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("species");
-
-                    b.Property<string>("XenoPostfix")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValue("")
-                        .HasColumnName("xeno_postfix");
-
-                    b.Property<string>("XenoPrefix")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValue("")
-                        .HasColumnName("xeno_prefix");
 
                     b.HasKey("Id")
                         .HasName("PK_profile");
@@ -1123,6 +1124,18 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasDatabaseName("IX_rmc_commendations_round_id");
 
                     b.ToTable("rmc_commendations", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDisabledProfile", b =>
+                {
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.HasKey("ProfileId")
+                        .HasName("PK_rmc_disabled_profiles");
+
+                    b.ToTable("rmc_disabled_profiles", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCDiscordAccount", b =>
@@ -1402,6 +1415,56 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("rmc_player_action_order", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerJobPriority", b =>
+                {
+                    b.Property<int>("PreferenceId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("preference_id");
+
+                    b.Property<string>("JobName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("job_name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("priority");
+
+                    b.HasKey("PreferenceId", "JobName")
+                        .HasName("PK_rmc_player_job_priorities");
+
+                    b.ToTable("rmc_player_job_priorities", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerPreference", b =>
+                {
+                    b.Property<int>("PreferenceId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("preference_id");
+
+                    b.Property<bool>("PlaytimePerks")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("playtime_perks");
+
+                    b.Property<int>("PreferenceUnavailable")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("preference_unavailable");
+
+                    b.Property<string>("XenoPostfix")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("xeno_postfix");
+
+                    b.Property<string>("XenoPrefix")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("xeno_prefix");
+
+                    b.HasKey("PreferenceId")
+                        .HasName("PK_rmc_player_preferences");
+
+                    b.ToTable("rmc_player_preferences", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
                 {
                     b.Property<Guid>("PlayerId")
@@ -1448,6 +1511,35 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasName("PK_rmc_squad_preferences");
 
                     b.ToTable("rmc_squad_preferences", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.Rank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rank_id");
+
+                    b.Property<string>("JobName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("job_name");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.Property<string>("RankName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("rank_name");
+
+                    b.HasKey("Id")
+                        .HasName("PK_rank");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("rank", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
@@ -2127,6 +2219,18 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Server");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.DisabledInsert", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("DisabledInserts")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_disabled_insert_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Job", b =>
                 {
                     b.HasOne("Content.Server.Database.Profile", "Profile")
@@ -2334,6 +2438,18 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Round");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCDisabledProfile", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithOne("RMCDisabled")
+                        .HasForeignKey("Content.Server.Database.RMCDisabledProfile", "ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_disabled_profiles_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCLinkedAccount", b =>
                 {
                     b.HasOne("Content.Server.Database.RMCDiscordAccount", "Discord")
@@ -2474,6 +2590,30 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerJobPriority", b =>
+                {
+                    b.HasOne("Content.Server.Database.Preference", "Preference")
+                        .WithMany("RMCJobPriorities")
+                        .HasForeignKey("PreferenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_player_job_priorities_preference_preference_id");
+
+                    b.Navigation("Preference");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerPreference", b =>
+                {
+                    b.HasOne("Content.Server.Database.Preference", "Preference")
+                        .WithOne("RMCPreference")
+                        .HasForeignKey("Content.Server.Database.RMCPlayerPreference", "PreferenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_player_preferences_preference_preference_id");
+
+                    b.Navigation("Preference");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2508,6 +2648,18 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_rmc_squad_preferences_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.Rank", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("Ranks")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rank_profile_profile_id");
 
                     b.Navigation("Profile");
                 });
@@ -2816,17 +2968,27 @@ namespace Content.Server.Database.Migrations.Sqlite
             modelBuilder.Entity("Content.Server.Database.Preference", b =>
                 {
                     b.Navigation("Profiles");
+
+                    b.Navigation("RMCJobPriorities");
+
+                    b.Navigation("RMCPreference");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Profile", b =>
                 {
                     b.Navigation("Antags");
 
+                    b.Navigation("DisabledInserts");
+
                     b.Navigation("Jobs");
 
                     b.Navigation("Loadouts");
 
                     b.Navigation("NamedItems");
+
+                    b.Navigation("RMCDisabled");
+
+                    b.Navigation("Ranks");
 
                     b.Navigation("SquadPreference");
 

@@ -297,3 +297,43 @@ public sealed class RMCChatBans
     public Player? LastEditedBy { get; set; }
     public DateTime? LastEditedAt { get; set; }
 }
+
+[Table("rmc_player_job_priorities")]
+[PrimaryKey(nameof(PreferenceId), nameof(JobName))]
+public sealed class RMCPlayerJobPriority
+{
+    [ForeignKey(nameof(Preference))]
+    public int PreferenceId { get; set; }
+
+    public Preference Preference { get; set; } = default!;
+
+    public string JobName { get; set; } = default!;
+
+    public DbJobPriority Priority { get; set; }
+}
+
+[Table("rmc_player_preferences")]
+public sealed class RMCPlayerPreference
+{
+    [Key, ForeignKey(nameof(Preference))]
+    public int PreferenceId { get; set; }
+
+    public Preference Preference { get; set; } = default!;
+
+    public DbPreferenceUnavailableMode PreferenceUnavailable { get; set; }
+
+    public string XenoPrefix { get; set; } = string.Empty;
+
+    public string XenoPostfix { get; set; } = string.Empty;
+
+    public bool PlaytimePerks { get; set; } = true;
+}
+
+[Table("rmc_disabled_profiles")]
+public sealed class RMCDisabledProfile
+{
+    [Key, ForeignKey(nameof(Profile))]
+    public int ProfileId { get; set; }
+
+    public Profile Profile { get; set; } = default!;
+}

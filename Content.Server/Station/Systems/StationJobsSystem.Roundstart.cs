@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.Antag;
 using Content.Server.Players.PlayTimeTracking;
-using Content.Server.Preferences.Managers;
+using Content.Server._RMC14.Preferences;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
 using Content.Shared.Preferences;
@@ -21,7 +21,7 @@ public sealed partial class StationJobsSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IBanManager _banManager = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly IServerPreferencesManager _serverPreferences = default!;
+    [Dependency] private readonly RMCCharacterSelectionSystem _rmcCharacters = default!;
 
     private Dictionary<int, HashSet<string>> _jobsByWeight = default!;
     private List<int> _orderedWeights = default!;
@@ -56,7 +56,8 @@ public sealed partial class StationJobsSystem
     /// as there may end up being more round-start slots than available slots, which can cause weird behavior.
     /// A warning to all who enter ye cursed lands: This function is long and mildly incomprehensible. Best used without touching.
     /// </remarks>
-    public Dictionary<NetUserId, (ProtoId<JobPrototype>?, EntityUid)> AssignJobs(Dictionary<NetUserId, HumanoidCharacterProfile> profiles, IReadOnlyList<EntityUid> stations, bool useRoundStartJobs = true)
+    public Dictionary<NetUserId, (ProtoId<JobPrototype>?, EntityUid)> AssignJobs(Dictionary<NetUserId, HumanoidCharacterProfile> profiles, IReadOnlyList<EntityUid> stations, bool useRoundStartJobs = true,
+        IReadOnlyDictionary<NetUserId, Dictionary<ProtoId<JobPrototype>, JobPriority>>? jobPriorities = null) // RMC14
     {
         DebugTools.Assert(stations.Count > 0);
 
@@ -67,6 +68,9 @@ public sealed partial class StationJobsSystem
 
         // We need to modify this collection later, so make a copy of it.
         profiles = profiles.ShallowClone();
+
+        // RMC14
+        jobPriorities ??= profiles.Keys.ToDictionary(p => p, p => _rmcCharacters.GetPlayableJobPriorities(p));
 
         // Player <-> (job, station)
         var assigned = new Dictionary<NetUserId, (ProtoId<JobPrototype>?, EntityUid)>(profiles.Count);
@@ -111,7 +115,7 @@ public sealed partial class StationJobsSystem
                 if (profiles.Count == 0)
                     goto endFunc;
 
-                var candidates = GetPlayersJobCandidates(weight, selectedPriority, profiles);
+                var candidates = GetPlayersJobCandidates(weight, selectedPriority, profiles, jobPriorities); // RMC14
 
                 var optionsRemaining = 0;
 
@@ -294,8 +298,7 @@ public sealed partial class StationJobsSystem
                 continue;
             }
 
-            var profile = profiles[player];
-            if (profile.PreferenceUnavailable != PreferenceUnavailableMode.SpawnAsOverflow)
+            if (_rmcCharacters.GetPreferenceUnavailable(player) != PreferenceUnavailableMode.SpawnAsOverflow) // RMC14
             {
                 assignedJobs.Add(player, (null, EntityUid.Invalid));
                 continue;
@@ -343,7 +346,8 @@ public sealed partial class StationJobsSystem
     /// <param name="selectedPriority">Priority to find, if any.</param>
     /// <param name="profiles">Profiles to look in.</param>
     /// <returns>Players and a list of their matching jobs.</returns>
-    private Dictionary<NetUserId, List<string>> GetPlayersJobCandidates(int? weight, JobPriority? selectedPriority, Dictionary<NetUserId, HumanoidCharacterProfile> profiles)
+    private Dictionary<NetUserId, List<string>> GetPlayersJobCandidates(int? weight, JobPriority? selectedPriority, Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
+        IReadOnlyDictionary<NetUserId, Dictionary<ProtoId<JobPrototype>, JobPriority>>? jobPriorities) // RMC14
     {
         var outputDict = new Dictionary<NetUserId, List<string>>(profiles.Count);
 
@@ -351,21 +355,10 @@ public sealed partial class StationJobsSystem
         {
             var roleBans = _banManager.GetJobBans(player);
             var antagBlocked = _antag.GetPreSelectedAntagSessions();
-            Dictionary<ProtoId<JobPrototype>, JobPriority> playerJobs;
-
-            if (_serverPreferences.TryGetCachedPreferences(player, out var playerPreferences))
-            {
-                playerJobs = playerPreferences.JobPrioritiesFiltered();
-            }
-            else
-            {
-                // Tests & other synthetic callers may provide profiles without a backing cached preference entry
-                playerJobs = profile.JobPriorities
-                    .Where(kvp => kvp.Value != JobPriority.Never)
-                    .ToDictionary();
-            }
-
+            // RMC14
+            var playerJobs = jobPriorities?.GetValueOrDefault(player) ?? _rmcCharacters.GetPlayableJobPriorities(player);
             var profileJobs = playerJobs.Keys.ToList();
+            // RMC14
             var ev = new StationJobsGetCandidatesEvent(player, profileJobs);
             RaiseLocalEvent(ref ev);
 
@@ -373,7 +366,7 @@ public sealed partial class StationJobsSystem
 
             foreach (var jobId in profileJobs)
             {
-                var priority = playerJobs[jobId];
+                var priority = playerJobs[jobId]; // RMC14
 
                 if (!(priority == selectedPriority || selectedPriority is null))
                     continue;
@@ -390,7 +383,7 @@ public sealed partial class StationJobsSystem
                 if (!(roleBans == null || !roleBans.Contains(jobId)))
                     continue;
 
-                availableJobs ??= new List<string>(playerJobs.Count);
+                availableJobs ??= new List<string>(playerJobs.Count); // RMC14
                 availableJobs.Add(jobId);
             }
 

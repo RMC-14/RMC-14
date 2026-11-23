@@ -1,4 +1,5 @@
 #nullable enable
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Content.Server.GameTicking;
@@ -8,11 +9,13 @@ using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Robust.Client;
 using Robust.Server.Player;
 using Robust.Shared.Exceptions;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.IntegrationTests.Pair;
@@ -94,6 +97,11 @@ public sealed partial class TestPair : IAsyncDisposable
         foreach (var user in _modifiedProfiles)
         {
             await Server.WaitPost(() => prefMan.SetProfile(user, 0, new HumanoidCharacterProfile()).Wait());
+            var defaultPriorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>
+            {
+                { SharedGameTicker.FallbackOverflowJob, JobPriority.High },
+            };
+            await Server.WaitPost(() => prefMan.SetJobPriorities(user, defaultPriorities).Wait());
         }
         _modifiedProfiles.Clear();
     }

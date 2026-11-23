@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
-using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -33,15 +32,11 @@ namespace Content.Shared.Preferences
         private static readonly Regex RestrictedNameRegex = new(@"[^A-Za-z0-9 '\-]");
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
-        /// <summary>
-        /// Job preferences for initial spawn.
-        /// </summary>
+        // RMC14
         [DataField]
-        private Dictionary<ProtoId<JobPrototype>, JobPriority> _jobPriorities = new()
+        private HashSet<ProtoId<JobPrototype>> _jobPreferences = new()
         {
-            {
-                SharedGameTicker.FallbackOverflowJob, JobPriority.High
-            }
+            SharedGameTicker.FallbackOverflowJob,
         };
 
         public const string SurvivorBaseScenarioPrefix = "!base:";
@@ -190,15 +185,8 @@ namespace Content.Shared.Preferences
         [DataField]
         public bool OnlyUsePreferredSquads { get; private set; }
 
-        /// <summary>
-        /// <see cref="_jobPriorities"/>
-        /// </summary>
-        public IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> JobPriorities => _jobPriorities;
-
-        /// <summary>
-        /// Jobs this profile is willing to take.
-        /// </summary>
-        public IReadOnlySet<ProtoId<JobPrototype>> JobPreferences => _jobPriorities.Keys.ToHashSet();
+        // RMC14
+        public IReadOnlySet<ProtoId<JobPrototype>> JobPreferences => _jobPreferences;
 
         /// <summary>
         /// <see cref="_disabledSurvivorInserts"/>
@@ -225,18 +213,7 @@ namespace Content.Shared.Preferences
         [DataField]
         public SharedRMCNamedItems NamedItems { get; private set; } = new();
 
-        [DataField]
-        public bool PlaytimePerks { get; private set; } = true;
-
-        [DataField]
-        public string XenoPrefix { get; private set; } = string.Empty;
-
-        [DataField]
-        public string XenoPostfix { get; private set; } = string.Empty;
-
-        /// <summary>
-        /// Whether this character slot is active for multi-slot assignment.
-        /// </summary>
+        // RMC14
         [DataField]
         public bool Enabled { get; private set; } = true;
 
@@ -253,15 +230,13 @@ namespace Content.Shared.Preferences
             Dictionary<ProtoId<JobPrototype>, ProtoId<RankPrototype>?> rankPreference,
             HashSet<EntProtoId<SquadTeamComponent>>? squadPreferences,
             bool onlyUsePreferredSquads,
-            Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
+            HashSet<ProtoId<JobPrototype>> jobPreferences, // RMC14
             PreferenceUnavailableMode preferenceUnavailable,
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
             SharedRMCNamedItems namedItems,
-            bool playtimePerks,
-            string xenoPrefix,
-            string xenoPostfix,
+            // RMC14
             bool enabled = true,
             HashSet<string>? disabledSurvivorInserts = null)
         {
@@ -277,17 +252,14 @@ namespace Content.Shared.Preferences
             _rankPreferences = rankPreference;
             _squadPreferences = squadPreferences;
             OnlyUsePreferredSquads = onlyUsePreferredSquads;
-            _jobPriorities = jobPriorities;
+            _jobPreferences = jobPreferences; // RMC14
             PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
-            _jobPriorities = SanitizeJobPriorities(_jobPriorities);
 
             NamedItems = namedItems;
-            PlaytimePerks = playtimePerks;
-            XenoPrefix = xenoPrefix;
-            XenoPostfix = xenoPostfix;
+            // RMC14
             Enabled = enabled;
             _disabledSurvivorInserts = disabledSurvivorInserts ?? new();
         }
@@ -306,15 +278,12 @@ namespace Content.Shared.Preferences
                 new Dictionary<ProtoId<JobPrototype>, ProtoId<RankPrototype>?>(other.RankPreferences),
                 other._squadPreferences != null ? new HashSet<EntProtoId<SquadTeamComponent>>(other._squadPreferences) : null,
                 other.OnlyUsePreferredSquads,
-                new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
+                new HashSet<ProtoId<JobPrototype>>(other._jobPreferences), // RMC14
                 other.PreferenceUnavailable,
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
                 other.NamedItems,
-                other.PlaytimePerks,
-                other.XenoPrefix,
-                other.XenoPostfix,
                 other.Enabled,
                 new HashSet<string>(other._disabledSurvivorInserts))
         {
@@ -480,21 +449,6 @@ namespace Content.Shared.Preferences
             return new(this) { OnlyUsePreferredSquads = onlyUsePreferredSquads };
         }
 
-        public HumanoidCharacterProfile WithPlaytimePerks(bool playtimePerks)
-        {
-            return new(this) { PlaytimePerks = playtimePerks };
-        }
-
-        public HumanoidCharacterProfile WithXenoPrefix(string prefix)
-        {
-            return new(this) { XenoPrefix = prefix };
-        }
-
-        public HumanoidCharacterProfile WithXenoPostfix(string postfix)
-        {
-            return new(this) { XenoPostfix = postfix };
-        }
-
         public HumanoidCharacterProfile WithEnabled(bool enabled)
         {
             return new(this) { Enabled = enabled };
@@ -511,74 +465,29 @@ namespace Content.Shared.Preferences
             return new(this) { _disabledSurvivorInserts = inserts };
         }
 
-        public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
+        // RMC14
+        public HumanoidCharacterProfile WithJobPreference(ProtoId<JobPrototype> jobId, bool pref)
         {
-            var dictionary = SanitizeJobPriorities(new Dictionary<ProtoId<JobPrototype>, JobPriority>(jobPriorities));
-
-            return new(this)
-            {
-                _jobPriorities = dictionary
-            };
-        }
-
-        private static Dictionary<ProtoId<JobPrototype>, JobPriority> SanitizeJobPriorities(
-            Dictionary<ProtoId<JobPrototype>, JobPriority> priorities)
-        {
-            var sanitized = new Dictionary<ProtoId<JobPrototype>, JobPriority>(priorities.Count);
-            var hasHighPriority = false;
-
-            foreach (var (job, priority) in priorities)
-            {
-                if (priority == JobPriority.Never)
-                    continue;
-
-                if (priority == JobPriority.High)
-                {
-                    if (hasHighPriority)
-                        sanitized[job] = JobPriority.Medium;
-                    else
-                    {
-                        sanitized[job] = JobPriority.High;
-                        hasHighPriority = true;
-                    }
-
-                    continue;
-                }
-
-                sanitized[job] = priority;
-            }
-
-            return sanitized;
-        }
-
-        public HumanoidCharacterProfile WithJobPriority(ProtoId<JobPrototype> jobId, JobPriority priority)
-        {
-            var dictionary = new Dictionary<ProtoId<JobPrototype>, JobPriority>(_jobPriorities);
-            if (priority == JobPriority.Never)
-            {
-                dictionary.Remove(jobId);
-            }
-            else if (priority == JobPriority.High)
-            {
-                // There can only ever be one high priority job.
-                foreach (var (job, value) in dictionary)
-                {
-                    if (value == JobPriority.High)
-                        dictionary[job] = JobPriority.Medium;
-                }
-
-                dictionary[jobId] = priority;
-            }
+            var set = new HashSet<ProtoId<JobPrototype>>(_jobPreferences);
+            if (pref)
+                set.Add(jobId);
             else
-            {
-                dictionary[jobId] = priority;
-            }
+                set.Remove(jobId);
 
             return new(this)
             {
-                _jobPriorities = dictionary,
+                _jobPreferences = set,
             };
         }
+
+        public HumanoidCharacterProfile WithJobPreferences(IEnumerable<ProtoId<JobPrototype>> jobPreferences)
+        {
+            return new(this)
+            {
+                _jobPreferences = new HashSet<ProtoId<JobPrototype>>(jobPreferences),
+            };
+        }
+        // RMC14
 
         public HumanoidCharacterProfile WithPreferenceUnavailable(PreferenceUnavailableMode mode)
         {
@@ -691,7 +600,7 @@ namespace Content.Shared.Preferences
             if (OnlyUsePreferredSquads != other.OnlyUsePreferredSquads) return false;
             if ((_squadPreferences == null) != (other._squadPreferences == null)) return false;
             if (_squadPreferences != null && !_squadPreferences.SetEquals(other._squadPreferences!)) return false;
-            if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
+            if (!_jobPreferences.SetEquals(other._jobPreferences)) return false; // RMC14
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
@@ -699,9 +608,6 @@ namespace Content.Shared.Preferences
             if (NamedItems != other.NamedItems) return false;
             if (ArmorPreference != other.ArmorPreference) return false;
             if (!_rankPreferences.SequenceEqual(other._rankPreferences)) return false;
-            if (PlaytimePerks != other.PlaytimePerks) return false;
-            if (XenoPrefix != other.XenoPrefix) return false;
-            if (XenoPostfix != other.XenoPostfix) return false;
             if (Enabled != other.Enabled) return false;
             if (!_disabledSurvivorInserts.SetEquals(other._disabledSurvivorInserts)) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
@@ -803,26 +709,10 @@ namespace Content.Shared.Preferences
                 _ => SpawnPriorityPreference.None // Invalid enum values.
             };
 
-            var priorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>(JobPriorities
-                .Where(p => prototypeManager.TryIndex<JobPrototype>(p.Key, out var job) && job.SetPreference && p.Value switch
-                {
-                    JobPriority.Never => false, // Drop never since that's assumed default.
-                    JobPriority.Low => true,
-                    JobPriority.Medium => true,
-                    JobPriority.High => true,
-                    _ => false
-                }));
-
-            var hasHighPrio = false;
-            foreach (var (key, value) in priorities)
-            {
-                if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrio)
-                    priorities[key] = JobPriority.Medium;
-                hasHighPrio = true;
-            }
+            // RMC14
+            var jobPreferences = _jobPreferences
+                .Where(job => prototypeManager.TryIndex(job, out var jobProto) && jobProto.SetPreference)
+                .ToList();
 
             var antags = AntagPreferences
                 .Where(id => prototypeManager.TryIndex(id, out var antag) && antag.SetPreference)
@@ -882,12 +772,9 @@ namespace Content.Shared.Preferences
                 _squadPreferences = validSquads;
             }
 
-            _jobPriorities.Clear();
-
-            foreach (var (job, priority) in priorities)
-            {
-                _jobPriorities.Add(job, priority);
-            }
+            // RMC14
+            _jobPreferences.Clear();
+            _jobPreferences.UnionWith(jobPreferences);
 
             PreferenceUnavailable = prefsUnavailableMode;
 
@@ -930,44 +817,6 @@ namespace Content.Shared.Preferences
                 SentryName = ValidateNamedItem(NamedItems.SentryName),
             };
 
-            string ValidateXenoName(string xenoName, bool numberEndingAllowed)
-            {
-                xenoName = xenoName.ToUpperInvariant();
-                for (var i = 0; i < xenoName.Length; i++)
-                {
-                    var c = xenoName[i];
-                    if (i > 0 && numberEndingAllowed && c >= '0' && c <= '9')
-                        continue;
-
-                    if (c < 'A' || c > 'Z')
-                        return string.Empty;
-                }
-
-                return xenoName;
-            }
-
-            XenoPrefix = XenoPrefix.Trim();
-            XenoPostfix = XenoPostfix.Trim();
-
-            var xenoName = collection.Resolve<IEntityManager>().System<SharedXenoNameSystem>();
-            var prefixMax = xenoName.GetMaxXenoPrefixLength(session);
-            var postfixMax = xenoName.GetMaxXenoPostfixLength(session);
-            if (XenoPrefix.Length > prefixMax)
-                XenoPrefix = XenoPrefix[..prefixMax];
-
-            XenoPrefix = ValidateXenoName(XenoPrefix, false);
-
-            if (XenoPrefix.Length > 2)
-            {
-                XenoPostfix = string.Empty;
-            }
-            else
-            {
-                if (XenoPostfix.Length > postfixMax)
-                    XenoPostfix = XenoPostfix[..postfixMax];
-
-                XenoPostfix = ValidateXenoName(XenoPostfix, true);
-            }
         }
 
         /// <summary>
@@ -1032,7 +881,7 @@ namespace Content.Shared.Preferences
         public override int GetHashCode()
         {
             var hashCode = new HashCode();
-            hashCode.Add(_jobPriorities);
+            hashCode.Add(_jobPreferences); // RMC14
             hashCode.Add(_antagPreferences);
             hashCode.Add(_traitPreferences);
             hashCode.Add(_loadouts);
@@ -1050,9 +899,6 @@ namespace Content.Shared.Preferences
             hashCode.Add(_squadPreferences);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);
-            hashCode.Add(PlaytimePerks);
-            hashCode.Add(XenoPrefix);
-            hashCode.Add(XenoPostfix);
             hashCode.Add(Enabled);
             hashCode.Add(_disabledSurvivorInserts);
             return hashCode.ToHashCode();

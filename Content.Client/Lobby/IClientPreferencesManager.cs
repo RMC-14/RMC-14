@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Preferences;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -8,6 +9,9 @@ namespace Content.Client.Lobby
     public interface IClientPreferencesManager
     {
         event Action OnServerDataLoaded;
+
+        // RMC14
+        event Action OnPreferencesUpdated;
 
         bool ServerDataLoaded => Settings != null;
 
@@ -20,8 +24,12 @@ namespace Content.Client.Lobby
         void CreateCharacter(ICharacterProfile profile);
         void DeleteCharacter(ICharacterProfile profile);
         void DeleteCharacter(int slot);
+
+        // RMC14
         void SetCharacterEnable(int slot, bool enable = true);
         void UpdateJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities);
+        void UpdatePlayerSettings(RMCPlayerSettings settings);
+
         void UpdateConstructionFavorites(List<ProtoId<ConstructionPrototype>> favorites);
     }
 }

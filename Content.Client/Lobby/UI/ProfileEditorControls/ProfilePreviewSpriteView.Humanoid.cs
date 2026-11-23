@@ -145,7 +145,7 @@ public sealed partial class ProfilePreviewSpriteView
     /// <param name="profile">Profile to get job for</param>
     private JobPrototype? GetPreferredJob(HumanoidCharacterProfile profile)
     {
-        var globalPriorities = _preferencesManager.Preferences?.JobPriorities ?? [];
+        IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> globalPriorities = _preferencesManager.Preferences?.JobPriorities ?? new Dictionary<ProtoId<JobPrototype>, JobPriority>(); // RMC14
         var candidates = profile.JobPreferences
             .Where(jobId => _prototypeManager.HasIndex<JobPrototype>(jobId))
             .Select(jobId => _prototypeManager.Index<JobPrototype>(jobId))
@@ -156,13 +156,7 @@ public sealed partial class ProfilePreviewSpriteView
 
         JobPriority GetEffectivePriority(JobPrototype job)
         {
-            if (globalPriorities.TryGetValue(job.ID, out var globalPriority))
-                return globalPriority;
-
-            if (profile.JobPriorities.TryGetValue(job.ID, out var profilePriority))
-                return profilePriority;
-
-            return JobPriority.Never;
+            return globalPriorities.GetValueOrDefault(job.ID, JobPriority.Never);
         }
 
         candidates.Sort((a, b) =>

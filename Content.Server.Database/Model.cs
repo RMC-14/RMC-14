@@ -63,6 +63,10 @@ namespace Content.Server.Database
         public DbSet<RMCPlayerStats> RMCPlayerStats { get; set; } = default!;
         public DbSet<RMCPlayerActionOrder> RMCPlayerActionOrder { get; set; } = default!;
         public DbSet<RMCChatBans> RMCPlayerChatBans { get; set; } = default!;
+        // RMC14
+        public DbSet<RMCPlayerJobPriority> RMCPlayerJobPriorities { get; set; } = default!;
+        public DbSet<RMCPlayerPreference> RMCPlayerPreferences { get; set; } = default!;
+        public DbSet<RMCDisabledProfile> RMCDisabledProfiles { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -73,18 +77,6 @@ namespace Content.Server.Database
             modelBuilder.Entity<Profile>()
                 .HasIndex(p => new {p.Slot, PrefsId = p.PreferenceId})
                 .IsUnique();
-
-            modelBuilder.Entity<Profile>()
-                .Property(p => p.PlaytimePerks)
-                .HasDefaultValue(true);
-
-            modelBuilder.Entity<Profile>()
-                .Property(p => p.XenoPrefix)
-                .HasDefaultValue(string.Empty);
-
-            modelBuilder.Entity<Profile>()
-                .Property(p => p.XenoPostfix)
-                .HasDefaultValue(string.Empty);
 
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
@@ -568,6 +560,9 @@ namespace Content.Server.Database
         public string AdminOOCColor { get; set; } = null!;
         public List<string> ConstructionFavorites { get; set; } = new();
         public List<Profile> Profiles { get; } = new();
+        // RMC14
+        public List<RMCPlayerJobPriority> RMCJobPriorities { get; } = new();
+        public RMCPlayerPreference? RMCPreference { get; set; }
     }
 
     public class Profile
@@ -603,10 +598,8 @@ namespace Content.Server.Database
         public RMCSquadPreference? SquadPreference { get; set; }
         public string ArmorPreference { get; set; } = null!;
         public List<Rank> Ranks { get; } = new();
-        public bool PlaytimePerks { get; set; } = true;
-        public string XenoPrefix { get; set; } = string.Empty;
-        public string XenoPostfix { get; set; } = string.Empty;
-        public bool Enabled { get; set; } = true;
+        // RMC14
+        public RMCDisabledProfile? RMCDisabled { get; set; }
     }
 
     public class Job

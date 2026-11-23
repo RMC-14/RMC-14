@@ -152,7 +152,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
 
             var prio = priorities.GetValueOrDefault(job, JobPriority.Never);
 
-            var atLeastOneEnabled = prefs.GetAllEnabledProfilesForJob(job).Count != 0;
+            var atLeastOneEnabled = PlayerPreferences.IsCharacterlessJob(job.ID, _prototypeManager) || prefs.HasCharacterForJob(job.ID); // RMC14
             var icon = new DraggableJobIcon(job, () => !PriorityLock.Pressed, _ => CreateJobTooltip(job));
 
             if(!atLeastOneEnabled)
@@ -457,7 +457,18 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
 
         content.AddChild(grid);
 
-        var profiles = prefs.GetAllProfilesForJob(job);
+        // RMC14
+        if (PlayerPreferences.IsCharacterlessJob(job.ID, _prototypeManager))
+        {
+            grid.AddChild(new Label
+            {
+                Text = Loc.GetString("rmc-lobby-character-preview-panel-tooltip-characterless-job"),
+                Align = Label.AlignMode.Center,
+            });
+            return tooltip;
+        }
+
+        var profiles = prefs.GetCharactersForJob(job.ID, includeDisabled: true).ToDictionary(c => c.Slot, c => c.Profile);
 
         if (profiles.Count == 0)
         {

@@ -16,8 +16,8 @@ using NpgsqlTypes;
 namespace Content.Server.Database.Migrations.Postgres
 {
     [DbContext(typeof(PostgresServerDbContext))]
-    [Migration("20260306090224_ProfileEnabled")]
-    partial class ProfileEnabled
+    [Migration("20261122084505_RMCMultiCharacter")]
+    partial class RMCMultiCharacter
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -637,6 +637,33 @@ namespace Content.Server.Database.Migrations.Postgres
                         });
                 });
 
+            modelBuilder.Entity("Content.Server.Database.DisabledInsert", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("disabled_insert_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("InsertName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("insert_name");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_disabled_insert");
+
+                    b.HasIndex("ProfileId", "InsertName")
+                        .IsUnique();
+
+                    b.ToTable("disabled_insert", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
                 {
                     b.Property<int>("Id")
@@ -843,10 +870,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("char_name");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
 
                     b.Property<string>("EyeColor")
                         .IsRequired()
@@ -1121,6 +1144,18 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedById")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by_id");
+
                     b.Property<Guid>("GiverId")
                         .HasColumnType("uuid")
                         .HasColumnName("giver_id");
@@ -1153,18 +1188,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("text");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("boolean")
-                        .HasColumnName("deleted");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<Guid?>("DeletedById")
-                        .HasColumnType("uuid")
-                        .HasColumnName("deleted_by_id");
-
                     b.Property<int>("Type")
                         .HasColumnType("integer")
                         .HasColumnName("type");
@@ -1182,6 +1205,18 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasDatabaseName("IX_rmc_commendations_round_id");
 
                     b.ToTable("rmc_commendations", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDisabledProfile", b =>
+                {
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.HasKey("ProfileId")
+                        .HasName("PK_rmc_disabled_profiles");
+
+                    b.ToTable("rmc_disabled_profiles", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCDiscordAccount", b =>
@@ -1465,6 +1500,56 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("rmc_player_action_order", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerJobPriority", b =>
+                {
+                    b.Property<int>("PreferenceId")
+                        .HasColumnType("integer")
+                        .HasColumnName("preference_id");
+
+                    b.Property<string>("JobName")
+                        .HasColumnType("text")
+                        .HasColumnName("job_name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("PreferenceId", "JobName")
+                        .HasName("PK_rmc_player_job_priorities");
+
+                    b.ToTable("rmc_player_job_priorities", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerPreference", b =>
+                {
+                    b.Property<int>("PreferenceId")
+                        .HasColumnType("integer")
+                        .HasColumnName("preference_id");
+
+                    b.Property<bool>("PlaytimePerks")
+                        .HasColumnType("boolean")
+                        .HasColumnName("playtime_perks");
+
+                    b.Property<int>("PreferenceUnavailable")
+                        .HasColumnType("integer")
+                        .HasColumnName("preference_unavailable");
+
+                    b.Property<string>("XenoPostfix")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("xeno_postfix");
+
+                    b.Property<string>("XenoPrefix")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("xeno_prefix");
+
+                    b.HasKey("PreferenceId")
+                        .HasName("PK_rmc_player_preferences");
+
+                    b.ToTable("rmc_player_preferences", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
                 {
                     b.Property<Guid>("PlayerId")
@@ -1511,6 +1596,37 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasName("PK_rmc_squad_preferences");
 
                     b.ToTable("rmc_squad_preferences", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.Rank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("rank_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("JobName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("job_name");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.Property<string>("RankName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("rank_name");
+
+                    b.HasKey("Id")
+                        .HasName("PK_rank");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("rank", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
@@ -2212,6 +2328,18 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Server");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.DisabledInsert", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("DisabledInserts")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_disabled_insert_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Job", b =>
                 {
                     b.HasOne("Content.Server.Database.Profile", "Profile")
@@ -2380,6 +2508,13 @@ namespace Content.Server.Database.Migrations.Postgres
 
             modelBuilder.Entity("Content.Server.Database.RMCCommendation", b =>
                 {
+                    b.HasOne("Content.Server.Database.Player", "DeletedBy")
+                        .WithMany("CommendationsDeleted")
+                        .HasForeignKey("DeletedById")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_rmc_commendations_player_deleted_by_id");
+
                     b.HasOne("Content.Server.Database.Player", "Giver")
                         .WithMany("CommendationsGiven")
                         .HasForeignKey("GiverId")
@@ -2396,13 +2531,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasConstraintName("FK_rmc_commendations_player_receiver_id");
 
-                    b.HasOne("Content.Server.Database.Player", "DeletedBy")
-                        .WithMany("CommendationsDeleted")
-                        .HasForeignKey("DeletedById")
-                        .HasPrincipalKey("UserId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .HasConstraintName("FK_rmc_commendations_player_deleted_by_id");
-
                     b.HasOne("Content.Server.Database.Round", "Round")
                         .WithMany("Commendations")
                         .HasForeignKey("RoundId")
@@ -2417,6 +2545,18 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Receiver");
 
                     b.Navigation("Round");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDisabledProfile", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithOne("RMCDisabled")
+                        .HasForeignKey("Content.Server.Database.RMCDisabledProfile", "ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_disabled_profiles_profile_profile_id");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCLinkedAccount", b =>
@@ -2559,6 +2699,30 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerJobPriority", b =>
+                {
+                    b.HasOne("Content.Server.Database.Preference", "Preference")
+                        .WithMany("RMCJobPriorities")
+                        .HasForeignKey("PreferenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_player_job_priorities_preference_preference_id");
+
+                    b.Navigation("Preference");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerPreference", b =>
+                {
+                    b.HasOne("Content.Server.Database.Preference", "Preference")
+                        .WithOne("RMCPreference")
+                        .HasForeignKey("Content.Server.Database.RMCPlayerPreference", "PreferenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_player_preferences_preference_preference_id");
+
+                    b.Navigation("Preference");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2593,6 +2757,18 @@ namespace Content.Server.Database.Migrations.Postgres
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_rmc_squad_preferences_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.Rank", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("Ranks")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rank_profile_profile_id");
 
                     b.Navigation("Profile");
                 });
@@ -2901,17 +3077,27 @@ namespace Content.Server.Database.Migrations.Postgres
             modelBuilder.Entity("Content.Server.Database.Preference", b =>
                 {
                     b.Navigation("Profiles");
+
+                    b.Navigation("RMCJobPriorities");
+
+                    b.Navigation("RMCPreference");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Profile", b =>
                 {
                     b.Navigation("Antags");
 
+                    b.Navigation("DisabledInserts");
+
                     b.Navigation("Jobs");
 
                     b.Navigation("Loadouts");
 
                     b.Navigation("NamedItems");
+
+                    b.Navigation("RMCDisabled");
+
+                    b.Navigation("Ranks");
 
                     b.Navigation("SquadPreference");
 
