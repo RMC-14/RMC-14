@@ -40,6 +40,17 @@ public sealed partial class CMDistressSignalRuleSystem
 
             comp.SurvivorJobs = jobs.ToList();
         }
+        else
+        {
+            var civilian = comp.CivilianSurvivorJob;
+            var nonCivilian = comp.SurvivorJobs.Where(e => e.Job != civilian).ToList();
+            var civilianEntries = comp.SurvivorJobs.Where(e => e.Job == civilian).ToList();
+
+            if (civilianEntries.Count > 0)
+            {
+                comp.SurvivorJobs = nonCivilian.Concat(civilianEntries).ToList();
+            }
+        }
 
         var possibleJobs = CollectPossibleSurvivorJobs(comp);
         var (spawners, spawnersLeft) = FindSurvivorSpawners(possibleJobs);
@@ -137,6 +148,13 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
+    private enum SurvivorSpawnResult
+    {
+        Spawned, // Spawned the survivor
+        TryNextCandidate, // For whatever reason the candidate could not spawn in this job, lets try again
+        StopJob // No more suitable candidates / Job wide issue. No point in trying again
+    }
+
     private void SpawnSurvivorsFromCandidates(
         CMDistressSignalRuleComponent comp,
         RulePlayerSpawningEvent ev,
@@ -158,7 +176,8 @@ public sealed partial class CMDistressSignalRuleSystem
                 Log.Info($"Rolling survivor job {job} with priority {i} and players {string.Join(", ", playerNames)}");
                 while (players[i].Count > 0 && (ignoreLimit || selected < totalSurvivors))
                 {
-                    if (TrySpawnSingleSurvivor(job, players[i], comp, ev, spawnersLeft, spawners, out var playerId))
+                    var result = TrySpawnSingleSurvivor(job, players[i], comp, ev, spawnersLeft, spawners, out var playerId);
+                    if (result == SurvivorSpawnResult.Spawned)
                     {
                         var name = ev.Profiles.TryGetValue(playerId, out var prof) ? prof.Name : playerId.ToString();
                         Log.Info($"Spawned survivor job {job} with name/id {name}, ignore limit: {ignoreLimit}");
@@ -166,9 +185,14 @@ public sealed partial class CMDistressSignalRuleSystem
                         if (!ignoreLimit)
                             selected++;
                     }
-                    else
+                    else if (result == SurvivorSpawnResult.TryNextCandidate)
                     {
-                        Log.Info($"Stopped rolling survivor job {job}");
+                        Log.Info($"Could not spawn player:{playerId} in job:{job}, Trying again with another candidate");
+                        continue;
+                    }
+                    else if (result == SurvivorSpawnResult.StopJob)
+                    {
+                        Log.Info($"Stopped rolling for job:{job}");
                         break;
                     }
                 }
@@ -189,7 +213,7 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
-    private bool TrySpawnSingleSurvivor(
+    private SurvivorSpawnResult TrySpawnSingleSurvivor(
         ProtoId<JobPrototype> job,
         List<NetUserId> list,
         CMDistressSignalRuleComponent comp,
@@ -203,28 +227,30 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             list.Remove(playerId);
             spawnedId = default;
-            return false;
+            return SurvivorSpawnResult.TryNextCandidate; // Just a missing Session, Try another player
         }
 
         var spawnAsJob = DetermineSurvivorJob(job, playerId, comp, out var scenarioSuccess, out var stop);
         if (stop)
         {
+            // Player is not allowed in this job or no more are available
+            list.Remove(playerId);
             spawnedId = default;
-            return false;
+            return SurvivorSpawnResult.TryNextCandidate; // Try another player
         }
 
         var selectRandomVariant = SelectedPlanetMap?.Comp.SelectRandomSurvivorVariant ?? false;
         if (!DecrementOriginalJobSlot(job, comp, selectRandomVariant, scenarioSuccess, ref spawnAsJob))
         {
             spawnedId = default;
-            return false;
+            return SurvivorSpawnResult.StopJob; // No more slots left :(
         }
 
         var spawner = FindSurvivorSpawner(spawnAsJob, comp, spawnersLeft, spawners, out stop);
         if (stop)
         {
             spawnedId = default;
-            return false;
+            return SurvivorSpawnResult.StopJob; // Nowhere to spawn!
         }
 
         list.Remove(playerId);
@@ -246,7 +272,7 @@ public sealed partial class CMDistressSignalRuleSystem
         RaiseLocalEvent(survivorMob, new PlayerSpawnCompleteEvent(survivorMob, player, spawnAsJob, false, true, 0, default, profile), true);
 
         spawnedId = playerId;
-        return true;
+        return SurvivorSpawnResult.Spawned;
     }
 
     private ProtoId<JobPrototype> DetermineSurvivorJob(
