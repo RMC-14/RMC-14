@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: JustMyselfUwU
-  changes:
-  - message: Fixed barricades and mounted weapons not blinding you when welding them
-    type: Fix
-  id: 3422
-  time: '2026-06-16T21:48:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9930
-- author: Whisper
-  changes:
-  - message: '[SOP] SOs may deploy anywhere while remaining in the ARC'
-    type: Add
-  id: 3423
-  time: '2026-06-16T21:47:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10179
-- author: Vixting
-  changes:
-  - message: Adds languages. Languages can be selected from the traits section. If
-      you don't understand the language, the words spoken will be garbled for you.
-      Normal languages use a round seed, meaning you can learn what a word means in
-      a round even if you don't know the language. Xenonid language is completely
-      random however.
-    type: Add
-  - message: Adds language learning system, currently only for synths to learn xenonid,
-      through exposure to the language you will learn it. Survivor synths have a boosted
-      initial learning rate.
-    type: Add
-  - message: Radios now support different prefixes.
-    type: Add
-  - message: . now supports multi broadcast
-    type: Tweak
-  id: 3424
-  time: '2026-06-16T21:51:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9831
 - author: kleinerstation13
   changes:
   - message: Fixed Type 19 using incorrect firing sound, not having inhand sprites,
@@ -4390,5 +4357,35 @@
   id: 3921
   time: '2026-11-22T04:21:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10640
+- author: Vixting
+  changes:
+  - message: Ghost visibility has been adjusted
+    type: Tweak
+  - message: Ghost appearance is now saved & restored on reconnecting
+    type: Add
+  id: 3922
+  time: '2026-11-22T22:15:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11166
+- author: GrigoriyGalintano
+  changes:
+  - message: Added proper and knee pushups for organic humanoids and synthetics.
+    type: Add
+  id: 3923
+  time: '2026-11-22T22:21:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10794
+- author: Arykh
+  changes:
+  - message: Added Cryo Cells!
+    type: Add
+  - message: Removed Clone/Genetic healing from Dylovene. To heal Clone/Genetic damage,
+      use a Cryo Cell with a beaker containing Cryoxadone and/or Clonexadone.
+    type: Remove
+  - message: Fixed the AutoDoc, Body Scanner, and Sleeper not stunning on exit.
+    type: Fix
+  - message: Fixed being able to instantly enter the AutoDoc and Sleeper via Alt-Click.
+    type: Fix
+  id: 3924
+  time: '2026-11-23T00:26:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10815
 Name: RMC14
 Order: -1

@@ -20,8 +20,11 @@ ui-options-function-rmc-camera-adjust-west = Adjust west
 ui-options-function-rmc-camera-adjust-south = Adjust south
 ui-options-function-rmc-camera-adjust-east = Adjust east
 ui-options-function-rmc-camera-reset = Reset camera
+ui-options-function-rmc-pushup = Do a pushup
+ui-options-function-rmc-pushup-routine = Start a pushup routine
 ui-options-function-rmc-rest = Rest
 ui-options-function-rmc-resist = Resist
+ui-options-function-rmc-weak-pushup = Do a knee pushup
 ui-options-function-rmc-open-language-menu = Open language menu
 ui-options-function-rmc-cycle-language = Cycle language
 
