@@ -53,14 +53,15 @@
     back: CMSatchelLiaisonSecure
     id: RMCIDCardColonistScientist
     outerClothing: RMCJacketCorporateBlue
-    shoes: CMBootsBlack
+    shoes: CMBootsUrbanFilled
     gloves: RMCHandsVeteran
-    ears: RMCHeadsetDistressBureauDamaged
+    ears: RMCHeadsetMarineNV
   storage:
     back:
     - CMSheetMetal20
     - CMClipboard
     - CMPenClicky
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

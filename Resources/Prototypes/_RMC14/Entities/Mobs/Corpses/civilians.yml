@@ -81,8 +81,8 @@
   storage:
     back:
     - RMCRadioHandheldColonyOff
-    # - CMFirstAidKitFilledRobust Uncomment when surgery kit is added
-    # TODO Surgery kit
+    - CMFirstAidKitFilledRobust
+    - CMFirstAidKitSurgeryFilled
 
 # Engineer
 - type: randomHumanoidSettings
@@ -418,6 +418,14 @@
     - RMCGearCorpseUnitedNationsRiotOfficerAltFive
   - type: Rank
     rank: RMCRankCMBDeputy
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/job_icons/CMB.rsi
+      state: cmb_rco
+  - type: NpcFactionMember
+    factions:
+    - Bureau
+    - Civilian
 
 - type: randomHumanoidSettings
   parent: RMCCorpseUnitedNationsRiotOfficer
@@ -428,9 +436,9 @@
 - type: startingGear
   id: RMCGearCorpseUnitedNationsRiotOfficer
   equipment:
-    head: ArmorHelmetPMCRiotShield
-    jumpsuit: RMCJumpsuitRiotControl
-    outerClothing: RMCArmorPMCRiot
+    head: RMCArmorHelmetM10CMBVisorSWAT
+    jumpsuit: RMCSwatCMBUniform
+    outerClothing: RMCArmorPMCRiotCMB
     belt: CMStunbaton
     gloves: CMHandsBlackMarine
     ears: CMHeadsetColony
@@ -551,8 +559,8 @@
   id: RMCGearCorpseCLFM16
   equipment:
     head: RMCHeadMilitiaBucket
-    belt: CMBeltMarineM16
-    suitstorage: WeaponRifleM16
+    belt: RMCBeltMarineCR16
+    suitstorage: RMCWeaponRifleCR16
     outerClothing: RMCCoatMilitiaBrace
 
 - type: startingGear
@@ -560,8 +568,8 @@
   id: RMCGearCorpseCLFMP5
   equipment:
     head: RMCHelmetWelding
-    belt: CMBeltMarineMP5
-    suitstorage: WeaponSMGMP5
+    belt: RMCBeltMarinePCAC5
+    suitstorage: RMCWeaponSMGPCAC5A4
     outerClothing: RMCCoatMilitiaBrace
 
 # Russian

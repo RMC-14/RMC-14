@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared.Physics;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -20,6 +21,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Collections;
+using Content.Shared._RMC14.Xenonids.Rest;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -160,12 +162,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                     continue;
                 }
 
-                if (candidate.CollisionClass == VehicleCollisionClass.SoftMob &&
-                    candidate.MobState != null &&
-                    _standing.IsDown(candidate.Entity))
-                {
-                    continue;
-                }
+            if (candidate.CollisionClass == VehicleCollisionClass.SoftMob &&
+                candidate.MobState != null &&
+                (_standing.IsDown(candidate.Entity) || HasComp<XenoRestingComponent>(candidate.Entity)))
+            {
+                continue;
+            }
 
                 if (applyEffects && candidate.Door is { } door && !_net.IsClient &&
                     (candidate.CollisionClass == VehicleCollisionClass.Breakable || candidate.CollisionClass == VehicleCollisionClass.Ignore))
@@ -289,6 +291,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return false;
 
         if (!physicsQ.TryComp(other, out var otherBody) || !otherBody.CanCollide)
+            return false;
+
+        if (TryComp(other, out XenoBurrowComponent? burrow) && burrow.Active)
             return false;
 
         var hasDoor = TryComp(other, out DoorComponent? door);
@@ -499,12 +504,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!applyEffects)
             return CollisionHandlingResult.Continue;
 
-        TrySmash(other, vehicle, ref playedCollisionSound);
+        var destroyed = TrySmash(other, vehicle, ref playedCollisionSound);
 
         if (smashable.MinDestroyWeightClass == null && smashable.MinContinueWeightClass == null)
             return CollisionHandlingResult.Continue;
 
-        if (!TerminatingOrDeleted(other))
+        if (!destroyed && !TerminatingOrDeleted(other) && !EntityManager.IsQueuedForDeletion(other))
         {
             AddBlockingCollision(vehicle, other, collisionAabb, otherAabb, clearance, mapId, debug, blockers);
             return CollisionHandlingResult.Blocked;
@@ -939,17 +944,21 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ApplySmashSlowdown(vehicle, mover, smashable);
 
         if (_net.IsClient)
+        {
+            if (!smashable.DeleteOnHit || !ShouldPredictVehicleInteractions(vehicle))
+                return false;
+
+            PredictedQueueDel(target);
             return true;
+        }
 
         if (smashable.SmashSound != null)
             _audio.PlayPvs(smashable.SmashSound, Transform(target).Coordinates);
 
-        SmashTarget(target, vehicle, smashable);
-
-        return true;
+        return SmashTarget(target, vehicle, smashable);
     }
 
-    private void SmashTarget(EntityUid target, EntityUid vehicle, VehicleSmashableComponent smashable)
+    private bool SmashTarget(EntityUid target, EntityUid vehicle, VehicleSmashableComponent smashable)
     {
         var damage = new DamageSpecifier
         {
@@ -962,12 +971,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         _damageable.TryChangeDamage(target, damage, true, origin: vehicle, tool: vehicle);
 
         if (!smashable.DeleteOnHit)
-            return;
+            return false;
 
         if (TerminatingOrDeleted(target))
-            return;
+            return true;
 
-        _destructible.DestroyEntity(target);
+        return _destructible.DestroyEntity(target);
     }
 
     private void PlayCollisionSound(EntityUid uid, ref bool played)
@@ -1136,7 +1145,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!ShouldPredictVehicleInteractions(vehicle))
             return;
 
-        if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob))
+        if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob) || HasComp<XenoRestingComponent>(mob))
             return;
 
         if (TryComp(vehicle, out GridVehicleMoverComponent? vehicleMover) &&
