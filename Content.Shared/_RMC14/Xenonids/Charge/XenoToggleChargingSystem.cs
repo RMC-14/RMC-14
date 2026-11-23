@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Actions;
+using System.Numerics;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
@@ -8,7 +9,6 @@ using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -19,6 +19,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -57,6 +58,11 @@ public sealed class XenoToggleChargingSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
+    // Used when checking if the charger is moving towards or away from a hard collision.
+    // 0 means parallel collisions collide, and moving even slightly away doesn't collide.
+    // Anything more positive means the charger must be moving more towards the collision,
+    // anything negative means the charger can be moving more away from the collision.
+    private readonly double _hardCollsionLeeway = Math.Sin(MathHelper.DegreesToRadians(1));
 
     private EntityQuery<InputMoverComponent> _inputMoverQuery;
     private EntityQuery<XenoToggleChargingComponent> _xenoToggleChargingQuery;
@@ -460,6 +466,33 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         if (Math.Abs(ent.Comp.Steps - 1) < 0.001)
             return;
 
+        // Ignore non-hard collisions if they don't involve mob collision fixtures.
+        if ((!args.OurFixture.Hard || !args.OtherFixture.Hard)
+            && ((int)args.OurFixture.CollisionMask & (int)CollisionGroup.MobCollision) == 0)
+            return;
+
+        // Value between -1 and 1, that indicates how "ahead" of the charger the collision must be to register.
+        // Negative values allow hits that are more behind. Positive values prevent hits that are more ahead.
+        // 0 allows hits against things that are perfectly parallel, and disallows hits even slightly behind.
+        var leeway = 0d;
+        Vector2 toContact;
+        if (args.PointCount > 0)
+        {
+            // hard contact is geometry-aware
+            toContact = args.WorldPoints[0] - _transform.GetWorldPosition(ent);
+            leeway = _hardCollsionLeeway;
+        }
+        else
+        {
+            // soft contact only cares about origins
+            toContact = _transform.GetWorldPosition(args.OtherEntity) - _transform.GetWorldPosition(ent);
+        }
+        // Ignore collision if moving away from the collision point,
+        // allowing some leeway in either direction.
+        if (!toContact.IsLengthZero() && ent.Comp.Direction != DirectionFlag.None
+            && Vector2.Dot(ent.Comp.Direction.AsDir().ToVec(), toContact.Normalized()) < leeway)
+            return;
+
         _hit.Add((ent, args.OtherEntity));
     }
 
@@ -581,9 +614,6 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             foreach (var hit in _hit)
             {
                 if (TerminatingOrDeleted(hit.Crusher) || TerminatingOrDeleted(hit.Target))
-                    continue;
-
-                if (HasComp<XenoChargeDontHitComponent>(hit.Target))
                     continue;
 
                 if (_xenoToggleChargingRecentlyHitQuery.TryComp(hit.Target, out var recently) &&
