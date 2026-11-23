@@ -517,3 +517,51 @@
         - XenoProjectileImpassable
         - BarricadeImpassable
 
+- type: entity
+  parent: XenoChargedSpitProjectile #TODO RMC14 if charged spit gets falloff this needs 0
+  id: XenoChargedSpitProjectileDissolver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    impactEffect: null
+    damage:
+      types:
+        Heat: 45
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+    noDamageOnFriendlyXeno: true
+  - type: ProjectileMaxRange
+    max: 7
+  - type: RMCPenetratingProjectile
+    range: 7
+    rangeLossPerHit: 0
+    wallMultiplier: 10
+    bigXenoMultiplier: 1
+    thickMembraneMultiplier: 10
+    membraneMultiplier: 10
+    fixedDamageLoss: 24.75
+    spentOnZeroDamage: true
+    deleteOnSpent: true
+
+- type: entity
+  parent: XenoChargedSpitProjectileDissolver
+  id: XenoChargedSpitProjectileDissolverTwoCharge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCPenetratingProjectile
+    fixedDamageLoss: 15.75
+  - type: CMArmorPiercing
+    amount: 15
+
+- type: entity
+  parent: XenoChargedSpitProjectileDissolverTwoCharge
+  id: XenoChargedSpitProjectileDissolverThreeCharge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCPenetratingProjectile
+    fixedDamageLoss: 12.6
+  - type: CMArmorPiercing
+    amount: 20
+  
+

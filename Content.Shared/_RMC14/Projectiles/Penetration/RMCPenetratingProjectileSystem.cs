@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared.FixedPoint;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
@@ -63,12 +64,12 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
     /// </summary>
     private void OnStartCollide(Entity<RMCPenetratingProjectileComponent> ent, ref StartCollideEvent args)
     {
-        if(!TryComp(ent, out ProjectileComponent? projectile) || ent.Comp.ShotFrom == null)
+        if (!TryComp(ent, out ProjectileComponent? projectile) || ent.Comp.ShotFrom == null)
             return;
 
         var rangeLoss = ent.Comp.RangeLossPerHit;
-        var damageLoss = ent.Comp.DamageMultiplierLossPerHit;
-       _rmcSize.TryGetSize(args.OtherEntity, out var size);
+        var damageLoss = ent.Comp.FixedDamageLoss == null ? ent.Comp.DamageMultiplierLossPerHit : ent.Comp.FixedDamageLoss.Value;
+        _rmcSize.TryGetSize(args.OtherEntity, out var size);
 
         // Apply damage and range loss multipliers depending on target hit.
         if ((args.OtherFixture.CollisionLayer & HardCollisionGroup) != 0)
@@ -78,32 +79,53 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
                 !occluder.Enabled)
             {
                 rangeLoss *= ent.Comp.ThickMembraneMultiplier;
-                damageLoss *=  ent.Comp.ThickMembraneMultiplier;
+                damageLoss *= ent.Comp.ThickMembraneMultiplier;
 
                 // Normal membranes have an even lower multiplier.
                 if (HasComp<XenoStructureUpgradeableComponent>(args.OtherEntity))
                 {
                     rangeLoss *= ent.Comp.MembraneMultiplier;
-                    damageLoss *=  ent.Comp.MembraneMultiplier;
+                    damageLoss *= ent.Comp.MembraneMultiplier;
                 }
             }
             else
             {
                 rangeLoss *= ent.Comp.WallMultiplier;
-                damageLoss *=  ent.Comp.WallMultiplier;
+                damageLoss *= ent.Comp.WallMultiplier;
             }
         }
-        else if(size >= RMCSizes.Big)
+        else if (size >= RMCSizes.Big)
         {
             rangeLoss *= ent.Comp.BigXenoMultiplier;
-            damageLoss *=  ent.Comp.BigXenoMultiplier;
+            damageLoss *= ent.Comp.BigXenoMultiplier;
         }
 
         ent.Comp.Range -= rangeLoss;
         Dirty(ent);
 
-        projectile.Damage *= 1 - damageLoss;
-        Dirty(ent,projectile);
+        if (ent.Comp.FixedDamageLoss == null)
+            projectile.Damage *= 1 - damageLoss;
+        else
+        {
+            foreach (var damage in projectile.Damage.DamageDict)
+            {
+                if (damage.Value <= 0)
+                    continue;
+
+                var loss = FixedPoint2.Min(damage.Value, damageLoss);
+                projectile.Damage.DamageDict[damage.Key] = damage.Value - loss;
+                damageLoss -= loss;
+                if (damageLoss <= 0)
+                    break;
+            }
+        }
+
+        if (ent.Comp.SpentOnZeroDamage && projectile.Damage.GetTotal() <= 0)
+        {
+            ent.Comp.ForceSpent = true;
+            Dirty(ent);
+        }
+        Dirty(ent, projectile);
     }
 
     /// <summary>
@@ -111,7 +133,7 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
     /// </summary>
     private void OnAllowAdditionalHits(Entity<RMCPenetratingProjectileComponent> ent, ref AfterProjectileHitEvent args)
     {
-        if(ent.Comp.ShotFrom == null)
+        if (ent.Comp.ShotFrom == null)
             return;
 
         var distanceTravelled =
@@ -121,7 +143,7 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
         ent.Comp.HitTargetIds.Add(GetNetEntity(args.Target).Id);
         Dirty(ent);
 
-        if (range < 0)
+        if (range < 0 || ent.Comp.ForceSpent)
             return;
 
         args.Projectile.Comp.ProjectileSpent = false;

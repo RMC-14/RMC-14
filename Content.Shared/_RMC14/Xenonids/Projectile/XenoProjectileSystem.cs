@@ -350,7 +350,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.DeleteOnFriendlyXeno || ent.Comp.StopOnFriendlyXeno)
+        if (ent.Comp.DeleteOnFriendlyXeno || ent.Comp.StopOnFriendlyXeno || ent.Comp.NoDamageOnFriendlyXeno)
             return;
 
         if (_hive.FromSameHive(ent.Owner, args.OtherEntity) &&
@@ -365,7 +365,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         {
             args.Handled = true;
 
-            if (!ent.Comp.DeleteOnFriendlyXeno && !HasComp<XenoConstructComponent>(args.Target) || ent.Comp.StopOnFriendlyXeno)
+            if (!ent.Comp.DeleteOnFriendlyXeno && !HasComp<XenoConstructComponent>(args.Target) || ent.Comp.StopOnFriendlyXeno || ent.Comp.NoDamageOnFriendlyXeno)
                 return;
 
             if (_net.IsServer || IsClientSide(ent))
