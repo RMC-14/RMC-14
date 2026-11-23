@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Follower;
@@ -148,10 +149,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         _disconnectExpiresAt.Remove(ev.Player.UserId);
 
-        var isQueueEligible = HasComp<GhostComponent>(ev.Entity)
-            || TryComp<MindTakeoverBehaviorComponent>(ev.Entity, out var takeoverBehavior) && !takeoverBehavior.EjectFromLarvaQueues;
-
-        if (isQueueEligible)
+        if (CanRemainInQueue(ev.Entity))
         {
             if (_pendingOffers.TryGetValue(ev.Player.UserId, out var pending))
             {
@@ -506,14 +504,8 @@ public sealed class LarvaQueueSystem : EntitySystem
                 continue;
             }
 
-            if (!HasComp<GhostComponent>(s.AttachedEntity.Value))
+            if (!CanRemainInQueue(s.AttachedEntity.Value))
             {
-                if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
-                {
-                    session = s;
-                    break;
-                }
-
                 reembodied ??= new List<NetUserId>();
                 reembodied.Add(netId);
                 continue;
@@ -560,15 +552,8 @@ public sealed class LarvaQueueSystem : EntitySystem
                 continue;
             }
 
-            if (!HasComp<GhostComponent>(s.AttachedEntity.Value))
+            if (!CanRemainInQueue(s.AttachedEntity.Value))
             {
-                if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
-                {
-                    absolutePosition = offset + indexInList;
-                    session = s;
-                    return true;
-                }
-
                 list.Remove(node);
                 node = next;
                 continue;
@@ -632,6 +617,20 @@ public sealed class LarvaQueueSystem : EntitySystem
         {
             TryRemoveFromQueue(netUserId, (hiveId, hive));
         }
+    }
+
+    private bool CanRemainInQueue(EntityUid entity)
+    {
+        if (HasComp<GhostComponent>(entity))
+            return true;
+
+        if (TryComp(entity, out MindTakeoverBehaviorComponent? takeover) && !takeover.EjectFromLarvaQueues)
+            return true;
+
+        if (HasComp<ThunderdomeMapComponent>(Transform(entity).MapUid))
+            return true;
+
+        return false;
     }
 
     public bool IsAlreadyQueued(NetUserId userId, EntityUid hiveId)
