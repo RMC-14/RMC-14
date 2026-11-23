@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Fixed the Bobda vending machine bag being meltable and strippable
-    type: Fix
-  id: 3427
-  time: '2026-06-19T00:47:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10111
 - author: MoonlightHollow
   changes:
   - message: Update and clean up RCM skills
@@ -4390,5 +4383,13 @@
   id: 3926
   time: '2026-11-23T03:48:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10653
+- author: yagwog
+  changes:
+  - message: Added ability for the queen to banish xenonids, then also later re-admit
+      them to the hive.
+    type: Add
+  id: 3927
+  time: '2026-11-23T03:51:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8576
 Name: RMC14
 Order: -1
