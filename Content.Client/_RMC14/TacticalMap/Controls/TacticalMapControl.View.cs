@@ -1,229 +1,184 @@
-using System;
 using System.Numerics;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.TacticalMap.Controls;
 
 public sealed partial class TacticalMapControl
 {
-    public float GetCurrentZoomFactor()
-    {
-        return _zoomFactor;
-    }
+    private const float MinZoom = 0.3f;
+    private const float MaxZoom = 5f;
+    private const float FitZoom = 1f;
+    private const float FitZoomEpsilon = 0.001f;
+    private const float PanResistanceZoomRange = 0.35f;
+    private const float PanResistanceExponent = 1.5f;
+    private const float ZoomSpeed = 1.2f;
 
-    public Vector2 GetCurrentPanOffset()
-    {
-        return _panOffset;
-    }
+    private float _zoom = FitZoom;
+    private Vector2 _pan;
+    private (float Zoom, Vector2 Pan)? _pendingView;
 
-    public void SetViewUpdateCallback(Action<float, Vector2> callback)
-    {
-        _viewUpdateCallback = callback;
-    }
+    public float Zoom => _zoom;
+    public Vector2 Pan => _pan;
 
-    private void NotifyViewChanged()
+    public void SetView(float zoom, Vector2 pan)
     {
-        _viewUpdateCallback?.Invoke(_zoomFactor, _panOffset);
-    }
-
-    public void LoadViewSettings(float zoomFactor, Vector2 panOffset, EntityUid? mapEntity)
-    {
-        _currentMapEntity = mapEntity;
-        _zoomFactor = Math.Clamp(zoomFactor, MinZoom, MaxZoom);
-        _panOffset = panOffset;
-
-        ApplyViewSettings();
-    }
-
-    public void ApplyViewSettings()
-    {
-        if (Texture == null)
+        _zoom = Math.Clamp(zoom, MinZoom, MaxZoom);
+        _pan = pan;
+        if (PixelWidth <= 0 || PixelHeight <= 0 || !_hasBase)
+        {
+            _pendingView = (_zoom, pan);
             return;
+        }
 
-        Vector2 availableSize = new(PixelWidth, PixelHeight);
-        if (availableSize.X <= 0 || availableSize.Y <= 0)
-            return;
-
-        _zoomFactor = Math.Clamp(_zoomFactor, MinZoom, MaxZoom);
-        _panOffset = ClampPanOffset(availableSize, _zoomFactor, _panOffset);
+        _pendingView = null;
+        ClampView();
     }
 
-    public bool CenterOnPosition(Vector2i indices)
+    public void ResetView()
     {
-        if (Texture == null)
+        _zoom = FitZoom;
+        _pan = Vector2.Zero;
+    }
+
+    public float PixelsPerTile
+    {
+        get
+        {
+            if (!_hasBase || PixelWidth <= 0 || PixelHeight <= 0)
+                return 1f;
+
+            var baseScale = MathF.Min((float) PixelWidth / _width, (float) PixelHeight / _height);
+            return baseScale * _zoom;
+        }
+    }
+
+    private float GetOverlayScale()
+    {
+        return PixelsPerTile / OverlayUnitsPerTile;
+    }
+
+    private Vector2 GetTopLeft()
+    {
+        var size = new Vector2(_width, _height) * PixelsPerTile;
+        return (new Vector2(PixelWidth, PixelHeight) - size) / 2f + _pan;
+    }
+
+    public Vector2 TileToPixel(Vector2 tile)
+    {
+        var scale = PixelsPerTile;
+        var topLeft = GetTopLeft();
+        return new Vector2(
+            topLeft.X + (tile.X - _min.X) * scale,
+            topLeft.Y + (_min.Y + _height - tile.Y) * scale);
+    }
+
+    public Vector2 PixelToTile(Vector2 pixel)
+    {
+        var scale = PixelsPerTile;
+        var topLeft = GetTopLeft();
+        return new Vector2(
+            _min.X + (pixel.X - topLeft.X) / scale,
+            _min.Y + _height - (pixel.Y - topLeft.Y) / scale);
+    }
+
+    public Vector2i PixelToIndices(Vector2 pixel)
+    {
+        var tile = PixelToTile(pixel);
+        return new Vector2i((int) MathF.Floor(tile.X), (int) MathF.Floor(tile.Y));
+    }
+
+    public Vector2 IndicesToPixelCenter(Vector2i indices)
+    {
+        return TileToPixel(new Vector2(indices.X + 0.5f, indices.Y + 0.5f));
+    }
+
+    public bool CenterOn(Vector2i indices)
+    {
+        if (!_hasBase)
             return false;
 
-        Vector2 availableSize = new(PixelWidth, PixelHeight);
-
-        if (availableSize.X <= 0 || availableSize.Y <= 0)
-            return false;
-
-        Vector2 targetPosition = IndicesToPosition(indices);
-
-        Vector2 textureSize = Texture.Size;
-        float baseScaleX = availableSize.X / textureSize.X;
-        float baseScaleY = availableSize.Y / textureSize.Y;
-        float baseScale = Math.Min(baseScaleX, baseScaleY);
-        float actualScale = baseScale * _zoomFactor;
-        Vector2 actualSize = textureSize * actualScale;
-        float overlayScale = actualScale / MapScale;
-
-        Vector2 screenCenter = availableSize / 2;
-        _panOffset = screenCenter - targetPosition * overlayScale - (availableSize - actualSize) / 2;
-        _panOffset = ClampPanOffset(availableSize, _zoomFactor, _panOffset);
-
+        var scale = PixelsPerTile;
+        var available = new Vector2(PixelWidth, PixelHeight);
+        var centered = (available - new Vector2(_width, _height) * scale) / 2f;
+        var offset = new Vector2(indices.X + 0.5f - _min.X, _min.Y + _height - (indices.Y + 0.5f)) * scale;
+        _pan = available / 2f - centered - offset;
+        ClampView();
         return true;
     }
 
-    public void ResetZoomAndPan()
+    private void ClampView()
     {
-        _zoomFactor = FitZoom;
-        _panOffset = Vector2.Zero;
-        ApplyViewSettings();
-        NotifyViewChanged();
+        _zoom = Math.Clamp(_zoom, MinZoom, MaxZoom);
+        if (!_hasBase || _zoom <= FitZoom + FitZoomEpsilon)
+        {
+            _pan = Vector2.Zero;
+            return;
+        }
+
+        var size = new Vector2(_width, _height) * PixelsPerTile;
+        var max = new Vector2(
+            MathF.Max(0f, (size.X - PixelWidth) / 2f),
+            MathF.Max(0f, (size.Y - PixelHeight) / 2f));
+
+        _pan = new Vector2(Math.Clamp(_pan.X, -max.X, max.X), Math.Clamp(_pan.Y, -max.Y, max.Y));
     }
 
-    public bool IsAtFitZoom(float? zoomFactor = null)
+    private float GetPanResistance()
     {
-        return (zoomFactor ?? _zoomFactor) <= FitZoom + FitZoomEpsilon;
-    }
-
-    public Vector2 IndicesToPosition(Vector2i indices)
-    {
-        return GetDrawPosition(indices) * MapScale;
-    }
-
-    public Vector2i PositionToIndices(Vector2 controlPosition)
-    {
-        if (Texture == null)
-            return Vector2i.Zero;
-
-        if (!TryGetMapPixelPosition(controlPosition, out var pixelPosition))
-            return Vector2i.Zero;
-
-        (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
-
-        Vector2 relativeToTexture = (pixelPosition - actualTopLeft) / overlayScale;
-
-        return new Vector2i(
-            (int)(relativeToTexture.X / MapScale) + _min.X,
-            _delta.Y - (int)(relativeToTexture.Y / MapScale) + _min.Y
-        );
-    }
-
-    public Vector2 ConvertIndicesToLineCoordinates(Vector2i indices)
-    {
-        return GetDrawPosition(indices) * MapScale;
-    }
-
-    private float GetUIScale()
-    {
-        return Width > 0 ? PixelWidth / Width : 1.0f;
-    }
-
-    private Vector2 LogicalToPixel(Vector2 logicalPosition)
-    {
-        float uiScale = GetUIScale();
-        return logicalPosition * uiScale;
-    }
-
-    private Vector2 PixelToLogical(Vector2 pixelPosition)
-    {
-        float uiScale = GetUIScale();
-        return pixelPosition / uiScale;
-    }
-
-    private float GetScaledBlipSize(float overlayScale)
-    {
-        float baseScaledSize = BaseBlipSize * (1.0f + (overlayScale - 1.0f) * 0.6f);
-        float zoomReduction = 1.0f / (float)Math.Pow(Math.Max(_zoomFactor, 0.3f), 0.3f);
-        return baseScaledSize * zoomReduction * BlipSizeMultiplier;
-    }
-
-    private (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) GetDrawParameters()
-    {
-        if (Texture == null)
-            return (Vector2.Zero, Vector2.Zero, 1.0f);
-
-        Vector2 textureSize = Texture.Size;
-        Vector2 availableSize = new(PixelWidth, PixelHeight);
-
-        float baseScaleX = availableSize.X / textureSize.X;
-        float baseScaleY = availableSize.Y / textureSize.Y;
-        float baseScale = Math.Min(baseScaleX, baseScaleY);
-        float actualScale = baseScale * _zoomFactor;
-
-        Vector2 actualSize = textureSize * actualScale;
-        Vector2 actualTopLeft = (availableSize - actualSize) / 2 + _panOffset;
-        float overlayScale = actualScale / MapScale;
-
-        return (actualSize, actualTopLeft, overlayScale);
-    }
-
-    private Vector2 ClampPanOffset(Vector2 availableSize, float zoomFactor, Vector2 panOffset)
-    {
-        if (Texture == null)
-            return Vector2.Zero;
-
-        if (IsAtFitZoom(zoomFactor))
-            return Vector2.Zero;
-
-        Vector2 textureSize = Texture.Size;
-        float baseScaleX = availableSize.X / textureSize.X;
-        float baseScaleY = availableSize.Y / textureSize.Y;
-        float baseScale = Math.Min(baseScaleX, baseScaleY);
-        Vector2 actualSize = textureSize * (baseScale * zoomFactor);
-
-        Vector2 maxPan = new(
-            Math.Max(0f, (actualSize.X - availableSize.X) * 0.5f),
-            Math.Max(0f, (actualSize.Y - availableSize.Y) * 0.5f));
-
-        return new Vector2(
-            Math.Clamp(panOffset.X, -maxPan.X, maxPan.X),
-            Math.Clamp(panOffset.Y, -maxPan.Y, maxPan.Y));
-    }
-
-    private float GetPanResistance(float zoomFactor)
-    {
-        if (IsAtFitZoom(zoomFactor))
+        if (_zoom <= FitZoom + FitZoomEpsilon)
             return 0f;
 
-        if (zoomFactor >= FitZoom + PanResistanceZoomRange)
+        if (_zoom >= FitZoom + PanResistanceZoomRange)
             return 1f;
 
-        float normalized = (zoomFactor - FitZoom) / PanResistanceZoomRange;
+        var normalized = (_zoom - FitZoom) / PanResistanceZoomRange;
         return MathF.Pow(Math.Clamp(normalized, 0f, 1f), PanResistanceExponent);
     }
 
-    private bool TryGetMapPixelPosition(Vector2 controlPosition, out Vector2 pixelPosition, bool requireInside = false)
+    private void ZoomAt(Vector2 pixel, bool zoomIn)
     {
-        pixelPosition = Vector2.Zero;
+        if (!_hasBase)
+            return;
 
-        if (Texture == null)
-            return false;
+        var anchor = PixelToTile(pixel);
+        var target = Math.Clamp(zoomIn ? _zoom * ZoomSpeed : _zoom / ZoomSpeed, MinZoom, MaxZoom);
+        if (MathF.Abs(target - _zoom) < 0.001f)
+            return;
 
-        Vector2 logicalPixelPosition = LogicalToPixel(controlPosition);
-        (Vector2 actualSize, Vector2 actualTopLeft, _) = GetDrawParameters();
-        UIBox2 mapRect = UIBox2.FromDimensions(actualTopLeft, actualSize);
+        _zoom = target;
+        if (_zoom <= FitZoom + FitZoomEpsilon)
+        {
+            _pan = Vector2.Zero;
+        }
+        else
+        {
+            _pan += pixel - TileToPixel(anchor);
+            ClampView();
+        }
 
-        if (requireInside && !mapRect.Contains(logicalPixelPosition))
-            return false;
-
-        pixelPosition = new Vector2(
-            Math.Clamp(logicalPixelPosition.X, mapRect.Left, mapRect.Right),
-            Math.Clamp(logicalPixelPosition.Y, mapRect.Top, mapRect.Bottom));
-        return true;
     }
 
-    private Vector2i GetDrawPosition(Vector2i pos)
+    private float GetBlipSize()
     {
-        return new Vector2i(pos.X - _min.X, _delta.Y - (pos.Y - _min.Y));
+        var overlay = GetOverlayScale();
+        var baseSize = BaseBlipSize * (1f + (overlay - 1f) * 0.6f);
+        var zoomReduction = 1f / MathF.Pow(MathF.Max(_zoom, 0.3f), 0.3f);
+        return baseSize * zoomReduction * BlipSizeMultiplier;
     }
 
-    private Vector2 PositionToLineCoordinatesFloat(Vector2 controlPosition, Vector2 actualTopLeft, float overlayScale)
+    protected override void Resized()
     {
-        Vector2 pixelPosition = LogicalToPixel(controlPosition);
-        return (pixelPosition - actualTopLeft) / overlayScale;
+        base.Resized();
+        ApplyPendingView();
+        ClampView();
+    }
+
+    private void ApplyPendingView()
+    {
+        if (_pendingView is not { } pending || PixelWidth <= 0 || PixelHeight <= 0 || !_hasBase)
+            return;
+
+        _pendingView = null;
+        _zoom = pending.Zoom;
+        _pan = pending.Pan;
     }
 }

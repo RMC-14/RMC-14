@@ -88,8 +88,8 @@
         requireInputValidation: false
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapGhost
-    layerSets: [TacticalMapSetGhost]
-    liveUpdate: true
+    allChannels: true # RMC14
+    liveUpdate: true # RMC14
   - type: ViewIntelObjectives
   - type: VentSight
   - type: IgnoreInteractionRange

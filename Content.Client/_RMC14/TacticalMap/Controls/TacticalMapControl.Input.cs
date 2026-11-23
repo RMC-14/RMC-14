@@ -1,460 +1,205 @@
-using System;
 using System.Numerics;
+using Content.Client._RMC14.TacticalMap.UI;
 using Content.Shared._RMC14.TacticalMap;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
-using Robust.Shared.Maths;
-using Robust.Shared.Network;
 
 namespace Content.Client._RMC14.TacticalMap.Controls;
 
 public sealed partial class TacticalMapControl
 {
+    private bool _toolActive;
+    private bool _panning;
+    private bool _panMoved;
+    private Vector2 _panStart;
+    private Vector2 _panLast;
+    private Vector2? _mouse;
+    private Vector2i? _hover;
+
+    public Vector2? MousePixel => _mouse;
+
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
     {
         base.KeyBindDown(args);
+        if (!_hasBase)
+            return;
 
+        var pixel = args.RelativePixelPosition;
         if (args.Function == EngineKeyFunctions.UIClick)
         {
-            if (HandleQueenEyeClick(args))
-                return;
-
-            if (HandleLabelClick(args))
-                return;
-
-            if (HandleBlipClick(args))
-                return;
-
-            HandleDrawingClick(args);
-        }
-        else if (args.Function == EngineKeyFunctions.UIRightClick)
-        {
-            HandlePanningStart(args);
-        }
-    }
-
-    private bool HandleQueenEyeClick(GUIBoundKeyEventArgs args)
-    {
-        if (QueenEyeMode && !Drawing && !IsCanvas)
-        {
-            Vector2i clickPosition = PositionToIndices(args.RelativePosition);
-            OnQueenEyeMove?.Invoke(clickPosition);
-            args.Handle();
-            return true;
-        }
-        return false;
-    }
-
-    private bool HandleLabelClick(GUIBoundKeyEventArgs args)
-    {
-        if (!LabelEditMode || !Drawing || CurrentLabelMode == LabelMode.None)
-            return false;
-
-        Vector2i? labelPosition = GetLabelAtPosition(args.RelativePosition);
-        if (labelPosition != null)
-        {
-            if (CurrentLabelMode == LabelMode.Tactical)
+            UserInteraction?.Invoke();
+            if (_tool != null && Draft != null)
             {
-                _draggingLabel = labelPosition;
-                _labelDragStart = LogicalToPixel(args.RelativePosition).Floored();
-                _currentDragPosition = LogicalToPixel(args.RelativePosition);
-            }
-            args.Handle();
-            return true;
-        }
-
-        Vector2i clickPosition = PositionToIndices(args.RelativePosition);
-        ShowLabelInputDialog(clickPosition);
-        args.Handle();
-        return true;
-    }
-
-    private bool HandleBlipClick(GUIBoundKeyEventArgs args)
-    {
-        var blipIndex = GetBlipIndexAtPosition(args.RelativePosition);
-        var allowBlipClick = !QueenEyeMode && !Drawing;
-
-        if (blipIndex != null && _blips != null && allowBlipClick)
-        {
-            var blip = _blips[blipIndex.Value];
-            OnBlipClicked?.Invoke(blip.Indices);
-            var entityId = _blipEntityIds != null && blipIndex.Value < _blipEntityIds.Length
-                ? _blipEntityIds[blipIndex.Value]
-                : (NetEntity?) null;
-            OnBlipEntityClicked?.Invoke(blip.Indices, entityId);
-            args.Handle();
-            return true;
-        }
-        return false;
-    }
-
-    private void HandleDrawingClick(GUIBoundKeyEventArgs args)
-    {
-        HideTunnelInfo();
-
-        if (Drawing && !LabelEditMode)
-        {
-            _dragging = true;
-            if (!EraserMode)
-                BeginStroke();
-            Vector2 startPixel = LogicalToPixel(args.RelativePosition);
-            _dragStart = startPixel.Floored();
-            _lastDrag = _dragStart;
-            _previewEnd = _dragStart;
-            _lastErasePosition = null;
-
-            if (EraserMode)
-            {
-                _lastErasePosition = startPixel;
-                TryEraseAt(args.RelativePosition);
+                _toolActive = true;
+                _tool.Begin(this, pixel);
+                args.Handle();
+                return;
             }
 
-            OnUserInteraction?.Invoke();
-            args.Handle();
+            if (PointMode)
+            {
+                PointClicked?.Invoke(PixelToIndices(pixel));
+                args.Handle();
+                return;
+            }
+
+            if (AllowBlipClicks && TryFindBlip(pixel, out var blip))
+            {
+                BlipClicked?.Invoke(blip.Entity);
+                args.Handle();
+            }
+
+            return;
         }
-    }
 
-    private bool HandleLabelRightClick(GUIBoundKeyEventArgs args)
-    {
-        Vector2i? labelPosition = GetTacticalLabelAtPosition(args.RelativePosition);
-        if (labelPosition == null)
-            return false;
-
-        string? existingText = TacticalLabels.TryGetValue(labelPosition.Value, out var data)
-            ? data.Text
-            : null;
-        if (string.IsNullOrWhiteSpace(existingText))
-            return false;
-
-        ShowLabelInputDialog(labelPosition.Value, existingText);
-        args.Handle();
-        return true;
-    }
-
-    private bool HandleBlipRightClick(GUIBoundKeyEventArgs args)
-    {
-        TacticalMapBlip? clickedBlip = GetBlipAtPosition(args.RelativePosition);
-        if (clickedBlip != null && OnBlipRightClicked != null)
+        if (args.Function == EngineKeyFunctions.UIRightClick)
         {
-            OnBlipRightClicked.Invoke(clickedBlip.Value.Indices, "");
+            _panning = true;
+            _panMoved = false;
+            _panStart = pixel;
+            _panLast = pixel;
             args.Handle();
-            return true;
         }
-        return false;
-    }
-
-    private void HandleRightClickAction(GUIBoundKeyEventArgs args)
-    {
-        if (HandleLabelRightClick(args))
-            return;
-
-        if (HandleBlipRightClick(args))
-            return;
-
-        HandleContextMenuRequest(args);
-    }
-
-    private bool HandleContextMenuRequest(GUIBoundKeyEventArgs args)
-    {
-        if (OnContextMenuRequested == null || Texture == null)
-            return false;
-
-        Vector2i clickPosition = PositionToIndices(args.RelativePosition);
-        OnContextMenuRequested.Invoke(this, clickPosition, args.PointerLocation.Position);
-        args.Handle();
-        return true;
-    }
-
-    private void HandlePanningStart(GUIBoundKeyEventArgs args)
-    {
-        HideTunnelInfo();
-        _rightClickPanning = true;
-        _rightClickMoved = false;
-        _rightClickStartPosition = LogicalToPixel(args.RelativePosition);
-        _lastPanPosition = _rightClickStartPosition;
-        args.Handle();
     }
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
         base.KeyBindUp(args);
-
+        var pixel = args.RelativePixelPosition;
         if (args.Function == EngineKeyFunctions.UIClick)
         {
-            if (_draggingLabel != null && _labelDragStart != null && _currentDragPosition != null)
-            {
-                Vector2 currentPixelPos = LogicalToPixel(args.RelativePosition);
-                Vector2 dragDiff = currentPixelPos - _labelDragStart.Value;
+            if (!_toolActive)
+                return;
 
-                if (dragDiff.Length() > MinDragDistance)
-                {
-                    Vector2i newPosition = PositionToIndices(args.RelativePosition);
-                    OnMoveLabel?.Invoke(_draggingLabel.Value, newPosition);
-                }
-                else
-                {
-                    string? existingText = GetLabelAt(_draggingLabel.Value);
-                    if (existingText != null)
-                    {
-                        ShowLabelInputDialog(_draggingLabel.Value, existingText);
-                    }
-                }
-
-                _draggingLabel = null;
-                _labelDragStart = null;
-                _currentDragPosition = null;
-                args.Handle();
-            }
-            else if (_dragging && Drawing && !LabelEditMode)
-            {
-                if (!EraserMode && _dragStart != null && (StraightLineMode || SquareMode))
-                {
-                    Vector2i currentPos = LogicalToPixel(args.RelativePosition).Floored();
-                    Vector2i diff = currentPos - _dragStart.Value;
-
-                    if (diff.Length >= MinDragDistance)
-                    {
-                        Vector2i startIndices = PositionToIndices(PixelToLogical(new Vector2(_dragStart.Value.X, _dragStart.Value.Y)));
-                        Vector2i endIndices = PositionToIndices(args.RelativePosition);
-
-                        if (StraightLineMode)
-                        {
-                            endIndices = SnapToStraightLine(startIndices, endIndices);
-                            Vector2 lineStart = ConvertIndicesToLineCoordinates(startIndices);
-                            Vector2 lineEnd = ConvertIndicesToLineCoordinates(endIndices);
-                            AddLineToCanvas(lineStart, lineEnd, smooth: false);
-                        }
-                        else if (SquareMode)
-                        {
-                            AddSquareToCanvas(startIndices, endIndices);
-                        }
-                    }
-                }
-
-                if (!EraserMode)
-                    EndStroke();
-
-                _dragging = false;
-                _lastDrag = null;
-                _dragStart = null;
-                _previewEnd = null;
-                _lastErasePosition = null;
-                args.Handle();
-            }
-        }
-        else if (args.Function == EngineKeyFunctions.UIRightClick)
-        {
-            if (!_rightClickMoved)
-                HandleRightClickAction(args);
-
-            _rightClickPanning = false;
-            _lastPanPosition = null;
-            _rightClickStartPosition = null;
-            _rightClickMoved = false;
+            _toolActive = false;
+            _tool?.End(this, pixel);
             args.Handle();
+            return;
         }
+
+        if (args.Function != EngineKeyFunctions.UIRightClick || !_panning)
+            return;
+
+        _panning = false;
+        args.Handle();
+        if (_panMoved || !_hasBase)
+            return;
+
+        var indices = PixelToIndices(pixel);
+        if (TryFindBlip(pixel, out var blip))
+        {
+            BlipRightClicked?.Invoke(blip.Entity, blip.Blip.Indices);
+            return;
+        }
+
+        if (_tool != null && Draft != null && TryGetDraftLabelAt(pixel, out var labelTile))
+        {
+            OpenLabelDialog(labelTile);
+            return;
+        }
+
+        ContextMenuRequested?.Invoke(indices, GlobalPosition + args.RelativePosition);
     }
 
     protected override void MouseMove(GUIMouseMoveEventArgs args)
     {
         base.MouseMove(args);
+        var pixel = args.RelativePixelPosition;
+        _mouse = pixel;
 
-        _lastMousePosition = args.RelativePosition;
-
-        if (_draggingLabel != null)
+        if (_panning)
         {
-            _currentDragPosition = LogicalToPixel(args.RelativePosition);
-            args.Handle();
-        }
-        else if (_dragging && Drawing && !LabelEditMode)
-        {
-            Vector2 currentPixelPos = LogicalToPixel(args.RelativePosition);
-            Vector2i currentPos = currentPixelPos.Floored();
-
-            if (EraserMode)
+            if (!_panMoved && (pixel - _panStart).Length() >= MinDragDistance && GetPanResistance() > 0f)
             {
-                if (_lastErasePosition == null ||
-                    (currentPixelPos - _lastErasePosition.Value).Length() >= MinEraserSegmentPixels)
-                {
-                    TryEraseAt(args.RelativePosition);
-                    _lastErasePosition = currentPixelPos;
-                }
-            }
-            else if (StraightLineMode || SquareMode)
-            {
-                _previewEnd = currentPos;
-            }
-            else
-            {
-                if (_lastDrag != null)
-                {
-                    Vector2i diff = currentPos - _lastDrag.Value;
-                    if (diff.Length >= MinDragDistance)
-                    {
-                        if (Texture == null)
-                            return;
-
-                        (_, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
-                        float minSegment = MinFreehandSegmentPixels / Math.Max(overlayScale, 0.001f);
-
-                        Vector2 lineStart = PositionToLineCoordinatesFloat(
-                            PixelToLogical(new Vector2(_lastDrag.Value.X, _lastDrag.Value.Y)),
-                            actualTopLeft,
-                            overlayScale);
-                        Vector2 lineEnd = PositionToLineCoordinatesFloat(
-                            args.RelativePosition,
-                            actualTopLeft,
-                            overlayScale);
-
-                        Vector2 delta = lineEnd - lineStart;
-                        float distance = delta.Length();
-                        if (distance >= minSegment)
-                        {
-                            int steps = (int)MathF.Ceiling(distance / minSegment);
-                            Vector2 step = delta / steps;
-                            Vector2 prev = lineStart;
-                            for (int i = 1; i <= steps; i++)
-                            {
-                                Vector2 next = lineStart + step * i;
-                                AddLineSegment(prev, next);
-                                prev = next;
-                            }
-                        }
-                        _lastDrag = currentPos;
-                    }
-                }
-            }
-            args.Handle();
-        }
-        else if (_rightClickPanning && _lastPanPosition != null)
-        {
-            Vector2 currentPixelPos = LogicalToPixel(args.RelativePosition);
-
-            if (_rightClickStartPosition == null)
-            {
-                _rightClickStartPosition = currentPixelPos;
-                _lastPanPosition = currentPixelPos;
+                _panMoved = true;
+                _panLast = pixel;
             }
 
-            if (!_rightClickMoved)
+            if (_panMoved)
             {
-                if ((currentPixelPos - _rightClickStartPosition.Value).Length() < MinDragDistance)
-                    return;
-
-                if (GetPanResistance(_zoomFactor) <= 0f)
-                    return;
-
-                _rightClickMoved = true;
-                _lastPanPosition = currentPixelPos;
+                _pan += (pixel - _panLast) * GetPanResistance();
+                _panLast = pixel;
+                ClampView();
+                UserInteraction?.Invoke();
             }
-
-            Vector2 panDelta = currentPixelPos - _lastPanPosition.Value;
-            float panResistance = GetPanResistance(_zoomFactor);
-
-            if (panResistance <= 0f)
-                return;
-
-            _panOffset += panDelta * panResistance;
-            ApplyViewSettings();
-            NotifyViewChanged();
-
-            _lastPanPosition = currentPixelPos;
-            args.Handle();
         }
 
-        UpdateHoverInfo(args.RelativePosition);
+        if (_toolActive)
+            _tool?.Move(this, pixel);
+
+        UpdateHover(pixel);
     }
 
     protected override void MouseExited()
     {
         base.MouseExited();
-        _lastMousePosition = null;
-        ClearHoverInfo();
+        _mouse = null;
+        if (_hover == null)
+            return;
+
+        _hover = null;
+        HoverChanged?.Invoke(null);
     }
 
     protected override void MouseWheel(GUIMouseWheelEventArgs args)
     {
         base.MouseWheel(args);
-
-        if (Texture == null)
+        if (!_hasBase || args.Delta.Y == 0)
             return;
 
-        if (!TryGetMapPixelPosition(args.RelativePosition, out var mousePixelPos, requireInside: true))
-            return;
-
-        (Vector2 oldActualSize, Vector2 oldActualTopLeft, float oldOverlayScale) = GetDrawParameters();
-
-        float oldZoom = _zoomFactor;
-        float targetZoom = oldZoom;
-
-        if (args.Delta.Y > 0)
-            targetZoom *= ZoomSpeed;
-        else if (args.Delta.Y < 0)
-            targetZoom /= ZoomSpeed;
-
-        targetZoom = Math.Clamp(targetZoom, MinZoom, MaxZoom);
-
-        if (Math.Abs(targetZoom - oldZoom) > 0.001f)
-        {
-            Vector2 relativeToTexture = (mousePixelPos - oldActualTopLeft) / oldOverlayScale;
-            Vector2 availableSize = new(PixelWidth, PixelHeight);
-            Vector2 newPan = Vector2.Zero;
-
-            if (!IsAtFitZoom(targetZoom))
-            {
-                Vector2 textureSize = Texture.Size;
-                float baseScaleX = availableSize.X / textureSize.X;
-                float baseScaleY = availableSize.Y / textureSize.Y;
-                float baseScale = Math.Min(baseScaleX, baseScaleY);
-                float actualScale = baseScale * targetZoom;
-                Vector2 actualSize = textureSize * actualScale;
-                float overlayScale = actualScale / MapScale;
-                Vector2 centeredTopLeft = (availableSize - actualSize) / 2;
-
-                newPan = mousePixelPos - relativeToTexture * overlayScale - centeredTopLeft;
-            }
-
-            _zoomFactor = targetZoom;
-            _panOffset = ClampPanOffset(availableSize, _zoomFactor, newPan);
-            NotifyViewChanged();
-        }
-
+        ZoomAt(args.RelativePixelPosition, args.Delta.Y > 0);
+        UserInteraction?.Invoke();
         args.Handle();
     }
 
-    private TacticalMapBlip? GetBlipAtPosition(Vector2 controlPosition)
+    private void UpdateHover(Vector2 pixel)
     {
-        var index = GetBlipIndexAtPosition(controlPosition);
-        if (index == null || _blips == null)
-            return null;
-
-        return _blips[index.Value];
-    }
-
-    private int? GetBlipIndexAtPosition(Vector2 controlPosition)
-    {
-        if (_blips == null || Texture == null)
-            return null;
-
-        Vector2 pixelPosition = LogicalToPixel(controlPosition);
-        (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
-        float clickTolerance = ClickTolerance * overlayScale;
-
-        for (var i = 0; i < _blips.Length; i++)
+        Vector2i? hover = null;
+        if (_hasBase)
         {
-            var blip = _blips[i];
-            Vector2 blipPosition = IndicesToPosition(blip.Indices) * overlayScale + actualTopLeft;
-            float scaledBlipSize = GetScaledBlipSize(overlayScale);
-
-            UIBox2 blipRect = UIBox2.FromDimensions(
-                blipPosition - new Vector2(clickTolerance, clickTolerance),
-                new Vector2(scaledBlipSize + clickTolerance * 2, scaledBlipSize + clickTolerance * 2)
-            );
-
-            if (blipRect.Contains(pixelPosition))
-                return i;
+            var indices = PixelToIndices(pixel);
+            if (IsWithinMap(indices))
+                hover = indices;
         }
 
-        return null;
+        if (hover == _hover)
+            return;
+
+        _hover = hover;
+        HoverChanged?.Invoke(hover);
+    }
+
+    public void OpenLabelDialog(Vector2i tile)
+    {
+        if (Draft == null)
+            return;
+
+        var draft = Draft;
+        TacticalMapLabelData? existing = draft.Labels.TryGetValue(tile, out var label) ? label : null;
+        LabelTextDialog.Show(MapTheme,
+            existing?.Text ?? string.Empty,
+            onConfirmed: text =>
+            {
+                text = text.Trim();
+                if (text.Length > LabelMaxLength)
+                    text = text.Substring(0, LabelMaxLength);
+
+                if (text.Length == 0)
+                {
+                    if (existing != null)
+                        draft.SetLabel(tile, null);
+                }
+                else
+                {
+                    draft.SetLabel(tile, new TacticalMapLabelData(text, existing?.Color ?? DrawColor));
+                }
+
+                NotifyDraftChanged();
+            },
+            onDeleted: () =>
+            {
+                draft.SetLabel(tile, null);
+                NotifyDraftChanged();
+            });
     }
 }

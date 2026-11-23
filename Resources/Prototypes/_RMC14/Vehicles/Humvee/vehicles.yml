@@ -142,9 +142,8 @@
     - offset: 1,-0.1
       radius: 0.45
       interiorCoords: 2.41,-1.35
-  - type: TacticalMapLayerTracked
-    layers: [Marines]
   - type: TacticalMapTracked
+    factions: [UNMC]
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
