@@ -1,31 +1,31 @@
-using System.Collections.Generic;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.TacticalMap.Controls;
 
-public sealed class TacticalMapOptionButton : OptionButton
+public sealed class TacticalMapOptionButton : OptionButton, ITacticalMapThemed
 {
-    private static readonly Color BackgroundColor = Color.FromHex("#1A1F27").WithAlpha(0.75f);
-    private static readonly Color BorderColor = Color.FromHex("#2C3440").WithAlpha(0.8f);
-
     private readonly Label? _label;
     private readonly TextureRect? _triangle;
+    private TacticalMapTheme _theme = TacticalMapTheme.Marine;
 
     public TacticalMapOptionButton()
     {
-        StyleBoxOverride = CreateStyleBox();
-
         _label = FindChild<Label>(this);
         if (_label != null)
         {
             _label.ClipText = true;
-            _label.Align = Label.AlignMode.Center;
+            _label.Align = Label.AlignMode.Left;
         }
 
         _triangle = FindChild<TextureRect>(this);
+        UpdateVisualState();
+    }
+
+    public void ApplyTheme(TacticalMapTheme theme)
+    {
+        _theme = theme;
         UpdateVisualState();
     }
 
@@ -37,33 +37,32 @@ public sealed class TacticalMapOptionButton : OptionButton
 
     public override void ButtonOverride(Button button)
     {
-        button.StyleBoxOverride = CreateStyleBox();
-        button.TextAlign = Label.AlignMode.Center;
+        button.StyleBoxOverride = TacticalMapStyle.Box(_theme.Surface, _theme.Border, padding: 3);
+        button.TextAlign = Label.AlignMode.Left;
         button.ClipText = true;
-        button.Label.FontColorOverride = TacticalMapInnerButton.DefaultTextColor;
+        button.Label.FontOverride = TacticalMapStyle.Font(_theme);
+        button.Label.FontColorOverride = _theme.Text;
     }
 
     private void UpdateVisualState()
     {
-        var color = Disabled
-            ? TacticalMapInnerButton.DefaultDisabledTextColor
-            : (IsHovered ? TacticalMapInnerButton.DefaultHoveredTextColor : TacticalMapInnerButton.DefaultTextColor);
+        var hovered = DrawMode == DrawModeEnum.Hover;
+        var color = Disabled ? _theme.TextDisabled : _theme.Text;
+        var box = TacticalMapStyle.Box(
+            hovered ? Color.InterpolateBetween(_theme.Surface, _theme.Text, _theme.Hover.A) : _theme.Surface,
+            hovered ? _theme.TextMuted : _theme.Border);
+        box.SetContentMarginOverride(StyleBox.Margin.Horizontal, 6);
+        box.SetContentMarginOverride(StyleBox.Margin.Vertical, 1);
+        StyleBoxOverride = box;
 
         if (_label != null)
+        {
+            _label.FontOverride = TacticalMapStyle.Font(_theme);
             _label.FontColorOverride = color;
+        }
 
         if (_triangle != null)
             _triangle.ModulateSelfOverride = color;
-    }
-
-    private static StyleBoxFlat CreateStyleBox()
-    {
-        return new StyleBoxFlat
-        {
-            BackgroundColor = BackgroundColor,
-            BorderColor = BorderColor,
-            BorderThickness = new Thickness(1),
-        };
     }
 
     private static T? FindChild<T>(Control root) where T : Control
