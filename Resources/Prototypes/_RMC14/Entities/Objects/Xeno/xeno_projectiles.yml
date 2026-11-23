@@ -530,9 +530,10 @@
         Heat: 45
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
-    noDamageOnFriendlyXeno: true
+    cancelSameHiveCollide: false
   - type: ProjectileMaxRange
     max: 7
+  - type: RMCIgnoreRequiredProjectileTarget
   - type: RMCPenetratingProjectile
     range: 7
     rangeLossPerHit: 0
@@ -542,7 +543,7 @@
     membraneMultiplier: 10
     fixedDamageLoss: 24.75
     spentOnZeroDamage: true
-    deleteOnSpent: true
+    deleteOnZeroDamage: true
 
 - type: entity
   parent: XenoChargedSpitProjectileDissolver

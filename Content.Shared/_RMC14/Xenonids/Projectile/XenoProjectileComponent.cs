@@ -16,5 +16,5 @@ public sealed partial class XenoProjectileComponent : Component
     public bool StopOnCollide;
 
     [DataField, AutoNetworkedField]
-    public bool NoDamageOnFriendlyXeno;
+    public bool CancelSameHiveCollide = true;
 }

@@ -1,8 +1,9 @@
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared.Projectiles;
-using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Standing;
-using Robust.Shared.Physics.Events;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
+using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.Damage.Components;
 
@@ -39,7 +40,7 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
             if (TerminatingOrDeleted(shooter.Value))
                 return;
 
-            if (!_container.IsEntityOrParentInContainer(shooter.Value))
+            if (!_container.IsEntityOrParentInContainer(shooter.Value) && !HasComp<RMCIgnoreRequiredProjectileTargetComponent>(other))
                args.Cancelled = true;
         }
     }

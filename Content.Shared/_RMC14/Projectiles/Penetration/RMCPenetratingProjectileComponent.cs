@@ -68,14 +68,11 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
     public FixedPoint2? FixedDamageLoss;
 
     /// <summary>
-    ///     If the projectile gets spent at 0 damage left.
+    ///     If the projectile gets deleted at 0 damage left.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool SpentOnZeroDamage = false;
+    public bool DeleteOnZeroDamage = false;
 
-    /// <summary>
-    ///     Used with above field.
-    /// </summary>
     [DataField, AutoNetworkedField]
-    public bool ForceSpent = false;
+    public bool DeleteAfterHit = false;
 }
