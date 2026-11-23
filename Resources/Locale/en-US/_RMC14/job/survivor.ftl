@@ -285,7 +285,7 @@ rmc-job-greeting-soro-spetsnaz = You are a member of Group 'B' of the Spetsnaz R
 
   On a return trip from an expedition, you received a distress signal from a crashed military supply ship on the colony of Sorokyne Strata. Given the colony itself went dark, the likeliest scenario any of your squad could think of was foreign groundside anti-air as a result of a potential incursion. Your unit elected to deploy to the colony to perform reconnaissance.
 
-  On atmospheric entry, you couldn't observe anything to suggest an invasion. Nothing at all. As you land, the colony begins to slip into the shadow of the mountains. The colony is still. The sunlight is dimming. The silence is full.
+  As you circled in low orbit in observation of the colony, you felt the underside of the dropship shudder as you slowly began losing altitude. None of you could make out what it was, nor did you have time as the pilot strained to perform an emergency landing. Now grounded, the dread of what lurks in the darkness begins to trickle in.
 
   You must survive and find a way to contact the Ministry of Space Colonization.
 
@@ -293,7 +293,7 @@ rmc-job-greeting-soro-spetsnaz = You are a member of Group 'B' of the Spetsnaz R
 
   You are [bold][color=#ce1e1e][font size=14]not aware[/font][/color][/bold] of the marines nor their intentions.
 
-  You are [bold][color=#ce1e1e][font size=14]not aware[/font][/color][/bold] of the xenonid threat.
+  You are [bold][color=#51A16C][font size=14]aware[/font][/color][/bold] of the xenonid threat.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
