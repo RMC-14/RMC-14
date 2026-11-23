@@ -53,4 +53,4 @@
     damage:
       types:
         Slash: 45
-  - type: OmaeWaMouShindeiru #TODO Make both katana wielders attack each other somehow?
+  - type: OmaeWaMouShindeiru

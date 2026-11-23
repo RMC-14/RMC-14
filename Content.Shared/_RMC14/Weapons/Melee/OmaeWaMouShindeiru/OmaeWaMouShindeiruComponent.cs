@@ -41,7 +41,7 @@ public sealed partial class OmaeWaMouShindeiruComponent : Component
     };
 
     [DataField]
-    public SoundSpecifier BoneBreakSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/alien_knockdown.ogg"); //TODO RMC14 Bonebreak sound bone_break1
+    public SoundSpecifier BoneBreakSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/alien_knockdown.ogg"); //TODO RMC14 Bonebreak sound bone_break1.ogg
 
     public readonly Dictionary<EntityUid, EntityUid> Streams = new();
 }
