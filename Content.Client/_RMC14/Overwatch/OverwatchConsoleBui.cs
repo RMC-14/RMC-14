@@ -234,6 +234,35 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         SendPredictedMessage(msg);
                     };
 
+                monitor.OffsetUpButton.Text = "^";
+                monitor.OffsetUpButton.OnPressed += _ =>
+                {
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.North);
+                };
+
+                monitor.OffsetLeftButton.Text = "<";
+                monitor.OffsetLeftButton.OnPressed += _ =>
+                {
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.West);
+                };
+
+                monitor.OffsetRightButton.Text = ">";
+                monitor.OffsetRightButton.OnPressed += _ =>
+                {
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.East);
+                };
+
+                monitor.OffsetDownButton.Text = "v";
+                monitor.OffsetDownButton.OnPressed += _ =>
+                {
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.South);
+                };
+
+                monitor.ResetOffsetButton.OnPressed += _ =>
+                {
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.Reset);
+                };
+
                 monitor.MessageSquadButton.OnPressed += _ =>
                 {
                     if (_messagePending || _messageWindow is { Disposed: false, IsOpen: true })
