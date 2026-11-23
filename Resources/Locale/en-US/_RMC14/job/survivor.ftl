@@ -498,7 +498,7 @@ rmc-job-greeting-shivas-commando = You are a Weston-Yamada Commando!
 
 rmc-job-greeting-shivas-panic-room-colonist = You are a Weston-Yamada employee of Shiva's Snowball!
 
-  You are an employee of Weston-Yamada's working on the colony. Your supervisor ushered you and your peers into the panic room as the outbreak began, lowering the shutters once everyone was inside. You have been taking shelter in the panic room in hopes of waiting out the infestation.
+  You are an employee of Weston-Yamada working on the colony. Your supervisor ushered you and your peers into the panic room as the outbreak began, lowering the shutters once everyone was inside. You have been taking shelter in the panic room in hopes of waiting out the infestation.
 
   It has been weeks. Supplies are running out. None of you are sure how much longer you can last. The shutters occasionally tremble as freakish claws crawl under them in an attempt to pry them open, but to no avail. You have no idea how long it will be until they succeed.
 
