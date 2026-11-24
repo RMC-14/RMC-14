@@ -34,7 +34,7 @@ public sealed partial class IconSmoothSystem
         _sprite.LayerSetVisible((uid, sprite), EdgeLayer.West, false);
     }
 
-    private void OnEdgeShutdown(EntityUid uid, SmoothEdgeComponent component, ComponentShutdown args)
+    private void OnEdgeShutdown(EntityUid uid, SmoothEdgeComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;

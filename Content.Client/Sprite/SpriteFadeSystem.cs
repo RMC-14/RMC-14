@@ -52,7 +52,7 @@ public sealed class SpriteFadeSystem : EntitySystem
         SubscribeLocalEvent<FadingSpriteComponent, ComponentShutdown>(OnFadingShutdown);
     }
 
-    private void OnFadingShutdown(EntityUid uid, FadingSpriteComponent component, ComponentShutdown args)
+    private void OnFadingShutdown(EntityUid uid, FadingSpriteComponent component, ref ComponentShutdown args)
     {
         if (MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating || !TryComp<SpriteComponent>(uid, out var sprite))
             return;

@@ -153,7 +153,7 @@ public sealed class SurveillanceCameraSystem : EntitySystem
         SetActive(camera, args.Powered, component);
     }
 
-    private void OnShutdown(EntityUid camera, SurveillanceCameraComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid camera, SurveillanceCameraComponent component, ref ComponentShutdown args)
     {
         Deactivate(camera, component);
     }

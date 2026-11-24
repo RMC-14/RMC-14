@@ -35,7 +35,7 @@ public sealed class WorldControllerSystem : EntitySystem
     /// <summary>
     ///     Handles deleting chunks properly.
     /// </summary>
-    private void OnChunkShutdown(EntityUid uid, WorldChunkComponent component, ComponentShutdown args)
+    private void OnChunkShutdown(EntityUid uid, WorldChunkComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<WorldControllerComponent>(component.Map, out var controller))
             return;
@@ -67,7 +67,7 @@ public sealed class WorldControllerSystem : EntitySystem
     /// <summary>
     ///     Handles the inner logic of unloading a chunk, i.e. events.
     /// </summary>
-    private void OnChunkUnloadedCore(EntityUid uid, LoadedChunkComponent component, ComponentShutdown args)
+    private void OnChunkUnloadedCore(EntityUid uid, LoadedChunkComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<WorldChunkComponent>(uid, out var chunk))
             return;

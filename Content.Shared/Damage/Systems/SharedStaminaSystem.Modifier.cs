@@ -18,7 +18,7 @@ public partial class SharedStaminaSystem
         stamina.CritThreshold *= comp.Modifier;
     }
 
-    private void OnModifierShutdown(EntityUid uid, StaminaModifierComponent comp, ComponentShutdown args)
+    private void OnModifierShutdown(EntityUid uid, StaminaModifierComponent comp, ref ComponentShutdown args)
     {
         if (!TryComp<StaminaComponent>(uid, out var stamina))
             return;

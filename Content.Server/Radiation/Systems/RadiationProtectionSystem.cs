@@ -25,7 +25,7 @@ public sealed class RadiationProtectionSystem : EntitySystem
             buffComp.Modifiers.Add(component.RadiationProtectionModifierSetId, modifier);
     }
 
-    private void OnShutdown(EntityUid uid, RadiationProtectionComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, RadiationProtectionComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<DamageProtectionBuffComponent>(uid, out var buffComp))
             return;

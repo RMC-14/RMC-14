@@ -62,7 +62,7 @@ namespace Content.Server.Power.EntitySystems
             });
         }
 
-        private void OnProviderShutdown(EntityUid uid, ApcPowerProviderComponent component, ComponentShutdown args)
+        private void OnProviderShutdown(EntityUid uid, ApcPowerProviderComponent component, ref ComponentShutdown args)
         {
             foreach (var receiver in component.LinkedReceivers)
             {

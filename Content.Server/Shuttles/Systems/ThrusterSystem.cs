@@ -255,7 +255,7 @@ public sealed class ThrusterSystem : EntitySystem
         ent.Comp.NextFire = _timing.CurTime + ent.Comp.FireCooldown;
     }
 
-    private void OnThrusterShutdown(EntityUid uid, ThrusterComponent component, ComponentShutdown args)
+    private void OnThrusterShutdown(EntityUid uid, ThrusterComponent component, ref ComponentShutdown args)
     {
         DisableThruster(uid, component);
     }

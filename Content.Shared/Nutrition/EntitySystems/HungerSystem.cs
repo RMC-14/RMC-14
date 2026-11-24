@@ -45,7 +45,7 @@ public sealed class HungerSystem : EntitySystem
         SetHunger(uid, amount, component);
     }
 
-    private void OnShutdown(EntityUid uid, HungerComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, HungerComponent component, ref ComponentShutdown args)
     {
         _alerts.ClearAlertCategory(uid, component.HungerAlertCategory);
     }

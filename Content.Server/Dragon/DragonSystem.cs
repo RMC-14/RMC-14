@@ -112,7 +112,7 @@ public sealed partial class DragonSystem : EntitySystem
         _actions.AddAction(uid, ref component.SpawnRiftActionEntity, component.SpawnRiftAction);
     }
 
-    private void OnShutdown(EntityUid uid, DragonComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, DragonComponent component, ref ComponentShutdown args)
     {
         DeleteRifts(uid, false, component);
     }

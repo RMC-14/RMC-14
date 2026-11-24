@@ -46,7 +46,7 @@ public sealed class FlashSystem : SharedFlashSystem
         }
     }
 
-    private void OnShutdown(EntityUid uid, FlashedComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, FlashedComponent component, ref ComponentShutdown args)
     {
         if (_player.LocalEntity == uid)
         {

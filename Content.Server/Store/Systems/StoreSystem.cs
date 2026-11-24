@@ -62,7 +62,7 @@ public sealed partial class StoreSystem : EntitySystem
         RaiseLocalEvent(uid, ref ev, true);
     }
 
-    private void OnShutdown(EntityUid uid, StoreComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, StoreComponent component, ref ComponentShutdown args)
     {
         var ev = new StoreRemovedEvent();
         RaiseLocalEvent(uid, ref ev, true);

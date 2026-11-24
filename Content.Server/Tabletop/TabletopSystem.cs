@@ -153,7 +153,7 @@ namespace Content.Server.Tabletop
             OpenSessionFor(actor.PlayerSession, uid);
         }
 
-        private void OnGameShutdown(EntityUid uid, TabletopGameComponent component, ComponentShutdown args)
+        private void OnGameShutdown(EntityUid uid, TabletopGameComponent component, ref ComponentShutdown args)
         {
             CleanupSession(uid);
         }
@@ -169,7 +169,7 @@ namespace Content.Server.Tabletop
                 CloseSessionFor(args.Player, component.Tabletop);
         }
 
-        private void OnGamerShutdown(EntityUid uid, TabletopGamerComponent component, ComponentShutdown args)
+        private void OnGamerShutdown(EntityUid uid, TabletopGamerComponent component, ref ComponentShutdown args)
         {
             if (!TryComp(uid, out ActorComponent? actor))
                 return;

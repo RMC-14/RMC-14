@@ -242,7 +242,7 @@ public sealed class GatewaySystem : EntitySystem
         UpdateAppearance(uid);
     }
 
-    private void OnDestinationShutdown(EntityUid uid, GatewayComponent comp, ComponentShutdown args)
+    private void OnDestinationShutdown(EntityUid uid, GatewayComponent comp, ref ComponentShutdown args)
     {
         var query = AllEntityQuery<GatewayComponent>();
         while (query.MoveNext(out var gatewayUid, out var gateway))

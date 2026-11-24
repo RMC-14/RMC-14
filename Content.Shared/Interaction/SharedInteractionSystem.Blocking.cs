@@ -52,7 +52,7 @@ public partial class SharedInteractionSystem
         _actionBlockerSystem.UpdateCanMove(uid);
     }
 
-    private void OnBlockingShutdown(EntityUid uid, BlockMovementComponent component, ComponentShutdown args)
+    private void OnBlockingShutdown(EntityUid uid, BlockMovementComponent component, ref ComponentShutdown args)
     {
         _actionBlockerSystem.UpdateCanMove(uid);
     }

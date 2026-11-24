@@ -456,7 +456,7 @@ public sealed class MobThresholdSystem : EntitySystem
         UpdateAllEffects((target, thresholds, mobState, damageable), mobState.CurrentState);
     }
 
-    private void MobThresholdShutdown(EntityUid target, MobThresholdsComponent component, ComponentShutdown args)
+    private void MobThresholdShutdown(EntityUid target, MobThresholdsComponent component, ref ComponentShutdown args)
     {
         if (component.TriggersAlerts)
             _alerts.ClearAlertCategory(target, component.HealthAlertCategory);

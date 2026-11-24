@@ -68,7 +68,7 @@ public sealed partial class ResearchSystem
             RegisterClient(uid, allServers[0], component, allServers[0]);
     }
 
-    private void OnClientShutdown(EntityUid uid, ResearchClientComponent component, ComponentShutdown args)
+    private void OnClientShutdown(EntityUid uid, ResearchClientComponent component, ref ComponentShutdown args)
     {
         UnregisterClient(uid, component);
     }

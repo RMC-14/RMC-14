@@ -69,7 +69,7 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
         _toUpdate.UnionWith(_physics.GetContactingEntities(uid));
     }
 
-    private void OnShutdown(EntityUid uid, SpeedModifierContactsComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, SpeedModifierContactsComponent component, ref ComponentShutdown args)
     {
         if (!TryComp(uid, out PhysicsComponent? phys))
             return;

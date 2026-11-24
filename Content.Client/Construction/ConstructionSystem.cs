@@ -64,7 +64,7 @@ namespace Content.Client.Construction
             SubscribeLocalEvent<ConstructionGhostComponent, ComponentShutdown>(HandleGhostComponentShutdown);
         }
 
-        private void HandleGhostComponentShutdown(EntityUid uid, ConstructionGhostComponent component, ComponentShutdown args)
+        private void HandleGhostComponentShutdown(EntityUid uid, ConstructionGhostComponent component, ref ComponentShutdown args)
         {
             ClearGhost(component.GhostId);
         }

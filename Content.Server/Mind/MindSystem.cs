@@ -33,7 +33,7 @@ public sealed class MindSystem : SharedMindSystem
         SubscribeLocalEvent<MindComponent, ComponentShutdown>(OnMindShutdown);
     }
 
-    private void OnMindShutdown(EntityUid uid, MindComponent mind, ComponentShutdown args)
+    private void OnMindShutdown(EntityUid uid, MindComponent mind, ref ComponentShutdown args)
     {
         if (mind.UserId is {} user)
         {

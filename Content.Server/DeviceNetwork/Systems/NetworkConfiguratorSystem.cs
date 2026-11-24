@@ -118,7 +118,7 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
             args.Result = BoundUserInterfaceRangeResult.Fail;
     }
 
-    private void OnShutdown(EntityUid uid, NetworkConfiguratorComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, NetworkConfiguratorComponent component, ref ComponentShutdown args)
     {
         ClearDevices(uid, component);
 

@@ -130,7 +130,7 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
         }
     }
 
-    private void OnComponentShutdown(EntityUid uid, JukeboxComponent component, ComponentShutdown args)
+    private void OnComponentShutdown(EntityUid uid, JukeboxComponent component, ref ComponentShutdown args)
     {
         component.AudioStream = Audio.Stop(component.AudioStream);
     }

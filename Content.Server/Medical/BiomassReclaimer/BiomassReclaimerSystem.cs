@@ -133,7 +133,7 @@ namespace Content.Server.Medical.BiomassReclaimer
             _ambientSoundSystem.SetAmbience(uid, true);
         }
 
-        private void OnShutdown(EntityUid uid, ActiveBiomassReclaimerComponent component, ComponentShutdown args)
+        private void OnShutdown(EntityUid uid, ActiveBiomassReclaimerComponent component, ref ComponentShutdown args)
         {
             RemComp<JitteringComponent>(uid);
             _ambientSoundSystem.SetAmbience(uid, false);

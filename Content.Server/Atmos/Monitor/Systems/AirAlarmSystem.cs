@@ -247,7 +247,7 @@ public sealed class AirAlarmSystem : EntitySystem
         _deviceLink.SendSignal(uid, GetPort(comp), true);
     }
 
-    private void OnShutdown(EntityUid uid, AirAlarmComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, AirAlarmComponent component, ref ComponentShutdown args)
     {
         _activeUserInterfaces.Remove(uid);
     }

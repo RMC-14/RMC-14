@@ -29,7 +29,7 @@ public sealed class LegsParalyzedSystem : EntitySystem
         _movementSpeedModifierSystem.ChangeBaseSpeed(uid, 0, 0, 20);
     }
 
-    private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ref ComponentShutdown args)
     {
         _standingSystem.Stand(uid);
         _bodySystem.UpdateMovementSpeed(uid);

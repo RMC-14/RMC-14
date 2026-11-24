@@ -34,7 +34,7 @@ public abstract class SharedFlyBySoundSystem : EntitySystem
         // _fixtures.TryCreateFixture(uid, shape, FlyByFixture, collisionLayer: (int) CollisionGroup.MobMask, hard: false, body: body);
     }
 
-    private void OnShutdown(EntityUid uid, FlyBySoundComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, FlyBySoundComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<PhysicsComponent>(uid, out var body) ||
             MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating)

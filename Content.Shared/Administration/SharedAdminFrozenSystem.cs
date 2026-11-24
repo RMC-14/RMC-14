@@ -26,7 +26,7 @@ public abstract class SharedAdminFrozenSystem : EntitySystem
         SubscribeLocalEvent<AdminFrozenComponent, ThrowAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, InteractionAttemptEvent>(OnInteractAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<AdminFrozenComponent, ComponentShutdown>(UpdateCanMove);
+        SubscribeLocalEvent<AdminFrozenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<AdminFrozenComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
         SubscribeLocalEvent<AdminFrozenComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, AttackAttemptEvent>(OnAttempt);
@@ -74,6 +74,11 @@ public abstract class SharedAdminFrozenSystem : EntitySystem
             return;
 
         args.Cancel();
+    }
+
+    private void OnShutdown(Entity<AdminFrozenComponent> ent, ref ComponentShutdown args)
+    {
+        _blocker.UpdateCanMove(ent);
     }
 
     private void UpdateCanMove(EntityUid uid, AdminFrozenComponent component, EntityEventArgs args)

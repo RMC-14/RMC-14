@@ -66,7 +66,7 @@ public sealed class GatewayGeneratorSystem : EntitySystem
         SubscribeLocalEvent<GatewayGeneratorDestinationComponent, GatewayOpenEvent>(OnGeneratorOpen);
     }
 
-    private void OnGeneratorShutdown(EntityUid uid, GatewayGeneratorComponent component, ComponentShutdown args)
+    private void OnGeneratorShutdown(EntityUid uid, GatewayGeneratorComponent component, ref ComponentShutdown args)
     {
         foreach (var genUid in component.Generated)
         {

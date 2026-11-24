@@ -79,7 +79,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         }
     }
 
-    private void OnShutdown(EntityUid uid, StaminaComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, StaminaComponent component, ref ComponentShutdown args)
     {
         if (MetaData(uid).EntityLifeStage < EntityLifeStage.Terminating)
         {

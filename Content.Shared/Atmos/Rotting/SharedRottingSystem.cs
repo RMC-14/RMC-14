@@ -62,7 +62,7 @@ public abstract class SharedRottingSystem : EntitySystem
         args.PushMarkup(Loc.GetString(description, ("target", Identity.Entity(perishable, EntityManager))));
     }
 
-    private void OnShutdown(EntityUid uid, RottingComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, RottingComponent component, ref ComponentShutdown args)
     {
         if (TryComp<PerishableComponent>(uid, out var perishable))
         {

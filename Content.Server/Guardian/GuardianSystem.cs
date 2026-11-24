@@ -61,7 +61,7 @@ namespace Content.Server.Guardian
             SubscribeLocalEvent<GuardianHostComponent, MechPilotRelayedEvent<GettingAttackedAttemptEvent>>(OnPilotAttackAttempt);
         }
 
-        private void OnGuardianShutdown(EntityUid uid, GuardianComponent component, ComponentShutdown args)
+        private void OnGuardianShutdown(EntityUid uid, GuardianComponent component, ref ComponentShutdown args)
         {
             var host = component.Host;
             component.Host = null;
@@ -123,7 +123,7 @@ namespace Content.Server.Guardian
             _actionSystem.AddAction(uid, ref component.ActionEntity, component.Action);
         }
 
-        private void OnHostShutdown(EntityUid uid, GuardianHostComponent component, ComponentShutdown args)
+        private void OnHostShutdown(EntityUid uid, GuardianHostComponent component, ref ComponentShutdown args)
         {
             if (component.HostedGuardian is not {} guardian)
                 return;

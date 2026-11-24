@@ -49,7 +49,7 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
         component.NextSound = Timing.CurTime;
     }
 
-    private void OnShutdown(EntityUid uid, MaterialReclaimerComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, MaterialReclaimerComponent component, ref ComponentShutdown args)
     {
         _audio.Stop(component.Stream);
     }

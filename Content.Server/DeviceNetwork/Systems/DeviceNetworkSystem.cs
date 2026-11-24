@@ -135,7 +135,7 @@ namespace Content.Server.DeviceNetwork.Systems
         /// <summary>
         /// Automatically disconnect when an entity with a DeviceNetworkComponent shuts down.
         /// </summary>
-        private void OnNetworkShutdown(EntityUid uid, DeviceNetworkComponent component, ComponentShutdown args)
+        private void OnNetworkShutdown(EntityUid uid, DeviceNetworkComponent component, ref ComponentShutdown args)
         {
             foreach (var list in component.DeviceLists)
             {

@@ -78,7 +78,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
     /// <summary>
     ///     Handles debris shutdown/detach.
     /// </summary>
-    private void OnDebrisShutdown(EntityUid uid, OwnedDebrisComponent component, ComponentShutdown args)
+    private void OnDebrisShutdown(EntityUid uid, OwnedDebrisComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<DebrisFeaturePlacerControllerComponent>(component.OwningController, out var placer))
             return;

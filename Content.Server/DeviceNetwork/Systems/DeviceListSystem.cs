@@ -21,7 +21,7 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
         SubscribeLocalEvent<BeforeSerializationEvent>(OnMapSave);
     }
 
-    private void OnShutdown(EntityUid uid, DeviceListComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, DeviceListComponent component, ref ComponentShutdown args)
     {
         foreach (var conf in component.Configurators)
         {

@@ -94,7 +94,7 @@ namespace Content.Server.Shuttles.Systems
                 args.Cancel();
         }
 
-        private void OnShutdown(EntityUid uid, DockingComponent component, ComponentShutdown args)
+        private void OnShutdown(EntityUid uid, DockingComponent component, ref ComponentShutdown args)
         {
             if (component.DockedWith == null ||
                 Comp<MetaDataComponent>(uid).EntityLifeStage > EntityLifeStage.MapInitialized)

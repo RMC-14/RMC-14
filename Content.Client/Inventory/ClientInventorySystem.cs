@@ -89,7 +89,7 @@ namespace Content.Client.Inventory
             OnSpriteUpdate?.Invoke(update);
         }
 
-        private void OnShutdown(EntityUid uid, InventoryComponent component, ComponentShutdown args)
+        private void OnShutdown(EntityUid uid, InventoryComponent component, ref ComponentShutdown args)
         {
             if (uid == _playerManager.LocalEntity)
                 OnUnlinkInventory?.Invoke();

@@ -24,7 +24,7 @@ public sealed class TemporaryBlindnessSystem : EntitySystem
         _blindableSystem.UpdateIsBlind(uid);
     }
 
-    private void OnShutdown(EntityUid uid, TemporaryBlindnessComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, TemporaryBlindnessComponent component, ref ComponentShutdown args)
     {
         _blindableSystem.UpdateIsBlind(uid);
     }

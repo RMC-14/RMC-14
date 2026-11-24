@@ -30,7 +30,7 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(uid, StrapVisuals.State, component.BuckledEntities.Count != 0);
     }
 
-    private void OnStrapShutdown(EntityUid uid, StrapComponent component, ComponentShutdown args)
+    private void OnStrapShutdown(EntityUid uid, StrapComponent component, ref ComponentShutdown args)
     {
         if (!TerminatingOrDeleted(uid))
             StrapRemoveAll(uid, component);

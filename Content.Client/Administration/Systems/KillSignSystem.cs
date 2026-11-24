@@ -15,7 +15,7 @@ public sealed class KillSignSystem : EntitySystem
         SubscribeLocalEvent<KillSignComponent, ComponentShutdown>(KillSignRemoved);
     }
 
-    private void KillSignRemoved(EntityUid uid, KillSignComponent component, ComponentShutdown args)
+    private void KillSignRemoved(EntityUid uid, KillSignComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;

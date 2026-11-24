@@ -7,10 +7,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
-using Content.Shared.Bed.Sleep;
 using Content.Shared.Damage.Components;
-using Content.Shared.Database;
-using Content.Shared.Hands;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
@@ -52,7 +49,7 @@ public abstract class SharedStunSystem : EntitySystem
         SubscribeLocalEvent<SlowedDownComponent, ComponentShutdown>(OnSlowRemove);
 
         SubscribeLocalEvent<StunnedComponent, ComponentStartup>(UpdateCanMove);
-        SubscribeLocalEvent<StunnedComponent, ComponentShutdown>(UpdateCanMove);
+        SubscribeLocalEvent<StunnedComponent, ComponentShutdown>(OnStunShutdown);
 
         SubscribeLocalEvent<StunOnContactComponent, StartCollideEvent>(OnStunOnContactCollide);
 
@@ -110,6 +107,11 @@ public abstract class SharedStunSystem : EntitySystem
 
     }
 
+    private void OnStunShutdown(Entity<StunnedComponent> ent, ref ComponentShutdown args)
+    {
+        _blocker.UpdateCanMove(ent);
+    }
+
     private void UpdateCanMove(EntityUid uid, StunnedComponent component, EntityEventArgs args)
     {
         _blocker.UpdateCanMove(uid);
@@ -135,8 +137,11 @@ public abstract class SharedStunSystem : EntitySystem
         _standingState.Down(uid);
     }
 
-    private void OnKnockShutdown(EntityUid uid, KnockedDownComponent component, ComponentShutdown args)
+    private void OnKnockShutdown(EntityUid uid, KnockedDownComponent component, ref ComponentShutdown args)
     {
+        if (args.LifeStage >= EntityLifeStage.Terminating)
+            return;
+
         _standingState.Stand(uid);
     }
 
@@ -151,7 +156,7 @@ public abstract class SharedStunSystem : EntitySystem
         _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
     }
 
-    private void OnSlowRemove(EntityUid uid, SlowedDownComponent component, ComponentShutdown args)
+    private void OnSlowRemove(EntityUid uid, SlowedDownComponent component, ref ComponentShutdown args)
     {
         component.SprintSpeedModifier = 1f;
         component.WalkSpeedModifier = 1f;

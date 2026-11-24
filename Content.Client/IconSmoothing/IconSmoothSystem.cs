@@ -96,7 +96,7 @@ namespace Content.Client.IconSmoothing
             _sprite.LayerSetDirOffset(sprite, CornerLayers.SW, DirectionOffset.Clockwise);
         }
 
-        private void OnShutdown(EntityUid uid, IconSmoothComponent component, ComponentShutdown args)
+        private void OnShutdown(EntityUid uid, IconSmoothComponent component, ref ComponentShutdown args)
         {
             _dirtyEntities.Enqueue(uid);
             DirtyNeighbours(uid, component);

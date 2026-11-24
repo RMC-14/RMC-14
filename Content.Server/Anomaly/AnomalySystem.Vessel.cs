@@ -48,7 +48,7 @@ public sealed partial class AnomalySystem
             : Loc.GetString("anomaly-vessel-component-assigned"));
     }
 
-    private void OnVesselShutdown(EntityUid uid, AnomalyVesselComponent component, ComponentShutdown args)
+    private void OnVesselShutdown(EntityUid uid, AnomalyVesselComponent component, ref ComponentShutdown args)
     {
         if (component.Anomaly is not { } anomaly)
             return;

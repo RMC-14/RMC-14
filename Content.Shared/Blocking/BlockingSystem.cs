@@ -119,7 +119,7 @@ public sealed partial class BlockingSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnShutdown(EntityUid uid, BlockingComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, BlockingComponent component, ref ComponentShutdown args)
     {
         //In theory the user should not be null when this fires off
         if (component.User != null)

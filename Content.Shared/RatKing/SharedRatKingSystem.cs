@@ -50,7 +50,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         UpdateActions(uid, component);
     }
 
-    private void OnShutdown(EntityUid uid, RatKingComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, RatKingComponent component, ref ComponentShutdown args)
     {
         foreach (var servant in component.Servants)
         {
@@ -84,7 +84,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         UpdateAllServants(uid, component);
     }
 
-    private void OnServantShutdown(EntityUid uid, RatKingServantComponent component, ComponentShutdown args)
+    private void OnServantShutdown(EntityUid uid, RatKingServantComponent component, ref ComponentShutdown args)
     {
         if (TryComp(component.King, out RatKingComponent? ratKingComponent))
             ratKingComponent.Servants.Remove(uid);

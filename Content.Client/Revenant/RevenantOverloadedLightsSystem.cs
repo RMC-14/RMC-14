@@ -39,7 +39,7 @@ public sealed class RevenantOverloadedLightsSystem : SharedRevenantOverloadedLig
         Dirty(uid, light);
     }
 
-    private void OnShutdown(EntityUid uid, RevenantOverloadedLightsComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, RevenantOverloadedLightsComponent component, ref ComponentShutdown args)
     {
         if (!_lights.TryGetLight(uid, out var light))
             return;

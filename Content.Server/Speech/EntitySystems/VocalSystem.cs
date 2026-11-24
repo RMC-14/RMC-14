@@ -38,7 +38,7 @@ public sealed class VocalSystem : EntitySystem
         LoadSounds(uid, component);
     }
 
-    private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, VocalComponent component, ref ComponentShutdown args)
     {
         // remove scream action when component removed
         if (component.ScreamActionEntity != null)

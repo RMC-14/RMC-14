@@ -40,7 +40,7 @@ public sealed partial class TriggerSystem
         }
     }
 
-    private void OnProximityShutdown(EntityUid uid, TriggerOnProximityComponent component, ComponentShutdown args)
+    private void OnProximityShutdown(EntityUid uid, TriggerOnProximityComponent component, ref ComponentShutdown args)
     {
         component.Colliding.Clear();
     }

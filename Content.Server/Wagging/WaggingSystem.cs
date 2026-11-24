@@ -33,7 +33,7 @@ public sealed class WaggingSystem : EntitySystem
         _actions.AddAction(uid, ref component.ActionEntity, component.Action, uid);
     }
 
-    private void OnWaggingShutdown(EntityUid uid, WaggingComponent component, ComponentShutdown args)
+    private void OnWaggingShutdown(EntityUid uid, WaggingComponent component, ref ComponentShutdown args)
     {
         _actions.RemoveAction(uid, component.ActionEntity);
     }

@@ -18,7 +18,7 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
         SubscribeLocalEvent<ExpendableLightComponent, ComponentShutdown>(OnLightShutdown);
     }
 
-    private void OnLightShutdown(EntityUid uid, ExpendableLightComponent component, ComponentShutdown args)
+    private void OnLightShutdown(EntityUid uid, ExpendableLightComponent component, ref ComponentShutdown args)
     {
         component.PlayingStream = _audioSystem.Stop(component.PlayingStream);
     }

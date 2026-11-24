@@ -337,7 +337,7 @@ public sealed class TemperatureSystem : EntitySystem
     }
 
     private void OnParentThresholdShutdown(EntityUid uid, ContainerTemperatureDamageThresholdsComponent component,
-        ComponentShutdown args)
+        ref ComponentShutdown args)
     {
         RecursiveThresholdUpdate(uid, GetEntityQuery<TemperatureComponent>(), GetEntityQuery<TransformComponent>(),
             GetEntityQuery<ContainerTemperatureDamageThresholdsComponent>());
