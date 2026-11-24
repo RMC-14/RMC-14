@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Console should have less Can't resolve Entity 0 now.
-    type: Fix
-  id: 3469
-  time: '2026-07-03T01:34:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10295
 - author: Dygon
   changes:
   - message: You can no longer turn on a sentry through the sentry laptop if there
@@ -4340,5 +4333,12 @@
   id: 3968
   time: '2026-11-24T22:03:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11194
+- author: yagwog
+  changes:
+  - message: Brains can no longer speak to you in LOOC
+    type: Fix
+  id: 3969
+  time: '2026-11-24T22:14:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11197
 Name: RMC14
 Order: -1
