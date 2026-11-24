@@ -442,3 +442,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/95ae559e042140dc2ec9a1929c7c3895f8f2f75f/sound/voice/alien_queen_xmas_2.ogg"
+  
+- files: ["alien_queen_breath.ogg"]
+  license: "CC-BY-SA-4.0"
+  copyright: "Made by monkey.d.jerry (Discord)"
+  source: "https://discord.com/channels/1168210010233376858/1168217282988757116/1542894740914053233"
+
+- files: ["alien_queen_breath2.ogg"]
+  license: "CC-BY-SA-4.0"
+  copyright: "Made by monkey.d.jerry (Discord)"
+  source: "https://discord.com/channels/1168210010233376858/1168217282988757116/1544677867516993626"
