@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Xenonids.Despoiler.Stab;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Acid;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoDespoilerAcidSystem))]
