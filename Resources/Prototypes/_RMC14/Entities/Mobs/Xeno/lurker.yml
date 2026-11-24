@@ -120,6 +120,8 @@
     knockdownRequiresInvisibility: true
     unrootOnMelee: true
   - type: XenoTurnInvisible
+    opacity: 0.09804 # 25/255
+    darkFactor: 0.6
   - type: XenoCripplingStrike
     removeOnHit: true
     preventTackle: true

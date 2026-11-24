@@ -852,6 +852,9 @@
     walkModifier: .725
     sprintModifier: .725
   - type: GhillieSuit
+    opacity: 0.05882 # 15/255
+    darkFactor: 0.6
+    addedOpacityOnShoot: 0.13725 # 35/255
     whitelist:
       components:
       - SniperWhitelist
