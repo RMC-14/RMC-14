@@ -1,4 +1,6 @@
 using Content.Shared.Damage.Components;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Robust.Shared.Timing;
 
@@ -8,6 +10,7 @@ public sealed class RMCThrowingSystem : EntitySystem
 {
     [Dependency] private readonly ThrownItemSystem _thrown = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
 
@@ -58,6 +61,7 @@ public sealed class RMCThrowingSystem : EntitySystem
         if (_timing.CurTime < ent.Comp.CooldownEndsAt)
         {
             args.Cancelled = true;
+            _popup.PopupEntity(Loc.GetString("throwing-user-threw-fail-cooldown", ("item", Identity.Name(ent, EntityManager, args.User))), args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
