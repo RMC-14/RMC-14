@@ -1,10 +1,9 @@
-using System.Linq;
-using System.Numerics;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -17,6 +16,9 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Random;
+using System.Linq;
+using System.Numerics;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
@@ -34,8 +36,9 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly EggMorpherSystem _morpher = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -61,18 +64,33 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         // parasite OR try to throw a held parasite
         if (_interact.InRangeUnobstructed(xeno, target))
         {
-            var clickedEntities = _lookup.GetEntitiesIntersecting(target);
+            var clickedEntities = _lookup.GetEntitiesInRange(target, 0.5f, LookupFlags.Approximate | LookupFlags.Uncontained);
             var tileHasParasites = false;
 
-            foreach (var possibleParasite in clickedEntities)
+            foreach (var possibleParasiteOrMorpher in clickedEntities)
             {
-                if (_mobState.IsDead(possibleParasite))
+                if (TryComp<EggMorpherComponent>(possibleParasiteOrMorpher, out var morpher) && _hive.FromSameHive(xeno.Owner, possibleParasiteOrMorpher))
+                {
+                    if (morpher.CurParasites <= 0 || xeno.Comp.CurParasites >= xeno.Comp.MaxParasites)
+                        continue;
+
+                    if (HasComp<OnFireComponent>(xeno))
+                    {
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-empty-on-fire", ("morpher", possibleParasiteOrMorpher)), xeno, args.Performer, PopupType.MediumCaution);
+                        continue;
+                    }
+
+                    _morpher.EggMorpherEmpty((possibleParasiteOrMorpher, morpher), xeno);
+                    return;
+                }
+
+                if (_mobState.IsDead(possibleParasiteOrMorpher))
                     continue;
 
-                if (!HasComp<XenoParasiteComponent>(possibleParasite))
+                if (!HasComp<XenoParasiteComponent>(possibleParasiteOrMorpher))
                     continue;
 
-                if (!HasComp<ParasiteAIComponent>(possibleParasite))
+                if (!HasComp<ParasiteAIComponent>(possibleParasiteOrMorpher))
                     continue;
 
                 tileHasParasites = true;
@@ -83,7 +101,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
                     return;
                 }
 
-                AddParasite(possibleParasite, xeno);
+                AddParasite(possibleParasiteOrMorpher, xeno);
             }
 
             if (tileHasParasites)
@@ -97,9 +115,22 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         if (_hands.GetActiveItem((xeno, null)) is { } heldEntity &&
             HasComp<XenoParasiteComponent>(heldEntity))
         {
+
+            if (xeno.Comp.NextThrow > _timing.CurTime)
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-throw-cooldown"), xeno, xeno, PopupType.SmallCaution);
+                return;
+            }
+
+            if (TryComp<ParasiteDropCooldownComponent>(xeno, out var cooldown))
+            {
+                cooldown.NextDropTime = TimeSpan.Zero;
+                Dirty(xeno, cooldown);
+            }
+
             _hands.TryDrop(xeno.Owner);
             var coords = _transform.GetMoverCoordinates(xeno);
-            // If throw distance would be more than 4, fix it to be exactly 4
+            // If throw distance would be more than ParasiteThrowDistance, fix it to be exactly ParasiteThrowDistance
             if (coords.TryDistance(EntityManager, target, out var dis) && dis > xeno.Comp.ParasiteThrowDistance)
             {
                 var fixedTrajectory = (target.Position - coords.Position).Normalized() * xeno.Comp.ParasiteThrowDistance;
@@ -107,18 +138,17 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             }
 
             _rmcObstacleSlamming.MakeImmune(heldEntity);
-            _throw.TryThrow(heldEntity, target, user: xeno);
+            _throw.TryThrow(heldEntity, target, user: xeno, baseThrowSpeed: 20);
 
             // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle.
-            // Should amount to about 10 seconds before they attempt a leap (10 seconds stunned)
-            // Average in parity is waiting 7.5 if you're lucky on idle time which would take 10 seconds still
             if (TryComp<ParasiteAIComponent>(heldEntity, out var ai) && !_mobState.IsDead(heldEntity))
             {
-                _stun.TryStun(heldEntity, xeno.Comp.ThrownParasiteStunDuration * 2, true);
+                _stun.TryStun(heldEntity, xeno.Comp.ThrownParasiteStunDuration, true);
                 _parasite.GoActive((heldEntity, ai));
             }
 
-            _action.SetUseDelay((args.Action, args.Action), xeno.Comp.ThrownParasiteCooldown);
+            xeno.Comp.NextThrow = _timing.CurTime + xeno.Comp.ThrownParasiteCooldown;
+            Dirty(xeno);
 
             return;
         }
@@ -138,12 +168,21 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             return;
         }
 
+        if (xeno.Comp.NextRetrieve > _timing.CurTime)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-throw-cooldown"), xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
         if (RemoveParasite(xeno) is not { } newParasite)
             return;
 
         _hive.SetSameHive(xeno.Owner, newParasite);
 
         _hands.TryPickupAnyHand(xeno, newParasite);
+
+        xeno.Comp.NextRetrieve = _timing.CurTime + xeno.Comp.RetrieveParasiteCooldown;
+        Dirty(xeno);
 
         var msg = Loc.GetString("cm-xeno-throw-parasite-unstash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
         _popup.PopupEntity(msg, xeno, xeno);
@@ -220,7 +259,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             _hive.SetHive(newParasite, hive);
             _transform.DropNextTo(newParasite, xeno.Owner);
             //So they don't eat eachother before they gloriously fly into the sunset
-            _stun.TryStun(newParasite, xeno.Comp.ThrownParasiteStunDuration, true);
+            _stun.TryStun(newParasite, xeno.Comp.DropParasiteStunDuration, true);
             _throw.TryThrow(newParasite, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
         }
 
@@ -254,48 +293,6 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         UpdateParasiteClingers(xeno);
 
         return Spawn(xeno.Comp.ParasitePrototype);
-    }
-
-    private void UpdateParasiteClingers(Entity<XenoParasiteThrowerComponent> xeno)
-    {
-        var parasiteNumber = Math.Min(Math.Ceiling((((double)xeno.Comp.CurParasites / xeno.Comp.MaxParasites) * xeno.Comp.NumPositions)), xeno.Comp.NumPositions);
-
-        var overlayNumbers = xeno.Comp.VisiblePositions.Count(position => position == true);
-
-        if (overlayNumbers > parasiteNumber)
-        {
-            var visibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, true);
-            for (var i = 0; i < overlayNumbers - parasiteNumber; i++)
-            {
-                var index = _random.PickAndTake(visibleIndexes);
-                xeno.Comp.VisiblePositions[index] = false;
-            }
-        }
-        else
-        {
-            var invisibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, false);
-            for (var i = 0; i < parasiteNumber - overlayNumbers; i++)
-            {
-                var index = _random.PickAndTake(invisibleIndexes);
-                xeno.Comp.VisiblePositions[index] = true;
-            }
-        }
-
-        Dirty(xeno);
-
-        //Need to clone the array for it to dirty properly
-        _appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
-    }
-
-    private List<int> GetVisualIndexes(bool[] bools, bool visible)
-    {
-        List<int> visualIndexes = new();
-        for (int i = 0; i < bools.Length; i++)
-        {
-            if (bools[i] == visible)
-                visualIndexes.Add(i);
-        }
-        return visualIndexes;
     }
 
     public EntityUid? TryRemoveGhostParasite(Entity<XenoParasiteThrowerComponent> xeno, out string message)

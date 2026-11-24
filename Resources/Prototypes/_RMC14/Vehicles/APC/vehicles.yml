@@ -5,6 +5,15 @@
   name: armored personnel carrier
   description: A rugged armored personnel carrier outfitted for battlefield support.
   components:
+  - type: VehicleSafety
+    icon:
+      sprite: _RMC14/Interface/map_blips_large.rsi
+      state: apc
+  - type: VehicleLock
+    access:
+    - CMAccessCrewman
+    - RMCAccessCommand
+    - CMAccessBrig
   - type: WarpPoint
     follow: true
     location: APC
@@ -15,6 +24,7 @@
     turnDelay: 0.4
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
+    weightClass: Light
   - type: VehicleOvercharge
     speedMultiplier: 1.4
     duration: 3
@@ -131,7 +141,7 @@
       insertDelay: 1.5
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 10
     maxXenos: 3
@@ -150,7 +160,7 @@
   components:
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 18
     maxXenos: 3
@@ -209,7 +219,7 @@
       state: wheels_1
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_medical_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 11
     maxXenos: 3
@@ -265,7 +275,7 @@
       state: wheels_1
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_command_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 12
     maxXenos: 3
@@ -304,6 +314,8 @@
   description: An armored personnel carrier configured for SPP forces.
   suffix: Drivable, APC, Base, SPP
   components:
+  - type: VehicleLock
+    access: []
   - type: GridVehicleMover
     maxSpeed: 5
     acceleration: 2.0
@@ -378,7 +390,7 @@
       insertDelay: 1.5
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/spp_apc_interior.yml
-    enterDoAfter: 1.0
+    enterDoAfter: 0.5
     exitDoAfter: 1.0
     maxPassengers: 14
     maxXenos: 4

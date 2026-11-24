@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a49e386aa82222508cacc8a40c351a96d9122bd3/icons/mob/hud/actions.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "chamber_swap"
+    },
+    {
+      "name": "chamber_swap_off"
+    }
+  ]
+}

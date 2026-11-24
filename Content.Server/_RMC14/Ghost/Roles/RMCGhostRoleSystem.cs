@@ -7,6 +7,7 @@ using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.GameTicking;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Ghost.Roles;
 
@@ -105,3 +106,9 @@ public sealed class RMCGhostRoleSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct GhostRoleRaffleEvent(TimeSpan CountDown, float RoundTimeRequirement, bool Handled = false);
+
+/// <summary>
+/// raised on a ghost role before a player takes it or joins its raffle, cancel it to stop them
+/// </summary>
+[ByRefEvent]
+public record struct RMCTakeGhostRoleAttemptEvent(ICommonSession Player, bool Cancelled = false);

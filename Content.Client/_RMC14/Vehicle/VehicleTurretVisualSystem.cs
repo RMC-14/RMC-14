@@ -5,7 +5,6 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Map;
-using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Vehicle;
 
@@ -14,6 +13,7 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
     private const float PixelsPerMeter = 32f;
 
     [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleTurretSystem _turret = default!;
 
@@ -41,12 +41,20 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
 
             if (!TryComputeRenderedTransform((EntityUid) turretUid,
                     turret,
-                    out _,
+                    out var vehicle,
                     out _,
                     out var localOffset,
                     out var localRotation))
             {
                 continue;
+            }
+
+            if (TryComp(uid, out SpriteComponent? visualSprite) &&
+                TryComp(vehicle, out SpriteComponent? vehicleSprite))
+            {
+                localOffset = localOffset * vehicleSprite.Scale + vehicleSprite.Offset;
+                if (visualSprite.Scale != vehicleSprite.Scale)
+                    _sprite.SetScale((uid, visualSprite), vehicleSprite.Scale);
             }
 
             var visualXform = Transform(uid);

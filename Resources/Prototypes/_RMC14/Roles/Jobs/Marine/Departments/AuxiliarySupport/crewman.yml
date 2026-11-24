@@ -1,6 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMVehicleCrewman
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-engineering
   name: cm-job-name-vc
   description: cm-job-description-vc
   playTimeTracker: CMJobVehicleCrewman
@@ -12,7 +13,15 @@
     role: CMJobCombatTech
     time: 18000 # 5 hours
   ranks:
-    RMCRankCorporal: []
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobVehicleCrewman
+      time: 252000 # 70 hours
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobVehicleCrewman
+      time: 36000 # 10 hours
+    RMCRankLanceCorporal: []
   startingGear: CMGearVehicleCrewman
   icon: "CMJobIconVehicleCrewman"
   joinNotifyCrew: false
