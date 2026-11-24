@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Added APCs to LV-624 landing zones!
-    type: Add
-  id: 3467
-  time: '2026-07-03T01:35:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10297
 - author: SabreML
   changes:
   - message: Fixed observers being unable to hear xenos talking if 'Ghost Hearing'
@@ -4336,5 +4329,16 @@
   id: 3966
   time: '2026-11-24T08:28:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9515
+- author: IceNoobXD
+  changes:
+  - message: Shiva has now unique colonist corpses which are in snow gear!
+    type: Tweak
+  - message: Minor map changes to Shiva inserts!
+    type: Tweak
+  - message: the AEGIS corpse now longer uses upstream gear!
+    type: Tweak
+  id: 3967
+  time: '2026-11-24T08:43:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11072
 Name: RMC14
 Order: -1
