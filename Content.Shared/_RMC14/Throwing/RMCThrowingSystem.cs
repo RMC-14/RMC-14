@@ -50,24 +50,18 @@ public sealed class RMCThrowingSystem : EntitySystem
         RemCompDeferred<ThrownLimitHitsComponent>(ent);
     }
 
-    private void OnThrowCooldownThrowAttempt(Entity<RMCThrowCooldownComponent> ent, ref ThrowAttemptEvent args)
+    private void OnThrowCooldownThrowAttempt(Entity<RMCThrowCooldownComponent> ent, ref ThrowItemAttemptEvent args)
     {
         if (args.Cancelled)
             return;
 
         if (_timing.CurTime < ent.Comp.CooldownEndsAt)
         {
-            if (ent.Comp.ItemsThrown < ent.Comp.ThrowLimit)
-                ent.Comp.ItemsThrown++;
-            else
-                args.Cancel();
-
-            Dirty(ent);
+            args.Cancelled = true;
             return;
         }
 
         ent.Comp.CooldownEndsAt = _timing.CurTime + ent.Comp.Duration;
-        ent.Comp.ItemsThrown = 1;
         Dirty(ent);
     }
 }
