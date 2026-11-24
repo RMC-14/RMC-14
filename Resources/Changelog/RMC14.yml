@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed being able to refill flamer tanks from any range
-    type: Fix
-  id: 3463
-  time: '2026-07-03T01:28:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10269
 - author: Ian321
   changes:
   - message: The tanks DRGN flamer now creates the fire centered on the target.
@@ -4334,5 +4327,13 @@
   id: 3962
   time: '2026-11-24T06:58:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9445
+- author: keegaroo65
+  changes:
+  - message: Fixed the Tactical Map disappearing when you evolve or devolve (doesn't
+      pop out automatically)
+    type: Fix
+  id: 3963
+  time: '2026-11-24T07:15:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9330
 Name: RMC14
 Order: -1
