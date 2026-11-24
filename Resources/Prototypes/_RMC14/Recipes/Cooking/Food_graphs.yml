@@ -1,16 +1,33 @@
 ﻿- type: constructionGraph
-  id: FoodMeatSausage
+  id: Sausage
   start: start
   graph:
 
   - node: start
     edges:
-    - to: sausage cooked
+    - to: cooked sausage
       completed:
       - !type:PlaySound
         sound: /Audio/Effects/sizzle.ogg
       steps:
       - minTemperature: 335
 
-  - node: sausage cooked
+  - node: cooked sausage
     entity: FoodMeatSausageCooked
+
+- type: constructionGraph
+  id: GrilledFISH
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: grilled fish
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+
+  - node: grilled fish
+    entity: RMCFoodMeatFishGrilled

@@ -819,3 +819,103 @@
     FoodOnionSlice: 1
     FoodGarlic: 1
     FoodMeatBacon: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChickenNoodleSoup
+  name: chicken noodle soup recipe
+  result: RMCSoupChickenNoodle
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChickenCutlet: 1
+    FoodNoodlesBoiled: 1
+    FoodCarrot: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChickenDumplings
+  name: chicken noodle soup recipe
+  result: RMCSoupChickenNoodle
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChickenCutlet: 1
+    FoodDoughSlice: 2
+    FoodCarrot: 1
+
+- type: microwaveMealRecipe
+  id: RecipeClamChowder
+  name: clam chowder recipe
+  result: RMCSoupClamChowder
+  time: 15
+  group: Savory
+  reagents:
+    Milk: 10
+  solids:
+    FoodBowlBig: 1
+    FoodButterSlice: 1
+    RMCFoodFishClam: 1
+    FoodCarrot: 1
+    FoodPotato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRamenTonkotsu
+  name: tonkotsu ramen recipe
+  result: RMCSoupTonkotsu
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+    RMCSoysauce: 5
+  solids:
+    FoodBowlBig: 1
+    FoodMeatBacon: 2
+    FoodNoodlesBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRamenXenokotsu
+  name: tonkotsu ramen recipe
+  result: RMCSoupXenokotsu
+  time: 15
+  group: Savory
+  reagents:
+    Water: 10
+    RMCSoysauce: 5
+  solids:
+    FoodBowlBig: 1
+    FoodMeatXenoCutlet: 3
+    FoodNoodlesBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCoqAuVin
+  name: coq au vin recipe
+  result: RMCSoupXenokotsu
+  time: 15
+  group: Savory
+  reagents:
+    Wine: 5
+    Water: 5
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChickenCutlet: 1
+    FoodCarrot: 1
+    FoodMushroom: 1
+
+- type: microwaveMealRecipe
+  id: RecipeToastGravy
+  name: toast and gravy recipe
+  result: RMCToastGravy
+  time: 10
+  group: Savory
+  reagents:
+    Flour: 5
+    Cream: 10
+    Blackpepper: 5
+  solids:
+    FoodBreadPlainSlice: 1
+    FoodMeatSausage: 1
