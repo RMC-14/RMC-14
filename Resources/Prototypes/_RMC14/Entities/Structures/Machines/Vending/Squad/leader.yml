@@ -46,8 +46,6 @@
         points: 15
     - name: Utilities
       entries:
-#      - id: RMCWhistle
-#        points: 3
       - id: CMFireExtinguisherPortable
         points: 3
       - id: RMCMotionDetector
