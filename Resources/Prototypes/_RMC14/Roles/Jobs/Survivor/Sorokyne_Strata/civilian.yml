@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMJobSurvivorSoroCivilian
   name: rmc-job-name-survivor-soro-civilian
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorSoroCivilian
   spawnMenuRoleName: Civilian (Sorokyne Survivor)

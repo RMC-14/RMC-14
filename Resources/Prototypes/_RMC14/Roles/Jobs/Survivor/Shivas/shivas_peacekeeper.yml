@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: RMCSurvivorShivasILRCPeacekeeper
   name: cm-job-name-survivor-un-peacekeeper
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorShivasILRCPeacekeeper
   spawnMenuRoleName: ILRC Peacekeeper (Shivas Survivor)

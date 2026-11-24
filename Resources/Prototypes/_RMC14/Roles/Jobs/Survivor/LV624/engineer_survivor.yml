@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: CMSurvivorLV624Engineer
   name: rmc-job-name-survivor-lv624-engineer
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorLV624Engineer
   spawnMenuRoleName: Engineer (LV624 Survivor)
   special:

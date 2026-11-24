@@ -2,7 +2,7 @@
   parent: [ RMCJobNametagBase, CMSurvivor ]
   id: CMSurvivorCorporate
   name: cm-job-name-survivor-corporate
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor-corporate
   playTimeTracker: CMJobSurvivorCorporate
   icon: "RMCJobIconGenericColonistCorporate"
   hasIcon: true

@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: RMCSurvivorHybrisaTSEPAConstable
   name: rmc-job-name-tsepa-constable
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   ranks:
     RMCRankTSEPASergeant:
     - !type:RoleTimeRequirement

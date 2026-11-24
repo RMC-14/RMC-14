@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: CMSurvivorLV624CorporateLiaison
   name: rmc-job-name-survivor-lv624-corporate-liaison
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (LV624 Survivor)
   startingGear: RMCGearSurvivorLV624CorporateLiaison
   icon: "CMJobIconLiaison"

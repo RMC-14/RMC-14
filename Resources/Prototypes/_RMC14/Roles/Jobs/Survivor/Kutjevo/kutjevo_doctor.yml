@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: RMCSurvivorKutjevoDoctor
   name: rmc-job-name-survivor-kutjevo-doctor
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoDoctor
   spawnMenuRoleName: Kutjevo Doctor (Kutjevo Survivor)
   special:

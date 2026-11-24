@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: CMSurvivorLV624CorporateDomeGoonLead
   name: rmc-job-name-pmc-corporate-goon-leader
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: We-Ya Goon Lead (LV624 Special Survivor)
   startingGear: RMCGearSurvivorGoonLead
   icon: "RMCJobIconPMCGoonLead"
@@ -30,7 +30,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_goon
-  greeting: rmc-job-greeting-corporate-dome-goon-lead
+  greeting: rmc-job-greeting-corporate-dome-security
 
 - type: entity
   parent: CMSpawnPointJobBase

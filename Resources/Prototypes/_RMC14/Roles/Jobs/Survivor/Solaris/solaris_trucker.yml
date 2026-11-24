@@ -2,7 +2,7 @@
   parent: CMSurvivorTrucker
   id: CMSurvivorSolarisTrucker
   name: rmc-job-name-survivor-solaris-trucker
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorSolarisTrucker
   spawnMenuRoleName: Solaris Heavy Vehicle Operator (Solaris Survivor)
   special:

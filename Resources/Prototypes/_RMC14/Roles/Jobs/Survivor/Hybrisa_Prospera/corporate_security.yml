@@ -2,7 +2,7 @@
   parent: CMSurvivorGoon
   id: RMCSurvivorHybrisaCorporateSecurity
   name: rmc-job-name-pmc-corporate-goon
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaCorporateSecurity
   spawnMenuRoleName: We-Ya Goon (Hybrisa Survivor)
   hasIcon: true

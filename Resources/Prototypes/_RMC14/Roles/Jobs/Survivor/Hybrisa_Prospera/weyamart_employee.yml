@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: RMCSurvivorHybrisaWeyamartEmployee
   name: rmc-job-name-survivor-hybrisa-weyamart-employee
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaWeyamartEmployee
   spawnMenuRoleName: Civilian - Weyamart Employee (Hybrisa Survivor)
   special:

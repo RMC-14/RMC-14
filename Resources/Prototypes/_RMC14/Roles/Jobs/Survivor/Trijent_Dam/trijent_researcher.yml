@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: CMSurvivorTrijentResearcher
   name: cm-job-name-survivor-trijent-researcher
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorTrijentResearcher
   spawnMenuRoleName: Trijent Dam Researcher (Trijent Survivor)
   accessGroups:

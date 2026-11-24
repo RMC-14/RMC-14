@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: RMCSurvivorHybrisaGrindBarista
   name: rmc-job-name-survivor-grind-barista
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaGrindBarista
   spawnMenuRoleName: Daily Grind Barista (Hybrisa Survivor)
   special:

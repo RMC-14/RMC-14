@@ -10,7 +10,7 @@
   - ColonistPMC
   startingGear: RMCGearSurvivorPMCCommander
   icon: RMCJobIconPMCCommander
-  greeting: rmc-job-greeting-solaris-pmc-commander
+  greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorCO
   spawnMenuRoleName: PMC Field Operations Leader (Solaris Special Survivor)
   special:

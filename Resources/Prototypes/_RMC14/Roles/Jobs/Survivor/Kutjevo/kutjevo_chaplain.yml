@@ -2,7 +2,7 @@
   parent: CMSurvivorPriest
   id: RMCSurvivorKutjevoChaplain
   name: rmc-job-name-survivor-kutjevo-chaplain
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoChaplain
   spawnMenuRoleName: Chaplain (Kutjevo Survivor)
 

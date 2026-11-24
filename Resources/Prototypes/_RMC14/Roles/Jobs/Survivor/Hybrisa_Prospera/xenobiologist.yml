@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: RMCSurvivorHybrisaXenobiologist
   name: rmc-job-name-survivor-xenobiologist
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaXenobiologist
   spawnMenuRoleName: Xenobiologist (Hybrisa Survivor)
   special:

@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: RMCSurvivorHybrisaFireProtectionSpecialist
   name: rmc-job-name-survivor-fire-protection-specialist-hybrisa
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaFireProtectionSpecialist
   spawnMenuRoleName: Fire Protection Specialist (Hybrisa Survivor)
   special:

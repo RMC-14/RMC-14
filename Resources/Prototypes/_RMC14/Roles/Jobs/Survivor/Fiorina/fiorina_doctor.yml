@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: CMSurvivorFiorinaDoctor
   name: cm-job-name-survivor-fiorina-doctor
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorFiorinaDoctor
   accessGroups:

@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: CMSurvivorTrijentEngiHydro
   name: cm-job-name-survivor-trijent-engi-hydro
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorTrijentEngiHydro
   spawnMenuRoleName: Hydro Electric Engineer (Trijent Survivor)
   special:

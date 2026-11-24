@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: RMCSurvivorHybrisaCorporateLiaison
   name: cm-job-name-liaison
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (Hybrisa Survivor)
   startingGear: RMCGearSurvivorHybrisaCorporateLiaison
   icon: "CMJobIconLiaison"

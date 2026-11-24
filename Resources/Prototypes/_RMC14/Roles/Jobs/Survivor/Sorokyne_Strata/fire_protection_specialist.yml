@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMJobSurvivorFireProtectionSpecialist
   name: rmc-job-name-survivor-fire-protection-specialist
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorFireProtectionSpecialist
   spawnMenuRoleName: Fire Protection Specialist (Sorokyne Survivor)

@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMSurvivorHost
   name: cm-job-name-survivor
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearHostSurvivorBase
   spawnMenuRoleName: Civilian Survivor (Xenonid Host)
 

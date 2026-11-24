@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: CMSurvivorSolarisScientist
   name: rmc-job-name-survivor-solaris-scientist
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorSolarisScientist
   accessGroups:

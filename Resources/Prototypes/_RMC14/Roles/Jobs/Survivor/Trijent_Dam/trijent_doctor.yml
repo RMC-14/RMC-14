@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: CMSurvivorTrijentDoctor
   name: cm-job-name-survivor-trijent-doctor
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorTrijentDoctor
   spawnMenuRoleName: Trijent Doctor (Trijent Survivor)
   special:

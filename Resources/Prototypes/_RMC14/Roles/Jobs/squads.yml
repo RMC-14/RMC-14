@@ -420,7 +420,7 @@
 - type: entity
   parent: SquadBase
   id: SquadFORECON
-  name: Recon
+  name: FORECON
   components:
   - type: SquadTeam
     color: "#32CD32"

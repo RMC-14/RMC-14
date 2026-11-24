@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: RMCSurvivorNewVaraderoResearcher
   name: rmc-job-name-survivor-new-varadero-researcher
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorNewVaraderoResearcher
   greeting: rmc-job-greeting-varadero

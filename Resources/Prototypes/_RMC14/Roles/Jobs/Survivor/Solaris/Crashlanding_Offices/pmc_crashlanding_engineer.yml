@@ -9,7 +9,7 @@
   - ColonistPMC
   startingGear: RMCGearSurvivorPMCEngineer
   icon: RMCJobIconPMCEngineer
-  greeting: rmc-job-greeting-solaris-pmc-engineer
+  greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: PMC Engineer (Solaris Special Survivor)
   special:

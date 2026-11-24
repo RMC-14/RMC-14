@@ -3,7 +3,7 @@
   parent: CMSurvivor
   id: CMSurvivorPrisoner
   name: cm-job-name-survivor-prisoner
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorPrisoner
   spawnMenuRoleName: Prisoner (Survivor)

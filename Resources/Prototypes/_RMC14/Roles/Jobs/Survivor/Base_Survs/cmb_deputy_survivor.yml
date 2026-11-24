@@ -5,7 +5,7 @@
   parent: CMSurvivorSecurity
   id: CMSurvivorCMBDeputy
   name: rmc-job-name-survivor-cmb-deputy
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   ranks:
     RMCRankCMBCorporal:
     - !type:RoleTimeRequirement

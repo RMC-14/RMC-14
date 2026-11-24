@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: RMCSurvivorUNMCRifleman
   name: cm-job-name-rifleman
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorUNMCRifleman
   greeting: rmc-job-greeting-varadero

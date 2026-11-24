@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: RMCSurvivorKutjevoCMBDeputy
   name: rmc-job-name-survivor-cmb-deputy
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoCMBDeputy
   hasIcon: true
   icon: RMCJobIconBureauDeputy

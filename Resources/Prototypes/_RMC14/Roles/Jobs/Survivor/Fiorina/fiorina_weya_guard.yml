@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: CMSurvivorFiorinaPrisonGuard
   name: rmc-job-name-pmc-corporate-goon-secguard
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaPrisonGuard
   accessGroups:

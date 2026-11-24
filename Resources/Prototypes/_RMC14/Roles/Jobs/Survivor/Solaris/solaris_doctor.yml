@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: CMSurvivorSolarisDoctor
   name: rmc-job-name-survivor-solaris-doctor
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorSolarisDoctor
   spawnMenuRoleName: Solaris Doctor (Solaris Survivor)
   special:

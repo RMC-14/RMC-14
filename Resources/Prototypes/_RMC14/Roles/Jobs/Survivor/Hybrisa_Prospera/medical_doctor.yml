@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: RMCSurvivorHybrisaMedicalDoctor
   name: rmc-job-name-survivor-medical-doctor
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaMedicalDoctor
   spawnMenuRoleName: Medical Doctor (Hybrisa Survivor)
   special:

@@ -2,7 +2,7 @@
   parent: CMSurvivorSecurity
   id: CMSurvivorGoon
   name: rmc-job-name-pmc-corporate-goon
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorGoon
   spawnMenuRoleName: We-Ya Goon (Survivor)
   icon: "RMCJobIconPMCGoonStandard"

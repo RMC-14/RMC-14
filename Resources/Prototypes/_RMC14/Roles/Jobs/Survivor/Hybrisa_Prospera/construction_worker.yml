@@ -2,7 +2,7 @@
   parent: CMSurvivorEngineer
   id: RMCSurvivorHybrisaConstructionWorker
   name: rmc-job-name-survivor-construction-worker
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaConstructionWorker
   spawnMenuRoleName: Construction Worker (Hybrisa Survivor)
   special:

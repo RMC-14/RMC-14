@@ -2,7 +2,7 @@
   parent: CMSurvivorTrucker
   id: RMCSurvivorKutjevoTrucker
   name: rmc-job-name-survivor-kutjevo-trucker
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoTrucker
   spawnMenuRoleName: Kutjevo Heavy Vehicle Operator (Kutjevo Survivor)
   special:

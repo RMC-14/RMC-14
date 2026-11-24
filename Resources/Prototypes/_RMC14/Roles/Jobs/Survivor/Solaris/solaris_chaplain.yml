@@ -2,7 +2,7 @@
   parent: CMSurvivorPriest
   id: CMSurvivorSolarisChaplain
   name: rmc-job-name-survivor-solaris-chaplain
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   startingGear: RMCGearSurvivorSolarisChaplain
   spawnMenuRoleName: Chaplain (Solaris Survivor)
 

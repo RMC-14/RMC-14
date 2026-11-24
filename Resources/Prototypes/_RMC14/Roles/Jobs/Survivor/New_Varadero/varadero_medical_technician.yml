@@ -2,7 +2,7 @@
   parent: CMSurvivorDoctor
   id: CMSurvivorMedicalTechnician
   name: rmc-job-name-survivor-medical-technician
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorMedicalTechnician
   greeting: rmc-job-greeting-varadero

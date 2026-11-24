@@ -5,7 +5,7 @@
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorShivasEngineer
   spawnMenuRoleName: Engineer (Shivas Special Survivor)
-  greeting: rmc-job-greeting-shivas-panic-room-engineer
+  greeting: rmc-job-greeting-shivas-panic-room-colonist
 
 - type: entity
   parent: RMCSpawnPointSurvivorShivasEngineer

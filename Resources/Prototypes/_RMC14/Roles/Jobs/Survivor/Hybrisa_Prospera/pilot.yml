@@ -2,7 +2,7 @@
   parent: CMSurvivorCorporate
   id: RMCSurvivorHybrisaCommercialPilot
   name: rmc-job-name-survivor-commercial-pilot
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   spawnMenuRoleName: Commercial Pilot (Hybrisa Survivor)
   startingGear: RMCGearSurvivorHybrisaCommercialPilot
   hasIcon: false

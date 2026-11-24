@@ -2,7 +2,7 @@
   parent: CMSurvivorScientist
   id: RMCSurvivorShivasResearcher
   name: rmc-job-name-survivor-shivas-researcher
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorShivasResearcher
   spawnMenuRoleName: Researcher (Shivas Survivor)

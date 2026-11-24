@@ -2,7 +2,7 @@
   parent: CMSurvivor
   id: CMJobSurvivorArmedPoliceOfficer
   name: rmc-job-name-survivor-civil-gendarmes-officer
-  description: cm-job-description-survivor
+  description: rmc-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
     RMCRankSPPStrsh:
