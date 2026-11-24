@@ -357,32 +357,17 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         }
         // End RMC14
 
-        // Need to unselect existing ones if we're at or above limit
-        var limit = Math.Max(0, groupLoadouts.Count + 1 - protoManager.Index(selectedGroup).MaxLimit);
-
-        for (var i = 0; i < groupLoadouts.Count; i++)
+        if (groupLoadouts.Any(loadout => loadout.Prototype == selectedLoadout))
         {
-            var loadout = groupLoadouts[i];
-
-            if (loadout.Prototype != selectedLoadout)
-            {
-                // Remove any other loadouts that might push it above the limit.
-                if (limit > 0)
-                {
-                    limit--;
-                    groupLoadouts.RemoveAt(i);
-                    i--;
-                }
-
-                continue;
-            }
-
             // RMC14 - EnsureValid and this did not play well because Shork broke it.
             // DebugTools.Assert(false);
             // End RMC14
-
             return false;
         }
+
+        var maxLimit = protoManager.Index(selectedGroup).MaxLimit;
+        if (maxLimit > 0 && groupLoadouts.Count >= maxLimit)
+            return false;
 
         groupLoadouts.Add(new Loadout()
         {

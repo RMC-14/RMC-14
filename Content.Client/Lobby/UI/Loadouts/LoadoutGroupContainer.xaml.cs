@@ -10,6 +10,7 @@ using Robust.Shared.IoC;
 using System;
 using Robust.Shared.Prototypes;
 using System.Linq;
+using Robust.Shared.Utility;
 
 namespace Content.Client.Lobby.UI.Loadouts;
 
@@ -58,9 +59,16 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
 
         if (_groupProto.MaxLimit > 0)
         {
+            var selectedCount = loadout.SelectedLoadouts.TryGetValue(_groupProto.ID, out var selectedLoadouts)
+                ? selectedLoadouts.Count
+                : 0;
+
             RestrictionsContainer.AddChild(new Label()
             {
-                Text = Loc.GetString("loadouts-max-limit", ("count", _groupProto.MaxLimit)),
+                Text = Loc.GetString(
+                    "loadouts-max-limit",
+                    ("count", selectedCount),
+                    ("max", _groupProto.MaxLimit)),
                 Margin = new Thickness(5, 0, 5, 5),
             });
         }
@@ -242,6 +250,12 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
                 reason = null;
                 enabled = true;
             }
+        }
+
+        if (_groupProto.MaxLimit > 0 && selected.Count >= _groupProto.MaxLimit && !pressed)
+        {
+            enabled = false;
+            reason = FormattedMessage.FromUnformatted(Loc.GetString("loadouts-max-limit-reached"));
         }
 
         var cont = new LoadoutContainer(proto, !enabled, reason);
