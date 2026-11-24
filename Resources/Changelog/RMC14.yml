@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Fixed the targeting overlay sometimes appearing at the wrong location.
-    type: Fix
-  id: 3458
-  time: '2026-07-03T01:19:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10222
-- author: Dygon
-  changes:
   - message: Imaginary friends can no longer talk through radio channels.
     type: Fix
   id: 3459
@@ -4327,5 +4320,12 @@
   id: 3957
   time: '2026-11-24T06:44:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11119
+- author: kleinerstation13
+  changes:
+  - message: Fixed Hybrisa Commercial Pilot survivor job not having tacmap icons
+    type: Fix
+  id: 3958
+  time: '2026-11-24T06:47:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9891
 Name: RMC14
 Order: -1
