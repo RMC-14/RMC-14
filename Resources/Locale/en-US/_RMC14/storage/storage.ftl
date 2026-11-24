@@ -28,3 +28,15 @@ rmc-storage-hand-eject-last-item = Clicking {THE($storage)} with an empty hand n
 rmc-storage-hand-eject-first-item = Clicking {THE($storage)} with an empty hand now puts the first stored item in your hand.
 rmc-storage-hand-eject-unequips = Clicking {THE($storage)} now unequips it.
 rmc-storage-hand-eject-open = Clicking {THE($storage)} now opens it.
+
+rmc-hijack-cabinet-locked = This cabinet will unlock and open itself during evacuation procedures.
+
+rmc-storage-shake = Shake
+rmc-storage-shake-fail-self = You shake {THE($target)} but nothing falls out.
+rmc-storage-shake-fail-self-empty = You shake {THE($target)} but nothing falls out. {CAPITALIZE(SUBJECT($target))} {CONJUGATE-BASIC($target, "feel", "feels")} empty...
+rmc-storage-shake-fail-others = {CAPITALIZE(THE($user))} shakes {THE($target)} but nothing falls out.
+rmc-storage-shake-success-self = You shake {THE($target)} and {INDEFINITE($item)} {$item} falls out.
+rmc-storage-shake-success-others = {CAPITALIZE(THE($user))} shakes {THE($target)} and {INDEFINITE($item)} {$item} falls out.
+
+rmc-storage-equipped-otheraccessible-self-opening = You start opening the {$item} on {THE($target)}.
+rmc-storage-equipped-otheraccessible-other-opening = {CAPITALIZE(THE($user))} is trying to open your equipped {$item}.

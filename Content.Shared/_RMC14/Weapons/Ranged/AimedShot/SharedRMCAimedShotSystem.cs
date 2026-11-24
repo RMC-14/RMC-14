@@ -118,7 +118,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
         Dirty(gun, aimedShot);
 
         _audio.PlayPredicted(aimedShot.AimingSound, gun, user);
-        _targeting.Target(gun, user, target, laserDuration, targetEffect, showDirection);
+        _targeting.Target(gun, user, target, laserDuration, targetEffect, showDirection, rootUser: true);
     }
 
     /// <summary>
@@ -216,7 +216,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
             }
         }
         // Update ammo visualiser because client doesn't know about the shot.
-        var ev = new UpdateClientAmmoEvent();
+        var ev = new UpdateClientAmmoEvent(-1);
         RaiseLocalEvent(ent, ref ev);
     }
 

@@ -9,23 +9,22 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Nutritious : RMCChemicalEffect
 {
+    public override string Abbreviation => "NTR";
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var updatedFactor = NutrimentFactor + ActualPotency;
-        return $"Restores [color=green]{updatedFactor * ActualPotency}[/color] nutrients to the body and satiates hunger";
+        var updatedFactor = NutrimentFactor + Level;
+        return $"Restores [color=green]{updatedFactor * Potency}[/color] nutrients to the body and satiates hunger";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var entityManager = args.EntityManager;
-        var target = args.TargetEntity;
-        var mobStateSystem = entityManager.System<MobStateSystem>();
-        var hungerSystem = entityManager.System<HungerSystem>();
-
-        if (mobStateSystem.IsDead(target))
+        var mobState = System<MobStateSystem>(args);
+        if (mobState.IsDead(args.TargetEntity))
             return;
 
-        var updatedFactor = NutrimentFactor + ActualPotency;
-        hungerSystem.ModifyHunger(target, updatedFactor * ActualPotency);
+        var hunger = System<HungerSystem>(args);
+        var updatedFactor = NutrimentFactor + Level;
+        hunger.ModifyHunger(args.TargetEntity, updatedFactor * Potency); // Half because chemicals tick every second
     }
 }

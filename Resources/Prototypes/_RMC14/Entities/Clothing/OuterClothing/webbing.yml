@@ -20,6 +20,7 @@
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
       - RMCBeltHolsterM13
+      - RMCG8Pouch
       - Flashlight
       - DiscreteHealthAnalyzer
       - Pen
@@ -51,6 +52,14 @@
 
 - type: entity
   parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingNV
+  suffix: Varadero
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_nv.rsi
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
   id: RMCOuterClothingExternalWebbingBrown
   suffix: Brown
   components:
@@ -64,3 +73,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_black.rsi
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingSPPSurvivor
+  suffix: SPP, Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+    - id: RMCMRESPP

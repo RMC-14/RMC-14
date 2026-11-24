@@ -44,13 +44,15 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     public bool NightVision;
 
     [DataField, AutoNetworkedField]
-    public NetEntity? SelectedSystem;
+    public TimeSpan LingeringCameraDuration = TimeSpan.FromSeconds(5);
 
     [DataRecord]
     [Serializable, NetSerializable]
     public record struct Screen(
         DropshipTerminalWeaponsScreen State,
-        NetEntity? Weapon
+        NetEntity? Weapon,
+        NetEntity? System,
+        bool QuickMode
     );
 
     [DataRecord]

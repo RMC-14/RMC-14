@@ -4,7 +4,7 @@
   parent: CMBaseWallInvincible
   id: RMCWallHybrisaRock
   name: rock wall
-  description: Massive columns comprised of anicent sedimentary rocks loom before you.
+  description: Massive columns comprised of ancient sedimentary rocks loom before you.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi

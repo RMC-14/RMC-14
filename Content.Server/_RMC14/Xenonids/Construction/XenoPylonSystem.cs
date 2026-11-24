@@ -2,8 +2,9 @@ using Content.Server._RMC14.Damage;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Events;
-using Content.Shared._RMC14.Dropship;
+using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -12,12 +13,17 @@ using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Ghost.Roles.Components;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Timing;
-using Robust.Shared.Utility;
+using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Tag;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
@@ -27,18 +33,23 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
 
+    private static readonly ProtoId<TagPrototype> Larva = "RMCXenoLarva";
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<HiveCoreComponent, DestructionEventArgs>(OnHiveCoreDestruction);
+        SubscribeLocalEvent<HiveCoreComponent, TimedDespawnEvent>(OnHiveCoreDestruction);
 
         SubscribeLocalEvent<XenoComponent, GhostRoleSpawnerUsedEvent>(OnXenoSpawnerUsed);
 
@@ -49,15 +60,14 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         SubscribeLocalEvent<HiveCoreComponent, StepTriggeredOffEvent>(OnHiveCoreStepTriggered);
     }
 
-    private void OnHiveCoreDestruction(Entity<HiveCoreComponent> ent, ref DestructionEventArgs args)
+    private void OnHiveCoreDestruction<T>(Entity<HiveCoreComponent> ent, ref T args)
     {
-        if (_hive.GetHive(ent.Owner) is {} hive &&
+        if (_hive.GetHive(ent.Owner) is { } hive &&
             _gameTicker.RoundDuration() > hive.Comp.PreSetupCutoff)
         {
             hive.Comp.NewCoreAt = _timing.CurTime + hive.Comp.NewCoreCooldown;
             hive.Comp.AnnouncedHiveCoreCooldownOver = false;
         }
-
     }
 
     private void OnXenoSpawnerUsed(Entity<XenoComponent> xeno, ref GhostRoleSpawnerUsedEvent args)
@@ -153,7 +163,9 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
 
     private bool CanTrigger(EntityUid user)
     {
-        return _tagSystem.HasTag(user, "RMCXenoLarva") && _mobState.IsDead(user);
+        return _tagSystem.HasTag(user, Larva)
+            && !HasComp<XenoBanishComponent>(user)
+            && (_mobState.IsDead(user) || _mind.GetMind(user) == null);
     }
 
     private void OnHiveCoreStepTriggered(Entity<HiveCoreComponent> core, ref StepTriggeredOffEvent args)
@@ -161,10 +173,17 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         var tripper = args.Tripper;
         if (CanTrigger(tripper))
         {
-            _hive.IncreaseBurrowedLarva(1);
+            var othersFilter = Filter.Pvs(core);
+            foreach (var other in othersFilter.Recipients)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-larva-recovered", ("larva", Identity.Name(tripper, EntityManager, otherEnt))),
+                core, otherEnt, PopupType.Medium);
+            }
+            _hive.ChangeBurrowedLarva(1);
             QueueDel(tripper);
         }
     }
-
 }
-

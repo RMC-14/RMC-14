@@ -1,13 +1,20 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.DoAfter;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Folded;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Placement;
 using Content.Shared._RMC14.Scoping;
+using Content.Shared._RMC14.Stealth;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Buckle;
@@ -15,6 +22,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -39,8 +47,11 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Emplacements;
@@ -60,7 +71,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlock = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly FoldableSystem _foldable = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -68,11 +81,16 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly RMCPlacementSystem _placement = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
     [Dependency] private readonly RMCFoldableSystem _rmcFoldable = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedScopeSystem _scope = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly RMCSharedWeaponControllerSystem _weaponController = default!;
@@ -98,10 +116,11 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         SubscribeLocalEvent<WeaponMountComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<WeaponMountComponent, GetVerbsEvent<AlternativeVerb>>(OnAltVerb);
         SubscribeLocalEvent<WeaponMountComponent, BreakageEventArgs>(OnBreak);
-        SubscribeLocalEvent<WeaponMountComponent, DamageModifyEvent>(OnDamageModified);
+        SubscribeLocalEvent<WeaponMountComponent, BeforeDamageChangedEvent>(OnDamageModified);
         SubscribeLocalEvent<WeaponMountComponent, RMCCheckTileFreeEvent>(OnCheckTileFree);
         SubscribeLocalEvent<WeaponMountComponent, GetIFFGunUserEvent>(OnGetGunUser);
         SubscribeLocalEvent<WeaponMountComponent, InteractHandEvent>(OnInteractHand, before: new[] { typeof(SharedBuckleSystem) });
+        SubscribeLocalEvent<WeaponMountComponent, XenoToggleChargingCollideEvent>(OnChargeCollide);
 
         // Relayed events
         SubscribeLocalEvent<WeaponMountComponent, MountableWeaponRelayedEvent<OverheatedEvent>>(OnWeaponOverheated);
@@ -207,6 +226,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -236,6 +256,10 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return;
         }
 
+        var delay = ent.Comp.DisassembleDelay;
+        if (ent.Comp.DisassembleSkill != null)
+            delay *= _skills.GetSkillDelayMultiplier(args.User, ent.Comp.DisassembleSkill.Value);
+
         if (ent.Comp.MountedEntity != null)
         {
             args.Cancel();
@@ -243,7 +267,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             {
                 var doAfterArgs = new DoAfterArgs(EntityManager,
                     args.User,
-                    ent.Comp.AssembleDelay,
+                    delay,
                     new SecureToMountDoAfterEvent(),
                     ent,
                     ent,
@@ -252,6 +276,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
                     NeedHand = true,
                     BreakOnMove = true,
                     BreakOnHandChange = true,
+                    RootEntity = true,
                 };
 
                 _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -287,6 +312,13 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         weapon.MountedTo = GetNetEntity(ent);
         Dirty(args.Used.Value, weapon);
 
+        var fixture = ent.Comp.DeployFixture is { } fixtureId && TryComp(ent, out FixturesComponent? fixtures)
+            ? _fixture.GetFixtureOrNull(ent, fixtureId, fixtures)
+            : null;
+
+        if (fixture != null)
+            _physics.SetHard(ent, fixture, true);
+
         ent.Comp.MountedEntity = args.Used;
         _collisionWake.SetEnabled(ent, false);
         _item.SetSize(ent, ent.Comp.MountedWeaponSize);
@@ -303,6 +335,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return;
 
         ent.Comp.IsWeaponSecured = true;
+        DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.IsWeaponSecured));
+
         _buckle.StrapSetEnabled(ent, true);
 
         if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && mountedMeta.EntityPrototype != null)
@@ -335,6 +369,13 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             _metaData.SetEntityDescription(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityPrototype.ID + "-description"));
         }
 
+        var fixture = ent.Comp.DeployFixture is { } fixtureId && TryComp(ent, out FixturesComponent? fixtures)
+            ? _fixture.GetFixtureOrNull(ent, fixtureId, fixtures)
+            : null;
+
+        if (fixture != null)
+            _physics.SetHard(ent, fixture, false);
+
         ent.Comp.MountedEntity = null;
         _buckle.StrapSetEnabled(ent, false);
         _collisionWake.SetEnabled(ent, true);
@@ -359,6 +400,13 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && ent.Comp.IsWeaponLocked && mountedMeta.EntityPrototype != null)
             _metaData.SetEntityDescription(ent, Loc.GetString( "emplacement-mount-" + mountedMeta.EntityPrototype.ID + "-description-mounted"));
+
+        var fixture = ent.Comp.DeployFixture is { } fixtureId && TryComp(ent, out FixturesComponent? fixtures)
+            ? _fixture.GetFixtureOrNull(ent, fixtureId, fixtures)
+            : null;
+
+        if (fixture != null)
+            _physics.SetHard(ent, fixture, true);
 
         var xform = Transform(ent);
         _transform.SetCoordinates(ent, xform, coordinates, rotation);
@@ -397,15 +445,25 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     public void UndeployMount(Entity<WeaponMountComponent> ent, EntityUid? user = null, FoldableComponent? foldable = null)
     {
+        if (!Resolve(ent, ref foldable, false))
+            return;
+
         if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && ent.Comp.IsWeaponLocked && mountedMeta.EntityPrototype != null)
             _metaData.SetEntityDescription(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityPrototype.ID + "-description"));
 
         ent.Comp.IsWeaponSecured = false;
+        DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.IsWeaponSecured));
+
         _transform.Unanchor(ent);
 
-        if (foldable != null)
-            _foldable.SetFolded(ent, foldable, true);
+        var fixture = ent.Comp.DeployFixture is { } fixtureId && TryComp(ent, out FixturesComponent? fixtures)
+            ? _fixture.GetFixtureOrNull(ent, fixtureId, fixtures)
+            : null;
 
+        if (fixture != null)
+            _physics.SetHard(ent, fixture, false);
+
+        _foldable.SetFolded(ent, foldable, true);
         _buckle.StrapSetEnabled(ent, false);
         _collisionWake.SetEnabled(ent, true);
 
@@ -431,6 +489,22 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return false;
         }
 
+        if (HasComp<VehicleInteriorOccupantComponent>(user))
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-mount-deploy-vehicle"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (TryComp(user, out EntityTurnInvisibleComponent? invisible))
+        {
+            if (invisible.Enabled || invisible.UncloakTime + invisible.UncloakWeaponLock > _timing.CurTime)
+            {
+                var popup = Loc.GetString("emplacement-mount-deploy-invisible");
+                _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
+                return false;
+            }
+        }
+
         var direction = rotation.GetCardinalDir();
         coordinates = coordinates.Offset(direction.ToVec());
         if (_rmcMap.IsTileBlocked(coordinates, CollisionGroup.MidImpassable))
@@ -440,9 +514,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return false;
         }
 
-        if (_rmcMap.HasAnchoredEntityEnumerator<WeaponMountComponent>(coordinates))
+        if (_placement.TryFindBlocker(coordinates, ent.Comp.PlacementRestrictions, out var blockingEntity, ent))
         {
-            var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", ent));
+            var msg = Loc.GetString("emplacement-mount-too-close", ("mount", blockingEntity));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
             return false;
         }
@@ -450,12 +524,6 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         var grid = _transform.GetGrid((user, Transform(user)));
         if (TryComp(grid, out MapGridComponent? mapGrid))
         {
-            if (!TryComp(ent, out MetaDataComponent? metaData))
-                return false;
-
-            if (HasWeaponMountNearbyPopup((grid.Value, mapGrid), coordinates, ent.Owner, ent.Comp.MountExclusionAreaSize, user))
-                return false;
-
             if (ent.Comp.BarricadeExclusionAreaSize != 0 &&
                 _barricade.HasBarricadeNearbyPopup((grid.Value, mapGrid), user, coordinates, ent.Comp.BarricadeExclusionAreaSize))
                 return false;
@@ -465,10 +533,11 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     private void OnInteractHand(Entity<WeaponMountComponent> ent, ref InteractHandEvent args)
     {
-        if (!_combatMode.IsInCombatMode(args.User))
-            return;
+        if (_combatMode.IsInCombatMode(args.User) && TryComp(ent, out FoldableComponent? foldable) && !foldable.IsFolded)
+            args.Handled = true;
 
-        args.Handled = true;
+        if (HasComp<XenoComponent>(args.User))
+            args.Handled = true;
     }
 
     private void OnStrapAttempt(Entity<WeaponMountComponent> ent, ref StrapAttemptEvent args)
@@ -477,6 +546,28 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         {
             args.Cancelled = true;
             return;
+        }
+
+        if (!_directionBlock.IsBehindTarget(ent ,args.Buckle) ||
+            ent.Owner.ToCoordinates().TryDistance(EntityManager, args.Buckle.Owner.ToCoordinates(), out var distance )
+            && distance > ent.Comp.MountableDistance)
+        {
+            var msg = Loc.GetString("emplacement-mount-too-far", ("mount", ent));
+            _popup.PopupClient(msg, args.Buckle, args.Buckle, PopupType.SmallCaution );
+
+            args.Cancelled = true;
+            return;
+        }
+
+        if (TryComp(args.Buckle, out EntityTurnInvisibleComponent? invisible))
+        {
+            if (invisible.Enabled || invisible.UncloakTime + invisible.UncloakWeaponLock > _timing.CurTime)
+            {
+                var popup = Loc.GetString("rmc-cloak-attempt-mount-weapon");
+                _popup.PopupClient(popup, args.Buckle, args.Buckle, PopupType.SmallCaution);
+                args.Cancelled = true;
+                return;
+            }
         }
 
         if (args.User == args.Buckle)
@@ -488,6 +579,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     private void OnStrapped(Entity<WeaponMountComponent> ent, ref StrappedEvent args)
     {
         ent.Comp.User = args.Buckle;
+        DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.User));
+
         if (ent.Comp.MountedEntity is not { } weapon)
             return;
 
@@ -499,11 +592,13 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         }
 
         _actions.AddAction(args.Buckle, ref ent.Comp.DismountActionEntity, ent.Comp.DismountAction, args.Buckle);
+        _rmcDoAfter.TryCancelAll(args.Buckle.Owner);
     }
 
     private void OnUnStrapped(Entity<WeaponMountComponent> ent, ref UnstrappedEvent args)
     {
         ent.Comp.User = null;
+        DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.User));
         RemComp<WeaponControllerComponent>(args.Buckle);
 
         if (TryComp(ent.Comp.MountedEntity, out ScopeComponent? scope))
@@ -637,6 +732,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         }
     }
 
+    private void OnChargeCollide(Entity<WeaponMountComponent> ent, ref XenoToggleChargingCollideEvent args)
+    {
+        if (args.Charger.Comp.Stage <= 0)
+            return;
+
+        UndeployMount(ent);
+    }
+
     /// <summary>
     ///     Check if a weapon mount is anchored near the given coordinates.
     /// </summary>
@@ -729,17 +832,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     /// <returns>True if the mount can be assembled</returns>
     private bool CanAssembleMount(Entity<WeaponMountComponent> ent, EntityUid user)
     {
-        if (ent.Comp.MountExclusionAreaSize == 0)
+        if (!_placement.TryFindBlocker(_transform.GetMoverCoordinates(ent), ent.Comp.PlacementRestrictions, out var blockingEntity, ent))
             return true;
 
-        var grid = _transform.GetGrid((ent, Transform(ent)));
-        if (!TryComp(grid, out MapGridComponent? mapGrid))
-            return true;
+        var msg = Loc.GetString("emplacement-mount-too-close", ("mount", blockingEntity));
+        _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
 
-        if (HasWeaponMountNearbyPopup((grid.Value, mapGrid), _transform.GetMoverCoordinates(ent), ent.Owner, ent.Comp.MountExclusionAreaSize, user))
-            return false;
+        return false;
 
-        return true;
     }
 
     /// <summary>
@@ -785,6 +885,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -811,6 +912,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -819,9 +921,13 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     private bool TryUndeployMount(Entity<WeaponMountComponent> ent, EntityUid user, EntityUid? used = null)
     {
+        var delay = ent.Comp.DisassembleDelay;
+        if (ent.Comp.DisassembleSkill != null)
+            delay *= _skills.GetSkillDelayMultiplier(user, ent.Comp.DisassembleSkill.Value);
+
         var undeployDoAfterArgs = new DoAfterArgs(EntityManager,
             user,
-            ent.Comp.DisassembleDelay,
+            delay,
             new MountUnDeployDoAfterEvent(),
             ent,
             ent,
@@ -830,6 +936,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(undeployDoAfterArgs));
@@ -858,11 +965,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         UpdateAppearance(ent);
     }
 
-    private void OnDamageModified(Entity<WeaponMountComponent> ent, ref DamageModifyEvent args)
+    private void OnDamageModified(Entity<WeaponMountComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        // Set all damage received to 0 if the mount is folded.
+        if (args.Damage.GetTotal() < 0)
+            return;
+
+        // Receive no damage while folded.
         if (TryComp(ent, out FoldableComponent? foldable) && foldable.IsFolded)
-            args.Damage = new DamageSpecifier();
+            args.Cancelled = true;
     }
 
     private void OnCheckTileFree(Entity<WeaponMountComponent> ent, ref RMCCheckTileFreeEvent args)

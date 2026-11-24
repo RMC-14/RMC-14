@@ -1,26 +1,38 @@
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids.Banish;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Ghost;
+using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
+using Robust.Server.Containers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
 public sealed class XenoEggRoleSystem : EntitySystem
 {
+    private readonly ProtoId<JobPrototype> _parasiteJob = "CMXenoParasite";
     private TimeSpan _parasiteSpawnDelay;
+    private int _parasiteSpawnMinimum;
+    private int _parasiteSpawnScale;
 
     [Dependency] private readonly ActorSystem _actor = default!;
+    [Dependency] private readonly SharedXenoBanishSystem _banish = default!;
     [Dependency] private readonly XenoEggSystem _eggSystem = default!;
     [Dependency] private readonly XenoParasiteThrowerSystem _throwerSystem = default!;
+    [Dependency] private readonly XenoEvolutionSystem _evolutionSystem = default!;
     [Dependency] private readonly EggMorpherSystem _eggMorpherSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -29,6 +41,8 @@ public sealed class XenoEggRoleSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -47,12 +61,14 @@ public sealed class XenoEggRoleSystem : EntitySystem
             subs.Event<XenoParasiteGhostBuiMsg>(OnEggMorpherGhostBuiChosen);
         });
 
-        Subs.BuiEvents<ParasiteAIComponent>(XenoParasiteGhostUI.Key, subs =>
+        Subs.BuiEvents<XenoParasiteComponent>(XenoParasiteGhostUI.Key, subs =>
         {
             subs.Event<XenoParasiteGhostBuiMsg>(OnParasiteGhostBuiChosen);
         });
 
         Subs.CVar(_config, RMCCVars.RMCParasiteSpawnInitialDelayMinutes, v => _parasiteSpawnDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCParasiteSpawnMinimum, v => _parasiteSpawnMinimum = v, true);
+        Subs.CVar(_config, RMCCVars.RMCParasiteSpawnScale, v => _parasiteSpawnScale = v, true);
     }
 
     private void OnXenoEggGhostBuiChosen(Entity<XenoEggComponent> ent, ref XenoParasiteGhostBuiMsg args)
@@ -107,16 +123,22 @@ public sealed class XenoEggRoleSystem : EntitySystem
         }
     }
 
-    private void OnParasiteGhostBuiChosen(Entity<ParasiteAIComponent> ent, ref XenoParasiteGhostBuiMsg args)
+    private void OnParasiteGhostBuiChosen(Entity<XenoParasiteComponent> ent, ref XenoParasiteGhostBuiMsg args)
     {
         var user = args.Actor;
 
         if (!SharedChecks(ent, user))
             return;
 
+        if (!(HasComp<ParasiteAIComponent>(ent) || HasComp<ParasiteAIDelayAddComponent>(ent)) ||
+            _container.IsEntityInContainer(ent))
+            return;
+
         if (_actor.TryGetSession(user, out var session) && session != null)
         {
-            _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, ent.Owner, ent.Owner);
+            //Uses seperate system due to parasites not having an inherent ghost role
+            var newMind = _mind.CreateMind(session.UserId, Name(ent));
+            _mind.TransferTo(newMind, ent);
         }
     }
 
@@ -140,11 +162,21 @@ public sealed class XenoEggRoleSystem : EntitySystem
             return false;
         }
 
+        // Limit the amount of player controlled parasites.
+        var livingParasites = _evolutionSystem.GetLiving<XenoComponent>(x => x.Comp.Role == _parasiteJob && TryComp<ActorComponent>(x, out var actor) && actor.PlayerSession != null);
+        var livingXenos = _evolutionSystem.GetLiving<XenoComponent>(x => x.Comp.CountedInSlots);
+        var max = Math.Max(_parasiteSpawnMinimum, livingXenos / _parasiteSpawnScale);
+        if (livingParasites >= max)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-too-many"), user, user, PopupType.MediumCaution);
+            return false;
+        }
+
         // If the player previously successfully infected someone, they bypass the timer check entirely
         if (HasComp<InfectionSuccessComponent>(user))
             return true;
 
-        var timeSinceDeath = _gameTiming.CurTime.Subtract(ghostComp.TimeOfDeath);
+        var timeSinceDeath = _gameTiming.RealTime.Subtract(ghostComp.TimeOfDeath);
 
         // Must have been dead for 3 minutes
         if (timeSinceDeath < TimeSpan.FromMinutes(3))
@@ -159,6 +191,13 @@ public sealed class XenoEggRoleSystem : EntitySystem
     {
         //TODO RMC14 parasite bans should be checked here
         _ui.CloseUi(ent, XenoParasiteGhostUI.Key);
+
+        if (_actor.TryGetSession(user, out var session) &&
+            session != null &&
+            !_banish.CanJoinHivePopup(session, ent))
+        {
+            return false;
+        }
 
         return UserCheck(user);
     }

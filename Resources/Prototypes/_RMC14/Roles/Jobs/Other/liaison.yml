@@ -1,8 +1,10 @@
 ﻿- type: job
   parent: RMCJobNametagBase
   id: CMLiaison
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-liaison
   name: cm-job-name-liaison
   description: cm-job-description-liaison
+  newToJobInfo: rmc-new-to-job-cl
   requirements:
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
@@ -66,6 +68,9 @@
     shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

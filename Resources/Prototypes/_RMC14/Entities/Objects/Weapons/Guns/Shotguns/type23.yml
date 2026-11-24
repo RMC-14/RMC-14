@@ -14,7 +14,7 @@
   - type: Gun
     shotsPerBurst: 1
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_small.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_small_alt.ogg
   - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:
@@ -64,7 +64,7 @@
           tags:
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentBurstFireAssembly #TODO RMC14 Needs to be able to shoot 3 shells at once when this is on /similar to custombuilt etc...
   - type: AttachableHolderVisuals
     offsets:

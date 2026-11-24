@@ -11,8 +11,6 @@
   name: Praetorian
   description: A huge, looming beast of an alien.
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-praetorian
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/praetorian.rsi
   - type: MobState
@@ -39,7 +37,9 @@
     - ActionXenoSprayAcidPraetorian
     - ActionXenoDevolve
     tier: 3
-    hudOffset: -0.15,0.16
+    hudOffset: -0.2,0.16
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -141,7 +141,6 @@
     range: 6
     moveDelayTime: 0
   - type: XenoShield
-    shield: Praetorian
   - type: XenoAcidBall
   - type: XenoEvolution
     strains:
@@ -180,6 +179,8 @@
     name: rmc-xeno-valkyrie-name
     description: rmc-xeno-valkyrie-description
     popup: rmc-xeno-valkyrie-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoPraetorian
   - type: XenoPheromones
     pheromonesMultiplier: 3
     pheroSuffix: strong
@@ -233,12 +234,20 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/dancer_praetorian.rsi
+  - type: XenoRegen
+    critHealMultiplier: 0.4455  # 35% increased regeneration
+    standHealingMultiplier: 0.567
+    restHealMultiplier: 1.35
+  - type: XenoCappedPheromones
+    cappedPheromones:
+      Recovery: 3
   - type: Xeno
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailStabLance
+    - ActionXenoTailStabLanceAlt
     - ActionXenoImpale
     - ActionXenoDodge
     - ActionXenoTailTrip
@@ -247,6 +256,8 @@
     name: rmc-xeno-dancer-name
     description: rmc-xeno-dancer-description
     popup: rmc-xeno-dancer-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoPraetorian
   - type: CMArmor
     xenoArmor: 20
   - type: XenoClaws
@@ -258,6 +269,11 @@
       groups:
         Brute: 40
   - type: XenoTailTrip
+  - type: XenoAltTailStab
+    tailDamage:
+      groups:
+        Brute: 8
+  - type: XenoSwiftSteps
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoPraetorianDancer
@@ -292,6 +308,8 @@
     name: rmc-xeno-vanguard-name
     description: rmc-xeno-vanguard-description
     popup: rmc-xeno-vanguard-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoPraetorian
   - type: XenoClaws
     clawType: Sharp
   - type: XenoShield
@@ -343,6 +361,8 @@
     name: rmc-xeno-oppressor-name
     description: rmc-xeno-oppressor-description
     popup: rmc-xeno-oppressor-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoPraetorian
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 3.5
@@ -379,6 +399,8 @@
     damage:
       groups:
         Brute: 15
+  - type: XenoFishing
+    failChance: 0.3 # Fish fear her
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoPraetorianOppressor

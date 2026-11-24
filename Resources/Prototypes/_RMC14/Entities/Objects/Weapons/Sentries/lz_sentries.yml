@@ -58,6 +58,7 @@
   - type: GunIFF
     enabled: true
     intrinsic: true
+  - type: PointLight
   - type: HomingShots
 
 - type: entity
@@ -66,6 +67,20 @@
   name: UN-577 spaceborne gauss turret
   description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 60
+  - type: PointLight
+    radius: 40
+    energy: 10.0
+    color: "#880808"
+    mask: /Textures/Effects/LightMasks/double_cone.png
+  - type: RotatingLight
+    speed: 90
   - type: Gun
     fireRate: 15
     selectedMode: FullAuto

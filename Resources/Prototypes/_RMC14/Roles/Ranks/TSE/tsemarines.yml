@@ -3,6 +3,12 @@
   name: Marine
   prefix: Mne.
   paygrade: E1
+  
+- type: rank #Rank used for Paramarines Rifleman
+  id: RCMRankParamarine
+  name: Paramarine
+  prefix: PMne.
+  paygrade: E1
 
 - type: rank
   id: RMCRankTSELanceCorporal
@@ -99,107 +105,8 @@
   name: General
   prefix: Gen.
   paygrade: O10
-
-# The below ranks are for the JAPANESE TSE marines. What does that mean? Why do they have two sets of ranks? Why does this exist? Why must we suffer like this?
-
-- type: rank
-  id: RMCRankEIAFNitoRikushi
-  name: Nito Rikushi
-  prefix: Nt-Shi.
-  paygrade: E2
-
-- type: rank
-  id: RMCRankEIAFIttoRikushi
-  name: Itto Rikushi
-  prefix: It-Shi.
-  paygrade: E3
-
-- type: rank
-  id: RMCRankEIAFRikushicho
-  name: Rikushicho
-  prefix: Shi.
-  paygrade: E4
-
-- type: rank
-  id: RMCRankEIAFSantoRikuso
-  name: Santo Rikuso
-  prefix: St-Rik.
-  paygrade: E5
-
-- type: rank
-  id: RMCRankEIAFNitoRikuso
-  name: Nito Rikuso
-  prefix: Nt-Rik.
-  paygrade: E6
-
-- type: rank
-  id: RMCRankEIAFIttoRikuso
-  name: Itto Rikuso
-  prefix: It-Rik.
-  paygrade: E7
-
-- type: rank
-  id: RMCRankEIAFRikusocho
-  name: Rikusocho
-  prefix: Rik.
-  paygrade: E8
-
-- type: rank
-  id: RMCRankEIAFSantoKaii
-  name: Santo Kaii
-  prefix: St-Wei.
-  paygrade: O1
-
-- type: rank
-  id: RMCRankEIAFNitoKaii
-  name: Nito Kaii
-  prefix: Nt-Wei.
-  paygrade: O2
-
-- type: rank
-  id: RMCRankEIAFIttoKaii
-  name: Itto Kaii
-  prefix: It-Wei.
-  paygrade: O3
-
-- type: rank
-  id: RMCRankEIAFSantoKaisa
-  name: Santo Kaisa
-  prefix: St-Sa.
-  paygrade: O4
-
-- type: rank
-  id: RMCRankEIAFNitoKaisa
-  name: Nito Kaisa
-  prefix: Nt-Sa.
-  paygrade: O5
-
-- type: rank
-  id: RMCRankEIAFIttoKaisa
-  name: Itto Kaisa
-  prefix: It-Sa.
-  paygrade: O6
-
-- type: rank
-  id: RMCRankEIAFKaishoHo
-  name: Kaisho-ho
-  prefix: It-Sho.
-  paygrade: O7
-
-- type: rank
-  id: RMCRankEIAFKaisho
-  name: Kaisho
-  prefix: Sho.
-  paygrade: O8
-
-- type: rank
-  id: RMCRankEIAFBakuryochotarusho
-  name: Bakuryōchō-taru-shō
-  prefix: Bt-Sho.
-  paygrade: O9
-
+  
 - type: rank
   id: RMCRankTSEEmpress
-  name: Empress
+  name: Empress # This needs to be changed to allow it to change dynamically for genders
   prefix: HRM.
-# This needs to be changed to allow it to change dynamically for genders

@@ -5,7 +5,7 @@
   description: These four-packs of Luckies come in every MRE. They're not as good as the Embassy Crowns found in some TSE MREs, but at least they're free.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_4.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_mini.rsi
     layers:
     - state: closed
     - state: open
@@ -193,9 +193,25 @@
   id: RMCCigarette
   description: An unfiltered roll of tobacco and nicotine. Smoking this releases even more tar and soot into your mouth.
   components:
+  - type: RMCCryoUnavailableOnStore
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
     state: unlit-icon
+  - type: Clothing
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
+
+- type: entity
+  parent: RMCCigarette
+  id: RMCCigaretteBlackRoll
+  description: A roll of tobacco, nicotine, and some phosphor, in a fancy black package. The phosphor makes the tip glow blue when lit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
+    state: unlit-icon
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
 
 - type: entity
   id: RMCCigaretteSpent
@@ -217,10 +233,29 @@
       - Burnt
 
 - type: entity
+  id: RMCCigaretteBlackRollSpent
+  parent: RMCCigaretteBlackRoll
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
+
+- type: entity
   parent: RMCCigarettePackLuckySloths
   id: RMCCigarettePackWeYaGold
   name: We-Ya gold packet
-  description: Paving Better Worlds, and rolling better cigarettes. These fancy cigarettes are Weston-Yamada's entry into the premium tobacco market. Comes backed by a fierce legal team.
+  description: The future is now, with better cigarettes! These fancy cigarettes are Weston-Yamada's entry into the market. Comes backed by a fierce legal team.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
@@ -228,6 +263,23 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/weya.rsi
       state: helmet
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 20
+
+- type: entity
+  parent: CMCigarettePackLuckySlothsMini
+  id: RMCCigarettePackWeYaGoldMini
+  name: We-Ya gold mini packet
+  description: The future is now, with better cigarettes! Compact and ready for your executive ventures, protecting corporate assets never felt cooler.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 4
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
@@ -237,13 +289,34 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCCigaretteBlackRoll
+      amount: 20
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
       state: helmet
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: CMCigarettePackLuckySlothsMini
+  id: RMCCigarettePackExecutiveSelectMini
+  name: executive select mini packet
+  description: Luxury right in your ration. You will have them just in time to use them while observing a nuclear blast and enjoying it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCCigaretteBlackRoll
+      amount: 4
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackArcturianAce
   name: arcturian ace
   description: An entry level brand of cigarettes with a bright blue packaging. You're guessing these aren't really good for you, but it doesn't matter when it's Arcturian baby!
@@ -263,7 +336,7 @@
     content: rmc-lore-examinable-lady-fingers
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackElectroGolds
   name: Kierlan electro golds
   description: Lovingly machine-rolled for YOUR pleasure. For when you want to look cool and the risk of a slow horrible death isn't really a factor.
@@ -274,7 +347,7 @@
     content: rmc-lore-examinable-kierland-electro-golds
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackEmeraldGreens
   name: emerald greens
   description: They remind you of a gross, tar-filled version of Ireland. These cheap cigarettes are Weston-Yamada's entry into the general market.
@@ -285,7 +358,7 @@
     content: rmc-lore-examinable-emerald-greens
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackSolRedsTurquoise
   name: turquoise sol reds
   description: Claims to be all-natural and organic, with no additives. Not much better for your health than other brands, but they taste good and are highly addictive.
@@ -294,10 +367,326 @@
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/sol_reds.rsi
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackSolRedsYellow
   name: yellow sol reds
   description: Claims to be all-natural and organic, with no additives. Not much better for your health than other brands, but they taste good and are highly addictive. This type seems to have a more mellow flavor.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/sol_reds_yellow.rsi
+
+#SPP Cigarettes.
+
+- type: entity
+  parent: CigPackBase
+  id: RMCCigarettePackLingxiaoGolds
+  name: lingxiao golds pack
+  description: The shining jewel in the SPP tobacco industry, and rated highly. Incredibly expensive, and considered to be rare in the UN, but people who can afford them typically can be found with them.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/liangxiao_golds.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      visible: false
+    - state: cig5
+      map: ["cig5"]
+      visible: false
+    - state: cig6
+      map: ["cig6"]
+      visible: false
+    - state: cig7
+      map: ["cig7"]
+      visible: false
+    - state: cig8
+      map: ["cig8"]
+      visible: false
+    - state: cig9
+      map: ["cig9"]
+      visible: false
+    - state: cig10
+      map: ["cig10"]
+      visible: false
+    - state: cig11
+      map: ["cig11"]
+      visible: false
+    - state: cig12
+      map: ["cig12"]
+      visible: false
+    - state: cig13
+      map: ["cig13"]
+      visible: false
+    - state: cig14
+      map: ["cig14"]
+      visible: false
+    - state: cig15
+      map: ["cig15"]
+      visible: false
+    - state: cig16
+      map: ["cig16"]
+      visible: false
+    - state: cig17
+      map: ["cig17"]
+      visible: false
+    - state: cig18
+      map: ["cig18"]
+      visible: false
+    - state: cig19
+      map: ["cig19"]
+      visible: false
+    - state: cig20
+      map: ["cig20"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,19,1
+    whitelist:
+      components:
+      - RMCLighter
+      tags:
+      - Cigarette
+  - type: StorageFill
+    contents:
+    - id: RMCLingxiaoCigarette
+      amount: 20
+  - type: ItemCounter
+    count:
+      tags: [Cigarette]
+    composite: true
+    layerStates:
+    - cig1
+    - cig2
+    - cig3
+    - cig4
+    - cig5
+    - cig6
+    - cig7
+    - cig8
+    - cig9
+    - cig10
+    - cig11
+    - cig12
+    - cig13
+    - cig14
+    - cig15
+    - cig16
+    - cig17
+    - cig18
+    - cig19
+    - cig20
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-liangxiao
+
+
+- type: entity
+  parent: Cigarette
+  id: RMCLingxiaoCigarette
+  name: Lingxiao Cigarette
+  description: A high-quality roll of Yunnan Tobacco and nicotine. Experts say this is the best way to get lung cancer. They can be found anywhere affluent enough to handle the expensive import duties.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/langxiaogold_cig.rsi
+    state: unlit-icon
+
+- type: entity
+  id: RMCLingxiaoCigaretteteSpent
+  parent: RMCLingxiaoCigarette
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
+
+- type: entity
+  parent: CigPackBase
+  id: RMCCigarettePackTarasClassic
+  name: taras classic pack
+  description: About as iconic as the flag of the SPP itself, this can be found in the hands of every single SPP citizen, from a Kommissar to a General to a coal miner. 
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/taras_classic.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      visible: false
+    - state: cig5
+      map: ["cig5"]
+      visible: false
+    - state: cig6
+      map: ["cig6"]
+      visible: false
+    - state: cig7
+      map: ["cig7"]
+      visible: false
+    - state: cig8
+      map: ["cig8"]
+      visible: false
+    - state: cig9
+      map: ["cig9"]
+      visible: false
+    - state: cig10
+      map: ["cig10"]
+      visible: false
+    - state: cig11
+      map: ["cig11"]
+      visible: false
+    - state: cig12
+      map: ["cig12"]
+      visible: false
+    - state: cig13
+      map: ["cig13"]
+      visible: false
+    - state: cig14
+      map: ["cig14"]
+      visible: false
+    - state: cig15
+      map: ["cig15"]
+      visible: false
+    - state: cig16
+      map: ["cig16"]
+      visible: false
+    - state: cig17
+      map: ["cig17"]
+      visible: false
+    - state: cig18
+      map: ["cig18"]
+      visible: false
+    - state: cig19
+      map: ["cig19"]
+      visible: false
+    - state: cig20
+      map: ["cig20"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,19,1
+    whitelist:
+      components:
+      - RMCLighter
+      tags:
+      - Cigarette
+  - type: StorageFill
+    contents:
+    - id: RMCSPPStandardCigarette
+      amount: 20
+  - type: ItemCounter
+    count:
+      tags: [Cigarette]
+    composite: true
+    layerStates:
+    - cig1
+    - cig2
+    - cig3
+    - cig4
+    - cig5
+    - cig6
+    - cig7
+    - cig8
+    - cig9
+    - cig10
+    - cig11
+    - cig12
+    - cig13
+    - cig14
+    - cig15
+    - cig16
+    - cig17
+    - cig18
+    - cig19
+    - cig20
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-taras
+
+
+- type: entity
+  parent: Cigarette
+  id: RMCSPPStandardCigarette
+  name: SPP Filtered Cigarette
+  description: A simple filtered cigarette. At least it's marginally healthier then the UN unfiltered ones!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/spp_cig.rsi
+    state: unlit-icon
+
+- type: entity
+  id: RMCSPPStandardCigaretteSpent
+  parent: RMCSPPStandardCigarette
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
+
+- type: entity
+  parent: RMCCigarettePackTarasClassic
+  id: RMCCigarettePackBoheBlueMenthols
+  name: bohe blue menthols
+  description: Strong, filtered menthol cigarettes made out of the finest mediocre off-planet tobacco and coated in as much menthol as possible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/bohe_blue_menthols.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-bohe-blue
+

@@ -4,7 +4,7 @@
     ///     Permissions that admins can have.
     /// </summary>
     [Flags]
-    public enum AdminFlags : uint
+    public enum AdminFlags : ulong
     {
         None = 0,
 
@@ -138,5 +138,22 @@
         ///     Dangerous host permissions like scsi.
         /// </summary>
         Host = 1u << 31,
+
+        // RMC Permissions
+
+        /// <summary>
+        ///     Test Commands
+        /// </summary>
+        RMCMaintainer = 1ul << 32,
+
+        /// <summary>
+        ///     Admin Ghost
+        /// </summary>
+        AdminGhost = 1ul << 33,
+
+        /// <summary>
+        ///     Segmented Ban and Unban for finer permission control. Anyone with +UNBAN should have +BAN.
+        /// </summary>
+        Unban = 1ul << 34,
     }
 }

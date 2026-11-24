@@ -206,6 +206,10 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 150
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: [Crowbar, RMCBaseMeleeWeapon]

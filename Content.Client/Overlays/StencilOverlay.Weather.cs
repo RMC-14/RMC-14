@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Weather;
 using Content.Shared.Light.Components;
 using Content.Shared.Weather;
 using Robust.Client.Graphics;
@@ -49,6 +50,23 @@ public sealed partial class StencilOverlay
                         (tile.GridIndices + Vector2i.One) * grid.Comp.TileSize);
 
                     worldHandle.DrawRect(gridTile, Color.White);
+                }
+            }
+
+            // RMC14
+            if (_entManager.TryGetComponent(_playerManager.LocalEntity, out TransformComponent? playerXform))
+            {
+                var playerPos = _transform.GetMapCoordinates(_playerManager.LocalEntity!.Value, playerXform).Position;
+
+                var query = _entManager.EntityQueryEnumerator<RMCBlockWeatherComponent>();
+                while (query.MoveNext(out var entity, out _))
+                {
+                    var roofBounds = _entLookup.GetAABBNoContainer(entity,
+                        _transform.GetWorldPosition(entity),
+                        _transform.GetWorldRotation(entity));
+
+                    if (roofBounds.Contains(playerPos))
+                        worldHandle.DrawRect(roofBounds, Color.White);
                 }
             }
 

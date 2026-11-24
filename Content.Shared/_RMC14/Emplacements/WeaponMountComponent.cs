@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Placement;
 using Content.Shared.Item;
 using Content.Shared.Tools;
 using Content.Shared.Whitelist;
@@ -56,7 +58,7 @@ public sealed partial class WeaponMountComponent : Component
     public TimeSpan AssembleDelay = TimeSpan.FromSeconds(1.5f);
 
     /// <summary>
-    ///     The DOAfter duration for any disassembling related actions.
+    ///     The DOAfter duration for any disassembling related actions, affected by the <see cref="DisassembleSkill"/>
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan DisassembleDelay = TimeSpan.FromSeconds(1.5f);
@@ -104,6 +106,12 @@ public sealed partial class WeaponMountComponent : Component
     public int BarricadeExclusionAreaSize;
 
     /// <summary>
+    ///     Anchored entities that prevent this mount from being deployed nearby.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<RMCPlacementRestriction> PlacementRestrictions = new();
+
+    /// <summary>
     ///     The action prototype to stop using the mount.
     /// </summary>
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
@@ -144,6 +152,21 @@ public sealed partial class WeaponMountComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool AcidableWhileDeployed;
+
+    /// <summary>
+    ///     How close you need to be to the mount to strap yourself to it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float MountableDistance = 2;
+
+    /// <summary>
+    ///     The skill that lowers the duration of the disassemble/undeploy doafter.
+    /// </summary>
+    [DataField]
+    public EntProtoId<SkillDefinitionComponent>? DisassembleSkill; //TODO make this RMCSkillEngineer after rebalancing of the deploy/undeploy doafter durations
+
+    [DataField, AutoNetworkedField]
+    public string? DeployFixture = "mount";
 
     [DataField]
     public SoundSpecifier? UndeploySound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");

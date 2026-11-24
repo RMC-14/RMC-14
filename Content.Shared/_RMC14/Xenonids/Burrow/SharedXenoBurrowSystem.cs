@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -64,12 +65,12 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         SubscribeLocalEvent<XenoBurrowComponent, InteractionAttemptEvent>(PreventInteraction);
         SubscribeLocalEvent<XenoBurrowComponent, RMCIgniteAttemptEvent>(OnBurrowedCancel);
         SubscribeLocalEvent<XenoBurrowComponent, AttackAttemptEvent>(OnBurrowedCancel);
+        SubscribeLocalEvent<XenoBurrowComponent, DoAfterAttemptEvent<XenoCorrosiveAcidDoAfterEvent>>(OnBurrowedCancel);
 
         SubscribeLocalEvent<XenoBurrowComponent, XenoBurrowActionEvent>(OnBeginBurrow);
         SubscribeLocalEvent<XenoBurrowComponent, XenoBurrowDownDoAfter>(OnFinishBurrow);
         SubscribeLocalEvent<XenoBurrowComponent, BurrowedEvent>(SetBurrow);
         SubscribeLocalEvent<XenoBurrowComponent, XenoBurrowMoveDoAfter>(OnFinishTunnel);
-
     }
 
     private void PreventExamine(Entity<XenoBurrowComponent> burrower, ref ExamineAttemptEvent args)
@@ -137,6 +138,17 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         if (args.burrowed)
         {
             _transform.AnchorEntity(burrower);
+
+            if (TryComp<DoAfterComponent>(burrower, out var doAfterComp))
+            {
+                foreach (var doAfterIndex in doAfterComp.DoAfters.Keys)
+                {
+                    _doAfter.Cancel(burrower, doAfterIndex, doAfterComp);
+                }
+            }
+
+            if (_net.IsServer)
+                _audio.PlayPvs(burrower.Comp.BurrowDownSound, burrower);
         }
         else
         {
@@ -225,10 +237,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                 burrower.Comp.Tunneling = true;
                 Dirty(burrower);
             }
-
             Dirty(burrower);
-            if (_net.IsServer)
-                _audio.PlayPvs(burrower.Comp.BurrowDownSound, burrower);
         }
         else
         {

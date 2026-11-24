@@ -13,7 +13,7 @@ namespace Content.Client._RMC14.Weapons.Ranged.Targeting;
 
 public sealed class TargetingOverlay : Overlay
 {
-    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+    public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private readonly IEntityManager _entManager;
     private readonly SpriteSystem _sprite;
@@ -46,14 +46,20 @@ public sealed class TargetingOverlay : Overlay
 
         while (query.MoveNext(out var uid, out var targeted))
         {
+            if (!xformQuery.TryGetComponent(uid, out var xform))
+                continue;
+
+            var viewportEye = args.Viewport.Eye;
+            if (viewportEye != null && viewportEye.Position.MapId != xform.MapID)
+                continue;
+
             // Laser visuals
             foreach (var targeter in targeted.TargetedBy)
             {
                 if (!targetingLaserQuery.TryGetComponent(targeter, out var targetingLaser) || !targetingLaser.ShowLaser)
                     continue;
 
-                if (!xformQuery.TryGetComponent(targeter, out var gunXform) ||
-                    !xformQuery.TryGetComponent(uid, out var xform))
+                if (!xformQuery.TryGetComponent(targeter, out var gunXform))
                     continue;
 
                 if (xform.MapID != gunXform.MapID)
@@ -88,10 +94,7 @@ public sealed class TargetingOverlay : Overlay
                 worldHandle.DrawTextureRect(laserRsi, rotated, Color.White.WithAlpha(alpha));
             }
 
-            if (!xformQuery.TryGetComponent(uid, out var targetXform))
-                continue;
-
-            var worldPosCross = _transform.GetWorldPosition(targetXform, xformQuery);
+            var worldPosCross = _transform.GetWorldPosition(xform, xformQuery);
 
             if (targeted.TargetType == TargetedEffects.None)
                 continue;

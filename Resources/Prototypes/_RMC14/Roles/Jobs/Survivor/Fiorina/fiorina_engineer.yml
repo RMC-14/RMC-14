@@ -12,14 +12,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
-        RMCSkillFireman: 1
-        RMCSkillEngineer: 2
-        RMCSkillConstruction: 2
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetSurvivorEngineer
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember

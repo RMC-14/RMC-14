@@ -13,14 +13,19 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+      preset: RMCSkillPresetSurvivorDoctor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMoHDoctor
     - type: RMCSurvivor
@@ -31,6 +36,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+#    - type: TacticalMapIcon # TODO RMC14: tacmap of diff factions mechanic
+#      icon:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: spp_doc
+#      background:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: background_spp_medical
   useLoadoutOfJob: CMSurvivorDoctor # for inheritance
 
 - type: startingGear
@@ -58,7 +70,7 @@
   name: ministry of health doctor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGearOther:
     -
       - [ RMCPouchFirstAidSplintsGauzeOintment ]

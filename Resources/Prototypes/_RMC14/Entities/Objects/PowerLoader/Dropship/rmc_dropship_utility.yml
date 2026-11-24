@@ -13,7 +13,7 @@
   - type: DropshipUtility
     skills:
       all:
-        RMCSkillPilot: 2
+        RMCSkillPilot: 1
   - type: PowerLoaderAttachable
     attachDelay: 7
     attachableTypes:
@@ -159,3 +159,24 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: RMCDropshipAttachmentUtility
+  id: RMCDropshipAttachmentLaunchBay
+  name: LAG-14 internal sentry launcher
+  description: A launch bay to drop special ordnance. Fits inside the dropship's crew weapon emplacement. Moving this will require some sort of lifter. Accepts the A/C-49-P Air Deployable Sentry as ammunition.
+  components:
+  - type: Sprite
+    layers:
+    - state: launch_bay
+  - type: DropshipFabricatorPrintable
+    cost: 200
+  - type: DropshipUtility
+  #  skills:
+  #    all:
+  #      RMCSkillPilot: 2 #todo rmc14 fix skill check not working
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: launch_bay_deployed
+  - type: RMCOrbitalDeployer

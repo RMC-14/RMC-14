@@ -11,13 +11,17 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/tool.rsi
     layers:
     - state: "off"
-      map: [ "enum.VendingMachineVisualLayers.Base" ]
+      map: ["enum.VendingMachineVisualLayers.Base"]
     - state: "normal-unshaded"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
       shader: unshaded
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: AccessReader
     access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessCombatTechPrep"
     - "CMAccessEngineering"
@@ -206,6 +210,7 @@
   - type: AccessReader
     access: [["CMAccessResearch"]]
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessResearch"
     hackable: true

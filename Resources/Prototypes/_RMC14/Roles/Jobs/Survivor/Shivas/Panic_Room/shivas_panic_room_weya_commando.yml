@@ -15,10 +15,21 @@
   camouflageStartingGear: null
   greeting: rmc-job-greeting-shivas-commando
   playTimeTracker: CMJobSurvivorSecurity
-  spawnMenuRoleName: Survivor - We-Ya Commando (Shivas)
+  spawnMenuRoleName: We-Ya Commando (Shivas Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Japanese
+      - English
+      - SignLanguage
+      understoodLanguages:
+      - Japanese
+      - English
+      - SignLanguage
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       preset: RMCSkillPresetPMCCommando
     - type: RMCSurvivor
@@ -45,7 +56,7 @@
   equipment:
     jumpsuit: RMCJumpsuitVeteranPMCCommandoSurvivor
     shoes: RMCBootsPMCCommandoFilled
-    head: ArmorHelmetPMCCommandoSurvivor
+    head: RMCArmorHelmetPMCCommandoDamaged
     ears: RMCHeadsetHvHWeYaPMCCommando
     belt: RMCBeltPMCFilledCommando
     id: CMIDCardCommando
@@ -78,7 +89,6 @@
     - id: CMRollerBedSpawnFolded
     - id: CMMedicalUpgradeKitFilledCommando
 #  /obj/item/stack/medical/splint/nano(src, rand(1,2))
-
   - type: Sprite
     layers:
     - state: advfirstaid
@@ -149,7 +159,7 @@
   parent: CMJobIconBase
   id: RMCJobIconPMCCommando
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
     state: pmc_commando_gun
 
 - type: entity

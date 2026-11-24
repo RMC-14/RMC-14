@@ -36,12 +36,13 @@
     - map: [ "belt" ]
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.UniformAccessoryLayer.Base" ]
     - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "enum.MedalVisualLayers.Base1" ]
-    - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "back" ] # RMC14 re-arrange back slot
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
@@ -64,6 +65,9 @@
     - map: [ "hooked" ]
       sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
       state: hooked
+      visible: false
+    - map: [ "enum.ParatoxinVisualLayers.Base" ]
+      sprite: "_RMC14/Effects/paratoxin_effect.rsi"
       visible: false
     - map: [ "enum.NewPlayerLayers.Layer" ]
       visible: false
@@ -226,6 +230,8 @@
     - AnomalyHost
   - type: MobGibbedByExplosionType
   - type: RMCCanBeFultoned
+  - type: ExplosionResistance
+    damageCoefficient: 1.2  # TODO RMC14: won't be necessary once limb damage is implemented to mimic parity
 
 - type: entity
   save: false
@@ -340,10 +346,10 @@
     - map: [ "belt" ]
     - map: [ "outerClothing" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
-    - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]

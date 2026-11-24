@@ -17,6 +17,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       preset: RMCSkillPresetSurvivorSPPPrivate
     - type: EquipSurvivorPreset
@@ -31,13 +40,20 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: rmc-job-prefix-army-reservist
+#    - type: TacticalMapIcon # TODO RMC14: tacmap of diff factions mechanic
+#      icon:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: spp_pvt
+#      background:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: background_spp
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorArmyReservist
   equipment:
-    suitstorage: RMCWeaponRifleAK4047
+    suitstorage: RMCWeaponRifleType77
     jumpsuit: RMCJumpsuitSPPArmy
     shoes: CMBootsBlackFilled
     gloves: RMCHandsVeteran
@@ -68,10 +84,10 @@
   name: people's armed police officer preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGear:
     - [ RMCGrenadeMolotov ]
-    - [ CMPackFlare ]
+    - [ RMCPackFlareR44 ]
     - [ WeaponNailgun ]
     - [ RMCFireAxe ]
     - [ RMCWelderIndustrial ]

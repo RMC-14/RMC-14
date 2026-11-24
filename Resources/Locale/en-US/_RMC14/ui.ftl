@@ -1,8 +1,20 @@
-﻿cm-ui-rmc14 = RMC14
+cm-ui-rmc14 = RMC14
 
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
 rmc-ui-options-xeno-ability-previews = Show xeno ability previews
+rmc-ui-options-marine-equipment-previews = Show marine equipment previews
+rmc-ui-options-post-death-chat-mute = Mute chat briefly after death
+rmc-ui-options-post-death-chat-mute-confirmation-title = Disable post-death chat mute?
+rmc-ui-options-post-death-chat-mute-confirmation-text = Disabling this mute means you may immediately see the reaction of other characters after your character dies.
+  Remember to separate character interactions from player interactions, comments about your character are not necessarily directed at you.
+
+  If something upsets you, step away before responding, and use admin help for rule-breaking behavior.
+  Read the "Roleplay Setting Disclaimer" in the "Don't Antagonize/Harass Others" section of the rules.
+
+  By continuing, you acknowledge that you may see potentially upsetting post-death reactions and agree not to get upset at other players over in-character interactions.
+rmc-ui-options-post-death-chat-mute-confirmation-accept = I understand, disable
+rmc-ui-options-post-death-chat-mute-confirmation-deny = Keep chat mute enabled
 
 rmc-ui-voicelines = Voicelines
 rmc-ui-options-tab-voicelines = Voicelines
@@ -38,6 +50,7 @@ rmc-ui-audio-emotes-feroxi = Play emotes for feroxis
 rmc-ui-audio-emotes-skrell = Play emotes for skrells
 
 cm-ui-roadmap = Roadmap
+rmc-ui-roadmap-orbital-bombardment = Orbital bombardment
 
 rmc-ui-link-discord-account = Link Discord
 rmc-ui-link-discord-account-text = Click the button below to copy your code.
@@ -89,14 +102,21 @@ rmc-ui-patreon = Patreon
 
 rmc-other-credits-tab = Other
 
+rmc-ui-chat-preview = Show typed messages as a centred preview in the middle of the screen
 rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
+rmc-ui-hive-leader-tackle-xenos = Tackle other xenos as hive leader.
 rmc-ui-show-new-player-icons = Show new player icons as mentor or department head roles
+rmc-ui-larva-queue-victim-priority = Get priority to burst your own larva when nested
 rmc-ui-xeno-night-vision-default = Xeno night vision default
 rmc-ui-xeno-night-vision-default-off = Off
 rmc-ui-xeno-night-vision-default-half = Half light
 rmc-ui-xeno-night-vision-default-full = Full
+rmc-ui-akimbo-mode = Akimbo firing mode
+rmc-ui-akimbo-mode-both = Fire both
+rmc-ui-akimbo-mode-alternate = Alternate hands
+rmc-ui-akimbo-mode-keep = Keep active hand
 rmc-night-vision-mode-verb = Set night vision: {$mode}
 
 rmc-area-info = {$area}{$restrictions}
@@ -112,6 +132,50 @@ rmc-tacmap-alert-no-area = Unknown area
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
 
 rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads
+rmc-ui-options-announcements-max-visible = Simultaneous announcements
+rmc-ui-options-announcements-layout = Announcement layout
+rmc-ui-options-announcements-layout-open-editor = Open layout editor
+rmc-ui-options-announcements-layout-reset-all = Reset all layout overrides
+rmc-ui-options-announcements-layout-window = Announcement Layout
+rmc-ui-options-announcements-layout-preview = Preview preset
+rmc-ui-options-announcements-layout-target-global = Global default
+rmc-ui-options-announcements-layout-target-preset = This preset override
+rmc-ui-options-announcements-layout-target-global-check = Edit global override instead of this preset
+rmc-ui-options-announcements-layout-position-x = Position X
+rmc-ui-options-announcements-layout-position-y = Position Y
+rmc-ui-options-announcements-layout-scale = Scale
+rmc-ui-options-announcements-layout-scale-input = Scale value
+rmc-ui-options-announcements-layout-body-scale = Body text scale
+rmc-ui-options-announcements-layout-title-scale = Title text scale
+rmc-ui-options-announcements-layout-show = Show announcement
+rmc-ui-options-announcements-layout-show-title = Show title
+rmc-ui-options-announcements-layout-show-portrait = Show portrait
+rmc-ui-options-announcements-layout-body-color = Body color hex
+rmc-ui-options-announcements-layout-title-color = Title color hex
+rmc-ui-options-announcements-layout-speaker-color = Speaker name color hex
+rmc-ui-options-announcements-layout-sprite-box-color = Sprite box bg hex
+rmc-ui-options-announcements-layout-sprite-box-border-color = Sprite box border hex
+rmc-ui-options-announcements-layout-crt-glow-color = CRT glow color hex
+rmc-ui-options-announcements-layout-background-color = Background color hex
+rmc-ui-options-announcements-layout-scale-value = Scale: {$value}
+rmc-ui-options-announcements-layout-position-value = Position: {$x}, {$y}
+rmc-ui-options-announcements-layout-position-default = Position: preset default
+rmc-ui-options-announcements-layout-reset-target = Reset current target
+rmc-ui-options-announcements-layout-help = Drag the announcement on the screen to reposition it. Use the slider, mouse wheel, or fields to edit the selected preset. Tick the global override box only when you want to change the default fallback used by presets without their own override.
+rmc-ui-options-announcements-layout-summary = Global layout: {$global}. Preset overrides: {$count}.
+rmc-ui-options-announcements-layout-summary-default = preset default
+rmc-ui-options-announcements-layout-summary-custom = custom
+rmc-ui-options-announcements-layout-preview-line-1 = {$name} preview
+rmc-ui-options-announcements-layout-preview-line-2 = Drag to reposition. Scale is local.
+rmc-ui-options-announcements-layout-preview-speaker = Speaker
+rmc-ui-options-announcements-layout-no-presets = No announcement presets are available for layout editing.
+rmc-ui-options-night-vision-color = Night vision visor color
+rmc-ui-options-night-vision-color-green = Green
+rmc-ui-options-night-vision-color-orange = Orange
+rmc-ui-options-night-vision-color-white = White
+rmc-ui-options-night-vision-color-yellow = Yellow
+rmc-ui-options-night-vision-color-red = Red
+rmc-ui-options-night-vision-color-blue = Blue
 
 # Dialog input
 rmc-dialog-input-placeholder-default = Enter text

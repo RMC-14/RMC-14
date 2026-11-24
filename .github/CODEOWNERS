@@ -1,4 +1,12 @@
 # Last match in file takes precedence.
 
 # Ping for all PRs
-* @DrSmugleaf @QuietlyWhisper
+* @DrSmugleaf
+
+‎Resources/Maps @RMC-14/mapping-maintainer
+‎Resources/Maps/_RMC14/PVE @RMC-14/pve-gamemaster
+‎Resources/Prototypes/_RMC14/Entities/Areas/PVE @RMC-14/pve-gamemaster
+
+/Resources/Lobby/ @RMC-14/sprite-maintainer @QuietlyWhisper
+/Resources/Audio/ @QuietlyWhisper
+/Resources/Textures/ @RMC-14/sprite-maintainer @QuietlyWhisper

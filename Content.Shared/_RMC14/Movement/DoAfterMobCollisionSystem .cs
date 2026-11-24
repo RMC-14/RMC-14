@@ -1,5 +1,5 @@
+using Content.Shared._RMC14.Movement;
 using Content.Shared.DoAfter;
-using Content.Shared.Movement.Systems;
 
 namespace Content.Shared.Movement.Systems;
 
@@ -8,12 +8,12 @@ public sealed class DoAfterMobCollisionSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ActiveDoAfterComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
+        SubscribeLocalEvent<ActiveDoAfterComponent, RMCAttemptMobPushedEvent>(OnAttemptMobPushed);
     }
 
-    private void OnAttemptMobCollide(EntityUid uid, ActiveDoAfterComponent component, ref AttemptMobCollideEvent args)
+    private void OnAttemptMobPushed(Entity<ActiveDoAfterComponent> ent, ref RMCAttemptMobPushedEvent args)
     {
-        if (!TryComp<DoAfterComponent>(uid, out var doAfterComp))
+        if (!TryComp<DoAfterComponent>(ent, out var doAfterComp))
             return;
 
         foreach (var doAfter in doAfterComp.DoAfters.Values)

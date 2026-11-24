@@ -66,7 +66,6 @@
   - type: Appearance
   - type: RMCMesonsNonviewable
   - type: XenoResinHole
-  - type: XenoFriendly
   - type: XenoAnnounceStructureDestruction
     messageID: rmc-xeno-construction-resin-hole-destroyed
     structureName: empty
@@ -89,6 +88,7 @@
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
+    ignoreWeightless: true
   - type: RMCNightVisionVisible
     priority: -1
   - type: Corrodible
@@ -96,3 +96,4 @@
   - type: XenoConstruct
   - type: RequireProjectileTarget
   - type: DeletedByWeedKiller
+  - type: XenoChargeDontHit

@@ -15,7 +15,6 @@
       tags:
       - CMFirstAidKit
       - RMCEngineerKit
-      - RMCBoxStorage
 
 # Medium General Pouch
 - type: entity
@@ -223,6 +222,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/large_ammo_mag_pmc.rsi
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargeTR76S
+  suffix: Filled, TR76S
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSniperTR76
+      amount: 4
+
 # Pistol Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
@@ -353,6 +362,38 @@
     - id: CMShellShotgunBeanbag
       amount: 7
 
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeCMBDeputyERTFilled
+  suffix: CMB Deputy, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 4
+    - id : CMShellShotgunSlugs
+      amount: 2
+    - id: CMShellShotgunBeanbag
+      amount: 1
+
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeCMBMarshalERTFilled
+  suffix: CMB Marshal, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 3
+    - id: CMShellShotgunIncendiaryBuckshot
+      amount: 1
+    - id: CMShellShotgunIncendiary
+      amount: 1
+    - id : CMShellShotgunSlugs
+      amount: 1
+    - id: CMShellShotgunBeanbag
+      amount: 1
+
 # Large Documents Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -375,6 +416,7 @@
       - Folder
       - Write
       - RMCIntelItem
+      - RMCDataDisk
   - type: FixedItemSizeStorage
   - type: Dumpable
 
@@ -405,8 +447,6 @@
     - state: closed
       map: [ "fullLayer" ]
   - type: CMItemSlots
-    cooldown: 1
-    cooldownPopup: You need to wait before taking another flare!
     count: 16
     slot:
       name: Flare
@@ -418,17 +458,49 @@
   parent: RMCPouchFlare
   id: RMCPouchFlareL96
   name: L96 flare pouch
+  suffix: RCM
   description: A pouch designed to hold flares used by the Royal Crown Marines. Refillable with an L96 flare pack.
   components:
-  - type: CMItemSlots
-    cooldown: 1
-    cooldownPopup: You need to wait before taking another flare!
-    count: 16
-    slot:
-      name: RMCFlareL96
-      whitelist:
-        tags:
-        - RMCFlareL96
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/flare_rcm.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
+
+- type: entity
+  parent: RMCPouchFlare
+  id: RMCPouchFlareR44
+  name: R44 flare pouch
+  suffix: SPP
+  description: An SPP-issue flare pouch intended to hold R44 illumination flares. Refillable with an R44 flare pack.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/flarespp.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
+
+- type: entity
+  parent: RMCPouchFlare
+  id: RMCPouchFlareC18
+  name: C18 flare pouch
+  suffix: PMC
+  description: A black pouch most often issued to Weston-Yamada PMCs meant for flares. Refillable with a C18 flare pack.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/flarepmc.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
 
 # Radio Pouch
 - type: entity
@@ -590,6 +662,21 @@
     # Something about /item/tool/weldingtool/hugetank - leaving empty
 
 - type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFilledSPPSynthetic
+  suffix: Filled, SPP Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: CMWrench
+    - id: RMCCableCoil30
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
+- type: entity
   parent: RMCPouchTools
   id: RMCPouchToolsFilledRCM
   suffix: Filled, RCM
@@ -600,6 +687,21 @@
     - id: CMWirecutter
     - id: CMFireExtinguisherPortable
     - id: CMMultitool
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFilledSOF
+  suffix: Filled, SOF
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: RMCTacticalPrybar
+    - id: CMWirecutter
+    - id: CMWrench
+    - id: RMCCableCoil30
+    - id: CMMultitool
+    - id: CMWelder
 
 - type: entity
   parent: RMCPouchToolsSoc
@@ -616,6 +718,21 @@
     - id: CMWrench
     - id: RMCExplosivePlastic
     - id: RMCExplosivePlastic
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocRCMPVEAssaultEngi
+  suffix: Filled, RCM, PVE
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMEntrenchingTool
+    - id: RMCExplosivePlastic
+      amount: 3
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: RMCNailgunCompact
 
 # Sling Pouch
 - type: entity
@@ -661,6 +778,7 @@
     blacklist:
       components:
       - Xeno
+  - type: CMHolster
 
 # Cassetes Pouch
 - type: entity
@@ -698,21 +816,40 @@
       - RMCMagazineSmartGunirradiated
   - type: FixedItemSizeStorage
 
+# Security Tools
+- type: entity
+  parent: RMCPouchGeneral
+  id: RMCPouchSecurityTools
+  name: tactical security pouch
+  description: A custom fit security pouch, capable of fitting a variety of security tools in different compartments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,9,1 # 5 slots
+    whitelist:
+      tags:
+      - SecBeltEquip
+      - Taser
+      - Flashlight
+      - CMMagazinePistol
+      - RMCShellShotgun
+      - RMCMagazineRevolver
+      - Donut
+      - RMCGrenadeFlashBang
+      - Radio
+      components:
+      - Handcuff
+      - Flash
+      - FlashOnTrigger
+      - Stunbaton
+      - ForensicScanner
+      - MeleeWeapon
+      - Gun
+      - RMCLighter
+  - type: FixedItemSizeStorage
+
 - type: Tag
   id: RMCPouchShotgunShells
-
-- type: entity
-  parent: RMCPouchToolsSoc
-  id: RMCPouchToolsSocRCMPVEAssaultEngi
-  suffix: Filled, RCM, PVE
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMFireExtinguisherPortable
-    - id: CMEntrenchingTool
-    - id: RMCExplosivePlastic
-    - id: RMCExplosivePlastic
-    - id: RMCExplosiveBreachingCharge
-      amount: 3
-    - id: RMCNailgunCompact
-    - id: CMMultitool

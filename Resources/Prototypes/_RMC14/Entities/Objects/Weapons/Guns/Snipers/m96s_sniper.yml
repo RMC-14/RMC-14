@@ -129,6 +129,13 @@
 
 - type: entity
   parent: CMMagazineSniperM96S
+  id: CMMagazineSniperM96SEmpty
+  suffix: empty
+  components:
+    - type: RMCEmptyMag
+
+- type: entity
+  parent: CMMagazineSniperM96S
   id: CMMagazineSniperM96SIncendiary
   name: "M96S incendiary magazine (10x28mm)"
   description: A magazine of sniper rifle ammo. An aimed shot with it will temporarily blind the targe and kindle the blaze further.
@@ -213,6 +220,9 @@
       buildup: true
   - type: AimedShotEffect
     extraHits: 2
+  - type: IgnoreSwiftSteps
+  - type: ProjectileCoverInteraction
+    ignoreCover: true
 
 - type: entity
   parent: CMBulletSniper10x28mm
@@ -251,6 +261,7 @@
   - type: RMCAreaDamage
     damageArea: 2.5
     falloffDistance: 1.5
+    xenoDamageMultiplier: 2 # Xenos take double area damage from flak in CM13 compared to humans, I tried finding out why without success so here's a 2x multiplier.
 
 - type: Tag
   id: CMM96SSniperRifle

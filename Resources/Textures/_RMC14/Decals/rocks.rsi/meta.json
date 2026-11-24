@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/natural/rocks.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rock_1"
+    },
+    {
+      "name": "rock_2"
+    },
+    {
+      "name": "rock_3"
+    },
+    {
+      "name": "rock_4"
+    },
+    {
+      "name": "rock_5"
+    },
+    {
+      "name": "rock_6"
+    },
+    {
+      "name": "rock_7"
+    },
+    {
+      "name": "rock_8"
+    },
+    {
+      "name": "rock_9"
+    },
+    {
+      "name": "rock_10"
+    },
+    {
+      "name": "rock_11"
+    },
+    {
+      "name": "rock_12"
+    }
+  ]
+}

@@ -18,6 +18,12 @@
     head: CMHeadBeretTan
 
 - type: loadout
+  id: CamoBeretRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBeret
+
+- type: loadout
   id: BoonieRMC
   cost: 2
   equipment:
@@ -34,6 +40,18 @@
   cost: 2
   equipment:
     head: RMCHeadCapFlippable
+
+- type: loadout
+  id: CapRoyalRMC
+  cost: 2
+  equipment:
+    head: RMCHeadCapRoyal
+
+- type: loadout
+  id: BoonieRoyalRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBoonieRoyal
 
 - type: loadout
   id: BrownHeadbandRMC
@@ -101,3 +119,34 @@
   storage:
     back:
     - RMCHeadUNMCHeadset
+
+- type: loadout
+  id: HeadsetRoyalRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHeadRoyalHeadset
+
+- type: loadout
+  id: HeadDuragRMC
+  cost: 2
+  equipment:
+    head: RMCHeadDurag
+
+- type: loadout
+  id: HeadDuragBlackRMC
+  cost: 2
+  equipment:
+    head: RMCHeadDuragBlack
+
+- type: loadout
+  id: HeadBandanaRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBandana
+
+- type: loadout
+  id: HeadBandanaTanRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBandanaTan

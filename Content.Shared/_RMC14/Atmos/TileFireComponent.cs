@@ -25,7 +25,7 @@ public sealed partial class TileFireComponent : Component
     public TimeSpan SpawnedAt;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Duration = TimeSpan.FromMinutes(1);
+    public TimeSpan Duration = TimeSpan.FromSeconds(55);
 
     [DataField, AutoNetworkedField]
     public TimeSpan BigFireDuration = TimeSpan.FromSeconds(0.5);

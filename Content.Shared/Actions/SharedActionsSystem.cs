@@ -126,10 +126,25 @@ public abstract class SharedActionsSystem : EntitySystem
         return (ent, ent.Comp);
     }
 
-    public void SetCooldown(Entity<ActionComponent?>? action, TimeSpan start, TimeSpan end)
+    public void SetCooldown(Entity<ActionComponent?>? action, TimeSpan start, TimeSpan end, bool applyModifications = false)
     {
         if (GetAction(action) is not {} ent)
             return;
+
+        // RMC14 start
+        if (applyModifications)
+        {
+            var ev = new SettingCooldownEvent()
+            {
+                InitialDelay = end - start,
+                Start = start,
+                End = end
+            };
+            RaiseLocalEvent(ent, ref ev);
+            start = ev.Start;
+            end = ev.End;
+        }
+        // RMC14 end
 
         ent.Comp.Cooldown = new ActionCooldown
         {
@@ -151,10 +166,10 @@ public abstract class SharedActionsSystem : EntitySystem
     /// <summary>
     /// Starts a cooldown starting now, lasting for <c>cooldown</c> seconds.
     /// </summary>
-    public void SetCooldown(Entity<ActionComponent?>? action, TimeSpan cooldown)
+    public void SetCooldown(Entity<ActionComponent?>? action, TimeSpan cooldown, bool applyModifications = true)
     {
         var start = GameTiming.CurTime;
-        SetCooldown(action, start, start + cooldown);
+        SetCooldown(action, start, start + cooldown, applyModifications);
     }
 
     public void ClearCooldown(Entity<ActionComponent?>? action)
@@ -176,13 +191,30 @@ public abstract class SharedActionsSystem : EntitySystem
     /// <summary>
     ///     Sets the cooldown for this action only if it is bigger than the one it already has.
     /// </summary>
-    public void SetIfBiggerCooldown(Entity<ActionComponent?>? action, TimeSpan cooldown)
+    public void SetIfBiggerCooldown(Entity<ActionComponent?>? action, TimeSpan cooldown, bool applyModifications = true)
     {
         if (GetAction(action) is not {} ent || cooldown < TimeSpan.Zero)
             return;
 
         var start = GameTiming.CurTime;
         var end = start + cooldown;
+
+        // RMC14 start
+        if (applyModifications)
+        {
+            // We need to apply modifications before checking if it's bigger
+            var ev = new SettingCooldownEvent()
+            {
+                InitialDelay = end - start,
+                Start = start,
+                End = end
+            };
+            RaiseLocalEvent(ent, ref ev);
+            start = ev.Start;
+            end = ev.End;
+        }
+        // RMC14 end
+
         if (ent.Comp.Cooldown?.End > end)
             return;
 
@@ -878,7 +910,19 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!comp.Enabled)
             return false;
 
+        // RMC14
+        // When we're not in simulation, such as when using actions, CurTime might be a value
+        // that's between ticks. We queue actions for the next update cycle, so we also have
+        // to make sure CurTime will have the same value here as during that cycle. We can do
+        // this by temporarily setting InSimulation to true, which changes how CurTime is
+        // calculated so that it matches what it WILL be during the updates.
+        var oldInSim = GameTiming.InSimulation; // RMC14
+        GameTiming.InSimulation = true; // RMC14
+
         var curTime = GameTiming.CurTime;
+
+        GameTiming.InSimulation = oldInSim; // RMC14
+
         if (comp.Cooldown.HasValue && comp.Cooldown.Value.End > curTime)
             return false;
 
@@ -1062,4 +1106,13 @@ public abstract class SharedActionsSystem : EntitySystem
         ent.Comp.Temporary = temporary;
         Dirty(ent);
     }
+}
+
+// RMC14
+[ByRefEvent]
+public struct SettingCooldownEvent
+{
+    public TimeSpan InitialDelay { get; init; }
+    public TimeSpan Start;
+    public TimeSpan End;
 }

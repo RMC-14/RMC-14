@@ -1,10 +1,15 @@
-﻿using Content.Shared._RMC14.Dialog;
+﻿using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
+using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -25,7 +30,9 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -41,8 +48,12 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     public int CharacterLimit = 1000;
 
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
+
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadReasonEvent>(OnEchoSquadReason);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadConfirmEvent>(OnEchoSquadConfirm);
 
@@ -71,8 +82,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         _dialog.OpenConfirmation(
             ent,
             user.Value,
-            "Confirm Activation",
-            $"Confirm activation of Echo Squad for {args.Message}",
+            Loc.GetString("rmc-announcement-echo-confirm-title"),
+            Loc.GetString("rmc-announcement-echo-confirm-message", ("message", args.Message)),
             ev
         );
     }
@@ -119,7 +130,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (text.Length > CharacterLimit)
             text = text[..CharacterLimit].Trim();
 
-        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName);
+        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName, overlay: ent.Comp.AnnouncementOverlay);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
@@ -139,14 +150,14 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
             return;
 
         var ev = new EchoSquadReasonEvent(GetNetEntity(args.Actor));
-        _dialog.OpenInput(ent, args.Actor, "What is the purpose of Echo Squad?", ev);
+        _dialog.OpenInput(ent, args.Actor, Loc.GetString("rmc-announcement-echo-reason-title"), ev);
     }
 
     private void OnMarineCommunicationsOverwatchMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsOverwatchMsg args)
     {
         if (!_skills.HasSkill(args.Actor, ent.Comp.OverwatchSkill, ent.Comp.OverwatchSkillLevel))
         {
-            _popup.PopupClient("You are not trained in overwatch!", args.Actor, PopupType.LargeCaution);
+            _popup.PopupClient(Loc.GetString("rmc-announcement-overwatch-untrained"), args.Actor, PopupType.LargeCaution);
             return;
         }
 
@@ -172,7 +183,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         EntityUid? source,
         string message,
         SoundSpecifier? sound = null,
-        LocId? announcement = null)
+        LocId? announcement = null,
+        RMCAnnouncementOverlay? overlay = null)
     {
     }
 
@@ -194,7 +206,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceSquad(
         string message,
         EntityUid squad,
-        SoundSpecifier? sound = null)
+        SoundSpecifier? sound = null,
+        RMCAnnouncementOverlay? overlay = null)
     {
     }
 
@@ -211,12 +224,11 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     /// <param name="message">The content of the announcement.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
     /// <param name="filter">Who should be able to see and hear the announcement.</param>
-    /// <param name="excludeSurvivors">Whether or not to exclude survivors from the list of recipients.</param>
     public virtual void AnnounceToMarines(
         string message,
         SoundSpecifier? sound = null,
         Filter? filter = null,
-        bool excludeSurvivors = true)
+        RMCAnnouncementOverlay? overlay = null)
     {
     }
 
@@ -242,7 +254,6 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     /// <param name="name">The name to sign the message with, defaults to the name of <see cref="author"/>.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
     /// <param name="filter">Who should be able to see and hear the announcement.</param>
-    /// <param name="excludeSurvivors">Whether or not to exclude survivors from the list of recipients.</param>
     public void AnnounceSigned(
         EntityUid sender,
         string message,
@@ -250,17 +261,32 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         string? name = null,
         SoundSpecifier? sound = null,
         Filter? filter = null,
-        bool excludeSurvivors = true)
+        EntProtoId<RMCAnnouncementPresetComponent>? overlay = null)
     {
         if (_net.IsClient)
             return;
 
-        author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
+        // grab before defaulting
+        var overlayName = name;
+        author ??= Loc.GetString("rmc-announcement-author");
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
-        AnnounceToMarines(wrappedMessage, sound, filter, excludeSurvivors);
+        RMCAnnouncementOverlay? announcementOverlay = overlay is { } preset
+            ? new RMCAnnouncementOverlay(preset, FormattedMessage.EscapeText(message), sender, overlayName)
+            : null;
+
+        AnnounceToMarines(wrappedMessage, sound, filter, announcementOverlay);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
+
+        if (_idCard.TryFindIdCard(sender, out var idCard) &&
+            TryComp(idCard, out ItemIFFComponent? idCardIff))
+        {
+            foreach (var faction in idCardIff.Factions)
+            {
+                _core.CreateARESLog(faction, LogCat, $"{Name(sender)} sent an announcement: {message}");
+            }
+        }
     }
 
     public string FormatHighCommand(string? author, string message)

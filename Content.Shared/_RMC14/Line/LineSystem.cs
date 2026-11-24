@@ -1,15 +1,21 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Entrenching;
-using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.Beam.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
+using Content.Shared.Physics;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -17,8 +23,10 @@ namespace Content.Shared._RMC14.Line;
 
 public sealed class LineSystem : EntitySystem
 {
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -27,16 +35,19 @@ public sealed class LineSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly ProtoId<TagPrototype> WindowFrameTag = "WindowFrame";
     private static readonly float MaxBeamDistance = 500;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
     private EntityQuery<DoorComponent> _doorQuery;
+    private EntityQuery<RMCEntityStorageLineBlockableComponent> _lockerQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
 
     public override void Initialize()
     {
         _barricadeQuery = GetEntityQuery<BarricadeComponent>();
         _doorQuery = GetEntityQuery<DoorComponent>();
+        _lockerQuery = GetEntityQuery<RMCEntityStorageLineBlockableComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
@@ -142,12 +153,43 @@ public sealed class LineSystem : EntitySystem
         if (grid == null)
             return false;
 
+        // Check if the next tile is blocked by more than one wall/structure to prevent the line from passing through diagonally.
+        var direction = coords.Position - previousCoords.Position;
+        if (direction != Vector2.Zero)
+        {
+            var ray = new CollisionRay(previousCoords.Position, direction.Normalized(), (int)CollisionGroup.FullTileMask);
+            var intersect = _physics.IntersectRayWithPredicate(Transform(previousCoords.EntityId).MapID, ray, direction.Length(), e => !Transform(e).Anchored, false);
+            var results = intersect.Select(r => r.HitEntity).ToHashSet();
+            var blockCount = 0;
+            foreach (var entity in results)
+            {
+                if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
+                    continue;
+
+                // open or opening doors don't count as blockers
+                // if the entity is a door, and the door isn't closed, denying, or welded, ignore it as a blocker
+                if (_doorQuery.TryComp(entity, out var door) && door.State != DoorState.Closed && door.State != DoorState.Denying && door.State != DoorState.Welded)
+                    continue;
+
+                blockCount++;
+
+                if (blockCount < 2)
+                    continue;
+
+                blocker = entity;
+                return true;
+            }
+        }
+
         var indices = _mapSystem.TileIndicesFor(grid.Value, grid, coords);
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Value, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
-            if (!ignoreBarricades && _barricadeQuery.HasComp(uid))
+            if (_barricadeQuery.HasComp(uid))
             {
+                if (ignoreBarricades)
+                    continue;
+
                 if (_doorQuery.TryComp(uid, out var door) && door.State != DoorState.Closed)
                     continue;
 
@@ -165,7 +207,15 @@ public sealed class LineSystem : EntitySystem
             }
             else if (_doorQuery.TryComp(uid, out var door))
             {
-                if (door.State != DoorState.Closed)
+                if (door.State != DoorState.Closed && door.State != DoorState.Denying && door.State != DoorState.Welded)
+                    continue;
+
+                blocker = uid.Value;
+                return true;
+            }
+            else if (_lockerQuery.HasComp(uid))
+            {
+                if (_entityStorage.IsOpen(uid.Value))
                     continue;
 
                 blocker = uid.Value;
@@ -173,6 +223,9 @@ public sealed class LineSystem : EntitySystem
             }
             else if (_tag.HasAnyTag(uid.Value, StructureTag, WallTag))
             {
+                if (ignoreBarricades && _tag.HasTag(uid.Value, WindowFrameTag))
+                    continue;
+
                 blocker = uid.Value;
                 return true;
             }
