@@ -143,11 +143,6 @@ public abstract class SharedTacticalMapSystem : EntitySystem
             EnsureComp<ReopenTacticalMapComponent>(newXeno);
     }
 
-    private void DoAfterXenoEvolve(Entity<TacticalMapUserComponent> newXeno, ref XenoEvolutionDoAfterEvent args)
-    {
-        RestoreTacmapOpen(newXeno);
-    }
-
     // When a xeno with that component finishes evolving, reopen the Tacmap.
     private void OnAfterXenoEvolve(Entity<ReopenTacticalMapComponent> newXeno, ref AfterNewXenoEvolvedEvent args)
     {
