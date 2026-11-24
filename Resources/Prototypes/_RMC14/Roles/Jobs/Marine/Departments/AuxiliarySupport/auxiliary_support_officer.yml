@@ -1,5 +1,5 @@
-- type: job
-  parent: RMCJobMarineBase
+﻿- type: job
+  parent: CMJobBase
   id: CMAuxiliarySupportOfficer
   name: cm-job-name-aso
   description: cm-job-description-aso
@@ -42,11 +42,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetMarine]
-    - type: TacticalMapLayerTracked
-      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillConstruction: 2

@@ -1,5 +1,5 @@
-- type: job
-  parent: RMCJobMarineBase
+﻿- type: job
+  parent: CMJobBase
   id: CMCMO
   name: rmc-job-name-cmo
   description: rmc-job-description-cmo
@@ -31,11 +31,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetMarine]
-    - type: TacticalMapLayerTracked
-      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillEndurance: 1

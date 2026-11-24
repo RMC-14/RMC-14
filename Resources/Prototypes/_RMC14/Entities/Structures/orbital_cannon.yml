@@ -138,8 +138,7 @@
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: aegisob
   - type: TacticalMapTracked
-  - type: TacticalMapLayerTracked
-    layers: [Marines, Xenos]
+    factions: [UNMC, RMCXeno]
   - type: Sprite
     sprite: _RMC14/Structures/ob_warhead_aegis.rsi
     state: ob_warhead_aegis

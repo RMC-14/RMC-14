@@ -1,6 +1,6 @@
 # Pizza Delivery
 - type: job
-  parent: RMCJobMarineBase
+  parent: CMJobBase
   id: CMPizzaDeliverer
   name: rmc-job-name-pizza
   description: rmc-ghost-role-information-pizza-description
@@ -15,11 +15,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetMarine]
-    - type: TacticalMapLayerTracked
-      layers: [Marines]
     - type: NpcFactionMember
       factions:
       - Civilian

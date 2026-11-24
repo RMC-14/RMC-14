@@ -1,5 +1,5 @@
-- type: job
-  parent: RMCJobMarineBase
+﻿- type: job
+  parent: CMJobBase
   id: CMDropshipCrewChief
   name: cm-job-name-dcc
   description: cm-job-description-dcc
@@ -36,11 +36,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetMarine]
-    - type: TacticalMapLayerTracked
-      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillEndurance: 1

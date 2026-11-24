@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobMarineBase
+  parent: CMJobBase
   id: CMMessTech
   name: cm-job-name-messtech
   description: cm-job-description-messtech
@@ -28,11 +28,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetMarine]
-    - type: TacticalMapLayerTracked
-      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillConstruction: 1

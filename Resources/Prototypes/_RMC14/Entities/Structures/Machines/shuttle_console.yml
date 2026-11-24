@@ -167,7 +167,9 @@
         type: DropshipWeaponsBui
   - type: DropshipTerminalWeapons
   - type: TacticalMapComputer
-    allowedSquadGroups: [UNMC]
+    allSquads: false
+    uiKeys:
+    - enum.DropshipTerminalWeaponsUi.Key
   - type: RequiresSkill
     skills:
       RMCSkillPilot: 1
@@ -275,7 +277,9 @@
         type: DropshipWeaponsBui
   - type: DropshipTerminalWeapons
   - type: TacticalMapComputer
-    allowedSquadGroups: [UNMC]
+    allSquads: false
+    uiKeys:
+    - enum.DropshipTerminalWeaponsUi.Key
 
 - type: entity
   parent: MarkerBase

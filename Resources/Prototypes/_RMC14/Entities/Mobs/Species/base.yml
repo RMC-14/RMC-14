@@ -282,6 +282,8 @@
   - type: UserBlockShootingInsideContainers
   - type: TacticalMapTracked
     trackDead: true
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapMarine
   - type: EmoteCooldown
   - type: FiremanCarriable
   - type: CanFiremanCarry

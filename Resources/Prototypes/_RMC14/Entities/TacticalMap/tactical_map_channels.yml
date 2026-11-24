@@ -1,0 +1,44 @@
+- type: entity
+  id: RMCTacticalMapChannelUNMC
+  name: UNMC
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TacticalMapChannel
+    faction: UNMC
+    snapshotOnSubmit: true
+    sortOrder: 0
+    color: "#8AB4FF"
+  - type: TacticalMapMarineAnnounce
+    message: rmc-tacmap-updated-unmc
+
+- type: entity
+  id: RMCTacticalMapChannelSquad
+  name: squad
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TacticalMapChannel
+    faction: UNMC
+    scope: Squad
+    squadGroups: [ UNMC ]
+    sortOrder: 5
+    cooldown: 0
+
+- type: entity
+  id: RMCTacticalMapChannelHive
+  name: hive
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TacticalMapChannel
+    faction: RMCXeno
+    scope: Hive
+    snapshotOnSubmit: true
+    sortOrder: 10
+    color: "#9B59B6"
+  - type: TacticalMapXenoAnnounce
+    message: rmc-tacmap-updated-xeno
+
+- type: entity
+  id: RMCTacticalMapLiveFeed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TacticalMapLiveFeed

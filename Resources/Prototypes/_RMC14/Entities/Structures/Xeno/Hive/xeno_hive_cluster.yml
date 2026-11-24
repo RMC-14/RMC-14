@@ -37,9 +37,8 @@
   - type: RepairableXenoStructure
     plasmaCost: 300
     repairLength: 4
-  - type: TacticalMapLayerTracked
-    layers: [Xenos]
   - type: TacticalMapTracked
+    factions: [RMCXeno]
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi

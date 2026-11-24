@@ -26,9 +26,8 @@
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: DoAfter
-  - type: TacticalMapLayerTracked
-    layers: [Xenos]
   - type: TacticalMapTracked
+    factions: [RMCXeno]
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi

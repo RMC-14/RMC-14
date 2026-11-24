@@ -19,9 +19,8 @@
     location: GM marker
   - type: RMCVisibleToGhostsOnly
   - type: Appearance
-  - type: TacticalMapLayerTracked
-    layers: [Marines, Xenos]
   - type: TacticalMapTracked
+    factions: [UNMC, RMCXeno]
 
 - type: entity
   parent: RMCMarkerGM
@@ -166,3 +165,4 @@
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: gm_star
+  

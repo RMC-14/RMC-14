@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobMarineBase
+  parent: CMJobBase
   id: CMCargoTech
   name: cm-job-name-cargotech
   description: cm-job-description-cargotech
@@ -29,11 +29,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetMarine]
-    - type: TacticalMapLayerTracked
-      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillConstruction: 1

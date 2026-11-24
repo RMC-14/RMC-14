@@ -74,9 +74,8 @@
   - type: EvolutionBonus
   - type: WarpPoint
     location: hive core
-  - type: TacticalMapLayerTracked
-    layers: [Xenos]
   - type: TacticalMapTracked
+    factions: [RMCXeno]
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -179,9 +178,8 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
-  - type: TacticalMapLayerTracked
-    layers: [Xenos]
   - type: TacticalMapTracked
+    factions: [RMCXeno]
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi

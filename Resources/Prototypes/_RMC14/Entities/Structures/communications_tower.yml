@@ -69,13 +69,8 @@
           False: {visible: false}
   - type: MaxDamage
     max: 500
-  - type: TacticalMapLayerTracked
-    layers: [Marines, Xenos]
   - type: TacticalMapTracked
-  - type: ActiveTacticalMapTracked
-    icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: supply
+    factions: [UNMC, RMCXeno]
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi

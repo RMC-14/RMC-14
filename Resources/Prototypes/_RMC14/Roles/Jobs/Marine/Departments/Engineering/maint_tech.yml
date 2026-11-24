@@ -1,5 +1,5 @@
-- type: job
-  parent: RMCJobMarineBase
+﻿- type: job
+  parent: CMJobBase
   id: CMMaintTech
   name: cm-job-name-maint-tech
   description: cm-job-description-maint-tech
@@ -29,11 +29,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetMarine]
-    - type: TacticalMapLayerTracked
-      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillDomestics: 1

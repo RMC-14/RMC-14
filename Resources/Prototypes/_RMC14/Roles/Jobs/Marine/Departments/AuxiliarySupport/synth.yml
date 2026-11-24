@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobMarineBase
+  parent: CMJobBase
   id: RMCJobSynthetic
   name: rmc-job-name-synth
   description: rmc-job-description-synth
@@ -23,11 +23,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetMarine]
-    - type: TacticalMapLayerTracked
-      layers: [Marines]
     - type: Language
       preset: RMCLanguagePresetSynth
     - type: LanguageLearning
