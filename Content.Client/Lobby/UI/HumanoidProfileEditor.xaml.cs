@@ -1275,7 +1275,7 @@ namespace Content.Client.Lobby.UI
 
             _loadoutWindow.OnLoadoutPressed += (loadoutGroup, loadoutProto) =>
             {
-                roleLoadout.AddLoadout(loadoutGroup, loadoutProto, _prototypeManager, session, collection);
+                roleLoadout.AddLoadout(loadoutGroup, loadoutProto, _prototypeManager);
                 //RMC14 - Re-validate and recalculate points after changing the selected loadouts
                 roleLoadout.EnsureValid(Profile, session, collection);
                 //end RMC14 
@@ -1286,7 +1286,7 @@ namespace Content.Client.Lobby.UI
 
             _loadoutWindow.OnLoadoutUnpressed += (loadoutGroup, loadoutProto) =>
             {
-                roleLoadout.RemoveLoadout(loadoutGroup, loadoutProto, _prototypeManager, session, collection);
+                roleLoadout.RemoveLoadout(loadoutGroup, loadoutProto, _prototypeManager);
                 //RMC14 - Re-validate and recalculate points after changing the selected loadouts
                 roleLoadout.EnsureValid(Profile, session, collection);
                 //end RMC14 

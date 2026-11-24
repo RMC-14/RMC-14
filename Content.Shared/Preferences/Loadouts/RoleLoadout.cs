@@ -347,12 +347,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     /// <summary>
     /// Applies the specified loadout to this group.
     /// </summary>
-    public bool AddLoadout(
-        ProtoId<LoadoutGroupPrototype> selectedGroup,
-        ProtoId<LoadoutPrototype> selectedLoadout,
-        IPrototypeManager protoManager,
-        ICommonSession? session,
-        IDependencyCollection collection)
+    public bool AddLoadout(ProtoId<LoadoutGroupPrototype> selectedGroup, ProtoId<LoadoutPrototype> selectedLoadout, IPrototypeManager protoManager)
     {
         // RMC14
         if (!SelectedLoadouts.TryGetValue(selectedGroup, out var groupLoadouts))
@@ -374,17 +369,6 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
                 // Remove any other loadouts that might push it above the limit.
                 if (limit > 0)
                 {
-                    // RMC14
-                    // Refund points for the removed loadout selection immediately so UI can reflect cost changes.
-                    if (Points != null)
-                    {
-                        if (protoManager.TryIndex(loadout.Prototype, out var removedProto) && removedProto.Cost != null)
-                        {
-                            Points += removedProto.Cost.Value;
-                        }
-                    }
-                    // End RMC14
-
                     limit--;
                     groupLoadouts.RemoveAt(i);
                     i--;
@@ -405,20 +389,13 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             Prototype = selectedLoadout,
         });
 
-        RecalculatePoints(protoManager, session, collection);
-
         return true;
     }
 
     /// <summary>
     /// Removed the specified loadout from this group.
     /// </summary>
-    public bool RemoveLoadout(
-        ProtoId<LoadoutGroupPrototype> selectedGroup,
-        ProtoId<LoadoutPrototype> selectedLoadout,
-        IPrototypeManager protoManager,
-        ICommonSession? session,
-        IDependencyCollection collection)
+    public bool RemoveLoadout(ProtoId<LoadoutGroupPrototype> selectedGroup, ProtoId<LoadoutPrototype> selectedLoadout, IPrototypeManager protoManager)
     {
         // Although this may bring us below minimum we'll let EnsureValid handle it.
 
@@ -432,7 +409,6 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
                 continue;
 
             groupLoadouts.RemoveAt(i);
-            RecalculatePoints(protoManager, session, collection);
             return true;
         }
 
@@ -486,7 +462,6 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             return CalculatePointsFromHours(0, basePoints);
 
         var playtimes = collection.Resolve<ISharedPlaytimeManager>().GetPlayTimes(session);
-
         var overallKey = PlayTimeTrackingShared.TrackerOverall.ToString();
 
         var totalTicks = playtimes
