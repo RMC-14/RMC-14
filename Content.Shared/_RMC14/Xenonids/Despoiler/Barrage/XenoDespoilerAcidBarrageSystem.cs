@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Projectiles;
@@ -47,21 +48,21 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         SubscribeNetworkEvent<XenoDespoilerBarrageFireRequest>(OnFireRequest);
     }
 
-    private void OnAction(EntityUid uid, XenoDespoilerComponent comp, XenoDespoilerAcidBarrageActionEvent args)
+    private void OnAction(Entity<XenoDespoilerComponent> ent, ref XenoDespoilerAcidBarrageActionEvent args)
     {
         if (args.Handled || !HasComp<XenoDespoilerAcidBarrageActionComponent>(args.Action))
             return;
 
-        if (_armedQuery.HasComp(uid))
+        if (_armedQuery.HasComp(ent))
         {
-            ResetBarrage(uid, args.Action);
+            ResetBarrage(ent, args.Action);
             args.Handled = true;
             return;
         }
 
-        EnsureComp<XenoDespoilerArmedBarrageComponent>(uid);
+        EnsureComp<XenoDespoilerArmedBarrageComponent>(ent);
         _actions.SetToggled(args.Action.Owner, true);
-        _popup.PopupEntity(Loc.GetString("rmc-despoiler-barrage-armed"), uid, uid);
+        _popup.PopupClient(Loc.GetString("rmc-despoiler-barrage-armed"), ent, ent);
         args.Handled = true;
     }
 
@@ -70,8 +71,12 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not { } uid)
             return;
 
-        if (!_despoilerQuery.HasComp(uid) || !_armedQuery.HasComp(uid) || _chargingQuery.HasComp(uid))
+        if (!_despoilerQuery.TryComp(uid, out var despoilerComp) ||
+            !_armedQuery.HasComp(uid) ||
+            _chargingQuery.HasComp(uid))
+        {
             return;
+        }
 
         if (!_actionBlocker.CanConsciouslyPerformAction(uid))
             return;
@@ -82,7 +87,7 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         var charging = EnsureComp<XenoDespoilerChargingBarrageComponent>(uid);
         charging.StartedAt = _timing.CurTime;
         charging.ExpiresAt = _timing.CurTime + TimeSpan.FromSeconds(action.MaxChargeSeconds);
-        charging.Empowered = _catalyze.IsEmpowered(uid, Comp<XenoDespoilerComponent>(uid));
+        charging.Empowered = _catalyze.IsEmpowered((uid, despoilerComp));
         charging.Target = msg.Target;
         charging.SpeedMultiplier = action.ChargingSpeedMultiplier;
         Dirty(uid, charging);
@@ -117,30 +122,10 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         {
             FireVolley(uid, action, charge, coords);
             _actions.SetCooldown((actionEnt.Owner, null), action.PostFireCooldown);
-            _catalyze.TakeEmpowerment(uid, comp);
+            _catalyze.TakeEmpowerment((uid, comp));
         }
 
         ResetBarrage(uid);
-    }
-
-    public override void Update(float frameTime)
-    {
-        var now = _timing.CurTime;
-        var query = EntityQueryEnumerator<XenoDespoilerChargingBarrageComponent>();
-        while (query.MoveNext(out var uid, out var charge))
-        {
-            if (!_actionBlocker.CanConsciouslyPerformAction(uid))
-            {
-                ResetBarrage(uid);
-                continue;
-            }
-
-            if (!TryGetBarrageAction(uid, out _, out var action))
-                continue;
-
-            if (now >= charge.ExpiresAt + action.ChargeGracePeriod)
-                ResetBarrage(uid);
-        }
     }
 
     private void ResetBarrage(EntityUid uid, EntityUid? actionEnt = null)
@@ -157,7 +142,7 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
 
     private bool TryGetBarrageAction(EntityUid xeno,
         out Entity<ActionComponent> actionEnt,
-        out XenoDespoilerAcidBarrageActionComponent action)
+        [NotNullWhen(true)] out XenoDespoilerAcidBarrageActionComponent? action)
     {
         foreach (var entry in _rmcActions.GetActionsWithEvent<XenoDespoilerAcidBarrageActionEvent>(xeno))
         {
@@ -170,7 +155,7 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         }
 
         actionEnt = default;
-        action = default!;
+        action = null;
         return false;
     }
 
@@ -233,5 +218,25 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
 
         if (action.FireSound is { } sound)
             _audio.PlayPvs(sound, uid);
+    }
+
+    public override void Update(float frameTime)
+    {
+        var now = _timing.CurTime;
+        var query = EntityQueryEnumerator<XenoDespoilerChargingBarrageComponent>();
+        while (query.MoveNext(out var uid, out var charge))
+        {
+            if (!_actionBlocker.CanConsciouslyPerformAction(uid))
+            {
+                ResetBarrage(uid);
+                continue;
+            }
+
+            if (!TryGetBarrageAction(uid, out _, out var action))
+                continue;
+
+            if (now >= charge.ExpiresAt + action.ChargeGracePeriod)
+                ResetBarrage(uid);
+        }
     }
 }

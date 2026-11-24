@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Xenonids.Despoiler;
+using Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.Despoiler;

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Xenonids.Despoiler;
+using Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 using Content.Shared.ActionBlocker;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;

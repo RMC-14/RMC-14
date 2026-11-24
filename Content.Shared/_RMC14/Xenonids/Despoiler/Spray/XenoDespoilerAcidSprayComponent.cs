@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Xenonids.Despoiler.Spray;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoDespoilerAcidSprayComponent : Component
 {
-    [DataField]
+    [DataField(required: true)]
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]

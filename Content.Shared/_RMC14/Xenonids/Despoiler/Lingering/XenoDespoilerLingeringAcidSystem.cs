@@ -25,19 +25,19 @@ public sealed class XenoDespoilerLingeringAcidSystem : EntitySystem
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _pullableQuery = GetEntityQuery<PullableComponent>();
 
-        SubscribeLocalEvent<XenoDespoilerLingeringAcidComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<XenoDespoilerLingeringAcidComponent, MapInitEvent>(OnInit);
         SubscribeLocalEvent<XenoDespoilerLingeringAcidComponent, StartCollideEvent>(OnCollide);
     }
 
-    private void OnInit(EntityUid uid, XenoDespoilerLingeringAcidComponent comp, ComponentInit args)
+    private void OnInit(Entity<XenoDespoilerLingeringAcidComponent> ent, ref MapInitEvent args)
     {
-        var min = (float)comp.MinLifetime.TotalSeconds;
-        var max = (float)comp.MaxLifetime.TotalSeconds;
-        var despawn = EnsureComp<TimedDespawnComponent>(uid);
+        var min = (float)ent.Comp.MinLifetime.TotalSeconds;
+        var max = (float)ent.Comp.MaxLifetime.TotalSeconds;
+        var despawn = EnsureComp<TimedDespawnComponent>(ent);
         despawn.Lifetime = _random.NextFloat(min, max);
     }
 
-    private void OnCollide(EntityUid uid, XenoDespoilerLingeringAcidComponent comp, ref StartCollideEvent args)
+    private void OnCollide(Entity<XenoDespoilerLingeringAcidComponent> ent, ref StartCollideEvent args)
     {
         var target = args.OtherEntity;
         if (!_mobStateQuery.HasComp(target) || _xenoQuery.HasComp(target))
@@ -46,7 +46,7 @@ public sealed class XenoDespoilerLingeringAcidSystem : EntitySystem
         if (_pullableQuery.TryComp(target, out var pull) && pull.BeingPulled)
             return;
 
-        var dmg = new DamageSpecifier(comp.CrossBurnDamage);
-        _damageable.TryChangeDamage(target, dmg, ignoreResistances: false, origin: comp.Caster);
+        var dmg = new DamageSpecifier(ent.Comp.CrossBurnDamage);
+        _damageable.TryChangeDamage(target, dmg, ignoreResistances: false, origin: ent.Comp.Caster);
     }
 }

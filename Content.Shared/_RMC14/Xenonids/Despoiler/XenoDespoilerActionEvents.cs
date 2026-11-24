@@ -13,17 +13,13 @@ public sealed partial class XenoDespoilerOozingWoundsActionEvent : InstantAction
 public sealed partial class XenoDespoilerCatalyzeActionEvent : InstantActionEvent;
 
 [Serializable, NetSerializable]
-public sealed class XenoDespoilerBarrageStartChargeRequest : EntityEventArgs
+public sealed class XenoDespoilerBarrageStartChargeRequest(NetCoordinates target) : EntityEventArgs
 {
-    public NetCoordinates Target;
-
-    public XenoDespoilerBarrageStartChargeRequest(NetCoordinates target) => Target = target;
+    public NetCoordinates Target = target;
 }
 
 [Serializable, NetSerializable]
-public sealed class XenoDespoilerBarrageFireRequest : EntityEventArgs
+public sealed class XenoDespoilerBarrageFireRequest(NetCoordinates target) : EntityEventArgs
 {
-    public NetCoordinates Target;
-
-    public XenoDespoilerBarrageFireRequest(NetCoordinates target) => Target = target;
+    public NetCoordinates Target = target;
 }

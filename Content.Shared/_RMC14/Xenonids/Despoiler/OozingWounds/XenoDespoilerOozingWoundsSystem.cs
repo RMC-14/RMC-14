@@ -37,7 +37,7 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
         SubscribeLocalEvent<XenoDespoilerComponent, XenoDespoilerOozingWoundsActionEvent>(OnUse);
     }
 
-    private void OnUse(EntityUid uid, XenoDespoilerComponent comp, XenoDespoilerOozingWoundsActionEvent args)
+    private void OnUse(Entity<XenoDespoilerComponent> ent, ref XenoDespoilerOozingWoundsActionEvent args)
     {
         if (args.Handled)
             return;
@@ -48,15 +48,15 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
         if (!_rmcActions.TryUseAction(args))
             return;
 
-        var empowered = _catalyze.TakeEmpowerment(uid, comp);
+        var empowered = _catalyze.TakeEmpowerment(ent);
 
-        var severity = ComputeSeverity(uid, action);
+        var severity = ComputeSeverity(ent, action);
         var radius = action.BaseRadius + severity;
-        var origin = Transform(uid).Coordinates;
+        var origin = Transform(ent).Coordinates;
         var sprayProto = empowered ? action.AcidSprayEmpoweredProto : action.AcidSprayProto;
         var now = _timing.CurTime;
 
-        var pending = EnsureComp<XenoDespoilerOozingWoundsPendingComponent>(uid);
+        var pending = EnsureComp<XenoDespoilerOozingWoundsPendingComponent>(ent);
 
         for (var dx = -radius; dx <= radius; dx++)
         {
@@ -73,8 +73,8 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
                 var tile = origin.Offset(new Vector2(dx, dy)).SnapToGrid(EntityManager);
                 var spawnDelay = action.DistanceDelayPerTile * cheby;
 
-                var telegraph = Spawn(action.TelegraphProto, tile);
-                _hive.SetSameHive(uid, telegraph);
+                var telegraph = PredictedSpawnAtPosition(action.TelegraphProto, tile);
+                _hive.SetSameHive(ent.Owner, telegraph);
 
                 if (spawnDelay > TimeSpan.Zero)
                     EnsureComp<TimedDespawnComponent>(telegraph).Lifetime = (float)spawnDelay.TotalSeconds;
@@ -91,9 +91,29 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
         }
 
         if (action.CastSound is { } sound)
-            _audio.PlayPvs(sound, uid);
+            _audio.PlayPredicted(sound, ent, ent);
 
         args.Handled = true;
+    }
+
+    private int ComputeSeverity(EntityUid uid, XenoDespoilerOozingWoundsActionComponent action)
+    {
+        if (!TryComp<DamageableComponent>(uid, out var dmg))
+            return 0;
+
+        if (!_mobThresholds.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold) ||
+            deadThreshold <= 0)
+        {
+            return 0;
+        }
+
+        var hpFrac = 1f - Math.Clamp((float)(dmg.TotalDamage / deadThreshold.Value), 0f, 1f);
+
+        var severity = 0;
+        if (hpFrac <= action.SeverityHpThreshold)
+            severity++;
+
+        return severity;
     }
 
     public override void Update(float frameTime)
@@ -113,7 +133,7 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
                 if (TerminatingOrDeleted(caster))
                     continue;
 
-                var spray = Spawn(entry.SprayProto, entry.Tile);
+                var spray = PredictedSpawnAtPosition(entry.SprayProto, entry.Tile);
                 _hive.SetSameHive(caster, spray);
 
                 if (_sprayQuery.TryComp(spray, out var sprayComp))
@@ -122,39 +142,20 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
                     Dirty(spray, sprayComp);
                 }
 
-                if (_random.Prob(entry.PuddleChance))
-                {
-                    var puddle = Spawn(entry.PuddleProto, entry.Tile);
-                    _hive.SetSameHive(caster, puddle);
-                    if (_lingeringQuery.TryComp(puddle, out var puddleComp))
-                    {
-                        puddleComp.Caster = caster;
-                        Dirty(puddle, puddleComp);
-                    }
-                }
+                if (!_random.Prob(entry.PuddleChance))
+                    continue;
+
+                var puddle = PredictedSpawnAtPosition(entry.PuddleProto, entry.Tile);
+                _hive.SetSameHive(caster, puddle);
+                if (!_lingeringQuery.TryComp(puddle, out var puddleComp))
+                    continue;
+
+                puddleComp.Caster = caster;
+                Dirty(puddle, puddleComp);
             }
 
             if (pending.Pending.Count == 0)
                 RemCompDeferred<XenoDespoilerOozingWoundsPendingComponent>(caster);
         }
-    }
-
-    private int ComputeSeverity(EntityUid uid, XenoDespoilerOozingWoundsActionComponent action)
-    {
-        if (!TryComp<DamageableComponent>(uid, out var dmg))
-            return 0;
-
-        if (!_mobThresholds.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold) ||
-            deadThreshold <= 0)
-        {
-            return 0;
-        }
-
-        var hpFrac = 1f - Math.Clamp((float)(dmg.TotalDamage / deadThreshold.Value), 0f, 1f);
-
-        var severity = 0;
-        if (hpFrac <= action.SeverityHpThreshold1) severity++;
-        if (hpFrac <= action.SeverityHpThreshold2) severity++;
-        return severity;
     }
 }

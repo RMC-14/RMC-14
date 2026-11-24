@@ -14,10 +14,7 @@ public sealed partial class XenoDespoilerOozingWoundsActionComponent : Component
     public int BaseRadius = 1;
 
     [DataField, AutoNetworkedField]
-    public float SeverityHpThreshold1 = 0.7f;
-
-    [DataField, AutoNetworkedField]
-    public float SeverityHpThreshold2 = 0.3f;
+    public float SeverityHpThreshold = 0.7f;
 
     [DataField, AutoNetworkedField]
     public float LingeringAcidChance = 0.2f;

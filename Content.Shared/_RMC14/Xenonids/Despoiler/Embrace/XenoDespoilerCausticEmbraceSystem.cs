@@ -45,7 +45,7 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
         SubscribeLocalEvent<XenoDespoilerComponent, XenoDespoilerCausticEmbraceActionEvent>(OnUse);
     }
 
-    private void OnUse(EntityUid uid, XenoDespoilerComponent comp, XenoDespoilerCausticEmbraceActionEvent args)
+    private void OnUse(Entity<XenoDespoilerComponent> ent, ref XenoDespoilerCausticEmbraceActionEvent args)
     {
         if (args.Handled)
             return;
@@ -53,7 +53,7 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
         if (!TryComp<XenoDespoilerCausticEmbraceActionComponent>(args.Action, out var action))
             return;
 
-        var ownerXform = Transform(uid);
+        var ownerXform = Transform(ent);
         var ownerMap = _xform.ToMapCoordinates(ownerXform.Coordinates);
         var targetMap = _xform.ToMapCoordinates(args.Target);
         if (ownerMap.MapId != targetMap.MapId)
@@ -68,16 +68,16 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
         if (step == Vector2.Zero)
             return;
 
-        if (_catalyze.IsEmpowered(uid, comp))
+        if (_catalyze.IsEmpowered(ent))
         {
-            if (!CanEmpoweredLunge(uid, action, args, dist, out var victim))
+            if (!CanEmpoweredLunge(ent, action, args, dist, out var victim))
                 return;
 
             if (!_rmcActions.TryUseAction(args))
                 return;
 
-            ExecuteEmpoweredLunge(uid, action, victim.Value);
-            _catalyze.TakeEmpowerment(uid, comp);
+            ExecuteEmpoweredLunge(ent, action, victim.Value);
+            _catalyze.TakeEmpowerment(ent);
             args.Handled = true;
             return;
         }
@@ -85,23 +85,23 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
         var landing = ownerXform.Coordinates.Offset(step);
 
         if (_rmcMap.IsTileBlocked(landing) ||
-            !_interaction.InRangeUnobstructed(uid, landing, range: action.NormalRange + UnobstructedRangeBuffer))
+            !_interaction.InRangeUnobstructed(ent, landing, range: action.NormalRange + UnobstructedRangeBuffer))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-despoiler-pounce-blocked"), uid, uid);
+            _popup.PopupClient(Loc.GetString("rmc-despoiler-pounce-blocked"), ent, ent);
             return;
         }
 
         if (!_rmcActions.TryUseAction(args))
             return;
 
-        _xform.SetCoordinates(uid, landing);
+        args.Handled = true;
+
+        _xform.SetCoordinates(ent, landing);
 
         if (action.PounceSound is { } sound)
-            _audio.PlayPvs(sound, uid);
+            _audio.PlayPvs(sound, ent);
 
-        SpawnSplashAroundExceptBack(uid, action, landing, step);
-
-        args.Handled = true;
+        SpawnSplashAroundExceptBack(ent, action, landing, step);
     }
 
     private static Vector2 SnapDirectionToTile(Vector2 dir)
@@ -133,7 +133,7 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
                 var tile = center.Offset(new Vector2(dx, dy));
                 var tileMap = _xform.ToMapCoordinates(tile);
 
-                var telegraph = Spawn(action.TelegraphProto, tile);
+                var telegraph = PredictedSpawnAtPosition(action.TelegraphProto, tile);
                 _hive.SetSameHive(caster, telegraph);
 
                 foreach (var ent in hits)
@@ -153,13 +153,14 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
 
                 if (_random.Prob(action.LingeringAcidChance))
                 {
-                    var puddle = Spawn(action.LingeringAcidProto, tile);
+                    var puddle = PredictedSpawnAtPosition(action.LingeringAcidProto, tile);
                     _hive.SetSameHive(caster, puddle);
-                    if (_lingeringQuery.TryComp(puddle, out var puddleComp))
-                    {
-                        puddleComp.Caster = caster;
-                        Dirty(puddle, puddleComp);
-                    }
+
+                    if (!_lingeringQuery.TryComp(puddle, out var puddleComp))
+                        continue;
+
+                    puddleComp.Caster = caster;
+                    Dirty(puddle, puddleComp);
                 }
             }
         }
@@ -174,20 +175,20 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
         victim = null;
         if (dist > action.EmpoweredRange)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-despoiler-pounce-out-of-range"), uid, uid);
+            _popup.PopupClient(Loc.GetString("rmc-despoiler-pounce-out-of-range"), uid, uid);
             return false;
         }
 
         victim = FindEmpoweredVictim(uid, args);
         if (victim is null)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-despoiler-caustic-no-target"), uid, uid);
+            _popup.PopupClient(Loc.GetString("rmc-despoiler-caustic-no-target"), uid, uid);
             return false;
         }
 
         if (!_interaction.InRangeUnobstructed(uid, victim.Value, range: action.EmpoweredRange + UnobstructedRangeBuffer))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-despoiler-pounce-blocked"), uid, uid);
+            _popup.PopupClient(Loc.GetString("rmc-despoiler-pounce-blocked"), uid, uid);
             victim = null;
             return false;
         }
@@ -195,17 +196,17 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
         return true;
     }
 
-    private void ExecuteEmpoweredLunge(EntityUid uid,
+    private void ExecuteEmpoweredLunge(Entity<XenoDespoilerComponent> ent,
         XenoDespoilerCausticEmbraceActionComponent action,
         EntityUid victim)
     {
-        _xform.SetCoordinates(uid, Transform(victim).Coordinates);
+        _xform.SetCoordinates(ent, Transform(victim).Coordinates);
 
         if (action.PounceSound is { } sound)
-            _audio.PlayPvs(sound, uid);
+            _audio.PlayPredicted(sound, ent, ent);
 
-        _damageable.TryChangeDamage(victim, action.EmpoweredDamage, ignoreResistances: false, origin: uid);
-        _acid.ApplyAcid(victim, uid, enhance: true);
+        _damageable.TryChangeDamage(victim, action.EmpoweredDamage, ignoreResistances: false, origin: ent);
+        _acid.ApplyAcid(victim, ent.AsNullable(), enhance: true);
 
         _stun.TryParalyze(victim, action.EmpoweredWeakenDuration, true);
     }

@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Despoiler;
+using Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;

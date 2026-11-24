@@ -9,9 +9,9 @@ namespace Content.Shared._RMC14.Xenonids.Despoiler.Spray;
 
 public sealed class XenoDespoilerAcidSpraySystem : EntitySystem
 {
+    [Dependency] private readonly XenoDespoilerAcidSystem _acid = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly XenoDespoilerAcidSystem _acid = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
@@ -27,27 +27,29 @@ public sealed class XenoDespoilerAcidSpraySystem : EntitySystem
         SubscribeLocalEvent<XenoDespoilerAcidSprayComponent, StartCollideEvent>(OnCollide);
     }
 
-    private void OnCollide(EntityUid uid, XenoDespoilerAcidSprayComponent comp, ref StartCollideEvent args)
+    private void OnCollide(Entity<XenoDespoilerAcidSprayComponent> ent, ref StartCollideEvent args)
     {
         var target = args.OtherEntity;
         if (!_mobStateQuery.HasComp(target) || _xenoQuery.HasComp(target) || _immunityQuery.HasComp(target))
             return;
 
-        _damageable.TryChangeDamage(target, comp.Damage, ignoreResistances: false, origin: comp.Caster);
+        _damageable.TryChangeDamage(target, ent.Comp.Damage, ignoreResistances: false, origin: ent.Comp.Caster);
 
-        if (comp.Caster is { } caster)
+        if (ent.Comp.Caster is { } caster)
             _acid.ApplyAcid(target, caster);
 
-        if (comp.StunsOnEmpowered)
-        {
-            _stun.TryParalyze(target, comp.StunDuration, true);
+        if (!ent.Comp.StunsOnEmpowered)
+            return;
 
-            var immunity = EnsureComp<XenoDespoilerAcidImmunityComponent>(target);
-            var expires = _timing.CurTime + comp.GrantImmunityDuration;
-            if (expires > immunity.ExpiresAt)
-                immunity.ExpiresAt = expires;
-            Dirty(target, immunity);
-        }
+        _stun.TryParalyze(target, ent.Comp.StunDuration, true);
+
+        var immunity = EnsureComp<XenoDespoilerAcidImmunityComponent>(target);
+        var expires = _timing.CurTime + ent.Comp.GrantImmunityDuration;
+        if (expires <= immunity.ExpiresAt)
+            return;
+
+        immunity.ExpiresAt = expires;
+        Dirty(target, immunity);
     }
 
     public override void Update(float frameTime)

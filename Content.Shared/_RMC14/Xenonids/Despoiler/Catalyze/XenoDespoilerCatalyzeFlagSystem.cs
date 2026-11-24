@@ -6,19 +6,19 @@ public sealed class XenoDespoilerCatalyzeFlagSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    public bool IsEmpowered(EntityUid uid, XenoDespoilerComponent comp)
+    public bool IsEmpowered(Entity<XenoDespoilerComponent> ent)
     {
-        return comp.NextAbilityEmpowered && _timing.CurTime <= comp.EmpowerExpiresAt;
+        return ent.Comp.NextAbilityEmpowered && _timing.CurTime <= ent.Comp.EmpowerExpiresAt;
     }
 
-    public bool TakeEmpowerment(EntityUid uid, XenoDespoilerComponent comp)
+    public bool TakeEmpowerment(Entity<XenoDespoilerComponent> ent)
     {
-        var wasActive = IsEmpowered(uid, comp);
+        var wasActive = IsEmpowered(ent);
 
-        if (comp.NextAbilityEmpowered)
+        if (ent.Comp.NextAbilityEmpowered)
         {
-            comp.NextAbilityEmpowered = false;
-            Dirty(uid, comp);
+            ent.Comp.NextAbilityEmpowered = false;
+            Dirty(ent);
         }
 
         return wasActive;

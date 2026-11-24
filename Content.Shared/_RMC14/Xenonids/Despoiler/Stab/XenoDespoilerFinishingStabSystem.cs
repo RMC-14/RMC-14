@@ -8,8 +8,8 @@ namespace Content.Shared._RMC14.Xenonids.Despoiler.Stab;
 
 public sealed class XenoDespoilerFinishingStabSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly XenoDespoilerAcidSystem _acid = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     private EntityQuery<UserAcidedComponent> _acidQuery;
 
@@ -21,17 +21,17 @@ public sealed class XenoDespoilerFinishingStabSystem : EntitySystem
         SubscribeLocalEvent<XenoDespoilerComponent, MeleeHitEvent>(OnMeleeHit);
     }
 
-    private void OnGetTailStabBonus(EntityUid uid, XenoDespoilerComponent comp, ref RMCGetTailStabBonusDamageEvent args)
+    private void OnGetTailStabBonus(Entity<XenoDespoilerComponent> ent, ref RMCGetTailStabBonusDamageEvent args)
     {
-        EnsureComp<XenoDespoilerTailStabPendingComponent>(uid);
+        EnsureComp<XenoDespoilerTailStabPendingComponent>(ent);
     }
 
-    private void OnMeleeHit(EntityUid uid, XenoDespoilerComponent comp, MeleeHitEvent args)
+    private void OnMeleeHit(Entity<XenoDespoilerComponent> ent, ref MeleeHitEvent args)
     {
-        if (!RemComp<XenoDespoilerTailStabPendingComponent>(uid))
+        if (!RemComp<XenoDespoilerTailStabPendingComponent>(ent))
             return;
 
-        var table = comp.FinishingStabBonusByTier;
+        var table = ent.Comp.FinishingStabBonusByTier;
         if (table.Count == 0)
             return;
 
@@ -49,7 +49,7 @@ public sealed class XenoDespoilerFinishingStabSystem : EntitySystem
             if (bonus.GetTotal() <= 0)
                 continue;
 
-            _damageable.TryChangeDamage(target, bonus, ignoreResistances: true, origin: uid);
+            _damageable.TryChangeDamage(target, new DamageSpecifier(bonus), ignoreResistances: true, origin: ent);
         }
     }
 }

@@ -9,13 +9,13 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee.Events;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler.Stab;
+namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
 public sealed class XenoDespoilerAcidSystem : EntitySystem
 {
     [Dependency] private readonly XenoDespoilerHypertensionSystem _hyper = default!;
-    [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoDespoilerComponent> _despoilerQuery;
@@ -39,15 +39,15 @@ public sealed class XenoDespoilerAcidSystem : EntitySystem
         SubscribeLocalEvent<XenoDespoilerHypertensionComponent, DamageChangedEvent>(OnDamageTaken);
     }
 
-    private void OnGetMeleeDamage(EntityUid uid, XenoDespoilerSlashOnHitComponent comp, ref GetMeleeDamageEvent args)
+    private void OnGetMeleeDamage(Entity<XenoDespoilerSlashOnHitComponent> ent, ref GetMeleeDamageEvent args)
     {
-        if (TryGetHyperBurn(uid, out var burn))
+        if (TryGetHyperBurn(ent, out var burn))
             args.Damage += burn;
     }
 
-    private void OnGetTailStabBonusDamage(EntityUid uid, XenoDespoilerSlashOnHitComponent comp, ref RMCGetTailStabBonusDamageEvent args)
+    private void OnGetTailStabBonusDamage(Entity<XenoDespoilerSlashOnHitComponent> ent, ref RMCGetTailStabBonusDamageEvent args)
     {
-        if (TryGetHyperBurn(uid, out var burn))
+        if (TryGetHyperBurn(ent, out var burn))
             args.Damage += burn;
     }
 
@@ -59,13 +59,13 @@ public sealed class XenoDespoilerAcidSystem : EntitySystem
         _hyper.AddPoints(ent, (float) delta.GetTotal() * ent.Comp.PointsPerDamageTaken);
     }
 
-    private bool TryGetHyperBurn(EntityUid uid, [NotNullWhen(true)] out DamageSpecifier? burn)
+    private bool TryGetHyperBurn(Entity<XenoDespoilerSlashOnHitComponent, XenoDespoilerHypertensionComponent?> ent, [NotNullWhen(true)] out DamageSpecifier? burn)
     {
         burn = null!;
-        if (!_hyperQuery.TryComp(uid, out var hyper) || hyper.Stacks <= 0)
+        if (!_hyperQuery.Resolve(ent, ref ent.Comp2, false) || ent.Comp2.Stacks <= 0)
             return false;
 
-        var bonus = hyper.Stacks * hyper.BonusBurnPerStack;
+        var bonus = ent.Comp2.Stacks * ent.Comp2.BonusBurnPerStack;
         if (bonus <= 0)
             return false;
 
@@ -73,33 +73,35 @@ public sealed class XenoDespoilerAcidSystem : EntitySystem
         {
             DamageDict =
             {
-                ["Heat"] = FixedPoint2.New(bonus),
+                [ent.Comp1.DamageType] = FixedPoint2.New(bonus),
             },
         };
 
         return true;
     }
 
-    private void OnMeleeHit(EntityUid uid, XenoDespoilerSlashOnHitComponent comp, MeleeHitEvent args)
+    private void OnMeleeHit(Entity<XenoDespoilerSlashOnHitComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
-        if (!_xenoQuery.HasComp(uid))
+        if (!_xenoQuery.HasComp(ent) ||
+            !_despoilerQuery.TryComp(ent, out var despoilerComp) ||
+            !_hyperQuery.TryComp(ent, out var hyper))
+        {
             return;
-
-        _hyperQuery.TryComp(uid, out var hyper);
+        }
 
         foreach (var hit in args.HitEntities)
         {
-            if (hit == uid || _xenoQuery.HasComp(hit))
+            if (hit == ent.Owner || _xenoQuery.HasComp(hit))
                 continue;
 
-            if (hyper != null && hyper.Stacks >= comp.EnhanceStacksThreshold)
-                ApplyAcid(hit, uid);
+            if (hyper != null && hyper.Stacks >= ent.Comp.EnhanceStacksThreshold)
+                ApplyAcid(hit, (ent, despoilerComp));
 
             if (hyper != null && _marineQuery.HasComp(hit))
-                _hyper.AddSlashPoints((uid, hyper));
+                _hyper.AddSlashPoints((ent, hyper));
         }
     }
 
@@ -111,21 +113,22 @@ public sealed class XenoDespoilerAcidSystem : EntitySystem
     /// acid tier on the target; <paramref name="enhance"/> jumps tier to max and flips
     /// the UserAcided combo flag.
     /// </summary>
-    public void ApplyAcid(EntityUid target, EntityUid caster, bool enhance = false)
+    public void ApplyAcid(EntityUid target, Entity<XenoDespoilerComponent?> caster, bool enhance = false)
     {
-        if (!_despoilerQuery.TryComp(caster, out var despoilerComp))
+        if (!_despoilerQuery.Resolve(caster, ref caster.Comp, false))
             return;
 
         if (_mobState.IsDead(target))
             return;
 
-        if (!_userAcidedQuery.HasComp(target) && despoilerComp.AcidComponents.Count > 0)
-            EntityManager.AddComponents(target, despoilerComp.AcidComponents, removeExisting: false);
+        if (!_userAcidedQuery.HasComp(target) && caster.Comp.AcidComponents.Count > 0)
+            EntityManager.AddComponents(target, caster.Comp.AcidComponents, removeExisting: false);
 
         var tier = EnsureComp<XenoDespoilerAcidTierComponent>(target);
         if (enhance)
         {
             tier.Tier = tier.MaxTier;
+
             if (_userAcidedQuery.TryComp(target, out var acid))
                 _xenoSpit.EnhanceAcid((target, acid), tier.MaxTier);
         }
