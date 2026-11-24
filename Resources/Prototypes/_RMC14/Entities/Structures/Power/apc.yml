@@ -5,6 +5,9 @@
   description: A control terminal for the area electrical systems.
   categories: [ HideSpawnMenu ]
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: Transform
     anchored: true
   - type: AccessReader
@@ -131,6 +134,11 @@
           Charging: { state: display-charging }
           FullCharge: { state: display-full }
   - type: RMCMesonsNonviewable
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-wall-apc
+    whitelist:
+      components:
+      - Xeno
 
 # APC under construction
 - type: entity
@@ -171,7 +179,7 @@
 - type: entity
   parent: CMApcBase
   id: CMApc
-  suffix: No Power
+  suffix: Power
   components:
   - type: RMCApc
     startingCell: RMCPowerCellAPC

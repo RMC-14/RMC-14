@@ -1,0 +1,16 @@
+- type: entity
+  parent: BaseItem
+  id: RMCGooeyGreyMass
+  name: gooey grey mass
+  description: It looks like a melted... something.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Chemistry/effects.rsi
+    noRot: true
+    state: molten
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static

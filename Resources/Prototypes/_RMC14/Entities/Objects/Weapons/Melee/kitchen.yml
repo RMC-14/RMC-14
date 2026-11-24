@@ -10,6 +10,7 @@
   - type: Item
     size: Small
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -27,10 +28,14 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UsableWhileDevoured
+    canUnequip: true
   - type: Tag
     tags:
     - Knife
   - type: DeleteOnExplosion
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 12000
 
 - type: entity
   parent: RMCKitchenKnife
@@ -40,6 +45,8 @@
   components:
   - type: Sprite
     state: plastic
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: RMCKitchenKnife

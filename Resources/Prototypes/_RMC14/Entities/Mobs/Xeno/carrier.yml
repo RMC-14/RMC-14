@@ -11,8 +11,7 @@
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
   abstract: true
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-carrier
+  - type: CanBuildThickFromConstructNode
   - type: MobState
     allowedStates:
     - Alive
@@ -27,6 +26,8 @@
     role: CMXenoCarrier
     tier: 2
     hudOffset: 0,0.19
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 300 # 5 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -38,6 +39,7 @@
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
@@ -131,17 +133,8 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
   - type: Xeno
     actionIds:
@@ -169,6 +162,7 @@
   id: RMCXenoCarrierEggsac
   suffix: Eggsac
   components:
+  - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
     - RMCGuideRoleEggsac
@@ -188,18 +182,6 @@
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
-      visible: false
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -216,6 +198,8 @@
     name: rmc-xeno-eggsac-name
     description: rmc-xeno-eggsac-description
     popup: rmc-xeno-eggsac-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoCarrier
   - type: XenoPheromones
     pheromonesMultiplier: 3
     pheroSuffix: strong

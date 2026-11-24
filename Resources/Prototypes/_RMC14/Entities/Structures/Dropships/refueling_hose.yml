@@ -1,0 +1,26 @@
+﻿- type: entity
+  id: RMCRefuelingHose
+  name: refueling hose
+  description: "A long refueling hose that connects to various types of dropships"
+  placement:
+    mode: SnapgridCenter
+  suffix: End
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/refueling_hose.rsi
+    state: fuelline1
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Clickable
+
+- type: entity
+  parent: RMCRefuelingHose
+  id: RMCRefuelingHoseAlt
+  suffix: Mid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/refueling_hose.rsi
+    state: fuelline2

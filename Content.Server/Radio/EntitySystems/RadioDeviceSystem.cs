@@ -5,6 +5,7 @@ using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Radio.Components;
+using Content.Server._RMC14.Radio;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Shared._RMC14.Xenonids;
@@ -99,6 +100,11 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (!component.ToggleOnInteract)
             return;
 
+        // RMC14
+        if (HasComp<RMCRadioListenOnlyModeComponent>(uid) && HasComp<RadioMicrophoneComponent>(uid))
+            return;
+        // RMC14
+
         ToggleRadioSpeaker(uid, args.User, args.Handled, component);
         args.Handled = true;
     }
@@ -107,6 +113,31 @@ public sealed class RadioDeviceSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return;
+
+        // RMC14
+        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp))
+        {
+            // On to Listen, Mic stops transmitting but speaker still recieves.
+            if (!comp.Enabled && component.Enabled)
+            {
+                comp.Enabled = true;
+                EnsureComp<BlockListeningComponent>(uid);
+
+                var state = Loc.GetString("handheld-radio-component-listen-only-state");
+                var message = Loc.GetString("handheld-radio-component-on-use", ("radioState", state));
+                _popup.PopupEntity(message, user, user);
+
+                _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, false);
+                return;
+            }
+
+            // will need a guard for Speaker if a PowerRequired=True radio is ever added.
+            var enabled = !component.Enabled;
+            SetMicrophoneEnabled(uid, user, enabled, quiet, component);
+            SetSpeakerEnabled(uid, user, enabled, true);
+            return;
+        }
+        // RMC14
 
         SetMicrophoneEnabled(uid, user, !component.Enabled, quiet, component);
     }
@@ -123,8 +154,10 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (!Resolve(uid, ref component, false))
             return;
 
-        if (component.PowerRequired && !this.IsPowered(uid, EntityManager))
+        // RMC14 - An unpowered microphone must still be able to turn off.
+        if (enabled && component.PowerRequired && !this.IsPowered(uid, EntityManager))
             return;
+        // RMC14
 
         component.Enabled = enabled;
 
@@ -134,6 +167,14 @@ public sealed class RadioDeviceSystem : EntitySystem
             var message = Loc.GetString("handheld-radio-component-on-use", ("radioState", state));
             _popup.PopupEntity(message, user.Value, user.Value);
         }
+
+        // RMC14
+        if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled && !enabled)
+        {
+            comp.Enabled = false;
+            RemCompDeferred<BlockListeningComponent>(uid);
+        }
+        // RMC14
 
         _appearance.SetData(uid, RadioDeviceVisuals.Broadcasting, component.Enabled);
         if (component.Enabled)
@@ -166,7 +207,13 @@ public sealed class RadioDeviceSystem : EntitySystem
 
         _appearance.SetData(uid, RadioDeviceVisuals.Speaker, component.Enabled);
         if (component.Enabled)
-            EnsureComp<ActiveRadioComponent>(uid).Channels.UnionWith(component.Channels);
+        {
+            // RMC14 - RadioSpeakerComponent is authoritative; do not retain stale channels.
+            var active = EnsureComp<ActiveRadioComponent>(uid);
+            active.Channels.Clear();
+            active.Channels.UnionWith(component.Channels);
+            // RMC14
+        }
         else
             RemCompDeferred<ActiveRadioComponent>(uid);
     }
@@ -184,6 +231,18 @@ public sealed class RadioDeviceSystem : EntitySystem
             args.PushMarkup(Loc.GetString("handheld-radio-component-on-examine", ("frequency", proto.Frequency)));
             args.PushMarkup(Loc.GetString("handheld-radio-component-chennel-examine",
                 ("channel", proto.LocalizedName)));
+
+            // RMC14
+            if (component.ToggleOnInteract)
+            {
+                var state = Loc.GetString(component.Enabled ? "handheld-radio-component-on-state" : "handheld-radio-component-off-state");
+
+                if (TryComp(uid, out RMCRadioListenOnlyModeComponent? comp) && comp.Enabled)
+                    state = Loc.GetString("handheld-radio-component-listen-only-state");
+
+                args.PushMarkup(Loc.GetString("handheld-radio-component-state-examine", ("radioState", state)));
+            }
+            // RMC14
         }
     }
 
@@ -209,21 +268,25 @@ public sealed class RadioDeviceSystem : EntitySystem
         }
     }
 
-    private void OnReceiveRadio(EntityUid uid, RadioSpeakerComponent component, ref RadioReceiveEvent args)
+    // RMC14
+    private void OnReceiveRadio(Entity<RadioSpeakerComponent> ent, ref RadioReceiveEvent args)
     {
-        if (uid == args.RadioSource)
+        if (ent.Owner == args.RadioSource)
             return;
+
+        if (args.SpeakerRelays is { } relays)
+        {
+            relays.Add(ent.Owner);
+            return;
+        }
 
         var nameEv = new TransformSpeakerNameEvent(args.MessageSource, Name(args.MessageSource));
         RaiseLocalEvent(args.MessageSource, nameEv);
 
-        var name = Loc.GetString("speech-name-relay",
-            ("speaker", Name(uid)),
-            ("originalName", nameEv.VoiceName));
-
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
-        _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false, ignoreXenos: true);
+        _chat.SendRadioSpeakerWhisperWithLanguage(ent.Owner, args.Message, args.Language, nameEv.VoiceName, originalSpeaker: args.MessageSource);
     }
+    // RMC14
 
     private void OnIntercomEncryptionChannelsChanged(Entity<IntercomComponent> ent, ref EncryptionChannelsChangedEvent args)
     {
@@ -267,7 +330,7 @@ public sealed class RadioDeviceSystem : EntitySystem
         SetIntercomChannel(ent, args.Channel);
     }
 
-    private void SetIntercomChannel(Entity<IntercomComponent> ent, ProtoId<RadioChannelPrototype>? channel)
+    public void SetIntercomChannel(Entity<IntercomComponent> ent, ProtoId<RadioChannelPrototype>? channel)
     {
         ent.Comp.CurrentChannel = channel;
 
@@ -284,7 +347,17 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (TryComp<RadioMicrophoneComponent>(ent, out var mic))
             mic.BroadcastChannel = channel;
         if (TryComp<RadioSpeakerComponent>(ent, out var speaker))
+        {
             speaker.Channels = new() { channel };
+
+            // RMC14 - Keep an already enabled speaker synchronized with its selected channel.
+            if (TryComp<ActiveRadioComponent>(ent, out var active))
+            {
+                active.Channels.Clear();
+                active.Channels.Add(channel.Value);
+            }
+            // RMC14
+        }
         Dirty(ent);
     }
 }

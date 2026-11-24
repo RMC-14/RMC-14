@@ -1,33 +1,40 @@
-using Content.Shared._RMC14.Line;
+using System.Linq;
+using System.Numerics;
 using Content.Shared.Climbing.Events;
-using Content.Shared.Coordinates;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
 
 public sealed class RMCMovementSystem : EntitySystem
 {
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private HashSet<EntityUid> _intersectedEntities = new();
+    private const CollisionGroup ClimbCheckGroup = CollisionGroup.Impassable | CollisionGroup.HighImpassable |
+                                              CollisionGroup.MidImpassable | CollisionGroup.LowImpassable;
+
+    private readonly HashSet<EntityUid> _intersecting = [];
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCMobCollisionComponent, MapInitEvent>(OnMobCollisionMapInit);
         SubscribeLocalEvent<RMCMobCollisionComponent, MobStateChangedEvent>(OnMobCollisionMobStateChanged);
+
+        SubscribeLocalEvent<RMCOutsideChamberComponent, PreventCollideEvent>(OnPreventCollide);
     }
 
     private void OnMobCollisionMapInit(Entity<RMCMobCollisionComponent> ent, ref MapInitEvent args)
@@ -83,21 +90,21 @@ public sealed class RMCMovementSystem : EntitySystem
             user = movingEntity;
         }
 
-        var movingEntityMapCoords = _transform.GetMapCoordinates(movingEntity);
-        var targetMapCoords = _transform.GetMapCoordinates(target);
-        var transform = new Transform(0);
+        var userPosition = _transform.GetMoverCoordinates(user.Value).Position;
+        var targetPosition = _transform.GetMoverCoordinates(target).Position;
+        var direction = targetPosition - userPosition;
 
-        var line = new EdgeShape(movingEntityMapCoords.Position, targetMapCoords.Position);
+        if (direction == Vector2.Zero)
+            return true;
 
-        _intersectedEntities.Clear();
-        _lookup.GetEntitiesIntersecting<EdgeShape>(_transform.GetMapId(movingEntity), line, transform, _intersectedEntities);
+        var ray = new CollisionRay(userPosition, direction.Normalized(), (int)ClimbCheckGroup);
+        var intersect = _physics.IntersectRayWithPredicate(Transform(user.Value).MapID, ray, direction.Length(), e => !Transform(e).Anchored);
+        var results = intersect.Select(r => r.HitEntity).ToHashSet();
 
-        if (includeTarget)
-            _intersectedEntities.Add(target);
-        else
-            _intersectedEntities.Remove(target);
+        if (!includeTarget)
+            results.Remove(target);
 
-        foreach (var entity in _intersectedEntities)
+        foreach (var entity in results)
         {
             var ev = new AttemptClimbEvent(user.Value, movingEntity, entity);
             RaiseLocalEvent(entity, ref ev);
@@ -106,12 +113,47 @@ public sealed class RMCMovementSystem : EntitySystem
                 continue;
             }
 
-            if (popup)
+            if (popup && !ev.PopupHandled)
             {
                 _popup.PopupClient(Loc.GetString("rmc-climb-prevented-by-obstacles"), user, PopupType.MediumCaution);
             }
             return false;
         }
         return true;
+    }
+
+    public void SuppressCollisionOnExit(EntityUid ent, EntityUid chamber)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        var outside = EnsureComp<RMCOutsideChamberComponent>(ent);
+        outside.Chamber = chamber;
+        Dirty(ent, outside);
+    }
+
+    private void OnPreventCollide(Entity<RMCOutsideChamberComponent> ent, ref PreventCollideEvent args)
+    {
+        if (ent.Comp.Chamber == args.OtherEntity)
+            args.Cancelled = true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<RMCOutsideChamberComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Chamber is not { } chamber)
+            {
+                RemCompDeferred<RMCOutsideChamberComponent>(uid);
+                continue;
+            }
+
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
+
+            if (!_intersecting.Contains(chamber))
+                RemCompDeferred<RMCOutsideChamberComponent>(uid);
+        }
     }
 }

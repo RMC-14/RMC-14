@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/05/2025 06:38:13
-  entityCount: 379
+  time: 01/08/2026 20:35:46
+  entityCount: 394
 maps: []
 grids:
 - 1
@@ -134,12 +134,21 @@ entities:
             id: burnt2
           decals:
             12: 9,13
+            17: 9,5
+        - node:
+            cleanable: True
+            angle: 1.5707963267948966 rad
+            id: burnt2
+          decals:
+            18: 9,13
         - node:
             cleanable: True
             angle: 4.71238898038469 rad
             id: burnt2
           decals:
             13: 11,20
+            15: 19,4
+            16: 18,5
         - node:
             cleanable: True
             id: burnt3
@@ -151,6 +160,7 @@ entities:
             id: burnt3
           decals:
             10: 18,5
+            20: 19,17
         - node:
             cleanable: True
             angle: 3.141592653589793 rad
@@ -163,6 +173,7 @@ entities:
             id: burnt3
           decals:
             5: 9,5
+            19: 11,20
         - node:
             cleanable: True
             angle: 1.5707963267948966 rad
@@ -240,6 +251,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 21.5,14.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
 - proto: CMAutolathe
   entities:
   - uid: 185
@@ -439,36 +452,6 @@ entities:
     components:
     - type: Transform
       pos: 22.5,7.5
-      parent: 1
-- proto: RMCLightFixture
-  entities:
-  - uid: 160
-    components:
-    - type: Transform
-      pos: 4.5,11.5
-      parent: 1
-  - uid: 161
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.5,9.5
-      parent: 1
-  - uid: 229
-    components:
-    - type: Transform
-      pos: 5.5,15.5
-      parent: 1
-  - uid: 378
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 23.5,17.5
-      parent: 1
-  - uid: 379
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 20.5,17.5
       parent: 1
 - proto: CMMultitool
   entities:
@@ -1696,6 +1679,36 @@ entities:
     - type: Transform
       pos: 11.5,6.5
       parent: 1
+- proto: RMCLightFixture
+  entities:
+  - uid: 160
+    components:
+    - type: Transform
+      pos: 4.5,11.5
+      parent: 1
+  - uid: 161
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,9.5
+      parent: 1
+  - uid: 229
+    components:
+    - type: Transform
+      pos: 5.5,15.5
+      parent: 1
+  - uid: 378
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,17.5
+      parent: 1
+  - uid: 379
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 20.5,17.5
+      parent: 1
 - proto: RMCMagazinePistolM1984Rubber
   entities:
   - uid: 366
@@ -1729,6 +1742,20 @@ entities:
     components:
     - type: Transform
       pos: 15.5,3.5
+      parent: 1
+- proto: RMCMagazineRifleSSG45
+  entities:
+  - uid: 392
+    components:
+    - type: Transform
+      pos: 15.5,5.5
+      parent: 1
+- proto: RMCMagazineRifleSSG45Extended
+  entities:
+  - uid: 393
+    components:
+    - type: Transform
+      pos: 15.5,5.5
       parent: 1
 - proto: RMCPhotocopier
   entities:
@@ -2132,23 +2159,25 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: Office Complex 1
-- proto: RMCSpawnerCorpseWeYaPMC
+- proto: RMCSpawnerCorpseWeYaGoon
   entities:
-  - uid: 236
+  - uid: 2
     components:
     - type: Transform
       pos: 9.5,20.5
       parent: 1
-  - uid: 239
+  - uid: 236
     components:
     - type: Transform
       pos: 13.5,7.5
       parent: 1
-  - uid: 314
+  - uid: 239
     components:
     - type: Transform
       pos: 18.5,16.5
       parent: 1
+- proto: RMCSpawnerCorpseWeYaPMC
+  entities:
   - uid: 356
     components:
     - type: Transform
@@ -2213,6 +2242,78 @@ entities:
     components:
     - type: Transform
       pos: 15.5,4.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorCrashlandingOfficesEngineer
+  entities:
+  - uid: 381
+    components:
+    - type: Transform
+      pos: 12.5,14.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorCrashlandingOfficesFOL
+  entities:
+  - uid: 389
+    components:
+    - type: Transform
+      pos: 18.5,9.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorCrashlandingOfficesLeader
+  entities:
+  - uid: 314
+    components:
+    - type: Transform
+      pos: 15.5,16.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorCrashlandingOfficesMedic
+  entities:
+  - uid: 383
+    components:
+    - type: Transform
+      pos: 16.5,12.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorSolarisCorporateSupervisor
+  entities:
+  - uid: 382
+    components:
+    - type: Transform
+      pos: 12.5,10.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorSolarisPMCGunner
+  entities:
+  - uid: 384
+    components:
+    - type: Transform
+      pos: 12.5,15.5
+      parent: 1
+  - uid: 385
+    components:
+    - type: Transform
+      pos: 13.5,14.5
+      parent: 1
+  - uid: 386
+    components:
+    - type: Transform
+      pos: 16.5,15.5
+      parent: 1
+  - uid: 387
+    components:
+    - type: Transform
+      pos: 10.5,9.5
+      parent: 1
+  - uid: 388
+    components:
+    - type: Transform
+      pos: 12.5,8.5
+      parent: 1
+  - uid: 390
+    components:
+    - type: Transform
+      pos: 11.5,4.5
+      parent: 1
+  - uid: 391
+    components:
+    - type: Transform
+      pos: 17.5,4.5
       parent: 1
 - proto: RMCTablePartTan
   entities:
@@ -2336,5 +2437,12 @@ entities:
     components:
     - type: Transform
       pos: 23.5,19.5
+      parent: 1
+- proto: XenoTunnel
+  entities:
+  - uid: 394
+    components:
+    - type: Transform
+      pos: 6.5,1.5
       parent: 1
 ...

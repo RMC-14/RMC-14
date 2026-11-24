@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5947249ebc1be2d5fb2c0ce558b0f244ff6ad0ef/icons/obj/items/clothing/ties.dmi, https://github.com/cmss13-devs/cmss13/blob/6bb886fa1b5d76f7266c2f0514d860537008dfa4/icons/mob/humans/onmob/ties.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5947249ebc1be2d5fb2c0ce558b0f244ff6ad0ef/icons/obj/items/clothing/ties.dmi, https://github.com/cmss13-devs/cmss13/blob/6bb886fa1b5d76f7266c2f0514d860537008dfa4/icons/mob/humans/onmob/ties.dmi, icon and equipped edited by VictorJob (Github), further modified by PursuitinAshes (Github)",
   "size": {
     "x": 32,
     "y": 32
@@ -12,8 +12,6 @@
       "delays": [
         [
           12,
-          0.1,
-          0.1,
           0.1,
           0.1,
           0.1,

@@ -53,9 +53,19 @@ public abstract class SharedXenoWatchSystem : EntitySystem
 
     public virtual void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
     {
+        var watching = EnsureComp<XenoWatchingComponent>(watcher);
+        watching.Watching = toWatch;
+        Dirty(watcher, watching);
+
+        var watched = EnsureComp<XenoWatchedComponent>(toWatch);
+        watched.Watching.Add(watcher);
+        Dirty(toWatch, watched);
+
+        var ev = new XenoWatchEvent(toWatch);
+        RaiseLocalEvent(watcher, ref ev);
     }
 
-    protected virtual void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
+    public virtual void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
     {
         if (!Resolve(watcher, ref watcher.Comp))
             return;

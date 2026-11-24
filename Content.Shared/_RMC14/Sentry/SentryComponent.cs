@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Sentry.Laptop;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
@@ -9,17 +10,11 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Sentry;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SentrySystem))]
+[Access(typeof(SentrySystem), typeof(SharedSentryLaptopSystem))]
 public sealed partial class SentryComponent : Component
 {
     [DataField, AutoNetworkedField]
     public SentryMode Mode;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan DeployDelay = TimeSpan.FromSeconds(3);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan UndeployDelay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public TimeSpan MagazineDelay = TimeSpan.FromSeconds(7);
@@ -32,9 +27,6 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillEngineer";
-
-    [DataField, AutoNetworkedField]
-    public int SkillLevel = 2;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? MagazineSwapSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/unload.ogg");
@@ -58,10 +50,31 @@ public sealed partial class SentryComponent : Component
     public ProtoId<TagPrototype>? MagazineTag = "RMCMagazineSentry";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<SkillDefinitionComponent> DelaySkill = "RMCSkillConstruction";
+    public EntityUid? Camera;
 
     [DataField, AutoNetworkedField]
-    public bool HomingShots = true;
+    public float LowAmmoThreshold = 0.25f;
+
+    [DataField, AutoNetworkedField]
+    public float CriticalHealthThreshold = 0.25f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastLowAmmoAlert;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastHealthAlert;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastTargetAlert;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AlertCooldown = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    ///     Can the sentry be picked up or toggled on/off.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IsLocked;
 }
 
 [Serializable, NetSerializable]

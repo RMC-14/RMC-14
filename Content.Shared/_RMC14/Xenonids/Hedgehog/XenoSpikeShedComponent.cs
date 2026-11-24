@@ -25,7 +25,7 @@ public sealed partial class XenoSpikeShedComponent : Component
     public TimeSpan ShardLockExpireAt;
 
     [DataField, AutoNetworkedField]
-    public float SpeedBoost = 1.5f;
+    public float SpeedBoost = 1.2f;
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier ShardDamage = new();

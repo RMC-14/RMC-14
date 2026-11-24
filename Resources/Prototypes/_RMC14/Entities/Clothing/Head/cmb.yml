@@ -10,4 +10,29 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/cmb_helmet.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 10
+    explosionArmor: 25
+    # armor_energy = 30
   - type: RMCEarProtection
+
+- type: entity
+  parent: RMCArmorHelmetM10CMB
+  id: RMCArmorHelmetM10CMBVisorSWAT
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCVisorSWAT
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCMB
+  name: CMB Riot Control Unit beret
+  description: A dark beret with a badge that has the word 'MARSHAL' on the front, representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_cmb.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_cmb.rsi

@@ -91,7 +91,7 @@
   parent: RMC40MMGrenadeM74AGMF
   id: RMCBatonSlugHIRR
   name: HIRR baton slug
-  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
+  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
@@ -105,6 +105,11 @@
     - Grenade
     - LauncherCompatibleGrenade
   - type: InheritAcid
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-batong
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
@@ -119,6 +124,14 @@
   - type: CartridgeAmmo
     deleteOnSpawn: true
     proto: RMCAirBurstProjectileSmoke
+
+- type: entity
+  parent: RMC40MMGrenadeM74AGMS
+  id: RMC40MMGrenadeM74AGMSVehicle
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCAirBurstProjectileSmokeVehicle
 
 #PROJECTILES
 - type: entity
@@ -138,7 +151,7 @@
   - type: Projectile
     deleteOnCollide: false
     impactEffect: BulletImpactEffect
-    maxFixedRange: 7
+    maxFixedRange: 8.463 #The result of CircleAreaFromSquareAbilityRange(7)
     damage:
       types:
         Piercing: 100
@@ -201,6 +214,9 @@
   - type: DirectionalTileFireOnTrigger
     range: 3
     spawn: RMCTileFire
+    sound: /Audio/_RMC14/Effects/hit_on_shattered_glass.ogg
+    intensity: 20
+    duration: 15
 
 - type: entity
   parent: RMCBaseAirBurstProjectile
@@ -273,10 +289,21 @@
       path: /Audio/Effects/gen_hit.ogg
   - type: SpawnOnTerminate
     spawn: RMCSmoke
-    projectileAdjust: false
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
+
+- type: entity
+  parent: RMCAirBurstProjectileSmoke
+  id: RMCAirBurstProjectileSmokeVehicle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: RMCAirBurstProjectileSmokeVehicle
+    count: 3
+    spread: 45
+  - type: TimedDespawn
+    lifetime: 2
 
 #Payload projectiles
 - type: entity
@@ -426,7 +453,7 @@
   parent: RMCBaseBullet
   id: RMCBatonSlugProjectile
   name: HIRR baton slug
-  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
+  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces.
   categories: [ HideSpawnMenu ]
   components:
   - type: TriggerOnFixedDistanceStop

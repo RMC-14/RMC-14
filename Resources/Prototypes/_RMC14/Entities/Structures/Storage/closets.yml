@@ -55,11 +55,24 @@
           params:
             volume: -6
   - type: EntityStorageCloseOnMapInit
+  - type: RMCEntityStorageLineBlockable
   - type: XenoToggleChargingDamage
     stageLoss: 2
     damage:
       types:
         Blunt: 40
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
 
 - type: entity
   parent: CMClosetBaseUnanchored
@@ -211,6 +224,14 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/bio_scientist.rsi
 
+- type: entity
+  parent: CMClosetBio
+  id: CMClosetBioMedical
+  suffix: Medical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/bio_medical.rsi
+
 # Gimmics
 - type: entity
   parent: CMClosetBase
@@ -262,3 +283,79 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetSPPGearFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMGear
+  suffix: PVE, RCM
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTroopSgtGear
+  name: troop sergeant locker
+  suffix: PVE, RCM, Troop Sergeant
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTroopSgtFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMSectionLeaderGear
+  name: section leader locker
+  suffix: PVE, RCM, Section Leader
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMSectionLeaderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMSGOGear
+  name: smart gun operator locker
+  suffix: PVE, RCM, SGO
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMSGOFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTeamLeaderGear
+  name: team leader locker
+  suffix: PVE, RCM, Team Leader
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTeamLeaderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTroopCommanderGear
+  name: troop commander locker
+  suffix: PVE, RCM, Troop Commander
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTroopCommanderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMSapperGear
+  name: sapper locker
+  suffix: PVE, RCM, Sapper
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMSapperFill

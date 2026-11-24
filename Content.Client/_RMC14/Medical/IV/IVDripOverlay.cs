@@ -53,5 +53,20 @@ public sealed class IVDripOverlay : Overlay
 
             handle.DrawLine(packPosition.Position, attachedPosition.Position, Color.White);
         }
+
+        var dialysisMachines = _entity.EntityQueryEnumerator<PortableDialysisComponent>();
+        while (dialysisMachines.MoveNext(out var dialysisId, out var dialysisComponent))
+        {
+            if (dialysisComponent.AttachedTo is not { Valid: true } attachedTo)
+                continue;
+
+            var dialysisPosition = transformSystem.GetMapCoordinates(dialysisId);
+            var attachedPosition = transformSystem.GetMapCoordinates(attachedTo);
+
+            if (dialysisPosition.MapId == MapId.Nullspace || attachedPosition.MapId == MapId.Nullspace)
+                continue;
+
+            handle.DrawLine(dialysisPosition.Position, attachedPosition.Position, Color.White);
+        }
     }
 }

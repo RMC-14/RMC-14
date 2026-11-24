@@ -17,7 +17,7 @@
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/p90_shot.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -73,6 +73,9 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentExtendedCompensator
           - RMCAttachmentRecoilCompensator
+        random:
+        - RMCAttachmentExtendedBarrel
+        - RMCAttachmentRecoilCompensator
       rmc-aslot-rail:
         locked: true
         startingAttachable: RMCAttachmentFP9000Scope
@@ -83,6 +86,8 @@
         whitelist:
           tags:
           - RMCAttachmentLaserSight
+        random:
+        - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0.06, .15
@@ -110,7 +115,7 @@
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/p90_shot.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto

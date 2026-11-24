@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
@@ -28,16 +29,18 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly LineSystem _line = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly VehicleWheelSystem _vehicleWheels = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
@@ -101,14 +104,14 @@ public sealed class XenoSprayAcidSystem : EntitySystem
             _actions.StartUseDelay(action.AsNullable());
         }
 
-        var start = xeno.Owner.ToCoordinates();
-        var end = GetCoordinates(args.Coordinates);
-        var tiles = _line.DrawLine(start, end, xeno.Comp.Delay, xeno.Comp.Range, out var blocker);
-        var active = EnsureComp<ActiveAcidSprayingComponent>(xeno);
-        active.Blocker = blocker;
-        active.Acid = xeno.Comp.Acid;
-        active.Spawn = tiles;
-        Dirty(xeno, active);
+        CreateLine(
+            xeno,
+            xeno.Owner.ToCoordinates(),
+            GetCoordinates(args.Coordinates),
+            xeno.Comp.Delay,
+            xeno.Comp.Range,
+            xeno.Comp.Acid
+        );
     }
 
     private void OnSprayAcidedMapInit(Entity<SprayAcidedComponent> ent, ref MapInitEvent args)
@@ -162,6 +165,38 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         Dirty(target, comp);
     }
 
+    private void TryAcidVehicleWheels(EntityUid splatter)
+    {
+        if (!TryComp(splatter, out DamageOnCollideComponent? onCollide))
+            return;
+
+        var damage = _onCollide.GetCollideDamage((splatter, onCollide)).GetTotal().Float();
+        if (damage <= 0f)
+            return;
+
+        var splatterMap = _transform.GetMapId(splatter);
+        var splatterAabb = _lookup.GetWorldAABB(splatter);
+        var vehicles = new HashSet<Entity<VehicleWheelSlotsComponent>>();
+        _lookup.GetEntitiesIntersecting(splatterMap, splatterAabb, vehicles);
+        foreach (var vehicle in vehicles)
+        {
+            _vehicleWheels.DamageWheels(vehicle, damage);
+        }
+    }
+
+    public void CreateLine(EntityUid user, EntityCoordinates start, EntityCoordinates end, TimeSpan delay, float range, EntProtoId acid, bool ignoreBlocker = true)
+    {
+        var tiles = _line.DrawLine(start, end, delay, range, out var blocker);
+        if (!ignoreBlocker && blocker != null)
+            return;
+
+        var active = EnsureComp<ActiveAcidSprayingComponent>(user);
+        active.Blocker = blocker;
+        active.Acid = acid;
+        active.Spawn = tiles;
+        Dirty(user, active);
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -183,6 +218,8 @@ public sealed class XenoSprayAcidSystem : EntitySystem
                 _hive.SetSameHive(uid, spawned);
                 splatter.Xeno = uid;
                 Dirty(spawned, splatter);
+
+                TryAcidVehicleWheels(spawned);
 
                 if (_xenoSprayAcidQuery.TryComp(uid, out var xenoSprayAcid))
                 {

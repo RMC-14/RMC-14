@@ -4,6 +4,11 @@
   name: royal marine headset
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets.
   components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: RCMTeamLead
+    trackerModes:
+    - RCMTeamLead
+    - RCMLieutenant
   - type: Sprite
     state: vai_headset
   - type: ContainerFill
@@ -16,38 +21,72 @@
   - type: GrantTacMapAlert
 
 - type: entity
-  parent: RMCHeadsetIconsTSE
+  parent: RMCHeadsetRoyalMarine
   id: RMCHeadsetRoyalMarineLeader
   name: royal marine leader's headset
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. 
   components:
-  - type: Sprite
-    state: vai_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyRoyalMarine
+      - RMCEncryptionKeyRoyalMarineCommand
   - type: RMCHeadset
-    channels:
-    - RoyalMarine
     radioTextIncrease: 2
   - type: GrantTacMapAlert
 
 - type: entity
-  parent: RMCHeadsetIconsTSE
+  parent: RMCHeadsetRoyalMarine
   id: RMCHeadsetRoyalMarineOfficer
   name: royal marine officer's headset
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
   components:
-  - type: Sprite
-    state: vai_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyRoyalMarine
+      - RMCEncryptionKeyRoyalMarineCommand
   - type: RMCHeadset
-    channels:
-    - RoyalMarine
+    radioTextIncrease: 3
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetRoyalMarine
+  id: RMCHeadsetRoyalMarinePVE
+  name: royal marine's headset
+  suffix: PVE
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. 
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyRoyalMarinePVE
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
+  - type: GrantSquadLeaderTracker
+    defaultMode: RCMPVETroopCommander
+    trackerModes:
+    - RCMPVESectionLead
+    - RCMPVETroopSergeant
+    - RCMPVETeamLead
+    - RCMPVETroopCommander
+    - PrimaryLandingZone
+  - type: RemoveComponents
+    components:
+    - type: RMCHeadset
+  - type: GrantTacMapAlert
+  - type: GrantAreaInfo
+
+- type: entity
+  parent: RMCHeadsetRoyalMarinePVE
+  id: RMCHeadsetRoyalMarineLeaderPVE
+  name: royal marine leader's headset
+  suffix: PVE
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyRoyalMarineCommandPVE
+  - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantTacMapAlert
 
@@ -58,9 +97,43 @@
   components:
   - type: EncryptionKey
     channels:
-    - MarineCommand
     - MarineCommon
     - RoyalMarine
     defaultChannel: RoyalMarine
   - type: Sprite
     state: sl_key
+
+- type: entity
+  parent: RMCEncryptionKeyRoyalMarine
+  id: RMCEncryptionKeyRoyalMarineCommand
+  name: royal marine command radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - RoyalMarine
+    - MarineCommand
+    
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyRoyalMarinePVE
+  name: royal marine radio encryption key
+  suffix: PVE
+  components:
+  - type: EncryptionKey
+    channels:
+    - RoyalMarine
+    defaultChannel: RoyalMarine
+  - type: Sprite
+    state: sl_key
+
+- type: entity
+  parent: RMCEncryptionKeyRoyalMarinePVE
+  id: RMCEncryptionKeyRoyalMarineCommandPVE
+  name: royal marine command radio encryption key
+  suffix: PVE
+  components:
+  - type: EncryptionKey
+    channels:
+    - RoyalMarine
+    - MarineCommand

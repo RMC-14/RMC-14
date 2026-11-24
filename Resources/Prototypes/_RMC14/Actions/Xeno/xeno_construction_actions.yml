@@ -19,6 +19,9 @@
     useDelay: 1
   - type: InstantAction
     event: !type:XenoPlantWeedsActionEvent
+  - type: SwappableAction
+    swappedActionProto: ActionXenoExpandWeeds
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoChooseStructure
@@ -66,7 +69,6 @@
     checkStructureSelected: true
     checkWeeds: true
     canUpgrade: true
-  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -98,7 +100,6 @@
     checkStructureSelected: true
     checkWeeds: true
     canUpgrade: false
-  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoOrderConstruction
@@ -113,7 +114,6 @@
       state: morph_resin
   - type: InstantAction
     event: !type:XenoOrderConstructionActionEvent
-  - type: RMCDazeableAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -164,6 +164,7 @@
   - type: InstantAction
     event: !type:XenoFruitChooseActionEvent
   - type: XenoFruitChooseAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoFruitPlant
@@ -179,6 +180,7 @@
     useDelay: 5
   - type: InstantAction
     event: !type:XenoFruitPlantActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoPlantWeedsHardy
@@ -196,6 +198,7 @@
     event: !type:XenoPlantWeedsActionEvent
       plasmaCost: 125
       prototype: XenoHardyWeedsSource
+  - type: RMCDazeableAction
 
 # For healer drone
 - type: entity
@@ -220,8 +223,14 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: build_tunnel
     useDelay: 300
-  - type: InstantAction
+  - type: TargetAction
+    range: 16
+    deselectOnMiss: true
+    checkCanAccess: false
+  - type: WorldTargetAction
     event: !type:XenoDigTunnelActionEvent
+  - type: RMCDazeableAction
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -261,7 +270,36 @@
       state: plant_weeds
     useDelay: 0.5
   - type: TargetAction
+    checkCanAccess: false
+    range: -1
+    deselectOnMiss: false
+    repeat: true
   - type: WorldTargetAction
     event: !type:XenoExpandWeedsActionEvent
-  - type: XenoActionPlasma
-    cost: 50
+
+- type: entity
+  id: ActionXenoDesignerSelectedDesign
+  parent: ActionXenoBase
+  name: Selected Design
+  description: Toggle whether newly placed design nodes are wall or door nodes.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon: { sprite: _RMC14/Actions/designer_actions.rsi, state: design_mark_wall }
+    iconOn: { sprite: _RMC14/Actions/designer_actions.rsi, state: design_mark_door }
+    useDelay: 0.2
+  - type: InstantAction
+    event: !type:DesignerSelectedDesignToggleActionEvent
+
+- type: entity
+  id: ActionXenoDesignerGreaterResinSurge
+  parent: ActionXenoBase
+  name: Greater Resin Surge (250)
+  description: Consumes nearby design nodes to create temporary reflective resin walls.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon: { sprite: _RMC14/Actions/designer_actions.rsi, state: greater_resin_surge }
+    useDelay: 30
+  - type: InstantAction
+    event: !type:DesignerGreaterResinSurgeActionEvent

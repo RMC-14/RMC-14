@@ -1,0 +1,743 @@
+- type: entity
+  abstract: true
+  parent: CMBaseWallInvincible
+  id: RMCBaseSPPSOFDropshipWallAlt
+  name: SPP-DS-3 'Volk' wall
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/spp_sof_alt.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Dropships/spp_sof_alt.rsi
+  - type: Clickable
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt1
+  components:
+  - type: Sprite
+    state: 1
+  - type: Icon
+    state: 1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt2
+  components:
+  - type: Sprite
+    state: 2
+  - type: Icon
+    state: 2
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt3
+  components:
+  - type: Sprite
+    state: 3
+  - type: Icon
+    state: 3
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt4
+  components:
+  - type: Sprite
+    state: 4
+  - type: Icon
+    state: 4
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt5
+  components:
+  - type: Sprite
+    state: 5
+  - type: Icon
+    state: 5
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt6
+  components:
+  - type: Sprite
+    state: 6
+  - type: Icon
+    state: 6
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt7
+  components:
+  - type: Sprite
+    state: 7
+  - type: Icon
+    state: 7
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt8
+  components:
+  - type: Sprite
+    state: 8
+  - type: Icon
+    state: 8
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt9
+  components:
+  - type: Sprite
+    state: 9
+  - type: Icon
+    state: 9
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt10
+  components:
+  - type: Sprite
+    state: 10
+  - type: Icon
+    state: 10
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt11
+  components:
+  - type: Sprite
+    state: 11
+  - type: Icon
+    state: 11
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt12
+  components:
+  - type: Sprite
+    state: 12
+  - type: Icon
+    state: 12
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt13
+  components:
+  - type: Sprite
+    state: 13
+  - type: Icon
+    state: 13
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt14
+  components:
+  - type: Sprite
+    state: 14
+  - type: Icon
+    state: 14
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt15
+  components:
+  - type: Sprite
+    state: 15
+  - type: Icon
+    state: 15
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt16
+  components:
+  - type: Sprite
+    state: 16
+  - type: Icon
+    state: 16
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt17
+  components:
+  - type: Sprite
+    state: 17
+  - type: Icon
+    state: 17
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt18
+  components:
+  - type: Sprite
+    state: 18
+  - type: Icon
+    state: 18
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt19
+  components:
+  - type: Sprite
+    state: 19
+  - type: Icon
+    state: 19
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt20
+  components:
+  - type: Sprite
+    state: 20
+  - type: Icon
+    state: 20
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt21
+  components:
+  - type: Sprite
+    state: 21
+  - type: Icon
+    state: 21
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt22
+  components:
+  - type: Sprite
+    state: 22
+  - type: Icon
+    state: 22
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt23
+  components:
+  - type: Sprite
+    state: 23
+  - type: Icon
+    state: 23
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt24
+  components:
+  - type: Sprite
+    state: 24
+  - type: Icon
+    state: 24
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt25
+  components:
+  - type: Sprite
+    state: 25
+  - type: Icon
+    state: 25
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt26
+  components:
+  - type: Sprite
+    state: 26
+  - type: Icon
+    state: 26
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt27
+  components:
+  - type: Sprite
+    state: 27
+  - type: Icon
+    state: 27
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt28
+  components:
+  - type: Sprite
+    state: 28
+  - type: Icon
+    state: 28
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt29
+  components:
+  - type: Sprite
+    state: 29
+  - type: Icon
+    state: 29
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt30
+  components:
+  - type: Sprite
+    state: 30
+  - type: Icon
+    state: 30
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt31
+  components:
+  - type: Sprite
+    state: 31
+  - type: Icon
+    state: 31
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt32
+  components:
+  - type: Sprite
+    state: 32
+  - type: Icon
+    state: 32
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt33
+  components:
+  - type: Sprite
+    state: 33
+  - type: Icon
+    state: 33
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt34
+  components:
+  - type: Sprite
+    state: 34
+  - type: Icon
+    state: 34
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt35
+  components:
+  - type: Sprite
+    state: 35
+  - type: Icon
+    state: 35
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt36
+  components:
+  - type: Sprite
+    state: 36
+  - type: Icon
+    state: 36
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt37
+  components:
+  - type: Sprite
+    state: 37
+  - type: Icon
+    state: 37
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt38
+  components:
+  - type: Sprite
+    state: 38
+  - type: Icon
+    state: 38
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt39
+  components:
+  - type: Sprite
+    state: 39
+  - type: Icon
+    state: 39
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt40
+  components:
+  - type: Sprite
+    state: 40
+  - type: Icon
+    state: 40
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt41
+  components:
+  - type: Sprite
+    state: 41
+  - type: Icon
+    state: 41
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt42
+  components:
+  - type: Sprite
+    state: 42
+  - type: Icon
+    state: 42
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt43
+  components:
+  - type: Sprite
+    state: 43
+  - type: Icon
+    state: 43
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt44
+  components:
+  - type: Sprite
+    state: 44
+  - type: Icon
+    state: 44
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt45
+  components:
+  - type: Sprite
+    state: 45
+  - type: Icon
+    state: 45
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt46
+  components:
+  - type: Sprite
+    state: 46
+  - type: Icon
+    state: 46
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt47
+  components:
+  - type: Sprite
+    state: 47
+  - type: Icon
+    state: 47
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt48
+  components:
+  - type: Sprite
+    state: 48
+  - type: Icon
+    state: 48
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt49
+  components:
+  - type: Sprite
+    state: 49
+  - type: Icon
+    state: 49
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt50
+  components:
+  - type: Sprite
+    state: 50
+  - type: Icon
+    state: 50
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt51
+  components:
+  - type: Sprite
+    state: 51
+  - type: Icon
+    state: 51
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt52
+  components:
+  - type: Sprite
+    state: 52
+  - type: Icon
+    state: 52
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt53
+  components:
+  - type: Sprite
+    state: 53
+  - type: Icon
+    state: 53
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt54
+  components:
+  - type: Sprite
+    state: 54
+  - type: Icon
+    state: 54
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt55
+  components:
+  - type: Sprite
+    state: 55
+  - type: Icon
+    state: 55
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt56
+  components:
+  - type: Sprite
+    state: 56
+  - type: Icon
+    state: 56
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt57
+  components:
+  - type: Sprite
+    state: 57
+  - type: Icon
+    state: 57
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt58
+  components:
+  - type: Sprite
+    state: 58
+  - type: Icon
+    state: 58
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt59
+  components:
+  - type: Sprite
+    state: 59
+  - type: Icon
+    state: 59
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt60
+  components:
+  - type: Sprite
+    state: 60
+  - type: Icon
+    state: 60
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt61
+  components:
+  - type: Sprite
+    state: 61
+  - type: Icon
+    state: 61
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt62
+  components:
+  - type: Sprite
+    state: 62
+  - type: Icon
+    state: 62
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt63
+  components:
+  - type: Sprite
+    state: 63
+  - type: Icon
+    state: 63
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt64
+  components:
+  - type: Sprite
+    state: 64
+  - type: Icon
+    state: 64
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt65
+  components:
+  - type: Sprite
+    state: 65
+  - type: Icon
+    state: 65
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt66
+  components:
+  - type: Sprite
+    state: 66
+  - type: Icon
+    state: 66
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt67
+  components:
+  - type: Sprite
+    state: 67
+  - type: Icon
+    state: 67
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt68
+  components:
+  - type: Sprite
+    state: 68
+  - type: Icon
+    state: 68
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt69
+  components:
+  - type: Sprite
+    state: 69
+  - type: Icon
+    state: 69
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt70
+  components:
+  - type: Sprite
+    state: 70
+  - type: Icon
+    state: 70
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt71
+  components:
+  - type: Sprite
+    state: 71
+  - type: Icon
+    state: 71
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt72
+  components:
+  - type: Sprite
+    state: 72
+  - type: Icon
+    state: 72
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt73
+  components:
+  - type: Sprite
+    state: 73
+  - type: Icon
+    state: 73
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt74
+  components:
+  - type: Sprite
+    state: 74
+  - type: Icon
+    state: 74
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt75
+  components:
+  - type: Sprite
+    state: 75
+  - type: Icon
+    state: 75
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt76
+  components:
+  - type: Sprite
+    state: 76
+  - type: Icon
+    state: 76
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt77
+  components:
+  - type: Sprite
+    state: 77
+  - type: Icon
+    state: 77
+
+- type: entity
+  parent: RMCBaseSPPSOFDropshipWallAlt
+  id: RMCSPPSOFDropshipWallAlt78
+  components:
+  - type: Sprite
+    state: 78
+  - type: Icon
+    state: 78

@@ -1,0 +1,20 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/storage/kits.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "medical_upgrade_kit_base"
+    },
+    {
+      "name": "medical_upgrade_kit_open"
+    },
+    {
+      "name": "medical_upgrade_kit_closed"
+    }
+  ]
+}

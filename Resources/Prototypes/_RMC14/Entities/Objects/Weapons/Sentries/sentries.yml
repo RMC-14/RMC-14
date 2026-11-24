@@ -5,6 +5,15 @@
   name: turret
   components:
   - type: Sentry
+  - type: Eye
+  - type: DeviceNetwork
+  - type: DeviceLinkSink
+    ports: [ SentryControl ]
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -53,6 +62,8 @@
     curve: !type:BoolCurve
   - !type:CanFaceCon
     curve: !type:BoolCurve
+  - !type:TargetNotBurrowedCon
+    curve: !type:BoolCurve
 
 - type: entity
   parent: BaseItem
@@ -60,17 +71,31 @@
   name: engineering upgrade kit
   description: A kit used to upgrade the defenses of an engineer's sentry. Back in 1980 when the machines tried to break free, it was a single android who laid them low. Now their technology is used widely on the rim.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: Sprite
     sprite: _RMC14/Objects/engineering_kit.rsi
     state: icon
   - type: SentryUpgradeItem
 
 - type: entity
+  abstract: true
   parent: RMCBaseSentry
-  id: RMCSentry
+  id: RMCSentryConstruct
   name: UN 571-C sentry gun
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
+  - type: SentryTargeting
+    friendlyFactions:
+    - UNMC
+    originalFaction: UNMC
+    targetedFactions:
+    - RMCXeno
+    - CLF
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     state: normal_uac_sentry_handheld
@@ -78,7 +103,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: XenoCrusherChargable
     setDamage:
       types:
@@ -86,6 +112,21 @@
   - type: Tag
     tags:
     - RMCSentry
+  - type: PointLight
+
+- type: entity
+  parent: [RMCSentryConstruct, BaseItem]
+  id: RMCSentry
+  components:
+  - type: Item
+    size: Normal
+  - type: RMCDeployableEquipment
+    placementRestrictions:
+    - radius: 0
+      blacklist:
+        components:
+        - WeaponMount
+        - RMCDeployableEquipment
 
 - type: Tag
   id: RMCSentry
@@ -152,9 +193,10 @@
         - BulletImpassable
         hard: false
   - type: Sentry
+    upgrades: null
+  - type: RMCDeployableEquipment
     deployDelay: 0.75
     undeployDelay: 0.75
-    upgrades: null
 
 - type: entity
   parent: RMCSentryMini
@@ -162,11 +204,16 @@
   name: We-Ya 512-M mini sentry
   description: A compact version of the UNMC defenses. Designed for quick deployment of the associated type in the field. This one has been modified for use by the mercenaries employed by Weston-Yamada.
   components:
+  - type: SentryTargeting
+    friendlyFactions:
+    - WeYa
+    originalFaction: WeYa
   - type: NpcFactionMember
     factions:
     - WeYa
   - type: UserIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: Tag
     tags:
     - RMCSentryWeYa
@@ -177,11 +224,16 @@
   name: SPP SDS-R8 light sentry
   description: A compact version of the SPP defense sentry SDS-R7. Designed for deployment in the field.
   components:
+  - type: SentryTargeting
+    friendlyFactions:
+    - SPP
+    originalFaction: SPP
   - type: NpcFactionMember
     factions:
     - SPP
   - type: UserIFF
-    faction: FactionSPP
+    factions:
+    - FactionSPP
 
 - type: entity
   parent: RMCSentry
@@ -237,11 +289,17 @@
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
-    deployDelay: 2
     upgrades: null
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sniper-sentry
+    whitelist:
+      components:
+      - Xeno
+  - type: RMCDeployableEquipment
+    deployDelay: 2
 
 - type: entity
   parent: RMCSentry
@@ -345,13 +403,19 @@
       AggroVisionRadius: !type:Single
         4.0
   - type: Sentry
-    undeployDelay: 1.5
     upgrades: null
     startingMagazine: RMCMagazineSentryShotgun
     magazineTag: RMCMagazineSentryShotgun
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 2
     accuracyMultiplierUnwielded: 2
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-shotgun-sentry
+    whitelist:
+      components:
+      - Xeno
+  - type: RMCDeployableEquipment
+    undeployDelay: 1.5
 
 - type: entity
   parent: RMCBaseTurret
@@ -385,13 +449,13 @@
     deviation: 75
   - type: ProjectileDamageReceived
     multiplier: 0.1
+
 - type: entity
   parent: RMCSentry
   id: RMCSentryMiniFire
   name: UN 45-FM mini sentry
   description: The Mini Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UN 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
   components:
-  - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     drawdepth: Mobs
@@ -446,20 +510,24 @@
         - BulletImpassable
         hard: false
   - type: Sentry
-    homingShots: false
-    deployDelay: 0.75
-    undeployDelay: 0.75
     upgrades: null
     startingMagazine: RMCMagazineSentryFire
     magazineTag: RMCMagazineSentryFire
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-fire-sentry
+    whitelist:
+      components:
+      - Xeno
+  - type: RMCDeployableEquipment
+    deployDelay: 0.75
+    undeployDelay: 0.75
 
 - type: entity
-  parent: RMCBaseSentry
+  parent: RMCSentry
   id: RMCSentryFire
   name: UN 55-FA assault sentry flamer
-  description: The Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
+  description: The Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UN 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
   components:
-  - type: RMCFireProjectile
   - type: Gun
     fireRate: .33
     projectileSpeed: 20.0
@@ -481,20 +549,24 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: Sentry
-    homingShots: false
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
     startingMagazine: RMCMagazineSentryFireBlue
     magazineTag: RMCMagazineSentryFireBlue
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-fire-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSentry
   id: RMCSentrySniperFire
   name: UN 60-FP plasma sentry
-  description: The Plasma Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the phosphorus that lingers doesn't.
+  description: The Plasma Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UN 571-C Sentry gun, this sentry has IFF but the phosphorus that lingers doesn't.
   components:
-  - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     drawdepth: Mobs
@@ -542,11 +614,36 @@
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
-    homingShots: false
-    deployDelay: 2
     upgrades: null
     startingMagazine: RMCMagazineSentryFireSmoke
     magazineTag: RMCMagazineSentryFireSmoke
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-fire-sentry
+    whitelist:
+      components:
+      - Xeno
+  - type: RMCDeployableEquipment
+    deployDelay: 2
+
+- type: entity
+  parent: RMCTurretGaussDumb
+  id: RMCTurretGaussModifiedCLF
+  name: modified UN-577 gauss turret
+  description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a high-capacity drum magazine. This one's IFF system has been fried via acid damage, and it will open fire on any targets within range.
+  components:
+  - type: Gun
+    fireRate: 2.5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCCartridgeSentry
+    capacity: 500
+  - type: NpcFactionMember
+    factions:
+    - CLF
+  - type: UserIFF
+    factions:
+    - FactionCLF
+    - FactionSurvivor

@@ -35,7 +35,7 @@
           radius: 1.5
         hard: false
         layer:
-        - SmallMobLayer
+        - Opaque
         mask:
         - MobLayer
   - type: CollisionWake
@@ -88,6 +88,7 @@
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
+    ignoreWeightless: true
   - type: RMCNightVisionVisible
     priority: -1
   - type: Corrodible
@@ -95,3 +96,4 @@
   - type: XenoConstruct
   - type: RequireProjectileTarget
   - type: DeletedByWeedKiller
+  - type: XenoChargeDontHit

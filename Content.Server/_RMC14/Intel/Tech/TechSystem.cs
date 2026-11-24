@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.GameTicking.Events;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Humanoid.Components;
 using Content.Server.Spawners.Components;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Server.GameObjects;
@@ -17,13 +19,13 @@ public sealed class ServerTechSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
-    private static readonly EntProtoId CombatTechProto = "RMCRandomHumanoidFoxtrotCombatTech";
-    private static readonly EntProtoId FireteamLeaderProto = "RMCRandomHumanoidFoxtrotFireteamLeader";
-    private static readonly EntProtoId HospitalCorpsmanProto = "RMCRandomHumanoidFoxtrotHospitalCorpsman";
-    private static readonly EntProtoId RiflemanProto = "RMCRandomHumanoidFoxtrotRifleman";
-    private static readonly EntProtoId SmartGunOperatorProto = "RMCRandomHumanoidFoxtrotSmartGunOperator";
-    private static readonly EntProtoId SquadLeaderProto = "RMCRandomHumanoidFoxtrotSquadLeader";
-    private static readonly EntProtoId WeaponsSpecialistProto = "RMCRandomHumanoidFoxtrotWeaponsSpecialist";
+    private static readonly EntProtoId CombatTechProto = "RMCNewGhostFoxtrotCombatTech";
+    private static readonly EntProtoId FireteamLeaderProto = "RMCNewGhostFoxtrotFireteamLeader";
+    private static readonly EntProtoId HospitalCorpsmanProto = "RMCNewGhostFoxtrotHospitalCorpsman";
+    private static readonly EntProtoId RiflemanProto = "RMCNewGhostFoxtrotRifleman";
+    private static readonly EntProtoId SmartGunOperatorProto = "RMCNewGhostFoxtrotSmartGunOperator";
+    private static readonly EntProtoId SquadLeaderProto = "RMCNewGhostFoxtrotSquadLeader";
+    private static readonly EntProtoId WeaponsSpecialistProto = "RMCNewGhostFoxtrotWeaponsSpecialist";
 
     private bool _cryoMarinesPurchased = false;
 
@@ -33,6 +35,7 @@ public sealed class ServerTechSystem : EntitySystem
         SubscribeLocalEvent<TechCryoMarinesEvent>(OnTechCryoMarines);
         SubscribeLocalEvent<TechCryoSpecEvent>(OnTechCryoSpec);
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
+        SubscribeLocalEvent<RespawnOnCryoComponent, EnteredCryostorageEvent>(OnEnteredCryostorageEvent);
     }
 
     private void OnRoundStart(RoundStartingEvent ev)
@@ -42,7 +45,6 @@ public sealed class ServerTechSystem : EntitySystem
 
     private void OnTechCryoMarines(TechCryoMarinesEvent ev)
     {
-        // TODO RMC14 this should spawn you as your character but with random name
         SpawnCryo(_cryoMarinesPurchased ? FireteamLeaderProto : SquadLeaderProto, 1);
         SpawnCryo(CombatTechProto, 1);
         SpawnCryo(HospitalCorpsmanProto, 1);
@@ -56,17 +58,39 @@ public sealed class ServerTechSystem : EntitySystem
         SpawnCryo(WeaponsSpecialistProto, 1);
     }
 
-    private void SpawnCryo(EntProtoId spawnerId, uint amount)
+    private bool GetGhostDirectly(EntityPrototype spawner, [NotNullWhen(true)] out GhostRoleComponent? ghost)
     {
-        if (!_proto.TryIndex(spawnerId, out var spawner) ||
-            !spawner.TryGetComponent<RandomHumanoidSpawnerComponent>(out var human, _componentFactory) ||
+        ghost = default;
+
+        if (!spawner.TryGetComponent(out ghost, _componentFactory))
+            return false;
+
+        return true;
+    }
+
+    private bool GetGhostViaHumonoid(EntityPrototype spawner, [NotNullWhen(true)] out GhostRoleComponent? ghost)
+    {
+        ghost = default;
+
+        if (!spawner.TryGetComponent<RandomHumanoidSpawnerComponent>(out var human, _componentFactory) ||
             human.SettingsPrototypeId is null ||
             !_proto.TryIndex<RandomHumanoidSettingsPrototype>(human.SettingsPrototypeId, out var settings) ||
             settings.Components is null ||
             !settings.Components.TryGetComponent("GhostRole", out var ghostI))
+            return false;
+
+        ghost = (GhostRoleComponent)ghostI;
+        return true;
+    }
+
+    private void SpawnCryo(EntProtoId spawnerId, uint amount)
+    {
+        if (!_proto.TryIndex(spawnerId, out var spawner))
             return;
 
-        var ghost = (GhostRoleComponent)ghostI;
+        if (!GetGhostDirectly(spawner, out var ghost) &&
+            !GetGhostViaHumonoid(spawner, out ghost))
+            return;
 
         var spawners = AllEntityQuery<SpawnPointComponent>();
         List<EntityUid> valid = [];
@@ -82,5 +106,10 @@ public sealed class ServerTechSystem : EntitySystem
             var choice = _random.Pick(valid);
             Spawn(spawnerId, _transform.GetMapCoordinates(choice));
         }
+    }
+
+    private void OnEnteredCryostorageEvent(Entity<RespawnOnCryoComponent> ent, ref EnteredCryostorageEvent args)
+    {
+        SpawnCryo(ent.Comp.Spawner, 1);
     }
 }

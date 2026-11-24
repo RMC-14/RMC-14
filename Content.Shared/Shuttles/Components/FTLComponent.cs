@@ -30,7 +30,7 @@ public sealed partial class FTLComponent : Component
     public float TravelTime = 0f;
 
     [DataField]
-    public EntProtoId? VisualizerProto = "FtlVisualizerEntity";
+    public EntProtoId? VisualizerProto; // = "FtlVisualizerEntity" RMC14 no ftl visualizer;
 
     [DataField, AutoNetworkedField]
     public EntityUid? VisualizerEntity;
@@ -51,9 +51,9 @@ public sealed partial class FTLComponent : Component
     public ProtoId<TagPrototype>? PriorityTag;
 
     [ViewVariables(VVAccess.ReadWrite), DataField("soundTravel")]
-    public SoundSpecifier? TravelSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/hyperspace_progress.ogg")
+    public SoundSpecifier? TravelSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/dropship_travel.ogg") // RMC14 "/Audio/Effects/Shuttle/hyperspace_progress.ogg" -> dropship_travel.ogg
     {
-        Params = AudioParams.Default.WithVolume(-3f).WithLoop(true)
+        Params = AudioParams.Default.WithVolume(6f).WithLoop(true) // RMC14 -3f -> 6f
     };
 
     [DataField]

@@ -28,10 +28,12 @@ tiles-cm-dirt = dirt tile
 tiles-cm-desert = desert tile
 tiles-cm-sand = sand tile
 tiles-cm-grass = grass tile
+tiles-cm-grass-weedable = weedable grass tile
 tiles-cm-dirt-grass = dirt grass tile
 tiles-cm-rock = rock tile
 tiles-rmc-red-desert = red desert tile
-tiles-rmc-desert-water-shore = shore
+tiles-rmc-planet-auto-sand = sand tile
+tiles-rmc-desert-water-shore = shore tile
 tiles-rmc-coagulation = coagulation
 
 tiles-rmc-asphalt = asphalt tile

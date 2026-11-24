@@ -34,6 +34,12 @@ cm-chatsan-replacement-admins-marine = high command
 cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
 
+cm-chatsan-word-xx121-marine = xx121
+cm-chatsan-replacement-xx121-marine = xenonids
+
+cm-chatsan-word-xx-121-marine = xx-121
+cm-chatsan-replacement-xx-121-marine = xenonids
+
 cm-chatsan-word-xenoid = xenoid
 cm-chatsan-replacement-xenoid = xenonid
 
@@ -52,11 +58,16 @@ cm-chatsan-replacement-eorg-xeno = sister harm
 cm-chatsan-word-sniper = sniper
 cm-chatsan-replacement-sniper = long spitter
 
+cm-chatsan-replacement-xm43e1 = special heavy long spitter
+cm-chatsan-replacement-m96s = special long spitter
+
 cm-chatsan-word-flare = flare
 cm-chatsan-replacement-flare = glow stick
 
 cm-chatsan-word-flares = flares
 cm-chatsan-replacement-flares = glow sticks
+
+cm-chatsan-replacement-flare-cas = green stick
 
 cm-chatsan-word-synth = synth
 cm-chatsan-replacement-synth = fake host
@@ -175,6 +186,10 @@ cm-chatsan-replacement-orbital-bomb = skyfire
 cm-chatsan-word-orbital-bombardment = orbital bombardment
 cm-chatsan-replacement-orbital-bombardment = skyfire
 
+cm-chatsan-replacement-orbital-cannon = skyfire launcher
+cm-chatsan-replacement-orbital-cannon-shell = skyfire stick
+cm-chatsan-replacement-orbital-cannon-fuel = skyfire plasma
+
 cm-chatsan-word-engie = engie
 cm-chatsan-replacement-engie = tall builder
 
@@ -283,11 +298,11 @@ cm-chatsan-replacement-felinid = feline host
 cm-chatsan-word-felinids = felinids
 cm-chatsan-replacement-felinids = feline hosts
 
-cm-chatsan-word-cat = cat
-cm-chatsan-replacement-cat = feline host
+cm-chatsan-word-vamp = vamp
+cm-chatsan-word-replacement-vamp = vampire lurker
 
-cm-chatsan-word-cats = cats
-cm-chatsan-replacement-cats = feline hosts
+cm-chatsan-word-vamps = vamps
+cm-chatsan-word-replacement-vamps = vampire lurkers
 
 cm-chatsan-word-vulpkanin = vulpkanin
 cm-chatsan-replacement-vulpkanin = canine host
@@ -300,12 +315,6 @@ cm-chatsan-replacement-vulp = canine host
 
 cm-chatsan-word-vulps = vulps
 cm-chatsan-replacement-vulps = canine hosts
-
-cm-chatsan-word-dog = dog
-cm-chatsan-replacement-dog = canine host
-
-cm-chatsan-word-dogs = dogs
-cm-chatsan-replacement-dogs = canine hosts
 
 cm-chatsan-word-avali = avali
 cm-chatsan-replacement-avali = four-eared host
@@ -322,18 +331,6 @@ cm-chatsan-replacement-rodentias = squeaking hosts
 cm-chatsan-word-rodentiae = rodentiae
 cm-chatsan-replacement-rodentiae = squeaking hosts
 
-cm-chatsan-word-rat = rat
-cm-chatsan-replacement-rat = squeaking host
-
-cm-chatsan-word-rats = rats
-cm-chatsan-replacement-rats = squeaking hosts
-
-cm-chatsan-word-mouse = mouse
-cm-chatsan-replacement-mouse = squeaking host
-
-cm-chatsan-word-mice = mice
-cm-chatsan-replacement-mice = squeaking hosts
-
 cm-chatsan-word-feroxi = feroxi
 cm-chatsan-replacement-feroxi = aquatic host
 
@@ -346,14 +343,70 @@ cm-chatsan-replacement-shark = aquatic host
 cm-chatsan-word-sharks = sharks
 cm-chatsan-replacement-sharks = aquatic hosts
 
-cm-chatsan-word-fish = fish
-cm-chatsan-replacement-fish = aquatic host
+cm-chatsan-word-dog = dog
+cm-chatsan-replacement-dog = canine
+
+cm-chatsan-word-corgi = corgi
+cm-chatsan-word-mrwiggles = mr.wiggles
+cm-chatsan-word-mr-wiggles = mr wiggles
+cm-chatsan-word-mister-wiggles = mister wiggles
+cm-chatsan-word-puppy = puppy
+cm-chatsan-replacement-corgi = canine fuzzy
+
+cm-chatsan-word-dogs = dogs
+cm-chatsan-word-corgies = corgies
+cm-chatsan-word-puppies = puppies
+cm-chatsan-replacement-dogs = canines
+
+cm-chatsan-word-cat = cat
+cm-chatsan-word-kitty = kitty
+cm-chatsan-word-kitten = kitten
+cm-chatsan-replacement-cat = feline
+
+cm-chatsan-word-cats = cats
+cm-chatsan-word-kitties = kitties
+cm-chatsan-word-kittens = kittens
+cm-chatsan-replacement-cats = felines
+
+cm-chatsan-word-carp = carp
+cm-chatsan-replacement-fish = aquatic creature
+
+cm-chatsan-word-rat = rat
+cm-chatsan-word-mouse = mouse
+cm-chatsan-replacement-rat = squeaking creature
+
+cm-chatsan-word-rats = rats
+cm-chatsan-word-mice = mice
+cm-chatsan-replacement-rats = squeaking creature
+
+cm-chatsan-word-monkey = monkey
+cm-chatsan-word-monke = monke
+cm-chatsan-word-kobold = kobold
+cm-chatsan-word-farwa = farwa
+cm-chatsan-word-stok = stok
+cm-chatsan-word-neaera = neaera
+cm-chatsan-word-yiren = yiren
+cm-chatsan-replacement-monkey = small host
+
+cm-chatsan-word-monkeys = monkeys
+cm-chatsan-word-monkies = monkies
+cm-chatsan-word-kobolds = kobolds
+cm-chatsan-word-farwas = farwas
+cm-chatsan-word-stoks = stoks
+cm-chatsan-word-neaeras = neaeras
+cm-chatsan-word-yirens = yirens
+cm-chatsan-replacement-monkeys = small hosts
 
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
 
 cm-chatsan-word-grenades = grenades
 cm-chatsan-replacement-grenades = boomsticks
+
+cm-chatsan-replacement-training-grenade = fake boomstick
+cm-chatsan-replacement-incendiary-grenade = fire boomstick
+cm-chatsan-replacement-smoke-grenade = smoke boomstick
+cm-chatsan-replacement-wp-grenade = fire smoke boomstick
 
 cm-chatsan-word-gl = gl
 cm-chatsan-replacement-gl = boomstick launcher
@@ -373,7 +426,9 @@ cm-chatsan-replacement-ammo = spits
 # TODO RMC14 rouny > runner but only if no rouny was spawned in the round
 
 # cm-chatsan-word-#tank = #tank
-# cm-chatsan-replacement-#tank = turtle
+cm-chatsan-replacement-tank = metal beast
+
+cm-chatsan-replacement-arc = metal beetle
 
 cm-chatsan-word-laser = laser
 cm-chatsan-replacement-laser = dot
@@ -381,11 +436,21 @@ cm-chatsan-replacement-laser = dot
 cm-chatsan-word-lazer = lazer
 cm-chatsan-replacement-lazer = dot
 
+cm-chatsan-replacement-laser-cas = red dot
+cm-chatsan-replacement-laser-range = green dot
+
+cm-chatsan-replacement-binoculars = far seer
+cm-chatsan-replacement-rangefinder = green dot caller
+cm-chatsan-replacement-laser-designator = red dot caller
+cm-chatsan-replacement-laser-designator-special = special red dot caller
+
 cm-chatsan-word-flamer = flamer
 cm-chatsan-replacement-flamer = fire spitter
 
 cm-chatsan-word-flamethrower = flamethrower
 cm-chatsan-replacement-flamethrower = fire spitter
+
+cm-chatsan-replacement-m34t = special fire spitter
 
 cm-chatsan-word-sadar = sadar
 cm-chatsan-replacement-sadar = tuber
@@ -393,8 +458,12 @@ cm-chatsan-replacement-sadar = tuber
 cm-chatsan-word-rocket = rocket
 cm-chatsan-replacement-rocket = boom spit
 
+cm-chatsan-replacement-rocket-wp = burning boom spit
+
 cm-chatsan-word-grenadier = grenadier
 cm-chatsan-replacement-grenadier = boomstick spitter
+
+cm-chatsan-replacement-m83 = special boomstick launcher
 
 cm-chatsan-word-scout = scout spec
 cm-chatsan-replacement-scout = tall lurker
@@ -402,14 +471,22 @@ cm-chatsan-replacement-scout = tall lurker
 cm-chatsan-word-scout-specialist = scout specialist
 cm-chatsan-replacement-scout-specialist = tall lurker
 
+cm-chatsan-replacement-scout-m4spr = special spitter
+
 cm-chatsan-word-mortar = mortar
 cm-chatsan-replacement-mortar = skyboom
+
+cm-chatsan-replacement-mortar-kit = skyboom launcher
+cm-chatsan-replacement-mortar-shell = skyboom stick
 
 cm-chatsan-word-demo = demo
 cm-chatsan-replacement-demo = boom tuber
 
 cm-chatsan-word-demolitionist = demolitionist
 cm-chatsan-replacement-demolitionist = boom tuber
+
+cm-chatsan-replacement-rocket-launcher = boom tube
+cm-chatsan-replacement-m5atl = special boom tube
 
 cm-chatsan-word-ws = ws
 cm-chatsan-replacement-ws = special tall
@@ -453,6 +530,8 @@ cm-chatsan-replacement-smartgunner = smart spitter
 cm-chatsan-word-smart-gunner = smart gunner
 cm-chatsan-replacement-smart-gunner = smart spitter
 
+cm-chatsan-replacement-su6 = small smart spitter
+
 cm-chatsan-word-sentry = sentry
 cm-chatsan-word-turret = turret
 cm-chatsan-replacement-sentry = auto spitter
@@ -460,6 +539,11 @@ cm-chatsan-replacement-sentry = auto spitter
 cm-chatsan-word-sentries = sentries
 cm-chatsan-word-turrets = turrets
 cm-chatsan-replacement-sentries = auto spitters
+
+cm-chatsan-replacement-sniper-sentry = long auto spitter
+cm-chatsan-replacement-shotgun-sentry = scatter auto spitter
+cm-chatsan-replacement-fire-sentry = fire auto spitter
+cm-chatsan-replacement-tesla-sentry = zapping pillar
 
 cm-chatsan-word-squad = squad
 cm-chatsan-replacement-squad = caste
@@ -595,6 +679,11 @@ cm-chatsan-word-barricades = barricades
 cm-chatsan-word-cades = cades
 cm-chatsan-replacement-barricades = metal resin
 
+cm-chatsan-replacement-folding-barricade = metal resin door
+
+cm-chatsan-replacement-plasteel-barricade = hard metal resin
+cm-chatsan-replacement-folding-plasteel-barricade = hard metal resin door
+
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked
 
@@ -689,6 +778,11 @@ cm-chatsan-replacement-generator = light core
 cm-chatsan-word-generators = generators
 cm-chatsan-replacement-generators = light cores
 
+cm-chatsan-word-gens = gens
+cm-chatsan-word-replacement-gens = light cores
+
+cm-chatsan-replacement-wall-apc = light box
+
 cm-chatsan-word-disk = disk
 cm-chatsan-word-disc = disc
 cm-chatsan-replacement-disk = memory wheel
@@ -700,10 +794,10 @@ cm-chatsan-word-flashlights = flashlights
 cm-chatsan-replacement-flashlights = glow tubes
 
 cm-chatsan-word-window = window
-cm-chatsan-replacement-window = tall membrane
+cm-chatsan-replacement-window = glass membrane
 
 cm-chatsan-word-windows = windows
-cm-chatsan-replacement-windows = tall membranes
+cm-chatsan-replacement-windows = glass membranes
 
 cm-chatsan-word-light-bulb = light bulb
 cm-chatsan-word-lightbulb = lightbulb
@@ -786,7 +880,11 @@ cm-chatsan-word-batonged = batonged
 cm-chatsan-word-replacement-batonged = daze spitted
 
 cm-chatsan-word-xover = xover
+cm-chatsan-word-xenoover = xenover
 cm-chatsan-word-replacement-xover = over
+
+cm-chatsan-word-m2c = m2c
+cm-chatsan-word-replacement-m2c = heavy mounted spitter
 
 cm-chatsan-word-m13 = m13
 cm-chatsan-word-replacement-m13 = fast spitter
@@ -797,11 +895,18 @@ cm-chatsan-word-replacement-m63 = fast spitter
 cm-chatsan-word-p90 = p90
 cm-chatsan-word-replacement-p90 = fast spitter
 
+cm-chatsan-word-pdw90 = pdw90
+cm-chatsan-word-replacement-pdw90 = fast spitter
+
 cm-chatsan-word-m54c = m54c
 cm-chatsan-word-replacement-m54c = spitter
 
 cm-chatsan-word-m42a2 = m42a2
 cm-chatsan-word-replacement-m42a2 = scatter spitter
+
+cm-chatsan-word-replacement-xm51 = wall-melting spitter
+
+cm-chatsan-word-replacement-xm88 = clicking spitter
 
 cm-chatsan-word-m34 = m34
 cm-chatsan-word-replacement-m34 = fire spitter
@@ -833,7 +938,7 @@ cm-chatsan-word-replacement-foxtrot = brown hosts
 cm-chatsan-word-thru = thru
 cm-chatsan-replacement-thru = through
 
-cm-chatsan-word-tho = th
+cm-chatsan-word-tho = tho
 cm-chatsan-replacement-tho = though
 
 cm-chatsan-word-t1 = t1
@@ -855,6 +960,8 @@ cm-chatsan-word-evos = evos
 cm-chatsan-replacement-evos = evolutions
 
 cm-chatsan-word-tax = tax
+cm-chatsan-word-taxx = taxx
+cm-chatsan-word-taxxx = taxxx
 cm-chatsan-word-xax = xax
 cm-chatsan-replacement-tax = build
 
@@ -863,6 +970,7 @@ cm-chatsan-word-xaxes = xaxes
 cm-chatsan-replacement-taxes = building
 
 cm-chatsan-word-taxing = taxing
+cm-chatsan-word-taxxing = taxxing
 cm-chatsan-word-xaxing = xaxing
 cm-chatsan-replacement-taxing = building
 
@@ -882,3 +990,39 @@ cm-chatsan-replacement-slopcade = bad cades
 
 cm-chatsan-word-clanker = clanker
 cm-chatsan-replacement-clanker = synthetic
+
+cm-chatsan-word-rwall = rwall
+cm-chatsan-replacement-rwall = reinforced wall
+
+cm-chatsan-word-pyro = pyro
+cm-chatsan-word-replacement-pyro = flamewalker
+
+cm-chatsan-word-pyros = pyros
+cm-chatsan-word-replacement-pyros = flamewalkers
+
+cm-chatsan-word-fender = fender
+cm-chatsan-word-replacement-fender = defender
+
+cm-chatsan-word-fenders = fenders
+cm-chatsan-word-replacement-fenders = defenders
+
+cm-chatsan-word-senti = senti
+cm-chatsan-word-replacement-senti = sentinel
+
+cm-chatsan-word-sentis = sentis
+cm-chatsan-word-replacement-sentis = sentinels
+
+cm-chatsan-word-valk = valk
+cm-chatsan-word-replacement-valk = valkyrie
+
+cm-chatsan-word-valks = valks
+cm-chatsan-word-replacement-valks = valkyries
+
+cm-chatsan-word-lessy = lessy
+cm-chatsan-word-replacement-lessy = lesser
+
+cm-chatsan-word-gamba = gamba
+cm-chatsan-word-replacement-gamba = gamble
+
+cm-chatsan-word-pheros = pheros
+cm-chatsan-word-replacement-pheros = pheromones

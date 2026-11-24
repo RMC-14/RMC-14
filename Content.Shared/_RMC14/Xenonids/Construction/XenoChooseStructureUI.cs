@@ -10,6 +10,14 @@ public enum XenoChooseStructureUI : byte
 }
 
 [Serializable, NetSerializable]
+public sealed class XenoChooseStructureBuiState(bool showNodeCount, int nodeCount, int nodeMax) : BoundUserInterfaceState
+{
+    public readonly bool ShowNodeCount = showNodeCount;
+    public readonly int NodeCount = nodeCount;
+    public readonly int NodeMax = nodeMax;
+}
+
+[Serializable, NetSerializable]
 public sealed class XenoChooseStructureBuiMsg(EntProtoId structureId) : BoundUserInterfaceMessage
 {
     public readonly EntProtoId StructureId = structureId;

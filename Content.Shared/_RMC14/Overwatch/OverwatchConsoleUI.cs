@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Mobs;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
@@ -15,6 +16,16 @@ public enum OverwatchLocation
     Planet = 0,
     Ship = 1,
     Max = 1,
+}
+
+[Serializable, NetSerializable]
+public enum OverwatchDirection
+{
+    Reset = 0, // Used for resetting eye offset and zoom back to default
+    North = 1,
+    South = 2,
+    East  = 3,
+    West  = 4
 }
 
 [Serializable, NetSerializable]
@@ -111,7 +122,7 @@ public sealed class OverwatchConsoleSupplyDropSaveBuiMsg(int longitude, int lati
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsoleLocationCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+public sealed class OverwatchConsoleSupplyDropCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
 {
     public readonly int Index = index;
     public readonly string Comment = comment;
@@ -147,13 +158,42 @@ public sealed class OverwatchConsoleOrbitalCommentBuiMsg(int index, string comme
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchCameraAdjustOffsetMsg(NetEntity actor, OverwatchDirection direction) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Actor = actor;
+    public readonly OverwatchDirection Direction = direction;
+}
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUserInterfaceMessage
 {
     public readonly string Message = message;
 }
 
 [Serializable, NetSerializable]
-public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader, bool CanSupplyDrop, SpriteSpecifier.Rsi LeaderIcon);
+public sealed class OverwatchConsoleSendMessageResultBuiMsg(bool sent) : BoundUserInterfaceMessage
+{
+    public readonly bool Sent = sent;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOpenSquadObjectivesBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSetSquadObjectiveBuiMsg(SquadObjectiveType type, string objective) : BoundUserInterfaceMessage
+{
+    public readonly SquadObjectiveType Type = type;
+    public readonly string Objective = objective;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleClearSquadObjectiveBuiMsg(SquadObjectiveType type) : BoundUserInterfaceMessage
+{
+    public readonly SquadObjectiveType Type = type;
+}
+
+[Serializable, NetSerializable]
+public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader, bool CanSupplyDrop, SpriteSpecifier.Rsi LeaderIcon, Dictionary<SquadObjectiveType, string> Objectives);
 
 [Serializable, NetSerializable]
 public readonly record struct OverwatchMarine(

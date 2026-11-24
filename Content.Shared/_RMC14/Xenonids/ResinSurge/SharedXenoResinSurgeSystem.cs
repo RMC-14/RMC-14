@@ -12,11 +12,14 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Shared.Spawning;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 
@@ -49,9 +52,9 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (!target.IsValid(EntityManager))
             return;
 
-        if (_net.IsServer)
+        if (PredictedSpawnAtPosition(xeno.Comp.UnstableWallId, target) is { } wall &&
+            _net.IsServer)
         {
-            var wall = Spawn(xeno.Comp.UnstableWallId, target);
             _hive.SetSameHive(xeno.Owner, wall);
         }
     }
@@ -61,9 +64,9 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (!target.IsValid(EntityManager))
             return;
 
-        if (_net.IsServer)
+        if (PredictedSpawnAtPosition(xeno.Comp.StickyResinId, target) is { } resin &&
+            _net.IsServer)
         {
-            var resin = SpawnAtPosition(xeno.Comp.StickyResinId, target);
             _hive.SetSameHive(xeno.Owner, resin);
         }
     }
@@ -98,20 +101,20 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (args.Handled)
             return;
 
+        var target = args.Target.SnapToGrid(EntityManager, _map);
+
         // Check if target on grid
-        if (_transform.GetGrid(args.Target) is not { } gridId ||
+        if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        if (!_examine.InRangeUnOccluded(xeno.Owner, args.Target, xeno.Comp.Range))
+        if (!_examine.InRangeUnOccluded(xeno.Owner, target, xeno.Comp.Range))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-see-fail"), xeno, xeno);
             return;
         }
 
         args.Handled = true;
-
-        var target = args.Target.SnapToGrid(EntityManager, _map);
 
         // Check if user has enough plasma
         if (xeno.Comp.ResinDoafter != null || !_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))
@@ -134,18 +137,26 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 }
 
                 // If no, buff structure
-                var popupSelf = Loc.GetString("rmc-xeno-resin-surge-shield-self", ("target", entity));
-                var popupOthers = Loc.GetString("rmc-xeno-resin-surge-shield-others", ("xeno", xeno), ("target", entity));
-                _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+                var selfMessage = Loc.GetString("rmc-xeno-resin-surge-shield-self", ("target", entity));
+                _popup.PopupClient(selfMessage, xeno, xeno);
+
+                var others = Filter.PvsExcept(xeno).Recipients;
+                foreach (var other in others)
+                {
+                    if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                    var xenoName = ("xeno", Identity.Name(xeno, EntityManager, otherEnt));
+                    var otherMessage = Loc.GetString("rmc-xeno-resin-surge-shield-others", xenoName, ("target", entity));
+                    _popup.PopupEntity(otherMessage, xeno, otherEnt);
+                }
 
                 _xenoReinforce.Reinforce(entity, xeno.Comp.ReinforceAmount, xeno.Comp.ReinforceDuration);
-                if (_net.IsServer)
-                {
-                    if (HasComp<DoorComponent>(entity))
-                        SpawnAttachedTo(xeno.Comp.SurgeDoorEffect, entity.ToCoordinates());
-                    else
-                        SpawnAttachedTo(xeno.Comp.SurgeWallEffect, entity.ToCoordinates());
-                }
+
+                if (HasComp<DoorComponent>(entity))
+                    PredictedSpawnAttachedTo(xeno.Comp.SurgeDoorEffect, entity.ToCoordinates());
+                else
+                    PredictedSpawnAttachedTo(xeno.Comp.SurgeWallEffect, entity.ToCoordinates());
                 return;
             }
 
@@ -186,9 +197,19 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
 
                 if (weeds != null && _hive.FromSameHive(xeno.Owner, weedEnt))
                 {
-                    var popupSelf = Loc.GetString("rmc-xeno-resin-surge-wall-self");
-                    var popupOthers = Loc.GetString("rmc-xeno-resin-surge-wall-others", ("xeno", xeno));
-                    _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+                    var selfMessage = Loc.GetString("rmc-xeno-resin-surge-wall-self");
+                    _popup.PopupClient(selfMessage, xeno, xeno);
+
+                    var others = Filter.PvsExcept(xeno).Recipients;
+                    foreach (var other in others)
+                    {
+                        if (other.AttachedEntity is not { } otherEnt)
+                        continue;
+
+                        var xenoName = ("xeno", Identity.Name(xeno, EntityManager, otherEnt));
+                        var otherMessage = Loc.GetString("rmc-xeno-resin-surge-wall-others", xenoName);
+                        _popup.PopupEntity(otherMessage, xeno, otherEnt);
+                    }
 
                     SurgeUnstableWall(xeno, target);
                     return;
@@ -217,9 +238,19 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        var popupSelf = Loc.GetString("rmc-xeno-resin-surge-sticky-self");
-        var popupOthers = Loc.GetString("rmc-xeno-resin-surge-sticky-others", ("xeno", xeno));
-        _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+        var selfMessage = Loc.GetString("rmc-xeno-resin-surge-sticky-self");
+        _popup.PopupClient(selfMessage, xeno, xeno);
+
+        var others = Filter.PvsExcept(xeno).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+            continue;
+
+            var xenoName = ("xeno", Identity.Name(xeno, EntityManager, otherEnt));
+            var otherMessage = Loc.GetString("rmc-xeno-resin-surge-sticky-others", xenoName);
+            _popup.PopupEntity(otherMessage, xeno, otherEnt);
+        }
 
         if (_net.IsServer)
         {

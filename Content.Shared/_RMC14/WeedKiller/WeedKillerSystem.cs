@@ -5,7 +5,9 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared.Coordinates;
+using Content.Shared.Destructible;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -21,6 +23,7 @@ public sealed class WeedKillerSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
@@ -142,7 +145,10 @@ public sealed class WeedKillerSystem : EntitySystem
                 if (!_deletedByWeedKillerQuery.HasComp(anchoredId))
                     continue;
 
-                QueueDel(anchoredId);
+                if (TryComp(anchoredId, out HiveCoreComponent? _))
+                    _destructible.DestroyEntity(anchoredId);
+                else
+                    QueueDel(anchoredId);
             }
         }
     }

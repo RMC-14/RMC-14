@@ -26,6 +26,8 @@
     - FullAuto
     soundGunshot:
       collection: CMM54CShoot
+      params:
+        volume: -1
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -94,8 +96,8 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: Tag
@@ -159,8 +161,8 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
 
 - type: Tag
   id: RMCWeaponRifleM54C2

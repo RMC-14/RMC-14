@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorMilitary
   id: RMCSurvivorForeconBase
   name: rmc-job-name-forecon
   description: rmc-job-description-forecon
@@ -14,12 +14,6 @@
   greeting: rmc-job-greeting-forecon
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: FORECON Survivor (Base)
-  useLoadoutOfJob: CMSurvivor
-  medals:
-    Bronze: RMCMedalBronzeService
-    Silver: RMCMedalSilverService
-    Gold: RMCMedalGoldService
-    Platinum: RMCMedalPlatinumService
   hidden: true
 
 - type: startingGear
@@ -33,13 +27,14 @@
     ears: RMCHeadsetForecon
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCFlashlight
 
 - type: entity
   id: RMCSurvivorPresetForeconNoPrimary
   name: forecon no primary survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
@@ -49,12 +44,12 @@
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]
-    # todo walkman and casette
-    # todo deck of cards
+      - [ RMCPlayingCardDeck ]
+      - [ RMCCassettePlayer, RMCCassetteTapeCustom ] # It's supposed to be the indie cassette but I don't think we can use the sounds
     randomWeapon:
-    - [ RMCM1984BeltFilled ]
-    - [ RMCM1984BeltFilled ]
-    - [ RMCM1984BeltFilled ]
+    - [ RMCM1911BeltFilledForecon ]
+    - [ RMCM1911BeltFilledForecon ]
+    - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCMotionDetector ]
     tryEquipRandomWeapon: true
@@ -65,9 +60,11 @@
   name: forecon survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
-    primaryWeapons:
+  - type: EntityPreset
+    primaryWeapons: # 1/3 M4SPR, 2/3 M54C
     - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
+    - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
     primaryWeaponChance: 1
 
 - type: entity
@@ -76,6 +73,6 @@
   name: forecon survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomWeapon:
     - []

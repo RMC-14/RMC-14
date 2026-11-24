@@ -84,7 +84,7 @@
           - RMCAttachmentAngledGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentFlashlightGrip
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00
@@ -114,6 +114,11 @@
       state: all
   - type: RMCGunChamber
     enabled: false
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-xm51
+    whitelist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCWeaponShotgunXM51

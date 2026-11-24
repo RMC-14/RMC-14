@@ -7,6 +7,14 @@
   name: rmc-job-name-survivor-cmb-deputy
   description: cm-job-description-survivor
   ranks:
+    RMCRankCMBCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 630000 # 175 hours
+    RMCRankCMBSeniorDeputy:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
     RMCRankCMBDeputy: []
   startingGear: RMCGearSurvivorCMBDeputy
   accessGroups:
@@ -18,7 +26,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorMarshal
+      preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -36,7 +44,8 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_cmb
-  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-deputy
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity

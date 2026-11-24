@@ -12,8 +12,6 @@
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-runner
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Runner/runner.rsi
   - type: Eye
@@ -23,10 +21,21 @@
     - Alive
     - Critical
     - Dead
+  - type: FiremanCarriable
+    canThrow: true
+    carrierWhitelist:
+      components:
+      - Synth
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoRunner
     tier: 1
     hudOffset: -0.15,0.6
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
     unlockAt: 300 # 5 minutes
   - type: XenoRegen
     restHealMultiplier:  1.75
@@ -178,18 +187,6 @@
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
-      visible: false
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -209,6 +206,8 @@
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
     popup: rmc-xeno-acider-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoRunner
   - type: CMArmor
     xenoArmor: 15
   - type: MovementSpeedModifier
@@ -233,26 +232,17 @@
     autoRot: true
     color: "#22FF22"
   - type: XenoAcidSlash
-    acid:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
-      duration: 20
   - type: ForTheHive
     baseSprite: _RMC14/Mobs/Xenonids/Runner/acider_runner.rsi
     activeSprite: _RMC14/Mobs/Xenonids/Runner/acider_runner_primed.rsi
     baseDamage:
       types:
         Heat: 1
-    acid:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
   - type: XenoAciderGeneration
+  - type: AcidTrap
+    trapLevel: 3
+    cost: 75
+    spray: XenoAcidSprayTrapStrong
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.59

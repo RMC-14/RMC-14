@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Client._RMC14.Actions;
 using Content.Client.Actions;
 using Content.Client.Construction;
+using Content.Client.ContextMenu.UI;
 using Content.Client.Gameplay;
 using Content.Client.Hands;
 using Content.Client.Interaction;
@@ -13,6 +14,7 @@ using Content.Client.UserInterface.Systems.Actions.Widgets;
 using Content.Client.UserInterface.Systems.Actions.Windows;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
@@ -41,17 +43,25 @@ using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 
 namespace Content.Client.UserInterface.Systems.Actions;
 
-public sealed class ActionUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<ActionsSystem>
+// RMC14
+public sealed partial class ActionUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<ActionsSystem>
+// RMC14
 {
     [Dependency] private readonly IOverlayManager _overlays = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IInputManager _input = default!;
 
+    // RMC14
+    [Dependency] private readonly EntityMenuUIController _entityMenu = default!;
+
     [UISystemDependency] private readonly ActionsSystem? _actionsSystem = default;
     [UISystemDependency] private readonly InteractionOutlineSystem? _interactionOutline = default;
     [UISystemDependency] private readonly TargetOutlineSystem? _targetOutline = default;
     [UISystemDependency] private readonly SpriteSystem _spriteSystem = default!;
+
+    // RMC14
+    [UISystemDependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     private ActionButtonContainer? _container;
     private readonly List<EntityUid?> _actions = new();
@@ -182,7 +192,26 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             return !target.InteractOnMiss;
         }
 
-        var ev = new ActionTargetAttemptEvent(args, (user, comp), action);
+        // RMC14 start
+        // Instead of using the entity the engine says we clicked on, we use our own logic to get the target.
+        // Since the args are read-only we have to make a new one that's identical, except with the new target.
+        // HOWEVER, to prevent overriding a context menu selection, we use the original target if the input came
+        // from a context menu click.
+        var argsToUse = args;
+        if (!_entityMenu.HandlingContextMenuInput)
+        {
+            var newTarget = _rmcActions.GetActionTarget(user, action.AsNullable(), args);
+            argsToUse = new PointerInputCmdArgs(
+                args.Session,
+                args.Coordinates,
+                args.ScreenCoordinates,
+                newTarget ?? EntityUid.Invalid,
+                args.State,
+                args.OriginalMessage);
+        }
+        // RMC14 end
+
+        var ev = new ActionTargetAttemptEvent(argsToUse, (user, comp), action);
         EntityManager.EventBus.RaiseLocalEvent(action, ref ev);
         if (!ev.Handled)
         {
@@ -235,17 +264,21 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
     private void TriggerAction(int index)
     {
-        if (!_actions.TryGetValue(index, out var actionId) ||
-            _actionsSystem?.GetAction(actionId) is not {} action)
-        {
+        // RMC14
+        var activeActions = GetActiveHotbarActions();
+        if (index < 0 || index >= activeActions.Count)
             return;
-        }
+
+        if (activeActions[index] is not { } actionId ||
+            _actionsSystem?.GetAction(actionId) is not { } action)
+            return;
 
         // TODO: probably should have a clientside event raised for flexibility
-        if (EntityManager.TryGetComponent<TargetActionComponent>(action, out var target))
-            ToggleTargeting((action, action, target));
+        if (EntityManager.TryGetComponent<TargetActionComponent>(actionId, out var target))
+            ToggleTargeting((actionId, action.Comp, target));
         else
             _actionsSystem?.TriggerAction(action);
+        // RMC14
     }
 
     private void OnActionAdded(EntityUid actionId)
@@ -258,29 +291,51 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (action.Comp.Toggled && EntityManager.TryGetComponent<TargetActionComponent>(actionId, out var target))
             StartTargeting((action, action, target));
 
+        // RMC14
+        if (EntityManager.HasComponent<VehicleHardpointActionComponent>(actionId))
+        {
+            RefreshVehicleHotbarOverride(forceUpdate: true);
+            return;
+        }
+        // RMC14
+
         if (_actions.Contains(action))
             return;
 
         _actions.Add(action);
+        // RMC14
+        RefreshVehicleHotbarOverride(forceUpdate: true);
+        // RMC14
     }
 
     private void OnActionRemoved(EntityUid actionId)
     {
-        if (_container == null)
-            return;
-
         if (actionId == SelectingTargetFor)
             StopTargeting();
 
+        // RMC14
+        if (EntityManager.HasComponent<VehicleHardpointActionComponent>(actionId))
+        {
+            _vehicleActions.RemoveAll(x => x == actionId);
+            RefreshVehicleHotbarOverride(forceUpdate: true);
+            return;
+        }
+
+        _vehicleActions.RemoveAll(x => x == actionId);
+        // RMC14
+
         _actions.RemoveAll(x => x == actionId);
+        // RMC14
+        RefreshVehicleHotbarOverride(forceUpdate: true);
+        // RMC14
     }
 
     private void OnActionsUpdated()
     {
         QueueWindowUpdate();
-
-        if (_actionsSystem != null)
-            _container?.SetActionData(_actionsSystem, _actions.ToArray());
+        // RMC14
+        RefreshVehicleHotbarOverride(forceUpdate: true);
+        // RMC14
     }
 
     private void ActionButtonPressed(ButtonEventArgs args)
@@ -428,11 +483,21 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         PopulateActions(actions);
     }
 
-    private void SetAction(ActionButton button, EntityUid? actionId, bool updateSlots = true)
+    // RMC14
+    private void SetAction(
+        ActionButton button,
+        EntityUid? actionId,
+        bool updateSlots = true,
+        bool allowOverrideClear = false)
     {
         if (_actionsSystem == null)
             return;
 
+        if (_vehicleHotbarOverride && actionId == null && !allowOverrideClear)
+            return;
+
+        var actionList = GetEditableHotbarActions();
+        // RMC14
         int position;
 
         if (actionId == null)
@@ -440,28 +505,30 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             button.ClearData();
             if (_container?.TryGetButtonIndex(button, out position) ?? false)
             {
-                if (_actions.Count > position && position >= 0)
-                    _actions.RemoveAt(position);
+                if (actionList.Count > position && position >= 0)
+                    actionList.RemoveAt(position);
             }
         }
         else if (button.TryReplaceWith(actionId.Value, _actionsSystem) &&
             _container != null &&
             _container.TryGetButtonIndex(button, out position))
         {
-            if (position >= _actions.Count)
+            if (position >= actionList.Count)
             {
-                _actions.Add(actionId);
+                actionList.Add(actionId);
             }
             else
             {
-                _actions[position] = actionId;
+                actionList[position] = actionId;
             }
         }
 
         if (updateSlots)
-            _container?.SetActionData(_actionsSystem, _actions.ToArray());
+            _container?.SetActionData(_actionsSystem, GetActiveHotbarActions().ToArray());
 
-        EntityManager.SystemOrNull<RMCActionsSystem>()?.ActionsChanged(_actions);
+        if (!_vehicleHotbarOverride)
+            EntityManager.SystemOrNull<RMCActionsSystem>()?.ActionsChanged(_actions);
+        // RMC14
     }
 
     private void DragAction()
@@ -481,10 +548,10 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         }
 
         if (dragged.Parent is ActionButtonContainer)
-            SetAction(dragged, swapAction, false);
+            SetAction(dragged, swapAction, false, allowOverrideClear: true);
 
         if (_actionsSystem != null)
-            _container?.SetActionData(_actionsSystem, _actions.ToArray());
+            _container?.SetActionData(_actionsSystem, GetActiveHotbarActions().ToArray());
 
         _menuDragHelper.EndDrag();
     }
@@ -536,6 +603,14 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     {
         if (args.Function == EngineKeyFunctions.UIRightClick)
         {
+            // RMC14
+            if (_vehicleHotbarOverride)
+            {
+                args.Handle();
+                return;
+            }
+            // RMC14
+
             SetAction(button, null);
             args.Handle();
             return;
@@ -698,6 +773,12 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
     private void ClearActions()
     {
+        _actions.Clear();
+        // RMC14
+        _vehicleActions.Clear();
+        _vehicleHotbarOverride = false;
+        _vehicleOutsideView = false;
+        // RMC14
         _container?.ClearActionData();
     }
 
@@ -709,10 +790,17 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         _actions.Clear();
         foreach (var assign in assignments)
         {
+            // RMC14
+            if (EntityManager.HasComponent<VehicleHardpointActionComponent>(assign.ActionId))
+                continue;
+            // RMC14
+
             _actions.Add(assign.ActionId);
         }
 
-        _container?.SetActionData(_actionsSystem, _actions.ToArray());
+        // RMC14
+        RefreshVehicleHotbarOverride(forceUpdate: true);
+        // RMC14
     }
 
     public void RemoveActionContainer()
@@ -739,6 +827,9 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     public override void FrameUpdate(FrameEventArgs args)
     {
         _menuDragHelper.Update(args.DeltaSeconds);
+        // RMC14
+        RefreshVehicleHotbarOverride();
+        // RMC14
         if (_window is {UpdateNeeded: true})
             SearchAndDisplay();
     }
@@ -749,12 +840,19 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             return;
 
         LoadDefaultActions();
-        _container?.SetActionData(_actionsSystem, _actions.ToArray());
+        // RMC14
+        RefreshVehicleHotbarOverride(forceUpdate: true);
+        // RMC14
         QueueWindowUpdate();
     }
 
     private void OnComponentUnlinked()
     {
+        // RMC14
+        _vehicleHotbarOverride = false;
+        _vehicleOutsideView = false;
+        _vehicleActions.Clear();
+        // RMC14
         _container?.ClearActionData();
         QueueWindowUpdate();
         StopTargeting();
@@ -771,6 +869,11 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         _actions.Clear();
         foreach (var (action, _) in actions)
         {
+            // RMC14
+            if (EntityManager.HasComponent<VehicleHardpointActionComponent>(action))
+                continue;
+            // RMC14
+
             if (!_actions.Contains(action))
                 _actions.Add(action);
         }

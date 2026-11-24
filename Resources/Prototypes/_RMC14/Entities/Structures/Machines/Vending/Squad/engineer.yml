@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSCTGear
-  name: ColMarTech squad comtech gear rack
+  name: ASRS squad comtech gear rack
   description: An automated gear rack for combat technicians.
   components:
   - type: AccessReader
@@ -22,10 +22,10 @@
     - name: Handheld Defense
       choices:  { CMHandheldDefense : 1 }
       entries:
-    #    CMJIMAPlantedFlag
       - id: RMCSentry
         recommended: true
       - id: RMCTesla
+      - id: RMCPlantedFlag
       - id: RMCSentryFire
     - name: Handheld Defense Upgrade
       choices: { CMHandheldDefenseUpgrade: 1 }
@@ -69,8 +69,8 @@
         points: 18
       - id: RMCPacketGrenadeIncendiaryFilled
         points: 18
-    #- id: CMM40HPDPPhosphorusPacket3
-    #  points: 18
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
@@ -81,8 +81,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    # - id: CMM20MineBox4
-    #   points: 18
+      - id: RMCBoxClaymoreMineFilled
+        points: 18
     # - id: CMM40MFHSMetalFoamGrenade
     #   points: 5
     # - id: RMCElectroshockGrenadex3
@@ -93,10 +93,6 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -137,8 +133,8 @@
         points: 12
       - id: RMCM85A1Case
         points: 24
-    #- id: CMM56DHeavyMachineGun
-    #  points: 24
+      - id: RMCML66DCase
+        points: 24
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
@@ -152,8 +148,8 @@
         points: 15
       - id: RMCPouchFuelTank
         points: 4
-    #- id: CMSlingPouch
-    #  points: 6
+      - id: RMCPouchSling
+        points: 6
       - id: RMCPouchGeneralLarge
         points: 6
       - id: CMBeltUtilityCombat
@@ -172,6 +168,8 @@
         points: 3
       - id: RMCSynthResetKey
         points: 10
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 12
     - name: Binoculars
       entries:
       - id: RMCBinoculars
@@ -204,7 +202,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSCTEquipment
-  name: ColMarTech squad comtech equipment rack
+  name: ASRS squad comtech equipment rack
   description: An automated rack hooked up to a colossal storage of combat technician standard-issue equipment.
   components:
   - type: Sprite
@@ -263,6 +261,11 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
+      - id: RMCBeltConstruction
+        recommended: true
+      - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
+        # mandatory: true, TODO allow vendors to mark entries as mandatory
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: RMCBeltHolsterPistol
@@ -271,12 +274,7 @@
       - id: RMCBeltHolsterSMGPouch
       - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
-      - id: CMBeltUtilityFilled
-        name: M276 pattern toolbelt rig (Full)
-        # mandatory: true, TODO allow vendors to mark entries as mandatory
       - id: RMCBeltGrenade
-      - id: RMCBeltConstruction
-        recommended: true
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -307,9 +305,11 @@
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
+      - id: RMCToolWebbingSmallFilled
+        name: small tool webbing (Full)
+        recommended: true
       - id: CMWebbingBlack
       - id: CMWebbingBrown
-        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
@@ -318,8 +318,6 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
-      - id: RMCToolWebbingSmallFilled
-        name: small tool webbing (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -330,7 +328,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSCTTools
-  name: ColMarTech squad comTech tools vendor
+  name: ASRS squad comTech tools vendor
   description: A vending machine that stores various extra tools that are useful on the field.
   components:
   - type: AccessReader
@@ -344,6 +342,7 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessCombatTechPrep"
     hackable: true
@@ -379,9 +378,10 @@
         amount: 2
       - id: RMCLightReplacer
         amount: 4
-    # - name: Utility
-    #   entries:
-    #   - id: Sentry Gun Network Laptop
-    #     amount: 4
+    - name: Utility
+      entries:
+      - id: RMCSentryLaptop
+        name: sentry gun network laptop
+        amount: 4
     #   - id: Sentry Gun Network Encryption KEy
     #     amount: 4

@@ -17,7 +17,7 @@
     - CMBeltUtilityFilled
     - CMMultitool
     - RMCFlashlight
-    - FoodDonkpocket
+    - RMCFoodDonkpocket
     - CMGrenadeSmoke
     - DoorElectronics
     - CMWirecutter
@@ -100,11 +100,11 @@
     - RMCWeaponPistolHoldout: RMCMagazinePistolHoldout
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
-    - CMWeaponPistolM1984: CMMagazinePistolM1984
+    - CMWeaponPistolM1911: CMMagazinePistolM1911
     - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     - WeaponShotgunCustomBuilt: CMShellShotgunBuckshot
-    - RMCWeaponShotgunHG3712: CMShellShotgunBuckshot
+    - RMCWeaponShotgunM12: CMShellShotgunBuckshot
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
     - RMCWeaponSMGType64: RMCMagazineSMGType64
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
@@ -113,15 +113,45 @@
     - RMCWeaponRifleL42A: RMCMagazineRifleL42A
     - RMCWeaponSMGType19: RMCMagazineSMGType19
     - RMCWeaponRifleABR40: RMCMagazineRifleABR40
-    - WeaponSMGMP5: CMMagazineSMGMP5
-    - WeaponRifleM16: RMCMagazineRifleM16
+    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - RMCWeaponRifleCR16: RMCMagazineRifleCR16
     - WeaponRifleAR10: RMCMagazineRifleAR10
     - RMCWeaponRifleType71: RMCMagazineRifleType71
     - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerRandomHalyconGuns
+  id: RMCSpawnerRandomConfiscatedEquipment
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RMCConfiscatedEquipmentTable
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomConfiscatedWeaponry
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RMCConfiscatedWeaponryTable
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomHalcyonGuns
   name: random crate loot spawner
   description: This is a random crate loot spawner
   categories: [ HideSpawnMenu ]
@@ -172,6 +202,7 @@
   parent: BaseStructureDynamic
   id: RMCCrateOpenableBase
   components:
+  - type: VehicleSmashable
   - type: CrateOpenable
     spawn:
     - id: RMCPlankWood2
@@ -226,6 +257,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -248,14 +282,15 @@
 
 - type: entity
   parent: RMCCrateLarge
-  id: RMCCrateHalyconFireArms
-  name: Halycon firearm crate
+  id: RMCCrateHalcyonFireArms
+  name: Halcyon firearm crate
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate
-    spawn: RMCSpawnerRandomHalyconGuns
+    spawn: RMCSpawnerRandomHalcyonGuns
 #Todo RMC14: Make it so it does it 3 times
 
+# Black market
 - type: entity
   parent: RMCCrateLarge
   id: RMCCrateBlackmarketFireArms
@@ -269,10 +304,29 @@
   parent: RMCSecureCaseDouble #Evilass hidden GUN GAMBA CRATEEEEEEEE For CHANCESSSS CLAIMEEEEEEEEEEEEEE
   id: RMCCrateBlackmarketFireArmsHidden
   name: supply crate
+  suffix: Hidden Firearms
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate
     spawn: RMCSpawnerRandomMERCGuns
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateBlackmarketConfiscatedEquipment # TODO crate heat 10 and dollar cost 70
+  name: seized foreign equipment crate
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomConfiscatedEquipment
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateBlackmarketConfiscatedWeaponry # TODO crate heat 15 and dollar cost 45
+  name: seized foreign weaponry crate
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomConfiscatedWeaponry
+
+# Black market end
 
 - type: entity
   parent: RMCCrateLarge # TDLR (randomized spawn does not work with crateopenable spawn a object that uses Spawnonterminate for it) Part of UNMC Guns Crate
@@ -345,7 +399,7 @@
     - id: RMCSmallFloodlightUnanchored
       amount: 4
   - type: SpawnOnTerminate
-    spawn: FoodDonkpocket
+    spawn: RMCFoodDonkpocket
 
 - type: entity
   parent: RMCSecureCaseStrapped #Floodlights (funny drag stuff)
@@ -402,9 +456,9 @@
     spawn: CMPamphletPowerloader
 
 - type: entity
-  parent: RMCSecureCaseStrapped #Powerloader Fujin
+  parent: RMCSecureCaseStrapped #Powerloader LU-43
   id: RMCCratePowerLoaderGreen
-  name: Fujin Powerloader crate
+  name: Powerloader crate
   description: A crate containing one folded, but fully assembled, LU-43 Power Loader and included pamphlet for quick training.
   components:
   - type: CrateOpenable
@@ -415,10 +469,10 @@
     spawn: CMPamphletPowerloader
 
 - type: entity
-  parent: RMCSecureCaseStrapped #Powerloader Ferret
+  parent: RMCSecureCaseStrapped #Powerloader LU-52
   id: RMCCratePowerLoaderBlue
-  name: Ferret Powerloader crate
-  description: A crate containing one folded, but fully assembled, LU-52 Power Loader and included pamphlet for quick training.
+  name: powerloader crate
+  description: A crate containing one blue, folded, but fully assembled, LU-52 Power Loader and included pamphlet for quick training.
   components:
   - type: CrateOpenable
     spawn:
@@ -452,6 +506,19 @@
       amount: 1
   - type: SpawnOnTerminate
     spawn: CMSheetPlasteel30
+
+- type: entity
+  parent: RMCSecureCase # x6 Sentry M30 ammo drum
+  id: RMCSecureCaseSentryAmmo6
+  name: UN 571-C ammunition drum case (x6)
+  description: An ammunition case containing 6 M30 ammo drums.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMagazineSentry
+      amount: 6
+  - type: SpawnOnTerminate
+    spawn: RMCPlankWood2
 
 #Blackmarket will be down from there TODO RMC14: Blackmarket Crates after R4T rifle
 
@@ -493,6 +560,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -545,6 +615,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -621,6 +694,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -675,6 +751,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -697,6 +774,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -809,6 +889,7 @@
     noRot: true
   - type: InteractionOutline
   - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -831,5 +912,8 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]

@@ -9,13 +9,19 @@ public sealed class RMCLightOffsetSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCSpriteSystem _sprite = default!;
 
-    protected readonly HashSet<EntityUid> ToUpdate = new();
-
+    private readonly HashSet<EntityUid> ToUpdate = new();
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCLightOffsetComponent, ComponentStartup>(OnLightStartup);
         SubscribeLocalEvent<RMCLightOffsetComponent, MapInitEvent>(OnLightUpdate);
         SubscribeLocalEvent<RMCLightOffsetComponent, EntParentChangedMessage>(OnLightUpdate);
+    }
+
+    private void OnLightStartup(Entity<RMCLightOffsetComponent> ent, ref ComponentStartup args)
+    {
+        if (_net.IsClient)
+            OffsetLight(ent);
     }
 
     private void OnLightUpdate<T>(Entity<RMCLightOffsetComponent> ent, ref T args)
@@ -34,6 +40,11 @@ public sealed class RMCLightOffsetSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
+        OffsetLight(ent);
+    }
+
+    private void OffsetLight(Entity<RMCLightOffsetComponent> ent)
+    {
         var sprite = EnsureComp<SpriteSetRenderOrderComponent>(ent);
         switch (Transform(ent).LocalRotation.GetDir())
         {

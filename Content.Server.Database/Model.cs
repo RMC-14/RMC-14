@@ -483,6 +483,13 @@ namespace Content.Server.Database
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<RMCCommendation>()
+                .HasOne(r => r.DeletedBy)
+                .WithMany(p => p.CommendationsDeleted)
+                .HasForeignKey(r => r.DeletedById)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             modelBuilder.Entity<RMCPlayerStats>()
                 .HasOne(s => s.Player)
                 .WithOne(p => p.Stats)
@@ -590,6 +597,7 @@ namespace Content.Server.Database
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
         public string ArmorPreference { get; set; } = null!;
+        public List<Rank> Ranks { get; } = new();
         public bool PlaytimePerks { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
@@ -631,6 +639,17 @@ namespace Content.Server.Database
 
         public string TraitName { get; set; } = null!;
     }
+
+    public class Rank
+    {
+        public int Id { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public int ProfileId { get; set; }
+
+        public string JobName { get; set; } = null!;
+        public string RankName { get; set; } = null!;
+    }
+
 
     #region Loadouts
 
@@ -773,6 +792,7 @@ namespace Content.Server.Database
         public List<RMCRoleTimerExclude> RoleTimerExcludes { get; set; } = default!;
         public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
         public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
+        public List<RMCCommendation> CommendationsDeleted { get; set; } = default!;
         public RMCPlayerStats Stats { get; set; } = default!;
         public List<RMCPlayerActionOrder> ActionOrder { get; set; } = default!;
         public List<RMCChatBans> ChatBans { get; set; } = default!;

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.Physics;
@@ -47,23 +48,35 @@ public sealed partial class DamageOnCollideComponent : Component
     public bool Fire = false;
 
     [DataField]
-    public CollisionGroup Collision = CollisionGroup.FullTileLayer;
+    public CollisionGroup Collision = CollisionGroup.HighImpassable | CollisionGroup.MidImpassable | CollisionGroup.LowImpassable | CollisionGroup.BulletImpassable | CollisionGroup.InteractImpassable;
 
     [DataField]
-    public TimeSpan AcidComboDuration;
+    public int AcidComboMaxTier = 2;
 
     [DataField]
     public DamageSpecifier? AcidComboDamage;
 
     [DataField]
+    public DamageSpecifier? AcidComboDamageChain;
+
+    [DataField]
     public TimeSpan AcidComboParalyze;
 
     [DataField]
-    public int AcidComboResists;
+    public int DirectHitMultiplier = 3;
 
     [DataField]
     public TimeSpan Paralyze;
 
     [DataField]
     public bool IgnoreResistances;
+
+    [DataField]
+    public int ArmorPenetration;
+
+    [DataField]
+    public bool CanRehit;
+
+    [DataField, AutoNetworkedField]
+    public bool Disabled = false;
 }

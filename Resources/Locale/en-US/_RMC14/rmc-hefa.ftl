@@ -47,3 +47,6 @@ rmc-name-hefa-46 = Tor
 rmc-name-hefa-47 = Ulfius
 rmc-name-hefa-48 = Yvain
 rmc-name-hefa-49 = Ywain
+
+rmc-hefa-sword-primed = You prime the sword! It will now explode when you strike someone.
+rmc-hefa-sword-deprimed = You de-activate the sword!

@@ -19,7 +19,7 @@ public sealed partial class IVDripComponent : Component
     public string Slot = "pack";
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 TransferAmount = FixedPoint2.New(5);
+    public FixedPoint2 TransferAmount = FixedPoint2.New(4.5);
 
     [DataField, AutoNetworkedField]
     public TimeSpan TransferDelay = TimeSpan.FromSeconds(3);

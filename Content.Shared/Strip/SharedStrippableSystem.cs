@@ -45,7 +45,8 @@ public abstract class SharedStrippableSystem : EntitySystem
     // RMC14
     [Dependency] private readonly SkillsSystem _skills = default!;
 
-    private static readonly EntProtoId<SkillDefinitionComponent> MultiStripSkill = "RMCSkillPolice";
+    private static readonly EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillPolice";
+    public const int MinimumStripSkillLevel = 1;
     private const int MultiStripSkillLevel = 2;
 
     public override void Initialize()
@@ -287,8 +288,10 @@ public abstract class SharedStrippableSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<RMCUnstrippableComponent>(slotItem))
+        if (TryComp<RMCUnstrippableComponent>(slotItem, out var unstrippableItem))
         {
+            if (unstrippableItem.PoliceCanStrip && _skills.HasSkill(user, Skill, MinimumStripSkillLevel))
+                return true;
             _popupSystem.PopupCursor(Loc.GetString("rmc-unstrippable", ("item", slotItem), ("owner", Identity.Entity(target, EntityManager))));
             return false;
         }
@@ -345,7 +348,7 @@ public abstract class SharedStrippableSystem : EntitySystem
             BreakOnMove = true,
             NeedHand = true,
             BreakOnHandChange = false, // Allow simultaneously removing multiple items.
-            DuplicateCondition = _skills.HasSkill(user, MultiStripSkill, MultiStripSkillLevel) ? DuplicateConditions.SameTool : DuplicateConditions.SameEvent, // RMC14
+            DuplicateCondition = _skills.HasSkill(user, Skill, MultiStripSkillLevel) ? DuplicateConditions.SameTool : DuplicateConditions.SameEvent, // RMC14
             ForceVisible = user != target,
         };
 
@@ -561,7 +564,7 @@ public abstract class SharedStrippableSystem : EntitySystem
             BreakOnMove = true,
             NeedHand = true,
             BreakOnHandChange = false, // Allow simultaneously removing multiple items.
-            DuplicateCondition = _skills.HasSkill(user.Owner, MultiStripSkill, MultiStripSkillLevel) ? DuplicateConditions.SameTool : DuplicateConditions.SameEvent, // RMC14
+            DuplicateCondition = _skills.HasSkill(user.Owner, Skill, MultiStripSkillLevel) ? DuplicateConditions.SameTool : DuplicateConditions.SameEvent, // RMC14
             ForceVisible = user != target,
         };
 

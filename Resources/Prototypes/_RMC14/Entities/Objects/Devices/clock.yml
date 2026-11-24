@@ -27,3 +27,31 @@
   - type: Physics
     bodyType: Static
     canCollide: false
+
+- type: entity
+  id: RMCWoodClock
+  name: wood clock
+  description: An ordinary clock, for telling the time.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Objects/Devices/clocks.rsi
+    state: wood_clock
+  - type: RMCClock
+  - type: WallMount
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+
+- type: entity
+  parent: RMCWoodClock
+  id: RMCGoldClock
+  name: gold clock
+  description: An ostentatious clock, for telling people how rich you are.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Objects/Devices/clocks.rsi
+    state: gold_clock

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/19/2025 02:36:47
-  entityCount: 24559
+  time: 01/12/2026 22:43:21
+  entityCount: 24563
 maps:
 - 1
 grids:
@@ -5553,33 +5553,33 @@ entities:
         -78,65: RMCAreaLv522Oob
         -78,66: RMCAreaLv522Oob
         -78,67: RMCAreaLv522Oob
-        -78,68: RMCAreaLv522Oob
-        -78,69: RMCAreaLv522Oob
-        -78,70: RMCAreaLv522Oob
-        -78,71: RMCAreaLv522Oob
-        -78,72: RMCAreaLv522Oob
-        -78,73: RMCAreaLv522Oob
-        -78,74: RMCAreaLv522Oob
-        -78,75: RMCAreaLv522Oob
-        -78,76: RMCAreaLv522Oob
-        -78,77: RMCAreaLv522Oob
-        -78,78: RMCAreaLv522Oob
-        -78,79: RMCAreaLv522Oob
-        -78,80: RMCAreaLv522Oob
-        -78,81: RMCAreaLv522Oob
-        -78,82: RMCAreaLv522Oob
-        -78,83: RMCAreaLv522Oob
-        -78,84: RMCAreaLv522Oob
-        -78,85: RMCAreaLv522Oob
-        -78,86: RMCAreaLv522Oob
-        -78,87: RMCAreaLv522Oob
-        -78,88: RMCAreaLv522Oob
-        -78,89: RMCAreaLv522Oob
-        -78,90: RMCAreaLv522Oob
-        -78,91: RMCAreaLv522Oob
-        -78,92: RMCAreaLv522Oob
-        -78,93: RMCAreaLv522Oob
-        -78,94: RMCAreaLv522Oob
+        -78,68: RMCAreaLv522AtmosWestReactor
+        -78,69: RMCAreaLv522AtmosWestReactor
+        -78,70: RMCAreaLv522AtmosWestReactor
+        -78,71: RMCAreaLv522AtmosWestReactor
+        -78,72: RMCAreaLv522AtmosWestReactor
+        -78,73: RMCAreaLv522AtmosWestReactor
+        -78,74: RMCAreaLv522AtmosWestReactor
+        -78,75: RMCAreaLv522AtmosWestReactor
+        -78,76: RMCAreaLv522AtmosWestReactor
+        -78,77: RMCAreaLv522AtmosWestReactor
+        -78,78: RMCAreaLv522AtmosWestReactor
+        -78,79: RMCAreaLv522AtmosWestReactor
+        -78,80: RMCAreaLv522AtmosWestReactor
+        -78,81: RMCAreaLv522AtmosWestReactor
+        -78,82: RMCAreaLv522AtmosWestReactor
+        -78,83: RMCAreaLv522AtmosWestReactor
+        -78,84: RMCAreaLv522AtmosWestReactor
+        -78,85: RMCAreaLv522AtmosWestReactor
+        -78,86: RMCAreaLv522AtmosWestReactor
+        -78,87: RMCAreaLv522AtmosWestReactor
+        -78,88: RMCAreaLv522AtmosWestReactor
+        -78,89: RMCAreaLv522AtmosWestReactor
+        -78,90: RMCAreaLv522AtmosWestReactor
+        -78,91: RMCAreaLv522AtmosWestReactor
+        -78,92: RMCAreaLv522AtmosWestReactor
+        -78,93: RMCAreaLv522AtmosWestReactor
+        -78,94: RMCAreaLv522AtmosWestReactor
         -78,95: RMCAreaLv522Oob
         -78,96: RMCAreaLv522Oob
         -78,97: RMCAreaLv522Oob
@@ -5757,34 +5757,34 @@ entities:
         -77,65: RMCAreaLv522Oob
         -77,66: RMCAreaLv522Oob
         -77,67: RMCAreaLv522Oob
-        -77,68: RMCAreaLv522Oob
-        -77,69: RMCAreaLv522Oob
-        -77,70: RMCAreaLv522Oob
-        -77,71: RMCAreaLv522Oob
-        -77,72: RMCAreaLv522Oob
-        -77,73: RMCAreaLv522Oob
-        -77,74: RMCAreaLv522Oob
-        -77,75: RMCAreaLv522Oob
-        -77,76: RMCAreaLv522Oob
-        -77,77: RMCAreaLv522Oob
-        -77,78: RMCAreaLv522Oob
-        -77,79: RMCAreaLv522Oob
-        -77,80: RMCAreaLv522Oob
-        -77,81: RMCAreaLv522Oob
-        -77,82: RMCAreaLv522Oob
-        -77,83: RMCAreaLv522Oob
-        -77,84: RMCAreaLv522Oob
-        -77,85: RMCAreaLv522Oob
-        -77,86: RMCAreaLv522Oob
-        -77,87: RMCAreaLv522Oob
-        -77,88: RMCAreaLv522Oob
-        -77,89: RMCAreaLv522Oob
-        -77,90: RMCAreaLv522Oob
-        -77,91: RMCAreaLv522Oob
-        -77,92: RMCAreaLv522Oob
-        -77,93: RMCAreaLv522Oob
-        -77,94: RMCAreaLv522Oob
-        -77,95: RMCAreaLv522Oob
+        -77,68: RMCAreaLv522AtmosWestReactor
+        -77,69: RMCAreaLv522AtmosWestReactor
+        -77,70: RMCAreaLv522AtmosWestReactor
+        -77,71: RMCAreaLv522AtmosWestReactor
+        -77,72: RMCAreaLv522AtmosWestReactor
+        -77,73: RMCAreaLv522AtmosWestReactor
+        -77,74: RMCAreaLv522AtmosWestReactor
+        -77,75: RMCAreaLv522AtmosWestReactor
+        -77,76: RMCAreaLv522AtmosWestReactor
+        -77,77: RMCAreaLv522AtmosWestReactor
+        -77,78: RMCAreaLv522AtmosWestReactor
+        -77,79: RMCAreaLv522AtmosWestReactor
+        -77,80: RMCAreaLv522AtmosWestReactor
+        -77,81: RMCAreaLv522AtmosWestReactor
+        -77,82: RMCAreaLv522AtmosWestReactor
+        -77,83: RMCAreaLv522AtmosWestReactor
+        -77,84: RMCAreaLv522AtmosWestReactor
+        -77,85: RMCAreaLv522AtmosWestReactor
+        -77,86: RMCAreaLv522AtmosWestReactor
+        -77,87: RMCAreaLv522AtmosWestReactor
+        -77,88: RMCAreaLv522AtmosWestReactor
+        -77,89: RMCAreaLv522AtmosWestReactor
+        -77,90: RMCAreaLv522AtmosWestReactor
+        -77,91: RMCAreaLv522AtmosWestReactor
+        -77,92: RMCAreaLv522AtmosWestReactor
+        -77,93: RMCAreaLv522AtmosWestReactor
+        -77,94: RMCAreaLv522AtmosWestReactor
+        -77,95: RMCAreaLv522AtmosWestReactor
         -77,96: RMCAreaLv522Oob
         -77,97: RMCAreaLv522Oob
         -77,98: RMCAreaLv522Oob
@@ -5960,36 +5960,36 @@ entities:
         -76,64: RMCAreaLv522Oob
         -76,65: RMCAreaLv522Oob
         -76,66: RMCAreaLv522Oob
-        -76,67: RMCAreaLv522Oob
-        -76,68: RMCAreaLv522Oob
-        -76,69: RMCAreaLv522Oob
-        -76,70: RMCAreaLv522Oob
-        -76,71: RMCAreaLv522Oob
-        -76,72: RMCAreaLv522Oob
-        -76,73: RMCAreaLv522Oob
-        -76,74: RMCAreaLv522Oob
-        -76,75: RMCAreaLv522Oob
-        -76,76: RMCAreaLv522Oob
-        -76,77: RMCAreaLv522Oob
-        -76,78: RMCAreaLv522Oob
-        -76,79: RMCAreaLv522Oob
-        -76,80: RMCAreaLv522Oob
-        -76,81: RMCAreaLv522Oob
-        -76,82: RMCAreaLv522Oob
-        -76,83: RMCAreaLv522Oob
-        -76,84: RMCAreaLv522Oob
-        -76,85: RMCAreaLv522Oob
-        -76,86: RMCAreaLv522Oob
-        -76,87: RMCAreaLv522Oob
-        -76,88: RMCAreaLv522Oob
-        -76,89: RMCAreaLv522Oob
-        -76,90: RMCAreaLv522Oob
-        -76,91: RMCAreaLv522Oob
-        -76,92: RMCAreaLv522Oob
-        -76,93: RMCAreaLv522Oob
-        -76,94: RMCAreaLv522Oob
-        -76,95: RMCAreaLv522Oob
-        -76,96: RMCAreaLv522Oob
+        -76,67: RMCAreaLv522AtmosWestReactor
+        -76,68: RMCAreaLv522AtmosWestReactor
+        -76,69: RMCAreaLv522AtmosWestReactor
+        -76,70: RMCAreaLv522AtmosWestReactor
+        -76,71: RMCAreaLv522AtmosWestReactor
+        -76,72: RMCAreaLv522AtmosWestReactor
+        -76,73: RMCAreaLv522AtmosWestReactor
+        -76,74: RMCAreaLv522AtmosWestReactor
+        -76,75: RMCAreaLv522AtmosWestReactor
+        -76,76: RMCAreaLv522AtmosWestReactor
+        -76,77: RMCAreaLv522AtmosWestReactor
+        -76,78: RMCAreaLv522AtmosWestReactor
+        -76,79: RMCAreaLv522AtmosWestReactor
+        -76,80: RMCAreaLv522AtmosWestReactor
+        -76,81: RMCAreaLv522AtmosWestReactor
+        -76,82: RMCAreaLv522AtmosWestReactor
+        -76,83: RMCAreaLv522AtmosWestReactor
+        -76,84: RMCAreaLv522AtmosWestReactor
+        -76,85: RMCAreaLv522AtmosWestReactor
+        -76,86: RMCAreaLv522AtmosWestReactor
+        -76,87: RMCAreaLv522AtmosWestReactor
+        -76,88: RMCAreaLv522AtmosWestReactor
+        -76,89: RMCAreaLv522AtmosWestReactor
+        -76,90: RMCAreaLv522AtmosWestReactor
+        -76,91: RMCAreaLv522AtmosWestReactor
+        -76,92: RMCAreaLv522AtmosWestReactor
+        -76,93: RMCAreaLv522AtmosWestReactor
+        -76,94: RMCAreaLv522AtmosWestReactor
+        -76,95: RMCAreaLv522AtmosWestReactor
+        -76,96: RMCAreaLv522AtmosWestReactor
         -76,97: RMCAreaLv522Oob
         -76,98: RMCAreaLv522Oob
         -76,99: RMCAreaLv522Oob
@@ -6153,47 +6153,47 @@ entities:
         -75,53: RMCAreaLv522OutdoorsNwRockies
         -75,54: RMCAreaLv522OutdoorsNwRockies
         -75,55: RMCAreaLv522Oob
-        -75,56: RMCAreaLv522Oob
-        -75,57: RMCAreaLv522Oob
-        -75,58: RMCAreaLv522Oob
-        -75,59: RMCAreaLv522Oob
-        -75,60: RMCAreaLv522Oob
+        -75,56: RMCAreaLv522AtmosCargoIntake
+        -75,57: RMCAreaLv522AtmosCargoIntake
+        -75,58: RMCAreaLv522AtmosCargoIntake
+        -75,59: RMCAreaLv522AtmosCargoIntake
+        -75,60: RMCAreaLv522AtmosCargoIntake
         -75,61: RMCAreaLv522Oob
         -75,62: RMCAreaLv522Oob
         -75,63: RMCAreaLv522Oob
         -75,64: RMCAreaLv522Oob
         -75,65: RMCAreaLv522Oob
-        -75,66: RMCAreaLv522Oob
-        -75,67: RMCAreaLv522Oob
-        -75,68: RMCAreaLv522Oob
-        -75,69: RMCAreaLv522Oob
-        -75,70: RMCAreaLv522Oob
-        -75,71: RMCAreaLv522Oob
-        -75,72: RMCAreaLv522Oob
-        -75,73: RMCAreaLv522Oob
-        -75,74: RMCAreaLv522Oob
-        -75,75: RMCAreaLv522Oob
-        -75,76: RMCAreaLv522Oob
-        -75,77: RMCAreaLv522Oob
-        -75,78: RMCAreaLv522Oob
-        -75,79: RMCAreaLv522Oob
-        -75,80: RMCAreaLv522Oob
-        -75,81: RMCAreaLv522Oob
-        -75,82: RMCAreaLv522Oob
-        -75,83: RMCAreaLv522Oob
-        -75,84: RMCAreaLv522Oob
-        -75,85: RMCAreaLv522Oob
-        -75,86: RMCAreaLv522Oob
-        -75,87: RMCAreaLv522Oob
-        -75,88: RMCAreaLv522Oob
-        -75,89: RMCAreaLv522Oob
-        -75,90: RMCAreaLv522Oob
-        -75,91: RMCAreaLv522Oob
-        -75,92: RMCAreaLv522Oob
-        -75,93: RMCAreaLv522Oob
-        -75,94: RMCAreaLv522Oob
-        -75,95: RMCAreaLv522Oob
-        -75,96: RMCAreaLv522Oob
+        -75,66: RMCAreaLv522AtmosWestReactor
+        -75,67: RMCAreaLv522AtmosWestReactor
+        -75,68: RMCAreaLv522AtmosWestReactor
+        -75,69: RMCAreaLv522AtmosWestReactor
+        -75,70: RMCAreaLv522AtmosWestReactor
+        -75,71: RMCAreaLv522AtmosWestReactor
+        -75,72: RMCAreaLv522AtmosWestReactor
+        -75,73: RMCAreaLv522AtmosWestReactor
+        -75,74: RMCAreaLv522AtmosWestReactor
+        -75,75: RMCAreaLv522AtmosWestReactor
+        -75,76: RMCAreaLv522AtmosWestReactor
+        -75,77: RMCAreaLv522AtmosWestReactor
+        -75,78: RMCAreaLv522AtmosWestReactor
+        -75,79: RMCAreaLv522AtmosWestReactor
+        -75,80: RMCAreaLv522AtmosWestReactor
+        -75,81: RMCAreaLv522AtmosWestReactor
+        -75,82: RMCAreaLv522AtmosWestReactor
+        -75,83: RMCAreaLv522AtmosWestReactor
+        -75,84: RMCAreaLv522AtmosWestReactor
+        -75,85: RMCAreaLv522AtmosWestReactor
+        -75,86: RMCAreaLv522AtmosWestReactor
+        -75,87: RMCAreaLv522AtmosWestReactor
+        -75,88: RMCAreaLv522AtmosWestReactor
+        -75,89: RMCAreaLv522AtmosWestReactor
+        -75,90: RMCAreaLv522AtmosWestReactor
+        -75,91: RMCAreaLv522AtmosWestReactor
+        -75,92: RMCAreaLv522AtmosWestReactor
+        -75,93: RMCAreaLv522AtmosWestReactor
+        -75,94: RMCAreaLv522AtmosWestReactor
+        -75,95: RMCAreaLv522AtmosWestReactor
+        -75,96: RMCAreaLv522AtmosWestReactor
         -75,97: RMCAreaLv522Oob
         -75,98: RMCAreaLv522Oob
         -75,99: RMCAreaLv522Oob
@@ -6357,48 +6357,48 @@ entities:
         -74,53: RMCAreaLv522OutdoorsNwRockies
         -74,54: RMCAreaLv522OutdoorsNwRockies
         -74,55: RMCAreaLv522Oob
-        -74,56: RMCAreaLv522Oob
-        -74,57: RMCAreaLv522Oob
-        -74,58: RMCAreaLv522Oob
-        -74,59: RMCAreaLv522Oob
-        -74,60: RMCAreaLv522Oob
+        -74,56: RMCAreaLv522AtmosCargoIntake
+        -74,57: RMCAreaLv522AtmosCargoIntake
+        -74,58: RMCAreaLv522AtmosCargoIntake
+        -74,59: RMCAreaLv522AtmosCargoIntake
+        -74,60: RMCAreaLv522AtmosCargoIntake
         -74,61: RMCAreaLv522Oob
         -74,62: RMCAreaLv522Oob
         -74,63: RMCAreaLv522Oob
         -74,64: RMCAreaLv522Oob
         -74,65: RMCAreaLv522Oob
-        -74,66: RMCAreaLv522Oob
-        -74,67: RMCAreaLv522Oob
-        -74,68: RMCAreaLv522Oob
-        -74,69: RMCAreaLv522Oob
-        -74,70: RMCAreaLv522Oob
-        -74,71: RMCAreaLv522Oob
-        -74,72: RMCAreaLv522Oob
-        -74,73: RMCAreaLv522Oob
-        -74,74: RMCAreaLv522Oob
-        -74,75: RMCAreaLv522Oob
-        -74,76: RMCAreaLv522Oob
-        -74,77: RMCAreaLv522Oob
-        -74,78: RMCAreaLv522Oob
-        -74,79: RMCAreaLv522Oob
-        -74,80: RMCAreaLv522Oob
-        -74,81: RMCAreaLv522Oob
-        -74,82: RMCAreaLv522Oob
-        -74,83: RMCAreaLv522Oob
-        -74,84: RMCAreaLv522Oob
-        -74,85: RMCAreaLv522Oob
-        -74,86: RMCAreaLv522Oob
-        -74,87: RMCAreaLv522Oob
-        -74,88: RMCAreaLv522Oob
-        -74,89: RMCAreaLv522Oob
-        -74,90: RMCAreaLv522Oob
-        -74,91: RMCAreaLv522Oob
-        -74,92: RMCAreaLv522Oob
-        -74,93: RMCAreaLv522Oob
-        -74,94: RMCAreaLv522Oob
-        -74,95: RMCAreaLv522Oob
-        -74,96: RMCAreaLv522Oob
-        -74,97: RMCAreaLv522Oob
+        -74,66: RMCAreaLv522AtmosWestReactor
+        -74,67: RMCAreaLv522AtmosWestReactor
+        -74,68: RMCAreaLv522AtmosWestReactor
+        -74,69: RMCAreaLv522AtmosWestReactor
+        -74,70: RMCAreaLv522AtmosWestReactor
+        -74,71: RMCAreaLv522AtmosWestReactor
+        -74,72: RMCAreaLv522AtmosWestReactor
+        -74,73: RMCAreaLv522AtmosWestReactor
+        -74,74: RMCAreaLv522AtmosWestReactor
+        -74,75: RMCAreaLv522AtmosWestReactor
+        -74,76: RMCAreaLv522AtmosWestReactor
+        -74,77: RMCAreaLv522AtmosWestReactor
+        -74,78: RMCAreaLv522AtmosWestReactor
+        -74,79: RMCAreaLv522AtmosWestReactor
+        -74,80: RMCAreaLv522AtmosWestReactor
+        -74,81: RMCAreaLv522AtmosWestReactor
+        -74,82: RMCAreaLv522AtmosWestReactor
+        -74,83: RMCAreaLv522AtmosWestReactor
+        -74,84: RMCAreaLv522AtmosWestReactor
+        -74,85: RMCAreaLv522AtmosWestReactor
+        -74,86: RMCAreaLv522AtmosWestReactor
+        -74,87: RMCAreaLv522AtmosWestReactor
+        -74,88: RMCAreaLv522AtmosWestReactor
+        -74,89: RMCAreaLv522AtmosWestReactor
+        -74,90: RMCAreaLv522AtmosWestReactor
+        -74,91: RMCAreaLv522AtmosWestReactor
+        -74,92: RMCAreaLv522AtmosWestReactor
+        -74,93: RMCAreaLv522AtmosWestReactor
+        -74,94: RMCAreaLv522AtmosWestReactor
+        -74,95: RMCAreaLv522AtmosWestReactor
+        -74,96: RMCAreaLv522AtmosWestReactor
+        -74,97: RMCAreaLv522AtmosWestReactor
         -74,98: RMCAreaLv522Oob
         -74,99: RMCAreaLv522Oob
         -74,100: RMCAreaLv522Oob
@@ -6561,48 +6561,48 @@ entities:
         -73,53: RMCAreaLv522OutdoorsNwRockies
         -73,54: RMCAreaLv522Oob
         -73,55: RMCAreaLv522Oob
-        -73,56: RMCAreaLv522Oob
-        -73,57: RMCAreaLv522Oob
-        -73,58: RMCAreaLv522Oob
-        -73,59: RMCAreaLv522Oob
-        -73,60: RMCAreaLv522Oob
+        -73,56: RMCAreaLv522AtmosCargoIntake
+        -73,57: RMCAreaLv522AtmosCargoIntake
+        -73,58: RMCAreaLv522AtmosCargoIntake
+        -73,59: RMCAreaLv522AtmosCargoIntake
+        -73,60: RMCAreaLv522AtmosCargoIntake
         -73,61: RMCAreaLv522Oob
         -73,62: RMCAreaLv522Oob
         -73,63: RMCAreaLv522Oob
         -73,64: RMCAreaLv522Oob
         -73,65: RMCAreaLv522Oob
-        -73,66: RMCAreaLv522Oob
-        -73,67: RMCAreaLv522Oob
-        -73,68: RMCAreaLv522Oob
-        -73,69: RMCAreaLv522Oob
-        -73,70: RMCAreaLv522Oob
-        -73,71: RMCAreaLv522Oob
-        -73,72: RMCAreaLv522Oob
-        -73,73: RMCAreaLv522Oob
-        -73,74: RMCAreaLv522Oob
-        -73,75: RMCAreaLv522Oob
-        -73,76: RMCAreaLv522Oob
-        -73,77: RMCAreaLv522Oob
-        -73,78: RMCAreaLv522Oob
-        -73,79: RMCAreaLv522Oob
-        -73,80: RMCAreaLv522Oob
-        -73,81: RMCAreaLv522Oob
-        -73,82: RMCAreaLv522Oob
-        -73,83: RMCAreaLv522Oob
-        -73,84: RMCAreaLv522Oob
-        -73,85: RMCAreaLv522Oob
-        -73,86: RMCAreaLv522Oob
-        -73,87: RMCAreaLv522Oob
-        -73,88: RMCAreaLv522Oob
-        -73,89: RMCAreaLv522Oob
-        -73,90: RMCAreaLv522Oob
-        -73,91: RMCAreaLv522Oob
-        -73,92: RMCAreaLv522Oob
-        -73,93: RMCAreaLv522Oob
-        -73,94: RMCAreaLv522Oob
-        -73,95: RMCAreaLv522Oob
-        -73,96: RMCAreaLv522Oob
-        -73,97: RMCAreaLv522Oob
+        -73,66: RMCAreaLv522AtmosWestReactor
+        -73,67: RMCAreaLv522AtmosWestReactor
+        -73,68: RMCAreaLv522AtmosWestReactor
+        -73,69: RMCAreaLv522AtmosWestReactor
+        -73,70: RMCAreaLv522AtmosWestReactor
+        -73,71: RMCAreaLv522AtmosWestReactor
+        -73,72: RMCAreaLv522AtmosWestReactor
+        -73,73: RMCAreaLv522AtmosWestReactor
+        -73,74: RMCAreaLv522AtmosWestReactor
+        -73,75: RMCAreaLv522AtmosWestReactor
+        -73,76: RMCAreaLv522AtmosWestReactor
+        -73,77: RMCAreaLv522AtmosWestReactor
+        -73,78: RMCAreaLv522AtmosWestReactor
+        -73,79: RMCAreaLv522AtmosWestReactor
+        -73,80: RMCAreaLv522AtmosWestReactor
+        -73,81: RMCAreaLv522AtmosWestReactor
+        -73,82: RMCAreaLv522AtmosWestReactor
+        -73,83: RMCAreaLv522AtmosWestReactor
+        -73,84: RMCAreaLv522AtmosWestReactor
+        -73,85: RMCAreaLv522AtmosWestReactor
+        -73,86: RMCAreaLv522AtmosWestReactor
+        -73,87: RMCAreaLv522AtmosWestReactor
+        -73,88: RMCAreaLv522AtmosWestReactor
+        -73,89: RMCAreaLv522AtmosWestReactor
+        -73,90: RMCAreaLv522AtmosWestReactor
+        -73,91: RMCAreaLv522AtmosWestReactor
+        -73,92: RMCAreaLv522AtmosWestReactor
+        -73,93: RMCAreaLv522AtmosWestReactor
+        -73,94: RMCAreaLv522AtmosWestReactor
+        -73,95: RMCAreaLv522AtmosWestReactor
+        -73,96: RMCAreaLv522AtmosWestReactor
+        -73,97: RMCAreaLv522AtmosWestReactor
         -73,98: RMCAreaLv522Oob
         -73,99: RMCAreaLv522Oob
         -73,100: RMCAreaLv522Oob
@@ -6765,49 +6765,49 @@ entities:
         -72,53: RMCAreaLv522OutdoorsNwRockies
         -72,54: RMCAreaLv522OutdoorsNwRockies
         -72,55: RMCAreaLv522Oob
-        -72,56: RMCAreaLv522Oob
-        -72,57: RMCAreaLv522Oob
-        -72,58: RMCAreaLv522Oob
-        -72,59: RMCAreaLv522Oob
-        -72,60: RMCAreaLv522Oob
+        -72,56: RMCAreaLv522AtmosCargoIntake
+        -72,57: RMCAreaLv522AtmosCargoIntake
+        -72,58: RMCAreaLv522AtmosCargoIntake
+        -72,59: RMCAreaLv522AtmosCargoIntake
+        -72,60: RMCAreaLv522AtmosCargoIntake
         -72,61: RMCAreaLv522Oob
         -72,62: RMCAreaLv522Oob
         -72,63: RMCAreaLv522Oob
         -72,64: RMCAreaLv522Oob
         -72,65: RMCAreaLv522Oob
-        -72,66: RMCAreaLv522Oob
-        -72,67: RMCAreaLv522Oob
-        -72,68: RMCAreaLv522Oob
-        -72,69: RMCAreaLv522Oob
-        -72,70: RMCAreaLv522Oob
-        -72,71: RMCAreaLv522Oob
-        -72,72: RMCAreaLv522Oob
-        -72,73: RMCAreaLv522Oob
-        -72,74: RMCAreaLv522Oob
-        -72,75: RMCAreaLv522Oob
-        -72,76: RMCAreaLv522Oob
-        -72,77: RMCAreaLv522Oob
-        -72,78: RMCAreaLv522Oob
-        -72,79: RMCAreaLv522Oob
-        -72,80: RMCAreaLv522Oob
-        -72,81: RMCAreaLv522Oob
-        -72,82: RMCAreaLv522Oob
-        -72,83: RMCAreaLv522Oob
-        -72,84: RMCAreaLv522Oob
-        -72,85: RMCAreaLv522Oob
-        -72,86: RMCAreaLv522Oob
-        -72,87: RMCAreaLv522Oob
-        -72,88: RMCAreaLv522Oob
-        -72,89: RMCAreaLv522Oob
-        -72,90: RMCAreaLv522Oob
-        -72,91: RMCAreaLv522Oob
-        -72,92: RMCAreaLv522Oob
-        -72,93: RMCAreaLv522Oob
-        -72,94: RMCAreaLv522Oob
-        -72,95: RMCAreaLv522Oob
-        -72,96: RMCAreaLv522Oob
-        -72,97: RMCAreaLv522Oob
-        -72,98: RMCAreaLv522Oob
+        -72,66: RMCAreaLv522AtmosWestReactor
+        -72,67: RMCAreaLv522AtmosWestReactor
+        -72,68: RMCAreaLv522AtmosWestReactor
+        -72,69: RMCAreaLv522AtmosWestReactor
+        -72,70: RMCAreaLv522AtmosWestReactor
+        -72,71: RMCAreaLv522AtmosWestReactor
+        -72,72: RMCAreaLv522AtmosWestReactor
+        -72,73: RMCAreaLv522AtmosWestReactor
+        -72,74: RMCAreaLv522AtmosWestReactor
+        -72,75: RMCAreaLv522AtmosWestReactor
+        -72,76: RMCAreaLv522AtmosWestReactor
+        -72,77: RMCAreaLv522AtmosWestReactor
+        -72,78: RMCAreaLv522AtmosWestReactor
+        -72,79: RMCAreaLv522AtmosWestReactor
+        -72,80: RMCAreaLv522AtmosWestReactor
+        -72,81: RMCAreaLv522AtmosWestReactor
+        -72,82: RMCAreaLv522AtmosWestReactor
+        -72,83: RMCAreaLv522AtmosWestReactor
+        -72,84: RMCAreaLv522AtmosWestReactor
+        -72,85: RMCAreaLv522AtmosWestReactor
+        -72,86: RMCAreaLv522AtmosWestReactor
+        -72,87: RMCAreaLv522AtmosWestReactor
+        -72,88: RMCAreaLv522AtmosWestReactor
+        -72,89: RMCAreaLv522AtmosWestReactor
+        -72,90: RMCAreaLv522AtmosWestReactor
+        -72,91: RMCAreaLv522AtmosWestReactor
+        -72,92: RMCAreaLv522AtmosWestReactor
+        -72,93: RMCAreaLv522AtmosWestReactor
+        -72,94: RMCAreaLv522AtmosWestReactor
+        -72,95: RMCAreaLv522AtmosWestReactor
+        -72,96: RMCAreaLv522AtmosWestReactor
+        -72,97: RMCAreaLv522AtmosWestReactor
+        -72,98: RMCAreaLv522AtmosWestReactor
         -72,99: RMCAreaLv522Oob
         -72,100: RMCAreaLv522Oob
         -72,101: RMCAreaLv522Oob
@@ -6969,49 +6969,49 @@ entities:
         -71,53: RMCAreaLv522OutdoorsNwRockies
         -71,54: RMCAreaLv522OutdoorsNwRockies
         -71,55: RMCAreaLv522Oob
-        -71,56: RMCAreaLv522Oob
-        -71,57: RMCAreaLv522Oob
-        -71,58: RMCAreaLv522Oob
-        -71,59: RMCAreaLv522Oob
-        -71,60: RMCAreaLv522Oob
-        -71,61: RMCAreaLv522Oob
+        -71,56: RMCAreaLv522AtmosCargoIntake
+        -71,57: RMCAreaLv522AtmosCargoIntake
+        -71,58: RMCAreaLv522AtmosCargoIntake
+        -71,59: RMCAreaLv522AtmosCargoIntake
+        -71,60: RMCAreaLv522AtmosCargoIntake
+        -71,61: RMCAreaLv522AtmosCargoIntake
         -71,62: RMCAreaLv522AtmosCargoIntake
         -71,63: RMCAreaLv522AtmosCargoIntake
         -71,64: RMCAreaLv522AtmosCargoIntake
-        -71,65: RMCAreaLv522Oob
-        -71,66: RMCAreaLv522Oob
-        -71,67: RMCAreaLv522Oob
-        -71,68: RMCAreaLv522Oob
-        -71,69: RMCAreaLv522Oob
-        -71,70: RMCAreaLv522Oob
-        -71,71: RMCAreaLv522Oob
-        -71,72: RMCAreaLv522Oob
-        -71,73: RMCAreaLv522Oob
-        -71,74: RMCAreaLv522Oob
-        -71,75: RMCAreaLv522Oob
-        -71,76: RMCAreaLv522Oob
-        -71,77: RMCAreaLv522Oob
-        -71,78: RMCAreaLv522Oob
-        -71,79: RMCAreaLv522Oob
-        -71,80: RMCAreaLv522Oob
-        -71,81: RMCAreaLv522Oob
-        -71,82: RMCAreaLv522Oob
-        -71,83: RMCAreaLv522Oob
-        -71,84: RMCAreaLv522Oob
-        -71,85: RMCAreaLv522Oob
-        -71,86: RMCAreaLv522Oob
-        -71,87: RMCAreaLv522Oob
-        -71,88: RMCAreaLv522Oob
-        -71,89: RMCAreaLv522Oob
-        -71,90: RMCAreaLv522Oob
-        -71,91: RMCAreaLv522Oob
-        -71,92: RMCAreaLv522Oob
-        -71,93: RMCAreaLv522Oob
-        -71,94: RMCAreaLv522Oob
-        -71,95: RMCAreaLv522Oob
-        -71,96: RMCAreaLv522Oob
-        -71,97: RMCAreaLv522Oob
-        -71,98: RMCAreaLv522Oob
+        -71,65: RMCAreaLv522AtmosWestReactor
+        -71,66: RMCAreaLv522AtmosWestReactor
+        -71,67: RMCAreaLv522AtmosWestReactor
+        -71,68: RMCAreaLv522AtmosWestReactor
+        -71,69: RMCAreaLv522AtmosWestReactor
+        -71,70: RMCAreaLv522AtmosWestReactor
+        -71,71: RMCAreaLv522AtmosWestReactor
+        -71,72: RMCAreaLv522AtmosWestReactor
+        -71,73: RMCAreaLv522AtmosWestReactor
+        -71,74: RMCAreaLv522AtmosWestReactor
+        -71,75: RMCAreaLv522AtmosWestReactor
+        -71,76: RMCAreaLv522AtmosWestReactor
+        -71,77: RMCAreaLv522AtmosWestReactor
+        -71,78: RMCAreaLv522AtmosWestReactor
+        -71,79: RMCAreaLv522AtmosWestReactor
+        -71,80: RMCAreaLv522AtmosWestReactor
+        -71,81: RMCAreaLv522AtmosWestReactor
+        -71,82: RMCAreaLv522AtmosWestReactor
+        -71,83: RMCAreaLv522AtmosWestReactor
+        -71,84: RMCAreaLv522AtmosWestReactor
+        -71,85: RMCAreaLv522AtmosWestReactor
+        -71,86: RMCAreaLv522AtmosWestReactor
+        -71,87: RMCAreaLv522AtmosWestReactor
+        -71,88: RMCAreaLv522AtmosWestReactor
+        -71,89: RMCAreaLv522AtmosWestReactor
+        -71,90: RMCAreaLv522AtmosWestReactor
+        -71,91: RMCAreaLv522AtmosWestReactor
+        -71,92: RMCAreaLv522AtmosWestReactor
+        -71,93: RMCAreaLv522AtmosWestReactor
+        -71,94: RMCAreaLv522AtmosWestReactor
+        -71,95: RMCAreaLv522AtmosWestReactor
+        -71,96: RMCAreaLv522AtmosWestReactor
+        -71,97: RMCAreaLv522AtmosWestReactor
+        -71,98: RMCAreaLv522AtmosWestReactor
         -71,99: RMCAreaLv522Oob
         -71,100: RMCAreaLv522Oob
         -71,101: RMCAreaLv522Oob
@@ -7173,50 +7173,50 @@ entities:
         -70,53: RMCAreaLv522OutdoorsNwRockies
         -70,54: RMCAreaLv522OutdoorsNwRockies
         -70,55: RMCAreaLv522Oob
-        -70,56: RMCAreaLv522Oob
-        -70,57: RMCAreaLv522Oob
-        -70,58: RMCAreaLv522Oob
-        -70,59: RMCAreaLv522Oob
-        -70,60: RMCAreaLv522Oob
+        -70,56: RMCAreaLv522AtmosCargoIntake
+        -70,57: RMCAreaLv522AtmosCargoIntake
+        -70,58: RMCAreaLv522AtmosCargoIntake
+        -70,59: RMCAreaLv522AtmosCargoIntake
+        -70,60: RMCAreaLv522AtmosCargoIntake
         -70,61: RMCAreaLv522AtmosCargoIntake
         -70,62: RMCAreaLv522AtmosCargoIntake
         -70,63: RMCAreaLv522AtmosCargoIntake
         -70,64: RMCAreaLv522AtmosCargoIntake
         -70,65: RMCAreaLv522AtmosCargoIntake
-        -70,66: RMCAreaLv522Oob
-        -70,67: RMCAreaLv522Oob
-        -70,68: RMCAreaLv522Oob
-        -70,69: RMCAreaLv522Oob
-        -70,70: RMCAreaLv522Oob
-        -70,71: RMCAreaLv522Oob
-        -70,72: RMCAreaLv522Oob
-        -70,73: RMCAreaLv522Oob
-        -70,74: RMCAreaLv522Oob
-        -70,75: RMCAreaLv522Oob
-        -70,76: RMCAreaLv522Oob
-        -70,77: RMCAreaLv522Oob
-        -70,78: RMCAreaLv522Oob
-        -70,79: RMCAreaLv522Oob
-        -70,80: RMCAreaLv522Oob
-        -70,81: RMCAreaLv522Oob
-        -70,82: RMCAreaLv522Oob
-        -70,83: RMCAreaLv522Oob
-        -70,84: RMCAreaLv522Oob
-        -70,85: RMCAreaLv522Oob
-        -70,86: RMCAreaLv522Oob
-        -70,87: RMCAreaLv522Oob
-        -70,88: RMCAreaLv522Oob
-        -70,89: RMCAreaLv522Oob
-        -70,90: RMCAreaLv522Oob
-        -70,91: RMCAreaLv522Oob
-        -70,92: RMCAreaLv522Oob
-        -70,93: RMCAreaLv522Oob
-        -70,94: RMCAreaLv522Oob
-        -70,95: RMCAreaLv522Oob
-        -70,96: RMCAreaLv522Oob
-        -70,97: RMCAreaLv522Oob
-        -70,98: RMCAreaLv522Oob
-        -70,99: RMCAreaLv522Oob
+        -70,66: RMCAreaLv522AtmosWestReactor
+        -70,67: RMCAreaLv522AtmosWestReactor
+        -70,68: RMCAreaLv522AtmosWestReactor
+        -70,69: RMCAreaLv522AtmosWestReactor
+        -70,70: RMCAreaLv522AtmosWestReactor
+        -70,71: RMCAreaLv522AtmosWestReactor
+        -70,72: RMCAreaLv522AtmosWestReactor
+        -70,73: RMCAreaLv522AtmosWestReactor
+        -70,74: RMCAreaLv522AtmosWestReactor
+        -70,75: RMCAreaLv522AtmosWestReactor
+        -70,76: RMCAreaLv522AtmosWestReactor
+        -70,77: RMCAreaLv522AtmosWestReactor
+        -70,78: RMCAreaLv522AtmosWestReactor
+        -70,79: RMCAreaLv522AtmosWestReactor
+        -70,80: RMCAreaLv522AtmosWestReactor
+        -70,81: RMCAreaLv522AtmosWestReactor
+        -70,82: RMCAreaLv522AtmosWestReactor
+        -70,83: RMCAreaLv522AtmosWestReactor
+        -70,84: RMCAreaLv522AtmosWestReactor
+        -70,85: RMCAreaLv522AtmosWestReactor
+        -70,86: RMCAreaLv522AtmosWestReactor
+        -70,87: RMCAreaLv522AtmosWestReactor
+        -70,88: RMCAreaLv522AtmosWestReactor
+        -70,89: RMCAreaLv522AtmosWestReactor
+        -70,90: RMCAreaLv522AtmosWestReactor
+        -70,91: RMCAreaLv522AtmosWestReactor
+        -70,92: RMCAreaLv522AtmosWestReactor
+        -70,93: RMCAreaLv522AtmosWestReactor
+        -70,94: RMCAreaLv522AtmosWestReactor
+        -70,95: RMCAreaLv522AtmosWestReactor
+        -70,96: RMCAreaLv522AtmosWestReactor
+        -70,97: RMCAreaLv522AtmosWestReactor
+        -70,98: RMCAreaLv522AtmosWestReactor
+        -70,99: RMCAreaLv522AtmosWestReactor
         -70,100: RMCAreaLv522Oob
         -70,101: RMCAreaLv522Oob
         -70,102: RMCAreaLv522Oob
@@ -7377,9 +7377,9 @@ entities:
         -69,53: RMCAreaLv522OutdoorsNwRockies
         -69,54: RMCAreaLv522Oob
         -69,55: RMCAreaLv522Oob
-        -69,56: RMCAreaLv522Oob
-        -69,57: RMCAreaLv522Oob
-        -69,58: RMCAreaLv522Oob
+        -69,56: RMCAreaLv522AtmosCargoIntake
+        -69,57: RMCAreaLv522AtmosCargoIntake
+        -69,58: RMCAreaLv522AtmosCargoIntake
         -69,59: RMCAreaLv522AtmosCargoIntake
         -69,60: RMCAreaLv522AtmosCargoIntake
         -69,61: RMCAreaLv522AtmosCargoIntake
@@ -7387,40 +7387,40 @@ entities:
         -69,63: RMCAreaLv522AtmosCargoIntake
         -69,64: RMCAreaLv522AtmosCargoIntake
         -69,65: RMCAreaLv522AtmosCargoIntake
-        -69,66: RMCAreaLv522AtmosCargoIntake
-        -69,67: RMCAreaLv522Oob
-        -69,68: RMCAreaLv522Oob
-        -69,69: RMCAreaLv522Oob
-        -69,70: RMCAreaLv522Oob
-        -69,71: RMCAreaLv522Oob
-        -69,72: RMCAreaLv522Oob
-        -69,73: RMCAreaLv522Oob
-        -69,74: RMCAreaLv522Oob
-        -69,75: RMCAreaLv522Oob
-        -69,76: RMCAreaLv522Oob
-        -69,77: RMCAreaLv522Oob
-        -69,78: RMCAreaLv522Oob
+        -69,66: RMCAreaLv522AtmosWestReactor
+        -69,67: RMCAreaLv522AtmosWestReactor
+        -69,68: RMCAreaLv522AtmosWestReactor
+        -69,69: RMCAreaLv522AtmosWestReactor
+        -69,70: RMCAreaLv522AtmosWestReactor
+        -69,71: RMCAreaLv522AtmosWestReactor
+        -69,72: RMCAreaLv522AtmosWestReactor
+        -69,73: RMCAreaLv522AtmosWestReactor
+        -69,74: RMCAreaLv522AtmosWestReactor
+        -69,75: RMCAreaLv522AtmosWestReactor
+        -69,76: RMCAreaLv522AtmosWestReactor
+        -69,77: RMCAreaLv522AtmosWestReactor
+        -69,78: RMCAreaLv522AtmosWestReactor
         -69,79: RMCAreaLv522AtmosWestReactor
-        -69,80: RMCAreaLv522Oob
-        -69,81: RMCAreaLv522Oob
+        -69,80: RMCAreaLv522AtmosWestReactor
+        -69,81: RMCAreaLv522AtmosWestReactor
         -69,82: RMCAreaLv522AtmosWestReactor
-        -69,83: RMCAreaLv522Oob
+        -69,83: RMCAreaLv522AtmosWestReactor
         -69,84: RMCAreaLv522AtmosWestReactor
-        -69,85: RMCAreaLv522Oob
+        -69,85: RMCAreaLv522AtmosWestReactor
         -69,86: RMCAreaLv522AtmosWestReactor
         -69,87: RMCAreaLv522AtmosWestReactor
-        -69,88: RMCAreaLv522Oob
-        -69,89: RMCAreaLv522Oob
-        -69,90: RMCAreaLv522Oob
-        -69,91: RMCAreaLv522Oob
-        -69,92: RMCAreaLv522Oob
-        -69,93: RMCAreaLv522Oob
-        -69,94: RMCAreaLv522Oob
-        -69,95: RMCAreaLv522Oob
-        -69,96: RMCAreaLv522Oob
-        -69,97: RMCAreaLv522Oob
-        -69,98: RMCAreaLv522Oob
-        -69,99: RMCAreaLv522Oob
+        -69,88: RMCAreaLv522AtmosWestReactor
+        -69,89: RMCAreaLv522AtmosWestReactor
+        -69,90: RMCAreaLv522AtmosWestReactor
+        -69,91: RMCAreaLv522AtmosWestReactor
+        -69,92: RMCAreaLv522AtmosWestReactor
+        -69,93: RMCAreaLv522AtmosWestReactor
+        -69,94: RMCAreaLv522AtmosWestReactor
+        -69,95: RMCAreaLv522AtmosWestReactor
+        -69,96: RMCAreaLv522AtmosWestReactor
+        -69,97: RMCAreaLv522AtmosWestReactor
+        -69,98: RMCAreaLv522AtmosWestReactor
+        -69,99: RMCAreaLv522AtmosWestReactor
         -69,100: RMCAreaLv522Oob
         -69,101: RMCAreaLv522Oob
         -69,102: RMCAreaLv522Oob
@@ -7581,9 +7581,9 @@ entities:
         -68,53: RMCAreaLv522OutdoorsNwRockies
         -68,54: RMCAreaLv522OutdoorsNwRockies
         -68,55: RMCAreaLv522Oob
-        -68,56: RMCAreaLv522Oob
-        -68,57: RMCAreaLv522Oob
-        -68,58: RMCAreaLv522Oob
+        -68,56: RMCAreaLv522AtmosCargoIntake
+        -68,57: RMCAreaLv522AtmosCargoIntake
+        -68,58: RMCAreaLv522AtmosCargoIntake
         -68,59: RMCAreaLv522AtmosCargoIntake
         -68,60: RMCAreaLv522AtmosCargoIntake
         -68,61: RMCAreaLv522AtmosCargoIntake
@@ -7591,17 +7591,17 @@ entities:
         -68,63: RMCAreaLv522AtmosCargoIntake
         -68,64: RMCAreaLv522AtmosCargoIntake
         -68,65: RMCAreaLv522AtmosCargoIntake
-        -68,66: RMCAreaLv522AtmosCargoIntake
-        -68,67: RMCAreaLv522AtmosCargoIntake
-        -68,68: RMCAreaLv522AtmosCargoIntake
-        -68,69: RMCAreaLv522Oob
-        -68,70: RMCAreaLv522Oob
-        -68,71: RMCAreaLv522Oob
-        -68,72: RMCAreaLv522Oob
-        -68,73: RMCAreaLv522Oob
-        -68,74: RMCAreaLv522Oob
-        -68,75: RMCAreaLv522Oob
-        -68,76: RMCAreaLv522Oob
+        -68,66: RMCAreaLv522AtmosWestReactor
+        -68,67: RMCAreaLv522AtmosWestReactor
+        -68,68: RMCAreaLv522AtmosWestReactor
+        -68,69: RMCAreaLv522AtmosWestReactor
+        -68,70: RMCAreaLv522AtmosWestReactor
+        -68,71: RMCAreaLv522AtmosWestReactor
+        -68,72: RMCAreaLv522AtmosWestReactor
+        -68,73: RMCAreaLv522AtmosWestReactor
+        -68,74: RMCAreaLv522AtmosWestReactor
+        -68,75: RMCAreaLv522AtmosWestReactor
+        -68,76: RMCAreaLv522AtmosWestReactor
         -68,77: RMCAreaLv522AtmosWestReactor
         -68,78: RMCAreaLv522AtmosWestReactor
         -68,79: RMCAreaLv522AtmosWestReactor
@@ -7616,15 +7616,15 @@ entities:
         -68,88: RMCAreaLv522AtmosWestReactor
         -68,89: RMCAreaLv522AtmosWestReactor
         -68,90: RMCAreaLv522AtmosWestReactor
-        -68,91: RMCAreaLv522Oob
-        -68,92: RMCAreaLv522Oob
-        -68,93: RMCAreaLv522Oob
-        -68,94: RMCAreaLv522Oob
-        -68,95: RMCAreaLv522Oob
-        -68,96: RMCAreaLv522Oob
-        -68,97: RMCAreaLv522Oob
-        -68,98: RMCAreaLv522Oob
-        -68,99: RMCAreaLv522Oob
+        -68,91: RMCAreaLv522AtmosWestReactor
+        -68,92: RMCAreaLv522AtmosWestReactor
+        -68,93: RMCAreaLv522AtmosWestReactor
+        -68,94: RMCAreaLv522AtmosWestReactor
+        -68,95: RMCAreaLv522AtmosWestReactor
+        -68,96: RMCAreaLv522AtmosWestReactor
+        -68,97: RMCAreaLv522AtmosWestReactor
+        -68,98: RMCAreaLv522AtmosWestReactor
+        -68,99: RMCAreaLv522AtmosWestReactor
         -68,100: RMCAreaLv522Oob
         -68,101: RMCAreaLv522Oob
         -68,102: RMCAreaLv522Oob
@@ -7785,8 +7785,8 @@ entities:
         -67,53: RMCAreaLv522OutdoorsNwRockies
         -67,54: RMCAreaLv522OutdoorsNwRockies
         -67,55: RMCAreaLv522Oob
-        -67,56: RMCAreaLv522Oob
-        -67,57: RMCAreaLv522Oob
+        -67,56: RMCAreaLv522AtmosCargoIntake
+        -67,57: RMCAreaLv522AtmosCargoIntake
         -67,58: RMCAreaLv522AtmosCargoIntake
         -67,59: RMCAreaLv522AtmosCargoIntake
         -67,60: RMCAreaLv522AtmosCargoIntake
@@ -7795,16 +7795,16 @@ entities:
         -67,63: RMCAreaLv522AtmosCargoIntake
         -67,64: RMCAreaLv522AtmosCargoIntake
         -67,65: RMCAreaLv522AtmosCargoIntake
-        -67,66: RMCAreaLv522AtmosCargoIntake
-        -67,67: RMCAreaLv522AtmosCargoIntake
-        -67,68: RMCAreaLv522AtmosCargoIntake
-        -67,69: RMCAreaLv522AtmosCargoIntake
-        -67,70: RMCAreaLv522AtmosCargoIntake
-        -67,71: RMCAreaLv522Oob
-        -67,72: RMCAreaLv522Oob
-        -67,73: RMCAreaLv522Oob
-        -67,74: RMCAreaLv522Oob
-        -67,75: RMCAreaLv522Oob
+        -67,66: RMCAreaLv522AtmosWestReactor
+        -67,67: RMCAreaLv522AtmosWestReactor
+        -67,68: RMCAreaLv522AtmosWestReactor
+        -67,69: RMCAreaLv522AtmosWestReactor
+        -67,70: RMCAreaLv522AtmosWestReactor
+        -67,71: RMCAreaLv522AtmosWestReactor
+        -67,72: RMCAreaLv522AtmosWestReactor
+        -67,73: RMCAreaLv522AtmosWestReactor
+        -67,74: RMCAreaLv522AtmosWestReactor
+        -67,75: RMCAreaLv522AtmosWestReactor
         -67,76: RMCAreaLv522AtmosWestReactor
         -67,77: RMCAreaLv522AtmosWestReactor
         -67,78: RMCAreaLv522AtmosWestReactor
@@ -7821,14 +7821,14 @@ entities:
         -67,89: RMCAreaLv522AtmosWestReactor
         -67,90: RMCAreaLv522AtmosWestReactor
         -67,91: RMCAreaLv522AtmosWestReactor
-        -67,92: RMCAreaLv522Oob
-        -67,93: RMCAreaLv522Oob
-        -67,94: RMCAreaLv522Oob
-        -67,95: RMCAreaLv522Oob
-        -67,96: RMCAreaLv522Oob
-        -67,97: RMCAreaLv522Oob
-        -67,98: RMCAreaLv522Oob
-        -67,99: RMCAreaLv522Oob
+        -67,92: RMCAreaLv522AtmosWestReactor
+        -67,93: RMCAreaLv522AtmosWestReactor
+        -67,94: RMCAreaLv522AtmosWestReactor
+        -67,95: RMCAreaLv522AtmosWestReactor
+        -67,96: RMCAreaLv522AtmosWestReactor
+        -67,97: RMCAreaLv522AtmosWestReactor
+        -67,98: RMCAreaLv522AtmosWestReactor
+        -67,99: RMCAreaLv522AtmosWestReactor
         -67,100: RMCAreaLv522Oob
         -67,101: RMCAreaLv522Oob
         -67,102: RMCAreaLv522Oob
@@ -7989,8 +7989,8 @@ entities:
         -66,53: RMCAreaLv522OutdoorsNwRockies
         -66,54: RMCAreaLv522OutdoorsNwRockies
         -66,55: RMCAreaLv522Oob
-        -66,56: RMCAreaLv522Oob
-        -66,57: RMCAreaLv522Oob
+        -66,56: RMCAreaLv522AtmosCargoIntake
+        -66,57: RMCAreaLv522AtmosCargoIntake
         -66,58: RMCAreaLv522AtmosCargoIntake
         -66,59: RMCAreaLv522AtmosCargoIntake
         -66,60: RMCAreaLv522AtmosCargoIntake
@@ -7999,14 +7999,14 @@ entities:
         -66,63: RMCAreaLv522AtmosCargoIntake
         -66,64: RMCAreaLv522AtmosCargoIntake
         -66,65: RMCAreaLv522AtmosCargoIntake
-        -66,66: RMCAreaLv522AtmosCargoIntake
-        -66,67: RMCAreaLv522AtmosCargoIntake
-        -66,68: RMCAreaLv522AtmosCargoIntake
-        -66,69: RMCAreaLv522AtmosCargoIntake
-        -66,70: RMCAreaLv522AtmosCargoIntake
-        -66,71: RMCAreaLv522AtmosCargoIntake
-        -66,72: RMCAreaLv522Oob
-        -66,73: RMCAreaLv522Oob
+        -66,66: RMCAreaLv522AtmosWestReactor
+        -66,67: RMCAreaLv522AtmosWestReactor
+        -66,68: RMCAreaLv522AtmosWestReactor
+        -66,69: RMCAreaLv522AtmosWestReactor
+        -66,70: RMCAreaLv522AtmosWestReactor
+        -66,71: RMCAreaLv522AtmosWestReactor
+        -66,72: RMCAreaLv522AtmosWestReactor
+        -66,73: RMCAreaLv522AtmosWestReactor
         -66,74: RMCAreaLv522AtmosWestReactor
         -66,75: RMCAreaLv522AtmosWestReactor
         -66,76: RMCAreaLv522AtmosWestReactor
@@ -8026,14 +8026,14 @@ entities:
         -66,90: RMCAreaLv522AtmosWestReactor
         -66,91: RMCAreaLv522AtmosWestReactor
         -66,92: RMCAreaLv522AtmosWestReactor
-        -66,93: RMCAreaLv522Oob
-        -66,94: RMCAreaLv522Oob
-        -66,95: RMCAreaLv522Oob
-        -66,96: RMCAreaLv522Oob
-        -66,97: RMCAreaLv522Oob
-        -66,98: RMCAreaLv522Oob
-        -66,99: RMCAreaLv522Oob
-        -66,100: RMCAreaLv522Oob
+        -66,93: RMCAreaLv522AtmosWestReactor
+        -66,94: RMCAreaLv522AtmosWestReactor
+        -66,95: RMCAreaLv522AtmosWestReactor
+        -66,96: RMCAreaLv522AtmosWestReactor
+        -66,97: RMCAreaLv522AtmosWestReactor
+        -66,98: RMCAreaLv522AtmosWestReactor
+        -66,99: RMCAreaLv522AtmosWestReactor
+        -66,100: RMCAreaLv522AtmosWestReactor
         -66,101: RMCAreaLv522Oob
         -66,102: RMCAreaLv522Oob
         -65,-101: RMCAreaLv522Oob
@@ -8193,8 +8193,8 @@ entities:
         -65,53: RMCAreaLv522OutdoorsNwRockies
         -65,54: RMCAreaLv522Oob
         -65,55: RMCAreaLv522Oob
-        -65,56: RMCAreaLv522Oob
-        -65,57: RMCAreaLv522Oob
+        -65,56: RMCAreaLv522AtmosCargoIntake
+        -65,57: RMCAreaLv522AtmosCargoIntake
         -65,58: RMCAreaLv522AtmosCargoIntake
         -65,59: RMCAreaLv522AtmosCargoIntake
         -65,60: RMCAreaLv522AtmosCargoIntake
@@ -8203,12 +8203,12 @@ entities:
         -65,63: RMCAreaLv522Oob
         -65,64: RMCAreaLv522Oob
         -65,65: RMCAreaLv522AtmosCargoIntake
-        -65,66: RMCAreaLv522AtmosCargoIntake
-        -65,67: RMCAreaLv522AtmosCargoIntake
-        -65,68: RMCAreaLv522AtmosCargoIntake
-        -65,69: RMCAreaLv522AtmosCargoIntake
-        -65,70: RMCAreaLv522AtmosCargoIntake
-        -65,71: RMCAreaLv522AtmosCargoIntake
+        -65,66: RMCAreaLv522AtmosWestReactor
+        -65,67: RMCAreaLv522AtmosWestReactor
+        -65,68: RMCAreaLv522AtmosWestReactor
+        -65,69: RMCAreaLv522AtmosWestReactor
+        -65,70: RMCAreaLv522AtmosWestReactor
+        -65,71: RMCAreaLv522AtmosWestReactor
         -65,72: RMCAreaLv522AtmosWestReactor
         -65,73: RMCAreaLv522AtmosWestReactor
         -65,74: RMCAreaLv522AtmosWestReactor
@@ -8230,14 +8230,14 @@ entities:
         -65,90: RMCAreaLv522AtmosWestReactor
         -65,91: RMCAreaLv522AtmosWestReactor
         -65,92: RMCAreaLv522AtmosWestReactor
-        -65,93: RMCAreaLv522Oob
-        -65,94: RMCAreaLv522Oob
-        -65,95: RMCAreaLv522Oob
-        -65,96: RMCAreaLv522Oob
-        -65,97: RMCAreaLv522Oob
-        -65,98: RMCAreaLv522Oob
-        -65,99: RMCAreaLv522Oob
-        -65,100: RMCAreaLv522Oob
+        -65,93: RMCAreaLv522AtmosWestReactor
+        -65,94: RMCAreaLv522AtmosWestReactor
+        -65,95: RMCAreaLv522AtmosWestReactor
+        -65,96: RMCAreaLv522AtmosWestReactor
+        -65,97: RMCAreaLv522AtmosWestReactor
+        -65,98: RMCAreaLv522AtmosWestReactor
+        -65,99: RMCAreaLv522AtmosWestReactor
+        -65,100: RMCAreaLv522AtmosWestReactor
         -65,101: RMCAreaLv522Oob
         -65,102: RMCAreaLv522Oob
         -64,-101: RMCAreaLv522Oob
@@ -8397,8 +8397,8 @@ entities:
         -64,53: RMCAreaLv522OutdoorsNwRockies
         -64,54: RMCAreaLv522OutdoorsNwRockies
         -64,55: RMCAreaLv522Oob
-        -64,56: RMCAreaLv522Oob
-        -64,57: RMCAreaLv522Oob
+        -64,56: RMCAreaLv522AtmosCargoIntake
+        -64,57: RMCAreaLv522AtmosCargoIntake
         -64,58: RMCAreaLv522AtmosCargoIntake
         -64,59: RMCAreaLv522AtmosCargoIntake
         -64,60: RMCAreaLv522AtmosCargoIntake
@@ -8407,11 +8407,11 @@ entities:
         -64,63: RMCAreaLv522Oob
         -64,64: RMCAreaLv522Oob
         -64,65: RMCAreaLv522Oob
-        -64,66: RMCAreaLv522AtmosCargoIntake
-        -64,67: RMCAreaLv522AtmosCargoIntake
-        -64,68: RMCAreaLv522AtmosCargoIntake
-        -64,69: RMCAreaLv522AtmosCargoIntake
-        -64,70: RMCAreaLv522AtmosCargoIntake
+        -64,66: RMCAreaLv522AtmosWestReactor
+        -64,67: RMCAreaLv522AtmosWestReactor
+        -64,68: RMCAreaLv522AtmosWestReactor
+        -64,69: RMCAreaLv522AtmosWestReactor
+        -64,70: RMCAreaLv522AtmosWestReactor
         -64,71: RMCAreaLv522AtmosWestReactor
         -64,72: RMCAreaLv522AtmosWestReactor
         -64,73: RMCAreaLv522AtmosWestReactor
@@ -8433,15 +8433,15 @@ entities:
         -64,89: RMCAreaLv522AtmosWestReactor
         -64,90: RMCAreaLv522AtmosWestReactor
         -64,91: RMCAreaLv522AtmosWestReactor
-        -64,92: RMCAreaLv522Oob
-        -64,93: RMCAreaLv522Oob
-        -64,94: RMCAreaLv522Oob
-        -64,95: RMCAreaLv522Oob
-        -64,96: RMCAreaLv522Oob
-        -64,97: RMCAreaLv522Oob
-        -64,98: RMCAreaLv522Oob
-        -64,99: RMCAreaLv522Oob
-        -64,100: RMCAreaLv522Oob
+        -64,92: RMCAreaLv522AtmosWestReactor
+        -64,93: RMCAreaLv522AtmosWestReactor
+        -64,94: RMCAreaLv522AtmosWestReactor
+        -64,95: RMCAreaLv522AtmosWestReactor
+        -64,96: RMCAreaLv522AtmosWestReactor
+        -64,97: RMCAreaLv522AtmosWestReactor
+        -64,98: RMCAreaLv522AtmosWestReactor
+        -64,99: RMCAreaLv522AtmosWestReactor
+        -64,100: RMCAreaLv522AtmosWestReactor
         -64,101: RMCAreaLv522Oob
         -64,102: RMCAreaLv522Oob
         -63,-101: RMCAreaLv522Oob
@@ -8601,8 +8601,8 @@ entities:
         -63,53: RMCAreaLv522OutdoorsNwRockies
         -63,54: RMCAreaLv522OutdoorsNwRockies
         -63,55: RMCAreaLv522Oob
-        -63,56: RMCAreaLv522Oob
-        -63,57: RMCAreaLv522Oob
+        -63,56: RMCAreaLv522AtmosCargoIntake
+        -63,57: RMCAreaLv522AtmosCargoIntake
         -63,58: RMCAreaLv522AtmosCargoIntake
         -63,59: RMCAreaLv522AtmosCargoIntake
         -63,60: RMCAreaLv522AtmosCargoIntake
@@ -8611,9 +8611,9 @@ entities:
         -63,63: RMCAreaLv522Oob
         -63,64: RMCAreaLv522Oob
         -63,65: RMCAreaLv522Oob
-        -63,66: RMCAreaLv522Oob
-        -63,67: RMCAreaLv522AtmosCargoIntake
-        -63,68: RMCAreaLv522AtmosCargoIntake
+        -63,66: RMCAreaLv522AtmosWestReactor
+        -63,67: RMCAreaLv522AtmosWestReactor
+        -63,68: RMCAreaLv522AtmosWestReactor
         -63,69: RMCAreaLv522AtmosWestReactor
         -63,70: RMCAreaLv522AtmosWestReactor
         -63,71: RMCAreaLv522AtmosWestReactor
@@ -8638,14 +8638,14 @@ entities:
         -63,90: RMCAreaLv522AtmosWestReactor
         -63,91: RMCAreaLv522AtmosWestReactor
         -63,92: RMCAreaLv522AtmosWestReactor
-        -63,93: RMCAreaLv522Oob
-        -63,94: RMCAreaLv522Oob
-        -63,95: RMCAreaLv522Oob
-        -63,96: RMCAreaLv522Oob
-        -63,97: RMCAreaLv522Oob
-        -63,98: RMCAreaLv522Oob
-        -63,99: RMCAreaLv522Oob
-        -63,100: RMCAreaLv522Oob
+        -63,93: RMCAreaLv522AtmosWestReactor
+        -63,94: RMCAreaLv522AtmosWestReactor
+        -63,95: RMCAreaLv522AtmosWestReactor
+        -63,96: RMCAreaLv522AtmosWestReactor
+        -63,97: RMCAreaLv522AtmosWestReactor
+        -63,98: RMCAreaLv522AtmosWestReactor
+        -63,99: RMCAreaLv522AtmosWestReactor
+        -63,100: RMCAreaLv522AtmosWestReactor
         -63,101: RMCAreaLv522Oob
         -63,102: RMCAreaLv522Oob
         -62,-101: RMCAreaLv522Oob
@@ -8805,8 +8805,8 @@ entities:
         -62,53: RMCAreaLv522OutdoorsNwRockies
         -62,54: RMCAreaLv522OutdoorsNwRockies
         -62,55: RMCAreaLv522Oob
-        -62,56: RMCAreaLv522Oob
-        -62,57: RMCAreaLv522Oob
+        -62,56: RMCAreaLv522AtmosCargoIntake
+        -62,57: RMCAreaLv522AtmosCargoIntake
         -62,58: RMCAreaLv522AtmosCargoIntake
         -62,59: RMCAreaLv522AtmosCargoIntake
         -62,60: RMCAreaLv522AtmosCargoIntake
@@ -8815,8 +8815,8 @@ entities:
         -62,63: RMCAreaLv522Oob
         -62,64: RMCAreaLv522Oob
         -62,65: RMCAreaLv522Oob
-        -62,66: RMCAreaLv522AtmosCargoIntake
-        -62,67: RMCAreaLv522AtmosCargoIntake
+        -62,66: RMCAreaLv522AtmosWestReactor
+        -62,67: RMCAreaLv522AtmosWestReactor
         -62,68: RMCAreaLv522AtmosWestReactor
         -62,69: RMCAreaLv522AtmosWestReactor
         -62,70: RMCAreaLv522AtmosWestReactor
@@ -8843,13 +8843,13 @@ entities:
         -62,91: RMCAreaLv522AtmosWestReactor
         -62,92: RMCAreaLv522AtmosWestReactor
         -62,93: RMCAreaLv522AtmosWestReactor
-        -62,94: RMCAreaLv522Oob
-        -62,95: RMCAreaLv522Oob
-        -62,96: RMCAreaLv522Oob
-        -62,97: RMCAreaLv522Oob
-        -62,98: RMCAreaLv522Oob
-        -62,99: RMCAreaLv522Oob
-        -62,100: RMCAreaLv522Oob
+        -62,94: RMCAreaLv522AtmosWestReactor
+        -62,95: RMCAreaLv522AtmosWestReactor
+        -62,96: RMCAreaLv522AtmosWestReactor
+        -62,97: RMCAreaLv522AtmosWestReactor
+        -62,98: RMCAreaLv522AtmosWestReactor
+        -62,99: RMCAreaLv522AtmosWestReactor
+        -62,100: RMCAreaLv522AtmosWestReactor
         -62,101: RMCAreaLv522Oob
         -62,102: RMCAreaLv522Oob
         -61,-101: RMCAreaLv522Oob
@@ -9010,7 +9010,7 @@ entities:
         -61,54: RMCAreaLv522Oob
         -61,55: RMCAreaLv522Oob
         -61,56: RMCAreaLv522Oob
-        -61,57: RMCAreaLv522Oob
+        -61,57: RMCAreaLv522AtmosCargoIntake
         -61,58: RMCAreaLv522AtmosCargoIntake
         -61,59: RMCAreaLv522AtmosCargoIntake
         -61,60: RMCAreaLv522AtmosCargoIntake
@@ -9019,8 +9019,8 @@ entities:
         -61,63: RMCAreaLv522Oob
         -61,64: RMCAreaLv522Oob
         -61,65: RMCAreaLv522Oob
-        -61,66: RMCAreaLv522Oob
-        -61,67: RMCAreaLv522Oob
+        -61,66: RMCAreaLv522AtmosWestReactor
+        -61,67: RMCAreaLv522AtmosWestReactor
         -61,68: RMCAreaLv522AtmosWestReactor
         -61,69: RMCAreaLv522AtmosWestReactor
         -61,70: RMCAreaLv522AtmosWestReactor
@@ -9047,13 +9047,13 @@ entities:
         -61,91: RMCAreaLv522AtmosWestReactor
         -61,92: RMCAreaLv522AtmosWestReactor
         -61,93: RMCAreaLv522AtmosWestReactor
-        -61,94: RMCAreaLv522Oob
-        -61,95: RMCAreaLv522Oob
-        -61,96: RMCAreaLv522Oob
-        -61,97: RMCAreaLv522Oob
-        -61,98: RMCAreaLv522Oob
-        -61,99: RMCAreaLv522Oob
-        -61,100: RMCAreaLv522Oob
+        -61,94: RMCAreaLv522AtmosWestReactor
+        -61,95: RMCAreaLv522AtmosWestReactor
+        -61,96: RMCAreaLv522AtmosWestReactor
+        -61,97: RMCAreaLv522AtmosWestReactor
+        -61,98: RMCAreaLv522AtmosWestReactor
+        -61,99: RMCAreaLv522AtmosWestReactor
+        -61,100: RMCAreaLv522AtmosWestReactor
         -61,101: RMCAreaLv522Oob
         -61,102: RMCAreaLv522Oob
         -60,-101: RMCAreaLv522Oob
@@ -9223,9 +9223,9 @@ entities:
         -60,63: RMCAreaLv522Oob
         -60,64: RMCAreaLv522Oob
         -60,65: RMCAreaLv522Oob
-        -60,66: RMCAreaLv522Oob
-        -60,67: RMCAreaLv522Oob
-        -60,68: RMCAreaLv522Oob
+        -60,66: RMCAreaLv522AtmosWestReactor
+        -60,67: RMCAreaLv522AtmosWestReactor
+        -60,68: RMCAreaLv522AtmosWestReactor
         -60,69: RMCAreaLv522AtmosWestReactor
         -60,70: RMCAreaLv522AtmosWestReactor
         -60,71: RMCAreaLv522AtmosWestReactor
@@ -9252,11 +9252,11 @@ entities:
         -60,92: RMCAreaLv522AtmosWestReactor
         -60,93: RMCAreaLv522AtmosWestReactor
         -60,94: RMCAreaLv522AtmosWestReactor
-        -60,95: RMCAreaLv522Oob
-        -60,96: RMCAreaLv522Oob
-        -60,97: RMCAreaLv522Oob
-        -60,98: RMCAreaLv522Oob
-        -60,99: RMCAreaLv522Oob
+        -60,95: RMCAreaLv522AtmosWestReactor
+        -60,96: RMCAreaLv522AtmosWestReactor
+        -60,97: RMCAreaLv522AtmosWestReactor
+        -60,98: RMCAreaLv522AtmosWestReactor
+        -60,99: RMCAreaLv522AtmosWestReactor
         -60,100: RMCAreaLv522Oob
         -60,101: RMCAreaLv522Oob
         -60,102: RMCAreaLv522Oob
@@ -9427,9 +9427,9 @@ entities:
         -59,63: RMCAreaLv522Oob
         -59,64: RMCAreaLv522Oob
         -59,65: RMCAreaLv522Oob
-        -59,66: RMCAreaLv522Oob
-        -59,67: RMCAreaLv522Oob
-        -59,68: RMCAreaLv522Oob
+        -59,66: RMCAreaLv522AtmosWestReactor
+        -59,67: RMCAreaLv522AtmosWestReactor
+        -59,68: RMCAreaLv522AtmosWestReactor
         -59,69: RMCAreaLv522AtmosWestReactor
         -59,70: RMCAreaLv522AtmosWestReactor
         -59,71: RMCAreaLv522AtmosWestReactor
@@ -9457,10 +9457,10 @@ entities:
         -59,93: RMCAreaLv522AtmosWestReactor
         -59,94: RMCAreaLv522AtmosWestReactor
         -59,95: RMCAreaLv522AtmosWestReactor
-        -59,96: RMCAreaLv522Oob
-        -59,97: RMCAreaLv522Oob
-        -59,98: RMCAreaLv522Oob
-        -59,99: RMCAreaLv522Oob
+        -59,96: RMCAreaLv522AtmosWestReactor
+        -59,97: RMCAreaLv522AtmosWestReactor
+        -59,98: RMCAreaLv522AtmosWestReactor
+        -59,99: RMCAreaLv522AtmosWestReactor
         -59,100: RMCAreaLv522Oob
         -59,101: RMCAreaLv522Oob
         -59,102: RMCAreaLv522Oob
@@ -9621,7 +9621,7 @@ entities:
         -58,53: RMCAreaLv522OutdoorsNwRockies
         -58,54: RMCAreaLv522OutdoorsNwRockies
         -58,55: RMCAreaLv522Oob
-        -58,56: RMCAreaLv522Oob
+        -58,56: RMCAreaLv522AtmosCargoIntake
         -58,57: RMCAreaLv522AtmosCargoIntake
         -58,58: RMCAreaLv522AtmosCargoIntake
         -58,59: RMCAreaLv522AtmosCargoIntake
@@ -9631,8 +9631,8 @@ entities:
         -58,63: RMCAreaLv522Oob
         -58,64: RMCAreaLv522Oob
         -58,65: RMCAreaLv522Oob
-        -58,66: RMCAreaLv522Oob
-        -58,67: RMCAreaLv522Oob
+        -58,66: RMCAreaLv522AtmosWestReactor
+        -58,67: RMCAreaLv522AtmosWestReactor
         -58,68: RMCAreaLv522AtmosWestReactor
         -58,69: RMCAreaLv522AtmosWestReactor
         -58,70: RMCAreaLv522AtmosWestReactor
@@ -9662,9 +9662,9 @@ entities:
         -58,94: RMCAreaLv522AtmosWestReactor
         -58,95: RMCAreaLv522AtmosWestReactor
         -58,96: RMCAreaLv522AtmosWestReactor
-        -58,97: RMCAreaLv522Oob
-        -58,98: RMCAreaLv522Oob
-        -58,99: RMCAreaLv522Oob
+        -58,97: RMCAreaLv522AtmosWestReactor
+        -58,98: RMCAreaLv522AtmosWestReactor
+        -58,99: RMCAreaLv522AtmosWestReactor
         -58,100: RMCAreaLv522Oob
         -58,101: RMCAreaLv522Oob
         -58,102: RMCAreaLv522Oob
@@ -9825,7 +9825,7 @@ entities:
         -57,53: RMCAreaLv522OutdoorsNwRockies
         -57,54: RMCAreaLv522OutdoorsNwRockies
         -57,55: RMCAreaLv522Oob
-        -57,56: RMCAreaLv522Oob
+        -57,56: RMCAreaLv522AtmosCargoIntake
         -57,57: RMCAreaLv522AtmosCargoIntake
         -57,58: RMCAreaLv522AtmosCargoIntake
         -57,59: RMCAreaLv522AtmosCargoIntake
@@ -9835,7 +9835,7 @@ entities:
         -57,63: RMCAreaLv522Oob
         -57,64: RMCAreaLv522Oob
         -57,65: RMCAreaLv522Oob
-        -57,66: RMCAreaLv522Oob
+        -57,66: RMCAreaLv522AtmosWestReactor
         -57,67: RMCAreaLv522AtmosWestReactor
         -57,68: RMCAreaLv522AtmosWestReactor
         -57,69: RMCAreaLv522AtmosWestReactor
@@ -9847,14 +9847,14 @@ entities:
         -57,75: RMCAreaLv522AtmosWestReactor
         -57,76: RMCAreaLv522AtmosWestReactor
         -57,77: RMCAreaLv522AtmosWestReactor
-        -57,78: RMCAreaLv522Oob
+        -57,78: RMCAreaLv522AtmosWestReactor
         -57,79: RMCAreaLv522AtmosWestReactor
-        -57,80: RMCAreaLv522Oob
+        -57,80: RMCAreaLv522AtmosWestReactor
         -57,81: RMCAreaLv522AtmosWestReactor
         -57,82: RMCAreaLv522AtmosWestReactor
-        -57,83: RMCAreaLv522Oob
+        -57,83: RMCAreaLv522AtmosWestReactor
         -57,84: RMCAreaLv522AtmosWestReactor
-        -57,85: RMCAreaLv522Oob
+        -57,85: RMCAreaLv522AtmosWestReactor
         -57,86: RMCAreaLv522AtmosWestReactor
         -57,87: RMCAreaLv522AtmosWestReactor
         -57,88: RMCAreaLv522AtmosWestReactor
@@ -9866,9 +9866,9 @@ entities:
         -57,94: RMCAreaLv522AtmosWestReactor
         -57,95: RMCAreaLv522AtmosWestReactor
         -57,96: RMCAreaLv522AtmosWestReactor
-        -57,97: RMCAreaLv522Oob
-        -57,98: RMCAreaLv522Oob
-        -57,99: RMCAreaLv522Oob
+        -57,97: RMCAreaLv522AtmosWestReactor
+        -57,98: RMCAreaLv522AtmosWestReactor
+        -57,99: RMCAreaLv522AtmosWestReactor
         -57,100: RMCAreaLv522Oob
         -57,101: RMCAreaLv522Oob
         -57,102: RMCAreaLv522Oob
@@ -10029,7 +10029,7 @@ entities:
         -56,53: RMCAreaLv522OutdoorsNwRockies
         -56,54: RMCAreaLv522OutdoorsNwRockies
         -56,55: RMCAreaLv522Oob
-        -56,56: RMCAreaLv522Oob
+        -56,56: RMCAreaLv522AtmosCargoIntake
         -56,57: RMCAreaLv522AtmosCargoIntake
         -56,58: RMCAreaLv522AtmosCargoIntake
         -56,59: RMCAreaLv522AtmosCargoIntake
@@ -10039,7 +10039,7 @@ entities:
         -56,63: RMCAreaLv522Oob
         -56,64: RMCAreaLv522Oob
         -56,65: RMCAreaLv522Oob
-        -56,66: RMCAreaLv522Oob
+        -56,66: RMCAreaLv522AtmosWestReactor
         -56,67: RMCAreaLv522AtmosWestReactor
         -56,68: RMCAreaLv522AtmosWestReactor
         -56,69: RMCAreaLv522AtmosWestReactor
@@ -10050,28 +10050,28 @@ entities:
         -56,74: RMCAreaLv522AtmosWestReactor
         -56,75: RMCAreaLv522AtmosWestReactor
         -56,76: RMCAreaLv522AtmosWestReactor
-        -56,77: RMCAreaLv522Oob
-        -56,78: RMCAreaLv522Oob
-        -56,79: RMCAreaLv522Oob
-        -56,80: RMCAreaLv522Oob
+        -56,77: RMCAreaLv522AtmosWestReactor
+        -56,78: RMCAreaLv522AtmosWestReactor
+        -56,79: RMCAreaLv522AtmosWestReactor
+        -56,80: RMCAreaLv522AtmosWestReactor
         -56,81: RMCAreaLv522AtmosWestReactor
         -56,82: RMCAreaLv522AtmosWestReactor
-        -56,83: RMCAreaLv522Oob
-        -56,84: RMCAreaLv522Oob
-        -56,85: RMCAreaLv522Oob
-        -56,86: RMCAreaLv522Oob
+        -56,83: RMCAreaLv522AtmosWestReactor
+        -56,84: RMCAreaLv522AtmosWestReactor
+        -56,85: RMCAreaLv522AtmosWestReactor
+        -56,86: RMCAreaLv522AtmosWestReactor
         -56,87: RMCAreaLv522AtmosWestReactor
         -56,88: RMCAreaLv522AtmosWestReactor
         -56,89: RMCAreaLv522AtmosWestReactor
-        -56,90: RMCAreaLv522Oob
+        -56,90: RMCAreaLv522AtmosWestReactor
         -56,91: RMCAreaLv522AtmosWestReactor
         -56,92: RMCAreaLv522AtmosWestReactor
         -56,93: RMCAreaLv522AtmosWestReactor
         -56,94: RMCAreaLv522AtmosWestReactor
         -56,95: RMCAreaLv522AtmosWestReactor
         -56,96: RMCAreaLv522AtmosWestReactor
-        -56,97: RMCAreaLv522Oob
-        -56,98: RMCAreaLv522Oob
+        -56,97: RMCAreaLv522AtmosWestReactor
+        -56,98: RMCAreaLv522AtmosWestReactor
         -56,99: RMCAreaLv522Oob
         -56,100: RMCAreaLv522Oob
         -56,101: RMCAreaLv522Oob
@@ -10243,7 +10243,7 @@ entities:
         -55,63: RMCAreaLv522AtmosCargoIntake
         -55,64: RMCAreaLv522Oob
         -55,65: RMCAreaLv522Oob
-        -55,66: RMCAreaLv522Oob
+        -55,66: RMCAreaLv522AtmosWestReactor
         -55,67: RMCAreaLv522AtmosWestReactor
         -55,68: RMCAreaLv522AtmosWestReactor
         -55,69: RMCAreaLv522AtmosWestReactor
@@ -10255,20 +10255,20 @@ entities:
         -55,75: RMCAreaLv522AtmosWestReactor
         -55,76: RMCAreaLv522AtmosWestReactor
         -55,77: RMCAreaLv522AtmosWestReactor
-        -55,78: RMCAreaLv522Oob
-        -55,79: RMCAreaLv522Oob
-        -55,80: RMCAreaLv522Oob
+        -55,78: RMCAreaLv522AtmosWestReactor
+        -55,79: RMCAreaLv522AtmosWestReactor
+        -55,80: RMCAreaLv522AtmosWestReactor
         -55,81: RMCAreaLv522AtmosWestReactor
         -55,82: RMCAreaLv522AtmosWestReactor
-        -55,83: RMCAreaLv522Oob
+        -55,83: RMCAreaLv522AtmosWestReactor
         -55,84: RMCAreaLv522AtmosWestReactor
-        -55,85: RMCAreaLv522Oob
+        -55,85: RMCAreaLv522AtmosWestReactor
         -55,86: RMCAreaLv522AtmosWestReactor
         -55,87: RMCAreaLv522AtmosWestReactor
         -55,88: RMCAreaLv522AtmosWestReactor
-        -55,89: RMCAreaLv522Oob
-        -55,90: RMCAreaLv522Oob
-        -55,91: RMCAreaLv522Oob
+        -55,89: RMCAreaLv522AtmosWestReactor
+        -55,90: RMCAreaLv522AtmosWestReactor
+        -55,91: RMCAreaLv522AtmosWestReactor
         -55,92: RMCAreaLv522AtmosWestReactor
         -55,93: RMCAreaLv522AtmosWestReactor
         -55,94: RMCAreaLv522AtmosWestReactor
@@ -10459,8 +10459,8 @@ entities:
         -54,75: RMCAreaLv522AtmosWestReactor
         -54,76: RMCAreaLv522AtmosWestReactor
         -54,77: RMCAreaLv522AtmosWestReactor
-        -54,78: RMCAreaLv522Oob
-        -54,79: RMCAreaLv522Oob
+        -54,78: RMCAreaLv522AtmosWestReactor
+        -54,79: RMCAreaLv522AtmosWestReactor
         -54,80: RMCAreaLv522AtmosWestReactor
         -54,81: RMCAreaLv522AtmosWestReactor
         -54,82: RMCAreaLv522AtmosWestReactor
@@ -10470,10 +10470,10 @@ entities:
         -54,86: RMCAreaLv522AtmosWestReactor
         -54,87: RMCAreaLv522AtmosWestReactor
         -54,88: RMCAreaLv522AtmosWestReactor
-        -54,89: RMCAreaLv522Oob
-        -54,90: RMCAreaLv522Oob
-        -54,91: RMCAreaLv522Oob
-        -54,92: RMCAreaLv522Oob
+        -54,89: RMCAreaLv522AtmosWestReactor
+        -54,90: RMCAreaLv522AtmosWestReactor
+        -54,91: RMCAreaLv522AtmosWestReactor
+        -54,92: RMCAreaLv522AtmosWestReactor
         -54,93: RMCAreaLv522AtmosWestReactor
         -54,94: RMCAreaLv522AtmosWestReactor
         -54,95: RMCAreaLv522AtmosWestReactor
@@ -10675,9 +10675,9 @@ entities:
         -53,87: RMCAreaLv522AtmosWestReactor
         -53,88: RMCAreaLv522AtmosWestReactor
         -53,89: RMCAreaLv522AtmosWestReactor
-        -53,90: RMCAreaLv522Oob
-        -53,91: RMCAreaLv522Oob
-        -53,92: RMCAreaLv522Oob
+        -53,90: RMCAreaLv522AtmosWestReactor
+        -53,91: RMCAreaLv522AtmosWestReactor
+        -53,92: RMCAreaLv522AtmosWestReactor
         -53,93: RMCAreaLv522AtmosWestReactor
         -53,94: RMCAreaLv522AtmosWestReactor
         -53,95: RMCAreaLv522AtmosWestReactor
@@ -10880,7 +10880,7 @@ entities:
         -52,88: RMCAreaLv522AtmosWestReactor
         -52,89: RMCAreaLv522AtmosWestReactor
         -52,90: RMCAreaLv522AtmosWestReactor
-        -52,91: RMCAreaLv522Oob
+        -52,91: RMCAreaLv522AtmosWestReactor
         -52,92: RMCAreaLv522AtmosWestReactor
         -52,93: RMCAreaLv522AtmosWestReactor
         -52,94: RMCAreaLv522AtmosWestReactor
@@ -11053,7 +11053,7 @@ entities:
         -51,57: RMCAreaLv522Oob
         -51,58: RMCAreaLv522AtmosCargoIntake
         -51,59: RMCAreaLv522AtmosCargoIntake
-        -51,60: RMCAreaLv522Oob
+        -51,60: RMCAreaLv522AtmosCargoIntake
         -51,61: RMCAreaLv522AtmosCargoIntake
         -51,62: RMCAreaLv522AtmosCargoIntake
         -51,63: RMCAreaLv522AtmosCargoIntake
@@ -11074,8 +11074,8 @@ entities:
         -51,78: RMCAreaLv522AtmosWestReactor
         -51,79: RMCAreaLv522AtmosWestReactor
         -51,80: RMCAreaLv522AtmosWestReactor
-        -51,81: RMCAreaLv522Oob
-        -51,82: RMCAreaLv522Oob
+        -51,81: RMCAreaLv522AtmosWestReactor
+        -51,82: RMCAreaLv522AtmosWestReactor
         -51,83: RMCAreaLv522AtmosWestReactor
         -51,84: RMCAreaLv522AtmosWestReactor
         -51,85: RMCAreaLv522AtmosWestReactor
@@ -11257,8 +11257,8 @@ entities:
         -50,57: RMCAreaLv522AtmosCargoIntake
         -50,58: RMCAreaLv522AtmosCargoIntake
         -50,59: RMCAreaLv522AtmosCargoIntake
-        -50,60: RMCAreaLv522Oob
-        -50,61: RMCAreaLv522Oob
+        -50,60: RMCAreaLv522AtmosCargoIntake
+        -50,61: RMCAreaLv522AtmosCargoIntake
         -50,62: RMCAreaLv522AtmosCargoIntake
         -50,63: RMCAreaLv522AtmosCargoIntake
         -50,64: RMCAreaLv522AtmosCargoIntake
@@ -11279,8 +11279,8 @@ entities:
         -50,79: RMCAreaLv522AtmosWestReactor
         -50,80: RMCAreaLv522AtmosWestReactor
         -50,81: RMCAreaLv522AtmosWestReactor
-        -50,82: RMCAreaLv522Oob
-        -50,83: RMCAreaLv522Oob
+        -50,82: RMCAreaLv522AtmosWestReactor
+        -50,83: RMCAreaLv522AtmosWestReactor
         -50,84: RMCAreaLv522AtmosWestReactor
         -50,85: RMCAreaLv522AtmosWestReactor
         -50,86: RMCAreaLv522AtmosWestReactor
@@ -11461,8 +11461,8 @@ entities:
         -49,57: RMCAreaLv522AtmosCargoIntake
         -49,58: RMCAreaLv522AtmosCargoIntake
         -49,59: RMCAreaLv522AtmosCargoIntake
-        -49,60: RMCAreaLv522Oob
-        -49,61: RMCAreaLv522Oob
+        -49,60: RMCAreaLv522AtmosCargoIntake
+        -49,61: RMCAreaLv522AtmosCargoIntake
         -49,62: RMCAreaLv522AtmosCargoIntake
         -49,63: RMCAreaLv522AtmosCargoIntake
         -49,64: RMCAreaLv522AtmosCargoIntake
@@ -11489,7 +11489,7 @@ entities:
         -49,85: RMCAreaLv522AtmosWestReactor
         -49,86: RMCAreaLv522AtmosWestReactor
         -49,87: RMCAreaLv522AtmosWestReactor
-        -49,88: RMCAreaLv522Oob
+        -49,88: RMCAreaLv522AtmosWestReactor
         -49,89: RMCAreaLv522AtmosWestReactor
         -49,90: RMCAreaLv522AtmosWestReactor
         -49,91: RMCAreaLv522AtmosWestReactor
@@ -11664,10 +11664,10 @@ entities:
         -48,56: RMCAreaLv522AtmosCargoIntake
         -48,57: RMCAreaLv522AtmosCargoIntake
         -48,58: RMCAreaLv522AtmosCargoIntake
-        -48,59: RMCAreaLv522Oob
-        -48,60: RMCAreaLv522Oob
-        -48,61: RMCAreaLv522Oob
-        -48,62: RMCAreaLv522Oob
+        -48,59: RMCAreaLv522AtmosCargoIntake
+        -48,60: RMCAreaLv522AtmosCargoIntake
+        -48,61: RMCAreaLv522AtmosCargoIntake
+        -48,62: RMCAreaLv522AtmosCargoIntake
         -48,63: RMCAreaLv522AtmosCargoIntake
         -48,64: RMCAreaLv522AtmosCargoIntake
         -48,65: RMCAreaLv522AtmosCargoIntake
@@ -11693,12 +11693,12 @@ entities:
         -48,85: RMCAreaLv522AtmosWestReactor
         -48,86: RMCAreaLv522AtmosWestReactor
         -48,87: RMCAreaLv522AtmosWestReactor
-        -48,88: RMCAreaLv522Oob
-        -48,89: RMCAreaLv522Oob
+        -48,88: RMCAreaLv522AtmosWestReactor
+        -48,89: RMCAreaLv522AtmosWestReactor
         -48,90: RMCAreaLv522AtmosWestReactor
         -48,91: RMCAreaLv522AtmosWestReactor
         -48,92: RMCAreaLv522AtmosWestReactor
-        -48,93: RMCAreaLv522Oob
+        -48,93: RMCAreaLv522AtmosWestReactor
         -48,94: RMCAreaLv522Oob
         -48,95: RMCAreaLv522Oob
         -48,96: RMCAreaLv522Oob
@@ -11868,9 +11868,9 @@ entities:
         -47,56: RMCAreaLv522AtmosCargoIntake
         -47,57: RMCAreaLv522AtmosCargoIntake
         -47,58: RMCAreaLv522AtmosCargoIntake
-        -47,59: RMCAreaLv522Oob
-        -47,60: RMCAreaLv522Oob
-        -47,61: RMCAreaLv522Oob
+        -47,59: RMCAreaLv522AtmosCargoIntake
+        -47,60: RMCAreaLv522AtmosCargoIntake
+        -47,61: RMCAreaLv522AtmosCargoIntake
         -47,62: RMCAreaLv522AtmosCargoIntake
         -47,63: RMCAreaLv522AtmosCargoIntake
         -47,64: RMCAreaLv522AtmosCargoIntake
@@ -11884,7 +11884,7 @@ entities:
         -47,72: RMCAreaLv522Oob
         -47,73: RMCAreaLv522Oob
         -47,74: RMCAreaLv522Oob
-        -47,75: RMCAreaLv522Oob
+        -47,75: RMCAreaLv522AtmosWestReactor
         -47,76: RMCAreaLv522AtmosWestReactor
         -47,77: RMCAreaLv522AtmosWestReactor
         -47,78: RMCAreaLv522AtmosWestReactor
@@ -11896,9 +11896,9 @@ entities:
         -47,84: RMCAreaLv522AtmosWestReactor
         -47,85: RMCAreaLv522AtmosWestReactor
         -47,86: RMCAreaLv522AtmosWestReactor
-        -47,87: RMCAreaLv522Oob
-        -47,88: RMCAreaLv522Oob
-        -47,89: RMCAreaLv522Oob
+        -47,87: RMCAreaLv522AtmosWestReactor
+        -47,88: RMCAreaLv522AtmosWestReactor
+        -47,89: RMCAreaLv522AtmosWestReactor
         -47,90: RMCAreaLv522AtmosWestReactor
         -47,91: RMCAreaLv522AtmosWestReactor
         -47,92: RMCAreaLv522AtmosWestReactor
@@ -12073,7 +12073,7 @@ entities:
         -46,57: RMCAreaLv522AtmosCargoIntake
         -46,58: RMCAreaLv522AtmosCargoIntake
         -46,59: RMCAreaLv522AtmosCargoIntake
-        -46,60: RMCAreaLv522Oob
+        -46,60: RMCAreaLv522AtmosCargoIntake
         -46,61: RMCAreaLv522AtmosCargoIntake
         -46,62: RMCAreaLv522AtmosCargoIntake
         -46,63: RMCAreaLv522AtmosCargoIntake
@@ -13315,7 +13315,7 @@ entities:
         -40,75: RMCAreaLv522Oob
         -40,76: RMCAreaLv522Oob
         -40,77: RMCAreaLv522Oob
-        -40,78: RMCAreaLv522Oob
+        -40,78: RMCAreaLv522AtmosNorthCommandCentre
         -40,79: RMCAreaLv522AtmosNorthCommandCentre
         -40,80: RMCAreaLv522AtmosNorthCommandCentre
         -40,81: RMCAreaLv522AtmosNorthCommandCentre
@@ -13518,8 +13518,8 @@ entities:
         -39,74: RMCAreaLv522Oob
         -39,75: RMCAreaLv522AtmosNorthCommandCentre
         -39,76: RMCAreaLv522AtmosNorthCommandCentre
-        -39,77: RMCAreaLv522Oob
-        -39,78: RMCAreaLv522Oob
+        -39,77: RMCAreaLv522AtmosNorthCommandCentre
+        -39,78: RMCAreaLv522AtmosNorthCommandCentre
         -39,79: RMCAreaLv522AtmosNorthCommandCentre
         -39,80: RMCAreaLv522AtmosNorthCommandCentre
         -39,81: RMCAreaLv522AtmosNorthCommandCentre
@@ -13706,7 +13706,7 @@ entities:
         -38,58: RMCAreaLv522AtmosCargoIntake
         -38,59: RMCAreaLv522AtmosCargoIntake
         -38,60: RMCAreaLv522AtmosCargoIntake
-        -38,61: RMCAreaLv522Oob
+        -38,61: RMCAreaLv522AtmosCargoIntake
         -38,62: RMCAreaLv522AtmosCargoIntake
         -38,63: RMCAreaLv522AtmosCargoIntake
         -38,64: RMCAreaLv522AtmosCargoIntake
@@ -13909,9 +13909,9 @@ entities:
         -37,57: RMCAreaLv522AtmosCargoIntake
         -37,58: RMCAreaLv522AtmosCargoIntake
         -37,59: RMCAreaLv522AtmosCargoIntake
-        -37,60: RMCAreaLv522Oob
-        -37,61: RMCAreaLv522Oob
-        -37,62: RMCAreaLv522Oob
+        -37,60: RMCAreaLv522AtmosCargoIntake
+        -37,61: RMCAreaLv522AtmosCargoIntake
+        -37,62: RMCAreaLv522AtmosCargoIntake
         -37,63: RMCAreaLv522AtmosCargoIntake
         -37,64: RMCAreaLv522AtmosCargoIntake
         -37,65: RMCAreaLv522AtmosCargoIntake
@@ -14113,9 +14113,9 @@ entities:
         -36,57: RMCAreaLv522AtmosCargoIntake
         -36,58: RMCAreaLv522AtmosCargoIntake
         -36,59: RMCAreaLv522AtmosCargoIntake
-        -36,60: RMCAreaLv522Oob
-        -36,61: RMCAreaLv522Oob
-        -36,62: RMCAreaLv522Oob
+        -36,60: RMCAreaLv522AtmosCargoIntake
+        -36,61: RMCAreaLv522AtmosCargoIntake
+        -36,62: RMCAreaLv522AtmosCargoIntake
         -36,63: RMCAreaLv522AtmosCargoIntake
         -36,64: RMCAreaLv522AtmosCargoIntake
         -36,65: RMCAreaLv522AtmosCargoIntake
@@ -14317,9 +14317,9 @@ entities:
         -35,57: RMCAreaLv522AtmosCargoIntake
         -35,58: RMCAreaLv522AtmosCargoIntake
         -35,59: RMCAreaLv522AtmosCargoIntake
-        -35,60: RMCAreaLv522Oob
-        -35,61: RMCAreaLv522Oob
-        -35,62: RMCAreaLv522Oob
+        -35,60: RMCAreaLv522AtmosCargoIntake
+        -35,61: RMCAreaLv522AtmosCargoIntake
+        -35,62: RMCAreaLv522AtmosCargoIntake
         -35,63: RMCAreaLv522AtmosCargoIntake
         -35,64: RMCAreaLv522AtmosCargoIntake
         -35,65: RMCAreaLv522AtmosCargoIntake
@@ -14521,9 +14521,9 @@ entities:
         -34,57: RMCAreaLv522AtmosCargoIntake
         -34,58: RMCAreaLv522AtmosCargoIntake
         -34,59: RMCAreaLv522AtmosCargoIntake
-        -34,60: RMCAreaLv522Oob
-        -34,61: RMCAreaLv522Oob
-        -34,62: RMCAreaLv522Oob
+        -34,60: RMCAreaLv522AtmosCargoIntake
+        -34,61: RMCAreaLv522AtmosCargoIntake
+        -34,62: RMCAreaLv522AtmosCargoIntake
         -34,63: RMCAreaLv522AtmosCargoIntake
         -34,64: RMCAreaLv522AtmosCargoIntake
         -34,65: RMCAreaLv522AtmosCargoIntake
@@ -14542,7 +14542,7 @@ entities:
         -34,78: RMCAreaLv522AtmosNorthCommandCentre
         -34,79: RMCAreaLv522AtmosNorthCommandCentre
         -34,80: RMCAreaLv522AtmosNorthCommandCentre
-        -34,81: RMCAreaLv522Oob
+        -34,81: RMCAreaLv522AtmosNorthCommandCentre
         -34,82: RMCAreaLv522AtmosNorthCommandCentre
         -34,83: RMCAreaLv522AtmosNorthCommandCentre
         -34,84: RMCAreaLv522AtmosNorthCommandCentre
@@ -14725,9 +14725,9 @@ entities:
         -33,57: RMCAreaLv522AtmosCargoIntake
         -33,58: RMCAreaLv522AtmosCargoIntake
         -33,59: RMCAreaLv522AtmosCargoIntake
-        -33,60: RMCAreaLv522Oob
-        -33,61: RMCAreaLv522Oob
-        -33,62: RMCAreaLv522Oob
+        -33,60: RMCAreaLv522AtmosCargoIntake
+        -33,61: RMCAreaLv522AtmosCargoIntake
+        -33,62: RMCAreaLv522AtmosCargoIntake
         -33,63: RMCAreaLv522AtmosCargoIntake
         -33,64: RMCAreaLv522AtmosCargoIntake
         -33,65: RMCAreaLv522AtmosCargoIntake
@@ -14745,9 +14745,9 @@ entities:
         -33,77: RMCAreaLv522AtmosNorthCommandCentre
         -33,78: RMCAreaLv522AtmosNorthCommandCentre
         -33,79: RMCAreaLv522AtmosNorthCommandCentre
-        -33,80: RMCAreaLv522Oob
-        -33,81: RMCAreaLv522Oob
-        -33,82: RMCAreaLv522Oob
+        -33,80: RMCAreaLv522AtmosNorthCommandCentre
+        -33,81: RMCAreaLv522AtmosNorthCommandCentre
+        -33,82: RMCAreaLv522AtmosNorthCommandCentre
         -33,83: RMCAreaLv522AtmosNorthCommandCentre
         -33,84: RMCAreaLv522AtmosNorthCommandCentre
         -33,85: RMCAreaLv522AtmosNorthCommandCentre
@@ -14930,7 +14930,7 @@ entities:
         -32,58: RMCAreaLv522AtmosCargoIntake
         -32,59: RMCAreaLv522AtmosCargoIntake
         -32,60: RMCAreaLv522AtmosCargoIntake
-        -32,61: RMCAreaLv522Oob
+        -32,61: RMCAreaLv522AtmosCargoIntake
         -32,62: RMCAreaLv522AtmosCargoIntake
         -32,63: RMCAreaLv522AtmosCargoIntake
         -32,64: RMCAreaLv522AtmosCargoIntake
@@ -14948,11 +14948,11 @@ entities:
         -32,76: RMCAreaLv522AtmosNorthCommandCentre
         -32,77: RMCAreaLv522AtmosNorthCommandCentre
         -32,78: RMCAreaLv522AtmosNorthCommandCentre
-        -32,79: RMCAreaLv522Oob
-        -32,80: RMCAreaLv522Oob
-        -32,81: RMCAreaLv522Oob
-        -32,82: RMCAreaLv522Oob
-        -32,83: RMCAreaLv522Oob
+        -32,79: RMCAreaLv522AtmosNorthCommandCentre
+        -32,80: RMCAreaLv522AtmosNorthCommandCentre
+        -32,81: RMCAreaLv522AtmosNorthCommandCentre
+        -32,82: RMCAreaLv522AtmosNorthCommandCentre
+        -32,83: RMCAreaLv522AtmosNorthCommandCentre
         -32,84: RMCAreaLv522AtmosNorthCommandCentre
         -32,85: RMCAreaLv522AtmosNorthCommandCentre
         -32,86: RMCAreaLv522AtmosNorthCommandCentre
@@ -15152,11 +15152,11 @@ entities:
         -31,76: RMCAreaLv522AtmosNorthCommandCentre
         -31,77: RMCAreaLv522AtmosNorthCommandCentre
         -31,78: RMCAreaLv522AtmosNorthCommandCentre
-        -31,79: RMCAreaLv522Oob
-        -31,80: RMCAreaLv522Oob
-        -31,81: RMCAreaLv522Oob
-        -31,82: RMCAreaLv522Oob
-        -31,83: RMCAreaLv522Oob
+        -31,79: RMCAreaLv522AtmosNorthCommandCentre
+        -31,80: RMCAreaLv522AtmosNorthCommandCentre
+        -31,81: RMCAreaLv522AtmosNorthCommandCentre
+        -31,82: RMCAreaLv522AtmosNorthCommandCentre
+        -31,83: RMCAreaLv522AtmosNorthCommandCentre
         -31,84: RMCAreaLv522AtmosNorthCommandCentre
         -31,85: RMCAreaLv522AtmosNorthCommandCentre
         -31,86: RMCAreaLv522AtmosNorthCommandCentre
@@ -15333,7 +15333,7 @@ entities:
         -30,53: RMCAreaLv522AtmosReactorGarage
         -30,54: RMCAreaLv522AtmosReactorGarage
         -30,55: RMCAreaLv522Oob
-        -30,56: RMCAreaLv522Oob
+        -30,56: RMCAreaLv522AtmosCargoIntake
         -30,57: RMCAreaLv522AtmosCargoIntake
         -30,58: RMCAreaLv522AtmosCargoIntake
         -30,59: RMCAreaLv522AtmosCargoIntake
@@ -15356,10 +15356,10 @@ entities:
         -30,76: RMCAreaLv522AtmosNorthCommandCentre
         -30,77: RMCAreaLv522AtmosNorthCommandCentre
         -30,78: RMCAreaLv522AtmosNorthCommandCentre
-        -30,79: RMCAreaLv522Oob
-        -30,80: RMCAreaLv522Oob
-        -30,81: RMCAreaLv522Oob
-        -30,82: RMCAreaLv522Oob
+        -30,79: RMCAreaLv522AtmosNorthCommandCentre
+        -30,80: RMCAreaLv522AtmosNorthCommandCentre
+        -30,81: RMCAreaLv522AtmosNorthCommandCentre
+        -30,82: RMCAreaLv522AtmosNorthCommandCentre
         -30,83: RMCAreaLv522AtmosNorthCommandCentre
         -30,84: RMCAreaLv522AtmosNorthCommandCentre
         -30,85: RMCAreaLv522AtmosNorthCommandCentre
@@ -15537,8 +15537,8 @@ entities:
         -29,53: RMCAreaLv522AtmosReactorGarage
         -29,54: RMCAreaLv522AtmosReactorGarage
         -29,55: RMCAreaLv522Oob
-        -29,56: RMCAreaLv522Oob
-        -29,57: RMCAreaLv522Oob
+        -29,56: RMCAreaLv522AtmosCargoIntake
+        -29,57: RMCAreaLv522AtmosCargoIntake
         -29,58: RMCAreaLv522AtmosCargoIntake
         -29,59: RMCAreaLv522AtmosCargoIntake
         -29,60: RMCAreaLv522AtmosCargoIntake
@@ -15560,10 +15560,10 @@ entities:
         -29,76: RMCAreaLv522AtmosNorthCommandCentre
         -29,77: RMCAreaLv522AtmosNorthCommandCentre
         -29,78: RMCAreaLv522AtmosNorthCommandCentre
-        -29,79: RMCAreaLv522Oob
-        -29,80: RMCAreaLv522Oob
-        -29,81: RMCAreaLv522Oob
-        -29,82: RMCAreaLv522Oob
+        -29,79: RMCAreaLv522AtmosNorthCommandCentre
+        -29,80: RMCAreaLv522AtmosNorthCommandCentre
+        -29,81: RMCAreaLv522AtmosNorthCommandCentre
+        -29,82: RMCAreaLv522AtmosNorthCommandCentre
         -29,83: RMCAreaLv522AtmosNorthCommandCentre
         -29,84: RMCAreaLv522AtmosNorthCommandCentre
         -29,85: RMCAreaLv522AtmosNorthCommandCentre
@@ -15741,9 +15741,9 @@ entities:
         -28,53: RMCAreaLv522AtmosReactorGarage
         -28,54: RMCAreaLv522AtmosReactorGarage
         -28,55: RMCAreaLv522Oob
-        -28,56: RMCAreaLv522Oob
-        -28,57: RMCAreaLv522Oob
-        -28,58: RMCAreaLv522Oob
+        -28,56: RMCAreaLv522AtmosCargoIntake
+        -28,57: RMCAreaLv522AtmosCargoIntake
+        -28,58: RMCAreaLv522AtmosCargoIntake
         -28,59: RMCAreaLv522AtmosCargoIntake
         -28,60: RMCAreaLv522AtmosCargoIntake
         -28,61: RMCAreaLv522AtmosCargoIntake
@@ -15764,10 +15764,10 @@ entities:
         -28,76: RMCAreaLv522AtmosNorthCommandCentre
         -28,77: RMCAreaLv522AtmosNorthCommandCentre
         -28,78: RMCAreaLv522AtmosNorthCommandCentre
-        -28,79: RMCAreaLv522Oob
-        -28,80: RMCAreaLv522Oob
-        -28,81: RMCAreaLv522Oob
-        -28,82: RMCAreaLv522Oob
+        -28,79: RMCAreaLv522AtmosNorthCommandCentre
+        -28,80: RMCAreaLv522AtmosNorthCommandCentre
+        -28,81: RMCAreaLv522AtmosNorthCommandCentre
+        -28,82: RMCAreaLv522AtmosNorthCommandCentre
         -28,83: RMCAreaLv522AtmosNorthCommandCentre
         -28,84: RMCAreaLv522AtmosNorthCommandCentre
         -28,85: RMCAreaLv522AtmosNorthCommandCentre
@@ -15945,19 +15945,19 @@ entities:
         -27,53: RMCAreaLv522AtmosReactorGarage
         -27,54: RMCAreaLv522AtmosReactorGarage
         -27,55: RMCAreaLv522Oob
-        -27,56: RMCAreaLv522Oob
-        -27,57: RMCAreaLv522Oob
-        -27,58: RMCAreaLv522Oob
-        -27,59: RMCAreaLv522Oob
+        -27,56: RMCAreaLv522AtmosCargoIntake
+        -27,57: RMCAreaLv522AtmosCargoIntake
+        -27,58: RMCAreaLv522AtmosCargoIntake
+        -27,59: RMCAreaLv522AtmosCargoIntake
         -27,60: RMCAreaLv522AtmosCargoIntake
         -27,61: RMCAreaLv522AtmosCargoIntake
         -27,62: RMCAreaLv522AtmosCargoIntake
         -27,63: RMCAreaLv522AtmosCargoIntake
         -27,64: RMCAreaLv522AtmosCargoIntake
         -27,65: RMCAreaLv522AtmosCargoIntake
-        -27,66: RMCAreaLv522Oob
-        -27,67: RMCAreaLv522Oob
-        -27,68: RMCAreaLv522Oob
+        -27,66: RMCAreaLv522AtmosCargoIntake
+        -27,67: RMCAreaLv522AtmosCargoIntake
+        -27,68: RMCAreaLv522AtmosCargoIntake
         -27,69: RMCAreaLv522AtmosCargoIntake
         -27,70: RMCAreaLv522AtmosCargoIntake
         -27,71: RMCAreaLv522AtmosCargoIntake
@@ -15969,10 +15969,10 @@ entities:
         -27,77: RMCAreaLv522AtmosNorthCommandCentre
         -27,78: RMCAreaLv522AtmosNorthCommandCentre
         -27,79: RMCAreaLv522AtmosNorthCommandCentre
-        -27,80: RMCAreaLv522Oob
-        -27,81: RMCAreaLv522Oob
-        -27,82: RMCAreaLv522Oob
-        -27,83: RMCAreaLv522Oob
+        -27,80: RMCAreaLv522AtmosNorthCommandCentre
+        -27,81: RMCAreaLv522AtmosNorthCommandCentre
+        -27,82: RMCAreaLv522AtmosNorthCommandCentre
+        -27,83: RMCAreaLv522AtmosNorthCommandCentre
         -27,84: RMCAreaLv522AtmosNorthCommandCentre
         -27,85: RMCAreaLv522AtmosNorthCommandCentre
         -27,86: RMCAreaLv522AtmosNorthCommandCentre
@@ -16149,17 +16149,17 @@ entities:
         -26,53: RMCAreaLv522AtmosReactorGarage
         -26,54: RMCAreaLv522AtmosReactorGarage
         -26,55: RMCAreaLv522Oob
-        -26,56: RMCAreaLv522Oob
-        -26,57: RMCAreaLv522Oob
-        -26,58: RMCAreaLv522Oob
-        -26,59: RMCAreaLv522Oob
-        -26,60: RMCAreaLv522Oob
+        -26,56: RMCAreaLv522AtmosCargoIntake
+        -26,57: RMCAreaLv522AtmosCargoIntake
+        -26,58: RMCAreaLv522AtmosCargoIntake
+        -26,59: RMCAreaLv522AtmosCargoIntake
+        -26,60: RMCAreaLv522AtmosCargoIntake
         -26,61: RMCAreaLv522AtmosCargoIntake
         -26,62: RMCAreaLv522AtmosCargoIntake
         -26,63: RMCAreaLv522AtmosCargoIntake
         -26,64: RMCAreaLv522AtmosCargoIntake
-        -26,65: RMCAreaLv522Oob
-        -26,66: RMCAreaLv522Oob
+        -26,65: RMCAreaLv522AtmosCargoIntake
+        -26,66: RMCAreaLv522AtmosCargoIntake
         -26,67: RMCAreaLv522AtmosCommandCentre
         -26,68: RMCAreaLv522AtmosCommandCentre
         -26,69: RMCAreaLv522AtmosCommandCentre
@@ -16173,10 +16173,10 @@ entities:
         -26,77: RMCAreaLv522AtmosNorthCommandCentre
         -26,78: RMCAreaLv522AtmosNorthCommandCentre
         -26,79: RMCAreaLv522AtmosNorthCommandCentre
-        -26,80: RMCAreaLv522Oob
-        -26,81: RMCAreaLv522Oob
-        -26,82: RMCAreaLv522Oob
-        -26,83: RMCAreaLv522Oob
+        -26,80: RMCAreaLv522AtmosNorthCommandCentre
+        -26,81: RMCAreaLv522AtmosNorthCommandCentre
+        -26,82: RMCAreaLv522AtmosNorthCommandCentre
+        -26,83: RMCAreaLv522AtmosNorthCommandCentre
         -26,84: RMCAreaLv522AtmosNorthCommandCentre
         -26,85: RMCAreaLv522AtmosNorthCommandCentre
         -26,86: RMCAreaLv522AtmosNorthCommandCentre
@@ -16353,16 +16353,16 @@ entities:
         -25,53: RMCAreaLv522AtmosReactorGarage
         -25,54: RMCAreaLv522AtmosReactorGarage
         -25,55: RMCAreaLv522Oob
-        -25,56: RMCAreaLv522Oob
-        -25,57: RMCAreaLv522Oob
-        -25,58: RMCAreaLv522Oob
-        -25,59: RMCAreaLv522Oob
-        -25,60: RMCAreaLv522Oob
-        -25,61: RMCAreaLv522Oob
+        -25,56: RMCAreaLv522AtmosCargoIntake
+        -25,57: RMCAreaLv522AtmosCargoIntake
+        -25,58: RMCAreaLv522AtmosCargoIntake
+        -25,59: RMCAreaLv522AtmosCargoIntake
+        -25,60: RMCAreaLv522AtmosCargoIntake
+        -25,61: RMCAreaLv522AtmosCargoIntake
         -25,62: RMCAreaLv522AtmosCargoIntake
         -25,63: RMCAreaLv522AtmosCargoIntake
         -25,64: RMCAreaLv522AtmosCargoIntake
-        -25,65: RMCAreaLv522Oob
+        -25,65: RMCAreaLv522AtmosCargoIntake
         -25,66: RMCAreaLv522AtmosCommandCentre
         -25,67: RMCAreaLv522AtmosCommandCentre
         -25,68: RMCAreaLv522AtmosCommandCentre
@@ -16378,10 +16378,10 @@ entities:
         -25,78: RMCAreaLv522AtmosNorthCommandCentre
         -25,79: RMCAreaLv522AtmosNorthCommandCentre
         -25,80: RMCAreaLv522AtmosNorthCommandCentre
-        -25,81: RMCAreaLv522Oob
-        -25,82: RMCAreaLv522Oob
-        -25,83: RMCAreaLv522Oob
-        -25,84: RMCAreaLv522Oob
+        -25,81: RMCAreaLv522AtmosNorthCommandCentre
+        -25,82: RMCAreaLv522AtmosNorthCommandCentre
+        -25,83: RMCAreaLv522AtmosNorthCommandCentre
+        -25,84: RMCAreaLv522AtmosNorthCommandCentre
         -25,85: RMCAreaLv522AtmosNorthCommandCentre
         -25,86: RMCAreaLv522AtmosNorthCommandCentre
         -25,87: RMCAreaLv522AtmosNorthCommandCentre
@@ -16557,12 +16557,12 @@ entities:
         -24,53: RMCAreaLv522AtmosReactorGarage
         -24,54: RMCAreaLv522AtmosReactorGarage
         -24,55: RMCAreaLv522Oob
-        -24,56: RMCAreaLv522Oob
-        -24,57: RMCAreaLv522Oob
-        -24,58: RMCAreaLv522Oob
-        -24,59: RMCAreaLv522Oob
-        -24,60: RMCAreaLv522Oob
-        -24,61: RMCAreaLv522Oob
+        -24,56: RMCAreaLv522AtmosCargoIntake
+        -24,57: RMCAreaLv522AtmosCargoIntake
+        -24,58: RMCAreaLv522AtmosCargoIntake
+        -24,59: RMCAreaLv522AtmosCargoIntake
+        -24,60: RMCAreaLv522AtmosCargoIntake
+        -24,61: RMCAreaLv522AtmosCargoIntake
         -24,62: RMCAreaLv522AtmosCargoIntake
         -24,63: RMCAreaLv522AtmosCargoIntake
         -24,64: RMCAreaLv522AtmosCargoIntake
@@ -16582,10 +16582,10 @@ entities:
         -24,78: RMCAreaLv522AtmosNorthCommandCentre
         -24,79: RMCAreaLv522AtmosNorthCommandCentre
         -24,80: RMCAreaLv522AtmosNorthCommandCentre
-        -24,81: RMCAreaLv522Oob
-        -24,82: RMCAreaLv522Oob
-        -24,83: RMCAreaLv522Oob
-        -24,84: RMCAreaLv522Oob
+        -24,81: RMCAreaLv522AtmosNorthCommandCentre
+        -24,82: RMCAreaLv522AtmosNorthCommandCentre
+        -24,83: RMCAreaLv522AtmosNorthCommandCentre
+        -24,84: RMCAreaLv522AtmosNorthCommandCentre
         -24,85: RMCAreaLv522AtmosNorthCommandCentre
         -24,86: RMCAreaLv522AtmosNorthCommandCentre
         -24,87: RMCAreaLv522AtmosNorthCommandCentre
@@ -16761,12 +16761,12 @@ entities:
         -23,53: RMCAreaLv522AtmosReactorGarage
         -23,54: RMCAreaLv522AtmosReactorGarage
         -23,55: RMCAreaLv522Oob
-        -23,56: RMCAreaLv522Oob
-        -23,57: RMCAreaLv522Oob
-        -23,58: RMCAreaLv522Oob
-        -23,59: RMCAreaLv522Oob
-        -23,60: RMCAreaLv522Oob
-        -23,61: RMCAreaLv522Oob
+        -23,56: RMCAreaLv522AtmosCargoIntake
+        -23,57: RMCAreaLv522AtmosCargoIntake
+        -23,58: RMCAreaLv522AtmosCargoIntake
+        -23,59: RMCAreaLv522AtmosCargoIntake
+        -23,60: RMCAreaLv522AtmosCargoIntake
+        -23,61: RMCAreaLv522AtmosCargoIntake
         -23,62: RMCAreaLv522AtmosCargoIntake
         -23,63: RMCAreaLv522AtmosCargoIntake
         -23,64: RMCAreaLv522AtmosCargoIntake
@@ -16786,9 +16786,9 @@ entities:
         -23,78: RMCAreaLv522AtmosNorthCommandCentre
         -23,79: RMCAreaLv522AtmosNorthCommandCentre
         -23,80: RMCAreaLv522AtmosNorthCommandCentre
-        -23,81: RMCAreaLv522Oob
-        -23,82: RMCAreaLv522Oob
-        -23,83: RMCAreaLv522Oob
+        -23,81: RMCAreaLv522AtmosNorthCommandCentre
+        -23,82: RMCAreaLv522AtmosNorthCommandCentre
+        -23,83: RMCAreaLv522AtmosNorthCommandCentre
         -23,84: RMCAreaLv522AtmosNorthCommandCentre
         -23,85: RMCAreaLv522AtmosNorthCommandCentre
         -23,86: RMCAreaLv522AtmosNorthCommandCentre
@@ -16965,11 +16965,11 @@ entities:
         -22,53: RMCAreaLv522AtmosReactorGarage
         -22,54: RMCAreaLv522AtmosReactorGarage
         -22,55: RMCAreaLv522Oob
-        -22,56: RMCAreaLv522Oob
-        -22,57: RMCAreaLv522Oob
-        -22,58: RMCAreaLv522Oob
-        -22,59: RMCAreaLv522Oob
-        -22,60: RMCAreaLv522Oob
+        -22,56: RMCAreaLv522AtmosCargoIntake
+        -22,57: RMCAreaLv522AtmosCargoIntake
+        -22,58: RMCAreaLv522AtmosCargoIntake
+        -22,59: RMCAreaLv522AtmosCargoIntake
+        -22,60: RMCAreaLv522AtmosCargoIntake
         -22,61: RMCAreaLv522AtmosCargoIntake
         -22,62: RMCAreaLv522AtmosCargoIntake
         -22,63: RMCAreaLv522AtmosCargoIntake
@@ -16991,8 +16991,8 @@ entities:
         -22,79: RMCAreaLv522AtmosNorthCommandCentre
         -22,80: RMCAreaLv522AtmosNorthCommandCentre
         -22,81: RMCAreaLv522AtmosNorthCommandCentre
-        -22,82: RMCAreaLv522Oob
-        -22,83: RMCAreaLv522Oob
+        -22,82: RMCAreaLv522AtmosNorthCommandCentre
+        -22,83: RMCAreaLv522AtmosNorthCommandCentre
         -22,84: RMCAreaLv522AtmosNorthCommandCentre
         -22,85: RMCAreaLv522AtmosNorthCommandCentre
         -22,86: RMCAreaLv522AtmosNorthCommandCentre
@@ -17169,10 +17169,10 @@ entities:
         -21,53: RMCAreaLv522AtmosReactorGarage
         -21,54: RMCAreaLv522AtmosReactorGarage
         -21,55: RMCAreaLv522Oob
-        -21,56: RMCAreaLv522Oob
-        -21,57: RMCAreaLv522Oob
-        -21,58: RMCAreaLv522Oob
-        -21,59: RMCAreaLv522Oob
+        -21,56: RMCAreaLv522AtmosCargoIntake
+        -21,57: RMCAreaLv522AtmosCargoIntake
+        -21,58: RMCAreaLv522AtmosCargoIntake
+        -21,59: RMCAreaLv522AtmosCargoIntake
         -21,60: RMCAreaLv522AtmosCargoIntake
         -21,61: RMCAreaLv522AtmosCargoIntake
         -21,62: RMCAreaLv522AtmosCargoIntake
@@ -17195,8 +17195,8 @@ entities:
         -21,79: RMCAreaLv522AtmosNorthCommandCentre
         -21,80: RMCAreaLv522AtmosNorthCommandCentre
         -21,81: RMCAreaLv522AtmosNorthCommandCentre
-        -21,82: RMCAreaLv522Oob
-        -21,83: RMCAreaLv522Oob
+        -21,82: RMCAreaLv522AtmosNorthCommandCentre
+        -21,83: RMCAreaLv522AtmosNorthCommandCentre
         -21,84: RMCAreaLv522AtmosNorthCommandCentre
         -21,85: RMCAreaLv522AtmosNorthCommandCentre
         -21,86: RMCAreaLv522AtmosNorthCommandCentre
@@ -17373,9 +17373,9 @@ entities:
         -20,53: RMCAreaLv522AtmosReactorGarage
         -20,54: RMCAreaLv522AtmosReactorGarage
         -20,55: RMCAreaLv522Oob
-        -20,56: RMCAreaLv522Oob
-        -20,57: RMCAreaLv522Oob
-        -20,58: RMCAreaLv522Oob
+        -20,56: RMCAreaLv522AtmosCargoIntake
+        -20,57: RMCAreaLv522AtmosCargoIntake
+        -20,58: RMCAreaLv522AtmosCargoIntake
         -20,59: RMCAreaLv522AtmosCargoIntake
         -20,60: RMCAreaLv522AtmosCargoIntake
         -20,61: RMCAreaLv522AtmosCargoIntake
@@ -17392,7 +17392,7 @@ entities:
         -20,72: RMCAreaLv522AtmosCommandCentre
         -20,73: RMCAreaLv522AtmosCommandCentre
         -20,74: RMCAreaLv522Oob
-        -20,75: RMCAreaLv522Oob
+        -20,75: RMCAreaLv522AtmosNorthCommandCentre
         -20,76: RMCAreaLv522AtmosNorthCommandCentre
         -20,77: RMCAreaLv522AtmosNorthCommandCentre
         -20,78: RMCAreaLv522AtmosNorthCommandCentre
@@ -17400,7 +17400,7 @@ entities:
         -20,80: RMCAreaLv522AtmosNorthCommandCentre
         -20,81: RMCAreaLv522AtmosNorthCommandCentre
         -20,82: RMCAreaLv522AtmosNorthCommandCentre
-        -20,83: RMCAreaLv522Oob
+        -20,83: RMCAreaLv522AtmosNorthCommandCentre
         -20,84: RMCAreaLv522AtmosNorthCommandCentre
         -20,85: RMCAreaLv522AtmosNorthCommandCentre
         -20,86: RMCAreaLv522AtmosNorthCommandCentre
@@ -17577,9 +17577,9 @@ entities:
         -19,53: RMCAreaLv522AtmosReactorGarage
         -19,54: RMCAreaLv522AtmosReactorGarage
         -19,55: RMCAreaLv522AtmosCargoIntake
-        -19,56: RMCAreaLv522Oob
-        -19,57: RMCAreaLv522Oob
-        -19,58: RMCAreaLv522Oob
+        -19,56: RMCAreaLv522AtmosCargoIntake
+        -19,57: RMCAreaLv522AtmosCargoIntake
+        -19,58: RMCAreaLv522AtmosCargoIntake
         -19,59: RMCAreaLv522AtmosCargoIntake
         -19,60: RMCAreaLv522AtmosCargoIntake
         -19,61: RMCAreaLv522AtmosCargoIntake
@@ -17596,8 +17596,8 @@ entities:
         -19,72: RMCAreaLv522AtmosCommandCentre
         -19,73: RMCAreaLv522AtmosCommandCentre
         -19,74: RMCAreaLv522Oob
-        -19,75: RMCAreaLv522Oob
-        -19,76: RMCAreaLv522Oob
+        -19,75: RMCAreaLv522AtmosNorthCommandCentre
+        -19,76: RMCAreaLv522AtmosNorthCommandCentre
         -19,77: RMCAreaLv522AtmosNorthCommandCentre
         -19,78: RMCAreaLv522AtmosNorthCommandCentre
         -19,79: RMCAreaLv522AtmosNorthCommandCentre
@@ -17782,9 +17782,9 @@ entities:
         -18,54: RMCAreaLv522AtmosReactorGarage
         -18,55: RMCAreaLv522AtmosCargoIntake
         -18,56: RMCAreaLv522AtmosCargoIntake
-        -18,57: RMCAreaLv522Oob
-        -18,58: RMCAreaLv522Oob
-        -18,59: RMCAreaLv522Oob
+        -18,57: RMCAreaLv522AtmosCargoIntake
+        -18,58: RMCAreaLv522AtmosCargoIntake
+        -18,59: RMCAreaLv522AtmosCargoIntake
         -18,60: RMCAreaLv522AtmosCargoIntake
         -18,61: RMCAreaLv522AtmosCargoIntake
         -18,62: RMCAreaLv522AtmosCargoIntake
@@ -17800,8 +17800,8 @@ entities:
         -18,72: RMCAreaLv522AtmosCommandCentre
         -18,73: RMCAreaLv522AtmosCommandCentre
         -18,74: RMCAreaLv522Oob
-        -18,75: RMCAreaLv522Oob
-        -18,76: RMCAreaLv522Oob
+        -18,75: RMCAreaLv522AtmosNorthCommandCentre
+        -18,76: RMCAreaLv522AtmosNorthCommandCentre
         -18,77: RMCAreaLv522AtmosNorthCommandCentre
         -18,78: RMCAreaLv522AtmosNorthCommandCentre
         -18,79: RMCAreaLv522AtmosNorthCommandCentre
@@ -17987,9 +17987,9 @@ entities:
         -17,55: RMCAreaLv522AtmosCargoIntake
         -17,56: RMCAreaLv522AtmosCargoIntake
         -17,57: RMCAreaLv522AtmosCargoIntake
-        -17,58: RMCAreaLv522Oob
-        -17,59: RMCAreaLv522Oob
-        -17,60: RMCAreaLv522Oob
+        -17,58: RMCAreaLv522AtmosCargoIntake
+        -17,59: RMCAreaLv522AtmosCargoIntake
+        -17,60: RMCAreaLv522AtmosCargoIntake
         -17,61: RMCAreaLv522AtmosCargoIntake
         -17,62: RMCAreaLv522AtmosCargoIntake
         -17,63: RMCAreaLv522AtmosCargoIntake
@@ -18004,9 +18004,9 @@ entities:
         -17,72: RMCAreaLv522AtmosCommandCentre
         -17,73: RMCAreaLv522AtmosCommandCentre
         -17,74: RMCAreaLv522Oob
-        -17,75: RMCAreaLv522Oob
-        -17,76: RMCAreaLv522Oob
-        -17,77: RMCAreaLv522Oob
+        -17,75: RMCAreaLv522AtmosNorthCommandCentre
+        -17,76: RMCAreaLv522AtmosNorthCommandCentre
+        -17,77: RMCAreaLv522AtmosNorthCommandCentre
         -17,78: RMCAreaLv522AtmosNorthCommandCentre
         -17,79: RMCAreaLv522AtmosNorthCommandCentre
         -17,80: RMCAreaLv522AtmosNorthCommandCentre
@@ -18191,9 +18191,9 @@ entities:
         -16,55: RMCAreaLv522AtmosCargoIntake
         -16,56: RMCAreaLv522AtmosCargoIntake
         -16,57: RMCAreaLv522AtmosCargoIntake
-        -16,58: RMCAreaLv522Oob
-        -16,59: RMCAreaLv522Oob
-        -16,60: RMCAreaLv522Oob
+        -16,58: RMCAreaLv522AtmosCargoIntake
+        -16,59: RMCAreaLv522AtmosCargoIntake
+        -16,60: RMCAreaLv522AtmosCargoIntake
         -16,61: RMCAreaLv522AtmosCargoIntake
         -16,62: RMCAreaLv522AtmosCargoIntake
         -16,63: RMCAreaLv522AtmosCargoIntake
@@ -18218,7 +18218,7 @@ entities:
         -16,82: RMCAreaLv522AtmosNorthCommandCentre
         -16,83: RMCAreaLv522AtmosNorthCommandCentre
         -16,84: RMCAreaLv522AtmosNorthCommandCentre
-        -16,85: RMCAreaLv522AtmosEastReactorWest
+        -16,85: RMCAreaLv522AtmosNorthCommandCentre
         -16,86: RMCAreaLv522AtmosNorthCommandCentre
         -16,87: RMCAreaLv522AtmosNorthCommandCentre
         -16,88: RMCAreaLv522AtmosNorthCommandCentre
@@ -18395,9 +18395,9 @@ entities:
         -15,55: RMCAreaLv522AtmosCargoIntake
         -15,56: RMCAreaLv522AtmosCargoIntake
         -15,57: RMCAreaLv522AtmosCargoIntake
-        -15,58: RMCAreaLv522Oob
-        -15,59: RMCAreaLv522Oob
-        -15,60: RMCAreaLv522Oob
+        -15,58: RMCAreaLv522AtmosCargoIntake
+        -15,59: RMCAreaLv522AtmosCargoIntake
+        -15,60: RMCAreaLv522AtmosCargoIntake
         -15,61: RMCAreaLv522AtmosCargoIntake
         -15,62: RMCAreaLv522AtmosCargoIntake
         -15,63: RMCAreaLv522AtmosCargoIntake
@@ -18420,9 +18420,9 @@ entities:
         -15,80: RMCAreaLv522AtmosNorthCommandCentre
         -15,81: RMCAreaLv522AtmosNorthCommandCentre
         -15,82: RMCAreaLv522AtmosNorthCommandCentre
-        -15,83: RMCAreaLv522Oob
-        -15,84: RMCAreaLv522AtmosEastReactorWest
-        -15,85: RMCAreaLv522AtmosEastReactorWest
+        -15,83: RMCAreaLv522AtmosNorthCommandCentre
+        -15,84: RMCAreaLv522AtmosNorthCommandCentre
+        -15,85: RMCAreaLv522AtmosNorthCommandCentre
         -15,86: RMCAreaLv522AtmosNorthCommandCentre
         -15,87: RMCAreaLv522AtmosNorthCommandCentre
         -15,88: RMCAreaLv522AtmosNorthCommandCentre
@@ -18600,8 +18600,8 @@ entities:
         -14,56: RMCAreaLv522AtmosCargoIntake
         -14,57: RMCAreaLv522AtmosCargoIntake
         -14,58: RMCAreaLv522AtmosCargoIntake
-        -14,59: RMCAreaLv522Oob
-        -14,60: RMCAreaLv522Oob
+        -14,59: RMCAreaLv522AtmosCargoIntake
+        -14,60: RMCAreaLv522AtmosCargoIntake
         -14,61: RMCAreaLv522AtmosCargoIntake
         -14,62: RMCAreaLv522AtmosCargoIntake
         -14,63: RMCAreaLv522AtmosCargoIntake
@@ -18623,9 +18623,9 @@ entities:
         -14,79: RMCAreaLv522AtmosEastReactorWest
         -14,80: RMCAreaLv522AtmosEastReactorWest
         -14,81: RMCAreaLv522AtmosEastReactorWest
-        -14,82: RMCAreaLv522Oob
-        -14,83: RMCAreaLv522Oob
-        -14,84: RMCAreaLv522Oob
+        -14,82: RMCAreaLv522AtmosEastReactorWest
+        -14,83: RMCAreaLv522AtmosEastReactorWest
+        -14,84: RMCAreaLv522AtmosEastReactorWest
         -14,85: RMCAreaLv522AtmosEastReactorWest
         -14,86: RMCAreaLv522AtmosEastReactorWest
         -14,87: RMCAreaLv522AtmosNorthCommandCentre
@@ -18804,7 +18804,7 @@ entities:
         -13,56: RMCAreaLv522AtmosCargoIntake
         -13,57: RMCAreaLv522AtmosCargoIntake
         -13,58: RMCAreaLv522AtmosCargoIntake
-        -13,59: RMCAreaLv522Oob
+        -13,59: RMCAreaLv522AtmosCargoIntake
         -13,60: RMCAreaLv522AtmosCargoIntake
         -13,61: RMCAreaLv522AtmosCargoIntake
         -13,62: RMCAreaLv522AtmosCargoIntake
@@ -18827,8 +18827,8 @@ entities:
         -13,79: RMCAreaLv522AtmosEastReactorWest
         -13,80: RMCAreaLv522AtmosEastReactorWest
         -13,81: RMCAreaLv522AtmosEastReactorWest
-        -13,82: RMCAreaLv522Oob
-        -13,83: RMCAreaLv522Oob
+        -13,82: RMCAreaLv522AtmosEastReactorWest
+        -13,83: RMCAreaLv522AtmosEastReactorWest
         -13,84: RMCAreaLv522AtmosEastReactorWest
         -13,85: RMCAreaLv522AtmosEastReactorWest
         -13,86: RMCAreaLv522AtmosEastReactorWest
@@ -18998,8 +18998,8 @@ entities:
         -12,46: RMCAreaLv522AtmosReactorGarage
         -12,47: RMCAreaLv522AtmosReactorGarage
         -12,48: RMCAreaLv522AtmosReactorGarage
-        -12,49: RMCAreaLv522AtmosReactorGarage
-        -12,50: RMCAreaLv522Oob
+        -12,49: RMCAreaLv522Oob
+        -12,50: RMCAreaLv522AtmosCargoIntake
         -12,51: RMCAreaLv522AtmosCargoIntake
         -12,52: RMCAreaLv522AtmosCargoIntake
         -12,53: RMCAreaLv522AtmosCargoIntake
@@ -19015,7 +19015,7 @@ entities:
         -12,63: RMCAreaLv522AtmosCargoIntake
         -12,64: RMCAreaLv522AtmosCargoIntake
         -12,65: RMCAreaLv522AtmosCargoIntake
-        -12,66: RMCAreaLv522Oob
+        -12,66: RMCAreaLv522AtmosCargoIntake
         -12,67: RMCAreaLv522AtmosCommandCentre
         -12,68: RMCAreaLv522AtmosCommandCentre
         -12,69: RMCAreaLv522AtmosCommandCentre
@@ -19031,8 +19031,8 @@ entities:
         -12,79: RMCAreaLv522AtmosEastReactorWest
         -12,80: RMCAreaLv522AtmosEastReactorWest
         -12,81: RMCAreaLv522AtmosEastReactorWest
-        -12,82: RMCAreaLv522Oob
-        -12,83: RMCAreaLv522Oob
+        -12,82: RMCAreaLv522AtmosEastReactorWest
+        -12,83: RMCAreaLv522AtmosEastReactorWest
         -12,84: RMCAreaLv522AtmosEastReactorWest
         -12,85: RMCAreaLv522AtmosEastReactorWest
         -12,86: RMCAreaLv522AtmosEastReactorWest
@@ -19202,8 +19202,8 @@ entities:
         -11,46: RMCAreaLv522Oob
         -11,47: RMCAreaLv522Oob
         -11,48: RMCAreaLv522Oob
-        -11,49: RMCAreaLv522Oob
-        -11,50: RMCAreaLv522Oob
+        -11,49: RMCAreaLv522AtmosCargoIntake
+        -11,50: RMCAreaLv522AtmosCargoIntake
         -11,51: RMCAreaLv522AtmosCargoIntake
         -11,52: RMCAreaLv522AtmosCargoIntake
         -11,53: RMCAreaLv522AtmosCargoIntake
@@ -19218,8 +19218,8 @@ entities:
         -11,62: RMCAreaLv522AtmosCargoIntake
         -11,63: RMCAreaLv522AtmosCargoIntake
         -11,64: RMCAreaLv522AtmosCargoIntake
-        -11,65: RMCAreaLv522Oob
-        -11,66: RMCAreaLv522Oob
+        -11,65: RMCAreaLv522AtmosCargoIntake
+        -11,66: RMCAreaLv522AtmosCargoIntake
         -11,67: RMCAreaLv522AtmosCommandCentre
         -11,68: RMCAreaLv522AtmosCommandCentre
         -11,69: RMCAreaLv522AtmosCommandCentre
@@ -19235,8 +19235,8 @@ entities:
         -11,79: RMCAreaLv522AtmosEastReactorWest
         -11,80: RMCAreaLv522AtmosEastReactorWest
         -11,81: RMCAreaLv522AtmosEastReactorWest
-        -11,82: RMCAreaLv522Oob
-        -11,83: RMCAreaLv522Oob
+        -11,82: RMCAreaLv522AtmosEastReactorWest
+        -11,83: RMCAreaLv522AtmosEastReactorWest
         -11,84: RMCAreaLv522AtmosEastReactorWest
         -11,85: RMCAreaLv522AtmosEastReactorWest
         -11,86: RMCAreaLv522AtmosEastReactorWest
@@ -19406,7 +19406,7 @@ entities:
         -10,46: RMCAreaLv522Oob
         -10,47: RMCAreaLv522Oob
         -10,48: RMCAreaLv522Oob
-        -10,49: RMCAreaLv522Oob
+        -10,49: RMCAreaLv522AtmosCargoIntake
         -10,50: RMCAreaLv522AtmosCargoIntake
         -10,51: RMCAreaLv522AtmosCargoIntake
         -10,52: RMCAreaLv522AtmosCargoIntake
@@ -19421,9 +19421,9 @@ entities:
         -10,61: RMCAreaLv522AtmosCargoIntake
         -10,62: RMCAreaLv522AtmosCargoIntake
         -10,63: RMCAreaLv522AtmosCargoIntake
-        -10,64: RMCAreaLv522Oob
-        -10,65: RMCAreaLv522Oob
-        -10,66: RMCAreaLv522Oob
+        -10,64: RMCAreaLv522AtmosCargoIntake
+        -10,65: RMCAreaLv522AtmosCargoIntake
+        -10,66: RMCAreaLv522AtmosCargoIntake
         -10,67: RMCAreaLv522Oob
         -10,68: RMCAreaLv522AtmosCommandCentre
         -10,69: RMCAreaLv522Oob
@@ -19433,14 +19433,14 @@ entities:
         -10,73: RMCAreaLv522Oob
         -10,74: RMCAreaLv522Oob
         -10,75: RMCAreaLv522Oob
-        -10,76: RMCAreaLv522Oob
+        -10,76: RMCAreaLv522AtmosEastReactorWest
         -10,77: RMCAreaLv522AtmosEastReactorWest
         -10,78: RMCAreaLv522AtmosEastReactorWest
         -10,79: RMCAreaLv522AtmosEastReactorWest
         -10,80: RMCAreaLv522AtmosEastReactorWest
         -10,81: RMCAreaLv522AtmosEastReactorWest
-        -10,82: RMCAreaLv522Oob
-        -10,83: RMCAreaLv522Oob
+        -10,82: RMCAreaLv522AtmosEastReactorWest
+        -10,83: RMCAreaLv522AtmosEastReactorWest
         -10,84: RMCAreaLv522AtmosEastReactorWest
         -10,85: RMCAreaLv522AtmosEastReactorWest
         -10,86: RMCAreaLv522AtmosEastReactorWest
@@ -19609,8 +19609,8 @@ entities:
         -9,45: RMCAreaLv522AtmosWayInCommandCentre
         -9,46: RMCAreaLv522Oob
         -9,47: RMCAreaLv522Oob
-        -9,48: RMCAreaLv522Oob
-        -9,49: RMCAreaLv522Oob
+        -9,48: RMCAreaLv522AtmosCargoIntake
+        -9,49: RMCAreaLv522AtmosCargoIntake
         -9,50: RMCAreaLv522AtmosCargoIntake
         -9,51: RMCAreaLv522AtmosCargoIntake
         -9,52: RMCAreaLv522AtmosCargoIntake
@@ -19624,10 +19624,10 @@ entities:
         -9,60: RMCAreaLv522AtmosCargoIntake
         -9,61: RMCAreaLv522AtmosCargoIntake
         -9,62: RMCAreaLv522AtmosCargoIntake
-        -9,63: RMCAreaLv522Oob
-        -9,64: RMCAreaLv522Oob
-        -9,65: RMCAreaLv522Oob
-        -9,66: RMCAreaLv522Oob
+        -9,63: RMCAreaLv522AtmosCargoIntake
+        -9,64: RMCAreaLv522AtmosCargoIntake
+        -9,65: RMCAreaLv522AtmosCargoIntake
+        -9,66: RMCAreaLv522AtmosCargoIntake
         -9,67: RMCAreaLv522Oob
         -9,68: RMCAreaLv522Oob
         -9,69: RMCAreaLv522Oob
@@ -19637,14 +19637,14 @@ entities:
         -9,73: RMCAreaLv522Oob
         -9,74: RMCAreaLv522Oob
         -9,75: RMCAreaLv522Oob
-        -9,76: RMCAreaLv522Oob
+        -9,76: RMCAreaLv522AtmosEastReactorWest
         -9,77: RMCAreaLv522AtmosEastReactorWest
         -9,78: RMCAreaLv522AtmosEastReactorWest
         -9,79: RMCAreaLv522AtmosEastReactorWest
         -9,80: RMCAreaLv522AtmosEastReactorWest
-        -9,81: RMCAreaLv522Oob
-        -9,82: RMCAreaLv522Oob
-        -9,83: RMCAreaLv522Oob
+        -9,81: RMCAreaLv522AtmosEastReactorWest
+        -9,82: RMCAreaLv522AtmosEastReactorWest
+        -9,83: RMCAreaLv522AtmosEastReactorWest
         -9,84: RMCAreaLv522AtmosEastReactorWest
         -9,85: RMCAreaLv522AtmosEastReactorWest
         -9,86: RMCAreaLv522AtmosEastReactorWest
@@ -19813,8 +19813,8 @@ entities:
         -8,45: RMCAreaLv522AtmosWayInCommandCentre
         -8,46: RMCAreaLv522Oob
         -8,47: RMCAreaLv522Oob
-        -8,48: RMCAreaLv522Oob
-        -8,49: RMCAreaLv522Oob
+        -8,48: RMCAreaLv522AtmosCargoIntake
+        -8,49: RMCAreaLv522AtmosCargoIntake
         -8,50: RMCAreaLv522AtmosCargoIntake
         -8,51: RMCAreaLv522AtmosCargoIntake
         -8,52: RMCAreaLv522AtmosCargoIntake
@@ -19827,11 +19827,11 @@ entities:
         -8,59: RMCAreaLv522AtmosCargoIntake
         -8,60: RMCAreaLv522AtmosCargoIntake
         -8,61: RMCAreaLv522AtmosCargoIntake
-        -8,62: RMCAreaLv522Oob
-        -8,63: RMCAreaLv522Oob
-        -8,64: RMCAreaLv522Oob
-        -8,65: RMCAreaLv522Oob
-        -8,66: RMCAreaLv522Oob
+        -8,62: RMCAreaLv522AtmosCargoIntake
+        -8,63: RMCAreaLv522AtmosCargoIntake
+        -8,64: RMCAreaLv522AtmosCargoIntake
+        -8,65: RMCAreaLv522AtmosCargoIntake
+        -8,66: RMCAreaLv522AtmosCargoIntake
         -8,67: RMCAreaLv522Oob
         -8,68: RMCAreaLv522Oob
         -8,69: RMCAreaLv522Oob
@@ -19841,15 +19841,15 @@ entities:
         -8,73: RMCAreaLv522Oob
         -8,74: RMCAreaLv522Oob
         -8,75: RMCAreaLv522Oob
-        -8,76: RMCAreaLv522Oob
+        -8,76: RMCAreaLv522AtmosEastReactorWest
         -8,77: RMCAreaLv522AtmosEastReactorWest
         -8,78: RMCAreaLv522AtmosEastReactorWest
         -8,79: RMCAreaLv522AtmosEastReactorWest
         -8,80: RMCAreaLv522AtmosEastReactorWest
-        -8,81: RMCAreaLv522Oob
-        -8,82: RMCAreaLv522Oob
-        -8,83: RMCAreaLv522Oob
-        -8,84: RMCAreaLv522Oob
+        -8,81: RMCAreaLv522AtmosEastReactorWest
+        -8,82: RMCAreaLv522AtmosEastReactorWest
+        -8,83: RMCAreaLv522AtmosEastReactorWest
+        -8,84: RMCAreaLv522AtmosEastReactorWest
         -8,85: RMCAreaLv522AtmosEastReactorWest
         -8,86: RMCAreaLv522AtmosEastReactorWest
         -8,87: RMCAreaLv522AtmosEastReactorWest
@@ -20017,7 +20017,7 @@ entities:
         -7,45: RMCAreaLv522AtmosWayInCommandCentre
         -7,46: RMCAreaLv522Oob
         -7,47: RMCAreaLv522Oob
-        -7,48: RMCAreaLv522Oob
+        -7,48: RMCAreaLv522AtmosCargoIntake
         -7,49: RMCAreaLv522AtmosCargoIntake
         -7,50: RMCAreaLv522AtmosCargoIntake
         -7,51: RMCAreaLv522AtmosCargoIntake
@@ -20029,16 +20029,16 @@ entities:
         -7,57: RMCAreaLv522AtmosCargoIntake
         -7,58: RMCAreaLv522AtmosCargoIntake
         -7,59: RMCAreaLv522AtmosCargoIntake
-        -7,60: RMCAreaLv522Oob
-        -7,61: RMCAreaLv522Oob
-        -7,62: RMCAreaLv522Oob
-        -7,63: RMCAreaLv522Oob
-        -7,64: RMCAreaLv522Oob
-        -7,65: RMCAreaLv522Oob
-        -7,66: RMCAreaLv522Oob
-        -7,67: RMCAreaLv522Oob
-        -7,68: RMCAreaLv522Oob
-        -7,69: RMCAreaLv522Oob
+        -7,60: RMCAreaLv522AtmosCargoIntake
+        -7,61: RMCAreaLv522AtmosCargoIntake
+        -7,62: RMCAreaLv522AtmosCargoIntake
+        -7,63: RMCAreaLv522AtmosCargoIntake
+        -7,64: RMCAreaLv522AtmosCargoIntake
+        -7,65: RMCAreaLv522AtmosEastReactorSouth
+        -7,66: RMCAreaLv522AtmosEastReactorSouth
+        -7,67: RMCAreaLv522AtmosEastReactorSouth
+        -7,68: RMCAreaLv522AtmosEastReactorSouth
+        -7,69: RMCAreaLv522AtmosEastReactorSouth
         -7,70: RMCAreaLv522AtmosEastReactorSouth
         -7,71: RMCAreaLv522AtmosEastReactorSouth
         -7,72: RMCAreaLv522AtmosEastReactorSouth
@@ -20051,9 +20051,9 @@ entities:
         -7,79: RMCAreaLv522AtmosEastReactorWest
         -7,80: RMCAreaLv522AtmosEastReactorWest
         -7,81: RMCAreaLv522AtmosEastReactorWest
-        -7,82: RMCAreaLv522Oob
-        -7,83: RMCAreaLv522Oob
-        -7,84: RMCAreaLv522Oob
+        -7,82: RMCAreaLv522AtmosEastReactorWest
+        -7,83: RMCAreaLv522AtmosEastReactorWest
+        -7,84: RMCAreaLv522AtmosEastReactorWest
         -7,85: RMCAreaLv522AtmosEastReactorWest
         -7,86: RMCAreaLv522AtmosEastReactorWest
         -7,87: RMCAreaLv522AtmosEastReactorWest
@@ -20221,8 +20221,8 @@ entities:
         -6,45: RMCAreaLv522AtmosWayInCommandCentre
         -6,46: RMCAreaLv522AtmosWayInCommandCentre
         -6,47: RMCAreaLv522Oob
-        -6,48: RMCAreaLv522Oob
-        -6,49: RMCAreaLv522Oob
+        -6,48: RMCAreaLv522AtmosCargoIntake
+        -6,49: RMCAreaLv522AtmosCargoIntake
         -6,50: RMCAreaLv522AtmosCargoIntake
         -6,51: RMCAreaLv522AtmosCargoIntake
         -6,52: RMCAreaLv522AtmosCargoIntake
@@ -20232,17 +20232,17 @@ entities:
         -6,56: RMCAreaLv522AtmosCargoIntake
         -6,57: RMCAreaLv522AtmosCargoIntake
         -6,58: RMCAreaLv522AtmosCargoIntake
-        -6,59: RMCAreaLv522Oob
-        -6,60: RMCAreaLv522Oob
-        -6,61: RMCAreaLv522Oob
-        -6,62: RMCAreaLv522Oob
-        -6,63: RMCAreaLv522Oob
-        -6,64: RMCAreaLv522Oob
-        -6,65: RMCAreaLv522Oob
-        -6,66: RMCAreaLv522Oob
-        -6,67: RMCAreaLv522Oob
-        -6,68: RMCAreaLv522Oob
-        -6,69: RMCAreaLv522Oob
+        -6,59: RMCAreaLv522AtmosCargoIntake
+        -6,60: RMCAreaLv522AtmosCargoIntake
+        -6,61: RMCAreaLv522AtmosCargoIntake
+        -6,62: RMCAreaLv522AtmosCargoIntake
+        -6,63: RMCAreaLv522AtmosCargoIntake
+        -6,64: RMCAreaLv522AtmosCargoIntake
+        -6,65: RMCAreaLv522AtmosEastReactorSouth
+        -6,66: RMCAreaLv522AtmosEastReactorSouth
+        -6,67: RMCAreaLv522AtmosEastReactorSouth
+        -6,68: RMCAreaLv522AtmosEastReactorSouth
+        -6,69: RMCAreaLv522AtmosEastReactorSouth
         -6,70: RMCAreaLv522AtmosEastReactorSouth
         -6,71: RMCAreaLv522AtmosEastReactorSouth
         -6,72: RMCAreaLv522AtmosEastReactorSouth
@@ -20256,7 +20256,7 @@ entities:
         -6,80: RMCAreaLv522AtmosEastReactorWest
         -6,81: RMCAreaLv522AtmosEastReactorWest
         -6,82: RMCAreaLv522AtmosEastReactorWest
-        -6,83: RMCAreaLv522Oob
+        -6,83: RMCAreaLv522AtmosEastReactorWest
         -6,84: RMCAreaLv522AtmosEastReactorWest
         -6,85: RMCAreaLv522AtmosEastReactorWest
         -6,86: RMCAreaLv522AtmosEastReactorWest
@@ -20425,27 +20425,27 @@ entities:
         -5,45: RMCAreaLv522AtmosWayInCommandCentre
         -5,46: RMCAreaLv522AtmosWayInCommandCentre
         -5,47: RMCAreaLv522Oob
-        -5,48: RMCAreaLv522Oob
-        -5,49: RMCAreaLv522Oob
+        -5,48: RMCAreaLv522AtmosCargoIntake
+        -5,49: RMCAreaLv522AtmosCargoIntake
         -5,50: RMCAreaLv522AtmosCargoIntake
         -5,51: RMCAreaLv522AtmosCargoIntake
         -5,52: RMCAreaLv522AtmosCargoIntake
         -5,53: RMCAreaLv522AtmosCargoIntake
-        -5,54: RMCAreaLv522Oob
+        -5,54: RMCAreaLv522AtmosCargoIntake
         -5,55: RMCAreaLv522AtmosCargoIntake
         -5,56: RMCAreaLv522AtmosCargoIntake
         -5,57: RMCAreaLv522AtmosCargoIntake
         -5,58: RMCAreaLv522AtmosCargoIntake
-        -5,59: RMCAreaLv522Oob
-        -5,60: RMCAreaLv522Oob
-        -5,61: RMCAreaLv522Oob
-        -5,62: RMCAreaLv522Oob
+        -5,59: RMCAreaLv522AtmosCargoIntake
+        -5,60: RMCAreaLv522AtmosCargoIntake
+        -5,61: RMCAreaLv522AtmosCargoIntake
+        -5,62: RMCAreaLv522AtmosCargoIntake
         -5,63: RMCAreaLv522AtmosEastReactorSouth
         -5,64: RMCAreaLv522AtmosEastReactorSouth
-        -5,65: RMCAreaLv522Oob
-        -5,66: RMCAreaLv522Oob
-        -5,67: RMCAreaLv522Oob
-        -5,68: RMCAreaLv522Oob
+        -5,65: RMCAreaLv522AtmosEastReactorSouth
+        -5,66: RMCAreaLv522AtmosEastReactorSouth
+        -5,67: RMCAreaLv522AtmosEastReactorSouth
+        -5,68: RMCAreaLv522AtmosEastReactorSouth
         -5,69: RMCAreaLv522AtmosEastReactorSouth
         -5,70: RMCAreaLv522AtmosEastReactorSouth
         -5,71: RMCAreaLv522AtmosEastReactorSouth
@@ -20634,14 +20634,14 @@ entities:
         -4,50: RMCAreaLv522AtmosEastReactorSouth
         -4,51: RMCAreaLv522AtmosEastReactorSouth
         -4,52: RMCAreaLv522AtmosEastReactorSouth
-        -4,53: RMCAreaLv522Oob
-        -4,54: RMCAreaLv522Oob
-        -4,55: RMCAreaLv522Oob
+        -4,53: RMCAreaLv522AtmosEastReactorSouth
+        -4,54: RMCAreaLv522AtmosEastReactorSouth
+        -4,55: RMCAreaLv522AtmosEastReactorSouth
         -4,56: RMCAreaLv522AtmosEastReactorSouth
         -4,57: RMCAreaLv522AtmosCargoIntake
         -4,58: RMCAreaLv522AtmosCargoIntake
-        -4,59: RMCAreaLv522Oob
-        -4,60: RMCAreaLv522Oob
+        -4,59: RMCAreaLv522AtmosCargoIntake
+        -4,60: RMCAreaLv522AtmosCargoIntake
         -4,61: RMCAreaLv522AtmosEastReactorSouth
         -4,62: RMCAreaLv522AtmosEastReactorSouth
         -4,63: RMCAreaLv522AtmosEastReactorSouth
@@ -20649,7 +20649,7 @@ entities:
         -4,65: RMCAreaLv522AtmosEastReactorSouth
         -4,66: RMCAreaLv522AtmosEastReactorSouth
         -4,67: RMCAreaLv522AtmosEastReactorSouth
-        -4,68: RMCAreaLv522Oob
+        -4,68: RMCAreaLv522AtmosEastReactorSouth
         -4,69: RMCAreaLv522AtmosEastReactorSouth
         -4,70: RMCAreaLv522AtmosEastReactorSouth
         -4,71: RMCAreaLv522AtmosEastReactorSouth
@@ -20838,13 +20838,13 @@ entities:
         -3,50: RMCAreaLv522AtmosEastReactorSouth
         -3,51: RMCAreaLv522AtmosEastReactorSouth
         -3,52: RMCAreaLv522AtmosEastReactorSouth
-        -3,53: RMCAreaLv522Oob
-        -3,54: RMCAreaLv522Oob
+        -3,53: RMCAreaLv522AtmosEastReactorSouth
+        -3,54: RMCAreaLv522AtmosEastReactorSouth
         -3,55: RMCAreaLv522AtmosEastReactorSouth
         -3,56: RMCAreaLv522AtmosEastReactorSouth
         -3,57: RMCAreaLv522AtmosEastReactorSouth
         -3,58: RMCAreaLv522AtmosEastReactorSouth
-        -3,59: RMCAreaLv522Oob
+        -3,59: RMCAreaLv522AtmosCargoIntake
         -3,60: RMCAreaLv522AtmosEastReactorSouth
         -3,61: RMCAreaLv522AtmosEastReactorSouth
         -3,62: RMCAreaLv522AtmosEastReactorSouth
@@ -21043,7 +21043,7 @@ entities:
         -2,51: RMCAreaLv522AtmosEastReactorSouth
         -2,52: RMCAreaLv522AtmosEastReactorSouth
         -2,53: RMCAreaLv522AtmosEastReactorSouth
-        -2,54: RMCAreaLv522Oob
+        -2,54: RMCAreaLv522AtmosEastReactorSouth
         -2,55: RMCAreaLv522AtmosEastReactorSouth
         -2,56: RMCAreaLv522AtmosEastReactorSouth
         -2,57: RMCAreaLv522AtmosEastReactorSouth
@@ -21070,8 +21070,8 @@ entities:
         -2,78: RMCAreaLv522AtmosEastReactorWest
         -2,79: RMCAreaLv522AtmosEastReactorWest
         -2,80: RMCAreaLv522AtmosEastReactorWest
-        -2,81: RMCAreaLv522Oob
-        -2,82: RMCAreaLv522Oob
+        -2,81: RMCAreaLv522AtmosEastReactorWest
+        -2,82: RMCAreaLv522AtmosEastReactorWest
         -2,83: RMCAreaLv522AtmosEastReactorWest
         -2,84: RMCAreaLv522AtmosEastReactorWest
         -2,85: RMCAreaLv522AtmosEastReactorWest
@@ -21247,7 +21247,7 @@ entities:
         -1,51: RMCAreaLv522AtmosEastReactorSouth
         -1,52: RMCAreaLv522AtmosEastReactorSouth
         -1,53: RMCAreaLv522AtmosEastReactorSouth
-        -1,54: RMCAreaLv522Oob
+        -1,54: RMCAreaLv522AtmosEastReactorSouth
         -1,55: RMCAreaLv522AtmosEastReactorSouth
         -1,56: RMCAreaLv522AtmosEastReactorSouth
         -1,57: RMCAreaLv522AtmosEastReactorSouth
@@ -21275,9 +21275,9 @@ entities:
         -1,79: RMCAreaLv522AtmosEastReactorWest
         -1,80: RMCAreaLv522AtmosEastReactorWest
         -1,81: RMCAreaLv522AtmosEastReactorWest
-        -1,82: RMCAreaLv522Oob
-        -1,83: RMCAreaLv522Oob
-        -1,84: RMCAreaLv522Oob
+        -1,82: RMCAreaLv522AtmosEastReactorWest
+        -1,83: RMCAreaLv522AtmosEastReactorWest
+        -1,84: RMCAreaLv522AtmosEastReactorWest
         -1,85: RMCAreaLv522AtmosEastReactorWest
         -1,86: RMCAreaLv522AtmosEastReactorWest
         -1,87: RMCAreaLv522AtmosEastReactorWest
@@ -21443,7 +21443,7 @@ entities:
         0,43: RMCAreaLv522AtmosWayInCommandCentre
         0,44: RMCAreaLv522AtmosWayInCommandCentre
         0,45: RMCAreaLv522AtmosWayInCommandCentre
-        0,46: RMCAreaLv522Oob
+        0,46: RMCAreaLv522AtmosWayInCommandCentre
         0,47: RMCAreaLv522AtmosWayInCommandCentre
         0,48: RMCAreaLv522Oob
         0,49: RMCAreaLv522AtmosEastReactorSouth
@@ -21451,7 +21451,7 @@ entities:
         0,51: RMCAreaLv522AtmosEastReactorSouth
         0,52: RMCAreaLv522AtmosEastReactorSouth
         0,53: RMCAreaLv522AtmosEastReactorSouth
-        0,54: RMCAreaLv522Oob
+        0,54: RMCAreaLv522AtmosEastReactorSouth
         0,55: RMCAreaLv522AtmosEastReactorSouth
         0,56: RMCAreaLv522AtmosEastReactorSouth
         0,57: RMCAreaLv522AtmosEastReactorSouth
@@ -21479,8 +21479,8 @@ entities:
         0,79: RMCAreaLv522AtmosEastReactorWest
         0,80: RMCAreaLv522AtmosEastReactorWest
         0,81: RMCAreaLv522AtmosEastReactorWest
-        0,82: RMCAreaLv522Oob
-        0,83: RMCAreaLv522Oob
+        0,82: RMCAreaLv522AtmosEastReactorWest
+        0,83: RMCAreaLv522AtmosEastReactorWest
         0,84: RMCAreaLv522AtmosEastReactorWest
         0,85: RMCAreaLv522AtmosEastReactorWest
         0,86: RMCAreaLv522AtmosEastReactorWest
@@ -21646,10 +21646,10 @@ entities:
         1,42: RMCAreaLv522AtmosWayInCommandCentre
         1,43: RMCAreaLv522AtmosWayInCommandCentre
         1,44: RMCAreaLv522AtmosWayInCommandCentre
-        1,45: RMCAreaLv522Oob
-        1,46: RMCAreaLv522Oob
-        1,47: RMCAreaLv522Oob
-        1,48: RMCAreaLv522Oob
+        1,45: RMCAreaLv522AtmosWayInCommandCentre
+        1,46: RMCAreaLv522AtmosWayInCommandCentre
+        1,47: RMCAreaLv522AtmosWayInCommandCentre
+        1,48: RMCAreaLv522AtmosEastReactorSouth
         1,49: RMCAreaLv522AtmosEastReactorSouth
         1,50: RMCAreaLv522AtmosEastReactorSouth
         1,51: RMCAreaLv522AtmosEastReactorSouth
@@ -21683,8 +21683,8 @@ entities:
         1,79: RMCAreaLv522AtmosEastReactorWest
         1,80: RMCAreaLv522AtmosEastReactorWest
         1,81: RMCAreaLv522AtmosEastReactorWest
-        1,82: RMCAreaLv522Oob
-        1,83: RMCAreaLv522Oob
+        1,82: RMCAreaLv522AtmosEastReactorWest
+        1,83: RMCAreaLv522AtmosEastReactorWest
         1,84: RMCAreaLv522AtmosEastReactorWest
         1,85: RMCAreaLv522AtmosEastReactorWest
         1,86: RMCAreaLv522AtmosEastReactorWest
@@ -21851,10 +21851,10 @@ entities:
         2,43: RMCAreaLv522AtmosWayInCommandCentre
         2,44: RMCAreaLv522AtmosWayInCommandCentre
         2,45: RMCAreaLv522AtmosWayInCommandCentre
-        2,46: RMCAreaLv522Oob
-        2,47: RMCAreaLv522Oob
-        2,48: RMCAreaLv522Oob
-        2,49: RMCAreaLv522Oob
+        2,46: RMCAreaLv522AtmosWayInCommandCentre
+        2,47: RMCAreaLv522AtmosWayInCommandCentre
+        2,48: RMCAreaLv522AtmosEastReactorSouth
+        2,49: RMCAreaLv522AtmosEastReactorSouth
         2,50: RMCAreaLv522AtmosEastReactorSouth
         2,51: RMCAreaLv522AtmosEastReactorSouth
         2,52: RMCAreaLv522AtmosEastReactorSouth
@@ -21862,8 +21862,8 @@ entities:
         2,54: RMCAreaLv522AtmosEastReactorSouth
         2,55: RMCAreaLv522AtmosEastReactorSouth
         2,56: RMCAreaLv522AtmosEastReactorSouth
-        2,57: RMCAreaLv522Oob
-        2,58: RMCAreaLv522Oob
+        2,57: RMCAreaLv522AtmosEastReactorSouth
+        2,58: RMCAreaLv522AtmosEastReactorSouth
         2,59: RMCAreaLv522AtmosEastReactorSouth
         2,60: RMCAreaLv522AtmosEastReactorSouth
         2,61: RMCAreaLv522AtmosEastReactorSouth
@@ -21885,11 +21885,11 @@ entities:
         2,77: RMCAreaLv522AtmosEastReactorWest
         2,78: RMCAreaLv522AtmosEastReactorWest
         2,79: RMCAreaLv522AtmosEastReactorWest
-        2,80: RMCAreaLv522Oob
-        2,81: RMCAreaLv522Oob
-        2,82: RMCAreaLv522Oob
-        2,83: RMCAreaLv522Oob
-        2,84: RMCAreaLv522Oob
+        2,80: RMCAreaLv522AtmosEastReactorWest
+        2,81: RMCAreaLv522AtmosEastReactorWest
+        2,82: RMCAreaLv522AtmosEastReactorWest
+        2,83: RMCAreaLv522AtmosEastReactorWest
+        2,84: RMCAreaLv522AtmosEastReactorWest
         2,85: RMCAreaLv522AtmosEastReactorWest
         2,86: RMCAreaLv522AtmosEastReactorWest
         2,87: RMCAreaLv522AtmosEastReactorWest
@@ -22055,10 +22055,10 @@ entities:
         3,43: RMCAreaLv522AtmosWayInCommandCentre
         3,44: RMCAreaLv522AtmosWayInCommandCentre
         3,45: RMCAreaLv522AtmosWayInCommandCentre
-        3,46: RMCAreaLv522Oob
-        3,47: RMCAreaLv522Oob
-        3,48: RMCAreaLv522Oob
-        3,49: RMCAreaLv522Oob
+        3,46: RMCAreaLv522AtmosWayInCommandCentre
+        3,47: RMCAreaLv522AtmosWayInCommandCentre
+        3,48: RMCAreaLv522AtmosEastReactorSouth
+        3,49: RMCAreaLv522AtmosEastReactorSouth
         3,50: RMCAreaLv522AtmosEastReactorSouth
         3,51: RMCAreaLv522AtmosEastReactorSouth
         3,52: RMCAreaLv522AtmosEastReactorSouth
@@ -22088,13 +22088,13 @@ entities:
         3,76: RMCAreaLv522AtmosEastReactorWest
         3,77: RMCAreaLv522AtmosEastReactorWest
         3,78: RMCAreaLv522AtmosEastReactorWest
-        3,79: RMCAreaLv522Oob
-        3,80: RMCAreaLv522Oob
-        3,81: RMCAreaLv522Oob
-        3,82: RMCAreaLv522Oob
-        3,83: RMCAreaLv522Oob
-        3,84: RMCAreaLv522Oob
-        3,85: RMCAreaLv522Oob
+        3,79: RMCAreaLv522AtmosEastReactorWest
+        3,80: RMCAreaLv522AtmosEastReactorWest
+        3,81: RMCAreaLv522AtmosEastReactorWest
+        3,82: RMCAreaLv522AtmosEastReactorWest
+        3,83: RMCAreaLv522AtmosEastReactorWest
+        3,84: RMCAreaLv522AtmosEastReactorWest
+        3,85: RMCAreaLv522AtmosEastReactorWest
         3,86: RMCAreaLv522AtmosEastReactorWest
         3,87: RMCAreaLv522AtmosEastReactorWest
         3,88: RMCAreaLv522AtmosEastReactorWest
@@ -22260,9 +22260,9 @@ entities:
         4,44: RMCAreaLv522AtmosWayInCommandCentre
         4,45: RMCAreaLv522AtmosWayInCommandCentre
         4,46: RMCAreaLv522AtmosWayInCommandCentre
-        4,47: RMCAreaLv522Oob
-        4,48: RMCAreaLv522Oob
-        4,49: RMCAreaLv522Oob
+        4,47: RMCAreaLv522AtmosWayInCommandCentre
+        4,48: RMCAreaLv522AtmosEastReactorSouth
+        4,49: RMCAreaLv522AtmosEastReactorSouth
         4,50: RMCAreaLv522AtmosEastReactorSouth
         4,51: RMCAreaLv522AtmosEastReactorSouth
         4,52: RMCAreaLv522AtmosEastReactorSouth
@@ -22293,10 +22293,10 @@ entities:
         4,77: RMCAreaLv522AtmosEastReactorWest
         4,78: RMCAreaLv522AtmosEastReactorWest
         4,79: RMCAreaLv522AtmosEastReactorWest
-        4,80: RMCAreaLv522Oob
-        4,81: RMCAreaLv522Oob
-        4,82: RMCAreaLv522Oob
-        4,83: RMCAreaLv522Oob
+        4,80: RMCAreaLv522AtmosEastReactorWest
+        4,81: RMCAreaLv522AtmosEastReactorWest
+        4,82: RMCAreaLv522AtmosEastReactorWest
+        4,83: RMCAreaLv522AtmosEastReactorWest
         4,84: RMCAreaLv522AtmosEastReactorWest
         4,85: RMCAreaLv522AtmosEastReactorWest
         4,86: RMCAreaLv522AtmosEastReactorWest
@@ -22465,9 +22465,9 @@ entities:
         5,45: RMCAreaLv522AtmosWayInCommandCentre
         5,46: RMCAreaLv522AtmosWayInCommandCentre
         5,47: RMCAreaLv522AtmosWayInCommandCentre
-        5,48: RMCAreaLv522Oob
-        5,49: RMCAreaLv522Oob
-        5,50: RMCAreaLv522Oob
+        5,48: RMCAreaLv522AtmosEastReactorSouth
+        5,49: RMCAreaLv522AtmosEastReactorSouth
+        5,50: RMCAreaLv522AtmosEastReactorSouth
         5,51: RMCAreaLv522AtmosEastReactorSouth
         5,52: RMCAreaLv522AtmosEastReactorSouth
         5,53: RMCAreaLv522AtmosEastReactorSouth
@@ -22497,9 +22497,9 @@ entities:
         5,77: RMCAreaLv522AtmosEastReactorWest
         5,78: RMCAreaLv522AtmosEastReactorWest
         5,79: RMCAreaLv522AtmosEastReactorWest
-        5,80: RMCAreaLv522Oob
-        5,81: RMCAreaLv522Oob
-        5,82: RMCAreaLv522Oob
+        5,80: RMCAreaLv522AtmosEastReactorWest
+        5,81: RMCAreaLv522AtmosEastReactorWest
+        5,82: RMCAreaLv522AtmosEastReactorWest
         5,83: RMCAreaLv522AtmosEastReactorWest
         5,84: RMCAreaLv522AtmosEastReactorWest
         5,85: RMCAreaLv522AtmosEastReactorWest
@@ -22669,10 +22669,10 @@ entities:
         6,45: RMCAreaLv522AtmosWayInCommandCentre
         6,46: RMCAreaLv522AtmosWayInCommandCentre
         6,47: RMCAreaLv522AtmosWayInCommandCentre
-        6,48: RMCAreaLv522Oob
-        6,49: RMCAreaLv522Oob
-        6,50: RMCAreaLv522Oob
-        6,51: RMCAreaLv522Oob
+        6,48: RMCAreaLv522AtmosEastReactorSouth
+        6,49: RMCAreaLv522AtmosEastReactorSouth
+        6,50: RMCAreaLv522AtmosEastReactorSouth
+        6,51: RMCAreaLv522AtmosEastReactorSouth
         6,52: RMCAreaLv522AtmosEastReactorSouth
         6,53: RMCAreaLv522AtmosEastReactorSouth
         6,54: RMCAreaLv522AtmosEastReactorSouth
@@ -22694,15 +22694,15 @@ entities:
         6,70: RMCAreaLv522AtmosEastReactorSouth
         6,71: RMCAreaLv522AtmosEastReactorSouth
         6,72: RMCAreaLv522AtmosEastReactorSouth
-        6,73: RMCAreaLv522Oob
+        6,73: RMCAreaLv522AtmosEastReactorSouth
         6,74: RMCAreaLv522AtmosEastReactorWest
         6,75: RMCAreaLv522AtmosEastReactorWest
         6,76: RMCAreaLv522AtmosEastReactorWest
         6,77: RMCAreaLv522AtmosEastReactorWest
         6,78: RMCAreaLv522AtmosEastReactorWest
-        6,79: RMCAreaLv522Oob
-        6,80: RMCAreaLv522Oob
-        6,81: RMCAreaLv522Oob
+        6,79: RMCAreaLv522AtmosEastReactorWest
+        6,80: RMCAreaLv522AtmosEastReactorWest
+        6,81: RMCAreaLv522AtmosEastReactorWest
         6,82: RMCAreaLv522AtmosEastReactorWest
         6,83: RMCAreaLv522AtmosEastReactorWest
         6,84: RMCAreaLv522AtmosEastReactorWest
@@ -22873,13 +22873,13 @@ entities:
         7,45: RMCAreaLv522AtmosEastReactorSouth
         7,46: RMCAreaLv522AtmosEastReactorSouth
         7,47: RMCAreaLv522AtmosEastReactorSouth
-        7,48: RMCAreaLv522Oob
-        7,49: RMCAreaLv522Oob
-        7,50: RMCAreaLv522Oob
-        7,51: RMCAreaLv522Oob
-        7,52: RMCAreaLv522Oob
-        7,53: RMCAreaLv522Oob
-        7,54: RMCAreaLv522Oob
+        7,48: RMCAreaLv522AtmosEastReactorSouth
+        7,49: RMCAreaLv522AtmosEastReactorSouth
+        7,50: RMCAreaLv522AtmosEastReactorSouth
+        7,51: RMCAreaLv522AtmosEastReactorSouth
+        7,52: RMCAreaLv522AtmosEastReactorSouth
+        7,53: RMCAreaLv522AtmosEastReactorSouth
+        7,54: RMCAreaLv522AtmosEastReactorSouth
         7,55: RMCAreaLv522AtmosEastReactorSouth
         7,56: RMCAreaLv522AtmosEastReactorSouth
         7,57: RMCAreaLv522AtmosEastReactorSouth
@@ -22887,25 +22887,25 @@ entities:
         7,59: RMCAreaLv522AtmosEastReactorSouth
         7,60: RMCAreaLv522AtmosEastReactorSouth
         7,61: RMCAreaLv522AtmosEastReactorSouth
-        7,62: RMCAreaLv522Oob
+        7,62: RMCAreaLv522AtmosEastReactorSouth
         7,63: RMCAreaLv522AtmosEastReactorSouth
         7,64: RMCAreaLv522AtmosEastReactorSouth
         7,65: RMCAreaLv522AtmosEastReactorSouth
         7,66: RMCAreaLv522AtmosEastReactorSouth
-        7,67: RMCAreaLv522Oob
-        7,68: RMCAreaLv522Oob
+        7,67: RMCAreaLv522AtmosEastReactorSouth
+        7,68: RMCAreaLv522AtmosEastReactorSouth
         7,69: RMCAreaLv522AtmosEastReactorSouth
         7,70: RMCAreaLv522AtmosEastReactorSouth
         7,71: RMCAreaLv522AtmosEastReactorSouth
-        7,72: RMCAreaLv522Oob
-        7,73: RMCAreaLv522Oob
+        7,72: RMCAreaLv522AtmosEastReactorSouth
+        7,73: RMCAreaLv522AtmosEastReactorSouth
         7,74: RMCAreaLv522AtmosEastReactorWest
         7,75: RMCAreaLv522AtmosEastReactorWest
         7,76: RMCAreaLv522AtmosEastReactorWest
         7,77: RMCAreaLv522AtmosEastReactorWest
         7,78: RMCAreaLv522AtmosEastReactorWest
-        7,79: RMCAreaLv522Oob
-        7,80: RMCAreaLv522Oob
+        7,79: RMCAreaLv522AtmosEastReactorWest
+        7,80: RMCAreaLv522AtmosEastReactorWest
         7,81: RMCAreaLv522AtmosEastReactorWest
         7,82: RMCAreaLv522AtmosEastReactorWest
         7,83: RMCAreaLv522AtmosEastReactorWest
@@ -23077,39 +23077,39 @@ entities:
         8,45: RMCAreaLv522AtmosEastReactorSouth
         8,46: RMCAreaLv522AtmosEastReactorSouth
         8,47: RMCAreaLv522AtmosEastReactorSouth
-        8,48: RMCAreaLv522Oob
+        8,48: RMCAreaLv522AtmosEastReactorSouth
         8,49: RMCAreaLv522AtmosEastReactorSouth
         8,50: RMCAreaLv522AtmosEastReactorSouth
-        8,51: RMCAreaLv522Oob
-        8,52: RMCAreaLv522Oob
-        8,53: RMCAreaLv522Oob
-        8,54: RMCAreaLv522Oob
-        8,55: RMCAreaLv522Oob
+        8,51: RMCAreaLv522AtmosEastReactorSouth
+        8,52: RMCAreaLv522AtmosEastReactorSouth
+        8,53: RMCAreaLv522AtmosEastReactorSouth
+        8,54: RMCAreaLv522AtmosEastReactorSouth
+        8,55: RMCAreaLv522AtmosEastReactorSouth
         8,56: RMCAreaLv522AtmosEastReactorSouth
         8,57: RMCAreaLv522AtmosEastReactorSouth
         8,58: RMCAreaLv522AtmosEastReactorSouth
         8,59: RMCAreaLv522AtmosEastReactorSouth
         8,60: RMCAreaLv522AtmosEastReactorSouth
-        8,61: RMCAreaLv522Oob
-        8,62: RMCAreaLv522Oob
+        8,61: RMCAreaLv522AtmosEastReactorSouth
+        8,62: RMCAreaLv522AtmosEastReactorSouth
         8,63: RMCAreaLv522AtmosEastReactorSouth
         8,64: RMCAreaLv522AtmosEastReactorSouth
         8,65: RMCAreaLv522AtmosEastReactorSouth
-        8,66: RMCAreaLv522Oob
-        8,67: RMCAreaLv522Oob
-        8,68: RMCAreaLv522Oob
-        8,69: RMCAreaLv522Oob
-        8,70: RMCAreaLv522Oob
-        8,71: RMCAreaLv522Oob
-        8,72: RMCAreaLv522Oob
+        8,66: RMCAreaLv522AtmosEastReactorSouth
+        8,67: RMCAreaLv522AtmosEastReactorSouth
+        8,68: RMCAreaLv522AtmosEastReactorSouth
+        8,69: RMCAreaLv522AtmosEastReactorSouth
+        8,70: RMCAreaLv522AtmosEastReactorSouth
+        8,71: RMCAreaLv522AtmosEastReactorSouth
+        8,72: RMCAreaLv522AtmosEastReactorSouth
         8,73: RMCAreaLv522AtmosEastReactorWest
         8,74: RMCAreaLv522AtmosEastReactorWest
         8,75: RMCAreaLv522AtmosEastReactorWest
         8,76: RMCAreaLv522AtmosEastReactorWest
         8,77: RMCAreaLv522AtmosEastReactorWest
         8,78: RMCAreaLv522AtmosEastReactorWest
-        8,79: RMCAreaLv522Oob
-        8,80: RMCAreaLv522Oob
+        8,79: RMCAreaLv522AtmosEastReactorWest
+        8,80: RMCAreaLv522AtmosEastReactorWest
         8,81: RMCAreaLv522AtmosEastReactorWest
         8,82: RMCAreaLv522AtmosEastReactorWest
         8,83: RMCAreaLv522AtmosEastReactorWest
@@ -23286,34 +23286,34 @@ entities:
         9,50: RMCAreaLv522AtmosEastReactorSouth
         9,51: RMCAreaLv522AtmosEastReactorSouth
         9,52: RMCAreaLv522AtmosEastReactorSouth
-        9,53: RMCAreaLv522Oob
-        9,54: RMCAreaLv522Oob
-        9,55: RMCAreaLv522Oob
-        9,56: RMCAreaLv522Oob
+        9,53: RMCAreaLv522AtmosEastReactorSouth
+        9,54: RMCAreaLv522AtmosEastReactorSouth
+        9,55: RMCAreaLv522AtmosEastReactorSouth
+        9,56: RMCAreaLv522AtmosEastReactorSouth
         9,57: RMCAreaLv522AtmosEastReactorSouth
         9,58: RMCAreaLv522AtmosEastReactorSouth
         9,59: RMCAreaLv522AtmosEastReactorSouth
-        9,60: RMCAreaLv522Oob
-        9,61: RMCAreaLv522Oob
+        9,60: RMCAreaLv522AtmosEastReactorSouth
+        9,61: RMCAreaLv522AtmosEastReactorSouth
         9,62: RMCAreaLv522AtmosEastReactorSouth
         9,63: RMCAreaLv522AtmosEastReactorSouth
         9,64: RMCAreaLv522AtmosEastReactorSouth
         9,65: RMCAreaLv522AtmosEastReactorSouth
-        9,66: RMCAreaLv522Oob
-        9,67: RMCAreaLv522Oob
-        9,68: RMCAreaLv522Oob
-        9,69: RMCAreaLv522Oob
-        9,70: RMCAreaLv522Oob
-        9,71: RMCAreaLv522Oob
-        9,72: RMCAreaLv522Oob
+        9,66: RMCAreaLv522AtmosEastReactorSouth
+        9,67: RMCAreaLv522AtmosEastReactorSouth
+        9,68: RMCAreaLv522AtmosEastReactorSouth
+        9,69: RMCAreaLv522AtmosEastReactorSouth
+        9,70: RMCAreaLv522AtmosEastReactorSouth
+        9,71: RMCAreaLv522AtmosEastReactorSouth
+        9,72: RMCAreaLv522AtmosEastReactorSouth
         9,73: RMCAreaLv522AtmosEastReactorWest
         9,74: RMCAreaLv522AtmosEastReactorWest
         9,75: RMCAreaLv522AtmosEastReactorWest
         9,76: RMCAreaLv522AtmosEastReactorWest
         9,77: RMCAreaLv522AtmosEastReactorWest
         9,78: RMCAreaLv522Oob
-        9,79: RMCAreaLv522Oob
-        9,80: RMCAreaLv522Oob
+        9,79: RMCAreaLv522AtmosEastReactorWest
+        9,80: RMCAreaLv522AtmosEastReactorWest
         9,81: RMCAreaLv522AtmosEastReactorWest
         9,82: RMCAreaLv522AtmosEastReactorWest
         9,83: RMCAreaLv522AtmosEastReactorWest
@@ -23490,24 +23490,24 @@ entities:
         10,50: RMCAreaLv522AtmosEastReactorSouth
         10,51: RMCAreaLv522AtmosEastReactorSouth
         10,52: RMCAreaLv522AtmosEastReactorSouth
-        10,53: RMCAreaLv522Oob
-        10,54: RMCAreaLv522Oob
-        10,55: RMCAreaLv522Oob
-        10,56: RMCAreaLv522Oob
+        10,53: RMCAreaLv522AtmosEastReactorSouth
+        10,54: RMCAreaLv522AtmosEastReactorSouth
+        10,55: RMCAreaLv522AtmosEastReactorSouth
+        10,56: RMCAreaLv522AtmosEastReactorSouth
         10,57: RMCAreaLv522AtmosEastReactorSouth
         10,58: RMCAreaLv522AtmosEastReactorSouth
         10,59: RMCAreaLv522AtmosEastReactorSouth
-        10,60: RMCAreaLv522Oob
-        10,61: RMCAreaLv522Oob
+        10,60: RMCAreaLv522AtmosEastReactorSouth
+        10,61: RMCAreaLv522AtmosEastReactorSouth
         10,62: RMCAreaLv522AtmosEastReactorSouth
         10,63: RMCAreaLv522AtmosEastReactorSouth
         10,64: RMCAreaLv522AtmosEastReactorSouth
         10,65: RMCAreaLv522AtmosEastReactorSouth
         10,66: RMCAreaLv522AtmosEastReactorSouth
-        10,67: RMCAreaLv522Oob
-        10,68: RMCAreaLv522Oob
-        10,69: RMCAreaLv522Oob
-        10,70: RMCAreaLv522Oob
+        10,67: RMCAreaLv522AtmosEastReactorSouth
+        10,68: RMCAreaLv522AtmosEastReactorSouth
+        10,69: RMCAreaLv522AtmosEastReactorSouth
+        10,70: RMCAreaLv522AtmosEastReactorSouth
         10,71: RMCAreaLv522Oob
         10,72: RMCAreaLv522Oob
         10,73: RMCAreaLv522Oob
@@ -23516,9 +23516,9 @@ entities:
         10,76: RMCAreaLv522AtmosEastReactorWest
         10,77: RMCAreaLv522AtmosEastReactorWest
         10,78: RMCAreaLv522Oob
-        10,79: RMCAreaLv522Oob
-        10,80: RMCAreaLv522Oob
-        10,81: RMCAreaLv522AtmosEastReactorWest
+        10,79: RMCAreaLv522AtmosEastReactor
+        10,80: RMCAreaLv522AtmosEastReactor
+        10,81: RMCAreaLv522AtmosEastReactor
         10,82: RMCAreaLv522AtmosEastReactor
         10,83: RMCAreaLv522AtmosEastReactor
         10,84: RMCAreaLv522AtmosEastReactor
@@ -23695,22 +23695,22 @@ entities:
         11,51: RMCAreaLv522AtmosEastReactorSouth
         11,52: RMCAreaLv522AtmosEastReactorSouth
         11,53: RMCAreaLv522AtmosEastReactorSouth
-        11,54: RMCAreaLv522Oob
+        11,54: RMCAreaLv522AtmosEastReactorSouth
         11,55: RMCAreaLv522AtmosEastReactorSouth
         11,56: RMCAreaLv522AtmosEastReactorSouth
         11,57: RMCAreaLv522AtmosEastReactorSouth
         11,58: RMCAreaLv522AtmosEastReactorSouth
         11,59: RMCAreaLv522AtmosEastReactorSouth
         11,60: RMCAreaLv522AtmosEastReactorSouth
-        11,61: RMCAreaLv522Oob
+        11,61: RMCAreaLv522AtmosEastReactorSouth
         11,62: RMCAreaLv522AtmosEastReactorSouth
         11,63: RMCAreaLv522AtmosEastReactorSouth
         11,64: RMCAreaLv522AtmosEastReactorSouth
         11,65: RMCAreaLv522AtmosEastReactorSouth
         11,66: RMCAreaLv522AtmosEastReactorSouth
-        11,67: RMCAreaLv522Oob
-        11,68: RMCAreaLv522Oob
-        11,69: RMCAreaLv522Oob
+        11,67: RMCAreaLv522AtmosEastReactorSouth
+        11,68: RMCAreaLv522AtmosEastReactorSouth
+        11,69: RMCAreaLv522AtmosEastReactorSouth
         11,70: RMCAreaLv522Oob
         11,71: RMCAreaLv522Oob
         11,72: RMCAreaLv522Oob
@@ -23720,7 +23720,7 @@ entities:
         11,76: RMCAreaLv522AtmosEastReactor
         11,77: RMCAreaLv522AtmosEastReactor
         11,78: RMCAreaLv522Oob
-        11,79: RMCAreaLv522Oob
+        11,79: RMCAreaLv522AtmosEastReactor
         11,80: RMCAreaLv522AtmosEastReactor
         11,81: RMCAreaLv522AtmosEastReactor
         11,82: RMCAreaLv522AtmosEastReactor
@@ -23913,7 +23913,7 @@ entities:
         12,65: RMCAreaLv522AtmosEastReactorSouth
         12,66: RMCAreaLv522AtmosEastReactorSouth
         12,67: RMCAreaLv522AtmosEastReactorSouth
-        12,68: RMCAreaLv522Oob
+        12,68: RMCAreaLv522AtmosEastReactorSouth
         12,69: RMCAreaLv522Oob
         12,70: RMCAreaLv522Oob
         12,71: RMCAreaLv522Oob
@@ -24722,8 +24722,8 @@ entities:
         16,58: RMCAreaLv522AtmosEastReactorSouth
         16,59: RMCAreaLv522AtmosEastReactorSouth
         16,60: RMCAreaLv522AtmosEastReactorSouth
-        16,61: RMCAreaLv522Oob
-        16,62: RMCAreaLv522Oob
+        16,61: RMCAreaLv522AtmosEastReactorSouth
+        16,62: RMCAreaLv522AtmosEastReactorSouth
         16,63: RMCAreaLv522AtmosEastReactorSouth
         16,64: RMCAreaLv522Oob
         16,65: RMCAreaLv522Oob
@@ -24925,9 +24925,9 @@ entities:
         17,57: RMCAreaLv522AtmosEastReactorSouth
         17,58: RMCAreaLv522AtmosEastReactorSouth
         17,59: RMCAreaLv522AtmosEastReactorSouth
-        17,60: RMCAreaLv522Oob
-        17,61: RMCAreaLv522Oob
-        17,62: RMCAreaLv522Oob
+        17,60: RMCAreaLv522AtmosEastReactorSouth
+        17,61: RMCAreaLv522AtmosEastReactorSouth
+        17,62: RMCAreaLv522AtmosEastReactorSouth
         17,63: RMCAreaLv522Oob
         17,64: RMCAreaLv522Oob
         17,65: RMCAreaLv522Oob
@@ -25128,10 +25128,10 @@ entities:
         18,56: RMCAreaLv522AtmosEastReactorSouth
         18,57: RMCAreaLv522AtmosEastReactorSouth
         18,58: RMCAreaLv522AtmosEastReactorSouth
-        18,59: RMCAreaLv522Oob
-        18,60: RMCAreaLv522Oob
-        18,61: RMCAreaLv522Oob
-        18,62: RMCAreaLv522Oob
+        18,59: RMCAreaLv522AtmosEastReactorSouth
+        18,60: RMCAreaLv522AtmosEastReactorSouth
+        18,61: RMCAreaLv522AtmosEastReactorSouth
+        18,62: RMCAreaLv522AtmosEastReactorSouth
         18,63: RMCAreaLv522Oob
         18,64: RMCAreaLv522Oob
         18,65: RMCAreaLv522Oob
@@ -25331,11 +25331,11 @@ entities:
         19,55: RMCAreaLv522AtmosEastReactorSouth
         19,56: RMCAreaLv522AtmosEastReactorSouth
         19,57: RMCAreaLv522AtmosEastReactorSouth
-        19,58: RMCAreaLv522Oob
-        19,59: RMCAreaLv522Oob
-        19,60: RMCAreaLv522Oob
-        19,61: RMCAreaLv522Oob
-        19,62: RMCAreaLv522Oob
+        19,58: RMCAreaLv522AtmosEastReactorSouth
+        19,59: RMCAreaLv522AtmosEastReactorSouth
+        19,60: RMCAreaLv522AtmosEastReactorSouth
+        19,61: RMCAreaLv522AtmosEastReactorSouth
+        19,62: RMCAreaLv522AtmosEastReactorSouth
         19,63: RMCAreaLv522Oob
         19,64: RMCAreaLv522Oob
         19,65: RMCAreaLv522Oob
@@ -25535,11 +25535,11 @@ entities:
         20,55: RMCAreaLv522AtmosEastReactorSouth
         20,56: RMCAreaLv522AtmosEastReactorSouth
         20,57: RMCAreaLv522Oob
-        20,58: RMCAreaLv522Oob
-        20,59: RMCAreaLv522Oob
-        20,60: RMCAreaLv522Oob
-        20,61: RMCAreaLv522Oob
-        20,62: RMCAreaLv522Oob
+        20,58: RMCAreaLv522AtmosEastReactorSouth
+        20,59: RMCAreaLv522AtmosEastReactorSouth
+        20,60: RMCAreaLv522AtmosEastReactorSouth
+        20,61: RMCAreaLv522AtmosEastReactorSouth
+        20,62: RMCAreaLv522AtmosEastReactorSouth
         20,63: RMCAreaLv522Oob
         20,64: RMCAreaLv522Oob
         20,65: RMCAreaLv522Oob
@@ -25739,11 +25739,11 @@ entities:
         21,55: RMCAreaLv522AtmosEastReactorSouth
         21,56: RMCAreaLv522AtmosEastReactorSouth
         21,57: RMCAreaLv522Oob
-        21,58: RMCAreaLv522Oob
-        21,59: RMCAreaLv522Oob
-        21,60: RMCAreaLv522Oob
-        21,61: RMCAreaLv522Oob
-        21,62: RMCAreaLv522Oob
+        21,58: RMCAreaLv522AtmosEastReactorSouth
+        21,59: RMCAreaLv522AtmosEastReactorSouth
+        21,60: RMCAreaLv522AtmosEastReactorSouth
+        21,61: RMCAreaLv522AtmosEastReactorSouth
+        21,62: RMCAreaLv522AtmosEastReactorSouth
         21,63: RMCAreaLv522Oob
         21,64: RMCAreaLv522Oob
         21,65: RMCAreaLv522Oob
@@ -25944,10 +25944,10 @@ entities:
         22,56: RMCAreaLv522AtmosEastReactorSouth
         22,57: RMCAreaLv522AtmosEastReactorSouth
         22,58: RMCAreaLv522AtmosEastReactorSouth
-        22,59: RMCAreaLv522Oob
-        22,60: RMCAreaLv522Oob
-        22,61: RMCAreaLv522Oob
-        22,62: RMCAreaLv522Oob
+        22,59: RMCAreaLv522AtmosEastReactorSouth
+        22,60: RMCAreaLv522AtmosEastReactorSouth
+        22,61: RMCAreaLv522AtmosEastReactorSouth
+        22,62: RMCAreaLv522AtmosEastReactorSouth
         22,63: RMCAreaLv522Oob
         22,64: RMCAreaLv522Oob
         22,65: RMCAreaLv522Oob
@@ -26150,7 +26150,7 @@ entities:
         23,58: RMCAreaLv522AtmosEastReactorSouth
         23,59: RMCAreaLv522AtmosEastReactorSouth
         23,60: RMCAreaLv522AtmosEastReactorSouth
-        23,61: RMCAreaLv522Oob
+        23,61: RMCAreaLv522AtmosEastReactorSouth
         23,62: RMCAreaLv522AtmosEastReactorSouth
         23,63: RMCAreaLv522Oob
         23,64: RMCAreaLv522Oob
@@ -29010,10 +29010,10 @@ entities:
         37,62: RMCAreaLv522AtmosEastReactorSouth
         37,63: RMCAreaLv522AtmosEastReactorSouth
         37,64: RMCAreaLv522AtmosEastReactorSouth
-        37,65: RMCAreaLv522Oob
-        37,66: RMCAreaLv522Oob
-        37,67: RMCAreaLv522Oob
-        37,68: RMCAreaLv522Oob
+        37,65: RMCAreaLv522AtmosEastReactorSouth
+        37,66: RMCAreaLv522AtmosEastReactorSouth
+        37,67: RMCAreaLv522AtmosEastReactorSouth
+        37,68: RMCAreaLv522AtmosEastReactorSouth
         37,69: RMCAreaLv522AtmosEastReactor
         37,70: RMCAreaLv522AtmosEastReactor
         37,71: RMCAreaLv522AtmosEastReactor
@@ -29215,8 +29215,8 @@ entities:
         38,63: RMCAreaLv522AtmosEastReactorSouth
         38,64: RMCAreaLv522AtmosEastReactorSouth
         38,65: RMCAreaLv522AtmosEastReactorSouth
-        38,66: RMCAreaLv522Oob
-        38,67: RMCAreaLv522Oob
+        38,66: RMCAreaLv522AtmosEastReactorSouth
+        38,67: RMCAreaLv522AtmosEastReactorSouth
         38,68: RMCAreaLv522AtmosEastReactorSouth
         38,69: RMCAreaLv522AtmosEastReactor
         38,70: RMCAreaLv522AtmosEastReactor
@@ -42461,7 +42461,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -76970.75
+      secondsUntilStateChange: -77638.84
       state: Opening
 - proto: CMAirlockMedicalLocked
   entities:
@@ -42501,6 +42501,13 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
+- proto: CMAirlockSecureLockedColony
+  entities:
+  - uid: 8982
+    components:
+    - type: Transform
+      pos: 29.5,62.5
+      parent: 1
 - proto: CMApc
   entities:
   - uid: 191
@@ -52669,7 +52676,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -59410.855
+      secondsUntilStateChange: -60078.953
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -52685,7 +52692,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -59410.855
+      secondsUntilStateChange: -60078.953
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -79864,6 +79871,20 @@ entities:
     - type: Transform
       pos: 83.5,15.5
       parent: 1
+- proto: RMCContainerShortTanLeft
+  entities:
+  - uid: 9004
+    components:
+    - type: Transform
+      pos: -18.5,76.5
+      parent: 1
+- proto: RMCContainerShortTanRight
+  entities:
+  - uid: 9003
+    components:
+    - type: Transform
+      pos: -17.5,76.5
+      parent: 1
 - proto: RMCContainerTartarusLeft
   entities:
   - uid: 337
@@ -80366,6 +80387,11 @@ entities:
     - type: Transform
       pos: 76.5,52.5
       parent: 1
+  - uid: 9000
+    components:
+    - type: Transform
+      pos: -5.5,86.5
+      parent: 1
 - proto: RMCContainerTrijentMiddle
   entities:
   - uid: 330
@@ -80373,12 +80399,22 @@ entities:
     - type: Transform
       pos: 77.5,52.5
       parent: 1
+  - uid: 8999
+    components:
+    - type: Transform
+      pos: -4.5,86.5
+      parent: 1
 - proto: RMCContainerTrijentRight
   entities:
   - uid: 274
     components:
     - type: Transform
       pos: 78.5,52.5
+      parent: 1
+  - uid: 8998
+    components:
+    - type: Transform
+      pos: -3.5,86.5
       parent: 1
 - proto: RMCContainerVerticalBottom
   entities:
@@ -80844,6 +80880,20 @@ entities:
     components:
     - type: Transform
       pos: 70.5,49.5
+      parent: 1
+- proto: RMCContainerWeYaWhiteLeft
+  entities:
+  - uid: 9100
+    components:
+    - type: Transform
+      pos: -21.5,77.5
+      parent: 1
+- proto: RMCContainerWeYaWhiteRight
+  entities:
+  - uid: 9099
+    components:
+    - type: Transform
+      pos: -20.5,77.5
       parent: 1
 - proto: RMCCouchEnd
   entities:
@@ -82380,6 +82430,16 @@ entities:
     components:
     - type: Transform
       pos: -6.5,88.5
+      parent: 1
+  - uid: 8983
+    components:
+    - type: Transform
+      pos: 2.5,87.5
+      parent: 1
+  - uid: 9001
+    components:
+    - type: Transform
+      pos: -22.5,77.5
       parent: 1
 - proto: RMCCrateMinecart
   entities:
@@ -93199,61 +93259,6 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: map_corpo
-  - uid: 10547
-    components:
-    - type: MetaData
-      name: Secure Blast Door A
-    - type: Transform
-      pos: 29.5,62.5
-      parent: 1
-    - type: Corrodible
-      isCorrodible: False
-    - type: RMCPodDoor
-      id: Marked_1
-  - uid: 10548
-    components:
-    - type: MetaData
-      name: Secure Blast Door B
-    - type: Transform
-      pos: 29.5,62.5
-      parent: 1
-    - type: Corrodible
-      isCorrodible: False
-    - type: RMCPodDoor
-      id: Marked_2
-  - uid: 10549
-    components:
-    - type: MetaData
-      name: Secure Blast Door C
-    - type: Transform
-      pos: 29.5,62.5
-      parent: 1
-    - type: Corrodible
-      isCorrodible: False
-    - type: RMCPodDoor
-      id: Marked_3
-  - uid: 10550
-    components:
-    - type: MetaData
-      name: Secure Blast Door D
-    - type: Transform
-      pos: 29.5,62.5
-      parent: 1
-    - type: Corrodible
-      isCorrodible: False
-    - type: RMCPodDoor
-      id: Marked_6
-  - uid: 10551
-    components:
-    - type: MetaData
-      name: Secure Blast Door E
-    - type: Transform
-      pos: 29.5,62.5
-      parent: 1
-    - type: Corrodible
-      isCorrodible: False
-    - type: RMCPodDoor
-      id: Marked_7
 - proto: RMCPodDoorButton
   entities:
   - uid: 10554
@@ -96315,6 +96320,11 @@ entities:
       parent: 1
 - proto: RMCSecureCase
   entities:
+  - uid: 8984
+    components:
+    - type: Transform
+      pos: 1.5,87.5
+      parent: 1
   - uid: 10978
     components:
     - type: Transform
@@ -96490,6 +96500,16 @@ entities:
     components:
     - type: Transform
       pos: 23.390202,-0.3706603
+      parent: 1
+  - uid: 8985
+    components:
+    - type: Transform
+      pos: -6.5,87.5
+      parent: 1
+  - uid: 9002
+    components:
+    - type: Transform
+      pos: -20.5,76.5
       parent: 1
   - uid: 11000
     components:
@@ -174697,26 +174717,4 @@ entities:
       containers:
         rmc_xeno_tunnel_mob_container: !type:Container
           ents: []
-- proto: XenoWeedsSource
-  entities:
-  - uid: 27000
-    components:
-    - type: Transform
-      pos: -68.5,85.5
-      parent: 1
-  - uid: 27006
-    components:
-    - type: Transform
-      pos: -55.5,48.5
-      parent: 1
-  - uid: 27063
-    components:
-    - type: Transform
-      pos: 8.5,38.5
-      parent: 1
-  - uid: 27080
-    components:
-    - type: Transform
-      pos: 21.5,42.5
-      parent: 1
 ...

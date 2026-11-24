@@ -268,6 +268,7 @@ namespace Content.Server.Construction
                 // allow simultaneously starting several construction jobs using the same stack of materials.
                 CancelDuplicate = false,
                 BlockDuplicate = false,
+                RootEntity = true, // RMC14
             };
 
             if (await _doAfterSystem.WaitDoAfter(doAfterArgs) == DoAfterStatus.Cancelled)
@@ -456,7 +457,7 @@ namespace Content.Server.Construction
             }
 
             var coordinates = GetCoordinates(ev.Location);
-            var attempt = new RMCConstructionAttemptEvent(coordinates, constructionPrototype.Name);
+            var attempt = new RMCConstructionAttemptEvent(coordinates, constructionPrototype);
             RaiseLocalEvent(ref attempt);
 
             if (attempt.Cancelled)

@@ -63,6 +63,8 @@
         reagents:
         - ReagentId: CMBicaridine
           Quantity: 15
+  - type: Pill
+    pillType: 2
   - type: Sprite
     layers:
     - state: pill3
@@ -81,6 +83,8 @@
         reagents:
         - ReagentId: CMDexalin
           Quantity: 15
+  - type: Pill
+    pillType: 15
   - type: Sprite
     layers:
     - state: pill16
@@ -99,6 +103,8 @@
         reagents:
         - ReagentId: CMDylovene
           Quantity: 15
+  - type: Pill
+    pillType: 12
   - type: Sprite
     layers:
     - state: pill13
@@ -117,6 +123,8 @@
         reagents:
         - ReagentId: CMInaprovaline
           Quantity: 15
+  - type: Pill
+    pillType: 0
   - type: Sprite
     layers:
     - state: pill1
@@ -135,6 +143,8 @@
         reagents:
         - ReagentId: CMKelotane
           Quantity: 15
+  - type: Pill
+    pillType: 4
   - type: Sprite
     layers:
     - state: pill5
@@ -153,12 +163,36 @@
         reagents:
         - ReagentId: CMTricordrazine
           Quantity: 15
+  - type: Pill
+    pillType: 4
   - type: Sprite
     layers:
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
     skilledExamine: cm-pill-contents-tricordrazine
+
+- type: entity
+  parent: CMPill
+  id: RMCPillUltrazineUnmarked
+  name: unmarked pill
+  description: An unknown pill.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: RMCUltrazine
+          Quantity: 5
+  - type: Pill
+    pillType: 5
+  - type: Sprite
+    layers:
+    - state: pill6
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-ultrazine
 
 - type: entity
   parent: CMPill
@@ -171,6 +205,8 @@
         reagents:
         - ReagentId: RMCRussianRed
           Quantity: 10
+  - type: Pill
+    pillType: 11
   - type: Sprite
     layers:
     - state: pill12
@@ -192,6 +228,8 @@
           Quantity: 7.5
         - ReagentId: CMMeralyne
           Quantity: 7.5
+  - type: Pill
+    pillType: 3
   - type: Sprite
     layers:
     - state: pill4
@@ -213,6 +251,8 @@
           Quantity: 7.5
         - ReagentId: CMDermaline
           Quantity: 7.5
+  - type: Pill
+    pillType: 6
   - type: Sprite
     layers:
     - state: pill7
@@ -231,6 +271,8 @@
         reagents:
         - ReagentId: CMImidazoline
           Quantity: 1
+  - type: Pill
+    pillType: 2
   - type: Sprite
     layers:
     - state: pill3
@@ -252,6 +294,8 @@
         reagents:
         - ReagentId: RMCAntiZed
           Quantity: 15
+  - type: Pill
+    pillType: 15
   - type: Sprite
     layers:
     - state: pill16
@@ -271,6 +315,8 @@
         reagents:
         - ReagentId: RMCCyanide
           Quantity: 50
+  - type: Pill
+    pillType: 15
   - type: Sprite
     layers:
     - state: pill16
@@ -293,6 +339,8 @@
         reagents:
         - ReagentId: CMDexalinPlus
           Quantity: 10
+  - type: Pill
+    pillType: 15
   - type: Sprite
     layers:
     - state: pill16
@@ -313,6 +361,8 @@
           Quantity: 10
         - ReagentId: Nutriment
           Quantity: 5
+  - type: Pill
+    pillType: 13
   - type: Sprite
     layers:
     - state: pill14

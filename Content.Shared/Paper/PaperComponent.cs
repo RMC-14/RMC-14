@@ -7,7 +7,21 @@ namespace Content.Shared.Paper;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PaperComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public Color TextColor = new(25, 25, 25);
+    [DataField, AutoNetworkedField]
+    public Color Color = Color.White;
+
+    [DataField, AutoNetworkedField]
+    public int Thickness = 20;
+
     public PaperAction Mode;
+
+    /// <summary>
+    /// The player currently editing this paper, if any.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? EditingPlayer;
     [DataField("content"), AutoNetworkedField]
     public string Content { get; set; } = "";
 
@@ -67,6 +81,29 @@ public sealed partial class PaperComponent : Component
         {
             SignatureIndex = signatureIndex;
         }
+    }
+
+    /// <summary>
+    /// Sent when a player clicks a [date] or [time] button, asking the server to fill it with the in-game date or time.
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class PaperTimeStampRequestMessage : BoundUserInterfaceMessage
+    {
+        public readonly PaperTimeStampType Type;
+        public readonly int Index;
+
+        public PaperTimeStampRequestMessage(PaperTimeStampType type, int index)
+        {
+            Type = type;
+            Index = index;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public enum PaperTimeStampType : byte
+    {
+        Date,
+        Time,
     }
 
     [Serializable, NetSerializable]

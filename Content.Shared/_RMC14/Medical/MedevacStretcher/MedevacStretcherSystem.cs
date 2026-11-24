@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.Utility.Events;
+using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
@@ -44,17 +45,18 @@ public sealed class MedevacStretcherSystem : EntitySystem
         SubscribeLocalEvent<MedevacStretcherComponent, InteractHandEvent>(OnInteract);
         SubscribeLocalEvent<MedevacStretcherComponent, StrappedEvent>(OnStrapped);
         SubscribeLocalEvent<MedevacStretcherComponent, UnstrappedEvent>(OnStrapped);
+        SubscribeLocalEvent<MedevacStretcherComponent, MedevacFailedEvent>(OnMedevacFailed);
     }
 
-    public void Medevac(Entity<MedevacStretcherComponent> ent, EntityUid medevacEntity)
+    public bool TryMedevac(Entity<MedevacStretcherComponent> ent, EntityUid medevacEntity)
     {
         if (_net.IsClient)
-            return;
+            return false;
 
         if (!TryComp(ent.Owner, out StrapComponent? strap) ||
             strap.BuckledEntities.Count == 0)
         {
-            return;
+            return false;
         }
 
         foreach (var buckled in strap.BuckledEntities)
@@ -63,6 +65,7 @@ public sealed class MedevacStretcherSystem : EntitySystem
         }
 
         _appearance.SetData(ent, MedevacStretcherVisuals.MedevacingState, false);
+        return true;
     }
 
     private void OnExamine(Entity<MedevacStretcherComponent> ent, ref ExaminedEvent args)
@@ -121,6 +124,11 @@ public sealed class MedevacStretcherSystem : EntitySystem
 
         _appearance.SetData(ent.Owner, MedevacStretcherVisuals.MedevacingState, true);
         args.ReadyForMedevac = true;
+    }
+
+    private void OnMedevacFailed(Entity<MedevacStretcherComponent> ent, ref MedevacFailedEvent args)
+    {
+        _appearance.SetData(ent.Owner, MedevacStretcherVisuals.MedevacingState, false);
     }
 
     private void OnInteract(Entity<MedevacStretcherComponent> ent, ref InteractHandEvent args)

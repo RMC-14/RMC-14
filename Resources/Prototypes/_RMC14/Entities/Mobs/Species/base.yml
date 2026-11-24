@@ -21,6 +21,7 @@
         layer:
         - Opaque
         - XenoProjectileImpassable
+        - Marine
       fix2:
         shape:
           !type:PhysShapeCircle
@@ -33,6 +34,7 @@
   - type: InjectableSolution
     solution: chemicals
   - type: RMCStamina
+  - type: RMCPulse
   - type: Bloodstream
     bloodReagent: Blood
     bloodMaxVolume: 560
@@ -47,6 +49,7 @@
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
   - type: Woundable
+  - type: RMCBloodSplatterer
   - type: StatusEffects
     allowed:
     - Stun
@@ -80,6 +83,7 @@
     - DoorBumpOpener
   - type: Marine
   - type: RMCSuitLight
+  - type: RMCLastBodyScanResult
   - type: HolocardState
   - type: Hunger
     baseDecayRate: 0.025
@@ -227,6 +231,13 @@
       whitelist:
         components:
         - RequisitionsCrate #Lockers/Crates
+  - type: Language
+    spokenLanguages:
+      - English
+    understoodLanguages:
+      - English
+    currentLanguage: English
+    defaultLanguage: English
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -258,46 +269,18 @@
         acided:
           None:
             visible: false
+          Weak:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: human_acid_weak
+            visible: true
           Normal:
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid
             visible: true
-          Enhanced:
+          Strong:
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
-      enum.HookedVisuals.Hooked:
-        hooked:
-          True: { visible: true }
-          False: { visible: false }
-      enum.TargetedVisuals.Targeted:
-        targeted:
-          None:
-            visible: false
-          Spotted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: spotter_lockon
-            visible: true
-          Targeted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon
-            visible: true
-          TargetedIntense:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon_intense
-            visible: true
-      enum.TargetedVisuals.TargetedDirection:
-        targetedDirection:
-          True: { visible: true}
-          False: { visible: false}
-      enum.TargetedVisuals.TargetedDirectionIntense:
-        targetedDirectionIntense:
-          True: { visible: true }
-          False: { visible: false }
-      enum.FocusedVisuals.Focused:
-        focused:
-          True: { visible: true }
-          False: { visible: false }
   - type: Spottable
   - type: ActiveInputMover
   - type: DropItemsOnRest
@@ -359,11 +342,13 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
+  - type: RMCPushup
   - type: RMCMeleeDamageSkill
   - type: RMCStripTimeSkill
   - type: RMCDisarm
   - type: RMCDisarmable
   - type: StunOnExplosionReceived
+  - type: RMCProneExplosionMult
   - type: DeafenWhileCrit
   - type: RMCStopDropRollVisuals
   - type: XenoToggleChargingDamage
@@ -379,6 +364,7 @@
       8: 8
   - type: XenoToggleChargingKnockback
   - type: XenoToggleChargingParalyze
+  - type: ParatoxinVisuals
   - type: RMCMobStateDrawDepth
     drawDepths:
       Dead: BelowMobs
@@ -393,7 +379,24 @@
       components:
       - Xeno
   - type: RMCHealthIcons
+  - type: RMCLightsOutOnDeath
   - type: RMCMesonsNonviewable
     xenoVisible: true
   - type: RMCActionOrder
     id: RMCBaseMobSpeciesOrganic
+  - type: OpenStorageOnGearEquip
+    whitelist:
+      tags:
+      - SurvivalPouch
+  - type: RMCApplyOnDamageThreshold
+    thresholds:
+      - damageType: Airloss
+        threshold: 50
+        statusName: Unconscious
+        statusComponent: RMCUnconscious
+        duration: 6
+  - type: HumanoidAppearance
+    species: Human
+    hideLayersOnEquip:
+    - UndergarmentTop
+    - Hair

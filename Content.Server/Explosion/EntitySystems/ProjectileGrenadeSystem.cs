@@ -1,6 +1,8 @@
-﻿using Content.Server.Explosion.Components;
+﻿using Content.Server._RMC14.Explosion;
+using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -96,11 +98,21 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 shootCount++;
             }
 
+            // RMC14
+            EntityUid? gunUid = null;
+            EntityUid? user = null;
+
+            if (TryComp(uid, out ProjectileComponent? clusterProjectile))
+            {
+                gunUid = clusterProjectile.Weapon;
+                user = clusterProjectile.Shooter;
+            }
+
             // velocity is randomized to make the projectiles look
             // slightly uneven, doesn't really change much, but it looks better
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, uid, null, component.ProjectileSpeed);
+            _gun.ShootProjectile(contentUid, direction, velocity, gunUid, user, component.ProjectileSpeed);
             _spawned.Add(contentUid);
         }
 

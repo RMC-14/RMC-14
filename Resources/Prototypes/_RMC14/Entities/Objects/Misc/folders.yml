@@ -29,6 +29,8 @@
     blacklist:
       components:
       - Xeno
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: CMFolderBaseEmpty

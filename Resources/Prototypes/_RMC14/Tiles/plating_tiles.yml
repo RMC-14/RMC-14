@@ -38,6 +38,11 @@
   sprite: /Textures/_RMC14/Tiles/floors/panelscorched.png
 
 - type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingThermite
+  sprite: /Textures/_RMC14/Tiles/floors/wall_thermite.png
+
+- type: tile
   parent: CMFloorStripedBase
   id: CMFloorStriped0
   sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_0.png

@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechEquipment
-  name: ColMarTech automated marine equipment rack
+  name: ASRS marine equipment rack
   description: An automated rack hooked up to a colossal storage of Marine Rifleman standard-issue equipment.
   components:
   - type: AccessReader
@@ -113,8 +113,8 @@
         points: 20
       - id: RMCPacketGrenadeIncendiaryFilled
         points: 20
-    #- id: CMM40HPDPPhosphorusPacket3
-    #  points: 20
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 20
       - id: RMCPacketGrenadeSmokeFilled
         points: 10
       - id: RMCPacketGrenadeM74AGMFFilled
@@ -125,18 +125,14 @@
         points: 10
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 15
-    #- id: CMM20MineBox4
-    #  points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -202,8 +198,8 @@
         points: 5
       - id: RMCWeldingGoggles
         points: 5
-    #- id: CMSlingPouch
-    #  points: 15
+      - id: RMCPouchSling
+        points: 15
       - id: RMCPouchGeneralLarge
         points: 15
     - name: Utilities
@@ -220,6 +216,8 @@
         points: 15
       - id: RMCWhistle
         points: 5
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 15
     - name: Binoculars
       entries:
       - id: RMCBinoculars

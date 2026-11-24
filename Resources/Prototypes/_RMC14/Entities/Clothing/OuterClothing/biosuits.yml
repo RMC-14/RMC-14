@@ -29,10 +29,50 @@
     speedTier: light
 
 - type: entity
+  parent: RMCSuitBioGeneral
+  id: RMCSuitBioMedical
+  suffix: Medical, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_medical.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_medical.rsi
+
+- type: entity
+  parent: RMCSuitBioGeneral
+  id: RMCSuitBioScientist
+  suffix: Scientist, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_scientist.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_scientist.rsi
+
+- type: entity
+  parent: RMCSuitBioGeneral
+  id: RMCSuitBioSecurity
+  suffix: Security, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_security.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_security.rsi
+
+- type: entity
+  parent: RMCSuitBioGeneral
+  id: RMCSuitBioVirology
+  suffix: Virology, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_virology.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_virology.rsi
+
+- type: entity
   parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
   id: RMCArmorFirefighter
   name: PT-LT firesuit
-  description: The 'PyroTex LT' is an advanced, lightweight firesuit developed by 'Fujin'. It provides protection against fire and heat, while also offering a degree of protection from blunt force trauma.
+  description: The 'PyroTex LT' is an advanced, lightweight firesuit. It provides protection against fire and heat, while also offering a degree of protection from blunt force trauma.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/firefighter.rsi
@@ -53,6 +93,28 @@
   - type: RMCImmuneToIgnition
     immuneToDirectHits: false
    # TODO gas_transfer_coefficient = 0.90
+
+- type: entity
+  parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
+  id: RMCSuitFirefighter
+  name: firesuit
+  description: A suit that protects against fire and heat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/firesuit.rsi
+  - type: Item
+    size: Large
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+  - type: ClothingSpeedModifier # slowdown = 1 (SLOWDOWN_ARMOR_HEAVY)
+    walkModifier: 0.62
+    sprintModifier: 0.62
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
+  # TODO gas_transfer_coefficient = 0.90
 
 - type: entity
   parent: RMCArmorFirefighter

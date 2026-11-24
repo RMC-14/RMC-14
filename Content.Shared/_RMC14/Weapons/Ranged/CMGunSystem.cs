@@ -8,10 +8,12 @@ using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -39,8 +41,10 @@ using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -48,11 +52,14 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+using Content.Shared._RMC14.Xenonids.Rest;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
 public sealed class CMGunSystem : EntitySystem
 {
+    [Dependency] private readonly GunAkimboSystem _akimbo = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -64,11 +71,13 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectileSystem = default!;
+    [Dependency] private readonly VehicleWeaponsSystem _vehicleWeapons = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
@@ -79,6 +88,9 @@ public sealed class CMGunSystem : EntitySystem
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
+
+    private HashSet<Entity<FixturesComponent>> _intersectedEntities = new();
+    private HashSet<Entity<FixturesComponent>> _impassableEntities = new();
 
     private readonly int _blockArcCollisionGroup = (int) (CollisionGroup.HighImpassable | CollisionGroup.Impassable);
 
@@ -109,11 +121,6 @@ public sealed class CMGunSystem : EntitySystem
 
         SubscribeLocalEvent<GunUserWhitelistComponent, AttemptShootEvent>(OnGunUserWhitelistAttemptShoot);
 
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GunRefreshModifiersEvent>(OnGunUnskilledPenaltyRefresh);
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GetWeaponAccuracyEvent>(OnGunUnskilledPenaltyGetWeaponAccuracy);
-
         SubscribeLocalEvent<GunDamageModifierComponent, AmmoShotEvent>(OnGunDamageModifierAmmoShot);
         SubscribeLocalEvent<GunDamageModifierComponent, MapInitEvent>(OnGunDamageModifierMapInit);
 
@@ -130,6 +137,10 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunSkilledAccuracyComponent, ItemWieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledAccuracyComponent, ItemUnwieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledAccuracyComponent, GetWeaponAccuracyEvent>(OnAccuracySkilledGetWeaponAccuracy);
+
+        SubscribeLocalEvent<GunSkilledScatterComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledScatterComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledScatterComponent, GunRefreshModifiersEvent>(OnSkilledScatterRefresh);
 
         SubscribeLocalEvent<GunRequiresSkillsComponent, AttemptShootEvent>(OnRequiresSkillsAttemptShoot);
 
@@ -149,7 +160,6 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunDualWieldingComponent, GotEquippedHandEvent>(OnDualWieldingEquippedHand);
         SubscribeLocalEvent<GunDualWieldingComponent, GotUnequippedHandEvent>(OnDualWieldingUnequippedHand);
         SubscribeLocalEvent<GunDualWieldingComponent, GunRefreshModifiersEvent>(OnDualWieldingRefreshModifiers);
-        SubscribeLocalEvent<GunDualWieldingComponent, GetWeaponAccuracyEvent>(OnDualWieldingGetWeaponAccuracy);
 
         SubscribeLocalEvent<UnremoveableComponent, RMCItemDropAttemptEvent>(OnUnremoveableDropAttempt);
     }
@@ -173,6 +183,8 @@ public sealed class CMGunSystem : EntitySystem
 
         // Find start and end coordinates for vector.
         var from = _transform.GetMapCoordinates(ent);
+        if (args.FiredProjectiles.Count > 0)
+            from = _transform.GetMapCoordinates(args.FiredProjectiles[0]);
         var to = _transform.ToMapCoordinates(target);
         // Must be same map.
         if (from.MapId != to.MapId)
@@ -184,7 +196,17 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         // Check for a max range from the ShootAtFixedPointComponent. If defined, take the minimum between that and the calculated distance.
-        var distance = ent.Comp.MaxFixedRange != null ? Math.Min(ent.Comp.MaxFixedRange.Value, direction.Length()) : direction.Length();
+        var baseDistance = ent.Comp.MaxFixedRange != null ? Math.Min(ent.Comp.MaxFixedRange.Value, direction.Length()) : direction.Length();
+
+        if (ent.Comp.AutoAimClosestObstacle)
+        {
+            var ray = new CollisionRay(from.Position, direction.Normalized(), ((int)Physics.CollisionGroup.Impassable));
+            var hitResults = _physics.IntersectRay(from.MapId, ray, baseDistance, returnOnFirstHit: true);
+            if (hitResults.TryFirstOrNull(out var hitResult) && hitResult is RayCastResults trueHit)
+            {
+                baseDistance = trueHit.Distance;
+            }
+        }
         // Get current time and normalize the vector for physics math.
         var time = _timing.CurTime;
         var normalized = direction.Normalized();
@@ -214,6 +236,7 @@ public sealed class CMGunSystem : EntitySystem
                 comp.ArcProj = true;
 
             // Take the lowest nonzero MaxFixedRange between projectile and gun for the capped vector length.
+            var distance = baseDistance;
             if (TryComp(projectile, out ProjectileComponent? normalProjectile) && normalProjectile.MaxFixedRange > 0)
             {
                 distance = distance > 0 ? Math.Min(normalProjectile.MaxFixedRange.Value, distance) : normalProjectile.MaxFixedRange.Value;
@@ -221,6 +244,7 @@ public sealed class CMGunSystem : EntitySystem
             // Calculate travel time and equivalent distance based either on click location or calculated max range, whichever is shorter.
             comp.FlyEndTime = time + TimeSpan.FromSeconds(distance / gun.ProjectileSpeedModified);
         }
+
     }
 
     /// <summary>
@@ -317,7 +341,19 @@ public sealed class CMGunSystem : EntitySystem
             if (!TryComp(args.FiredProjectiles[t], out RMCProjectileAccuracyComponent? accuracyComponent))
                 continue;
 
-            accuracyComponent.Accuracy *= weapon.Comp.ModifiedAccuracyMultiplier;
+            var accuracyMultiplier = weapon.Comp.ModifiedAccuracyMultiplier;
+            if (TryComp(weapon.Owner, out GunDualWieldingComponent? dualWielding) &&
+                dualWielding.WeaponGroup != GunDualWieldingGroup.None &&
+                TryGetGunUser(weapon.Owner, out var user) &&
+                TryGetOtherDualWieldedGun(user, (weapon.Owner, dualWielding), out _))
+            {
+                var shotSeed = TryComp(weapon.Owner, out GunComponent? gun) ? gun.NextFire.Ticks : 0;
+                var akimboRandom = new Xoshiro128P((long) t << 32 | (uint) netId, shotSeed);
+                var penalty = FixedPoint2.New(0.1f * (5 + akimboRandom.Next() % 3));
+                accuracyMultiplier = FixedPoint2.Max(0.1f, accuracyMultiplier - penalty);
+            }
+
+            accuracyComponent.Accuracy *= accuracyMultiplier;
             accuracyComponent.Accuracy += orderAccuracy;
 
             var count = 0;
@@ -363,27 +399,27 @@ public sealed class CMGunSystem : EntitySystem
         _popup.PopupClient(popup, args.User, args.User, PopupType.SmallCaution);
     }
 
-    private void OnGunUnskilledPenaltyRefresh(Entity<GunUnskilledPenaltyComponent> ent, ref GunRefreshModifiersEvent args)
+    private void OnSkilledScatterRefresh(Entity<GunSkilledScatterComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        if (TryGetUserSkills(ent, out var user) &&
-            _skills.HasSkill((user, user), ent.Comp.Skill, ent.Comp.Firearms))
+        if (!TryGetUserSkills(ent, out var user))
+            return;
+
+        var firearmsLevel = _skills.GetSkill((user, user), ent.Comp.Skill);
+
+        if (firearmsLevel < ent.Comp.SkilledMinimum && !HasComp<GunUnskilledUsableComponent>(ent.Owner)) // Unskilled penalty
         {
+            args.MinAngle += ent.Comp.UnskilledAngleIncrease;
+            args.MaxAngle += ent.Comp.UnskilledAngleIncrease;
             return;
         }
 
-        args.MinAngle += ent.Comp.AngleIncrease;
-        args.MaxAngle += ent.Comp.AngleIncrease;
-    }
-
-    private void OnGunUnskilledPenaltyGetWeaponAccuracy(Entity<GunUnskilledPenaltyComponent> ent, ref GetWeaponAccuracyEvent args)
-    {
-        if (TryGetUserSkills(ent, out var user) &&
-            _skills.HasSkill((user, user), ent.Comp.Skill, ent.Comp.Firearms))
-        {
+        if (firearmsLevel == ent.Comp.SkilledMinimum) // Minimum firearms doesn't get any special buffs
             return;
-        }
 
-        args.AccuracyMultiplier += ent.Comp.AccuracyAddMult;
+        // Meaning firearms 2 gets around a 12 degree reduction
+        var angleDecrease = _skills.GetSkill((user, user), ent.Comp.Skill) * ent.Comp.SkillMultiplier;
+        args.MinAngle = Angle.FromDegrees(Math.Max(args.MinAngle.Degrees - angleDecrease, 0.0));
+        args.MaxAngle = Angle.FromDegrees(Math.Max(args.MaxAngle.Degrees - angleDecrease, args.MinAngle));
     }
 
     private void OnGunDamageModifierMapInit(Entity<GunDamageModifierComponent> ent, ref MapInitEvent args)
@@ -419,9 +455,15 @@ public sealed class CMGunSystem : EntitySystem
     private void OnGunPointBlankAmmoShot(Entity<GunPointBlankComponent> gun, ref AmmoShotEvent args)
     {
         if (!TryComp(gun.Owner, out GunComponent? gunComp) ||
-            gunComp.Target == null ||
-            !HasComp<TransformComponent>(gunComp.Target) ||
-            !HasComp<EvasionComponent>(gunComp.Target))
+            gunComp.Target == null)
+        {
+            return;
+        }
+
+        var target = gunComp.Target.Value;
+
+        if (!HasComp<TransformComponent>(target) ||
+            !HasComp<EvasionComponent>(target))
         {
             return;
         }
@@ -429,16 +471,16 @@ public sealed class CMGunSystem : EntitySystem
         if (!TryGetGunUser(gun.Owner, out var user))
             return;
 
-        var shooterFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
-        RaiseLocalEvent(user, ref shooterFactionEvent);
+        var shooterFactionEvent = new GetIFFFactionEvent(SlotFlags.IDCARD, new());
+        RaiseLocalEvent(user.Owner, ref shooterFactionEvent);
 
-        var targetFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
-        RaiseLocalEvent(gunComp.Target.Value, ref targetFactionEvent);
+        var targetFactionEvent = new GetIFFFactionEvent(SlotFlags.IDCARD, new());
+        RaiseLocalEvent(target, ref targetFactionEvent);
 
-        if (shooterFactionEvent.Faction != null && 
-            targetFactionEvent.Faction != null && 
-            shooterFactionEvent.Faction == targetFactionEvent.Faction &&
-            HasComp<EntityActiveInvisibleComponent>(gunComp.Target))
+        if (shooterFactionEvent.Factions.Count != 0 &&
+            targetFactionEvent.Factions.Count != 0 &&
+            shooterFactionEvent.Factions.Overlaps(targetFactionEvent.Factions) &&
+            HasComp<EntityActiveInvisibleComponent>(target))
         {
             return;
         }
@@ -472,7 +514,7 @@ public sealed class CMGunSystem : EntitySystem
                 continue;
             }
 
-            if (_standing.IsDown(gunComp.Target.Value))
+            if (_standing.IsDown(gunComp.Target.Value) || HasComp<XenoRestingComponent>(gunComp.Target.Value))
             {
                 projectileComp.Damage *= gun.Comp.ProneDamageMult;
                 Dirty(projectile, projectileComp);
@@ -510,6 +552,13 @@ public sealed class CMGunSystem : EntitySystem
     {
         if (!TryGetUserSkills(gun, out var user))
             return;
+
+        if (!_skills.HasSkill((user, user), gun.Comp.Skill, gun.Comp.SkilledMinimum)
+            && !HasComp<GunUnskilledUsableComponent>(gun))
+        {
+            args.AccuracyMultiplier -= gun.Comp.AccuracyAddMult;
+            return;
+        }
 
         args.AccuracyMultiplier += gun.Comp.AccuracyAddMult * _skills.GetSkill((user, user), gun.Comp.Skill);
     }
@@ -592,6 +641,7 @@ public sealed class CMGunSystem : EntitySystem
         RaiseLocalEvent(gun, ref ev);
 
         gun.Comp.ModifiedMultiplier = ev.Multiplier;
+        Dirty(gun);
     }
 
     public bool HasRequiredEquippedPopup(Entity<GunRequireEquippedComponent?> gun, EntityUid user)
@@ -623,6 +673,11 @@ public sealed class CMGunSystem : EntitySystem
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);
             var ev = new ProjectileFixedDistanceStopEvent();
             RaiseLocalEvent(uid, ref ev);
+
+            if (_net.IsClient &&
+                IsClientSide(uid) &&
+                HasComp<DeleteOnFixedDistanceStopComponent>(uid))
+                QueueDel(uid);
         }
     }
 
@@ -721,17 +776,6 @@ public sealed class CMGunSystem : EntitySystem
         args.MaxAngle += gun.Comp.ScatterModifier;
     }
 
-    private void OnDualWieldingGetWeaponAccuracy(Entity<GunDualWieldingComponent> gun, ref GetWeaponAccuracyEvent args)
-    {
-        if (gun.Comp.WeaponGroup == GunDualWieldingGroup.None || !TryGetGunUser(gun, out var user))
-            return;
-
-        if (!TryGetOtherDualWieldedGun(user, gun, out _))
-            return;
-
-        args.AccuracyMultiplier += gun.Comp.AccuracyAddMult;
-    }
-
     private void OnUnremoveableDropAttempt(Entity<UnremoveableComponent> ent, ref RMCItemDropAttemptEvent args)
     {
         args.Cancelled = true;
@@ -740,29 +784,21 @@ public sealed class CMGunSystem : EntitySystem
     private bool TryGetOtherDualWieldedGun(EntityUid user, Entity<GunDualWieldingComponent> gun, out Entity<GunDualWieldingComponent> otherGun)
     {
         otherGun = default;
-
-        if (!TryComp(user, out HandsComponent? handsComp))
-            return false;
-
-        foreach (var hand in handsComp.Hands.Keys)
-        {
-            if (_hands.GetHeldItem(user, hand) is { } held &&
-                held != gun.Owner &&
-                TryComp(held, out GunDualWieldingComponent? dualWieldingComp) &&
-                dualWieldingComp.WeaponGroup == gun.Comp.WeaponGroup)
-            {
-                otherGun = (held, dualWieldingComp);
-                return true;
-            }
-        }
-
-        return false;
+        return TryComp(user, out HandsComponent? hands) &&
+               _akimbo.TryGetOtherDualWieldedGun((user, hands), gun, out otherGun, out _);
     }
 
     public bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
     {
         if (_container.TryGetContainingContainer((gun, null), out var container) &&
-            TryComp(container.Owner, out HandsComponent? hands))
+            _vehicleWeapons.TryGetOperatorForSelectedWeapon(container.Owner, gun, out var operatorUid) &&
+            TryComp(operatorUid, out HandsComponent? operatorHands))
+        {
+            user = (operatorUid, operatorHands);
+            return true;
+        }
+
+        if (container != null && TryComp(container.Owner, out HandsComponent? hands))
         {
             user = (container.Owner, hands);
             return true;
@@ -883,3 +919,15 @@ public sealed partial class DelayedAmmoInsertDoAfterEvent : SimpleDoAfterEvent;
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// An event raised before a shot attempt is made.
+/// </summary>
+[ByRefEvent]
+public record struct BeforeAttemptShootEvent(EntityCoordinates Origin, Vector2 Offset, bool Handled = false);
+
+/// <summary>
+/// An event raised right before a muzzle flash event is raised.
+/// </summary>
+[ByRefEvent]
+public record struct RMCBeforeMuzzleFlashEvent(EntityUid Weapon, Vector2 Offset = default);

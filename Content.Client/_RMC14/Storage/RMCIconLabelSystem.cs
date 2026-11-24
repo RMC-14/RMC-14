@@ -19,6 +19,8 @@ public sealed class RMCIconLabelSystem : SharedRMCIconLabelSystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         _font = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 8);
 
         Subs.CVar(_config, RMCCVars.RMCDrawStorageIconLabels, v => _drawStorageIconLabels = v, true);

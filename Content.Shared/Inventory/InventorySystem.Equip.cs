@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Admin.AdminGhost;
 using Content.Shared._RMC14.Hands;
 using Content.Shared.Armor;
 using Content.Shared.Clothing.Components;
@@ -246,6 +247,9 @@ public abstract partial class InventorySystem
 
         if (slotDefinition == null && !TryGetSlot(target, slot, out slotDefinition, inventory: inventory))
             return false;
+
+        if (HasComp<RMCAdminGhostComponent>(target))
+            return true;
 
         DebugTools.Assert(slotDefinition.Name == slot);
         if (slotDefinition.DependsOn != null)

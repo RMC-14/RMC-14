@@ -11,6 +11,15 @@
   useLoadoutOfJob: CMSurvivor
   basePlaytimeTracker: true
   hidden: true # Keep hidden, this role exists as a base for other military survivor roles and so playtimes are visible in the character stats menu
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
 
 - type: startingGear
   id: RMCGearMilitarySurvivor

@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMSquad
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-combat
   name: department-CMSquad
   description: cm-department-Marine-description
   color: "#DE3A3A"
@@ -12,10 +13,25 @@
   - CMSmartGunOperator
   - CMHospitalCorpsman
   - CMCombatTech
-  - CMPVERifleman
+  - CMPVERifleman # PVE UNMC
   - CMPVEHospitalCorpsman
   - CMPVESquadLeader
   - CMPVESmartGunOperator
   - CMPVESectionSergeant
+  - CMRoyalMarinesTroopSargePVE # PVE RCM
+  - CMRoyalMarinesSectionLeaderPVE
+  - CMRoyalMarinesTeamLeaderPVE
+  - CMRoyalMarinesAssaultEngineerPVE
+  - CMRoyalMarinesSmartgunnerPVE
+  - CMRoyalMarinesBombSpecPVE
+  - CMRoyalMarinesScoutSniperPVE
+  - CMRoyalMarinesMedicPVE
+  - CMRoyalMarinesRiflemanPVE
+  - RMCFORECONPVESquadLead # PVE FORECON
+  - RMCFORECONPVEAssistantSL
+  - RMCFORECONPVERadioTelephoneOperator
+  - RMCFORECONPVECorpsman
+  - RMCFORECONPVESmartgunner
+  - RMCFORECONPVERifleman
   departmentRadio: null
   headOfDepartment: CMSquadLeader

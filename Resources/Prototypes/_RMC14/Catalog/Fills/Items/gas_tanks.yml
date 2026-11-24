@@ -1,7 +1,7 @@
 - type: entity
-  id: CMAnestheticTankFilled
   parent: CMAnestheticTank
-  suffix: Filled
+  id: CMAnestheticTankFilled
+  suffix: RMC14, Filled
   components:
   - type: GasTank
     #      0.21  | % oxygen in normal atmosphere
@@ -23,4 +23,77 @@
         - 0 # ammonia
         - 0.615413715 # 30% N2O
         # 2.051379050       total
+      temperature: 293.15
+
+- type: entity
+  parent: RMCGasTankOxygen
+  id: RMCGasTankOxygenFilled
+  suffix: RMC14, Filled
+  components:
+  - type: GasTank
+    outputPressure: 21.3
+    air:
+      # 31 minutes
+      volume: 5
+      moles:
+      - 2.051379050 # oxygen
+      temperature: 293.15
+
+- type: entity
+  parent: RMCEmergencyOxygenTank
+  id: RMCEmergencyOxygenTankFilled
+  suffix: RMC14, Filled
+  components:
+  - type: GasTank
+    outputPressure: 21.3
+    air:
+      # 4 minutes
+      volume: 0.66
+      moles:
+      - 0.270782035 # oxygen
+      temperature: 293.15
+
+- type: entity
+  parent: RMCExtendedEmergencyOxygenTank
+  id: RMCExtendedEmergencyOxygenTankFilled
+  suffix: RMC14, Filled
+  components:
+  - type: GasTank
+    outputPressure: 21.3
+    air:
+      # 9 minutes
+      volume: 1.5
+      moles:
+      - 0.615413715 # oxygen
+      temperature: 293.15
+
+- type: entity
+  parent: RMCDoubleEmergencyOxygenTank
+  id: RMCDoubleEmergencyOxygenTankFilled
+  suffix: RMC14, Filled
+  components:
+  - type: GasTank
+    outputPressure: 21.3
+    air:
+      # 15 minutes
+      volume: 2.5
+      moles:
+      - 1.025689525 # oxygen
+      temperature: 293.15
+
+- type: entity
+  parent: RMCGasTankPhoron
+  id: RMCGasTankPhoronFilled
+  suffix: RMC14, Filled
+  components:
+  - type: GasTank
+    outputPressure: 101.3
+    air:
+      # 6 minutes of agony
+      volume: 5
+      moles:
+      - 0           # oxygen
+      - 0           # nitrogen
+      - 0           # CO2
+      - 2.051379050 # plasma
       temperature: 293.15

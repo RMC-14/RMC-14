@@ -19,6 +19,7 @@ public sealed class AttachableSilencerSystem : EntitySystem
 
     private void OnSilencerMuzzleFlash(Entity<AttachableSilencerComponent> ent, ref AttachableRelayedEvent<GunMuzzleFlashAttemptEvent> args)
     {
-        args.Args.Cancelled = true;
+        if (ent.Comp.HideMuzzleFlash)
+            args.Args.Cancelled = true;
     }
 }

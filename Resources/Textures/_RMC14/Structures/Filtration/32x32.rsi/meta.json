@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/turf/floors/32x32.dmi, https://github.com/cmss13-devs/cmss13/blob/46d1d000640006d99b3ea99475fee4ba96890702/icons/turf/floors/coagulation.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "filtration_catwalk"
+    },
+    {
+      "name": "filtration_segmentA"
+    },
+    {
+      "name": "filtration_segmentB"
+    },
+    {
+      "name": "filtration_segmentC"
+    },
+    {
+      "name": "filtration_segmentD"
+    },
+    {
+      "name": "ne1"
+    },
+    {
+      "name": "ne2"
+    },
+    {
+      "name": "ne3"
+    },
+    {
+      "name": "ne4"
+    },
+    {
+      "name": "ne5"
+    },
+    {
+      "name": "northleft"
+    },
+    {
+      "name": "northmid"
+    },
+    {
+      "name": "northright"
+    },
+    {
+      "name": "nw1"
+    },
+    {
+      "name": "nw2"
+    },
+    {
+      "name": "nw3"
+    },
+    {
+      "name": "nw4"
+    },
+    {
+      "name": "se1"
+    },
+    {
+      "name": "se2"
+    },
+    {
+      "name": "sw1"
+    },
+    {
+      "name": "sw2"
+    }
+  ]
+}

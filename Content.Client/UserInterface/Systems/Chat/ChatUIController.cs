@@ -1,8 +1,9 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.Mentor;
+using Content.Client._RMC14.Mobs.Ghosts;
 using Content.Client.Administration.Managers;
 using Content.Client.Chat;
 using Content.Client.Chat.Managers;
@@ -12,11 +13,14 @@ using Content.Client.Examine;
 using Content.Client.Gameplay;
 using Content.Client.Ghost;
 using Content.Client.Mind;
+using Content.Client.Popups;
 using Content.Client.Roles;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
+using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
 using Content.Client.UserInterface.Systems.Gameplay;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -71,6 +75,11 @@ public sealed partial class ChatUIController : UIController
     [UISystemDependency] private readonly TransformSystem? _transform = default;
     [UISystemDependency] private readonly MindSystem? _mindSystem = default!;
     [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
+
+    // RMC14
+    [UISystemDependency] private readonly CMGhostSystem? _cmGhost = default;
+    [UISystemDependency] private readonly PopupSystem? _popup = default!;
+    // RMC14
 
     private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
     private string[] _chatNameColors = default!;
@@ -129,6 +138,15 @@ public sealed partial class ChatUIController : UIController
 
     private LayoutContainer _speechBubbleRoot = default!;
 
+    // RMC14
+    private BoxContainer _chatPreviewContainer = default!;
+    private PanelContainer _chatPreviewPanel = default!;
+    private WrappingRichTextLabel _chatPreviewLabel = default!;
+    private int _lastPreviewCursorPos = -1;
+    private int _lastPreviewSelLower = -1;
+    private int _lastPreviewSelUpper = -1;
+    // RMC14
+
     /// <summary>
     ///     Speech bubbles that are currently visible on screen.
     ///     We track them to push them up when new ones get added.
@@ -141,6 +159,8 @@ public sealed partial class ChatUIController : UIController
     /// </summary>
     private readonly Dictionary<EntityUid, SpeechBubbleQueueData> _queuedSpeechBubbles
         = new();
+
+    private bool _speechBubblesSuppressed;
 
     private readonly HashSet<ChatBox> _chats = new();
     public IReadOnlySet<ChatBox> Chats => _chats;
@@ -202,6 +222,31 @@ public sealed partial class ChatUIController : UIController
         _chatNameColorsEnabled = _config.GetCVar(CCVars.ChatEnableColorName);
 
         _speechBubbleRoot = new LayoutContainer();
+
+        // RMC14
+        _chatPreviewLabel = new WrappingRichTextLabel();
+        _chatPreviewPanel = new PanelContainer
+        {
+            Visible = false,
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.5f),
+                ContentMarginLeftOverride = 8,
+                ContentMarginRightOverride = 8,
+                ContentMarginTopOverride = 4,
+                ContentMarginBottomOverride = 4,
+            },
+        };
+        _chatPreviewPanel.AddChild(_chatPreviewLabel);
+        var previewCenterRow = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+        previewCenterRow.AddChild(new Control { HorizontalExpand = true });
+        previewCenterRow.AddChild(_chatPreviewPanel);
+        previewCenterRow.AddChild(new Control { HorizontalExpand = true });
+        _chatPreviewContainer = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
+        _chatPreviewContainer.AddChild(new Control { VerticalExpand = true });
+        _chatPreviewContainer.AddChild(previewCenterRow);
+        _chatPreviewContainer.AddChild(new Control { VerticalExpand = true });
+        // RMC14
 
         UpdateChannelPermissions();
 
@@ -276,6 +321,12 @@ public sealed partial class ChatUIController : UIController
 
         var viewportContainer = UIManager.ActiveScreen!.FindControl<LayoutContainer>("ViewportContainer");
         SetSpeechBubbleRoot(viewportContainer);
+
+        // RMC14
+        _chatPreviewContainer.Orphan();
+        viewportContainer.AddChild(_chatPreviewContainer);
+        LayoutContainer.SetAnchorPreset(_chatPreviewContainer, LayoutContainer.LayoutPreset.Wide);
+        // RMC14
 
         SetChatWindowOpacity(_config.GetCVar(CCVars.ChatWindowOpacity));
     }
@@ -448,7 +499,20 @@ public sealed partial class ChatUIController : UIController
         _speechBubbleRoot.Orphan();
         root.AddChild(_speechBubbleRoot);
         LayoutContainer.SetAnchorPreset(_speechBubbleRoot, LayoutContainer.LayoutPreset.Wide);
+        _speechBubbleRoot.Visible = !_speechBubblesSuppressed;
         _speechBubbleRoot.SetPositionLast();
+    }
+
+    public void SetSpeechBubblesSuppressed(bool suppressed)
+    {
+        if (_speechBubblesSuppressed == suppressed)
+            return;
+
+        _speechBubblesSuppressed = suppressed;
+        _speechBubbleRoot.Visible = !suppressed;
+
+        if (suppressed)
+            ClearSpeechBubbles();
     }
 
     private void OnAttachedChanged(EntityUid uid)
@@ -460,6 +524,9 @@ public sealed partial class ChatUIController : UIController
 
     private void AddSpeechBubble(ChatMessage msg, SpeechBubble.SpeechType speechType)
     {
+        if (_speechBubblesSuppressed)
+            return;
+
         var ent = EntityManager.GetEntity(msg.SenderEntity);
 
         if (!EntityManager.EntityExists(ent))
@@ -535,6 +602,22 @@ public sealed partial class ChatUIController : UIController
         {
             _activeSpeechBubbles.Remove(entityUid);
         }
+    }
+
+    private void ClearSpeechBubbles()
+    {
+        _queuedSpeechBubbles.Clear();
+
+        foreach (var bubbles in _activeSpeechBubbles.Values)
+        {
+            foreach (var bubble in bubbles)
+            {
+                bubble.OnDied -= SpeechBubbleDied;
+                bubble.Orphan();
+            }
+        }
+
+        _activeSpeechBubbles.Clear();
     }
 
     private void UpdateChannelPermissions()
@@ -625,6 +708,28 @@ public sealed partial class ChatUIController : UIController
     {
         UpdateQueuedSpeechBubbles(delta);
 
+        // RMC14 update preview cursor/selection (arrow keys fire OnKeyBindDown BEFORE moving
+        // the cursor, so we poll here insead, which runs after all key processing is done)
+        if (_chatPreviewPanel.Visible)
+        {
+            var mainChat = _chats.FirstOrDefault(c => c.Main);
+            if (mainChat != null)
+            {
+                var input = mainChat.ChatInput.Input;
+                var cursorPos = input.CursorPosition;
+                var selLower = input.SelectionLower;
+                var selUpper = input.SelectionUpper;
+                if (cursorPos != _lastPreviewCursorPos || selLower != _lastPreviewSelLower || selUpper != _lastPreviewSelUpper)
+                {
+                    _lastPreviewCursorPos = cursorPos;
+                    _lastPreviewSelLower = selLower;
+                    _lastPreviewSelUpper = selUpper;
+                    UpdateChatPreview();
+                }
+            }
+        }
+        // RMC14
+
         try
         {
             var time = _timing.CurTime;
@@ -663,6 +768,9 @@ public sealed partial class ChatUIController : UIController
 
     private void UpdateQueuedSpeechBubbles(FrameEventArgs delta)
     {
+        if (_speechBubblesSuppressed)
+            return;
+
         // Update queued speech bubbles.
         if (_queuedSpeechBubbles.Count == 0 || _examine == null)
         {
@@ -833,6 +941,25 @@ public sealed partial class ChatUIController : UIController
             text = $";{text}";
         }
 
+        // RMC14
+        if (MapLocalIfGhost(channel) == ChatSelectChannel.Dead &&
+            _player.LocalEntity is { } localEntity &&
+            _ent.HasComponent<RMCDeadChatMutedComponent>(localEntity))
+        {
+            var warning = Loc.GetString("rmc-ghost-dead-chat-send-blocked");
+            _popup?.PopupClient(warning, localEntity, localEntity);
+            return;
+        }
+
+        if (_cmGhost?.ShouldMutePostDeathChat((ChatChannel) channel) == true &&
+            _player.LocalEntity is { } postDeathMutedEntity)
+        {
+            var warning = Loc.GetString("rmc-ghost-post-death-chat-send-blocked");
+            _popup?.PopupClient(warning, postDeathMutedEntity, postDeathMutedEntity);
+            return;
+        }
+        // RMC14
+
         _manager.SendMessage(text, prefixChannel == 0 ? channel : prefixChannel);
     }
 
@@ -877,7 +1004,16 @@ public sealed partial class ChatUIController : UIController
     private void OnChatMessage(MsgChatMessage message)
     {
         var msg = message.Message;
-        ProcessChatMessage(msg, !msg.HidePopup);
+
+        // RMC14
+        if (msg.Channel == ChatChannel.Dead &&
+            _player.LocalEntity is { } localEntity &&
+            _ent.HasComponent<RMCDeadChatMutedComponent>(localEntity))
+            return;
+
+        if (_cmGhost?.ShouldMutePostDeathChat(msg.Channel) != true)
+            ProcessChatMessage(msg, !msg.HidePopup || msg.UseEmoteSpeechBubble);
+        // RMC14
 
         if ((msg.Channel & ChatChannel.AdminRelated) == 0 ||
             _config.GetCVar(CCVars.ReplayRecordAdminChat))
@@ -956,11 +1092,15 @@ public sealed partial class ChatUIController : UIController
         switch (msg.Channel)
         {
             case ChatChannel.Local:
-                AddSpeechBubble(msg, SpeechBubble.SpeechType.Say);
+                // RMC14
+                AddSpeechBubble(msg, msg.UseEmoteSpeechBubble ? SpeechBubble.SpeechType.Emote : SpeechBubble.SpeechType.Say);
+                // RMC14
                 break;
 
             case ChatChannel.Whisper:
-                AddSpeechBubble(msg, SpeechBubble.SpeechType.Whisper);
+                // RMC14
+                AddSpeechBubble(msg, msg.UseEmoteSpeechBubble ? SpeechBubble.SpeechType.Emote : SpeechBubble.SpeechType.Whisper);
+                // RMC14
                 break;
 
             case ChatChannel.Dead:
@@ -1005,12 +1145,93 @@ public sealed partial class ChatUIController : UIController
     public void NotifyChatTextChange()
     {
         _typingIndicator?.ClientChangedChatText();
+        // RMC14
+        UpdateChatPreview();
+        // RMC14
     }
 
     public void NotifyChatFocus(bool isFocused)
     {
         _typingIndicator?.ClientChangedChatFocus(isFocused);
+        // RMC14
+        if (!isFocused)
+            _chatPreviewPanel.Visible = false;
+        // RMC14
     }
+
+    // RMC14
+    private void UpdateChatPreview()
+    {
+        if (!_config.GetCVar(RMCCVars.RMCChatPreview))
+        {
+            _chatPreviewPanel.Visible = false;
+            return;
+        }
+
+        var mainChat = _chats.FirstOrDefault(c => c.Main);
+        if (mainChat == null)
+        {
+            _chatPreviewPanel.Visible = false;
+            return;
+        }
+
+        var inputText = mainChat.ChatInput.Input.Text;
+        if (string.IsNullOrEmpty(inputText))
+        {
+            _chatPreviewPanel.Visible = false;
+            return;
+        }
+
+        var (prefixChannel, _, radioChannel) = SplitInputContents(inputText);
+        var effectiveChannel = prefixChannel != ChatSelectChannel.None
+            ? prefixChannel
+            : mainChat.ChatInput.ChannelSelector.SelectedChannel;
+
+        string channelName;
+        Color color;
+        if (radioChannel != null)
+        {
+            channelName = Loc.GetString(radioChannel.Name);
+            color = radioChannel.Color;
+        }
+        else
+        {
+            channelName = ChannelSelectorButton.ChannelSelectorName(effectiveChannel);
+            color = mainChat.ChatInput.ChannelSelector.ChannelSelectColor(effectiveChannel);
+        }
+
+        var cursorPos = Math.Clamp(mainChat.ChatInput.Input.CursorPosition, 0, inputText.Length);
+        var selLower = Math.Clamp(mainChat.ChatInput.Input.SelectionLower, 0, inputText.Length);
+        var selUpper = Math.Clamp(mainChat.ChatInput.Input.SelectionUpper, 0, inputText.Length);
+        var hasSelection = selLower < selUpper;
+
+        var msg = new FormattedMessage();
+        msg.PushColor(color);
+        msg.AddText($"[{channelName}] ");
+
+        if (hasSelection)
+        {
+            msg.AddText(inputText[..selLower]);
+            msg.Pop();
+            msg.PushColor(Color.White);
+            msg.AddText(inputText[selLower..selUpper]);
+            msg.Pop();
+            msg.PushColor(color);
+            msg.AddText(inputText[selUpper..]);
+        }
+        else
+        {
+            msg.AddText(inputText[..cursorPos]);
+            msg.AddText("│");
+            msg.AddText(inputText[cursorPos..]);
+        }
+
+        msg.Pop();
+
+        _chatPreviewLabel.SetMessage(msg, defaultColor: color);
+        _chatPreviewPanel.Visible = true;
+    }
+    // RMC14
 
     public void Repopulate()
     {
@@ -1042,4 +1263,30 @@ public sealed partial class ChatUIController : UIController
 
         public Queue<SpeechBubbleData> MessageQueue { get; } = new();
     }
+
+    // RMC14
+    private sealed class WrappingRichTextLabel : RichTextLabel
+    {
+        private const float MaxWrapWidth = 500f;
+
+        public new void SetMessage(FormattedMessage message, Type[]? tagsAllowed = null, Color? defaultColor = null)
+        {
+            base.SetMessage(message, tagsAllowed, defaultColor);
+            // force immediate measure so _entry.LineBreaks is populated before Draw
+            // is called on this same frame without this, RichTextEntry starts with empty
+            // LineBreaks & Draw renders all text on one long overflowing line for one frame
+            Measure(new Vector2(float.PositiveInfinity, float.PositiveInfinity));
+        }
+
+        protected override Vector2 MeasureOverride(Vector2 availableSize)
+        {
+            var natural = base.MeasureOverride(new Vector2(float.PositiveInfinity, availableSize.Y));
+            if (natural.X <= MaxWrapWidth)
+                return natural;
+
+            var wrapped = base.MeasureOverride(new Vector2(MaxWrapWidth, availableSize.Y));
+            return new Vector2(MaxWrapWidth, wrapped.Y);
+        }
+    }
+    // RMC14
 }

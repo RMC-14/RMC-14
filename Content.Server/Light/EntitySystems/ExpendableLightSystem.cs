@@ -1,7 +1,7 @@
-using Content.Server.Light.Components;
 using Content.Server.Stack;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.IgnitionSource;
@@ -9,19 +9,20 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Stacks;
-using Content.Shared.Light.EntitySystems;
 using Content.Shared.Tag;
+using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Utility;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -80,11 +81,54 @@ namespace Content.Server.Light.EntitySystems
                 switch (component.CurrentState)
                 {
                     case ExpendableLightState.Lit:
+                        component.CurrentState = ExpendableLightState.PhaseOne; //RMC14
+                        component.StateExpiryTime = (float)component.PhaseOneDuration.TotalSeconds; // RMC14
+
+                        if (component.PhaseOneDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+
+                        break;
+
+                    //RMC14
+                    case ExpendableLightState.PhaseOne:
+                        component.CurrentState = ExpendableLightState.PhaseTwo;
+                        component.StateExpiryTime = (float)component.PhaseTwoDuration.TotalSeconds;
+
+                        if (component.PhaseTwoDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+
+                        break;
+                    //RMC14
+                    case ExpendableLightState.PhaseTwo:
+                        component.CurrentState = ExpendableLightState.PhaseThree;
+                        component.StateExpiryTime = (float)component.PhaseThreeDuration.TotalSeconds;
+
+                        if (component.PhaseThreeDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+                        break;
+                    //RMC14
+                    case ExpendableLightState.PhaseThree:
+                        component.CurrentState = ExpendableLightState.PhaseFour;
+                        component.StateExpiryTime = (float)component.PhaseFourDuration.TotalSeconds;
+
+                        if (component.PhaseFourDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+                        break;
+                    //RMC14
+                    case ExpendableLightState.PhaseFour:
+                        component.CurrentState = ExpendableLightState.PhaseFive;
+                        component.StateExpiryTime = (float)component.PhaseFiveDuration.TotalSeconds;
+
+                        if (component.PhaseFiveDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+                        break;
+
+                    //RMC14
+                    case ExpendableLightState.PhaseFive:
                         component.CurrentState = ExpendableLightState.Fading;
                         component.StateExpiryTime = (float)component.FadeOutDuration.TotalSeconds;
 
                         UpdateVisualizer(ent);
-
                         break;
 
                     default:
@@ -99,7 +143,9 @@ namespace Content.Server.Light.EntitySystems
 
                         if (TryComp<ItemComponent>(ent, out var item))
                         {
-                            _item.SetHeldPrefix(ent, "unlit", component: item);
+                            // RMC14
+                            _item.SetHeldPrefix(ent, component.HeldPrefixUnlit, component: item);
+                            _appearance.SetData(ent, ToggleableVisuals.Enabled, false);
                         }
 
                         // RMC14
@@ -128,7 +174,9 @@ namespace Content.Server.Light.EntitySystems
             {
                 if (TryComp<ItemComponent>(ent, out var item))
                 {
-                    _item.SetHeldPrefix(ent, "lit", component: item);
+                    // RMC14
+                    _item.SetHeldPrefix(ent, component.HeldPrefixLit, component: item);
+                    _appearance.SetData(ent, ToggleableVisuals.Enabled, true);
                 }
 
                 var ignite = new IgnitionEvent(true);
@@ -195,12 +243,40 @@ namespace Content.Server.Light.EntitySystems
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.TurnOnBehaviourID, appearance);
                     break;
 
+                //RMC14
+                case ExpendableLightState.PhaseOne:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseOneBehaviourID, appearance);
+                    break;
+                //RMC14
+                case ExpendableLightState.PhaseTwo:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseTwoBehaviourID, appearance);
+                    break;
+                //RMC14
+                case ExpendableLightState.PhaseThree:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseThreeBehaviourID, appearance);
+                    break;
+                //RMC14
+                case ExpendableLightState.PhaseFour:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseFourBehaviourID, appearance);
+                    break;
+                //rMC14
+                case ExpendableLightState.PhaseFive:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseFiveBehaviourID, appearance);
+                    break;
+
                 case ExpendableLightState.Fading:
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.FadeOutBehaviourID, appearance);
                     break;
 
                 case ExpendableLightState.Dead:
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, string.Empty, appearance);
+                    // RMC14
+                    if (TryComp<CartridgeAmmoComponent>(ent, out var cartridge))
+                    {
+                        cartridge.Spent = true;
+                        Dirty(ent,cartridge);
+                    }
+                    // RMC14
                     var ignite = new IgnitionEvent(false);
                     RaiseLocalEvent(ent, ref ignite);
                     break;
@@ -234,7 +310,9 @@ namespace Content.Server.Light.EntitySystems
         {
             if (TryComp<ItemComponent>(uid, out var item))
             {
-                _item.SetHeldPrefix(uid, "unlit", component: item);
+                // RMC14
+                _item.SetHeldPrefix(uid, component.HeldPrefixUnlit, component: item);
+                _appearance.SetData(uid, ToggleableVisuals.Enabled, false);
             }
 
             component.CurrentState = ExpendableLightState.BrandNew;

@@ -49,5 +49,5 @@ public sealed partial class XenoSpikeShieldComponent : Component
     public FixedPoint2 ShieldAmount = 500;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId EffectId = "RMCEffectShieldBlue";
+    public string VisualState = "hedgehog-shield";
 }

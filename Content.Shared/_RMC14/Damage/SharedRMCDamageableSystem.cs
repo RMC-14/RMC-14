@@ -10,7 +10,6 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
-using Content.Shared._RMC14.Projectiles;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Chat.Prototypes;
@@ -24,16 +23,23 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Silicons.Borgs;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Smoke;
+using Robust.Shared.Audio;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Content.Shared.StatusEffect;
 
 namespace Content.Shared._RMC14.Damage;
 
@@ -55,6 +61,8 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -70,6 +78,12 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
+
+    private DamageSpecifier _mergedDamage = new DamageSpecifier();
+    private DamageSpecifier _mergedArmorPiercingDamage = new DamageSpecifier();
+    private HashSet<ProtoId<EmotePrototype>> _mergedEmotes = new HashSet<ProtoId<EmotePrototype>>();
+    private HashSet<string> _mergedPopups = new HashSet<string>();
+    private List<SoundSpecifier> _collectedSounds = new List<SoundSpecifier>();
 
     public override void Initialize()
     {
@@ -320,14 +334,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
     {
-        if (_mobThresholds.TryGetDeadThreshold(ent.Owner, out var mobThreshold) && TryComp<DamageableComponent>(ent, out var damageable))
-        {
-            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
-            var type = _prototypes.Index<DamageTypePrototype>(LethalDamageType);
-            var damage = new DamageSpecifier(type, lethalAmountOfDamage);
-            _damageable.TryChangeDamage(ent.Owner, damage, true);
-        }
-
+        DoLethalDamage(ent.Owner);
         args.Cancelled = true;
     }
 
@@ -451,11 +458,11 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (damage.Comp.BarricadeDamage != null && _barricadeQuery.HasComp(target))
             return true;
 
-        if (!Resolve(target, ref target.Comp, false))
-            return false;
-
         if (!_entityWhitelist.IsWhitelistPassOrNull(damage.Comp.Whitelist, target))
             return false;
+
+        if (!Resolve(target, ref target.Comp, false))
+            return HasComp<VehicleComponent>(target);
 
         if (!damage.Comp.AffectsDead && _mobState.IsDead(target))
             return false;
@@ -517,6 +524,66 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         }
 
         return false;
+    }
+
+    /// <summary>
+    ///   Does a lethal amount of asphyxiation damage to the given mob. Optionally checks for critical state.
+    /// </summary>
+    public void DoLethalDamage(EntityUid target, bool checkCrit = true, EntityUid? origin = null)
+    {
+        if (!_mobState.IsCritical(target) && checkCrit)
+            return;
+
+        if (_mobThresholds.TryGetDeadThreshold(target, out var mobThreshold)
+            && TryComp<DamageableComponent>(target, out var damageable))
+        {
+            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
+            var type = _prototypes.Index(LethalDamageType);
+            var lethalDamage = new DamageSpecifier(type, lethalAmountOfDamage);
+            _damageable.TryChangeDamage(target, lethalDamage, true, origin: origin);
+        }
+    }
+
+    /// <summary>
+    /// This copies any damage values in other than are higher than mergeTarget into mergeTarget.
+    /// Supports scaling the other damage first (more efficient than allocating a new DamageSpecifier)
+    /// </summary>
+    public void MergeHigherSpecifiers(DamageSpecifier mergeTarget, DamageSpecifier? other, float otherScaleFactor = 1.0f)
+    {
+        if (other == null)
+            return;
+
+        var damageDict = mergeTarget.DamageDict;
+        foreach (var (type, value) in other.DamageDict)
+        {
+            var otherDamage = value * otherScaleFactor;
+            if (damageDict.TryGetValue(type, out var existing))
+            {
+                damageDict[type] = FixedPoint2.Max(existing, otherDamage);
+            }
+            else
+            {
+                damageDict[type] = otherDamage;
+            }
+        }
+    }
+
+    public bool TryScaleDamageOverTimeDamage(Entity<DamageOverTimeComponent?> ent, float scale)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
+        if (ent.Comp.Damage == null)
+            return true; // treat this as scaling 0 damage, which is valid.
+
+        if (1f - float.Epsilon * 100f < scale && scale < 1f + float.Epsilon * 100f)
+            return true; // scaling by 1, effectively. Don't do anything and consider it done.
+
+        ent.Comp.Damage *= scale;
+
+        DirtyField(ent, ent.Comp, nameof(ent.Comp.Damage));
+
+        return true;
     }
 
     public override void Update(float frameTime)
@@ -626,10 +693,45 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 continue;
             }
 
+            var damagingContacts = 0;
+            _mergedDamage.DamageDict.Clear();
+            _mergedArmorPiercingDamage.DamageDict.Clear();
+            _mergedEmotes.Clear();
+            _mergedPopups.Clear();
+            _collectedSounds.Clear();
+
+            // We go over every contact and keep the highest damage for EVERY category.
+            // That is, if one contact does 5 brute and 10 heat, and another does 10 brute and 5 heat,
+            // we take 10 brute and 10 heat.
             foreach (var contact in contacts)
             {
                 if (!_damageOverTimeQuery.TryComp(contact, out var damage))
                     continue;
+
+                if (damage.Cover != null)
+                {
+                    var userCoordinates = Transform(user).Coordinates;
+                    var covered = false;
+
+                    if (_transform.GetGrid(userCoordinates) is { } gridUid &&
+                        TryComp<MapGridComponent>(gridUid, out var grid))
+                    {
+                        var tileIndices = _mapSystem.TileIndicesFor(gridUid, grid, userCoordinates);
+                        var anchoredEntities = _mapSystem.GetAnchoredEntities(gridUid, grid, tileIndices);
+
+                        foreach (var anchored in anchoredEntities)
+                        {
+                            if (_entityWhitelist.IsWhitelistPass(damage.Cover, anchored))
+                            {
+                                covered = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (covered)
+                        continue;
+                }
 
                 if (!damage.AffectsDead && _mobState.IsDead(user))
                     continue;
@@ -650,26 +752,94 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 if (_hive.FromSameHive(contact, user))
                     continue;
 
-                userDamage.NextDamageAt = time + userDamage.DamageEvery;
+                damagingContacts += 1;
 
-                if (damage.Damage != null)
-                    DoDamage((contact, damage), user, damage.Damage);
+                var scale = 1.0f;
 
-                if (damage.ArmorPiercingDamage != null)
-                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true, acidic: damage.Acidic);
+                if (damage.Acidic && HasComp<XenoComponent>(user))
+                    scale *= XenoSystem.XENO_ACID_DAMAGE_MULT;
+
+                if (damage.Multipliers is { } multipliers)
+                {
+                    foreach (var multiplier in multipliers)
+                    {
+                        if (_entityWhitelist.IsWhitelistPass(multiplier.Whitelist, user))
+                        {
+                            scale *= (float)multiplier.Multiplier;
+                        }
+                    }
+                }
+
+                MergeHigherSpecifiers(_mergedDamage, damage.Damage, scale);
+                MergeHigherSpecifiers(_mergedArmorPiercingDamage, damage.ArmorPiercingDamage, scale);
 
                 if (damage.Emotes is { Count: > 0 } emotes)
                 {
-                    var emote = _random.Pick(emotes);
+                    _mergedEmotes.UnionWith(emotes);
+                }
+
+                if (damage.Popup is { } popup)
+                {
+                    _mergedPopups.Add(popup);
+                }
+
+                if (damage.Sound is { } sound)
+                {
+                    _collectedSounds.Add(sound);
+                }
+
+                // Try to prevent/mitigate performance degredation from unexpectedly high counts of damaging contacts.
+                if (damagingContacts >= 20)
+                    break;
+            }
+
+            if (damagingContacts > 0)
+            {
+                userDamage.NextDamageAt = time + userDamage.DamageEvery;
+
+                if (_mergedDamage.AnyPositive())
+                    _damageable.TryChangeDamage(user, _mergedDamage);
+
+                if (_mergedArmorPiercingDamage.AnyPositive())
+                    _damageable.TryChangeDamage(user, _mergedArmorPiercingDamage, true);
+
+                if (_mergedEmotes.Count > 0)
+                {
+                    var emote = _random.Pick(_mergedEmotes);
                     DoEmote(user, emote);
                 }
 
-                if (damage.Popup is { } popup && _random.Prob(0.5f))
+                if (_mergedPopups.Count > 0 && _random.Prob(0.5f))
+                {
+                    var popup = _random.Pick(_mergedPopups);
                     _popup.PopupEntity(popup, user, user, PopupType.SmallCaution);
+                }
 
-                _audio.PlayPvs(damage.Sound, user);
+                if (_collectedSounds.Count > 0)
+                {
+                    var sound = _random.Pick(_collectedSounds);
+                    _audio.PlayPvs(sound, user);
+                }
+            }
+        }
 
-                break;
+        var rmcapplyonthesholdquery = EntityQueryEnumerator<RMCApplyOnDamageThresholdComponent, DamageableComponent>();
+        while (rmcapplyonthesholdquery.MoveNext(out var uid, out var apply, out var damagable))
+        {
+            if (time < apply.NextCheck)
+                continue;
+
+            apply.NextCheck = time + apply.CheckEvery;
+
+            foreach (var thres in apply.Thresholds)
+            {
+                if (!damagable.DamagePerGroup.TryGetValue(thres.DamageType, out var damage))
+                    continue;
+
+                if (damage < thres.Threshold)
+                    continue;
+
+                _status.TryAddStatusEffect(uid, thres.StatusName, thres.Duration, true, thres.StatusComponent);
             }
         }
     }

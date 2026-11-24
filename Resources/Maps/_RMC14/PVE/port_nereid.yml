@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/26/2025 01:59:10
+  time: 01/01/2026 22:26:39
   entityCount: 36192
 maps:
 - 1
@@ -2154,6 +2154,36 @@ entities:
             id: RMCDecalOilFloor7
           decals:
             45: -17,12
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalWeYaTile1
+          decals:
+            703: -20,42
+            706: 91,69
+            709: 71,169
+            712: 91,169
+            715: 111,169
+            718: 131,169
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalWeYaTile2
+          decals:
+            704: -19,42
+            707: 92,69
+            710: 72,169
+            713: 92,169
+            716: 112,169
+            719: 132,169
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalWeYaTile3
+          decals:
+            705: -18,42
+            708: 93,69
+            711: 73,169
+            714: 93,169
+            717: 113,169
+            720: 133,169
     - type: BecomesStation
       id: PortNereid
     - type: MapLight
@@ -53559,6 +53589,13 @@ entities:
       parent: 1
 - proto: CMApcMediumCapacity
   entities:
+  - uid: 18429
+    components:
+    - type: Transform
+      pos: -2.5,-34.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.45,-0.32
   - uid: 20303
     components:
     - type: Transform
@@ -53583,14 +53620,6 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.7,-0.4
-  - uid: 34312
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -2.5,-35.5
-      parent: 1
-    - type: SpriteSetRenderOrder
-      offset: -0.5,-1.5
   - uid: 34313
     components:
     - type: Transform
@@ -55946,55 +55975,57 @@ entities:
     - type: Transform
       pos: 52.5,38.5
       parent: 1
-  - uid: 9893
+- proto: CMClosetRadiationFilledTycho
+  entities:
+  - uid: 191
     components:
     - type: Transform
       pos: -18.5,-43.5
       parent: 1
-  - uid: 9900
+  - uid: 196
     components:
     - type: Transform
       pos: 9.5,-23.5
       parent: 1
-  - uid: 27875
+  - uid: 200
     components:
     - type: Transform
-      pos: 23.5,159.5
+      pos: 24.5,154.5
       parent: 1
-  - uid: 27877
-    components:
-    - type: Transform
-      pos: 22.5,159.5
-      parent: 1
-  - uid: 27878
-    components:
-    - type: Transform
-      pos: 24.5,159.5
-      parent: 1
-  - uid: 27879
-    components:
-    - type: Transform
-      pos: 29.5,159.5
-      parent: 1
-  - uid: 27880
-    components:
-    - type: Transform
-      pos: 30.5,159.5
-      parent: 1
-  - uid: 27881
-    components:
-    - type: Transform
-      pos: 22.5,154.5
-      parent: 1
-  - uid: 27882
+  - uid: 204
     components:
     - type: Transform
       pos: 23.5,154.5
       parent: 1
-  - uid: 27883
+  - uid: 208
     components:
     - type: Transform
-      pos: 24.5,154.5
+      pos: 22.5,154.5
+      parent: 1
+  - uid: 2071
+    components:
+    - type: Transform
+      pos: 30.5,159.5
+      parent: 1
+  - uid: 2479
+    components:
+    - type: Transform
+      pos: 29.5,159.5
+      parent: 1
+  - uid: 2482
+    components:
+    - type: Transform
+      pos: 24.5,159.5
+      parent: 1
+  - uid: 2486
+    components:
+    - type: Transform
+      pos: 23.5,159.5
+      parent: 1
+  - uid: 2491
+    components:
+    - type: Transform
+      pos: 22.5,159.5
       parent: 1
 - proto: CMClosetTool
   entities:
@@ -78096,106 +78127,6 @@ entities:
       bodyType: Static
 - proto: CMLockerCargo
   entities:
-  - uid: 191
-    components:
-    - type: Transform
-      pos: -19.5,6.5
-      parent: 1
-    - type: Lock
-      locked: False
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 192
-          - 193
-          - 195
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 196
-    components:
-    - type: Transform
-      pos: -19.5,8.5
-      parent: 1
-    - type: Lock
-      locked: False
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 197
-          - 198
-          - 199
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 200
-    components:
-    - type: Transform
-      pos: -18.5,8.5
-      parent: 1
-    - type: Lock
-      locked: False
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 201
-          - 202
-          - 203
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 204
-    components:
-    - type: Transform
-      pos: -17.5,8.5
-      parent: 1
-    - type: Lock
-      locked: False
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 205
-          - 206
-          - 207
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 208
-    components:
-    - type: Transform
-      pos: -18.5,6.5
-      parent: 1
-    - type: Lock
-      locked: False
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 209
-          - 210
-          - 211
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
   - uid: 811
     components:
     - type: Transform
@@ -78230,26 +78161,6 @@ entities:
           ents:
           - 7776
           - 7851
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 2071
-    components:
-    - type: Transform
-      pos: -17.5,6.5
-      parent: 1
-    - type: Lock
-      locked: False
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 2072
-          - 2073
-          - 2074
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -78376,7 +78287,7 @@ entities:
     - type: Transform
       pos: 42.57707,74.541046
       parent: 1
-- proto: CMMagazineSMGMP5
+- proto: RMCMagazineSMGPCAC5
   entities:
   - uid: 2465
     components:
@@ -142107,33 +142018,6 @@ entities:
     - type: Transform
       pos: 23.504414,111.73223
       parent: 1
-- proto: GeigerCounter
-  entities:
-  - uid: 9906
-    components:
-    - type: Transform
-      pos: 8.684738,-21.330692
-      parent: 1
-  - uid: 27888
-    components:
-    - type: Transform
-      pos: 26.296986,154.65356
-      parent: 1
-  - uid: 27889
-    components:
-    - type: Transform
-      pos: 26.578236,154.46606
-      parent: 1
-  - uid: 27890
-    components:
-    - type: Transform
-      pos: 27.421986,154.57544
-      parent: 1
-  - uid: 27891
-    components:
-    - type: Transform
-      pos: 27.671986,154.46606
-      parent: 1
 - proto: HydroponicsToolClippers
   entities:
   - uid: 5105
@@ -155436,6 +155320,116 @@ entities:
     - type: Transform
       pos: -1.6145061,12.527931
       parent: 1
+- proto: RMCClosetMiner
+  entities:
+  - uid: 3850
+    components:
+    - type: Transform
+      pos: -19.5,8.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 198
+          - 197
+          - 199
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 18490
+    components:
+    - type: Transform
+      pos: -18.5,8.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 202
+          - 201
+          - 203
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 27875
+    components:
+    - type: Transform
+      pos: -17.5,8.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 206
+          - 205
+          - 207
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 27877
+    components:
+    - type: Transform
+      pos: -17.5,6.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 2073
+          - 2072
+          - 2074
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 27878
+    components:
+    - type: Transform
+      pos: -18.5,6.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 210
+          - 209
+          - 211
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 27879
+    components:
+    - type: Transform
+      pos: -19.5,6.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 193
+          - 192
+          - 195
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
 - proto: RMCCoagulationArm
   entities:
   - uid: 22899
@@ -155882,7 +155876,7 @@ entities:
   - uid: 9907
     components:
     - type: Transform
-      pos: 8.36057,-21.514698
+      pos: 6.724045,-21.863615
       parent: 1
   - uid: 18438
     components:
@@ -157718,7 +157712,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 17408.4159249
     - type: Door
-      secondsUntilStateChange: -15832.46
+      secondsUntilStateChange: -16267.844
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -157732,7 +157726,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 17408.4159249
     - type: Door
-      secondsUntilStateChange: -15832.46
+      secondsUntilStateChange: -16267.844
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -170306,21 +170300,11 @@ entities:
     - type: Transform
       pos: -9.506043,6.7637405
       parent: 1
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents: []
   - uid: 9904
     components:
     - type: Transform
-      pos: 6.376195,-21.717823
+      pos: 6.30217,-21.457365
       parent: 1
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents: []
   - uid: 20121
     components:
     - type: Transform
@@ -172911,6 +172895,23 @@ entities:
           showEnts: False
           occludes: True
           ents: []
+- proto: RMCGeigerCounter
+  entities:
+  - uid: 9893
+    components:
+    - type: Transform
+      pos: 8.687205,-21.28549
+      parent: 1
+  - uid: 9900
+    components:
+    - type: Transform
+      pos: 27.572247,154.51207
+      parent: 1
+  - uid: 9905
+    components:
+    - type: Transform
+      pos: 26.540997,154.55894
+      parent: 1
 - proto: RMCGeneratorFusionCell
   entities:
   - uid: 3117
@@ -181560,42 +181561,43 @@ entities:
   - uid: 192
     components:
     - type: Transform
-      parent: 191
+      parent: 27879
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 198
     components:
     - type: Transform
-      parent: 196
+      parent: 3850
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 202
     components:
     - type: Transform
-      parent: 200
+      parent: 18490
     - type: Physics
       canCollide: False
+    - type: ActionsContainer
     - type: InsideEntityStorage
   - uid: 206
     components:
     - type: Transform
-      parent: 204
+      parent: 27875
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 210
     components:
     - type: Transform
-      parent: 208
+      parent: 27878
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 2072
     components:
     - type: Transform
-      parent: 2071
+      parent: 27877
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -181655,42 +181657,42 @@ entities:
   - uid: 193
     components:
     - type: Transform
-      parent: 191
+      parent: 27879
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 197
     components:
     - type: Transform
-      parent: 196
+      parent: 3850
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 201
     components:
     - type: Transform
-      parent: 200
+      parent: 18490
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 205
     components:
     - type: Transform
-      parent: 204
+      parent: 27875
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 209
     components:
     - type: Transform
-      parent: 208
+      parent: 27878
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 2073
     components:
     - type: Transform
-      parent: 2071
+      parent: 27877
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -182390,42 +182392,42 @@ entities:
   - uid: 195
     components:
     - type: Transform
-      parent: 191
+      parent: 27879
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 199
     components:
     - type: Transform
-      parent: 196
+      parent: 3850
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 203
     components:
     - type: Transform
-      parent: 200
+      parent: 18490
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 207
     components:
     - type: Transform
-      parent: 204
+      parent: 27875
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 211
     components:
     - type: Transform
-      parent: 208
+      parent: 27878
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 2074
     components:
     - type: Transform
-      parent: 2071
+      parent: 27877
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -246337,7 +246339,7 @@ entities:
           endTime: 5690.1789278
           startTime: 5761.6942382
           length: 0.4
-- proto: RMCWeaponSMGMP5Alt
+- proto: RMCWeaponSMGPCAC5A5
   entities:
   - uid: 2464
     components:

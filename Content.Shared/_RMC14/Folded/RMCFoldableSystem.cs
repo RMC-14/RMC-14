@@ -23,4 +23,14 @@ public sealed class RMCFoldableSystem : EntitySystem
             _transform.Unanchor(ent);
         }
     }
+
+    public bool TryLockFold(EntityUid uid, bool locked, FoldableComponent? foldableComp = null)
+    {
+        if (!Resolve(uid, ref foldableComp, false))
+            return false;
+
+        foldableComp.IsLocked = locked;
+
+        return true;
+    }
 }

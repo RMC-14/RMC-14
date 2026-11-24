@@ -1,0 +1,130 @@
+<controls:SentryLaptopWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Sentry.Laptop"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:vp="clr-namespace:Content.Client.Viewport"
+    Title="Sentry Network Control"
+    MinSize="800 700">
+    <BoxContainer Orientation="Horizontal">
+        <PanelContainer MinWidth="600" HorizontalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#05090F"
+                                       BorderColor="#88C7FA" BorderThickness="2" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 5 8 5">
+                    <RichTextLabel Name="LaptopHeader" Access="Public" />
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Align="End">
+                        <controls:SentryButton Name="GlobalIFFButton" Access="Public"
+                                             Margin="1" BackgroundColor="#1A3D5C"
+                                             BorderColor="#88C7FA" BorderThickness="1"
+                                             Text="GLOBAL IFF" />
+                        <controls:SentryButton Name="RefreshButton" Access="Public"
+                                             Margin="1" BackgroundColor="#1A3D5C"
+                                             BorderColor="#88C7FA" BorderThickness="1"
+                                             Text="REFRESH" />
+                        <controls:SentryButton Name="UnlinkAllButton" Access="Public"
+                                             Margin="1" BackgroundColor="#5C1A1A"
+                                             BorderColor="#A42625" BorderThickness="1"
+                                             Text="UNLINK ALL" />
+                    </BoxContainer>
+                </BoxContainer>
+
+                <cc:HSeparator Color="#88C7FA" />
+
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 5 8 5">
+                    <Label Name="StatusLabel" Access="Public"
+                           Text="Status: No sentries linked"
+                           VerticalAlignment="Center"
+                           FontColorOverride="#88C7FA"
+                           HorizontalExpand="True"/>
+                </BoxContainer>
+
+                <cc:HSeparator Color="#88C7FA" />
+
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 5 8 5">
+                    <Label Text="SEARCH:" FontColorOverride="#88C7FA" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                    <LineEdit Name="SearchBar" Access="Public"
+                             HorizontalExpand="True"
+                             PlaceHolder="Search sentries by name or location..."/>
+                </BoxContainer>
+
+                <cc:HSeparator Color="#88C7FA" />
+
+                <PanelContainer Name="GlobalIFFPanel" Access="Public" Visible="False" Margin="8 5">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#0A1520"
+                                               BorderColor="#4AA3E8" BorderThickness="1" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="10">
+                        <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+                            <Label Text="GLOBAL IFF TARGETING CONTROLS" FontColorOverride="#88C7FA" VerticalAlignment="Center" HorizontalExpand="True"/>
+                            <controls:SentryButton Name="GlobalApplyIFFButton" Access="Public"
+                                                 Margin="0 0 5 0"
+                                                 BackgroundColor="#1A3D5C"
+                                                 BorderColor="#88C7FA" BorderThickness="1"
+                                                 Text="APPLY TO ALL" />
+                            <controls:SentryButton Name="GlobalResetTargetingButton" Access="Public"
+                                                 BackgroundColor="#1A3D5C"
+                                                 BorderColor="#88C7FA" BorderThickness="1"
+                                                 Text="RESET ALL TO DEFAULT" />
+                        </BoxContainer>
+                        <cc:HSeparator Color="#4AA3E8" Margin="0 5"/>
+                        <ScrollContainer MaxHeight="200" MinHeight="140" HorizontalExpand="True">
+                            <GridContainer Name="GlobalFactionContainer"
+                                           Access="Public"
+                                           Columns="3"
+                                           Margin="5"
+                                           HorizontalExpand="True"/>
+                        </ScrollContainer>
+                        <cc:HSeparator Color="#4AA3E8" Margin="0 5"/>
+                        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right">
+                            <controls:SentryButton Name="GlobalPowerOnButton" Access="Public"
+                                                 Margin="0 0 5 0"
+                                                 BackgroundColor="#1A3D5C"
+                                                 BorderColor="#88C7FA" BorderThickness="1"
+                                                 Text="POWER ALL ON" />
+                            <controls:SentryButton Name="GlobalPowerOffButton" Access="Public"
+                                                 BackgroundColor="#5C1A1A"
+                                                 BorderColor="#A42625" BorderThickness="1"
+                                                 Text="POWER ALL OFF" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="5">
+                    <BoxContainer Name="SentryListContainer"
+                                Access="Public"
+                                Orientation="Vertical"
+                                HorizontalExpand="True"
+                                Margin="3"/>
+                </ScrollContainer>
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer Name="CameraPanel" Access="Public" MinWidth="750" HorizontalExpand="True" Visible="False">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#05090F"
+                                       BorderColor="#88C7FA" BorderThickness="2" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" Margin="5">
+                <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+                    <RichTextLabel Name="CameraTitle" Access="Public"
+                                 Text="[color=#88C7FA][bold]CAMERA VIEW[/bold][/color]"
+                                 VerticalAlignment="Center"
+                                 HorizontalExpand="True"/>
+                    <controls:SentryButton Name="CloseCameraButton" Access="Public"
+                                         BackgroundColor="#5C1A1A"
+                                         BorderColor="#A42625" BorderThickness="1"
+                                         Text="CLOSE" />
+                </BoxContainer>
+                <cc:HSeparator Color="#88C7FA" Margin="0 0 0 5"/>
+                <Control HorizontalExpand="True" VerticalExpand="True">
+                    <vp:ScalingViewport Name="CameraViewport" Access="Public" MouseFilter="Ignore"
+                                        MinSize="740 600" HorizontalExpand="True" VerticalExpand="True" />
+                </Control>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:SentryLaptopWindow>

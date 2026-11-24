@@ -1,16 +1,20 @@
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Timing;
+using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -26,18 +30,21 @@ public sealed class HealthScannerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
+    [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly SharedInteractionSystem _interact = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<HealthScannerComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<HealthScannerComponent, DoAfterAttemptEvent<HealthScannerDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<HealthScannerComponent, HealthScannerDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<HealthScannerComponent, ActivatableUIOpenAttemptEvent>(OnUIActivateAttempt);
     }
 
     private void OnAfterInteract(Entity<HealthScannerComponent> scanner, ref AfterInteractEvent args)
@@ -64,6 +71,19 @@ public sealed class HealthScannerSystem : EntitySystem
         }
 
         _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnUIActivateAttempt(Entity<HealthScannerComponent> scanner, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (scanner.Comp.Target == null)
+        {
+            _popup.PopupClient(Loc.GetString("health-analyzer-window-no-patient-data-text"), scanner, args.User, PopupType.SmallCaution);
+
+            args.Cancel();
+        }
     }
 
     private void OnDoAfterAttempt(Entity<HealthScannerComponent> ent, ref DoAfterAttemptEvent<HealthScannerDoAfterEvent> args)
@@ -99,7 +119,8 @@ public sealed class HealthScannerSystem : EntitySystem
         _audio.PlayPredicted(scanner.Comp.Sound, scanner, args.User);
         _ui.OpenUi(scanner.Owner, HealthScannerUIKey.Key, args.User);
 
-        UpdateUI(scanner);
+        if (_timing.IsFirstTimePredicted)
+            UpdateUI(scanner);
     }
 
     /// <param name="scanner">The Health Scanner</param>
@@ -161,10 +182,11 @@ public sealed class HealthScannerSystem : EntitySystem
                 _ui.CloseUi(scanner.Owner, HealthScannerUIKey.Key);
 
             scanner.Comp.Target = null;
+            Dirty(scanner);
             return;
         }
 
-        if (!_rmcHands.TryGetHolder(scanner, out _))
+        if (!_rmcHands.TryGetHolder(scanner, out var user) || !_interact.InRangeAndAccessible(user, scanner.Comp.Target.Value))
             return;
 
         FixedPoint2 blood = 0;
@@ -178,10 +200,16 @@ public sealed class HealthScannerSystem : EntitySystem
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
         _rmcTemperature.TryGetCurrentTemperature(target, out var temperature);
 
+        var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
-        var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, chemicals, bleeding);
+        var damage = TryComp<DamageableComponent>(target, out var dam) ? dam.Damage : new();
+        var wounds = TryComp<WoundedComponent>(target, out var wound) ? wound.Wounds : new();
+        var woundTypes = wound != null ? wound.WoundGroups : new();
+        var mobState = TryComp<MobStateComponent>(target, out var mob) ? mob.CurrentState : MobState.Alive;
 
-        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
+        var state = new HealthScanState(GetNetEntity(target), mobState, damage, wounds, woundTypes, blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
+
+        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }
 
     public override void Update(float frameTime)
@@ -197,7 +225,10 @@ public sealed class HealthScannerSystem : EntitySystem
                 continue;
 
             active.UpdateAt = time + active.UpdateCooldown;
-            UpdateUI((uid, active));
+
+            //Only update the UI if delay would be zero and its in our hands
+            if (_rmcHands.TryGetHolder(uid, out var user) && _skills.GetDelay(user, uid) <= TimeSpan.Zero)
+                UpdateUI((uid, active));
         }
     }
 }

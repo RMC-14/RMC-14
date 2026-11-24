@@ -1,0 +1,46 @@
+﻿{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b6b4d923f3a7b043f0a7b774e8eb14f2a84550/icons/obj/structures/alien/structures.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "idle",
+            "delays": [
+                [
+                    4,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.6,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    4
+                ]
+            ]
+        },
+        {
+            "name": "attack",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.2,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        }
+    ]
+}

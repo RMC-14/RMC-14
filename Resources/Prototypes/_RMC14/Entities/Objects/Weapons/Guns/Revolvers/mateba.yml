@@ -115,6 +115,11 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMatebaGolden
   - type: AttachableHolder
     slots:
       rmc-bslot-barrel:
@@ -146,6 +151,50 @@
 
 - type: entity
   parent: RMCWeaponRevolverMateba
+  id: RMCWeaponRevolverMatebaSilver
+  name: silver Mateba autorevolver custom
+  description: The .454 Mateba 6 Unica autorevolver is a semi-automatic handcannon that uses its own recoil to rotate the cylinders. Extremely rare, prohibitively costly, and unyieldingly powerful, it's found in the hands of a select few high-ranking UNMC officials. Stylish, sophisticated, and above all, extremely deadly. This one is finished in a beautiful polished silver.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_silver.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_silver.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMatebaSilver
+  - type: AttachableHolder
+    slots:
+      rmc-bslot-barrel:
+        startingAttachable: RMCAttachmentMatebaStandardSilver
+        whitelist:
+          tags:
+          - RMCAttachmentMatebaStandardSilver
+          - RMCAttachmentMatebaMarksmanSilver
+          - RMCAttachmentMatebaSnubNoseSilver
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-bslot-barrel: 0.215, 0.19
+      rmc-aslot-barrel: 0.215, 0.19
+      rmc-aslot-rail: -0.11, 0.22
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCWeaponRevolverMateba
   id: RMCWeaponRevolverMatebaSpecial
   name: Mateba autorevolver special
   description: An old, heavily modified version of the Mateba Autorevolver. It sports a smooth wooden grip, and a much larger barrel to it's unmodified counterpart. It's clear that this weapon has been cared for over a long period of time.
@@ -154,6 +203,11 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMatebaSpecial
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.2
   - type: AttachableHolder
@@ -176,6 +230,83 @@
       rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCWeaponRevolverMateba
+  id: RMCWeaponRevolverMateba2006M
+  name: Spearhead 2006M autorevolver
+  description: The Spearhead 2006M is a powerful, fast-firing revolver that uses its own recoil to rotate the cylinders. It fires heavy .454 rounds. It is compatible with more commonly found Unica 6 speedloaders.
+  components:
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/mateba_2006m.ogg
+  - type: RevolverAmmoProvider
+    soundEject:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mateba2006m_open_chamber.ogg
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mateba2006m_speed_loader.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-bslot-barrel:
+        locked: true
+        startingAttachable: null
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-mateba-2006m
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMateba
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006M
+  id: RMCWeaponRevolverMateba2006MGold
+  name: golden Spearhead 2006M autorevolver
+  suffix: Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006MGold
+  id: RMCWeaponRevolverMateba2006MBlackGold
+  suffix: Black Handle, Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_bgold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_bgold.rsi
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006M
+  id: RMCWeaponRevolverMateba2006MSilver
+  name: silver Spearhead 2006M autorevolver
+  suffix: Silver
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_silver.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_silver.rsi
 
 - type: entity
   id: RMCBaseSpeedLoaderMateba
@@ -401,7 +532,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
+        Piercing: 50
   - type: CMArmorPiercing
     amount: 50
 
@@ -448,6 +579,7 @@
     - 0,0,9,1 # 7 slots
     whitelist:
       tags:
+      - RMCMateba
       - RMCAttachmentMatebaStandard
       - RMCAttachmentMatebaMarksman
       - RMCAttachmentMatebaSnubNose
@@ -457,6 +589,9 @@
     - id: RMCAttachmentMatebaStandard
     - id: RMCAttachmentMatebaMarksman
     - id: RMCAttachmentMatebaSnubNose
+  - type: Tag
+    tags:
+    - RMCMatebaCustomizationCase
 
 - type: entity
   parent: RMCMatebaCustomizationCase
@@ -482,9 +617,13 @@
     - id: RMCAttachmentMatebaMarksman
     - id: RMCAttachmentMatebaSnubNose
 
+- type: Tag
+  id: RMCMatebaCustomizationCase
+
 - type: entity
   parent: RMCMatebaCustomizationCase
   id: RMCMatebaCustomizationCaseLuxury
+  suffix: Golden
   name: luxurious mateba customization kit case
   description: A black case used for storing the tools and parts needed to customize a Mateba revolver. This variant is made for general-grade golden Matebas and comes with golden barrel attachments
   components:
@@ -509,6 +648,33 @@
     - id: RMCAttachmentMatebaSnubNoseGolden
 
 - type: entity
+  parent: RMCMatebaCustomizationCase
+  id: RMCMatebaCustomizationCaseSilver
+  suffix: Silver
+  name: luxurious mateba customization kit case
+  description: A black case used for storing the tools and parts needed to customize a Mateba revolver. This variant is made for general-grade silver Matebas and comes with silver barrel attachments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
+    layers:
+    - state: c_matebacase
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
+    state: c_matebacase
+  - type: FixedItemSizeStorage
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCAttachmentMatebaStandardSilver
+      - RMCAttachmentMatebaMarksmanSilver
+      - RMCAttachmentMatebaSnubNoseSilver
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentMatebaStandardSilver
+    - id: RMCAttachmentMatebaMarksmanSilver
+    - id: RMCAttachmentMatebaSnubNoseSilver
+
+- type: entity
   parent: RMCMatebaCustomizationCaseWeapon
   id: RMCMatebaCustomizationCaseLuxuryWeapon
   description: A black case used for storing the tools and parts needed to customize a Mateba revolver. This variant is made for general-grade golden Matebas and comes with golden barrel attachments, and the mateba handcannon itself.
@@ -520,6 +686,10 @@
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
     state: c_matebacase
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMatebaGolden
   - type: Storage
     whitelist:
       tags:
@@ -560,3 +730,12 @@
 
 - type: Tag
   id: RMCMateba
+
+- type: Tag
+  id: RMCMatebaGolden
+
+- type: Tag
+  id: RMCMatebaSilver
+
+- type: Tag
+  id: RMCMatebaSpecial

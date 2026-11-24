@@ -1,10 +1,16 @@
 using System.Numerics;
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Tackle;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Crest;
+using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
@@ -18,10 +24,10 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -37,14 +43,17 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
+
+    private const float BarricadeCheckRange = 2.5f;
 
     private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
     {
@@ -78,15 +87,14 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<BlockPullingDeadComponent, PullStartedMessage>(OnBlockDeadPullStarted);
         SubscribeLocalEvent<BlockPullingDeadComponent, PullStoppedMessage>(OnBlockDeadPullStopped);
 
-        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullAttemptEvent>(OnPreventPulledWhileAliveAttempt);
-        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStartedMessage>(OnPreventPulledWhileAliveStart);
-        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStoppedMessage>(OnPreventPulledWhileAliveStop);
-
         SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnPullAnimation);
 
         SubscribeLocalEvent<PullerComponent, PullStoppedMessage>(OnPullerPullStopped);
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
+
+        SubscribeLocalEvent<PullerComponent, RMCDisarmUserGetRangeEvent>(ExtendTacklingRangeToPullingTarget);
+        SubscribeLocalEvent<PullerComponent, RMCMeleeUserGetRangeEvent>(ExtendAttackingRangeToPullingTarget);
     }
 
     private void OnGetPullTarget(Entity<BuckleComponent> ent, ref RMCGetPullTargetEvent ev)
@@ -112,22 +120,97 @@ public sealed class RMCPullingSystem : EntitySystem
             return;
         }
 
+        // if entitity is on synth whitelist allow pull unless its defender with crest lowered or fortified
+        if (TryComp<ParalyzeImmuneFromComponent>(user, out var immuneFrom) &&
+            immuneFrom.Whitelist != null &&
+            _whitelist.IsWhitelistPass(immuneFrom.Whitelist, ent.Owner))
+        {
+            var defenderHasActiveDefense =
+                (TryComp<XenoCrestComponent>(ent.Owner, out var crest) && crest.Lowered) ||
+                (TryComp<XenoFortifyComponent>(ent.Owner, out var fort) && fort.Fortified);
+
+            if (!defenderHasActiveDefense)
+                return;
+
+            // Defender fortified or crested - knockback and stun but allows for synth to cancel
+            args.Cancelled = true;
+
+            if (ent.Comp.Sound is { } sound)
+            {
+                var pitch = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
+                _audio.PlayPredicted(sound, ent, user, sound.Params.WithPitchScale(pitch));
+            }
+
+            var origin = _transform.GetMapCoordinates(ent.Owner);
+            _sizeStun.KnockBack(user, origin, knockBackPowerMin: 2f, knockBackPowerMax: 2f, knockBackSpeed: 10f, ignoreSize: true);
+
+            // Stun is here to prevent movement during knockback animation
+            _stun.TryParalyze(user, ent.Comp.Duration, true);
+
+            // Allow cancel on movement after minimum 0.5 seconds
+            var cancel = EnsureComp<SynthStunCancelOnMoveComponent>(user);
+            cancel.CancelAfter = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+
+            // Self-only popup using rmc-pull-paralyze-self
+            var selfMsg = Loc.GetString("rmc-pull-paralyze-self",
+                ("puller", user),
+                ("pulled", Identity.Name(target, EntityManager, user)));
+
+            _popup.PopupClient(selfMsg, user, user, PopupType.MediumCaution);
+
+            return;
+        }
+        else
+        {
+            // Enitity not on synths whitelist - knockback and stun but allows for synth to cancel
+            if (TryComp<ParalyzeImmuneFromComponent>(user, out var immuneFromNotWL) && immuneFromNotWL.Whitelist != null)
+            {
+                if (!_whitelist.IsWhitelistPass(immuneFromNotWL.Whitelist, ent.Owner))
+                {
+                    args.Cancelled = true;
+
+                    if (ent.Comp.Sound is { } sound)
+                    {
+                        var pitch = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
+                        _audio.PlayPredicted(sound, ent, user, sound.Params.WithPitchScale(pitch));
+                    }
+
+                    var origin = _transform.GetMapCoordinates(ent.Owner);
+                    _sizeStun.KnockBack(user, origin, knockBackPowerMin: 2f, knockBackPowerMax: 2f, knockBackSpeed: 10f, ignoreSize: true);
+
+                    // Stun is here to prevent movement during knockback animation
+                    _stun.TryParalyze(user, ent.Comp.Duration, true);
+
+                    // Allow cancel on movement after minimum 0.5 seconds
+                    var cancel = EnsureComp<SynthStunCancelOnMoveComponent>(user);
+                    cancel.CancelAfter = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+
+                    // Self-only popup using rmc-pull-paralyze-self
+                    var selfMsg = Loc.GetString("rmc-pull-paralyze-self",
+                        ("puller", user),
+                        ("pulled", Identity.Name(target, EntityManager, user)));
+
+                    _popup.PopupClient(selfMsg, user, user, PopupType.MediumCaution);
+
+                    return;
+                }
+            }
+        }
+
+        // Default behaviour: cancel event and paralyze the puller.
         args.Cancelled = true;
 
-        if (ent.Comp.Sound is { } sound)
+        if (ent.Comp.Sound is { } sound2)
         {
-            var pitch = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
-            _audio.PlayPredicted(sound, ent, user, sound.Params.WithPitchScale(pitch));
+            var pitch2 = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
+            _audio.PlayPredicted(sound2, ent, user, sound2.Params.WithPitchScale(pitch2));
         }
 
         _stun.TryParalyze(user, ent.Comp.Duration, true);
 
-        var puller = user;
-        var pulled = target;
-        var othersMessage = Loc.GetString("rmc-pull-paralyze-others", ("puller", puller), ("pulled", pulled));
-        var selfMessage = Loc.GetString("rmc-pull-paralyze-self", ("puller", puller), ("pulled", pulled));
-
-        _popup.PopupPredicted(selfMessage, othersMessage, puller, puller, PopupType.MediumCaution);
+        var othersMessage = Loc.GetString("rmc-pull-paralyze-others", ("puller", user), ("pulled", target));
+        var selfMessage = Loc.GetString("rmc-pull-paralyze-self", ("puller", user), ("pulled", Identity.Name(target, EntityManager, user)));
+        _popup.PopupPredicted(selfMessage, othersMessage, user, user, PopupType.MediumCaution);
     }
 
     private void OnInfectOnPullAttempt(Entity<InfectOnPullAttemptComponent> ent, ref PullAttemptEvent args)
@@ -222,9 +305,11 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
+        var targetName = Identity.Name(args.PulledUid, EntityManager, ent);
+
         if (!CanPullDead(ent, args.PulledUid))
         {
-            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
+            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", targetName)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
         }
     }
@@ -241,19 +326,6 @@ public sealed class RMCPullingSystem : EntitySystem
             RemCompDeferred<BlockPullingDeadActiveComponent>(ent);
     }
 
-    private void OnPreventPulledWhileAliveAttempt(Entity<PreventPulledWhileAliveComponent> ent, ref PullAttemptEvent args)
-    {
-        if (args.PulledUid != ent.Owner)
-            return;
-
-        if (!CanPullPreventPulledWhileAlive((ent, ent), args.PullerUid))
-        {
-            var msg = Loc.GetString("rmc-prevent-pull-alive", ("target", ent));
-            _popup.PopupClient(msg, ent, args.PullerUid, PopupType.SmallCaution);
-            args.Cancelled = true;
-        }
-    }
-
     private void OnMeleePullAttempt(Entity<MeleeWeaponComponent> ent, ref PullAttemptEvent args)
     {
         if (args.PullerUid != ent.Owner)
@@ -261,47 +333,27 @@ public sealed class RMCPullingSystem : EntitySystem
 
         if (ent.Comp.NextAttack > _timing.CurTime)
             args.Cancelled = true;
+
+        var pulledUid = args.PulledUid;
+        var attackEvent = new LightAttackEvent(GetNetEntity(pulledUid), GetNetEntity(ent), GetNetCoordinates(pulledUid.ToCoordinates()));
+        if (_rmcMelee.AttemptOverrideAttack(pulledUid, ent, ent, attackEvent, out var attack, out var cancelled, BarricadeCheckRange))
+        {
+            if (attack is LightAttackEvent { Target: not null } light)
+            {
+                var target = GetEntity(light.Target.Value);
+                _melee.AttemptLightAttack(ent, ent, ent.Comp, target, false);
+            }
+
+            args.Cancelled = true;
+        }
+
+        if (cancelled)
+            args.Cancelled = true;
     }
 
     private void OnXenoPullToggle(Entity<XenoComponent> ent, ref RMCPullToggleEvent args)
     {
         args.Handled = true;
-    }
-
-    private void OnPreventPulledWhileAliveStart(Entity<PreventPulledWhileAliveComponent> ent, ref PullStartedMessage args)
-    {
-        if (args.PulledUid != ent.Owner)
-            return;
-
-        EnsureComp<ActivePreventPulledWhileAliveComponent>(ent);
-    }
-
-    private void OnPreventPulledWhileAliveStop(Entity<PreventPulledWhileAliveComponent> ent, ref PullStoppedMessage args)
-    {
-        if (args.PulledUid != ent.Owner)
-            return;
-
-        RemCompDeferred<ActivePreventPulledWhileAliveComponent>(ent);
-    }
-
-    private bool CanPullPreventPulledWhileAlive(Entity<PreventPulledWhileAliveComponent?> pulled, EntityUid user)
-    {
-        if (!Resolve(pulled, ref pulled.Comp, false))
-            return true;
-
-        if (!_mobState.IsAlive(pulled))
-            return true;
-
-        if (!_whitelist.IsWhitelistPassOrNull(pulled.Comp.Whitelist, user))
-            return true;
-
-        foreach (var effect in pulled.Comp.ExceptEffects)
-        {
-            if (_statusEffects.HasStatusEffect(pulled, effect))
-                return true;
-        }
-
-        return false;
     }
 
     public void TryStopUserPullIfPulling(EntityUid user, EntityUid target)
@@ -436,6 +488,23 @@ public sealed class RMCPullingSystem : EntitySystem
         return ev.Target;
     }
 
+
+    private void ExtendTacklingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCDisarmUserGetRangeEvent args)
+    {
+        if (args.Target == ent.Comp.Pulling && args.Target != null)
+        {
+            args.Range = 4.0f;
+        }
+    }
+
+    private void ExtendAttackingRangeToPullingTarget(Entity<PullerComponent> ent, ref RMCMeleeUserGetRangeEvent args)
+    {
+        if (args.Target == ent.Comp.Pulling && args.Target != null)
+        {
+            args.Range = 4.0f;
+        }
+    }
+    
     public override void Update(float frameTime)
     {
         var blockDeadActive = EntityQueryEnumerator<BlockPullingDeadActiveComponent, PullerComponent>();
@@ -451,18 +520,6 @@ public sealed class RMCPullingSystem : EntitySystem
                 _pulling.TryStopPull(pulling, pullable, uid);
         }
 
-        var preventPulledWhileAlive = EntityQueryEnumerator<ActivePreventPulledWhileAliveComponent, PreventPulledWhileAliveComponent, PullableComponent>();
-        while (preventPulledWhileAlive.MoveNext(out var uid, out _, out var prevent, out var pullable))
-        {
-            if (pullable.Puller is not { } puller ||
-                CanPullPreventPulledWhileAlive((uid, prevent), puller))
-            {
-                continue;
-            }
-
-            _pulling.TryStopPull(uid, pullable);
-        }
-
         var pulledQuery = EntityQueryEnumerator<BeingPulledComponent, InputMoverComponent, PullableComponent>();
         while (pulledQuery.MoveNext(out var uid, out _, out var input, out var pullable))
         {
@@ -473,6 +530,23 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
 
             _pulling.TryStopPull(uid, pullable);
+        }
+
+        // Synth stun/knockdown cancel via movementkeyinput from grabbing not whitlisted e.g T3 or fort
+        var cancelQuery = EntityQueryEnumerator<SynthStunCancelOnMoveComponent, InputMoverComponent>();
+        while (cancelQuery.MoveNext(out var uid, out var cancel, out var input))
+        {
+            if ((input.HeldMoveButtons & MoveButtons.AnyDirection) == 0)
+                continue;
+
+            if (_timing.CurTime < cancel.CancelAfter)
+                continue;
+
+            // Remove both paralyze and knockdown effects
+            _statusEffects.TryRemoveStatusEffect(uid, "Stun");
+            _statusEffects.TryRemoveStatusEffect(uid, "KnockedDown");
+
+            RemCompDeferred<SynthStunCancelOnMoveComponent>(uid);
         }
 
         var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent>();

@@ -4,10 +4,15 @@
   name: rmc-job-name-free-press-responder
   description: rmc-job-description-free-press-responder
   playTimeTracker: CMJobFreePressResponder
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobLiaison
+    time: 270000 # 75 hours
+  setPreference: false
   ranks:
     RMCRankCivilian: []
   startingGear: RMCGearFreePressResponder
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconCorrespondent"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-staff
   accessGroups:
@@ -34,8 +39,6 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
-  hasIcon: false
-  hidden: true
 
 - type: startingGear
   id: RMCGearFreePressResponder
@@ -45,9 +48,9 @@
     shoes: RMCShoesLaceup
     head: ClothingHeadHatFedoraBrown
     id: RMCIDCardFreePressResponder
-    ears: CMHeadsetReporter
+    # ears: RMCHeadsetFreePressResponder # removed for now, may come back as listen-only
     eyes: RMCGlassesMedicalHUDGlasses
-    back: CMSatchelFilledFaxResponder
+    back: RMCSatchelFilledFaxResponderFreePress
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument

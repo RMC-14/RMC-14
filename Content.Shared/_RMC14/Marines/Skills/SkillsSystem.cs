@@ -11,11 +11,13 @@ using Content.Shared.Examine;
 using Content.Shared.Flash;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Content.Shared.Storage;
 using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
@@ -99,10 +101,13 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnSkillsMapInit(Entity<SkillsComponent> ent, ref MapInitEvent args)
     {
-        if (!_prototypes.TryIndex(ent.Comp.Preset, out var skillPreset))
+        if (ent.Comp.Preset is not { } presetPrototype)
             return;
 
-        ent.Comp.Skills = skillPreset.Skills;
+        if (!presetPrototype.TryGet(out var skillPreset, _prototypes, _compFactory))
+            return;
+
+        ent.Comp.Skills = new(skillPreset.Skills);
         Dirty(ent);
     }
 
@@ -159,6 +164,10 @@ public sealed class SkillsSystem : EntitySystem
     private void OnRequiresSkillBeforeRangedInteract(Entity<RequiresSkillComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (args.Handled)
+            return;
+
+        // Allow interaction with storage containers regardless of skill
+        if (args.Target != null && (HasComp<StorageComponent>(args.Target.Value) || HasComp<ItemSlotsComponent>(args.Target.Value)))
             return;
 
         if (!HasAllSkills(args.User, ent.Comp.Skills))

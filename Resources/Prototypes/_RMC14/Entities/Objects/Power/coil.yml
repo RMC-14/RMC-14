@@ -41,6 +41,10 @@
     tags:
     - CableCoil
   - type: RMCCableCoil
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+      CMGlass: 20
 
 - type: entity
   parent: RMCCableCoil

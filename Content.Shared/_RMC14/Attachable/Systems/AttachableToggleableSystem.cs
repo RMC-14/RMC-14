@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -21,21 +22,22 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
+using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableToggleableSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainerSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelistSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
@@ -46,12 +48,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
-    private const string attachableToggleUseDelayID = "RMCAttachableToggle";
+    private const string AttachableToggleUseDelayId = "RMCAttachableToggle";
 
-    private const int bracingInvalidCollisionGroup = (int)CollisionGroup.ThrownItem;
-    private const int bracingRequiredCollisionGroup = (int)CollisionGroup.MidImpassable;
+    private const int BracingInvalidCollisionGroup = (int)CollisionGroup.Impassable | (int)CollisionGroup.HighImpassable;
+    private const int BracingRequiredCollisionGroup = (int)CollisionGroup.MidImpassable;
 
     public override void Initialize()
     {
@@ -71,6 +74,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
         //SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<AttachableToggleableComponent, GrantAttachableActionsEvent>(OnGrantAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, RemoveAttachableActionsEvent>(OnRemoveAttachableActions);
+        SubscribeLocalEvent<AttachableToggleableComponent, GetVerbsEvent<ActivationVerb>>(OnGetActivationVerbs,
+            after: new[] { typeof(SharedHandheldLightSystem) });
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<HandDeselectedEvent>>(OnHandDeselected);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotEquippedHandEvent>>(OnGotEquippedHand);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotUnequippedHandEvent>>(OnGotUnequippedHand);
@@ -138,6 +143,11 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private void OnAttachableAltered(Entity<AttachableToggleableSimpleActivateComponent> attachable, ref AttachableAlteredEvent args)
     {
         if (args.User == null)
+            return;
+
+        // Check if attachment has AttachedOnly restriction
+        if (TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent) &&
+            toggleableComponent.AttachedOnly && !toggleableComponent.Attached)
             return;
 
         switch (args.Alteration)
@@ -449,7 +459,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private bool CanStartToggleDoAfter(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleStartedEvent args, bool silent = false)
     {
         if (TryComp(attachable.Owner, out UseDelayComponent? useDelayComponent) &&
-            _useDelaySystem.IsDelayed((attachable.Owner, useDelayComponent), attachableToggleUseDelayID))
+            _useDelaySystem.IsDelayed((attachable.Owner, useDelayComponent), AttachableToggleUseDelayId))
         {
             return false;
         }
@@ -486,6 +496,18 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return false;
         }
 
+        if (!attachable.Comp.Active &&
+            attachable.Comp.InstantToggle == AttachableInstantToggleConditions.Brace &&
+            HasComp<VehicleRideSurfaceRiderComponent>(args.User))
+        {
+            if (!silent)
+                _popupSystem.PopupClient(
+                    Loc.GetString("rmc-attachable-activation-fail-on-vehicle", ("attachable", attachable)),
+                    args.User,
+                    args.User);
+            return false;
+        }
+
         return true;
     }
 
@@ -502,70 +524,42 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 if (attachable.Comp.Active || transformComponent.ParentUid != userUid || !TryComp(userUid, out TransformComponent? userTransform))
                     break;
 
-                TimeSpan? doAfter;
+                var origin = _transformSystem.GetWorldPosition(userTransform);
+                var direction = _transformSystem.GetWorldRotation(userTransform).ToWorldVec();
+                var mapId = userTransform.MapID;
 
-                var coords = userTransform.Coordinates;
+                var hits = _physics.IntersectRay(
+                    mapId,
+                    new CollisionRay(origin, direction, BracingRequiredCollisionGroup),
+                    maxLength: attachable.Comp.InstantToggleRange,
+                    ignoredEnt: userUid,
+                    returnOnFirstHit: false
+                );
 
-                Func<EntityCoordinates, EntityCoordinates, bool> comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return false; };
-                var coordsShift = new Vector2(0f, 0f);
-
-                Func<HashSet<EntityUid>, EntityUid?> GetBracingSurface = (HashSet<EntityUid> ents) =>
+                EntityUid? surface = null;
+                foreach (var hit in hits)
                 {
-                    foreach (var entity in ents)
+                    var ent = hit.HitEntity;
+
+                    if (!TryComp(ent, out FixturesComponent? fixtures))
+                        continue;
+
+                    foreach (var fixture in fixtures.Fixtures.Values)
                     {
-                        if (!TryComp(entity, out FixturesComponent? fixturesComponent) || !Transform(entity).Anchored)
+                        if ((fixture.CollisionLayer & BracingRequiredCollisionGroup) == 0)
                             continue;
 
-                        foreach (var fixture in fixturesComponent.Fixtures.Values)
-                        {
-                            if ((fixture.CollisionLayer & bracingInvalidCollisionGroup) != 0 || (fixture.CollisionLayer & bracingRequiredCollisionGroup) == 0)
-                                continue;
+                        if ((fixture.CollisionLayer & BracingInvalidCollisionGroup) != 0)
+                            continue;
 
-                            if (!comparer(coords, Transform(entity).Coordinates))
-                                continue;
-
-                            return entity;
-                        }
+                        surface = ent;
+                        break;
                     }
 
-                    return null;
-                };
-
-                switch (userTransform.LocalRotation.GetCardinalDir())
-                {
-                    case Direction.South:
-                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.Y < userCoords.Y; };
-                        coordsShift = new Vector2(0f, -0.7f);
-                        break;
-
-                    case Direction.North:
-                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.Y > userCoords.Y; };
-                        coordsShift = new Vector2(0f, 0.7f);
-                        break;
-
-                    case Direction.East:
-                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.X > userCoords.X; };
-                        coordsShift = new Vector2(0.7f, 0f);
-                        break;
-
-                    case Direction.West:
-                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.X < userCoords.X; };
-                        coordsShift = new Vector2(-0.7f, 0f);
-                        break;
-
-                    default:
+                    if (surface != null)
                         break;
                 }
 
-                var surface = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
-                if (surface != null)
-                {
-                    popupText = Loc.GetString("attachable-popup-activate-deploy-on-generic", ("attachable", attachable.Owner), ("surface", surface));
-                    return TimeSpan.FromSeconds(0f);
-                }
-
-                coords = new EntityCoordinates(coords.EntityId, coords.Position + coordsShift);
-                surface = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
                 if (surface != null)
                 {
                     popupText = Loc.GetString("attachable-popup-activate-deploy-on-generic", ("attachable", attachable.Owner), ("surface", surface));
@@ -661,8 +655,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
         var holderEv = new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotId, mode);
         RaiseLocalEvent(holder.Owner, ref holderEv);
 
-        _useDelaySystem.SetLength(attachable.Owner, attachable.Comp.UseDelay, attachableToggleUseDelayID);
-        _useDelaySystem.TryResetDelay(attachable.Owner, id: attachableToggleUseDelayID);
+        _useDelaySystem.SetLength(attachable.Owner, attachable.Comp.UseDelay, AttachableToggleUseDelayId);
+        _useDelaySystem.TryResetDelay(attachable.Owner, id: AttachableToggleUseDelayId);
         _actionsSystem.StartUseDelay(attachable.Comp.Action);
 
         if (attachable.Comp.ShowTogglePopup && userUid != null)
@@ -729,8 +723,12 @@ public sealed class AttachableToggleableSystem : EntitySystem
         _attachableHolderSystem.SetSupercedingAttachable(holder, attachable.Owner);
     }
 
-    private void Toggle(Entity<AttachableToggleableComponent> attachable, EntityUid? user, bool interrupted = false)
+    public void Toggle(Entity<AttachableToggleableComponent> attachable, EntityUid? user, bool interrupted = false)
     {
+        // Prevent toggling if attachment is restricted to being attached only
+        if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            return;
+
         if (!_attachableHolderSystem.TryGetHolder(attachable.Owner, out var holderUid) ||
             !TryComp(holderUid, out AttachableHolderComponent? holderComponent) ||
             !_attachableHolderSystem.TryGetSlotId(holderUid.Value, attachable.Owner, out var slotId))
@@ -758,6 +756,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void GrantAttachableActions(Entity<AttachableToggleableComponent> ent, EntityUid user, bool doSecondTry = true)
     {
+        // Don't grant action if AttachedOnly is true and not currently attached
+        if (ent.Comp.AttachedOnly && !ent.Comp.Attached)
+            return;
+
         // This is to prevent ActionContainerSystem from shitting itself if the attachment has actions other than its attachment toggle.
         if (!TryComp(ent.Owner, out ActionsContainerComponent? actionsContainerComponent) || actionsContainerComponent.Container == null)
         {
@@ -770,12 +772,26 @@ public sealed class AttachableToggleableSystem : EntitySystem
         }
 
         var exists = ent.Comp.Action != null;
+        if (exists &&
+            ent.Comp.Action is { } pending &&
+            Exists(pending) &&
+            actionsContainerComponent.Container?.Contains(pending) != true)
+        {
+            if (_net.IsServer)
+            {
+                ent.Comp.Action = null;
+                Dirty(ent);
+            }
+            return;
+        }
         _actionContainerSystem.EnsureAction(ent, ref ent.Comp.Action, ent.Comp.ActionId, actionsContainerComponent);
 
         if (ent.Comp.Action is not { } actionId)
             return;
 
         _actionsSystem.GrantContainedAction(user, ent.Owner, actionId);
+
+        _actionsSystem.SetToggled(actionId, ent.Comp.Active);
 
         if (exists)
             return;
@@ -797,7 +813,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void RelayAttachableActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
     {
-        if (attachable.Comp.ActionsToRelayWhitelist == null || !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent))
+        if (attachable.Comp.ActionsToRelayWhitelist == null ||
+            !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent) ||
+            actionsContainerComponent.Container is not { } container) // Your IDE lies, this CAN be null.
             return;
 
         foreach (var actionUid in actionsContainerComponent.Container.ContainedEntities)
@@ -828,11 +846,15 @@ public sealed class AttachableToggleableSystem : EntitySystem
         }
 
         _actionsSystem.RemoveProvidedAction(user, ent, action);
+        ent.Comp.Action = null;
+        Dirty(ent);
     }
 
     private void RemoveRelayedActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
     {
-        if (attachable.Comp.ActionsToRelayWhitelist == null || !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent))
+        if (attachable.Comp.ActionsToRelayWhitelist == null ||
+            !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent) ||
+            actionsContainerComponent.Container is not { } container) // Your IDE lies, this CAN be null.
             return;
 
         foreach (var actionUid in actionsContainerComponent.Container.ContainedEntities)
@@ -869,6 +891,14 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
             args.Handled = true;
+    }
+
+    private void OnGetActivationVerbs(Entity<AttachableToggleableComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        if (!ent.Comp.AttachedOnly || ent.Comp.Attached)
+            return;
+
+        args.Verbs.RemoveWhere(v => v.Text == Loc.GetString("verb-common-toggle-light"));
     }
 #endregion
 }

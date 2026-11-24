@@ -10,6 +10,7 @@
   - CMAccessMarinePrep
   - CMAccessCMP
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessAlpha
   - CMAccessBravo
   - CMAccessCharlie
@@ -19,6 +20,7 @@
   - CMAccessOT
   - RMCAccessDatabase
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 - type: accessGroup
   id: MP
@@ -30,6 +32,7 @@
   - CMAccessDropship
   - CMAccessMarinePrep
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessAlpha
   - CMAccessBravo
   - CMAccessCharlie
@@ -50,6 +53,7 @@
   - CMAccessMarinePrep
   - CMAccessArmory
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessAlpha
   - CMAccessBravo
   - CMAccessCharlie
@@ -58,3 +62,4 @@
   - CMAccessMaint
   - CMAccessOT
   - RMCAccessDatabase
+  - RMCAccessLogs

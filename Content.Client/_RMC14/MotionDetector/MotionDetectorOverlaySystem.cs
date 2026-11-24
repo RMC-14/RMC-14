@@ -5,6 +5,7 @@ using Content.Client.UserInterface.Systems.Viewport;
 using Content.Shared._RMC14.MotionDetector;
 using Content.Shared.CCVar;
 using Content.Shared.Inventory;
+using Content.Shared.Storage;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -63,6 +64,11 @@ public sealed class MotionDetectorOverlaySystem : EntitySystem
             while (inv.NextItem(out var item))
             {
                 ents.Add(item);
+
+                if (_entity.HasComponent<PropagateDetectorsComponent>(item) &&
+                    _entity.TryGetComponent<StorageComponent>(item, out var itemStorage))
+                    foreach (var deepItem in itemStorage.StoredItems.Keys)
+                        ents.Add(deepItem);
             }
         }
 

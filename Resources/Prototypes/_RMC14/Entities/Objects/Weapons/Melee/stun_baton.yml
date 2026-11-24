@@ -35,10 +35,12 @@
     energyPerUse: 50
   - type: RMCStaminaDamageOnHit
     damage: 100
+    jitterDuration: 2
   - type: MeleeRequiresSkill
     skills:
       RMCSkillPolice: 1
   - type: StunOnHit
+    duration: 20
     whitelist:
       components:
       - Marine
@@ -57,6 +59,14 @@
       params:
         variation: 0.250
   - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
     activatedDamage:
       types:
         Blunt: 0
@@ -68,12 +78,8 @@
     bluntStaminaDamageFactor: 2.0
     angle: 60
     animation: WeaponArcThrust
-  - type: StaminaDamageOnHit
+  - type: RMCStaminaDamageOnCollide
     damage: 35
-    sound: /Audio/Weapons/egloves.ogg
-  - type: StaminaDamageOnCollide
-    damage: 35
-    sound: /Audio/Weapons/egloves.ogg
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 1000
@@ -81,13 +87,74 @@
   - type: UseDelay
   - type: DisarmMalus
     malus: 0.225
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
-# TODO RMC14: Actually implement the telescopic baton
 - type: entity
-  parent: CMStunbaton
+  parent: BaseItem
   id: RMCTelescopicBaton
   name: telescopic baton
   description: A compact yet rebalanced personal defense weapon. Can be concealed when folded.
   components:
-  - type: Item
-    size: Small
+    - type: ItemToggle
+      predictable: false
+      soundActivate:
+        path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+        params:
+          volume: -5
+      soundDeactivate:
+        path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+        params:
+          volume: -5
+      soundFailToActivate:
+        path: /Audio/Machines/button.ogg
+        params:
+          variation: 0.250
+    - type: ItemToggleSize
+      activatedSize: Normal
+    - type: Sprite
+      sprite: _RMC14/Objects/Weapons/Melee/telebaton.rsi
+      layers:
+        - state: telebaton-icon
+        - state: telebaton-on
+          visible: false
+          map: [ "on" ]
+    - type: Item
+      size: Small
+      sprite: _RMC14/Objects/Weapons/Melee/telebaton.rsi
+      heldPrefix: telebaton
+    - type: UseDelay
+      delay: 0.5
+    - type: ToggleableVisuals
+      spriteLayer: on
+      inhandVisuals:
+        left:
+          - state: inhand-left-on
+        right:
+          - state: inhand-right-on
+    - type: Appearance
+    - type: RMCStaminaDamageOnHit
+      damage: 100
+    - type: MeleeRequiresSkill
+      skills:
+        RMCSkillPolice: 1
+    - type: StunOnHit
+      duration: 0
+      whitelist:
+        components:
+        - Marine
+    - type: ItemToggleMeleeWeapon
+      activatedDamage:
+        types:
+          Blunt: 0
+    - type: MeleeWeapon
+      wideAnimationRotation: -135
+      damage:
+        types:
+          Blunt: 10
+      angle: 60
+      animation: WeaponArcThrust
+    - type: LandAtCursor
+    - type: DisarmMalus
+      malus: 0.225

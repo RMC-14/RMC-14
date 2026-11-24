@@ -33,6 +33,8 @@
   - type: Tag
     tags:
     - DrinkGlass
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: RMCDrinkCoffee
@@ -64,6 +66,39 @@
           Quantity: 30
 
 - type: entity
+  parent: RMCDrinkTea
+  id: RMCDrinkTeaSPP
+  name: insulated container
+  suffix: Tea
+  description: A small, reusable, insulated container for holding liquids with a sip lid.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/tea.rsi
+    state: tea_spp
+    layers: []
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCTea
+          Quantity: 30
+
+- type: entity
+  parent: RMCDrinkTeaSPP
+  id: RMCDrinkWaterSPP
+  name: insulated container
+  suffix: Water
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Water
+          Quantity: 30
+
+- type: entity
   parent: RMCDrinkCoffee
   id: RMCDrinkHotCocoa
   name: dutch hot cocoa
@@ -80,5 +115,3 @@
         reagents:
         - ReagentId: RMCHotCocoa
           Quantity: 30
-
-

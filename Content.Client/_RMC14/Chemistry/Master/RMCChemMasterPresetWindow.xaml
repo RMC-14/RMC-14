@@ -1,0 +1,33 @@
+<controls:RMCChemMasterPresetWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master"
+    MinHeight="400">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <!-- Header with Saved Presets and buttons -->
+        <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+            <RichTextLabel Text="{Loc rmc-chem-master-preset-saved-title}" StyleClasses="LabelHeading" />
+            <Control HorizontalExpand="True" />
+            <Button Name="ToggleQuickAccessButton" Access="Public" StyleClasses="OpenBoth"
+                    Text="{Loc rmc-chem-master-preset-show-quick-access}" Margin="0 0 5 0" />
+            <Button Name="ToggleReorderButton" Access="Public" StyleClasses="OpenBoth"
+                    Text="{Loc rmc-chem-master-preset-reorder}" />
+        </BoxContainer>
+        <!-- Saved Presets List -->
+        <PanelContainer StyleClasses="LowDivider" VerticalExpand="True">
+            <ScrollContainer HScrollEnabled="False" ReturnMeasure="True">
+                <BoxContainer Name="SavedPresetsContainer" Access="Public" Orientation="Vertical" />
+            </ScrollContainer>
+        </PanelContainer>
+        <RichTextLabel Name="NoPresetsLabel" Access="Public"
+                       Text="{Loc rmc-chem-master-preset-none-saved}"
+                       StyleClasses="LabelSubText" Margin="0 5 0 0" />
+        <!-- Create New Preset Button -->
+        <Button Name= "CreateNewPresetButton" Access="Public" StyleClasses="OpenBoth"
+                HorizontalExpand="True" Margin="0 10 0 0">
+            <BoxContainer Orientation="Horizontal">
+                <RichTextLabel Text="+ " />
+                <RichTextLabel Text="{Loc rmc-chem-master-preset-create-new}" />
+            </BoxContainer>
+        </Button>
+    </BoxContainer>
+</controls:RMCChemMasterPresetWindow>

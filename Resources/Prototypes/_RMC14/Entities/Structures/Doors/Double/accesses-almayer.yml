@@ -49,6 +49,15 @@
   - type: AccessReader
     access: [ [ "CMAccessMedical" ], [ "RMCAccessCommand" ] ]
 
+# Morgue
+- type: entity
+  parent: CMDoubleDoorMedicalSolid
+  id: CMDoubleDoorMorgueSolidLocked
+  suffix: Morgue, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessMorgue" ] ]
+
 # Chemistry
 - type: entity
   parent: CMDoubleDoorMedicalGlass

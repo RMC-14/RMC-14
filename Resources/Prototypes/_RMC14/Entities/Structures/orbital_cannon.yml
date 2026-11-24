@@ -25,20 +25,18 @@
     offset: 1.5, 0.5
     layers:
     - state: obc_unloaded
-      map: [ "base" ]
+      map: [ "CannonLayerKey" ]
   - type: Clickable
   - type: InteractionOutline
-  - type: Appearance
-  - type: GenericVisualizer # TODO RMC14 animations
-    visuals:
-      enum.OrbitalCannonVisuals.Base:
-        base:
-          Loaded: { state: obc_loaded }
-          Unloaded: { state: obc_unloaded }
-          Chambered: { state: obc_chambered }
+  - type: RMCAnimation
   - type: RMCLoreExaminable
     content: rmc-lore-examniable-orbital-cannon
   - type: RMCMesonsNonviewable
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-orbital-cannon
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCOrbitalCannonDerelict
@@ -60,14 +58,25 @@
     mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
+  - type: CollisionWake
   - type: Physics
-    bodyType: Static
-    canCollide: false
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 100000
+        mask:
+        - ItemMask
+  - type: TileFrictionModifier
+    modifier: 10000
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_fuel
     drawdepth: SmallObjects
+    noRot: true
   - type: Clickable
   - type: InteractionOutline
   - type: PowerLoaderGrabbable
@@ -75,6 +84,11 @@
     virtualLeft: RMCVirtualFuelLeft
   - type: Item
   - type: OrbitalCannonFuel
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-orbital-cannon-fuel
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true
@@ -84,14 +98,25 @@
     mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
+  - type: CollisionWake
   - type: Physics
-    bodyType: Static
-    canCollide: false
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 100000
+        mask:
+        - ItemMask
+  - type: TileFrictionModifier
+    modifier: 10000
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead1
     drawdepth: SmallObjects
+    noRot: true
   - type: OrbitalCannonWarhead
   - type: Clickable
   - type: InteractionOutline
@@ -99,6 +124,11 @@
     virtualRight: RMCVirtualWarheadRight
     virtualLeft: RMCVirtualWarheadLeft
   - type: Item
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-orbital-cannon-shell
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
@@ -108,6 +138,7 @@
   components:
   - type: Sprite
     state: ob_warhead_1
+    noRot: true
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionExplosive
 
@@ -119,6 +150,7 @@
   components:
   - type: Sprite
     state: ob_warhead_2
+    noRot: true
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionIncendiary
 
@@ -130,6 +162,7 @@
   components:
   - type: Sprite
     state: ob_warhead_3
+    noRot: true
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionCluster
 
@@ -150,6 +183,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/ob_warhead_aegis.rsi
     state: ob_warhead_aegis
+    noRot: true
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionAegis
     isAegis: true
@@ -292,7 +326,26 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: ob_console # TODO RMC14 powered off, broken
+    drawdepth: HighFloorObjects
+    layers:
+    - state: "ob_console0" # TODO RMC14 broken
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "ob_console"
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Clickable
   - type: InteractionOutline
   - type: UserInterface
@@ -388,3 +441,67 @@
     falloffPower: 50
     sharpness: 25
     width: 0.7
+
+# Tray
+- type: entity
+  id: RMCOrbitalCannonTray
+  name: loading tray
+  description: "The orbital cannon's loading tray."
+  suffix: Cannon spawns with one that's linked to it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,1.04,0.24"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        hard: false
+  - type: Sprite
+    sprite: _RMC14/Structures/orbital_cannon_tray.rsi
+    drawdepth: LargeObjects
+    offset: 0.5, 0.5
+    layers:
+    - state: cannon_tray
+      map: [ "base" ]
+    - state: cannon_tray_explosive
+      map: [ "warhead" ]
+      visible: false
+    - state: cannon_tray_1
+      map: [ "fuel" ]
+      visible: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Climbable
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.OrbitalCannonTrayVisuals.Warhead:
+        warhead:
+          None: { visible: false }
+          RMCOrbitalCannonWarheadExplosive: { visible: true, state: cannon_tray_explosive }
+          RMCOrbitalCannonWarheadIncendiary: { visible: true, state: cannon_tray_incendiary }
+          RMCOrbitalCannonWarheadCluster: { visible: true, state: cannon_tray_cluster }
+          RMCOrbitalCannonWarheadAegis: { visible: true, state: cannon_tray_explosive } # We don't have aegis tray sprite
+      enum.OrbitalCannonTrayVisuals.Fuel:
+        fuel:
+          0: { visible: false }
+          1: { visible: true, state: cannon_tray_1 }
+          2: { visible: true, state: cannon_tray_2 }
+          3: { visible: true, state: cannon_tray_3 }
+          4: { visible: true, state: cannon_tray_4 }
+          5: { visible: true, state: cannon_tray_5 }
+          6: { visible: true, state: cannon_tray_6 }
+  - type: RMCMesonsNonviewable
+  - type: OrbitalCannonTray
+  - type: WallMount
+    arc: 175

@@ -22,7 +22,7 @@
     <Box HorizontalAlignment="Left">  <GuideEntityEmbed Entity="RMCMortarShellHE"/> </Box>
 
     - Detonates with a powerful [color=#FFA500]explosion[/color] upon impact at the target coordinates.
-    - Knockbacks and stuns anything in its blast radious.
+    - Knocks back and stuns anything in its blast radius.
     - The damage applied by the explosion, is marginal at best.
     - HE shells best use is to stun hostiles and clear out enemy positions
     - Primary use: [italic]Direct damage to hostiles and structures.[/italic]
@@ -47,12 +47,12 @@
     - Primary use: [italic]Reconnaissance, target spotting, observing enemy movements safely.[/italic]
 
     ## Operational Factors & Positioning
-    Understanding these is [bold]critical[/bold] to operating the mortar:
+    Understanding these points are [bold]critical[/bold] to operating the mortar:
     - [bold]Engagement Range[/bold]: The mortar can only engage targets between [color=#FFFF00]15 tiles (minimum)[/color] and [color=#FFFF00]65 tiles (maximum)[/color] from its deployed position.
     Firing outside this window is impossible.
     - [bold]Tactical Positioning and Vulnerability [/bold]: Due to its range, the mortar is typically deployed [italic]behind the main frontline[/italic].
     This backline positioning makes the mortar operator [color=#ff0000]highly susceptible to enemy flanks[/color].
-    Always be aware of your surroundings, listen for enemy movements, and request security from squadmates if needed.
+    Always be aware of your surroundings, listen for enemy movements, and request security from squad mates if needed.
 
     ## Coordinate System Example
     Mortar targeting uses an XY coordinate system. Imagine a grid laid over the battlefield. Your spotter will give you coordinates like "(X) Longitude: 50, (Y) Latitude: -30, HE Shell"
@@ -80,7 +80,7 @@
 
     Mortar works via coordinates, but you can also change where the mortar fires with the offset as well.
     When you want to use the mortar, first thing you need to do is get the coordinates of where you want to send the shells with a laser designator or a range finder.
-    Afterwards, simply input them in the interface and [color=#00FF00]set the coordinates[/color], and you are ready to fire.
+    Afterward, simply input them in the interface and [color=#00FF00]set the coordinates[/color], and you are ready to fire.
 
     After setting your coordinates simply just interact with the mortar with a shell in hand.
 

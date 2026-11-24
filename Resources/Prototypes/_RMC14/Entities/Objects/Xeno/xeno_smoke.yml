@@ -31,9 +31,10 @@
   - type: ActiveEdgeSpreader
   - type: EdgeSpreader
     id: RMCSmokeAcid
+    spreadDelay: 0.6
   - type: EvenSmoke
-    spawn: RMCSmokeAcid
     range: 3
+    rangeMultipliesRegularDamage: true
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
@@ -43,7 +44,7 @@
         Asphyxiation: 3
     damage:
       types:
-        Heat: 35
+        Heat: 17.5
     barricadeDamage:
       types:
         Heat: 8.5
@@ -51,6 +52,12 @@
       components:
       - Marine
       - Xeno
+      - Vehicle
+    multipliers:
+    - multiplier: 2
+      whitelist:
+        components:
+        - Vehicle
   - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
 
 - type: entity
@@ -86,8 +93,8 @@
   - type: ActiveEdgeSpreader
   - type: EdgeSpreader
     id: RMCSmokeNeurotoxin
+    spreadDelay: 0.5
   - type: EvenSmoke
-    spawn: RMCSmokeNeurotoxin
     range: 4
   - type: NeurotoxinInjector
     neuroPerSecond: 6
@@ -105,7 +112,7 @@
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
-    damage:
+    armorPiercingDamage:
       types:
         Asphyxiation: 5
     whitelist:
@@ -177,9 +184,9 @@
   - type: DeleteOnExplosion
   - type: EdgeSpreader
     id: RMCSmokeKingDoom
+    spreadDelay: 0.1
   - type: ActiveEdgeSpreader
   - type: EvenSmoke
-    spawn: RMCSmokeKingDoom
     range: 7
 
 
@@ -191,7 +198,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeAcidShroud
     range: 1
 
 - type: entity
@@ -201,7 +207,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeNeurotoxinShroud
     range: 1
 
 - type: entity
@@ -211,7 +216,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeAcidDeathcloud
     range: 2
 
 - type: edgeSpreader

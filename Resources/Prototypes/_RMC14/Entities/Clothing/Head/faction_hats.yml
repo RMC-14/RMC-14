@@ -3,7 +3,7 @@
   parent: CMHeadCap
   id: RMCHeadCapBureau
   name: bureau cap
-  description: A dark cap enscribed with the powerful letters of 'MARSHAL' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
+  description: A dark cap inscribed with the powerful letters of 'MARSHAL' representing justice, authority, and protection in the outer rim.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
@@ -15,6 +15,7 @@
   parent: CMHeadBeretRed
   id: RMCHeadBeretProvost
   name: UNMC provost beret
+  suffix: Standard
   description: A beret with the UNMC Military Police insignia emblazoned on it.
   components:
   - type: Sprite
@@ -24,8 +25,9 @@
 
 - type: entity
   parent: RMCHeadBeretProvost
-  id: RMCHeadBeretProvostSenior
-  name: UNMC senior provost beret
+  id: RMCHeadBeretProvostGold
+  name: UNMC provost beret
+  suffix: Gold
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi

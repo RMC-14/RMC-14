@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSynthetic
-  name: ColMarTech Synthetic Equipment Rack
+  name: ASRS synthetic equipment rack
   description: An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units.
   components:
   - type: AccessReader
@@ -153,17 +153,17 @@
 - type: entity
   parent: ColMarTechCrewSynthetic
   id: ColMarTechCrewSyntheticColony
-  name: ColMarTech Synthetic Equipment Rack
+  name: ASRS synthetic equipment rack
   suffix: Colony Synth Access
   components:
   - type: CMAutomatedVendor
     jobs:
-    - RMCJobSyntheticColony
+    - RMCSyntheticColony
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSyntheticGear
-  name: ColMarTech Synthetic Auxiliary Gear Rack
+  name: ASRS synthetic auxiliary gear rack
   description: An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
   components:
   - type: AccessReader
@@ -202,7 +202,7 @@
       # /obj/item/tool/weldpack/minitank - 4 Points
       - id: RMCEngineerKit
         points: 1
-      - id: CMCrowbar # TODO RMC14: tactical prybar
+      - id: RMCTacticalPrybar
         points: 5
     - name: Firstaid Kits
       entries:
@@ -227,15 +227,15 @@
       - id: RMCMedevacStretcherFolded
         points: 6
       # /obj/item/stack/medical/splint - 1 Point
-      - id: CMRollerBed
+      - id: CMRollerBedSpawnFolded
         points: 4
-      - id: CMStasisBag
+      - id: CMStasisBagFolded
         points: 6
       - id: CMMiniTank
         points: 6
       - id: CMBloodPackFull
         points: 5
-      - id: CMPortableSurgicalBed
+      - id: CMPortableSurgicalBedSpawnFolded
         points: 10
       - id: CMPillCanisterBicaridine
         points: 5
@@ -304,11 +304,10 @@
       - id: RMCFlashlightPen
         points: 2
 
-
 - type: entity
   parent: ColMarTechBase
   id: WeYaExperimentalToolsVendor
-  name: We-Ya Experimental Tools Vendor
+  name: We-Ya experimental tools vendor
   description: A smaller vendor hooked up to a cache of specially provisioned, experimental tools and equipment provided by the We-Ya Research and Development Division(TM). Handle with care.
   components:
   # TODO RMC14 : Use a token instead of access
@@ -324,23 +323,23 @@
     sections:
     - name: Experimental Tools
       entries:
-      # autocompressor - 15 Points
       - id: RMCSynthBreachingHammer
         points: 15
       - id: RMCDefibrillatorCompact
         points: 15
       - id: RMCVendorBundleCompactNailgunKit
         points: 15
-      # backpack firefighting watertank - 15 Points
-      # crew monitor - 15 Points
-      # maintenance jack - 15 Points
-      # portable dialysis machine - 15 Points
       - id: RMCTelescopicBaton
         points: 15
-      - id: CMWebbingSurgicalBlue
+      - id: RMCWebbingSurgicalGreen
         points: 15
-      - id: CMWebbingSurgicalGreen
+      - id: RMCWebbingSurgicalBlue
         points: 15
+      # Surgical Drop Pouch (Green) - 15 Points
+      # Surgical Drop Pouch (Blue) - 15 Points
+      # Surgical Drop Pouch (Black) - 15 Points
+      # Tool Webbing (Not small) - 15 Points
+      # Tool Drop Pouch (Not small) - 15 Points
       - id: CMSatchelMarineLogistics
         points: 15
       - id: RMCSatchelMarineIntelChestrig

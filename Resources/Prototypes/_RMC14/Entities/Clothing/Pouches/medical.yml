@@ -24,8 +24,12 @@
       - CMSurgicalLine
       - CMSynthGraft
       - Hypospray
+      - PillPacket
       components:
       - Hypospray
+  - type: Tag
+    tags:
+    - RMCPouchMedical
 
 - type: entity
   parent: RMCPouchMedicalSoc
@@ -79,9 +83,9 @@
   - type: StorageFill # TODO RMC14
     contents:
     - id: CMHealthAnalyzer
-    - id: CMTraumaKit10
-      amount: 2
-    - id: CMBurnKit10
+    - id: CMTraumaKit10 # TODO RMC14 Nano Splints
+    - id: CMUpgradedTraumaKit10
+    - id: CMUpgradedBurnKit10
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     - id: CMEmergencyAutoInjector
@@ -131,6 +135,9 @@
       components:
       - Hypospray
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCPouchMedical
 
 - type: entity
   parent: RMCPouchFirstResponder
@@ -219,22 +226,6 @@
       tags:
       - CMAutoInjector
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: RMCPouchAutoinjector
-  id: RMCPouchAutoinjectorFill
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents: # todo rmc14 autoinjectors kelo x2, tramad x2, emerg
-    - id: CMBicaridineAutoInjector
-      amount: 2
-    - id: CMKelotaneAutoInjector
-      amount: 2
-#    - id: CMTramadolAutoInjector
-#      amount: 2
-    - id: CMEmergencyAutoInjector
-      amount: 1
 
 # Syringe Pouch
 - type: entity
