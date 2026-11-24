@@ -103,7 +103,7 @@
   - type: RMCLungeProtection
   - type: DirectionalAttackBlocker
   - type: RMCLeapProtection
-    inherentStunDuration: 3
+    inherentStunDuration: 4
     fullProtection: true
   - type: WeaponMount
     fixedWeaponPrototype: "RMCSmartGunMountedStatic"

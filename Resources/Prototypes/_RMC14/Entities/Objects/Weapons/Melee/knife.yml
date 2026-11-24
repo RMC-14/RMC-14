@@ -51,6 +51,7 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UsableWhileDevoured
+    canUnequip: true
   - type: AttachableVisuals
     rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
     prefix: bayonet
@@ -68,7 +69,7 @@
   - type: DeleteOnExplosion
   - type: Tool
     qualities:
-    - Cutting
+    - FenceCutting
     speedModifier: 0.8
     useSound:
       path: /Audio/Items/wirecutter.ogg
@@ -229,6 +230,7 @@
       types:
         Slash: 50
   - type: UsableWhileDevoured
+    canUnequip: true
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
@@ -265,6 +267,7 @@
       types:
         Slash: 50
   - type: UsableWhileDevoured
+    canUnequip: true
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Weapons/Melee/fs_knife.rsi
@@ -300,6 +303,7 @@
       types:
         Slash: 10
   - type: UsableWhileDevoured
+    canUnequip: true
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
@@ -307,7 +311,7 @@
     malus: 0.225
   - type: Tool
     qualities:
-    - Prying
+    - DoorPrying
   - type: Prying
     pryPowered: false
     speedModifier: 0.8
@@ -352,6 +356,7 @@
       types:
         Slash: 55
   - type: UsableWhileDevoured
+    canUnequip: true
 
 - type: entity
   parent: CMM2132Machete
@@ -403,6 +408,7 @@
       types:
         Slash: 3
   - type: UsableWhileDevoured
+    canUnequip: true
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
       path: /Audio/Weapons/genhit3.ogg
