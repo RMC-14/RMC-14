@@ -63,7 +63,6 @@ namespace Content.Server.Database
                 .Include(p => p.Profiles).ThenInclude(h => h.Jobs)
                 .Include(p => p.Profiles).ThenInclude(h => h.Antags)
                 .Include(p => p.Profiles).ThenInclude(h => h.Traits)
-                .Include(p => p.Profiles).ThenInclude(h => h.DisabledInserts)
                 .Include(p => p.Profiles)
                     .ThenInclude(h => h.Loadouts)
                     .ThenInclude(l => l.Groups)
@@ -73,6 +72,7 @@ namespace Content.Server.Database
                 .Include(p => p.Profiles).ThenInclude(p => p.SquadPreference)
                 // RMC14
                 .Include(p => p.Profiles).ThenInclude(p => p.RMCDisabled)
+                .Include(p => p.Profiles).ThenInclude(p => p.RMCDisabledInserts)
                 .Include(p => p.RMCJobPriorities)
                 .Include(p => p.RMCPreference)
 
@@ -135,7 +135,6 @@ namespace Content.Server.Database
                 .Include(p => p.Jobs)
                 .Include(p => p.Antags)
                 .Include(p => p.Traits)
-                .Include(p => p.DisabledInserts)
                 .Include(p => p.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
@@ -143,6 +142,7 @@ namespace Content.Server.Database
                 .Include(p => p.NamedItems)
                 .Include(p => p.SquadPreference)
                 .Include(p => p.RMCDisabled) // RMC14
+                .Include(p => p.RMCDisabledInserts) // RMC14
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -421,7 +421,7 @@ namespace Content.Server.Database
                 },
                 // RMC14
                 enabled: profile.RMCDisabled == null,
-                disabledSurvivorInserts: profile.DisabledInserts.Select(i => i.InsertName).ToHashSet()
+                disabledSurvivorInserts: profile.RMCDisabledInserts.Select(i => i.InsertName).ToHashSet()
             );
         }
 
@@ -475,10 +475,11 @@ namespace Content.Server.Database
                         .Select(t => new Trait {TraitName = t})
             );
 
-            profile.DisabledInserts.Clear();
-            profile.DisabledInserts.AddRange(
+            // RMC14
+            profile.RMCDisabledInserts.Clear();
+            profile.RMCDisabledInserts.AddRange(
                 humanoid.DisabledSurvivorInserts
-                        .Select(i => new DisabledInsert {InsertName = i})
+                        .Select(i => new RMCDisabledInsert {InsertName = i})
             );
 
             profile.Ranks.Clear();

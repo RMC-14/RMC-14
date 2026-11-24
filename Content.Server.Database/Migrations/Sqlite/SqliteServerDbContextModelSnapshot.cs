@@ -597,31 +597,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("connection_log", (string)null);
                 });
 
-            modelBuilder.Entity("Content.Server.Database.DisabledInsert", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("disabled_insert_id");
-
-                    b.Property<string>("InsertName")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("insert_name");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("profile_id");
-
-                    b.HasKey("Id")
-                        .HasName("PK_disabled_insert");
-
-                    b.HasIndex("ProfileId", "InsertName")
-                        .IsUnique();
-
-                    b.ToTable("disabled_insert", (string)null);
-                });
-
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
                 {
                     b.Property<int>("Id")
@@ -1121,6 +1096,22 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasDatabaseName("IX_rmc_commendations_round_id");
 
                     b.ToTable("rmc_commendations", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDisabledInsert", b =>
+                {
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.Property<string>("InsertName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("insert_name");
+
+                    b.HasKey("ProfileId", "InsertName")
+                        .HasName("PK_rmc_disabled_inserts");
+
+                    b.ToTable("rmc_disabled_inserts", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCDisabledProfile", b =>
@@ -2216,18 +2207,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Server");
                 });
 
-            modelBuilder.Entity("Content.Server.Database.DisabledInsert", b =>
-                {
-                    b.HasOne("Content.Server.Database.Profile", "Profile")
-                        .WithMany("DisabledInserts")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_disabled_insert_profile_profile_id");
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("Content.Server.Database.Job", b =>
                 {
                     b.HasOne("Content.Server.Database.Profile", "Profile")
@@ -2433,6 +2412,18 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Receiver");
 
                     b.Navigation("Round");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCDisabledInsert", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("RMCDisabledInserts")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_disabled_inserts_profile_profile_id");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCDisabledProfile", b =>
@@ -2975,8 +2966,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                 {
                     b.Navigation("Antags");
 
-                    b.Navigation("DisabledInserts");
-
                     b.Navigation("Jobs");
 
                     b.Navigation("Loadouts");
@@ -2984,6 +2973,8 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("NamedItems");
 
                     b.Navigation("RMCDisabled");
+
+                    b.Navigation("RMCDisabledInserts");
 
                     b.Navigation("Ranks");
 

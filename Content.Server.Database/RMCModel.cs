@@ -337,3 +337,15 @@ public sealed class RMCDisabledProfile
 
     public Profile Profile { get; set; } = default!;
 }
+
+[Table("rmc_disabled_inserts")]
+[PrimaryKey(nameof(ProfileId), nameof(InsertName))]
+public sealed class RMCDisabledInsert
+{
+    [ForeignKey(nameof(Profile))]
+    public int ProfileId { get; set; }
+
+    public Profile Profile { get; set; } = default!;
+
+    public string InsertName { get; set; } = default!;
+}

@@ -67,6 +67,7 @@ namespace Content.Server.Database
         public DbSet<RMCPlayerJobPriority> RMCPlayerJobPriorities { get; set; } = default!;
         public DbSet<RMCPlayerPreference> RMCPlayerPreferences { get; set; } = default!;
         public DbSet<RMCDisabledProfile> RMCDisabledProfiles { get; set; } = default!;
+        public DbSet<RMCDisabledInsert> RMCDisabledInserts { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -84,10 +85,6 @@ namespace Content.Server.Database
 
             modelBuilder.Entity<Trait>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.TraitName})
-                .IsUnique();
-
-            modelBuilder.Entity<DisabledInsert>()
-                .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.InsertName})
                 .IsUnique();
 
             modelBuilder.Entity<ProfileRoleLoadout>()
@@ -586,7 +583,6 @@ namespace Content.Server.Database
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
-        public List<DisabledInsert> DisabledInserts { get; } = new();
 
         public List<ProfileRoleLoadout> Loadouts { get; } = new();
 
@@ -600,6 +596,7 @@ namespace Content.Server.Database
         public List<Rank> Ranks { get; } = new();
         // RMC14
         public RMCDisabledProfile? RMCDisabled { get; set; }
+        public List<RMCDisabledInsert> RMCDisabledInserts { get; } = new();
     }
 
     public class Job
@@ -637,15 +634,6 @@ namespace Content.Server.Database
         public int ProfileId { get; set; }
 
         public string TraitName { get; set; } = null!;
-    }
-
-    public class DisabledInsert
-    {
-        public int Id { get; set; }
-        public Profile Profile { get; set; } = null!;
-        public int ProfileId { get; set; }
-
-        public string InsertName { get; set; } = null!;
     }
 
     public class Rank

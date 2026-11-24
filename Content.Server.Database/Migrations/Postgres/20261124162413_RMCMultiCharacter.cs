@@ -11,6 +11,24 @@ namespace Content.Server.Database.Migrations.Postgres
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "rmc_disabled_inserts",
+                columns: table => new
+                {
+                    profile_id = table.Column<int>(type: "integer", nullable: false),
+                    insert_name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_rmc_disabled_inserts", x => new { x.profile_id, x.insert_name });
+                    table.ForeignKey(
+                        name: "FK_rmc_disabled_inserts_profile_profile_id",
+                        column: x => x.profile_id,
+                        principalTable: "profile",
+                        principalColumn: "profile_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "rmc_disabled_profiles",
                 columns: table => new
                 {
@@ -87,11 +105,26 @@ SELECT p.profile_id
 FROM profile p
 JOIN preference pr ON pr.preference_id = p.preference_id
 WHERE p.slot <> pr.selected_character_slot;");
+
+            migrationBuilder.DropColumn(
+                name: "playtime_perks",
+                table: "profile");
+
+            migrationBuilder.DropColumn(
+                name: "xeno_postfix",
+                table: "profile");
+
+            migrationBuilder.DropColumn(
+                name: "xeno_prefix",
+                table: "profile");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "rmc_disabled_inserts");
+
             migrationBuilder.DropTable(
                 name: "rmc_disabled_profiles");
 
@@ -100,6 +133,27 @@ WHERE p.slot <> pr.selected_character_slot;");
 
             migrationBuilder.DropTable(
                 name: "rmc_player_preferences");
+
+            migrationBuilder.AddColumn<bool>(
+                name: "playtime_perks",
+                table: "profile",
+                type: "boolean",
+                nullable: false,
+                defaultValue: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "xeno_postfix",
+                table: "profile",
+                type: "text",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "xeno_prefix",
+                table: "profile",
+                type: "text",
+                nullable: false,
+                defaultValue: "");
         }
     }
 }
