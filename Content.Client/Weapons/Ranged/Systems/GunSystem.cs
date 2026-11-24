@@ -36,6 +36,7 @@ using Robust.Shared.Utility;
 using SharedGunSystem = Content.Shared.Weapons.Ranged.Systems.SharedGunSystem;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Client._RMC14.Weapons.Ranged;
 
 namespace Content.Client.Weapons.Ranged.Systems;
 
@@ -56,6 +57,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
     [Dependency] private readonly GunAkimboSystem _akimbo = default!;
     [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
+    [Dependency] private readonly RMCGunSystem _rmcGun = default!;
     [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly VehicleTurretMuzzleOffsetSystem _vehicleTurretMuzzleOffset = default!;
     // RMC14
@@ -235,8 +237,11 @@ public sealed partial class GunSystem : SharedGunSystem
         // RMC14
 
         NetEntity? target = null;
-        if (_state.CurrentState is GameplayStateBase screen)
-            target = GetNetEntity(screen.GetClickedEntity(mousePos));
+        // RMC14 start
+        //if (_state.CurrentState is GameplayStateBase screen)
+        //    target = GetNetEntity(screen.GetClickedEntity(mousePos));
+        target = GetNetEntity(_rmcGun.GetAttackTarget(entity, mousePos, (gunUid, gun)));
+        // RMC14 end
 
         if (_player.LocalSession is not { } session)
             return;
