@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Fixed Type 71C being able to take laser sights and mini flamethrowers.
-    type: Fix
-  id: 3455
-  time: '2026-07-03T01:18:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10226
 - author: Vixting
   changes:
   - message: Fixed sentries targeting things inside of containers
@@ -4321,5 +4314,16 @@
   id: 3954
   time: '2026-11-24T06:31:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8290
+- author: Arykh
+  changes:
+  - message: 'Added the following chemical properties for a future medical update:
+      cardiotoxic, hemolytic, hemorrhaging, hemositic, hepatotoxic, hypermetabolic,
+      igniting, intravenous, nephrotoxic, neuropathic, neurotoxic, oculotoxic, pneumotoxic,
+      alcoholic, antispasmodic, cryometabolizing, excreting, hallucinogenic, hyperthermic,
+      neuroinhibiting, and thanatometabolizing.'
+    type: Add
+  id: 3955
+  time: '2026-11-24T06:41:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9544
 Name: RMC14
 Order: -1
