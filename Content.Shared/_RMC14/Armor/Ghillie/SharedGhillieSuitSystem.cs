@@ -94,7 +94,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
                 BreakOnMove = true,
                 BreakOnDamage = true,
                 CancelDuplicate = true,
-                DuplicateCondition = DuplicateConditions.SameTool
+                DuplicateCondition = DuplicateConditions.SameTool,
+                RootEntity = true,
             };
 
             if (_doAfter.TryStartDoAfter(doAfterEventArgs))
@@ -172,6 +173,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
             var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
             activeInvisibility.Opacity = comp.Opacity;
+            activeInvisibility.GreyFactor = comp.GreyFactor;
+            activeInvisibility.DarkFactor = comp.DarkFactor;
             activeInvisibility.DisableMobCollision = true;
             Dirty(user, activeInvisibility);
 

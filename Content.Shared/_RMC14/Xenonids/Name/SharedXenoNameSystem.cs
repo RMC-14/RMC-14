@@ -1,14 +1,13 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.IdentityManagement;
+using Content.Shared._RMC14.PlayTimeTracking;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.NameModifier.EntitySystems;
-using Content.Shared.Players.PlayTimeTracking;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Name;
 
@@ -18,8 +17,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SharedRMCPlayTimeManager _rmcPlaytime = default!;
 
     private const string DefaultPrefix = "XX";
 
@@ -50,6 +48,21 @@ public abstract class SharedXenoNameSystem : EntitySystem
             true);
     }
 
+    /// <summary>
+    /// Returns either the xeno's assigned prefix, or <see cref="DefaultPrefix"/> if they don't have one set.
+    /// </summary>
+    public string GetXenoPrefix(Entity<XenoNameComponent?> ent)
+    {
+        if (Resolve(ent, ref ent.Comp) && ent.Comp.Prefix.Length != 0)
+        {
+            return ent.Comp.Prefix;
+        }
+        else
+        {
+            return DefaultPrefix;
+        }
+    }
+
     private void OnNewXenoEvolved(ref NewXenoEvolvedEvent ev)
     {
         TransferName(ev.OldXeno, ev.NewXeno);
@@ -66,12 +79,8 @@ public abstract class SharedXenoNameSystem : EntitySystem
         if (rank.Length > 0)
             rank = $"{rank} ";
 
-        var prefix = ent.Comp.Prefix;
-        if (prefix.Length == 0)
-            prefix = DefaultPrefix;
-
+        var prefix = GetXenoPrefix(ent.Owner);
         var postfix = ent.Comp.Postfix;
-
         var number = ent.Comp.Number;
 
         if (HasComp<XenoOmitNumberComponent>(ent))
@@ -119,15 +128,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
         var xenoPlaytime = TimeSpan.Zero;
         try
         {
-            var times = _playtime.GetPlayTimes(player);
-            foreach (var (id, time) in times)
-            {
-                if (_prototype.TryIndex(id, out PlayTimeTrackerPrototype? tracker) &&
-                    tracker.IsXeno)
-                {
-                    xenoPlaytime += time;
-                }
-            }
+            xenoPlaytime = _rmcPlaytime.GetTotalXenoPlaytime(player);
         }
         catch (Exception e)
         {
@@ -145,12 +146,21 @@ public abstract class SharedXenoNameSystem : EntitySystem
     public int GetMaxXenoPostfixLength(ICommonSession player)
     {
         var time = GetXenoPlaytime(player);
-        if (time > _xenoPostfixTwoTime)
+
+        if (time > _xenoPostfixTime)
             return 2;
-        else if (time > _xenoPostfixTime)
-            return 1;
 
         return 0;
+    }
+
+    public bool AllowPostfixLetterEnding(ICommonSession player)
+    {
+        var time = GetXenoPlaytime(player);
+
+        if (time <= _xenoPostfixTwoTime)
+            return false;
+
+        return true;
     }
 
     private void TransferName(EntityUid oldXeno, EntityUid newXeno)

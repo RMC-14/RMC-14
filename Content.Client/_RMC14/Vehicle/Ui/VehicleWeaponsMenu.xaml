@@ -21,8 +21,9 @@
         </ScrollContainer>
 
         <BoxContainer Orientation="Horizontal" SeparationOverride="0" HorizontalExpand="True">
-            <CheckBox Name="AutoTurretToggle" Access="Public" ToggleMode="True" Text="Auto Turret"/>
-            <CheckBox Name="StabilizationToggle" Access="Public" ToggleMode="True" Text="Stabilization"/>
+            <controls:VehicleHudToggleButton Name="SafetyToggle" Access="Public" Visible="False"/>
+            <controls:VehicleHudToggleButton Name="StabilizationToggle" Access="Public" Visible="False"/>
+            <controls:VehicleHudToggleButton Name="AutoTurretToggle" Access="Public" Visible="False"/>
         </BoxContainer>
 
         <Label Name="AmmoCounter"
