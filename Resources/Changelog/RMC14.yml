@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed melee cooldown not being tracked in some circumstances
-    type: Fix
-  id: 3453
-  time: '2026-07-03T01:18:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10234
 - author: Vermidia
   changes:
   - message: Fixed Acider runner primed animation playing weirdly
@@ -4311,5 +4304,18 @@
   id: 3952
   time: '2026-11-24T06:15:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9811
+- author: CyberTropic
+  changes:
+  - message: P.A.C.M.A.N. portable generator (phoron fueled, 5kW power output).
+    type: Add
+  - message: S.U.P.E.R.P.A.C.M.A.N. portable generator (uranium fueled, 15kW power
+      output).
+    type: Add
+  - message: Xenonids can sabotage portable generators, but smaller xenos will be
+      too weak to do so.
+    type: Add
+  id: 3953
+  time: '2026-11-24T06:21:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10604
 Name: RMC14
 Order: -1
