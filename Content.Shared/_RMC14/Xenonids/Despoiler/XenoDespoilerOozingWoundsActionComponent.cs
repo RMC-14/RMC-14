@@ -1,38 +1,40 @@
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Spawners;
 
 namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoDespoilerOozingWoundsActionComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int BaseRadius = 1;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float SeverityHpThreshold1 = 0.7f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float SeverityHpThreshold2 = 0.3f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float LingeringAcidChance = 0.2f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan DistanceDelayPerTile = TimeSpan.FromSeconds(0.2);
 
-    [DataField]
-    public EntProtoId TelegraphProto = "RMCEffectDespoilerOozingTelegraph";
+    [DataField, AutoNetworkedField]
+    public EntProtoId<TimedDespawnComponent> TelegraphProto = "RMCEffectDespoilerOozingTelegraph";
 
-    [DataField]
-    public EntProtoId AcidSprayProto = "RMCEffectDespoilerAcidSpray";
+    [DataField, AutoNetworkedField]
+    public EntProtoId<XenoDespoilerAcidSprayComponent> AcidSprayProto = "RMCEffectDespoilerAcidSpray";
 
-    [DataField]
-    public EntProtoId AcidSprayEmpoweredProto = "RMCEffectDespoilerAcidSprayEmpowered";
+    [DataField, AutoNetworkedField]
+    public EntProtoId<XenoDespoilerAcidSprayComponent> AcidSprayEmpoweredProto = "RMCEffectDespoilerAcidSprayEmpowered";
 
-    [DataField]
-    public EntProtoId LingeringAcidProto = "RMCEffectDespoilerLingeringAcid";
+    [DataField, AutoNetworkedField]
+    public EntProtoId<XenoDespoilerLingeringAcidComponent> LingeringAcidProto = "RMCEffectDespoilerLingeringAcid";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? CastSound;
 }

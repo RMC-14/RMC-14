@@ -1,16 +1,18 @@
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Spawners;
 
 namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoDespoilerCatalyzeActionComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int HypertensionCost = 1;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan BuffDuration = TimeSpan.FromSeconds(10);
 
-    [DataField]
-    public EntProtoId VisualProto = "RMCEffectDespoilerCatalyze";
+    [DataField, AutoNetworkedField]
+    public EntProtoId<TimedDespawnComponent> VisualProto = "RMCEffectDespoilerCatalyze";
 }

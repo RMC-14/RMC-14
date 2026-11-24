@@ -1,16 +1,18 @@
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Spawners;
 
 namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoDespoilerCausticEmbraceActionComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int NormalRange = 1;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int EmpoweredRange = 5;
 
     [DataField]
@@ -25,21 +27,21 @@ public sealed partial class XenoDespoilerCausticEmbraceActionComponent : Compone
         DamageDict = { ["Heat"] = 30 },
     };
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float LingeringAcidChance = 0.3f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan EmpoweredWeakenDuration = TimeSpan.FromSeconds(1);
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float SplashScanSize = 3f;
 
-    [DataField]
-    public EntProtoId TelegraphProto = "RMCEffectDespoilerCausticTelegraph";
+    [DataField, AutoNetworkedField]
+    public EntProtoId<TimedDespawnComponent> TelegraphProto = "RMCEffectDespoilerCausticTelegraph";
 
-    [DataField]
-    public EntProtoId LingeringAcidProto = "RMCEffectDespoilerLingeringAcid";
+    [DataField, AutoNetworkedField]
+    public EntProtoId<XenoDespoilerLingeringAcidComponent> LingeringAcidProto = "RMCEffectDespoilerLingeringAcid";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? PounceSound;
 }

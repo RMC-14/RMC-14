@@ -6,10 +6,10 @@ namespace Content.Shared._RMC14.Xenonids.Despoiler;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoDespoilerLingeringAcidComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan MinLifetime = TimeSpan.FromSeconds(15);
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan MaxLifetime = TimeSpan.FromSeconds(20);
 
     [DataField]

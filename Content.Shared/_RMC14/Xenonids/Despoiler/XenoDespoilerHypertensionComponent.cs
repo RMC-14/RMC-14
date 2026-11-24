@@ -24,13 +24,13 @@ public sealed partial class XenoDespoilerHypertensionComponent : Component
     [DataField]
     public float PointsPerDamageTaken = 0.5f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan DecayDelay = TimeSpan.FromSeconds(10);
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float DecayPerSecond = 200f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float BonusBurnPerStack = 10f;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]

@@ -1,14 +1,18 @@
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoDespoilerOozingWoundsPendingComponent : Component
 {
-    public readonly List<XenoDespoilerOozingWoundsPendingTile> Pending = new();
+    [DataField, AutoNetworkedField]
+    public List<XenoDespoilerOozingWoundsPendingTile> Pending = new();
 }
 
+[Serializable, NetSerializable]
 public struct XenoDespoilerOozingWoundsPendingTile
 {
     public TimeSpan SpawnAt;

@@ -7,11 +7,11 @@ namespace Content.Shared._RMC14.Xenonids.Despoiler;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoDespoilerAcidBarrageProjectileComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float LingeringAcidChance = 0.25f;
 
-    [DataField]
-    public EntProtoId LingeringAcidProto = "RMCEffectDespoilerLingeringAcid";
+    [DataField, AutoNetworkedField]
+    public EntProtoId<XenoDespoilerLingeringAcidComponent> LingeringAcidProto = "RMCEffectDespoilerLingeringAcid";
 
     [DataField, AutoNetworkedField]
     public EntityUid? Shooter;
