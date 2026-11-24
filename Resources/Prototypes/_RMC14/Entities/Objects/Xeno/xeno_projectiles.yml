@@ -592,6 +592,7 @@
 - type: entity
   parent: XenoSpitProjectile
   id: XenoSpitProjectileDissolverAcidBlobSmall
+  name: small acid blob
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -614,6 +615,7 @@
 - type: entity
   parent: XenoSpitProjectileDissolverAcidBlobSmall
   id: XenoSpitProjectileDissolverAcidBlob
+  name: acid blob
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -627,6 +629,8 @@
     damage:
       types:
         Heat: 25
+  - type: TriggerOnCollide
+    fixtureID: projectile
   - type: ProjectileMaxRange
     max: 7
     delete: false
@@ -635,6 +639,9 @@
   - type: ClusterLimitHits
     limit: 0
     ignoreFirstHit: true
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+    cancelSameHiveCollide: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -645,8 +652,5 @@
     capacity: 4
     spreadAngle: 40
     directHitProjectiles: 4
+    projectileSpeed: 30
   - type: IgnorePredictionHide
-
-
-  
-
