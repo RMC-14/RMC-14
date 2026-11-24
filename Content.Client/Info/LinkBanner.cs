@@ -22,7 +22,8 @@ namespace Content.Client.Info
         {
             var buttons = new BoxContainer
             {
-                Orientation = LayoutOrientation.Horizontal
+                Orientation = LayoutOrientation.Horizontal,
+                HorizontalExpand = true, // RMC14
             };
             AddChild(buttons);
 
@@ -75,6 +76,13 @@ namespace Content.Client.Info
                 button.OnPressed += _ => uriOpener.OpenUri(_cfg.GetCVar(cVar));
                 buttons.AddChild(button);
                 _infoLinks.Add((cVar, button));
+            }
+
+            // RMC14
+            foreach (var child in buttons.Children)
+            {
+                child.HorizontalExpand = true;
+                child.MinHeight = 32;
             }
         }
 

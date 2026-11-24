@@ -1,0 +1,41 @@
+<lobby:RMCJobPrioritiesWindow
+    xmlns="https://spacestation14.io"
+    xmlns:lobby="clr-namespace:Content.Client._RMC14.Lobby"
+    xmlns:rmcUi="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="{Loc 'rmc-job-priorities-window-title'}"
+    SetSize="860 620"
+    MinSize="480 380">
+    <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="6">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+            <LineEdit Name="SearchLineEdit" HorizontalExpand="True"
+                      PlaceHolder="{Loc 'rmc-job-priorities-window-search'}" />
+            <CheckBox Name="SelectedOnlyCheck" Text="{Loc 'rmc-job-priorities-window-selected-only'}" />
+        </BoxContainer>
+        <PanelContainer StyleClasses="PanelBackgroundBaseDark" VerticalExpand="True">
+            <ScrollContainer Name="JobScroll" VerticalExpand="True" HScrollEnabled="False">
+                <BoxContainer Name="ColumnBox" Orientation="Horizontal" SeparationOverride="6" Margin="6" />
+            </ScrollContainer>
+        </PanelContainer>
+        <Label Name="HintLabel" StyleClasses="LabelSubText" ClipText="True"
+               Text="{Loc 'rmc-job-priorities-window-hint'}" />
+        <Label Text="{Loc 'rmc-job-priority-editor-player-settings'}" StyleClasses="LabelKeyText" />
+        <rmcUi:BlueHorizontalSeparator />
+        <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+            <Label Text="{Loc 'rmc-job-priorities-window-unavailable'}" VAlign="Center" />
+            <OptionButton Name="PreferenceUnavailableButton" />
+            <Control HorizontalExpand="True" />
+            <CheckBox Name="PlaytimePerksButton" Text="{Loc 'rmc-job-priorities-window-playtime-perks'}" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+            <Label Text="{Loc 'humanoid-profile-editor-xeno-prefix'}"
+                   ToolTip="{Loc 'humanoid-profile-editor-xeno-prefix-tooltip'}"
+                   MouseFilter="Stop" VAlign="Center" />
+            <LineEdit Name="XenoPrefix" MinWidth="120" />
+            <Control MinWidth="12" />
+            <Label Text="{Loc 'humanoid-profile-editor-xeno-postfix'}"
+                   ToolTip="{Loc 'humanoid-profile-editor-xeno-postfix-tooltip'}"
+                   MouseFilter="Stop" VAlign="Center" />
+            <LineEdit Name="XenoPostfix" MinWidth="120" />
+        </BoxContainer>
+    </BoxContainer>
+</lobby:RMCJobPrioritiesWindow>
