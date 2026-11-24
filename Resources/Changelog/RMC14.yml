@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed spray acid acid not showing up on damaged barricades
-    type: Fix
-  - message: Fixed upgraded barricades not showing damage on part of the sprite and
-      folding barricades having no damage overlay.
-    type: Fix
-  id: 3447
-  time: '2026-07-03T01:14:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10251
-- author: Vermidia
-  changes:
   - message: Fixed broken platforms/ledges drawing above cades etc.
     type: Fix
   id: 3448
@@ -4306,5 +4296,21 @@
   id: 3946
   time: '2026-11-24T02:47:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9548
+- author: MidZik
+  changes:
+  - message: Invisible scouts are harder to see, especially on weeds.
+    type: Tweak
+  - message: Invisible lurkers are significantly harder to see, especially on weeds.
+    type: Tweak
+  - message: Invisible snipers are significantly easier to see. They will now be slightly
+      easier to see than scouts.
+    type: Tweak
+  - message: Invisible reactive tarps are slightly harder to see.
+    type: Tweak
+  - message: Fixed invisible lurkers being highlighted when moused over.
+    type: Fix
+  id: 3947
+  time: '2026-11-24T05:06:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11082
 Name: RMC14
 Order: -1
