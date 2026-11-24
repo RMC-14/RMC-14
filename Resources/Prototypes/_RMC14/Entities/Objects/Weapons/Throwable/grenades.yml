@@ -26,6 +26,8 @@
     thresholds: []
   - type: ChangeItemSizeOnTimerTrigger
   - type: CancelUseWithCloak
+  - type: RMCThrowCooldown
+    duration: 0.5
 
 - type: entity
   abstract: true
