@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Healer Drone's Salve and Sacrifice not being highlighted when selected.
-    type: Fix
-  id: 3438
-  time: '2026-06-27T01:51:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10289
 - author: SabreML
   changes:
   - message: Reduced the size of the empty gap in chat after xeno announcements. (Deaths,
@@ -4399,5 +4392,14 @@
   id: 3937
   time: '2026-11-24T00:11:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11174
+- author: '- Simon'
+  changes:
+  - message: Fax Responders for WeYa and Free Press! A new role with a 75 hour requirement
+      designed to correspond with their related departments and to offer assistance
+      / RP for them.
+    type: Add
+  id: 3938
+  time: '2026-11-24T00:26:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10942
 Name: RMC14
 Order: -1
