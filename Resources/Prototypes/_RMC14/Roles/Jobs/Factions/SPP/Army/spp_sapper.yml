@@ -106,7 +106,7 @@
     head: ArmorHelmetSPPEngineer
     ears: RMCHeadsetSPPEngineer
     eyes: RMCWeldingGoggles
-    mask: CMMaskGas
+    mask: RMCMaskGasSPP
     jumpsuit: CMJumpsuitSPPEngi
     outerClothing: RMCArmorSPPRifleman
     gloves: RMCHandsVeteranInsulated

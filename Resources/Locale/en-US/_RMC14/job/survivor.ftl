@@ -329,6 +329,8 @@ rmc-job-prefix-soro-spetsnaz-synth = B/SRU SYN
 
 # Trijent survs
 
+rmc-job-name-survivor-trijent-roughneck = Roughneck
+
 rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
 
 rmc-job-name-survivor-trijent-goon = Trijent Dam Security

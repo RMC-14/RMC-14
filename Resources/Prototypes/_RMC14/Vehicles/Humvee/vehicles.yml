@@ -5,6 +5,10 @@
   name: humvee
   description: A fast armored utility vehicle outfitted for patrols and support.
   components:
+  - type: VehicleSafety
+    icon:
+      sprite: _RMC14/Interface/map_blips_large.rsi
+      state: humvee
   - type: VehicleLock
     access:
     - CMAccessCrewman
@@ -351,3 +355,9 @@
     - offset: 1,-0.1
       radius: 0.5
       interiorCoords: 3.56, -0.42
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-arc
+    whitelist:
+      components:
+      - Xeno
+

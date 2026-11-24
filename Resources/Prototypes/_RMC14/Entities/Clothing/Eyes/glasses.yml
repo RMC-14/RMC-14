@@ -211,16 +211,16 @@
 
 - type: entity
   parent: [ClothingEyesHudMedical, BaseToggleClothing]
-  id: RMCGlassesMedicalHUDGlasses
-  name: HealthMate HUD
-  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  id: RMCGlassesMedicalHUDGlassesOld
+  name: SensorMate HUD
+  description: A much older heads-up display that displays the last known biometric data from suit sensors of any given individual.
   components:
   - type: Item
     storedRotation: 0
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhudold.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhudold.rsi
   - type: ItemToggle
     activated: true
     soundActivate:
@@ -250,6 +250,17 @@
           True: {state: icon-on}
           False: {state: icon}
   - type: Appearance
+
+- type: entity
+  parent: RMCGlassesMedicalHUDGlassesOld
+  id: RMCGlassesMedicalHUDGlasses
+  name: HealthMate HUD
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhud.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhud.rsi
   - type: ItemToggleRequiresSkill
     skills:
       RMCSkillMedical: 1
@@ -1184,7 +1195,7 @@
 - type: entity
   parent: ClothingEyesBase
   id: RMCWeldingGoggles
-  name: welding goggles # TODO RMC14 impairs vision when on
+  name: welding goggles
   description: Protects the eyes from welders, approved by the mad scientist association.
   components:
   - type: Sprite
@@ -1198,6 +1209,7 @@
   - type: ComponentToggler
     components:
     - type: EyeProtection
+    - type: WeldingVision
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
@@ -1228,7 +1240,7 @@
 
 - type: entity
   parent: RMCWeldingGoggles
-  id: RMCWeldingGogglesSuperior # TODO RMC14 less vision impairment then regular goggles
+  id: RMCWeldingGogglesSuperior
   name: superior welding goggles
   description: Welding goggles made from more expensive materials, strangely smells like potatoes.
   components:
@@ -1236,6 +1248,11 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles_superior.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles_superior.rsi
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+  - type: WeldingVision
+    superior: true
 
 - type: entity
   parent: ClothingEyesBase
