@@ -48,7 +48,8 @@
                 "--cvar", "rmc.planet_map_vote=false",
                 "--cvar", "rmc.distress_xenos_minimum=0",
                 "--cvar", "rmc.distress_disable_auto_end=true",
-                "--cvar", "rmc.lobby_auto_ready=true"
+                "--cvar", "rmc.lobby_auto_ready=true",
+                "--cvar", "rmc.lobby_start_paused=true"
             ],
             "console": "integratedTerminal",
             "stopAtEntry": false
