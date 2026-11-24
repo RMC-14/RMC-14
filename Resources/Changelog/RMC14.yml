@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Sorokyne strata has recived a map parity passover which adds a lot of
-      new props to the map and removed/replaced some hull/Indestructible walls!
-    type: Tweak
-  id: 3437
-  time: '2026-06-25T19:45:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9974
 - author: Vermidia
   changes:
   - message: Fixed Healer Drone's Salve and Sacrifice not being highlighted when selected.
@@ -4398,5 +4390,14 @@
   id: 3936
   time: '2026-11-23T23:58:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11175
+- author: MidZik
+  changes:
+  - message: Base crusher's Charge now refunds 10 plasma and gets its cooldown reduced
+      by 5 seconds when damaging anything that isn't a mob, barricade, sentry, or
+      flag.
+    type: Tweak
+  id: 3937
+  time: '2026-11-24T00:11:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11174
 Name: RMC14
 Order: -1
