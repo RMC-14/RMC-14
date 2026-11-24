@@ -1785,3 +1785,57 @@
   - type: EntityTargetAction
     event: !type:XenoDrainingBiteActionEvent
   - type: XenoOffensiveAction
+
+- type: entity
+  id: ActionXenoSpitDissolverCorrosive
+  parent: ActionXenoSpit
+  name: Corrosive Spit (45)
+  description: Launches a strong projectile after a 0.6s that pierces through one enemy or ally and covers them with acid. At 4 stored acid, pierces though an additional mob and extra armor piercing. At 5 stored acid, pierces though another additional mob and even more armor piercing.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_xeno_acid
+  - type: WorldTargetAction
+    event: !type:XenoDissolverBombardActionEvent
+      spitTypePerChargeLevel: [XenoChargedSpitProjectileDissolverCorrosive, XenoChargedSpitProjectileDissolverCorrosive, XenoChargedSpitProjectileDissolverCorrosive, XenoChargedSpitProjectileDissolverCorrosive, XenoChargedSpitProjectileDissolverCorrosiveTwoCharge, XenoChargedSpitProjectileDissolverCorrosiveThreeCharge]
+
+- type: entity
+  id: ActionXenoSpitDissolverAcidBlob
+  parent: ActionXenoSpit
+  name: Acid Blob (65)
+  description: Launches a projectile after a 0.8s windup that explodes forward into smaller projectiles on reaching its target or on collision. Strengthens weak acid on enemies and stuns them.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_acid_ball
+  - type: WorldTargetAction
+    event: !type:XenoDissolverBombardActionEvent
+      baseSpit: XenoSpitProjectileDissolverAcidBlob
+      windup: 0.8
+      speed: 20
+      plasmaCost: 65
+      maxDistance: 6.206
+
+- type: entity
+  id: ActionXenoSpitDissolverEnzymaticBreath
+  parent: ActionXenoSpit
+  name: Enzymatic Breath (55)
+  description: Launches 5 weak projectiles after a 1s windup that cover enemies with acid and slows them down, or roots if they are already slow. Windup is reduced by 0.1s per stored acid.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_shotgun
+  - type: WorldTargetAction
+    event: !type:XenoDissolverBombardActionEvent
+      baseSpit: XenoChargedSpitProjectileDissolverEnzymatic
+      windup: 1
+      extraProjectiles: 4
+      scatter: 60
+      windupReductionPerStack: 0.1
+      plasmaCost: 55

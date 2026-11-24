@@ -519,7 +519,8 @@
 
 - type: entity
   parent: XenoChargedSpitProjectile #TODO RMC14 if charged spit gets falloff this needs 0
-  id: XenoChargedSpitProjectileDissolver
+  id: XenoChargedSpitProjectileDissolverCorrosive
+  name: corrosive spit
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -546,8 +547,8 @@
     deleteOnZeroDamage: true
 
 - type: entity
-  parent: XenoChargedSpitProjectileDissolver
-  id: XenoChargedSpitProjectileDissolverTwoCharge
+  parent: XenoChargedSpitProjectileDissolverCorrosive
+  id: XenoChargedSpitProjectileDissolverCorrosiveTwoCharge
   categories: [ HideSpawnMenu ]
   components:
   - type: RMCPenetratingProjectile
@@ -556,13 +557,97 @@
     amount: 15
 
 - type: entity
-  parent: XenoChargedSpitProjectileDissolverTwoCharge
-  id: XenoChargedSpitProjectileDissolverThreeCharge
+  parent: XenoChargedSpitProjectileDissolverCorrosiveTwoCharge
+  id: XenoChargedSpitProjectileDissolverCorrosiveThreeCharge
   categories: [ HideSpawnMenu ]
   components:
   - type: RMCPenetratingProjectile
     fixedDamageLoss: 12.6
   - type: CMArmorPiercing
     amount: 20
+
+- type: entity
+  parent: XenoChargedSpitProjectile #TODO RMC14 if charged spit gets falloff this needs 0
+  id: XenoChargedSpitProjectileDissolverEnzymatic
+  name: enzymatic breath
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_weak # Fits better with its low damage
+      shader: unshaded
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Heat: 10
+  - type: ProjectileMaxRange
+    max: 4
+  - type: XenoSlowingSpitProjectile
+    slow: 3
+    paralyze: 0
+    resistLevel: 10 # Unreachable
+    rootIfAlreadySlowed: true
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoSpitProjectileDissolverAcidBlobSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_weak
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 10
+  - type: ProjectileMaxRange
+    max: 2
+  - type: XenoAcidOnHit
+    acid: null
+    enhance: true
+    maxTier: 2
+    stunOnEnhance: 2
+
+- type: entity
+  parent: XenoSpitProjectileDissolverAcidBlobSmall
+  id: XenoSpitProjectileDissolverAcidBlob
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_normal
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: false
+    maxFixedRange: 6.206 #The result of CircleAreaFromSquareAbilityRange(5)
+    damage:
+      types:
+        Heat: 25
+  - type: ProjectileMaxRange
+    max: 7
+    delete: false
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: ClusterLimitHits
+    limit: 0
+    ignoreFirstHit: true
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    evenSpread: true
+    rebounds: false
+    fillPrototype: XenoSpitProjectileDissolverAcidBlobSmall
+    capacity: 4
+    spreadAngle: 40
+    directHitProjectiles: 4
+  - type: IgnorePredictionHide
+
+
   
 

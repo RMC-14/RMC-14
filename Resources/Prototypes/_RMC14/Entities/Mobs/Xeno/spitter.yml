@@ -142,6 +142,9 @@
   - type: XenoTailStab
     inject:
       RMCMolecularAcid: 2
+  - type: XenoEvolution
+    strains:
+    - RMCXenoSpitterDissolver
 
 - type: entity
   parent: RMCXenoSpitterBase
@@ -157,11 +160,10 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidNormal
-    - ActionXenoSpit # TODO REMOVE JUST FOR TESTING
-    #- ActionXenoCorrosiveSpit
-    #- ActionXenoAcidGlob
-    #- ActionXenoEnzymaticBreath
-    #- ActionXenoStoreAcid
+    - ActionXenoSpitDissolverCorrosive
+    - ActionXenoSpitDissolverAcidBlob
+    - ActionXenoSpitDissolverEnzymaticBreath
+    - ActionXenoStoreAcid
     - ActionXenoDevolve
   - type: XenoStrain
     name: rmc-xeno-dissolver-name
@@ -190,7 +192,6 @@
     explosionArmor: 20
   - type: XenoPlasma
     plasmaRegenOnWeeds: 4.5
+  - type: XenoDissolverBombard
   - type: VentCrawler
     ventCrawlIcon: dissolver_spitter
-  - type: XenoSpit
-    projectileId: XenoChargedSpitProjectileDissolver

@@ -40,7 +40,7 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
             if (TerminatingOrDeleted(shooter.Value))
                 return;
 
-            if (!_container.IsEntityOrParentInContainer(shooter.Value) && !HasComp<RMCIgnoreRequiredProjectileTargetComponent>(other))
+            if (!_container.IsEntityOrParentInContainer(shooter.Value) && !HasComp<RMCIgnoreRequiredProjectileTargetComponent>(other)) // RMC14
                args.Cancelled = true;
         }
     }
