@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Xenonids.Despoiler;
 using Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 using Robust.Client.GameObjects;
 
@@ -10,24 +9,15 @@ public sealed class XenoDespoilerAcidBarrageProjectileVisualSystem : EntitySyste
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoDespoilerAcidBarrageProjectileComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<XenoDespoilerAcidBarrageProjectileComponent, AfterAutoHandleStateEvent>(OnState);
+        SubscribeLocalEvent<XenoDespoilerAcidBarrageProjectileComponent, ComponentStartup>(OnApply);
+        SubscribeLocalEvent<XenoDespoilerAcidBarrageProjectileComponent, AfterAutoHandleStateEvent>(OnApply);
     }
 
-    private void OnStartup(EntityUid uid, XenoDespoilerAcidBarrageProjectileComponent comp, ComponentStartup args)
+    private void OnApply<T>(Entity<XenoDespoilerAcidBarrageProjectileComponent> ent, ref T args)
     {
-        Apply(uid, comp);
-    }
-
-    private void OnState(EntityUid uid, XenoDespoilerAcidBarrageProjectileComponent comp, ref AfterAutoHandleStateEvent args)
-    {
-        Apply(uid, comp);
-    }
-
-    private void Apply(EntityUid uid, XenoDespoilerAcidBarrageProjectileComponent comp)
-    {
-        if (!TryComp<SpriteComponent>(uid, out var sprite))
+        if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
-        _sprite.SetScale((uid, sprite), comp.Scale);
+
+        _sprite.SetScale((ent, sprite), ent.Comp.Scale);
     }
 }
