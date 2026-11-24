@@ -297,14 +297,6 @@
     bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 10 # CLOTHING_ARMOR_LOW
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
-  - type: Foldable
-    canFoldInsideContainer: true
-    unfoldVerbText: rmc-button-up-verb
-    foldVerbText: rmc-unbutton-verb
-  - type: FoldableClothing
-    foldedEquippedPrefix: jacket
-    foldedHeldPrefix: jacket
-  - type: Appearance
 
 - type: entity
   parent: CMArmorM4PMCLight
