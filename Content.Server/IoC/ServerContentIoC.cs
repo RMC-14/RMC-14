@@ -2,6 +2,7 @@ using Content.Server._RMC14.Actions;
 using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Discord;
+using Content.Server._RMC14.GMRequest;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
 using Content.Server._RMC14.PlayTimeTracking;
@@ -30,6 +31,7 @@ using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
+using Content.Shared._RMC14.PlayTimeTracking;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
@@ -90,11 +92,13 @@ namespace Content.Server.IoC
             // RMC14
             IoCManager.Register<LinkAccountManager>();
             IoCManager.Register<RMCPlayTimeManager>();
+            IoCManager.Register<SharedRMCPlayTimeManager, RMCPlayTimeManager>();
             IoCManager.Register<RMCDiscordManager>();
             IoCManager.Register<MentorManager>();
             IoCManager.Register<CommendationManager>();
             IoCManager.Register<RMCActionsManager>();
             IoCManager.Register<RMCChatBansManager>();
+            IoCManager.Register<GMRequestManager>();
         }
     }
 }

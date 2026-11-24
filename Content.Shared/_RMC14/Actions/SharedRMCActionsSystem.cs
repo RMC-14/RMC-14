@@ -1,7 +1,12 @@
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Interaction;
+using Content.Shared.Whitelist;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Actions;
@@ -9,9 +14,16 @@ namespace Content.Shared._RMC14.Actions;
 public abstract class SharedRMCActionsSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<ActionSharedCooldownComponent> _actionSharedCooldownQuery;
+
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _targetFactions = [];
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _userFactions = [];
 
     public override void Initialize()
     {
@@ -25,7 +37,13 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
         SubscribeLocalEvent<ActionInRangeUnobstructedComponent, RMCActionUseAttemptEvent>(OnInRangeUnobstructedUseAttempt);
 
-        SubscribeLocalEvent<ActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
+        SubscribeLocalEvent<ActionReducedUseDelayComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
+
+        SubscribeLocalEvent<EntityTargetActionComponent, CheckActionTargetEvent>(OnCheckActionTarget);
+        SubscribeLocalEvent<ActionTargetHiveAllyComponent, CheckActionTargetEvent>(OnHiveAllyCheckActionTarget);
+        SubscribeLocalEvent<ActionTargetNonHiveAllyComponent, CheckActionTargetEvent>(OnNonHiveAllyCheckActionTarget);
+        SubscribeLocalEvent<ActionTargetIFFComponent, CheckActionTargetEvent>(OnIFFCheckActionTarget);
+        SubscribeLocalEvent<ActionReducedUseDelayComponent, SettingCooldownEvent>(OnReducedSettingCooldown);
     }
 
     private void OnMissedTargetAction(RMCMissedTargetActionEvent args)
@@ -106,49 +124,14 @@ public abstract class SharedRMCActionsSystem : EntitySystem
         }
     }
 
-    private void OnReducedUseDelayEvent(EntityUid uid, ActionComponent component, ActionReducedUseDelayEvent args)
+    private void OnReducedUseDelayEvent(Entity<ActionReducedUseDelayComponent> ent, ref ActionReducedUseDelayEvent args)
     {
-        if (!TryComp(uid, out ActionReducedUseDelayComponent? comp))
+        if (args.Amount < 0 || args.Amount > 1 || args.Amount == ent.Comp.UseDelayReduction)
             return;
 
-        if (args.Amount < 0 || args.Amount > 1)
-            return;
+        ent.Comp.UseDelayReduction = args.Amount;
 
-        comp.UseDelayReduction = args.Amount;
-
-        if (TryComp(uid, out ActionSharedCooldownComponent? shared))
-        {
-            comp.UseDelayBase ??= shared.Cooldown;
-
-            RefreshSharedUseDelay((uid, comp), shared);
-            return;
-        }
-
-        // Should be fine to only set this once as the base use delay should remain constant
-        comp.UseDelayBase ??= component.UseDelay;
-        RefreshUseDelay((uid, comp));
-    }
-
-    private void RefreshUseDelay(Entity<ActionReducedUseDelayComponent> ent)
-    {
-        if (ent.Comp.UseDelayBase is not { } delayBase)
-            return;
-
-        var reduction = ent.Comp.UseDelayReduction.Double();
-        var delayNew = delayBase.Multiply(1 - reduction);
-
-        _actions.SetUseDelay(ent.Owner, delayNew);
-    }
-
-    private void RefreshSharedUseDelay(Entity<ActionReducedUseDelayComponent> ent, ActionSharedCooldownComponent shared)
-    {
-        if (ent.Comp.UseDelayBase is not { } delayBase)
-            return;
-
-        var reduction = ent.Comp.UseDelayReduction.Double();
-        var delayNew = delayBase.Multiply(1 - reduction);
-
-        shared.Cooldown = delayNew;
+        Dirty(ent, ent.Comp);
     }
 
     private void OnCooldownUse(Entity<ActionCooldownComponent> ent, ref RMCActionUseEvent args)
@@ -166,6 +149,79 @@ public abstract class SharedRMCActionsSystem : EntitySystem
 
         if (!_interaction.InRangeUnobstructed(args.User, target, ent.Comp.Range))
             args.Cancelled = true;
+    }
+
+    private void OnReducedSettingCooldown(Entity<ActionReducedUseDelayComponent> ent, ref SettingCooldownEvent args)
+    {
+        // TODO RMC14 this is a "flat" reduction calculation. It's fine for now since this is the only
+        // cooldown reducer we have, but if we ever get more sources of cooldown reduction, this will
+        // need to be revisited to be multiplicative instead of additive to prevent issues.
+        var reductionAmount = args.InitialDelay * ent.Comp.UseDelayReduction.Float();
+        args.Start -= reductionAmount;
+        args.End -= reductionAmount;
+    }
+
+    private void OnCheckActionTarget(Entity<EntityTargetActionComponent> ent, ref CheckActionTargetEvent args)
+    {
+        if (args.Skip)
+            return;
+
+        if (_whitelist.IsWhitelistFail(ent.Comp.Whitelist, args.Target)
+            || _whitelist.IsBlacklistPass(ent.Comp.Blacklist, args.Target)
+            || !ent.Comp.CanTargetSelf && args.Target == args.User
+            || args.Action.Comp.CheckCanInteract && !_actionBlocker.CanInteract(args.User, args.Target) && ent.Comp.TargetCheckCanInteract)
+        {
+            args.Skip = true;
+            return;
+        }
+
+        if (args.Defer)
+            return;
+
+        if (_whitelist.IsWhitelistFail(ent.Comp.PriorityWhitelist, args.Target)
+            || _whitelist.IsBlacklistPass(ent.Comp.DeferBlacklist, args.Target))
+        {
+            args.Defer = true;
+            return;
+        }
+    }
+
+    private void OnHiveAllyCheckActionTarget(Entity<ActionTargetHiveAllyComponent> ent, ref CheckActionTargetEvent args)
+    {
+        if (args.Skip || !ent.Comp.Skip && (!ent.Comp.Defer || args.Defer))
+            return;
+
+        if (_hive.FromSameHiveOrAlly(args.User, args.Target))
+        {
+            args.Skip = ent.Comp.Skip;
+            args.Defer = ent.Comp.Defer;
+        }
+    }
+
+    private void OnNonHiveAllyCheckActionTarget(Entity<ActionTargetNonHiveAllyComponent> ent, ref CheckActionTargetEvent args)
+    {
+        if (args.Skip || !ent.Comp.Skip && (!ent.Comp.Defer || args.Defer))
+            return;
+
+        if (!_hive.FromSameHiveOrAlly(args.User, args.Target))
+        {
+            args.Skip = ent.Comp.Skip;
+            args.Defer = ent.Comp.Defer;
+        }
+    }
+
+    private void OnIFFCheckActionTarget(Entity<ActionTargetIFFComponent> ent, ref CheckActionTargetEvent args)
+    {
+        if (args.Skip || !ent.Comp.Skip && (!ent.Comp.Defer || args.Defer))
+            return;
+
+        if (_gunIFF.TryGetFactions(args.User, _userFactions)
+            && _gunIFF.TryGetFactions(args.Target, _targetFactions)
+            && _userFactions.Overlaps(_targetFactions))
+        {
+            args.Skip = ent.Comp.Skip;
+            args.Defer = ent.Comp.Defer;
+        }
     }
 
     public bool CanUseActionPopup(EntityUid user, EntityUid action, EntityUid? target = null)
@@ -246,3 +302,15 @@ public sealed class RMCMissedTargetActionEvent : EntityEventArgs
         Action = actionId;
     }
 }
+
+/// <summary>
+/// Event raised on actions that allows the action to decide if a target should be skipped or deferred to prefer other entities.
+/// Handling this event should cause NO SIDE EFFECTS.
+/// </summary>
+/// <param name="Target">Target to check.</param>
+/// <param name="User">User of the action.</param>
+/// <param name="Action">The ActionComponent of the action.</param>
+/// <param name="Skip">Set to true if the target should be skipped, disallowing it from being a target.</param>
+/// <param name="Defer">Set to true if the target should be deferred, allowing it to be a target only if there are no non-deferred targets.</param>
+[ByRefEvent]
+public record struct CheckActionTargetEvent(in EntityUid Target, in EntityUid User, in Entity<ActionComponent> Action, bool Skip = false, bool Defer = false);

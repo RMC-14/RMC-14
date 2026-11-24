@@ -40,6 +40,12 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     [DataField]
     public readonly string? OverwatchRoleName;
 
+    /// <summary>
+    /// Should this job have rank preferences appear in the preferences menu?
+    /// </summary>
+    [DataField]
+    public bool SetRankPreference { get; private set; } = false;
+
     [DataField]
     public readonly string? SpawnMenuRoleName;
 
@@ -89,4 +95,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// </summary>
     [DataField]
     public readonly Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
+
+    [DataField]
+    public readonly LocId? FirstDeploymentAssignment;
 }

@@ -1,13 +1,33 @@
 rmc-xeno-strain-specialized-into = It has specialized into {INDEFINITE($strain)} {$strain}.
 
+rmc-xeno-trapper-name = Sapper
+rmc-xeno-trapper-description = You trade your bombard, neurotoxin, acid shroud, acid spray, some speed and a little health to gain the ability to create acid explosions and restrain enemies within them.
+   You gain the ability to:
+   - Fire a close ranged shotgun of acid that deals high damage, further increased against trapped targets.
+   - - Gain stacks of Insight when you strike enemies with your shotgun. At 10 stacks, you empower your next trap deployment.
+   - - - Hitting a trapped enemy will instantly give you max stacks of Insight.
+   - Place a line of restraining traps at a distance to set up ambushes or disrupt enemies.
+   - - When empowered, the traps restrain for longer and empower your next Acid Mine explosion.
+   - Remotely detonate hidden Acid Mines, causing a delayed explosion of acid that burns enemies and corrodes through structures.
+   - - When empowered, deals greatly increased damage to structures and slightly increased damage to enemies. It also applies a lingering acid to enemies.
+   - Gain a temporary speed boost when hurt, allowing a swifter escape.
+rmc-xeno-trapper-popup = The battlefield is my canvas, this one, my painter. Melt them where they stand.
+
 rmc-xeno-dancer-name = Dancer
 rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, corrosive acid, dash, and a small bit of armor for high single-target damage.
+   You lose:
+   - Your dash and acid abilities
+   - The ability to fully benefit from recovery pheromones better than 'strong'
    You gain the ability to:
+   - Better health regen overtime.
+   - The ability to dodge every 6th projectile that would hit you (note: you can still be hit by snipers and rockets).
    - Break walls and other simple structures with your slash attack.
    - Cause enemies to be marked on slash and tail stab hits which effects your other abilities.
+   - Tail Lance, which can be used as a normal tail stab or one that has 1/3rd the cooldown, much less damage, but ignores armor.
    - Impale an enemy for your base slash damage and pierce some armor, hitting twice on marked.
    - Trip an enemy to disarm them, or stun them if marked.
-   - Gain a temporary speed boost thats doubled around your enemies.
+   - Cause critical marks on nearby enemies if you crit or kill an enemy. These act like normal marks, but impale and tail trip will have no cooldown if used on a critical marked enemy. Additionally, hitting an critical marked enemy with your slash or tail lash will end the cooldowns of both impale and tail trip.
+   - Gain a temporary speed boost that allows you to move through enemies and allies, as well as dodge every 3rd projectile instead of every 6th.
 rmc-xeno-dancer-popup = A performance fit for a Queen, this one will become my instrument of death.
 
 rmc-xeno-oppressor-name = Oppressor
@@ -115,7 +135,7 @@ rmc-xeno-berserker-name = Berserker
 rmc-xeno-berserker-description = You lose:
   - Your empower, charge, and scissor cut.
   - Some health.
-  - A bit of your influence under frenzy pheromones.
+  - The ability to fully benefit from 'strong' or better frenzy pheromones
   You gain:
   - Movement speed, a slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
   - The ability to heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
@@ -177,3 +197,36 @@ rmc-xeno-designer-description = You lose:
     - Greater Resin Surge turns design nodes into weaker reflective walls
     - Slightly stronger tackle
 rmc-xeno-designer-popup = You are hive's designer, go and expand the hive beyond its limit.
+
+rmc-xeno-magicalgirl-name = Magical Girl
+rmc-xeno-magicalgirl-description = Receive your Plasma Wand from The Queen Mother and transform into your Magical Girl form to combat the forces of evil!
+rmc-xeno-magicalgirl-popup = With the power of Plasma and Resin! Transform!
+
+rmc-xeno-destrain-choice = Destrain: {$caste}
+rmc-xeno-destrain-success = We shed our specialization and return to our original form.
+rmc-xeno-destrain-cooldown = We lack the strength to reset our strain. We will be able to reset it in {$minutes} {$minutes ->
+    [one] minute
+   *[other] minutes
+}.
+
+rmc-xeno-witch-name = Witch
+rmc-xeno-witch-description = You shall make a stew so wicked and shrew! Command your army of cursed children to turn talls into your greatest brew!
+rmc-xeno-witch-popup = Muwahahahah!
+rmc-xeno-bloodqueen-name = Blood Queen
+rmc-xeno-bloodqueen-description = You lose:
+  - Your queen level pheromones are replaced with strong pheromones.
+  - The ability to attach an ovipositor.
+  - Your screech, order construction, secrete resin, plant weeds and spit-based abilities.
+  - Your normal acid is replaced with weak acid.
+  You gain:
+  - Increased speed, damage, health, and armor.
+  - Your slashes now do a slight AOE to enemies surrounding the target.
+  - Brace: Gives you a temporary shield for 5 seconds that reduces damage taken slightly.
+  - Doom: A terrifying roar that removes helpful chemicals and darkens lights.
+  - Massacre: Guts multiple dead bodies in an area. Gives a burrowed larva for each body gibbed.
+  - Blood Drain: Drain a pulled, downed, living target of blood, doing damage and giving your hive evolution points.
+rmc-xeno-bloodqueen-popup = This is no time to sit idle; The hive hungers for blood.
+
+rmc-xeno-christmasqueen-name = Christmas
+rmc-xeno-christmasqueen-description = Become a beacon of festive cheer and grant gifts of children to all the talls who have been good this year.
+rmc-xeno-christmasqueen-popup = My star upon the tree, lay your gifts, for there is hugs to spread in the morning.

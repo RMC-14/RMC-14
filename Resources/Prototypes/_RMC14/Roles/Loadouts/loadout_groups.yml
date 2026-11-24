@@ -18,6 +18,22 @@
   - MarineLeatherSatchel
 
 - type: loadoutGroup
+  id: MarineSecureBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - MarineSecureSatchel
+
+- type: loadoutGroup
+  id: LiaisonBackpackRMC
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LiaisonSecureSatchel
+
+- type: loadoutGroup
   id: MarineTechnicianBackpack
   name: rmc-loadout-group-backpack
   minLimit: 1
@@ -50,6 +66,14 @@
   - ProvostSecuritySatchel
 
 - type: loadoutGroup
+  id: ExecutiveSecurityGuardBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - ExecutiveSecurityGuardSatchel
+
+- type: loadoutGroup
   id: RoyalBackpack
   name: rmc-loadout-group-backpack
   minLimit: 1
@@ -64,30 +88,38 @@
   minLimit: 0
   maxLimit: 12
   loadouts:
-  - AviatorsRMC
-  - EyepatchRMC
-  - GlassesRPGRMC
-  - GlassesRPGRMCOld
-  - GlassesPrescriptionRMC
-  - HippieGlassesRMC
   - GogglesRMC
   - GogglesPrescriptionRMC
   - GogglesBlackRMC
   - GogglesOrangeRMC # TODO add prescription variants of all the goggles
-  - GogglesAdvancedRMC
-  - GogglesM1A1RMC
-  - PersonalShadesRMC
-  - SunglassesRMC # TODO prescription sunglasses
-  - GlassesTriMaxYellowRMC
-  - GlassesTriMaxBronzeRMC
-  - GlassesTriMaxBlackRMC
   - GogglesRedRMC
   - GogglesBlueRMC
   - GogglesPurpleRMC
   - GogglesYellowRMC
+  - GogglesAdvancedRMC
   - GogglesPolarizedBlueRMC
   - GogglesPolarizedOrangeRMC
+  - GogglesM1A1RMC
   - GogglesM1A1BlueRMC
+  - EyepatchRMC
+  - WhiteEyepatchRMC
+  - GreenEyepatchRMC
+  - GlassesRPGRMC
+  - GlassesRPGRMCOld
+  - GlassesPrescriptionRMC
+  - HippieGlassesRMC
+  - AviatorsRMC
+  - AviatorsSilverRMC
+  - PersonalShadesRMC
+  - PersonalShadesRedRMC
+  - PersonalShadesOrangeRMC
+  - PersonalShadesYellowRMC
+  - PersonalShadesGreenRMC
+  - PersonalShadesBlueRMC
+  - SunglassesRMC # TODO prescription sunglasses
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
   - HippieGlassesBloodredRMC
   - HippieGlassesGreenRMC
   - HippieGlassesMidnightRMC
@@ -154,6 +186,7 @@
   - MaskScarfGreenRMC
   - MaskScarfTanRMC
   - GasMaskRMC
+  - MaskSterileRMC
   - TornScarfBlackRMC
   - TornScarfDesertRMC
   - TornScarfGreenRMC
@@ -244,6 +277,14 @@
   minLimit: 0
   maxLimit: 10
   loadouts:
+  - HeadDuragRMC
+  - HeadDuragBlackRMC
+  - HeadBandanaRMC
+  - HeadBandanaTanRMC
+  - HeadBeanieRMC
+  - HeadBeanieTanRMC
+  - HeadBeanieGreenRMC
+  - HeadBeanieGrayRMC
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
@@ -257,10 +298,6 @@
   - RedHeadbandRMC
   - TanHeadbandRMC
   - SquadHeadbandRMC
-  - HeadBeanieRMC
-  - HeadBeanieTanRMC
-  - HeadBeanieGreenRMC
-  - HeadBeanieGrayRMC
   - UNMCHeadsetRMC
 
 - type: loadoutGroup
@@ -322,9 +359,11 @@
   - FeatherPurpleRMC
   - FeatherYellowRMC
   - GunOilRMC
+  - HelmetGarbRabbitsFootRMC
   - RosaryRMC
   - PrescriptionRMC
   - TrimmedWireRMC
+  - HelmetGarbXM43E1RMC
   - ChaplainPatchRMC
   - PeaceFlairRMC
   - IoFlairRMC
@@ -399,6 +438,8 @@
   - PonchoUrbanRMC
   - PonchoSnowRMC
   - PatchPeaceRMC
+  - FieldMedicPatchRMC
+  - PDTLKitRMC
 
 - type: loadoutGroup
   id: AccessoriesRMCPVE
@@ -522,6 +563,7 @@
   - HoldoutPistolRMC
   - CustomM1984RMC
   - CustomM44RMC
+  - M48A4LoadoutRMC
   - HG45AguilaCaseRMC
   - HG45MarinaCaseRMC
 
@@ -619,6 +661,7 @@
   - BootsGreyFilledRMC
   - HandsBrownMarineRMC
   - HandsGreyMarineRMC
+  - PestSprayRMC
 
 
 # Food (sweets)
@@ -668,7 +711,7 @@
   id: RMCLoadoutGroupPins
   name: rmc-loadout-group-pins
   minLimit: 0
-  maxLimit: 13
+  maxLimit: 14
   loadouts:
   - RMCPinLGBT
   - RMCPinAromantic
@@ -683,6 +726,7 @@
   - RMCPinTransgender
   - RMCPinAutism
   - RMCPinAutismGold
+  - RMCPinAlly
 
 # Commanding Officer
 - type: loadoutGroup
@@ -706,20 +750,41 @@
   name: rmc-loadout-group-role-specific-weapon
   loadouts:
   - MatebaRMC
+  - MatebaSpecialRMC
+  - Mateba2006MRMC
+  - M1911CRMC
   - HandcannonRMC
+  - HandcannonPolishedRMC
+  - SilverMatebaRMC
   - GoldMatebaRMC
   - GoldHandcannonRMC
+  - Mateba2006MRMCSilver
+  - Mateba2006MRMCGold
+  - Mateba2006MRMCBlackGold
 
 # Corporate Liaison
 - type: loadoutGroup
   id: LiaisonRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 3
+  maxLimit: 5
   loadouts:
   - RMCWeYaClipboard
+  - RMCPatchWeYaCommsDivision
   - RMCWeYaThermos
+  - WEYABagPhoneSatchel
   - RMCJacketWindbreakerWEYA
+
+# Executive Bodyguard
+- type: loadoutGroup
+  id: BodyguardRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 3
+  loadouts:
+  - RMCPatchWeYaSecurityDivision
+  - RMCWeYaCanteen
+  - RMCJumpsuitLiaisonBlueSecurityExecutiveBodyguard
 
 # Chief MP
 - type: loadoutGroup
@@ -906,13 +971,22 @@
   - NeckerchiefWhiteRMC
   - NeckerchiefRedRMC
 
+- type: loadoutGroup
+  id: SynthGenRMC
+  name: rmc-loadout-group-synth
+  maxLimit: 1
+  minLimit: 1
+  loadouts:
+  - RMCSynthGenOne
+  - RMCSynthGenTwo
+  - RMCSynthGenThree
 # Watches
 - type: loadoutGroup
   id: WatchesBasicRMC
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -935,7 +1009,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -943,11 +1017,11 @@
   - WatchLiaisonRMC
 
 - type: loadoutGroup
-  id: WatchesCommandingOfficerRMC
+  id: WatchesCommandingOfficerRMC # Given to SEA and PvI aswell.
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -962,6 +1036,9 @@
   minLimit: 0
   maxLimit: 7
   loadouts:
+  - PatchFreelancerRMC
+  - PatchFreelancerAltRMC
+  - FieldMedicPatchRMC
   - PatchWeYaRMC
   - PatchWeYaRMCSquare
   - PatchWeYaRMCBlack
@@ -983,24 +1060,32 @@
   - ShoesYellowRMC
   - ShoesRedRMC
   - ShoesPurpleRMC
-  - PlushieFarwaRMC
-  - PlushieBarricadeRMC
-  - PlushieBeeRMC
-  - PlushieSharkGreyRMC
-  - PlushieSharkBlueRMC
-  - PlushieSharkPinkRMC
-  - PlushieMothRMC
-  - PlushieRockRMC
-  - PlushieTherapyRMC
-  - PlushieGnarpGnarpRMC
-  - PlushieGnarpGnarpAltRMC
 
 # Provost Inspector
 - type: loadoutGroup
   id: ProvostRoleSpecificOuterwearRMC
   name: rmc-loadout-group-provost-role-specific-outerwear
-  minLimit: 0
+  minLimit: 1
   maxLimit: 1
   loadouts:
   - ProvostJacketFilledRMC
   - ProvostCoatFilledRMC
+  - RMCProvostJacketBlueFilled
+
+- type: loadoutGroup
+  id: ProvostWeaponRMC
+  name: rmc-loadout-group-provost-weapon
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCWeaponPistolHandcannon
+  - RMCWeaponPistolHandcannonProvost
+
+- type: loadoutGroup
+  id: ProvostRoleSpecificHeadRMC
+  name: rmc-loadout-group-provost-role-specific-headwear
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCHeadBeretProvostGold
+  - RMCHeadBeretProvostBlue

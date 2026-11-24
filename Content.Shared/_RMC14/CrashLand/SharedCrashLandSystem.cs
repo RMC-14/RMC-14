@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
@@ -39,6 +40,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -54,6 +56,10 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
     private EntityQuery<CrashLandableComponent> _crashLandableQuery;
 
+    private readonly EntProtoId<CrashLandingBlockedComponent> _crashLandingBlocker = "RMCCrashLandingBlocker";
+    private readonly float _crashLandingBlockerRadius = 10;
+    private readonly HashSet<Entity<CrashLandingBlockedComponent>> _crashLandingBlockers = new();
+
     public override void Initialize()
     {
         _crashLandableQuery = GetEntityQuery<CrashLandableComponent>();
@@ -66,6 +72,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
         SubscribeLocalEvent<CrashLandingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
         SubscribeLocalEvent<CrashLandingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
+        SubscribeLocalEvent<CrashLandingComponent, CheckMeleeAttackerEvent>(OnReceivingMeleeAttackAttempt);
         SubscribeLocalEvent<CrashLandingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -142,6 +149,11 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     private void OnAttemptMobTargetCollide(Entity<CrashLandingComponent> ent, ref AttemptMobTargetCollideEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnReceivingMeleeAttackAttempt(Entity<CrashLandingComponent> ent, ref CheckMeleeAttackerEvent args)
+    {
+        args.Skip = true;
     }
 
     private void OnGettingAttacked(Entity<CrashLandingComponent> ent, ref GettingAttackedAttemptEvent args)
@@ -228,7 +240,14 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         return valid;
     }
 
-    public bool TryGetCrashLandLocation(out EntityCoordinates location)
+    /// <summary>
+    /// Try and get a valid position to crash land on.
+    /// Used for blind para-dropping and failed evacuation pods/shuttles.
+    /// </summary>
+    /// <param name="blocking">Is the thing crashing a grid (evacuation pod/shuttle)?</param>
+    /// <param name="location"></param>
+    /// <returns>True if a valid location has been found.</returns>
+    public bool TryGetCrashLandLocation(bool blocking, out EntityCoordinates location)
     {
         location = default;
         var distressQuery = EntityQueryEnumerator<RMCPlanetComponent>();
@@ -252,6 +271,17 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
                     continue;
 
                 location = _mapSystem.GridTileToLocal(grid, gridComp, tile);
+
+                if (blocking)
+                {
+                    _crashLandingBlockers.Clear();
+                    _entityLookup.GetEntitiesInRange(location, _crashLandingBlockerRadius, _crashLandingBlockers);
+                    if (_crashLandingBlockers.Count > 0)
+                        continue;
+
+                    SpawnAtPosition(_crashLandingBlocker, location);
+                }
+
                 return true;
             }
         }
@@ -264,7 +294,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryGetCrashLandLocation(out var location))
+        if (!TryGetCrashLandLocation(false, out var location))
             return;
 
         TryCrashLand(crashLandable.Owner, doDamage, location);
@@ -330,9 +360,6 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             if (!(crashLanding.RemainingTime <= 0))
                 continue;
 
-            if (crashLanding.DoDamage)
-                ApplyFallingDamage(uid);
-
             var ev = new CrashLandedEvent(crashLanding.DoDamage);
             RaiseLocalEvent(uid, ref ev);
 
@@ -340,6 +367,10 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
                 _audio.PlayPvs(crashLandable.CrashSound, uid);
 
             RemComp<CrashLandingComponent>(uid);
+
+            if (crashLanding.DoDamage)
+                ApplyFallingDamage(uid);
+
             Blocker.UpdateCanMove(uid);
         }
     }

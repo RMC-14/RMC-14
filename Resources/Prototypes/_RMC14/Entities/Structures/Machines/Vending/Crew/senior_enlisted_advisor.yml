@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechEquipmentSEA
-  name: ColMarTech SEA equipment rack
+  name: ASRS SEA equipment rack
   description: An automated rack hooked up to a colossal storage of Senior Enlisted Advisor standard-issue equipment.
   suffix: SEA
   components:
@@ -16,10 +16,13 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMSatchel
+      - id: CMSatchelSecureStandard
       - id: CMBootsBlackFilled
       - id: CMMRE
       - id: RMCStampSEA
+      - id: RMCOuterClothingExternalWebbing
+      - id: CMJumpsuitOperations
+        name: operations uniform
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
@@ -30,6 +33,7 @@
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltBrowne
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled
@@ -61,6 +65,7 @@
       choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
+      - id: RMCCoatAllWeather
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
@@ -108,7 +113,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechGunsSEA
-  name: ColMarTech SEA weapon rack
+  name: ASRS SEA weapon rack
   description: An automated rack hooked up to a colossal storage of Senior Enlisted Advisor standard-issue equipment.
   suffix: SEA
   components:

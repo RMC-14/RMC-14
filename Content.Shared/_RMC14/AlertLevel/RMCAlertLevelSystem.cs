@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.ARES;
+﻿using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Doors;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
@@ -14,14 +16,16 @@ using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.AlertLevel;
 
 public sealed class RMCAlertLevelSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly RMCAnnouncementOverlaySystem _announcementOverlay = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
+    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
@@ -31,6 +35,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
 
     private EntityQuery<GhostComponent> _ghostQuery;
 
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
     public override void Initialize()
     {
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
@@ -65,6 +70,18 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         var uid = Spawn();
         var comp = EnsureComp<RMCAlertLevelComponent>(uid);
         return (uid, comp);
+    }
+
+    public EntProtoId<RMCAnnouncementPresetComponent> GetOverlay(RMCAlertLevels level)
+    {
+        var alert = EnsureAlertLevel();
+        return level switch
+        {
+            RMCAlertLevels.Blue => alert.Comp.BlueOverlay,
+            RMCAlertLevels.Red => alert.Comp.RedOverlay,
+            RMCAlertLevels.Delta => alert.Comp.DeltaOverlay,
+            _ => alert.Comp.GreenOverlay,
+        };
     }
 
     public RMCAlertLevels? Get()
@@ -109,6 +126,14 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             almayers.Add(uid);
         }
 
+        if (user != null)
+        {
+            foreach (var almayer in almayers)
+            {
+                _aresCore.CreateARESLog(almayer, LogCat, (string)$"{Name(user.Value)} set the alert level to: {level}");
+            }
+        }
+
         var transformQuery = EntityManager.TransformQuery;
         var filter = Filter.Empty()
             .AddWhereAttachedEntity(entity =>
@@ -133,12 +158,20 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         {
             if (announcement != null)
             {
-                _marineAnnounce.AnnounceToMarines(Loc.GetString(announcement));
+                var text = Loc.GetString(announcement);
+                _marineAnnounce.AnnounceToMarines(text, overlay: new RMCAnnouncementOverlay(GetOverlay(level), text));
             }
             else if (message != null)
             {
-                var ares = _ares.EnsureARES();
-                _marineAnnounce.AnnounceRadio(ares, Loc.GetString(message.Value), ent.Comp.RadioChannel);
+                var ares = _aresCore.EnsureMarineARES();
+                var text = Loc.GetString(message.Value);
+                _marineAnnounce.AnnounceRadio(ares, text, ent.Comp.RadioChannel);
+
+                var overlayFilter = Filter.Empty()
+                    .AddPlayers(filter.Recipients)
+                    .RemoveWhereAttachedEntity(e => !HasComp<MarineComponent>(e) && !_ghostQuery.HasComp(e));
+
+                _announcementOverlay.Show(new RMCAnnouncementOverlay(GetOverlay(level), text), overlayFilter);
             }
         }
 

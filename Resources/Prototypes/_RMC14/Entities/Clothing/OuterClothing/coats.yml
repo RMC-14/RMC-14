@@ -34,6 +34,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - RMCSynthAllowedArmor
 
 - type: entity
   abstract: True
@@ -628,6 +631,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
     melee: 10
+    bullet: 10
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
@@ -643,6 +647,27 @@
   name: marine service jacket
   description: A service jacket typically worn by officers of the UNMC.
   suffix: Unbuttoned
+
+- type: entity
+  parent: [CMCoatOfficer, RMCBaseJacketButtonable]
+  id: RMCCoatAllWeather
+  name: marine all-weather coat
+  description: A water-resistant trench coat issued to marines not expected to see frontline combat. You think you remember hearing something about these bleeding orange into the wash.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/allweather.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/allweather.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCCoatAllWeather]
+  id: RMCCoatAllWeatherFolded
+  name: marine all-weather coat
+  description: A water-resistant trench coat issued to marines not expected to see frontline combat. You think you remember hearing something about these bleeding orange into the wash.
+  suffix: Folded
 
 - type: entity
   parent: CMCoatOfficer
@@ -690,9 +715,9 @@
 
 - type: entity
   parent: CMCoatOfficer
-  id: RMCProvostCommandJacket
-  name: Provost Command Jacket
-  description: A crisp jacket with the Provost sigil.
+  id: RMCProvostJacketBlue # Playtime reward for PvIs
+  name: Provost Jacket
+  description: A crisp jacket with the Provost sigil. The blue mark symbolizes extensive service in their division.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provostci_jacket.rsi
@@ -710,8 +735,8 @@
     - id: RMCHandcuffs
 
 - type: entity
-  parent: RMCProvostCommandJacket
-  id: RMCProvostCommandJacketFilled
+  parent: RMCProvostJacketBlue
+  id: RMCProvostJacketBlueFilled
   suffix: Filled
   components:
   - type: StorageFill
@@ -962,6 +987,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatOveralls
+  name: blue coveralls
+  description: A pair of denim overalls. With a large pocket in the front these overalls are popular with workers of all kinds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/overalls.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/overalls.rsi
+
 # Chance's Claim
 
 - type: entity
@@ -1039,6 +1075,7 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
+  - type: MoveOrderArmor
 
 - type: entity
   parent: RMCCoatSnowSurvivor

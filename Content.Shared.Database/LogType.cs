@@ -525,4 +525,9 @@ public enum LogType
     RMCIconLabel = RMCMarineAnnounce + 43,
     RMCMedalRecommendation = RMCMarineAnnounce + 44,
     RMCAutodocSurgeryAbort = RMCMarineAnnounce + 45,
+    RMCXenoPsychic = RMCMarineAnnounce + 46,
+    RMCElevatorLaunched = RMCMarineAnnounce + 47,
+    RMCMentorHelp = RMCMarineAnnounce + 48,
+    RMCXenoBanish = RMCMarineAnnounce + 49,
+    RMCXenoReadmit = RMCMarineAnnounce + 50,
 }

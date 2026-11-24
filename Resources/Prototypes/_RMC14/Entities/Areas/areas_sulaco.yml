@@ -23,6 +23,8 @@
     OB: false
     supplyDrop: false
     weatherEnabled: false
+    alwaysPowered: true
+    construction: false
 
 - type: entity
   parent: RMCAreaShuttleDrop1
@@ -108,6 +110,8 @@
     OB: false
     supplyDrop: false
     weatherEnabled: false
+    alwaysPowered: true
+    construction: false
 
 - type: entity
   parent: RMCAreaShuttleDrop2

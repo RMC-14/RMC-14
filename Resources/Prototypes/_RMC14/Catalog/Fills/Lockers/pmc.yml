@@ -2,9 +2,9 @@
   id: RMCClosetPMCGearFill
   table: !type:AllSelector
     children:
-    - id: CMBootsBlackFilled
+    - id: RMCBootsPMCFilled
     - id: RMCJumpsuitVeteranPMCNoWebbing
-    - id: RMCHeadsetDistressPMCPVE
+    - id: RMCHeadsetPMCPVE
 
 - type: entityTable
   id: RMCClosetPMCSLFill

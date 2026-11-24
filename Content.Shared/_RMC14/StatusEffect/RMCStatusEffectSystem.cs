@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
@@ -13,7 +14,7 @@ public sealed class RMCStatusEffectSystem : EntitySystem
     private static readonly ProtoId<StatusEffectPrototype> Knockdown = "KnockedDown";
     private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
-    private static readonly ProtoId<StatusEffectPrototype> Dazed = "Dazed";
+    private static readonly EntProtoId Dazed = RMCDazedSystem.StatusEffectDazed;
 
     public override void Initialize()
     {
@@ -48,7 +49,7 @@ public sealed class RMCStatusEffectSystem : EntitySystem
 
     private void OnStunResistanceStatusEffectTime(Entity<RMCStunResistanceComponent> ent, ref RMCStatusEffectTimeEvent args)
     {
-        if (args.Key != Knockdown && args.Key != Stun && args.Key != Unconscious && args.Key != Dazed)
+        if (args.Key != Knockdown && args.Key != Stun && args.Key != Unconscious)
             return;
 
         args.Duration /= ent.Comp.Resistance;

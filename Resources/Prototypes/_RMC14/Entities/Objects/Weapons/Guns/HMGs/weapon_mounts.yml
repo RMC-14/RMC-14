@@ -15,6 +15,15 @@
     buckledAlertType: null
     buckleOffset: "0,0.48"
   - type: WeaponMount
+    placementRestrictions:
+    - radius: 0
+      blacklist:
+        components:
+        - RMCDeployableEquipment
+    - radius: 5
+      blacklist:
+        components:
+        - WeaponMount
   - type: Fixtures
     fixtures:
       mount:
@@ -75,6 +84,10 @@
   - type: XenoCrusherChargable
   - type: Physics
     bodyType: Dynamic
+  - type: RMCHealthExaminable
+    speciesType: Mechanical
+  - type: RMCNightVisionVisible
+    priority: 1
 
 - type: entity
   parent: RMCBaseWeaponMount
@@ -90,7 +103,7 @@
   - type: RMCLungeProtection
   - type: DirectionalAttackBlocker
   - type: RMCLeapProtection
-    inherentStunDuration: 3
+    inherentStunDuration: 4
     fullProtection: true
   - type: WeaponMount
     fixedWeaponPrototype: "RMCSmartGunMountedStatic"
@@ -271,6 +284,12 @@
     canRotateWithoutTool: true
     mountOnDeploy: true
     mountExclusionAreaSize: 0
+    placementRestrictions:
+    - radius: 0
+      blacklist:
+        components:
+        - RMCDeployableEquipment
+        - WeaponMount
     barricadeExclusionAreaSize: 2
     assembleDelay: 0.5
     undeploySound: null

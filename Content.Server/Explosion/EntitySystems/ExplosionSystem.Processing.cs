@@ -10,6 +10,10 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
 using Content.Shared.Tag;
+// RMC14
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared.Vehicle.Components;
+// RMC14
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
@@ -457,23 +461,28 @@ public sealed partial class ExplosionSystem
             GetEntitiesToDamage(uid, originalDamage, id);
             foreach (var (entity, damage) in _toDamage)
             {
-                if (damage.GetTotal() > 0 && TryComp<ActorComponent>(entity, out var actorComponent))
+                // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
+                // RMC14
+                var bev = new BeforeExplosionRecievedEvent(id, epicenter, damage);
+                RaiseLocalEvent(entity, ref bev);
+                var finalDamage = bev.Damage;
+                // RMC14
+
+                if (finalDamage.GetTotal() > 0 && TryComp<ActorComponent>(entity, out var actorComponent))
                 {
                     // Log damage to player entities only, cause this will create a massive amount of log spam otherwise.
                     if (cause != null)
                     {
-                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion of {ToPrettyString(cause):actor} dealt {damage.GetTotal()} damage to {ToPrettyString(entity):subject}");
+                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion of {ToPrettyString(cause):actor} dealt {finalDamage.GetTotal()} damage to {ToPrettyString(entity):subject}");
                     }
                     else
                     {
-                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion at {epicenter:epicenter} dealt {damage.GetTotal()} damage to {ToPrettyString(entity):subject}");
+                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion at {epicenter:epicenter} dealt {finalDamage.GetTotal()} damage to {ToPrettyString(entity):subject}");
                     }
 
                 }
-
-                // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
-                _damageableSystem.TryChangeDamage(entity, damage * _damageableSystem.UniversalExplosionDamageModifier, ignoreResistances: true);
-                var ev = new ExplosionReceivedEvent(id, epicenter, damage);
+                _damageableSystem.TryChangeDamage(entity, finalDamage * _damageableSystem.UniversalExplosionDamageModifier, ignoreResistances: true);
+                var ev = new ExplosionReceivedEvent(id, epicenter, finalDamage);
                 RaiseLocalEvent(entity, ref ev);
             }
         }
@@ -493,6 +502,10 @@ public sealed partial class ExplosionSystem
             && !xform.Anchored
             && throwForce > 0
             && !EntityManager.IsQueuedForDeletion(uid)
+            // RMC14
+            && !HasComp<VehicleComponent>(uid)
+            && !HasComp<GridVehicleMoverComponent>(uid)
+            // RMC14
             && _physicsQuery.TryGetComponent(uid, out var physics)
             && physics.BodyType == BodyType.Dynamic)
         {

@@ -232,7 +232,10 @@
       "name": "masterkey_a"
     },
     {
-      "name": "flamer_nozzle_a_0"
+      "name": "masterkey_a_alt"
+    },
+    {
+      "name": "flamer_nozzle_a"
     },
     {
       "name": "flamer_nozzle_a_1"
@@ -266,6 +269,45 @@
     },
     {
       "name": "laserlight-on"
+    },
+    {
+      "name": "flamethrower_intense-on",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "flamethrower_intense",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "flamethrower_intense_a",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "qyj72_bipod"
+    },
+    {
+      "name": "qyj72_bipod-on"
+    },
+    {
+      "name": "qyj72_bipod_a"
+    },
+    {
+      "name": "qyj72_bipod_a-on"
     }
   ]
 }

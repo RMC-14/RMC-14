@@ -16,6 +16,13 @@
     - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    description: cm-xeno-description
+    raffle:
+      settings: short
+    rules: cm-xeno-rules
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
     layers:
@@ -58,8 +65,7 @@
     - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoWordQueen
-#    - ActionXenoPsychicWhisper
-#    - ActionXenoPsychicRadiance
+    - ActionXenoPsychic
     - ActionXenoGut
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
@@ -72,6 +78,8 @@
     bypassTierCount: true
     unlockAt: 0
     hudOffset: -0.1,0
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
@@ -104,6 +112,9 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: VehicleDamageMultiplier
+    multiplier: 3
+  - type: XenoPsychicCommunication
   - type: InnateCommandSpeech
   - type: RMCInnateRadioTextIncrease
     radioTextIncrease: 3
@@ -181,6 +192,13 @@
       path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
       params:
         volume: -6
+  - type: SoundOnDrag
+    sound:
+      collection: XenoFootstepLarge
+      params:
+        volume: 0
+    downedSound:
+      path: /Audio/Effects/stonedoor_openclose.ogg
   - type: WhitelistPickup
     whitelist:
       components:
@@ -204,21 +222,17 @@
     addComponents:
     - type: XenoScreech
     - type: XenoToggleSpit
+    # Overwrites the immature order, so matured queens order their extra abilities correctly
+    - type: RMCActionOrder
+      id: CMXenoQueen
     addActions:
     - ActionXenoScreech
-    - ActionXenoSpitQueen
-    - ActionXenoToggleSpitType
+    - ActionXenoQueenSpitNeuro
+    - ActionXenoQueenSpitAcid
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
     prefix: queen
-  - type: PreventPulledWhileAlive
-    whitelist:
-      components:
-      - Xeno
-    exceptEffects:
-    - Stun
-    - KnockedDown
   - type: TacticalMapUser
     xenos: true
     canDraw: true
@@ -240,9 +254,12 @@
   - type: XenoHeal
   - type: StunOnExplosionReceived
     weak: false
-  - type: XenoSpit
+  - type: XenoSlowingSpit
     projectileId: XenoQueenNeuroSpitProjectile
     plasmaCost: 50
+  - type: XenoSpit
+    projectileId: XenoChargedSpitProjectile
+    plasmaCost: 25
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen
@@ -277,16 +294,26 @@
   - type: RemoveComponents
     components:
     - type: Gibbable
+    - type: CanBeLarvaQueued
+
+# Queens start immature, so this is the id their action bar order is saved under until they mature
+- type: entity
+  abstract: true
+  id: CMXenoQueenImmature
 
 - type: entity
   parent: RMCXenoQueenBase
   id: CMXenoQueen
   components:
+  # XenoMaturing moves this ordering onto CMXenoQueen once they mature
   - type: RMCActionOrder
-    id: CMXenoQueen
-  # - type: XenoEvolution #can be enabled for events like april fools.
-  #   strains:
-  #   - RMCXenoQueenMaid
+    id: CMXenoQueenImmature
+    #  - type: XenoEvolution #can be enabled for events like april fools.
+    #    strains:
+    #    - RMCXenoQueenMaid
+    #    - RMCXenoQueenMagical
+    #    - RMCXenoQueenChristmas
+    #    - RMCXenoQueenWitch
 
 - type: entity
   id: XenoLeaderPheromoneRelay
@@ -306,8 +333,15 @@
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
       sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+  # Reskin of the queen with the same actions, so it shares her action bar order
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
   - type: XenoStrain
     name: rmc-xeno-maid-name
     description: rmc-xeno-maid-description
@@ -315,6 +349,177 @@
   - type: OwOAccent
   - type: Speech
     speechSounds: Cat
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenMagical
+  suffix: Magical Girl Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/magicalgirl_queen/magical_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/magicalgirl_queen/magical_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  # Reskin of the queen with the same actions, so it shares her action bar order
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
+  - type: XenoStrain
+    name: rmc-xeno-magicalgirl-name
+    description: rmc-xeno-magicalgirl-description
+    popup: rmc-xeno-magicalgirl-popup
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenWitch
+  suffix: Witch Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/witch_queen/witch_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/witch_queen/witch_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
+  - type: XenoStrain
+    name: rmc-xeno-witch-name
+    description: rmc-xeno-witch-description
+    popup: rmc-xeno-witch-popup
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenChristmas
+  suffix: Christmas Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/christmas_queen/christmas_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/christmas_queen/christmas_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
+  - type: XenoStrain
+    name: rmc-xeno-christmasqueen-name
+    description: rmc-xeno-christmasqueen-description
+    popup: rmc-xeno-christmasqueen-popup
+
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenBlood
+  suffix: Blood Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/blood_queen.rsi
+  - type: XenoStrain
+    name: rmc-xeno-bloodqueen-name
+    description: rmc-xeno-bloodqueen-description
+    popup: rmc-xeno-bloodqueen-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidWeak
+    - ActionXenoPheromones
+    - ActionXenoWordQueen
+    - ActionXenoPsychic
+    - ActionXenoMassacre
+    - ActionXenoBloodDrain
+    - ActionXenoManageHive
+  - type: XenoMaturing
+    critThreshold: 1500
+    deadThreshold: 1600
+    addComponents:
+    - type: XenoDoom
+    - type: CrusherShield
+      shieldEffect: blood-shield
+      plasmaCost: 200
+      shieldDuration: 5
+      explosionResistanceDuration: 0
+      damageReduction: 5
+    addActions:
+    - ActionXenoDoomBloodQueen
+    - ActionXenoDefensiveShieldBloodQueen
+  - type: CMArmor
+    xenoArmor: 35
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+  - type: XenoPheromones
+    pheromonesMultiplier: 3
+    pheroSuffix: strong
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoFruit
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 50
+  - type: XenoBrutalize
+    damage:
+      groups:
+        Brute: 40
+    baseCooldownReduction: 0
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 68
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.68
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.755
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.5275
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: XenoFootstepLarge
+      params:
+        volume: 4
+  - type: XenoMassacre
+  - type: XenoBloodDrain
+    biteDamage:
+      groups:
+        Brute: 20
+  - type: RMCActionOrder
+    id: RMCXenoQueenBlood
+
 
 - type: entity
   parent: StationAiHolo

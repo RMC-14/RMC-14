@@ -6,6 +6,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    drawdepth: Effects
     layers:
     - state: bullet
       shader: unshaded
@@ -21,6 +22,8 @@
     thresholds:
     - range: 22
       falloff: 10
+  - type: ProjectileCoverInteraction
+    ignoreCover: true
 
 - type: entity
   parent: RMCBaseBullet
@@ -44,9 +47,10 @@
     thresholds:
     - range: 22
       falloff: 10
+  - type: ProjectileCoverInteraction
+    ignoreCover: true
 
 - type: entity
-  abstract: true
   parent: RMCBaseBullet
   id: RMCBaseBulletSentryFireProjectile
   name: flaming ball
@@ -55,7 +59,6 @@
   components:
   - type: IgniteOnProjectileHit
   - type: IgnorePredictionHide
-  - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
     layers:
@@ -89,6 +92,7 @@
         - BulletImpassable
   - type: TriggerOnCollide
     fixtureID: projectile
+  - type: DeleteOnTrigger
 
 - type: entity
   parent: RMCBaseBulletSentryFireProjectile
@@ -133,6 +137,7 @@
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: SpawnOnTerminate
     spawn: RMCSmokeFireSentry
+    spawnOffset: 0.5
 
 - type: Tag
   id: RMCBulletSentryFireProjectile

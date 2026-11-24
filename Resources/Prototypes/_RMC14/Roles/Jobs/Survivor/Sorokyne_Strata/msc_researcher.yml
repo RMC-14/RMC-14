@@ -1,11 +1,9 @@
 - type: job
-  parent: CMSurvivor
+  parent: CMSurvivorScientist
   id: CMJobSurvivorMSCResearcher
   name: rmc-job-name-survivor-msc-researcher
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
-  ranks:
-    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorMSCResearcher
   accessGroups:
   - ColonistMedical
@@ -13,15 +11,21 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      - German
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      - German
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillResearch: 1
+      preset: RMCSkillPresetSurvivorResearcher
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMSCResearcher
     - type: RMCSurvivor
