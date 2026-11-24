@@ -2,7 +2,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Dropship.Utility.Components;
+namespace Content.Shared._RMC14.PayloadDeployment.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCOrbitalDeployerComponent : Component

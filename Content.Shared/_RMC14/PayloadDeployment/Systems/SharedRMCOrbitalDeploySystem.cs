@@ -1,4 +1,5 @@
-using Content.Shared._RMC14.Dropship.Utility.Components;
+using System.Linq;
+using Content.Shared._RMC14.PayloadDeployment.Components;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Coordinates;
 using Content.Shared.Popups;
@@ -10,9 +11,9 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._RMC14.Dropship.Utility.Systems;
+namespace Content.Shared._RMC14.PayloadDeployment.Systems;
 
-public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
+public abstract class SharedRMCOrbitalDeploySystem : EntitySystem
 {
     [Dependency] protected readonly SharedContainerSystem Container = default!;
 
@@ -25,22 +26,23 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
-    private static readonly EntProtoId DefaultDropPodPrototype = "RMCSupplyDropPod";
+    protected static readonly EntProtoId DefaultDropPodPrototype = "RMCSupplyDropPod";
 
     /// <summary>
-    ///     Tries to paradrop an entity to the target's coordinates.
+    ///     Tries to deploy the payload configured for an orbital deployer to the target's coordinates.
     /// </summary>
-    /// <param name="deployer">The entity being deployed, or the entity deciding what to deploy</param>
+    /// <param name="deployer">The entity launching the payload</param>
+    /// <param name="payloadHolder">The entity holding the deployer's payload container</param>
     /// <param name="target">The target to deploy on</param>
     /// <param name="user">The entity attempting to deploy</param>
-    /// <param name="deployerComp">The <see cref="RMCOrbitalDeployerComponent"/></param>
+    /// <param name="deployerComp">The deployer's <see cref="RMCOrbitalDeployerComponent"/></param>
     /// <returns>True if deploying was successful</returns>
-    public bool TryDeploy(EntityUid deployer, EntityUid target, EntityUid user, RMCOrbitalDeployerComponent? deployerComp = null)
+    public bool TryDeployFromDeployer(EntityUid deployer, EntityUid payloadHolder, EntityUid target, EntityUid user, RMCOrbitalDeployerComponent? deployerComp = null)
     {
         if (!Resolve(deployer, ref deployerComp, false))
             return false;
 
-        if (!Container.TryGetContainer(Transform(deployer).ParentUid, deployerComp.DeployableContainerSlotId, out var container))
+        if (!Container.TryGetContainer(payloadHolder, deployerComp.DeployableContainerSlotId, out var container))
             return false;
 
         var deployableEnt = container.ContainedEntities.Count > 0 ? container.ContainedEntities[0] : default;
@@ -48,7 +50,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
         if (!TryComp(deployableEnt, out RMCOrbitalDeployableComponent? deployable))
             return false;
 
-        var dropLocation =_map.AlignToGrid(target.ToCoordinates());
+        var dropLocation = _map.AlignToGrid(target.ToCoordinates());
 
         if (deployable.DeployBlacklist is { } blacklist)
         {
@@ -82,9 +84,10 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             Dirty(deployableEnt, deployable);
         }
 
-        var openAt = TimeSpan.FromSeconds(deployable.ArrivingSoundDelay + deployable.DropDuration);
         var landingDamage = deployable.LandingDamage;
+        var landingEffect = deployable.LandingEffectId;
         var arrivingSound = deployable.ArrivingSound;
+        var openDelay = TimeSpan.Zero;
 
         if (deployable.DropPod)
         {
@@ -98,61 +101,82 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             Container.Insert(deploying, podContainer);
 
             deploying = dropPod;
-            openAt += podComponent.OpenTimeRemaining;
+            openDelay = podComponent.OpenTimeRemaining;
             landingDamage = podComponent.LandingDamage;
+            landingEffect = podComponent.LandingEffectId;
             arrivingSound = podComponent.ArrivingSound;
         }
 
-        _audio.PlayPredicted(deployerComp.LaunchSound, _transform.GetMoverCoordinates(deployer), user);
+        _audio.PlayPredicted(deployable.LaunchSound ?? deployerComp.LaunchSound, _transform.GetMoverCoordinates(deployer), user);
         SupplyDrop.LaunchSupplyDrop(deploying,
             _transform.ToMapCoordinates(dropLocation),
             deployable.ArrivingSoundDelay,
             deployable.DropDuration,
-            openAt,
+            openDelay,
             landingDamage,
-            deployable.LandingEffectId,
+            landingEffect,
             arrivingSound,
             deployerComp.DropScatter,
-            deployable.UseParachute);
+            deployable.UseParachute,
+            null,
+            deployable.DropPod);
 
         return true;
     }
 
-    /// <summary>
-    ///     Puts an entity in a drop pod and supply drops it to the given coordinates.
-    /// </summary>
-    /// <param name="deploying">The entity being deployed.</param>
-    /// <param name="dropLocation">The location the drop pod should land at.</param>
-    /// <param name="skyFallDuration">How long it should take before the drop pod appears at the target map and starts it's falling animation.</param>
-    /// <param name="dropDuration">The duration of the falling animation.</param>
-    /// <param name="timeToOpen">The amount of time in seconds it takes after landing for the drop pod to release it's contents.</param>
-    /// <param name="dropScatter">How far away from the given drop location the drop pod can be randomly dropped to.</param>
-    /// <param name="useParachute">Whether the drop pod should have a parachute during it's falling animation.</param>
-    public void DoOrbitalDeploy(EntityUid deploying, MapCoordinates dropLocation, float skyFallDuration = 5, float dropDuration = 3, float timeToOpen = 2, int dropScatter = 0, bool useParachute = true)
+    protected bool TryCreateOrbitalDropPod(float timeToOpen, out Entity<SupplyDropPodComponent> dropPod)
     {
-        var dropPod = Spawn(DefaultDropPodPrototype);
-        DebugTools.Assert(HasComp<SupplyDropPodComponent>(dropPod));
+        dropPod = default;
+        if (!float.IsFinite(timeToOpen) || timeToOpen < 0)
+            return false;
 
+        var pod = Spawn(DefaultDropPodPrototype);
+        if (!TryComp(pod, out SupplyDropPodComponent? podComponent))
+        {
+            QueueDel(pod);
+            return false;
+        }
+
+        podComponent.OpenTimeRemaining = TimeSpan.FromSeconds(timeToOpen);
+        Dirty(pod, podComponent);
+        dropPod = (pod, podComponent);
+        return true;
+    }
+
+    protected void LaunchOrbitalDropPod(EntityUid dropPod,
+        MapCoordinates dropLocation,
+        float skyFallDuration,
+        float dropDuration,
+        bool useParachute,
+        IReadOnlyList<EntityCoordinates>? launchCoordinates = null,
+        int dropScatter = 0,
+        MapCoordinates? stagingCoordinates = null,
+        bool showLandingWarning = true)
+    {
         if (!TryComp(dropPod, out SupplyDropPodComponent? podComponent))
             return;
 
-        _audio.PlayPvs(podComponent.LaunchSound, _transform.GetMoverCoordinates(deploying)); // Play sound at the location the entity is deployed from.
-
-        var openAt = TimeSpan.FromSeconds(skyFallDuration + dropDuration + timeToOpen);
-        var podContainer = Container.EnsureContainer<Container>(dropPod, podComponent.DeploySlotId);
-        Container.Insert(deploying, podContainer);
-
-        _audio.PlayPvs(podComponent.LaunchSound, _transform.GetMoverCoordinates(deploying)); // Play sound at the location of the entity after being inserted into the drop pod.
+        if (launchCoordinates != null)
+        {
+            foreach (var launch in launchCoordinates.Distinct())
+            {
+                _audio.PlayPvs(podComponent.LaunchSound, launch);
+            }
+        }
 
         SupplyDrop.LaunchSupplyDrop(dropPod,
-            _transform.ToMapCoordinates(_map.AlignToGrid(_transform.ToCoordinates(dropLocation))),
+            dropLocation,
             skyFallDuration,
             dropDuration,
-            openAt,
+            podComponent.OpenTimeRemaining,
             podComponent.LandingDamage,
-            podComponent.LandingEffectId,
+            showLandingWarning ? podComponent.LandingEffectId : null,
             podComponent.ArrivingSound,
             dropScatter,
-            useParachute);
+            useParachute,
+            stagingCoordinates,
+            true);
+
+        _audio.PlayPvs(podComponent.LaunchSound, _transform.GetMoverCoordinates(dropPod));
     }
 }
