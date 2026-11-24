@@ -91,10 +91,9 @@
       sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
       state: all
   - type: MountableWeapon
-  - type: GunUnskilledPenalty
-    firearms: 0
-    angleIncrease: 0
-    accuracyAddMult: 0
+  - type: GunSkilledScatter
+    skilledMinimum: 0
+    unskilledAngleIncrease: 0
   - type: Scope
     scopePopup: null
     unScopePopup: null
@@ -196,6 +195,13 @@
     - suitStorage
   - type: Item
     size: Large
+
+- type: entity
+  parent: RMCMagazineML66D
+  id: RMCMagazineML66DEmpty
+  suffix: Empty
+  components:
+  - type: RMCEmptyMag
 
 - type: entity
   parent: RMCMagazineML66D

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.GameStates;
 using Content.Server._RMC14.Marines;
@@ -9,6 +9,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
@@ -46,6 +47,7 @@ namespace Content.Server._RMC14.Dropship;
 public sealed class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
@@ -65,7 +67,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCPvsSystem _rmcPvs = default!;
-    [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
     [Dependency] private readonly AreaSystem _area = default!;
 
     private EntityQuery<DockingComponent> _dockingQuery;
@@ -120,41 +121,21 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         OnRefreshUI(ent, ref args);
 
-        var map = args.FromMapUid;
-        if (HasComp<AlmayerComponent>(map))
+        if (args.FromMapUid is { } warship && HasComp<AlmayerComponent>(warship))
         {
-            var ev = new DropshipLaunchedFromWarshipEvent(ent);
+            var ev = new DropshipLaunchedFromWarshipEvent(ent, warship);
             RaiseLocalEvent(ent, ref ev, true);
         }
 
         RelayToMountedEntities(ent, args);
         RelayToDropshipDepartureLocation(ent, args);
 
-        if (!_hijack) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
+        if (ent.Comp.Crashed)
         {
-            int xenoCount = 0;
-            string dropshipName = string.Empty;
-            var dropship = EnsureComp<DropshipComponent>(_dropshipId);
-            var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
-            while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
-            {
-                if (xform.GridUid == _dropshipId && mobState.CurrentState != MobState.Dead)
-                {
-                    xenoCount++;
-                    if (string.IsNullOrEmpty(dropshipName) && _area.TryGetArea(uid, out _, out var areaProto))
-                        dropshipName = areaProto.Name;
-                }
-            }
-
-            if (xenoCount > 0)
-            {
-                _alertLevelSystem.Set(RMCAlertLevels.Red, _dropshipId, false, false);
-                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
-                    ("name", dropshipName),
-                    ("count", xenoCount)),
-                    dropship.UnidentifledlifesignsSound);
-            }
+            var ev = new DropshipHijackLaunchedEvent(ent);
+            RaiseLocalEvent(ref ev);
         }
+
     }
 
     private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)
@@ -179,6 +160,27 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         RelayToMountedEntities(ent, args);
         RelayToDropshipDestination(ent, args);
+
+        if (!ent.Comp.Crashed) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
+        {
+            int xenoCount = 0;
+            string dropshipName = Name(ent);
+            var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+            while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
+            {
+                if (xform.GridUid == ent && mobState.CurrentState != MobState.Dead)
+                    xenoCount++;
+            }
+
+            if (xenoCount > 0)
+            {
+                _alertLevel.Set(RMCAlertLevels.Red, ent, false, false);
+                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
+                    ("name", dropshipName),
+                    ("count", xenoCount)),
+                    ent.Comp.UnidentifledlifesignsSound);
+            }
+        }
 
         ent.Comp.DepartureLocation = ent.Comp.Destination;
         Dirty(ent);
@@ -508,12 +510,17 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 Audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
                 var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
-                _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+                _marineAnnounce.AnnounceARESStaging(
+                    dropshipId.Value,
+                    marineText,
+                    dropship.MarineHijackSound,
+                    new LocId("rmc-announcement-dropship-message"),
+                    new RMCAnnouncementOverlay(_alertLevel.GetOverlay(RMCAlertLevels.Red), marineText));
 
                 var generalQuartersText = Loc.GetString("rmc-announcement-general-quarters");
                 Timer.Spawn(TimeSpan.FromSeconds(10), () =>
                 {
-                    _alertLevelSystem.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
+                    _alertLevel.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
                     _marineAnnounce.AnnounceARESStaging(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
                 });
             }
@@ -824,7 +831,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 dropship.AnnouncedCrash = true;
                 Dirty(uid, dropship);
 
-                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-emergency-dropship-crash"), dropship.CrashWarningSound);
+                var crashAnnouncement = Loc.GetString("rmc-announcement-emergency-dropship-crash");
+                _marineAnnounce.AnnounceToMarines(
+                    crashAnnouncement,
+                    dropship.CrashWarningSound,
+                    overlay: new RMCAnnouncementOverlay(_alertLevel.GetOverlay(RMCAlertLevels.Delta), crashAnnouncement));
                 continue;
             }
 

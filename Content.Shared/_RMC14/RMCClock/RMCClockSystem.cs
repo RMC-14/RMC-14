@@ -16,22 +16,25 @@ public sealed class RMCClockSystem : EntitySystem
         SubscribeLocalEvent<RMCClockComponent, AccessoryRelayedEvent<ExaminedEvent>>(OnEquipedExamined);
     }
 
-    private string GetTime()
+    public DateTime GetWorldTime()
     {
-        var worldTime = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.TimeOffset ?? TimeSpan.Zero) + _ticker.RoundDuration();
-        var worldDate = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.DateOffset ?? DateTime.Today.AddYears(100))
-                        + worldTime;
+        var globalTime = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault();
+        var worldTime = (globalTime?.TimeOffset ?? TimeSpan.Zero) + _ticker.RoundDuration();
+        return (globalTime?.DateOffset ?? DateTime.Today.AddYears(100)) + worldTime;
+    }
 
-        return worldDate.ToString("dd MMMM, yyyy - HH:mm");
+    private string GetFormattedTime()
+    {
+        return GetWorldTime().ToString("dd MMMM, yyyy - HH:mm");
     }
 
     private void OnExamined(Entity<RMCClockComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("rmc-clock-examine", ("device", ent.Owner), ("time", GetTime())));
+        args.PushMarkup(Loc.GetString("rmc-clock-examine", ("device", ent.Owner), ("time", GetFormattedTime())));
     }
 
     private void OnEquipedExamined(Entity<RMCClockComponent> ent, ref AccessoryRelayedEvent<ExaminedEvent> args)
     {
-        args.Args.PushMarkup(Loc.GetString("rmc-clock-examine", ("device", ent.Owner), ("time", GetTime())));
+        args.Args.PushMarkup(Loc.GetString("rmc-clock-examine", ("device", ent.Owner), ("time", GetFormattedTime())));
     }
 }

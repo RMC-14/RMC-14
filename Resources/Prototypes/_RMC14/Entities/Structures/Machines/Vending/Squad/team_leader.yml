@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechFLGear
-  name: ColMarTech fireteam leader gear rack
+  name: ASRS fireteam leader gear rack
   description: An automated gear rack for fireteam leaders.
   components:
   - type: AccessReader
@@ -135,6 +135,8 @@
         points: 10
       - id: RMCLaserDesignator
         points: 15
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 15
     - name: Helmet Optics
       entries:
       - id: RMCVisorNightVision
@@ -160,7 +162,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechFLEquipment
-  name: ColMarTech fireteam leader equipment rack
+  name: ASRS fireteam leader equipment rack
   description: An automated rack hooked up to a colossal storage of fireteam leader standard-issue equipment.
   components:
   - type: AccessReader
@@ -258,6 +260,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
+  categories: [ HideSpawnMenu ]
   description: Contains a laser designator, and two packs of signal flares.
   components:
   - type: Sprite
