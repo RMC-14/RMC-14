@@ -44,7 +44,6 @@
                 "--cvar", "game.lobbyenabled=true",
                 "--cvar", "game.defaultpreset=CMDistressSignal",
                 "--cvar", "game.map=Almayer",
-                // seconds from the first player connecting until roundstart
                 "--cvar", "game.lobbyduration=10",
                 "--cvar", "rmc.planet_map_vote=false",
                 "--cvar", "rmc.distress_xenos_minimum=0",
