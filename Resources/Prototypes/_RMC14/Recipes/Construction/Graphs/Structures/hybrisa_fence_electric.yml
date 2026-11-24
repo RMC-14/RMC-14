@@ -1,4 +1,4 @@
-﻿- type: constructionGraph
+- type: constructionGraph
   parent: RMC
   id: RMCFenceHybrisaElectric
   start: start
@@ -21,7 +21,9 @@
     edges:
     - to: rmcFenceBroken
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 1.0
 
   - node: rmcFenceBroken
@@ -34,7 +36,9 @@
         amount: 10
       - !type:DeleteEntity
       steps:
-      - tool: Cutting
+      - tools:
+        - Cutting
+        - FenceCutting
         doAfter: 5.0
     - to: fenceMetal
       steps:

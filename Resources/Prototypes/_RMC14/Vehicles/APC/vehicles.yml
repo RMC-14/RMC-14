@@ -5,6 +5,10 @@
   name: armored personnel carrier
   description: A rugged armored personnel carrier outfitted for battlefield support.
   components:
+  - type: VehicleSafety
+    icon:
+      sprite: _RMC14/Interface/map_blips_large.rsi
+      state: apc
   - type: VehicleLock
     access:
     - CMAccessCrewman

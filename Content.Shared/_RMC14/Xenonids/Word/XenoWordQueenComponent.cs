@@ -1,6 +1,8 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared._RMC14.Announce;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Word;
 
@@ -13,4 +15,7 @@ public sealed partial class XenoWordQueenComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoQueenCommand", AudioParams.Default.WithVolume(-6));
+
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent>? AnnouncementOverlay = "RMCAnnouncementXenoQueen";
 }

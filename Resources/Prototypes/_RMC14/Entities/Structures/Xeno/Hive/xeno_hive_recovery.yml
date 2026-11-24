@@ -65,6 +65,11 @@
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveRecoveryNodeXeno
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: recovery_node
+    opacity: 0.4
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: WarpPoint
@@ -109,3 +114,8 @@
     id: HivePlasmaTreeXeno
   - type: WarpPoint
     location: plasma tree
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: recovery_node
+    opacity: 0.4

@@ -19,6 +19,16 @@ public enum OverwatchLocation
 }
 
 [Serializable, NetSerializable]
+public enum OverwatchDirection
+{
+    Reset = 0, // Used for resetting eye offset and zoom back to default
+    North = 1,
+    South = 2,
+    East  = 3,
+    West  = 4
+}
+
+[Serializable, NetSerializable]
 public enum OverwatchConsoleUI
 {
     Key,
@@ -112,7 +122,7 @@ public sealed class OverwatchConsoleSupplyDropSaveBuiMsg(int longitude, int lati
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsoleLocationCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+public sealed class OverwatchConsoleSupplyDropCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
 {
     public readonly int Index = index;
     public readonly string Comment = comment;
@@ -148,9 +158,22 @@ public sealed class OverwatchConsoleOrbitalCommentBuiMsg(int index, string comme
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchCameraAdjustOffsetMsg(NetEntity actor, OverwatchDirection direction) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Actor = actor;
+    public readonly OverwatchDirection Direction = direction;
+}
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUserInterfaceMessage
 {
     public readonly string Message = message;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSendMessageResultBuiMsg(bool sent) : BoundUserInterfaceMessage
+{
+    public readonly bool Sent = sent;
 }
 
 [Serializable, NetSerializable]
