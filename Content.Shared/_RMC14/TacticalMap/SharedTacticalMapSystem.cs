@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Robust.Shared.Configuration;
 
