@@ -41,7 +41,7 @@
     - type: RMCTrackable
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPSpetsnazWeaponOnly
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: RMCSurvivor
     - type: RMCAllowSuitStorage
   hidden: true

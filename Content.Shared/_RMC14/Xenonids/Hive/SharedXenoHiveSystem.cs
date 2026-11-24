@@ -6,6 +6,7 @@ using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
@@ -26,6 +27,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
@@ -34,6 +36,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -52,6 +55,10 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     private EntityQuery<HiveMemberComponent> _memberQuery;
 
     private readonly HashSet<EntityUid> _contacting = new();
+
+    private TimeSpan _burrowedLarvaHiveCoreInvincibilityTimeSeconds;
+    private TimeSpan _burrowedLarvaQueenInvincibilityTime;
+    private TimeSpan _burrowedLarvaFallbackInvincibilityTime;
 
     public override void Initialize()
     {
@@ -73,6 +80,10 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         SubscribeLocalEvent<HiveGunComponent, AmmoShotEvent>(OnHiveGunShot);
 
         SubscribeLocalEvent<XenoStunnedPreventCollisionComponent, PreventCollideEvent>(OnStunnedPreventCollide);
+
+        Subs.CVar(_config, RMCCVars.BurrowedLarvaHiveCoreInvincibilityTimeSeconds, v => _burrowedLarvaHiveCoreInvincibilityTimeSeconds = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.BurrowedLarvaQueenInvincibilityTimeSeconds, v => _burrowedLarvaQueenInvincibilityTime = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.BurrowedLarvaFallbackInvincibilityTimeSeconds, v => _burrowedLarvaFallbackInvincibilityTime = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -170,6 +181,22 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return null;
 
         return (uid, comp);
+    }
+
+    /// <summary>
+    /// Gets the hive component either of the hive entity itself, or the hive of a hive member.
+    /// </summary>
+    /// <param name="uid">uid of the hive itself, or a member of a hive.</param>
+    public Entity<HiveComponent>? GetHiveOrSelf(EntityUid uid)
+    {
+        if (_query.TryComp(uid, out var comp))
+        {
+            return TerminatingOrDeleted(uid) ? null : (uid, comp);
+        }
+        else
+        {
+            return GetHive(uid);
+        }
     }
 
     public Entity<HiveComponent>? GetHiveByName(string hiveName)
@@ -478,11 +505,11 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         // The duration depends on where the larva spawns, in priority order: hive core, then the queen, then a fallback hive member.
         TimeSpan invincibilityTime;
         if (TrySpawnAt<HiveCoreComponent>())
-            invincibilityTime = hive.Comp.BurrowedLarvaHiveCoreInvincibilityTime;
+            invincibilityTime = _burrowedLarvaHiveCoreInvincibilityTimeSeconds;
         else if (TrySpawnAt<XenoEvolutionGranterComponent>())
-            invincibilityTime = hive.Comp.BurrowedLarvaQueenInvincibilityTime;
+            invincibilityTime = _burrowedLarvaQueenInvincibilityTime;
         else if (TrySpawnAt<XenoComponent>())
-            invincibilityTime = hive.Comp.BurrowedLarvaFallbackInvincibilityTime;
+            invincibilityTime = _burrowedLarvaFallbackInvincibilityTime;
         else
             return false;
 

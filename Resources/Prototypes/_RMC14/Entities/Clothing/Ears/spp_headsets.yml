@@ -25,7 +25,8 @@
 - type: radioChannel
   id: SPPMed
   name: chat-radio-spp-med
-  keycode: "i"
+  keycode: "m"
+  radioPrefix: "#"
   frequency: 1254
   color: "#9b0612"
   longRange: true
@@ -200,7 +201,7 @@
   parent: RMCHeadsetDistressSPP
   id: RMCHeadsetDistressHalcyon
   name: halcyon corporate headset
-  description: A headset commonly worn by Halcyon Dynamics corporate personnel.
+  description: A headset commonly worn by Halcyon corporate personnel.
   components:
   - type: ContainerFill
     containers:
@@ -227,7 +228,7 @@
     - SquadLeaderSPP
     - PrimaryLandingZone
   - type: GrantAreaInfo
-  
+
 - type: entity
   parent: RMCHeadsetSPPPVE
   id: RMCHeadsetSPPLeaderPVE

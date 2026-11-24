@@ -279,12 +279,12 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             if (_entityWhitelist.IsWhitelistFail(explosion.Whitelist, target))
                 continue;
 
-            DoDirectExplosionDamage(ent, target, user, explosion.ExplosionType, explosion.Damage, explosion.ArmorPiercing);
+            DoDirectExplosionDamage(ent, target, user, explosion.ExplosionType, explosion.Damage, explosion.ArmorPiercing, explosion.IsAtEpicenter);
         }
     }
 
     public void DoDirectExplosionDamage(EntityUid origin, EntityUid target, EntityUid? user,
-        ProtoId<ExplosionPrototype> explosionType, DamageSpecifier damage, int armorPiercing = 0)
+        ProtoId<ExplosionPrototype> explosionType, DamageSpecifier damage, int armorPiercing = 0, bool? isAtEpicenter = null)
     {
         var ev = new GetExplosionResistanceEvent(explosionType);
         RaiseLocalEvent(target, ref ev);
@@ -303,9 +303,11 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);
 
-        // TODO RMC14 add BeforeExplosionReceived when merged in, with params to override direction
+        var bev = new BeforeExplosionRecievedEvent(explosionType, _transform.GetMapCoordinates(origin), damage, isAtEpicenter);
+        RaiseLocalEvent(target, ref bev);
+        var finalDamage = bev.Damage;
 
-        var dam = _damage.TryChangeDamage(target, damage * ev.DamageCoefficient, true, origin: user, tool: origin);
+        var dam = _damage.TryChangeDamage(target, finalDamage * ev.DamageCoefficient, true, origin: user, tool: origin);
 
         if (dam == null)
             return;
@@ -316,13 +318,13 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
     private void OnProneMultBeforeExplosionReceived(Entity<RMCProneExplosionMultComponent> ent, ref BeforeExplosionRecievedEvent args)
     {
-        if (args.HasDirectionOverride == null)
+        if (args.IsAtEpicenter == null)
         {
             var distance = (_transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Position - args.Epicenter.Position).Length();
             if (distance <= ent.Comp.NoMultCenterRadius || (!_standing.IsDown(ent) && !HasComp<XenoRestingComponent>(ent)))
                 return;
         }
-        else if (!args.HasDirectionOverride.Value)
+        else if (args.IsAtEpicenter.Value)
             return;
 
         args.Damage *= ent.Comp.ProneMultiplier;

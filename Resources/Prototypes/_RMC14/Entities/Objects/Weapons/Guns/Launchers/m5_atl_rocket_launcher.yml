@@ -187,6 +187,7 @@
             Blunt: 175
             Heat: 175
         armorPiercing: 100
+        isAtEpicenter: true
   - type: CMExplosionEffect
   - type: RMCScorchEffect
   - type: PointLight
@@ -246,6 +247,7 @@
             Blunt: 150
             Heat: 150
         armorPiercing: 100
+        isAtEpicenter: true
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
     layers:
@@ -321,8 +323,8 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmokeWhitePhosphorusNoSpread
-  categories: [ HideSpawnMenu ]
+  id: RMCSmokeWhitePhosphorus
+  suffix: White Phosphorus
   components:
   - type: Transform
     anchored: true
@@ -343,12 +345,6 @@
     burnColor: "#00b8ff"
   - type: EdgeSpreader
     id: Smoke
-
-- type: entity
-  parent: RMCSmokeWhitePhosphorusNoSpread
-  id: RMCSmokeWhitePhosphorus
-  components:
   - type: EvenSmoke
-    spawn: RMCSmokeWhitePhosphorusNoSpread
     initialSpread: 3
     range: 3

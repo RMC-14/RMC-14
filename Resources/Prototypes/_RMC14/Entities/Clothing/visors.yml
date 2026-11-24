@@ -39,6 +39,17 @@
       color: "#008000"
 
 - type: entity
+  parent: RMCVisorNightVision
+  id: RMCVisorNightVisionAdvanced
+  name: advanced night vision optic
+  suffix: No battery drain
+  description: An insertable visor HUD into a standard UNMC helmet. This type gives a form of night vision and is standard issue in special forces units.
+  components:
+    - type: PowerCellDraw
+      enabled: false
+      drawRate: 0
+
+- type: entity
   parent: RMCVisorBase
   id: RMCVisorMedical
   name: basic medical optic
@@ -109,6 +120,7 @@
   - type: ComponentToggler
     components:
     - type: EyeProtection
+    - type: WeldingVision
 
 - type: entity
   parent: RMCVisorWelding

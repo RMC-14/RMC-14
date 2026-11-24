@@ -42,6 +42,9 @@
     shoes: RMCShoesLaceup
     jumpsuit: RMCJumpsuitLiaisonPilot
     outerClothing: RMCCoatWeYaPilot
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: RMCSurvivorPresetCorporate

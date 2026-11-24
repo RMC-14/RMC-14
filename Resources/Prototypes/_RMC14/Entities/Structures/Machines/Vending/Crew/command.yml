@@ -536,6 +536,7 @@
       - id: CMBeltUtilityCombat
       - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
+      - id: RMCBeltBrowne
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
@@ -628,6 +629,10 @@
       - id: RMCMagazinePistolHandcannonHI
         points: 15
       - id: RMCMagazinePistolHandcannonHIAP
+        points: 20
+      - id: RMCMagazinePistolM1911HI
+        points: 15
+      - id: RMCMagazinePistolM1911HIAP
         points: 20
     - name: Shotgun Ammunition
       entries:
@@ -964,6 +969,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltBrowne
     - name: Patches
       jobs:
       - CMChiefMP

@@ -319,6 +319,8 @@
       - id: CMPackFlare
         amount: 20
         recommended: true
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 5
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
