@@ -156,7 +156,7 @@ namespace Content.Server._RMC14.Mobs
             if (remaining <= TimeSpan.Zero)
                 return;
 
-            SetPostDeathChatMutedUntil((ghostUid, ghost), GameTiming.CurTime + remaining);
+            SetPostDeathChatMutedUntil((ghostUid, ghost), GameTiming.RealTime + remaining);
         }
 
         private void ChangeGhostBoo(Entity<GhostComponent> ghost)

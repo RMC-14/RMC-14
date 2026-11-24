@@ -20,6 +20,20 @@ public sealed partial class GhillieSuitComponent : Component
     public float Opacity = 0.01f;
 
     /// <summary>
+    /// How desaturated the entity should become while invisible.
+    /// 0 = no desaturation, 1 = fully grayscale.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float GreyFactor;
+
+    /// <summary>
+    /// How dark the entity should become while invisible.
+    /// 0 = no change, 1 = every color becomes black
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float DarkFactor;
+
+    /// <summary>
     /// How much opacity is added whenever the user fires a gun.
     /// </summary>
     [DataField, AutoNetworkedField]

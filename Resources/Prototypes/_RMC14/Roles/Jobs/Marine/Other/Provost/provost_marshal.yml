@@ -50,6 +50,13 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-marshal
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: general2
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
   hidden: true
 
 - type: randomHumanoidSettings

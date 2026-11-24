@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMRequisitions
+  firstDeploymentAssignment: rmc-announcement-first-deployment-assignment-logistics
   name: department-CMRequisitions
   description: cm-department-Requisitions-description
   color: "#5F4519"

@@ -289,7 +289,7 @@ rmc-job-prefix-fire-protection-specialist = FPPB
 
 rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
-rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
+rmc-job-name-survivor-halcyon-liaison = Halcyon - Corporate Liaison
 
 # Sorokyne SPP special forces insert survs
 
@@ -328,6 +328,8 @@ rmc-job-name-spetsnaz-synth = Spetsnaz SRU Synthetic
 rmc-job-prefix-soro-spetsnaz-synth = B/SRU SYN
 
 # Trijent survs
+
+rmc-job-name-survivor-trijent-roughneck = Roughneck
 
 rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
 

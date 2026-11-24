@@ -222,6 +222,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/large_ammo_mag_pmc.rsi
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargeTR76S
+  suffix: Filled, TR76S
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSniperTR76
+      amount: 4
+
 # Pistol Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
@@ -352,6 +362,38 @@
     - id: CMShellShotgunBeanbag
       amount: 7
 
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeCMBDeputyERTFilled
+  suffix: CMB Deputy, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 4
+    - id : CMShellShotgunSlugs
+      amount: 2
+    - id: CMShellShotgunBeanbag
+      amount: 1
+
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeCMBMarshalERTFilled
+  suffix: CMB Marshal, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 3
+    - id: CMShellShotgunIncendiaryBuckshot
+      amount: 1
+    - id: CMShellShotgunIncendiary
+      amount: 1
+    - id : CMShellShotgunSlugs
+      amount: 1
+    - id: CMShellShotgunBeanbag
+      amount: 1
+
 # Large Documents Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -418,6 +460,15 @@
   name: L96 flare pouch
   suffix: RCM
   description: A pouch designed to hold flares used by the Royal Crown Marines. Refillable with an L96 flare pack.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/flare_rcm.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
 
 - type: entity
   parent: RMCPouchFlare

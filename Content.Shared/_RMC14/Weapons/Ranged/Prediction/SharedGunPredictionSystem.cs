@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.CombatMode;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -12,6 +13,7 @@ public abstract class SharedGunPredictionSystem : EntitySystem
 {
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly GunAkimboSystem _akimbo = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleRideSurfaceSystem _rideSurface = default!;
@@ -26,15 +28,17 @@ public abstract class SharedGunPredictionSystem : EntitySystem
     public List<EntityUid>? ShootRequested(NetEntity netGun, NetCoordinates coordinates, NetEntity? target, List<int>? projectiles, ICommonSession session, bool rearmSemiAuto = false)
     {
         var user = session.AttachedEntity;
+        var gunUid = GetEntity(netGun);
 
         if (user == null ||
             !_combatMode.IsInCombatMode(user) ||
-            !_gun.TryGetGun(user.Value, out var ent, out var gun))
+            !TryComp(gunUid, out GunComponent? gun))
         {
             return null;
         }
 
-        if (ent != GetEntity(netGun))
+        var offHand = !IsActiveGun(user.Value, gunUid);
+        if (offHand && !_akimbo.TryConsumeOffHandShot(user.Value, gunUid))
             return null;
 
         var shootCoordinates = GetCoordinates(coordinates);
@@ -50,9 +54,18 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         gun.ShootCoordinates = shootCoordinates;
         gun.Target = targetUid;
 #pragma warning restore RA0002
-        if (rearmSemiAuto)
-            _gun.ResetShotCounter(ent, gun);
+        if (rearmSemiAuto || offHand)
+            _gun.ResetShotCounter(gunUid, gun);
 
-        return _gun.AttemptShoot(user.Value, ent, gun, projectiles, session);
+        var shot = _gun.AttemptShoot(user.Value, gunUid, gun, projectiles, session);
+        if (offHand)
+            _gun.EndBurst(gunUid, gun);
+
+        return shot;
+    }
+
+    private bool IsActiveGun(EntityUid user, EntityUid gun)
+    {
+        return _gun.TryGetGun(user, out var activeGun, out _) && activeGun == gun;
     }
 }

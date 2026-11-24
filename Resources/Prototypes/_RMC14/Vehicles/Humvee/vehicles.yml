@@ -5,6 +5,10 @@
   name: humvee
   description: A fast armored utility vehicle outfitted for patrols and support.
   components:
+  - type: VehicleSafety
+    icon:
+      sprite: _RMC14/Interface/map_blips_large.rsi
+      state: humvee
   - type: VehicleLock
     access:
     - CMAccessCrewman

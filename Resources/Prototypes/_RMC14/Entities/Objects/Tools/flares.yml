@@ -431,8 +431,10 @@
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
     - state: m94_e
+      offset: 0, 0.05
       map: [ "emptyLayer" ]
     - state: m94
+      offset: 0, 0.05
       map: [ "fullLayer" ]
   - type: Appearance
   - type: GenericVisualizer
@@ -462,8 +464,10 @@
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
     - state: ck25_e
+      offset: 0, 0.05
       map: [ "emptyLayer" ]
     - state: ck25
+      offset: 0, 0.05
       map: [ "fullLayer" ]
   - type: CMItemSlots
     startingItem: CMFlareColonist
@@ -520,8 +524,10 @@
   - type: Sprite
     layers:
     - state: m89_e
+      offset: 0, 0.05
       map: [ "emptyLayer" ]
     - state: m89
+      offset: 0, 0.05
       map: [ "fullLayer" ]
   - type: CMItemSlots
     count: 8
@@ -756,8 +762,10 @@
   - type: Sprite
     layers:
     - state: l96_e
+      offset: 0, 0.05
       map: [ "emptyLayer" ]
     - state: l96
+      offset: 0, 0.05
       map: [ "fullLayer" ]
   - type: CMItemSlots
     count: 8
@@ -858,8 +866,10 @@
   - type: Sprite
     layers:
     - state: r44_e
+      offset: 0, 0.05
       map: [ "emptyLayer" ]
     - state: r44
+      offset: 0, 0.05
       map: [ "fullLayer" ]
   - type: CMItemSlots
     count: 8
@@ -974,8 +984,10 @@
   - type: Sprite
     layers:
     - state: c18_e
+      offset: 0, 0.05
       map: [ "emptyLayer" ]
     - state: c18
+      offset: 0, 0.05
       map: [ "fullLayer" ]
   - type: CMItemSlots
     count: 8
