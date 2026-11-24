@@ -1,11 +1,6 @@
-﻿using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
-
 namespace Content.Shared._RMC14.TacticalMap;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 [Access(typeof(SharedTacticalMapSystem))]
-public sealed partial class ReopenTacticalMapComponent : Component
-{
+public sealed partial class ReopenTacticalMapComponent : Component;
 
-}
