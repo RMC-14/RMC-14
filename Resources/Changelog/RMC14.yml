@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: SabreML
-  changes:
-  - message: Fixed observers being unable to hear xenos talking if 'Ghost Hearing'
-      was disabled.
-    type: Fix
-  id: 3468
-  time: '2026-07-03T01:32:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10291
 - author: Thereisabear
   changes:
   - message: Console should have less Can't resolve Entity 0 now.
@@ -4340,5 +4332,13 @@
   id: 3967
   time: '2026-11-24T08:43:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11072
+- author: Thereisabear
+  changes:
+  - message: Fixed reinforced barricades not having the proper acid coefficient. 1
+      -> 1.15
+    type: Fix
+  id: 3968
+  time: '2026-11-24T22:03:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11194
 Name: RMC14
 Order: -1
