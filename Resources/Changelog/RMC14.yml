@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed circumstance where hivemind was accessible when it shouldn't have
-      been
-    type: Fix
-  id: 3451
-  time: '2026-07-03T01:17:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10238
 - author: BreakpointDebug1234
   changes:
   - message: Added Provost Pen
@@ -4310,5 +4302,13 @@
   id: 3950
   time: '2026-11-24T06:03:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10696
+- author: Vermidia
+  changes:
+  - message: Added music when King spawns from a cocoon. Said track that plays no
+      longer plays during hijack.
+    type: Add
+  id: 3951
+  time: '2026-11-24T06:13:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10436
 Name: RMC14
 Order: -1
