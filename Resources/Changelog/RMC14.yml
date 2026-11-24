@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed broken platforms/ledges drawing above cades etc.
-    type: Fix
-  id: 3448
-  time: '2026-07-03T01:14:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10254
-- author: IceNoobXD
-  changes:
-  - message: Added a search bar to the Intel UI, which allows you to search for any
-      word in the clues tab. Clues are now sorted alphabetically and received a visual
-      overhaul by shortening the text, making the IDs and codes bigger, and adding
-      color. Also added a button to hide the location information!
-    type: Add
-  - message: Data terminal now has a unpowered sprite and plays a small tune when
-      its done uploading. The SIGINT disk reader also now plays a tune when its done
-      uploading data!
-    type: Tweak
-  id: 3449
-  time: '2026-07-03T01:16:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10245
 - author: Vixting
   changes:
   - message: Synths can now bully xenos (pull, carry, throw the small ones)
@@ -4312,5 +4291,20 @@
   id: 3947
   time: '2026-11-24T05:06:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11082
+- author: Vermidia
+  changes:
+  - message: Carrot Juice no longer gives nutriment and oculine - it heals eye damage
+      directly and acts like other juices otherwise.
+    type: Tweak
+  id: 3948
+  time: '2026-11-24T05:15:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10645
+- author: Vermidia
+  changes:
+  - message: Nutriment is now available in chem dispensers for free.
+    type: Tweak
+  id: 3949
+  time: '2026-11-24T05:15:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10678
 Name: RMC14
 Order: -1
