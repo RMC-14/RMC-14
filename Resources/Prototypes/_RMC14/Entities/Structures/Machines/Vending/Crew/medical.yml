@@ -104,7 +104,7 @@
       - id: RMCCoatSnow
       - id: RMCMaskBalaclava
       - id: RMCMaskTornScarfBlack
-        name: Snow Scarf
+        name: Snow Scarf 
     - name: Headwear
       choices: { CMHeadwear: 1 }
       jobs:
