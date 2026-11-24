@@ -2,7 +2,7 @@
   parent: CMSniperEquipmentCase
   id: RMCScoutSniperSniperEquipmentCase
   name: L144 scout-sniper equipment case
-  description: "A large case containing an L144 long-range rifle, an L8 head-mounted optical device, eight spare magazines of squash-head rounds, and a bipod. \nItems removed from this case cannot be re-inserted."
+  description: "A large case containing an L144 long-range rifle, an L8 head-mounted optical device, four spare HESH magazines, five spare APCR magazines, and a bipod. \nItems removed from this case cannot be re-inserted."
   suffix: Sniper
   components:
   - type: Sprite
@@ -44,7 +44,7 @@
   parent: CMSniperEquipmentCase
   id: RMCScoutSniperMarksmanEquipmentCase
   name: L112A1 scout-sniper equipment case
-  description: "A large case containing an L112A1 designated marksman rifle, an L8 head-mounted optical device, ten spare magazines of squash-head rounds, and a bipod. \nItems removed from this case cannot be re-inserted."
+  description: "A large case containing an L112A1 designated marksman rifle, an L8 head-mounted optical device, nine spare HESH magazines, and a bipod. \nItems removed from this case cannot be re-inserted."
   suffix: Marksman
   components:
   - type: Sprite
