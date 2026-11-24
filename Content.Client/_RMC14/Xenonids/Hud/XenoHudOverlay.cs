@@ -707,7 +707,7 @@ public sealed class XenoHudOverlay : Overlay
             return;
 
         var level = Math.Clamp(hyper.Stacks, 0, hyper.MaxStacks);
-        var icon = new Rsi(_rsiPathHypertension, $"level_{level}");
+        var icon = new Rsi(_rsiPathHypertension, $"hypertension_{level}");
         var texture = _sprite.GetFrame(icon, _timing.CurTime);
 
         var bounds = sprite.Bounds;

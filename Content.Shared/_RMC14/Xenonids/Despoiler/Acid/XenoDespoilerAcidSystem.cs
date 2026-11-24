@@ -16,7 +16,6 @@ public sealed class XenoDespoilerAcidSystem : EntitySystem
 {
     [Dependency] private readonly XenoDespoilerHypertensionSystem _hyper = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedXenoAcidSystem _xenoAcid = default!;
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -109,8 +108,8 @@ public sealed class XenoDespoilerAcidSystem : EntitySystem
 
     /// <summary>
     /// Apply Despoiler's lingering acid to <paramref name="target"/> from
-    /// <paramref name="caster"/>. Uses the caster's <see cref="XenoDespoilerComponent.AcidComponents"/>
-    /// registry to spawn <see cref="UserAcidedComponent"/> on first hit; ticks/visuals
+    /// <paramref name="caster"/>. Uses the caster's <see cref="XenoDespoilerComponent.Acid"/>
+    /// registry to add <see cref="UserAcidedComponent"/> on first hit; ticks/visuals
     /// after that are owned by <see cref="XenoSpitSystem"/>. Increments the Despoiler
     /// acid tier on the target; <paramref name="enhance"/> jumps tier to max and flips
     /// the UserAcided combo flag.

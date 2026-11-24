@@ -11,6 +11,7 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -18,18 +19,19 @@ namespace Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 
 public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly XenoDespoilerCatalyzeFlagSystem _catalyze = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
 
     private EntityQuery<XenoDespoilerComponent> _despoilerQuery;
     private EntityQuery<XenoDespoilerArmedBarrageComponent> _armedQuery;
@@ -44,8 +46,9 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         _projectileQuery = GetEntityQuery<XenoDespoilerAcidBarrageProjectileComponent>();
 
         SubscribeLocalEvent<XenoDespoilerComponent, XenoDespoilerAcidBarrageActionEvent>(OnAction);
-        SubscribeNetworkEvent<XenoDespoilerBarrageStartChargeRequest>(OnStartChargeRequest);
-        SubscribeNetworkEvent<XenoDespoilerBarrageFireRequest>(OnFireRequest);
+
+        SubscribeAllEvent<XenoDespoilerBarrageStartChargeRequest>(OnStartChargeRequest);
+        SubscribeAllEvent<XenoDespoilerBarrageFireRequest>(OnFireRequest);
     }
 
     private void OnAction(Entity<XenoDespoilerComponent> ent, ref XenoDespoilerAcidBarrageActionEvent args)
@@ -93,7 +96,7 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         Dirty(uid, charging);
 
         if (action.ChargeSound is { } sound)
-            _audio.PlayPvs(sound, uid);
+            _audio.PlayPredicted(sound, uid, uid);
     }
 
     private void OnFireRequest(XenoDespoilerBarrageFireRequest msg, EntitySessionEventArgs args)
@@ -120,7 +123,7 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         if (TryGetBarrageAction(uid, out var actionEnt, out var action) &&
             _rmcActions.TryUseAction(uid, actionEnt.Owner, uid))
         {
-            FireVolley(uid, action, charge, coords);
+            FireVolley((uid, charge), action, coords);
             _actions.SetCooldown((actionEnt.Owner, null), action.PostFireCooldown);
             _catalyze.TakeEmpowerment((uid, comp));
         }
@@ -159,18 +162,26 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         return false;
     }
 
-    private void FireVolley(EntityUid uid, XenoDespoilerAcidBarrageActionComponent action,
-        XenoDespoilerChargingBarrageComponent charge, EntityCoordinates target)
+    private void FireVolley(Entity<XenoDespoilerChargingBarrageComponent> ent,
+        XenoDespoilerAcidBarrageActionComponent action,
+        EntityCoordinates target)
     {
-        var heldFor = (float)(_timing.CurTime - charge.StartedAt).TotalSeconds;
+        if (action.FireSound is { } sound)
+            _audio.PlayPredicted(sound, ent, ent);
+
+        // TODO RMC14 prediction and lag compensation
+        if (_net.IsClient)
+            return;
+
+        var heldFor = (float)(_timing.CurTime - ent.Comp.StartedAt).TotalSeconds;
         var chargeFrac = Math.Clamp(heldFor / action.MaxChargeSeconds, 0f, 1f);
 
         var count = (int)MathF.Round(MathHelper.Lerp(action.MinProjectiles, action.MaxProjectiles, chargeFrac));
         count = Math.Clamp(count, action.MinProjectiles, action.MaxProjectiles);
-        if (charge.Empowered)
+        if (ent.Comp.Empowered)
             count += action.EmpowerBonusProjectiles;
 
-        var casterCoords = Transform(uid).Coordinates;
+        var casterCoords = Transform(ent).Coordinates;
         var casterMap = _xform.ToMapCoordinates(casterCoords);
         var targetMap = _xform.ToMapCoordinates(target);
 
@@ -185,7 +196,7 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
         }
         else
         {
-            var fallback = Transform(uid).LocalRotation.ToWorldVec();
+            var fallback = Transform(ent).LocalRotation.ToWorldVec();
             baseAngle = MathF.Atan2(fallback.Y, fallback.X);
             aimDir = Vector2.Normalize(fallback);
         }
@@ -201,11 +212,11 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
             var rangeTiles = _random.Next(action.MinRangeTiles, action.MaxRangeTiles + 1);
 
             var proj = Spawn(action.ProjectileId, spawnCoords);
-            _hive.SetSameHive(uid, proj);
+            _hive.SetSameHive(ent.Owner, proj);
 
             if (_projectileQuery.TryComp(proj, out var projComp))
             {
-                projComp.Shooter = uid;
+                projComp.Shooter = ent;
                 projComp.LingeringAcidChance = action.LingeringAcidChance;
                 var scaleFactor = action.MinProjectileScale + (float)_random.NextDouble() * scaleSpan;
                 projComp.Scale = new Vector2(scaleFactor, scaleFactor);
@@ -213,11 +224,8 @@ public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
             }
 
             _rmcProjectile.SetMaxRange(proj, rangeTiles);
-            _gun.ShootProjectile(proj, unit * rangeTiles, Vector2.Zero, uid, uid, speed: action.ProjectileSpeed);
+            _gun.ShootProjectile(proj, unit * rangeTiles, Vector2.Zero, ent, ent, speed: action.ProjectileSpeed);
         }
-
-        if (action.FireSound is { } sound)
-            _audio.PlayPvs(sound, uid);
     }
 
     public override void Update(float frameTime)

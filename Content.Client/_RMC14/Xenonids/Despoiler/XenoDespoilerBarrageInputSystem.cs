@@ -55,7 +55,7 @@ public sealed class XenoDespoilerBarrageInputSystem : EntitySystem
             if (!TryGetCursorCoords(out var coords))
                 return false;
 
-            RaiseNetworkEvent(new XenoDespoilerBarrageStartChargeRequest(GetNetCoordinates(coords)));
+            RaisePredictiveEvent(new XenoDespoilerBarrageStartChargeRequest(GetNetCoordinates(coords)));
             return true;
         }
 
@@ -67,7 +67,7 @@ public sealed class XenoDespoilerBarrageInputSystem : EntitySystem
             if (!TryGetCursorCoords(out var coords))
                 return false;
 
-            RaiseNetworkEvent(new XenoDespoilerBarrageFireRequest(GetNetCoordinates(coords)));
+            RaisePredictiveEvent(new XenoDespoilerBarrageFireRequest(GetNetCoordinates(coords)));
             return true;
         }
 
