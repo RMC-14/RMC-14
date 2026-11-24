@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Stealth;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Prototypes;
@@ -23,6 +24,11 @@ namespace Content.Client.Interactable.Components
         {
             _lastRenderScale = renderScale;
             _inRange = inInteractionRange;
+
+            // RMC14 do not highlight invisible entities
+            if (_entMan.HasComponent<EntityActiveInvisibleComponent>(uid))
+                return;
+
             if (_entMan.TryGetComponent(uid, out SpriteComponent? sprite) && sprite.PostShader == null)
             {
                 // TODO why is this creating a new instance of the outline shader every time the mouse enters???

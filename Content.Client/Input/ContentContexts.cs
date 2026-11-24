@@ -165,6 +165,18 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCResist);
             human.AddFunction(CMKeyFunctions.RMCOpenLanguageMenu);
             human.AddFunction(CMKeyFunctions.RMCCycleLanguage);
+            human.AddFunction(CMKeyFunctions.RMCVehicleHorn);
+            human.AddFunction(CMKeyFunctions.RMCVehicleOvercharge);
+            human.AddFunction(CMKeyFunctions.RMCVehicleSpotlight);
+            human.AddFunction(CMKeyFunctions.RMCVehicleSafety);
+
+            // Only while viewing overwatch cameras
+            var overwatch = contexts.New("overwatch", human);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustNorth);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustWest);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustSouth);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustEast);
+            overwatch.AddFunction(CMKeyFunctions.RMCCameraReset);
 
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");

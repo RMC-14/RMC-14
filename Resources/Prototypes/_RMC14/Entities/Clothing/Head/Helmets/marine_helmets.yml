@@ -82,6 +82,16 @@
     - RMCVisorMedicalAdvancedIntegrated
 
 - type: entity
+  parent: RMCArmorHelmetM10SO
+  id: RMCArmorHelmetM10CELO
+  suffix: CE, LO
+  components:
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorMedicalIntegrated
+
+- type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Medic
   name: M10 medic helmet

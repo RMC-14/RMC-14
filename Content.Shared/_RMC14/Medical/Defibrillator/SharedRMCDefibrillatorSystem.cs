@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Effects;
+using Content.Shared._RMC14.Chemistry.Effects.Positive;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Emote;
