@@ -798,7 +798,7 @@
       entries:
       - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetSeniorCommand
-      - id: CMMRE
+      - id: CMMRE 
 # TODO: - id: Trench Whistle
     - name: Uniform # TODO: Port this.
       jobs:
@@ -1573,7 +1573,7 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineTech
-      - id: CMSatchel
+      - id: CMSatchel 
     - name: Personal Sidearm
       jobs:
       - CMAuxiliarySupportOfficer
