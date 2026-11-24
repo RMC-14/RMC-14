@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vixting
   changes:
-  - message: Synths can now bully xenos (pull, carry, throw the small ones)
-    type: Add
-  id: 3450
-  time: '2026-07-03T01:20:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8335
-- author: Vixting
-  changes:
   - message: Fixed circumstance where hivemind was accessible when it shouldn't have
       been
     type: Fix
@@ -4306,5 +4299,16 @@
   id: 3949
   time: '2026-11-24T05:15:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10678
+- author: Dygon
+  changes:
+  - message: The Queen can now remotely remove structures by clicking their icon on
+      the map. Built structures will be removed after 5 minutes, unbuilt structures
+      will be removed instantly.
+    type: Tweak
+  - message: Unbuilt xenonid structures now have a transparent icon on the map.
+    type: Tweak
+  id: 3950
+  time: '2026-11-24T06:03:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10696
 Name: RMC14
 Order: -1
