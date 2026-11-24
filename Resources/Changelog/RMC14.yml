@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Forecon can now spawn with an M54C and additional fluff items
-    type: Tweak
-  id: 3457
-  time: '2026-07-03T01:20:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10220
 - author: Dygon
   changes:
   - message: Fixed the targeting overlay sometimes appearing at the wrong location.
@@ -4325,5 +4318,14 @@
   id: 3956
   time: '2026-11-24T06:43:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10637
+- author: BreakpointDebug1234
+  changes:
+  - message: Added basic medical HUDs to CE and LO helmets
+    type: Add
+  - message: LO & RTs now spawn with fingerless gloves
+    type: Tweak
+  id: 3957
+  time: '2026-11-24T06:44:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11119
 Name: RMC14
 Order: -1
