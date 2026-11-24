@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed direct hit of the incinerator's stream dealing damage multiple
-      times, for real this time. This may have also fixed some instances of other
-      fires dealing damage multiple times on spawn.
-    type: Fix
-  id: 3443
-  time: '2026-07-03T01:00:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10333
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed defender headbutt, warrior fling, oppressor dislocate, oppressor
@@ -4406,5 +4397,13 @@
   id: 3942
   time: '2026-11-24T01:40:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10553
+- author: ShepardToTheStars
+  changes:
+  - message: Knives no longer quick-equip to the mask slot on 'use'. They can still
+      be put in the mask slot normally.
+    type: Tweak
+  id: 3943
+  time: '2026-11-24T01:43:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11147
 Name: RMC14
 Order: -1
