@@ -289,7 +289,7 @@
       fix-5: # Front Wall
         shape:
           !type:PhysShapeAabb
-          bounds: "0.4,-1.4,2.5,-1.5"
+          bounds: "0.4,-1.5,2.5,-1.4"
         density: 20000
         hard: true
         mask:
