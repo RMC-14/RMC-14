@@ -14,25 +14,8 @@
         orGroup: MarineGift
         weight: 5.0
 
-      # HEFA's
-      - id: CMPacketGrenadeFragFilled
-        orGroup: MarineGift
-        weight: 2.5
-
-      # REAL WEAPONS & ATTACHMENTS
-      - id: RMCWeaponRevolverMateba
-        orGroup: MarineGift
-        weight: 0.1
-      - id: RMCWeaponPistolHandcannon
-        orGroup: MarineGift
-        weight: 1.0
-      - id: RMCCombatSword
-        orGroup: MarineGift
-        weight: 1.0
-      - id: RMCEnergySword
-        orGroup: MarineGift
-        weight: 0.3
-      - id: RMCAttachmentBarrelCharger
+      # RARE ROLL
+      - id: ToySword
         orGroup: MarineGift
         weight: 1.0
       - id: RMCAttachmentExtendedBarrel
@@ -41,26 +24,11 @@
       - id: RMCAttachmentBurstFireAssembly
         orGroup: MarineGift
         weight: 1.0
-      - id: RMCTrollWSToken
+      - id: RMCFoodPackageWSToken
         orGroup: MarineGift
-        weight: 0.01
+        weight: 1.0
 
       # FACTIONS COSMETICS
-      - id: RMCCLFArmband
-        orGroup: MarineGift
-        weight: 1
-      - id: RMCJumpsuitCLFSoldier
-        orGroup: MarineGift
-        weight: 1
-      - id: CMHeadBandRebel
-        orGroup: MarineGift
-        weight: 1
-      - id: RMCColonyLiberationFrontCup
-        orGroup: MarineGift
-        weight: 1
-      - id: RMCPatchCLF
-        orGroup: MarineGift
-        weight: 1
       - id: RMCHeadRoyalCapPeaked
         orGroup: MarineGift
         weight: 2
@@ -124,7 +92,96 @@
       - id: RMCJumpsuitMarineTyrargo
         orGroup: MarineGift
         weight: 2
+      - id: RMCJumpsuitDutchBandolier
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCJumpsuitDutch
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCArmorHelmetDutchBand
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCArmorHelmetDutchCap
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCArmorHelmetDutch
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchOliveBranch
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchHalcyon
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCPatchNovaris
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCSwatLeaderCMBUniform
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCSwatCMBUniform
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCMarshalCMBUniform
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCRC6RiotShield
+        orGroup: MarineGift
+        weight: 2
+      - id: RMCVisorSWAT
+        orGroup: MarineGift
+        weight: 2
+      - id: CMHeadBeretCMB
+        orGroup: MarineGift
+        weight: 2
 
+      # WEYA Sponsored Cosmetics
+      - id: RMCShoesWeYaStompers
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCHeadCapWestonYamadaDark
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCHeadBeretWeYa
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCHeadWeYaPilotCap
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCPatchWeYaBlackSquare
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCPatchWeYaFury161
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCPatchWeYa
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCPatchWeYaBlack
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCMREWeYa
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCDrinkWEYACocoMilk
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCDrinkWEYABugJuice
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCDrinkWEYASoylent
+        orGroup: MarineGift
+        weight: 2.5
+      - id: CMDrinkWEYAWaterBottle30
+        orGroup: MarineGift
+        weight: 2.5
+      - id: RMCWestonYamadaCup
+        orGroup: MarineGift
+        weight: 2.5
+      - id: CMPenClicky
+        orGroup: MarineGift
+        weight: 2.5
+        
       # STANDARD ROLL
       - id: SnapPopBox
         orGroup: MarineGift
@@ -336,44 +393,30 @@
 
 - type: entity
   parent: BaseItem
-  id: RMCTrollWSToken
+  id: RMCFoodPackageWSToken
   name: Weapons Specialist's token
-  suffix: Joke Item
-  description: |
-    ⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⡤⢤⣤⣤⣤⣤⣤⣄⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⣠⣿⡿⣟⠯⡒⢯⣽⣓⣒⢾⣯⣭⣿⣿⠿⠭⠭⣯⣷⣦⡀⠀⠀⠀
-    ⠀⠀⠀⠀⣰⣿⣯⣞⣕⣽⠾⠿⠿⠿⢿⣏⣿⣿⣿⡗⣽⣿⣿⣷⡝⣿⣿⡆⠀⠀
-    ⠀⠀⠀⣀⣛⠛⢿⣛⢝⢁⣀⣀⣀⠓⠶⠈⣿⣿⡿⠗⠉⠁⢀⣀⣹⣛⣛⣳⢄⠀
-    ⠀⡔⡾⢁⣴⡆⢦⣬⣙⣛⣋⣤⣿⣿⣷⣾⣿⣿⣿⡆⢿⣿⡟⠻⠛⡉⣍⣲⢱⠁
-    ⠀⣇⣇⢸⣉⡀⢦⣌⡙⠻⠿⣯⣭⣥⠡⡤⠿⢿⣿⣿⡆⠉⡻⢿⣿⠇⢻⣟⠼⠀
-    ⠀⠈⠪⣴⣿⣧⡀⢉⠛⠘⢶⣦⣬⠉⣀⠓⠿⠿⠯⢉⣴⠿⠿⠓⡁⡄⠀⣿⠃⠀
-    ⠀⠀⠀⠙⣿⣿⣷⣌⠻⢠⣤⣀⠉⠐⠛⠿⠿⠰⠶⠦⠰⠶⠇⠘⠃⠁⠀⣿⠀⠀
-    ⠀⠀⠀⠀⠘⢿⣿⣿⣷⣌⠻⢿⠇⣼⣶⣦⡄⣄⣀⡀⢀⡀⢀⡀⡀⠀⢠⣿⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠙⠯⣛⠭⣻⠶⣬⣉⣛⠛⠃⠿⠿⠃⠿⠃⠚⣀⣁⣤⣾⣿⡀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠒⠯⣶⣋⡽⢛⣿⣯⣿⣭⣭⡿⢿⣿⣻⣾⢟⣿⡇⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⠿⣶⣾⣿⣿⣿⣭⣭⣭⣶⣿⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠛⠋⠁⠀⠀⠀
+  suffix: Food
+  description: A rare, gleaming token awarded by UNMC High Command to only the most elite of the elite. It feels surprisingly light in your hand.
   components:
   - type: Sprite
-    sprite: Objects/Misc/coins.rsi
+    sprite: _RMC14/Objects/Misc/coins.rsi
     state: coin_gold
   - type: Item
-    sprite: Objects/Misc/coins.rsi
+    sprite: _RMC14/Objects/Misc/coins.rsi
     size: Tiny
-  - type: EmitSoundOnUse
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodWSToken
+      amount: 1
     sound:
-      collection: ClownRecorder
-  - type: EmitSoundOnActivate
-    sound:
-      collection: ClownRecorder
-  - type: EmitSoundOnTrigger
-    sound:
-      collection: ClownRecorder
-  - type: EmitSoundOnLand
-    sound:
-      collection: ToyFall
-  - type: EmitSoundOnCollide
-    sound:
-      collection: ToyFall
-  - type: UseDelay
-    delay: 120
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: CMMREFoodChocolateBrownie
+  id: RMCFoodWSToken
+  name: Weapons Specialist's chocolate token
+  description: A milk chocolate token made with only the finest ingredients. What, did you expect an actual token?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/coins.rsi
+    state: coin_copper

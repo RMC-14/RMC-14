@@ -563,6 +563,7 @@
   id: RMCFloraTreeChristmas
   suffix: RMC Presents
   name: christmas tree
+  description: A Christmas tree, decorated with lights and ornaments. It has a present underneath it, maybe there is one for you too?
   components:
   - type: Sprite
     state: treechristmas02
