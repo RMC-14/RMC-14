@@ -31,7 +31,7 @@ public sealed partial class NPCLeapComponent : Component
     public float MaxAngleDegrees = 5;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public CollisionGroup Mask = CollisionGroup.SmallMobMask;
+    public CollisionGroup Mask = CollisionGroup.MobCollision;
 }
 
 public enum LeapStatus : byte
