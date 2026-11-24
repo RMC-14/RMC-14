@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed defender headbutt, warrior fling, oppressor dislocate, oppressor
-      tail lash, and vanguard fling cleave not killing crit marines.
-    type: Fix
-  id: 3444
-  time: '2026-07-03T01:01:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8859
 - author: Bagietens
   changes:
   - message: 'Fixed #9881'
@@ -4405,5 +4397,12 @@
   id: 3943
   time: '2026-11-24T01:43:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11147
+- author: BreakpointDebug1234
+  changes:
+  - message: Minor QoL fixes for some of the ERT roles.
+    type: Tweak
+  id: 3944
+  time: '2026-11-24T02:05:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11075
 Name: RMC14
 Order: -1
