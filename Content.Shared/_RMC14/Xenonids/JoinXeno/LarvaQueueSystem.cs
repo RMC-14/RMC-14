@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Follower;
@@ -136,10 +137,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         _disconnectExpiresAt.Remove(ev.Player.UserId);
 
-        var isQueueEligible = HasComp<GhostComponent>(ev.Entity)
-            || TryComp<MindTakeoverBehaviorComponent>(ev.Entity, out var takeoverBehavior) && !takeoverBehavior.EjectFromLarvaQueues;
-
-        if (isQueueEligible)
+        if (CanRemainInQueue(ev.Entity))
         {
             if (_pendingOffers.TryGetValue(ev.Player.UserId, out var pending))
             {
@@ -207,7 +205,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             return;
         }
 
-        if ((_gameTiming.CurTime - ghost.TimeOfDeath).TotalSeconds >= larvaWaitTime)
+        if ((_gameTiming.RealTime - ghost.TimeOfDeath).TotalSeconds >= larvaWaitTime)
         {
             Queue.GetOrNew(hive).AddLast(session);
             var position = GetQueuePosition(session, hive);
@@ -220,7 +218,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         else
         {
             PreQueue.GetOrNew(hive).Add(session, larvaWaitTime + ghost.TimeOfDeath.TotalSeconds);
-            var timeLeft = TimeSpan.FromSeconds(larvaWaitTime) + ghost.TimeOfDeath - _gameTiming.CurTime;
+            var timeLeft = TimeSpan.FromSeconds(larvaWaitTime) + ghost.TimeOfDeath - _gameTiming.RealTime;
             _popup.PopupEntity(
                 $"You died too recently, and will be added to the queue in {timeLeft.TotalSeconds:F0} seconds.",
                 actorEntity.Value, actorEntity.Value);
@@ -499,15 +497,8 @@ public sealed class LarvaQueueSystem : EntitySystem
                 continue;
             }
 
-            if (!HasComp<GhostComponent>(s.AttachedEntity.Value))
+            if (!CanRemainInQueue(s.AttachedEntity.Value))
             {
-                if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
-                {
-                    absolutePosition = indexInList;
-                    session = s;
-                    return true;
-                }
-
                 list.Remove(node);
                 node = next;
                 continue;
@@ -582,6 +573,20 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
     }
 
+    private bool CanRemainInQueue(EntityUid entity)
+    {
+        if (HasComp<GhostComponent>(entity))
+            return true;
+
+        if (TryComp(entity, out MindTakeoverBehaviorComponent? takeover) && !takeover.EjectFromLarvaQueues)
+            return true;
+
+        if (HasComp<ThunderdomeMapComponent>(Transform(entity).MapUid))
+            return true;
+
+        return false;
+    }
+
     public bool IsAlreadyQueued(NetUserId userId, EntityUid hiveId)
     {
         if (PreQueue.TryGetValue(hiveId, out var pq) && pq.ContainsKey(userId))
@@ -596,7 +601,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (!PreQueue.TryGetValue(hiveId, out var pq) || !pq.TryGetValue(userId, out var promotionTime))
             return null;
 
-        var remaining = promotionTime - _gameTiming.CurTime.TotalSeconds;
+        var remaining = promotionTime - _gameTiming.RealTime.TotalSeconds;
         return TimeSpan.FromSeconds(remaining > 0 ? remaining : 0);
     }
 
@@ -640,6 +645,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             return;
 
         var time = _gameTiming.CurTime;
+        var realTime = _gameTiming.RealTime;
 
         var expiredDisconnected = new List<NetUserId>();
         foreach (var (userId, expiry) in _disconnectExpiresAt)
@@ -663,7 +669,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             var toPromote = new List<NetUserId>();
             foreach (var (userId, userTime) in hivePreQueue)
             {
-                if (userTime <= time.TotalSeconds)
+                if (userTime <= realTime.TotalSeconds)
                     toPromote.Add(userId);
             }
 
