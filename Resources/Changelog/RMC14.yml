@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Bagietens
-  changes:
-  - message: 'Fixed #9881'
-    type: Fix
-  id: 3445
-  time: '2026-07-03T01:04:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10011
 - author: Vixting
   changes:
   - message: Fixed being able to repair hardpoints that are fully destroyed.
@@ -4404,5 +4397,18 @@
   id: 3944
   time: '2026-11-24T02:05:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11075
+- author: Dygon
+  changes:
+  - message: Fixed larva queue wait times sometimes being much longer than intended
+      after dying.
+    type: Fix
+  - message: Fixed ghosts displaying an incorrect time since death.
+    type: Fix
+  - message: Players now remain in the larva queue and can receive larva offers while
+      controlling any mob on the Thunderdome map.
+    type: Fix
+  id: 3945
+  time: '2026-11-24T02:36:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11173
 Name: RMC14
 Order: -1
