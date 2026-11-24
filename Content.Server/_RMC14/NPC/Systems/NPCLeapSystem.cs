@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
-using Microsoft.CodeAnalysis.Elfie.Model.Structures;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.NPC.Systems;
