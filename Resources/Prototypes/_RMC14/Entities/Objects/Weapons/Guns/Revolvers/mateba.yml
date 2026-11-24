@@ -151,50 +151,6 @@
 
 - type: entity
   parent: RMCWeaponRevolverMateba
-  id: RMCWeaponRevolverMatebaSilver
-  name: silver Mateba autorevolver custom
-  description: The .454 Mateba 6 Unica autorevolver is a semi-automatic handcannon that uses its own recoil to rotate the cylinders. Extremely rare, prohibitively costly, and unyieldingly powerful, it's found in the hands of a select few high-ranking UNMC officials. Stylish, sophisticated, and above all, extremely deadly. This one is finished in a beautiful polished silver.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_silver.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_silver.rsi
-  - type: Tag
-    tags:
-    - Sidearm
-    - RMCRevolver
-    - RMCMatebaSilver
-  - type: AttachableHolder
-    slots:
-      rmc-bslot-barrel:
-        startingAttachable: RMCAttachmentMatebaStandardSilver
-        whitelist:
-          tags:
-          - RMCAttachmentMatebaStandardSilver
-          - RMCAttachmentMatebaMarksmanSilver
-          - RMCAttachmentMatebaSnubNoseSilver
-      rmc-aslot-barrel:
-        whitelist:
-          tags:
-          - RMCAttachmentRecoilCompensator
-          - RMCAttachmentBarrelCharger
-      rmc-aslot-rail:
-        whitelist:
-          tags:
-          - RMCAttachmentRailFlashlight
-          - RMCAttachmentS5RedDotSight
-          - RMCAttachmentS5MicroRedDotSight
-          - RMCAttachmentS6ReflexSight
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-bslot-barrel: 0.215, 0.19
-      rmc-aslot-barrel: 0.215, 0.19
-      rmc-aslot-rail: -0.11, 0.22
-  - type: ItemCamouflage
-    camouflageVariations: {}
-
-- type: entity
-  parent: RMCWeaponRevolverMateba
   id: RMCWeaponRevolverMatebaSpecial
   name: Mateba autorevolver special
   description: An old, heavily modified version of the Mateba Autorevolver. It sports a smooth wooden grip, and a much larger barrel to it's unmodified counterpart. It's clear that this weapon has been cared for over a long period of time.
@@ -286,27 +242,6 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
-
-- type: entity
-  parent: RMCWeaponRevolverMateba2006MGold
-  id: RMCWeaponRevolverMateba2006MBlackGold
-  suffix: Black Handle, Gold
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_bgold.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_bgold.rsi
-
-- type: entity
-  parent: RMCWeaponRevolverMateba2006M
-  id: RMCWeaponRevolverMateba2006MSilver
-  name: silver Spearhead 2006M autorevolver
-  suffix: Silver
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_silver.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_silver.rsi
 
 - type: entity
   id: RMCBaseSpeedLoaderMateba
