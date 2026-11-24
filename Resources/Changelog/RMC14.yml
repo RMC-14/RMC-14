@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The tanks DRGN flamer now creates the fire centered on the target.
-    type: Fix
-  id: 3464
-  time: '2026-07-03T01:26:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10214
 - author: TheFairyKings
   changes:
   - message: Magical Girl Queen.
@@ -4335,5 +4328,13 @@
   id: 3963
   time: '2026-11-24T07:15:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9330
+- author: NotInButIn
+  changes:
+  - message: Fixed the loadout window locking up after saving a character with an
+      over-budget loadout selection.
+    type: Fix
+  id: 3964
+  time: '2026-11-24T07:24:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10431
 Name: RMC14
 Order: -1
