@@ -1,3 +1,4 @@
+using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Despoiler;
@@ -12,7 +13,7 @@ public sealed partial class XenoDespoilerLingeringAcidComponent : Component
     public TimeSpan MaxLifetime = TimeSpan.FromSeconds(20);
 
     [DataField]
-    public float CrossBurnDamage = 20f;
+    public DamageSpecifier CrossBurnDamage = new() { DamageDict = { { "Heat", 20 } } };
 
     [DataField, AutoNetworkedField]
     public EntityUid? Caster;

@@ -1,7 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Stab;
-using Content.Shared._RMC14.Xenonids.Despoiler;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Damage;
@@ -9,7 +8,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee.Events;
 
-namespace Content.Server._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
 public sealed class XenoDespoilerAcidSystem : SharedXenoDespoilerAcidSystem
 {
@@ -51,17 +50,17 @@ public sealed class XenoDespoilerAcidSystem : SharedXenoDespoilerAcidSystem
             args.Damage += burn;
     }
 
-    private void OnDamageTaken(EntityUid uid, XenoDespoilerHypertensionComponent comp, DamageChangedEvent args)
+    private void OnDamageTaken(Entity<XenoDespoilerHypertensionComponent> ent, ref DamageChangedEvent args)
     {
         if (!args.DamageIncreased || args.DamageDelta is not { } delta)
             return;
 
-        _hyper.AddPoints(uid, comp, (float) delta.GetTotal() * comp.PointsPerDamageTaken);
+        _hyper.AddPoints(ent, (float) delta.GetTotal() * ent.Comp.PointsPerDamageTaken);
     }
 
-    private bool TryGetHyperBurn(EntityUid uid, out DamageSpecifier burn)
+    private bool TryGetHyperBurn(EntityUid uid, [NotNullWhen(true)] out DamageSpecifier? burn)
     {
-        burn = default!;
+        burn = null!;
         if (!_hyperQuery.TryComp(uid, out var hyper) || hyper.Stacks <= 0)
             return false;
 
@@ -69,8 +68,14 @@ public sealed class XenoDespoilerAcidSystem : SharedXenoDespoilerAcidSystem
         if (bonus <= 0)
             return false;
 
-        burn = new DamageSpecifier();
-        burn.DamageDict["Heat"] = FixedPoint2.New(bonus);
+        burn = new DamageSpecifier
+        {
+            DamageDict =
+            {
+                ["Heat"] = FixedPoint2.New(bonus),
+            },
+        };
+
         return true;
     }
 
@@ -93,7 +98,7 @@ public sealed class XenoDespoilerAcidSystem : SharedXenoDespoilerAcidSystem
                 ApplyAcid(hit, uid);
 
             if (hyper != null && _marineQuery.HasComp(hit))
-                _hyper.AddSlashPoints(uid, hyper);
+                _hyper.AddSlashPoints((uid, hyper));
         }
     }
 
@@ -121,15 +126,13 @@ public sealed class XenoDespoilerAcidSystem : SharedXenoDespoilerAcidSystem
         {
             tier.Tier = tier.MaxTier;
             if (_userAcidedQuery.TryComp(target, out var acid))
-            {
-                _xenoSpit.SetAcidCombo((target, acid),
-                    duration: default, damage: null, paralyze: default, resists: default);
-            }
+                _xenoSpit.EnhanceAcid((target, acid), tier.MaxTier);
         }
         else if (tier.Tier < tier.MaxTier)
         {
             tier.Tier++;
         }
+
         Dirty(target, tier);
     }
 

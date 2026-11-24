@@ -8,7 +8,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 
-namespace Content.Server._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
 public sealed class XenoDespoilerLingeringAcidSystem : EntitySystem
 {
@@ -46,8 +46,7 @@ public sealed class XenoDespoilerLingeringAcidSystem : EntitySystem
         if (_pullableQuery.TryComp(target, out var pull) && pull.BeingPulled)
             return;
 
-        var dmg = new DamageSpecifier();
-        dmg.DamageDict["Heat"] = FixedPoint2.New(comp.CrossBurnDamage);
+        var dmg = new DamageSpecifier(comp.CrossBurnDamage);
         _damageable.TryChangeDamage(target, dmg, ignoreResistances: false, origin: comp.Caster);
     }
 }

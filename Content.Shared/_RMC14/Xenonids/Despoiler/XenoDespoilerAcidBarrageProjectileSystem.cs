@@ -3,7 +3,7 @@ using Content.Shared._RMC14.Xenonids.Despoiler;
 using Content.Shared.Coordinates.Helpers;
 using Robust.Shared.Random;
 
-namespace Content.Server._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
 public sealed class XenoDespoilerAcidBarrageProjectileSystem : EntitySystem
 {

@@ -1,10 +1,9 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.Despoiler;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
 
-namespace Content.Server._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
 public sealed class XenoDespoilerCatalyzeSystem : EntitySystem
 {
@@ -21,52 +20,63 @@ public sealed class XenoDespoilerCatalyzeSystem : EntitySystem
         SubscribeLocalEvent<XenoDespoilerComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnCatalyze(EntityUid uid, XenoDespoilerComponent comp, XenoDespoilerCatalyzeActionEvent args)
+    private void OnCatalyze(Entity<XenoDespoilerComponent> ent, ref XenoDespoilerCatalyzeActionEvent args)
     {
         if (args.Handled)
             return;
 
-        if (!TryComp<XenoDespoilerHypertensionComponent>(uid, out var hyper))
+        if (!TryComp<XenoDespoilerHypertensionComponent>(ent, out var hyper))
             return;
 
         if (!TryComp<XenoDespoilerCatalyzeActionComponent>(args.Action, out var action))
             return;
 
-        if (!_hyper.TrySpendStacks(uid, hyper, action.HypertensionCost))
+        if (!_hyper.TrySpendStacks((ent, hyper), action.HypertensionCost))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-despoiler-no-hypertension"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("rmc-despoiler-no-hypertension"), ent, ent);
             return;
         }
 
         if (!_rmcActions.TryUseAction(args))
             return;
 
-        comp.NextAbilityEmpowered = true;
-        comp.EmpowerExpiresAt = _timing.CurTime + action.BuffDuration;
-        Dirty(uid, comp);
+        ent.Comp.NextAbilityEmpowered = true;
+        ent.Comp.EmpowerExpiresAt = _timing.CurTime + action.BuffDuration;
+        Dirty(ent);
 
-        var server = EnsureComp<XenoDespoilerServerComponent>(uid);
+        var server = EnsureComp<XenoDespoilerVisualComponent>(ent);
         DespawnVisual(server);
 
-        var burst = Spawn(action.VisualProto, Transform(uid).Coordinates);
-        _xform.SetParent(burst, uid);
-        _hive.SetSameHive(uid, burst);
+        var burst = Spawn(action.VisualProto, Transform(ent).Coordinates);
+        _xform.SetParent(burst, ent);
+        _hive.SetSameHive(ent.Owner, burst);
         server.CatalyzeVisual = burst;
 
-        _popup.PopupEntity(Loc.GetString("rmc-despoiler-catalyze-active"), uid, uid);
+        _popup.PopupEntity(Loc.GetString("rmc-despoiler-catalyze-active"), ent, ent);
         args.Handled = true;
     }
 
-    private void OnShutdown(EntityUid uid, XenoDespoilerComponent comp, ComponentShutdown args)
+    private void OnShutdown(Entity<XenoDespoilerComponent> ent, ref ComponentShutdown args)
     {
-        if (TryComp<XenoDespoilerServerComponent>(uid, out var server))
+        if (TryComp<XenoDespoilerVisualComponent>(ent, out var server))
             DespawnVisual(server);
+    }
+
+    private void DespawnVisual(XenoDespoilerVisualComponent comp)
+    {
+        if (comp.CatalyzeVisual is not { } visualEnt)
+            return;
+
+        if (Exists(visualEnt) && !TerminatingOrDeleted(visualEnt))
+            QueueDel(visualEnt);
+
+        comp.CatalyzeVisual = null;
     }
 
     public override void Update(float frameTime)
     {
         var now = _timing.CurTime;
-        var query = EntityQueryEnumerator<XenoDespoilerComponent, XenoDespoilerServerComponent>();
+        var query = EntityQueryEnumerator<XenoDespoilerComponent, XenoDespoilerVisualComponent>();
         while (query.MoveNext(out var uid, out var comp, out var server))
         {
             if (comp.NextAbilityEmpowered && now > comp.EmpowerExpiresAt)
@@ -78,16 +88,5 @@ public sealed class XenoDespoilerCatalyzeSystem : EntitySystem
             if (!comp.NextAbilityEmpowered && server.CatalyzeVisual is not null)
                 DespawnVisual(server);
         }
-    }
-
-    private void DespawnVisual(XenoDespoilerServerComponent server)
-    {
-        if (server.CatalyzeVisual is not { } visual)
-            return;
-
-        if (Exists(visual) && !TerminatingOrDeleted(visual))
-            QueueDel(visual);
-
-        server.CatalyzeVisual = null;
     }
 }

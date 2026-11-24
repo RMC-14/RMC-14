@@ -1,12 +1,10 @@
-using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Despoiler;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 
-namespace Content.Server._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler;
 
 public sealed class XenoDespoilerAcidSpraySystem : EntitySystem
 {

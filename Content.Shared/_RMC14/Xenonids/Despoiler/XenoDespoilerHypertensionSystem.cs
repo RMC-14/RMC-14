@@ -6,38 +6,38 @@ public sealed class XenoDespoilerHypertensionSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    public void AddSlashPoints(EntityUid uid, XenoDespoilerHypertensionComponent comp)
+    public void AddSlashPoints(Entity<XenoDespoilerHypertensionComponent> ent)
     {
-        AddPoints(uid, comp, comp.PointsPerSlash);
+        AddPoints(ent, ent.Comp.PointsPerSlash);
     }
 
-    public void AddPoints(EntityUid uid, XenoDespoilerHypertensionComponent comp, float amount)
+    public void AddPoints(Entity<XenoDespoilerHypertensionComponent> ent, float amount)
     {
         if (amount <= 0)
             return;
 
-        comp.Points += amount;
-        comp.LastActivityAt = _timing.CurTime;
+        ent.Comp.Points += amount;
+        ent.Comp.LastActivityAt = _timing.CurTime;
 
-        while (comp.Points >= comp.PointsPerStack && comp.Stacks < comp.MaxStacks)
+        while (ent.Comp.Points >= ent.Comp.PointsPerStack && ent.Comp.Stacks < ent.Comp.MaxStacks)
         {
-            comp.Points -= comp.PointsPerStack;
-            comp.Stacks++;
+            ent.Comp.Points -= ent.Comp.PointsPerStack;
+            ent.Comp.Stacks++;
         }
 
-        if (comp.Stacks >= comp.MaxStacks)
-            comp.Points = 0;
+        if (ent.Comp.Stacks >= ent.Comp.MaxStacks)
+            ent.Comp.Points = 0;
 
-        Dirty(uid, comp);
+        Dirty(ent);
     }
 
-    public bool TrySpendStacks(EntityUid uid, XenoDespoilerHypertensionComponent comp, int count)
+    public bool TrySpendStacks(Entity<XenoDespoilerHypertensionComponent> ent, int count)
     {
-        if (comp.Stacks < count)
+        if (ent.Comp.Stacks < count)
             return false;
 
-        comp.Stacks -= count;
-        Dirty(uid, comp);
+        ent.Comp.Stacks -= count;
+        Dirty(ent);
         return true;
     }
 
