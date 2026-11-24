@@ -68,6 +68,10 @@ public sealed partial class TacticalMapControl : TextureRect
     private int? _localPlayerEntityId;
     private Dictionary<Vector2i, string> _areaLabels = new();
 
+    private int? _watchingEntityId;
+    private bool? _watchingLiveUpdate;
+    private Vector2i? _watchingIndices;
+
     private Vector2i _min;
     private Vector2i _delta;
     private float _zoomFactor = 1.0f;
@@ -230,6 +234,13 @@ public sealed partial class TacticalMapControl : TextureRect
     public void SetLocalPlayerEntityId(int? entityId)
     {
         _localPlayerEntityId = entityId;
+    }
+
+    public void SetWatchingData(int? entityId, bool? liveUpdate, Vector2i? watchingIndices)
+    {
+        _watchingEntityId = entityId;
+        _watchingLiveUpdate = liveUpdate;
+        _watchingIndices = watchingIndices;
     }
 
 
@@ -606,6 +617,8 @@ public sealed partial class TacticalMapControl : TextureRect
         if (_blips == null)
             return;
 
+        var watchingPingSeperate = _watchingLiveUpdate == false && _watchingEntityId.HasValue;
+
         for (int i = 0; i < _blips.Length; i++)
         {
             TacticalMapBlip blip = _blips[i];
@@ -618,11 +631,21 @@ public sealed partial class TacticalMapControl : TextureRect
             handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, backgroundColor);
             handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect, iconColor);
 
+            // Draw location ping for local character
             if (_localPlayerEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length)
             {
                 if (_blipEntityIds[i] == _localPlayerEntityId.Value)
                 {
-                    DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, blip.Color);
+                    DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, Color.FromHex("#00FFFF"));
+                }
+            }
+
+            // Draw location ping for player you're watching
+            if (_watchingEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length)
+            {
+                if (_blipEntityIds[i] == _watchingEntityId.Value && !watchingPingSeperate)
+                {
+                    DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, Color.Orange);
                 }
             }
 
@@ -641,6 +664,17 @@ public sealed partial class TacticalMapControl : TextureRect
             if (defibTexture != null)
                 handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect, iconColor);
         }
+
+        // If live updating is disabled, draw the location ping for who you're watching anyways
+        if (watchingPingSeperate && _watchingEntityId.HasValue && _watchingIndices.HasValue)
+        {
+            var indices = _watchingIndices.Value;
+
+            Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
+            float scaledBlipSize = GetScaledBlipSize(overlayScale);
+
+            DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, Color.Orange);
+        }
     }
 
     private void DrawPingEffect(DrawingHandleScreen handle, Vector2 center, float blipSize, float overlayScale, TimeSpan curTime, Color blipColor)
@@ -654,7 +688,7 @@ public sealed partial class TacticalMapControl : TextureRect
         float ringSize = blipSize * scale;
         Vector2 ringCenter = center + new Vector2(blipSize / 2, blipSize / 2);
 
-        Color pingColor = Color.FromHex("#00FFFF").WithAlpha(alpha);
+        Color pingColor = blipColor.WithAlpha(alpha);
 
         float thickness = PingRingThickness * overlayScale;
         int segments = 32;
