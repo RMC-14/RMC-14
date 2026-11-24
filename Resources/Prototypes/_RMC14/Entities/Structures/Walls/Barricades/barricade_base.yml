@@ -40,7 +40,7 @@
   - type: DirectionalAttackBlocker
   - type: ProjectileCover
   - type: RMCLeapProtection
-    inherentStunDuration: 3
+    inherentStunDuration: 4
     fullProtection: true
   - type: RMCLungeProtection
   - type: InteractionOutline

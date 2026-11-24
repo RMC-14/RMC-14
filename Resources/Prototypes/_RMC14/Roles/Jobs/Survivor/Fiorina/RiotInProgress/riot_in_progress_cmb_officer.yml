@@ -15,7 +15,7 @@
     RMCRankCMBSeniorDeputy:
       - !type:RoleTimeRequirement
         role: CMJobSurvivorSecurity
-        time: 90000 # 25 hours
+        time: 252000 # 70 hours
     RMCRankCMBDeputy: []
   icon: "RMCJobIconBureauRCO"
   spawnMenuRoleName: CMB Riot Control Officer (Fiorina Special Survivor)
@@ -87,12 +87,12 @@
   components:
   - type: EntityPreset
     primaryWeapons:
-    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
-    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
-    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
-    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
-    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
-    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, RMCArmorHelmetM10CMBVisorSWAT ]
+    - [ RMCSwatCMBUniformB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, RMCArmorHelmetM10CMBVisorSWAT ]
     - [ RMCSwatCMBUniformMK45, RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCHeadCapBureau ]
     - [ RMCSwatCMBUniformM1984, RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, CMHeadBeretCMB ]
     - [ RMCSwatCMBUniformMK45, RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A4, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCArmorHelmetM10CMBVisorSWAT ]

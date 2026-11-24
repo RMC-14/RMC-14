@@ -12,3 +12,4 @@
     - RMCOperationSuffixes
     nameFormat: name-format-rmc-operation
   - type: CMDistressSignalRule
+  - type: RMCFirstDeployment
