@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: noctynral
-  changes:
-  - message: Adjusted the position of the tanks primary weapons, secondary weapons
-      and modules to align better with the actual tank.
-    type: Tweak
-  - message: Added a proper sprite for the vehicle keys.
-    type: Add
-  id: 3442
-  time: '2026-06-29T18:57:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10231
 - author: Vermidia
   changes:
   - message: Fixed direct hit of the incinerator's stream dealing damage multiple
@@ -4409,5 +4399,12 @@
   id: 3941
   time: '2026-11-24T01:37:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11148
+- author: wheelwrightt
+  changes:
+  - message: Welding protection now darkens FoV when flipped down.
+    type: Add
+  id: 3942
+  time: '2026-11-24T01:40:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10553
 Name: RMC14
 Order: -1
