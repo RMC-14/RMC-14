@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TheFairyKings
-  changes:
-  - message: Magical Girl Queen.
-    type: Add
-  id: 3465
-  time: '2026-07-03T01:30:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10274
 - author: Dygon
   changes:
   - message: Fixed the dazed overlay effect sometimes not being removed after the
@@ -4336,5 +4329,13 @@
   id: 3964
   time: '2026-11-24T07:24:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10431
+- author: ArdyTheApe
+  changes:
+  - message: Added 3 new French recipes! Cassoulet, Bouillabaisse, and Bourguignon
+      stew can now be prepared in the Mess Hall.
+    type: Add
+  id: 3965
+  time: '2026-11-24T07:35:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10501
 Name: RMC14
 Order: -1
