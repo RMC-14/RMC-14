@@ -16,6 +16,7 @@ namespace Content.Client.Administration.UI.Tabs.AdminTab
 
         protected override void EnteredTree()
         {
+            base.EnteredTree();
             SubmitButton.OnPressed += SubmitButtonOnOnPressed;
             PlayerList.OnSelectionChanged += OnListOnOnSelectionChanged;
         }
