@@ -68,7 +68,7 @@ namespace Content.Shared.Containers.ItemSlots
         {
             foreach (var slot in itemSlots.Slots.Values)
             {
-                if (slot.HasItem || string.IsNullOrEmpty(slot.StartingItem))
+                if (slot.HasItem || string.IsNullOrEmpty(slot.StartingItem?.Id))
                     continue;
 
                 var item = Spawn(slot.StartingItem, Transform(uid).Coordinates);

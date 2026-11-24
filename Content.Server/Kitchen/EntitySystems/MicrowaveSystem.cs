@@ -42,6 +42,7 @@ using Content.Server.Construction.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Robust.Shared.Utility;
+using Content.Shared.Chemistry.Reagent;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
@@ -199,7 +200,7 @@ namespace Content.Server.Kitchen.EntitySystems
         {
             // TODO Turn recipe.IngredientsReagents into a ReagentQuantity[]
 
-            var totalReagentsToRemove = new Dictionary<string, FixedPoint2>(recipe.IngredientsReagents);
+            var totalReagentsToRemove = new Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>(recipe.IngredientsReagents);
 
             // this is spaghetti ngl
             foreach (var item in component.Storage.ContainedEntities)

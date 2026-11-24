@@ -290,7 +290,7 @@ public sealed class RadioDeviceSystem : EntitySystem
 
     private void OnIntercomEncryptionChannelsChanged(Entity<IntercomComponent> ent, ref EncryptionChannelsChangedEvent args)
     {
-        ent.Comp.SupportedChannels = args.Component.Channels.Select(p => new ProtoId<RadioChannelPrototype>(p)).ToList();
+        ent.Comp.SupportedChannels = args.Component.Channels.ToList();
 
         var channel = args.Component.DefaultChannel;
         if (ent.Comp.CurrentChannel != null && ent.Comp.SupportedChannels.Contains(ent.Comp.CurrentChannel.Value))
@@ -345,10 +345,10 @@ public sealed class RadioDeviceSystem : EntitySystem
         }
 
         if (TryComp<RadioMicrophoneComponent>(ent, out var mic))
-            mic.BroadcastChannel = channel;
+            mic.BroadcastChannel = channel.Value;
         if (TryComp<RadioSpeakerComponent>(ent, out var speaker))
         {
-            speaker.Channels = new() { channel };
+            speaker.Channels = new() { channel.Value };
 
             // RMC14 - Keep an already enabled speaker synchronized with its selected channel.
             if (TryComp<ActiveRadioComponent>(ent, out var active))

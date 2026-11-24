@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Emp;
 using Content.Shared.ActionBlocker;
@@ -222,9 +223,9 @@ public sealed class SurveillanceCameraSystem : EntitySystem
 
         if (camera.AvailableNetworks.Count == 0)
         {
-            if (deviceNet.ReceiveFrequencyId != null)
+            if (deviceNet.ReceiveFrequencyId is { } recvFreq)
             {
-                camera.AvailableNetworks.Add(deviceNet.ReceiveFrequencyId);
+                camera.AvailableNetworks.Add(recvFreq);
             }
             else if (!camera.NetworkSet)
             {
@@ -234,7 +235,7 @@ public sealed class SurveillanceCameraSystem : EntitySystem
         }
 
         var state = new SurveillanceCameraSetupBoundUiState(camera.CameraId, deviceNet.ReceiveFrequency ?? 0,
-            camera.AvailableNetworks, camera.NameSet, camera.NetworkSet);
+            camera.AvailableNetworks.Select(id => id.Id).ToList(), camera.NameSet, camera.NetworkSet);
         _userInterface.SetUiState(uid, SurveillanceCameraSetupUiKey.Camera, state);
     }
 

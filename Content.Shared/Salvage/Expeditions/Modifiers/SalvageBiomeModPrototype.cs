@@ -1,6 +1,5 @@
 using Content.Shared.Parallax.Biomes;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Salvage.Expeditions.Modifiers;
 
@@ -26,6 +25,6 @@ public sealed partial class SalvageBiomeModPrototype : IPrototype, ISalvageMod
     [DataField("weather")]
     public bool Weather = true;
 
-    [DataField("biome", required: true, customTypeSerializer:typeof(PrototypeIdSerializer<BiomeTemplatePrototype>))]
-    public string? BiomePrototype;
+    [DataField("biome", required: true)]
+    public ProtoId<BiomeTemplatePrototype>? BiomePrototype;
 }

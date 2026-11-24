@@ -31,7 +31,7 @@ namespace Content.Server.Engineering.EntitySystems
         {
             if (!args.CanReach && !component.IgnoreDistance)
                 return;
-            if (string.IsNullOrEmpty(component.Prototype))
+            if (string.IsNullOrEmpty(component.Prototype?.Id))
                 return;
 
             var gridUid = _transform.GetGrid(args.ClickLocation);

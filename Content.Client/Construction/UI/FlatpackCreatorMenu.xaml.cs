@@ -95,7 +95,7 @@ public sealed partial class FlatpackCreatorMenu : FancyWindow
             }
             else if (_entityManager.TryGetComponent<ComputerBoardComponent>(_currentBoard, out var computerBoard))
             {
-                prototype = computerBoard.Prototype;
+                prototype = computerBoard.Prototype?.Id;
                 cost = _flatpack.GetFlatpackCreationCost((_owner, flatpacker), null);
             }
 

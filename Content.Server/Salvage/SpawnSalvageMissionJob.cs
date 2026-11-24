@@ -121,11 +121,11 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
 
         var missionBiome = _prototypeManager.Index<SalvageBiomeModPrototype>(mission.Biome);
 
-        if (missionBiome.BiomePrototype != null)
+        if (missionBiome.BiomePrototype is { } biomeId)
         {
             var biome = _entManager.AddComponent<BiomeComponent>(mapUid);
             var biomeSystem = _entManager.System<BiomeSystem>();
-            biomeSystem.SetTemplate(mapUid, biome, _prototypeManager.Index<BiomeTemplatePrototype>(missionBiome.BiomePrototype));
+            biomeSystem.SetTemplate(mapUid, biome, _prototypeManager.Index(biomeId));
             biomeSystem.SetSeed(mapUid, biome, mission.Seed);
             _entManager.Dirty(mapUid, biome);
 

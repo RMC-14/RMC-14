@@ -91,9 +91,9 @@ public sealed partial class ResearchConsoleMenu : FancyWindow
 
         var disciplineText = Loc.GetString("research-discipline-none");
         var disciplineColor = Color.Gray;
-        if (database.MainDiscipline != null)
+        if (database.MainDiscipline is { } mainDiscipline)
         {
-            var discipline = _prototype.Index<TechDisciplinePrototype>(database.MainDiscipline);
+            var discipline = _prototype.Index(mainDiscipline);
             disciplineText = Loc.GetString(discipline.Name);
             disciplineColor = discipline.Color;
         }

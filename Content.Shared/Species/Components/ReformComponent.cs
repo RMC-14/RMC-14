@@ -1,5 +1,4 @@
     using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Species.Components;

@@ -4,7 +4,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Utility;
 using Robust.Shared.Serialization;
 
@@ -22,14 +21,14 @@ namespace Content.Shared.Damage
     {
         // These exist solely so the wiki works. Please do not touch them or use them.
         [JsonPropertyName("types")]
-        [DataField("types", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, DamageTypePrototype>))]
+        [DataField("types")]
         [UsedImplicitly]
-        private Dictionary<string, FixedPoint2>? _damageTypeDictionary;
+        private Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>? _damageTypeDictionary;
 
         [JsonPropertyName("groups")]
-        [DataField("groups", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, DamageGroupPrototype>))]
+        [DataField("groups")]
         [UsedImplicitly]
-        private Dictionary<string, FixedPoint2>? _damageGroupDictionary;
+        private Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>? _damageGroupDictionary;
 
         /// <summary>
         ///     Main DamageSpecifier dictionary. Most DamageSpecifier functions exist to somehow modifying this.
@@ -152,7 +151,7 @@ namespace Content.Shared.Damage
 
                 float newValue = value.Float();
 
-                if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
+                if (modifierSet.FlatReductions.TryGetValue(key, out var reduction))
                     newValue = Math.Max(0f, newValue - reduction); // flat reductions can't heal you
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))

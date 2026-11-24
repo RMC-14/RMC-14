@@ -77,15 +77,15 @@ public sealed class AtmosMonitorSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, AtmosMonitorComponent component, MapInitEvent args)
     {
-        if (component.TemperatureThresholdId != null)
+        if (component.TemperatureThresholdId is { } temperatureId)
         {
-            var proto = _prototypeManager.Index<AtmosAlarmThresholdPrototype>(component.TemperatureThresholdId);
+            var proto = _prototypeManager.Index(temperatureId);
             component.TemperatureThreshold ??= new(proto);
         }
 
-        if (component.PressureThresholdId != null)
+        if (component.PressureThresholdId is { } pressureId)
         {
-            var proto = _prototypeManager.Index<AtmosAlarmThresholdPrototype>(component.PressureThresholdId);
+            var proto = _prototypeManager.Index(pressureId);
             component.PressureThreshold ??= new(proto);
         }
 

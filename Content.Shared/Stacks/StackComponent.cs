@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Stacks
 {
@@ -8,8 +8,8 @@ namespace Content.Shared.Stacks
     public sealed partial class StackComponent : Component
     {
         [ViewVariables(VVAccess.ReadWrite)]
-        [DataField("stackType", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<StackPrototype>))]
-        public string StackTypeId { get; private set; } = default!;
+        [DataField("stackType", required: true)]
+        public ProtoId<StackPrototype> StackTypeId { get; private set; } = default!;
 
         /// <summary>
         ///     Current stack count.

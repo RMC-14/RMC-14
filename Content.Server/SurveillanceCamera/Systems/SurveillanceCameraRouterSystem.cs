@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DeviceNetwork;
@@ -158,7 +159,7 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
         }
 
         var state = new SurveillanceCameraSetupBoundUiState(router.SubnetName, deviceNet.ReceiveFrequency ?? 0,
-            router.AvailableNetworks, true, router.SubnetFrequencyId != null);
+            router.AvailableNetworks.Select(id => id.Id).ToList(), true, router.SubnetFrequencyId != null);
         _userInterface.SetUiState(uid, SurveillanceCameraSetupUiKey.Router, state);
     }
 
@@ -189,7 +190,7 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
         var payload = new NetworkPayload()
         {
             { DeviceNetworkConstants.Command, SurveillanceCameraSystem.CameraSubnetData },
-            { SurveillanceCameraSystem.CameraSubnetData, router.SubnetFrequencyId }
+            { SurveillanceCameraSystem.CameraSubnetData, router.SubnetFrequencyId.Value.Id }
         };
 
         _deviceNetworkSystem.QueuePacket(uid, origin, payload);

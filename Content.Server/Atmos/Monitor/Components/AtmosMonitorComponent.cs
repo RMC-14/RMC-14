@@ -1,7 +1,6 @@
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Monitor;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Atmos.Monitor.Components;
 
@@ -22,14 +21,14 @@ public sealed partial class AtmosMonitorComponent : Component
     [DataField("netEnabled")]
     public bool NetEnabled = true;
 
-    [DataField("temperatureThresholdId", customTypeSerializer: (typeof(PrototypeIdSerializer<AtmosAlarmThresholdPrototype>)))]
-    public string? TemperatureThresholdId;
+    [DataField("temperatureThresholdId")]
+    public ProtoId<AtmosAlarmThresholdPrototype>? TemperatureThresholdId;
 
     [DataField("temperatureThreshold")]
     public AtmosAlarmThreshold? TemperatureThreshold;
 
-    [DataField("pressureThresholdId", customTypeSerializer: (typeof(PrototypeIdSerializer<AtmosAlarmThresholdPrototype>)))]
-    public string? PressureThresholdId;
+    [DataField("pressureThresholdId")]
+    public ProtoId<AtmosAlarmThresholdPrototype>? PressureThresholdId;
 
     [DataField("pressureThreshold")]
     public AtmosAlarmThreshold? PressureThreshold;
@@ -41,9 +40,8 @@ public sealed partial class AtmosMonitorComponent : Component
     [DataField("monitorFire")]
     public bool MonitorFire = false;
 
-    [DataField("gasThresholdPrototypes",
-        customTypeSerializer:typeof(PrototypeIdValueDictionarySerializer<Gas, AtmosAlarmThresholdPrototype>))]
-    public Dictionary<Gas, string>? GasThresholdPrototypes;
+    [DataField("gasThresholdPrototypes")]
+    public Dictionary<Gas, ProtoId<AtmosAlarmThresholdPrototype>>? GasThresholdPrototypes;
 
     [DataField("gasThresholds")]
     public Dictionary<Gas, AtmosAlarmThreshold>? GasThresholds;

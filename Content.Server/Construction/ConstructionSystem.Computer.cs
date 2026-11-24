@@ -51,7 +51,7 @@ public sealed partial class ConstructionSystem
             AddContainer(ent, "board", construction);
 
         // We don't do anything if this is null or empty.
-        if (string.IsNullOrEmpty(component.BoardPrototype))
+        if (string.IsNullOrEmpty(component.BoardPrototype?.Id))
             return;
 
         var container = _container.EnsureContainer<Container>(ent, "board");

@@ -23,9 +23,9 @@ public sealed class ExaminableDamageSystem : EntitySystem
 
     private void OnInit(EntityUid uid, ExaminableDamageComponent component, ComponentInit args)
     {
-        if (component.MessagesProtoId == null)
+        if (component.MessagesProtoId is not { } messagesId)
             return;
-        component.MessagesProto = _prototype.Index<ExaminableDamagePrototype>(component.MessagesProtoId);
+        component.MessagesProto = _prototype.Index(messagesId);
     }
 
     private void OnExamine(EntityUid uid, ExaminableDamageComponent component, ExaminedEvent args)

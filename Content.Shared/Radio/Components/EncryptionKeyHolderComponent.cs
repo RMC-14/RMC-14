@@ -4,7 +4,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Radio.Components;
 
@@ -26,9 +25,9 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     ///     The tool required to extract the encryption keys from the headset.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("keysExtractionMethod", customTypeSerializer: typeof(PrototypeIdSerializer<ToolQualityPrototype>))]
+    [DataField("keysExtractionMethod")]
     [AutoNetworkedField]
-    public string KeysExtractionMethod = "Screwing";
+    public ProtoId<ToolQualityPrototype> KeysExtractionMethod = "Screwing";
 
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("keySlots")]
@@ -54,7 +53,7 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     /// </summary>
     [ViewVariables]
     [AutoNetworkedField]
-    public HashSet<string> Channels = new();
+    public HashSet<ProtoId<RadioChannelPrototype>> Channels = new();
 
     /// <summary>
     ///     This is the channel that will be used when using the default/department prefix (<see cref="SharedChatSystem.DefaultChannelKey"/>).
@@ -62,7 +61,7 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     [ViewVariables]
     [DataField] // RMC14 datafield attribute
     [AutoNetworkedField]
-    public string? DefaultChannel;
+    public ProtoId<RadioChannelPrototype>? DefaultChannel;
 
     /// <summary>
     ///     Combined set of radio channels provided by all contained keys that are ReadOnly.

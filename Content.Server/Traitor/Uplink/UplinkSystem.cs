@@ -70,7 +70,7 @@ public sealed class UplinkSystem : EntitySystem
         store.AccountOwner = mind;
 
         store.Balance.Clear();
-        _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, balance } },
+        _store.TryAddCurrency(new() { { TelecrystalCurrencyPrototype, balance } },
             uplink,
             store);
 

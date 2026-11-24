@@ -44,9 +44,9 @@ public sealed class MiningSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, OreVeinComponent component, MapInitEvent args)
     {
-        if (component.CurrentOre != null || component.OreRarityPrototypeId == null || !_random.Prob(component.OreChance))
+        if (component.CurrentOre != null || component.OreRarityPrototypeId is not { } rarityId || !_random.Prob(component.OreChance))
             return;
 
-        component.CurrentOre = _proto.Index<WeightedRandomOrePrototype>(component.OreRarityPrototypeId).Pick(_random);
+        component.CurrentOre = _proto.Index(rarityId).Pick(_random);
     }
 }

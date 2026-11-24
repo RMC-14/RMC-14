@@ -6,7 +6,6 @@ using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Validation;
 using Robust.Shared.Serialization.Markdown.Value;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Serialization.TypeSerializers.Interfaces;
 
 namespace Content.Shared.Damage;
@@ -14,8 +13,6 @@ namespace Content.Shared.Damage;
 //todo writing
 public sealed class DamageSpecifierDictionarySerializer : ITypeReader<Dictionary<string, FixedPoint2>, MappingDataNode>
 {
-    private ITypeValidator<Dictionary<string, FixedPoint2>, MappingDataNode> _damageTypeSerializer = new PrototypeIdDictionarySerializer<FixedPoint2, DamageTypePrototype>();
-    private ITypeValidator<Dictionary<string, FixedPoint2>, MappingDataNode> _damageGroupSerializer = new PrototypeIdDictionarySerializer<FixedPoint2, DamageGroupPrototype>();
 
     public ValidationNode Validate(ISerializationManager serializationManager, MappingDataNode node,
         IDependencyCollection dependencies, ISerializationContext? context = null)
@@ -23,12 +20,12 @@ public sealed class DamageSpecifierDictionarySerializer : ITypeReader<Dictionary
         var vals = new Dictionary<ValidationNode, ValidationNode>();
         if (node.TryGet<MappingDataNode>("types", out var typesNode))
         {
-            vals.Add(new ValidatedValueNode(new ValueDataNode("types")), _damageTypeSerializer.Validate(serializationManager, typesNode, dependencies, context));
+            vals.Add(new ValidatedValueNode(new ValueDataNode("types")), serializationManager.ValidateNode<Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>>(typesNode, context));
         }
 
         if (node.TryGet<MappingDataNode>("groups", out var groupsNode))
         {
-            vals.Add(new ValidatedValueNode(new ValueDataNode("groups")), _damageGroupSerializer.Validate(serializationManager, groupsNode, dependencies, context));
+            vals.Add(new ValidatedValueNode(new ValueDataNode("groups")), serializationManager.ValidateNode<Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>>(groupsNode, context));
         }
 
         return new ValidatedMappingNode(vals);

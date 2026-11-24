@@ -1,5 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
+using System.Linq;
 using Content.Server.Cargo.Systems;
 using Content.Server.Construction.Completions;
 using Content.Server.Construction.Components;
@@ -158,7 +159,7 @@ public sealed class MaterialArbitrageTest
                 && proto.Components.TryGetValue(compositionName, out var compositionReg))
             {
                 var compositionComp = (PhysicalCompositionComponent)compositionReg.Component;
-                baseComposition = compositionComp.MaterialComposition;
+                baseComposition = compositionComp.MaterialComposition.ToDictionary(pair => pair.Key.Id, pair => pair.Value);
 
             }
 
@@ -410,7 +411,7 @@ public sealed class MaterialArbitrageTest
                     continue;
 
                 // Check cargo sell price
-                var materialPrice = await GetDeconstructedPrice(compositionComponent.MaterialComposition);
+                var materialPrice = await GetDeconstructedPrice(compositionComponent.MaterialComposition.ToDictionary(pair => pair.Key.Id, pair => pair.Value));
                 var chemicalPrice = await GetChemicalCompositionPrice(compositionComponent.ChemicalComposition);
                 var sumPrice = materialPrice + chemicalPrice;
                 var price = await GetPrice(id);
@@ -491,7 +492,7 @@ public sealed class MaterialArbitrageTest
 #pragma warning restore CS1998
 
 #pragma warning disable CS1998
-        async Task<double> GetChemicalCompositionPrice(Dictionary<string, FixedPoint2> mats)
+        async Task<double> GetChemicalCompositionPrice(Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> mats)
         {
             double price = 0;
             foreach (var (id, num) in mats)

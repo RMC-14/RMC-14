@@ -2,7 +2,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Tools;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;    // RMC14
 using System.Linq;
 
 namespace Content.Shared.Construction.Steps
@@ -13,22 +12,22 @@ namespace Content.Shared.Construction.Steps
         // Begin RMC14
         [Dependency] private readonly IPrototypeManager _protoManager = default!;
         
-        [DataField("tools", required:true, customTypeSerializer:typeof(PrototypeIdListSerializer<ToolQualityPrototype>))]
-        public List<string> Tools { get; private set; } = new();
+        [DataField("tools", required:true)]
+        public List<ProtoId<ToolQualityPrototype>> Tools { get; private set; } = new();
         // End RMC14
 
         [DataField("fuel")] public float Fuel { get; private set; } = 10;
 
-        [DataField("examine")] public string ExamineOverride { get; private set; } = string.Empty;
+        [DataField("examine")] public LocId Examine { get; private set; } = string.Empty;
 
         // Begin RMC14
         [DataField] public DuplicateConditions DuplicateConditions { get; private set; }
 
         public override void DoExamine(ExaminedEvent examinedEvent)
         {
-            if (!string.IsNullOrEmpty(ExamineOverride))
+            if (!string.IsNullOrEmpty(Examine))
             {
-                examinedEvent.PushMarkup(Loc.GetString(ExamineOverride));
+                examinedEvent.PushMarkup(Loc.GetString(Examine));
                 return;
             }
 

@@ -1,7 +1,6 @@
 // using Content.Server.Body.Components;
 using Content.Shared.Body.Prototypes;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.EntityEffects.EffectConditions;
 
@@ -10,8 +9,8 @@ namespace Content.Shared.EntityEffects.EffectConditions;
 /// </summary>
 public sealed partial class OrganType : EventEntityEffectCondition<OrganType>
 {
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdSerializer<MetabolizerTypePrototype>))]
-    public string Type = default!;
+    [DataField(required: true)]
+    public ProtoId<MetabolizerTypePrototype> Type = default!;
 
     /// <summary>
     ///     Does this condition pass when the organ has the type, or when it doesn't have the type?
