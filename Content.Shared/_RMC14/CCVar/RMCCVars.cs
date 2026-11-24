@@ -146,6 +146,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCEvolutionPointsAccumulateBeforeMinutes =
         CVarDef.Create("rmc.evolution_points_accumulate_before_minutes", 15, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<float> RMCXenoQueenRequirementGracePeriodMinutes =
+        CVarDef.Create("rmc.xeno_queen_requirement_grace_period_minutes", 2.5f, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
 
@@ -690,15 +693,29 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCGMRequestSoundMuted =
         CVarDef.Create("rmc.gm_request_sound_muted", false,  CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
-    public static readonly CVarDef<float> RMCGhostBodyAlpha =
-        CVarDef.Create("rmc.ghost_body_alpha", 0x88 / 255f, CVar.REPLICATED | CVar.SERVER);
+    /// <summary>
+    ///     if players can join as a fax responder from the lobby
+    /// </summary>
+    public static readonly CVarDef<bool> RMCFaxRespondersEnabled =
+        CVarDef.Create("rmc.fax_responders_enabled", true, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCGhostClothingAlphaBoost =
-        CVarDef.Create("rmc.ghost_clothing_alpha_boost", 0.4f, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<float> RMCGhostBodyAlpha =
+        CVarDef.Create("rmc.ghost_body_alpha", 0.35f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCGhostObserverAlpha =
+        CVarDef.Create("rmc.ghost_observer_alpha", 0x88 / 255f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 
+    public static readonly CVarDef<float> BurrowedLarvaHiveCoreInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_hive_core_invincibility_time_seconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> BurrowedLarvaQueenInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_queen_invincibility_time_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> BurrowedLarvaFallbackInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_fallback_invincibility_time_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
     /// <summary>
     /// How many entities to damage/delete per tick after nukemap/scuttle.
     /// </summary>
