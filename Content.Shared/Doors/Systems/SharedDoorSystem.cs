@@ -53,7 +53,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
 
-    //RMC14
+    // RMC14
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
 
     public static readonly ProtoId<TagPrototype> DoorBumpTag = "DoorBumpOpener";
@@ -580,7 +580,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
         _doorIntersecting.Clear();
         _entityLookup.GetLocalEntitiesIntersecting(xform.GridUid.Value, tileRef.GridIndices, _doorIntersecting, gridComp: mapGridComp, flags: (LookupFlags.All & ~LookupFlags.Sensors));
 
-        //RMC14
+        // RMC14
         var isResinDoor = HasComp<ResinDoorComponent>(uid);
 
         // TODO SLOTH fix electro's code.
@@ -594,7 +594,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
             if (!otherPhysics.Comp.CanCollide)
                 continue;
 
-            //RMC14
+            // RMC14
             if (isResinDoor && _xenoConstruct.IsResinDoorCollidable(otherPhysics))
                 continue;
 
