@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Xenonids.Despoiler.Stab;
+using Content.Shared._RMC14.Xenonids.Despoiler.Acid;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;

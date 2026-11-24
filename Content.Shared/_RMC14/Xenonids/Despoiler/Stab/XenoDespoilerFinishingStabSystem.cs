@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Xenonids.Despoiler;
+using Content.Shared._RMC14.Xenonids.Despoiler.Acid;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Damage;

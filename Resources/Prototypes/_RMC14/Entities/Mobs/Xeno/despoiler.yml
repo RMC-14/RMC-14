@@ -103,14 +103,6 @@
         Heat: 30
     - types:
         Heat: 40
-    acidComponents:
-    - type: UserAcided
-      armorPiercing: 40
-      duration: 12
-      damageEvery: 1
-      damage:
-        types:
-          Heat: 1
   - type: XenoDespoilerHypertension
     maxStacks: 4
     pointsPerStack: 200

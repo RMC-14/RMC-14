@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Despoiler.Hypertension;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit;
@@ -15,6 +16,7 @@ public sealed class XenoDespoilerAcidSystem : EntitySystem
 {
     [Dependency] private readonly XenoDespoilerHypertensionSystem _hyper = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedXenoAcidSystem _xenoAcid = default!;
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -121,8 +123,8 @@ public sealed class XenoDespoilerAcidSystem : EntitySystem
         if (_mobState.IsDead(target))
             return;
 
-        if (!_userAcidedQuery.HasComp(target) && caster.Comp.AcidComponents.Count > 0)
-            EntityManager.AddComponents(target, caster.Comp.AcidComponents, removeExisting: false);
+        if (!_userAcidedQuery.HasComp(target))
+            _xenoSpit.ApplyOrExtendAcid(target, caster.Comp.Acid, caster.Comp.AcidDuration);
 
         var tier = EnsureComp<XenoDespoilerAcidTierComponent>(target);
         if (enhance)

@@ -4,8 +4,6 @@
   components:
   - type: Action
     itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Interface/Actions/despoiler_ability_icons.rsi
     checkCanInteract: false
 
 - type: entity
@@ -16,6 +14,7 @@
   components:
   - type: Action
     icon:
+      sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler_ability_icons.rsi
       state: acid_barrage
   - type: InstantAction
     event: !type:XenoDespoilerAcidBarrageActionEvent
@@ -49,6 +48,7 @@
   components:
   - type: Action
     icon:
+      sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler_ability_icons.rsi
       state: caustic_embrace
     useDelay: 12
   - type: TargetAction
@@ -82,6 +82,7 @@
   components:
   - type: Action
     icon:
+      sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler_ability_icons.rsi
       state: oozing_wounds
     useDelay: 25
   - type: InstantAction
@@ -109,6 +110,7 @@
   components:
   - type: Action
     icon:
+      sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler_ability_icons.rsi
       state: catalyze
     useDelay: 20
   - type: InstantAction

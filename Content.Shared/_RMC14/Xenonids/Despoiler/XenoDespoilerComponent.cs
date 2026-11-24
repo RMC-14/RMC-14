@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -17,6 +18,9 @@ public sealed partial class XenoDespoilerComponent : Component
     [DataField]
     public List<DamageSpecifier> FinishingStabBonusByTier = new();
 
-    [DataField]
-    public ComponentRegistry AcidComponents = new();
+    [DataField, AutoNetworkedField]
+    public EntProtoId<XenoAcidTypeComponent> Acid = "RMCWeakLingeringAcid";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AcidDuration = TimeSpan.FromSeconds(12);
 }

@@ -82,7 +82,7 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
                 pending.Pending.Add(new XenoDespoilerOozingWoundsPendingTile
                 {
                     SpawnAt = now + spawnDelay,
-                    Tile = tile,
+                    Tile = GetNetCoordinates(tile),
                     SprayProto = sprayProto,
                     PuddleProto = action.LingeringAcidProto,
                     PuddleChance = action.LingeringAcidChance,
@@ -133,7 +133,11 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
                 if (TerminatingOrDeleted(caster))
                     continue;
 
-                var spray = PredictedSpawnAtPosition(entry.SprayProto, entry.Tile);
+                var coords = GetCoordinates(entry.Tile);
+                if (!coords.IsValid(EntityManager))
+                    continue;
+
+                var spray = PredictedSpawnAtPosition(entry.SprayProto, coords);
                 _hive.SetSameHive(caster, spray);
 
                 if (_sprayQuery.TryComp(spray, out var sprayComp))
@@ -145,7 +149,7 @@ public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
                 if (!_random.Prob(entry.PuddleChance))
                     continue;
 
-                var puddle = PredictedSpawnAtPosition(entry.PuddleProto, entry.Tile);
+                var puddle = PredictedSpawnAtPosition(entry.PuddleProto, coords);
                 _hive.SetSameHive(caster, puddle);
                 if (!_lingeringQuery.TryComp(puddle, out var puddleComp))
                     continue;

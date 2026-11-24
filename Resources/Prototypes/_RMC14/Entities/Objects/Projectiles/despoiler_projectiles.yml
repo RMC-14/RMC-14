@@ -47,7 +47,6 @@
   - type: XenoDespoilerLingeringAcid
     minLifetime: 15
     maxLifetime: 20
-    crossBurnDamage: 20
   - type: Physics
     bodyType: Static
   - type: Fixtures

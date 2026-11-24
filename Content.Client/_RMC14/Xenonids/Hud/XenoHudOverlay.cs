@@ -31,6 +31,7 @@ using Content.Shared._RMC14.Xenonids.Finesse;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Xenonids.Despoiler.Hypertension;
 using Content.Shared.FixedPoint;
 using Content.Shared._RMC14.Xenonids.Paratoxin;
 

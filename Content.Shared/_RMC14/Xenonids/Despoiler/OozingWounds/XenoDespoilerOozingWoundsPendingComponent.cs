@@ -13,4 +13,4 @@ public sealed partial class XenoDespoilerOozingWoundsPendingComponent : Componen
 }
 
 [Serializable, NetSerializable]
-public record struct XenoDespoilerOozingWoundsPendingTile(TimeSpan SpawnAt, EntityCoordinates Tile, EntProtoId SprayProto, EntProtoId PuddleProto, float PuddleChance);
+public record struct XenoDespoilerOozingWoundsPendingTile(TimeSpan SpawnAt, NetCoordinates Tile, EntProtoId SprayProto, EntProtoId PuddleProto, float PuddleChance);
