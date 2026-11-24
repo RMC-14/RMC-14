@@ -7,11 +7,12 @@
     sprite: _RMC14/Structures/Furniture/bookshelf.rsi
     snapCardinals: true
     layers:
+      - state: bookcase
       - state: book-0
       - map: ["enum.StorageFillLayers.Fill"]
   - type: Appearance
   - type: StorageFillVisualizer
-    maxFillLevels: 5
+    maxFillLevels: 10
     fillBaseName: book
   - type: Damageable
     damageContainer: Inorganic
@@ -33,7 +34,7 @@
         acts: ["Destruction"]
   - type: Storage
     grid:
-    - 0,0,15,1
+    - 0,0,17,1
   - type: Occluder
     enabled: false
   - type: RMCMesonsNonviewable
@@ -42,18 +43,28 @@
   parent: RMCBookcase
   id: RMCBookcaseMedical
   name: medical manuals bookcase
-#  components:
-#  - type: StorageFill
-#    contents:
-#    /obj/item/book/manual/medical_diagnostics_manual x3
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCGuidebookMedical
+        amount: 3
+      - id: RMCGuidebookSurgery
+        amount: 2
+      - id: RMCGuidebookChemistry
+        amount: 2
 
 - type: entity
   parent: RMCBookcase
   id: RMCBookcaseEngineering
   name: engineering manuals bookcase
-#  components:
-#  - type: StorageFill
-#    contents:
-#    /obj/item/book/manual/engineering_construction
-#    /obj/item/book/manual/engineering_hacking
-#    /obj/item/book/manual/engineering_guide
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCGuidebookConstruction
+        amount: 2
+      - id: RMCGuidebookEngineering
+        amount: 2
+      - id: RMCGuidebookTelecomms
+        amount: 2
+      - id: RMCGuidebookReactor
+        amount: 2

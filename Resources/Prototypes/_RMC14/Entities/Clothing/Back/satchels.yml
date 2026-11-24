@@ -500,6 +500,30 @@
     - id: CMStampDenied
 
 - type: entity
+  parent: CMSatchelFilledFaxResponder
+  id: RMCSatchelFilledFaxResponderWeYa
+  suffix: Fax Responder, WeYa
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
+    - id: RMCPaperFaxTemplateWeYa
+
+- type: entity
+  parent: CMSatchelFilledFaxResponder
+  id: RMCSatchelFilledFaxResponderFreePress
+  suffix: Fax Responder, Free Press
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
+    - id: RMCPaperFaxTemplateFreePress
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelFilledFaxResponderHighComm
   suffix: Fax Responder, HComm
@@ -798,6 +822,38 @@
     - id: CMPenClicky
     - id: RMCRadioHandheldColonyOff
     - id: CMClipboard
+    - id: RMCUniversalRecorder
+    - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: RMCSatchelCMBDeputyERTFilled
+  suffix: CMB Marshal, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHoldout
+    - id: RMCRadioHandheldColonyOff
+    - id: RMCFlashlight
+    # TODO RMC14 camera
+    - id: RMCUniversalRecorder
+    - id: CMCrowbar
+    - id: RMCZipties
+    - id: RMCGrenadeFlashBang
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: RMCSatchelCMBMarshalERTFilled
+  suffix: CMB Marshal, ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHoldout
+    # TODO RMC14 rubber pallet grenade
+    # TODO RMC14 CMB handled distress beacon
+    - id: RMCRadioHandheldColonyOff
+    - id: RMCFlashlight
+    # TODO RMC14 camera
     - id: RMCUniversalRecorder
     - id: CMCrowbar
 
@@ -1390,6 +1446,21 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+
+- type: entity
+  parent: RMCSatchelMARSOC
+  id: RMCSatchelMARSOCFilled
+  name: UNMC SOF combat pack
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive # TODO RMC14 M40/2 HEDP grenade
+      amount: 3
+    - id: RMCGrenadeWhitePhosphorusCompound
+      amount: 3
+    - id: RMCMotionDetector
+    # TODO RMC14 cermaic plate
 
 - type: entity
   parent: CMSatchel

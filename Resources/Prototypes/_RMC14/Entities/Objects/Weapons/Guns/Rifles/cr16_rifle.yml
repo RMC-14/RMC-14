@@ -28,7 +28,7 @@
     - SemiAuto
     - Burst
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m16.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cr16.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -157,6 +157,9 @@
       rmc-aslot-rail: -0.25, 0.125
       rmc-aslot-stock: -0.59, 0
       rmc-aslot-underbarrel: 0.135, -0.275
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cr16a5.ogg
 
 - type: entity
   parent: CMMagazineRifleBase
