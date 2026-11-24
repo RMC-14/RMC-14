@@ -1790,7 +1790,7 @@
   id: ActionXenoSpitDissolverCorrosive
   parent: ActionXenoSpit
   name: Corrosive Spit (45)
-  description: Launches a strong projectile after a 0.6s that pierces through one enemy or ally and covers them with acid. You can change targets during the windup. Hits downed targets even when not aimed. At 4 stored acid, pierces though an additional mob and extra armor piercing. At 5 stored acid, pierces though another additional mob and even more armor piercing.
+  description: Launches a strong projectile after a 0.6s that pierces through one enemy or ally and covers them with acid. You can change targets during the windup. Loses damage for each mob pierced, and hits downed targets even when not aimed. At 4 stored acid, pierces though an additional mob, loses less damage per pierce, and extra armor piercing. At 5 stored acid, pierces though another additional mob, loses much less damage per pierce, and even more armor piercing.
   components:
   - type: Action
     itemIconStyle: NoItem
