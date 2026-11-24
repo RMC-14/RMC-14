@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Content.Client._RMC14.Lobby;
 using Content.Client.Guidebook;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
@@ -22,6 +23,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -48,7 +50,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
-    private JobPriorityEditor? _jobPriorityEditor;
+    private RMCJobPrioritiesWindow? _jobPrioritiesWindow; // RMC14
     private CharacterSetupGuiSavePanel? _savePanel;
 
     /// <summary>
@@ -101,7 +103,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     {
         _profileEditor?.RefreshAntags();
         _profileEditor?.RefreshJobs();
-        _jobPriorityEditor?.RefreshJobs();
+        _jobPrioritiesWindow?.Refresh(); // RMC14
     }
 
     private void OnProtoReload(PrototypesReloadedEventArgs obj)
@@ -146,15 +148,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             return;
 
         RefreshLobbyPreview();
-
-        if (_characterSetup == null)
-            return;
-
-        var showingJobPriorities = _jobPriorityEditor?.Visible == true && _profileEditor?.Visible != true;
-        _characterSetup.ReloadCharacterPickers(selectJobPriorities: showingJobPriorities);
-
-        if (_jobPriorityEditor is { } jobPriorityEditor && !jobPriorityEditor.IsDirty())
-            jobPriorityEditor.LoadJobPriorities();
+        _characterSetup?.ReloadCharacterPickers();
     }
 
     private void PreferencesDataLoaded()
@@ -174,8 +168,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         var previewPanel = state.Lobby?.CharacterPreview;
         if (previewPanel != null)
         {
-            previewPanel.PrioritiesUpdated -= OnLobbyPrioritiesUpdated;
-            previewPanel.PrioritiesUpdated += OnLobbyPrioritiesUpdated;
+            previewPanel.JobPrioritiesButton.OnPressed -= OnJobPrioritiesPressed; // RMC14
+            previewPanel.JobPrioritiesButton.OnPressed += OnJobPrioritiesPressed; // RMC14
             previewPanel.SetLoaded(_preferencesManager.ServerDataLoaded);
         }
 
@@ -189,9 +183,11 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         var previewPanel = state.Lobby?.CharacterPreview;
         if (previewPanel != null)
         {
-            previewPanel.PrioritiesUpdated -= OnLobbyPrioritiesUpdated;
+            previewPanel.JobPrioritiesButton.OnPressed -= OnJobPrioritiesPressed; // RMC14
             previewPanel.SetLoaded(false);
         }
+
+        _jobPrioritiesWindow?.Close(); // RMC14
 
         if (_stateManager.CurrentState is LobbyState lobby)
         {
@@ -208,7 +204,6 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         var (characterGui, profileEditor) = EnsureGui();
         characterGui.ReloadCharacterPickers();
         profileEditor.ResetToDefault();
-        _jobPriorityEditor?.LoadJobPriorities();
     }
 
     /// <summary>
@@ -217,6 +212,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private void RefreshLobbyPreview()
     {
         PreviewPanel?.Refresh();
+        _jobPrioritiesWindow?.Refresh(); // RMC14
     }
 
     private void RefreshEditors()
@@ -224,45 +220,38 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         _profileEditor?.RefreshAntags();
         _profileEditor?.RefreshJobs();
         _profileEditor?.RefreshLoadouts();
-        _jobPriorityEditor?.RefreshJobs();
+        _jobPrioritiesWindow?.Refresh(); // RMC14
     }
 
-    private void OnLobbyPrioritiesUpdated()
+    // RMC14 start
+    public void SetJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> priorities)
     {
-        if (_characterSetup != null)
+        _preferencesManager.UpdateJobPriorities(priorities);
+        _profileEditor?.RefreshPreviewForPriorityUpdate();
+        _characterSetup?.ReloadCharacterPickers();
+        OnAnyCharacterOrJobChange?.Invoke();
+    }
+
+    public void OpenJobPrioritiesWindow()
+    {
+        if (_jobPrioritiesWindow != null)
         {
-            var showingJobPriorities = _jobPriorityEditor?.Visible == true && _profileEditor?.Visible != true;
-            _characterSetup.ReloadCharacterPickers(selectJobPriorities: showingJobPriorities);
+            _jobPrioritiesWindow.MoveToFront();
+            return;
         }
 
-        _profileEditor?.RefreshPreviewForPriorityUpdate();
+        _jobPrioritiesWindow = new RMCJobPrioritiesWindow();
+        _jobPrioritiesWindow.PrioritiesChanged += SetJobPriorities;
+        _jobPrioritiesWindow.SettingsChanged += _preferencesManager.UpdatePlayerSettings;
+        _jobPrioritiesWindow.OnClose += () => _jobPrioritiesWindow = null;
+        _jobPrioritiesWindow.OpenCentered();
     }
 
-    /// <summary>
-    /// Save job priorities locally and on the remote server, reload the character setup gui appropriately
-    /// </summary>
-    private void SaveJobPriorities()
+    private void OnJobPrioritiesPressed(BaseButton.ButtonEventArgs args)
     {
-        if (_jobPriorityEditor == null)
-            return;
-        SaveJobPriorities(_jobPriorityEditor.SelectedJobPriorities);
+        OpenJobPrioritiesWindow();
     }
-
-    /// <summary>
-    /// Save job priorities locally and on the remote server, reload the character setup gui appropriately
-    /// </summary>
-    /// <param name="newJobPriorities"></param>
-    private void SaveJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities)
-    {
-        _preferencesManager.UpdateJobPriorities(newJobPriorities);
-        if (_jobPriorityEditor != null)
-            _preferencesManager.UpdatePlayerSettings(_jobPriorityEditor.SelectedSettings); // RMC14
-        OnAnyCharacterOrJobChange?.Invoke();
-        _profileEditor?.RefreshPreviewForPriorityUpdate();
-        _jobPriorityEditor?.LoadJobPriorities();
-        var (characterGui, _) = EnsureGui();
-        characterGui.ReloadCharacterPickers(selectJobPriorities: true);
-    }
+    // RMC14 end
 
     private void SaveProfile()
     {
@@ -343,13 +332,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             _requirements,
             _markings);
 
-        _jobPriorityEditor = new JobPriorityEditor(_preferencesManager, _prototypeManager, _requirements);
-
-        _jobPriorityEditor.Save += SaveJobPriorities;
-
         _profileEditor.OnOpenGuidebook += _guide.OpenHelp;
 
-        _characterSetup = new CharacterSetupGui(_profileEditor, _jobPriorityEditor);
+        _characterSetup = new CharacterSetupGui(_profileEditor); // RMC14
 
         _characterSetup.CloseButton.OnPressed += _ =>
         {
@@ -357,13 +342,6 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             if( _profileEditor.Visible && _profileEditor.Profile != null && _profileEditor.IsDirty)
             {
                 OpenSavePanel(SaveProfile);
-
-                return;
-            }
-
-            if (_jobPriorityEditor.Visible && _jobPriorityEditor.IsDirty())
-            {
-                OpenSavePanel(SaveJobPriorities);
 
                 return;
             }

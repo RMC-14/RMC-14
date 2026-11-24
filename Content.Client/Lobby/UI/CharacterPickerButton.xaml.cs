@@ -16,8 +16,9 @@ namespace Content.Client.Lobby.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CharacterPickerButton : ContainerButton
 {
-    private const string EnabledLoc = "character-setup-gui-character-picker-button-enabled-button";
-    private const string DisabledLoc = "character-setup-gui-character-picker-button-disabled-button";
+    // RMC14
+    private const string EnabledIconPath = "/Textures/Interface/Nano/Monotone/monotone_checkbox_checked.svg.96dpi.png";
+    private const string DisabledIconPath = "/Textures/Interface/Nano/Monotone/monotone_checkbox_unchecked.svg.96dpi.png";
 
     /// <summary>
     /// Invoked if we should delete the attached character
@@ -56,7 +57,7 @@ public sealed partial class CharacterPickerButton : ContainerButton
         View.LoadPreview(profile);
 
         EnabledCheck.Pressed = profile.Enabled;
-        EnabledCheck.Text = Loc.GetString(profile.Enabled ? EnabledLoc : DisabledLoc);
+        UpdateEnabledIcon(profile.Enabled); // RMC14
 
         Pressed = isSelected;
 
@@ -94,8 +95,15 @@ public sealed partial class CharacterPickerButton : ContainerButton
             EnabledCheck.OnToggled += args =>
             {
                 OnEnableToggled?.Invoke(args.Pressed);
-                EnabledCheck.Text = Loc.GetString(args.Pressed ? EnabledLoc : DisabledLoc);
+                UpdateEnabledIcon(args.Pressed); // RMC14
             };
         }
+    }
+
+    // RMC14
+    private void UpdateEnabledIcon(bool enabled)
+    {
+        EnabledIcon.TexturePath = enabled ? EnabledIconPath : DisabledIconPath;
+        EnabledCheck.ToolTip = Loc.GetString(enabled ? "rmc-character-picker-enabled-tooltip" : "rmc-character-picker-disabled-tooltip");
     }
 }

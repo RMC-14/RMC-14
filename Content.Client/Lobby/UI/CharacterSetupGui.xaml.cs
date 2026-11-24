@@ -55,7 +55,7 @@ namespace Content.Client.Lobby.UI
         /// <summary>
         /// UI Class for the character customization window that pops up when you click "Customize" on the lobby screen
         /// </summary>
-        public CharacterSetupGui(HumanoidProfileEditor profileEditor, JobPriorityEditor jobPriorityEditor)
+        public CharacterSetupGui(HumanoidProfileEditor profileEditor) // RMC14
         {
             _humanoidProfileEditor = profileEditor;
             RobustXamlLoader.Load(this);
@@ -84,7 +84,6 @@ namespace Content.Client.Lobby.UI
             };
 
             CharEditor.AddChild(profileEditor);
-            JobPriorityEditor.AddChild(jobPriorityEditor);
             RulesButton.OnPressed += _ => new RulesAndInfoWindow().Open();
 
             StatsButton.OnPressed += _ => new RMCPlaytimeStatsWindow().OpenCentered(); // RMC-PlaytimeStats-Tweak
@@ -95,22 +94,13 @@ namespace Content.Client.Lobby.UI
 
             _cfg.OnValueChanged(CCVars.SeeOwnNotes, p => AdminRemarksButton.Visible = p, true);
 
-            // This is in the same button group as the character picker buttons
-            JobPrioritiesButton.OnPressed += args =>
-            {
-                jobPriorityEditor.LoadJobPriorities();
-                CharEditor.Visible = false;
-                JobPriorityEditor.Visible = true;
-                ReloadCharacterPickers(selectJobPriorities: true);
-            };
+            JobPrioritiesButton.OnPressed += _ => UserInterfaceManager.GetUIController<LobbyUIController>().OpenJobPrioritiesWindow(); // RMC14
         }
 
         /// <summary>
         /// Disposes and reloads all character picker buttons from the preferences data.
         /// </summary>
-        /// <param name="selectJobPriorities">If true, then reload with the job priorities button selected instead of
-        /// one of the character picker buttons</param>
-        public void ReloadCharacterPickers(bool selectJobPriorities = false)
+        public void ReloadCharacterPickers() // RMC14
         {
             _createNewCharacterButton.Orphan();
             Characters.RemoveAllChildren();
@@ -118,16 +108,10 @@ namespace Content.Client.Lobby.UI
             var numberOfFullSlots = 0;
             var characterButtonsGroup = new ButtonGroup();
 
-            // Include the Edit Job Priorities button into this group
-            JobPrioritiesButton.Group = characterButtonsGroup;
-
             if (!_preferencesManager.ServerDataLoaded)
             {
                 return;
             }
-
-            CharEditor.Visible = !selectJobPriorities;
-            JobPriorityEditor.Visible = selectJobPriorities;
 
             _createNewCharacterButton.ToolTip =
                 Loc.GetString("character-setup-gui-create-new-character-button-tooltip",
@@ -139,7 +123,7 @@ namespace Content.Client.Lobby.UI
             {
                 if (character is not HumanoidCharacterProfile humanoid)
                     continue;
-                var isSelected = !selectJobPriorities &&  (SelectedCharacterSlot.HasValue ? slot == SelectedCharacterSlot : first);
+                var isSelected = SelectedCharacterSlot.HasValue ? slot == SelectedCharacterSlot : first; // RMC14
                 numberOfFullSlots++;
                 var characterPickerButton = new CharacterPickerButton(
                     _preferencesManager,
@@ -159,8 +143,6 @@ namespace Content.Client.Lobby.UI
                 {
                     SelectedCharacterSlot = slot;
                     SelectCharacter?.Invoke(slot);
-                    CharEditor.Visible = true;
-                    JobPriorityEditor.Visible = false;
                     _humanoidProfileEditor.SetProfile(slot);
                 };
 

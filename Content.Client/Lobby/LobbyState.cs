@@ -72,12 +72,12 @@ namespace Content.Client.Lobby
 
             var width = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
             Lobby.RightSide.SetWidth = width;
+            Lobby.UpdateLeftColumnWidth(); // RMC14
 
             UpdateLobbyUi();
 
             Lobby.CharacterPreview.CharacterSetupButton.OnPressed += OnSetupPressed;
             Lobby.CharacterPreview.PatronPerks.OnPressed += OnPatronPerksPressed;
-            Lobby.CharacterPreview.PrioritiesUpdated += UpdateReadyAllowed;
             Lobby.ReadyButton.OnPressed += OnReadyPressed;
             Lobby.ReadyButton.OnToggled += OnReadyToggled;
             Lobby.ReadyButton.TooltipSupplier = GetReadyButtonTooltip;
@@ -168,7 +168,7 @@ namespace Content.Client.Lobby
                 return;
             }
 
-            new LateJoinGui().OpenCentered();
+            new RMCLateJoinGui().OpenCentered(); // RMC14
         }
 
         private void OnReadyToggled(BaseButton.ButtonToggledEventArgs args)
