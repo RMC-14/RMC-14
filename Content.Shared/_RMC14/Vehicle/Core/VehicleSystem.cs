@@ -1063,7 +1063,7 @@ public sealed partial class VehicleSystem : EntitySystem
             if (seatXform.MapID != mapId)
                 continue;
 
-            var key = Spawn(VehicleKey, seatXform.Coordinates);
+            var key = SpawnAttachedTo(VehicleKey, seatXform.Coordinates);
             if (TryComp(key, out VehicleKeyComponent? keyComp))
                 _vehicleLock.BindKey((key, keyComp), keyId, vehicle);
 

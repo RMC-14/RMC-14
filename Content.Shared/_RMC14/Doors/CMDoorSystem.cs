@@ -315,7 +315,7 @@ public sealed class CMDoorSystem : EntitySystem
 
         var adjacent = transform.Coordinates.Offset(transform.LocalRotation.GetCardinalDir());
         var position = _map.LocalToTile(transform.GridUid.Value, grid, adjacent);
-        return _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, position);
+        return _map.GetAnchoredEntities(transform.GridUid.Value, grid, position);
     }
 
     // RMC TODO: Once all legacy CMDoubleDoors are removed this can be removed

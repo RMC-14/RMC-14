@@ -949,7 +949,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (!smashable.DeleteOnHit || !ShouldPredictVehicleInteractions(vehicle))
                 return false;
 
-            PredictedQueueDel(target);
+            QueueDel(target);
             return true;
         }
 

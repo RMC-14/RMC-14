@@ -464,7 +464,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void PlaceResinHole(Entity<XenoComponent> xeno, EntityCoordinates coords, EntProtoId resinHolePrototype)
     {
-        var resinHole = Spawn(resinHolePrototype, coords);
+        var resinHole = SpawnAttachedTo(resinHolePrototype, coords);
 
         _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno.Owner):xeno} placed a resin hole at {coords}");
 

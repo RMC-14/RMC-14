@@ -41,7 +41,7 @@ public sealed class RMCGibSystem : EntitySystem
         foreach (var protoId in ent.Comp.Entities)
         {
             var position = _transform.GetMoverCoordinates(ent);
-            var newEntity = Spawn(protoId, position);
+            var newEntity = SpawnAttachedTo(protoId, position);
             _transform.AttachToGridOrMap(newEntity);
         }
     }

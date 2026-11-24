@@ -29,7 +29,7 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
         Subs.CVar(_cfg, CCVars.AudioMasterVolume, value => _originalVolume = value, true);
     }
 
-    private void OnDeafShutdown(EntityUid uid, DeafComponent component, ComponentShutdown args)
+    private void OnDeafShutdown(EntityUid uid, DeafComponent component, ref ComponentShutdown args)
     {
         if (_player.LocalEntity == uid)
             _audio.SetMasterGain(_originalVolume);

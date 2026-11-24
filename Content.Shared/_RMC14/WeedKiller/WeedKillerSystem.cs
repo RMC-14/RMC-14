@@ -138,7 +138,7 @@ public sealed class WeedKillerSystem : EntitySystem
 
         foreach (var position in killer.Comp.Positions)
         {
-            Spawn(WeedKiller, _map.ToCoordinates(position.Grid, position.Indices, position.Grid));
+            SpawnAttachedTo(WeedKiller, _map.ToCoordinates(position.Grid, position.Indices, position.Grid));
             var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(position.Grid, position.Indices);
             while (anchored.MoveNext(out var anchoredId))
             {

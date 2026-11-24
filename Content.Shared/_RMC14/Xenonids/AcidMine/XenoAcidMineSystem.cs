@@ -96,7 +96,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
         {
             for (var y = -1; y <= 1; y++)
             {
-                var blastUid = Spawn(protoId, new EntityCoordinates(args.Target.EntityId, center + new Vector2(x, y)));
+                var blastUid = SpawnAttachedTo(protoId, new EntityCoordinates(args.Target.EntityId, center + new Vector2(x, y)));
                 var blast = EnsureComp<XenoAcidBlastComponent>(blastUid);
                 if (x != 0 || y != 0)
                     blast.ExplosionSound = null;

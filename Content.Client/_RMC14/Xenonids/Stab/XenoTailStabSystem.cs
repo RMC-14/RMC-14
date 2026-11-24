@@ -66,7 +66,7 @@ public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        var animationEnt = Spawn(animationId, user.Comp2.Coordinates);
+        var animationEnt = SpawnAttachedTo(animationId, user.Comp2.Coordinates);
         _transform.SetParent(animationEnt, user);
 
         var sprite = EnsureComp<SpriteComponent>(animationEnt);

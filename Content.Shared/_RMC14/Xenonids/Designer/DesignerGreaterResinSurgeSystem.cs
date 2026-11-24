@@ -155,7 +155,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
         {
             foreach (var tileCenter in tileCenters)
             {
-                var effect = Spawn(effectId, GetCoordinates(tileCenter));
+                var effect = SpawnAttachedTo(effectId, GetCoordinates(tileCenter));
                 effects.Add(effect);
                 if (TryGetNetEntity(effect, out var netEffect) && TryGetNetEntity(ent.Owner, out var netUser))
                 {
@@ -218,7 +218,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
                 continue;
 
             // Spawn after the enumerator is disposed to avoid modifying anchored entity collections mid-iteration.
-            var spawned = Spawn(pending.WallPrototype, tileCenter.SnapToGrid(EntityManager));
+            var spawned = SpawnAttachedTo(pending.WallPrototype, tileCenter.SnapToGrid(EntityManager));
             _hive.SetSameHive(user, spawned);
 
             foreach (var nodeUid in nodesToConvert)

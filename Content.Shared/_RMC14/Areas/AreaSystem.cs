@@ -451,13 +451,13 @@ public sealed class AreaSystem : EntitySystem
                 areaGrid.Labels.Clear();
                 Dirty(ent, areaGrid);
 
-                var tiles = _map.GetAllTilesEnumerator(ent, mapGrid);
+                var tiles = _map.GetAllTiles(ent, mapGrid);
                 var areasOccupied = new Dictionary<EntProtoId<AreaComponent>, (int Resin, int Buildable)>();
                 while (tiles.MoveNext(out var tileRefNullable))
                 {
                     var tileRef = tileRefNullable.Value;
                     var pos = tileRef.GridIndices;
-                    var anchoredEnumerator = _map.GetAnchoredEntitiesEnumerator(ent, mapGrid, pos);
+                    var anchoredEnumerator = _map.GetAnchoredEntities(ent, mapGrid, pos);
 
                     var found = false;
                     var invincibleWall = false;

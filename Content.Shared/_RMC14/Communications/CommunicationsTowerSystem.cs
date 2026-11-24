@@ -280,7 +280,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
                 continue;
 
             var spawner = _random.Pick(spawners);
-            Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
+            SpawnAttachedTo(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
         }
     }
 }

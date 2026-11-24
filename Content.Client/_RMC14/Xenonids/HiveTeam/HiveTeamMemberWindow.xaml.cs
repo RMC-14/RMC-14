@@ -36,7 +36,7 @@ public sealed partial class HiveTeamMemberWindow : DefaultWindow
         Title = $"Fireteam {state.TeamNumber}: {state.RoleName}";
         TeamLabel.Text = state.RoleName;
 
-        LeaderSlot.DisposeAllChildren();
+        LeaderSlot.RemoveAllChildren();
         if (state.Leader is { } leader)
         {
             var leaderControl = new XenoChoiceControl();
@@ -55,7 +55,7 @@ public sealed partial class HiveTeamMemberWindow : DefaultWindow
             });
         }
 
-        MembersSlot.DisposeAllChildren();
+        MembersSlot.RemoveAllChildren();
         if (state.TeamMembers.Count == 0)
         {
             MembersSlot.AddChild(new Label

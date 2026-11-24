@@ -59,7 +59,7 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
         RoleBox.SelectId(entry?.Role ?? 0);
         RoleBox.OnItemSelected += args => onSetRole(index, args.Id);
 
-        LeaderSlot.DisposeAllChildren();
+        LeaderSlot.RemoveAllChildren();
         if (entry?.Leader is { } leaderNet)
         {
             var leaderXeno = allXenos.Find(x => x.Entity == leaderNet);
@@ -102,7 +102,7 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
             LeaderSlot.AddChild(addLeaderBtn);
         }
 
-        MembersGrid.DisposeAllChildren();
+        MembersGrid.RemoveAllChildren();
         if (entry != null)
         {
             foreach (var memberNet in entry.Members)

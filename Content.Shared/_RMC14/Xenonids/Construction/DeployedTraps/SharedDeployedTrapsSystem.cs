@@ -47,7 +47,7 @@ public sealed class SharedDeployedTrapsSystem : EntitySystem
         caught.ExpireTime = _timing.CurTime + trap.Comp.StunDuration;
         caught.Applier = trap.Comp.PlacedBy;
 
-        PredictedQueueDel(trap.Owner);
+        QueueDel(trap.Owner);
     }
 
     private void OnStepOffTriggered(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggeredOffEvent args)

@@ -738,7 +738,7 @@ public sealed class XenoEggSystem : EntitySystem
         }
 
         var tile = _map.TileIndicesFor(gridId, grid, coordinates);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridId, grid, tile);
         hasHiveWeeds = _weeds.IsOnHiveWeeds((gridId, grid), coordinates);
         while (anchored.MoveNext(out var uid))
         {

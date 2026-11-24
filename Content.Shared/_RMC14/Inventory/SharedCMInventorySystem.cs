@@ -201,7 +201,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 var itemId = items[i];
                 if (copy.ContainerSlot is { } containerSlot)
                 {
-                    var item = Spawn(itemId, coordinates);
+                    var item = SpawnAttachedTo(itemId, coordinates);
                     _container.Insert(item, containerSlot);
                 }
                 else

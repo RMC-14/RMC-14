@@ -226,7 +226,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         if (_window == null)
             return;
 
-        _window.RecommendationsList.DisposeAllChildren();
+        _window.RecommendationsList.RemoveAllChildren();
         _recommendationGroups.Clear();
 
         foreach (var group in state.RecommendationGroups)
@@ -573,7 +573,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             _medalsInfoBuilt = true;
         }
 
-        _window.ViewMedalsList.DisposeAllChildren();
+        _window.ViewMedalsList.RemoveAllChildren();
 
         foreach (var entry in state.AwardedMedals)
         {

@@ -193,7 +193,7 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             if (!computer.PrintedCommendationIds.Contains(commendationId))
                 return;
 
-            var medal = Spawn(prototypeId.Value, coordinates);
+            var medal = SpawnAttachedTo(prototypeId.Value, coordinates);
 
             // Set owner in accessory component if it exists
             if (receiverEntity != null && TryComp<UniformAccessoryComponent>(medal, out var accessory))

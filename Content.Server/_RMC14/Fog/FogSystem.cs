@@ -65,7 +65,7 @@ public sealed class FogSystem : EntitySystem
                 continue;
             }
 
-            Spawn(spawn, _transform.GetMoverCoordinates(uid));
+            SpawnAttachedTo(spawn, _transform.GetMoverCoordinates(uid));
         }
     }
 }

@@ -1061,7 +1061,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         var unloaded = 0;
         while (remaining > 0)
         {
-            var spawned = Spawn(prototype, Transform(user).Coordinates);
+            var spawned = SpawnAttachedTo(prototype, Transform(user).Coordinates);
             if (!TryComp(spawned, out BulletBoxComponent? box))
             {
                 _hands.PickupOrDrop(user, spawned);

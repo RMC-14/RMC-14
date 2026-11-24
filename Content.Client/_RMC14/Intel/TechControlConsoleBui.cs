@@ -41,7 +41,7 @@ public sealed class TechControlConsoleBui : BoundUserInterface
         if (!EntMan.TryGetComponent(Owner, out TechControlConsoleComponent? console))
             return;
 
-        _window.Options.DisposeAllChildren();
+        _window.Options.RemoveAllChildren();
         for (var i = console.Tree.Options.Count - 1; i >= 0; i--)
         {
             var header = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
@@ -131,7 +131,7 @@ public sealed class TechControlConsoleBui : BoundUserInterface
         _optionWindow.DescriptionLabel.Text = Localize(option.Description);
         _optionWindow.CostLabel.Text = $"{option.CurrentCost}";
 
-        _optionWindow.Statistics.DisposeAllChildren();
+        _optionWindow.Statistics.RemoveAllChildren();
         var hasStats = false;
 
         if (option.Repurchasable)

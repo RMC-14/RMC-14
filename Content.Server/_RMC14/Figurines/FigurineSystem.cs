@@ -130,7 +130,7 @@ public sealed class FigurineSystem : EntitySystem
             return;
 
         if (!Deleted(spawner))
-            Spawn(_random.Pick(_figurines), Transform(spawner).Coordinates);
+            SpawnAttachedTo(_random.Pick(_figurines), Transform(spawner).Coordinates);
 
         QueueDel(spawner);
     }

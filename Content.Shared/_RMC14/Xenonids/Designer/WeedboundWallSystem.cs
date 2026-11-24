@@ -119,7 +119,7 @@ public sealed class WeedboundWallSystem : EntitySystem
             ? weedbound.ThickResiduePrototype
             : weedbound.ResiduePrototype;
 
-        var residue = Spawn(residueProto, coords);
+        var residue = SpawnAttachedTo(residueProto, coords);
 
         // Some weedbound structures may not have their hive set (e.g. created by older paths),
         // but their supporting weeds will. Prefer the structure, otherwise fall back to the weeds.

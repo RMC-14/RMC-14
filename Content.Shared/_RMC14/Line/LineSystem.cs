@@ -181,7 +181,7 @@ public sealed class LineSystem : EntitySystem
         }
 
         var indices = _mapSystem.TileIndicesFor(grid.Value, grid, coords);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Value, grid, indices);
+        var anchored = _mapSystem.GetAnchoredEntities(grid.Value, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
             if (_barricadeQuery.HasComp(uid))

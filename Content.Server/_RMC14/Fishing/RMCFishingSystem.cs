@@ -352,7 +352,7 @@ public sealed class RMCFishingSystem : SharedRMCFishingSystem
             return;
         }
 
-        var caught = Spawn(loot, target);
+        var caught = SpawnAttachedTo(loot, target);
         _throwing.TryThrow(caught, _transform.GetMoverCoordinates(user), 2f, user, compensateFriction: true);
 
         _audio.PlayPvs(ent.Comp.SuccessSound, ent.Owner);
@@ -398,7 +398,7 @@ public sealed class RMCFishingSystem : SharedRMCFishingSystem
     {
         ClearFishingLine(ent.Owner);
 
-        _lineVisuals[ent.Owner] = Spawn(GetFishingLineVisualPrototype(ent.Comp.Direction, biting), adjacent);
+        _lineVisuals[ent.Owner] = SpawnAttachedTo(GetFishingLineVisualPrototype(ent.Comp.Direction, biting), adjacent);
     }
 
     private void ClearFishingLine(EntityUid rod)
@@ -507,7 +507,7 @@ public sealed class RMCFishingSystem : SharedRMCFishingSystem
             if (string.IsNullOrEmpty(id))
                 continue;
 
-            Spawn(id, coordinates);
+            SpawnAttachedTo(id, coordinates);
         }
     }
 

@@ -176,7 +176,7 @@ public sealed class RangefinderSystem : EntitySystem
             : rangefinder.Comp.RangefinderSpawn;
 
         coords = _transform.GetMoverCoordinates(coords);
-        active.Target = Spawn(modeLaser, coords);
+        active.Target = SpawnAttachedTo(modeLaser, coords);
         active.Origin = _transform.GetMoverCoordinates(rangefinder);
         Dirty(rangefinder, active);
 

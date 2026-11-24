@@ -155,7 +155,7 @@ public sealed class AttachableHolderSystem : EntitySystem
             var container = _container.EnsureContainer<ContainerSlot>(holder, slotId);
             container.OccludesLight = false;
 
-            var attachableUid = Spawn(attachment, coords);
+            var attachableUid = SpawnAttachedTo(attachment, coords);
             if (!_container.Insert(attachableUid, container, containerXform: xform))
                 continue;
 

@@ -59,7 +59,7 @@ public sealed class AegisSpawnerSystem : EntitySystem
             {
                 var selectedSpawner = _random.Pick(aegisSpawners);
                 var coordinates = _transform.GetMoverCoordinates(selectedSpawner.Uid);
-                Spawn(selectedSpawner.Component.Spawn, coordinates);
+                SpawnAttachedTo(selectedSpawner.Component.Spawn, coordinates);
 
                 if (selectedSpawner.Component.DeleteAfterSpawn)
                     QueueDel(selectedSpawner.Uid);

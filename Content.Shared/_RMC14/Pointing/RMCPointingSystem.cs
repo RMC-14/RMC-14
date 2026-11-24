@@ -16,11 +16,11 @@ public sealed class RMCPointingSystem : EntitySystem
     {
         if (!TryComp(ent, out SquadMemberComponent? member))
         {
-            ev.Spawned = Spawn(ent.Comp.Arrow, ev.Coordinates);
+            ev.Spawned = SpawnAttachedTo(ent.Comp.Arrow, ev.Coordinates);
             return;
         }
 
-        ev.Spawned = Spawn(ent.Comp.SquadArrow, ev.Coordinates);
+        ev.Spawned = SpawnAttachedTo(ent.Comp.SquadArrow, ev.Coordinates);
         _rmcSprite.SetColor(ev.Spawned.Value, member.BackgroundColor);
     }
 }

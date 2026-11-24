@@ -503,7 +503,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
             for (var i = 0; i < ent.Comp.PillAmount; i++)
             {
-                var pill = Spawn(ent.Comp.PillProto, coords);
+                var pill = SpawnAttachedTo(ent.Comp.PillProto, coords);
                 if (!_storage.Insert(fill, pill, out _, user: args.Actor, playSound: false) && !_itemSlots.TryInsertEmpty(fill, pill, null, true))
                 {
                     QueueDel(pill);

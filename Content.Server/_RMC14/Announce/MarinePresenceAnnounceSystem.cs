@@ -23,7 +23,6 @@ public sealed class MarinePresenceAnnounceSystem : EntitySystem
     [Dependency] private SquadSystem _squad = default!;
     [Dependency] private StationRecordsSystem _stationRecords = default!;
 
-    [ValidatePrototypeId<RadioChannelPrototype>]
     private static readonly ProtoId<RadioChannelPrototype> CommonChannel = "MarineCommon";
 
     public void AnnounceLateJoin(bool lateJoin, bool silent, EntityUid mob, string jobId, string jobName, JobPrototype jobPrototype)

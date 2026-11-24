@@ -57,7 +57,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (!_area.IsWeatherEnabled((uid, grid), tileRef.GridIndices))
             return false;
 
-        var anchoredEntities = _mapSystem.GetAnchoredEntitiesEnumerator(uid, grid, tileRef.GridIndices);
+        var anchoredEntities = _mapSystem.GetAnchoredEntities(uid, grid, tileRef.GridIndices);
 
         while (anchoredEntities.MoveNext(out var ent))
         {

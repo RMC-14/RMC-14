@@ -10,8 +10,8 @@ namespace Content.Client._RMC14.Elevators;
 [UsedImplicitly]
 public sealed class ElevatorPanelBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     [ViewVariables]
     private ElevatorPanelWindow? _window;
@@ -77,7 +77,7 @@ public sealed class ElevatorPanelBui : BoundUserInterface
         if (_window == null)
             return;
 
-        _window.ButtonGrid.DisposeAllChildren();
+        _window.ButtonGrid.RemoveAllChildren();
         _destinations.Clear();
 
         ElevatorButton EleButton(string name, bool disabled)

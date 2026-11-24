@@ -259,7 +259,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
             return;
         }
 
-        var warning = Spawn(PipeExplosionWarning, _transform.GetMoverCoordinates(pipe, xform));
+        var warning = SpawnAttachedTo(PipeExplosionWarning, _transform.GetMoverCoordinates(pipe, xform));
         _audio.PlayPvs(map.Comp.PipeHiss, pipe);
 
         if (TryComp(pipe, out RMCHijackActivePipeComponent? active))
@@ -304,7 +304,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         _rmcFlammable.SpawnFireDiamond(PipeFire, coordinates, PipeFireRange);
 
         Del(pipe);
-        var brokenPipe = Spawn(BrokenPipe, coordinates);
+        var brokenPipe = SpawnAttachedTo(BrokenPipe, coordinates);
         _transform.SetLocalRotation(brokenPipe, rotation);
     }
 

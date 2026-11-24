@@ -872,7 +872,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
             return false;
         }
 
-        var printed = Spawn(ent.Comp.PrintoutPrototype, Transform(ent).Coordinates);
+        var printed = SpawnAttachedTo(ent.Comp.PrintoutPrototype, Transform(ent).Coordinates);
         if (!TryComp<PaperComponent>(printed, out var paperComp))
         {
             QueueDel(printed);

@@ -215,7 +215,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         if (tunnels.ContainsKey(name))
             return false;
 
-        var newTunnel = Spawn(TunnelPrototypeId, buildLocation);
+        var newTunnel = SpawnAttachedTo(TunnelPrototypeId, buildLocation);
         tunnelEnt = newTunnel;
 
         _hive.SetHive(newTunnel, associatedHiveEnt);
@@ -794,7 +794,7 @@ public sealed class XenoTunnelSystem : EntitySystem
                 TryComp(waterGridId, out MapGridComponent? waterGridComp))
             {
                 var waterTile = _map.GetTileRef(waterGridId, waterGridComp, coords);
-                var waterAnchored = _map.GetAnchoredEntitiesEnumerator(waterGridId, waterGridComp, waterTile.GridIndices);
+                var waterAnchored = _map.GetAnchoredEntities(waterGridId, waterGridComp, waterTile.GridIndices);
                 while (waterAnchored.MoveNext(out var uid))
                 {
                     if (_rmcWaterQuery.HasComp(uid))

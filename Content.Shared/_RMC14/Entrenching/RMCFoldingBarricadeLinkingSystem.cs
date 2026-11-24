@@ -264,7 +264,7 @@ public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
     private void UpdateAnchoredAt(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
     {
         var tile = _map.LocalToTile(grid, grid, coordinates);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(grid, grid, tile);
         while (anchored.MoveNext(out var anchoredUid))
         {
             if (_linkingQuery.TryGetComponent(anchoredUid, out var linking))
@@ -315,7 +315,7 @@ public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
         var facing = xform.LocalRotation.GetCardinalDir();
         var adjacent = xform.Coordinates.Offset(direction);
         var tile = _map.LocalToTile(gridUid, grid, adjacent);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
         while (anchored.MoveNext(out var anchoredUid))
         {
             if (anchoredUid == ent.Owner ||

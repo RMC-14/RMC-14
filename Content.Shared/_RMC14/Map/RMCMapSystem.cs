@@ -103,7 +103,7 @@ public sealed class RMCMapSystem : EntitySystem
         if (offset != null)
             indices = indices.Offset(offset.Value);
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, indices);
+        var anchored = _map.GetAnchoredEntities(grid, grid, indices);
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
     }
 
@@ -138,7 +138,7 @@ public sealed class RMCMapSystem : EntitySystem
         if (offset != null)
             indices = indices.Offset(offset.Value);
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, indices);
+        var anchored = _map.GetAnchoredEntities(grid, grid, indices);
         return new RMCAnchoredEntitiesEnumerator<T>(EntityManager, _transform, anchored, facing);
     }
 

@@ -17,19 +17,19 @@ namespace Content.Shared._RMC14.PlayingCards;
 
 public abstract class SharedPlayingCardSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
-    [Dependency] protected readonly SharedHandsSystem Hands = default!;
+    [Dependency] protected SharedHandsSystem Hands = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] protected readonly SharedUserInterfaceSystem Ui = default!;
+    [Dependency] protected SharedUserInterfaceSystem Ui = default!;
 
     private readonly HashSet<Entity<PlayingCardComponent>> _cardLookup = new();
     private readonly HashSet<Entity<PlayingCardHandComponent>> _handLookup = new();
@@ -638,7 +638,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         hand.Comp.Cards.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
         Dirty(hand);
-        PredictedQueueDel(card.Owner);
+        QueueDel(card.Owner);
         UpdateHandName(hand);
         TryPopup(hand, Loc.GetString("rmc-playing-card-add-to-hand", ("count", hand.Comp.Cards.Count)), user);
     }
@@ -647,7 +647,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         hand1.Comp.Cards.AddRange(hand2.Comp.Cards);
         Dirty(hand1);
-        PredictedQueueDel(hand2.Owner);
+        QueueDel(hand2.Owner);
         UpdateHandName(hand1);
         TryPopup(hand1, Loc.GetString("rmc-playing-card-merge-hands", ("count", hand1.Comp.Cards.Count)), user);
     }
@@ -739,7 +739,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
         deck.Comp.CardOrder.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
         Dirty(deck);
-        PredictedQueueDel(card.Owner);
+        QueueDel(card.Owner);
 
         Popup.PopupPredicted(Loc.GetString("rmc-playing-card-added-to-deck"), null, deck, user);
         Audio.PlayPredicted(deck.Comp.DrawSound, deck, user);
@@ -766,7 +766,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         Dirty(deck);
 
         if (hand.Comp.Cards.Count == 0)
-            PredictedQueueDel(hand.Owner);
+            QueueDel(hand.Owner);
         else
             Dirty(hand);
 

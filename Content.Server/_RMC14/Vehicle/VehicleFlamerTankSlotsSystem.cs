@@ -35,7 +35,7 @@ public sealed class VehicleFlamerTankSlotsSystem : EntitySystem
 
             if (ent.Comp.StartingItem is { } startingItem)
             {
-                var spawned = Spawn(startingItem, new EntityCoordinates(ent, default));
+                var spawned = SpawnAttachedTo(startingItem, new EntityCoordinates(ent, default));
                 _itemSlots.TryInsert(ent, slotId, spawned, null);
             }
         }

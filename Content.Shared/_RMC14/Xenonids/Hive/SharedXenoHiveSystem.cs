@@ -493,7 +493,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
                     continue;
 
                 var position = _transform.GetMoverCoordinates(uid);
-                larva = Spawn(hive.Comp.BurrowedLarvaId, position);
+                larva = SpawnAttachedTo(hive.Comp.BurrowedLarvaId, position);
                 _transform.AttachToGridOrMap(larva.Value);
                 return true;
             }

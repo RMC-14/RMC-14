@@ -72,8 +72,8 @@ public sealed partial class XenoSpitSystem : EntitySystem
     [Dependency] private RMCSlowSystem _slow = default!;
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private XenoSystem _xeno = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcblood = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedRMCBloodstreamSystem _rmcblood = default!;
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
 
@@ -287,7 +287,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
         if (_hive.FromSameHive(spit.Owner, target) ||
             HasComp<XenoComponent>(target))
         {
-            PredictedQueueDel(spit.Owner);
+            QueueDel(spit.Owner);
             return;
         }
 

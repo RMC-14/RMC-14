@@ -44,7 +44,7 @@ public sealed class RMCAdminChatBansListEui : BaseEui
         if (_window == null || _state == null)
             return;
 
-        _window.Container.DisposeAllChildren();
+        _window.Container.RemoveAllChildren();
         foreach (var ban in _state.Bans)
         {
             var row = new RMCAdminChatBanRow();

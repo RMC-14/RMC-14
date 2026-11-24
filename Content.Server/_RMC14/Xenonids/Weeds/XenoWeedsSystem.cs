@@ -162,7 +162,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     continue;
 
                 var coords = _map.GridTileToLocal(grid, grid, neighbor);
-                var neighborWeeds = Spawn(prototype, coords);
+                var neighborWeeds = SpawnAttachedTo(prototype, coords);
                 var neighborWeedsEnt = AssignSource(neighborWeeds, (source.Value, sourceWeeds));
 
                 // If `neighborWeeds` is replacing a lower tier weed tile (regular -> hive), transfer over any wall weeds from the old one.

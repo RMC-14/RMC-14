@@ -103,7 +103,7 @@ public sealed class BarricadeSystem : EntitySystem
 
         if (!TryComp(args.Target, out BarricadeSandbagComponent? barricade))
             return;
-        var full = Spawn(barricade.Material, GetCoordinates(args.Coordinates));
+        var full = SpawnAttachedTo(barricade.Material, GetCoordinates(args.Coordinates));
 
         var bagsSalvaged = barricade.MaxMaterial;
         if (bagsSalvaged <= 0 && TryComp(full, out FullSandbagComponent? fullSandbag))
@@ -112,7 +112,7 @@ public sealed class BarricadeSystem : EntitySystem
             bagsSalvaged -= Math.Max((int) damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
 
         if (TryComp(args.Target, out BarbedComponent? barbed) && barbed.IsBarbed)
-            Spawn(barbed.Spawn, GetCoordinates(args.Coordinates));
+            SpawnAttachedTo(barbed.Spawn, GetCoordinates(args.Coordinates));
 
         Del(args.Target);
 
@@ -339,7 +339,7 @@ public sealed class BarricadeSystem : EntitySystem
 
             if (_net.IsServer)
             {
-                var filled = Spawn(empty.Comp.Filled, coordinates);
+                var filled = SpawnAttachedTo(empty.Comp.Filled, coordinates);
                 var filledStack = EnsureComp<StackComponent>(filled);
                 _stack.SetCount(filled, toRemove, filledStack);
             }
@@ -449,7 +449,7 @@ public sealed class BarricadeSystem : EntitySystem
         if (!TileSolidAndNotBlocked(tile))
             return false;
 
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tile.GridIndices);
+        var anchored = _mapSystem.GetAnchoredEntities(grid, grid, tile.GridIndices);
         while (anchored.MoveNext(out var uid))
         {
             if (HasComp<BarricadeComponent>(uid) &&
@@ -480,7 +480,7 @@ public sealed class BarricadeSystem : EntitySystem
         }
 
         var indices = _mapSystem.TileIndicesFor(gridId, grid, coordinates);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, indices);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
             if (_barricadeQuery.HasComp(uid))

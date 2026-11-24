@@ -41,6 +41,7 @@ public sealed class RMCRepairableSystem : EntitySystem
     [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private TagSystem _tags = default!;
     [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private RMCWeldEffectSystem _weldEffect = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
@@ -254,10 +255,11 @@ public sealed class RMCRepairableSystem : EntitySystem
                 var rotation = xform.LocalRotation;
                 var anchored = xform.Anchored;
 
-                var restored = Spawn(replace.Prototype, coords);
+                var restored = SpawnAttachedTo(replace.Prototype, coords);
                 var restoredXform = Transform(restored);
-                restoredXform.LocalRotation = rotation;
-                restoredXform.Anchored = anchored;
+                _transform.TryAnchor((restored, restoredXform), anchored);
+                // Spawning may snap to the tile center, restore the original position without unanchoring.
+                _transform.SetCoordinates(restored, restoredXform, coords, rotation, unanchor: false);
                 QueueDel(repairable);
             }
 

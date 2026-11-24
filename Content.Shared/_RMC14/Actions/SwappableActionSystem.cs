@@ -2,15 +2,17 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.Actions;
 
 public sealed class SwappableActionSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
-    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
 
     public override void Initialize()
     {
@@ -29,7 +31,7 @@ public sealed class SwappableActionSystem : EntitySystem
                 proto.TryGetComponent<WorldTargetActionComponent>(out var world, _compFactory) &&
                 world.Event is { } ev)
             {
-                _actions.SetEvent(ent, ev);
+                _actions.SetEvent(ent, _serialization.CreateCopy(ev, notNullableOverride: true));
             }
         }
         else
@@ -39,7 +41,7 @@ public sealed class SwappableActionSystem : EntitySystem
                 proto.TryGetComponent<InstantActionComponent>(out var instant, _compFactory) &&
                 instant.Event is { } ev)
             {
-                _actions.SetEvent(ent, ev);
+                _actions.SetEvent(ent, _serialization.CreateCopy(ev, notNullableOverride: true));
             }
         }
     }
@@ -133,7 +135,7 @@ public sealed class SwappableActionSystem : EntitySystem
             Dirty(actionId, world);
 
             if (protoWorld.Event is { } worldEv)
-                _actions.SetEvent(actionId, worldEv);
+                _actions.SetEvent(actionId, _serialization.CreateCopy(worldEv, notNullableOverride: true));
         }
         else if (proto.TryGetComponent<InstantActionComponent>(out var protoInstant, _compFactory))
         {
@@ -142,7 +144,7 @@ public sealed class SwappableActionSystem : EntitySystem
 
             EnsureComp<InstantActionComponent>(actionId);
             if (protoInstant.Event is { } instantEv)
-                _actions.SetEvent(actionId, instantEv);
+                _actions.SetEvent(actionId, _serialization.CreateCopy(instantEv, notNullableOverride: true));
         }
     }
 }

@@ -71,7 +71,7 @@ public sealed class PropCallingSystem : SharedPropCallingSystem
             _actions.AddAction(uid, ref comp.CallPropsEntity, comp.CallProps, uid);
     }
 
-    private void OnPropCallingShutdown(EntityUid uid, PropCallingComponent comp, ComponentShutdown args)
+    private void OnPropCallingShutdown(EntityUid uid, PropCallingComponent comp, ref ComponentShutdown args)
     {
         var ent = (uid, comp);
 
@@ -81,7 +81,7 @@ public sealed class PropCallingSystem : SharedPropCallingSystem
             _callersSignedUp.Remove(ent);
     }
 
-    private void OnPropCallerShutdown(EntityUid uid, PropCallerComponent comp, ComponentShutdown args)
+    private void OnPropCallerShutdown(EntityUid uid, PropCallerComponent comp, ref ComponentShutdown args)
     {
         _actions.RemoveAction(uid, comp.CallPropsEntity);
     }

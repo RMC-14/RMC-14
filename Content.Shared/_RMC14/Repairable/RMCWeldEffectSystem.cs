@@ -87,7 +87,7 @@ public sealed class RMCWeldEffectSystem : EntitySystem
 
         RotateOffsets(offsetRotation, ref startOffset, ref endOffset, ref pathOffsets);
 
-        var effect = Spawn(WeldEffect, xform.Coordinates);
+        var effect = SpawnAttachedTo(WeldEffect, xform.Coordinates);
         if (!Exists(effect))
             return;
 

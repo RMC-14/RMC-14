@@ -304,7 +304,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         args.Handled = true;
         if (_net.IsServer)
         {
-            var weeds = Spawn(args.Prototype, coordinates);
+            var weeds = SpawnAttachedTo(args.Prototype, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
             _hive.SetSameHive(xeno.Owner, weeds);
         }
@@ -388,7 +388,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            var newWeeds = Spawn(toSpawn, coordinates);
+            var newWeeds = SpawnAttachedTo(toSpawn, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(newWeeds):weeds} at {coordinates}");
             _hive.SetSameHive(xeno.Owner, newWeeds);
 
@@ -498,7 +498,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             {
                 BeginStructureUpgrade(upgradeable);
                 Del(upgradeable);
-                var spawn = Spawn(to, snapped);
+                var spawn = SpawnAttachedTo(to, snapped);
                 _hive.SetSameHive(xeno.Owner, spawn);
             }
             finally
@@ -550,7 +550,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (_net.IsServer && _prototype.HasIndex(effectId))
         {
-            effect = Spawn(effectId, entityCoords);
+            effect = SpawnAttachedTo(effectId, entityCoords);
             RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno), finalBuildTime), Filter.PvsExcept(effect.Value));
         }
 
@@ -658,7 +658,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 }
             }
 
-            var structure = Spawn(structureToSpawn, coordinates);
+            var structure = SpawnAttachedTo(structureToSpawn, coordinates);
             _hive.SetSameHive(xeno.Owner, structure);
             if (TryComp(structure, out DesignNodeComponent? nodeComp))
             {
@@ -827,7 +827,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var coordinates = target.SnapToGrid(EntityManager);
-        var structure = Spawn(args.StructureId, coordinates);
+        var structure = SpawnAttachedTo(args.StructureId, coordinates);
 
         _hive.SetSameHive(xeno.Owner, structure);
 
@@ -942,7 +942,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             floorWeeds = _xenoWeeds.GetWeedsOnFloor(transform.Coordinates);
         }
 
-        var spawn = Spawn(node.Spawn, transform.Coordinates);
+        var spawn = SpawnAttachedTo(node.Spawn, transform.Coordinates);
 
         var hive = _hive.GetHive(target);
         _hive.SetHive(spawn, hive);
@@ -1213,7 +1213,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var dir = (AtmosDirection)(1 << i);
             var pos = indices.Offset(dir);
-            var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, pos);
+            var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, pos);
             while (anchored.MoveNext(out var uid))
             {
                 if (TerminatingOrDeleted(uid.Value) || EntityManager.IsQueuedForDeletion(uid.Value))
@@ -1468,7 +1468,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
             if (_hiveConstructionNodeQuery.TryGetComponent(uid, out var node) &&
@@ -1569,7 +1569,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         foreach (var direction in Directions)
         {
             var pos = SharedMapSystem.GetDirection(tile, direction);
-            var directionEnumerator = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, pos);
+            var directionEnumerator = _mapSystem.GetAnchoredEntities(gridId, grid, pos);
 
             while (directionEnumerator.MoveNext(out var ent))
             {
@@ -1728,7 +1728,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var dir = (AtmosDirection)(1 << i);
             var pos = tile.Offset(dir);
-            var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, pos);
+            var anchored = _mapSystem.GetAnchoredEntities(grid, grid, pos);
             while (anchored.MoveNext(out var uid))
             {
                 if (TerminatingOrDeleted(uid.Value) || EntityManager.IsQueuedForDeletion(uid.Value))
@@ -1751,7 +1751,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private bool CanPlaceSpaceRequiringStructurePopup(MapCoordinates mapCoords, Entity<MapGridComponent> map, EntityUid user, string structName, bool popup = true)
     {
         var mapId = mapCoords.MapId;
-        var aabbRange = new Box2(mapCoords.X - 1.5F, mapCoords.Y + 1.5F, mapCoords.X + 1.5F, mapCoords.Y - 1.5F);
+        var aabbRange = new Box2(mapCoords.X - 1.5F, mapCoords.Y - 1.5F, mapCoords.X + 1.5F, mapCoords.Y + 1.5F);
         var nearHiveLimitedStructure = _entityLookup.AnyComponentsIntersecting(typeof(HiveConstructionLimitedComponent), mapId, aabbRange);
         var centerTile = _mapSystem.GetTileRef(map, mapCoords);
         var userCoords = _transform.ToCoordinates(user, mapCoords);
@@ -1815,7 +1815,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var tile = _mapSystem.TileIndicesFor(gridId, grid, coords);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
         var hasWeeds = false;
         while (anchored.MoveNext(out var uid))
         {

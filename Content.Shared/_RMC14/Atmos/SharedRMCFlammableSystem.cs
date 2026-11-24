@@ -254,7 +254,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
 
         var coords = _transform.GetMoverCoordinates(ent);
-        var molotov = Spawn(ent.Comp.Spawns, coords);
+        var molotov = SpawnAttachedTo(ent.Comp.Spawns, coords);
 
         var tileFire = EnsureComp<TileFireOnTriggerComponent>(molotov);
         tileFire.Duration = intensity.Int();
@@ -398,7 +398,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void SpawnFireChain(EntProtoId spawn, EntityUid chain, EntityCoordinates coordinates, int? intensity, int? duration)
     {
-        var spawned = Spawn(spawn, coordinates);
+        var spawned = SpawnAttachedTo(spawn, coordinates);
         if (intensity != null || duration != null)
         {
             var ignite = EnsureComp<RMCIgniteOnCollideComponent>(spawned);

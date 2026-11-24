@@ -313,7 +313,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
             }
         }
 
-        Spawn(ent.Comp.Explosion, coordinates);
+        SpawnAttachedTo(ent.Comp.Explosion, coordinates);
     }
 
     private void OnFuelPowerLoaderInteract(Entity<OrbitalCannonFuelComponent> ent, ref PowerLoaderInteractEvent args)

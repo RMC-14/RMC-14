@@ -204,10 +204,9 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
         foreach (var job in jobsToMap)
         {
-            if (job.PlayTimeTracker is not { } trackerProtoId)
-                continue;
-
-            validTrackers.Add(trackerProtoId);
+            // RMC14
+            validTrackers.Add(job.PlayTimeTracker);
+            // RMC14
         }
 
         foreach (var trackerProtoId in validTrackers)

@@ -528,8 +528,10 @@ public sealed class EntityEffectSystem : EntitySystem
                 return;
             }
 
-            if (_spreader.RequiresFloorToSpread(args.Effect.PrototypeId) && _turf.IsSpace(tileRef))
+            // RMC14
+            if (_spreader.RequiresFloorToSpread(args.Effect.PrototypeId.Id) && _turf.IsSpace(tileRef))
                 return;
+            // RMC14
 
             var coords = _map.MapToGrid(gridUid, mapCoords);
             var ent = Spawn(args.Effect.PrototypeId, coords.SnapToGrid());
@@ -631,13 +633,12 @@ public sealed class EntityEffectSystem : EntitySystem
 
     private void OnExecuteEmote(ref ExecuteEntityEffectEvent<Emote> args)
     {
-        if (args.Effect.EmoteId == null)
-            return;
-
+        // RMC14
         if (args.Effect.ShowInChat)
             _chat.TryEmoteWithChat(args.Args.TargetEntity, args.Effect.EmoteId, ChatTransmitRange.GhostRangeLimit, forceEmote: args.Effect.Force);
         else
             _chat.TryEmoteWithoutChat(args.Args.TargetEntity, args.Effect.EmoteId);
+        // RMC14
     }
 
     private void OnExecuteEmpReactionEffect(ref ExecuteEntityEffectEvent<EmpReactionEffect> args)

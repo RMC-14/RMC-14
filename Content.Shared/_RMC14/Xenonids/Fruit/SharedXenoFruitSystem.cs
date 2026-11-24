@@ -372,7 +372,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         // Target has fruit, resin hole, egg, xeno construct or other obstruction on it
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
             // Target on another fruit
@@ -462,7 +462,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            var entity = Spawn(xeno.Comp.FruitChoice, coordinates);
+            var entity = SpawnAttachedTo(xeno.Comp.FruitChoice, coordinates);
             var fruit = EnsureComp<XenoFruitComponent>(entity);
             var xform = Transform(entity);
 

@@ -136,7 +136,7 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         var coordinates = _transform.GetMoverCoordinates(newFriend);
         var prototype = targetIsXeno ? XenoImaginaryFriendPrototype : ImaginaryFriendPrototype;
 
-        var friend = EntityManager.SpawnEntity(prototype, coordinates);
+        var friend = SpawnAttachedTo(prototype, coordinates);
         _transform.AttachToGridOrMap(friend, Transform(friend));
 
         TryComp(newFriend, out ActorComponent? friendActor);

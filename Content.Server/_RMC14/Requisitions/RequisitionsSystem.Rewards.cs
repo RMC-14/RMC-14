@@ -20,7 +20,7 @@ namespace Content.Server._RMC14.Requisitions
         {
             // Create a sheet of paper to write the order details on
             // Order information sprinkled with flavor text
-            var printedPaper = EntityManager.SpawnEntity(paperwork, coordinates);
+            var printedPaper = SpawnAttachedTo(paperwork, coordinates);
 
             if (!TryComp<PaperComponent>(printedPaper, out var paper))
                 return;

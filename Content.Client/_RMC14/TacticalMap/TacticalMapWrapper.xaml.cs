@@ -845,7 +845,7 @@ public sealed partial class TacticalMapWrapper : Control
         SquadObjectivesContainer.Visible = true;
 
         // Clear existing labels
-        SquadObjectivesBox.DisposeAllChildren();
+        SquadObjectivesBox.RemoveAllChildren();
 
         // Create a label for each objective type
         foreach (SquadObjectiveType objectiveType in Enum.GetValues<SquadObjectiveType>())

@@ -132,7 +132,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         EntityManager.RemoveComponent<XenoConstructionRequiresSupportComponent>(ent);
 
         if (ent.Comp.BlockerId != null)
-            ent.Comp.Blocker = Spawn(ent.Comp.BlockerId, ent.Owner.ToCoordinates());
+            ent.Comp.Blocker = SpawnAttachedTo(ent.Comp.BlockerId, ent.Owner.ToCoordinates());
 
         _rmcSprite.SetColor(ent.Owner, ent.Comp.Color);
     }

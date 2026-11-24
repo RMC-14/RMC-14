@@ -159,7 +159,7 @@ public sealed class HealthScannerUiData
                 panel.BackgroundColor = Color.Transparent;
         }
 
-        window.ChemicalsContainer.DisposeAllChildren();
+        window.ChemicalsContainer.RemoveAllChildren();
 
         var anyChemicals = false;
         var anyUnknown = false;
@@ -233,7 +233,7 @@ public sealed class HealthScannerUiData
         pulseMsg.AddText(uiState.Pulse);
         window.PulseLabel.SetMessage(pulseMsg);
 
-        window.AdviceContainer.DisposeAllChildren();
+        window.AdviceContainer.RemoveAllChildren();
         // Medication Advice
         if (!isPermaDead)
         {

@@ -26,7 +26,7 @@ public sealed partial class XenoPickerWindow : DefaultWindow
         Func<EntProtoId?, Texture?> getTexture,
         Action<NetEntity> onPicked)
     {
-        Container.DisposeAllChildren();
+        Container.RemoveAllChildren();
         _entries.Clear();
 
         foreach (var xeno in xenos)

@@ -158,7 +158,7 @@ public sealed class BulletBoxSystem : EntitySystem
                 foreach (var (round, _) in taken)
                 {
                     if (round is { } roundId)
-                        PredictedDel(roundId);
+                        Del(roundId);
                 }
             }
 

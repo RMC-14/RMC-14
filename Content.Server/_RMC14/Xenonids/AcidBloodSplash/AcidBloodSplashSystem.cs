@@ -66,7 +66,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             _rmcDecal.GetDecalsInTile(ent, spawner.Decals) < spawner.MaxDecalsPerTile)
         {
             // create decal, probability inside prototype
-            Spawn(ent.Comp.BloodDecalSpawnerPrototype, ent.Owner.ToCoordinates());
+            SpawnAttachedTo(ent.Comp.BloodDecalSpawnerPrototype, ent.Owner.ToCoordinates());
         }
 
         var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.

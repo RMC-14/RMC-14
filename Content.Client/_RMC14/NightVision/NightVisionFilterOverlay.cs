@@ -44,7 +44,7 @@ public sealed class NightVisionFilterOverlay : Overlay
 
             var colorVal = _config.GetCVar(RMCCVars.RMCNightVisionColor);
             var color = ((NightVisionColor) colorVal).ToColor();
-            _shader.SetParameter("nv_color", new Robust.Shared.Maths.Vector3(color.R, color.G, color.B));
+            _shader.SetParameter("nv_color", new Vector3(color.R, color.G, color.B));
 
             handle.UseShader(_shader);
             handle.DrawRect(args.WorldBounds, Color.White);

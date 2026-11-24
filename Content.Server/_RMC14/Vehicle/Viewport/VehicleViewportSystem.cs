@@ -149,7 +149,7 @@ public sealed class VehicleViewportSystem : EntitySystem
         if (TryComp(user, out EyeComponent? eye))
             userState.PreviousTarget = eye.Target;
         userState.Source = vehicle;
-        userState.PeekTarget = Spawn(VehiclePeekAnchor, peekCoords);
+        userState.PeekTarget = SpawnAttachedTo(VehiclePeekAnchor, peekCoords);
 
         var watching = EnsureComp<VehicleWatchingComponent>(user);
         watching.Watching = vehicle;

@@ -699,7 +699,7 @@ public sealed class RMCStorageSystem : EntitySystem
         {
             foreach (var proto in _entityTable.GetSpawns(hijackFill.Table))
             {
-                var ent = Spawn(proto, coords);
+                var ent = SpawnAttachedTo(proto, coords);
                 _entityStorage.Insert(ent, uid);
             }
         }

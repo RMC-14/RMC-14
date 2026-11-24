@@ -103,7 +103,7 @@ public sealed class DropshipTerminalBui(EntityUid owner, Enum uiKey) : BoundUser
         }
 
         _dropships.Clear();
-        _window.DropshipContainer.DisposeAllChildren();
+        _window.DropshipContainer.RemoveAllChildren();
         foreach (var dropship in dropships)
         {
             var button = Row(dropship.Name, () => _selected = dropship.Id);

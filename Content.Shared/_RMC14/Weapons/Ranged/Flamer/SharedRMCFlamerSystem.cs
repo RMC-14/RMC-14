@@ -767,7 +767,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var ball = Spawn(nozzle.Comp.Projectile, fromCoordinates);
+        var ball = SpawnAttachedTo(nozzle.Comp.Projectile, fromCoordinates);
 
         var spawnOnTerminateComp = EnsureComp<SpawnOnTerminateComponent>(ball);
         _projectile.SetSpawn((ball, spawnOnTerminateComp), reagent.FireEntity);

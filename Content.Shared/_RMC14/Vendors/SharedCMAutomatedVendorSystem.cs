@@ -439,7 +439,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 // Create item near the vendor
                 var coords = Transform(vendor).Coordinates;
-                var spawnedItem = Spawn(itemId, coords);
+                var spawnedItem = SpawnAttachedTo(itemId, coords);
 
                 // Throw in a random direction with a random force
                 var direction = new Vector2(_random.NextFloat(-1, 1), _random.NextFloat(-1, 1));

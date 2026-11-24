@@ -87,11 +87,13 @@ public sealed class FlatpackSystem : SharedFlatpackSystem
             cost = GetFlatpackCreationCost(ent, (board, machine));
             proto = machine.Prototype;
         }
-        else if (TryComp<ComputerBoardComponent>(board, out var computer) && computer.Prototype != null)
+        // RMC14
+        else if (TryComp<ComputerBoardComponent>(board, out var computer) && computer.Prototype is { } computerPrototype)
         {
             cost = GetFlatpackCreationCost(ent, null);
-            proto = computer.Prototype;
+            proto = computerPrototype;
         }
+        // RMC14
         else
         {
             Log.Error($"Encountered invalid flatpack board while packing: {ToPrettyString(board)}");

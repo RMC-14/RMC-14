@@ -110,7 +110,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.CancelButton.Visible = true;
         _window.LaunchButton.Visible = true;
 
-        _window.DestinationsContainer.DisposeAllChildren();
+        _window.DestinationsContainer.RemoveAllChildren();
 
         DropshipButton DestinationButton(string name, bool disabled, Action onPressed)
         {

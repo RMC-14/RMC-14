@@ -27,7 +27,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         if (ent.Comp.Spawn is not { } spawn)
             return;
 
-        Spawn(spawn, ent.Owner.ToCoordinates());
+        SpawnAttachedTo(spawn, ent.Owner.ToCoordinates());
     }
 
     private void OnSpawnOnInteractHand(Entity<SpawnOnInteractComponent> ent, ref InteractHandEvent args)

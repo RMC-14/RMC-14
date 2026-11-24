@@ -64,7 +64,7 @@ public abstract class SharedAutodocSystem : EntitySystem
             var rotation = Transform(autodoc).LocalRotation;
             var rotatedOffset = rotation.RotateVec(autodoc.Comp.ConsoleSpawnOffset);
             var consoleCoords = _transform.GetMoverCoordinates(autodoc).Offset(rotatedOffset);
-            var consoleId = Spawn(autodoc.Comp.SpawnConsolePrototype.Value, consoleCoords);
+            var consoleId = SpawnAttachedTo(autodoc.Comp.SpawnConsolePrototype.Value, consoleCoords);
 
             // Set the console's rotation to match the autodoc + 180 degrees because sprites are opposite
             _transform.SetLocalRotation(consoleId, rotation + Math.PI);

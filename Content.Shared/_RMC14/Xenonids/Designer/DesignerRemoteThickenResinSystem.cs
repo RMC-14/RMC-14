@@ -71,7 +71,7 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
         {
             _xenoConstruction.BeginStructureUpgrade(target);
             Del(target);
-            var thickened = Spawn(upgradeable.To.Value, targetCoords);
+            var thickened = SpawnAttachedTo(upgradeable.To.Value, targetCoords);
             _transform.SetLocalRotation(thickened, targetXform.LocalRotation);
             _hive.SetSameHive(ent.Owner, thickened);
         }

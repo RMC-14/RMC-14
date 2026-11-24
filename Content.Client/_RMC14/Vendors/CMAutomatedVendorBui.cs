@@ -82,7 +82,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         if (_window == null)
             return;
 
-        _window.Sections.DisposeAllChildren();
+        _window.Sections.RemoveAllChildren();
 
         for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
         {

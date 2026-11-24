@@ -30,7 +30,7 @@ public sealed partial class HardpointMenu : FancyWindow
     public EntityUid? VehicleEntity;
     private bool _vehicleIconSet;
     private float _vehicleSpin;
-    private const float VehicleSpinSpeed = MathHelper.TwoPi / 6f;
+    private const float VehicleSpinSpeed = MathF.Tau / 6f;
     private const float PixelsPerMeter = 32f;
     private readonly List<PreviewOverlay> _previewOverlays = new();
 
@@ -86,8 +86,8 @@ public sealed partial class HardpointMenu : FancyWindow
 
         _vehicleSpin += frameTime * VehicleSpinSpeed;
 
-        if (_vehicleSpin > MathHelper.TwoPi)
-            _vehicleSpin -= MathHelper.TwoPi;
+        if (_vehicleSpin > MathF.Tau)
+            _vehicleSpin -= MathF.Tau;
 
         var dir = new Angle(_vehicleSpin).GetDir();
         VehicleIcon.OverrideDirection = dir;
@@ -122,7 +122,7 @@ public sealed partial class HardpointMenu : FancyWindow
         ErrorLabel.Visible = hasError;
         ErrorLabel.Text = hasError ? error! : string.Empty;
 
-        HardpointList.DisposeAllChildren();
+        HardpointList.RemoveAllChildren();
 
         if (hasFrameIntegrity && frameMaxIntegrity > 0f)
         {
@@ -477,9 +477,9 @@ public sealed partial class HardpointMenu : FancyWindow
             return offset.Base;
 
         var angle = dir.ToAngle();
-        var normalized = angle.Theta % MathHelper.TwoPi;
+        var normalized = angle.Theta % MathF.Tau;
         if (normalized < 0f)
-            normalized += MathHelper.TwoPi;
+            normalized += MathF.Tau;
 
         var segment = MathHelper.PiOver2;
         var index = (int) Math.Floor(normalized / segment) & 3;

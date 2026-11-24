@@ -102,7 +102,7 @@ public sealed class RMCRandomizedPresetSystem : EntitySystem
     private void Equip(EntityUid entity, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false, bool tryEquip = true, string? slotName = null)
     {
         var coordinates = _transform.GetMoverCoordinates(entity);
-        var spawn = Spawn(toSpawn, coordinates);
+        var spawn = SpawnAttachedTo(toSpawn, coordinates);
 
         if (tryEquip)
         {

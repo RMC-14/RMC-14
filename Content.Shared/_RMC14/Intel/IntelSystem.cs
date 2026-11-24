@@ -1343,7 +1343,7 @@ public sealed class IntelSystem : EntitySystem
             var spawner = _random.Pick(spawners);
             var coords = _transform.GetMoverCoordinates(spawner);
             var proto = _random.Pick(protos);
-            var intel = Spawn(proto, coords);
+            var intel = SpawnAttachedTo(proto, coords);
             items.Add(intel);
 
             if (activePosition)

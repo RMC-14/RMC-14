@@ -37,9 +37,9 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
+    [Dependency] protected ActionBlockerSystem Blocker = default!;
     [Dependency] private IConfigurationManager _config = default!;
-    [Dependency] protected readonly DamageableSystem Damageable = default!;
+    [Dependency] protected DamageableSystem Damageable = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private INetManager _net = default!;
@@ -222,7 +222,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         var physQuery = GetEntityQuery<PhysicsComponent>();
         var valid = true;
 
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid.Comp, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(grid, grid.Comp, tile);
         while (anchored.MoveNext(out var ent))
         {
             if (!physQuery.TryGetComponent(ent, out var body))

@@ -660,7 +660,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         ClearHole(wall, deleteHole: true);
 
         var xform = Transform(wall);
-        var damagedGirder = Spawn(DamagedGirderPrototype, xform.Coordinates);
+        var damagedGirder = SpawnAttachedTo(DamagedGirderPrototype, xform.Coordinates);
         _transform.SetLocalRotation(damagedGirder, xform.LocalRotation);
         QueueDel(wall);
     }

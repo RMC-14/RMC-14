@@ -33,7 +33,7 @@ public sealed class DropshipHijackerBui(EntityUid owner, Enum uiKey) : BoundUser
             _window.Header.SetMarkup("[bold]Where to 'land'?[/bold]");
         }
 
-        _window.Destinations.DisposeAllChildren();
+        _window.Destinations.RemoveAllChildren();
         foreach (var (id, name) in s.Destinations)
         {
             var button = new Button

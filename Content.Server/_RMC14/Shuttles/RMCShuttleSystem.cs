@@ -55,7 +55,7 @@ public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
         if (!TryComp(ent, out MapGridComponent? grid))
             return;
 
-        var enumerator = _mapSystem.GetAllTilesEnumerator(ent, grid);
+        var enumerator = _mapSystem.GetAllTiles(ent, grid);
         while (enumerator.MoveNext(out var tile))
         {
             if(!TryComp(ent, out MapGridComponent? mapGrid))

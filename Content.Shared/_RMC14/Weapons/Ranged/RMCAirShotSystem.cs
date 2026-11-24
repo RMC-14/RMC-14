@@ -80,7 +80,7 @@ public sealed class RMCAirShotSystem : EntitySystem
             {
                 if (TryComp(casing, out RMCAirProjectileComponent? projectile))
                 {
-                    var spawned = Spawn(projectile.Prototype, GetCoordinates(args.Coordinates));
+                    var spawned = SpawnAttachedTo(projectile.Prototype, GetCoordinates(args.Coordinates));
                     if (HasComp<FlareSignalComponent>(spawned))
                     {
                         var id = _dropship.ComputeNextId();

@@ -377,7 +377,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     _net.IsServer &&
                     targetComponent.Eyes.TryGetValue(uid, out var oldEye))
                 {
-                    var proxy = Spawn(null, Transform(dropshipTarget).Coordinates);
+                    var proxy = SpawnAttachedTo(null, Transform(dropshipTarget).Coordinates);
 
                     var proxyTarget = EnsureComp<DropshipTargetComponent>(proxy);
                     proxyTarget.Abbreviation = targetComponent.Abbreviation;
@@ -1472,7 +1472,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 if (flight.MarkerWarning)
                 {
-                    flight.WarningMarker = Spawn(DropshipTargetMarker, flight.Target);
+                    flight.WarningMarker = SpawnAttachedTo(DropshipTargetMarker, flight.Target);
                     var despawn = EnsureComp<TimedDespawnComponent>(flight.WarningMarker.Value);
                     despawn.Lifetime = (float) (flight.MarkerAt - _timing.CurTime).TotalSeconds;
                 }
@@ -1484,7 +1484,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!flight.SpawnedMarker)
             {
                 flight.SpawnedMarker = true;
-                flight.Marker = Spawn(DropshipTargetMarker, flight.Target);
+                flight.Marker = SpawnAttachedTo(DropshipTargetMarker, flight.Target);
                 Dirty(uid, flight);
 
                 _audio.PlayPvs(flight.SoundMarker, flight.Marker.Value);
@@ -1662,7 +1662,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return false;
 
         var tile = _map.LocalToTile(gridUid, grid, impactCoords);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
 
         var foundWall = false;
         while (anchored.MoveNext(out var uid))
@@ -1726,7 +1726,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return false;
 
         var tile = _map.LocalToTile(gridUid, grid, impactCoords);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
 
         while (anchored.MoveNext(out var uid))
         {
@@ -1774,7 +1774,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (_net.IsClient)
                 return null;
 
-            eye = Spawn(null, target.Owner.ToCoordinates());
+            eye = SpawnAttachedTo(null, target.Owner.ToCoordinates());
             target.Comp.Eyes[terminal] = eye;
             Dirty(target);
 

@@ -43,8 +43,7 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private RMCUnrevivableSystem _unrevivable = default!;
 
     // TODO RMC14 move these to a component
-    [ValidatePrototypeId<DamageTypePrototype>]
-    private const string HealType = "Asphyxiation";
+    private static readonly ProtoId<DamageTypePrototype> HealType = "Asphyxiation";
     private static readonly ProtoId<DamageGroupPrototype> Airloss = "Airloss";
 
     private static readonly TimeSpan CPRCooldownSeconds = TimeSpan.FromSeconds(7);

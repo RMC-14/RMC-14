@@ -164,7 +164,9 @@ public static class RMCAnnouncementOverrides
 
     private static Color? GetColor(Dictionary<string, string> fields, string key)
     {
-        return fields.TryGetValue(key, out var text) ? Color.TryFromHex(text) : null;
+        return fields.TryGetValue(key, out var text) && Color.TryFromHex(text, out var color)
+            ? color
+            : null;
     }
 
     private static bool TryGetFloat(Dictionary<string, string> fields, string key, out float value)

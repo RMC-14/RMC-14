@@ -144,7 +144,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
     {
         paraDroppable.OriginalSpriteOffset = offset;
 
-        var animationEnt = Spawn(paraDroppable.ParachutePrototype, coordinates);
+        var animationEnt = SpawnAttachedTo(paraDroppable.ParachutePrototype, coordinates);
         var despawn = EnsureComp<TimedDespawnComponent>(animationEnt);
         despawn.Lifetime = fallDuration;
 

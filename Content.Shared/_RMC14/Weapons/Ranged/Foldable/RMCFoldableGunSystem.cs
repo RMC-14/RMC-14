@@ -103,7 +103,7 @@ public sealed class RMCFoldableGunSystem : EntitySystem
         _popup.PopupPredicted(selfText, othersText, user, user);
         _audio.PlayPredicted(ent.Comp.ToggleFoldSound, user, user);
 
-        PredictedQueueDel(ent.Owner);
+        QueueDel(ent.Owner);
 
         args.Handled = true;
     }

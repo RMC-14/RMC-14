@@ -173,7 +173,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (turret.VisualEntity is { } existing && Exists(existing))
             return;
 
-        var visual = Spawn(TurretVisual, new EntityCoordinates(vehicle, Vector2.Zero));
+        var visual = SpawnAttachedTo(TurretVisual, new EntityCoordinates(vehicle, Vector2.Zero));
         var visualComp = EnsureComp<VehicleTurretVisualComponent>(visual);
         visualComp.Turret = GetNetEntity(turretUid);
         Dirty(visual, visualComp);
@@ -357,9 +357,9 @@ public sealed class VehicleTurretSystem : EntitySystem
             return turret.PixelOffset;
 
         var baseOffset = turret.PixelOffset;
-        var normalized = facing.Theta % MathHelper.TwoPi;
+        var normalized = facing.Theta % MathF.Tau;
         if (normalized < 0)
-            normalized += MathHelper.TwoPi;
+            normalized += MathF.Tau;
 
         var dir = GetDirectionalDir((float) normalized);
         return baseOffset + GetDirectionalOffset(turret, dir);

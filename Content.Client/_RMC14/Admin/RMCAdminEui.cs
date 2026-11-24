@@ -171,7 +171,7 @@ public sealed class RMCAdminEui : BaseEui
             });
         }
 
-        _adminWindow.MarineTab.SpecialistSkills.DisposeAllChildren();
+        _adminWindow.MarineTab.SpecialistSkills.RemoveAllChildren();
         foreach (var comp in s.SpecialistSkills)
         {
             var specButton = new Button
@@ -202,7 +202,7 @@ public sealed class RMCAdminEui : BaseEui
             _adminWindow.MarineTab.SpecialistPointsSpinBox.OverrideValue(specialistPoints);
         }
 
-        _adminWindow.MarineTab.Squads.DisposeAllChildren();
+        _adminWindow.MarineTab.Squads.RemoveAllChildren();
         foreach (var squad in s.Squads)
         {
             var squadRow = new RMCSquadRow()

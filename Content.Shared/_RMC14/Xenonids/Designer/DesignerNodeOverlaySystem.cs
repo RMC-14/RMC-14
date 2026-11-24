@@ -32,7 +32,7 @@ public sealed class DesignerNodeOverlaySystem : EntitySystem
         };
 
         var coords = Transform(nodeUid).Coordinates;
-        var overlay = Spawn(overlayProto, coords);
+        var overlay = SpawnAttachedTo(overlayProto, coords);
         _transform.SetParent(overlay, nodeUid);
 
         overlayComp.Overlay = overlay;

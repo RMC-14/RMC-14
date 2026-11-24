@@ -1278,7 +1278,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private EntityUid TransferXeno(EntityUid xeno, EntProtoId proto)
     {
         var coordinates = _transform.GetMoverCoordinates(xeno);
-        var newXeno = Spawn(proto, coordinates);
+        var newXeno = SpawnAttachedTo(proto, coordinates);
         _xenoHive.SetSameHive(xeno, newXeno);
 
         RemComp<CanBeLarvaQueuedComponent>(xeno);

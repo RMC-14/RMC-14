@@ -98,7 +98,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             var coordinates = _transform.GetMoverCoordinates(uid, xform);
             var rotation = xform.LocalRotation;
             Del(uid);
-            var spawned = Spawn(id, coordinates);
+            var spawned = SpawnAttachedTo(id, coordinates);
             _transform.SetLocalRotation(spawned, rotation);
         }
     }

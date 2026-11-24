@@ -485,7 +485,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
     private void DrawTunnelableTiles(in OverlayDrawArgs args, MapCoordinates originMap, XenoDigTunnelActionEvent tunnelEvent)
     {
-        if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(originMap, out var gridUid, out var grid))
             return;
 
         bool updateTileCache;

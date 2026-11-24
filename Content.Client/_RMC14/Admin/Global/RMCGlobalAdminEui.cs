@@ -42,11 +42,11 @@ public sealed class RMCGlobalAdminEui : BaseEui
         if (state is not RMCAdminEuiState s)
             return;
 
-        _window.CVars.DisposeAllChildren();
-        _window.Squads.DisposeAllChildren();
-        _window.XenoTiers.DisposeAllChildren();
-        _window.TacticalMapHistory.DisposeAllChildren();
-        _window.Factions.DisposeAllChildren();
+        _window.CVars.RemoveAllChildren();
+        _window.Squads.RemoveAllChildren();
+        _window.XenoTiers.RemoveAllChildren();
+        _window.TacticalMapHistory.RemoveAllChildren();
+        _window.Factions.RemoveAllChildren();
 
         foreach (var cVar in _config.GetRegisteredCVars())
         {

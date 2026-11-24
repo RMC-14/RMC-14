@@ -307,7 +307,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         var dropEntityCoordinates = _transform.ToCoordinates(dropCoordinates);
 
         dropping.OpenAt = time + openDelay;
-        dropping.LandingEffect = Spawn(landingEffect, dropEntityCoordinates);
+        dropping.LandingEffect = SpawnAttachedTo(landingEffect, dropEntityCoordinates);
         dropping.LandingDamage = landingDamage;
         Dirty(droppingEntity, dropping);
 

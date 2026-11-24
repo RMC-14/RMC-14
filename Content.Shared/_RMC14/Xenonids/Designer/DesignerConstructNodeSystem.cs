@@ -187,7 +187,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         var effectId = isThickVariant ? node.Comp.ConstructAnimationEffectThick : node.Comp.ConstructAnimationEffect;
         if (_prototype.HasIndex(effectId))
         {
-            var effect = Spawn(effectId, coords);
+            var effect = SpawnAttachedTo(effectId, coords);
             build.AnimationEffect = effect;
             if (TryGetNetEntity(effect, out var netEffect) && TryGetNetEntity(user, out var netUser))
             {
@@ -264,7 +264,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
             isThickVariant |= _weeds.IsOnHiveWeeds((gridUid, gridComp!), coords);
 
         var proto = isThickVariant ? nodeComp.ConstructWeedboundThick : nodeComp.ConstructWeedbound;
-        var spawned = EntityManager.SpawnEntity(proto, coords);
+        var spawned = SpawnAttachedTo(proto, coords);
 
         var weedbound = EnsureComp<WeedboundWallComponent>(spawned);
         weedbound.IsThickVariant = isThickVariant;

@@ -190,7 +190,7 @@ public abstract class SharedBarbedSystem : EntitySystem
             return;
 
         var coordinates = _transform.GetMoverCoordinates(barbed);
-        EntityManager.SpawnEntity(barbed.Comp.Spawn, coordinates);
+        SpawnAttachedTo(barbed.Comp.Spawn, coordinates);
     }
 
     private void OnDoorStateChanged(Entity<BarbedComponent> barbed, ref DoorStateChangedEvent args)

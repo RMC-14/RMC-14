@@ -455,7 +455,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     public Entity<XenoWeedsComponent>? GetWeedsOnFloor(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
-        var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
+        var enumerator = _mapSystem.GetAnchoredEntities(grid, grid, position);
 
         while (enumerator.MoveNext(out var anchored))
         {
@@ -575,7 +575,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 return false;
         }
 
-        var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tileIndex);
+        var targetTileAnchored = _mapSystem.GetAnchoredEntities(grid, grid, tileIndex);
         while (targetTileAnchored.MoveNext(out var uid))
         {
             if (_blockWeedsQuery.HasComp(uid))

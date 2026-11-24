@@ -53,7 +53,7 @@ public abstract class SharedSleeperSystem : EntitySystem
             var rotation = Transform(sleeper).LocalRotation;
             var rotatedOffset = rotation.RotateVec(sleeper.Comp.ConsoleSpawnOffset);
             var consoleCoords = _transform.GetMoverCoordinates(sleeper).Offset(rotatedOffset);
-            var consoleId = Spawn(sleeper.Comp.SpawnConsolePrototype.Value, consoleCoords);
+            var consoleId = SpawnAttachedTo(sleeper.Comp.SpawnConsolePrototype.Value, consoleCoords);
 
             // Set the console's rotation to match the sleeper
             _transform.SetLocalRotation(consoleId, rotation);

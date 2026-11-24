@@ -51,7 +51,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
             var rotation = Transform(scanner).LocalRotation;
             var rotatedOffset = rotation.RotateVec(scanner.Comp.ConsoleSpawnOffset);
             var consoleCoords = _transform.GetMoverCoordinates(scanner).Offset(rotatedOffset);
-            var consoleId = Spawn(scanner.Comp.SpawnConsolePrototype.Value, consoleCoords);
+            var consoleId = SpawnAttachedTo(scanner.Comp.SpawnConsolePrototype.Value, consoleCoords);
 
             _transform.SetLocalRotation(consoleId, rotation);
 
