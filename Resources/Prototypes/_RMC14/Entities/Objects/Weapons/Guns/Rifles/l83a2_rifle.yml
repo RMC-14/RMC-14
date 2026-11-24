@@ -20,7 +20,7 @@
     - SemiAuto
     - Burst
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m16.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cr16.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
