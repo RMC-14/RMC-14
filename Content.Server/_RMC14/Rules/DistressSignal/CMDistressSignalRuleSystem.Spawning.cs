@@ -206,45 +206,27 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private bool TryGetPriority(NetUserId id, ProtoId<JobPrototype> job, RulePlayerSpawningEvent ev, out JobPriority priority)
     {
-        priority = JobPriority.Never;
-
-        IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority>? priorities = null;
-        if (_prefsManager.TryGetCachedPreferences(id, out var preferences))
-            priorities = preferences.JobPrioritiesFiltered();
-        else if (ev.Profiles.TryGetValue(id, out var profile))
-            priorities = profile.JobPriorities;
-
-        return priorities != null &&
-               priorities.TryGetValue(job, out priority) &&
+        return _rmcCharacters.TryGetPlayablePriority(id, job, out priority) &&
                priority > JobPriority.Never;
     }
 
     private HumanoidCharacterProfile SelectSpawnProfile(
         ICommonSession player,
         ProtoId<JobPrototype> primaryJob,
-        ProtoId<JobPrototype>? secondaryJob = null)
+        ProtoId<JobPrototype>? secondaryJob = null,
+        Predicate<HumanoidCharacterProfile>? filter = null)
     {
-        var fallbackProfile = GameTicker.GetPlayerProfile(player);
-
-        if (!_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
-            return fallbackProfile;
-
-        if (preferences.SelectProfileForJob(primaryJob) is { } primaryProfile)
-            return primaryProfile;
+        if (_rmcCharacters.TryPickCharacter(player.UserId, primaryJob, out var primary, filter))
+            return primary;
 
         if (secondaryJob is { } secondary &&
-            preferences.SelectProfileForJob(secondary) is { } secondaryProfile)
+            _rmcCharacters.TryPickCharacter(player.UserId, secondary, out var secondaryProfile, filter))
         {
             return secondaryProfile;
         }
 
-        if (preferences.TryGetHumanoidInSlot(preferences.SelectedCharacterIndex, out var selectedProfile) &&
-            selectedProfile != null)
-        {
-            return selectedProfile;
-        }
-
-        return fallbackProfile;
+        return _rmcCharacters.ResolveCharacter(player.UserId, primaryJob, filter) ??
+               _rmcCharacters.GetDefaultProfile(player.UserId);
     }
 
     /// <summary>

@@ -1,7 +1,7 @@
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Humanoid;
-using Content.Server.Preferences.Managers;
+using Content.Server._RMC14.Preferences;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
@@ -14,7 +14,7 @@ public sealed class AntagLoadProfileRuleSystem : GameRuleSystem<AntagLoadProfile
 {
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IServerPreferencesManager _prefs = default!;
+    [Dependency] private readonly RMCCharacterSelectionSystem _characters = default!;
 
     public override void Initialize()
     {
@@ -28,11 +28,10 @@ public sealed class AntagLoadProfileRuleSystem : GameRuleSystem<AntagLoadProfile
         if (args.Handled)
             return;
 
+        // RMC14
         HumanoidCharacterProfile? profile = null;
         if (args.Session != null)
         {
-            var preferences = _prefs.GetPreferences(args.Session.UserId);
-
             var roles = new HashSet<ProtoId<AntagPrototype>>();
             foreach (var (definition, selectedSessions) in args.GameRule.Comp.PreSelectedSessions)
             {
@@ -49,12 +48,13 @@ public sealed class AntagLoadProfileRuleSystem : GameRuleSystem<AntagLoadProfile
             }
 
             if (roles.Count > 0)
-                profile = preferences.SelectProfileForAntag(roles);
+                profile = _characters.ResolveAntagCharacter(args.Session.UserId, roles);
 
-            profile ??= preferences.SelectedCharacter as HumanoidCharacterProfile;
+            profile ??= _characters.GetDefaultProfile(args.Session.UserId);
         }
 
         profile ??= HumanoidCharacterProfile.RandomWithSpecies();
+        // RMC14
 
 
         if (profile?.Species is not { } speciesId || !_proto.TryIndex(speciesId, out var species))

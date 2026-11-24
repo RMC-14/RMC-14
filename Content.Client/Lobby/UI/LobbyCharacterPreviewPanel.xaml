@@ -1,23 +1,26 @@
 <Control
     xmlns="https://spacestation14.io"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    xmlns:style="clr-namespace:Content.Client.Stylesheets"
-    xmlns:ui="clr-namespace:Content.Client.Lobby.UI">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.Lobby">
     <BoxContainer Name="VBox" Orientation="Vertical">
 
         <!-- Header and the checkbox for locking/unlocking priority icons -->
-        <BoxContainer>
-            <controls:NanoHeading Name="Header" Text="{Loc 'lobby-character-preview-panel-header'}" />
+        <!-- RMC14 -->
+        <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+            <BoxContainer Name="ButtonRow" Orientation="Horizontal" SeparationOverride="4" Visible="False">
+                <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}" />
+                <Button Name="JobPriorities" Text="{Loc 'rmc-lobby-job-priorities-button'}" />
+                <Button Name="PatronPerks" Access="Public" Text="{Loc 'rmc-ui-patron-perks'}" Visible="False" />
+            </BoxContainer>
+            <Control HorizontalExpand="True" />
+            <CheckBox Name="PriorityLock" Text="{Loc 'ui-lobby-lock-priorities-checkbox-label'}"
+                      VerticalAlignment="Center"
+                      ToolTip="{Loc 'ui-lobby-lock-priorities-checkbox-tooltip'}"/>
             <Button Name="TogglePrioritiesButton"
                     Text="▼"
+                    StyleClasses="ButtonSquare"
                     MinSize="24 24"
-                    Margin="4 0 0 0"
                     ToolTip="{Loc 'lobby-character-preview-panel-collapse-job-priorities-tooltip'}"/>
-            <CheckBox Name="PriorityLock" Text="{Loc 'ui-lobby-lock-priorities-checkbox-label'}"
-                      HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Center"
-                      ToolTip="{Loc 'ui-lobby-lock-priorities-checkbox-tooltip'}"/>
         </BoxContainer>
 
         <!-- This is the main bit, only shows once we have preferences from the server -->
@@ -29,52 +32,30 @@
                               VerticalExpand="True"
                               HorizontalExpand="True"
                               HorizontalAlignment="Center"
-                              SeparationOverride="6">
+                              SeparationOverride="2">
 
                     <!-- Jobs with "Never" priority -->
                     <ui:DraggableJobTarget Name="NeverBox" Priority="Never" />
 
                     <!-- Vertical rule -->
-                    <PanelContainer MinSize="2 0">
-                        <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
-                        </PanelContainer.PanelOverride>
-                    </PanelContainer>
+                    <PanelContainer MinSize="1 0" StyleClasses="LowDivider" /> <!-- RMC14 -->
 
                     <!-- Jobs with "Low" priority -->
                     <ui:DraggableJobTarget Name="LowBox" Priority="Low" />
 
                     <!-- Vertical rule -->
-                    <PanelContainer MinSize="2 0">
-                        <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
-                        </PanelContainer.PanelOverride>
-                    </PanelContainer>
+                    <PanelContainer MinSize="1 0" StyleClasses="LowDivider" /> <!-- RMC14 -->
 
                     <!-- Jobs with "Medium" priority -->
                     <ui:DraggableJobTarget Name="MediumBox" Priority="Medium" />
 
                     <!-- Vertical rule -->
-                    <PanelContainer MinSize="2 0">
-                        <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
-                        </PanelContainer.PanelOverride>
-                    </PanelContainer>
+                    <PanelContainer MinSize="1 0" StyleClasses="LowDivider" /> <!-- RMC14 -->
 
                     <!-- THE job with "HIGH" priority -->
                     <ui:DraggableJobTarget Name="HighBox" Priority="High" />
 
                 </BoxContainer> <!-- End job grids -->
-
-                <controls:VSpacer/>
-
-                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
-                            HorizontalAlignment="Center"
-                            Margin="0 5 0 0"/>
-                    <Button Name="PatronPerks" Access="Public" Text="{Loc 'rmc-ui-patron-perks'}"
-                            Margin="0 5 0 0" Visible="False" />
-                </BoxContainer>
             </BoxContainer>
         </BoxContainer>
         <Label Name="Unloaded" Text="{Loc 'lobby-character-preview-panel-unloaded-preferences-label'}"/>

@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Preferences;
 using Content.Server.Hands.Systems;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.CCVar;
@@ -14,6 +15,7 @@ namespace Content.Server._RMC14.Medal;
 
 public sealed class PlaytimeMedalSystem : EntitySystem
 {
+    [Dependency] private readonly RMCCharacterSelectionSystem _characters = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly SharedUniformAccessorySystem _uniformAccessory = default!;
@@ -48,7 +50,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
-        if (!ev.Profile.PlaytimePerks)
+        if (!_characters.GetPlayerSettings(ev.Player.UserId).PlaytimePerks)
             return;
 
         if (ev.JobId == null ||

@@ -1,3 +1,4 @@
+using Content.Client._RMC14.Lobby;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -123,6 +124,22 @@ namespace Content.Client.Lobby.UI
         private static readonly Color SurvivorInsertDisabledModulate = Color.FromHex("#ff9a9a");
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
+
+        // RMC14 start
+        private readonly Dictionary<string, JobDepartmentEntry> _jobDepartments = new();
+        private readonly HashSet<string> _collapsedJobDepartments = new();
+
+        private sealed class JobDepartmentEntry(string name, BoxContainer category, BoxContainer entries, Label stats, Label expand)
+        {
+            public readonly string Name = name;
+            public readonly BoxContainer Category = category;
+            public readonly BoxContainer Entries = entries;
+            public readonly Label Stats = stats;
+            public readonly Label Expand = expand;
+            public readonly List<(JobPrototype Job, Control Row)> Jobs = new();
+            public bool Shown;
+        }
+        // RMC14 end
 
         private Direction _previewRotation = Direction.North;
 
@@ -480,6 +497,7 @@ namespace Content.Client.Lobby.UI
             TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-jobs-tab"));
 
             _jobCategories = new Dictionary<string, BoxContainer>();
+            JobSearch.OnTextChanged += _ => FilterJobs(); // RMC14
 
             RefreshAntags();
             RefreshJobs();
@@ -1001,6 +1019,7 @@ namespace Content.Client.Lobby.UI
         {
             JobList.DisposeAllChildren();
             _jobCategories.Clear();
+            _jobDepartments.Clear(); // RMC14
             _jobPriorities.Clear();
             _rankPriorities.Clear();
             _survivorVariantPriorityButtons.Clear();
@@ -1064,22 +1083,58 @@ namespace Content.Client.Lobby.UI
                         });
                     }
 
+                    // RMC14 start
+                    var headerText = department.CustomName ?? Loc.GetString("humanoid-profile-editor-department-jobs-label", ("departmentName", departmentName));
+                    var expand = new Label { Margin = new Thickness(5f, 0, 5f, 0) };
+                    var stats = new Label { StyleClasses = { StyleBase.StyleClassLabelSubText }, Margin = new Thickness(0, 0, 5f, 0) };
+                    var header = new ContainerButton
+                    {
+                        Children =
+                        {
+                            new BoxContainer
+                            {
+                                Orientation = LayoutOrientation.Horizontal,
+                                Children =
+                                {
+                                    expand,
+                                    new Label { Text = headerText, HorizontalExpand = true },
+                                    stats,
+                                },
+                            },
+                        },
+                    };
+
                     category.AddChild(new PanelContainer
                     {
                         PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#464966")},
-                        Children =
-                        {
-                            new Label
-                            {
-                                Text = department.CustomName ?? Loc.GetString("humanoid-profile-editor-department-jobs-label", ("departmentName", departmentName)),
-                                Margin = new Thickness(5f, 0, 0, 0)
-                            }
-                        }
+                        Children = { header },
                     });
+
+                    var entries = new BoxContainer { Orientation = LayoutOrientation.Vertical };
+                    category.AddChild(entries);
+
+                    var departmentId = department.ID;
+                    header.OnPressed += _ =>
+                    {
+                        if (!_collapsedJobDepartments.Add(departmentId))
+                            _collapsedJobDepartments.Remove(departmentId);
+
+                        FilterJobs();
+                    };
+
+                    _jobDepartments[department.ID] = new JobDepartmentEntry(
+                        $"{departmentName} {headerText}",
+                        category,
+                        entries,
+                        stats,
+                        expand);
+                    // RMC14 end
 
                     _jobCategories[department.ID] = category;
                     JobList.AddChild(category);
                 }
+
+                var departmentEntry = _jobDepartments[department.ID]; // RMC14
 
                 var departmentJobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
                     .Where(job => job.SetPreference)
@@ -1094,6 +1149,8 @@ namespace Content.Client.Lobby.UI
                 // RMC14
                 if (jobs.Length == 0)
                     category.Visible = false;
+
+                departmentEntry.Shown = category.Visible;
                 // RMC14
 
                 Array.Sort(jobs, JobUIComparer.Instance);
@@ -1101,13 +1158,18 @@ namespace Content.Client.Lobby.UI
 
                 foreach (var job in jobs)
                 {
-                    var jobRow = AddJobSelector(job, category, items, titleSize: titleSize);
+                    // RMC14 start
+                    var jobWrapper = new BoxContainer { Orientation = LayoutOrientation.Vertical };
+                    departmentEntry.Entries.AddChild(jobWrapper);
+                    departmentEntry.Jobs.Add((job, jobWrapper));
+                    var jobRow = AddJobSelector(job, jobWrapper, items, titleSize: titleSize);
 
                     if (department.ID == SurvivorVariantJobPreferences.SurvivorDepartment &&
                         survivorVariantJobs.TryGetValue(job.ID, out var variants))
                     {
-                        AddSurvivorVariantJobSelectors(category, jobRow, variants, job.ID);
+                        AddSurvivorVariantJobSelectors(jobWrapper, jobRow, variants, job.ID);
                     }
+                    // RMC14 end
 
                     // RMC14
                     var rankOptions = new OptionButton()
@@ -1163,7 +1225,50 @@ namespace Content.Client.Lobby.UI
 
             UpdateJobPriorities();
             UpdatePlaytimeRankPreferenceControls();
+            FilterJobs(); // RMC14
         }
+
+        // RMC14 start
+        private void FilterJobs()
+        {
+            var search = JobSearch.Text.Trim();
+            foreach (var (id, department) in _jobDepartments)
+            {
+                if (!department.Shown)
+                    continue;
+
+                var departmentMatches = search.Length == 0 ||
+                                        department.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase);
+                var any = false;
+                foreach (var (job, row) in department.Jobs)
+                {
+                    var visible = departmentMatches ||
+                                  job.LocalizedName.Contains(search, StringComparison.CurrentCultureIgnoreCase);
+                    row.Visible = visible;
+                    any |= visible;
+                }
+
+                var collapsed = search.Length == 0 && _collapsedJobDepartments.Contains(id);
+                department.Category.Visible = any;
+                department.Entries.Visible = !collapsed;
+                department.Expand.Text = collapsed ? "▶" : "▼";
+            }
+        }
+
+        private void UpdateJobCounts()
+        {
+            foreach (var department in _jobDepartments.Values)
+            {
+                var selected = department.Jobs.Count(j => Profile?.JobPreferences.Contains(j.Job.ID) == true);
+                department.Stats.Text = Loc.GetString("rmc-humanoid-profile-editor-department-count",
+                    ("selected", selected),
+                    ("total", department.Jobs.Count));
+            }
+
+            var count = Profile?.JobPreferences.Count(job => _prototypeManager.HasIndex(job)) ?? 0;
+            JobCountLabel.Text = Loc.GetString("rmc-humanoid-profile-editor-job-count", ("count", count));
+        }
+        // RMC14 end
 
         private void AddSurvivorVariantJobSelectors(
             BoxContainer category,
@@ -2097,6 +2202,8 @@ namespace Content.Client.Lobby.UI
 
             foreach (var (_, updateStyle) in _survivorVariantInsertButtons)
                 updateStyle();
+
+            UpdateJobCounts(); // RMC14
         }
 
         private void UpdateSexControls()

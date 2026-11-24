@@ -28,6 +28,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server._RMC14.Announce;
+using Content.Server._RMC14.Preferences;
 
 namespace Content.Server.GameTicking
 {
@@ -37,6 +38,7 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly SharedJobSystem _jobs = default!;
         [Dependency] private readonly AdminSystem _admin = default!;
         [Dependency] private readonly MarinePresenceAnnounceSystem _marinePresenceAnnounce = default!;
+        [Dependency] private readonly RMCCharacterSelectionSystem _rmcCharacters = default!;
 
         public static readonly EntProtoId ObserverPrototypeName = "MobObserver";
         public static readonly EntProtoId AdminObserverPrototypeName = "RMCAdminObserver";
@@ -122,12 +124,22 @@ namespace Content.Server.GameTicking
                 if (job == null)
                     continue;
 
-                var session = _playerManager.GetSessionById(player);
-                var profile = SelectProfileForAssignedJob(player, job.Value, profiles);
-                if (profile == null)
-                    continue;
+                // RMC14 begin
+                var jobId = job.Value;
+                var profile = _rmcCharacters.ResolveCharacter(player, jobId, p => _distressSignal!.CanSpawnForJob(jobId, p)) ??
+                              profiles[player];
 
-                SpawnPlayer(session, profile, station, job, false);
+                if (profile.OnlyUsePreferredSquads && !_distressSignal!.CanSpawnForJob(jobId, profile))
+                {
+                    var session = _playerManager.GetSessionById(player);
+                    RaiseLocalEvent(new NoJobsAvailableSpawningEvent(session));
+                    _chatManager.DispatchServerMessage(session,
+                        Loc.GetString("game-ticker-player-no-preferred-squads-available"));
+                    continue;
+                }
+
+                SpawnPlayer(_playerManager.GetSessionById(player), profile, station, job, false);
+                // RMC14 end
             }
 
             RefreshLateJoinAllowed();
@@ -139,42 +151,15 @@ namespace Content.Server.GameTicking
                 force));
         }
 
-        private HumanoidCharacterProfile? SelectProfileForAssignedJob(
-            NetUserId userId,
-            ProtoId<JobPrototype> job,
-            IReadOnlyDictionary<NetUserId, HumanoidCharacterProfile> fallbackProfiles)
-        {
-            Predicate<HumanoidCharacterProfile>? compatibility = null;
-            compatibility = profile => _distressSignal!.CanSpawnForJob(job, profile);
-
-            if (_prefsManager.TryGetCachedPreferences(userId, out var prefs))
-            {
-                var selected = prefs.SelectProfileForJob(job, compatibility);
-                if (selected != null)
-                    return selected;
-
-                if (prefs.TryGetHumanoidInSlot(prefs.SelectedCharacterIndex, out var selectedProfile) &&
-                    selectedProfile != null &&
-                    (compatibility == null || compatibility(selectedProfile)))
-                {
-                    return selectedProfile;
-                }
-            }
-
-            return fallbackProfiles.GetValueOrDefault(userId);
-        }
-
         private void SpawnPlayer(ICommonSession player,
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
             bool silent = false,
-            int? selectedCharacterSlot = null)
+            int? selectedCharacterSlot = null) // RMC14
         {
-            var character = GetPlayerProfile(player);
-
             var jobBans = _banManager.GetJobBans(player.UserId);
-            if (jobId != null && jobBans?.Contains(jobId) == true)
+            if (jobBans == null || jobId != null && jobBans.Contains(jobId))
                 return;
 
             if (jobId != null)
@@ -185,16 +170,16 @@ namespace Content.Server.GameTicking
                     return;
             }
 
-            SpawnPlayer(player, character, station, jobId, lateJoin, silent, selectedCharacterSlot);
+            SpawnPlayer(player, null, station, jobId, lateJoin, silent, selectedCharacterSlot); // RMC14
         }
 
         private void SpawnPlayer(ICommonSession player,
-            HumanoidCharacterProfile? character,
+            HumanoidCharacterProfile? character, // RMC14 nullable, resolved once the job is known
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
             bool silent = false,
-            int? selectedCharacterSlot = null)
+            int? selectedCharacterSlot = null) // RMC14
         {
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
@@ -216,7 +201,6 @@ namespace Content.Server.GameTicking
                 return;
             }
 
-            character ??= HumanoidCharacterProfile.Random();
             string speciesId;
             if (_randomizeCharacters)
             {
@@ -248,7 +232,7 @@ namespace Content.Server.GameTicking
             }
 
             // We raise this event to allow other systems to handle spawning this player themselves. (e.g. late-join wizard, etc)
-            var bev = new PlayerBeforeSpawnEvent(player, character, jobId, lateJoin, station);
+            var bev = new PlayerBeforeSpawnEvent(player, character ?? _rmcCharacters.GetDefaultProfile(player.UserId), jobId, lateJoin, station); // RMC14
             RaiseLocalEvent(bev);
 
             // Do nothing, something else has handled spawning this player for us!
@@ -267,12 +251,9 @@ namespace Content.Server.GameTicking
             if (jobBans != null)
                 restrictedRoles.UnionWith(jobBans);
 
-            var playerPreferences = _prefsManager.GetPreferences(player.UserId);
-            var requestedJob = jobId;
-
             // Pick best job best on prefs.
             jobId ??= _stationJobs.PickBestAvailableJobWithPriority(station,
-                playerPreferences.JobPrioritiesFiltered(),
+                _rmcCharacters.GetPlayableJobPriorities(player.UserId), // RMC14
                 true,
                 restrictedRoles);
             // If no job available, stay in lobby, or if no lobby spawn as observer
@@ -291,35 +272,25 @@ namespace Content.Server.GameTicking
                 return;
             }
 
-            // For non-randomized characters, try to pick a profile that requested the chosen job.
-            if (!_randomizeCharacters)
+            // RMC14 begin
+            var finalJobId = new ProtoId<JobPrototype>(jobId);
+            if (character == null && selectedCharacterSlot != null)
             {
-                HumanoidCharacterProfile? matchingProfile = null;
-                Predicate<HumanoidCharacterProfile>? compatibility = null;
-                var chosenJobId = new ProtoId<JobPrototype>(jobId);
-                compatibility = profile => _distressSignal!.CanSpawnForJob(chosenJobId, profile);
+                if (!_rmcCharacters.TryGetRequestedCharacter(player.UserId, selectedCharacterSlot.Value, finalJobId, out character))
+                {
+                    if (!LobbyEnabled)
+                        JoinAsObserver(player);
 
-                if (selectedCharacterSlot != null &&
-                    playerPreferences.TryGetHumanoidInSlot(selectedCharacterSlot.Value, out var preferredProfile) &&
-                    preferredProfile != null &&
-                    compatibility(preferredProfile))
-                {
-                    matchingProfile = preferredProfile;
-                }
-                else
-                {
-                    matchingProfile = playerPreferences.SelectProfileForJob(
-                        jobId,
-                        compatibility);
-                }
-
-                if (matchingProfile != null)
-                {
-                    character = matchingProfile;
+                    RaiseLocalEvent(new NoJobsAvailableSpawningEvent(player));
+                    _chatManager.DispatchServerMessage(player,
+                        Loc.GetString("rmc-game-ticker-character-cannot-play-job"));
+                    return;
                 }
             }
 
-            var finalJobId = new ProtoId<JobPrototype>(jobId);
+            character ??= _rmcCharacters.ResolveCharacter(player.UserId, finalJobId, p => _distressSignal!.CanSpawnForJob(finalJobId, p)) ??
+                          HumanoidCharacterProfile.Random();
+
             if (character.OnlyUsePreferredSquads &&
                 !_distressSignal!.CanSpawnForJob(finalJobId, character))
             {
@@ -333,6 +304,7 @@ namespace Content.Server.GameTicking
                     Loc.GetString("game-ticker-player-no-preferred-squads-available"));
                 return;
             }
+            // RMC14 end
 
             PlayerJoinGame(player, silent);
 

@@ -2,7 +2,7 @@
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Preferences;
+namespace Content.Shared._RMC14.Preferences;
 
 /// <summary>
 /// The client sends this to enable or disable the character in a character slot

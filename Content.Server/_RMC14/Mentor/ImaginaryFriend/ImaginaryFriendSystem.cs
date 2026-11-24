@@ -152,10 +152,8 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
                     if (profile is not HumanoidCharacterProfile humanoid)
                         continue;
 
-                    var jobs = humanoid.JobPriorities;
-                    var highJob = jobs.FirstOrDefault(x => x.Value == JobPriority.High).Key;
-
-                    if (highJob != ImaginaryFriendJobPrototype)
+                    var highJob = ImaginaryFriendJobPrototype;
+                    if (!humanoid.JobPreferences.Contains(highJob))
                         continue;
 
                     if (TryComp(friend, out HumanoidAppearanceComponent? humanoidAppearance))

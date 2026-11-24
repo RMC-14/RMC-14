@@ -13,7 +13,9 @@ using Content.Server.Administration.Managers;
 using Content.Server.IP;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
+using Content.Shared._RMC14.Preferences;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.GameTicking;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
@@ -69,6 +71,11 @@ namespace Content.Server.Database
                 .Include(p => p.Profiles).ThenInclude(p => p.NamedItems)
                 .Include(p => p.Profiles).ThenInclude(h => h.Ranks)
                 .Include(p => p.Profiles).ThenInclude(p => p.SquadPreference)
+                // RMC14
+                .Include(p => p.Profiles).ThenInclude(p => p.RMCDisabled)
+                .Include(p => p.RMCJobPriorities)
+                .Include(p => p.RMCPreference)
+
                 .AsSplitQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
 
@@ -86,7 +93,14 @@ namespace Content.Server.Database
             foreach (var favorite in prefs.ConstructionFavorites)
                 constructionFavorites.Add(new ProtoId<ConstructionPrototype>(favorite));
 
-            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), constructionFavorites);
+            // RMC14
+            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), constructionFavorites)
+            {
+                JobPriorities = prefs.RMCJobPriorities.ToDictionary(
+                    j => new ProtoId<JobPrototype>(j.JobName),
+                    j => (JobPriority) j.Priority),
+                PlayerSettings = ConvertPlayerSettings(prefs.RMCPreference),
+            };
         }
 
         public async Task SaveSelectedCharacterIndexAsync(NetUserId userId, int index)
@@ -128,6 +142,7 @@ namespace Content.Server.Database
                 .Include(p => p.Ranks)
                 .Include(p => p.NamedItems)
                 .Include(p => p.SquadPreference)
+                .Include(p => p.RMCDisabled) // RMC14
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -148,49 +163,65 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task SaveJobPrioritiesAsync(NetUserId userId, Dictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities)
+        // RMC14 begin
+        public async Task SaveJobPrioritiesAsync(NetUserId userId, IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities)
         {
             await using var db = await GetDb();
 
             var prefs = await db.DbContext
                 .Preference
-                .Include(p => p.Profiles)
-                    .ThenInclude(p => p.Jobs)
+                .Include(p => p.RMCJobPriorities)
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId);
 
             if (prefs == null)
                 return;
 
-            var selectedProfile = prefs.Profiles.SingleOrDefault(p => p.Slot == prefs.SelectedCharacterSlot);
-            if (selectedProfile == null)
-                return;
-
-            selectedProfile.Jobs.Clear();
-
-            var hasHighPriority = false;
-            foreach (var (job, priority) in newJobPriorities)
+            prefs.RMCJobPriorities.Clear();
+            foreach (var (job, priority) in PlayerPreferences.SanitizeJobPriorities(newJobPriorities))
             {
-                if (priority == JobPriority.Never)
-                    continue;
-
-                var fixedPriority = priority;
-                if (fixedPriority == JobPriority.High)
-                {
-                    if (hasHighPriority)
-                        fixedPriority = JobPriority.Medium;
-                    else
-                        hasHighPriority = true;
-                }
-
-                selectedProfile.Jobs.Add(new Job
+                prefs.RMCJobPriorities.Add(new RMCPlayerJobPriority
                 {
                     JobName = job,
-                    Priority = (DbJobPriority) fixedPriority,
+                    Priority = (DbJobPriority) priority,
                 });
             }
 
             await db.DbContext.SaveChangesAsync();
         }
+
+        public async Task SavePlayerSettingsAsync(NetUserId userId, RMCPlayerSettings settings)
+        {
+            await using var db = await GetDb();
+
+            var prefs = await db.DbContext
+                .Preference
+                .Include(p => p.RMCPreference)
+                .SingleOrDefaultAsync(p => p.UserId == userId.UserId);
+
+            if (prefs == null)
+                return;
+
+            prefs.RMCPreference ??= new RMCPlayerPreference();
+            prefs.RMCPreference.PreferenceUnavailable = (DbPreferenceUnavailableMode) settings.PreferenceUnavailable;
+            prefs.RMCPreference.XenoPrefix = settings.XenoPrefix;
+            prefs.RMCPreference.XenoPostfix = settings.XenoPostfix;
+            prefs.RMCPreference.PlaytimePerks = settings.PlaytimePerks;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        private static RMCPlayerSettings ConvertPlayerSettings(RMCPlayerPreference? preference)
+        {
+            if (preference == null)
+                return RMCPlayerSettings.Default;
+
+            return new RMCPlayerSettings(
+                (PreferenceUnavailableMode) preference.PreferenceUnavailable,
+                preference.XenoPrefix,
+                preference.XenoPostfix,
+                preference.PlaytimePerks);
+        }
+        // RMC14 end
 
         private static async Task DeleteCharacterSlot(ServerDbContext db, NetUserId userId, int slot)
         {
@@ -221,11 +252,30 @@ namespace Content.Server.Database
 
             prefs.Profiles.Add(profile);
 
+            // RMC14
+            var defaultPriorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>
+            {
+                { SharedGameTicker.FallbackOverflowJob, JobPriority.High },
+            };
+
+            foreach (var (job, priority) in defaultPriorities)
+            {
+                prefs.RMCJobPriorities.Add(new RMCPlayerJobPriority
+                {
+                    JobName = job,
+                    Priority = (DbJobPriority) priority,
+                });
+            }
+
             db.DbContext.Preference.Add(prefs);
 
             await db.DbContext.SaveChangesAsync();
 
-            return new PlayerPreferences(new[] { new KeyValuePair<int, ICharacterProfile>(0, defaultProfile) }, 0, Color.FromHex(prefs.AdminOOCColor), []);
+            // RMC14
+            return new PlayerPreferences(new[] { new KeyValuePair<int, ICharacterProfile>(0, defaultProfile) }, 0, Color.FromHex(prefs.AdminOOCColor), [])
+            {
+                JobPriorities = defaultPriorities,
+            };
         }
 
         public async Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot)
@@ -272,7 +322,7 @@ namespace Content.Server.Database
 
         private static HumanoidCharacterProfile ConvertProfiles(Profile profile)
         {
-            var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
+            var jobs = profile.Jobs.Select(j => new ProtoId<JobPrototype>(j.JobName)).ToHashSet(); // RMC14
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
             var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
             var ranks = profile.Ranks.ToDictionary(
@@ -369,10 +419,8 @@ namespace Content.Server.Database
                     ArmorName = profile.NamedItems?.ArmorName,
                     SentryName = profile.NamedItems?.SentryName,
                 },
-                profile.PlaytimePerks,
-                profile.XenoPrefix,
-                profile.XenoPostfix,
-                enabled: profile.Enabled,
+                // RMC14
+                enabled: profile.RMCDisabled == null,
                 disabledSurvivorInserts: profile.DisabledInserts.Select(i => i.InsertName).ToHashSet()
             );
         }
@@ -409,10 +457,10 @@ namespace Content.Server.Database
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
 
             profile.Jobs.Clear();
+            // RMC14
             profile.Jobs.AddRange(
-                humanoid.JobPriorities
-                    .Where(j => j.Value != JobPriority.Never)
-                    .Select(j => new Job {JobName = j.Key, Priority = (DbJobPriority) j.Value})
+                humanoid.JobPreferences
+                    .Select(j => new Job {JobName = j, Priority = DbJobPriority.Low})
             );
 
             profile.Antags.Clear();
@@ -480,10 +528,11 @@ namespace Content.Server.Database
                 SentryName = humanoid.NamedItems.SentryName,
             };
 
-            profile.PlaytimePerks = humanoid.PlaytimePerks;
-            profile.XenoPrefix = humanoid.XenoPrefix;
-            profile.XenoPostfix = humanoid.XenoPostfix;
-            profile.Enabled = humanoid.Enabled;
+            // RMC14
+            if (humanoid.Enabled)
+                profile.RMCDisabled = null;
+            else
+                profile.RMCDisabled ??= new RMCDisabledProfile();
 
             return profile;
         }

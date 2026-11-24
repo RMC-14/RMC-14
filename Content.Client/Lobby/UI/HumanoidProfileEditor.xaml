@@ -129,6 +129,12 @@
                 </BoxContainer>
                 <BoxContainer Orientation="Vertical">
                     <!-- Jobs -->
+                    <!-- RMC14 -->
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="3 5 3 5">
+                        <LineEdit Name="JobSearch" HorizontalExpand="True"
+                                  PlaceHolder="{Loc 'rmc-humanoid-profile-editor-job-search'}" />
+                        <Label Name="JobCountLabel" VAlign="Center" StyleClasses="LabelSubText" />
+                    </BoxContainer>
                     <ScrollContainer VerticalExpand="True">
                         <BoxContainer Name="JobList" Orientation="Vertical" />
                     </ScrollContainer>

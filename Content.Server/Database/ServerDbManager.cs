@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
+using Content.Shared._RMC14.Preferences;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -42,7 +43,11 @@ namespace Content.Server.Database
 
         Task SaveCharacterSlotAsync(NetUserId userId, ICharacterProfile? profile, int slot);
 
-        Task SaveJobPrioritiesAsync(NetUserId userId, Dictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities);
+        // RMC14
+        Task SaveJobPrioritiesAsync(NetUserId userId, IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities);
+
+        Task SavePlayerSettingsAsync(NetUserId userId, RMCPlayerSettings settings);
+        // RMC14
 
         Task SaveAdminOOCColorAsync(NetUserId userId, Color color);
 
@@ -568,11 +573,19 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.SaveCharacterSlotAsync(userId, profile, slot));
         }
 
-        public Task SaveJobPrioritiesAsync(NetUserId userId, Dictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities)
+        // RMC14 begin
+        public Task SaveJobPrioritiesAsync(NetUserId userId, IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities)
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.SaveJobPrioritiesAsync(userId, newJobPriorities));
         }
+
+        public Task SavePlayerSettingsAsync(NetUserId userId, RMCPlayerSettings settings)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SavePlayerSettingsAsync(userId, settings));
+        }
+        // RMC14 end
 
         public Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot)
         {

@@ -26,7 +26,22 @@ namespace Content.Client.Lobby.UI
 
             CollapseButton.OnPressed += _ => TogglePanel(false);
             ExpandButton.OnPressed += _ => TogglePanel(true);
+
+            MainContainer.OnResized += UpdateLeftColumnWidth; // RMC14
         }
+
+        // RMC14 start
+        private const float MaxLeftColumnWidth = 800;
+        private const float LeftColumnGap = 24;
+
+        public void UpdateLeftColumnWidth()
+        {
+            var rightWidth = RightSide.Visible ? (float.IsNaN(RightSide.SetWidth) ? RightSide.Width : RightSide.SetWidth) : 0;
+            var width = Math.Clamp(MainContainer.Width - rightWidth - LeftColumnGap, 0, MaxLeftColumnWidth);
+            LeftSideTop.SetWidth = width;
+            CharacterCard.SetWidth = width;
+        }
+        // RMC14 end
 
         public void SwitchState(LobbyGuiState state)
         {
@@ -60,6 +75,7 @@ namespace Content.Client.Lobby.UI
         {
             RightSide.Visible = value;
             ExpandPanel.Visible = !value;
+            UpdateLeftColumnWidth(); // RMC14
         }
 
         public enum LobbyGuiState : byte

@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Shared._RMC14.Preferences;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -26,7 +27,11 @@ namespace Content.Server.Preferences.Managers
 
         Task SetProfile(NetUserId userId, int slot, ICharacterProfile profile);
         Task SetConstructionFavorites(NetUserId userId, List<ProtoId<ConstructionPrototype>> favorites);
-        Task SetJobPriorities(NetUserId userId, Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities);
+        // RMC14
+        Task SetJobPriorities(NetUserId userId, IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities);
+        Task SetPlayerSettings(NetUserId userId, RMCPlayerSettings settings);
+        Task SetCharacterEnabled(NetUserId userId, int slot, bool enabled);
+
         Task DeleteProfile(NetUserId userId, int slot);
     }
 }

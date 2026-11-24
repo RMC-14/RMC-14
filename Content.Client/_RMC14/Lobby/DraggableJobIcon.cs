@@ -115,27 +115,16 @@ public sealed class DraggableJobIcon : TextureRect
     /// </summary>
     private void StopDragging()
     {
-        var oldParent = _oldParent;
-        var oldScale = _oldScale;
-        var oldModulate = _oldModulate;
-        var dragGhost = _dragGhost;
+        _dragGhost?.Orphan();
+        Modulate = _oldModulate;
+
+        if (Parent == _oldParent && _oldScale is not null)
+            TextureScale = _oldScale.Value;
 
         _oldParent = null;
         _oldScale = null;
         _dragGhost = null;
         _oldModulate = Color.White;
-
-        _uiManager.DeferAction(() =>
-        {
-            dragGhost?.Orphan();
-
-            Modulate = oldModulate;
-
-            // If nothing reparented the icon from the drop handling, restore its pre-drag scale.
-            if (Parent == oldParent && oldScale is not null)
-                TextureScale = oldScale.Value;
-
-        });
     }
 
     /// <summary>

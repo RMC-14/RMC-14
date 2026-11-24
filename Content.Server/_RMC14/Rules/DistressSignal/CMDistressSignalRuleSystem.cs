@@ -3,6 +3,7 @@ using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Nuke;
 using Content.Server._RMC14.Power;
+using Content.Server._RMC14.Preferences;
 using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Logs;
@@ -137,6 +138,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
     [Dependency] private readonly IServerPreferencesManager _prefsManager = default!;
+    [Dependency] private readonly RMCCharacterSelectionSystem _rmcCharacters = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly TechSystem _tech = default!;
     [Dependency] private readonly IPlayerManager _player = default!;

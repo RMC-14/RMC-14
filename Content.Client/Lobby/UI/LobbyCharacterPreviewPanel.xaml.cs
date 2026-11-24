@@ -1,3 +1,4 @@
+using Content.Client._RMC14.Lobby;
 using System.Linq;
 using System.Numerics;
 using Content.Client.Lobby.UI.ProfileEditorControls;
@@ -28,32 +29,30 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     private SpriteSystem _sprite = default!;
-    private const int MaxTotalColumns = 15;
+    private const int MaxTotalColumns = 30; // RMC14
     private const int MinColumnNever = 5;
     private const int MinColumnLow = 2;
     private const int MinColumnMedium = 3;
-    private const float RegularPriorityIconWidth = 48f;
-    private const float TargetHorizontalMargin = 20f;
-    private const float HighPriorityTargetWidth = 96f;
-    private const float JobGridSeparationWidth = 6f;
+    // RMC14 start
+    private const float RegularPriorityIconWidth = 20f;
+    private const float TargetHorizontalMargin = 4f;
+    private const float HighPriorityTargetWidth = 68f;
+    private const float JobGridSeparationWidth = 2f;
     private const int JobGridElementCount = 7;
-    private const float SeparatorWidth = 2f;
+    private const float SeparatorWidth = 1f;
+    // RMC14 end
     private const int SeparatorCount = 3;
     private bool _prioritiesCollapsed;
     private readonly List<JobPrototype> _orderedJobs = [];
     private readonly Dictionary<ProtoId<JobPrototype>, int> _orderedJobIndices = [];
-    private readonly List<(DraggableJobIcon Icon, JobPriority Priority)> _pendingPriorityChanges = [];
-    private bool _priorityFlushQueued;
+    private bool _sendingPriorities;
 
     /// <summary>
     /// <see cref="LobbyState"/> needs to register events on this button, so provide a property to access it publicly.
     /// </summary>
     public Button CharacterSetupButton => CharacterSetup;
 
-    /// <summary>
-    /// Action invoked when the player's job priorities have been updated.
-    /// </summary>
-    public event Action? PrioritiesUpdated;
+    public Button JobPrioritiesButton => JobPriorities; // RMC14
 
     /// <summary>
     /// Just a helper function to grab the appropriate <see cref="DraggableJobTarget"/> control corresponding to the
@@ -98,6 +97,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     public void SetLoaded(bool value)
     {
         Loaded.Visible = value;
+        ButtonRow.Visible = value; // RMC14
         Unloaded.Visible = !value;
         PrioritiesSection.Visible = value && !_prioritiesCollapsed;
         PriorityLock.Visible = !_prioritiesCollapsed;
@@ -126,8 +126,9 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     /// </summary>
     public void Refresh()
     {
-        _pendingPriorityChanges.Clear();
-        _priorityFlushQueued = false;
+        if (_sendingPriorities)
+            return;
+
         RefreshOrderedJobs();
 
         foreach (var prio in Enum.GetValues<JobPriority>())
@@ -207,42 +208,10 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         {
             var currentHigh = target.GetContainedIcons().FirstOrDefault(existing => existing != icon);
             if (currentHigh is not null)
-                QueuePriorityChange(currentHigh, JobPriority.Medium);
+                ApplyPriorityChange(currentHigh, JobPriority.Medium);
         }
 
-        QueuePriorityChange(icon, target.Priority);
-    }
-
-    private void QueuePriorityChange(DraggableJobIcon icon, JobPriority priority)
-    {
-        for (var i = _pendingPriorityChanges.Count - 1; i >= 0; i--)
-        {
-            if (_pendingPriorityChanges[i].Icon == icon)
-                _pendingPriorityChanges.RemoveAt(i);
-        }
-
-        _pendingPriorityChanges.Add((icon, priority));
-
-        if (_priorityFlushQueued)
-            return;
-
-        _priorityFlushQueued = true;
-        _uiManager.DeferAction(FlushPriorityChanges);
-    }
-
-    private void FlushPriorityChanges()
-    {
-        _priorityFlushQueued = false;
-
-        if (_pendingPriorityChanges.Count == 0)
-            return;
-
-        foreach (var (icon, priority) in _pendingPriorityChanges)
-        {
-            ApplyPriorityChange(icon, priority);
-        }
-
-        _pendingPriorityChanges.Clear();
+        ApplyPriorityChange(icon, target.Priority);
         SendUpdatedPriorities();
         BalanceColumns();
     }
@@ -382,7 +351,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     {
         var minTotalColumns = MinColumnNever + MinColumnLow + MinColumnMedium;
 
-        if (JobGrid.Width <= 0)
+        if (Width <= 0) // RMC14
             return minTotalColumns;
 
         var sectionGapWidth = JobGridSeparationWidth * (JobGridElementCount - 1);
@@ -391,7 +360,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
                             SeparatorWidth * SeparatorCount +
                             sectionGapWidth;
 
-        var calculatedColumns = (int)MathF.Floor((JobGrid.Width - reservedWidth) / RegularPriorityIconWidth);
+        var calculatedColumns = (int)MathF.Floor((Width - reservedWidth) / RegularPriorityIconWidth); // RMC14
         return Math.Clamp(calculatedColumns, minTotalColumns, MaxTotalColumns);
     }
 
@@ -401,8 +370,15 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     /// </summary>
     private void SendUpdatedPriorities()
     {
-        _preferences.UpdateJobPriorities(GetJobPriorities());
-        PrioritiesUpdated?.Invoke();
+        _sendingPriorities = true;
+        try
+        {
+            _uiManager.GetUIController<LobbyUIController>().SetJobPriorities(GetJobPriorities()); // RMC14
+        }
+        finally
+        {
+            _sendingPriorities = false;
+        }
     }
 
     /// <summary>

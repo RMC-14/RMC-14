@@ -185,7 +185,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         ev.Jobs.UnionWith(GetDisallowedJobs(ev.Player));
     }
 
-    public bool IsAllowed(ICommonSession player, string role)
+    public bool IsAllowed(ICommonSession player, string role, HumanoidCharacterProfile? profile = null) // RMC14 profile
     {
         if (!_prototypes.TryIndex<JobPrototype>(role, out var job) ||
             !_cfg.GetCVar(CCVars.GameRoleTimers))
@@ -200,7 +200,37 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             playTimes = new Dictionary<string, TimeSpan>();
         }
 
-        return JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter);
+        return RMCRequirementsMet(job, playTimes, player.UserId, profile); // RMC14
+    }
+
+    // RMC14
+    private bool RMCRequirementsMet(
+        JobPrototype job,
+        IReadOnlyDictionary<string, TimeSpan> playTimes,
+        NetUserId userId,
+        HumanoidCharacterProfile? profile)
+    {
+        if (profile != null)
+            return JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, profile);
+
+        if (_preferencesManager.TryGetCachedPreferences(userId, out var prefs))
+        {
+            var anyCharacter = false;
+            foreach (var character in prefs.Characters.Values)
+            {
+                if (character is not HumanoidCharacterProfile humanoid)
+                    continue;
+
+                anyCharacter = true;
+                if (JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, humanoid))
+                    return true;
+            }
+
+            if (anyCharacter)
+                return false;
+        }
+
+        return JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, null);
     }
 
     public HashSet<ProtoId<JobPrototype>> GetDisallowedJobs(ICommonSession player)
@@ -217,7 +247,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
 
         foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
         {
-            if (JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter))
+            if (RMCRequirementsMet(job, playTimes, player.UserId, null)) // RMC14
                 roles.Add(job.ID);
         }
 
@@ -242,7 +272,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         for (var i = 0; i < jobs.Count; i++)
         {
             if (_prototypes.TryIndex(jobs[i], out var job)
-                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter))
+                && RMCRequirementsMet(job, playTimes, userId, null)) // RMC14
             {
                 continue;
             }

@@ -1,11 +1,12 @@
 using System.IO;
+using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Lidgren.Network;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Preferences;
+namespace Content.Shared._RMC14.Preferences;
 
 /// <summary>
 /// The client sends this to update their global job priorities

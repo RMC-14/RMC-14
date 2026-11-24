@@ -399,19 +399,15 @@ public sealed partial class CMDistressSignalRuleSystem
             var xenoCandidates = 0;
             foreach (var player in ev.Players)
             {
-                if (_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
+                if (_rmcCharacters.TryGetPlayablePriority(player.UserId, distress.XenoSelectableJob, out var xenoPriority) &&
+                    xenoPriority > JobPriority.Never)
                 {
-                    var jobPriorities = preferences.JobPrioritiesFiltered();
-                    if (jobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
-                        xenoPriority > JobPriority.Never)
-                    {
-                        xenoCandidates++;
-                    }
-                    else if (jobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
-                        queenPriority > JobPriority.Never)
-                    {
-                        xenoCandidates++;
-                    }
+                    xenoCandidates++;
+                }
+                else if (_rmcCharacters.TryGetPlayablePriority(player.UserId, distress.QueenJob, out var queenPriority) &&
+                    queenPriority > JobPriority.Never)
+                {
+                    xenoCandidates++;
                 }
             }
 

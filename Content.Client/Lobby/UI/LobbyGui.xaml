@@ -2,6 +2,7 @@
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maths="clr-namespace:Robust.Shared.Maths;assembly=Robust.Shared.Maths"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:vote="clr-namespace:Content.Client.Voting.UI"
@@ -22,8 +23,9 @@
                         <!-- Left Top Panel -->
                         <PanelContainer StyleClasses="BackgroundPanel" HorizontalAlignment="Left" Name="LeftSideTop"
                                         VerticalAlignment="Top">
-                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="800">
-                                <info:LinkBanner Name="LinkBanner" VerticalExpand="false" HorizontalAlignment="Center"
+                            <!-- RMC14 -->
+                            <BoxContainer Orientation="Vertical" MaxWidth="800">
+                                <info:LinkBanner Name="LinkBanner" VerticalExpand="false"
                                                  Margin="3 3 3 3" />
                                 <controls:StripeBack>
                                     <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="3 3 3 3">
@@ -46,6 +48,14 @@
                                 </controls:StripeBack>
                                 <RichTextLabel Name="PlaytimeComment" Visible="False" Access="Public" HorizontalAlignment="Center" />
                             </BoxContainer>
+                        </PanelContainer>
+                        <!-- RMC14 -->
+                        <PanelContainer Name="CharacterCard" HorizontalAlignment="Left"
+                                        VerticalAlignment="Top" Margin="0 4 0 0">
+                            <PanelContainer.PanelOverride>
+                                <gfx:StyleBoxFlat BackgroundColor="#1F1F23D9" BorderColor="#34343C" BorderThickness="1" />
+                            </PanelContainer.PanelOverride>
+                            <lobbyUi:LobbyCharacterPreviewPanel Name="CharacterPreview" Access="Public" Margin="6 4" />
                         </PanelContainer>
                         <!-- Voting Popups -->
                         <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer"
@@ -102,9 +112,6 @@
                                      Margin="3 3 3 3" MaxWidth="400" HorizontalAlignment="Left" />
                     <Label Name="StationTime" Access="Public" FontColorOverride="{x:Static maths:Color.LightGray}"
                            Margin="3 3 3 3" HorizontalAlignment="Left" />
-                    <controls:HSpacer Spacing="5" />
-                    <lobbyUi:LobbyCharacterPreviewPanel Name="CharacterPreview" Access="Public" />
-                    <controls:HSpacer Spacing="5" />
                     <BoxContainer MinHeight="10" />
                     <!-- Gold line -->
                     <controls:HLine StyleClasses="highlight" Thickness="2" Access="Public" />

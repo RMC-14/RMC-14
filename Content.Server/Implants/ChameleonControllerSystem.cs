@@ -1,4 +1,5 @@
-﻿using Content.Server.Clothing.Systems;
+﻿using Content.Server._RMC14.Preferences;
+using Content.Server.Clothing.Systems;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
@@ -23,6 +24,7 @@ public sealed class ChameleonControllerSystem : SharedChameleonControllerSystem
     [Dependency] private readonly SharedStationSpawningSystem _stationSpawningSystem = default!;
     [Dependency] private readonly ChameleonClothingSystem _chameleonClothingSystem = default!;
     [Dependency] private readonly IServerPreferencesManager _preferences = default!;
+    [Dependency] private readonly RMCCharacterSelectionSystem _rmcCharacters = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
 
     public override void Initialize()
@@ -86,11 +88,7 @@ public sealed class ChameleonControllerSystem : SharedChameleonControllerSystem
         if (!TryComp<ActorComponent>(user, out var actorComponent))
             return;
 
-        var userId = actorComponent.PlayerSession.UserId;
-        var prefs = _preferences.GetPreferences(userId);
-
-        if (prefs.SelectedCharacter is not HumanoidCharacterProfile profile)
-            return;
+        var profile = _rmcCharacters.GetActiveProfile(actorComponent.PlayerSession); // RMC14
 
         var jobProtoId = LoadoutSystem.GetJobPrototype(jobPrototype.ID);
 

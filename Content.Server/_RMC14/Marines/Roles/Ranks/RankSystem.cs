@@ -1,9 +1,7 @@
 using Content.Server.Players.PlayTimeTracking;
-using Content.Server.Preferences.Managers;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking;
-using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
@@ -13,7 +11,6 @@ public sealed class RankSystem : SharedRankSystem
 {
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IServerPreferencesManager _preferences = default!;
 
     public override void Initialize()
     {
@@ -50,14 +47,7 @@ public sealed class RankSystem : SharedRankSystem
             playTimes ??= new Dictionary<string, TimeSpan>();
         }
 
-        var profile = ev.Player != null
-            ? _preferences.GetPreferences(ev.Player.UserId).SelectedCharacter as HumanoidCharacterProfile
-            : HumanoidCharacterProfile.RandomWithSpecies();
-
-        if (profile == null)
-            return;
-
-        profile.RankPreferences.TryGetValue(ev.JobId, out var preferredRankId);
+        ev.Profile.RankPreferences.TryGetValue(ev.JobId, out var preferredRankId);
 
         // First pass: try to honour the player's explicit rank preference.
         if (preferredRankId != null)
