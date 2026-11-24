@@ -17,7 +17,7 @@ namespace Content.Shared.Body.Systems
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
         // RMC14
-        [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
+        [Dependency] private RMCReagentSystem _rmcReagent = default!;
 
         public const string DefaultSolutionName = "stomach";
 

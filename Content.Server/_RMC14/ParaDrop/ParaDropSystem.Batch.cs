@@ -17,14 +17,13 @@ namespace Content.Server._RMC14.ParaDrop;
 
 public sealed partial class ParaDropSystem
 {
-    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RMCPayloadDeploymentSystem _payloadDeployment = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedCrashLandSystem _crashLand = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private RMCPayloadDeploymentSystem _payloadDeployment = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly List<ParaDropJob> _batchJobs = [];
     private readonly HashSet<EntityUid> _reservedPayloads = [];
@@ -92,7 +91,7 @@ public sealed partial class ParaDropSystem
                 }
             }
 
-            if (!_mapManager.TryFindGridAt(request.Target, out var grid, out var gridComponent))
+            if (!_map.TryFindGridAt(request.Target, out var grid, out var gridComponent))
             {
                 CleanupEntities(spawnedPayload);
                 return new RMCPayloadDeploymentResult(

@@ -359,12 +359,12 @@ public abstract class SharedSupplyDropSystem : EntitySystem
 
                 foreach (var tile in footprint)
                 {
-                    dropping.LandingEffects.Add(Spawn(effect, _map.GridTileToLocal(grid, gridComponent, tile.GridIndices)));
+                    dropping.LandingEffects.Add(SpawnAttachedTo(effect, _map.GridTileToLocal(grid, gridComponent, tile.GridIndices)));
                 }
             }
 
             if (dropping.LandingEffects.Count == 0)
-                dropping.LandingEffects.Add(Spawn(effect, dropEntityCoordinates));
+                dropping.LandingEffects.Add(SpawnAttachedTo(effect, dropEntityCoordinates));
         }
 
         dropping.LandingDamage = landingDamage;

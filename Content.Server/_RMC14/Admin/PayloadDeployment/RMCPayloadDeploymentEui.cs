@@ -29,9 +29,9 @@ public sealed class RMCPayloadDeploymentEui : BaseEui
     private const int DefaultNearbyRadius = 7;
     private const int MaxNearbyRadius = 50;
 
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     private readonly EntityLookupSystem _lookup;
     private readonly SharedMapSystem _map;

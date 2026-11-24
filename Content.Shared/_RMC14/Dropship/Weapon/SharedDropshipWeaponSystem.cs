@@ -81,6 +81,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private DropshipUtilitySystem _dropshipUtility = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private NameModifierSystem _name = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedOnCollideSystem _onCollide = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;

@@ -5,7 +5,7 @@ namespace Content.Server._RMC14.Name;
 
 public sealed class RandomizeNameSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {

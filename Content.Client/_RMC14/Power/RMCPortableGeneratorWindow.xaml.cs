@@ -11,7 +11,7 @@ namespace Content.Client._RMC14.Power;
 [GenerateTypedNameReferences]
 public sealed partial class RMCPortableGeneratorWindow : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private static readonly Color GreenColor = Color.FromHex("#5AC229");
     private static readonly Color RedColor = Color.FromHex("#CE3E31");

@@ -135,7 +135,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
 
     private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier, Vector2 offset = new())
     {
-        var animationEnt = Spawn(paraDroppable.ParachutePrototype, coordinates);
+        var animationEnt = SpawnAttachedTo(paraDroppable.ParachutePrototype, coordinates);
         if (TryComp(animationEnt, out SpriteComponent? sprite))
             _sprite.SetScale((animationEnt, sprite), sprite.Scale * paraDroppable.ParachuteScale);
 

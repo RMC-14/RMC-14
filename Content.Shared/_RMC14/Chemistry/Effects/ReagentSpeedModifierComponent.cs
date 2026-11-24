@@ -12,7 +12,7 @@ public abstract partial class ReagentSpeedModifierComponent : Component
 
 public abstract class ReagentSpeedModifierSystem<T> : EntitySystem where T : ReagentSpeedModifierComponent
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

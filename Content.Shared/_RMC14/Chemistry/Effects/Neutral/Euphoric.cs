@@ -13,7 +13,8 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Euphoric : RMCChemicalEffect
 {
-    private static readonly ImmutableArray<string> Emotes = ImmutableArray.Create("laugh", "giggle", "chuckle", "grin", "smile", "twitch");
+    private static readonly ImmutableArray<string> Emotes =
+        ImmutableArray.Create<string>(new[] { "laugh", "giggle", "chuckle", "grin", "smile", "twitch" });
 
     public override string Abbreviation => "EPH";
 

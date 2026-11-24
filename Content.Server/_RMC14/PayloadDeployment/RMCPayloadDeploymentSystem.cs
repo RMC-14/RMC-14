@@ -10,9 +10,9 @@ namespace Content.Server._RMC14.PayloadDeployment;
 
 public sealed class RMCPayloadDeploymentSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const float StagingGroupSeparation = RMCPayloadDeploymentLimits.MaxLandingRadius * 2 + 100;
 
