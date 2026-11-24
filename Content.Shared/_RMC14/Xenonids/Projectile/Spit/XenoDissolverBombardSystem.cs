@@ -45,8 +45,6 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
         args.Handled = true;
 
         ModifyStoredAcid(xeno, 1);
-
-        //TODO RMC14 make the ability icon update
     }
 
     private void OnXenoDissolverBombardActionEvent(Entity<XenoDissolverBombardComponent> xeno, ref XenoDissolverBombardActionEvent args)
