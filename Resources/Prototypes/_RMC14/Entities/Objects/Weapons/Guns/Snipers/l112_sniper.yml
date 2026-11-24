@@ -36,7 +36,7 @@
     - SemiAuto
     recoilWielded: 1
     scatterWielded: 4
-    baseFireRate: 2.5
+    baseFireRate: 3
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.5
   - type: WieldDelay
@@ -102,8 +102,8 @@
       rmc-aslot-barrel: 0.90, 0.064
       rmc-aslot-underbarrel: 0.39, -0.23
   - type: AimedShot
-    aimDuration: 0.6
-    aimedShotCooldown: 1.2
+    aimDuration: 0.9
+    aimedShotCooldown: 1.8
   - type: RMCGunChamber
     enabled: false
 

@@ -52,6 +52,7 @@
           tags:
           - RMCMagazineSniperL144
           - RMCMagazineSniperL144SH
+          - RMCMagazineSniperL144APCR
   - type: GunUserWhitelist
     whitelist:
       components:
@@ -140,6 +141,33 @@
       color: "#DD4242"
 
 - type: entity
+  parent: RMCMagazineSniperL144
+  id: RMCMagazineSniperL144APCR
+  name: "L144 APCR magazine (10x28mm)"
+  description: A 15-round magazine of 10x28mm armor-piercing composite rigid cartridges.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - RMCMagazineSniperL144APCR
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeSniper10x28mmAPCR
+    proto: RMCCartridgeSniper10x28mmAPCR
+    capacity: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l144.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+
+- type: entity
   parent: CMCartridgeSniper10x28mm
   id: RMCCartridgeSniper10x28mmSH
   name: squash-head cartridge (10x28mm)
@@ -165,7 +193,60 @@
     amount: 50
   - type: AimedShotEffect
     extraHits: 1
-    superSlowDuration: 7.5
+    slowDuration: 6
+
+- type: entity
+  parent: RMCCartridgeSniper10x28mmSH
+  id: RMCCartridgeSniper10x28mmAPCR
+  name: armor-piercing composite rigid cartridge (10x28mm)
+  components:
+  - type: CartridgeAmmo
+    proto: RMCBulletSniper10x28mmAPCR
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeSniper10x28mmAPCR
+
+- type: entity
+  parent: CMBulletSniper10x28mm
+  id: RMCBulletSniper10x28mmAPCR
+  name: armor-piercing composite rigid bullet (10x28mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 60
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 32
+      losesEffectWithRange: true
+      stunTime: 1
+      slowTime: 2
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    thresholds:
+    - range: 32
+      falloff: 20
+    - range: 4
+      falloff: 10
+      buildup: true
+  - type: RMCPenetratingProjectile
+    rangeLossPerHit: 1
+  - type: AimedShotEffect
+    extraHits: 1
+    superSlowDuration: 2
+    slowDuration: 3
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 1
 
 - type: Tag
   id: RMCL144SniperRifle
@@ -177,4 +258,10 @@
   id: RMCMagazineSniperL144SH
 
 - type: Tag
+  id: RMCMagazineSniperL144APCR
+
+- type: Tag
   id: RMCCartridgeSniper10x28mmSH
+
+- type: Tag
+  id: RMCCartridgeSniper10x28mmAPCR

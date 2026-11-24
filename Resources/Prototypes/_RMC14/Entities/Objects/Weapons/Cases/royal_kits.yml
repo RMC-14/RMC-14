@@ -1,8 +1,8 @@
 - type: entity
   parent: CMSniperEquipmentCase
   id: RMCScoutSniperSniperEquipmentCase
-  name: scout-sniper equipment case
-  description: "A large case containing an L144 long-range rifle, an L8 head-mounted optical device, eight spare magazines of squash-head rounds, and a bipod."
+  name: L144 scout-sniper equipment case
+  description: "A large case containing an L144 long-range rifle, an L8 head-mounted optical device, eight spare magazines of squash-head rounds, and a bipod. \nItems removed from this case cannot be re-inserted."
   suffix: Sniper
   components:
   - type: Sprite
@@ -26,12 +26,14 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,21,1
+    - 0,0,23,1
   - type: StorageFill
     contents:
     - id: RMCGlassesL8HMOD
+    - id: RMCMagazineSniperL144APCR
+      amount: 5
     - id: RMCMagazineSniperL144SH
-      amount: 8
+      amount: 4
     - id: RMCL144SniperRifle
     - id: RMCAttachmentBipod
   - type: CMChangeUserOnVend
@@ -41,8 +43,8 @@
 - type: entity
   parent: CMSniperEquipmentCase
   id: RMCScoutSniperMarksmanEquipmentCase
-  name: scout-sniper equipment case
-  description: "A large case containing an L112A1 designated marksman rifle, an L8 head-mounted optical device, ten spare magazines of squash-head rounds, and a bipod."
+  name: L112A1 scout-sniper equipment case
+  description: "A large case containing an L112A1 designated marksman rifle, an L8 head-mounted optical device, ten spare magazines of squash-head rounds, and a bipod. \nItems removed from this case cannot be re-inserted."
   suffix: Marksman
   components:
   - type: Sprite
@@ -66,7 +68,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,25,1
+    - 0,0,23,1
   - type: IgnoreContentsSize
     items:
       tags:
@@ -74,9 +76,9 @@
   - type: StorageFill
     contents:
     - id: RMCGlassesL8HMOD
-    - id: RMCL112SniperRifleSuppressedSH
     - id: RMCMagazineSniperL112SH
-      amount: 10
+      amount: 9
+    - id: RMCL112SniperRifleSuppressedSH
     - id: RMCAttachmentBipod
   - type: CMChangeUserOnVend
     addComponents:
