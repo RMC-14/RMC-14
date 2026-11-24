@@ -131,22 +131,11 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         RestoreTacmapOpen(newXeno);
     }
 
-    private void OnAfterXenoDevolve(Entity<TacticalMapUserComponent> newXeno, ref AfterNewXenoEvolvedEvent args)
+    // When a xeno with that component finishes evolving, reopen the Tacmap.
+    private void OnAfterXenoEvolve(Entity<ReopenTacticalMapComponent> newXeno, ref AfterNewXenoEvolvedEvent args)
     {
-        RestoreTacmapOpen(newXeno);
-    }
-
-    // When a xeno evolution finishes evolving, look for a component marking
-    // whether to reopen the Tacmap
-    private void RestoreTacmapOpen(Entity<TacticalMapUserComponent> newXeno)
-    {
-        if (!TryComp<ReopenTacticalMapComponent>(newXeno.Owner, out _))
-        {
-            return;
-        }
-
-        _ui.TryOpenUi(newXeno.Owner, TacticalMapUserUi.Key, newXeno);
-
-        RemComp<ReopenTacticalMapComponent>(newXeno.Owner);
+        if (HasComp<TacticalMapUserComponent>(newXeno))
+            _ui.TryOpenUi(newXeno.Owner, TacticalMapUserUi.Key, newXeno);
+        RemComp<ReopenTacticalMapComponent>(newXeno);
     }
 }
