@@ -405,6 +405,8 @@
     accuracy: 160
   - type: ProjectileMaxRange
     max: 7
+  - type: ProjectileCoverInteraction
+    stoppedByCover: false
 
 - type: entity
   parent: XenoSpitProjectile
