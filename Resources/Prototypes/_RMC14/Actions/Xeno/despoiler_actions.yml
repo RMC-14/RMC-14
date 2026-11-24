@@ -1,15 +1,22 @@
 - type: entity
   parent: ActionXenoBase
-  id: RMCActionXenoDespoilerAcidBarrage
-  name: rmc-action-despoiler-acid-barrage-name
-  description: rmc-action-despoiler-acid-barrage-desc
+  id: RMCActionXenoDespoilerBase
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Interface/Actions/despoiler.rsi
-      state: acid_barrage
+      sprite: _RMC14/Interface/Actions/despoiler_ability_icons.rsi
     checkCanInteract: false
+
+- type: entity
+  parent: ActionXenoBase
+  id: RMCActionXenoDespoilerAcidBarrage
+  name: Acid Barrage
+  description: "Activate to arm - the icon lights up green. Hold LMB to charge the volley: the longer you hold, the more projectiles. Release LMB to fire at the cursor."
+  components:
+  - type: Action
+    icon:
+      state: acid_barrage
   - type: InstantAction
     event: !type:XenoDespoilerAcidBarrageActionEvent
   - type: XenoDespoilerAcidBarrageAction
@@ -37,15 +44,12 @@
 - type: entity
   parent: ActionXenoBase
   id: RMCActionXenoDespoilerCausticEmbrace
-  name: rmc-action-despoiler-caustic-embrace-name
-  description: rmc-action-despoiler-caustic-embrace-desc
+  name: Caustic Embrace
+  description: Leap toward the click with an acid splash. Empowered lets you strike a chosen target up to 5 tiles away and applies an acid DoT.
   components:
   - type: Action
-    itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Interface/Actions/despoiler.rsi
       state: caustic_embrace
-    checkCanInteract: false
     useDelay: 12
   - type: TargetAction
     range: 5
@@ -73,15 +77,12 @@
 - type: entity
   parent: ActionXenoBase
   id: RMCActionXenoDespoilerOozingWounds
-  name: rmc-action-despoiler-oozing-wounds-name
-  description: rmc-action-despoiler-oozing-wounds-desc
+  name: Oozing Wounds
+  description: Creates a ring of acid spray around you. The radius grows as your HP drops. The empowered version stuns and applies acid.
   components:
   - type: Action
-    itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Interface/Actions/despoiler.rsi
       state: oozing_wounds
-    checkCanInteract: false
     useDelay: 25
   - type: InstantAction
     event: !type:XenoDespoilerOozingWoundsActionEvent
@@ -103,15 +104,12 @@
 - type: entity
   parent: ActionXenoBase
   id: RMCActionXenoDespoilerCatalyze
-  name: rmc-action-despoiler-catalyze-name
-  description: rmc-action-despoiler-catalyze-desc
+  name: Catalyze
+  description: Spends 1 Hypertension stack and empowers your next active ability.
   components:
   - type: Action
-    itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Interface/Actions/despoiler.rsi
       state: catalyze
-    checkCanInteract: false
     useDelay: 20
   - type: InstantAction
     event: !type:XenoDespoilerCatalyzeActionEvent
