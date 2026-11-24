@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: BreakpointDebug1234
-  changes:
-  - message: Added Provost Pen
-    type: Add
-  id: 3452
-  time: '2026-07-03T01:19:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8099
 - author: Vixting
   changes:
   - message: Fixed melee cooldown not being tracked in some circumstances
@@ -4310,5 +4303,13 @@
   id: 3951
   time: '2026-11-24T06:13:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10436
+- author: Dygon
+  changes:
+  - message: Putting a gun inside a bag or holster mid-burst now prevents it from
+      shooting.
+    type: Fix
+  id: 3952
+  time: '2026-11-24T06:15:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9811
 Name: RMC14
 Order: -1
