@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Xenonids.Despoiler.Catalyze;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -12,7 +13,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 
 public sealed class XenoDespoilerAcidBarrageSystem : EntitySystem
 {

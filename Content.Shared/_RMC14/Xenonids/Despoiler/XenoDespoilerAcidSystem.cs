@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Despoiler.Hypertension;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -8,9 +9,9 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee.Events;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Stab;
 
-public sealed class XenoDespoilerAcidSystem : SharedXenoDespoilerAcidSystem
+public sealed class XenoDespoilerAcidSystem : EntitySystem
 {
     [Dependency] private readonly XenoDespoilerHypertensionSystem _hyper = default!;
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;

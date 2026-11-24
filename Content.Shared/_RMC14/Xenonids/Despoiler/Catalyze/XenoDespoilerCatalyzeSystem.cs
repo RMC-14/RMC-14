@@ -1,9 +1,10 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Despoiler.Hypertension;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Catalyze;
 
 public sealed class XenoDespoilerCatalyzeSystem : EntitySystem
 {

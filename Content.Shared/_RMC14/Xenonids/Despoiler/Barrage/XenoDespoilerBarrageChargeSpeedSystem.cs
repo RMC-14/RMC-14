@@ -1,6 +1,6 @@
 using Content.Shared.Movement.Systems;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 
 public sealed class XenoDespoilerBarrageChargeSpeedSystem : EntitySystem
 {

@@ -2,6 +2,9 @@ using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Despoiler;
+using Content.Shared._RMC14.Xenonids.Despoiler.Catalyze;
+using Content.Shared._RMC14.Xenonids.Despoiler.Lingering;
+using Content.Shared._RMC14.Xenonids.Despoiler.Spray;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
@@ -11,7 +14,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.OozingWounds;
 
 public sealed class XenoDespoilerOozingWoundsSystem : EntitySystem
 {

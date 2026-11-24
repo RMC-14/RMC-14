@@ -1,14 +1,14 @@
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.Despoiler;
+using Content.Shared._RMC14.Xenonids.Despoiler.Lingering;
 using Content.Shared.Coordinates.Helpers;
 using Robust.Shared.Random;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 
 public sealed class XenoDespoilerAcidBarrageProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
     private EntityQuery<XenoDespoilerLingeringAcidComponent> _lingeringQuery;

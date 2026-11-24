@@ -2,6 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Xenonids.Despoiler.Catalyze;
+using Content.Shared._RMC14.Xenonids.Despoiler.Lingering;
+using Content.Shared._RMC14.Xenonids.Despoiler.Stab;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Damage;
 using Content.Shared.Interaction;
@@ -12,7 +15,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Embrace;
 
 public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
 {

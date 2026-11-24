@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Stab;
 
 /// <summary>
 ///     One-shot marker set during RMCGetTailStabBonusDamageEvent and consumed by the

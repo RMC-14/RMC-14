@@ -8,7 +8,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Lingering;
 
 public sealed class XenoDespoilerLingeringAcidSystem : EntitySystem
 {

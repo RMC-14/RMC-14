@@ -1,9 +1,11 @@
+using Content.Shared._RMC14.Xenonids.Despoiler.Lingering;
+using Content.Shared._RMC14.Xenonids.Despoiler.Spray;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.OozingWounds;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoDespoilerOozingWoundsActionComponent : Component

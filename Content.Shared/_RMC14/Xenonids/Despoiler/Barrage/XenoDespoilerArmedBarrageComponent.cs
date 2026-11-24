@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Barrage;
 
 /// <summary>
 ///     Marker added when the Despoiler selects Acid Barrage. While present (replicated to the local client),

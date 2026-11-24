@@ -1,6 +1,6 @@
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Xenonids.Despoiler;
+namespace Content.Shared._RMC14.Xenonids.Despoiler.Catalyze;
 
 public sealed class XenoDespoilerCatalyzeFlagSystem : EntitySystem
 {
