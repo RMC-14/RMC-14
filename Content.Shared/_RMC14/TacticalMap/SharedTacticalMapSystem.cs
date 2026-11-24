@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.TacticalMap;
@@ -16,6 +17,10 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         SubscribeLocalEvent<TacticalMapUserComponent, OpenTacMapAlertEvent>(OnUserOpenAlert);
 
         Subs.CVar(_config, RMCCVars.RMCTacticalMapLineLimit, v => LineLimit = v, true);
+
+        SubscribeLocalEvent<TacticalMapUserComponent, NewXenoEvolvedEvent>(OnXenoEvolve);
+        SubscribeLocalEvent<TacticalMapUserComponent, XenoDevolvedEvent>(OnXenoDevolve);
+        SubscribeLocalEvent<ReopenTacticalMapComponent, AfterNewXenoEvolvedEvent>(OnAfterXenoEvolve);
     }
 
     private void OnUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
@@ -118,5 +123,31 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     public virtual bool HasValidPosition(EntityUid ent, ref Vector2i indices)
     {
         return false;
+    }
+
+    private void OnXenoEvolve(Entity<TacticalMapUserComponent> newXeno, ref NewXenoEvolvedEvent args)
+    {
+        MaintainTacmapOpen(newXeno, args.OldXeno);
+    }
+
+    private void OnXenoDevolve(Entity<TacticalMapUserComponent> newXeno, ref XenoDevolvedEvent args)
+    {
+        MaintainTacmapOpen(newXeno, args.OldXeno);
+    }
+
+    // When a xeno begins to evolve or devolve, give the new entity a component
+    // to mark it as needing to reopen the Tacmap
+    private void MaintainTacmapOpen(Entity<TacticalMapUserComponent> newXeno, EntityUid oldXeno)
+    {
+        if (_ui.IsUiOpen(oldXeno, TacticalMapUserUi.Key, oldXeno))
+            EnsureComp<ReopenTacticalMapComponent>(newXeno);
+    }
+
+    // When a xeno with that component finishes evolving, reopen the Tacmap.
+    private void OnAfterXenoEvolve(Entity<ReopenTacticalMapComponent> newXeno, ref AfterNewXenoEvolvedEvent args)
+    {
+        if (HasComp<TacticalMapUserComponent>(newXeno))
+            _ui.TryOpenUi(newXeno.Owner, TacticalMapUserUi.Key, newXeno);
+        RemComp<ReopenTacticalMapComponent>(newXeno);
     }
 }
