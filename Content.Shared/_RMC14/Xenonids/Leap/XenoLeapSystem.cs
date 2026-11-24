@@ -29,6 +29,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
@@ -54,6 +55,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -85,6 +87,8 @@ public sealed class XenoLeapSystem : EntitySystem
     // TODO RMC14 not sure how many points are actually needed here to be safe, but this is a very small
     // data structure so overallocating should not cause problems.
     private Vector2[] _points = new Vector2[16];
+
+    private const string LeapSensorFixtureId = "leap-sensor";
 
     public override void Initialize()
     {
@@ -177,7 +181,8 @@ public sealed class XenoLeapSystem : EntitySystem
             return;
         }
 
-        if (!_physicsQuery.TryGetComponent(xeno, out var physics))
+        if (!_physicsQuery.TryGetComponent(xeno, out var physics)
+            || !_fixturesQuery.TryGetComponent(xeno, out var fixtures))
             return;
 
         if (EnsureComp<XenoLeapingComponent>(xeno, out var leaping))
@@ -231,14 +236,24 @@ public sealed class XenoLeapSystem : EntitySystem
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
         _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
 
-        if (TryComp(xeno, out FixturesComponent? fixtures))
-        {
-            var collisionGroup = (int) leaping.IgnoredCollisionGroupSmall;
-            if (_size.TryGetSize(xeno, out var size) && size > RMCSizes.SmallXeno)
-                collisionGroup = (int) leaping.IgnoredCollisionGroupLarge;
+        var collisionGroup = (int) leaping.IgnoredCollisionGroupSmall;
+        if (_size.TryGetSize(xeno, out var size) && size > RMCSizes.SmallXeno)
+            collisionGroup = (int) leaping.IgnoredCollisionGroupLarge;
 
-            var fixture = fixtures.Fixtures.First();
-            _physics.SetCollisionMask(xeno, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ collisionGroup);
+        var fixture = fixtures.Fixtures.First();
+        _physics.SetCollisionMask(xeno, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ collisionGroup);
+
+        if (!fixtures.Fixtures.ContainsKey(LeapSensorFixtureId))
+        {
+            _fixtures.TryCreateFixture(
+                xeno,
+                fixture.Value.Shape,
+                LeapSensorFixtureId,
+                density: 0f,
+                hard: false,
+                collisionMask: (int)CollisionGroup.MobCollision,
+                manager: fixtures,
+                body: physics);
         }
 
         var contacts = _physics.GetContacts((xeno, fixtures));
@@ -255,23 +270,31 @@ public sealed class XenoLeapSystem : EntitySystem
             if (_colliding.Contains(otherEnt))
                 continue;
 
-            // Ignore fixtures that can contact but should be ignored.
-            if (leaping.IgnoreFixtureIds.Contains(contact.FixtureAId)
-                || leaping.IgnoreFixtureIds.Contains(contact.FixtureBId))
+            // Ignore non-hard collisions if they don't involve our leap sensor
+            if (!contact.Hard
+                && contact.FixtureAId != LeapSensorFixtureId
+                && contact.FixtureBId != LeapSensorFixtureId)
                 continue;
 
-            // If the leaper is trying to move AWAY from the contact, ignore it.
+            Vector2 toContact;
             if (contact.Manifold.PointCount > 0 && contact.Manifold.PointCount <= _points.Length)
             {
+                // hard contact handling is geometry-aware
                 contact.GetWorldManifold(
                     _physics.GetPhysicsTransform(contact.EntityA),
                     _physics.GetPhysicsTransform(contact.EntityB),
                     out _,
                     _points);
-                var toContact = _points[0] - origin.Position;
-                if (Vector2.Dot(direction, toContact) < 0)
-                    continue;
+                toContact = _points[0] - origin.Position;
             }
+            else
+            {
+                // soft contact handling just cares about origins
+                toContact = _transform.GetWorldPosition(otherEnt) - origin.Position;
+            }
+            // If the leaper is trying to move AWAY from the contact, ignore it.
+            if (Vector2.Dot(direction, toContact) < 0)
+                continue;
 
             _colliding.Add(otherEnt);
         }
@@ -326,18 +349,25 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
     {
-        // Ignore collision if colliding with ignored fixture
-        if (xeno.Comp.IgnoreFixtureIds.Contains(args.OurFixtureId)
-            || xeno.Comp.IgnoreFixtureIds.Contains(args.OtherFixtureId))
+        // Ignore non-hard collisions if they don't involve our leap sensor
+        if ((!args.OurFixture.Hard || !args.OtherFixture.Hard)
+            && args.OurFixtureId != LeapSensorFixtureId)
             return;
 
-        // Ignore collision if moving away from the collision point.
+        Vector2 toContact;
         if (args.PointCount > 0)
         {
-            var toContact = args.WorldPoints[0] - _transform.GetWorldPosition(xeno);
-            if (Vector2.Dot(xeno.Comp.Direction, toContact) < 0)
-                return;
+            // hard contact is geometry-aware
+            toContact = args.WorldPoints[0] - _transform.GetWorldPosition(xeno);
         }
+        else
+        {
+            // soft contact only cares about origins
+            toContact = _transform.GetWorldPosition(args.OtherEntity) - _transform.GetWorldPosition(xeno);
+        }
+        // Ignore collision if moving away from the collision point.
+        if (Vector2.Dot(xeno.Comp.Direction, toContact) < 0)
+            return;
 
         ApplyLeapingHitEffects(xeno, args.OtherEntity);
     }
@@ -346,6 +376,9 @@ public sealed class XenoLeapSystem : EntitySystem
     {
         var ev = new XenoLeapStoppedEvent();
         RaiseLocalEvent(ent, ref ev);
+
+        if (_fixturesQuery.TryGetComponent(ent, out var fixtures))
+            _fixtures.DestroyFixture(ent, LeapSensorFixtureId, manager: fixtures);
 
         StopLeap(ent);
     }
@@ -690,7 +723,8 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void StopLeap(Entity<XenoLeapingComponent> leaping)
     {
-        if (_physicsQuery.TryGetComponent(leaping, out var physics))
+        if (_physicsQuery.TryGetComponent(leaping, out var physics)
+            && physics.BodyStatus != BodyStatus.OnGround)
         {
             _physics.SetLinearVelocity(leaping, Vector2.Zero, body: physics);
             _physics.SetBodyStatus(leaping, physics, BodyStatus.OnGround);

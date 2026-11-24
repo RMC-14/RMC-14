@@ -179,6 +179,11 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.CMHolsterQuaternary);
             AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
             AddButton(CMKeyFunctions.RMCInteractWithOtherHand);
+            // RMC14 start
+            AddButton(CMKeyFunctions.RMCPushup);
+            AddButton(CMKeyFunctions.RMCPushupRoutine);
+            AddButton(CMKeyFunctions.RMCWeakPushup);
+            // RMC14 end
             AddButton(CMKeyFunctions.RMCRest);
             AddButton(CMKeyFunctions.RMCResist);
             AddButton(CMKeyFunctions.RMCOpenLanguageMenu);
@@ -297,6 +302,13 @@ namespace Content.Client.Options.UI.Tabs
             {
                 AddButton(boundKey);
             }
+
+            AddHeader("ui-options-function-rmc-overwatch-camera-adjustment");
+            AddButton(CMKeyFunctions.RMCCameraAdjustNorth);
+            AddButton(CMKeyFunctions.RMCCameraAdjustWest);
+            AddButton(CMKeyFunctions.RMCCameraAdjustSouth);
+            AddButton(CMKeyFunctions.RMCCameraAdjustEast);
+            AddButton(CMKeyFunctions.RMCCameraReset);
 
             AddHeader("ui-options-header-shuttle");
             AddButton(ContentKeyFunctions.ShuttleStrafeUp);

@@ -372,7 +372,7 @@
 - type: entity
   parent: RMCAttachmentMiniFlamethrower
   id: RMCAttachmentMiniFlamethrowerAdvanced
-  name: advanced underbarrel flamethrower # TODO RMC14: No intensity switch on this one, remove the regular UBF as a parent once we get it
+  name: advanced underbarrel flamethrower
   components:
   - type: Tag
     tags:
@@ -393,6 +393,11 @@
     reagentWhitelist:
     - RMCNapalmUT
     - WeldingFuel
+  - type: RemoveComponents # no intense mode
+    components:
+    - type: UniqueAction
+    - type: RMCFlamerIntenseMode
+    - type: RMCFlamerReagentOverride
 
 - type: entity
   parent: RMCAttachmentMiniFlamethrowerAdvanced
