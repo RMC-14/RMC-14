@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vixting
   changes:
-  - message: Fixed language icon going out of position
-    type: Fix
-  id: 3462
-  time: '2026-07-03T01:28:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10203
-- author: Vixting
-  changes:
   - message: Fixed being able to refill flamer tanks from any range
     type: Fix
   id: 3463
@@ -4333,5 +4326,13 @@
   id: 3961
   time: '2026-11-24T06:54:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10544
+- author: keegaroo65
+  changes:
+  - message: Added an orange location ping for xenos to see where whoever they're
+      watching is on the Tactical Map
+    type: Add
+  id: 3962
+  time: '2026-11-24T06:58:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9445
 Name: RMC14
 Order: -1
