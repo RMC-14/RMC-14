@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By patogrone (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "sleeves-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "sleeveless-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    }
+  ]
+}

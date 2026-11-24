@@ -8,10 +8,12 @@ namespace Content.Shared._RMC14.Xenonids.Leap;
 public sealed partial class RMCLeapProtectionComponent : Component
 {
     /// <summary>
-    ///     How long the leaping entity should be stunned for when blocked.
+    ///     NOT actual duration
+    ///     This value = CM's apply_effect(value) x 2
+    ///     This value typically scaled further by RMCStatusEffectSystem.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan StunDuration = TimeSpan.FromSeconds(3);
+    public TimeSpan StunDuration = TimeSpan.FromSeconds(2);
 
     /// <summary>
     ///     The sound to make when a leap is blocked.
@@ -23,7 +25,9 @@ public sealed partial class RMCLeapProtectionComponent : Component
     };
 
     /// <summary>
-    ///     How long the leaping entity should be stunned for when blocked.
+    ///     NOT actual duration
+    ///     This value = CM's apply_effect(value) x 2
+    ///     This value typically scaled further by RMCStatusEffectSystem.
     ///     Only set this if the entity has inherent leap protection.
     /// </summary>
     [DataField, AutoNetworkedField]

@@ -20,6 +20,14 @@
     },
     {
       "name": "plastic"
+    },
+    {
+      "name": "plastic-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "plastic-inhand-left",
+      "directions": 4
     }
   ]
 }
