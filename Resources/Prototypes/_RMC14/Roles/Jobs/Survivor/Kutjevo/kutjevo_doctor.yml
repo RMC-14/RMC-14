@@ -25,7 +25,7 @@
   parent: RMCGearSurvivorDoctor
   id: RMCGearSurvivorKutjevoDoctor
   equipment:
-    eyes: RMCGlassesMedicalHUDGlassesAdvanced
+    eyes: RMCGlassesMedicalHUDGlasses
     head: RMCArmorHelmetPMCKutjevoMedical
     mask: RMCMaskKutjevoRespirator
     jumpsuit: RMCJumpsuitKutjevoDrysuit

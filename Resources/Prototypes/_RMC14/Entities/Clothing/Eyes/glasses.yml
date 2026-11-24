@@ -211,7 +211,7 @@
 
 - type: entity
   parent: [ClothingEyesHudMedical, BaseToggleClothing]
-  id: RMCGlassesMedicalHUDGlasses
+  id: RMCGlassesMedicalHUDGlassesOld
   name: SensorMate HUD
   description: A much older heads-up display that displays the last known biometric data from suit sensors of any given individual.
   components:
@@ -252,8 +252,8 @@
   - type: Appearance
 
 - type: entity
-  parent: RMCGlassesMedicalHUDGlasses
-  id: RMCGlassesMedicalHUDGlassesAdvanced
+  parent: RMCGlassesMedicalHUDGlassesOld
+  id: RMCGlassesMedicalHUDGlasses
   name: HealthMate HUD
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
   components:

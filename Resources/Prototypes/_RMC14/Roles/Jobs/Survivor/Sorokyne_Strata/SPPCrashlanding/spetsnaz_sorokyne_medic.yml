@@ -41,7 +41,7 @@
   parent: RMCGearSPPSpetsnazBase
   id: RMCGearSPPSpetsnazMedic
   equipment:
-    eyes: RMCGlassesMedicalHUDGlassesAdvanced
+    eyes: RMCGlassesMedicalHUDGlasses
     belt: RMCBeltMedicBagSPP
     back: RMCSatchelMedicpack
   storage:

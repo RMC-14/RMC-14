@@ -44,7 +44,7 @@
   id: RMCGearWeYaResponder
   equipment:
     # ears: RMCHeadsetWeYaResponder # removed for now, may come back as listen-only
-    eyes: RMCGlassesMedicalHUDGlassesAdvanced
+    eyes: RMCGlassesMedicalHUDGlasses
     back: RMCSatchelFilledFaxResponderWeYa
     belt: CMClipboard
     head: RMCHeadCapWestonYamadaDark

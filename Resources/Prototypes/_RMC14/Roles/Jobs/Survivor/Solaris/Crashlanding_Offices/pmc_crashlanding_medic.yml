@@ -64,7 +64,7 @@
     belt: RMCM77BeltFilled
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
-    eyes: RMCGlassesMedicalHUDGlassesAdvanced
+    eyes: RMCGlassesMedicalHUDGlasses
   storage:
     back:
     - CMSheetMetal20

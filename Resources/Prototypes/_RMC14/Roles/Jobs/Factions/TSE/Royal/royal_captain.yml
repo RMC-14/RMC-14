@@ -44,7 +44,7 @@
   id: RMCGearRoyalCaptain
   equipment:
     head: RMCHeadRoyalBeretLead
-    eyes: RMCGlassesMedicalHUDGlassesAdvanced
+    eyes: RMCGlassesMedicalHUDGlasses
     ears: RMCHeadsetRoyalMarineOfficer
     jumpsuit: RMCJumpsuitMarineRoyalTeamlead
     outerClothing: RMCArmorRoyalPaddedFilledCO

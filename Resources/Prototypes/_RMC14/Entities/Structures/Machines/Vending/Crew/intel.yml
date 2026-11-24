@@ -319,7 +319,7 @@
       - id: CMPackFlare
         amount: 20
         recommended: true
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesOld
         points: 5
 
 - type: entity

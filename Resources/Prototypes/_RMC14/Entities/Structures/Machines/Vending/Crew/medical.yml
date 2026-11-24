@@ -42,7 +42,7 @@
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
-      - id: RMCGlassesMedicalHUDGlassesAdvanced
+      - id: RMCGlassesMedicalHUDGlasses
 #      - id: Prescription Medical HUD Glasses
     - name: Uniform
       choices: { CMUniform: 1 }
@@ -104,7 +104,7 @@
       - id: RMCCoatSnow
       - id: RMCMaskBalaclava
       - id: RMCMaskTornScarfBlack
-        name: Snow Scarf 
+        name: Snow Scarf
     - name: Headwear
       choices: { CMHeadwear: 1 }
       jobs:

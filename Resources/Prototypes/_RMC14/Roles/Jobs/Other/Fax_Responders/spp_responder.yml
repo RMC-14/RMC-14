@@ -47,7 +47,7 @@
     head: CMHeadCapSPPUshanka
     id: RMCIDCardSPPResponder
     ears: RMCHeadsetSPPCommand
-    eyes: RMCGlassesMedicalHUDGlassesAdvanced
+    eyes: RMCGlassesMedicalHUDGlasses
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge

@@ -54,7 +54,7 @@
         points: 5
       - id: RMCFulton20
         points: 5
-      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCGlassesMedicalHUDGlassesOld
         points: 4
         recommended: true
     - name: Binoculars

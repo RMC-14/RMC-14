@@ -57,7 +57,7 @@
     jumpsuit: CMScrubsBlue
     back: CMSatchelMedical
     shoes: CMBootsBlackFilled
-    eyes: RMCGlassesMedicalHUDGlassesAdvanced
+    eyes: RMCGlassesMedicalHUDGlasses
     gloves: CMHandsLatex
     id: CMIDCardColonistDoctor
     ears: CMHeadsetColony

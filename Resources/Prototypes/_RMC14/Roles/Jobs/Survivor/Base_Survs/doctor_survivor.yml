@@ -72,10 +72,10 @@
       - [ RMCPouchFirstResponderFill ]
       - [ RMCPouchMedkitFillAdvanced ]
     -
-      - [ RMCGlassesMedicalHUDGlassesAdvanced ]
+      - [ RMCGlassesMedicalHUDGlasses ]
       - [ CMFirstAidKitFilledRobust ]
-      - [ RMCGlassesMedicalHUDGlassesAdvanced, CMFirstAidKitFilledRobust ]
-      - [ RMCGlassesMedicalHUDGlassesAdvanced, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
 
 - type: entity
   parent: MarkerBase

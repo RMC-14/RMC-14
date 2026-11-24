@@ -49,7 +49,7 @@
     head: ClothingHeadHatFedoraBrown
     id: RMCIDCardFreePressResponder
     # ears: RMCHeadsetFreePressResponder # removed for now, may come back as listen-only
-    eyes: RMCGlassesMedicalHUDGlassesAdvanced
+    eyes: RMCGlassesMedicalHUDGlasses
     back: RMCSatchelFilledFaxResponderFreePress
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
