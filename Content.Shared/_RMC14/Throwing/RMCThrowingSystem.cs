@@ -20,7 +20,7 @@ public sealed class RMCThrowingSystem : EntitySystem
         SubscribeLocalEvent<ThrownLimitHitsComponent, LandEvent>(OnThrownLimitHitsLand);
         SubscribeLocalEvent<ThrownLimitHitsComponent, StopThrowEvent>(OnThrownLimitHitsStopThrow);
 
-        SubscribeLocalEvent<RMCThrowCooldownComponent, ThrowAttemptEvent>(OnThrowCooldownThrowAttempt);
+        SubscribeLocalEvent<RMCThrowCooldownComponent, ThrowItemAttemptEvent>(OnThrowCooldownThrowAttempt);
     }
 
     private void OnDamageOtherOnHitThrown(Entity<DamageOtherOnHitComponent> ent, ref ThrownEvent args)
