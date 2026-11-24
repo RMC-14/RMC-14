@@ -2,11 +2,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Despoiler;
-using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Server.Audio;
@@ -17,9 +18,6 @@ namespace Content.Server._RMC14.Xenonids.Despoiler;
 
 public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
 {
-    private const float TileHalfExtent = 0.5f;
-    private const float UnobstructedRangeBuffer = 1f;
-
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -33,6 +31,9 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoDespoilerCatalyzeFlagSystem _catalyze = default!;
     [Dependency] private readonly XenoDespoilerAcidSystem _acid = default!;
+
+    private const float TileHalfExtent = 0.5f;
+    private const float UnobstructedRangeBuffer = 1f;
 
     private EntityQuery<XenoDespoilerLingeringAcidComponent> _lingeringQuery;
 
@@ -136,12 +137,15 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
 
                 foreach (var ent in hits)
                 {
-                    if (!XenoDespoilerVictims.IsValidVictim(EntityManager, ent, caster))
+                    if (!IsValidVictim(ent, caster))
                         continue;
 
                     var entPos = _xform.ToMapCoordinates(Transform(ent).Coordinates).Position;
-                    if (Math.Abs(entPos.X - tileMap.Position.X) > TileHalfExtent) continue;
-                    if (Math.Abs(entPos.Y - tileMap.Position.Y) > TileHalfExtent) continue;
+                    if (Math.Abs(entPos.X - tileMap.Position.X) > TileHalfExtent)
+                        continue;
+
+                    if (Math.Abs(entPos.Y - tileMap.Position.Y) > TileHalfExtent)
+                        continue;
 
                     _damageable.TryChangeDamage(ent, action.SplashDamage, ignoreResistances: false, origin: caster);
                 }
@@ -207,17 +211,24 @@ public sealed class XenoDespoilerCausticEmbraceSystem : EntitySystem
 
     private EntityUid? FindEmpoweredVictim(EntityUid caster, XenoDespoilerCausticEmbraceActionEvent args)
     {
-        if (args.Entity is { } target && XenoDespoilerVictims.IsValidVictim(EntityManager, target, caster))
+        if (args.Entity is { } target && IsValidVictim(target, caster))
             return target;
 
         var landingMap = _xform.ToMapCoordinates(args.Target);
         foreach (var ent in _lookup.GetEntitiesIntersecting(landingMap.MapId,
                      Box2.CenteredAround(landingMap.Position, new Vector2(1f, 1f))))
         {
-            if (XenoDespoilerVictims.IsValidVictim(EntityManager, ent, caster))
+            if (IsValidVictim(ent, caster))
                 return ent;
         }
 
         return null;
+    }
+
+    private bool IsValidVictim(EntityUid victim, EntityUid caster)
+    {
+        return victim != caster &&
+               HasComp<MobStateComponent>(victim) &&
+               !HasComp<XenoComponent>(victim);
     }
 }
