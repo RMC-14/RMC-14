@@ -10,9 +10,6 @@
   name: Despoiler
   description: A massive, hunched xenomorph with hyper-pressurized acid sacs lining its spine. Steam hisses from cracks in its carapace.
   components:
-  - type: GhostRole
-    name: rmc-xeno-despoiler-name
-    description: rmc-xeno-despoiler-description
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler.rsi
     layers:
@@ -167,7 +164,7 @@
       types:
         Heat: 3
   - type: FixedIdentity
-    name: rmc-xeno-despoiler-name
+    name: rmc-job-name-xeno-despoiler
   - type: RMCActionOrder
     id: RMCXenoDespoiler
   - type: IntelRecoverCorpseObjectiveOnDeath
