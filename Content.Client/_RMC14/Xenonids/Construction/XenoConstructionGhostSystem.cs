@@ -4,6 +4,7 @@ using Content.Client.IconSmoothing;
 using Content.Client.UserInterface.Systems.Actions;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.BuildMark;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
@@ -27,6 +28,7 @@ using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
@@ -40,6 +42,7 @@ namespace Content.Client._RMC14.Xenonids.Construction;
 [UsedImplicitly]
 public sealed class XenoConstructionGhostSystem : EntitySystem
 {
+    [Dependency] private readonly XenoBuildMarkSystem _buildMark = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
@@ -62,8 +65,18 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
+    private static readonly Color ValidColor = new(48, 255, 48, 128);
+    private static readonly Color InvalidColor = new(255, 48, 48, 128);
+    private static readonly Color MarkColor = new(255, 220, 48, 128);
+
     private TimeSpan _upgradeCooldown = TimeSpan.FromSeconds(0.1f);
     private TimeSpan _lastUpgradeAttempt = TimeSpan.Zero;
+
+    private bool _wasMouseDown;
+    private bool _upgradeMode;
+    private bool _pressedInViewport;
+    private bool _painting;
+    private EntityCoordinates? _paintCoords;
 
     public override void Initialize()
     {
@@ -75,6 +88,18 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             .Bind(EngineKeyFunctions.Use, new PointerInputCmdHandler(HandleUse, outsidePrediction: true))
             .Bind(EngineKeyFunctions.UseSecondary, new PointerInputCmdHandler(HandleRightClick, outsidePrediction: true))
             .Register<XenoConstructionGhostSystem>();
+    }
+
+    private EntProtoId? GetMarkChoice(XenoConstructionComponent? construction, bool isConstructionActive)
+    {
+        if (isConstructionActive &&
+            construction is { OrderConstructionTargeting: false, BuildChoice: { } choice } &&
+            _buildMark.CanMark(choice))
+        {
+            return choice;
+        }
+
+        return null;
     }
 
     public override void Shutdown()
@@ -139,6 +164,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         if (player == null)
         {
             ClearCurrentGhost();
+            _painting = false;
             return;
         }
 
@@ -147,24 +173,46 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         var hasQueenBuildingBoost = HasComp<QueenBuildingBoostComponent>(player.Value);
 
         var isMouseDown = _inputManager.IsKeyDown(Keyboard.Key.MouseLeft);
-        var upgradeUnderMouse = hasQueenBuildingBoost ? GetUpgradeableStructureUnderMouse() : null;
+        var mouseJustPressed = isMouseDown && !_wasMouseDown;
+        _wasMouseDown = isMouseDown;
+
+        TryComp(player.Value, out XenoConstructionComponent? construction);
+        var canUpgrade = hasQueenBuildingBoost || construction is { CanUpgrade: true };
+        var upgradeable = canUpgrade ? GetUpgradeableStructureUnderMouse() : null;
+        var upgradeUnderMouse = hasQueenBuildingBoost ? upgradeable : null;
+        var markChoice = GetMarkChoice(construction, isConstructionActive);
+
+        var overViewport = IsMouseOverViewport();
+        if (mouseJustPressed)
+        {
+            _pressedInViewport = overViewport;
+            _upgradeMode = overViewport && upgradeable != null;
+        }
+
+        if (markChoice == null || !isMouseDown || _upgradeMode || !_pressedInViewport)
+            _painting = false;
+        else if (mouseJustPressed)
+            StartMarkPaint();
+        else if (_painting)
+            UpdateMarkPaint(player.Value, overViewport);
 
         if (isMouseDown &&
             isConstructionActive &&
             !string.IsNullOrEmpty(buildChoice) &&
-            (!isBuilding || upgradeUnderMouse != null) &&
-            TryComp(player.Value, out XenoConstructionComponent? construction) &&
-            !construction.OrderConstructionTargeting)
+            (_upgradeMode ? upgradeUnderMouse != null : markChoice == null && !isBuilding) &&
+            construction is { OrderConstructionTargeting: false })
         {
             var now = _timing.CurTime;
             if (now - _lastUpgradeAttempt >= _upgradeCooldown)
             {
-                TryConstructionAtMousePosition(player.Value, upgradeUnderMouse);
+                TryConstructionAtMousePosition(player.Value, _upgradeMode ? upgradeUnderMouse : null);
                 _lastUpgradeAttempt = now;
             }
         }
 
-        var shouldShowGhost = isConstructionActive && !string.IsNullOrEmpty(buildChoice) && !isBuilding;
+        var shouldShowGhost = isConstructionActive &&
+                              !string.IsNullOrEmpty(buildChoice) &&
+                              (!isBuilding || markChoice != null);
 
         if (shouldShowGhost)
         {
@@ -187,11 +235,13 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
     private void TryConstructionAtMousePosition(EntityUid player, Entity<XenoStructureUpgradeableComponent>? upgradeable)
     {
+        TryConstructionAt(player, SnapToGrid(_inputManager.MouseScreenPosition), upgradeable);
+    }
+
+    private void TryConstructionAt(EntityUid player, EntityCoordinates coords, Entity<XenoStructureUpgradeableComponent>? upgradeable)
+    {
         if (!TryComp(player, out XenoConstructionComponent? construction))
             return;
-
-        var mouseScreenPos = _inputManager.MouseScreenPosition;
-        var coords = SnapToGrid(mouseScreenPos);
 
         if (!coords.IsValid(EntityManager))
             return;
@@ -223,8 +273,20 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             if (construction.BuildChoice == null)
                 return;
 
-            if (!_xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true, false))
+            var choice = construction.BuildChoice.Value;
+            if (_buildMark.CanMark(choice))
+            {
+                if (_buildMark.TryGetOwnMark(player, coords, out _))
+                    return;
+
+                _xenoConstruction.AdjustForTarget(player, coords, false);
+                if (_xenoConstruction.CheckSecreteOnTile((player, construction), choice, coords, true, true, false, true) == XenoSecreteTileResult.Blocked)
+                    return;
+            }
+            else if (!_xenoConstruction.CanSecreteOnTilePopup((player, construction), choice, coords, true, true, false))
+            {
                 return;
+            }
         }
 
         var actionController = _uiManager.GetUIController<ActionUIController>();
@@ -421,10 +483,68 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         }
 
         if (TryComp(_currentGhost.Value, out SpriteComponent? sprite))
+            sprite.Color = GetGhostColor(player.Value, coords, _buildMark.IsSecreting(player.Value));
+    }
+
+    private bool IsMouseOverViewport()
+    {
+        return _uiManager.MouseGetControl(_inputManager.MouseScreenPosition) is IViewportControl;
+    }
+
+    private void StartMarkPaint()
+    {
+        _painting = true;
+        _paintCoords = SnapToGrid(_inputManager.MouseScreenPosition);
+    }
+
+    private void UpdateMarkPaint(EntityUid player, bool overViewport)
+    {
+        if (!overViewport)
         {
-            sprite.Color = IsValidConstructionLocation(player.Value, coords)
-                ? new Color(48, 255, 48, 128)
-                : new Color(255, 48, 48, 128);
+            _paintCoords = null;
+            return;
+        }
+
+        var coords = SnapToGrid(_inputManager.MouseScreenPosition);
+        if (!coords.IsValid(EntityManager) || coords.Equals(_paintCoords))
+            return;
+
+        var last = _paintCoords;
+        _paintCoords = coords;
+
+        if (last is not { } from ||
+            _transform.GetGrid(from) is not { } gridUid ||
+            _transform.GetGrid(coords) != gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+        {
+            TryConstructionAt(player, coords, null);
+            return;
+        }
+
+        var start = _mapSystem.CoordinatesToTile(gridUid, grid, from);
+        var end = _mapSystem.CoordinatesToTile(gridUid, grid, coords);
+        var dx = Math.Abs(end.X - start.X);
+        var dy = -Math.Abs(end.Y - start.Y);
+        var stepX = start.X < end.X ? 1 : -1;
+        var stepY = start.Y < end.Y ? 1 : -1;
+        var error = dx + dy;
+        var tile = start;
+        while (tile != end)
+        {
+            var doubled = 2 * error;
+            if (doubled >= dy)
+            {
+                error += dy;
+                tile.X += stepX;
+            }
+
+            if (doubled <= dx)
+            {
+                error += dx;
+                tile.Y += stepY;
+            }
+
+            TryConstructionAt(player, _mapSystem.GridTileToLocal(gridUid, grid, tile), null);
         }
     }
 
@@ -446,28 +566,41 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         return _mapSystem.GridTileToLocal(gridUid, grid, tileCoords);
     }
 
-    private bool IsValidConstructionLocation(EntityUid player, EntityCoordinates coords)
+    private Color GetGhostColor(EntityUid player, EntityCoordinates coords, bool isBuilding)
     {
         if (!TryComp(player, out XenoConstructionComponent? construction))
-            return false;
+            return InvalidColor;
 
         try
         {
             if (construction.OrderConstructionTargeting && construction.OrderConstructionChoice != null)
             {
-                return _xenoConstruction.CanOrderConstructionPopup((player, construction), coords, construction.OrderConstructionChoice, false);
+                return _xenoConstruction.CanOrderConstructionPopup((player, construction), coords, construction.OrderConstructionChoice, false)
+                    ? ValidColor
+                    : InvalidColor;
             }
 
-            if (construction.BuildChoice != null)
+            if (construction.BuildChoice is not { } choice)
+                return InvalidColor;
+
+            _xenoConstruction.AdjustForTarget(player, coords, false);
+            if (!_buildMark.CanMark(choice))
             {
-                return _xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true, false);
+                return _xenoConstruction.CanSecreteOnTilePopup((player, construction), choice, coords, true, true, false)
+                    ? ValidColor
+                    : InvalidColor;
             }
 
-            return false;
+            return _xenoConstruction.CheckSecreteOnTile((player, construction), choice, coords, true, true, false, true) switch
+            {
+                XenoSecreteTileResult.Blocked => InvalidColor,
+                XenoSecreteTileResult.Allowed when !isBuilding => ValidColor,
+                _ => MarkColor,
+            };
         }
         catch
         {
-            return false;
+            return InvalidColor;
         }
     }
 
