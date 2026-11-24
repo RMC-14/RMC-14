@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed the default radio channel not being accounted for.
-    type: Fix
-  id: 3460
-  time: '2026-07-03T01:29:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10270
 - author: Vermidia
   changes:
   - message: '[PVE] Added language:add, language:remove, and language:reset for modifying
@@ -4328,5 +4321,17 @@
   id: 3959
   time: '2026-11-24T06:49:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11107
+- author: Ian321
+  changes:
+  - message: '[Admin] Ghost bar spawner.'
+    type: Add
+  - message: Foxtrot now spawn looking like your character but still with a random
+      name.
+    type: Tweak
+  - message: Foxtrot now appear after being assigned.
+    type: Tweak
+  id: 3960
+  time: '2026-11-24T06:51:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10192
 Name: RMC14
 Order: -1
