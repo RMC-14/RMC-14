@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: IceNoobXD
-  changes:
-  - message: Fixed chances having no or double APCs in a lot of areas and added a
-      few new areas to replace existing once!
-    type: Fix
-  id: 3441
-  time: '2026-06-29T05:35:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10278
 - author: noctynral
   changes:
   - message: Adjusted the position of the tanks primary weapons, secondary weapons
@@ -4410,5 +4402,12 @@
   id: 3940
   time: '2026-11-24T01:29:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10324
+- author: kleinerstation13
+  changes:
+  - message: Replaced MP27's in admin armory with M20A rifles on Solaris
+    type: Tweak
+  id: 3941
+  time: '2026-11-24T01:37:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11148
 Name: RMC14
 Order: -1
