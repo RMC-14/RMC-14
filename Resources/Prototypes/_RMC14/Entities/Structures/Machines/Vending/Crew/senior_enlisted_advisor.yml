@@ -20,7 +20,7 @@
       - id: CMBootsBlackFilled
       - id: CMMRE
       - id: RMCStampSEA
-      - id: RMCOuterClothingExternalWebbing      
+      - id: RMCOuterClothingExternalWebbing
       - id: CMJumpsuitOperations
         name: operations uniform
     - name: Gloves
@@ -33,6 +33,7 @@
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltBrowne
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled
@@ -64,6 +65,7 @@
       choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
+      - id: RMCCoatAllWeather
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:

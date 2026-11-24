@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (LV624 Survivor)
   startingGear: RMCGearSurvivorLV624CorporateLiaison
+  icon: "CMJobIconLiaison"
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate

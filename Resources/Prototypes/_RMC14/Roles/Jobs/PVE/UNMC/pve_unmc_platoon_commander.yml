@@ -9,6 +9,7 @@
     role: CMJobExecutiveOfficer
     time: 10800 # 3 hours
   ranks:
+    RMCRankFirstLT: []
     RMCRankSecondLT: []
   spawnMenuRoleName: Sun Rider Platoon Commander (PVE)
   startingGear: RMCGearPVEPlatoonCommander
@@ -54,7 +55,7 @@
     shoes: RMCShoesLaceup
     head: CMHeadCapOfficer
     id: RMCIDCardPlatoonCommander
-    ears: RMCHeadsetGoldenArrow
+    ears: RMCHeadsetSunRidersLeader
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchGeneralLarge
 

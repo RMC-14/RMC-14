@@ -72,6 +72,7 @@
     jumpsuit: RMCSwatCMBUniformSpearhead
     outerClothing: RMCArmorM4RMedium
     mask: RMCMaskSWAT
+    belt: CMBeltSecurityMPFilled
     head: RMCArmorHelmetM10CMBVisorSWAT
     back: RMCSatchelSecuritySurvivorFillRiotControlOfficer
     eyes: RMCGlassesSecuritySwat
@@ -106,10 +107,10 @@
     - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
     - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
     - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12 ]
-    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
-    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
-    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
-    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    - [ RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A5, RMCMotionDetectorCompact ]
+    - [ RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A5, RMCMotionDetectorCompact ]
     primaryWeaponChance: 1
 
 - type: jobIcon
