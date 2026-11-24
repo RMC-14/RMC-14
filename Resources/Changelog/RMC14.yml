@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Imaginary friends can no longer talk through radio channels.
-    type: Fix
-  id: 3459
-  time: '2026-07-03T01:19:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10221
 - author: Vixting
   changes:
   - message: Fixed the default radio channel not being accounted for.
@@ -4327,5 +4320,13 @@
   id: 3958
   time: '2026-11-24T06:47:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9891
+- author: Vermidia
+  changes:
+  - message: Fixed throws having no cooldown. The same item can't be thrown again
+      for 1s, except nades (which are 0.5s).
+    type: Fix
+  id: 3959
+  time: '2026-11-24T06:49:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11107
 Name: RMC14
 Order: -1
