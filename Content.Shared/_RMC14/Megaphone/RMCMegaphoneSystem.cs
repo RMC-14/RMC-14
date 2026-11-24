@@ -1,7 +1,7 @@
 using Content.Shared.Interaction.Events;
 using Content.Shared._RMC14.Dialog;
-using Robust.Shared.Serialization;
 using Content.Shared.Examine;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Megaphone;
 
@@ -21,7 +21,9 @@ public sealed class RMCMegaphoneSystem : EntitySystem
     {
         args.Handled = true;
 
-        var ev = new MegaphoneInputEvent(GetNetEntity(args.User));
+        var ev = new MegaphoneInputEvent(
+            GetNetEntity(args.User),
+            VoiceRangeMultiplier: ent.Comp.VoiceRangeMultiplier);
         _dialog.OpenInput(args.User, Loc.GetString("rmc-megaphone-ui-text"), ev, largeInput: false, characterLimit: 150);
     }
 
@@ -32,4 +34,7 @@ public sealed class RMCMegaphoneSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed record MegaphoneInputEvent(NetEntity Actor, string Message = "") : DialogInputEvent(Message);
+public sealed record MegaphoneInputEvent(
+    NetEntity Actor,
+    string Message = "",
+    float VoiceRangeMultiplier = 1.5f) : DialogInputEvent(Message);

@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CameraShake;
+using Content.Shared._RMC14.Fishing;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
@@ -10,6 +11,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
+using Content.Shared.Fishing;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -48,6 +50,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private RMCDazedSystem _daze = default!;
     [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private SharedRMCFishingSystem _fishing = default!;
 
     protected Box2Rotated LastTailAttack;
 
@@ -101,7 +104,10 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         // TODO RMC14 lag compensation
         var damaged = false;
         var damage = new DamageSpecifier(stabStats.TailDamage);
-        var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
+
+        EntityUid? fishingCatch = null;
+
+        var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier(), ref stab.Comp.BonusDamageMult);
         RaiseLocalEvent(stab, ref eve);
         damage += eve.Damage;
         if (args.Entity == null ||
@@ -110,6 +116,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         {
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
             RaiseLocalEvent(stab, missEvent);
+
+            if (TryComp<XenoFishingComponent>(stab, out var fisher))
+                _fishing.DoXenoFish((stab.Owner, fisher), args.Target, out fishingCatch);
 
             foreach (var action in _actions.GetActions(stab))
             {
@@ -240,6 +249,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", userName), ("target", hitName));
                     _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
                 }
+
+                var afterEv = new XenoAfterTailStabEvent(hit);
+                RaiseLocalEvent(stab, ref afterEv);
             }
         }
 
@@ -252,7 +264,8 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 _rotate.RotateXeno(stab, angle.GetDir());
             }
 
-            var sound = args.Entity != null && damaged && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stabStats.SoundHit : stab.Comp.SoundMiss;
+            var hit = (args.Entity != null && damaged && !TerminatingOrDeleted(args.Entity) && args.Entity != stab) || fishingCatch != null;
+            var sound = hit ? stabStats.SoundHit : stab.Comp.SoundMiss;
             _audio.PlayPvs(sound, stab);
         }
 

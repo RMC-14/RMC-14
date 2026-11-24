@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9dd2c0d0a1c21e3c9bddbad1321c63fd886f61cf/icons/obj/objects.dmi, https://github.com/cmss13-devs/cmss13/blob/6a955a3c180f3efcf3b997c230fff4d634eb0629/icons/obj/structures/machinery/yautja_machines.dmi, ai_interface_chair taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/objects.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9dd2c0d0a1c21e3c9bddbad1321c63fd886f61cf/icons/obj/objects.dmi, https://github.com/cmss13-devs/cmss13/blob/6a955a3c180f3efcf3b997c230fff4d634eb0629/icons/obj/structures/machinery/yautja_machines.dmi, ai_interface_chair taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/objects.dmi, comfychair_echo and _foxtrot by CatAndHats (github) based on comfychair_delta",
   "size": {
     "x": 32,
     "y": 32
@@ -49,6 +49,14 @@
     },
     {
       "name": "comfychair_delta",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_echo",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_foxtrot",
       "directions": 4
     },
     {

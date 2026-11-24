@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Folded;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Placement;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Vehicle;
@@ -57,7 +58,7 @@ namespace Content.Shared._RMC14.Emplacements;
 
 public abstract class SharedWeaponMountSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedXenoAcidSystem XenoAcid = default!;
+    [Dependency] protected SharedXenoAcidSystem XenoAcid = default!;
 
     [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
@@ -81,6 +82,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private RMCPlacementSystem _placement = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private RMCDoAfterSystem _rmcDoAfter = default!;
     [Dependency] private RMCFoldableSystem _rmcFoldable = default!;
@@ -224,6 +226,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -273,6 +276,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
                     NeedHand = true,
                     BreakOnMove = true,
                     BreakOnHandChange = true,
+                    RootEntity = true,
                 };
 
                 _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -510,9 +514,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return false;
         }
 
-        if (_rmcMap.HasAnchoredEntityEnumerator<WeaponMountComponent>(coordinates))
+        if (_placement.TryFindBlocker(coordinates, ent.Comp.PlacementRestrictions, out var blockingEntity, ent))
         {
-            var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", ent));
+            var msg = Loc.GetString("emplacement-mount-too-close", ("mount", blockingEntity));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
             return false;
         }
@@ -520,12 +524,6 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         var grid = _transform.GetGrid((user, Transform(user)));
         if (TryComp(grid, out MapGridComponent? mapGrid))
         {
-            if (!TryComp(ent, out MetaDataComponent? metaData))
-                return false;
-
-            if (HasWeaponMountNearbyPopup((grid.Value, mapGrid), coordinates, ent.Owner, ent.Comp.MountExclusionAreaSize, user))
-                return false;
-
             if (ent.Comp.BarricadeExclusionAreaSize != 0 &&
                 _barricade.HasBarricadeNearbyPopup((grid.Value, mapGrid), user, coordinates, ent.Comp.BarricadeExclusionAreaSize))
                 return false;
@@ -834,17 +832,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     /// <returns>True if the mount can be assembled</returns>
     private bool CanAssembleMount(Entity<WeaponMountComponent> ent, EntityUid user)
     {
-        if (ent.Comp.MountExclusionAreaSize == 0)
+        if (!_placement.TryFindBlocker(_transform.GetMoverCoordinates(ent), ent.Comp.PlacementRestrictions, out var blockingEntity, ent))
             return true;
 
-        var grid = _transform.GetGrid((ent, Transform(ent)));
-        if (!TryComp(grid, out MapGridComponent? mapGrid))
-            return true;
+        var msg = Loc.GetString("emplacement-mount-too-close", ("mount", blockingEntity));
+        _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
 
-        if (HasWeaponMountNearbyPopup((grid.Value, mapGrid), _transform.GetMoverCoordinates(ent), ent.Owner, ent.Comp.MountExclusionAreaSize, user))
-            return false;
+        return false;
 
-        return true;
     }
 
     /// <summary>
@@ -890,6 +885,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -916,6 +912,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
@@ -939,6 +936,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             NeedHand = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(undeployDoAfterArgs));

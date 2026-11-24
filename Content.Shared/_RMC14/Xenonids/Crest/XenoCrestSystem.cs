@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared.Actions;
+using Content.Shared.Alert;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
@@ -16,6 +17,7 @@ namespace Content.Shared._RMC14.Xenonids.Crest;
 public sealed class XenoCrestSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private CMArmorSystem _armor = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
@@ -122,9 +124,13 @@ public sealed class XenoCrestSystem : EntitySystem
         Dirty(xeno);
 
         _armor.UpdateArmorValue((xeno, null));
-
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);
+
+        if (xeno.Comp.Lowered)
+            _alerts.ShowAlert(xeno, xeno.Comp.Alert);
+        else
+            _alerts.ClearAlert(xeno, xeno.Comp.Alert);
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleCrestActionEvent>(xeno))
         {

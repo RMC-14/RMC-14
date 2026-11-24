@@ -1,7 +1,8 @@
-﻿using Content.Shared._RMC14.Animations;
+using Content.Shared._RMC14.Animations;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Spray;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Mobs.Systems;
@@ -42,6 +43,7 @@ public sealed class AcidPillarSystem : EntitySystem
 
         return !_mobState.IsIncapacitated(target) &&
                !_standingState.IsDown(target) &&
+               !HasComp<XenoRestingComponent>(target) &&
                !HasComp<StunnedComponent>(target);
     }
 

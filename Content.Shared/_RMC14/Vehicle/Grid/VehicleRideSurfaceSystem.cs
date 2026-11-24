@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Teleporter;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Components;
@@ -31,6 +32,7 @@ public sealed partial class VehicleRideSurfaceSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

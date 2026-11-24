@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
@@ -31,18 +32,18 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private XenoEnergySystem _energy = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] protected SharedPopupSystem _popup = default!;
+    [Dependency] protected SharedXenoHiveSystem _hive = default!;
     [Dependency] private XenoEvolutionSystem _evolution = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-    [Dependency] protected readonly SharedAudioSystem _audio = default!;
+    [Dependency] protected SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedCMChatSystem _chat = default!;
     [Dependency] private SharedPointLightSystem _pointLight = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] protected readonly SharedTransformSystem _transform = default!;
+    [Dependency] protected SharedTransformSystem _transform = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private XenoSystem _xeno = default!;
@@ -51,6 +52,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private XenoSpitSystem _spit = default!;
 
     public override void Initialize()
     {
@@ -97,7 +99,6 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
         hive.Duration = xeno.Comp.Duration;
         hive.TimeLeft = xeno.Comp.Duration;
         hive.BaseDamage = xeno.Comp.BaseDamage;
-        hive.MobAcid = xeno.Comp.Acid;
 
         ForTheHiveShout(xeno);
 
@@ -214,10 +215,9 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                             continue;
 
                         //Do the acid check here
-                        if (_interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
+                        if (active.MobAcid != null && _interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                         {
-                            if (active.MobAcid is { } add)
-                                EntityManager.AddComponents(mob, add);
+                            _spit.ApplyOrExtendAcid(mob.Owner, active.MobAcid.Value);
                         }
 
                         if (!_interaction.InRangeUnobstructed(xeno, mob.Owner, burnRange, collisionMask: CollisionGroup.Impassable))

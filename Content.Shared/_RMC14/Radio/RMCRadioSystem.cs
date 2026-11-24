@@ -47,6 +47,7 @@ public sealed class RMCRadioSystem : EntitySystem
         args.Verbs.Add(new AlternativeVerb
         {
             Text = "Tune Radio",
+            Priority = 1,
             IconEntity = GetNetEntity(ent.Owner),
             Act = () =>
             {

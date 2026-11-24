@@ -32,6 +32,9 @@ public sealed class ClientClothingSystem : ClothingSystem
         {"head", "HELMET"},
         {"eyes", "EYES"},
         {"ears", "EARS"},
+        // RMC14
+        {"ears2", "EARS"},
+        // RMC14
         {"mask", "MASK"},
         {"outerClothing", "OUTERCLOTHING"},
         {Jumpsuit, "INNERCLOTHING"},

@@ -86,6 +86,7 @@ public sealed class BarricadeSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.DigDelay, ev, tool, args.Target, tool)
         {
             BreakOnMove = true,
+            RootEntity = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
     }
@@ -152,6 +153,7 @@ public sealed class BarricadeSystem : EntitySystem
             var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.FillDelay, ev, tool, empty, tool)
             {
                 BreakOnMove = true,
+                RootEntity = true,
             };
             _doAfter.TryStartDoAfter(doAfter);
             _popup.PopupClient(Loc.GetString("cm-entrenching-begin-filling"), args.User, args.User);
@@ -213,6 +215,7 @@ public sealed class BarricadeSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.FillDelay, ev, tool, empty, tool)
         {
             BreakOnMove = true,
+            RootEntity = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
         _popup.PopupClient(Loc.GetString("cm-entrenching-begin-filling"), args.User, args.User);
@@ -305,6 +308,7 @@ public sealed class BarricadeSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, tool.Comp.DigDelay, ev, tool, used: tool)
         {
             BreakOnMove = true,
+            RootEntity = true,
             NeedHand = true,
             BreakOnHandChange = true,
         };
@@ -370,6 +374,7 @@ public sealed class BarricadeSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, full.Comp.BuildDelay, ev, full, full)
         {
             BreakOnMove = true,
+            RootEntity = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);

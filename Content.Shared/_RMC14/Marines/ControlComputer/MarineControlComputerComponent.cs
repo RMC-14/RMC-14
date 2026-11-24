@@ -1,5 +1,7 @@
+using Content.Shared._RMC14.Announce;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -40,6 +42,9 @@ public sealed partial class MarineControlComputerComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ShipAnnouncementCooldown = TimeSpan.FromSeconds(30);
 
+    [DataField]
+    public EntProtoId<RMCAnnouncementPresetComponent>? ShipAnnouncementOverlay = "RMCAnnouncementMarineCommand";
+
     [DataField, AutoNetworkedField]
     public bool CanPrintCommendations = true;
 
@@ -54,6 +59,12 @@ public sealed partial class MarineControlComputerComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<string> PrintedCommendationIds = new();
+
+    /// <summary>
+    ///     The map this computer toggles the evacuation state of.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? EvacuationMap;
 }
 
 [Serializable, NetSerializable]

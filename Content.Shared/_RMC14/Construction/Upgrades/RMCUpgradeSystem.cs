@@ -1,7 +1,8 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -26,6 +27,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedXenoAcidSystem _xenoAcid = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     private readonly Dictionary<EntProtoId, RMCConstructionUpgradeComponent> _upgradePrototypes = new();
     private EntityQuery<RMCConstructionUpgradeItemComponent> _upgradeItemQuery;
@@ -37,6 +39,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
         _downgradeItemQuery = GetEntityQuery<MultitoolComponent>();
 
         SubscribeLocalEvent<RMCConstructionUpgradeTargetComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<RMCConstructionUpgradeTargetComponent, DowngradeDoAfterEvent>(OnDowngradeDoAfter);
 
         Subs.BuiEvents<RMCConstructionUpgradeTargetComponent>(RMCConstructionUpgradeUiKey.Key,
             subs =>
@@ -84,6 +87,15 @@ public sealed class RMCUpgradeSystem : EntitySystem
             return;
         }
 
+        if (!Transform(ent).Anchored)
+        {
+            var failPopup = Loc.GetString("rmc-construction-require-anchored", ("ent", ent));
+            _popup.PopupClient(failPopup, ent, user, PopupType.SmallCaution);
+
+            args.Handled = true;
+            return;
+        }
+
         if (downgradeItem != null && ent.Comp.Downgrade != null)
         {
             RemoveUpgrade(ent, user);
@@ -100,6 +112,35 @@ public sealed class RMCUpgradeSystem : EntitySystem
 
     private void RemoveUpgrade(Entity<RMCConstructionUpgradeTargetComponent> ent, EntityUid user)
     {
+        if (ent.Comp.Downgrade == null)
+            return;
+
+        if (!_upgradePrototypes.TryGetValue(ent.Comp.Downgrade.Value, out var upgradeComp))
+            return;
+
+        var downgradeDoAfter = new DoAfterArgs(EntityManager,
+            user,
+            ent.Comp.DowngradeTime,
+            new DowngradeDoAfterEvent(),
+            ent)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = true,
+            RootEntity = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
+        };
+
+        _doAfter.TryStartDoAfter(downgradeDoAfter);
+    }
+
+    private void OnDowngradeDoAfter(Entity<RMCConstructionUpgradeTargetComponent> ent, ref DowngradeDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
         if (_net.IsClient)
             return;
 
@@ -115,12 +156,13 @@ public sealed class RMCUpgradeSystem : EntitySystem
             var materialStack = Spawn(stackProto.Spawn, coordinates);
             if (TryComp<StackComponent>(materialStack, out var stack))
             {
-                _stack.SetCount(materialStack, upgradeComp.Amount, stack);
+                _stack.SetCount(materialStack, upgradeComp.Amount / 2, stack);
             }
         }
 
         var downgradePopup = Loc.GetString("rmc-construction-downgrade", ("ent", ent));
-        ApplyEntityUpgrade(ent, upgradeComp.BaseEntity, user, downgradePopup);
+        ApplyEntityUpgrade(ent, upgradeComp.BaseEntity, args.User, downgradePopup);
+
     }
 
     private void OnUpgradeBuiMsg(Entity<RMCConstructionUpgradeTargetComponent> ent, ref RMCConstructionUpgradeBuiMsg args)

@@ -3,8 +3,10 @@ using System.Numerics;
 using Content.Client.CombatMode;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
+using Content.Client.UserInterface.Systems.Actions;
 using Content.Client.Verbs;
 using Content.Client.Verbs.UI;
+using Content.Shared.Actions.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
@@ -52,7 +54,13 @@ namespace Content.Client.ContextMenu.UI
         [UISystemDependency] private readonly TransformSystem _xform = default!;
         [UISystemDependency] private readonly CombatModeSystem _combatMode = default!;
 
+        // RMC
+        [Dependency] private readonly ActionUIController _action = default!;
+
         private bool _updating;
+
+        // RMC14
+        public bool HandlingContextMenuInput { get; private set; }
 
         /// <summary>
         ///     This maps the currently displayed entities to the actual GUI elements.
@@ -152,8 +160,22 @@ namespace Content.Client.ContextMenu.UI
                 var session = _playerManager.LocalSession;
                 if (session != null)
                 {
+                    HandlingContextMenuInput = true; // RMC14
                     inputSys.HandleInputCommand(session, func, message);
+                    HandlingContextMenuInput = false; // RMC14
                 }
+
+                // RMC start
+                // Don't close the menu on use if the user is currently using a repeatable action.
+                if (args.Function == EngineKeyFunctions.Use
+                    && _action.SelectingTargetFor is { } selectedActionId
+                    && _entityManager.TryGetComponent<TargetActionComponent>(selectedActionId, out var target)
+                    && target.Repeat)
+                {
+                    args.Handle();
+                    return;
+                }
+                // RMC end
 
                 _context.Close();
                 args.Handle();

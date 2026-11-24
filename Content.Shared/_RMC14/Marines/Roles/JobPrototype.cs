@@ -95,4 +95,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// </summary>
     [DataField]
     public Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
+
+    [DataField]
+    public LocId? FirstDeploymentAssignment;
 }

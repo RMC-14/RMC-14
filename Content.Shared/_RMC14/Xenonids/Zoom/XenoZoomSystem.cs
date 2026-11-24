@@ -65,14 +65,18 @@ public sealed class XenoZoomSystem : EntitySystem
             return;
 
         args.Handled = true;
+        SetZoomEnabled(xeno, !xeno.Comp.Enabled);
+    }
 
-        xeno.Comp.Enabled = !xeno.Comp.Enabled;
+    private void SetZoomEnabled(Entity<XenoZoomComponent> xeno, bool enabled)
+    {
+        xeno.Comp.Enabled = enabled;
 
-        if (xeno.Comp.Enabled)
+        if (enabled)
         {
             _contentEye.SetMaxZoom(xeno, xeno.Comp.Zoom);
             _contentEye.SetZoom(xeno, xeno.Comp.Zoom);
-            xeno.Comp.Offset = Transform(args.User).LocalRotation.GetCardinalDir().ToVec() * xeno.Comp.OffsetLength;
+            xeno.Comp.Offset = Transform(xeno.Owner).LocalRotation.GetCardinalDir().ToVec() * xeno.Comp.OffsetLength;
         }
         else
         {
@@ -84,7 +88,7 @@ public sealed class XenoZoomSystem : EntitySystem
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoZoomActionEvent>(xeno))
         {
-            _actions.SetToggled((action, action), xeno.Comp.Enabled);
+            _actions.SetToggled((action, action), enabled);
         }
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
@@ -130,21 +134,21 @@ public sealed class XenoZoomSystem : EntitySystem
 
     private void OnRest(Entity<XenoZoomComponent> ent, ref XenoRestEvent args)
     {
-        if (!ent.Comp.Enabled)
+        if (args.Resting)
+        {
+            ent.Comp.WasZoomedBeforeRest = ent.Comp.Enabled;
+
+            if (!ent.Comp.Enabled)
+                return;
+
+            SetZoomEnabled(ent, false);
+            return;
+        }
+
+        if (!ent.Comp.WasZoomedBeforeRest)
             return;
 
-        ent.Comp.Enabled = false;
-        _contentEye.ResetZoom(ent);
-        ent.Comp.Offset = Vector2.Zero;
-        Dirty(ent);
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
-
-        if (TryComp(ent, out EyeComponent? eye))
-            _contentEye.UpdateEyeOffset((ent.Owner, eye));
-
-        foreach (var action in _rmcActions.GetActionsWithEvent<XenoZoomActionEvent>(ent))
-        {
-            _actions.SetToggled((action, action), ent.Comp.Enabled);
-        }
+        ent.Comp.WasZoomedBeforeRest = false;
+        SetZoomEnabled(ent, true);
     }
 }

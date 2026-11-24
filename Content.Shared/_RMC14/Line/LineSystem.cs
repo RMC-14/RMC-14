@@ -3,10 +3,13 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.Beam.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
 using Content.Shared.Physics;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -20,6 +23,7 @@ namespace Content.Shared._RMC14.Line;
 
 public sealed class LineSystem : EntitySystem
 {
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private TagSystem _tag = default!;
@@ -35,12 +39,14 @@ public sealed class LineSystem : EntitySystem
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
     private EntityQuery<DoorComponent> _doorQuery;
+    private EntityQuery<RMCEntityStorageLineBlockableComponent> _lockerQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
 
     public override void Initialize()
     {
         _barricadeQuery = GetEntityQuery<BarricadeComponent>();
         _doorQuery = GetEntityQuery<DoorComponent>();
+        _lockerQuery = GetEntityQuery<RMCEntityStorageLineBlockableComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
@@ -159,6 +165,11 @@ public sealed class LineSystem : EntitySystem
                 if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
                     continue;
 
+                // open or opening doors don't count as blockers
+                // if the entity is a door, and the door isn't closed, denying, or welded, ignore it as a blocker
+                if (_doorQuery.TryComp(entity, out var door) && door.State != DoorState.Closed && door.State != DoorState.Denying && door.State != DoorState.Welded)
+                    continue;
+
                 blockCount++;
 
                 if (blockCount < 2)
@@ -196,6 +207,14 @@ public sealed class LineSystem : EntitySystem
             else if (_doorQuery.TryComp(uid, out var door))
             {
                 if (door.State != DoorState.Closed && door.State != DoorState.Denying && door.State != DoorState.Welded)
+                    continue;
+
+                blocker = uid.Value;
+                return true;
+            }
+            else if (_lockerQuery.HasComp(uid))
+            {
+                if (_entityStorage.IsOpen(uid.Value))
                     continue;
 
                 blocker = uid.Value;

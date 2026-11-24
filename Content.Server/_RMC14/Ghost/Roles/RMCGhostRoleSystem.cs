@@ -1,5 +1,6 @@
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Components;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Ghost.Roles;
 
@@ -28,3 +29,9 @@ public sealed class RMCGhostRoleSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct GhostRoleRaffleEvent(TimeSpan CountDown, float RoundTimeRequirement, bool Handled = false);
+
+/// <summary>
+/// raised on a ghost role before a player takes it or joins its raffle, cancel it to stop them
+/// </summary>
+[ByRefEvent]
+public record struct RMCTakeGhostRoleAttemptEvent(ICommonSession Player, bool Cancelled = false);

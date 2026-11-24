@@ -10,7 +10,7 @@ using Robust.Shared.Toolshed.TypeParsers;
 
 namespace Content.Server._RMC14.PlayTimeTracking;
 
-[ToolshedCommand, AdminCommand(AdminFlags.Ban)]
+[ToolshedCommand, AdminCommand(AdminFlags.Host)] // RMC14 Ban -> Host, we don't do exemptions
 public sealed partial class ExcludeRoleTimerCommand : ToolshedCommand
 {
     [Dependency] private IServerDbManager _db = default!;

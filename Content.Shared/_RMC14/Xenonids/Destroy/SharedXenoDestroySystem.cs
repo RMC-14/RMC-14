@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
@@ -18,6 +19,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Explosion;
@@ -56,7 +58,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private MobStateSystem _mob = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
@@ -73,6 +75,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private RMCPullingSystem _rmcPull = default!;
     [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedRMCExplosionSystem _explosion = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
 
@@ -235,10 +238,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
 
                 if (_whitelist.IsWhitelistPass(xeno.Comp.Structures, ent))
                 {
-                    var ev = new GetExplosionResistanceEvent(xeno.Comp.ExplosionType.Id);
-                    RaiseLocalEvent(ent, ref ev);
-
-                    _damage.TryChangeDamage(ent, xeno.Comp.StructureDamage * ev.DamageCoefficient, true, origin: xeno, tool: xeno);
+                    _explosion.DoDirectExplosionDamage(xeno, ent, xeno, xeno.Comp.ExplosionType, xeno.Comp.StructureDamage);
                     continue;
                 }
             }

@@ -60,42 +60,43 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem : EntitySystem
 {
-    [Dependency] private   readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly SharedMapSystem MapManager = default!;
-    [Dependency] private   readonly INetManager _netManager = default!;
-    [Dependency] protected readonly IPrototypeManager ProtoManager = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
-    [Dependency] protected readonly ISharedAdminLogManager Logs = default!;
-    [Dependency] protected readonly DamageableSystem Damageable = default!;
-    [Dependency] protected readonly ExamineSystemShared Examine = default!;
-    [Dependency] private   readonly SharedHandsSystem _hands = default!;
-    [Dependency] private   readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private   readonly RechargeBasicEntityAmmoSystem _recharge = default!;
-    [Dependency] protected readonly SharedActionsSystem Actions = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] private   readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] protected readonly SharedContainerSystem Containers = default!;
-    [Dependency] private   readonly SharedGravitySystem _gravity = default!;
-    [Dependency] protected readonly SharedPointLightSystem Lights = default!;
-    [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
-    [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
-    [Dependency] protected readonly SharedProjectileSystem Projectiles = default!;
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
-    [Dependency] protected readonly TagSystem TagSystem = default!;
-    [Dependency] protected readonly ThrowingSystem ThrowingSystem = default!;
-    [Dependency] private   readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private   readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private   readonly SharedStunSystem _stun = default!;
-    [Dependency] private   readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private   readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private   readonly IConfigurationManager _config = default!;
-    [Dependency] private   readonly INetConfigurationManager _netConfig = default!;
+    [Dependency] private   ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected SharedMapSystem MapManager = default!;
+    [Dependency] private   INetManager _netManager = default!;
+    [Dependency] protected IPrototypeManager ProtoManager = default!;
+    [Dependency] protected IRobustRandom Random = default!;
+    [Dependency] protected ISharedAdminLogManager Logs = default!;
+    [Dependency] protected DamageableSystem Damageable = default!;
+    [Dependency] protected ExamineSystemShared Examine = default!;
+    [Dependency] private   SharedHandsSystem _hands = default!;
+    [Dependency] private   ItemSlotsSystem _slots = default!;
+    [Dependency] private   RechargeBasicEntityAmmoSystem _recharge = default!;
+    [Dependency] protected SharedActionsSystem Actions = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] private   SharedCombatModeSystem _combatMode = default!;
+    [Dependency] protected SharedContainerSystem Containers = default!;
+    [Dependency] private   SharedGravitySystem _gravity = default!;
+    [Dependency] protected SharedPointLightSystem Lights = default!;
+    [Dependency] protected SharedPopupSystem PopupSystem = default!;
+    [Dependency] protected SharedPhysicsSystem Physics = default!;
+    [Dependency] protected SharedProjectileSystem Projectiles = default!;
+    [Dependency] protected SharedTransformSystem TransformSystem = default!;
+    [Dependency] protected TagSystem TagSystem = default!;
+    [Dependency] protected ThrowingSystem ThrowingSystem = default!;
+    [Dependency] private   UseDelaySystem _useDelay = default!;
+    [Dependency] private   EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private   SharedStaminaSystem _stamina = default!;
+    [Dependency] private   SharedStunSystem _stun = default!;
+    [Dependency] private   SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private   SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private   IConfigurationManager _config = default!;
+    [Dependency] private   INetConfigurationManager _netConfig = default!;
 
     // RMC14
     [Dependency] private AttachableHolderSystem _attachableHolder = default!;
+    [Dependency] private GunAkimboSystem _akimbo = default!;
     [Dependency] private SharedRMCFlamerSystem _flamer = default!;
     [Dependency] private VehicleWeaponsSystem _rmcVehicleWeapons = default!;
     [Dependency] private RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
@@ -166,16 +167,28 @@ public abstract partial class SharedGunSystem : EntitySystem
         var gunUid = GetEntity(ev.Gun);
 
         if (args.SenderSession.AttachedEntity == null ||
-            !TryComp<GunComponent>(gunUid, out var gun) ||
-            !TryGetGun(args.SenderSession.AttachedEntity.Value, out _, out var userGun))
+            !TryComp<GunComponent>(gunUid, out var gun))
         {
             return;
         }
 
-        if (userGun != gun)
+        var user = args.SenderSession.AttachedEntity.Value;
+        if (!CanStopGun(user, gunUid, gun))
             return;
 
         StopShooting(gunUid, gun);
+    }
+
+    // RMC14
+    private bool CanStopGun(EntityUid user, EntityUid gunUid, GunComponent gun)
+    {
+        if (TryGetGun(user, out _, out var activeGun) &&
+            activeGun == gun)
+        {
+            return true;
+        }
+
+        return _akimbo.IsHeldDualWieldGun(user, gunUid);
     }
 
     public bool CanShoot(GunComponent component)
@@ -268,6 +281,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
 
+    public void StopShooting(Entity<GunComponent> gun)
+    {
+        StopShooting(gun.Owner, gun.Comp);
+    }
+
     public void ResetShotCounter(EntityUid uid, GunComponent gun)
     {
         if (gun.ShotCounter == 0)
@@ -276,6 +294,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShotCounter = 0;
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
+
+    // RMC14
+    public void EndBurst(EntityUid uid, GunComponent gun)
+    {
+        if (!gun.BurstActivated && gun.BurstShotsCount == 0)
+            return;
+
+        gun.BurstActivated = false;
+        gun.BurstShotsCount = 0;
+        DirtyField(uid, gun, nameof(GunComponent.BurstActivated));
+    }
+    // RMC14
 
     // RMC14 Needed to check if the attempted shot actually shot any projectiles.
     /// <summary>
@@ -799,6 +829,10 @@ public abstract partial class SharedGunSystem : EntitySystem
                 case RMCFlamerAmmoProviderComponent flamer:
                     if (ent != null)
                         _flamer.ShootFlamer((ent.Value, flamer), (gunUid, gun), user, fromCoordinates, toCoordinates);
+                    break;
+                case RMCFlamerNozzleComponent nozzle:
+                    if (ent != null)
+                        _flamer.ShootNozzle((ent.Value, nozzle), (gunUid, gun), user, fromCoordinates, toCoordinates);
                     break;
                 case RMCSprayAmmoProviderComponent spray:
                     if (ent != null)

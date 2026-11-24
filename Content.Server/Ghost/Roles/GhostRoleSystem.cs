@@ -395,6 +395,13 @@ public sealed class GhostRoleSystem : EntitySystem
         if (!_ghostRoles.TryGetValue(identifier, out var roleEnt))
             return;
 
+        // RMC14
+        var attemptEv = new RMCTakeGhostRoleAttemptEvent(player);
+        RaiseLocalEvent(roleEnt, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+        // RMC14
+
         // get raffle or create a new one if it doesn't exist
         var raffle = _ghostRoleRaffles.TryGetValue(identifier, out var raffleEnt)
             ? raffleEnt.Comp
@@ -486,6 +493,13 @@ public sealed class GhostRoleSystem : EntitySystem
     {
         if (!_ghostRoles.TryGetValue(identifier, out var role))
             return false;
+
+        // RMC14
+        var attemptEv = new RMCTakeGhostRoleAttemptEvent(player);
+        RaiseLocalEvent(role, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return false;
+        // RMC14
 
         var ev = new TakeGhostRoleEvent(player);
         RaiseLocalEvent(role, ref ev);

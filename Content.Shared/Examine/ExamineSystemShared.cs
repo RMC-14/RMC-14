@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Eye.Blinding.Components;
@@ -69,7 +70,16 @@ namespace Content.Shared.Examine
             if (MobStateSystem.IsIncapacitated(examiner))
                 return false;
 
-            if (!InRangeUnOccluded(examiner, entity, ExamineDetailsRange))
+            // RMC
+            var detailsOrigin = examiner;
+            if (TryComp<VehicleWatchingComponent>(examiner, out var detailsWatcher) &&
+                detailsWatcher.Watching is { } detailsWatched &&
+                Comp<TransformComponent>(examiner).MapID != Transform(entity).MapID)
+            {
+                detailsOrigin = detailsWatched;
+            }
+
+            if (!InRangeUnOccluded(detailsOrigin, entity, ExamineDetailsRange))
                 return false;
 
             // Is the target hidden in a opaque locker or something? Currently this check allows players to examine
@@ -119,8 +129,12 @@ namespace Content.Shared.Examine
 
             if (Comp<TransformComponent>(examiner).MapID != target.MapId)
             {
-                if (!HasComp<OverwatchWatchingComponent>(examiner) && !HasComp<XenoWatchingComponent>(examiner))
+                if (!HasComp<OverwatchWatchingComponent>(examiner) &&
+                    !HasComp<XenoWatchingComponent>(examiner) &&
+                    !HasComp<VehicleWatchingComponent>(examiner)) //RMC
+                {
                     return false;
+                }
             }
 
             // Do target InRangeUnoccluded which has different checks.
@@ -151,6 +165,18 @@ namespace Content.Shared.Examine
                         predicate: predicate,
                         ignoreInsideBlocker: true);
                 }
+                // RMC
+                else if (Comp<TransformComponent>(examiner).MapID != target.MapId &&
+                         TryComp<VehicleWatchingComponent>(examiner, out var vehicleWatcher) &&
+                         vehicleWatcher.Watching is { } vehicleWatched)
+                {
+                    return InRangeUnOccluded(
+                        vehicleWatched,
+                        examined.Value,
+                        GetExaminerRange(vehicleWatched),
+                        predicate: predicate,
+                        ignoreInsideBlocker: true);
+                }
 
                 return InRangeUnOccluded(
                     examiner,
@@ -161,6 +187,19 @@ namespace Content.Shared.Examine
             }
             else
             {
+                // RMC
+                if (Comp<TransformComponent>(examiner).MapID != target.MapId &&
+                    TryComp<VehicleWatchingComponent>(examiner, out var vehicleWatcher) &&
+                    vehicleWatcher.Watching is { } vehicleWatched)
+                {
+                    return InRangeUnOccluded(
+                        vehicleWatched,
+                        target,
+                        GetExaminerRange(vehicleWatched),
+                        predicate: predicate,
+                        ignoreInsideBlocker: true);
+                }
+
                 return InRangeUnOccluded(
                     examiner,
                     target,

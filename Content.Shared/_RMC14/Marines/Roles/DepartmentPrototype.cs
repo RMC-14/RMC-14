@@ -36,4 +36,7 @@ public sealed partial class DepartmentPrototype : IInheritingPrototype, ICMSpeci
     /// </summary>
     [DataField]
     public ProtoId<JobPrototype>? HeadOfDepartment { get; private set; }
+
+    [DataField]
+    public LocId? FirstDeploymentAssignment { get; private set; }
 }

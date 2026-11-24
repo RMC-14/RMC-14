@@ -1,9 +1,8 @@
 using System;
-using Content.Shared.Input;
+using Content.Shared._RMC14.Input;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
@@ -23,19 +22,18 @@ public sealed class VehicleHornSystem : EntitySystem
         if (_net.IsClient)
         {
             CommandBinds.Builder
-                .Bind(ContentKeyFunctions.UseItemInHand, InputCmdHandler.FromDelegate(session => {
-                    if (session?.AttachedEntity is not { } user)
-                        return;
-
-                    if (!_rmcVehicles.TryResolveControlledVehicle(user, out var vehicleUid))
-                        return;
-
-                    RaiseNetworkEvent(new VehicleHornRequestEvent(GetNetEntity(vehicleUid)));
-                }, handle: false))
+                .Bind(CMKeyFunctions.RMCVehicleHorn, new VehicleOperatorInputCmdHandler(_rmcVehicles,
+                    vehicle => RaiseNetworkEvent(new VehicleHornRequestEvent(GetNetEntity(vehicle)))))
                 .Register<VehicleHornSystem>();
         }
 
         SubscribeNetworkEvent<VehicleHornRequestEvent>(OnHornRequest);
+    }
+
+    public override void Shutdown()
+    {
+        if (_net.IsClient)
+            CommandBinds.Unregister<VehicleHornSystem>();
     }
 
     private void OnHornRequest(VehicleHornRequestEvent ev, EntitySessionEventArgs args)
