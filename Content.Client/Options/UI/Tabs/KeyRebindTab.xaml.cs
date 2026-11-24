@@ -196,6 +196,12 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCXenoPheromonesWarding);
             AddButton(CMKeyFunctions.RMCXenoPheromonesFrenzy);
 
+            AddHeader("ui-options-header-rmc-vehicle");
+            AddButton(CMKeyFunctions.RMCVehicleHorn);
+            AddButton(CMKeyFunctions.RMCVehicleOvercharge);
+            AddButton(CMKeyFunctions.RMCVehicleSpotlight);
+            AddButton(CMKeyFunctions.RMCVehicleSafety);
+
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
             AddToggleCvarCheckBox("ui-options-hold-to-attack-melee", CCVars.ControlHoldToAttackMelee);

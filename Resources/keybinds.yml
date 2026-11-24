@@ -698,6 +698,22 @@ binds:
 - function: RMCResist
   type: State
   key: B
+- function: RMCVehicleHorn
+  type: State
+  key: Z
+  priority: 1
+- function: RMCVehicleOvercharge
+  type: State
+  key: Space
+  priority: 1
+- function: RMCVehicleSpotlight
+  type: State
+  key: F
+  priority: 1
+- function: RMCVehicleSafety
+  type: State
+  key: C
+  priority: 1
 - function: RMCCameraAdjustNorth
   type: State
   key: W

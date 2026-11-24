@@ -36,6 +36,13 @@ ui-options-function-rmc-xeno-pheromones-recovery = Emit Recovery pheromones
 ui-options-function-rmc-xeno-pheromones-warding = Emit Warding pheromones
 ui-options-function-rmc-xeno-pheromones-frenzy = Emit Frenzy pheromones
 
+ui-options-header-rmc-vehicle = Vehicle
+
+ui-options-function-rmc-vehicle-horn = Sound horn
+ui-options-function-rmc-vehicle-overcharge = Overcharge
+ui-options-function-rmc-vehicle-spotlight = Toggle spotlight
+ui-options-function-rmc-vehicle-safety = Toggle safety mode
+
 ui-options-function-smart-equip-uniform = Smart-equip to uniform
 ui-options-function-smart-equip-armor = Smart-equip to armor
 ui-options-function-smart-equip-helmet = Smart-equip to helmet
