@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: '[PVE] Added language:add, language:remove, and language:reset for modifying
-      an entities'' known languages.'
-    type: Add
-  id: 3461
-  time: '2026-07-03T01:27:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10213
 - author: Vixting
   changes:
   - message: Fixed language icon going out of position
@@ -4333,5 +4325,13 @@
   id: 3960
   time: '2026-11-24T06:51:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10192
+- author: Vixting
+  changes:
+  - message: The playtime requirment for evolving to Queen is now applied, it can
+      be bypassed after 2.5m elapsing of no one evolving to Queen
+    type: Add
+  id: 3961
+  time: '2026-11-24T06:54:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10544
 Name: RMC14
 Order: -1
