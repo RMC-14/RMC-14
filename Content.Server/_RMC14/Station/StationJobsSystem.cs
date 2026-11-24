@@ -22,12 +22,14 @@ public sealed partial class StationJobsSystem : EntitySystem
                 if (!exists)
                     assignments.Add(new JobAssignment(_prototypeManager.Index(jobId), stationId));
 
-                Log.Debug($"Setting assignment limit for {jobId} based on setup info {available}");
-
                 foreach (var assignment in assignments)
                 {
-                    var limit = available[0];
-                    assignment.AssignmentLimit = limit != -1 ? limit : null;
+                    var limit = available[0] != -1 ? available[0] : (int?)null;
+
+                    if (limit != assignment.AssignmentLimit)
+                        Log.Debug($"Setting assignment limit for {jobId} from {assignment.AssignmentLimit} to {limit}");
+
+                    assignment.AssignmentLimit = limit;
                 }
             }
         }

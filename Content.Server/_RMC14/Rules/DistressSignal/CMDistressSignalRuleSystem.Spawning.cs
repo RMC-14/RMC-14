@@ -272,11 +272,6 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
-    private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
-    {
-        ApplyJobSlotScaling(comp, ev.PlayerPool.Count, ev.PlayerPool.Count);
-    }
-
     private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, float marines, float players)
     {
         var vehicleThreshold = _config.GetCVar(RMCCVars.RMCVehicleRoundstartThresholdPlayers);
@@ -325,7 +320,6 @@ public sealed partial class CMDistressSignalRuleSystem
                         }
                     }
 
-                    Log.Info($"Setting {job} to {slots} slots.");
                     _stationJobs.TrySetJobSlot(stationId, job, slots, stationJobs: stationJobs);
                 }
             }

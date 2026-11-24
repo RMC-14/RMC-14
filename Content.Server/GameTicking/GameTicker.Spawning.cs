@@ -186,6 +186,11 @@ namespace Content.Server.GameTicking
                 Log.Debug($"Player {player.Session} preferences: [{string.Join(", ", player.JobPreferenceOrder)}]");
             }
 
+            Log.Debug($"""
+                Weighted jobs:
+                  {string.Join("\n  ", weightedJobs)}
+                """);
+
             foreach (var newPlayer in players)
             {
                 // Game rules or systems add slots that can be assigned to players.
@@ -224,7 +229,6 @@ namespace Content.Server.GameTicking
                     if (!jobAssignments.ContainsKey(weightedJob))
                         continue;
 
-                    Log.Debug($"Assigning weighted job {weightedJob}");
                     var reprocessStartIndex = processingPlayers.Count;
                     foreach (var unassigned in jobAssignments[weightedJob].Where(item => item.IsAssignable))
                     {
@@ -235,7 +239,7 @@ namespace Content.Server.GameTicking
                         }
                     }
 
-                    if (reprocessStartIndex >= processingPlayers.Count)
+                    if (reprocessStartIndex < processingPlayers.Count)
                         Log.Debug($"Some players reassigned to weighted job {weightedJob}");
 
                     // If someone was re-assigned we have to reprocess all players that came after,
