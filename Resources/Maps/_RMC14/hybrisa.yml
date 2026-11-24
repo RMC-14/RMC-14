@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/23/2026 19:21:57
-  entityCount: 59604
+  time: 11/24/2026 18:00:47
+  entityCount: 59603
 maps:
 - 1
 grids:
@@ -101334,7 +101334,7 @@ entities:
       containers:
       - drink
     - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.20745055
+      sprayFizzinessThresholdRoll: 0.2160254
     - type: MeleeWeapon
       nextAttack: -8152.2251811
     - type: EmitSoundOnCollide
@@ -105251,7 +105251,7 @@ entities:
       pos: -202.5,-33.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -43906.527
+      secondsUntilStateChange: -43932.434
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -144318,7 +144318,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -168491.22
+      secondsUntilStateChange: -168517.12
       state: Opening
   - uid: 12644
     components:
@@ -181059,7 +181059,7 @@ entities:
       pos: -215.5,-133.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -111264.41
+      secondsUntilStateChange: -111290.31
       state: Opening
 - proto: RMCCurtainRed
   entities:
@@ -181252,7 +181252,7 @@ entities:
       pos: -37.5,-24.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -84866.15
+      secondsUntilStateChange: -84892.055
       state: Opening
   - uid: 18991
     components:
@@ -250777,13 +250777,6 @@ entities:
     components:
     - type: Transform
       pos: -207.4975,-99.33156
-      parent: 1
-- proto: RMCPlantedFlagWeYa
-  entities:
-  - uid: 28040
-    components:
-    - type: Transform
-      pos: -131.5,-141.5
       parent: 1
 - proto: RMCPlanter
   entities:
