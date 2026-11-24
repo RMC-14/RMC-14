@@ -541,11 +541,10 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: charge_spit
+      state: store_acid_0
     useDelay: 5
   - type: InstantAction
     event: !type:XenoDissolverStoreAcidActionEvent
   - type: XenoActionPlasma
     cost: 150
   - type: RMCDazeableAction
-  - type: RMCInContainerAction

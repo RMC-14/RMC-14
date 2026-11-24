@@ -472,7 +472,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno, plasma))
             return false;
 
-        _audio.PlayPredicted(sound, xeno, xeno);
+        _audio.PlayPredicted(sound, xeno, predicted ? xeno : null);
         if (_net.IsClient && !_gunPrediction.GunPrediction || !_timing.IsFirstTimePredicted)
             return true;
 

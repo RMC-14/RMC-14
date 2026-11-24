@@ -4,6 +4,8 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Dissolver;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Robust.Shared.Utility;
+using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsComponent;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
@@ -60,6 +62,7 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
         if (xeno.Comp.BombardDoafter != null)
         {
             xeno.Comp.TargetCoordinates = args.Target;
+            xeno.Comp.TargetEnt = args.Entity;
             return;
         }
 
@@ -73,6 +76,7 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
             windup -= args.WindupReductionPerStack * xeno.Comp.StoredAcid;
 
         xeno.Comp.TargetCoordinates = args.Target;
+        xeno.Comp.TargetEnt = args.Entity;
 
         var ev = new XenoDissolverBombardDoAfterEvent(spit, args.ExtraProjectiles, args.Scatter, args.Speed, args.PlasmaCost, args.MaxDistance);
         var doAfter = new DoAfterArgs(EntityManager, xeno, windup, ev, xeno) { BreakOnMove = true, RootEntity = true };
@@ -104,7 +108,7 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
         }
 
         _xenoProjectile.TryShoot(xeno, xeno.Comp.TargetCoordinates.Value, args.PlasmaCost, args.SpitId, xeno.Comp.Sound,
-            1 + args.ExtraProjectiles, args.Scatter, args.Speed, stopDistance, predicted: (stopDistance == null));
+            1 + args.ExtraProjectiles, args.Scatter, args.Speed, stopDistance, xeno.Comp.TargetEnt, predicted: (stopDistance == null));
 
         StoredAcidCooldowns(xeno);
     }
@@ -128,6 +132,10 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
     {
         xeno.Comp.StoredAcid = Math.Clamp(xeno.Comp.StoredAcid + amount, 0, xeno.Comp.MaxStoredAcid);
         _armor.UpdateArmorValue(xeno.Owner);
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoDissolverStoreAcidActionEvent>(xeno))
+        {
+            _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.Rsi(xeno.Comp.AcidIconResPath, xeno.Comp.AcidIconStatePrefix + xeno.Comp.StoredAcid));
+        }
         Dirty(xeno);
     }
 

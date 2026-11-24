@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Ranged.Components;
@@ -10,6 +11,7 @@ namespace Content.Shared.Damage.Components;
 public sealed class RequireProjectileTargetSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {
@@ -40,7 +42,7 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
             if (TerminatingOrDeleted(shooter.Value))
                 return;
 
-            if (!_container.IsEntityOrParentInContainer(shooter.Value) && !HasComp<RMCIgnoreRequiredProjectileTargetComponent>(other)) // RMC14
+            if (!_container.IsEntityOrParentInContainer(shooter.Value) && !(HasComp<RMCIgnoreRequiredProjectileTargetComponent>(other) && !_mobState.IsDead(ent))) // RMC14
                args.Cancelled = true;
         }
     }
