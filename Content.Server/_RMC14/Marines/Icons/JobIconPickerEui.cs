@@ -13,8 +13,8 @@ namespace Content.Server._RMC14.Marines.Icons;
 [UsedImplicitly]
 public sealed class JobIconPickerEui : BaseEui
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     private readonly NetEntity _target;
     public Action? OnClosed;

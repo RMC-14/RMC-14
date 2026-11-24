@@ -11,9 +11,9 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
 {
     public const string BaseLayerKey = "ghost-non-humanoid-base";
 
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private readonly Dictionary<EntProtoId, PrototypeSpriteData?> _prototypeSprites = new();
 

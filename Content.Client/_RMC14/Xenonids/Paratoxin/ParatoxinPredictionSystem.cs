@@ -17,9 +17,9 @@ namespace Content.Client._RMC14.Xenonids.Paratoxin;
 // If predicted projectiles are fixed to get re-applied during prediction, this system should be deleted entirely.
 public sealed class ParatoxinPredictionSystem : EntitySystem
 {
-    [Dependency] private readonly ParatoxinSystem _paratoxinSystem = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IClientGameTiming _timing = default!;
+    [Dependency] private ParatoxinSystem _paratoxinSystem = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IClientGameTiming _timing = default!;
 
     private readonly Queue<(GameTick Tick, EntityUid Target, int ShotId, int Stacks)> _predictedParatoxinApplications = new();
 

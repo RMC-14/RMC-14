@@ -11,8 +11,8 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed partial class VehicleSystem
 {
-    [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private void OnDemolitionInteractUsing(Entity<VehicleDemolitionComponent> ent, ref InteractUsingEvent args)
     {

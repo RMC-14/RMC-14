@@ -9,8 +9,8 @@ namespace Content.Shared._RMC14.PlayTimeTracking;
 
 public abstract class SharedRMCPlayTimeManager : IPostInjectInit
 {
-    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private ISharedPlaytimeManager _playtime = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private bool _jobsDataLoaded;
     private FrozenSet<ProtoId<PlayTimeTrackerPrototype>> _xenoJobs = [];

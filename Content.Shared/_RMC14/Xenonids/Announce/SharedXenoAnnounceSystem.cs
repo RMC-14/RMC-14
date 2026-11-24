@@ -16,7 +16,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     [Dependency] private AreaSystem _areas = default!;
     [Dependency] private XenoEvolutionSystem _xenoEvolution = default!;
 
-    [Dependency] protected readonly SharedXenoHiveSystem Hive = default!;
+    [Dependency] protected SharedXenoHiveSystem Hive = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);

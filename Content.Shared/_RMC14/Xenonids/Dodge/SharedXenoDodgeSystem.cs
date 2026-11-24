@@ -14,7 +14,7 @@ namespace Content.Shared._RMC14.Xenonids.Dodge;
 public abstract class SharedXenoDodgeSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private MovementSpeedModifierSystem _speed = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

@@ -33,7 +33,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private SharedCombatModeSystem _combatMode = default!;
 
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
     public override void Initialize()
     {

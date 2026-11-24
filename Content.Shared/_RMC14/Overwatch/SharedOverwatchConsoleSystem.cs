@@ -44,8 +44,8 @@ namespace Content.Shared._RMC14.Overwatch;
 
 public abstract class SharedOverwatchConsoleSystem : EntitySystem
 {
-    [Dependency] protected readonly ISharedPlayerManager Player = default!;
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
+    [Dependency] protected ISharedPlayerManager Player = default!;
+    [Dependency] protected SharedTransformSystem TransformSystem = default!;
 
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private AreaSystem _area = default!;

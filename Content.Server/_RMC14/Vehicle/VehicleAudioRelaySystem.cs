@@ -11,8 +11,8 @@ namespace Content.Server._RMC14.Vehicle;
 
 public sealed class VehicleAudioRelaySystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const float MuffleVolumeDb = -8f;
     private const float MaxFalloffDb = -20f;

@@ -19,13 +19,13 @@ namespace Content.Client._RMC14.Ghost;
 
 public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly DisplacementMapSystem _displacement = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private DisplacementMapSystem _displacement = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private readonly Dictionary<EntProtoId, CachedClothingData?> _clothingCache = new();
     private readonly Dictionary<EntProtoId, CachedItemData?> _itemCache = new();

@@ -17,7 +17,7 @@ namespace Content.Server._RMC14.Marines.Icons;
 [ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
 public sealed class IconCommand : ToolshedCommand
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     private SharedMarineSystem? _marineSystem;
 
@@ -116,7 +116,7 @@ public sealed class IconCommand : ToolshedCommand
     // TAB completion of job icon names for icon:set NO " " NEEDED!!
     public sealed class MarineIconStateParser : CustomTypeParser<string>
     {
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
+        [Dependency] private IPrototypeManager _protoManager = default!;
 
         public override bool TryParse(ParserContext ctx, [NotNullWhen(true)] out string? result)
         {

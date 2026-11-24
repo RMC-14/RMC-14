@@ -7,7 +7,7 @@ namespace Content.Server._RMC14.Pushup;
 
 public sealed class RMCPushupEmoteSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCPushupSystem _pushup = default!;
+    [Dependency] private SharedRMCPushupSystem _pushup = default!;
 
     private static readonly ProtoId<EmotePrototype> PushupRoutineEmote = "RMCPushupRoutine";
 

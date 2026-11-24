@@ -15,7 +15,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
 public sealed partial class XenoSpitSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
 
     private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";

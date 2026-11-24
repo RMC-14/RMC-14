@@ -25,7 +25,7 @@ namespace Content.Shared._RMC14.Explosion;
 
 public abstract partial class SharedRMCLandmineSystem : EntitySystem
 {
-    [Dependency] protected readonly GunIFFSystem GunIff = default!;
+    [Dependency] protected GunIFFSystem GunIff = default!;
 
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

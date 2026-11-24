@@ -14,13 +14,13 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 
 public sealed class GunAkimboSystem : EntitySystem
 {
-    [Dependency] private readonly CMGunSystem _cmGun = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private CMGunSystem _cmGun = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetConfigurationManager _netConfig = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly Dictionary<EntityUid, (EntityUid Gun, GameTick Tick)> _pendingOffHandShots = new();
 

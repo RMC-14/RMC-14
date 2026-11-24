@@ -24,12 +24,12 @@ namespace Content.Server._RMC14.Elevators;
 
 public sealed class RMCElevatorSystem : SharedRMCElevatorSystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly DoorSystem _door = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private DoorSystem _door = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<DoorBoltComponent> _doorBoltsQuery;

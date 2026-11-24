@@ -23,15 +23,15 @@ namespace Content.Server._RMC14.Rules;
 
 public sealed class RMCFirstDeploymentSystem : EntitySystem
 {
-    [Dependency] private readonly RMCAnnouncementOverlaySystem _announcementOverlay = default!;
-    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RMCClockSystem _rmcClock = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private RMCAnnouncementOverlaySystem _announcementOverlay = default!;
+    [Dependency] private CMDistressSignalRuleSystem _distressSignal = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private RMCClockSystem _rmcClock = default!;
+    [Dependency] private RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

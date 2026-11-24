@@ -14,9 +14,9 @@ namespace Content.Server._RMC14.Announce;
 [AdminCommand(AdminFlags.Moderator)]
 public sealed class RMCAnnouncePresetCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly RMCAnnouncementOverlaySystem _announcementOverlay = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private RMCAnnouncementOverlaySystem _announcementOverlay = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private static readonly string[] Targets = ["all", "marines", "xenos"];
 

@@ -18,11 +18,11 @@ namespace Content.Server._RMC14.GMRequest;
 /// </remarks>
 public sealed class GMRequestManager
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly Robust.Shared.Configuration.IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private Robust.Shared.Configuration.IConfigurationManager _cfg = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public Dictionary<int, GMRequestLog> Logs { get; } = new();
 

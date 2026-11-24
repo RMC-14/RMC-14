@@ -10,9 +10,9 @@ namespace Content.Server._RMC14.GMRequest;
 
 public sealed class GMRequestEui : BaseEui
 {
-    [Dependency] private readonly GMRequestManager _manager = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private GMRequestManager _manager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public GMRequestEui()
     {

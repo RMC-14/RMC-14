@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Repairable;
 
 public sealed class RMCWeldableSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
 
     public override void Initialize()
     {

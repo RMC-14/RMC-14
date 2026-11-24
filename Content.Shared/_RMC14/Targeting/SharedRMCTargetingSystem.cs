@@ -14,7 +14,7 @@ namespace Content.Shared._RMC14.Targeting;
 
 public abstract class SharedRMCTargetingSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private INetManager _net = default!;

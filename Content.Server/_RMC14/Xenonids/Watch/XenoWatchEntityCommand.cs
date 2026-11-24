@@ -9,7 +9,7 @@ internal sealed class XenoWatchEntityCommand : IConsoleCommand
 {
     public const string CommandName = "xeno_watch_entity";
 
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     public string Command => CommandName;
     public string Description => string.Empty;

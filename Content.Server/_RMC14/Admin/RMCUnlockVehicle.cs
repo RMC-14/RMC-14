@@ -12,7 +12,7 @@ namespace Content.Server._RMC14.Admin;
 [AdminCommand(AdminFlags.Fun)]
 public sealed class RMCUnlockVehicle : LocalizedEntityCommands
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override string Command => "unlockvehicle";
 

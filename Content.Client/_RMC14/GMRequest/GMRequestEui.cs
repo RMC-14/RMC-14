@@ -13,11 +13,11 @@ namespace Content.Client._RMC14.GMRequest;
 
 public sealed class GMRequestEui : BaseEui
 {
-    [Dependency] private readonly GMRequestClientManager _manager = default!;
-    [Dependency] private readonly IClientAdminManager _adminManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IEntitySystemManager _entMan = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private GMRequestClientManager _manager = default!;
+    [Dependency] private IClientAdminManager _adminManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IEntitySystemManager _entMan = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     private readonly GMRequestWindow _window;
     private readonly ICommonSession? _session;

@@ -7,11 +7,11 @@ namespace Content.Shared._RMC14.Xenonids.Destrain;
 
 public sealed class XenoDestrainSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private XenoEvolutionSystem _xenoEvolution = default!;
 
     public override void Initialize()
     {

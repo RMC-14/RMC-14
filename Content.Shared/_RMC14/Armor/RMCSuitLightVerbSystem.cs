@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Armor;
 
 public sealed class RMCSuitLightVerbSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

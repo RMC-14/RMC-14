@@ -9,9 +9,9 @@ namespace Content.Client._RMC14.Announce;
 
 public sealed class RMCAnnouncementPortraitView : Control
 {
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly Dictionary<string, Color> _colorParameters = new();
     private readonly Dictionary<string, float> _floatParameters = new();

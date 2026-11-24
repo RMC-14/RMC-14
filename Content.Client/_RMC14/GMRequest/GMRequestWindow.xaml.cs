@@ -14,9 +14,9 @@ namespace Content.Client._RMC14.GMRequest;
 [GenerateTypedNameReferences]
 public sealed partial class GMRequestWindow : DefaultWindow
 {
-    [Dependency] private readonly GMRequestClientManager _manager = default!;
-    [Dependency] private readonly IClientConsoleHost _clientConsole = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private GMRequestClientManager _manager = default!;
+    [Dependency] private IClientConsoleHost _clientConsole = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public GMRequestLog? _selectedLog;
     public int? _selectedLogId;

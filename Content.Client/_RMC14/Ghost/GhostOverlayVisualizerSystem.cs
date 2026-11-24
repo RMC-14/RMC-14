@@ -14,10 +14,10 @@ public sealed class GhostOverlayVisualizerSystem : EntitySystem
     private const string FireLayerKey = "ghost-overlay-fire";
     private const string XenoWoundLayerKey = "ghost-overlay-xeno-wound";
 
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly GhostColorSystem _ghostColor = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private GhostColorSystem _ghostColor = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

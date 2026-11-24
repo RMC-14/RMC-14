@@ -14,9 +14,9 @@ public sealed class GhostColorSystem : EntitySystem
 {
     private static readonly ProtoId<ShaderPrototype> GhostAlphaShader = "RMCGhostAlpha";
 
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private float _observerAlpha;
     private ShaderInstance _alphaShader = default!;

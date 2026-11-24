@@ -41,7 +41,7 @@ namespace Content.Shared._RMC14.Dropship;
 
 public abstract class SharedDropshipSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
 
     [Dependency] private AreaSystem _areas = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;

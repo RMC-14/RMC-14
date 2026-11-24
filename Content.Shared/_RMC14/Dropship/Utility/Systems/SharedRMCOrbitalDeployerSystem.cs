@@ -14,14 +14,14 @@ namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
 public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
 
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly SharedSupplyDropSystem SupplyDrop = default!;
+    [Dependency] protected SharedSupplyDropSystem SupplyDrop = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 

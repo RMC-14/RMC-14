@@ -11,9 +11,9 @@ namespace Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 public abstract partial class SharedXenoEggRetrieverSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] protected SharedAppearanceSystem _appearance = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
+    [Dependency] protected SharedPopupSystem _popup = default!;
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private IGameTiming _timing = default!;
 

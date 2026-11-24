@@ -6,7 +6,7 @@ namespace Content.Server._RMC14.Xenonids.Ovipositor;
 
 public sealed class XenoOvipositorHiveNotifySystem : EntitySystem
 {
-    [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private XenoAnnounceSystem _xenoAnnounce = default!;
 
     public override void Initialize()
     {

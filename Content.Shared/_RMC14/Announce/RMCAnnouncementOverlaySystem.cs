@@ -15,14 +15,14 @@ namespace Content.Shared._RMC14.Announce;
 
 public sealed class RMCAnnouncementOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedPvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private SharedRankSystem _rank = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly List<ICommonSession> _expired = new();
     private TimeSpan _portraitGrace;

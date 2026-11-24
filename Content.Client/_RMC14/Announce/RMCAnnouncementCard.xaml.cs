@@ -22,9 +22,9 @@ public sealed partial class RMCAnnouncementCard : Control, IRMCAnnouncementView
     private const float CrtCollapseEnd = 0.45f;
     private const float CrtDotEnd = 0.85f;
 
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private Color _textColor;
     private Color _titleColor;

@@ -10,10 +10,10 @@ namespace Content.Shared._RMC14.Elevators;
 
 public abstract class SharedRMCElevatorSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] protected SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] protected IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();

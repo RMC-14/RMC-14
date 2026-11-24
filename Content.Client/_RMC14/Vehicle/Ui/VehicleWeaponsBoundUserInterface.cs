@@ -10,7 +10,7 @@ namespace Content.Client._RMC14.Vehicle.Ui;
 
 public sealed class VehicleWeaponsBoundUserInterface : BoundUserInterface, IRefreshableBui
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private VehicleWeaponsMenu? _menu;
 

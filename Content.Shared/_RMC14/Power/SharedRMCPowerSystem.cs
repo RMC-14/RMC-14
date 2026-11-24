@@ -33,7 +33,7 @@ namespace Content.Shared._RMC14.Power;
 
 public abstract class SharedRMCPowerSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedPointLightSystem Pointlight = default!;
+    [Dependency] protected SharedPointLightSystem Pointlight = default!;
 
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

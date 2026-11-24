@@ -10,8 +10,8 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleSafetySystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private VehicleSystem _rmcVehicles = default!;
 
     public override void Initialize()
     {

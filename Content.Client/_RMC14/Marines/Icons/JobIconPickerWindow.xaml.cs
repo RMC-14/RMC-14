@@ -13,8 +13,8 @@ namespace Content.Client._RMC14.Marines.Icons;
 [GenerateTypedNameReferences]
 public sealed partial class JobIconPickerWindow : DefaultWindow
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IEntitySystemManager _entitySystem = default!;
 
     private static readonly ResPath TextureRoot = new("/Textures");
     private static readonly ResPath JobIconsRoot = new("/Textures/_RMC14/Interface/job_icons");

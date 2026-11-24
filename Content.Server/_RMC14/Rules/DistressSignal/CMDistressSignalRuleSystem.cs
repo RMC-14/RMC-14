@@ -155,7 +155,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private SharedXenoConstructionSystem _xenoConstruction = default!;
     [Dependency] private SharedRoleSystem _roles = default!;
     [Dependency] private LarvaQueueSystem _larvaQueue = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
+    [Dependency] private PvsOverrideSystem _pvs = default!;
 
     private float _marinesPerXeno;
     private bool _autoBalance;

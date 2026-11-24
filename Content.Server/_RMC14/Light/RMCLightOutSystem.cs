@@ -5,7 +5,7 @@ namespace Content.Server._RMC14.Light;
 
 public sealed class RMCLightOutSystem : SharedRMCLightOutSystem
 {
-    [Dependency] private readonly ExpendableLightSystem _expend = default!;
+    [Dependency] private ExpendableLightSystem _expend = default!;
 
     protected override void ExtinguishFlare(EntityUid ent)
     {

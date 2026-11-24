@@ -11,9 +11,9 @@ namespace Content.Client._RMC14.Announce;
 [GenerateTypedNameReferences]
 public sealed partial class RMCAnnouncementTitleCard : BoxContainer, IRMCAnnouncementView
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private Color _textColor;
     private Color _titleColor;
