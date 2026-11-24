@@ -444,6 +444,28 @@
     - id: RMCWeaponPistolHandcannon
 
 - type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolHandcannonForeconFilled
+  suffix: Filled, Forecon, Peregrine
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 3
+    - id: RMCWeaponPistolHandcannonCustom
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolM1911CForeconFilled
+  suffix: Filled, Forecon, M1911C
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1911
+      amount: 3
+    - id: RMCWeaponPistolM1911C
+
+- type: entity
   id: RMCM1911CBeltFilled
   parent: RMCBeltHolsterPistol
   suffix: M1911C, CO, Filled
@@ -751,6 +773,17 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMateba2006MSilver
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCBeltHolsterPistol2006MForeconFilled
+  suffix: Filled, Forecon, 2006M
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
+      amount: 3
+    - id: RMCWeaponRevolverMateba2006M
 
 - type: entity
   parent: RMCMatebaBelt

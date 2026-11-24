@@ -22,6 +22,7 @@
   description: The standard-issue bayonet of the Marines. You can slide this knife into your boots, or attach it to the end of a rifle.
   components:
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -81,6 +82,7 @@
   description: A heavy combat knife, designed for SPP special forces. Its heft and durability makes it popular for various uses in the field.
   components:
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -103,6 +105,7 @@
   description: A heavy combat knife, designed for SPP special forces. Its heft and durability makes it popular for various uses in the field.
   components:
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -125,6 +128,7 @@
   description: Forged for the elite forces of the Royal Crown Marines, the sleek, tempered construction of this blade has been lauded by its wielders.
   components:
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -147,6 +151,7 @@
   description: Forged for the elite forces of the Royal Crown Marines, the sleek, tempered construction of this blade has been lauded by its wielders.
   components:
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -169,6 +174,7 @@
   description: This thin, yet rigid dagger is favored for its combination of elegant features and lethality in hand-to-hand combat.
   components:
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -191,6 +197,7 @@
   description: This thin, yet rigid dagger is favored for its combination of elegant features and lethality in hand-to-hand combat.
   components:
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -216,6 +223,7 @@
     sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
     state: icon
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket
@@ -253,6 +261,7 @@
     sprite: _RMC14/Objects/Weapons/Melee/fs_knife.rsi
     state: icon
   - type: Clothing
+    quickEquip: false
     slots:
     - mask
     - pocket

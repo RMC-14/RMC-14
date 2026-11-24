@@ -305,7 +305,7 @@
     contents:
     - id: CMScrewdriver
     - id: CMWirecutter
-    - id: CMCrowbar
+    - id: RMCTacticalPrybar
     - id: RMCCableCoil
     - id: CMMultitool
     - id: CMWrench

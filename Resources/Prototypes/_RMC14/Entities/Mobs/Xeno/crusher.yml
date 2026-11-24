@@ -133,6 +133,13 @@
       types:
         Blunt: 60
         Structural: 750
+    hitRefundBlacklist:
+      components:
+      - MobState
+      - Barricade
+      - Sentry
+      - PlantedFlag
+      #- BellTower # TODO RMC14 whenever this is added
   - type: XenoShield
   - type: XenoEvolution
     strains:
