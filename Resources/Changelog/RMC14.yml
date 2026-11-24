@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: SabreML
-  changes:
-  - message: Reduced the size of the empty gap in chat after xeno announcements. (Deaths,
-      traps, etc.)
-    type: Tweak
-  id: 3439
-  time: '2026-06-28T01:40:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10285
 - author: CatAndHats
   changes:
   - message: Removed the incorrectly mapped Type-71 HEAP magazines from the Trijent
@@ -4401,5 +4393,13 @@
   id: 3938
   time: '2026-11-24T00:26:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10942
+- author: IceNoobXD
+  changes:
+  - message: DCC's jobicon now gets the officer outline/colors once they reach the
+      Warrant officer rank!
+    type: Add
+  id: 3939
+  time: '2026-11-24T01:24:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11168
 Name: RMC14
 Order: -1
