@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   save: false
   parent: BaseMobSpecies
   id: RMCBaseMobSpeciesOrganic
@@ -49,6 +49,7 @@
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
   - type: Woundable
+  - type: RMCBloodSplatterer
   - type: StatusEffects
     allowed:
     - Stun
@@ -341,6 +342,7 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
+  - type: RMCPushup
   - type: RMCMeleeDamageSkill
   - type: RMCStripTimeSkill
   - type: RMCDisarm

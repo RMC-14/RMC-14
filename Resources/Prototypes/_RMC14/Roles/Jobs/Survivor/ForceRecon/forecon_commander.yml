@@ -38,7 +38,7 @@
         tags:
         - RMCSquadFORECON
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetForeconNoPistol
+      preset: RMCSurvivorPresetForeconCommander
     - type: SpotterWhitelist
     - type: RMCAwardRecommendation
       maxRecommendations: 4
@@ -49,7 +49,6 @@
   parent: RMCGearForeconBase
   id: RMCGearForeconCommander
   equipment:
-    belt: RMCMatebaBeltForeconFilled
     outerClothing: RMCJacketWindbreakerForeconFilled
     back: RMCSatchelMarineForeconSurvivorCommanderFill
     id: CMIDCardGold
@@ -71,3 +70,16 @@
   icon:
     sprite: _RMC14/Interface/job_icons/Misc/other.rsi
     state: hudsquad_vo
+
+- type: entity
+  parent: RMCSurvivorPresetForecon
+  id: RMCSurvivorPresetForeconCommander
+  name: forecon commander survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomWeapon: # 50% for mateba, 25% for peregrine, 25% for M1911C
+    - [ RMCMatebaBeltForeconFilled ]
+    - [ RMCBeltHolsterPistol2006MForeconFilled ]
+    - [ RMCBeltHolsterPistolHandcannonForeconFilled ]
+    - [ RMCBeltHolsterPistolM1911CForeconFilled ]

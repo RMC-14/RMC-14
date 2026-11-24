@@ -630,6 +630,10 @@
         points: 15
       - id: RMCMagazinePistolHandcannonHIAP
         points: 20
+      - id: RMCMagazinePistolM1911HI
+        points: 15
+      - id: RMCMagazinePistolM1911HIAP
+        points: 20
     - name: Shotgun Ammunition
       entries:
       - id: RMCBoxShotgunBuckshot
@@ -794,7 +798,7 @@
       entries:
       - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetSeniorCommand
-      - id: CMMRE 
+      - id: CMMRE
 # TODO: - id: Trench Whistle
     - name: Uniform # TODO: Port this.
       jobs:
@@ -1200,7 +1204,7 @@
       - CMChiefEngineer
       choices: { CMCombatHelmet: 1 }
       entries:
-      - id: RMCArmorHelmetM10SO
+      - id: RMCArmorHelmetM10CELO
       - id: CMArmorHelmetM10Tech
     - name: Mask
       jobs:
@@ -1237,8 +1241,11 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: RMCOuterClothingExternalWebbing
+      - id: CMHandsInsulated
+      - id: CMJumpsuitQM
+      - id: CMSatchelMarineTech
       - id: RMCQuartermasterJacket
+      - id: RMCOuterClothingExternalWebbing
     - name: Gloves
       jobs:
       - CMQuartermaster
@@ -1250,9 +1257,12 @@
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
+      - id: RMCHeadCapQuartermaster
+        recommended: true
       - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
+        name: Cargo Cap
     - name: Personal Sidearm
       jobs:
       - CMQuartermaster
@@ -1274,7 +1284,7 @@
       entries:
       - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
-      - id: RMCArmorHelmetM10SO
+      - id: RMCArmorHelmetM10CELO
       - id: CMBootsBlackFilled
     - name: Patches
       jobs:
@@ -1569,7 +1579,7 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineTech
-      - id: CMSatchel 
+      - id: CMSatchel
     - name: Personal Sidearm
       jobs:
       - CMAuxiliarySupportOfficer
