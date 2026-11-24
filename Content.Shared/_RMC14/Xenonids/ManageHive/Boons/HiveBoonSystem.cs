@@ -23,6 +23,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -58,6 +59,7 @@ public sealed class HiveBoonSystem : EntitySystem
     [Dependency] private ISerializationManager _serialization = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private static readonly EntProtoId<HiveBoonDefinitionComponent> KingBoonId = "RMCHiveBoonKing";
     private static readonly EntProtoId<HiveKingCocoonComponent> KingCocoonId = "RMCHiveCocoonKing";
@@ -788,6 +790,8 @@ public sealed class HiveBoonSystem : EntitySystem
             var king = SpawnAtPosition(cocoonComp.Spawn, cocoonId.ToCoordinates());
             _hive.SetSameHive(cocoonId, king);
             EnsureComp<HiveConstructionSuppressAnnouncementsComponent>(cocoonId);
+            // Audio
+            _audio.PlayGlobal(cocoonComp.KingMusic, Filter.Broadcast(), true);
             QueueDel(cocoonId);
 
             foreach (var (user, _) in votes)

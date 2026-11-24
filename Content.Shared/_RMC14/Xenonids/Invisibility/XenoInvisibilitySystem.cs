@@ -1,5 +1,6 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
@@ -55,20 +56,26 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
-        if (TryComp<XenoActiveInvisibleComponent>(xeno, out var invis))
+        if (TryComp<XenoActiveInvisibleComponent>(xeno, out var xenoInvis))
         {
-            var refundedCooldown = GetRefundedCooldown(xeno, invis, xeno.Comp.ManualRefundMultiplier);
-            RemoveInvisibility((xeno, invis), refundedCooldown);
+            var refundedCooldown = GetRefundedCooldown(xeno, xenoInvis, xeno.Comp.ManualRefundMultiplier);
+            RemoveInvisibility((xeno, xenoInvis), refundedCooldown);
         }
         else
         {
-            var active = EnsureComp<XenoActiveInvisibleComponent>(xeno);
-            active.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
-            active.FullCooldown = xeno.Comp.FullCooldown;
-            active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
+            xenoInvis = EnsureComp<XenoActiveInvisibleComponent>(xeno);
+            xenoInvis.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
+            xenoInvis.FullCooldown = xeno.Comp.FullCooldown;
+            xenoInvis.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
+            Dirty(xeno, xenoInvis);
+
+            var invis = EnsureComp<EntityActiveInvisibleComponent>(xeno);
+            invis.Opacity = xeno.Comp.Opacity;
+            invis.DarkFactor = xeno.Comp.DarkFactor;
+            Dirty(xeno, invis);
 
             //Half a second cooldown to prevent double clicks
-            StartCooldown((xeno, active), xeno.Comp.ToggleLockoutTime, true);
+            StartCooldown((xeno, xenoInvis), xeno.Comp.ToggleLockoutTime, true);
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         }
     }
@@ -138,6 +145,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
     private void RemoveInvisibility(Entity<XenoActiveInvisibleComponent> xeno, TimeSpan cooldownTime)
     {
         RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
+        RemCompDeferred<EntityActiveInvisibleComponent>(xeno);
         StartCooldown(xeno, cooldownTime, false);
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
 

@@ -2,10 +2,9 @@ using System.Numerics;
 using Content.Client._RMC14.UserInterface;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Localization;
-using Robust.Shared.Maths;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids.Egg;
 using JetBrains.Annotations;
 
 namespace Content.Client._RMC14.TacticalMap;
@@ -69,7 +68,19 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         Refresh();
 
         Window.Wrapper.SetupUpdateButton(msg => SendPredictedMessage(msg));
+        if (EntMan.HasComponent<XenoOvipositorCapableComponent>(Owner))
+            Window.Wrapper.Map.OnEntityBlipClicked = OnEntityBlipClicked;
+
         Window.Wrapper.Map.OnQueenEyeMove += position => SendPredictedMessage(new TacticalMapQueenEyeMoveMsg(position));
+    }
+
+    private bool OnEntityBlipClicked(int entityId, TacticalMapBlip blip)
+    {
+        if (!blip.RemotelyRemovable)
+            return false;
+
+        SendMessage(new XenoRemoteStructureRemovalBuiMsg(new NetEntity(entityId)));
+        return true;
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -106,14 +117,14 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         base.Dispose(disposing);
     }
 
-    public void Refresh()
+    public void Refresh(EntityUid? watchTargetUid = null, bool? liveUpdate = null)
     {
         if (Window == null)
             return;
 
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
         Window.Wrapper.SetLineLimit(lineLimit);
-        UpdateBlips();
+        UpdateBlips(watchTargetUid, liveUpdate);
         UpdateLabels();
         UpdateTimestamps();
 
@@ -151,7 +162,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         _refreshed = true;
     }
 
-    private void UpdateBlips()
+    private void UpdateBlips(EntityUid? watchTargetUid = null, bool? liveUpdate = null)
     {
         if (Window == null)
             return;
@@ -190,11 +201,46 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
 
         Window.Wrapper.UpdateBlips(blips, entityIds);
 
-        int? localPlayerId = _player.LocalEntity != null
-            ? (int?)EntMan.GetNetEntity(_player.LocalEntity.Value)
+        UpdateLocationPings(watchTargetUid, liveUpdate);
+    }
+
+    private void UpdateLocationPings(EntityUid? watchTargetUid = null, bool? liveUpdate = null)
+    {
+        if (Window == null)
+            return;
+
+        NetEntity? localPlayerNetEntity = _player.LocalEntity != null
+            ? EntMan.GetNetEntity(_player.LocalEntity.Value)
             : null;
+        var localPlayerId = (int?)localPlayerNetEntity ?? null;
+
         Window.Wrapper.Map.SetLocalPlayerEntityId(localPlayerId);
         Window.Wrapper.Canvas.SetLocalPlayerEntityId(localPlayerId);
+
+        // EntityUid.Invalid is used to denote an Unwatch event, non-null means a Watch event
+        if (watchTargetUid == null)
+            return;
+
+        int? targetId = watchTargetUid != EntityUid.Invalid
+            ? (int?)EntMan.GetNetEntity(watchTargetUid)
+            : null;
+
+        Vector2i? indices = targetId != null
+            ? GetWatchingIndices(watchTargetUid.Value)
+            : null;
+
+        Window.Wrapper.Map.SetWatchingData(targetId, liveUpdate, indices);
+        Window.Wrapper.Canvas.SetWatchingData(targetId, liveUpdate, indices);
+    }
+
+    private Vector2i? GetWatchingIndices(EntityUid ent)
+    {
+        Vector2i indices = Vector2i.Zero;
+
+        EntMan.System<TacticalMapSystem>().HasValidPosition(
+            ent, ref indices);
+
+        return indices == Vector2i.Zero ? null : indices;
     }
 
     private void UpdateLabels()

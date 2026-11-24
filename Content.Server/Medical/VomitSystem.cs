@@ -4,6 +4,7 @@ using Content.Server.Forensics;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Medical.Vomit;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
