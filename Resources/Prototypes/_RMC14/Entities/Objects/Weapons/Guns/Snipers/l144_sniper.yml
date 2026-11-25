@@ -193,7 +193,7 @@
     amount: 50
   - type: AimedShotEffect
     extraHits: 1
-    slowDuration: 6
+    slowDuration: 3
 
 - type: entity
   parent: RMCCartridgeSniper10x28mmSH
@@ -223,8 +223,8 @@
         minMobSize: VerySmallXeno
       maxRange: 32
       losesEffectWithRange: true
-      stunTime: 1
-      slowTime: 2
+      stunTime: 1.5
+      slowTime: 3
   - type: RMCProjectileAccuracy
     accuracy: 125
     thresholds:
@@ -237,8 +237,8 @@
     rangeLossPerHit: 1
   - type: AimedShotEffect
     extraHits: 1
-    superSlowDuration: 2
-    slowDuration: 3
+    superSlowDuration: 3
+    slowDuration: 4.5
   - type: RMCDebilitate
     blacklist:
       components:
