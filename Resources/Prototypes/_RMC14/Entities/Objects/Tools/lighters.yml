@@ -35,7 +35,7 @@
   id: RMCZippo
   components:
   - type: Sprite
-    sprite:  _RMC14/Objects/Tools/Lighters/zippo.rsi
+    sprite: _RMC14/Objects/Tools/Lighters/zippo.rsi
     layers:
     - state: closed
       map: ["base"]
@@ -52,11 +52,6 @@
   - type: Item
     size: Tiny
     sprite: _RMC14/Objects/Tools/Lighters/zippo.rsi
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - suitstorage
-  - type: RMCLighter
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/zippo.rsi
@@ -65,10 +60,10 @@
     spriteLayer: lighter_flame
     inhandVisuals:
       left:
-      - state: inhand-left-flame
+      - state: zippoon-inhand-left
         shader: unshaded
       right:
-      - state: inhand-right-flame
+      - state: zippoon-inhand-right
         shader: unshaded
 
 - type: entity
@@ -77,25 +72,51 @@
   parent: RMCZippo
   id: RMCZippoExec
   components:
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Tools/Lighters/execzippo.rsi
+    heldPrefix: execzippo
   - type: Sprite
-    sprite:  _RMC14/Objects/Tools/Lighters/execzippo.rsi
+    sprite: _RMC14/Objects/Tools/Lighters/execzippo.rsi
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/execzippo.rsi
       state: helmet
+  - type: ToggleableVisuals
+    spriteLayer: lighter_flame
+    inhandVisuals:
+      left:
+      - state: execzippoon-inhand-left
+        shader: unshaded
+      right:
+      - state: execzippoon-inhand-right
+        shader: unshaded
 
 - type: entity
-  name: golden zippo lighter
+  name: Golden Zippo Lighter
   description: A gold-anodized Zippo lighter. Ostentatious, but it certainly stands out.
   parent: RMCZippo
   id: RMCZippoGold
   components:
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Tools/Lighters/goldzippo.rsi
+    heldPrefix: goldzippo
   - type: Sprite
-    sprite:  _RMC14/Objects/Tools/Lighters/goldzippo.rsi
+    sprite: _RMC14/Objects/Tools/Lighters/goldzippo.rsi
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/goldzippo.rsi
       state: helmet
+  - type: ToggleableVisuals
+    spriteLayer: lighter_flame
+    inhandVisuals:
+      left:
+      - state: goldzippoon-inhand-left
+        shader: unshaded
+      right:
+      - state: goldzippoon-inhand-right
+        shader: unshaded
 
 - type: entity
   name: cheap lighter
@@ -104,7 +125,7 @@
   id: RMCLighter
   components:
   - type: Item
-    heldPrefix: null
+    heldPrefix: lighter_c #TODO: Make the in-hand visual update with randomized sprite
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -112,7 +133,7 @@
     soundDeactivate:
       collection: lighterOffSounds
   - type: Sprite
-    sprite:  _RMC14/Objects/Tools/Lighters/basic.rsi
+    sprite: _RMC14/Objects/Tools/Lighters/basic.rsi
     layers:
     - state: lighter_c
       map: ["base"]
@@ -126,15 +147,14 @@
       map: ["flame"]
       visible: false
       shader: unshaded
-
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:
       left:
-      - state: inhand-left-flame
+      - state: lighter_flame_on-inhand-left
         shader: unshaded
       right:
-      - state: inhand-right-flame
+      - state: lighter_flame_on-inhand-right
         shader: unshaded
   - type: RandomSprite
     available:

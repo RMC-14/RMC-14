@@ -863,6 +863,7 @@
           tags:
           - CMWeaponPistolM1984
           - CMWeaponPistolM1911
+          - RMCWeaponPistolM1911C
       mk80_fill:
         whitelist:
           tags:
@@ -944,6 +945,32 @@
     - id: RMCMagazinePistolNP92
       amount: 6
     - id: RMCWeaponPistolNP92
+
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCBeltHolsterRevolverSPP
+  name: Type 47-S revolver holster rig
+  description: The Type 47-S is the standard load-bearing equipment of the SPP. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry a revolver and speedloaders, and is most commonly carried by SNCOs and officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_spp.rsi
+    layers:
+    - state: icon-front
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: zhnk72 # TODO RMC14 per-gun underlay
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+      offset: -0.065, -0.085
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_spp.rsi
+      state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_spp.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: RMCBeltHolsterPistol
@@ -1713,6 +1740,17 @@
       sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
     - type: ItemCamouflage
       camouflageVariations: {}
+
+- type: entity
+  parent: CMBeltUtility
+  id: RMCBeltUtilityRCM
+  name: L55 pattern toolbelt rig
+  description: The L55 is the standard load-bearing equipment of the Royal Crown Marines. It consists of a modular belt with various clips. This version features two ergonomic pouches intended to carry various tools into combat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/rcm_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/rcm_utility.rsi
 
 - type: entity
   parent: CMBeltBaseStorage

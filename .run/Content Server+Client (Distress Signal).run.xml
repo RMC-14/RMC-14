@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Content Server+Client (Distress Signal)" type="CompoundRunConfigurationType">
+    <toRun name="Content.Client" type="DotNetProject" />
+    <toRun name="Content.Server (Distress Signal)" type="DotNetProject" />
+    <method v="2" />
+  </configuration>
+</component>

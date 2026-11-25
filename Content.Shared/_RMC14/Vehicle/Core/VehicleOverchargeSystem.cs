@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Input;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
@@ -23,21 +22,18 @@ public sealed class VehicleOverchargeSystem : EntitySystem
         if (_net.IsClient)
         {
             CommandBinds.Builder
-                .Bind(CMKeyFunctions.CMUniqueAction, InputCmdHandler.FromDelegate(session =>
-
-                {
-                    if (session?.AttachedEntity is not { } user)
-                        return;
-
-                    if (!_rmcVehicles.TryResolveControlledVehicle(user, out var vehicleUid))
-                        return;
-
-                    RaiseNetworkEvent(new VehicleOverchargeRequestEvent(GetNetEntity(vehicleUid)));
-                }, handle: false))
+                .Bind(CMKeyFunctions.RMCVehicleOvercharge, new VehicleOperatorInputCmdHandler(_rmcVehicles,
+                    vehicle => RaiseNetworkEvent(new VehicleOverchargeRequestEvent(GetNetEntity(vehicle)))))
                 .Register<VehicleOverchargeSystem>();
         }
 
         SubscribeNetworkEvent<VehicleOverchargeRequestEvent>(OnOverchargeRequest);
+    }
+
+    public override void Shutdown()
+    {
+        if (_net.IsClient)
+            CommandBinds.Unregister<VehicleOverchargeSystem>();
     }
 
     private void OnOverchargeRequest(VehicleOverchargeRequestEvent ev, EntitySessionEventArgs args)

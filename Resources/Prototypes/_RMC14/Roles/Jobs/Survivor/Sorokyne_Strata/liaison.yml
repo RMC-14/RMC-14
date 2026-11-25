@@ -6,7 +6,7 @@
   startingGear: RMCGearSurvivorHalcyonLiaison
   accessGroups:
   - ColonistCorporate
-  spawnMenuRoleName: Halcyon Corporation Liaison (Sorokyne Survivor)
+  spawnMenuRoleName: Halcyon Liaison (Sorokyne Survivor)
   icon: "RMCJobIconHalcyonExec"
   ranks:
     RMCRankHalcyonExecutiveSpecialist:

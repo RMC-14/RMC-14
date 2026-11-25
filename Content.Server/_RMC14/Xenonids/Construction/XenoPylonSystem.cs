@@ -4,6 +4,7 @@ using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Events;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -22,6 +23,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
@@ -47,6 +49,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         base.Initialize();
 
         SubscribeLocalEvent<HiveCoreComponent, DestructionEventArgs>(OnHiveCoreDestruction);
+        SubscribeLocalEvent<HiveCoreComponent, TimedDespawnEvent>(OnHiveCoreDestruction);
 
         SubscribeLocalEvent<XenoComponent, GhostRoleSpawnerUsedEvent>(OnXenoSpawnerUsed);
 
@@ -57,7 +60,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         SubscribeLocalEvent<HiveCoreComponent, StepTriggeredOffEvent>(OnHiveCoreStepTriggered);
     }
 
-    private void OnHiveCoreDestruction(Entity<HiveCoreComponent> ent, ref DestructionEventArgs args)
+    private void OnHiveCoreDestruction<T>(Entity<HiveCoreComponent> ent, ref T args)
     {
         if (_hive.GetHive(ent.Owner) is { } hive &&
             _gameTicker.RoundDuration() > hive.Comp.PreSetupCutoff)
@@ -160,7 +163,9 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
 
     private bool CanTrigger(EntityUid user)
     {
-        return _tagSystem.HasTag(user, Larva) && (_mobState.IsDead(user) || _mind.GetMind(user) == null);
+        return _tagSystem.HasTag(user, Larva)
+            && !HasComp<XenoBanishComponent>(user)
+            && (_mobState.IsDead(user) || _mind.GetMind(user) == null);
     }
 
     private void OnHiveCoreStepTriggered(Entity<HiveCoreComponent> core, ref StepTriggeredOffEvent args)

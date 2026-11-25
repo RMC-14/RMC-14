@@ -180,13 +180,13 @@
       collection: XenoFootstepLarge
       params:
         volume: 0
-#  - type: RandomSound
-#    sound:
-#      collection: XenoQueenBreath # TODO RMC14
-#      params:
-#        volume: -10
-#    min: 45
-#    max: 60
+  - type: RandomSound
+    sound:
+      collection: XenoQueenBreath
+      params:
+        volume: 0
+    min: 45
+    max: 60
   - type: SoundOnDeath
     sound:
       path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
@@ -312,6 +312,7 @@
     #    strains:
     #    - RMCXenoQueenMaid
     #    - RMCXenoQueenMagical
+    #    - RMCXenoQueenChristmas
     #    - RMCXenoQueenWitch
 
 - type: entity
@@ -393,10 +394,38 @@
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
   - type: XenoStrain
     name: rmc-xeno-witch-name
     description: rmc-xeno-witch-description
     popup: rmc-xeno-witch-popup
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenChristmas
+  suffix: Christmas Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/christmas_queen/christmas_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/christmas_queen/christmas_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: RMCActionOrder
+    id: CMXenoQueenImmature
+  - type: XenoStrain
+    name: rmc-xeno-christmasqueen-name
+    description: rmc-xeno-christmasqueen-description
+    popup: rmc-xeno-christmasqueen-popup
+
 
 - type: entity
   parent: RMCXenoQueenBase
@@ -443,7 +472,7 @@
     cost: 70
   - type: XenoPheromones
     pheromonesMultiplier: 3
-    pheroSuffix: strong  
+    pheroSuffix: strong
   - type: WhitelistPickup
     whitelist:
       components:
@@ -490,7 +519,7 @@
         Brute: 20
   - type: RMCActionOrder
     id: RMCXenoQueenBlood
-      
+
 
 - type: entity
   parent: StationAiHolo

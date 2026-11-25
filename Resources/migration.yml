@@ -1561,9 +1561,10 @@ RMCMapInsertSorokyneSPPSOFAlt: RMCMapInsertSorokyneSPPSpetsnazAlt
 
 # 2026-10-25
 CMIV: RMCIVStand
-  
+
 # 2026-11-09
 RMCSpawnerCorpseUNMCMilitaryPoliceRandom: RMCSpawnerCorpseUNMCVeteranRiflemanRandom
+LockerAtmospherics: RMCLockerEngineerAtmos
 
 # 2026-11-20
 WeaponSMGMP5: RMCWeaponSMGPCAC5A4
@@ -1586,3 +1587,5 @@ RMCBoxMagazineRifleM16: RMCBoxMagazineRifleCR16
 RMCAttachmentM16Stock: RMCAttachmentCR16Stock
 RMCAttachmentM16StockCollapsible: RMCAttachmentCR16StockCollapsible
 RMCCartridgeRifleM16: RMCCartridgeRifleCR16
+
+RMCSpawnPointSurvivorHalcyonDynamicsLiaison: RMCSpawnPointSurvivorHalcyonLiaison

@@ -779,7 +779,7 @@
     state: spp1left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPPRight
   suffix: SPP, 1, Right
   components:
@@ -787,7 +787,7 @@
     state: spp1right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP2Left
   suffix: SPP, 2, Left
   components:
@@ -795,7 +795,7 @@
     state: spp2left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP2Right
   suffix: SPP, 2, Right
   components:
@@ -803,7 +803,7 @@
     state: spp2right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP3Left
   suffix: SPP, 3, Left
   components:
@@ -811,7 +811,7 @@
     state: spp3left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP3Right
   suffix: SPP, 3, Right
   components:
@@ -819,7 +819,7 @@
     state: spp3right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP4Left
   suffix: SPP, 4, Left
   components:
@@ -827,7 +827,7 @@
     state: spp4left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP4Right
   suffix: SPP, 4, Right
   components:
@@ -835,7 +835,7 @@
     state: spp4right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP5Left
   suffix: SPP, 5, Left
   components:
@@ -843,7 +843,7 @@
     state: spp5left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP5Right
   suffix: SPP, 5, Right
   components:
@@ -851,7 +851,7 @@
     state: spp5right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP6Left
   suffix: SPP, 6, Left
   components:
@@ -859,7 +859,7 @@
     state: spp6left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP6Right
   suffix: SPP, 6, Right
   components:
@@ -867,7 +867,7 @@
     state: spp6right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP7Left
   suffix: SPP, 7, Left
   components:
@@ -875,7 +875,7 @@
     state: spp7left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP7Right
   suffix: SPP, 7, Right
   components:
@@ -883,7 +883,7 @@
     state: spp7right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP8Left
   suffix: SPP, 8, Left
   components:
@@ -891,7 +891,7 @@
     state: spp8left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP8Right
   suffix: SPP, 8, Right
   components:
@@ -899,7 +899,7 @@
     state: spp8right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP9Left
   suffix: SPP, 9, Left
   components:
@@ -907,7 +907,7 @@
     state: spp9left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP9Right
   suffix: SPP, 9, Right
   components:
@@ -915,7 +915,7 @@
     state: spp9right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP10Left
   suffix: SPP, 10, Left
   components:
@@ -923,7 +923,7 @@
     state: spp10left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP10Right
   suffix: SPP, 10, Right
   components:
@@ -931,7 +931,7 @@
     state: spp10right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP11Left
   suffix: SPP, 11, Left
   components:
@@ -939,7 +939,7 @@
     state: spp11left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP11Right
   suffix: SPP, 11, Right
   components:
@@ -947,7 +947,7 @@
     state: spp11right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP12Left
   suffix: SPP, 12, Left
   components:
@@ -955,7 +955,7 @@
     state: spp12left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP12Right
   suffix: SPP, 12, Right
   components:
@@ -963,7 +963,7 @@
     state: spp12right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP13Left
   suffix: SPP, 13, Left
   components:
@@ -971,7 +971,7 @@
     state: spp13left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP13Right
   suffix: SPP, 13, Right
   components:
@@ -979,7 +979,7 @@
     state: spp13right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP14Left
   suffix: SPP, 14, Left
   components:
@@ -987,7 +987,7 @@
     state: spp14left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP14Right
   suffix: SPP, 14, Right
   components:
@@ -995,7 +995,7 @@
     state: spp14right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP15Left
   suffix: SPP, 15, Left
   components:
@@ -1003,7 +1003,7 @@
     state: spp15left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP15Right
   suffix: SPP, 15, Right
   components:
@@ -1011,7 +1011,7 @@
     state: spp15right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP16Left
   suffix: SPP, 16, Left
   components:
@@ -1019,7 +1019,7 @@
     state: spp16left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP16Right
   suffix: SPP, 16, Right
   components:
@@ -1027,7 +1027,7 @@
     state: spp16right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP17Left
   suffix: SPP, 17, Left
   components:
@@ -1035,7 +1035,7 @@
     state: spp17left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP17Right
   suffix: SPP, 17, Right
   components:
@@ -1043,7 +1043,7 @@
     state: spp17right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP18Left
   suffix: SPP, 18, Left
   components:
@@ -1051,7 +1051,7 @@
     state: spp18left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP18Right
   suffix: SPP, 18, Right
   components:
@@ -1059,7 +1059,7 @@
     state: spp18right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP19Left
   suffix: SPP, 19, Left
   components:
@@ -1067,7 +1067,7 @@
     state: spp19left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP19Right
   suffix: SPP, 19, Right
   components:
@@ -1075,7 +1075,7 @@
     state: spp19right
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP20Left
   suffix: SPP, 20, Left
   components:
@@ -1083,7 +1083,7 @@
     state: spp20left
 
 - type: entity
-  parent: RMCContainerShortSPPLeft
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortSPP20Right
   suffix: SPP, 20, Right
   components:
@@ -1202,40 +1202,6 @@
   components:
   - type: Sprite
     state: medical_right
-
-- type: entity
-  parent: RMCContainerTartarusLeft
-  id: RMCContainerShortHalcyonLeft
-  suffix: Halcyon, Left
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/containers_2.rsi
-    state: halcyon_l
-
-- type: entity
-  parent: RMCContainerShortHalcyonLeft
-  id: RMCContainerShortHalcyonRight
-  suffix: Halcyon, Right
-  components:
-  - type: Sprite
-    state: halcyon_r
-
-- type: entity
-  parent: RMCContainerTartarusLeft
-  id: RMCContainerShortNovarisLeft
-  suffix: Novaris, Left
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/containers_2.rsi
-    state: novaris_l
-
-- type: entity
-  parent: RMCContainerShortNovarisLeft
-  id: RMCContainerShortNovarisRight
-  suffix: Novaris, Right
-  components:
-  - type: Sprite
-    state: novaris_r
 
 # Vertical
 

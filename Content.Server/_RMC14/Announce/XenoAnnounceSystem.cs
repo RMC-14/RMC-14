@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -14,13 +15,14 @@ namespace Content.Server._RMC14.Announce;
 public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
+    [Dependency] private readonly RMCAnnouncementOverlaySystem _announcementOverlay = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    public override void Announce(EntityUid source, Filter filter, string message, string wrapped, SoundSpecifier? sound = null, PopupType? popup = null, bool needsQueen = false)
+    public override void Announce(EntityUid source, Filter filter, string message, string wrapped, SoundSpecifier? sound = null, PopupType? popup = null, bool needsQueen = false, RMCAnnouncementOverlay? overlay = null)
     {
-        base.Announce(source, filter, message, wrapped, sound, popup, needsQueen);
+        base.Announce(source, filter, message, wrapped, sound, popup, needsQueen, overlay);
 
         if (needsQueen)
         {
@@ -42,6 +44,7 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
 
         _chat.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrapped, source, false, true, null);
         _audio.PlayGlobal(sound, filter, true);
+        _announcementOverlay.Show(overlay, filter);
 
         if (popup == null)
             return;

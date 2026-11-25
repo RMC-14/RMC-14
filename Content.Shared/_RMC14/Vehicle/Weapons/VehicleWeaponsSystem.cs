@@ -52,8 +52,9 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, StrappedEvent>(OnWeaponSeatStrapped);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, UnstrappedEvent>(OnWeaponSeatUnstrapped);
 
-        SubscribeLocalEvent<VehicleWeaponsSeatComponent, BoundUIOpenedEvent>(OnWeaponsUiOpened);
-        SubscribeLocalEvent<VehicleWeaponsSeatComponent, BoundUIClosedEvent>(OnWeaponsUiClosed);
+        SubscribeLocalEvent<VehicleHudSeatComponent, StrappedEvent>(OnHudSeatStrapped);
+        SubscribeLocalEvent<VehicleHudSeatComponent, UnstrappedEvent>(OnHudSeatUnstrapped);
+        SubscribeLocalEvent<VehicleHudSeatComponent, BoundUIOpenedEvent>(OnWeaponsUiOpened);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, VehicleWeaponsSelectMessage>(OnWeaponsSelect);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, VehicleWeaponsStabilizationMessage>(OnWeaponsStabilization);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, VehicleWeaponsAutoModeMessage>(OnWeaponsAutoMode);
@@ -125,7 +126,6 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
 
         UpdateGunnerView(args.Buckle.Owner, vehicleUid, ent.Comp);
 
-        _ui.OpenUi(ent.Owner, VehicleWeaponsUiKey.Key, args.Buckle.Owner);
         UpdateWeaponsUiForAllOperators(vehicleUid, weapons);
     }
 
@@ -139,7 +139,6 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
 
         RemCompDeferred<VehicleWeaponsOperatorComponent>(args.Buckle.Owner);
         RemCompDeferred<VehicleWatchingComponent>(args.Buckle.Owner);
-        _ui.CloseUi(ent.Owner, VehicleWeaponsUiKey.Key, args.Buckle.Owner);
         UpdateGunnerView(args.Buckle.Owner, ent.Owner, ent.Comp, removeOnly: true);
 
         _viewToggle.DisableViewToggle(args.Buckle.Owner, ent.Owner);

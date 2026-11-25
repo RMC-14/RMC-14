@@ -530,3 +530,21 @@
   components:
     - type: Sprite
       state: lay_egg
+
+- type: entity
+  id: ActionXenoStoreAcid
+  parent: ActionXenoBase
+  name: Store Acid (150)
+  description: Store acid for your spit abilities. For each stored acid you lose 5 armor, and can have up to 5 charges at once. When your spit abilities are used, they cause all your spit abilities to go on cooldown. Without any stored acid, their cooldown is 11s, otherwise it's 1s. Stored acid will additionally go on cooldown for 4s. You can't use this during your spit's windups.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: store_acid_0
+    useDelay: 5
+  - type: InstantAction
+    event: !type:XenoDissolverStoreAcidActionEvent
+  - type: XenoActionPlasma
+    cost: 150
+  - type: RMCDazeableAction

@@ -345,7 +345,7 @@
   - type: BlockIdExamine
   - type: NoStunOnExit
   - type: RMCSpeciesSlowdownModifier
-    slowModifier: 0.75
+    slowModifier: 0.7
     superSlowModifier: 1.5
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
@@ -378,7 +378,7 @@
     xenoVisible: true
   - type: CanBeLarvaQueued
   - type: XenoLastStandable
-  # - type: RMCEquippedStorageOpenOnInteract - TODO RMC14 to use with xeno backpacks
+# - type: RMCEquippedStorageOpenOnInteract - TODO RMC14 to use with xeno backpacks
 
 - type: entity
   abstract: true
@@ -495,6 +495,7 @@
       groups:
         Brute: 30
     tailRange: 2.5
+  - type: XenoFishing
 
 - type: entity
   abstract: true
