@@ -275,7 +275,7 @@
   id: HeadwearRMC
   name: rmc-loadout-group-headwear
   minLimit: 0
-  maxLimit: 2
+  maxLimit: 3
   loadouts:
   - HeadDuragRMC
   - HeadDuragBlackRMC
