@@ -498,7 +498,7 @@
   id: PlushiesRMC
   name: rmc-loadout-group-plushies
   minLimit: 0
-  maxLimit: 2
+  maxLimit: 1
   loadouts:
   - PlushieFarwaRMC
   - PlushieBarricadeRMC
