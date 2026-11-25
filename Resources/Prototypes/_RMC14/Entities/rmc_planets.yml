@@ -604,7 +604,7 @@
       - CMJobSurvivorSoroMiner: -1
       - CMJobSurvivorFireProtectionSpecialist: 1
       CMSurvivorCorporate:
-      - CMJobSurvivorHalcyonLiaison: 2
+      - CMJobSurvivorHalcyonDynamicsLiaison: 2
       CMSurvivorDoctor:
       - CMJobSurvivorMoHDoctor: 3
       CMSurvivorEngineer:
