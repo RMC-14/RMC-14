@@ -72,6 +72,12 @@ public sealed partial class BusinessCardWindow : BaseWindow
         {
             var msg = new FormattedMessage();
             msg.AddMarkupPermissive(state.Text);
+
+            foreach (var node in msg.Nodes)
+            {
+                node.Attributes.Remove("size");
+            }
+
             ContentLabel.SetMessage(msg, AllowedTags, TextColor);
         }
     }
