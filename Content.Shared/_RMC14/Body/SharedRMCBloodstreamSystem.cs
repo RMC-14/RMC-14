@@ -228,23 +228,24 @@ public abstract class SharedRMCBloodstreamSystem : EntitySystem
             !TryComp<DamageableComponent>(ent, out var damage)) //TODO RMC14 do not process when in cryo
             return;
 
-        var bloodVolume = blood.Volume;
-
         bool isSynth = HasComp<SynthComponent>(ent);
 
         //Blood regen
 
-        if (bloodVolume < ent.Comp2.BloodNormal &&
+        if (blood.Volume < ent.Comp2.BloodNormal &&
             TryComp<HungerComponent>(ent, out var hunger) &&
             _hunger.GetHunger(hunger) >= ent.Comp2.BloodRegenNutritionCost)
         {
             _bloodstream.TryModifyBloodLevel((ent, ent.Comp1), ent.Comp2.BloodRegen);
             _hunger.ModifyHunger(ent, -ent.Comp2.BloodRegenNutritionCost);
         }
-        else if (bloodVolume > ent.Comp2.BloodNormal)
+        else if (blood.Volume > ent.Comp2.BloodNormal)
             blood.RemoveSolution(ent.Comp2.OverlimitBloodLoss);
 
-        //TODO RMC14 reduce max blood depending on heart health
+        var bloodVolume = blood.Volume;
+
+        //TODO RMC14 reduce current blood by a percent for the below checks
+        //depending on heart health
 
         if (bloodVolume > ent.Comp2.BloodSafe || !_proto.TryIndex(ent.Comp2.OxygenDamage, out var oxyDamage))
             return;
