@@ -11,7 +11,7 @@ namespace Content.Shared.Research.Systems;
 
 public abstract class SharedResearchSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedLatheSystem _lathe = default!;
 

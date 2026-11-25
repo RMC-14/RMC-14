@@ -17,12 +17,12 @@ namespace Content.Shared.Security.Systems;
 public abstract class SharedGenpopSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] protected readonly SharedIdCardSystem IdCard = default!;
+    [Dependency] protected SharedIdCardSystem IdCard = default!;
     [Dependency] private LockSystem _lock = default!;
-    [Dependency] protected readonly MetaDataSystem MetaDataSystem = default!;
+    [Dependency] protected MetaDataSystem MetaDataSystem = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
 

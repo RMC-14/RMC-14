@@ -23,7 +23,7 @@ namespace Content.Shared.Examine
         [Dependency] private SharedTransformSystem _transform = default!;
         [Dependency] private SharedContainerSystem _containerSystem = default!;
         [Dependency] private SharedInteractionSystem _interactionSystem = default!;
-        [Dependency] protected readonly MobStateSystem MobStateSystem = default!;
+        [Dependency] protected MobStateSystem MobStateSystem = default!;
 
         // RMC14
         [Dependency] private QueenEyeSystem _queenEye = default!;

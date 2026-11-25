@@ -19,7 +19,7 @@ public abstract class SharedSingularitySystem : EntitySystem
     [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private SharedEventHorizonSystem _horizons = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
-    [Dependency] protected readonly IViewVariablesManager Vvm = default!;
+    [Dependency] protected IViewVariablesManager Vvm = default!;
 #endregion Dependencies
 
     /// <summary>

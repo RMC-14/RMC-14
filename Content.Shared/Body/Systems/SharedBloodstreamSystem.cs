@@ -30,7 +30,7 @@ namespace Content.Shared.Body.Systems;
 
 public abstract class SharedBloodstreamSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
+    [Dependency] protected SharedSolutionContainerSystem SolutionContainer = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

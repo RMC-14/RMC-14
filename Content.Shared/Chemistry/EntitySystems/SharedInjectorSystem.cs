@@ -18,12 +18,12 @@ public abstract class SharedInjectorSystem : EntitySystem
     /// </summary>
     public static readonly FixedPoint2[] TransferAmounts = { 1, 5, 10, 15 };
 
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainers = default!;
-    [Dependency] protected readonly MobStateSystem MobState = default!;
-    [Dependency] protected readonly SharedCombatModeSystem Combat = default!;
-    [Dependency] protected readonly SharedDoAfterSystem DoAfter = default!;
-    [Dependency] protected readonly ISharedAdminLogManager AdminLogger = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedSolutionContainerSystem SolutionContainers = default!;
+    [Dependency] protected MobStateSystem MobState = default!;
+    [Dependency] protected SharedCombatModeSystem Combat = default!;
+    [Dependency] protected SharedDoAfterSystem DoAfter = default!;
+    [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
 
     public override void Initialize()
     {

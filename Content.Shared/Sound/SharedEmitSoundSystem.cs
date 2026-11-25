@@ -29,12 +29,12 @@ namespace Content.Shared.Sound;
 [UsedImplicitly]
 public abstract class SharedEmitSoundSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private INetManager _netMan = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
-    [Dependency] private   readonly SharedAmbientSoundSystem _ambient = default!;
-    [Dependency] private   readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected IRobustRandom Random = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambient = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private TurfSystem _turf = default!;

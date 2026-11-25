@@ -25,14 +25,14 @@ namespace Content.Shared.Anomaly;
 
 public abstract class SharedAnomalySystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
-    [Dependency] protected readonly ISharedAdminLogManager AdminLog = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected IRobustRandom Random = default!;
+    [Dependency] protected ISharedAdminLogManager AdminLog = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMapSystem _map = default!;

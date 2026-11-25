@@ -12,8 +12,8 @@ namespace Content.Shared.Ninja.Systems;
 /// </summary>
 public abstract class SharedSpaceNinjaSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedNinjaSuitSystem Suit = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedNinjaSuitSystem Suit = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
     public EntityQuery<SpaceNinjaComponent> NinjaQuery;
 

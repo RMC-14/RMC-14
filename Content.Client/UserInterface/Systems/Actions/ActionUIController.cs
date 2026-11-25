@@ -53,7 +53,7 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
     [Dependency] private IInputManager _input = default!;
 
     // RMC14
-    [Dependency] private readonly EntityMenuUIController _entityMenu = default!;
+    [Dependency] private EntityMenuUIController _entityMenu = default!;
 
     [UISystemDependency] private readonly ActionsSystem? _actionsSystem = default;
     [UISystemDependency] private readonly InteractionOutlineSystem? _interactionOutline = default;

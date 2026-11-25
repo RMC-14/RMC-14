@@ -10,8 +10,8 @@ namespace Content.Server.GameTicking.Rules.VariationPass;
 public abstract class VariationPassSystem<T> : GameRuleSystem<T>
     where T: IComponent
 {
-    [Dependency] protected readonly StationSystem Stations = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
+    [Dependency] protected StationSystem Stations = default!;
+    [Dependency] protected IRobustRandom Random = default!;
 
     public override void Initialize()
     {

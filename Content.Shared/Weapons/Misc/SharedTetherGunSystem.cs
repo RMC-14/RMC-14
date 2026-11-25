@@ -31,7 +31,7 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedJointSystem _joints = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
+    [Dependency] protected SharedTransformSystem TransformSystem = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private ThrownItemSystem _thrown = default!;
 

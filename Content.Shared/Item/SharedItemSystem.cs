@@ -17,8 +17,8 @@ namespace Content.Shared.Item;
 public abstract class SharedItemSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
-    [Dependency] private   readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
 
     private EntityQuery<FixedItemSizeStorageComponent> _fixedItemSizeStorageQuery;
 

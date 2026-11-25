@@ -22,7 +22,7 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
     [Dependency] private SharedItemSystem _itemSystem = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private TagSystem _tag = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] protected IGameTiming _timing = default!;
 
     private static readonly SlotFlags[] IgnoredSlots =
     {
@@ -35,7 +35,7 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
     private readonly Dictionary<SlotFlags, List<EntProtoId>> _data = new();
 
     public readonly Dictionary<SlotFlags, List<string>> ValidVariants = new();
-    [Dependency] protected readonly SharedUserInterfaceSystem UI = default!;
+    [Dependency] protected SharedUserInterfaceSystem UI = default!;
 
     private static readonly ProtoId<TagPrototype> WhitelistChameleonTag = "WhitelistChameleon";
 

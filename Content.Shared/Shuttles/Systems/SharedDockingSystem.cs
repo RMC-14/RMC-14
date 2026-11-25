@@ -5,7 +5,7 @@ namespace Content.Shared.Shuttles.Systems;
 
 public abstract class SharedDockingSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedTransformSystem XformSystem = default!;
+    [Dependency] protected SharedTransformSystem XformSystem = default!;
 
     public const float DockingHiglightRange = 4f;
     public const float DockRange = 1f + 0.2f;

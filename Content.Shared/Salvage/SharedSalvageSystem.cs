@@ -17,7 +17,7 @@ namespace Content.Shared.Salvage;
 
 public abstract partial class SharedSalvageSystem : EntitySystem
 {
-    [Dependency] protected readonly IConfigurationManager CfgManager = default!;
+    [Dependency] protected IConfigurationManager CfgManager = default!;
     [Dependency] private IPrototypeManager _proto = default!;
 
     /// <summary>

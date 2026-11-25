@@ -18,9 +18,9 @@ namespace Content.Shared.Station;
 
 public abstract class SharedStationSpawningSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] protected readonly InventorySystem InventorySystem = default!;
+    [Dependency] protected InventorySystem InventorySystem = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;
     [Dependency] private MetaDataSystem _metadata = default!;
     [Dependency] private SharedStorageSystem _storage = default!;

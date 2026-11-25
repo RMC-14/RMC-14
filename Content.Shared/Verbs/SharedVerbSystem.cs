@@ -11,7 +11,7 @@ namespace Content.Shared.Verbs
     {
         [Dependency] private SharedInteractionSystem _interactionSystem = default!;
         [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
-        [Dependency] protected readonly SharedContainerSystem ContainerSystem = default!;
+        [Dependency] protected SharedContainerSystem ContainerSystem = default!;
 
         public override void Initialize()
         {

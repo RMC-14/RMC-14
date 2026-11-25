@@ -24,10 +24,10 @@ namespace Content.Shared.Materials;
 public abstract class SharedMaterialReclaimerSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly SharedAmbientSoundSystem AmbientSound = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected SharedAmbientSoundSystem AmbientSound = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private EmagSystem _emag = default!;
 

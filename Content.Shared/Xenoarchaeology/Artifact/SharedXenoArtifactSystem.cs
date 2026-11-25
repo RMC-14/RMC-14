@@ -16,8 +16,8 @@ public abstract partial class SharedXenoArtifactSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected readonly IRobustRandom RobustRandom = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected IRobustRandom RobustRandom = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

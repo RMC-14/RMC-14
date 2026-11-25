@@ -13,7 +13,7 @@ namespace Content.Shared.Labels.EntitySystems;
 
 public abstract class SharedHandLabelerSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
+    [Dependency] protected SharedUserInterfaceSystem UserInterfaceSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private LabelSystem _labelSystem = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

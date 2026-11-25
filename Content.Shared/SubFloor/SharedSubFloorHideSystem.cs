@@ -20,10 +20,10 @@ namespace Content.Shared.SubFloor
     {
         [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
         [Dependency] private SharedAmbientSoundSystem _ambientSoundSystem = default!;
-        [Dependency] protected readonly SharedMapSystem Map = default!;
-        [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+        [Dependency] protected SharedMapSystem Map = default!;
+        [Dependency] protected SharedAppearanceSystem Appearance = default!;
         [Dependency] private SharedVisibilitySystem _visibility = default!;
-        [Dependency] protected readonly SharedPopupSystem _popup = default!;
+        [Dependency] protected SharedPopupSystem _popup = default!;
 
         private EntityQuery<SubFloorHideComponent> _hideQuery;
 

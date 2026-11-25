@@ -17,11 +17,11 @@ namespace Content.Server.StationEvents.Events;
 /// </summary>
 public abstract class StationEventSystem<T> : GameRuleSystem<T> where T : IComponent
 {
-    [Dependency] protected readonly IAdminLogManager AdminLogManager = default!;
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected readonly ChatSystem ChatSystem = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] protected readonly StationSystem StationSystem = default!;
+    [Dependency] protected IAdminLogManager AdminLogManager = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected ChatSystem ChatSystem = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] protected StationSystem StationSystem = default!;
 
     protected ISawmill Sawmill = default!;
 

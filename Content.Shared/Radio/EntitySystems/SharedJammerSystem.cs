@@ -10,7 +10,7 @@ public abstract class SharedJammerSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedDeviceNetworkJammerSystem _jammer = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
     public override void Initialize()
     {

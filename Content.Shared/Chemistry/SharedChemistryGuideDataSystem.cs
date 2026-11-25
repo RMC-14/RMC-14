@@ -9,7 +9,7 @@ namespace Content.Shared.Chemistry;
 /// </summary>
 public abstract class SharedChemistryGuideDataSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
 
     protected readonly Dictionary<string, ReagentGuideEntry> Registry = new();
 

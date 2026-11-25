@@ -55,7 +55,7 @@ namespace Content.Client.ContextMenu.UI
         [UISystemDependency] private readonly CombatModeSystem _combatMode = default!;
 
         // RMC
-        [Dependency] private readonly ActionUIController _action = default!;
+        [Dependency] private ActionUIController _action = default!;
 
         private bool _updating;
 

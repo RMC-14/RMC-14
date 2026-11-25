@@ -5,7 +5,7 @@ namespace Content.Shared.Sandbox
 {
     public abstract class SharedSandboxSystem : EntitySystem
     {
-        [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
+        [Dependency] protected IPrototypeManager PrototypeManager = default!;
 
         [Serializable, NetSerializable]
         protected sealed class MsgSandboxStatus : EntityEventArgs

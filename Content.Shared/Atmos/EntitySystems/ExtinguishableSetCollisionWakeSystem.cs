@@ -8,7 +8,7 @@ namespace Content.Shared.Atmos.EntitySystems;
 public sealed class ExtinguishableSetCollisionWakeSystem : EntitySystem
 {
     [Dependency]
-    private readonly CollisionWakeSystem _collisionWake = null!;
+    private CollisionWakeSystem _collisionWake = null!;
 
     public override void Initialize()
     {

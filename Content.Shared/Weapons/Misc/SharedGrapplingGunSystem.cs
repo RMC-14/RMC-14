@@ -21,7 +21,7 @@ namespace Content.Shared.Weapons.Misc;
 
 public abstract class SharedGrapplingGunSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private INetManager _netManager = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

@@ -19,14 +19,14 @@ public abstract class SharedFlatpackSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] protected readonly MachinePartSystem MachinePart = default!;
-    [Dependency] protected readonly SharedMaterialStorageSystem MaterialStorage = default!;
+    [Dependency] protected MachinePartSystem MachinePart = default!;
+    [Dependency] protected SharedMaterialStorageSystem MaterialStorage = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedToolSystem _tool = default!;

@@ -14,11 +14,11 @@ namespace Content.Shared.Devour;
 
 public abstract class SharedDevourSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] protected SharedAudioSystem _audioSystem = default!;
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
-    [Dependency] protected readonly SharedContainerSystem ContainerSystem = default!;
+    [Dependency] protected SharedContainerSystem ContainerSystem = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()

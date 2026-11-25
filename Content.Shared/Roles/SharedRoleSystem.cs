@@ -20,12 +20,12 @@ namespace Content.Shared.Roles;
 
 public abstract class SharedRoleSystem : EntitySystem
 {
-    [Dependency] private   readonly IConfigurationManager _cfg = default!;
-    [Dependency] private   readonly IEntityManager _entityManager = default!;
-    [Dependency] private   readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private   readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] protected readonly ISharedPlayerManager Player = default!;
-    [Dependency] private   readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] protected ISharedPlayerManager Player = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     // RMC14
     [Dependency] private SharedMindSystem _minds = default!;

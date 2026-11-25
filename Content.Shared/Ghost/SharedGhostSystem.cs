@@ -15,7 +15,7 @@ namespace Content.Shared.Ghost
     /// </summary>
     public abstract class SharedGhostSystem : EntitySystem
     {
-        [Dependency] protected readonly SharedPopupSystem Popup = default!;
+        [Dependency] protected SharedPopupSystem Popup = default!;
 
         public override void Initialize()
         {

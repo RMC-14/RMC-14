@@ -10,11 +10,11 @@ namespace Content.Shared.Wires;
 
 public abstract class SharedWiresSystem : EntitySystem
 {
-    [Dependency] protected readonly ISharedAdminLogManager AdminLogger = default!;
+    [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
     [Dependency] private ActivatableUISystem _activatableUI = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] protected readonly SharedToolSystem Tool = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] protected SharedToolSystem Tool = default!;
 
     public override void Initialize()
     {

@@ -12,7 +12,7 @@ namespace Content.Shared.Movement.Systems
     public sealed class MovementSpeedModifierSystem : EntitySystem
     {
         [Dependency] private IGameTiming _timing = default!;
-        [Dependency] private   readonly IConfigurationManager _configManager = default!;
+        [Dependency] private IConfigurationManager _configManager = default!;
 
         private float _frictionModifier;
         private float _airDamping;

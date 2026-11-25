@@ -12,7 +12,7 @@ namespace Content.Shared.Atmos.EntitySystems;
 public abstract class SharedGasPressureRegulatorSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
+    [Dependency] protected SharedUserInterfaceSystem UserInterfaceSystem = default!;
 
     public override void Initialize()
     {

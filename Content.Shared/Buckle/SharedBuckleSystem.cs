@@ -21,8 +21,8 @@ public abstract partial class SharedBuckleSystem : EntitySystem
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private ISharedPlayerManager _playerManager = default!;
 
-    [Dependency] protected readonly ActionBlockerSystem ActionBlocker = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected ActionBlockerSystem ActionBlocker = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
 
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private MobStateSystem _mobState = default!;

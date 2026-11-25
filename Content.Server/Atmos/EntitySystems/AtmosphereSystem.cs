@@ -35,7 +35,7 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private TileSystem _tile = default!;
     [Dependency] private MapSystem _map = default!;
-    [Dependency] public readonly PuddleSystem Puddle = default!;
+    [Dependency] public PuddleSystem Puddle = default!;
 
     private const float ExposedUpdateDelay = 1f;
     private float _exposedTimer = 0f;

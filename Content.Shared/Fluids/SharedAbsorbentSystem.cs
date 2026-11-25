@@ -22,10 +22,10 @@ public abstract class SharedAbsorbentSystem : EntitySystem
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popups = default!;
-    [Dependency] protected readonly SharedPuddleSystem Puddle = default!;
+    [Dependency] protected SharedPuddleSystem Puddle = default!;
     [Dependency] private SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
+    [Dependency] protected SharedSolutionContainerSystem SolutionContainer = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedItemSystem _item = default!;

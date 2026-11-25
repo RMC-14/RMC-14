@@ -16,7 +16,7 @@ public abstract class SharedMailingUnitSystem : EntitySystem
 {
     [Dependency] private SharedDeviceNetworkSystem _deviceNetworkSystem = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
-    [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
+    [Dependency] protected SharedUserInterfaceSystem UserInterfaceSystem = default!;
 
     private const string MailTag = "mail";
 

@@ -14,7 +14,7 @@ namespace Content.Shared.Bed;
 
 public abstract class SharedBedSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private ActionContainerSystem _actConts = default!;
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private EmagSystem _emag = default!;

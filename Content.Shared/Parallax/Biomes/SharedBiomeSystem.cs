@@ -13,9 +13,9 @@ namespace Content.Shared.Parallax.Biomes;
 
 public abstract class SharedBiomeSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager ProtoManager = default!;
+    [Dependency] protected IPrototypeManager ProtoManager = default!;
     [Dependency] private ISerializationManager _serManager = default!;
-    [Dependency] protected readonly ITileDefinitionManager TileDefManager = default!;
+    [Dependency] protected ITileDefinitionManager TileDefManager = default!;
     [Dependency] private TileSystem _tile = default!;
     [Dependency] private SharedMapSystem _map = default!;
 

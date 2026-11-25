@@ -9,8 +9,8 @@ namespace Content.Shared.Construction
     public abstract class SharedConstructionSystem : EntitySystem
     {
         [Dependency] private SharedMapSystem _map = default!;
-        [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-        [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
+        [Dependency] protected IPrototypeManager PrototypeManager = default!;
+        [Dependency] protected SharedTransformSystem TransformSystem = default!;
 
         /// <summary>
         ///     Get predicate for construction obstruction checks.

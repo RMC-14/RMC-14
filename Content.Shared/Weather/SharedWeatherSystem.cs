@@ -14,8 +14,8 @@ namespace Content.Shared.Weather;
 
 public abstract class SharedWeatherSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly IPrototypeManager ProtoMan = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected IPrototypeManager ProtoMan = default!;
     [Dependency] private ITileDefinitionManager _tileDefManager = default!;
     [Dependency] private MetaDataSystem _metadata = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

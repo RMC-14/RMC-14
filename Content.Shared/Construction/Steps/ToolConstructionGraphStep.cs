@@ -10,7 +10,7 @@ namespace Content.Shared.Construction.Steps
     public sealed partial class ToolConstructionGraphStep : ConstructionGraphStep
     {
         // Begin RMC14
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
+        [Dependency] private IPrototypeManager _protoManager = default!;
         
         [DataField("tools", required:true)]
         public List<ProtoId<ToolQualityPrototype>> Tools { get; private set; } = new();

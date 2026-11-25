@@ -28,7 +28,7 @@ public abstract class SharedRingerSystem : EntitySystem
     [Dependency] private SharedPdaSystem _pda = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
-    [Dependency] protected readonly SharedUserInterfaceSystem UI = default!;
+    [Dependency] protected SharedUserInterfaceSystem UI = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

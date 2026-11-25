@@ -35,7 +35,7 @@ namespace Content.Shared._RMC14.ParaDrop;
 public abstract partial class SharedParaDropSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
+    [Dependency] protected ActionBlockerSystem Blocker = default!;
     [Dependency] private SharedCrashLandSystem _crashLand = default!;
     [Dependency] private SharedDropshipSystem _dropship = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
