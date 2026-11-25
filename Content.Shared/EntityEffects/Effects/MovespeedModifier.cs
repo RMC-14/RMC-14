@@ -69,9 +69,7 @@ public sealed partial class MovespeedModifier : EntityEffect
     {
         var gameTiming = IoCManager.Resolve<IGameTiming>();
 
-        var offsetTime = Math.Max(status.ModifierTimer.TotalSeconds, gameTiming.CurTime.TotalSeconds);
-
-        status.ModifierTimer = TimeSpan.FromSeconds(offsetTime + time);
+        status.ModifierTimer = gameTiming.CurTime + TimeSpan.FromSeconds(time); // RMC14
 
         entityManager.Dirty(uid, status);
     }

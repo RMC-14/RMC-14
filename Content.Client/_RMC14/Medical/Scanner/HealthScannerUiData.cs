@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Medical.HUD;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.HUD.Systems;
+using Content.Shared._RMC14.Medical.Pain;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Medical.Wounds;
@@ -355,8 +356,6 @@ public sealed class HealthScannerUiData
                 AddAdvice(Loc.GetString("rmc-health-analyzer-advice-food"), window);
         }
 
-        // TODO RMC14 Pain related medical advice
-
         // Damage related
         var brute = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(BruteGroup);
         var burn = uiState.Damage.GetDamagePerGroup(_protoManager).GetValueOrDefault(BurnGroup);
@@ -396,6 +395,25 @@ public sealed class HealthScannerUiData
             uiState.State != Shared.Mobs.MobState.Dead)
         {
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-dylovene"), window);
+        }
+
+        if (uiState.Chemicals != null &&
+            !_mob.IsDead(target) &&
+            _entities.TryGetComponent<PainComponent>(target, out var pain) &&
+            pain.PerceivedPain > 5)
+        {
+            // If there's oxycodone in their system already then other painkillers won't be able to improve on that.
+            if (!uiState.Chemicals.ContainsReagent("RMCOxycodone", null))
+            {
+                if (pain.PerceivedPain > 40)
+                {
+                    AddAdvice(Loc.GetString("rmc-health-analyzer-advice-oxycodone"), window);
+                }
+                else if (!uiState.Chemicals.ContainsReagent("RMCTramadol", null))
+                {
+                    AddAdvice(Loc.GetString("rmc-health-analyzer-advice-tramadol"), window);
+                }
+            }
         }
 
         // TODO RMC14 Clone damage advice
