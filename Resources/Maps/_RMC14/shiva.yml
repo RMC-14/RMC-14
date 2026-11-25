@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/19/2026 19:40:19
-  entityCount: 18733
+  time: 11/25/2026 19:21:36
+  entityCount: 18734
 maps:
 - 1
 grids:
@@ -52527,36 +52527,6 @@ entities:
       parent: 1
 - proto: CMWindowShiva
   entities:
-  - uid: 2755
-    components:
-    - type: Transform
-      pos: 43.5,13.5
-      parent: 1
-  - uid: 2756
-    components:
-    - type: Transform
-      pos: 42.5,13.5
-      parent: 1
-  - uid: 2757
-    components:
-    - type: Transform
-      pos: 41.5,13.5
-      parent: 1
-  - uid: 2758
-    components:
-    - type: Transform
-      pos: 39.5,16.5
-      parent: 1
-  - uid: 2759
-    components:
-    - type: Transform
-      pos: 39.5,15.5
-      parent: 1
-  - uid: 2760
-    components:
-    - type: Transform
-      pos: 39.5,17.5
-      parent: 1
   - uid: 2761
     components:
     - type: Transform
@@ -52746,36 +52716,6 @@ entities:
     components:
     - type: Transform
       pos: 126.5,14.5
-      parent: 1
-  - uid: 2799
-    components:
-    - type: Transform
-      pos: 8.5,132.5
-      parent: 1
-  - uid: 2800
-    components:
-    - type: Transform
-      pos: 8.5,133.5
-      parent: 1
-  - uid: 2801
-    components:
-    - type: Transform
-      pos: 8.5,134.5
-      parent: 1
-  - uid: 2802
-    components:
-    - type: Transform
-      pos: 10.5,137.5
-      parent: 1
-  - uid: 2803
-    components:
-    - type: Transform
-      pos: 10.5,138.5
-      parent: 1
-  - uid: 2804
-    components:
-    - type: Transform
-      pos: 10.5,139.5
       parent: 1
   - uid: 2805
     components:
@@ -53577,6 +53517,38 @@ entities:
     - type: Transform
       pos: 193.5,155.5
       parent: 1
+- proto: CMWindowShivaBlue
+  entities:
+  - uid: 2755
+    components:
+    - type: Transform
+      pos: 41.5,13.5
+      parent: 1
+  - uid: 2756
+    components:
+    - type: Transform
+      pos: 42.5,13.5
+      parent: 1
+  - uid: 2757
+    components:
+    - type: Transform
+      pos: 43.5,13.5
+      parent: 1
+  - uid: 2758
+    components:
+    - type: Transform
+      pos: 39.5,16.5
+      parent: 1
+  - uid: 2759
+    components:
+    - type: Transform
+      pos: 39.5,17.5
+      parent: 1
+  - uid: 2760
+    components:
+    - type: Transform
+      pos: 39.5,15.5
+      parent: 1
 - proto: CMWindowShivaGrey
   entities:
   - uid: 2896
@@ -53942,6 +53914,38 @@ entities:
     components:
     - type: Transform
       pos: 173.5,33.5
+      parent: 1
+- proto: CMWindowShivaPink
+  entities:
+  - uid: 2799
+    components:
+    - type: Transform
+      pos: 10.5,139.5
+      parent: 1
+  - uid: 2800
+    components:
+    - type: Transform
+      pos: 10.5,138.5
+      parent: 1
+  - uid: 2801
+    components:
+    - type: Transform
+      pos: 10.5,137.5
+      parent: 1
+  - uid: 2802
+    components:
+    - type: Transform
+      pos: 8.5,134.5
+      parent: 1
+  - uid: 2803
+    components:
+    - type: Transform
+      pos: 8.5,133.5
+      parent: 1
+  - uid: 2804
+    components:
+    - type: Transform
+      pos: 8.5,132.5
       parent: 1
 - proto: CMWindowShivaRed
   entities:
@@ -54799,7 +54803,7 @@ entities:
       pos: 198.5,44.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -7290.8457
+      secondsUntilStateChange: -7472.885
       state: Opening
   - uid: 3195
     components:
@@ -55113,7 +55117,7 @@ entities:
     - type: Occluder
       enabled: False
     - type: Door
-      secondsUntilStateChange: -16790.951
+      secondsUntilStateChange: -16972.988
       state: Denying
   - uid: 3256
     components:
@@ -123738,6 +123742,13 @@ entities:
     - type: Transform
       pos: 95.5,63.5
       parent: 1
+- proto: RMCMapInsertShivaLZ2Scenarios
+  entities:
+  - uid: 17150
+    components:
+    - type: Transform
+      pos: 15.5,111.5
+      parent: 1
 - proto: RMCMapInsertShivaPanicRoomHold
   entities:
   - uid: 15779
@@ -137706,31 +137717,91 @@ entities:
     - type: Transform
       pos: 28.5,119.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        rmc_dual_tube: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
   - uid: 18170
     components:
     - type: Transform
       pos: 67.5,24.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        rmc_dual_tube: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
   - uid: 18171
     components:
     - type: Transform
       pos: 102.5,70.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        rmc_dual_tube: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
   - uid: 18172
     components:
     - type: Transform
       pos: 109.5,68.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        rmc_dual_tube: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
   - uid: 18173
     components:
     - type: Transform
       pos: 127.5,47.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        rmc_dual_tube: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
   - uid: 18174
     components:
     - type: Transform
       pos: 99.73503,13.136038
       parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        rmc_dual_tube: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
 - proto: RMCWeaponShotgunType23
   entities:
   - uid: 18175
