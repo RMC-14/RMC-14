@@ -5,12 +5,14 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Trijent Corporation Liaison (Trijent Survivor)
   startingGear: RMCGearSurvivorTrijentCorporate
+  icon: "CMJobIconLiaison"
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate
   id: RMCGearSurvivorTrijentCorporate
   equipment:
     jumpsuit: CMJumpsuitLiaisonIvy
+    back: CMSatchelSecureFillSurvivor
 
 - type: entity
   parent: CMSpawnPointJobBase

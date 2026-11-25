@@ -1,11 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -45,6 +48,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedRMCSpraySystem _rmcSpray = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
@@ -53,6 +57,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly RMCProjectileSystem _projectile = default!;
 
     public override void Initialize()
     {
@@ -80,6 +85,15 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCCanUseBroilerComponent, UniqueActionEvent>(OnBroilerUniqueAction);
         SubscribeLocalEvent<RMCCanUseBroilerComponent, ExaminedEvent>(OnBroilerUniqueActionExamine, before: [typeof(SharedGunSystem)]);
+
+        SubscribeLocalEvent<RMCFlamerIntenseModeComponent, UniqueActionEvent>(OnFlamerIntenseModeUniqueAction);
+        SubscribeLocalEvent<RMCFlamerIntenseModeComponent, RMCFlamerIntenseModeActionEvent>(OnFlamerIntenseModeAction);
+        SubscribeLocalEvent<RMCFlamerIntenseModeComponent, ExaminedEvent>(OnFlamerIntenseModeUniqueActionExamine, before: [typeof(SharedGunSystem)]);
+
+        SubscribeLocalEvent<RMCFlamerNozzleComponent, TakeAmmoEvent>(OnNozzleTakeAmmo);
+        SubscribeLocalEvent<RMCFlamerNozzleComponent, UniqueActionEvent>(OnNozzleUniqueAction);
+
+        SubscribeLocalEvent<RMCFlamerChainComponent, ComponentShutdown>(OnFlamerChainShutdown);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -147,6 +161,9 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void OnFlamerTankBeforeRangedInteract(Entity<RMCFlamerTankComponent> tank, ref BeforeRangedInteractEvent args)
     {
+        if (!args.CanReach)
+            return;
+
         if (!HasComp<RMCFlamerAmmoProviderComponent>(tank))
         {
             RefillTank(tank, ref args);
@@ -250,7 +267,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     private void OnIgniterToggle(Entity<RMCIgniterComponent> ent, ref IsHotEvent args)
     {
         if (TryComp<AttachableHolderComponent>(ent, out var holder) &&
-            holder.SupercedingAttachable != null)
+            !HasComp<RMCFlamerNozzleComponent>(holder.SupercedingAttachable))
         {
             args.IsHot = false;
             return;
@@ -325,11 +342,27 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         var chain = Spawn();
         var chainComp = EnsureComp<RMCFlamerChainComponent>(chain);
-        chainComp.Spawn = reagent.FireEntity;
+        var maxIntensity = tank.Value.Comp.MaxIntensity;
+        var maxDuration = tank.Value.Comp.MaxDuration;
+        var fireTile = reagent.FireEntity;
+        var fireReagent = reagent.ID;
+        if (TryComp(flamer, out RMCFlamerReagentOverrideComponent? overComp))
+        {
+            if (overComp.Intensity != null)
+                maxIntensity = (int)overComp.Intensity;
+            if (overComp.Duration != null)
+                maxDuration = (int)overComp.Duration;
+            if (overComp.Reagent != null)
+            {
+                fireReagent = overComp.Reagent;
+                fireTile = _reagent.Index(fireReagent).FireEntity;
+            }
+        }
+        chainComp.Spawn = fireTile;
         chainComp.Tiles = tiles;
-        chainComp.Reagent = reagent.ID;
-        chainComp.MaxIntensity = tank.Value.Comp.MaxIntensity;
-        chainComp.MaxDuration = tank.Value.Comp.MaxDuration;
+        chainComp.Reagent = fireReagent;
+        chainComp.MaxIntensity = maxIntensity;
+        chainComp.MaxDuration = maxDuration;
         chainComp.FuelPressure = (int)flamer.Comp.CostPer;
 
         Dirty(chain, chainComp);
@@ -347,6 +380,12 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     public bool TryGetFuelColor(Entity<RMCFlamerAmmoProviderComponent> flamer, out Color color)
     {
         color = default;
+
+        if (TryComp(flamer, out RMCFlamerReagentOverrideComponent? overComp) && overComp.Reagent != null)
+        {
+            color = _reagent.Index((string)overComp.Reagent).SubstanceColor;
+            return true;
+        }
         if (!TryGetTankSolution(flamer, out var solutionEnt, out _))
             return false;
 
@@ -389,6 +428,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
 
         var maxRange = Math.Min(tank.Value.Comp.MaxRange, reagent.Radius);
+        if (TryComp(flamer, out RMCFlamerReagentOverrideComponent? overComp) && overComp.Range != null)
+            maxRange = (int)overComp.Range;
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), maxRange);
         if (delta.Length() > maxRange)
             toCoordinates = fromCoordinates.Offset(normalized * range);
@@ -437,6 +478,23 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                  TryComp(tankId, out tankComp))
         {
             tankEnt = (tankId.Value, tankComp);
+
+            if (TryComp(flamer, out VehicleFlamerTankSlotsComponent? tankSlots) &&
+                _solution.TryGetSolution(tankEnt.Value.Owner, tankEnt.Value.Comp.SolutionId, out var primarySol, out _) &&
+                primarySol.Value.Comp.Solution.Volume < flamer.Comp.CostPer)
+            {
+                for (var i = 1; i < tankSlots.MaxTanks; i++)
+                {
+                    var extraSlotId = $"{flamer.Comp.ContainerId}_{i + 1}";
+                    if (!_container.TryGetContainer(flamer, extraSlotId, out var extraContainer) ||
+                        !extraContainer.ContainedEntities.TryFirstOrNull(out var extraTankId) ||
+                        !TryComp(extraTankId, out RMCFlamerTankComponent? extraTankComp))
+                        continue;
+
+                    tankEnt = (extraTankId.Value, extraTankComp);
+                    break;
+                }
+            }
         }
         else if (!display && HasComp<RMCCanUseBroilerComponent>(flamer))
         {
@@ -475,7 +533,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         return _solution.TryGetSolution(tankValue.Owner, tankValue.Comp.SolutionId, out solutionEnt, out _);
     }
 
-    private void Transfer(EntityUid source,
+    public void Transfer(EntityUid source,
         Entity<SolutionComponent> sourceSolutionEnt,
         Entity<RMCFlamerTankComponent> target,
         Entity<SolutionComponent> targetSolutionEnt,
@@ -597,6 +655,155 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     public void OnBroilerUniqueActionExamine(Entity<RMCCanUseBroilerComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
+    }
+
+    public void OnFlamerIntenseModeUniqueAction(Entity<RMCFlamerIntenseModeComponent> ent, ref UniqueActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        ent.Comp.Intense = !ent.Comp.Intense;
+        var ev = new RMCFlamerIntenseModeActionEvent();
+        ev.Performer = args.UserUid;
+        RaiseLocalEvent(ent, ev);
+        Dirty(ent);
+    }
+
+    private void OnFlamerIntenseModeAction(Entity<RMCFlamerIntenseModeComponent> ent, ref RMCFlamerIntenseModeActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        if (ent.Comp.Intense)
+        {
+            _popup.PopupClient(Loc.GetString(ent.Comp.ActivateText), ent, args.Performer);
+            _audio.PlayPredicted(ent.Comp.ActivateSound, ent, args.Performer);
+        }
+        else
+        {
+            _popup.PopupClient(Loc.GetString(ent.Comp.DeactivateText), ent, args.Performer);
+            _audio.PlayPredicted(ent.Comp.DeactivateSound, ent, args.Performer);
+        }
+        if (TryComp(ent, out RMCFlamerAmmoProviderComponent? providerComp))
+        {
+            if (!ent.Comp.Intense && ent.Comp.NormalFireCost != null)
+                providerComp.CostPer = (int)ent.Comp.NormalFireCost;
+            else if (ent.Comp.IntenseFireCost != null)
+                providerComp.CostPer = (int)ent.Comp.IntenseFireCost;
+        }
+        if (ent.Comp.HasIntenseVisuals && TryComp(ent, out AppearanceComponent? appearComp))
+            _appearance.SetData(ent, IntenseVisuals.Intense, ent.Comp.Intense, appearComp);
+        if (TryComp(ent, out RMCFlamerReagentOverrideComponent? overComp))
+        {
+            if (!ent.Comp.Intense)
+            {
+                overComp.Intensity = ent.Comp.NormalIntensity;
+                overComp.Duration = ent.Comp.NormalDuration;
+                overComp.Range = ent.Comp.NormalRange;
+                overComp.Reagent = ent.Comp.NormalFireReagent;
+            }
+            else
+            {
+                overComp.Intensity = ent.Comp.IntenseIntensity;
+                overComp.Duration = ent.Comp.IntenseDuration;
+                overComp.Range = ent.Comp.IntenseRange;
+                overComp.Reagent = ent.Comp.IntenseFireReagent;
+            }
+            /// Changes the flamer tank component to reflect the overriden values.
+            /// Only for inspect text; reagent values are replaced when firing.
+            if (TryComp(ent, out RMCFlamerTankComponent? tankComp))
+            {
+                if (overComp.Intensity != null)
+                    tankComp.MaxIntensity = (int)overComp.Intensity;
+                if (overComp.Duration != null)
+                    tankComp.MaxDuration = (int)overComp.Duration;
+                if (overComp.Range != null)
+                    tankComp.MaxRange = (int)overComp.Range;
+            }
+        }
+        Dirty(ent);
+    }
+
+    public void OnFlamerIntenseModeUniqueActionExamine(Entity<RMCFlamerIntenseModeComponent> ent, ref ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
+    }
+
+    public void ShootNozzle(Entity<RMCFlamerNozzleComponent> nozzle,
+        Entity<GunComponent> gun,
+        EntityUid? user,
+        EntityCoordinates fromCoordinates,
+        EntityCoordinates toCoordinates)
+    {
+        if (!TryComp(nozzle, out TransformComponent? transform) ||
+            !TryComp<RMCFlamerAmmoProviderComponent>(transform.ParentUid, out var flamerComp))
+        {
+            // Not attached.
+            return;
+        }
+
+        if (!TryGetTankSolution((transform.ParentUid, flamerComp), out var solution, out _) ||
+            solution.Value.Comp.Solution.Volume == FixedPoint2.Zero ||
+            !solution.Value.Comp.Solution.TryFirstOrNull(out var firstReagent) ||
+            !_reagent.TryIndex(firstReagent.Value.Reagent, out var reagent))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-flamer-empty"), gun, user);
+            return;
+        }
+
+        if (TryComp<RMCIgniterComponent>(transform.ParentUid, out var igniter) && !igniter.Enabled)
+        {
+            _popup.PopupClient(Loc.GetString(igniter.Popup), gun, user);
+            return;
+        }
+
+        solution.Value.Comp.Solution.RemoveSolution(nozzle.Comp.CostPer);
+        _solution.UpdateChemicals(solution.Value);
+
+        _audio.PlayLocal(gun.Comp.SoundGunshot, gun, gun);
+
+        if (_net.IsClient)
+            return;
+
+        var ball = Spawn(nozzle.Comp.Projectile, fromCoordinates);
+
+        var spawnOnTerminateComp = EnsureComp<SpawnOnTerminateComponent>(ball);
+        _projectile.SetSpawn((ball, spawnOnTerminateComp), reagent.FireEntity);
+
+        var maxRange = nozzle.Comp.MaxRange;
+        if (fromCoordinates.TryDistance(EntityManager, toCoordinates, out var distance) && distance < maxRange)
+        {
+            maxRange = distance;
+        }
+        _projectile.SetMaxRange(ball, maxRange);
+        _projectile.ModifyDamage(ball, reagent.Intensity);
+        _rmcFlammable.IgniteOnProjectileHit(ball, reagent);
+
+        _gun.Shoot(nozzle, gun, ball, fromCoordinates, toCoordinates, out _, user, false);
+    }
+
+    private void OnNozzleTakeAmmo(Entity<RMCFlamerNozzleComponent> ent, ref TakeAmmoEvent args)
+    {
+        args.Ammo.Add((ent, ent.Comp));
+    }
+
+    private void OnNozzleUniqueAction(Entity<RMCFlamerNozzleComponent> ent, ref UniqueActionEvent args)
+    {
+        if (!TryComp(ent, out TransformComponent? transform) ||
+            !TryComp<RMCIgniterComponent>(transform.ParentUid, out var igniter))
+        {
+            // Not attached to a flamer or the flamer has no igniter.
+            return;
+        }
+
+        OnIgniterUniqueAction((transform.ParentUid, igniter), ref args);
+    }
+
+    private void OnFlamerChainShutdown(Entity<RMCFlamerChainComponent> ent, ref ComponentShutdown args)
+    {
+        _onCollide.CleanupChain(ent.Comp.Chain);
     }
 
     public override void Update(float frameTime)

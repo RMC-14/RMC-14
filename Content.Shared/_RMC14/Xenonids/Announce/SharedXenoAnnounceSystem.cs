@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -31,18 +32,18 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             locationName = areaProto.Name;
 
         if (HasComp<ParasiteSpentComponent>(ent))
-            AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-parasite-announce-infect", ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color);
+            AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-parasite-announce-infect", ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color, useHiveAsSource: true);
         else
         {
             if (HasComp<XenoEvolutionGranterComponent>(ent) || _xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
-                AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color);
+                AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color, useHiveAsSource: true);
         }
     }
 
     public string WrapHive(string message, Color? color = null)
     {
         color ??= Color.FromHex("#921992");
-        return $"[color={color.Value.ToHex()}][font size=16][bold]{message}[/bold][/font][/color]\n\n";
+        return $"[color={color.Value.ToHex()}][font size=16][bold]{message}[/bold][/font][/color]\n";
     }
 
     /// <summary>
@@ -55,13 +56,15 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     /// <param name="sound"></param>
     /// <param name="popup"></param>
     /// <param name="needsQueen">Whether the message can only be sent if the hive has an active queen</param>
+    /// <param name="overlay">The on screen overlay to show to the same recipients, if any</param>
     public virtual void Announce(EntityUid source,
         Filter filter,
         string message,
         string wrapped,
         SoundSpecifier? sound = null,
         PopupType? popup = null,
-        bool needsQueen = false)
+        bool needsQueen = false,
+        RMCAnnouncementOverlay? overlay = null)
     {
     }
 
@@ -82,12 +85,13 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         SoundSpecifier? sound = null,
         PopupType? popup = null,
         Color? color = null,
-        bool needsQueen = false)
+        bool needsQueen = false,
+        bool useHiveAsSource = false)
     {
-        if (Hive.GetHive(xeno) is not {} hive)
+        if (Hive.GetHive(xeno) is not { } hive)
             return;
 
-        AnnounceToHive(xeno, hive, message, sound, popup, color, needsQueen);
+        AnnounceToHive(useHiveAsSource ? hive : xeno, hive, message, sound, popup, color, needsQueen);
     }
 
     public void AnnounceSameHiveDefaultSound(Entity<HiveMemberComponent?> xeno,

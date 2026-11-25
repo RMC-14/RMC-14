@@ -111,13 +111,20 @@
 
 # Tanker
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitMarineTanker
-  name: UNMC tanker uniform
+  name: vehicle crewman uniform
+  description: A uniform worn by vehicle crewmen of the UNMC. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
-
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/urban.rsi
 # CBRN
 
 - type: entity
@@ -481,6 +488,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/urban.rsi
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
@@ -492,7 +506,14 @@
   description: A flightsuit worn by pilot officers of the UNMC, with plenty of leather straps, pouches, and other essential gear you will never use. Looks badass.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt/urban.rsi
 
 # Dropship Crew Chief
 - type: entity
@@ -546,17 +567,14 @@
 
 # Marine
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitSurvivorMarine
   name: UNMC uniform
-  description: Torn, Burned and blood stained. This uniform has seen much more than you could possibly imagine.
+  description: Torn, burned, and blood stained. This uniform has seen much more than you could possibly imagine.
   suffix: FORECON, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/recon_marine.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
   parent: CMJumpsuitSurvivorMarine
@@ -569,6 +587,29 @@
     startingAccessories:
     - RMCPatchUNMC
     - RMCPatchFORECON
+
+# Tyrargo
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMarineTyrargo
+  name: UNMC uniform
+  description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tyrargo_uniform.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchUNMC
+
+- type: entity
+  parent: RMCJumpsuitMarineTyrargo
+  id: RMCJumpsuitMarineTyrargoWebbing
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchForecon
 
 # High Command
 
@@ -621,3 +662,77 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/synthetic_support.rsi
+
+# NV
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitPilotFighter
+  name: ASU-25F/P g-suit
+  description: The ASU-25F/P Antipressure Suit is an anti-G garment commonly seen in use by Aerofighter pilots across the Marine Corps, meant to sustain a pilot's consciousness during high-speed turns. While considered bulky and uncomfortable to wear, it has been attributed as the source of the unusually high survival rate among Aerofighter pilots during Operation Justice.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/pilot_fighter.rsi
+
+- type: entity
+  parent: RMCJumpsuitMarinePatch
+  id: RMCJumpsuitMarineNV
+  suffix: Varadero
+  description: A standard-issue Marine uniform with moisture-wicking properties. It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/standard.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMarineNVCommander
+  name: UNMC Base Commander jumpsuit
+  description: Standard-issue Commanding Officer uniform . It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/commander.rsi
+
+- type: entity
+  parent: RMCJumpsuitMarineNVCommander
+  id: RMCJumpsuitMarineNVSynth
+  name: UNMC Support Synthetic jumpsuit
+  description: A standard-issue uniform worn by synthetics of the UNMC. IIt has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/synth.rsi
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineNVMedic
+  name: UNMC Medical Technician jumpsuit
+  description: Standard-issue UNMC Medical Technician fatigues. It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/medic.rsi
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineNVUtility
+  name: UNMC utility jumpsuit
+  description: Standard-issue fatigues for UNMC maintenance personnel. It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/req.rsi
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineNVEngi
+  name: UNMC Engineer jumpsuit
+  description: Standard-issue fatigues for UNMC engineering personnel. It has shards of light Kevlar to help protect against stabbing weapons and bullets, as well as additional ripstop weave to prevent tearing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/NV/engineer.rsi
+
+- type: entity
+  parent: RMCJumpsuitMarineNV
+  id: RMCJumpsuitSurvivorMarineFirefighter
+  suffix: Varadero Firefighter
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterM77Survivor

@@ -292,6 +292,9 @@
     amount: 10
   - type: AimedShotEffect
     extraHits: 1
+  - type: IgnoreSwiftSteps
+  - type: ProjectileCoverInteraction
+    ignoreCover: true
 
 - type: entity
   parent: RMCBaseBullet
@@ -317,6 +320,9 @@
     amount: 30
   - type: AimedShotEffect
     extraHits: 1
+  - type: IgnoreSwiftSteps
+  - type: ProjectileCoverInteraction
+    ignoreCover: true
 
 - type: Tag
   id: RMCL112SniperRifle

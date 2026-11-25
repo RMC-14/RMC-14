@@ -1,5 +1,7 @@
+using Content.Shared._RMC14.Fishing;
 using Content.Shared._RMC14.WeedKiller;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -18,6 +20,9 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool MortarPlacement;
+
+    [DataField, AutoNetworkedField]
+    public bool Construction = true;
 
     [DataField, AutoNetworkedField]
     public bool MortarFire;
@@ -96,4 +101,7 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ResinConstructCount;
+
+    [DataField]
+    public ProtoId<RMCFishingLootPrototype>? FishingLoot;
 }

@@ -155,6 +155,7 @@
           tags:
           - CMWeaponPistolM1984
           - CMWeaponPistolM1911
+          - RMCWeaponPistolM1911C
       mk80_fill:
         whitelist:
           tags:
@@ -227,9 +228,6 @@
         whitelist:
           tags:
           - Taser
-
-  - type: Storage
-    maxItemSize: Normal
   - type: CMHolster
   - type: CMItemSlots
 
@@ -272,6 +270,7 @@
   - type: Tag
     tags:
     - Pouch
+    - RMCMacheteHolder
   - type: CMHolster
   - type: CMItemSlots
   - type: InteractedBlacklist

@@ -84,14 +84,8 @@
   - type: DeviceNetwork
   - type: DeviceLinkSink
     ports: [ SentryControl ]
-  - type: HealthExaminable
-    locPrefix: sentry
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
+  - type: RMCHealthExaminable
+    speciesType: Mechanical
   - type: ShortExamine
   - type: SentryTargeting
     targetedFactions:
@@ -118,6 +112,11 @@
       types:
         Blunt: 40
   - type: RequireProjectileTarget
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-tesla-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseTesla
@@ -191,12 +190,13 @@
     factions:
     - FactionMarine
   - type: Sentry
-    deployDelay: 0.75
-    undeployDelay: 0.75
     upgrades: null
   - type: RMCTeslaCoil
     dazeDuration: 0
     fireDelay: 1
+  - type: RMCDeployableEquipment
+    deployDelay: 0.75
+    undeployDelay: 0.75
 
 - type: entity
   parent: RMCTesla

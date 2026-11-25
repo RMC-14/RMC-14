@@ -1,10 +1,11 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Fabricator;
 using Content.Shared._RMC14.Dropship.Utility.Components;
+using Content.Shared._RMC14.PayloadDeployment.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
@@ -89,6 +90,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, DidUnequipHandEvent>(OnHandsChanged);
 
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, GettingPickedUpAttemptEvent>(OnGrabbableGettingPickedUpAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, CombatModeShouldHandInteractEvent>(OnGrababbleShouldInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
@@ -297,6 +299,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             DistanceThreshold = 2.5f,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -388,6 +391,15 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
 
         // TODO RMC14 popup
+        if (!HasComp<PowerLoaderComponent>(args.User))
+            args.Cancel();
+    }
+
+    private void OnGrabbableGettingPickedUpAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref GettingPickedUpAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
         if (!HasComp<PowerLoaderComponent>(args.User))
             args.Cancel();
     }
@@ -610,12 +622,18 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
+        var delayMultiplier = 1f;
+        if (TryComp(args.User, out MovementRelayTargetComponent? relay))
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, ent.Comp.AttachSkill);
+
+        var delay = attachableComponent.AttachDelay * delayMultiplier;
         var ev = new DropshipAttachDoAfterEvent(GetNetEntity(target), GetNetEntity(used), slot.ID);
-        var doAfter = new DoAfterArgs(EntityManager, user, attachableComponent.AttachDelay, ev, target, target, used)
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, target, target, used)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             DistanceThreshold = 2.5f,
+            RootEntity = true,
         };
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.User, out var loader))
             loader.DoAfter = ev.DoAfter;
@@ -659,6 +677,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             DistanceThreshold = 2.5f,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.PowerLoader, out var loader))
@@ -853,6 +872,76 @@ public sealed class PowerLoaderSystem : EntitySystem
         return _hands.CountFreeHands(user.Owner) > 0;
     }
 
+    internal bool TryGetActivePowerLoader(EntityUid user, [NotNullWhen(true)] out Entity<PowerLoaderComponent>? loader)
+    {
+        loader = default;
+
+        if (TryComp(user, out PowerLoaderComponent? loaderComp))
+        {
+            loader = new Entity<PowerLoaderComponent>(user, loaderComp);
+            return true;
+        }
+
+        if (!HasComp<ActivePowerLoaderPilotComponent>(user) ||
+            !TryComp(user, out BuckleComponent? buckle) ||
+            buckle.BuckledTo is not { } buckledTo ||
+            !TryComp(buckledTo, out PowerLoaderComponent? buckledLoader))
+        {
+            return false;
+        }
+
+        loader = new Entity<PowerLoaderComponent>(buckledTo, buckledLoader);
+        return true;
+    }
+
+    internal bool TryGetInteractionUser(EntityUid user, out EntityUid actor)
+    {
+        actor = user;
+
+        if (!TryComp(user, out PowerLoaderComponent? _) ||
+            !TryComp(user, out StrapComponent? strap))
+        {
+            return true;
+        }
+
+        foreach (var buckled in strap.BuckledEntities)
+        {
+            if (HasComp<ActivePowerLoaderPilotComponent>(buckled))
+            {
+                actor = buckled;
+                return true;
+            }
+        }
+
+        actor = default;
+        return false;
+    }
+
+    internal bool CanPickupWithActiveHand(EntityUid user)
+    {
+        if (!TryGetActivePowerLoader(user, out var loader) ||
+            !TryGetLoaderHandForUser(user, loader.Value, out var loaderHand))
+        {
+            return false;
+        }
+
+        return !_hands.TryGetHeldItem(loader.Value.Owner, loaderHand, out _);
+    }
+
+    internal bool TryPickupWithActiveHand(EntityUid user, EntityUid target)
+    {
+        if (!TryGetActivePowerLoader(user, out var loader) ||
+            !TryGetLoaderHandForUser(user, loader.Value, out var loaderHand) ||
+            _hands.TryGetHeldItem(loader.Value.Owner, loaderHand, out _))
+        {
+            return false;
+        }
+
+        _hands.DoPickup(loader.Value, loaderHand, target);
+        SyncHands(loader.Value);
+        return true;
+    }
+
     private bool CanPickupPopup(
         Entity<PowerLoaderComponent> loader,
         Entity<PowerLoaderGrabbableComponent?> grabbable,
@@ -884,6 +973,32 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             yield return entity;
         }
+    }
+
+    private bool TryGetLoaderHandForUser(
+        EntityUid user,
+        Entity<PowerLoaderComponent> loader,
+        [NotNullWhen(true)] out string? loaderHandId)
+    {
+        loaderHandId = null;
+
+        if (_hands.GetActiveHand(user) is not { } activeHandId ||
+            !_hands.TryGetHand(user, activeHandId, out var activeHand))
+        {
+            return false;
+        }
+
+        if (!_hands.EnumerateHands(loader.Owner).TryFirstOrDefault(
+                handId =>
+                    _hands.TryGetHand(loader.Owner, handId, out var loaderHand) &&
+                    loaderHand.Value.Location == activeHand.Value.Location,
+                out var matchedHand))
+        {
+            return false;
+        }
+
+        loaderHandId = matchedHand;
+        return true;
     }
 
     private void SyncHands(Entity<PowerLoaderComponent> loader)
@@ -1147,13 +1262,19 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (!TryComp(container.ContainedEntity, out PowerLoaderDetachableComponent? detachableComponent))
             return;
 
+        var delayMultiplier = 1f;
+        if (TryComp(user.Owner, out MovementRelayTargetComponent? relay))
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, detachableComponent.DetachSkill);
+
+        var delay = detachableComponent.DetachDelay * delayMultiplier;
         var contained = container.ContainedEntity.Value;
         var ev = new DropshipDetachDoAfterEvent(GetNetEntity(ent), GetNetEntity(contained), container.ID);
-        var doAfter = new DoAfterArgs(EntityManager, user, detachableComponent.DetachDelay, ev, target, target)
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, target, target)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             DistanceThreshold = 2.5f,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

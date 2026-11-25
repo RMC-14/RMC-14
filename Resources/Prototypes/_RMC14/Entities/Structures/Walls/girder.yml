@@ -20,7 +20,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
+          bounds: "-0.5,-0.5,0.5,0.5"
         density: 60
         mask:
         - MachineMask
@@ -47,11 +47,6 @@
         !type:DamageTrigger
         damage: 125
       behaviors:
-        - !type:SpawnEntitiesBehavior
-          spawn:
-            RMCGirderDamaged:
-              min: 1
-              max: 1
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
     - trigger:
@@ -107,11 +102,6 @@
         !type:DamageTrigger
         damage: 500
       behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          RMCGirderDamaged:
-            min: 1
-            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
@@ -153,7 +143,7 @@
     state: displaced
   - type: Icon
     state: displaced
-    
+
 - type: entity
   id: RMCGirderDamaged
   name: damaged girder
@@ -198,7 +188,7 @@
     prototype: CMGirder
 
   - type: RMCGenericExamine
-    message: rmc-structure-displaced-examine-tip
+    message: rmc-structure-damaged-girder-examine-tip
     whitelist:
       components:
       - Marine

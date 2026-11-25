@@ -297,6 +297,26 @@
     {
       "name": "platform_sm_stair_alt",
       "directions": 4
+    },
+    {
+      "name": "tyrargo_rock_platform",
+      "directions": 4
+    },
+    {
+      "name": "tyrargo_rock_platform_deco",
+      "directions": 4
+    },
+    {
+      "name": "tyrargo_rock_platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisadecoedging",
+      "directions": 4
+    },
+    {
+      "name": "hybrisadecoedging_corner",
+      "directions": 4
     }
   ]
 }

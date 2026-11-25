@@ -26,6 +26,7 @@ using Content.Shared.Hands;
 using Content.Shared.Item;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Systems;
+using Content.Shared._RMC14.Actions;
 
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
@@ -49,12 +50,13 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<VentEntranceComponent, ExaminedEvent>(OnVentEntranceExamine);
-        SubscribeLocalEvent<VentEntranceComponent, InteractHandEvent>(OnVentEntranceInteract);
+        SubscribeLocalEvent<VentEntranceComponent, ActivateInWorldEvent>(OnVentEntranceInteract);
         SubscribeLocalEvent<VentEntranceComponent, VentEnterDoafterEvent>(OnVentEnterDoafter);
 
         SubscribeLocalEvent<VentExitComponent, VentExitDoafterEvent>(OnVentExitDoafter);
 
         SubscribeLocalEvent<VentCrawlableComponent, MapInitEvent>(OnVentDuctInit);
+        SubscribeLocalEvent<VentCrawlableComponent, ReAnchorEvent>(OnVentReanchor);
         SubscribeLocalEvent<VentCrawlableComponent, MoveEvent>(OnVentDuctMove);
         SubscribeLocalEvent<VentCrawlableComponent, AnchorStateChangedEvent>(OnVentAnchorChanged);
         SubscribeLocalEvent<VentCrawlableComponent, RMCContainerDestructionEmptyEvent>(OnVentContainerDeletionEmpty);
@@ -87,12 +89,29 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         if(ent.Comp.Enabled)
             args.VisibilityMask |= (int)VisibilityFlags.Subfloor;
     }
+
     private void OnVentDuctInit(Entity<VentCrawlableComponent> vent, ref MapInitEvent args)
     {
+        if (_net.IsClient)
+            return;
+
+        vent.Comp.OriginalTravelDirection = vent.Comp.TravelDirection;
         if (vent.Comp.TravelDirection == PipeDirection.Fourway)
             return;
 
         vent.Comp.TravelDirection = vent.Comp.TravelDirection.RotatePipeDirection(Transform(vent).LocalRotation);
+        Dirty(vent);
+    }
+
+    private void OnVentReanchor(Entity<VentCrawlableComponent> vent, ref ReAnchorEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (vent.Comp.TravelDirection == PipeDirection.Fourway)
+            return;
+
+        vent.Comp.TravelDirection = vent.Comp.OriginalTravelDirection.RotatePipeDirection(Transform(vent).LocalRotation);
         Dirty(vent);
     }
 
@@ -143,7 +162,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         return true;
     }
 
-    private void OnVentEntranceInteract(Entity<VentEntranceComponent> vent, ref InteractHandEvent args)
+    private void OnVentEntranceInteract(Entity<VentEntranceComponent> vent, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;
@@ -312,7 +331,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         var actions = _actions.GetActions(ent);
         foreach (var action in actions)
         {
-            _actions.SetEnabled(action.AsNullable(), false);
+            if (!HasComp<RMCInContainerActionComponent>(action))
+                _actions.SetEnabled(action.AsNullable(), false);
         }
     }
 
@@ -321,7 +341,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         var actions = _actions.GetActions(ent);
         foreach (var action in actions)
         {
-            _actions.SetEnabled(action.AsNullable(), true);
+            if (!HasComp<RMCInContainerActionComponent>(action))
+                _actions.SetEnabled(action.AsNullable(), true);
         }
     }
 

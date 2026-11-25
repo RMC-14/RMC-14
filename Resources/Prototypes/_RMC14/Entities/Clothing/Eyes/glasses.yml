@@ -10,12 +10,20 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
+      state: helmet
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   - type: FlashImmunity
-#  - type: GuideHelp # TODO RMC14
-#    guides:
-#    - Security
+  - type: OverwatchCamera
+  - type: Tag
+    tags:
+    - RipOffOnInfection
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 - type: entity
   parent: CMGlassesSecurity
@@ -26,6 +34,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
+      state: helmet
 
 - type: entity
   parent: CMGlassesSecurity
@@ -63,6 +75,24 @@
         icon:
           True: { state: icon_on }
           False: { state: icon }
+
+- type: entity
+  parent: CMGlassesM42ScoutSight
+  id: CMGlassesM42SpotterSight
+  name: M96 spotter sight
+  description: A companion headset and night vision goggles system for UNMC spotters. Allows highlighted imaging of surroundings.
+
+- type: entity
+  parent: CMGlassesM42ScoutSight
+  id: CMGlassesM96CSight
+  name: M96C special operations sight
+  description: A specialized variation of the M96 scout sight system, intended for use with the high-power M96C anti-tank sniper rifle. Allows for highlighted imaging of surroundings, as well as detection of thermal signatures even from a great distance.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
+    layers:
+    - state: icon
+      map: [ "icon" ]
 
 - type: entity
   parent: CMGlassesM42ScoutSight
@@ -122,6 +152,12 @@
           False: { state: icon }
 
 - type: entity
+  parent: RMCGlassesM4SPRBattleSight
+  id: RMCGlassesM4SPRBattleSightRCM
+  name: Royal Crown Marine marksman's goggles
+  description: A headset and night vision goggles system used by RMC Marksmen. Allows highlighted imaging of surroundings.
+
+- type: entity
   parent: ClothingEyesBase
   id: RMCGlassesSmartGunSight
   name: ML66A head mounted sight # TODO RMC14 meson tile vision see description below
@@ -141,6 +177,7 @@
       RMCSkillSmartGun: 1
     defaultState: half
   - type: ClothingRequireEquipped
+    handsValid: true
     whitelist:
       components:
       - SmartGun
@@ -151,6 +188,9 @@
         icon:
           True: { state: icon_on }
           False: { state: icon }
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: ClothingEyesBase
@@ -191,16 +231,16 @@
 
 - type: entity
   parent: [ClothingEyesHudMedical, BaseToggleClothing]
-  id: RMCGlassesMedicalHUDGlasses
-  name: HealthMate HUD
-  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  id: RMCGlassesMedicalHUDGlassesOld
+  name: SensorMate HUD
+  description: A much older heads-up display that displays the last known biometric data from suit sensors of any given individual.
   components:
   - type: Item
     storedRotation: 0
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhudold.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhudold.rsi
   - type: ItemToggle
     activated: true
     soundActivate:
@@ -230,6 +270,17 @@
           True: {state: icon-on}
           False: {state: icon}
   - type: Appearance
+
+- type: entity
+  parent: RMCGlassesMedicalHUDGlassesOld
+  id: RMCGlassesMedicalHUDGlasses
+  name: HealthMate HUD
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhud.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhud.rsi
   - type: ItemToggleRequiresSkill
     skills:
       RMCSkillMedical: 1
@@ -311,10 +362,10 @@
   - type: Appearance
   - type: ItemToggleRequiresSkill
     skills:
-      RMCSkillMedical: 1
+      RMCSkillResearch: 1
   - type: ItemToggleDeactivateUnskilled
     skills:
-      RMCSkillMedical: 1
+      RMCSkillResearch: 1
     popup: rmc-skills-hud-toggle
 
 - type: entity
@@ -332,6 +383,16 @@
     slots:
     - MASK
     - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
+      state: helmet
+  - type: Tag
+    tags:
+    - RMCPrescriptionGlasses
+
+- type: Tag
+  id: RMCPrescriptionGlasses
 
 - type: entity
   parent: RMCGlassesMarineRpg
@@ -342,6 +403,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
+      state: helmet
 
 - type: entity
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
@@ -533,6 +598,12 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
       state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
+      state: hat-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -551,6 +622,12 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
       state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
+      state: hat-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -569,6 +646,12 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
       state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+      state: hat-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -593,6 +676,12 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
       state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
+      state: hat-down
 
 - type: entity
   parent: ClothingEyesBase
@@ -721,6 +810,10 @@
     slots:
     - MASK
     - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/sunglasses.rsi
+      state: helmet
 
 - type: entity
   parent: RMCSunglasses
@@ -730,19 +823,59 @@
 
 # Identical to upstream ones, sans the name and description
 - type: entity
-  parent: ClothingEyesEyepatch
+  parent: RMCBaseScarfMask
   id: RMCEyepatch
-  suffix: RMC
+  suffix: RMC, Black
   name: eyepatch
   description: Once worn by swashbucklers of old, now more commonly associated with a figure of legend. They say he was big AND a boss. Impressive no? Don't let the MPs see you wearing this non-regulation attire.
   components:
   - type: Item
     storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
     slots:
     - MASK
     - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCEyepatch
+  id: RMCGreenEyepatch
+  suffix: RMC, Green
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Misc/green_eyepatch.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Misc/green_eyepatch.rsi
+    slots:
+    - MASK
+    - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Misc/green_eyepatch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCEyepatch
+  id: RMCWhiteEyepatch
+  suffix: RMC, White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Misc/white_eyepatch.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Misc/white_eyepatch.rsi
+    slots:
+    - MASK
+    - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Misc/white_eyepatch.rsi
+      state: helmet
 
 - type: entity
   parent: RMCSunglasses
@@ -760,6 +893,11 @@
     - MASK
     - EYES
   - type: FlashImmunity
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses.rsi
+      state: helmet
+
 
 - type: entity
   parent: RMCSunglassesBig
@@ -773,6 +911,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-trimax-polarized-shades
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
+      state: helmet
 
 - type: entity
   parent: RMCGlassesTriMaxYellow
@@ -782,6 +924,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
+      state: helmet
 
 - type: entity
   parent: RMCGlassesTriMaxYellow
@@ -792,6 +938,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
+      state: helmet
 
 - type: entity
   parent: RMCSunglasses
@@ -811,6 +961,56 @@
     - EYES
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-trimex-personal-shades
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeRed
+  suffix: No FlashImmunity, Red
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_red.rsi
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeOrange
+  suffix: No FlashImmunity, Orange
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_orange.rsi
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeYellow
+  suffix: No FlashImmunity, Yellow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_yellow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_yellow.rsi
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeGreen
+  suffix: No FlashImmunity, Green
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_green.rsi
+
+- type: entity
+  parent: RMCSunglassesBigFake
+  id: RMCSunglassesBigFakeBlue
+  suffix: No FlashImmunity, Blue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses_blue.rsi
 
 - type: entity
   parent: RMCSunglassesBigFake
@@ -856,6 +1056,11 @@
     slots:
     - EYES
     - MASK
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators.rsi
+      state: helmet
+
 
 - type: entity
   parent: RMCGlassesAviators
@@ -867,6 +1072,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
+      state: helmet
 
 - type: entity
   parent: ClothingEyesBase
@@ -883,6 +1092,10 @@
     slots:
     - MASK
     - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hipster.rsi
+      state: helmet
 
 # Hippie Glasses
 
@@ -895,6 +1108,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlasses
@@ -906,6 +1123,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -916,6 +1137,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -926,6 +1151,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -936,6 +1165,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -946,6 +1179,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -956,6 +1193,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -966,11 +1207,15 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
+      state: helmet
 
 - type: entity
   parent: ClothingEyesBase
   id: RMCWeldingGoggles
-  name: welding goggles # TODO RMC14 impairs vision when on
+  name: welding goggles
   description: Protects the eyes from welders, approved by the mad scientist association.
   components:
   - type: Sprite
@@ -984,6 +1229,7 @@
   - type: ComponentToggler
     components:
     - type: EyeProtection
+    - type: WeldingVision
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
@@ -1004,13 +1250,17 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
       state: helmet-down
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCWeldingGoggle
 
 - type: entity
   parent: RMCWeldingGoggles
-  id: RMCWeldingGogglesSuperior # TODO RMC14 less vision impairment then regular goggles
+  id: RMCWeldingGogglesSuperior
   name: superior welding goggles
   description: Welding goggles made from more expensive materials, strangely smells like potatoes.
   components:
@@ -1018,6 +1268,11 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles_superior.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles_superior.rsi
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+  - type: WeldingVision
+    superior: true
 
 - type: entity
   parent: ClothingEyesBase

@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechMedicalGear
-  name: ColMarTech squad medical gear rack
+  name: ASRS squad medical gear rack
   description: An automated gear rack for hospital corpsmen.
   components:
   - type: AccessReader
@@ -123,10 +123,6 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -211,7 +207,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechMedicalEquipment
-  name: ColMarTech squad medical equipment rack
+  name: ASRS squad medical equipment rack
   description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
   components:
   - type: AccessReader
@@ -330,7 +326,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCColMarTechMedicalEquipmentPVE
-  name: ColMarTech squad medical equipment rack
+  name: ASRS squad medical equipment rack
   description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
   suffix: PVE
   components:
@@ -421,15 +417,18 @@
       - id: RMCHandsLatexMarine
         name: combat sterile gloves
       - id: CMMaskSterile
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
       - id: RMCSatchelPMCMedic
+        name: PMC medic combat pack
         recommended: true
-      - id: ArmorHelmetPMC
-        recommended: true
+      - id: RMCSatchelPMC
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltMedicBagPMCFilled
-        name: M276 medical storage rig (Full)
+        name: WY-TM625 pattern medical bag (Full)
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -445,7 +444,7 @@
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
 #       recommended: true
-      - id: RMCPouchMedkit
+      - id: RMCPouchMedkitPMC
         recommended: true
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
@@ -528,7 +527,7 @@
   parent: RMCColMarTechMedicalEquipmentPVE
   id: ColMarTechMedicalChemicalPVE
   suffix: PVE
-  name: ColMarTech squad medical chemical rack
+  name: ASRS squad medical chemical rack
   description: An automated gear rack for specialized chemicals for the hospital corpsman.
   components:
   - type: Sprite
@@ -565,11 +564,10 @@
         points: 40
       - id: RMCLargeBottleDexalinPlus
         points: 30
-    # TODO RMC14: the minitank is currently non functional
-    # - name: Injectors
-    #   entries:
-    #   - id: CMMiniTank
-    #     points: 40
+    - name: Injectors
+      entries:
+      - id: CMMiniTank
+        points: 40
 
 - type: entity
   parent: ColMarTechMedicalChemicalPVE
@@ -612,8 +610,7 @@
         points: 40
       - id: RMCLargeBottleDexalinPlus
         points: 30
-    # TODO RMC14: the minitank is currently non functional
-    # - name: Injectors
-    #   entries:
-    #   - id: CMMiniTank
-    #     points: 40
+    - name: Injectors
+      entries:
+      - id: CMMiniTank
+        points: 40

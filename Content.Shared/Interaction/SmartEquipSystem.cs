@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Intel.Detector;
 using Content.Shared._RMC14.MotionDetector;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
@@ -48,6 +49,12 @@ public sealed class SmartEquipSystem : EntitySystem
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.SmartEquipBackpack, InputCmdHandler.FromDelegate(HandleSmartEquipBackpack, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipBelt, InputCmdHandler.FromDelegate(HandleSmartEquipBelt, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipPocket1, InputCmdHandler.FromDelegate(HandleSmartEquipPocket1, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipPocket2, InputCmdHandler.FromDelegate(HandleSmartEquipPocket2, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipSuitStorage, InputCmdHandler.FromDelegate(HandleSmartEquipSuitStorage, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipUniform, InputCmdHandler.FromDelegate(HandleSmartEquipUniform, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipArmor, InputCmdHandler.FromDelegate(HandleSmartEquipArmor, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipHelmet, InputCmdHandler.FromDelegate(HandleSmartEquipHelmet, handle: false, outsidePrediction: false))
             .Register<SmartEquipSystem>();
     }
 
@@ -66,6 +73,36 @@ public sealed class SmartEquipSystem : EntitySystem
     private void HandleSmartEquipBelt(ICommonSession? session)
     {
         HandleSmartEquip(session, "belt");
+    }
+
+    private void HandleSmartEquipPocket1(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "pocket1");
+    }
+
+    private void HandleSmartEquipPocket2(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "pocket2");
+    }
+
+    private void HandleSmartEquipSuitStorage(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "suitstorage");
+    }
+
+    private void HandleSmartEquipUniform(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "jumpsuit");
+    }
+
+    private void HandleSmartEquipArmor(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "outerClothing");
+    }
+
+    private void HandleSmartEquipHelmet(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "head");
     }
 
     private void HandleSmartEquip(ICommonSession? session, string equipmentSlot)
@@ -92,6 +129,11 @@ public sealed class SmartEquipSystem : EntitySystem
         var session = playerSession;
         var equipmentSlot = msg.EquipmentSlot;
         if (playerSession.AttachedEntity is not { Valid: true } uid || !Exists(uid))
+            return;
+
+        // RMC14
+        // Disable smartequip if player is devoured
+        if (HasComp<DevouredComponent>(uid))
             return;
 
         // early out if we don't have any hands or a valid inventory slot
@@ -176,6 +218,13 @@ public sealed class SmartEquipSystem : EntitySystem
         // case 2 (storage item):
         if (TryComp<StorageComponent>(slotItem, out var storage))
         {
+            // RMC14
+            if (!_actionBlocker.CanInteract(uid, slotItem) ||
+                !_storage.CanInteract(uid, (slotItem, storage), silent: false))
+            {
+                return;
+            }
+
             switch (handItem)
             {
                 case null when storage.Container.ContainedEntities.Count == 0:

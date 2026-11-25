@@ -375,6 +375,24 @@
     },
     {
       "name": "daggerb_a"
+    },
+    {
+      "name": "mateba_short_s"
+    },
+    {
+      "name": "mateba_medium_s"
+    },
+    {
+      "name": "mateba_long_s"
+    },
+    {
+      "name": "mateba_short_s_a"
+    },
+    {
+      "name": "mateba_medium_s_a"
+    },
+    {
+      "name": "mateba_long_s_a"
     }
   ]
 }

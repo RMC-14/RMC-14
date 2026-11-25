@@ -60,6 +60,19 @@
       - id: CMPackFlare
 
 - type: entity
+  id: RMCWallClosetFireSafetyFilled
+  parent: RMCWallClosetFireSafety
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCHardhatRed
+      - id: RMCSuitFirefighter
+      - id: RMCReagentGasTankOxygen
+      - id: CMFireExtinguisher
+      - id: CMPackFlare
+
+- type: entity
   parent: CMLockerCommanderSecure
   id: CMLockerCommanderSecureFilled
   suffix: Filled
@@ -120,17 +133,30 @@
     - id: RMCSynthResetKeySMART
     - id: RMCMREWeYa
     - id: RMCMREWeYa
-      # ToDo: RMC14 Platinum Coin
+    - id: RMCCoinPlatinum
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000
-    - id: CMWebbingHolster
-    - id: RMCWeaponPistolPK7
-    - id: RMCMagazinePistolPK7
-    - id: RMCMagazinePistolPK7
+    - id: RMCBackpackRTOBagPhone
+    - id: RMCShoulderHolsterPK7
 
 - type: entity
-  parent: CMLockerBase
-  id: RMCLockerFieldDoctor
+  parent: RMCLockerSecureSafeCO
+  id: RMCLockerSecureSafeCOFilled
+  suffix: Commanding Officer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMoneybag
+    - id: RMCCoinChallenge
+    - id: RMCGlassesMonocle
+    - id: RMCZippoGold
+      # ToDo: RMC14 Almayer code book
+    - id: RMCHollowCane
+    - id: RMCTelescopicBaton
+
+- type: entity
+  parent: RMCLockerFieldDoctor
+  id: RMCLockerFieldDoctorFilled
   suffix: Filled, Field Doctor
   components:
   - type: StorageFill
@@ -154,3 +180,15 @@
     - id: RMCShovel
     - id: RMCPickaxe
     # TODO: Add Meson Goggles, Analyzer, Orebag
+
+- type: entity
+  parent: CMLockerSuitStorageUnit
+  id: RMCLockerSuitStorageUnitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetCivilianCompressionSuit
+    - id: RMCSuitCivilianCompressionSuit
+    - id: RMCMaskBreath
+    - id: RMCGasTankOxygenFilled

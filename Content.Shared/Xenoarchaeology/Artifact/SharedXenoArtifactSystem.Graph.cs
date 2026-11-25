@@ -71,8 +71,14 @@ public abstract partial class SharedXenoArtifactSystem
         if (index < 0 || index >= ent.Comp.NodeVertices.Length)
             return false;
 
-        if (ent.Comp.NodeVertices[index] is { } netUid && GetEntity(netUid) is var uid)
-            node = (uid, XenoArtifactNode(uid));
+        // RMC14 Skips nodes already deleted instead of throwing.
+        if (ent.Comp.NodeVertices[index] is { } netUid &&
+            TryGetEntity(netUid, out var uid) &&
+            _nodeQuery.TryComp(uid.Value, out var nodeComp))
+        {
+            node = (uid.Value, nodeComp);
+        }
+        // RMC14
 
         return node != null;
     }

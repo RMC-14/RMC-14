@@ -23,6 +23,7 @@
   supervisors: cm-job-supervisors-nobody
   accessGroups:
   - Colonist
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -115,7 +116,7 @@
   - type: EntityPreset
     randomGear:
     - [ RMCGrenadeMolotov ]
-    - [ CMPackFlare ]
+    - [ CMPackFlareColonist ]
     - [ WeaponNailgun ]
     - [ RMCFireAxe ]
     - [ RMCWelderIndustrial ]
@@ -137,7 +138,7 @@
     primaryWeapons:
     - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]
     - [ RMCBeltMarineUZI, RMCWeaponSMGUZI ]
-    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunM12 ]
     - [ CMBeltMarineAR10, WeaponRifleAR10 ]
     primaryWeaponChance: 0.6
 

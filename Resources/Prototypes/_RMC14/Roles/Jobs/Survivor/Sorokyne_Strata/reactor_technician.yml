@@ -11,6 +11,17 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - English
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - English
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       skills:
         RMCSkillEndurance: 2
@@ -30,6 +41,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+#    - type: TacticalMapIcon # TODO RMC14: tacmap of diff factions mechanic
+#      icon:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: spp_cont
+#      background:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: background_spp_bravo
   useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear

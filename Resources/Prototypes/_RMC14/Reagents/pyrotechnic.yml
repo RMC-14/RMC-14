@@ -92,6 +92,18 @@
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmUTTank
+  name: reagent-name-rmcnapalm-ut
+  desc: reagent-desc-rmcnapalm-ut
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#DD9B00"
+  intensity: 30
+  duration: 20
+  radius: 7
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
   id: RMCBGel
   name: reagent-name-rmcbgel
   desc: reagent-desc-rmcbgel
@@ -189,9 +201,9 @@
       metabolismRate: 0.1
       effects:
       - !type:Corrosive
-        potency: 6
+        level: 6
       - !type:Toxic
-        potency: 6
+        level: 6
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
@@ -213,4 +225,4 @@
       metabolismRate: 0.1
       effects:
       - !type:Toxic
-        potency: 2
+        level: 2

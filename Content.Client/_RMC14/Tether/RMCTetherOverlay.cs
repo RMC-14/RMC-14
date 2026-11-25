@@ -59,6 +59,10 @@ public sealed class RMCTetherOverlay : Overlay
             if (_playerManager.LocalEntity is not { } player || player == origin && !tether.VisibleToOrigin)
                 continue;
 
+            var viewportEye = args.Viewport.Eye;
+            if (viewportEye != null && viewportEye.Position.MapId != xform.MapID)
+                continue;
+
             var worldPos = _transform.GetWorldPosition(xform, xformQuery);
             var gunWorldPos = _transform.GetWorldPosition(origin.Value, xformQuery);
             var diff = worldPos - gunWorldPos;

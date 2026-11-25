@@ -48,9 +48,10 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     private readonly List<string> _announce = [];
     private readonly EntProtoId _defaultHive = "CMXenoHive";
 
-    private TimeSpan _lateJoinsPerBurrowedLarvaEarlyThreshold;
-    private float _lateJoinsPerBurrowedLarvaEarly;
-    private float _lateJoinsPerBurrowedLarva;
+    private TimeSpan _lateJoinsPerBurrowedAdjustmentThreshold;
+    private float _lateJoinsPerBurrowedAdjustment;
+    private float _lateJoinsPerBurrowedMinimum;
+    private float _marinesPerXeno;
 
     private const int InvinciblePer = 10;
     private readonly List<Entity<InvincibleHiveStructureComponent>> _invincibles = new();
@@ -66,11 +67,12 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         SubscribeLocalEvent<InvincibleHiveStructureComponent, MapInitEvent>(OnInvincibleMapInit);
 
         Subs.CVar(_config,
-            RMCCVars.RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes,
-            v => _lateJoinsPerBurrowedLarvaEarlyThreshold = TimeSpan.FromMinutes(v),
+            RMCCVars.RMCLateJoinsPerBurrowedAdjustmentThresholdMinutes,
+            v => _lateJoinsPerBurrowedAdjustmentThreshold = TimeSpan.FromMinutes(v),
             true);
-        Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarvaEarly, v => _lateJoinsPerBurrowedLarvaEarly = v, true);
-        Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarva, v => _lateJoinsPerBurrowedLarva = v, true);
+        Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedAdjustment, v => _lateJoinsPerBurrowedAdjustment = v, true);
+        Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedMinimum, v => _lateJoinsPerBurrowedMinimum = v, true);
+        Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -83,15 +85,16 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
         if (ev.JobId is not { } jobId ||
             !_prototypes.TryIndex(jobId, out JobPrototype? job) ||
-            job.RoleWeight < 0)
+            job.RoleWeight <= 0)
         {
             return;
         }
 
         var time = _timing.CurTime;
-        var lateJoinsPer = time < _lateJoinsPerBurrowedLarvaEarlyThreshold
-            ? _lateJoinsPerBurrowedLarvaEarly
-            : _lateJoinsPerBurrowedLarva;
+        var lateJoinsPer = _marinesPerXeno;
+        if (time >= _lateJoinsPerBurrowedAdjustmentThreshold)
+            lateJoinsPer += _lateJoinsPerBurrowedAdjustment;
+        lateJoinsPer = Math.Max(lateJoinsPer, _lateJoinsPerBurrowedMinimum);
 
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var uid, out var hive))
@@ -104,7 +107,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             hive.LateJoinMarines -= lateJoinsPer;
-            IncreaseBurrowedLarva((uid, hive), 1);
+            ChangeBurrowedLarva((uid, hive), 1);
         }
     }
 
@@ -209,7 +212,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 EvoScreech(hive);
             }
 
-            if (!hive.AnnouncedQueenDeathCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && roundTime >= hive.NewQueenAt.Value)
+            if (!hive.AnnouncedQueenDeathCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && _timing.CurTime >= hive.NewQueenAt.Value)
             {
                 var queenPopup = Loc.GetString("rmc-queen-death-cooldown-over");
                 _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, queenPopup, hive.AnnounceSound);
@@ -217,7 +220,16 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 Dirty(hiveId, hive);
             }
 
-            if (!hive.AnnouncedHiveCoreCooldownOver && hive.NewCoreAt.HasValue && roundTime >= hive.NewCoreAt)
+            //No queen has been picked they have 1 minutes to pick a queeen before hive goes feral
+            if (!hive.AnnouncedNoQueenCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && _timing.CurTime >= hive.NewQueenAt.Value + hive.NoQueenAlertTime)
+            {
+                var noQueenPopup = Loc.GetString("rmc-no-queen-warning");
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, noQueenPopup, hive.AnnounceSound);
+                hive.AnnouncedNoQueenCooldownOver = true;
+                Dirty(hiveId, hive);
+            }
+
+            if (!hive.AnnouncedHiveCoreCooldownOver && hive.NewCoreAt.HasValue && _timing.CurTime >= hive.NewCoreAt)
             {
                 var corePopup = Loc.GetString("rmc-hive-core-cooldown-over");
                 _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, corePopup, hive.AnnounceSound);
@@ -244,7 +256,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
             }
 
-            IncreaseBurrowedLarva(1);
+            ChangeBurrowedLarva((id, hive), 1);
             burrowed.PooledLarva--;
             if (burrowed.PooledLarva < 1)
                 RemCompDeferred<HijackBurrowedSurgeComponent>(id);

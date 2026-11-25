@@ -25,13 +25,13 @@ public sealed partial class NPCLeapComponent : Component
     public EntityCoordinates Destination;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float LeapDistance = 3.5f;
+    public float LeapDistance = 2.0f;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public float MaxAngleDegrees = 5;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public CollisionGroup Mask = CollisionGroup.SmallMobMask;
+    public CollisionGroup Mask = CollisionGroup.MobCollision | CollisionGroup.SmallMobMask | CollisionGroup.BarbedBarricade;
 }
 
 public enum LeapStatus : byte

@@ -72,6 +72,11 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
       state: all
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rocket-launcher
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   id: RMCRocketHJRA12AT
@@ -242,6 +247,7 @@
     thresholds:
     - range: 7
       falloff: 10
+  - type: IgnoreSwiftSteps
 
 - type: Tag
   id: RMCRocketHJRA12

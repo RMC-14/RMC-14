@@ -1,0 +1,47 @@
+<controls:ElevatorPanelWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Elevators"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Title="{Loc 'rmc-elevator-panel-name'}"
+    MinSize="450 240">
+        <BoxContainer HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="20">
+                <BoxContainer Orientation="Vertical" Margin="2 0 2 0">
+                    <PanelContainer Margin="40 0 40 0">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderColor="#BFBFBF" BackgroundColor="#141414" BorderThickness="1" />
+                        </PanelContainer.PanelOverride>
+                        <RichTextLabel Name="LocationStatus" Access="Public" HorizontalAlignment="Center" Margin="2"/>
+                    </PanelContainer>
+                    <PanelContainer Margin="2 0 2 0">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderColor="#BFBFBF" BorderThickness="2" />
+                        </PanelContainer.PanelOverride>
+                        <RichTextLabel Name="LocationLabel" Access="Public" HorizontalAlignment="Center" Margin="2"/>
+                    </PanelContainer>
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                    <PanelContainer Margin="40 0 40 0">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderColor="#BFBFBF" BackgroundColor="#141414" BorderThickness="1" />
+                        </PanelContainer.PanelOverride>
+                        <RichTextLabel Name="StatusLabel" Access="Public" HorizontalAlignment="Center" Margin="2"/>
+                    </PanelContainer>
+                    <PanelContainer Margin="2 0 2 0">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderColor="#BFBFBF" BorderThickness="2" />
+                        </PanelContainer.PanelOverride>
+                        <RichTextLabel Name="StatusProgress" Access="Public" HorizontalAlignment="Center" Margin="2"/>
+                    </PanelContainer>
+                </BoxContainer>
+            </BoxContainer>
+            <PanelContainer Margin="2 0 2 0" HorizontalExpand="True" SizeFlagsStretchRatio="3">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BorderColor="#BFBFBF" BorderThickness="2" />
+                </PanelContainer.PanelOverride>
+                <GridContainer Name="ButtonGrid" Access="Public" Columns="2" HorizontalExpand="True">
+                </GridContainer>
+            </PanelContainer>
+        </BoxContainer>
+</controls:ElevatorPanelWindow>

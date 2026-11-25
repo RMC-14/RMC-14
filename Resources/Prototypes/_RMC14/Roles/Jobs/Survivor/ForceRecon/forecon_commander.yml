@@ -1,0 +1,85 @@
+- type: job
+  parent: RMCSurvivorForeconBase
+  id: RMCSurvivorForeconCommander
+  name: rmc-job-name-forecon-commander
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankMajor: []
+  accessGroups:
+  - ColonistEngi
+  startingGear: RMCGearForeconCommander
+  spawnMenuRoleName: FORECON Commander (Survivor)
+  supervisors: cm-job-supervisors-marine-high-command
+  icon: "RMCJobIconForeconCommander"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: RMCSkillPresetCommander
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon-co
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: co
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetForeconCommander
+    - type: SpotterWhitelist
+    - type: RMCAwardRecommendation
+      maxRecommendations: 4
+  hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  parent: RMCGearForeconBase
+  id: RMCGearForeconCommander
+  equipment:
+    outerClothing: RMCJacketWindbreakerForeconFilled
+    back: RMCSatchelMarineForeconSurvivorCommanderFill
+    id: CMIDCardGold
+    ears: RMCHeadsetForeconCommander
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointForeconCommander
+  name: FORECON Commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorForeconCommander
+  - type: Sprite
+    state: co_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconForeconCommander
+  icon:
+    sprite: _RMC14/Interface/job_icons/Misc/other.rsi
+    state: hudsquad_vo
+
+- type: entity
+  parent: RMCSurvivorPresetForecon
+  id: RMCSurvivorPresetForeconCommander
+  name: forecon commander survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomWeapon: # 50% for mateba, 25% for peregrine, 25% for M1911C
+    - [ RMCMatebaBeltForeconFilled ]
+    - [ RMCBeltHolsterPistol2006MForeconFilled ]
+    - [ RMCBeltHolsterPistolHandcannonForeconFilled ]
+    - [ RMCBeltHolsterPistolM1911CForeconFilled ]

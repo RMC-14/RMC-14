@@ -26,6 +26,13 @@
     thresholds: []
   - type: ChangeItemSizeOnTimerTrigger
   - type: CancelUseWithCloak
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-grenade
+    whitelist:
+      components:
+      - Xeno
+  - type: RMCThrowCooldown
+    duration: 0.5
 
 - type: entity
   abstract: true
@@ -69,6 +76,9 @@
   - type: RequiresSkill
     skills:
       RMCSkillPolice: 2
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 - type: entity
   parent:
@@ -82,9 +92,9 @@
     sprite: _RMC14/Objects/Weapons/Grenades/m40hedp.rsi
   - type: ExplodeOnTrigger
   - type: Explosive
-    maxIntensity: 20 # max 100 brute, 100 burn
-    intensitySlope: 6
-    totalIntensity: 200
+    maxIntensity: 10
+    intensitySlope: 4.99
+    totalIntensity: 148
     canCreateVacuum: false
   - type: Ammo
   - type: CMExplosionEffect
@@ -124,6 +134,11 @@
     - RMCGrenadeM40
     - RMCGrenadeRiot
   - type: Ammo
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-smoke-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: Smoke
@@ -144,8 +159,8 @@
   - type: ActiveEdgeSpreader
   - type: EdgeSpreader
     id: RMCSmokeAcid
+    spreadDelay: 0.1
   - type: EvenSmoke
-    spawn: RMCSmoke
     range: 3
 
 - type: entity
@@ -153,7 +168,6 @@
   id: RMCSmokeExplosionProofSmall
   components:
   - type: EvenSmoke
-    spawn: RMCSmoke
     range: 1
 
 - type: entity
@@ -164,8 +178,8 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmokePhosphorusNoSpread
-  categories: [ HideSpawnMenu ]
+  id: RMCSmokePhosphorus
+  suffix: Phosphorus
   components:
   - type: Transform
     anchored: true
@@ -174,7 +188,7 @@
     sprite: _RMC14/Effects/smoke.rsi
     state: smoke2
   - type: TimedDespawn
-    lifetime: 5
+    lifetime: 3
   - type: Tag
     tags:
     - HideContextMenu
@@ -189,50 +203,31 @@
         Heat: 0.5
   - type: EdgeSpreader
     id: Smoke
-
-- type: entity
-  parent: RMCSmokePhosphorusNoSpread
-  id: RMCSmokeFireSentry
-  components:
   - type: EvenSmoke
-    spawn: RMCSmokePhosphorusNoSpread
-    initialSpread: 1
-    range: 1
-
-- type: entity
-  parent: RMCSmokePhosphorusNoSpread
-  id: RMCSmokePhosphorusNoSpreadStrong
-  components:
-  - type: TimedDespawn
-    lifetime: 3
-
-- type: entity
-  parent: RMCSmokePhosphorusNoSpreadStrong
-  id: RMCSmokePhosphorus
-  components:
-  - type: EvenSmoke
-    spawn: RMCSmokePhosphorusNoSpreadStrong
     initialSpread: 3
     range: 3
 
 - type: entity
-  parent: RMCSmokePhosphorusNoSpread
-  id: RMCSmokePhosphorusNoSpreadWeak
+  parent: RMCSmokePhosphorus
+  id: RMCSmokeFireSentry
+  suffix: Fire Sentry Phosphorus
+  components:
+  - type: TimedDespawn
+    lifetime: 5
+  - type: EvenSmoke
+    initialSpread: 1
+    range: 1
+
+- type: entity
+  parent: RMCSmokePhosphorus
+  id: RMCSmokePhosphorusWeak
+  suffix: Weak Phosphorus
   components:
   - type: TimedDespawn
     lifetime: 2
   - type: RMCIgniteOnCollide
     maxStacks: 15 #TODO make this 45 after adding fire stacks over time works.
     duration: 5
-
-- type: entity
-  parent: RMCSmokePhosphorusNoSpreadWeak
-  id: RMCSmokePhosphorusWeak
-  components:
-  - type: EvenSmoke
-    spawn: RMCSmokePhosphorusNoSpreadWeak
-    initialSpread: 3
-    range: 3
 
 - type: entity
   parent: CMGrenadeHighExplosive
@@ -243,9 +238,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
   - type: Explosive
-    maxIntensity: 8 # max 40 brute 40 burn
-    intensitySlope: 4
-    totalIntensity: 110
+    maxIntensity: 4
+    intensitySlope: 21.1
+    totalIntensity: 101
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
@@ -274,9 +269,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m15frag.rsi
   - type: Explosive
-    maxIntensity: 20
-    intensitySlope: 6
-    totalIntensity: 240
+    maxIntensity: 97
+    intensitySlope: 2.1
+    totalIntensity: 466
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
@@ -303,9 +298,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m12blast.rsi
   - type: Explosive
-    maxIntensity: 35 # max 175 brute, 175 burn
-    intensitySlope: 5
-    totalIntensity: 280
+    maxIntensity: 20
+    intensitySlope: 6.07
+    totalIntensity: 605
   - type: Tag
     tags:
     - Grenade
@@ -328,6 +323,11 @@
     - RMCGrenadeTraining
     - RMCGrenadeM40
   - type: Ammo
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-training-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent:
@@ -346,6 +346,11 @@
     spawn: RMCTileFireGreen
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-incendiary-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent:
@@ -369,6 +374,11 @@
     proto: RMCSmokePhosphorusWeak
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-wp-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCGrenadeWhitePhosphorus
@@ -465,9 +475,9 @@
     delay: 0
   - type: ExplodeOnTrigger
   - type: Explosive
-    maxIntensity: 16
-    intensitySlope: 6
-    totalIntensity: 160
+    maxIntensity: 10
+    intensitySlope: 2.9
+    totalIntensity: 305
     canCreateVacuum: false
   - type: Ammo
   - type: CMExplosionEffect

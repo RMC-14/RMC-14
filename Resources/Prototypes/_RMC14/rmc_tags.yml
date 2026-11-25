@@ -1,4 +1,7 @@
 - type: Tag
+  id: RMCSkillPamphlet
+
+- type: Tag
   id: CMCartridge10x20mm
 
 - type: Tag
@@ -59,6 +62,9 @@
   id: SurvivalPouch
 
 - type: Tag
+  id: RMCPouchMedical
+
+- type: Tag
   id: LauncherCompatibleGrenade
 
 - type: Tag
@@ -95,6 +101,9 @@
   id: RMCGlass
 
 - type: Tag
+  id: RMCFoldingBarricade
+
+- type: Tag
   id: RMCHelmet
 
 - type: Tag
@@ -108,6 +117,9 @@
 
 - type: Tag
   id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCMacheteHolder
 
 - type: Tag
   id: RMCScalpel
@@ -140,6 +152,11 @@
   id: Bacon
 
 - type: Tag
+
+  id: Watch
+
+- type: Tag
+
   id: RMCPinpointer
 
 - type: Tag
@@ -179,4 +196,10 @@
   id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
 
 - type: Tag
+  id: RMCSynthAllowedArmor # armor items synths are permitted to wear regardless of CanWearArmor
+
+- type: Tag
   id: RMCSentryLaptop
+
+- type: Tag
+  id: RMCDataDisk

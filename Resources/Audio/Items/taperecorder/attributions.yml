@@ -1,0 +1,4 @@
+- files: ["taperecorder_open.ogg", "taperecorder_close.ogg", "taperecorder_play.ogg", "taperecorder_stop.ogg", "taperecorder_print.ogg", "tape_flip.ogg", "taperecorder_hiss_start.ogg", "taperecorder_hiss_mid.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from CMSS13"
+  source: "https://github.com/cmss13-devs/cmss13/tree/cb2431347031d174f929226c61c8fb3a8519f34a/sound/items/taperecorder"

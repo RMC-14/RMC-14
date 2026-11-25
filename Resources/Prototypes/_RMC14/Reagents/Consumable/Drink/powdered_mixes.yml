@@ -1,0 +1,91 @@
+# Drink Powders
+- type: reagent
+  id: RMCInstantJuicePowderOrange
+  parent: BaseDrink
+  name: reagent-name-instant-orange-powder
+  desc: reagent-desc-instant-orange-powder
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#E78108"
+
+- type: reagent
+  id: RMCInstantJuicePowderApple
+  parent: BaseDrink
+  name: reagent-name-instant-apple-powder
+  desc: reagent-desc-instant-apple-powder
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#365E30"
+
+- type: reagent
+  id: RMCInstantJuicePowderWatermelon
+  parent: BaseDrink
+  name: reagent-name-instant-watermelon-powder
+  desc: reagent-desc-instant-watermelon-powder
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#863333"
+
+- type: reagent
+  id: RMCInstantJuicePowderGrape
+  parent: BaseDrink
+  name: reagent-name-instant-grape-powder
+  desc: reagent-desc-instant-grape-powder
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#863333"
+
+- type: reagent
+  id: RMCInstantJuicePowderPineapple
+  parent: BaseDrink
+  name: reagent-name-instant-pineapple-powder
+  desc: reagent-desc-instant-pineapple-powder
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#FFC000"
+
+# Drink Mixes
+- type: reagent
+  id: RMCInstantJuiceOrange
+  parent: BaseDrink
+  name: reagent-name-instant-orange
+  desc: reagent-desc-instant-orange
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: orange
+  color: "#E78108"
+
+- type: reagent
+  id: RMCInstantJuiceApple
+  parent: BaseDrink
+  name: reagent-name-instant-apple
+  desc: reagent-desc-instant-apple
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: apple
+  color: "#F59A40"
+
+- type: reagent
+  id: RMCInstantJuiceWatermelon
+  parent: BaseDrink
+  name: reagent-name-instant-watermelon
+  desc: reagent-desc-instant-watermelon
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: watermelon
+  color: "#A71D1D"
+
+- type: reagent
+  id: RMCInstantJuiceGrape
+  parent: BaseDrink
+  name: reagent-name-instant-grape
+  desc: reagent-desc-instant-grape
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: grape
+  color: "#863333"
+
+- type: reagent
+  id: RMCInstantJuicePineapple
+  parent: BaseDrink
+  name: reagent-name-instant-pineapple
+  desc: reagent-desc-instant-pineapple
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: pineapple
+  color: "#FFC000"
