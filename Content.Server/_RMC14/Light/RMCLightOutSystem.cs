@@ -1,7 +1,7 @@
 using Content.Server.Light.EntitySystems;
 using Content.Shared.Light.Components;
 
-namespace Content.Server._RMC14.Light;
+namespace Content.Shared._RMC14.Light;
 
 public sealed class RMCLightOutSystem : SharedRMCLightOutSystem
 {
