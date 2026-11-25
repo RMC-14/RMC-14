@@ -127,10 +127,10 @@
     - CMSheetPlasteel50
     - RMCExplosivePlastic
     - RMCExplosivePlastic
+    - RMCLightReplacer
     pocket1:
     - CMWelder
     - CMEntrenchingTool
-    - RMCLightReplacer
 
 - type: playTimeTracker
   id: RMCJobPMCEngineer
