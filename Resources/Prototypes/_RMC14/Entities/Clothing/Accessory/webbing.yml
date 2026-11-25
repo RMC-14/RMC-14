@@ -910,6 +910,31 @@
     contents:
     - id: RMCMagazineMar50LMG
       amount: 5
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,9,1 # 5 slots
+      blacklist:
+        tags:
+        - CMMagazineSmg
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
+        - RMCSyringeCase
+        - RMCMagazineMar50LMG
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbing
