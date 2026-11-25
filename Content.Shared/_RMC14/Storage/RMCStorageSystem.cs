@@ -522,6 +522,27 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
+    public bool TryInsertInBackStorage(EntityUid wearer, EntityUid toInsert)
+    {
+        var slots = _inventory.GetSlotEnumerator(wearer, SlotFlags.BACK);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is not { } storageItem ||
+                !_storageQuery.TryComp(storageItem, out var storage))
+            {
+                continue;
+            }
+
+            if (!CanInsertStoreSkill(storageItem, toInsert, wearer, out _))
+                return false;
+
+            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage, playSound: false))
+                return true;
+        }
+
+        return false;
+    }
+
     private void OnContainerEmptyDestroyed(Entity<RMCContainerEmptyOnDestructionComponent> containerEnt, ref DestructionEventArgs args)
     {
         if (!containerEnt.Comp.OnDestruction)

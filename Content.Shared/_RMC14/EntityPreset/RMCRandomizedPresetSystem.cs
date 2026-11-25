@@ -1,8 +1,6 @@
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
-using Content.Shared.Storage;
-using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -16,7 +14,6 @@ public sealed class RMCRandomizedPresetSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public void ApplyPreset(EntityUid entity, IRMCRandomizedPreset preset)
@@ -120,7 +117,7 @@ public sealed class RMCRandomizedPresetSystem : EntitySystem
             }
         }
 
-        if (tryStorage && TryInsertItemInStorage(entity, spawn))
+        if (tryStorage && _rmcStorage.TryInsertInBackStorage(entity, spawn))
             return;
 
         if (tryInHand && _hands.TryPickupAnyHand(entity, spawn))
@@ -128,26 +125,5 @@ public sealed class RMCRandomizedPresetSystem : EntitySystem
 
         Log.Warning($"Couldn't equip {ToPrettyString(spawn)} on {ToPrettyString(entity)}");
         QueueDel(spawn);
-    }
-
-    private bool TryInsertItemInStorage(EntityUid entity, EntityUid toInsert)
-    {
-        var slots = _inventory.GetSlotEnumerator(entity, SlotFlags.BACK);
-        while (slots.MoveNext(out var slot))
-        {
-            if (slot.ContainedEntity is not { } storageItem ||
-                !TryComp(storageItem, out StorageComponent? storage))
-            {
-                continue;
-            }
-
-            if (!_rmcStorage.CanInsertStoreSkill(storageItem, toInsert, entity, out _))
-                return false;
-
-            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage, playSound: false))
-                return true;
-        }
-
-        return false;
     }
 }
