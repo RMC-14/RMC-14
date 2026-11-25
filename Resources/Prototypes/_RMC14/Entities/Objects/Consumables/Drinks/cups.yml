@@ -147,13 +147,17 @@
   description: A well-crafted, brutal mug adorned with the logo of the Halcyon corporation. Made for those who pursue relentless progress and industry.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/halcyoncup.rsi
     layers:
       - sprite: _RMC14/Objects/Consumable/Drinks/halcyoncup.rsi
-        state: base
+        state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
-        state: icon-3
+        sprite: _RMC14/Objects/Consumable/Drinks/halcyoncup.rsi
+        state: icon-2
         visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: icon-
 
 - type: entity
   parent: RMCCoffeeCup
