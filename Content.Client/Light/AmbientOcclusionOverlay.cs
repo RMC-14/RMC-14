@@ -19,6 +19,7 @@ public sealed class AmbientOcclusionOverlay : Overlay
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
     private static readonly ProtoId<ShaderPrototype> StencilMaskShader = "StencilMask";
     private static readonly ProtoId<ShaderPrototype> StencilEqualDrawShader = "StencilEqualDraw";
+    private const float BlurMultiplier = 14f;
 
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IConfigurationManager _cfgManager = default!;
@@ -47,7 +48,7 @@ public sealed class AmbientOcclusionOverlay : Overlay
     {
         /*
          * tl;dr
-         * - we draw a black square on each "ambient occlusion" entity.
+         * - we draw each occluder's polygon to an AO source texture.
          * - we blur this.
          * - We apply it to the viewport.
          *
@@ -61,10 +62,13 @@ public sealed class AmbientOcclusionOverlay : Overlay
         var worldBounds = args.WorldBounds;
         var worldHandle = args.WorldHandle;
         var color = Color.FromHex(_cfgManager.GetCVar(CCVars.AmbientOcclusionColor));
+        var distance = _cfgManager.GetCVar(CCVars.AmbientOcclusionDistance);
         //var color = Color.Red;
         var target = viewport.RenderTarget;
         var lightScale = target.Size / (Vector2) viewport.Size;
         var scale = viewport.RenderScale / (Vector2.One / lightScale);
+        var expandedBounds = worldBounds.Enlarged(GetBlurMargin(viewport, distance));
+        var polygonExpansion = distance / EyeManager.PixelsPerMeter;
         var maps = _entManager.System<SharedMapSystem>();
         var lookups = _entManager.System<EntityLookupSystem>();
         var query = _entManager.System<OccluderSystem>();
@@ -99,20 +103,20 @@ public sealed class AmbientOcclusionOverlay : Overlay
                 var worldToTargetMatrix = _aoTarget.GetWorldToLocalMatrix(viewport.Eye!, scale);
 
                 _cachedOccluders.Clear();
-                query.QueryAabb(_cachedOccluders, mapId, worldBounds);
+                query.QueryAabb(_cachedOccluders, mapId, expandedBounds);
 
                 foreach (var entry in _cachedOccluders)
                 {
                     DebugTools.Assert(entry.Comp1.Enabled);
                     var matrix = xformSystem.GetWorldMatrix(entry.Comp2);
                     var localToTargetMatrix = Matrix3x2.Multiply(matrix, worldToTargetMatrix);
-                    AppendAmbientOcclusionPolygon(worldHandle, entry.Comp1.Polygon, localToTargetMatrix);
+                    AppendAmbientOcclusionPolygon(worldHandle, entry.Comp1.Polygon, localToTargetMatrix, polygonExpansion);
                 }
 
                 FlushAmbientOcclusionPolygons(worldHandle);
             }, Color.Transparent);
 
-        _clyde.BlurRenderTarget(viewport, _aoTarget, _aoBlurBuffer, viewport.Eye!, 14f);
+        _clyde.BlurRenderTarget(viewport, _aoTarget, _aoBlurBuffer, viewport.Eye!, BlurMultiplier);
 
         // Need to do stencilling after blur as it will nuke it.
         // Draw stencil for the grid so we don't draw in space.
@@ -128,7 +132,7 @@ public sealed class AmbientOcclusionOverlay : Overlay
                 {
                     var transform = xformSystem.GetWorldMatrix(grid.Owner);
                     var worldToTextureMatrix = Matrix3x2.Multiply(transform, invMatrix);
-                    var tiles = maps.GetTilesEnumerator(grid.Owner, grid, worldBounds);
+                    var tiles = maps.GetTilesIntersecting(grid.Owner, grid, worldBounds);
                     worldHandle.SetTransform(worldToTextureMatrix);
                     while (tiles.MoveNext(out var tileRef))
                     {
@@ -154,10 +158,22 @@ public sealed class AmbientOcclusionOverlay : Overlay
         args.WorldHandle.UseShader(null);
     }
 
+    private static float GetBlurMargin(IClydeViewport viewport, float distance)
+    {
+        if (viewport.Eye == null)
+            return distance / EyeManager.PixelsPerMeter;
+
+        var cameraSize = viewport.Eye.Zoom.Y * viewport.Size.Y * (1 / viewport.RenderScale.Y) / EyeManager.PixelsPerMeter;
+
+        // Matches Clyde's BlurRenderTarget radius calculation closely enough to include off-screen AO contributors.
+        return distance / EyeManager.PixelsPerMeter + BlurMultiplier / cameraSize;
+    }
+
     private void AppendAmbientOcclusionPolygon(
         DrawingHandleWorld worldHandle,
         ReadOnlySpan<Vector2> polygon,
-        Matrix3x2 localToTargetMatrix)
+        Matrix3x2 localToTargetMatrix,
+        float expansion)
     {
         if (polygon.Length < 3)
             return;
@@ -167,10 +183,27 @@ public sealed class AmbientOcclusionOverlay : Overlay
             FlushAmbientOcclusionPolygons(worldHandle);
 
         var indexBase = (ushort) _aoVertices.Count;
+        var center = Vector2.Zero;
 
         for (var i = 0; i < polygon.Length; i++)
         {
-            _aoVertices.Add(Vector2.Transform(polygon[i], localToTargetMatrix));
+            center += polygon[i];
+        }
+
+        center /= polygon.Length;
+
+        for (var i = 0; i < polygon.Length; i++)
+        {
+            var vertex = polygon[i];
+
+            if (expansion > 0f)
+            {
+                var offset = vertex - center;
+                if (offset.LengthSquared() > 0f)
+                    vertex += Vector2.Normalize(offset) * expansion;
+            }
+
+            _aoVertices.Add(Vector2.Transform(vertex, localToTargetMatrix));
         }
 
         for (var i = 1; i < polygon.Length - 1; i++)
