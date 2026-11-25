@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: RMCBaseMobSpeciesOrganic
@@ -37,17 +37,19 @@
   - type: RMCPulse
   - type: Bloodstream
     bloodReagent: Blood
-    bloodMaxVolume: 560
-    maxBleedAmount: 50
-    bleedReductionAmount: 0
-    bloodRefreshAmount: 0.15
+    bloodMaxVolume: 600
+    chemicalMaxVolume: 1000
+    updateInterval: 1
+    maxBleedAmount: null
+    damageBleedModifiers: CMBloodlossHuman
+    #bloodloss modifiers in bloodstream below are ignored - rmcblood uses its own fields
     bloodlossDamage:
       types:
         Bloodloss: 0.5
     bloodlossHealDamage:
       types:
         Bloodloss: -1
-    damageBleedModifiers: CMBloodlossHuman
+  - type: RMCBlood
   - type: Woundable
   - type: StatusEffects
     allowed:

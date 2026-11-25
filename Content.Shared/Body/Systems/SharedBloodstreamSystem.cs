@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared._RMC14.Medical.Wounds;
@@ -45,6 +46,7 @@ public abstract class SharedBloodstreamSystem : EntitySystem
     // RMC14
     [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
 
     public override void Initialize()
     {
@@ -74,6 +76,12 @@ public abstract class SharedBloodstreamSystem : EntitySystem
 
             bloodstream.NextUpdate += bloodstream.AdjustedUpdateInterval;
             DirtyField(uid, bloodstream, nameof(BloodstreamComponent.NextUpdate)); // needs to be dirtied on the client so it can be rerolled during prediction
+
+            if (TryComp<RMCBloodComponent>(uid, out var rmcblood)) //RMC14
+            {
+                _rmcBloodstream.UpdateBlood((uid, bloodstream, rmcblood), curTime);
+                continue;
+            }
 
             if (!_cmStasisBag.CanBodyMetabolize(uid))
                 continue;
@@ -441,7 +449,12 @@ public abstract class SharedBloodstreamSystem : EntitySystem
             return false;
 
         ent.Comp.BleedAmount += amount;
-        ent.Comp.BleedAmount = Math.Clamp(ent.Comp.BleedAmount, 0, ent.Comp.MaxBleedAmount);
+        //RMC14
+        if (ent.Comp.MaxBleedAmount != null)
+            ent.Comp.BleedAmount = Math.Clamp(ent.Comp.BleedAmount, 0, ent.Comp.MaxBleedAmount.Value);
+        else
+            ent.Comp.BleedAmount = Math.Max(ent.Comp.BleedAmount, 0);
+        //RMC14
 
         DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmount));
 

@@ -72,7 +72,7 @@ public sealed partial class BloodstreamComponent : Component
     /// How high can <see cref="BleedAmount"/> go?
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float MaxBleedAmount = 10.0f;
+    public float? MaxBleedAmount = 10.0f; //RMC14 - can be null
 
     /// <summary>
     /// What percentage of current blood is necessary to avoid dealing blood loss damage?

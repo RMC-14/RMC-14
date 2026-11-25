@@ -191,14 +191,15 @@ public sealed class HealthScannerSystem : EntitySystem
 
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;
-        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream))
+        if (_rmcBloodstream.TryGetBloodVolumes(target, out var bloodVol, out var normalBloodVol))
         {
-            blood = bloodstream.Volume;
-            maxBlood = bloodstream.MaxVolume;
+            blood = bloodVol;
+            maxBlood = normalBloodVol;
         }
 
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
         _rmcTemperature.TryGetCurrentTemperature(target, out var temperature);
+        _rmcBloodstream.TryGetBloodThresholds(target, out var bloodThresholds);
 
         var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
@@ -207,7 +208,7 @@ public sealed class HealthScannerSystem : EntitySystem
         var woundTypes = wound != null ? wound.WoundGroups : new();
         var mobState = TryComp<MobStateComponent>(target, out var mob) ? mob.CurrentState : MobState.Alive;
 
-        var state = new HealthScanState(GetNetEntity(target), mobState, damage, wounds, woundTypes, blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
+        var state = new HealthScanState(GetNetEntity(target), mobState, damage, wounds, woundTypes, blood, maxBlood, bloodThresholds, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }
