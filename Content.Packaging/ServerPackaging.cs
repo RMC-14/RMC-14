@@ -34,23 +34,6 @@ public static class ServerPackaging
         .Select(o => o.Rid)
         .ToList();
 
-    private static readonly List<string> ServerContentAssemblies = new()
-    {
-        "Content.Server.Database",
-        "Content.Server",
-        "Content.Shared",
-        "Content.Shared.Database",
-    };
-
-    private static readonly List<string> ServerExtraAssemblies = new()
-    {
-        // Python script had Npgsql. though we want Npgsql.dll as well soooo
-        "Npgsql",
-        "Microsoft",
-        "NetCord",
-        "Discord.Net",
-    };
-
     private static readonly List<string> ServerNotExtraAssemblies = new()
     {
         "JetBrains.Annotations",
