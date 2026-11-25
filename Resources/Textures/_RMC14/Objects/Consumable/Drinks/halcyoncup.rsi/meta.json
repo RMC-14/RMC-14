@@ -1,17 +1,20 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Made by SharkSnake98 on Github",
+  "copyright": "Made by SharkSnake98 on GitHub, fill by @TadJohnson00 (GitHub).",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "base"
+      "name": "icon-0"
     },
     {
-      "name": "icon"
+      "name": "icon-1"
+    },
+    {
+      "name": "icon-2"
     }
   ]
 }
