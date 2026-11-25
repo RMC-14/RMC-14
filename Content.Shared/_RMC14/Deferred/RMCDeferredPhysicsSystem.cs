@@ -7,6 +7,7 @@ namespace Content.Shared._RMC14.Deferred;
 // TODO RMC14 See if this can be removed after predicted collision events are buffered in RobustToolbox.
 /// <summary>
 /// Defers physics operations that can invalidate contacts until after collision events finish being raised.
+/// Use these methods when stopping throws or updating contacts from collision handlers.
 /// </summary>
 public sealed partial class RMCDeferredPhysicsSystem : EntitySystem
 {
@@ -67,7 +68,7 @@ public sealed partial class RMCDeferredPhysicsSystem : EntitySystem
     /// <summary>
     /// Queues landing and stopping a thrown entity.
     /// </summary>
-    /// <returns>Returns True if queued, False if it is already queued or no longer being thrown.</returns>
+    /// <returns>Returns True if queued, False if it is already queued or no longer being thrown or has no physics component.</returns>
     public bool TryQueueLandAndStopThrow(EntityUid uid, bool playLandSound = true)
     {
         if (!_physicsQuery.HasComp(uid) || !_thrownItemQuery.HasComp(uid) || !_pendingThrowStops.Add(uid))
@@ -91,7 +92,7 @@ public sealed partial class RMCDeferredPhysicsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Queues contact regeneration for an awake physics body.
+    /// Queues contact regeneration. The physics body must still exist and be awake when the queued event is processed.
     /// </summary>
     /// <returns>Returns True if queued, False if the entity has no physics body or already has contact regeneration queued.</returns>
     public bool TryQueueRegenerateContacts(EntityUid uid)
