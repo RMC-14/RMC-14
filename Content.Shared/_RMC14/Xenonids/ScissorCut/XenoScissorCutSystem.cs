@@ -14,6 +14,8 @@ using Content.Shared.Maps;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 
@@ -23,7 +25,7 @@ public sealed class XenoScissorCutSystem : EntitySystem
 {
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private XenoSystem _xeno = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
@@ -35,6 +37,10 @@ public sealed class XenoScissorCutSystem : EntitySystem
     [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private TurfSystem _turf = default!;
+
+    private readonly HashSet<FixtureProxy> _fixtures = new();
+    private readonly HashSet<Entity<PhysicsComponent>> _targets = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoScissorCutComponent, XenoScissorCutActionEvent>(OnXenoScissorCutAction);
@@ -67,7 +73,23 @@ public sealed class XenoScissorCutSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        foreach (var ent in _physics.GetCollidingEntities(Transform(xeno).MapID, rot))
+        _fixtures.Clear();
+        _targets.Clear();
+        _lookup.GetFixturesIntersecting(Transform(xeno).MapID, rot, _fixtures, new FixtureQueryArgs(
+            new QueryFilter
+            {
+                LayerBits = -1L,
+                MaskBits = -1L,
+                Flags = QueryFlags.Dynamic | QueryFlags.Static | QueryFlags.Sensors,
+            },
+            Approximate: true));
+
+        foreach (var fixture in _fixtures)
+        {
+            _targets.Add((fixture.Entity, fixture.Body));
+        }
+
+        foreach (var ent in _targets)
         {
             if (HasComp<DamageOnXenoScissorsComponent>(ent) || HasComp<DestroyOnXenoPierceScissorComponent>(ent))
             {
