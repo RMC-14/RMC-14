@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: MidZik
-  changes:
-  - message: Spammable xeno announcements (such as traps being destroyed) will use
-      the repeated message system when possible to reduce how much the chat window
-      gets flooded with messages, such as during an orbital bombardment.
-    type: Tweak
-  id: 3472
-  time: '2026-07-03T01:40:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10309
 - author: Dygon
   changes:
   - message: Xenonid players not on the dropship when a hijack is initiated now automatically
@@ -4341,5 +4332,12 @@
   id: 3971
   time: '2026-11-25T01:20:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11201
+- author: Simon
+  changes:
+  - message: Fixed oversight that allows size to be used within markup tags
+    type: Fix
+  id: 3972
+  time: '2026-11-25T20:49:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11212
 Name: RMC14
 Order: -1
