@@ -61,12 +61,12 @@ public sealed partial class XenoChargeSystem : EntitySystem
     [Dependency] private ThrownItemSystem _thrownItem = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private  VehicleWheelSystem _vehicleWheels = default!;
+    [Dependency] private VehicleWheelSystem _vehicleWheels = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private XenoSystem _xeno = default!;
     [Dependency] private XenoAnimationsSystem _xenoAnimations = default!;
     [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private  CMArmorSystem _armor = default!;
+    [Dependency] private CMArmorSystem _armor = default!;
 
     private EntityQuery<XenoChargeDontHitComponent> _xenoChargeDontHitQuery;
 

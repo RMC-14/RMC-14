@@ -36,20 +36,20 @@ public abstract partial class SharedSupplyDropSystem : EntitySystem
 {
     private const float LandingDamageBoundsPaddingFactor = 0.33f;
 
-    [Dependency] private  AreaSystem _area = default!;
-    [Dependency] private  SharedAudioSystem _audio = default!;
-    [Dependency] private  IComponentFactory _compFactory = default!;
-    [Dependency] private  ARESCoreSystem _core = default!;
-    [Dependency] private  SharedContainerSystem _container = default!;
-    [Dependency] private  SharedCrashLandSystem _crashLand = default!;
-    [Dependency] private  DamageableSystem _damageable = default!;
-    [Dependency] private  EntityLookupSystem _entityLookup = default!;
-    [Dependency] private  SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private  SharedMapSystem _map = default!;
-    [Dependency] private  SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private  INetManager _net = default!;
-    [Dependency] private  SharedParaDropSystem _paradrop = default!;
-    [Dependency] private  SharedPopupSystem _popup = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedCrashLandSystem _crashLand = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedParaDropSystem _paradrop = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private RMCMapSystem _rmcMap = default!;

@@ -10,7 +10,6 @@ namespace Content.Shared._RMC14.Throwing;
 public sealed partial class RMCThrowingSystem : EntitySystem
 {
     [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;
-    [Dependency] private ThrownItemSystem _thrown = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 

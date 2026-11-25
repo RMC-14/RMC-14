@@ -54,7 +54,7 @@ public sealed partial class UniversalRecorderSystem : EntitySystem
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private  SharedToolSystem _tool = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
