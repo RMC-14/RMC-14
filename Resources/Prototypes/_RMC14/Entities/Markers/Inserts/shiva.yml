@@ -102,10 +102,10 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Shiva/lz2_scenario1.yml" # "lz2-southwest": "full", "lz2-south-gate": "half", "lz2-southeast": "none", "lz2-eastsouth": "half", "lz2-southeast-gate": "none", "lz2-east": "none", "lz2-east-gate": "full", "lz2-north": "full"
-      probability: 0
+      probability: 0,17
     - spawn: "/Maps/_RMC14/Inserts/Shiva/lz2_scenario2.yml" # "lz2-southwest": "half", "lz2-south-gate": "full", "lz2-southeast": "full", "lz2-eastsouth": "none", "lz2-southeast-gate": "open", "lz2-east": "half", "lz2-east-gate": "none", "lz2-north": "open"
-      probability: 0
+      probability: 0,17
     - spawn: "/Maps/_RMC14/Inserts/Shiva/lz2_scenario3.yml" # "lz2-southwest": "half", "lz2-south-gate": "none", "lz2-southeast": "half", "lz2-eastsouth": "full", "lz2-southeast-gate": "full", "lz2-east": "none", "lz2-east-gate": "half", "lz2-north": "none"
-      probability: 0
+      probability: 0,17
     - spawn: "/Maps/_RMC14/Inserts/Shiva/lz2_scenario4.yml" # "lz2-southwest": "full", "lz2-south-gate": "none", "lz2-southeast": "half", "lz2-eastsouth": "none", "lz2-southeast-gate": "open", "lz2-east": "full", "lz2-east-gate": "none", "lz2-north": "open"
-      probability: 1
+      probability: 0,17

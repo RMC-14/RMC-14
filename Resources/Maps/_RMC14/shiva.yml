@@ -37720,7 +37720,7 @@ entities:
     - type: Transform
       pos: 179.5,43.5
       parent: 1
-- proto: ClosetWallFire
+- proto: RMCWallClosetFireSafetyFilled
   entities:
   - uid: 90
     components:
