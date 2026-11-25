@@ -6,7 +6,7 @@ namespace Content.Server.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.RMCMaintainer)] //RMC14
     [AdminCommand(AdminFlags.Round)]
-    sealed class DelayStartCommand : IConsoleCommand
+    sealed partial class DelayStartCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _e = default!;
 

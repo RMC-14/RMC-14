@@ -14,7 +14,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Client._RMC14.Xenonids.Designer;
 
-public sealed class DesignerCrosshairSystem : EntitySystem
+public sealed partial class DesignerCrosshairSystem : EntitySystem
 {
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

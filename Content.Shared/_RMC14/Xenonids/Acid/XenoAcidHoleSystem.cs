@@ -38,7 +38,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
-public sealed class XenoAcidHoleSystem : EntitySystem
+public sealed partial class XenoAcidHoleSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageable = default!;

@@ -9,7 +9,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Xenonids.Emote;
 
-public sealed class XenoEmoteSystem : EntitySystem
+public sealed partial class XenoEmoteSystem : EntitySystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;

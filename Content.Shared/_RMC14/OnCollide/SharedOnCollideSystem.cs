@@ -17,7 +17,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.OnCollide;
 
-public abstract class SharedOnCollideSystem : EntitySystem
+public abstract partial class SharedOnCollideSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private MobStateSystem _mobState = default!;

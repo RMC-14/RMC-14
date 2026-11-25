@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Whistle;
 
-public sealed class RMCWhistleSystem : EntitySystem
+public sealed partial class RMCWhistleSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

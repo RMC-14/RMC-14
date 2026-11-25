@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.WeedKiller;
 
-public sealed class WeedKillerSystem : EntitySystem
+public sealed partial class WeedKillerSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

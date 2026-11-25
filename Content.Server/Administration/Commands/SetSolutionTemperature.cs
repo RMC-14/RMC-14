@@ -7,7 +7,7 @@ using System.Linq;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class SetSolutionTemperature : IConsoleCommand
+    public sealed partial class SetSolutionTemperature : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

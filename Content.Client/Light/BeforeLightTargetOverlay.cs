@@ -7,7 +7,7 @@ namespace Content.Client.Light;
 /// <summary>
 /// Handles an enlarged lighting target so content can use large blur radii.
 /// </summary>
-public sealed class BeforeLightTargetOverlay : Overlay
+public sealed partial class BeforeLightTargetOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 

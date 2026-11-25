@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.RMCMedicalRecords;
 
-public abstract class SharedRMCMedicalRecordsSystem : EntitySystem
+public abstract partial class SharedRMCMedicalRecordsSystem : EntitySystem
 {
     [Dependency] private SkillsSystem _skills = default!;
 

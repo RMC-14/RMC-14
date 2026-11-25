@@ -3,7 +3,7 @@ using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Marines;
 
-public sealed class MarineSystem : SharedMarineSystem
+public sealed partial class MarineSystem : SharedMarineSystem
 {
     [Dependency] private IOverlayManager _overlays = default!;
 

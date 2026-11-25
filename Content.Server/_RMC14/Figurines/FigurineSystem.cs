@@ -18,7 +18,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace Content.Server._RMC14.Figurines;
 
-public sealed class FigurineSystem : EntitySystem
+public sealed partial class FigurineSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private HandsSystem _hands = default!;

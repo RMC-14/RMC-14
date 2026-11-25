@@ -6,7 +6,7 @@ using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Telephone;
 
-public sealed class TelephoneOverlay : Overlay
+public sealed partial class TelephoneOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
 

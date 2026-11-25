@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Botany.Systems;
 
-public sealed class SeedExtractorSystem : EntitySystem
+public sealed partial class SeedExtractorSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private PopupSystem _popupSystem = default!;

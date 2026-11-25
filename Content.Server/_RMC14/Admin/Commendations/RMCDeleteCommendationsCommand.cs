@@ -13,7 +13,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin.Commendations;
 
 [AdminCommand(AdminFlags.Commendations)]
-public sealed class RMCDeleteCommendationsCommand : LocalizedCommands
+public sealed partial class RMCDeleteCommendationsCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _locator = default!;
     [Dependency] private IServerDbManager _db = default!;

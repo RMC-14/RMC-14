@@ -7,7 +7,7 @@ using Content.Shared.Storage;
 
 namespace Content.Server.Holosign;
 
-public sealed class HolosignSystem : EntitySystem
+public sealed partial class HolosignSystem : EntitySystem
 {
     [Dependency] private PowerCellSystem _powerCell = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

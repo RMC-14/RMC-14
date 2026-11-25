@@ -7,7 +7,7 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Handles requiring multiple traitors being alive for the objective to be given.
 /// </summary>
-public sealed class MultipleTraitorsRequirementSystem : EntitySystem
+public sealed partial class MultipleTraitorsRequirementSystem : EntitySystem
 {
     [Dependency] private TraitorRuleSystem _traitorRule = default!;
 

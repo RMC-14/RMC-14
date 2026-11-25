@@ -22,7 +22,7 @@ namespace Content.Server.Radio.EntitySystems;
 /// <summary>
 ///     This system handles radio speakers and microphones (which together form a hand-held radio).
 /// </summary>
-public sealed class RadioDeviceSystem : EntitySystem
+public sealed partial class RadioDeviceSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private PopupSystem _popup = default!;

@@ -8,7 +8,7 @@ using Content.Shared.Timing;
 
 namespace Content.Shared.Friends.Systems;
 
-public sealed class PettableFriendSystem : EntitySystem
+public sealed partial class PettableFriendSystem : EntitySystem
 {
     [Dependency] private NpcFactionSystem _factionException = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

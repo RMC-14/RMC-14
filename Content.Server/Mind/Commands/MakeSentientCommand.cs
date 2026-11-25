@@ -10,7 +10,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Mind.Commands
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class MakeSentientCommand : IConsoleCommand
+    public sealed partial class MakeSentientCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

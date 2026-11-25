@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Crayon.UI
 {
-    public sealed class CrayonBoundUserInterface : BoundUserInterface
+    public sealed partial class CrayonBoundUserInterface : BoundUserInterface
     {
         [Dependency] private IPrototypeManager _protoManager = default!;
 

@@ -31,7 +31,7 @@ namespace Content.Server.Station.Systems;
 /// Also provides helpers for spawning in the player's mob.
 /// </summary>
 [PublicAPI]
-public sealed class StationSpawningSystem : SharedStationSpawningSystem
+public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
 {
     [Dependency] private SharedAccessSystem _accessSystem = default!;
     [Dependency] private ActorSystem _actors = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Roles
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class AddRoleCommand : LocalizedEntityCommands
+    public sealed partial class AddRoleCommand : LocalizedEntityCommands
     {
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;

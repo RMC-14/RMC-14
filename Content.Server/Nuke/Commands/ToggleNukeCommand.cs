@@ -8,7 +8,7 @@ namespace Content.Server.Nuke.Commands;
 
 [UsedImplicitly]
 [AdminCommand(AdminFlags.Fun)]
-public sealed class ToggleNukeCommand : LocalizedCommands
+public sealed partial class ToggleNukeCommand : LocalizedCommands
 {
     [Dependency] private IEntityManager _entManager = default!;
 

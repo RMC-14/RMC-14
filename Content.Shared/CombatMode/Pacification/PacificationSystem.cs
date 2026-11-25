@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.CombatMode.Pacification;
 
-public sealed class PacificationSystem : EntitySystem
+public sealed partial class PacificationSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alertsSystem = default!;
     [Dependency] private SharedActionsSystem _actionsSystem = default!;

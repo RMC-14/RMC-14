@@ -4,7 +4,7 @@ using Content.Server.Explosion.Components.OnTrigger;
 
 namespace Content.Server.Explosion.EntitySystems;
 
-public sealed class TwoStageTriggerSystem : EntitySystem
+public sealed partial class TwoStageTriggerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ISerializationManager _serializationManager = default!;

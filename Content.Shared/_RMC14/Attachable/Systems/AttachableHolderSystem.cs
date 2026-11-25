@@ -32,7 +32,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachableHolderSystem : EntitySystem
+public sealed partial class AttachableHolderSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;

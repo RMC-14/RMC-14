@@ -15,7 +15,7 @@ using static Content.Shared._RMC14.Requisitions.Components.RequisitionsRailingMo
 
 namespace Content.Shared._RMC14.Requisitions;
 
-public abstract class SharedRequisitionsSystem : EntitySystem
+public abstract partial class SharedRequisitionsSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private FixtureSystem _fixtures = default!;

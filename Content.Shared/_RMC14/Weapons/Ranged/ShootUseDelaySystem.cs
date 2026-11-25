@@ -4,7 +4,7 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class ShootUseDelaySystem : EntitySystem
+public sealed partial class ShootUseDelaySystem : EntitySystem
 {
     [Dependency] private UseDelaySystem _useDelay = default!;
 

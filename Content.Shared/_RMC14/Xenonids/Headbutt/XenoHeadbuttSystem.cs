@@ -24,7 +24,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Headbutt;
 
-public sealed class XenoHeadbuttSystem : EntitySystem
+public sealed partial class XenoHeadbuttSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;

@@ -6,7 +6,7 @@ using Content.Shared.PDA;
 
 namespace Content.Server.Access.Systems;
 
-public sealed class IdBindSystem : EntitySystem
+public sealed partial class IdBindSystem : EntitySystem
 {
     [Dependency] private IdCardSystem _cardSystem = default!;
     [Dependency] private PdaSystem _pdaSystem = default!;

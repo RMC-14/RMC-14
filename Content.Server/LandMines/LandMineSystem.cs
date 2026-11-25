@@ -8,7 +8,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.LandMines;
 
-public sealed class LandMineSystem : EntitySystem
+public sealed partial class LandMineSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audioSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;

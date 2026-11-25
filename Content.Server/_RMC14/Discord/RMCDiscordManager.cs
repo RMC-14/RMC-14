@@ -9,7 +9,7 @@ using LogMessage = Discord.LogMessage;
 
 namespace Content.Server._RMC14.Discord;
 
-public sealed class RMCDiscordManager : IPostInjectInit
+public sealed partial class RMCDiscordManager : IPostInjectInit
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private ILogManager _logManager = default!;

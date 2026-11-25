@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Access.Systems;
 
-public sealed class IdExaminableSystem : EntitySystem
+public sealed partial class IdExaminableSystem : EntitySystem
 {
     [Dependency] private ExamineSystemShared _examineSystem = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;

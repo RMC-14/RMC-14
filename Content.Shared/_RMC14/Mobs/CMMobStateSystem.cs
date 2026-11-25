@@ -14,7 +14,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Mobs;
 
-public sealed class CMMobStateSystem : EntitySystem
+public sealed partial class CMMobStateSystem : EntitySystem
 {
     [Dependency] private IConsoleHost _host = default!;
     [Dependency] private MobStateSystem _mobState = default!;

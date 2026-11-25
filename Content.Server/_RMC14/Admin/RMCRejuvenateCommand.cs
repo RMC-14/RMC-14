@@ -11,7 +11,7 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Admin;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
-public sealed class RMCRejuvenateCommand : ToolshedCommand
+public sealed partial class RMCRejuvenateCommand : ToolshedCommand
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 

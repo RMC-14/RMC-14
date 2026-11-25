@@ -14,7 +14,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Brutalize;
 
-public sealed class XenoBrutalizeSystem : EntitySystem
+public sealed partial class XenoBrutalizeSystem : EntitySystem
 {
     [Dependency] private XenoSystem _xeno = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;

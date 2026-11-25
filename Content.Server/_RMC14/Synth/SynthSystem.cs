@@ -14,7 +14,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Synth;
 
-public sealed class SynthSystem : SharedSynthSystem
+public sealed partial class SynthSystem : SharedSynthSystem
 {
     private const string GrenadeTag = "Grenade";
 

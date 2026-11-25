@@ -22,7 +22,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Tail_Lash;
 
-public sealed class XenoTailLashSystem : EntitySystem
+public sealed partial class XenoTailLashSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private XenoPlasmaSystem _plasma = default!;

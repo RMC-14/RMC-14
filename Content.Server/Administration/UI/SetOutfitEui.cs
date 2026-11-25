@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace Content.Server.Administration.UI
 {
     [UsedImplicitly]
-    public sealed class SetOutfitEui : BaseEui
+    public sealed partial class SetOutfitEui : BaseEui
     {
         [Dependency] private IAdminManager _adminManager = default!;
         private readonly NetEntity _target;

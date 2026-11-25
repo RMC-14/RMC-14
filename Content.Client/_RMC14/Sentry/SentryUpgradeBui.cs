@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Sentry;
 
 [UsedImplicitly]
-public sealed class SentryUpgradeBui : BoundUserInterface
+public sealed partial class SentryUpgradeBui : BoundUserInterface
 {
     [Dependency] private IClyde _displayManager = default!;
     [Dependency] private IEyeManager _eye = default!;

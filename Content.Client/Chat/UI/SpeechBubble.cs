@@ -20,7 +20,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Chat.UI
 {
-    public abstract class SpeechBubble : Control
+    public abstract partial class SpeechBubble : Control
     {
         [Dependency] private IGameTiming _timing = default!;
         [Dependency] private IEyeManager _eyeManager = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.CombatMode
 {
-    public sealed class ColoredScreenBorderOverlay : Overlay
+    public sealed partial class ColoredScreenBorderOverlay : Overlay
     {
         private static readonly ProtoId<ShaderPrototype> Shader = "ColoredScreenBorder";
 

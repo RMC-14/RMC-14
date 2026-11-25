@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.RMCCustomHoliday;
 
-public sealed class RMCCustomHolidaySystem : EntitySystem
+public sealed partial class RMCCustomHolidaySystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
 

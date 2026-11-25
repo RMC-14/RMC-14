@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Body;
 
-public abstract class SharedRMCBloodstreamSystem : EntitySystem
+public abstract partial class SharedRMCBloodstreamSystem : EntitySystem
 {
     [Dependency] private RMCReagentSystem _rmcReagent = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;

@@ -14,7 +14,7 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Handles power cell upgrading and actions.
 /// </summary>
-public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
+public sealed partial class NinjaSuitSystem : SharedNinjaSuitSystem
 {
     [Dependency] private EmpSystem _emp = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

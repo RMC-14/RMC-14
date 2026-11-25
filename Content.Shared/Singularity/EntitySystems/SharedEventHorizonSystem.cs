@@ -13,7 +13,7 @@ namespace Content.Shared.Singularity.EntitySystems;
 /// <summary>
 /// The entity system primarily responsible for managing <see cref="EventHorizonComponent"/>s.
 /// </summary>
-public abstract class SharedEventHorizonSystem : EntitySystem
+public abstract partial class SharedEventHorizonSystem : EntitySystem
 {
 
     [Dependency] private FixtureSystem _fixtures = default!;

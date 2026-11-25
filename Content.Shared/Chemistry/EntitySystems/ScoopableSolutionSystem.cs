@@ -8,7 +8,7 @@ namespace Content.Shared.Chemistry.EntitySystems;
 /// <summary>
 /// Handles solution transfer when a beaker is used on a scoopable entity.
 /// </summary>
-public sealed class ScoopableSolutionSystem : EntitySystem
+public sealed partial class ScoopableSolutionSystem : EntitySystem
 {
     [Dependency] private INetManager _netManager = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

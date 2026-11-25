@@ -34,7 +34,7 @@ public sealed class SaveActionsCommand : IConsoleCommand
 */
 
 [AnyCommand]
-public sealed class LoadActionsCommand : LocalizedCommands
+public sealed partial class LoadActionsCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 

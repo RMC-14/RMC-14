@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Connection.Whitelist;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class AddBlacklistCommand : LocalizedCommands
+public sealed partial class AddBlacklistCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _playerLocator = default!;
     [Dependency] private IServerDbManager _db = default!;
@@ -61,7 +61,7 @@ public sealed class AddBlacklistCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Unban)] // RMC Ban -> Unban
-public sealed class RemoveBlacklistCommand : LocalizedCommands
+public sealed partial class RemoveBlacklistCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _playerLocator = default!;
     [Dependency] private IServerDbManager _db = default!;

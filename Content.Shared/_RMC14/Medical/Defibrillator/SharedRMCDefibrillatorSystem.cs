@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Defibrillator;
 
-public abstract class SharedRMCDefibrillatorSystem : EntitySystem
+public abstract partial class SharedRMCDefibrillatorSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageable = default!;

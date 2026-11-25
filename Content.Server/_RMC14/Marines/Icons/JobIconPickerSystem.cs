@@ -8,7 +8,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Marines.Icons;
 
-public sealed class JobIconPickerSystem : EntitySystem
+public sealed partial class JobIconPickerSystem : EntitySystem
 {
     [Dependency] private IAdminManager _adminManager = default!;
     [Dependency] private EuiManager _eui = default!;

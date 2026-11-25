@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class VehicleRideSurfaceVisualSystem : EntitySystem
+public sealed partial class VehicleRideSurfaceVisualSystem : EntitySystem
 {
     private const float RiderPositionEpsilon = 0.000001f;
 

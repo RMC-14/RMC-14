@@ -20,7 +20,7 @@ using Content.Shared._RMC14.Medical.Unrevivable;
 
 namespace Content.Shared._RMC14.Marines.Dogtags;
 
-public sealed class DogtagsSystem : EntitySystem
+public sealed partial class DogtagsSystem : EntitySystem
 {
     [Dependency] private SharedRottingSystem _rotting = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

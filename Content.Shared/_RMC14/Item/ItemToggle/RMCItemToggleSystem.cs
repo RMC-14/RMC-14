@@ -4,7 +4,7 @@ using Content.Shared.Item.ItemToggle.Components;
 
 namespace Content.Shared._RMC14.Item.ItemToggle;
 
-public sealed class RMCItemToggleSystem : EntitySystem
+public sealed partial class RMCItemToggleSystem : EntitySystem
 {
     [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private SharedItemSystem _item = default!;

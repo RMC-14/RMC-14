@@ -11,7 +11,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class BanCommand : LocalizedCommands
+public sealed partial class BanCommand : LocalizedCommands
 {
 
     [Dependency] private IPlayerLocator _locator = default!;

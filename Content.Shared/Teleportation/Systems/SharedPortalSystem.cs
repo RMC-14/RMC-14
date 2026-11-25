@@ -21,7 +21,7 @@ namespace Content.Shared.Teleportation.Systems;
 /// <summary>
 /// This handles teleporting entities through portals, and creating new linked portals.
 /// </summary>
-public abstract class SharedPortalSystem : EntitySystem
+public abstract partial class SharedPortalSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private INetManager _netMan = default!;

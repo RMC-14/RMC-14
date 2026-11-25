@@ -16,7 +16,7 @@ namespace Content.Server.Atmos.EntitySystems;
 /// <summary>
 /// This handles restricting pipe-based entities from overlapping outlets/inlets with other entities.
 /// </summary>
-public sealed class PipeRestrictOverlapSystem : EntitySystem
+public sealed partial class PipeRestrictOverlapSystem : EntitySystem
 {
     [Dependency] private MapSystem _map = default!;
     [Dependency] private PopupSystem _popup = default!;

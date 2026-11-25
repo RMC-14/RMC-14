@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Controls
 {
-    public abstract class SlotControl : Control, IEntityControl
+    public abstract partial class SlotControl : Control, IEntityControl
     {
         [Dependency] private IEntityManager _entities = default!;
         [Dependency] private IPrototypeManager _prototype = default!;

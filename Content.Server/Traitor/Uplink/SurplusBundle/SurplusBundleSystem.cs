@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Traitor.Uplink.SurplusBundle;
 
-public sealed class SurplusBundleSystem : EntitySystem
+public sealed partial class SurplusBundleSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EntityStorageSystem _entityStorage = default!;

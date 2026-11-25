@@ -10,7 +10,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Teleporter;
 
-public abstract class SharedRMCTeleporterSystem : EntitySystem
+public abstract partial class SharedRMCTeleporterSystem : EntitySystem
 {
     [Dependency] private PullingSystem _pulling = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

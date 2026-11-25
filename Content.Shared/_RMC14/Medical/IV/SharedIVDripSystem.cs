@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.IV;
 
-public abstract class SharedIVDripSystem : EntitySystem
+public abstract partial class SharedIVDripSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedContainerSystem _containers = default!;

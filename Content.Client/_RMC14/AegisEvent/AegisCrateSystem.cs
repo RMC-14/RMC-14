@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.AegisCrate;
 
-public sealed class AegisCrateSystem : SharedAegisCrateSystem
+public sealed partial class AegisCrateSystem : SharedAegisCrateSystem
 {
     private const string AnimationKey = "AegisCrateOpenAnim";
     private Animation? _openingAnimation;

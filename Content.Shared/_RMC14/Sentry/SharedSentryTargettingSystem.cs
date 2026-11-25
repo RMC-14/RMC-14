@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Sentry;
 
-public abstract class SharedSentryTargetingSystem : EntitySystem
+public abstract partial class SharedSentryTargetingSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

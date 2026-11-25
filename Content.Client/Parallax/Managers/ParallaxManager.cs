@@ -8,7 +8,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.Parallax.Managers;
 
-public sealed class ParallaxManager : IParallaxManager
+public sealed partial class ParallaxManager : IParallaxManager
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;

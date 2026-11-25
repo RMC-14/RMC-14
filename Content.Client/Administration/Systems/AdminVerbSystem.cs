@@ -10,7 +10,7 @@ namespace Content.Client.Administration.Systems
     /// <summary>
     ///     Client-side admin verb system. These usually open some sort of UIs.
     /// </summary>
-    sealed class AdminVerbSystem : EntitySystem
+    sealed partial class AdminVerbSystem : EntitySystem
     {
         [Dependency] private IClientConGroupController _clientConGroupController = default!;
         [Dependency] private IClientConsoleHost _clientConsoleHost = default!;

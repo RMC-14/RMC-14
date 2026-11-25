@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 namespace Content.Server.GameTicking.Rules.VariationPass;
 
 /// <inheritdoc cref="PuddleMessVariationPassComponent"/>
-public sealed class PuddleMessVariationPassSystem : VariationPassSystem<PuddleMessVariationPassComponent>
+public sealed partial class PuddleMessVariationPassSystem : VariationPassSystem<PuddleMessVariationPassComponent>
 {
     [Dependency] private PuddleSystem _puddle = default!;
     [Dependency] private IPrototypeManager _proto = default!;

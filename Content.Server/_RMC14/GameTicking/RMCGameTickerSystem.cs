@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.GameTicking;
 
-public sealed class RMCGameTickerSystem : SharedRMCGameTickerSystem
+public sealed partial class RMCGameTickerSystem : SharedRMCGameTickerSystem
 {
     [Dependency] private GameTicker _gameTicker = default!;
 

@@ -3,7 +3,7 @@ using Content.Shared.Item.ItemToggle.Components;
 
 namespace Content.Shared.Access.Systems;
 
-public sealed class AccessToggleSystem : EntitySystem
+public sealed partial class AccessToggleSystem : EntitySystem
 {
     [Dependency] private SharedAccessSystem _access = default!;
 

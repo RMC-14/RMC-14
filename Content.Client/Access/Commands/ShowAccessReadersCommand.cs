@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 
 namespace Content.Client.Access.Commands;
 
-public sealed class ShowAccessReadersCommand : LocalizedEntityCommands
+public sealed partial class ShowAccessReadersCommand : LocalizedEntityCommands
 {
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private IResourceCache _cache = default!;

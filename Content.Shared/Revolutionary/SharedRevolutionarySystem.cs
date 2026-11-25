@@ -9,7 +9,7 @@ using Content.Shared.Antag;
 
 namespace Content.Shared.Revolutionary;
 
-public abstract class SharedRevolutionarySystem : EntitySystem
+public abstract partial class SharedRevolutionarySystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedStunSystem _sharedStun = default!;

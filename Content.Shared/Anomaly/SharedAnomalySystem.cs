@@ -23,7 +23,7 @@ using Content.Shared.Actions;
 
 namespace Content.Shared.Anomaly;
 
-public abstract class SharedAnomalySystem : EntitySystem
+public abstract partial class SharedAnomalySystem : EntitySystem
 {
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private INetManager _net = default!;

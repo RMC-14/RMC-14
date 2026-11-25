@@ -19,7 +19,7 @@ using static Content.Shared._RMC14.Webbing.WebbingTransferComponent;
 
 namespace Content.Shared._RMC14.Webbing;
 
-public abstract class SharedWebbingSystem : EntitySystem
+public abstract partial class SharedWebbingSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private InventorySystem _inventory = default!;

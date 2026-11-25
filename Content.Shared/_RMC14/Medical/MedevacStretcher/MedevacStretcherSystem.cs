@@ -21,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.MedevacStretcher;
 
-public sealed class MedevacStretcherSystem : EntitySystem
+public sealed partial class MedevacStretcherSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AreaSystem _areas = default!;

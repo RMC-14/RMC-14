@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Orbit;
 
-public sealed class OrbitVisualsSystem : EntitySystem
+public sealed partial class OrbitVisualsSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _robustRandom = default!;
     [Dependency] private AnimationPlayerSystem _animations = default!;

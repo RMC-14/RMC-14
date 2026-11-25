@@ -30,7 +30,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 
-public abstract class SharedRMCChemMasterSystem : EntitySystem
+public abstract partial class SharedRMCChemMasterSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

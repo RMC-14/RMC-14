@@ -8,7 +8,7 @@ namespace Content.Server._RMC14.Rules;
 /// <summary>
 /// Contains Misc Functions for round end text appending, so it can be used across gamerules.
 /// </summary>
-public sealed class RMCGameRuleExtrasSystem : EntitySystem
+public sealed partial class RMCGameRuleExtrasSystem : EntitySystem
 {
     [Dependency] private DogtagsSystem _dogtags = default!;
     [Dependency] private CommendationSystem _commendation = default!;

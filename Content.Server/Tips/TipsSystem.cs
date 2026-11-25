@@ -18,7 +18,7 @@ namespace Content.Server.Tips;
 /// <summary>
 ///     Handles periodically displaying gameplay tips to all players ingame.
 /// </summary>
-public sealed class TipsSystem : EntitySystem
+public sealed partial class TipsSystem : EntitySystem
 {
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

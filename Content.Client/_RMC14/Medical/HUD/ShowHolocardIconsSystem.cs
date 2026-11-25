@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Medical.HUD;
 
-public sealed class ShowHolocardIconsSystem : EquipmentHudSystem<HolocardScannerComponent>
+public sealed partial class ShowHolocardIconsSystem : EquipmentHudSystem<HolocardScannerComponent>
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
 

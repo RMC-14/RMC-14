@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Effects;
 
-public sealed class ColorFlashEffectSystem : SharedColorFlashEffectSystem
+public sealed partial class ColorFlashEffectSystem : SharedColorFlashEffectSystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private AnimationPlayerSystem _animation = default!;

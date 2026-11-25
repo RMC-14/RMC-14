@@ -6,7 +6,7 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Shared._RMC14.Xenonids.MeleeSlow;
 
-public sealed class XenoMeleeSlowSystem : EntitySystem
+public sealed partial class XenoMeleeSlowSystem : EntitySystem
 {
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private StandingStateSystem _standing = default!;

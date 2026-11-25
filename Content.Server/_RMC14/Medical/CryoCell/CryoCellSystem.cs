@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.CryoCell;
 
-public sealed class CryoCellSystem : SharedCryoCellSystem
+public sealed partial class CryoCellSystem : SharedCryoCellSystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;

@@ -18,7 +18,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.Sentry.Laptop;
 
 [UsedImplicitly]
-public sealed class SentryLaptopBui : BoundUserInterface
+public sealed partial class SentryLaptopBui : BoundUserInterface
 {
     [Dependency] private IEntityManager _entities = default!;
 

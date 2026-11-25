@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 namespace Content.Client.Gameplay
 {
     [Virtual]
-    public class GameplayState : GameplayStateBase, IMainViewportState
+    public partial class GameplayState : GameplayStateBase, IMainViewportState
     {
         [Dependency] private IEyeManager _eyeManager = default!;
         [Dependency] private IOverlayManager _overlayManager = default!;

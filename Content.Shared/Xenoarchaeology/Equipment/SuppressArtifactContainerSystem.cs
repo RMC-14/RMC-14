@@ -5,7 +5,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.Xenoarchaeology.Equipment;
 
-public sealed class SuppressArtifactContainerSystem : EntitySystem
+public sealed partial class SuppressArtifactContainerSystem : EntitySystem
 {
     [Dependency] private SharedXenoArtifactSystem _xenoArtifact = default!;
 

@@ -11,7 +11,7 @@ using Content.Shared.GameTicking.Components;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class SolarFlareRule : StationEventSystem<SolarFlareRuleComponent>
+public sealed partial class SolarFlareRule : StationEventSystem<SolarFlareRuleComponent>
 {
     [Dependency] private PoweredLightSystem _poweredLight = default!;
     [Dependency] private SharedDoorSystem _door = default!;

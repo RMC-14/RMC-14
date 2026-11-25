@@ -6,7 +6,7 @@ using Robust.Client.Player;
 
 namespace Content.Client.Movement.Systems;
 
-public sealed class ContentEyeSystem : SharedContentEyeSystem
+public sealed partial class ContentEyeSystem : SharedContentEyeSystem
 {
     [Dependency] private IPlayerManager _player = default!;
 

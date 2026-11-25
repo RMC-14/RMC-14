@@ -3,7 +3,7 @@ using Content.Shared.DoAfter;
 
 namespace Content.Shared._RMC14.DoAfter;
 
-public sealed class RMCDoAfterSystem : EntitySystem
+public sealed partial class RMCDoAfterSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
 

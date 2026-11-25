@@ -11,7 +11,7 @@ namespace Content.Server.Singularity.EntitySystems;
 /// <summary>
 /// Handles singularity attractors.
 /// </summary>
-public sealed class SingularityAttractorSystem : EntitySystem
+public sealed partial class SingularityAttractorSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

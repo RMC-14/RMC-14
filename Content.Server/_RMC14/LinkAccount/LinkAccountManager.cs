@@ -12,7 +12,7 @@ using Color = System.Drawing.Color;
 
 namespace Content.Server._RMC14.LinkAccount;
 
-public sealed class LinkAccountManager : IPostInjectInit
+public sealed partial class LinkAccountManager : IPostInjectInit
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private INetManager _net = default!;

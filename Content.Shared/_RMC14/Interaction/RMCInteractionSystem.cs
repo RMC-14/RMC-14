@@ -11,7 +11,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Interaction;
 
-public sealed class RMCInteractionSystem : EntitySystem
+public sealed partial class RMCInteractionSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;

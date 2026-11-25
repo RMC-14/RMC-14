@@ -21,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Rules;
 
-public sealed class RMCFirstDeploymentSystem : EntitySystem
+public sealed partial class RMCFirstDeploymentSystem : EntitySystem
 {
     [Dependency] private RMCAnnouncementOverlaySystem _announcementOverlay = default!;
     [Dependency] private CMDistressSignalRuleSystem _distressSignal = default!;

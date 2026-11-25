@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Maturing;
 
-public sealed class XenoMaturingSystem : EntitySystem
+public sealed partial class XenoMaturingSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private MobThresholdSystem _mobThreshold = default!;

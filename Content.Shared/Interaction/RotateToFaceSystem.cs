@@ -14,7 +14,7 @@ namespace Content.Shared.Interaction
     /// Doesn't really fit with SharedInteractionSystem so it's not there.
     /// </summary>
     [UsedImplicitly]
-    public sealed class RotateToFaceSystem : EntitySystem
+    public sealed partial class RotateToFaceSystem : EntitySystem
     {
         [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
         [Dependency] private SharedTransformSystem _transform = default!;

@@ -10,7 +10,7 @@ namespace Content.Shared.Beeper.Systems;
 
 
 //This handles generic proximity beeper logic
-public sealed class BeeperSystem : EntitySystem
+public sealed partial class BeeperSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;

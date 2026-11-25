@@ -2,7 +2,7 @@ using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Blind;
 
-public sealed class RMCBlindSystem : EntitySystem
+public sealed partial class RMCBlindSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
 

@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
 // Binds design nodes to weed for weedbound walls/doors.
-public sealed class DesignerNodeBindingSystem : EntitySystem
+public sealed partial class DesignerNodeBindingSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private RMCMapSystem _rmcMap = default!;

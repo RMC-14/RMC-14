@@ -4,7 +4,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.Containers;
 
-public sealed class ExitContainerOnMoveSystem : EntitySystem
+public sealed partial class ExitContainerOnMoveSystem : EntitySystem
 {
     [Dependency] private ClimbSystem _climb = default!;
     [Dependency] private SharedContainerSystem _container = default!;

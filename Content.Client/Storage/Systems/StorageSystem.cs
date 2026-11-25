@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Storage.Systems;
 
-public sealed class StorageSystem : SharedStorageSystem
+public sealed partial class StorageSystem : SharedStorageSystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPlayerManager _player = default!;

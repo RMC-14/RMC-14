@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Round | AdminFlags.Spawn)]
-    public sealed class LoadGameMapCommand : LocalizedEntityCommands
+    public sealed partial class LoadGameMapCommand : LocalizedEntityCommands
     {
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private GameTicker _gameTicker = default!;
@@ -73,7 +73,7 @@ namespace Content.Server.Administration.Commands
     }
 
     [AdminCommand(AdminFlags.Round | AdminFlags.Spawn)]
-    public sealed class ListGameMaps : LocalizedCommands
+    public sealed partial class ListGameMaps : LocalizedCommands
     {
         [Dependency] private IPrototypeManager _prototypeManager = default!;
 

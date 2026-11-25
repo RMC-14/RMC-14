@@ -4,7 +4,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.Atmos.Piping.EntitySystems
 {
-    public sealed class AtmosPipeColorSystem : EntitySystem
+    public sealed partial class AtmosPipeColorSystem : EntitySystem
     {
         [Dependency] private SharedAppearanceSystem _appearance = default!;
 

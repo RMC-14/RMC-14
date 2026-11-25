@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rend;
 
-public sealed class XenoRendSystem : EntitySystem
+public sealed partial class XenoRendSystem : EntitySystem
 {
     [Dependency] private SharedRMCActionsSystem _actions = default!;
     [Dependency] private SharedRMCEmoteSystem _emote = default!;

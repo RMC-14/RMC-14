@@ -8,7 +8,7 @@ using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Vehicle;
 
-public sealed class VehicleChatRelaySystem : EntitySystem
+public sealed partial class VehicleChatRelaySystem : EntitySystem
 {
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private VehicleSystem _vehicle = default!;

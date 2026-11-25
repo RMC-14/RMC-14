@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.Mindshield.FakeMindShield;
 
-public sealed class SharedFakeMindShieldImplantSystem : EntitySystem
+public sealed partial class SharedFakeMindShieldImplantSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     public override void Initialize()

@@ -10,7 +10,7 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Handles kill person condition logic and picking random kill targets.
 /// </summary>
-public sealed class KillPersonConditionSystem : EntitySystem
+public sealed partial class KillPersonConditionSystem : EntitySystem
 {
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private IConfigurationManager _config = default!;

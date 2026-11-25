@@ -15,7 +15,7 @@ namespace Content.Client.Machines.EntitySystems;
 /// Handles client side examination events to show the expected layout of the machine
 /// based on the origin of the main entity.
 /// </summary>
-public sealed class MultipartMachineSystem : SharedMultipartMachineSystem
+public sealed partial class MultipartMachineSystem : SharedMultipartMachineSystem
 {
     private readonly EntProtoId _ghostPrototype = "MultipartMachineGhost";
     private readonly Color _partiallyTransparent = new Color(255, 255, 255, 180);

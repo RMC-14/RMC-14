@@ -16,7 +16,7 @@ namespace Content.Shared.Animals;
 ///     Gives the ability to produce milkable reagents;
 ///     produces endlessly if the owner does not have a HungerComponent.
 /// </summary>
-public sealed class UdderSystem : EntitySystem
+public sealed partial class UdderSystem : EntitySystem
 {
     [Dependency] private HungerSystem _hunger = default!;
     [Dependency] private IGameTiming _timing = default!;

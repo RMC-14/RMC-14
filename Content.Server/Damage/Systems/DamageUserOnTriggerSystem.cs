@@ -5,7 +5,7 @@ using Content.Shared.Damage.Components;
 namespace Content.Server.Damage.Systems;
 
 // System for damage that occurs on specific trigger, towards the user..
-public sealed class DamageUserOnTriggerSystem : EntitySystem
+public sealed partial class DamageUserOnTriggerSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageableSystem = default!;
 

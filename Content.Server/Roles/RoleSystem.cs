@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Roles;
 
-public sealed class RoleSystem : SharedRoleSystem
+public sealed partial class RoleSystem : SharedRoleSystem
 {
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IPrototypeManager _proto = default!;

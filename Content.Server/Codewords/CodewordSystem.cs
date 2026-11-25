@@ -11,7 +11,7 @@ namespace Content.Server.Codewords;
 /// <summary>
 /// Gamerule that provides codewords for other gamerules that rely on them.
 /// </summary>
-public sealed class CodewordSystem : EntitySystem
+public sealed partial class CodewordSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;

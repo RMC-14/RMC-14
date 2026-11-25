@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Lube;
 
-public sealed class LubedSystem : EntitySystem
+public sealed partial class LubedSystem : EntitySystem
 {
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private IRobustRandom _random = default!;

@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Actions;
 
-public sealed class RMCActionsSystem : SharedRMCActionsSystem
+public sealed partial class RMCActionsSystem : SharedRMCActionsSystem
 {
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private RMCActionsManager _manager = default!;

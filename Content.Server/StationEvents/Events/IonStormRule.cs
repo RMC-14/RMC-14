@@ -6,7 +6,7 @@ using Content.Shared.Station.Components;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class IonStormRule : StationEventSystem<IonStormRuleComponent>
+public sealed partial class IonStormRule : StationEventSystem<IonStormRuleComponent>
 {
     [Dependency] private IonStormSystem _ionStorm = default!;
 

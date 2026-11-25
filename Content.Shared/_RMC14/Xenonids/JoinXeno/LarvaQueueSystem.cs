@@ -18,7 +18,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 
-public sealed class LarvaQueueSystem : EntitySystem
+public sealed partial class LarvaQueueSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private FollowerSystem _follower = default!;

@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Prediction;
 
-public abstract class SharedGunPredictionSystem : EntitySystem
+public abstract partial class SharedGunPredictionSystem : EntitySystem
 {
     [Dependency] private SharedCombatModeSystem _combatMode = default!;
     [Dependency] private IConfigurationManager _config = default!;

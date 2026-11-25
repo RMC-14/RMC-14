@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.GhostColor;
 
-public sealed class GhostColorSystem : EntitySystem
+public sealed partial class GhostColorSystem : EntitySystem
 {
     private static readonly ProtoId<ShaderPrototype> GhostAlphaShader = "RMCGhostAlpha";
 

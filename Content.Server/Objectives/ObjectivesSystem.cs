@@ -21,7 +21,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Objectives;
 
-public sealed class ObjectivesSystem : SharedObjectivesSystem
+public sealed partial class ObjectivesSystem : SharedObjectivesSystem
 {
     [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

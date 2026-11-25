@@ -15,7 +15,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Gut;
 
-public sealed class SharedXenoGutSystem : EntitySystem
+public sealed partial class SharedXenoGutSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

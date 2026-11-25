@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Targeting;
 
-public abstract class SharedRMCTargetingSystem : EntitySystem
+public abstract partial class SharedRMCTargetingSystem : EntitySystem
 {
     [Dependency] protected IGameTiming Timing = default!;
 

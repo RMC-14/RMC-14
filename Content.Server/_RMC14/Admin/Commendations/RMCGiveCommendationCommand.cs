@@ -20,7 +20,7 @@ using Content.Server._RMC14.Commendations;
 namespace Content.Server._RMC14.Admin.Commendations;
 
 [AdminCommand(AdminFlags.Commendations)]
-public sealed class RMCGiveCommendationCommand : LocalizedCommands
+public sealed partial class RMCGiveCommendationCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _locator = default!;
     [Dependency] private IPlayerManager _players = default!;

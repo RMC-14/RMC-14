@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Anomaly.Effects;
 
-public sealed class ElectricityAnomalySystem : EntitySystem
+public sealed partial class ElectricityAnomalySystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

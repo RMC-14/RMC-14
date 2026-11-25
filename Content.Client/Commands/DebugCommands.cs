@@ -8,7 +8,7 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client.Commands;
 
-internal sealed class ShowMarkersCommand : LocalizedCommands
+internal sealed partial class ShowMarkersCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
@@ -22,7 +22,7 @@ internal sealed class ShowMarkersCommand : LocalizedCommands
     }
 }
 
-internal sealed class ShowSubFloor : LocalizedCommands
+internal sealed partial class ShowSubFloor : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
@@ -36,7 +36,7 @@ internal sealed class ShowSubFloor : LocalizedCommands
     }
 }
 
-internal sealed class NotifyCommand : LocalizedCommands
+internal sealed partial class NotifyCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 

@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
-public sealed class DesignerRemoteThickenResinSystem : EntitySystem
+public sealed partial class DesignerRemoteThickenResinSystem : EntitySystem
 {
     [Dependency] private SharedXenoConstructionSystem _xenoConstruction = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;

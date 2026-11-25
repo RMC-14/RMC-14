@@ -2,7 +2,7 @@
 
 namespace Content.Client.Ghost.Commands;
 
-public sealed class ToggleGhostVisibilityCommand : LocalizedEntityCommands
+public sealed partial class ToggleGhostVisibilityCommand : LocalizedEntityCommands
 {
     [Dependency] private GhostSystem _ghost = default!;
 

@@ -12,7 +12,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Gibbing;
 
-public sealed class RMCGibSystem : EntitySystem
+public sealed partial class RMCGibSystem : EntitySystem
 {
     private const float ItemLaunchImpulse = 8f;
     private const float ItemLaunchImpulseVariance = 3f;

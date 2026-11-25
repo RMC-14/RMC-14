@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Movement;
 
-public sealed class RMCLagCompensationSystem : SharedRMCLagCompensationSystem
+public sealed partial class RMCLagCompensationSystem : SharedRMCLagCompensationSystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private LagCompensationSystem _lagCompensation = default!;

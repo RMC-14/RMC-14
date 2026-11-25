@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.EntityPreset;
 
-public sealed class EntityPresetSystem : EntitySystem
+public sealed partial class EntityPresetSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private INetManager _net = default!;

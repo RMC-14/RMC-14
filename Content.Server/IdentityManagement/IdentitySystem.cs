@@ -19,7 +19,7 @@ namespace Content.Server.IdentityManagement;
 /// <summary>
 ///     Responsible for updating the identity of an entity on init or clothing equip/unequip.
 /// </summary>
-public sealed class IdentitySystem : SharedIdentitySystem
+public sealed partial class IdentitySystem : SharedIdentitySystem
 {
     [Dependency] private IdCardSystem _idCard = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;

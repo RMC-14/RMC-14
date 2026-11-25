@@ -9,7 +9,7 @@ using Content.Shared.Speech.Muting;
 
 namespace Content.Server.Puppet
 {
-    public sealed class VentriloquistPuppetSystem : SharedVentriloquistPuppetSystem
+    public sealed partial class VentriloquistPuppetSystem : SharedVentriloquistPuppetSystem
     {
         [Dependency] private PopupSystem _popupSystem = default!;
 

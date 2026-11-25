@@ -7,7 +7,7 @@ namespace Content.Shared.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact effect that opens doors in some area around.
 /// </summary>
-public sealed class XAEKnockSystem : BaseXAESystem<XAEKnockComponent>
+public sealed partial class XAEKnockSystem : BaseXAESystem<XAEKnockComponent>
 {
     [Dependency] private IGameTiming _timing = default!;
 

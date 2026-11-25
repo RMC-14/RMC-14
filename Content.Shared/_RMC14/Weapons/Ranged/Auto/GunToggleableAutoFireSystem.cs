@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Auto;
 
-public sealed class GunToggleableAutoFireSystem : EntitySystem
+public sealed partial class GunToggleableAutoFireSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

@@ -14,7 +14,7 @@ namespace Content.Shared.Contraband;
 /// <summary>
 /// This handles showing examine messages for contraband-marked items.
 /// </summary>
-public sealed class ContrabandSystem : EntitySystem
+public sealed partial class ContrabandSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _configuration = default!;
     [Dependency] private IPrototypeManager _proto = default!;

@@ -44,7 +44,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Dropship;
 
-public sealed class DropshipSystem : SharedDropshipSystem
+public sealed partial class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private RMCAlertLevelSystem _alertLevel = default!;

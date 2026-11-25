@@ -24,7 +24,7 @@ using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
-public sealed class CMRefillableSolutionSystem : EntitySystem
+public sealed partial class CMRefillableSolutionSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;

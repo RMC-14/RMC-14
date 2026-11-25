@@ -3,7 +3,7 @@ using Content.Shared.CartridgeLoader;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
-public sealed class MedTekCartridgeSystem : EntitySystem
+public sealed partial class MedTekCartridgeSystem : EntitySystem
 {
     [Dependency] private CartridgeLoaderSystem _cartridgeLoaderSystem = default!;
 

@@ -13,7 +13,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class HardpointSlotSystem : EntitySystem
+public sealed partial class HardpointSlotSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

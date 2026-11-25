@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Destrain;
 
-public sealed class XenoDestrainSystem : EntitySystem
+public sealed partial class XenoDestrainSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

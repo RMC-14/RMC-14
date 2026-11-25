@@ -5,7 +5,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Instruments;
 
-public sealed class SwappableInstrumentSystem : EntitySystem
+public sealed partial class SwappableInstrumentSystem : EntitySystem
 {
     [Dependency] private SharedInstrumentSystem _sharedInstrument = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

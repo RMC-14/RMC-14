@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Scorch;
 
-public sealed class RMCScorchSystem : EntitySystem
+public sealed partial class RMCScorchSystem : EntitySystem
 {
     [Dependency] private DecalSystem _decals = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

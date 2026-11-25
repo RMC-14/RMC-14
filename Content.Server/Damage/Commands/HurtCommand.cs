@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Damage.Commands
 {
     [AdminCommand(AdminFlags.Fun)]
-    sealed class DamageCommand : IConsoleCommand
+    sealed partial class DamageCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;

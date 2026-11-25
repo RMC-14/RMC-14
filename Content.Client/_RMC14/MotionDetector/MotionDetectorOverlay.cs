@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.MotionDetector;
 
-public sealed class MotionDetectorOverlay : Overlay
+public sealed partial class MotionDetectorOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IGameTiming _timing = default!;

@@ -21,7 +21,7 @@ using Robust.Shared.Map;
 
 namespace Content.Server.Storage.EntitySystems;
 
-public sealed class EntityStorageSystem : SharedEntityStorageSystem
+public sealed partial class EntityStorageSystem : SharedEntityStorageSystem
 {
     [Dependency] private ConstructionSystem _construction = default!;
     [Dependency] private AtmosphereSystem _atmos = default!;

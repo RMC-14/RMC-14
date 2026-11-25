@@ -4,7 +4,7 @@ using Content.Shared.Popups;
 
 namespace Content.Shared._RMC14.Light;
 
-public sealed class CMPoweredLightSystem : EntitySystem
+public sealed partial class CMPoweredLightSystem : EntitySystem
 {
     [Dependency] private SharedPointLightSystem _pointLight = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

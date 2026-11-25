@@ -4,7 +4,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Dropship.Weapon;
 
-public sealed class DropshipWeaponSystem : SharedDropshipWeaponSystem
+public sealed partial class DropshipWeaponSystem : SharedDropshipWeaponSystem
 {
     [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
 

@@ -6,7 +6,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.GameTicking.Managers;
 
-public sealed class TitleWindowManager
+public sealed partial class TitleWindowManager
 {
     [Dependency] private IBaseClient _client = default!;
     [Dependency] private IClyde _clyde = default!;

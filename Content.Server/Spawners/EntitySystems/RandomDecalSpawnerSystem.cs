@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Spawners.EntitySystems;
 
-public sealed class RandomDecalSpawnerSystem : EntitySystem
+public sealed partial class RandomDecalSpawnerSystem : EntitySystem
 {
     [Dependency] private DecalSystem _decal = default!;
     [Dependency] private SharedMapSystem _map = default!;

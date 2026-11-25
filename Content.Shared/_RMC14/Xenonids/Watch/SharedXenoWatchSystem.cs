@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Watch;
 
-public abstract class SharedXenoWatchSystem : EntitySystem
+public abstract partial class SharedXenoWatchSystem : EntitySystem
 {
     [Dependency] private SharedEyeSystem _eye = default!;
     [Dependency] private INetManager _net = default!;

@@ -11,7 +11,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Explosion.EntitySystems;
 
-public sealed class ProjectileGrenadeSystem : EntitySystem
+public sealed partial class ProjectileGrenadeSystem : EntitySystem
 {
     [Dependency] private GunSystem _gun = default!;
     [Dependency] private IRobustRandom _random = default!;

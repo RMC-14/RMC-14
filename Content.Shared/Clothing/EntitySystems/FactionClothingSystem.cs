@@ -8,7 +8,7 @@ namespace Content.Shared.Clothing.EntitySystems;
 /// <summary>
 /// Handles <see cref="FactionClothingComponent"/> faction adding and removal.
 /// </summary>
-public sealed class FactionClothingSystem : EntitySystem
+public sealed partial class FactionClothingSystem : EntitySystem
 {
     [Dependency] private NpcFactionSystem _faction = default!;
 

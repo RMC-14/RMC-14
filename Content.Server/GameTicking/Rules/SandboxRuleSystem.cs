@@ -4,7 +4,7 @@ using Content.Shared.GameTicking.Components;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class SandboxRuleSystem : GameRuleSystem<SandboxRuleComponent>
+public sealed partial class SandboxRuleSystem : GameRuleSystem<SandboxRuleComponent>
 {
     [Dependency] private SandboxSystem _sandbox = default!;
 

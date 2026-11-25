@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Antag;
 
-public sealed class MobReplacementRuleSystem : GameRuleSystem<MobReplacementRuleComponent>
+public sealed partial class MobReplacementRuleSystem : GameRuleSystem<MobReplacementRuleComponent>
 {
     [Dependency] private IRobustRandom _random = default!;
 

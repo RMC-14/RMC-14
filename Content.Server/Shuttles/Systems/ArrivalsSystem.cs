@@ -43,7 +43,7 @@ namespace Content.Server.Shuttles.Systems;
 /// <summary>
 /// If enabled spawns players on a separate arrivals station before they can transfer to the main station.
 /// </summary>
-public sealed class ArrivalsSystem : EntitySystem
+public sealed partial class ArrivalsSystem : EntitySystem
 {
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IConfigurationManager _cfgManager = default!;

@@ -2,7 +2,7 @@ using Content.Shared.Power.Components;
 
 namespace Content.Shared.Power.EntitySystems;
 
-public abstract class SharedPowerNetSystem : EntitySystem
+public abstract partial class SharedPowerNetSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 

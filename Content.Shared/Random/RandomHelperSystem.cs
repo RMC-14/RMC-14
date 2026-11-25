@@ -8,7 +8,7 @@ namespace Content.Shared.Random;
 /// <summary>
 ///     System containing various content-related random helpers.
 /// </summary>
-public sealed class RandomHelperSystem : EntitySystem
+public sealed partial class RandomHelperSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IRobustRandom _random = default!;

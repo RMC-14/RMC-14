@@ -2,7 +2,7 @@
 
 namespace Content.Client.Decals;
 
-public sealed class ToggleDecalCommand : LocalizedEntityCommands
+public sealed partial class ToggleDecalCommand : LocalizedEntityCommands
 {
     [Dependency] private DecalSystem _decal = default!;
 

@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Overheat;
 
-public sealed class OverheatSystem : EntitySystem
+public sealed partial class OverheatSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IGameTiming _time = default!;

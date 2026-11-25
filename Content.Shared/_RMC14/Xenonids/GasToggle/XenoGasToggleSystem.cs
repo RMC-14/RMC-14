@@ -2,7 +2,7 @@
 
 namespace Content.Shared._RMC14.Xenonids.GasToggle;
 
-public sealed class XenoGasToggleSystem : EntitySystem
+public sealed partial class XenoGasToggleSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
 

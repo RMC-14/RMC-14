@@ -7,7 +7,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Audio;
 
-public sealed class ServerGlobalSoundSystem : SharedGlobalSoundSystem
+public sealed partial class ServerGlobalSoundSystem : SharedGlobalSoundSystem
 {
     [Dependency] private IConsoleHost _conHost = default!;
     [Dependency] private StationSystem _stationSystem = default!;

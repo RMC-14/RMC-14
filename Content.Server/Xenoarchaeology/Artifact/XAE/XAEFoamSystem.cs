@@ -14,7 +14,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact effect that starts Foam chemical reaction with random-ish reagents inside.
 /// </summary>
-public sealed class XAEFoamSystem : BaseXAESystem<XAEFoamComponent>
+public sealed partial class XAEFoamSystem : BaseXAESystem<XAEFoamComponent>
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SmokeSystem _smoke = default!;

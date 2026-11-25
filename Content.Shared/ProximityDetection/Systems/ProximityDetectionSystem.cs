@@ -8,7 +8,7 @@ namespace Content.Shared.ProximityDetection.Systems;
 /// <summary>
 /// Handles generic proximity detector logic.
 /// </summary>
-public sealed class ProximityDetectionSystem : EntitySystem
+public sealed partial class ProximityDetectionSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ItemToggleSystem _toggle = default!;

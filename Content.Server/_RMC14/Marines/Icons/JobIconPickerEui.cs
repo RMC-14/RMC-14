@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 namespace Content.Server._RMC14.Marines.Icons;
 
 [UsedImplicitly]
-public sealed class JobIconPickerEui : BaseEui
+public sealed partial class JobIconPickerEui : BaseEui
 {
     [Dependency] private IAdminManager _adminManager = default!;
     [Dependency] private IEntityManager _entManager = default!;

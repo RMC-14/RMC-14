@@ -10,7 +10,7 @@ using Robust.Client.UserInterface;
 namespace Content.Client.Administration.UI.BanList;
 
 [UsedImplicitly]
-public sealed class BanListEui : BaseEui
+public sealed partial class BanListEui : BaseEui
 {
     [Dependency] private IUserInterfaceManager _ui = default!;
 

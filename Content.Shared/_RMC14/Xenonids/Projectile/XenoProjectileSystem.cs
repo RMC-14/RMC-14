@@ -31,7 +31,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile;
 
-public sealed class XenoProjectileSystem : EntitySystem
+public sealed partial class XenoProjectileSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedGunSystem _gun = default!;

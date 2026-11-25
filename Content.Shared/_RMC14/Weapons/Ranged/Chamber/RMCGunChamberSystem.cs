@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Chamber;
 
-public sealed class RMCGunChamberSystem : EntitySystem
+public sealed partial class RMCGunChamberSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;

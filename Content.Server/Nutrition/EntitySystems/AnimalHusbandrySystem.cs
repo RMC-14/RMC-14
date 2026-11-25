@@ -21,7 +21,7 @@ namespace Content.Server.Nutrition.EntitySystems;
 /// <summary>
 /// This handles logic and interactions related to <see cref="ReproductiveComponent"/>
 /// </summary>
-public sealed class AnimalHusbandrySystem : EntitySystem
+public sealed partial class AnimalHusbandrySystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private HungerSystem _hunger = default!;

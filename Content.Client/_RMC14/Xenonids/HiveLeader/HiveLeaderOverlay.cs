@@ -13,7 +13,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Xenonids.HiveLeader;
 
-public sealed class HiveLeaderOverlay : Overlay
+public sealed partial class HiveLeaderOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IOverlayManager _overlay = default!;

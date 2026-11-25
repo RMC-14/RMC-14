@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Soak;
 
-public sealed class XenoSoakSystem : EntitySystem
+public sealed partial class XenoSoakSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private SharedAuraSystem _aura = default!;

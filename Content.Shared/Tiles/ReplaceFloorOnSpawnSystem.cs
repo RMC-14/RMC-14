@@ -5,7 +5,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Tiles;
 
-public sealed class ReplaceFloorOnSpawnSystem : EntitySystem
+public sealed partial class ReplaceFloorOnSpawnSystem : EntitySystem
 {
     [Dependency] private ITileDefinitionManager _tile = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

@@ -19,7 +19,7 @@ namespace Content.Server.GameTicking.Rules;
 /// <summary>
 /// Manages <see cref="DeathMatchRuleComponent"/>
 /// </summary>
-public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponent>
+public sealed partial class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponent>
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private MindSystem _mind = default!;

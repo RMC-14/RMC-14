@@ -14,7 +14,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Administration;
 
-public sealed class PlayerPanelEui : BaseEui
+public sealed partial class PlayerPanelEui : BaseEui
 {
     [Dependency] private IAdminManager _admins = default!;
     [Dependency] private IServerDbManager _db = default!;

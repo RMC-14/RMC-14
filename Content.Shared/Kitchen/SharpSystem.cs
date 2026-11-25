@@ -21,7 +21,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Kitchen;
 
-public sealed class SharpSystem : EntitySystem
+public sealed partial class SharpSystem : EntitySystem
 {
     [Dependency] private SharedBodySystem _bodySystem = default!;
     [Dependency] private SharedDestructibleSystem _destructibleSystem = default!;

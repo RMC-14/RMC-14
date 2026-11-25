@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Mobs;
 
-public abstract class SharedCMGhostSystem : EntitySystem
+public abstract partial class SharedCMGhostSystem : EntitySystem
 {
     [Dependency] protected SharedActionsSystem Actions = default!;
     [Dependency] protected IConfigurationManager Config = default!;

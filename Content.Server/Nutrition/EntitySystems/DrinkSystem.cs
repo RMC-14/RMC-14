@@ -30,7 +30,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Nutrition.EntitySystems;
 
-public sealed class DrinkSystem : SharedDrinkSystem
+public sealed partial class DrinkSystem : SharedDrinkSystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private FoodSystem _food = default!;

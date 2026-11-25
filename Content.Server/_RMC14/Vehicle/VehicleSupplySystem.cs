@@ -25,7 +25,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Vehicle;
 
-public sealed class VehicleSupplySystem : EntitySystem
+public sealed partial class VehicleSupplySystem : EntitySystem
 {
     private readonly record struct HardpointItemInfo(string ProtoId, HashSet<ProtoId<TagPrototype>> Tags);
     private const int VendedHardpointAmmoCount = 3;

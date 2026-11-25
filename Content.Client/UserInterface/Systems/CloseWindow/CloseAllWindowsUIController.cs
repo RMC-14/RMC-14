@@ -9,7 +9,7 @@ using Robust.Shared.Input.Binding;
 
 namespace Content.Client.UserInterface.Systems.Info;
 
-public sealed class CloseAllWindowsUIController : UIController
+public sealed partial class CloseAllWindowsUIController : UIController
 {
     [Dependency] private IInputManager _inputManager = default!;
     [Dependency] private IUserInterfaceManager _uiManager = default!;

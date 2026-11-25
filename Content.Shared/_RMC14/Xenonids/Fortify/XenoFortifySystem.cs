@@ -28,7 +28,7 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Xenonids.Fortify;
 
-public sealed class XenoFortifySystem : EntitySystem
+public sealed partial class XenoFortifySystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.RCD.Systems;
 
-public sealed class RCDAmmoSystem : EntitySystem
+public sealed partial class RCDAmmoSystem : EntitySystem
 {
     [Dependency] private SharedChargesSystem _sharedCharges = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

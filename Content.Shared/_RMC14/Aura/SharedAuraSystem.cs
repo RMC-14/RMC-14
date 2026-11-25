@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Aura;
 
-public abstract class SharedAuraSystem : EntitySystem
+public abstract partial class SharedAuraSystem : EntitySystem
 {
 
     [Dependency] private IGameTiming _timing = default!;

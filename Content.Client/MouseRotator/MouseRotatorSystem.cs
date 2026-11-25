@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 namespace Content.Client.MouseRotator;
 
 /// <inheritdoc/>
-public sealed class MouseRotatorSystem : SharedMouseRotatorSystem
+public sealed partial class MouseRotatorSystem : SharedMouseRotatorSystem
 {
     [Dependency] private IInputManager _input = default!;
     [Dependency] private IPlayerManager _player = default!;

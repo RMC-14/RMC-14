@@ -20,7 +20,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Flurry;
 
-public sealed class XenoFlurrySystem : EntitySystem
+public sealed partial class XenoFlurrySystem : EntitySystem
 {
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

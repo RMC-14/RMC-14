@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-public sealed class EmoteOnDamageSystem : EntitySystem
+public sealed partial class EmoteOnDamageSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

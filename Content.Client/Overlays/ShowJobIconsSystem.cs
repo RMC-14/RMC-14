@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Overlays;
 
-public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponent>
+public sealed partial class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponent>
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;

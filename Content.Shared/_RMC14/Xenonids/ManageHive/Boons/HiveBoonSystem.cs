@@ -36,7 +36,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 
-public sealed class HiveBoonSystem : EntitySystem
+public sealed partial class HiveBoonSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AreaSystem _area = default!;

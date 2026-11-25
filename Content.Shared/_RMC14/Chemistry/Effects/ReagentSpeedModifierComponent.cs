@@ -10,7 +10,7 @@ public abstract partial class ReagentSpeedModifierComponent : Component
     public abstract TimeSpan AppliedAt { get; set; }
 }
 
-public abstract class ReagentSpeedModifierSystem<T> : EntitySystem where T : ReagentSpeedModifierComponent
+public abstract partial class ReagentSpeedModifierSystem<T> : EntitySystem where T : ReagentSpeedModifierComponent
 {
     [Dependency] private IGameTiming _timing = default!;
 

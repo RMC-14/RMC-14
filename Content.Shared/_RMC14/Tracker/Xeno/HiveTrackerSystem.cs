@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Tracker.Xeno;
 
-public sealed class HiveTrackerSystem : EntitySystem
+public sealed partial class HiveTrackerSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private DialogSystem _dialog = default!;

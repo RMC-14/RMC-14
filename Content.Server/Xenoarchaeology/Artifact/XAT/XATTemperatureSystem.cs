@@ -8,7 +8,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAT;
 /// <summary>
 /// System for checking if temperature-related xeno artifact node should be triggered.
 /// </summary>
-public sealed class XATTemperatureSystem : BaseQueryUpdateXATSystem<XATTemperatureComponent>
+public sealed partial class XATTemperatureSystem : BaseQueryUpdateXATSystem<XATTemperatureComponent>
 {
     [Dependency] private AtmosphereSystem _atmosphere = default!;
 

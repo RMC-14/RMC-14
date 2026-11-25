@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Stun;
 
-public sealed class RMCDazedSystem : EntitySystem
+public sealed partial class RMCDazedSystem : EntitySystem
 {
     [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private SharedStatusEffectsSystem _statusEffect = default!;

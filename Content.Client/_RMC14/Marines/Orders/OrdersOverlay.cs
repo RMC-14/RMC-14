@@ -13,7 +13,7 @@ namespace Content.Client._RMC14.Marines.Orders;
 
 // This is all just copy pasted from the XenoPheromonesOverlay because I could not figure out how to generalize it easily
 // TODO RMC14: Just generalize this along with the xeno system. Possibly to be reused by other stuff as well?
-public sealed class OrdersOverlay : Overlay
+public sealed partial class OrdersOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager _players = default!;

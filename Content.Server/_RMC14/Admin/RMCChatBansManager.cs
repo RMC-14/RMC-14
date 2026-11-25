@@ -13,7 +13,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class RMCChatBansManager : IPostInjectInit
+public sealed partial class RMCChatBansManager : IPostInjectInit
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private IEntityManager _entity = default!;

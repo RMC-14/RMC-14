@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Payload.EntitySystems;
 
-public sealed class PayloadSystem : EntitySystem
+public sealed partial class PayloadSystem : EntitySystem
 {
     [Dependency] private TagSystem _tagSystem = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;

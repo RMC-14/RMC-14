@@ -39,7 +39,7 @@ public struct TunnelCacheEntry
 }
 
 [UsedImplicitly]
-public sealed class SelectDestinationTunnelBui : BoundUserInterface
+public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 {
     [Dependency] private IPlayerManager _player = default!;
 

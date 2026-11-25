@@ -3,7 +3,7 @@ using Content.Shared.Actions.Events;
 
 namespace Content.Shared._RMC14.Xenonids.Actions;
 
-public sealed class XenoActionsSystem : EntitySystem
+public sealed partial class XenoActionsSystem : EntitySystem
 {
     [Dependency] private XenoSystem _xeno = default!;
 

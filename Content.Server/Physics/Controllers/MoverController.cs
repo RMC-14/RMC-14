@@ -15,7 +15,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.Physics.Controllers;
 
-public sealed class MoverController : SharedMoverController
+public sealed partial class MoverController : SharedMoverController
 {
     [Dependency] private ThrusterSystem _thruster = default!;
     [Dependency] private SharedTransformSystem _xformSystem = default!;

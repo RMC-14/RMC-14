@@ -13,7 +13,7 @@ namespace Content.Server._RMC14.Admin;
 /// </summary>
 [AdminCommand(AdminFlags.RMCMaintainer)] //RMC14
 [AdminCommand(AdminFlags.Fun)]
-public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
+public sealed partial class RMCDelayRoundEndCommand : LocalizedEntityCommands
 {
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IConfigurationManager _cfg = default!;

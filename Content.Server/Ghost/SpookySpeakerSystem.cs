@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Ghost;
 
-public sealed class SpookySpeakerSystem : EntitySystem
+public sealed partial class SpookySpeakerSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;

@@ -20,7 +20,7 @@ using Robust.Shared.Audio.Systems;
 namespace Content.Server.Defusable.Systems;
 
 /// <inheritdoc/>
-public sealed class DefusableSystem : SharedDefusableSystem
+public sealed partial class DefusableSystem : SharedDefusableSystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private ExplosionSystem _explosion = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Construction.Commands;
 
 [AdminCommand(AdminFlags.Mapping)]
-public sealed class FixRotationsCommand : IConsoleCommand
+public sealed partial class FixRotationsCommand : IConsoleCommand
 {
     [Dependency] private IEntityManager _entManager = default!;
 

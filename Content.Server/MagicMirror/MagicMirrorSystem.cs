@@ -18,7 +18,7 @@ namespace Content.Server.MagicMirror;
 /// <summary>
 /// Allows humanoids to change their appearance mid-round.
 /// </summary>
-public sealed class MagicMirrorSystem : SharedMagicMirrorSystem
+public sealed partial class MagicMirrorSystem : SharedMagicMirrorSystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DoAfterSystem _doAfterSystem = default!;

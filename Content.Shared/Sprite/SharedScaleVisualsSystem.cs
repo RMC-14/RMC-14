@@ -3,7 +3,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Sprite;
 
-public abstract class SharedScaleVisualsSystem : EntitySystem
+public abstract partial class SharedScaleVisualsSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 

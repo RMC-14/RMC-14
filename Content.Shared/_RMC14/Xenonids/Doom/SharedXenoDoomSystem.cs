@@ -17,7 +17,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Doom;
-public abstract class SharedXenoDoomSystem : EntitySystem
+public abstract partial class SharedXenoDoomSystem : EntitySystem
 {
     [Dependency] private SharedPointLightSystem _pointLight = default!;
     [Dependency] private IGameTiming _timing = default!;

@@ -12,7 +12,7 @@ using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Xenonids.Watch;
 
-public sealed class XenoWatchSystem : SharedXenoWatchSystem
+public sealed partial class XenoWatchSystem : SharedXenoWatchSystem
 {
     [Dependency] private SharedEyeSystem _eye = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;

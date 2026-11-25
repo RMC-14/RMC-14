@@ -5,7 +5,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Sprite;
 
-public sealed class RMCSpriteVisualizerSystem : VisualizerSystem<SpriteSetRenderOrderComponent>
+public sealed partial class RMCSpriteVisualizerSystem : VisualizerSystem<SpriteSetRenderOrderComponent>
 {
     [Dependency] private SpriteSystem _sprite = default!;
 

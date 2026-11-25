@@ -13,7 +13,7 @@ namespace Content.Shared.Toilet.Systems
     /// Handles sprite changes for both toilet seat up and down as well as for lid open and closed. Handles interactions with hidden stash
     /// </summary>
 
-    public abstract class SharedToiletSystem : EntitySystem
+    public abstract partial class SharedToiletSystem : EntitySystem
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private SharedAudioSystem _audio = default!;

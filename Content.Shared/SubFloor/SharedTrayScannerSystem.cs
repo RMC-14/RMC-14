@@ -8,7 +8,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SubFloor;
 
-public abstract class SharedTrayScannerSystem : EntitySystem
+public abstract partial class SharedTrayScannerSystem : EntitySystem
 {
     [Dependency] private INetManager _netMan = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

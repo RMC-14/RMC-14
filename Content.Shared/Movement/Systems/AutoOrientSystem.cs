@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Movement.Systems;
 
-public sealed class AutoOrientSystem : EntitySystem
+public sealed partial class AutoOrientSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] private IGameTiming _timing = default!;

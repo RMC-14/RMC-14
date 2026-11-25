@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.AlertLevel;
 
-public sealed class AlertLevelDisplaySystem : EntitySystem
+public sealed partial class AlertLevelDisplaySystem : EntitySystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
 

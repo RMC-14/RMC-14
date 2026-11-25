@@ -8,7 +8,7 @@ using Robust.Client.State;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Sniper;
 
-public sealed class RMCSpottingSystem : SharedRMCSpottingSystem
+public sealed partial class RMCSpottingSystem : SharedRMCSpottingSystem
 {
     [Dependency] private IEyeManager _eyeManager = default!;
     [Dependency] private IInputManager _inputManager = default!;

@@ -5,7 +5,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Medical.Refill;
 
-public sealed class RMCMedicalSupplyLinkSystem : SharedRMCMedicalSupplyLinkSystem
+public sealed partial class RMCMedicalSupplyLinkSystem : SharedRMCMedicalSupplyLinkSystem
 {
     [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
     [Dependency] private RMCMapSystem _rmcMap = default!;

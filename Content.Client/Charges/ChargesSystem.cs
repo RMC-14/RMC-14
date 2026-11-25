@@ -5,7 +5,7 @@ using Content.Shared.Charges.Systems;
 
 namespace Content.Client.Charges;
 
-public sealed class ChargesSystem : SharedChargesSystem
+public sealed partial class ChargesSystem : SharedChargesSystem
 {
     [Dependency] private ActionsSystem _actions = default!;
 

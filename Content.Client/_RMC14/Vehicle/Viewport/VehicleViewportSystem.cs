@@ -4,7 +4,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client._RMC14.Vehicle.Viewport;
 
-public sealed class VehicleViewportSystem : EntitySystem
+public sealed partial class VehicleViewportSystem : EntitySystem
 {
     [Dependency] private SharedEyeSystem _eye = default!;
 

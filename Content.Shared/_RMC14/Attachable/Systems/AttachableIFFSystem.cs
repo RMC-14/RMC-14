@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachableIFFSystem : EntitySystem
+public sealed partial class AttachableIFFSystem : EntitySystem
 {
     [Dependency] private AttachableHolderSystem _holder = default!;
     [Dependency] private GunIFFSystem _gunIFF = default!;

@@ -44,7 +44,7 @@ using DropshipUtilityComponent = Content.Shared._RMC14.Dropship.Utility.Componen
 
 namespace Content.Shared._RMC14.PowerLoader;
 
-public sealed class PowerLoaderSystem : EntitySystem
+public sealed partial class PowerLoaderSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedBuckleSystem _buckle = default!;

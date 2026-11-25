@@ -14,7 +14,7 @@ namespace Content.Server.Administration.Commands
     /// </summary>
     [AdminCommand(AdminFlags.RMCMaintainer)] //RMC14
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class AddReagent : IConsoleCommand
+    public sealed partial class AddReagent : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
         [Dependency] private IPrototypeManager _protomanager = default!;

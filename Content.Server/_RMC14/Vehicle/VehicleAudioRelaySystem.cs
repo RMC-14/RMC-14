@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Vehicle;
 
-public sealed class VehicleAudioRelaySystem : EntitySystem
+public sealed partial class VehicleAudioRelaySystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

@@ -5,7 +5,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Client.Commands;
 
-public sealed class HideMechanismsCommand : LocalizedEntityCommands
+public sealed partial class HideMechanismsCommand : LocalizedEntityCommands
 {
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private SpriteSystem _spriteSystem = default!;

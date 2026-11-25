@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Announce;
 
-public sealed class RMCAnnouncementPortraitView : Control
+public sealed partial class RMCAnnouncementPortraitView : Control
 {
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IEntityManager _entities = default!;

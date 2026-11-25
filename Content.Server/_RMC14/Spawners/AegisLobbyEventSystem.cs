@@ -16,7 +16,7 @@ namespace Content.Server._RMC14.Spawners;
 /// <summary>
 /// System to handle delayed AEGIS event execution when scheduled from lobby
 /// </summary>
-public sealed class AegisLobbyEventSystem : EntitySystem
+public sealed partial class AegisLobbyEventSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private GameTicker _gameTicker = default!;

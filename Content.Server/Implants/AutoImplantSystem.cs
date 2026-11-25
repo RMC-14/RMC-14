@@ -2,7 +2,7 @@ using Content.Server.Implants.Components;
 
 namespace Content.Server.Implants;
 
-public sealed class AutoImplantSystem : EntitySystem
+public sealed partial class AutoImplantSystem : EntitySystem
 {
     [Dependency] private SubdermalImplantSystem _subdermalImplant = default!;
 

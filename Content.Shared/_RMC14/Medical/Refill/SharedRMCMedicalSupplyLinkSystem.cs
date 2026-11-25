@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
-public abstract class SharedRMCMedicalSupplyLinkSystem : EntitySystem
+public abstract partial class SharedRMCMedicalSupplyLinkSystem : EntitySystem
 {
     [Dependency] private RMCMapSystem _rmcMap = default!;
     [Dependency] private SharedRMCAnimationSystem _animation = default!;

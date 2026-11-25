@@ -4,7 +4,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.GameStates;
 
-public sealed class RMCPvsSystem : SharedRMCPvsSystem
+public sealed partial class RMCPvsSystem : SharedRMCPvsSystem
 {
     [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 

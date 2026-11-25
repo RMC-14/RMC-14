@@ -33,7 +33,7 @@ using Content.Shared._RMC14.Areas;
 
 namespace Content.Shared._RMC14.Sentry;
 
-public sealed class SentrySystem : EntitySystem
+public sealed partial class SentrySystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

@@ -12,7 +12,7 @@ namespace Content.Shared.Animals;
 ///     Gives ability to produce fiber reagents;
 ///     produces endlessly if the owner has no HungerComponent.
 /// </summary>
-public sealed class WoolySystem : EntitySystem
+public sealed partial class WoolySystem : EntitySystem
 {
     [Dependency] private HungerSystem _hunger = default!;
     [Dependency] private IGameTiming _timing = default!;

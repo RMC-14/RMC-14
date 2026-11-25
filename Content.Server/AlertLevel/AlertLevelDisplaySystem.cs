@@ -5,7 +5,7 @@ using Content.Shared.Power;
 
 namespace Content.Server.AlertLevel;
 
-public sealed class AlertLevelDisplaySystem : EntitySystem
+public sealed partial class AlertLevelDisplaySystem : EntitySystem
 {
     [Dependency] private StationSystem _stationSystem = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

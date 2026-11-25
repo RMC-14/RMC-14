@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.AcidMine;
 
-public sealed class XenoAcidMineSystem : EntitySystem
+public sealed partial class XenoAcidMineSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;

@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Vomit;
 
-public sealed class RMCVomitSystem : EntitySystem
+public sealed partial class RMCVomitSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;

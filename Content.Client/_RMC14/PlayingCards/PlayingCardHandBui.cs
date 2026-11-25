@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.PlayingCards;
 
 [UsedImplicitly]
-public sealed class PlayingCardHandBui : BoundUserInterface
+public sealed partial class PlayingCardHandBui : BoundUserInterface
 {
     [Dependency] private IClyde _displayManager = default!;
     [Dependency] private IEyeManager _eye = default!;

@@ -27,7 +27,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.Wounds;
 
-public abstract class SharedWoundsSystem : EntitySystem
+public abstract partial class SharedWoundsSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;

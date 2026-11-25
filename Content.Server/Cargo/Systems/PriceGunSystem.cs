@@ -8,7 +8,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.Cargo.Systems;
 
-public sealed class PriceGunSystem : SharedPriceGunSystem
+public sealed partial class PriceGunSystem : SharedPriceGunSystem
 {
     [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private PricingSystem _pricingSystem = default!;

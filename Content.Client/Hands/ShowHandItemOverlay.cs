@@ -13,7 +13,7 @@ using Direction = Robust.Shared.Maths.Direction;
 
 namespace Content.Client.Hands
 {
-    public sealed class ShowHandItemOverlay : Overlay
+    public sealed partial class ShowHandItemOverlay : Overlay
     {
         [Dependency] private IConfigurationManager _cfg = default!;
         [Dependency] private IInputManager _inputManager = default!;

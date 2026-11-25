@@ -12,7 +12,7 @@ using Robust.Shared.Random;
 namespace Content.Shared.Chemistry;
 
 [UsedImplicitly]
-public sealed class ReactiveSystem : EntitySystem
+public sealed partial class ReactiveSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _robustRandom = default!;

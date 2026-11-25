@@ -66,7 +66,7 @@ using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsScreen
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
-public abstract class SharedDropshipWeaponSystem : EntitySystem
+public abstract partial class SharedDropshipWeaponSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

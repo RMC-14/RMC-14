@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client.Drowsiness;
 
-public sealed class DrowsinessSystem : SharedDrowsinessSystem
+public sealed partial class DrowsinessSystem : SharedDrowsinessSystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IOverlayManager _overlayMan = default!;

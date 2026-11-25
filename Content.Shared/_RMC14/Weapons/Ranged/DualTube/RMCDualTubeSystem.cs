@@ -16,7 +16,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.DualTube;
 
-public sealed class RMCDualTubeSystem : EntitySystem
+public sealed partial class RMCDualTubeSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

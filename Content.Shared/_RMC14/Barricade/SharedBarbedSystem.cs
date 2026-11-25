@@ -22,7 +22,7 @@ using Content.Shared.Examine;
 
 namespace Content.Shared._RMC14.Barricade;
 
-public abstract class SharedBarbedSystem : EntitySystem
+public abstract partial class SharedBarbedSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

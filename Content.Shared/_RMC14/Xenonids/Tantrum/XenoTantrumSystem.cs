@@ -14,7 +14,7 @@ using Content.Shared.Coordinates;
 
 namespace Content.Shared._RMC14.Xenonids.Tantrum;
 
-public sealed class XenoTantrumSystem : EntitySystem
+public sealed partial class XenoTantrumSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;

@@ -21,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
-public sealed class XenoEggRoleSystem : EntitySystem
+public sealed partial class XenoEggRoleSystem : EntitySystem
 {
     private readonly ProtoId<JobPrototype> _parasiteJob = "CMXenoParasite";
     private TimeSpan _parasiteSpawnDelay;

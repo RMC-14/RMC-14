@@ -4,7 +4,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Tether;
 
-public sealed class RMCTetherSystem : SharedRMCTetherSystem
+public sealed partial class RMCTetherSystem : SharedRMCTetherSystem
 {
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private RMCPvsSystem _pvs = default!;

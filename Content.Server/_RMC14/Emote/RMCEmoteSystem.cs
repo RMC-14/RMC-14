@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Emote;
 
-public sealed class RMCEmoteSystem : SharedRMCEmoteSystem
+public sealed partial class RMCEmoteSystem : SharedRMCEmoteSystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private IGameTiming _timing = default!;

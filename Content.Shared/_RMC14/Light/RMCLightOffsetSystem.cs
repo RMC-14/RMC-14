@@ -4,7 +4,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Light;
 
-public sealed class RMCLightOffsetSystem : EntitySystem
+public sealed partial class RMCLightOffsetSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedRMCSpriteSystem _sprite = default!;

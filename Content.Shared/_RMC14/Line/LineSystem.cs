@@ -21,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Line;
 
-public sealed class LineSystem : EntitySystem
+public sealed partial class LineSystem : EntitySystem
 {
     [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;

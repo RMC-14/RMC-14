@@ -28,7 +28,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Barricade;
 
-public sealed class RMCFoldingBarricadeSystem : EntitySystem
+public sealed partial class RMCFoldingBarricadeSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

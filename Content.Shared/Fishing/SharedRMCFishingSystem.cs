@@ -14,7 +14,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.Fishing;
 
-public abstract class SharedRMCFishingSystem : EntitySystem
+public abstract partial class SharedRMCFishingSystem : EntitySystem
 {
     [Dependency] private RMCMapSystem _rmcMap = default!;
     [Dependency] private RMCWaterSystem _water = default!;

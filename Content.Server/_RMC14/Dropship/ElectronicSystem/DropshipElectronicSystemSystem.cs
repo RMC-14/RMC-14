@@ -6,7 +6,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server._RMC14.Dropship.ElectronicSystem;
 
-public sealed class DropshipElectronicSystemSystem : SharedDropshipElectronicSystemSystem
+public sealed partial class DropshipElectronicSystemSystem : SharedDropshipElectronicSystemSystem
 {
     [Dependency] private PointLightSystem _pointLight = default!;
 

@@ -12,7 +12,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Announce;
 
-public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
+public sealed partial class XenoAnnounceSystem : SharedXenoAnnounceSystem
 {
     [Dependency] private IAdminLogManager _adminLogs = default!;
     [Dependency] private RMCAnnouncementOverlaySystem _announcementOverlay = default!;

@@ -12,7 +12,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Anomaly.Effects;
 
-public sealed class BluespaceAnomalySystem : EntitySystem
+public sealed partial class BluespaceAnomalySystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

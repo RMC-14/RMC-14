@@ -19,7 +19,7 @@ using static Content.Shared.Access.Components.AccessOverriderComponent;
 namespace Content.Server.Access.Systems;
 
 [UsedImplicitly]
-public sealed class AccessOverriderSystem : SharedAccessOverriderSystem
+public sealed partial class AccessOverriderSystem : SharedAccessOverriderSystem
 {
     [Dependency] private UserInterfaceSystem _userInterface = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;

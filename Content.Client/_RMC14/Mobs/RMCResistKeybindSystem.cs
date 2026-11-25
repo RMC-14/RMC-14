@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Mobs;
 
-public sealed class RMCResistKeybindSystem : EntitySystem
+public sealed partial class RMCResistKeybindSystem : EntitySystem
 {
     [Dependency] private ClientAlertsSystem _alerts = default!;
 

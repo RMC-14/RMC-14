@@ -8,7 +8,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Camera;
 
 [UsedImplicitly]
-public abstract class SharedCameraRecoilSystem : EntitySystem
+public abstract partial class SharedCameraRecoilSystem : EntitySystem
 {
     /// <summary>
     ///     Maximum rate of magnitude restore towards 0 kick.

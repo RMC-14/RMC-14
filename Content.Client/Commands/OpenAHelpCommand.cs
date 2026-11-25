@@ -7,7 +7,7 @@ using Robust.Shared.Network;
 namespace Content.Client.Commands;
 
 [AnyCommand]
-public sealed class OpenAHelpCommand : LocalizedCommands
+public sealed partial class OpenAHelpCommand : LocalizedCommands
 {
     [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
 

@@ -21,7 +21,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Bible
 {
-    public sealed class BibleSystem : EntitySystem
+    public sealed partial class BibleSystem : EntitySystem
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private ActionBlockerSystem _blocker = default!;

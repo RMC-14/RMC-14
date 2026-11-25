@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client.Points;
 
 /// <inheritdoc/>
-public sealed class PointSystem : SharedPointSystem
+public sealed partial class PointSystem : SharedPointSystem
 {
     [Dependency] private CharacterInfoSystem _characterInfo = default!;
 

@@ -10,7 +10,7 @@ namespace Content.Shared.Light.EntitySystems;
 /// <summary>
 /// Handles the roof flag for tiles that gets used for the RoofOverlay.
 /// </summary>
-public abstract class SharedRoofSystem : EntitySystem
+public abstract partial class SharedRoofSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private AreaSystem _area = default!;

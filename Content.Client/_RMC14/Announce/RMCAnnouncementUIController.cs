@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Announce;
 
-public sealed class RMCAnnouncementUIController : UIController,
+public sealed partial class RMCAnnouncementUIController : UIController,
     IOnStateEntered<GameplayState>,
     IOnStateExited<GameplayState>,
     IOnSystemChanged<RMCAnnouncementOverlayUISystem>

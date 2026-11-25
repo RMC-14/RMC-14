@@ -4,7 +4,7 @@ using Content.Shared.Gravity;
 
 namespace Content.Server.Gravity;
 
-public sealed class GravityGeneratorSystem : EntitySystem
+public sealed partial class GravityGeneratorSystem : EntitySystem
 {
     [Dependency] private GravitySystem _gravitySystem = default!;
     [Dependency] private SharedPointLightSystem _lights = default!;

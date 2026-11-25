@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Weeds;
 
-public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
+public sealed partial class XenoWeedsSystem : SharedXenoWeedsSystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;

@@ -34,7 +34,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Synth;
 
-public abstract class SharedSynthSystem : EntitySystem
+public abstract partial class SharedSynthSystem : EntitySystem
 {
     private static readonly TimeSpan UnableUsePopupCooldown = TimeSpan.FromSeconds(1);
     private static readonly ProtoId<TagPrototype> SynthAllowedArmorTag = "RMCSynthAllowedArmor";

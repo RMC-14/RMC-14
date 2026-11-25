@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SubFloor;
 
-public sealed class SubFloorHideSystem : SharedSubFloorHideSystem
+public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private SharedEyeSystem _eye = default!;

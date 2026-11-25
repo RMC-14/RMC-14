@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class DepartmentBanCommand : IConsoleCommand
+public sealed partial class DepartmentBanCommand : IConsoleCommand
 {
     [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private IPlayerLocator _locator = default!;

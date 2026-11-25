@@ -35,7 +35,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachableToggleableSystem : EntitySystem
+public sealed partial class AttachableToggleableSystem : EntitySystem
 {
     [Dependency] private ActionContainerSystem _actionContainerSystem = default!;
     [Dependency] private EntityWhitelistSystem _entityWhitelistSystem = default!;

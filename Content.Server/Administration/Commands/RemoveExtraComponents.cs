@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Mapping)]
-    public sealed class RemoveExtraComponents : LocalizedEntityCommands
+    public sealed partial class RemoveExtraComponents : LocalizedEntityCommands
     {
         [Dependency] private IComponentFactory _compFactory = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;

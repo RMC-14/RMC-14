@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Speech.EntitySystems;
 
-public abstract class SharedStutteringSystem : EntitySystem
+public abstract partial class SharedStutteringSystem : EntitySystem
 {
     public static readonly ProtoId<StatusEffectPrototype> StutterKey = "Stutter";
 

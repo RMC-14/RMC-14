@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Construction.Upgrades;
 
 [UsedImplicitly]
-public sealed class RMCConstructionUpgradeBui : BoundUserInterface
+public sealed partial class RMCConstructionUpgradeBui : BoundUserInterface
 {
     [Dependency] private IClyde _displayManager = default!;
     [Dependency] private IEyeManager _eye = default!;

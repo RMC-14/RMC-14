@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot;
 
-public abstract class SharedRMCAimedShotSystem : EntitySystem
+public abstract partial class SharedRMCAimedShotSystem : EntitySystem
 {
     [Dependency] private SharedRMCTargetingSystem _targeting = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

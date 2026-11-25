@@ -12,7 +12,7 @@ namespace Content.Server.Actions;
 /// <summary>
 ///     This System handled interactions for the <see cref="ActionOnInteractComponent"/>.
 /// </summary>
-public sealed class ActionOnInteractSystem : EntitySystem
+public sealed partial class ActionOnInteractSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

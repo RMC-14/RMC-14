@@ -9,7 +9,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Containers;
 
-public sealed class ThrowInsertContainerSystem : EntitySystem
+public sealed partial class ThrowInsertContainerSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

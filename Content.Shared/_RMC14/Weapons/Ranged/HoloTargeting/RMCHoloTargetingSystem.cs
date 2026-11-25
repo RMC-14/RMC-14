@@ -2,7 +2,7 @@ using Content.Shared.Projectiles;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.HoloTargeting;
 
-public sealed class RMCHoloTargetingSystem : EntitySystem
+public sealed partial class RMCHoloTargetingSystem : EntitySystem
 {
     [Dependency] private RMCHoloTargetedSystem _holoTargeted = default!;
 

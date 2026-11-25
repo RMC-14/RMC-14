@@ -14,7 +14,7 @@ using JetBrains.Annotations;
 namespace Content.Server.Atmos.Piping.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class AtmosUnsafeUnanchorSystem : EntitySystem
+    public sealed partial class AtmosUnsafeUnanchorSystem : EntitySystem
     {
         [Dependency] private AtmosphereSystem _atmosphere = default!;
         [Dependency] private NodeGroupSystem _group = default!;

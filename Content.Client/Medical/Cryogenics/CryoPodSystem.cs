@@ -6,7 +6,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Medical.Cryogenics;
 
-public sealed class CryoPodSystem : SharedCryoPodSystem
+public sealed partial class CryoPodSystem : SharedCryoPodSystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;

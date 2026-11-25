@@ -16,7 +16,7 @@ namespace Content.Shared.PDA;
 /// <summary>
 /// Handles the shared functionality for PDA ringtones.
 /// </summary>
-public abstract class SharedRingerSystem : EntitySystem
+public abstract partial class SharedRingerSystem : EntitySystem
 {
     public const int RingtoneLength = 6;
     public const int NoteTempo = 300;

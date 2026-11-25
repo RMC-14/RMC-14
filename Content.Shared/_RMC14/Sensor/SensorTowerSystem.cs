@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Sensor;
 
-public sealed class SensorTowerSystem : EntitySystem
+public sealed partial class SensorTowerSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

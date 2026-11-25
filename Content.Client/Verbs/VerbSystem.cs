@@ -22,7 +22,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.Verbs
 {
     [UsedImplicitly]
-    public sealed class VerbSystem : SharedVerbSystem
+    public sealed partial class VerbSystem : SharedVerbSystem
     {
         [Dependency] private PopupSystem _popupSystem = default!;
         [Dependency] private ExamineSystem _examine = default!;

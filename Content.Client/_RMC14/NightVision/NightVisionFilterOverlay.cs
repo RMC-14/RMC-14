@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.NightVision;
 
-public sealed class NightVisionFilterOverlay : Overlay
+public sealed partial class NightVisionFilterOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager _players = default!;

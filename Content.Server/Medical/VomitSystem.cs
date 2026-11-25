@@ -20,7 +20,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Medical
 {
-    public sealed class VomitSystem : EntitySystem
+    public sealed partial class VomitSystem : EntitySystem
     {
         [Dependency] private IPrototypeManager _proto = default!;
         [Dependency] private AudioSystem _audio = default!;

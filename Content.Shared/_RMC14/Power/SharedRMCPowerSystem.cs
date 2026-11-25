@@ -34,7 +34,7 @@ using static Content.Shared.Popups.PopupType;
 
 namespace Content.Shared._RMC14.Power;
 
-public abstract class SharedRMCPowerSystem : EntitySystem
+public abstract partial class SharedRMCPowerSystem : EntitySystem
 {
     [Dependency] protected SharedPointLightSystem Pointlight = default!;
 

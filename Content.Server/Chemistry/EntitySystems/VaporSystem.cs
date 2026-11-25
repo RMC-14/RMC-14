@@ -22,7 +22,7 @@ using Robust.Shared.Spawners;
 namespace Content.Server.Chemistry.EntitySystems
 {
     [UsedImplicitly]
-    internal sealed class VaporSystem : EntitySystem
+    internal sealed partial class VaporSystem : EntitySystem
     {
         [Dependency] private IPrototypeManager _protoManager = default!;
         [Dependency] private SharedMapSystem _map = default!;

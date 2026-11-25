@@ -33,7 +33,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Charge;
 
-public sealed class XenoChargeSystem : EntitySystem
+public sealed partial class XenoChargeSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

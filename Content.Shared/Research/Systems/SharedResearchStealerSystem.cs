@@ -7,7 +7,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Research.Systems;
 
-public abstract class SharedResearchStealerSystem : EntitySystem
+public abstract partial class SharedResearchStealerSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedNinjaGlovesSystem _gloves = default!;

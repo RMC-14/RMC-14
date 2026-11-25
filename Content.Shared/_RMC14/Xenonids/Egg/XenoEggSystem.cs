@@ -56,7 +56,7 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Xenonids.Egg;
 
-public sealed class XenoEggSystem : EntitySystem
+public sealed partial class XenoEggSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContainerSystem _container = default!;

@@ -45,7 +45,7 @@ using static Content.Shared.Storage.StorageComponent;
 
 namespace Content.Shared._RMC14.Storage;
 
-public sealed class RMCStorageSystem : EntitySystem
+public sealed partial class RMCStorageSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedCrashLandSystem _crashLand = default!;

@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Unrevivable;
 
-public sealed class RMCUnrevivableSystem : EntitySystem
+public sealed partial class RMCUnrevivableSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
 

@@ -21,7 +21,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class RMCAirShotSystem : EntitySystem
+public sealed partial class RMCAirShotSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private AreaSystem _area = default!;

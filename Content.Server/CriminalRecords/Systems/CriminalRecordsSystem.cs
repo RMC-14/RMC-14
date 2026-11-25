@@ -21,7 +21,7 @@ namespace Content.Server.CriminalRecords.Systems;
 ///         - See security officers' actions in Criminal Records in the radio
 ///         - See reasons for any action with no need to ask the officer personally
 /// </summary>
-public sealed class CriminalRecordsSystem : SharedCriminalRecordsSystem
+public sealed partial class CriminalRecordsSystem : SharedCriminalRecordsSystem
 {
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private StationRecordsSystem _records = default!;

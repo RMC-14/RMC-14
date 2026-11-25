@@ -9,7 +9,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Atmos.Commands
 {
     [AdminCommand(AdminFlags.Debug)]
-    public sealed class AddGasCommand : IConsoleCommand
+    public sealed partial class AddGasCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

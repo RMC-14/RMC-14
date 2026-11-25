@@ -19,7 +19,7 @@ namespace Content.Server.Prayer;
 /// <remarks>
 /// Rain is a professional developer and this did not take 2 PRs to fix subtle messages
 /// </remarks>
-public sealed class PrayerSystem : EntitySystem
+public sealed partial class PrayerSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private PopupSystem _popupSystem = default!;

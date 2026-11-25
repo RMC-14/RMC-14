@@ -30,7 +30,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.Implants;
 
-public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
+public sealed partial class SubdermalImplantSystem : SharedSubdermalImplantSystem
 {
     [Dependency] private CuffableSystem _cuffable = default!;
     [Dependency] private HumanoidAppearanceSystem _humanoidAppearance = default!;

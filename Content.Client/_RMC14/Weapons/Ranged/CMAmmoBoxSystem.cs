@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Weapons.Ranged;
 
-public sealed class CMAmmoBoxSystem : EntitySystem
+public sealed partial class CMAmmoBoxSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
 

@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
-public sealed class XenoFruitPlanterVisualsSystem : EntitySystem
+public sealed partial class XenoFruitPlanterVisualsSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

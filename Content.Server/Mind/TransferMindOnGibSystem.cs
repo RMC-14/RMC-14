@@ -12,7 +12,7 @@ namespace Content.Server.Mind;
 /// to a different entity when they gib.
 /// used for skeletons.
 /// </summary>
-public sealed class TransferMindOnGibSystem : EntitySystem
+public sealed partial class TransferMindOnGibSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private TagSystem _tag = default!;

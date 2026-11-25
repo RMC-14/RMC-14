@@ -13,7 +13,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Overwatch;
 
-public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
+public sealed partial class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
     [Dependency] private CommunicationsTowerSystem _communicationsTower = default!;
     [Dependency] private SharedEyeSystem _eye = default!;

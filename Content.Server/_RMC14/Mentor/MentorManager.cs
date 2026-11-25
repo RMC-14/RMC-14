@@ -22,7 +22,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Mentor;
 
-public sealed class MentorManager : IPostInjectInit
+public sealed partial class MentorManager : IPostInjectInit
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;

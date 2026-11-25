@@ -14,7 +14,7 @@ using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.SurveillanceCamera;
 
-public sealed class SurveillanceCameraSystem : EntitySystem
+public sealed partial class SurveillanceCameraSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;

@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Bed;
 
-public abstract class SharedBedSystem : EntitySystem
+public abstract partial class SharedBedSystem : EntitySystem
 {
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private ActionContainerSystem _actConts = default!;

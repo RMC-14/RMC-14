@@ -16,7 +16,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Impale;
 
-public sealed class XenoImpaleSystem : EntitySystem
+public sealed partial class XenoImpaleSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedRMCEmoteSystem _emote = default!;

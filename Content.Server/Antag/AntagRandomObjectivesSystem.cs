@@ -10,7 +10,7 @@ namespace Content.Server.Antag;
 /// <summary>
 /// Adds fixed objectives to an antag made with <c>AntagRandomObjectivesComponent</c>.
 /// </summary>
-public sealed class AntagRandomObjectivesSystem : EntitySystem
+public sealed partial class AntagRandomObjectivesSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedMindSystem _mind = default!;

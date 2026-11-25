@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Players.RateLimiting;
 
-public sealed class PlayerRateLimitManager : SharedPlayerRateLimitManager
+public sealed partial class PlayerRateLimitManager : SharedPlayerRateLimitManager
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private IGameTiming _gameTiming = default!;

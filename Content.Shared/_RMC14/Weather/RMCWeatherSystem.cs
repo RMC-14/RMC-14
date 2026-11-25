@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weather;
 
-public sealed class RMCWeatherSystem : EntitySystem
+public sealed partial class RMCWeatherSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;

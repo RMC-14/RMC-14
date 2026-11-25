@@ -18,7 +18,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Singularity.EntitySystems;
 
-public sealed class RadiationCollectorSystem : EntitySystem
+public sealed partial class RadiationCollectorSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private PopupSystem _popupSystem = default!;

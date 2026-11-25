@@ -21,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Scanner;
 
-public sealed class HealthScannerSystem : EntitySystem
+public sealed partial class HealthScannerSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

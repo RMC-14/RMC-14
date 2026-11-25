@@ -6,7 +6,7 @@ using Content.Shared.Examine;
 
 namespace Content.Shared.Paper;
 
-public sealed class EnvelopeSystem : EntitySystem
+public sealed partial class EnvelopeSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;

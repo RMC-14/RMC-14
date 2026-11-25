@@ -9,7 +9,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
-public sealed class UtensilSystem : EntitySystem
+public sealed partial class UtensilSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private FoodSystem _foodSystem = default!;

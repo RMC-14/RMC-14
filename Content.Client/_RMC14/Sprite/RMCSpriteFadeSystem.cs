@@ -17,7 +17,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client._RMC14.Sprite;
 
-public sealed class RMCSpriteFadeSystem : EntitySystem
+public sealed partial class RMCSpriteFadeSystem : EntitySystem
 {
     /*
     * If the player entity is obstructed under the specified components then it will drop the alpha for that entity

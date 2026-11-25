@@ -9,7 +9,7 @@ namespace Content.Server.DeviceLinking.Systems;
 /// <summary>
 /// Handles the control of output based on the input and enable ports.
 /// </summary>
-public sealed class MemoryCellSystem : EntitySystem
+public sealed partial class MemoryCellSystem : EntitySystem
 {
     [Dependency] private DeviceLinkSystem _deviceLink = default!;
 

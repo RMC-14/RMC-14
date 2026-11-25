@@ -20,7 +20,7 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Xenonids;
 
-public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
+public sealed partial class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private RMCSpriteSystem _rmcSprite = default!;

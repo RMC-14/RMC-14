@@ -3,7 +3,7 @@ using Content.Shared._RMC14.Sprite;
 
 namespace Content.Shared._RMC14.Pointing;
 
-public sealed class RMCPointingSystem : EntitySystem
+public sealed partial class RMCPointingSystem : EntitySystem
 {
     [Dependency] private SharedRMCSpriteSystem _rmcSprite = default!;
 

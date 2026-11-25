@@ -16,7 +16,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Implants;
 
-public sealed class ChameleonControllerSystem : SharedChameleonControllerSystem
+public sealed partial class ChameleonControllerSystem : SharedChameleonControllerSystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private InventorySystem _inventory = default!;

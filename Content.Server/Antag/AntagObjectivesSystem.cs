@@ -8,7 +8,7 @@ namespace Content.Server.Antag;
 /// <summary>
 /// Adds fixed objectives to an antag made with <c>AntagObjectivesComponent</c>.
 /// </summary>
-public sealed class AntagObjectivesSystem : EntitySystem
+public sealed partial class AntagObjectivesSystem : EntitySystem
 {
     [Dependency] private SharedMindSystem _mind = default!;
 

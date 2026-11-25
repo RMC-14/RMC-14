@@ -21,7 +21,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Dislocate;
 
-public sealed class XenoDislocateSystem : EntitySystem
+public sealed partial class XenoDislocateSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;

@@ -26,7 +26,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Empower;
 
-public sealed class XenoEmpowerSystem : EntitySystem
+public sealed partial class XenoEmpowerSystem : EntitySystem
 {
     [Dependency] private XenoPlasmaSystem _plasma = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

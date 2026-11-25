@@ -13,7 +13,7 @@ namespace Content.Server.Thief.Systems;
 /// <see cref="ThiefUndeterminedBackpackComponent"/>
 /// this system links the interface to the logic, and will output to the player a set of items selected by him in the interface
 /// </summary>
-public sealed class ThiefUndeterminedBackpackSystem : EntitySystem
+public sealed partial class ThiefUndeterminedBackpackSystem : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IPrototypeManager _proto = default!;

@@ -12,7 +12,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.CriminalRecords.Systems;
 
-public sealed class CriminalRecordsHackerSystem : SharedCriminalRecordsHackerSystem
+public sealed partial class CriminalRecordsHackerSystem : SharedCriminalRecordsHackerSystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private CriminalRecordsSystem _criminalRecords = default!;

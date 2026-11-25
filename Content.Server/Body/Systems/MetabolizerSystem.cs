@@ -22,7 +22,7 @@ using Robust.Shared.Timing;
 namespace Content.Server.Body.Systems
 {
     /// <inheritdoc/>
-    public sealed class MetabolizerSystem : SharedMetabolizerSystem
+    public sealed partial class MetabolizerSystem : SharedMetabolizerSystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;

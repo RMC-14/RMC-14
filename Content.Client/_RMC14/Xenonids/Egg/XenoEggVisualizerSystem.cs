@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Client._RMC14.Xenonids.Egg;
 
-public sealed class XenoEggVisualizerSystem : EntitySystem
+public sealed partial class XenoEggVisualizerSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
     [Dependency] private IResourceCache _resourceCache = default!;

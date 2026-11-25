@@ -30,7 +30,7 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Server._RMC14.Fishing;
 
-public sealed class RMCFishingSystem : SharedRMCFishingSystem
+public sealed partial class RMCFishingSystem : SharedRMCFishingSystem
 {
     private const string FishingLineVisualPrototypePrefix = "RMCFishingLineVisual";
 

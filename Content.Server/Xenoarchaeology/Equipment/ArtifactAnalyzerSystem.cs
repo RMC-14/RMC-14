@@ -8,7 +8,7 @@ using Robust.Shared.Audio.Systems;
 namespace Content.Server.Xenoarchaeology.Equipment;
 
 /// <inheritdoc />
-public sealed class ArtifactAnalyzerSystem : SharedArtifactAnalyzerSystem
+public sealed partial class ArtifactAnalyzerSystem : SharedArtifactAnalyzerSystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

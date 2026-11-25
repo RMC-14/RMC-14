@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.IconLabel;
 
-public abstract class SharedRMCIconLabelSystem : EntitySystem
+public abstract partial class SharedRMCIconLabelSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

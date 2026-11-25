@@ -4,7 +4,7 @@ using Content.Server.AlertLevel;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class AlertLevelInterceptionRule : StationEventSystem<AlertLevelInterceptionRuleComponent>
+public sealed partial class AlertLevelInterceptionRule : StationEventSystem<AlertLevelInterceptionRuleComponent>
 {
     [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
 

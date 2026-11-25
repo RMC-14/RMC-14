@@ -6,7 +6,7 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._RMC14.FarSight;
 
-public sealed class FarSightSystem : EntitySystem
+public sealed partial class FarSightSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

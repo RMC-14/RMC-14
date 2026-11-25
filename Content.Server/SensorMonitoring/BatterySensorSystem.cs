@@ -6,7 +6,7 @@ using Content.Shared.DeviceNetwork.Events;
 
 namespace Content.Server.SensorMonitoring;
 
-public sealed class BatterySensorSystem : EntitySystem
+public sealed partial class BatterySensorSystem : EntitySystem
 {
     public const string DeviceNetworkCommandSyncData = "bat_sync_data";
 

@@ -8,7 +8,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class SetMindCommand : LocalizedEntityCommands
+    public sealed partial class SetMindCommand : LocalizedEntityCommands
     {
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private SharedMindSystem _mindSystem = default!;

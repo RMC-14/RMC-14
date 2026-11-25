@@ -7,7 +7,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class RMCGunGroupPenaltySystem : EntitySystem
+public sealed partial class RMCGunGroupPenaltySystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Invisibility;
 
-public sealed class XenoInvisibilitySystem : EntitySystem
+public sealed partial class XenoInvisibilitySystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;

@@ -15,7 +15,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class MeteorSwarmSystem : GameRuleSystem<MeteorSwarmComponent>
+public sealed partial class MeteorSwarmSystem : GameRuleSystem<MeteorSwarmComponent>
 {
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private AudioSystem _audio = default!;

@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Implants.UI;
 
-public sealed class ImplanterStatusControl : Control
+public sealed partial class ImplanterStatusControl : Control
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     private readonly ImplanterComponent _parent;

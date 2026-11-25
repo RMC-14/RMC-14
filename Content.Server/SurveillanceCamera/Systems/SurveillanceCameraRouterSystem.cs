@@ -12,7 +12,7 @@ using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.SurveillanceCamera;
 
-public sealed class SurveillanceCameraRouterSystem : EntitySystem
+public sealed partial class SurveillanceCameraRouterSystem : EntitySystem
 {
     [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;

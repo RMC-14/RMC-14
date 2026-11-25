@@ -8,7 +8,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Atmos.Commands
 {
     [AdminCommand(AdminFlags.Debug)]
-    public sealed class AddAtmosCommand : IConsoleCommand
+    public sealed partial class AddAtmosCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entities = default!;
 

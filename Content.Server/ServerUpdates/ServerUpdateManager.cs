@@ -18,7 +18,7 @@ namespace Content.Server.ServerUpdates;
 /// This was originally only designed for restarting on *update*,
 /// but now also handles periodic restarting to keep server uptime via <see cref="CCVars.ServerUptimeRestartMinutes"/>.
 /// </remarks>
-public sealed class ServerUpdateManager : IPostInjectInit
+public sealed partial class ServerUpdateManager : IPostInjectInit
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IWatchdogApi _watchdog = default!;

@@ -29,7 +29,7 @@ namespace Content.Server.RoundEnd
     /// Handles ending rounds normally and also via requesting it (e.g. via comms console)
     /// If you request a round end then an escape shuttle will be used.
     /// </summary>
-    public sealed class RoundEndSystem : EntitySystem
+    public sealed partial class RoundEndSystem : EntitySystem
     {
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private IConfigurationManager _cfg = default!;

@@ -22,7 +22,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Communications;
 
-public sealed class CommunicationsTowerSystem : EntitySystem
+public sealed partial class CommunicationsTowerSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

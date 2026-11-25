@@ -6,7 +6,7 @@ namespace Content.Server.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.RMCMaintainer)] //RMC14
     [AdminCommand(AdminFlags.Round)]
-    sealed class StartRoundCommand : IConsoleCommand
+    sealed partial class StartRoundCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _e = default!;
 

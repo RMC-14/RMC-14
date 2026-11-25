@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Client.Forensics
 {
-    public sealed class ForensicScannerBoundUserInterface : BoundUserInterface
+    public sealed partial class ForensicScannerBoundUserInterface : BoundUserInterface
     {
         [Dependency] private IGameTiming _gameTiming = default!;
 

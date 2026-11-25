@@ -70,7 +70,7 @@ namespace Content.Server.Administration
         Task<LocatedPlayerData?> LookupIdAsync(NetUserId userId, CancellationToken cancel = default);
     }
 
-    internal sealed class PlayerLocator : IPlayerLocator, IDisposable, IPostInjectInit
+    internal sealed partial class PlayerLocator : IPlayerLocator, IDisposable, IPostInjectInit
     {
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IConfigurationManager _configurationManager = default!;

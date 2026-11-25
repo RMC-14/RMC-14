@@ -4,7 +4,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Ladder;
 
-public sealed class LadderSystem : SharedLadderSystem
+public sealed partial class LadderSystem : SharedLadderSystem
 {
     [Dependency] private SharedEyeSystem _eye = default!;
     [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;

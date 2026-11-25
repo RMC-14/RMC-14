@@ -8,7 +8,7 @@ namespace Content.Server.Anomaly.Effects;
 /// <summary>
 /// This component allows the anomaly to create puddles from SolutionContainer.
 /// </summary>
-public sealed class PuddleCreateAnomalySystem : EntitySystem
+public sealed partial class PuddleCreateAnomalySystem : EntitySystem
 {
     [Dependency] private PuddleSystem _puddle = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;

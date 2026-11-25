@@ -6,7 +6,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.GameStates;
 
-public sealed class SharedRMCGameStateSystem : EntitySystem
+public sealed partial class SharedRMCGameStateSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private INetManager _net = default!;

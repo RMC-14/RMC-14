@@ -3,7 +3,7 @@ using Robust.Shared.Network;
 
 namespace Content.Client._RMC14.LinkAccount;
 
-public sealed class LinkAccountManager : IPostInjectInit
+public sealed partial class LinkAccountManager : IPostInjectInit
 {
     [Dependency] private INetManager _net = default!;
 

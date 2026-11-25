@@ -12,7 +12,7 @@ using Robust.Client.Physics;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class GridVehicleMoverSystem : EntitySystem
+public sealed partial class GridVehicleMoverSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlayManager = default!;
     [Dependency] private ClientPhysicsSystem _physics = default!;

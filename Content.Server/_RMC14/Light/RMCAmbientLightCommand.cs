@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Light;
 
-public sealed class RMCAmbientLightCommand : EntitySystem
+public sealed partial class RMCAmbientLightCommand : EntitySystem
 {
     [Dependency] private IConsoleHost _console = default!;
     [Dependency] private RMCAmbientLightSystem _lightSystem = default!;

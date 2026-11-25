@@ -9,7 +9,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.EntityPreset;
 
-public sealed class RMCRandomizedPresetSystem : EntitySystem
+public sealed partial class RMCRandomizedPresetSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

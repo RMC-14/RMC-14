@@ -2,7 +2,7 @@ using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Xenonids.Targeting;
 
-public sealed class XenoAbilityPreviewSystem : EntitySystem
+public sealed partial class XenoAbilityPreviewSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
 

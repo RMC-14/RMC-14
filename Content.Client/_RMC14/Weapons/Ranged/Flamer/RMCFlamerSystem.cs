@@ -7,7 +7,7 @@ using Robust.Client.Input;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Flamer;
 
-public sealed class RMCFlamerSystem : SharedRMCFlamerSystem
+public sealed partial class RMCFlamerSystem : SharedRMCFlamerSystem
 {
     [Dependency] private IInputManager _input = default!;
     [Dependency] private IOverlayManager _overlay = default!;

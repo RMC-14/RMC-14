@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Ghost.Roles
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class MakeGhostRoleCommand : IConsoleCommand
+    public sealed partial class MakeGhostRoleCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

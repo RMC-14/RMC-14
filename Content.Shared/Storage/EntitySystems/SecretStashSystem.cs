@@ -23,7 +23,7 @@ namespace Content.Shared.Storage.EntitySystems;
 /// <summary>
 ///     Secret Stash allows an item to be hidden within.
 /// </summary>
-public sealed class SecretStashSystem : EntitySystem
+public sealed partial class SecretStashSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;

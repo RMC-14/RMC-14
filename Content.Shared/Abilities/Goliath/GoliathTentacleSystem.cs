@@ -10,7 +10,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Abilities.Goliath;
 
-public sealed class GoliathTentacleSystem : EntitySystem
+public sealed partial class GoliathTentacleSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private INetManager _net = default!;

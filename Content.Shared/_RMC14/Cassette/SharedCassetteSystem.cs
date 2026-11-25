@@ -23,7 +23,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Cassette;
 
-public abstract class SharedCassetteSystem : EntitySystem
+public abstract partial class SharedCassetteSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;

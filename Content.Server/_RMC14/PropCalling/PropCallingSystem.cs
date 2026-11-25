@@ -6,7 +6,7 @@ using Content.Shared.Toggleable;
 using Robust.Shared.Configuration;
 
 namespace Content.Server._RMC14.PropCalling;
-public sealed class PropCallingSystem : SharedPropCallingSystem
+public sealed partial class PropCallingSystem : SharedPropCallingSystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

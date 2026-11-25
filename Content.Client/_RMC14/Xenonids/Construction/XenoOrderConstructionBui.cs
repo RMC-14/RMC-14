@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Xenonids.Construction;
 
 [UsedImplicitly]
-public sealed class XenoOrderConstructionBui : BoundUserInterface
+public sealed partial class XenoOrderConstructionBui : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

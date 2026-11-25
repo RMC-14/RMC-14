@@ -5,7 +5,7 @@ using Robust.Shared.Map;
 
 namespace Content.Server._RMC14.Stack;
 
-public sealed class RMCStackSystem : SharedRMCStackSystem
+public sealed partial class RMCStackSystem : SharedRMCStackSystem
 {
     [Dependency] private StackSystem _stack = default!;
 

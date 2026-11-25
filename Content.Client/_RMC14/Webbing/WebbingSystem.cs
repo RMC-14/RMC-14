@@ -12,7 +12,7 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Client._RMC14.Webbing;
 
-public sealed class WebbingSystem : SharedWebbingSystem
+public sealed partial class WebbingSystem : SharedWebbingSystem
 {
     [Dependency] private ItemSystem _item = default!;
     [Dependency] private IPlayerManager _player = default!;

@@ -6,7 +6,7 @@ using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client._RMC14.Requisitions;
 
-public sealed class RequisitionsSystem : SharedRequisitionsSystem
+public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
 

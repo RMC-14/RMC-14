@@ -9,7 +9,7 @@ using System.Numerics;
 namespace Content.Client.Commands;
 
 [UsedImplicitly]
-public sealed class ZoomCommand : LocalizedCommands
+public sealed partial class ZoomCommand : LocalizedCommands
 {
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private IEyeManager _eyeManager = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Doors.Electronics;
 
-public sealed class DoorElectronicsBoundUserInterface : BoundUserInterface
+public sealed partial class DoorElectronicsBoundUserInterface : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
 

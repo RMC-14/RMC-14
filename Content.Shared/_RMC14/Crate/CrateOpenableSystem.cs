@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Crate;
 
-public sealed class CrateOpenableSystem : EntitySystem
+public sealed partial class CrateOpenableSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;

@@ -12,7 +12,7 @@ namespace Content.Server.Speech.EntitySystems
     /// <summary>
     /// Replaces text in messages, either with full replacements or word replacements.
     /// </summary>
-    public sealed class ReplacementAccentSystem : EntitySystem
+    public sealed partial class ReplacementAccentSystem : EntitySystem
     {
         [Dependency] private IPrototypeManager _proto = default!;
         [Dependency] private IRobustRandom _random = default!;

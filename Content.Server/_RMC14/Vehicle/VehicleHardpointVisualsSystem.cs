@@ -5,7 +5,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Server._RMC14.Vehicle;
 
-public sealed class VehicleHardpointVisualsSystem : EntitySystem
+public sealed partial class VehicleHardpointVisualsSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;

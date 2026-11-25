@@ -5,7 +5,7 @@ namespace Content.Shared.Actions;
 /// <summary>
 /// <see cref="ActionGrantComponent"/>
 /// </summary>
-public sealed class ActionGrantSystem : EntitySystem
+public sealed partial class ActionGrantSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
 

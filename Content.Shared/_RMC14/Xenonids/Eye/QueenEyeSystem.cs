@@ -23,7 +23,7 @@ using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Eye;
 
-public sealed class QueenEyeSystem : EntitySystem
+public sealed partial class QueenEyeSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private SharedEyeSystem _eye = default!;

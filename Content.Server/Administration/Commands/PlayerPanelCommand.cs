@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class PlayerPanelCommand : LocalizedCommands
+public sealed partial class PlayerPanelCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _locator = default!;
     [Dependency] private EuiManager _euis = default!;

@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.BodyScanner;
 
-public abstract class SharedBodyScannerSystem : EntitySystem
+public abstract partial class SharedBodyScannerSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

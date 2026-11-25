@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.EUI
 {
-    public sealed class EuiManager : IPostInjectInit
+    public sealed partial class EuiManager : IPostInjectInit
     {
         [Dependency] private ILogManager _log = default!;
         [Dependency] private IPlayerManager _players = default!;

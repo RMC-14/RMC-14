@@ -21,7 +21,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.Hands.Systems
 {
     [UsedImplicitly]
-    public sealed class HandsSystem : SharedHandsSystem
+    public sealed partial class HandsSystem : SharedHandsSystem
     {
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IUserInterfaceManager _ui = default!;

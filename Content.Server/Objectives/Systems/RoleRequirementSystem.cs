@@ -7,7 +7,7 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Handles role requirement for objectives that require a certain (probably antagonist) role(s).
 /// </summary>
-public sealed class RoleRequirementSystem : EntitySystem
+public sealed partial class RoleRequirementSystem : EntitySystem
 {
     [Dependency] private SharedRoleSystem _roles = default!;
     public override void Initialize()

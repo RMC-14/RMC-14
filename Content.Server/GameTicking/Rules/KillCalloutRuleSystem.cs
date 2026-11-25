@@ -12,7 +12,7 @@ namespace Content.Server.GameTicking.Rules;
 /// <summary>
 /// This handles calling out kills from <see cref="KillTrackingSystem"/>
 /// </summary>
-public sealed class KillCalloutRuleSystem : GameRuleSystem<KillCalloutRuleComponent>
+public sealed partial class KillCalloutRuleSystem : GameRuleSystem<KillCalloutRuleComponent>
 {
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;

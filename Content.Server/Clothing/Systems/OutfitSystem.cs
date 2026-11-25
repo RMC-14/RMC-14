@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Clothing.Systems;
 
-public sealed class OutfitSystem : EntitySystem
+public sealed partial class OutfitSystem : EntitySystem
 {
     [Dependency] private IServerPreferencesManager _preferenceManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

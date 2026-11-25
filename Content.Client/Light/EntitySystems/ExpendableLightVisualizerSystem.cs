@@ -5,7 +5,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Client.Light.EntitySystems;
 
-public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<ExpendableLightComponent>
+public sealed partial class ExpendableLightVisualizerSystem : VisualizerSystem<ExpendableLightComponent>
 {
     [Dependency] private PointLightSystem _pointLightSystem = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;

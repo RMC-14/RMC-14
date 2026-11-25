@@ -9,7 +9,7 @@ using Robust.Shared.Network;
 
 namespace Content.Server.Administration.BanList;
 
-public sealed class BanListEui : BaseEui
+public sealed partial class BanListEui : BaseEui
 {
     [Dependency] private IAdminManager _admins = default!;
     [Dependency] private IPlayerLocator _playerLocator = default!;

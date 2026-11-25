@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Spawners;
 
-public sealed class RMCSpawnerSystem : EntitySystem
+public sealed partial class RMCSpawnerSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;

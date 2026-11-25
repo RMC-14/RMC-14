@@ -6,7 +6,7 @@ using Robust.Client.Player;
 
 namespace Content.Client._RMC14.Mobs.Ghosts
 {
-    public sealed class CMGhostSystem : SharedCMGhostSystem
+    public sealed partial class CMGhostSystem : SharedCMGhostSystem
     {
         [Dependency] private IPlayerManager _player = default!;
         [Dependency] private SharedPopupSystem _popup = default!;

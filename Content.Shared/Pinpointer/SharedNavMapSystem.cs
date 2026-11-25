@@ -9,7 +9,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Pinpointer;
 
-public abstract class SharedNavMapSystem : EntitySystem
+public abstract partial class SharedNavMapSystem : EntitySystem
 {
     public const int Categories = 3;
     public const int Directions = 4; // Not directly tied to number of atmos directions

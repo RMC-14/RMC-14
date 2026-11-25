@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Nuke
 {
-    public sealed class NukeCodePaperSystem : EntitySystem
+    public sealed partial class NukeCodePaperSystem : EntitySystem
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private ChatSystem _chatSystem = default!;

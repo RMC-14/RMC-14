@@ -3,7 +3,7 @@ using Content.Shared.Damage;
 
 namespace Content.Shared.Flash;
 
-public sealed class DamagedByFlashingSystem : EntitySystem
+public sealed partial class DamagedByFlashingSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
 

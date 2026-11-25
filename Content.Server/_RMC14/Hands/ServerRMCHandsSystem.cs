@@ -4,7 +4,7 @@ using Robust.Shared.Map;
 
 namespace Content.Server._RMC14.Hands;
 
-public sealed class ServerRMCHandsSystem : RMCHandsSystem
+public sealed partial class ServerRMCHandsSystem : RMCHandsSystem
 {
     [Dependency] private HandsSystem _hands = default!;
 

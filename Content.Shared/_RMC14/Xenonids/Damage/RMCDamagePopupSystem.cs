@@ -5,7 +5,7 @@ using Content.Shared.Popups;
 
 namespace Content.Shared._RMC14.Xenonids.Damage;
 
-public sealed class RMCDamagePopupSystem : EntitySystem
+public sealed partial class RMCDamagePopupSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popupSystem = default!;
 

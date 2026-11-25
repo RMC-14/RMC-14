@@ -2,7 +2,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Emp;
 
-public abstract class SharedEmpSystem : EntitySystem
+public abstract partial class SharedEmpSystem : EntitySystem
 {
     [Dependency] protected IGameTiming Timing = default!;
 

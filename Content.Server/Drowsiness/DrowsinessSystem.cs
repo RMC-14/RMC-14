@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Drowsiness;
 
-public sealed class DrowsinessSystem : SharedDrowsinessSystem
+public sealed partial class DrowsinessSystem : SharedDrowsinessSystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Discord;
 
-public sealed class RMCDiscordSystem : EntitySystem
+public sealed partial class RMCDiscordSystem : EntitySystem
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private IChatManager _chat = default!;

@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Verbs
 {
-    public sealed class VerbSystem : SharedVerbSystem
+    public sealed partial class VerbSystem : SharedVerbSystem
     {
         [Dependency] private ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private HandsSystem _hands = default!;

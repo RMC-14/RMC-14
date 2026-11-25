@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship.Fabricator;
 
-public sealed class DropshipFabricatorSystem : EntitySystem
+public sealed partial class DropshipFabricatorSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

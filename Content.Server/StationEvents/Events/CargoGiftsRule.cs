@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class CargoGiftsRule : StationEventSystem<CargoGiftsRuleComponent>
+public sealed partial class CargoGiftsRule : StationEventSystem<CargoGiftsRuleComponent>
 {
     [Dependency] private CargoSystem _cargoSystem = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

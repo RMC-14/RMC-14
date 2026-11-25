@@ -7,7 +7,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Atmos;
 
-public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
+public sealed partial class RMCFlammableSystem : SharedRMCFlammableSystem
 {
     [Dependency] private FlammableSystem _flammable = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;

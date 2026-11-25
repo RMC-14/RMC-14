@@ -18,7 +18,7 @@ using Robust.Shared.Random;
 namespace Content.Server.RatKing
 {
     /// <inheritdoc/>
-    public sealed class RatKingSystem : SharedRatKingSystem
+    public sealed partial class RatKingSystem : SharedRatKingSystem
     {
         [Dependency] private AtmosphereSystem _atmos = default!;
         [Dependency] private ChatSystem _chat = default!;

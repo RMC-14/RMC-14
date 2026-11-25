@@ -36,7 +36,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Mortar;
 
-public abstract class SharedMortarSystem : EntitySystem
+public abstract partial class SharedMortarSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

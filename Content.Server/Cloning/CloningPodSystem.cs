@@ -31,7 +31,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Cloning;
 
-public sealed class CloningPodSystem : EntitySystem
+public sealed partial class CloningPodSystem : EntitySystem
 {
     [Dependency] private DeviceLinkSystem _signalSystem = default!;
     [Dependency] private IPlayerManager _playerManager = null!;

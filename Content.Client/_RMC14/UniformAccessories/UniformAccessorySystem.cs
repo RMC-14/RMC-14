@@ -14,7 +14,7 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Client._RMC14.UniformAccessories;
 
-public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
+public sealed partial class UniformAccessorySystem : SharedUniformAccessorySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedItemSystem _item = default!;

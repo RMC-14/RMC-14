@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Atmos;
 
-public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
+public sealed partial class RMCFlammableSystem : SharedRMCFlammableSystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
 

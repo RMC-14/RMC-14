@@ -2,7 +2,7 @@
 
 namespace Content.Client._RMC14.Xenonids.HiveLeader;
 
-public sealed class HiveLeaderUISystem : EntitySystem
+public sealed partial class HiveLeaderUISystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
 

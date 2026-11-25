@@ -10,7 +10,7 @@ namespace Content.Client.Clickable;
 /// <summary>
 /// Handles click detection for sprites.
 /// </summary>
-public sealed class ClickableSystem : EntitySystem
+public sealed partial class ClickableSystem : EntitySystem
 {
     [Dependency] private IClickMapManager _clickMapManager = default!;
     [Dependency] private SharedTransformSystem _transforms = default!;

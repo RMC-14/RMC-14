@@ -4,7 +4,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Teleporter;
 
-public sealed class RMCTeleporterSystem : SharedRMCTeleporterSystem
+public sealed partial class RMCTeleporterSystem : SharedRMCTeleporterSystem
 {
     [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
 

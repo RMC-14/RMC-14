@@ -8,7 +8,7 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.StepTrigger.Systems;
 
-public sealed class StepTriggerSystem : EntitySystem
+public sealed partial class StepTriggerSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private SharedGravitySystem _gravity = default!;

@@ -11,7 +11,7 @@ using static Robust.Client.UserInterface.Controls.LineEdit;
 namespace Content.Client._RMC14.Xenonids.Watch;
 
 [UsedImplicitly]
-public sealed class XenoWatchBui : BoundUserInterface
+public sealed partial class XenoWatchBui : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

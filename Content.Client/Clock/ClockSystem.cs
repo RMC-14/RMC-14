@@ -3,7 +3,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Clock;
 
-public sealed class ClockSystem : SharedClockSystem
+public sealed partial class ClockSystem : SharedClockSystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
 

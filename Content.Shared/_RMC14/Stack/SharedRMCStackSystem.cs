@@ -3,7 +3,7 @@ using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Stack;
 
-public abstract class SharedRMCStackSystem : EntitySystem
+public abstract partial class SharedRMCStackSystem : EntitySystem
 {
     [Dependency] private SharedStackSystem _stack = default!;
 

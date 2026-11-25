@@ -13,7 +13,7 @@ using Robust.Shared.Player;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.AdminGhost)] // RMC14
-public sealed class AGhostCommand : LocalizedCommands
+public sealed partial class AGhostCommand : LocalizedCommands
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private ISharedPlayerManager _playerManager = default!;

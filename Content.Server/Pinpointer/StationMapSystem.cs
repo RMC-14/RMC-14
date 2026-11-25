@@ -5,7 +5,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Pinpointer;
 
-public sealed class StationMapSystem : EntitySystem
+public sealed partial class StationMapSystem : EntitySystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private PowerCellSystem _cell = default!;

@@ -11,7 +11,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Anomaly.Effects;
 
-public sealed class TileAnomalySystem : SharedTileAnomalySystem
+public sealed partial class TileAnomalySystem : SharedTileAnomalySystem
 {
     [Dependency] private SharedAnomalySystem _anomaly = default!;
     [Dependency] private ITileDefinitionManager _tiledef = default!;

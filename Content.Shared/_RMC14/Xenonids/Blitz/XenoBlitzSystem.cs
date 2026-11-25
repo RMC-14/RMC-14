@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Blitz;
 
-public sealed class XenoBlitzSystem : EntitySystem
+public sealed partial class XenoBlitzSystem : EntitySystem
 {
     [Dependency] private XenoPlasmaSystem _plasma = default!;
     [Dependency] private XenoSystem _xeno = default!;

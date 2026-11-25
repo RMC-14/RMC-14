@@ -2,7 +2,7 @@ using Content.Shared.Chemistry.EntitySystems;
 
 namespace Content.Shared.ReagentSpeed;
 
-public sealed class ReagentSpeedSystem : EntitySystem
+public sealed partial class ReagentSpeedSystem : EntitySystem
 {
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
 

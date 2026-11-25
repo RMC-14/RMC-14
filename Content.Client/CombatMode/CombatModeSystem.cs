@@ -9,7 +9,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.CombatMode;
 
-public sealed class CombatModeSystem : SharedCombatModeSystem
+public sealed partial class CombatModeSystem : SharedCombatModeSystem
 {
     [Dependency] private IOverlayManager _overlayManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;

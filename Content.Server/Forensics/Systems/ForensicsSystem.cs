@@ -23,7 +23,7 @@ using Content.Shared.Hands.Components;
 
 namespace Content.Server.Forensics
 {
-    public sealed class ForensicsSystem : EntitySystem
+    public sealed partial class ForensicsSystem : EntitySystem
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private InventorySystem _inventory = default!;

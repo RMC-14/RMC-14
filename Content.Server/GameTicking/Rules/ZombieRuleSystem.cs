@@ -21,7 +21,7 @@ using System.Globalization;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
+public sealed partial class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
 {
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private ChatSystem _chat = default!;

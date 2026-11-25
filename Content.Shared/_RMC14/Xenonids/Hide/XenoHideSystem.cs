@@ -3,7 +3,7 @@ using Content.Shared.Actions;
 
 namespace Content.Shared._RMC14.Xenonids.Hide;
 
-public sealed class XenoHideSystem : EntitySystem
+public sealed partial class XenoHideSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

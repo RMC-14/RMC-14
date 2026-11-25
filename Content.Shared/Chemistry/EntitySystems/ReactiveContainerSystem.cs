@@ -4,7 +4,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
-public sealed class ReactiveContainerSystem : EntitySystem
+public sealed partial class ReactiveContainerSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private ReactiveSystem _reactiveSystem = default!;

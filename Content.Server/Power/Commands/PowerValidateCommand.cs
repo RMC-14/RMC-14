@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Power.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class PowerValidateCommand : LocalizedEntityCommands
+public sealed partial class PowerValidateCommand : LocalizedEntityCommands
 {
     [Dependency] private PowerNetSystem _powerNet = null!;
 

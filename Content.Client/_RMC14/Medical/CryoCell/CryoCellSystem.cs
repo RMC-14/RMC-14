@@ -3,7 +3,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Medical.CryoCell;
 
-public sealed class CryoCellSystem : SharedCryoCellSystem
+public sealed partial class CryoCellSystem : SharedCryoCellSystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;

@@ -8,7 +8,7 @@ using Content.Shared._RMC14.CCVar;
 
 namespace Content.Server._RMC14.Xenonids.Acid;
 
-public sealed class XenoAcidSystem : SharedXenoAcidSystem
+public sealed partial class XenoAcidSystem : SharedXenoAcidSystem
 {
 	[Dependency] private IGameTiming _timing = default!;
 	[Dependency] private IConfigurationManager _config = default!;

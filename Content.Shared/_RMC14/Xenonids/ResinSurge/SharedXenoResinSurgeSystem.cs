@@ -23,7 +23,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 
-public sealed class SharedXenoResinSurgeSystem : EntitySystem
+public sealed partial class SharedXenoResinSurgeSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

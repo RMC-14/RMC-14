@@ -8,7 +8,7 @@ using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class VehicleTurretVisualSystem : EntitySystem
+public sealed partial class VehicleTurretVisualSystem : EntitySystem
 {
     private const float PixelsPerMeter = 32f;
 

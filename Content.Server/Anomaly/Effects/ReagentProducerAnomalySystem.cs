@@ -12,7 +12,7 @@ namespace Content.Server.Anomaly.Effects;
 
 /// <see cref="ReagentProducerAnomalyComponent"/>
 
-public sealed class ReagentProducerAnomalySystem : EntitySystem
+public sealed partial class ReagentProducerAnomalySystem : EntitySystem
 {
     //The idea is to divide substances into several categories.
     //The anomaly will choose one of the categories with a given chance based on severity.

@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Intel.Tech;
 
-public sealed class TechSystem : EntitySystem
+public sealed partial class TechSystem : EntitySystem
 {
     [Dependency] private ARESCoreSystem _core = default!;
     [Dependency] private DropshipFabricatorSystem _dropshipFabricator = default!;

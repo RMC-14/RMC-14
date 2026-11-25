@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.Chemistry;
 
-public abstract class SharedRMCChemistrySystem : EntitySystem
+public abstract partial class SharedRMCChemistrySystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;

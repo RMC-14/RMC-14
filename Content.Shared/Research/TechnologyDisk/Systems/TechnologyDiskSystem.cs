@@ -14,7 +14,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Research.TechnologyDisk.Systems;
 
-public sealed class TechnologyDiskSystem : EntitySystem
+public sealed partial class TechnologyDiskSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private IRobustRandom _random = default!;

@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.TailFountain;
 
-public sealed class XenoTailFountainSystem : EntitySystem
+public sealed partial class XenoTailFountainSystem : EntitySystem
 {
     [Dependency] private SharedRMCFlammableSystem _flame = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

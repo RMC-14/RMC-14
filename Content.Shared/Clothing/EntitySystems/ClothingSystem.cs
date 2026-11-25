@@ -10,7 +10,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public abstract class ClothingSystem : EntitySystem
+public abstract partial class ClothingSystem : EntitySystem
 {
     [Dependency] private SharedItemSystem _itemSys = default!;
     [Dependency] private InventorySystem _invSystem = default!;

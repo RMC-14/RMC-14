@@ -6,7 +6,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleViewToggleSystem : EntitySystem
+public sealed partial class VehicleViewToggleSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedEyeSystem _eye = default!;

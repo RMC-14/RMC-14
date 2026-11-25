@@ -9,7 +9,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.Roadmap;
 
-public sealed class RoadmapUIController : UIController, IOnStateEntered<LobbyState>
+public sealed partial class RoadmapUIController : UIController, IOnStateEntered<LobbyState>
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private InfoUIController _infoUIController = default!;

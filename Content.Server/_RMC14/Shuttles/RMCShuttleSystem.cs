@@ -9,7 +9,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server._RMC14.Shuttles;
 
-public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
+public sealed partial class RMCShuttleSystem : SharedRMCShuttleSystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

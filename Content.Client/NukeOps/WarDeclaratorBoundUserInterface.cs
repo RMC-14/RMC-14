@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 namespace Content.Client.NukeOps;
 
 [UsedImplicitly]
-public sealed class WarDeclaratorBoundUserInterface : BoundUserInterface
+public sealed partial class WarDeclaratorBoundUserInterface : BoundUserInterface
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 

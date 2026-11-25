@@ -6,7 +6,7 @@ namespace Content.Shared.Ninja.Systems;
 /// <summary>
 /// Handles predicting that the action exists, creating items is done serverside.
 /// </summary>
-public abstract class SharedItemCreatorSystem : EntitySystem
+public abstract partial class SharedItemCreatorSystem : EntitySystem
 {
     [Dependency] private ActionContainerSystem _actionContainer = default!;
 

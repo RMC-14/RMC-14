@@ -16,7 +16,7 @@ namespace Content.Server._RMC14.GMRequest;
 /// <summary>
 /// Handles giving out the GM Request verb and sending those requests to the manager.
 /// </summary>
-public sealed class GMRequestVerbSystem : EntitySystem
+public sealed partial class GMRequestVerbSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IChatManager _chatManager = default!;

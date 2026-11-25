@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.Round)]
-    public sealed class ForcePresetCommand : LocalizedEntityCommands
+    public sealed partial class ForcePresetCommand : LocalizedEntityCommands
     {
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private GameTicker _ticker = default!;

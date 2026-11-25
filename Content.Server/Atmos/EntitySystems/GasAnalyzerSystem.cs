@@ -15,7 +15,7 @@ using static Content.Shared.Atmos.Components.GasAnalyzerComponent;
 namespace Content.Server.Atmos.EntitySystems;
 
 [UsedImplicitly]
-public sealed class GasAnalyzerSystem : EntitySystem
+public sealed partial class GasAnalyzerSystem : EntitySystem
 {
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private AtmosphereSystem _atmo = default!;

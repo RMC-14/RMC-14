@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Movement;
 
-public sealed class RMCLagCompensationSystem : SharedRMCLagCompensationSystem
+public sealed partial class RMCLagCompensationSystem : SharedRMCLagCompensationSystem
 {
     [Dependency] private IClientGameTiming _timing = default!;
 

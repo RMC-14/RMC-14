@@ -4,7 +4,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.IconLabel;
 
-public sealed class RMCIconLabelSystem : SharedRMCIconLabelSystem
+public sealed partial class RMCIconLabelSystem : SharedRMCIconLabelSystem
 {
     [Dependency] private QuickDialogSystem _quickDialog = default!;
 

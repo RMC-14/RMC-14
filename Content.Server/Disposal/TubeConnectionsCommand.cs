@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Disposal
 {
     [AdminCommand(AdminFlags.Debug)]
-    public sealed class TubeConnectionsCommand : IConsoleCommand
+    public sealed partial class TubeConnectionsCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entities = default!;
 

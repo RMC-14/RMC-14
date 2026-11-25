@@ -17,7 +17,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Flag;
 
-public sealed class PlantableFlagSystem : EntitySystem
+public sealed partial class PlantableFlagSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

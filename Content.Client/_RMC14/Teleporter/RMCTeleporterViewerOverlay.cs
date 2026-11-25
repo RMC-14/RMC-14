@@ -15,7 +15,7 @@ using static Robust.Shared.GameObjects.LookupFlags;
 
 namespace Content.Client._RMC14.Teleporter;
 
-public sealed class RMCTeleporterViewerOverlay : Overlay
+public sealed partial class RMCTeleporterViewerOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager _player = default!;

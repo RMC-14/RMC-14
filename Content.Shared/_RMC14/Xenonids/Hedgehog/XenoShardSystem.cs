@@ -21,7 +21,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
-public sealed class XenoShardSystem : EntitySystem
+public sealed partial class XenoShardSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;

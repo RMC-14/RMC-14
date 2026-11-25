@@ -3,7 +3,7 @@ using Robust.Shared.Console;
 
 namespace Content.Client.NPC;
 
-public sealed class ShowHtnCommand : LocalizedEntityCommands
+public sealed partial class ShowHtnCommand : LocalizedEntityCommands
 {
     [Dependency] private HTNSystem _htnSystem = default!;
 

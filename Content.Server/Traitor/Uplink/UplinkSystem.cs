@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Traitor.Uplink;
 
-public sealed class UplinkSystem : EntitySystem
+public sealed partial class UplinkSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;

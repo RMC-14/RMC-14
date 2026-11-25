@@ -14,7 +14,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact activation effect that pries tiles and throws stuff around.
 /// </summary>
-public sealed class XAEThrowThingsAroundSystem : BaseXAESystem<XAEThrowThingsAroundComponent>
+public sealed partial class XAEThrowThingsAroundSystem : BaseXAESystem<XAEThrowThingsAroundComponent>
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

@@ -15,7 +15,7 @@ namespace Content.Server.Worldgen.Systems.Debris;
 /// <summary>
 ///     This handles placing debris within the world evenly with rng, primarily for structures like asteroid fields.
 /// </summary>
-public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
+public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
 {
     [Dependency] private NoiseIndexSystem _noiseIndex = default!;
     [Dependency] private PoissonDiskSampler _sampler = default!;

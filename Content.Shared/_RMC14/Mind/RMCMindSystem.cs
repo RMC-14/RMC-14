@@ -5,7 +5,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Mind;
 
-public sealed class RMCMindSystem : EntitySystem
+public sealed partial class RMCMindSystem : EntitySystem
 {
     [Dependency] private SharedRMCPvsSystem _rmcPvs = default!;
 

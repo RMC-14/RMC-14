@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Barricade;
 
-public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
+public abstract partial class SharedDirectionalAttackBlockSystem : EntitySystem
 {
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;

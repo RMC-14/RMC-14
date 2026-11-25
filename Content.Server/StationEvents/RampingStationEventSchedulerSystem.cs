@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.StationEvents;
 
-public sealed class RampingStationEventSchedulerSystem : GameRuleSystem<RampingStationEventSchedulerComponent>
+public sealed partial class RampingStationEventSchedulerSystem : GameRuleSystem<RampingStationEventSchedulerComponent>
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EventManagerSystem _event = default!;

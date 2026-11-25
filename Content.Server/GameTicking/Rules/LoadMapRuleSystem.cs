@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class LoadMapRuleSystem : StationEventSystem<LoadMapRuleComponent>
+public sealed partial class LoadMapRuleSystem : StationEventSystem<LoadMapRuleComponent>
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private MapSystem _map = default!;

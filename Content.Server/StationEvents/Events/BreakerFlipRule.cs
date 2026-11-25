@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 namespace Content.Server.StationEvents.Events;
 
 [UsedImplicitly]
-public sealed class BreakerFlipRule : StationEventSystem<BreakerFlipRuleComponent>
+public sealed partial class BreakerFlipRule : StationEventSystem<BreakerFlipRuleComponent>
 {
     [Dependency] private ApcSystem _apcSystem = default!;
 

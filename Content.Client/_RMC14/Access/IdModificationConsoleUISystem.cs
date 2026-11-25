@@ -5,7 +5,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Client._RMC14.Access;
 
-public sealed class IdModificationConsoleUISystem : EntitySystem
+public sealed partial class IdModificationConsoleUISystem : EntitySystem
 {
     [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;
     [Dependency] private IClientGameTiming _timing = default!;

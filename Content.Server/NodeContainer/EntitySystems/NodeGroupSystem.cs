@@ -20,7 +20,7 @@ namespace Content.Server.NodeContainer.EntitySystems
     /// </summary>
     /// <seealso cref="NodeContainerSystem"/>
     [UsedImplicitly]
-    public sealed class NodeGroupSystem : EntitySystem
+    public sealed partial class NodeGroupSystem : EntitySystem
     {
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IAdminManager _adminManager = default!;

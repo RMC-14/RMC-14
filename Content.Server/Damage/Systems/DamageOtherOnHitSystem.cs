@@ -16,7 +16,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Damage.Systems
 {
-    public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
+    public sealed partial class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
     {
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private GunSystem _guns = default!;

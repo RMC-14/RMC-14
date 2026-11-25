@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
 
-public abstract class SharedRMCLagCompensationSystem : EntitySystem
+public abstract partial class SharedRMCLagCompensationSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private INetManager _net = default!;

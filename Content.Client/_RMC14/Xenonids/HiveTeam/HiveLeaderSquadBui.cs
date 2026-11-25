@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Xenonids.HiveTeam;
 
 [UsedImplicitly]
-public sealed class HiveLeaderSquadBui : BoundUserInterface
+public sealed partial class HiveLeaderSquadBui : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

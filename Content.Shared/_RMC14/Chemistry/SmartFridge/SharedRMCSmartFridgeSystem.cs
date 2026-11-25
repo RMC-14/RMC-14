@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Chemistry.SmartFridge;
 
-public abstract class SharedRMCSmartFridgeSystem : EntitySystem
+public abstract partial class SharedRMCSmartFridgeSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

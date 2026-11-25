@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.Controllers;
 namespace Content.Client.UserInterface.Systems.Vote;
 
 [UsedImplicitly]
-public sealed class VoteUIController : UIController
+public sealed partial class VoteUIController : UIController
 {
     [Dependency] private IVoteManager _votes = default!;
 

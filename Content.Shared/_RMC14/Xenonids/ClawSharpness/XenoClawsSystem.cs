@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.ClawSharpness;
 
-public sealed class XenoClawsSystem : EntitySystem
+public sealed partial class XenoClawsSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _protoManager = default!;
 

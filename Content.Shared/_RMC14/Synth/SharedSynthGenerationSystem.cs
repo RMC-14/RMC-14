@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Synth;
 
-public sealed class SharedSynthGenerationSystem : EntitySystem
+public sealed partial class SharedSynthGenerationSystem : EntitySystem
 {
 
     [Dependency] private IPrototypeManager _prototype = default!;

@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Paralyzing;
 
-public sealed class XenoParalyzingSlashSystem : EntitySystem
+public sealed partial class XenoParalyzingSlashSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.ShakeStun;
 
-public sealed class StunShakeableSystem : EntitySystem
+public sealed partial class StunShakeableSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

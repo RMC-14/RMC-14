@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Salvage.UI;
 
 [UsedImplicitly]
-public sealed class SalvageExpeditionConsoleBoundUserInterface : BoundUserInterface
+public sealed partial class SalvageExpeditionConsoleBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private OfferingWindow? _window;

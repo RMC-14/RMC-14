@@ -12,7 +12,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Singularity
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class StartSingularityEngineCommand : LocalizedEntityCommands
+    public sealed partial class StartSingularityEngineCommand : LocalizedEntityCommands
     {
         [Dependency] private EmitterSystem _emitterSystem = default!;
         [Dependency] private MultipartMachineSystem _multipartSystem = default!;

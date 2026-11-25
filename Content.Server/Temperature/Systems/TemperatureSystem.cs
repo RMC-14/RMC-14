@@ -17,7 +17,7 @@ using Content.Shared.Projectiles;
 
 namespace Content.Server.Temperature.Systems;
 
-public sealed class TemperatureSystem : EntitySystem
+public sealed partial class TemperatureSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private AtmosphereSystem _atmosphere = default!;

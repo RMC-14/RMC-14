@@ -15,7 +15,7 @@ using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.Atmos.Monitor.Systems;
 
-public sealed class AtmosAlarmableSystem : EntitySystem
+public sealed partial class AtmosAlarmableSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private AudioSystem _audioSystem = default!;

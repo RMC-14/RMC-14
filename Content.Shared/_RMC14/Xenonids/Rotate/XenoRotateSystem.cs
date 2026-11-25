@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rotate;
 
-public sealed class XenoRotateSystem : EntitySystem
+public sealed partial class XenoRotateSystem : EntitySystem
 {
     [Dependency] private RotateToFaceSystem _rotateTo = default!;
     [Dependency] private IGameTiming _timing = default!;

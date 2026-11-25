@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.OnCollide;
 
-public sealed class OnCollideSystem : SharedOnCollideSystem
+public sealed partial class OnCollideSystem : SharedOnCollideSystem
 {
     [Dependency] private RMCEmoteSystem _rmcEmotes = default!;
 

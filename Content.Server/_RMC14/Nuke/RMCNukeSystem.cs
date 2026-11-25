@@ -16,7 +16,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Nuke;
 
-public sealed class RMCNukeSystem : EntitySystem
+public sealed partial class RMCNukeSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private DamageableSystem _damageable = default!;

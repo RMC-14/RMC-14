@@ -33,7 +33,7 @@ namespace Content.Server.Afk
     }
 
     [UsedImplicitly]
-    public sealed class AfkManager : IAfkManager
+    public sealed partial class AfkManager : IAfkManager
     {
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IGameTiming _gameTiming = default!;

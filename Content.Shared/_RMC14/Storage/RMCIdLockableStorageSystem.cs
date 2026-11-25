@@ -17,7 +17,7 @@ namespace Content.Shared._RMC14.Storage;
 /// <summary>
 /// Handles ID swipe lock and access checks for reusable RMC lockable storage.
 /// </summary>
-public sealed class RMCIdLockableStorageSystem : EntitySystem
+public sealed partial class RMCIdLockableStorageSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

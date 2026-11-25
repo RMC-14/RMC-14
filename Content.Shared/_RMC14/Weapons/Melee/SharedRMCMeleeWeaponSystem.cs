@@ -20,7 +20,7 @@ using Content.Shared._RMC14.Tackle;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
 
-public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
+public abstract partial class SharedRMCMeleeWeaponSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private SharedMeleeWeaponSystem _melee = default!;

@@ -24,7 +24,7 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.ManageHive;
 
-public sealed class ManageHiveSystem : EntitySystem
+public sealed partial class ManageHiveSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedCommendationSystem _commendation = default!;

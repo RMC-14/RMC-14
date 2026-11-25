@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public sealed class HideLayerClothingSystem : EntitySystem
+public sealed partial class HideLayerClothingSystem : EntitySystem
 {
     [Dependency] private SharedHumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private IGameTiming _timing = default!;

@@ -2,7 +2,7 @@ using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Marines;
 
-public sealed class WarshipSystem : EntitySystem
+public sealed partial class WarshipSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
 

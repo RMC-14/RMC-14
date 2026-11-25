@@ -13,7 +13,7 @@ namespace Content.Server.Machines.EntitySystems;
 /// When requested, performs scans of the map area around the specified entity
 /// to find and match parts of the machine.
 /// </summary>
-public sealed class MultipartMachineSystem : SharedMultipartMachineSystem
+public sealed partial class MultipartMachineSystem : SharedMultipartMachineSystem
 {
     [Dependency] private IComponentFactory _factory = default!;
     [Dependency] private MapSystem _mapSystem = default!;

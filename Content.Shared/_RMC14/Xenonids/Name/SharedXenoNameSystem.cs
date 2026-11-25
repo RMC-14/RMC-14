@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Name;
 
-public abstract class SharedXenoNameSystem : EntitySystem
+public abstract partial class SharedXenoNameSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private SharedMindSystem _mind = default!;

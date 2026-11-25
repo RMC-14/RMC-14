@@ -18,7 +18,7 @@ namespace Content.Server.Spreader;
 /// <summary>
 /// Handles generic spreading logic, where one anchored entity spreads to neighboring tiles.
 /// </summary>
-public sealed class SpreaderSystem : EntitySystem
+public sealed partial class SpreaderSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _robustRandom = default!;

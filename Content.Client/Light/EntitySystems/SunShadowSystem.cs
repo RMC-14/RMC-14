@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Light.EntitySystems;
 
-public sealed class SunShadowSystem : SharedSunShadowSystem
+public sealed partial class SunShadowSystem : SharedSunShadowSystem
 {
     [Dependency] private ClientGameTicker _ticker = default!;
     [Dependency] private IGameTiming _timing = default!;

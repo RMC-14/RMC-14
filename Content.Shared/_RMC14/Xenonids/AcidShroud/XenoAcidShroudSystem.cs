@@ -7,7 +7,7 @@ using Content.Shared.DoAfter;
 
 namespace Content.Shared._RMC14.Xenonids.AcidShroud;
 
-public sealed class XenoAcidShroudSystem : EntitySystem
+public sealed partial class XenoAcidShroudSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;

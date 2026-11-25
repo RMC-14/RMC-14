@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Announce;
 
-public sealed class RMCAnnouncementShaderRect : Control
+public sealed partial class RMCAnnouncementShaderRect : Control
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

@@ -12,7 +12,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Engineering.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class SpawnAfterInteractSystem : EntitySystem
+    public sealed partial class SpawnAfterInteractSystem : EntitySystem
     {
         [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
         [Dependency] private StackSystem _stackSystem = default!;

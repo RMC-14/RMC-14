@@ -20,7 +20,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Chat;
 
-public sealed class SuicideSystem : EntitySystem
+public sealed partial class SuicideSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _entityLookupSystem = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

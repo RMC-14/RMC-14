@@ -8,7 +8,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.Wires;
 
-public abstract class SharedWiresSystem : EntitySystem
+public abstract partial class SharedWiresSystem : EntitySystem
 {
     [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
     [Dependency] private ActivatableUISystem _activatableUI = default!;

@@ -8,7 +8,7 @@ namespace Content.Server.Tesla.EntitySystems;
 /// <summary>
 /// Fires electric arcs at surrounding objects.
 /// </summary>
-public sealed class LightningArcShooterSystem : EntitySystem
+public sealed partial class LightningArcShooterSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private LightningSystem _lightning = default!;

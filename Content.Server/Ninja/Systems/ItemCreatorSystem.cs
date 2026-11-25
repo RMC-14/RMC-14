@@ -7,7 +7,7 @@ using Content.Shared.Popups;
 
 namespace Content.Server.Ninja.Systems;
 
-public sealed class ItemCreatorSystem : SharedItemCreatorSystem
+public sealed partial class ItemCreatorSystem : SharedItemCreatorSystem
 {
     [Dependency] private BatterySystem _battery = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

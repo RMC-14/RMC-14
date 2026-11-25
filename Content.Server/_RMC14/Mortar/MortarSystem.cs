@@ -16,7 +16,7 @@ using Content.Server.Chat.Systems;
 
 namespace Content.Server._RMC14.Mortar;
 
-public sealed class MortarSystem : SharedMortarSystem
+public sealed partial class MortarSystem : SharedMortarSystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private ContainerSystem _container = default!;

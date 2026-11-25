@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Lunge;
 
-public sealed class XenoLungeSystem : EntitySystem
+public sealed partial class XenoLungeSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;

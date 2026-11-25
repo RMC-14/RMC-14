@@ -10,7 +10,7 @@ using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorM
 namespace Content.Client._RMC14.Requisitions;
 
 [UsedImplicitly]
-public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

@@ -16,7 +16,7 @@ using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.ARES.ExternalTerminals;
 
-public sealed class ARESExternalTerminalSystem : EntitySystem
+public sealed partial class ARESExternalTerminalSystem : EntitySystem
 {
     [Dependency] private ARESCoreSystem _core = default!;
     [Dependency] private IComponentFactory _componentFactory = default!;

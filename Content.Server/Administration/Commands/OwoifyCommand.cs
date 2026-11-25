@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class OwoifyCommand : IConsoleCommand
+public sealed partial class OwoifyCommand : IConsoleCommand
 {
     [Dependency] private IEntityManager _entManager = default!;
 

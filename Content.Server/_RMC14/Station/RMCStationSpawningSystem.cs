@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Station;
 
-public sealed class RMCStationSpawningSystem : SharedRMCStationSpawningSystem
+public sealed partial class RMCStationSpawningSystem : SharedRMCStationSpawningSystem
 {
     [Dependency] private StationSpawningSystem _stationSpawning = default!;
 

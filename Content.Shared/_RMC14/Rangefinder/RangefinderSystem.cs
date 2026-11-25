@@ -20,7 +20,7 @@ using static Content.Shared._RMC14.Rangefinder.RangefinderMode;
 
 namespace Content.Shared._RMC14.Rangefinder;
 
-public sealed class RangefinderSystem : EntitySystem
+public sealed partial class RangefinderSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AreaSystem _area = default!;

@@ -10,7 +10,7 @@ namespace Content.Shared.Xenoarchaeology.Equipment;
 /// <summary>
 /// This handles logic relating to <see cref="ArtifactCrusherComponent"/>
 /// </summary>
-public abstract class SharedArtifactCrusherSystem : EntitySystem
+public abstract partial class SharedArtifactCrusherSystem : EntitySystem
 {
     [Dependency] protected SharedAppearanceSystem Appearance = default!;
     [Dependency] protected SharedAudioSystem AudioSystem = default!;

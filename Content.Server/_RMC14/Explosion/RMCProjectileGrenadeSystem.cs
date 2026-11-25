@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Explosion;
 
-public sealed class RMCProjectileGrenadeSystem : EntitySystem
+public sealed partial class RMCProjectileGrenadeSystem : EntitySystem
 {
     private readonly List<EntityUid> _hitEntities = new();
 

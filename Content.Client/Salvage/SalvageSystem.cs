@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Client.Salvage;
 
-public sealed class SalvageSystem : SharedSalvageSystem
+public sealed partial class SalvageSystem : SharedSalvageSystem
 {
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private ContentAudioSystem _audio = default!;

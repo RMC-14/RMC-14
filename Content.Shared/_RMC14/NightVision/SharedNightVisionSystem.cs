@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.NightVision;
 
-public abstract class SharedNightVisionSystem : EntitySystem
+public abstract partial class SharedNightVisionSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private AlertsSystem _alerts = default!;

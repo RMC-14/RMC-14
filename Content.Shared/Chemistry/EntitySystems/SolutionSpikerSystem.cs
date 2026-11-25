@@ -14,7 +14,7 @@ namespace Content.Shared.Chemistry.EntitySystems;
 ///     Examples of spikable entity interactions include pills being dropped into glasses,
 ///     eggs being cracked into bowls, and so on.
 /// </summary>
-public sealed class SolutionSpikerSystem : EntitySystem
+public sealed partial class SolutionSpikerSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;

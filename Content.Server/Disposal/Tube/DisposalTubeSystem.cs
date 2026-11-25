@@ -19,7 +19,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Disposal.Tube
 {
-    public sealed class DisposalTubeSystem : SharedDisposalTubeSystem
+    public sealed partial class DisposalTubeSystem : SharedDisposalTubeSystem
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;

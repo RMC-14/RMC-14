@@ -7,7 +7,7 @@ namespace Content.Server.Silicons.Laws;
 /// <summary>
 /// This handles running the ion storm event a on specific entity when that entity is spawned in.
 /// </summary>
-public sealed class StartIonStormedSystem : EntitySystem
+public sealed partial class StartIonStormedSystem : EntitySystem
 {
     [Dependency] private IonStormSystem _ionStorm = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

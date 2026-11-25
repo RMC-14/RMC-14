@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Marines;
 
-public sealed class MarineOverlay : Overlay
+public sealed partial class MarineOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager _players = default!;

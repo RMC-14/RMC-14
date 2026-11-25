@@ -9,7 +9,7 @@ namespace Content.Server.IgnitionSource;
 /// <summary>
 /// Handles igniting when triggered and stopping ignition after the delay.
 /// </summary>
-public sealed class IgniteOnTriggerSystem : EntitySystem
+public sealed partial class IgniteOnTriggerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedIgnitionSourceSystem _source = default!;

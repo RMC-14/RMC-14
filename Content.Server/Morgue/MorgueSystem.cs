@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Morgue;
 
-public sealed class MorgueSystem : EntitySystem
+public sealed partial class MorgueSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.Round)]
-    public sealed class ForceMapCommand : LocalizedCommands
+    public sealed partial class ForceMapCommand : LocalizedCommands
     {
         [Dependency] private IConfigurationManager _configurationManager = default!;
         [Dependency] private IGameMapManager _gameMapManager = default!;

@@ -3,7 +3,7 @@ using Content.Shared.Power.Generator;
 
 namespace Content.Server.Power.Generator;
 
-public sealed class GeneratorSignalControlSystem: EntitySystem
+public sealed partial class GeneratorSignalControlSystem: EntitySystem
 {
     [Dependency] private GeneratorSystem _generator = default!;
     [Dependency] private ActiveGeneratorRevvingSystem _revving = default!;

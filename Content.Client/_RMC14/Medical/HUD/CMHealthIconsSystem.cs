@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Medical.HUD;
 
-public sealed class CMHealthIconsSystem : EntitySystem
+public sealed partial class CMHealthIconsSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

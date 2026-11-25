@@ -4,7 +4,7 @@ using Content.Server.GameTicking.Rules;
 
 namespace Content.Server.Antag;
 
-public sealed class AntagRandomSpawnSystem : GameRuleSystem<AntagRandomSpawnComponent>
+public sealed partial class AntagRandomSpawnSystem : GameRuleSystem<AntagRandomSpawnComponent>
 {
     [Dependency] private SharedTransformSystem _transform = default!;
 

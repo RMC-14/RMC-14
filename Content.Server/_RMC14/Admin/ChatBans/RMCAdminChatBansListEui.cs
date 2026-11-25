@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 
 namespace Content.Server._RMC14.Admin.ChatBans;
 
-public sealed class RMCAdminChatBansListEui : BaseEui
+public sealed partial class RMCAdminChatBansListEui : BaseEui
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private ILogManager _logManager = default!;

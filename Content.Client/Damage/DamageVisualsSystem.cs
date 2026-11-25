@@ -24,7 +24,7 @@ namespace Content.Client.Damage;
 ///     of the sprite layer, and then passing in a bool value
 ///     (true to enable, false to disable).
 /// </summary>
-public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponent>
+public sealed partial class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponent>
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
 

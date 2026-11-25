@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 namespace Content.Server.Power.SMES;
 
 [UsedImplicitly]
-internal sealed class SmesSystem : EntitySystem
+internal sealed partial class SmesSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

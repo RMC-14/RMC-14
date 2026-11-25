@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Salve;
 
-public sealed class XenoSalveSystem : EntitySystem
+public sealed partial class XenoSalveSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IGameTiming _timing = default!;

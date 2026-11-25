@@ -8,7 +8,7 @@ using Robust.Shared.Toolshed.Syntax;
 namespace Content.Server.Toolshed.Commands.AdminDebug;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Debug)]
-public sealed class ACmdCommand : ToolshedCommand
+public sealed partial class ACmdCommand : ToolshedCommand
 {
     [Dependency] private IAdminManager _adminManager = default!;
 

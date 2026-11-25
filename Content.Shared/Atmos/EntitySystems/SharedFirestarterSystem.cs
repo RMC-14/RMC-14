@@ -3,7 +3,7 @@ using Content.Shared.Atmos.Components;
 
 namespace Content.Shared.Atmos.EntitySystems;
 
-public abstract class SharedFirestarterSystem : EntitySystem
+public abstract partial class SharedFirestarterSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
 

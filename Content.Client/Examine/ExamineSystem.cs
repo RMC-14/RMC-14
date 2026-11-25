@@ -24,7 +24,7 @@ using Direction = Robust.Shared.Maths.Direction;
 namespace Content.Client.Examine
 {
     [UsedImplicitly]
-    public sealed class ExamineSystem : ExamineSystemShared
+    public sealed partial class ExamineSystem : ExamineSystemShared
     {
         [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private IPlayerManager _playerManager = default!;

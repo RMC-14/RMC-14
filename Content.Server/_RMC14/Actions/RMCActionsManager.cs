@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Actions;
 
-public sealed class RMCActionsManager : IPostInjectInit
+public sealed partial class RMCActionsManager : IPostInjectInit
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private ILogManager _logManager = default!;

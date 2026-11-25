@@ -9,7 +9,7 @@ using Content.Shared.NPC.Systems;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class RMCGlobalAdminEui : BaseEui
+public sealed partial class RMCGlobalAdminEui : BaseEui
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private IEntityManager _entities = default!;

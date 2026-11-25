@@ -14,7 +14,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Map;
 
-public sealed class RMCMapSystem : EntitySystem
+public sealed partial class RMCMapSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private SharedMapSystem _map = default!;

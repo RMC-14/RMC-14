@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Damage;
 
-public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
+public sealed partial class RMCTemporaryInvincibilitySystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IGameTiming _timing = default!;

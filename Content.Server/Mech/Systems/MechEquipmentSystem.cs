@@ -10,7 +10,7 @@ namespace Content.Server.Mech.Systems;
 /// <summary>
 /// Handles the insertion of mech equipment into mechs.
 /// </summary>
-public sealed class MechEquipmentSystem : EntitySystem
+public sealed partial class MechEquipmentSystem : EntitySystem
 {
     [Dependency] private MechSystem _mech = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

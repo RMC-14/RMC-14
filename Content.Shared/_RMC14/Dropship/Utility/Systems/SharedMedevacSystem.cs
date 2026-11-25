@@ -10,7 +10,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public abstract class SharedMedevacSystem : EntitySystem
+public abstract partial class SharedMedevacSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private DropshipUtilitySystem _dropshipUtility = default!;

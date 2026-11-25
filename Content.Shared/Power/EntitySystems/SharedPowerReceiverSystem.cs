@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared.Power.EntitySystems;
 
-public abstract class SharedPowerReceiverSystem : EntitySystem
+public abstract partial class SharedPowerReceiverSystem : EntitySystem
 {
     [Dependency] private INetManager _netMan = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.MotionDetector;
 
-public sealed class MotionDetectorOverlaySystem : EntitySystem
+public sealed partial class MotionDetectorOverlaySystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private IEntityManager _entity = default!;

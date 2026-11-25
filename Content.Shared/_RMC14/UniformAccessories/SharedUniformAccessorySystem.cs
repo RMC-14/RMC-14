@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.UniformAccessories;
 
-public abstract class SharedUniformAccessorySystem : EntitySystem
+public abstract partial class SharedUniformAccessorySystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

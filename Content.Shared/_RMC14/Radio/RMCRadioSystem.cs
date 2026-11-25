@@ -8,7 +8,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Radio;
 
-public sealed class RMCRadioSystem : EntitySystem
+public sealed partial class RMCRadioSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private EncryptionKeySystem _encryptionKey = default!;

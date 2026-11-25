@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace Content.Shared.FingerprintReader;
 
 // TODO: This has a lot of overlap with the AccessReaderSystem, maybe merge them in the future?
-public sealed class FingerprintReaderSystem : EntitySystem
+public sealed partial class FingerprintReaderSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

@@ -8,7 +8,7 @@ using Content.Client.Light.EntitySystems;
 
 namespace Content.Client.Light;
 
-public sealed class HandheldLightSystem : SharedHandheldLightSystem
+public sealed partial class HandheldLightSystem : SharedHandheldLightSystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private LightBehaviorSystem _lightBehavior = default!;

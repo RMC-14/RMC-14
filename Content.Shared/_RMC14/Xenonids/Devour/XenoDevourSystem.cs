@@ -51,7 +51,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Devour;
 
-public sealed class XenoDevourSystem : EntitySystem
+public sealed partial class XenoDevourSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ActionBlockerSystem _blocker = default!;

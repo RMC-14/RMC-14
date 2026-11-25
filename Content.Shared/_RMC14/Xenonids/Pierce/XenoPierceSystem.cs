@@ -17,7 +17,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Pierce;
 
-public sealed class XenoPierceSystem : EntitySystem
+public sealed partial class XenoPierceSystem : EntitySystem
 {
     [Dependency] private XenoSystem _xeno = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

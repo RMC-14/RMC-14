@@ -18,7 +18,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Friction
 {
-    public sealed class TileFrictionController : VirtualController
+    public sealed partial class TileFrictionController : VirtualController
     {
         [Dependency] private IConfigurationManager _configManager = default!;
         [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;

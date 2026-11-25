@@ -42,7 +42,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Overwatch;
 
-public abstract class SharedOverwatchConsoleSystem : EntitySystem
+public abstract partial class SharedOverwatchConsoleSystem : EntitySystem
 {
     [Dependency] protected ISharedPlayerManager Player = default!;
     [Dependency] protected SharedTransformSystem TransformSystem = default!;

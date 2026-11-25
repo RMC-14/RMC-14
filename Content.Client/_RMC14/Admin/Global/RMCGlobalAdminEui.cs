@@ -15,7 +15,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client._RMC14.Admin.Global;
 
-public sealed class RMCGlobalAdminEui : BaseEui
+public sealed partial class RMCGlobalAdminEui : BaseEui
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IConfigurationManager _config = default!;

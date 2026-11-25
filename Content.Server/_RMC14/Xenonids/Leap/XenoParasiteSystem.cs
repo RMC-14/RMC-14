@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Xenonids.Leap;
 
-public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
+public sealed partial class XenoParasiteSystem : SharedXenoParasiteSystem
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private GhostSystem _ghostSystem = default!;

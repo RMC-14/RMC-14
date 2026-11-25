@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 
 namespace Content.Client.Ghost;
 
-public sealed class GhostToggleSelfVisibility : LocalizedEntityCommands
+public sealed partial class GhostToggleSelfVisibility : LocalizedEntityCommands
 {
     [Dependency] private SpriteSystem _sprite = default!;
 

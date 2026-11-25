@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Light;
 
-public abstract class SharedHandheldLightSystem : EntitySystem
+public abstract partial class SharedHandheldLightSystem : EntitySystem
 {
     [Dependency] private SharedItemSystem _itemSys = default!;
     [Dependency] private ClothingSystem _clothingSys = default!;

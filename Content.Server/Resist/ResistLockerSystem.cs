@@ -12,7 +12,7 @@ using Content.Shared.ActionBlocker;
 
 namespace Content.Server.Resist;
 
-public sealed class ResistLockerSystem : EntitySystem
+public sealed partial class ResistLockerSystem : EntitySystem
 {
     [Dependency] private EntityStorageSystem _entityStorage = default!;
     [Dependency] private LockSystem _lockSystem = default!;

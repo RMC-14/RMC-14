@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Language.Systems;
 
-public abstract class SharedLanguageLearningSystem : EntitySystem
+public abstract partial class SharedLanguageLearningSystem : EntitySystem
 {
     [Dependency] protected SharedLanguageSystem _language = default!;
     [Dependency] protected IPrototypeManager _prototypeManager = default!;

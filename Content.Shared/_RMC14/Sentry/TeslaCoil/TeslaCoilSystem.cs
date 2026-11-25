@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Sentry.TeslaCoil;
 
-public sealed class TeslaCoilSystem : EntitySystem
+public sealed partial class TeslaCoilSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IGameTiming _timing = default!;

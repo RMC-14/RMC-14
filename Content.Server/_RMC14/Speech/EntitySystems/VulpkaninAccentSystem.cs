@@ -5,7 +5,7 @@ using Content.Server.Speech;
 
 namespace Content.Server._RMC14.Speech.EntitySystems;
 
-public sealed class VulpkaninAccentSystem : EntitySystem
+public sealed partial class VulpkaninAccentSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
 

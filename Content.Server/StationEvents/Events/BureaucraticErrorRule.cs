@@ -10,7 +10,7 @@ using Robust.Shared.Random;
 namespace Content.Server.StationEvents.Events;
 
 [UsedImplicitly]
-public sealed class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
+public sealed partial class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
 {
     [Dependency] private StationJobsSystem _stationJobs = default!;
 

@@ -9,7 +9,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.Salvage;
 
-public sealed class RestrictedRangeSystem : SharedRestrictedRangeSystem
+public sealed partial class RestrictedRangeSystem : SharedRestrictedRangeSystem
 {
     [Dependency] private FixtureSystem _fixtures = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;

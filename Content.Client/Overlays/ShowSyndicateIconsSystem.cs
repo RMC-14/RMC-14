@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Overlays;
 
-public sealed class ShowSyndicateIconsSystem : EquipmentHudSystem<ShowSyndicateIconsComponent>
+public sealed partial class ShowSyndicateIconsSystem : EquipmentHudSystem<ShowSyndicateIconsComponent>
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

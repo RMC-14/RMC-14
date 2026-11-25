@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Blind;
 
-public sealed class RMCBlurOverlay : Overlay
+public sealed partial class RMCBlurOverlay : Overlay
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;

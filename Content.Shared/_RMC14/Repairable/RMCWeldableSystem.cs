@@ -3,7 +3,7 @@ using Content.Shared.Tools.Systems;
 
 namespace Content.Shared._RMC14.Repairable;
 
-public sealed class RMCWeldableSystem : EntitySystem
+public sealed partial class RMCWeldableSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
 

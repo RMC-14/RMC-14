@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin.ChatBans;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class RMCAdminChatBanCommand : LocalizedCommands
+public sealed partial class RMCAdminChatBanCommand : LocalizedCommands
 {
     [Dependency] private EuiManager _eui = default!;
 

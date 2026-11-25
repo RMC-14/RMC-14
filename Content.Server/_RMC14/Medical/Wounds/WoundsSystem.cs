@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.Wounds;
 
-public sealed class WoundsSystem : SharedWoundsSystem
+public sealed partial class WoundsSystem : SharedWoundsSystem
 {
     [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;

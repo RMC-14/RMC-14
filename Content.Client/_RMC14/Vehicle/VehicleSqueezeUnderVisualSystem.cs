@@ -4,7 +4,7 @@ using RmcDrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class VehicleSqueezeUnderVisualSystem : EntitySystem
+public sealed partial class VehicleSqueezeUnderVisualSystem : EntitySystem
 {
     private const float SqueezingAlpha = 0.4f;
 

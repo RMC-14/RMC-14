@@ -10,7 +10,7 @@ namespace Content.Server.Solar.EntitySystems
     /// Responsible for updating solar control consoles.
     /// </summary>
     [UsedImplicitly]
-    internal sealed class PowerSolarControlConsoleSystem : EntitySystem
+    internal sealed partial class PowerSolarControlConsoleSystem : EntitySystem
     {
         [Dependency] private PowerSolarSystem _powerSolarSystem = default!;
         [Dependency] private UserInterfaceSystem _uiSystem = default!;

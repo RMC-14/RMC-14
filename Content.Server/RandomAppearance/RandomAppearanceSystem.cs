@@ -3,7 +3,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.RandomAppearance;
 
-public sealed class RandomAppearanceSystem : EntitySystem
+public sealed partial class RandomAppearanceSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

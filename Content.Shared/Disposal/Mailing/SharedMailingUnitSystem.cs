@@ -12,7 +12,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared.Disposal.Mailing;
 
-public abstract class SharedMailingUnitSystem : EntitySystem
+public abstract partial class SharedMailingUnitSystem : EntitySystem
 {
     [Dependency] private SharedDeviceNetworkSystem _deviceNetworkSystem = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;

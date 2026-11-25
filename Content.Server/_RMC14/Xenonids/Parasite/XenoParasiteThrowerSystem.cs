@@ -22,7 +22,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
-public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
+public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 {
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private HandsSystem _hands = default!;

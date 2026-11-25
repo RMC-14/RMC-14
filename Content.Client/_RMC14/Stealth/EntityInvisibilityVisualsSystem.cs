@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Stealth;
 
-public sealed class EntityInvisibilityVisualsSystem : EntitySystem
+public sealed partial class EntityInvisibilityVisualsSystem : EntitySystem
 {
     private static readonly ProtoId<ShaderPrototype> InvisibleShader = "RMCInvisible";
 

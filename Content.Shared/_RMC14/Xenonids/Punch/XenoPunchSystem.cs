@@ -13,7 +13,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Punch;
 
-public sealed class XenoPunchSystem : EntitySystem
+public sealed partial class XenoPunchSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;

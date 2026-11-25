@@ -4,7 +4,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared.Light.EntitySystems;
 
-public sealed class LightCollideSystem : EntitySystem
+public sealed partial class LightCollideSystem : EntitySystem
 {
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SlimPoweredLightSystem _lights = default!;

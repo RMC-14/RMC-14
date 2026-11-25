@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Storage.EntitySystems;
 
-internal sealed class StoreOnCollideSystem : EntitySystem
+internal sealed partial class StoreOnCollideSystem : EntitySystem
 {
     [Dependency] private SharedEntityStorageSystem _storage = default!;
     [Dependency] private LockSystem _lock = default!;

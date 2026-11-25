@@ -6,7 +6,7 @@ namespace Content.Server.Speech.EntitySystems;
 /// <summary>
 /// System that gives the speaker a faux-French accent.
 /// </summary>
-public sealed class FrenchAccentSystem : EntitySystem
+public sealed partial class FrenchAccentSystem : EntitySystem
 {
     [Dependency] private ReplacementAccentSystem _replacement = default!;
 

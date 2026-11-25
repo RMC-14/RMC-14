@@ -13,7 +13,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.TailTrip;
 
-public sealed class XenoTailTripSystem : EntitySystem
+public sealed partial class XenoTailTripSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedStunSystem _stun = default!;

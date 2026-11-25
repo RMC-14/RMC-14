@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Eye.Blinding.Systems;
 
-public sealed class TemporaryBlindnessSystem : EntitySystem
+public sealed partial class TemporaryBlindnessSystem : EntitySystem
 {
     public static readonly ProtoId<StatusEffectPrototype> BlindingStatusEffect = "TemporaryBlindness";
 

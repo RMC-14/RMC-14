@@ -29,7 +29,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Pushup;
 
-public sealed class SharedRMCPushupSystem : EntitySystem
+public sealed partial class SharedRMCPushupSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedBodySystem _body = default!;

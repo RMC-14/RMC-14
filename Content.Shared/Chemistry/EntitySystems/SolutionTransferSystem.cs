@@ -12,7 +12,7 @@ namespace Content.Shared.Chemistry.EntitySystems;
 /// Allows an entity to transfer solutions with a customizable amount per click.
 /// Also provides <see cref="Transfer"/> API for other systems.
 /// </summary>
-public sealed class SolutionTransferSystem : EntitySystem
+public sealed partial class SolutionTransferSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

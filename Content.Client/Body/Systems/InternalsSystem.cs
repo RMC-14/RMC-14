@@ -4,7 +4,7 @@ using Content.Shared.Body.Systems;
 
 namespace Content.Client.Body.Systems;
 
-public sealed class InternalsSystem : SharedInternalsSystem
+public sealed partial class InternalsSystem : SharedInternalsSystem
 {
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
 

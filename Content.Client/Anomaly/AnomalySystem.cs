@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Anomaly;
 
-public sealed class AnomalySystem : SharedAnomalySystem
+public sealed partial class AnomalySystem : SharedAnomalySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private FloatingVisualizerSystem _floating = default!;

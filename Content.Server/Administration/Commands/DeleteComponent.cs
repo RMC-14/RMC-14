@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Spawn)]
-    public sealed class DeleteComponent : LocalizedEntityCommands
+    public sealed partial class DeleteComponent : LocalizedEntityCommands
     {
         [Dependency] private IComponentFactory _compFactory = default!;
 

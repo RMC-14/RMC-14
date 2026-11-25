@@ -13,7 +13,7 @@ using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server.Silicons.StationAi;
 
-public sealed class StationAiSystem : SharedStationAiSystem
+public sealed partial class StationAiSystem : SharedStationAiSystem
 {
     [Dependency] private IChatManager _chats = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

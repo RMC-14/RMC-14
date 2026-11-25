@@ -3,7 +3,7 @@ using Content.Shared._RMC14.Hands;
 
 namespace Content.Shared._RMC14.Sprite;
 
-public abstract class SharedRMCSpriteSystem : EntitySystem
+public abstract partial class SharedRMCSpriteSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 

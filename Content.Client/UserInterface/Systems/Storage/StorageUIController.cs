@@ -25,7 +25,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.UserInterface.Systems.Storage;
 
-public sealed class StorageUIController : UIController, IOnSystemChanged<StorageSystem>
+public sealed partial class StorageUIController : UIController, IOnSystemChanged<StorageSystem>
 {
     /*
      * Things are a bit over the shop but essentially

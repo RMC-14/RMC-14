@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Sentry.Flag;
 
-public sealed class PlantedFlagSystem : EntitySystem
+public sealed partial class PlantedFlagSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedDropshipWeaponSystem _dropshipWeapon = default!;

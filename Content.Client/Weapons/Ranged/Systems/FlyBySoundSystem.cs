@@ -10,7 +10,7 @@ using Robust.Shared.Random;
 
 namespace Content.Client.Weapons.Ranged.Systems;
 
-public sealed class FlyBySoundSystem : SharedFlyBySoundSystem
+public sealed partial class FlyBySoundSystem : SharedFlyBySoundSystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IRobustRandom _random = default!;

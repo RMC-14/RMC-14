@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Construction;
 
 [UsedImplicitly]
-public sealed class RMCConstructionBui : BoundUserInterface
+public sealed partial class RMCConstructionBui : BoundUserInterface
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

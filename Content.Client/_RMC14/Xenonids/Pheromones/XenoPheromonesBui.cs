@@ -14,7 +14,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Xenonids.Pheromones;
 
 [UsedImplicitly]
-public sealed class XenoPheromonesBui : BoundUserInterface
+public sealed partial class XenoPheromonesBui : BoundUserInterface
 {
     [Dependency] private IClyde _displayManager = default!;
     [Dependency] private IInputManager _inputManager = default!;

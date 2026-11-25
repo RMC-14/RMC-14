@@ -9,7 +9,7 @@ namespace Content.Client.DebugMon;
 /// <summary>
 /// This handles preventing certain debug monitors from being usable by non-admins.
 /// </summary>
-internal sealed class DebugMonitorManager
+internal sealed partial class DebugMonitorManager
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IClientAdminManager _admin = default!;

@@ -17,7 +17,7 @@ namespace Content.Shared.Fluids;
 /// <summary>
 /// Mopping logic for interacting with puddle components.
 /// </summary>
-public abstract class SharedAbsorbentSystem : EntitySystem
+public abstract partial class SharedAbsorbentSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

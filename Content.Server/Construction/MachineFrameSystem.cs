@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Construction;
 
-public sealed class MachineFrameSystem : EntitySystem
+public sealed partial class MachineFrameSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private TagSystem _tag = default!;

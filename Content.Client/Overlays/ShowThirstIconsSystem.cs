@@ -5,7 +5,7 @@ using Content.Shared.StatusIcon.Components;
 
 namespace Content.Client.Overlays;
 
-public sealed class ShowThirstIconsSystem : EquipmentHudSystem<ShowThirstIconsComponent>
+public sealed partial class ShowThirstIconsSystem : EquipmentHudSystem<ShowThirstIconsComponent>
 {
     [Dependency] private ThirstSystem _thirst = default!;
 

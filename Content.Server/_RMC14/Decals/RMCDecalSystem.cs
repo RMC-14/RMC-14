@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Decals;
 
-public sealed class RMCDecalSystem : EntitySystem
+public sealed partial class RMCDecalSystem : EntitySystem
 {
     [Dependency] private DecalSystem _decal = default!;
 

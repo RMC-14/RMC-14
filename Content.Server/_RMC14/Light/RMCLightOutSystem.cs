@@ -3,7 +3,7 @@ using Content.Shared.Light.Components;
 
 namespace Content.Server._RMC14.Light;
 
-public sealed class RMCLightOutSystem : SharedRMCLightOutSystem
+public sealed partial class RMCLightOutSystem : SharedRMCLightOutSystem
 {
     [Dependency] private ExpendableLightSystem _expend = default!;
 

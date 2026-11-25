@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 namespace Content.Server.Damage.ForceSay;
 
 /// <inheritdoc cref="DamageForceSayComponent"/>
-public sealed class DamageForceSaySystem : EntitySystem
+public sealed partial class DamageForceSaySystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

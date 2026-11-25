@@ -6,7 +6,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.Fluids;
 
-public sealed class SpraySafetySystem : EntitySystem
+public sealed partial class SpraySafetySystem : EntitySystem
 {
     [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

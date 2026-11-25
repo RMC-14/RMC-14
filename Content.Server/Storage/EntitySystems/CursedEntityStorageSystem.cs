@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Content.Server.Storage.EntitySystems;
 
-public sealed class CursedEntityStorageSystem : EntitySystem
+public sealed partial class CursedEntityStorageSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedContainerSystem _container = default!;

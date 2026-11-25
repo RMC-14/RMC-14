@@ -6,7 +6,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Decals.Commands
 {
     [AdminCommand(AdminFlags.Mapping)]
-    public sealed class RemoveDecalCommand : IConsoleCommand
+    public sealed partial class RemoveDecalCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

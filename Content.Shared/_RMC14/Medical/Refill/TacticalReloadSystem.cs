@@ -7,7 +7,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
-public sealed class TacticalReloadSystem : EntitySystem
+public sealed partial class TacticalReloadSystem : EntitySystem
 {
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private SharedContainerSystem _container = default!;

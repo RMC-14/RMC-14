@@ -21,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Sentry.Laptop;
 
-public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
+public sealed partial class SentryLaptopSystem : SharedSentryLaptopSystem
 {
     [Dependency] private AreaSystem _areaServer = default!;
     [Dependency] private SharedSentryTargetingSystem _sentryTargetingServer = default!;

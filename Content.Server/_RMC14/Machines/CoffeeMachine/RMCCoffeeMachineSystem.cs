@@ -13,7 +13,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Machines.CoffeeMachine;
 
-public sealed class RMCCoffeeMachineSystem : EntitySystem
+public sealed partial class RMCCoffeeMachineSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private AudioSystem _audio = default!;

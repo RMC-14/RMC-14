@@ -11,7 +11,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact activation effect that is polymorphing all humanoid entities in range.
 /// </summary>
-public sealed class XAEPolymorphSystem : BaseXAESystem<XAEPolymorphComponent>
+public sealed partial class XAEPolymorphSystem : BaseXAESystem<XAEPolymorphComponent>
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private MobStateSystem _mob = default!;

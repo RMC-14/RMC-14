@@ -7,7 +7,7 @@ using Content.Shared.Mobs.Systems;
 
 namespace Content.Server.Bed
 {
-    public sealed class BedSystem : SharedBedSystem
+    public sealed partial class BedSystem : SharedBedSystem
     {
         [Dependency] private DamageableSystem _damageableSystem = default!;
         [Dependency] private MobStateSystem _mobStateSystem = default!;

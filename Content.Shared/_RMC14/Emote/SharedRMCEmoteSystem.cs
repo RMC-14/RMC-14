@@ -18,7 +18,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Emote;
 
-public abstract class SharedRMCEmoteSystem : EntitySystem
+public abstract partial class SharedRMCEmoteSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private INetManager _net = default!;

@@ -4,7 +4,7 @@ using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Explosion.Implosion;
 
-public sealed class RMCImplosionSystem : EntitySystem
+public sealed partial class RMCImplosionSystem : EntitySystem
 {
     [Dependency] private RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;

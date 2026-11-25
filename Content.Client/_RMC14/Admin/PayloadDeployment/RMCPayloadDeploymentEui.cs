@@ -18,7 +18,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Admin.PayloadDeployment;
 
 [UsedImplicitly]
-public sealed class RMCPayloadDeploymentEui : BaseEui
+public sealed partial class RMCPayloadDeploymentEui : BaseEui
 {
     private const int MaxNearbyRadius = 50;
     private const int MaxManifestNameLength = 32;

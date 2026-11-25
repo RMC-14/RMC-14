@@ -12,7 +12,7 @@ namespace Content.Server.Mech.Systems;
 /// Handles <see cref="MechAssemblyComponent"/> and the insertion
 /// and removal of parts from the assembly.
 /// </summary>
-public sealed class MechAssemblySystem : EntitySystem
+public sealed partial class MechAssemblySystem : EntitySystem
 {
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private TagSystem _tag = default!;

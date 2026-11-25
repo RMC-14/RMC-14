@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.StatusEffect;
 
-public sealed class RMCStatusEffectSystem : EntitySystem
+public sealed partial class RMCStatusEffectSystem : EntitySystem
 {
     [Dependency] private SkillsSystem _skills = default!;
 

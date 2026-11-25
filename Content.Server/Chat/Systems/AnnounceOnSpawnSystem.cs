@@ -2,7 +2,7 @@ using Content.Server.Chat;
 
 namespace Content.Server.Chat.Systems;
 
-public sealed class AnnounceOnSpawnSystem : EntitySystem
+public sealed partial class AnnounceOnSpawnSystem : EntitySystem
 {
     [Dependency] private ChatSystem _chat = default!;
 

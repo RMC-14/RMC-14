@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.ItemPickup;
 
-public sealed class ItemPickupSystem : EntitySystem
+public sealed partial class ItemPickupSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IGameTiming _timing = default!;

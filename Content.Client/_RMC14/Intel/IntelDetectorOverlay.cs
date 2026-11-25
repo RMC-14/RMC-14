@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Intel;
 
-public sealed class IntelDetectorOverlay : Overlay
+public sealed partial class IntelDetectorOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IGameTiming _timing = default!;

@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Eye.Blinding.Systems;
 
-public sealed class EyeClosingSystem : EntitySystem
+public sealed partial class EyeClosingSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IGameTiming _timing = default!;

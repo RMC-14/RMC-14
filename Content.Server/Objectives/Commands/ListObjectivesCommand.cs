@@ -10,7 +10,7 @@ using Robust.Shared.Player;
 namespace Content.Server.Objectives.Commands
 {
     [AdminCommand(AdminFlags.Logs)]
-    public sealed class ListObjectivesCommand : LocalizedCommands
+    public sealed partial class ListObjectivesCommand : LocalizedCommands
     {
         [Dependency] private IEntityManager _entities = default!;
         [Dependency] private IPlayerManager _players = default!;

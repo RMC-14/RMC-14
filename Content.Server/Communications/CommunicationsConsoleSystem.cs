@@ -22,7 +22,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server.Communications
 {
-    public sealed class CommunicationsConsoleSystem : EntitySystem
+    public sealed partial class CommunicationsConsoleSystem : EntitySystem
     {
         [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
         [Dependency] private AlertLevelSystem _alertLevelSystem = default!;

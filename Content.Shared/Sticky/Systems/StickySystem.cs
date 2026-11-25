@@ -9,7 +9,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.Sticky.Systems;
 
-public sealed class StickySystem : EntitySystem
+public sealed partial class StickySystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

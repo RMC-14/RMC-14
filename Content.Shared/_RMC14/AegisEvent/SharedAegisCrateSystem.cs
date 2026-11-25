@@ -11,7 +11,7 @@ using Content.Shared.Physics;
 
 namespace Content.Shared._RMC14.AegisCrate;
 
-public abstract class SharedAegisCrateSystem : EntitySystem
+public abstract partial class SharedAegisCrateSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

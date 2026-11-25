@@ -9,7 +9,7 @@ using Content.Shared.Traits.Assorted;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class MassHallucinationsRule : StationEventSystem<MassHallucinationsRuleComponent>
+public sealed partial class MassHallucinationsRule : StationEventSystem<MassHallucinationsRuleComponent>
 {
     [Dependency] private ParacusiaSystem _paracusia = default!;
 

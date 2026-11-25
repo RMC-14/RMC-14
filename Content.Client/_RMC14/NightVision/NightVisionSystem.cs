@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.NightVision;
 
-public sealed class NightVisionSystem : SharedNightVisionSystem
+public sealed partial class NightVisionSystem : SharedNightVisionSystem
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private ILightManager _light = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Explosion.EntitySystems;
 
-public sealed class RMCSharedScatteringGrenadeSystem : EntitySystem
+public sealed partial class RMCSharedScatteringGrenadeSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private IRobustRandom _random = default!;

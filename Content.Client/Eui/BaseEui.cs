@@ -4,7 +4,7 @@ using Robust.Shared.Network;
 
 namespace Content.Client.Eui
 {
-    public abstract class BaseEui
+    public abstract partial class BaseEui
     {
         [Dependency] private IClientNetManager _netManager = default!;
 

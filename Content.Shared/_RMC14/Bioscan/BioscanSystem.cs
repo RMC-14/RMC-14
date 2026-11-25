@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Bioscan;
 
-public sealed class BioscanSystem : EntitySystem
+public sealed partial class BioscanSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private IConfigurationManager _config = default!;

@@ -16,7 +16,7 @@ namespace Content.Shared.Storage.EntitySystems;
 /// <summary>
 /// This handles <see cref="BinComponent"/>
 /// </summary>
-public sealed class BinSystem : EntitySystem
+public sealed partial class BinSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedAdminLogManager _admin = default!;

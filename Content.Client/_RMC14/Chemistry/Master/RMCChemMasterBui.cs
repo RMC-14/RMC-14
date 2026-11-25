@@ -21,7 +21,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Chemistry.Master;
 
 [UsedImplicitly]
-public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
+public sealed partial class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 {
     [Dependency] private ILocalizationManager _localization = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

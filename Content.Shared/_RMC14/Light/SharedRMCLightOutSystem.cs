@@ -14,7 +14,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._RMC14.Light;
 
-public abstract class SharedRMCLightOutSystem : EntitySystem
+public abstract partial class SharedRMCLightOutSystem : EntitySystem
 {
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private InventorySystem _inventory = default!;

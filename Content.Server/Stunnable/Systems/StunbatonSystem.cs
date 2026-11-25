@@ -11,7 +11,7 @@ using Content.Shared.Stunnable;
 
 namespace Content.Server.Stunnable.Systems
 {
-    public sealed class StunbatonSystem : SharedStunbatonSystem
+    public sealed partial class StunbatonSystem : SharedStunbatonSystem
     {
         [Dependency] private RiggableSystem _riggableSystem = default!;
         [Dependency] private SharedPopupSystem _popup = default!;

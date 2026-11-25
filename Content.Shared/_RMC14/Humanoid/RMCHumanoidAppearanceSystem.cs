@@ -12,7 +12,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Humanoid;
 
-public sealed class RMCHumanoidAppearanceSystem : EntitySystem
+public sealed partial class RMCHumanoidAppearanceSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;

@@ -41,7 +41,7 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
 
-public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
+public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

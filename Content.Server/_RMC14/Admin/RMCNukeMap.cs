@@ -8,7 +8,7 @@ using Robust.Shared.Map;
 namespace Content.Server._RMC14.Admin;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class RMCNukeMap : LocalizedEntityCommands
+public sealed partial class RMCNukeMap : LocalizedEntityCommands
 {
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private RMCNukeSystem _nuke = default!;

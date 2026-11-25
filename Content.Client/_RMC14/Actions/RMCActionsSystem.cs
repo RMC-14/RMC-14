@@ -12,7 +12,7 @@ using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 
 namespace Content.Client._RMC14.Actions;
 
-public sealed class RMCActionsSystem : SharedRMCActionsSystem
+public sealed partial class RMCActionsSystem : SharedRMCActionsSystem
 {
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private IEyeManager _eyeManager = default!;

@@ -12,7 +12,7 @@ using Content.Shared.Throwing;
 namespace Content.Shared.Administration;
 
 // TODO deduplicate with BlockMovementComponent
-public abstract class SharedAdminFrozenSystem : EntitySystem
+public abstract partial class SharedAdminFrozenSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private PullingSystem _pulling = default!;

@@ -13,7 +13,7 @@ using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Projectiles.StoppingPower;
 
-public sealed class RMCStoppingPowerSystem : EntitySystem
+public sealed partial class RMCStoppingPowerSystem : EntitySystem
 {
     [Dependency] private RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

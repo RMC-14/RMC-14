@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.MapText;
 
 /// <inheritdoc/>
-public sealed class MapTextSystem : SharedMapTextSystem
+public sealed partial class MapTextSystem : SharedMapTextSystem
 {
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private IUserInterfaceManager _uiManager = default!;

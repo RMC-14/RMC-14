@@ -9,7 +9,7 @@ namespace Content.Shared.Movement.Systems;
 /// <summary>
 /// Plays a sound on MoveInputEvent.
 /// </summary>
-public sealed class MovementSoundSystem : EntitySystem
+public sealed partial class MovementSoundSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

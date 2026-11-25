@@ -10,7 +10,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Clothing;
 
-public sealed class HelmetAccessoriesSystem : EntitySystem
+public sealed partial class HelmetAccessoriesSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedItemSystem _item = default!;

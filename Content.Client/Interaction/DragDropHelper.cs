@@ -20,7 +20,7 @@ namespace Content.Client.Interaction;
 /// If for any reason the drag is ended, OnEndDrag is invoked.
 /// </summary>
 /// <typeparam name="T">thing being dragged and dropped</typeparam>
-public sealed class DragDropHelper<T>
+public sealed partial class DragDropHelper<T>
 {
     [Dependency] private IInputManager _inputManager = default!;
     [Dependency] private IConfigurationManager _cfg = default!;

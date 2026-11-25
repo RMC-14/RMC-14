@@ -18,7 +18,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Tumble;
 
-public sealed class XenoTumbleSystem : EntitySystem
+public sealed partial class XenoTumbleSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageable = default!;

@@ -6,7 +6,7 @@ namespace Content.Shared.Ninja.Systems;
 /// <summary>
 /// System for katana binding and dash events. Recalling is handled by the suit.
 /// </summary>
-public sealed class EnergyKatanaSystem : EntitySystem
+public sealed partial class EnergyKatanaSystem : EntitySystem
 {
     [Dependency] private SharedSpaceNinjaSystem _ninja = default!;
 

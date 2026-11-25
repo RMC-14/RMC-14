@@ -8,7 +8,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleSpotlightSystem : EntitySystem
+public sealed partial class VehicleSpotlightSystem : EntitySystem
 {
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private SharedPointLightSystem _lights = default!;

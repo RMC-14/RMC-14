@@ -5,7 +5,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.DeviceLinking.Systems
 {
-    public sealed class TwoWayLeverSystem : EntitySystem
+    public sealed partial class TwoWayLeverSystem : EntitySystem
     {
         [Dependency] private SharedDeviceLinkSystem _signalSystem = default!;
         [Dependency] private SharedAppearanceSystem _appearance = default!;

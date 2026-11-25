@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Chat.Managers;
 
-internal sealed class ChatManager : IChatManager
+internal sealed partial class ChatManager : IChatManager
 {
     [Dependency] private IClientConsoleHost _consoleHost = default!;
     [Dependency] private IClientAdminManager _adminMgr = default!;

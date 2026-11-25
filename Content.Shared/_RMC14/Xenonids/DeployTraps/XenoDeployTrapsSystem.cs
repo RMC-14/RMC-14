@@ -18,7 +18,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.DeployTraps;
 
-public sealed class XenoDeployTrapsSystem : EntitySystem
+public sealed partial class XenoDeployTrapsSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

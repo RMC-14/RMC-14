@@ -6,7 +6,7 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Shared._RMC14.Projectiles.Penetration;
 
-public sealed class RMCPenetratingProjectileSystem : EntitySystem
+public sealed partial class RMCPenetratingProjectileSystem : EntitySystem
 {
     private const int HardCollisionGroup = (int) (CollisionGroup.HighImpassable | CollisionGroup.Impassable);
 

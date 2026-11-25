@@ -5,7 +5,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Connection;
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class GrantConnectBypassCommand : LocalizedCommands
+public sealed partial class GrantConnectBypassCommand : LocalizedCommands
 {
     private static readonly TimeSpan DefaultDuration = TimeSpan.FromHours(1);
 

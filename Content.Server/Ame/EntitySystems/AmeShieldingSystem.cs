@@ -4,7 +4,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.Ame.EntitySystems;
 
-public sealed class AmeShieldingSystem : EntitySystem
+public sealed partial class AmeShieldingSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearanceSystem = default!;
     [Dependency] private PointLightSystem _pointLightSystem = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Input.Binding;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class RMCSelectiveFireSystem : EntitySystem
+public sealed partial class RMCSelectiveFireSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gunSystem = default!;
 

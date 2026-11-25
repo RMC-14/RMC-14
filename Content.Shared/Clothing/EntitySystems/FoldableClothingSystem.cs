@@ -5,7 +5,7 @@ using Content.Shared.Item;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public sealed class FoldableClothingSystem : EntitySystem
+public sealed partial class FoldableClothingSystem : EntitySystem
 {
     [Dependency] private ClothingSystem _clothingSystem = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;

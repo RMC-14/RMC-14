@@ -7,7 +7,7 @@ using Content.Shared.Interaction.Events;
 
 namespace Content.Server.Storage.EntitySystems;
 
-public sealed class SpawnTableOnUseSystem : EntitySystem
+public sealed partial class SpawnTableOnUseSystem : EntitySystem
 {
     [Dependency] private EntityTableSystem _entityTable = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;

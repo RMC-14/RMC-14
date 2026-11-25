@@ -13,7 +13,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.Physics.Controllers;
 
-public sealed class ConveyorController : SharedConveyorController
+public sealed partial class ConveyorController : SharedConveyorController
 {
     [Dependency] private FixtureSystem _fixtures = default!;
     [Dependency] private DeviceLinkSystem _signalSystem = default!;

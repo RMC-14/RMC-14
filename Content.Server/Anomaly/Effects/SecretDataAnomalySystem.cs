@@ -3,7 +3,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Anomaly.Effects;
 
-public sealed class SecretDataAnomalySystem : EntitySystem
+public sealed partial class SecretDataAnomalySystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
 

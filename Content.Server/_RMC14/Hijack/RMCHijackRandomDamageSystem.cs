@@ -20,7 +20,7 @@ namespace Content.Server._RMC14.Hijack;
 ///     Applies shipwide randomized structural damage after a hijacked dropship lands.
 ///     Percentages are calculated from the currently existing targets on the landing map.
 /// </summary>
-public sealed class RMCHijackRandomDamageSystem : EntitySystem
+public sealed partial class RMCHijackRandomDamageSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IConfigurationManager _config = default!;

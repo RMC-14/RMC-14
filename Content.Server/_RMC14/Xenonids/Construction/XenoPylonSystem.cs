@@ -27,7 +27,7 @@ using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
-public sealed class XenoPylonSystem : SharedXenoPylonSystem
+public sealed partial class XenoPylonSystem : SharedXenoPylonSystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private XenoEvolutionSystem _evolution = default!;

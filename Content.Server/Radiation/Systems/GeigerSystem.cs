@@ -12,7 +12,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Radiation.Systems;
 
-public sealed class GeigerSystem : SharedGeigerSystem
+public sealed partial class GeigerSystem : SharedGeigerSystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private RadiationSystem _radiation = default!;

@@ -8,7 +8,7 @@ using Content.Shared.Power.EntitySystems;
 
 namespace Content.Shared.Atmos.Piping.Binary.Systems;
 
-public abstract class SharedGasVolumePumpSystem : EntitySystem
+public abstract partial class SharedGasVolumePumpSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

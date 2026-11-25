@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Atmos.Piping.Binary.Systems;
 
-public sealed class GasVolumePumpSystem : SharedGasVolumePumpSystem
+public sealed partial class GasVolumePumpSystem : SharedGasVolumePumpSystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
 

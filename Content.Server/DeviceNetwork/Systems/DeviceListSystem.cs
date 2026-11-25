@@ -8,7 +8,7 @@ using Robust.Shared.Map.Events;
 namespace Content.Server.DeviceNetwork.Systems;
 
 [UsedImplicitly]
-public sealed class DeviceListSystem : SharedDeviceListSystem
+public sealed partial class DeviceListSystem : SharedDeviceListSystem
 {
     [Dependency] private NetworkConfiguratorSystem _configurator = default!;
 

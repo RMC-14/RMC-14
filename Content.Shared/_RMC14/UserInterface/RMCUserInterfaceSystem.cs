@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 namespace Content.Shared._RMC14.UserInterface;
 
-public sealed class RMCUserInterfaceSystem : EntitySystem
+public sealed partial class RMCUserInterfaceSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 

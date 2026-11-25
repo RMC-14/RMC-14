@@ -10,7 +10,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Doors.Systems;
 
-public sealed class AirlockSystem : SharedAirlockSystem
+public sealed partial class AirlockSystem : SharedAirlockSystem
 {
     [Dependency] private WiresSystem _wiresSystem = default!;
 

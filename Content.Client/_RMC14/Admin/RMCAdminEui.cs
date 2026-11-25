@@ -18,7 +18,7 @@ using static Robust.Client.UserInterface.Controls.LineEdit;
 namespace Content.Client._RMC14.Admin;
 
 [UsedImplicitly]
-public sealed class RMCAdminEui : BaseEui
+public sealed partial class RMCAdminEui : BaseEui
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

@@ -5,7 +5,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Strain;
 
-public sealed class XenoStrainSystem : EntitySystem
+public sealed partial class XenoStrainSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

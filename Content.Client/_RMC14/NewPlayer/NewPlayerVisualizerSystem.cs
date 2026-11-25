@@ -8,7 +8,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.NewPlayer;
 
-public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelComponent>
+public sealed partial class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelComponent>
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IConfigurationManager _configManager = default!;

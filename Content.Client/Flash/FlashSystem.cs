@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client.Flash;
 
-public sealed class FlashSystem : SharedFlashSystem
+public sealed partial class FlashSystem : SharedFlashSystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IOverlayManager _overlayMan = default!;

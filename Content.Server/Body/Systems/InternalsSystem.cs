@@ -14,7 +14,7 @@ using Content.Shared.Roles;
 
 namespace Content.Server.Body.Systems;
 
-public sealed class InternalsSystem : SharedInternalsSystem
+public sealed partial class InternalsSystem : SharedInternalsSystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private GasTankSystem _gasTank = default!;

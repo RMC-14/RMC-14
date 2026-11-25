@@ -24,7 +24,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Ghost;
 
-public sealed class RMCGhostAppearanceSystem : EntitySystem
+public sealed partial class RMCGhostAppearanceSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedContainerSystem _container = default!;

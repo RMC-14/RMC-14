@@ -4,7 +4,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class BulletholeSystem : EntitySystem
+public sealed partial class BulletholeSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IRobustRandom _random = default!;

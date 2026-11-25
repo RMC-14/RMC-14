@@ -45,7 +45,7 @@ using static Content.Shared._RMC14.Intel.IntelSpawnerType;
 
 namespace Content.Shared._RMC14.Intel;
 
-public sealed class IntelSystem : EntitySystem
+public sealed partial class IntelSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedXenoAcidSystem _acid = default!;

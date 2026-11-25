@@ -6,7 +6,7 @@ using Robust.Server.GameStates;
 
 namespace Content.Server._RMC14.Holiday;
 
-public sealed class RMCHolidaySystem : SharedRMCHolidaySystem
+public sealed partial class RMCHolidaySystem : SharedRMCHolidaySystem
 {
 
     [Dependency] private HolidaySystem _holiday = default!;

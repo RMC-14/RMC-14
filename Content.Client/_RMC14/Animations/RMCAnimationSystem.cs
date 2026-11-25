@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Animations;
 
-public sealed class RMCAnimationSystem : SharedRMCAnimationSystem
+public sealed partial class RMCAnimationSystem : SharedRMCAnimationSystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
     [Dependency] private SpriteSystem _sprite = default!;

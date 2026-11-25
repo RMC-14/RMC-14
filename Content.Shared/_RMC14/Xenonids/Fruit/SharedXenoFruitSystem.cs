@@ -50,7 +50,7 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
-public sealed class SharedXenoFruitSystem : EntitySystem
+public sealed partial class SharedXenoFruitSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;

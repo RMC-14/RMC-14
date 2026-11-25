@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Atmos.Commands
 {
     [AdminCommand(AdminFlags.Debug)]
-    public sealed class ListGasesCommand : IConsoleCommand
+    public sealed partial class ListGasesCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _e = default!;
 

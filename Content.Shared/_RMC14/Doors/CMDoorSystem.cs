@@ -25,7 +25,7 @@ using Content.Shared._RMC14.Weapons.Melee;
 
 namespace Content.Shared._RMC14.Doors;
 
-public sealed class CMDoorSystem : EntitySystem
+public sealed partial class CMDoorSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private SharedMarineAnnounceSystem _announce = default!;

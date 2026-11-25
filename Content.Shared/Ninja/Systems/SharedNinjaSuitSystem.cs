@@ -15,7 +15,7 @@ namespace Content.Shared.Ninja.Systems;
 /// <summary>
 /// Handles (un)equipping and provides some API functions.
 /// </summary>
-public abstract class SharedNinjaSuitSystem : EntitySystem
+public abstract partial class SharedNinjaSuitSystem : EntitySystem
 {
     [Dependency] private ActionContainerSystem _actionContainer = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

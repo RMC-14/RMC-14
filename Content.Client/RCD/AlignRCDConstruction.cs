@@ -13,7 +13,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Client.RCD;
 
-public sealed class AlignRCDConstruction : PlacementMode
+public sealed partial class AlignRCDConstruction : PlacementMode
 {
     [Dependency] private IEntityManager _entityManager = default!;
     private readonly SharedMapSystem _mapSystem;

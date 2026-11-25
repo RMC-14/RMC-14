@@ -10,7 +10,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Smackdown;
 
-public sealed class XenoSmackdownSystem : EntitySystem
+public sealed partial class XenoSmackdownSystem : EntitySystem
 {
     [Dependency] private XenoSystem _xeno = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

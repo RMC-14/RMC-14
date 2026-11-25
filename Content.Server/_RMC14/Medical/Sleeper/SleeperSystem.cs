@@ -22,7 +22,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.Sleeper;
 
-public sealed class SleeperSystem : SharedSleeperSystem
+public sealed partial class SleeperSystem : SharedSleeperSystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private MobStateSystem _mobState = default!;

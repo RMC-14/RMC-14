@@ -13,7 +13,7 @@ using Timer = Robust.Shared.Timing.Timer;
 namespace Content.Server.StationEvents.Events
 {
     [UsedImplicitly]
-    public sealed class PowerGridCheckRule : StationEventSystem<PowerGridCheckRuleComponent>
+    public sealed partial class PowerGridCheckRule : StationEventSystem<PowerGridCheckRuleComponent>
     {
         [Dependency] private ApcSystem _apcSystem = default!;
 

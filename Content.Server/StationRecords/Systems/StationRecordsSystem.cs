@@ -35,7 +35,7 @@ namespace Content.Server.StationRecords.Systems;
 ///     depend on this general record being created. This is subject
 ///     to change.
 /// </summary>
-public sealed class StationRecordsSystem : SharedStationRecordsSystem
+public sealed partial class StationRecordsSystem : SharedStationRecordsSystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private StationRecordKeyStorageSystem _keyStorage = default!;

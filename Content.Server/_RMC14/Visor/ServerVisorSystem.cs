@@ -9,7 +9,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._RMC14.Visor;
 
-public sealed class ServerVisorSystem : EntitySystem
+public sealed partial class ServerVisorSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;

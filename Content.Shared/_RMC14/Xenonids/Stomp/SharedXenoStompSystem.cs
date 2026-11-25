@@ -19,7 +19,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Stomp;
 
-public sealed class XenoStompSystem : EntitySystem
+public sealed partial class XenoStompSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private MobStateSystem _mobState = default!;

@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Ghost;
 
-public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
+public sealed partial class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
 {
     public const string BaseLayerKey = "ghost-non-humanoid-base";
 

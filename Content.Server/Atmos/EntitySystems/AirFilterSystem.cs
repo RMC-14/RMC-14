@@ -9,7 +9,7 @@ namespace Content.Server.Atmos.EntitySystems;
 /// <summary>
 /// Handles gas filtering and intake for <see cref="AirIntakeComponent"/> and <see cref="AirFilterComponent"/>.
 /// </summary>
-public sealed class AirFilterSystem : EntitySystem
+public sealed partial class AirFilterSystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmosphere = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

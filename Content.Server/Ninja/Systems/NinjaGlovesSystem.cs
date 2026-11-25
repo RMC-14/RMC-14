@@ -9,7 +9,7 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Handles the toggle gloves action.
 /// </summary>
-public sealed class NinjaGlovesSystem : SharedNinjaGlovesSystem
+public sealed partial class NinjaGlovesSystem : SharedNinjaGlovesSystem
 {
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.UserInterface.Systems.Viewport;
 
-public sealed class ViewportUIController : UIController
+public sealed partial class ViewportUIController : UIController
 {
     [Dependency] private IEyeManager _eyeManager = default!;
     [Dependency] private IPlayerManager _playerMan = default!;

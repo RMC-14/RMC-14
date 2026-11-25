@@ -5,7 +5,7 @@ using Robust.Client.Graphics;
 
 namespace Content.Client.Overlays;
 
-public sealed class StencilOverlaySystem : EntitySystem
+public sealed partial class StencilOverlaySystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private ParallaxSystem _parallax = default!;

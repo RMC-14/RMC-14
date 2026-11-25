@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
-public sealed class WeedboundWallSystem : EntitySystem
+public sealed partial class WeedboundWallSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private RMCMapSystem _rmcMap = default!;

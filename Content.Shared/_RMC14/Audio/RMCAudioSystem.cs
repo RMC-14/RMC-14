@@ -5,7 +5,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Audio;
 
-public sealed class RMCAudioSystem : EntitySystem
+public sealed partial class RMCAudioSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

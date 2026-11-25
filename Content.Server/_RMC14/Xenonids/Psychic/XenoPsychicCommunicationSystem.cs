@@ -21,7 +21,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Xenonids.Psychic;
 
-public sealed class XenoPsychicCommunicationSystem : EntitySystem
+public sealed partial class XenoPsychicCommunicationSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

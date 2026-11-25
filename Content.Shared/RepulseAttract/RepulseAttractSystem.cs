@@ -12,7 +12,7 @@ using Content.Shared.Weapons.Melee;
 
 namespace Content.Shared.RepulseAttract;
 
-public sealed class RepulseAttractSystem : EntitySystem
+public sealed partial class RepulseAttractSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private ThrowingSystem _throw = default!;

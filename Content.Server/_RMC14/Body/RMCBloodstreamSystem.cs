@@ -6,7 +6,7 @@ using Content.Shared.Chemistry.EntitySystems;
 
 namespace Content.Server._RMC14.Body;
 
-public sealed class RMCBloodstreamSystem : SharedRMCBloodstreamSystem
+public sealed partial class RMCBloodstreamSystem : SharedRMCBloodstreamSystem
 {
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
 

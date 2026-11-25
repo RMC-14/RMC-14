@@ -4,7 +4,7 @@ using Robust.Server.Player;
 
 namespace Content.Server._RMC14.CrewManifest;
 
-public sealed class RMCCrewManifestSystem : SharedRMCCrewManifestSystem
+public sealed partial class RMCCrewManifestSystem : SharedRMCCrewManifestSystem
 {
     [Dependency] private CrewManifestSystem _crewManifest = default!;
     [Dependency] private IPlayerManager _player = default!;

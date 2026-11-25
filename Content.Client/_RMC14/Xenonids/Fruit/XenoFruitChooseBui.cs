@@ -12,7 +12,7 @@ namespace Content.Client._RMC14.Xenonids.Fruit;
 
 
 [UsedImplicitly]
-public sealed class XenoFruitChooseBui : BoundUserInterface
+public sealed partial class XenoFruitChooseBui : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

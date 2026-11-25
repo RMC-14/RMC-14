@@ -4,7 +4,7 @@ namespace Content.Shared.Containers;
 /// <summary>
 /// This handles deleting an entity when it's empty
 /// </summary>
-public sealed class DeleteOnContainerEmptySystem : EntitySystem
+public sealed partial class DeleteOnContainerEmptySystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     public override void Initialize()

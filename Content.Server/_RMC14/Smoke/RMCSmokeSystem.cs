@@ -12,7 +12,7 @@ using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Smoke;
 
-public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
+public sealed partial class RMCSmokeSystem : SharedRMCSmokeSystem
 {
     [Dependency] private SharedXenoHiveSystem _hive = default!;
     [Dependency] private SharedMapSystem _map = default!;

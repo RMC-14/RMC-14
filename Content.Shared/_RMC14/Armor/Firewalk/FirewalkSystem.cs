@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor.Firewalk;
 
-public sealed class FirewalkSystem : EntitySystem
+public sealed partial class FirewalkSystem : EntitySystem
 {
     [Dependency] private SharedAuraSystem _aura = default!;
     [Dependency] private InventorySystem _inventory = default!;

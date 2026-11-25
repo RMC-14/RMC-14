@@ -27,7 +27,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Construction;
 
-public sealed class RMCConstructionSystem : EntitySystem
+public sealed partial class RMCConstructionSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private FixtureSystem _fixture = default!;

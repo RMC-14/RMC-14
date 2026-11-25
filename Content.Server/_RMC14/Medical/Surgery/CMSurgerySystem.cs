@@ -21,7 +21,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Medical.Surgery;
 
-public sealed class CMSurgerySystem : SharedCMSurgerySystem
+public sealed partial class CMSurgerySystem : SharedCMSurgerySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private ChatSystem _chat = default!;

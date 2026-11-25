@@ -11,7 +11,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Gibbing.Systems;
 
-public sealed class GibbingSystem : EntitySystem
+public sealed partial class GibbingSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;

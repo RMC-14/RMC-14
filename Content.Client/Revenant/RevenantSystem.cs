@@ -7,7 +7,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Revenant;
 
-public sealed class RevenantSystem : EntitySystem
+public sealed partial class RevenantSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;

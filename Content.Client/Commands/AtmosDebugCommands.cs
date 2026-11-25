@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Client.Commands;
 
 [UsedImplicitly]
-internal sealed class AtvRangeCommand : LocalizedCommands
+internal sealed partial class AtvRangeCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
@@ -43,7 +43,7 @@ internal sealed class AtvRangeCommand : LocalizedCommands
 }
 
 [UsedImplicitly]
-internal sealed class AtvModeCommand : LocalizedCommands
+internal sealed partial class AtvModeCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
@@ -102,7 +102,7 @@ internal sealed class AtvModeCommand : LocalizedCommands
 }
 
 [UsedImplicitly]
-internal sealed class AtvCBMCommand : LocalizedCommands
+internal sealed partial class AtvCBMCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 

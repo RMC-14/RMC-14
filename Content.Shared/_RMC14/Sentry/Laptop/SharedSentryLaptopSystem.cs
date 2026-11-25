@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Sentry.Laptop;
 
-public abstract class SharedSentryLaptopSystem : EntitySystem
+public abstract partial class SharedSentryLaptopSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

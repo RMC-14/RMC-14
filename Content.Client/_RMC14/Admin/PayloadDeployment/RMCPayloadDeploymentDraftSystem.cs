@@ -5,7 +5,7 @@ using Robust.Shared.Network;
 
 namespace Content.Client._RMC14.Admin.PayloadDeployment;
 
-public sealed class RMCPayloadDeploymentDraftSystem : EntitySystem
+public sealed partial class RMCPayloadDeploymentDraftSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
 

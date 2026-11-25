@@ -24,7 +24,7 @@ namespace Content.Server._RMC14.Cryostorage;
 /// RMC requisitions equipment recovery built on top of vanilla cryostorage.
 /// Stored bodies remain owned by <see cref="CryostorageSystem"/>; this system only lists and moves existing items.
 /// </summary>
-public sealed class RMCCryoRecoverySystem : EntitySystem
+public sealed partial class RMCCryoRecoverySystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private ContainerSystem _container = default!;

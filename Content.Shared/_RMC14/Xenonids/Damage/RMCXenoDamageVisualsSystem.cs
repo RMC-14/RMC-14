@@ -5,7 +5,7 @@ using Content.Shared.Rounding;
 
 namespace Content.Shared._RMC14.Xenonids.Damage;
 
-public sealed class RMCXenoDamageVisualsSystem : EntitySystem
+public sealed partial class RMCXenoDamageVisualsSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private MobThresholdSystem _thresholds = default!;

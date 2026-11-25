@@ -9,7 +9,7 @@ namespace Content.Server.Guidebook;
 /// Server system for identifying component fields/properties to extract values from entity prototypes.
 /// Extracted data is sent to clients when they connect or when prototypes are reloaded.
 /// </summary>
-public sealed class GuidebookDataSystem : EntitySystem
+public sealed partial class GuidebookDataSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _protoMan = default!;
 

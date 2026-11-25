@@ -19,7 +19,7 @@ using static Content.Shared.MedicalScanner.SharedMedicalScannerComponent; // Hmm
 
 namespace Content.Server.Medical
 {
-    public sealed class MedicalScannerSystem : EntitySystem
+    public sealed partial class MedicalScannerSystem : EntitySystem
     {
         [Dependency] private DeviceLinkSystem _signalSystem = default!;
         [Dependency] private ActionBlockerSystem _blocker = default!;

@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 namespace Content.Server.Chat.V2.Commands;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
-public sealed class DeleteChatMessageCommand : ToolshedCommand
+public sealed partial class DeleteChatMessageCommand : ToolshedCommand
 {
     [Dependency] private IEntitySystemManager _manager = default!;
 

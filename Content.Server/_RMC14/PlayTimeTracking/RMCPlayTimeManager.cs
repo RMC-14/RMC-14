@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.PlayTimeTracking;
 
-public sealed class RMCPlayTimeManager : SharedRMCPlayTimeManager
+public sealed partial class RMCPlayTimeManager : SharedRMCPlayTimeManager
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private INetManager _net = default!;

@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared._RMC14.Elevators;
 
-public abstract class SharedRMCElevatorSystem : EntitySystem
+public abstract partial class SharedRMCElevatorSystem : EntitySystem
 {
     [Dependency] protected SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;

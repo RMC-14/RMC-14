@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Parallax.Biomes;
 
-public abstract class SharedBiomeSystem : EntitySystem
+public abstract partial class SharedBiomeSystem : EntitySystem
 {
     [Dependency] protected IPrototypeManager ProtoManager = default!;
     [Dependency] private ISerializationManager _serManager = default!;

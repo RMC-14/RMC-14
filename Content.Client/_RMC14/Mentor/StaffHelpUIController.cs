@@ -25,7 +25,7 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client._RMC14.Mentor;
 
-public sealed class StaffHelpUIController : UIController, IOnSystemChanged<BwoinkSystem>
+public sealed partial class StaffHelpUIController : UIController, IOnSystemChanged<BwoinkSystem>
 {
     [Dependency] private AHelpUIController _aHelp = default!;
     [Dependency] private IClyde _clyde = default!;

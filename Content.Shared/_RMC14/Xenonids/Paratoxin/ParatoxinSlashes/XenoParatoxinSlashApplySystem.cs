@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Paratoxin.ParatoxinSlashes;
 
-public sealed class XenoParatoxinSlashApplySystem : EntitySystem
+public sealed partial class XenoParatoxinSlashApplySystem : EntitySystem
 {
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

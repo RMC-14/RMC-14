@@ -12,7 +12,7 @@ using Content.Shared.StatusEffect;
 
 namespace Content.Shared._RMC14.Projectiles.Aimed;
 
-public sealed class AimedProjectileSystem : EntitySystem
+public sealed partial class AimedProjectileSystem : EntitySystem
 {
     private const float BigXenoSlowDurationMultiplier = 0.6f;
     private const float BigXenoBlindDurationMultiplier = 0.4f;

@@ -10,7 +10,7 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client._RMC14.TacticalMap;
 
 [UsedImplicitly]
-public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
+public sealed partial class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
 {
     [Dependency] private IPlayerManager _player = default!;
 

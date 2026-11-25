@@ -5,7 +5,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Client._RMC14.Chemistry.SmartFridge;
 
-public sealed class RMCSmartFridgeSystem : SharedRMCSmartFridgeSystem
+public sealed partial class RMCSmartFridgeSystem : SharedRMCSmartFridgeSystem
 {
     [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;
     [Dependency] private IClientGameTiming _timing = default!;

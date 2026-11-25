@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Deafness;
 
-public abstract class SharedDeafnessSystem : EntitySystem
+public abstract partial class SharedDeafnessSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _statusEffect = default!;
     [Dependency] private IGameTiming _timing = default!;

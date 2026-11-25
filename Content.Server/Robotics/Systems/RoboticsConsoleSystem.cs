@@ -17,7 +17,7 @@ namespace Content.Server.Research.Systems;
 /// Handles UI and state receiving for the robotics control console.
 /// <c>BorgTransponderComponent<c/> broadcasts state from the station's borgs to consoles.
 /// </summary>
-public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
+public sealed partial class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
 {
     [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;

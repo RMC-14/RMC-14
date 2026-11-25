@@ -9,7 +9,7 @@ using Content.Shared.Mind;
 
 namespace Content.Shared._RMC14.Mobs;
 
-public sealed class RMCAdminGhostDragPossessionSystem : EntitySystem
+public sealed partial class RMCAdminGhostDragPossessionSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private ISharedAdminManager _adminManager = default!;

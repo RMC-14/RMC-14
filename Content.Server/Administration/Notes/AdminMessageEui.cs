@@ -10,7 +10,7 @@ using static Content.Shared.Administration.Notes.AdminMessageEuiMsg;
 
 namespace Content.Server.Administration.Notes;
 
-public sealed class AdminMessageEui : BaseEui
+public sealed partial class AdminMessageEui : BaseEui
 {
     [Dependency] private IAdminNotesManager _notesMan = default!;
     [Dependency] private IConfigurationManager _cfg = default!;

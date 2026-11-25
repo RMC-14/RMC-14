@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Doors.Systems;
 
-public abstract class SharedAirlockSystem : EntitySystem
+public abstract partial class SharedAirlockSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] protected SharedAppearanceSystem Appearance = default!;

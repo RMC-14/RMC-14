@@ -7,7 +7,7 @@ using Robust.Client.Player;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
 
-public sealed class VehicleBoundUiRefreshSystem : EntitySystem
+public sealed partial class VehicleBoundUiRefreshSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;

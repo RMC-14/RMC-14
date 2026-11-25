@@ -30,7 +30,7 @@ using IConfigurationManager = Robust.Shared.Configuration.IConfigurationManager;
 
 namespace Content.Server._RMC14.Xenonids.Hive;
 
-public sealed class XenoHiveSystem : SharedXenoHiveSystem
+public sealed partial class XenoHiveSystem : SharedXenoHiveSystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

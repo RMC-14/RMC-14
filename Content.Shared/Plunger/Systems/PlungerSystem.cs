@@ -15,7 +15,7 @@ namespace Content.Shared.Plunger.Systems;
 /// <summary>
 /// Plungers can be used to unblock entities with PlungerUseComponent.
 /// </summary>
-public sealed class PlungerSystem : EntitySystem
+public sealed partial class PlungerSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;

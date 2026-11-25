@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 namespace Content.Server.StationEvents.Events;
 
 [UsedImplicitly]
-public sealed class FalseAlarmRule : StationEventSystem<FalseAlarmRuleComponent>
+public sealed partial class FalseAlarmRule : StationEventSystem<FalseAlarmRuleComponent>
 {
     [Dependency] private EventManagerSystem _event = default!;
 

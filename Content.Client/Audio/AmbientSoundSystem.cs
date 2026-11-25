@@ -24,7 +24,7 @@ namespace Content.Client.Audio;
 /// <summary>
 /// Samples nearby <see cref="AmbientSoundComponent"/> and plays audio.
 /// </summary>
-public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
+public sealed partial class AmbientSoundSystem : SharedAmbientSoundSystem
 {
     [Dependency] private AmbientSoundTreeSystem _treeSys = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

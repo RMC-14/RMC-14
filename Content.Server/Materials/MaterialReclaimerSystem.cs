@@ -30,7 +30,7 @@ using Content.Shared.Humanoid;
 namespace Content.Server.Materials;
 
 /// <inheritdoc/>
-public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
+public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private AppearanceSystem _appearance = default!;

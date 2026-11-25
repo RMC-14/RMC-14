@@ -7,7 +7,7 @@ using Robust.Shared.Network;
 
 namespace Content.Client.Mapping;
 
-public sealed class MappingManager : IPostInjectInit
+public sealed partial class MappingManager : IPostInjectInit
 {
     [Dependency] private IFileDialogManager _file = default!;
     [Dependency] private IClientNetManager _net = default!;

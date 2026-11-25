@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 namespace Content.Server.GameTicking.Rules.VariationPass;
 
 /// <inheritdoc cref="PoweredLightVariationPassComponent"/>
-public sealed class PoweredLightVariationPassSystem : VariationPassSystem<PoweredLightVariationPassComponent>
+public sealed partial class PoweredLightVariationPassSystem : VariationPassSystem<PoweredLightVariationPassComponent>
 {
     [Dependency] private PoweredLightSystem _poweredLight = default!;
 

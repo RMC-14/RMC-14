@@ -11,7 +11,7 @@ namespace Content.Shared.Roles.Jobs;
 /// <summary>
 ///     Handles the job data on mind entities.
 /// </summary>
-public abstract class SharedJobSystem : EntitySystem
+public abstract partial class SharedJobSystem : EntitySystem
 {
     [Dependency] private SharedPlayerSystem _playerSystem = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

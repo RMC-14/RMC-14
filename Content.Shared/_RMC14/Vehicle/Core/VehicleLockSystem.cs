@@ -13,7 +13,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleLockSystem : EntitySystem
+public sealed partial class VehicleLockSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

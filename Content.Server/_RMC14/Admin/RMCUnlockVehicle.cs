@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._RMC14.Admin;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class RMCUnlockVehicle : LocalizedEntityCommands
+public sealed partial class RMCUnlockVehicle : LocalizedEntityCommands
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

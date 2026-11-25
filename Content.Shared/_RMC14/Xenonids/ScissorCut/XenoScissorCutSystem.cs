@@ -21,7 +21,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.ScissorCut;
 
-public sealed class XenoScissorCutSystem : EntitySystem
+public sealed partial class XenoScissorCutSystem : EntitySystem
 {
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

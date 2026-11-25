@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Damage;
 
-public sealed class PassiveDamageSystem : EntitySystem
+public sealed partial class PassiveDamageSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private IGameTiming _timing = default!;

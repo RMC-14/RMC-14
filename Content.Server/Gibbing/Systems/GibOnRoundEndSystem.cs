@@ -5,7 +5,7 @@ using Content.Shared.Objectives.Systems;
 using Content.Server.Body.Systems;
 
 namespace Content.Server.Gibbing.Systems;
-public sealed class GibOnRoundEndSystem : EntitySystem
+public sealed partial class GibOnRoundEndSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private SharedMindSystem _mind = default!;

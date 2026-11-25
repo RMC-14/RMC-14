@@ -8,7 +8,7 @@ using static Robust.Client.Animations.AnimationTrackProperty;
 
 namespace Content.Client._RMC14.Xenonids.Animations;
 
-public sealed class XenoAnimationsSystem : EntitySystem
+public sealed partial class XenoAnimationsSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
     [Dependency] private IPlayerManager _player = default!;

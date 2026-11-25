@@ -9,7 +9,7 @@ namespace Content.Shared.Objectives.Systems;
 /// <summary>
 /// Provides API for creating and interacting with objectives.
 /// </summary>
-public abstract class SharedObjectivesSystem : EntitySystem
+public abstract partial class SharedObjectivesSystem : EntitySystem
 {
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private IPrototypeManager _protoMan = default!;

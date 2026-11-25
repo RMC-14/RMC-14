@@ -7,7 +7,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Client._RMC14.Attachable.Systems;
 
-public sealed class AttachableHolderVisualsSystem : EntitySystem
+public sealed partial class AttachableHolderVisualsSystem : EntitySystem
 {
     [Dependency] private AttachableHolderSystem _attachableHolderSystem = default!;
 

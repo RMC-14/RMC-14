@@ -15,7 +15,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Bombard;
 
-public sealed class XenoBombardSystem : EntitySystem
+public sealed partial class XenoBombardSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

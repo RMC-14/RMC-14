@@ -9,7 +9,7 @@ using Robust.Client.UserInterface;
 namespace Content.Client.Administration.UI.PlayerPanel;
 
 [UsedImplicitly]
-public sealed class PlayerPanelEui : BaseEui
+public sealed partial class PlayerPanelEui : BaseEui
 {
     [Dependency] private IClientConsoleHost _console = default!;
     [Dependency] private IClientAdminManager _admin = default!;

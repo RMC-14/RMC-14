@@ -30,7 +30,7 @@ using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Stab;
 
-public abstract class SharedXenoTailStabSystem : EntitySystem
+public abstract partial class SharedXenoTailStabSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

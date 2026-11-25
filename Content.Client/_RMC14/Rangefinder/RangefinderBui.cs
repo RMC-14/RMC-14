@@ -9,7 +9,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client._RMC14.Rangefinder;
 
 [UsedImplicitly]
-public sealed class RangefinderBui : BoundUserInterface
+public sealed partial class RangefinderBui : BoundUserInterface
 {
     [Dependency] private IClipboardManager _clipboard = default!;
 

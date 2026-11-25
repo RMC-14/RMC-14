@@ -15,7 +15,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Administration.Notes;
 
-public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
+public sealed partial class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 {
     [Dependency] private IAdminManager _admins = default!;
     [Dependency] private IServerDbManager _db = default!;

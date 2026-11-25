@@ -13,7 +13,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.ARES;
 
-public sealed class ARESCoreSystem : EntitySystem
+public sealed partial class ARESCoreSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedGameTicker _ticker = default!;

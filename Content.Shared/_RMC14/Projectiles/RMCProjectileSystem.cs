@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Projectiles;
 
-public sealed class RMCProjectileSystem : EntitySystem
+public sealed partial class RMCProjectileSystem : EntitySystem
 {
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private MobStateSystem _mobState = default!;

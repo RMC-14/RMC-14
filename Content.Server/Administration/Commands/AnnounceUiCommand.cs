@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Moderator)]
-    public sealed class AnnounceUiCommand : LocalizedEntityCommands
+    public sealed partial class AnnounceUiCommand : LocalizedEntityCommands
     {
         [Dependency] private EuiManager _euiManager = default!;
 

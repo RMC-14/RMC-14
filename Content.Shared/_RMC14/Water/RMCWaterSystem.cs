@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Water;
 
-public sealed class RMCWaterSystem : EntitySystem
+public sealed partial class RMCWaterSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;

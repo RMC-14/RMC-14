@@ -13,7 +13,7 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Prevents planting a spider charge outside of its location and handles greentext.
 /// </summary>
-public sealed class SpiderChargeSystem : SharedSpiderChargeSystem
+public sealed partial class SpiderChargeSystem : SharedSpiderChargeSystem
 {
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private PopupSystem _popup = default!;

@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.HotPotato;
 
-public sealed class HotPotatoSystem : SharedHotPotatoSystem
+public sealed partial class HotPotatoSystem : SharedHotPotatoSystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;

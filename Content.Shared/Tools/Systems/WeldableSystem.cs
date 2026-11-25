@@ -9,7 +9,7 @@ using LayerChangeOnWeldComponent = Content.Shared.Tools.Components.LayerChangeOn
 
 namespace Content.Shared.Tools.Systems;
 
-public sealed class WeldableSystem : EntitySystem
+public sealed partial class WeldableSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedToolSystem _toolSystem = default!;

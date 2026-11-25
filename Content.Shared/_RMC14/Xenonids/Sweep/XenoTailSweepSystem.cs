@@ -16,7 +16,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Sweep;
 
-public sealed class XenoTailSweepSystem : EntitySystem
+public sealed partial class XenoTailSweepSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Marines.HyperSleep;
 
-public abstract class SharedHyperSleepChamberSystem : EntitySystem
+public abstract partial class SharedHyperSleepChamberSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private RMCMovementSystem _rmcMovement = default!;

@@ -6,7 +6,7 @@ using Content.Shared.GameTicking;
 
 namespace Content.Shared._RMC14.RMCClock;
 
-public sealed class RMCClockSystem : EntitySystem
+public sealed partial class RMCClockSystem : EntitySystem
 {
     [Dependency] private SharedGameTicker _ticker = default!;
 

@@ -22,7 +22,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Retrieve;
 
-public sealed class XenoRetrieveSystem : EntitySystem
+public sealed partial class XenoRetrieveSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

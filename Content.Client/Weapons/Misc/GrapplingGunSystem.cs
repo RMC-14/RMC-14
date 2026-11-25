@@ -11,7 +11,7 @@ using Robust.Shared.Physics.Dynamics.Joints;
 
 namespace Content.Client.Weapons.Misc;
 
-public sealed class GrapplingGunSystem : SharedGrapplingGunSystem
+public sealed partial class GrapplingGunSystem : SharedGrapplingGunSystem
 {
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private InputSystem _input = default!;

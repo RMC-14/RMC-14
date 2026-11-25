@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.Actions;
 
-public sealed class SwappableActionSystem : EntitySystem
+public sealed partial class SwappableActionSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

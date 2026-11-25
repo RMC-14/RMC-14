@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Decals.Commands
 {
     [AdminCommand(AdminFlags.Mapping)]
-    public sealed class AddDecalCommand : IConsoleCommand
+    public sealed partial class AddDecalCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
         [Dependency] private IPrototypeManager _protoManager = default!;

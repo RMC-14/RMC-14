@@ -5,7 +5,7 @@ using Robust.Server.Player;
 namespace Content.Server.Administration.Logs.Converters;
 
 [AdminLogConverter]
-public sealed class EntityStringRepresentationConverter : AdminLogConverter<EntityStringRepresentation>
+public sealed partial class EntityStringRepresentationConverter : AdminLogConverter<EntityStringRepresentation>
 {
     [Dependency] private IAdminManager _adminManager = default!;
 

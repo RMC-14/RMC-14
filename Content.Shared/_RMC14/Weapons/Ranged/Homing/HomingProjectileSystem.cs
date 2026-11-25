@@ -8,7 +8,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Homing;
 
-public sealed class HomingProjectileSystem : EntitySystem
+public sealed partial class HomingProjectileSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;

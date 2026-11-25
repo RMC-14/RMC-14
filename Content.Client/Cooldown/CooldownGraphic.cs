@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Cooldown
 {
-    public sealed class CooldownGraphic : Control
+    public sealed partial class CooldownGraphic : Control
     {
         private static readonly ProtoId<ShaderPrototype> Shader = "CooldownAnimation";
 

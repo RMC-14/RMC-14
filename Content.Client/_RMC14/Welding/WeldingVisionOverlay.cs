@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Welding;
 
-public sealed class WeldingVisionOverlay : Overlay
+public sealed partial class WeldingVisionOverlay : Overlay
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;

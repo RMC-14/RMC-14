@@ -23,7 +23,7 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Shared._RMC14.Anchor;
 
-public sealed class DeployableItemSystem : EntitySystem
+public sealed partial class DeployableItemSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private AnchorableSystem _anchorable = default!;

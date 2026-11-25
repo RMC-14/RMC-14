@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Delivery;
 
-public sealed class DeliveryVisualizerSystem : VisualizerSystem<DeliveryComponent>
+public sealed partial class DeliveryVisualizerSystem : VisualizerSystem<DeliveryComponent>
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

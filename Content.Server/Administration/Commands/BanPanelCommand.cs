@@ -5,7 +5,7 @@ using Content.Server.EUI;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class BanPanelCommand : LocalizedCommands
+public sealed partial class BanPanelCommand : LocalizedCommands
 {
 
     [Dependency] private IPlayerLocator _locator = default!;

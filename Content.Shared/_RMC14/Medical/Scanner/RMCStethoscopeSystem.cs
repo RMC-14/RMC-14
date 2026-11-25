@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.Scanner;
 
-public sealed class RMCStethoscopeSystem : EntitySystem
+public sealed partial class RMCStethoscopeSystem : EntitySystem
 {
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

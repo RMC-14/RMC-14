@@ -7,7 +7,7 @@ using Robust.Shared.Reflection;
 
 namespace Content.Client.Sprite;
 
-public sealed class RandomSpriteSystem : SharedRandomSpriteSystem
+public sealed partial class RandomSpriteSystem : SharedRandomSpriteSystem
 {
     [Dependency] private IReflectionManager _reflection = default!;
     [Dependency] private ClientClothingSystem _clothing = default!;

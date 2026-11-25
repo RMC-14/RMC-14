@@ -16,7 +16,7 @@ namespace Content.Server.Rootable;
 /// <summary>
 /// Adds an action to toggle rooting to the ground, primarily for the Diona species.
 /// </summary>
-public sealed class RootableSystem : SharedRootableSystem
+public sealed partial class RootableSystem : SharedRootableSystem
 {
     [Dependency] private ISharedAdminLogManager _logger = default!;
     [Dependency] private IGameTiming _timing = default!;

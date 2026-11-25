@@ -32,7 +32,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.SupplyDrop;
 
-public abstract class SharedSupplyDropSystem : EntitySystem
+public abstract partial class SharedSupplyDropSystem : EntitySystem
 {
     private const float LandingDamageBoundsPaddingFactor = 0.33f;
 

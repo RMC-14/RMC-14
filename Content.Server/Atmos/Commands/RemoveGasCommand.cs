@@ -7,7 +7,7 @@ using Robust.Shared.Map;
 namespace Content.Server.Atmos.Commands
 {
     [AdminCommand(AdminFlags.Debug)]
-    public sealed class RemoveGasCommand : IConsoleCommand
+    public sealed partial class RemoveGasCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

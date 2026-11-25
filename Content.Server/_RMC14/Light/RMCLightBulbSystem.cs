@@ -5,7 +5,7 @@ using Robust.Server.Audio;
 
 namespace Content.Server._RMC14.Light;
 
-public sealed class RMCLightBulbSystem : EntitySystem
+public sealed partial class RMCLightBulbSystem : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private LightBulbSystem _lightBulb = default!;

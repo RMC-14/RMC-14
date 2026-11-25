@@ -14,7 +14,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.Entrenching;
 
-public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
+public sealed partial class RMCFoldingBarricadeLinkingSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

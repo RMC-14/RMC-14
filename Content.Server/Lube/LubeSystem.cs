@@ -13,7 +13,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Lube;
 
-public sealed class LubeSystem : EntitySystem
+public sealed partial class LubeSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

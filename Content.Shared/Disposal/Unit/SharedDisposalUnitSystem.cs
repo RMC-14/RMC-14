@@ -39,7 +39,7 @@ public sealed partial class DisposalDoAfterEvent : SimpleDoAfterEvent
 {
 }
 
-public abstract class SharedDisposalUnitSystem : EntitySystem
+public abstract partial class SharedDisposalUnitSystem : EntitySystem
 {
     [Dependency] protected ActionBlockerSystem ActionBlockerSystem = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;

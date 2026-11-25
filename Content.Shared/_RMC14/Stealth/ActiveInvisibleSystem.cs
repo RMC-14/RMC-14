@@ -3,7 +3,7 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._RMC14.Stealth;
 
-public sealed class ActiveInvisibleSystem : EntitySystem
+public sealed partial class ActiveInvisibleSystem : EntitySystem
 {
     [Dependency] private EvasionSystem _evasionSystem = default!;
 

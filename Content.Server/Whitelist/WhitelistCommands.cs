@@ -10,7 +10,7 @@ using Robust.Shared.Network;
 namespace Content.Server.Whitelist;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class AddWhitelistCommand : LocalizedCommands
+public sealed partial class AddWhitelistCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _locator = default!;
     [Dependency] private IServerDbManager _dbManager = default!;
@@ -58,7 +58,7 @@ public sealed class AddWhitelistCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class RemoveWhitelistCommand : LocalizedCommands
+public sealed partial class RemoveWhitelistCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _locator = default!;
     [Dependency] private IServerDbManager _dbManager = default!;
@@ -107,7 +107,7 @@ public sealed class RemoveWhitelistCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class KickNonWhitelistedCommand : LocalizedCommands
+public sealed partial class KickNonWhitelistedCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private IServerNetManager _netManager = default!;

@@ -8,7 +8,7 @@ namespace Content.Server.Administration.Systems;
 /// <summary>
 /// This handles the administrative test arena maps, and loading them.
 /// </summary>
-public sealed class AdminTestArenaSystem : EntitySystem
+public sealed partial class AdminTestArenaSystem : EntitySystem
 {
     [Dependency] private MapLoaderSystem _loader = default!;
     [Dependency] private MetaDataSystem _metaDataSystem = default!;

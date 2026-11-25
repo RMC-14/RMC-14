@@ -11,7 +11,7 @@ namespace Content.Client.UserInterface.Controls
     ///     Wrapper for <see cref="ScalingViewport"/> that listens to configuration variables.
     ///     Also does NN-snapping within tolerances.
     /// </summary>
-    public sealed class MainViewport : UIWidget
+    public sealed partial class MainViewport : UIWidget
     {
         [Dependency] private IConfigurationManager _cfg = default!;
         [Dependency] private ViewportManager _vpManager = default!;

@@ -11,7 +11,7 @@ using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
-public sealed class XenoSpikeShieldSystem : EntitySystem
+public sealed partial class XenoSpikeShieldSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private XenoProjectileSystem _xenoProjectile = default!;

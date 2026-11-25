@@ -8,7 +8,7 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Handles help progress condition logic.
 /// </summary>
-public sealed class HelpProgressConditionSystem : EntitySystem
+public sealed partial class HelpProgressConditionSystem : EntitySystem
 {
     [Dependency] private SharedObjectivesSystem _objectives = default!;
     [Dependency] private TargetObjectiveSystem _target = default!;

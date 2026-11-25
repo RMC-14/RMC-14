@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Rest;
 
-public sealed class XenoRestKeybindSystem : EntitySystem
+public sealed partial class XenoRestKeybindSystem : EntitySystem
 {
     [Dependency] private ActionsSystem _actionsSystem = default!;
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;

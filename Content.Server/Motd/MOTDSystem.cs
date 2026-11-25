@@ -11,7 +11,7 @@ namespace Content.Server.Motd;
 /// <summary>
 /// The system that handles broadcasting the Message Of The Day to players when they join the lobby/the MOTD changes/they ask for it to be printed.
 /// </summary>
-public sealed class MOTDSystem : EntitySystem
+public sealed partial class MOTDSystem : EntitySystem
 {
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;

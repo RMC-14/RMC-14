@@ -7,7 +7,7 @@ namespace Content.Server.GameTicking.Rules.VariationPass;
 ///     Base class for procedural variation rule passes, which apply some kind of variation to a station,
 ///     so we simply reduce the boilerplate for the event handling a bit with this.
 /// </summary>
-public abstract class VariationPassSystem<T> : GameRuleSystem<T>
+public abstract partial class VariationPassSystem<T> : GameRuleSystem<T>
     where T: IComponent
 {
     [Dependency] protected StationSystem Stations = default!;

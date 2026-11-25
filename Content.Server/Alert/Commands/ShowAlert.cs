@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Alert.Commands
 {
     [AdminCommand(AdminFlags.Debug)]
-    public sealed class ShowAlert : IConsoleCommand
+    public sealed partial class ShowAlert : IConsoleCommand
     {
         [Dependency] private IEntityManager _e = default!;
 

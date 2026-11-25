@@ -6,7 +6,7 @@ using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.DeviceNetwork.Systems.Devices
 {
-    public sealed class ApcNetSwitchSystem : EntitySystem
+    public sealed partial class ApcNetSwitchSystem : EntitySystem
     {
         [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
 

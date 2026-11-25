@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Ghost.Roles;
 
-public sealed class RMCGhostRoleSystem : EntitySystem
+public sealed partial class RMCGhostRoleSystem : EntitySystem
 {
     [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private GhostRoleSystem _ghostRole = default!;

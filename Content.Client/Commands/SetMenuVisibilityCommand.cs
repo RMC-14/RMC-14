@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Client.Commands;
 
 [UsedImplicitly]
-internal sealed class SetMenuVisibilityCommand : LocalizedCommands
+internal sealed partial class SetMenuVisibilityCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 

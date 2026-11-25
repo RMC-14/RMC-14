@@ -19,7 +19,7 @@ namespace Content.Server.GameTicking.Rules;
 /// <summary>
 /// This handles logic and interactions related to <see cref="RespawnDeadRuleComponent"/>
 /// </summary>
-public sealed class RespawnRuleSystem : GameRuleSystem<RespawnDeadRuleComponent>
+public sealed partial class RespawnRuleSystem : GameRuleSystem<RespawnDeadRuleComponent>
 {
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IGameTiming _timing = default!;

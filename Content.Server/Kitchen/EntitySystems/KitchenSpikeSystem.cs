@@ -26,7 +26,7 @@ using static Content.Shared.Kitchen.Components.KitchenSpikeComponent;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
-    public sealed class KitchenSpikeSystem : SharedKitchenSpikeSystem
+    public sealed partial class KitchenSpikeSystem : SharedKitchenSpikeSystem
     {
         [Dependency] private PopupSystem _popupSystem = default!;
         [Dependency] private SharedDoAfterSystem _doAfter = default!;

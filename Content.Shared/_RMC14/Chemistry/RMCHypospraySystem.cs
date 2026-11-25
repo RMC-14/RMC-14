@@ -6,7 +6,7 @@ using Content.Shared.Timing;
 
 namespace Content.Shared._RMC14.Chemistry;
 
-public sealed class RMCHypospraySystem : EntitySystem
+public sealed partial class RMCHypospraySystem : EntitySystem
 {
     [Dependency] private HypospraySystem _hypospray = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

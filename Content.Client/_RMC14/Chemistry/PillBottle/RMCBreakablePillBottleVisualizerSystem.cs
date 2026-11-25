@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Chemistry.PillBottle;
 
-public sealed class RMCBreakablePillBottleVisualizerSystem : EntitySystem
+public sealed partial class RMCBreakablePillBottleVisualizerSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;

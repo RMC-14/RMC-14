@@ -57,7 +57,7 @@ using Content.Shared._RMC14.Xenonids.Rest;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class CMGunSystem : EntitySystem
+public sealed partial class CMGunSystem : EntitySystem
 {
     [Dependency] private GunAkimboSystem _akimbo = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

@@ -29,7 +29,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleDeploySystem : EntitySystem
+public sealed partial class VehicleDeploySystem : EntitySystem
 {
     private static readonly EntProtoId HardpointTypeCannon = "HardpointTypeCannon";
 

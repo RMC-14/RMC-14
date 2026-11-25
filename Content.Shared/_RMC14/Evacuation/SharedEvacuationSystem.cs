@@ -40,7 +40,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Evacuation;
 
-public abstract class SharedEvacuationSystem : EntitySystem
+public abstract partial class SharedEvacuationSystem : EntitySystem
 {
     [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

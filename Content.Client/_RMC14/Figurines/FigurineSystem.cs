@@ -13,7 +13,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Client._RMC14.Figurines;
 
-public sealed class FigurineSystem : EntitySystem
+public sealed partial class FigurineSystem : EntitySystem
 {
     [Dependency] private IClientAdminManager _adminManager = default!;
     [Dependency] private IClyde _clyde = default!;
@@ -75,7 +75,7 @@ public sealed class FigurineSystem : EntitySystem
         _control.QueuedTextures.Enqueue((texture, Direction.South, ent));
     }
 
-    private sealed class ContentSpriteControl : Control
+    private sealed partial class ContentSpriteControl : Control
     {
         [Dependency] private IEntityManager _entManager = default!;
 

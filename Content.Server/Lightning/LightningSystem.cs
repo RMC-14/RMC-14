@@ -16,7 +16,7 @@ namespace Content.Server.Lightning;
 
 //I redesigned so that lightning branches can only be created from the point where the lightning struck, no more collide checks
 //and the number of these branches is explicitly controlled in the new function.
-public sealed class LightningSystem : SharedLightningSystem
+public sealed partial class LightningSystem : SharedLightningSystem
 {
     [Dependency] private BeamSystem _beam = default!;
     [Dependency] private IRobustRandom _random = default!;

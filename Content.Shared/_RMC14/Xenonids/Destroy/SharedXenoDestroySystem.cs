@@ -46,7 +46,7 @@ using Robust.Shared.Timing;
 using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Destroy;
-public abstract class SharedXenoDestroySystem : EntitySystem
+public abstract partial class SharedXenoDestroySystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;

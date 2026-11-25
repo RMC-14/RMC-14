@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.Elevators;
 
 [UsedImplicitly]
-public sealed class ElevatorPanelBui : BoundUserInterface
+public sealed partial class ElevatorPanelBui : BoundUserInterface
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IGameTiming _timing = default!;

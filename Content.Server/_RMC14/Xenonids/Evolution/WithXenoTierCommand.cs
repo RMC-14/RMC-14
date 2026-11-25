@@ -8,7 +8,7 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Xenonids.Evolution;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Query)]
-public sealed class WithXenoTierCommand : ToolshedCommand
+public sealed partial class WithXenoTierCommand : ToolshedCommand
 {
     [Dependency] private IComponentFactory _compFactory = default!;
 

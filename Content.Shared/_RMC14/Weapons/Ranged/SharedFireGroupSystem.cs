@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class SharedFireGroupSystem : EntitySystem
+public sealed partial class SharedFireGroupSystem : EntitySystem
 {
     [Dependency] private UseDelaySystem _delay = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

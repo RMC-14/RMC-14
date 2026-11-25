@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.HUD.Systems;
 
-public sealed class HolocardSystem : EntitySystem
+public sealed partial class HolocardSystem : EntitySystem
 {
     [Dependency] private SkillsSystem _skills = default!;
     [Dependency] private INetManager _net = default!;

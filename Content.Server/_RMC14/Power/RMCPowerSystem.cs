@@ -22,7 +22,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Power;
 
-public sealed class RMCPowerSystem : SharedRMCPowerSystem
+public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
 {
     [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

@@ -14,7 +14,7 @@ using JetBrains.Annotations;
 namespace Content.Server.Atmos.Piping.Unary.EntitySystems;
 
 [UsedImplicitly]
-public sealed class GasCondenserSystem : EntitySystem
+public sealed partial class GasCondenserSystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private PowerReceiverSystem _power = default!;

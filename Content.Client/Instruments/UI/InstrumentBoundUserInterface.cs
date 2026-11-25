@@ -8,7 +8,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Client.Instruments.UI
 {
-    public sealed class InstrumentBoundUserInterface : BoundUserInterface
+    public sealed partial class InstrumentBoundUserInterface : BoundUserInterface
     {
         public IEntityManager Entities => EntMan;
         [Dependency] public IMidiManager MidiManager = default!;

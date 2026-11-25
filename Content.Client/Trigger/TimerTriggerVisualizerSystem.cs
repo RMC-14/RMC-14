@@ -7,7 +7,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client.Trigger;
 
-public sealed class TimerTriggerVisualizerSystem : VisualizerSystem<TimerTriggerVisualsComponent>
+public sealed partial class TimerTriggerVisualizerSystem : VisualizerSystem<TimerTriggerVisualsComponent>
 {
     [Dependency] private SharedAudioSystem _audioSystem = default!;
 

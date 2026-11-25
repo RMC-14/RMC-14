@@ -11,7 +11,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class DragonRuleSystem : GameRuleSystem<DragonRuleComponent>
+public sealed partial class DragonRuleSystem : GameRuleSystem<DragonRuleComponent>
 {
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;

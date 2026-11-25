@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Connection;
 
-public sealed class MindCheckSystem : EntitySystem
+public sealed partial class MindCheckSystem : EntitySystem
 {
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private INetManager _net = default!;

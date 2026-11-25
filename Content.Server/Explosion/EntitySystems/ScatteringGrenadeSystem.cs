@@ -9,7 +9,7 @@ using Content.Shared.Explosion.EntitySystems;
 
 namespace Content.Server.Explosion.EntitySystems;
 
-public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
+public sealed partial class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private IRobustRandom _random = default!;

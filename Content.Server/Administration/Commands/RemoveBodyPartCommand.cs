@@ -5,7 +5,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class RemoveBodyPartCommand : IConsoleCommand
+    public sealed partial class RemoveBodyPartCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

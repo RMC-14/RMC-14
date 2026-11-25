@@ -14,7 +14,7 @@ namespace Content.Client.Light;
 /// <summary>
 /// Applies ambient-occlusion to the viewport.
 /// </summary>
-public sealed class AmbientOcclusionOverlay : Overlay
+public sealed partial class AmbientOcclusionOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
     private static readonly ProtoId<ShaderPrototype> StencilMaskShader = "StencilMask";

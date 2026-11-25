@@ -17,7 +17,7 @@ using static Content.Client.Tips.TippyUI;
 
 namespace Content.Client.Tips;
 
-public sealed class TippyUIController : UIController
+public sealed partial class TippyUIController : UIController
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IResourceCache _resCache = default!;

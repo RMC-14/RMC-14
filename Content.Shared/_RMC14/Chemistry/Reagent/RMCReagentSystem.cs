@@ -9,7 +9,7 @@ using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.Chemistry.Reagent;
 
-public sealed class RMCReagentSystem : EntitySystem
+public sealed partial class RMCReagentSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private ISerializationManager _serialization = default!;

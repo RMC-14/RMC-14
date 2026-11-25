@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.CardboardBox;
 
-public sealed class CardboardBoxSystem : SharedCardboardBoxSystem
+public sealed partial class CardboardBoxSystem : SharedCardboardBoxSystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedMoverController _mover = default!;

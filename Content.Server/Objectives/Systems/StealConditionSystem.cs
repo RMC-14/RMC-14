@@ -15,7 +15,7 @@ using Content.Shared.Stacks;
 
 namespace Content.Server.Objectives.Systems;
 
-public sealed class StealConditionSystem : EntitySystem
+public sealed partial class StealConditionSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IPrototypeManager _proto = default!;

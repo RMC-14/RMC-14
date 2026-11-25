@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Name;
 
-public sealed class XenoNameSystem : SharedXenoNameSystem
+public sealed partial class XenoNameSystem : SharedXenoNameSystem
 {
     [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private NameModifierSystem _nameModifier = default!;

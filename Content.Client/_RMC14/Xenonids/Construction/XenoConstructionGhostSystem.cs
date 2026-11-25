@@ -38,7 +38,7 @@ using static Content.Shared.Physics.CollisionGroup;
 namespace Content.Client._RMC14.Xenonids.Construction;
 
 [UsedImplicitly]
-public sealed class XenoConstructionGhostSystem : EntitySystem
+public sealed partial class XenoConstructionGhostSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IEyeManager _eyeManager = default!;

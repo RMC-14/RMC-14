@@ -7,7 +7,7 @@ using Robust.Shared.ContentPack;
 
 namespace Content.Client.Info
 {
-    public sealed class RulesAndInfoWindow : DefaultWindow
+    public sealed partial class RulesAndInfoWindow : DefaultWindow
     {
         [Dependency] private IResourceManager _resourceManager = default!;
 

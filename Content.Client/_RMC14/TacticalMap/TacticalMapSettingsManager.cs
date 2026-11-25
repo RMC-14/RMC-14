@@ -17,7 +17,7 @@ using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Client._RMC14.TacticalMap;
 
-public sealed class TacticalMapSettingsManager
+public sealed partial class TacticalMapSettingsManager
 {
     private const string SettingsPath = "/rmc_tactical_map_settings.yml";
 

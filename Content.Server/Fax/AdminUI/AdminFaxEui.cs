@@ -11,7 +11,7 @@ using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.Fax.AdminUI;
 
-public sealed class AdminFaxEui : BaseEui
+public sealed partial class AdminFaxEui : BaseEui
 {
     [Dependency] private IEntityManager _entityManager = default!;
     private readonly FaxSystem _faxSystem;

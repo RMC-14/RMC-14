@@ -26,7 +26,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.ControlComputer;
 
-public abstract class SharedMarineControlComputerSystem : EntitySystem
+public abstract partial class SharedMarineControlComputerSystem : EntitySystem
 {
     [Dependency] private RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private SharedCommendationSystem _commendation = default!;

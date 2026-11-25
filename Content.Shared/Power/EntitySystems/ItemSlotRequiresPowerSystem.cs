@@ -3,7 +3,7 @@ using Content.Shared.Power.Components;
 
 namespace Content.Shared.Power.EntitySystems;
 
-public sealed class ItemSlotRequiresPowerSystem : EntitySystem
+public sealed partial class ItemSlotRequiresPowerSystem : EntitySystem
 {
     [Dependency] private SharedPowerReceiverSystem _receiver = default!;
 

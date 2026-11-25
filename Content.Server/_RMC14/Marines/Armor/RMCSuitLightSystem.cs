@@ -13,7 +13,7 @@ using Content.Shared.Popups;
 
 namespace Content.Server._RMC14.Marines.Armor;
 
-public sealed class RMCSuitLightSystem : EntitySystem
+public sealed partial class RMCSuitLightSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private InventorySystem _inventory = default!;

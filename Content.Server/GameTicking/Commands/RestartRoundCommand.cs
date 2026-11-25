@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.Round)]
-    public sealed class RestartRoundCommand : IConsoleCommand
+    public sealed partial class RestartRoundCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _e = default!;
 
@@ -29,7 +29,7 @@ namespace Content.Server.GameTicking.Commands
     }
 
     [AdminCommand(AdminFlags.Round)]
-    public sealed class RestartRoundNowCommand : IConsoleCommand
+    public sealed partial class RestartRoundNowCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _e = default!;
 

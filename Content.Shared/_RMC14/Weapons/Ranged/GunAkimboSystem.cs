@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class GunAkimboSystem : EntitySystem
+public sealed partial class GunAkimboSystem : EntitySystem
 {
     [Dependency] private CMGunSystem _cmGun = default!;
     [Dependency] private IConfigurationManager _config = default!;

@@ -8,7 +8,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Body.Commands
 {
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class AttachBodyPartCommand : IConsoleCommand
+    public sealed partial class AttachBodyPartCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

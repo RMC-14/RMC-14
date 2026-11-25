@@ -34,7 +34,7 @@ namespace Content.Shared._RMC14.Xenonids.Burrow;
 /// <summary>
 /// Deals with Burrowing, where a xeno goes into the ground and shortly comes back up
 /// </summary>
-public abstract class SharedXenoBurrowSystem : EntitySystem
+public abstract partial class SharedXenoBurrowSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityManager _entities = default!;

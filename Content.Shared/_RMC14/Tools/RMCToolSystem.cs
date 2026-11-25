@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Tools;
 
-public sealed class RMCToolSystem : EntitySystem
+public sealed partial class RMCToolSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

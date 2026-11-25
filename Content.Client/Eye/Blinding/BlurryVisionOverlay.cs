@@ -8,7 +8,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.Eye.Blinding
 {
-    public sealed class BlurryVisionOverlay : Overlay
+    public sealed partial class BlurryVisionOverlay : Overlay
     {
         private static readonly ProtoId<ShaderPrototype> CataractsShader = "Cataracts";
         private static readonly ProtoId<ShaderPrototype> CircleShader = "CircleMask";

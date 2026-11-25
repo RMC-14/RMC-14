@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 namespace Content.Server.Light.EntitySystems;
 
 /// <inheritdoc/>
-public sealed class LightCycleSystem : SharedLightCycleSystem
+public sealed partial class LightCycleSystem : SharedLightCycleSystem
 {
     [Dependency] private IRobustRandom _random = default!;
 

@@ -3,7 +3,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Light.EntitySystems;
 
-public abstract class SharedSunShadowSystem : EntitySystem
+public abstract partial class SharedSunShadowSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
 

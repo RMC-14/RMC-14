@@ -4,7 +4,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Research.Systems;
 
-public sealed class ResearchStealerSystem : SharedResearchStealerSystem
+public sealed partial class ResearchStealerSystem : SharedResearchStealerSystem
 {
     [Dependency] private SharedResearchSystem _research = default!;
     [Dependency] private IRobustRandom _random = default!;

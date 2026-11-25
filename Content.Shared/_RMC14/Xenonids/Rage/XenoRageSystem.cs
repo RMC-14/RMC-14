@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rage;
 
-public sealed class XenoRageSystem : EntitySystem
+public sealed partial class XenoRageSystem : EntitySystem
 {
     [Dependency] private SharedMeleeWeaponSystem _meleeWeapon = default!;
     [Dependency] private INetManager _net = default!;

@@ -15,7 +15,7 @@ using Content.Shared.CCVar;
 namespace Content.Server.Atmos.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class GasTankSystem : SharedGasTankSystem
+    public sealed partial class GasTankSystem : SharedGasTankSystem
     {
         [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private ExplosionSystem _explosions = default!;

@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Research.TechnologyDisk.Systems;
 
-public sealed class DiskConsoleSystem : EntitySystem
+public sealed partial class DiskConsoleSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private AudioSystem _audio = default!;

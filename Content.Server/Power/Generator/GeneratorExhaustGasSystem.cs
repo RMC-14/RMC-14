@@ -7,7 +7,7 @@ namespace Content.Server.Power.Generator;
 
 /// <seealso cref="GeneratorSystem"/>
 /// <seealso cref="GeneratorExhaustGasComponent"/>
-public sealed class GeneratorExhaustGasSystem : EntitySystem
+public sealed partial class GeneratorExhaustGasSystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmosphere = default!;
 

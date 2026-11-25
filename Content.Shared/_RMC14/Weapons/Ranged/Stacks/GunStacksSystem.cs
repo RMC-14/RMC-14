@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Stacks;
 
-public sealed class GunStacksSystem : EntitySystem
+public sealed partial class GunStacksSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private INetManager _net = default!;

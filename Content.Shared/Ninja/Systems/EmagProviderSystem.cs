@@ -12,7 +12,7 @@ namespace Content.Shared.Ninja.Systems;
 /// <summary>
 /// Handles emagging whitelisted objects when clicked.
 /// </summary>
-public sealed class EmagProviderSystem : EntitySystem
+public sealed partial class EmagProviderSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;

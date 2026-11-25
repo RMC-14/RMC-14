@@ -17,7 +17,7 @@ using Color = Robust.Shared.Maths.Color;
 
 namespace Content.Client.Sprite;
 
-public sealed class ContentSpriteSystem : EntitySystem
+public sealed partial class ContentSpriteSystem : EntitySystem
 {
     [Dependency] private IClientAdminManager _adminManager = default!;
     [Dependency] private IClyde _clyde = default!;
@@ -139,7 +139,7 @@ public sealed class ContentSpriteSystem : EntitySystem
     /// This is horrible. I asked PJB if there's an easy way to render straight to a texture outside of the render loop
     /// and she also mentioned this as a bad possibility.
     /// </summary>
-    private sealed class ContentSpriteControl : Control
+    private sealed partial class ContentSpriteControl : Control
     {
         [Dependency] private IEntityManager _entManager = default!;
         [Dependency] private ILogManager _logMan = default!;

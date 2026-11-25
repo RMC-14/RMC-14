@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
-public abstract class SharedInjectorSystem : EntitySystem
+public abstract partial class SharedInjectorSystem : EntitySystem
 {
     /// <summary>
     ///     Default transfer amounts for the set-transfer verb.

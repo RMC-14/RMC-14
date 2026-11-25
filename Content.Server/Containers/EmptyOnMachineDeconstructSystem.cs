@@ -9,7 +9,7 @@ namespace Content.Server.Containers
     /// Implements functionality of EmptyOnMachineDeconstructComponent.
     /// </summary>
     [UsedImplicitly]
-    public sealed class EmptyOnMachineDeconstructSystem : EntitySystem
+    public sealed partial class EmptyOnMachineDeconstructSystem : EntitySystem
     {
         [Dependency] private SharedContainerSystem _container = default!;
 

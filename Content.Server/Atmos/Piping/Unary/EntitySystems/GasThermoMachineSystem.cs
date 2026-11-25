@@ -19,7 +19,7 @@ using Content.Shared.DeviceNetwork.Components;
 namespace Content.Server.Atmos.Piping.Unary.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class GasThermoMachineSystem : SharedGasThermoMachineSystem
+    public sealed partial class GasThermoMachineSystem : SharedGasThermoMachineSystem
     {
         [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private PowerReceiverSystem _power = default!;

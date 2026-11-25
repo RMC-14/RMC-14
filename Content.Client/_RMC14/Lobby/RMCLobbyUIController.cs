@@ -14,7 +14,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Lobby;
 
-public sealed class RMCLobbyUIController : UIController, IOnSystemChanged<FaxResponderSystem>
+public sealed partial class RMCLobbyUIController : UIController, IOnSystemChanged<FaxResponderSystem>
 {
     [Dependency] private JobRequirementsManager _jobRequirements = default!;
     [Dependency] private IClientPreferencesManager _preferences = default!;

@@ -16,7 +16,7 @@ namespace Content.Shared.SprayPainter;
 /// System for painting airlocks using a spray painter.
 /// Pipes are handled serverside since AtmosPipeColorSystem is server only.
 /// </summary>
-public abstract class SharedSprayPainterSystem : EntitySystem
+public abstract partial class SharedSprayPainterSystem : EntitySystem
 {
     [Dependency] protected IPrototypeManager Proto = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

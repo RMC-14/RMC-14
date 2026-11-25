@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Nutrition.EntitySystems
 {
-    public sealed class TrashOnSolutionEmptySystem : EntitySystem
+    public sealed partial class TrashOnSolutionEmptySystem : EntitySystem
     {
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private TagSystem _tagSystem = default!;

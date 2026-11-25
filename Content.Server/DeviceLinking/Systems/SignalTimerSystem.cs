@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.DeviceLinking.Systems;
 
-public sealed class SignalTimerSystem : EntitySystem
+public sealed partial class SignalTimerSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IGameTiming _gameTiming = default!;

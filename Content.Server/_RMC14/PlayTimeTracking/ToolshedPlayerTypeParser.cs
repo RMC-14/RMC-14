@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.PlayTimeTracking;
 
-public sealed class ToolshedPlayerTypeParser : TypeParser<ToolshedPlayer>
+public sealed partial class ToolshedPlayerTypeParser : TypeParser<ToolshedPlayer>
 {
     [Dependency] private IPlayerManager _playerManager = default!;
 

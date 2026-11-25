@@ -4,7 +4,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Materials.OreSilo;
 
-public abstract class SharedOreSiloSystem : EntitySystem
+public abstract partial class SharedOreSiloSystem : EntitySystem
 {
     [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
     [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;

@@ -7,7 +7,7 @@ using Content.Shared.Rounding;
 
 namespace Content.Server._RMC14.Medical.Defibrillator;
 
-public sealed class RMCDefibrillatorSystem : SharedRMCDefibrillatorSystem
+public sealed partial class RMCDefibrillatorSystem : SharedRMCDefibrillatorSystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;

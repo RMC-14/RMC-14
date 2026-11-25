@@ -2,7 +2,7 @@ using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Welding;
 
-public sealed class WeldingVisionSystem : EntitySystem
+public sealed partial class WeldingVisionSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
 

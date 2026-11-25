@@ -22,7 +22,7 @@ using static Robust.Client.UserInterface.Controls.LineEdit;
 namespace Content.Client._RMC14.Vendors;
 
 [UsedImplicitly]
-public sealed class CMAutomatedVendorBui : BoundUserInterface
+public sealed partial class CMAutomatedVendorBui : BoundUserInterface
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

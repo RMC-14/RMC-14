@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.PlayingCards;
 
-public sealed class PlayingCardSystem : SharedPlayingCardSystem
+public sealed partial class PlayingCardSystem : SharedPlayingCardSystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ISharedPlayerManager _player = default!;

@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Mentor;
 
 [AnyCommand]
-public sealed class DeMentorCommand : LocalizedCommands
+public sealed partial class DeMentorCommand : LocalizedCommands
 {
     [Dependency] private MentorManager _mentor = default!;
 

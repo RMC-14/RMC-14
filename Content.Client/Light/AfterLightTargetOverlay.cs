@@ -7,7 +7,7 @@ namespace Content.Client.Light;
 /// <summary>
 /// This exists just to copy <see cref="BeforeLightTargetOverlay"/> to the light render target
 /// </summary>
-public sealed class AfterLightTargetOverlay : Overlay
+public sealed partial class AfterLightTargetOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 

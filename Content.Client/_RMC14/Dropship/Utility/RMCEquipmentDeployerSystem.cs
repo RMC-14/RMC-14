@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Dropship.Utility;
 
-public sealed class RMCEquipmentDeployerSystem : SharedRMCEquipmentDeployerSystem
+public sealed partial class RMCEquipmentDeployerSystem : SharedRMCEquipmentDeployerSystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
 

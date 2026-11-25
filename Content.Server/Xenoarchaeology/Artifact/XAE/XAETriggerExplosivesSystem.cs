@@ -9,7 +9,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact effect of triggering explosion.
 /// </summary>
-public sealed class XAETriggerExplosivesSystem : BaseXAESystem<XAETriggerExplosivesComponent>
+public sealed partial class XAETriggerExplosivesSystem : BaseXAESystem<XAETriggerExplosivesComponent>
 {
     [Dependency] private ExplosionSystem _explosion = default!;
 

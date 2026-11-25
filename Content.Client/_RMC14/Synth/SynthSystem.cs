@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Synth;
 
-public sealed class SynthSystem : SharedSynthSystem
+public sealed partial class SynthSystem : SharedSynthSystem
 { // TODO rework this code why is damage visuals client only
     [Dependency] private DamageVisualsSystem _damageVisuals = default!;
 

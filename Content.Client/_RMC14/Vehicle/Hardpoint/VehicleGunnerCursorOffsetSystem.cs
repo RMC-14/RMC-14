@@ -13,7 +13,7 @@ using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Vehicle.Hardpoint;
 
-public sealed class VehicleGunnerCursorOffsetSystem : EntitySystem
+public sealed partial class VehicleGunnerCursorOffsetSystem : EntitySystem
 {
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private ContentEyeSystem _contentEye = default!;

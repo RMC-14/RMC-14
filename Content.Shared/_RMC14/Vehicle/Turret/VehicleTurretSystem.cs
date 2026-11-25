@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleTurretSystem : EntitySystem
+public sealed partial class VehicleTurretSystem : EntitySystem
 {
     private static readonly EntProtoId TurretVisual = "VehicleTurretVisual";
 

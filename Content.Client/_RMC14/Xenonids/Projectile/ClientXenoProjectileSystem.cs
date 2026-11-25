@@ -6,7 +6,7 @@ using Robust.Client.Player;
 
 namespace Content.Client._RMC14.Xenonids.Projectile;
 
-public sealed class ClientXenoProjectileSystem : EntitySystem
+public sealed partial class ClientXenoProjectileSystem : EntitySystem
 {
     [Dependency] private GunPredictionSystem _gunPrediction = default!;
     [Dependency] private IPlayerManager _player = default!;

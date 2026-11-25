@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Interaction;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class TilePryCommand : LocalizedEntityCommands
+public sealed partial class TilePryCommand : LocalizedEntityCommands
 {
     [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;

@@ -16,7 +16,7 @@ namespace Content.Server._RMC14.GMRequest;
 /// <remarks>
 /// The "true" location of GM Request log data.
 /// </remarks>
-public sealed class GMRequestManager
+public sealed partial class GMRequestManager
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IChatManager _chatManager = default!;

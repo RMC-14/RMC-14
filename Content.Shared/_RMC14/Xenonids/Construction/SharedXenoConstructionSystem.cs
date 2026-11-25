@@ -57,7 +57,7 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
-public sealed class SharedXenoConstructionSystem : EntitySystem
+public sealed partial class SharedXenoConstructionSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private AreaSystem _area = default!;

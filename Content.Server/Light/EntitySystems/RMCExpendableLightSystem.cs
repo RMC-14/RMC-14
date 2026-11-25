@@ -9,7 +9,7 @@ using Robust.Shared.Physics.Systems;
 namespace Content.Server.Light.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class RMCExpendableLightSystem : SharedExpendableLightSystem
+    public sealed partial class RMCExpendableLightSystem : SharedExpendableLightSystem
     {
         [Dependency] private SharedPhysicsSystem _physics = default!;
         [Dependency] private ExpendableLightSystem _light = default!;

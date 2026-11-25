@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Announce;
 
-public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateExited<GameplayState>
+public sealed partial class RMCAnnouncementLayoutUIController : UIController, IOnStateExited<GameplayState>
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

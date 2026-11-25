@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Content.Shared.Magic.Systems;
 
-public sealed class AnimateSpellSystem : EntitySystem
+public sealed partial class AnimateSpellSystem : EntitySystem
 {
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

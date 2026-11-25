@@ -25,7 +25,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Medical.Scanner;
 
-public sealed class HealthScannerUiData
+public sealed partial class HealthScannerUiData
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private ISharedPlayerManager _player = default!;

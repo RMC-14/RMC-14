@@ -5,7 +5,7 @@ using Content.Shared.Database;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
-public sealed class NotekeeperCartridgeSystem : EntitySystem
+public sealed partial class NotekeeperCartridgeSystem : EntitySystem
 {
     [Dependency] private CartridgeLoaderSystem? _cartridgeLoaderSystem = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Client.Commands;
 
 [AnyCommand]
-public sealed class ToggleOutlineCommand : LocalizedCommands
+public sealed partial class ToggleOutlineCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _configurationManager = default!;
 

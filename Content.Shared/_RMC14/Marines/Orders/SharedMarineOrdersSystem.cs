@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Marines.Orders;
 
-public abstract class SharedMarineOrdersSystem : EntitySystem
+public abstract partial class SharedMarineOrdersSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;

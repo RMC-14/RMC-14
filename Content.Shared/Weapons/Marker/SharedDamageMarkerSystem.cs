@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Weapons.Marker;
 
-public abstract class SharedDamageMarkerSystem : EntitySystem
+public abstract partial class SharedDamageMarkerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _netManager = default!;

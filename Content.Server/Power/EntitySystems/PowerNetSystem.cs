@@ -19,7 +19,7 @@ namespace Content.Server.Power.EntitySystems
     ///     Manages power networks, power state, and all power components.
     /// </summary>
     [UsedImplicitly]
-    public sealed class PowerNetSystem : SharedPowerNetSystem
+    public sealed partial class PowerNetSystem : SharedPowerNetSystem
     {
         [Dependency] private AppearanceSystem _appearance = default!;
         [Dependency] private PowerNetConnectorSystem _powerNetConnector = default!;

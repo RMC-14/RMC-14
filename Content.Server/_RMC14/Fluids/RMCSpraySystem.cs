@@ -5,7 +5,7 @@ using Robust.Shared.Map;
 
 namespace Content.Server._RMC14.Fluids;
 
-public sealed class RMCSpraySystem : SharedRMCSpraySystem
+public sealed partial class RMCSpraySystem : SharedRMCSpraySystem
 {
     [Dependency] private SpraySystem _spray = default!;
 

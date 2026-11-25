@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Standing;
 
-public sealed class RMCStandingSystem : EntitySystem
+public sealed partial class RMCStandingSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

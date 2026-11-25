@@ -6,7 +6,7 @@ using Content.Shared._RMC14.NPC;
 
 namespace Content.Server._RMC14.NPC;
 
-public sealed class RMCNPCSystem : SharedRMCNPCSystem
+public sealed partial class RMCNPCSystem : SharedRMCNPCSystem
 {
     [Dependency] private NPCSystem _npc = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

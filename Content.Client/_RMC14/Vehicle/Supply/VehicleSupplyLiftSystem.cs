@@ -5,7 +5,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Vehicle.Supply;
 
-public sealed class VehicleSupplyLiftSystem : EntitySystem
+public sealed partial class VehicleSupplyLiftSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
     [Dependency] private SpriteSystem _sprite = default!;

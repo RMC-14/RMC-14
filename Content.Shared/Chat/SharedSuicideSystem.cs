@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Content.Shared.Chat;
 
-public sealed class SharedSuicideSystem : EntitySystem
+public sealed partial class SharedSuicideSystem : EntitySystem
 {
     private static readonly ProtoId<DamageTypePrototype> FallbackDamageType = "Blunt";
 

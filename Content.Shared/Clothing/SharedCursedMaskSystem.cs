@@ -11,7 +11,7 @@ namespace Content.Shared.Clothing;
 /// <summary>
 /// This handles <see cref="CursedMaskComponent"/>
 /// </summary>
-public abstract class SharedCursedMaskSystem : EntitySystem
+public abstract partial class SharedCursedMaskSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

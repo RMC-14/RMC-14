@@ -14,7 +14,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Respawn;
 
-public sealed class SpecialRespawnSystem : SharedSpecialRespawnSystem
+public sealed partial class SpecialRespawnSystem : SharedSpecialRespawnSystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private AtmosphereSystem _atmosphere = default!;

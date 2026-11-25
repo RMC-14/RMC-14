@@ -7,7 +7,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.Audio;
 
-public sealed class AudioUIController : UIController
+public sealed partial class AudioUIController : UIController
 {
     [Dependency] private IAudioManager _audioManager = default!;
     [Dependency] private IConfigurationManager _configManager = default!;

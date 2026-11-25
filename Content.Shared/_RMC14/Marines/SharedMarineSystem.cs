@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines;
 
-public abstract class SharedMarineSystem : EntitySystem
+public abstract partial class SharedMarineSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private INetConfigurationManager _netConfig = default!;

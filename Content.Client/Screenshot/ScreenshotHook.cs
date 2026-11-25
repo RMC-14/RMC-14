@@ -13,7 +13,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Client.Screenshot
 {
-    internal sealed class ScreenshotHook : IScreenshotHook
+    internal sealed partial class ScreenshotHook : IScreenshotHook
     {
         private static readonly ResPath BaseScreenshotPath = new("/Screenshots");
 

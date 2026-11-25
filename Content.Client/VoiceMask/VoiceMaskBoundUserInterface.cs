@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.VoiceMask;
 
-public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
+public sealed partial class VoiceMaskBoundUserInterface : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _protomanager = default!;
 

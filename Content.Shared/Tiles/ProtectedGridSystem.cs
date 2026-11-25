@@ -4,7 +4,7 @@ using Robust.Shared.Map.Enumerators;
 
 namespace Content.Shared.Tiles;
 
-public sealed class ProtectedGridSystem : EntitySystem
+public sealed partial class ProtectedGridSystem : EntitySystem
 {
     [Dependency] private SharedMapSystem _map = default!;
 

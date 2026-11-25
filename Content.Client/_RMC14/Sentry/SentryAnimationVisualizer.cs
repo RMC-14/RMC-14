@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Sentry;
 
-public sealed class SentryAnimationVisualizer : EntitySystem
+public sealed partial class SentryAnimationVisualizer : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
 

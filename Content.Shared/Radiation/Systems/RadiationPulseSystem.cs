@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Radiation.Systems;
 
-public sealed class RadiationPulseSystem : EntitySystem
+public sealed partial class RadiationPulseSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
 

@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Timing;
 
-public sealed class UseDelaySystem : EntitySystem
+public sealed partial class UseDelaySystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private MetaDataSystem _metadata = default!;

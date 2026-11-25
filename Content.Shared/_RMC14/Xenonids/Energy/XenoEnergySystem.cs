@@ -14,7 +14,7 @@ using Content.Shared._RMC14.Xenonids.Rest;
 
 namespace Content.Shared._RMC14.Xenonids.Energy;
 
-public sealed class XenoEnergySystem : EntitySystem
+public sealed partial class XenoEnergySystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private MobStateSystem _mobState = default!;

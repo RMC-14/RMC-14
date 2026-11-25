@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Fog;
 
-public sealed class FogSystem : EntitySystem
+public sealed partial class FogSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private IRobustRandom _random = default!;

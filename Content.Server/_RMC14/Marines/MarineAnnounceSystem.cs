@@ -22,7 +22,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Marines;
 
-public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
+public sealed partial class MarineAnnounceSystem : SharedMarineAnnounceSystem
 {
     [Dependency] private IAdminLogManager _adminLogs = default!;
     [Dependency] private RMCAnnouncementOverlaySystem _announcementOverlay = default!;

@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.CameraShake;
 
-public sealed class RMCCameraShakeSystem : EntitySystem
+public sealed partial class RMCCameraShakeSystem : EntitySystem
 {
     [Dependency] private SharedCameraRecoilSystem _cameraRecoil = default!;
     [Dependency] private IRobustRandom _random = default!;

@@ -38,7 +38,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.OrbitalCannon;
 
-public sealed class OrbitalCannonSystem : EntitySystem
+public sealed partial class OrbitalCannonSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedRMCAnimationSystem _animation = default!;

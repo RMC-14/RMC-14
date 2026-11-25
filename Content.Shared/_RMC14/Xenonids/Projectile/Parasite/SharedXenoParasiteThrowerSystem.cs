@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
-public abstract class SharedXenoParasiteThrowerSystem : EntitySystem
+public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 {
     [Dependency] protected SharedAppearanceSystem _appearance = default!;
     [Dependency] private IGameTiming _timing = default!;

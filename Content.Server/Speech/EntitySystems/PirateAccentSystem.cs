@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed class PirateAccentSystem : EntitySystem
+public sealed partial class PirateAccentSystem : EntitySystem
 {
     private static readonly Regex FirstWordAllCapsRegex = new(@"^(\S+)");
 

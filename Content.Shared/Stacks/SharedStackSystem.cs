@@ -16,7 +16,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared.Stacks
 {
     [UsedImplicitly]
-    public abstract class SharedStackSystem : EntitySystem
+    public abstract partial class SharedStackSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
         [Dependency] private IPrototypeManager _prototype = default!;

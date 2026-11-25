@@ -7,7 +7,7 @@ using System.Linq;
 namespace Content.Client.Commands;
 
 [UsedImplicitly]
-public sealed class DebugPathfindingCommand : LocalizedCommands
+public sealed partial class DebugPathfindingCommand : LocalizedCommands
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 

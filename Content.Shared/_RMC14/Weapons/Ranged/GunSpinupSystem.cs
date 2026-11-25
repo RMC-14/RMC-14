@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class GunSpinupSystem : EntitySystem
+public sealed partial class GunSpinupSystem : EntitySystem
 {
     private const float ClientWindupSafetyPadding = 0.05f;
     private const float ModifierRefreshEpsilon = 0.01f;

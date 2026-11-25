@@ -11,7 +11,7 @@ using JetBrains.Annotations;
 namespace Content.Server.DeviceLinking.Systems
 {
     [UsedImplicitly]
-    public sealed class DoorSignalControlSystem : EntitySystem
+    public sealed partial class DoorSignalControlSystem : EntitySystem
     {
         [Dependency] private DoorSystem _doorSystem = default!;
         [Dependency] private DeviceLinkSystem _signalSystem = default!;

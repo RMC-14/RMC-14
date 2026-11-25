@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Radiation.EntitySystems;
 
-public sealed class RadiationProtectionSystem : EntitySystem
+public sealed partial class RadiationProtectionSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
 

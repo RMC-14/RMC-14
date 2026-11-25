@@ -27,7 +27,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class RMCAdminSystem : SharedRMCAdminSystem
+public sealed partial class RMCAdminSystem : SharedRMCAdminSystem
 {
     [Dependency] private AdminSystem _admin = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;

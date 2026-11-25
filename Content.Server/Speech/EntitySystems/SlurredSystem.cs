@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed class SlurredSystem : SharedSlurredSystem
+public sealed partial class SlurredSystem : SharedSlurredSystem
 {
     [Dependency] private StatusEffectsSystem _statusEffectsSystem = default!;
     [Dependency] private IRobustRandom _random = default!;

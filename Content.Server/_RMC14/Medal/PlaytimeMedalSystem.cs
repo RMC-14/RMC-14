@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Medal;
 
-public sealed class PlaytimeMedalSystem : EntitySystem
+public sealed partial class PlaytimeMedalSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private HandsSystem _hands = default!;

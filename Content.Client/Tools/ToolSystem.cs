@@ -7,7 +7,7 @@ using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
 
 namespace Content.Client.Tools
 {
-    public sealed class ToolSystem : SharedToolSystem
+    public sealed partial class ToolSystem : SharedToolSystem
     {
         [Dependency] private SpriteSystem _sprite = default!;
 

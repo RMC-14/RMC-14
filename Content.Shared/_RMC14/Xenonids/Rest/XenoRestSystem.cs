@@ -27,7 +27,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rest;
 
-public sealed class XenoRestSystem : EntitySystem
+public sealed partial class XenoRestSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

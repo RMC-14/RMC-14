@@ -20,7 +20,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Content.Client._RMC14.Marines.ControlComputer;
 
 [UsedImplicitly]
-public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private IClipboardManager _clipboard = default!;
     [Dependency] private IResourceCache _resourceCache = default!;

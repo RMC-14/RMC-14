@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.CryoCell;
 
-public abstract class SharedCryoCellSystem : EntitySystem
+public abstract partial class SharedCryoCellSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

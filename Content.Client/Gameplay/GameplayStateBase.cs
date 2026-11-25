@@ -29,7 +29,7 @@ namespace Content.Client.Gameplay
     // Ok actually it's fine.
     // Instantiated dynamically through the StateManager, Dependencies will be resolved.
     [Virtual]
-    public class GameplayStateBase : State, IEntityEventSubscriber
+    public partial class GameplayStateBase : State, IEntityEventSubscriber
     {
         [Dependency] private IEyeManager _eyeManager = default!;
         [Dependency] private IInputManager _inputManager = default!;

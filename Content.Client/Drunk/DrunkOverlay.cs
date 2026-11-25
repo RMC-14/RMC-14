@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Drunk;
 
-public sealed class DrunkOverlay : Overlay
+public sealed partial class DrunkOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Drunk";
 

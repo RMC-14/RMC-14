@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Stealth;
 
-public sealed class RMCPassiveStealthSystem : EntitySystem
+public sealed partial class RMCPassiveStealthSystem : EntitySystem
 {
     [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private INetManager _net = default!;

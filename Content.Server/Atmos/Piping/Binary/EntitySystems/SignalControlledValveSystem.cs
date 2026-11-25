@@ -5,7 +5,7 @@ using Content.Shared.DeviceLinking.Events;
 
 namespace Content.Server.Atmos.Piping.Binary.EntitySystems;
 
-public sealed class SignalControlledValveSystem : EntitySystem
+public sealed partial class SignalControlledValveSystem : EntitySystem
 {
     [Dependency] private DeviceLinkSystem _signal = default!;
     [Dependency] private GasValveSystem _valve = default!;

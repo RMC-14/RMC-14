@@ -3,7 +3,7 @@ using Content.Shared.StoryGen;
 
 namespace Content.Server.Paper;
 
-public sealed class PaperRandomStorySystem : EntitySystem
+public sealed partial class PaperRandomStorySystem : EntitySystem
 {
     [Dependency] private StoryGeneratorSystem _storyGen = default!;
     [Dependency] private PaperSystem _paper = default!;

@@ -8,7 +8,7 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class InactivityTimeRestartRuleSystem : GameRuleSystem<InactivityRuleComponent>
+public sealed partial class InactivityTimeRestartRuleSystem : GameRuleSystem<InactivityRuleComponent>
 {
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;

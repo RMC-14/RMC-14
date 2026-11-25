@@ -4,7 +4,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-public abstract class SharedTacticalMapSystem : EntitySystem
+public abstract partial class SharedTacticalMapSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;

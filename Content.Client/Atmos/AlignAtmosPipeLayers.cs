@@ -23,7 +23,7 @@ namespace Content.Client.Atmos;
 /// <remarks>
 /// This placement mode is not on the engine because it is content specific.
 /// </remarks>
-public sealed class AlignAtmosPipeLayers : SnapgridCenter
+public sealed partial class AlignAtmosPipeLayers : SnapgridCenter
 {
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private IPrototypeManager _protoManager = default!;

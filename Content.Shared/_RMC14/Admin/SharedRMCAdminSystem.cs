@@ -5,7 +5,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Admin;
 
-public abstract class SharedRMCAdminSystem : EntitySystem
+public abstract partial class SharedRMCAdminSystem : EntitySystem
 {
     [Dependency] private ISharedAdminManager _admin = default!;
 

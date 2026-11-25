@@ -11,7 +11,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Actions;
 
-public abstract class SharedRMCActionsSystem : EntitySystem
+public abstract partial class SharedRMCActionsSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;

@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.PhysicsSystem.Controllers;
 
-public sealed class MoverController : SharedMoverController
+public sealed partial class MoverController : SharedMoverController
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPlayerManager _playerManager = default!;

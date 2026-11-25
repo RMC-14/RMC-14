@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Sniper.Focused;
 
-public sealed class RMCFocusingSystem : EntitySystem
+public sealed partial class RMCFocusingSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private IPlayerManager _player = default!;

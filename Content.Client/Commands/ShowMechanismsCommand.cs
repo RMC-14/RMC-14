@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 
 namespace Content.Client.Commands;
 
-public sealed class ShowMechanismsCommand : LocalizedEntityCommands
+public sealed partial class ShowMechanismsCommand : LocalizedEntityCommands
 {
     [Dependency] private SpriteSystem _spriteSystem = default!;
 

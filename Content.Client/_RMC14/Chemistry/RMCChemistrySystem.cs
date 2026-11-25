@@ -4,7 +4,7 @@ using Robust.Client.Player;
 
 namespace Content.Client._RMC14.Chemistry;
 
-public sealed class RMCChemistryUISystem : SharedRMCChemistrySystem
+public sealed partial class RMCChemistryUISystem : SharedRMCChemistrySystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;

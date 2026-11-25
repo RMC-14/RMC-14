@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Construction.Commands;
 
 [AdminCommand(AdminFlags.Mapping)]
-public sealed class TileWallsCommand : IConsoleCommand
+public sealed partial class TileWallsCommand : IConsoleCommand
 {
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private ITileDefinitionManager _tileDefManager = default!;

@@ -10,7 +10,7 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Provides API for other components and handles setting the title.
 /// </summary>
-public sealed class TargetObjectiveSystem : EntitySystem
+public sealed partial class TargetObjectiveSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedJobSystem _job = default!;

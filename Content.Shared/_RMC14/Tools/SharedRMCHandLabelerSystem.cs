@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Tools;
 
-public abstract class SharedRMCHandLabelerSystem : EntitySystem
+public abstract partial class SharedRMCHandLabelerSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private INetManager _net = default!;

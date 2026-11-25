@@ -16,7 +16,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Word;
 
-public sealed class XenoWordQueenSystem : EntitySystem
+public sealed partial class XenoWordQueenSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedCMChatSystem _cmChat = default!;

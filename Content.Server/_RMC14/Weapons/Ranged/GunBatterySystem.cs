@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._RMC14.Weapons.Ranged;
 
-public sealed class GunBatterySystem : EntitySystem
+public sealed partial class GunBatterySystem : EntitySystem
 {
     [Dependency] private BatterySystem _battery = default!;
     [Dependency] private SharedContainerSystem _container = default!;

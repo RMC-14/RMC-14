@@ -11,7 +11,7 @@ namespace Content.Client.Animations;
 /// <summary>
 ///     System that handles animating an entity that a player has picked up.
 /// </summary>
-public sealed class EntityPickupAnimationSystem : EntitySystem
+public sealed partial class EntityPickupAnimationSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _animations = default!;
     [Dependency] private MetaDataSystem _metaData = default!;

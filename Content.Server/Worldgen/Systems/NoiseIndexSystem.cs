@@ -9,7 +9,7 @@ namespace Content.Server.Worldgen.Systems;
 /// <summary>
 ///     This handles the noise index.
 /// </summary>
-public sealed class NoiseIndexSystem : EntitySystem
+public sealed partial class NoiseIndexSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;

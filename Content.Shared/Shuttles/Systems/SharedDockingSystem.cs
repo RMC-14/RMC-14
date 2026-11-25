@@ -3,7 +3,7 @@ using Robust.Shared.Map;
 
 namespace Content.Shared.Shuttles.Systems;
 
-public abstract class SharedDockingSystem : EntitySystem
+public abstract partial class SharedDockingSystem : EntitySystem
 {
     [Dependency] protected SharedTransformSystem XformSystem = default!;
 

@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Spreader;
 
-public sealed class KudzuSystem : EntitySystem
+public sealed partial class KudzuSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _robustRandom = default!;

@@ -8,7 +8,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class SetOutfitCommand : LocalizedEntityCommands
+    public sealed partial class SetOutfitCommand : LocalizedEntityCommands
     {
         [Dependency] private EuiManager _euiManager = default!;
         [Dependency] private OutfitSystem _outfitSystem = default!;

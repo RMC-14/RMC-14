@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace Content.Client._RMC14.Xenonids.Dodge;
 
-public sealed class XenoDodgeSystem : SharedXenoDodgeSystem
+public sealed partial class XenoDodgeSystem : SharedXenoDodgeSystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private IRobustRandom _random = default!;

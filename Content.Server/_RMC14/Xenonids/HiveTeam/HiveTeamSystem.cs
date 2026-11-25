@@ -22,7 +22,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Xenonids.HiveTeam;
 
-public sealed class HiveTeamSystem : EntitySystem
+public sealed partial class HiveTeamSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;

@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Content.Server.Silicons.Laws;
 
-public sealed class IonStormSystem : EntitySystem
+public sealed partial class IonStormSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

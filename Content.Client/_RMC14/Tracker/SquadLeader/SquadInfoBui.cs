@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Tracker.SquadLeader;
 
 [UsedImplicitly]
-public sealed class SquadInfoBui : BoundUserInterface
+public sealed partial class SquadInfoBui : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

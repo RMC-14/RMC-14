@@ -12,7 +12,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Intel.Tech;
 
-public sealed class ServerTechSystem : EntitySystem
+public sealed partial class ServerTechSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IPrototypeManager _proto = default!;

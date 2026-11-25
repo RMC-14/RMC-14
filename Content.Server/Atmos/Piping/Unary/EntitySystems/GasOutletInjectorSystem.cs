@@ -11,7 +11,7 @@ using JetBrains.Annotations;
 namespace Content.Server.Atmos.Piping.Unary.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class GasOutletInjectorSystem : EntitySystem
+    public sealed partial class GasOutletInjectorSystem : EntitySystem
     {
         [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private SharedAppearanceSystem _appearance = default!;

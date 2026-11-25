@@ -6,7 +6,7 @@ using Robust.Server.GameObjects;
 namespace Content.Server.DeviceNetwork.Systems;
 
 /// <inheritdoc/>
-public sealed class DeviceNetworkJammerSystem : SharedDeviceNetworkJammerSystem
+public sealed partial class DeviceNetworkJammerSystem : SharedDeviceNetworkJammerSystem
 {
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private SharedDeviceNetworkJammerSystem _jammer = default!;

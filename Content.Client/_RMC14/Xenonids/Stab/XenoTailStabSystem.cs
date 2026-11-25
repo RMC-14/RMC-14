@@ -12,7 +12,7 @@ using static Robust.Client.Animations.AnimationTrackProperty;
 
 namespace Content.Client._RMC14.Xenonids.Stab;
 
-public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
+public sealed partial class XenoTailStabSystem : SharedXenoTailStabSystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
     [Dependency] private IConsoleHost _console = default!;

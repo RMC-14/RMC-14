@@ -24,7 +24,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.MotionDetector;
 
-public sealed class MotionDetectorSystem : EntitySystem
+public sealed partial class MotionDetectorSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

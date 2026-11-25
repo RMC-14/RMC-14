@@ -3,7 +3,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Power.APC;
 
-public sealed class ApcVisualizerSystem : VisualizerSystem<ApcVisualsComponent>
+public sealed partial class ApcVisualizerSystem : VisualizerSystem<ApcVisualsComponent>
 {
     [Dependency] private SharedPointLightSystem _lights = default!;
 

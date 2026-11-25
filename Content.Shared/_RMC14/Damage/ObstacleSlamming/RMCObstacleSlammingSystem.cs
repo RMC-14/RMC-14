@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Damage.ObstacleSlamming;
 
-public sealed class RMCObstacleSlammingSystem : EntitySystem
+public sealed partial class RMCObstacleSlammingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;

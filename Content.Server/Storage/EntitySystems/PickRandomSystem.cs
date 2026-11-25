@@ -11,7 +11,7 @@ using Robust.Shared.Random;
 namespace Content.Server.Storage.EntitySystems;
 
 // TODO: move this to shared for verb prediction if/when storage is in shared
-public sealed class PickRandomSystem : EntitySystem
+public sealed partial class PickRandomSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

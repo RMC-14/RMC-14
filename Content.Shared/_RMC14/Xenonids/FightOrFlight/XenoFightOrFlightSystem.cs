@@ -11,7 +11,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.FightOrFlight;
 
-public sealed class XenoFightOrFlightSystem : EntitySystem
+public sealed partial class XenoFightOrFlightSystem : EntitySystem
 {
     [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private INetManager _net = default!;

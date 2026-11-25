@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Radiation.Overlays
 {
-    public sealed class RadiationPulseOverlay : Overlay
+    public sealed partial class RadiationPulseOverlay : Overlay
     {
         private static readonly ProtoId<ShaderPrototype> RadiationShader = "Radiation";
 

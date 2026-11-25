@@ -17,7 +17,7 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Shocks clicked mobs using battery charge.
 /// </summary>
-public sealed class StunProviderSystem : SharedStunProviderSystem
+public sealed partial class StunProviderSystem : SharedStunProviderSystem
 {
     [Dependency] private BatterySystem _battery = default!;
     [Dependency] private DamageableSystem _damageable = default!;

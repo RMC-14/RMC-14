@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Keycard;
 
-public sealed class KeycardDeviceSystem : EntitySystem
+public sealed partial class KeycardDeviceSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private RMCAlertLevelSystem _alertLevel = default!;

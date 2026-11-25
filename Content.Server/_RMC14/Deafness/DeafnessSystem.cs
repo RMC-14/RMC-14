@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Deafness;
 
-public sealed class DeafnessSystem : SharedDeafnessSystem
+public sealed partial class DeafnessSystem : SharedDeafnessSystem
 {
     [Dependency] private IRobustRandom _random = default!;
 

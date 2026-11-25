@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Clothing;
 
-public sealed class RMCClothingSystem : EntitySystem
+public sealed partial class RMCClothingSystem : EntitySystem
 {
     [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

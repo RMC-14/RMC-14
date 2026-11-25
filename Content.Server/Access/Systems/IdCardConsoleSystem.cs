@@ -23,7 +23,7 @@ using Robust.Shared.Random;
 namespace Content.Server.Access.Systems;
 
 [UsedImplicitly]
-public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
+public sealed partial class IdCardConsoleSystem : SharedIdCardConsoleSystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private StationRecordsSystem _record = default!;

@@ -16,7 +16,7 @@ namespace Content.Shared.SubFloor
     ///     Entity system backing <see cref="SubFloorHideComponent"/>.
     /// </summary>
     [UsedImplicitly]
-    public abstract class SharedSubFloorHideSystem : EntitySystem
+    public abstract partial class SharedSubFloorHideSystem : EntitySystem
     {
         [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
         [Dependency] private SharedAmbientSoundSystem _ambientSoundSystem = default!;

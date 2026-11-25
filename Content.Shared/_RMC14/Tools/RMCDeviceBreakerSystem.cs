@@ -8,7 +8,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Tools;
 
-public sealed class RMCDeviceBreakerSystem : EntitySystem
+public sealed partial class RMCDeviceBreakerSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doafter = default!;
     [Dependency] private SharedRMCPowerSystem _power = default!;

@@ -15,7 +15,7 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Client._RMC14.Xenonids.Pheromones;
 
-public sealed class XenoPheromonesOverlay : Overlay
+public sealed partial class XenoPheromonesOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager _players = default!;

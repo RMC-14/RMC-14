@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Research.Disk
 {
-    public sealed class ResearchDiskSystem : EntitySystem
+    public sealed partial class ResearchDiskSystem : EntitySystem
     {
         [Dependency] private IPrototypeManager _prototype = default!;
         [Dependency] private PopupSystem _popupSystem = default!;

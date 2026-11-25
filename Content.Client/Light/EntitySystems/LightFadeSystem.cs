@@ -5,7 +5,7 @@ using Robust.Shared.Animations;
 
 namespace Content.Client.Light.EntitySystems;
 
-public sealed class LightFadeSystem : EntitySystem
+public sealed partial class LightFadeSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _player = default!;
 

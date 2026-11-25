@@ -4,7 +4,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.PlayingCards;
 
-public sealed class PlayingCardSystem : SharedPlayingCardSystem
+public sealed partial class PlayingCardSystem : SharedPlayingCardSystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
 

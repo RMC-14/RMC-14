@@ -14,7 +14,7 @@ using Robust.Shared.Physics.Systems;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.AdminGhost)] //RMC14
-    public sealed class WarpCommand : IConsoleCommand
+    public sealed partial class WarpCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

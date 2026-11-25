@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 namespace Content.Server.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.Round)]
-    sealed class EndRoundCommand : IConsoleCommand
+    sealed partial class EndRoundCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _e = default!;
         [Dependency] private IConfigurationManager _cfg = default!;

@@ -42,7 +42,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
-public sealed class SquadSystem : EntitySystem
+public sealed partial class SquadSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

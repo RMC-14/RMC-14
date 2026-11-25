@@ -22,7 +22,7 @@ using Content.Shared.NodeContainer;
 
 namespace Content.Server.Atmos.Consoles;
 
-public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleSystem
+public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleSystem
 {
     [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private SharedMapSystem _sharedMapSystem = default!;

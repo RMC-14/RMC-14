@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.PDT;
 
-public sealed class PDTSystem : EntitySystem
+public sealed partial class PDTSystem : EntitySystem
 {
     private const float LowBatteryFraction = 0.5f;
 

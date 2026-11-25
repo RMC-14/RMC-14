@@ -13,7 +13,7 @@ namespace Content.Server.CartridgeLoader.Cartridges;
 /// <summary>
 ///     Server-side class implementing the core UI logic of NanoTask
 /// </summary>
-public sealed class NanoTaskCartridgeSystem : SharedNanoTaskCartridgeSystem
+public sealed partial class NanoTaskCartridgeSystem : SharedNanoTaskCartridgeSystem
 {
     [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
     [Dependency] private IGameTiming _timing = default!;

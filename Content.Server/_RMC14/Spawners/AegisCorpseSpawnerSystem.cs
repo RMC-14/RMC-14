@@ -11,7 +11,7 @@ namespace Content.Server._RMC14.Spawners;
 /// <summary>
 /// Dedicated system for managing AEGIS corpse spawner activation and persistence
 /// </summary>
-public sealed class AegisCorpseSpawnerSystem : EntitySystem
+public sealed partial class AegisCorpseSpawnerSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IRobustRandom _random = default!;

@@ -13,7 +13,7 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Shared._RMC14.Wheelchair;
 
-public sealed class WheelchairSystem : EntitySystem
+public sealed partial class WheelchairSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

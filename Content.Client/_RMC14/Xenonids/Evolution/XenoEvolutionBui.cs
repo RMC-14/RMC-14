@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Xenonids.Evolution;
 
 [UsedImplicitly]
-public sealed class XenoEvolutionBui : BoundUserInterface
+public sealed partial class XenoEvolutionBui : BoundUserInterface
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

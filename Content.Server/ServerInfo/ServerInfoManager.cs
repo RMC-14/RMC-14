@@ -8,7 +8,7 @@ namespace Content.Server.ServerInfo;
 /// <summary>
 /// Adds additional data like info links to the server info endpoint
 /// </summary>
-public sealed class ServerInfoManager
+public sealed partial class ServerInfoManager
 {
     private static readonly (CVarDef<string> cVar, string icon, string name)[] Vars =
     {

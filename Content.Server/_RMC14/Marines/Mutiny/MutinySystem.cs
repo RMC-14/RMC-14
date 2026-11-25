@@ -16,7 +16,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Marines.Mutiny;
 
-public sealed class MutinySystem : SharedMutinySystem
+public sealed partial class MutinySystem : SharedMutinySystem
 {
     [Dependency] private IAdminManager _adminManager = default!;
     [Dependency] private IChatManager _chatManager = default!;

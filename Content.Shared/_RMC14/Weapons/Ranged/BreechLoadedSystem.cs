@@ -12,7 +12,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class BreechLoadedSystem : EntitySystem
+public sealed partial class BreechLoadedSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;

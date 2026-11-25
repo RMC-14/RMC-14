@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Shields;
 
-public sealed class KingShieldSystem : EntitySystem
+public sealed partial class KingShieldSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

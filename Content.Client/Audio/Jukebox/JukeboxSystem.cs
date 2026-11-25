@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Audio.Jukebox;
 
 
-public sealed class JukeboxSystem : SharedJukeboxSystem
+public sealed partial class JukeboxSystem : SharedJukeboxSystem
 {
     [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private AnimationPlayerSystem _animationPlayer = default!;

@@ -8,7 +8,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Atmos.Commands
 {
     [AdminCommand(AdminFlags.Debug)]
-    public sealed class SetTemperatureCommand : IConsoleCommand
+    public sealed partial class SetTemperatureCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entities = default!;
 

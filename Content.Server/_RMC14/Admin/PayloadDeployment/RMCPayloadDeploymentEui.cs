@@ -24,7 +24,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Admin.PayloadDeployment;
 
-public sealed class RMCPayloadDeploymentEui : BaseEui
+public sealed partial class RMCPayloadDeploymentEui : BaseEui
 {
     private const int DefaultNearbyRadius = 7;
     private const int MaxNearbyRadius = 50;

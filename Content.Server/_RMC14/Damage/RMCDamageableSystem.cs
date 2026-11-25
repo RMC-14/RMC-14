@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Damage;
 
-public sealed class RMCDamageableSystem : SharedRMCDamageableSystem
+public sealed partial class RMCDamageableSystem : SharedRMCDamageableSystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private DestructibleSystem _destructible = default!;

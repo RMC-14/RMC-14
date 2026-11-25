@@ -14,7 +14,7 @@ using Content.Shared.Speech.Muting;
 
 namespace Content.Server.Abilities.Mime
 {
-    public sealed class MimePowersSystem : EntitySystem
+    public sealed partial class MimePowersSystem : EntitySystem
     {
         [Dependency] private PopupSystem _popupSystem = default!;
         [Dependency] private SharedActionsSystem _actionsSystem = default!;

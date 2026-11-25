@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Aura;
 
-public sealed class AuraSystem : SharedAuraSystem
+public sealed partial class AuraSystem : SharedAuraSystem
 {
     private static readonly ProtoId<ShaderPrototype> AuraShader = "RMCAuraOutline";
 

@@ -33,7 +33,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Pulling;
 
-public sealed class RMCPullingSystem : EntitySystem
+public sealed partial class RMCPullingSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

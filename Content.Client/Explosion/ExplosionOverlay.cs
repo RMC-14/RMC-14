@@ -11,7 +11,7 @@ using Robust.Shared.Random;
 namespace Content.Client.Explosion;
 
 [UsedImplicitly]
-public sealed class ExplosionOverlay : Overlay
+public sealed partial class ExplosionOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
 

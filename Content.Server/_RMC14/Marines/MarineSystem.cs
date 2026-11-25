@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Marines;
 
-public sealed class MarineSystem : SharedMarineSystem
+public sealed partial class MarineSystem : SharedMarineSystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IdCardSystem _idCard = default!;

@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Prediction;
 
-public sealed class GunPredictionSystem : SharedGunPredictionSystem
+public sealed partial class GunPredictionSystem : SharedGunPredictionSystem
 {
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private IPlayerManager _player = default!;

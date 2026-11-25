@@ -12,7 +12,7 @@ using Content.Shared.Popups;
 
 namespace Content.Shared._RMC14.Access;
 
-public sealed class IdCardSystem : EntitySystem
+public sealed partial class IdCardSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

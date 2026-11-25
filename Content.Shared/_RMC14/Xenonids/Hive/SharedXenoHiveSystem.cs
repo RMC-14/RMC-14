@@ -31,7 +31,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
-public abstract class SharedXenoHiveSystem : EntitySystem
+public abstract partial class SharedXenoHiveSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedBroadphaseSystem _broadphase = default!;

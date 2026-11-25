@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids;
 
-public sealed class XenoRoleSystem : EntitySystem
+public sealed partial class XenoRoleSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private GameTicker _gameTicker = default!;

@@ -11,7 +11,7 @@ using Content.Server.Power.EntitySystems;
 
 namespace Content.Server.PowerSink
 {
-    public sealed class PowerSinkSystem : EntitySystem
+    public sealed partial class PowerSinkSystem : EntitySystem
     {
         /// <summary>
         /// Percentage of battery full to trigger the announcement warning at.

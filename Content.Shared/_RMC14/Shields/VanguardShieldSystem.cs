@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Shields;
 
-public sealed class VanguardShieldSystem : EntitySystem
+public sealed partial class VanguardShieldSystem : EntitySystem
 {
     [Dependency] private XenoShieldSystem _shield = default!;
     [Dependency] private INetManager _net = default!;

@@ -8,7 +8,7 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Handles <see cref="CodeConditionComponent"/> progress and provides API for systems to use.
 /// </summary>
-public sealed class CodeConditionSystem : EntitySystem
+public sealed partial class CodeConditionSystem : EntitySystem
 {
     [Dependency] private SharedMindSystem _mind = default!;
 

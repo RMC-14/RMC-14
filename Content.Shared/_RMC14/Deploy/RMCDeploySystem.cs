@@ -27,7 +27,7 @@ using Content.Shared.Ghost;
 
 namespace Content.Shared._RMC14.Deploy;
 
-public sealed class RMCDeploySystem : EntitySystem
+public sealed partial class RMCDeploySystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Singularity.EntitySystems;
 
-public sealed class SingularityGeneratorSystem : SharedSingularityGeneratorSystem
+public sealed partial class SingularityGeneratorSystem : SharedSingularityGeneratorSystem
 {
     #region Dependencies
     [Dependency] private IViewVariablesManager _vvm = default!;

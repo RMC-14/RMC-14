@@ -15,7 +15,7 @@ namespace Content.Client.Playtime;
 ///     This notably excludes scenarios like the lobby.
 /// </para>
 /// </remarks>
-public sealed class ClientsidePlaytimeTrackingManager
+public sealed partial class ClientsidePlaytimeTrackingManager
 {
     [Dependency] private IClientNetManager _clientNetManager = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;

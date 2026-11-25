@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Sound;
 
-public sealed class CMSoundSystem : EntitySystem
+public sealed partial class CMSoundSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedEmitSoundSystem _emitSound = default!;

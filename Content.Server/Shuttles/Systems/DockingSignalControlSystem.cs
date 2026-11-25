@@ -4,7 +4,7 @@ using Content.Server.Shuttles.Events;
 
 namespace Content.Server.Shuttles.Systems;
 
-public sealed class DockingSignalControlSystem : EntitySystem
+public sealed partial class DockingSignalControlSystem : EntitySystem
 {
     [Dependency] private DeviceLinkSystem _deviceLinkSystem = default!;
 

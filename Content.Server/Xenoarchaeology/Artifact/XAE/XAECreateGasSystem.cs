@@ -12,7 +12,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact effect that creates certain atmospheric gas on artifact tile / adjacent tiles.
 /// </summary>
-public sealed class XAECreateGasSystem : BaseXAESystem<XAECreateGasComponent>
+public sealed partial class XAECreateGasSystem : BaseXAESystem<XAECreateGasComponent>
 {
     [Dependency] private AtmosphereSystem _atmosphere = default!;
     [Dependency] private TransformSystem _transform = default!;

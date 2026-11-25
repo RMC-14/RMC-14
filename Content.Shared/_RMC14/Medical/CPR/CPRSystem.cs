@@ -25,7 +25,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.CPR;
 
-public sealed class CPRSystem : EntitySystem
+public sealed partial class CPRSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private DamageableSystem _damageable = default!;

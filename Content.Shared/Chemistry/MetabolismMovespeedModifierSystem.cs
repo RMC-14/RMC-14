@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared.Chemistry
 {
     // TODO CONVERT THIS TO A STATUS EFFECT!!!!!!!!!!!!!!!!!!!!!!!!
-    public sealed class MetabolismMovespeedModifierSystem : EntitySystem
+    public sealed partial class MetabolismMovespeedModifierSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
         [Dependency] private MovementSpeedModifierSystem _movespeed = default!;

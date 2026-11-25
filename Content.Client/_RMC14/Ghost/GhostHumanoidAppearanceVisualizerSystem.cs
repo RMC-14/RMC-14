@@ -17,7 +17,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Client._RMC14.Ghost;
 
-public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
+public sealed partial class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
 {
     [Dependency] private DisplacementMapSystem _displacement = default!;
     [Dependency] private HumanoidAppearanceSystem _humanoid = default!;

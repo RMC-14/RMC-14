@@ -7,7 +7,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Client.Light;
 
-public sealed class TileEmissionOverlay : Overlay
+public sealed partial class TileEmissionOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 

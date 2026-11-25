@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Tools.Systems;
 
-public sealed class ToolRefinablSystem : EntitySystem
+public sealed partial class ToolRefinablSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IRobustRandom _random = default!;

@@ -14,7 +14,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Crest;
 
-public sealed class XenoCrestSystem : EntitySystem
+public sealed partial class XenoCrestSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private AlertsSystem _alerts = default!;

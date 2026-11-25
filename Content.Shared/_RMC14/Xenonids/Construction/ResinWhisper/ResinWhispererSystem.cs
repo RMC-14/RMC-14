@@ -11,7 +11,7 @@ using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 
-public sealed class ResinWhispererSystem : EntitySystem
+public sealed partial class ResinWhispererSystem : EntitySystem
 {
     [Dependency] private SharedDoorSystem _door = default!;
     [Dependency] private ExamineSystemShared _examineSystem = default!;

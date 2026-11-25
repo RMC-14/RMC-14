@@ -4,7 +4,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Client.SubFloor;
 
-public sealed class TrayScanRevealSystem : EntitySystem
+public sealed partial class TrayScanRevealSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMapSystem _map = default!;

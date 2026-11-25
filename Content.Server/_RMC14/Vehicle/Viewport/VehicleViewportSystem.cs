@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Vehicle.Viewport;
 
-public sealed class VehicleViewportSystem : EntitySystem
+public sealed partial class VehicleViewportSystem : EntitySystem
 {
     private static readonly EntProtoId VehiclePeekAnchor = "VehiclePeekAnchor";
 

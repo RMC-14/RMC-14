@@ -19,7 +19,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.HiveLeader;
 
-public sealed class HiveLeaderSystem : EntitySystem
+public sealed partial class HiveLeaderSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContainerSystem _container = default!;

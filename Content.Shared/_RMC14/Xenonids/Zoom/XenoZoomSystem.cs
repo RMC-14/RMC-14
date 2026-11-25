@@ -10,7 +10,7 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Zoom;
 
-public sealed class XenoZoomSystem : EntitySystem
+public sealed partial class XenoZoomSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContentEyeSystem _contentEye = default!;

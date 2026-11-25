@@ -22,7 +22,7 @@ namespace Content.Client.Construction.UI
     /// model. This is where the bulk of UI work is done, either calling functions in the model to change state, or collecting
     /// data out of the model to *present* to the screen though the UI framework.
     /// </summary>
-    internal sealed class ConstructionMenuPresenter : IDisposable
+    internal sealed partial class ConstructionMenuPresenter : IDisposable
     {
         [Dependency] private EntityManager _entManager = default!;
         [Dependency] private IEntitySystemManager _systemManager = default!;

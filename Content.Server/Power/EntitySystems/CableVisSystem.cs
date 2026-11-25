@@ -9,7 +9,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Power.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class CableVisSystem : EntitySystem
+    public sealed partial class CableVisSystem : EntitySystem
     {
         [Dependency] private SharedAppearanceSystem _appearance = default!;
         [Dependency] private NodeContainerSystem _nodeContainer = default!;

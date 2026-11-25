@@ -18,7 +18,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Rules;
 
-public sealed class RMCPlanetSystem : EntitySystem
+public sealed partial class RMCPlanetSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IConfigurationManager _config = default!;

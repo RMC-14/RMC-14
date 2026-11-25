@@ -9,7 +9,7 @@ using Robust.Shared.Random;
 
 namespace Content.Client.CriminalRecords;
 
-public sealed class CriminalRecordsConsoleBoundUserInterface : BoundUserInterface
+public sealed partial class CriminalRecordsConsoleBoundUserInterface : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;

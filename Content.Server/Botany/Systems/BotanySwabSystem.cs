@@ -7,7 +7,7 @@ using Content.Shared.Swab;
 
 namespace Content.Server.Botany.Systems;
 
-public sealed class BotanySwabSystem : EntitySystem
+public sealed partial class BotanySwabSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private PopupSystem _popupSystem = default!;

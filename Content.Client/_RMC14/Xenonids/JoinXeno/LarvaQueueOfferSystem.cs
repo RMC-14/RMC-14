@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.Xenonids.JoinXeno;
 
 [UsedImplicitly]
-public sealed class LarvaQueueOfferSystem : EntitySystem
+public sealed partial class LarvaQueueOfferSystem : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IGameTiming _timing = default!;

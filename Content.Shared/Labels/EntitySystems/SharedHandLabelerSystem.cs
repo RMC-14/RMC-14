@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Labels.EntitySystems;
 
-public abstract class SharedHandLabelerSystem : EntitySystem
+public abstract partial class SharedHandLabelerSystem : EntitySystem
 {
     [Dependency] protected SharedUserInterfaceSystem UserInterfaceSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;

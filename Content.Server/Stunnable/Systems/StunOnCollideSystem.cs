@@ -9,7 +9,7 @@ using Robust.Shared.Physics.Events;
 namespace Content.Server.Stunnable
 {
     [UsedImplicitly]
-    internal sealed class StunOnCollideSystem : EntitySystem
+    internal sealed partial class StunOnCollideSystem : EntitySystem
     {
         [Dependency] private StunSystem _stunSystem = default!;
 

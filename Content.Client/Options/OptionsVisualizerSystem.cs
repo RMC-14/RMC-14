@@ -8,7 +8,7 @@ namespace Content.Client.Options;
 /// <summary>
 /// Implements <see cref="OptionsVisualizerComponent"/>.
 /// </summary>
-public sealed class OptionsVisualizerSystem : EntitySystem
+public sealed partial class OptionsVisualizerSystem : EntitySystem
 {
     private static readonly (OptionVisualizerOptions, CVarDef<bool>)[] OptionVars =
     {

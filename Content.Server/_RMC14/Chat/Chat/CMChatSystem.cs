@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Chat.Chat;
 
-public sealed class CMChatSystem : SharedCMChatSystem
+public sealed partial class CMChatSystem : SharedCMChatSystem
 {
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private InventorySystem _inventory = default!;

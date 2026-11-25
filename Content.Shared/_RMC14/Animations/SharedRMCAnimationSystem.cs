@@ -4,7 +4,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Animations;
 
-public abstract class SharedRMCAnimationSystem : EntitySystem
+public abstract partial class SharedRMCAnimationSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
 

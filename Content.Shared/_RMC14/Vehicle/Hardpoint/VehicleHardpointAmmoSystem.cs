@@ -14,7 +14,7 @@ public readonly record struct VehicleAmmoSlotState(
 
 public readonly record struct VehicleAmmoChangedEvent(EntityUid AmmoProvider);
 
-public sealed class VehicleHardpointAmmoSystem : EntitySystem
+public sealed partial class VehicleHardpointAmmoSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
 

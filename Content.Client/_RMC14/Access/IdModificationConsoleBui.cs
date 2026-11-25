@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Access;
 
-public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableBui
+public sealed partial class IdModificationConsoleBui : BoundUserInterface, IRefreshableBui
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     private readonly ContainerSystem _container;

@@ -35,7 +35,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server._RMC14.UniversalRecorder;
 
-public sealed class UniversalRecorderSystem : EntitySystem
+public sealed partial class UniversalRecorderSystem : EntitySystem
 {
     private static readonly AudioParams PlaybackHissAudioParams = AudioParams.Default
         .WithVolume(-8f)

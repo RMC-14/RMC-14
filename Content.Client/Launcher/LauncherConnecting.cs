@@ -10,7 +10,7 @@ using Robust.Shared.Random;
 
 namespace Content.Client.Launcher
 {
-    public sealed class LauncherConnecting : Robust.Client.State.State
+    public sealed partial class LauncherConnecting : Robust.Client.State.State
     {
         [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private IClientNetManager _clientNetManager = default!;

@@ -19,7 +19,7 @@ using Content.Shared.Clumsy;
 
 namespace Content.Server.Cluwne;
 
-public sealed class CluwneSystem : EntitySystem
+public sealed partial class CluwneSystem : EntitySystem
 {
     private static readonly ProtoId<DamageGroupPrototype> GeneticDamageGroup = "Genetic";
 

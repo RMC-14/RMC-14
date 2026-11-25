@@ -39,7 +39,7 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.Dropship;
 
-public abstract class SharedDropshipSystem : EntitySystem
+public abstract partial class SharedDropshipSystem : EntitySystem
 {
     [Dependency] protected SharedAudioSystem Audio = default!;
 

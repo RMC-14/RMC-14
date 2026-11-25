@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-public sealed class AreaInfoSystem : EntitySystem
+public sealed partial class AreaInfoSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private InventorySystem _inv = default!;

@@ -7,7 +7,7 @@ using Robust.Shared.Map;
 
 namespace Content.Shared.Verbs
 {
-    public abstract class SharedVerbSystem : EntitySystem
+    public abstract partial class SharedVerbSystem : EntitySystem
     {
         [Dependency] private SharedInteractionSystem _interactionSystem = default!;
         [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;

@@ -112,7 +112,7 @@ namespace Content.Client.Changelog
     }
 
     [UsedImplicitly, AnyCommand]
-    public sealed class ChangelogCommand : LocalizedCommands
+    public sealed partial class ChangelogCommand : LocalizedCommands
     {
         [Dependency] private IUserInterfaceManager _uiManager = default!;
 

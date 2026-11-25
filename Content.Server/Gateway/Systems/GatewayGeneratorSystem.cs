@@ -21,7 +21,7 @@ namespace Content.Server.Gateway.Systems;
 /// <summary>
 /// Generates gateway destinations regularly and indefinitely that can be chosen from.
 /// </summary>
-public sealed class GatewayGeneratorSystem : EntitySystem
+public sealed partial class GatewayGeneratorSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] private IGameTiming _timing = default!;

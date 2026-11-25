@@ -10,7 +10,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Evacuation;
 
-public sealed class EvacuationSystem : SharedEvacuationSystem
+public sealed partial class EvacuationSystem : SharedEvacuationSystem
 {
     [Dependency] private SharedCrashLandSystem _crashLand = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;

@@ -3,7 +3,7 @@ using Content.Shared._RMC14.Marines.Skills.Pamphlets;
 
 namespace Content.Server._RMC14.Language.Systems;
 
-public sealed class LanguagePamphletSystem : EntitySystem
+public sealed partial class LanguagePamphletSystem : EntitySystem
 {
     [Dependency] private LanguageSystem _language = default!;
     [Dependency] private LanguageLearningSystem _learning = default!;

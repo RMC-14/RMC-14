@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared._RMC14.Camera;
 
 // we would be using the upstream system for cameras IF IT WAS NOT ABOMINABLE DOGSHIT
-public abstract class SharedRMCCameraSystem : EntitySystem
+public abstract partial class SharedRMCCameraSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private INetManager _net = default!;

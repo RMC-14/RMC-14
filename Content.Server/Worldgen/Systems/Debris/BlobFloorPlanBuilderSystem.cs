@@ -10,7 +10,7 @@ namespace Content.Server.Worldgen.Systems.Debris;
 /// <summary>
 ///     This handles building the floor plans for "blobby" debris.
 /// </summary>
-public sealed class BlobFloorPlanBuilderSystem : BaseWorldSystem
+public sealed partial class BlobFloorPlanBuilderSystem : BaseWorldSystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ITileDefinitionManager _tileDefinition = default!;

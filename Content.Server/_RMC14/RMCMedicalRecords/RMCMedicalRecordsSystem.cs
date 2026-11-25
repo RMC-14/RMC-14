@@ -25,7 +25,7 @@ namespace Content.Server._RMC14.RMCMedicalRecords;
 ///     Creates <see cref="RMCMedicalRecord"/> entries in the station record set when a general record is created.
 ///     Also manages entity-bound scan data on <see cref="RMCLastBodyScanResultComponent"/>.
 /// </summary>
-public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
+public sealed partial class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 {
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private SharedRMCBloodstreamSystem _rmcBloodstream = default!;

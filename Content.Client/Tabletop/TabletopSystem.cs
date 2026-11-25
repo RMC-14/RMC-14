@@ -20,7 +20,7 @@ using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 namespace Content.Client.Tabletop
 {
     [UsedImplicitly]
-    public sealed class TabletopSystem : SharedTabletopSystem
+    public sealed partial class TabletopSystem : SharedTabletopSystem
     {
         [Dependency] private IInputManager _inputManager = default!;
         [Dependency] private IUserInterfaceManager _uiManger = default!;

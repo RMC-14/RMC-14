@@ -7,7 +7,7 @@ using Content.Shared.Tools.Components; // RMC14
 
 namespace Content.Shared.Placeable;
 
-public sealed class PlaceableSurfaceSystem : EntitySystem
+public sealed partial class PlaceableSurfaceSystem : EntitySystem
 {
     [Dependency] private SharedHandsSystem _handsSystem = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;

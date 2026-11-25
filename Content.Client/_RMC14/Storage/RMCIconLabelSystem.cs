@@ -8,7 +8,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.Storage;
 
-public sealed class RMCIconLabelSystem : SharedRMCIconLabelSystem
+public sealed partial class RMCIconLabelSystem : SharedRMCIconLabelSystem
 {
     [Dependency] private IResourceCache _cache = default!;
     [Dependency] private IConfigurationManager _config = default!;

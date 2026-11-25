@@ -41,7 +41,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.TacticalMap;
 
-public sealed class TacticalMapSystem : SharedTacticalMapSystem
+public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;

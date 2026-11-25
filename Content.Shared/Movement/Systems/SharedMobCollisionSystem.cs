@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Movement.Systems;
 
-public abstract class SharedMobCollisionSystem : EntitySystem
+public abstract partial class SharedMobCollisionSystem : EntitySystem
 {
     [Dependency] protected IConfigurationManager CfgManager = default!;
     [Dependency] private IRobustRandom _random = default!;

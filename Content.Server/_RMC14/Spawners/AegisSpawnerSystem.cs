@@ -9,7 +9,7 @@ namespace Content.Server._RMC14.Spawners;
 /// <summary>
 /// Dedicated system for managing AEGIS spawner activation and persistence
 /// </summary>
-public sealed class AegisSpawnerSystem : EntitySystem
+public sealed partial class AegisSpawnerSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IRobustRandom _random = default!;

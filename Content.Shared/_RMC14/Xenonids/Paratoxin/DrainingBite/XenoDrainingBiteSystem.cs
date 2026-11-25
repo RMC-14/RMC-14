@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Paratoxin.DrainingBite;
 
-public sealed class XenoDrainingBiteSystem : EntitySystem
+public sealed partial class XenoDrainingBiteSystem : EntitySystem
 {
     [Dependency] private ParatoxinSystem _paratoxin = default!;
     [Dependency] private SharedRMCBloodstreamSystem _rmcblood = default!;

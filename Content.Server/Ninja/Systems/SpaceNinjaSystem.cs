@@ -27,7 +27,7 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Main ninja system that handles ninja setup, provides helper methods for the rest of the code to use.
 /// </summary>
-public sealed class SpaceNinjaSystem : SharedSpaceNinjaSystem
+public sealed partial class SpaceNinjaSystem : SharedSpaceNinjaSystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private BatterySystem _battery = default!;

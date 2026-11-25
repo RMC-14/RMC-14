@@ -6,7 +6,7 @@ using Robust.Client.GameObjects;
 namespace Content.Client.Xenoarchaeology.Equipment;
 
 /// <inheritdoc />
-public sealed class ArtifactAnalyzerSystem : SharedArtifactAnalyzerSystem
+public sealed partial class ArtifactAnalyzerSystem : SharedArtifactAnalyzerSystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
 

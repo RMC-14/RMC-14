@@ -13,7 +13,7 @@ namespace Content.Server.Chat.V2.Repository;
 /// Stores <see cref="IChatEvent"/>, gives them UIDs, and issues <see cref="MessageCreatedEvent"/>.
 /// Allows for deletion of messages.
 /// </summary>
-public sealed class ChatRepositorySystem : EntitySystem
+public sealed partial class ChatRepositorySystem : EntitySystem
 {
     [Dependency] private IReplayRecordingManager _replay = default!;
     [Dependency] private IPlayerManager _player = default!;

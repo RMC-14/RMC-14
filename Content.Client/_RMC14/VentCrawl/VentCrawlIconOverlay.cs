@@ -12,7 +12,7 @@ using static Content.Shared.DrawDepth.DrawDepth;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Client._RMC14.VentCrawl;
-public sealed class VentCrawlIconOverlay : Overlay
+public sealed partial class VentCrawlIconOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager _players = default!;

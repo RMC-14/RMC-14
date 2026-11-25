@@ -11,7 +11,7 @@ namespace Content.Server.Speech.EntitySystems;
 /// <summary>
 ///     This system redirects local chat messages to listening entities (e.g., radio microphones).
 /// </summary>
-public sealed class ListeningSystem : EntitySystem
+public sealed partial class ListeningSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _xforms = default!;
 

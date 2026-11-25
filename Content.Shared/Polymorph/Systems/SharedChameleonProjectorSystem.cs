@@ -21,7 +21,7 @@ namespace Content.Shared.Polymorph.Systems;
 /// Handles disguise validation, disguising and revealing.
 /// Most appearance copying is done clientside.
 /// </summary>
-public abstract class SharedChameleonProjectorSystem : EntitySystem
+public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;

@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Repairable;
 
-public sealed class RMCWeldEffectSystem : EntitySystem
+public sealed partial class RMCWeldEffectSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
 

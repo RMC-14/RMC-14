@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Screech;
 
-public sealed class XenoScreechSystem : EntitySystem
+public sealed partial class XenoScreechSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;

@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 
 namespace Content.Client.Replay;
 
-public sealed class ReplayToggleScreenshotModeCommand : BaseReplayCommand
+public sealed partial class ReplayToggleScreenshotModeCommand : BaseReplayCommand
 {
     [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
     [Dependency] private ContentReplayPlaybackManager _replayManager = default!;

@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared._RMC14.Suicide;
 
 // this ignores the suicide cvar since we don't want upstream suicides
-public sealed class RMCSuicideSystem : EntitySystem
+public sealed partial class RMCSuicideSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _admin = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

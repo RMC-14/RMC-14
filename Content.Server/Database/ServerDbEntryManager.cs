@@ -11,7 +11,7 @@ namespace Content.Server.Database;
 /// This allows the value to be cached,
 /// so it can be easily retrieved by later code that needs to log the server ID to the database.
 /// </remarks>
-public sealed class ServerDbEntryManager
+public sealed partial class ServerDbEntryManager
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IServerDbManager _db = default!;

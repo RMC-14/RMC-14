@@ -12,7 +12,7 @@ using Content.Shared.Storage;
 
 namespace Content.Server._RMC14.NamedItems;
 
-public sealed class RMCNamedItemSystem : SharedRMCNamedItemSystem
+public sealed partial class RMCNamedItemSystem : SharedRMCNamedItemSystem
 {
     [Dependency] private IAdminLogManager _adminLogs = default!;
     [Dependency] private LinkAccountManager _linkAccount = default!;

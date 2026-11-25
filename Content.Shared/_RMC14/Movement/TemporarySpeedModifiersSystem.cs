@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
 
-public sealed class TemporarySpeedModifiersSystem : EntitySystem
+public sealed partial class TemporarySpeedModifiersSystem : EntitySystem
 {
     private const float MaxSpeedModifier = 1f;
 

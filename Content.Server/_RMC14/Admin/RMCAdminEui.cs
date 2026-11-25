@@ -23,7 +23,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class RMCAdminEui : BaseEui
+public sealed partial class RMCAdminEui : BaseEui
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

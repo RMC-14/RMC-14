@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)] // RMC14 Ban -> Admin
-public sealed class BanExemptionUpdateCommand : LocalizedCommands
+public sealed partial class BanExemptionUpdateCommand : LocalizedCommands
 {
     [Dependency] private IServerDbManager _dbManager = default!;
     [Dependency] private IPlayerLocator _playerLocator = default!;
@@ -62,7 +62,7 @@ public sealed class BanExemptionUpdateCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Admin)] // RMC14 Ban -> Admin
-public sealed class BanExemptionGetCommand : LocalizedCommands
+public sealed partial class BanExemptionGetCommand : LocalizedCommands
 {
     [Dependency] private IServerDbManager _dbManager = default!;
     [Dependency] private IPlayerLocator _playerLocator = default!;

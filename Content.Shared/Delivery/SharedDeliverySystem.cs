@@ -21,7 +21,7 @@ namespace Content.Shared.Delivery;
 /// Shared side of the DeliverySystem.
 /// This covers for letters/packages, as well as spawning a reward for the player upon opening.
 /// </summary>
-public abstract class SharedDeliverySystem : EntitySystem
+public abstract partial class SharedDeliverySystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

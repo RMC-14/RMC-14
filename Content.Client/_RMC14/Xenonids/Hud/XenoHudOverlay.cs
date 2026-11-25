@@ -35,7 +35,7 @@ using Content.Shared._RMC14.Xenonids.Paratoxin;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
-public sealed class XenoHudOverlay : Overlay
+public sealed partial class XenoHudOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IOverlayManager _overlay = default!;

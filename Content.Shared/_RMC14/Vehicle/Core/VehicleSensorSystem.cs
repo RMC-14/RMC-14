@@ -4,7 +4,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleSensorSystem : EntitySystem
+public sealed partial class VehicleSensorSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

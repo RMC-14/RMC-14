@@ -9,7 +9,7 @@ using Content.Shared.Power;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
-public sealed class SolutionHeaterSystem : EntitySystem
+public sealed partial class SolutionHeaterSystem : EntitySystem
 {
     [Dependency] private PowerReceiverSystem _powerReceiver = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

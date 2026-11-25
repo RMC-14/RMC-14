@@ -10,7 +10,7 @@ using Robust.Shared.Random;
 namespace Content.Server.Body.Commands
 {
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class RemoveHandCommand : IConsoleCommand
+    public sealed partial class RemoveHandCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
         [Dependency] private IRobustRandom _random = default!;

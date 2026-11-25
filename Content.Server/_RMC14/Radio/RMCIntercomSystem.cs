@@ -13,7 +13,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server._RMC14.Radio;
 
-public sealed class RMCIntercomSystem : EntitySystem
+public sealed partial class RMCIntercomSystem : EntitySystem
 {
     [Dependency] private InteractionSystem _interaction = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

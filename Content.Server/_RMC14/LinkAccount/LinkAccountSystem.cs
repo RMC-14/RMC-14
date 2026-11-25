@@ -16,7 +16,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.LinkAccount;
 
-public sealed class LinkAccountSystem : EntitySystem
+public sealed partial class LinkAccountSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private IConfigurationManager _config = default!;

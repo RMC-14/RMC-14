@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.PayloadDeployment;
 
-public sealed class RMCPayloadDeploymentSystem : EntitySystem
+public sealed partial class RMCPayloadDeploymentSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private SharedMapSystem _map = default!;

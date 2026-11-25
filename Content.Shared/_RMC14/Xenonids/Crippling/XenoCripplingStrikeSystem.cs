@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Crippling;
 
-public sealed class XenoCripplingStrikeSystem : EntitySystem
+public sealed partial class XenoCripplingStrikeSystem : EntitySystem
 {
     [Dependency] private RMCSlowSystem _slow = default!;
     [Dependency] private INetManager _net = default!;

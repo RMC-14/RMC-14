@@ -15,7 +15,7 @@ using Robust.Shared.Player;
 namespace Content.Server.Atmos.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class AtmosDebugOverlaySystem : SharedAtmosDebugOverlaySystem
+    public sealed partial class AtmosDebugOverlaySystem : SharedAtmosDebugOverlaySystem
     {
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IConfigurationManager _configManager = default!;

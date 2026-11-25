@@ -11,7 +11,7 @@ using Robust.Shared.Localization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleWheelSystem : EntitySystem
+public sealed partial class VehicleWheelSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private HardpointSystem _hardpoints = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 
 namespace Content.Client.Jittering
 {
-    public sealed class JitteringSystem : SharedJitteringSystem
+    public sealed partial class JitteringSystem : SharedJitteringSystem
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private AnimationPlayerSystem _animationPlayer = default!;

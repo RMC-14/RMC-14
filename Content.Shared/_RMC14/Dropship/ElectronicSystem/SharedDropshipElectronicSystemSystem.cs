@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Dropship.ElectronicSystem;
 
-public abstract class SharedDropshipElectronicSystemSystem : EntitySystem
+public abstract partial class SharedDropshipElectronicSystemSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDropshipSystem _dropship = default!;

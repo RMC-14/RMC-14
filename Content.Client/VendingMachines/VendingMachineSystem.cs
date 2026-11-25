@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Client.VendingMachines;
 
-public sealed class VendingMachineSystem : SharedVendingMachineSystem
+public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
 {
     [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
     [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;

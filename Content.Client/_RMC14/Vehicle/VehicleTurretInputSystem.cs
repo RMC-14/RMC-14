@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class VehicleTurretInputSystem : EntitySystem
+public sealed partial class VehicleTurretInputSystem : EntitySystem
 {
     private const float AimUpdateInterval = 0.02f;
     private static readonly Angle AimEpsilon = Angle.FromDegrees(1);

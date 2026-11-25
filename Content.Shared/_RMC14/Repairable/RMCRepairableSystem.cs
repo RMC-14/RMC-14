@@ -27,7 +27,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Repairable;
 
-public sealed class RMCRepairableSystem : EntitySystem
+public sealed partial class RMCRepairableSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageable = default!;

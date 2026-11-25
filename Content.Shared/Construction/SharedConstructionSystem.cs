@@ -6,7 +6,7 @@ using static Content.Shared.Interaction.SharedInteractionSystem;
 
 namespace Content.Shared.Construction
 {
-    public abstract class SharedConstructionSystem : EntitySystem
+    public abstract partial class SharedConstructionSystem : EntitySystem
     {
         [Dependency] private SharedMapSystem _map = default!;
         [Dependency] protected IPrototypeManager PrototypeManager = default!;

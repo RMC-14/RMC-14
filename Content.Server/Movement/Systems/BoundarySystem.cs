@@ -3,7 +3,7 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Server.Movement.Systems;
 
-public sealed class BoundarySystem : EntitySystem
+public sealed partial class BoundarySystem : EntitySystem
 {
     /*
      * The real reason this even exists is because with out mover controller it's really easy to clip out of bounds on chain shapes.

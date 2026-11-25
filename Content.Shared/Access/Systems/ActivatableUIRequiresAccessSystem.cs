@@ -3,7 +3,7 @@ using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 
 namespace Content.Shared.Access.Systems;
-public sealed class ActivatableUIRequiresAccessSystem : EntitySystem
+public sealed partial class ActivatableUIRequiresAccessSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _access = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

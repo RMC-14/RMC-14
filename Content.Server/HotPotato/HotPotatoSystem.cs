@@ -9,7 +9,7 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Server.HotPotato;
 
-public sealed class HotPotatoSystem : SharedHotPotatoSystem
+public sealed partial class HotPotatoSystem : SharedHotPotatoSystem
 {
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

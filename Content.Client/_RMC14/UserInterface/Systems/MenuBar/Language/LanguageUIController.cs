@@ -24,7 +24,7 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client._RMC14.UserInterface.Systems.Language;
 
-public sealed class LanguageUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
+public sealed partial class LanguageUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     [Dependency] private IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private ISharedPlayerManager _player = default!;

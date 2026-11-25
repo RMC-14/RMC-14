@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Content.Client._RMC14.Sprite;
 
-public sealed class RMCAltSpriteVisualizerSystem : VisualizerSystem<RMCAlternateSpriteComponent>
+public sealed partial class RMCAltSpriteVisualizerSystem : VisualizerSystem<RMCAlternateSpriteComponent>
 {
 
     [Dependency] private IConfigurationManager _configuration = default!;

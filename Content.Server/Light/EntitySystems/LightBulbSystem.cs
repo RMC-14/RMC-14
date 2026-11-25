@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Light.EntitySystems
 {
-    public sealed class LightBulbSystem : EntitySystem
+    public sealed partial class LightBulbSystem : EntitySystem
     {
         [Dependency] private SharedAppearanceSystem _appearance = default!;
         [Dependency] private SharedAudioSystem _audio = default!;

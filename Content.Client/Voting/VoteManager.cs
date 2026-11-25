@@ -32,7 +32,7 @@ namespace Content.Client.Voting
         event Action CanCallStandardVotesChanged;
     }
 
-    public sealed class VoteManager : IVoteManager
+    public sealed partial class VoteManager : IVoteManager
     {
         [Dependency] private IAudioManager _audio = default!;
         [Dependency] private IBaseClient _client = default!;

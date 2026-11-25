@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Marines.ControlComputer;
 
-public sealed class MarineControlComputerSystem : SharedMarineControlComputerSystem
+public sealed partial class MarineControlComputerSystem : SharedMarineControlComputerSystem
 {
     [Dependency] private SharedRankSystem _rank = default!;
     [Dependency] private SharedJobSystem _jobs = default!;

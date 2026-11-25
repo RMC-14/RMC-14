@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleGunnerViewSystem : EntitySystem
+public sealed partial class VehicleGunnerViewSystem : EntitySystem
 {
     [Dependency] private SharedContentEyeSystem _eye = default!;
 

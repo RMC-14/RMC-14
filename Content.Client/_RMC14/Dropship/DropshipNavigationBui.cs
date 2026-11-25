@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.Dropship;
 
 [UsedImplicitly]
-public sealed class DropshipNavigationBui : BoundUserInterface
+public sealed partial class DropshipNavigationBui : BoundUserInterface
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IGameTiming _timing = default!;

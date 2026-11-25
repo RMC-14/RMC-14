@@ -9,7 +9,7 @@ namespace Content.Client.Guidebook.RichText;
 /// In order to be accessed by this tag, the desired field/property must
 /// be tagged with <see cref="Shared.Guidebook.GuidebookDataAttribute"/>.
 /// </summary>
-public sealed class ProtodataTag : IMarkupTagHandler
+public sealed partial class ProtodataTag : IMarkupTagHandler
 {
     [Dependency] private ILogManager _logMan = default!;
     [Dependency] private IEntityManager _entMan = default!;

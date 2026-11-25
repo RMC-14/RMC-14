@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Whistle;
 
-public sealed class WhistleSystem : EntitySystem
+public sealed partial class WhistleSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private IGameTiming _timing = default!;

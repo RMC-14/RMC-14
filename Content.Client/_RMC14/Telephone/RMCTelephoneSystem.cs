@@ -3,7 +3,7 @@ using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Telephone;
 
-public sealed class RMCTelephoneSystem : SharedRMCTelephoneSystem
+public sealed partial class RMCTelephoneSystem : SharedRMCTelephoneSystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
 

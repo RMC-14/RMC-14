@@ -10,7 +10,7 @@ namespace Content.Shared.Cabinet;
 /// <summary>
 /// Controls ItemCabinet slot locking and visuals.
 /// </summary>
-public sealed class ItemCabinetSystem : EntitySystem
+public sealed partial class ItemCabinetSystem : EntitySystem
 {
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private OpenableSystem _openable = default!;

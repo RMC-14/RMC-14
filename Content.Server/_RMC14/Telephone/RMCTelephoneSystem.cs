@@ -19,7 +19,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Telephone;
 
-public sealed class RMCTelephoneSystem : SharedRMCTelephoneSystem
+public sealed partial class RMCTelephoneSystem : SharedRMCTelephoneSystem
 {
     [Dependency] private IAdminManager _adminManager = default!;
     [Dependency] private AudioSystem _audio = default!;

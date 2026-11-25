@@ -32,7 +32,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Armor;
 
-public sealed class CMArmorSystem : EntitySystem
+public sealed partial class CMArmorSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;

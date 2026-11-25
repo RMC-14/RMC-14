@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.PowerCell;
 
-public abstract class SharedPowerCellSystem : EntitySystem
+public abstract partial class SharedPowerCellSystem : EntitySystem
 {
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;

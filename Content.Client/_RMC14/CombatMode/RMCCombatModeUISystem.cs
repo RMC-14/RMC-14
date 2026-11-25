@@ -12,7 +12,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Client._RMC14.CombatMode;
 
-public sealed class RMCCombatModeUISystem : EntitySystem
+public sealed partial class RMCCombatModeUISystem : EntitySystem
 {
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private CombatModeSystem _combatMode = default!;

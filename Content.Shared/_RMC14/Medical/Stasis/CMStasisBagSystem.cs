@@ -11,7 +11,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Medical.Stasis;
 
-public sealed class CMStasisBagSystem : EntitySystem
+public sealed partial class CMStasisBagSystem : EntitySystem
 {
     [Dependency] private SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private SharedContainerSystem _container = default!;

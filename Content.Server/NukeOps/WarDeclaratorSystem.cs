@@ -16,7 +16,7 @@ namespace Content.Server.NukeOps;
 /// <summary>
 ///     This handles nukeops special war mode declaration device and directly using nukeops game rule
 /// </summary>
-public sealed class WarDeclaratorSystem : EntitySystem
+public sealed partial class WarDeclaratorSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IConfigurationManager _cfg = default!;

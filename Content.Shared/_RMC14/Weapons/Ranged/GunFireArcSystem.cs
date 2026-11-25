@@ -4,7 +4,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class GunFireArcSystem : EntitySystem
+public sealed partial class GunFireArcSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

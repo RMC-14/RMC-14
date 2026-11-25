@@ -39,7 +39,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
-public abstract class SharedNeurotoxinSystem : EntitySystem
+public abstract partial class SharedNeurotoxinSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;

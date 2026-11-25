@@ -4,7 +4,7 @@ using Content.Shared.Inventory;
 
 namespace Content.Shared.Eye.Blinding.Systems;
 
-public sealed class BlindfoldSystem : EntitySystem
+public sealed partial class BlindfoldSystem : EntitySystem
 {
     [Dependency] private BlindableSystem _blindableSystem = default!;
 

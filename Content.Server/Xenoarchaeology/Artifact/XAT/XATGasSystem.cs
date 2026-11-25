@@ -8,7 +8,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAT;
 /// <summary>
 /// System for xeno artifact trigger, which gets activated from some gas being on the same time as artifact with certain concentration.
 /// </summary>
-public sealed class XATGasSystem : BaseQueryUpdateXATSystem<XATGasComponent>
+public sealed partial class XATGasSystem : BaseQueryUpdateXATSystem<XATGasComponent>
 {
     [Dependency] private AtmosphereSystem _atmosphere = default!;
 

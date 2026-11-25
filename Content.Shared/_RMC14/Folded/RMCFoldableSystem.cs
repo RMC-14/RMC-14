@@ -2,7 +2,7 @@ using Content.Shared.Foldable;
 
 namespace Content.Shared._RMC14.Folded;
 
-public sealed class RMCFoldableSystem : EntitySystem
+public sealed partial class RMCFoldableSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
 

@@ -5,7 +5,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Mentor;
 
 [AnyCommand]
-public sealed class MentorChatCommand : IConsoleCommand
+public sealed partial class MentorChatCommand : IConsoleCommand
 {
     [Dependency] private MentorManager _mentor = default!;
 

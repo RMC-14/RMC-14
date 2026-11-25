@@ -13,7 +13,7 @@ using Robust.Shared.Physics;
 
 namespace Content.Client.Light;
 
-public sealed class RoofOverlay : Overlay
+public sealed partial class RoofOverlay : Overlay
 {
     private readonly IEntityManager _entManager;
     // RMC14

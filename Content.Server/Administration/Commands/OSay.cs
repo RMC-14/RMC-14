@@ -8,7 +8,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class OSay : LocalizedCommands
+public sealed partial class OSay : LocalizedCommands
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IEntityManager _entityManager = default!;

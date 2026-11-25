@@ -29,7 +29,7 @@ namespace Content.Server.Fluids.EntitySystems;
 /// <summary>
 /// Handles non-atmos solution entities similar to puddles.
 /// </summary>
-public sealed class SmokeSystem : EntitySystem
+public sealed partial class SmokeSystem : EntitySystem
 {
     // If I could do it all again this could probably use a lot more of puddles.
     [Dependency] private IAdminLogManager _logger = default!;

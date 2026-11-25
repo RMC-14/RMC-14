@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Item;
 
-public sealed class ItemCamouflageSystem : EntitySystem
+public sealed partial class ItemCamouflageSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private InventorySystem _inventory = default!;

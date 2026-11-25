@@ -16,7 +16,7 @@ using Content.Shared.Whitelist;
 namespace Content.Server.Power.EntitySystems;
 
 [UsedImplicitly]
-internal sealed class ChargerSystem : EntitySystem
+internal sealed partial class ChargerSystem : EntitySystem
 {
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;

@@ -16,7 +16,7 @@ using Robust.Shared.Timing;
 // TODO: Make greater resin surge crate reflective resin instead of thick resin.
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
-public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
+public sealed partial class DesignerGreaterResinSurgeSystem : EntitySystem
 {
     private const float EffectSearchPaddingMultiplier = 2f;
 

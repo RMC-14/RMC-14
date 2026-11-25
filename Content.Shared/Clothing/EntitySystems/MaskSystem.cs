@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public sealed class MaskSystem : EntitySystem
+public sealed partial class MaskSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actionSystem = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;

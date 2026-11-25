@@ -17,7 +17,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Xenonids.Banish;
 
-public sealed class XenoBanishSystem : SharedXenoBanishSystem
+public sealed partial class XenoBanishSystem : SharedXenoBanishSystem
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private XenoAnnounceSystem _announce = default!;

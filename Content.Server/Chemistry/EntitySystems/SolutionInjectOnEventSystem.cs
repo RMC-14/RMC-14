@@ -17,7 +17,7 @@ namespace Content.Server.Chemistry.EntitySystems;
 /// System for handling the different inheritors of <see cref="BaseSolutionInjectOnEventComponent"/>.
 /// Subscribes to relevent events and performs solution injections when they are raised.
 /// </summary>
-public sealed class SolutionInjectOnCollideSystem : EntitySystem
+public sealed partial class SolutionInjectOnCollideSystem : EntitySystem
 {
     [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private InventorySystem _inventory = default!;

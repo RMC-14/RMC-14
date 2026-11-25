@@ -5,7 +5,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.Camera;
 
-public sealed class CameraRecoilSystem : SharedCameraRecoilSystem
+public sealed partial class CameraRecoilSystem : SharedCameraRecoilSystem
 {
     [Dependency] private IConfigurationManager _configManager = default!;
 

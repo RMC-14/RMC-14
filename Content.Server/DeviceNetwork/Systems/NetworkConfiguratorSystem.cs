@@ -25,7 +25,7 @@ using Robust.Shared.Utility;
 namespace Content.Server.DeviceNetwork.Systems;
 
 [UsedImplicitly]
-public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
+public sealed partial class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 {
     [Dependency] private DeviceListSystem _deviceListSystem = default!;
     [Dependency] private DeviceLinkSystem _deviceLinkSystem = default!;

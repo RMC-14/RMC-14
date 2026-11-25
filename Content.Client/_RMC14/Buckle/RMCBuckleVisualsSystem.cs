@@ -8,7 +8,7 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Buckle;
 
-public sealed class RMCBuckleVisualsSystem : EntitySystem
+public sealed partial class RMCBuckleVisualsSystem : EntitySystem
 {
     [Dependency] private RMCSpriteSystem _rmcSprite = default!;
 

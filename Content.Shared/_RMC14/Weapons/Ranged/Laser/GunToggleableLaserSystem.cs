@@ -3,7 +3,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Laser;
 
-public sealed class GunToggleableLaserSystem : EntitySystem
+public sealed partial class GunToggleableLaserSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

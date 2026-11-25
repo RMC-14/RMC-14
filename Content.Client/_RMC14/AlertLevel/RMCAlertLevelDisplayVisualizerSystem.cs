@@ -7,7 +7,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.AlertLevel;
 
-public sealed class RMCAlertLevelDisplayVisualizerSystem : EntitySystem
+public sealed partial class RMCAlertLevelDisplayVisualizerSystem : EntitySystem
 {
 
     [Dependency] private SharedGameTicker _ticker = default!;

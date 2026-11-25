@@ -78,7 +78,7 @@ public sealed class AirAlarmModeFactory
 }
 
 // like a tiny little EntitySystem
-public abstract class AirAlarmModeExecutor : IAirAlarmMode
+public abstract partial class AirAlarmModeExecutor : IAirAlarmMode
 {
     [Dependency] public IEntityManager EntityManager = default!;
     public readonly DeviceNetworkSystem DeviceNetworkSystem;

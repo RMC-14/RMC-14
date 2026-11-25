@@ -14,7 +14,7 @@ namespace Content.Server.Thief.Systems;
 /// <summary>
 /// <see cref="ThiefBeaconComponent"/>
 /// </summary>
-public sealed class ThiefBeaconSystem : EntitySystem
+public sealed partial class ThiefBeaconSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

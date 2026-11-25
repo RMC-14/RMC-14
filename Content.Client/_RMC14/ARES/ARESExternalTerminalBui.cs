@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.ARES;
 
-public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBui
+public sealed partial class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBui
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

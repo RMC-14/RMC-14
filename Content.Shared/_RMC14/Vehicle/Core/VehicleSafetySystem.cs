@@ -8,7 +8,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleSafetySystem : EntitySystem
+public sealed partial class VehicleSafetySystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private VehicleSystem _rmcVehicles = default!;

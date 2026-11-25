@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Clock;
 
-public sealed class ClockSystem : SharedClockSystem
+public sealed partial class ClockSystem : SharedClockSystem
 {
     [Dependency] private PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private IRobustRandom _robustRandom = default!;

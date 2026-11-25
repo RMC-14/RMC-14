@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.PlayTimeTracking;
 
-public abstract class SharedRMCPlayTimeManager : IPostInjectInit
+public abstract partial class SharedRMCPlayTimeManager : IPostInjectInit
 {
     [Dependency] private ISharedPlaytimeManager _playtime = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

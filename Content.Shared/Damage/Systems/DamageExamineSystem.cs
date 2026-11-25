@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Damage.Systems;
 
-public sealed class DamageExamineSystem : EntitySystem
+public sealed partial class DamageExamineSystem : EntitySystem
 {
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

@@ -7,7 +7,7 @@ using Content.Shared.Whitelist;
 
 namespace Content.Server.Devour;
 
-public sealed class DevourSystem : SharedDevourSystem
+public sealed partial class DevourSystem : SharedDevourSystem
 {
     [Dependency] private BloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private EntityWhitelistSystem _entityWhitelistSystem = default!;

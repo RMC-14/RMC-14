@@ -22,7 +22,7 @@ namespace Content.Shared._RMC14.Armor.Ghillie;
 /// <summary>
 /// Handles the ghillie suit's prepare position ability.
 /// </summary>
-public sealed class SharedGhillieSuitSystem : EntitySystem
+public sealed partial class SharedGhillieSuitSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

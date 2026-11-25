@@ -6,7 +6,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared.Security.Systems;
 
-public sealed class DeployableBarrierSystem : EntitySystem
+public sealed partial class DeployableBarrierSystem : EntitySystem
 {
     [Dependency] private FixtureSystem _fixtures = default!;
     [Dependency] private SharedPointLightSystem _pointLight = default!;

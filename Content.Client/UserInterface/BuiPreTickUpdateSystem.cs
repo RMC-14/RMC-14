@@ -28,7 +28,7 @@ public interface IBuiPreTickUpdate
 /// <summary>
 /// Implements <see cref="BuiPreTickUpdateSystem"/>.
 /// </summary>
-public sealed class BuiPreTickUpdateSystem : EntitySystem
+public sealed partial class BuiPreTickUpdateSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _playerManager = null!;
     [Dependency] private UserInterfaceSystem _uiSystem = null!;

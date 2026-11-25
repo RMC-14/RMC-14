@@ -15,7 +15,7 @@ using Robust.Shared.Toolshed.Syntax;
 namespace Content.Server._RMC14.Vehicle;
 
 [ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
-public sealed class VehicleRoundstartCommand : ToolshedCommand
+public sealed partial class VehicleRoundstartCommand : ToolshedCommand
 {
     private static readonly ProtoId<JobPrototype> VehicleCrewmanJob = "CMVehicleCrewman";
     private static readonly EntProtoId VehicleHumveeArcUnlock = "VehicleHumveeARC";

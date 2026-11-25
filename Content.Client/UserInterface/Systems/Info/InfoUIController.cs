@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Systems.Info;
 
-public sealed class InfoUIController : UIController, IOnStateExited<GameplayState>
+public sealed partial class InfoUIController : UIController, IOnStateExited<GameplayState>
 {
     [Dependency] private IClientConsoleHost _consoleHost = default!;
     [Dependency] private INetManager _netManager = default!;

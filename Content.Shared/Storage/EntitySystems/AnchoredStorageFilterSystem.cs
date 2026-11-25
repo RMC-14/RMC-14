@@ -8,7 +8,7 @@ namespace Content.Shared.Storage.EntitySystems;
 /// Ejects items that do not match a <see cref="EntityWhitelist"/> from a storage when it is anchored.
 /// <seealso cref="AnchoredStorageFilterComponent"/>
 /// </summary>
-public sealed class AnchoredStorageFilterSystem : EntitySystem
+public sealed partial class AnchoredStorageFilterSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedContainerSystem _container = default!;

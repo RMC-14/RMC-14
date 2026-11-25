@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.Slow;
 
-public sealed class RMCSlowSystem : EntitySystem
+public sealed partial class RMCSlowSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;

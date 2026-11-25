@@ -2,7 +2,7 @@
 
 namespace Content.Client._RMC14.Areas;
 
-public sealed class ShowAreasCommand : IConsoleCommand
+public sealed partial class ShowAreasCommand : IConsoleCommand
 {
     [Dependency] private IEntityManager _entities = default!;
 

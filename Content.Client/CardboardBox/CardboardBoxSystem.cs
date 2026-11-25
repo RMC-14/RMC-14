@@ -8,7 +8,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.CardboardBox;
 
-public sealed class CardboardBoxSystem : SharedCardboardBoxSystem
+public sealed partial class CardboardBoxSystem : SharedCardboardBoxSystem
 {
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private TransformSystem _transform = default!;

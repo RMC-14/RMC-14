@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Construction.Upgrades;
 
-public sealed class RMCUpgradeSystem : EntitySystem
+public sealed partial class RMCUpgradeSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private SkillsSystem _skills = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.NewPlayer;
 
-public sealed class NewPlayerPopupSystem : EntitySystem
+public sealed partial class NewPlayerPopupSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPlayerManager _players = default!;

@@ -8,7 +8,7 @@ namespace Content.Client.Fax.System;
 /// <summary>
 /// Visualizer for the fax machine which displays the correct sprite based on the inserted entity.
 /// </summary>
-public sealed class FaxVisualsSystem : EntitySystem
+public sealed partial class FaxVisualsSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _player = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

@@ -10,7 +10,7 @@ using Content.Shared.Eui;
 
 namespace Content.Server._RMC14.Admin.ChatBans;
 
-public sealed class RMCAdminChatBansEui : BaseEui
+public sealed partial class RMCAdminChatBansEui : BaseEui
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private IChatManager _chat = default!;

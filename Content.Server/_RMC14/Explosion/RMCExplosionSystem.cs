@@ -22,7 +22,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Explosion;
 
-public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
+public sealed partial class RMCExplosionSystem : SharedRMCExplosionSystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private DecalSystem _decals = default!;

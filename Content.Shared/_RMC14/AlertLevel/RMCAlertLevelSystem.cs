@@ -20,7 +20,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.AlertLevel;
 
-public sealed class RMCAlertLevelSystem : EntitySystem
+public sealed partial class RMCAlertLevelSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private RMCAnnouncementOverlaySystem _announcementOverlay = default!;

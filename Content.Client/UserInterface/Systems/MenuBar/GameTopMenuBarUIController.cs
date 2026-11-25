@@ -13,7 +13,7 @@ using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Client.UserInterface.Systems.MenuBar;
 
-public sealed class GameTopMenuBarUIController : UIController
+public sealed partial class GameTopMenuBarUIController : UIController
 {
     [Dependency] private EscapeUIController _escape = default!;
     [Dependency] private AdminUIController _admin = default!;

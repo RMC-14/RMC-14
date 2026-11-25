@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.DeployedTraps;
 
-public sealed class SharedDeployedTrapsSystem : EntitySystem
+public sealed partial class SharedDeployedTrapsSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private RMCSlowSystem _slow = default!;

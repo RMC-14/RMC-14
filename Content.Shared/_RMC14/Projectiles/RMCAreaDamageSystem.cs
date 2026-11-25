@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Projectiles;
 
-public sealed class RMCAreaDamageSystem : EntitySystem
+public sealed partial class RMCAreaDamageSystem : EntitySystem
 {
     [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private DamageableSystem _damage = default!;

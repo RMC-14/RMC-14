@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Input;
 
-public sealed class RMCInputSystem : EntitySystem
+public sealed partial class RMCInputSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private INetManager _net = default!;

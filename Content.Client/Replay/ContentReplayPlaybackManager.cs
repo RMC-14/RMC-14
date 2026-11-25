@@ -32,7 +32,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Replay;
 
-public sealed class ContentReplayPlaybackManager
+public sealed partial class ContentReplayPlaybackManager
 {
     [Dependency] private IStateManager _stateMan = default!;
     [Dependency] private IClientGameTiming _timing = default!;

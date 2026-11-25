@@ -24,7 +24,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Movement.Systems;
 
-public sealed class PullController : VirtualController
+public sealed partial class PullController : VirtualController
 {
     /*
      * This code is awful. If you try to tweak this without refactoring it I'm gonna revert it.

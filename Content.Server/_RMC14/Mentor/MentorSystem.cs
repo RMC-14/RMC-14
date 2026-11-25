@@ -4,7 +4,7 @@ using Content.Shared.Follower;
 
 namespace Content.Server._RMC14.Mentor;
 
-public sealed class MentorSystem : EntitySystem
+public sealed partial class MentorSystem : EntitySystem
 {
     [Dependency] private FollowerSystem _follower = default!;
 

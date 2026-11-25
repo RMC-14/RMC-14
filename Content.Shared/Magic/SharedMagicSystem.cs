@@ -40,7 +40,7 @@ namespace Content.Shared.Magic;
 /// <summary>
 /// Handles learning and using spells (actions)
 /// </summary>
-public abstract class SharedMagicSystem : EntitySystem
+public abstract partial class SharedMagicSystem : EntitySystem
 {
     [Dependency] private ISerializationManager _seriMan = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;

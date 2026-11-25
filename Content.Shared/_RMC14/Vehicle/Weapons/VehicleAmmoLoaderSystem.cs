@@ -22,7 +22,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleAmmoLoaderSystem : EntitySystem
+public sealed partial class VehicleAmmoLoaderSystem : EntitySystem
 {
     [Dependency] private BulletBoxSystem _bulletBox = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

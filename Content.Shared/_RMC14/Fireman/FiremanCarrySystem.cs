@@ -29,7 +29,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Fireman;
 
-public sealed class FiremanCarrySystem : EntitySystem
+public sealed partial class FiremanCarrySystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

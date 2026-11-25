@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Doors.Systems;
 
-public abstract class SharedFirelockSystem : EntitySystem
+public abstract partial class SharedFirelockSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;

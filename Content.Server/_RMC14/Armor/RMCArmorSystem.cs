@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Armor;
 
-public sealed class RMCArmorSystem : EntitySystem
+public sealed partial class RMCArmorSystem : EntitySystem
 {
     [Dependency] private IServerPreferencesManager _prefs = default!;
     [Dependency] protected InventorySystem InventorySystem = default!;

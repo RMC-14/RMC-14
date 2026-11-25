@@ -25,7 +25,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.Autodoc;
 
-public sealed class AutodocSystem : SharedAutodocSystem
+public sealed partial class AutodocSystem : SharedAutodocSystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private SharedBodySystem _body = default!;

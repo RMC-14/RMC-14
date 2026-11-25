@@ -9,7 +9,7 @@ namespace Content.Server.Shuttles.Commands;
 /// Calls in the emergency shuttle.
 /// </summary>
 [AdminCommand(AdminFlags.Fun)]
-public sealed class DockEmergencyShuttleCommand : LocalizedEntityCommands
+public sealed partial class DockEmergencyShuttleCommand : LocalizedEntityCommands
 {
     [Dependency] private EmergencyShuttleSystem _shuttleSystem = default!;
 

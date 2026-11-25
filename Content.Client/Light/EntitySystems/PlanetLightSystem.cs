@@ -4,7 +4,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.Light.EntitySystems;
 
-public sealed class PlanetLightSystem : EntitySystem
+public sealed partial class PlanetLightSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] private IOverlayManager _overlayMan = default!;

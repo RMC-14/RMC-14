@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Scuttle;
 
-public sealed class RMCScuttleCinematicSystem : EntitySystem
+public sealed partial class RMCScuttleCinematicSystem : EntitySystem
 {
     private static readonly SoundSpecifier CinematicExplosionSound =
         new SoundCollectionSpecifier("Explosion", AudioParams.Default.WithVolume(4f));

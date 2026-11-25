@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Maps;
 
-public sealed class GameMapManager : IGameMapManager
+public sealed partial class GameMapManager : IGameMapManager
 {
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

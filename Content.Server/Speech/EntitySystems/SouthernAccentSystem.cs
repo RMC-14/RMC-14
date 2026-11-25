@@ -3,7 +3,7 @@ using Content.Server.Speech.Components;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed class SouthernAccentSystem : EntitySystem
+public sealed partial class SouthernAccentSystem : EntitySystem
 {
     private static readonly Regex RegexLowerIng = new(@"ing\b");
     private static readonly Regex RegexUpperIng = new(@"ING\b");

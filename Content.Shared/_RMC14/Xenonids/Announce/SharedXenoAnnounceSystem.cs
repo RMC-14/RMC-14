@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Announce;
 
-public abstract class SharedXenoAnnounceSystem : EntitySystem
+public abstract partial class SharedXenoAnnounceSystem : EntitySystem
 {
     [Dependency] private AreaSystem _areas = default!;
     [Dependency] private XenoEvolutionSystem _xenoEvolution = default!;

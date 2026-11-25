@@ -22,7 +22,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Spray;
 
-public sealed class XenoSprayAcidSystem : EntitySystem
+public sealed partial class XenoSprayAcidSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

@@ -12,7 +12,7 @@ namespace Content.Server.Physics.Controllers;
 /// <summary>
 /// A component which makes its entity periodically chaotic jumps arounds
 /// </summary>
-public sealed class ChaoticJumpSystem : VirtualController
+public sealed partial class ChaoticJumpSystem : VirtualController
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

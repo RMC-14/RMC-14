@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Humanoid.Markings;
 
-public sealed class RMCConditionalMarkingsSystem : EntitySystem
+public sealed partial class RMCConditionalMarkingsSystem : EntitySystem
 {
     [Dependency] private HumanoidAppearanceSystem _humanoidAppearance = default!;
     [Dependency] private IRobustRandom _random = default!;

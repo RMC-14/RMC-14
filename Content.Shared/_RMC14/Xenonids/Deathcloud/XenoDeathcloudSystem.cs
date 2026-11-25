@@ -5,7 +5,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Deathcloud;
 
-public sealed class XenoDeathcloudSystem : EntitySystem
+public sealed partial class XenoDeathcloudSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;

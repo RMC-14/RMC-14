@@ -13,7 +13,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.Atmos.Portable;
 
-public sealed class SpaceHeaterSystem : EntitySystem
+public sealed partial class SpaceHeaterSystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private PopupSystem _popup = default!;

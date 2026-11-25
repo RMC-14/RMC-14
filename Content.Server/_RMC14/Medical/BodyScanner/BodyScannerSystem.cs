@@ -5,7 +5,7 @@ using Robust.Server.Player;
 
 namespace Content.Server._RMC14.Medical.BodyScanner;
 
-public sealed class BodyScannerSystem : SharedBodyScannerSystem
+public sealed partial class BodyScannerSystem : SharedBodyScannerSystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private RMCMedicalRecordsSystem _rmcMedicalRecords = default!;

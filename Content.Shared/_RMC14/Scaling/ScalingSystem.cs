@@ -18,7 +18,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Scaling;
 
-public sealed class ScalingSystem : EntitySystem
+public sealed partial class ScalingSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private SharedGameTicker _gameTicker = default!;

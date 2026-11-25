@@ -12,7 +12,7 @@ namespace Content.Server.Spawners.EntitySystems
     /// System that manages unique random spawners.
     /// Ensures no duplicate prototypes are spawned within the same spawner group.
     /// </summary>
-    public sealed class UniqueRandomSpawnerSystem : EntitySystem
+    public sealed partial class UniqueRandomSpawnerSystem : EntitySystem
     {
         [Dependency] private IRobustRandom _robustRandom = default!;
 

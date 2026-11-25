@@ -8,7 +8,7 @@ using Content.Server.GameTicking;
 namespace Content.Server.Ghost
 {
     [AnyCommand]
-    public sealed class GhostCommand : IConsoleCommand
+    public sealed partial class GhostCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entities = default!;
 

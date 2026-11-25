@@ -27,7 +27,7 @@ namespace Content.IntegrationTests.Tests.Networking
     // the tick where the server *should* have, but did not, acknowledge the state change.
     // Finally, we run two events inside the prediction area to ensure reconciling does for incremental stuff.
     [TestFixture]
-    public sealed class SimplePredictReconcileTest
+    public sealed partial class SimplePredictReconcileTest
     {
         [Test]
         public async Task Test()
@@ -388,7 +388,7 @@ namespace Content.IntegrationTests.Tests.Networking
             await pair.CleanReturnAsync();
         }
 
-        public sealed class PredictionTestEntitySystem : EntitySystem
+        public sealed partial class PredictionTestEntitySystem : EntitySystem
         {
             public bool Allow { get; set; } = true;
 

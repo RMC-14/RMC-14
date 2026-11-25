@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Vehicle;
 
-public sealed class VehicleEntranceItemSystem : EntitySystem
+public sealed partial class VehicleEntranceItemSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> HandGrenadeTag = "HandGrenade";
     private static readonly ProtoId<TagPrototype> GrenadeTag = "Grenade";

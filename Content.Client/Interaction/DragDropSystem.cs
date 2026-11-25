@@ -29,7 +29,7 @@ namespace Content.Client.Interaction;
 /// <summary>
 /// Handles clientside drag and drop logic
 /// </summary>
-public sealed class DragDropSystem : SharedDragDropSystem
+public sealed partial class DragDropSystem : SharedDragDropSystem
 {
     private static readonly ProtoId<ShaderPrototype> ShaderDropTargetInRange = "SelectionOutlineInrange";
 

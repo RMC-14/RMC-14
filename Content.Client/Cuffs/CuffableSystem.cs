@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Cuffs;
 
-public sealed class CuffableSystem : SharedCuffableSystem
+public sealed partial class CuffableSystem : SharedCuffableSystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SpriteSystem _sprite = default!;

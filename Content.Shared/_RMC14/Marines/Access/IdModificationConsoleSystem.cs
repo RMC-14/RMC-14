@@ -23,7 +23,7 @@ using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.Marines.Access;
 
-public sealed class IdModificationConsoleSystem : EntitySystem
+public sealed partial class IdModificationConsoleSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedContainerSystem _container = default!;

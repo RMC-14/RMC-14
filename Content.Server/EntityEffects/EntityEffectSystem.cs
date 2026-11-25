@@ -45,7 +45,7 @@ using PolymorphEffect = Content.Shared.EntityEffects.Effects.Polymorph;
 
 namespace Content.Server.EntityEffects;
 
-public sealed class EntityEffectSystem : EntitySystem
+public sealed partial class EntityEffectSystem : EntitySystem
 {
     private static readonly ProtoId<WeightedRandomFillSolutionPrototype> RandomPickBotanyReagent = "RandomPickBotanyReagent";
 

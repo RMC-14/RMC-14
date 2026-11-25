@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Doors;
 
 /// <inheritdoc/>
-public sealed class TurnstileSystem : SharedTurnstileSystem
+public sealed partial class TurnstileSystem : SharedTurnstileSystem
 {
     [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
     [Dependency] private SpriteSystem _sprite = default!;

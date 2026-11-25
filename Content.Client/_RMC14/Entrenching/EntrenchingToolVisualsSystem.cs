@@ -5,7 +5,7 @@ using static Content.Shared._RMC14.Entrenching.EntrenchingToolComponentVisualLay
 
 namespace Content.Client._RMC14.Entrenching;
 
-public sealed class EntrenchingToolVisualsSystem : EntitySystem
+public sealed partial class EntrenchingToolVisualsSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
 

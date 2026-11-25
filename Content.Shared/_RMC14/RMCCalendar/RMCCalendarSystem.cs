@@ -7,7 +7,7 @@ using Content.Shared._RMC14.RMCCustomHoliday;
 
 namespace Content.Shared._RMC14.RMCCalendar;
 
-public sealed class RMCCalendarSystem : EntitySystem
+public sealed partial class RMCCalendarSystem : EntitySystem
 {
     [Dependency] private SharedGameTicker _ticker = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

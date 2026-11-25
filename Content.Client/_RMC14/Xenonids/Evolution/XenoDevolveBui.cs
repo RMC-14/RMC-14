@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Xenonids.Evolution;
 
 [UsedImplicitly]
-public sealed class XenoDevolveBui : BoundUserInterface
+public sealed partial class XenoDevolveBui : BoundUserInterface
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

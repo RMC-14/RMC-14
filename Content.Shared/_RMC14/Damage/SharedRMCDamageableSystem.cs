@@ -43,7 +43,7 @@ using Content.Shared.StatusEffect;
 
 namespace Content.Shared._RMC14.Damage;
 
-public abstract class SharedRMCDamageableSystem : EntitySystem
+public abstract partial class SharedRMCDamageableSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageable = default!;

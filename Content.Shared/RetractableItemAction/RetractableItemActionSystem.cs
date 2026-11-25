@@ -13,7 +13,7 @@ namespace Content.Shared.RetractableItemAction;
 /// <summary>
 /// System for handling retractable items, such as armblades.
 /// </summary>
-public sealed class RetractableItemActionSystem : EntitySystem
+public sealed partial class RetractableItemActionSystem : EntitySystem
 {
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedContainerSystem _containers = default!;

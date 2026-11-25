@@ -18,7 +18,7 @@ namespace Content.Shared.Ninja.Systems;
 /// <summary>
 /// Handles dashing logic including charge consumption and checking attempt events.
 /// </summary>
-public sealed class DashAbilitySystem : EntitySystem
+public sealed partial class DashAbilitySystem : EntitySystem
 {
     [Dependency] private ActionContainerSystem _actionContainer = default!;
     [Dependency] private IGameTiming _timing = default!;

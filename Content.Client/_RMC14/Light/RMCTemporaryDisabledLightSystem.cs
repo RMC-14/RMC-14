@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Light;
 
-public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
+public sealed partial class RMCTemporaryDisabledLightSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private ContainerSystem _container = default!;

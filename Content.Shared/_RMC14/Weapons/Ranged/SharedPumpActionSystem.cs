@@ -9,7 +9,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public abstract class SharedPumpActionSystem : EntitySystem
+public abstract partial class SharedPumpActionSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

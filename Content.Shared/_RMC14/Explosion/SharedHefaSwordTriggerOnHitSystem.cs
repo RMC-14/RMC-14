@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Explosion;
 
-public abstract class SharedHefaSwordTriggerOnHitSystem : EntitySystem
+public abstract partial class SharedHefaSwordTriggerOnHitSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;

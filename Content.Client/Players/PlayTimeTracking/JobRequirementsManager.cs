@@ -19,7 +19,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Players.PlayTimeTracking;
 
-public sealed class JobRequirementsManager : ISharedPlaytimeManager
+public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
 {
     [Dependency] private IBaseClient _client = default!;
     [Dependency] private IClientNetManager _net = default!;

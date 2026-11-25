@@ -12,7 +12,7 @@ namespace Content.Server.Physics.Controllers;
 /// <summary>
 /// A system which makes its entity chasing another entity with selected component.
 /// </summary>
-public sealed class ChasingWalkSystem : VirtualController
+public sealed partial class ChasingWalkSystem : VirtualController
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IRobustRandom _random = default!;

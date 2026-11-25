@@ -7,7 +7,7 @@ using Robust.Shared.Player;
 namespace Content.Server.Materials;
 
 /// <inheritdoc/>
-public sealed class OreSiloSystem : SharedOreSiloSystem
+public sealed partial class OreSiloSystem : SharedOreSiloSystem
 {
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private NavMapSystem _navMap = default!;

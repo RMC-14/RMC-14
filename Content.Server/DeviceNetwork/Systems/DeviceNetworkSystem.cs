@@ -16,7 +16,7 @@ namespace Content.Server.DeviceNetwork.Systems
     ///     Device networking allows machines and devices to communicate with each other while adhering to restrictions like range or being connected to the same powernet.
     /// </summary>
     [UsedImplicitly]
-    public sealed class DeviceNetworkSystem : SharedDeviceNetworkSystem
+    public sealed partial class DeviceNetworkSystem : SharedDeviceNetworkSystem
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private IPrototypeManager _protoMan = default!;

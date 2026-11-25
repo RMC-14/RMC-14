@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Mining;
 
-public sealed class MiningOverlay : Overlay
+public sealed partial class MiningOverlay : Overlay
 {
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private IGameTiming _timing = default!;

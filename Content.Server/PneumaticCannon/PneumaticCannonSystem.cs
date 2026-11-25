@@ -16,7 +16,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Server.PneumaticCannon;
 
-public sealed class PneumaticCannonSystem : SharedPneumaticCannonSystem
+public sealed partial class PneumaticCannonSystem : SharedPneumaticCannonSystem
 {
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private GasTankSystem _gasTank = default!;

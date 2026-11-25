@@ -16,7 +16,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Gateway.Systems;
 
-public sealed class GatewaySystem : EntitySystem
+public sealed partial class GatewaySystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private IGameTiming _timing = default!;

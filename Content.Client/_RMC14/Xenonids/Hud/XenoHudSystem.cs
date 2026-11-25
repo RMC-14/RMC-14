@@ -2,7 +2,7 @@
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
-public sealed class XenoHudSystem : EntitySystem
+public sealed partial class XenoHudSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
 

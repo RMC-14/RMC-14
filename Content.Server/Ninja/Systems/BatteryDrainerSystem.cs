@@ -14,7 +14,7 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Handles the doafter and power transfer when draining.
 /// </summary>
-public sealed class BatteryDrainerSystem : SharedBatteryDrainerSystem
+public sealed partial class BatteryDrainerSystem : SharedBatteryDrainerSystem
 {
     [Dependency] private BatterySystem _battery = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

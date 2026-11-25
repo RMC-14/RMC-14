@@ -18,7 +18,7 @@ namespace Content.Server.Power.Generator;
 /// <seealso cref="PowerSwitchableComponent"/>
 /// <seealso cref="PortableGeneratorSystem"/>
 /// <seealso cref="GeneratorSystem"/>
-public sealed class PowerSwitchableSystem : SharedPowerSwitchableSystem
+public sealed partial class PowerSwitchableSystem : SharedPowerSwitchableSystem
 {
     [Dependency] private NodeGroupSystem _nodeGroup = default!;
     [Dependency] private PopupSystem _popup = default!;

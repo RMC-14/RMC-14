@@ -8,7 +8,7 @@ namespace Content.Server.Anomaly.Effects;
 /// <summary>
 /// This handles <see cref="TempAffectingAnomalyComponent"/>
 /// </summary>
-public sealed class TempAffectingAnomalySystem : EntitySystem
+public sealed partial class TempAffectingAnomalySystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmosphere = default!;
     [Dependency] private TransformSystem _xform = default!;

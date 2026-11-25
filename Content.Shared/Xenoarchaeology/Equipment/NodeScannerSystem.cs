@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared.Xenoarchaeology.Equipment;
 
 /// <summary> Controls behaviour of artifact node scanner device. </summary>
-public sealed class NodeScannerSystem : EntitySystem
+public sealed partial class NodeScannerSystem : EntitySystem
 {
     [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private IGameTiming _timing = default!;

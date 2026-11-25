@@ -23,7 +23,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared.Stunnable;
 
-public abstract class SharedStunSystem : EntitySystem
+public abstract partial class SharedStunSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

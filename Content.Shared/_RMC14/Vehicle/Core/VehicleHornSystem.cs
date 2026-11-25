@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleHornSystem : EntitySystem
+public sealed partial class VehicleHornSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;

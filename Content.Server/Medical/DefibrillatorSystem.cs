@@ -30,7 +30,7 @@ namespace Content.Server.Medical;
 /// <summary>
 /// This handles interactions and logic relating to <see cref="DefibrillatorComponent"/>
 /// </summary>
-public sealed class DefibrillatorSystem : EntitySystem
+public sealed partial class DefibrillatorSystem : EntitySystem
 {
     [Dependency] private ChatSystem _chatManager = default!;
     [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;

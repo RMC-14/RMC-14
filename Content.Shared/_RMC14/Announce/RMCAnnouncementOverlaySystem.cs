@@ -13,7 +13,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Announce;
 
-public sealed class RMCAnnouncementOverlaySystem : EntitySystem
+public sealed partial class RMCAnnouncementOverlaySystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IConfigurationManager _config = default!;

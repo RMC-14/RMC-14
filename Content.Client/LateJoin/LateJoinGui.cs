@@ -23,7 +23,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.LateJoin
 {
-    public sealed class LateJoinGui : DefaultWindow
+    public sealed partial class LateJoinGui : DefaultWindow
     {
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private IClientConsoleHost _consoleHost = default!;

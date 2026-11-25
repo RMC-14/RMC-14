@@ -2,7 +2,7 @@ using Content.Server.DeviceLinking.Systems;
 
 namespace Content.Server.Disposal.Tube;
 
-public sealed class DisposalSignallerSystem : EntitySystem
+public sealed partial class DisposalSignallerSystem : EntitySystem
 {
     [Dependency] private DeviceLinkSystem _link = default!;
 

@@ -14,7 +14,7 @@ using static Robust.Client.UserInterface.Controls.TabContainer;
 
 namespace Content.Client._RMC14.LinkAccount;
 
-public sealed class LinkAccountUIController : UIController, IOnSystemChanged<LinkAccountSystem>
+public sealed partial class LinkAccountUIController : UIController, IOnSystemChanged<LinkAccountSystem>
 {
     [Dependency] private IClipboardManager _clipboard = default!;
     [Dependency] private IConfigurationManager _config = default!;

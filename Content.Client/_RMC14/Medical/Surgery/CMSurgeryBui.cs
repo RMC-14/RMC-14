@@ -13,7 +13,7 @@ using static Robust.Client.UserInterface.Control;
 namespace Content.Client._RMC14.Medical.Surgery;
 
 [UsedImplicitly]
-public sealed class CMSurgeryBui : BoundUserInterface
+public sealed partial class CMSurgeryBui : BoundUserInterface
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IPlayerManager _player = default!;

@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Players.JobWhitelist;
 
-public sealed class JobWhitelistManager : IPostInjectInit
+public sealed partial class JobWhitelistManager : IPostInjectInit
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private IServerDbManager _db = default!;

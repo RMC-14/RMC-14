@@ -12,7 +12,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.DeviceLinking.Systems;
 
-public sealed class LogicGateSystem : EntitySystem
+public sealed partial class LogicGateSystem : EntitySystem
 {
     [Dependency] private DeviceLinkSystem _deviceLink = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

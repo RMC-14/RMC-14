@@ -3,7 +3,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 // Overlays for design nodes to indicate their type. Visible to xenos only
-public sealed class DesignerNodeOverlaySystem : EntitySystem
+public sealed partial class DesignerNodeOverlaySystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

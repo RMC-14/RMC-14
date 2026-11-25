@@ -7,7 +7,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Client._RMC14.TacticalMap;
 
-public sealed class TacticalMapSystem : SharedTacticalMapSystem
+public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

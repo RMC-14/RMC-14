@@ -4,7 +4,7 @@ using Content.Shared.Preferences;
 
 namespace Content.Server.Humanoid.Systems;
 
-public sealed class RandomHumanoidAppearanceSystem : EntitySystem
+public sealed partial class RandomHumanoidAppearanceSystem : EntitySystem
 {
     [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private MetaDataSystem _metaData = default!;

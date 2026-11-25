@@ -21,7 +21,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Forensics
 {
-    public sealed class ForensicScannerSystem : EntitySystem
+    public sealed partial class ForensicScannerSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
         [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;

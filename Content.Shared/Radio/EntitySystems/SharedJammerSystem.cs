@@ -6,7 +6,7 @@ using Content.Shared.DeviceNetwork.Systems;
 
 namespace Content.Shared.Radio.EntitySystems;
 
-public abstract class SharedJammerSystem : EntitySystem
+public abstract partial class SharedJammerSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedDeviceNetworkJammerSystem _jammer = default!;

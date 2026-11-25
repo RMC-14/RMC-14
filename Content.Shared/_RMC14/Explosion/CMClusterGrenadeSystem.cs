@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Explosion;
 
-public sealed class CMClusterGrenadeSystem : EntitySystem
+public sealed partial class CMClusterGrenadeSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
 

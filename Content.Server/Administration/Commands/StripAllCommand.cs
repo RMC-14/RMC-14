@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class StripAllCommand : LocalizedEntityCommands
+public sealed partial class StripAllCommand : LocalizedEntityCommands
 {
     [Dependency] private SharedHandsSystem _handsSystem = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;

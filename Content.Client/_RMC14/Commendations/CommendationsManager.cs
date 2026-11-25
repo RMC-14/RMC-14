@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Commendations;
 
-public sealed class CommendationsManager : IPostInjectInit
+public sealed partial class CommendationsManager : IPostInjectInit
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IEntitySystemManager _systems = default!;

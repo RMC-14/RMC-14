@@ -3,7 +3,7 @@ using Content.Shared._RMC14.UserInterface;
 
 namespace Content.Client._RMC14.Dialog;
 
-public sealed class DialogUISystem : EntitySystem
+public sealed partial class DialogUISystem : EntitySystem
 {
     [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;
 

@@ -13,7 +13,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.Disposal.Unit
 {
-    public sealed class DisposableSystem : EntitySystem
+    public sealed partial class DisposableSystem : EntitySystem
     {
         [Dependency] private ThrowingSystem _throwing = default!;
         [Dependency] private AtmosphereSystem _atmosphereSystem = default!;

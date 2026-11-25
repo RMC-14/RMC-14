@@ -3,7 +3,7 @@ using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
-public sealed class ActionGunSystem : EntitySystem
+public sealed partial class ActionGunSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedGunSystem _gun = default!;

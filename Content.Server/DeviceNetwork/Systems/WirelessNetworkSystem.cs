@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace Content.Server.DeviceNetwork.Systems
 {
     [UsedImplicitly]
-    public sealed class WirelessNetworkSystem : EntitySystem
+    public sealed partial class WirelessNetworkSystem : EntitySystem
     {
         [Dependency] private SharedTransformSystem _transformSystem = default!;
 

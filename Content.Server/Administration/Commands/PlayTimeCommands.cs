@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Host)]
-public sealed class PlayTimeAddOverallCommand : IConsoleCommand
+public sealed partial class PlayTimeAddOverallCommand : IConsoleCommand
 {
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
@@ -59,7 +59,7 @@ public sealed class PlayTimeAddOverallCommand : IConsoleCommand
 }
 
 [AdminCommand(AdminFlags.Host)]
-public sealed class PlayTimeAddRoleCommand : IConsoleCommand
+public sealed partial class PlayTimeAddRoleCommand : IConsoleCommand
 {
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
@@ -124,7 +124,7 @@ public sealed class PlayTimeAddRoleCommand : IConsoleCommand
 }
 
 [AdminCommand(AdminFlags.Debug)] // RMC14 Moderator -> Debug
-public sealed class PlayTimeGetOverallCommand : IConsoleCommand
+public sealed partial class PlayTimeGetOverallCommand : IConsoleCommand
 {
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
@@ -169,7 +169,7 @@ public sealed class PlayTimeGetOverallCommand : IConsoleCommand
 }
 
 [AdminCommand(AdminFlags.Debug)] // RMC14 Moderator -> Debug
-public sealed class PlayTimeGetRoleCommand : IConsoleCommand
+public sealed partial class PlayTimeGetRoleCommand : IConsoleCommand
 {
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
@@ -248,7 +248,7 @@ public sealed class PlayTimeGetRoleCommand : IConsoleCommand
 /// Saves the timers for a particular player immediately
 /// </summary>
 [AdminCommand(AdminFlags.Debug)] // RMC14 Moderator -> Debug
-public sealed class PlayTimeSaveCommand : IConsoleCommand
+public sealed partial class PlayTimeSaveCommand : IConsoleCommand
 {
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
@@ -290,7 +290,7 @@ public sealed class PlayTimeSaveCommand : IConsoleCommand
 }
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class PlayTimeFlushCommand : IConsoleCommand
+public sealed partial class PlayTimeFlushCommand : IConsoleCommand
 {
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;

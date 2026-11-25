@@ -3,7 +3,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.GameStates;
 
-public abstract class SharedRMCPvsSystem : EntitySystem
+public abstract partial class SharedRMCPvsSystem : EntitySystem
 {
     [Dependency] private ISharedPlayerManager _player = default!;
 

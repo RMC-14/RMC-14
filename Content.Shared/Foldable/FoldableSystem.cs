@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 namespace Content.Shared.Foldable;
 
 // TODO: This system could arguably be refactored into a general state system, as it is being utilized for a lot of different objects with various needs.
-public sealed class FoldableSystem : EntitySystem
+public sealed partial class FoldableSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedBuckleSystem _buckle = default!;

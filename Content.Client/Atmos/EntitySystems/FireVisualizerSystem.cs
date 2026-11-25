@@ -10,7 +10,7 @@ namespace Content.Client.Atmos.EntitySystems;
 /// <summary>
 /// This handles the display of fire effects on flammable entities.
 /// </summary>
-public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent>
+public sealed partial class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent>
 {
     [Dependency] private PointLightSystem _lights = default!;
 

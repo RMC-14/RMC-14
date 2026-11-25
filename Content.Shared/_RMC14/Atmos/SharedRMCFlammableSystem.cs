@@ -45,7 +45,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Atmos;
 
-public abstract class SharedRMCFlammableSystem : EntitySystem
+public abstract partial class SharedRMCFlammableSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

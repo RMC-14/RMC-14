@@ -21,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public sealed class RMCFultonSystem : EntitySystem
+public sealed partial class RMCFultonSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

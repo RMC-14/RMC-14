@@ -7,7 +7,7 @@ using Robust.Shared.Animations;
 
 namespace Content.Client._RMC14.Pushup;
 
-public sealed class RMCPushupVisualizerSystem : EntitySystem
+public sealed partial class RMCPushupVisualizerSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
     [Dependency] private IEyeManager _eye = default!;

@@ -9,7 +9,7 @@ namespace Content.Server.Atmos.EntitySystems;
 /// Handles automatically adding a grid atmosphere to grids that become large enough, allowing players to build shuttles
 /// with a sealed atmosphere from scratch.
 /// </summary>
-public sealed class AutomaticAtmosSystem : EntitySystem
+public sealed partial class AutomaticAtmosSystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
 

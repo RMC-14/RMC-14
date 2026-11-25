@@ -17,7 +17,7 @@ using static Content.Shared.Administration.Logs.AdminLogsEuiMsg;
 
 namespace Content.Server.Administration.Logs;
 
-public sealed class AdminLogsEui : BaseEui
+public sealed partial class AdminLogsEui : BaseEui
 {
     [Dependency] private IAdminLogManager _adminLogs = default!;
     [Dependency] private IAdminManager _adminManager = default!;

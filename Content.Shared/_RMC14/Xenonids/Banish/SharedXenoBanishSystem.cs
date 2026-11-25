@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Banish;
 
-public abstract class SharedXenoBanishSystem : EntitySystem
+public abstract partial class SharedXenoBanishSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private DialogSystem _dialog = default!;

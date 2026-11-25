@@ -14,7 +14,7 @@ using Content.Server.StationRecords;
 
 namespace Content.Server._RMC14.Announce;
 
-public sealed class MarinePresenceAnnounceSystem : EntitySystem
+public sealed partial class MarinePresenceAnnounceSystem : EntitySystem
 {
     [Dependency] private ARESCoreSystem _aresCore = default!;
     [Dependency] private MarineAnnounceSystem _marineAnnounce = default!;

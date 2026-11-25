@@ -28,7 +28,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class RMCBattleExecuteSystem : EntitySystem
+public sealed partial class RMCBattleExecuteSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _admin = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

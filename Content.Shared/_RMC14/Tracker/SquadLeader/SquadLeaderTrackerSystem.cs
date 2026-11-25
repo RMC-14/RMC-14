@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Tracker.SquadLeader;
 
-public sealed class SquadLeaderTrackerSystem : EntitySystem
+public sealed partial class SquadLeaderTrackerSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private AlertsSystem _alerts = default!;

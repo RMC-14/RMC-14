@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Walker;
 
-public sealed class XenoResinWalkerSystem : EntitySystem
+public sealed partial class XenoResinWalkerSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;

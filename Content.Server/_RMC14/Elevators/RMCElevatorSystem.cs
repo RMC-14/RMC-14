@@ -22,7 +22,7 @@ using System.Numerics;
 
 namespace Content.Server._RMC14.Elevators;
 
-public sealed class RMCElevatorSystem : SharedRMCElevatorSystem
+public sealed partial class RMCElevatorSystem : SharedRMCElevatorSystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;

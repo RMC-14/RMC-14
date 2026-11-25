@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Weapons.Misc;
 
-public abstract class SharedGrapplingGunSystem : EntitySystem
+public abstract partial class SharedGrapplingGunSystem : EntitySystem
 {
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private INetManager _netManager = default!;

@@ -12,7 +12,7 @@ namespace Content.Shared.Singularity.EntitySystems;
 /// <summary>
 /// The entity system primarily responsible for managing <see cref="SingularityComponent"/>s.
 /// </summary>
-public abstract class SharedSingularitySystem : EntitySystem
+public abstract partial class SharedSingularitySystem : EntitySystem
 {
 #region Dependencies
     [Dependency] private SharedAppearanceSystem _visualizer = default!;

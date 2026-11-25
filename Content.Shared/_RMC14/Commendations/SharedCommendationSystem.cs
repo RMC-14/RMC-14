@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Commendations;
 
-public abstract class SharedCommendationSystem : EntitySystem
+public abstract partial class SharedCommendationSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
 

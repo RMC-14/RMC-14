@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.GMRequest;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class GMRequestUICommand : LocalizedCommands
+public sealed partial class GMRequestUICommand : LocalizedCommands
 {
     [Dependency] private EuiManager _eui = default!;
 

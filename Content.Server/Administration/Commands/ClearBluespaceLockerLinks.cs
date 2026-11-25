@@ -5,7 +5,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class ClearBluespaceLockerLinks : IConsoleCommand
+public sealed partial class ClearBluespaceLockerLinks : IConsoleCommand
 {
     [Dependency] private IEntityManager _entityManager = default!;
 

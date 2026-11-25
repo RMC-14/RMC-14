@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Placement;
 
-public sealed class PlacementLoggerSystem : EntitySystem
+public sealed partial class PlacementLoggerSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;

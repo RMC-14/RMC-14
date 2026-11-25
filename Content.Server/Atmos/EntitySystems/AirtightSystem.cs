@@ -7,7 +7,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Atmos.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class AirtightSystem : EntitySystem
+    public sealed partial class AirtightSystem : EntitySystem
     {
         [Dependency] private SharedTransformSystem _transform = default!;
         [Dependency] private AtmosphereSystem _atmosphereSystem = default!;

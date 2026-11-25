@@ -8,7 +8,7 @@ using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
 
 namespace Content.Server.Repairable
 {
-    public sealed class RepairableSystem : SharedRepairableSystem
+    public sealed partial class RepairableSystem : SharedRepairableSystem
     {
         [Dependency] private SharedToolSystem _toolSystem = default!;
         [Dependency] private DamageableSystem _damageableSystem = default!;

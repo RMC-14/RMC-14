@@ -10,7 +10,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin.Commendations;
 
 [AdminCommand(AdminFlags.Logs)]
-public sealed class RMCListCommendationsCommand : LocalizedCommands
+public sealed partial class RMCListCommendationsCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _locator = default!;
     [Dependency] private IServerDbManager _db = default!;

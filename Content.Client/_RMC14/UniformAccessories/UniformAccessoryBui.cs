@@ -11,7 +11,7 @@ using Robust.Shared.Containers;
 namespace Content.Client._RMC14.UniformAccessories;
 
 [UsedImplicitly]
-public sealed class UniformAccessoryBui : BoundUserInterface
+public sealed partial class UniformAccessoryBui : BoundUserInterface
 {
     [Dependency] private IClyde _displayManager = default!;
     [Dependency] private IEyeManager _eye = default!;

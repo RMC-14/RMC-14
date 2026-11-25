@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Voicelines;
 
-public sealed class HumanoidVoicelinesSystem : EntitySystem
+public sealed partial class HumanoidVoicelinesSystem : EntitySystem
 {
     [Dependency] private INetConfigurationManager _config = default!;
 

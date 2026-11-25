@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.ViewNotes)]
-public sealed class OpenAdminNotesCommand : LocalizedCommands
+public sealed partial class OpenAdminNotesCommand : LocalizedCommands
 {
     [Dependency] private IAdminNotesManager _adminNotes = default!;
     [Dependency] private IPlayerLocator _locator = default!;

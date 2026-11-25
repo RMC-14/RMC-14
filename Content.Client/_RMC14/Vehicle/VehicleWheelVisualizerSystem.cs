@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class VehicleWheelVisualizerSystem : VisualizerSystem<VehicleWheelSlotsComponent>
+public sealed partial class VehicleWheelVisualizerSystem : VisualizerSystem<VehicleWheelSlotsComponent>
 {
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private IGameTiming _timing = default!;

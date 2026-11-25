@@ -7,7 +7,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Client.Shuttles.Systems
 {
-    public sealed class ShuttleConsoleSystem : SharedShuttleConsoleSystem
+    public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     {
         [Dependency] private IInputManager _input = default!;
         [Dependency] private IPlayerManager _playerManager = default!;

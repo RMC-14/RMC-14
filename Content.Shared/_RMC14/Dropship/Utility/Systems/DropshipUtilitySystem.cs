@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public sealed class DropshipUtilitySystem : EntitySystem
+public sealed partial class DropshipUtilitySystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedDropshipSystem _dropship = default!;

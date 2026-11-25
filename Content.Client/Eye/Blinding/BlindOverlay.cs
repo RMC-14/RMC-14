@@ -10,7 +10,7 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Client.Eye.Blinding
 {
-    public sealed class BlindOverlay : Overlay
+    public sealed partial class BlindOverlay : Overlay
     {
         private static readonly ProtoId<ShaderPrototype> GreyscaleShader = "GreyscaleFullscreen";
         private static readonly ProtoId<ShaderPrototype> CircleShader = "CircleMask";

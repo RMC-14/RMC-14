@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.NewPlayer;
 
-public sealed class NewPlayerSystem : EntitySystem
+public sealed partial class NewPlayerSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IConfigurationManager _config = default!;

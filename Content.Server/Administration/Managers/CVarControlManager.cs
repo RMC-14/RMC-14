@@ -11,7 +11,7 @@ namespace Content.Server.Administration.Managers;
 /// <summary>
 /// Manages the control of CVars via the <see cref="Content.Shared.CCVar.CVarAccess.CVarControl"/> attribute.
 /// </summary>
-public sealed class CVarControlManager : IPostInjectInit
+public sealed partial class CVarControlManager : IPostInjectInit
 {
     [Dependency] private IReflectionManager _reflectionManager = default!;
     [Dependency] private IAdminManager _adminManager = default!;

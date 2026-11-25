@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Scuttle;
 
-public sealed class RMCScuttleCinematicOverlay : Overlay
+public sealed partial class RMCScuttleCinematicOverlay : Overlay
 {
     private static readonly ResPath SpritePath = new("/Textures/_RMC14/Interface/scuttle_explosion.rsi");
     private static readonly SpriteSpecifier.Rsi IntroShip = new(SpritePath, "intro_ship");

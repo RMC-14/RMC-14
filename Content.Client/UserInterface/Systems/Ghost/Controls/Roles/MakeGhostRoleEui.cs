@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles;
 
 [UsedImplicitly]
-public sealed class MakeGhostRoleEui : BaseEui
+public sealed partial class MakeGhostRoleEui : BaseEui
 {
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;

@@ -15,7 +15,7 @@ namespace Content.Server.Administration.Managers;
 /// Handles kicking people that connect to multiple servers on the same DB at once.
 /// </summary>
 /// <seealso cref="CCVars.AdminAllowMultiServerPlay"/>
-public sealed class MultiServerKickManager
+public sealed partial class MultiServerKickManager
 {
     public const string NotificationChannel = "multi_server_kick";
 

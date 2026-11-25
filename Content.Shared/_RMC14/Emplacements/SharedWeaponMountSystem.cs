@@ -56,7 +56,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Emplacements;
 
-public abstract class SharedWeaponMountSystem : EntitySystem
+public abstract partial class SharedWeaponMountSystem : EntitySystem
 {
     [Dependency] protected SharedXenoAcidSystem XenoAcid = default!;
 

@@ -12,7 +12,7 @@ using static Content.Shared.Storage.EntitySpawnCollection;
 
 namespace Content.Server.Storage.EntitySystems
 {
-    public sealed class SpawnItemsOnUseSystem : EntitySystem
+    public sealed partial class SpawnItemsOnUseSystem : EntitySystem
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private IAdminLogManager _adminLogger = default!;

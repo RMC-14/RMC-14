@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachablePryingSystem : EntitySystem
+public sealed partial class AttachablePryingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
 

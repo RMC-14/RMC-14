@@ -8,7 +8,7 @@ using Robust.Shared.Audio.Components;
 
 namespace Content.Server._RMC14.Campfire;
 
-public sealed class CampfireSystem : SharedCampfireSystem
+public sealed partial class CampfireSystem : SharedCampfireSystem
 {
     [Dependency] private SharedAmbientSoundSystem _ambient = default!;
     [Dependency] private SharedPointLightSystem _lights = default!;

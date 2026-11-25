@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Anomaly.Effects;
 
-public sealed class EntityAnomalySystem : SharedEntityAnomalySystem
+public sealed partial class EntityAnomalySystem : SharedEntityAnomalySystem
 {
     [Dependency] private SharedAnomalySystem _anomaly = default!;
     [Dependency] private IRobustRandom _random = default!;

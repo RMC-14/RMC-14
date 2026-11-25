@@ -6,7 +6,7 @@ namespace Content.Shared.Clothing.EntitySystems;
 /// <summary>
 /// On toggle handles the changes to ItemComponent.HeldPrefix. <see cref="ToggleClothingPrefixComponent"/>.
 /// </summary>
-public sealed class ToggleClothingPrefixSystem : EntitySystem
+public sealed partial class ToggleClothingPrefixSystem : EntitySystem
 {
     [Dependency] private ClothingSystem _clothing = default!;
 

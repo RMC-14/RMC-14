@@ -10,7 +10,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Chat;
 
-public abstract class SharedCMChatSystem : EntitySystem
+public abstract partial class SharedCMChatSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private SquadSystem _squadSystem = default!;

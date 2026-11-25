@@ -8,7 +8,7 @@ using Robust.Shared.Graphics;
 
 namespace Content.Client.SprayPainter;
 
-public sealed class SprayPainterSystem : SharedSprayPainterSystem
+public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
 {
     [Dependency] private IResourceCache _resourceCache = default!;
 

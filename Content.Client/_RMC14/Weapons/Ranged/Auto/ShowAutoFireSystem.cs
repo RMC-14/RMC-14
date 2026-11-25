@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Auto;
 
-public sealed class ShowAutoFireSystem : EntitySystem
+public sealed partial class ShowAutoFireSystem : EntitySystem
 {
     [Dependency] private IConsoleHost _console = default!;
     [Dependency] private GunToggleableAutoFireSystem _autoFire = default!;

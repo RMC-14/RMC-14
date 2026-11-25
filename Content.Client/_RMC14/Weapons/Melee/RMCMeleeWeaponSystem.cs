@@ -14,7 +14,7 @@ using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Weapons.Melee;
 
-public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
+public sealed partial class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private IEyeManager _eye = default!;

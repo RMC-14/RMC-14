@@ -16,7 +16,7 @@ namespace Content.Server.Holiday.Christmas;
 /// <summary>
 /// This handles granting players their gift.
 /// </summary>
-public sealed class RandomGiftSystem : EntitySystem
+public sealed partial class RandomGiftSystem : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private HandsSystem _hands = default!;

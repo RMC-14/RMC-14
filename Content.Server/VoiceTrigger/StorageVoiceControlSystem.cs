@@ -12,7 +12,7 @@ namespace Content.Server.VoiceTrigger;
 /// <summary>
 /// Allows storages to be manipulated using voice commands.
 /// </summary>
-public sealed class StorageVoiceControlSystem : EntitySystem
+public sealed partial class StorageVoiceControlSystem : EntitySystem
 {
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private HandsSystem _hands = default!;

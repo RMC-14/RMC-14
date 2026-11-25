@@ -11,7 +11,7 @@ using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Megaphone;
 
-public sealed class RMCServerMegaphoneSystem : EntitySystem
+public sealed partial class RMCServerMegaphoneSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IServerConsoleHost _console = default!;

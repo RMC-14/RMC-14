@@ -5,7 +5,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.Doom;
-public sealed class DoomOverlay : Overlay
+public sealed partial class DoomOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public override bool RequestScreenTexture => true;

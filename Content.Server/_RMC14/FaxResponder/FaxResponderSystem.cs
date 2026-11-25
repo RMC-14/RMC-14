@@ -14,7 +14,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.FaxResponder;
 
-public sealed class FaxResponderSystem : EntitySystem
+public sealed partial class FaxResponderSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private GameTicker _gameTicker = default!;

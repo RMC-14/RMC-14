@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Damage.Commands
 {
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class GodModeCommand : IConsoleCommand
+    public sealed partial class GodModeCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

@@ -16,7 +16,7 @@ namespace Content.Server.Mapping;
 /// <summary>
 ///     Handles autosaving maps.
 /// </summary>
-public sealed class MappingSystem : EntitySystem
+public sealed partial class MappingSystem : EntitySystem
 {
     [Dependency] private IConsoleHost _conHost = default!;
     [Dependency] private IGameTiming _timing = default!;

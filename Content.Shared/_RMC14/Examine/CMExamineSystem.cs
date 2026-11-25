@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Examine;
 
-public sealed class CMExamineSystem : EntitySystem
+public sealed partial class CMExamineSystem : EntitySystem
 {
     [Dependency] private SkillsSystem _skillsSystem = default!;
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;

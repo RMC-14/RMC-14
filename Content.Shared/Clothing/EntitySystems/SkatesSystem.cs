@@ -8,7 +8,7 @@ namespace Content.Shared.Clothing.EntitySystems;
 /// <summary>
 /// Changes the friction and acceleration of the wearer and also the damage on impact variables of thew wearer when hitting a static object.
 /// </summary>
-public sealed class SkatesSystem : EntitySystem
+public sealed partial class SkatesSystem : EntitySystem
 {
     [Dependency] private MovementSpeedModifierSystem _move = default!;
     [Dependency] private DamageOnHighSpeedImpactSystem _impact = default!;

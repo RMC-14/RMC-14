@@ -13,7 +13,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.CartridgeLoader;
 
-public sealed class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
+public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
 {
     [Dependency] private ContainerSystem _containerSystem = default!;
     [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;

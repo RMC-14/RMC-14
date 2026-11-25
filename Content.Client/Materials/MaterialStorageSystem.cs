@@ -3,7 +3,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Materials;
 
-public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
+public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private TransformSystem _transform = default!;

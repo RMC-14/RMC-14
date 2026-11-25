@@ -17,7 +17,7 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Client._RMC14.Overwatch;
 
-public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
+public sealed partial class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IEyeManager _eye = default!;

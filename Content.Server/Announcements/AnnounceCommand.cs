@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Announcements;
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class AnnounceCommand : LocalizedEntityCommands
+public sealed partial class AnnounceCommand : LocalizedEntityCommands
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private IPrototypeManager _proto = default!;

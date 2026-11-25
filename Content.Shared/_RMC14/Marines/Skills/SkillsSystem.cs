@@ -29,7 +29,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Skills;
 
-public sealed class SkillsSystem : EntitySystem
+public sealed partial class SkillsSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private ExamineSystemShared _examine = default!;

@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 
-public sealed class GunIFFSystem : EntitySystem
+public sealed partial class GunIFFSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

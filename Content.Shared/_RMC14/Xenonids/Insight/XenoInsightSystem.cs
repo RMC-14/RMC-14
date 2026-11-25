@@ -5,7 +5,7 @@ using Content.Shared.Popups;
 
 namespace Content.Shared._RMC14.Xenonids.Insight;
 
-public sealed class XenoInsightSystem : EntitySystem
+public sealed partial class XenoInsightSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedRMCEmoteSystem _emote = default!;

@@ -11,7 +11,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Marines.Skills.Pamphlets;
 
-public sealed class SkillPamphletSystem : EntitySystem
+public sealed partial class SkillPamphletSystem : EntitySystem
 {
     [Dependency] private SharedJobSystem _job = default!;
     [Dependency] private SharedLanguageSystem _language = default!;

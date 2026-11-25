@@ -5,7 +5,7 @@ using static Robust.Client.Animations.AnimationTrackSpriteFlick;
 
 namespace Content.Client._RMC14.Doors;
 
-public sealed class RMCDoorVisualsSystem : EntitySystem
+public sealed partial class RMCDoorVisualsSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
 

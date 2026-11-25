@@ -14,7 +14,7 @@ namespace Content.Shared.Actions;
 /// <summary>
 /// Handles storing & spawning action entities in a container.
 /// </summary>
-public sealed class ActionContainerSystem : EntitySystem
+public sealed partial class ActionContainerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedContainerSystem _container = default!;

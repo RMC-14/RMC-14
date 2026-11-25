@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.TailSeize;
 
-public sealed class XenoTailSeizeSystem : EntitySystem
+public sealed partial class XenoTailSeizeSystem : EntitySystem
 {
     [Dependency] private XenoHookSystem _hook = default!;
     [Dependency] private XenoProjectileSystem _projectile = default!;

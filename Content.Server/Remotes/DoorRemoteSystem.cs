@@ -11,7 +11,7 @@ using Content.Shared.Remotes.EntitySystems;
 
 namespace Content.Shared.Remotes
 {
-    public sealed class DoorRemoteSystem : SharedDoorRemoteSystem
+    public sealed partial class DoorRemoteSystem : SharedDoorRemoteSystem
     {
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private AirlockSystem _airlock = default!;

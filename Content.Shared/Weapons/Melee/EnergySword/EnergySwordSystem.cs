@@ -7,7 +7,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Weapons.Melee.EnergySword;
 
-public sealed class EnergySwordSystem : EntitySystem
+public sealed partial class EnergySwordSystem : EntitySystem
 {
     [Dependency] private SharedRgbLightControllerSystem _rgbSystem = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

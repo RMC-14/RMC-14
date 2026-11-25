@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 
 namespace Content.Client.Weapons.Melee;
 
-public sealed class MeleeSpreadCommand : LocalizedEntityCommands
+public sealed partial class MeleeSpreadCommand : LocalizedEntityCommands
 {
     [Dependency] private IEyeManager _eyeManager = default!;
     [Dependency] private IInputManager _inputManager = default!;

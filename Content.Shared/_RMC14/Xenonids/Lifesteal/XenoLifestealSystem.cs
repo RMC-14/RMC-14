@@ -15,7 +15,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Lifesteal;
 
-public sealed class XenoLifestealSystem : EntitySystem
+public sealed partial class XenoLifestealSystem : EntitySystem
 {
     [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private DamageableSystem _damageable = default!;

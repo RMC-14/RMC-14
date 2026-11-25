@@ -16,7 +16,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Aid;
 
-public sealed class XenoAidSystem : EntitySystem
+public sealed partial class XenoAidSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private DamageableSystem _damageable = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Stealth)]
-public sealed class StealthminCommand : LocalizedCommands
+public sealed partial class StealthminCommand : LocalizedCommands
 {
     [Dependency] private IAdminManager _adminManager = default!;
 

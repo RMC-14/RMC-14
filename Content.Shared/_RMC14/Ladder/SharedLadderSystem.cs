@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Ladder;
 
-public abstract class SharedLadderSystem : EntitySystem
+public abstract partial class SharedLadderSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedEyeSystem _eye = default!;

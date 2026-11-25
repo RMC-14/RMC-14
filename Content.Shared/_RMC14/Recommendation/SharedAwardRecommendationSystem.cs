@@ -21,7 +21,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Recommendation;
 
-public sealed class SharedAwardRecommendationSystem : EntitySystem
+public sealed partial class SharedAwardRecommendationSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private DialogSystem _dialog = default!;

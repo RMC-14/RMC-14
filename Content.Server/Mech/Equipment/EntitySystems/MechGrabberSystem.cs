@@ -22,7 +22,7 @@ namespace Content.Server.Mech.Equipment.EntitySystems;
 /// <summary>
 /// Handles <see cref="MechGrabberComponent"/> and all related UI logic
 /// </summary>
-public sealed class MechGrabberSystem : EntitySystem
+public sealed partial class MechGrabberSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private MechSystem _mech = default!;

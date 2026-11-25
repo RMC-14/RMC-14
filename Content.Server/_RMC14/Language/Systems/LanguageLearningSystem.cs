@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Language.Systems;
 
-public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
+public sealed partial class LanguageLearningSystem : SharedLanguageLearningSystem
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private ExamineSystemShared _examine = default!;

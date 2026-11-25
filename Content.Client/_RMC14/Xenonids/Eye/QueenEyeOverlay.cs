@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Eye;
 
-public sealed class QueenEyeOverlay : Overlay
+public sealed partial class QueenEyeOverlay : Overlay
 {
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IEntityManager _entities = default!;

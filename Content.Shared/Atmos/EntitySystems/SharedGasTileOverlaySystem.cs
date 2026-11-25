@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Atmos.EntitySystems
 {
-    public abstract class SharedGasTileOverlaySystem : EntitySystem
+    public abstract partial class SharedGasTileOverlaySystem : EntitySystem
     {
         public const byte ChunkSize = 8;
         protected float AccumulatedFrameTime;

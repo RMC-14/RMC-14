@@ -30,7 +30,7 @@ using System.Numerics;
 
 namespace Content.Shared._RMC14.Stun;
 
-public sealed class RMCSizeStunSystem : EntitySystem
+public sealed partial class RMCSizeStunSystem : EntitySystem
 {
     private const double DazedMultiplierSmallXeno = 0.7;
     private const double DazedMultiplierBigXeno = 1.2;

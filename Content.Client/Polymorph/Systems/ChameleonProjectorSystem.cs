@@ -8,7 +8,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client.Polymorph.Systems;
 
-public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
+public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;

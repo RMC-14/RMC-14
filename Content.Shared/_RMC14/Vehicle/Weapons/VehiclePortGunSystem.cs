@@ -18,7 +18,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehiclePortGunSystem : EntitySystem
+public sealed partial class VehiclePortGunSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedEyeSystem _eye = default!;

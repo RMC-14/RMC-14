@@ -9,7 +9,7 @@ using Robust.Shared.Configuration;
 namespace Content.Client._RMC14.Power;
 
 [UsedImplicitly]
-public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private IConfigurationManager _config = default!;
 

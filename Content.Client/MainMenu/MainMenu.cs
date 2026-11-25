@@ -17,7 +17,7 @@ namespace Content.Client.MainMenu
     ///     Main menu screen that is the first screen to be displayed when the game starts.
     /// </summary>
     // Instantiated dynamically through the StateManager, Dependencies will be resolved.
-    public sealed class MainScreen : Robust.Client.State.State
+    public sealed partial class MainScreen : Robust.Client.State.State
     {
         [Dependency] private IBaseClient _client = default!;
         [Dependency] private IClientNetManager _netManager = default!;

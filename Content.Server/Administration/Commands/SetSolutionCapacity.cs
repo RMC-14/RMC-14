@@ -9,7 +9,7 @@ namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.RMCMaintainer)] //RMC14
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class SetSolutionCapacity : IConsoleCommand
+    public sealed partial class SetSolutionCapacity : IConsoleCommand
     {
         [Dependency] private IEntityManager _entManager = default!;
 

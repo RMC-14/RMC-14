@@ -7,7 +7,7 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Handles progress for the survive objective condition.
 /// </summary>
-public sealed class SurviveConditionSystem : EntitySystem
+public sealed partial class SurviveConditionSystem : EntitySystem
 {
     [Dependency] private SharedMindSystem _mind = default!;
 

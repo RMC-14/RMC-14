@@ -3,7 +3,7 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Ammo;
 
-public sealed class RMCEmptyMagSystem : EntitySystem
+public sealed partial class RMCEmptyMagSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
 

@@ -12,7 +12,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Clothing.Systems;
 
-public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
+public sealed partial class ChameleonClothingSystem : SharedChameleonClothingSystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IdentitySystem _identity = default!;

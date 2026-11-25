@@ -21,7 +21,7 @@ namespace Content.Server.CriminalRecords.Systems;
 /// <summary>
 /// Handles all UI for criminal records console
 /// </summary>
-public sealed class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleSystem
+public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleSystem
 {
     [Dependency] private AccessReaderSystem _access = default!;
     [Dependency] private CriminalRecordsSystem _criminalRecords = default!;

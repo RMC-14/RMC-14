@@ -7,7 +7,7 @@ namespace Content.Client.Cargo.Systems;
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed class ClientPriceGunSystem : SharedPriceGunSystem
+public sealed partial class ClientPriceGunSystem : SharedPriceGunSystem
 {
     [Dependency] private UseDelaySystem _useDelay = default!;
 

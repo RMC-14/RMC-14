@@ -24,7 +24,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server._RMC14.Spawners;
 
-public sealed class RMCSpawnerSystem : EntitySystem
+public sealed partial class RMCSpawnerSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private GameTicker _gameTicker = default!;

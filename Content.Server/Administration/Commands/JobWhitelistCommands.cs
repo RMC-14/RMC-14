@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Host)]
-public sealed class JobWhitelistAddCommand : LocalizedCommands
+public sealed partial class JobWhitelistAddCommand : LocalizedCommands
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private JobWhitelistManager _jobWhitelist = default!;
@@ -86,7 +86,7 @@ public sealed class JobWhitelistAddCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Host)]
-public sealed class GetJobWhitelistCommand : LocalizedCommands
+public sealed partial class GetJobWhitelistCommand : LocalizedCommands
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private IPlayerLocator _playerLocator = default!;
@@ -138,7 +138,7 @@ public sealed class GetJobWhitelistCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Host)]
-public sealed class RemoveJobWhitelistCommand : LocalizedCommands
+public sealed partial class RemoveJobWhitelistCommand : LocalizedCommands
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private JobWhitelistManager _jobWhitelist = default!;

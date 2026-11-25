@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Body.Systems;
 
-public sealed class BodySystem : SharedBodySystem
+public sealed partial class BodySystem : SharedBodySystem
 {
     [Dependency] private GhostSystem _ghostSystem = default!;
     [Dependency] private IGameTiming _gameTiming = default!;

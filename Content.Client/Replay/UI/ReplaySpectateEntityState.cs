@@ -10,7 +10,7 @@ namespace Content.Client.Replay.UI;
 /// Gameplay state when observing/spectating an entity during a replay.
 /// </summary>
 [Virtual]
-public class ReplaySpectateEntityState : GameplayState
+public partial class ReplaySpectateEntityState : GameplayState
 {
     [Dependency] private ContentReplayPlaybackManager _replayManager = default!;
 

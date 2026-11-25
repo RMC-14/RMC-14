@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Damage.Systems;
 
-public sealed class DamageOnHighSpeedImpactSystem : EntitySystem
+public sealed partial class DamageOnHighSpeedImpactSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IRobustRandom _robustRandom = default!;

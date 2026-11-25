@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Logs)]
-public sealed class OpenAdminLogsCommand : LocalizedEntityCommands
+public sealed partial class OpenAdminLogsCommand : LocalizedEntityCommands
 {
     [Dependency] private EuiManager _euiManager = default!;
 

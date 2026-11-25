@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Wieldable;
 
-public sealed class RMCWieldableSystem : EntitySystem
+public sealed partial class RMCWieldableSystem : EntitySystem
 {
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private IGameTiming _timing = default!;

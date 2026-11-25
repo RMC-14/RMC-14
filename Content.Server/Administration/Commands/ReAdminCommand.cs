@@ -5,7 +5,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AnyCommand]
-    public sealed class ReAdminCommand : LocalizedCommands
+    public sealed partial class ReAdminCommand : LocalizedCommands
     {
         [Dependency] private IAdminManager _adminManager = default!;
 

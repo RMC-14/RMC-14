@@ -12,7 +12,7 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 
-public sealed class BulletBoxSystem : EntitySystem
+public sealed partial class BulletBoxSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

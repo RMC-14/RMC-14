@@ -14,7 +14,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact effect that creates temporary portal between places on station.
 /// </summary>
-public sealed class XAEPortalSystem : BaseXAESystem<XAEPortalComponent>
+public sealed partial class XAEPortalSystem : BaseXAESystem<XAEPortalComponent>
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private LinkedEntitySystem _link = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Client.Parallax;
 
-public sealed class BiomeDebugOverlay : Overlay
+public sealed partial class BiomeDebugOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
 

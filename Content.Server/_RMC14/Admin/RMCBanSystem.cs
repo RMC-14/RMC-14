@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class RMCBanSystem : SharedRMCBanSystem
+public sealed partial class RMCBanSystem : SharedRMCBanSystem
 {
     [Dependency] private IBanManager _ban = default!;
 

@@ -28,7 +28,7 @@ namespace Content.Shared._RMC14.Armor.ThermalCloak;
 /// <summary>
 /// Handles Thermal Cloak's cloaking ability
 /// </summary>
-public sealed class ThermalCloakSystem : EntitySystem
+public sealed partial class ThermalCloakSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

@@ -5,7 +5,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Xenonids.Watch;
 
 [AnyCommand]
-internal sealed class XenoWatchEntityCommand : IConsoleCommand
+internal sealed partial class XenoWatchEntityCommand : IConsoleCommand
 {
     public const string CommandName = "xeno_watch_entity";
 

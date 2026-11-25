@@ -5,7 +5,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class ControlMob : IConsoleCommand
+    public sealed partial class ControlMob : IConsoleCommand
     {
         [Dependency] private IEntityManager _entities = default!;
 

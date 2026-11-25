@@ -49,7 +49,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Leap;
 
-public sealed class XenoLeapSystem : EntitySystem
+public sealed partial class XenoLeapSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

@@ -2,7 +2,7 @@ using Content.Shared._RMC14.Vents;
 using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.VentCrawl;
-public sealed class VentCrawlingSystem : SharedVentCrawlingSystem
+public sealed partial class VentCrawlingSystem : SharedVentCrawlingSystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
 

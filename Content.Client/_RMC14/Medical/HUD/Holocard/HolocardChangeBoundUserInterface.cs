@@ -6,7 +6,7 @@ using Robust.Client.UserInterface;
 namespace Content.Client._RMC14.Medical.HUD.Holocard;
 
 [UsedImplicitly]
-public sealed class HolocardChangeBoundUserInterface : BoundUserInterface
+public sealed partial class HolocardChangeBoundUserInterface : BoundUserInterface
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IEntityManager _entities = default!;

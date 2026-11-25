@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.PlayingCards;
 
-public abstract class SharedPlayingCardSystem : EntitySystem
+public abstract partial class SharedPlayingCardSystem : EntitySystem
 {
     [Dependency] protected SharedAudioSystem Audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;

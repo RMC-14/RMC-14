@@ -10,7 +10,7 @@ using Robust.Shared.Map;
 
 namespace Content.Shared.Containers;
 
-public sealed class ContainerFillSystem : EntitySystem
+public sealed partial class ContainerFillSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private EntityTableSystem _entityTable = default!;

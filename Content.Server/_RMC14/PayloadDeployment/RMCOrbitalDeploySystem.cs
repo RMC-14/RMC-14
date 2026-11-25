@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.PayloadDeployment;
 
-public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
+public sealed partial class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
 {
     private static readonly EntProtoId? DirectDropLandingEffect = "RMCEffectAlert";
     private static readonly SoundSpecifier DirectDropLaunchSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/bamf.ogg");

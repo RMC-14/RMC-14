@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Glue;
 
-public sealed class GlueSystem : SharedGlueSystem
+public sealed partial class GlueSystem : SharedGlueSystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Movement.Systems;
 
-public sealed class JetpackSystem : SharedJetpackSystem
+public sealed partial class JetpackSystem : SharedJetpackSystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ClothingSystem _clothing = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerCommand : LocalizedCommands
+public sealed partial class PanicBunkerCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 
@@ -48,7 +48,7 @@ public sealed class PanicBunkerCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerDisableWithAdminsCommand : LocalizedCommands
+public sealed partial class PanicBunkerDisableWithAdminsCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 
@@ -68,7 +68,7 @@ public sealed class PanicBunkerDisableWithAdminsCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerEnableWithoutAdminsCommand : LocalizedCommands
+public sealed partial class PanicBunkerEnableWithoutAdminsCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 
@@ -88,7 +88,7 @@ public sealed class PanicBunkerEnableWithoutAdminsCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerCountDeadminnedCommand : LocalizedCommands
+public sealed partial class PanicBunkerCountDeadminnedCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 
@@ -108,7 +108,7 @@ public sealed class PanicBunkerCountDeadminnedCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerShowReasonCommand : LocalizedCommands
+public sealed partial class PanicBunkerShowReasonCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 
@@ -128,7 +128,7 @@ public sealed class PanicBunkerShowReasonCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerMinAccountAgeCommand : LocalizedCommands
+public sealed partial class PanicBunkerMinAccountAgeCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 
@@ -160,7 +160,7 @@ public sealed class PanicBunkerMinAccountAgeCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerMinOverallMinutesCommand : LocalizedCommands
+public sealed partial class PanicBunkerMinOverallMinutesCommand : LocalizedCommands
 {
     [Dependency] private IConfigurationManager _cfg = default!;
 

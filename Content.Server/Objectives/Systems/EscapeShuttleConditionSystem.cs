@@ -6,7 +6,7 @@ using Content.Shared.Objectives.Components;
 
 namespace Content.Server.Objectives.Systems;
 
-public sealed class EscapeShuttleConditionSystem : EntitySystem
+public sealed partial class EscapeShuttleConditionSystem : EntitySystem
 {
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private SharedMindSystem _mind = default!;

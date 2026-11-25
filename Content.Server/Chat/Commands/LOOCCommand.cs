@@ -6,7 +6,7 @@ using Robust.Shared.Enums;
 namespace Content.Server.Chat.Commands
 {
     [AnyCommand]
-    internal sealed class LOOCCommand : IConsoleCommand
+    internal sealed partial class LOOCCommand : IConsoleCommand
     {
         [Dependency] private IEntityManager _e = default!;
 

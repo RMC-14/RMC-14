@@ -9,7 +9,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Sandbox.Commands
 {
     [AnyCommand]
-    public sealed class ColorNetworkCommand : LocalizedEntityCommands
+    public sealed partial class ColorNetworkCommand : LocalizedEntityCommands
     {
         [Dependency] private IAdminManager _adminManager = default!;
         [Dependency] private AtmosPipeColorSystem _pipeColorSystem = default!;

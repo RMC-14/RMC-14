@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 namespace Content.Server._RMC14.Marines.Icons;
 
 [ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
-public sealed class IconCommand : ToolshedCommand
+public sealed partial class IconCommand : ToolshedCommand
 {
     [Dependency] private IPrototypeManager _protoManager = default!;
 
@@ -114,7 +114,7 @@ public sealed class IconCommand : ToolshedCommand
     }
 
     // TAB completion of job icon names for icon:set NO " " NEEDED!!
-    public sealed class MarineIconStateParser : CustomTypeParser<string>
+    public sealed partial class MarineIconStateParser : CustomTypeParser<string>
     {
         [Dependency] private IPrototypeManager _protoManager = default!;
 

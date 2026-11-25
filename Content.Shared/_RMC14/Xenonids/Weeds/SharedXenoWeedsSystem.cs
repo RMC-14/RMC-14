@@ -42,7 +42,7 @@ using Content.Shared._RMC14.Vents;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
 
-public abstract class SharedXenoWeedsSystem : EntitySystem
+public abstract partial class SharedXenoWeedsSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

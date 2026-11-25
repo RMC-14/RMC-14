@@ -10,7 +10,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client._RMC14.Dropship.Fabricator;
 
 [UsedImplicitly]
-public sealed class DropshipFabricatorBui : BoundUserInterface
+public sealed partial class DropshipFabricatorBui : BoundUserInterface
 {
     private const int QueueRowHeight = 28;
 

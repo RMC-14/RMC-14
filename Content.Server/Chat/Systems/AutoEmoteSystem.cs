@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Chat.Systems;
 
-public sealed class AutoEmoteSystem : EntitySystem
+public sealed partial class AutoEmoteSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

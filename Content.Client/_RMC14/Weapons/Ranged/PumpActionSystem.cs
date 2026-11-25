@@ -8,7 +8,7 @@ using Robust.Client.Input;
 
 namespace Content.Client._RMC14.Weapons.Ranged;
 
-public sealed class PumpActionSystem : SharedPumpActionSystem
+public sealed partial class PumpActionSystem : SharedPumpActionSystem
 {
     [Dependency] private IInputManager _input = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

@@ -7,7 +7,7 @@ using System.Text.Json.Nodes;
 
 namespace Content.Server.Discord.WebhookMessages;
 
-public sealed class VoteWebhooks : IPostInjectInit
+public sealed partial class VoteWebhooks : IPostInjectInit
 {
     [Dependency] private IEntitySystemManager _entSys = default!;
     [Dependency] private DiscordWebhook _discord = default!;

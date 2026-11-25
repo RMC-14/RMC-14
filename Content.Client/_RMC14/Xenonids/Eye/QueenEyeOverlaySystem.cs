@@ -5,7 +5,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.Xenonids.Eye;
 
-public sealed class QueenEyeOverlaySystem : EntitySystem
+public sealed partial class QueenEyeOverlaySystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private IPlayerManager _player = default!;

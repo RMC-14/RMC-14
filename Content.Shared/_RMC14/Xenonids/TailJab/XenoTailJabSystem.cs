@@ -17,7 +17,7 @@ using Content.Shared._RMC14.Xenonids.ScissorCut;
 
 namespace Content.Shared._RMC14.Xenonids.TailJab;
 
-public sealed class XenoTailJabSystem : EntitySystem
+public sealed partial class XenoTailJabSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damage = default!;

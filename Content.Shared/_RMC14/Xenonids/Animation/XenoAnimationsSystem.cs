@@ -3,7 +3,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Animation;
 
-public sealed class XenoAnimationsSystem : EntitySystem
+public sealed partial class XenoAnimationsSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
 

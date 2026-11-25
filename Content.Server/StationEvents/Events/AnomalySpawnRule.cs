@@ -5,7 +5,7 @@ using Content.Server.StationEvents.Components;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class AnomalySpawnRule : StationEventSystem<AnomalySpawnRuleComponent>
+public sealed partial class AnomalySpawnRule : StationEventSystem<AnomalySpawnRuleComponent>
 {
     [Dependency] private AnomalySystem _anomaly = default!;
 

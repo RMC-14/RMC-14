@@ -10,7 +10,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Cleave;
 
-public sealed class XenoCleaveSystem : EntitySystem
+public sealed partial class XenoCleaveSystem : EntitySystem
 {
     [Dependency] private XenoSystem _xeno = default!;
     [Dependency] private INetManager _net = default!;

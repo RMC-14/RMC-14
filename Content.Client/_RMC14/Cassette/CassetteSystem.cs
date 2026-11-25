@@ -16,7 +16,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Cassette;
 
-public sealed class CassetteSystem : SharedCassetteSystem
+public sealed partial class CassetteSystem : SharedCassetteSystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IAudioManager _audioManager = default!;

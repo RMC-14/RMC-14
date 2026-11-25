@@ -15,7 +15,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server.Atmos.EntitySystems;
 
-public sealed class HeatExchangerSystem : EntitySystem
+public sealed partial class HeatExchangerSystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private IConfigurationManager _cfg = default!;

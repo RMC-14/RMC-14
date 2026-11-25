@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Implants;
 
-public sealed class ImplanterSystem : SharedImplanterSystem
+public sealed partial class ImplanterSystem : SharedImplanterSystem
 {
     [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private IPrototypeManager _proto = default!;

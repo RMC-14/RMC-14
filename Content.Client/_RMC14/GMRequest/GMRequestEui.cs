@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.GMRequest;
 
-public sealed class GMRequestEui : BaseEui
+public sealed partial class GMRequestEui : BaseEui
 {
     [Dependency] private GMRequestClientManager _manager = default!;
     [Dependency] private IClientAdminManager _adminManager = default!;

@@ -14,7 +14,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.Doors.Systems
 {
-    public sealed class FirelockSystem : SharedFirelockSystem
+    public sealed partial class FirelockSystem : SharedFirelockSystem
     {
         [Dependency] private SharedDoorSystem _doorSystem = default!;
         [Dependency] private AtmosphereSystem _atmosSystem = default!;

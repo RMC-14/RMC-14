@@ -31,7 +31,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Pheromones;
 
-public abstract class SharedXenoPheromonesSystem : EntitySystem
+public abstract partial class SharedXenoPheromonesSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

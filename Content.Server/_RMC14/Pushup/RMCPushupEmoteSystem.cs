@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Pushup;
 
-public sealed class RMCPushupEmoteSystem : EntitySystem
+public sealed partial class RMCPushupEmoteSystem : EntitySystem
 {
     [Dependency] private SharedRMCPushupSystem _pushup = default!;
 

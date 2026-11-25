@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Drowsiness;
 
-public sealed class DrowsinessOverlay : Overlay
+public sealed partial class DrowsinessOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Drowsiness";
 

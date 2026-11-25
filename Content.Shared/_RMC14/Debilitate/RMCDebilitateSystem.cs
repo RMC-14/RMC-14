@@ -4,7 +4,7 @@ using Content.Shared.Whitelist;
 
 namespace Content.Shared._RMC14.Debilitate;
 
-public sealed class RMCDebilitateSystem : EntitySystem
+public sealed partial class RMCDebilitateSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private SharedStunSystem _stun = default!;

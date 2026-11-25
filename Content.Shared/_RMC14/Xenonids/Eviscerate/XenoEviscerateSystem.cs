@@ -16,7 +16,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Eviscerate;
 
-public sealed class XenoEviscerateSystem : EntitySystem
+public sealed partial class XenoEviscerateSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;

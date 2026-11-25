@@ -20,7 +20,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Hands;
 
-public abstract class RMCHandsSystem : EntitySystem
+public abstract partial class RMCHandsSystem : EntitySystem
 {
     private static readonly SpriteSpecifier.Texture PickupIcon = new(new ResPath("/Textures/Interface/VerbIcons/pickup.svg.192dpi.png"));
 

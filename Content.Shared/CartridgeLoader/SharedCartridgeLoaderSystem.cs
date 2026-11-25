@@ -3,7 +3,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.CartridgeLoader;
 
-public abstract class SharedCartridgeLoaderSystem : EntitySystem
+public abstract partial class SharedCartridgeLoaderSystem : EntitySystem
 {
     public const string InstalledContainerId = "program-container";
 

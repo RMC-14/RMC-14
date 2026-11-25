@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Security.Systems;
 
-public abstract class SharedGenpopSystem : EntitySystem
+public abstract partial class SharedGenpopSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] protected IGameTiming Timing = default!;

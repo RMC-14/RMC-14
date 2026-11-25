@@ -15,7 +15,7 @@ namespace Content.Client._RMC14.Xenonids.Paratoxin;
 //
 // To resolve this, we have this client side system reapply paratoxin stacks for predicted ticks.
 // If predicted projectiles are fixed to get re-applied during prediction, this system should be deleted entirely.
-public sealed class ParatoxinPredictionSystem : EntitySystem
+public sealed partial class ParatoxinPredictionSystem : EntitySystem
 {
     [Dependency] private ParatoxinSystem _paratoxinSystem = default!;
     [Dependency] private IPlayerManager _player = default!;

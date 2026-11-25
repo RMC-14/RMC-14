@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.SwiftSteps;
 
-public sealed class XenoSwiftStepsSystem : EntitySystem
+public sealed partial class XenoSwiftStepsSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private XenoRestSystem _xenoRest = default!;

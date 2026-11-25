@@ -22,7 +22,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Visor;
 
-public sealed class VisorSystem : EntitySystem
+public sealed partial class VisorSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContainerSystem _container = default!;

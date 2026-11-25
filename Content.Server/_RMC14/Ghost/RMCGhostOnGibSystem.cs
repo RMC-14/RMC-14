@@ -5,7 +5,7 @@ using Content.Shared.Mind.Components;
 
 namespace Content.Server._RMC14.Ghost;
 
-public sealed class RMCGhostOnGibSystem : EntitySystem
+public sealed partial class RMCGhostOnGibSystem : EntitySystem
 {
     [Dependency] private GhostSystem _ghost = default!;
     [Dependency] private SharedMindSystem _mind = default!;

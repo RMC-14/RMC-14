@@ -11,7 +11,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.Clothing;
 
-public sealed class SharedMagbootsSystem : EntitySystem
+public sealed partial class SharedMagbootsSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private InventorySystem _inventory = default!;

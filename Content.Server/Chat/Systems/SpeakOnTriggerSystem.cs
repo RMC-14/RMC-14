@@ -5,7 +5,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Chat.Systems;
 
-public sealed class SpeakOnTriggerSystem : EntitySystem
+public sealed partial class SpeakOnTriggerSystem : EntitySystem
 {
     [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private IRobustRandom _random = default!;

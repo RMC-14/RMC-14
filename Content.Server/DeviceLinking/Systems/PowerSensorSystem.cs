@@ -16,7 +16,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.DeviceLinking.Systems;
 
-public sealed class PowerSensorSystem : EntitySystem
+public sealed partial class PowerSensorSystem : EntitySystem
 {
     [Dependency] private DeviceLinkSystem _deviceLink = default!;
     [Dependency] private IGameTiming _timing = default!;

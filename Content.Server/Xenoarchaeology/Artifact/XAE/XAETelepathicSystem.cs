@@ -10,7 +10,7 @@ namespace Content.Server.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact activation effect that sends sublime telepathic messages.
 /// </summary>
-public sealed class XAETelepathicSystem : BaseXAESystem<XAETelepathicComponent>
+public sealed partial class XAETelepathicSystem : BaseXAESystem<XAETelepathicComponent>
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

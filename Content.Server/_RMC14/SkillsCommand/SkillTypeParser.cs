@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.SkillsCommand;
 
-public sealed class SkillTypeParser : TypeParser<SkillType>
+public sealed partial class SkillTypeParser : TypeParser<SkillType>
 {
     [Dependency] private IEntityManager _entities = default!;
 

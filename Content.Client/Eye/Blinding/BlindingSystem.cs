@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client.Eye.Blinding;
 
-public sealed class BlindingSystem : EntitySystem
+public sealed partial class BlindingSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IOverlayManager _overlayMan = default!;

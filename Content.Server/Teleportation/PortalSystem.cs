@@ -7,7 +7,7 @@ using Robust.Shared.Map;
 
 namespace Content.Server.Teleportation;
 
-public sealed class PortalSystem : SharedPortalSystem
+public sealed partial class PortalSystem : SharedPortalSystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 

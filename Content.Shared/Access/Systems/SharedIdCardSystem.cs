@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Access.Systems;
 
-public abstract class SharedIdCardSystem : EntitySystem
+public abstract partial class SharedIdCardSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;

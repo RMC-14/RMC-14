@@ -18,7 +18,7 @@ namespace Content.Server.Administration.Managers;
 ///     This manager sends a Discord webhook notification whenever a player with an active
 ///     watchlist joins the server.
 /// </summary>
-public sealed class WatchlistWebhookManager : IWatchlistWebhookManager
+public sealed partial class WatchlistWebhookManager : IWatchlistWebhookManager
 {
     [Dependency] private IAdminNotesManager _adminNotes = default!;
     [Dependency] private IBaseServer _baseServer = default!;

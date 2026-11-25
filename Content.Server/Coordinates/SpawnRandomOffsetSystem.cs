@@ -4,7 +4,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Coordinates;
 
-public sealed class SpawnRandomOffsetSystem : EntitySystem
+public sealed partial class SpawnRandomOffsetSystem : EntitySystem
 {
     [Dependency] private RandomHelperSystem _randomHelper = default!;
 

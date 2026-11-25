@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Silicons.StationAi;
 
-public sealed class StationAiOverlay : Overlay
+public sealed partial class StationAiOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> CameraStaticShader = "CameraStatic";
     private static readonly ProtoId<ShaderPrototype> StencilMaskShader = "StencilMask";

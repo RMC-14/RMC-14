@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Movement.Systems;
 
-public sealed class MobCollisionSystem : SharedMobCollisionSystem
+public sealed partial class MobCollisionSystem : SharedMobCollisionSystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPlayerManager _player = default!;

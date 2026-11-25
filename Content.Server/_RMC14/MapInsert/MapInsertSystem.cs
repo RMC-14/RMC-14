@@ -20,7 +20,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.MapInsert;
 
-public sealed class MapInsertSystem : EntitySystem
+public sealed partial class MapInsertSystem : EntitySystem
 {
     [Dependency] private AreaSystem _areas = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

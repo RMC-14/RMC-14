@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachableMagneticSystem : EntitySystem
+public sealed partial class AttachableMagneticSystem : EntitySystem
 {
     [Dependency] private RMCMagneticSystem _magneticSystem = default!;
     [Dependency] private IGameTiming _timing = default!;

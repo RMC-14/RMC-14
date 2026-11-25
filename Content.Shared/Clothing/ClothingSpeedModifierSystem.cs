@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Clothing;
 
-public sealed class ClothingSpeedModifierSystem : EntitySystem
+public sealed partial class ClothingSpeedModifierSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ExamineSystemShared _examine = default!;

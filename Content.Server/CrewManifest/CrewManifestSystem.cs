@@ -19,7 +19,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.CrewManifest;
 
-public sealed class CrewManifestSystem : EntitySystem
+public sealed partial class CrewManifestSystem : EntitySystem
 {
     [Dependency] private StationSystem _stationSystem = default!;
     [Dependency] private StationRecordsSystem _recordsSystem = default!;
@@ -299,7 +299,7 @@ public sealed class CrewManifestSystem : EntitySystem
 }
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class CrewManifestCommand : LocalizedEntityCommands
+public sealed partial class CrewManifestCommand : LocalizedEntityCommands
 {
     [Dependency] private CrewManifestSystem _manifestSystem = default!;
 

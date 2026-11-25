@@ -21,7 +21,7 @@ namespace Content.Shared.Materials;
 /// Handles interactions and logic related to <see cref="MaterialReclaimerComponent"/>,
 /// <see cref="CollideMaterialReclaimerComponent"/>, and <see cref="ActiveMaterialReclaimerComponent"/>.
 /// </summary>
-public abstract class SharedMaterialReclaimerSystem : EntitySystem
+public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] protected IGameTiming Timing = default!;

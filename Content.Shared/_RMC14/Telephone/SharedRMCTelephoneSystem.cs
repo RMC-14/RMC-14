@@ -21,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Telephone;
 
-public abstract class SharedRMCTelephoneSystem : EntitySystem
+public abstract partial class SharedRMCTelephoneSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;

@@ -4,7 +4,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachableHolderExamineSystem : EntitySystem
+public sealed partial class AttachableHolderExamineSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
 

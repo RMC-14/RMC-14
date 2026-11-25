@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Power.Visualizers;
 
-public sealed class CableVisualizerSystem : EntitySystem
+public sealed partial class CableVisualizerSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearanceSystem = default!;
     [Dependency] private SpriteSystem _sprite = default!;

@@ -29,7 +29,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared._RMC14.Actions;
 
 namespace Content.Shared._RMC14.Vents;
-public abstract class SharedVentCrawlingSystem : EntitySystem
+public abstract partial class SharedVentCrawlingSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doafter = default!;
     [Dependency] private SharedContainerSystem _container = default!;

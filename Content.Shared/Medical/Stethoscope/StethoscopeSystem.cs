@@ -12,7 +12,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.Medical.Stethoscope;
 
-public sealed class StethoscopeSystem : EntitySystem
+public sealed partial class StethoscopeSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

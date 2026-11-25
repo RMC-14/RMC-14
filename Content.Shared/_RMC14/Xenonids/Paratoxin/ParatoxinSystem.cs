@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Paratoxin;
 
-public sealed class ParatoxinSystem : EntitySystem
+public sealed partial class ParatoxinSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private INetManager _net = default!;

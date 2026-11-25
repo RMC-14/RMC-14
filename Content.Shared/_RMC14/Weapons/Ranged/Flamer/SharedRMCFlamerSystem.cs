@@ -35,7 +35,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 
-public abstract class SharedRMCFlamerSystem : EntitySystem
+public abstract partial class SharedRMCFlamerSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

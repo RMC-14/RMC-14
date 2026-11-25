@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Mining;
 
-public sealed class MeteorSystem : EntitySystem
+public sealed partial class MeteorSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private DamageableSystem _damageable = default!;

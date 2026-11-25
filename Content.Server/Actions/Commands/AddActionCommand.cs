@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Actions.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class AddActionCommand : LocalizedEntityCommands
+public sealed partial class AddActionCommand : LocalizedEntityCommands
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

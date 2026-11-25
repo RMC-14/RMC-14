@@ -13,7 +13,7 @@ namespace Content.Server.Anomaly.Effects;
 ///
 
 /// <see cref="InjectionAnomalyComponent"/>
-public sealed class InjectionAnomalySystem : EntitySystem
+public sealed partial class InjectionAnomalySystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;

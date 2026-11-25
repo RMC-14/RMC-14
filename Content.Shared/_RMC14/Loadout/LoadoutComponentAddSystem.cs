@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Loadout;
 
-public sealed class LoadoutComponentAddSystem : EntitySystem
+public sealed partial class LoadoutComponentAddSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
 

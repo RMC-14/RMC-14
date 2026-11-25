@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Explosion;
 
-public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
+public sealed partial class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
 {
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

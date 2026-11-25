@@ -9,7 +9,7 @@ namespace Content.Shared.Construction.EntitySystems;
 /// Prevents anchoring an item in the same tile as an item matching the <see cref="EntityWhitelist"/>.
 /// <seealso cref="BlockAnchorOnComponent"/>
 /// </summary>
-public sealed class BlockAnchorOnSystem : EntitySystem
+public sealed partial class BlockAnchorOnSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedMapSystem _map = default!;

@@ -21,7 +21,7 @@ namespace Content.Server.Dragon;
 /// <summary>
 /// Handles events for rift entities and rift updating.
 /// </summary>
-public sealed class DragonRiftSystem : EntitySystem
+public sealed partial class DragonRiftSystem : EntitySystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private DragonSystem _dragon = default!;

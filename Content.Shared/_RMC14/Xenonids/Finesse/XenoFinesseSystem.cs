@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Finesse;
 
-public sealed class XenoFinesseSystem : EntitySystem
+public sealed partial class XenoFinesseSystem : EntitySystem
 {
     [Dependency] private XenoSystem _xeno = default!;
     [Dependency] private IGameTiming _timing = default!;

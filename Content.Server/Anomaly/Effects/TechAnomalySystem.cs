@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Anomaly.Effects;
 
-public sealed class TechAnomalySystem : EntitySystem
+public sealed partial class TechAnomalySystem : EntitySystem
 {
     [Dependency] private DeviceLinkSystem _signal = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

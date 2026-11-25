@@ -26,7 +26,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids;
 
-public sealed class MassacreSystem : EntitySystem
+public sealed partial class MassacreSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

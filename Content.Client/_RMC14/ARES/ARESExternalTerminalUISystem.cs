@@ -5,7 +5,7 @@ using Robust.Client.Timing;
 
 namespace Content.Client._RMC14.ARES;
 
-public sealed class ARESExternalTerminalUISystem : EntitySystem
+public sealed partial class ARESExternalTerminalUISystem : EntitySystem
 {
     [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;
     [Dependency] private IClientGameTiming _timing = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 namespace Content.Server.Power.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class BatterySystem : EntitySystem
+    public sealed partial class BatterySystem : EntitySystem
     {
         [Dependency] private IGameTiming _timing = default!;
 

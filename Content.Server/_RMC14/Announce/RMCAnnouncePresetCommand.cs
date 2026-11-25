@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._RMC14.Announce;
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class RMCAnnouncePresetCommand : LocalizedEntityCommands
+public sealed partial class RMCAnnouncePresetCommand : LocalizedEntityCommands
 {
     [Dependency] private RMCAnnouncementOverlaySystem _announcementOverlay = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

@@ -78,7 +78,7 @@ public readonly record struct VehicleMountedFlamerProvider(
     RMCFlamerAmmoProviderComponent FlamerAmmo,
     int ExtraSlots);
 
-public sealed class VehicleTopologySystem : EntitySystem
+public sealed partial class VehicleTopologySystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;

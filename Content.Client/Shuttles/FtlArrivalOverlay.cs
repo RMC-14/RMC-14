@@ -12,7 +12,7 @@ namespace Content.Client.Shuttles;
 /// <summary>
 /// Plays a visualization whenever a shuttle is arriving from FTL.
 /// </summary>
-public sealed class FtlArrivalOverlay : Overlay
+public sealed partial class FtlArrivalOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
 

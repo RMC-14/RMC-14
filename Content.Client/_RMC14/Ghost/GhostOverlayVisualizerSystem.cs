@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Ghost;
 
-public sealed class GhostOverlayVisualizerSystem : EntitySystem
+public sealed partial class GhostOverlayVisualizerSystem : EntitySystem
 {
     private const string FireLayerKey = "ghost-overlay-fire";
     private const string XenoWoundLayerKey = "ghost-overlay-xeno-wound";

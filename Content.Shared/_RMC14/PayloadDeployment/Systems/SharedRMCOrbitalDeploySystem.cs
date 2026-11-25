@@ -13,7 +13,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.PayloadDeployment.Systems;
 
-public abstract class SharedRMCOrbitalDeploySystem : EntitySystem
+public abstract partial class SharedRMCOrbitalDeploySystem : EntitySystem
 {
     [Dependency] protected SharedContainerSystem Container = default!;
 

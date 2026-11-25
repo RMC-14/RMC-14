@@ -6,7 +6,7 @@ using Content.Shared.Audio;
 
 namespace Content.Server.Atmos.Piping.Binary.EntitySystems;
 
-public sealed class GasValveSystem : SharedGasValveSystem
+public sealed partial class GasValveSystem : SharedGasValveSystem
 {
     [Dependency] private SharedAmbientSoundSystem _ambientSoundSystem = default!;
     [Dependency] private NodeContainerSystem _nodeContainer = default!;

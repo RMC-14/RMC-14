@@ -7,7 +7,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Client.Disposal.Unit;
 
-public sealed class DisposalUnitSystem : SharedDisposalUnitSystem
+public sealed partial class DisposalUnitSystem : SharedDisposalUnitSystem
 {
     [Dependency] private AppearanceSystem _appearanceSystem = default!;
     [Dependency] private AnimationPlayerSystem _animationSystem = default!;

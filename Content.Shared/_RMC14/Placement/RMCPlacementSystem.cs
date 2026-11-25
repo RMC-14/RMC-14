@@ -5,7 +5,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.Placement;
 
-public sealed class RMCPlacementSystem : EntitySystem
+public sealed partial class RMCPlacementSystem : EntitySystem
 {
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

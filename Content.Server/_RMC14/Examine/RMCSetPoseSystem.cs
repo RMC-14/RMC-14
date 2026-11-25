@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Examine;
 
-public sealed class RMCSetPoseSystem : SharedRMCSetPoseSystem
+public sealed partial class RMCSetPoseSystem : SharedRMCSetPoseSystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private QuickDialogSystem _quickDialog = default!;

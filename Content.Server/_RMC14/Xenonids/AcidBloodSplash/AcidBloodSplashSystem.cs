@@ -22,7 +22,7 @@ using Content.Shared._RMC14.Stun;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
-public sealed class AcidBloodSplashSystem : EntitySystem
+public sealed partial class AcidBloodSplashSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IComponentFactory _compFactory = default!;

@@ -16,7 +16,7 @@ namespace Content.Server.Rotatable
     /// <summary>
     ///     Handles verbs for the <see cref="RotatableComponent"/> and <see cref="FlippableComponent"/> components.
     /// </summary>
-    public sealed class RotatableSystem : EntitySystem
+    public sealed partial class RotatableSystem : EntitySystem
     {
         [Dependency] private PopupSystem _popup = default!;
         [Dependency] private ActionBlockerSystem _actionBlocker = default!;

@@ -3,7 +3,7 @@ using Content.Shared.Preferences;
 
 namespace Content.Server._RMC14.Name;
 
-public sealed class RandomizeNameSystem : EntitySystem
+public sealed partial class RandomizeNameSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _metaData = default!;
 

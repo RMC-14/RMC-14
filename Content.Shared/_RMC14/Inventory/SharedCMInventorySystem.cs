@@ -31,7 +31,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Inventory;
 
-public abstract class SharedCMInventorySystem : EntitySystem
+public abstract partial class SharedCMInventorySystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

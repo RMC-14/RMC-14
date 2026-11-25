@@ -4,7 +4,7 @@ using Content.Shared.IgnitionSource.Components;
 
 namespace Content.Shared.IgnitionSource.EntitySystems;
 
-public sealed class MatchboxSystem : EntitySystem
+public sealed partial class MatchboxSystem : EntitySystem
 {
     [Dependency] private MatchstickSystem _match = default!;
 

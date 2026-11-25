@@ -14,7 +14,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Voting
 {
     [AnyCommand]
-    public sealed class CreateVoteCommand : LocalizedEntityCommands
+    public sealed partial class CreateVoteCommand : LocalizedEntityCommands
     {
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private IVoteManager _voteManager = default!;
@@ -64,7 +64,7 @@ namespace Content.Server.Voting
     }
 
     [AdminCommand(AdminFlags.Round)]
-    public sealed class CreateCustomCommand : LocalizedEntityCommands
+    public sealed partial class CreateCustomCommand : LocalizedEntityCommands
     {
         [Dependency] private IVoteManager _voteManager = default!;
         [Dependency] private IAdminLogManager _adminLogger = default!;
@@ -145,7 +145,7 @@ namespace Content.Server.Voting
     }
 
     [AnyCommand]
-    public sealed class VoteCommand : LocalizedEntityCommands
+    public sealed partial class VoteCommand : LocalizedEntityCommands
     {
         [Dependency] private IVoteManager _voteManager = default!;
 
@@ -203,7 +203,7 @@ namespace Content.Server.Voting
     }
 
     [AnyCommand]
-    public sealed class ListVotesCommand : LocalizedEntityCommands
+    public sealed partial class ListVotesCommand : LocalizedEntityCommands
     {
         [Dependency] private IVoteManager _voteManager = default!;
 
@@ -219,7 +219,7 @@ namespace Content.Server.Voting
     }
 
     [AdminCommand(AdminFlags.Round)]
-    public sealed class CancelVoteCommand : LocalizedEntityCommands
+    public sealed partial class CancelVoteCommand : LocalizedEntityCommands
     {
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private IVoteManager _voteManager = default!;

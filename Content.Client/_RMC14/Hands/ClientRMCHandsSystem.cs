@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Hands;
 
-public sealed class ClientRMCHandsSystem : RMCHandsSystem
+public sealed partial class ClientRMCHandsSystem : RMCHandsSystem
 {
     [Dependency] private HandsSystem _hands = default!;
 

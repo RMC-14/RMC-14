@@ -9,7 +9,7 @@ using Robust.Server.GameObjects;
 namespace Content.Server.Atmos.EntitySystems;
 
 [UsedImplicitly]
-public sealed class GasMinerSystem : SharedGasMinerSystem
+public sealed partial class GasMinerSystem : SharedGasMinerSystem
 {
     [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private TransformSystem _transformSystem = default!;

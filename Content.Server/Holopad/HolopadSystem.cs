@@ -24,7 +24,7 @@ using System.Linq;
 
 namespace Content.Server.Holopad;
 
-public sealed class HolopadSystem : SharedHolopadSystem
+public sealed partial class HolopadSystem : SharedHolopadSystem
 {
     [Dependency] private TelephoneSystem _telephoneSystem = default!;
     [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;

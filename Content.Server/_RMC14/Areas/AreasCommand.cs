@@ -9,7 +9,7 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Areas;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Host)]
-public sealed class AreasCommand : ToolshedCommand
+public sealed partial class AreasCommand : ToolshedCommand
 {
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Deafness;
 
-public sealed class DeafnessSystem : SharedDeafnessSystem
+public sealed partial class DeafnessSystem : SharedDeafnessSystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IAudioManager _audio = default!;

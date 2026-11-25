@@ -9,7 +9,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Construction;
 
-public sealed class RMCUnfoldCardboardSystem : EntitySystem
+public sealed partial class RMCUnfoldCardboardSystem : EntitySystem
 {
     [Dependency] private SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

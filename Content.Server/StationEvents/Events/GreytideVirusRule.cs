@@ -17,7 +17,7 @@ namespace Content.Server.StationEvents.Events;
 ///     Greytide Virus event
 ///     This will open and bolt airlocks and unlock lockers from randomly selected access groups.
 /// </summary>
-public sealed class GreytideVirusRule : StationEventSystem<GreytideVirusRuleComponent>
+public sealed partial class GreytideVirusRule : StationEventSystem<GreytideVirusRuleComponent>
 {
     [Dependency] private AccessReaderSystem _access = default!;
     [Dependency] private SharedDoorSystem _door = default!;

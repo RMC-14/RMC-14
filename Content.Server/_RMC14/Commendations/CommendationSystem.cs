@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Commendations;
 
-public sealed class CommendationSystem : SharedCommendationSystem
+public sealed partial class CommendationSystem : SharedCommendationSystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private CommendationManager _commendation = default!;

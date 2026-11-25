@@ -14,7 +14,7 @@ using GasCanisterComponent = Content.Shared.Atmos.Piping.Unary.Components.GasCan
 
 namespace Content.Server.Atmos.Piping.Unary.EntitySystems;
 
-public sealed class GasCanisterSystem : SharedGasCanisterSystem
+public sealed partial class GasCanisterSystem : SharedGasCanisterSystem
 {
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

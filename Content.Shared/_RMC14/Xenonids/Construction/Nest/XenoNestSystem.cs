@@ -44,7 +44,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.Nest;
 
-public sealed class XenoNestSystem : EntitySystem
+public sealed partial class XenoNestSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;

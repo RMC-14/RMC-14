@@ -31,7 +31,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Explosion;
 
-public abstract class SharedRMCExplosionSystem : EntitySystem
+public abstract partial class SharedRMCExplosionSystem : EntitySystem
 {
     [Dependency] private SharedXenoAcidSystem _acid = default!;
     [Dependency] private SharedBodySystem _body = default!;

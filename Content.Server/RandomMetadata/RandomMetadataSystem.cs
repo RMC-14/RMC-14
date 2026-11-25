@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.RandomMetadata;
 
-public sealed class RandomMetadataSystem : EntitySystem
+public sealed partial class RandomMetadataSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;

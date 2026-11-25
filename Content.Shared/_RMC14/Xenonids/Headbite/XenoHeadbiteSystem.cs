@@ -20,7 +20,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Headbite;
 
-public sealed class XenoHeadbiteSystem : EntitySystem
+public sealed partial class XenoHeadbiteSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private MobStateSystem _mobState = default!;

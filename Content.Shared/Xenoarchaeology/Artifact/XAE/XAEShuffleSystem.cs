@@ -8,7 +8,7 @@ namespace Content.Shared.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System that handles mob entities spacial shuffling effect.
 /// </summary>
-public sealed class XAEShuffleSystem : BaseXAESystem<XAEShuffleComponent>
+public sealed partial class XAEShuffleSystem : BaseXAESystem<XAEShuffleComponent>
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IRobustRandom _random = default!;

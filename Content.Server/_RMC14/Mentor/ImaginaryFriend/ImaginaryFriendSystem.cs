@@ -20,7 +20,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Mentor.ImaginaryFriend;
 
-public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
+public sealed partial class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private IChatManager _chat = default!;

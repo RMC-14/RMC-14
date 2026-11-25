@@ -10,7 +10,7 @@ using Robust.Shared.Input.Binding;
 namespace Content.Client.UserInterface.Systems.EscapeMenu;
 
 [UsedImplicitly]
-public sealed class EscapeContextUIController : UIController
+public sealed partial class EscapeContextUIController : UIController
 {
     [Dependency] private IInputManager _inputManager = default!;
 

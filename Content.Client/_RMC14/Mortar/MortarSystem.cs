@@ -4,7 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Mortar;
 
-public sealed class MortarSystem : SharedMortarSystem
+public sealed partial class MortarSystem : SharedMortarSystem
 {
     [Dependency] private AnimationPlayerSystem _animation = default!;
 

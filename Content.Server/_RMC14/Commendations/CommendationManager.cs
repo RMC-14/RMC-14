@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Commendations;
 
-public sealed class CommendationManager : IPostInjectInit
+public sealed partial class CommendationManager : IPostInjectInit
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private INetManager _net = default!;

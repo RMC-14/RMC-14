@@ -18,7 +18,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems;
 /// See https://en.wikipedia.org/wiki/Pressure_regulator
 /// </summary>
 [UsedImplicitly]
-public sealed class GasPressureRegulatorSystem : SharedGasPressureRegulatorSystem
+public sealed partial class GasPressureRegulatorSystem : SharedGasPressureRegulatorSystem
 {
     [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;

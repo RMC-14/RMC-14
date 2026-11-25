@@ -5,7 +5,7 @@ using Content.Shared.GameTicking;
 
 namespace Content.Shared._RMC14.DetailExaminable;
 
-public sealed class RMCDetailedExaminableSystem : EntitySystem
+public sealed partial class RMCDetailedExaminableSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
 

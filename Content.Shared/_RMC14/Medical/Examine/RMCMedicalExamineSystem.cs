@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.Examine;
 
-public sealed class RMCMedicalExamineSystem : EntitySystem
+public sealed partial class RMCMedicalExamineSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private RMCSizeStunSystem _sizeStun = default!;

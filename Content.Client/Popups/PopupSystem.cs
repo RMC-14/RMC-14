@@ -18,7 +18,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Popups
 {
-    public sealed class PopupSystem : SharedPopupSystem
+    public sealed partial class PopupSystem : SharedPopupSystem
     {
         [Dependency] private IConfigurationManager _configManager = default!;
         [Dependency] private IInputManager _inputManager = default!;

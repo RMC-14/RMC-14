@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleRunoverSystem : EntitySystem
+public sealed partial class VehicleRunoverSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private INetManager _net = default!;

@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [UsedImplicitly]
-    public sealed class PromoteHostCommand : LocalizedCommands
+    public sealed partial class PromoteHostCommand : LocalizedCommands
     {
         [Dependency] private IAdminManager _adminManager = default!;
         [Dependency] private IPlayerManager _playerManager = default!;

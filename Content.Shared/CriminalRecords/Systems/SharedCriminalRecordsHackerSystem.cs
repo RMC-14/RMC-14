@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.CriminalRecords.Systems;
 
-public abstract class SharedCriminalRecordsHackerSystem : EntitySystem
+public abstract partial class SharedCriminalRecordsHackerSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedNinjaGlovesSystem _gloves = default!;

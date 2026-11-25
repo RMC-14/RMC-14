@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Actions;
 
-public sealed class ActionUpgradeSystem : EntitySystem
+public sealed partial class ActionUpgradeSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private ActionContainerSystem _actionContainer = default!;

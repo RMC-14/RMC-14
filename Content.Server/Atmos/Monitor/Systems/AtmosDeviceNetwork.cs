@@ -9,7 +9,7 @@ namespace Content.Server.Atmos.Monitor.Systems;
 ///     Generic device network commands useful for atmos devices,
 ///     as well as some helper commands.
 /// </summary>
-public sealed class AtmosDeviceNetworkSystem : EntitySystem
+public sealed partial class AtmosDeviceNetworkSystem : EntitySystem
 {
     /// <summary>
     ///     Register a device's address on this device.

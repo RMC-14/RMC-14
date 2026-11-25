@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.IV;
 
-public sealed class IVDripSystem : SharedIVDripSystem
+public sealed partial class IVDripSystem : SharedIVDripSystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;

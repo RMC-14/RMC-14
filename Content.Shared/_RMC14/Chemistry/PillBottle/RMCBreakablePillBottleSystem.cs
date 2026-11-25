@@ -21,7 +21,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Chemistry.PillBottle;
 
-public sealed class RMCBreakablePillBottleSystem : EntitySystem
+public sealed partial class RMCBreakablePillBottleSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

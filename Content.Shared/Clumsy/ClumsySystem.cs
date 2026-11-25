@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Clumsy;
 
-public sealed class ClumsySystem : EntitySystem
+public sealed partial class ClumsySystem : EntitySystem
 {
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

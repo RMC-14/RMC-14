@@ -8,7 +8,7 @@ using static Content.Shared._RMC14.Mobs.RMCPulseComponent;
 
 namespace Content.Shared._RMC14.Mobs;
 
-public sealed class RMCPulseSystem : EntitySystem
+public sealed partial class RMCPulseSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;

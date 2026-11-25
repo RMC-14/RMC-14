@@ -4,7 +4,7 @@ using Content.Shared.Popups;
 
 namespace Content.Shared.Damage.Systems;
 
-public sealed class DamagePopupSystem : EntitySystem
+public sealed partial class DamagePopupSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popupSystem = default!;
 

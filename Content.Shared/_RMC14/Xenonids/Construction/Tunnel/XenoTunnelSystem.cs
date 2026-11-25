@@ -40,7 +40,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 
-public sealed class XenoTunnelSystem : EntitySystem
+public sealed partial class XenoTunnelSystem : EntitySystem
 {
     private const string TunnelPrototypeId = "XenoTunnel";
 

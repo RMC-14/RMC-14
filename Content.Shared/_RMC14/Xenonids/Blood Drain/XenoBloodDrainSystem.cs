@@ -24,7 +24,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Blood_Drain;
 
-public sealed class XenoBloodDrainSystem : EntitySystem
+public sealed partial class XenoBloodDrainSystem : EntitySystem
 {
     [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

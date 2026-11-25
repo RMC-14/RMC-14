@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Stun;
 
-public sealed class DazedUiController : EntitySystem
+public sealed partial class DazedUiController : EntitySystem
 {
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private IOverlayManager _overlayManager = default!;

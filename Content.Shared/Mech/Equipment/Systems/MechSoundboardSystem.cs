@@ -8,7 +8,7 @@ namespace Content.Shared.Mech.Equipment.Systems;
 /// <summary>
 /// Handles everything for mech soundboard.
 /// </summary>
-public sealed class MechSoundboardSystem : EntitySystem
+public sealed partial class MechSoundboardSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;

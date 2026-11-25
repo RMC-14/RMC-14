@@ -24,7 +24,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Tackle;
 
-public sealed class TackleSystem : EntitySystem
+public sealed partial class TackleSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

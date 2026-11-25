@@ -8,7 +8,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
 
-public sealed class VehicleWeaponsBoundUserInterface : BoundUserInterface, IRefreshableBui
+public sealed partial class VehicleWeaponsBoundUserInterface : BoundUserInterface, IRefreshableBui
 {
     [Dependency] private IPlayerManager _player = default!;
 

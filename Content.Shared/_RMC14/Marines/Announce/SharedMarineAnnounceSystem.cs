@@ -26,7 +26,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Announce;
 
-public abstract class SharedMarineAnnounceSystem : EntitySystem
+public abstract partial class SharedMarineAnnounceSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private IConfigurationManager _config = default!;

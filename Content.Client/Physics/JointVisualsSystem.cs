@@ -2,7 +2,7 @@ using Robust.Client.Graphics;
 
 namespace Content.Client.Physics;
 
-public sealed class JointVisualsSystem : EntitySystem
+public sealed partial class JointVisualsSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
 

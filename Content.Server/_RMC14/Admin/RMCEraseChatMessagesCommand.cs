@@ -8,7 +8,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class RMCEraseChatMessagesCommand : LocalizedCommands
+public sealed partial class RMCEraseChatMessagesCommand : LocalizedCommands
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private IChatManager _chat = default!;

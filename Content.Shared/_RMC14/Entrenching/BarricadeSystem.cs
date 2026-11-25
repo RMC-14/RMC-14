@@ -20,7 +20,7 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Entrenching;
 
-public sealed class BarricadeSystem : EntitySystem
+public sealed partial class BarricadeSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

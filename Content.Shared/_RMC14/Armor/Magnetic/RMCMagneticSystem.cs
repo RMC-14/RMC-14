@@ -12,7 +12,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Armor.Magnetic;
 
-public sealed class RMCMagneticSystem : EntitySystem
+public sealed partial class RMCMagneticSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private InventorySystem _inventory = default!;
