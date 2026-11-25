@@ -51,9 +51,6 @@
     ears: RMCHeadsetDistressWeYa
     id: RMCIDCardColonistScientist
     pocket1: RMCPouchSurvivalFill
-  storage:
-    back:
-    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -84,3 +81,5 @@
       - [ RMCGrenadeCustomMetalFoam ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
+    -
+      - [ CMSheetMetal20 ]
