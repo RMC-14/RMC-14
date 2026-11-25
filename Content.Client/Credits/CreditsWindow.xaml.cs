@@ -101,7 +101,7 @@ public sealed partial class CreditsWindow : DefaultWindow
 
     private async void PopulateAttributions(BoxContainer attributionsContainer, int count)
     {
-        attributionsContainer.DisposeAllChildren();
+        attributionsContainer.RemoveAllChildren();
 
         if (_attributions.Count == 0)
         {
