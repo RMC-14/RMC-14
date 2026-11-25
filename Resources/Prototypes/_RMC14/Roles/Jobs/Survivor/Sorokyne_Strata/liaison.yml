@@ -65,6 +65,7 @@
     back:
     - CMSheetMetal20
     - RMCMaskGasSPP
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

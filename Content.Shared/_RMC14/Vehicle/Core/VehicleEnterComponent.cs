@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.DoAfter;
 using Content.Shared.Roles;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -57,10 +58,31 @@ public sealed partial class VehicleEnterComponent : Component
     public float EnterDoAfter = 0f;
 
     [DataField]
+    public float XenoEnterDoAfter = 3f;
+
+    [DataField]
+    public float DragEnterDoAfter = 2f;
+
+    [DataField]
     public float ExitDoAfter = 0f;
 
     [DataField]
     public Vector2 ExitOffset = Vector2.Zero;
+
+    [DataField]
+    public EntityWhitelist PulledBlacklist = new()
+    {
+        Components =
+        [
+            "Barricade",
+            "Sentry",
+            "WeaponMount",
+            "CMAutomatedVendor",
+            "VendingMachine",
+            // TODO RMC14: block the flag thing as well
+        ],
+        Tags = new() { "Window" },
+    };
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -90,7 +112,13 @@ public sealed partial class VehicleEnterDoAfterEvent : SimpleDoAfterEvent
 }
 
 [Serializable, NetSerializable]
-public sealed partial class VehicleExitDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class VehicleExitDoAfterEvent : SimpleDoAfterEvent
+{
+    public override DoAfterEvent Clone()
+    {
+        return new VehicleExitDoAfterEvent();
+    }
+}
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(VehicleSystem))]

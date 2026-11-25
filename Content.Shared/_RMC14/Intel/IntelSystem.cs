@@ -244,6 +244,7 @@ public sealed class IntelSystem : EntitySystem
 
         SubscribeLocalEvent<ViewIntelObjectivesComponent, MapInitEvent>(OnViewIntelObjectivesMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, ViewIntelObjectivesActionEvent>(OnViewIntelObjectivesAction);
+        SubscribeLocalEvent<ViewIntelObjectivesComponent, BoundUIOpenedEvent>(OnViewIntelObjectivesUIOpened);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, InteractHandEvent>(OnViewIntelObjectivesInteractHand, before: [typeof(LockSystem)]);
 
         SubscribeLocalEvent<IntelHasUnlockedComponent, RefreshNameModifiersEvent>(OnHasUnlockedRefreshName);
@@ -510,6 +511,16 @@ public sealed class IntelSystem : EntitySystem
         _ui.OpenUi(ent.Owner, ViewIntelObjectivesUI.Key, actor);
     }
 
+    private void OnViewIntelObjectivesUIOpened(Entity<ViewIntelObjectivesComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        if (_net.IsServer && args.UiKey.Equals(ViewIntelObjectivesUI.Key))
+        {
+            var tree = EnsureTechTree().Comp.Tree;
+            ent.Comp.Tree = tree;
+            Dirty(ent);
+        }
+    }
+
     private void OnHasUnlockedRefreshName(Entity<IntelHasUnlockedComponent> ent, ref RefreshNameModifiersEvent args)
     {
         args.AddModifier("rmc-intel-unlocked", extraArgs: ("unlocked", string.Join(", ", ent.Comp.Unlocked)));
@@ -723,7 +734,7 @@ public sealed class IntelSystem : EntitySystem
         if (!storeGlobal)
             return AddPersonalClue(user, target, clue);
 
-        _popup.PopupEntity(clue, target, user, PopupType.Medium);
+        _popup.PopupEntity(FormattedMessage.RemoveMarkupOrThrow(clue), target, user, PopupType.Medium);
 
         RemovePersonalClueFromAll(target);
 

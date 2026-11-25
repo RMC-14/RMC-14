@@ -10,6 +10,7 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Xenonids.Rest;
 
 namespace Content.Shared._RMC14.Xenonids.Energy;
 
@@ -68,7 +69,7 @@ public sealed class XenoEnergySystem : EntitySystem
                 return;
 
             isHit = true;
-            if (_stand.IsDown(hit))
+            if (_stand.IsDown(hit) || HasComp<XenoRestingComponent>(hit))
                 isDown = true;
             break;
         }
