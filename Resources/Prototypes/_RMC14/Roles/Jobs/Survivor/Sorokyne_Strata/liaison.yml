@@ -1,6 +1,6 @@
 - type: job
   parent: [ RMCJobRibbonBase, CMSurvivorCorporate ] # Halcyon CL shouldn't spawn with WY badges
-  id: CMJobSurvivorHalcyonDynamicsLiaison # todo RMC14 forever cursed with a name typo without a database migration
+  id: CMJobSurvivorHalcyonLiaison
   name: rmc-job-name-survivor-halcyon-liaison
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHalcyonLiaison

@@ -554,9 +554,9 @@
 
 - type: entity
   parent: RMCContainerBase
-  id: RMCContainerHalcyonDynamicsLeft
-  name: Halcyon Dynamics Corporation Cargo Container
-  description: "A huge industrial shipping container. This one is owned by the Halcyon Dynamics Corporation, producer of starship parts, military-grade weaponry, and prosthetic limbs. Despite their close relationship with the SPP, you suspect they love money as much as any other Megacorp."
+  id: RMCContainerHalcyonLeft
+  name: Halcyon Corporation Cargo Container
+  description: "A huge industrial shipping container. This one is owned by the Halcyon Corporation, producer of starship parts, military-grade weaponry, and prosthetic limbs. Despite their close relationship with the SPP, you suspect they love money as much as any other Megacorp."
   suffix: Halcyon, Left
   components:
   - type: Sprite
@@ -564,24 +564,24 @@
     state: halcyoncontainerleft
 
 - type: entity
-  parent: RMCContainerHalcyonDynamicsLeft
-  id: RMCContainerHalcyonDynamicsMiddle
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonMiddle
   suffix: Halcyon, Middle
   components:
   - type: Sprite
     state: halcyoncontainermiddle
 
 - type: entity
-  parent: RMCContainerHalcyonDynamicsLeft
-  id: RMCContainerHalcyonDynamicsRight
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonRight
   suffix: Halcyon, Right
   components:
   - type: Sprite
     state: halcyoncontainerright
 
 - type: entity
-  parent: RMCContainerHalcyonDynamicsLeft
-  id: RMCContainerHalcyonDynamicsLeftAlt
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonLeftAlt
   suffix: Halcyon, Left, Alt
   components:
   - type: Sprite
@@ -589,16 +589,16 @@
     state: halcyoncontainerleft_alt
 
 - type: entity
-  parent: RMCContainerHalcyonDynamicsLeft
-  id: RMCContainerHalcyonDynamicsMiddleAlt
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonMiddleAlt
   suffix: Halcyon, Middle, Alt
   components:
   - type: Sprite
     state: halcyoncontainermiddle_alt
 
 - type: entity
-  parent: RMCContainerHalcyonDynamicsLeft
-  id: RMCContainerHalcyonDynamicsRightAlt
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonRightAlt
   suffix: Halcyon, Right, Alt
   components:
   - type: Sprite
