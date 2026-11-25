@@ -177,10 +177,9 @@ public abstract class SharedStationSpawningSystem : EntitySystem
                     {
                         var spawnedEntity = Spawn(entProto, coords);
                         // RMC14
-                        if (startingGear is not LoadoutPrototype &&
-                            TryComp(spawnedEntity, out ItemComponent? item))
+                        if (TryComp(spawnedEntity, out ItemComponent? item))
                         {
-                            var ev = new CMStorageItemFillEvent((spawnedEntity, item), storage);
+                            var ev = new CMStorageItemFillEvent((spawnedEntity, item), storage, startingGear);
                             RaiseLocalEvent(slotEnt.Value, ref ev);
                         }
                         // RMC14
