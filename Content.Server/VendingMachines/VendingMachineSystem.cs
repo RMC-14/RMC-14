@@ -237,7 +237,7 @@ namespace Content.Server.VendingMachines
                 spawnCoordinates = spawnCoordinates.Offset(offset);
             }
 
-            var ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            var ent = SpawnAttachedTo(vendComponent.NextItemToEject, spawnCoordinates);
 
             if (vendComponent.ThrowNextItem)
             {

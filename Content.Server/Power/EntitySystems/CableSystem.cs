@@ -55,7 +55,7 @@ public sealed partial class CableSystem : EntitySystem
 
         _adminLogger.Add(LogType.CableCut, LogImpact.High, $"The {ToPrettyString(uid)} at {xform.Coordinates} was cut by {ToPrettyString(args.User)}.");
 
-        Spawn(cable.CableDroppedOnCutPrototype, xform.Coordinates);
+        SpawnAttachedTo(cable.CableDroppedOnCutPrototype, xform.Coordinates);
         QueueDel(uid);
     }
 
@@ -74,7 +74,7 @@ public sealed partial class CableSystem : EntitySystem
 
         // This entity should not be un-anchorable. But this can happen if the grid-tile is deleted (RCD, explosion,
         // etc). In that case: behave as if the cable had been cut.
-        Spawn(cable.CableDroppedOnCutPrototype, Transform(uid).Coordinates);
+        SpawnAttachedTo(cable.CableDroppedOnCutPrototype, Transform(uid).Coordinates);
         QueueDel(uid);
     }
 }

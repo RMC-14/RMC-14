@@ -64,7 +64,7 @@ namespace Content.IntegrationTests.Tests.Doors
 
             await server.WaitAssertion(() =>
             {
-                airlock = entityManager.SpawnEntity("AirlockDummy", MapCoordinates.Nullspace);
+                airlock = entityManager.Spawn("AirlockDummy", MapCoordinates.Nullspace);
 
 #pragma warning disable NUnit2045 // Interdependent assertions.
                 Assert.That(entityManager.TryGetComponent(airlock, out doorComponent), Is.True);
@@ -133,9 +133,9 @@ namespace Content.IntegrationTests.Tests.Doors
             await server.WaitAssertion(() =>
             {
                 var humanCoordinates = new MapCoordinates(new Vector2(airlockPhysicsDummyStartingX, 0), map.MapId);
-                airlockPhysicsDummy = entityManager.SpawnEntity("AirlockPhysicsDummy", humanCoordinates);
+                airlockPhysicsDummy = entityManager.Spawn("AirlockPhysicsDummy", humanCoordinates);
 
-                airlock = entityManager.SpawnEntity("AirlockDummy", new MapCoordinates(new Vector2(0, 0), map.MapId));
+                airlock = entityManager.Spawn("AirlockDummy", new MapCoordinates(new Vector2(0, 0), map.MapId));
 
                 Assert.Multiple(() =>
                 {

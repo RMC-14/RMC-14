@@ -55,7 +55,7 @@ namespace Content.Server.RatKing
             }
             args.Handled = true;
             _hunger.ModifyHunger(uid, -component.HungerPerArmyUse, hunger);
-            var servant = Spawn(component.ArmyMobSpawnId, Transform(uid).Coordinates);
+            var servant = SpawnAttachedTo(component.ArmyMobSpawnId, Transform(uid).Coordinates);
             var comp = EnsureComp<RatKingServantComponent>(servant);
             comp.King = uid;
             Dirty(servant, comp);

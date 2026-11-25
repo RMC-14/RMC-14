@@ -41,7 +41,7 @@ public sealed class ContainerFillSystem : EntitySystem
 
             foreach (var proto in prototypes)
             {
-                var ent = Spawn(proto, coords);
+                var ent = SpawnAttachedTo(proto, coords);
                 if (!_containerSystem.Insert(ent, container, containerXform: xform))
                 {
                     var alreadyContained = container.ContainedEntities.Count > 0 ? string.Join("\n", container.ContainedEntities.Select(e => $"\t - {ToPrettyString(e)}")) : "< empty >";
@@ -82,7 +82,7 @@ public sealed class ContainerFillSystem : EntitySystem
                 EntityUid spawn;
                 try
                 {
-                    spawn = Spawn(proto, coords);
+                    spawn = SpawnAttachedTo(proto, coords);
                 }
                 catch(Exception e)
                 {

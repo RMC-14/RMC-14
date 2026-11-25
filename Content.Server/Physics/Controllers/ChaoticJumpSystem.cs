@@ -70,7 +70,7 @@ public sealed class ChaoticJumpSystem : VirtualController
             targetPos = new Vector2(startPos.X + range * (float) Math.Cos(direction), startPos.Y + range * (float) Math.Sin(direction));
         }
 
-        Spawn(component.Effect, transform.Coordinates);
+        SpawnAttachedTo(component.Effect, transform.Coordinates);
 
         _transform.SetWorldPosition(uid, targetPos);
     }

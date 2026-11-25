@@ -49,7 +49,7 @@ public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
             var quantity = weak ? component.WeakReagentQuantity : component.ReagentQuantity;
             solution.AddReagent(reagent, quantity);
 
-            var foamEnt = Spawn(ChemicalReactionSystem.FoamReaction, transform.Coordinates);
+            var foamEnt = SpawnAttachedTo(ChemicalReactionSystem.FoamReaction, transform.Coordinates);
             var spreadAmount = weak ? component.WeakSpread : component.Spread;
             _smoke.StartSmoke(foamEnt, solution, component.Time, spreadAmount);
             Audio.PlayPvs(component.Sound, transform.Coordinates);

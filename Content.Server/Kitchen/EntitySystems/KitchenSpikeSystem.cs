@@ -194,7 +194,7 @@ namespace Content.Server.Kitchen.EntitySystems
 
             var item = _random.PickAndTake(component.PrototypesToSpawn);
 
-            var ent = Spawn(item, Transform(uid).Coordinates);
+            var ent = SpawnAttachedTo(item, Transform(uid).Coordinates);
             _metaData.SetEntityName(ent,
                 Loc.GetString("comp-kitchen-spike-meat-name", ("name", Name(ent)), ("victim", component.Victim)));
 

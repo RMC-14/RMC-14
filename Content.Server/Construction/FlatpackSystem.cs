@@ -103,7 +103,7 @@ public sealed class FlatpackSystem : SharedFlatpackSystem
         if (!MaterialStorage.TryChangeMaterialAmount((ent, null), cost))
             return;
 
-        var flatpack = Spawn(comp.BaseFlatpackPrototype, Transform(ent).Coordinates);
+        var flatpack = SpawnAttachedTo(comp.BaseFlatpackPrototype, Transform(ent).Coordinates);
         SetupFlatpack(flatpack, proto, board);
         Del(board);
     }

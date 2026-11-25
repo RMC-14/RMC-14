@@ -21,7 +21,7 @@ public sealed partial class SalvageSystem
         if (!data.Missions.TryGetValue(args.Index, out var missionparams))
             return;
 
-        var cdUid = Spawn(CoordinatesDisk, Transform(uid).Coordinates);
+        var cdUid = SpawnAttachedTo(CoordinatesDisk, Transform(uid).Coordinates);
         SpawnMission(missionparams, station.Value, cdUid);
 
         data.ActiveMission = args.Index;

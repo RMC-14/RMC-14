@@ -142,7 +142,7 @@ public sealed partial class GunSystem : SharedGunSystem
             if (!TryComp(coords.EntityId, out TransformComponent? relativeXform))
                 continue;
 
-            var ent = Spawn(HitscanProto, coords);
+            var ent = SpawnAttachedTo(HitscanProto, coords);
             var sprite = Comp<SpriteComponent>(ent);
 
             var xform = Transform(ent);
@@ -388,7 +388,7 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
         }
 
-        var ent = Spawn(message.Prototype, coordinates);
+        var ent = SpawnAttachedTo(message.Prototype, coordinates);
         TransformSystem.SetWorldRotationNoLerp(ent, message.Angle);
 
         // RMC14

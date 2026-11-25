@@ -39,7 +39,7 @@ public sealed class TurnstileSystem : SharedTurnstileSystem
 
     private void OnExamined(Entity<TurnstileComponent> ent, ref ExaminedEvent args)
     {
-        Spawn(ExamineArrow, new EntityCoordinates(ent, 0, 0));
+        SpawnAttachedTo(ExamineArrow, new EntityCoordinates(ent, 0, 0));
     }
 
     protected override void PlayAnimation(EntityUid uid, string stateId)

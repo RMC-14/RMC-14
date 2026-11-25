@@ -101,7 +101,7 @@ public sealed class ProjectileAnomalySystem : EntitySystem
                 ? _xform.WithEntityId(coords, gridUid)
                 : new(_map.GetMapOrInvalid(mapPos.MapId), mapPos.Position);
 
-        var ent = Spawn(component.ProjectilePrototype, spawnCoords);
+        var ent = SpawnAttachedTo(component.ProjectilePrototype, spawnCoords);
         var direction = _xform.ToMapCoordinates(targetCoords).Position - mapPos.Position;
 
         if (!TryComp<ProjectileComponent>(ent, out var comp))

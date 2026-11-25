@@ -56,7 +56,7 @@ public sealed class BinSystem : EntitySystem
         var xform = Transform(uid);
         foreach (var id in component.InitialContents)
         {
-            var ent = Spawn(id, xform.Coordinates);
+            var ent = SpawnAttachedTo(id, xform.Coordinates);
             if (!TryInsertIntoBin(uid, ent, component))
             {
                 Log.Error($"Entity {ToPrettyString(ent)} was unable to be initialized into bin {ToPrettyString(uid)}");

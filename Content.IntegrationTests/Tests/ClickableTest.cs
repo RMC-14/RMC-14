@@ -61,7 +61,7 @@ namespace Content.IntegrationTests.Tests
 
             await server.WaitPost(() =>
             {
-                serverEnt = serverEntManager.SpawnEntity(prototype, testMap.GridCoords);
+                serverEnt = serverEntManager.SpawnAttachedTo(prototype, testMap.GridCoords);
                 serverEntManager.System<SharedTransformSystem>().SetWorldRotation(serverEnt, angle);
             });
 

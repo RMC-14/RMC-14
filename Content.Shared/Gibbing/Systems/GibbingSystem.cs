@@ -187,7 +187,7 @@ public sealed class GibbingSystem : EntitySystem
         }
 
         if (gibType == GibType.Gib)
-            PredictedQueueDel(gibbable.Owner);
+            QueueDel(gibbable.Owner);
         return true;
     }
 
@@ -292,7 +292,7 @@ public sealed class GibbingSystem : EntitySystem
         var gibbedEvent = new EntityGibbedEvent(gibbable, localGibs);
         RaiseLocalEvent(gibbable, ref gibbedEvent);
         if (deleteTarget)
-            PredictedQueueDel(gibbable.Owner);
+            QueueDel(gibbable.Owner);
         return localGibs;
     }
 
@@ -332,7 +332,7 @@ public sealed class GibbingSystem : EntitySystem
         gibletEntity = null;
         if (gibbable.GibPrototypes.Count == 0)
             return false;
-        gibletEntity = Spawn(gibbable.GibPrototypes[_random.Next(0, gibbable.GibPrototypes.Count)],
+        gibletEntity = SpawnAttachedTo(gibbable.GibPrototypes[_random.Next(0, gibbable.GibPrototypes.Count)],
             randomSpreadModifier == null
                 ? coords
                 : coords.Offset(_random.NextVector2(gibbable.GibScatterRange * randomSpreadModifier.Value)));

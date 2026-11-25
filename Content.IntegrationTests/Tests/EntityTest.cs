@@ -65,7 +65,7 @@ namespace Content.IntegrationTests.Tests
                         // TODO: Fix this better in engine.
                         mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
                         var coord = new EntityCoordinates(grid.Owner, 0, 0);
-                        entityMan.SpawnEntity(spawn, coord);
+                        entityMan.SpawnAttachedTo(spawn, coord);
                     }
                 });
 
@@ -132,7 +132,7 @@ namespace Content.IntegrationTests.Tests
                     .ToList();
                 foreach (var protoId in protoIds)
                 {
-                    entityMan.SpawnEntity(protoId, map.GridCoords);
+                    entityMan.SpawnAttachedTo(protoId, map.GridCoords);
                 }
             });
             await server.WaitRunTicks(15);
@@ -206,7 +206,7 @@ namespace Content.IntegrationTests.Tests
                     {
                         mapSys.CreateMap(out var mapId);
                         var grid = mapSys.CreateGridEntity(mapId);
-                        var ent = sEntMan.SpawnEntity(protoId, new EntityCoordinates(grid.Owner, 0.5f, 0.5f));
+                        var ent = sEntMan.SpawnAttachedTo(protoId, new EntityCoordinates(grid.Owner, 0.5f, 0.5f));
                         foreach (var (_, component) in sEntMan.GetNetComponents(ent))
                         {
                             sEntMan.Dirty(ent, component);
@@ -343,7 +343,7 @@ namespace Content.IntegrationTests.Tests
                     var serverEntities = new HashSet<EntityUid>(Entities(server.EntMan));
                     var clientEntities = new HashSet<EntityUid>(Entities(client.EntMan));
                     EntityUid uid = default;
-                    await server.WaitPost(() => uid = server.EntMan.SpawnEntity(protoId, coords));
+                    await server.WaitPost(() => uid = server.EntMan.Spawn(protoId, coords));
                     await pair.RunTicksSync(3);
 
                     // If the entity deleted itself, check that it didn't spawn other entities
@@ -482,7 +482,7 @@ namespace Content.IntegrationTests.Tests
                             continue;
                         }
 
-                        var entity = entityManager.SpawnEntity(null, testLocation);
+                        var entity = entityManager.SpawnAttachedTo(null, testLocation);
 
                         Assert.That(entityManager.GetComponent<MetaDataComponent>(entity).EntityInitialized);
 

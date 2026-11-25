@@ -333,7 +333,7 @@ public abstract class SharedMagicSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        var ent = Spawn(proto, position.SnapToGrid(EntityManager));
+        var ent = SpawnAttachedTo(proto, position.SnapToGrid(EntityManager));
 
         if (lifetime != null)
         {

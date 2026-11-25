@@ -42,7 +42,7 @@ public sealed class ItemCreatorSystem : SharedItemCreatorSystem
             return;
 
         // try to put throwing star in hand, otherwise it goes on the ground
-        var star = Spawn(comp.SpawnedPrototype, Transform(user).Coordinates);
+        var star = SpawnAttachedTo(comp.SpawnedPrototype, Transform(user).Coordinates);
         _hands.TryPickupAnyHand(user, star);
     }
 

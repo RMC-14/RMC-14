@@ -51,7 +51,7 @@ public sealed class OutfitSystem : EntitySystem
                 if (gearStr == string.Empty)
                     continue;
 
-                var equipmentEntity = EntityManager.SpawnEntity(gearStr, EntityManager.GetComponent<TransformComponent>(target).Coordinates);
+                var equipmentEntity = EntityManager.SpawnAttachedTo(gearStr, EntityManager.GetComponent<TransformComponent>(target).Coordinates);
                 if (slot.Name == "id" &&
                     EntityManager.TryGetComponent(equipmentEntity, out PdaComponent? pdaComponent) &&
                     EntityManager.TryGetComponent<IdCardComponent>(pdaComponent.ContainedId, out var id))
@@ -70,7 +70,7 @@ public sealed class OutfitSystem : EntitySystem
             var coords = EntityManager.GetComponent<TransformComponent>(target).Coordinates;
             foreach (var prototype in startingGear.Inhand)
             {
-                var inhandEntity = EntityManager.SpawnEntity(prototype, coords);
+                var inhandEntity = EntityManager.SpawnAttachedTo(prototype, coords);
                 _handSystem.TryPickup(target, inhandEntity, checkActionBlocker: false, handsComp: handsComponent);
             }
         }

@@ -72,7 +72,7 @@ namespace Content.Client.Inventory
             _cuffable = EntMan.System<SharedCuffableSystem>();
             _strippable = EntMan.System<StrippableSystem>();
 
-            _virtualHiddenEntity = EntMan.SpawnEntity(HiddenPocketEntityId, MapCoordinates.Nullspace);
+            _virtualHiddenEntity = EntMan.Spawn(HiddenPocketEntityId, MapCoordinates.Nullspace);
         }
 
         protected override void Open()

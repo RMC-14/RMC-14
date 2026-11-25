@@ -46,7 +46,7 @@ public sealed partial class MindTests
         MindComponent mind = default!;
         await pair.Server.WaitPost(() =>
         {
-            entity = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
+            entity = entMan.Spawn(null, MapCoordinates.Nullspace);
             mindId = mindSys.CreateMind(player.UserId);
             mind = entMan.GetComponent<MindComponent>(mindId);
             mindSys.TransferTo(mindId, entity);
@@ -78,7 +78,7 @@ public sealed partial class MindTests
         await pair.Server.WaitAssertion(() =>
         {
             var oldUid = player.AttachedEntity;
-            ghostUid = entMan.SpawnEntity(GameTicker.ObserverPrototypeName, MapCoordinates.Nullspace);
+            ghostUid = entMan.Spawn(GameTicker.ObserverPrototypeName, MapCoordinates.Nullspace);
             mindId = mindSys.GetMind(player.UserId)!.Value;
             Assert.That(mindId, Is.Not.EqualTo(default(EntityUid)));
             mind = entMan.GetComponent<MindComponent>(mindId);

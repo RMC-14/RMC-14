@@ -27,7 +27,7 @@ public sealed class RestrictedRangeSystem : SharedRestrictedRangeSystem
 
     public EntityUid CreateBoundary(EntityCoordinates coordinates, float range)
     {
-        var boundaryUid = Spawn(null, coordinates);
+        var boundaryUid = SpawnAttachedTo(null, coordinates);
         var boundaryPhysics = AddComp<PhysicsComponent>(boundaryUid);
         var cShape = new ChainShape();
         // Don't need it to be a perfect circle, just need it to be loosely accurate.

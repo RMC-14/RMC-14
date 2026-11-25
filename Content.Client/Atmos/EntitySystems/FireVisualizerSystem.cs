@@ -118,7 +118,7 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             return;
         // RMC14 end
 
-        component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
+        component.LightEntity ??= SpawnAttachedTo(null, new EntityCoordinates(uid, default));
         var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);
 
         // RMC14 start

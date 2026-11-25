@@ -53,7 +53,7 @@ namespace Content.Server.Nutrition.EntitySystems
                 }
                 foreach (var trash in foodComp.Trash)
                 {
-                    Spawn(trash, Transform(uid).Coordinates);
+                    SpawnAttachedTo(trash, Transform(uid).Coordinates);
                 }
             }
             ActivatePayload(uid);

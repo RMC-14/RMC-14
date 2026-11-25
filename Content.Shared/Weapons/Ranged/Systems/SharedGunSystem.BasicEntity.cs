@@ -36,7 +36,7 @@ public abstract partial class SharedGunSystem
                 component.Count--;
             }
 
-            var ent = Spawn(component.Proto, args.Coordinates);
+            var ent = SpawnAttachedTo(component.Proto, args.Coordinates);
             args.Ammo.Add((ent, EnsureShootable(ent)));
         }
 

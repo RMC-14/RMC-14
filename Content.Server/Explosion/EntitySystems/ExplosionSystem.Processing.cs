@@ -261,7 +261,7 @@ public sealed partial class ExplosionSystem
         }
 
         if (!tileBlocked)
-            Spawn(ShockwaveSmoke, new EntityCoordinates(grid.Owner, tile));
+            SpawnAttachedTo(ShockwaveSmoke, new EntityCoordinates(grid.Owner, tile));
 
         // Next, we get the intersecting entities AGAIN, but purely for throwing. This way, glass shards spawned from
         // windows will be flung outwards, and not stay where they spawned. This is however somewhat unnecessary, and a

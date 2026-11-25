@@ -24,7 +24,7 @@ namespace Content.Server.Construction.Completions
             var coordinates = entityManager.GetComponent<TransformComponent>(uid).Coordinates;
             for (var i = 0; i < Amount; i++)
             {
-                containerSystem.Insert(entityManager.SpawnEntity(Prototype, coordinates), container);
+                containerSystem.Insert(entityManager.SpawnAttachedTo(Prototype, coordinates), container);
             }
         }
     }

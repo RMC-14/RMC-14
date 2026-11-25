@@ -189,7 +189,7 @@ public sealed class AnimalHusbandrySystem : EntitySystem
         var spawns = EntitySpawnCollection.GetSpawns(component.Offspring, _random);
         foreach (var spawn in spawns)
         {
-            var offspring = Spawn(spawn, xform.Coordinates.Offset(_random.NextVector2(0.3f)));
+            var offspring = SpawnAttachedTo(spawn, xform.Coordinates.Offset(_random.NextVector2(0.3f)));
             _transform.AttachToGridOrMap(offspring);
             if (component.MakeOffspringInfant)
             {

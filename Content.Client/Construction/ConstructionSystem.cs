@@ -291,7 +291,7 @@ namespace Content.Client.Construction
             if (!CheckConstructionConditions(prototype, loc, dir, user, showPopup: true))
                 return false;
 
-            ghost = Spawn("constructionghost", loc);
+            ghost = SpawnAttachedTo("constructionghost", loc);
             var comp = Comp<ConstructionGhostComponent>(ghost.Value);
             comp.Prototype = prototype;
             comp.GhostId = ghost.GetHashCode();
@@ -310,7 +310,7 @@ namespace Content.Client.Construction
             }
             else if (targetProto.Components.TryGetValue("Sprite", out _))
             {
-                var dummy = EntityManager.SpawnEntity(targetProtoId, MapCoordinates.Nullspace);
+                var dummy = EntityManager.Spawn(targetProtoId, MapCoordinates.Nullspace);
                 var targetSprite = EnsureComp<SpriteComponent>(dummy);
                 EntityManager.System<AppearanceSystem>().OnChangeData(dummy, targetSprite);
 

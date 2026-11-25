@@ -113,7 +113,7 @@ namespace Content.Server.Rotatable
         public void Flip(EntityUid uid, FlippableComponent component)
         {
             var oldTransform = Comp<TransformComponent>(uid);
-            var entity = Spawn(component.MirrorEntity, oldTransform.Coordinates);
+            var entity = SpawnAttachedTo(component.MirrorEntity, oldTransform.Coordinates);
             var newTransform = Comp<TransformComponent>(entity);
             newTransform.LocalRotation = oldTransform.LocalRotation;
             _transform.Unanchor(entity, newTransform);

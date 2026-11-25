@@ -129,12 +129,12 @@ public sealed class TippyUIController : UIController
 
                 if (next.Proto != null)
                 {
-                    _entity = EntityManager.SpawnEntity(next.Proto, MapCoordinates.Nullspace);
+                    _entity = EntityManager.Spawn(next.Proto, MapCoordinates.Nullspace);
                     tippy.ModifyLayers = false;
                 }
                 else
                 {
-                    _entity = EntityManager.SpawnEntity(_cfg.GetCVar(CCVars.TippyEntity), MapCoordinates.Nullspace);
+                    _entity = EntityManager.Spawn(_cfg.GetCVar(CCVars.TippyEntity), MapCoordinates.Nullspace);
                     tippy.ModifyLayers = true;
                 }
                 if (!EntityManager.TryGetComponent(_entity, out sprite))

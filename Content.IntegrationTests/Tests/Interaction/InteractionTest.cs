@@ -210,7 +210,7 @@ public abstract partial class InteractionTest
             SEntMan.System<SharedMindSystem>().WipeMind(ServerSession.ContentData()?.Mind);
 
             old = cPlayerMan.LocalEntity;
-            SPlayer = SEntMan.SpawnEntity(PlayerPrototype, SEntMan.GetCoordinates(PlayerCoords));
+            SPlayer = SEntMan.SpawnAttachedTo(PlayerPrototype, SEntMan.GetCoordinates(PlayerCoords));
             Player = SEntMan.GetNetEntity(SPlayer);
             Server.PlayerMan.SetAttachedEntity(ServerSession, SPlayer);
             Hands = SEntMan.GetComponent<HandsComponent>(SPlayer);

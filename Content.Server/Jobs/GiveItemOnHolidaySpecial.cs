@@ -28,7 +28,7 @@ namespace Content.Server.Jobs
 
             var entMan = IoCManager.Resolve<IEntityManager>();
 
-            var entity = entMan.SpawnEntity(Prototype, entMan.GetComponent<TransformComponent>(mob).Coordinates);
+            var entity = entMan.SpawnAttachedTo(Prototype, entMan.GetComponent<TransformComponent>(mob).Coordinates);
 
             sysMan.GetEntitySystem<SharedHandsSystem>().PickupOrDrop(mob, entity);
         }

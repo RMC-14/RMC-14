@@ -36,7 +36,7 @@ namespace Content.IntegrationTests.Tests.Construction
                     if (!proto.Components.ContainsKey("Construction"))
                         continue;
 
-                    var ent = entMan.SpawnEntity(proto.ID, new MapCoordinates(Vector2.Zero, map.MapId));
+                    var ent = entMan.Spawn(proto.ID, new MapCoordinates(Vector2.Zero, map.MapId));
                     var construction = entMan.GetComponent<ConstructionComponent>(ent);
 
                     var graph = protoMan.Index<ConstructionGraphPrototype>(construction.Graph);

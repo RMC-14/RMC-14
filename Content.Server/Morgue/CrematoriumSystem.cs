@@ -136,7 +136,7 @@ public sealed class CrematoriumSystem : EntitySystem
                 _containers.Remove(item, storage.Contents);
                 Del(item);
             }
-            var ash = Spawn("Ash", Transform(uid).Coordinates);
+            var ash = SpawnAttachedTo("Ash", Transform(uid).Coordinates);
             _containers.Insert(ash, storage.Contents);
         }
 

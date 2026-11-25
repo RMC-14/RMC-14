@@ -720,7 +720,7 @@ namespace Content.Shared.Cuffs
                 if (cuff.BreakOnRemove)
                 {
                     QueueDel(cuffsToRemove);
-                    var trash = Spawn(cuff.BrokenPrototype, Transform(cuffsToRemove).Coordinates);
+                    var trash = SpawnAttachedTo(cuff.BrokenPrototype, Transform(cuffsToRemove).Coordinates);
                     _hands.PickupOrDrop(user, trash);
                 }
                 else

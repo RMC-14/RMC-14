@@ -167,10 +167,10 @@ namespace Content.IntegrationTests.Tests.Disposal
             {
                 // Spawn the entities
                 var coordinates = testMap.GridCoords;
-                human = entityManager.SpawnEntity("HumanDisposalDummy", coordinates);
-                wrench = entityManager.SpawnEntity("WrenchDummy", coordinates);
-                disposalUnit = entityManager.SpawnEntity("DisposalUnitDummy", coordinates);
-                disposalTrunk = entityManager.SpawnEntity("DisposalTrunkDummy", coordinates);
+                human = entityManager.SpawnAttachedTo("HumanDisposalDummy", coordinates);
+                wrench = entityManager.SpawnAttachedTo("WrenchDummy", coordinates);
+                disposalUnit = entityManager.SpawnAttachedTo("DisposalUnitDummy", coordinates);
+                disposalTrunk = entityManager.SpawnAttachedTo("DisposalTrunkDummy", coordinates);
 
                 // Test for components existing
                 unitUid = disposalUnit;

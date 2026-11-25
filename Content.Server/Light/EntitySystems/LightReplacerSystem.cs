@@ -63,7 +63,7 @@ public sealed class LightReplacerSystem : SharedLightReplacerSystem
         var xform = Transform(uid);
         foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Contents))
         {
-            var ent = Spawn(spawn, xform.Coordinates);
+            var ent = SpawnAttachedTo(spawn, xform.Coordinates);
             TryInsertBulb(uid, ent, replacer: component);
         }
     }

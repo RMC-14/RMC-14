@@ -44,7 +44,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
         // Spawn web in center
         if (!IsTileBlockedByWeb(coords))
         {
-            Spawn(component.WebPrototype, coords);
+            SpawnAttachedTo(component.WebPrototype, coords);
             result = true;
         }
 
@@ -56,7 +56,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
 
             if (!IsTileBlockedByWeb(coords))
             {
-                Spawn(component.WebPrototype, coords);
+                SpawnAttachedTo(component.WebPrototype, coords);
                 result = true;
             }
         }

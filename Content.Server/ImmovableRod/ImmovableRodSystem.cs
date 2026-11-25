@@ -99,7 +99,7 @@ public sealed class ImmovableRodSystem : EntitySystem
 
             Del(uid);
             Del(ent);
-            Spawn("Singularity", coords);
+            SpawnAttachedTo("Singularity", coords);
 
             return;
         }

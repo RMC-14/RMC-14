@@ -86,7 +86,7 @@ public sealed class PrototypeSaveTest
                 //Iterate list of prototypes to spawn
                 foreach (var prototype in prototypes)
                 {
-                    uid = entityMan.SpawnEntity(prototype.ID, testLocation);
+                    uid = entityMan.SpawnAttachedTo(prototype.ID, testLocation);
                     context.Prototype = prototype;
 
                     // get default prototype data

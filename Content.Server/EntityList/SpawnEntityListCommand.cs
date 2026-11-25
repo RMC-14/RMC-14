@@ -45,7 +45,7 @@ namespace Content.Server.EntityList
 
             foreach (var entity in prototype.Entities(_prototypeManager))
             {
-                EntityManager.SpawnEntity(entity.ID, EntityManager.GetComponent<TransformComponent>(attached).Coordinates);
+                EntityManager.SpawnAttachedTo(entity.ID, EntityManager.GetComponent<TransformComponent>(attached).Coordinates);
                 i++;
             }
 

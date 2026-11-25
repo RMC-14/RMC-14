@@ -41,7 +41,7 @@ public sealed partial class DeliverySystem
 
             foreach (var id in spawns)
             {
-                Spawn(id, coords);
+                SpawnAttachedTo(id, coords);
             }
         }
 

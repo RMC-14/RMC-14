@@ -428,7 +428,7 @@ public sealed class PlantHolderSystem : EntitySystem
         if (component.Seed != null && component.Seed.TurnIntoKudzu
             && component.WeedLevel >= component.Seed.WeedHighLevelThreshold)
         {
-            Spawn(component.Seed.KudzuPrototype, Transform(uid).Coordinates.SnapToGrid(EntityManager));
+            SpawnAttachedTo(component.Seed.KudzuPrototype, Transform(uid).Coordinates.SnapToGrid(EntityManager));
             component.Seed.TurnIntoKudzu = false;
             component.Health = 0;
         }

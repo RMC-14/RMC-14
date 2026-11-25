@@ -61,7 +61,7 @@ namespace Content.Benchmarks
             // Initialize N entities with one component.
             for (var i = 0; i < N; i++)
             {
-                var entity = _entityManager.SpawnEntity(null, EntityCoordinates.Invalid);
+                var entity = _entityManager.SpawnAttachedTo(null, EntityCoordinates.Invalid);
                 _entityManager.AddComponent<DummyComponent>(entity);
             }
         }

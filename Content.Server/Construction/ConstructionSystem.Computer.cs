@@ -60,7 +60,7 @@ public sealed partial class ConstructionSystem
         if (container.ContainedEntities.Count != 0)
             return;
 
-        var board = Spawn(component.BoardPrototype, Transform(ent).Coordinates);
+        var board = SpawnAttachedTo(component.BoardPrototype, Transform(ent).Coordinates);
 
         if (!_container.Insert(board, container))
             Log.Warning($"Couldn't insert board {board} to computer {ent}!");

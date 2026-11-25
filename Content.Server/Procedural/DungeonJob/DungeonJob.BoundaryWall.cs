@@ -82,10 +82,10 @@ public sealed partial class DungeonJob
             }
 
             if (isCorner)
-                _entManager.SpawnEntity(cornerWall, _maps.GridTileToLocal(_gridUid, _grid, index.Index));
+                _entManager.SpawnAttachedTo(cornerWall, _maps.GridTileToLocal(_gridUid, _grid, index.Index));
 
             if (!isCorner)
-                _entManager.SpawnEntity(wall, _maps.GridTileToLocal(_gridUid, _grid, index.Index));
+                _entManager.SpawnAttachedTo(wall, _maps.GridTileToLocal(_gridUid, _grid, index.Index));
 
             if (i % 20 == 0)
             {

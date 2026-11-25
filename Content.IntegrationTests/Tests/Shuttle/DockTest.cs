@@ -60,7 +60,7 @@ public sealed class DockTest : ContentUnitTest
             };
 
             mapSystem.SetTiles(grid1.Owner, grid1.Comp, tiles1);
-            var dock1 = entManager.SpawnEntity("AirlockShuttle", new EntityCoordinates(grid1Ent, dock1Pos));
+            var dock1 = entManager.SpawnAttachedTo("AirlockShuttle", new EntityCoordinates(grid1Ent, dock1Pos));
             var dock1Xform = entManager.GetComponent<TransformComponent>(dock1);
             dock1Xform.LocalRotation = dock1Angle;
 
@@ -74,7 +74,7 @@ public sealed class DockTest : ContentUnitTest
             };
 
             mapSystem.SetTiles(grid2.Owner, grid2.Comp, tiles2);
-            var dock2 = entManager.SpawnEntity("AirlockShuttle", new EntityCoordinates(grid2Ent, dock2Pos));
+            var dock2 = entManager.SpawnAttachedTo("AirlockShuttle", new EntityCoordinates(grid2Ent, dock2Pos));
             var dock2Xform = entManager.GetComponent<TransformComponent>(dock2);
             dock2Xform.LocalRotation = dock2Angle;
 
@@ -119,7 +119,7 @@ public sealed class DockTest : ContentUnitTest
         await server.WaitAssertion(() =>
         {
             mapSystem.SetTile(map.MapUid, mapGrid, Vector2i.Zero, new Tile(1));
-            var airlockEnt = entManager.SpawnEntity("AirlockShuttle", new EntityCoordinates(map.MapUid, Vector2.One / 2f));
+            var airlockEnt = entManager.SpawnAttachedTo("AirlockShuttle", new EntityCoordinates(map.MapUid, Vector2.One / 2f));
             Assert.That(entManager.GetComponent<TransformComponent>(airlockEnt).Anchored);
 
             var dockingConfig = dockingSystem.GetDockingConfig(shuttle, map.MapUid);

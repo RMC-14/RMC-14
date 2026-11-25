@@ -534,7 +534,7 @@ public sealed class EntityEffectSystem : EntitySystem
             // RMC14
 
             var coords = _map.MapToGrid(gridUid, mapCoords);
-            var ent = Spawn(args.Effect.PrototypeId, coords.SnapToGrid());
+            var ent = SpawnAttachedTo(args.Effect.PrototypeId, coords.SnapToGrid());
 
             _smoke.StartSmoke(ent, splitSolution, args.Effect.Duration, spreadAmount);
 
@@ -717,7 +717,7 @@ public sealed class EntityEffectSystem : EntitySystem
         if (args.Effect.FlashEffectPrototype == null)
             return;
 
-        var uid = EntityManager.SpawnEntity(args.Effect.FlashEffectPrototype, _xform.GetMapCoordinates(transform));
+        var uid = EntityManager.Spawn(args.Effect.FlashEffectPrototype, _xform.GetMapCoordinates(transform));
         _xform.AttachToGridOrMap(uid);
 
         if (!TryComp<PointLightComponent>(uid, out var pointLightComp))

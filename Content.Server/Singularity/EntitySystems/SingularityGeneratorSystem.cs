@@ -53,7 +53,7 @@ public sealed class SingularityGeneratorSystem : SharedSingularityGeneratorSyste
             return;
 
         SetPower(uid, 0, comp);
-        Spawn(comp.SpawnPrototype, Transform(uid).Coordinates);
+        SpawnAttachedTo(comp.SpawnPrototype, Transform(uid).Coordinates);
     }
 
     #region Getters/Setters

@@ -248,7 +248,7 @@ namespace Content.Server.Lathe
                 var currentRecipe = _proto.Index(comp.CurrentRecipe.Value);
                 if (currentRecipe.Result is { } resultProto)
                 {
-                    var result = Spawn(resultProto, Transform(uid).Coordinates);
+                    var result = SpawnAttachedTo(resultProto, Transform(uid).Coordinates);
                     _stack.TryMergeToContacts(result);
                 }
 

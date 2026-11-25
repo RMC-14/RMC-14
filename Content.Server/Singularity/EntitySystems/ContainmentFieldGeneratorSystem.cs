@@ -313,7 +313,7 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
         while (currentOffset.Length() < stopDist)
         {
             var currentCoords = gen1Coords.Offset(currentOffset);
-            var newField = Spawn(firstGen.Comp.CreatedField, currentCoords);
+            var newField = SpawnAttachedTo(firstGen.Comp.CreatedField, currentCoords);
 
             var fieldXForm = Transform(newField);
             _transformSystem.SetParent(newField, fieldXForm, firstGen);

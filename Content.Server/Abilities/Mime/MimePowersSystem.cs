@@ -94,7 +94,7 @@ namespace Content.Server.Abilities.Mime
 
             _popupSystem.PopupEntity(Loc.GetString("mime-invisible-wall-popup", ("mime", uid)), uid);
             // Make sure we set the invisible wall to despawn properly
-            Spawn(component.WallPrototype, _turf.GetTileCenter(tile.Value));
+            SpawnAttachedTo(component.WallPrototype, _turf.GetTileCenter(tile.Value));
             // Handle args so cooldown works
             args.Handled = true;
         }

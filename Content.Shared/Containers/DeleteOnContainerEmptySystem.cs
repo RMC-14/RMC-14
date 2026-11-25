@@ -17,6 +17,6 @@ public sealed class DeleteOnContainerEmptySystem : EntitySystem
             return;
 
         if (_container.TryGetContainer(ent.Owner, ent.Comp.ContainerId, out var container) && container.ContainedEntities.Count == 0)
-            PredictedQueueDel(ent.Owner);
+            QueueDel(ent.Owner);
     }
 }

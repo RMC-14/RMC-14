@@ -145,7 +145,7 @@ public sealed class SmokeSystem : EntitySystem
         foreach (var neighbor in args.NeighborFreeTiles)
         {
             var coords = _map.GridTileToLocal(neighbor.Tile.GridUid, neighbor.Grid, neighbor.Tile.GridIndices);
-            var ent = Spawn(prototype.ID, coords);
+            var ent = SpawnAttachedTo(prototype.ID, coords);
             var spreadAmount = Math.Max(0, smokePerSpread);
             entity.Comp.SpreadAmount -= args.NeighborFreeTiles.Count;
 

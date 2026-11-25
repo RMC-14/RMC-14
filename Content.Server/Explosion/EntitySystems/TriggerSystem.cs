@@ -183,7 +183,7 @@ namespace Content.Server.Explosion.EntitySystems
                 var coords = xform.Coordinates;
                 if (!coords.IsValid(EntityManager))
                     return;
-                Spawn(ent.Comp.Proto, coords);
+                SpawnAttachedTo(ent.Comp.Proto, coords);
 
             }
         }

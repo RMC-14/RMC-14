@@ -58,7 +58,7 @@ public sealed partial class BuildMech : IGraphAction
         containerSystem.Remove(cell, container);
 
         var transform = entityManager.GetComponent<TransformComponent>(uid);
-        var mech = entityManager.SpawnEntity(MechPrototype, transform.Coordinates);
+        var mech = entityManager.SpawnAttachedTo(MechPrototype, transform.Coordinates);
 
         if (entityManager.TryGetComponent<MechComponent>(mech, out var mechComp) && mechComp.BatterySlot.ContainedEntity == null)
         {

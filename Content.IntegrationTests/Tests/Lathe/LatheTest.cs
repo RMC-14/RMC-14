@@ -46,7 +46,7 @@ public sealed class LatheTest
             var materialEntities = new List<EntityUid>(materialEntityProtos.Count());
             foreach (var materialEntityProto in materialEntityProtos)
             {
-                materialEntities.Add(entMan.SpawnEntity(materialEntityProto.ID, mapData.GridCoords));
+                materialEntities.Add(entMan.SpawnAttachedTo(materialEntityProto.ID, mapData.GridCoords));
             }
 
             Assert.Multiple(() =>

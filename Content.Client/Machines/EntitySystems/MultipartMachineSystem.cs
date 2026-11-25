@@ -56,7 +56,7 @@ public sealed class MultipartMachineSystem : SharedMultipartMachineSystem
                 continue;
 
             var entityCoords = new EntityCoordinates(ent.Owner, part.Offset);
-            var ghostEnt = Spawn(_ghostPrototype, entityCoords);
+            var ghostEnt = SpawnAttachedTo(_ghostPrototype, entityCoords);
 
             if (!XformQuery.TryGetComponent(ghostEnt, out var xform))
                 break;

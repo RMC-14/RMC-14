@@ -214,7 +214,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
                 }
             }
 
-            var ent = Spawn(debrisFeatureEv.DebrisProto, coords);
+            var ent = SpawnAttachedTo(debrisFeatureEv.DebrisProto, coords);
             component.OwnedDebris.Add(point, ent);
 
             var owned = EnsureComp<OwnedDebrisComponent>(ent);

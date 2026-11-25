@@ -208,7 +208,7 @@ public abstract class SharedAnomalySystem : EntitySystem
 
         if (spawnCore)
         {
-            var core = Spawn(supercritical ? component.CorePrototype : component.CoreInertPrototype, Transform(uid).Coordinates);
+            var core = SpawnAttachedTo(supercritical ? component.CorePrototype : component.CoreInertPrototype, Transform(uid).Coordinates);
             _transform.PlaceNextTo(core, uid);
         }
 

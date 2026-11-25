@@ -26,9 +26,9 @@ public sealed partial class BuckleTest
 
         await server.WaitAssertion(() =>
         {
-            user = entMan.SpawnEntity(BuckleDummyId, MapCoordinates.Nullspace);
-            victim = entMan.SpawnEntity(BuckleDummyId, MapCoordinates.Nullspace);
-            chair = entMan.SpawnEntity(StrapDummyId, MapCoordinates.Nullspace);
+            user = entMan.Spawn(BuckleDummyId, MapCoordinates.Nullspace);
+            victim = entMan.Spawn(BuckleDummyId, MapCoordinates.Nullspace);
+            chair = entMan.Spawn(StrapDummyId, MapCoordinates.Nullspace);
 
             Assert.That(entMan.TryGetComponent(victim, out buckle));
             Assert.That(entMan.TryGetComponent(chair, out strap));
@@ -74,8 +74,8 @@ public sealed partial class BuckleTest
 
         await server.WaitAssertion(() =>
         {
-            user = entMan.SpawnEntity(BuckleDummyId, MapCoordinates.Nullspace);
-            chair = entMan.SpawnEntity(StrapDummyId, MapCoordinates.Nullspace);
+            user = entMan.Spawn(BuckleDummyId, MapCoordinates.Nullspace);
+            chair = entMan.Spawn(StrapDummyId, MapCoordinates.Nullspace);
 
             Assert.That(entMan.TryGetComponent(user, out buckle));
             Assert.That(entMan.TryGetComponent(chair, out strap));

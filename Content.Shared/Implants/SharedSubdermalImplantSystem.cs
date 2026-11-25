@@ -53,7 +53,7 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
                 if (_tag.HasTag(implant, MicroBombTag))
                 {
                     _container.Remove(implant, implantContainer);
-                    PredictedQueueDel(implant);
+                    QueueDel(implant);
                 }
             }
         }
@@ -109,7 +109,7 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
     public EntityUid? AddImplant(EntityUid uid, String implantId)
     {
         var coords = Transform(uid).Coordinates;
-        var ent = Spawn(implantId, coords);
+        var ent = SpawnAttachedTo(implantId, coords);
 
         if (TryComp<SubdermalImplantComponent>(ent, out var implant))
         {

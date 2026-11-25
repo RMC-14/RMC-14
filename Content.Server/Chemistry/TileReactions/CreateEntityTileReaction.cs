@@ -65,7 +65,7 @@ public sealed partial class CreateEntityTileReaction : ITileReaction
 
         var center = entityManager.System<TurfSystem>().GetTileCenter(tile);
         var pos = center.Offset(new Vector2(xoffs, yoffs));
-        entityManager.SpawnEntity(Entity, pos);
+        entityManager.SpawnAttachedTo(Entity, pos);
 
         return Usage;
     }

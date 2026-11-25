@@ -128,7 +128,7 @@ public sealed partial class ParcelWrappingSystem
         // Spawn unwrap trash.
         if (parcel.Comp.UnwrapTrash is { } trashProto)
         {
-            var trash = Spawn(trashProto, parcelTransform.Coordinates);
+            var trash = SpawnAttachedTo(trashProto, parcelTransform.Coordinates);
             _transform.DropNextTo((trash, null), (parcel, parcelTransform));
         }
 

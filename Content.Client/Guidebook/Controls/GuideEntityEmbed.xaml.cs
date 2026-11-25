@@ -64,7 +64,7 @@ public sealed partial class GuideEntityEmbed : BoxContainer, IDocumentTag
     {
         Interactive = interactive;
 
-        var ent = _entityManager.SpawnEntity(proto, MapCoordinates.Nullspace);
+        var ent = _entityManager.Spawn(proto, MapCoordinates.Nullspace);
         View.SetEntity(ent);
 
         if (caption)
@@ -144,7 +144,7 @@ public sealed partial class GuideEntityEmbed : BoxContainer, IDocumentTag
             return false;
         }
 
-        var ent = _entityManager.SpawnEntity(proto, MapCoordinates.Nullspace);
+        var ent = _entityManager.Spawn(proto, MapCoordinates.Nullspace);
 
         _tagSystem.AddTag(ent, GuidebookSystem.GuideEmbedTag);
         View.SetEntity(ent);

@@ -71,7 +71,7 @@ namespace Content.Shared.Containers.ItemSlots
                 if (slot.HasItem || string.IsNullOrEmpty(slot.StartingItem?.Id))
                     continue;
 
-                var item = Spawn(slot.StartingItem, Transform(uid).Coordinates);
+                var item = SpawnAttachedTo(slot.StartingItem, Transform(uid).Coordinates);
 
                 if (slot.ContainerSlot != null)
                     _containers.Insert(item, slot.ContainerSlot);

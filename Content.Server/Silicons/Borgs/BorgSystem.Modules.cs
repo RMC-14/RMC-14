@@ -194,7 +194,7 @@ public sealed partial class BorgSystem
 
             if (!component.ItemsCreated)
             {
-                item = Spawn(itemProto, xform.Coordinates);
+                item = SpawnAttachedTo(itemProto, xform.Coordinates);
             }
             else
             {

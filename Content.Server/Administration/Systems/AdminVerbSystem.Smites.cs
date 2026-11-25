@@ -153,7 +153,7 @@ public sealed partial class AdminVerbSystem
                 _popupSystem.PopupCoordinates(
                     Loc.GetString("admin-smite-chess-others", ("name", args.Target)), xform.Coordinates,
                     Filter.PvsExcept(args.Target), true, PopupType.MediumCaution);
-                var board = Spawn("ChessBoard", xform.Coordinates);
+                var board = SpawnAttachedTo("ChessBoard", xform.Coordinates);
                 var session = _tabletopSystem.EnsureSession(Comp<TabletopGameComponent>(board));
                 _transformSystem.SetMapCoordinates(args.Target, session.Position);
                 _transformSystem.SetWorldRotationNoLerp((args.Target, xform), Angle.Zero);
@@ -556,7 +556,7 @@ public sealed partial class AdminVerbSystem
                 Icon = new SpriteSpecifier.Rsi(new ("/Textures/Clothing/Head/Hats/catears.rsi"), "icon"),
                 Act = () =>
                 {
-                    var ears = Spawn("ClothingHeadHatCatEars", Transform(args.Target).Coordinates);
+                    var ears = SpawnAttachedTo("ClothingHeadHatCatEars", Transform(args.Target).Coordinates);
                     EnsureComp<UnremoveableComponent>(ears);
                     _inventorySystem.TryUnequip(args.Target, "head", true, true, false, inventory);
                     _inventorySystem.TryEquip(args.Target, ears, "head", true, true, false, inventory);
@@ -643,7 +643,7 @@ public sealed partial class AdminVerbSystem
             Act = () =>
             {
                 QueueDel(args.Target);
-                Spawn("Ash", Transform(args.Target).Coordinates);
+                SpawnAttachedTo("Ash", Transform(args.Target).Coordinates);
                 _popupSystem.PopupEntity(Loc.GetString("admin-smite-turned-ash-other", ("name", args.Target)), args.Target, PopupType.LargeCaution);
             },
             Impact = LogImpact.Extreme,
@@ -723,7 +723,7 @@ public sealed partial class AdminVerbSystem
             Act = () =>
             {
                 var xform = Transform(args.Target);
-                var locker = Spawn("ClosetMaintenance", xform.Coordinates);
+                var locker = SpawnAttachedTo("ClosetMaintenance", xform.Coordinates);
                 if (TryComp<EntityStorageComponent>(locker, out var storage))
                 {
                     _entityStorageSystem.ToggleOpen(args.Target, locker, storage);

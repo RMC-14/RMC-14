@@ -163,7 +163,7 @@ public partial class SharedBodySystem
                 // Spawn the entity on the target
                 // then get the body part type, create the slot, and finally
                 // we can insert it into the container.
-                var childPart = Spawn(connectionSlot.Part, new EntityCoordinates(parentEntity, Vector2.Zero));
+                var childPart = SpawnAttachedTo(connectionSlot.Part, new EntityCoordinates(parentEntity, Vector2.Zero));
                 cameFromEntities[connection] = childPart;
 
                 var childPartComponent = Comp<BodyPartComponent>(childPart);

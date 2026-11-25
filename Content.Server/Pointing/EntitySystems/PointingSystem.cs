@@ -170,7 +170,7 @@ namespace Content.Server.Pointing.EntitySystems
             var arrowEv = new RMCSpawnPointingArrowEvent("PointingArrow", coordsPointed);
             RaiseLocalEvent(player, ref arrowEv);
 
-            var arrow = arrowEv.Spawned ?? Spawn(arrowEv.Arrow, coordsPointed);
+            var arrow = arrowEv.Spawned ?? SpawnAttachedTo(arrowEv.Arrow, coordsPointed);
 
             if (TryComp<PointingArrowComponent>(arrow, out var pointing))
             {

@@ -33,7 +33,7 @@ public sealed class BufferingSystem : EntitySystem
                     continue;
 
                 buffering.BufferingTimer = _random.NextFloat(buffering.MinimumBufferTime, buffering.MaximumBufferTime);
-                buffering.BufferingIcon = Spawn("BufferingIcon", new EntityCoordinates(uid, Vector2.Zero));
+                buffering.BufferingIcon = SpawnAttachedTo("BufferingIcon", new EntityCoordinates(uid, Vector2.Zero));
                 EnsureComp<AdminFrozenComponent>(uid);
             }
         }

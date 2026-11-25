@@ -136,7 +136,7 @@ public sealed partial class MechSystem : SharedMechSystem
         // TODO: this should use containerfill?
         foreach (var equipment in component.StartingEquipment)
         {
-            var ent = Spawn(equipment, xform.Coordinates);
+            var ent = SpawnAttachedTo(equipment, xform.Coordinates);
             InsertEquipment(uid, ent, component);
         }
 

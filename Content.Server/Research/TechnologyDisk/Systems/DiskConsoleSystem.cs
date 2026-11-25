@@ -38,7 +38,7 @@ public sealed class DiskConsoleSystem : EntitySystem
                 continue;
 
             RemComp(uid, printing);
-            Spawn(console.DiskPrototype, xform.Coordinates);
+            SpawnAttachedTo(console.DiskPrototype, xform.Coordinates);
         }
     }
 

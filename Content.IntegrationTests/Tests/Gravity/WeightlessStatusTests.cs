@@ -50,7 +50,7 @@ namespace Content.IntegrationTests.Tests.Gravity
 
             await server.WaitAssertion(() =>
             {
-                human = entityManager.SpawnEntity("HumanWeightlessDummy", testMap.GridCoords);
+                human = entityManager.SpawnAttachedTo("HumanWeightlessDummy", testMap.GridCoords);
 
                 Assert.That(entityManager.TryGetComponent(human, out AlertsComponent alerts));
             });
@@ -63,7 +63,7 @@ namespace Content.IntegrationTests.Tests.Gravity
                 // No gravity without a gravity generator
                 Assert.That(alertsSystem.IsShowingAlert(human, weightlessAlert));
 
-                generatorUid = entityManager.SpawnEntity("WeightlessGravityGeneratorDummy", entityManager.GetComponent<TransformComponent>(human).Coordinates);
+                generatorUid = entityManager.SpawnAttachedTo("WeightlessGravityGeneratorDummy", entityManager.GetComponent<TransformComponent>(human).Coordinates);
             });
 
             // Let WeightlessSystem and GravitySystem tick

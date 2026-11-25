@@ -95,7 +95,7 @@ public sealed class EntityAnomalySystem : SharedEntityAnomalySystem
 
         foreach (var tileref in tiles)
         {
-            Spawn(_random.Pick(entry.Spawns), _mapSystem.ToCenterCoordinates(tileref, grid));
+            SpawnAttachedTo(_random.Pick(entry.Spawns), _mapSystem.ToCenterCoordinates(tileref, grid));
         }
     }
 }

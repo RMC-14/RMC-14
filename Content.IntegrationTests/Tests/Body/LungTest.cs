@@ -96,7 +96,7 @@ namespace Content.IntegrationTests.Tests.Body
             {
                 var center = new Vector2(0.5f, 0.5f);
                 var coordinates = new EntityCoordinates(grid.Value, center);
-                human = entityManager.SpawnEntity("HumanLungDummy", coordinates);
+                human = entityManager.SpawnAttachedTo("HumanLungDummy", coordinates);
                 relevantAtmos = entityManager.GetComponent<GridAtmosphereComponent>(grid.Value);
                 startingMoles = 100f; // Hardcoded because GetMapMoles returns 900 here for some reason.
 
@@ -160,7 +160,7 @@ namespace Content.IntegrationTests.Tests.Body
                 var center = new Vector2(0.5f, 0.5f);
 
                 var coordinates = new EntityCoordinates(grid.Value, center);
-                human = entityManager.SpawnEntity("HumanLungDummy", coordinates);
+                human = entityManager.SpawnAttachedTo("HumanLungDummy", coordinates);
 
                 var mixture = entityManager.System<AtmosphereSystem>().GetContainingMixture(human);
 #pragma warning disable NUnit2045

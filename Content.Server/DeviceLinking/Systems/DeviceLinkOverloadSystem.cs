@@ -23,6 +23,6 @@ public sealed class DeviceLinkOverloadSystem : EntitySystem
 
     private void OnOverloadSpawn(EntityUid uid, SpawnOnOverloadComponent component, ref DeviceLinkOverloadedEvent args)
     {
-        Spawn(component.Prototype, Transform(uid).Coordinates);
+        SpawnAttachedTo(component.Prototype, Transform(uid).Coordinates);
     }
 }

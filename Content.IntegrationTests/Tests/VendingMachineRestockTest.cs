@@ -204,10 +204,10 @@ namespace Content.IntegrationTests.Tests
                 var coordinates = testMap.GridCoords;
 
                 // Spawn the entities.
-                user = entityManager.SpawnEntity("HumanVendingDummy", coordinates);
-                machine = entityManager.SpawnEntity("VendingMachineTest", coordinates);
-                packageRight = entityManager.SpawnEntity("TestRestockCorrect", coordinates);
-                packageWrong = entityManager.SpawnEntity("TestRestockWrong", coordinates);
+                user = entityManager.SpawnAttachedTo("HumanVendingDummy", coordinates);
+                machine = entityManager.SpawnAttachedTo("VendingMachineTest", coordinates);
+                packageRight = entityManager.SpawnAttachedTo("TestRestockCorrect", coordinates);
+                packageWrong = entityManager.SpawnAttachedTo("TestRestockWrong", coordinates);
 
                 // Sanity test for components existing.
                 Assert.Multiple(() =>
@@ -294,7 +294,7 @@ namespace Content.IntegrationTests.Tests
                 Assert.That(totalStartingRamen, Is.EqualTo(0),
                     "Did not start with zero ramen.");
 
-                restock = entityManager.SpawnEntity("TestRestockExplode", coordinates);
+                restock = entityManager.SpawnAttachedTo("TestRestockExplode", coordinates);
                 var damageSpec = new DamageSpecifier(prototypeManager.Index(TestDamageType), 100);
                 var damageResult = damageableSystem.TryChangeDamage(restock, damageSpec);
 
@@ -345,7 +345,7 @@ namespace Content.IntegrationTests.Tests
             {
                 var coordinates = testMap.GridCoords;
 
-                var machine = entityManager.SpawnEntity("VendingMachineTest", coordinates);
+                var machine = entityManager.SpawnAttachedTo("VendingMachineTest", coordinates);
 
                 Assert.That(vendingMachineSystem.GetAvailableInventory(machine), Has.Count.EqualTo(1),
                     "Machine's available inventory did not contain one entry.");

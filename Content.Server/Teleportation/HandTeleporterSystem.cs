@@ -94,7 +94,7 @@ public sealed class HandTeleporterSystem : EntitySystem
 
             var timeout = EnsureComp<PortalTimeoutComponent>(user);
             timeout.EnteredPortal = null;
-            component.FirstPortal = Spawn(component.FirstPortalPrototype, Transform(user).Coordinates);
+            component.FirstPortal = SpawnAttachedTo(component.FirstPortalPrototype, Transform(user).Coordinates);
 
             if (component.AllowPortalsOnDifferentMaps && TryComp<PortalComponent>(component.FirstPortal, out var portal))
                 portal.CanTeleportToOtherMaps = true;
@@ -116,7 +116,7 @@ public sealed class HandTeleporterSystem : EntitySystem
 
             var timeout = EnsureComp<PortalTimeoutComponent>(user);
             timeout.EnteredPortal = null;
-            component.SecondPortal = Spawn(component.SecondPortalPrototype, Transform(user).Coordinates);
+            component.SecondPortal = SpawnAttachedTo(component.SecondPortalPrototype, Transform(user).Coordinates);
 
             if (component.AllowPortalsOnDifferentMaps && TryComp<PortalComponent>(component.SecondPortal, out var portal))
                 portal.CanTeleportToOtherMaps = true;

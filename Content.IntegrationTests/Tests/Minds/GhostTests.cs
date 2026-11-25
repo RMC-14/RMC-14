@@ -76,7 +76,7 @@ public sealed class GhostTests
         Entity<MindComponent> mind = default!;
         await data.Pair.Server.WaitPost(() =>
         {
-            data.Player = data.SEntMan.GetNetEntity(data.SEntMan.SpawnEntity(null, data.SEntMan.GetCoordinates(data.PlayerCoords)));
+            data.Player = data.SEntMan.GetNetEntity(data.SEntMan.SpawnAttachedTo(null, data.SEntMan.GetCoordinates(data.PlayerCoords)));
             mind = data.SMindSys.CreateMind(data.ServerSession.UserId, "DummyPlayerEntity");
             data.SPlayerEnt = data.SEntMan.GetEntity(data.Player);
             data.SMindSys.TransferTo(mind, data.SPlayerEnt, mind: mind.Comp);

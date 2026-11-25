@@ -428,7 +428,7 @@ public sealed partial class ShuttleSystem
         foreach (var tile in sparkTiles)
         {
             var coords = _mapSystem.GridTileToLocal(uid, grid, tile);
-            Spawn(_sparkEffect, coords);
+            SpawnAttachedTo(_sparkEffect, coords);
         }
     }
 

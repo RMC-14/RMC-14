@@ -235,7 +235,7 @@ namespace Content.Server.Bible
                 return;
 
             // Make this familiar the component's summon
-            var familiar = Spawn(component.SpecialItemPrototype, position.Coordinates);
+            var familiar = SpawnAttachedTo(component.SpecialItemPrototype, position.Coordinates);
             component.Summon = familiar;
 
             // If this is going to use a ghost role mob spawner, attach it to the bible.

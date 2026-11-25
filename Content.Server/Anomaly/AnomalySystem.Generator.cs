@@ -151,7 +151,7 @@ public sealed partial class AnomalySystem
             break;
         }
 
-        Spawn(toSpawn, targetCoords);
+        SpawnAttachedTo(toSpawn, targetCoords);
     }
 
     private void OnGeneratingStartup(EntityUid uid, GeneratingAnomalyGeneratorComponent component, ComponentStartup args)

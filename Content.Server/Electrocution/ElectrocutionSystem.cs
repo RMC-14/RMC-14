@@ -328,7 +328,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
         if (!Resolve(sourceUid, ref sourceTransform)) // This shouldn't really happen, but just in case...
             return true;
 
-        var electrocutionEntity = Spawn($"VirtualElectrocutionLoad{node.NodeGroupID}", sourceTransform.Coordinates);
+        var electrocutionEntity = SpawnAttachedTo($"VirtualElectrocutionLoad{node.NodeGroupID}", sourceTransform.Coordinates);
 
         var nodeContainer = Comp<NodeContainerComponent>(electrocutionEntity);
 

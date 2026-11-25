@@ -58,12 +58,12 @@ namespace Content.IntegrationTests.Tests.Interaction.Click
 
             await server.WaitAssertion(() =>
             {
-                user = sEntities.SpawnEntity(null, coords);
+                user = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<HandsComponent>(user);
                 sEntities.EnsureComponent<ComplexInteractionComponent>(user);
                 handSys.AddHand(user, "hand", HandLocation.Left);
-                target = sEntities.SpawnEntity(null, coords);
-                item = sEntities.SpawnEntity(null, coords);
+                target = sEntities.Spawn(null, coords);
+                item = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<ItemComponent>(item);
             });
 
@@ -125,13 +125,13 @@ namespace Content.IntegrationTests.Tests.Interaction.Click
 
             await server.WaitAssertion(() =>
             {
-                user = sEntities.SpawnEntity(null, coords);
+                user = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<HandsComponent>(user);
                 handSys.AddHand(user, "hand", HandLocation.Left);
-                target = sEntities.SpawnEntity(null, new MapCoordinates(new Vector2(1.9f, 0), mapId));
-                item = sEntities.SpawnEntity(null, coords);
+                target = sEntities.Spawn(null, new MapCoordinates(new Vector2(1.9f, 0), mapId));
+                item = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<ItemComponent>(item);
-                wall = sEntities.SpawnEntity("DummyDebugWall", new MapCoordinates(new Vector2(1, 0), sEntities.GetComponent<TransformComponent>(user).MapID));
+                wall = sEntities.Spawn("DummyDebugWall", new MapCoordinates(new Vector2(1, 0), sEntities.GetComponent<TransformComponent>(user).MapID));
             });
 
             await server.WaitRunTicks(1);
@@ -190,12 +190,12 @@ namespace Content.IntegrationTests.Tests.Interaction.Click
 
             await server.WaitAssertion(() =>
             {
-                user = sEntities.SpawnEntity(null, coords);
+                user = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<HandsComponent>(user);
                 sEntities.EnsureComponent<ComplexInteractionComponent>(user);
                 handSys.AddHand(user, "hand", HandLocation.Left);
-                target = sEntities.SpawnEntity(null, new MapCoordinates(new Vector2(SharedInteractionSystem.InteractionRange - 0.1f, 0), mapId));
-                item = sEntities.SpawnEntity(null, coords);
+                target = sEntities.Spawn(null, new MapCoordinates(new Vector2(SharedInteractionSystem.InteractionRange - 0.1f, 0), mapId));
+                item = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<ItemComponent>(item);
             });
 
@@ -256,11 +256,11 @@ namespace Content.IntegrationTests.Tests.Interaction.Click
 
             await server.WaitAssertion(() =>
             {
-                user = sEntities.SpawnEntity(null, coords);
+                user = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<HandsComponent>(user);
                 handSys.AddHand(user, "hand", HandLocation.Left);
-                target = sEntities.SpawnEntity(null, new MapCoordinates(new Vector2(SharedInteractionSystem.InteractionRange + 0.5f, 0), mapId)); // RMC14
-                item = sEntities.SpawnEntity(null, coords);
+                target = sEntities.Spawn(null, new MapCoordinates(new Vector2(SharedInteractionSystem.InteractionRange + 0.5f, 0), mapId)); // RMC14
+                item = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<ItemComponent>(item);
             });
 
@@ -323,14 +323,14 @@ namespace Content.IntegrationTests.Tests.Interaction.Click
 
             await server.WaitAssertion(() =>
             {
-                user = sEntities.SpawnEntity(null, coords);
+                user = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<HandsComponent>(user);
                 sEntities.EnsureComponent<ComplexInteractionComponent>(user);
                 handSys.AddHand(user, "hand", HandLocation.Left);
-                target = sEntities.SpawnEntity(null, coords);
-                item = sEntities.SpawnEntity(null, coords);
+                target = sEntities.Spawn(null, coords);
+                item = sEntities.Spawn(null, coords);
                 sEntities.EnsureComponent<ItemComponent>(item);
-                containerEntity = sEntities.SpawnEntity(null, coords);
+                containerEntity = sEntities.Spawn(null, coords);
                 container = conSystem.EnsureContainer<Container>(containerEntity, "InteractionTestContainer");
             });
 

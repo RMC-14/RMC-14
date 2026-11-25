@@ -47,7 +47,7 @@ public sealed class IdCardSystem : SharedIdCardSystem
                 {
                     _popupSystem.PopupCoordinates(Loc.GetString("id-card-component-microwave-burnt", ("id", uid)),
                      transformComponent.Coordinates, PopupType.Medium);
-                    Spawn("FoodBadRecipe",
+                    SpawnAttachedTo("FoodBadRecipe",
                         transformComponent.Coordinates);
                 }
                 _adminLogger.Add(LogType.Action, LogImpact.Medium,

@@ -77,7 +77,7 @@ public sealed class SolutionRoundingTest
         await server.WaitPost(() =>
         {
             var system = server.System<SharedSolutionContainerSystem>();
-            var beaker = server.EntMan.SpawnEntity("SolutionRoundingTestContainer", testMap.GridCoords);
+            var beaker = server.EntMan.SpawnAttachedTo("SolutionRoundingTestContainer", testMap.GridCoords);
 
             system.TryGetSolution(beaker, "beaker", out var newSolutionEnt, out var newSolution);
 

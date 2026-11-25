@@ -39,7 +39,7 @@ public sealed class LimitedItemGiverSystem : EntitySystem
             if (item is null)
                 continue;
 
-            var spawned = Spawn(item, coords);
+            var spawned = SpawnAttachedTo(item, coords);
             _hands.PickupOrDrop(args.User, spawned);
         }
 

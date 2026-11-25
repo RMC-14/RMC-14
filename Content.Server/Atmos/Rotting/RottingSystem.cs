@@ -114,7 +114,7 @@ public sealed class RottingSystem : SharedRottingSystem
                 var stage = RotStage(uid, rotting, perishable);
                 if (stage >= rotInto.Stage)
                 {
-                    Spawn(rotInto.Entity, xform.Coordinates);
+                    SpawnAttachedTo(rotInto.Entity, xform.Coordinates);
                     QueueDel(uid);
                     continue;
                 }

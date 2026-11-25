@@ -21,7 +21,7 @@ public sealed partial class ParticleAcceleratorSystem
             return;
         }
 
-        var emitted = Spawn(emitter.EmittedPrototype, xform.Coordinates);
+        var emitted = SpawnAttachedTo(emitter.EmittedPrototype, xform.Coordinates);
 
         if (xformQuery.TryGetComponent(emitted, out var particleXform))
             _transformSystem.SetLocalRotation(emitted, xform.LocalRotation, particleXform);

@@ -71,7 +71,7 @@ namespace Content.Server.Spawners.EntitySystems
             // Remove it from the pool so it won't be picked again
             pool.Remove(selectedProto);
             // Spawn the entity
-            Spawn(selectedProto, Transform(ent).Coordinates);
+            SpawnAttachedTo(selectedProto, Transform(ent).Coordinates);
         }
     }
 }

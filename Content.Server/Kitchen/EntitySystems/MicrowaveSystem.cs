@@ -564,7 +564,7 @@ namespace Content.Server.Kitchen.EntitySystems
 
                 if (_tag.HasTag(item, PlasticTag))
                 {
-                    var junk = Spawn(component.BadRecipeEntityId, Transform(uid).Coordinates);
+                    var junk = SpawnAttachedTo(component.BadRecipeEntityId, Transform(uid).Coordinates);
                     _container.Insert(junk, component.Storage);
                     Del(item);
                     continue;
@@ -706,7 +706,7 @@ namespace Content.Server.Kitchen.EntitySystems
                     for (var i = 0; i < active.PortionedRecipe.Item2; i++)
                     {
                         SubtractContents(microwave, active.PortionedRecipe.Item1);
-                        Spawn(active.PortionedRecipe.Item1.Result, coords);
+                        SpawnAttachedTo(active.PortionedRecipe.Item1.Result, coords);
                     }
                 }
 

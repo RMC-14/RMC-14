@@ -45,7 +45,7 @@ namespace Content.IntegrationTests.Tests.Commands
 
             await server.WaitAssertion(() =>
             {
-                var human = entManager.SpawnEntity("DamageableDummy", MapCoordinates.Nullspace);
+                var human = entManager.Spawn("DamageableDummy", MapCoordinates.Nullspace);
                 DamageableComponent damageable = null;
                 MobStateComponent mobState = null;
 

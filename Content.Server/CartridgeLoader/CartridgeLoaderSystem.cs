@@ -207,7 +207,7 @@ public sealed class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
         if (ev.Cancelled)
             return false;
 
-        var installedProgram = Spawn(prototype, new EntityCoordinates(loaderUid, 0, 0));
+        var installedProgram = SpawnAttachedTo(prototype, new EntityCoordinates(loaderUid, 0, 0));
         if (!TryComp(installedProgram, out CartridgeComponent? cartridge))
             return false;
 

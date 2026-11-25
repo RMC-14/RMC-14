@@ -130,13 +130,13 @@ public sealed class FTLDiskCommand : LocalizedCommands
                 }
 
                 // create the FTL disk
-                EntityUid cdUid = _entManager.SpawnEntity(CoordinatesDisk, coords);
+                EntityUid cdUid = _entManager.SpawnAttachedTo(CoordinatesDisk, coords);
                 var cd = _entManager.EnsureComponent<ShuttleDestinationCoordinatesComponent>(cdUid);
                 cd.Destination = dest;
                 _entManager.Dirty(cdUid, cd);
 
                 // create disk case
-                EntityUid cdCaseUid = _entManager.SpawnEntity(DiskCase, coords);
+                EntityUid cdCaseUid = _entManager.SpawnAttachedTo(DiskCase, coords);
 
                 // apply labels
                 if (_entManager.TryGetComponent<MetaDataComponent>(dest, out var meta) && meta != null && meta.EntityName != null)

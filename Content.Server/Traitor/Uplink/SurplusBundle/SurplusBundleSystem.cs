@@ -35,7 +35,7 @@ public sealed class SurplusBundleSystem : EntitySystem
         var content = GetRandomContent(ent);
         foreach (var item in content)
         {
-            var dode = Spawn(item.ProductEntity, cords);
+            var dode = SpawnAttachedTo(item.ProductEntity, cords);
             _entityStorage.Insert(dode, ent);
         }
     }

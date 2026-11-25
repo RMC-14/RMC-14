@@ -90,6 +90,6 @@ public sealed class JetpackSystem : SharedJetpackSystem
             return;
         }
 
-        Spawn("JetpackEffect", coordinates);
+        SpawnAttachedTo("JetpackEffect", coordinates);
     }
 }

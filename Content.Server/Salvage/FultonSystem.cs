@@ -31,7 +31,7 @@ public sealed class FultonSystem : SharedFultonSystem
         if (Exists(component.Effect))
             return;
 
-        component.Effect = Spawn(EffectProto, new EntityCoordinates(uid, EffectOffset));
+        component.Effect = SpawnAttachedTo(EffectProto, new EntityCoordinates(uid, EffectOffset));
         Dirty(uid, component);
     }
 

@@ -44,8 +44,8 @@ namespace Content.IntegrationTests.Tests.Interaction
             {
                 var coordinates = map.MapCoords;
 
-                origin = sEntities.SpawnEntity(HumanId, coordinates);
-                other = sEntities.SpawnEntity(HumanId, coordinates);
+                origin = sEntities.Spawn(HumanId, coordinates);
+                other = sEntities.Spawn(HumanId, coordinates);
                 conSystem.EnsureContainer<Container>(other, "InRangeUnobstructedTestOtherContainer");
                 mapCoordinates = tSystem.GetMapCoordinates(other);
             });

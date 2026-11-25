@@ -292,7 +292,7 @@ public sealed class CloningPodSystem : EntitySystem
         if (HasComp<EmaggedComponent>(uid))
         {
             _audio.PlayPvs(clonePod.ScreamSound, uid);
-            Spawn(clonePod.MobSpawnId, transform.Coordinates);
+            SpawnAttachedTo(clonePod.MobSpawnId, transform.Coordinates);
         }
 
         Solution bloodSolution = new();

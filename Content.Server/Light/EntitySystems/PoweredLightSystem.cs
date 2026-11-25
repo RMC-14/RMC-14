@@ -79,7 +79,7 @@ namespace Content.Server.Light.EntitySystems
             // TODO: Use ContainerFill dog
             if (light.HasLampOnSpawn != null)
             {
-                var entity = Spawn(light.HasLampOnSpawn, Comp<TransformComponent>(uid).Coordinates);
+                var entity = SpawnAttachedTo(light.HasLampOnSpawn, Comp<TransformComponent>(uid).Coordinates);
                 _containerSystem.Insert(entity, light.LightBulbContainer);
             }
             // need this to update visualizers

@@ -332,7 +332,7 @@ public abstract class SharedAbsorbentSystem : EntitySystem
             {
                 // Spawn a *sparkle*
                 PredictedSpawnAttachedTo(absorber.MoppedEffect, Transform(target).Coordinates);
-                PredictedQueueDel(target);
+                QueueDel(target);
                 isRemoved = true;
             }
         }

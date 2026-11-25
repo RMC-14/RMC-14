@@ -139,7 +139,7 @@ public abstract class SharedRatKingSystem : EntitySystem
 
         var spawn = PrototypeManager.Index<WeightedRandomEntityPrototype>(component.RummageLoot).Pick(Random);
         if (_net.IsServer)
-            Spawn(spawn, Transform(uid).Coordinates);
+            SpawnAttachedTo(spawn, Transform(uid).Coordinates);
     }
 
     public void UpdateAllServants(EntityUid uid, RatKingComponent component)

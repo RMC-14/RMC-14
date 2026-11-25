@@ -57,7 +57,7 @@ public sealed class XAEFoamSystem : BaseXAESystem<XAEFoamComponent>
         var sol = new Solution();
         var range = (int)MathF.Round(MathHelper.Lerp(component.MinFoamAmount, component.MaxFoamAmount, _random.NextFloat(0, 1f)));
         sol.AddReagent(component.SelectedReagent, component.ReagentAmount);
-        var foamEnt = Spawn(ChemicalReactionSystem.FoamReaction, args.Coordinates);
+        var foamEnt = SpawnAttachedTo(ChemicalReactionSystem.FoamReaction, args.Coordinates);
         var spreadAmount = range * 4;
         _smoke.StartSmoke(foamEnt, sol, component.Duration, spreadAmount);
     }

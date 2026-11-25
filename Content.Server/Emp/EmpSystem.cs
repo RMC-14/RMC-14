@@ -57,7 +57,7 @@ public sealed class EmpSystem : SharedEmpSystem
         {
             TryEmpEffects(uid, energyConsumption, duration);
         }
-        Spawn(EmpPulseEffectPrototype, coordinates);
+        SpawnAttachedTo(EmpPulseEffectPrototype, coordinates);
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public sealed class EmpSystem : SharedEmpSystem
         RaiseLocalEvent(uid, ref ev);
         if (ev.Affected)
         {
-            Spawn(EmpDisabledEffectPrototype, Transform(uid).Coordinates);
+            SpawnAttachedTo(EmpDisabledEffectPrototype, Transform(uid).Coordinates);
         }
         if (ev.Disabled)
         {

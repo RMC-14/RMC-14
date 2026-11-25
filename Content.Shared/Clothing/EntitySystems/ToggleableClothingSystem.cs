@@ -287,7 +287,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         else
         {
             var xform = Transform(uid);
-            component.ClothingUid = Spawn(component.ClothingPrototype, xform.Coordinates);
+            component.ClothingUid = SpawnAttachedTo(component.ClothingPrototype, xform.Coordinates);
             var attachedClothing = EnsureComp<AttachedClothingComponent>(component.ClothingUid.Value);
             attachedClothing.AttachedUid = uid;
             Dirty(component.ClothingUid.Value, attachedClothing);

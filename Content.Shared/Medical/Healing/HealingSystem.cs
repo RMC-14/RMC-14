@@ -94,7 +94,7 @@ public sealed class HealingSystem : EntitySystem
         }
         else
         {
-            PredictedQueueDel(args.Used.Value);
+            QueueDel(args.Used.Value);
         }
 
         if (target.Owner != args.User)

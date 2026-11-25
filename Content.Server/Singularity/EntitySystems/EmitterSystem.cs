@@ -274,7 +274,7 @@ namespace Content.Server.Singularity.EntitySystems
                 return;
 
             var xform = Transform(uid);
-            var ent = Spawn(component.BoltType, xform.Coordinates);
+            var ent = SpawnAttachedTo(component.BoltType, xform.Coordinates);
             var proj = EnsureComp<ProjectileComponent>(ent);
             _projectile.SetShooter(ent, proj, uid);
 

@@ -24,7 +24,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         if (Deleted(coords.EntityId))
             return;
 
-        var ent = Spawn(ev.Prototype, coords);
+        var ent = SpawnAttachedTo(ev.Prototype, coords);
 
         if (TryComp<SpriteComponent>(ent, out var sprite))
         {

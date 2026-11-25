@@ -131,7 +131,7 @@ public sealed class NanoTaskCartridgeSystem : SharedNanoTaskCartridgeSystem
                     return;
 
                 ent.Comp.NextPrintAllowedAfter = _timing.CurTime + ent.Comp.PrintDelay;
-                var printed = Spawn("PaperNanoTaskItem", Transform(message.Actor).Coordinates);
+                var printed = SpawnAttachedTo("PaperNanoTaskItem", Transform(message.Actor).Coordinates);
                 _hands.PickupOrDrop(message.Actor, printed);
                 _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/printer.ogg"), ent.Owner);
                 SetupPrintedTask(printed, task.Item);

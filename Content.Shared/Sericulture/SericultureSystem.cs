@@ -110,7 +110,7 @@ public abstract partial class SharedSericultureSystem : EntitySystem
 
         if (!_netManager.IsClient) // Have to do this because spawning stuff in shared is CBT.
         {
-            var newEntity = Spawn(comp.EntityProduced, Transform(uid).Coordinates);
+            var newEntity = SpawnAttachedTo(comp.EntityProduced, Transform(uid).Coordinates);
 
             _stackSystem.TryMergeToHands(newEntity, uid);
         }

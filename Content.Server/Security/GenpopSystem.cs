@@ -18,7 +18,7 @@ public sealed class GenpopSystem : SharedGenpopSystem
             var offset = (wallMountComponent.Direction + xform.LocalRotation - Math.PI / 2).ToVec() * GenpopIDEjectDistanceFromWall;
             spawnCoordinates = spawnCoordinates.Offset(offset);
         }
-        var uid = Spawn(ent.Comp.IdCardProto, spawnCoordinates);
+        var uid = SpawnAttachedTo(ent.Comp.IdCardProto, spawnCoordinates);
         ent.Comp.LinkedId = uid;
         IdCard.TryChangeFullName(uid, name);
 

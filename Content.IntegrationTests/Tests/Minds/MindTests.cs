@@ -64,7 +64,7 @@ public sealed partial class MindTests
         {
             var mindSystem = entMan.EntitySysManager.GetEntitySystem<SharedMindSystem>();
 
-            var entity = entMan.SpawnEntity(null, new MapCoordinates());
+            var entity = entMan.Spawn(null, new MapCoordinates());
             var mindComp = entMan.EnsureComponent<MindContainerComponent>(entity);
 
             var mind = mindSystem.CreateMind(null);
@@ -90,7 +90,7 @@ public sealed partial class MindTests
         {
             var mindSystem = entMan.EntitySysManager.GetEntitySystem<SharedMindSystem>();
 
-            var entity = entMan.SpawnEntity(null, new MapCoordinates());
+            var entity = entMan.Spawn(null, new MapCoordinates());
             var mindComp = entMan.EnsureComponent<MindContainerComponent>(entity);
 
             var mindId = mindSystem.CreateMind(null).Owner;
@@ -127,7 +127,7 @@ public sealed partial class MindTests
 
         await server.WaitAssertion(() =>
         {
-            entity = entMan.SpawnEntity("MindTestEntityDamageable", new MapCoordinates());
+            entity = entMan.Spawn("MindTestEntityDamageable", new MapCoordinates());
             mindContainerComp = entMan.EnsureComponent<MindContainerComponent>(entity);
 
             mindId = mindSystem.CreateMind(null);
@@ -178,8 +178,8 @@ public sealed partial class MindTests
         {
             var mindSystem = entMan.EntitySysManager.GetEntitySystem<SharedMindSystem>();
 
-            var entity = entMan.SpawnEntity(null, new MapCoordinates());
-            var targetEntity = entMan.SpawnEntity(null, new MapCoordinates());
+            var entity = entMan.Spawn(null, new MapCoordinates());
+            var targetEntity = entMan.Spawn(null, new MapCoordinates());
             var mindComp = entMan.EnsureComponent<MindContainerComponent>(entity);
             entMan.EnsureComponent<MindContainerComponent>(targetEntity);
 
@@ -221,7 +221,7 @@ public sealed partial class MindTests
         MindComponent mind = default!;
         await server.WaitAssertion(() =>
         {
-            var entity = entMan.SpawnEntity(null, new MapCoordinates());
+            var entity = entMan.Spawn(null, new MapCoordinates());
             var mindComp = entMan.EnsureComponent<MindContainerComponent>(entity);
             entMan.DirtyEntity(entity);
 
@@ -272,7 +272,7 @@ public sealed partial class MindTests
             var mindSystem = entMan.EntitySysManager.GetEntitySystem<SharedMindSystem>();
             var roleSystem = entMan.EntitySysManager.GetEntitySystem<SharedRoleSystem>();
 
-            var entity = entMan.SpawnEntity(null, new MapCoordinates());
+            var entity = entMan.Spawn(null, new MapCoordinates());
             var mindComp = entMan.EnsureComponent<MindContainerComponent>(entity);
 
             var mindId = mindSystem.CreateMind(null).Owner;
@@ -348,7 +348,7 @@ public sealed partial class MindTests
 
         await server.WaitAssertion(() =>
         {
-            entity = entMan.SpawnEntity(null, new MapCoordinates());
+            entity = entMan.Spawn(null, new MapCoordinates());
             var mindComp = entMan.EnsureComponent<MindContainerComponent>(entity);
 
             mindId = mindSystem.CreateMind(player.UserId, "Mindy McThinker");
@@ -377,7 +377,7 @@ public sealed partial class MindTests
         {
             Assert.That(mind.OwnedEntity, Is.Not.Null);
 
-            mob = entMan.SpawnEntity(null, new MapCoordinates());
+            mob = entMan.Spawn(null, new MapCoordinates());
 
             MakeSentientCommand.MakeSentient(mob, entMan);
             mobMindId = mindSystem.CreateMind(player.UserId, "Mindy McThinker the Second");
@@ -447,7 +447,7 @@ public sealed partial class MindTests
 
             Assert.That(mind.OwnedEntity, Is.Not.Null);
 
-            ghostRole = entMan.SpawnEntity("GhostRoleTestEntity", MapCoordinates.Nullspace);
+            ghostRole = entMan.Spawn("GhostRoleTestEntity", MapCoordinates.Nullspace);
         });
 
         await pair.RunTicksSync(20);

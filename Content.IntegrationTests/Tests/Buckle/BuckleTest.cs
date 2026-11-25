@@ -69,8 +69,8 @@ namespace Content.IntegrationTests.Tests.Buckle
 
             await server.WaitAssertion(() =>
             {
-                human = entityManager.SpawnEntity(BuckleDummyId, coordinates);
-                chair = entityManager.SpawnEntity(StrapDummyId, coordinates);
+                human = entityManager.SpawnAttachedTo(BuckleDummyId, coordinates);
+                chair = entityManager.SpawnAttachedTo(StrapDummyId, coordinates);
 
                 // Default state, unbuckled
                 Assert.That(entityManager.TryGetComponent(human, out buckle));
@@ -256,8 +256,8 @@ namespace Content.IntegrationTests.Tests.Buckle
 
             await server.WaitAssertion(() =>
             {
-                human = entityManager.SpawnEntity(BuckleDummyId, coordinates);
-                var chair = entityManager.SpawnEntity(StrapDummyId, coordinates);
+                human = entityManager.SpawnAttachedTo(BuckleDummyId, coordinates);
+                var chair = entityManager.SpawnAttachedTo(StrapDummyId, coordinates);
 
                 // Component sanity check
                 Assert.Multiple(() =>
@@ -279,7 +279,7 @@ namespace Content.IntegrationTests.Tests.Buckle
                 // Put an item into every hand
                 for (var i = 0; i < hands.Count; i++)
                 {
-                    var akms = entityManager.SpawnEntity(ItemDummyId, coordinates);
+                    var akms = entityManager.SpawnAttachedTo(ItemDummyId, coordinates);
 
                     Assert.That(handsSys.TryPickupAnyHand(human, akms));
                 }
@@ -346,8 +346,8 @@ namespace Content.IntegrationTests.Tests.Buckle
 
             await server.WaitAssertion(() =>
             {
-                human = entityManager.SpawnEntity(BuckleDummyId, coordinates);
-                chair = entityManager.SpawnEntity(StrapDummyId, coordinates);
+                human = entityManager.SpawnAttachedTo(BuckleDummyId, coordinates);
+                chair = entityManager.SpawnAttachedTo(StrapDummyId, coordinates);
 
                 // Component sanity check
                 Assert.Multiple(() =>
