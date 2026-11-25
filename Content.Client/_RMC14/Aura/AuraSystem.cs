@@ -1,3 +1,5 @@
+using Content.Client._RMC14.Graphics;
+using Content.Client.Graphics;
 using Content.Shared._RMC14.Aura;
 using Content.Shared._RMC14.Stealth;
 using Robust.Client.GameObjects;
@@ -8,7 +10,11 @@ namespace Content.Client._RMC14.Aura;
 
 public sealed class AuraSystem : SharedAuraSystem
 {
+    private static readonly ProtoId<ShaderPrototype> AuraShader = "RMCAuraOutline";
+
     [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -22,7 +28,7 @@ public sealed class AuraSystem : SharedAuraSystem
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCAuraOutline").InstanceUnique();
+        UpdateShader((ent, ent.Comp, sprite));
     }
 
     private void OnShutdown(Entity<AuraComponent> ent, ref ComponentShutdown args)
@@ -30,13 +36,10 @@ public sealed class AuraSystem : SharedAuraSystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        if (HasComp<EntityActiveInvisibleComponent>(ent))
-            return;
-
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        sprite.PostShader = null;
+        _sprite.RemovePostShader((ent, sprite), RMCPostShaderIds.Aura);
     }
 
     public override void Update(float frameTime)
@@ -47,8 +50,34 @@ public sealed class AuraSystem : SharedAuraSystem
 
         while (auraQuery.MoveNext(out var uid, out var aura, out var sprite))
         {
-            sprite.PostShader?.SetParameter("outline_color", aura.Color);
-            sprite.PostShader?.SetParameter("outline_width", aura.OutlineWidth);
+            UpdateShader((uid, aura, sprite));
         }
+    }
+
+    private void UpdateShader(Entity<AuraComponent, SpriteComponent> ent)
+    {
+        if (HasComp<EntityActiveInvisibleComponent>(ent))
+        {
+            _sprite.RemovePostShader((ent, ent.Comp2), RMCPostShaderIds.Aura);
+            return;
+        }
+
+        ShaderInstance shader;
+        if (_sprite.TryGetPostShader(ent.Comp2, RMCPostShaderIds.Aura, out var entry))
+        {
+            shader = entry.Shader;
+        }
+        else
+        {
+            shader = _prototypes.Index(AuraShader).InstanceUnique();
+            _sprite.SetPostShader((ent, ent.Comp2), new SpriteComponent.PostShaderArgs(RMCPostShaderIds.Aura, shader)
+            {
+                After = ContentPostShaderIds.AfterBaseEffects,
+                Before = ContentPostShaderIds.BeforeOutlines,
+            });
+        }
+
+        shader.SetParameter("outline_color", ent.Comp1.Color);
+        shader.SetParameter("outline_width", ent.Comp1.OutlineWidth);
     }
 }

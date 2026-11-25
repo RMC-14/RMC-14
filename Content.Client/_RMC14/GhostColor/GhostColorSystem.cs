@@ -1,4 +1,5 @@
 using Content.Client._RMC14.Ghost;
+using Content.Client._RMC14.Graphics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.GhostColor;
@@ -65,14 +66,16 @@ public sealed class GhostColorSystem : EntitySystem
 
         if (!HasComp<GhostHumanoidAppearanceComponent>(uid) && !HasComp<GhostNonHumanoidAppearanceComponent>(uid))
         {
-            if (sprite.PostShader == _alphaShader)
-                sprite.PostShader = null;
+            _sprite.RemovePostShader(spriteEnt, RMCPostShaderIds.GhostAlpha);
 
             _sprite.SetColor(spriteEnt, ghostColor.WithAlpha(_observerAlpha));
             return;
         }
 
         _sprite.SetColor(spriteEnt, ghostColor.WithAlpha(1f));
-        sprite.PostShader = _alphaShader;
+        _sprite.SetPostShader(spriteEnt, new SpriteComponent.PostShaderArgs(RMCPostShaderIds.GhostAlpha, _alphaShader)
+        {
+            After = RMCPostShaderIds.BeforeOpacity,
+        });
     }
 }
