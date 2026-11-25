@@ -36,7 +36,7 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
             return;
 
         //Can't use during windups
-        if (xeno.Comp.BombardDoafter != null || xeno.Comp.StoredAcid >= xeno.Comp.MaxStoredAcid)
+        if (_doafter.IsRunning(xeno.Comp.BombardDoafter) || xeno.Comp.StoredAcid >= xeno.Comp.MaxStoredAcid)
             return;
 
         if (!_rmcActions.TryUseAction(args))
@@ -57,7 +57,7 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
 
         // Do retargeting if doafter is currently running
         // TODO RMC14 allow changing target on mouse drag
-        if (xeno.Comp.BombardDoafter is { } doafter && _doafter.IsRunning(doafter))
+        if (_doafter.IsRunning(xeno.Comp.BombardDoafter))
         {
             xeno.Comp.TargetCoordinates = args.Target;
             xeno.Comp.TargetEnt = args.Entity;
