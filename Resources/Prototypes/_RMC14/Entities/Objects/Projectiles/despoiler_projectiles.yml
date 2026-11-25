@@ -5,7 +5,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Effects/despoiler_acid_puddle.rsi
+    sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler_acid_puddle.rsi
     drawdepth: Effects
     layers:
     - state: xeno_acid_lingering
@@ -37,7 +37,7 @@
   - type: Transform
     anchored: true
   - type: Sprite
-    sprite: _RMC14/Effects/despoiler_acid_puddle.rsi
+    sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler_acid_puddle.rsi
     state: puddle
     drawdepth: BelowMobs
   - type: PointLight
@@ -72,7 +72,7 @@
   - type: Transform
     anchored: true
   - type: Sprite
-    sprite: _RMC14/Effects/despoiler_acid_puddle.rsi
+    sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler_acid_puddle.rsi
     state: puddle
     drawdepth: BelowMobs
   - type: PointLight
@@ -137,8 +137,8 @@
   components:
   - type: Transform
   - type: Sprite
-    sprite: _RMC14/Effects/despoiler_catalyze.rsi
-    state: bubbles
+#    sprite: _RMC14/Effects/despoiler_catalyze.rsi # TODO RMC14
+#    state: bubbles
     drawdepth: BelowMobs
     noRot: true
   - type: PointLight
