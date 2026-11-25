@@ -84,9 +84,6 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
 
     private void OnXenoDissolverBombardDoAfterEvent(Entity<XenoDissolverBombardComponent> xeno, ref XenoDissolverBombardDoAfterEvent args)
     {
-        xeno.Comp.BombardDoafter = null;
-        Dirty(xeno);
-
         if (args.Handled || args.Cancelled || xeno.Comp.TargetCoordinates == null)
             return;
 
