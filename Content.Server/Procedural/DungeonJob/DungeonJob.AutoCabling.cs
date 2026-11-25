@@ -27,7 +27,7 @@ public sealed partial class DungeonJob
         // Gather existing nodes
         foreach (var tile in allTiles)
         {
-            var anchored = _maps.GetAnchoredEntitiesEnumerator(_gridUid, _grid, tile);
+            var anchored = _maps.GetAnchoredEntities(_gridUid, _grid, tile);
 
             while (anchored.MoveNext(out var anc))
             {
@@ -133,7 +133,7 @@ public sealed partial class DungeonJob
             if (reservedTiles.Contains(tile))
                 continue;
 
-            var anchored = _maps.GetAnchoredEntitiesEnumerator(_gridUid, _grid, tile);
+            var anchored = _maps.GetAnchoredEntities(_gridUid, _grid, tile);
             var found = false;
 
             while (anchored.MoveNext(out var anc))
@@ -151,7 +151,7 @@ public sealed partial class DungeonJob
             if (found)
                 continue;
 
-            _entManager.SpawnEntity(gen.Entity, _maps.GridTileToLocal(_gridUid, _grid, tile));
+            _entManager.SpawnAttachedTo(gen.Entity, _maps.GridTileToLocal(_gridUid, _grid, tile));
         }
     }
 }

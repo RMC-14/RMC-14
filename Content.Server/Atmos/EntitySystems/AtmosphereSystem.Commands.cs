@@ -106,7 +106,7 @@ public sealed partial class AtmosphereSystem
 
                air.Clear();
                var mixtureId = 0;
-               var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, indices);
+               var enumerator = _mapSystem.GetAnchoredEntities(grid, grid, indices);
                while (enumerator.MoveNext(out var entUid))
                {
                    if (query.TryComp(entUid, out var marker))
@@ -148,7 +148,7 @@ public sealed partial class AtmosphereSystem
         var volume = GetVolumeForTiles(ent);
         TryComp(ent.Comp4.MapUid, out MapAtmosphereComponent? mapAtmos);
 
-        var enumerator = _map.GetAllTilesEnumerator(ent, ent);
+        var enumerator = _map.GetAllTiles(ent, ent);
         while (enumerator.MoveNext(out var tileRef))
         {
             var tile = GetOrNewTile(ent, ent, tileRef.Value.GridIndices);

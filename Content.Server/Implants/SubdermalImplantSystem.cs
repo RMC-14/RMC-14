@@ -162,7 +162,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
             var range = (float) Math.Sqrt(radius);
             var box = Box2.CenteredAround(userCoords.Position, new Vector2(range, range));
-            var tilesInRange = _mapSystem.GetTilesEnumerator(targetGrid.Value.Owner, targetGrid.Value.Comp, box, false);
+            var tilesInRange = _mapSystem.GetTilesIntersecting(targetGrid.Value.Owner, targetGrid.Value.Comp, box, false);
             var tileList = new ValueList<Vector2i>();
 
             while (tilesInRange.MoveNext(out var tile))
