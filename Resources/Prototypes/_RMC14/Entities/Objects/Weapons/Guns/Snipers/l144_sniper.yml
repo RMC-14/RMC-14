@@ -36,8 +36,6 @@
     baseFireRate: 0.667
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 3
-  - type: GunDamageModifier
-    multiplier: 1.5
   - type: WieldDelay
     baseDelay: 1.2
   - type: ItemSlots
