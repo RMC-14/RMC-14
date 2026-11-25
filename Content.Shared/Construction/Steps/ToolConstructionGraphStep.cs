@@ -18,16 +18,16 @@ namespace Content.Shared.Construction.Steps
 
         [DataField("fuel")] public float Fuel { get; private set; } = 10;
 
-        [DataField("examine")] public LocId Examine { get; private set; } = string.Empty;
+        [DataField("examine")] public LocId? Examine { get; private set; }
 
         // Begin RMC14
         [DataField] public DuplicateConditions DuplicateConditions { get; private set; }
 
         public override void DoExamine(ExaminedEvent examinedEvent)
         {
-            if (!string.IsNullOrEmpty(Examine))
+            if (Examine is { } examineOverride)
             {
-                examinedEvent.PushMarkup(Loc.GetString(Examine));
+                examinedEvent.PushMarkup(Loc.GetString(examineOverride));
                 return;
             }
 
