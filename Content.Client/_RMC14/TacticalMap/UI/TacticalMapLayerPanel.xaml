@@ -1,0 +1,6 @@
+<ui:TacticalMapLayerPanel
+    xmlns="https://spacestation14.io"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.TacticalMap.UI"
+    Title="{Loc ui-tactical-map-section-layers}">
+    <BoxContainer Name="LayerList" Orientation="Vertical" SeparationOverride="3" HorizontalExpand="True" />
+</ui:TacticalMapLayerPanel>

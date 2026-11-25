@@ -1,0 +1,99 @@
+<ui:TacticalMapView
+    xmlns="https://spacestation14.io"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.TacticalMap.UI"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap.Controls">
+    <controls:TacticalMapPanel Name="WindowFrame" Kind="Frame" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical">
+            <controls:TacticalMapPanel Name="TitleBar" Kind="Header">
+                <BoxContainer Orientation="Horizontal" Margin="8 0 3 0" MinHeight="26" SeparationOverride="6">
+                    <controls:TacticalMapLabel Name="TitleLabel" TextStyle="Title" VAlign="Center" />
+                    <controls:TacticalMapOptionButton Name="MapSelectButton" MinWidth="150" MinHeight="20"
+                                                      VerticalAlignment="Center" Visible="False" />
+                    <Control HorizontalExpand="True" />
+                    <controls:TacticalMapLabel Name="FeedLabel" TextStyle="Small" VAlign="Center" />
+                    <controls:TacticalMapDivider Vertical="True" Margin="0 6" />
+                    <controls:TacticalMapButton Name="FocusButton" Text="{Loc ui-tactical-map-focus-button}"
+                                                MinHeight="20" VerticalAlignment="Center" />
+                    <controls:TacticalMapButton Name="PopoutButton" Text="{Loc ui-tactical-map-popout-button}"
+                                                MinHeight="20" VerticalAlignment="Center" />
+                    <controls:TacticalMapButton Name="CloseButton" Kind="Danger" Text="{Loc ui-tactical-map-close-button}"
+                                                MinWidth="24" MinHeight="20" VerticalAlignment="Center" />
+                </BoxContainer>
+            </controls:TacticalMapPanel>
+
+            <controls:TacticalMapPanel Name="Toolbar" Kind="Header">
+                <BoxContainer Name="MainButtonRow" Orientation="Horizontal" Margin="6 4" SeparationOverride="4"
+                              HorizontalExpand="True">
+                    <controls:TacticalMapButton Name="LabelsButton" Text="{Loc ui-tactical-map-labels-button}"
+                                                MinWidth="56" MinHeight="22" />
+                    <controls:TacticalMapButton Name="FollowButton" Text="{Loc ui-tactical-map-follow-button}"
+                                                MinWidth="56" MinHeight="22" />
+                    <controls:TacticalMapButton Name="ResetViewButton" Text="{Loc ui-tactical-map-reset-button}"
+                                                MinWidth="48" MinHeight="22" />
+                    <controls:TacticalMapDivider Vertical="True" Margin="2 3" />
+                    <controls:TacticalMapButton Name="LayersButton" Text="{Loc ui-tactical-map-layers-button}"
+                                                MinWidth="56" MinHeight="22" Visible="False" />
+                    <controls:TacticalMapButton Name="OverlaysButton" Text="{Loc ui-tactical-map-overlays-toggle-button}"
+                                                MinWidth="64" MinHeight="22" />
+                    <controls:TacticalMapButton Name="ObjectivesButton" Text="{Loc ui-tactical-map-objectives-button}"
+                                                MinWidth="72" MinHeight="22" Visible="False" />
+                    <controls:TacticalMapButton Name="SettingsButton" Text="{Loc ui-tactical-map-display-button}"
+                                                MinWidth="56" MinHeight="22" />
+                </BoxContainer>
+            </controls:TacticalMapPanel>
+
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+                <ui:TacticalMapToolPanel Name="ToolPanel" Visible="False" />
+
+                <Control Name="MapContainer" HorizontalExpand="True" VerticalExpand="True" Margin="4">
+                    <controls:TacticalMapControl Name="Map" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
+                </Control>
+
+                <ScrollContainer Name="Sidebar" HScrollEnabled="False" SetWidth="224" Margin="0 4 4 4" Visible="False">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                        <ui:TacticalMapLayerPanel Name="LayerPanel" Visible="False" />
+                        <ui:TacticalMapOverlayPanel Name="OverlayPanel" Visible="False" />
+                        <controls:TacticalMapSection Name="ObjectivesSection" Title="{Loc ui-tactical-map-section-objectives}"
+                                                     Visible="False">
+                            <BoxContainer Name="ObjectivesList" Orientation="Vertical" SeparationOverride="6" />
+                        </controls:TacticalMapSection>
+                        <controls:TacticalMapSection Name="DisplaySection" Title="{Loc ui-tactical-map-section-display}"
+                                                     Visible="False">
+                            <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                                <controls:TacticalMapLabel Text="{Loc ui-tactical-map-label-mode-heading}" TextStyle="Heading" />
+                                <BoxContainer Orientation="Horizontal" SeparationOverride="3">
+                                    <controls:TacticalMapButton Name="LabelModeAllButton"
+                                                                Text="{Loc ui-tactical-map-labels-mode-all}"
+                                                                HorizontalExpand="True" MinHeight="22" />
+                                    <controls:TacticalMapButton Name="LabelModeTacticalButton"
+                                                                Text="{Loc ui-tactical-map-labels-mode-tactical}"
+                                                                HorizontalExpand="True" MinHeight="22" />
+                                    <controls:TacticalMapButton Name="LabelModeAreaButton"
+                                                                Text="{Loc ui-tactical-map-labels-mode-area}"
+                                                                HorizontalExpand="True" MinHeight="22" />
+                                </BoxContainer>
+                                <controls:TacticalMapDivider Margin="0 2" />
+                                <controls:TacticalMapLabel Name="BlipSizeLabel" TextStyle="Heading" />
+                                <Slider Name="BlipSizeSlider" MinValue="0.5" MaxValue="3.0" Value="0.9"
+                                        HorizontalExpand="True" MinHeight="14" />
+                                <controls:TacticalMapDivider Margin="0 2" />
+                                <controls:TacticalMapButton Name="CrtButton" Text="{Loc ui-tactical-map-crt-button}"
+                                                            AlignLeft="True" HorizontalExpand="True" MinHeight="22" />
+                            </BoxContainer>
+                        </controls:TacticalMapSection>
+                    </BoxContainer>
+                </ScrollContainer>
+            </BoxContainer>
+
+            <controls:TacticalMapPanel Name="StatusBar" Kind="Footer">
+                <BoxContainer Orientation="Horizontal" Margin="8 0" MinHeight="20" SeparationOverride="6">
+                    <TextureRect Name="HoverAreaIcon" SetSize="14 14" Stretch="KeepAspectCentered"
+                                 VerticalAlignment="Center" Visible="False" />
+                    <controls:TacticalMapLabel Name="HoverAreaLabel" TextStyle="Small" ClipText="True"
+                                               HorizontalExpand="True" VAlign="Center" />
+                    <controls:TacticalMapLabel Name="ModeLabel" TextStyle="Small" VAlign="Center" />
+                </BoxContainer>
+            </controls:TacticalMapPanel>
+        </BoxContainer>
+    </controls:TacticalMapPanel>
+</ui:TacticalMapView>
