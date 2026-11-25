@@ -80,6 +80,8 @@ public abstract class SharedRMCLightOutSystem : EntitySystem
                 Dirty(invEnt, handLight);
             }
 
+            ExtinguishFlare(invEnt);
+
             if (TryComp<AttachableHolderComponent>(invEnt, out var holder))
             {
                 foreach (var slot in holder.Slots.Keys)
