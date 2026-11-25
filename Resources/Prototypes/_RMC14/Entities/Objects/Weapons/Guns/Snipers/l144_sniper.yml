@@ -246,7 +246,7 @@
     whitelist:
       components:
       - Marine
-    knockdown: 1
+    knockdown: 1.5
 
 - type: Tag
   id: RMCL144SniperRifle
