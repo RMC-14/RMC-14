@@ -331,7 +331,7 @@
 - type: entity
   parent: CMAutoInjector
   id: RMCNaloxoneAutoInjectorEmergency
-  name: overdose autoinjector
+  name: EZ single-dose overdose autoinjector
   description: An autoinjector loaded with a single use of Naloxone+, designed to flush the body of most chemicals. Doesn't require any training to use.
   suffix: PvE
   components:
