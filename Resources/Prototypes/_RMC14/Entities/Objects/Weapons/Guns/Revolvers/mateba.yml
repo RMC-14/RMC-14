@@ -246,9 +246,9 @@
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mateba2006m_speed_loader.ogg
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: AttachableHolder
