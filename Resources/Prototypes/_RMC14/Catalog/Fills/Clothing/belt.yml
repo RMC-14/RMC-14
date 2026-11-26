@@ -935,7 +935,6 @@
 
 - type: entity
   parent: RMCBeltSPPBrown
-  parent: CMBeltMarine
   id: RMCType71BeltFilled
   suffix: Filled, Type 71
   components:
