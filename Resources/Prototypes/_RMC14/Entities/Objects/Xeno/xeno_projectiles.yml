@@ -656,4 +656,5 @@
     spreadAngle: 40
     directHitProjectiles: 5
     projectileSpeed: 30
+  - type: DeleteOnTrigger
   - type: IgnorePredictionHide
