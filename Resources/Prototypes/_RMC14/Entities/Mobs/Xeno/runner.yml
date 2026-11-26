@@ -83,7 +83,7 @@
     - CMXenoQueen
   - type: XenoZoom
   - type: MeleeWeapon
-    attackRate: 1.4
+    attackRate: 1.666
     damage:
       groups:
         Brute: 22.5

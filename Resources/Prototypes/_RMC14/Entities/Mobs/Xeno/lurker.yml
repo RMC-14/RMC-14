@@ -66,7 +66,7 @@
   - type: XenoClaws
     clawType: Sharp
   - type: MeleeWeapon
-    attackRate: 0.75
+    attackRate: 0.8333
     damage:
       groups:
         Brute: 35
@@ -190,13 +190,10 @@
       groups:
         Brute: 60
   - type: MeleeWeapon
-    attackRate: 0.93
+    attackRate: 1
     damage:
       groups:
         Brute: 30
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 3
-    baseSprintSpeed: 6
   - type: XenoStrain
     name: rmc-xeno-vampire-name
     description: rmc-xeno-vampire-description

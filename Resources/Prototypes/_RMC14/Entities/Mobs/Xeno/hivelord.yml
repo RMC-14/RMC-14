@@ -291,8 +291,22 @@
     stunMin: 5
     stunMax: 6
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.15
-    baseSprintSpeed: 3.9
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
   - type: XenoZoom
   - type: XenoStrain
     name: rmc-xeno-designer-name
