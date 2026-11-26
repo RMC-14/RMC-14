@@ -145,6 +145,21 @@
     - RMCWeaponPistolHandcannonCustom
 
 - type: entity
+  parent: RMCWeaponPistolHandcannonGold
+  id: RMCWeaponPistolHandcannonPolished
+  name: polished Peregrine Handcannon
+  description: The handcannon that needs no introduction, the Peregrine Handcannon is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks. # base handcanon desc
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_polished.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_polished.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonPolished
+
+- type: entity
   parent: RMCWeaponPistolHandcannon
   id: RMCWeaponPistolHandcannonProvost
   name: provost handcannon
@@ -332,6 +347,9 @@
 
 - type: Tag
   id: RMCWeaponPistolHandcannonCustom
+
+- type: Tag
+  id: RMCWeaponPistolHandcannonPolished
 
 - type: Tag
   id: RMCWeaponPistolHandcannonProvost
