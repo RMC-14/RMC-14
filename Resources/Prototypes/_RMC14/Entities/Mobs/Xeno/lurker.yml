@@ -194,6 +194,7 @@
     damage:
       groups:
         Brute: 30
+  - type: MovementSpeedModifier # This is not actually faster in 13 at base if you test it
   - type: XenoStrain
     name: rmc-xeno-vampire-name
     description: rmc-xeno-vampire-description

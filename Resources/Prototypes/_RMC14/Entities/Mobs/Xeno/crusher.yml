@@ -183,9 +183,7 @@
     tailDamage:
       groups:
         Brute: 36
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 1.9
-    baseSprintSpeed: 3.4
+  - type: MovementSpeedModifier # Not actually faster
   - type: XenoStrain
     name: rmc-xeno-charger-name
     description: rmc-xeno-charger-description

@@ -260,6 +260,7 @@
     destrainTo: CMXenoPraetorian
   - type: CMArmor
     xenoArmor: 20
+  - type: MovementSpeedModifier # This is not actually faster in 13 at base if you test it
   - type: XenoClaws
     clawType: Sharp
   - type: XenoFinesse
