@@ -4,7 +4,11 @@ using System.Runtime.InteropServices;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.DoAfter;
+using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Body.Part;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -14,6 +18,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stacks;
@@ -22,6 +27,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -29,6 +35,8 @@ namespace Content.Shared._RMC14.Medical.Wounds;
 
 public abstract class SharedWoundsSystem : EntitySystem
 {
+    private static readonly EntProtoId<SkillDefinitionComponent> EnduranceSkill = "RMCSkillEndurance";
+
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -40,6 +48,8 @@ public abstract class SharedWoundsSystem : EntitySystem
     [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStackSystem _stacks = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private float _bloodlossMultiplier = 1;
@@ -59,6 +69,9 @@ public abstract class SharedWoundsSystem : EntitySystem
         SubscribeLocalEvent<WoundTreaterComponent, UseInHandEvent>(OnWoundTreaterUseInHand);
         SubscribeLocalEvent<WoundTreaterComponent, AfterInteractEvent>(OnWoundTreaterAfterInteract);
         SubscribeLocalEvent<WoundTreaterComponent, TreatWoundDoAfterEvent>(OnWoundTreaterDoAfter);
+
+        SubscribeLocalEvent<EscharComponent, ComponentStartup>(OnEscharAdded);
+        SubscribeLocalEvent<EscharComponent, ComponentShutdown>(OnEscharRemoved);
 
         Subs.CVar(_config, RMCCVars.CMBloodlossMultiplier, v => _bloodlossMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMBleedTimeMultiplier, v => _bleedTimeMultiplier = v, true);
@@ -89,8 +102,93 @@ public abstract class SharedWoundsSystem : EntitySystem
             foreach (var woundGroup in ent.Comp.WoundGroups)
             {
                 TryAddWound(ent, woundGroup.Key, args.DamageDelta, woundGroup.Value);
+
+                if (woundGroup.Value != WoundType.Brute ||
+                    !_net.IsServer ||
+                    args.Origin is null ||
+                    HasComp<WoundableUntreatableComponent>(ent) ||
+                    !_prototypes.TryIndex(woundGroup.Key, out var bruteGroup) ||
+                    !args.DamageDelta.TryGetDamageInGroup(bruteGroup, out var bruteDamage) ||
+                    bruteDamage <= FixedPoint2.New(10) ||
+                    !_random.Prob(GetInternalBleedingChance(ent, bruteDamage)))
+                    continue;
+
+                TryAddInternalBleeding(ent);
             }
+
+            // TODO: Add fracture-movement injuries here once fracture mechanics are implemented.
+
+            if (_net.IsServer)
+                TryAddEscharFromBodyDamage(ent.Owner, args.Damageable);
         }
+    }
+
+    private float GetInternalBleedingChance(EntityUid body, FixedPoint2 bruteDamage)
+    {
+        var endurance = _skills.GetSkill(body, EnduranceSkill);
+        var baseChance = Math.Clamp(bruteDamage.Float() * (2f / 3f) / 100f, 0f, 1f);
+        return baseChance * MathF.Pow(0.91f, endurance);
+    }
+
+    public bool TryAddInternalBleeding(
+        EntityUid body,
+        BodyPartType? bodyPart = null,
+        BodyPartSymmetry? symmetry = null)
+    {
+        if (!HasComp<BloodstreamComponent>(body))
+            return false;
+
+        var candidates = _body.GetBodyChildren(body)
+            .Where(part => part.Component.PartType is not (BodyPartType.Other or BodyPartType.Tail or BodyPartType.Hand or BodyPartType.Foot))
+            .Where(part => bodyPart == null || part.Component.PartType == bodyPart)
+            .Where(part => symmetry == null || part.Component.Symmetry == symmetry)
+            .ToArray();
+
+        if (candidates.Length == 0)
+            return false;
+
+        var selected = candidates[_random.Next(candidates.Length)].Component;
+        var wounded = EnsureComp<WoundedComponent>(body);
+        var index = wounded.InternalBleeds.FindIndex(entry =>
+            entry.BodyPart == selected.PartType && entry.Symmetry == selected.Symmetry);
+
+        if (index >= 0)
+        {
+            var existing = wounded.InternalBleeds[index];
+            wounded.InternalBleeds[index] = existing with { Severity = Math.Min(existing.Severity + 1, 3) };
+        }
+        else
+        {
+            wounded.InternalBleeds.Add(new InternalBleedingEntry(selected.PartType, selected.Symmetry, 1));
+        }
+
+        Dirty(body, wounded);
+        return true;
+    }
+
+    public bool TryRepairInternalBleeding(EntityUid body, BodyPartType bodyPart, BodyPartSymmetry symmetry)
+    {
+        if (!TryComp(body, out WoundedComponent? wounded))
+            return false;
+
+        var index = wounded.InternalBleeds.FindIndex(entry =>
+            entry.BodyPart == bodyPart && entry.Symmetry == symmetry);
+
+        if (index < 0)
+            return false;
+
+        wounded.InternalBleeds.RemoveAt(index);
+        Dirty(body, wounded);
+
+        if (wounded.Wounds.Count == 0 && wounded.InternalBleeds.Count == 0)
+            RemCompDeferred<WoundedComponent>(body);
+
+        return true;
+    }
+
+    protected float GetInternalBleedingRate(InternalBleedingEntry entry)
+    {
+        return entry.Severity * 0.5f * _bloodlossMultiplier;
     }
 
     private void OnWoundableBleed(Entity<WoundableComponent> ent, ref CMBleedEvent args)
@@ -152,6 +250,8 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (damage != FixedPoint2.Zero)
         {
             var total = _rmcDamageable.DistributeDamageCached((target, damageable), treater.Comp.Group, damage);
+            if (treater.Comp.Group == "Burn")
+                ClampEscharBurnHealing(target, damageable, total);
             _damageable.TryChangeDamage(target, total, true, damageable: damageable, origin: user, tool: args.Used);
         }
 
@@ -263,6 +363,14 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (!TryComp(target, out wounded) ||
             wounded.Wounds.Count == 0)
         {
+            if (wounded is { InternalBleeds.Count: > 0 })
+            {
+                if (doPopups)
+                    _popup.PopupClient(Loc.GetString("cm-wounds-internal-bleeding"), target, user, PopupType.SmallCaution);
+
+                return false;
+            }
+
             if (user == target)
             {
                 if (doPopups && treater.Comp.NoneSelfPopup is { } selfPopup)
@@ -340,6 +448,8 @@ public abstract class SharedWoundsSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("cm-wounds-open-cut", ("target", targetName), ("treater", treater.Owner)), target, user, PopupType.SmallCaution);
             else if (otherUntreated)
                 _popup.PopupClient(Loc.GetString("cm-wounds-cannot-treat", ("treater", treater.Owner)), target, user, PopupType.SmallCaution);
+            else if (wounded.InternalBleeds.Count > 0)
+                _popup.PopupClient(Loc.GetString("cm-wounds-internal-bleeding"), target, user, PopupType.SmallCaution);
             else
                 _popup.PopupClient(Loc.GetString("cm-wounds-already-treated", ("target", target)), target, user);
         }
@@ -536,6 +646,183 @@ public abstract class SharedWoundsSystem : EntitySystem
             if (wounds[i].Type == type)
                 wounds.RemoveSwap(i);
         }
+    }
+
+    public bool TryAddEschar(EntityUid body, EntityUid? targetPart = null)
+    {
+        return TryAddEschar(body, targetPart, 30f);
+    }
+
+    /// <summary>
+    /// Adds eschar to a targeted limb when one is supplied, or randomly selects an eligible organic limb.
+    /// The optional damage argument is a future-facing hook for limb-targeted burn damage.
+    /// </summary>
+    public bool TryAddEschar(EntityUid body, EntityUid? targetPart, float burnDamage)
+    {
+        if (burnDamage < 30f)
+            return false;
+
+        if (!_random.Prob(0.5f))
+            return false;
+
+        EntityUid selected;
+        if (targetPart is { } targeted && CanAddEschar(targeted))
+        {
+            selected = targeted;
+        }
+        else
+        {
+            var candidates = _body.GetBodyChildren(body)
+                .Where(child => CanAddEschar(child.Id))
+                .Select(child => child.Id)
+                .ToArray();
+
+            if (candidates.Length == 0)
+                return false;
+
+            selected = candidates[_random.Next(candidates.Length)];
+        }
+
+        EnsureComp<EscharComponent>(selected);
+        return true;
+    }
+
+    private bool TryAddEscharFromBodyDamage(EntityUid body, DamageableComponent damageable)
+    {
+        if (damageable.DamagePerGroup.GetValueOrDefault("Burn") < FixedPoint2.New(30))
+            return false;
+
+        return TryAddEschar(body, null, damageable.DamagePerGroup.GetValueOrDefault("Burn").Float());
+    }
+
+    private bool CanAddEschar(EntityUid part)
+    {
+        if (HasComp<EscharComponent>(part) ||
+            HasComp<WoundableUntreatableComponent>(part))
+        {
+            return false;
+        }
+
+        if (!TryComp<BodyPartComponent>(part, out var bodyPart))
+            return false;
+
+        return bodyPart.PartType != BodyPartType.Tail &&
+               bodyPart.PartType != BodyPartType.Other;
+    }
+
+    public bool RemoveEschar(EntityUid body)
+    {
+        var removed = false;
+        foreach (var (part, _) in _body.GetBodyChildren(body))
+        {
+            if (RemComp<EscharComponent>(part))
+                removed = true;
+        }
+
+        return removed;
+    }
+
+    public bool RemoveEschar(EntityUid body, EntityUid part)
+    {
+        if (TryComp<BodyPartComponent>(part, out var bodyPart) && bodyPart.Body == body)
+            return RemComp<EscharComponent>(part);
+
+        return false;
+    }
+
+    public bool HasEschar(EntityUid body)
+    {
+        return _body.GetBodyChildren(body).Any(child => HasComp<EscharComponent>(child.Id));
+    }
+
+    public bool HasEschar(EntityUid body, EntityUid part)
+    {
+        return TryComp<BodyPartComponent>(part, out var bodyPart) &&
+               bodyPart.Body == body &&
+               HasComp<EscharComponent>(part);
+    }
+
+    public void ClampEscharBurnHealing(EntityUid body, DamageableComponent damageable, DamageSpecifier healing)
+    {
+        var threshold = GetEscharHealingThreshold(body);
+        if (threshold <= FixedPoint2.Zero)
+            return;
+
+        var burnDamage = damageable.DamagePerGroup.GetValueOrDefault("Burn");
+        var allowedHealing = burnDamage - threshold;
+        if (allowedHealing <= FixedPoint2.Zero)
+        {
+            healing.DamageDict.Clear();
+            return;
+        }
+
+        var _ = FixedPoint2.Zero;
+        var totalBurnHealing = FixedPoint2.Zero;
+        foreach (var damage in healing.DamageDict.Values)
+        {
+            if (damage < FixedPoint2.Zero)
+                totalBurnHealing -= damage;
+        }
+
+        if (totalBurnHealing <= allowedHealing)
+            return;
+
+        var scale = allowedHealing / totalBurnHealing;
+        var keys = healing.DamageDict.Keys.ToArray();
+        foreach (var key in keys)
+        {
+            if (healing.DamageDict[key] < FixedPoint2.Zero)
+                healing.DamageDict[key] *= scale;
+        }
+    }
+
+    public FixedPoint2 GetEscharHealingThreshold(EntityUid body)
+    {
+        var escharCount = _body.GetBodyChildren(body).Count(child => HasComp<EscharComponent>(child.Id));
+        return FixedPoint2.New(escharCount * 5);
+    }
+
+    private void OnEscharAdded(Entity<EscharComponent> ent, ref ComponentStartup args)
+    {
+        // TODO: Future pain work: eschar should apply 10 pain while present.
+
+        if (!TryComp<BodyPartComponent>(ent, out var bodyPart) ||
+            bodyPart.Body is not { } body)
+        {
+            return;
+        }
+
+        if (bodyPart.PartType is BodyPartType.Leg or BodyPartType.Foot &&
+            TryComp<MovementBodyPartComponent>(ent, out var movement))
+        {
+            EnsureComp<EscharMoveEffectComponent>(ent, out var effect);
+            effect.WalkSpeed = movement.WalkSpeed;
+            effect.SprintSpeed = movement.SprintSpeed;
+            movement.WalkSpeed *= 0.75f;
+            movement.SprintSpeed *= 0.75f;
+            Dirty(ent, movement);
+            Dirty(ent, effect);
+            _body.UpdateMovementSpeed(body);
+        }
+    }
+
+    private void OnEscharRemoved(Entity<EscharComponent> ent, ref ComponentShutdown args)
+    {
+        // TODO: Future pain work: eschar pain should be removed when eschar is removed.
+
+        if (!TryComp<EscharMoveEffectComponent>(ent, out var effect) ||
+            !TryComp<MovementBodyPartComponent>(ent, out var movement))
+        {
+            return;
+        }
+
+        movement.WalkSpeed = effect.WalkSpeed;
+        movement.SprintSpeed = effect.SprintSpeed;
+        RemComp<EscharMoveEffectComponent>(ent);
+        Dirty(ent, movement);
+
+        if (TryComp<BodyPartComponent>(ent, out var bodyPart) && bodyPart.Body is { } body)
+            _body.UpdateMovementSpeed(body);
     }
 
     public bool HasUntreated(Entity<WoundedComponent?> wounded, ProtoId<DamageGroupPrototype> group)

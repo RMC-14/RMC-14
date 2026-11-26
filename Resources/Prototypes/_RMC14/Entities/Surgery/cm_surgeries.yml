@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMSurgeryBase
   categories: [ HideSpawnMenu ]
 
@@ -24,6 +24,20 @@
     - CMSurgeryStepCloseBones
     - CMSurgeryStepMendRibcage
     - CMSurgeryStepCloseIncision
+
+- type: entity
+  parent: CMSurgeryBase
+  id: RMCSurgeryEscharRemoval
+  name: Eschar Removal
+  description: Remove hardened burn tissue and apply a graft.
+  components:
+  - type: CMSurgery
+    priority: 1
+    requirement: CMSurgeryOpenIncision
+    steps:
+    - RMCSurgeryStepRemoveEschar
+    - RMCSurgeryStepGraftEschar
+  - type: RMCSurgeryEscharCondition
 
 - type: entity
   parent: CMSurgeryBase
@@ -53,6 +67,32 @@
   - type: CMSurgeryLarvaCondition
   - type: CMSurgeryPartCondition
     part: Torso
+
+- type: entity
+  parent: CMSurgeryBase
+  id: RMCSurgeryForeignObjectRemoval
+  name: Foreign Object Removal
+  description: Removal of a Foreign object from the body.
+  components:
+  - type: CMSurgery
+    priority: -1
+    requirement: CMSurgeryOpenIncision
+    steps:
+    - RMCSurgeryStepExtractForeignObject
+  - type: RMCSurgeryForeignObjectCondition
+
+- type: entity
+  parent: CMSurgeryBase
+  id: RMCSurgeryInternalBleedingRepair
+  name: Internal Bleeding Repair
+  description: Locate and repair a damaged blood vessel.
+  components:
+  - type: CMSurgery
+    priority: -1
+    requirement: CMSurgeryOpenIncision
+    steps:
+    - RMCSurgeryStepRepairInternalBleeding
+  - type: RMCSurgeryInternalBleedingCondition
 
 - type: entity
   parent: CMSurgeryBase

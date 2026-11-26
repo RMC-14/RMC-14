@@ -1,6 +1,8 @@
 using Content.Server.StationRecords.Systems;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Embeds;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
 using Content.Shared._RMC14.Medical.Wounds;
@@ -84,6 +86,21 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
         var woundTypes = wound != null ? wound.WoundGroups : new();
         var state = TryComp<MobStateComponent>(target, out var mobState) ? mobState.CurrentState : MobState.Alive;
 
+        var embeddedObjectInBodyParts = new List<ForeignObjectEmbeddedEntry>();
+        if (TryComp<ForeignObjectEmbeddedComponent>(target, out var embeddedComponent))
+            embeddedObjectInBodyParts = ForeignObjectEmbeddedUtility.GetEmbeddedObjectInBodyParts(embeddedComponent);
+
+        var internalBleeds = new List<InternalBleedingEntry>();
+        if (TryComp<WoundedComponent>(target, out var wounded))
+            internalBleeds.AddRange(wounded.InternalBleeds);
+
+        var eschars = new List<EscharEntry>();
+        foreach (var (part, partComp) in _body.GetBodyChildren(target))
+        {
+            if (HasComp<EscharComponent>(part))
+                eschars.Add(new EscharEntry(partComp.PartType, partComp.Symmetry));
+        }
+
         return new HealthScanState(
             GetNetEntity(target),
             state,
@@ -96,7 +113,10 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
             pulse,
             chemicals,
             bleeding,
-            detailLevel);
+            detailLevel,
+            embeddedObjectInBodyParts,
+            internalBleeds,
+            eschars);
     }
 
     private List<RMCAutodocScanData> GenerateAutodocData(EntityUid target)

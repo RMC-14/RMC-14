@@ -9,6 +9,12 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/headband/green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/headband/green.rsi
+  - type: RMCSurgeryTool
+    consumable: true
+    consumeWholeItem: true
+    toolTypes:
+    - kind: FixOVein
+      quality: Awful
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Hats/headband/green.rsi

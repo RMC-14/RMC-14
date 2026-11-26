@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
@@ -30,10 +31,21 @@ public sealed partial class Anticorrosive : RMCChemicalEffect
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, potency);
 
+        if (args.EntityManager.TryGetComponent(args.TargetEntity, out DamageableComponent? targetDamageable) &&
+            args.EntityManager.TrySystem(out SharedWoundsSystem? wounds))
+        {
+            wounds.ClampEscharBurnHealing(args.TargetEntity, targetDamageable, healing);
+        }
+
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
         if (ActualPotency > 2)
         {
             healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, potency * 0.5f);
+            if (args.EntityManager.TryGetComponent(args.TargetEntity, out DamageableComponent? boostedDamageable) &&
+                args.EntityManager.TrySystem(out SharedWoundsSystem? boostedWounds))
+            {
+                boostedWounds.ClampEscharBurnHealing(args.TargetEntity, boostedDamageable, healing);
+            }
             damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
         }
     }
