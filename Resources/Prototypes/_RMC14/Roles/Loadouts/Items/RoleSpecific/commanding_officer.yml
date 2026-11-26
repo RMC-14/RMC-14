@@ -56,7 +56,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 900000 # 70 hrs
+      time: 252000 # 70 hrs
   equipment:
     belt: RMCMatebaBeltLuxuriousFilledSilver
   storage:
