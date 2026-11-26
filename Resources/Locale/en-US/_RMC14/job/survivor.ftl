@@ -329,6 +329,8 @@ rmc-job-prefix-soro-spetsnaz-synth = B/SRU SYN
 
 # Trijent survs
 
+rmc-job-name-survivor-trijent-roughneck = Roughneck
+
 rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
 
 rmc-job-name-survivor-trijent-goon = Trijent Dam Security
@@ -599,6 +601,8 @@ rmc-job-greeting-shivas-panic-room-engineer = You are an Engineer on the Colony!
   You are an Engineer working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the xenonids seem to be able to see in the dark, as you saw one grab a co-worker trying to fix the generators after the power went out. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-survivor-corpse-colonial-division-manager = Colonial Division Manager
 
 # Tyrargo Rift survs
 

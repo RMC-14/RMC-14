@@ -121,11 +121,6 @@ public sealed class CMGunSystem : EntitySystem
 
         SubscribeLocalEvent<GunUserWhitelistComponent, AttemptShootEvent>(OnGunUserWhitelistAttemptShoot);
 
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GunRefreshModifiersEvent>(OnGunUnskilledPenaltyRefresh);
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GetWeaponAccuracyEvent>(OnGunUnskilledPenaltyGetWeaponAccuracy);
-
         SubscribeLocalEvent<GunDamageModifierComponent, AmmoShotEvent>(OnGunDamageModifierAmmoShot);
         SubscribeLocalEvent<GunDamageModifierComponent, MapInitEvent>(OnGunDamageModifierMapInit);
 
@@ -142,6 +137,10 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunSkilledAccuracyComponent, ItemWieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledAccuracyComponent, ItemUnwieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledAccuracyComponent, GetWeaponAccuracyEvent>(OnAccuracySkilledGetWeaponAccuracy);
+
+        SubscribeLocalEvent<GunSkilledScatterComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledScatterComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledScatterComponent, GunRefreshModifiersEvent>(OnSkilledScatterRefresh);
 
         SubscribeLocalEvent<GunRequiresSkillsComponent, AttemptShootEvent>(OnRequiresSkillsAttemptShoot);
 
@@ -163,6 +162,8 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunDualWieldingComponent, GunRefreshModifiersEvent>(OnDualWieldingRefreshModifiers);
 
         SubscribeLocalEvent<UnremoveableComponent, RMCItemDropAttemptEvent>(OnUnremoveableDropAttempt);
+
+        SubscribeLocalEvent<GunComponent, CheckShotTargetEvent>(OnGunCheckShotTarget);
     }
 
     /// <summary>
@@ -400,27 +401,27 @@ public sealed class CMGunSystem : EntitySystem
         _popup.PopupClient(popup, args.User, args.User, PopupType.SmallCaution);
     }
 
-    private void OnGunUnskilledPenaltyRefresh(Entity<GunUnskilledPenaltyComponent> ent, ref GunRefreshModifiersEvent args)
+    private void OnSkilledScatterRefresh(Entity<GunSkilledScatterComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        if (TryGetUserSkills(ent, out var user) &&
-            _skills.HasSkill((user, user), ent.Comp.Skill, ent.Comp.Firearms))
+        if (!TryGetUserSkills(ent, out var user))
+            return;
+
+        var firearmsLevel = _skills.GetSkill((user, user), ent.Comp.Skill);
+
+        if (firearmsLevel < ent.Comp.SkilledMinimum && !HasComp<GunUnskilledUsableComponent>(ent.Owner)) // Unskilled penalty
         {
+            args.MinAngle += ent.Comp.UnskilledAngleIncrease;
+            args.MaxAngle += ent.Comp.UnskilledAngleIncrease;
             return;
         }
 
-        args.MinAngle += ent.Comp.AngleIncrease;
-        args.MaxAngle += ent.Comp.AngleIncrease;
-    }
-
-    private void OnGunUnskilledPenaltyGetWeaponAccuracy(Entity<GunUnskilledPenaltyComponent> ent, ref GetWeaponAccuracyEvent args)
-    {
-        if (TryGetUserSkills(ent, out var user) &&
-            _skills.HasSkill((user, user), ent.Comp.Skill, ent.Comp.Firearms))
-        {
+        if (firearmsLevel == ent.Comp.SkilledMinimum) // Minimum firearms doesn't get any special buffs
             return;
-        }
 
-        args.AccuracyMultiplier += ent.Comp.AccuracyAddMult;
+        // Meaning firearms 2 gets around a 12 degree reduction
+        var angleDecrease = _skills.GetSkill((user, user), ent.Comp.Skill) * ent.Comp.SkillMultiplier;
+        args.MinAngle = Angle.FromDegrees(Math.Max(args.MinAngle.Degrees - angleDecrease, 0.0));
+        args.MaxAngle = Angle.FromDegrees(Math.Max(args.MaxAngle.Degrees - angleDecrease, args.MinAngle));
     }
 
     private void OnGunDamageModifierMapInit(Entity<GunDamageModifierComponent> ent, ref MapInitEvent args)
@@ -553,6 +554,13 @@ public sealed class CMGunSystem : EntitySystem
     {
         if (!TryGetUserSkills(gun, out var user))
             return;
+
+        if (!_skills.HasSkill((user, user), gun.Comp.Skill, gun.Comp.SkilledMinimum)
+            && !HasComp<GunUnskilledUsableComponent>(gun))
+        {
+            args.AccuracyMultiplier -= gun.Comp.AccuracyAddMult;
+            return;
+        }
 
         args.AccuracyMultiplier += gun.Comp.AccuracyAddMult * _skills.GetSkill((user, user), gun.Comp.Skill);
     }
@@ -773,6 +781,16 @@ public sealed class CMGunSystem : EntitySystem
     private void OnUnremoveableDropAttempt(Entity<UnremoveableComponent> ent, ref RMCItemDropAttemptEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnGunCheckShotTarget(Entity<GunComponent> gun, ref CheckShotTargetEvent args)
+    {
+        // Guns do not allow targeting entities that cannot collide with bullets
+        if (!_physicsQuery.TryGetComponent(args.Target, out var target)
+            || (target.CollisionLayer & (int)CollisionGroup.BulletImpassable) == 0)
+        {
+            args.Skip = true;
+        }
     }
 
     private bool TryGetOtherDualWieldedGun(EntityUid user, Entity<GunDualWieldingComponent> gun, out Entity<GunDualWieldingComponent> otherGun)

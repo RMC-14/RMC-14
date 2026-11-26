@@ -313,7 +313,10 @@ public sealed partial class XenoSpitSystem : EntitySystem
 
         if (spit.Comp.Slow > TimeSpan.Zero)
         {
-            if (spit.Comp.SuperSlow)
+            if (spit.Comp.RootIfAlreadySlowed &&
+                ((spit.Comp.SuperSlow ? HasComp<RMCSuperSlowdownComponent>(target) : HasComp<RMCSlowdownComponent>(target))))
+                _slow.TryRoot(target, spit.Comp.Slow);
+            else if (spit.Comp.SuperSlow)
                 _slow.TrySuperSlowdown(target, spit.Comp.Slow);
             else
                 _slow.TrySlowdown(target, spit.Comp.Slow);

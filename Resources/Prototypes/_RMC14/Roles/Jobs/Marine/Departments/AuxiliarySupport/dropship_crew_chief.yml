@@ -14,7 +14,7 @@
     group: CMJobsMedical
     time: 3600 # 1 hours
   ranks:
-    RMCRankWarrantOfficer:
+    RMCRankWarrantOfficerDCCRankUp:
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
       time: 630000 # 175 hours

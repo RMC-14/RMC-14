@@ -1,5 +1,6 @@
-using Content.Server.Light.EntitySystems;
+using Content.Shared._RMC14.Light;
 using Content.Shared.Light.Components;
+using Content.Server.Light.EntitySystems;
 
 namespace Content.Server._RMC14.Light;
 
