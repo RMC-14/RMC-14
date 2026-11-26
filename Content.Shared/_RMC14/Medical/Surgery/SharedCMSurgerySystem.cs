@@ -20,6 +20,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
+using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Temperature;
 using Robust.Shared.Audio.Systems;
@@ -45,6 +46,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly SharedStackSystem _stacks = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -107,6 +109,35 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
         var ev = new CMSurgeryStepEvent(args.User, ent, part, GetTools(args.User));
         RaiseLocalEvent(step, ref ev);
+
+        if (_net.IsServer &&
+            TryComp(step, out CMSurgeryStepComponent? stepComp) &&
+            stepComp.Tool is { } requiredKinds)
+        {
+            foreach (var requiredKind in requiredKinds)
+            {
+                if (TryFindToolForKind(GetTools(args.User), requiredKind, out var consumable) &&
+                    TryComp(consumable, out RMCSurgeryToolComponent? consumableTool) &&
+                    consumableTool.Consumable)
+                {
+                    if (consumableTool.ConsumeWholeItem)
+                    {
+                        QueueDel(consumable);
+                    }
+                    else if (TryComp(consumable, out StackComponent? stack) &&
+                             _stacks.GetCount(consumable, stack) >= consumableTool.ConsumableAmount)
+                    {
+                        _stacks.Use(consumable, consumableTool.ConsumableAmount, stack);
+                    }
+                    else if (!HasComp<StackComponent>(consumable))
+                    {
+                        QueueDel(consumable);
+                    }
+
+                    break;
+                }
+            }
+        }
 
         RefreshUI(ent);
     }

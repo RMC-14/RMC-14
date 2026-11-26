@@ -46,6 +46,8 @@
       CMSteel: 50
       CMGlass: 20
   - type: RMCSurgeryTool
+    consumable: true
+    consumableAmount: 1
     toolTypes:
     - kind: Hemostat
       quality: BadSubstitute

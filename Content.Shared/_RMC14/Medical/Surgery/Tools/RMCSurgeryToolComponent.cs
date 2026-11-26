@@ -32,6 +32,15 @@ public sealed partial class RMCSurgeryToolComponent : Component
     [DataField, AutoNetworkedField]
     public bool OpenSurgeryMenu = false;
 
+    [DataField, AutoNetworkedField]
+    public bool Consumable;
+
+    [DataField, AutoNetworkedField]
+    public int ConsumableAmount = 1;
+
+    [DataField, AutoNetworkedField]
+    public bool ConsumeWholeItem;
+
     public bool TryGetBestTypeForStep(EntProtoId step, IReadOnlyCollection<RMCSurgeryToolKind> requiredKinds, out RMCSurgeryToolTypeResolved resolved)
     {
         RMCSurgeryToolTypeResolved? best = null;

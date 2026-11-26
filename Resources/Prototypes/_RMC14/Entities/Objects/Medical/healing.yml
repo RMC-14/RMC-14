@@ -34,6 +34,8 @@
   - type: Sprite
     state: ointment
   - type: RMCSurgeryTool
+    consumable: true
+    consumableAmount: 1
     toolTypes:
     - kind: Graft
       quality: Awful
