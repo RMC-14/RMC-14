@@ -4,6 +4,7 @@
   storage:
     back:
     - RMCPoncho
+  groupBy: "poncho"
 
 - type: loadout
   id: PonchoJungleRMC
@@ -11,6 +12,7 @@
   storage:
     back:
     - RMCPonchoJungle
+  groupBy: "poncho"
 
 - type: loadout
   id: PonchoDesertRMC
@@ -18,6 +20,7 @@
   storage:
     back:
     - RMCPonchoDesert
+  groupBy: "poncho"
 
 - type: loadout
   id: PonchoUrbanRMC
@@ -25,6 +28,7 @@
   storage:
     back:
     - RMCPonchoUrban
+  groupBy: "poncho"
 
 - type: loadout
   id: PonchoSnowRMC
@@ -32,3 +36,4 @@
   storage:
     back:
     - RMCPonchoSnow
+  groupBy: "poncho"

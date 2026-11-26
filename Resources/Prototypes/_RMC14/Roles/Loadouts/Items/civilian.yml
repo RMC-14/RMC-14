@@ -4,72 +4,84 @@
   cost: 1
   inhand:
     - RMCPatchFreelancer
+  groupBy: "patch"
 
 - type: loadout
   id: PatchFreelancerAltRMC
   cost: 1
   inhand:
     - RMCPatchFreelancerAlt
+  groupBy: "patch"
 
 - type: loadout
   id: PatchWeYaRMC
   cost: 1
   inhand:
     - RMCPatchWeYa
+  groupBy: "patch"
 
 - type: loadout
   id: PatchWeYaRMCSquare
   cost: 1
   inhand:
     - RMCPatchWeYaBlackSquare
+  groupBy: "patch"
 
 - type: loadout
   id: PatchWeYaRMCBlack
   cost: 1
   inhand:
     - RMCPatchWeYaBlack
+  groupBy: "patch"
 
 - type: loadout
   id: PatchWeYaRMCFury161
   cost: 1
   inhand:
     - RMCPatchWeYaFury161
+  groupBy: "patch"
 
 - type: loadout
   id: PatchTSERMC
   cost: 1
   inhand:
     - RMCPatchTSE
+  groupBy: "patch"
 
 - type: loadout
   id: PatchMSCRMC
   cost: 1
   inhand:
     - RMCPatchSPPMSC
+  groupBy: "patch"
 
 - type: loadout
   id: PatchCLFRMC
   cost: 1
   inhand:
     - RMCPatchCLF
+  groupBy: "patch"
 
 - type: loadout
   id: PatchOliveBranch
   cost: 1
   inhand:
   - RMCPatchOliveBranch
+  groupBy: "patch"
 
 - type: loadout
   id: PatchNovaris
   cost: 1
   inhand:
   - RMCPatchNovaris
+  groupBy: "patch"
 
 - type: loadout
   id: PatchHalcyon
   cost: 1
   inhand:
   - RMCPatchHalcyon
+  groupBy: "patch"
 
 # Shoes
 - type: loadout
@@ -77,42 +89,49 @@
   cost: 1
   equipment:
     shoes: RMCShoesBlack
+  groupBy: "shoes"
 
 - type: loadout
   id: ShoesBrownRMC
   cost: 1
   equipment:
     shoes: RMCShoesBrown
+  groupBy: "shoes"
 
 - type: loadout
   id: ShoesBlueRMC
   cost: 1
   equipment:
     shoes: RMCShoesBlue
+  groupBy: "shoes"
 
 - type: loadout
   id: ShoesGreenRMC
   cost: 1
   equipment:
     shoes: RMCShoesGreen
+  groupBy: "shoes"
 
 - type: loadout
   id: ShoesYellowRMC
   cost: 1
   equipment:
     shoes: RMCShoesYellow
+  groupBy: "shoes"
 
 - type: loadout
   id: ShoesRedRMC
   cost: 1
   equipment:
     shoes: RMCShoesRed
+  groupBy: "shoes"
 
 - type: loadout
   id: ShoesPurpleRMC
   cost: 1
   equipment:
     shoes: RMCShoesPurple
+  groupBy: "shoes"
 
 # Hats
 - type: loadout
@@ -120,12 +139,14 @@
   cost: 2
   equipment:
     head: RMCHeadCowboyHatLight
+  groupBy: "cowboy"
 
 - type: loadout
   id: HeadCowboyHatDarkRMC
   cost: 2
   equipment:
     head: RMCHeadCowboyHatDark
+  groupBy: "cowboy"
 
 - type: loadout
   id: HeadBandRebelRMC

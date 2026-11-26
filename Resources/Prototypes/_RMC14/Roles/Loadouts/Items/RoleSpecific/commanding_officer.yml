@@ -62,6 +62,7 @@
   storage:
     back:
     - RMCMatebaCustomizationCaseLuxury
+  groupBy: "metaba"
 
 - type: loadout
   id: SilverMatebaRMC
@@ -77,6 +78,7 @@
   storage:
     back:
     - RMCMatebaCustomizationCaseSilver
+  groupBy: "metaba"
 
 - type: loadout
   id: GoldHandcannonRMC
@@ -89,6 +91,7 @@
       time: 900000 # 250 hrs
   equipment:
     belt: RMCGoldHandcannonBeltFilled
+  groupBy: "handcannon"
 
 - type: loadout
   id: MatebaRMC
@@ -98,30 +101,35 @@
   storage:
     back:
     - RMCMatebaCustomizationCase
+  groupBy: "metaba"
 
 - type: loadout
   id: MatebaSpecialRMC
   dummyEntity: RMCWeaponRevolverMatebaSpecial
   equipment:
     belt: RMCMatebaBeltSpecialFilled
+  groupBy: "metaba"
 
 - type: loadout
   id: HandcannonRMC
   dummyEntity: RMCWeaponPistolHandcannonCustom
   equipment:
     belt: RMCPeregrineHandcannonBeltFilled
+  groupBy: "handcannon"
 
 - type: loadout
   id: HandcannonPolishedRMC
   dummyEntity: RMCWeaponPistolHandcannonPolished
   equipment:
     belt: RMCPolishedHandcannonBeltFilled
+  groupBy: "handcannon"
 
 - type: loadout
   id: Mateba2006MRMC
   dummyEntity: RMCWeaponRevolverMateba2006M
   equipment:
     belt: RMCMatebaBeltFilled2006M
+  groupBy: "metaba2006"
 
 - type: loadout
   id: Mateba2006MRMCGold
@@ -134,6 +142,7 @@
   dummyEntity: RMCWeaponRevolverMateba2006MGold
   equipment:
     belt: RMCMatebaBeltFilled2006MGold
+  groupBy: "metaba2006"
 
 - type: loadout
   id: Mateba2006MRMCBlackGold
@@ -146,6 +155,7 @@
   dummyEntity: RMCWeaponRevolverMateba2006MBlackGold
   equipment:
     belt: RMCMatebaBeltFilled2006MBlackGold
+  groupBy: "metaba2006"
 
 - type: loadout
   id: Mateba2006MRMCSilver
@@ -158,6 +168,7 @@
   dummyEntity: RMCWeaponRevolverMateba2006MSilver
   equipment:
     belt: RMCMatebaBeltFilled2006MSilver
+  groupBy: "metaba2006"
 
 - type: loadout
   id: M1911CRMC

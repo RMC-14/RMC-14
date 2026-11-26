@@ -4,186 +4,217 @@
   cost: 2
   equipment:
     eyes: RMCGlassesAviators
+  groupBy: "aviators"
 
 - type: loadout
   id: AviatorsSilverRMC
   cost: 2
   equipment:
     eyes: RMCGlassesAviatorsSilver
+  groupBy: "aviators"
 
 - type: loadout
   id: EyepatchRMC
   cost: 2
   equipment:
     eyes: RMCEyepatch
+  groupBy: "eyepatch"
 
 - type: loadout
   id: GreenEyepatchRMC
   cost: 2
   equipment:
     eyes: RMCGreenEyepatch
+  groupBy: "eyepatch"
 
 - type: loadout
   id: WhiteEyepatchRMC
   cost: 2
   equipment:
     eyes: RMCWhiteEyepatch
+  groupBy: "eyepatch"
 
 - type: loadout
   id: GlassesRPGRMC
   cost: 2
   equipment:
     eyes: RMCGlassesMarineRpg
+  groupBy: "marinerpg"
 
 - type: loadout
   id: GlassesRPGRMCOld
   cost: 2
   equipment:
     eyes: RMCGlassesMarineRpgOld
+  groupBy: "marinerpg"
 
 - type: loadout
   id: GlassesPrescriptionRMC
   cost: 2
   equipment:
     eyes: RMCHipsterGlasses
+  groupBy: "prescription"
 
 - type: loadout
   id: HippieGlassesRMC
   cost: 2
   equipment:
     eyes: RMCHippieGlasses
+  groupBy: "prescription"
 
 - type: loadout
   id: GlassesTriMaxYellowRMC
   cost: 2
   equipment:
     eyes: RMCGlassesTriMaxYellowFake
+  groupBy: "trimax"
 
 - type: loadout
   id: GlassesTriMaxBronzeRMC
   cost: 2
   equipment:
     eyes: RMCGlassesTriMaxBronzeFake
+  groupBy: "trimax"
 
 - type: loadout
   id: GlassesTriMaxBlackRMC
   cost: 2
   equipment:
     eyes: RMCGlassesTriMaxBlackFake
+  groupBy: "trimax"
 
 - type: loadout
   id: GogglesRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallistic
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesPrescriptionRMC
   cost: 2
   equipment:
     eyes: RMCGogglesPrescriptionBallistic
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesBlackRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticBlack
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesOrangeRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticOrange
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesRedRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticRed
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesBlueRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticBlue
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesPurpleRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticPurple
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesYellowRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticYellow
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesAdvancedRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticSquad
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesM1A1RMC
   cost: 2
   equipment:
     eyes: RMCGogglesM1A1Ballistic
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesPolarizedBlueRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticPolarizedBlue
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesPolarizedOrangeRMC
   cost: 2
   equipment:
     eyes: RMCGogglesBallisticPolarizedOrange
+  groupBy: "goggles"
 
 - type: loadout
   id: GogglesM1A1BlueRMC
   cost: 2
   equipment:
     eyes: RMCGogglesM1A1BallisticBlue
+  groupBy: "goggles"
 
 - type: loadout
   id: PersonalShadesRMC
   cost: 2
   equipment:
     eyes: RMCSunglassesBigFake
+  groupBy: "trimax"
 
 - type: loadout
   id: PersonalShadesRedRMC
   cost: 2
   equipment:
     eyes: RMCSunglassesBigFakeRed
+  groupBy: "trimax"
 
 - type: loadout
   id: PersonalShadesOrangeRMC
   cost: 2
   equipment:
     eyes: RMCSunglassesBigFakeOrange
+  groupBy: "trimax"
 
 - type: loadout
   id: PersonalShadesYellowRMC
   cost: 2
   equipment:
     eyes: RMCSunglassesBigFakeYellow
+  groupBy: "trimax"
 
 - type: loadout
   id: PersonalShadesGreenRMC
   cost: 2
   equipment:
     eyes: RMCSunglassesBigFakeGreen
+  groupBy: "trimax"
 
 - type: loadout
   id: PersonalShadesBlueRMC
   cost: 2
   equipment:
     eyes: RMCSunglassesBigFakeBlue
+  groupBy: "trimax"
 
 - type: loadout
   id: SunglassesRMC
@@ -196,39 +227,46 @@
   cost: 2
   equipment:
     eyes: RMCHippieGlassesBloodred
+  groupBy: "startex"
 
 - type: loadout
   id: HippieGlassesGreenRMC
   cost: 2
   equipment:
     eyes: RMCHippieGlassesGreen
+  groupBy: "startex"
 
 - type: loadout
   id: HippieGlassesMidnightRMC
   cost: 2
   equipment:
     eyes: RMCHippieGlassesMidnight
+  groupBy: "startex"
 
 - type: loadout
   id: HippieGlassesNightblueRMC
   cost: 2
   equipment:
     eyes: RMCHippieGlassesNightblue
+  groupBy: "startex"
 
 - type: loadout
   id: HippieGlassesPinkRMC
   cost: 2
   equipment:
     eyes: RMCHippieGlassesPink
+  groupBy: "startex"
 
 - type: loadout
   id: HippieGlassesSunriseRMC
   cost: 2
   equipment:
     eyes: RMCHippieGlassesSunrise
+  groupBy: "startex"
 
 - type: loadout
   id: HippieGlassesSunsetRMC
   cost: 2
   equipment:
     eyes: RMCHippieGlassesSunset
+  groupBy: "startex"

@@ -33,6 +33,7 @@
   storage:
     back:
     - CMFolderBlack
+  groupBy: "folders"
 
 - type: loadout
   id: FolderBlueRMC
@@ -40,6 +41,7 @@
   storage:
     back:
     - CMFolderBlue
+  groupBy: "folders"
 
 - type: loadout
   id: FolderRedRMC
@@ -47,6 +49,7 @@
   storage:
     back:
     - CMFolderRed
+  groupBy: "folders"
 
 - type: loadout
   id: FolderWhiteRMC
@@ -54,6 +57,7 @@
   storage:
     back:
     - CMFolderWhite
+  groupBy: "folders"
 
 - type: loadout
   id: FolderYellowRMC
@@ -61,3 +65,4 @@
   storage:
     back:
     - CMFolderYellow
+  groupBy: "folders"

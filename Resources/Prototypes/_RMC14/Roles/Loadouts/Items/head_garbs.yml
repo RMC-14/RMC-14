@@ -5,6 +5,7 @@
   storage:
     back:
     - RMCHelmetGarbNightVision
+  groupBy: "nightvision"
 
 - type: loadout
   id: FakeNVGPVERMC
@@ -12,6 +13,7 @@
   storage:
     back:
     - RMCHelmetGarbNightVisionPVE
+  groupBy: "nightvision"
 
 - type: loadout
   id: NettingRMC
@@ -19,6 +21,7 @@
   storage:
     back:
     - RMCHelmetGarbNetting
+  groupBy: "netting"
 
 - type: loadout
   id: NettingUrbanRMC
@@ -26,6 +29,7 @@
   storage:
     back:
     - RMCHelmetGarbNettingUrban
+  groupBy: "netting"
 
 - type: loadout
   id: NettingDesertRMC
@@ -33,6 +37,7 @@
   storage:
     back:
     - RMCHelmetGarbNettingDesert
+  groupBy: "netting"
 
 - type: loadout
   id: NettingJungleRMC
@@ -40,6 +45,7 @@
   storage:
     back:
     - RMCHelmetGarbNettingJungle
+  groupBy: "netting"
 
 - type: loadout
   id: RaincoverRMC
@@ -47,6 +53,7 @@
   storage:
     back:
     - RMCHelmetGarbRainCover
+  groupBy: "raincover"
 
 - type: loadout
   id: RaincoverUrbanRMC
@@ -54,6 +61,7 @@
   storage:
     back:
     - RMCHelmetGarbRainCoverUrban
+  groupBy: "raincover"
 
 - type: loadout
   id: RaincoverDesertRMC
@@ -61,6 +69,7 @@
   storage:
     back:
     - RMCHelmetGarbRainCoverDesert
+  groupBy: "raincover"
 
 - type: loadout
   id: RaincoverJungleRMC
@@ -68,6 +77,7 @@
   storage:
     back:
     - RMCHelmetGarbRainCoverJungle
+  groupBy: "raincover"
 
 - type: loadout
   id: BuckshotSpentRMC
@@ -75,6 +85,7 @@
   storage:
     back:
     - RMCHelmetGarbBuckshot
+  groupBy: "spentammo"
 
 - type: loadout
   id: FlechetteSpentRMC
@@ -82,6 +93,7 @@
   storage:
     back:
     - RMCHelmetGarbFlechette
+  groupBy: "spentammo"
 
 - type: loadout
   id: SlugSpentRMC
@@ -89,6 +101,7 @@
   storage:
     back:
     - RMCHelmetGarbSlug
+  groupBy: "spentammo"
 
 - type: loadout
   id: CartridgeSpentRMC
@@ -96,6 +109,7 @@
   storage:
     back:
     - RMCHelmetGarbCartridge
+  groupBy: "spentammo"
 
 - type: loadout
   id: HelmetGasmaskRMC
@@ -103,6 +117,7 @@
   storage:
     back:
     - RMCHelmetGarbGasmask
+  groupBy: "gasmask"
 
 - type: loadout
   id: HelmetGasmaskDesertRMC
@@ -110,6 +125,7 @@
   storage:
     back:
     - RMCHelmetGarbGasmaskDesert
+  groupBy: "gasmask"
 
 - type: loadout
   id: HelmetGasmaskJungleRMC
@@ -117,6 +133,7 @@
   storage:
     back:
     - RMCHelmetGarbGasmaskJungle
+  groupBy: "gasmask"
 
 - type: loadout
   id: HelmetGasmaskUrbanRMC
@@ -124,6 +141,7 @@
   storage:
     back:
     - RMCHelmetGarbGasmaskUrban
+  groupBy: "gasmask"
 
 - type: loadout
   id: FeatherRMC
@@ -131,6 +149,7 @@
   storage:
     back:
     - RMCHelmetGarbFeather
+  groupBy: "feather"
 
 - type: loadout
   id: FeatherRedRMC
@@ -138,6 +157,7 @@
   storage:
     back:
     - RMCHelmetGarbFeatherRed
+  groupBy: "feather"
 
 - type: loadout
   id: FeatherBlueRMC
@@ -145,6 +165,7 @@
   storage:
     back:
     - RMCHelmetGarbFeatherBlue
+  groupBy: "feather"
 
 - type: loadout
   id: FeatherYellowRMC
@@ -152,6 +173,7 @@
   storage:
     back:
     - RMCHelmetGarbFeatherYellow
+  groupBy: "feather"
 
 - type: loadout
   id: FeatherPurpleRMC
@@ -159,6 +181,7 @@
   storage:
     back:
     - RMCHelmetGarbFeatherPurple
+  groupBy: "feather"
 
 - type: loadout
   id: GunOilRMC
@@ -201,6 +224,7 @@
   storage:
     back:
     - RMCHelmetGarbPeaceFlair
+  groupBy: "flair"
 
 - type: loadout
   id: IoFlairRMC
@@ -208,6 +232,7 @@
   storage:
     back:
     - RMCHelmetGarbIoFlair
+  groupBy: "flair"
 
 - type: loadout
   id: TerraTekFlairRMC
@@ -215,6 +240,7 @@
   storage:
     back:
     - RMCHelmetGarbTerraTekFlair
+  groupBy: "flair"
 
 - type: loadout
   id: UNMCFlairRMC
@@ -222,6 +248,7 @@
   storage:
     back:
     - RMCHelmetGarbUNMCFlair
+  groupBy: "flair"
 
 - type: loadout
   id: MovieTicketRMC
@@ -243,7 +270,3 @@
   storage:
     back:
     - RMCHelmetGarbRabbitsFoot
-
-
-
-
