@@ -1,13 +1,10 @@
 using System.Linq;
 using Content.Shared._RMC14.Marines.Access;
-using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.UserInterface;
 using Content.Shared.Access.Components;
-using Content.Shared.NPC.Prototypes;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Shared.Containers;
-using Robust.Shared.Localization;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Access;
@@ -26,9 +23,6 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
     private readonly HashSet<IdModificationConsoleAccessButton> _accessButtons = [];
     private readonly HashSet<IdModificationConsoleAccessGroupButton> _accessGroupButtons = [];
     private string _currentAccessGroup = "";
-
-    private readonly Dictionary<ProtoId<NpcFactionPrototype>, IdModificationConsoleAccessButton> _tacMapAccessButtons = new();
-    private readonly HashSet<ProtoId<NpcFactionPrototype>> _currentTacMapAccess = new();
 
     private readonly HashSet<IdModificationConsoleAccessGroupButton> _jobGroupButtons = new();
     private readonly HashSet<IdModificationConsoleAccessButton> _jobButtons = new();
@@ -49,11 +43,6 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
         EntMan.TryGetComponent(target, out MetaDataComponent? metaData);
         EntMan.TryGetComponent(target, out IdCardComponent? targetCardComponent);
         EntMan.TryGetComponent(target, out AccessComponent? targetCardAccessComponent);
-        EntMan.TryGetComponent(target, out TacticalMapAccessComponent? tacMapAccess);
-
-        _currentTacMapAccess.Clear();
-        if (tacMapAccess != null)
-            _currentTacMapAccess.UnionWith(tacMapAccess.Factions);
 
         if (console.Authenticated)
             _window.SignInButton.Text = "Log Out";
@@ -101,7 +90,6 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
                     AccessGroupRefresh(console, targetCardAccessComponent);
                     AccessButtonRefresh(targetCardAccessComponent);
                     RefreshIFFButton(console);
-                    RefreshTacMapAccessButtons();
                     break;
                 case "Jobs":
                     _window.JobContainer.Visible = true;
@@ -217,7 +205,6 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
         };
 
         DisplayAccessGroups(console);
-        DisplayTacMapAccess(console);
 
         // Jobs
         var tab2 = new IdModificationConsoleTabButton();
@@ -294,44 +281,6 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
 
         _window.IFF.ModulateSelfOverride = Color.Green;
         _window.IFF.Text = "Grant IFF";
-    }
-
-    private void DisplayTacMapAccess(IdModificationConsoleComponent console)
-    {
-        if (_window is not { IsOpen: true })
-            return;
-
-        _window.TacMapAccess.RemoveAllChildren();
-        _tacMapAccessButtons.Clear();
-
-        foreach (var faction in console.TacticalMapFactions)
-        {
-            var button = new IdModificationConsoleAccessButton();
-            button.AccessButton.HorizontalExpand = true;
-            button.AccessButton.SetHeight = 30;
-            button.AccessButton.Text = $"{faction.Id} Tactical Map";
-            button.AccessButton.OnPressed += _ =>
-            {
-                var revoke = _currentTacMapAccess.Contains(faction);
-                SendPredictedMessage(new IdModificationConsoleTacMapAccessBuiMsg(faction, revoke));
-                Refresh();
-            };
-
-            _tacMapAccessButtons[faction] = button;
-            _window.TacMapAccess.AddChild(button);
-        }
-    }
-
-    private void RefreshTacMapAccessButtons()
-    {
-        if (_window is not { IsOpen: true })
-            return;
-
-        foreach (var (faction, button) in _tacMapAccessButtons)
-        {
-            var enabled = _currentTacMapAccess.Contains(faction);
-            button.AccessButton.ModulateSelfOverride = enabled ? Color.Green : null;
-        }
     }
 
     private void DisplayAccessGroups(IdModificationConsoleComponent console)

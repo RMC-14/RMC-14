@@ -5,7 +5,6 @@
   description: Terminal for programming UNMC employee ID card access.
   components:
   - type: IdModificationConsole
-    tacticalMapFactions: [UNMC]
     jobList:
     - CMCE
     - Synth

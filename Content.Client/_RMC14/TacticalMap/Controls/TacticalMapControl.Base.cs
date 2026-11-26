@@ -44,6 +44,7 @@ public sealed partial class TacticalMapControl
         public Dictionary<string, string> AreaLinkedLz = new();
     }
 
+    // shared by every map control so reopening a map doesnt rebuild its textures
     private static readonly Dictionary<EntityUid, BaseMapCache> BaseCache = new();
 
     private EntityUid? _map;
@@ -108,6 +109,7 @@ public sealed partial class TacticalMapControl
             return;
         }
 
+        // new component instance means grid was recreated, version bumps on every state
         if (_base != null && ReferenceEquals(_base.Component, comp) && _base.Version == comp.Version)
             return;
 
@@ -235,6 +237,7 @@ public sealed partial class TacticalMapControl
                         continue;
 
                     var tile = new Vector2i(originX + i % TacticalMapChunk.Size, originY + i / TacticalMapChunk.Size);
+                    // image rows go top-down
                     var x = tile.X - min.X;
                     var y = height - 1 - (tile.Y - min.Y);
                     if (x < 0 || y < 0 || x >= width || y >= height)
@@ -288,6 +291,7 @@ public sealed partial class TacticalMapControl
         return cache;
     }
 
+    // flood fills from the edges, so holes inside the map count as map & the glow only traces the outside
     private static bool[] FillEnclosed(bool[] mask, int width, int height)
     {
         var outside = new bool[mask.Length];
@@ -387,6 +391,7 @@ public sealed partial class TacticalMapControl
         return Texture.LoadFromImage(image);
     }
 
+    // built at GlowScale for a smoother blur, then the map itself is cut out so only the outer glow is left
     private static Texture BuildGlow(bool[] mask, int width, int height)
     {
         var outline = Dilate(mask, width, height, GlowPadding, OutlineTiles);
@@ -415,6 +420,7 @@ public sealed partial class TacticalMapControl
             }
         }
 
+        // two box blur passes roughly approximate gaussian
         var buffer = new float[alpha.Length];
         for (var pass = 0; pass < 2; pass++)
         {
@@ -494,6 +500,8 @@ public sealed partial class TacticalMapControl
         var x = tile.X - _min.X;
         var y = _height - 1 - (tile.Y - _min.Y);
         var index = y * _width + x;
+
+        // inside the bounds but not a mapped tile
         if (!_base.Mask[index])
             return false;
 

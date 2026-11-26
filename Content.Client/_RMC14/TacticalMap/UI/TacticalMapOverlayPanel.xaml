@@ -8,13 +8,5 @@
         <BoxContainer Name="RoofList" Orientation="Vertical" SeparationOverride="3" HorizontalExpand="True" />
         <controls:TacticalMapButton Name="LinkedLzButton" Text="{Loc ui-tactical-map-overlay-linked-lz}"
                                     AlignLeft="True" HorizontalExpand="True" MinHeight="22" />
-        <controls:TacticalMapDivider Margin="0 2" />
-        <controls:TacticalMapLabel Text="{Loc ui-tactical-map-section-radius}" TextStyle="Heading" />
-        <BoxContainer Orientation="Horizontal" SeparationOverride="3" HorizontalExpand="True">
-            <controls:TacticalMapButton Name="OrbitalButton" Text="{Loc ui-tactical-map-radius-ob}"
-                                        HorizontalExpand="True" MinHeight="22" />
-            <controls:TacticalMapButton Name="MortarButton" Text="{Loc ui-tactical-map-radius-mortar}"
-                                        HorizontalExpand="True" MinHeight="22" />
-        </BoxContainer>
     </BoxContainer>
 </ui:TacticalMapOverlayPanel>

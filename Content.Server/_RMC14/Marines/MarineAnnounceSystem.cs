@@ -76,6 +76,9 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         ref MarineCommunicationsDesignatePrimaryLZMsg args)
     {
         var user = args.Actor;
+        if (!computer.Comp.CanDesignateLZ)
+            return;
+
         if (!TryGetEntity(args.LZ, out var lz))
         {
             Log.Warning($"{ToPrettyString(user)} tried to designate invalid entity {args.LZ} as primary LZ!");
@@ -92,9 +95,12 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         computer.Comp.Operation = _distressSignal.OperationName ?? string.Empty;
         computer.Comp.LandingZones.Clear();
 
-        foreach (var (id, metaData) in _dropship.GetPrimaryLZCandidates())
+        if (computer.Comp.CanDesignateLZ)
         {
-            computer.Comp.LandingZones.Add(new LandingZone(GetNetEntity(id), metaData.EntityName));
+            foreach (var (id, metaData) in _dropship.GetPrimaryLZCandidates())
+            {
+                computer.Comp.LandingZones.Add(new LandingZone(GetNetEntity(id), metaData.EntityName));
+            }
         }
 
         computer.Comp.LandingZones.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));

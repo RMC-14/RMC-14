@@ -12,7 +12,11 @@ public sealed class TacticalMapCanvasDraft(EntityUid channel)
     private readonly List<(List<TacticalMapStroke> Strokes, Dictionary<Vector2i, TacticalMapLabelData> Labels)> _undo = new();
 
     public EntityUid Channel { get; } = channel;
+
+    // canvas version this draft was copied from
     public int BaseVersion { get; private set; } = -1;
+
+    // sent, waiting for the server to send the new version back
     public bool Submitted { get; private set; }
     public readonly List<TacticalMapStroke> Strokes = new();
     public readonly Dictionary<Vector2i, TacticalMapLabelData> Labels = new();
@@ -32,6 +36,7 @@ public sealed class TacticalMapCanvasDraft(EntityUid channel)
 
     public int PointCount => Strokes.Sum(s => s.Points.Count);
 
+    // take the servers copy unless there are unsent edits
     public bool ShouldResetTo(TacticalMapCanvasLayer layer)
     {
         return BaseVersion != layer.Version && (!Dirty || Submitted);
@@ -69,6 +74,8 @@ public sealed class TacticalMapCanvasDraft(EntityUid channel)
     {
         Checkpoint();
         Strokes.Add(stroke);
+
+        // drop the oldest strokes once over the point limit
         while (pointLimit > 0 && Strokes.Count > 1 && PointCount > pointLimit)
         {
             Strokes.RemoveAt(0);
@@ -77,6 +84,7 @@ public sealed class TacticalMapCanvasDraft(EntityUid channel)
         Dirty = true;
     }
 
+    // no checkpoint, the eraser takes one per drag instead of per step
     public void SetStrokes(List<TacticalMapStroke> strokes)
     {
         Strokes.Clear();
@@ -264,6 +272,7 @@ public abstract class TacticalMapShapeTool : TacticalMapTool
 
 public sealed class TacticalMapLineTool : TacticalMapShapeTool
 {
+    // snaps to horizontal, vertical or 45 degrees
     protected override Vector2i Snap(Vector2i start, Vector2i end)
     {
         var dx = end.X - start.X;
@@ -347,6 +356,7 @@ public sealed class TacticalMapEraserTool : TacticalMapTool
             handle.DrawCircle(mouse, RadiusPixels + map.DrawThickness * 1.5f, Color.White.WithAlpha(0.45f));
     }
 
+    // splits strokes where the eraser touches them instead of deleting the whole stroke
     private static void EraseAt(TacticalMapControl map, Vector2 pixel)
     {
         if (map.Draft is not { } draft || draft.Strokes.Count == 0)
@@ -359,6 +369,7 @@ public sealed class TacticalMapEraserTool : TacticalMapTool
         var result = new List<TacticalMapStroke>(draft.Strokes.Count);
         foreach (var stroke in draft.Strokes)
         {
+            // thick strokes are easier to hit
             var effective = radius + stroke.Thickness * 0.6f / TacticalMapControl.OverlayUnitsPerTile;
             var radiusSquared = effective * effective;
             var points = stroke.Points;
@@ -426,6 +437,7 @@ public sealed class TacticalMapLabelTool : TacticalMapTool
 
     public Vector2i? DraggingLabel { get; private set; }
 
+    // pressing on a label starts a drag, pressing on an empty tile opens the dialog
     public override void Begin(TacticalMapControl map, Vector2 pixel)
     {
         if (map.TryGetDraftLabelAt(pixel, out var tile))
@@ -458,6 +470,7 @@ public sealed class TacticalMapLabelTool : TacticalMapTool
             return;
         }
 
+        // barely moved, treat it as a click & edit the label
         map.OpenLabelDialog(tile);
     }
 

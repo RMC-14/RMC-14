@@ -4,6 +4,12 @@
   name: ICB liaison headset
   suffix: ICB, Colony
   components:
+  - type: GrantTacticalMap
+    grantMap: false
+    factions: [UNMC]
+  - type: RemoveComponents
+    components:
+    - type: GrantTacMapAlert
   - type: ContainerFill
     containers:
       key_slots:

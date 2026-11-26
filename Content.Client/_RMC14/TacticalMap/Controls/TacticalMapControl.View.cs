@@ -14,6 +14,8 @@ public sealed partial class TacticalMapControl
 
     private float _zoom = FitZoom;
     private Vector2 _pan;
+
+    // view set before layout or before the base map arrived, applied once both exist
     private (float Zoom, Vector2 Pan)? _pendingView;
 
     public float Zoom => _zoom;
@@ -62,6 +64,7 @@ public sealed partial class TacticalMapControl
         return (new Vector2(PixelWidth, PixelHeight) - size) / 2f + _pan;
     }
 
+    // tile y goes up, pixel y goes down
     public Vector2 TileToPixel(Vector2 tile)
     {
         var scale = PixelsPerTile;
@@ -105,6 +108,7 @@ public sealed partial class TacticalMapControl
         return true;
     }
 
+    // at fit zoom the map stays centred, past it the map edges cant be dragged into view
     private void ClampView()
     {
         _zoom = Math.Clamp(_zoom, MinZoom, MaxZoom);
@@ -122,6 +126,7 @@ public sealed partial class TacticalMapControl
         _pan = new Vector2(Math.Clamp(_pan.X, -max.X, max.X), Math.Clamp(_pan.Y, -max.Y, max.Y));
     }
 
+    // 0 at fit zoom, eases up to 1 so panning fades in instead of snapping on
     private float GetPanResistance()
     {
         if (_zoom <= FitZoom + FitZoomEpsilon)
@@ -151,6 +156,7 @@ public sealed partial class TacticalMapControl
         }
         else
         {
+            // keep the tile under the cursor in place
             _pan += pixel - TileToPixel(anchor);
             ClampView();
         }
@@ -160,6 +166,7 @@ public sealed partial class TacticalMapControl
     private float GetBlipSize()
     {
         var overlay = GetOverlayScale();
+        // grows with the window but shrinks a little when zoomed in so blips dont hide the map
         var baseSize = BaseBlipSize * (1f + (overlay - 1f) * 0.6f);
         var zoomReduction = 1f / MathF.Pow(MathF.Max(_zoom, 0.3f), 0.3f);
         return baseSize * zoomReduction * BlipSizeMultiplier;

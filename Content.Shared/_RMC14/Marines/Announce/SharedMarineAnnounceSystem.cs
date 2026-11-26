@@ -14,6 +14,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Robust.Shared.Audio;
@@ -35,6 +36,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRankSystem _rankSystem = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -130,7 +132,16 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (text.Length > CharacterLimit)
             text = text[..CharacterLimit].Trim();
 
-        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName, overlay: ent.Comp.AnnouncementOverlay);
+        Filter? filter = null;
+        if (ent.Comp.AnnounceFactions.Count > 0)
+        {
+            var factions = ent.Comp.AnnounceFactions;
+            filter = Filter.Empty().AddWhereAttachedEntity(e =>
+                HasComp<GhostComponent>(e) || _npcFaction.IsMemberOfAny(e, factions));
+        }
+
+        var author = ent.Comp.AnnounceAuthor is { } authorId ? Loc.GetString(authorId) : null;
+        AnnounceSigned(args.Actor, text, author: author, name: ent.Comp.AnnounceName, filter: filter, overlay: ent.Comp.AnnouncementOverlay);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);

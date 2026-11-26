@@ -26,19 +26,27 @@ public sealed partial class TacticalMapControl
     private const float PingMaxAlpha = 0.65f;
     private const float PingRingThickness = 1.5f;
     private const int PingSegments = 32;
-    private const float RadiusPreviewFillAlpha = 0.12f;
     private const float MortarOverlayFillAlpha = 0.4f;
     private const float StructureOverlayFillAlpha = 0.3f;
     private const float GlowAlpha = 1f;
     private const float CrtTexelsPerTile = 2f;
     private const float CrtStrength = 1f;
+    private const float TooltipOffset = 14f;
+    private const float RouteThickness = 2.5f;
+    private const float RouteGlowScale = 3.5f;
+    private const float RouteGlowAlpha = 0.18f;
+    private const float RouteChevronSpacing = 18f;
+    private const float RouteChevronSpeed = 24f;
+    private const float RouteChevronSize = 4f;
+    private const float RouteArrowLength = 10f;
+    private const float RouteArrowWidth = 6f;
+    private const float TooltipPadding = 5f;
+    private const float TooltipLineSpacing = 2f;
 
     private static readonly Color AreaLabelColor = Color.White;
     private static readonly Color AreaLabelBackground = Color.Black.WithAlpha(0.5f);
     private static readonly Color TacticalLabelBackground = Color.FromHex("#0D1A2F").WithAlpha(0.5f);
     private static readonly Color LabelDragBackground = Color.Black.WithAlpha(0.7f);
-    private static readonly Color OrbitalRadiusColor = Color.FromHex("#F2C94C");
-    private static readonly Color MortarRadiusColor = Color.FromHex("#4FC3FF");
     private static readonly Color MortarRangeColor = Color.FromHex("#43B581");
     private static readonly Color GridColor = Color.FromHex("#88C7FA").WithAlpha(0.06f);
     private static readonly Color PingColor = Color.FromHex("#00FFFF");
@@ -54,6 +62,7 @@ public sealed partial class TacticalMapControl
     private readonly List<Vector2> _pathBuffer = new();
     private readonly List<Vector2> _stripBuffer = new();
     private readonly List<Vector2> _joinBuffer = new();
+    private readonly List<(string Text, Font Font, Color Color)> _tooltipLines = new();
 
     public string? InfoText { get; set; }
     public Vector2i? InfoIndices { get; set; }
@@ -69,6 +78,7 @@ public sealed partial class TacticalMapControl
         var topLeft = GetTopLeft();
         var rect = UIBox2.FromDimensions(topLeft, new Vector2(_width, _height) * scale);
 
+        // back to front, the order matters
         DrawBase(handle, topLeft, rect, scale);
         DrawOverlays(handle, rect);
         DrawTiles(handle, _mortarTiles, MortarRangeColor.WithAlpha(MortarOverlayFillAlpha));
@@ -79,16 +89,19 @@ public sealed partial class TacticalMapControl
         DrawModeBorder(handle, rect);
         DrawStrokes(handle);
         _tool?.DrawPreview(this, handle);
-        DrawRadiusPreview(handle);
         DrawLabels(handle);
+        DrawRoute(handle, time);
         DrawStructures(handle, time);
         DrawBlips(handle, time);
+        DrawRouteTarget(handle, time);
         DrawSelf(handle, time);
         DrawWatched(handle, time);
         DrawMortarMarker(handle, time);
         DrawInfoText(handle);
+        DrawBlipTooltip(handle, time);
     }
 
+    // glow, then the black outline, then the map on top
     private void DrawBase(DrawingHandleScreen handle, Vector2 topLeft, UIBox2 rect, float scale)
     {
         var glowPadding = new Vector2(GlowPadding, GlowPadding) * scale;
@@ -128,6 +141,7 @@ public sealed partial class TacticalMapControl
 
     private void DrawTile(DrawingHandleScreen handle, Vector2i tile, Color color, float scale)
     {
+        // y + 1 is the tiles top edge, which is the top left once flipped to pixels
         var topLeft = TileToPixel(new Vector2(tile.X, tile.Y + 1));
         handle.DrawRect(UIBox2.FromDimensions(topLeft, new Vector2(scale, scale)), color);
     }
@@ -146,6 +160,7 @@ public sealed partial class TacticalMapControl
 
     private void DrawGrid(DrawingHandleScreen handle, UIBox2 rect, float scale)
     {
+        // lines would just be noise this zoomed out
         if (scale < 1.5f)
             return;
 
@@ -218,6 +233,7 @@ public sealed partial class TacticalMapControl
             _pixelBuffer.Add(TileToPixel(point));
         }
 
+        // a slightly wider faint pass underneath softens the edges
         BuildPath(_pixelBuffer, stroke.Smooth, _pathBuffer);
         if (_pathBuffer.Count == 1)
         {
@@ -233,6 +249,8 @@ public sealed partial class TacticalMapControl
     private static void BuildPath(List<Vector2> points, bool smooth, List<Vector2> path)
     {
         path.Clear();
+
+        // catmull rom through the points, sampled every few pixels
         if (smooth && points.Count >= 3)
         {
             for (var i = 0; i < points.Count - 1; i++)
@@ -256,6 +274,7 @@ public sealed partial class TacticalMapControl
             }
         }
 
+        // the spacing check can drop the real end point, put it back
         var last = points[^1];
         if (path.Count > 1 && path[^1] != last)
             path[^1] = last;
@@ -269,6 +288,7 @@ public sealed partial class TacticalMapControl
         path.Add(point);
     }
 
+    // one triangle strip with mitered joins. corners too sharp to miter get capped & covered with a circle
     private void DrawPath(DrawingHandleScreen handle, List<Vector2> path, float thickness, Color color)
     {
         var half = thickness / 2f;
@@ -329,39 +349,6 @@ public sealed partial class TacticalMapControl
         var radius = thickness / 2f;
         if (radius > 0.01f)
             handle.DrawCircle(position, radius, color);
-    }
-
-    private void DrawRadiusPreview(DrawingHandleScreen handle)
-    {
-        if (RadiusMode == TacticalMapRadiusMode.None || _hover is not { } center || !IsWithinMap(center))
-            return;
-
-        var (radius, color, filter) = RadiusMode == TacticalMapRadiusMode.OrbitalBombardment
-            ? (OrbitalRadius, OrbitalRadiusColor, TacticalMapTileFlags.OrbitalBombard)
-            : (MortarRadius, MortarRadiusColor, TacticalMapTileFlags.MortarFire);
-
-        if (radius <= 0f)
-            return;
-
-        var scale = PixelsPerTile;
-        var fill = color.WithAlpha(RadiusPreviewFillAlpha);
-        var max = (int) MathF.Ceiling(radius);
-        var radiusSquared = radius * radius;
-        for (var dx = -max; dx <= max; dx++)
-        {
-            for (var dy = -max; dy <= max; dy++)
-            {
-                if (dx * dx + dy * dy > radiusSquared)
-                    continue;
-
-                var tile = new Vector2i(center.X + dx, center.Y + dy);
-                if (TryGetTileFlags(tile, out var packed) &&
-                    (TacticalMapChunk.GetEffectiveFlags(packed) & filter) != 0)
-                {
-                    DrawTile(handle, tile, fill, scale);
-                }
-            }
-        }
     }
 
     private void DrawLabels(DrawingHandleScreen handle)
@@ -487,6 +474,8 @@ public sealed partial class TacticalMapControl
                 continue;
 
             var anchor = GetLabelAnchor(position, showArea && _areaLabels.ContainsKey(position));
+
+            // rough size from the character count, no font measuring needed
             var halfWidth = label.Text.Length * fontSize * 0.3f + padding;
             var halfHeight = fontSize * 0.5f + padding;
             if (MathF.Abs(pixel.X - anchor.X) <= halfWidth && MathF.Abs(pixel.Y - anchor.Y) <= halfHeight)
@@ -499,6 +488,7 @@ public sealed partial class TacticalMapControl
         return false;
     }
 
+    // drawn before the other blips so they sit underneath
     private void DrawStructures(DrawingHandleScreen handle, TimeSpan time)
     {
         if (_structureBlips.Count == 0)
@@ -528,6 +518,7 @@ public sealed partial class TacticalMapControl
             if (IsStructureBlip(view.Blip, out _))
                 continue;
 
+            // DrawSelf handles it when we have our own position, otherwise ping the feed copy
             if (_selfIndices != null && view.Entity == _selfEntity)
                 continue;
 
@@ -567,6 +558,7 @@ public sealed partial class TacticalMapControl
         var color = blip.Color.WithAlpha(blip.Color.A * alpha);
         var overlay = Color.White.WithAlpha(alpha);
 
+        // only the background takes the squad tint, icon & status stay white
         handle.DrawTextureRect(GetFrame(blip.Background ?? BackgroundRsi, time), rect, color);
         handle.DrawTextureRect(GetFrame(blip.Icon, time), rect, overlay);
 
@@ -593,6 +585,7 @@ public sealed partial class TacticalMapControl
             handle.DrawTextureRect(GetFrame(status, time), rect, overlay);
     }
 
+    // expanding, fading ring. built from quads since DrawCircle cant do hollow rings with a thickness
     private void DrawPing(DrawingHandleScreen handle, Vector2 center, float blipSize, TimeSpan time, Color pingColor)
     {
         var progress = (float) (time.TotalSeconds % PingDuration) / PingDuration;
@@ -634,5 +627,154 @@ public sealed partial class TacticalMapControl
 
         var anchor = IndicesToPixelCenter(indices) - new Vector2(0f, GetBlipSize() * 1.5f);
         DrawLabel(handle, GetLabelFont(GetOverlayScale()), text, anchor, Color.White, LabelDragBackground);
+    }
+
+    private void DrawBlipTooltip(DrawingHandleScreen handle, TimeSpan time)
+    {
+        if (_mouse is not { } mouse || _panning && _panMoved || _toolActive || !TryFindHoveredBlip(mouse, out var blip))
+            return;
+
+        _tooltipLines.Clear();
+        if (!string.IsNullOrWhiteSpace(blip.Name))
+            _tooltipLines.Add((blip.Name, TacticalMapStyle.Font(MapTheme, TacticalMapTextStyle.Title), MapTheme.Text));
+
+        if (!string.IsNullOrWhiteSpace(blip.Role))
+            _tooltipLines.Add((blip.Role, TacticalMapStyle.Font(MapTheme, TacticalMapTextStyle.Small), MapTheme.TextMuted));
+
+        if ((blip.Flags & TacticalMapBlipFlags.Dead) != 0)
+        {
+            var small = TacticalMapStyle.Font(MapTheme, TacticalMapTextStyle.Small);
+            if ((blip.Flags & TacticalMapBlipFlags.Undefibbable) != 0)
+            {
+                _tooltipLines.Add((Loc.GetString("ui-tactical-map-tooltip-unrevivable"), small, MapTheme.Danger));
+            }
+            else if (blip.UnrevivableEnd > time)
+            {
+                var left = blip.UnrevivableEnd - time;
+                var text = Loc.GetString("ui-tactical-map-tooltip-revivable",
+                    ("time", $"{(int) left.TotalMinutes}:{left.Seconds:D2}"));
+                _tooltipLines.Add((text, small, MapTheme.Warning));
+            }
+            else
+            {
+                _tooltipLines.Add((Loc.GetString("ui-tactical-map-tooltip-dead"), small, MapTheme.Danger));
+            }
+        }
+
+        if (_tooltipLines.Count == 0)
+            return;
+
+        var scale = UIScale;
+        var padding = TooltipPadding * scale;
+        var spacing = TooltipLineSpacing * scale;
+        var width = 0f;
+        var height = 0f;
+        foreach (var (text, font, _) in _tooltipLines)
+        {
+            var size = handle.GetDimensions(font, text, scale);
+            width = MathF.Max(width, size.X);
+            height += font.GetLineHeight(scale) + spacing;
+        }
+
+        height -= spacing;
+        var box = new Vector2(width + padding * 2f, height + padding * 2f);
+        // flip to the other side of the cursor near the edges
+        var position = mouse + new Vector2(TooltipOffset, TooltipOffset) * scale;
+        if (position.X + box.X > PixelSize.X)
+            position.X = mouse.X - TooltipOffset * scale - box.X;
+
+        if (position.Y + box.Y > PixelSize.Y)
+            position.Y = mouse.Y - TooltipOffset * scale - box.Y;
+
+        position = Vector2.Max(position, Vector2.Zero);
+        var rect = UIBox2.FromDimensions(position, box);
+        handle.DrawRect(rect, MapTheme.Background.WithAlpha(0.92f));
+        handle.DrawRect(rect, MapTheme.Border, false);
+
+        var cursor = position + new Vector2(padding, padding);
+        foreach (var (text, font, color) in _tooltipLines)
+        {
+            handle.DrawString(font, cursor, text, scale, color);
+            cursor.Y += font.GetLineHeight(scale) + spacing;
+        }
+    }
+
+    private void DrawRoute(DrawingHandleScreen handle, TimeSpan time)
+    {
+        if (_routeFrom is not { } from || _routeTo is not { } to || from == to ||
+            !IsWithinMap(from) || !IsWithinMap(to))
+        {
+            return;
+        }
+
+        var scale = UIScale;
+        var blip = GetBlipSize();
+        var start = IndicesToPixelCenter(from);
+        var end = IndicesToPixelCenter(to);
+        var delta = end - start;
+        var length = delta.Length();
+
+        // trim both ends so the line doesn't cover the blips
+        var startTrim = blip * 0.7f;
+        var endTrim = blip * 0.8f;
+        if (length <= startTrim + endTrim)
+            return;
+
+        var direction = delta / length;
+        var normal = new Vector2(-direction.Y, direction.X);
+        var lineStart = start + direction * startTrim;
+        var tip = end - direction * endTrim;
+        var arrowLength = RouteArrowLength * scale;
+        var arrowWidth = RouteArrowWidth * scale;
+        var lineEnd = tip - direction * arrowLength * 0.6f;
+        var thickness = RouteThickness * scale;
+
+        // DrawPrimitives treats colours as linear
+        var color = Color.ToSrgb(_routeColor);
+
+        var glow = normal * thickness * RouteGlowScale / 2f;
+        _quad[0] = lineStart + glow;
+        _quad[1] = lineEnd + glow;
+        _quad[2] = lineStart - glow;
+        _quad[3] = _quad[2];
+        _quad[4] = _quad[1];
+        _quad[5] = lineEnd - glow;
+        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _quad, color.WithAlpha(RouteGlowAlpha));
+
+        _pathBuffer.Clear();
+        _pathBuffer.Add(lineStart);
+        _pathBuffer.Add(lineEnd);
+        DrawPath(handle, _pathBuffer, thickness, color);
+
+        var spacing = RouteChevronSpacing * scale;
+        var chevron = RouteChevronSize * scale;
+        var travel = (lineEnd - lineStart).Length() - chevron;
+
+        // chevrons scroll toward the target
+        var offset = (float) (time.TotalSeconds * RouteChevronSpeed * scale % spacing);
+        var chevronColor = Color.ToSrgb(Color.InterpolateBetween(_routeColor, Color.White, 0.6f));
+        for (var distance = offset + chevron; distance < travel; distance += spacing)
+        {
+            var center = lineStart + direction * distance;
+            _pathBuffer.Clear();
+            _pathBuffer.Add(center - direction * chevron + normal * chevron);
+            _pathBuffer.Add(center);
+            _pathBuffer.Add(center - direction * chevron - normal * chevron);
+            DrawPath(handle, _pathBuffer, thickness * 0.6f, chevronColor);
+        }
+
+        var back = tip - direction * arrowLength;
+        _quad[0] = tip;
+        _quad[1] = back + normal * arrowWidth;
+        _quad[2] = back - normal * arrowWidth;
+        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _quad.AsSpan(0, 3), color);
+    }
+
+    private void DrawRouteTarget(DrawingHandleScreen handle, TimeSpan time)
+    {
+        if (_routeTo is not { } to || !IsWithinMap(to))
+            return;
+
+        DrawPing(handle, IndicesToPixelCenter(to), GetBlipSize(), time, _routeColor);
     }
 }

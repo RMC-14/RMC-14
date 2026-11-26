@@ -4,6 +4,9 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Actions;
+using Content.Shared.Inventory;
+using Content.Shared.Mind;
+using Content.Shared.Roles.Jobs;
 using Content.Shared.GameTicking;
 using Content.Shared.Mobs.Systems;
 using Robust.Server.GameObjects;
@@ -25,7 +28,10 @@ public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -49,6 +55,7 @@ public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
         InitializeChannels();
         InitializeTracking();
         InitializeViewers();
+        InitializeGrant();
         InitializeBaseMap();
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
@@ -90,12 +97,14 @@ public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
         UpdateBaseMaps();
 
         var time = _timing.CurTime;
+        // full redo every so often in case an event was missed
         if (time >= _nextForceUpdate)
         {
             _nextForceUpdate = time + _forceUpdateEvery;
             ForceRefresh();
         }
 
+        // blip moves are batched to this interval
         if (time >= _nextUpdate)
         {
             _nextUpdate = time + _updateEvery;

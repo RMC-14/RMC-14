@@ -111,7 +111,7 @@
     pocket2: RMCPouchGeneralLarge
   storage:
     pocket1:
-    # TODO RMC14: RMCTabletPMC
+    - RMCTabletPMC
     - RMCRangefinder
 
 - type: playTimeTracker

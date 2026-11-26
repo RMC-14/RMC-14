@@ -1,0 +1,22 @@
+<tunnel:SelectDestinationTunnelPanel
+    xmlns="https://spacestation14.io"
+    xmlns:tunnel="clr-namespace:Content.Client._RMC14.Xenonids.Construction.Tunnel"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap.Controls"
+    Orientation="Vertical" SetWidth="220" Margin="4 4 0 4" SeparationOverride="4">
+    <controls:TacticalMapSection Title="{Loc xeno-ui-tunnel-section-tunnels}" VerticalExpand="True">
+        <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+            <BoxContainer Name="TunnelList" Orientation="Vertical" SeparationOverride="2" HorizontalExpand="True" />
+        </ScrollContainer>
+        <controls:TacticalMapLabel Name="EmptyLabel" Text="{Loc xeno-ui-tunnel-none}" TextStyle="Small" Visible="False" />
+    </controls:TacticalMapSection>
+    <controls:TacticalMapSection Title="{Loc xeno-ui-tunnel-section-route}">
+        <BoxContainer Orientation="Vertical" SeparationOverride="2">
+            <controls:TacticalMapLabel Name="CurrentLabel" TextStyle="Small" ClipText="True" />
+            <controls:TacticalMapLabel Name="SelectedLabel" ClipText="True" />
+        </BoxContainer>
+    </controls:TacticalMapSection>
+    <controls:TacticalMapButton Name="OnlyTunnelsButton" Text="{Loc xeno-ui-tunnel-only-tunnels}"
+                                AlignLeft="True" HorizontalExpand="True" MinHeight="22" />
+    <controls:TacticalMapButton Name="TravelButton" Kind="Primary" Text="{Loc xeno-ui-select-destination-tunnel-submit-text}"
+                                HorizontalExpand="True" MinHeight="30" />
+</tunnel:SelectDestinationTunnelPanel>

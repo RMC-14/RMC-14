@@ -38,5 +38,63 @@
   - type: Corrodible
     isCorrodible: false
 
+- type: entity
+  parent: BaseItem
+  id: RMCTabletFactionBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/command_tablet.rsi
+    state: cotablet
+  - type: Item
+    size: Normal
+  - type: ActivatableUI
+    key: enum.MarineCommunicationsComputerUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.MarineCommunicationsComputerUI.Key:
+        type: MarineCommunicationsComputerBui
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
+  - type: Tag
+    tags:
+    - CommandTablet
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCTabletFactionBase
+  id: RMCTabletSPP
+  name: SPP field commander's tablet
+  description: A special device used by field SPP commanders.
+  components:
+  - type: MarineCommunicationsComputer
+    canCreateEcho: false
+    canDesignateLZ: false
+    announcementOverlay: null
+    announceAuthor: rmc-announcement-author-spp
+    announceFactions: [ SPP ]
+  - type: TacticalMapComputer
+    factions: [ SPP ]
+    squadGroups: [ SPP ]
+    canDraw: true
+
+- type: entity
+  parent: RMCTabletFactionBase
+  id: RMCTabletPMC
+  name: site director's tablet
+  description: A special device used by corporate PMC directors.
+  components:
+  - type: MarineCommunicationsComputer
+    canCreateEcho: false
+    canDesignateLZ: false
+    announcementOverlay: null
+    announceAuthor: rmc-announcement-author-pmc
+    announceFactions: [ WeYa ]
+  - type: TacticalMapComputer
+    factions: [ WeYa ]
+    squadGroups: [ WeYa ]
+    canDraw: true
+
 - type: Tag
   id: CommandTablet

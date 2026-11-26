@@ -86,6 +86,8 @@ public sealed partial class TacticalMapSystem
 
             var index = TacticalMapChunk.GetIndex(tile);
             var packed = PackColor(color);
+
+            // 0 means no tile
             data.Colors[index] = packed == 0 ? 1u : packed;
             data.Flags[index] = TacticalMapChunk.PackFlags(flags, comp.RoofBlocked.GetValueOrDefault(tile));
 
@@ -127,6 +129,7 @@ public sealed partial class TacticalMapSystem
             }
             else if (chunk.Colors.AsSpan().SequenceEqual(data.Colors) && chunk.Flags.AsSpan().SequenceEqual(data.Flags))
             {
+                // untouched chunks keep their tick so they stay out of delta states
                 continue;
             }
 
@@ -170,6 +173,7 @@ public sealed partial class TacticalMapSystem
             Dirty(map);
     }
 
+    // roofing entities block fire support in a circle around them
     private void RecomputeRoofs(Entity<TacticalMapComponent> map)
     {
         var blockedTiles = map.Comp.RoofBlocked;

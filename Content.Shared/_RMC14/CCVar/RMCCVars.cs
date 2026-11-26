@@ -204,7 +204,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.tactical_map_announce_cooldown_seconds", 240, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<int> RMCTacticalMapLineLimit =
-        CVarDef.Create("rmc.tactical_map_line_limit", 1000, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("rmc.tactical_map_line_limit", 4000, CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<int> RMCTacticalMapAdminHistorySize =
         CVarDef.Create("rmc.tactical_map_admin_history_size", 100, CVar.SERVER | CVar.REPLICATED);

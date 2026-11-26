@@ -2,7 +2,6 @@ using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Content.Shared.Preferences;
@@ -238,7 +237,6 @@ public sealed partial class CMDistressSignalRuleSystem
         if (!_mind.TryGetMind(playerId, out var mind))
             mind = _mind.CreateMind(playerId);
 
-        RemCompDeferred<TacticalMapUserComponent>(survivorMob);
         _mind.TransferTo(mind.Value, survivorMob);
         _roles.MindAddJobRole(mind.Value, jobPrototype: spawnAsJob);
         _playTime.PlayerRolesChanged(player);

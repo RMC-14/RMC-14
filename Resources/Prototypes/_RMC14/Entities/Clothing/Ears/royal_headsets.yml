@@ -4,6 +4,9 @@
   name: royal marine headset
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets.
   components:
+  - type: GrantTacticalMap
+    grantMap: false
+    factions: [UNMC]
   - type: GrantSquadLeaderTracker
     defaultMode: RCMTeamLead
     trackerModes:
@@ -18,7 +21,6 @@
   - type: RMCHeadset
     channels:
     - RoyalMarine
-  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetRoyalMarine
@@ -32,7 +34,6 @@
       - RMCEncryptionKeyRoyalMarineCommand
   - type: RMCHeadset
     radioTextIncrease: 2
-  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetRoyalMarine
@@ -46,7 +47,6 @@
       - RMCEncryptionKeyRoyalMarineCommand
   - type: RMCHeadset
     radioTextIncrease: 3
-  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetRoyalMarine
@@ -72,7 +72,6 @@
   - type: RemoveComponents
     components:
     - type: RMCHeadset
-  - type: GrantTacMapAlert
   - type: GrantAreaInfo
 
 - type: entity
@@ -88,7 +87,6 @@
       - RMCEncryptionKeyRoyalMarineCommandPVE
   - type: RMCHeadset
     radioTextIncrease: 3
-  - type: GrantTacMapAlert
 
 - type: entity
   parent: CMEncryptionKey

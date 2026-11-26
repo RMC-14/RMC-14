@@ -434,15 +434,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
 
         args.Handled = true;
-        if (!HasComp<MarineCommunicationsComputerComponent>(ent) &&
-            (ent.Comp.Squad is not { } squadNet ||
-             !TryGetEntity(squadNet, out var squad) ||
-             !_squad.IsInSquad(args.Target, squad.Value)))
-        {
-            _popup.PopupCursor("That marine is not in the selected squad.", args.Actor, PopupType.MediumCaution);
-            return;
-        }
-
         if (!ent.Comp.ShowHidden && IsHidden(ent, GetNetEntity(args.Target)))
         {
             _popup.PopupCursor("That marine is hidden from overwatch.", args.Actor, PopupType.MediumCaution);

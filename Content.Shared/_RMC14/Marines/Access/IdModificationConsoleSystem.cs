@@ -8,7 +8,6 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Skills.Pamphlets;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
-using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
@@ -62,7 +61,6 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 subs.Event<IdModificationConsoleSignInBuiMsg>(OnSignInMsg);
                 subs.Event<IdModificationConsoleSignInTargetBuiMsg>(OnSignInTargetMsg);
                 subs.Event<IdModificationConsoleIFFChangeBuiMsg>(OnIFFChangeMsg);
-                subs.Event<IdModificationConsoleTacMapAccessBuiMsg>(OnTacMapAccessMsg);
                 subs.Event<IdModificationConsoleJobChangeBuiMsg>(OnJobChangeMsg);
                 subs.Event<IdModificationConsoleTerminateConfirmBuiMsg>(OnTerminateConfirmMsg);
                 subs.Event<IdModificationConsoleAssignSquadMsg>(OnTerminalAssignSquadMsg);
@@ -204,38 +202,6 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
 
         Dirty(ent);
-    }
-
-    private void OnTacMapAccessMsg(Entity<IdModificationConsoleComponent> ent,
-        ref IdModificationConsoleTacMapAccessBuiMsg args)
-    {
-        if (!ent.Comp.Authenticated || !ent.Comp.TacticalMapFactions.Contains(args.Faction))
-            return;
-
-        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) || uid == null)
-            return;
-
-        var access = EnsureComp<TacticalMapAccessComponent>(uid.Value);
-        if (!args.Revoke)
-        {
-            if (access.Factions.Add(args.Faction))
-            {
-                Dirty(uid.Value, access);
-                _adminLogger.Add(LogType.RMCIdModify,
-                    LogImpact.Medium,
-                    $"{ToPrettyString(args.Actor):player} has granted {args.Faction.Id} tactical map access for {ToPrettyString(uid):entity}");
-            }
-        }
-        else
-        {
-            if (access.Factions.Remove(args.Faction))
-            {
-                Dirty(uid.Value, access);
-                _adminLogger.Add(LogType.RMCIdModify,
-                    LogImpact.Low,
-                    $"{ToPrettyString(args.Actor):player} has revoked {args.Faction.Id} tactical map access for {ToPrettyString(uid):entity}");
-            }
-        }
     }
 
     private void OnSignInTargetMsg(Entity<IdModificationConsoleComponent> ent,

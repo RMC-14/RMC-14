@@ -33,7 +33,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         SubscribeLocalEvent<TacticalMapComputerComponent, TacticalMapCollectAccessEvent>(OnComputerCollectAccess);
 
         SubscribeLocalEvent<InventoryComponent, TacticalMapCollectAccessEvent>(OnInventoryCollectAccess);
-        SubscribeLocalEvent<TacticalMapAccessComponent, InventoryRelayedEvent<TacticalMapCollectAccessEvent>>(OnAccessItemCollectAccess);
+        SubscribeLocalEvent<GrantTacticalMapComponent, InventoryRelayedEvent<TacticalMapCollectAccessEvent>>(OnGrantCollectAccess);
 
         SubscribeLocalEvent<TacticalMapComponent, ComponentGetState>(OnMapGetState);
         SubscribeLocalEvent<TacticalMapLiveFeedComponent, ComponentGetState>(OnLiveFeedGetState);
@@ -115,14 +115,17 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         _inventory.RelayEvent(ent, ref args);
     }
 
-    private void OnAccessItemCollectAccess(Entity<TacticalMapAccessComponent> ent, ref InventoryRelayedEvent<TacticalMapCollectAccessEvent> args)
+    private void OnGrantCollectAccess(Entity<GrantTacticalMapComponent> ent, ref InventoryRelayedEvent<TacticalMapCollectAccessEvent> args)
     {
-        args.Args.Factions.UnionWith(ent.Comp.Factions);
+        if (ent.Comp.GrantMap)
+            args.Args.Factions.UnionWith(ent.Comp.Factions);
     }
 
     private void OnMapGetState(Entity<TacticalMapComponent> ent, ref ComponentGetState args)
     {
         var comp = ent.Comp;
+
+        // full state the 1st time, then only chunks changed since FromTick plus the key set for removals
         if (args.FromTick <= comp.CreationTick)
         {
             var chunks = new Dictionary<Vector2i, TacticalMapChunkData>(comp.Chunks.Count);
@@ -164,6 +167,8 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     {
         var comp = ent.Comp;
         var channel = GetNetEntity(comp.Channel) ?? NetEntity.Invalid;
+
+        // same delta scheme as the base map, per blip
         if (args.FromTick <= comp.CreationTick)
         {
             args.State = new TacticalMapLiveFeedState(channel, new Dictionary<NetEntity, TacticalMapBlip>(comp.Blips));
@@ -189,7 +194,8 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     public TacticalMapCollectAccessEvent CollectAccess(EntityUid viewer)
     {
-        var ev = new TacticalMapCollectAccessEvent(SlotFlags.IDCARD);
+        // relayed to the ears slot so headsets can grant access
+        var ev = new TacticalMapCollectAccessEvent(SlotFlags.EARS);
         RaiseLocalEvent(viewer, ref ev);
         return ev;
     }
@@ -245,6 +251,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
             if (!computer.CanDraw || !_skills.HasSkill(actor, computer.Skill, computer.SkillLevel))
                 return false;
         }
+        // personal map can only be drawn on by its owner
         else if (!TryComp(viewer, out TacticalMapUserComponent? user) || !user.CanDraw || viewer != actor)
         {
             return false;

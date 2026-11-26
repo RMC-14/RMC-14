@@ -36,6 +36,7 @@ public sealed partial class TacticalMapControl
                 return;
             }
 
+            // point mode picks a tile, except clicks on removable structures
             if (PointMode)
             {
                 if (RemovableBlipClicks &&
@@ -61,6 +62,7 @@ public sealed partial class TacticalMapControl
             return;
         }
 
+        // right drag pans, right click without moving opens a menu on release
         if (args.Function == EngineKeyFunctions.UIRightClick)
         {
             _panning = true;
@@ -121,6 +123,8 @@ public sealed partial class TacticalMapControl
             if (!_panMoved && (pixel - _panStart).Length() >= MinDragDistance && GetPanResistance() > 0f)
             {
                 _panMoved = true;
+
+                // start from here so the view doesnt jump by the drag threshold
                 _panLast = pixel;
             }
 
@@ -137,6 +141,19 @@ public sealed partial class TacticalMapControl
             _tool?.Move(this, pixel);
 
         UpdateHover(pixel);
+    }
+
+    // keybindup is dropped if the map is hidden mid drag, so cancel here
+    // a normal release runs keybindup 1st, so this doesnt cut it short
+    protected override void ControlFocusExited()
+    {
+        base.ControlFocusExited();
+        _panning = false;
+        if (!_toolActive)
+            return;
+
+        _toolActive = false;
+        _tool?.Cancel();
     }
 
     protected override void MouseExited()

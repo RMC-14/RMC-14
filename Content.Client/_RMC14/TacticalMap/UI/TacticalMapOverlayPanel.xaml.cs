@@ -13,10 +13,8 @@ public sealed partial class TacticalMapOverlayPanel : TacticalMapSection
 
     private readonly TacticalMapButton[] _roofButtons = new TacticalMapButton[TacticalMapRoofLevels.Count];
     private TacticalMapOverlays _overlays;
-    private TacticalMapRadiusMode _radius;
 
     public event Action<TacticalMapOverlays>? OverlaysChanged;
-    public event Action<TacticalMapRadiusMode>? RadiusModeChanged;
 
     public TacticalMapOverlayPanel()
     {
@@ -42,15 +40,12 @@ public sealed partial class TacticalMapOverlayPanel : TacticalMapSection
         }
 
         LinkedLzButton.OnPressed += _ => Toggle(TacticalMapOverlays.LinkedLz);
-        OrbitalButton.OnPressed += _ => ToggleRadius(TacticalMapRadiusMode.OrbitalBombardment);
-        MortarButton.OnPressed += _ => ToggleRadius(TacticalMapRadiusMode.Mortar);
         UpdateButtons();
     }
 
-    public void SetState(TacticalMapOverlays overlays, TacticalMapRadiusMode radius)
+    public void SetState(TacticalMapOverlays overlays)
     {
         _overlays = overlays;
-        _radius = radius;
         UpdateButtons();
     }
 
@@ -59,13 +54,6 @@ public sealed partial class TacticalMapOverlayPanel : TacticalMapSection
         _overlays ^= flag;
         UpdateButtons();
         OverlaysChanged?.Invoke(_overlays);
-    }
-
-    private void ToggleRadius(TacticalMapRadiusMode mode)
-    {
-        _radius = _radius == mode ? TacticalMapRadiusMode.None : mode;
-        UpdateButtons();
-        RadiusModeChanged?.Invoke(_radius);
     }
 
     private void UpdateButtons()
@@ -84,8 +72,6 @@ public sealed partial class TacticalMapOverlayPanel : TacticalMapSection
         if (lz)
             active++;
 
-        OrbitalButton.Active = _radius == TacticalMapRadiusMode.OrbitalBombardment;
-        MortarButton.Active = _radius == TacticalMapRadiusMode.Mortar;
         Detail = active > 0 ? Loc.GetString("ui-tactical-map-overlay-active-count", ("count", active)) : null;
     }
 }

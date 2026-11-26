@@ -6,6 +6,9 @@
   description: A special headset used by corporate personnel.
   suffix: WeYa, PMC, HvH,
   components:
+  - type: GrantTacticalMap
+    grantMap: true
+    factions: []
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
     state: pmc_headset

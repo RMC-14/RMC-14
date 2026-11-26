@@ -30,13 +30,6 @@ public enum TacticalMapOverlays
     LinkedLz = 1 << 5,
 }
 
-public enum TacticalMapRadiusMode
-{
-    None,
-    OrbitalBombardment,
-    Mortar,
-}
-
 public sealed partial class TacticalMapControl : Control
 {
     public const float OverlayUnitsPerTile = 3f;
@@ -79,6 +72,9 @@ public sealed partial class TacticalMapControl : Control
     private Vector2i? _selfIndices;
     private TacticalMapBlip? _selfBlip;
     private Vector2i? _watchedIndices;
+    private Vector2i? _routeFrom;
+    private Vector2i? _routeTo;
+    private Color _routeColor = Color.White;
 
     private Vector2i? _mortarCenter;
     private int _mortarMinRange;
@@ -96,9 +92,6 @@ public sealed partial class TacticalMapControl : Control
     public bool LabelsEnabled { get; set; } = true;
     public TacticalMapLabelMode LabelMode { get; set; } = TacticalMapLabelMode.All;
     public TacticalMapOverlays Overlays { get; set; }
-    public TacticalMapRadiusMode RadiusMode { get; set; }
-    public float OrbitalRadius { get; set; } = 17.5f;
-    public float MortarRadius { get; set; } = 5.3f;
     public float HiveCoreRange { get; set; } = 11.848f;
     public float HivePylonRange { get; set; } = 8.463f;
     public bool PointMode { get; set; }
@@ -108,7 +101,7 @@ public sealed partial class TacticalMapControl : Control
     public bool RemovableBlipClicks { get; set; }
     public Color DrawColor { get; set; } = Color.Black;
     public float DrawThickness { get; set; } = 2f;
-    public int LineLimit { get; set; } = 1000;
+    public int LineLimit { get; set; } = 4000;
     public int LabelMaxLength { get; set; } = 64;
 
     public event Action<NetEntity>? BlipClicked;
@@ -141,11 +134,13 @@ public sealed partial class TacticalMapControl : Control
             if (_tool == value)
                 return;
 
+            _toolActive = false;
             _tool?.Cancel();
             _tool = value;
         }
     }
 
+    // unsent edits stay on screen after leaving draw mode
     public bool IsDraftVisible => Draft != null && (_tool != null || Draft.Dirty);
 
     public void SetDraft(TacticalMapCanvasDraft? draft)
@@ -153,6 +148,7 @@ public sealed partial class TacticalMapControl : Control
         if (Draft == draft)
             return;
 
+        _toolActive = false;
         _tool?.Cancel();
         Draft = draft;
     }
@@ -169,25 +165,32 @@ public sealed partial class TacticalMapControl : Control
         RebuildStructureOverlays();
     }
 
-    public void SetSelf(NetEntity? entity, Vector2i? indices)
+    public void SetSelf(NetEntity? entity, Vector2i? indices, TacticalMapBlip? blip = null)
     {
         _selfEntity = entity;
         _selfIndices = indices;
-        _selfBlip = null;
-        if (entity == null)
+        _selfBlip = blip;
+        if (entity == null || blip != null)
             return;
 
-        foreach (var blip in _blips)
+        foreach (var view in _blips)
         {
-            if (blip.Entity != entity)
+            if (view.Entity != entity)
                 continue;
 
-            _selfBlip = blip.Blip;
+            _selfBlip = view.Blip;
             break;
         }
     }
 
     public Vector2i? SelfIndices => _selfIndices;
+
+    public void SetRoute(Vector2i? from, Vector2i? to, Color color)
+    {
+        _routeFrom = from;
+        _routeTo = to;
+        _routeColor = color;
+    }
 
     public void SetWatched(Vector2i? indices)
     {
@@ -245,6 +248,7 @@ public sealed partial class TacticalMapControl : Control
         }
     }
 
+    // shades what hive cores (ob) & pylons (cas) protect, only on tiles where the area would allow it
     private void RebuildStructureOverlays()
     {
         _structureBlips.Clear();
@@ -294,6 +298,44 @@ public sealed partial class TacticalMapControl : Control
         return blip.Icon.RsiState == HivePylonState;
     }
 
+    private bool TryFindHoveredBlip(Vector2 pixel, out TacticalMapBlip found)
+    {
+        found = default;
+        if (!_hasBase)
+            return false;
+
+        var half = GetBlipSize() / 2f;
+
+        // self is drawn from the user component, so check it first & skip its feed copy
+        if (_selfIndices is { } selfIndices && _selfBlip is { } selfBlip && IsOver(pixel, selfIndices, half))
+        {
+            found = selfBlip with { Indices = selfIndices };
+            return true;
+        }
+
+        for (var i = _blips.Count - 1; i >= 0; i--)
+        {
+            var view = _blips[i];
+            if (_selfIndices != null && view.Entity == _selfEntity)
+                continue;
+
+            if (!IsOver(pixel, view.Blip.Indices, half))
+                continue;
+
+            found = view.Blip;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool IsOver(Vector2 pixel, Vector2i indices, float half)
+    {
+        var center = IndicesToPixelCenter(indices);
+        return MathF.Abs(pixel.X - center.X) <= half && MathF.Abs(pixel.Y - center.Y) <= half;
+    }
+
+    // prefers a blip under the cursor, otherwise the closest one within click tolerance
     public bool TryFindBlip(Vector2 pixel, out TacticalMapBlipView found)
     {
         found = default;
@@ -375,6 +417,8 @@ public sealed partial class TacticalMapControl : Control
         for (var i = _layers.Count - 1; i >= 0; i--)
         {
             var layer = _layers[i];
+
+            // the draft replaces the layer its editing
             if (IsDraftVisible && layer.Channel == Draft!.Channel)
                 continue;
 

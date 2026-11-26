@@ -36,6 +36,8 @@ public sealed class TacticalMapViewBinder : IDisposable
 
     public EntityUid Viewer { get; }
 
+    public Action<List<TacticalMapBlipView>>? BlipFilter { get; set; }
+
     private bool CanEdit => _send != null;
 
     public TacticalMapViewBinder(TacticalMapView view, EntityUid viewer, Action<BoundUserInterfaceMessage>? send)
@@ -72,6 +74,7 @@ public sealed class TacticalMapViewBinder : IDisposable
         }
         catch (Exception e)
         {
+            // runs every frame, so only log each distinct error once
             var error = e.ToString();
             if (error == _lastError)
                 return;
@@ -79,6 +82,12 @@ public sealed class TacticalMapViewBinder : IDisposable
             _lastError = error;
             _sawmill.Error($"Error refreshing the tactical map for {_entMan.ToPrettyString(Viewer)}:\n{e}");
         }
+    }
+
+    public void InvalidateBlips()
+    {
+        _blipRevision = -1;
+        Refresh();
     }
 
     private void RefreshView(bool force)
@@ -89,6 +98,7 @@ public sealed class TacticalMapViewBinder : IDisposable
                                      _entMan.HasComponent<XenoOvipositorCapableComponent>(Viewer));
         _view.SetWatched(GetWatchedIndices());
 
+        // structural rebuilds maps, layers and drafts. otherwise only blips are refreshed
         var structural = force || _revision != _tacticalMap.Revision;
         if (!structural && _blipRevision == _tacticalMap.BlipRevision)
             return;
@@ -116,8 +126,11 @@ public sealed class TacticalMapViewBinder : IDisposable
         else
             _blips.Clear();
 
+        BlipFilter?.Invoke(_blips);
+
         NetEntity? self = null;
         Vector2i? selfIndices = null;
+        TacticalMapBlip? selfBlip = null;
         if (_view.SelectedMap is { } current &&
             Viewer == _player.LocalEntity &&
             _entMan.TryGetComponent(Viewer, out TacticalMapUserComponent? user) &&
@@ -125,9 +138,10 @@ public sealed class TacticalMapViewBinder : IDisposable
         {
             self = _entMan.GetNetEntity(Viewer);
             selfIndices = user.SelfIndices;
+            selfBlip = user.SelfBlip;
         }
 
-        _view.SetBlips(_blips, self, selfIndices, live, snapshotTime);
+        _view.SetBlips(_blips, self, selfIndices, selfBlip, live, snapshotTime);
     }
 
     private void UpdateCanvas()
@@ -147,6 +161,7 @@ public sealed class TacticalMapViewBinder : IDisposable
         if (drawing && _drawTarget == null)
             _drawTarget = _layers.First(l => l.Drawable).Channel;
 
+        // pick up new server versions without throwing away unsent edits
         foreach (var layer in _layers)
         {
             if (layer.Drawable && _drafts.TryGetValue(layer.Channel, out var draft) && draft.ShouldResetTo(layer))
@@ -284,6 +299,7 @@ public sealed class TacticalMapViewBinder : IDisposable
         if (_tacticalMap.TryGetTileIndices(watched, map, out var indices))
             return indices;
 
+        // watched xeno is outside pvs, fall back to its blip
         var net = _entMan.GetNetEntity(watched);
         foreach (var blip in _blips)
         {
@@ -312,6 +328,7 @@ public sealed class TacticalMapViewBinder : IDisposable
         return null;
     }
 
+    // ghosts and the queen eye click the map to move there
     private bool IsPointMode()
     {
         if (_player.LocalEntity is not { } player)

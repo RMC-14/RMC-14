@@ -54,6 +54,8 @@
       - CMEncryptionKeyCommon
   - type: GrantAreaInfo
   - type: GrantTacMapAlert
+  - type: GrantTacticalMap
+    factions: [UNMC]
 
 - type: entity
   parent: RMCHeadsetShip

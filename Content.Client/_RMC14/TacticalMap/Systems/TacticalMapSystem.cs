@@ -9,10 +9,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    // channel -> feed. the channels LiveFeed field isnt networked, so this is filled from feed states
     private readonly Dictionary<EntityUid, EntityUid> _liveFeeds = new();
     private readonly Dictionary<EntityUid, int> _userHashes = new();
     private readonly HashSet<NetEntity> _seenBlips = new();
 
+    // views compare these to know when to rebuild: channels/canvases vs just blips
     public int Revision { get; private set; }
 
     public int BlipRevision { get; private set; }
@@ -42,6 +44,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<TacticalMapComputerComponent, AfterAutoHandleStateEvent>(OnChanged);
     }
 
+    // user state also carries self position every move, only do a full rebuild when channels change
     private void OnUserState(Entity<TacticalMapUserComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         var hash = ent.Comp.Live ? 1 : 0;
@@ -274,6 +277,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         TimeSpan? snapshotTime = null;
         foreach (var channel in channels)
         {
+            // squad channels only have a canvas
             if (!TryComp(channel, out TacticalMapChannelComponent? comp) ||
                 comp.Map != map ||
                 comp.Scope == TacticalMapChannelScope.Squad)
@@ -292,6 +296,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 continue;
             }
 
+            // not live, show the blips from the last submit
             if (!TryComp(channel, out TacticalMapSnapshotComponent? snapshot))
                 continue;
 

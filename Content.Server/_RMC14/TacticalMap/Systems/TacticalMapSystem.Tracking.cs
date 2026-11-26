@@ -1,11 +1,15 @@
+using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
+using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.GameTicking;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.NPC.Components;
@@ -36,6 +40,7 @@ public sealed partial class TacticalMapSystem
         SubscribeLocalEvent<TacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnTrackedAppearanceChanged);
 
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MoveEvent>(OnActiveMove);
+        SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, EntityRenamedEvent>(OnActiveRenamed);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, ComponentRemove>(OnActiveRemoved);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, EntityTerminatingEvent>(OnActiveRemoved);
 
@@ -87,6 +92,11 @@ public sealed partial class TacticalMapSystem
         _dirtyTracked.Add(ent);
     }
 
+    private void OnActiveRenamed(Entity<ActiveTacticalMapTrackedComponent> ent, ref EntityRenamedEvent args)
+    {
+        MarkTrackedDirty(ent.Comp, ent, false, true);
+    }
+
     private void OnActiveRemoved<T>(Entity<ActiveTacticalMapTrackedComponent> ent, ref T args)
     {
         RemoveFromChannels(ent);
@@ -116,6 +126,7 @@ public sealed partial class TacticalMapSystem
 
     private void FlushTracked()
     {
+        // swap so anything marked dirty during the flush waits for the next one
         (_flushingTracked, _dirtyTracked) = (_dirtyTracked, _flushingTracked);
         foreach (var uid in _flushingTracked)
         {
@@ -137,7 +148,7 @@ public sealed partial class TacticalMapSystem
         {
             RemoveFromChannels(ent);
             comp.Map = null;
-            UpdateSelf(ent, null, default);
+            UpdateSelf(ent, null, default, null);
             return;
         }
 
@@ -148,7 +159,6 @@ public sealed partial class TacticalMapSystem
         }
 
         comp.Indices = indices;
-        UpdateSelf(ent, map.Owner, indices);
 
         if (comp.AppearanceDirty)
         {
@@ -156,7 +166,10 @@ public sealed partial class TacticalMapSystem
             UpdateAppearance(ent);
         }
 
-        if (comp.Icon is not { } icon)
+        var tracked = CreateBlip(comp, indices);
+        UpdateSelf(ent, map.Owner, indices, tracked);
+
+        if (tracked is not { } blip)
         {
             RemoveFromChannels(ent);
             return;
@@ -168,21 +181,29 @@ public sealed partial class TacticalMapSystem
             UpdateMembership(ent, map);
         }
 
-        var blip = new TacticalMapBlip(indices,
-            icon,
-            comp.Background,
-            comp.Color,
-            comp.Flags,
-            comp.UnrevivableStart,
-            comp.UnrevivableEnd,
-            comp.Opacity);
-
         var net = GetNetEntity(ent);
         var alwaysVisible = HasComp<TacticalMapAlwaysVisibleComponent>(ent);
         foreach (var channel in comp.Channels)
         {
             WriteBlip(channel, net, blip, alwaysVisible);
         }
+    }
+
+    private static TacticalMapBlip? CreateBlip(ActiveTacticalMapTrackedComponent comp, Vector2i indices)
+    {
+        if (comp.Icon is not { } icon)
+            return null;
+
+        return new TacticalMapBlip(indices,
+            icon,
+            comp.Background,
+            comp.Color,
+            comp.Flags,
+            comp.UnrevivableStart,
+            comp.UnrevivableEnd,
+            comp.Opacity,
+            comp.Name,
+            comp.Role);
     }
 
     private bool TryGetTrackedPosition(EntityUid uid, out Entity<TacticalMapComponent> map, out Vector2i indices)
@@ -192,6 +213,8 @@ public sealed partial class TacticalMapSystem
 
         var target = uid;
         var xform = Transform(uid);
+
+        // not on a tacmap grid (inside vehicle), let something else supply the position
         if (xform.GridUid is not { } ownGrid || !HasComp<TacticalMapComponent>(ownGrid))
         {
             var ev = new TacticalMapGetTrackedPositionEvent();
@@ -230,6 +253,7 @@ public sealed partial class TacticalMapSystem
         if (TryComp(ent, out MapBlipIconOverrideComponent? iconOverride) && iconOverride.Icon != null)
             icon = iconOverride.Icon;
 
+        // a squad background replaces the colour tint
         var color = Color.White;
         if (_squad.TryGetMemberSquad(ent.Owner, out var squad))
         {
@@ -269,12 +293,54 @@ public sealed partial class TacticalMapSystem
         comp.Flags = flags;
         comp.UnrevivableStart = start;
         comp.UnrevivableEnd = end;
+        comp.Name = Name(ent);
+        comp.Role = HasComp<XenoComponent>(ent) ? null : GetRoleName(ent);
+    }
+
+    private string? GetRevealedName(EntityUid uid)
+    {
+        if (!Exists(uid))
+            return null;
+
+        if (TryComp(uid, out FixedIdentityComponent? fixedIdentity) && fixedIdentity.Name is { } nameId)
+        {
+            var ev = new RMCGetFixedIdentityEvent(Loc.GetString(nameId));
+            RaiseLocalEvent(uid, ref ev);
+            return ev.Name;
+        }
+
+        if (HasComp<XenoComponent>(uid))
+            return Loc.GetString("cm-xeno-name");
+
+        return Identity.Name(uid, EntityManager).Name;
+    }
+
+    private string? GetRoleName(EntityUid uid)
+    {
+        var title = _squad.GetSquadTitle(uid);
+        if (title.Length > 0)
+            return title;
+
+        if (TryComp(uid, out OriginalRoleComponent? original) &&
+            _prototypes.TryIndex(original.Job, out var job))
+        {
+            return job.LocalizedName;
+        }
+
+        if (_mind.TryGetMind(uid, out var mindId, out _) &&
+            _jobs.MindTryGetJobName(mindId, out var name))
+        {
+            return name;
+        }
+
+        return null;
     }
 
     private void UpdateMembership(Entity<ActiveTacticalMapTrackedComponent> ent, Entity<TacticalMapComponent> map)
     {
         _channelBuffer.Clear();
 
+        // factions on the tracked component take priority over npc factions
         IEnumerable<ProtoId<NpcFactionPrototype>> factions;
         if (TryComp(ent, out TacticalMapTrackedComponent? tracked) && tracked.Factions.Count > 0)
             factions = tracked.Factions;
@@ -323,6 +389,7 @@ public sealed partial class TacticalMapSystem
             return;
         }
 
+        // a real blip takes over a revealed one
         feed.Revealed.Remove(net);
         if (!feed.Blips.TryGetValue(net, out var existing) || existing != blip)
         {
@@ -331,6 +398,7 @@ public sealed partial class TacticalMapSystem
             Dirty(feedUid, feed);
         }
 
+        // always visible blips are kept in the snapshot
         if (!alwaysVisible || !TryComp(channel, out TacticalMapSnapshotComponent? snapshot))
             return;
 
@@ -379,6 +447,7 @@ public sealed partial class TacticalMapSystem
         ent.Comp.MembershipDirty = true;
     }
 
+    // copies another factions blips into a channels feed
     private void UpdateReveals()
     {
         var maps = EntityQueryEnumerator<TacticalMapComponent>();
@@ -412,9 +481,11 @@ public sealed partial class TacticalMapSystem
 
                         foreach (var (net, blip) in source.Feed.Blips)
                         {
+                            // no chaining reveals
                             if (source.Feed.Revealed.Contains(net))
                                 continue;
 
+                            // the receiver already tracks it for real
                             if (receiver.Feed.Blips.ContainsKey(net) && !receiver.Feed.Revealed.Contains(net))
                                 continue;
 
@@ -426,7 +497,12 @@ public sealed partial class TacticalMapSystem
                                     continue;
                             }
 
-                            desired[net] = blip with { Flags = blip.Flags | TacticalMapBlipFlags.Revealed };
+                            desired[net] = blip with
+                            {
+                                Flags = blip.Flags | TacticalMapBlipFlags.Revealed,
+                                Name = GetRevealedName(GetEntity(net)),
+                                Role = null,
+                            };
                         }
                     }
                 }
@@ -477,16 +553,18 @@ public sealed partial class TacticalMapSystem
             Dirty(side.FeedUid, feed);
     }
 
-    private void UpdateSelf(EntityUid uid, EntityUid? map, Vector2i indices)
+    // own position goes on the user component so it shows even when not on any channel
+    private void UpdateSelf(EntityUid uid, EntityUid? map, Vector2i indices, TacticalMapBlip? blip)
     {
         if (!_selfTracked.Contains(uid) || !TryComp(uid, out TacticalMapUserComponent? user))
             return;
 
-        if (user.SelfMap == map && user.SelfIndices == indices)
+        if (user.SelfMap == map && user.SelfIndices == indices && user.SelfBlip == blip)
             return;
 
         user.SelfMap = map;
         user.SelfIndices = indices;
+        user.SelfBlip = blip;
         Dirty(uid, user);
     }
 }

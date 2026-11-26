@@ -68,9 +68,6 @@ public sealed partial class TacticalMapContextPopup : Popup, ITacticalMapThemed
         if (showCoordinates)
             AddInfoLine(Loc.GetString("ui-tactical-map-context-coords", ("x", info.Indices.X), ("y", info.Indices.Y)));
 
-        if (!string.IsNullOrWhiteSpace(info.AreaId))
-            AddInfoLine(Loc.GetString("ui-tactical-map-context-id", ("id", info.AreaId)));
-
         if (!string.IsNullOrWhiteSpace(info.LinkedLz))
             AddInfoLine(Loc.GetString("ui-tactical-map-context-linked-lz", ("lz", info.LinkedLz)));
 

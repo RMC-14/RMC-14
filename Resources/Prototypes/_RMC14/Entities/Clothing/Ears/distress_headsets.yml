@@ -36,6 +36,9 @@
   name: bureau earpiece
   description: A sleek headset used by The Colony Marshal Bureau. Low profile and comfortable. No one is above the law.
   components:
+  - type: GrantTacticalMap
+    grantMap: false
+    factions: [UNMC]
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
     state: cmb_headset
@@ -64,6 +67,9 @@
   description: A headset commonly worn by WeYa corporate personnel.
   suffix: WeYa, Colony
   components:
+  - type: GrantTacticalMap
+    grantMap: false
+    factions: [UNMC]
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
     state: we_ya_headset
@@ -79,6 +85,9 @@
   name: PMC headset
   description: A special headset used by corporate personnel.
   components:
+  - type: GrantTacticalMap
+    grantMap: true
+    factions: []
   - type: ContainerFill
     containers:
       key_slots:
@@ -101,6 +110,9 @@
   description: A special headset used by corporate personnel.
   suffix: PVE
   components:
+  - type: GrantTacticalMap
+    grantMap: true
+    factions: []
   - type: ContainerFill
     containers:
       key_slots:
@@ -141,6 +153,9 @@
   description: A special headset used by corporate personnel.
   suffix: Director
   components:
+  - type: GrantTacticalMap
+    grantMap: true
+    factions: []
   - type: ContainerFill
     containers:
       key_slots:
@@ -163,6 +178,9 @@
   name: We-Ya headset
   description: A special headset used by corporate personnel.
   components:
+  - type: GrantTacticalMap
+    grantMap: true
+    factions: []
   - type: ContainerFill
     containers:
       key_slots:
@@ -196,6 +214,9 @@
   description: A special headset used by corporate personnel.
   suffix: Director
   components:
+  - type: GrantTacticalMap
+    grantMap: true
+    factions: []
   - type: ContainerFill
     containers:
       key_slots:
@@ -364,6 +385,9 @@
   description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
   suffix: Survivor, Paramarine
   components:
+    - type: GrantTacticalMap
+      grantMap: false
+      factions: [UNMC]
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/headsets.rsi
       state: vai_headset

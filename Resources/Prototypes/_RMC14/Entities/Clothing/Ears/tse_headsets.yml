@@ -35,12 +35,14 @@
   parent: RMCHeadsetIconsTSE
   id: RMCHeadsetTSEAbstract
   components:
+  - type: GrantTacticalMap
+    grantMap: false
+    factions: [UNMC]
   - type: GrantSquadLeaderTracker
     defaultMode: InspectorTSEPA
     trackerModes:
     - InspectorTSEPA
     - SeniorConstableTSEPA
-  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetTSEAbstract

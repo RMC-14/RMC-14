@@ -1,6 +1,8 @@
 rmc-announcement-author = Command
 rmc-announcement-author-shipside = Command Ship
 rmc-announcement-author-highcommand = UNMC High Command
+rmc-announcement-author-spp = SPP Command
+rmc-announcement-author-pmc = PMC Command
 rmc-announcement-author-queen-mother = The Queen Mother
 rmc-announcement-title-command = >> COMMAND <<
 rmc-announcement-title-overwatch = >> OVERWATCH <<

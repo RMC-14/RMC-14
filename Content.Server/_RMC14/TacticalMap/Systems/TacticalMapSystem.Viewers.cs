@@ -23,7 +23,10 @@ public sealed partial class TacticalMapSystem
 
     private sealed class ViewerSession
     {
+        // ref counted, a computer can have the same actor in more than one of its ui keys
         public readonly Dictionary<(EntityUid Viewer, EntityUid Actor), int> Viewers = new();
+
+        // channel & feed entities this session has a pvs override for
         public readonly HashSet<EntityUid> Subscribed = new();
         public bool Dirty;
     }
@@ -164,11 +167,12 @@ public sealed partial class TacticalMapSystem
         var key = (viewer, actor);
         state.Viewers[key] = state.Viewers.GetValueOrDefault(key) + 1;
 
+        // own map, start sending self position
         if (viewer == actor && HasComp<TacticalMapUserComponent>(viewer))
         {
             _selfTracked.Add(viewer);
             if (TryComp(viewer, out ActiveTacticalMapTrackedComponent? active))
-                UpdateSelf(viewer, active.Map, active.Indices);
+                UpdateSelf(viewer, active.Map, active.Indices, CreateBlip(active, active.Indices));
         }
 
         state.Dirty = true;
@@ -245,6 +249,7 @@ public sealed partial class TacticalMapSystem
         }
     }
 
+    // channels & feeds live in nullspace, so clients only get them through session overrides
     private void RefreshSession(ICommonSession session, ViewerSession state)
     {
         _desiredBuffer.Clear();
@@ -265,6 +270,8 @@ public sealed partial class TacticalMapSystem
             foreach (var channel in channels)
             {
                 _desiredBuffer.Add(channel);
+
+                // only live viewers get the feed
                 if (live && TryComp(channel, out TacticalMapChannelComponent? comp) && comp.LiveFeed is { } feed)
                     _desiredBuffer.Add(feed);
             }
@@ -293,6 +300,7 @@ public sealed partial class TacticalMapSystem
 
     private void RefreshViewer(EntityUid viewer)
     {
+        // once per pass, several sessions can share a computer
         if (!_refreshedViewers.Add(viewer))
             return;
 
@@ -320,6 +328,7 @@ public sealed partial class TacticalMapSystem
         }
     }
 
+    // one channel per map per proto, plus per hive/squad for those scopes. created on first use
     private void ResolveChannels(TacticalMapCollectAccessEvent access, List<EntityUid> result)
     {
         var maps = EntityQueryEnumerator<TacticalMapComponent>();
@@ -448,6 +457,7 @@ public sealed partial class TacticalMapSystem
         if (input == null)
             return result;
 
+        // newest first so the point budget keeps the latest strokes
         var budget = LineLimit;
         for (var i = input.Count - 1; i >= 0 && budget > 0; i--)
         {
@@ -455,6 +465,7 @@ public sealed partial class TacticalMapSystem
             if (stroke.Points is not { Count: > 0 } points)
                 continue;
 
+            // stroke that doesnt fit keeps its newest points
             var take = Math.Min(points.Count, budget);
             var clean = new List<Vector2>(take);
             for (var p = points.Count - take; p < points.Count; p++)
@@ -527,6 +538,7 @@ public sealed partial class TacticalMapSystem
         return result;
     }
 
+    // what non live viewers see until the next submit
     private void TakeSnapshot(EntityUid channelId, TacticalMapChannelComponent channel)
     {
         if (!TryComp(channelId, out TacticalMapSnapshotComponent? snapshot))
@@ -555,6 +567,7 @@ public sealed partial class TacticalMapSystem
         ActivateBlip(ent, args.Actor, args.Target);
     }
 
+    // only blips this viewer can actually see
     private void ActivateBlip(EntityUid viewer, EntityUid actor, NetEntity targetNet)
     {
         if (!TryGetEntity(targetNet, out var target) ||
@@ -624,6 +637,7 @@ public sealed partial class TacticalMapSystem
         RaiseLocalEvent(actor, ref ev);
     }
 
+    // ghosts teleport to the clicked tile
     private void OnGhostPointActivated(Entity<GhostComponent> ent, ref TacticalMapPointActivatedEvent args)
     {
         if (args.Handled || !TryComp(args.Map, out MapGridComponent? grid))

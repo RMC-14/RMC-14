@@ -15,7 +15,15 @@ xeno-ui-rename-tunnel-verb = Rename Tunnel
 xeno-ui-enter-tunnel-verb = Enter Tunnel
 
 xeno-ui-select-destination-tunnel-title = Select Destination Tunnel
-xeno-ui-select-destination-tunnel-submit-text = Select Tunnel
+xeno-ui-select-destination-tunnel-submit-text = Travel
+xeno-ui-tunnel-section-tunnels = Tunnels
+xeno-ui-tunnel-section-route = Route
+xeno-ui-tunnel-none = No other tunnels in the hive.
+xeno-ui-tunnel-only-tunnels = Only show tunnels
+xeno-ui-tunnel-current = From: {$name}
+xeno-ui-tunnel-unknown = Unknown
+xeno-ui-tunnel-destination = To: {$name}
+xeno-ui-tunnel-no-destination = Pick a destination
 
 rmc-xeno-ui-burrowed-need-time = You ghosted too recently. You cannot become a burrowed larva until 2.5 minutes have passed ({$seconds} seconds remaining).
 

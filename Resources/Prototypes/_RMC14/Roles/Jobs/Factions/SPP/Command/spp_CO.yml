@@ -80,6 +80,7 @@
     pocket2: RMCPouchGeneralLargeFilledSPPCommand
   storage:
     back:
+    - RMCTabletSPP
     - RMCMegaphone
     - RMCMotionDetector
     - CMFireExtinguisher

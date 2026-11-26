@@ -38,6 +38,40 @@
     message: The Xenonid tactical map has been updated.
 
 - type: entity
+  id: RMCTacticalMapChannelWeYa
+  name: WeYa
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TacticalMapChannel
+    faction: WeYa
+    snapshotOnSubmit: true
+    sortOrder: 40
+    color: "#D4A93A"
+
+- type: entity
+  id: RMCTacticalMapChannelSPP
+  name: SPP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TacticalMapChannel
+    faction: SPP
+    snapshotOnSubmit: true
+    sortOrder: 60
+    color: "#C8303A"
+
+- type: entity
+  id: RMCTacticalMapChannelSquadSPP
+  name: SPP squad
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TacticalMapChannel
+    faction: SPP
+    scope: Squad
+    squadGroups: [ SPP ]
+    sortOrder: 65
+    cooldown: 0
+
+- type: entity
   id: RMCTacticalMapLiveFeed
   categories: [ HideSpawnMenu ]
   components:

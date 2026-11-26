@@ -43,6 +43,7 @@
             </controls:TacticalMapPanel>
 
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="SidePanelContainer" Orientation="Vertical" Visible="False" />
                 <ui:TacticalMapToolPanel Name="ToolPanel" Visible="False" />
 
                 <Control Name="MapContainer" HorizontalExpand="True" VerticalExpand="True" Margin="4">

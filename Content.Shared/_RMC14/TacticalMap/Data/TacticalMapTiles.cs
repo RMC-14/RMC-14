@@ -30,6 +30,7 @@ public sealed class TacticalMapChunk
     public readonly uint[] Flags = new uint[TileCount];
     public GameTick LastUpdate;
 
+    // low 16 bits are what the area allows, high 16 bits are what roofs block
     public static uint PackFlags(TacticalMapTileFlags area, TacticalMapTileFlags roofBlocked)
     {
         return (uint) area | ((uint) roofBlocked << 16);
@@ -62,6 +63,7 @@ public sealed class TacticalMapChunk
         return y * Size + x;
     }
 
+    // rounds down so negative tiles land in the right chunk
     private static int FloorDiv(int value)
     {
         return value >= 0 ? value / Size : (value - Size + 1) / Size;

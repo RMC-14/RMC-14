@@ -20,6 +20,7 @@ public sealed class TacticalMapReplaySystem : EntitySystem
 
     private const int FramesPerChunk = 40;
 
+    // frames store indices into the channel and icon tables to stay small
     private sealed class Recording
     {
         public string Name = string.Empty;
@@ -79,6 +80,7 @@ public sealed class TacticalMapReplaySystem : EntitySystem
                 var channelIndex = GetChannelIndex(recording, channelId, channel);
                 foreach (var (net, blip) in feed.Blips)
                 {
+                    // the real blip is already recorded on its own channel
                     if (SharedTacticalMapSystem.IsRevealed(feed, net))
                         continue;
 
@@ -185,6 +187,8 @@ public sealed class TacticalMapReplaySystem : EntitySystem
         }
 
         RaiseNetworkEvent(new TacticalMapReplayHeaderEvent(requestId, maps), session);
+
+        // frames go out in chunks so a long round isnt one huge message
 
         for (var mapIndex = 0; mapIndex < recordings.Count; mapIndex++)
         {

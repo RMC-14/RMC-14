@@ -115,6 +115,9 @@
   parent: RMCHeadsetIconsSPP
   id: RMCHeadsetSPPAbstract
   components:
+  - type: GrantTacticalMap
+    grantMap: true
+    factions: []
   - type: GrantSquadLeaderTracker
     defaultMode: LeaderSpp
     trackerModes:

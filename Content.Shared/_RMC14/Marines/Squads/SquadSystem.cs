@@ -614,18 +614,19 @@ public sealed class SquadSystem : EntitySystem
 
     public void UpdateSquadTitle(EntityUid marine)
     {
+        var title = GetSquadTitle(marine);
+        if (title != string.Empty)
+            MarineSetTitle(marine, title);
+    }
+
+    public string GetSquadTitle(EntityUid marine)
+    {
         if (TryComp<SquadNameOverrideComponent>(marine, out var overrideComp))
-        {
-            MarineSetTitle(marine, Loc.GetString(overrideComp.Name));
-            return;
-        }
+            return Loc.GetString(overrideComp.Name);
 
         var ev = new GetMarineSquadNameEvent();
         RaiseLocalEvent(marine, ref ev);
-
-        var title = $"{ev.SquadName} {ev.RoleName}".Trim();
-        if (title != string.Empty)
-            MarineSetTitle(marine, title);
+        return $"{ev.SquadName} {ev.RoleName}".Trim();
     }
 
     public void MarineSetTitle(EntityUid marine, string title)

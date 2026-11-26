@@ -54,12 +54,15 @@ public sealed partial class TacticalMapSystem
             ent.Comp.DisplayName = Name(ent);
 
         ent.Comp.BaseDirty = true;
+
+        // faction channels exist up front, hive & squad made on demand
         foreach (var (id, proto) in _channelPrototypes)
         {
             if (proto.Scope == TacticalMapChannelScope.Faction)
                 GetOrCreateChannel(ent, id, null);
         }
 
+        // anything already on this grid needs sorting into the new channels
         var tracked = EntityQueryEnumerator<ActiveTacticalMapTrackedComponent>();
         while (tracked.MoveNext(out var uid, out var active))
         {
@@ -111,6 +114,8 @@ public sealed partial class TacticalMapSystem
         channel.OwnerId = owner == null ? null : GetNetEntity(owner.Value);
         EnsureComp<TacticalMapCanvasComponent>(uid);
 
+        // squad channels are canvas + objectives only. others get a snapshot & a live feed,
+        // the feed is its own entity so only live viewers are sent it
         if (channel.Scope == TacticalMapChannelScope.Squad)
         {
             var objectives = EnsureComp<TacticalMapObjectivesComponent>(uid);
@@ -149,6 +154,7 @@ public sealed partial class TacticalMapSystem
         QueueDel(channel);
     }
 
+    // drops channels whose hive or squad is gone
     private void CleanupOrphanChannels()
     {
         var maps = EntityQueryEnumerator<TacticalMapComponent>();

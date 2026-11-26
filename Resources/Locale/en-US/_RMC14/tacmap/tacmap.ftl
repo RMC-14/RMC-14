@@ -110,4 +110,3 @@ ui-tactical-map-color-purple = Purple
 ui-tactical-map-color-green = Green
 ui-tactical-map-color-brown = Brown
 
-ui-tactical-map-tunnel-info = Tunnel: {$name}
