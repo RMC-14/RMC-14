@@ -266,7 +266,8 @@
       - RMCScoutArmor
     denyReason: rmc-wear-scout-armor-required
   - type: ThermalCloak
-    opacity: 0.03 # Put to 0.03 for testing
+    opacity: 0.03922 # 10/255
+    darkFactor: 0.6
     restrictWeapons: true
     cloakedHideLayers:
     - Hair
@@ -798,6 +799,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/molle.rsi
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15
 
 - type: entity
   parent: RMCSatchelTyrargo

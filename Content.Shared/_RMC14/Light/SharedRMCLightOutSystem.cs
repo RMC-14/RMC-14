@@ -1,6 +1,6 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Systems;
-using Content.Shared._RMC14.Light;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
@@ -12,7 +12,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
 using Robust.Shared.Containers;
 
-namespace Content.Server._RMC14.Light;
+namespace Content.Shared._RMC14.Light;
 
 public abstract class SharedRMCLightOutSystem : EntitySystem
 {
@@ -27,11 +27,17 @@ public abstract class SharedRMCLightOutSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCLightsOutOnDeathComponent, XenoParasiteInfectEvent>(OnInfect);
+        SubscribeLocalEvent<RMCLightsOutOnDeathComponent, XenoDevouredEvent>(OnDevoured);
         SubscribeLocalEvent<RMCLightsOutOnDeathComponent, MobStateChangedEvent>(OnDeath);
         SubscribeLocalEvent<RMCLightsOutOnDeathComponent, DropHandItemsEvent>(OnDropItems, before: [typeof(SharedHandsSystem)]);
     }
 
     private void OnInfect(Entity<RMCLightsOutOnDeathComponent> ent, ref XenoParasiteInfectEvent args)
+    {
+        TurnOffLights(ent);
+    }
+
+    private void OnDevoured(Entity<RMCLightsOutOnDeathComponent> ent, ref XenoDevouredEvent args)
     {
         TurnOffLights(ent);
     }
@@ -73,6 +79,8 @@ public abstract class SharedRMCLightOutSystem : EntitySystem
                 _handheldLight.TurnOff((invEnt, handLight));
                 Dirty(invEnt, handLight);
             }
+
+            ExtinguishFlare(invEnt);
 
             if (TryComp<AttachableHolderComponent>(invEnt, out var holder))
             {

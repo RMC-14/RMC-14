@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Content.Server (Distress Signal)" type="DotNetProject" factoryName=".NET Project">
+    <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Content.Server/Content.Server.exe" />
+    <option name="PROGRAM_PARAMETERS" value="--cvar game.lobbyenabled=true --cvar game.defaultpreset=CMDistressSignal --cvar game.map=Almayer --cvar game.lobbyduration=10 --cvar rmc.planet_map_vote=false --cvar rmc.distress_xenos_minimum=0 --cvar rmc.distress_disable_auto_end=true --cvar rmc.lobby_auto_ready=true --cvar rmc.lobby_start_paused=true" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin/Content.Server" />
+    <option name="PASS_PARENT_ENVS" value="1" />
+    <option name="USE_EXTERNAL_CONSOLE" value="0" />
+    <option name="USE_MONO" value="0" />
+    <option name="RUNTIME_ARGUMENTS" value="" />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Content.Server/Content.Server.csproj" />
+    <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+    <option name="PROJECT_ARGUMENTS_TRACKING" value="0" />
+    <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+    <option name="PROJECT_KIND" value="DotNetCore" />
+    <option name="PROJECT_TFM" value="net9.0" />
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

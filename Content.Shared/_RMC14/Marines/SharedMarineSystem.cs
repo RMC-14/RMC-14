@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -32,8 +33,9 @@ public abstract class SharedMarineSystem : EntitySystem
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
-        SubscribeLocalEvent<MarineComponent, CheckMeleeTargetEvent>(OnMarineCheckMeleeTarget);
         SubscribeLocalEvent<MarineComponent, GetMarineIconEvent>(OnMarineGetIcon);
+        SubscribeLocalEvent<MarineComponent, CheckMeleeTargetEvent>(OnMarineCheckMeleeTarget);
+        SubscribeLocalEvent<MarineComponent, CheckGunTargetEvent>(OnMarineCheckGunTarget);
 
         SubscribeLocalEvent<GrantMarineIconsComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantMarineIconsComponent, GotUnequippedEvent>(OnGotUnequipped);
@@ -73,7 +75,7 @@ public abstract class SharedMarineSystem : EntitySystem
         if (args.Skip)
             return;
 
-        // If you're trying to attack yourself, allow if if you have damage yourself enabled, otherwise don't allow it at all.
+        // If you're trying to attack yourself, allow it if you have damage yourself enabled, otherwise don't allow it at all.
         if (marine.Owner == args.Target)
         {
             if (args.Disarm
@@ -98,6 +100,19 @@ public abstract class SharedMarineSystem : EntitySystem
         {
             args.Skip = true;
             return;
+        }
+    }
+
+    private void OnMarineCheckGunTarget(Entity<MarineComponent> marine, ref CheckGunTargetEvent args)
+    {
+        if (args.Skip)
+            return;
+
+        // If you're trying to shoot yourself, allow it if you have damage yourself enabled, otherwise don't allow it at all.
+        if (marine.Owner == args.Target
+            && !(TryComp<ActorComponent>(marine, out var actor) && _netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCDamageYourself)))
+        {
+            args.Skip = true;
         }
     }
 

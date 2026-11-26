@@ -934,9 +934,22 @@
     - id: RMCWeaponPistolHandcannonGold
 
 - type: entity
-  parent: CMBeltMarine
+  parent: RMCBeltHolsterPistol
+  id: RMCPolishedHandcannonBeltFilled
+  suffix: Filled, Polished Peregrine
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+    - id: RMCWeaponPistolHandcannonPolished
+
+- type: entity
+  parent: RMCBeltSPPBrown
   id: RMCType71BeltFilled
-  suffix: Filled
+  suffix: Filled, Type 71
   components:
   - type: StorageFill
     contents:
@@ -1052,7 +1065,7 @@
 - type: entity
   parent: RMCBeltSPPBrown
   id: RMCBeltSPPBrownHalfFill
-  suffix: Filled
+  suffix: Filled Half, Type 77
   components:
   - type: StorageFill
     contents:
@@ -1212,7 +1225,7 @@
     - id: RMCWeaponRevolverSpearhead
 
 - type: entity
-  parent: RMCBeltHolsterRevolver
+  parent: RMCBeltHolsterRevolverSPP
   id: RMCBeltHolsterRevolverZHNK72Fill
   suffix: Filled
   components:

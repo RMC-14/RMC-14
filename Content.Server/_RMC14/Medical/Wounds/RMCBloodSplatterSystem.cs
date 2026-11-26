@@ -1,6 +1,7 @@
 using Content.Server._RMC14.Decals;
 using Content.Server.Spawners.Components;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Medical.Vomit;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Coordinates;
 using Robust.Shared.Map;
