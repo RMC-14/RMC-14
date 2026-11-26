@@ -33,7 +33,6 @@ ui-tactical-map-section-colour = Colour
 ui-tactical-map-section-width = Width
 ui-tactical-map-section-actions = Actions
 ui-tactical-map-section-roofs = ROOFS
-ui-tactical-map-section-radius = RADIUS
 ui-tactical-map-section-channels = Channels
 
 ui-tactical-map-layer-visibility-summary = {$selected}/{$total}
@@ -76,16 +75,17 @@ ui-tactical-map-overlay-roof1-desc = Roof: blocks mortar placement, lasing, mede
 ui-tactical-map-overlay-roof2-desc = Structure: blocks supply drops / mortar fire
 ui-tactical-map-overlay-roof3-desc = Cave: blocks CAS
 ui-tactical-map-overlay-roof4-desc = Deep Cave: blocks orbital bombard
-ui-tactical-map-radius-ob = OB
-ui-tactical-map-radius-mortar = Mortar
 ui-tactical-map-create-mortar = Create Mortar
 ui-tactical-map-remove-mortar = Remove Mortar
 
 ui-tactical-map-context-coords = Tile: {$x}, {$y}
-ui-tactical-map-context-id = ID: {$id}
 ui-tactical-map-context-tactical-label = Tactical: {$label}
 ui-tactical-map-context-area-label = Area: {$label}
 ui-tactical-map-context-linked-lz = Linked LZ: {$lz}
+
+ui-tactical-map-tooltip-dead = Dead
+ui-tactical-map-tooltip-unrevivable = Unrevivable
+ui-tactical-map-tooltip-revivable = Revivable: {$time}
 ui-tactical-map-context-allowed-title = Allowed
 ui-tactical-map-context-blocked-title = Blocked
 ui-tactical-map-action-ob = OB

@@ -34,6 +34,12 @@ public sealed partial class ActiveTacticalMapTrackedComponent : Component
     public TimeSpan UnrevivableEnd;
 
     [ViewVariables]
+    public string? Name;
+
+    [ViewVariables]
+    public string? Role;
+
+    [ViewVariables]
     public HashSet<EntityUid> Channels = new();
 
     [ViewVariables]

@@ -125,9 +125,9 @@
   - type: BypassSkillChecks
   - type: SeeNewPlayers
   - type: TacticalMapUser
-    allChannels: true # RMC14
+    allChannels: true
     liveUpdate: true
-  
+
 
 - type: entity
   abstract: true

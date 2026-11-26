@@ -35,4 +35,7 @@ public sealed partial class TacticalMapUserComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2i SelfIndices;
+
+    [DataField, AutoNetworkedField]
+    public TacticalMapBlip? SelfBlip;
 }

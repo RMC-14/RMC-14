@@ -25,7 +25,9 @@ public readonly record struct TacticalMapBlip(
     TacticalMapBlipFlags Flags,
     TimeSpan UnrevivableStart,
     TimeSpan UnrevivableEnd,
-    float Opacity = 1f)
+    float Opacity = 1f,
+    string? Name = null,
+    string? Role = null)
 {
     public const int DefibStages = 5;
 
