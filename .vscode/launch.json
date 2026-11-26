@@ -9,7 +9,11 @@
             "type": "coreclr",
             "request": "launch",
             "program": "${workspaceFolder}/bin/Content.Client/Content.Client.dll",
-            "args": [],
+            "args": [
+                "--connect",
+                // keep retrying for ~2 minutes while the server is still starting
+                "--cvar", "net.handshake_attempts=40"
+            ],
             "console": "internalConsole",
             "stopAtEntry": false
         },
@@ -32,6 +36,25 @@
             "stopAtEntry": false
         },
         {
+            "name": "Server (Distress Signal)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/Content.Server/Content.Server.dll",
+            "args": [
+                "--cvar", "game.lobbyenabled=true",
+                "--cvar", "game.defaultpreset=CMDistressSignal",
+                "--cvar", "game.map=Almayer",
+                "--cvar", "game.lobbyduration=10",
+                "--cvar", "rmc.planet_map_vote=false",
+                "--cvar", "rmc.distress_xenos_minimum=0",
+                "--cvar", "rmc.distress_disable_auto_end=true",
+                "--cvar", "rmc.lobby_auto_ready=true",
+                "--cvar", "rmc.lobby_start_paused=true"
+            ],
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
             "name": "YAML Linter",
             "type": "coreclr",
             "request": "launch",
@@ -47,6 +70,14 @@
             "name": "Server/Client",
             "configurations": [
                 "Server",
+                "Client"
+            ],
+            "preLaunchTask": "build"
+        },
+        {
+            "name": "Server/Client (Distress Signal)",
+            "configurations": [
+                "Server (Distress Signal)",
                 "Client"
             ],
             "preLaunchTask": "build"

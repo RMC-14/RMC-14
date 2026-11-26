@@ -146,6 +146,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCEvolutionPointsAccumulateBeforeMinutes =
         CVarDef.Create("rmc.evolution_points_accumulate_before_minutes", 15, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<float> RMCXenoQueenRequirementGracePeriodMinutes =
+        CVarDef.Create("rmc.xeno_queen_requirement_grace_period_minutes", 2.5f, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
 
@@ -532,6 +535,12 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCDistressXenosMinimum =
         CVarDef.Create("rmc.distress_xenos_minimum", 4, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDistressDisableAutoEnd =
+        CVarDef.Create("rmc.distress_disable_auto_end", false, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> RMCLobbyAutoReady =
+        CVarDef.Create("rmc.lobby_auto_ready", false, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> VolumeGainCassettes =
         CVarDef.Create("rmc.volume_gain_cassettes", 0.33f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
