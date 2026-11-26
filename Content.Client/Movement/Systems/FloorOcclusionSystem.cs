@@ -52,6 +52,12 @@ public sealed partial class FloorOcclusionSystem : SharedFloorOcclusionSystem
         if (!_spriteQuery.Resolve(sprite.Owner, ref sprite.Comp, false))
             return;
 
+        // RMC14
+        // Component startup reapplies the shader after the sprite has initialized.
+        if (sprite.Comp.LifeStage < ComponentLifeStage.Initialized)
+            return;
+        // RMC14
+
         var shader = _proto.Index(HorizontalCut).Instance();
 
         if (enabled)

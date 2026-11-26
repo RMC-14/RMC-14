@@ -73,6 +73,11 @@ public sealed partial class GhostColorSystem : EntitySystem
         }
 
         _sprite.SetColor(spriteEnt, ghostColor.WithAlpha(1f));
+
+        // Appearance startup reapplies the shader after the sprite has initialized.
+        if (sprite.LifeStage < ComponentLifeStage.Initialized)
+            return;
+
         _sprite.SetPostShader(spriteEnt, new SpriteComponent.PostShaderArgs(RMCPostShaderIds.GhostAlpha, _alphaShader)
         {
             After = RMCPostShaderIds.BeforeOpacity,
