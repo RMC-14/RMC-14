@@ -3,6 +3,8 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Mobs.Components;
@@ -26,6 +28,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
@@ -112,7 +115,9 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
                 armorPiercing = armorPiercingComp.Amount;
 
             projectileCount = Math.Max(newProjectileCount, 0);
-            _damage.TryChangeDamage(entity, damage, armorPiercing: armorPiercing);
+
+            if (!HasComp<XenoProjectileComponent>(ent) || !_hive.FromSameHive(ent.Owner, entity.Owner))
+                _damage.TryChangeDamage(entity, damage, armorPiercing: armorPiercing);
 
             // Make sure the leftover projectiles don't hit the entity that was hit directly
             if (!TryComp(entity, out UserLimitHitsComponent? limit))
