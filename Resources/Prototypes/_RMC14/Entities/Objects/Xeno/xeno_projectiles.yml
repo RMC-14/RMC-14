@@ -650,6 +650,7 @@
   - type: ProjectileGrenade
     evenSpread: true
     rebounds: false
+    directHit: true
     fillPrototype: XenoSpitProjectileDissolverAcidBlobSmall
     capacity: 4
     spreadAngle: 40
