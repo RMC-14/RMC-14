@@ -146,9 +146,9 @@ public sealed partial class RMCPenetratingProjectileSystem : EntitySystem
         if (ent.Comp.DeleteAfterHit)
         {
             if (args.Projectile.Comp.QueueDeletion)
-                PredictedQueueDel(ent.Owner);
+                QueueDel(ent.Owner);
             else
-                PredictedDel(ent.Owner);
+                Del(ent.Owner);
             return;
         }
 
