@@ -483,7 +483,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var swings = 0;
 
         // TODO: If we get autoattacks then probably need a shotcounter like guns so we can do timing properly.
-        if (weapon.NextAttack < curTime)
+        if (curTime - weapon.NextAttack > Timing.TickPeriod) // RMC14 changed to resolve above TODO
             weapon.NextAttack = curTime;
 
         while (weapon.NextAttack <= curTime)
