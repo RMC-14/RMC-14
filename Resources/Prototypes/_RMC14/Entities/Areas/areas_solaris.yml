@@ -530,6 +530,7 @@
     supplyDrop: false
     minimapColor: '#812DA2EE'
     weatherEnabled: false
+    excludeFromTacticalMap: false
 
 - type: entity
   parent: RMCAreaBigredv2CavesLambda
@@ -794,6 +795,7 @@
     paradropping: false
     OB: true
     supplyDrop: false
+    excludeFromTacticalMap: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
