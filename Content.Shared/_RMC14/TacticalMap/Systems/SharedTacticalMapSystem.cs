@@ -38,6 +38,10 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         SubscribeLocalEvent<TacticalMapComponent, ComponentGetState>(OnMapGetState);
         SubscribeLocalEvent<TacticalMapLiveFeedComponent, ComponentGetState>(OnLiveFeedGetState);
 
+        SubscribeLocalEvent<TacticalMapUserComponent, NewXenoEvolvedEvent>(OnXenoEvolved);
+        SubscribeLocalEvent<TacticalMapUserComponent, XenoDevolvedEvent>(OnXenoDevolved);
+        SubscribeLocalEvent<ReopenTacticalMapComponent, AfterNewXenoEvolvedEvent>(OnAfterXenoEvolved);
+
         Subs.CVar(_config, RMCCVars.RMCTacticalMapLineLimit, v => LineLimit = v, true);
         Subs.CVar(_config, RMCCVars.RMCTacticalMapLabelLimit, v => LabelLimit = v, true);
         Subs.CVar(_config, RMCCVars.RMCTacticalMapLabelMaxLength, v => LabelMaxLength = v, true);
@@ -51,6 +55,30 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     private void OnUserOpenAlert(Entity<TacticalMapUserComponent> ent, ref OpenTacMapAlertEvent args)
     {
         ToggleUserMap(ent);
+    }
+
+    private void OnXenoEvolved(Entity<TacticalMapUserComponent> ent, ref NewXenoEvolvedEvent args)
+    {
+        MaintainUserMapOpen(ent, args.OldXeno);
+    }
+
+    private void OnXenoDevolved(Entity<TacticalMapUserComponent> ent, ref XenoDevolvedEvent args)
+    {
+        MaintainUserMapOpen(ent, args.OldXeno);
+    }
+
+    private void MaintainUserMapOpen(Entity<TacticalMapUserComponent> newXeno, EntityUid oldXeno)
+    {
+        if (UI.IsUiOpen(oldXeno, TacticalMapUserUi.Key, oldXeno))
+            EnsureComp<ReopenTacticalMapComponent>(newXeno);
+    }
+
+    private void OnAfterXenoEvolved(Entity<ReopenTacticalMapComponent> ent, ref AfterNewXenoEvolvedEvent args)
+    {
+        if (HasComp<TacticalMapUserComponent>(ent))
+            UI.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
+
+        RemComp<ReopenTacticalMapComponent>(ent);
     }
 
     private void OnUserCollectAccess(Entity<TacticalMapUserComponent> ent, ref TacticalMapCollectAccessEvent args)
@@ -184,6 +212,23 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
         channels = Array.Empty<EntityUid>();
         live = false;
+        return false;
+    }
+
+    public bool IsOnViewerChannels(EntityUid viewer, EntityUid tracked)
+    {
+        if (!TryGetViewer(viewer, out var channels, out _) ||
+            !TryComp(tracked, out ActiveTacticalMapTrackedComponent? active))
+        {
+            return false;
+        }
+
+        foreach (var channel in channels)
+        {
+            if (active.Channels.Contains(channel))
+                return true;
+        }
+
         return false;
     }
 

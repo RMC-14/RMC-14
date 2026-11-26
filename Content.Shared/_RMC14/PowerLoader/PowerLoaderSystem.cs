@@ -1,10 +1,11 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Fabricator;
 using Content.Shared._RMC14.Dropship.Utility.Components;
+using Content.Shared._RMC14.PayloadDeployment.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
@@ -298,6 +299,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             DistanceThreshold = 2.5f,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -620,12 +622,18 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
+        var delayMultiplier = 1f;
+        if (TryComp(args.User, out MovementRelayTargetComponent? relay))
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, ent.Comp.AttachSkill);
+
+        var delay = attachableComponent.AttachDelay * delayMultiplier;
         var ev = new DropshipAttachDoAfterEvent(GetNetEntity(target), GetNetEntity(used), slot.ID);
-        var doAfter = new DoAfterArgs(EntityManager, user, attachableComponent.AttachDelay, ev, target, target, used)
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, target, target, used)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             DistanceThreshold = 2.5f,
+            RootEntity = true,
         };
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.User, out var loader))
             loader.DoAfter = ev.DoAfter;
@@ -669,6 +677,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             DistanceThreshold = 2.5f,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.PowerLoader, out var loader))
@@ -1253,13 +1262,19 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (!TryComp(container.ContainedEntity, out PowerLoaderDetachableComponent? detachableComponent))
             return;
 
+        var delayMultiplier = 1f;
+        if (TryComp(user.Owner, out MovementRelayTargetComponent? relay))
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, detachableComponent.DetachSkill);
+
+        var delay = detachableComponent.DetachDelay * delayMultiplier;
         var contained = container.ContainedEntity.Value;
         var ev = new DropshipDetachDoAfterEvent(GetNetEntity(ent), GetNetEntity(contained), container.ID);
-        var doAfter = new DoAfterArgs(EntityManager, user, detachableComponent.DetachDelay, ev, target, target)
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, target, target)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             DistanceThreshold = 2.5f,
+            RootEntity = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

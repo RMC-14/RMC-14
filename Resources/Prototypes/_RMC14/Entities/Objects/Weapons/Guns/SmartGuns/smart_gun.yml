@@ -155,6 +155,11 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleSGO
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-smartgun
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSmartGunNoCamo
@@ -281,6 +286,8 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+      params:
+        volume: -3
   - type: ItemSlots
     slots:
       gun_magazine:

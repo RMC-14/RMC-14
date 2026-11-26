@@ -33,6 +33,15 @@
 
 - type: entity
   parent: RMCArmorSPP
+  id: RMCArmorSPPSpetsnazAlt
+  name: Izdeliye-M T5 tactical vest
+  description: An early production model of the CCC5-L Tactical Vest designed for Spetsnaz forces. While more protective than its' newer cousin, the use of heavier composites adds a lot of extra bulk which hinders movement. Despite being a somewhat outdated design, it's still issued to some Spetsnaz units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_vest.rsi
+
+- type: entity
+  parent: RMCArmorSPP
   id: RMCArmorSPPSupport
   name: UL6 personal armor
   description: Standard body armor of the SPP military, the UL6 (Union Light MK6) is a light body armor, slightly weaker than the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. This set of personal armor lacks the iconic neck piece and some of the armor in favor of user mobility.
@@ -49,6 +58,15 @@
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
+
+- type: entity
+  parent: RMCArmorSPPSupport
+  id: RMCArmorSPPSpetsnazSupport
+  name: Izdeliye-S T5 tactical support vest
+  description: The final iteration of the CCC5-L Tactical Plated Vest before it recieved its' official designation, designed for Spetsnaz forces. Offering a middle ground between the 'H' and 'M' T5 models, the 'S' vest features enhanced mobility with an improved armor package, though critically lacks limb coverage. Despite being a somewhat outdated design, it's still in use by some Spetsnaz units who prefer the wider range of movement the lower armor coverage affords them.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_plated.rsi
 
 - type: entity
   parent: RMCArmorSPPSupport
@@ -127,6 +145,20 @@
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
+  - type: IgnoreContentsSize # TODO RMC14: Also ignores minigun mags size
+    items:
+      tags:
+      - RMCMagazineLMGQYJ72
+  - type: RMCGrantLeapProtection
+
+- type: entity
+  parent: RMCArmorSPPHeavy
+  id: RMCArmorSPPSpetsnazHeavyAlt
+  name: Izdeliye-H T5 heavy tactical vest
+  description: An early production model of the CCC5-L Heavy Tactical Vest designed for Spetsnaz forces. The 'H' variant features further reinforced armor and add-on modular pouches. Despite the superiority of the newer CC5-L HTV, some Spetsnaz specialists prefer to use the older version due to its' unique ability to mount a fortified add-on neck plate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_heavy.rsi
 
 - type: entity
   parent: RMCArmorSPPHeavy
@@ -169,12 +201,12 @@
 
 - type: entity
   parent: RMCArmorSPP
-  id: RMCArmorSPPSOF
+  id: RMCArmorSPPSpetsnaz
   name: SPP CCC5-L tactical vest
-  description: A lightweight SPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  description: A lightweight SPP-issued armor vest designed for Spetsnaz forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_vest.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_vest.rsi
   - type: CMArmor # Covers arms
     melee: 15
     bullet: 20
@@ -191,8 +223,8 @@
     - 0,0,7,1 # 4 slots
 
 - type: entity
-  parent: RMCArmorSPPSOF
-  id: RMCArmorSPPSOFFilled
+  parent: RMCArmorSPPSpetsnaz
+  id: RMCArmorSPPSpetsnazFilled
   suffix: Filled, Survivor
   components:
   - type: StorageFill
@@ -204,12 +236,12 @@
 
 - type: entity
   parent: RMCArmorSPP
-  id: RMCArmorSPPSOFHeavy
+  id: RMCArmorSPPSpetsnazHeavy
   name: SPP CCC5-L heavy tactical vest
-  description: A heavily reinforced SPP-issued tactical vest designed for space operations forces operating in high-risk environments. The CCC5-L Heavy-Plated Tactical Vest features additional polymer-ceramic composite plating across the chest and torso, providing superior protection against ballistic and explosive threats. Despite its bulk, the vest maintains a balance between protection and mobility, with modular pouches for quick access to essential gear.
+  description: A heavily reinforced SPP-issued tactical vest designed for Spetsnaz forces operating in high-risk environments. The CCC5-L Heavy-Plated Tactical Vest features additional polymer-ceramic composite plating across the chest and torso, providing superior protection against ballistic and explosive threats. Despite its bulk, the vest maintains a balance between protection and mobility, with modular pouches for quick access to essential gear.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_heavy.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_heavy.rsi
   - type: CMArmor # Covers arms and groin
     melee: 20
     bullet: 25
@@ -227,12 +259,12 @@
 
 - type: entity
   parent: RMCArmorSPP
-  id: RMCArmorSPPSOFPlated
+  id: RMCArmorSPPSpetsnazPlated
   name: SPP CCC5-L plated tactical vest
-  description: A lightweight SPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  description: A lightweight SPP-issued armor vest designed for Spetsnaz forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_plated.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_plated.rsi
   - type: CMArmor # Covers arms
     melee: 15
     bullet: 25
@@ -250,12 +282,12 @@
 
 - type: entity
   parent: RMCArmorSPP
-  id: RMCArmorSPPSOFSynth
+  id: RMCArmorSPPSpetsnazSynth
   name: SPP CCC5-L synthetic tactical vest
-  description: A lightweight SPP-issued armor vest designed for synthetic units. It features greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  description: A lightweight SPP-issued armor vest designed for synthetic units. It has had all of its' armor inserts removed. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_vest_synth.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spetsnaz_vest_synth.rsi
   - type: CMArmor
     melee: 0
     bullet: 0
@@ -276,7 +308,7 @@
 
 # SPP coats
 - type: entity
-  parent: RMCCoatBureauDeputy
+  parent: RMCArmorSPP
   id: RMCCoatSPP
   name: SPP UL4 officer jacket
   description: A lightweight jacket, issued to officers of the SPP's military. Slightly protective from incoming damage, best off with proper armor however.
@@ -297,6 +329,13 @@
     grid:
     - 0,0,5,1 # 3 slots
   - type: FixedItemSizeStorage
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_NONE
+    walkModifier: 1
+    sprintModifier: 1
+  - type: RemoveComponents
+    components:
+    - type: RMCArmorSpeedTier
+    - type: MoveOrderArmor
 
 - type: entity
   parent: RMCCoatBureauDeputy
@@ -397,8 +436,8 @@
 # Survivor fills
 
 - type: entity
-  parent: RMCArmorSPPSupport
-  id: RMCArmorSPPSupportSurvivorFill
+  parent: RMCArmorSPPSpetsnazSupport
+  id: RMCArmorSPPSpetsnazSupportSurvivorFill
   suffix: Filled, Survivor
   components:
   - type: StorageFill
@@ -407,8 +446,8 @@
     - id: RMCMRESPP
 
 - type: entity
-  parent: RMCArmorSPP
-  id: RMCArmorSPPSurvivorFill
+  parent: RMCArmorSPPSpetsnazAlt
+  id: RMCArmorSPPSpetsnazAltSurvivorFill
   suffix: Filled, Survivor
   components:
   - type: StorageFill
@@ -416,8 +455,8 @@
     - id: CMCrowbar
 
 - type: entity
-  parent: RMCArmorSPPHeavy
-  id: RMCArmorSPPHeavySurvivorFill
+  parent: RMCArmorSPPSpetsnazHeavyAlt
+  id: RMCArmorSPPSpetsnazHeavyAltSurvivorFill
   suffix: Filled, Survivor
   components:
   - type: StorageFill

@@ -38,6 +38,15 @@ public sealed partial class TacticalMapControl
 
             if (PointMode)
             {
+                if (RemovableBlipClicks &&
+                    TryFindBlip(pixel, out var removable) &&
+                    (removable.Blip.Flags & TacticalMapBlipFlags.RemotelyRemovable) != 0)
+                {
+                    BlipClicked?.Invoke(removable.Entity);
+                    args.Handle();
+                    return;
+                }
+
                 PointClicked?.Invoke(PixelToIndices(pixel));
                 args.Handle();
                 return;

@@ -4,7 +4,9 @@ using Content.Client._RMC14.TacticalMap.Controls;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Eye;
+using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Ghost;
 using Robust.Client.Player;
 
@@ -82,6 +84,10 @@ public sealed class TacticalMapViewBinder : IDisposable
     private void RefreshView(bool force)
     {
         _view.SetPointMode(CanEdit && IsPointMode());
+        _view.SetRemovableBlipClicks(CanEdit &&
+                                     _player.LocalEntity == Viewer &&
+                                     _entMan.HasComponent<XenoOvipositorCapableComponent>(Viewer));
+        _view.SetWatched(GetWatchedIndices());
 
         var structural = force || _revision != _tacticalMap.Revision;
         if (!structural && _blipRevision == _tacticalMap.BlipRevision)
@@ -264,6 +270,28 @@ public sealed class TacticalMapViewBinder : IDisposable
     private void OnPointActivated(EntityUid map, Vector2i indices)
     {
         _send?.Invoke(new TacticalMapActivatePointMsg(_entMan.GetNetEntity(map), indices));
+    }
+
+    private Vector2i? GetWatchedIndices()
+    {
+        if (_view.SelectedMap is not { } map ||
+            !_entMan.TryGetComponent(_player.LocalEntity, out XenoWatchingComponent? watching) ||
+            watching.Watching is not { } watched)
+        {
+            return null;
+        }
+
+        if (_tacticalMap.TryGetTileIndices(watched, map, out var indices))
+            return indices;
+
+        var net = _entMan.GetNetEntity(watched);
+        foreach (var blip in _blips)
+        {
+            if (blip.Entity == net)
+                return blip.Blip.Indices;
+        }
+
+        return null;
     }
 
     private EntityUid? GetPreferredMap()

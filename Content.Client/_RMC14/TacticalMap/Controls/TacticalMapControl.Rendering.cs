@@ -42,6 +42,7 @@ public sealed partial class TacticalMapControl
     private static readonly Color MortarRangeColor = Color.FromHex("#43B581");
     private static readonly Color GridColor = Color.FromHex("#88C7FA").WithAlpha(0.06f);
     private static readonly Color PingColor = Color.FromHex("#00FFFF");
+    private static readonly Color WatchedPingColor = Color.Orange;
     private static readonly Color LabelToolBorderColor = Color.Green.WithAlpha(0.3f);
     private static readonly Color PointModeBorderColor = Color.Purple.WithAlpha(0.3f);
     private static readonly ResPath LabelFontPath = new("/Fonts/NotoSans/NotoSans-Bold.ttf");
@@ -83,6 +84,7 @@ public sealed partial class TacticalMapControl
         DrawStructures(handle, time);
         DrawBlips(handle, time);
         DrawSelf(handle, time);
+        DrawWatched(handle, time);
         DrawMortarMarker(handle, time);
         DrawInfoText(handle);
     }
@@ -533,7 +535,7 @@ public sealed partial class TacticalMapControl
             var center = IndicesToPixelCenter(view.Blip.Indices);
             DrawBlip(handle, view.Blip, center, alpha, time);
             if (view.Entity == _selfEntity)
-                DrawPing(handle, center, GetBlipSize(), time);
+                DrawPing(handle, center, GetBlipSize(), time, PingColor);
         }
     }
 
@@ -546,13 +548,22 @@ public sealed partial class TacticalMapControl
         if (_selfBlip is { } blip)
             DrawBlip(handle, blip with { Indices = indices }, center, 1f, time);
 
-        DrawPing(handle, center, GetBlipSize(), time);
+        DrawPing(handle, center, GetBlipSize(), time, PingColor);
+    }
+
+    private void DrawWatched(DrawingHandleScreen handle, TimeSpan time)
+    {
+        if (_watchedIndices is not { } indices || !IsWithinMap(indices))
+            return;
+
+        DrawPing(handle, IndicesToPixelCenter(indices), GetBlipSize(), time, WatchedPingColor);
     }
 
     private void DrawBlip(DrawingHandleScreen handle, TacticalMapBlip blip, Vector2 center, float alpha, TimeSpan time)
     {
         var size = GetBlipSize();
         var rect = UIBox2.FromDimensions(center - new Vector2(size / 2f, size / 2f), new Vector2(size, size));
+        alpha *= blip.Opacity;
         var color = blip.Color.WithAlpha(blip.Color.A * alpha);
         var overlay = Color.White.WithAlpha(alpha);
 
@@ -582,11 +593,11 @@ public sealed partial class TacticalMapControl
             handle.DrawTextureRect(GetFrame(status, time), rect, overlay);
     }
 
-    private void DrawPing(DrawingHandleScreen handle, Vector2 center, float blipSize, TimeSpan time)
+    private void DrawPing(DrawingHandleScreen handle, Vector2 center, float blipSize, TimeSpan time, Color pingColor)
     {
         var progress = (float) (time.TotalSeconds % PingDuration) / PingDuration;
         var radius = blipSize * (PingMinScale + (PingMaxScale - PingMinScale) * progress) / 2f;
-        var color = PingColor.WithAlpha(PingMaxAlpha * (1f - progress));
+        var color = pingColor.WithAlpha(PingMaxAlpha * (1f - progress));
         var thickness = PingRingThickness * GetOverlayScale();
         var step = MathF.PI * 2f / PingSegments;
         for (var i = 0; i < PingSegments; i++)

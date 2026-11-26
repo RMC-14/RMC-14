@@ -116,6 +116,11 @@
     spawn: HiveCoreXeno
   - type: HiveConstructionLimited
     id: HiveCoreXeno
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: core
+    opacity: 0.4
   - type: WarpPoint
     location: hive core
   - type: RMCAlternateSprite

@@ -22,10 +22,10 @@
     - name: Handheld Defense
       choices:  { CMHandheldDefense : 1 }
       entries:
-    #    CMJIMAPlantedFlag
       - id: RMCSentry
         recommended: true
       - id: RMCTesla
+      - id: RMCPlantedFlag
       - id: RMCSentryFire
     - name: Handheld Defense Upgrade
       choices: { CMHandheldDefenseUpgrade: 1 }
@@ -168,6 +168,8 @@
         points: 3
       - id: RMCSynthResetKey
         points: 10
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 12
     - name: Binoculars
       entries:
       - id: RMCBinoculars

@@ -42,7 +42,7 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
     - type: SquadArmorWearer
-    - type: QYJWhitelist
+    - type: SPPSpecWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-specialist
   hidden: true
@@ -114,7 +114,7 @@
     shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponLMGQYJ72
     id: RMCIDSPP
-    belt: RMCT73BeltFilled
+    belt: RMCBeltHolsterPistolSPPT73
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchExplosiveFilledC4SPP

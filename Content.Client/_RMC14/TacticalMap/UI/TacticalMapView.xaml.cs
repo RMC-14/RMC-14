@@ -167,6 +167,16 @@ public sealed partial class TacticalMapView : Control
         PopoutButton.Visible = visible;
     }
 
+    public void SetRemovableBlipClicks(bool enabled)
+    {
+        Map.RemovableBlipClicks = enabled;
+    }
+
+    public void SetWatched(Vector2i? indices)
+    {
+        Map.SetWatched(indices);
+    }
+
     public void SetPointMode(bool enabled)
     {
         if (Map.PointMode == enabled)

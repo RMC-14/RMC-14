@@ -22,6 +22,9 @@ public sealed partial class ActiveTacticalMapTrackedComponent : Component
     public Color Color = Color.White;
 
     [ViewVariables]
+    public float Opacity = 1f;
+
+    [ViewVariables]
     public TacticalMapBlipFlags Flags;
 
     [ViewVariables]

@@ -27,7 +27,7 @@
     - Back
   - type: Gun
     cameraRecoilScalar: 0
-    fireRate: 0.333
+    fireRate: 0.286
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -97,6 +97,11 @@
     - RMCWeaponIncineratorM34
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-flamethrower
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCWeaponFlamer
@@ -206,6 +211,17 @@
   - type: Appearance
   - type: SolutionStorageFillable
     solution: rmc_flamer_tank
+
+- type: entity
+  parent: RMCTankFlamer
+  id: RMCTankFlamerEmpty
+  suffix: Empty
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents: [ ]
 
 - type: entity
   parent: RMCTankFlamer

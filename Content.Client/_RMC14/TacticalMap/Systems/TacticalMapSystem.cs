@@ -1,11 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.TacticalMap;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map.Components;
 
 namespace Content.Client._RMC14.TacticalMap;
 
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
     private readonly Dictionary<EntityUid, EntityUid> _liveFeeds = new();
     private readonly Dictionary<EntityUid, int> _userHashes = new();
     private readonly HashSet<NetEntity> _seenBlips = new();
@@ -206,6 +209,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         feed = null;
         return _liveFeeds.TryGetValue(channel, out var feedUid) && TryComp(feedUid, out feed);
+    }
+
+    public bool TryGetTileIndices(EntityUid ent, EntityUid map, out Vector2i indices)
+    {
+        indices = default;
+        return TryComp(ent, out TransformComponent? xform) &&
+               xform.GridUid == map &&
+               TryComp(map, out MapGridComponent? grid) &&
+               _transform.TryGetGridTilePosition((ent, xform), out indices, grid);
     }
 
     public bool TryGetViewerChannels(EntityUid viewer, List<EntityUid> channels, out bool live)

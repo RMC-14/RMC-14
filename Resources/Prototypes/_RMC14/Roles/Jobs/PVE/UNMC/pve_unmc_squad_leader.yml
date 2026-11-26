@@ -6,6 +6,7 @@
   playTimeTracker: CMJobPVESquadLeader
   ranks:
     RMCRankSergeant: []
+    RMCRankCorporal: []
   spawnMenuRoleName: Sun Rider Squad Leader (PVE)
   startingGear: RMCGearPVESquadLeader
   dummyStartingGear: CMGearFireteamLeaderEquipped
@@ -47,6 +48,7 @@
   id: RMCGearPVESquadLeader
   equipment:
     id: RMCDogtagPVESquadLeader
+    ears: RMCHeadsetSunRidersLeader
 
 - type: entity
   parent: CMSpawnPointJobBase

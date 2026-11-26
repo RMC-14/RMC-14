@@ -37,6 +37,7 @@
   - type: DeletedByWeedKiller
   - type: XenoFriendly
   - type: RMCTrackable
+  - type: BlockXenoConstruction
 
 - type: entity
   parent: XenoTunnel

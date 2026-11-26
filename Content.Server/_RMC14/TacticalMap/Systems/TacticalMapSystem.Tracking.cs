@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared.Atmos.Rotting;
@@ -173,7 +174,8 @@ public sealed partial class TacticalMapSystem
             comp.Color,
             comp.Flags,
             comp.UnrevivableStart,
-            comp.UnrevivableEnd);
+            comp.UnrevivableEnd,
+            comp.Opacity);
 
         var net = GetNetEntity(ent);
         var alwaysVisible = HasComp<TacticalMapAlwaysVisibleComponent>(ent);
@@ -217,10 +219,12 @@ public sealed partial class TacticalMapSystem
     {
         SpriteSpecifier.Rsi? icon = null;
         SpriteSpecifier.Rsi? background = null;
+        var opacity = 1f;
         if (TryComp(ent, out TacticalMapIconComponent? iconComp))
         {
             icon = iconComp.Icon;
             background = iconComp.Background;
+            opacity = iconComp.Opacity;
         }
 
         if (TryComp(ent, out MapBlipIconOverrideComponent? iconOverride) && iconOverride.Icon != null)
@@ -238,6 +242,9 @@ public sealed partial class TacticalMapSystem
         var flags = TacticalMapBlipFlags.None;
         if (HasComp<HiveLeaderComponent>(ent))
             flags |= TacticalMapBlipFlags.HiveLeader;
+
+        if (HasComp<XenoRemoteStructureRemovalComponent>(ent))
+            flags |= TacticalMapBlipFlags.RemotelyRemovable;
 
         var start = TimeSpan.Zero;
         var end = TimeSpan.Zero;
@@ -258,6 +265,7 @@ public sealed partial class TacticalMapSystem
         comp.Icon = icon;
         comp.Background = background;
         comp.Color = color;
+        comp.Opacity = opacity;
         comp.Flags = flags;
         comp.UnrevivableStart = start;
         comp.UnrevivableEnd = end;

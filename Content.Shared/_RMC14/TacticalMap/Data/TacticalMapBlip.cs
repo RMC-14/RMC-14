@@ -12,6 +12,7 @@ public enum TacticalMapBlipFlags : byte
     Undefibbable = 1 << 1,
     HiveLeader = 1 << 2,
     Revealed = 1 << 3,
+    RemotelyRemovable = 1 << 4,
 }
 
 [DataRecord]
@@ -23,7 +24,8 @@ public readonly record struct TacticalMapBlip(
     Color Color,
     TacticalMapBlipFlags Flags,
     TimeSpan UnrevivableStart,
-    TimeSpan UnrevivableEnd)
+    TimeSpan UnrevivableEnd,
+    float Opacity = 1f)
 {
     public const int DefibStages = 5;
 

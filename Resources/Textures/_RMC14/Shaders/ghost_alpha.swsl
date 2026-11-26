@@ -1,0 +1,13 @@
+light_mode unshaded;
+
+uniform highp float opacity;
+
+void fragment() {
+    highp vec4 sprite = zTexture(UV);
+
+    if (sprite.a <= 0.0) {
+        discard;
+    }
+
+    COLOR = vec4(sprite.rgb / sprite.a, sprite.a * opacity);
+}

@@ -78,6 +78,7 @@ public sealed partial class TacticalMapControl : Control
     private NetEntity? _selfEntity;
     private Vector2i? _selfIndices;
     private TacticalMapBlip? _selfBlip;
+    private Vector2i? _watchedIndices;
 
     private Vector2i? _mortarCenter;
     private int _mortarMinRange;
@@ -104,6 +105,7 @@ public sealed partial class TacticalMapControl : Control
     public bool CrtOverlay { get; set; } = true;
     public TacticalMapTheme MapTheme { get; set; } = TacticalMapTheme.Marine;
     public bool AllowBlipClicks { get; set; } = true;
+    public bool RemovableBlipClicks { get; set; }
     public Color DrawColor { get; set; } = Color.Black;
     public float DrawThickness { get; set; } = 2f;
     public int LineLimit { get; set; } = 1000;
@@ -186,6 +188,11 @@ public sealed partial class TacticalMapControl : Control
     }
 
     public Vector2i? SelfIndices => _selfIndices;
+
+    public void SetWatched(Vector2i? indices)
+    {
+        _watchedIndices = indices;
+    }
 
     public void SetLayers(IReadOnlyList<TacticalMapCanvasLayer> layers)
     {
@@ -293,21 +300,43 @@ public sealed partial class TacticalMapControl : Control
         if (!_hasBase)
             return false;
 
-        var size = GetBlipSize();
+        var half = GetBlipSize() / 2f;
         var tolerance = ClickTolerance * GetOverlayScale();
+        var exactIndex = -1;
+        var exactDistance = float.MaxValue;
+        var fallbackIndex = -1;
+        var fallbackDistance = float.MaxValue;
         for (var i = _blips.Count - 1; i >= 0; i--)
         {
             var blip = _blips[i];
             var center = TileToPixel(new Vector2(blip.Blip.Indices.X + 0.5f, blip.Blip.Indices.Y + 0.5f));
-            var half = size / 2f + tolerance;
-            if (MathF.Abs(pixel.X - center.X) > half || MathF.Abs(pixel.Y - center.Y) > half)
+            var dx = MathF.Abs(pixel.X - center.X);
+            var dy = MathF.Abs(pixel.Y - center.Y);
+            var distance = dx * dx + dy * dy;
+            if (dx <= half && dy <= half)
+            {
+                if (distance < exactDistance)
+                {
+                    exactIndex = i;
+                    exactDistance = distance;
+                }
+
+                continue;
+            }
+
+            if (dx > half + tolerance || dy > half + tolerance || distance >= fallbackDistance)
                 continue;
 
-            found = blip;
-            return true;
+            fallbackIndex = i;
+            fallbackDistance = distance;
         }
 
-        return false;
+        var index = exactIndex >= 0 ? exactIndex : fallbackIndex;
+        if (index < 0)
+            return false;
+
+        found = _blips[index];
+        return true;
     }
 
     public TacticalMapAreaInfo GetAreaInfo(Vector2i indices)

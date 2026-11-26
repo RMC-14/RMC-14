@@ -97,7 +97,7 @@ public sealed partial class GridVehicleMoverComponent : Component
     /// maximum sideways lane offset used for normal lane correction
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float TileOffsetLimit = 1f;
+    public float TileOffsetLimit = 1.5f;
 
     /// <summary>
     /// sideways lane offset sampling step for finding clear lanes
@@ -115,7 +115,7 @@ public sealed partial class GridVehicleMoverComponent : Component
     /// maximum sideways correction speed in grid units / second
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float LaneCorrectionSpeed = 4f;
+    public float LaneCorrectionSpeed = 6f;
 
     /// <summary>
     /// distance between continuous collision probes while moving
@@ -269,6 +269,18 @@ public sealed partial class GridVehicleMoverComponent : Component
     /// </summary>
     [NonSerialized]
     public Vector2i TurnNudgeCacheDir;
+
+    /// <summary>
+    /// number of fixed steps to skip lane searches after a failed search
+    /// </summary>
+    [NonSerialized]
+    public int LaneSearchSkipSteps;
+
+    /// <summary>
+    /// move direction that triggered the current lane search skip
+    /// </summary>
+    [NonSerialized]
+    public Vector2i LaneSearchCacheDir;
 
     /// <summary>
     /// active multiplier applied to movement speed after smashing objects

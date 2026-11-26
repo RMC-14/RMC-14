@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Xenonids.Announce;
 
@@ -16,7 +17,11 @@ public sealed class TacticalMapAnnounceSystem : EntitySystem
 
     private void OnMarineSubmitted(Entity<TacticalMapMarineAnnounceComponent> ent, ref TacticalMapCanvasSubmittedEvent args)
     {
-        _marineAnnounce.AnnounceARESStaging(args.Actor, ent.Comp.Message);
+        RMCAnnouncementOverlay? overlay = ent.Comp.Overlay is { } preset
+            ? new RMCAnnouncementOverlay(preset, ent.Comp.Message)
+            : null;
+
+        _marineAnnounce.AnnounceARESStaging(args.Actor, ent.Comp.Message, overlay: overlay);
     }
 
     private void OnXenoSubmitted(Entity<TacticalMapXenoAnnounceComponent> ent, ref TacticalMapCanvasSubmittedEvent args)

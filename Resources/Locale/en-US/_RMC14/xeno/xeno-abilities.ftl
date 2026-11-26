@@ -21,7 +21,6 @@ rmc-xeno-psychic-radiance-message = Radiate a psychic message.
 rmc-xeno-psychic-radiance-no-targets = There are no nearby minds to radiate to.
 rmc-xeno-psychic-radiance-sent = We radiate our thoughts to {$count} nearby minds.
 rmc-xeno-psychic-give-order-message = Give an order to {$target}.
-rmc-xeno-psychic-give-order-must-watch = We must be watching a sister to give an order.
 rmc-xeno-psychic-give-order-sent = We give an order to {$target}.
 rmc-xeno-psychic-target-invalid = That mind is no longer within our reach.
 rmc-xeno-psychic-message-xeno = [color=#921992][font size=14][bold]The voice of {$queen} resonates in your head:[/bold] "{$message}"[/font][/color]
@@ -75,6 +74,8 @@ rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-failed-marines-dropped = The sky talls have already landed, we can no longer evolve into this form.
 rmc-xeno-evolution-failed-queen-exists = The hive already has a Queen!
+rmc-xeno-evolution-failed-queen-requirement-minutes = We have not yet proven ourselves worthy to lead the hive. Anyone will be able to answer the call in {$minutes} minutes and {$seconds} seconds if no one else does.
+rmc-xeno-evolution-failed-queen-requirement-seconds = We have not yet proven ourselves worthy to lead the hive. Anyone will be able to answer the call in {$seconds} seconds if no one else does.
 rmc-xeno-evolution-failed-not-enough-points = We need more evolution material.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
@@ -83,8 +84,12 @@ rmc-xeno-evolution-raffle-won = The hive has chosen us!
 rmc-xeno-evolution-raffle-grace-health = A slot has opened for us, but we must be at full health! We have {$seconds} seconds.
 rmc-xeno-evolution-raffle-grace-location = A slot has opened for us, but we cannot evolve here! We have {$seconds} seconds.
 rmc-xeno-evolution-raffle-grace-weeds = A slot has opened for us, but we must be on weeds! We have {$seconds} seconds.
-rmc-xeno-evolution-raffle-missed = We were not ready in time and lost our place in the raffle.
-rmc-xeno-evolution-raffle-blocked-lower = A slot has opened for us, but the hive already has too many Tier {$tier} and higher sisters — one must fall or a Tier {$tier} slot open before we can ascend directly.
+rmc-xeno-evolution-raffle-missed = We were not ready in time. The hive passes over us for this slot, but we remain in the raffle.
+rmc-xeno-evolution-raffle-out-of-line = That caste is no longer within our evolution line. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-left-changed = Our new form cannot become that caste. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-left-closed = The hive has made its choice without us. We must evolve the usual way.
+rmc-xeno-evolution-raffle-left-crit = We are too wounded to be chosen. We lose our place in the raffle.
+rmc-xeno-evolution-raffle-progress = {$name} - {$progress}/{$cost}
 rmc-xeno-evolution-tab-evolve = Evolve
 rmc-xeno-evolution-tab-raffle = Raffle
 
@@ -169,6 +174,7 @@ cm-pheromones-warding = Warding
 cm-pheromones-frenzy = Frenzy
 cm-xeno-pheromones-start = You start emitting {$pheromones} pheromones
 cm-xeno-pheromones-stop = You stop emitting pheromones
+rmc-xeno-pheromones-already = We are already emitting {$pheromones} pheromones!
 
 # Regurgitate
 cm-xeno-none-devoured = You haven't devoured anyone!
@@ -225,6 +231,8 @@ cm-xeno-retrieve-egg-too-many-eggs = We can't carry more eggs!
 cm-xeno-retrieve-egg-stash-egg = We store the egg for safekeeping. Now holding: {$cur_eggs}/{$max_eggs}.
 cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding: {$cur_eggs}/{$max_eggs}.
 rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
+rmc-xeno-retrieve-egg-fill = We start filling {THE($morpher)} with our children.
+rmc-xeno-retrieve-egg-fill-finish = We slide our children out of eggs into {THE($morpher)}. Now holding: {$cur_eggs}/{$max_eggs}.
 
 # Throw Parasite
 cm-xeno-throw-parasite-no-parasites = We don't have any children stored!
@@ -236,6 +244,12 @@ rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE(
    [one] role
    *[other] roles
 } available.
+rmc-xeno-throw-parasite-empty = We take children from {THE($morpher)} and carry them for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
+rmc-xeno-throw-parasite-empty-on-fire = Touching {THE($morpher)} while you're on fire would burn the children in it!
+rmc-xeno-throw-parasite-throw-cooldown = We must wait before throwing another child.
+rmc-xeno-throw-parasite-retrieve-cooldown = We must wait before retrieving another child.
+
+rmc-xeno-parasite-drop-cooldown = We must wait before dropping another child.
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
@@ -254,10 +268,9 @@ rmc-xeno-retrieve-anchored = That sister cannot move!
 rmc-xeno-retrieve-too-big = {$target} is too big to retrieve while standing up!
 rmc-xeno-retrieve-dead = {$target} is already dead!
 rmc-xeno-retrieve-blocked = We can't reach {$target} with our resin retrieval hook!
-rmc-xeno-retrieve-start-self = We prepare to fire our resin retrieval hook at {$target}!
-rmc-xeno-retrieve-start-others = {$user} prepares to fire its resin retrieval hook at {$target}!
-rmc-xeno-retrieve-finish-user = We fling {$target} over our head with our resin hook!
-rmc-xeno-retrieve-finish-target = We are pulled toward {$user}!
+rmc-xeno-retrieve-finish-self = We fling {$target} over our head with our resin hook!
+rmc-xeno-retrieve-finish-target = We are pulled over {$user}'s head!
+rmc-xeno-retrieve-finish-others = {$target} is pulled over {$user}'s head!
 
 # Aid
 rmc-xeno-aid-self = We cannot heal ourself!
@@ -487,3 +500,29 @@ rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE
 rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
 rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
 rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!
+
+# Massacre
+rmc-xeno-massacre-no-targets = There's no dead to tear apart!
+rmc-xeno-massacre-start-self = We start ripping apart the dead!
+rmc-xeno-massacre-start-others = {CAPITALIZE(THE($user))} starts tearing apart the nearby bodies!
+rmc-xeno-massacre-end-self = We tear the dead apart!
+rmc-xeno-massacre-end-others = {CAPITALIZE(THE($user))} tears the nearby bodies apart!
+
+# Blood Drain
+rmc-xeno-blood-drain-target = {CAPITALIZE(THE($user))} is biting into you!
+rmc-xeno-blood-drain-no-blood = {CAPITALIZE(THE($target))} has no blood left!
+rmc-xeno-blood-drain-bad-blood = {CAPITALIZE(THE($target))} has terrible tasting blood!
+rmc-xeno-blood-drain-infected-blood = {CAPITALIZE(THE($target))} has sister blood flowing through them!
+rmc-xeno-blood-drain-pull = We need to pull {CAPITALIZE(THE($target))} to drain blood!
+rmc-xeno-blood-drain-down = We need to keep {CAPITALIZE(THE($target))} down to drain blood!
+
+# Paratoxin Slashes
+rmc-xeno-paratoxin-slashes-apply = Our next {$number ->
+[1] slash
+*[other] {$number} slashes
+} will apply paratoxin!
+rmc-xeno-paratoxin-slashes-expire = We have waited too long, our slashes will no longer apply paratoxin!
+
+# Catalytic Tail Stab
+rmc-xeno-catalytic-tail-stab-buff = We are faster and more armored for a short time!
+rmc-xeno-catalytic-tail-stab-buff-expire = We feel our speed and armor dissipate!

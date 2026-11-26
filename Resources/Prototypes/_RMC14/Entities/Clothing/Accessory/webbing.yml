@@ -485,6 +485,29 @@
       amount: 2
 
 - type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingHolsterSpearhead
+  suffix: Filled, Spearhead
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearhead
+      amount: 1
+    - id: RMCSpeedLoader357
+      amount: 2
+
+- type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingHolsterSpearheadCustom
+  suffix: Spearhead custom, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearheadCustom
+    - id: RMCSpeedLoader357
+    - id: RMCSpeedLoader357
+
+- type: entity
   parent: CMWebbingBase
   id: RMCWebbingDropPouch
   name: brown drop pouch
@@ -502,7 +525,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     components:
     - type: Storage
@@ -514,7 +537,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
@@ -562,7 +585,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
@@ -577,7 +600,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
@@ -614,7 +637,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - RMCBoxStorage
+      - RMCEngineerKit
   - type: Webbing
     components:
     - type: Storage
@@ -626,7 +649,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - RMCBoxStorage
+        - RMCEngineerKit
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance

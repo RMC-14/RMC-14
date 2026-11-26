@@ -15,7 +15,7 @@
     RMCRankCMBSeniorDeputy:
     - !type:RoleTimeRequirement
       role: CMJobSurvivorSecurity
-      time: 90000 # 25 hours
+      time: 252000 # 70 hours
     RMCRankCMBDeputy: []
   spawnMenuRoleName: Fiorina CMB Riot Officer (Survivor)
   icon: "RMCJobIconBureauRCO"
@@ -50,9 +50,9 @@
   parent: RMCGearSurvivorCMBDeputy
   id: RMCGearSurvivorFiorinaRiotOfficer
   equipment:
-    jumpsuit: RMCJumpsuitRiotControl
-    outerClothing: RMCArmorPMCRiot
-    head: ArmorHelmetPMCRiotShield
+    jumpsuit: RMCSwatCMBUniform
+    outerClothing: RMCArmorPMCRiotCMB
+    head: RMCArmorHelmetM10CMBVisorSWAT
     gloves: CMHandsBlackMarine
     shoes: RMCBootsPMCFilled
     pocket2: RMCPouchMagazineLarge

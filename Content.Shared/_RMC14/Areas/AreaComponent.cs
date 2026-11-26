@@ -22,6 +22,9 @@ public sealed partial class AreaComponent : Component
     public bool MortarPlacement;
 
     [DataField, AutoNetworkedField]
+    public bool Construction = true;
+
+    [DataField, AutoNetworkedField]
     public bool MortarFire;
 
     [DataField, AutoNetworkedField]

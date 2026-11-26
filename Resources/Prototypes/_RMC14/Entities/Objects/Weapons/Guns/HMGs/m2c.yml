@@ -41,7 +41,7 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m2c2.ogg
       params:
-        volume: -5
+        volume: -1
         variation: 0.05
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
@@ -87,10 +87,9 @@
       sprite: _RMC14/Interface/MousePointer/lmg_mouse.rsi
       state: all
   - type: MountableWeapon
-  - type: GunUnskilledPenalty
-    firearms: 0
-    angleIncrease: 0
-    accuracyAddMult: 0
+  - type: GunSkilledScatter
+    skilledMinimum: 0
+    unskilledAngleIncrease: 0
   - type: Scope
     scopePopup: null
     unScopePopup: null
