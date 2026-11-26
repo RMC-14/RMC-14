@@ -308,7 +308,7 @@ public sealed partial class CMDistressSignalRuleSystem
         CMDistressSignalRuleComponent comp, List<EntityUid> xenoSpawnPoints, List<EntityUid> xenoLeaderSpawnPoints)
     {
         var leader = _prototypes.TryIndex(ent, out var proto) &&
-                     proto.TryGetComponent(out XenoComponent? xeno, _compFactory) &&
+                     proto.TryComp(out XenoComponent? xeno, _compFactory) &&
                      xeno.SpawnAtLeaderPoint;
 
         var point = _random.Pick(leader ? xenoLeaderSpawnPoints : xenoSpawnPoints);

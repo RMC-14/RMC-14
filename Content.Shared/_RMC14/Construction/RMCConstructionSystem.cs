@@ -316,7 +316,7 @@ public sealed partial class RMCConstructionSystem : EntitySystem
     public List<int> CalculateSpawns(string entityPrototype, int amount)
     {
         var proto = _prototype.Index<EntityPrototype>(entityPrototype);
-        proto.TryGetComponent<StackComponent>(out var stack, EntityManager.ComponentFactory);
+        proto.TryComp<StackComponent>(out var stack, EntityManager.ComponentFactory);
         var maxCountPerStack = _stack.GetMaxCount(stack);
         var amounts = new List<int>();
         while (amount > 0)
@@ -441,7 +441,7 @@ public sealed partial class RMCConstructionSystem : EntitySystem
         if (!TryComp(gridId, out MapGridComponent? grid))
             return true;
 
-        if (proto.TryGetComponent(out BarricadeComponent? barricade, _componentFactory))
+        if (proto.TryComp(out BarricadeComponent? barricade, _componentFactory))
         {
             return !_weaponMount.HasWeaponMountNearbyPopup((gridId, grid), coordinates, proto, user: user);
         }

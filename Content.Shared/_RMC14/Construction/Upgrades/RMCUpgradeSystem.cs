@@ -251,7 +251,7 @@ public sealed partial class RMCUpgradeSystem : EntitySystem
 
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (prototype.TryGetComponent(out RMCConstructionUpgradeComponent? upgrade, _compFactory))
+            if (prototype.TryComp(out RMCConstructionUpgradeComponent? upgrade, _compFactory))
                 _upgradePrototypes[prototype.ID] = upgrade;
         }
     }

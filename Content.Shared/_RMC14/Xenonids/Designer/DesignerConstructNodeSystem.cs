@@ -247,7 +247,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         // Weeds must still exist for the weedbound structure to be built.
         if (nodeComp.BoundWeed is not { } boundWeed || !Exists(boundWeed) || !HasComp<Content.Shared._RMC14.Xenonids.Weeds.XenoWeedsComponent>(boundWeed))
         {
-            EntityManager.DeleteEntity(nodeUid);
+            Del(nodeUid);
             return;
         }
 
@@ -271,7 +271,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
 
         _weedbound.RegisterWeedboundStructure(spawned, boundWeed);
 
-        EntityManager.DeleteEntity(nodeUid);
+        Del(nodeUid);
         _popup.PopupClient(Loc.GetString("rmc-xeno-designer-infuse-node"), user, user, PopupType.Small);
     }
 

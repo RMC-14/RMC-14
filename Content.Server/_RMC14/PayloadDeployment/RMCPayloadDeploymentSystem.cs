@@ -63,7 +63,7 @@ public sealed partial class RMCPayloadDeploymentSystem : EntitySystem
 
     public void PreparePrototypePayload(EntityUid entity, EntityPrototype prototype)
     {
-        if (!prototype.TryGetComponent(out TransformComponent? transform, _compFactory) ||
+        if (!prototype.TryComp(out TransformComponent? transform, _compFactory) ||
             !transform.Anchored)
         {
             return;

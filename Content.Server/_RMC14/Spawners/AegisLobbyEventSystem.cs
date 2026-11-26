@@ -146,12 +146,12 @@ public sealed partial class AegisLobbyEventSystem : EntitySystem
     public bool SendCICFax(IEntitySystemManager systemManager, IEntityManager entityManager, string message, EntProtoId faxProto, string? sender = null)
     {
         if (!_proto.TryIndex(faxProto, out var faxPaper) ||
-            !faxPaper.TryGetComponent<PaperComponent>(out var paper, EntityManager.ComponentFactory))
+            !faxPaper.TryComp<PaperComponent>(out var paper, EntityManager.ComponentFactory))
             return false;
 
         var label = string.Empty;
 
-        if (faxPaper.TryGetComponent<LabelComponent>(out var labelComp, EntityManager.ComponentFactory))
+        if (faxPaper.TryComp<LabelComponent>(out var labelComp, EntityManager.ComponentFactory))
             label = labelComp.CurrentLabel;
 
         var printout = new FaxPrintout(

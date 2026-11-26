@@ -119,7 +119,7 @@ public sealed partial class MapInsertSystem : EntitySystem
                     if (!_prototypes.TryIndex(protoId, out var proto))
                         continue;
 
-                    if (!proto.TryGetComponent(out AreaComponent? areaComp, _compFactory))
+                    if (!proto.TryComp(out AreaComponent? areaComp, _compFactory))
                         continue;
 
                     _areas.ReplaceArea(mainAreaGrid, coordinatesi + position, protoId);

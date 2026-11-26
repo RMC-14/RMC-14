@@ -79,7 +79,7 @@ public sealed partial class DesignerCrosshairSystem : EntitySystem
         var nodeType = DesignNodeType.Construct;
         if (construction.BuildChoice is { } buildChoice &&
             _prototype.TryIndex(buildChoice, out var proto) &&
-            proto.TryGetComponent(out DesignNodeComponent? nodeComp, _compFactory))
+            proto.TryComp(out DesignNodeComponent? nodeComp, _compFactory))
         {
             nodeType = nodeComp.NodeType;
         }

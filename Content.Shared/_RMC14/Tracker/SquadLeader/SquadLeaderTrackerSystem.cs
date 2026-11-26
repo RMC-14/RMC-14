@@ -557,7 +557,7 @@ public sealed partial class SquadLeaderTrackerSystem : EntitySystem
                 var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
                 var targetName = "";
 
-                if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
+                if (TryComp(trackableUid, trackingComponent, out _))
                 {
                     if (!_net.IsClient)
                         targetName = Name(trackableUid);
@@ -717,7 +717,7 @@ public sealed partial class SquadLeaderTrackerSystem : EntitySystem
                 if (trackerMode.Component != null)
                 {
                     var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
-                    if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
+                    if (TryComp(trackableUid, trackingComponent, out _))
                     {
                         SetTarget((uid, tracker), trackableUid);
 

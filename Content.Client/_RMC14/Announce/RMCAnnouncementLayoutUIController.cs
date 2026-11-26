@@ -116,7 +116,7 @@ public sealed partial class RMCAnnouncementLayoutUIController : UIController, IO
         _presets.Clear();
         foreach (var prototype in _prototype.EnumeratePrototypes<EntityPrototype>())
         {
-            if (!prototype.TryGetComponent(out RMCAnnouncementPresetComponent? preset, _compFactory) ||
+            if (!prototype.TryComp(out RMCAnnouncementPresetComponent? preset, _compFactory) ||
                 !preset.ShowInLayoutEditor)
             {
                 continue;

@@ -74,12 +74,12 @@ public sealed partial class SharedXenoGutSystem : EntitySystem
 
         var xenoMsg = Loc.GetString("rmc-gut-start-xenos", ("user", xeno.Owner));
         var xenoFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
+            .RemoveWhereAttachedEntity(uid => !HasComp<XenoComponent>(uid));
         _popup.PopupPredicted(xenoMsg, xeno.Owner, null, xenoFilter, true, PopupType.LargeCaution);
 
         var marineMsg = Loc.GetString("rmc-gut-start-marines", ("target", args.Target));
         var marineFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<MarineComponent>(uid));
+            .RemoveWhereAttachedEntity(uid => !HasComp<MarineComponent>(uid));
         _popup.PopupPredicted(marineMsg, xeno.Owner, null, marineFilter, true, PopupType.LargeCaution);
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -117,12 +117,12 @@ public sealed partial class SharedXenoGutSystem : EntitySystem
 
         var xenoMsg = Loc.GetString("rmc-gut-finish-xenos", ("user", xeno.Owner));
         var xenoFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
+            .RemoveWhereAttachedEntity(uid => !HasComp<XenoComponent>(uid));
         _popup.PopupPredicted(xenoMsg, xeno.Owner, null, xenoFilter, true, PopupType.LargeCaution);
 
         var marineMsg = Loc.GetString("rmc-gut-finish-marines", ("target", args.Target));
         var marineFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<MarineComponent>(uid));
+            .RemoveWhereAttachedEntity(uid => !HasComp<MarineComponent>(uid));
         _popup.PopupPredicted(marineMsg, xeno.Owner, null, marineFilter, true, PopupType.LargeCaution);
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoGutActionEvent>(xeno))

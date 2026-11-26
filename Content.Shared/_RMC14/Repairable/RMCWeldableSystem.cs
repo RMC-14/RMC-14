@@ -19,7 +19,7 @@ public sealed partial class RMCWeldableSystem : EntitySystem
             return;
 
         var baseFuel = MetaData(ent).EntityPrototype is { } proto &&
-                       proto.TryGetComponent<WeldableComponent>(out var protoWeldable, _compFactory)
+                       proto.TryComp<WeldableComponent>(out var protoWeldable, _compFactory)
             ? protoWeldable.Fuel
             : ent.Comp.Fuel;
 

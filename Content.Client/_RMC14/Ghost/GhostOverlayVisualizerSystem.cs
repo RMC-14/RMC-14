@@ -84,7 +84,7 @@ public sealed partial class GhostOverlayVisualizerSystem : EntitySystem
         EntityPrototype prototype,
         GhostDamageSnapshot damage)
     {
-        if (!prototype.TryGetComponent(out DamageVisualsComponent? damageVisuals, _compFactory) ||
+        if (!prototype.TryComp(out DamageVisualsComponent? damageVisuals, _compFactory) ||
             !damageVisuals.Overlay ||
             damageVisuals.TargetLayers == null ||
             damageVisuals.DamageOverlayGroups == null)
@@ -141,7 +141,7 @@ public sealed partial class GhostOverlayVisualizerSystem : EntitySystem
         EntityPrototype prototype,
         GhostFireSnapshot fire)
     {
-        if (!prototype.TryGetComponent(out FireVisualsComponent? fireVisuals, _compFactory) ||
+        if (!prototype.TryComp(out FireVisualsComponent? fireVisuals, _compFactory) ||
             fireVisuals.Sprite == null)
         {
             return;

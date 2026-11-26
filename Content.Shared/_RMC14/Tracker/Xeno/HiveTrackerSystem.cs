@@ -319,7 +319,7 @@ public sealed partial class HiveTrackerSystem : EntitySystem
                     // Only automatically track the first found target if looking for a queen
                     if (trackerMode.Component == QueenTrackerComponent)
                     {
-                        if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
+                        if (TryComp(trackableUid, trackingComponent, out _))
                         {
                             SetTarget((uid, tracker), trackableUid);
                             if (tracker.Target != null)

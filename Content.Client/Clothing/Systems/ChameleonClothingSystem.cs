@@ -35,7 +35,7 @@ public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
     {
         base.UpdateSprite(uid, proto);
         if (TryComp(uid, out SpriteComponent? sprite)
-            && proto.TryGetComponent(out SpriteComponent? otherSprite, Factory))
+            && proto.TryComp(out SpriteComponent? otherSprite, Factory))
         {
             // TODO no system method to replace this with.
             // otherSprite.Owner is Invalid here because the component is being taken from a prototype.
@@ -46,7 +46,7 @@ public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
 
         // Edgecase for PDAs to include visuals when UI is open
         if (TryComp(uid, out PdaBorderColorComponent? borderColor)
-            && proto.TryGetComponent(out PdaBorderColorComponent? otherBorderColor, Factory))
+            && proto.TryComp(out PdaBorderColorComponent? otherBorderColor, Factory))
         {
             borderColor.BorderColor = otherBorderColor.BorderColor;
             borderColor.AccentHColor = otherBorderColor.AccentHColor;

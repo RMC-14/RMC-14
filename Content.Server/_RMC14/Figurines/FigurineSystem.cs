@@ -88,7 +88,7 @@ public sealed partial class FigurineSystem : EntitySystem
         _allFigurines.Clear();
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (prototype.TryGetComponent(out PatronFigurineComponent? figurine, _compFactory))
+            if (prototype.TryComp(out PatronFigurineComponent? figurine, _compFactory))
             {
                 if (_allFigurines.ContainsKey(figurine.Id))
                     Log.Error($"Duplicate id {figurine.Id} found for figurine {prototype.ID}");
@@ -108,7 +108,7 @@ public sealed partial class FigurineSystem : EntitySystem
         foreach (var (_, figurineId) in _allFigurines)
         {
             if (_prototypes.TryIndex(figurineId, out var figurine) &&
-                figurine.TryGetComponent(out PatronFigurineComponent? figurineComp, _compFactory))
+                figurine.TryComp(out PatronFigurineComponent? figurineComp, _compFactory))
             {
                 if (!Guid.TryParse(figurineComp.Id, out var guid))
                 {

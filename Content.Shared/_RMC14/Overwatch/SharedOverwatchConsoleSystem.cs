@@ -772,7 +772,7 @@ public abstract partial class SharedOverwatchConsoleSystem : EntitySystem
     private void ApplyCameraOffset(NetEntity actorNetEntity, OverwatchDirection direction)
     {
         if (!TryGetEntity(actorNetEntity, out var watchedUid) ||
-            !EntityManager.TryGetComponent<EyeComponent>(watchedUid.Value, out var eye) ||
+            !TryComp<EyeComponent>(watchedUid.Value, out var eye) ||
             !HasComp<OverwatchWatchingComponent>(GetEntity(actorNetEntity)))
             return;
 

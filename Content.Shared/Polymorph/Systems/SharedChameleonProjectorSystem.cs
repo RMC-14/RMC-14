@@ -305,7 +305,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         if (!_proto.TryIndex<EntityPrototype>(protoId, out var proto))
             return false;
 
-        return proto.TryGetComponent(out src, EntityManager.ComponentFactory);
+        return proto.TryComp(out src, EntityManager.ComponentFactory);
     }
 }
 

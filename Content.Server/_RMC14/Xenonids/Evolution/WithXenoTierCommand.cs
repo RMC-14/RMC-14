@@ -27,6 +27,6 @@ public sealed partial class WithXenoTierCommand : ToolshedCommand
         [CommandArgument] int tier,
         [CommandInverted] bool inverted)
     {
-        return input.Where(x => (x.TryGetComponent(out XenoComponent? xeno, _compFactory) && xeno.Tier == tier) ^ inverted);
+        return input.Where(x => (x.TryComp(out XenoComponent? xeno, _compFactory) && xeno.Tier == tier) ^ inverted);
     }
 }

@@ -168,7 +168,7 @@ public sealed partial class CommunicationsTowerSystem : EntitySystem
             foreach (var faction in factions)
             {
                 if (_prototypes.TryIndex(faction, out var factionProto) &&
-                    factionProto.TryGetComponent(out FactionFrequenciesComponent? frequencies, _compFactory))
+                    factionProto.TryComp(out FactionFrequenciesComponent? frequencies, _compFactory))
                 {
                     ent.Comp.Channels.UnionWith(frequencies.Channels);
                 }

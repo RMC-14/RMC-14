@@ -61,7 +61,7 @@ public sealed partial class RMCAnnouncePresetCommand : LocalizedEntityCommands
         {
             1 => CompletionResult.FromHintOptions(
                 _prototypes.EnumeratePrototypes<EntityPrototype>()
-                    .Where(p => p.TryGetComponent(out RMCAnnouncementPresetComponent? _, _compFactory))
+                    .Where(p => p.TryComp(out RMCAnnouncementPresetComponent? _, _compFactory))
                     .Select(p => p.ID),
                 Loc.GetString("cmd-announcepreset-hint-preset")),
             2 => CompletionResult.FromHint(Loc.GetString("cmd-announcepreset-hint-message")),

@@ -97,7 +97,7 @@ public sealed partial class ARESExternalTerminalSystem : EntitySystem
         if (Prototype(ent) is not { } proto)
             return;
 
-        proto.TryGetComponent<ARESExternalTerminalComponent>(out var comp, _componentFactory);
+        proto.TryComp<ARESExternalTerminalComponent>(out var comp, _componentFactory);
         var refComp = ent.Comp;
         _serialization.CopyTo(comp, ref refComp);
 

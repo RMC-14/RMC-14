@@ -197,7 +197,7 @@ public sealed partial class XenoEvolutionBui : BoundUserInterface
         {
             if (hasQueenAlive &&
                 _prototype.TryIndex(evolutionId, out var proto) &&
-                proto.TryGetComponent(out XenoEvolutionGranterComponent? _, _compFactory))
+                proto.TryComp(out XenoEvolutionGranterComponent? _, _compFactory))
             {
                 continue;
             }

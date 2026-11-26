@@ -344,7 +344,7 @@ public sealed partial class GhostHumanoidAppearanceVisualizerSystem : EntitySyst
             return cached;
 
         if (!_prototype.TryIndex(protoId, out var prototype) ||
-            !prototype.TryGetComponent(out ClothingComponent? clothing, _compFactory))
+            !prototype.TryComp(out ClothingComponent? clothing, _compFactory))
         {
             _clothingCache[protoId] = null;
             return null;
@@ -370,7 +370,7 @@ public sealed partial class GhostHumanoidAppearanceVisualizerSystem : EntitySyst
             return cached;
 
         if (!_prototype.TryIndex(protoId, out var prototype) ||
-            !prototype.TryGetComponent(out ItemComponent? item, _compFactory))
+            !prototype.TryComp(out ItemComponent? item, _compFactory))
         {
             _itemCache[protoId] = null;
             return null;
@@ -397,7 +397,7 @@ public sealed partial class GhostHumanoidAppearanceVisualizerSystem : EntitySyst
             return res.RSI;
         }
 
-        return prototype.TryGetComponent(out SpriteComponent? sprite, _compFactory) ? sprite.BaseRSI : null;
+        return prototype.TryComp(out SpriteComponent? sprite, _compFactory) ? sprite.BaseRSI : null;
     }
 
     private static bool TryResolveEquippedVisuals(

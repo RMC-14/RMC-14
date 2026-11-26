@@ -116,7 +116,7 @@ public sealed partial class GhostNonHumanoidAppearanceVisualizerSystem : EntityS
         if (!_prototype.TryIndex(prototypeId, out var prototype))
             return false;
 
-        if (!prototype.TryGetComponent(out SpriteComponent? sprite, _compFactory))
+        if (!prototype.TryComp(out SpriteComponent? sprite, _compFactory))
         {
             _prototypeSprites[prototypeId] = null;
             return false;

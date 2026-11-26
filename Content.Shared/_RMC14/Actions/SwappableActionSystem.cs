@@ -28,7 +28,7 @@ public sealed partial class SwappableActionSystem : EntitySystem
             if (HasComp<WorldTargetActionComponent>(ent) &&
                 ent.Comp.SwappedActionProto is { } id &&
                 _prototype.TryIndex(id, out var proto) &&
-                proto.TryGetComponent<WorldTargetActionComponent>(out var world, _compFactory) &&
+                proto.TryComp<WorldTargetActionComponent>(out var world, _compFactory) &&
                 world.Event is { } ev)
             {
                 _actions.SetEvent(ent, _serialization.CreateCopy(ev, notNullableOverride: true));
@@ -38,7 +38,7 @@ public sealed partial class SwappableActionSystem : EntitySystem
         {
             if (HasComp<InstantActionComponent>(ent) &&
                 MetaData(ent).EntityPrototype is { } proto &&
-                proto.TryGetComponent<InstantActionComponent>(out var instant, _compFactory) &&
+                proto.TryComp<InstantActionComponent>(out var instant, _compFactory) &&
                 instant.Event is { } ev)
             {
                 _actions.SetEvent(ent, _serialization.CreateCopy(ev, notNullableOverride: true));
@@ -108,7 +108,7 @@ public sealed partial class SwappableActionSystem : EntitySystem
         _metaData.SetEntityName(actionId, proto.Name);
         _metaData.SetEntityDescription(actionId, proto.Description);
 
-        if (proto.TryGetComponent<ActionComponent>(out var protoAction, _compFactory))
+        if (proto.TryComp<ActionComponent>(out var protoAction, _compFactory))
         {
             _actions.SetUseDelay(actionId, protoAction.UseDelay);
             _actions.SetIcon(actionId, protoAction.Icon);
@@ -116,12 +116,12 @@ public sealed partial class SwappableActionSystem : EntitySystem
             _actions.SetIconColor(actionId, protoAction.IconColor);
         }
 
-        if (proto.TryGetComponent<WorldTargetActionComponent>(out var protoWorld, _compFactory))
+        if (proto.TryComp<WorldTargetActionComponent>(out var protoWorld, _compFactory))
         {
             RemComp<InstantActionComponent>(actionId);
 
             var target = EnsureComp<TargetActionComponent>(actionId);
-            if (proto.TryGetComponent<TargetActionComponent>(out var protoTarget, _compFactory))
+            if (proto.TryComp<TargetActionComponent>(out var protoTarget, _compFactory))
             {
                 target.Repeat = protoTarget.Repeat;
                 target.DeselectOnMiss = protoTarget.DeselectOnMiss;
@@ -137,7 +137,7 @@ public sealed partial class SwappableActionSystem : EntitySystem
             if (protoWorld.Event is { } worldEv)
                 _actions.SetEvent(actionId, _serialization.CreateCopy(worldEv, notNullableOverride: true));
         }
-        else if (proto.TryGetComponent<InstantActionComponent>(out var protoInstant, _compFactory))
+        else if (proto.TryComp<InstantActionComponent>(out var protoInstant, _compFactory))
         {
             RemComp<WorldTargetActionComponent>(actionId);
             RemComp<TargetActionComponent>(actionId);

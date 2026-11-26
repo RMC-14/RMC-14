@@ -88,7 +88,7 @@ public abstract partial class SharedChameleonClothingSystem : EntitySystem
 
         // item sprite logic
         if (TryComp(uid, out ItemComponent? item) &&
-            proto.TryGetComponent(out ItemComponent? otherItem, Factory))
+            proto.TryComp(out ItemComponent? otherItem, Factory))
         {
             _itemSystem.CopyVisuals(uid, otherItem, item);
         }
@@ -148,7 +148,7 @@ public abstract partial class SharedChameleonClothingSystem : EntitySystem
             return false;
 
         // check if it is marked as valid chameleon target
-        if (!proto.TryGetComponent(out TagComponent? tag, Factory) || !_tag.HasTag(tag, WhitelistChameleonTag))
+        if (!proto.TryComp(out TagComponent? tag, Factory) || !_tag.HasTag(tag, WhitelistChameleonTag))
             return false;
 
         if (requiredTag != null && !_tag.HasTag(tag, requiredTag))
@@ -195,7 +195,7 @@ public abstract partial class SharedChameleonClothingSystem : EntitySystem
             // check if this is valid clothing
             if (!IsValidTarget(proto))
                 continue;
-            if (!proto.TryGetComponent(out ClothingComponent? item, Factory))
+            if (!proto.TryComp(out ClothingComponent? item, Factory))
                 continue;
 
             // sort item by their slot flags

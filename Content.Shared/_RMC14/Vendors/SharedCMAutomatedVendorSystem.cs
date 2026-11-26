@@ -715,7 +715,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
         int? partialStackAmount = null;
         if (entry.Amount == 0 &&
             _prototypes.TryIndex(entry.Id, out var entryProto) &&
-            entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory) &&
+            entryProto.TryComp(out StackComponent? entryStack, _compFactory) &&
             comp.PartialProductStacks.TryGetValue(entryStack.StackTypeId, out var partial) &&
             partial > 0)
         {
@@ -761,7 +761,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
             var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
             var currentPartialAmount = i == 0 ? partialStackAmount : null;
             var currentPartialItemId = i == 0 ? partialStackItemId : null;
-            if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
+            if (entity.TryComp(out CMVendorBundleComponent? bundle, _compFactory))
             {
                 foreach (var bundled in bundle.Bundle)
                 {
@@ -776,7 +776,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (entity.TryGetComponent(out CMChangeUserOnVendComponent? change, _compFactory) &&
+        if (entity.TryComp(out CMChangeUserOnVendComponent? change, _compFactory) &&
             change.AddComponents != null)
         {
             EntityManager.AddComponents(actor, change.AddComponents);
@@ -785,7 +785,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset, int? partialStackAmount = null, SlotFlags? replaceSlot = null)
     {
-        if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo, _compFactory))
+        if (_prototypes.Index(toVend).TryComp(out CMVendorMapToSquadComponent? mapTo, _compFactory))
         {
             if (TryComp(player, out SquadMemberComponent? member) &&
                 member.Squad is { } squad &&
@@ -961,7 +961,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
         if (entry.BoxSlots is not { } boxSlots)
         {
             if (!_prototypes.TryIndex(entry.Id, out var boxProto) ||
-                !boxProto.TryGetComponent(out CMItemSlotsComponent? slots, _compFactory) ||
+                !boxProto.TryComp(out CMItemSlotsComponent? slots, _compFactory) ||
                 slots.Count is not { } count)
             {
                 return 1;
@@ -1024,7 +1024,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
             if (failedItems.Contains(netItem))
                 continue;
 
-            if (!EntityManager.EntityExists(item))
+            if (!Exists(item))
             {
                 _container.Remove(item, storage.Container);
                 i--;
@@ -1070,7 +1070,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
         if (!TryComp(container, out StorageComponent? storage))
             return;
 
-        if (!EntityManager.EntityExists(item))
+        if (!Exists(item))
         {
             StartNextRestock(vendor, container, args.User, storage, args.FailedBulkRestockItems);
             return;
@@ -1164,7 +1164,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
         var stackTypeId = stack.StackTypeId;
 
         if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
-            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            !entryProto.TryComp(out StackComponent? entryStack, _compFactory))
         {
             return false;
         }
@@ -1251,7 +1251,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
     public bool TryClearPartialStack(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)
     {
         if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
-            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            !entryProto.TryComp(out StackComponent? entryStack, _compFactory))
         {
             return false;
         }
@@ -1325,7 +1325,7 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
                 if (!_prototypes.TryIndex(current.Id, out var proto))
                     continue;
 
-                if (!proto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                if (!proto.TryComp(out StackComponent? entryStack, _compFactory))
                     continue;
 
                 if (entryStack.StackTypeId != stackTypeId)
@@ -1604,12 +1604,12 @@ public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
 
         var expectedTotal = 0;
         if (_prototypes.TryIndex(itemProto, out var proto) &&
-            proto.TryGetComponent(out StorageFillComponent? storageFill, _compFactory))
+            proto.TryComp(out StorageFillComponent? storageFill, _compFactory))
         {
             foreach (var entry in storageFill.Contents)
             {
                 if (_prototypes.TryIndex(entry.PrototypeId, out var entryProto) &&
-                    entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                    entryProto.TryComp(out StackComponent? entryStack, _compFactory))
                 {
                     expectedTotal += entry.Amount * entryStack.Count;
                 }

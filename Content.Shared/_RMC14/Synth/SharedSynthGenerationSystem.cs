@@ -112,7 +112,7 @@ public sealed partial class SharedSynthGenerationSystem : EntitySystem
             foreach (var id in ent.Comp.AvailableGenerations)
             {
                 if (_prototype.TryIndex(id, out var proto) &&
-                    proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                    proto.TryComp(out SynthGenerationComponent? gen, _compFactory))
                     synthTypes.Add((proto, gen.Priority));
             }
         }
@@ -120,7 +120,7 @@ public sealed partial class SharedSynthGenerationSystem : EntitySystem
         {
             foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
             {
-                if (proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                if (proto.TryComp(out SynthGenerationComponent? gen, _compFactory))
                     synthTypes.Add((proto, gen.Priority));
             }
         }
@@ -129,7 +129,7 @@ public sealed partial class SharedSynthGenerationSystem : EntitySystem
 
         foreach (var (proto, _) in synthTypes)
         {
-            var desc = proto.TryGetComponent(out SynthGenerationComponent? genComp, _compFactory)
+            var desc = proto.TryComp(out SynthGenerationComponent? genComp, _compFactory)
                 ? genComp.Description
                 : string.Empty;
             options.Add(new DialogOption(proto.Name, new GenerationSelectedActionEvent(proto.ID), description: desc));

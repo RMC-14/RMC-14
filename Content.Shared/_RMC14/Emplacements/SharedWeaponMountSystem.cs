@@ -758,7 +758,7 @@ public abstract partial class SharedWeaponMountSystem : EntitySystem
 
         hasNearbyMounts = false;
 
-        if (checking.TryGetComponent(out WeaponMountComponent? mountComp, _componentFactory))
+        if (checking.TryComp(out WeaponMountComponent? mountComp, _componentFactory))
         {
             foreach (var mount in mounts)
             {

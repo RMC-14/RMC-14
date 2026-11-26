@@ -102,7 +102,7 @@ public sealed partial class DropshipFabricatorSystem : EntitySystem
         if (args.Id == default || !_prototypes.TryIndex(args.Id, out var proto))
             return;
 
-        if (!proto.TryGetComponent(out DropshipFabricatorPrintableComponent? printable, _compFactory))
+        if (!proto.TryComp(out DropshipFabricatorPrintableComponent? printable, _compFactory))
             return;
 
         var actor = args.Actor;
@@ -163,7 +163,7 @@ public sealed partial class DropshipFabricatorSystem : EntitySystem
             ent.Comp.Queue.RemoveAt(0);
 
             if (!_prototypes.TryIndex(entry.Id, out var proto) ||
-                !proto.TryGetComponent(out DropshipFabricatorPrintableComponent? printable, _compFactory))
+                !proto.TryComp(out DropshipFabricatorPrintableComponent? printable, _compFactory))
             {
                 RefundQueuedCost(ent, entry.Cost);
                 continue;

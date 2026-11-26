@@ -339,7 +339,7 @@ public sealed partial class XenoEggSystem : EntitySystem
 
         // Hand code is god-awful and its reach distance is inconsistent with args.CanReach
         // so we need to set the position ourselves.
-        _transform.SetCoordinates(egg, EntityManager.GetCoordinates(args.Coordinates));
+        _transform.SetCoordinates(egg, GetCoordinates(args.Coordinates));
         _transform.SetLocalRotation(egg, 0);
 
         SetEggState(egg, XenoEggState.Growing);

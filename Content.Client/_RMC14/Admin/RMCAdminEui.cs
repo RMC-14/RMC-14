@@ -77,7 +77,7 @@ public sealed partial class RMCAdminEui : BaseEui
         var tiers = new SortedDictionary<int, SortedSet<EntityPrototype>>();
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
+            if (entity.Abstract || !entity.TryComp(out XenoComponent? xeno, _compFactory))
                 continue;
 
             if (entity.HasComponent<XenoStrainComponent>(_compFactory) ||
@@ -219,7 +219,7 @@ public sealed partial class RMCAdminEui : BaseEui
             {
                 squadName = squadPrototype.Name;
 
-                if (squadPrototype.TryGetComponent(out SquadTeamComponent? squadComp, _compFactory))
+                if (squadPrototype.TryComp(out SquadTeamComponent? squadComp, _compFactory))
                     color = squadComp.Color;
             }
 

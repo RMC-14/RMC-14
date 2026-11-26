@@ -126,10 +126,10 @@ public sealed partial class XenoHiveSystem : SharedXenoHiveSystem
         ent.Comp.ReplaceAt = _timing.CurTime + ent.Comp.Duration;
         Dirty(ent);
 
-        EntityManager.RemoveComponent<DamageableComponent>(ent);
-        EntityManager.RemoveComponent<DestructibleComponent>(ent);
-        EntityManager.RemoveComponent<RMCWallExplosionDeletableComponent>(ent);
-        EntityManager.RemoveComponent<XenoConstructionRequiresSupportComponent>(ent);
+        RemComp<DamageableComponent>(ent);
+        RemComp<DestructibleComponent>(ent);
+        RemComp<RMCWallExplosionDeletableComponent>(ent);
+        RemComp<XenoConstructionRequiresSupportComponent>(ent);
 
         if (ent.Comp.BlockerId != null)
             ent.Comp.Blocker = SpawnAttachedTo(ent.Comp.BlockerId, ent.Owner.ToCoordinates());
@@ -307,16 +307,16 @@ public sealed partial class XenoHiveSystem : SharedXenoHiveSystem
 
                 _metaData.SetEntityName(ent, replace.Name);
 
-                if (replace.TryGetComponent(out DamageableComponent? damageable, _compFactory))
+                if (replace.TryComp(out DamageableComponent? damageable, _compFactory))
                     AddComp(ent, _serialization.CreateCopy(damageable, notNullableOverride: true), true);
 
-                if (replace.TryGetComponent(out DestructibleComponent? destructible, _compFactory))
+                if (replace.TryComp(out DestructibleComponent? destructible, _compFactory))
                     AddComp(ent, _serialization.CreateCopy(destructible, notNullableOverride: true), true);
 
-                if (replace.TryGetComponent(out RMCWallExplosionDeletableComponent? wallDeletable, _compFactory))
+                if (replace.TryComp(out RMCWallExplosionDeletableComponent? wallDeletable, _compFactory))
                     AddComp(ent, _serialization.CreateCopy(wallDeletable, notNullableOverride: true), true);
 
-                if (replace.TryGetComponent(out XenoConstructionRequiresSupportComponent? requiresSupport, _compFactory))
+                if (replace.TryComp(out XenoConstructionRequiresSupportComponent? requiresSupport, _compFactory))
                     AddComp(ent, _serialization.CreateCopy(requiresSupport, notNullableOverride: true), true);
             }
         }

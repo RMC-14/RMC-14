@@ -361,7 +361,7 @@ public sealed partial class SpreaderSystem : EntitySystem
 
     public bool RequiresFloorToSpread(EntProtoId<EdgeSpreaderComponent> spreader)
     {
-        if (!_prototype.Index(spreader).TryGetComponent<EdgeSpreaderComponent>(out var spreaderComp, EntityManager.ComponentFactory))
+        if (!_prototype.Index(spreader).TryComp<EdgeSpreaderComponent>(out var spreaderComp, EntityManager.ComponentFactory))
             return false;
 
         return _prototype.Index(spreaderComp.Id).PreventSpreadOnSpaced;

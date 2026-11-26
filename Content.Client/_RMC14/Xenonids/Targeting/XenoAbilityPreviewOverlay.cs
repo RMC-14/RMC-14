@@ -978,13 +978,13 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         if (!_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto))
             return BombardDefaultRadius;
 
-        if (!projectileProto.TryGetComponent<SpawnOnTerminateComponent>(out var spawn, _componentFactory))
+        if (!projectileProto.TryComp<SpawnOnTerminateComponent>(out var spawn, _componentFactory))
             return BombardDefaultRadius;
 
         if (!_prototypes.TryIndex<EntityPrototype>(spawn.Spawn, out var smokeProto))
             return BombardDefaultRadius;
 
-        if (smokeProto.TryGetComponent<EvenSmokeComponent>(out var evenSmoke, _componentFactory))
+        if (smokeProto.TryComp<EvenSmokeComponent>(out var evenSmoke, _componentFactory))
             return evenSmoke.Range;
 
         return BombardDefaultRadius;
@@ -993,9 +993,9 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private Color GetBombardColor(EntProtoId projectile)
     {
         if (_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto) &&
-            projectileProto.TryGetComponent<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
+            projectileProto.TryComp<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
             _prototypes.TryIndex<EntityPrototype>(spawn.Spawn, out var smokeProto) &&
-            smokeProto.TryGetComponent<SpriteComponent>(out var sprite, _componentFactory))
+            smokeProto.TryComp<SpriteComponent>(out var sprite, _componentFactory))
         {
             return sprite.Color;
         }
@@ -1006,7 +1006,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private int GetProjectileCollisionMask(EntProtoId projectile)
     {
         if (_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto) &&
-            projectileProto.TryGetComponent<FixturesComponent>(out var fixtures, _componentFactory))
+            projectileProto.TryComp<FixturesComponent>(out var fixtures, _componentFactory))
         {
             var mask = 0;
             foreach (var fixture in fixtures.Fixtures.Values)
@@ -1024,7 +1024,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private MapCoordinates AdjustProjectileImpact(EntProtoId projectile, MapCoordinates origin, MapCoordinates impact)
     {
         if (_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto) &&
-            projectileProto.TryGetComponent<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
+            projectileProto.TryComp<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
             spawn.SpawnOffset > 0)
         {
             var delta = impact.Position - origin.Position;

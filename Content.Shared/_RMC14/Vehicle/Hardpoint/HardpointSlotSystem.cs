@@ -185,7 +185,7 @@ public sealed partial class HardpointSlotSystem : EntitySystem
             return true;
         }
 
-        if (EntityManager.IsClientSide(ent.Owner))
+        if (IsClientSide(ent.Owner))
             return true;
 
         if (targetLocation.State.PendingInserts.ContainsValue(user))
@@ -230,7 +230,7 @@ public sealed partial class HardpointSlotSystem : EntitySystem
 
         args.Handled = true;
 
-        if (EntityManager.IsClientSide(args.Target))
+        if (IsClientSide(args.Target))
             return;
 
         if (targetLocation.Definition.InsertDelay <= 0f)

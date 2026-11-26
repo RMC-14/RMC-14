@@ -121,7 +121,7 @@ public abstract partial class SharedXenoDestroySystem : EntitySystem
 
         _jitter.DoJitter(xeno, xeno.Comp.JumpTime, true, 80, 8, true);
 
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.JumpTime, new XenoDestroyLeapDoafter(EntityManager.GetNetCoordinates(target)), xeno)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.JumpTime, new XenoDestroyLeapDoafter(GetNetCoordinates(target)), xeno)
         {
             BreakOnMove = true,
             BreakOnRest = true
@@ -141,7 +141,7 @@ public abstract partial class SharedXenoDestroySystem : EntitySystem
 
         args.Handled = true;
 
-        var coords = EntityManager.GetCoordinates(args.TargetCoords);
+        var coords = GetCoordinates(args.TargetCoords);
 
         if (!_interaction.InRangeUnobstructed(xeno, coords, xeno.Comp.Range) || _rmcMap.IsTileBlocked(coords))
         {

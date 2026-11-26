@@ -484,7 +484,7 @@ public sealed partial class VehicleSystem : EntitySystem
         }
 
         if (interior.Map.IsValid() &&
-            EntityManager.EntityExists(interior.Map) &&
+            Exists(interior.Map) &&
             TryComp(interior.Map, out VehicleInteriorLinkComponent? link) &&
             link.Vehicle == vehicle)
         {
@@ -500,7 +500,7 @@ public sealed partial class VehicleSystem : EntitySystem
         {
             _map.DeleteMap(interior.MapId);
         }
-        else if (interior.Map.IsValid() && EntityManager.EntityExists(interior.Map))
+        else if (interior.Map.IsValid() && Exists(interior.Map))
         {
             Del(interior.Map);
         }
@@ -1180,7 +1180,7 @@ public sealed partial class VehicleSystem : EntitySystem
             return;
 
         var interior = ent.Comp;
-        if (!interior.Grid.IsValid() || !EntityManager.EntityExists(interior.Grid))
+        if (!interior.Grid.IsValid() || !Exists(interior.Grid))
             return;
 
         if (!_area.TryGetArea(interior.Grid, out var area, out _))
@@ -1312,7 +1312,7 @@ public sealed partial class VehicleSystem : EntitySystem
 
         if (TryComp<VehicleOperatorComponent>(user, out var op) &&
             op.Vehicle is { } operatedVehicle &&
-            EntityManager.EntityExists(operatedVehicle))
+            Exists(operatedVehicle))
         {
             vehicle = operatedVehicle;
             return true;
@@ -1320,7 +1320,7 @@ public sealed partial class VehicleSystem : EntitySystem
 
         if (!TryGetVehicleFromInterior(user, out var interiorVehicle) ||
             interiorVehicle is not { } interiorVehicleUid ||
-            !EntityManager.EntityExists(interiorVehicleUid))
+            !Exists(interiorVehicleUid))
         {
             return false;
         }

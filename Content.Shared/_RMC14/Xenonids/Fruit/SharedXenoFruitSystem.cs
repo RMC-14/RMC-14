@@ -1157,7 +1157,7 @@ public sealed partial class SharedXenoFruitSystem : EntitySystem
 
     public string GetFruitSprite(EntityPrototype ent)
     {
-        if (!ent.TryGetComponent<XenoFruitComponent>(out var fruit, _componentFactory))
+        if (!ent.TryComp<XenoFruitComponent>(out var fruit, _componentFactory))
             return "fruit_lesser_spent";
 
         return fruit.GrownState;

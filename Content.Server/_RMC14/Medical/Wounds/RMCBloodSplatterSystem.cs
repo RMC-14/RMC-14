@@ -43,7 +43,7 @@ public sealed partial class RMCBloodSplatterSystem : EntitySystem
     private void SpawnDecal(EntityUid ent, EntProtoId decalSpawner)
     {
         if (!_prototypes.TryIndex(decalSpawner, out var prototype) ||
-            !prototype.TryGetComponent(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
+            !prototype.TryComp(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
             _rmcDecal.GetDecalsInTile(ent, spawner.Decals) < spawner.MaxDecalsPerTile)
         {
             SpawnAttachedTo(decalSpawner, ent.ToCoordinates());

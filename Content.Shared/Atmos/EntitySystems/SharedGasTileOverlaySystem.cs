@@ -12,8 +12,6 @@ namespace Content.Shared.Atmos.EntitySystems
         protected float AccumulatedFrameTime;
         protected bool PvsEnabled;
 
-        [Dependency] protected IPrototypeManager ProtoMan = default!;
-
         /// <summary>
         ///     array of the ids of all visible gases.
         /// </summary>

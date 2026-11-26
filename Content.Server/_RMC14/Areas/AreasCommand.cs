@@ -70,7 +70,7 @@ public sealed partial class AreasCommand : ToolshedCommand
                 if (!_prototypes.TryIndex(protoId, out var proto))
                     continue;
 
-                if (!proto.TryGetComponent(out AreaComponent? areaComp, _compFactory))
+                if (!proto.TryComp(out AreaComponent? areaComp, _compFactory))
                     continue;
 
                 if (!predicate(areaComp))

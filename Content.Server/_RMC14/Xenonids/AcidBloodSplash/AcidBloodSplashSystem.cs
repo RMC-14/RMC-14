@@ -62,7 +62,7 @@ public sealed partial class AcidBloodSplashSystem : EntitySystem
     private void ActivateSplash(Entity<AcidBloodSplashComponent> ent, float splashRadius)
     {
         if (!_prototypes.TryIndex(ent.Comp.BloodDecalSpawnerPrototype, out var prototype) ||
-            !prototype.TryGetComponent(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
+            !prototype.TryComp(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
             _rmcDecal.GetDecalsInTile(ent, spawner.Decals) < spawner.MaxDecalsPerTile)
         {
             // create decal, probability inside prototype

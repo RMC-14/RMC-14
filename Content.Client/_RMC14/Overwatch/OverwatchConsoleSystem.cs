@@ -261,7 +261,7 @@ public sealed partial class OverwatchConsoleSystem : SharedOverwatchConsoleSyste
 
             if (_pendingOffsetDirection != null && comp.CurrentPosition == Vector2.Zero)
             {
-                var netEntity = EntityManager.GetNetEntity(actor);
+                var netEntity = GetNetEntity(actor);
                 OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, _pendingOffsetDirection.Value));
                 _pendingOffsetDirection = null;
             }
@@ -330,7 +330,7 @@ public sealed partial class OverwatchConsoleSystem : SharedOverwatchConsoleSyste
         if (_player.LocalEntity is not { } player)
             return;
 
-        var netEntity = EntityManager.GetNetEntity(player);
+        var netEntity = GetNetEntity(player);
         OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, direction));
         RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, direction));
     }

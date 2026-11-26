@@ -501,7 +501,7 @@ public sealed partial class XenoEvolutionSystem : EntitySystem
         }
 
         // TODO RMC14 revive jelly when added should not bring back dead queens
-        if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
+        if (prototype.TryComp(out XenoEvolutionCappedComponent? capped, _compFactory) &&
             HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
             if (doPopup)
@@ -547,7 +547,7 @@ public sealed partial class XenoEvolutionSystem : EntitySystem
             }
         }
 
-        prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory);
+        prototype.TryComp(out XenoComponent? newXenoComp, _compFactory);
         if (newXenoComp != null &&
             newXenoComp.UnlockAt > _gameTicker.RoundDuration())
         {
@@ -694,7 +694,7 @@ public sealed partial class XenoEvolutionSystem : EntitySystem
     private bool TryEnterRaffle(Entity<XenoEvolutionComponent> xeno, EntProtoId target)
     {
         if (!_prototypes.TryIndex(target, out var proto) ||
-            !proto.TryGetComponent(out XenoComponent? targetXeno, _compFactory))
+            !proto.TryComp(out XenoComponent? targetXeno, _compFactory))
         {
             return false;
         }
@@ -772,7 +772,7 @@ public sealed partial class XenoEvolutionSystem : EntitySystem
     private bool ShouldRaffle(Entity<XenoEvolutionComponent> xeno, EntProtoId target)
     {
         if (!_prototypes.TryIndex(target, out var proto) ||
-            !proto.TryGetComponent(out XenoComponent? targetXeno, _compFactory) ||
+            !proto.TryComp(out XenoComponent? targetXeno, _compFactory) ||
             _xenoHive.GetHive(xeno.Owner) is not { } hive)
         {
             return false;
@@ -848,7 +848,7 @@ public sealed partial class XenoEvolutionSystem : EntitySystem
                 continue;
 
             if (_prototypes.TryIndex(current, out var proto) &&
-                proto.TryGetComponent(out XenoEvolutionComponent? evolution, _compFactory))
+                proto.TryComp(out XenoEvolutionComponent? evolution, _compFactory))
             {
                 Enqueue(evolution);
             }
@@ -865,18 +865,18 @@ public sealed partial class XenoEvolutionSystem : EntitySystem
         var current = target;
         while (visited.Add(current.Id) &&
                _prototypes.TryIndex(current, out var proto) &&
-               proto.TryGetComponent(out XenoDevolveComponent? devolve, _compFactory) &&
+               proto.TryComp(out XenoDevolveComponent? devolve, _compFactory) &&
                devolve.DevolvesTo.Length > 0)
         {
             var next = devolve.DevolvesTo[0];
             if (!_prototypes.TryIndex(next, out var nextProto) ||
-                !nextProto.TryGetComponent(out XenoComponent? nextXeno, _compFactory) ||
+                !nextProto.TryComp(out XenoComponent? nextXeno, _compFactory) ||
                 nextXeno.Tier <= currentTier)
             {
                 break;
             }
 
-            if (nextProto.TryGetComponent(out XenoEvolutionComponent? nextEvo, _compFactory))
+            if (nextProto.TryComp(out XenoEvolutionComponent? nextEvo, _compFactory))
                 cost += nextEvo.Max;
 
             current = next;

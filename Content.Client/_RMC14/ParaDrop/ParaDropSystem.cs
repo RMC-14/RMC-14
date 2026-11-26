@@ -160,7 +160,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         {
             var offset = new Vector2();
             var fallOffset = new Vector2(0f, adjustedHeight);
-            if (EntityManager.TryGetComponent(fallingUid, out SpriteComponent? sprite))
+            if (TryComp(fallingUid, out SpriteComponent? sprite))
             {
                 offset = sprite.Offset;
                 fallOffset = GetFallOffset(fallingUid, sprite, adjustedHeight);

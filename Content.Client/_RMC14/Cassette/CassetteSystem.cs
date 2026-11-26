@@ -44,7 +44,7 @@ public sealed partial class CassetteSystem : SharedCassetteSystem
         {
             foreach (var entity in _prototype.EnumeratePrototypes<EntityPrototype>())
             {
-                if (!entity.TryGetComponent(out CassetteTapeComponent? tape, _compFactory))
+                if (!entity.TryComp(out CassetteTapeComponent? tape, _compFactory))
                     continue;
 
                 foreach (var sound in tape.Songs)

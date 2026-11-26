@@ -71,7 +71,7 @@ namespace Content.Server.Access.Systems
                 return;
 
             var proto = _prototypeManager.Index(idSlotGear);
-            if (!proto.TryGetComponent<PdaComponent>(out var comp, EntityManager.ComponentFactory))
+            if (!proto.TryComp<PdaComponent>(out var comp, EntityManager.ComponentFactory))
                 return;
 
             _chameleon.SetSelectedPrototype(ent, comp.IdCard);

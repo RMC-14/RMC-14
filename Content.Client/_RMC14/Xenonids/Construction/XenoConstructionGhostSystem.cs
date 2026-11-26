@@ -352,7 +352,7 @@ public sealed partial class XenoConstructionGhostSystem : EntitySystem
         if (TryConfigureIconSmoothSprite(sprite, prototype))
             return;
 
-        if (prototype.TryGetComponent<SpriteComponent>(out var prototypeSprite, _compFactory))
+        if (prototype.TryComp<SpriteComponent>(out var prototypeSprite, _compFactory))
         {
             sprite.CopyFrom(prototypeSprite);
             sprite.Color = new Color(48, 255, 48, 128);
@@ -368,8 +368,8 @@ public sealed partial class XenoConstructionGhostSystem : EntitySystem
 
     private bool TryConfigureIconSmoothSprite(SpriteComponent sprite, EntityPrototype prototype)
     {
-        if (!prototype.TryGetComponent(out IconSmoothComponent? iconSmooth, _compFactory) ||
-            !prototype.TryGetComponent(out SpriteComponent? prototypeSprite, _compFactory) ||
+        if (!prototype.TryComp(out IconSmoothComponent? iconSmooth, _compFactory) ||
+            !prototype.TryComp(out SpriteComponent? prototypeSprite, _compFactory) ||
             string.IsNullOrEmpty(iconSmooth.StateBase))
         {
             return false;

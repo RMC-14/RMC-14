@@ -95,7 +95,7 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
             if (entProto.Abstract || usedNames.Contains(entProto.Name))
                 continue;
 
-            if (!entProto.TryGetComponent<ExtractableComponent>(out var extractableComponent, EntityManager.ComponentFactory))
+            if (!entProto.TryComp<ExtractableComponent>(out var extractableComponent, EntityManager.ComponentFactory))
                 continue;
 
             //these bloat the hell out of blood/fat

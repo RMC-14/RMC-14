@@ -94,7 +94,7 @@ public sealed partial class RMCAnnouncementOverlaySystem : EntitySystem
     {
         preset = null;
         return _prototype.TryIndex(id, out var prototype) &&
-               prototype.TryGetComponent(out preset, _compFactory);
+               prototype.TryComp(out preset, _compFactory);
     }
 
     public static TimeSpan GetRevealTime(RMCAnnouncementPresetComponent preset, int length)

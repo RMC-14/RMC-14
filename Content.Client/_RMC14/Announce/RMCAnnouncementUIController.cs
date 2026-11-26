@@ -118,7 +118,7 @@ public sealed partial class RMCAnnouncementUIController : UIController,
     private void OnAnnouncementReceived(RMCAnnouncementOverlayMsg msg)
     {
         if (!_prototype.TryIndex(msg.Preset, out var prototype) ||
-            !prototype.TryGetComponent(out RMCAnnouncementPresetComponent? preset, _compFactory))
+            !prototype.TryComp(out RMCAnnouncementPresetComponent? preset, _compFactory))
         {
             return;
         }

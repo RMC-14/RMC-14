@@ -62,7 +62,7 @@ public sealed partial class ServerTechSystem : EntitySystem
     {
         ghost = default;
 
-        if (!spawner.TryGetComponent(out ghost, _componentFactory))
+        if (!spawner.TryComp(out ghost, _componentFactory))
             return false;
 
         return true;
@@ -72,7 +72,7 @@ public sealed partial class ServerTechSystem : EntitySystem
     {
         ghost = default;
 
-        if (!spawner.TryGetComponent<RandomHumanoidSpawnerComponent>(out var human, _componentFactory) ||
+        if (!spawner.TryComp<RandomHumanoidSpawnerComponent>(out var human, _componentFactory) ||
             human.SettingsPrototypeId is null ||
             !_proto.TryIndex<RandomHumanoidSettingsPrototype>(human.SettingsPrototypeId, out var settings) ||
             settings.Components is null ||
