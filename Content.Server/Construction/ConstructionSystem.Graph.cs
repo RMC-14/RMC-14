@@ -366,6 +366,12 @@ namespace Content.Server.Construction
 
             TransformSystem.SetLocalRotationNoLerp(newUid, transform.LocalRotation);
 
+            // RMC14
+            // Keep the replacement unanchored if the original was unanchored.
+            if (!transform.Anchored)
+                TransformSystem.TryAnchor((newUid, newTransform, null), value: false);
+            // RMC14
+
             // Prefer anchoring directly. If anchoring fails, attach to the grid or map only as a fallback.
             // This avoids doing AttachToGridOrMap followed by TryAnchor, which can raise two transform updates.
             if (!transform.Anchored || !TransformSystem.AnchorEntity((newUid, newTransform, null)))

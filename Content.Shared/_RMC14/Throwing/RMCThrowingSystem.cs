@@ -16,8 +16,9 @@ public sealed partial class RMCThrowingSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<DamageOtherOnHitComponent, ThrownEvent>(OnDamageOtherOnHitThrown);
+
+        SubscribeLocalEvent<ThrownLimitHitsComponent, RMCThrowHitAttemptEvent>(OnThrownLimitHitsHitAttempt);
         SubscribeLocalEvent<ThrownLimitHitsComponent, ThrowDoHitEvent>(OnThrownLimitHitsDoHit);
-        SubscribeLocalEvent<ThrownLimitHitsComponent, LandEvent>(OnThrownLimitHitsLand);
         SubscribeLocalEvent<ThrownLimitHitsComponent, StopThrowEvent>(OnThrownLimitHitsStopThrow);
 
         SubscribeLocalEvent<RMCThrowCooldownComponent, ThrowItemAttemptEvent>(OnThrowCooldownThrowAttempt);
@@ -30,19 +31,24 @@ public sealed partial class RMCThrowingSystem : EntitySystem
         Dirty(ent, limit);
     }
 
-    private void OnThrownLimitHitsLand(Entity<ThrownLimitHitsComponent> ent, ref LandEvent args)
+    private void OnThrownLimitHitsHitAttempt(Entity<ThrownLimitHitsComponent> ent, ref RMCThrowHitAttemptEvent args)
     {
-        ent.Comp.Hit = false;
+        if (args.Cancelled)
+            return;
+
+        if (ent.Comp.Hit)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        ent.Comp.Hit = true;
         Dirty(ent);
     }
 
     private void OnThrownLimitHitsDoHit(Entity<ThrownLimitHitsComponent> ent, ref ThrowDoHitEvent args)
     {
-        if (!_deferredPhysics.TryQueueStopThrow(ent))
-            return;
-
-        ent.Comp.Hit = true;
-        Dirty(ent);
+        _deferredPhysics.TryQueueStopThrow(ent);
     }
 
     private void OnThrownLimitHitsStopThrow(Entity<ThrownLimitHitsComponent> ent, ref StopThrowEvent args)
