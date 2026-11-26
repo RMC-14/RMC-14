@@ -71,7 +71,7 @@
   - type: XenoClaws
     clawType: VerySharp
   - type: MeleeWeapon
-    attackRate: 1.11
+    attackRate: 1.1111
     damage:
       groups:
         Brute: 45
