@@ -2,33 +2,33 @@
     xmlns="https://spacestation14.io"
     xmlns:ui="clr-namespace:Content.Client._RMC14.TacticalMap.UI"
     xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap.Controls"
-    Title="Create Label"
-    SetSize="300 110">
-    <BoxContainer Orientation="Vertical" Margin="8">
-        <LineEdit Name="TextEdit" Access="Public"
-                  PlaceHolder="Label text..."
-                  HorizontalExpand="True"
-                  Margin="0 0 0 8"
-                  MinHeight="26" />
-        <BoxContainer Orientation="Horizontal">
-            <Button Name="OkButton" Access="Public"
-                    Text="OK"
-                    HorizontalExpand="True"
-                    Margin="0 0 4 0"
-                    MinHeight="24"
-                    MinWidth="50" />
-            <Button Name="CancelButton" Access="Public"
-                    Text="Cancel"
-                    HorizontalExpand="True"
-                    Margin="0 0 4 0"
-                    MinHeight="24"
-                    MinWidth="60" />
-            <Button Name="DeleteButton" Access="Public"
-                    Text="Delete"
-                    HorizontalExpand="True"
-                    Visible="False"
-                    MinHeight="24"
-                    MinWidth="60" />
+    SetSize="300 112">
+    <controls:TacticalMapPanel Kind="Window" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical">
+            <controls:TacticalMapPanel Kind="Header">
+                <BoxContainer Orientation="Horizontal" Margin="8 0 3 0" MinHeight="24">
+                    <controls:TacticalMapLabel Name="HeaderTitle" TextStyle="Title" VAlign="Center" HorizontalExpand="True" />
+                    <controls:TacticalMapButton Name="HeaderCloseButton" Kind="Danger" Text="{Loc ui-tactical-map-close-button}"
+                                                MinWidth="24" MinHeight="20" VerticalAlignment="Center" />
+                </BoxContainer>
+            </controls:TacticalMapPanel>
+            <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8">
+                <LineEdit Name="TextEdit" Access="Public"
+                          PlaceHolder="{Loc ui-tactical-map-label-dialog-placeholder}"
+                          HorizontalExpand="True" MinHeight="24" />
+                <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                    <controls:TacticalMapButton Name="DeleteButton" Access="Public" Kind="Danger"
+                                                Text="{Loc ui-tactical-map-label-dialog-delete}"
+                                                Visible="False" MinWidth="64" MinHeight="24" />
+                    <Control HorizontalExpand="True" />
+                    <controls:TacticalMapButton Name="CancelButton" Access="Public"
+                                                Text="{Loc ui-tactical-map-label-dialog-cancel}"
+                                                MinWidth="64" MinHeight="24" />
+                    <controls:TacticalMapButton Name="OkButton" Access="Public" Kind="Primary"
+                                                Text="{Loc ui-tactical-map-label-dialog-ok}"
+                                                MinWidth="64" MinHeight="24" />
+                </BoxContainer>
+            </BoxContainer>
         </BoxContainer>
-    </BoxContainer>
+    </controls:TacticalMapPanel>
 </ui:LabelTextDialog>

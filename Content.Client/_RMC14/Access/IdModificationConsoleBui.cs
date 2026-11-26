@@ -309,7 +309,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             var button = new IdModificationConsoleAccessButton();
             button.AccessButton.HorizontalExpand = true;
             button.AccessButton.SetHeight = 30;
-            button.AccessButton.Text = Loc.GetString("rmc-id-modification-tacmap-access-faction", ("faction", faction.Id));
+            button.AccessButton.Text = $"{faction.Id} Tactical Map";
             button.AccessButton.OnPressed += _ =>
             {
                 var revoke = _currentTacMapAccess.Contains(faction);

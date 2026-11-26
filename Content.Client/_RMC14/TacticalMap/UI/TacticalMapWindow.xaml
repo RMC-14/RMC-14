@@ -1,7 +1,6 @@
 <ui:TacticalMapWindow
     xmlns="https://spacestation14.io"
     xmlns:ui="clr-namespace:Content.Client._RMC14.TacticalMap.UI"
-    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap.Controls"
-    Title="Map" SetSize="1000 800">
-    <ui:TacticalMapWrapper Name="Wrapper" Access="Public" />
+    Title="{Loc ui-tactical-map-window-title}" SetSize="600 600" MinSize="320 320">
+    <ui:TacticalMapView Name="View" Access="Public" />
 </ui:TacticalMapWindow>
