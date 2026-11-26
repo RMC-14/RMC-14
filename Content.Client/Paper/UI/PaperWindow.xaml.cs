@@ -315,6 +315,13 @@ namespace Content.Client.Paper.UI
             // The markup system converts [form] and [signature] tags into interactive buttons
             var fm = new FormattedMessage();
             fm.AddMarkupPermissive(state.Text);
+
+            // size= on [bold], [mono] etc. would let players draw text at any size, [head] is the way to make text bigger
+            foreach (var node in fm.Nodes)
+            {
+                node.Attributes.Remove("size");
+            }
+
             WrittenTextLabel.SetMessage(fm, _allowedTags, DefaultTextColor);
             PaperContent.Margin = _originalContentMargin;
 

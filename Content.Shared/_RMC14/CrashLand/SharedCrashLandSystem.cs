@@ -7,6 +7,7 @@ using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
@@ -80,7 +81,8 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         SubscribeLocalEvent<CrashLandingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
         SubscribeLocalEvent<CrashLandingComponent, VehicleCanRunEvent>(OnVehicleCanRun);
         SubscribeLocalEvent<CrashLandingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
-        SubscribeLocalEvent<CrashLandingComponent, CheckMeleeAttackerEvent>(OnReceivingMeleeAttackAttempt);
+        SubscribeLocalEvent<CrashLandingComponent, CheckMeleeAttackerEvent>(OnCheckMeleeAttacker);
+        SubscribeLocalEvent<CrashLandingComponent, CheckGunAttackerEvent>(OnCheckGunAttacker);
         SubscribeLocalEvent<CrashLandingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
         SubscribeLocalEvent<CrashLandingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -209,7 +211,12 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnReceivingMeleeAttackAttempt(Entity<CrashLandingComponent> ent, ref CheckMeleeAttackerEvent args)
+    private void OnCheckMeleeAttacker(Entity<CrashLandingComponent> ent, ref CheckMeleeAttackerEvent args)
+    {
+        args.Skip = true;
+    }
+
+    private void OnCheckGunAttacker(Entity<CrashLandingComponent> ent, ref CheckGunAttackerEvent args)
     {
         args.Skip = true;
     }

@@ -251,10 +251,19 @@ public sealed partial class XenoSpitSystem : EntitySystem
         if (!_entityWhitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Target))
             return;
 
-        if (!HasComp<UserAcidedComponent>(ent))
-            ApplyOrExtendAcid(args.Target, ent.Comp.Acid, ent.Comp.ProlongDuration);
+        if (!HasComp<UserAcidedComponent>(args.Target))
+        {
+            if (ent.Comp.Acid == null)
+                return;
+
+            ApplyOrExtendAcid(args.Target, ent.Comp.Acid.Value, ent.Comp.ProlongDuration);
+        }
         else if (ent.Comp.Enhance)
+        {
             EnhanceAcid(args.Target, ent.Comp.MaxTier);
+            if (ent.Comp.StunOnEnhance != TimeSpan.Zero)
+                _stun.TryParalyze(args.Target, ent.Comp.StunOnEnhance, true);
+        }
     }
 
     private void OnUserAcidedGetArmor(Entity<UserAcidedComponent> ent, ref CMGetArmorEvent args)

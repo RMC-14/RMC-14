@@ -799,6 +799,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/molle.rsi
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15
 
 - type: entity
   parent: RMCSatchelTyrargo

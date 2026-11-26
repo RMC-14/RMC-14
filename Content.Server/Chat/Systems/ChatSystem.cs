@@ -7,6 +7,7 @@ using Content.Server._RMC14.Emote;
 using Content.Server._RMC14.Language.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Server.Body.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -365,7 +366,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         // If dead player LOOC is disabled, unless you are an admin with Moderator perms, send dead messages to dead chat
         if ((_adminManager.IsAdmin(player) && _adminManager.HasAdminFlag(player, AdminFlags.Moderator)) // Override if admin
             || _deadLoocEnabled
-            || (!HasComp<GhostComponent>(source) && !_mobStateSystem.IsDead(source)) // Check that player is not dead
+            || (!HasComp<GhostComponent>(source) && !_mobStateSystem.IsDead(source) && !HasComp<BrainComponent>(source)) // Check that player is not dead, RMC14 - disable looc for brains as they shouldn't be typing in LOOC
             || HasComp<ImaginaryFriendComponent>(player.AttachedEntity)) // RMC14
         {
         }

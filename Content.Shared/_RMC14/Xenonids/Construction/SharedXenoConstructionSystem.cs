@@ -1545,7 +1545,7 @@ public sealed partial class SharedXenoConstructionSystem : EntitySystem
             }
         }
 
-        return _area.CanResinPopup((gridId, grid, null), tile, xeno);
+        return _area.CanResinPopup((gridId, grid, null), tile, xeno, popup);
     }
 
     public bool CanOrderConstructionPopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target, EntProtoId? choice, bool popup = true)

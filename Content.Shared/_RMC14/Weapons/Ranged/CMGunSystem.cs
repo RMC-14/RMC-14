@@ -162,6 +162,8 @@ public sealed partial class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunDualWieldingComponent, GunRefreshModifiersEvent>(OnDualWieldingRefreshModifiers);
 
         SubscribeLocalEvent<UnremoveableComponent, RMCItemDropAttemptEvent>(OnUnremoveableDropAttempt);
+
+        SubscribeLocalEvent<GunComponent, CheckShotTargetEvent>(OnGunCheckShotTarget);
     }
 
     /// <summary>
@@ -779,6 +781,16 @@ public sealed partial class CMGunSystem : EntitySystem
     private void OnUnremoveableDropAttempt(Entity<UnremoveableComponent> ent, ref RMCItemDropAttemptEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnGunCheckShotTarget(Entity<GunComponent> gun, ref CheckShotTargetEvent args)
+    {
+        // Guns do not allow targeting entities that cannot collide with bullets
+        if (!_physicsQuery.TryGetComponent(args.Target, out var target)
+            || (target.CollisionLayer & (int)CollisionGroup.BulletImpassable) == 0)
+        {
+            args.Skip = true;
+        }
     }
 
     private bool TryGetOtherDualWieldedGun(EntityUid user, Entity<GunDualWieldingComponent> gun, out Entity<GunDualWieldingComponent> otherGun)

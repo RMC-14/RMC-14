@@ -87,7 +87,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     continue;
                 }
 
-                if (!_interaction.InRangeUnobstructed(uid, comp.Target, range, comp.Mask))
+                if (!_interaction.InRangeUnobstructed(uid, comp.Target, comp.LeapDistance, comp.Mask))
                 {
                     _doafter.Cancel(comp.CurrentDoAfter.Value);
                     comp.CurrentDoAfter = null;
@@ -135,6 +135,12 @@ public sealed partial class NPCLeapSystem : EntitySystem
                 var destination = worldPos.WithPosition(worldPos.Position + addedDis);
 
                 comp.Destination = destination;
+
+                if (!_interaction.InRangeUnobstructed(uid, comp.Destination, comp.LeapDistance, comp.Mask))
+                {
+                    comp.Status = LeapStatus.TargetOutOfRange;
+                    continue;
+                }
 
                 var actionEvent = _actions.GetEvent(actionId);
                 if (actionEvent != null)
