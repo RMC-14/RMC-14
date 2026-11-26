@@ -40,6 +40,8 @@
         RMCSkillEngineer: 2
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetFreelancerOutfits
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-freelancer-standard
@@ -112,13 +114,27 @@
     belt: RMCMAR40BeltFilled
     suitstorage: WeaponRifleMAR40
     gloves: RMCHandsVeteranPMC
-    jumpsuit: RMCJumpsuitFreelancer
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
     ears: RMCHeadsetDistressDukes
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchExplosiveFilledHEDP
+
+- type: entity
+  id: RMCSurvivorPresetFreelancerOutfits
+  name: freelancer preset with random outfits
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomStartingGear:
+      jumpsuit:
+      - RMCJumpsuitFreelancerBlackPants
+      - RMCJumpsuitFreelancerBluePants
+      - RMCJumpsuitFreelancerGreenPants
+      - RMCJumpsuitFreelancerDPM
+      - RMCJumpsuitFreelancerDPNU
+      - RMCJumpsuitFreelancerFlecktarn
 
 - type: playTimeTracker
   id: RMCJobFreelancerStandard

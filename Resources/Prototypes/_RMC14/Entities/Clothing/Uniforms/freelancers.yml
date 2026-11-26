@@ -74,3 +74,22 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/flecktarn.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/flecktarn.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerBluePants
+  id: RMCJumpsuitFreelancerMedic
+  name: mercenary's medical outfit
+  description: Olive drab cargo pants and a dark tactical shirt with faded medical IR patches on both shoulders. Why exactly are the medical patches IR? The answer seems to be not easy to see.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/medic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/medic.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerMedic
+  id: RMCJumpsuitFreelancerMedicFilled
+  suffix: Surgical Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSurgicalGreen

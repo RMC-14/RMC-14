@@ -46,7 +46,8 @@
         RMCSkillLeadership: 2
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
-      # TODO RMC14 add English, russian, Chinese and Japanese languages
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetFreelancerOutfits
     - type: MarineOrders
     - type: SquadArmorWearer
       leader: true
@@ -129,7 +130,6 @@
     suitstorage: RMCWeaponMar50LMG
     back: RMCSatchelLightpackFreelancerLeader
     gloves: RMCHandsVeteran
-    jumpsuit: RMCJumpsuitFreelancer
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
