@@ -934,11 +934,8 @@
     - id: RMCWeaponPistolHandcannonGold
 
 - type: entity
-<<<<<<< Updated upstream
   parent: RMCBeltSPPBrown
-=======
   parent: CMBeltMarine
->>>>>>> Stashed changes
   id: RMCType71BeltFilled
   suffix: Filled, Type 71
   components:
