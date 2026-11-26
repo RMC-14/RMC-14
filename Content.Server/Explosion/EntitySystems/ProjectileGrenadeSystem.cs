@@ -89,7 +89,9 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, angle, shootCount, hitEntities);
                 RaiseLocalEvent(uid, ref ev);
 
-                if(ev.TotalCount <= 0)
+                component.UnspawnedCount = ev.TotalCount;
+
+                if (ev.TotalCount <= 0)
                     break;
                 if (ev.Handled)
                 {

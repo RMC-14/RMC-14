@@ -106,7 +106,8 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
                 continue;
 
             // Deal damage directly and remove projectiles from the grenade
-            var newProjectileCount = projectileCount - ent.Comp.DirectHitProjectiles;
+            // -1 as the currently spawned projectile counts
+            var newProjectileCount = projectileCount - ent.Comp.DirectHitProjectiles - 1;
             var damage = projectile.Damage * ent.Comp.DirectHitProjectiles;
             if (newProjectileCount < 0)
                 damage += projectile.Damage * newProjectileCount;

@@ -613,6 +613,7 @@
     enhance: true
     maxTier: 2
     stunOnEnhance: 2
+  - type: IgnorePredictionHide
 
 - type: entity
   parent: XenoSpitProjectileDissolverAcidBlobSmall
@@ -657,4 +658,3 @@
     directHitProjectiles: 5
     projectileSpeed: 30
   - type: DeleteOnTrigger
-  - type: IgnorePredictionHide
