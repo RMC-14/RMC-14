@@ -1,6 +1,8 @@
-﻿using Content.Shared._RMC14.Xenonids.Eye;
+﻿using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Movement.Events;
+using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -11,12 +13,14 @@ public abstract class SharedXenoWatchSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoComponent, XenoWatchActionEvent>(OnXenoWatchAction);
+        SubscribeLocalEvent<XenoComponent, TacticalMapBlipActivatedEvent>(OnTacticalMapBlipActivated);
         SubscribeLocalEvent<XenoWatchingComponent, MoveInputEvent>(OnXenoMoveInput);
 
         Subs.BuiEvents<XenoComponent>(XenoWatchUIKey.Key,
@@ -24,6 +28,21 @@ public abstract class SharedXenoWatchSystem : EntitySystem
             {
                 subs.Event<XenoWatchBuiMsg>(OnXenoWatchBui);
             });
+    }
+
+    private void OnTacticalMapBlipActivated(Entity<XenoComponent> xeno, ref TacticalMapBlipActivatedEvent args)
+    {
+        if (args.Handled || args.Actor != xeno.Owner || !HasComp<XenoComponent>(args.Target))
+            return;
+
+        args.Handled = true;
+        if (!args.Live)
+        {
+            _popup.PopupCursor("You need a live tactical map to watch a sister from it.", xeno, PopupType.MediumCaution);
+            return;
+        }
+
+        Watch(xeno.Owner, args.Target);
     }
 
     private void OnXenoMoveInput(Entity<XenoWatchingComponent> xeno, ref MoveInputEvent args)

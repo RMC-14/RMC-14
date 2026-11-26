@@ -9,7 +9,7 @@
     sortOrder: 0
     color: "#8AB4FF"
   - type: TacticalMapMarineAnnounce
-    message: rmc-tacmap-updated-unmc
+    message: The UNMC tactical map has been updated.
 
 - type: entity
   id: RMCTacticalMapChannelSquad
@@ -35,7 +35,7 @@
     sortOrder: 10
     color: "#9B59B6"
   - type: TacticalMapXenoAnnounce
-    message: rmc-tacmap-updated-xeno
+    message: The Xenonid tactical map has been updated.
 
 - type: entity
   id: RMCTacticalMapLiveFeed

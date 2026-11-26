@@ -193,8 +193,62 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCTacticalMapShowAreaLabels =
         CVarDef.Create("rmc.tactical_map_show_area_labels", true, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    public static readonly CVarDef<int> RMCTacticalMapLabelLimit =
+        CVarDef.Create("rmc.tactical_map_label_limit", 100, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCTacticalMapLabelMaxLength =
+        CVarDef.Create("rmc.tactical_map_label_max_length", 64, CVar.SERVER | CVar.REPLICATED);
+
     public static readonly CVarDef<bool> RMCTacticalMapReplayPublicAfterRound =
-        CVarDef.Create("rmc.tactical_map_replay_public_after_round", true, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.tactical_map_replay_public_after_round", false, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> RMCTacticalMapReplaySampleSeconds =
+        CVarDef.Create("rmc.tactical_map_replay_sample_seconds", 5f, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> RMCTacticalMapReplayRequestCooldownSeconds =
+        CVarDef.Create("rmc.tactical_map_replay_request_cooldown_seconds", 30f, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> RMCTacticalMapBlipSize =
+        CVarDef.Create("rmc.tactical_map_blip_size", 0.9f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> RMCTacticalMapLineThickness =
+        CVarDef.Create("rmc.tactical_map_line_thickness", 2f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCTacticalMapColorIndex =
+        CVarDef.Create("rmc.tactical_map_color_index", 0, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCTacticalMapLabelMode =
+        CVarDef.Create("rmc.tactical_map_label_mode", 0, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCTacticalMapLabelsEnabled =
+        CVarDef.Create("rmc.tactical_map_labels_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCTacticalMapObjectivesVisible =
+        CVarDef.Create("rmc.tactical_map_objectives_visible", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCTacticalMapOverlaysVisible =
+        CVarDef.Create("rmc.tactical_map_overlays_visible", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCTacticalMapSettingsVisible =
+        CVarDef.Create("rmc.tactical_map_settings_visible", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCTacticalMapCrtEffect =
+        CVarDef.Create("rmc.tactical_map_crt_effect", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<string> RMCTacticalMapViewStates =
+        CVarDef.Create("rmc.tactical_map_view_states", string.Empty, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCTacticalMapWindowWidth =
+        CVarDef.Create("rmc.tactical_map_window_width", 1000, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCTacticalMapWindowHeight =
+        CVarDef.Create("rmc.tactical_map_window_height", 800, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> RMCTacticalMapWindowX =
+        CVarDef.Create("rmc.tactical_map_window_x", -1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> RMCTacticalMapWindowY =
+        CVarDef.Create("rmc.tactical_map_window_y", -1f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> RMCGunPrediction =
         CVarDef.Create("rmc.gun_prediction", true, CVar.SERVER | CVar.REPLICATED);

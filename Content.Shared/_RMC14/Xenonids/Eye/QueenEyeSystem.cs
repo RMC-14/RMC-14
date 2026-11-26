@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Watch;
@@ -8,6 +9,7 @@ using Content.Shared.Damage;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -27,10 +29,12 @@ public sealed class QueenEyeSystem : EntitySystem
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SwappableActionSystem _swappableAction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
 
     private SeedJob _seedJob;
     private ViewJob _job;
@@ -70,6 +74,7 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoUnwatchEvent>(OnQueenEyeActionUnwatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
         SubscribeLocalEvent<QueenEyeActionComponent, DamageChangedEvent>(OnQueenDamage);
+        SubscribeLocalEvent<QueenEyeActionComponent, TacticalMapPointActivatedEvent>(OnTacticalMapPointActivated);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
         SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove);
@@ -169,6 +174,26 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         _eye.SetTarget(queen, ent);
+    }
+
+    private void OnTacticalMapPointActivated(Entity<QueenEyeActionComponent> ent, ref TacticalMapPointActivatedEvent args)
+    {
+        if (args.Handled || ent.Comp.Eye is not { } eye || !TryComp(args.Map, out MapGridComponent? grid))
+            return;
+
+        args.Handled = true;
+        if (_transform.GetMapId(ent.Owner) != _transform.GetMapId(args.Map))
+            return;
+
+        var position = new Vector2(args.Indices.X + 0.5f, args.Indices.Y + 0.5f) * grid.TileSize;
+        var coordinates = new EntityCoordinates(args.Map, position);
+        if (!_weeds.IsOnWeeds((args.Map, grid), coordinates))
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-xeno-queen-eye-no-weeds"), ent, PopupType.MediumCaution);
+            return;
+        }
+
+        _transform.SetWorldPosition(eye, _transform.ToMapCoordinates(coordinates).Position);
     }
 
     private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)

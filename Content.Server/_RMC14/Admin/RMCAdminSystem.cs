@@ -1,5 +1,4 @@
-﻿using Content.Server._RMC14.TacticalMap;
-using Content.Server.Administration.Logs;
+﻿using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.EUI;
@@ -46,7 +45,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IConsoleHost _consoleHost = default!;
 
-    public readonly Queue<(Guid Id, List<TacticalMapLine> Lines, string Actor, int Round)> LinesDrawn = new();
+    public readonly Queue<TacticalMapHistoryEntry> LinesDrawn = new();
 
     private int _tacticalMapAdminHistorySize;
 
@@ -54,7 +53,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<TacticalMapUpdatedEvent>(OnTacticalMapUpdated);
+        SubscribeLocalEvent<TacticalMapCanvasSubmittedEvent>(OnTacticalMapUpdated);
         SubscribeLocalEvent<SpawnAsJobDialogEvent>(OnSpawnAsJobDialog);
         _consoleHost.AnyCommandExecuted += ConsoleHostOnAnyCommandExecuted;
 
@@ -94,9 +93,15 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
         _adminLog.Add(LogType.RMCAdminCommandLogging, LogImpact.Medium, $"{shell.Player:player} issued command: {commandName} with arguments: {log}");
     }
 
-    private void OnTacticalMapUpdated(ref TacticalMapUpdatedEvent ev)
+    private void OnTacticalMapUpdated(ref TacticalMapCanvasSubmittedEvent ev)
     {
-        LinesDrawn.Enqueue((Guid.NewGuid(), ev.Lines, ToPrettyString(ev.Actor), _gameTicker.RoundId));
+        LinesDrawn.Enqueue(new TacticalMapHistoryEntry(
+            Guid.NewGuid(),
+            GetNetEntity(ev.Map),
+            new List<TacticalMapStroke>(ev.Strokes),
+            new Dictionary<Vector2i, TacticalMapLabelData>(ev.Labels),
+            ToPrettyString(ev.Actor),
+            _gameTicker.RoundId));
 
         while (LinesDrawn.Count > 0 && LinesDrawn.Count > _tacticalMapAdminHistorySize)
         {

@@ -1,27 +1,41 @@
-﻿using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
+﻿using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 [Access(typeof(SharedTacticalMapSystem))]
 public sealed partial class ActiveTacticalMapTrackedComponent : Component
 {
-    [DataField]
+    [ViewVariables]
     public EntityUid? Map;
 
-    [DataField]
+    [ViewVariables]
+    public Vector2i Indices;
+
+    [ViewVariables]
     public SpriteSpecifier.Rsi? Icon;
 
-    [DataField]
-    public Color Color;
-
-    [DataField]
-    public bool Undefibbable;
-
-    [DataField]
+    [ViewVariables]
     public SpriteSpecifier.Rsi? Background;
 
-    [DataField]
-    public bool HiveLeader;
+    [ViewVariables]
+    public Color Color = Color.White;
+
+    [ViewVariables]
+    public TacticalMapBlipFlags Flags;
+
+    [ViewVariables]
+    public TimeSpan UnrevivableStart;
+
+    [ViewVariables]
+    public TimeSpan UnrevivableEnd;
+
+    [ViewVariables]
+    public HashSet<EntityUid> Channels = new();
+
+    [ViewVariables]
+    public bool MembershipDirty = true;
+
+    [ViewVariables]
+    public bool AppearanceDirty = true;
 }

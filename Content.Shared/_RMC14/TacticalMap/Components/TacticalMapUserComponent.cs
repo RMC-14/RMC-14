@@ -1,14 +1,10 @@
-using Content.Shared._RMC14.Marines.Squads;
-using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
-[Access(typeof(SharedTacticalMapSystem), typeof(TacMapLiveUpdateSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[Access(typeof(SharedTacticalMapSystem))]
 public sealed partial class TacticalMapUserComponent : Component
 {
     public override bool SendOnlyToOwner => true;
@@ -20,44 +16,23 @@ public sealed partial class TacticalMapUserComponent : Component
     public EntityUid? Action;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? Map;
-
-    [DataField, AutoNetworkedField]
     public bool LiveUpdate;
-
-    [DataField]
-    public List<ProtoId<TacticalMapLayerPrototype>> BaseLayers = new();
-
-    [DataField]
-    public List<ProtoId<TacticalMapLayerSetPrototype>> LayerSets = new();
-
-    [DataField, AutoNetworkedField]
-    public List<ProtoId<TacticalMapLayerPrototype>> VisibleLayers = new();
-
-    [DataField, AutoNetworkedField]
-    public List<ProtoId<TacticalMapLayerPrototype>> LayerOptions = new();
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<TacticalMapLayerPrototype>? ActiveLayer;
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<NetEntity, TacticalMapBlip> Blips = new();
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<SquadObjectiveType, string> Objectives = new();
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastBlipUpdateAt;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastAnnounceAt;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan NextAnnounceAt;
 
     [DataField, AutoNetworkedField]
     public bool CanDraw;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoQueenCommand", AudioParams.Default.WithVolume(-6));
+    public bool AllChannels;
+
+    [DataField, AutoNetworkedField]
+    public List<EntityUid> Channels = new();
+
+    [DataField, AutoNetworkedField]
+    public bool Live;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? SelfMap;
+
+    [DataField, AutoNetworkedField]
+    public Vector2i SelfIndices;
 }

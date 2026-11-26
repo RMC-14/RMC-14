@@ -11,10 +11,10 @@ public sealed class VehicleSensorSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TacticalMapXenoRevealRangeEvent>(OnTacticalMapXenoRevealRange);
+        SubscribeLocalEvent<TacticalMapCollectRevealsEvent>(OnTacticalMapCollectReveals);
     }
 
-    private void OnTacticalMapXenoRevealRange(ref TacticalMapXenoRevealRangeEvent ev)
+    private void OnTacticalMapCollectReveals(ref TacticalMapCollectRevealsEvent ev)
     {
         var query = EntityQueryEnumerator<VehicleSensorComponent>();
         while (query.MoveNext(out var uid, out var sensor))
@@ -23,14 +23,14 @@ public sealed class VehicleSensorSystem : EntitySystem
                 continue;
 
             if (!TryComp(vehicle, out TransformComponent? xform) ||
-                xform.GridUid is not { } gridId ||
-                !TryComp(gridId, out MapGridComponent? gridComp) ||
+                xform.GridUid != ev.Map ||
+                !TryComp(ev.Map, out MapGridComponent? gridComp) ||
                 !_transform.TryGetGridTilePosition((vehicle, xform), out var indices, gridComp))
             {
                 continue;
             }
 
-            ev.Sources.Add(new TacticalMapXenoRevealSource(gridId, indices, sensor.Range));
+            ev.Reveals.Add(new TacticalMapReveal(sensor.RevealFrom, sensor.RevealTo, indices, sensor.Range));
         }
     }
 

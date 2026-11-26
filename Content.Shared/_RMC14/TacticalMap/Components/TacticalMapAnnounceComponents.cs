@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.TacticalMap;
 public sealed partial class TacticalMapMarineAnnounceComponent : Component
 {
     [DataField(required: true)]
-    public LocId Message;
+    public string Message = string.Empty;
 }
 
 [RegisterComponent]
@@ -15,7 +15,7 @@ public sealed partial class TacticalMapMarineAnnounceComponent : Component
 public sealed partial class TacticalMapXenoAnnounceComponent : Component
 {
     [DataField(required: true)]
-    public LocId Message;
+    public string Message = string.Empty;
 
     [DataField]
     public SoundSpecifier? Sound = new SoundCollectionSpecifier("XenoQueenCommand", AudioParams.Default.WithVolume(-6));

@@ -1,19 +1,20 @@
 using Content.Shared.Administration;
 using Robust.Shared.Console;
-using Robust.Shared.GameObjects;
 
 namespace Content.Server._RMC14.TacticalMap;
 
 [AnyCommand]
-public sealed class TacticalMapReplayCommand : IConsoleCommand
+public sealed class TacticalMapReplayCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private readonly TacticalMapReplaySystem _replay = default!;
 
-    public string Command => "tacmapreplay";
-    public string Description => "Opens the tactical map replay viewer for the caller.";
-    public string Help => "Usage: tacmapreplay [mapId]";
+    public override string Command => "tacmapreplay";
 
-    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    public override string Description => "Opens the tactical map replay for the current round.";
+
+    public override string Help => "Usage: tacmapreplay [map name]";
+
+    public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length > 1)
         {
@@ -21,21 +22,14 @@ public sealed class TacticalMapReplayCommand : IConsoleCommand
             return;
         }
 
-        var player = shell.Player;
-        if (player == null)
+        if (shell.Player is not { } player)
         {
-            shell.WriteLine("This command can only be run by a player.");
+            shell.WriteLine(Loc.GetString("shell-cannot-run-command-from-server"));
             return;
         }
 
-        var replay = _entitySystemManager.GetEntitySystem<TacticalMapReplaySystem>();
-        if (!replay.CanAccessReplay(player, out var reason))
-        {
-            shell.WriteLine(reason ?? "You do not have access to the tactical map replay.");
-            return;
-        }
-
-        string? mapId = args.Length == 1 ? args[0] : null;
-        replay.SendReplay(player, mapId);
+        var mapName = args.Length == 1 ? args[0] : null;
+        if (!_replay.TryRequestReplay(player, mapName, out var reason))
+            shell.WriteLine(reason ?? "Unable to open the tactical map replay.");
     }
 }

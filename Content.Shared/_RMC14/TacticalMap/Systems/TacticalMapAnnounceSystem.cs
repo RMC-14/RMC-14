@@ -16,11 +16,11 @@ public sealed class TacticalMapAnnounceSystem : EntitySystem
 
     private void OnMarineSubmitted(Entity<TacticalMapMarineAnnounceComponent> ent, ref TacticalMapCanvasSubmittedEvent args)
     {
-        _marineAnnounce.AnnounceARESStaging(args.Actor, Loc.GetString(ent.Comp.Message));
+        _marineAnnounce.AnnounceARESStaging(args.Actor, ent.Comp.Message);
     }
 
     private void OnXenoSubmitted(Entity<TacticalMapXenoAnnounceComponent> ent, ref TacticalMapCanvasSubmittedEvent args)
     {
-        _xenoAnnounce.AnnounceSameHive(args.Actor, Loc.GetString(ent.Comp.Message), ent.Comp.Sound);
+        _xenoAnnounce.AnnounceSameHive(args.Actor, ent.Comp.Message, ent.Comp.Sound);
     }
 }

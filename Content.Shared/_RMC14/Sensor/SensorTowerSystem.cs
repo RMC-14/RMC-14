@@ -9,6 +9,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -25,10 +26,11 @@ public sealed class SensorTowerSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TacticalMapModifyVisibleLayersEvent>(OnTacticalMapModifyVisibleLayers);
+        SubscribeLocalEvent<TacticalMapCollectRevealsEvent>(OnTacticalMapCollectReveals);
 
         SubscribeLocalEvent<SensorTowerComponent, MapInitEvent>(OnSensorTowerMapInit);
         SubscribeLocalEvent<SensorTowerComponent, InteractUsingEvent>(OnSensorTowerInteractUsing);
@@ -38,41 +40,33 @@ public sealed class SensorTowerSystem : EntitySystem
         SubscribeLocalEvent<SensorTowerComponent, SensorTowerDestroyDoAfterEvent>(OnSensorTowerDestroyDoAfter);
     }
 
-    private void OnTacticalMapModifyVisibleLayers(ref TacticalMapModifyVisibleLayersEvent ev)
+    private void OnTacticalMapCollectReveals(ref TacticalMapCollectRevealsEvent ev)
     {
-        var towers = EntityQueryEnumerator<SensorTowerComponent>();
-        while (towers.MoveNext(out var tower))
+        var towers = EntityQueryEnumerator<SensorTowerComponent, TransformComponent>();
+        while (towers.MoveNext(out var uid, out var tower, out var xform))
         {
-            if (tower.State == SensorTowerState.On)
+            if (tower.State != SensorTowerState.On)
+                continue;
+
+            Vector2i? center = null;
+            if (tower.RevealRange > 0)
             {
-                if (tower.RevealRange > 0)
-                    continue;
-
-                if (tower.RevealLayers.Count == 0)
-                    return;
-
-                var shouldReveal = tower.RevealForLayers.Count == 0;
-                if (!shouldReveal)
+                if (xform.GridUid != ev.Map ||
+                    !TryComp(ev.Map, out MapGridComponent? grid) ||
+                    !_transform.TryGetGridTilePosition((uid, xform), out var indices, grid))
                 {
-                    foreach (var layer in tower.RevealForLayers)
-                    {
-                        if (ev.Layers.Contains(layer))
-                        {
-                            shouldReveal = true;
-                            break;
-                        }
-                    }
+                    continue;
                 }
 
-                if (!shouldReveal)
-                    continue;
+                center = indices;
+            }
 
-                foreach (var reveal in tower.RevealLayers)
+            foreach (var from in tower.RevealFrom)
+            {
+                foreach (var to in tower.RevealTo)
                 {
-                    ev.Layers.Add(reveal);
+                    ev.Reveals.Add(new TacticalMapReveal(from, to, center, tower.RevealRange));
                 }
-
-                return;
             }
         }
     }
@@ -177,7 +171,7 @@ public sealed class SensorTowerSystem : EntitySystem
 
         using (args.PushGroup(nameof(SensorTowerComponent)))
         {
-            // TODO RMC14 localize
+            // TODO: localize
             var text = ent.Comp.State switch
             {
                 SensorTowerState.Weld => "This one is heavily damaged. Use a blowtorch, wirecutters, then a wrench to repair it.",

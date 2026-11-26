@@ -116,8 +116,13 @@ public sealed class RMCAdminEui : BaseEui
         }
 
         var rmcAdmin = entities.System<RMCAdminSystem>();
-        var history = rmcAdmin.LinesDrawn.Reverse().Select(l => (l.Id, l.Actor, l.Round)).ToList();
-        var lines = rmcAdmin.LinesDrawn.FirstOrDefault(l => l.Item1 == tacticalMapLines);
+        var history = rmcAdmin.LinesDrawn.Reverse().Select(l => (l.Id, l.Actor, l.RoundId)).ToList();
+        TacticalMapHistoryEntry? lines = null;
+        foreach (var entry in rmcAdmin.LinesDrawn)
+        {
+            if (entry.Id == tacticalMapLines)
+                lines = entry;
+        }
 
         var allFactions = factionSys.GetFactions();
         var dummy = allFactions.GetValueOrDefault("RMCDumb", new FactionData());

@@ -161,7 +161,7 @@ public sealed class AreaInfoSystem : EntitySystem
         else
             restrictedActions.Add("Close Air Support");
 
-        if (_area.CanSupplyDrop(coordinates.ToMap(EntityManager, _transform)))
+        if (_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)))
             allowedActions.Add("Supply Drops");
         else
             restrictedActions.Add("Supply Drops");

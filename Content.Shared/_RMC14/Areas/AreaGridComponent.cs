@@ -4,27 +4,18 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Areas;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(AreaSystem), typeof(SharedAreaLookupSystem))]
+[Access(typeof(AreaSystem))]
 public sealed partial class AreaGridComponent : Component
 {
     [DataField, AutoNetworkedField]
     public Dictionary<Vector2i, EntProtoId<AreaComponent>> Areas = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<Vector2i, Color> Colors = new();
-
-    [DataField, AutoNetworkedField]
-    public bool HasTacMapBounds;
-
-    [DataField, AutoNetworkedField]
-    public Vector2i TacMapBoundsMin;
-
-    [DataField, AutoNetworkedField]
-    public Vector2i TacMapBoundsMax;
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<AreaComponent>, EntityUid> AreaEntities = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<Vector2i, string> Labels = new();
 }

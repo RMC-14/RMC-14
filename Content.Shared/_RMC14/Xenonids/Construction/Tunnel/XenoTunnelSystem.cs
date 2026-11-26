@@ -135,7 +135,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        EnsureComp<TunnelUIUserComponent>(args.Actor);
+        _tacticalMap.OpenViewer(args.Actor, args.Actor);
     }
 
     private void OnTunnelUIClosed(Entity<XenoTunnelComponent> tunnel, ref BoundUIClosedEvent args)
@@ -143,7 +143,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        RemCompDeferred<TunnelUIUserComponent>(args.Actor);
+        _tacticalMap.CloseViewer(args.Actor, args.Actor);
     }
 
     private void OnExamine(Entity<XenoTunnelComponent> xenoTunnel, ref ExaminedEvent args)
@@ -861,12 +861,6 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OpenDestinationUI(Entity<XenoTunnelComponent> tunnel, EntityUid enteringEntity)
     {
-        if (TryComp(enteringEntity, out TacticalMapUserComponent? userComp) &&
-            _tacticalMap.TryGetTacticalMap(userComp.Map, out var map))
-        {
-            _tacticalMap.UpdateUserData((enteringEntity, userComp), map);
-        }
-
         _ui.OpenUi(tunnel.Owner, SelectDestinationTunnelUI.Key, enteringEntity);
     }
 }

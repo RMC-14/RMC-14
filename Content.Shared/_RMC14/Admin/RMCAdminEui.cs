@@ -16,6 +16,15 @@ public readonly record struct Squad(EntProtoId Id, bool Exists, int Members);
 public readonly record struct Xeno(EntProtoId Proto);
 
 [Serializable, NetSerializable]
+public readonly record struct TacticalMapHistoryEntry(
+    Guid Id,
+    NetEntity Map,
+    List<TacticalMapStroke> Strokes,
+    Dictionary<Vector2i, TacticalMapLabelData> Labels,
+    string Actor,
+    int RoundId);
+
+[Serializable, NetSerializable]
 [Virtual]
 public class RMCAdminEuiState(
     List<Hive> hives,
@@ -23,7 +32,7 @@ public class RMCAdminEuiState(
     List<Xeno> xenos,
     int marines,
     List<(Guid Id, string Actor, int Round)> tacticalMapHistory,
-    (Guid Id, List<TacticalMapLine> Lines, string Actor, int RoundId) tacticalMapLines,
+    TacticalMapHistoryEntry? tacticalMapLines,
     Dictionary<string, FactionData> factions
 ) : EuiStateBase
 {
@@ -32,7 +41,7 @@ public class RMCAdminEuiState(
     public readonly List<Xeno> Xenos = xenos;
     public readonly int Marines = marines;
     public readonly List<(Guid Id, string Actor, int Round)> TacticalMapHistory = tacticalMapHistory;
-    public readonly (Guid Id, List<TacticalMapLine> Lines, string Actor, int RoundId) TacticalMapLines = tacticalMapLines;
+    public readonly TacticalMapHistoryEntry? TacticalMapLines = tacticalMapLines;
     public readonly Dictionary<string, FactionData> Factions = factions;
 }
 
@@ -43,7 +52,7 @@ public sealed class RMCAdminEuiTargetState(
     List<Xeno> xenos,
     int marines,
     List<(Guid Id, string Actor, int Round)> tacticalMapHistory,
-    (Guid Id, List<TacticalMapLine> Lines, string Actor, int RoundId) tacticalMapLines,
+    TacticalMapHistoryEntry? tacticalMapLines,
     Dictionary<string, FactionData> factions,
     List<(string Name, bool Present)> specialistSkills,
     int points,

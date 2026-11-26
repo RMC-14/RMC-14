@@ -1,99 +1,140 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Administration;
-using Content.Shared._RMC14.CCVar;
 using Content.Shared.GameTicking;
 using Robust.Shared.Configuration;
-using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.TacticalMap;
 
 public sealed class TacticalMapReplaySystem : EntitySystem
 {
     [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private const int MaxFramesPerMap = 2000;
-    private static readonly TimeSpan KeyframeInterval = TimeSpan.FromSeconds(10);
+    private const int FramesPerChunk = 40;
 
-    private sealed class ReplayRecording
+    private sealed class Recording
     {
-        public string MapId = string.Empty;
-        public string DisplayName = string.Empty;
+        public string Name = string.Empty;
+        public readonly List<TacticalMapReplayChannel> Channels = new();
+        public readonly Dictionary<EntityUid, int> ChannelIndices = new();
+        public readonly List<SpriteSpecifier.Rsi> Icons = new();
+        public readonly Dictionary<SpriteSpecifier.Rsi, int> IconIndices = new();
+        public readonly List<TacticalMapReplayCanvas> Canvases = new();
         public readonly List<TacticalMapReplayFrame> Frames = new();
-        public TimeSpan LastKeyframeAt;
-        public readonly Dictionary<string, LayerSnapshot> LastState = new();
     }
 
-    private sealed class LayerSnapshot
-    {
-        public readonly List<TacticalMapLine> Lines = new();
-        public readonly Dictionary<Vector2i, TacticalMapLabelData> Labels = new();
-        public readonly Dictionary<int, TacticalMapBlip> Blips = new();
-    }
-
-    private readonly Dictionary<EntityUid, ReplayRecording> _recordings = new();
+    private readonly Dictionary<EntityUid, Recording> _recordings = new();
+    private readonly Dictionary<ICommonSession, TimeSpan> _nextRequest = new();
+    private bool _publicAfterRound;
+    private TimeSpan _sampleEvery;
+    private TimeSpan _requestCooldown;
+    private TimeSpan _nextSample;
+    private int _nextRequestId;
 
     public override void Initialize()
     {
-        base.Initialize();
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeNetworkEvent<TacticalMapReplayRequestEvent>(OnReplayRequest);
-        SubscribeLocalEvent<TacticalMapComponent, EntityTerminatingEvent>(OnMapTerminating);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => _recordings.Clear());
+        Subs.CVar(_config, RMCCVars.RMCTacticalMapReplayPublicAfterRound, v => _publicAfterRound = v, true);
+        Subs.CVar(_config, RMCCVars.RMCTacticalMapReplaySampleSeconds, v => _sampleEvery = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCTacticalMapReplayRequestCooldownSeconds, v => _requestCooldown = TimeSpan.FromSeconds(v), true);
     }
 
-    public void RecordSnapshot(EntityUid mapId, TacticalMapComponent map)
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
-        var recording = GetOrCreateRecording(mapId, map);
-        var now = _timing.CurTime;
-        var isInitial = recording.Frames.Count == 0;
-        var allowKeyframe = isInitial || now - recording.LastKeyframeAt >= KeyframeInterval;
+        _recordings.Clear();
+        _nextRequest.Clear();
+        _nextSample = TimeSpan.Zero;
+    }
 
-        if (!TryBuildFrame(map, recording, allowKeyframe, isInitial, out var frame))
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+        if (time < _nextSample)
+            return;
+
+        _nextSample = time + _sampleEvery;
+        var maps = EntityQueryEnumerator<TacticalMapComponent>();
+        while (maps.MoveNext(out var mapId, out var map))
         {
-            if (recording.Frames.Count > 0)
+            var recording = GetRecording(mapId, map);
+            var blips = new List<TacticalMapReplayBlip>();
+            foreach (var channelId in map.Channels.Values)
             {
-                var lastFrame = recording.Frames[^1];
-                if (Math.Abs(lastFrame.Time - (float) now.TotalSeconds) > 0.001f)
-                    recording.Frames[^1] = lastFrame with { Time = (float) now.TotalSeconds };
+                if (!TryComp(channelId, out TacticalMapChannelComponent? channel) ||
+                    channel.LiveFeed is not { } feedId ||
+                    !TryComp(feedId, out TacticalMapLiveFeedComponent? feed))
+                {
+                    continue;
+                }
+
+                var channelIndex = GetChannelIndex(recording, channelId, channel);
+                foreach (var (net, blip) in feed.Blips)
+                {
+                    if (SharedTacticalMapSystem.IsRevealed(feed, net))
+                        continue;
+
+                    blips.Add(new TacticalMapReplayBlip(
+                        net.Id,
+                        (short) blip.Indices.X,
+                        (short) blip.Indices.Y,
+                        (ushort) GetIconIndex(recording, blip.Icon),
+                        blip.Background is { } background
+                            ? (ushort) GetIconIndex(recording, background)
+                            : TacticalMapReplayBlip.NoBackground,
+                        PackColor(blip.Color),
+                        (byte) blip.Flags,
+                        (byte) channelIndex));
+                }
             }
 
-            return;
+            recording.Frames.Add(new TacticalMapReplayFrame((float) time.TotalSeconds, blips));
         }
+    }
 
-        if (frame.IsKeyframe)
-            recording.LastKeyframeAt = now;
-
-        recording.Frames.Add(frame);
-
-        if (recording.Frames.Count > MaxFramesPerMap)
+    public void RecordCanvas(
+        EntityUid map,
+        EntityUid channelId,
+        List<TacticalMapStroke> strokes,
+        Dictionary<Vector2i, TacticalMapLabelData> labels)
+    {
+        if (!TryComp(map, out TacticalMapComponent? mapComp) ||
+            !TryComp(channelId, out TacticalMapChannelComponent? channel))
         {
-            var removeCount = recording.Frames.Count - MaxFramesPerMap;
-            recording.Frames.RemoveRange(0, removeCount);
-        }
-    }
-
-    public void SendReplay(ICommonSession session, string? mapIdFilter)
-    {
-        var maps = BuildReplayMaps(mapIdFilter);
-        RaiseNetworkEvent(new TacticalMapReplayDataEvent(maps), session);
-    }
-
-    private void OnReplayRequest(TacticalMapReplayRequestEvent msg, EntitySessionEventArgs args)
-    {
-        if (!CanAccessReplay(args.SenderSession, out _))
             return;
+        }
 
-        SendReplay(args.SenderSession, msg.MapId);
+        var recording = GetRecording(map, mapComp);
+        recording.Canvases.Add(new TacticalMapReplayCanvas(
+            (float) _timing.CurTime.TotalSeconds,
+            GetChannelIndex(recording, channelId, channel),
+            new List<TacticalMapStroke>(strokes),
+            new Dictionary<Vector2i, TacticalMapLabelData>(labels)));
+    }
+
+    public bool TryRequestReplay(ICommonSession session, string? mapName, out string? reason)
+    {
+        if (!CanAccessReplay(session, out reason))
+            return false;
+
+        var time = _timing.CurTime;
+        if (_nextRequest.TryGetValue(session, out var next) && time < next)
+        {
+            reason = $"You must wait {(int) Math.Ceiling((next - time).TotalSeconds)} more seconds before requesting another replay.";
+            return false;
+        }
+
+        _nextRequest[session] = time + _requestCooldown;
+        SendReplay(session, mapName);
+        return true;
     }
 
     public bool CanAccessReplay(ICommonSession session, out string? reason)
@@ -104,15 +145,15 @@ public sealed class TacticalMapReplaySystem : EntitySystem
             return true;
         }
 
-        if (!_cfg.GetCVar(RMCCVars.RMCTacticalMapReplayPublicAfterRound))
+        if (!_publicAfterRound)
         {
-            reason = "Tactical map replay access for non-admins is currently disabled.";
+            reason = "Tactical map replays are only available to admins.";
             return false;
         }
 
         if (_gameTicker.RunLevel != GameRunLevel.PostRound)
         {
-            reason = "Tactical map replay is only available on round end.";
+            reason = "Tactical map replays are only available after the round has ended.";
             return false;
         }
 
@@ -120,322 +161,78 @@ public sealed class TacticalMapReplaySystem : EntitySystem
         return true;
     }
 
-    private void OnMapTerminating(Entity<TacticalMapComponent> ent, ref EntityTerminatingEvent args)
+    private void SendReplay(ICommonSession session, string? mapName)
     {
-        _recordings.Remove(ent.Owner);
-    }
-
-    private ReplayRecording GetOrCreateRecording(EntityUid mapId, TacticalMapComponent map)
-    {
-        if (!_recordings.TryGetValue(mapId, out var recording))
-        {
-            recording = new ReplayRecording();
-            _recordings[mapId] = recording;
-        }
-
-        recording.MapId = map.MapId;
-        recording.DisplayName = map.DisplayName;
-        return recording;
-    }
-
-    private static void UpdateSnapshotLines(LayerSnapshot snapshot, bool isFull, List<TacticalMapLine> lines)
-    {
-        if (isFull)
-        {
-            snapshot.Lines.Clear();
-            snapshot.Lines.AddRange(lines);
-            return;
-        }
-
-        if (lines.Count > 0)
-            snapshot.Lines.AddRange(lines);
-    }
-
-    private static bool IsAppendOnly(IReadOnlyList<TacticalMapLine> previous, IReadOnlyList<TacticalMapLine> current)
-    {
-        if (current.Count < previous.Count)
-            return false;
-
-        for (var i = 0; i < previous.Count; i++)
-        {
-            if (!previous[i].Equals(current[i]))
-                return false;
-        }
-
-        return true;
-    }
-
-    private bool TryBuildFrame(
-        TacticalMapComponent map,
-        ReplayRecording recording,
-        bool allowKeyframe,
-        bool isInitial,
-        out TacticalMapReplayFrame frame)
-    {
-        var layers = new List<TacticalMapReplayLayerDelta>(map.Layers.Count);
-        var currentLayerIds = new HashSet<string>();
-        var hasChanges = false;
-
-        foreach (var (layerId, layer) in map.Layers.OrderBy(pair => pair.Key.Id))
-        {
-            var layerIdString = layerId.Id;
-            currentLayerIds.Add(layerIdString);
-
-            if (!recording.LastState.TryGetValue(layerIdString, out var snapshot))
-            {
-                snapshot = new LayerSnapshot();
-                recording.LastState[layerIdString] = snapshot;
-            }
-
-            if (BuildLayerDelta(layerIdString, layer, snapshot, false, out var delta))
-            {
-                layers.Add(delta);
-                hasChanges = true;
-            }
-        }
-
-        var removedLayers = new List<string>();
-        foreach (var layerId in recording.LastState.Keys)
-        {
-            if (!currentLayerIds.Contains(layerId))
-                removedLayers.Add(layerId);
-        }
-
-        foreach (var layerId in removedLayers)
-        {
-            var delta = new TacticalMapReplayLayerDelta(
-                layerId,
-                true,
-                true,
-                new List<TacticalMapLine>(),
-                true,
-                true,
-                new Dictionary<Vector2i, TacticalMapLabelData>(),
-                new List<Vector2i>(),
-                true,
-                true,
-                new Dictionary<int, TacticalMapBlip>(),
-                new List<int>());
-            layers.Add(delta);
-            recording.LastState.Remove(layerId);
-            hasChanges = true;
-        }
-
-        if (!hasChanges && !isInitial)
-        {
-            frame = default;
-            return false;
-        }
-
-        var useKeyframe = isInitial || (allowKeyframe && hasChanges);
-        if (useKeyframe)
-        {
-            layers = BuildKeyframeDeltas(map, recording);
-        }
-
-        frame = new TacticalMapReplayFrame(
-            (float) _timing.CurTime.TotalSeconds,
-            useKeyframe,
-            layers);
-
-        return true;
-    }
-
-    private static List<TacticalMapReplayLayerDelta> BuildKeyframeDeltas(
-        TacticalMapComponent map,
-        ReplayRecording recording)
-    {
-        var layers = new List<TacticalMapReplayLayerDelta>(map.Layers.Count);
-        recording.LastState.Clear();
-
-        foreach (var (layerId, layer) in map.Layers.OrderBy(pair => pair.Key.Id))
-        {
-            var layerIdString = layerId.Id;
-            var snapshot = new LayerSnapshot();
-            recording.LastState[layerIdString] = snapshot;
-
-            BuildLayerDelta(layerIdString, layer, snapshot, true, out var delta);
-            layers.Add(delta);
-        }
-
-        return layers;
-    }
-
-    private static bool BuildLayerDelta(
-        string layerId,
-        TacticalMapLayerData layer,
-        LayerSnapshot snapshot,
-        bool forceKeyframe,
-        out TacticalMapReplayLayerDelta delta)
-    {
-        bool linesChanged = false;
-        bool linesIsFull = false;
-        List<TacticalMapLine> linesDelta = new();
-
-        if (forceKeyframe)
-        {
-            linesChanged = true;
-            linesIsFull = true;
-            linesDelta = new List<TacticalMapLine>(layer.Lines);
-            UpdateSnapshotLines(snapshot, true, linesDelta);
-        }
-        else if (!layer.Lines.SequenceEqual(snapshot.Lines))
-        {
-            linesChanged = true;
-            if (IsAppendOnly(snapshot.Lines, layer.Lines))
-            {
-                linesIsFull = false;
-                linesDelta = layer.Lines.Skip(snapshot.Lines.Count).ToList();
-                UpdateSnapshotLines(snapshot, false, linesDelta);
-            }
-            else
-            {
-                linesIsFull = true;
-                linesDelta = new List<TacticalMapLine>(layer.Lines);
-                UpdateSnapshotLines(snapshot, true, linesDelta);
-            }
-        }
-
-        bool labelsChanged = false;
-        bool labelsIsFull = forceKeyframe;
-        var labelUpdates = new Dictionary<Vector2i, TacticalMapLabelData>();
-        var removedLabels = new List<Vector2i>();
-
-        if (forceKeyframe)
-        {
-            labelsChanged = true;
-            labelUpdates = new Dictionary<Vector2i, TacticalMapLabelData>(layer.Labels);
-            snapshot.Labels.Clear();
-            foreach (var (pos, label) in layer.Labels)
-                snapshot.Labels[pos] = label;
-        }
-        else
-        {
-            foreach (var (pos, label) in layer.Labels)
-            {
-                if (!snapshot.Labels.TryGetValue(pos, out var existing) || !existing.Equals(label))
-                    labelUpdates[pos] = label;
-            }
-
-            foreach (var pos in snapshot.Labels.Keys)
-            {
-                if (!layer.Labels.ContainsKey(pos))
-                    removedLabels.Add(pos);
-            }
-
-            labelsChanged = labelUpdates.Count > 0 || removedLabels.Count > 0;
-            if (labelsChanged)
-            {
-                foreach (var (pos, label) in labelUpdates)
-                    snapshot.Labels[pos] = label;
-
-                foreach (var pos in removedLabels)
-                    snapshot.Labels.Remove(pos);
-            }
-        }
-
-        bool blipsChanged = false;
-        bool blipsIsFull = forceKeyframe;
-        var blipUpdates = new Dictionary<int, TacticalMapBlip>();
-        var removedBlips = new List<int>();
-
-        if (forceKeyframe)
-        {
-            blipsChanged = true;
-            blipUpdates = new Dictionary<int, TacticalMapBlip>(layer.Blips);
-            snapshot.Blips.Clear();
-            foreach (var (id, blip) in layer.Blips)
-                snapshot.Blips[id] = blip;
-        }
-        else
-        {
-            foreach (var (id, blip) in layer.Blips)
-            {
-                if (!snapshot.Blips.TryGetValue(id, out var existing) || !existing.Equals(blip))
-                    blipUpdates[id] = blip;
-            }
-
-            foreach (var id in snapshot.Blips.Keys)
-            {
-                if (!layer.Blips.ContainsKey(id))
-                    removedBlips.Add(id);
-            }
-
-            blipsChanged = blipUpdates.Count > 0 || removedBlips.Count > 0;
-            if (blipsChanged)
-            {
-                foreach (var (id, blip) in blipUpdates)
-                    snapshot.Blips[id] = blip;
-
-                foreach (var id in removedBlips)
-                    snapshot.Blips.Remove(id);
-            }
-        }
-
-        delta = new TacticalMapReplayLayerDelta(
-            layerId,
-            linesChanged,
-            linesIsFull,
-            linesDelta,
-            labelsChanged,
-            labelsIsFull,
-            labelUpdates,
-            removedLabels,
-            blipsChanged,
-            blipsIsFull,
-            blipUpdates,
-            removedBlips);
-
-        return linesChanged || labelsChanged || blipsChanged || forceKeyframe;
-    }
-
-    private List<TacticalMapReplayMap> BuildReplayMaps(string? mapIdFilter)
-    {
+        var requestId = ++_nextRequestId;
         var maps = new List<TacticalMapReplayMap>();
-        var query = EntityQueryEnumerator<TacticalMapComponent>();
-        while (query.MoveNext(out var mapId, out var map))
+        var recordings = new List<Recording>();
+        foreach (var (mapId, recording) in _recordings)
         {
-            if (!string.IsNullOrWhiteSpace(mapIdFilter) &&
-                !string.Equals(map.MapId, mapIdFilter, StringComparison.OrdinalIgnoreCase))
+            if (!string.IsNullOrWhiteSpace(mapName) &&
+                !string.Equals(recording.Name, mapName, StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }
 
-            var recording = GetOrCreateRecording(mapId, map);
-            var frames = recording.Frames.Count > 0
-                ? new List<TacticalMapReplayFrame>(recording.Frames)
-                : new List<TacticalMapReplayFrame> { BuildKeyframeFrame(map) };
-
-            var layerIds = map.Layers.Keys.Select(layerId => layerId.Id).OrderBy(id => id).ToList();
-            maps.Add(new TacticalMapReplayMap(GetNetEntity(mapId), map.MapId, map.DisplayName, layerIds, frames));
+            maps.Add(new TacticalMapReplayMap(
+                GetNetEntity(mapId),
+                recording.Name,
+                new List<TacticalMapReplayChannel>(recording.Channels),
+                new List<SpriteSpecifier.Rsi>(recording.Icons),
+                new List<TacticalMapReplayCanvas>(recording.Canvases),
+                recording.Frames.Count));
+            recordings.Add(recording);
         }
 
-        return maps;
+        RaiseNetworkEvent(new TacticalMapReplayHeaderEvent(requestId, maps), session);
+
+        for (var mapIndex = 0; mapIndex < recordings.Count; mapIndex++)
+        {
+            var frames = recordings[mapIndex].Frames;
+            for (var start = 0; start < frames.Count; start += FramesPerChunk)
+            {
+                var count = Math.Min(FramesPerChunk, frames.Count - start);
+                RaiseNetworkEvent(new TacticalMapReplayChunkEvent(requestId, mapIndex, frames.GetRange(start, count)), session);
+            }
+        }
     }
 
-    private TacticalMapReplayFrame BuildKeyframeFrame(TacticalMapComponent map)
+    private Recording GetRecording(EntityUid map, TacticalMapComponent mapComp)
     {
-        var layers = new List<TacticalMapReplayLayerDelta>(map.Layers.Count);
-        foreach (var (layerId, layer) in map.Layers.OrderBy(pair => pair.Key.Id))
+        if (!_recordings.TryGetValue(map, out var recording))
         {
-            layers.Add(new TacticalMapReplayLayerDelta(
-                layerId.Id,
-                true,
-                true,
-                new List<TacticalMapLine>(layer.Lines),
-                true,
-                true,
-                new Dictionary<Vector2i, TacticalMapLabelData>(layer.Labels),
-                new List<Vector2i>(),
-                true,
-                true,
-                new Dictionary<int, TacticalMapBlip>(layer.Blips),
-                new List<int>()));
+            recording = new Recording();
+            _recordings[map] = recording;
         }
 
-        return new TacticalMapReplayFrame(
-            (float) _timing.CurTime.TotalSeconds,
-            true,
-            layers);
+        recording.Name = string.IsNullOrWhiteSpace(mapComp.DisplayName) ? Name(map) : mapComp.DisplayName;
+        return recording;
+    }
+
+    private int GetChannelIndex(Recording recording, EntityUid channelId, TacticalMapChannelComponent channel)
+    {
+        if (recording.ChannelIndices.TryGetValue(channelId, out var index))
+            return index;
+
+        index = recording.Channels.Count;
+        recording.Channels.Add(new TacticalMapReplayChannel(Name(channelId), channel.Color, channel.LiveFeed != null));
+        recording.ChannelIndices[channelId] = index;
+        return index;
+    }
+
+    private static int GetIconIndex(Recording recording, SpriteSpecifier.Rsi icon)
+    {
+        if (recording.IconIndices.TryGetValue(icon, out var index))
+            return index;
+
+        index = recording.Icons.Count;
+        recording.Icons.Add(icon);
+        recording.IconIndices[icon] = index;
+        return index;
+    }
+
+    private static uint PackColor(Color color)
+    {
+        return SharedTacticalMapSystem.PackColor(color);
     }
 }

@@ -1,48 +1,28 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.GameStates;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(SharedTacticalMapSystem))]
 public sealed partial class TacticalMapComputerComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid? Map;
+    public List<ProtoId<NpcFactionPrototype>> Factions = new() { "UNMC" };
 
     [DataField, AutoNetworkedField]
-    public Dictionary<NetEntity, TacticalMapBlip> Blips = new();
+    public bool AllSquads = true;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<SquadObjectiveType, string> Objectives = new();
-
-    [DataField]
-    public List<ProtoId<TacticalMapLayerPrototype>> BaseLayers = new();
-
-    [DataField]
-    public List<ProtoId<TacticalMapLayerSetPrototype>> LayerSets = new();
+    public HashSet<string> SquadGroups = new();
 
     [DataField, AutoNetworkedField]
-    public List<ProtoId<TacticalMapLayerPrototype>> VisibleLayers = new();
+    public bool LiveUpdate = true;
 
     [DataField, AutoNetworkedField]
-    public List<ProtoId<TacticalMapLayerPrototype>> LayerOptions = new();
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<TacticalMapLayerPrototype>? ActiveLayer;
-
-    [DataField]
-    public List<string> AllowedSquadGroups = new();
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastAnnounceAt;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan NextAnnounceAt;
+    public bool CanDraw;
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillLeadership";
@@ -50,5 +30,12 @@ public sealed partial class TacticalMapComputerComponent : Component
     [DataField, AutoNetworkedField]
     public int SkillLevel = 2;
 
-    public EntityUid? ObjectivesSquad;
+    [DataField]
+    public List<Enum> UiKeys = new() { TacticalMapComputerUi.Key };
+
+    [DataField, AutoNetworkedField]
+    public List<EntityUid> Channels = new();
+
+    [DataField, AutoNetworkedField]
+    public bool Live;
 }

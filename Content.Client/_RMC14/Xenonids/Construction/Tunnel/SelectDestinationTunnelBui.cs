@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Numerics;
-using Content.Shared._RMC14.Areas;
+using Content.Client._RMC14.TacticalMap;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using JetBrains.Annotations;
@@ -8,8 +8,6 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
-using static Robust.Client.UserInterface.Control;
-using Content.Client._RMC14.TacticalMap.UI;
 
 namespace Content.Client._RMC14.Xenonids.Construction.Tunnel;
 
@@ -36,7 +34,6 @@ public struct TunnelCacheEntry
     public Vector2i Position;
     public string Name;
     public NetEntity Entity;
-    public NetEntity EntityId;
 }
 
 [UsedImplicitly]
@@ -44,26 +41,39 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
 {
     [Dependency] private readonly IPlayerManager _player = default!;
 
+    private static readonly SpriteSpecifier.Rsi HighlightBackground =
+        new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "background");
+
+    private static readonly Color PathColor = Color.FromHex("#F535AA");
+    private const float PathThickness = 2f;
+    private const float PathDashLength = 2f;
+    private const float PathDashGap = 1.5f;
+
+    private readonly TacticalMapSystem _tacticalMap;
+
     private SelectDestinationTunnelWindow? _window;
     private NetEntity? _selectedTunnel;
     private Dictionary<string, NetEntity> _availableTunnels = new();
-    private NetEntity? _currentTunnelNetEntityKey;
+    private readonly Dictionary<NetEntity, string> _tunnelNames = new();
+    private NetEntity? _currentTunnel;
     private bool _showOnlyTunnels = true;
     private TunnelPathfindingConfig _pathfindingConfig = TunnelPathfindingConfig.Default;
 
     private readonly Dictionary<NetEntity, TunnelCacheEntry> _tunnelCache = new();
-    private readonly Dictionary<Vector2i, NetEntity> _positionToEntityCache = new();
     private readonly Dictionary<(Vector2i, Vector2i), double> _distanceCache = new();
     private readonly Dictionary<(Vector2i, Vector2i), List<Vector2i>> _pathCache = new();
-    private readonly List<TacticalMapBlip> _reusableBlipsList = new();
+    private readonly List<EntityUid> _channels = new();
+    private readonly List<TacticalMapMapOption> _maps = new();
+    private readonly List<TacticalMapBlipView> _allBlips = new();
+    private readonly List<TacticalMapBlipView> _shownBlips = new();
 
-    private bool _cacheValid;
     private Vector2i? _cachedCurrentPos;
     private Vector2i? _cachedSelectedPos;
 
     public SelectDestinationTunnelBui(EntityUid ent, Enum key) : base(ent, key)
     {
         IoCManager.InjectDependencies(this);
+        _tacticalMap = EntMan.System<TacticalMapSystem>();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -82,6 +92,12 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
 
         if (tunnelsChanged)
         {
+            _tunnelNames.Clear();
+            foreach (var (name, tunnel) in _availableTunnels)
+            {
+                _tunnelNames[tunnel] = name;
+            }
+
             InvalidateCache();
         }
 
@@ -95,17 +111,14 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
 
         UpdateTunnelList(state);
         UpdateSelectedTunnel(previouslySelectedTunnel);
-        UpdateTacticalMapDisplay();
         UpdateBlips();
     }
 
     private void InvalidateCache()
     {
         _tunnelCache.Clear();
-        _positionToEntityCache.Clear();
         _distanceCache.Clear();
         _pathCache.Clear();
-        _cacheValid = false;
         _cachedCurrentPos = null;
         _cachedSelectedPos = null;
     }
@@ -115,7 +128,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         if (_window == null)
             return;
 
-        _currentTunnelNetEntityKey = null;
+        _currentTunnel = null;
         string? currentTunnelName = null;
 
         foreach (var tunnel in newState.HiveTunnels)
@@ -123,7 +136,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
             if (EntMan.GetEntity(tunnel.Value) == Owner)
             {
                 currentTunnelName = tunnel.Key;
-                _currentTunnelNetEntityKey = tunnel.Value;
+                _currentTunnel = tunnel.Value;
                 continue;
             }
 
@@ -142,11 +155,11 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         if (_window == null)
             return;
 
-        if (previouslySelectedTunnel != null && _availableTunnels.ContainsValue(previouslySelectedTunnel.Value))
+        if (previouslySelectedTunnel != null && _tunnelNames.TryGetValue(previouslySelectedTunnel.Value, out var name))
         {
             _selectedTunnel = previouslySelectedTunnel;
             _window.SelectButton.Disabled = false;
-            _window.UpdateSelectedTunnelDisplay(GetTunnelNameCached(_selectedTunnel.Value));
+            _window.UpdateSelectedTunnelDisplay(name);
         }
         else
         {
@@ -156,83 +169,64 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         }
     }
 
-    private string? GetTunnelNameCached(NetEntity tunnel)
+    private EntityUid? GetMap()
     {
-        return _tunnelCache.TryGetValue(tunnel, out var cached)
-            ? cached.Name
-            : GetTunnelName(tunnel);
-    }
-
-    private string? GetTunnelName(NetEntity tunnel)
-    {
-        foreach (var kvp in _availableTunnels)
+        if (EntMan.TryGetComponent(Owner, out TransformComponent? xform))
         {
-            if (kvp.Value == tunnel)
-                return kvp.Key;
-        }
-        return null;
-    }
+            if (xform.GridUid is { } grid && EntMan.HasComponent<TacticalMapComponent>(grid))
+                return grid;
 
-    private void UpdateTacticalMapDisplay()
-    {
-        if (_window == null)
-            return;
-
-        if (_player.LocalEntity is { } player &&
-            EntMan.TryGetComponent(player, out TacticalMapUserComponent? user) &&
-            EntMan.TryGetComponent(user.Map, out AreaGridComponent? areaGrid))
-        {
-            _window.TacticalMapWrapper.UpdateTexture((user.Map.Value, areaGrid));
-        }
-    }
-
-    private void BuildTunnelCache(TacticalMapUserComponent user)
-    {
-        if (_cacheValid)
-            return;
-
-        _tunnelCache.Clear();
-        _positionToEntityCache.Clear();
-
-        foreach (var (entityId, blip) in user.Blips)
-        {
-            var tunnelName = GetTunnelNameByEntityId(entityId);
-            if (tunnelName != null && _availableTunnels.ContainsKey(tunnelName))
-            {
-                var cacheEntry = new TunnelCacheEntry
-                {
-                    Position = blip.Indices,
-                    Name = tunnelName,
-                    Entity = _availableTunnels[tunnelName],
-                    EntityId = entityId
-                };
-
-                _tunnelCache[entityId] = cacheEntry;
-                _positionToEntityCache[blip.Indices] = entityId;
-            }
+            if (xform.MapUid is { } map && EntMan.HasComponent<TacticalMapComponent>(map))
+                return map;
         }
 
-        _cacheValid = true;
+        _tacticalMap.CollectMaps(_channels, _maps);
+        return _maps.Count > 0 ? _maps[0].Map : null;
     }
 
     private void UpdateBlips()
     {
-        if (_window == null || _player.LocalEntity is not { } player ||
-            !EntMan.TryGetComponent(player, out TacticalMapUserComponent? user))
-        {
-            _window?.TacticalMapWrapper.UpdateBlips(null);
+        if (_window == null)
             return;
+
+        var control = _window.TacticalMap;
+        _allBlips.Clear();
+
+        EntityUid? map = null;
+        if (_player.LocalEntity is { } player && _tacticalMap.TryGetViewerChannels(player, _channels, out var live))
+        {
+            map = GetMap();
+            if (map != null)
+                _tacticalMap.CollectBlips(_channels, live, map.Value, _allBlips);
         }
 
-        BuildTunnelCache(user);
+        control.SetBaseMap(map);
+        BuildTunnelCache();
 
-        _reusableBlipsList.Clear();
+        _shownBlips.Clear();
+        Vector2i? currentTunnelPosition = null;
+        Vector2i? selectedTunnelPosition = null;
+        foreach (var view in _allBlips)
+        {
+            if (_showOnlyTunnels && !_tunnelNames.ContainsKey(view.Entity))
+                continue;
 
-        var (currentTunnelPosition, selectedTunnelPosition) = ProcessBlipCollections(user,
-            _selectedTunnel,
-            _reusableBlipsList);
+            var blip = view.Blip;
+            if (view.Entity == _currentTunnel)
+            {
+                currentTunnelPosition ??= blip.Indices;
+                blip = HighlightBlip(blip);
+            }
+            else if (view.Entity == _selectedTunnel)
+            {
+                selectedTunnelPosition ??= blip.Indices;
+                blip = HighlightBlip(blip);
+            }
 
-        _window.TacticalMapWrapper.UpdateBlips(_reusableBlipsList.ToArray());
+            _shownBlips.Add(new TacticalMapBlipView(view.Entity, blip));
+        }
+
+        control.SetBlips(_shownBlips);
 
         if (currentTunnelPosition != _cachedCurrentPos || selectedTunnelPosition != _cachedSelectedPos)
         {
@@ -242,48 +236,30 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         }
     }
 
-    private void GetTunnelEntityIds(NetEntity? selectedTunnelKey, HashSet<NetEntity> output)
+    private void BuildTunnelCache()
     {
-        if (_currentTunnelNetEntityKey.HasValue)
-            output.Add(_currentTunnelNetEntityKey.Value);
-
-        foreach (var netTunnel in _availableTunnels.Values)
+        _tunnelCache.Clear();
+        foreach (var view in _allBlips)
         {
-            output.Add(netTunnel);
-        }
-
-        if (selectedTunnelKey.HasValue)
-            output.Add(selectedTunnelKey.Value);
-    }
-
-    private (Vector2i? currentPos, Vector2i? selectedPos) ProcessBlipCollections(TacticalMapUserComponent user,
-        NetEntity? selectedTunnelKey,
-        List<TacticalMapBlip> blipsList)
-    {
-        Vector2i? currentTunnelPosition = null;
-        Vector2i? selectedTunnelPosition = null;
-
-        var tunnelEntityIds = new HashSet<NetEntity>(_availableTunnels.Values);
-        if (_currentTunnelNetEntityKey.HasValue)
-            tunnelEntityIds.Add(_currentTunnelNetEntityKey.Value);
-        if (selectedTunnelKey.HasValue)
-            tunnelEntityIds.Add(selectedTunnelKey.Value);
-
-        foreach (var (entityId, blip) in user.Blips)
-        {
-            if (_showOnlyTunnels && !tunnelEntityIds.Contains(entityId))
+            if (!_tunnelNames.TryGetValue(view.Entity, out var name))
                 continue;
 
-            blipsList.Add(HighlightBlip(blip, entityId, selectedTunnelKey));
-
-            if (_currentTunnelNetEntityKey == entityId && currentTunnelPosition == null)
-                currentTunnelPosition = blip.Indices;
-
-            if (selectedTunnelKey == entityId && selectedTunnelPosition == null)
-                selectedTunnelPosition = blip.Indices;
+            _tunnelCache[view.Entity] = new TunnelCacheEntry
+            {
+                Position = view.Blip.Indices,
+                Name = name,
+                Entity = view.Entity,
+            };
         }
+    }
 
-        return (currentTunnelPosition, selectedTunnelPosition);
+    private static TacticalMapBlip HighlightBlip(TacticalMapBlip blip)
+    {
+        return blip with
+        {
+            Background = HighlightBackground,
+            Flags = blip.Flags | TacticalMapBlipFlags.HiveLeader,
+        };
     }
 
     private List<Vector2i> GetAllTunnelPositions()
@@ -424,124 +400,80 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         return result;
     }
 
-    private string? GetTunnelNameByEntityId(NetEntity entityId)
-    {
-        if (_tunnelCache.TryGetValue(entityId, out var cached))
-            return cached.Name;
-
-        foreach (var kvp in _availableTunnels)
-        {
-            if (kvp.Value == entityId)
-                return kvp.Key;
-        }
-        return null;
-    }
-
     private void UpdateDirectionalArrow(Vector2i? currentPosition, Vector2i? selectedPosition)
     {
         if (_window == null)
             return;
 
-        _window.TacticalMapWrapper.Map.RemoveLinesByColor(Color.FromHex("#F535AA"));
+        var strokes = _window.TacticalMap.OverlayStrokes;
+        strokes.Clear();
 
-        if (currentPosition.HasValue && selectedPosition.HasValue && currentPosition != selectedPosition)
+        if (currentPosition is not { } current ||
+            selectedPosition is not { } selected ||
+            current == selected)
         {
-            _window.TacticalMapWrapper.Map.AddDashedTunnelPathClosest(
-                FindTunnelPath(currentPosition.Value, selectedPosition.Value),
-                Color.FromHex("#F535AA"));
+            return;
+        }
+
+        var path = FindTunnelPath(current, selected);
+        for (var i = 0; i < path.Count - 1; i++)
+        {
+            AddDashedSegment(strokes, path[i], path[i + 1]);
         }
     }
 
-    private TacticalMapBlip HighlightBlip(TacticalMapBlip blip, NetEntity entityId, NetEntity? selectedTunnelKey)
+    private static void AddDashedSegment(List<TacticalMapStroke> strokes, Vector2i from, Vector2i to)
     {
-        if (_currentTunnelNetEntityKey.HasValue && entityId == _currentTunnelNetEntityKey.Value)
-        {
-            return blip with
-            {
-                Background = new SpriteSpecifier.Rsi(new("/Textures/_RMC14/Interface/map_blips.rsi"), "background"),
-                HiveLeader = true
-            };
-        }
+        var start = new Vector2(from.X + 0.5f, from.Y + 0.5f);
+        var end = new Vector2(to.X + 0.5f, to.Y + 0.5f);
+        var delta = end - start;
+        var length = delta.Length();
+        if (length < 0.001f)
+            return;
 
-        if (selectedTunnelKey.HasValue && entityId == selectedTunnelKey.Value)
+        var direction = delta / length;
+        for (var position = 0f; position < length; position += PathDashLength + PathDashGap)
         {
-            return blip with
-            {
-                Background = new SpriteSpecifier.Rsi(new("/Textures/_RMC14/Interface/map_blips.rsi"), "background"),
-                HiveLeader = true
-            };
+            var dashEnd = MathF.Min(position + PathDashLength, length);
+            strokes.Add(new TacticalMapStroke(
+                PathColor,
+                PathThickness,
+                false,
+                new List<Vector2> { start + direction * position, start + direction * dashEnd }));
         }
-
-        return blip;
     }
 
-    private void OnBlipClicked(Vector2i clickedIndices)
+    private void OnBlipClicked(NetEntity entity)
     {
-        if (_window == null)
+        if (_window == null ||
+            entity == _currentTunnel ||
+            !_tunnelNames.TryGetValue(entity, out var tunnelName))
+        {
             return;
+        }
 
-        if (_player.LocalEntity is not { } player)
-            return;
-
-        if (!EntMan.TryGetComponent(player, out TacticalMapUserComponent? user))
-            return;
-
-        var foundEntityId = _positionToEntityCache.TryGetValue(clickedIndices, out var entityId)
-            ? entityId
-            : FindEntityIdAtIndices(clickedIndices, user);
-
-        if (!foundEntityId.HasValue)
-            return;
-
-        var tunnelName = GetTunnelNameByEntityId(foundEntityId.Value);
-        if (tunnelName == null || !_availableTunnels.TryGetValue(tunnelName, out var value))
-            return;
-
-        if (_currentTunnelNetEntityKey.HasValue && foundEntityId.Value == _currentTunnelNetEntityKey.Value)
-            return;
-
-        _selectedTunnel = value;
+        _selectedTunnel = entity;
         _window.SelectButton.Disabled = false;
         _window.UpdateSelectedTunnelDisplay(tunnelName);
         UpdateBlips();
     }
 
-    private void OnBlipRightClicked(Vector2i clickedIndices, string _)
+    private void OnBlipRightClicked(NetEntity entity, Vector2i indices)
     {
-        if (_window == null)
+        if (_window == null || !_tunnelNames.TryGetValue(entity, out var tunnelName))
             return;
 
-        if (_player.LocalEntity is not { } player ||
-            !EntMan.TryGetComponent(player, out TacticalMapUserComponent? user))
+        var control = _window.TacticalMap;
+        var text = Loc.GetString("ui-tactical-map-tunnel-info", ("name", tunnelName));
+        if (control.InfoIndices == indices && control.InfoText == text)
         {
+            control.InfoText = null;
+            control.InfoIndices = null;
             return;
         }
 
-        var foundEntityId = _positionToEntityCache.TryGetValue(clickedIndices, out var entityId)
-            ? entityId
-            : FindEntityIdAtIndices(clickedIndices, user);
-
-        if (!foundEntityId.HasValue)
-            return;
-
-        var tunnelName = GetTunnelNameByEntityId(foundEntityId.Value);
-        if (tunnelName == null || !_availableTunnels.ContainsKey(tunnelName))
-            return;
-
-        var screenPos = _window.TacticalMapWrapper.Map.IndicesToPosition(clickedIndices);
-        _window.TacticalMapWrapper.Map.ShowTunnelInfo(clickedIndices, tunnelName, screenPos);
-        _window.TacticalMapWrapper.Canvas.ShowTunnelInfo(clickedIndices, tunnelName, screenPos);
-    }
-
-    private NetEntity? FindEntityIdAtIndices(Vector2i indices, TacticalMapUserComponent user)
-    {
-        foreach (var kvp in user.Blips)
-        {
-            if (kvp.Value.Indices == indices)
-                return kvp.Key;
-        }
-
-        return null;
+        control.InfoText = text;
+        control.InfoIndices = indices;
     }
 
     public void ConfigurePathfinding(TunnelPathfindingConfig config)
@@ -560,13 +492,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
 
         _window = this.CreateWindow<SelectDestinationTunnelWindow>();
         _window.SelectButton.Disabled = true;
-        _window.SetBlipUpdateCallback(() => UpdateBlips());
-
-        var wrapper = _window.TacticalMapWrapper;
-        wrapper.SetCanvasAccess(false);
-
-        wrapper.Map.MouseFilter = MouseFilterMode.Stop;
-        wrapper.Canvas.MouseFilter = MouseFilterMode.Stop;
+        _window.SetBlipUpdateCallback(UpdateBlips);
 
         _window.ShowOnlyTunnelsCheckbox.OnPressed += args =>
         {
@@ -577,14 +503,13 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         _window.SelectableTunnels.OnItemSelected += args =>
         {
             _window.SelectButton.Disabled = false;
-            _selectedTunnel = (NetEntity)args.ItemList[args.ItemIndex].Metadata!;
-            _window.UpdateSelectedTunnelDisplay(GetTunnelNameCached(_selectedTunnel.Value));
+            _selectedTunnel = (NetEntity) args.ItemList[args.ItemIndex].Metadata!;
+            _window.UpdateSelectedTunnelDisplay(_tunnelNames.GetValueOrDefault(_selectedTunnel.Value));
             UpdateBlips();
         };
 
         _window.SelectButton.OnButtonDown += args =>
         {
-
             if (_selectedTunnel is null)
             {
                 args.Button.Disabled = true;
@@ -595,10 +520,8 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
             Close();
         };
 
-        _window.TacticalMapWrapper.Map.OnBlipClicked = OnBlipClicked;
-        _window.TacticalMapWrapper.Canvas.OnBlipClicked = OnBlipClicked;
-        _window.TacticalMapWrapper.Map.OnBlipRightClicked = OnBlipRightClicked;
-        _window.TacticalMapWrapper.Canvas.OnBlipRightClicked = OnBlipRightClicked;
+        _window.TacticalMap.BlipClicked += OnBlipClicked;
+        _window.TacticalMap.BlipRightClicked += OnBlipRightClicked;
     }
 
     private void GoToTunnel(NetEntity destinationTunnel)

@@ -1,7 +1,7 @@
 <DefaultWindow
     Margin="4 0"
     xmlns="https://spacestation14.io"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.TacticalMap.UI">
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap.Controls">
 
     <BoxContainer Orientation="Horizontal">
         <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" MinSize="300 0">
@@ -30,9 +30,11 @@
                 <CheckBox Name="ShowOnlyTunnelsCheckbox" Access="Public" Text="Show Only Tunnels" Pressed="True" Margin="8 0"/>
             </BoxContainer>
 
-            <ui:TacticalMapWrapper Name="TacticalMapWrapper"
+            <controls:TacticalMapControl Name="TacticalMap"
                                         Access="Public"
                                         MinSize="600 600"
+                                        HorizontalExpand="True"
+                                        VerticalExpand="True"
                                         Margin="0 4"/>
         </BoxContainer>
     </BoxContainer>

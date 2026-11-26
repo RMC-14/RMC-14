@@ -1,58 +1,63 @@
-using System;
-using System.Collections.Generic;
-using Robust.Shared.Network;
 using Robust.Shared.Serialization;
-using Robust.Shared.Maths;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
 [Serializable, NetSerializable]
-public sealed class TacticalMapReplayRequestEvent : EntityEventArgs
+public sealed class TacticalMapReplayHeaderEvent(int requestId, List<TacticalMapReplayMap> maps) : EntityEventArgs
 {
-    public readonly string? MapId;
-
-    public TacticalMapReplayRequestEvent(string? mapId)
-    {
-        MapId = mapId;
-    }
+    public readonly int RequestId = requestId;
+    public readonly List<TacticalMapReplayMap> Maps = maps;
 }
 
 [Serializable, NetSerializable]
-public sealed class TacticalMapReplayDataEvent : EntityEventArgs
+public sealed class TacticalMapReplayChunkEvent(int requestId, int mapIndex, List<TacticalMapReplayFrame> frames) : EntityEventArgs
 {
-    public readonly List<TacticalMapReplayMap> Maps;
-
-    public TacticalMapReplayDataEvent(List<TacticalMapReplayMap> maps)
-    {
-        Maps = maps;
-    }
+    public readonly int RequestId = requestId;
+    public readonly int MapIndex = mapIndex;
+    public readonly List<TacticalMapReplayFrame> Frames = frames;
 }
 
 [Serializable, NetSerializable]
-public readonly record struct TacticalMapReplayMap(
-    NetEntity Map,
-    string MapId,
-    string DisplayName,
-    List<string> LayerIds,
-    List<TacticalMapReplayFrame> Frames);
+public sealed class TacticalMapReplayMap(
+    NetEntity map,
+    string name,
+    List<TacticalMapReplayChannel> channels,
+    List<SpriteSpecifier.Rsi> icons,
+    List<TacticalMapReplayCanvas> canvases,
+    int frameCount)
+{
+    public readonly NetEntity Map = map;
+    public readonly string Name = name;
+    public readonly List<TacticalMapReplayChannel> Channels = channels;
+    public readonly List<SpriteSpecifier.Rsi> Icons = icons;
+    public readonly List<TacticalMapReplayCanvas> Canvases = canvases;
+    public readonly int FrameCount = frameCount;
+}
 
 [Serializable, NetSerializable]
-public readonly record struct TacticalMapReplayFrame(
+public readonly record struct TacticalMapReplayChannel(string Name, Color Color, bool HasBlips);
+
+[Serializable, NetSerializable]
+public readonly record struct TacticalMapReplayCanvas(
     float Time,
-    bool IsKeyframe,
-    List<TacticalMapReplayLayerDelta> Layers);
+    int Channel,
+    List<TacticalMapStroke> Strokes,
+    Dictionary<Vector2i, TacticalMapLabelData> Labels);
 
 [Serializable, NetSerializable]
-public readonly record struct TacticalMapReplayLayerDelta(
-    string LayerId,
-    bool LinesChanged,
-    bool LinesIsFull,
-    List<TacticalMapLine> Lines,
-    bool LabelsChanged,
-    bool LabelsIsFull,
-    Dictionary<Vector2i, TacticalMapLabelData> Labels,
-    List<Vector2i> RemovedLabels,
-    bool BlipsChanged,
-    bool BlipsIsFull,
-    Dictionary<int, TacticalMapBlip> Blips,
-    List<int> RemovedBlips);
+public readonly record struct TacticalMapReplayFrame(float Time, List<TacticalMapReplayBlip> Blips);
+
+[Serializable, NetSerializable]
+public readonly record struct TacticalMapReplayBlip(
+    int Entity,
+    short X,
+    short Y,
+    ushort Icon,
+    ushort Background,
+    uint Color,
+    byte Flags,
+    byte Channel)
+{
+    public const ushort NoBackground = ushort.MaxValue;
+}

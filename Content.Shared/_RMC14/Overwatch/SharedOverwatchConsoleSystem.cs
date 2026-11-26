@@ -44,7 +44,7 @@ namespace Content.Shared._RMC14.Overwatch;
 public abstract class SharedOverwatchConsoleSystem : EntitySystem
 {
     [Dependency] protected readonly ISharedPlayerManager Player = default!;
-    [Dependency] protected readonly SharedTransformSystem Xform = default!;
+    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AreaSystem _area = default!;
@@ -102,6 +102,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSquadEvent>(OnTransferMarineSquad);
+        SubscribeLocalEvent<OverwatchConsoleComponent, TacticalMapCanDrawEvent>(OnTacticalMapCanDraw);
+        SubscribeLocalEvent<OverwatchConsoleComponent, TacticalMapBlipActivatedEvent>(OnTacticalMapBlipActivated);
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
@@ -316,9 +318,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         ent.Comp.Squad = args.Squad;
         ent.Comp.Operator = Identity.Name(args.Actor, EntityManager);
         Dirty(ent);
-
-        if (_net.IsServer && args.Squad != null && TryGetEntity(args.Squad, out var squadEnt))
-            _tacticalMap.SetComputerDrawLayerFromSquad(ent.Owner, squadEnt.Value);
     }
 
     private void OnOverwatchViewTacticalMapBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchViewTacticalMapBuiMsg args)
@@ -392,36 +391,69 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (args.Target == default || !TryGetEntity(args.Target, out var target))
             return;
 
-        TryWatchTarget(args.Actor, target.Value);
+        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
+            return;
+
+        if (HasComp<ScopingComponent>(args.Actor))
+        {
+            if (_net.IsServer)
+            {
+                _popup.PopupCursor("You're too busy peering through optics.", args.Actor, PopupType.MediumCaution);
+            }
+            return;
+        }
+
+        Watch(args.Actor, camera);
     }
 
-    public bool TryWatchTarget(EntityUid actor, EntityUid target)
+    private void OnTacticalMapCanDraw(Entity<OverwatchConsoleComponent> ent, ref TacticalMapCanDrawEvent args)
     {
-        if (actor == target)
+        if (HasComp<MarineCommunicationsComputerComponent>(ent))
+            return;
+
+        if (!TryComp(args.Channel, out TacticalMapChannelComponent? channel) ||
+            channel.Scope != TacticalMapChannelScope.Squad ||
+            channel.OwnerId is not { } squad ||
+            squad != ent.Comp.Squad)
         {
-            if (_net.IsServer)
-                _popup.PopupCursor("You can't overwatch yourself.", actor, PopupType.MediumCaution);
-            return false;
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnTacticalMapBlipActivated(Entity<OverwatchConsoleComponent> ent, ref TacticalMapBlipActivatedEvent args)
+    {
+        if (args.Handled || _net.IsClient)
+            return;
+
+        args.Handled = true;
+        if (!HasComp<MarineCommunicationsComputerComponent>(ent) &&
+            (ent.Comp.Squad is not { } squadNet ||
+             !TryGetEntity(squadNet, out var squad) ||
+             !_squad.IsInSquad(args.Target, squad.Value)))
+        {
+            _popup.PopupCursor("That marine is not in the selected squad.", args.Actor, PopupType.MediumCaution);
+            return;
         }
 
-        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target, out var camera))
+        if (!ent.Comp.ShowHidden && IsHidden(ent, GetNetEntity(args.Target)))
         {
-            if (_net.IsServer)
-                _popup.PopupCursor("That marine has no overwatch camera.", actor, PopupType.MediumCaution);
-
-            return false;
+            _popup.PopupCursor("That marine is hidden from overwatch.", args.Actor, PopupType.MediumCaution);
+            return;
         }
 
-        if (HasComp<ScopingComponent>(actor))
+        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(args.Target, out var camera))
         {
-            if (_net.IsServer)
-                _popup.PopupCursor("You're too busy peering through optics.", actor, PopupType.MediumCaution);
-
-            return false;
+            _popup.PopupCursor("That marine has no camera to watch.", args.Actor, PopupType.MediumCaution);
+            return;
         }
 
-        Watch(actor, camera);
-        return true;
+        if (HasComp<ScopingComponent>(args.Actor))
+        {
+            _popup.PopupCursor("You're too busy peering through optics.", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        Watch(args.Actor, camera);
     }
 
     private void OnOverwatchHideBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleHideBuiMsg args)
@@ -592,7 +624,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _marineAnnounce.AnnounceSquad($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits: [font size=16][bold]{message}[/bold][/font][/color]", squadProto.ID);
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-message", ("operatorName", Name(args.Actor)), ("message", message)), squadProto.ID);
 
-        var coordinates = Xform.GetMapCoordinates(ent);
+        var coordinates = TransformSystem.GetMapCoordinates(ent);
         var players = Filter.Empty().AddInRange(coordinates, 12, Player, EntityManager);
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
@@ -637,7 +669,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-objective-updated", ("operatorName", Name(args.Actor)), ("objectiveType", objectiveTypeName), ("objective", objective)), squadProto.ID);
 
-        var coordinates = Xform.GetMapCoordinates(ent);
+        var coordinates = TransformSystem.GetMapCoordinates(ent);
         var players = Filter.Empty().AddInRange(coordinates, 12, Player, EntityManager);
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
@@ -685,7 +717,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-objective-cancelled", ("operatorName", Name(args.Actor)), ("objectiveType", objectiveTypeName), ("objective", cancelledObjective)), squadProto.ID);
 
-        var coordinates = Xform.GetMapCoordinates(ent);
+        var coordinates = TransformSystem.GetMapCoordinates(ent);
         var players = Filter.Empty().AddInRange(coordinates, 12, Player, EntityManager);
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
@@ -773,7 +805,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
                     MapCoordinates? leaderCoords = null;
                     if (_squad.TryGetSquadLeader(squadId, out var leader))
-                        leaderCoords = Xform.GetMapCoordinates(leader);
+                        leaderCoords = TransformSystem.GetMapCoordinates(leader);
 
                     while (membersQueue.TryDequeue(out var member))
                     {
@@ -791,7 +823,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                             continue;
                         }
 
-                        var coords = Xform.GetMapCoordinates(member);
+                        var coords = TransformSystem.GetMapCoordinates(member);
                         var name = Identity.Name(member, EntityManager);
                         var mobState = _mobStateQuery.CompOrNull(member)?.CurrentState ?? MobState.Alive;
                         var ssd = !_actor.HasComp(member);
