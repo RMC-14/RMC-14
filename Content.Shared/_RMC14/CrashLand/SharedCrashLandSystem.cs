@@ -63,7 +63,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     private EntityQuery<CrashLandableComponent> _crashLandableQuery;
 
     private readonly EntProtoId<CrashLandingBlockedComponent> _crashLandingBlocker = "RMCCrashLandingBlocker";
-    private readonly float _crashLandingBlockerRadius = 10;
+    private readonly float _crashLandingBlockerRadius = 15;
     private readonly HashSet<Entity<CrashLandingBlockedComponent>> _crashLandingBlockers = new();
 
     public override void Initialize()
