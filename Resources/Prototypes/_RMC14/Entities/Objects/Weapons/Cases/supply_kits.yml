@@ -114,6 +114,8 @@
   id: RMCSupplyKitHeavySupport
   name: Forward HAR Shield Kit
   components:
+    - type: Item
+      size: Ginormous
     - type: Storage
       maxItemSize: Ginormous
       grid:
