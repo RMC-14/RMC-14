@@ -41,7 +41,7 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
 
     public void Populate(
         int index,
-        HiveTeamEntry? entry,
+        HiveTeamEntryState? entry,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> pickerXenos,
         Func<EntProtoId?, Texture?> getTexture,

@@ -4246,7 +4246,7 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 141
     components:
@@ -8316,7 +8316,7 @@ entities:
     - type: Transform
       pos: 21.5,12.5
       parent: 1
-- proto: WeaponRifleM16
+- proto: RMCWeaponRifleCR16
   entities:
   - uid: 146
     components:

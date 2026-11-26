@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Vehicle;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -97,10 +98,14 @@ public sealed class RMCPlanetSystem : EntitySystem
 
     public bool IsOnPlanet(EntityCoordinates coordinates)
     {
-        if (_rmcPlanetQuery.HasComp(_transform.GetGrid(coordinates)))
+        var grid = _transform.GetGrid(coordinates);
+        var map = _transform.GetMap(coordinates);
+        (grid, map) = ResolveOutdoor(grid, map);
+
+        if (_rmcPlanetQuery.HasComp(grid))
             return true;
 
-        if (_rmcPlanetQuery.HasComp(_transform.GetMap(coordinates)))
+        if (_rmcPlanetQuery.HasComp(map))
             return true;
 
         return false;
@@ -108,13 +113,33 @@ public sealed class RMCPlanetSystem : EntitySystem
 
     public bool IsOnPlanet(TransformComponent xform)
     {
-        if (_rmcPlanetQuery.HasComp(xform.GridUid))
+        var (grid, map) = ResolveOutdoor(xform.GridUid, xform.MapUid);
+
+        if (_rmcPlanetQuery.HasComp(grid))
             return true;
 
-        if (_rmcPlanetQuery.HasComp(xform.MapUid))
+        if (_rmcPlanetQuery.HasComp(map))
             return true;
 
         return false;
+    }
+
+    // Vehicle interiors
+    private (EntityUid? Grid, EntityUid? Map) ResolveOutdoor(EntityUid? grid, EntityUid? map)
+    {
+        for (var i = 0; i < 8; i++)
+        {
+            if (map is not { } mapId || !TryComp(mapId, out VehicleInteriorLinkComponent? link))
+                break;
+
+            if (!TryComp(link.Vehicle, out TransformComponent? vehicleXform))
+                break;
+
+            grid = vehicleXform.GridUid;
+            map = vehicleXform.MapUid;
+        }
+
+        return (grid, map);
     }
 
     public bool IsOnPlanet(MapCoordinates coordinates)
@@ -140,6 +165,22 @@ public sealed class RMCPlanetSystem : EntitySystem
         }
 
         offset = default;
+        return false;
+    }
+
+    public bool TryPlanetToCoordinates(Vector2i coordinates, MapId mapId, out MapCoordinates mapCoordinates)
+    {
+        var planets = EntityQueryEnumerator<RMCPlanetComponent, TransformComponent>();
+        while (planets.MoveNext(out _, out var planet, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            mapCoordinates = new MapCoordinates(coordinates - planet.Offset, mapId);
+            return true;
+        }
+
+        mapCoordinates = default;
         return false;
     }
 

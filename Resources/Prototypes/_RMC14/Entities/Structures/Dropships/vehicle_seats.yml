@@ -46,11 +46,25 @@
     skills:
       all:
         RMCSkillVehicles: 1
+  - type: VehicleHudSeat
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
   - type: RemoveComponents
     components:
     - type: Damageable
     - type: Destructible
     - type: Corrodible
+
+- type: entity
+  parent: RMCSeatDriver
+  id: RMCSeatVanDriver
+  name: van driver seat
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/chairs.rsi
+    state: comfychair
 
 - type: entity
   parent: CMSeatBase
@@ -128,6 +142,11 @@
     skills:
       all:
         RMCSkillVehicles: 2
+  - type: VehicleHudSeat
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
 
 - type: entity
   parent: RMCSeatArmoredBase
@@ -141,6 +160,7 @@
     isPrimaryOperatorSeat: true
     allowUiSelection: true
     allowHotbarSelection: true
+  - type: VehicleHudSeat
   - type: UserInterface
     interfaces:
       enum.VehicleWeaponsUiKey.Key:
@@ -174,6 +194,7 @@
     allowHotbarSelection: true
     allowedHardpointTypes:
     - HardpointTypeSupport
+  - type: VehicleHudSeat
   - type: UserInterface
     interfaces:
       enum.VehicleWeaponsUiKey.Key:
@@ -193,6 +214,7 @@
     isPrimaryOperatorSeat: true
     allowUiSelection: true
     allowHotbarSelection: true
+  - type: VehicleHudSeat
   - type: UserInterface
     interfaces:
       enum.VehicleWeaponsUiKey.Key:
@@ -217,6 +239,7 @@
     allowedHardpointTypes:
     - HardpointTypeSecondary
     - HardpointTypeLauncher
+  - type: VehicleHudSeat
   - type: UserInterface
     interfaces:
       enum.VehicleWeaponsUiKey.Key:
@@ -260,6 +283,11 @@
     skills:
       all:
         RMCSkillVehicles: 2
+  - type: VehicleHudSeat
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
 
 - type: entity
   parent: RMCSeatHumveeBase
@@ -270,6 +298,11 @@
     skills:
       all:
         RMCSkillVehicles: 2
+  - type: VehicleHudSeat
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
 
 - type: entity
   parent: RMCSeatHumveeBase
@@ -283,6 +316,7 @@
     isPrimaryOperatorSeat: true
     allowUiSelection: true
     allowHotbarSelection: true
+  - type: VehicleHudSeat
   - type: UserInterface
     interfaces:
       enum.VehicleWeaponsUiKey.Key:

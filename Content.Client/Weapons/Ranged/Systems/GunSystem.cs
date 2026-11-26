@@ -13,6 +13,7 @@ using Content.Client.Weapons.Ranged.Components;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.CCVar;
+using Content.Shared.Hands.Components;
 using Content.Shared.CombatMode;
 // RMC14
 using Content.Shared.Weapons.Ranged.Components;
@@ -34,6 +35,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using SharedGunSystem = Content.Shared.Weapons.Ranged.Systems.SharedGunSystem;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Client._RMC14.Weapons.Ranged;
 
 namespace Content.Client.Weapons.Ranged.Systems;
 
@@ -52,7 +55,9 @@ public sealed partial class GunSystem : SharedGunSystem
 
     // RMC14
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
+    [Dependency] private readonly GunAkimboSystem _akimbo = default!;
     [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
+    [Dependency] private readonly RMCGunSystem _rmcGun = default!;
     [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly VehicleTurretMuzzleOffsetSystem _vehicleTurretMuzzleOffset = default!;
     // RMC14
@@ -89,6 +94,9 @@ public sealed partial class GunSystem : SharedGunSystem
     }
 
     private bool _spreadOverlay;
+    private bool _alternateAkimboLatched;
+    private BoundKeyFunction? _alternateAkimboLatchedKey;
+    private TimeSpan? _alternateAkimboLatchedUntil;
 
     public override void Initialize()
     {
@@ -176,10 +184,13 @@ public sealed partial class GunSystem : SharedGunSystem
         if (!Timing.IsFirstTimePredicted)
             return;
 
+        UpdateAlternateAkimboLatch();
+
         var entityNull = _player.LocalEntity;
 
         if (entityNull == null || !TryComp<CombatModeComponent>(entityNull, out var combat) || !combat.IsInCombatMode)
         {
+            ResetAlternateAkimboLatch();
             return;
         }
 
@@ -187,17 +198,26 @@ public sealed partial class GunSystem : SharedGunSystem
 
         if (!TryGetGun(entity, out var gunUid, out var gun))
         {
+            ResetAlternateAkimboLatch();
             return;
         }
+
+        var guns = GetRequestedGuns(entity, (gunUid, gun));
+        var alternateAkimbo = IsAlternateAkimbo(entity, (gunUid, gun));
 
         var useKey = gun.UseKey ? EngineKeyFunctions.Use : EngineKeyFunctions.UseSecondary;
 
         if (_inputSystem.CmdStates.GetState(useKey) != BoundKeyState.Down && !gun.BurstActivated)
         {
-            if (gun.ShotCounter != 0)
-                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
+            if (alternateAkimbo)
+                ResetAlternateAkimboLatch();
+
+            StopRequestedGuns(guns);
             return;
         }
+
+        if (alternateAkimbo && _alternateAkimboLatched)
+            return;
 
         if (gun.NextFire > Timing.CurTime)
             return;
@@ -206,9 +226,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
         if (mousePos.MapId == MapId.Nullspace)
         {
-            if (gun.ShotCounter != 0)
-                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
-
+            StopRequestedGuns(guns);
             return;
         }
 
@@ -219,8 +237,11 @@ public sealed partial class GunSystem : SharedGunSystem
         // RMC14
 
         NetEntity? target = null;
-        if (_state.CurrentState is GameplayStateBase screen)
-            target = GetNetEntity(screen.GetClickedEntity(mousePos));
+        // RMC14 start
+        //if (_state.CurrentState is GameplayStateBase screen)
+        //    target = GetNetEntity(screen.GetClickedEntity(mousePos));
+        target = GetNetEntity(_rmcGun.GetAttackTarget(entity, mousePos, (gunUid, gun)));
+        // RMC14 end
 
         if (_player.LocalSession is not { } session)
             return;
@@ -230,23 +251,109 @@ public sealed partial class GunSystem : SharedGunSystem
 
         Log.Debug($"Sending shoot request tick {Timing.CurTick} / {Timing.CurTime}");
 
-        // RMC rearm instead of treating every held-fire request as continuous fire.
-        var rearmSemiAuto =
-            _cfg.GetCVar(CCVars.ControlHoldToAttackRanged) &&
-            gun.SelectedMode == SelectiveFire.SemiAuto &&
-            !HasComp<GunClickToFireComponent>(gunUid) &&
-            (gun.AvailableModes & SelectiveFire.FullAuto) == 0;
-        var projectiles = _gunPrediction.ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, session, rearmSemiAuto);
-
-        RaisePredictiveEvent(new RequestShootEvent()
+        var requestedShot = false;
+        foreach (var requestedGun in guns)
         {
-            Target = target,
-            Coordinates = GetNetCoordinates(coordinates),
-            Gun = GetNetEntity(gunUid),
-            RearmSemiAuto = rearmSemiAuto,
-            Shot = projectiles?.Select(e => e.Id).ToList(),
-            LastRealTick = _rmcLagCompensation.GetLastRealTick(null),
-        });
+            if (requestedGun.Comp.NextFire > Timing.CurTime)
+                continue;
+
+            if (requestedGun.Owner != gunUid && !_akimbo.HasPendingOffHandShot(entity, requestedGun.Owner))
+                continue;
+
+            var rearmSemiAuto = ShouldRearmSemiAuto(requestedGun);
+            var projectiles = _gunPrediction.ShootRequested(
+                GetNetEntity(requestedGun.Owner),
+                GetNetCoordinates(coordinates),
+                target,
+                null,
+                session,
+                rearmSemiAuto);
+
+            RaisePredictiveEvent(new RequestShootEvent()
+            {
+                Target = target,
+                Coordinates = GetNetCoordinates(coordinates),
+                Gun = GetNetEntity(requestedGun.Owner),
+                RearmSemiAuto = rearmSemiAuto,
+                Shot = projectiles?.Select(e => e.Id).ToList(),
+                LastRealTick = _rmcLagCompensation.GetLastRealTick(null),
+            });
+
+            requestedShot = true;
+        }
+
+        if (alternateAkimbo && requestedShot)
+            LatchAlternateAkimbo(useKey, ShouldRearmSemiAuto((gunUid, gun)) ? gun.NextFire : null);
+    }
+
+    private bool ShouldRearmSemiAuto(Entity<GunComponent> gun)
+    {
+        return _cfg.GetCVar(CCVars.ControlHoldToAttackRanged) &&
+               gun.Comp.SelectedMode == SelectiveFire.SemiAuto &&
+               !HasComp<GunClickToFireComponent>(gun.Owner) &&
+               (gun.Comp.AvailableModes & SelectiveFire.FullAuto) == 0;
+    }
+
+    private List<Entity<GunComponent>> GetRequestedGuns(EntityUid user, Entity<GunComponent> activeGun)
+    {
+        var guns = new List<Entity<GunComponent>> { activeGun };
+
+        if (_akimbo.GetAkimboMode(user, activeGun.Comp) != GunAkimboMode.FireBoth ||
+            !TryComp(activeGun, out GunDualWieldingComponent? dualWielding) ||
+            dualWielding.WeaponGroup == GunDualWieldingGroup.None ||
+            !TryComp(user, out HandsComponent? hands) ||
+            !_akimbo.TryGetOtherDualWieldedGun((user, hands), (activeGun.Owner, dualWielding), out var otherGun, out _) ||
+            !TryComp(otherGun, out GunComponent? otherGunComp))
+        {
+            return guns;
+        }
+
+        guns.Add((otherGun.Owner, otherGunComp));
+        return guns;
+    }
+
+    private void StopRequestedGuns(List<Entity<GunComponent>> guns)
+    {
+        foreach (var gun in guns)
+        {
+            if (gun.Comp.ShotCounter != 0)
+                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gun.Owner) });
+        }
+    }
+
+    private bool IsAlternateAkimbo(EntityUid user, Entity<GunComponent> activeGun)
+    {
+        return _akimbo.GetAkimboMode(user, activeGun.Comp) == GunAkimboMode.AlternateHands &&
+               TryComp(activeGun.Owner, out GunDualWieldingComponent? dualWielding) &&
+               dualWielding.WeaponGroup != GunDualWieldingGroup.None &&
+               TryComp(user, out HandsComponent? hands) &&
+               _akimbo.TryGetOtherDualWieldedGun((user, hands), (activeGun.Owner, dualWielding), out _, out _);
+    }
+
+    private void UpdateAlternateAkimboLatch()
+    {
+        if (!_alternateAkimboLatched || _alternateAkimboLatchedKey is not { } key)
+            return;
+
+        if (_inputSystem.CmdStates.GetState(key) != BoundKeyState.Down ||
+            _alternateAkimboLatchedUntil is { } until && Timing.CurTime >= until)
+        {
+            ResetAlternateAkimboLatch();
+        }
+    }
+
+    private void LatchAlternateAkimbo(BoundKeyFunction useKey, TimeSpan? until)
+    {
+        _alternateAkimboLatched = true;
+        _alternateAkimboLatchedKey = useKey;
+        _alternateAkimboLatchedUntil = until;
+    }
+
+    private void ResetAlternateAkimboLatch()
+    {
+        _alternateAkimboLatched = false;
+        _alternateAkimboLatchedKey = null;
+        _alternateAkimboLatchedUntil = null;
     }
 
     protected override void Popup(string message, EntityUid? uid, EntityUid? user)

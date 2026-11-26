@@ -109,7 +109,7 @@
   id: RMCPropVehicleCrawler
   suffix: Use East, West
   name: colony crawler
-  description: It is a tread bound crawler used in harsh conditions. Supplied by Orbital Blue International; 'Your friends, in the Aerospace business.' A subsidiary of We-Ya.
+  description: It is a tread bound crawler used in harsh conditions. Manufactured by Miyahira, a subsidiary of We-Ya dedicated towards designing and manufacturing vehicles for the civilian market.
   components:
   - type: Sprite
     state: crawler
@@ -126,8 +126,6 @@
 - type: entity
   parent: RMCPropVehicleCrawler
   id: RMCPropVehicleCrawlerCovered
-  name: colony crawler
-  description: It is a tread bound crawler used in harsh conditions. Supplied by Orbital Blue International; 'Your friends, in the Aerospace business.' A subsidiary of We-Ya.
   components:
   - type: Sprite
     state: crawler_covered_bed
@@ -135,8 +133,6 @@
 - type: entity
   parent: RMCPropVehicleCrawler
   id: RMCPropVehicleCrawlerCrate
-  name: colony crawler
-  description: It is a tread bound crawler used in harsh conditions. Supplied by Orbital Blue International; 'Your friends, in the Aerospace business.' A subsidiary of We-Ya.
   components:
   - type: Sprite
     state: crawler_crate
@@ -144,8 +140,6 @@
 - type: entity
   parent: RMCPropVehicleCrawler
   id: RMCPropVehicleCrawlerCrate2
-  name: colony crawler
-  description: It is a tread bound crawler used in harsh conditions. Supplied by Orbital Blue International; 'Your friends, in the Aerospace business.' A subsidiary of We-Ya.
   components:
   - type: Sprite
     state: crawler_crate_alt
@@ -153,8 +147,6 @@
 - type: entity
   parent: RMCPropVehicleCrawler
   id: RMCPropVehicleCrawlerCrate3
-  name: colony crawler
-  description: It is a tread bound crawler used in harsh conditions. Supplied by Orbital Blue International; 'Your friends, in the Aerospace business.' A subsidiary of We-Ya.
   components:
   - type: Sprite
     state: crawler_crate_alt2
@@ -162,8 +154,6 @@
 - type: entity
   parent: RMCPropVehicleCrawler
   id: RMCPropVehicleCrawlerCrateWY
-  name: colony crawler
-  description: It is a tread bound crawler used in harsh conditions. Supplied by Orbital Blue International; 'Your friends, in the Aerospace business.' A subsidiary of We-Ya.
   components:
   - type: Sprite
     state: crawler_crate_wy
@@ -171,8 +161,6 @@
 - type: entity
   parent: RMCPropVehicleCrawler
   id: RMCPropVehicleCrawlerFuel
-  name: colony crawler
-  description: It is a tread bound crawler used in harsh conditions. Supplied by Orbital Blue International; 'Your friends, in the Aerospace business.' A subsidiary of We-Ya.
   components:
   - type: Sprite
     state: crawler_fuel

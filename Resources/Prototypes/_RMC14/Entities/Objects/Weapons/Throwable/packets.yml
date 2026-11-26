@@ -31,6 +31,7 @@
   - type: Tag
     tags:
     - RMCPacketGrenade
+    - RMCBoxStorage
 
 - type: entity
   parent: CMPacketBase
@@ -212,8 +213,8 @@
 - type: entity
   parent: CMPacketBase
   id: RMCPacketGrenadeM74AGMSHornet
-  name: M74AGM-S Hornet grenade packet
-  description: It contains three M74AGM-S Hornet airburst grenades.
+  name: M74AGM-H Hornet grenade packet
+  description: It contains three M74AGM-H Hornet airburst grenades.
   components:
   - type: Sprite
     layers:
@@ -277,6 +278,11 @@
     contents:
     - id: RMCBatonSlugHIRR
       amount: 3
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-batongs
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMPacketBase

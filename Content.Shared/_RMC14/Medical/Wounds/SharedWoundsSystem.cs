@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
@@ -85,8 +86,10 @@ public abstract class SharedWoundsSystem : EntitySystem
 
         if (args.DamageIncreased)
         {
-            TryAddWound(ent, ent.Comp.BruteWoundGroup, args.DamageDelta, WoundType.Brute);
-            TryAddWound(ent, ent.Comp.BurnWoundGroup, args.DamageDelta, WoundType.Burn);
+            foreach (var woundGroup in ent.Comp.WoundGroups)
+            {
+                TryAddWound(ent, woundGroup.Key, args.DamageDelta, woundGroup.Value);
+            }
         }
     }
 
@@ -419,8 +422,10 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (comp.Wounds.Count == 0)
             return;
 
-        HealOrRemove((uid, damageable, comp), comp.BruteWoundGroup, WoundType.Brute, damage, limit);
-        HealOrRemove((uid, damageable, comp), comp.BurnWoundGroup, WoundType.Burn, damage, limit);
+        foreach (var woundGroup in comp.WoundGroups)
+        {
+            HealOrRemove((uid, damageable, comp), woundGroup.Key, woundGroup.Value, damage, limit);
+        }
     }
 
     private void HealOrRemove(Entity<DamageableComponent, WoundedComponent> wounded,
@@ -513,12 +518,15 @@ public abstract class SharedWoundsSystem : EntitySystem
             }
         }
 
-        wounded.BruteWoundGroup = woundable.Comp.BruteWoundGroup;
-        wounded.BurnWoundGroup = woundable.Comp.BurnWoundGroup;
+        wounded.WoundGroups = woundable.Comp.WoundGroups;
 
         TimeSpan? newDuration = duration == TimeSpan.MaxValue ? null : time + duration;
-        wounded.Wounds.Add(new Wound(total, FixedPoint2.Zero, bloodloss, newDuration, type, false));
+        var newWound = new Wound(total, FixedPoint2.Zero, bloodloss, newDuration, type, false);
+        wounded.Wounds.Add(newWound);
         Dirty(woundable, wounded);
+
+        var ev = new RMCWoundAddedEvent(newWound);
+        RaiseLocalEvent(woundable, ref ev);
     }
 
     public void RemoveWounds(Entity<WoundedComponent?> wounded, WoundType type)
@@ -542,13 +550,10 @@ public abstract class SharedWoundsSystem : EntitySystem
             return false;
         }
 
-        WoundType type;
-        if (group == wounded.Comp.BruteWoundGroup)
-            type = WoundType.Brute;
-        else if (group == wounded.Comp.BurnWoundGroup)
-            type = WoundType.Burn;
-        else
+        if (!wounded.Comp.WoundGroups.ContainsKey(group))
             return false;
+
+        WoundType type = wounded.Comp.WoundGroups[group];
 
         var wounds = CollectionsMarshal.AsSpan(wounded.Comp.Wounds);
         foreach (ref var wound in wounds)
@@ -559,4 +564,29 @@ public abstract class SharedWoundsSystem : EntitySystem
 
         return false;
     }
+
+    public bool HasUntreated(List<Wound> woundsList, Dictionary<ProtoId<DamageGroupPrototype>, WoundType> woundTypes, ProtoId<DamageGroupPrototype> group)
+    {
+        if (woundsList.Count == 0)
+            return false;
+
+        if (!woundTypes.ContainsKey(group))
+            return false;
+
+        var type = woundTypes[group];
+
+        var wounds = CollectionsMarshal.AsSpan(woundsList);
+
+        foreach (ref var wound in wounds)
+        {
+            if (wound.Type == type && !wound.Treated)
+                return true;
+        }
+
+        return false;
+
+    }
 }
+
+[ByRefEvent]
+public record struct RMCWoundAddedEvent(Wound Wound);
