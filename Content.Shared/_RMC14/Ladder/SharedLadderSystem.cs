@@ -127,7 +127,11 @@ public abstract class SharedLadderSystem : EntitySystem
                 return ent.Comp.Below;
             // None of the above.
             default:
-                _popup.PopupClient(Loc.GetString("rmc-ladder-leads-nowhere"), ent, user, PopupType.SmallCaution);
+                _popup.PopupClient(
+                    Loc.GetString("rmc-ladder-leads-nowhere", ("name", ent.Comp.PopupName)),
+                    ent,
+                    user,
+                    PopupType.SmallCaution);
                 return null;
         }
     }
@@ -172,7 +176,7 @@ public abstract class SharedLadderSystem : EntitySystem
             ent.Comp.CurrentDoAfterId is { } currentDoAfterId &&
             _doAfter.IsRunning(currentDoAfterUser, currentDoAfterId))
         {
-            _popup.PopupClient(Loc.GetString("rmc-ladder-someone-else-climbing"), ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-ladder-someone-else-climbing", ("name", ent.Comp.PopupName)), ent, user, PopupType.SmallCaution);
             return;
         }
 
@@ -198,8 +202,13 @@ public abstract class SharedLadderSystem : EntitySystem
         ent.Comp.CurrentDoAfterUser = user;
         Dirty(ent);
 
-        var selfMessage = Loc.GetString("rmc-ladder-start-climbing-self", ("direction", direction));
-        var othersMessage = Loc.GetString("rmc-ladder-start-climbing-others", ("user", user), ("direction", direction));
+        var selfMessage = Loc.GetString("rmc-ladder-start-climbing-self",
+            ("direction", direction),
+            ("name", ent.Comp.PopupName));
+        var othersMessage = Loc.GetString("rmc-ladder-start-climbing-others",
+            ("user", user),
+            ("direction", direction),
+            ("name", ent.Comp.PopupName));
         _popup.PopupPredicted(selfMessage, othersMessage, user, user);
 
         if (_actorQuery.TryComp(user, out var actor))
@@ -256,8 +265,13 @@ public abstract class SharedLadderSystem : EntitySystem
         {
             var direction = GetDirectionText(source, destination) ?? Loc.GetString("rmc-ladder-direction-up");
 
-            var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self", ("direction", direction));
-            var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others", ("user", toMove), ("direction", direction));
+            var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self",
+                ("direction", direction),
+                ("name", source.Comp.PopupName));
+            var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others",
+                ("user", toMove),
+                ("direction", direction),
+                ("name", source.Comp.PopupName));
             _popup.PopupPredicted(selfMessage, othersMessage, toMove, toMove);
         }
     }

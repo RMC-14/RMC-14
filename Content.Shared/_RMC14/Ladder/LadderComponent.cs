@@ -30,6 +30,12 @@ public sealed partial class LadderComponent : Component
     public int Level = 0;
 
     /// <summary>
+	/// The word used for the ladder in interaction popups. E.g: "You start climbing up the <c>{LadderPopupName}</c>."
+	/// </summary>
+    [DataField, AutoNetworkedField]
+    public string PopupName = "ladder";
+
+    /// <summary>
     /// The ladder entity "above" this one, if any.
     /// </summary>
     [DataField, AutoNetworkedField]

@@ -64,6 +64,8 @@
   components:
   - type: Sprite
     state: rope
+  - type: Ladder
+    popupName: rope
 
 - type: entity
   parent: RMCLadderRope
