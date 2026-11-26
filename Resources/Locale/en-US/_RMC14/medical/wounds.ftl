@@ -55,4 +55,5 @@ cm-wounds-failed-not-enough = You don't have enough {$treater}!
 cm-wounds-open-cut = {$target} is cut open, you'll need more than a {$treater}!
 cm-wounds-cannot-treat = {THE($treater)} cannot treat these wounds!
 cm-wounds-already-treated = The wounds on {$target} have already been treated!
+cm-wounds-internal-bleeding = Internal bleeding requires surgical repair.
 cm-wounds-start-fumbling = You start fumbling with {THE($name)}.

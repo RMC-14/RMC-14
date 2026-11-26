@@ -1,7 +1,11 @@
 using Content.Server.Medical.Components;
 using Content.Server.PowerCell;
 using Content.Server.Temperature.Components;
+using Content.Shared._RMC14.Body;
+using Content.Shared._RMC14.Embeds;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Part;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -32,6 +36,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
 
     public override void Initialize()
     {
@@ -199,17 +204,25 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         var bloodAmount = float.NaN;
         var bleeding = false;
         var unrevivable = false;
+        var embeddedObjectInBodyParts = new List<ForeignObjectEmbeddedEntry>();
+        var internalBleeds = new List<InternalBleedingEntry>();
 
         if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
             _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
                 ref bloodstream.BloodSolution, out var bloodSolution))
         {
             bloodAmount = bloodSolution.FillFraction;
-            bleeding = bloodstream.BleedAmount > 0;
+            bleeding = _rmcBloodstream.IsBleeding(target);
         }
 
         if (TryComp<UnrevivableComponent>(target, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
+
+        if (TryComp<ForeignObjectEmbeddedComponent>(target, out var embeddedComponent))
+            embeddedObjectInBodyParts = ForeignObjectEmbeddedUtility.GetEmbeddedObjectInBodyParts(embeddedComponent);
+
+        if (TryComp<WoundedComponent>(target, out var wounded))
+            internalBleeds.AddRange(wounded.InternalBleeds);
 
         _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(
             GetNetEntity(target),
@@ -217,7 +230,9 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             bloodAmount,
             scanMode,
             bleeding,
-            unrevivable
+            unrevivable,
+            embeddedObjectInBodyParts,
+            internalBleeds
         ));
     }
 }

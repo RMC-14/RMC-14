@@ -33,6 +33,10 @@
     - CMOintment
   - type: Sprite
     state: ointment
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Graft
+      quality: Awful
   - type: Item
     heldPrefix: ointment
   - type: WoundTreater
@@ -165,6 +169,10 @@
   - type: Tag
     tags:
     - CMSurgicalLine
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: FixOVein
+      quality: Substitute
   - type: Sprite
     state: line_brute
   - type: Item
@@ -209,6 +217,10 @@
   - type: Tag
     tags:
     - CMSynthGraft
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Graft
+      quality: Ideal
   - type: Sprite
     state: line_burn
   - type: Item

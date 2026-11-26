@@ -9,6 +9,9 @@
     layers:
     - state: stun
       shader: unshaded
+  - type: RemoveComponents
+    components:
+    - type: ShrapnelChanceProjectile
   - type: Reflective
     reflective:
     - Energy
