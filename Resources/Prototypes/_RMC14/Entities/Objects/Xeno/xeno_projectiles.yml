@@ -654,6 +654,6 @@
     fillPrototype: XenoSpitProjectileDissolverAcidBlobSmall
     capacity: 4
     spreadAngle: 40
-    directHitProjectiles: 4
+    directHitProjectiles: 5
     projectileSpeed: 30
   - type: IgnorePredictionHide
