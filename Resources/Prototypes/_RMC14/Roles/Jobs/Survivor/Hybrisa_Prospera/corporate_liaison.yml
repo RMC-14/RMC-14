@@ -6,6 +6,20 @@
   spawnMenuRoleName: Corporate Liaison (Hybrisa Survivor)
   startingGear: RMCGearSurvivorHybrisaCorporateLiaison
   icon: "CMJobIconLiaison"
+  ranks:
+    RMCRankWeYaAssistantManager:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 630000 # 175 hours
+    RMCRankWeYaExecutiveSupervisor:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 252000 # 70 hours
+    RMCRankWeYaExecutiveSpecialist:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 90000 # 25 hours
+    RMCRankWeYaSeniorExecutive: []
   special:
   - !type:AddComponentSpecial
     components:
