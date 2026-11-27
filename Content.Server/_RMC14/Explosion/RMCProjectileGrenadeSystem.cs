@@ -130,7 +130,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
                 if (ev.Handled)
                     continue;
 
-                _damage.TryChangeDamage(entity, ev.Damage, armorPiercing: armorPiercing, origin: projectile.Shooter, tool: ent);
+                _damage.TryChangeDamage(entity, ev.Damage, armorPiercing: armorPiercing, origin: projectile.Shooter, tool: payloadUid);
             }
 
             // Make sure the leftover projectiles don't hit the entity that was hit directly
