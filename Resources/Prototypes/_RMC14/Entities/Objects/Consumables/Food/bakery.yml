@@ -1,0 +1,95 @@
+# Contents of bakery.rsi
+- type: entity
+  name: chawanmushi
+  parent: CMFoodBase
+  id: RMCFoodChawanmushi
+  description: A legendary egg custard that makes friends out of enemies. Probably too hot for a cat to eat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: chawanmushi
+  - type: FlavorProfile
+    flavors:
+    - creamy
+    - bread
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+
+- type: entity
+  parent: FoodDonkpocket
+  id: RMCFoodDonkpocket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: donkpocket
+  - type: Item
+    size: Small
+
+# Pies
+
+- type: entity
+  name: apple pie
+  parent: CMFoodBase
+  id: RMCFoodPieApple
+  description: A pie containing sweet, sweet love... or apple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: applepie
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - apple
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+
+- type: entity
+  name: apple pie
+  parent: CMFoodBase
+  id: RMCFoodPieApple
+  description: A pie containing sweet, sweet love... or apple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: applepie
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - apple
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+
+- type: entity
+  name: cherry pie
+  parent: CMFoodBase
+  id: RMCFoodPieCherry
+  description: Taste so good, make a grown man cry.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: cherrypie
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - apple
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
