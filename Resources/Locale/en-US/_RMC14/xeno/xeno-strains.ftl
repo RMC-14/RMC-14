@@ -167,7 +167,7 @@ rmc-xeno-hedgehog-name = Hedgehog
 # TODO RMC14 limb damage shrapnel and causing damage when they move
 rmc-xeno-hedgehog-description = You lose:
   - Your empower, charge, and scissor cut abilities.
-  - Some movement speed and attack speed.
+  - Some slash damage.
   - Your plasma system is replaced with bone shards (max 300).
   You gain:
   - Increased health and armor that scales with shard count (+2.5 armor per 50 shards).

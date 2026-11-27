@@ -311,7 +311,6 @@
     baseWalkSpeed: 1.8
     baseSprintSpeed: 3.2
   - type: MeleeWeapon
-    attackRate: 0.9
     damage:
       groups:
         Brute: 35
