@@ -320,6 +320,19 @@
   - type: CMArmor
     melee: 10
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatMessTechBlack
+  name: black mess technician jacket
+  description: This coat shows the determination of the mess technician wearing it that they cook for the love of the game.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef_black.rsi
+  - type: CMArmor
+    melee: 10
+
 # Tanker
 - type: entity
   parent: [RMCBaseJacketButtonable, RMCBaseJacket]
