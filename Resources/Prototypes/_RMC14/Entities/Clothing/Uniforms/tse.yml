@@ -73,7 +73,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalPVE
-  suffix: PVE, Whiskey Tp.
+  suffix: PVE
   components:
   - type: UniformAccessoryHolder
     startingAccessories:
