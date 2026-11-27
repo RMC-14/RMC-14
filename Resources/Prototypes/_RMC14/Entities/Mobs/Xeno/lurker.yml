@@ -195,6 +195,12 @@
       groups:
         Brute: 30
   - type: MovementSpeedModifier # This is not actually faster in 13 at base if you test it
+  - type: XenoResinWalker # Mimics speed increase on weeds in CM
+    active: true
+    plasmaCost: 0
+    plasmaUpkeep: 0
+    plasmaUseDelay: 1000
+    speedMultiplier: 1.3
   - type: XenoStrain
     name: rmc-xeno-vampire-name
     description: rmc-xeno-vampire-description

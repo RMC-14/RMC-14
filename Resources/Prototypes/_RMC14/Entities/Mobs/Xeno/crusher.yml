@@ -184,6 +184,12 @@
       groups:
         Brute: 36
   - type: MovementSpeedModifier # Not actually faster
+  - type: XenoResinWalker # Mimics speed increase on weeds in CM
+    active: true
+    plasmaCost: 0
+    plasmaUpkeep: 0
+    plasmaUseDelay: 1000
+    speedMultiplier: 1.1666
   - type: XenoStrain
     name: rmc-xeno-charger-name
     description: rmc-xeno-charger-description

@@ -114,7 +114,7 @@ rmc-xeno-maid-description = You trade your dignity.
 rmc-xeno-maid-popup = Rawr :3
 
 rmc-xeno-vampire-name = Vampire
-rmc-xeno-vampire-description = You lose all of your abilities and you forfeit a chunk of your health and damage in exchange for a large amount of armor, increased attack speed, and brand new abilities that make you an assassin.
+rmc-xeno-vampire-description = You lose all of your abilities and you forfeit a chunk of your health and damage in exchange for a large amount of armor, extra speed on weeds, increased attack speed, and brand new abilities that make you an assassin.
   You gain the ability to:
   - Rush on your opponent to disorient them.
   - Flurry to unleash a forward cleave that can hit and slow three talls and heal you for every tall you hit.
@@ -155,7 +155,7 @@ rmc-xeno-charger-description = In exchange for:
 
     You gain:
     - A considerable amount of health.
-    - Some speed.
+    - Some extra speed on weeds.
     - Your stomp does extra damage when stomping over a grounded tall.
     - Your charge is now manually-controlled and momentum-based; the further you go, the more damage and speed you will gain until you achieve maximum momentum, indicated by your roar.
     - Your armor is now directional, being the toughest on the front, weaker on the sides, and weakest from the back.
