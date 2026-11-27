@@ -59,9 +59,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
             if (HasKatana(target) && args.User != target)
             {
                 CounterSwing(args.User, target);
-
                 _stun.TryStun(args.User, ent.Comp.KillDelay, true);
-                _stun.TryStun(target, ent.Comp.KillDelay, true);
 
                 _popup.PopupPredicted(Loc.GetString("rmc-katana-cross-blades-user", ("target", MetaData(target).EntityName)), args.User, null, PopupType.Medium);
                 _popup.PopupPredicted(Loc.GetString("rmc-katana-cross-blades-target", ("user", MetaData(args.User).EntityName)), target, null, PopupType.Medium);
@@ -86,18 +84,15 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (HasComp<AlreadyDeadTargetComponent>(target))
+        if (HasComp<OmaeWaMouShindeiruTargetComponent>(target))
             return;
 
-        var delayedComp = EnsureComp<AlreadyDeadTargetComponent>(target);
+        var delayedComp = EnsureComp<OmaeWaMouShindeiruTargetComponent>(target);
         delayedComp.TriggerTime = _timing.CurTime + ent.Comp.KillDelay;
         delayedComp.NumberOfCuts = ent.Comp.NumberOfCuts;
         delayedComp.BypassResistances = ent.Comp.BypassResistances;
         delayedComp.Damage = damage;
         delayedComp.User = user;
-
-        if (delayedComp.AudioStream is { } oldStream && Exists(oldStream))
-            _audio.Stop(oldStream);
 
         var playStream = _audio.PlayPvs(ent.Comp.DeathImminentSound, target);
         delayedComp.AudioStream = playStream?.Entity;
@@ -144,7 +139,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
             return;
 
         var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<AlreadyDeadTargetComponent>();
+        var query = EntityQueryEnumerator<OmaeWaMouShindeiruTargetComponent>();
         while (query.MoveNext(out var uid, out var targetComp))
         {
             if (targetComp.TriggerTime > curTime)
@@ -160,7 +155,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
             if (TryComp<MobStateComponent>(uid, out var mobState) &&
                 mobState.CurrentState == MobState.Dead)
             {
-                RemComp<AlreadyDeadTargetComponent>(uid);
+                RemComp<OmaeWaMouShindeiruTargetComponent>(uid);
                 continue;
             }
 
@@ -172,7 +167,7 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
                 _damageable.TryChangeDamage(uid, targetComp.Damage, ignoreResistances: targetComp.BypassResistances, origin: targetComp.User);
             }
 
-            RemComp<AlreadyDeadTargetComponent>(uid);
+            RemComp<OmaeWaMouShindeiruTargetComponent>(uid);
         }
     }
 }

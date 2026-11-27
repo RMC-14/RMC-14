@@ -7,9 +7,9 @@ namespace Content.Shared._RMC14.Weapons.Melee.OmaeWaMouShindeiru;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(OmaeWaMouShindeiruSystem))]
-public sealed partial class AlreadyDeadTargetComponent : Component
+public sealed partial class OmaeWaMouShindeiruTargetComponent : Component
 {
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan TriggerTime;
 
     [DataField, AutoNetworkedField]
