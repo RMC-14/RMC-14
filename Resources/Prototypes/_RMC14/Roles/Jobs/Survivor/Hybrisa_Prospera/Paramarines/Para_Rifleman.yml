@@ -1,7 +1,7 @@
 - type: job
   parent: RMCSurvivorParaBase
   id: RMCSurvivorParamarine
-  name: rmc-job-name-paramarine
+  name: rmc-job-name-rcm-commando
   icon: RMCJobIconParamarine
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: RCM Paramarine Rifleman (Hybrisa Special Survivor)

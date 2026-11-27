@@ -325,7 +325,7 @@
 - type: entity
   parent: SquadBase
   id: SquadPara
-  name: RCM Para.
+  name: 24/PARA
   components:
   - type: SquadTeam
     color: "#3D6F43"

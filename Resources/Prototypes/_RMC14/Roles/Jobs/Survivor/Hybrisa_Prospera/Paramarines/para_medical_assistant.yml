@@ -1,7 +1,7 @@
 - type: job
   parent: RMCSurvivorParaBase
   id: RMCSurvivorParaMedicalAssistant
-  name: rmc-job-name-para-medic
+  name: rmc-job-name-rcm-medic
   ranks:
     RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearParaMedicalAssistant
@@ -40,7 +40,7 @@
       - type: AssignSquad
         squad: SquadPara
       - type: JobPrefix
-        prefix: rmc-job-prefix-paramarine
+        prefix: rmc-job-prefix-rcm-medic
   hidden: true
 
 - type: startingGear

@@ -40,7 +40,7 @@
         - type: AssignSquad
           squad: SquadPara
         - type: JobPrefix
-          prefix: rmc-job-prefix-paramarine
+          prefix: rmc-job-prefix-para-pilot
   hidden: true
 
 - type: startingGear

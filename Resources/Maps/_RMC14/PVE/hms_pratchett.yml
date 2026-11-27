@@ -1958,7 +1958,7 @@ entities:
         - node:
             angle: 4.71238898038469 rad
             color: '#FF3B3BFF'
-            id: RMCDecalTSETeamLead
+            id: RMCDecalTSETeamLeader
           decals:
             1159: -56,-8
         - node:
