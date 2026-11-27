@@ -89,6 +89,12 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, angle, shootCount, hitEntities);
                 RaiseLocalEvent(uid, ref ev);
 
+
+                // RMC14 Note: breaks for container projectile nades that don't just
+                // spawn stuff
+                // this probably should be refactored to work better at some point
+                // this is needed so the spawn contents code doesn't keep running after a direct hit
+                // eats them all
                 component.UnspawnedCount = ev.TotalCount;
 
                 if (ev.TotalCount <= 0)
