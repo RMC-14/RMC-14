@@ -97,6 +97,37 @@
         - ReagentId: RMCChocolateSyrup
           Quantity: 60
 
+# Coldsauce
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentColdsauce
+  name: coldsauce
+  description: Leaves the tongue numb in its passage.
+  components:
+  - type: Sprite
+    state: coldsauce
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Coldsauce
+          Quantity: 50
+
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentColdsauceCold
+  name: Cole's Cold bottle
+  description: A bottle of cold sauce locally produced in Shivas Snowball. You probably shouldn't drink this on its own.
+  components:
+  - type: Sprite
+    state: coldsauce_cole
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Coldsauce
+          Quantity: 50
+
 # Enzyme
 - type: entity
   parent: RMCCondiment
@@ -111,6 +142,22 @@
       food:
         reagents:
         - ReagentId: Enzyme
+          Quantity: 50
+
+# Flour
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentEnzyme
+  name: box of flour
+  description: A big bag of flour. Good for baking!
+  components:
+  - type: Sprite
+    state: flour
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Flour
           Quantity: 50
 
 # Sugar
@@ -163,12 +210,28 @@
         - ReagentId: RMCKetchup
           Quantity: 50
 
+# Olive Oil
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentOliveoil
+  name: olive oil
+  description: A delicious oil used in cooking. Made from olives.
+  components:
+  - type: Sprite
+    state: oliveoil
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Oliveoil
+          Quantity: 50
+
 # Rice
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentRice
   name: rice
-  description: welcome to the rice fields!
+  description: A big bag of rice. Good for cooking!
   components:
   - type: Sprite
     state: rice
