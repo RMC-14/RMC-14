@@ -98,7 +98,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     {
         var possibleDirectHits = ent.Comp.DirectHitProjectiles - 1; //Minus one to count ourselves
 
-        if (!TryComp(payloadUid, out ProjectileComponent? projectile) || possibleDirectHits <= 0)
+        if (!TryComp(payloadUid, out ProjectileComponent? projectile) || possibleDirectHits < 0)
             return null;
 
         var nearbyEntities = _entityLookup.GetEntitiesInRange<MobStateComponent>(Transform(ent).Coordinates, 0.5f);
