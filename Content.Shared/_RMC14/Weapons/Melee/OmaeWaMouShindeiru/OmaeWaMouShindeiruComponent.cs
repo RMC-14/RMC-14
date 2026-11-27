@@ -29,19 +29,9 @@ public sealed partial class OmaeWaMouShindeiruComponent : Component
     [DataField, AutoNetworkedField]
     public int NumberOfCuts = 8;
 
-    /// <summary>
-    /// Targets currently waiting for the delayed attack to trigger
-    /// </summary>
-    public readonly HashSet<EntityUid> PendingTargets = [];
-
     [DataField]
     public SoundSpecifier DeathImminentSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/heart_beat.ogg")
     {
         Params = AudioParams.Default.WithLoop(true)
     };
-
-    [DataField]
-    public SoundSpecifier BoneBreakSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/alien_knockdown.ogg"); //TODO RMC14 Bonebreak sound bone_break1.ogg
-
-    public readonly Dictionary<EntityUid, EntityUid> Streams = new();
 }

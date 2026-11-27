@@ -37,7 +37,6 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<OmaeWaMouShindeiruComponent, MeleeHitEvent>(OnYouAreAlreadyDeadMeleeHit, after: [typeof(SharedRMCMeleeWeaponSystem)]);
-        SubscribeLocalEvent<OmaeWaMouShindeiruComponent, ComponentShutdown>(OnKatanaShutdown);
     }
 
     private void OnYouAreAlreadyDeadMeleeHit(Entity<OmaeWaMouShindeiruComponent> ent, ref MeleeHitEvent args)
@@ -87,46 +86,21 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!ent.Comp.PendingTargets.Add(target))
+        if (HasComp<AlreadyDeadTargetComponent>(target))
             return;
 
+        var delayedComp = EnsureComp<AlreadyDeadTargetComponent>(target);
+        delayedComp.TriggerTime = _timing.CurTime + ent.Comp.KillDelay;
+        delayedComp.NumberOfCuts = ent.Comp.NumberOfCuts;
+        delayedComp.BypassResistances = ent.Comp.BypassResistances;
+        delayedComp.Damage = damage;
+        delayedComp.User = user;
+
+        if (delayedComp.AudioStream is { } oldStream && Exists(oldStream))
+            _audio.Stop(oldStream);
+
         var playStream = _audio.PlayPvs(ent.Comp.DeathImminentSound, target);
-        if (playStream != null)
-            ent.Comp.Streams[target] = playStream.Value.Entity;
-
-        var cuts = ent.Comp.NumberOfCuts;
-        var ignoreRes = ent.Comp.BypassResistances;
-        Timer.Spawn(ent.Comp.KillDelay,
-            () =>
-            {
-                if (!Exists(ent.Owner))
-                    return;
-
-                ent.Comp.PendingTargets.Remove(target);
-
-                if (ent.Comp.Streams.TryGetValue(target, out var stream))
-                {
-                    _audio.Stop(stream);
-                    ent.Comp.Streams.Remove(target);
-                }
-
-                if (Deleted(target) || !Exists(target))
-                    return;
-
-                if (TryComp<MobStateComponent>(target, out var mobState) &&
-                    mobState.CurrentState == MobState.Dead)
-                {
-                    return;
-                }
-
-                _audio.PlayPvs(ent.Comp.BoneBreakSound, target);
-                for (var i = 0; i < cuts; i++)
-                {
-                    // TODO RMC14 hit outer limbs so this can decap/delimb
-                    // var/def_zone = pick("head","l_leg","l_foot","r_leg","r_foot","l_arm","l_hand","r_arm","r_hand")
-                    _damageable.TryChangeDamage(target, damage, ignoreResistances: ignoreRes, origin: user, tool: ent.Owner);
-                }
-            });
+        delayedComp.AudioStream = playStream?.Entity;
     }
 
     private void CounterSwing(EntityUid user, EntityUid target)
@@ -164,14 +138,41 @@ public sealed class OmaeWaMouShindeiruSystem : EntitySystem
         return false;
     }
 
-    private void OnKatanaShutdown(EntityUid uid, OmaeWaMouShindeiruComponent comp, ComponentShutdown args)
+    public override void Update(float frameTime)
     {
-        foreach (var stream in comp.Streams.Values)
-        {
-            _audio.Stop(stream);
-        }
+        if (_net.IsClient)
+            return;
 
-        comp.Streams.Clear();
-        comp.PendingTargets.Clear();
+        var curTime = _timing.CurTime;
+        var query = EntityQueryEnumerator<AlreadyDeadTargetComponent>();
+        while (query.MoveNext(out var uid, out var targetComp))
+        {
+            if (targetComp.TriggerTime > curTime)
+                continue;
+
+            if (targetComp.AudioStream is { } stream &&
+                Exists(stream))
+            {
+                _audio.Stop(stream);
+                targetComp.AudioStream = null;
+            }
+
+            if (TryComp<MobStateComponent>(uid, out var mobState) &&
+                mobState.CurrentState == MobState.Dead)
+            {
+                RemComp<AlreadyDeadTargetComponent>(uid);
+                continue;
+            }
+
+            _audio.PlayPvs(targetComp.BoneBreakSound, uid);
+            for (var i = 0; i < targetComp.NumberOfCuts; i++)
+            {
+                // TODO RMC14 hit outer limbs so this can decap/delimb
+                // var/def_zone = pick("head","l_leg","l_foot","r_leg","r_foot","l_arm","l_hand","r_arm","r_hand")
+                _damageable.TryChangeDamage(uid, targetComp.Damage, ignoreResistances: targetComp.BypassResistances, origin: targetComp.User);
+            }
+
+            RemComp<AlreadyDeadTargetComponent>(uid);
+        }
     }
 }
