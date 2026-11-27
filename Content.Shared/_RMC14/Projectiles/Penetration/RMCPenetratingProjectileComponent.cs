@@ -87,4 +87,10 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float VehicleMultiplier = 1f;
+
+    /// <summary>
+    ///     The multiplier for range and damage loss if a non-mob that doesn't fall into any other category is hit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float NonMobMultiplier = 1f;
 }

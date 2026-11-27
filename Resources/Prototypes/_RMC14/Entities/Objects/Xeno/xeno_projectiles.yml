@@ -546,6 +546,7 @@
     membraneMultiplier: 10
     barricadeMultiplier: 10
     vehicleMultiplier: 10
+    nonMobMultiplier: 10
     fixedDamageLoss: 24.75
     deleteOnZeroDamage: true
 
