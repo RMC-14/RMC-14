@@ -8,9 +8,6 @@
   },
   "states": [
     {
-      "name": "legacy_bay"
-    },
-    {
       "name": "birthdaycake"
     },
     {
@@ -42,9 +39,6 @@
     },
     {
       "name": "braincake"
-    },
-    {
-      "name": "cake slices"
     },
     {
       "name": "birthdaycakeslice"
