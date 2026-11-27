@@ -51,9 +51,9 @@
       - id: RMCMagazinePistolM13Ext
         points: 6
       # - id: RMCSpeedLoader44Heavy
-      #  points: 10
+      #  points: 5
       - id: RMCSpeedLoader44Marksman
-        points: 10
+        points: 5
       - id: RMCMagazinePistolM1984HP
         points: 5
       - id: RMCMagazinePistolM1984AP
