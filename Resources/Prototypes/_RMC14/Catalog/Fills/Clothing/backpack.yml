@@ -1,7 +1,7 @@
 - type: entity
   parent: RMCBackpackRCMSmallPVP
   id: RMCBackpackRCMSmallPVPLieutenant
-  suffix: PVP, ERT Lt.
+  suffix: PVP, ERT Lt
   components:
   - type: StorageFill
     contents:
@@ -16,7 +16,7 @@
 - type: entity
   parent: RMCBackpackRCMSmallPVP
   id: RMCBackpackRCMSmallPVPMajor
-  suffix: PVP, ERT Maj.
+  suffix: PVP, ERT Maj
   components:
   - type: StorageFill
     contents:
@@ -30,7 +30,7 @@
 - type: entity
   parent: RMCBackpackRCMSmallPVP
   id: RMCBackpackRCMSmallPVPMarksman
-  suffix: PVP, ERT Mxmn.
+  suffix: PVP, ERT Mxmn
   components:
   - type: StorageFill
     contents:
@@ -42,7 +42,7 @@
 - type: entity
   parent: RMCBackpackRCMSmallPVP
   id: RMCBackpackRCMSmallPVPRifleman
-  suffix: PVP, ERT Rfn.
+  suffix: PVP, ERT Rfn
   components:
   - type: StorageFill
     contents:
@@ -55,7 +55,7 @@
 - type: entity
   parent: RMCBackpackRCMSmallPVP
   id: RMCBackpackRCMSmallPVPSmartgun
-  suffix: PVP, ERT SGO.
+  suffix: PVP, ERT SGO
   components:
   - type: StorageFill
     contents:
@@ -70,7 +70,7 @@
 - type: entity
   parent: RMCBackpackRCMSmallPVP
   id: RMCBackpackRCMSmallPVPTeamLeader
-  suffix: PVP, ERT TmLdr.
+  suffix: PVP, ERT TmLdr
   components:
   - type: StorageFill
     contents:
@@ -86,7 +86,7 @@
 - type: entity
   parent: RMCBackpackRCMMediumPVP
   id: RMCBackpackRCMMediumPVPFilled
-  suffix: PVP, ERT Capt.
+  suffix: PVP, ERT Capt
   components:
   - type: StorageFill
     contents:
@@ -104,7 +104,7 @@
 - type: entity
   parent: RMCBackpackRCMMedicPVP
   id: RMCBackpackRCMMedicPVPFilled
-  suffix: PVP, ERT MA.
+  suffix: PVP, ERT MA
   components:
   - type: StorageFill
     contents:
