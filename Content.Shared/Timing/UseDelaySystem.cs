@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Timing;
 using Robust.Shared.GameStates;
 using Robust.Shared.Timing;
 
@@ -8,6 +9,9 @@ public sealed class UseDelaySystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
+
+    // RMC14
+    [Dependency] private readonly RMCTimingSystem _rmcTiming = default!;
 
     private const string DefaultId = "default";
 
@@ -96,7 +100,7 @@ public sealed class UseDelaySystem : EntitySystem
         if (!ent.Comp.Delays.TryGetValue(id, out var entry))
             return false;
 
-        return entry.EndTime >= _gameTiming.CurTime;
+        return entry.EndTime >= _rmcTiming.GetInSimulationTime(); // RMC14
     }
 
     /// <summary>
