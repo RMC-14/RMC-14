@@ -544,6 +544,8 @@
     bigXenoMultiplier: 1
     thickMembraneMultiplier: 10
     membraneMultiplier: 10
+    barricadeMultiplier: 10
+    vehicleMultiplier: 10
     fixedDamageLoss: 24.75
     deleteOnZeroDamage: true
 
