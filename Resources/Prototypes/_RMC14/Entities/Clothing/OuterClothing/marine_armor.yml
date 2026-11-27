@@ -794,7 +794,7 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
-  - type: tag
+  - type: Tag
     tags:
     - RMCSynthAllowedArmor
 
