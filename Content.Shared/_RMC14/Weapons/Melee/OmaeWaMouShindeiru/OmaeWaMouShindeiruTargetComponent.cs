@@ -5,7 +5,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Weapons.Melee.OmaeWaMouShindeiru;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(OmaeWaMouShindeiruSystem))]
 public sealed partial class OmaeWaMouShindeiruTargetComponent : Component
 {
