@@ -16,18 +16,8 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      # /obj/item/coin/marine/synth
-      # /obj/item/device/defibrillator/synthetic
       - id: RMCSynthResetKey
       - id: RMCHeadsetSynth
-    - name: Uniform
-      choices: { CMUniform: 1 }
-      entries:
-      - id: RMCJumpsuitSynthetic
-        # mandatory: true, TODO allow vendors to mark entries as mandatory
-        # /obj/item/clothing/under/rank/synthetic/old
-      - id: JumpsuitMarine
-      - id: CMJumpsuitMarineMedic
     - name: Webbing
       choices: { CMAccessories: 1 }
       entries:
@@ -98,6 +88,10 @@
         name: S-V42A1 smartpack, tan
       - id: RMCSmartpackA1White
         name: S-V42A1 smartpack, white
+      - id: RMCBackpackRTO
+      - id: RMCSatchelWelder
+      - id: RMCSatchelWelderChestrig
+      - id: CMBackpackWelder
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -145,7 +139,7 @@
         name: tools pouch (Full)
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
-    - name: Pouches
+    - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskSterile

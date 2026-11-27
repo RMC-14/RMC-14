@@ -865,16 +865,14 @@
   points: 7
   groups:
   - SynthGenRMC
+  - SynthUniformRMC
+  - SynthUniformAccessoriesRMC
+  - SynthOuterwearRMC
   - SynthBackpackRMC
-  - SynthHeadwearRMC
-  - SynthGlassesRMC
-  - SynthMasksRMC
+  - HeadwearRMC
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesSynthRMC
-  - SynthUniformRMC
-  - SynthUniformAccessoriesRMC
-  - SynthSuitsRMC
   - PaperworkRMC
   - RecreationalRMC
   - PlushiesRMC

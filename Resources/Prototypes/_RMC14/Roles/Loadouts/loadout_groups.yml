@@ -800,123 +800,39 @@
   id: SynthUniformRMC
   name: rmc-loadout-group-synthetic-uniform
   minLimit: 1
-  loadouts:
-  - SynthUniformRMC
-  - SynthJumpsuitPristineRMC
-  - ScrubsBlueRMC
-  - ScrubsLightBlueRMC
-  - ScrubsGreenRMC
-  - ScrubsPurpleRMC
-  - ScrubsOliveRMC
-  - ScrubsGreyRMC
-  - ServiceUniformRMC
-  - ServiceUniformXORMC
-  - MarineUniformRMC
-  - CorpsmanUniformRMC
-  - ComTechUniformRMC
-  - EngineerUniformRMC
-  - MPUniformRMC
-  - JumpsuitOperationsRMC
-  - DCCJumpsuitRMC
-  - TShirtWhiteRMC
-  - TShirtGrayRMC
-  - TShirtRedRMC
-  - CivilianJumpsuitRMC
-  - WhiteServiceJumpsuitRMC
-  - LiaisonBlueJumpsuitRMC
-  - LiaisonBrownJumpsuitRMC
-  - LiaisonCorporateFormalJumpsuitRMC
-
-- type: loadoutGroup
-  id: SynthGlassesRMC
-  name: rmc-loadout-group-synthetic-glasses
-  minLimit: 0
-  maxLimit: 2
-  loadouts:
-  - AviatorsRMC
-  - EyepatchRMC
-  - GlassesRPGRMC
-  - GlassesRPGRMCOld
-  - GlassesPrescriptionRMC
-  - GogglesRMC
-  - GogglesPrescriptionRMC
-  - GogglesBlackRMC
-  - GogglesOrangeRMC # TODO add prescription variants of all the goggles
-  - GogglesAdvancedRMC
-  - GogglesM1A1RMC
-  - PersonalShadesRMC
-  - SunglassesRMC # TODO prescription sunglasses
-  - GlassesTriMaxYellowRMC
-  - GlassesTriMaxBronzeRMC
-  - GlassesTriMaxBlackRMC
-  - GogglesRedRMC
-  - GogglesBlueRMC
-  - GogglesPurpleRMC
-  - GogglesYellowRMC
-  - GogglesPolarizedBlueRMC
-  - GogglesPolarizedOrangeRMC
-  - GogglesM1A1BlueRMC
-  - GlassesSecurityRMC
-
-- type: loadoutGroup
-  id: SynthShoesRMC
-  name: rmc-loadout-group-synthetic-shoes
-  minLimit: 0
   maxLimit: 1
   loadouts:
-  - BootsBlackRMCSynth
-  - ShoesBlackRMCSynth
-  - ShoesBrownRMCSynth
-  - ShoesGreenRMCSynth
-  - ShoesPurpleRMCSynth
-  - ShoesRedRMCSynth
-  - ShoeWhiteRMCSynth
-  - ShoeYellowRMCSynth
+  - SynthUniformRMC
+  - SynthUniformOutdatedRMC
+  - SynthJumpsuitPristineRMC
+  - SynthUniformMarineRMC
+  - SynthUniformMarineHMRMC
+  - SynthUniformMarineCTRMC
+  - SynthUniformServiceRMC
+  - SynthUniformLightBlueScrubsRMC
+  - SynthUniformGreyScrubsRMC
+  - SynthUniformBlackScrubsRMC
+  - SynthUniformMTRMC
+  - SynthUniformBlackSuitRMC
+  - SynthUniformBlueSuitRMC
 
 - type: loadoutGroup
-  id: SynthHeadwearRMC
-  name: rmc-loadout-group-synthetic-headwear
-  minLimit: 0
-  maxLimit: 2
-  loadouts:
-  - SquadBeretRMC
-  - GreenBeretRMC
-  - TanBeretRMC
-  - CamoBeretRMC
-  - BoonieRMC
-  - BoonieTanRMC
-  - CapRMC
-  - BeretEngineerRMC
-  - CapMPRMC
-  - CapQuartermasterRMC
-  - HeadCapCargoRMC
-  - ArmorHelmetM10RMC
-  - HardHatRMC
-  - HardHatOrangeRMC
-  - HardHatWhiteRMC
-  - HardHatBlueRMC
-  - HeadCapOfficerRMC
-
-- type: loadoutGroup
-  id: SynthSuitsRMC
+  id: SynthOuterwearRMC
   name: rmc-loadout-group-synthetic-suits
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - CoatBomberRMC
-  - ExternalWebbingRMC
-  - ArmorM3VLSynthRMC
-  - HazardVestRMC
-  - HazardVestBlueRMC
-  - HazardVestYellowRMC
-  - HazardVestBlackRMC
-  - CoatServiceRMC
-  - LabcoatRMC
-  - QuartermasterJacketRMC
-  - CorporateBlackJacketRMC
-  - CorporateBrownJacketRMC
-  - CorporateBlueJacketRMC
-  - JacketWindbreakerRMC
+  - SynthExternalWebbingRMC
+  - SynthServiceJacketRMC
+  - SynthCoatBomberRMC
+  - SynthJacketWindbreakerRMC
+  - SynthJacketWindbreakerBrownRMC
+  - SynthJacketWindbreakerExpeditionRMC
+  - SynthCoatSnowRMC
+  - SynthHazardVestRMC
+  - SynthHazardVestBlueRMC
+  - SynthHazardVestYellowRMC
+  - SynthHazardVestBlackRMC
 
 - type: loadoutGroup
   id: SynthUniformAccessoriesRMC
@@ -924,62 +840,34 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
-  - ScienceArmbandRMC
-  - EngiArmbandRMC
-  - MedArmbandRMC
-  - TieRMC
-  - TieGreenRMC
-  - TieBlackRMC
-  - TieGoldRMC
-  - TieRedRMC
-  - TiePurpleRMC
+  - SynthScienceArmbandRMC
+  - SynthEngiArmbandRMC
+  - SynthMedArmbandRMC
+  - SynthTieRMC
+  - SynthTieBlackRMC
+  - SynthTieRedRMC
 
 - type: loadoutGroup
   id: SynthBackpackRMC
   name: rmc-loadout-group-backpack
   minLimit: 1
+  maxLimit: 1
   loadouts:
-  - BackpackEngineerRMC
-  - BackpackMarineMedicRMC
-  - MarineTechnicianSatchel
-  - MarineSatchel
-  - MarineLeatherSatchel
-  - MarineMedicSatchel
-  - SatchelWelderRMC
-
-- type: loadoutGroup
-  id: SynthMasksRMC
-  name: rmc-loadout-group-masks
-  minLimit: 1
-  loadouts:
-  - MaskScarfSquadRMC
-  - MaskScarfRedRMC
-  - MaskScarfBlackRMC
-  - MaskScarfGrayRMC
-  - MaskScarfGreenRMC
-  - MaskScarfTanRMC
-  - TornScarfBlackRMC
-  - TornScarfDesertRMC
-  - TornScarfGreenRMC
-  - TornScarfGreyRMC
-  - TornScarfUrbanRMC
-  - TornScarfSnowRMC
-  - NeckerchiefTanRMC
-  - NeckerchiefBlackRMC
-  - NeckerchiefGrayRMC
-  - NeckerchiefGreenRMC
-  - NeckerchiefWhiteRMC
-  - NeckerchiefRedRMC
+  - SynthMarineSatchelRMC
+  - SynthBrownSatchelRMC
+  - SynthSatchelBlackRMC
+  - SynthSatchelBlueRMC
 
 - type: loadoutGroup
   id: SynthGenRMC
   name: rmc-loadout-group-synth
-  maxLimit: 1
   minLimit: 1
+  maxLimit: 1
   loadouts:
   - RMCSynthGenOne
   - RMCSynthGenTwo
   - RMCSynthGenThree
+
 # Watches
 - type: loadoutGroup
   id: WatchesBasicRMC

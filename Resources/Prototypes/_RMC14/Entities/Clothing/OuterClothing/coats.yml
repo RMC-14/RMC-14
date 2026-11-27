@@ -1164,3 +1164,15 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/liaison.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/liaison.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatSnowSynth
+  name: snow suit
+  suffix: Synthetic, No armor
+  description: A standard snow suit. It can protect the wearer from extreme cold.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
