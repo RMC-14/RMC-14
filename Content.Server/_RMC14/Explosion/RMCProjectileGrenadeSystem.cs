@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
-using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Mobs.Components;
@@ -28,7 +27,6 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
