@@ -137,7 +137,7 @@ rmc-xeno-berserker-description = You lose:
   - Some health.
   - The ability to fully benefit from 'strong' or better frenzy pheromones
   You gain:
-  - Movement speed, a slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
+  - A slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
   - The ability to heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
   - Apprehend to increase your movement speed and apply a slow on the next target you slash.
   - Eviscerate to unleash a devastating windmill attack that heals you for every enemy you hit after an immobilizing wind-up.
