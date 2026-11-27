@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Xenonid players not on the dropship when a hijack is initiated now automatically
-      get added to the front of the larva queue.
-    type: Fix
-  id: 3473
-  time: '2026-07-03T01:40:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10307
 - author: Vixting
   changes:
   - message: Added pry sound to expanding a acid hole
@@ -4339,5 +4331,13 @@
   id: 3972
   time: '2026-11-25T20:49:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11212
+- author: Ian321
+  changes:
+  - message: Lifeboats and escape pods should no longer crash-land out of bounds on
+      most maps.
+    type: Fix
+  id: 3973
+  time: '2026-11-27T17:33:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11225
 Name: RMC14
 Order: -1
