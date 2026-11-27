@@ -210,9 +210,9 @@
   alert: SquadTrackerRCMPVETroopCommander
 
 - type: trackerMode
-  id: RCMTeamLead
-  job: CMRoyalMarinesTeamlead
-  alert: SquadTrackerRCMTeamLead
+  id: RCMTeamLeader
+  job: CMRoyalMarinesTeamLeader
+  alert: SquadTrackerRCMTeamLeader
 
 - type: trackerMode
   id: RCMLieutenant

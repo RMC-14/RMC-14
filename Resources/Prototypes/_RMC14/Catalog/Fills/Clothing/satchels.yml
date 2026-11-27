@@ -124,6 +124,52 @@
     - id: RMCBaseballBat
 
 - type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackFillParaCO
+  suffix: RCM Para, Survivor CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCTieBlack
+
+- type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledPara
+  suffix: RCM Para, Survivor
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+
+- type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledParaHelmet
+  suffix: RCM Para, Survivor, Helmet
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+        - id: RMCHeadRoyalL1HelmetBallistic
+
+- type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledParaSynth
+  suffix: RCM Para, Survivor, Synth
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+        - id: CMRollerBedSpawnFolded
+        - id: CMMultitool
+        - id: RMCCableCoil30
+        - id: CMHealthAnalyzer
+        - id: RMCSynthResetKey
+
+- type: entity
   parent: RMCSatchelTyrargo
   id: RMCSatchelTyrargoSurvivorFill
   suffix: Survivor, Filled

@@ -11522,7 +11522,7 @@ entities:
     - type: Transform
       pos: 1.5,1.5
       parent: 1
-- proto: CMSpawnPointRCMPVEMedicalTechnician
+- proto: CMSpawnPointRCMPVEMedicalAssistant
   entities:
   - uid: 793
     components:

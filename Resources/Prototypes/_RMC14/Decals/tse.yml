@@ -42,7 +42,7 @@
 
 - type: decal
   parent: CMDecalBase
-  id: RMCDecalTSETeamLead
+  id: RMCDecalTSETeamLeader
   sprite:
     sprite: _RMC14/Decals/tse.rsi
     state: team

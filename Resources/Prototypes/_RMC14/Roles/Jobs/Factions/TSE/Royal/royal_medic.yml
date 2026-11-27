@@ -10,7 +10,7 @@
   icon: "RMCJobIconRoyalMedic"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-tl
-  spawnMenuRoleName: RCM Medical Technician
+  spawnMenuRoleName: RCM Medical Assistant
   special:
   - !type:AddComponentSpecial
     components:

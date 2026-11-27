@@ -754,7 +754,7 @@
   id: RMCPackFlareL96
   name: L96 marking flare pack
   description: A packet of eight L96 Signal Marking Flares.
-  suffix: Filled, RCM
+  suffix: RCM
   components:
   - type: Tag
     tags:

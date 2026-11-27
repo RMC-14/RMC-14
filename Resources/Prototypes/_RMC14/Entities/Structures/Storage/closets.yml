@@ -298,7 +298,7 @@
   parent: RMCClosetGoldenArrowGear
   id: RMCClosetRCMTroopSgtGear
   name: troop sergeant locker
-  suffix: PVE, RCM, Troop Sergeant
+  suffix: PVE, RCM
   components:
   - type: EntityTableContainerFill
     containers:
@@ -309,7 +309,7 @@
   parent: RMCClosetGoldenArrowGear
   id: RMCClosetRCMSectionLeaderGear
   name: section leader locker
-  suffix: PVE, RCM, Section Leader
+  suffix: PVE, RCM
   components:
   - type: EntityTableContainerFill
     containers:
@@ -320,7 +320,7 @@
   parent: RMCClosetGoldenArrowGear
   id: RMCClosetRCMSGOGear
   name: smart gun operator locker
-  suffix: PVE, RCM, SGO
+  suffix: PVE, RCM
   components:
   - type: EntityTableContainerFill
     containers:
@@ -331,7 +331,7 @@
   parent: RMCClosetGoldenArrowGear
   id: RMCClosetRCMTeamLeaderGear
   name: team leader locker
-  suffix: PVE, RCM, Team Leader
+  suffix: PVE, RCM
   components:
   - type: EntityTableContainerFill
     containers:
@@ -342,7 +342,7 @@
   parent: RMCClosetGoldenArrowGear
   id: RMCClosetRCMTroopCommanderGear
   name: troop commander locker
-  suffix: PVE, RCM, Troop Commander
+  suffix: PVE, RCM
   components:
   - type: EntityTableContainerFill
     containers:
@@ -353,7 +353,7 @@
   parent: RMCClosetGoldenArrowGear
   id: RMCClosetRCMSapperGear
   name: sapper locker
-  suffix: PVE, RCM, Sapper
+  suffix: PVE, RCM
   components:
   - type: EntityTableContainerFill
     containers:

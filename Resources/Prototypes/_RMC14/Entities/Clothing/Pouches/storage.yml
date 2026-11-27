@@ -677,18 +677,6 @@
     - id: CMMultitool
 
 - type: entity
-  parent: RMCPouchTools
-  id: RMCPouchToolsFilledRCM
-  suffix: Filled, RCM
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMScrewdriver
-    - id: CMWirecutter
-    - id: CMFireExtinguisherPortable
-    - id: CMMultitool
-
-- type: entity
   parent: RMCPouchToolsSoc
   id: RMCPouchToolsSocFilledSOF
   suffix: Filled, SOF
@@ -718,21 +706,6 @@
     - id: CMWrench
     - id: RMCExplosivePlastic
     - id: RMCExplosivePlastic
-
-- type: entity
-  parent: RMCPouchToolsSoc
-  id: RMCPouchToolsSocRCMPVEAssaultEngi
-  suffix: Filled, RCM, PVE
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMFireExtinguisherPortable
-    - id: CMEntrenchingTool
-    - id: RMCExplosivePlastic
-      amount: 3
-    - id: RMCExplosiveBreachingCharge
-      amount: 3
-    - id: RMCNailgunCompact
 
 # Sling Pouch
 - type: entity

@@ -8,7 +8,7 @@
   startingGear: RMCGearParaTeamLeader
   icon: RMCJobIconParaTeamLeader
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Royal Paramarine Team Leader (Hybrisa Special Survivor)
+  spawnMenuRoleName: RCM Paramarine Team Leader (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -58,7 +58,7 @@
   equipment:
     id: RMCIDRoyalParamarinesTeamLeader
     head: RMCHeadParaBeretLead
-    ears: RMCHeadsetParaTeamLead
+    ears: RMCHeadsetParaTeamLeader
     outerClothing: RMCArmorParaVest
     back: RMCSatchelLightpackFilledPara
 

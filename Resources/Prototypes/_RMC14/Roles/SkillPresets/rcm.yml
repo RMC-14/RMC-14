@@ -1,7 +1,7 @@
 # RCM Skills
 - type: entity
   id: RMCSkillPresetRoyalRifleman
-  name: Royal Marine Rifleman
+  name: RCM Rifleman
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -10,7 +10,7 @@
       RMCSkillCqc: 2
       RMCSkillEndurance: 3
       RMCSkillEngineer: 1
-      RMCSkillFirearms: 1 #Should be 2 post recoil changes
+      RMCSkillFirearms: 2
       RMCSkillFireman: 2
       RMCSkillJtac: 1
       RMCSkillMedical: 2
@@ -20,7 +20,7 @@
 - type: entity
   parent: RMCSkillPresetRoyalRifleman
   id: RMCSkillPresetRoyalMedic
-  name: Royal Marine Medic
+  name: RCM Medic
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -32,7 +32,7 @@
 - type: entity
   parent: RMCSkillPresetRoyalRifleman
   id: RMCSkillPresetRoyalBreacher
-  name: Royal Marine Breacher
+  name: RCM Breacher
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -44,18 +44,17 @@
 - type: entity
   parent: RMCSkillPresetRoyalRifleman
   id: RMCSkillPresetRoyalMarksman
-  name: Royal Marine Marksman
+  name: RCM Marksman
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
-      #RMCSkillSpecialistWeapons: 1 #TODO give them WS skill for scout rifle
-      RMCSkillFirearms: 2 #Should be 3 post recoil changes
+      RMCSkillFirearms: 3
 
 - type: entity
   parent: RMCSkillPresetRoyalRifleman
   id: RMCSkillPresetRoyalSmartGunner
-  name: Royal Marine Smart Gun Operator
+  name: RCM Smart Gun Operator
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -65,7 +64,7 @@
 - type: entity
   parent: RMCSkillPresetRoyalRifleman
   id: RMCSkillPresetRoyalTeamLeader
-  name: Royal Marine Team Leader
+  name: RCM Team Leader
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -80,7 +79,7 @@
 - type: entity
   parent: RMCSkillPresetRoyalRifleman
   id: RMCSkillPresetRoyalLieutenant
-  name: Royal Marine Lieutenant
+  name: RCM Lieutenant
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -99,7 +98,7 @@
 - type: entity
   parent: RMCSkillPresetRoyalLieutenant
   id: RMCSkillPresetRoyalCaptain
-  name: Royal Marine Captain
+  name: RCM Captain
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -114,7 +113,7 @@
 - type: entity
   parent: RMCSkillPresetRoyalCaptain
   id: RMCSkillPresetRoyalMajor
-  name: Royal Marine Major
+  name: RCM Major
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset

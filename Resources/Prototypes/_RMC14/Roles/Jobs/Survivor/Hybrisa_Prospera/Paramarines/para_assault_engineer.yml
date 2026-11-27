@@ -1,13 +1,13 @@
 - type: job
   parent: RMCSurvivorParaBase
-  id: RMCSurvivorParaMedicalTechnician
-  name: rmc-job-name-para-medic
+  id: RMCSurvivorParaAssaultEngineer
+  name: rmc-job-name-para-engineer
   ranks:
     RMCRankTSELanceCorporal: [ ]
-  startingGear: RMCGearParaMedicalTechnician
-  icon: RMCJobIconParaMedicalTechnican
+  startingGear: RMCGearParaAssaultEngineer
+  icon: RMCJobIconParaAssaultEngineer
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Royal Paramarine Medical Technician (Hybrisa Special Survivor)
+  spawnMenuRoleName: RCM Paramarine Assault Engineer (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -29,11 +29,11 @@
       - type: IntelRescueSurvivorObjective
       - type: MotionDetectorTracked
       - type: Skills
-        preset: RMCSkillPresetParaMedic
+        preset: RMCSkillPresetParaEngineer
       - type: TacticalMapIcon
         icon:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
-          state: rmc_medic
+          state: rmc_breacher
         background:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: background_para
@@ -45,29 +45,27 @@
 
 - type: startingGear
   parent: RMCGearParaBase
-  id: RMCGearParaMedicalTechnician
+  id: RMCGearParaAssaultEngineer
   equipment:
-    id: RMCIDRoyalParamarinesMedicalTechnician
-    jumpsuit: RMCJumpsuitMarineParaPDW90
-    back: RMCBackpackRCMMedicPVPFilledParaMedic
-    eyes: RMCGlassesMedicalHUDGlasses
-    belt: RMCMedicalL75RCMFillPara
+    id: RMCIDRoyalParamarinesCombatEngineer
+    eyes: RMCWeldingGoggles
+    belt: RMCBeltUtilityRCMFilled
     outerClothing: RMCArmorParaVest
-    suitstorage: RMCWeaponSMGPDW90TSE
+    back: RMCSatchelLightpackFilledPara
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointParaMedicalTechnician
-  name: paramarine combat medical technician spawn point
+  id: RMCSpawnPointParaAssaultEngineer
+  name: paramarine assault engineer spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorParaMedicalTechnician
+    job_id: RMCSurvivorParaAssaultEngineer
   - type: Sprite
     state: surv_tse
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconParaMedicalTechnican
+  id: RMCJobIconParaAssaultEngineer
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
-    state: para_medic
+    state: para_engi

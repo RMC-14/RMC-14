@@ -1,13 +1,13 @@
 - type: job
   parent: CMJobBase
-  id: CMRoyalMarinesTeamlead
-  name: rmc-job-name-rcm-teamlead
+  id: CMRoyalMarinesTeamLeader
+  name: rmc-job-name-rcm-teamleader
   description: rmc-ghost-role-information-rcm-description
-  playTimeTracker: RMCJobRoyalTeamlead
+  playTimeTracker: RMCJobRoyalTeamLeader
   ranks:
     RMCRankTSESergeant: [ ]
-  startingGear: RMCGearRoyalTeamlead
-  icon: "RMCJobIconRoyalTeamlead"
+  startingGear: RMCGearRoyalTeamLeader
+  icon: "RMCJobIconRoyalTeamLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-lieutenant
   spawnMenuRoleName: RCM Team Leader
@@ -30,7 +30,7 @@
         state: rcm_teamleader
     - type: RMCTrackable
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-teamlead
+      prefix: rmc-job-prefix-rcm-teamleader
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -41,7 +41,7 @@
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidRoyalMarinesTeamlead
+  id: RMCRandomHumanoidRoyalMarinesTeamLeader
   name: royal crown marines ghost role team leader
   suffix: Spawner, Player, Friendly
   components:
@@ -49,18 +49,18 @@
     sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCRoyalMarinesTeamlead
+    settings: RMCRoyalMarinesTeamLeader
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCRoyalMarinesTeamlead
+  id: RMCRoyalMarinesTeamLeader
   components:
   - type: GhostRole
-    name: rmc-ghost-name-rcm-teamlead
+    name: rmc-ghost-name-rcm-teamleader
     description: rmc-ghost-role-information-rcm-description
     rules: rmc-ghost-role-information-rcm-rules
     reregister: false
-    job: CMRoyalMarinesTeamlead
+    job: CMRoyalMarinesTeamLeader
     raffle:
       settings: short
     requirements:
@@ -71,27 +71,27 @@
     squad: SquadRoyalMarines
 
 - type: startingGear
-  id: RMCGearRoyalTeamlead
+  id: RMCGearRoyalTeamLeader
   equipment:
     head: RMCHeadRoyalBeretLead
     ears: RMCHeadsetRoyalMarineLeader
-    jumpsuit: RMCJumpsuitMarineRoyalTeamlead
+    jumpsuit: RMCJumpsuitMarineRoyalTeamLeader
     outerClothing: RMCArmorRoyalPaddedFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
-    id: RMCIDRoyalMarinesTeamlead
+    id: RMCIDRoyalMarinesTeamLeader
     belt: RMCBeltHolsterPistolRCML54
-    back: RMCBackpackRCMSmallPVPTeamlead
+    back: RMCBackpackRCMSmallPVPTeamLeader
     pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
-  id: RMCJobRoyalTeamlead
+  id: RMCJobRoyalTeamLeader
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconRoyalTeamlead
+  id: RMCJobIconRoyalTeamLeader
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
     state: rcm_teamleader

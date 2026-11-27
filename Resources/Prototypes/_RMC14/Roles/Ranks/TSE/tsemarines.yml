@@ -3,12 +3,6 @@
   name: Marine
   prefix: Mne.
   paygrade: E1
-  
-- type: rank #Rank used for Paramarines Rifleman
-  id: RCMRankParamarine
-  name: Paramarine
-  prefix: PMne.
-  paygrade: E1
 
 - type: rank
   id: RMCRankTSELanceCorporal
