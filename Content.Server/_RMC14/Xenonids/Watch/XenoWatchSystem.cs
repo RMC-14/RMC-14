@@ -129,8 +129,6 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
     public override void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
     {
-        base.Watch(watcher, toWatch);
-
         if (!HasQueenPopup(watcher))
             return;
 
@@ -147,11 +145,8 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         _viewSubscriber.AddViewSubscriber(toWatch, watcher.Comp2.PlayerSession);
 
         RemoveWatcher(watcher);
-        EnsureComp<XenoWatchingComponent>(watcher).Watching = toWatch;
-        EnsureComp<XenoWatchedComponent>(toWatch).Watching.Add(watcher);
 
-        var ev = new XenoWatchEvent();
-        RaiseLocalEvent(watcher, ref ev);
+        base.Watch(watcher, toWatch);
     }
 
     public override void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)

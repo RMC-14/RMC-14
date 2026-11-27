@@ -27,7 +27,7 @@ rmc-overwatch-console-status = STATUS
 rmc-overwatch-console-launch-supply-drop = Launch Supply Drop
 rmc-overwatch-console-confirm-supply-drop = Confirm Supply Drop?
 rmc-overwatch-console-save = Save
-rmc-overwatch-console-max-coordinates = Max 3 stored coordinates. Will overwrite oldest first.
+rmc-overwatch-console-max-coordinates = Max 5 stored coordinates. Will overwrite oldest first.
 rmc-overwatch-console-fire = Fire
 rmc-overwatch-console-confirm-fire = Confirm Fire Mission?
 rmc-overwatch-console-disabled-select-squad = OVERWATCH DISABLED - SELECT SQUAD
@@ -56,12 +56,16 @@ rmc-overwatch-console-hide-dead = Hide dead
 rmc-overwatch-console-longitude-short = LONG.
 rmc-overwatch-console-latitude-short = LAT.
 rmc-overwatch-console-comment = COMMENT
-rmc-overwatch-console-save-comment = Save Comment
+rmc-overwatch-console-comment-placeholder = Optional comment
+rmc-overwatch-console-comment-autosave = Saves when you press Enter or leave the field.
+rmc-overwatch-console-load = Load
+rmc-overwatch-console-load-coordinates = Load these coordinates
 rmc-overwatch-console-no-crate-loaded = [color=red][bold][ NO CRATE LOADED ][/bold][/color]
 rmc-overwatch-console-crate-loaded = [color=green][bold][ CRATE LOADED ][/bold][/color]
 rmc-overwatch-console-ready = [color=green][bold][ READY ][/bold][/color]
 rmc-overwatch-console-not-ready = [color=red][bold][ NOT READY ][/bold][/color]
 rmc-overwatch-console-cooldown = [color=#D3B400][bold][ COOLDOWN - { $seconds } SECONDS ][/bold][/color]
+rmc-overwatch-console-announcement-cooldown = Wait {$seconds} seconds before sending another announcement to this squad.
 rmc-overwatch-console-no-warhead-loaded = [color=red][bold]No warhead loaded[/bold][/color]
 
 # Transfer messages
@@ -81,8 +85,11 @@ rmc-overwatch-console-choose-marine-transfer = Choose marine to transfer
 # Console messages
 rmc-overwatch-console-pain-kicked-out = The pain kicked you out of the console!
 
+# Camera offset
+rmc-overwatch-console-offset-calibration = Camera Offset
+
 # Squad message announcements
-rmc-overwatch-console-announce-message = [color=#3C70FF][bold]Overwatch:[/bold] { $operatorName } transmits: [font size=16][bold]{ $message }[/bold][/font][/color]
+rmc-overwatch-console-announce-message = [color={$color}][bold]Overwatch:[/bold] {$operatorName} transmits: [font size=16][bold]{$message}[/bold][/font][/color]
 rmc-overwatch-console-squad-message-sent = [bold][color=#6685F5]'{ $squadName }' squad message sent: '{ $message }'.[/color][/bold]
 
 # Squad leader promotion messages

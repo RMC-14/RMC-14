@@ -29,7 +29,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      collection: RMCSSG45Shoot
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m20a.ogg
     shotsPerBurst: 3
   - type: RMCSelectiveFire
     baseFireModes:

@@ -120,6 +120,8 @@
     knockdownRequiresInvisibility: true
     unrootOnMelee: true
   - type: XenoTurnInvisible
+    opacity: 0.09804 # 25/255
+    darkFactor: 0.6
   - type: XenoCripplingStrike
     removeOnHit: true
     preventTackle: true
@@ -213,3 +215,5 @@
     ventCrawlIcon: vampire
   - type: RMCActionOrder
     id: RMCXenoLurkerVampire
+  - type: XenoFishing
+    failChance: 0.9 # Slashing at the water has mixed results

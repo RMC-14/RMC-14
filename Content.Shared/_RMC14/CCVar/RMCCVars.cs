@@ -1,4 +1,6 @@
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 
@@ -143,6 +145,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCEvolutionPointsAccumulateBeforeMinutes =
         CVarDef.Create("rmc.evolution_points_accumulate_before_minutes", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCXenoQueenRequirementGracePeriodMinutes =
+        CVarDef.Create("rmc.xeno_queen_requirement_grace_period_minutes", 2.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
@@ -300,6 +305,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCBurrowedLarvaEvolutionPointsPer =
         CVarDef.Create("rmc.burrowed_larva_evolution_points_per", 250, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<float> RMCPlaytimeLarvaRankScaleFactor =
+        CVarDef.Create("rmc.playtime_larva_rank_scale_factor", 3.0f, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCPlaytimeBronzeMedalTimeHours =
         CVarDef.Create("rmc.playtime_bronze_medal_time_hours", 10, CVar.REPLICATED | CVar.SERVER);
 
@@ -455,14 +463,23 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCParasiteSpawnInitialDelayMinutes =
         CVarDef.Create("rmc.parasite_spawn_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCParasiteSpawnMinimum =
+        CVarDef.Create("rmc.parasite_spawn_minimum", 2, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCParasiteSpawnScale =
+        CVarDef.Create("rmc.parasite_spawn_scale", 4, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCXenoSpawnInitialMuteDurationSeconds =
-        CVarDef.Create("rmc.xeno_spawn_initial_mute_duration_seconds", 180f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.xeno_spawn_initial_mute_duration_seconds", 60f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCXenoEarlyEvoPointBoostBeforeMinutes =
         CVarDef.Create("rmc.evolution_early_evo_point_boost_minutes", 15, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCDamageYourself =
         CVarDef.Create("rmc.damage_yourself", false, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCAkimboMode =
+        CVarDef.Create("rmc.akimbo_mode", (int) GunAkimboMode.FireBoth, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
     public static readonly CVarDef<float> RMCOverwatchMaxProcessTimeMilliseconds =
         CVarDef.Create("rmc.overwatch_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
@@ -482,6 +499,15 @@ public sealed partial class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> RMCUseAlternateSprites =
         CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCAnnouncementMaxVisible =
+        CVarDef.Create("rmc.announcement_max_visible", 2, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<string> RMCAnnouncementOverrides =
+        CVarDef.Create("rmc.announcement_overrides", string.Empty, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<float> RMCAnnouncementPortraitGrace =
+        CVarDef.Create("rmc.announcement_portrait_grace", 60f, CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSunsetDuration =
         CVarDef.Create("rmc.lighting_sunset_duration", 280, CVar.REPLICATED | CVar.SERVER);
@@ -509,6 +535,12 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCDistressXenosMinimum =
         CVarDef.Create("rmc.distress_xenos_minimum", 4, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDistressDisableAutoEnd =
+        CVarDef.Create("rmc.distress_disable_auto_end", false, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> RMCLobbyAutoReady =
+        CVarDef.Create("rmc.lobby_auto_ready", false, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> VolumeGainCassettes =
         CVarDef.Create("rmc.volume_gain_cassettes", 0.33f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
@@ -633,7 +665,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLoadoutLowestRankSelectable =
         CVarDef.Create("rmc.loadout_lowest_rank_selectable", false, CVar.REPLICATED | CVar.SERVER);
-        
+
     public static readonly CVarDef<int> RMCLightningMaxAmountLightNearbyCount =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_count", 6, CVar.CLIENT | CVar.ARCHIVE);
 
@@ -667,12 +699,32 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCGMRequestSoundMuted =
         CVarDef.Create("rmc.gm_request_sound_muted", false,  CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
-    public static readonly CVarDef<float> RMCGhostBodyAlpha =
-        CVarDef.Create("rmc.ghost_body_alpha", 0x88 / 255f, CVar.REPLICATED | CVar.SERVER);
+    /// <summary>
+    ///     if players can join as a fax responder from the lobby
+    /// </summary>
+    public static readonly CVarDef<bool> RMCFaxRespondersEnabled =
+        CVarDef.Create("rmc.fax_responders_enabled", true, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCGhostClothingAlphaBoost =
-        CVarDef.Create("rmc.ghost_clothing_alpha_boost", 0.4f, CVar.REPLICATED | CVar.SERVER);
-        
+    public static readonly CVarDef<float> RMCGhostBodyAlpha =
+        CVarDef.Create("rmc.ghost_body_alpha", 0.35f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCGhostObserverAlpha =
+        CVarDef.Create("rmc.ghost_observer_alpha", 0x88 / 255f, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> BurrowedLarvaHiveCoreInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_hive_core_invincibility_time_seconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> BurrowedLarvaQueenInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_queen_invincibility_time_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> BurrowedLarvaFallbackInvincibilityTimeSeconds =
+        CVarDef.Create("rmc.burrowed_larva_fallback_invincibility_time_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
+    /// <summary>
+    /// How many entities to damage/delete per tick after nukemap/scuttle.
+    /// </summary>
+    public static readonly CVarDef<int> RMCNukeChunkSize =
+        CVarDef.Create("rmc.nukemap_chunk_size", 1024, CVar.SERVER | CVar.SERVERONLY);
 }

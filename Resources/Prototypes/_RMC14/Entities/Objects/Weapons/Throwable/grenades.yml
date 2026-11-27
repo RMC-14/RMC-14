@@ -26,6 +26,13 @@
     thresholds: []
   - type: ChangeItemSizeOnTimerTrigger
   - type: CancelUseWithCloak
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-grenade
+    whitelist:
+      components:
+      - Xeno
+  - type: RMCThrowCooldown
+    duration: 0.5
 
 - type: entity
   abstract: true
@@ -85,9 +92,9 @@
     sprite: _RMC14/Objects/Weapons/Grenades/m40hedp.rsi
   - type: ExplodeOnTrigger
   - type: Explosive
-    maxIntensity: 20 # max 100 brute, 100 burn
-    intensitySlope: 6
-    totalIntensity: 200
+    maxIntensity: 10
+    intensitySlope: 4.99
+    totalIntensity: 148
     canCreateVacuum: false
   - type: Ammo
   - type: CMExplosionEffect
@@ -127,6 +134,11 @@
     - RMCGrenadeM40
     - RMCGrenadeRiot
   - type: Ammo
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-smoke-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: Smoke
@@ -226,9 +238,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
   - type: Explosive
-    maxIntensity: 8 # max 40 brute 40 burn
-    intensitySlope: 4
-    totalIntensity: 110
+    maxIntensity: 4
+    intensitySlope: 21.1
+    totalIntensity: 101
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
@@ -257,9 +269,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m15frag.rsi
   - type: Explosive
-    maxIntensity: 20
-    intensitySlope: 6
-    totalIntensity: 240
+    maxIntensity: 97
+    intensitySlope: 2.1
+    totalIntensity: 466
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
@@ -286,9 +298,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m12blast.rsi
   - type: Explosive
-    maxIntensity: 35 # max 175 brute, 175 burn
-    intensitySlope: 5
-    totalIntensity: 280
+    maxIntensity: 20
+    intensitySlope: 6.07
+    totalIntensity: 605
   - type: Tag
     tags:
     - Grenade
@@ -311,6 +323,11 @@
     - RMCGrenadeTraining
     - RMCGrenadeM40
   - type: Ammo
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-training-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent:
@@ -329,6 +346,11 @@
     spawn: RMCTileFireGreen
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-incendiary-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent:
@@ -352,6 +374,11 @@
     proto: RMCSmokePhosphorusWeak
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-wp-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCGrenadeWhitePhosphorus
@@ -448,9 +475,9 @@
     delay: 0
   - type: ExplodeOnTrigger
   - type: Explosive
-    maxIntensity: 16
-    intensitySlope: 6
-    totalIntensity: 160
+    maxIntensity: 10
+    intensitySlope: 2.9
+    totalIntensity: 305
     canCreateVacuum: false
   - type: Ammo
   - type: CMExplosionEffect

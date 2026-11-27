@@ -226,3 +226,22 @@ rmc-xeno-bloodqueen-description = You lose:
   - Massacre: Guts multiple dead bodies in an area. Gives a burrowed larva for each body gibbed.
   - Blood Drain: Drain a pulled, downed, living target of blood, doing damage and giving your hive evolution points.
 rmc-xeno-bloodqueen-popup = This is no time to sit idle; The hive hungers for blood.
+
+rmc-xeno-christmasqueen-name = Christmas
+rmc-xeno-christmasqueen-description = Become a beacon of festive cheer and grant gifts of children to all the talls who have been good this year.
+rmc-xeno-christmasqueen-popup = My star upon the tree, lay your gifts, for there is hugs to spread in the morning.
+
+rmc-xeno-dissolver-name = Dissolver
+rmc-xeno-dissolver-description = You lose:
+    - Some health.
+    - Some slash damage.
+    - Your corrosive tail stab, spray acid, and charge acid abilities.
+    You gain:
+    - Lots of armor.
+    - More plasma regen.
+    - 3 new spit abilities that share a cooldown and can be re-aimed during their windups
+        - Corrosive spit pierces through enemies and covers them with acid. Can even go over your own allies and hit lying down targets.
+        - Acid Blob splits into multiple projectiles once reaching its destination, and upgrades your weak acid effect on targets, stunning them.
+        - Enzymatic Breath shoots out 5 spit in a thin cone that slow enemies, and root slowed enemies.
+    - You can store acid, which reduces your armor but also your ability cooldowns. Some abilities gain additional effects with higher stored acid.
+rmc-xeno-dissolver-popup = Your acid burns as much as my fury, let your acid blot out the sun, let them choke on their own misery.

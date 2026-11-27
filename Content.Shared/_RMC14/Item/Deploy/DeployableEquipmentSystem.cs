@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Placement;
@@ -15,6 +16,7 @@ namespace Content.Shared._RMC14.Item.Deploy;
 
 public sealed partial class DeployableEquipmentSystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly RMCPlacementSystem _placement = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -141,6 +143,12 @@ public sealed partial class DeployableEquipmentSystem : EntitySystem
 
         var direction = rotation.GetCardinalDir();
         coordinates = coordinates.Offset(direction.ToVec() * deployable.Comp.DeployDistance);
+        if (_area.TryGetArea(coordinates, out var area, out _) && !area.Value.Comp.Construction)
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-no-construction-area"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
         if (!_rmcMap.CanBuildOn(coordinates))
         {
             var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", deployable));
@@ -163,7 +171,6 @@ public sealed partial class DeployableEquipmentSystem : EntitySystem
 
         return true;
     }
-
 }
 
 [Serializable, NetSerializable]

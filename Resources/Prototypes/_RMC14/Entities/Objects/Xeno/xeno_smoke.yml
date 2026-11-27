@@ -184,6 +184,7 @@
   - type: DeleteOnExplosion
   - type: EdgeSpreader
     id: RMCSmokeKingDoom
+    spreadDelay: 0.1
   - type: ActiveEdgeSpreader
   - type: EvenSmoke
     range: 7

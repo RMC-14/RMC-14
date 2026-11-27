@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile;
 
@@ -14,4 +14,7 @@ public sealed partial class XenoProjectileComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool StopOnCollide;
+
+    [DataField, AutoNetworkedField]
+    public bool CancelSameHiveCollide = true;
 }

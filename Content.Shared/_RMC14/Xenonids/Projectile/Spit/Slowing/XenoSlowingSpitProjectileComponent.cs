@@ -25,4 +25,7 @@ public sealed partial class XenoSlowingSpitProjectileComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ResistLevel = 5;
+
+    [DataField, AutoNetworkedField]
+    public bool RootIfAlreadySlowed = false;
 }
