@@ -221,7 +221,8 @@ public abstract partial class SharedXenoParasiteSystem
         if (HasComp<TrapParasiteComponent>(para))
             RemCompDeferred<TrapParasiteComponent>(para);
 
-        para.Comp.NextActiveTime = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(para.Comp.MinIdleTime, para.Comp.MaxIdleTime + 1));
+        para.Comp.NextActiveTime = _timing.CurTime +
+            TimeSpan.FromSeconds((para.Comp.MinIdleTime == para.Comp.MaxIdleTime ? para.Comp.MinIdleTime : _random.NextFloat(para.Comp.MinIdleTime, para.Comp.MaxIdleTime + 0.01f)));
 
         Dirty(para);
     }

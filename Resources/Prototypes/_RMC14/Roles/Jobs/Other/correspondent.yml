@@ -88,7 +88,6 @@
     shoes: RMCShoesLaceup
     id: CMIDCardCorrespondent
     ears: CMHeadsetReporter
-    back: CMSatchel
     #    belt: CMCamera TODO RMC14
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCCorrespondentMicrophone
@@ -102,7 +101,6 @@
     id: CMDogtagCombatCorrespondent
     ears: CMHeadsetReporter
     belt: RMCM1984BeltFilled
-    back: CMSatchelMarine
     pocket1: RMCPouchGeneralMedium
     pocket2: RMCPouchGeneralMedium
 

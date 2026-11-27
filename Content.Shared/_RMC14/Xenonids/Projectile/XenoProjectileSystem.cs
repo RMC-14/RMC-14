@@ -353,7 +353,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (ent.Comp.DeleteOnFriendlyXeno || ent.Comp.StopOnFriendlyXeno)
             return;
 
-        if (_hive.FromSameHive(ent.Owner, args.OtherEntity) &&
+        if (ent.Comp.CancelSameHiveCollide && _hive.FromSameHive(ent.Owner, args.OtherEntity) &&
             (HasComp<XenoComponent>(args.OtherEntity) || HasComp<HiveCoreComponent>(args.OtherEntity)) &&
             !HasComp<XenoConstructComponent>(args.OtherEntity))
             args.Cancelled = true;
@@ -472,7 +472,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno, plasma))
             return false;
 
-        _audio.PlayPredicted(sound, xeno, xeno);
+        _audio.PlayPredicted(sound, xeno, predicted ? xeno : null);
         if (_net.IsClient && !_gunPrediction.GunPrediction || !_timing.IsFirstTimePredicted)
             return true;
 
