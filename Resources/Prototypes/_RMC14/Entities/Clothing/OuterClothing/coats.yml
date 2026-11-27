@@ -1169,7 +1169,7 @@
   parent: RMCBaseJacket
   id: RMCCoatSnowSynth
   name: snow suit
-  suffix: Synthetic, No armor
+  suffix: Synthetic
   description: A standard snow suit. It can protect the wearer from extreme cold.
   components:
   - type: Sprite
