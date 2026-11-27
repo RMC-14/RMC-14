@@ -203,7 +203,7 @@
 - type: entity
   parent: RMCHeadRoyalHelmet
   id: RMCHeadRoyalFlightHelmet
-  name: PH-4 'Spitfire' flight helmet # TODO: Standardise L-desig
+  name: PH-4 'Spitfire' flight helmet
   description: Standard flight helmet used across the Three Suns Empire’s aerospace forces, from fighter pilots to atmospheric crews. This PH-4 variant is tailored for dropship operations in space, featuring reinforced plating, HUD optics, and encrypted comms. Essential for high-risk insertions, landings, and exfil missions. Nicknamed “Spitfire” for its reliability under fire. # TODO: redesc
   suffix: RCM Para
   components:
