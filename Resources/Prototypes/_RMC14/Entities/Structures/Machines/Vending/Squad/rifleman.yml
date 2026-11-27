@@ -12,6 +12,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    pointsType: RFNVenderPoints
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
