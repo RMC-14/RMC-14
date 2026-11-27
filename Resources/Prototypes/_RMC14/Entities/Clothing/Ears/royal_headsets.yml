@@ -130,7 +130,7 @@
 - type: entity
   parent: RMCEncryptionKeyRoyalMarinePVE
   id: RMCEncryptionKeyRoyalMarineCommandPVE
-  name: royal crownmarine command radio encryption key
+  name: royal crown marine command radio encryption key
   suffix: PVE
   components:
   - type: EncryptionKey
