@@ -4,6 +4,9 @@ reagent-desc-rmc-cherry-jelly = Sweet jelly made from the cherry fruit.
 reagent-name-rmc-peanut-butter = peanut butter
 reagent-desc-rmc-peanut-butter = Creamy butter made from peanuts.
 
+reagent-name-rmc-chocolate-syrup = chocolate syrup
+reagent-desc-rmc-chocolate-syrup = Nectar of the gods.
+
 reagent-name-rmc-batter = Batter
 reagent-desc-rmc-batter = A mixture of flour and other elements, such as salt, egg, and milk.
 

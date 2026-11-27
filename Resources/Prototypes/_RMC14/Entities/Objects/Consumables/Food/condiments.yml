@@ -63,6 +63,40 @@
   - type: SolutionTransfer
     maxTransferAmount: 60
 
+#Chocolate Syrup
+- type: reagent
+  id: RMCChocolateSyrup
+  name: reagent-name-rmc-chocolate-syrup
+  group: Foods
+  desc: reagent-desc-rmc-chocolate-syrup
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: chocolate
+  color: "#562416"
+  recognizable: true
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        level: 2
+        nutFactor: 5
+        nutMetabolism: 0.1
+
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentChocolateSyrup
+  name: chocolate syrup
+  description: A bottle of Weyland-Yutani brand chocolate syrup for adding chocolate flavor to space treats, or for sipping directly from the nozzle like a little kid.
+  components:
+  - type: Sprite
+    state: chocolate_syrup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: RMCChocolateSyrup
+          Quantity: 60
+
 # Enzyme
 - type: entity
   parent: RMCCondiment
@@ -86,6 +120,8 @@
   name: sugar
   description: Tasty space sugar!
   components:
+  - type: Sprite
+    state: sugar
   - type: SolutionContainerManager
     solutions:
       food:
@@ -125,6 +161,22 @@
       food:
         reagents:
         - ReagentId: RMCKetchup
+          Quantity: 50
+
+# Rice
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentRice
+  name: rice
+  description: welcome to the rice fields!
+  components:
+  - type: Sprite
+    state: rice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Rice
           Quantity: 50
 
 # Soy Sauce
@@ -211,15 +263,45 @@
         - ReagentId: TableSalt
           Quantity: 20
 
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentSalt
+  name: salt shaker
+  description: Salt. From space oceans, presumably.
+  components:
+  - type: Sprite
+    state: saltshaker
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: TableSalt
+          Quantity: 50
+
 # Pepper
 - type: entity
   parent: RMCCondimentSmall
   id: RMCCondimentSmallPepper
-  name: pepper mill
+  name: pepper shaker
   description: Often used to flavor food or make people sneeze.
   components:
   - type: Sprite
     state: peppermillsmall
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Blackpepper
+          Quantity: 20
+
+- type: entity
+  parent: RMCCondimentSmall
+  id: RMCCondimentPepper
+  name: pepper mill
+  description: Often used to flavor food or make people sneeze.
+  components:
+  - type: Sprite
+    state: peppermill
   - type: SolutionContainerManager
     solutions:
       food:
