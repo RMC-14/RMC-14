@@ -23,6 +23,87 @@
           Quantity: 6
 
 - type: entity
+  name: cookie
+  parent: FoodBakedBase
+  id: RMCFoodBakedCookie
+  description: COOKIE!!!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: COOKIE!!!
+
+- type: entity
+  name: plump helmet biscuit
+  parent: FoodBakedBase
+  id: RMCFoodBakedPHelmBiscuit
+  description: This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced dwarven wheat flour.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: phelmbiscuit
+
+- type: entity
+  name: muffin
+  parent: FoodInjectableBase
+  id: RMCFoodBakedMuffin
+  description: A little muffin. Spongy, moist, and delicious.
+  components:
+  - type: Food
+    trash:
+    - FoodPlateMuffinTin
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: muffin
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: Item
+    size: Tiny
+
+- type: entity
+  name: golden apple streusel tart
+  parent: FoodPieBase
+  id: RMCFoodTartGapple
+  description: A tasty dessert that won't make it through a metal detector.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - apple
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: gappletart
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+
+- type: entity
+  name: pancakes
+  parent: CMFoodBase
+  id: RMCFoodPancakes
+  description: Golden brown creamy pancakes fresh from the griddle. Drizzled with maple syrup and topped with a slice of butter.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: pancakes
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+
+- type: entity
   parent: FoodDonkpocket
   id: RMCFoodDonkpocket
   components:
@@ -36,27 +117,7 @@
 
 - type: entity
   name: apple pie
-  parent: CMFoodBase
-  id: RMCFoodPieApple
-  description: A pie containing sweet, sweet love... or apple.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
-    state: applepie
-  - type: FlavorProfile
-    flavors:
-    - sweet
-    - apple
-  - type: SliceableFood
-    slice: FoodPieAppleSlice
-  - type: Tag
-    tags:
-    - Fruit
-    - Pie
-
-- type: entity
-  name: apple pie
-  parent: CMFoodBase
+  parent: FoodPieBase
   id: RMCFoodPieApple
   description: A pie containing sweet, sweet love... or apple.
   components:
@@ -76,7 +137,7 @@
 
 - type: entity
   name: cherry pie
-  parent: CMFoodBase
+  parent: FoodPieBase
   id: RMCFoodPieCherry
   description: Taste so good, make a grown man cry.
   components:
@@ -86,10 +147,168 @@
   - type: FlavorProfile
     flavors:
     - sweet
-    - apple
+    - cherry
   - type: SliceableFood
     slice: FoodPieAppleSlice
   - type: Tag
     tags:
     - Fruit
     - Pie
+
+- type: entity
+  name: meat pie
+  parent: FoodPieBase
+  id: RMCFoodPieMeat
+  description: An old barber recipe, very delicious!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: meatpie
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Meat
+    - Pie
+
+- type: entity
+  name: xeno-pie
+  parent: FoodPieBase
+  id: RMCFoodPieXeno
+  description: A delicious meatpie. Probably heretical.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: xenomeatpie
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - acid
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Meat
+    - Pie
+
+- type: entity
+  name: banana cream pie
+  parent: FoodPieBase
+  id: RMCFoodPieBananaCream
+  description: Just like back home, on clown planet! HONK!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - banana
+    - creamy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: pie
+  - type: CreamPie
+  - type: ThrowingAngle
+    angle: 180
+  - type: LandAtCursor
+  - type: ContainerContainer
+    containers:
+      payloadSlot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      payloadSlot:
+        whitelist:
+          components:
+          - OnUseTimerTrigger
+        insertSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        ejectSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        swap: false
+        disableEject: true
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+  - type: SliceableFood
+    slice: FoodPieBananaCreamSlice
+
+
+# Waffles
+- type: entity
+  name: waffles
+  parent: FoodBakedBase
+  id: RMCFoodWaffle
+  description: Mmm, waffles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: waffles
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  name: soy waffles
+  parent: RMCFoodWaffle
+  id: RMCFoodWaffleSoy
+  description: You feel healthier and - more feminine?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: soylent_yellow
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  name: soylent waffles
+  parent: RMCFoodWaffle
+  id: RMCFoodWaffleSoylent
+  description: Not made of people. Honest. # Definitely people
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: soylent_green
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  name: roffle waffles
+  parent: RMCFoodWaffle
+  id: RMCFoodWaffleRoffle
+  description: Waffles from Roffle. Co.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: rofflewaffles
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+
