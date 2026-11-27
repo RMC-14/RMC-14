@@ -1877,7 +1877,7 @@
   parent: RMCBeltHolsterPistolPara
   id: RMCBeltHolsterPistolParaCustom
   name: paramarine custom load-bearing rig
-  suffix: RCM Para, L54 Custom
+  suffix: RCM Para
   description: A modified RCM Paramarine belt featuring a black leather holster with gold inlay, a large utility pouch, and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
   components:
     - type: Sprite
