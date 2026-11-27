@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseHeaterMachine
+  id: RMCHotplate
+  name: hotplate
+  description: "The descendent of the microwaves, our newest invention in crayon heating technology: the hotplate!"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/hotplate.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    layers:
+    - state: icon
+    - state: on
+      map: ["enum.SolutionHeaterVisuals.IsOn"]
+      shader: unshaded
+  - type: SolutionHeater
+    heatPerSecond: 160
+  - type: ItemPlacer
+    whitelist:
+      components:
+      - FitsInDispenser
+  - type: PlaceableSurface
+    placeCentered: true
+    positionOffset: 0, 0.25
+  - type: Machine
+    board: HotplateMachineCircuitboard
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 20
+    channel: Equipment
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SolutionHeaterVisuals.IsOn:
+        enum.SolutionHeaterVisuals.IsOn:
+          True: { visible: true }
+          False: { visible: false }
