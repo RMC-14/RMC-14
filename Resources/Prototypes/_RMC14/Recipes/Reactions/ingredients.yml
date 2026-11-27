@@ -7,7 +7,7 @@
   reactants:
     RMCSulphuricAcid:
       amount: 1
-    RMCSoyMilk:
+    MilkSoy:
       amount: 2
   products:
     RMCSoysauce: 3
