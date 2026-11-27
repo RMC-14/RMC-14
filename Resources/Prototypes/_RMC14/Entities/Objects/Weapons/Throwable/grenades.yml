@@ -581,8 +581,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/type8wpdp.rsi
 
-- type: entity
-  parent: CMGrenadeFragOld
+- type: entity # different parenting because we don't want to inherit launchercompatible tag
+  parent: CMGrenadeBase
   id: CMGrenadeFragSPP
   name: Type 6 shrapnel grenade
   description: A fragmentation grenade found within the ranks of the SPP. Designed to explode into shrapnel and rupture the bodies of opponents. It explodes 3 seconds after the pin has been pulled.
@@ -592,12 +592,28 @@
   - type: Explosive
     maxIntensity: 20
     intensitySlope: 6
-    totalIntensity: 120
+    totalIntensity: 240
     deleteAfterExplosion: false
+    canCreateVacuum: false
   - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
     capacity: 56
+    directHit: false
   - type: OnUseTimerTrigger
     delay: 3
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Tag
+    tags:
+    - Grenade
+  - type: Ammo
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: ExplodeOnTrigger
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
 
 - type: Tag
   id: RMCGrenadeHEDP
