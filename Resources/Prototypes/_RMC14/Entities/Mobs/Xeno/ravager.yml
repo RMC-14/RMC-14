@@ -270,11 +270,6 @@
     - ActionXenoSpikeShield
     - ActionXenoSpikeShed
     - ActionXenoDevolve
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      650: Critical
-      750: Dead
   - type: CMArmor
     xenoArmor: 25
     explosionArmor: 100
