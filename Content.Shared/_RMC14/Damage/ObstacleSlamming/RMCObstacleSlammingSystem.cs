@@ -19,19 +19,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Damage.ObstacleSlamming;
 
-public sealed class RMCObstacleSlammingSystem : EntitySystem
+public sealed partial class RMCObstacleSlammingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
 
     private static readonly ProtoId<DamageTypePrototype> SlamDamageType = "Blunt";
     private readonly HashSet<EntityUid> _queuedImmuneEntities = new();

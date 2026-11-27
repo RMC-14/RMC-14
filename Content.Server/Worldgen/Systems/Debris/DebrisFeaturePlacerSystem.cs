@@ -15,14 +15,14 @@ namespace Content.Server.Worldgen.Systems.Debris;
 /// <summary>
 ///     This handles placing debris within the world evenly with rng, primarily for structures like asteroid fields.
 /// </summary>
-public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
+public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
 {
-    [Dependency] private readonly NoiseIndexSystem _noiseIndex = default!;
-    [Dependency] private readonly PoissonDiskSampler _sampler = default!;
-    [Dependency] private readonly TransformSystem _xformSys = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private NoiseIndexSystem _noiseIndex = default!;
+    [Dependency] private PoissonDiskSampler _sampler = default!;
+    [Dependency] private TransformSystem _xformSys = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -78,7 +78,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
     /// <summary>
     ///     Handles debris shutdown/detach.
     /// </summary>
-    private void OnDebrisShutdown(EntityUid uid, OwnedDebrisComponent component, ComponentShutdown args)
+    private void OnDebrisShutdown(EntityUid uid, OwnedDebrisComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<DebrisFeaturePlacerControllerComponent>(component.OwningController, out var placer))
             return;
@@ -214,7 +214,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
                 }
             }
 
-            var ent = Spawn(debrisFeatureEv.DebrisProto, coords);
+            var ent = SpawnAttachedTo(debrisFeatureEv.DebrisProto, coords);
             component.OwnedDebris.Add(point, ent);
 
             var owned = EnsureComp<OwnedDebrisComponent>(ent);
@@ -235,7 +235,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
     private bool HasCollisions(MapId mapId, Box2 point)
     {
         _mapGrids.Clear();
-        _mapManager.FindGridsIntersecting(mapId, point, ref _mapGrids);
+        _map.FindGridsIntersecting(mapId, point, ref _mapGrids);
         return _mapGrids.Count > 0;
     }
 

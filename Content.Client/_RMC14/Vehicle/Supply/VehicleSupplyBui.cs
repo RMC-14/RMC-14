@@ -105,7 +105,7 @@ public sealed class VehicleSupplyBui : BoundUserInterface, IRefreshableBui
 
         _availableVehicleIds.Clear();
         _availableCounts.Clear();
-        _window.AvailableRows.DisposeAllChildren();
+        _window.AvailableRows.RemoveAllChildren();
         _selectButtons.Clear();
         _copyToggleButtons.Clear();
         _copyContainers.Clear();

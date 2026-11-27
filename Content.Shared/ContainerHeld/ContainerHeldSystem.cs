@@ -6,11 +6,11 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.ContainerHeld;
 
-public sealed class ContainerHeldSystem : EntitySystem
+public sealed partial class ContainerHeldSystem : EntitySystem
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
 
     public override void Initialize()
     {

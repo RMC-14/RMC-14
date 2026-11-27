@@ -21,18 +21,18 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Recommendation;
 
-public sealed class SharedAwardRecommendationSystem : EntitySystem
+public sealed partial class SharedAwardRecommendationSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedMarineControlComputerSystem _control = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
-    [Dependency] private readonly SquadSystem _squads = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedMarineControlComputerSystem _control = default!;
+    [Dependency] private SharedRankSystem _rank = default!;
+    [Dependency] private SquadSystem _squads = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
     public int CharacterLimit { get; private set; }
     public int MinCharacterLimit { get; private set; }

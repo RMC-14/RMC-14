@@ -25,20 +25,20 @@ using Content.Shared._RMC14.Weapons.Melee;
 
 namespace Content.Shared._RMC14.Doors;
 
-public sealed class CMDoorSystem : EntitySystem
+public sealed partial class CMDoorSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _announce = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoorSystem _doors = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly WeldableSystem _weldable = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private SharedMarineAnnounceSystem _announce = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoorSystem _doors = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private WeldableSystem _weldable = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
@@ -315,7 +315,7 @@ public sealed class CMDoorSystem : EntitySystem
 
         var adjacent = transform.Coordinates.Offset(transform.LocalRotation.GetCardinalDir());
         var position = _map.LocalToTile(transform.GridUid.Value, grid, adjacent);
-        return _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, position);
+        return _map.GetAnchoredEntities(transform.GridUid.Value, grid, position);
     }
 
     // RMC TODO: Once all legacy CMDoubleDoors are removed this can be removed

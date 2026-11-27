@@ -8,10 +8,10 @@ namespace Content.Server._RMC14.Rules;
 /// <summary>
 /// Contains Misc Functions for round end text appending, so it can be used across gamerules.
 /// </summary>
-public sealed class RMCGameRuleExtrasSystem : EntitySystem
+public sealed partial class RMCGameRuleExtrasSystem : EntitySystem
 {
-    [Dependency] private readonly DogtagsSystem _dogtags = default!;
-    [Dependency] private readonly CommendationSystem _commendation = default!;
+    [Dependency] private DogtagsSystem _dogtags = default!;
+    [Dependency] private CommendationSystem _commendation = default!;
 
     /// <summary>
     /// Shows names from memorials in the round end text. Returns true if there was any fallen listed.

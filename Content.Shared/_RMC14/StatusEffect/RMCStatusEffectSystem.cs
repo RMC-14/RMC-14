@@ -6,9 +6,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.StatusEffect;
 
-public sealed class RMCStatusEffectSystem : EntitySystem
+public sealed partial class RMCStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private SkillsSystem _skills = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> EnduranceSkill = "RMCSkillEndurance";
     private static readonly ProtoId<StatusEffectPrototype> Knockdown = "KnockedDown";

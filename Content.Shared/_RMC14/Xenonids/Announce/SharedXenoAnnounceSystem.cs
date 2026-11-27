@@ -11,12 +11,12 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Announce;
 
-public abstract class SharedXenoAnnounceSystem : EntitySystem
+public abstract partial class SharedXenoAnnounceSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _areas = default!;
-    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private AreaSystem _areas = default!;
+    [Dependency] private XenoEvolutionSystem _xenoEvolution = default!;
 
-    [Dependency] protected readonly SharedXenoHiveSystem Hive = default!;
+    [Dependency] protected SharedXenoHiveSystem Hive = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);

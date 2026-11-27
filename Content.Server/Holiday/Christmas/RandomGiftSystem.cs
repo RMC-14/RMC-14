@@ -16,15 +16,15 @@ namespace Content.Server.Holiday.Christmas;
 /// <summary>
 /// This handles granting players their gift.
 /// </summary>
-public sealed class RandomGiftSystem : EntitySystem
+public sealed partial class RandomGiftSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly List<string> _possibleGiftsSafe = new();
     private readonly List<string> _possibleGiftsUnsafe = new();
@@ -57,10 +57,10 @@ public sealed class RandomGiftSystem : EntitySystem
             return;
 
         var coords = Transform(args.User).Coordinates;
-        var handsEnt = Spawn(component.SelectedEntity, coords);
+        var handsEnt = SpawnAttachedTo(component.SelectedEntity, coords);
         _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User)} used {ToPrettyString(uid)} which spawned {ToPrettyString(handsEnt)}");
         if (component.Wrapper is not null)
-            Spawn(component.Wrapper, coords);
+            SpawnAttachedTo(component.Wrapper, coords);
 
         _audio.PlayPvs(component.Sound, args.User);
 

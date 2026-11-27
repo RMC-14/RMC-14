@@ -6,11 +6,11 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.Fluids;
 
-public sealed class SpraySafetySystem : EntitySystem
+public sealed partial class SpraySafetySystem : EntitySystem
 {
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

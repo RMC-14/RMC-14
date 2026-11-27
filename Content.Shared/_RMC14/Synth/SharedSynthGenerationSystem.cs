@@ -15,15 +15,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Synth;
 
-public sealed class SharedSynthGenerationSystem : EntitySystem
+public sealed partial class SharedSynthGenerationSystem : EntitySystem
 {
 
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -112,7 +112,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
             foreach (var id in ent.Comp.AvailableGenerations)
             {
                 if (_prototype.TryIndex(id, out var proto) &&
-                    proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                    proto.TryComp(out SynthGenerationComponent? gen, _compFactory))
                     synthTypes.Add((proto, gen.Priority));
             }
         }
@@ -120,7 +120,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
         {
             foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
             {
-                if (proto.TryGetComponent(out SynthGenerationComponent? gen, _compFactory))
+                if (proto.TryComp(out SynthGenerationComponent? gen, _compFactory))
                     synthTypes.Add((proto, gen.Priority));
             }
         }
@@ -129,7 +129,7 @@ public sealed class SharedSynthGenerationSystem : EntitySystem
 
         foreach (var (proto, _) in synthTypes)
         {
-            var desc = proto.TryGetComponent(out SynthGenerationComponent? genComp, _compFactory)
+            var desc = proto.TryComp(out SynthGenerationComponent? genComp, _compFactory)
                 ? genComp.Description
                 : string.Empty;
             options.Add(new DialogOption(proto.Name, new GenerationSelectedActionEvent(proto.ID), description: desc));

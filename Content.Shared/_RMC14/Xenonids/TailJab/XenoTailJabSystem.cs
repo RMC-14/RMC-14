@@ -17,21 +17,21 @@ using Content.Shared._RMC14.Xenonids.ScissorCut;
 
 namespace Content.Shared._RMC14.Xenonids.TailJab;
 
-public sealed class XenoTailJabSystem : EntitySystem
+public sealed partial class XenoTailJabSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _flash = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
-    [Dependency] private readonly RMCSlowSystem _rmcSlow = default!;
-    [Dependency] private readonly XenoRotateSystem _rotate = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private SharedColorFlashEffectSystem _flash = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private RMCSlowSystem _rmcSlow = default!;
+    [Dependency] private XenoRotateSystem _rotate = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
 
     private const string WindowBonusDamageType = "Structural";
     private const int WindowDamageBonus = 100;

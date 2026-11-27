@@ -36,7 +36,7 @@ public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInte
         if (State is not RMCTelephoneBuiState state)
             return;
 
-        _window.Tabs.DisposeAllChildren();
+        _window.Tabs.RemoveAllChildren();
         var tabs = new Dictionary<string, BoxContainer>();
         foreach (var phone in state.Phones)
         {
@@ -118,7 +118,7 @@ public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInte
             TabContainer.SetTabTitle(category, categoryName);
         }
 
-        _window.Buttons.DisposeAllChildren();
+        _window.Buttons.RemoveAllChildren();
         if (state.Dnd)
         {
             var disableDndButton = new Button

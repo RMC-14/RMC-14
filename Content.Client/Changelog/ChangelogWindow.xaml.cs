@@ -15,8 +15,8 @@ namespace Content.Client.Changelog
     [GenerateTypedNameReferences]
     public sealed partial class ChangelogWindow : FancyWindow
     {
-        [Dependency] private readonly IClientAdminManager _adminManager = default!;
-        [Dependency] private readonly ChangelogManager _changelog = default!;
+        [Dependency] private IClientAdminManager _adminManager = default!;
+        [Dependency] private ChangelogManager _changelog = default!;
 
         public ChangelogWindow()
         {
@@ -55,7 +55,7 @@ namespace Content.Client.Changelog
             // Changelog is not kept in memory so load it again.
             var changelogs = await _changelog.LoadChangelog();
 
-            Tabs.DisposeAllChildren();
+            Tabs.RemoveAllChildren();
 
             var i = 0;
             foreach (var changelog in changelogs)
@@ -112,9 +112,9 @@ namespace Content.Client.Changelog
     }
 
     [UsedImplicitly, AnyCommand]
-    public sealed class ChangelogCommand : LocalizedCommands
+    public sealed partial class ChangelogCommand : LocalizedCommands
     {
-        [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+        [Dependency] private IUserInterfaceManager _uiManager = default!;
 
         public override string Command => "changelog";
 

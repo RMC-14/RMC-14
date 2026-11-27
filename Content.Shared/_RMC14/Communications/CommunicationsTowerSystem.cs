@@ -22,22 +22,22 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Communications;
 
-public sealed class CommunicationsTowerSystem : EntitySystem
+public sealed partial class CommunicationsTowerSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly HiveBoonSystem _hiveBoon = default!;
-    [Dependency] private readonly IntelSystem _intel = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private HiveBoonSystem _hiveBoon = default!;
+    [Dependency] private IntelSystem _intel = default!;
+    [Dependency] private GunIFFSystem _gunIFF = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<CommunicationsTowerSpawnerComponent>>> _spawners = new();
 
@@ -168,7 +168,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
             foreach (var faction in factions)
             {
                 if (_prototypes.TryIndex(faction, out var factionProto) &&
-                    factionProto.TryGetComponent(out FactionFrequenciesComponent? frequencies, _compFactory))
+                    factionProto.TryComp(out FactionFrequenciesComponent? frequencies, _compFactory))
                 {
                     ent.Comp.Channels.UnionWith(frequencies.Channels);
                 }
@@ -280,7 +280,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
                 continue;
 
             var spawner = _random.Pick(spawners);
-            Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
+            SpawnAttachedTo(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
         }
     }
 }

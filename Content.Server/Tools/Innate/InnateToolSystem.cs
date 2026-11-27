@@ -17,11 +17,11 @@ namespace Content.Server.Tools.Innate;
 ///     Spawns a list unremovable tools in hands if possible. Used for drones,
 ///     borgs, or maybe even stuff like changeling armblades!
 /// </summary>
-public sealed class InnateToolSystem : EntitySystem
+public sealed partial class InnateToolSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private SharedHandsSystem _sharedHandsSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     private static readonly ProtoId<TagPrototype> InnateDontDeleteTag = "InnateDontDelete";
 
@@ -51,7 +51,7 @@ public sealed class InnateToolSystem : EntitySystem
 
         var toSpawn = component.ToSpawn.First();
 
-        var item = Spawn(toSpawn, spawnCoord);
+        var item = SpawnAttachedTo(toSpawn, spawnCoord);
         AddComp<UnremoveableComponent>(item);
         if (!_sharedHandsSystem.TryPickupAnyHand(uid, item, checkActionBlocker: false))
         {
@@ -62,7 +62,7 @@ public sealed class InnateToolSystem : EntitySystem
         component.ToolUids.Add(item);
     }
 
-    private void OnShutdown(EntityUid uid, InnateToolComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, InnateToolComponent component, ref ComponentShutdown args)
     {
         foreach (var tool in component.ToolUids)
         {

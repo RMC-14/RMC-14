@@ -661,9 +661,9 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
                 return turret.PixelOffset;
 
             var baseOffset = turret.PixelOffset;
-            var normalized = facing.Theta % MathHelper.TwoPi;
+            var normalized = facing.Theta % MathF.Tau;
             if (normalized < 0)
-                normalized += MathHelper.TwoPi;
+                normalized += MathF.Tau;
 
             var dir = GetDirectionalDir((float)normalized);
             return baseOffset + GetDirectionalOffset(turret, dir);

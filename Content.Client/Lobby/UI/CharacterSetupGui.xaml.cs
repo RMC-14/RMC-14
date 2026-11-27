@@ -22,11 +22,11 @@ namespace Content.Client.Lobby.UI
     [GenerateTypedNameReferences]
     public sealed partial class CharacterSetupGui : Control
     {
-        [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
-        [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly IPrototypeManager _protomanager = default!;
-        [Dependency] private readonly IResourceCache _resourceCache = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IClientPreferencesManager _preferencesManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
+        [Dependency] private IPrototypeManager _protomanager = default!;
+        [Dependency] private IResourceCache _resourceCache = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
         private readonly Button _createNewCharacterButton;
 
@@ -79,7 +79,7 @@ namespace Content.Client.Lobby.UI
         public void ReloadCharacterPickers()
         {
             _createNewCharacterButton.Orphan();
-            Characters.DisposeAllChildren();
+            Characters.RemoveAllChildren();
 
             var numberOfFullSlots = 0;
             var characterButtonsGroup = new ButtonGroup();

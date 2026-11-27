@@ -7,11 +7,11 @@ using static Robust.Client.Graphics.RSI;
 
 namespace Content.Client._RMC14.Entrenching;
 
-public sealed class RMCFoldingBarricadeLinkingVisualizerSystem : EntitySystem
+public sealed partial class RMCFoldingBarricadeLinkingVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly (RMCFoldingBarricadeLinkingVisuals Visual,
         RMCFoldingBarricadeLinkingVisualLayers Layer,

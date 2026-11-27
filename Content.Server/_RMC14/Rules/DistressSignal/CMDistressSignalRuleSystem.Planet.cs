@@ -73,7 +73,7 @@ public sealed partial class CMDistressSignalRuleSystem
                     area.LandingZone)
                 {
                     var coordinates = _mapSystem.ToCoordinates(rule.Comp.XenoMap.Value, indices);
-                    Spawn(gas, coordinates);
+                    SpawnAttachedTo(gas, coordinates);
                 }
             }
         }

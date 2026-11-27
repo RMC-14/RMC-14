@@ -9,15 +9,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Paratoxin.DrainingBite;
 
-public sealed class XenoDrainingBiteSystem : EntitySystem
+public sealed partial class XenoDrainingBiteSystem : EntitySystem
 {
-    [Dependency] private readonly ParatoxinSystem _paratoxin = default!;
-    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcblood = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private ParatoxinSystem _paratoxin = default!;
+    [Dependency] private SharedRMCBloodstreamSystem _rmcblood = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

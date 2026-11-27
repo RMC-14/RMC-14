@@ -7,9 +7,9 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Admin;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
-public sealed class GetUsernameCommand : ToolshedCommand
+public sealed partial class GetUsernameCommand : ToolshedCommand
 {
-    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private IPlayerManager _players = default!;
 
     [CommandImplementation]
     public string? GetUsername([PipedArgument] EntityUid entity)

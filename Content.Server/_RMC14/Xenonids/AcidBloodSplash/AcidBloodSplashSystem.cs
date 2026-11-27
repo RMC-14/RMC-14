@@ -22,21 +22,21 @@ using Content.Shared._RMC14.Stun;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
-public sealed class AcidBloodSplashSystem : EntitySystem
+public sealed partial class AcidBloodSplashSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCDecalSystem _rmcDecal = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCDecalSystem _rmcDecal = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoSystem _xeno = default!;
 
     private static readonly ProtoId<EmotePrototype> ScreamProto = "Scream";
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
@@ -62,11 +62,11 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     private void ActivateSplash(Entity<AcidBloodSplashComponent> ent, float splashRadius)
     {
         if (!_prototypes.TryIndex(ent.Comp.BloodDecalSpawnerPrototype, out var prototype) ||
-            !prototype.TryGetComponent(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
+            !prototype.TryComp(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
             _rmcDecal.GetDecalsInTile(ent, spawner.Decals) < spawner.MaxDecalsPerTile)
         {
             // create decal, probability inside prototype
-            Spawn(ent.Comp.BloodDecalSpawnerPrototype, ent.Owner.ToCoordinates());
+            SpawnAttachedTo(ent.Comp.BloodDecalSpawnerPrototype, ent.Owner.ToCoordinates());
         }
 
         var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.

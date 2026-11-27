@@ -8,12 +8,12 @@ using Robust.Client.State;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Sniper;
 
-public sealed class RMCAimedShotSystem : SharedRMCAimedShotSystem
+public sealed partial class RMCAimedShotSystem : SharedRMCAimedShotSystem
 {
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IStateManager _state = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IStateManager _state = default!;
 
     public override void Initialize()
     {

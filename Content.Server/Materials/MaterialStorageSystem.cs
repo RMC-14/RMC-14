@@ -18,14 +18,14 @@ namespace Content.Server.Materials;
 /// <summary>
 /// This handles <see cref="SharedMaterialStorageSystem"/>
 /// </summary>
-public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
+public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StackSystem _stackSystem = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StackSystem _stackSystem = default!;
 
     public override void Initialize()
     {
@@ -69,7 +69,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
 
         if (material.StackEntity != null)
         {
-            if (!_prototypeManager.Index<EntityPrototype>(material.StackEntity).TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
+            if (!_prototypeManager.Index<EntityPrototype>(material.StackEntity).TryComp<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
                 return;
 
             var volumePerSheet = composition.MaterialComposition.FirstOrDefault(kvp => kvp.Key == msg.Material).Value;
@@ -173,7 +173,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
             return new List<EntityUid>();
 
         var entProto = _prototypeManager.Index<EntityPrototype>(materialProto.StackEntity);
-        if (!entProto.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
+        if (!entProto.TryComp<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
             return new List<EntityUid>();
 
         var materialPerStack = composition.MaterialComposition[materialProto.ID];

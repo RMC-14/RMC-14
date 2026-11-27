@@ -45,7 +45,9 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.2,0.5,0.2,0.35"
+          # RMC14
+          bounds: "-0.2,0.35,0.2,0.5"
+          # RMC14
         density: 190
         mask:
         - None

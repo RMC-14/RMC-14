@@ -18,15 +18,15 @@ namespace Content.Server.MagicMirror;
 /// <summary>
 /// Allows humanoids to change their appearance mid-round.
 /// </summary>
-public sealed class MagicMirrorSystem : SharedMagicMirrorSystem
+public sealed partial class MagicMirrorSystem : SharedMagicMirrorSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly MarkingManager _markings = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DoAfterSystem _doAfterSystem = default!;
+    [Dependency] private MarkingManager _markings = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     private static readonly ProtoId<TagPrototype> HidesHairTag = "HidesHair";
 

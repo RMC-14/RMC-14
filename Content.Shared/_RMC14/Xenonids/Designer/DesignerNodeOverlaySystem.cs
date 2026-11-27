@@ -3,10 +3,10 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 // Overlays for design nodes to indicate their type. Visible to xenos only
-public sealed class DesignerNodeOverlaySystem : EntitySystem
+public sealed partial class DesignerNodeOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -32,7 +32,7 @@ public sealed class DesignerNodeOverlaySystem : EntitySystem
         };
 
         var coords = Transform(nodeUid).Coordinates;
-        var overlay = Spawn(overlayProto, coords);
+        var overlay = SpawnAttachedTo(overlayProto, coords);
         _transform.SetParent(overlay, nodeUid);
 
         overlayComp.Overlay = overlay;

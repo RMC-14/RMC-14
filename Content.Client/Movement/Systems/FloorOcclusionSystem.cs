@@ -1,3 +1,4 @@
+using Content.Client.Graphics;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Client.GameObjects;
@@ -6,11 +7,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Movement.Systems;
 
-public sealed class FloorOcclusionSystem : SharedFloorOcclusionSystem
+public sealed partial class FloorOcclusionSystem : SharedFloorOcclusionSystem
 {
     private static readonly ProtoId<ShaderPrototype> HorizontalCut = "HorizontalCut";
 
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private EntityQuery<SpriteComponent> _spriteQuery;
 
@@ -50,18 +52,24 @@ public sealed class FloorOcclusionSystem : SharedFloorOcclusionSystem
         if (!_spriteQuery.Resolve(sprite.Owner, ref sprite.Comp, false))
             return;
 
-        var shader = _proto.Index(HorizontalCut).Instance();
-
-        if (sprite.Comp.PostShader is not null && sprite.Comp.PostShader != shader)
+        // RMC14
+        // Component startup reapplies the shader after the sprite has initialized.
+        if (sprite.Comp.LifeStage < ComponentLifeStage.Initialized)
             return;
+        // RMC14
+
+        var shader = _proto.Index(HorizontalCut).Instance();
 
         if (enabled)
         {
-            sprite.Comp.PostShader = shader;
+            _sprite.SetPostShader(sprite, new SpriteComponent.PostShaderArgs(ContentPostShaderIds.FloorOcclusion, shader)
+            {
+                Before = ContentPostShaderIds.BeforeOutlines,
+            });
         }
         else
         {
-            sprite.Comp.PostShader = null;
+            _sprite.RemovePostShader(sprite, ContentPostShaderIds.FloorOcclusion);
         }
     }
 }

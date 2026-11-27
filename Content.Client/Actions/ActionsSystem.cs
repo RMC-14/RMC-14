@@ -29,15 +29,15 @@ using YamlDotNet.RepresentationModel;
 namespace Content.Client.Actions
 {
     [UsedImplicitly]
-    public sealed class ActionsSystem : SharedActionsSystem
+    public sealed partial class ActionsSystem : SharedActionsSystem
     {
         public delegate void OnActionReplaced(EntityUid actionId);
 
-        [Dependency] private readonly SharedChargesSystem _sharedCharges = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IPrototypeManager _proto = default!;
-        [Dependency] private readonly IResourceManager _resources = default!;
-        [Dependency] private readonly MetaDataSystem _metaData = default!;
+        [Dependency] private SharedChargesSystem _sharedCharges = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IPrototypeManager _proto = default!;
+        [Dependency] private IResourceManager _resources = default!;
+        [Dependency] private MetaDataSystem _metaData = default!;
 
         public event Action<EntityUid>? OnActionAdded;
         public event Action<EntityUid>? OnActionRemoved;
@@ -53,7 +53,7 @@ namespace Content.Client.Actions
         public static readonly EntProtoId MappingEntityAction = "BaseMappingEntityAction";
 
         // RMC14
-        [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
+        [Dependency] private RMCLagCompensationSystem _rmcLagCompensation = default!;
         private readonly Queue<ActionRequest> _requested = new();
 
         public override void Initialize()
@@ -223,7 +223,7 @@ namespace Content.Client.Actions
             LinkAllActions(component);
         }
 
-        private void OnPlayerDetached(EntityUid uid, ActionsComponent component, LocalPlayerDetachedEvent? args = null)
+        private void OnPlayerDetached(EntityUid uid, ActionsComponent component, LocalPlayerDetachedEvent args)
         {
             UnlinkAllActions();
         }

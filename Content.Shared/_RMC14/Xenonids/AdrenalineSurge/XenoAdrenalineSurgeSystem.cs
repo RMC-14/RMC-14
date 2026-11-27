@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.AdrenalineSurge;
 
-public sealed class XenoAdrenalineSurgeSystem : EntitySystem
+public sealed partial class XenoAdrenalineSurgeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MovementSpeedModifierSystem _speedModifier = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

@@ -31,25 +31,25 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
-public abstract class SharedXenoHiveSystem : EntitySystem
+public abstract partial class SharedXenoHiveSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCTemporaryInvincibilitySystem _invincibility = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedBroadphaseSystem _broadphase = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedNightVisionSystem _nightVision = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCTemporaryInvincibilitySystem _invincibility = default!;
+    [Dependency] private SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private XenoSystem _xeno = default!;
 
     private EntityQuery<HiveComponent> _query;
     private EntityQuery<HiveMemberComponent> _memberQuery;
@@ -146,7 +146,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (!prototype.TryGetComponent(out XenoComponent? xeno, _compFactory))
+            if (!prototype.TryComp(out XenoComponent? xeno, _compFactory))
                 continue;
 
             if (xeno.UnlockAt == TimeSpan.Zero || prototype.HasComponent<XenoHiddenComponent>(_compFactory))
@@ -493,7 +493,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
                     continue;
 
                 var position = _transform.GetMoverCoordinates(uid);
-                larva = Spawn(hive.Comp.BurrowedLarvaId, position);
+                larva = SpawnAttachedTo(hive.Comp.BurrowedLarvaId, position);
                 _transform.AttachToGridOrMap(larva.Value);
                 return true;
             }
@@ -524,7 +524,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         _invincibility.GiveInvincibility(larva.Value, invincibilityTime);
 
         var newMind = _mind.CreateMind(session.UserId,
-            EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
+            Comp<MetaDataComponent>(larva.Value).EntityName);
         _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
         _adminLog.Add(LogType.RMCBurrowedLarva,
             $"{session.Name:player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");

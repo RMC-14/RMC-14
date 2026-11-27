@@ -12,16 +12,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.BodyScanner;
 
-public abstract class SharedBodyScannerSystem : EntitySystem
+public abstract partial class SharedBodyScannerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCMovementSystem _rmcMovement = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -51,7 +51,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
             var rotation = Transform(scanner).LocalRotation;
             var rotatedOffset = rotation.RotateVec(scanner.Comp.ConsoleSpawnOffset);
             var consoleCoords = _transform.GetMoverCoordinates(scanner).Offset(rotatedOffset);
-            var consoleId = Spawn(scanner.Comp.SpawnConsolePrototype.Value, consoleCoords);
+            var consoleId = SpawnAttachedTo(scanner.Comp.SpawnConsolePrototype.Value, consoleCoords);
 
             _transform.SetLocalRotation(consoleId, rotation);
 

@@ -6,12 +6,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.EntityPreset;
 
-public sealed class EntityPresetSystem : EntitySystem
+public sealed partial class EntityPresetSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RMCRandomizedPresetSystem _preset = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private RMCRandomizedPresetSystem _preset = default!;
 
     public override void Initialize()
     {

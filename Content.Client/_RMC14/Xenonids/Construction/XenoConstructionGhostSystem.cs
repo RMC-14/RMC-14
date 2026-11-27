@@ -38,22 +38,21 @@ using static Content.Shared.Physics.CollisionGroup;
 namespace Content.Client._RMC14.Xenonids.Construction;
 
 [UsedImplicitly]
-public sealed class XenoConstructionGhostSystem : EntitySystem
+public sealed partial class XenoConstructionGhostSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly QueenEyeSystem _queenEye = default!;
-    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private QueenEyeSystem _queenEye = default!;
+    [Dependency] private RMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
+    [Dependency] private SharedXenoConstructionSystem _xenoConstruction = default!;
 
     private EntityUid? _currentGhost;
     private string? _currentGhostStructure;
@@ -246,7 +245,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         if (!coords.IsValid(EntityManager))
             return null;
 
-        var snapped = coords.SnapToGrid(EntityManager, _mapManager);
+        var snapped = coords.SnapToGrid(EntityManager);
 
         if (_transform.GetGrid(snapped) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
@@ -254,7 +253,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, snapped);
 
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
             if (TryComp(uid, out XenoStructureUpgradeableComponent? comp) && comp.To != null)
@@ -302,7 +301,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             return;
 
         var playerCoords = xform.Coordinates;
-        var ghost = Spawn("XenoConstructionGhost", playerCoords);
+        var ghost = SpawnAttachedTo("XenoConstructionGhost", playerCoords);
         var actualPrototype = GetActualBuildPrototype(player, structurePrototype);
 
         ConfigureGhostSprite(ghost, actualPrototype);
@@ -353,7 +352,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         if (TryConfigureIconSmoothSprite(sprite, prototype))
             return;
 
-        if (prototype.TryGetComponent<SpriteComponent>(out var prototypeSprite, _compFactory))
+        if (prototype.TryComp<SpriteComponent>(out var prototypeSprite, _compFactory))
         {
             sprite.CopyFrom(prototypeSprite);
             sprite.Color = new Color(48, 255, 48, 128);
@@ -369,8 +368,8 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
     private bool TryConfigureIconSmoothSprite(SpriteComponent sprite, EntityPrototype prototype)
     {
-        if (!prototype.TryGetComponent(out IconSmoothComponent? iconSmooth, _compFactory) ||
-            !prototype.TryGetComponent(out SpriteComponent? prototypeSprite, _compFactory) ||
+        if (!prototype.TryComp(out IconSmoothComponent? iconSmooth, _compFactory) ||
+            !prototype.TryComp(out SpriteComponent? prototypeSprite, _compFactory) ||
             string.IsNullOrEmpty(iconSmooth.StateBase))
         {
             return false;
@@ -438,7 +437,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             return player != null ? _transform.GetMoverCoordinates(player.Value) : EntityCoordinates.Invalid;
         }
 
-        if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(mapCoords, out var gridUid, out var grid))
             return _transform.ToCoordinates(mapCoords);
 
         var gridCoords = _transform.ToCoordinates(gridUid, mapCoords);

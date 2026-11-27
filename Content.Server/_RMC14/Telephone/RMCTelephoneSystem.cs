@@ -19,16 +19,16 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Telephone;
 
-public sealed class RMCTelephoneSystem : SharedRMCTelephoneSystem
+public sealed partial class RMCTelephoneSystem : SharedRMCTelephoneSystem
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly CommunicationsTowerSystem _communicationsTower = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private CommunicationsTowerSystem _communicationsTower = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private RMCHandsSystem _rmcHands = default!;
+    [Dependency] private RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     public override void Initialize()
     {

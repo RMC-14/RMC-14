@@ -6,9 +6,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Administration.Systems;
 
-public sealed class BufferingSystem : EntitySystem
+public sealed partial class BufferingSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Update(float frameTime)
     {
@@ -33,7 +33,7 @@ public sealed class BufferingSystem : EntitySystem
                     continue;
 
                 buffering.BufferingTimer = _random.NextFloat(buffering.MinimumBufferTime, buffering.MaximumBufferTime);
-                buffering.BufferingIcon = Spawn("BufferingIcon", new EntityCoordinates(uid, Vector2.Zero));
+                buffering.BufferingIcon = SpawnAttachedTo("BufferingIcon", new EntityCoordinates(uid, Vector2.Zero));
                 EnsureComp<AdminFrozenComponent>(uid);
             }
         }

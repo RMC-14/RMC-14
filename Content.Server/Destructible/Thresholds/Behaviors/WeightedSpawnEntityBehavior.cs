@@ -5,7 +5,6 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Spawners;
 
 namespace Content.Server.Destructible.Thresholds.Behaviors;
@@ -72,11 +71,11 @@ public sealed partial class WeightedSpawnEntityBehavior : IThresholdBehavior
             // spawn the spawner, assign it a lifetime, and assign the entity that it will spawn when despawned
             for (var i = 0; i < amountToSpawn; i++)
             {
-                var spawner = system.EntityManager.SpawnEntity(tempSpawnerProto.ID, position.Offset(GetRandomVector()));
+                var spawner = system.EntityManager.Spawn(tempSpawnerProto.ID, position.Offset(GetRandomVector()));
                 system.EntityManager.EnsureComponent<TimedDespawnComponent>(spawner, out var timedDespawnComponent);
                 timedDespawnComponent.Lifetime = SpawnAfter;
                 system.EntityManager.EnsureComponent<SpawnOnDespawnComponent>(spawner, out var spawnOnDespawnComponent);
-                system.EntityManager.System<SpawnOnDespawnSystem>().SetPrototype((spawner, spawnOnDespawnComponent), entity);
+                system.EntityManager.System<SpawnOnDespawnSystem>().SetPrototype((spawner, spawnOnDespawnComponent), entity.Id);
             }
         }
         else
@@ -84,7 +83,7 @@ public sealed partial class WeightedSpawnEntityBehavior : IThresholdBehavior
             // directly spawn the desired entities
             for (var i = 0; i < amountToSpawn; i++)
             {
-                system.EntityManager.SpawnEntity(entity, position.Offset(GetRandomVector()));
+                system.EntityManager.Spawn(entity, position.Offset(GetRandomVector()));
             }
         }
     }

@@ -13,14 +13,14 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server._RMC14.Radio;
 
-public sealed class RMCIntercomSystem : EntitySystem
+public sealed partial class RMCIntercomSystem : EntitySystem
 {
-    [Dependency] private readonly InteractionSystem _interaction = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly RadioDeviceSystem _radioDevice = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private InteractionSystem _interaction = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private RadioDeviceSystem _radioDevice = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const float DirectRange = 1.5f;
     private const float DistanceEpsilon = 0.0001f;

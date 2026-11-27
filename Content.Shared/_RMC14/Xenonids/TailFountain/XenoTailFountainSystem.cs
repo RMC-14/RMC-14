@@ -11,14 +11,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.TailFountain;
 
-public sealed class XenoTailFountainSystem : EntitySystem
+public sealed partial class XenoTailFountainSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCFlammableSystem _flame = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedRMCFlammableSystem _flame = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private IGameTiming _timing = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoTailFountainComponent, XenoTailFountainActionEvent>(OnTailFountainAction);

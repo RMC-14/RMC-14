@@ -23,21 +23,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Paratoxin;
 
-public sealed class ParatoxinSystem : EntitySystem
+public sealed partial class ParatoxinSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly CMArmorSystem _armor = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private CMArmorSystem _armor = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
 
     private readonly EntProtoId<SkillDefinitionComponent> ResistSkill = "RMCSkillEndurance";
 

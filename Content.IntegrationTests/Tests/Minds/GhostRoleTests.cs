@@ -68,7 +68,7 @@ public sealed class GhostRoleTests
         EntityUid originalPlayerMob = default;
         await server.WaitPost(() =>
         {
-            originalPlayerMob = entMan.SpawnEntity(TestMobProtoId, mapData.GridCoords);
+            originalPlayerMob = entMan.SpawnAttachedTo(TestMobProtoId, mapData.GridCoords);
             mindSystem.TransferTo(originalPlayerMindId, originalPlayerMob, true);
         });
 
@@ -119,7 +119,7 @@ public sealed class GhostRoleTests
 
         // Spawn ghost takeover entity.
         EntityUid ghostRole = default;
-        await server.WaitPost(() => ghostRole = entMan.SpawnEntity(GhostRoleProtoId, mapData.GridCoords));
+        await server.WaitPost(() => ghostRole = entMan.SpawnAttachedTo(GhostRoleProtoId, mapData.GridCoords));
 
         // Take the ghost role
         await server.WaitPost(() =>

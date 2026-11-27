@@ -5,9 +5,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Humanoid.Markings
 {
-    public sealed class MarkingManager
+    public sealed partial class MarkingManager
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
 
         private readonly List<MarkingPrototype> _index = new();
         public FrozenDictionary<MarkingCategories, FrozenDictionary<string, MarkingPrototype>> CategorizedMarkings = default!;

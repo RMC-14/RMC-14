@@ -8,12 +8,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.CombatMode;
 
-public abstract class SharedCombatModeSystem : EntitySystem
+public abstract partial class SharedCombatModeSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private   readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private   readonly SharedPopupSystem _popup = default!;
-    [Dependency] private   readonly SharedMindSystem  _mind = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMindSystem  _mind = default!;
 
     public override void Initialize()
     {
@@ -30,7 +30,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         Dirty(uid, component);
     }
 
-    private void OnShutdown(EntityUid uid, CombatModeComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, CombatModeComponent component, ref ComponentShutdown args)
     {
         _actionsSystem.RemoveAction(uid, component.CombatToggleActionEntity);
 

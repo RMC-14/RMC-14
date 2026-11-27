@@ -4,11 +4,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Eye.Blinding.Systems;
 
-public sealed class TemporaryBlindnessSystem : EntitySystem
+public sealed partial class TemporaryBlindnessSystem : EntitySystem
 {
     public static readonly ProtoId<StatusEffectPrototype> BlindingStatusEffect = "TemporaryBlindness";
 
-    [Dependency] private readonly BlindableSystem _blindableSystem = default!;
+    [Dependency] private BlindableSystem _blindableSystem = default!;
 
     public override void Initialize()
     {
@@ -24,7 +24,7 @@ public sealed class TemporaryBlindnessSystem : EntitySystem
         _blindableSystem.UpdateIsBlind(uid);
     }
 
-    private void OnShutdown(EntityUid uid, TemporaryBlindnessComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, TemporaryBlindnessComponent component, ref ComponentShutdown args)
     {
         _blindableSystem.UpdateIsBlind(uid);
     }

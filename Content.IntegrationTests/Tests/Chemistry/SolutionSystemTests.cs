@@ -65,7 +65,7 @@ public sealed class SolutionSystemTests
             var oilAdded = new Solution("Oil", oilQuantity);
             var originalWater = new Solution("Water", waterQuantity);
 
-            beaker = entityManager.SpawnEntity("SolutionTarget", coordinates);
+            beaker = entityManager.SpawnAttachedTo("SolutionTarget", coordinates);
             Assert.That(containerSystem
                 .TryGetSolution(beaker, "beaker", out var solutionEnt, out var solution));
 
@@ -110,7 +110,7 @@ public sealed class SolutionSystemTests
             var oilAdded = new Solution("Oil", oilQuantity);
             var originalWater = new Solution("Water", waterQuantity);
 
-            beaker = entityManager.SpawnEntity("SolutionTarget", coordinates);
+            beaker = entityManager.SpawnAttachedTo("SolutionTarget", coordinates);
             Assert.That(containerSystem
                 .TryGetSolution(beaker, "beaker", out var solutionEnt, out var solution));
 
@@ -156,7 +156,7 @@ public sealed class SolutionSystemTests
             var oilAdded = new Solution("Oil", oilQuantity);
             var originalWater = new Solution("Water", waterQuantity);
 
-            beaker = entityManager.SpawnEntity("SolutionTarget", coordinates);
+            beaker = entityManager.SpawnAttachedTo("SolutionTarget", coordinates);
             Assert.That(containerSystem
                 .TryGetSolution(beaker, "beaker", out var solutionEnt, out var solution));
 
@@ -210,7 +210,7 @@ public sealed class SolutionSystemTests
             var oilAdded = new Solution("Oil", oilQuantity);
             var originalWater = new Solution("Water", waterQuantity);
 
-            beaker = entityManager.SpawnEntity("SolutionTarget", coordinates);
+            beaker = entityManager.SpawnAttachedTo("SolutionTarget", coordinates);
             Assert.That(containerSystem
                 .TryGetSolution(beaker, "beaker", out var solutionEnt, out var solution));
 

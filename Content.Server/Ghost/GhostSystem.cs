@@ -46,37 +46,37 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Ghost
 {
-    public sealed class GhostSystem : SharedGhostSystem
+    public sealed partial class GhostSystem : SharedGhostSystem
     {
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
-        [Dependency] private readonly IAdminLogManager _adminLog = default!;
-        [Dependency] private readonly SharedEyeSystem _eye = default!;
-        [Dependency] private readonly FollowerSystem _followerSystem = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly JobSystem _jobs = default!;
-        [Dependency] private readonly EntityLookupSystem _lookup = default!;
-        [Dependency] private readonly MindSystem _minds = default!;
-        [Dependency] private readonly MobStateSystem _mobState = default!;
-        [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-        [Dependency] private readonly ISharedPlayerManager _player = default!;
-        [Dependency] private readonly TransformSystem _transformSystem = default!;
-        [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
-        [Dependency] private readonly MetaDataSystem _metaData = default!;
-        [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-        [Dependency] private readonly IChatManager _chatManager = default!;
-        [Dependency] private readonly SharedMindSystem _mind = default!;
-        [Dependency] private readonly GameTicker _gameTicker = default!;
-        [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly TagSystem _tag = default!;
-        [Dependency] private readonly NameModifierSystem _nameMod = default!;
-        [Dependency] private readonly RMCGhostAppearanceSystem _rmcGhostAppearance = default!;
+        [Dependency] private SharedActionsSystem _actions = default!;
+        [Dependency] private IAdminLogManager _adminLog = default!;
+        [Dependency] private SharedEyeSystem _eye = default!;
+        [Dependency] private FollowerSystem _followerSystem = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private JobSystem _jobs = default!;
+        [Dependency] private EntityLookupSystem _lookup = default!;
+        [Dependency] private MindSystem _minds = default!;
+        [Dependency] private MobStateSystem _mobState = default!;
+        [Dependency] private SharedPhysicsSystem _physics = default!;
+        [Dependency] private ISharedPlayerManager _player = default!;
+        [Dependency] private TransformSystem _transformSystem = default!;
+        [Dependency] private VisibilitySystem _visibilitySystem = default!;
+        [Dependency] private MetaDataSystem _metaData = default!;
+        [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IConfigurationManager _configurationManager = default!;
+        [Dependency] private IChatManager _chatManager = default!;
+        [Dependency] private SharedMindSystem _mind = default!;
+        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private DamageableSystem _damageable = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private TagSystem _tag = default!;
+        [Dependency] private NameModifierSystem _nameMod = default!;
+        [Dependency] private RMCGhostAppearanceSystem _rmcGhostAppearance = default!;
 
         // RMC14
-        [Dependency] private readonly CMGhostSystem _cmGhost = default!;
+        [Dependency] private CMGhostSystem _cmGhost = default!;
         // RMC14
 
         private EntityQuery<GhostComponent> _ghostQuery;
@@ -218,7 +218,7 @@ namespace Content.Server.Ghost
             component.TimeOfDeath = time;
         }
 
-        private void OnGhostShutdown(EntityUid uid, GhostComponent component, ComponentShutdown args)
+        private void OnGhostShutdown(EntityUid uid, GhostComponent component, ref ComponentShutdown args)
         {
             // Perf: If the entity is deleting itself, no reason to change these back.
             if (Terminating(uid))

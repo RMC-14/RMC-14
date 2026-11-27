@@ -9,11 +9,11 @@ namespace Content.Server.Worldgen.Systems.Debris;
 /// <summary>
 ///     This handles populating simple structures, simply using a loot table for each tile.
 /// </summary>
-public sealed class SimpleFloorPlanPopulatorSystem : BaseWorldSystem
+public sealed partial class SimpleFloorPlanPopulatorSystem : BaseWorldSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -26,7 +26,7 @@ public sealed class SimpleFloorPlanPopulatorSystem : BaseWorldSystem
     {
         var placeables = new List<string?>(4);
         var grid = Comp<MapGridComponent>(uid);
-        var enumerator = _map.GetAllTilesEnumerator(uid, grid);
+        var enumerator = _map.GetAllTiles(uid, grid);
         while (enumerator.MoveNext(out var tile))
         {
             var coords = _map.GridTileToLocal(uid, grid, tile.Value.GridIndices);
@@ -42,7 +42,7 @@ public sealed class SimpleFloorPlanPopulatorSystem : BaseWorldSystem
                 if (proto is null)
                     continue;
 
-                Spawn(proto, coords);
+                SpawnAttachedTo(proto, coords);
             }
         }
     }

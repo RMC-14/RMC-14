@@ -24,12 +24,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.VendingMachines
 {
-    public sealed class VendingMachineSystem : SharedVendingMachineSystem
+    public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly PricingSystem _pricing = default!;
-        [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private PricingSystem _pricing = default!;
+        [Dependency] private ThrowingSystem _throwingSystem = default!;
+        [Dependency] private IGameTiming _timing = default!;
 
         private const float WallVendEjectDistanceFromWall = 1f;
 
@@ -237,7 +237,7 @@ namespace Content.Server.VendingMachines
                 spawnCoordinates = spawnCoordinates.Offset(offset);
             }
 
-            var ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            var ent = SpawnAttachedTo(vendComponent.NextItemToEject, spawnCoordinates);
 
             if (vendComponent.ThrowNextItem)
             {

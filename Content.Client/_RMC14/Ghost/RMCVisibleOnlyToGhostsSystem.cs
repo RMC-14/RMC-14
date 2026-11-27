@@ -4,10 +4,10 @@ using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
 namespace Content.Client._RMC14.Ghost;
-public sealed class RMCVisibleOnlyToGhostsSystem : EntitySystem
+public sealed partial class RMCVisibleOnlyToGhostsSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Update(float frameTime)
     {

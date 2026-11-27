@@ -26,11 +26,11 @@ namespace Content.IntegrationTests.Tests
                 // Spawn everything.
                 var invSystem = sysManager.GetEntitySystem<InventorySystem>();
 
-                var container = entMgr.SpawnEntity(null, coordinates);
+                var container = entMgr.SpawnAttachedTo(null, coordinates);
                 entMgr.EnsureComponent<InventoryComponent>(container);
                 entMgr.EnsureComponent<ContainerManagerComponent>(container);
 
-                var child = entMgr.SpawnEntity(null, coordinates);
+                var child = entMgr.SpawnAttachedTo(null, coordinates);
                 var item = entMgr.EnsureComponent<ClothingComponent>(child);
 
                 sysManager.GetEntitySystem<ClothingSystem>().SetSlots(child, SlotFlags.HEAD, item);

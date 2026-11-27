@@ -19,16 +19,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Standing;
 
-public sealed class RMCStandingSystem : EntitySystem
+public sealed partial class RMCStandingSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     private readonly List<EntityUid> _rotationResync = new();
 

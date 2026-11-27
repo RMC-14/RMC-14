@@ -1,3 +1,4 @@
+using Robust.Shared.Prototypes;
 using Content.Server.Atmos.Piping.Unary.Components;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.StationEvents.Components;
@@ -13,9 +14,9 @@ using Content.Shared.Chemistry.Reaction;
 namespace Content.Server.StationEvents.Events;
 
 [UsedImplicitly]
-public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
+public sealed partial class VentClogRule : StationEventSystem<VentClogRuleComponent>
 {
-    [Dependency] private readonly SmokeSystem _smoke = default!;
+    [Dependency] private SmokeSystem _smoke = default!;
 
     protected override void Started(EntityUid uid, VentClogRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -27,7 +28,7 @@ public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
         // TODO: "safe random" for chems. Right now this includes admin chemicals.
         var allReagents = PrototypeManager.EnumeratePrototypes<ReagentPrototype>()
             .Where(x => !x.Abstract)
-            .Select(x => x.ID).ToList();
+            .Select(x => new ProtoId<ReagentPrototype>(x.ID)).ToList();
 
         foreach (var (_, transform) in EntityQuery<GasVentPumpComponent, TransformComponent>())
         {
@@ -48,7 +49,7 @@ public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
             var quantity = weak ? component.WeakReagentQuantity : component.ReagentQuantity;
             solution.AddReagent(reagent, quantity);
 
-            var foamEnt = Spawn(ChemicalReactionSystem.FoamReaction, transform.Coordinates);
+            var foamEnt = SpawnAttachedTo(ChemicalReactionSystem.FoamReaction, transform.Coordinates);
             var spreadAmount = weak ? component.WeakSpread : component.Spread;
             _smoke.StartSmoke(foamEnt, solution, component.Time, spreadAmount);
             Audio.PlayPvs(component.Sound, transform.Coordinates);

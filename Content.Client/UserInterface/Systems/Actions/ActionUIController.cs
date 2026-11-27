@@ -47,13 +47,13 @@ namespace Content.Client.UserInterface.Systems.Actions;
 public sealed partial class ActionUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<ActionsSystem>
 // RMC14
 {
-    [Dependency] private readonly IOverlayManager _overlays = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IInputManager _input = default!;
+    [Dependency] private IOverlayManager _overlays = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IInputManager _input = default!;
 
     // RMC14
-    [Dependency] private readonly EntityMenuUIController _entityMenu = default!;
+    [Dependency] private EntityMenuUIController _entityMenu = default!;
 
     [UISystemDependency] private readonly ActionsSystem? _actionsSystem = default;
     [UISystemDependency] private readonly InteractionOutlineSystem? _interactionOutline = default;

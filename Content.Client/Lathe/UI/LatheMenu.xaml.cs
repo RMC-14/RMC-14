@@ -17,8 +17,8 @@ namespace Content.Client.Lathe.UI;
 [GenerateTypedNameReferences]
 public sealed partial class LatheMenu : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private readonly SpriteSystem _spriteSystem;
     private readonly LatheSystem _lathe;
@@ -225,7 +225,7 @@ public sealed partial class LatheMenu : DefaultWindow
     /// <param name="queue"></param>
     public void PopulateQueueList(IReadOnlyCollection<ProtoId<LatheRecipePrototype>> queue)
     {
-        QueueList.DisposeAllChildren();
+        QueueList.RemoveAllChildren();
 
         var idx = 1;
         foreach (var recipeProto in queue)

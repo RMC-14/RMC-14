@@ -25,15 +25,15 @@ namespace Content.Server._RMC14.RMCMedicalRecords;
 ///     Creates <see cref="RMCMedicalRecord"/> entries in the station record set when a general record is created.
 ///     Also manages entity-bound scan data on <see cref="RMCLastBodyScanResultComponent"/>.
 /// </summary>
-public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
+public sealed partial class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
-    [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
-    [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
-    [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
-    //[Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private SharedRMCBloodstreamSystem _rmcBloodstream = default!;
+    [Dependency] private RMCPulseSystem _rmcPulse = default!;
+    [Dependency] private RMCReagentSystem _rmcReagent = default!;
+    [Dependency] private SharedRMCTemperatureSystem _rmcTemperature = default!;
+    //[Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";

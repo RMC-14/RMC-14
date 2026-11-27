@@ -17,10 +17,10 @@ namespace Content.Shared.Silicons.Borgs;
 /// </summary>
 public abstract partial class SharedBorgSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] protected readonly ItemSlotsSystem ItemSlots = default!;
-    [Dependency] protected readonly ItemToggleSystem Toggle = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
+    [Dependency] protected ItemSlotsSystem ItemSlots = default!;
+    [Dependency] protected ItemToggleSystem Toggle = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

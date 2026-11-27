@@ -9,12 +9,12 @@ namespace Content.Shared.Construction.EntitySystems;
 /// Prevents anchoring an item in the same tile as an item matching the <see cref="EntityWhitelist"/>.
 /// <seealso cref="BlockAnchorOnComponent"/>
 /// </summary>
-public sealed class BlockAnchorOnSystem : EntitySystem
+public sealed partial class BlockAnchorOnSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -65,7 +65,7 @@ public sealed class BlockAnchorOnSystem : EntitySystem
             return false;
 
         var indices = _map.TileIndicesFor(grid, gridComp, ent.Comp2.Coordinates);
-        var enumerator = _map.GetAnchoredEntitiesEnumerator(grid, gridComp, indices);
+        var enumerator = _map.GetAnchoredEntities(grid, gridComp, indices);
 
         while (enumerator.MoveNext(out var otherEnt))
         {

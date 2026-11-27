@@ -22,17 +22,17 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Xenonids.HiveTeam;
 
-public sealed class HiveTeamSystem : EntitySystem
+public sealed partial class HiveTeamSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly HiveTrackerSystem _tracker = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private HiveLeaderSystem _hiveLeader = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private HiveTrackerSystem _tracker = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     private static readonly SoundSpecifier TeamAnnounceSound = new SoundCollectionSpecifier("XenoQueenCommand", AudioParams.Default.WithVolume(-6));
     private static readonly ResPath FireteamRsi = new("/Textures/_RMC14/Interface/fireteam.rsi");

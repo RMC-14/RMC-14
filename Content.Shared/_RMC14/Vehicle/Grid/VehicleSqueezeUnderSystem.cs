@@ -7,11 +7,11 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleSqueezeUnderSystem : EntitySystem
+public sealed partial class VehicleSqueezeUnderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     public override void Initialize()
     {

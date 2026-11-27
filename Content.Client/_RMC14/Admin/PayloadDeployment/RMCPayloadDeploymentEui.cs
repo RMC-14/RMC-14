@@ -18,18 +18,18 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Admin.PayloadDeployment;
 
 [UsedImplicitly]
-public sealed class RMCPayloadDeploymentEui : BaseEui
+public sealed partial class RMCPayloadDeploymentEui : BaseEui
 {
     private const int MaxNearbyRadius = 50;
     private const int MaxManifestNameLength = 32;
     private const int MaxPrototypeResults = 250;
 
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
 
     private readonly List<RMCPayloadDeploymentManifest> _manifests = [];
     private readonly List<RMCPayloadDeploymentMapEntry> _maps = [];

@@ -9,15 +9,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Item;
 
-public sealed class ItemCamouflageSystem : EntitySystem
+public sealed partial class ItemCamouflageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedStationSpawningSystem _stationSpawning = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedStationSpawningSystem _stationSpawning = default!;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public CamouflageType CurrentMapCamouflage { get; set; } = CamouflageType.Jungle;

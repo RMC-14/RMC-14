@@ -18,16 +18,16 @@ namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 
 public sealed partial class RecoveryNodeSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedXenoHealSystem _heal = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedDoAfterSystem _doafter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedXenoHealSystem _heal = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private XenoPlasmaSystem _plasma = default!;
 
     private EntityQuery<XenoAttachedOvipositorComponent> _attachedOviQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;

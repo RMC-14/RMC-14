@@ -53,7 +53,7 @@ public sealed partial class RMCCryoRecoveryWindow : DefaultWindow
 
     private void Render()
     {
-        PlayersContainer.DisposeAllChildren();
+        PlayersContainer.RemoveAllChildren();
 
         var filter = SearchBar.Text.Trim();
         var visiblePlayers = 0;

@@ -11,9 +11,9 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 namespace Content.Client._RMC14.OrbitalCannon;
 
 [UsedImplicitly]
-public sealed class OrbitalCannonComputerBui : BoundUserInterface
+public sealed partial class OrbitalCannonComputerBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly ContainerSystem _container;
     private readonly OrbitalCannonSystem _orbitalCannon;

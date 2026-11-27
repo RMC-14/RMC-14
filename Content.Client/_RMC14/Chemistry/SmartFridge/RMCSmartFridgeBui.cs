@@ -11,9 +11,9 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Chemistry.SmartFridge;
 
 [UsedImplicitly]
-public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
+public sealed partial class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
 {
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private readonly ContainerSystem _container;
 

@@ -7,10 +7,10 @@ namespace Content.Server.Traits.Assorted;
 /// <summary>
 /// This handles narcolepsy, causing the affected to fall asleep uncontrollably at a random interval.
 /// </summary>
-public sealed class NarcolepsySystem : EntitySystem
+public sealed partial class NarcolepsySystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -15,9 +15,9 @@ namespace Content.Server.Tesla.EntitySystems;
 /// <summary>
 /// A component that tracks an entity's saturation level from absorbing other creatures by touch, and spawns new entities when the saturation limit is reached.
 /// </summary>
-public sealed class TeslaEnergyBallSystem : EntitySystem
+public sealed partial class TeslaEnergyBallSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -28,7 +28,7 @@ public sealed class TeslaEnergyBallSystem : EntitySystem
 
     private void OnConsumed(Entity<TeslaEnergyBallComponent> tesla, ref EntityConsumedByEventHorizonEvent args)
     {
-        Spawn(tesla.Comp.ConsumeEffectProto, Transform(args.Entity).Coordinates);
+        SpawnAttachedTo(tesla.Comp.ConsumeEffectProto, Transform(args.Entity).Coordinates);
         if (TryComp<SinguloFoodComponent>(args.Entity, out var singuloFood))
         {
             AdjustEnergy(tesla, tesla.Comp, singuloFood.Energy);
@@ -45,7 +45,7 @@ public sealed class TeslaEnergyBallSystem : EntitySystem
         if (component.Energy > component.NeedEnergyToSpawn)
         {
             component.Energy -= component.NeedEnergyToSpawn;
-            Spawn(component.SpawnProto, Transform(uid).Coordinates);
+            SpawnAttachedTo(component.SpawnProto, Transform(uid).Coordinates);
         }
         if (component.Energy < component.EnergyToDespawn)
         {

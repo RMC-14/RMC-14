@@ -18,16 +18,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Friction
 {
-    public sealed class TileFrictionController : VirtualController
+    public sealed partial class TileFrictionController : VirtualController
     {
-        [Dependency] private readonly IConfigurationManager _configManager = default!;
-        [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-        [Dependency] private readonly SharedGravitySystem _gravity = default!;
-        [Dependency] private readonly SharedMoverController _mover = default!;
-        [Dependency] private readonly SharedMapSystem _map = default!;
+        [Dependency] private IConfigurationManager _configManager = default!;
+        [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+        [Dependency] private SharedGravitySystem _gravity = default!;
+        [Dependency] private SharedMoverController _mover = default!;
+        [Dependency] private SharedMapSystem _map = default!;
 
         //RMC14
-        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private IGameTiming _timing = default!;
 
         private EntityQuery<TileFrictionModifierComponent> _frictionQuery;
         private EntityQuery<TransformComponent> _xformQuery;
@@ -153,7 +153,7 @@ namespace Content.Shared.Friction
                 return tileModifier;
 
             // Check for anchored ents that modify friction
-            var anc = _map.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, tile.GridIndices);
+            var anc = _map.GetAnchoredEntities(xform.GridUid.Value, grid, tile.GridIndices);
             while (anc.MoveNext(out var tileEnt))
             {
                 if (_frictionQuery.TryGetComponent(tileEnt, out var friction))

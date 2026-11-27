@@ -9,9 +9,9 @@ using Robust.Shared.Configuration;
 namespace Content.Client._RMC14.Power;
 
 [UsedImplicitly]
-public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private static readonly Color BlueBackgroundColor = Color.FromHex("#3E6189");
     private static readonly Color GreenBackgroundColor = Color.FromHex("#1B9638");

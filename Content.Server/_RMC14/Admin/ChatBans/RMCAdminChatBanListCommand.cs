@@ -8,12 +8,12 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin.ChatBans;
 
 [AdminCommand(AdminFlags.ViewNotes)]
-public sealed class RMCAdminChatBanListCommand : LocalizedCommands
+public sealed partial class RMCAdminChatBanListCommand : LocalizedCommands
 {
-    [Dependency] private readonly EuiManager _eui = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
 
     public override string Command => "rmcadminchatbanlist";
 

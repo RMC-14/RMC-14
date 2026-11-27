@@ -13,13 +13,13 @@ using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server.Silicons.StationAi;
 
-public sealed class StationAiSystem : SharedStationAiSystem
+public sealed partial class StationAiSystem : SharedStationAiSystem
 {
-    [Dependency] private readonly IChatManager _chats = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _xforms = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private IChatManager _chats = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _xforms = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
 
     private readonly HashSet<Entity<StationAiCoreComponent>> _ais = new();
 

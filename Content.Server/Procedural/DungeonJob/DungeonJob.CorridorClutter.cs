@@ -22,7 +22,7 @@ public sealed partial class DungeonJob
         {
             var tile = random.Pick(dungeon.CorridorTiles);
 
-            var enumerator = _maps.GetAnchoredEntitiesEnumerator(_gridUid, _grid, tile);
+            var enumerator = _maps.GetAnchoredEntities(_gridUid, _grid, tile);
             var blocked = false;
 
             while (enumerator.MoveNext(out var ent))

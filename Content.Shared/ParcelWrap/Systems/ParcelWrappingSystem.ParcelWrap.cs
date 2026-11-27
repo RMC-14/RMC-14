@@ -83,7 +83,7 @@ public sealed partial class ParcelWrappingSystem
     {
         if (_net.IsServer)
         {
-            var spawned = Spawn(wrapper.Comp.ParcelPrototype, Transform(target).Coordinates);
+            var spawned = SpawnAttachedTo(wrapper.Comp.ParcelPrototype, Transform(target).Coordinates);
 
             // If this wrap maintains the size when wrapping, set the parcel's size to the target's size. Otherwise use the
             // wrap's fallback size.

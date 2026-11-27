@@ -3,9 +3,9 @@ using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Teleporter;
 
-public sealed class RMCTeleporterSystem : SharedRMCTeleporterSystem
+public sealed partial class RMCTeleporterSystem : SharedRMCTeleporterSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void Initialize()
     {

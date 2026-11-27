@@ -1,4 +1,5 @@
 using Content.Client._RMC14.Ghost;
+using Content.Client._RMC14.Graphics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.GhostColor;
@@ -10,13 +11,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.GhostColor;
 
-public sealed class GhostColorSystem : EntitySystem
+public sealed partial class GhostColorSystem : EntitySystem
 {
     private static readonly ProtoId<ShaderPrototype> GhostAlphaShader = "RMCGhostAlpha";
 
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private float _observerAlpha;
     private ShaderInstance _alphaShader = default!;
@@ -65,14 +66,21 @@ public sealed class GhostColorSystem : EntitySystem
 
         if (!HasComp<GhostHumanoidAppearanceComponent>(uid) && !HasComp<GhostNonHumanoidAppearanceComponent>(uid))
         {
-            if (sprite.PostShader == _alphaShader)
-                sprite.PostShader = null;
+            _sprite.RemovePostShader(spriteEnt, RMCPostShaderIds.GhostAlpha);
 
             _sprite.SetColor(spriteEnt, ghostColor.WithAlpha(_observerAlpha));
             return;
         }
 
         _sprite.SetColor(spriteEnt, ghostColor.WithAlpha(1f));
-        sprite.PostShader = _alphaShader;
+
+        // Appearance startup reapplies the shader after the sprite has initialized.
+        if (sprite.LifeStage < ComponentLifeStage.Initialized)
+            return;
+
+        _sprite.SetPostShader(spriteEnt, new SpriteComponent.PostShaderArgs(RMCPostShaderIds.GhostAlpha, _alphaShader)
+        {
+            After = RMCPostShaderIds.BeforeOpacity,
+        });
     }
 }

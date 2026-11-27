@@ -63,36 +63,36 @@ namespace Content.Server.Administration.Systems;
 
 public sealed partial class AdminVerbSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly BodySystem _bodySystem = default!;
-    [Dependency] private readonly CreamPieSystem _creamPieSystem = default!;
-    [Dependency] private readonly ElectrocutionSystem _electrocutionSystem = default!;
-    [Dependency] private readonly EntityStorageSystem _entityStorageSystem = default!;
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly FlammableSystem _flammableSystem = default!;
-    [Dependency] private readonly GhostKickManager _ghostKickManager = default!;
-    [Dependency] private readonly SharedGodmodeSystem _sharedGodmodeSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
-    [Dependency] private readonly PolymorphSystem _polymorphSystem = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly TabletopSystem _tabletopSystem = default!;
-    [Dependency] private readonly VomitSystem _vomitSystem = default!;
-    [Dependency] private readonly WeldableSystem _weldableSystem = default!;
-    [Dependency] private readonly SharedContentEyeSystem _eyeSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SuperBonkSystem _superBonkSystem = default!;
-    [Dependency] private readonly SlipperySystem _slipperySystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private BloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private BodySystem _bodySystem = default!;
+    [Dependency] private CreamPieSystem _creamPieSystem = default!;
+    [Dependency] private ElectrocutionSystem _electrocutionSystem = default!;
+    [Dependency] private EntityStorageSystem _entityStorageSystem = default!;
+    [Dependency] private ExplosionSystem _explosionSystem = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private FlammableSystem _flammableSystem = default!;
+    [Dependency] private GhostKickManager _ghostKickManager = default!;
+    [Dependency] private SharedGodmodeSystem _sharedGodmodeSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
+    [Dependency] private PolymorphSystem _polymorphSystem = default!;
+    [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private TabletopSystem _tabletopSystem = default!;
+    [Dependency] private VomitSystem _vomitSystem = default!;
+    [Dependency] private WeldableSystem _weldableSystem = default!;
+    [Dependency] private SharedContentEyeSystem _eyeSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SuperBonkSystem _superBonkSystem = default!;
+    [Dependency] private SlipperySystem _slipperySystem = default!;
     //RMC-14
-    [Dependency] private readonly SharedXenoParasiteSystem _xenoParasite = default!;
-    [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
-    [Dependency] private readonly MobStateSystem _mobstate = default!;
-    [Dependency] private readonly RMCDamageableSystem _rmcdamage = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private SharedXenoParasiteSystem _xenoParasite = default!;
+    [Dependency] private RandomHumanoidSystem _randomHumanoid = default!;
+    [Dependency] private MobStateSystem _mobstate = default!;
+    [Dependency] private RMCDamageableSystem _rmcdamage = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     private static readonly EntProtoId MouseProto = "CMMobMouse";
     private static readonly ProtoId<RandomHumanoidSettingsPrototype> RiflemanProto = "RMCUnassignedRifleman";
@@ -153,7 +153,7 @@ public sealed partial class AdminVerbSystem
                 _popupSystem.PopupCoordinates(
                     Loc.GetString("admin-smite-chess-others", ("name", args.Target)), xform.Coordinates,
                     Filter.PvsExcept(args.Target), true, PopupType.MediumCaution);
-                var board = Spawn("ChessBoard", xform.Coordinates);
+                var board = SpawnAttachedTo("ChessBoard", xform.Coordinates);
                 var session = _tabletopSystem.EnsureSession(Comp<TabletopGameComponent>(board));
                 _transformSystem.SetMapCoordinates(args.Target, session.Position);
                 _transformSystem.SetWorldRotationNoLerp((args.Target, xform), Angle.Zero);
@@ -556,7 +556,7 @@ public sealed partial class AdminVerbSystem
                 Icon = new SpriteSpecifier.Rsi(new ("/Textures/Clothing/Head/Hats/catears.rsi"), "icon"),
                 Act = () =>
                 {
-                    var ears = Spawn("ClothingHeadHatCatEars", Transform(args.Target).Coordinates);
+                    var ears = SpawnAttachedTo("ClothingHeadHatCatEars", Transform(args.Target).Coordinates);
                     EnsureComp<UnremoveableComponent>(ears);
                     _inventorySystem.TryUnequip(args.Target, "head", true, true, false, inventory);
                     _inventorySystem.TryEquip(args.Target, ears, "head", true, true, false, inventory);
@@ -643,7 +643,7 @@ public sealed partial class AdminVerbSystem
             Act = () =>
             {
                 QueueDel(args.Target);
-                Spawn("Ash", Transform(args.Target).Coordinates);
+                SpawnAttachedTo("Ash", Transform(args.Target).Coordinates);
                 _popupSystem.PopupEntity(Loc.GetString("admin-smite-turned-ash-other", ("name", args.Target)), args.Target, PopupType.LargeCaution);
             },
             Impact = LogImpact.Extreme,
@@ -723,7 +723,7 @@ public sealed partial class AdminVerbSystem
             Act = () =>
             {
                 var xform = Transform(args.Target);
-                var locker = Spawn("ClosetMaintenance", xform.Coordinates);
+                var locker = SpawnAttachedTo("ClosetMaintenance", xform.Coordinates);
                 if (TryComp<EntityStorageComponent>(locker, out var storage))
                 {
                     _entityStorageSystem.ToggleOpen(args.Target, locker, storage);

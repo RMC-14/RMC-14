@@ -14,18 +14,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.Fishing;
 
-public abstract class SharedRMCFishingSystem : EntitySystem
+public abstract partial class SharedRMCFishingSystem : EntitySystem
 {
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly RMCWaterSystem _water = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly IRobustRandom _random = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] protected readonly SharedTransformSystem _transform = default!;
-    [Dependency] protected readonly ThrowingSystem _throwing = default!;
-    [Dependency] protected readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private RMCWaterSystem _water = default!;
+    [Dependency] protected SharedPopupSystem _popup = default!;
+    [Dependency] protected IRobustRandom _random = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] protected SharedTransformSystem _transform = default!;
+    [Dependency] protected ThrowingSystem _throwing = default!;
+    [Dependency] protected SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

@@ -16,14 +16,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Nuke;
 
-public sealed class RMCNukeSystem : EntitySystem
+public sealed partial class RMCNukeSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SensorTowerSystem _sensorTower = default!;
-    [Dependency] private readonly RMCPowerSystem _power = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SensorTowerSystem _sensorTower = default!;
+    [Dependency] private RMCPowerSystem _power = default!;
 
     private readonly DamageSpecifier _damage = new() { DamageDict = { ["Blunt"] = 1e5, ["Heat"] = 1e5 } };
     private EntityQuery<RMCApcComponent> _apc;

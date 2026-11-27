@@ -44,13 +44,13 @@ public sealed class StartingGearPrototypeStorageTest
                     if (storageProto == string.Empty)
                         continue;
 
-                    var bag = server.EntMan.SpawnEntity(storageProto, coords);
+                    var bag = server.EntMan.SpawnAttachedTo(storageProto, coords);
                     if (entProtos.Count == 0)
                         continue;
 
                     foreach (var ent in entProtos)
                     {
-                        ents.Add(server.EntMan.SpawnEntity(ent, coords));
+                        ents.Add(server.EntMan.SpawnAttachedTo(ent, coords));
                     }
 
                     foreach (var ent in ents)

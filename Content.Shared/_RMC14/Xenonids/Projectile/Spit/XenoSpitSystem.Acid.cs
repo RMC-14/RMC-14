@@ -15,7 +15,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
 public sealed partial class XenoSpitSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
 
     private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
@@ -123,7 +123,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
 
     public void ApplyOrExtendAcid(EntityUid ent, EntProtoId acid, TimeSpan? extendTime = null)
     {
-        if (!_prototypeManager.TryIndex(acid, out var acidProto) || !acidProto.TryGetComponent<XenoAcidTypeComponent>(out var acidType, _compFactory))
+        if (!_prototypeManager.TryIndex(acid, out var acidProto) || !acidProto.TryComp<XenoAcidTypeComponent>(out var acidType, _compFactory))
             return;
 
         extendTime ??= TimeSpan.FromSeconds(10);
@@ -182,7 +182,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
             return true;
         }
 
-        if (!_prototypeManager.TryIndex(acided.Comp.Upgrade, out var acidProto) || !acidProto.TryGetComponent<XenoAcidTypeComponent>(out var acidType, _compFactory))
+        if (!_prototypeManager.TryIndex(acided.Comp.Upgrade, out var acidProto) || !acidProto.TryComp<XenoAcidTypeComponent>(out var acidType, _compFactory))
             return false;
 
         //Acid stuff

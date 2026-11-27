@@ -10,11 +10,11 @@ using Robust.Shared.Network;
 namespace Content.Server.Info;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class ShowRulesCommand : IConsoleCommand
+public sealed partial class ShowRulesCommand : IConsoleCommand
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public string Command => "showrules";
     public string Description => "Opens the rules popup for the specified player.";

@@ -9,9 +9,9 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client._RMC14.Rangefinder;
 
 [UsedImplicitly]
-public sealed class RangefinderBui : BoundUserInterface
+public sealed partial class RangefinderBui : BoundUserInterface
 {
-    [Dependency] private readonly IClipboardManager _clipboard = default!;
+    [Dependency] private IClipboardManager _clipboard = default!;
 
     private RangefinderWindow? _window;
 
@@ -59,7 +59,7 @@ public sealed class RangefinderBui : BoundUserInterface
             _window.Latitude.SetMarkupPermissive(msg);
         }
 
-        _window.BottomContainer.DisposeAllChildren();
+        _window.BottomContainer.RemoveAllChildren();
 
         if (rangefinder.LastCoords is { } mapCoords)
         {

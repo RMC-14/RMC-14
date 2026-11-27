@@ -8,11 +8,11 @@ using Content.Shared.NPC.Systems;
 
 namespace Content.Shared.RMCLoreExaminable;
 
-public sealed class DetailExaminableSystem : EntitySystem
+public sealed partial class DetailExaminableSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     public override void Initialize()
     {

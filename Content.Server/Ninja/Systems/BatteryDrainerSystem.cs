@@ -14,12 +14,12 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Handles the doafter and power transfer when draining.
 /// </summary>
-public sealed class BatteryDrainerSystem : SharedBatteryDrainerSystem
+public sealed partial class BatteryDrainerSystem : SharedBatteryDrainerSystem
 {
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -101,7 +101,7 @@ public sealed class BatteryDrainerSystem : SharedBatteryDrainerSystem
         var output = input * comp.DrainEfficiency;
         _battery.SetCharge(comp.BatteryUid.Value, battery.CurrentCharge + output, battery);
         // TODO: create effect message or something
-        Spawn("EffectSparks", Transform(target).Coordinates);
+        SpawnAttachedTo("EffectSparks", Transform(target).Coordinates);
         _audio.PlayPvs(comp.SparkSound, target);
         _popup.PopupEntity(Loc.GetString("battery-drainer-success", ("battery", target)), uid, uid);
 

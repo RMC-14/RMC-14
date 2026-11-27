@@ -14,9 +14,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Chemistry.EntitySystems;
 
 /// <inheritdoc/>
-public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
+public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
 
     private static readonly ProtoId<MixingCategoryPrototype> DefaultMixingCategory = "DummyMix";
     private static readonly ProtoId<MixingCategoryPrototype> DefaultGrindCategory = "DummyGrind";
@@ -32,7 +32,7 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
 
         SubscribeNetworkEvent<ReagentGuideRegistryChangedEvent>(OnReceiveRegistryUpdate);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        OnPrototypesReloaded(null);
+        LoadPrototypes(null);
     }
 
     private void OnReceiveRegistryUpdate(ReagentGuideRegistryChangedEvent message)
@@ -49,7 +49,12 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
         }
     }
 
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs? ev)
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        LoadPrototypes(ev);
+    }
+
+    private void LoadPrototypes(PrototypesReloadedEventArgs? args)
     {
         // this doesn't check what prototypes are being reloaded because, to be frank, we use a lot of them.
         _reagentSources.Clear();
@@ -90,7 +95,7 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
             if (entProto.Abstract || usedNames.Contains(entProto.Name))
                 continue;
 
-            if (!entProto.TryGetComponent<ExtractableComponent>(out var extractableComponent, EntityManager.ComponentFactory))
+            if (!entProto.TryComp<ExtractableComponent>(out var extractableComponent, EntityManager.ComponentFactory))
                 continue;
 
             //these bloat the hell out of blood/fat

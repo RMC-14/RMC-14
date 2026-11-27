@@ -6,9 +6,9 @@ using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Weapons.Ranged;
 
-public sealed class RMCGunSystem : EntitySystem
+public sealed partial class RMCGunSystem : EntitySystem
 {
-    [Dependency] private readonly IStateManager _stateManager = default!;
+    [Dependency] private IStateManager _stateManager = default!;
 
     public EntityUid? GetAttackTarget(EntityUid attacker, MapCoordinates mousePos, Entity<GunComponent> gun)
     {

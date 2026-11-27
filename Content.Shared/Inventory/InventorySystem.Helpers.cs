@@ -7,7 +7,7 @@ namespace Content.Shared.Inventory;
 
 public partial class InventorySystem
 {
-    [Dependency] private readonly SharedStorageSystem _storageSystem = default!;
+    [Dependency] private SharedStorageSystem _storageSystem = default!;
 
     /// <summary>
     /// Yields all entities in hands or inventory slots with the specific flags.
@@ -73,7 +73,7 @@ public partial class InventorySystem
             return false;
 
         // Let's spawn this first...
-        var item = Spawn(prototype, Transform(uid).Coordinates);
+        var item = SpawnAttachedTo(prototype, Transform(uid).Coordinates);
 
         // Helper method that deletes the item and returns false.
         bool DeleteItem()

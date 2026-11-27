@@ -8,12 +8,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Advertise.EntitySystems;
 
-public sealed class AdvertiseSystem : EntitySystem
+public sealed partial class AdvertiseSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     /// <summary>
     /// The maximum amount of time between checking if advertisements should be displayed

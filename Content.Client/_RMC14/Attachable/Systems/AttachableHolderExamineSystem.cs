@@ -6,9 +6,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Attachable.Systems;
 
-public sealed class AttachableHolderExamineSystem : EntitySystem
+public sealed partial class AttachableHolderExamineSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private bool _menuOpen = false;
 

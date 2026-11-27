@@ -9,10 +9,10 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.Salvage;
 
-public sealed class RestrictedRangeSystem : SharedRestrictedRangeSystem
+public sealed partial class RestrictedRangeSystem : SharedRestrictedRangeSystem
 {
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
@@ -27,7 +27,7 @@ public sealed class RestrictedRangeSystem : SharedRestrictedRangeSystem
 
     public EntityUid CreateBoundary(EntityCoordinates coordinates, float range)
     {
-        var boundaryUid = Spawn(null, coordinates);
+        var boundaryUid = SpawnAttachedTo(null, coordinates);
         var boundaryPhysics = AddComp<PhysicsComponent>(boundaryUid);
         var cShape = new ChainShape();
         // Don't need it to be a perfect circle, just need it to be loosely accurate.

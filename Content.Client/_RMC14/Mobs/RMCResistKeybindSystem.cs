@@ -6,9 +6,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Mobs;
 
-public sealed class RMCResistKeybindSystem : EntitySystem
+public sealed partial class RMCResistKeybindSystem : EntitySystem
 {
-    [Dependency] private readonly ClientAlertsSystem _alerts = default!;
+    [Dependency] private ClientAlertsSystem _alerts = default!;
 
     private static readonly ProtoId<AlertPrototype>[] ResistAlerts =
     [

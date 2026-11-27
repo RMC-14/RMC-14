@@ -16,5 +16,5 @@ public sealed partial class SlowOnPullComponent : Component
 
     [DataRecord]
     [Serializable, NetSerializable]
-    public readonly record struct SlowdownWhitelist(float Multiplier, EntityWhitelist Whitelist);
+    public readonly partial record struct SlowdownWhitelist(float Multiplier, EntityWhitelist Whitelist);
 }

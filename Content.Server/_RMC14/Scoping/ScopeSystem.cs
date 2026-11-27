@@ -4,9 +4,9 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Scoping;
 
-public sealed class ScopeSystem : SharedScopeSystem
+public sealed partial class ScopeSystem : SharedScopeSystem
 {
-    [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
 
     public override Direction? StartScoping(Entity<ScopeComponent> scope, EntityUid user)
     {

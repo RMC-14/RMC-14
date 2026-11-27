@@ -7,10 +7,10 @@ using Robust.Shared.Toolshed.Commands.Generic;
 
 namespace Content.Shared._RMC14.Intel.Tech;
 
-public sealed class RMCNukeAudioSystem : EntitySystem
+public sealed partial class RMCNukeAudioSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedGlobalSoundSystem _sound = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedGlobalSoundSystem _sound = default!;
 
     private List<SoundPathSpecifier> _audios = new();
 

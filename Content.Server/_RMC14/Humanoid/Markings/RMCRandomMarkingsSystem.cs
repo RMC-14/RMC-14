@@ -7,11 +7,11 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Humanoid.Markings;
 
-public sealed class RMCRandomMarkingsSystem : EntitySystem
+public sealed partial class RMCRandomMarkingsSystem : EntitySystem
 {
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearance = default!;
-    [Dependency] private readonly MarkingManager _markings = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoidAppearance = default!;
+    [Dependency] private MarkingManager _markings = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

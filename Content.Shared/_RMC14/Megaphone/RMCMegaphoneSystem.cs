@@ -5,9 +5,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Megaphone;
 
-public sealed class RMCMegaphoneSystem : EntitySystem
+public sealed partial class RMCMegaphoneSystem : EntitySystem
 {
-    [Dependency] private readonly DialogSystem _dialog = default!;
+    [Dependency] private DialogSystem _dialog = default!;
 
     public override void Initialize()
     {

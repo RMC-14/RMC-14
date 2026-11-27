@@ -16,11 +16,11 @@ using Content.Shared.Nutrition.EntitySystems;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
-public sealed class InjectorSystem : SharedInjectorSystem
+public sealed partial class InjectorSystem : SharedInjectorSystem
 {
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
+    [Dependency] private ReactiveSystem _reactiveSystem = default!;
+    [Dependency] private OpenableSystem _openable = default!;
 
     public override void Initialize()
     {

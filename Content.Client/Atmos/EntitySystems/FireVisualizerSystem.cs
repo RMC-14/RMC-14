@@ -10,9 +10,9 @@ namespace Content.Client.Atmos.EntitySystems;
 /// <summary>
 /// This handles the display of fire effects on flammable entities.
 /// </summary>
-public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent>
+public sealed partial class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent>
 {
-    [Dependency] private readonly PointLightSystem _lights = default!;
+    [Dependency] private PointLightSystem _lights = default!;
 
     // RMC14 start
     private EntityQuery<RMCFireColorComponent> _fireColorQuery;
@@ -33,7 +33,7 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
         SubscribeLocalEvent<FireVisualsComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnShutdown(EntityUid uid, FireVisualsComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, FireVisualsComponent component, ref ComponentShutdown args)
     {
         if (component.LightEntity != null)
         {
@@ -118,7 +118,7 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             return;
         // RMC14 end
 
-        component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
+        component.LightEntity ??= SpawnAttachedTo(null, new EntityCoordinates(uid, default));
         var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);
 
         // RMC14 start

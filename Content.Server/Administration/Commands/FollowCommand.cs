@@ -6,9 +6,9 @@ using Robust.Shared.Enums;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.AdminGhost)] // RMC14
-public sealed class FollowCommand : LocalizedEntityCommands
+public sealed partial class FollowCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly FollowerSystem _followerSystem = default!;
+    [Dependency] private FollowerSystem _followerSystem = default!;
 
     public override string Command => "follow";
 

@@ -76,5 +76,5 @@ public sealed partial class DamageOverTimeComponent : Component
 
     [DataRecord]
     [Serializable, NetSerializable]
-    public readonly record struct DamageMultiplier(FixedPoint2 Multiplier, EntityWhitelist Whitelist);
+    public readonly partial record struct DamageMultiplier(FixedPoint2 Multiplier, EntityWhitelist Whitelist);
 }

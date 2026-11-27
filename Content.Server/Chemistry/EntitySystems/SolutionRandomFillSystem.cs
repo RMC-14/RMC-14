@@ -8,11 +8,11 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
-public sealed class SolutionRandomFillSystem : EntitySystem
+public sealed partial class SolutionRandomFillSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionsSystem = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionsSystem = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -23,10 +23,10 @@ public sealed class SolutionRandomFillSystem : EntitySystem
 
     private void OnRandomSolutionFillMapInit(Entity<RandomFillSolutionComponent> entity, ref MapInitEvent args)
     {
-        if (entity.Comp.WeightedRandomId == null)
+        if (entity.Comp.WeightedRandomId is not { } weightedRandomId)
             return;
 
-        var pick = _proto.Index<WeightedRandomFillSolutionPrototype>(entity.Comp.WeightedRandomId).Pick(_random);
+        var pick = _proto.Index(weightedRandomId).Pick(_random);
 
         var reagent = pick.reagent;
         var quantity = pick.quantity;

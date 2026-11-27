@@ -4,9 +4,9 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Camera;
 
-public sealed class RMCCameraSystem : SharedRMCCameraSystem
+public sealed partial class RMCCameraSystem : SharedRMCCameraSystem
 {
-    [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
 

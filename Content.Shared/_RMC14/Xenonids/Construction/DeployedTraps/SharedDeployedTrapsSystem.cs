@@ -10,14 +10,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.DeployedTraps;
 
-public sealed class SharedDeployedTrapsSystem : EntitySystem
+public sealed partial class SharedDeployedTrapsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
@@ -47,7 +47,7 @@ public sealed class SharedDeployedTrapsSystem : EntitySystem
         caught.ExpireTime = _timing.CurTime + trap.Comp.StunDuration;
         caught.Applier = trap.Comp.PlacedBy;
 
-        PredictedQueueDel(trap.Owner);
+        QueueDel(trap.Owner);
     }
 
     private void OnStepOffTriggered(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggeredOffEvent args)

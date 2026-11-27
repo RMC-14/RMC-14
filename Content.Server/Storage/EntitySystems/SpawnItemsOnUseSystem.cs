@@ -12,14 +12,14 @@ using static Content.Shared.Storage.EntitySpawnCollection;
 
 namespace Content.Server.Storage.EntitySystems
 {
-    public sealed class SpawnItemsOnUseSystem : EntitySystem
+    public sealed partial class SpawnItemsOnUseSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly SharedHandsSystem _hands = default!;
-        [Dependency] private readonly PricingSystem _pricing = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private SharedHandsSystem _hands = default!;
+        [Dependency] private PricingSystem _pricing = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
 
         public override void Initialize()
         {
@@ -76,7 +76,7 @@ namespace Content.Server.Storage.EntitySystems
 
             foreach (var proto in spawnEntities)
             {
-                entityToPlaceInHands = Spawn(proto, coords);
+                entityToPlaceInHands = SpawnAttachedTo(proto, coords);
                 _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User)} used {ToPrettyString(uid)} which spawned {ToPrettyString(entityToPlaceInHands.Value)}");
             }
 

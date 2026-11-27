@@ -28,8 +28,8 @@ public sealed class BluespaceArtifactRule : StationEventSystem<BluespaceArtifact
             if (!TryFindRandomTile(out _, out _, out _, out var coords))
                 return;
 
-            Spawn(component.ArtifactSpawnerPrototype, coords);
-            Spawn(component.ArtifactFlashPrototype, coords);
+            SpawnAttachedTo(component.ArtifactSpawnerPrototype, coords);
+            SpawnAttachedTo(component.ArtifactFlashPrototype, coords);
 
             Sawmill.Info($"Spawning random artifact at {coords}");
         }

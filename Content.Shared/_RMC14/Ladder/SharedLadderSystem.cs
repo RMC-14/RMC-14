@@ -17,17 +17,17 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Ladder;
 
-public abstract class SharedLadderSystem : EntitySystem
+public abstract partial class SharedLadderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCTeleporterSystem _rmcTeleporter = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly HashSet<Entity<LadderComponent>> _toUpdate = new();
     private readonly Dictionary<string, HashSet<Entity<LadderComponent>>> _toUpdateIds = new();

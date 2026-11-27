@@ -25,24 +25,24 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Vehicle;
 
-public sealed class VehicleSupplySystem : EntitySystem
+public sealed partial class VehicleSupplySystem : EntitySystem
 {
     private readonly record struct HardpointItemInfo(string ProtoId, HashSet<ProtoId<TagPrototype>> Tags);
     private const int VendedHardpointAmmoCount = 3;
 
 
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly VehicleHardpointVisualsSystem _hardpointVisuals = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
-    [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private VehicleHardpointVisualsSystem _hardpointVisuals = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedRequisitionsSystem _requisitions = default!;
+    [Dependency] private VehicleSystem _rmcVehicles = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedCMAutomatedVendorSystem _vendor = default!;
 
     private readonly Dictionary<string, List<HardpointItemInfo>> _hardpointItemsByType = new();
     private readonly Dictionary<string, string> _hardpointTypeByProto = new();
@@ -251,7 +251,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             if (proto.Abstract)
                 continue;
 
-            if (!proto.TryGetComponent(out HardpointItemComponent? hardpointItem, _compFactory))
+            if (!proto.TryComp(out HardpointItemComponent? hardpointItem, _compFactory))
                 continue;
 
             _hardpointTypeByProto[Normalize(proto.ID)] = Normalize(hardpointItem.HardpointType.Id);
@@ -264,7 +264,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             }
 
             var tags = new HashSet<ProtoId<TagPrototype>>();
-            if (proto.TryGetComponent(out TagComponent? tagComp, _compFactory))
+            if (proto.TryComp(out TagComponent? tagComp, _compFactory))
                 tags = new HashSet<ProtoId<TagPrototype>>(tagComp.Tags);
 
             list.Add(new HardpointItemInfo(proto.ID, tags));
@@ -380,7 +380,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             if (proto.Abstract)
                 continue;
 
-            if (!proto.TryGetComponent(out BulletBoxComponent? box, _compFactory))
+            if (!proto.TryComp(out BulletBoxComponent? box, _compFactory))
                 continue;
 
             if (box.BulletType != bulletType)
@@ -1617,7 +1617,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             return _hardpointsByVehicleCache[key];
         }
 
-        if (!vehicleProto.TryGetComponent(out HardpointSlotsComponent? slots, _compFactory))
+        if (!vehicleProto.TryComp(out HardpointSlotsComponent? slots, _compFactory))
         {
             _hardpointsByVehicleCache[key] = new List<string>();
             return _hardpointsByVehicleCache[key];

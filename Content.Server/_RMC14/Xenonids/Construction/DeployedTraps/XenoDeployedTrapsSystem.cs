@@ -5,10 +5,10 @@ using Content.Shared.Damage;
 
 namespace Content.Server._RMC14.Xenonids.Construction.DeployedTraps;
 
-public sealed class XenoDeployedTrapsSystem : EntitySystem
+public sealed partial class XenoDeployedTrapsSystem : EntitySystem
 {
-    [Dependency] private readonly DestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private DestructibleSystem _destructible = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {

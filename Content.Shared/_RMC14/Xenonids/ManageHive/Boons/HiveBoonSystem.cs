@@ -36,30 +36,30 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 
-public sealed class HiveBoonSystem : EntitySystem
+public sealed partial class HiveBoonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly SharedRMCPlayTimeManager _rmcPlaytime = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRMCGameTickerSystem _rmcGameTicker = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private SharedRMCPlayTimeManager _rmcPlaytime = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private static readonly EntProtoId<HiveBoonDefinitionComponent> KingBoonId = "RMCHiveBoonKing";
     private static readonly EntProtoId<HiveKingCocoonComponent> KingCocoonId = "RMCHiveCocoonKing";
@@ -477,7 +477,7 @@ public sealed class HiveBoonSystem : EntitySystem
     public void TryActivateBoon(Entity<ManageHiveComponent> manage, EntProtoId<HiveBoonDefinitionComponent> boon)
     {
         if (!_prototype.TryIndex(boon, out var boonProto) ||
-            !boonProto.TryGetComponent(out HiveBoonDefinitionComponent? boonComp, _compFactory))
+            !boonProto.TryComp(out HiveBoonDefinitionComponent? boonComp, _compFactory))
         {
             return;
         }
@@ -608,7 +608,7 @@ public sealed class HiveBoonSystem : EntitySystem
     private bool TryGetUnlockAt(Entity<HiveBoonsComponent> boons, EntProtoId<HiveBoonDefinitionComponent> boonId, out TimeSpan unlockAt)
     {
         if (!_prototype.TryIndex(boonId, out var boon) ||
-            !boon.TryGetComponent(out HiveBoonDefinitionComponent? boonComp, _compFactory))
+            !boon.TryComp(out HiveBoonDefinitionComponent? boonComp, _compFactory))
         {
             unlockAt = TimeSpan.Zero;
             return false;
@@ -637,7 +637,7 @@ public sealed class HiveBoonSystem : EntitySystem
         var boons = ImmutableArray.CreateBuilder<(EntityPrototype Prototype, HiveBoonDefinitionComponent Component)>();
         foreach (var prototype in _prototype.EnumeratePrototypes<EntityPrototype>())
         {
-            if (!prototype.TryGetComponent(out HiveBoonDefinitionComponent? comp, _compFactory))
+            if (!prototype.TryComp(out HiveBoonDefinitionComponent? comp, _compFactory))
                 continue;
 
             boons.Add((prototype, comp));

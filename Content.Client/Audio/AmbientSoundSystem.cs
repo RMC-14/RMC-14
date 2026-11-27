@@ -24,15 +24,15 @@ namespace Content.Client.Audio;
 /// <summary>
 /// Samples nearby <see cref="AmbientSoundComponent"/> and plays audio.
 /// </summary>
-public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
+public sealed partial class AmbientSoundSystem : SharedAmbientSoundSystem
 {
-    [Dependency] private readonly AmbientSoundTreeSystem _treeSys = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private AmbientSoundTreeSystem _treeSys = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _xformSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void QueueUpdate(EntityUid uid, AmbientSoundComponent ambience)
         => _treeSys.QueueTreeUpdate(uid, ambience);
@@ -105,7 +105,7 @@ public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
         SubscribeLocalEvent<AmbientSoundComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnShutdown(EntityUid uid, AmbientSoundComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, AmbientSoundComponent component, ref ComponentShutdown args)
     {
         if (!_playingSounds.Remove((uid, component), out var sound))
             return;

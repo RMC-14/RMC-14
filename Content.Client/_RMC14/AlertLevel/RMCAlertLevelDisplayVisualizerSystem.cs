@@ -7,11 +7,11 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.AlertLevel;
 
-public sealed class RMCAlertLevelDisplayVisualizerSystem : EntitySystem
+public sealed partial class RMCAlertLevelDisplayVisualizerSystem : EntitySystem
 {
 
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
-    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private RMCAlertLevelSystem _alertLevel = default!;
 
     public override void Update(float frameTime)
     {

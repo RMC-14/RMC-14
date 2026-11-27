@@ -8,13 +8,13 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Spawners;
 
-public sealed class RMCSpawnerSystem : EntitySystem
+public sealed partial class RMCSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedEvacuationSystem _evacuation = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -27,7 +27,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         if (ent.Comp.Spawn is not { } spawn)
             return;
 
-        Spawn(spawn, ent.Owner.ToCoordinates());
+        SpawnAttachedTo(spawn, ent.Owner.ToCoordinates());
     }
 
     private void OnSpawnOnInteractHand(Entity<SpawnOnInteractComponent> ent, ref InteractHandEvent args)

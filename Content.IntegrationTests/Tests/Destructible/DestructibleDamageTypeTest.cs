@@ -33,7 +33,7 @@ namespace Content.IntegrationTests.Tests.Destructible
             {
                 var coordinates = testMap.GridCoords;
 
-                sDestructibleEntity = sEntityManager.SpawnEntity(DestructibleDamageTypeEntityId, coordinates);
+                sDestructibleEntity = sEntityManager.SpawnAttachedTo(DestructibleDamageTypeEntityId, coordinates);
                 sDamageableComponent = sEntityManager.GetComponent<DamageableComponent>(sDestructibleEntity);
                 sTestThresholdListenerSystem = sEntitySystemManager.GetEntitySystem<TestDestructibleListenerSystem>();
                 sTestThresholdListenerSystem.ThresholdsReached.Clear();

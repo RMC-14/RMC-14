@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Damage;
 
-public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
+public sealed partial class RMCTemporaryInvincibilitySystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EvasionSystem _evasion = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EvasionSystem _evasion = default!;
     public override void Initialize()
     {
         base.Initialize();

@@ -12,11 +12,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 
-public sealed class GunIFFSystem : EntitySystem
+public sealed partial class GunIFFSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _factionBuffer = new();

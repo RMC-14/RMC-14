@@ -21,15 +21,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Objectives;
 
-public sealed class ObjectivesSystem : SharedObjectivesSystem
+public sealed partial class ObjectivesSystem : SharedObjectivesSystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private IEnumerable<string>? _objectives;
 
@@ -244,7 +244,7 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
             var objectives = group.Weights.ShallowClone();
             while (_random.TryPickAndTake(objectives, out var objectiveProto))
             {
-                if (!_prototypeManager.Index(objectiveProto).TryGetComponent<ObjectiveComponent>(out var objectiveComp, EntityManager.ComponentFactory))
+                if (!_prototypeManager.Index(objectiveProto).TryComp<ObjectiveComponent>(out var objectiveComp, EntityManager.ComponentFactory))
                     continue;
 
                 if (objectiveComp.Difficulty <= maxDifficulty && TryCreateObjective((mindId, mind), objectiveProto, out var objective))

@@ -17,19 +17,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Banish;
 
-public abstract class SharedXenoBanishSystem : EntitySystem
+public abstract partial class SharedXenoBanishSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private LarvaQueueSystem _larvaQueue = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlaytimeManager _playtime = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {

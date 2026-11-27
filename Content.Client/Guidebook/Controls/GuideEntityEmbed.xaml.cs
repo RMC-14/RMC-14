@@ -26,10 +26,10 @@ namespace Content.Client.Guidebook.Controls;
 [GenerateTypedNameReferences]
 public sealed partial class GuideEntityEmbed : BoxContainer, IDocumentTag
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IEntitySystemManager _systemManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IEntitySystemManager _systemManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private readonly TagSystem _tagSystem;
     private readonly ExamineSystem _examineSystem;
@@ -64,7 +64,7 @@ public sealed partial class GuideEntityEmbed : BoxContainer, IDocumentTag
     {
         Interactive = interactive;
 
-        var ent = _entityManager.SpawnEntity(proto, MapCoordinates.Nullspace);
+        var ent = _entityManager.Spawn(proto, MapCoordinates.Nullspace);
         View.SetEntity(ent);
 
         if (caption)
@@ -144,7 +144,7 @@ public sealed partial class GuideEntityEmbed : BoxContainer, IDocumentTag
             return false;
         }
 
-        var ent = _entityManager.SpawnEntity(proto, MapCoordinates.Nullspace);
+        var ent = _entityManager.Spawn(proto, MapCoordinates.Nullspace);
 
         _tagSystem.AddTag(ent, GuidebookSystem.GuideEmbedTag);
         View.SetEntity(ent);

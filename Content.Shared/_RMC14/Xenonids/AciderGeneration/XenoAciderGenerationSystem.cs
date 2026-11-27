@@ -10,13 +10,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.AciderGeneration;
 
-public sealed class XenoAciderGenerationSystem : EntitySystem
+public sealed partial class XenoAciderGenerationSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly XenoEnergySystem _energy = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private XenoEnergySystem _energy = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAciderGenerationComponent, MeleeHitEvent>(OnMeleeHit);

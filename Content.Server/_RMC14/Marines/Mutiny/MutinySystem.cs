@@ -16,13 +16,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Marines.Mutiny;
 
-public sealed class MutinySystem : SharedMutinySystem
+public sealed partial class MutinySystem : SharedMutinySystem
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly EuiManager _euis = default!;
-    [Dependency] private readonly JobSystem _jobs = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private EuiManager _euis = default!;
+    [Dependency] private JobSystem _jobs = default!;
 
     public override void Initialize()
     {

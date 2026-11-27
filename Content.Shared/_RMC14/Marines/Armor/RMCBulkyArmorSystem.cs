@@ -3,9 +3,9 @@ using Content.Shared.Popups;
 
 namespace Content.Shared._RMC14.Marines.Armor;
 
-public sealed class RMCBulkyArmorSystem : EntitySystem
+public sealed partial class RMCBulkyArmorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

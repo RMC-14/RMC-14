@@ -14,17 +14,17 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
-public abstract class SharedXenoResinHoleSystem : EntitySystem
+public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] protected readonly MobStateSystem _mobState = default!;
-    [Dependency] protected readonly RMCHandsSystem _rmcHands = default!;
-    [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] protected readonly INetManager _net = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly AreaSystem _areas = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
+    [Dependency] protected SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] protected MobStateSystem _mobState = default!;
+    [Dependency] protected RMCHandsSystem _rmcHands = default!;
+    [Dependency] protected SharedXenoHiveSystem _hive = default!;
+    [Dependency] protected INetManager _net = default!;
+    [Dependency] protected SharedPopupSystem _popup = default!;
+    [Dependency] protected SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private AreaSystem _areas = default!;
+    [Dependency] private SharedXenoAnnounceSystem _announce = default!;
 
     public override void Initialize()
     {

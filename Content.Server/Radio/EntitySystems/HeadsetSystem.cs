@@ -11,13 +11,13 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Radio.EntitySystems;
 
-public sealed class HeadsetSystem : SharedHeadsetSystem
+public sealed partial class HeadsetSystem : SharedHeadsetSystem
 {
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private RadioSystem _radio = default!;
 
     //RMC14
-    [Dependency] private readonly SharedCMChatSystem _cmChat = default!;
+    [Dependency] private SharedCMChatSystem _cmChat = default!;
 
     public override void Initialize()
     {

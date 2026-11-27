@@ -19,7 +19,7 @@ namespace Content.Client.UserInterface.Controls
 
         public void Clear()
         {
-            DisposeAllChildren();
+            RemoveAllChildren();
         }
 
         public void AddEntry(float amount, Color color, string? tooltip = null)

@@ -20,18 +20,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Defibrillator;
 
-public abstract class SharedRMCDefibrillatorSystem : EntitySystem
+public abstract partial class SharedRMCDefibrillatorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
-    [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedRMCBloodstreamSystem _rmcBloodstream = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private SharedRMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private RMCReagentSystem _rmcReagent = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly ProtoId<EmotePrototype> GaspEmote = "Gasp";
     private static readonly ProtoId<StatusEffectPrototype> BlurredKey = "Blinded";

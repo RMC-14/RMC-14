@@ -7,13 +7,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Ghost;
 
-public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
+public sealed partial class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
 {
     public const string BaseLayerKey = "ghost-non-humanoid-base";
 
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private readonly Dictionary<EntProtoId, PrototypeSpriteData?> _prototypeSprites = new();
 
@@ -116,7 +116,7 @@ public sealed class GhostNonHumanoidAppearanceVisualizerSystem : EntitySystem
         if (!_prototype.TryIndex(prototypeId, out var prototype))
             return false;
 
-        if (!prototype.TryGetComponent(out SpriteComponent? sprite, _compFactory))
+        if (!prototype.TryComp(out SpriteComponent? sprite, _compFactory))
         {
             _prototypeSprites[prototypeId] = null;
             return false;

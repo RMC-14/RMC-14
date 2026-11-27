@@ -1,6 +1,5 @@
 using Content.Server.Spawners.EntitySystems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.Spawners.Components;
 

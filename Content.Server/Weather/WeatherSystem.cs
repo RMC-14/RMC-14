@@ -8,10 +8,10 @@ using System.Linq;
 
 namespace Content.Server.Weather;
 
-public sealed class WeatherSystem : SharedWeatherSystem
+public sealed partial class WeatherSystem : SharedWeatherSystem
 {
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
 
     public override void Initialize()
     {

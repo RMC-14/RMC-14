@@ -23,14 +23,14 @@ namespace Content.Client.Construction
     /// The client-side implementation of the construction system, which is used for constructing entities in game.
     /// </summary>
     [UsedImplicitly]
-    public sealed class ConstructionSystem : SharedConstructionSystem
+    public sealed partial class ConstructionSystem : SharedConstructionSystem
     {
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
-        [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-        [Dependency] private readonly SpriteSystem _sprite = default!;
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private ExamineSystemShared _examineSystem = default!;
+        [Dependency] private SharedTransformSystem _transformSystem = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private RMCConstructionSystem _rmcConstruction = default!;
 
         private readonly Dictionary<int, EntityUid> _ghosts = new();
         private readonly Dictionary<string, ConstructionGuide> _guideCache = new();
@@ -64,7 +64,7 @@ namespace Content.Client.Construction
             SubscribeLocalEvent<ConstructionGhostComponent, ComponentShutdown>(HandleGhostComponentShutdown);
         }
 
-        private void HandleGhostComponentShutdown(EntityUid uid, ConstructionGhostComponent component, ComponentShutdown args)
+        private void HandleGhostComponentShutdown(EntityUid uid, ConstructionGhostComponent component, ref ComponentShutdown args)
         {
             ClearGhost(component.GhostId);
         }
@@ -291,7 +291,7 @@ namespace Content.Client.Construction
             if (!CheckConstructionConditions(prototype, loc, dir, user, showPopup: true))
                 return false;
 
-            ghost = Spawn("constructionghost", loc);
+            ghost = SpawnAttachedTo("constructionghost", loc);
             var comp = Comp<ConstructionGhostComponent>(ghost.Value);
             comp.Prototype = prototype;
             comp.GhostId = ghost.GetHashCode();
@@ -301,7 +301,7 @@ namespace Content.Client.Construction
             var sprite = Comp<SpriteComponent>(ghost.Value);
             _sprite.SetColor((ghost.Value, sprite), new Color(48, 255, 48, 128));
 
-            if (targetProto.TryGetComponent(out IconComponent? icon, EntityManager.ComponentFactory))
+            if (targetProto.TryComp(out IconComponent? icon, EntityManager.ComponentFactory))
             {
                 _sprite.AddBlankLayer((ghost.Value, sprite), 0);
                 _sprite.LayerSetSprite((ghost.Value, sprite), 0, icon.Icon);
@@ -310,7 +310,7 @@ namespace Content.Client.Construction
             }
             else if (targetProto.Components.TryGetValue("Sprite", out _))
             {
-                var dummy = EntityManager.SpawnEntity(targetProtoId, MapCoordinates.Nullspace);
+                var dummy = EntityManager.Spawn(targetProtoId, MapCoordinates.Nullspace);
                 var targetSprite = EnsureComp<SpriteComponent>(dummy);
                 EntityManager.System<AppearanceSystem>().OnChangeData(dummy, targetSprite);
 

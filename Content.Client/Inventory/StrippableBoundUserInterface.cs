@@ -29,10 +29,10 @@ using static Robust.Client.UserInterface.Control;
 namespace Content.Client.Inventory
 {
     [UsedImplicitly]
-    public sealed class StrippableBoundUserInterface : BoundUserInterface
+    public sealed partial class StrippableBoundUserInterface : BoundUserInterface
     {
-        [Dependency] private readonly IPlayerManager _player = default!;
-        [Dependency] private readonly IUserInterfaceManager _ui = default!;
+        [Dependency] private IPlayerManager _player = default!;
+        [Dependency] private IUserInterfaceManager _ui = default!;
 
         private readonly ExamineSystem _examine;
         private readonly HandsSystem _hands;
@@ -72,7 +72,7 @@ namespace Content.Client.Inventory
             _cuffable = EntMan.System<SharedCuffableSystem>();
             _strippable = EntMan.System<StrippableSystem>();
 
-            _virtualHiddenEntity = EntMan.SpawnEntity(HiddenPocketEntityId, MapCoordinates.Nullspace);
+            _virtualHiddenEntity = EntMan.Spawn(HiddenPocketEntityId, MapCoordinates.Nullspace);
         }
 
         protected override void Open()

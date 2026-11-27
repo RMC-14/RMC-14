@@ -3,9 +3,9 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Armor;
 
-public sealed class ClothingGrantComponentsSystem : EntitySystem
+public sealed partial class ClothingGrantComponentsSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

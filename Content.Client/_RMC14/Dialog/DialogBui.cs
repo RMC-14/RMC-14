@@ -53,7 +53,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         container.Message.Text = s.Message.Text;
         container.Message.Visible = container.Message.Text?.Length > 0;
 
-        container.Options.DisposeAllChildren();
+        container.Options.RemoveAllChildren();
         var spriteSystem = EntMan.System<SpriteSystem>();
 
         for (var i = 0; i < s.Options.Count; i++)

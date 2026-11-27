@@ -31,7 +31,7 @@ namespace Content.IntegrationTests.Tests.Access
             await server.WaitAssertion(() =>
             {
                 var system = entityManager.System<AccessReaderSystem>();
-                var ent = entityManager.SpawnEntity("TestAccessReader", MapCoordinates.Nullspace);
+                var ent = entityManager.Spawn("TestAccessReader", MapCoordinates.Nullspace);
                 var reader = new Entity<AccessReaderComponent>(ent, entityManager.GetComponent<AccessReaderComponent>(ent));
 
                 // test empty

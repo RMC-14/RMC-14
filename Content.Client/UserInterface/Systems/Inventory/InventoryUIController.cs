@@ -27,10 +27,10 @@ using static Content.Client.Inventory.ClientInventorySystem;
 
 namespace Content.Client.UserInterface.Systems.Inventory;
 
-public sealed class InventoryUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>,
+public sealed partial class InventoryUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>,
     IOnSystemChanged<ClientInventorySystem>, IOnSystemChanged<HandsSystem>, IOnSystemChanged<WebbingSystem>, IOnSystemChanged<UniformAccessorySystem>
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     [UISystemDependency] private readonly ClientInventorySystem _inventorySystem = default!;
     [UISystemDependency] private readonly HandsSystem _handsSystem = default!;
@@ -341,7 +341,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         }
 
         // Set green / red overlay at 50% transparency
-        var hoverEntity = _entities.SpawnEntity("hoverentity", MapCoordinates.Nullspace);
+        var hoverEntity = _entities.Spawn("hoverentity", MapCoordinates.Nullspace);
         var hoverSprite = _entities.GetComponent<SpriteComponent>(hoverEntity);
         var fits = _inventorySystem.CanEquip(player.Value, held.Value, control.SlotName, out _, slotDef) &&
                    _container.CanInsert(held.Value, container);

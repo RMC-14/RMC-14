@@ -4,10 +4,10 @@ using Content.Shared._RMC14.Slow;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachableTemporarySpeedModsSystem : EntitySystem
+public sealed partial class AttachableTemporarySpeedModsSystem : EntitySystem
 {
-    [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private AttachableHolderSystem _attachableHolderSystem = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
 
     public override void Initialize()
     {

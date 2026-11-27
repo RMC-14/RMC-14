@@ -5,10 +5,10 @@ using Content.Shared.Mind.Components;
 
 namespace Content.Server._RMC14.Ghost;
 
-public sealed class RMCGhostOnGibSystem : EntitySystem
+public sealed partial class RMCGhostOnGibSystem : EntitySystem
 {
-    [Dependency] private readonly GhostSystem _ghost = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private GhostSystem _ghost = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {

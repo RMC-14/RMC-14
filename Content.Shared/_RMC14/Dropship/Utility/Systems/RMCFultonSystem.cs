@@ -21,24 +21,24 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public sealed class RMCFultonSystem : EntitySystem
+public sealed partial class RMCFultonSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRottingSystem _rotting = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcpulling = default!;
-    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedDropshipWeaponSystem _dropshipWeapon = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRottingSystem _rotting = default!;
+    [Dependency] private RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCPullingSystem _rmcpulling = default!;
+    [Dependency] private RMCUnrevivableSystem _unrevivable = default!;
 
     private int _fultonCount;
     private MapId? _fultonMap;

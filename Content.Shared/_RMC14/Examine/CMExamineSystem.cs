@@ -10,13 +10,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Examine;
 
-public sealed class CMExamineSystem : EntitySystem
+public sealed partial class CMExamineSystem : EntitySystem
 {
-    [Dependency] private readonly SkillsSystem _skillsSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly HealthExaminableSystem _healthExaminable = default!;
-    [Dependency] private readonly IdExaminableSystem _idExaminable = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private SkillsSystem _skillsSystem = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private HealthExaminableSystem _healthExaminable = default!;
+    [Dependency] private IdExaminableSystem _idExaminable = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     public override void Initialize()
     {

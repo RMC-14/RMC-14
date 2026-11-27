@@ -5,9 +5,9 @@ using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleWeaponSupportSystem : EntitySystem
+public sealed partial class VehicleWeaponSupportSystem : EntitySystem
 {
-    [Dependency] private readonly VehicleTopologySystem _topology = default!;
+    [Dependency] private VehicleTopologySystem _topology = default!;
 
     public override void Initialize()
     {

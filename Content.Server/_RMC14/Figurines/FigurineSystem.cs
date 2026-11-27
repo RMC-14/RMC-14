@@ -18,15 +18,15 @@ using SixLabors.ImageSharp.Processing;
 
 namespace Content.Server._RMC14.Figurines;
 
-public sealed class FigurineSystem : EntitySystem
+public sealed partial class FigurineSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StorageSystem _storage = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StorageSystem _storage = default!;
 
     private readonly Dictionary<string, EntProtoId> _allFigurines = new();
     private readonly HashSet<EntProtoId> _figurines = [];
@@ -88,7 +88,7 @@ public sealed class FigurineSystem : EntitySystem
         _allFigurines.Clear();
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (prototype.TryGetComponent(out PatronFigurineComponent? figurine, _compFactory))
+            if (prototype.TryComp(out PatronFigurineComponent? figurine, _compFactory))
             {
                 if (_allFigurines.ContainsKey(figurine.Id))
                     Log.Error($"Duplicate id {figurine.Id} found for figurine {prototype.ID}");
@@ -108,7 +108,7 @@ public sealed class FigurineSystem : EntitySystem
         foreach (var (_, figurineId) in _allFigurines)
         {
             if (_prototypes.TryIndex(figurineId, out var figurine) &&
-                figurine.TryGetComponent(out PatronFigurineComponent? figurineComp, _compFactory))
+                figurine.TryComp(out PatronFigurineComponent? figurineComp, _compFactory))
             {
                 if (!Guid.TryParse(figurineComp.Id, out var guid))
                 {
@@ -130,7 +130,7 @@ public sealed class FigurineSystem : EntitySystem
             return;
 
         if (!Deleted(spawner))
-            Spawn(_random.Pick(_figurines), Transform(spawner).Coordinates);
+            SpawnAttachedTo(_random.Pick(_figurines), Transform(spawner).Coordinates);
 
         QueueDel(spawner);
     }

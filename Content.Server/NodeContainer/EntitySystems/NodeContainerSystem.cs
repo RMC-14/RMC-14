@@ -13,9 +13,9 @@ namespace Content.Server.NodeContainer.EntitySystems
     /// </summary>
     /// <seealso cref="NodeGroupSystem"/>
     [UsedImplicitly]
-    public sealed class NodeContainerSystem : SharedNodeContainerSystem
+    public sealed partial class NodeContainerSystem : SharedNodeContainerSystem
     {
-        [Dependency] private readonly NodeGroupSystem _nodeGroupSystem = default!;
+        [Dependency] private NodeGroupSystem _nodeGroupSystem = default!;
         private EntityQuery<NodeContainerComponent> _query;
 
         public override void Initialize()
@@ -26,7 +26,6 @@ namespace Content.Server.NodeContainer.EntitySystems
             SubscribeLocalEvent<NodeContainerComponent, ComponentStartup>(OnStartupEvent);
             SubscribeLocalEvent<NodeContainerComponent, ComponentShutdown>(OnShutdownEvent);
             SubscribeLocalEvent<NodeContainerComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
-            SubscribeLocalEvent<NodeContainerComponent, ReAnchorEvent>(OnReAnchor);
             SubscribeLocalEvent<NodeContainerComponent, MoveEvent>(OnMoveEvent);
             SubscribeLocalEvent<NodeContainerComponent, ExaminedEvent>(OnExamine);
 
@@ -139,7 +138,7 @@ namespace Content.Server.NodeContainer.EntitySystems
             }
         }
 
-        private void OnShutdownEvent(EntityUid uid, NodeContainerComponent component, ComponentShutdown args)
+        private void OnShutdownEvent(EntityUid uid, NodeContainerComponent component, ref ComponentShutdown args)
         {
             foreach (var node in component.Nodes.Values)
             {
@@ -164,15 +163,6 @@ namespace Content.Server.NodeContainer.EntitySystems
                     _nodeGroupSystem.QueueReflood(node);
                 else
                     _nodeGroupSystem.QueueNodeRemove(node);
-            }
-        }
-
-        private void OnReAnchor(EntityUid uid, NodeContainerComponent component, ref ReAnchorEvent args)
-        {
-            foreach (var node in component.Nodes.Values)
-            {
-                _nodeGroupSystem.QueueNodeRemove(node);
-                _nodeGroupSystem.QueueReflood(node);
             }
         }
 

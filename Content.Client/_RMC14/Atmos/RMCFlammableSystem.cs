@@ -10,9 +10,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Atmos;
 
-public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
+public sealed partial class RMCFlammableSystem : SharedRMCFlammableSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
 
     private const string RollKey = "StopDropRollAnimation";
     private static readonly ProtoId<StatusEffectPrototype> KnockdownedKey = "KnockedDown";

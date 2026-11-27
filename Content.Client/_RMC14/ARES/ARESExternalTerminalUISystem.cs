@@ -5,10 +5,10 @@ using Robust.Client.Timing;
 
 namespace Content.Client._RMC14.ARES;
 
-public sealed class ARESExternalTerminalUISystem : EntitySystem
+public sealed partial class ARESExternalTerminalUISystem : EntitySystem
 {
-    [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
-    [Dependency] private readonly IClientGameTiming _timing = default!;
+    [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;
+    [Dependency] private IClientGameTiming _timing = default!;
 
     public override void Initialize()
     {

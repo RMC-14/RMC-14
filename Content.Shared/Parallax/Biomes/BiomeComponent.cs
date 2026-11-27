@@ -3,9 +3,6 @@ using Content.Shared.Parallax.Biomes.Markers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Noise;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Shared.Parallax.Biomes;
 
@@ -71,8 +68,8 @@ public sealed partial class BiomeComponent : Component
     /// <summary>
     /// Track what markers we've loaded already to avoid double-loading.
     /// </summary>
-    [DataField("loadedMarkers", customTypeSerializer:typeof(PrototypeIdDictionarySerializer<HashSet<Vector2i>, BiomeMarkerLayerPrototype>))]
-    public Dictionary<string, HashSet<Vector2i>> LoadedMarkers = new();
+    [DataField("loadedMarkers")]
+    public Dictionary<ProtoId<BiomeMarkerLayerPrototype>, HashSet<Vector2i>> LoadedMarkers = new();
 
     [DataField]
     public HashSet<ProtoId<BiomeMarkerLayerPrototype>> MarkerLayers = new();

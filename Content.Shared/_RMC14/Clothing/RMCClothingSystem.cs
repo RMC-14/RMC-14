@@ -17,17 +17,17 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Clothing;
 
-public sealed class RMCClothingSystem : EntitySystem
+public sealed partial class RMCClothingSystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SharedUniformAccessorySystem _uniformAccessories = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SharedUniformAccessorySystem _uniformAccessories = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private EntityQuery<ClothingLimitComponent> _clothingLimitQuery;
 

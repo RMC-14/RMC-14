@@ -6,8 +6,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Random;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.Utility;
 
 using Content.Server.EntityEffects;
@@ -127,14 +125,14 @@ public partial class SeedData
     /// <summary>
     ///     The entity prototype that is spawned when this type of seed is extracted from produce using a seed extractor.
     /// </summary>
-    [DataField("packetPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string PacketPrototype = "SeedBase";
+    [DataField("packetPrototype")]
+    public EntProtoId PacketPrototype = "SeedBase";
 
     /// <summary>
     ///     The entity prototype this seed spawns when it gets harvested.
     /// </summary>
-    [DataField("productPrototypes", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
-    public List<string> ProductPrototypes = new();
+    [DataField("productPrototypes")]
+    public List<EntProtoId> ProductPrototypes = new();
 
     [DataField] public Dictionary<string, SeedChemQuantity> Chemicals = new();
 
@@ -228,7 +226,7 @@ public partial class SeedData
 
     [DataField("screaming")] public bool CanScream;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
+    [DataField] public EntProtoId KudzuPrototype = "WeakKudzu";
 
     [DataField] public bool TurnIntoKudzu;
     [DataField] public string? SplatPrototype { get; set; }
@@ -243,8 +241,8 @@ public partial class SeedData
     /// <summary>
     ///     The seed prototypes this seed may mutate into when prompted to.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<SeedPrototype>))]
-    public List<string> MutationPrototypes = new();
+    [DataField]
+    public List<ProtoId<SeedPrototype>> MutationPrototypes = new();
 
     /// <summary>
     ///  Log impact for when the seed is planted.
@@ -270,8 +268,8 @@ public partial class SeedData
             Mysterious = Mysterious,
 
             PacketPrototype = PacketPrototype,
-            ProductPrototypes = new List<string>(ProductPrototypes),
-            MutationPrototypes = new List<string>(MutationPrototypes),
+            ProductPrototypes = new List<EntProtoId>(ProductPrototypes),
+            MutationPrototypes = new List<ProtoId<SeedPrototype>>(MutationPrototypes),
             Chemicals = new Dictionary<string, SeedChemQuantity>(Chemicals),
             ConsumeGasses = new Dictionary<Gas, float>(ConsumeGasses),
             ExudeGasses = new Dictionary<Gas, float>(ExudeGasses),
@@ -330,8 +328,8 @@ public partial class SeedData
             Mysterious = other.Mysterious,
 
             PacketPrototype = other.PacketPrototype,
-            ProductPrototypes = new List<string>(other.ProductPrototypes),
-            MutationPrototypes = new List<string>(other.MutationPrototypes),
+            ProductPrototypes = new List<EntProtoId>(other.ProductPrototypes),
+            MutationPrototypes = new List<ProtoId<SeedPrototype>>(other.MutationPrototypes),
 
             Chemicals = new Dictionary<string, SeedChemQuantity>(Chemicals),
             ConsumeGasses = new Dictionary<Gas, float>(ConsumeGasses),

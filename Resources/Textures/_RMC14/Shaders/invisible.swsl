@@ -18,6 +18,6 @@ void fragment() {
     rgb = mix(rgb, vec3(zGrayscale(rgb)), clamp(grey_factor, 0.0, 1.0));
     rgb = mix(rgb, vec3(0.0), clamp(dark_factor, 0.0, 1.0));
 
-    COLOR.rgb = rgb;
-    COLOR.a = sprite.a * clamp(opacity, 0.0, 1.0);
+    highp float alpha = clamp(opacity, 0.0, 1.0);
+    COLOR = vec4(rgb * alpha, sprite.a * alpha);
 }

@@ -7,13 +7,13 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 
-public sealed class IFFToggleSystem : EntitySystem
+public sealed partial class IFFToggleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCSelectiveFireSystem _fireSystem = default!;
-    [Dependency] private readonly GunIFFSystem _iffSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private RMCSelectiveFireSystem _fireSystem = default!;
+    [Dependency] private GunIFFSystem _iffSystem = default!;
 
     public override void Initialize()
     {

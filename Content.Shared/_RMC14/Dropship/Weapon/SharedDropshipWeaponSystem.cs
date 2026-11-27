@@ -66,42 +66,41 @@ using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsScreen
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
-public abstract class SharedDropshipWeaponSystem : EntitySystem
+public abstract partial class SharedDropshipWeaponSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly SharedRMCEquipmentDeployerSystem _equipmentDeployer = default!;
-    [Dependency] private readonly DropshipUtilitySystem _dropshipUtility = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly NameModifierSystem _name = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PowerLoaderSystem _powerloader = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCCameraSystem _rmcCamera = default!;
-    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
-    [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
-    [Dependency] private readonly SharedRMCOrbitalDeploySystem _orbitalDeploy = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private SharedDropshipSystem _dropship = default!;
+    [Dependency] private SharedRMCEquipmentDeployerSystem _equipmentDeployer = default!;
+    [Dependency] private DropshipUtilitySystem _dropshipUtility = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private NameModifierSystem _name = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedOnCollideSystem _onCollide = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PowerLoaderSystem _powerloader = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRMCCameraSystem _rmcCamera = default!;
+    [Dependency] private SharedRMCFlammableSystem _rmcFlammable = default!;
+    [Dependency] private SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private RMCImplosionSystem _rmcImplosion = default!;
+    [Dependency] private SharedRMCOrbitalDeploySystem _orbitalDeploy = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     private EntityQuery<RMCWallExplosionDeletableComponent> _wallDeletableQuery;
 
@@ -380,7 +379,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     _net.IsServer &&
                     targetComponent.Eyes.TryGetValue(uid, out var oldEye))
                 {
-                    var proxy = Spawn(null, Transform(dropshipTarget).Coordinates);
+                    var proxy = SpawnAttachedTo(null, Transform(dropshipTarget).Coordinates);
 
                     var proxyTarget = EnsureComp<DropshipTargetComponent>(proxy);
                     proxyTarget.Abbreviation = targetComponent.Abbreviation;
@@ -683,7 +682,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
         }
 
-        var coordinates = _transform.GetMoverCoordinates(target).SnapToGrid(EntityManager, _mapManager);
+        var coordinates = _transform.GetMoverCoordinates(target).SnapToGrid(EntityManager);
         if (!CasDebug && !_area.CanCAS(coordinates))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-cas");
@@ -804,7 +803,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var time = _timing.CurTime;
 
-        var spawnTarget = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager);
+        var spawnTarget = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager);
         if (ammo.Explosion != null && HasNonDeletableWallOnTile(spawnTarget))
             spawnTarget = FindAlternateLandingTile(spawnTarget, spawnTarget, 3);
 
@@ -1389,7 +1388,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     public void UpdateSignalFlareVisuals(EntityUid ent)
     {
-        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
+        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager);
 
         if (!IsFlareLit(ent))
             return;
@@ -1475,7 +1474,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 if (flight.MarkerWarning)
                 {
-                    flight.WarningMarker = Spawn(DropshipTargetMarker, flight.Target);
+                    flight.WarningMarker = SpawnAttachedTo(DropshipTargetMarker, flight.Target);
                     var despawn = EnsureComp<TimedDespawnComponent>(flight.WarningMarker.Value);
                     despawn.Lifetime = (float) (flight.MarkerAt - _timing.CurTime).TotalSeconds;
                 }
@@ -1487,7 +1486,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!flight.SpawnedMarker)
             {
                 flight.SpawnedMarker = true;
-                flight.Marker = Spawn(DropshipTargetMarker, flight.Target);
+                flight.Marker = SpawnAttachedTo(DropshipTargetMarker, flight.Target);
                 Dirty(uid, flight);
 
                 _audio.PlayPvs(flight.SoundMarker, flight.Marker.Value);
@@ -1526,7 +1525,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 var landing = flight.Target.Offset(spread);
 
-                var targetMap = _transform.ToMapCoordinates(landing.SnapToGrid(EntityManager, _mapManager));
+                var targetMap = _transform.ToMapCoordinates(landing.SnapToGrid(EntityManager));
 
                 foreach (var effect in flight.ImpactEffects)
                 {
@@ -1665,7 +1664,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return false;
 
         var tile = _map.LocalToTile(gridUid, grid, impactCoords);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
 
         var foundWall = false;
         while (anchored.MoveNext(out var uid))
@@ -1682,7 +1681,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private EntityCoordinates FindAlternateLandingTile(EntityCoordinates desired, EntityCoordinates original, int maxRadius = 3)
     {
-        var origin = desired.SnapToGrid(EntityManager, _mapManager);
+        var origin = desired.SnapToGrid(EntityManager);
         var maximumX = original.Position.X + maxRadius;
         var maximumY = original.Position.Y + maxRadius;
         var minimumX = original.Position.X - maxRadius;
@@ -1729,7 +1728,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return false;
 
         var tile = _map.LocalToTile(gridUid, grid, impactCoords);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
 
         while (anchored.MoveNext(out var uid))
         {
@@ -1777,7 +1776,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (_net.IsClient)
                 return null;
 
-            eye = Spawn(null, target.Owner.ToCoordinates());
+            eye = SpawnAttachedTo(null, target.Owner.ToCoordinates());
             target.Comp.Eyes[terminal] = eye;
             Dirty(target);
 

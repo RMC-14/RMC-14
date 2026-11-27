@@ -10,10 +10,10 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Doors;
 
 /// <inheritdoc/>
-public sealed class TurnstileSystem : SharedTurnstileSystem
+public sealed partial class TurnstileSystem : SharedTurnstileSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly EntProtoId ExamineArrow = "TurnstileArrow";
 
@@ -39,7 +39,7 @@ public sealed class TurnstileSystem : SharedTurnstileSystem
 
     private void OnExamined(Entity<TurnstileComponent> ent, ref ExaminedEvent args)
     {
-        Spawn(ExamineArrow, new EntityCoordinates(ent, 0, 0));
+        SpawnAttachedTo(ExamineArrow, new EntityCoordinates(ent, 0, 0));
     }
 
     protected override void PlayAnimation(EntityUid uid, string stateId)

@@ -10,14 +10,14 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public abstract class SharedMedevacSystem : EntitySystem
+public abstract partial class SharedMedevacSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly DropshipUtilitySystem _dropshipUtility = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MedevacStretcherSystem _stretcher = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private DropshipUtilitySystem _dropshipUtility = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MedevacStretcherSystem _stretcher = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {

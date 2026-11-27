@@ -9,10 +9,10 @@ using Robust.Shared.Map;
 
 namespace Content.Server.Emp;
 
-public sealed class EmpSystem : SharedEmpSystem
+public sealed partial class EmpSystem : SharedEmpSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public const string EmpPulseEffectPrototype = "EffectEmpPulse";
 
@@ -57,7 +57,7 @@ public sealed class EmpSystem : SharedEmpSystem
         {
             TryEmpEffects(uid, energyConsumption, duration);
         }
-        Spawn(EmpPulseEffectPrototype, coordinates);
+        SpawnAttachedTo(EmpPulseEffectPrototype, coordinates);
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public sealed class EmpSystem : SharedEmpSystem
         RaiseLocalEvent(uid, ref ev);
         if (ev.Affected)
         {
-            Spawn(EmpDisabledEffectPrototype, Transform(uid).Coordinates);
+            SpawnAttachedTo(EmpDisabledEffectPrototype, Transform(uid).Coordinates);
         }
         if (ev.Disabled)
         {

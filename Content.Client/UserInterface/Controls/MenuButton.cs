@@ -9,9 +9,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.UserInterface.Controls;
 
-public sealed class MenuButton : ContainerButton
+public sealed partial class MenuButton : ContainerButton
 {
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
     public const string StyleClassLabelTopButton = "topButtonLabel";
     public const string StyleClassRedTopButton = "topButtonLabel";
 
@@ -80,6 +80,7 @@ public sealed class MenuButton : ContainerButton
 
     protected override void EnteredTree()
     {
+        base.EnteredTree();
         _inputManager.OnKeyBindingAdded += OnKeyBindingChanged;
         _inputManager.OnKeyBindingRemoved += OnKeyBindingChanged;
         _inputManager.OnInputModeChanged += OnKeyBindingChanged;
@@ -87,6 +88,7 @@ public sealed class MenuButton : ContainerButton
 
     protected override void ExitedTree()
     {
+        base.ExitedTree();
         _inputManager.OnKeyBindingAdded -= OnKeyBindingChanged;
         _inputManager.OnKeyBindingRemoved -= OnKeyBindingChanged;
         _inputManager.OnInputModeChanged -= OnKeyBindingChanged;

@@ -6,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.Round)]
-    public sealed class RestartRoundCommand : IConsoleCommand
+    public sealed partial class RestartRoundCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _e = default!;
+        [Dependency] private IEntityManager _e = default!;
 
         public string Command => "restartround";
         public string Description => "Ends the current round and starts the countdown for the next lobby.";
@@ -29,9 +29,9 @@ namespace Content.Server.GameTicking.Commands
     }
 
     [AdminCommand(AdminFlags.Round)]
-    public sealed class RestartRoundNowCommand : IConsoleCommand
+    public sealed partial class RestartRoundNowCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _e = default!;
+        [Dependency] private IEntityManager _e = default!;
 
         public string Command => "restartroundnow";
         public string Description => "Moves the server from PostRound to a new PreRoundLobby.";

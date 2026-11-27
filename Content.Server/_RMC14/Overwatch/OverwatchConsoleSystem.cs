@@ -13,14 +13,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Overwatch;
 
-public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
+public sealed partial class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
-    [Dependency] private readonly CommunicationsTowerSystem _communicationsTower = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private CommunicationsTowerSystem _communicationsTower = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     private readonly float _cameraRadius = OverwatchWatchingComponent.CameraRadius;
 

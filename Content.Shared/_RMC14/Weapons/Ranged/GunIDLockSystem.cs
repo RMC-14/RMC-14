@@ -11,11 +11,11 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class GunIDLockSystem : EntitySystem
+public sealed partial class GunIDLockSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

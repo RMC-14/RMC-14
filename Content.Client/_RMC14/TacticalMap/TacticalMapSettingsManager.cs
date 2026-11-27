@@ -17,12 +17,12 @@ using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Client._RMC14.TacticalMap;
 
-public sealed class TacticalMapSettingsManager
+public sealed partial class TacticalMapSettingsManager
 {
     private const string SettingsPath = "/rmc_tactical_map_settings.yml";
 
-    [Dependency] private readonly IResourceManager _resourceMan = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private IResourceManager _resourceMan = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
 
     private readonly HashSet<string> _modifiedSettings = new();
     private readonly List<TacticalMapSettingRegistration> _defaultRegistrations = new();

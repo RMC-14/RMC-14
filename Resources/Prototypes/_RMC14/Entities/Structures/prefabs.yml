@@ -25,7 +25,11 @@
     sprite: _RMC14/Structures/prefabs.rsi
     offset: 0.5, 0.5
   - type: Occluder
-    boundingBox: "-0.5,-0.5,1.5,1.9"
+    polygon:
+    - -0.5,1.9
+    - 1.5,1.9
+    - 1.5,-0.5
+    - -0.5,-0.5
 
 - type: entity
   abstract: true

@@ -7,10 +7,10 @@ namespace Content.Shared.Xenoarchaeology.Artifact.XAT;
 /// Base type for xeno artifact trigger systems. Each system should work with 1 trigger mechanics.
 /// </summary>
 /// <typeparam name="T">Type of XAT component that system will work with.</typeparam>
-public abstract class BaseXATSystem<T> : EntitySystem where T : Component
+public abstract partial class BaseXATSystem<T> : EntitySystem where T : Component
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly SharedXenoArtifactSystem XenoArtifact = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected SharedXenoArtifactSystem XenoArtifact = default!;
 
     private EntityQuery<XenoArtifactUnlockingComponent> _unlockingQuery;
 

@@ -3,9 +3,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.ForTheHive;
 
-public sealed class XenoForTheHiveVisualizerSystem : VisualizerSystem<ForTheHiveComponent>
+public sealed partial class XenoForTheHiveVisualizerSystem : VisualizerSystem<ForTheHiveComponent>
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
     public override void Initialize()
     {
         base.Initialize();

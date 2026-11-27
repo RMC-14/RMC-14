@@ -24,13 +24,13 @@ namespace Content.Shared.Radio.EntitySystems;
 /// </summary>
 public sealed partial class EncryptionKeySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedWiresSystem _wires = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedWiresSystem _wires = default!;
 
     public override void Initialize()
     {
@@ -220,7 +220,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
     /// <param name="channels">HashSet of channels in headset, encryptionkey or etc.</param>
     /// <param name="protoManager">IPrototypeManager for getting prototypes of channels with their variables.</param>
     /// <param name="channelFTLPattern">String that provide id of pattern in .ftl files to format channel with variables of it.</param>
-    public void AddChannelsExamine(HashSet<string> channels, string? defaultChannel, ExaminedEvent examineEvent, IPrototypeManager protoManager, string channelFTLPattern, HashSet<ProtoId<RadioChannelPrototype>>? ReadonlyChannels)
+    public void AddChannelsExamine(HashSet<ProtoId<RadioChannelPrototype>> channels, ProtoId<RadioChannelPrototype>? defaultChannel, ExaminedEvent examineEvent, IPrototypeManager protoManager, string channelFTLPattern, HashSet<ProtoId<RadioChannelPrototype>>? ReadonlyChannels)
     {
         RadioChannelPrototype? proto;
         foreach (var id in channels)

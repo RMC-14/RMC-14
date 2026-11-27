@@ -31,17 +31,17 @@ namespace Content.Server.Station.Systems;
 /// Also provides helpers for spawning in the player's mob.
 /// </summary>
 [PublicAPI]
-public sealed class StationSpawningSystem : SharedStationSpawningSystem
+public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
 {
-    [Dependency] private readonly SharedAccessSystem _accessSystem = default!;
-    [Dependency] private readonly ActorSystem _actors = default!;
-    [Dependency] private readonly IdCardSystem _cardSystem = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly MetaDataSystem _metaSystem = default!;
-    [Dependency] private readonly PdaSystem _pdaSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedAccessSystem _accessSystem = default!;
+    [Dependency] private ActorSystem _actors = default!;
+    [Dependency] private IdCardSystem _cardSystem = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoidSystem = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private MetaDataSystem _metaSystem = default!;
+    [Dependency] private PdaSystem _pdaSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     /// <summary>
     /// Attempts to spawn a player character onto the given station.
@@ -92,7 +92,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         //RMC14
         bool adminSpawn = false)
     {
-        _prototypeManager.TryIndex(job ?? string.Empty, out var prototype, false);
+        _prototypeManager.Resolve(job, out var prototype);
         RoleLoadout? loadout = null;
 
         // Need to get the loadout up-front to handle names if we use an entity spawn override.
@@ -111,7 +111,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         }
 
         // RMC14 UseLoadoutOfJob
-        if (prototype?.UseLoadoutOfJob != null && _prototypeManager.TryIndex(prototype.UseLoadoutOfJob, out var usedPrototype, false))
+        if (prototype?.UseLoadoutOfJob != null && _prototypeManager.TryIndex(prototype.UseLoadoutOfJob, out var usedPrototype))
         {
             var newJobLoadout = LoadoutSystem.GetJobPrototype(usedPrototype.ID);
 
@@ -129,7 +129,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         if (prototype?.JobEntity != null)
         {
             DebugTools.Assert(entity is null);
-            var jobEntity = Spawn(prototype.JobEntity, coordinates);
+            var jobEntity = SpawnAttachedTo(prototype.JobEntity, coordinates);
             MakeSentientCommand.MakeSentient(jobEntity, EntityManager);
 
             // Make sure custom names get handled, what is gameticker control flow whoopy.
@@ -148,7 +148,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         if (!_prototypeManager.TryIndex<SpeciesPrototype>(speciesId, out var species))
             throw new ArgumentException($"Invalid species prototype was used: {speciesId}");
 
-        entity ??= Spawn(species.Prototype, coordinates);
+        entity ??= SpawnAttachedTo(species.Prototype, coordinates);
 
         // RMC14
         if (adminSpawn)
@@ -192,7 +192,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
     private void DoJobSpecials(ProtoId<JobPrototype>? job, EntityUid entity)
     {
-        if (!_prototypeManager.TryIndex(job ?? string.Empty, out JobPrototype? prototype, false))
+        if (!_prototypeManager.Resolve(job, out JobPrototype? prototype))
             return;
 
         foreach (var jobSpecial in prototype.Special)

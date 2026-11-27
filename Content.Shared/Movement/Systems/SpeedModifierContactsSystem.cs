@@ -10,13 +10,13 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared.Movement.Systems;
 
-public sealed class SpeedModifierContactsSystem : EntitySystem
+public sealed partial class SpeedModifierContactsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifierSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly RMCWaterSystem _rmcWater = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private MovementSpeedModifierSystem _speedModifierSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private RMCWaterSystem _rmcWater = default!;
 
     // TODO full-game-save
     // Either these need to be processed before a map is saved, or slowed/slowing entities need to update on init.
@@ -69,7 +69,7 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
         _toUpdate.UnionWith(_physics.GetContactingEntities(uid));
     }
 
-    private void OnShutdown(EntityUid uid, SpeedModifierContactsComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, SpeedModifierContactsComponent component, ref ComponentShutdown args)
     {
         if (!TryComp(uid, out PhysicsComponent? phys))
             return;

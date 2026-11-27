@@ -6,10 +6,10 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Construction;
 
 /// <inheritdoc/>
-public sealed class FlatpackSystem : SharedFlatpackSystem
+public sealed partial class FlatpackSystem : SharedFlatpackSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -28,7 +28,7 @@ public sealed class FlatpackSystem : SharedFlatpackSystem
         if (!PrototypeManager.TryIndex<EntityPrototype>(machineBoardId, out var machineBoardPrototype))
             return;
 
-        if (!machineBoardPrototype.TryGetComponent<SpriteComponent>(out var sprite, EntityManager.ComponentFactory))
+        if (!machineBoardPrototype.TryComp<SpriteComponent>(out var sprite, EntityManager.ComponentFactory))
             return;
 
         Color? color = null;

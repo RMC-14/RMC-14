@@ -8,8 +8,8 @@ namespace Content.Server._RMC14.Mentor;
 
 public sealed partial class MentorVerbSystem : EntitySystem
 {
-    [Dependency] private readonly ImaginaryFriendSystem _imaginaryFriend = default!;
-    [Dependency] private readonly MentorManager _mentorManager = default!;
+    [Dependency] private ImaginaryFriendSystem _imaginaryFriend = default!;
+    [Dependency] private MentorManager _mentorManager = default!;
 
     public override void Initialize()
     {

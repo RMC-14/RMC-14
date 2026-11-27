@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Trigger;
 
-public sealed class RMCTriggerSystem : EntitySystem
+public sealed partial class RMCTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

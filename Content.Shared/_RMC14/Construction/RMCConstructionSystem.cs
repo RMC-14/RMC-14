@@ -27,24 +27,24 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Construction;
 
-public sealed class RMCConstructionSystem : EntitySystem
+public sealed partial class RMCConstructionSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly FixtureSystem _fixture = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly VehicleSystem _vehicle = default!;
-    [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private FixtureSystem _fixture = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private VehicleSystem _vehicle = default!;
+    [Dependency] private SharedWeaponMountSystem _weaponMount = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -98,7 +98,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             var coordinates = _transform.GetMoverCoordinates(uid, xform);
             var rotation = xform.LocalRotation;
             Del(uid);
-            var spawned = Spawn(id, coordinates);
+            var spawned = SpawnAttachedTo(id, coordinates);
             _transform.SetLocalRotation(spawned, rotation);
         }
     }
@@ -316,7 +316,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     public List<int> CalculateSpawns(string entityPrototype, int amount)
     {
         var proto = _prototype.Index<EntityPrototype>(entityPrototype);
-        proto.TryGetComponent<StackComponent>(out var stack, EntityManager.ComponentFactory);
+        proto.TryComp<StackComponent>(out var stack, EntityManager.ComponentFactory);
         var maxCountPerStack = _stack.GetMaxCount(stack);
         var amounts = new List<int>();
         while (amount > 0)
@@ -441,7 +441,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (!TryComp(gridId, out MapGridComponent? grid))
             return true;
 
-        if (proto.TryGetComponent(out BarricadeComponent? barricade, _componentFactory))
+        if (proto.TryComp(out BarricadeComponent? barricade, _componentFactory))
         {
             return !_weaponMount.HasWeaponMountNearbyPopup((gridId, grid), coordinates, proto, user: user);
         }

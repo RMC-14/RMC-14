@@ -8,7 +8,7 @@ namespace Content.Client.UserInterface.Systems.Sandbox.Windows;
 [GenerateTypedNameReferences]
 public sealed partial class SandboxWindow : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entManager = null!;
+    [Dependency] private IEntityManager _entManager = null!;
 
     public SandboxWindow()
     {

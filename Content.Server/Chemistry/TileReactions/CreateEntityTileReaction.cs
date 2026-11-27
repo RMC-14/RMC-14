@@ -6,7 +6,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using System.Numerics;
 
 namespace Content.Server.Chemistry.TileReactions;
@@ -14,8 +13,8 @@ namespace Content.Server.Chemistry.TileReactions;
 [DataDefinition]
 public sealed partial class CreateEntityTileReaction : ITileReaction
 {
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string Entity = default!;
+    [DataField(required: true)]
+    public EntProtoId Entity = default!;
 
     [DataField]
     public FixedPoint2 Usage = FixedPoint2.New(1);
@@ -66,7 +65,7 @@ public sealed partial class CreateEntityTileReaction : ITileReaction
 
         var center = entityManager.System<TurfSystem>().GetTileCenter(tile);
         var pos = center.Offset(new Vector2(xoffs, yoffs));
-        entityManager.SpawnEntity(Entity, pos);
+        entityManager.SpawnAttachedTo(Entity, pos);
 
         return Usage;
     }

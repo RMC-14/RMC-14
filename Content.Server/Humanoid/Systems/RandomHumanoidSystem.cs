@@ -11,13 +11,13 @@ namespace Content.Server.Humanoid.Systems;
 /// <summary>
 ///     This deals with spawning and setting up random humanoids.
 /// </summary>
-public sealed class RandomHumanoidSystem : EntitySystem
+public sealed partial class RandomHumanoidSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -29,8 +29,8 @@ public sealed class RandomHumanoidSystem : EntitySystem
     private void OnMapInit(EntityUid uid, RandomHumanoidSpawnerComponent component, MapInitEvent args)
     {
         QueueDel(uid);
-        if (component.SettingsPrototypeId != null)
-            SpawnRandomHumanoid(component.SettingsPrototypeId, Transform(uid).Coordinates, MetaData(uid).EntityName);
+        if (component.SettingsPrototypeId is { } settingsId)
+            SpawnRandomHumanoid(settingsId, Transform(uid).Coordinates, MetaData(uid).EntityName);
     }
 
     public EntityUid SpawnRandomHumanoid(string prototypeId, EntityCoordinates coordinates, string name)

@@ -5,10 +5,10 @@ using Robust.Shared.Player;
 
 namespace Content.Client.Drunk;
 
-public sealed class DrunkSystem : SharedDrunkSystem
+public sealed partial class DrunkSystem : SharedDrunkSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
 
     private DrunkOverlay _overlay = default!;
 
@@ -42,7 +42,7 @@ public sealed class DrunkSystem : SharedDrunkSystem
             _overlayMan.AddOverlay(_overlay);
     }
 
-    private void OnDrunkShutdown(EntityUid uid, DrunkComponent component, ComponentShutdown args)
+    private void OnDrunkShutdown(EntityUid uid, DrunkComponent component, ref ComponentShutdown args)
     {
         if (_player.LocalEntity == uid)
         {

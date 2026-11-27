@@ -19,10 +19,10 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client._RMC14.Overwatch;
 
 [UsedImplicitly]
-public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
+public sealed partial class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 {
-    [Dependency] private readonly ILocalizationManager _localization = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private ILocalizationManager _localization = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private const string GreenColor = "#229132";
     private const string RedColor = "#A42625";
@@ -158,7 +158,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
             if (_squadViews.TryGetValue(squad.Id, out var monitor))
             {
-                monitor.RolesContainer.DisposeAllChildren();
+                monitor.RolesContainer.RemoveAllChildren();
             }
             else
             {
@@ -987,7 +987,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         BoxContainer loads,
         Thickness margin)
     {
-        longitudes.DisposeAllChildren();
+        longitudes.RemoveAllChildren();
 
         var panel = CreatePanel(SavedLocationRowHeight);
         panel.AddChild(new Label
@@ -997,7 +997,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         });
         longitudes.AddChild(panel);
 
-        latitudes.DisposeAllChildren();
+        latitudes.RemoveAllChildren();
         panel = CreatePanel(SavedLocationRowHeight);
         panel.AddChild(new Label
         {
@@ -1006,7 +1006,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         });
         latitudes.AddChild(panel);
 
-        comments.DisposeAllChildren();
+        comments.RemoveAllChildren();
         panel = CreatePanel(SavedLocationRowHeight);
         panel.AddChild(new Label
         {
@@ -1015,7 +1015,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         });
         comments.AddChild(panel);
 
-        loads.DisposeAllChildren();
+        loads.RemoveAllChildren();
         panel = CreatePanel(SavedLocationRowHeight);
         panel.AddChild(new Label
         {

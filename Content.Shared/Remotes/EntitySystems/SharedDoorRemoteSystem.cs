@@ -4,9 +4,9 @@ using Content.Shared.Remotes.Components;
 
 namespace Content.Shared.Remotes.EntitySystems;
 
-public abstract class SharedDoorRemoteSystem : EntitySystem
+public abstract partial class SharedDoorRemoteSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
     public override void Initialize()
     {

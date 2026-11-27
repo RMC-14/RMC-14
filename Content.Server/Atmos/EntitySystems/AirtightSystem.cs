@@ -7,19 +7,18 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Atmos.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class AirtightSystem : EntitySystem
+    public sealed partial class AirtightSystem : EntitySystem
     {
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
-        [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-        [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
+        [Dependency] private ExplosionSystem _explosionSystem = default!;
+        [Dependency] private SharedMapSystem _mapSystem = default!;
 
         public override void Initialize()
         {
             SubscribeLocalEvent<AirtightComponent, ComponentInit>(OnAirtightInit);
             SubscribeLocalEvent<AirtightComponent, ComponentShutdown>(OnAirtightShutdown);
             SubscribeLocalEvent<AirtightComponent, AnchorStateChangedEvent>(OnAirtightPositionChanged);
-            SubscribeLocalEvent<AirtightComponent, ReAnchorEvent>(OnAirtightReAnchor);
             SubscribeLocalEvent<AirtightComponent, MoveEvent>(OnAirtightMoved);
         }
 
@@ -52,6 +51,7 @@ namespace Content.Server.Atmos.EntitySystems
         private void OnAirtightPositionChanged(EntityUid uid, AirtightComponent airtight, ref AnchorStateChangedEvent args)
         {
             var xform = args.Transform;
+            var oldPosition = airtight.LastPosition;
 
             if (!TryComp(xform.GridUid, out MapGridComponent? grid))
                 return;
@@ -66,18 +66,12 @@ namespace Content.Server.Atmos.EntitySystems
 
             var airtightEv = new AirtightChanged(uid, airtight, false, (gridId.Value, tilePos));
             RaiseLocalEvent(uid, ref airtightEv, true);
-        }
 
-        private void OnAirtightReAnchor(EntityUid uid, AirtightComponent airtight, ref ReAnchorEvent args)
-        {
-            foreach (var gridId in new[] { args.OldGrid, args.Grid })
+            if (oldPosition != default && oldPosition != airtight.LastPosition)
             {
-                // Update and invalidate new position.
-                airtight.LastPosition = (gridId, args.TilePos);
-                InvalidatePosition(gridId, args.TilePos);
-
-                var airtightEv = new AirtightChanged(uid, airtight, false, (gridId, args.TilePos));
-                RaiseLocalEvent(uid, ref airtightEv, true);
+                InvalidatePosition(oldPosition.Grid, oldPosition.Tile);
+                var oldAirtightEv = new AirtightChanged(uid, airtight, false, oldPosition);
+                RaiseLocalEvent(uid, ref oldAirtightEv, true);
             }
         }
 

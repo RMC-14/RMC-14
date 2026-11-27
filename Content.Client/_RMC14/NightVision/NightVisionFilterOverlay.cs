@@ -9,12 +9,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.NightVision;
 
-public sealed class NightVisionFilterOverlay : Overlay
+public sealed partial class NightVisionFilterOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private static readonly ProtoId<ShaderPrototype> ShaderId = "RMCNightVision";
 
@@ -44,7 +44,7 @@ public sealed class NightVisionFilterOverlay : Overlay
 
             var colorVal = _config.GetCVar(RMCCVars.RMCNightVisionColor);
             var color = ((NightVisionColor) colorVal).ToColor();
-            _shader.SetParameter("nv_color", new Robust.Shared.Maths.Vector3(color.R, color.G, color.B));
+            _shader.SetParameter("nv_color", new Vector3(color.R, color.G, color.B));
 
             handle.UseShader(_shader);
             handle.DrawRect(args.WorldBounds, Color.White);

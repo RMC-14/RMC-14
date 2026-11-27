@@ -6,11 +6,11 @@ using Content.Shared.Timing;
 
 namespace Content.Shared._RMC14.Chemistry;
 
-public sealed class RMCHypospraySystem : EntitySystem
+public sealed partial class RMCHypospraySystem : EntitySystem
 {
-    [Dependency] private readonly HypospraySystem _hypospray = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private HypospraySystem _hypospray = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {

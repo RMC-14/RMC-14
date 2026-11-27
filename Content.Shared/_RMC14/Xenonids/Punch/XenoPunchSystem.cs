@@ -13,19 +13,19 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Punch;
 
-public sealed class XenoPunchSystem : EntitySystem
+public sealed partial class XenoPunchSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
 
     public override void Initialize()
     {

@@ -8,9 +8,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Movement;
 
-public sealed class RMCLagCompensationSystem : SharedRMCLagCompensationSystem
+public sealed partial class RMCLagCompensationSystem : SharedRMCLagCompensationSystem
 {
-    [Dependency] private readonly IClientGameTiming _timing = default!;
+    [Dependency] private IClientGameTiming _timing = default!;
 
     public override GameTick GetLastRealTick(NetUserId? session)
     {

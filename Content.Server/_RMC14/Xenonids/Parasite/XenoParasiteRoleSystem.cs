@@ -21,28 +21,28 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
-public sealed class XenoEggRoleSystem : EntitySystem
+public sealed partial class XenoEggRoleSystem : EntitySystem
 {
     private readonly ProtoId<JobPrototype> _parasiteJob = "CMXenoParasite";
     private TimeSpan _parasiteSpawnDelay;
     private int _parasiteSpawnMinimum;
     private int _parasiteSpawnScale;
 
-    [Dependency] private readonly ActorSystem _actor = default!;
-    [Dependency] private readonly SharedXenoBanishSystem _banish = default!;
-    [Dependency] private readonly XenoEggSystem _eggSystem = default!;
-    [Dependency] private readonly XenoParasiteThrowerSystem _throwerSystem = default!;
-    [Dependency] private readonly XenoEvolutionSystem _evolutionSystem = default!;
-    [Dependency] private readonly EggMorpherSystem _eggMorpherSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private ActorSystem _actor = default!;
+    [Dependency] private SharedXenoBanishSystem _banish = default!;
+    [Dependency] private XenoEggSystem _eggSystem = default!;
+    [Dependency] private XenoParasiteThrowerSystem _throwerSystem = default!;
+    [Dependency] private XenoEvolutionSystem _evolutionSystem = default!;
+    [Dependency] private EggMorpherSystem _eggMorpherSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private GhostRoleSystem _ghostRole = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private ContainerSystem _container = default!;
 
     public override void Initialize()
     {

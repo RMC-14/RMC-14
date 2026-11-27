@@ -45,7 +45,7 @@ public sealed class CargoTest
                     if (Ignored.Contains(proto.ID))
                         continue;
 
-                    var ent = entManager.SpawnEntity(proto.Product, testMap.MapCoords);
+                    var ent = entManager.Spawn(proto.Product, testMap.MapCoords);
                     var price = pricing.GetPrice(ent);
 
                     Assert.That(price, Is.AtMost(proto.Cost), $"Found arbitrage on {proto.ID} cargo product! Cost is {proto.Cost} but sell is {price}!");
@@ -79,7 +79,7 @@ public sealed class CargoTest
             {
                 foreach (var proto in protoManager.EnumeratePrototypes<CargoProductPrototype>())
                 {
-                    var ent = entManager.SpawnEntity(proto.Product, new MapCoordinates(Vector2.Zero, mapId));
+                    var ent = entManager.Spawn(proto.Product, new MapCoordinates(Vector2.Zero, mapId));
 
                     foreach (var bounty in bounties)
                     {
@@ -150,7 +150,6 @@ public sealed class CargoTest
 
         var entManager = server.ResolveDependency<IEntityManager>();
         var mapSystem = server.System<SharedMapSystem>();
-        var mapManager = server.ResolveDependency<IMapManager>();
         var protoManager = server.ResolveDependency<IPrototypeManager>();
         var componentFactory = server.ResolveDependency<IComponentFactory>();
         var whitelist = entManager.System<EntityWhitelistSystem>();
@@ -162,7 +161,7 @@ public sealed class CargoTest
         await server.WaitAssertion(() =>
         {
             var mapId = testMap.MapId;
-            var grid = mapManager.CreateGridEntity(mapId);
+            var grid = mapSystem.CreateGridEntity(mapId);
             var coord = new EntityCoordinates(grid.Owner, 0, 0);
 
             var sliceableEntityProtos = protoManager.EnumeratePrototypes<EntityPrototype>()
@@ -174,7 +173,7 @@ public sealed class CargoTest
 
             foreach (var proto in sliceableEntityProtos)
             {
-                var ent = entManager.SpawnEntity(proto, coord);
+                var ent = entManager.SpawnAttachedTo(proto, coord);
                 var sliceable = entManager.GetComponent<SliceableFoodComponent>(ent);
 
                 // Check each bounty
@@ -188,7 +187,7 @@ public sealed class CargoTest
                             continue;
 
                         // Spawn a slice
-                        var slice = entManager.SpawnEntity(sliceable.Slice, coord);
+                        var slice = entManager.SpawnAttachedTo(sliceable.Slice, coord);
 
                         // See if the slice also counts for this bounty entry
                         if (!cargo.IsValidBountyEntry(slice, entry))
@@ -243,7 +242,7 @@ public sealed class CargoTest
         {
             var priceSystem = entManager.System<PricingSystem>();
 
-            var ent = entManager.SpawnEntity("StackEnt", MapCoordinates.Nullspace);
+            var ent = entManager.Spawn("StackEnt", MapCoordinates.Nullspace);
             var price = priceSystem.GetPrice(ent);
             Assert.That(price, Is.EqualTo(100.0));
         });

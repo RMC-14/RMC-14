@@ -8,9 +8,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Hands;
 
-public sealed class ClientRMCHandsSystem : RMCHandsSystem
+public sealed partial class ClientRMCHandsSystem : RMCHandsSystem
 {
-    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     public override void Initialize()
     {

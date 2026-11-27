@@ -12,10 +12,10 @@ using Content.Shared.Throwing;
 namespace Content.Shared.Administration;
 
 // TODO deduplicate with BlockMovementComponent
-public abstract class SharedAdminFrozenSystem : EntitySystem
+public abstract partial class SharedAdminFrozenSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     public override void Initialize()
     {
@@ -26,7 +26,7 @@ public abstract class SharedAdminFrozenSystem : EntitySystem
         SubscribeLocalEvent<AdminFrozenComponent, ThrowAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, InteractionAttemptEvent>(OnInteractAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<AdminFrozenComponent, ComponentShutdown>(UpdateCanMove);
+        SubscribeLocalEvent<AdminFrozenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<AdminFrozenComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
         SubscribeLocalEvent<AdminFrozenComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, AttackAttemptEvent>(OnAttempt);
@@ -74,6 +74,11 @@ public abstract class SharedAdminFrozenSystem : EntitySystem
             return;
 
         args.Cancel();
+    }
+
+    private void OnShutdown(Entity<AdminFrozenComponent> ent, ref ComponentShutdown args)
+    {
+        _blocker.UpdateCanMove(ent);
     }
 
     private void UpdateCanMove(EntityUid uid, AdminFrozenComponent component, EntityEventArgs args)

@@ -8,10 +8,10 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Homing;
 
-public sealed class HomingProjectileSystem : EntitySystem
+public sealed partial class HomingProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     private readonly List<EntityUid> _toRemove = new();
 

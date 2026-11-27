@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Intel.Tech;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public readonly record struct TechOption(
+public readonly partial record struct TechOption(
     string Name,
     string Description,
     int Cost,

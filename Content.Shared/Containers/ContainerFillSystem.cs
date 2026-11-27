@@ -10,11 +10,11 @@ using Robust.Shared.Map;
 
 namespace Content.Shared.Containers;
 
-public sealed class ContainerFillSystem : EntitySystem
+public sealed partial class ContainerFillSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly EntityTableSystem _entityTable = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private EntityTableSystem _entityTable = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -41,7 +41,7 @@ public sealed class ContainerFillSystem : EntitySystem
 
             foreach (var proto in prototypes)
             {
-                var ent = Spawn(proto, coords);
+                var ent = SpawnAttachedTo(proto, coords);
                 if (!_containerSystem.Insert(ent, container, containerXform: xform))
                 {
                     var alreadyContained = container.ContainedEntities.Count > 0 ? string.Join("\n", container.ContainedEntities.Select(e => $"\t - {ToPrettyString(e)}")) : "< empty >";
@@ -82,7 +82,7 @@ public sealed class ContainerFillSystem : EntitySystem
                 EntityUid spawn;
                 try
                 {
-                    spawn = Spawn(proto, coords);
+                    spawn = SpawnAttachedTo(proto, coords);
                 }
                 catch(Exception e)
                 {

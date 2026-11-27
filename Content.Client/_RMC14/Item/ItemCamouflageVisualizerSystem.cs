@@ -18,12 +18,12 @@ using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Item;
 
-public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouflageComponent>
+public sealed partial class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouflageComponent>
 {
-    [Dependency] private readonly AttachableHolderVisualsSystem _attachableHolderVisuals = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly ItemSystem _item = default!;
-    [Dependency] private readonly IResourceCache _resource = default!;
+    [Dependency] private AttachableHolderVisualsSystem _attachableHolderVisuals = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private ItemSystem _item = default!;
+    [Dependency] private IResourceCache _resource = default!;
 
     public override void Initialize()
     {

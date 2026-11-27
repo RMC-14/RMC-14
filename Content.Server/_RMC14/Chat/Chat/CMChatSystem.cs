@@ -23,15 +23,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Chat.Chat;
 
-public sealed class CMChatSystem : SharedCMChatSystem
+public sealed partial class CMChatSystem : SharedCMChatSystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private LanguageSystem _language = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ReplacementAccentSystem _wordreplacement = default!;
 
     private EntityQuery<ImaginaryFriendComponent> _friendComponent;
     private EntityQuery<GhostComponent> _ghostQuery;

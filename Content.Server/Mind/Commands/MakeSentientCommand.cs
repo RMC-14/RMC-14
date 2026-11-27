@@ -10,9 +10,9 @@ using Robust.Shared.Console;
 namespace Content.Server.Mind.Commands
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class MakeSentientCommand : IConsoleCommand
+    public sealed partial class MakeSentientCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
 
         public string Command => "makesentient";
         public string Description => "Makes an entity sentient (able to be controlled by a player)";

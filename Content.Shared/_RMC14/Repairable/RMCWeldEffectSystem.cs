@@ -12,9 +12,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Repairable;
 
-public sealed class RMCWeldEffectSystem : EntitySystem
+public sealed partial class RMCWeldEffectSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     public static readonly EntProtoId WeldEffect = "RMCEffectWeldingSparks";
     private static readonly Vector2 DefaultStartOffset = new(0f, -0.45f);
@@ -87,7 +87,7 @@ public sealed class RMCWeldEffectSystem : EntitySystem
 
         RotateOffsets(offsetRotation, ref startOffset, ref endOffset, ref pathOffsets);
 
-        var effect = Spawn(WeldEffect, xform.Coordinates);
+        var effect = SpawnAttachedTo(WeldEffect, xform.Coordinates);
         if (!Exists(effect))
             return;
 

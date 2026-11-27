@@ -15,15 +15,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Glue;
 
-public sealed class GlueSystem : SharedGlueSystem
+public sealed partial class GlueSystem : SharedGlueSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly NameModifierSystem _nameMod = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private NameModifierSystem _nameMod = default!;
 
     public override void Initialize()
     {

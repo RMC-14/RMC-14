@@ -10,12 +10,12 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Ammo;
 
-public sealed class GunToggleableAmmoSystem : EntitySystem
+public sealed partial class GunToggleableAmmoSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly CMArmorSystem _cmArmor = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private CMArmorSystem _cmArmor = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<CMArmorPiercingComponent> _armorPiercingQuery;

@@ -12,12 +12,12 @@ using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Smoke;
 
-public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
+public sealed partial class RMCSmokeSystem : SharedRMCSmokeSystem
 {
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _damageable = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedRMCDamageableSystem _damageable = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
 
     private readonly List<(MapGridComponent Grid, TileRef Tile)> _tiles = new();
 

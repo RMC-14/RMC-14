@@ -24,9 +24,9 @@ namespace Content.Server.Cargo.Systems
 {
     public sealed partial class CargoSystem
     {
-        [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-        [Dependency] private readonly EmagSystem _emag = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private SharedTransformSystem _transformSystem = default!;
+        [Dependency] private EmagSystem _emag = default!;
+        [Dependency] private IGameTiming _timing = default!;
 
         private void InitializeConsole()
         {
@@ -329,7 +329,7 @@ namespace Content.Server.Cargo.Systems
             if (Timing.CurTime < component.NextPrintTime)
                 return;
 
-            var label = Spawn(account.AcquisitionSlip, Transform(uid).Coordinates);
+            var label = SpawnAttachedTo(account.AcquisitionSlip, Transform(uid).Coordinates);
             component.NextPrintTime = Timing.CurTime + component.PrintDelay;
             _audio.PlayPvs(component.PrintSound, uid);
 
@@ -620,13 +620,13 @@ namespace Content.Server.Cargo.Systems
         private bool FulfillOrder(CargoOrderData order, ProtoId<CargoAccountPrototype> account, EntityCoordinates spawn, string? paperProto)
         {
             // Create the item itself
-            var item = Spawn(order.ProductId, spawn);
+            var item = SpawnAttachedTo(order.ProductId, spawn);
 
             // Ensure the item doesn't start anchored
             _transformSystem.Unanchor(item, Transform(item));
 
             // Create a sheet of paper to write the order details on
-            var printed = Spawn(paperProto, spawn);
+            var printed = SpawnAttachedTo(paperProto, spawn);
             if (TryComp<PaperComponent>(printed, out var paper))
             {
                 // fill in the order data

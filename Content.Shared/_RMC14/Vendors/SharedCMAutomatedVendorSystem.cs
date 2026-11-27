@@ -68,39 +68,39 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vendors;
 
-public abstract class SharedCMAutomatedVendorSystem : EntitySystem
+public abstract partial class SharedCMAutomatedVendorSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
-    [Dependency] private readonly SharedRMCAnimationSystem _rmcAnimation = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SquadSystem _squads = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedWebbingSystem _webbing = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedCMInventorySystem _cmInventory = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRankSystem _rank = default!;
+    [Dependency] private SharedRMCAnimationSystem _rmcAnimation = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedRMCHolidaySystem _rmcHoliday = default!;
+    [Dependency] private RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SquadSystem _squads = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private TagSystem _tags = default!;
+    [Dependency] private ThrowingSystem _throwingSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedWebbingSystem _webbing = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -439,7 +439,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 // Create item near the vendor
                 var coords = Transform(vendor).Coordinates;
-                var spawnedItem = Spawn(itemId, coords);
+                var spawnedItem = SpawnAttachedTo(itemId, coords);
 
                 // Throw in a random direction with a random force
                 var direction = new Vector2(_random.NextFloat(-1, 1), _random.NextFloat(-1, 1));
@@ -715,7 +715,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         int? partialStackAmount = null;
         if (entry.Amount == 0 &&
             _prototypes.TryIndex(entry.Id, out var entryProto) &&
-            entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory) &&
+            entryProto.TryComp(out StackComponent? entryStack, _compFactory) &&
             comp.PartialProductStacks.TryGetValue(entryStack.StackTypeId, out var partial) &&
             partial > 0)
         {
@@ -761,7 +761,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
             var currentPartialAmount = i == 0 ? partialStackAmount : null;
             var currentPartialItemId = i == 0 ? partialStackItemId : null;
-            if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
+            if (entity.TryComp(out CMVendorBundleComponent? bundle, _compFactory))
             {
                 foreach (var bundled in bundle.Bundle)
                 {
@@ -776,7 +776,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (entity.TryGetComponent(out CMChangeUserOnVendComponent? change, _compFactory) &&
+        if (entity.TryComp(out CMChangeUserOnVendComponent? change, _compFactory) &&
             change.AddComponents != null)
         {
             EntityManager.AddComponents(actor, change.AddComponents);
@@ -785,7 +785,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset, int? partialStackAmount = null, SlotFlags? replaceSlot = null)
     {
-        if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo, _compFactory))
+        if (_prototypes.Index(toVend).TryComp(out CMVendorMapToSquadComponent? mapTo, _compFactory))
         {
             if (TryComp(player, out SquadMemberComponent? member) &&
                 member.Squad is { } squad &&
@@ -961,7 +961,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (entry.BoxSlots is not { } boxSlots)
         {
             if (!_prototypes.TryIndex(entry.Id, out var boxProto) ||
-                !boxProto.TryGetComponent(out CMItemSlotsComponent? slots, _compFactory) ||
+                !boxProto.TryComp(out CMItemSlotsComponent? slots, _compFactory) ||
                 slots.Count is not { } count)
             {
                 return 1;
@@ -1024,7 +1024,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             if (failedItems.Contains(netItem))
                 continue;
 
-            if (!EntityManager.EntityExists(item))
+            if (!Exists(item))
             {
                 _container.Remove(item, storage.Container);
                 i--;
@@ -1070,7 +1070,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!TryComp(container, out StorageComponent? storage))
             return;
 
-        if (!EntityManager.EntityExists(item))
+        if (!Exists(item))
         {
             StartNextRestock(vendor, container, args.User, storage, args.FailedBulkRestockItems);
             return;
@@ -1164,7 +1164,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var stackTypeId = stack.StackTypeId;
 
         if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
-            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            !entryProto.TryComp(out StackComponent? entryStack, _compFactory))
         {
             return false;
         }
@@ -1251,7 +1251,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     public bool TryClearPartialStack(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)
     {
         if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
-            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            !entryProto.TryComp(out StackComponent? entryStack, _compFactory))
         {
             return false;
         }
@@ -1325,7 +1325,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 if (!_prototypes.TryIndex(current.Id, out var proto))
                     continue;
 
-                if (!proto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                if (!proto.TryComp(out StackComponent? entryStack, _compFactory))
                     continue;
 
                 if (entryStack.StackTypeId != stackTypeId)
@@ -1604,12 +1604,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         var expectedTotal = 0;
         if (_prototypes.TryIndex(itemProto, out var proto) &&
-            proto.TryGetComponent(out StorageFillComponent? storageFill, _compFactory))
+            proto.TryComp(out StorageFillComponent? storageFill, _compFactory))
         {
             foreach (var entry in storageFill.Contents)
             {
                 if (_prototypes.TryIndex(entry.PrototypeId, out var entryProto) &&
-                    entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                    entryProto.TryComp(out StackComponent? entryStack, _compFactory))
                 {
                     expectedTotal += entry.Amount * entryStack.Count;
                 }

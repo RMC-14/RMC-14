@@ -12,12 +12,12 @@ namespace Content.Server.Worldgen.Systems;
 /// <summary>
 ///     This handles putting together chunk entities and notifying them about important changes.
 /// </summary>
-public sealed class WorldControllerSystem : EntitySystem
+public sealed partial class WorldControllerSystem : EntitySystem
 {
-    [Dependency] private readonly TransformSystem _xformSys = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private TransformSystem _xformSys = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     private const int PlayerLoadRadius = 2;
 
@@ -35,7 +35,7 @@ public sealed class WorldControllerSystem : EntitySystem
     /// <summary>
     ///     Handles deleting chunks properly.
     /// </summary>
-    private void OnChunkShutdown(EntityUid uid, WorldChunkComponent component, ComponentShutdown args)
+    private void OnChunkShutdown(EntityUid uid, WorldChunkComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<WorldControllerComponent>(component.Map, out var controller))
             return;
@@ -67,7 +67,7 @@ public sealed class WorldControllerSystem : EntitySystem
     /// <summary>
     ///     Handles the inner logic of unloading a chunk, i.e. events.
     /// </summary>
-    private void OnChunkUnloadedCore(EntityUid uid, LoadedChunkComponent component, ComponentShutdown args)
+    private void OnChunkUnloadedCore(EntityUid uid, LoadedChunkComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<WorldChunkComponent>(uid, out var chunk))
             return;

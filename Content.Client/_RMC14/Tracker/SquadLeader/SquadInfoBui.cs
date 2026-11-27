@@ -11,9 +11,9 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Tracker.SquadLeader;
 
 [UsedImplicitly]
-public sealed class SquadInfoBui : BoundUserInterface
+public sealed partial class SquadInfoBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private SquadInfoWindow? _window;
 
@@ -69,7 +69,7 @@ public sealed class SquadInfoBui : BoundUserInterface
         }
 
         // Display objectives
-        _window.ObjectivesContainer.DisposeAllChildren();
+        _window.ObjectivesContainer.RemoveAllChildren();
         foreach (SquadObjectiveType objectiveType in Enum.GetValues<SquadObjectiveType>())
         {
             var objectiveText = objectives.GetValueOrDefault(objectiveType, string.Empty);
@@ -93,7 +93,7 @@ public sealed class SquadInfoBui : BoundUserInterface
             _window.ObjectivesContainer.AddChild(objectiveLabel);
         }
 
-        _window.FireteamsContainer.DisposeAllChildren();
+        _window.FireteamsContainer.RemoveAllChildren();
         for (var i = 0; i < tracker.Fireteams.Fireteams.Length; i++)
         {
             var fireteam = tracker.Fireteams.Fireteams[i];

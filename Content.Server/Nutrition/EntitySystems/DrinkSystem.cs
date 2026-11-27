@@ -30,22 +30,22 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Nutrition.EntitySystems;
 
-public sealed class DrinkSystem : SharedDrinkSystem
+public sealed partial class DrinkSystem : SharedDrinkSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly FoodSystem _food = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly ReactiveSystem _reaction = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly StomachSystem _stomach = default!;
-    [Dependency] private readonly ForensicsSystem _forensics = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private FoodSystem _food = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private ReactiveSystem _reaction = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private StomachSystem _stomach = default!;
+    [Dependency] private ForensicsSystem _forensics = default!;
 
     public override void Initialize()
     {

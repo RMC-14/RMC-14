@@ -48,7 +48,7 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
         int ammoMax,
         EntProtoId? ammoPrototype)
     {
-        HardpointList.DisposeAllChildren();
+        HardpointList.RemoveAllChildren();
         ResizeToContent(hardpoints);
 
         var seenSlots = new HashSet<string>();

@@ -14,18 +14,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weather;
 
-public sealed class RMCWeatherSystem : EntitySystem
+public sealed partial class RMCWeatherSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedRoofSystem _roof = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedWeatherSystem _weather = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly RMCAmbientLightSystem _rmcLight = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedRoofSystem _roof = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedWeatherSystem _weather = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private RMCAmbientLightSystem _rmcLight = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
 
@@ -57,7 +57,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (!_area.IsWeatherEnabled((uid, grid), tileRef.GridIndices))
             return false;
 
-        var anchoredEntities = _mapSystem.GetAnchoredEntitiesEnumerator(uid, grid, tileRef.GridIndices);
+        var anchoredEntities = _mapSystem.GetAnchoredEntities(uid, grid, tileRef.GridIndices);
 
         while (anchoredEntities.MoveNext(out var ent))
         {

@@ -10,11 +10,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.IconLabel;
 
-public abstract class SharedRMCIconLabelSystem : EntitySystem
+public abstract partial class SharedRMCIconLabelSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> PillCanisterTag = "PillCanister";
 

@@ -27,7 +27,7 @@ public sealed class RemoveInvalidWeedsCommand : ToolshedCommand
             }
 
             var tile = mapSystem.CoordinatesToTile(gridId, grid, xform.Coordinates);
-            var anchored = mapSystem.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, tile);
+            var anchored = mapSystem.GetAnchoredEntities(xform.GridUid.Value, grid, tile);
             if (mapSystem.TryGetTileRef(gridId, grid, tile, out var tileRef) && !turfSystem.GetContentTileDefinition(tileRef).WeedsSpreadable)
             {
                 EntityManager.QueueDeleteEntity(uid);

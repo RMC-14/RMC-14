@@ -10,7 +10,7 @@ namespace Content.Server.Chat.Managers;
 ///     It currently ony removes the shorthands for emotes (like "lol" or "^-^") from a chat message and returns the last
 ///     emote in their message
 /// </summary>
-public sealed class ChatSanitizationManager : IChatSanitizationManager
+public sealed partial class ChatSanitizationManager : IChatSanitizationManager
 {
     private static readonly Dictionary<string, string> ShorthandToEmote = new()
     {
@@ -129,8 +129,8 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         { "['=", "chatsan-tearfully-smiles" }
     };
 
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private bool _doSanitize;
 

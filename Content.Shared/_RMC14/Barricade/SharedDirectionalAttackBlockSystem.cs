@@ -20,13 +20,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Barricade;
 
-public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
+public abstract partial class SharedDirectionalAttackBlockSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private RMCProjectileSystem _rmcProjectile = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

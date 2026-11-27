@@ -17,7 +17,7 @@ public sealed class FillLevelSpriteTest
     [Test]
     public async Task FillLevelSpritesExist()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { PreloadClientResources = true });
         var client = pair.Client;
         var protoMan = client.ResolveDependency<IPrototypeManager>();
         var componentFactory = client.ResolveDependency<IComponentFactory>();

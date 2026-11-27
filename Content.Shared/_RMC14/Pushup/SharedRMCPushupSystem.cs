@@ -29,24 +29,24 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Pushup;
 
-public sealed class SharedRMCPushupSystem : EntitySystem
+public sealed partial class SharedRMCPushupSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly RMCStaminaSystem _stamina = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCDoAfterSystem _rmcDoAfter = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private RMCStaminaSystem _stamina = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> EnduranceSkill = "RMCSkillEndurance";
 

@@ -30,16 +30,17 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Server._RMC14.Fishing;
 
-public sealed class RMCFishingSystem : SharedRMCFishingSystem
+public sealed partial class RMCFishingSystem : SharedRMCFishingSystem
 {
     private const string FishingLineVisualPrototypePrefix = "RMCFishingLineVisual";
 
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedScaleVisualsSystem _scaleVisuals = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
 
     private readonly Dictionary<EntityUid, EntityUid> _lineVisuals = new();
@@ -351,7 +352,7 @@ public sealed class RMCFishingSystem : SharedRMCFishingSystem
             return;
         }
 
-        var caught = Spawn(loot, target);
+        var caught = SpawnAttachedTo(loot, target);
         _throwing.TryThrow(caught, _transform.GetMoverCoordinates(user), 2f, user, compensateFriction: true);
 
         _audio.PlayPvs(ent.Comp.SuccessSound, ent.Owner);
@@ -397,7 +398,7 @@ public sealed class RMCFishingSystem : SharedRMCFishingSystem
     {
         ClearFishingLine(ent.Owner);
 
-        _lineVisuals[ent.Owner] = Spawn(GetFishingLineVisualPrototype(ent.Comp.Direction, biting), adjacent);
+        _lineVisuals[ent.Owner] = SpawnAttachedTo(GetFishingLineVisualPrototype(ent.Comp.Direction, biting), adjacent);
     }
 
     private void ClearFishingLine(EntityUid rod)
@@ -506,7 +507,7 @@ public sealed class RMCFishingSystem : SharedRMCFishingSystem
             if (string.IsNullOrEmpty(id))
                 continue;
 
-            Spawn(id, coordinates);
+            SpawnAttachedTo(id, coordinates);
         }
     }
 
@@ -519,7 +520,7 @@ public sealed class RMCFishingSystem : SharedRMCFishingSystem
 
         var t = (float)(ent.Comp.Length - ent.Comp.MinLength) / (ent.Comp.MaxLength - ent.Comp.MinLength);
         var scaleVal = ent.Comp.MinScale + t * (ent.Comp.MaxScale - ent.Comp.MinScale);
-        _appearance.SetData(ent.Owner, ScaleVisuals.Scale,  Vector2.One * scaleVal);
+        _scaleVisuals.SetSpriteScale(ent, Vector2.One * scaleVal);
     }
 
     private void OnSpearAfterInteract(Entity<RMCFishingSpearComponent> ent, ref AfterInteractEvent args)

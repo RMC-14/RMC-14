@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.AcidSlash;
 
-public sealed class XenoAcidSlashSystem : EntitySystem
+public sealed partial class XenoAcidSlashSystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoSpitSystem _spit = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoSpitSystem _spit = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAcidSlashComponent, MeleeHitEvent>(OnMeleeHit);

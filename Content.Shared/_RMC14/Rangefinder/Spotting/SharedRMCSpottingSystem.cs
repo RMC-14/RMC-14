@@ -11,14 +11,14 @@ namespace Content.Shared._RMC14.Rangefinder.Spotting;
 
 public abstract partial class SharedRMCSpottingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCTargetingSystem _targeting = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] private SharedRMCTargetingSystem _targeting = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
     public override void Initialize()
     {

@@ -12,13 +12,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Commendations;
 
-public sealed class CommendationSystem : SharedCommendationSystem
+public sealed partial class CommendationSystem : SharedCommendationSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly CommendationManager _commendation = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private CommendationManager _commendation = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedRankSystem _rank = default!;
 
     public override async void GiveCommendation(
         Entity<CommendationGiverComponent?, ActorComponent?> giver,

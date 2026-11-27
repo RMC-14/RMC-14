@@ -11,11 +11,11 @@ using Robust.Shared.Random;
 namespace Content.Server.Body.Commands
 {
     [AdminCommand(AdminFlags.Fun)]
-    sealed class AddHandCommand : IConsoleCommand
+    sealed partial class AddHandCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private IEntityManager _entManager = default!;
+        [Dependency] private IPrototypeManager _protoManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         private static readonly EntProtoId DefaultHandPrototype = "LeftHandHuman";
 
@@ -46,7 +46,7 @@ namespace Content.Server.Body.Commands
                     }
 
                     entity = player.AttachedEntity.Value;
-                    hand = _entManager.SpawnEntity(DefaultHandPrototype, _entManager.GetComponent<TransformComponent>(entity).Coordinates);
+                    hand = _entManager.SpawnAttachedTo(DefaultHandPrototype, _entManager.GetComponent<TransformComponent>(entity).Coordinates);
                     break;
                 case 1:
                     {
@@ -59,7 +59,7 @@ namespace Content.Server.Body.Commands
                             }
 
                             entity = uid.Value;
-                            hand = _entManager.SpawnEntity(DefaultHandPrototype, _entManager.GetComponent<TransformComponent>(entity).Coordinates);
+                            hand = _entManager.SpawnAttachedTo(DefaultHandPrototype, _entManager.GetComponent<TransformComponent>(entity).Coordinates);
                         }
                         else
                         {
@@ -76,7 +76,7 @@ namespace Content.Server.Body.Commands
                             }
 
                             entity = player.AttachedEntity.Value;
-                            hand = _entManager.SpawnEntity(args[0], _entManager.GetComponent<TransformComponent>(entity).Coordinates);
+                            hand = _entManager.SpawnAttachedTo(args[0], _entManager.GetComponent<TransformComponent>(entity).Coordinates);
                         }
 
                         break;
@@ -103,7 +103,7 @@ namespace Content.Server.Body.Commands
                             return;
                         }
 
-                        hand = _entManager.SpawnEntity(args[1], _entManager.GetComponent<TransformComponent>(entity).Coordinates);
+                        hand = _entManager.SpawnAttachedTo(args[1], _entManager.GetComponent<TransformComponent>(entity).Coordinates);
 
                         break;
                     }

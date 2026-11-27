@@ -28,17 +28,17 @@ namespace Content.Shared._RMC14.Armor.ThermalCloak;
 /// <summary>
 /// Handles Thermal Cloak's cloaking ability
 /// </summary>
-public sealed class ThermalCloakSystem : EntitySystem
+public sealed partial class ThermalCloakSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHumanoidAppearanceSystem _humanoidSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

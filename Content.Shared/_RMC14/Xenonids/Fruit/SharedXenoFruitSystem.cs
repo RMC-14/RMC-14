@@ -50,37 +50,36 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
-public sealed class SharedXenoFruitSystem : EntitySystem
+public sealed partial class SharedXenoFruitSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogs = default!;
 
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly XenoShieldSystem _xenoShield = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private TagSystem _tags = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private XenoShieldSystem _xenoShield = default!;
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedXenoPheromonesSystem _xenoPhero = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedXenoPheromonesSystem _xenoPhero = default!;
+    [Dependency] private SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
 
     private static readonly ProtoId<DamageTypePrototype> FruitPlantDamageType = "Blunt";
 
@@ -348,7 +347,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // Target not on weeds
-        target = target.SnapToGrid(EntityManager, _map);
+        target = target.SnapToGrid(EntityManager);
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
             popup = Loc.GetString("rmc-xeno-fruit-plant-failed-weeds");
@@ -373,7 +372,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         // Target has fruit, resin hole, egg, xeno construct or other obstruction on it
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
             // Target on another fruit
@@ -423,7 +422,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return;
         }
 
-        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager);
 
         if (!coordinates.IsValid(EntityManager))
             return;
@@ -463,7 +462,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            var entity = Spawn(xeno.Comp.FruitChoice, coordinates);
+            var entity = SpawnAttachedTo(xeno.Comp.FruitChoice, coordinates);
             var fruit = EnsureComp<XenoFruitComponent>(entity);
             var xform = Transform(entity);
 
@@ -1158,7 +1157,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     public string GetFruitSprite(EntityPrototype ent)
     {
-        if (!ent.TryGetComponent<XenoFruitComponent>(out var fruit, _componentFactory))
+        if (!ent.TryComp<XenoFruitComponent>(out var fruit, _componentFactory))
             return "fruit_lesser_spent";
 
         return fruit.GrownState;

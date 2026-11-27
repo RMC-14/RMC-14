@@ -12,7 +12,7 @@ namespace Content.Client._RMC14.NewPlayer;
 [GenerateTypedNameReferences]
 public sealed partial class NewToJobPopup : FancyWindow
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private float _remainingTime;
     private bool _initialSkipState;

@@ -6,10 +6,10 @@ using Robust.Client.Player;
 
 namespace Content.Client._RMC14.Mobs.Ghosts
 {
-    public sealed class CMGhostSystem : SharedCMGhostSystem
+    public sealed partial class CMGhostSystem : SharedCMGhostSystem
     {
-        [Dependency] private readonly IPlayerManager _player = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
+        [Dependency] private IPlayerManager _player = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
 
         private const ChatChannel PostDeathMutedChannels = ChatChannel.Local | ChatChannel.Whisper | ChatChannel.Radio | ChatChannel.Emotes | ChatChannel.Dead;
 

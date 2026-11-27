@@ -22,17 +22,17 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Visor;
 
-public sealed class VisorSystem : EntitySystem
+public sealed partial class VisorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerCellSystem _powerCell = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

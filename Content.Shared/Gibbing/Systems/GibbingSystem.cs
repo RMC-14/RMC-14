@@ -11,13 +11,13 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Gibbing.Systems;
 
-public sealed class GibbingSystem : EntitySystem
+public sealed partial class GibbingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physicsSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SharedPhysicsSystem _physicsSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     //TODO: (future optimization) implement a system that "caps" giblet entities by deleting the oldest ones once we reach a certain limit, customizable via CVAR
 
@@ -187,7 +187,7 @@ public sealed class GibbingSystem : EntitySystem
         }
 
         if (gibType == GibType.Gib)
-            PredictedQueueDel(gibbable.Owner);
+            QueueDel(gibbable.Owner);
         return true;
     }
 
@@ -292,7 +292,7 @@ public sealed class GibbingSystem : EntitySystem
         var gibbedEvent = new EntityGibbedEvent(gibbable, localGibs);
         RaiseLocalEvent(gibbable, ref gibbedEvent);
         if (deleteTarget)
-            PredictedQueueDel(gibbable.Owner);
+            QueueDel(gibbable.Owner);
         return localGibs;
     }
 
@@ -332,7 +332,7 @@ public sealed class GibbingSystem : EntitySystem
         gibletEntity = null;
         if (gibbable.GibPrototypes.Count == 0)
             return false;
-        gibletEntity = Spawn(gibbable.GibPrototypes[_random.Next(0, gibbable.GibPrototypes.Count)],
+        gibletEntity = SpawnAttachedTo(gibbable.GibPrototypes[_random.Next(0, gibbable.GibPrototypes.Count)],
             randomSpreadModifier == null
                 ? coords
                 : coords.Offset(_random.NextVector2(gibbable.GibScatterRange * randomSpreadModifier.Value)));

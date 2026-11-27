@@ -14,18 +14,18 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Screech;
 
-public sealed class XenoScreechSystem : EntitySystem
+public sealed partial class XenoScreechSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedDeafnessSystem _deaf = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private ExamineSystemShared _examineSystem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedDeafnessSystem _deaf = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     private readonly HashSet<Entity<MobStateComponent>> _closeMobs = new();

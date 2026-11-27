@@ -4,9 +4,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Construction;
 
-public sealed class XenoChooseStructureSystem : EntitySystem
+public sealed partial class XenoChooseStructureSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

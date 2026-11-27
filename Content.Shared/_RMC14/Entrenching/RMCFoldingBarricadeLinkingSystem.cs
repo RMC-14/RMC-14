@@ -14,15 +14,15 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.Entrenching;
 
-public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
+public sealed partial class RMCFoldingBarricadeLinkingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private static readonly Direction[] CardinalDirections =
     [
@@ -264,7 +264,7 @@ public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
     private void UpdateAnchoredAt(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
     {
         var tile = _map.LocalToTile(grid, grid, coordinates);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(grid, grid, tile);
         while (anchored.MoveNext(out var anchoredUid))
         {
             if (_linkingQuery.TryGetComponent(anchoredUid, out var linking))
@@ -315,7 +315,7 @@ public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
         var facing = xform.LocalRotation.GetCardinalDir();
         var adjacent = xform.Coordinates.Offset(direction);
         var tile = _map.LocalToTile(gridUid, grid, adjacent);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
         while (anchored.MoveNext(out var anchoredUid))
         {
             if (anchoredUid == ent.Owner ||

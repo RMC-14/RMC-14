@@ -21,14 +21,14 @@ namespace Content.Server.Dragon;
 /// <summary>
 /// Handles events for rift entities and rift updating.
 /// </summary>
-public sealed class DragonRiftSystem : EntitySystem
+public sealed partial class DragonRiftSystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DragonSystem _dragon = default!;
-    [Dependency] private readonly ISerializationManager _serManager = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DragonSystem _dragon = default!;
+    [Dependency] private ISerializationManager _serManager = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -90,7 +90,7 @@ public sealed class DragonRiftSystem : EntitySystem
             if (comp.SpawnAccumulator > comp.SpawnCooldown)
             {
                 comp.SpawnAccumulator -= comp.SpawnCooldown;
-                var ent = Spawn(comp.SpawnPrototype, xform.Coordinates);
+                var ent = SpawnAttachedTo(comp.SpawnPrototype, xform.Coordinates);
 
                 // Update their look to match the leader.
                 if (TryComp<RandomSpriteComponent>(comp.Dragon, out var randomSprite))
@@ -119,7 +119,7 @@ public sealed class DragonRiftSystem : EntitySystem
         }
     }
 
-    private void OnShutdown(EntityUid uid, DragonRiftComponent comp, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, DragonRiftComponent comp, ref ComponentShutdown args)
     {
         if (!TryComp<DragonComponent>(comp.Dragon, out var dragon) || dragon.Weakened)
             return;

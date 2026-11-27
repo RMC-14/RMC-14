@@ -4,9 +4,9 @@ using Content.Shared._RMC14.Xenonids.Egg;
 
 namespace Content.Server._RMC14.Xenonids.Ovipositor;
 
-public sealed class XenoOvipositorHiveNotifySystem : EntitySystem
+public sealed partial class XenoOvipositorHiveNotifySystem : EntitySystem
 {
-    [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private XenoAnnounceSystem _xenoAnnounce = default!;
 
     public override void Initialize()
     {

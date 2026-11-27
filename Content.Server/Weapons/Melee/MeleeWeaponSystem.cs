@@ -21,12 +21,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Weapons.Melee;
 
-public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
+public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DamageExamineSystem _damageExamine = default!;
-    [Dependency] private readonly LagCompensationSystem _lag = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DamageExamineSystem _damageExamine = default!;
+    [Dependency] private LagCompensationSystem _lag = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
 
     public override void Initialize()
     {

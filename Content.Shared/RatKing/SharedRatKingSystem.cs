@@ -13,14 +13,14 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.RatKing;
 
-public abstract class SharedRatKingSystem : EntitySystem
+public abstract partial class SharedRatKingSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected IRobustRandom Random = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -50,7 +50,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         UpdateActions(uid, component);
     }
 
-    private void OnShutdown(EntityUid uid, RatKingComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, RatKingComponent component, ref ComponentShutdown args)
     {
         foreach (var servant in component.Servants)
         {
@@ -84,7 +84,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         UpdateAllServants(uid, component);
     }
 
-    private void OnServantShutdown(EntityUid uid, RatKingServantComponent component, ComponentShutdown args)
+    private void OnServantShutdown(EntityUid uid, RatKingServantComponent component, ref ComponentShutdown args)
     {
         if (TryComp(component.King, out RatKingComponent? ratKingComponent))
             ratKingComponent.Servants.Remove(uid);
@@ -139,7 +139,7 @@ public abstract class SharedRatKingSystem : EntitySystem
 
         var spawn = PrototypeManager.Index<WeightedRandomEntityPrototype>(component.RummageLoot).Pick(Random);
         if (_net.IsServer)
-            Spawn(spawn, Transform(uid).Coordinates);
+            SpawnAttachedTo(spawn, Transform(uid).Coordinates);
     }
 
     public void UpdateAllServants(EntityUid uid, RatKingComponent component)

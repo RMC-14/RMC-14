@@ -99,7 +99,7 @@
   - type: Tool
     useSound:
       collection: Welder
-    qualities: Welding
+    qualities: [ Welding ]
   - type: Welder
     fuelConsumption: 0.025
     fuelLitCost: 0

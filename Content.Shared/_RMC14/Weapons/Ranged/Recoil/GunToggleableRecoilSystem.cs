@@ -7,13 +7,13 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Recoil;
 
-public sealed class GunToggleableRecoilSystem : EntitySystem
+public sealed partial class GunToggleableRecoilSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly RMCGunBatterySystem _gunBattery = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private RMCGunBatterySystem _gunBattery = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

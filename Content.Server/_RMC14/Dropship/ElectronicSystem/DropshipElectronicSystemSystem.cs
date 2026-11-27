@@ -6,9 +6,9 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server._RMC14.Dropship.ElectronicSystem;
 
-public sealed class DropshipElectronicSystemSystem : SharedDropshipElectronicSystemSystem
+public sealed partial class DropshipElectronicSystemSystem : SharedDropshipElectronicSystemSystem
 {
-    [Dependency] private readonly PointLightSystem _pointLight = default!;
+    [Dependency] private PointLightSystem _pointLight = default!;
 
     protected override void OnDropShipAttachmentInserted(Entity<DropshipElectronicSystemPointComponent> ent,
         ref DropShipAttachmentInsertedEvent args)

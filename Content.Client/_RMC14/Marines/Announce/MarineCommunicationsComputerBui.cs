@@ -95,7 +95,7 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             return;
         }
 
-        _window.LandingZonesContainer.DisposeAllChildren();
+        _window.LandingZonesContainer.RemoveAllChildren();
         _window.PlanetName.Text = computer.Planet;
         _window.OperationName.Text = computer.Operation;
 

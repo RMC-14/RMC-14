@@ -5,4 +5,4 @@ namespace Content.Shared._RMC14.Tracker.Xeno;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public sealed record HiveTrackerChangeModeEvent(ProtoId<TrackerModePrototype> Mode);
+public sealed partial record HiveTrackerChangeModeEvent(ProtoId<TrackerModePrototype> Mode);

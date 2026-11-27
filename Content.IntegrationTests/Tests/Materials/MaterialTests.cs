@@ -41,7 +41,7 @@ namespace Content.IntegrationTests.Tests.Materials
                         if (proto.StackEntity == null)
                             continue;
 
-                        var spawned = entityManager.SpawnEntity(proto.StackEntity, coords);
+                        var spawned = entityManager.SpawnAttachedTo(proto.StackEntity, coords);
 
                         Assert.That(entityManager.TryGetComponent<StackComponent>(spawned, out var stack),
                             $"{proto.ID} 'stack entity' {proto.StackEntity} does not have the stack component");

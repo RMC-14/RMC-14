@@ -5,11 +5,11 @@ using Content.Shared.Timing;
 
 namespace Content.Server.Explosion.EntitySystems;
 
-public sealed class RepulseAttractOnTriggerSystem : SharedRepulseAttractOnTriggerSystem
+public sealed partial class RepulseAttractOnTriggerSystem : SharedRepulseAttractOnTriggerSystem
 {
-    [Dependency] private readonly RepulseAttractSystem _repulse = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private RepulseAttractSystem _repulse = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
     public override void Initialize()
     {

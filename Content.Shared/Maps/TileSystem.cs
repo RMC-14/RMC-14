@@ -12,14 +12,13 @@ namespace Content.Shared.Maps;
 /// <summary>
 ///     Handles server-side tile manipulation like prying/deconstructing tiles.
 /// </summary>
-public sealed class TileSystem : EntitySystem
+public sealed partial class TileSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly SharedDecalSystem _decal = default!;
-    [Dependency] private readonly SharedMapSystem _maps = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private SharedDecalSystem _decal = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     /// <summary>
     ///     Returns a weighted pick of a tile variant.
@@ -153,11 +152,11 @@ public sealed class TileSystem : EntitySystem
                 (_robustRandom.NextFloat() - 0.5f) * bounds));
 
         //Actually spawn the relevant tile item at the right position and give it some random offset.
-        var tileItem = Spawn(tileDef.ItemDropPrototypeName, coordinates);
+        var tileItem = SpawnAttachedTo(tileDef.ItemDropPrototypeName, coordinates);
         Transform(tileItem).LocalRotation = _robustRandom.NextDouble() * Math.Tau;
 
         // Destroy any decals on the tile
-        var decals = _decal.GetDecalsInRange(gridUid, coordinates.SnapToGrid(EntityManager, _mapManager).Position, 0.5f);
+        var decals = _decal.GetDecalsInRange(gridUid, coordinates.SnapToGrid(EntityManager).Position, 0.5f);
         foreach (var (id, _) in decals)
         {
             _decal.RemoveDecal(tileRef.GridUid, id);

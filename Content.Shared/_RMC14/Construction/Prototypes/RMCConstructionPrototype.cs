@@ -12,11 +12,11 @@ namespace Content.Shared._RMC14.Construction.Prototypes;
 public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPrototype
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<RMCConstructionPrototype>))]
-    public string[]? Parents { get; }
+    public string[]? Parents { get; private set; }
 
     [NeverPushInheritance]
     [AbstractDataField]
-    public bool Abstract { get; }
+    public bool Abstract { get; private set; }
 
     [ViewVariables]
     [IdDataField]

@@ -5,11 +5,11 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Audio;
 
-public sealed class RMCAudioSystem : EntitySystem
+public sealed partial class RMCAudioSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

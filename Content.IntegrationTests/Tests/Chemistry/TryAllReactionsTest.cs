@@ -56,7 +56,7 @@ namespace Content.IntegrationTests.Tests.Chemistry
 
                 await server.WaitAssertion(() =>
                 {
-                    beaker = entityManager.SpawnEntity("TestSolutionContainer", coordinates);
+                    beaker = entityManager.SpawnAttachedTo("TestSolutionContainer", coordinates);
                     Assert.That(solutionContainerSystem
                         .TryGetSolution(beaker, "beaker", out solutionEnt, out solution));
                     foreach (var (id, reactant) in reactionPrototype.Reactants)
@@ -96,7 +96,7 @@ namespace Content.IntegrationTests.Tests.Chemistry
 
                     if (reactionPrototype.MixingCategories != null)
                     {
-                        var dummyEntity = entityManager.SpawnEntity(null, MapCoordinates.Nullspace);
+                        var dummyEntity = entityManager.Spawn(null, MapCoordinates.Nullspace);
                         var mixerComponent = entityManager.AddComponent<ReactionMixerComponent>(dummyEntity);
                         mixerComponent.ReactionTypes = reactionPrototype.MixingCategories;
                         solutionContainerSystem.UpdateChemicals(solutionEnt.Value, true, mixerComponent);

@@ -23,17 +23,17 @@ namespace Content.Server.Guardian
     /// <summary>
     /// A guardian has a host it's attached to that it fights for. A fighting spirit.
     /// </summary>
-    public sealed class GuardianSystem : EntitySystem
+    public sealed partial class GuardianSystem : EntitySystem
     {
-        [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly DamageableSystem _damageSystem = default!;
-        [Dependency] private readonly SharedActionsSystem _actionSystem = default!;
-        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly BodySystem _bodySystem = default!;
-        [Dependency] private readonly SharedContainerSystem _container = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private DamageableSystem _damageSystem = default!;
+        [Dependency] private SharedActionsSystem _actionSystem = default!;
+        [Dependency] private SharedHandsSystem _handsSystem = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private BodySystem _bodySystem = default!;
+        [Dependency] private SharedContainerSystem _container = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
 
         public override void Initialize()
         {
@@ -61,7 +61,7 @@ namespace Content.Server.Guardian
             SubscribeLocalEvent<GuardianHostComponent, MechPilotRelayedEvent<GettingAttackedAttemptEvent>>(OnPilotAttackAttempt);
         }
 
-        private void OnGuardianShutdown(EntityUid uid, GuardianComponent component, ComponentShutdown args)
+        private void OnGuardianShutdown(EntityUid uid, GuardianComponent component, ref ComponentShutdown args)
         {
             var host = component.Host;
             component.Host = null;
@@ -123,7 +123,7 @@ namespace Content.Server.Guardian
             _actionSystem.AddAction(uid, ref component.ActionEntity, component.Action);
         }
 
-        private void OnHostShutdown(EntityUid uid, GuardianHostComponent component, ComponentShutdown args)
+        private void OnHostShutdown(EntityUid uid, GuardianHostComponent component, ref ComponentShutdown args)
         {
             if (component.HostedGuardian is not {} guardian)
                 return;

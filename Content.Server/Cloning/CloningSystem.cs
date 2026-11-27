@@ -26,16 +26,16 @@ namespace Content.Server.Cloning;
 /// </summary>
 public sealed partial class CloningSystem : EntitySystem
 {
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
-    [Dependency] private readonly NameModifierSystem _nameMod = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoidSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedSubdermalImplantSystem _subdermalImplant = default!;
+    [Dependency] private NameModifierSystem _nameMod = default!;
 
     /// <summary>
     ///     Spawns a clone of the given humanoid mob at the specified location or in nullspace.
@@ -113,7 +113,7 @@ public sealed partial class CloningSystem : EntitySystem
 
             // If the original does not have the component, then the clone shouldn't have it either.
             RemComp(clone, componentRegistration.Type);
-            if (EntityManager.TryGetComponent(original, componentRegistration.Type, out var sourceComp)) // Does the original have this component?
+            if (TryComp(original, componentRegistration.Type, out var sourceComp)) // Does the original have this component?
             {
                 CopyComp(original, clone, sourceComp);
             }

@@ -4,10 +4,10 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class BulletholeSystem : EntitySystem
+public sealed partial class BulletholeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     // Bullethole overlays
     private const int MaxBulletholeState = 10;

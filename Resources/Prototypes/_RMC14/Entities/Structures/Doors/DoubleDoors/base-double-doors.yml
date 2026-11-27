@@ -36,7 +36,11 @@
   suffix: Almayer, Solid
   components:
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/almayer_solid.rsi
 
@@ -56,7 +60,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/command_solid.rsi
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
 
 - type: entity
   parent: RMCDoubleDoorBase
@@ -74,7 +82,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/engineer_solid.rsi
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
 
 - type: entity
   parent: RMCDoubleDoorBase
@@ -92,7 +104,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/generic_solid.rsi
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
 
 - type: entity
   parent: RMCDoubleDoorBase
@@ -110,7 +126,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/medical_solid.rsi
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
 
 - type: entity
   parent: RMCDoubleDoorBase
@@ -128,7 +148,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/personal_solid.rsi
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
 
 - type: entity
   parent: RMCDoubleDoorBase
@@ -186,7 +210,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/security_solid.rsi
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
 
 # SPP
 - type: entity
@@ -203,7 +231,11 @@
   suffix: SPP, Solid
   components:
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/spp_grey_door.rsi
 
@@ -213,6 +245,10 @@
   suffix: SPP, Solid, Utility
   components:
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,1.5"
+    polygon:
+    - -0.5,1.5
+    - 0.5,1.5
+    - 0.5,-0.5
+    - -0.5,-0.5
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/spp_utility_door.rsi

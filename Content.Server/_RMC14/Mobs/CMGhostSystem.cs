@@ -14,10 +14,10 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server._RMC14.Mobs
 {
-    public sealed class CMGhostSystem : SharedCMGhostSystem
+    public sealed partial class CMGhostSystem : SharedCMGhostSystem
     {
-        [Dependency] private readonly SharedMarineSystem _marine = default!;
-        [Dependency] private readonly SharedMindSystem _mind = default!;
+        [Dependency] private SharedMarineSystem _marine = default!;
+        [Dependency] private SharedMindSystem _mind = default!;
 
         private bool _ghostsCanBoo;
 

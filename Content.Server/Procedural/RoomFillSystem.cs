@@ -2,10 +2,10 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.Procedural;
 
-public sealed class RoomFillSystem : EntitySystem
+public sealed partial class RoomFillSystem : EntitySystem
 {
-    [Dependency] private readonly DungeonSystem _dungeon = default!;
-    [Dependency] private readonly SharedMapSystem _maps = default!;
+    [Dependency] private DungeonSystem _dungeon = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
 
     public override void Initialize()
     {

@@ -5,10 +5,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Client._RMC14.Chemistry.Master;
 
-public sealed class RMCChemMasterSystem : SharedRMCChemMasterSystem
+public sealed partial class RMCChemMasterSystem : SharedRMCChemMasterSystem
 {
-    [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
-    [Dependency] private readonly IClientGameTiming _timing = default!;
+    [Dependency] private RMCUserInterfaceSystem _rmcUI = default!;
+    [Dependency] private IClientGameTiming _timing = default!;
 
     public override void Initialize()
     {

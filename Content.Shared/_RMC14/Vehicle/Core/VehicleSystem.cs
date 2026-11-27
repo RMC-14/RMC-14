@@ -58,34 +58,33 @@ public sealed partial class VehicleSystem : EntitySystem
 
     private static readonly SoundSpecifier XenoFrameBreachSound = new SoundCollectionSpecifier("XenoPry");
 
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly VehicleRideSurfaceSystem _rideSurface = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
-    [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
-    [Dependency] private readonly RMCSizeStunSystem _rmcSize = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
-    [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
-    [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private VehicleRideSurfaceSystem _rideSurface = default!;
+    [Dependency] private SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private SharedRMCTeleporterSystem _rmcTeleporter = default!;
+    [Dependency] private RMCSizeStunSystem _rmcSize = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private VehicleLockSystem _vehicleLock = default!;
+    [Dependency] private Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
+    [Dependency] private VehicleViewToggleSystem _viewToggle = default!;
 
     private readonly HashSet<EntityUid> _intersecting = new();
 
@@ -356,7 +355,7 @@ public sealed partial class VehicleSystem : EntitySystem
     {
         if (TryComp(ent.Owner, out interior) &&
             interior.MapId != MapId.Nullspace &&
-            _mapManager.MapExists(interior.MapId))
+            _map.MapExists(interior.MapId))
         {
             return true;
         }
@@ -485,7 +484,7 @@ public sealed partial class VehicleSystem : EntitySystem
         }
 
         if (interior.Map.IsValid() &&
-            EntityManager.EntityExists(interior.Map) &&
+            Exists(interior.Map) &&
             TryComp(interior.Map, out VehicleInteriorLinkComponent? link) &&
             link.Vehicle == vehicle)
         {
@@ -497,11 +496,11 @@ public sealed partial class VehicleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (interior.MapId != MapId.Nullspace && _mapManager.MapExists(interior.MapId))
+        if (interior.MapId != MapId.Nullspace && _map.MapExists(interior.MapId))
         {
-            _mapManager.DeleteMap(interior.MapId);
+            _map.DeleteMap(interior.MapId);
         }
-        else if (interior.Map.IsValid() && EntityManager.EntityExists(interior.Map))
+        else if (interior.Map.IsValid() && Exists(interior.Map))
         {
             Del(interior.Map);
         }
@@ -1064,7 +1063,7 @@ public sealed partial class VehicleSystem : EntitySystem
             if (seatXform.MapID != mapId)
                 continue;
 
-            var key = Spawn(VehicleKey, seatXform.Coordinates);
+            var key = SpawnAttachedTo(VehicleKey, seatXform.Coordinates);
             if (TryComp(key, out VehicleKeyComponent? keyComp))
                 _vehicleLock.BindKey((key, keyComp), keyId, vehicle);
 
@@ -1181,7 +1180,7 @@ public sealed partial class VehicleSystem : EntitySystem
             return;
 
         var interior = ent.Comp;
-        if (!interior.Grid.IsValid() || !EntityManager.EntityExists(interior.Grid))
+        if (!interior.Grid.IsValid() || !Exists(interior.Grid))
             return;
 
         if (!_area.TryGetArea(interior.Grid, out var area, out _))
@@ -1293,10 +1292,10 @@ public sealed partial class VehicleSystem : EntitySystem
     {
         vehicle = null;
         var mapId = _transform.GetMapId(interiorEntity);
-        if (mapId == MapId.Nullspace || !_mapManager.MapExists(mapId))
+        if (mapId == MapId.Nullspace || !_map.MapExists(mapId))
             return false;
 
-        var mapUid = _mapManager.GetMapEntityId(mapId);
+        var mapUid = _map.GetMapOrInvalid(mapId);
         if (!TryComp(mapUid, out VehicleInteriorLinkComponent? link) ||
             Deleted(link.Vehicle))
         {
@@ -1313,7 +1312,7 @@ public sealed partial class VehicleSystem : EntitySystem
 
         if (TryComp<VehicleOperatorComponent>(user, out var op) &&
             op.Vehicle is { } operatedVehicle &&
-            EntityManager.EntityExists(operatedVehicle))
+            Exists(operatedVehicle))
         {
             vehicle = operatedVehicle;
             return true;
@@ -1321,7 +1320,7 @@ public sealed partial class VehicleSystem : EntitySystem
 
         if (!TryGetVehicleFromInterior(user, out var interiorVehicle) ||
             interiorVehicle is not { } interiorVehicleUid ||
-            !EntityManager.EntityExists(interiorVehicleUid))
+            !Exists(interiorVehicleUid))
         {
             return false;
         }
@@ -1368,7 +1367,7 @@ public sealed partial class VehicleSystem : EntitySystem
             !TryComp(vehicle, out VehicleEnterComponent? _) ||
             !TryComp(vehicle, out VehicleInteriorComponent? interior) ||
             interior.MapId == MapId.Nullspace ||
-            !_mapManager.MapExists(interior.MapId))
+            !_map.MapExists(interior.MapId))
         {
             return false;
         }

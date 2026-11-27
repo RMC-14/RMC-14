@@ -39,30 +39,30 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed partial class GridVehicleMoverSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly XenoFortifySystem _fortify = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
-    [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
-    [Dependency] private readonly RMCWaterSystem _rmcWater = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly VehicleSqueezeUnderSystem _squeezeUnder = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleSafetySystem _vehicleSafety = default!;
-    [Dependency] private readonly VehicleWheelSystem _wheels = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private XenoFortifySystem _fortify = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private VehicleSystem _rmcVehicles = default!;
+    [Dependency] private RMCWaterSystem _rmcWater = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private VehicleSqueezeUnderSystem _squeezeUnder = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleSafetySystem _vehicleSafety = default!;
+    [Dependency] private VehicleWheelSystem _wheels = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
     private EntityQuery<PhysicsComponent> physicsQ;
@@ -175,7 +175,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentStartup>(OnMoverStartup);
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentShutdown>(OnMoverShutdown);
         SubscribeLocalEvent<GridVehicleMoverComponent, MoveEvent>(OnMoverMove);
-        SubscribeLocalEvent<GridVehicleMoverComponent, ReAnchorEvent>(OnMoverReAnchor);
         SubscribeLocalEvent<GridVehicleMoverComponent, VehicleCanRunEvent>(OnMoverCanRun);
         SubscribeLocalEvent<GridVehicleMoverComponent, PreventCollideEvent>(OnMoverPreventCollide);
         SubscribeLocalEvent<XenoComponent, XenoFortifyAttemptEvent>(OnXenoFortifyAttemptVehicleBounds);
@@ -259,11 +258,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!args.ParentChanged)
             return;
 
-        TrySyncMoverToCurrentGrid(ent, centerOnTile: false);
-    }
-
-    private void OnMoverReAnchor(Entity<GridVehicleMoverComponent> ent, ref ReAnchorEvent args)
-    {
         TrySyncMoverToCurrentGrid(ent, centerOnTile: false);
     }
 

@@ -14,21 +14,21 @@ using Content.Shared.Coordinates;
 
 namespace Content.Shared._RMC14.Xenonids.Tantrum;
 
-public sealed class XenoTantrumSystem : EntitySystem
+public sealed partial class XenoTantrumSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly XenoStrainSystem _strain = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly XenoEnergySystem _energy = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly CMArmorSystem _armor = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private XenoStrainSystem _strain = default!;
+    [Dependency] private XenoPlasmaSystem _plasma = default!;
+    [Dependency] private XenoEnergySystem _energy = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private CMArmorSystem _armor = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

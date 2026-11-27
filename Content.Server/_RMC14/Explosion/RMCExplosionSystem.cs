@@ -22,18 +22,18 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Explosion;
 
-public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
+public sealed partial class RMCExplosionSystem : SharedRMCExplosionSystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly DecalSystem _decals = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly HumanoidVoicelinesSystem _humanoidVoicelines = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private DecalSystem _decals = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private HumanoidVoicelinesSystem _humanoidVoicelines = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     private readonly Dictionary<string, ProtoId<DecalPrototype>[]> _scorchDecalsByTag = new();
 

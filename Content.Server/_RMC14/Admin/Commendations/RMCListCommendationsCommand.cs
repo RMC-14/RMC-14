@@ -10,11 +10,11 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin.Commendations;
 
 [AdminCommand(AdminFlags.Logs)]
-public sealed class RMCListCommendationsCommand : LocalizedCommands
+public sealed partial class RMCListCommendationsCommand : LocalizedCommands
 {
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private IPlayerManager _players = default!;
 
     public override string Command => "rmclistcommendations";
 

@@ -5,9 +5,9 @@ using Content.Shared.Inventory.Events;
 
 namespace Content.Shared._RMC14.Medical.HUD.Systems;
 
-public sealed class HolocardScannerSystem : EntitySystem
+public sealed partial class HolocardScannerSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

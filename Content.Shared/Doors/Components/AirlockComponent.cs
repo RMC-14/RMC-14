@@ -2,7 +2,7 @@ using Content.Shared.DeviceLinking;
 using Content.Shared.Doors.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Doors.Components;
 
@@ -80,8 +80,8 @@ public sealed partial class AirlockComponent : Component
     /// <summary>
     /// The receiver port for turning off automatic closing.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
-    public string AutoClosePort = "AutoClose";
+    [DataField]
+    public ProtoId<SinkPortPrototype> AutoClosePort = "AutoClose";
 
     #region Graphics
 

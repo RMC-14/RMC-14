@@ -12,11 +12,11 @@ namespace Content.Server.Mech.Systems;
 /// Handles <see cref="MechAssemblyComponent"/> and the insertion
 /// and removal of parts from the assembly.
 /// </summary>
-public sealed class MechAssemblySystem : EntitySystem
+public sealed partial class MechAssemblySystem : EntitySystem
 {
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedToolSystem _toolSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -61,7 +61,7 @@ public sealed class MechAssemblySystem : EntitySystem
             if (!val)
                 return;
         }
-        Spawn(component.FinishedPrototype, Transform(uid).Coordinates);
+        SpawnAttachedTo(component.FinishedPrototype, Transform(uid).Coordinates);
         Del(uid);
     }
 }

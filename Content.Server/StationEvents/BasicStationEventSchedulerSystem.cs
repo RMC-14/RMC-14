@@ -20,10 +20,10 @@ namespace Content.Server.StationEvents
     ///     game presets use.
     /// </summary>
     [UsedImplicitly]
-    public sealed class BasicStationEventSchedulerSystem : GameRuleSystem<BasicStationEventSchedulerComponent>
+    public sealed partial class BasicStationEventSchedulerSystem : GameRuleSystem<BasicStationEventSchedulerComponent>
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly EventManagerSystem _event = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private EventManagerSystem _event = default!;
 
         protected override void Started(EntityUid uid, BasicStationEventSchedulerComponent component, GameRuleComponent gameRule,
             GameRuleStartedEvent args)
@@ -113,7 +113,7 @@ namespace Content.Server.StationEvents
 
             var eventScheduler = _protoMan.Index(eventSchedulerProto);
 
-            if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
+            if (!eventScheduler.TryComp<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
             {
                 return occurrences.Select(p => (p.Key, (float)p.Value)).OrderByDescending(p => p.Item2);
             }
@@ -158,7 +158,7 @@ namespace Content.Server.StationEvents
 
             var eventScheduler = _protoMan.Index(eventSchedulerProto);
 
-            if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
+            if (!eventScheduler.TryComp<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 yield break;
 
             var available = _stationEvent.AvailableEvents();
@@ -182,7 +182,7 @@ namespace Content.Server.StationEvents
 
             var eventScheduler = _protoMan.Index(eventSchedulerProto);
 
-            if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
+            if (!eventScheduler.TryComp<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 yield break;
 
             var timemins = time * 60;
@@ -210,7 +210,7 @@ namespace Content.Server.StationEvents
 
             var eventScheduler = _protoMan.Index(eventSchedulerProto);
 
-            if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
+            if (!eventScheduler.TryComp<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 return 0f;
 
             var available = _stationEvent.AvailableEvents();

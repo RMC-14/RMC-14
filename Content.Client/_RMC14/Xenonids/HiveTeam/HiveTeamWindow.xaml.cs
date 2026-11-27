@@ -26,8 +26,8 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         Action<int, NetEntity> onRemoveMember,
         Action<int, int> onSetRole)
     {
-        TopRow.DisposeAllChildren();
-        BottomRow.DisposeAllChildren();
+        TopRow.RemoveAllChildren();
+        BottomRow.RemoveAllChildren();
 
         for (var i = 0; i < HiveTeamsComponent.TeamCount; i++)
         {

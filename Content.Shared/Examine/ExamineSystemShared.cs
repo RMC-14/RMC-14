@@ -19,14 +19,14 @@ namespace Content.Shared.Examine
 {
     public abstract partial class ExamineSystemShared : EntitySystem
     {
-        [Dependency] private readonly OccluderSystem _occluder = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-        [Dependency] protected readonly MobStateSystem MobStateSystem = default!;
+        [Dependency] private OccluderSystem _occluder = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private SharedContainerSystem _containerSystem = default!;
+        [Dependency] private SharedInteractionSystem _interactionSystem = default!;
+        [Dependency] protected MobStateSystem MobStateSystem = default!;
 
         // RMC14
-        [Dependency] private readonly QueenEyeSystem _queenEye = default!;
+        [Dependency] private QueenEyeSystem _queenEye = default!;
 
         public const float MaxRaycastRange = 100;
 
@@ -51,6 +51,9 @@ namespace Content.Shared.Examine
         protected const float ExamineBlurrinessMult = 2.5f;
 
         private EntityQuery<GhostComponent> _ghostQuery;
+        private EntityQuery<OccluderComponent> _occluderQuery;
+        private EntityQuery<TransformComponent> _xformQuery;
+        private readonly List<RayCastResults> _occluderRaycastResults = new();
 
         /// <summary>
         ///     Creates a new examine tooltip with arbitrary info.
@@ -153,8 +156,7 @@ namespace Content.Shared.Examine
                         overwatched,
                         examined.Value,
                         GetExaminerRange(overwatched),
-                        predicate: predicate,
-                        ignoreInsideBlocker: true);
+                        predicate: predicate);
                 }
                 else if (TryComp<XenoWatchingComponent>(examiner, out var watcher) && watcher.Watching is { } watched)
                 {
@@ -162,8 +164,7 @@ namespace Content.Shared.Examine
                         watched,
                         examined.Value,
                         GetExaminerRange(watched),
-                        predicate: predicate,
-                        ignoreInsideBlocker: true);
+                        predicate: predicate);
                 }
                 // RMC
                 else if (Comp<TransformComponent>(examiner).MapID != target.MapId &&
@@ -174,16 +175,14 @@ namespace Content.Shared.Examine
                         vehicleWatched,
                         examined.Value,
                         GetExaminerRange(vehicleWatched),
-                        predicate: predicate,
-                        ignoreInsideBlocker: true);
+                        predicate: predicate);
                 }
 
                 return InRangeUnOccluded(
                     examiner,
                     examined.Value,
                     GetExaminerRange(examiner),
-                    predicate: predicate,
-                    ignoreInsideBlocker: true);
+                    predicate: predicate);
             }
             else
             {
@@ -196,16 +195,14 @@ namespace Content.Shared.Examine
                         vehicleWatched,
                         target,
                         GetExaminerRange(vehicleWatched),
-                        predicate: predicate,
-                        ignoreInsideBlocker: true);
+                        predicate: predicate);
                 }
 
                 return InRangeUnOccluded(
                     examiner,
                     target,
                     GetExaminerRange(examiner),
-                    predicate: predicate,
-                    ignoreInsideBlocker: true);
+                    predicate: predicate);
             }
         }
 
@@ -236,18 +233,18 @@ namespace Content.Shared.Examine
             return TryComp<EyeComponent>(uid, out var eye) && eye.DrawFov;
         }
 
-        public bool InRangeUnOccluded(MapCoordinates origin, MapCoordinates other, float range, Ignored? predicate, bool ignoreInsideBlocker = true, IEntityManager? entMan = null)
+        public bool InRangeUnOccluded(MapCoordinates origin, MapCoordinates other, float range, Ignored? predicate)
         {
             // No, rider. This is better.
             // ReSharper disable once ConvertToLocalFunction
             var wrapped = (EntityUid uid, Ignored? wrapped)
                 => wrapped != null && wrapped(uid);
 
-            return InRangeUnOccluded(origin, other, range, predicate, wrapped, ignoreInsideBlocker, entMan);
+            return InRangeUnOccluded(origin, other, range, predicate, wrapped);
         }
 
         public bool InRangeUnOccluded<TState>(MapCoordinates origin, MapCoordinates other, float range,
-            TState state, Func<EntityUid, TState, bool> predicate, bool ignoreInsideBlocker = true, IEntityManager? entMan = null)
+            TState state, Func<EntityUid, TState, bool> predicate)
         {
             if (other.MapId != origin.MapId ||
                 other.MapId == MapId.Nullspace) return false;
@@ -268,24 +265,24 @@ namespace Content.Shared.Examine
             }
 
             var ray = new Ray(origin.Position, dir.Normalized());
-            var rayResults = _occluder
-                .IntersectRayWithPredicate(origin.MapId, ray, length, state, predicate, false);
+            var rayResults = _occluderRaycastResults;
+            _occluder.IntersectRay(rayResults, origin.MapId, ray, length);
 
             if (rayResults.Count == 0) return true;
 
-            if (!ignoreInsideBlocker) return false;
-
             foreach (var result in rayResults)
             {
-                if (!TryComp(result.HitEntity, out OccluderComponent? o))
-                {
+                if (predicate(result.HitEntity, state))
                     continue;
+
+                if (!_occluderQuery.TryComp(result.HitEntity, out var occluder) ||
+                    !_xformQuery.TryComp(result.HitEntity, out var xform))
+                {
+                    return false;
                 }
 
-                var bBox = o.BoundingBox;
-                bBox = bBox.Translated(_transform.GetWorldPosition(result.HitEntity));
-
-                if (bBox.Contains(origin.Position) || bBox.Contains(other.Position))
+                if (_occluder.ContainsPoint(occluder, xform, origin.Position) ||
+                    _occluder.ContainsPoint(occluder, xform, other.Position))
                 {
                     continue;
                 }
@@ -296,7 +293,7 @@ namespace Content.Shared.Examine
             return true;
         }
 
-        public bool InRangeUnOccluded(EntityUid origin, EntityUid other, float range = ExamineRange, Ignored? predicate = null, bool ignoreInsideBlocker = true)
+        public bool InRangeUnOccluded(EntityUid origin, EntityUid other, float range = ExamineRange, Ignored? predicate = null)
         {
             var ev = new InRangeOverrideEvent(origin, other);
             RaiseLocalEvent(origin, ref ev);
@@ -309,22 +306,22 @@ namespace Content.Shared.Examine
             var originPos = _transform.GetMapCoordinates(origin);
             var otherPos = _transform.GetMapCoordinates(other);
 
-            return InRangeUnOccluded(originPos, otherPos, range, predicate, ignoreInsideBlocker);
+            return InRangeUnOccluded(originPos, otherPos, range, predicate);
         }
 
-        public bool InRangeUnOccluded(EntityUid origin, EntityCoordinates other, float range = ExamineRange, Ignored? predicate = null, bool ignoreInsideBlocker = true)
+        public bool InRangeUnOccluded(EntityUid origin, EntityCoordinates other, float range = ExamineRange, Ignored? predicate = null)
         {
             var originPos = _transform.GetMapCoordinates(origin);
             var otherPos = _transform.ToMapCoordinates(other);
 
-            return InRangeUnOccluded(originPos, otherPos, range, predicate, ignoreInsideBlocker);
+            return InRangeUnOccluded(originPos, otherPos, range, predicate);
         }
 
-        public bool InRangeUnOccluded(EntityUid origin, MapCoordinates other, float range = ExamineRange, Ignored? predicate = null, bool ignoreInsideBlocker = true)
+        public bool InRangeUnOccluded(EntityUid origin, MapCoordinates other, float range = ExamineRange, Ignored? predicate = null)
         {
             var originPos = _transform.GetMapCoordinates(origin);
 
-            return InRangeUnOccluded(originPos, other, range, predicate, ignoreInsideBlocker);
+            return InRangeUnOccluded(originPos, other, range, predicate);
         }
 
         public FormattedMessage GetExamineText(EntityUid entity, EntityUid? examiner)

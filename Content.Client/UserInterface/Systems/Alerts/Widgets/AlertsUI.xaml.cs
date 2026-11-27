@@ -17,9 +17,11 @@ public sealed partial class AlertsUI : UIWidget
 {
     // also known as Control.Children?
     private readonly Dictionary<AlertKey, AlertControl> _alertControls = new();
+    private readonly ISawmill _sawmill;
 
     public AlertsUI()
     {
+        _sawmill = Logger.GetSawmill("alert");
         RobustXamlLoader.Load(this);
     }
 
@@ -80,7 +82,7 @@ public sealed partial class AlertsUI : UIWidget
         {
             if (!alertKey.AlertType.HasValue)
             {
-                Logger.WarningS("alert", "found alertkey without alerttype," +
+                _sawmill.Warning("found alertkey without alerttype," +
                                          " alert keys should never be stored without an alerttype set: {0}", alertKey);
                 continue;
             }
@@ -88,7 +90,7 @@ public sealed partial class AlertsUI : UIWidget
             var alertType = alertKey.AlertType.Value;
             if (!alertsSystem.TryGet(alertType, out var newAlert))
             {
-                Logger.ErrorS("alert", "Unrecognized alertType {0}", alertType);
+                _sawmill.Error("Unrecognized alertType {0}", alertType);
                 continue;
             }
 

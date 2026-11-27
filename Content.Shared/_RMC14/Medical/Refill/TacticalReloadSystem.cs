@@ -7,13 +7,13 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
-public sealed class TacticalReloadSystem : EntitySystem
+public sealed partial class TacticalReloadSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doafter = default!;
 
     public override void Initialize()
     {

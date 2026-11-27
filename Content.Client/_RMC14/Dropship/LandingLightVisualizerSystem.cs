@@ -6,9 +6,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Dropship;
 
-public sealed class LandingLightVisualizerSystem : VisualizerSystem<LandingLightComponent>
+public sealed partial class LandingLightVisualizerSystem : VisualizerSystem<LandingLightComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     protected override void OnAppearanceChange(EntityUid uid, LandingLightComponent light, ref AppearanceChangeEvent args)
     {

@@ -28,20 +28,20 @@ using Content.Shared.Power;
 namespace Content.Server.Kitchen.EntitySystems
 {
     [UsedImplicitly]
-    internal sealed class ReagentGrinderSystem : EntitySystem
+    internal sealed partial class ReagentGrinderSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainersSystem = default!;
-        [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-        [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-        [Dependency] private readonly StackSystem _stackSystem = default!;
-        [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-        [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
-        [Dependency] private readonly JitteringSystem _jitter = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainersSystem = default!;
+        [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+        [Dependency] private SharedPopupSystem _popupSystem = default!;
+        [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+        [Dependency] private StackSystem _stackSystem = default!;
+        [Dependency] private SharedAudioSystem _audioSystem = default!;
+        [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+        [Dependency] private SharedContainerSystem _containerSystem = default!;
+        [Dependency] private SharedDestructibleSystem _destructible = default!;
+        [Dependency] private RandomHelperSystem _randomHelper = default!;
+        [Dependency] private JitteringSystem _jitter = default!;
 
         public override void Initialize()
         {

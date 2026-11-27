@@ -2,9 +2,9 @@ using Content.Shared.Actions;
 
 namespace Content.Shared._RMC14.Mentor.ImaginaryFriend;
 
-public abstract class SharedImaginaryFriendSystem : EntitySystem
+public abstract partial class SharedImaginaryFriendSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedActionsSystem Actions = default!;
+    [Dependency] protected SharedActionsSystem Actions = default!;
 
     public override void Initialize()
     {

@@ -5,11 +5,11 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Marines.Orders;
 
-public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
+public sealed partial class MarineOrdersSystem : SharedMarineOrdersSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

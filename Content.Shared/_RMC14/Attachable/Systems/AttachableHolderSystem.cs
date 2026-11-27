@@ -32,18 +32,18 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachableHolderSystem : EntitySystem
+public sealed partial class AttachableHolderSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedVerbSystem _verbSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedVerbSystem _verbSystem = default!;
 
     public override void Initialize()
     {
@@ -155,7 +155,7 @@ public sealed class AttachableHolderSystem : EntitySystem
             var container = _container.EnsureContainer<ContainerSlot>(holder, slotId);
             container.OccludesLight = false;
 
-            var attachableUid = Spawn(attachment, coords);
+            var attachableUid = SpawnAttachedTo(attachment, coords);
             if (!_container.Insert(attachableUid, container, containerXform: xform))
                 continue;
 

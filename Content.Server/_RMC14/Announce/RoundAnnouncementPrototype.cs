@@ -6,5 +6,5 @@ namespace Content.Server.Announcements;
 public sealed partial class RoundAnnouncementPrototype : ICMSpecific
 {
     [DataField]
-    public bool IsCM { get; }
+    public bool IsCM { get; private set; }
 }

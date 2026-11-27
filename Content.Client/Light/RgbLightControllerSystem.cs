@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Client.Items.Systems;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
@@ -13,12 +14,12 @@ using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client.Light
 {
-    public sealed class RgbLightControllerSystem : SharedRgbLightControllerSystem
+    public sealed partial class RgbLightControllerSystem : SharedRgbLightControllerSystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly ItemSystem _itemSystem = default!;
-        [Dependency] private readonly SharedPointLightSystem _lights = default!;
-        [Dependency] private readonly SpriteSystem _sprite = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private ItemSystem _itemSystem = default!;
+        [Dependency] private SharedPointLightSystem _lights = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
 
         public override void Initialize()
         {
@@ -42,7 +43,7 @@ namespace Content.Client.Light
             _itemSystem.VisualsChanged(uid);
         }
 
-        private void OnComponentShutdown(EntityUid uid, RgbLightControllerComponent rgb, ComponentShutdown args)
+        private void OnComponentShutdown(EntityUid uid, RgbLightControllerComponent rgb, ref ComponentShutdown args)
         {
             if (LifeStage(uid) >= EntityLifeStage.Terminating)
                 return;

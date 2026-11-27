@@ -8,12 +8,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Scorch;
 
-public sealed class RMCScorchSystem : EntitySystem
+public sealed partial class RMCScorchSystem : EntitySystem
 {
-    [Dependency] private readonly DecalSystem _decals = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCDecalSystem _rmcDecal = default!;
+    [Dependency] private DecalSystem _decals = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private RMCDecalSystem _rmcDecal = default!;
 
     public override void Initialize()
     {

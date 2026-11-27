@@ -12,12 +12,12 @@ namespace Content.Server.Objectives.Systems;
 /// Handles assinging a target to an objective entity with <see cref="TargetObjectiveComponent"/> using different components.
 /// These can be combined with condition components for objective completions in order to create a variety of objectives.
 /// </summary>
-public sealed class PickObjectiveTargetSystem : EntitySystem
+public sealed partial class PickObjectiveTargetSystem : EntitySystem
 {
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TraitorRuleSystem _traitorRule = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TraitorRuleSystem _traitorRule = default!;
 
     public override void Initialize()
     {

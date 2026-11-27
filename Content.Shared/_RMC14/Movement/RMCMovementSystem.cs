@@ -14,15 +14,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
 
-public sealed class RMCMovementSystem : EntitySystem
+public sealed partial class RMCMovementSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly FixtureSystem _fixture = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private FixtureSystem _fixture = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const CollisionGroup ClimbCheckGroup = CollisionGroup.Impassable | CollisionGroup.HighImpassable |
                                               CollisionGroup.MidImpassable | CollisionGroup.LowImpassable;

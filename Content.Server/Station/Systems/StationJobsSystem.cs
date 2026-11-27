@@ -23,10 +23,10 @@ namespace Content.Server.Station.Systems;
 [PublicAPI]
 public sealed partial class StationJobsSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -61,7 +61,7 @@ public sealed partial class StationJobsSystem : EntitySystem
         }
     }
 
-    private void OnStationDeletion(EntityUid uid, StationJobsComponent component, ComponentShutdown args)
+    private void OnStationDeletion(EntityUid uid, StationJobsComponent component, ref ComponentShutdown args)
     {
         UpdateJobsAvailable(); // we no longer exist so the jobs list is changed.
     }

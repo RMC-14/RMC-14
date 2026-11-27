@@ -14,16 +14,15 @@ using Content.Server.StationRecords;
 
 namespace Content.Server._RMC14.Announce;
 
-public sealed class MarinePresenceAnnounceSystem : EntitySystem
+public sealed partial class MarinePresenceAnnounceSystem : EntitySystem
 {
-    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
-    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
+    [Dependency] private ARESCoreSystem _aresCore = default!;
+    [Dependency] private MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedRankSystem _rank = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
 
-    [ValidatePrototypeId<RadioChannelPrototype>]
     private static readonly ProtoId<RadioChannelPrototype> CommonChannel = "MarineCommon";
 
     public void AnnounceLateJoin(bool lateJoin, bool silent, EntityUid mob, string jobId, string jobName, JobPrototype jobPrototype)

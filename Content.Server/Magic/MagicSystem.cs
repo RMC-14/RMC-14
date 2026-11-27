@@ -9,12 +9,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Magic;
 
-public sealed class MagicSystem : SharedMagicSystem
+public sealed partial class MagicSystem : SharedMagicSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     private static readonly ProtoId<TagPrototype> InvalidForSurvivorAntagTag = "InvalidForSurvivorAntag";
 
@@ -32,8 +32,8 @@ public sealed class MagicSystem : SharedMagicSystem
         var perfXForm = Transform(ev.Performer);
         var targetXForm = Transform(ev.Target);
 
-        Spawn(ev.Effect, perfXForm.Coordinates);
-        Spawn(ev.Effect, targetXForm.Coordinates);
+        SpawnAttachedTo(ev.Effect, perfXForm.Coordinates);
+        SpawnAttachedTo(ev.Effect, targetXForm.Coordinates);
     }
 
     protected override void OnRandomGlobalSpawnSpell(RandomGlobalSpawnSpellEvent ev)

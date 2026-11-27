@@ -11,13 +11,13 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Name;
 
-public abstract class SharedXenoNameSystem : EntitySystem
+public abstract partial class SharedXenoNameSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCPlayTimeManager _rmcPlaytime = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCPlayTimeManager _rmcPlaytime = default!;
 
     private const string DefaultPrefix = "XX";
 

@@ -14,13 +14,13 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Handles power cell upgrading and actions.
 /// </summary>
-public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
+public sealed partial class NinjaSuitSystem : SharedNinjaSuitSystem
 {
-    [Dependency] private readonly EmpSystem _emp = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SpaceNinjaSystem _ninja = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EmpSystem _emp = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SpaceNinjaSystem _ninja = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     // How much the cell score should be increased per 1 AutoRechargeRate.
     private const int AutoRechargeValue = 100;

@@ -4,9 +4,9 @@ using Robust.Shared.Console;
 
 namespace Content.Client.Commands;
 
-public sealed class ShowMechanismsCommand : LocalizedEntityCommands
+public sealed partial class ShowMechanismsCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     public override string Command => "showmechanisms";
 

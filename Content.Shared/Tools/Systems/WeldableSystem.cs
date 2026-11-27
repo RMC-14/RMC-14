@@ -9,12 +9,12 @@ using LayerChangeOnWeldComponent = Content.Shared.Tools.Components.LayerChangeOn
 
 namespace Content.Shared.Tools.Systems;
 
-public sealed class WeldableSystem : EntitySystem
+public sealed partial class WeldableSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedToolSystem _toolSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
     private EntityQuery<WeldableComponent> _query;
 
     public override void Initialize()

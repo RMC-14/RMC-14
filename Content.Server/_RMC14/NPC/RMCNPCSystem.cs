@@ -6,10 +6,10 @@ using Content.Shared._RMC14.NPC;
 
 namespace Content.Server._RMC14.NPC;
 
-public sealed class RMCNPCSystem : SharedRMCNPCSystem
+public sealed partial class RMCNPCSystem : SharedRMCNPCSystem
 {
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

@@ -14,7 +14,7 @@ public partial class ChatSystem
 {
     private FrozenDictionary<string, EmotePrototype> _wordEmoteDict = FrozenDictionary<string, EmotePrototype>.Empty;
 
-    [Dependency] private readonly HumanoidVoicelinesSystem _humanoidVoicelines = default!;
+    [Dependency] private HumanoidVoicelinesSystem _humanoidVoicelines = default!;
 
     protected override void OnPrototypeReload(PrototypesReloadedEventArgs obj)
     {

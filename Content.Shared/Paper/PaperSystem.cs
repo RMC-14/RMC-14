@@ -22,20 +22,20 @@ using Content.Shared.GameTicking;
 
 namespace Content.Shared.Paper;
 
-public sealed class PaperSystem : EntitySystem
+public sealed partial class PaperSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedIdentitySystem _identitySystem = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private MetaDataSystem _metaSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedIdentitySystem _identitySystem = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
     private static readonly ProtoId<TagPrototype> WriteTag = "Write";
@@ -294,14 +294,14 @@ public sealed class PaperSystem : EntitySystem
         if (!entity.Comp.StampedBy.Contains(stampInfo))
         {
             entity.Comp.StampedBy.Add(stampInfo);
-            
+
             // Clean unfilled form and signature tags when stamping to finalize the document
             var cleanedContent = CleanUnfilledTags(entity.Comp.Content);
             if (cleanedContent != entity.Comp.Content)
             {
                 SetContent(entity, cleanedContent);
             }
-            
+
             Dirty(entity);
             if (entity.Comp.StampState == null && TryComp<AppearanceComponent>(entity, out var appearance))
             {
@@ -413,7 +413,7 @@ public sealed class PaperSystem : EntitySystem
         var name = string.Empty;
         var rank = string.Empty;
         var role = string.Empty;
-        
+
         // Get the identity entity (ID card, etc.)
         var identityEntity = player;
         if (TryComp<IdentityComponent>(player, out var identity) &&
@@ -421,17 +421,17 @@ public sealed class PaperSystem : EntitySystem
         {
             identityEntity = idEntity;
         }
-        
+
         // Get name from identity or fallback to entity name
         name = MetaData(identityEntity).EntityName;
-        
+
         // Get rank from RankComponent
         if (TryComp<RankComponent>(player, out var rankComp))
         {
             var rankSystem = EntityManager.System<SharedRankSystem>();
             rank = rankSystem.GetRankString(player, isShort: true) ?? string.Empty;
         }
-        
+
         // Get role from mind system
         if (TryComp<MindContainerComponent>(player, out var mindContainer) &&
             mindContainer.Mind != null)
@@ -443,7 +443,7 @@ public sealed class PaperSystem : EntitySystem
                 role = Loc.GetString(roleInfo[0].Name);
             }
         }
-        
+
         // Format: "Rank Name, Role" or fallback combinations
         var signature = string.Empty;
         if (!string.IsNullOrEmpty(rank) && !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(role))
@@ -462,7 +462,7 @@ public sealed class PaperSystem : EntitySystem
         {
             signature = name;
         }
-        
+
         return signature;
     }
 

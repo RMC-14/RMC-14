@@ -45,35 +45,34 @@ using PolymorphEffect = Content.Shared.EntityEffects.Effects.Polymorph;
 
 namespace Content.Server.EntityEffects;
 
-public sealed class EntityEffectSystem : EntitySystem
+public sealed partial class EntityEffectSystem : EntitySystem
 {
     private static readonly ProtoId<WeightedRandomFillSolutionPrototype> RandomPickBotanyReagent = "RandomPickBotanyReagent";
 
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly EmpSystem _emp = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly SharedFlashSystem _flash = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly NarcolepsySystem _narcolepsy = default!;
-    [Dependency] private readonly PlantHolderSystem _plantHolder = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly RespiratorSystem _respirator = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SmokeSystem _smoke = default!;
-    [Dependency] private readonly SpreaderSystem _spreader = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly VomitSystem _vomit = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private EmpSystem _emp = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private SharedFlashSystem _flash = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private NarcolepsySystem _narcolepsy = default!;
+    [Dependency] private PlantHolderSystem _plantHolder = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private RespiratorSystem _respirator = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SmokeSystem _smoke = default!;
+    [Dependency] private SpreaderSystem _spreader = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private VomitSystem _vomit = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     public override void Initialize()
     {
@@ -523,17 +522,19 @@ public sealed class EntityEffectSystem : EntitySystem
             var transform = Comp<TransformComponent>(reagentArgs.TargetEntity);
             var mapCoords = _xform.GetMapCoordinates(reagentArgs.TargetEntity, xform: transform);
 
-            if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
+            if (!_map.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
                 !_map.TryGetTileRef(gridUid, grid, transform.Coordinates, out var tileRef))
             {
                 return;
             }
 
-            if (_spreader.RequiresFloorToSpread(args.Effect.PrototypeId) && _turf.IsSpace(tileRef))
+            // RMC14
+            if (_spreader.RequiresFloorToSpread(args.Effect.PrototypeId.Id) && _turf.IsSpace(tileRef))
                 return;
+            // RMC14
 
             var coords = _map.MapToGrid(gridUid, mapCoords);
-            var ent = Spawn(args.Effect.PrototypeId, coords.SnapToGrid());
+            var ent = SpawnAttachedTo(args.Effect.PrototypeId, coords.SnapToGrid());
 
             _smoke.StartSmoke(ent, splitSolution, args.Effect.Duration, spreadAmount);
 
@@ -632,13 +633,12 @@ public sealed class EntityEffectSystem : EntitySystem
 
     private void OnExecuteEmote(ref ExecuteEntityEffectEvent<Emote> args)
     {
-        if (args.Effect.EmoteId == null)
-            return;
-
+        // RMC14
         if (args.Effect.ShowInChat)
             _chat.TryEmoteWithChat(args.Args.TargetEntity, args.Effect.EmoteId, ChatTransmitRange.GhostRangeLimit, forceEmote: args.Effect.Force);
         else
             _chat.TryEmoteWithoutChat(args.Args.TargetEntity, args.Effect.EmoteId);
+        // RMC14
     }
 
     private void OnExecuteEmpReactionEffect(ref ExecuteEntityEffectEvent<EmpReactionEffect> args)
@@ -717,7 +717,7 @@ public sealed class EntityEffectSystem : EntitySystem
         if (args.Effect.FlashEffectPrototype == null)
             return;
 
-        var uid = EntityManager.SpawnEntity(args.Effect.FlashEffectPrototype, _xform.GetMapCoordinates(transform));
+        var uid = EntityManager.Spawn(args.Effect.FlashEffectPrototype, _xform.GetMapCoordinates(transform));
         _xform.AttachToGridOrMap(uid);
 
         if (!TryComp<PointLightComponent>(uid, out var pointLightComp))

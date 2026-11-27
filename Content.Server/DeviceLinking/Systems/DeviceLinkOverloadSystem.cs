@@ -5,9 +5,9 @@ using Content.Shared.DeviceLinking.Events;
 
 namespace Content.Server.DeviceLinking.Systems;
 
-public sealed class DeviceLinkOverloadSystem : EntitySystem
+public sealed partial class DeviceLinkOverloadSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
+    [Dependency] private AudioSystem _audioSystem = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<SoundOnOverloadComponent, DeviceLinkOverloadedEvent>(OnOverloadSound);
@@ -23,6 +23,6 @@ public sealed class DeviceLinkOverloadSystem : EntitySystem
 
     private void OnOverloadSpawn(EntityUid uid, SpawnOnOverloadComponent component, ref DeviceLinkOverloadedEvent args)
     {
-        Spawn(component.Prototype, Transform(uid).Coordinates);
+        SpawnAttachedTo(component.Prototype, Transform(uid).Coordinates);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Content.Client._RMC14.Intel;
 
-public sealed class IntelDetectorOverlaySystem : EntitySystem
+public sealed partial class IntelDetectorOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void Initialize()
     {

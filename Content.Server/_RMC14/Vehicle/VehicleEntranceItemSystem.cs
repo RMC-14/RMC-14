@@ -8,16 +8,16 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Vehicle;
 
-public sealed class VehicleEntranceItemSystem : EntitySystem
+public sealed partial class VehicleEntranceItemSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> HandGrenadeTag = "HandGrenade";
     private static readonly ProtoId<TagPrototype> GrenadeTag = "Grenade";
 
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleSystem _vehicle = default!;
-    [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleSystem _vehicle = default!;
+    [Dependency] private VehicleLockSystem _vehicleLock = default!;
 
     public override void Initialize()
     {

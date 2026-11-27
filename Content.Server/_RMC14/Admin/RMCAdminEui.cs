@@ -23,12 +23,12 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class RMCAdminEui : BaseEui
+public sealed partial class RMCAdminEui : BaseEui
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IReflectionManager _reflection = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IReflectionManager _reflection = default!;
 
     private readonly RMCAdminSystem _rmcAdmin;
     private readonly SharedCMAutomatedVendorSystem _automatedVendor;

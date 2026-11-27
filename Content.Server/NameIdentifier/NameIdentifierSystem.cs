@@ -10,11 +10,11 @@ namespace Content.Server.NameIdentifier;
 /// <summary>
 ///     Handles unique name identifiers for entities e.g. `monkey (MK-912)`
 /// </summary>
-public sealed class NameIdentifierSystem : EntitySystem
+public sealed partial class NameIdentifierSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
 
     /// <summary>
     /// Free IDs available per <see cref="NameIdentifierGroupPrototype"/>.

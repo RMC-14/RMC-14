@@ -14,16 +14,16 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Client._RMC14.Xenonids.Designer;
 
-public sealed class DesignerCrosshairSystem : EntitySystem
+public sealed partial class DesignerCrosshairSystem : EntitySystem
 {
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private ICursor? _transparentCursor;
 
@@ -79,7 +79,7 @@ public sealed class DesignerCrosshairSystem : EntitySystem
         var nodeType = DesignNodeType.Construct;
         if (construction.BuildChoice is { } buildChoice &&
             _prototype.TryIndex(buildChoice, out var proto) &&
-            proto.TryGetComponent(out DesignNodeComponent? nodeComp, _compFactory))
+            proto.TryComp(out DesignNodeComponent? nodeComp, _compFactory))
         {
             nodeType = nodeComp.NodeType;
         }

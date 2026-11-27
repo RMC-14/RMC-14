@@ -13,10 +13,13 @@ namespace Content.Client.Lobby.UI.Loadouts;
 [GenerateTypedNameReferences]
 public sealed partial class LoadoutContainer : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
-    private readonly EntityUid? _entity;
+    // RMC14
+    private readonly EntProtoId? _entityPrototype;
+    private EntityUid? _entity;
+    // RMC14
 
     public Button Select => SelectButton;
 
@@ -42,27 +45,36 @@ public sealed partial class LoadoutContainer : BoxContainer
 
         if (_protoManager.TryIndex(proto, out var loadProto))
         {
-            var ent = loadProto.DummyEntity ?? _entManager.System<LoadoutSystem>().GetFirstOrNull(loadProto);
-
-            if (ent == null)
-                return;
-
-            _entity = _entManager.SpawnEntity(ent, MapCoordinates.Nullspace);
-            Sprite.SetEntity(_entity);
-
-            var spriteTooltip = new Tooltip();
-            spriteTooltip.SetMessage(FormattedMessage.FromUnformatted(_entManager.GetComponent<MetaDataComponent>(_entity.Value).EntityDescription));
-
-            TooltipSupplier = _ => spriteTooltip;
+            // RMC14
+            _entityPrototype = loadProto.DummyEntity ?? _entManager.System<LoadoutSystem>().GetFirstOrNull(loadProto);
+            // RMC14
         }
     }
 
-    protected override void Dispose(bool disposing)
+    // RMC14
+    protected override void EnteredTree()
     {
-        base.Dispose(disposing);
-        if (!disposing)
+        base.EnteredTree();
+
+        if (_entityPrototype is not { } prototype)
             return;
 
-        _entManager.DeleteEntity(_entity);
+        _entity = _entManager.Spawn(prototype, MapCoordinates.Nullspace);
+        Sprite.SetEntity(_entity);
+
+        var spriteTooltip = new Tooltip();
+        spriteTooltip.SetMessage(FormattedMessage.FromUnformatted(_entManager.GetComponent<MetaDataComponent>(_entity.Value).EntityDescription));
+
+        TooltipSupplier = _ => spriteTooltip;
     }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+
+        Sprite.SetEntity(null);
+        _entManager.DeleteEntity(_entity);
+        _entity = null;
+    }
+    // RMC14
 }

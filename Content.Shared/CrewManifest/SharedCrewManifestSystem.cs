@@ -1,5 +1,4 @@
 using Content.Shared.Eui;
-using NetSerializer;
 using Robust.Shared.Serialization;
 using Color = Robust.Shared.Maths.Color; // RMC14
 

@@ -8,11 +8,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.PayloadDeployment;
 
-public sealed class RMCPayloadDeploymentSystem : EntitySystem
+public sealed partial class RMCPayloadDeploymentSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const float StagingGroupSeparation = RMCPayloadDeploymentLimits.MaxLandingRadius * 2 + 100;
 
@@ -63,7 +63,7 @@ public sealed class RMCPayloadDeploymentSystem : EntitySystem
 
     public void PreparePrototypePayload(EntityUid entity, EntityPrototype prototype)
     {
-        if (!prototype.TryGetComponent(out TransformComponent? transform, _compFactory) ||
+        if (!prototype.TryComp(out TransformComponent? transform, _compFactory) ||
             !transform.Anchored)
         {
             return;

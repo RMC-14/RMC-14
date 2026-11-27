@@ -12,16 +12,16 @@ using System.Linq;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-public sealed class AreaInfoSystem : EntitySystem
+public sealed partial class AreaInfoSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly InventorySystem _inv = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private InventorySystem _inv = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly Queue<Entity<AreaInfoComponent>> _marineAlertCopyQueue = new();
 

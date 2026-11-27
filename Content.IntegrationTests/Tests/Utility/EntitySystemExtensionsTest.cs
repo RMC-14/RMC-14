@@ -62,7 +62,7 @@ namespace Content.IntegrationTests.Tests.Utility
                 });
 
                 // Spawn a blocker with an Impassable mask
-                sEntityManager.SpawnEntity(BlockerDummyId, entityCoordinates);
+                sEntityManager.SpawnAttachedTo(BlockerDummyId, entityCoordinates);
                 broady.Update(0.016f);
 
                 // Cannot spawn something with an Impassable layer

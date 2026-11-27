@@ -21,19 +21,19 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public sealed class RMCAirShotSystem : EntitySystem
+public sealed partial class RMCAirShotSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedDropshipWeaponSystem _dropship = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedDropshipWeaponSystem _dropship = default!;
 
     public override void Initialize()
     {
@@ -80,7 +80,7 @@ public sealed class RMCAirShotSystem : EntitySystem
             {
                 if (TryComp(casing, out RMCAirProjectileComponent? projectile))
                 {
-                    var spawned = Spawn(projectile.Prototype, GetCoordinates(args.Coordinates));
+                    var spawned = SpawnAttachedTo(projectile.Prototype, GetCoordinates(args.Coordinates));
                     if (HasComp<FlareSignalComponent>(spawned))
                     {
                         var id = _dropship.ComputeNextId();

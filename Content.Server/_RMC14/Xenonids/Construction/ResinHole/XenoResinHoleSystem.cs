@@ -41,27 +41,27 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
 
-public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
+public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly DestructibleSystem _destructible = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly VehicleWheelSystem _wheels = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogs = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private XenoEnergySystem _xenoEnergy = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private SharedOnCollideSystem _onCollide = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedXenoConstructionSystem _xenoConstruct = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private DestructibleSystem _destructible = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private VehicleWheelSystem _wheels = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -464,7 +464,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void PlaceResinHole(Entity<XenoComponent> xeno, EntityCoordinates coords, EntProtoId resinHolePrototype)
     {
-        var resinHole = Spawn(resinHolePrototype, coords);
+        var resinHole = SpawnAttachedTo(resinHolePrototype, coords);
 
         _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno.Owner):xeno} placed a resin hole at {coords}");
 

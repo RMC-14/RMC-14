@@ -15,9 +15,9 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Chemistry;
 
 [UsedImplicitly]
-public sealed class RMCChemicalDispenserBui : BoundUserInterface
+public sealed partial class RMCChemicalDispenserBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private RMCChemicalDispenserWindow? _window;
 
@@ -123,7 +123,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
             _window.EjectBeakerButton.Visible = false;
             _window.ContentsNone.Visible = true;
             _window.BeakerContents.Visible = false;
-            _window.BeakerContents.DisposeAllChildren();
+            _window.BeakerContents.RemoveAllChildren();
 
             foreach (var chemical in _window.ChemicalsContainer.GetControlOfType<Button>())
             {
@@ -135,7 +135,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
             _window.EjectBeakerButton.Visible = true;
             _window.ContentsNone.Visible = false;
             _window.BeakerContents.Visible = true;
-            _window.BeakerContents.DisposeAllChildren();
+            _window.BeakerContents.RemoveAllChildren();
 
             foreach (var chemical in _window.ChemicalsContainer.GetControlOfType<Button>())
             {

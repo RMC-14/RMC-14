@@ -8,15 +8,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.SwiftSteps;
 
-public sealed class XenoSwiftStepsSystem : EntitySystem
+public sealed partial class XenoSwiftStepsSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly XenoRestSystem _xenoRest = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    //[Dependency] private readonly INetManager _net = default!;
-    //[Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private XenoRestSystem _xenoRest = default!;
+    [Dependency] private StandingStateSystem _standingState = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    //[Dependency] private INetManager _net = default!;
+    //[Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

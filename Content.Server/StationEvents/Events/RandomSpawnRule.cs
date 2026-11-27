@@ -13,7 +13,7 @@ public sealed class RandomSpawnRule : StationEventSystem<RandomSpawnRuleComponen
         if (TryFindRandomTile(out _, out _, out _, out var coords))
         {
             Sawmill.Info($"Spawning {comp.Prototype} at {coords}");
-            Spawn(comp.Prototype, coords);
+            SpawnAttachedTo(comp.Prototype, coords);
         }
     }
 }

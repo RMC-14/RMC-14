@@ -11,9 +11,9 @@ namespace Content.Server.SprayPainter;
 /// Handles spraying pipes using a spray painter.
 /// Airlocks are handled in shared.
 /// </summary>
-public sealed class SprayPainterSystem : SharedSprayPainterSystem
+public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
 {
-    [Dependency] private readonly AtmosPipeColorSystem _pipeColor = default!;
+    [Dependency] private AtmosPipeColorSystem _pipeColor = default!;
 
     public override void Initialize()
     {

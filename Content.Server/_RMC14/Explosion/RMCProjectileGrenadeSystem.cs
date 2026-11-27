@@ -15,17 +15,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Explosion;
 
-public sealed class RMCProjectileGrenadeSystem : EntitySystem
+public sealed partial class RMCProjectileGrenadeSystem : EntitySystem
 {
     private readonly List<EntityUid> _hitEntities = new();
 
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private GunIFFSystem _gunIFF = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

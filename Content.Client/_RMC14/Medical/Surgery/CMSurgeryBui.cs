@@ -13,10 +13,10 @@ using static Robust.Client.UserInterface.Control;
 namespace Content.Client._RMC14.Medical.Surgery;
 
 [UsedImplicitly]
-public sealed class CMSurgeryBui : BoundUserInterface
+public sealed partial class CMSurgeryBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private readonly CMSurgerySystem _system;
 
@@ -103,9 +103,9 @@ public sealed class CMSurgeryBui : BoundUserInterface
             };
         }
 
-        _window.Surgeries.DisposeAllChildren();
-        _window.Steps.DisposeAllChildren();
-        _window.Parts.DisposeAllChildren();
+        _window.Surgeries.RemoveAllChildren();
+        _window.Steps.RemoveAllChildren();
+        _window.Parts.RemoveAllChildren();
 
         View(ViewType.Parts);
 
@@ -205,7 +205,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         _part = _entities.GetEntity(netPart);
         _surgery = (surgery, surgeryId);
 
-        _window.Steps.DisposeAllChildren();
+        _window.Steps.RemoveAllChildren();
 
         if (surgery.Comp.Requirement is { } requirementId && _system.GetSingleton(requirementId) is { } requirement)
         {
@@ -243,7 +243,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
         _part = _entities.GetEntity(netPart);
 
-        _window.Surgeries.DisposeAllChildren();
+        _window.Surgeries.RemoveAllChildren();
 
         var surgeries = new List<(Entity<CMSurgeryComponent> Ent, EntProtoId Id, string Name)>();
         foreach (var surgeryId in surgeryIds)

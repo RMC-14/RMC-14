@@ -16,15 +16,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.LinkAccount;
 
-public sealed class LinkAccountSystem : EntitySystem
+public sealed partial class LinkAccountSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private TimeSpan _timeBetweenLobbyMessages;
     private TimeSpan _nextLobbyMessageTime;

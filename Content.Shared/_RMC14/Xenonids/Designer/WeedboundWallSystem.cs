@@ -8,11 +8,11 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
-public sealed class WeedboundWallSystem : EntitySystem
+public sealed partial class WeedboundWallSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
 
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
 
@@ -119,7 +119,7 @@ public sealed class WeedboundWallSystem : EntitySystem
             ? weedbound.ThickResiduePrototype
             : weedbound.ResiduePrototype;
 
-        var residue = Spawn(residueProto, coords);
+        var residue = SpawnAttachedTo(residueProto, coords);
 
         // Some weedbound structures may not have their hive set (e.g. created by older paths),
         // but their supporting weeds will. Prefer the structure, otherwise fall back to the weeds.

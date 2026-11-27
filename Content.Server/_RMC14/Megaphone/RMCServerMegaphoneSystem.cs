@@ -11,12 +11,12 @@ using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Megaphone;
 
-public sealed class RMCServerMegaphoneSystem : EntitySystem
+public sealed partial class RMCServerMegaphoneSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IServerConsoleHost _console = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IServerConsoleHost _console = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {

@@ -17,13 +17,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Movement.Systems;
 
-public abstract class SharedMobCollisionSystem : EntitySystem
+public abstract partial class SharedMobCollisionSystem : EntitySystem
 {
-    [Dependency] protected readonly IConfigurationManager CfgManager = default!;
-    [Dependency] private   readonly IRobustRandom _random = default!;
-    [Dependency] private   readonly MovementSpeedModifierSystem _moveMod = default!;
-    [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
-    [Dependency] private   readonly SharedTransformSystem _xformSystem = default!;
+    [Dependency] protected IConfigurationManager CfgManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MovementSpeedModifierSystem _moveMod = default!;
+    [Dependency] protected SharedPhysicsSystem Physics = default!;
+    [Dependency] private SharedTransformSystem _xformSystem = default!;
 
     protected EntityQuery<MobCollisionComponent> MobQuery;
     protected EntityQuery<PhysicsComponent> PhysicsQuery;
@@ -54,7 +54,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
     private float _massDiffCap;
 
     // RMC14
-    [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
+    [Dependency] private RMCSizeStunSystem _rmcSizeStun = default!;
 
     private EntityQuery<RMCMobCollisionMassComponent> _rmcMobCollisionMassQuery;
     private EntityQuery<XenoComponent> _xenoQuery;

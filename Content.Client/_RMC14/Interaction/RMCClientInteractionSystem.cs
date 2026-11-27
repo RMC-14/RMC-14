@@ -22,16 +22,16 @@ namespace Content.Client._RMC14.Interaction;
 
 public sealed partial class RMCClientInteractionSystem : EntitySystem
 {
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly RMCLagCompensationSystem _rmcLag = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private RMCLagCompensationSystem _rmcLag = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private EntityQuery<PullerComponent> _pullerQuery;
     private EntityQuery<PullableComponent> _pullableQuery;

@@ -5,9 +5,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.FaxResponder;
 
-public sealed class FaxResponderSystem : EntitySystem
+public sealed partial class FaxResponderSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     public List<FaxResponderJobStatus> Jobs { get; private set; } = new();
 

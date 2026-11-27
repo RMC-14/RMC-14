@@ -5,9 +5,9 @@ using Robust.Shared.Network;
 
 namespace Content.Client._RMC14.Admin.PayloadDeployment;
 
-public sealed class RMCPayloadDeploymentDraftSystem : EntitySystem
+public sealed partial class RMCPayloadDeploymentDraftSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     private readonly List<RMCPayloadDeploymentManifest> _manifests = [];
     private SharedGameTicker _ticker = default!;

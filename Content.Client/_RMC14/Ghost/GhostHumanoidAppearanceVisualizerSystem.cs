@@ -17,15 +17,15 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Client._RMC14.Ghost;
 
-public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
+public sealed partial class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly DisplacementMapSystem _displacement = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private DisplacementMapSystem _displacement = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private readonly Dictionary<EntProtoId, CachedClothingData?> _clothingCache = new();
     private readonly Dictionary<EntProtoId, CachedItemData?> _itemCache = new();
@@ -344,7 +344,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
             return cached;
 
         if (!_prototype.TryIndex(protoId, out var prototype) ||
-            !prototype.TryGetComponent(out ClothingComponent? clothing, _compFactory))
+            !prototype.TryComp(out ClothingComponent? clothing, _compFactory))
         {
             _clothingCache[protoId] = null;
             return null;
@@ -370,7 +370,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
             return cached;
 
         if (!_prototype.TryIndex(protoId, out var prototype) ||
-            !prototype.TryGetComponent(out ItemComponent? item, _compFactory))
+            !prototype.TryComp(out ItemComponent? item, _compFactory))
         {
             _itemCache[protoId] = null;
             return null;
@@ -397,7 +397,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
             return res.RSI;
         }
 
-        return prototype.TryGetComponent(out SpriteComponent? sprite, _compFactory) ? sprite.BaseRSI : null;
+        return prototype.TryComp(out SpriteComponent? sprite, _compFactory) ? sprite.BaseRSI : null;
     }
 
     private static bool TryResolveEquippedVisuals(

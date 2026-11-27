@@ -8,9 +8,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Antag;
 
-public sealed class MobReplacementRuleSystem : GameRuleSystem<MobReplacementRuleComponent>
+public sealed partial class MobReplacementRuleSystem : GameRuleSystem<MobReplacementRuleComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void Started(EntityUid uid, MobReplacementRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -32,7 +32,7 @@ public sealed class MobReplacementRuleSystem : GameRuleSystem<MobReplacementRule
             var coordinates = entity.Coordinates;
             Del(entity.Entity);
 
-            Spawn(component.Proto, coordinates);
+            SpawnAttachedTo(component.Proto, coordinates);
         }
     }
 }

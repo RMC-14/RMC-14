@@ -6,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin.PayloadDeployment;
 
 [AdminCommand(AdminFlags.VarEdit)]
-public sealed class RMCPayloadDeploymentUiCommand : LocalizedCommands
+public sealed partial class RMCPayloadDeploymentUiCommand : LocalizedCommands
 {
-    [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private EuiManager _eui = default!;
 
     public override string Command => "rmcdeploymentui";
 

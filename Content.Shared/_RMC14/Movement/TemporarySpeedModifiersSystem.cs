@@ -8,14 +8,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
 
-public sealed class TemporarySpeedModifiersSystem : EntitySystem
+public sealed partial class TemporarySpeedModifiersSystem : EntitySystem
 {
     private const float MaxSpeedModifier = 1f;
 
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedSystem = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedSystem = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {

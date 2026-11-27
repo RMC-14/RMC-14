@@ -10,10 +10,10 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Chat;
 
-public abstract class SharedCMChatSystem : EntitySystem
+public abstract partial class SharedCMChatSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SquadSystem _squadSystem = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SquadSystem _squadSystem = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<MarineComponent, ChatGetPrefixEvent>(OnMarineGetPrefix);

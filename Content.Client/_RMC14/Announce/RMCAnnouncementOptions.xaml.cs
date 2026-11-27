@@ -12,7 +12,7 @@ namespace Content.Client._RMC14.Announce;
 [GenerateTypedNameReferences]
 public sealed partial class RMCAnnouncementOptions : BoxContainer
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public RMCAnnouncementOptions()
     {

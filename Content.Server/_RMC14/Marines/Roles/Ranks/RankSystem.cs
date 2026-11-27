@@ -10,11 +10,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Marines.Roles.Ranks;
 
-public sealed class RankSystem : SharedRankSystem
+public sealed partial class RankSystem : SharedRankSystem
 {
-    [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IServerPreferencesManager _preferences = default!;
+    [Dependency] private PlayTimeTrackingManager _tracking = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IServerPreferencesManager _preferences = default!;
 
     public override void Initialize()
     {

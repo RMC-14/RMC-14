@@ -6,9 +6,9 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.NightVision;
 
-public sealed class NightVisionSystem : SharedNightVisionSystem
+public sealed partial class NightVisionSystem : SharedNightVisionSystem
 {
-    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
+    [Dependency] private INetConfigurationManager _netConfig = default!;
 
     public override void Initialize()
     {

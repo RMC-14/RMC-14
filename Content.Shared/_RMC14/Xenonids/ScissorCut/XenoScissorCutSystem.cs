@@ -14,27 +14,33 @@ using Content.Shared.Maps;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.ScissorCut;
 
-public sealed class XenoScissorCutSystem : EntitySystem
+public sealed partial class XenoScissorCutSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private TurfSystem _turf = default!;
+
+    private readonly HashSet<FixtureProxy> _fixtures = new();
+    private readonly HashSet<Entity<PhysicsComponent>> _targets = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoScissorCutComponent, XenoScissorCutActionEvent>(OnXenoScissorCutAction);
@@ -67,7 +73,23 @@ public sealed class XenoScissorCutSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        foreach (var ent in _physics.GetCollidingEntities(Transform(xeno).MapID, rot))
+        _fixtures.Clear();
+        _targets.Clear();
+        _lookup.GetFixturesIntersecting(Transform(xeno).MapID, rot, _fixtures, new FixtureQueryArgs(
+            new QueryFilter
+            {
+                LayerBits = -1L,
+                MaskBits = -1L,
+                Flags = QueryFlags.Dynamic | QueryFlags.Static | QueryFlags.Sensors,
+            },
+            Approximate: true));
+
+        foreach (var fixture in _fixtures)
+        {
+            _targets.Add((fixture.Entity, fixture.Body));
+        }
+
+        foreach (var ent in _targets)
         {
             if (HasComp<DamageOnXenoScissorsComponent>(ent) || HasComp<DestroyOnXenoPierceScissorComponent>(ent))
             {

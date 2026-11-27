@@ -23,19 +23,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Weeds;
 
-public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
+public sealed partial class XenoWeedsSystem : SharedXenoWeedsSystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlocker = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDirectionalAttackBlockSystem _directionBlocker = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
 
@@ -162,7 +162,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     continue;
 
                 var coords = _map.GridTileToLocal(grid, grid, neighbor);
-                var neighborWeeds = Spawn(prototype, coords);
+                var neighborWeeds = SpawnAttachedTo(prototype, coords);
                 var neighborWeedsEnt = AssignSource(neighborWeeds, (source.Value, sourceWeeds));
 
                 // If `neighborWeeds` is replacing a lower tier weed tile (regular -> hive), transfer over any wall weeds from the old one.
@@ -290,7 +290,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     {
         Entity<XenoWeedsComponent>? newParent = null;
 
-        var coordinates = _transform.GetMoverCoordinates(childEnt).SnapToGrid(EntityManager, Map);
+        var coordinates = _transform.GetMoverCoordinates(childEnt).SnapToGrid(EntityManager);
         if (_transform.GetGrid(coordinates) is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var gridComp))
             return newParent;
 

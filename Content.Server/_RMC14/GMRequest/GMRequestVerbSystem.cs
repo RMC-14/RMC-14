@@ -16,15 +16,15 @@ namespace Content.Server._RMC14.GMRequest;
 /// <summary>
 /// Handles giving out the GM Request verb and sending those requests to the manager.
 /// </summary>
-public sealed class GMRequestVerbSystem : EntitySystem
+public sealed partial class GMRequestVerbSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly GMRequestManager _gmRequestManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private GMRequestManager _gmRequestManager = default!;
 
     //Tracks the next permitted time to send a request for a player
     //Handled here to avoid extra Shared systems, components, etc

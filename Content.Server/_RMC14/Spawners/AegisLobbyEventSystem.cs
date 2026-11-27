@@ -16,15 +16,15 @@ namespace Content.Server._RMC14.Spawners;
 /// <summary>
 /// System to handle delayed AEGIS event execution when scheduled from lobby
 /// </summary>
-public sealed class AegisLobbyEventSystem : EntitySystem
+public sealed partial class AegisLobbyEventSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly FaxSystem _fax = default!;
-    [Dependency] private readonly SharedRequisitionsSystem _req = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private FaxSystem _fax = default!;
+    [Dependency] private SharedRequisitionsSystem _req = default!;
 
     private bool _aegisScheduled = false;
     private TimeSpan? _scheduledEventTime = null;
@@ -146,12 +146,12 @@ public sealed class AegisLobbyEventSystem : EntitySystem
     public bool SendCICFax(IEntitySystemManager systemManager, IEntityManager entityManager, string message, EntProtoId faxProto, string? sender = null)
     {
         if (!_proto.TryIndex(faxProto, out var faxPaper) ||
-            !faxPaper.TryGetComponent<PaperComponent>(out var paper, EntityManager.ComponentFactory))
+            !faxPaper.TryComp<PaperComponent>(out var paper, EntityManager.ComponentFactory))
             return false;
 
         var label = string.Empty;
 
-        if (faxPaper.TryGetComponent<LabelComponent>(out var labelComp, EntityManager.ComponentFactory))
+        if (faxPaper.TryComp<LabelComponent>(out var labelComp, EntityManager.ComponentFactory))
             label = labelComp.CurrentLabel;
 
         var printout = new FaxPrintout(

@@ -22,19 +22,19 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleAmmoLoaderSystem : EntitySystem
+public sealed partial class VehicleAmmoLoaderSystem : EntitySystem
 {
-    [Dependency] private readonly BulletBoxSystem _bulletBox = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly VehicleHardpointAmmoSystem _hardpointAmmo = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly VehicleTopologySystem _topology = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly VehicleSystem _vehicle = default!;
+    [Dependency] private BulletBoxSystem _bulletBox = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private VehicleHardpointAmmoSystem _hardpointAmmo = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private VehicleTopologySystem _topology = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private VehicleSystem _vehicle = default!;
 
     private readonly Dictionary<EntityUid, Dictionary<EntityUid, EntityUid>> _activeAmmoBoxes = new();
     private readonly Dictionary<EntityUid, HashSet<EntityUid>> _openLoadersByUser = new();
@@ -1061,7 +1061,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         var unloaded = 0;
         while (remaining > 0)
         {
-            var spawned = Spawn(prototype, Transform(user).Coordinates);
+            var spawned = SpawnAttachedTo(prototype, Transform(user).Coordinates);
             if (!TryComp(spawned, out BulletBoxComponent? box))
             {
                 _hands.PickupOrDrop(user, spawned);

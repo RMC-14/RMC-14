@@ -29,13 +29,13 @@ namespace Content.Server.Station.Systems;
 [PublicAPI]
 public sealed partial class StationSystem : SharedStationSystem
 {
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -73,7 +73,7 @@ public sealed partial class StationSystem : SharedStationSystem
         AddGridToStation(component.Station, args.Grid); // Add the new grid as a member.
     }
 
-    private void OnStationGridDeleted(EntityUid uid, StationMemberComponent component, ComponentShutdown args)
+    private void OnStationGridDeleted(EntityUid uid, StationMemberComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<StationDataComponent>(component.Station, out var stationData))
             return;
@@ -119,7 +119,7 @@ public sealed partial class StationSystem : SharedStationSystem
         _pvsOverride.AddGlobalOverride(uid);
     }
 
-    private void OnStationDeleted(EntityUid uid, StationDataComponent component, ComponentShutdown args)
+    private void OnStationDeleted(EntityUid uid, StationDataComponent component, ref ComponentShutdown args)
     {
         foreach (var grid in component.Grids)
         {
@@ -341,7 +341,7 @@ public sealed partial class StationSystem : SharedStationSystem
     public EntityUid InitializeNewStation(StationConfig stationConfig, IEnumerable<EntityUid>? gridIds, string? name = null)
     {
         // Use overrides for setup.
-        var station = EntityManager.SpawnEntity(stationConfig.StationPrototype, MapCoordinates.Nullspace, stationConfig.StationComponentOverrides);
+        var station = EntityManager.Spawn(stationConfig.StationPrototype, MapCoordinates.Nullspace, stationConfig.StationComponentOverrides);
 
         if (name is not null)
             RenameStation(station, name, false);

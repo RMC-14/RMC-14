@@ -6,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class RMCAdminUICommand : LocalizedCommands
+public sealed partial class RMCAdminUICommand : LocalizedCommands
 {
-    [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private EuiManager _eui = default!;
 
     public override string Command => "rmcadminui";
 

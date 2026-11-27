@@ -24,21 +24,21 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Actions;
 
-public abstract class SharedActionsSystem : EntitySystem
+public abstract partial class SharedActionsSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming GameTiming = default!;
-    [Dependency] private   readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private   readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private   readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private   readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private   readonly RotateToFaceSystem _rotateToFace = default!;
-    [Dependency] private   readonly SharedAudioSystem _audio = default!;
-    [Dependency] private   readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private   readonly SharedTransformSystem _transform = default!;
+    [Dependency] protected IGameTiming GameTiming = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     // RMC14
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<ActionsComponent> _actionsQuery;

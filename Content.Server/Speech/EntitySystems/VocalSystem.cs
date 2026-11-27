@@ -11,14 +11,14 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed class VocalSystem : EntitySystem
+public sealed partial class VocalSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly RMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private RMCEmoteSystem _rmcEmote = default!;
 
     public override void Initialize()
     {
@@ -38,7 +38,7 @@ public sealed class VocalSystem : EntitySystem
         LoadSounds(uid, component);
     }
 
-    private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, VocalComponent component, ref ComponentShutdown args)
     {
         // remove scream action when component removed
         if (component.ScreamActionEntity != null)

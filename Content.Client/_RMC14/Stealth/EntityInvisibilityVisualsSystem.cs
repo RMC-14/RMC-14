@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._RMC14.Graphics;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Robust.Client.GameObjects;
@@ -7,9 +8,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Stealth;
 
-public sealed class EntityInvisibilityVisualsSystem : EntitySystem
+public sealed partial class EntityInvisibilityVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    private static readonly ProtoId<ShaderPrototype> InvisibleShader = "RMCInvisible";
+
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -24,7 +28,12 @@ public sealed class EntityInvisibilityVisualsSystem : EntitySystem
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
+        var shader = _prototypes.Index(InvisibleShader).InstanceUnique();
+        _sprite.SetPostShader((ent, sprite), new SpriteComponent.PostShaderArgs(RMCPostShaderIds.Invisible, shader)
+        {
+            After = RMCPostShaderIds.BeforeOpacity,
+        });
+        SetShaderParams(sprite, CompOrNull<EntityActiveInvisibleComponent>(ent));
     }
 
     private void OnShutdown(Entity<EntityTurnInvisibleComponent> ent, ref ComponentShutdown args)
@@ -35,18 +44,21 @@ public sealed class EntityInvisibilityVisualsSystem : EntitySystem
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        sprite.PostShader = null;
+        _sprite.RemovePostShader((ent, sprite), RMCPostShaderIds.Invisible);
     }
 
     private void SetShaderParams(SpriteComponent sprite, EntityActiveInvisibleComponent? activeInvis)
     {
+        if (!_sprite.TryGetPostShader(sprite, RMCPostShaderIds.Invisible, out var entry))
+            return;
+
         var opacity = activeInvis?.Opacity ?? 1;
         var greyFactor = activeInvis?.GreyFactor ?? 0;
         var darkFactor = activeInvis?.DarkFactor ?? 0;
 
-        sprite.PostShader?.SetParameter("opacity", opacity);
-        sprite.PostShader?.SetParameter("grey_factor", greyFactor);
-        sprite.PostShader?.SetParameter("dark_factor", darkFactor);
+        entry.Shader.SetParameter("opacity", opacity);
+        entry.Shader.SetParameter("grey_factor", greyFactor);
+        entry.Shader.SetParameter("dark_factor", darkFactor);
     }
 
     public override void Update(float frameTime)

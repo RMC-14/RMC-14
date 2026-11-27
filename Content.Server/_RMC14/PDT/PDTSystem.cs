@@ -20,18 +20,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.PDT;
 
-public sealed class PDTSystem : EntitySystem
+public sealed partial class PDTSystem : EntitySystem
 {
     private const float LowBatteryFraction = 0.5f;
 
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly PowerCellSystem _cell = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private PowerCellSystem _cell = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     private EntityQuery<PDTBraceletComponent> _braceletQuery;
     private EntityQuery<PDTLocatorComponent> _locatorQuery;

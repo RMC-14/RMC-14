@@ -9,5 +9,5 @@ void fragment() {
         discard;
     }
 
-    COLOR = vec4(sprite.rgb / sprite.a, sprite.a * opacity);
+    COLOR = sprite * opacity;
 }

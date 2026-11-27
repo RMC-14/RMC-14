@@ -46,36 +46,36 @@ using Robust.Shared.Timing;
 using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Destroy;
-public abstract class SharedXenoDestroySystem : EntitySystem
+public abstract partial class SharedXenoDestroySystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly RMCGibSystem _rmcGib = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPull = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedRMCExplosionSystem _explosion = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private SharedDoAfterSystem _doafter = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private RMCGibSystem _rmcGib = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCPullingSystem _rmcPull = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedRMCExplosionSystem _explosion = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
 
@@ -121,7 +121,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
 
         _jitter.DoJitter(xeno, xeno.Comp.JumpTime, true, 80, 8, true);
 
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.JumpTime, new XenoDestroyLeapDoafter(EntityManager.GetNetCoordinates(target)), xeno)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.JumpTime, new XenoDestroyLeapDoafter(GetNetCoordinates(target)), xeno)
         {
             BreakOnMove = true,
             BreakOnRest = true
@@ -141,7 +141,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
 
         args.Handled = true;
 
-        var coords = EntityManager.GetCoordinates(args.TargetCoords);
+        var coords = GetCoordinates(args.TargetCoords);
 
         if (!_interaction.InRangeUnobstructed(xeno, coords, xeno.Comp.Range) || _rmcMap.IsTileBlocked(coords))
         {

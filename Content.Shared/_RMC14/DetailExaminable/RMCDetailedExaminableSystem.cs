@@ -5,9 +5,9 @@ using Content.Shared.GameTicking;
 
 namespace Content.Shared._RMC14.DetailExaminable;
 
-public sealed class RMCDetailedExaminableSystem : EntitySystem
+public sealed partial class RMCDetailedExaminableSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
     private readonly List<Entity<DetailExaminableComponent>> _queue = new();
 

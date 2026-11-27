@@ -8,9 +8,9 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Xenonids.Evolution;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Query)]
-public sealed class WithXenoTierCommand : ToolshedCommand
+public sealed partial class WithXenoTierCommand : ToolshedCommand
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
 
     [CommandImplementation]
     public IEnumerable<EntityUid> With(
@@ -27,6 +27,6 @@ public sealed class WithXenoTierCommand : ToolshedCommand
         [CommandArgument] int tier,
         [CommandInverted] bool inverted)
     {
-        return input.Where(x => (x.TryGetComponent(out XenoComponent? xeno, _compFactory) && xeno.Tier == tier) ^ inverted);
+        return input.Where(x => (x.TryComp(out XenoComponent? xeno, _compFactory) && xeno.Tier == tier) ^ inverted);
     }
 }

@@ -7,8 +7,8 @@ namespace Content.Shared._RMC14.Item;
 
 public sealed partial class ItemSizeChangeSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedItemSystem _itemSystem = default!;
 
     private readonly List<ItemSizePrototype> _sortedSizes = new();
 

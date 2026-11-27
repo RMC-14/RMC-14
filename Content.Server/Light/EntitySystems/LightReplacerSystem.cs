@@ -14,12 +14,12 @@ using Robust.Shared.Containers;
 namespace Content.Server.Light.EntitySystems;
 
 [UsedImplicitly]
-public sealed class LightReplacerSystem : SharedLightReplacerSystem
+public sealed partial class LightReplacerSystem : SharedLightReplacerSystem
 {
-    [Dependency] private readonly PoweredLightSystem _poweredLight = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private PoweredLightSystem _poweredLight = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {
@@ -63,7 +63,7 @@ public sealed class LightReplacerSystem : SharedLightReplacerSystem
         var xform = Transform(uid);
         foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Contents))
         {
-            var ent = Spawn(spawn, xform.Coordinates);
+            var ent = SpawnAttachedTo(spawn, xform.Coordinates);
             TryInsertBulb(uid, ent, replacer: component);
         }
     }

@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids;
 
 public sealed partial class XenoSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     private void OnVisualsMobStateChanged(Entity<XenoStateVisualsComponent> ent, ref MobStateChangedEvent args)
     {

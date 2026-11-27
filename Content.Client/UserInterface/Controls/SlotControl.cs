@@ -9,12 +9,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Controls
 {
-    [Virtual]
-    public abstract class SlotControl : Control, IEntityControl
+    public abstract partial class SlotControl : Control, IEntityControl
     {
-        [Dependency] private readonly IEntityManager _entities = default!;
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private IEntityManager _entities = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
 
         public static int DefaultButtonSize = 64;
 
@@ -42,7 +41,7 @@ namespace Content.Client.UserInterface.Controls
                 //this auto registers the button with it's parent container when it's set
                 if (_slotNameSet)
                 {
-                    Logger.Warning("Tried to set slotName after init for:" + Name);
+                    Log.Warning("Tried to set slotName after init for:" + Name);
                     return;
                 }
                 _slotNameSet = true;

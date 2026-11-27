@@ -11,14 +11,14 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Actions;
 
-public abstract class SharedRMCActionsSystem : EntitySystem
+public abstract partial class SharedRMCActionsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private GunIFFSystem _gunIFF = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<ActionSharedCooldownComponent> _actionSharedCooldownQuery;
 

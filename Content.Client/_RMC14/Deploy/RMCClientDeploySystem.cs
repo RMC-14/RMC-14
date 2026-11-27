@@ -6,9 +6,9 @@ namespace Content.Client._RMC14.Deploy;
 /// <summary>
 /// Client-side system for handling deploy area overlays and related network events during deployment.
 /// </summary>
-public sealed class RMCClientDeploySystem : EntitySystem
+public sealed partial class RMCClientDeploySystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
 
     public override void Initialize()
     {

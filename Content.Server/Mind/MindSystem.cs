@@ -16,14 +16,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Mind;
 
-public sealed class MindSystem : SharedMindSystem
+public sealed partial class MindSystem : SharedMindSystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly GhostSystem _ghosts = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private GhostSystem _ghosts = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()
     {
@@ -33,7 +33,7 @@ public sealed class MindSystem : SharedMindSystem
         SubscribeLocalEvent<MindComponent, ComponentShutdown>(OnMindShutdown);
     }
 
-    private void OnMindShutdown(EntityUid uid, MindComponent mind, ComponentShutdown args)
+    private void OnMindShutdown(EntityUid uid, MindComponent mind, ref ComponentShutdown args)
     {
         if (mind.UserId is {} user)
         {

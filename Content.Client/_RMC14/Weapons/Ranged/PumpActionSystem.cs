@@ -8,10 +8,10 @@ using Robust.Client.Input;
 
 namespace Content.Client._RMC14.Weapons.Ranged;
 
-public sealed class PumpActionSystem : SharedPumpActionSystem
+public sealed partial class PumpActionSystem : SharedPumpActionSystem
 {
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     protected override void OnExamined(Entity<PumpActionComponent> ent, ref ExaminedEvent args)
     {

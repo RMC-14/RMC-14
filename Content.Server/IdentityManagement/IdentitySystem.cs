@@ -19,15 +19,15 @@ namespace Content.Server.IdentityManagement;
 /// <summary>
 ///     Responsible for updating the identity of an entity on init or clothing equip/unequip.
 /// </summary>
-public sealed class IdentitySystem : SharedIdentitySystem
+public sealed partial class IdentitySystem : SharedIdentitySystem
 {
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly CriminalRecordsConsoleSystem _criminalRecordsConsole = default!;
-    [Dependency] private readonly GrammarSystem _grammarSystem = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private CriminalRecordsConsoleSystem _criminalRecordsConsole = default!;
+    [Dependency] private GrammarSystem _grammarSystem = default!;
 
     private HashSet<EntityUid> _queuedIdentityUpdates = new();
 
@@ -62,7 +62,7 @@ public sealed class IdentitySystem : SharedIdentitySystem
     // This is where the magic happens
     private void OnMapInit(EntityUid uid, IdentityComponent component, MapInitEvent args)
     {
-        var ident = Spawn(null, Transform(uid).Coordinates);
+        var ident = SpawnAttachedTo(null, Transform(uid).Coordinates);
 
         _metaData.SetEntityName(ident, "identity");
         QueueIdentityUpdate(uid);

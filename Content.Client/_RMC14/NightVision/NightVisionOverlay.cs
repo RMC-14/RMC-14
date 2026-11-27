@@ -13,12 +13,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.NightVision;
 
-public sealed class NightVisionOverlay : Overlay
+public sealed partial class NightVisionOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private readonly ContainerSystem _container;
     private readonly ExamineSystem _examine;
@@ -107,7 +107,7 @@ public sealed class NightVisionOverlay : Overlay
 
         var colorVal = _config.GetCVar(RMCCVars.RMCNightVisionColor);
         var color = ((NightVisionColor) colorVal).ToColor();
-        _shader.SetParameter("nv_color", new Robust.Shared.Maths.Vector3(color.R, color.G, color.B));
+        _shader.SetParameter("nv_color", new Vector3(color.R, color.G, color.B));
 
         var worldHandle = args.WorldHandle;
         worldHandle.UseShader(_shader);

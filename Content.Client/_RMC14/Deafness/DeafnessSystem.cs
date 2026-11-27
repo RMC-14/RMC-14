@@ -9,13 +9,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Deafness;
 
-public sealed class DeafnessSystem : SharedDeafnessSystem
+public sealed partial class DeafnessSystem : SharedDeafnessSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IAudioManager _audio = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IAudioManager _audio = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private float _originalVolume = 0.5f;
 
@@ -29,7 +29,7 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
         Subs.CVar(_cfg, CCVars.AudioMasterVolume, value => _originalVolume = value, true);
     }
 
-    private void OnDeafShutdown(EntityUid uid, DeafComponent component, ComponentShutdown args)
+    private void OnDeafShutdown(EntityUid uid, DeafComponent component, ref ComponentShutdown args)
     {
         if (_player.LocalEntity == uid)
             _audio.SetMasterGain(_originalVolume);

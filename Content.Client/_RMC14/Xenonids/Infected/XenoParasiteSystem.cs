@@ -10,10 +10,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.Infected;
 
-public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
+public sealed partial class XenoParasiteSystem : SharedXenoParasiteSystem
 {
-    [Dependency] private readonly XenoVisualizerSystem _xenoVisualizer = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private XenoVisualizerSystem _xenoVisualizer = default!;
+    [Dependency] private TagSystem _tags = default!;
 
     public override void Initialize()
     {

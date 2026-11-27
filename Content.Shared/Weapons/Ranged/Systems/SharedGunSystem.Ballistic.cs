@@ -19,11 +19,11 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
 
     // RMC14
-    [Dependency] private readonly SharedRMCStackSystem _rmcStack = default!;
+    [Dependency] private SharedRMCStackSystem _rmcStack = default!;
 
     protected virtual void InitializeBallistic()
     {
@@ -266,7 +266,7 @@ public abstract partial class SharedGunSystem
 
         // Delete the source BAP if it has the flag and is empty after trying to load. Maybe useful for shell handfuls.
         if (component.DeleteWhenEmpty && (component.Entities.Count == 0))
-            PredictedDel(uid);
+            Del(uid);
 
     }
 
@@ -461,7 +461,7 @@ public abstract partial class SharedGunSystem
             {
                 component.UnspawnedCount--;
                 DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
-                entity = Spawn(component.Proto, args.Coordinates);
+                entity = SpawnAttachedTo(component.Proto, args.Coordinates);
                 args.Ammo.Add((entity, EnsureShootable(entity)));
             }
         }

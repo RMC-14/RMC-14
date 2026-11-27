@@ -30,7 +30,7 @@ namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem
 {
-    [Dependency] private readonly FlammableSystem _flammableSystem = default!;
+    [Dependency] private FlammableSystem _flammableSystem = default!;
 
     /// <summary>
     ///     Used to limit explosion processing time. See <see cref="MaxProcessingTime"/>.
@@ -261,7 +261,7 @@ public sealed partial class ExplosionSystem
         }
 
         if (!tileBlocked)
-            Spawn(ShockwaveSmoke, new EntityCoordinates(grid.Owner, tile));
+            SpawnAttachedTo(ShockwaveSmoke, new EntityCoordinates(grid.Owner, tile));
 
         // Next, we get the intersecting entities AGAIN, but purely for throwing. This way, glass shards spawned from
         // windows will be flung outwards, and not stay where they spawned. This is however somewhat unnecessary, and a
@@ -713,7 +713,6 @@ sealed class Explosion
         int maxTileBreak,
         bool canCreateVacuum,
         IEntityManager entMan,
-        IMapManager mapMan,
         EntityUid visualEnt,
         EntityUid? cause,
         SharedMapSystem mapSystem)

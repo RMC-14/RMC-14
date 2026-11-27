@@ -33,7 +33,7 @@ public sealed partial class DungeonJob
                 var dir = (DirectionFlag) Math.Pow(2, i);
                 var neighbor = tile + dir.AsDir().ToIntVec();
 
-                var anc = _maps.GetAnchoredEntitiesEnumerator(_gridUid, _grid, neighbor);
+                var anc = _maps.GetAnchoredEntities(_gridUid, _grid, neighbor);
 
                 while (anc.MoveNext(out var ent))
                 {
@@ -60,7 +60,7 @@ public sealed partial class DungeonJob
                     var dir = (Direction) (i * 2 - 1);
                     var neighbor = tile + dir.ToIntVec();
 
-                    var anc = _maps.GetAnchoredEntitiesEnumerator(_gridUid, _grid, neighbor);
+                    var anc = _maps.GetAnchoredEntities(_gridUid, _grid, neighbor);
 
                     while (anc.MoveNext(out var ent))
                     {

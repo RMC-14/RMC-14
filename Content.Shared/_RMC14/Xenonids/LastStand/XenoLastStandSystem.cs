@@ -8,8 +8,8 @@ namespace Content.Shared._RMC14.Xenonids.LastStand;
 
 public sealed partial class XenoLastStandSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

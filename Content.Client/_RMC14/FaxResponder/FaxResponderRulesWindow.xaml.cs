@@ -14,7 +14,7 @@ namespace Content.Client._RMC14.FaxResponder;
 [GenerateTypedNameReferences]
 public sealed partial class FaxResponderRulesWindow : FancyWindow
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private static readonly ProtoId<GuideEntryPrototype> RulesGuide = "RMCRulesFaxResponder";
     private const float AcceptDelay = 10f;

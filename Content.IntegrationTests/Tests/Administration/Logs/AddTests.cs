@@ -36,7 +36,7 @@ public sealed class AddTests
         var coordinates = pair.TestMap.GridCoords;
         await server.WaitPost(() =>
         {
-            var entity = sEntities.SpawnEntity(null, coordinates);
+            var entity = sEntities.SpawnAttachedTo(null, coordinates);
 
             sAdminLogSystem.Add(LogType.Unknown, $"{entity:Entity} test log: {guid}");
         });
@@ -85,7 +85,7 @@ public sealed class AddTests
         var coordinates = testMap.GridCoords;
         await server.WaitPost(() =>
         {
-            var entity = sEntities.SpawnEntity(null, coordinates);
+            var entity = sEntities.SpawnAttachedTo(null, coordinates);
 
             sAdminLogSystem.Add(LogType.Unknown, $"{entity} test log: {guid}");
         });
@@ -145,7 +145,7 @@ public sealed class AddTests
         var coordinates = testMap.GridCoords;
         await server.WaitPost(() =>
         {
-            var entity = sEntities.SpawnEntity(null, coordinates);
+            var entity = sEntities.SpawnAttachedTo(null, coordinates);
 
             for (var i = 0; i < amount; i++)
             {

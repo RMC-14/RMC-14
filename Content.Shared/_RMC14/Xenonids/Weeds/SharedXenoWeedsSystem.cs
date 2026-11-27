@@ -42,34 +42,33 @@ using Content.Shared._RMC14.Vents;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
 
-public abstract class SharedXenoWeedsSystem : EntitySystem
+public abstract partial class SharedXenoWeedsSystem : EntitySystem
 {
-    [Dependency] protected readonly IMapManager Map = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlocker = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ITileDefinitionManager _tile = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityManager _entities = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly WeedboundWallSystem _weedboundWall = default!;
-    [Dependency] private readonly DesignerNodeBindingSystem _designerBinding = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDirectionalAttackBlockSystem _directionBlocker = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ITileDefinitionManager _tile = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityManager _entities = default!;
+    [Dependency] private SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private WeedboundWallSystem _weedboundWall = default!;
+    [Dependency] private DesignerNodeBindingSystem _designerBinding = default!;
+    [Dependency] private TagSystem _tags = default!;
 
     private static readonly ProtoId<TagPrototype> PlatformTag = "Platform";
 
@@ -456,7 +455,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     public Entity<XenoWeedsComponent>? GetWeedsOnFloor(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
-        var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
+        var enumerator = _mapSystem.GetAnchoredEntities(grid, grid, position);
 
         while (enumerator.MoveNext(out var anchored))
         {
@@ -576,7 +575,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 return false;
         }
 
-        var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tileIndex);
+        var targetTileAnchored = _mapSystem.GetAnchoredEntities(grid, grid, tileIndex);
         while (targetTileAnchored.MoveNext(out var uid))
         {
             if (_blockWeedsQuery.HasComp(uid))
@@ -631,7 +630,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             return false;
         }
 
-        var entities = _mapSystem.GetAnchoredEntities(grid, coordinates.ToVector2i(EntityManager, Map, _transform));
+        var entities = _mapSystem.GetAnchoredEntities(grid, coordinates.ToVector2i(EntityManager, _transform));
         {
             foreach (var entity in entities)
             {

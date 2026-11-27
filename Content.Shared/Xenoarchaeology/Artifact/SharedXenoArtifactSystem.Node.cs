@@ -10,7 +10,7 @@ namespace Content.Shared.Xenoarchaeology.Artifact;
 
 public abstract partial class SharedXenoArtifactSystem
 {
-    [Dependency] private readonly EntityTableSystem _entityTable =  default!;
+    [Dependency] private EntityTableSystem _entityTable =  default!;
 
     private EntityQuery<XenoArtifactComponent> _xenoArtifactQuery;
     private EntityQuery<XenoArtifactNodeComponent> _nodeQuery;

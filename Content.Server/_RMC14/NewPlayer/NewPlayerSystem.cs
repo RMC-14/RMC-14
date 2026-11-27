@@ -9,13 +9,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.NewPlayer;
 
-public sealed class NewPlayerSystem : EntitySystem
+public sealed partial class NewPlayerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playtimeManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RMCPlayTimeManager _rmcPlaytime = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private PlayTimeTrackingManager _playtimeManager = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private RMCPlayTimeManager _rmcPlaytime = default!;
 
     private TimeSpan _newPlayerTimeTotal;
     private TimeSpan _newPlayerTimeJob;

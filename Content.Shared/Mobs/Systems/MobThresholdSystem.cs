@@ -11,10 +11,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Mobs.Systems;
 
-public sealed class MobThresholdSystem : EntitySystem
+public sealed partial class MobThresholdSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
@@ -456,7 +456,7 @@ public sealed class MobThresholdSystem : EntitySystem
         UpdateAllEffects((target, thresholds, mobState, damageable), mobState.CurrentState);
     }
 
-    private void MobThresholdShutdown(EntityUid target, MobThresholdsComponent component, ComponentShutdown args)
+    private void MobThresholdShutdown(EntityUid target, MobThresholdsComponent component, ref ComponentShutdown args)
     {
         if (component.TriggersAlerts)
             _alerts.ClearAlertCategory(target, component.HealthAlertCategory);

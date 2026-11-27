@@ -10,12 +10,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Roles.Ranks;
 
-public abstract class SharedRankSystem : EntitySystem
+public abstract partial class SharedRankSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly SharedMarineSystem _marine = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedMarineSystem _marine = default!;
 
     public override void Initialize()
     {

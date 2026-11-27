@@ -9,15 +9,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Ghost;
 
-public sealed class GhostOverlayVisualizerSystem : EntitySystem
+public sealed partial class GhostOverlayVisualizerSystem : EntitySystem
 {
     private const string FireLayerKey = "ghost-overlay-fire";
     private const string XenoWoundLayerKey = "ghost-overlay-xeno-wound";
 
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly GhostColorSystem _ghostColor = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private GhostColorSystem _ghostColor = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -84,7 +84,7 @@ public sealed class GhostOverlayVisualizerSystem : EntitySystem
         EntityPrototype prototype,
         GhostDamageSnapshot damage)
     {
-        if (!prototype.TryGetComponent(out DamageVisualsComponent? damageVisuals, _compFactory) ||
+        if (!prototype.TryComp(out DamageVisualsComponent? damageVisuals, _compFactory) ||
             !damageVisuals.Overlay ||
             damageVisuals.TargetLayers == null ||
             damageVisuals.DamageOverlayGroups == null)
@@ -141,7 +141,7 @@ public sealed class GhostOverlayVisualizerSystem : EntitySystem
         EntityPrototype prototype,
         GhostFireSnapshot fire)
     {
-        if (!prototype.TryGetComponent(out FireVisualsComponent? fireVisuals, _compFactory) ||
+        if (!prototype.TryComp(out FireVisualsComponent? fireVisuals, _compFactory) ||
             fireVisuals.Sprite == null)
         {
             return;

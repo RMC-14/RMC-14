@@ -31,7 +31,6 @@ namespace Content.IntegrationTests.Tests.Interaction
             var server = pair.Server;
 
             var sEntities = server.ResolveDependency<IEntityManager>();
-            var mapManager = server.ResolveDependency<IMapManager>();
             var conSystem = sEntities.EntitySysManager.GetEntitySystem<SharedContainerSystem>();
             var tSystem = sEntities.EntitySysManager.GetEntitySystem<TransformSystem>();
 
@@ -45,8 +44,8 @@ namespace Content.IntegrationTests.Tests.Interaction
             {
                 var coordinates = map.MapCoords;
 
-                origin = sEntities.SpawnEntity(HumanId, coordinates);
-                other = sEntities.SpawnEntity(HumanId, coordinates);
+                origin = sEntities.Spawn(HumanId, coordinates);
+                other = sEntities.Spawn(HumanId, coordinates);
                 conSystem.EnsureContainer<Container>(other, "InRangeUnobstructedTestOtherContainer");
                 mapCoordinates = tSystem.GetMapCoordinates(other);
             });

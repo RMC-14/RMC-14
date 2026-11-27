@@ -3,9 +3,9 @@ using Robust.Shared.Network;
 
 namespace Content.Client._RMC14.PlayTimeTracking;
 
-public sealed class RMCPlayTimeManager : SharedRMCPlayTimeManager
+public sealed partial class RMCPlayTimeManager : SharedRMCPlayTimeManager
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     private readonly HashSet<string> _excluded = [];
 

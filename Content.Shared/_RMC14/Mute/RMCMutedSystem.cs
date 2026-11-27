@@ -3,9 +3,9 @@ using Content.Shared.Speech;
 
 namespace Content.Shared._RMC14.Mute;
 
-public sealed class RMCMutedSystem : EntitySystem
+public sealed partial class RMCMutedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

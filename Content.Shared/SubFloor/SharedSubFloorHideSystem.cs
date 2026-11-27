@@ -16,14 +16,14 @@ namespace Content.Shared.SubFloor
     ///     Entity system backing <see cref="SubFloorHideComponent"/>.
     /// </summary>
     [UsedImplicitly]
-    public abstract class SharedSubFloorHideSystem : EntitySystem
+    public abstract partial class SharedSubFloorHideSystem : EntitySystem
     {
-        [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-        [Dependency] private readonly SharedAmbientSoundSystem _ambientSoundSystem = default!;
-        [Dependency] protected readonly SharedMapSystem Map = default!;
-        [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-        [Dependency] private readonly SharedVisibilitySystem _visibility = default!;
-        [Dependency] protected readonly SharedPopupSystem _popup = default!;
+        [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+        [Dependency] private SharedAmbientSoundSystem _ambientSoundSystem = default!;
+        [Dependency] protected SharedMapSystem Map = default!;
+        [Dependency] protected SharedAppearanceSystem Appearance = default!;
+        [Dependency] private SharedVisibilitySystem _visibility = default!;
+        [Dependency] protected SharedPopupSystem _popup = default!;
 
         private EntityQuery<SubFloorHideComponent> _hideQuery;
 
@@ -95,7 +95,7 @@ namespace Content.Shared.SubFloor
             EnsureComp<CollideOnAnchorComponent>(uid);
         }
 
-        private void OnSubFloorTerminating(EntityUid uid, SubFloorHideComponent component, ComponentShutdown _)
+        private void OnSubFloorTerminating(EntityUid uid, SubFloorHideComponent component, ref ComponentShutdown _)
         {
             // If component is being deleted don't need to worry about updating any component stuff because it won't matter very shortly.
             if (Comp<MetaDataComponent>(uid).EntityLifeStage >= EntityLifeStage.Terminating)

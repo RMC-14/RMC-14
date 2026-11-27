@@ -14,10 +14,10 @@ namespace Content.Client.Overlays;
 /// <summary>
 /// Shows a healthy icon on mobs.
 /// </summary>
-public sealed class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsComponent>
+public sealed partial class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsComponent>
 {
-    [Dependency] private readonly IPrototypeManager _prototypeMan = default!;
-    [Dependency] private readonly CMHealthIconsSystem _healthIcons = default!;
+    [Dependency] private IPrototypeManager _prototypeMan = default!;
+    [Dependency] private CMHealthIconsSystem _healthIcons = default!;
 
     [ViewVariables]
     public HashSet<string> DamageContainers = new();

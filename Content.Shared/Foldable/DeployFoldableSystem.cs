@@ -10,15 +10,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Foldable;
 
-public sealed class DeployFoldableSystem : EntitySystem
+public sealed partial class DeployFoldableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly FoldableSystem _foldable = default!;
-    [Dependency] private readonly AnchorableSystem _anchorable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private FoldableSystem _foldable = default!;
+    [Dependency] private AnchorableSystem _anchorable = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     // RMC14
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
     private static readonly ProtoId<TagPrototype> StairsTag = "RMCStairs";

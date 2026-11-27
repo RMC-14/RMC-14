@@ -24,6 +24,6 @@ public sealed class TegSystem : EntitySystem
 
     private void CirculatorExamined(EntityUid uid, TegCirculatorComponent component, ClientExaminedEvent args)
     {
-        Spawn(ArrowPrototype, new EntityCoordinates(uid, 0, 0));
+        SpawnAttachedTo(ArrowPrototype, new EntityCoordinates(uid, 0, 0));
     }
 }

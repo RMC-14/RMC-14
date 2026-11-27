@@ -11,13 +11,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public sealed class DropshipUtilitySystem : EntitySystem
+public sealed partial class DropshipUtilitySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedDropshipSystem _dropship = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDropshipWeaponSystem _dropshipWeapon = default!;
 
     public override void Initialize()
     {

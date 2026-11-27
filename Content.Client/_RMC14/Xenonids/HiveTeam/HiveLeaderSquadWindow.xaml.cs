@@ -64,7 +64,7 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
         Title = roleName;
         AnnounceBox.PlaceHolder = $"Announce to {roleName}...";
 
-        LeaderSlot.DisposeAllChildren();
+        LeaderSlot.RemoveAllChildren();
         if (entry.Leader is { } leaderNet)
         {
             var leaderXeno = allXenos.Find(x => x.Entity == leaderNet);
@@ -84,7 +84,7 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
             });
         }
 
-        MembersSlot.DisposeAllChildren();
+        MembersSlot.RemoveAllChildren();
         if (entry.Members.Count == 0)
         {
             MembersSlot.AddChild(new Label

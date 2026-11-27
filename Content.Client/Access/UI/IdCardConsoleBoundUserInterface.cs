@@ -10,10 +10,10 @@ using static Content.Shared.Access.Components.IdCardConsoleComponent;
 
 namespace Content.Client.Access.UI
 {
-    public sealed class IdCardConsoleBoundUserInterface : BoundUserInterface
+    public sealed partial class IdCardConsoleBoundUserInterface : BoundUserInterface
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IConfigurationManager _cfgManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IConfigurationManager _cfgManager = default!;
         private readonly SharedIdCardConsoleSystem _idCardConsoleSystem = default!;
 
         private IdCardConsoleWindow? _window;

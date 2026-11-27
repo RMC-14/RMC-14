@@ -15,12 +15,14 @@ namespace Content.Server.Power.Nodes
             MapGridComponent? grid,
             IEntityManager entMan)
         {
-            if (!xform.Anchored || grid == null)
+            if (!xform.Anchored || grid == null || xform.GridUid is not { } gridUid)
                 yield break;
 
-            var gridIndex = grid.TileIndicesFor(xform.Coordinates);
+            var mapSystem = entMan.System<SharedMapSystem>();
+            var gridEnt = new Entity<MapGridComponent>(gridUid, grid);
+            var gridIndex = mapSystem.TileIndicesFor(gridEnt, xform.Coordinates);
 
-            var nodes = NodeHelpers.GetCardinalNeighborNodes(nodeQuery, grid, gridIndex, includeSameTile: false);
+            var nodes = NodeHelpers.GetCardinalNeighborNodes(nodeQuery, gridEnt, gridIndex, mapSystem, includeSameTile: false);
             foreach (var (dir, node) in nodes)
             {
                 if (node is CableTerminalNode

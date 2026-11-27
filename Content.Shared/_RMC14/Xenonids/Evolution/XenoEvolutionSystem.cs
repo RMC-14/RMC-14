@@ -44,34 +44,33 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Evolution;
 
-public sealed class XenoEvolutionSystem : EntitySystem
+public sealed partial class XenoEvolutionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ClimbSystem _climb = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly FollowerSystem _follower = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ClimbSystem _climb = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private FollowerSystem _follower = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private SharedXenoHiveSystem _xenoHive = default!;
+    [Dependency] private SharedXenoWeedsSystem _xenoWeeds = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
@@ -502,7 +501,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         // TODO RMC14 revive jelly when added should not bring back dead queens
-        if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
+        if (prototype.TryComp(out XenoEvolutionCappedComponent? capped, _compFactory) &&
             HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
             if (doPopup)
@@ -529,7 +528,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (!ignoreFixable && TryComp<RestrictEvolveOffWeedsComponent>(xeno.Owner, out var comp))
         {
-            var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+            var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager);
             if (_transform.GetGrid(coordinates) is not { } gridUid ||
                 !TryComp(gridUid, out MapGridComponent? grid))
             {
@@ -548,7 +547,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
         }
 
-        prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory);
+        prototype.TryComp(out XenoComponent? newXenoComp, _compFactory);
         if (newXenoComp != null &&
             newXenoComp.UnlockAt > _gameTicker.RoundDuration())
         {
@@ -695,7 +694,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private bool TryEnterRaffle(Entity<XenoEvolutionComponent> xeno, EntProtoId target)
     {
         if (!_prototypes.TryIndex(target, out var proto) ||
-            !proto.TryGetComponent(out XenoComponent? targetXeno, _compFactory))
+            !proto.TryComp(out XenoComponent? targetXeno, _compFactory))
         {
             return false;
         }
@@ -773,7 +772,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private bool ShouldRaffle(Entity<XenoEvolutionComponent> xeno, EntProtoId target)
     {
         if (!_prototypes.TryIndex(target, out var proto) ||
-            !proto.TryGetComponent(out XenoComponent? targetXeno, _compFactory) ||
+            !proto.TryComp(out XenoComponent? targetXeno, _compFactory) ||
             _xenoHive.GetHive(xeno.Owner) is not { } hive)
         {
             return false;
@@ -849,7 +848,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 continue;
 
             if (_prototypes.TryIndex(current, out var proto) &&
-                proto.TryGetComponent(out XenoEvolutionComponent? evolution, _compFactory))
+                proto.TryComp(out XenoEvolutionComponent? evolution, _compFactory))
             {
                 Enqueue(evolution);
             }
@@ -866,18 +865,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var current = target;
         while (visited.Add(current.Id) &&
                _prototypes.TryIndex(current, out var proto) &&
-               proto.TryGetComponent(out XenoDevolveComponent? devolve, _compFactory) &&
+               proto.TryComp(out XenoDevolveComponent? devolve, _compFactory) &&
                devolve.DevolvesTo.Length > 0)
         {
             var next = devolve.DevolvesTo[0];
             if (!_prototypes.TryIndex(next, out var nextProto) ||
-                !nextProto.TryGetComponent(out XenoComponent? nextXeno, _compFactory) ||
+                !nextProto.TryComp(out XenoComponent? nextXeno, _compFactory) ||
                 nextXeno.Tier <= currentTier)
             {
                 break;
             }
 
-            if (nextProto.TryGetComponent(out XenoEvolutionComponent? nextEvo, _compFactory))
+            if (nextProto.TryComp(out XenoEvolutionComponent? nextEvo, _compFactory))
                 cost += nextEvo.Max;
 
             current = next;
@@ -1117,7 +1116,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (TryComp<RestrictEvolveOffWeedsComponent>(xeno.Owner, out var restrict))
         {
-            var coordinates = _transform.GetMoverCoordinates(xeno.Owner).SnapToGrid(EntityManager, _map);
+            var coordinates = _transform.GetMoverCoordinates(xeno.Owner).SnapToGrid(EntityManager);
             if (_transform.GetGrid(coordinates) is not { } gridUid ||
                 !TryComp(gridUid, out MapGridComponent? grid))
             {
@@ -1313,7 +1312,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private EntityUid TransferXeno(EntityUid xeno, EntProtoId proto)
     {
         var coordinates = _transform.GetMoverCoordinates(xeno);
-        var newXeno = Spawn(proto, coordinates);
+        var newXeno = SpawnAttachedTo(proto, coordinates);
         _xenoHive.SetSameHive(xeno, newXeno);
 
         RemComp<CanBeLarvaQueuedComponent>(xeno);

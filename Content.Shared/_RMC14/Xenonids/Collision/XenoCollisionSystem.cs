@@ -20,21 +20,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Collision;
 
-public sealed class XenoCollisionSystem : EntitySystem
+public sealed partial class XenoCollisionSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly XenoRestSystem _xenoRest = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private StandingStateSystem _standingState = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private XenoRestSystem _xenoRest = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
 
     private EntityQuery<MobCollisionComponent> _mobCollisionQuery;
     private EntityQuery<StunFriendlyXenoOnStepComponent> _stunFriendlyXenoOnStepQuery;

@@ -14,15 +14,14 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Map;
 
-public sealed class RMCMapSystem : EntitySystem
+public sealed partial class RMCMapSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
@@ -92,7 +91,7 @@ public sealed class RMCMapSystem : EntitySystem
 
     public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(MapCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
     {
-        if (!_mapManager.TryFindGridAt(coords, out var gridId, out var gridComp))
+        if (!_map.TryFindGridAt(coords, out var gridId, out var gridComp))
             return RMCAnchoredEntitiesEnumerator.Empty;
 
         var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
@@ -104,7 +103,7 @@ public sealed class RMCMapSystem : EntitySystem
         if (offset != null)
             indices = indices.Offset(offset.Value);
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, indices);
+        var anchored = _map.GetAnchoredEntities(grid, grid, indices);
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
     }
 
@@ -127,7 +126,7 @@ public sealed class RMCMapSystem : EntitySystem
 
     public RMCAnchoredEntitiesEnumerator<T> GetAnchoredEntitiesEnumerator<T>(MapCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
     {
-        if (!_mapManager.TryFindGridAt(coords, out var gridId, out var gridComp))
+        if (!_map.TryFindGridAt(coords, out var gridId, out var gridComp))
             return RMCAnchoredEntitiesEnumerator<T>.Empty;
 
         var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
@@ -139,7 +138,7 @@ public sealed class RMCMapSystem : EntitySystem
         if (offset != null)
             indices = indices.Offset(offset.Value);
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, indices);
+        var anchored = _map.GetAnchoredEntities(grid, grid, indices);
         return new RMCAnchoredEntitiesEnumerator<T>(EntityManager, _transform, anchored, facing);
     }
 

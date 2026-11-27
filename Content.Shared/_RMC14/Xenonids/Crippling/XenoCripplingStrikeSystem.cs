@@ -12,17 +12,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Crippling;
 
-public sealed class XenoCripplingStrikeSystem : EntitySystem
+public sealed partial class XenoCripplingStrikeSystem : EntitySystem
 {
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
 
     public override void Initialize()
     {

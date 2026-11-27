@@ -1,8 +1,8 @@
 ﻿namespace Content.Shared._RMC14.Lights;
 
-public sealed class PointLightRotationSystem : EntitySystem
+public sealed partial class PointLightRotationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
 
     public override void Initialize()
     {

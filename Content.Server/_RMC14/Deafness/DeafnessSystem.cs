@@ -7,9 +7,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Deafness;
 
-public sealed class DeafnessSystem : SharedDeafnessSystem
+public sealed partial class DeafnessSystem : SharedDeafnessSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly List<string> _punctuation = new List<string> { ",", "!", ".", ";", "?" };
 

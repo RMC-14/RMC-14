@@ -11,9 +11,9 @@ namespace Content.Server._RMC14.Medical.Wounds;
 
 public sealed partial class RMCBloodSplatterSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RMCDecalSystem _rmcDecal = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private RMCDecalSystem _rmcDecal = default!;
 
     public override void Initialize()
     {
@@ -43,10 +43,10 @@ public sealed partial class RMCBloodSplatterSystem : EntitySystem
     private void SpawnDecal(EntityUid ent, EntProtoId decalSpawner)
     {
         if (!_prototypes.TryIndex(decalSpawner, out var prototype) ||
-            !prototype.TryGetComponent(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
+            !prototype.TryComp(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
             _rmcDecal.GetDecalsInTile(ent, spawner.Decals) < spawner.MaxDecalsPerTile)
         {
-            Spawn(decalSpawner, ent.ToCoordinates());
+            SpawnAttachedTo(decalSpawner, ent.ToCoordinates());
         }
     }
 }

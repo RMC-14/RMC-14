@@ -12,18 +12,18 @@ using Content.Shared.StatusEffect;
 
 namespace Content.Shared._RMC14.Projectiles.Aimed;
 
-public sealed class AimedProjectileSystem : EntitySystem
+public sealed partial class AimedProjectileSystem : EntitySystem
 {
     private const float BigXenoSlowDurationMultiplier = 0.6f;
     private const float BigXenoBlindDurationMultiplier = 0.4f;
     private const string BlindKey = "Blinded";
 
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
-    [Dependency] private readonly RMCDazedSystem _dazed = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private MobThresholdSystem _mobThresholds = default!;
+    [Dependency] private RMCDazedSystem _dazed = default!;
 
     public override void Initialize()
     {

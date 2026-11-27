@@ -57,36 +57,35 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
-public sealed class SharedXenoConstructionSystem : EntitySystem
+public sealed partial class SharedXenoConstructionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly QueenEyeSystem _queenEye = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly VehicleSystem _vehicle = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenoNestSystem _xenoNest = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-    [Dependency] private readonly ITileDefinitionManager _tile = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedXenoAnnounceSystem _announce = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogs = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private QueenEyeSystem _queenEye = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private VehicleSystem _vehicle = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tags = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private XenoNestSystem _xenoNest = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private ITileDefinitionManager _tile = default!;
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -279,7 +278,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoPlantWeedsAction(Entity<XenoConstructionComponent> xeno, ref XenoPlantWeedsActionEvent args)
     {
-        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager);
         if (_transform.GetGrid(coordinates) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? gridComp))
         {
@@ -305,7 +304,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         args.Handled = true;
         if (_net.IsServer)
         {
-            var weeds = Spawn(args.Prototype, coordinates);
+            var weeds = SpawnAttachedTo(args.Prototype, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
             _hive.SetSameHive(xeno.Owner, weeds);
         }
@@ -389,7 +388,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            var newWeeds = Spawn(toSpawn, coordinates);
+            var newWeeds = SpawnAttachedTo(toSpawn, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(newWeeds):weeds} at {coordinates}");
             _hive.SetSameHive(xeno.Owner, newWeeds);
 
@@ -463,7 +462,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void HandleSecreteResinPlacement(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
     {
-        var snapped = args.Target.SnapToGrid(EntityManager, _map);
+        var snapped = args.Target.SnapToGrid(EntityManager);
         var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
 
         if ((xeno.Comp.CanUpgrade || hasBoost) &&
@@ -499,7 +498,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             {
                 BeginStructureUpgrade(upgradeable);
                 Del(upgradeable);
-                var spawn = Spawn(to, snapped);
+                var spawn = SpawnAttachedTo(to, snapped);
                 _hive.SetSameHive(xeno.Owner, spawn);
             }
             finally
@@ -551,7 +550,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (_net.IsServer && _prototype.HasIndex(effectId))
         {
-            effect = Spawn(effectId, entityCoords);
+            effect = SpawnAttachedTo(effectId, entityCoords);
             RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno), finalBuildTime), Filter.PvsExcept(effect.Value));
         }
 
@@ -610,7 +609,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (area.Value.Comp.ResinConstructCount != 0 &&
                 !area.Value.Comp.Unweedable &&
                 _prototype.TryIndex(args.StructureId, out var structure) &&
-                structure.TryGetComponent(out XenoConstructionPlasmaCostComponent? plasmaCost, _compFactory) &&
+                structure.TryComp(out XenoConstructionPlasmaCostComponent? plasmaCost, _compFactory) &&
                 plasmaCost.ScalingCost)
             {
                 cost = GetDensityCost(area.Value, xeno, cost);
@@ -659,7 +658,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 }
             }
 
-            var structure = Spawn(structureToSpawn, coordinates);
+            var structure = SpawnAttachedTo(structureToSpawn, coordinates);
             _hive.SetSameHive(xeno.Owner, structure);
             if (TryComp(structure, out DesignNodeComponent? nodeComp))
             {
@@ -759,7 +758,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         foreach (var choiceId in xeno.Comp.CanBuild)
         {
             if (_prototype.TryIndex(choiceId, out var choiceProto) &&
-                choiceProto.TryGetComponent(out DesignerDeleteDesignNodeComponent? deleteComp, _compFactory))
+                choiceProto.TryComp(out DesignerDeleteDesignNodeComponent? deleteComp, _compFactory))
             {
                 return deleteComp.PlasmaCost;
             }
@@ -817,7 +816,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
 
-        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node, _compFactory) &&
+        if (prototype.TryComp(out HiveConstructionNodeComponent? node, _compFactory) &&
             !hasBoost &&
             !_xenoPlasma.TryRemovePlasmaPopup((xeno, plasma), node.InitialPlasmaCost))
         {
@@ -827,8 +826,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var coordinates = target.SnapToGrid(EntityManager, _map);
-        var structure = Spawn(args.StructureId, coordinates);
+        var coordinates = target.SnapToGrid(EntityManager);
+        var structure = SpawnAttachedTo(args.StructureId, coordinates);
 
         _hive.SetSameHive(xeno.Owner, structure);
 
@@ -943,7 +942,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             floorWeeds = _xenoWeeds.GetWeedsOnFloor(transform.Coordinates);
         }
 
-        var spawn = Spawn(node.Spawn, transform.Coordinates);
+        var spawn = SpawnAttachedTo(node.Spawn, transform.Coordinates);
 
         var hive = _hive.GetHive(target);
         _hive.SetHive(spawn, hive);
@@ -982,7 +981,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (GetCoordinates(args.Input.EntityCoordinatesTarget) is not { } target)
             return;
 
-        var snapped = target.SnapToGrid(EntityManager, _map);
+        var snapped = target.SnapToGrid(EntityManager);
 
         var adjustEv = new XenoSecreteStructureAdjustFields(snapped);
         RaiseLocalEvent(args.User, ref adjustEv);
@@ -1214,7 +1213,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var dir = (AtmosDirection)(1 << i);
             var pos = indices.Offset(dir);
-            var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, pos);
+            var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, pos);
             while (anchored.MoveNext(out var uid))
             {
                 if (TerminatingOrDeleted(uid.Value) || EntityManager.IsQueuedForDeletion(uid.Value))
@@ -1295,7 +1294,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
-            buildChoice.TryGetComponent(out XenoConstructionPlasmaCostComponent? cost, _compFactory))
+            buildChoice.TryComp(out XenoConstructionPlasmaCostComponent? cost, _compFactory))
         {
             return cost.Plasma;
         }
@@ -1307,7 +1306,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         XenoConstructionMinRangeComponent? minRangeComp = null;
         if (_prototype.TryIndex(prototype, out var buildChoice))
-            buildChoice.TryGetComponent(out minRangeComp, _compFactory);
+            buildChoice.TryComp(out minRangeComp, _compFactory);
         if (minRangeComp != null)
             return minRangeComp.MinRange.Float();
         return 0;
@@ -1316,7 +1315,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private float? GetBuildSpeed(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
-            buildChoice.TryGetComponent(out XenoConstructionBuildSpeedComponent? speed, _compFactory))
+            buildChoice.TryComp(out XenoConstructionBuildSpeedComponent? speed, _compFactory))
         {
             return speed.BuildTimeMult;
         }
@@ -1358,7 +1357,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range, float minRange = 0, bool popup = true)
     {
         var origin = _transform.GetMoverCoordinates(xeno);
-        target = target.SnapToGrid(EntityManager, _map);
+        target = target.SnapToGrid(EntityManager);
         if (!_transform.InRange(origin, target, range))
         {
             if (popup)
@@ -1413,7 +1412,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        target = target.SnapToGrid(EntityManager, _map);
+        target = target.SnapToGrid(EntityManager);
         var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
 
         if (IsNearVehiclePopup(xeno, target, popup))
@@ -1469,7 +1468,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
             if (_hiveConstructionNodeQuery.TryGetComponent(uid, out var node) &&
@@ -1570,7 +1569,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         foreach (var direction in Directions)
         {
             var pos = SharedMapSystem.GetDirection(tile, direction);
-            var directionEnumerator = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, pos);
+            var directionEnumerator = _mapSystem.GetAnchoredEntities(gridId, grid, pos);
 
             while (directionEnumerator.MoveNext(out var ent))
             {
@@ -1640,7 +1639,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 }
             }
 
-            if (choiceProto.TryGetComponent(out HiveConstructionLimitedComponent? limited, _compFactory) &&
+            if (choiceProto.TryComp(out HiveConstructionLimitedComponent? limited, _compFactory) &&
                 !CanPlaceLimitedHiveStructure(xeno.Owner, limited, out var limit, out _))
             {
                 // server-only as the structure may not be in the client's PVS bubble
@@ -1694,7 +1693,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     public bool CanPlaceLimitedXenoStructure(Entity<XenoSecretionLimitedComponent?> xeno, EntProtoId construction)
     {
         if (!_prototype.TryIndex(construction, out var prototype) ||
-            !prototype.TryGetComponent(out XenoSecretionLimitedComponent? comp, _compFactory))
+            !prototype.TryComp(out XenoSecretionLimitedComponent? comp, _compFactory))
         {
             return true;
         }
@@ -1729,7 +1728,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var dir = (AtmosDirection)(1 << i);
             var pos = tile.Offset(dir);
-            var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, pos);
+            var anchored = _mapSystem.GetAnchoredEntities(grid, grid, pos);
             while (anchored.MoveNext(out var uid))
             {
                 if (TerminatingOrDeleted(uid.Value) || EntityManager.IsQueuedForDeletion(uid.Value))
@@ -1752,7 +1751,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private bool CanPlaceSpaceRequiringStructurePopup(MapCoordinates mapCoords, Entity<MapGridComponent> map, EntityUid user, string structName, bool popup = true)
     {
         var mapId = mapCoords.MapId;
-        var aabbRange = new Box2(mapCoords.X - 1.5F, mapCoords.Y + 1.5F, mapCoords.X + 1.5F, mapCoords.Y - 1.5F);
+        var aabbRange = new Box2(mapCoords.X - 1.5F, mapCoords.Y - 1.5F, mapCoords.X + 1.5F, mapCoords.Y + 1.5F);
         var nearHiveLimitedStructure = _entityLookup.AnyComponentsIntersecting(typeof(HiveConstructionLimitedComponent), mapId, aabbRange);
         var centerTile = _mapSystem.GetTileRef(map, mapCoords);
         var userCoords = _transform.ToCoordinates(user, mapCoords);
@@ -1816,7 +1815,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var tile = _mapSystem.TileIndicesFor(gridId, grid, coords);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
         var hasWeeds = false;
         while (anchored.MoveNext(out var uid))
         {
@@ -2055,7 +2054,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var wantDoor = designer.BuildDoorNodes;
 
         if (!_prototype.TryIndex(choice, out var proto) ||
-            !proto.TryGetComponent(out DesignerDesignNodeVariantComponent? variants, _compFactory))
+            !proto.TryComp(out DesignerDesignNodeVariantComponent? variants, _compFactory))
         {
             return choice;
         }
@@ -2087,7 +2086,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_prototype.TryIndex(buildChoice, out var proto) && proto.HasComponent<DesignNodeComponent>())
             return 1f;
 
-        var snapped = target.SnapToGrid(EntityManager, _map);
+        var snapped = target.SnapToGrid(EntityManager);
         using var anchoredNodes = _rmcMap.GetAnchoredEntitiesEnumerator<DesignNodeComponent>(snapped);
         while (anchoredNodes.MoveNext(out var nodeUid))
         {
@@ -2122,7 +2121,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return 1f;
         }
 
-        var snapped = target.SnapToGrid(EntityManager, _map);
+        var snapped = target.SnapToGrid(EntityManager);
         using var anchoredNodes = _rmcMap.GetAnchoredEntitiesEnumerator<DesignNodeComponent>(snapped);
         while (anchoredNodes.MoveNext(out var nodeUid))
         {
@@ -2167,7 +2166,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private bool TryHandleDesignerRemoteDeleteNodeChoice(Entity<XenoConstructionComponent> xeno, EntProtoId choice, EntityCoordinates target)
     {
         if (!_prototype.TryIndex(choice, out var proto) ||
-            !proto.TryGetComponent(out DesignerDeleteDesignNodeComponent? deleteChoice, _compFactory))
+            !proto.TryComp(out DesignerDeleteDesignNodeComponent? deleteChoice, _compFactory))
         {
             return false;
         }
@@ -2186,7 +2185,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return true;
         }
 
-        var snapped = target.SnapToGrid(EntityManager, _map);
+        var snapped = target.SnapToGrid(EntityManager);
         EntityUid? nodeUid = null;
         DesignNodeComponent? nodeComp = null;
 
@@ -2219,7 +2218,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private bool TryHandleDesignerRemoteThickenResin(Entity<XenoConstructionComponent> xeno, EntProtoId choice, EntityCoordinates target)
     {
         if (!_prototype.TryIndex(choice, out var proto) ||
-            !proto.TryGetComponent(out DesignerRemoteThickenResinComponent? thickenChoice, _compFactory))
+            !proto.TryComp(out DesignerRemoteThickenResinComponent? thickenChoice, _compFactory))
         {
             return false;
         }
@@ -2239,7 +2238,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return true;
         }
 
-        var snapped = target.SnapToGrid(EntityManager, _map);
+        var snapped = target.SnapToGrid(EntityManager);
         if (!_rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) ||
             upgradeable.Comp.To is not { } to ||
             !_prototype.HasIndex(to))

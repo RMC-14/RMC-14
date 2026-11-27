@@ -3,15 +3,13 @@ using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared.Prying.Components;
 using Content.Shared.Tools.Components;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachablePryingSystem : EntitySystem
+public sealed partial class AttachablePryingSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -30,7 +28,7 @@ public sealed class AttachablePryingSystem : EntitySystem
                 var tool = EnsureComp<ToolComponent>(args.Holder);
 #pragma warning disable RA0002
                 prying.SpeedModifier = 0.5f;
-                tool.Qualities.Add("DoorPrying", _prototype);
+                tool.Qualities.Add("DoorPrying");
                 tool.UseSound = new SoundPathSpecifier("/Audio/Items/crowbar.ogg");
 #pragma warning restore RA0002
 

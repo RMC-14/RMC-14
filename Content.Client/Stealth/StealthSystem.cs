@@ -1,3 +1,4 @@
+using Content.Client.Graphics;
 using Content.Client.Interactable.Components;
 using Content.Client.StatusIcon;
 using Content.Shared.Stealth;
@@ -8,13 +9,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Stealth;
 
-public sealed class StealthSystem : SharedStealthSystem
+public sealed partial class StealthSystem : SharedStealthSystem
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Stealth";
 
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private ShaderInstance _shader = default!;
 
@@ -44,21 +45,31 @@ public sealed class StealthSystem : SharedStealthSystem
             return;
 
         _sprite.SetColor((uid, sprite), Color.White);
-        sprite.PostShader = enabled ? _shader : null;
-        sprite.GetScreenTexture = enabled;
-        sprite.RaiseShaderEvent = enabled;
-
-        if (!enabled)
+        if (enabled)
         {
-            if (component.HadOutline && !TerminatingOrDeleted(uid))
-                EnsureComp<InteractionOutlineComponent>(uid);
-            return;
+            _sprite.SetPostShader((uid, sprite), new SpriteComponent.PostShaderArgs(ContentPostShaderIds.Stealth, _shader)
+            {
+                GetScreenTexture = true,
+                RaiseShaderEvent = true,
+                Before = ContentPostShaderIds.BeforeOutlines,
+            });
+        }
+        else
+        {
+            _sprite.RemovePostShader((uid, sprite), ContentPostShaderIds.Stealth);
         }
 
-        if (TryComp(uid, out InteractionOutlineComponent? outline))
+        if (enabled)
         {
-            RemCompDeferred(uid, outline);
-            component.HadOutline = true;
+            component.HadOutline = RemCompDeferred<InteractionOutlineComponent>(uid);
+        }
+        else
+        {
+            if (component.HadOutline && !TerminatingOrDeleted(uid))
+            {
+                EnsureComp<InteractionOutlineComponent>(uid);
+                component.HadOutline = false;
+            }
         }
     }
 
@@ -67,9 +78,9 @@ public sealed class StealthSystem : SharedStealthSystem
         SetShader(uid, component.Enabled, component);
     }
 
-    private void OnShutdown(EntityUid uid, StealthComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, StealthComponent component, ref ComponentShutdown args)
     {
-        if (!Terminating(uid))
+        if (args.LifeStage != EntityLifeStage.Terminating)
             SetShader(uid, false, component);
     }
 

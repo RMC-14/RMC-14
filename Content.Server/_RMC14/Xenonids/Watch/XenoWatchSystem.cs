@@ -12,16 +12,16 @@ using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Xenonids.Watch;
 
-public sealed class XenoWatchSystem : SharedXenoWatchSystem
+public sealed partial class XenoWatchSystem : SharedXenoWatchSystem
 {
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
-    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private XenoEvolutionSystem _xenoEvolution = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<XenoWatchedComponent> _xenoWatchedQuery;

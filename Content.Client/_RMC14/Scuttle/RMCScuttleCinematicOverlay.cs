@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Scuttle;
 
-public sealed class RMCScuttleCinematicOverlay : Overlay
+public sealed partial class RMCScuttleCinematicOverlay : Overlay
 {
     private static readonly ResPath SpritePath = new("/Textures/_RMC14/Interface/scuttle_explosion.rsi");
     private static readonly SpriteSpecifier.Rsi IntroShip = new(SpritePath, "intro_ship");
@@ -18,8 +18,8 @@ public sealed class RMCScuttleCinematicOverlay : Overlay
     private static readonly SpriteSpecifier.Rsi ShipDestroyed = new(SpritePath, "ship_destroyed");
     private static readonly SpriteSpecifier.Rsi SummaryDestroyed = new(SpritePath, "summary_destroyed");
 
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly TimeSpan _startedAt;

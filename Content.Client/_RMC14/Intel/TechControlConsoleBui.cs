@@ -13,9 +13,9 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.Intel;
 
 [UsedImplicitly]
-public sealed class TechControlConsoleBui : BoundUserInterface
+public sealed partial class TechControlConsoleBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     private TechControlConsoleWindow? _window;
     private TechControlConsoleOptionWindow? _optionWindow;
@@ -41,7 +41,7 @@ public sealed class TechControlConsoleBui : BoundUserInterface
         if (!EntMan.TryGetComponent(Owner, out TechControlConsoleComponent? console))
             return;
 
-        _window.Options.DisposeAllChildren();
+        _window.Options.RemoveAllChildren();
         for (var i = console.Tree.Options.Count - 1; i >= 0; i--)
         {
             var header = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
@@ -131,7 +131,7 @@ public sealed class TechControlConsoleBui : BoundUserInterface
         _optionWindow.DescriptionLabel.Text = Localize(option.Description);
         _optionWindow.CostLabel.Text = $"{option.CurrentCost}";
 
-        _optionWindow.Statistics.DisposeAllChildren();
+        _optionWindow.Statistics.RemoveAllChildren();
         var hasStats = false;
 
         if (option.Repurchasable)

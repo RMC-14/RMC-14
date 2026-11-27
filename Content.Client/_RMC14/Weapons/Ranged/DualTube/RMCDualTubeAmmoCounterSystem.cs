@@ -3,9 +3,9 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Client._RMC14.Weapons.Ranged.DualTube;
 
-public sealed class RMCDualTubeAmmoCounterSystem : EntitySystem
+public sealed partial class RMCDualTubeAmmoCounterSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
 
     private readonly HashSet<EntityUid> _toRefresh = new();
 

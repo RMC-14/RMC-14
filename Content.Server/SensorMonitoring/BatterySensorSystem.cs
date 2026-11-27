@@ -6,11 +6,11 @@ using Content.Shared.DeviceNetwork.Events;
 
 namespace Content.Server.SensorMonitoring;
 
-public sealed class BatterySensorSystem : EntitySystem
+public sealed partial class BatterySensorSystem : EntitySystem
 {
     public const string DeviceNetworkCommandSyncData = "bat_sync_data";
 
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
 
     public override void Initialize()
     {

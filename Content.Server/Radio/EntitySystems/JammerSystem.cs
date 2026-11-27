@@ -9,12 +9,12 @@ using Content.Shared.DeviceNetwork.Systems;
 
 namespace Content.Server.Radio.EntitySystems;
 
-public sealed class JammerSystem : SharedJammerSystem
+public sealed partial class JammerSystem : SharedJammerSystem
 {
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDeviceNetworkJammerSystem _jammer = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedDeviceNetworkJammerSystem _jammer = default!;
 
     public override void Initialize()
     {

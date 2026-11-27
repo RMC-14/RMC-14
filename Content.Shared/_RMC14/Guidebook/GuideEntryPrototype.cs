@@ -8,12 +8,12 @@ namespace Content.Shared.Guidebook;
 public sealed partial class GuideEntryPrototype : IInheritingPrototype, ICMSpecific
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<GuideEntryPrototype>))]
-    public string[]? Parents { get; }
+    public string[]? Parents { get; private set; }
 
     [NeverPushInheritance]
     [AbstractDataField]
-    public bool Abstract { get; }
+    public bool Abstract { get; private set; }
 
     [DataField]
-    public bool IsCM { get; }
+    public bool IsCM { get; private set; }
 }

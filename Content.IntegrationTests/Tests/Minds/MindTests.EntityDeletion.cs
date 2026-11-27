@@ -39,8 +39,8 @@ public sealed partial class MindTests
         {
             var player = playerMan.Sessions.Single();
 
-            playerEnt = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
-            visitEnt = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
+            playerEnt = entMan.Spawn(null, MapCoordinates.Nullspace);
+            visitEnt = entMan.Spawn(null, MapCoordinates.Nullspace);
 
             mindId = mindSystem.CreateMind(player.UserId);
             mind = entMan.GetComponent<MindComponent>(mindId);
@@ -92,7 +92,7 @@ public sealed partial class MindTests
         MindComponent mind = default!;
         await server.WaitAssertion(() =>
         {
-            playerEnt = entMan.SpawnEntity(null, testMap.GridCoords);
+            playerEnt = entMan.SpawnAttachedTo(null, testMap.GridCoords);
             mindId = player.ContentData()!.Mind!.Value;
             mind = entMan.GetComponent<MindComponent>(mindId);
             mindSystem.TransferTo(mindId, playerEnt);
@@ -112,7 +112,7 @@ public sealed partial class MindTests
             Assert.That(entMan.EntityExists(attachedEntity), Is.True);
             Assert.That(attachedEntity, Is.Not.EqualTo(playerEnt));
             Assert.That(entMan.HasComponent<GhostComponent>(attachedEntity));
-            var transform = entMan.GetComponent<TransformComponent>(attachedEntity.Value);
+            var transform = entMan.GetComponent<TransformComponent>(attachedEntity!.Value);
             Assert.That(transform.MapID, Is.Not.EqualTo(MapId.Nullspace));
             Assert.That(transform.MapID, Is.Not.EqualTo(testMap.MapId));
 #pragma warning restore NUnit2045
@@ -175,12 +175,12 @@ public sealed partial class MindTests
         Assert.That(player.AttachedEntity, Is.Not.Null);
         Assert.That(entMan.EntityExists(player.AttachedEntity));
 #pragma warning restore NUnit2045
-        var originalEntity = player.AttachedEntity.Value;
+        var originalEntity = player.AttachedEntity!.Value;
 
         EntityUid ghost = default!;
         await server.WaitAssertion(() =>
         {
-            ghost = entMan.SpawnEntity(GameTicker.ObserverPrototypeName, MapCoordinates.Nullspace);
+            ghost = entMan.Spawn(GameTicker.ObserverPrototypeName, MapCoordinates.Nullspace);
             mindSystem.Visit(mind.Id, ghost);
         });
 
@@ -248,7 +248,7 @@ public sealed partial class MindTests
         var mindId = player.ContentData()?.Mind;
         Assert.That(mindId, Is.Not.Null);
 
-        var mind = entMan.GetComponent<MindComponent>(mindId.Value);
+        var mind = entMan.GetComponent<MindComponent>(mindId!.Value);
         Assert.That(mind.VisitingEntity, Is.Null);
 
         await pair.CleanReturnAsync();

@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed partial class AttachableModifiersSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSizeChangeSystem _itemSizeChangeSystem = default!;
+    [Dependency] private ItemSizeChangeSystem _itemSizeChangeSystem = default!;
 
     private void InitializeSize()
     {

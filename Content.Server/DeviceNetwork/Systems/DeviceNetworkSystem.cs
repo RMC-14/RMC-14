@@ -16,13 +16,13 @@ namespace Content.Server.DeviceNetwork.Systems
     ///     Device networking allows machines and devices to communicate with each other while adhering to restrictions like range or being connected to the same powernet.
     /// </summary>
     [UsedImplicitly]
-    public sealed class DeviceNetworkSystem : SharedDeviceNetworkSystem
+    public sealed partial class DeviceNetworkSystem : SharedDeviceNetworkSystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly IPrototypeManager _protoMan = default!;
-        [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-        [Dependency] private readonly DeviceListSystem _deviceLists = default!;
-        [Dependency] private readonly NetworkConfiguratorSystem _configurator = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private IPrototypeManager _protoMan = default!;
+        [Dependency] private SharedTransformSystem _transformSystem = default!;
+        [Dependency] private DeviceListSystem _deviceLists = default!;
+        [Dependency] private NetworkConfiguratorSystem _configurator = default!;
 
         private readonly Dictionary<int, DeviceNet> _networks = new(4);
         private readonly Queue<DeviceNetworkPacketEvent> _queueA = new();
@@ -135,7 +135,7 @@ namespace Content.Server.DeviceNetwork.Systems
         /// <summary>
         /// Automatically disconnect when an entity with a DeviceNetworkComponent shuts down.
         /// </summary>
-        private void OnNetworkShutdown(EntityUid uid, DeviceNetworkComponent component, ComponentShutdown args)
+        private void OnNetworkShutdown(EntityUid uid, DeviceNetworkComponent component, ref ComponentShutdown args)
         {
             foreach (var list in component.DeviceLists)
             {

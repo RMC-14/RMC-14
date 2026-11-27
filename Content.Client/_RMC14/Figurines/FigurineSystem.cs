@@ -13,13 +13,13 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Client._RMC14.Figurines;
 
-public sealed class FigurineSystem : EntitySystem
+public sealed partial class FigurineSystem : EntitySystem
 {
-    [Dependency] private readonly IClientAdminManager _adminManager = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IClientAdminManager _adminManager = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private readonly ContentSpriteControl _control = new();
 
@@ -75,9 +75,9 @@ public sealed class FigurineSystem : EntitySystem
         _control.QueuedTextures.Enqueue((texture, Direction.South, ent));
     }
 
-    private sealed class ContentSpriteControl : Control
+    private sealed partial class ContentSpriteControl : Control
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
+        [Dependency] private IEntityManager _entManager = default!;
 
         internal readonly Queue<(IRenderTexture Texture, Direction Direction, EntityUid Entity)> QueuedTextures = new();
 

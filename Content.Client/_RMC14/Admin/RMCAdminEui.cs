@@ -18,10 +18,10 @@ using static Robust.Client.UserInterface.Controls.LineEdit;
 namespace Content.Client._RMC14.Admin;
 
 [UsedImplicitly]
-public sealed class RMCAdminEui : BaseEui
+public sealed partial class RMCAdminEui : BaseEui
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private static readonly Comparer<EntityPrototype> EntityComparer =
         Comparer<EntityPrototype>.Create(static (a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
@@ -77,7 +77,7 @@ public sealed class RMCAdminEui : BaseEui
         var tiers = new SortedDictionary<int, SortedSet<EntityPrototype>>();
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
+            if (entity.Abstract || !entity.TryComp(out XenoComponent? xeno, _compFactory))
                 continue;
 
             if (entity.HasComponent<XenoStrainComponent>(_compFactory) ||
@@ -171,7 +171,7 @@ public sealed class RMCAdminEui : BaseEui
             });
         }
 
-        _adminWindow.MarineTab.SpecialistSkills.DisposeAllChildren();
+        _adminWindow.MarineTab.SpecialistSkills.RemoveAllChildren();
         foreach (var comp in s.SpecialistSkills)
         {
             var specButton = new Button
@@ -202,7 +202,7 @@ public sealed class RMCAdminEui : BaseEui
             _adminWindow.MarineTab.SpecialistPointsSpinBox.OverrideValue(specialistPoints);
         }
 
-        _adminWindow.MarineTab.Squads.DisposeAllChildren();
+        _adminWindow.MarineTab.Squads.RemoveAllChildren();
         foreach (var squad in s.Squads)
         {
             var squadRow = new RMCSquadRow()
@@ -219,7 +219,7 @@ public sealed class RMCAdminEui : BaseEui
             {
                 squadName = squadPrototype.Name;
 
-                if (squadPrototype.TryGetComponent(out SquadTeamComponent? squadComp, _compFactory))
+                if (squadPrototype.TryComp(out SquadTeamComponent? squadComp, _compFactory))
                     color = squadComp.Color;
             }
 

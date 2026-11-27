@@ -14,21 +14,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Sentry.TeslaCoil;
 
-public sealed class TeslaCoilSystem : EntitySystem
+public sealed partial class TeslaCoilSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly LineSystem _line = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly RMCDazedSystem _dazed = default!;
-    [Dependency] private readonly SentrySystem _sentrySystem = default!;
-    [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private LineSystem _line = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private RMCDazedSystem _dazed = default!;
+    [Dependency] private SentrySystem _sentrySystem = default!;
+    [Dependency] private SharedSentryTargetingSystem _targeting = default!;
 
 
     private readonly HashSet<EntityUid> _potentialTargets = new();

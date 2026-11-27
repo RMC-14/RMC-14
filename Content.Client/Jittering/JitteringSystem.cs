@@ -6,11 +6,11 @@ using Robust.Shared.Random;
 
 namespace Content.Client.Jittering
 {
-    public sealed class JitteringSystem : SharedJitteringSystem
+    public sealed partial class JitteringSystem : SharedJitteringSystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
-        [Dependency] private readonly SpriteSystem _sprite = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
 
         private readonly float[] _sign = { -1, 1 };
         private readonly string _jitterAnimationKey = "jittering";
@@ -35,7 +35,7 @@ namespace Content.Client.Jittering
             _animationPlayer.Play((uid, animationPlayer), GetAnimation(jittering, sprite), _jitterAnimationKey);
         }
 
-        private void OnShutdown(EntityUid uid, JitteringComponent jittering, ComponentShutdown args)
+        private void OnShutdown(EntityUid uid, JitteringComponent jittering, ref ComponentShutdown args)
         {
             if (TryComp(uid, out AnimationPlayerComponent? animationPlayer))
                 _animationPlayer.Stop(uid, animationPlayer, _jitterAnimationKey);

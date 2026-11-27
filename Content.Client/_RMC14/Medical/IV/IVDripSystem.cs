@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Medical.IV;
 
-public sealed class IVDripSystem : SharedIVDripSystem
+public sealed partial class IVDripSystem : SharedIVDripSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

@@ -9,13 +9,13 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
-public sealed class UtensilSystem : EntitySystem
+public sealed partial class UtensilSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly FoodSystem _foodSystem = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private FoodSystem _foodSystem = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
 
     public override void Initialize()
     {

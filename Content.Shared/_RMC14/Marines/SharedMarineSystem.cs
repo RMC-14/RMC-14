@@ -16,12 +16,12 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines;
 
-public abstract class SharedMarineSystem : EntitySystem
+public abstract partial class SharedMarineSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private INetConfigurationManager _netConfig = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;

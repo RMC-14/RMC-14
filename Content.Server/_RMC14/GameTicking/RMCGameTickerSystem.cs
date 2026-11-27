@@ -10,11 +10,11 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.GameTicking;
 
-public sealed class RMCGameTickerSystem : SharedRMCGameTickerSystem
+public sealed partial class RMCGameTickerSystem : SharedRMCGameTickerSystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private UserDbDataManager _userDb = default!;
 
     private bool _autoReady;
     private readonly HashSet<ICommonSession> _autoReadyPending = new();

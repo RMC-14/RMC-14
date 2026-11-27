@@ -1,5 +1,5 @@
 using Content.Shared.DeviceLinking;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Explosion.Components
 {
@@ -9,7 +9,7 @@ namespace Content.Server.Explosion.Components
     [RegisterComponent]
     public sealed partial class TimerStartOnSignalComponent : Component
     {
-        [DataField("port", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
-        public string Port = "Timer";
+        [DataField("port")]
+        public ProtoId<SinkPortPrototype> Port = "Timer";
     }
 }

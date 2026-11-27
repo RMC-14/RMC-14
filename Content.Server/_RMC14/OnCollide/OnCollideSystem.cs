@@ -7,9 +7,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.OnCollide;
 
-public sealed class OnCollideSystem : SharedOnCollideSystem
+public sealed partial class OnCollideSystem : SharedOnCollideSystem
 {
-    [Dependency] private readonly RMCEmoteSystem _rmcEmotes = default!;
+    [Dependency] private RMCEmoteSystem _rmcEmotes = default!;
 
     protected override void DoEmote(Entity<DamageOnCollideComponent> ent, EntityUid other)
     {

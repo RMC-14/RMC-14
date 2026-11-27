@@ -10,9 +10,9 @@ namespace Content.Server.Maps;
 /// </summary>
 [AdminCommand(AdminFlags.RMCMaintainer)]
 [AdminCommand(AdminFlags.Fun)]
-public sealed class GridDraggingCommand : LocalizedEntityCommands
+public sealed partial class GridDraggingCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly GridDraggingSystem _grid = default!;
+    [Dependency] private GridDraggingSystem _grid = default!;
 
     public override string Command => SharedGridDraggingSystem.CommandName;
 

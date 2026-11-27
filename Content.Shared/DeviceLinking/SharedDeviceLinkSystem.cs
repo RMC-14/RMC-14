@@ -10,13 +10,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.DeviceLinking;
 
-public abstract class SharedDeviceLinkSystem : EntitySystem
+public abstract partial class SharedDeviceLinkSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public const string InvokedPort = "link_port";
 

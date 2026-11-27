@@ -11,16 +11,16 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Ghost.Roles;
 
-public sealed class RMCGhostRoleSystem : EntitySystem
+public sealed partial class RMCGhostRoleSystem : EntitySystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly StationSpawningSystem _spawning = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly StationSystem _stations = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private GhostRoleSystem _ghostRole = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private StationSpawningSystem _spawning = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private StationSystem _stations = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

@@ -7,11 +7,11 @@ using Robust.Shared.Animations;
 
 namespace Content.Client._RMC14.Pushup;
 
-public sealed class RMCPushupVisualizerSystem : EntitySystem
+public sealed partial class RMCPushupVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const string AnimationKey = "rmc-pushup";
     private readonly Dictionary<EntityUid, Vector2> _baseOffsets = new();

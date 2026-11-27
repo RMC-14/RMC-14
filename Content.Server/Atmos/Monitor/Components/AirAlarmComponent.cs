@@ -4,7 +4,7 @@ using Content.Shared.Atmos.Monitor.Components;
 using Content.Shared.Atmos.Piping.Unary.Components;
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Network;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Atmos.Monitor.Components;
 
@@ -33,20 +33,20 @@ public sealed partial class AirAlarmComponent : Component
     /// <summary>
     /// The port that gets set to high while the alarm is in the danger state, and low when not.
     /// </summary>
-    [DataField("dangerPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
-    public string DangerPort = "AirDanger";
+    [DataField("dangerPort")]
+    public ProtoId<SourcePortPrototype> DangerPort = "AirDanger";
 
     /// <summary>
     /// The port that gets set to high while the alarm is in the warning state, and low when not.
     /// </summary>
-    [DataField("warningPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
-    public string WarningPort = "AirWarning";
+    [DataField("warningPort")]
+    public ProtoId<SourcePortPrototype> WarningPort = "AirWarning";
 
     /// <summary>
     /// The port that gets set to high while the alarm is in the normal state, and low when not.
     /// </summary>
-    [DataField("normalPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
-    public string NormalPort = "AirNormal";
+    [DataField("normalPort")]
+    public ProtoId<SourcePortPrototype> NormalPort = "AirNormal";
 
     /// <summary>
     /// Whether the panic wire is cut, forcing the alarm into panic mode.

@@ -11,14 +11,14 @@ using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class VehicleRideSurfaceVisualSystem : EntitySystem
+public sealed partial class VehicleRideSurfaceVisualSystem : EntitySystem
 {
     private const float RiderPositionEpsilon = 0.000001f;
 
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

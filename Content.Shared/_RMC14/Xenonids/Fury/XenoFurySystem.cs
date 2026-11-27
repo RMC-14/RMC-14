@@ -11,13 +11,13 @@ namespace Content.Shared._RMC14.Xenonids.Fury;
 
 public sealed partial class XenoFurySystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     private readonly HashSet<Entity<XenoComponent>> _xenos = new();
 

@@ -8,14 +8,14 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
-public sealed class RehydratableSystem : EntitySystem
+public sealed partial class RehydratableSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutions = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {
@@ -44,7 +44,7 @@ public sealed class RehydratableSystem : EntitySystem
 
         var randomMob = _random.Pick(comp.PossibleSpawns);
 
-        var target = Spawn(randomMob, Transform(uid).Coordinates);
+        var target = SpawnAttachedTo(randomMob, Transform(uid).Coordinates);
         _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(ent.Owner)} has been hydrated correctly and spawned: {ToPrettyString(target)}.");
 
         _popup.PopupEntity(Loc.GetString("rehydratable-component-expands-message", ("owner", uid)), target);

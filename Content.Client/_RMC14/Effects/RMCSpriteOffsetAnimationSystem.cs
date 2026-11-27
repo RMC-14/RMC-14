@@ -9,10 +9,10 @@ using Robust.Shared.Spawners;
 
 namespace Content.Client._RMC14.Effects;
 
-public sealed class RMCSpriteOffsetAnimationSystem : EntitySystem
+public sealed partial class RMCSpriteOffsetAnimationSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private IEyeManager _eye = default!;
 
     private const string AnimationKey = "rmc-sprite-offset";
 

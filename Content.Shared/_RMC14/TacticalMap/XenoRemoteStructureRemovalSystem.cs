@@ -12,15 +12,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-public sealed class XenoRemoteStructureRemovalSystem : EntitySystem
+public sealed partial class XenoRemoteStructureRemovalSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private DialogSystem _dialog = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTacticalMapSystem _tacticalMap = default!;
 
     public override void Initialize()
     {

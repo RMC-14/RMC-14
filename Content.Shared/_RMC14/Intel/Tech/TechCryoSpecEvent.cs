@@ -4,4 +4,4 @@ namespace Content.Shared._RMC14.Intel.Tech;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public sealed record TechCryoSpecEvent();
+public sealed partial record TechCryoSpecEvent();

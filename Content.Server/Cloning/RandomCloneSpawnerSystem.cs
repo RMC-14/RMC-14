@@ -9,13 +9,13 @@ namespace Content.Server.Cloning;
 /// <summary>
 ///     This deals with spawning and setting up a clone of a random crew member.
 /// </summary>
-public sealed class RandomCloneSpawnerSystem : EntitySystem
+public sealed partial class RandomCloneSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private CloningSystem _cloning = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {

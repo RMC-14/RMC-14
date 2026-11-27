@@ -12,12 +12,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Intel.Tech;
 
-public sealed class ServerTechSystem : EntitySystem
+public sealed partial class ServerTechSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private static readonly EntProtoId CombatTechProto = "RMCNewGhostFoxtrotCombatTech";
     private static readonly EntProtoId FireteamLeaderProto = "RMCNewGhostFoxtrotFireteamLeader";
@@ -62,7 +62,7 @@ public sealed class ServerTechSystem : EntitySystem
     {
         ghost = default;
 
-        if (!spawner.TryGetComponent(out ghost, _componentFactory))
+        if (!spawner.TryComp(out ghost, _componentFactory))
             return false;
 
         return true;
@@ -72,7 +72,7 @@ public sealed class ServerTechSystem : EntitySystem
     {
         ghost = default;
 
-        if (!spawner.TryGetComponent<RandomHumanoidSpawnerComponent>(out var human, _componentFactory) ||
+        if (!spawner.TryComp<RandomHumanoidSpawnerComponent>(out var human, _componentFactory) ||
             human.SettingsPrototypeId is null ||
             !_proto.TryIndex<RandomHumanoidSettingsPrototype>(human.SettingsPrototypeId, out var settings) ||
             settings.Components is null ||

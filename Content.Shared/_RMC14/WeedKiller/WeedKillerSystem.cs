@@ -19,19 +19,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.WeedKiller;
 
-public sealed class WeedKillerSystem : EntitySystem
+public sealed partial class WeedKillerSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private RMCCameraShakeSystem _rmcCameraShake = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private EntityQuery<DeletedByWeedKillerComponent> _deletedByWeedKillerQuery;
 
@@ -138,7 +138,7 @@ public sealed class WeedKillerSystem : EntitySystem
 
         foreach (var position in killer.Comp.Positions)
         {
-            Spawn(WeedKiller, _map.ToCoordinates(position.Grid, position.Indices, position.Grid));
+            SpawnAttachedTo(WeedKiller, _map.ToCoordinates(position.Grid, position.Indices, position.Grid));
             var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(position.Grid, position.Indices);
             while (anchored.MoveNext(out var anchoredId))
             {

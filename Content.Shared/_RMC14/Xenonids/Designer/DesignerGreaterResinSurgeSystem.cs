@@ -16,21 +16,20 @@ using Robust.Shared.Timing;
 // TODO: Make greater resin surge crate reflective resin instead of thick resin.
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
-public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
+public sealed partial class DesignerGreaterResinSurgeSystem : EntitySystem
 {
     private const float EffectSearchPaddingMultiplier = 2f;
 
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedMapSystem _sharedMap = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedMapSystem _sharedMap = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -156,7 +155,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
         {
             foreach (var tileCenter in tileCenters)
             {
-                var effect = Spawn(effectId, GetCoordinates(tileCenter));
+                var effect = SpawnAttachedTo(effectId, GetCoordinates(tileCenter));
                 effects.Add(effect);
                 if (TryGetNetEntity(effect, out var netEffect) && TryGetNetEntity(ent.Owner, out var netUser))
                 {
@@ -219,7 +218,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
                 continue;
 
             // Spawn after the enumerator is disposed to avoid modifying anchored entity collections mid-iteration.
-            var spawned = Spawn(pending.WallPrototype, tileCenter.SnapToGrid(EntityManager, _map));
+            var spawned = SpawnAttachedTo(pending.WallPrototype, tileCenter.SnapToGrid(EntityManager));
             _hive.SetSameHive(user, spawned);
 
             foreach (var nodeUid in nodesToConvert)

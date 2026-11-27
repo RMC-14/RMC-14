@@ -6,9 +6,9 @@ namespace Content.Client.Nutrition.EntitySystems;
 /// <summary>
 /// This handles visuals for <see cref="InfantComponent"/>
 /// </summary>
-public sealed class InfantSystem : EntitySystem
+public sealed partial class InfantSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -26,7 +26,7 @@ public sealed class InfantSystem : EntitySystem
         _sprite.SetScale((uid, sprite), component.VisualScale);
     }
 
-    private void OnShutdown(EntityUid uid, InfantComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, InfantComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;

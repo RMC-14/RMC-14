@@ -290,9 +290,9 @@ public sealed class VehicleSupplyWindowController : IDisposable
             return overlay.BaseOffset;
 
         var angle = direction.ToAngle();
-        var normalized = angle.Theta % MathHelper.TwoPi;
+        var normalized = angle.Theta % MathF.Tau;
         if (normalized < 0f)
-            normalized += MathHelper.TwoPi;
+            normalized += MathF.Tau;
 
         var segment = MathHelper.PiOver2;
         var index = (int)Math.Floor(normalized / segment) & 3;

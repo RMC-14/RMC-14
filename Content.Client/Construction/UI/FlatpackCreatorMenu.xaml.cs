@@ -18,8 +18,8 @@ namespace Content.Client.Construction.UI;
 [GenerateTypedNameReferences]
 public sealed partial class FlatpackCreatorMenu : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private readonly ItemSlotsSystem _itemSlots;
     private readonly FlatpackSystem _flatpack;
@@ -95,7 +95,7 @@ public sealed partial class FlatpackCreatorMenu : FancyWindow
             }
             else if (_entityManager.TryGetComponent<ComputerBoardComponent>(_currentBoard, out var computerBoard))
             {
-                prototype = computerBoard.Prototype;
+                prototype = computerBoard.Prototype?.Id;
                 cost = _flatpack.GetFlatpackCreationCost((_owner, flatpacker), null);
             }
 

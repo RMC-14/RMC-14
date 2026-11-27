@@ -9,9 +9,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Radio;
 
 [UsedImplicitly]
-public sealed class RMCRadioFilterBui : BoundUserInterface
+public sealed partial class RMCRadioFilterBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     [ViewVariables]
     private RMCRadioFilterWindow? _window;

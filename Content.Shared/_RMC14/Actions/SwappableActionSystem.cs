@@ -2,15 +2,17 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.Actions;
 
-public sealed class SwappableActionSystem : EntitySystem
+public sealed partial class SwappableActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
 
     public override void Initialize()
     {
@@ -26,20 +28,20 @@ public sealed class SwappableActionSystem : EntitySystem
             if (HasComp<WorldTargetActionComponent>(ent) &&
                 ent.Comp.SwappedActionProto is { } id &&
                 _prototype.TryIndex(id, out var proto) &&
-                proto.TryGetComponent<WorldTargetActionComponent>(out var world, _compFactory) &&
+                proto.TryComp<WorldTargetActionComponent>(out var world, _compFactory) &&
                 world.Event is { } ev)
             {
-                _actions.SetEvent(ent, ev);
+                _actions.SetEvent(ent, _serialization.CreateCopy(ev, notNullableOverride: true));
             }
         }
         else
         {
             if (HasComp<InstantActionComponent>(ent) &&
                 MetaData(ent).EntityPrototype is { } proto &&
-                proto.TryGetComponent<InstantActionComponent>(out var instant, _compFactory) &&
+                proto.TryComp<InstantActionComponent>(out var instant, _compFactory) &&
                 instant.Event is { } ev)
             {
-                _actions.SetEvent(ent, ev);
+                _actions.SetEvent(ent, _serialization.CreateCopy(ev, notNullableOverride: true));
             }
         }
     }
@@ -106,7 +108,7 @@ public sealed class SwappableActionSystem : EntitySystem
         _metaData.SetEntityName(actionId, proto.Name);
         _metaData.SetEntityDescription(actionId, proto.Description);
 
-        if (proto.TryGetComponent<ActionComponent>(out var protoAction, _compFactory))
+        if (proto.TryComp<ActionComponent>(out var protoAction, _compFactory))
         {
             _actions.SetUseDelay(actionId, protoAction.UseDelay);
             _actions.SetIcon(actionId, protoAction.Icon);
@@ -114,12 +116,12 @@ public sealed class SwappableActionSystem : EntitySystem
             _actions.SetIconColor(actionId, protoAction.IconColor);
         }
 
-        if (proto.TryGetComponent<WorldTargetActionComponent>(out var protoWorld, _compFactory))
+        if (proto.TryComp<WorldTargetActionComponent>(out var protoWorld, _compFactory))
         {
             RemComp<InstantActionComponent>(actionId);
 
             var target = EnsureComp<TargetActionComponent>(actionId);
-            if (proto.TryGetComponent<TargetActionComponent>(out var protoTarget, _compFactory))
+            if (proto.TryComp<TargetActionComponent>(out var protoTarget, _compFactory))
             {
                 target.Repeat = protoTarget.Repeat;
                 target.DeselectOnMiss = protoTarget.DeselectOnMiss;
@@ -133,16 +135,16 @@ public sealed class SwappableActionSystem : EntitySystem
             Dirty(actionId, world);
 
             if (protoWorld.Event is { } worldEv)
-                _actions.SetEvent(actionId, worldEv);
+                _actions.SetEvent(actionId, _serialization.CreateCopy(worldEv, notNullableOverride: true));
         }
-        else if (proto.TryGetComponent<InstantActionComponent>(out var protoInstant, _compFactory))
+        else if (proto.TryComp<InstantActionComponent>(out var protoInstant, _compFactory))
         {
             RemComp<WorldTargetActionComponent>(actionId);
             RemComp<TargetActionComponent>(actionId);
 
             EnsureComp<InstantActionComponent>(actionId);
             if (protoInstant.Event is { } instantEv)
-                _actions.SetEvent(actionId, instantEv);
+                _actions.SetEvent(actionId, _serialization.CreateCopy(instantEv, notNullableOverride: true));
         }
     }
 }

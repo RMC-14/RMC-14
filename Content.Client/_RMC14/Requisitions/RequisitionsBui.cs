@@ -10,10 +10,10 @@ using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorM
 namespace Content.Client._RMC14.Requisitions;
 
 [UsedImplicitly]
-public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     [ViewVariables]
     private RequisitionsWindow? _window;
@@ -105,7 +105,7 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
         var categoryHeader = new FormattedMessage();
         categoryHeader.AddMarkupOrThrow("[bold]Select a category[/bold]");
         _window.OrderCategoriesView.CategoryHeaderLabel.SetMessage(categoryHeader);
-        _window.OrderCategoriesView.CategoriesContainer.DisposeAllChildren();
+        _window.OrderCategoriesView.CategoriesContainer.RemoveAllChildren();
 
         if (_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
         {
@@ -161,7 +161,7 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
         }
 
         ShowView(_window, _window.CategoryView);
-        _window.CategoryView.OrdersContainer.DisposeAllChildren();
+        _window.CategoryView.OrdersContainer.RemoveAllChildren();
 
         var category = computer.Categories[categoryIndex];
         var requestMsg = new FormattedMessage();
@@ -191,7 +191,7 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
         if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
             return;
 
-        _window.OrderSearchView.ResultContainer.DisposeAllChildren();
+        _window.OrderSearchView.ResultContainer.RemoveAllChildren();
 
         if (string.IsNullOrEmpty(filter))
             return;

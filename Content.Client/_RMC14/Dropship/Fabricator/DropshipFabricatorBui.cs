@@ -10,12 +10,12 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client._RMC14.Dropship.Fabricator;
 
 [UsedImplicitly]
-public sealed class DropshipFabricatorBui : BoundUserInterface
+public sealed partial class DropshipFabricatorBui : BoundUserInterface
 {
     private const int QueueRowHeight = 28;
 
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     [ViewVariables]
     private DropshipFabricatorWindow? _window;
@@ -105,7 +105,7 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
             ("count", fabricator.Queue.Count),
             ("max", fabricator.MaxQueue)));
 
-        _window.QueueContainer.DisposeAllChildren();
+        _window.QueueContainer.RemoveAllChildren();
         if (fabricator.Queue.Count == 0)
         {
             var empty = new Label

@@ -10,11 +10,11 @@ using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
 
 namespace Content.Client.Salvage;
 
-public sealed class FultonSystem : SharedFultonSystem
+public sealed partial class FultonSystem : SharedFultonSystem
 {
-    [Dependency] private readonly ISerializationManager _serManager = default!;
-    [Dependency] private readonly AnimationPlayerSystem _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private ISerializationManager _serManager = default!;
+    [Dependency] private AnimationPlayerSystem _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly TimeSpan AnimationDuration = TimeSpan.FromSeconds(0.4);
 
@@ -69,7 +69,7 @@ public sealed class FultonSystem : SharedFultonSystem
         if (Deleted(entity) || !TryComp<SpriteComponent>(entity, out var entSprite))
             return;
 
-        var animationEnt = Spawn(null, coordinates);
+        var animationEnt = SpawnAttachedTo(null, coordinates);
         // TODO: Spawn fulton layer
         var sprite = AddComp<SpriteComponent>(animationEnt);
         _serManager.CopyTo(entSprite, ref sprite, notNullableOverride: true);

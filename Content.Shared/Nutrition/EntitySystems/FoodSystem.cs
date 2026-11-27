@@ -33,26 +33,26 @@ namespace Content.Shared.Nutrition.EntitySystems;
 /// <summary>
 /// Handles feeding attempts both on yourself and on the target.
 /// </summary>
-public sealed class FoodSystem : EntitySystem
+public sealed partial class FoodSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly FlavorProfileSystem _flavorProfile = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ReactiveSystem _reaction = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly StomachSystem _stomach = default!;
-    [Dependency] private readonly UtensilSystem _utensil = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private FlavorProfileSystem _flavorProfile = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ReactiveSystem _reaction = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private StomachSystem _stomach = default!;
+    [Dependency] private UtensilSystem _utensil = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     // RMC14
     public const float MaxFeedDistance = SharedInteractionSystem.InteractionRange;
@@ -343,7 +343,7 @@ public sealed class FoodSystem : EntitySystem
 
         if (component.Trash.Count == 0)
         {
-            PredictedQueueDel(food);
+            QueueDel(food);
             return;
         }
 
@@ -354,7 +354,7 @@ public sealed class FoodSystem : EntitySystem
         var trashes = component.Trash;
         var tryPickup = _hands.IsHolding(user, food, out _);
 
-        PredictedDel(food);
+        Del(food);
         foreach (var trash in trashes)
         {
             var spawnedTrash = EntityManager.PredictedSpawn(trash, position);

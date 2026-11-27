@@ -11,7 +11,7 @@ namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem
 {
-    [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
+    [Dependency] private DestructibleSystem _destructibleSystem = default!;
 
     private readonly Dictionary<string, int> _explosionTypes = new();
 
@@ -69,7 +69,7 @@ public sealed partial class ExplosionSystem
         query ??= GetEntityQuery<AirtightComponent>();
         var damageQuery = GetEntityQuery<DamageableComponent>();
         var destructibleQuery = GetEntityQuery<DestructibleComponent>();
-        var anchoredEnumerator = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchoredEnumerator = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
 
         while (anchoredEnumerator.MoveNext(out var uid))
         {

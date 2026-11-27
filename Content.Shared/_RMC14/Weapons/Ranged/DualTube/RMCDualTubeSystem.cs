@@ -16,18 +16,18 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.DualTube;
 
-public sealed class RMCDualTubeSystem : EntitySystem
+public sealed partial class RMCDualTubeSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPumpActionSystem _pumpAction = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPumpActionSystem _pumpAction = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
 
     public override void Initialize()
     {

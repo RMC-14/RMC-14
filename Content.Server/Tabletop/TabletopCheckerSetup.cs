@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.Tabletop
 {
@@ -9,22 +8,22 @@ namespace Content.Server.Tabletop
     public sealed partial class TabletopCheckerSetup : TabletopSetup
     {
 
-        [DataField("prototypePieceWhite", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string PrototypePieceWhite = default!;
+        [DataField("prototypePieceWhite")]
+        public EntProtoId PrototypePieceWhite = default!;
 
-        [DataField("prototypeCrownWhite", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string PrototypeCrownWhite = default!;
+        [DataField("prototypeCrownWhite")]
+        public EntProtoId PrototypeCrownWhite = default!;
 
-        [DataField("prototypePieceBlack", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string PrototypePieceBlack = default!;
+        [DataField("prototypePieceBlack")]
+        public EntProtoId PrototypePieceBlack = default!;
 
-        [DataField("prototypeCrownBlack", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string PrototypeCrownBlack = default!;
+        [DataField("prototypeCrownBlack")]
+        public EntProtoId PrototypeCrownBlack = default!;
 
         public override void SetupTabletop(TabletopSession session, IEntityManager entityManager)
         {
             session.Entities.Add(
-                entityManager.SpawnEntity(BoardPrototype, session.Position.Offset(-1, 0))
+                entityManager.Spawn(BoardPrototype, session.Position.Offset(-1, 0))
             );
 
             SpawnPieces(session, entityManager, session.Position.Offset(-4.5f, 3.5f));
@@ -47,11 +46,11 @@ namespace Content.Server.Tabletop
                     // Prevents an extra piece on the middle row
                     if (checker + offsetX > 8) continue;
 
-                    pieces[pieceIndex] = entityManager.SpawnEntity(
+                    pieces[pieceIndex] = entityManager.Spawn(
                         PrototypePieceBlack,
                         left.Offset(GetOffset(offsetX + (1 - checker)), GetOffset(offsetY * -1))
                     );
-                    pieces[pieceIndex] = entityManager.SpawnEntity(
+                    pieces[pieceIndex] = entityManager.Spawn(
                         PrototypePieceWhite,
                         left.Offset(GetOffset(offsetX + checker), GetOffset(offsetY - 7))
                     );
@@ -69,11 +68,11 @@ namespace Content.Server.Tabletop
             for (var i = 0; i < NumCrowns; i++)
             {
                 var step = -(Overlap * i);
-                pieces[pieceIndex] = entityManager.SpawnEntity(
+                pieces[pieceIndex] = entityManager.Spawn(
                     PrototypeCrownBlack,
                     left.Offset(GetOffset(xOffsetBlack), GetOffset(step))
                 );
-                pieces[pieceIndex + 1] = entityManager.SpawnEntity(
+                pieces[pieceIndex + 1] = entityManager.Spawn(
                     PrototypeCrownWhite,
                     left.Offset(GetOffset(xOffsetWhite), GetOffset(step))
                 );
@@ -84,11 +83,11 @@ namespace Content.Server.Tabletop
             for (var i = 0; i < 6; i++)
             {
                 var step = -((Overlap * (NumCrowns + 2)) + (Overlap * i));
-                pieces[pieceIndex] = entityManager.SpawnEntity(
+                pieces[pieceIndex] = entityManager.Spawn(
                     PrototypePieceBlack,
                     left.Offset(GetOffset(xOffsetBlack), GetOffset(step))
                 );
-                pieces[pieceIndex] = entityManager.SpawnEntity(
+                pieces[pieceIndex] = entityManager.Spawn(
                     PrototypePieceWhite,
                     left.Offset(GetOffset(xOffsetWhite), GetOffset(step))
                 );

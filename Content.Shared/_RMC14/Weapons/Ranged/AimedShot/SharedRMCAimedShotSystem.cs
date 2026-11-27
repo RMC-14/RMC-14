@@ -20,20 +20,20 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot;
 
-public abstract class SharedRMCAimedShotSystem : EntitySystem
+public abstract partial class SharedRMCAimedShotSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCTargetingSystem _targeting = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedRMCTargetingSystem _targeting = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedGunSystem _gunSystem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
 
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
     public override void Initialize()
     {

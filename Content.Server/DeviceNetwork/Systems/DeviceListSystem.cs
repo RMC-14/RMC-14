@@ -8,9 +8,9 @@ using Robust.Shared.Map.Events;
 namespace Content.Server.DeviceNetwork.Systems;
 
 [UsedImplicitly]
-public sealed class DeviceListSystem : SharedDeviceListSystem
+public sealed partial class DeviceListSystem : SharedDeviceListSystem
 {
-    [Dependency] private readonly NetworkConfiguratorSystem _configurator = default!;
+    [Dependency] private NetworkConfiguratorSystem _configurator = default!;
 
     public override void Initialize()
     {
@@ -21,7 +21,7 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
         SubscribeLocalEvent<BeforeSerializationEvent>(OnMapSave);
     }
 
-    private void OnShutdown(EntityUid uid, DeviceListComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, DeviceListComponent component, ref ComponentShutdown args)
     {
         foreach (var conf in component.Configurators)
         {

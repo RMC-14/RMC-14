@@ -16,18 +16,18 @@ using Content.Server.Chat.Systems;
 
 namespace Content.Server._RMC14.Mortar;
 
-public sealed class MortarSystem : SharedMortarSystem
+public sealed partial class MortarSystem : SharedMortarSystem
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly DropshipSystem _dropship = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private DropshipSystem _dropship = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     protected override bool CanLoadPopup(
         Entity<MortarComponent> mortar,

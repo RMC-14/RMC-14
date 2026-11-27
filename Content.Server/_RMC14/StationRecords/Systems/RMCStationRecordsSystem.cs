@@ -8,12 +8,12 @@ using Content.Shared.StationRecords;
 
 namespace Content.Server._RMC14.StationRecords.Systems;
 
-public sealed class RMCStationRecordsSystem : EntitySystem
+public sealed partial class RMCStationRecordsSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly StationRecordsSystem _record = default!;
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private StationRecordsSystem _record = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
+    [Dependency] private SquadSystem _squad = default!;
 
     public override void Initialize()
     {

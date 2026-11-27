@@ -4,9 +4,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Animations;
 
-public abstract class SharedRMCAnimationSystem : EntitySystem
+public abstract partial class SharedRMCAnimationSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     /// <summary>
     ///     Plays an animation with a specific key on an entity.

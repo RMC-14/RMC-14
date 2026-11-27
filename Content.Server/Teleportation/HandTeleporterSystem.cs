@@ -14,13 +14,13 @@ namespace Content.Server.Teleportation;
 /// <summary>
 /// This handles creating portals from a hand teleporter.
 /// </summary>
-public sealed class HandTeleporterSystem : EntitySystem
+public sealed partial class HandTeleporterSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly LinkedEntitySystem _link = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private LinkedEntitySystem _link = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doafter = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -94,7 +94,7 @@ public sealed class HandTeleporterSystem : EntitySystem
 
             var timeout = EnsureComp<PortalTimeoutComponent>(user);
             timeout.EnteredPortal = null;
-            component.FirstPortal = Spawn(component.FirstPortalPrototype, Transform(user).Coordinates);
+            component.FirstPortal = SpawnAttachedTo(component.FirstPortalPrototype, Transform(user).Coordinates);
 
             if (component.AllowPortalsOnDifferentMaps && TryComp<PortalComponent>(component.FirstPortal, out var portal))
                 portal.CanTeleportToOtherMaps = true;
@@ -116,7 +116,7 @@ public sealed class HandTeleporterSystem : EntitySystem
 
             var timeout = EnsureComp<PortalTimeoutComponent>(user);
             timeout.EnteredPortal = null;
-            component.SecondPortal = Spawn(component.SecondPortalPrototype, Transform(user).Coordinates);
+            component.SecondPortal = SpawnAttachedTo(component.SecondPortalPrototype, Transform(user).Coordinates);
 
             if (component.AllowPortalsOnDifferentMaps && TryComp<PortalComponent>(component.SecondPortal, out var portal))
                 portal.CanTeleportToOtherMaps = true;

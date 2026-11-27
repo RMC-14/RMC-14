@@ -4,11 +4,11 @@ using Robust.Shared.IoC;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class VehicleOverlayCommands : EntitySystem
+public sealed partial class VehicleOverlayCommands : EntitySystem
 {
-    [Dependency] private readonly IClientAdminManager _adminManager = default!;
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly GridVehicleMoverSystem _vehicleMover = default!;
+    [Dependency] private IClientAdminManager _adminManager = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private GridVehicleMoverSystem _vehicleMover = default!;
 
     public override void Initialize()
     {

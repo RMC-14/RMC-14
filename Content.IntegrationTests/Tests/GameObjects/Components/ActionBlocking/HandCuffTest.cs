@@ -47,7 +47,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
             HandsComponent hands = default!;
 
             var entityManager = server.ResolveDependency<IEntityManager>();
-            var mapManager = server.ResolveDependency<IMapManager>();
             var host = server.ResolveDependency<IServerConsoleHost>();
 
             var map = await pair.CreateTestMap();
@@ -60,10 +59,10 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
                 var xformSys = entityManager.System<SharedTransformSystem>();
 
                 // Spawn the entities
-                human = entityManager.SpawnEntity("HumanHandcuffDummy", coordinates);
-                otherHuman = entityManager.SpawnEntity("HumanHandcuffDummy", coordinates);
-                cuffs = entityManager.SpawnEntity("HandcuffsDummy", coordinates);
-                secondCuffs = entityManager.SpawnEntity("HandcuffsDummy", coordinates);
+                human = entityManager.Spawn("HumanHandcuffDummy", coordinates);
+                otherHuman = entityManager.Spawn("HumanHandcuffDummy", coordinates);
+                cuffs = entityManager.Spawn("HandcuffsDummy", coordinates);
+                secondCuffs = entityManager.Spawn("HandcuffsDummy", coordinates);
 
                 var coords = xformSys.GetWorldPosition(otherHuman);
                 xformSys.SetWorldPosition(human, coords);

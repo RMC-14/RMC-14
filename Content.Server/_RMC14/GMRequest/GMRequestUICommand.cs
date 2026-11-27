@@ -6,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.GMRequest;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class GMRequestUICommand : LocalizedCommands
+public sealed partial class GMRequestUICommand : LocalizedCommands
 {
-    [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private EuiManager _eui = default!;
 
     public override string Command => "gmrequestui";
     public override string Description => Loc.GetString("rmc-gm-request-command-ui-description");

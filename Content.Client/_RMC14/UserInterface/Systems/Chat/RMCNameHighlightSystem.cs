@@ -7,7 +7,7 @@ namespace Content.Client._RMC14.UserInterface.Systems.Chat;
 
 public sealed partial class RMCNameHighlightSystem : EntitySystem
 {
-    [Dependency] private readonly SharedXenoNameSystem _xenoName = default!;
+    [Dependency] private SharedXenoNameSystem _xenoName = default!;
 
 #pragma warning disable SYSLIB1045 // `GeneratedRegexAttribute` isn't allowed by client sandboxing.
     private static readonly Regex MarineNicknameRegex = new(

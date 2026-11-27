@@ -14,15 +14,14 @@ using Content.Shared.Speech.Muting;
 
 namespace Content.Server.Abilities.Mime
 {
-    public sealed class MimePowersSystem : EntitySystem
+    public sealed partial class MimePowersSystem : EntitySystem
     {
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-        [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-        [Dependency] private readonly TurfSystem _turf = default!;
-        [Dependency] private readonly IMapManager _mapMan = default!;
-        [Dependency] private readonly SharedContainerSystem _container = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private SharedActionsSystem _actionsSystem = default!;
+        [Dependency] private AlertsSystem _alertsSystem = default!;
+        [Dependency] private TurfSystem _turf = default!;
+        [Dependency] private SharedContainerSystem _container = default!;
+        [Dependency] private IGameTiming _timing = default!;
 
         public override void Initialize()
         {
@@ -81,7 +80,7 @@ namespace Content.Server.Abilities.Mime
             var xform = Transform(uid);
             // Get the tile in front of the mime
             var offsetValue = xform.LocalRotation.ToWorldVec();
-            var coords = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager, _mapMan);
+            var coords = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager);
             var tile = _turf.GetTileRef(coords);
             if (tile == null)
                 return;
@@ -95,7 +94,7 @@ namespace Content.Server.Abilities.Mime
 
             _popupSystem.PopupEntity(Loc.GetString("mime-invisible-wall-popup", ("mime", uid)), uid);
             // Make sure we set the invisible wall to despawn properly
-            Spawn(component.WallPrototype, _turf.GetTileCenter(tile.Value));
+            SpawnAttachedTo(component.WallPrototype, _turf.GetTileCenter(tile.Value));
             // Handle args so cooldown works
             args.Handled = true;
         }

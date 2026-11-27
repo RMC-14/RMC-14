@@ -17,15 +17,15 @@ using Robust.Shared.Timing;
 namespace Content.Server.Xenoarchaeology.Equipment.Systems;
 
 /// <inheritdoc/>
-public sealed class ArtifactCrusherSystem : SharedArtifactCrusherSystem
+public sealed partial class ArtifactCrusherSystem : SharedArtifactCrusherSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

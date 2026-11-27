@@ -6,11 +6,11 @@ using Content.Shared.Toggleable;
 using Robust.Shared.Configuration;
 
 namespace Content.Server._RMC14.PropCalling;
-public sealed class PropCallingSystem : SharedPropCallingSystem
+public sealed partial class PropCallingSystem : SharedPropCallingSystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
 
     private readonly HashSet<Entity<PropCallingComponent>> _callersSignedUp = new();
     private bool _propCallingEnabled;
@@ -71,7 +71,7 @@ public sealed class PropCallingSystem : SharedPropCallingSystem
             _actions.AddAction(uid, ref comp.CallPropsEntity, comp.CallProps, uid);
     }
 
-    private void OnPropCallingShutdown(EntityUid uid, PropCallingComponent comp, ComponentShutdown args)
+    private void OnPropCallingShutdown(EntityUid uid, PropCallingComponent comp, ref ComponentShutdown args)
     {
         var ent = (uid, comp);
 
@@ -81,7 +81,7 @@ public sealed class PropCallingSystem : SharedPropCallingSystem
             _callersSignedUp.Remove(ent);
     }
 
-    private void OnPropCallerShutdown(EntityUid uid, PropCallerComponent comp, ComponentShutdown args)
+    private void OnPropCallerShutdown(EntityUid uid, PropCallerComponent comp, ref ComponentShutdown args)
     {
         _actions.RemoveAction(uid, comp.CallPropsEntity);
     }

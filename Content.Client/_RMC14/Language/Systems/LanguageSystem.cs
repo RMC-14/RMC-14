@@ -11,7 +11,7 @@ namespace Content.Client._RMC14.Language.Systems;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
     private static readonly IReadOnlyDictionary<ProtoId<LanguagePrototype>, LanguageLearningViewData> EmptyLearningLanguages =
         new Dictionary<ProtoId<LanguagePrototype>, LanguageLearningViewData>();
 

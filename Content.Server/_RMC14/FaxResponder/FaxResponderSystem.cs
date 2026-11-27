@@ -14,12 +14,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.FaxResponder;
 
-public sealed class FaxResponderSystem : EntitySystem
+public sealed partial class FaxResponderSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
 
     // Jobs that show up in the lobby button window
     private static readonly ProtoId<JobPrototype>[] VisibleJobs =

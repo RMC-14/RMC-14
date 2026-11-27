@@ -78,7 +78,6 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly IPlayerManager _player;
     private readonly IUserInterfaceManager _ui;
     private readonly IConfigurationManager _config;
-    private readonly IMapManager _mapManager;
     private readonly IPrototypeManager _prototypes;
     private readonly IComponentFactory _componentFactory;
     private readonly IStateManager _stateManager;
@@ -122,7 +121,6 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _player = IoCManager.Resolve<IPlayerManager>();
         _ui = IoCManager.Resolve<IUserInterfaceManager>();
         _config = IoCManager.Resolve<IConfigurationManager>();
-        _mapManager = IoCManager.Resolve<IMapManager>();
         _prototypes = IoCManager.Resolve<IPrototypeManager>();
         _componentFactory = IoCManager.Resolve<IComponentFactory>();
         _stateManager = IoCManager.Resolve<IStateManager>();
@@ -335,7 +333,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         float radius,
         Color color)
     {
-        if (!_mapManager.TryFindGridAt(mousePos, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(mousePos, out var gridUid, out var grid))
             return;
 
         var center = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
@@ -359,7 +357,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         XenoDeployTrapsComponent deployTraps,
         Color color)
     {
-        if (!_mapManager.TryFindGridAt(mousePos, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(mousePos, out var gridUid, out var grid))
             return;
 
         var centerTile = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
@@ -463,7 +461,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             DrawTileMarker(args.WorldHandle, blockerInfo, BlockerOutlineColor.WithAlpha(OutlineAlpha));
         }
 
-        if (!_mapManager.TryFindGridAt(impact, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(impact, out var gridUid, out var grid))
         {
             args.WorldHandle.DrawCircle(impact.Position, radius, color, false);
             return;
@@ -487,7 +485,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
     private void DrawTunnelableTiles(in OverlayDrawArgs args, MapCoordinates originMap, XenoDigTunnelActionEvent tunnelEvent)
     {
-        if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(originMap, out var gridUid, out var grid))
             return;
 
         bool updateTileCache;
@@ -568,7 +566,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         float range,
         Color color)
     {
-        if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(originMap, out var gridUid, out var grid))
             return;
 
         var center = _mapSystem.CoordinatesToTile(gridUid, grid, originMap);
@@ -746,7 +744,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             if (tile.Coordinates.MapId != args.MapId)
                 continue;
 
-            if (!_mapManager.TryFindGridAt(tile.Coordinates, out var gridUid, out var grid))
+            if (!_mapSystem.TryFindGridAt(tile.Coordinates, out var gridUid, out var grid))
                 continue;
 
             var indices = _mapSystem.CoordinatesToTile(gridUid, grid, tile.Coordinates);
@@ -780,7 +778,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
     private void DrawLandingSquare(in OverlayDrawArgs args, MapCoordinates target, Color color)
     {
-        if (!_mapManager.TryFindGridAt(target, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(target, out var gridUid, out var grid))
             return;
 
         var box = Box2.CenteredAround(target.Position, Vector2.One);
@@ -868,7 +866,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private bool TryGetTileIndices(MapCoordinates coordinates, out TileInfo info)
     {
         info = default;
-        if (!_mapManager.TryFindGridAt(coordinates, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(coordinates, out var gridUid, out var grid))
             return false;
 
         var indices = _mapSystem.CoordinatesToTile(gridUid, grid, coordinates);
@@ -980,13 +978,13 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         if (!_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto))
             return BombardDefaultRadius;
 
-        if (!projectileProto.TryGetComponent<SpawnOnTerminateComponent>(out var spawn, _componentFactory))
+        if (!projectileProto.TryComp<SpawnOnTerminateComponent>(out var spawn, _componentFactory))
             return BombardDefaultRadius;
 
         if (!_prototypes.TryIndex<EntityPrototype>(spawn.Spawn, out var smokeProto))
             return BombardDefaultRadius;
 
-        if (smokeProto.TryGetComponent<EvenSmokeComponent>(out var evenSmoke, _componentFactory))
+        if (smokeProto.TryComp<EvenSmokeComponent>(out var evenSmoke, _componentFactory))
             return evenSmoke.Range;
 
         return BombardDefaultRadius;
@@ -995,9 +993,9 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private Color GetBombardColor(EntProtoId projectile)
     {
         if (_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto) &&
-            projectileProto.TryGetComponent<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
+            projectileProto.TryComp<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
             _prototypes.TryIndex<EntityPrototype>(spawn.Spawn, out var smokeProto) &&
-            smokeProto.TryGetComponent<SpriteComponent>(out var sprite, _componentFactory))
+            smokeProto.TryComp<SpriteComponent>(out var sprite, _componentFactory))
         {
             return sprite.Color;
         }
@@ -1008,7 +1006,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private int GetProjectileCollisionMask(EntProtoId projectile)
     {
         if (_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto) &&
-            projectileProto.TryGetComponent<FixturesComponent>(out var fixtures, _componentFactory))
+            projectileProto.TryComp<FixturesComponent>(out var fixtures, _componentFactory))
         {
             var mask = 0;
             foreach (var fixture in fixtures.Fixtures.Values)
@@ -1026,7 +1024,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private MapCoordinates AdjustProjectileImpact(EntProtoId projectile, MapCoordinates origin, MapCoordinates impact)
     {
         if (_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto) &&
-            projectileProto.TryGetComponent<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
+            projectileProto.TryComp<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
             spawn.SpawnOffset > 0)
         {
             var delta = impact.Position - origin.Position;

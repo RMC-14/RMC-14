@@ -14,17 +14,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Announce;
 
-public sealed class RMCAnnouncementUIController : UIController,
+public sealed partial class RMCAnnouncementUIController : UIController,
     IOnStateEntered<GameplayState>,
     IOnStateExited<GameplayState>,
     IOnSystemChanged<RMCAnnouncementOverlayUISystem>
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     [UISystemDependency] private readonly AudioSystem? _audio = default!;
 
@@ -118,7 +118,7 @@ public sealed class RMCAnnouncementUIController : UIController,
     private void OnAnnouncementReceived(RMCAnnouncementOverlayMsg msg)
     {
         if (!_prototype.TryIndex(msg.Preset, out var prototype) ||
-            !prototype.TryGetComponent(out RMCAnnouncementPresetComponent? preset, _compFactory))
+            !prototype.TryComp(out RMCAnnouncementPresetComponent? preset, _compFactory))
         {
             return;
         }

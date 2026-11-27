@@ -15,6 +15,8 @@ namespace Content.Shared.Examine
             SubscribeLocalEvent<GroupExamineComponent, GetVerbsEvent<ExamineVerb>>(OnGroupExamineVerb);
 
             _ghostQuery = GetEntityQuery<GhostComponent>();
+            _occluderQuery = GetEntityQuery<OccluderComponent>();
+            _xformQuery = GetEntityQuery<TransformComponent>();
         }
 
         /// <summary>

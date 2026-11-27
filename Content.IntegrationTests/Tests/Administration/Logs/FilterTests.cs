@@ -29,7 +29,7 @@ public sealed class FilterTests
 
         await server.WaitPost(() =>
         {
-            var entity = sEntities.SpawnEntity(null, coordinates);
+            var entity = sEntities.SpawnAttachedTo(null, coordinates);
 
             sAdminLogSystem.Add(LogType.Unknown, $"{entity:Entity} test log: {commonGuid} {firstGuid}");
         });
@@ -38,7 +38,7 @@ public sealed class FilterTests
 
         await server.WaitPost(() =>
         {
-            var entity = sEntities.SpawnEntity(null, coordinates);
+            var entity = sEntities.SpawnAttachedTo(null, coordinates);
 
             sAdminLogSystem.Add(LogType.Unknown, $"{entity:Entity} test log: {commonGuid} {secondGuid}");
         });

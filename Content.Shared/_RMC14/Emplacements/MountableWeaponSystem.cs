@@ -11,14 +11,14 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Emplacements;
 
-public sealed class MountableWeaponSystem : EntitySystem
+public sealed partial class MountableWeaponSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedWeaponMountSystem _weaponMount = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<MountableWeaponComponent, AttemptShootEvent>(OnAttemptShoot);

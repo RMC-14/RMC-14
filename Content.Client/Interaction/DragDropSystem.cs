@@ -1,7 +1,9 @@
 using System.Numerics;
 using Content.Client.CombatMode;
 using Content.Client.Gameplay;
+using Content.Client.Graphics;
 using Content.Client.Outline;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CCVar;
 using Content.Shared.DragDrop;
@@ -27,27 +29,27 @@ namespace Content.Client.Interaction;
 /// <summary>
 /// Handles clientside drag and drop logic
 /// </summary>
-public sealed class DragDropSystem : SharedDragDropSystem
+public sealed partial class DragDropSystem : SharedDragDropSystem
 {
     private static readonly ProtoId<ShaderPrototype> ShaderDropTargetInRange = "SelectionOutlineInrange";
 
     private static readonly ProtoId<ShaderPrototype> ShaderDropTargetOutOfRange = "SelectionOutline";
 
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfgMan = default!;
-    [Dependency] private readonly InteractionOutlineSystem _outline = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-    [Dependency] private readonly CombatModeSystem _combatMode = default!;
-    [Dependency] private readonly InputSystem _inputSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _cfgMan = default!;
+    [Dependency] private InteractionOutlineSystem _outline = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private CombatModeSystem _combatMode = default!;
+    [Dependency] private InputSystem _inputSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     // how often to recheck possible targets (prevents calling expensive
     // check logic each update)
@@ -101,7 +103,8 @@ public sealed class DragDropSystem : SharedDragDropSystem
     private ShaderInstance? _dropTargetInRangeShader;
     private ShaderInstance? _dropTargetOutOfRangeShader;
 
-    private readonly List<SpriteComponent> _highlightedSprites = new();
+    private readonly HashSet<SpriteComponent> _highlightedSprites = new();
+    private readonly HashSet<SpriteComponent> _nextHighlightedSprites = new();
 
     public override void Initialize()
     {
@@ -246,7 +249,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
 
             // pop up drag shadow under mouse
             var mousePos = _eyeManager.PixelToMap(screenPos);
-            _dragShadow = EntityManager.SpawnEntity("dragshadow", mousePos);
+            _dragShadow = EntityManager.Spawn("dragshadow", mousePos);
             var dragSprite = Comp<SpriteComponent>(_dragShadow.Value);
             _sprite.CopySprite((_draggedEntity.Value, draggedSprite), (_dragShadow.Value, dragSprite));
             dragSprite.RenderOrder = EntityManager.CurrentTick.Value;
@@ -422,8 +425,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
         // highlights the possible targets which are visible
         // and able to be dropped on by the current dragged entity
 
-        // remove current highlights
-        RemoveHighlights();
+        _nextHighlightedSprites.Clear();
 
         // find possible targets on screen even if not reachable
         // TODO: Duplicated in SpriteSystem and TargetOutlineSystem. Should probably be cached somewhere for a frame?
@@ -444,6 +446,10 @@ public sealed class DragDropSystem : SharedDragDropSystem
                 continue;
             }
 
+            // RMC14 do not highlight invisible entities
+            if (HasComp<EntityActiveInvisibleComponent>(entity))
+                continue;
+
             var valid = ValidDragDrop(user.Value, _draggedEntity.Value, entity);
 
             // check if it's able to be dropped on by current dragged entity
@@ -457,32 +463,52 @@ public sealed class DragDropSystem : SharedDragDropSystem
                         && _interactionSystem.InRangeUnobstructed(user.Value, entity);
             }
 
-            if (inRangeSprite.PostShader != null &&
-                inRangeSprite.PostShader != _dropTargetInRangeShader &&
-                inRangeSprite.PostShader != _dropTargetOutOfRangeShader)
-            {
-                continue;
-            }
-
             // highlight depending on whether its in or out of range
-            inRangeSprite.PostShader = valid.Value ? _dropTargetInRangeShader : _dropTargetOutOfRangeShader;
+            SetDragDropPostShader((entity, inRangeSprite), valid.Value ? _dropTargetInRangeShader! : _dropTargetOutOfRangeShader!);
             inRangeSprite.RenderOrder = EntityManager.CurrentTick.Value;
-            _highlightedSprites.Add(inRangeSprite);
+            _nextHighlightedSprites.Add(inRangeSprite);
         }
+
+        foreach (var highlightedSprite in _highlightedSprites)
+        {
+            if (_nextHighlightedSprites.Contains(highlightedSprite))
+                continue;
+
+            _sprite.RemovePostShader(highlightedSprite, ContentPostShaderIds.DragDropOutline);
+            highlightedSprite.RenderOrder = 0;
+        }
+
+        _highlightedSprites.Clear();
+        foreach (var highlightedSprite in _nextHighlightedSprites)
+        {
+            _highlightedSprites.Add(highlightedSprite);
+        }
+    }
+
+    private void SetDragDropPostShader(Entity<SpriteComponent?> sprite, ShaderInstance shader)
+    {
+        if (_sprite.TryGetPostShader(sprite, ContentPostShaderIds.DragDropOutline, out var entry) &&
+            entry.Shader == shader)
+        {
+            return;
+        }
+
+        _sprite.SetPostShader(sprite, new SpriteComponent.PostShaderArgs(ContentPostShaderIds.DragDropOutline, shader)
+        {
+            After = ContentPostShaderIds.AfterBaseEffects,
+        });
     }
 
     private void RemoveHighlights()
     {
         foreach (var highlightedSprite in _highlightedSprites)
         {
-            if (highlightedSprite.PostShader != _dropTargetInRangeShader && highlightedSprite.PostShader != _dropTargetOutOfRangeShader)
-                continue;
-
-            highlightedSprite.PostShader = null;
+            _sprite.RemovePostShader(highlightedSprite, ContentPostShaderIds.DragDropOutline);
             highlightedSprite.RenderOrder = 0;
         }
 
         _highlightedSprites.Clear();
+        _nextHighlightedSprites.Clear();
     }
 
     /// <summary>

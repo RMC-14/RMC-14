@@ -19,20 +19,19 @@ namespace Content.Shared.Tools.Systems;
 
 public abstract partial class SharedToolSystem : EntitySystem
 {
-    [Dependency] private   readonly IMapManager _mapManager = default!;
-    [Dependency] private   readonly IPrototypeManager _protoMan = default!;
-    [Dependency] protected readonly ISharedAdminLogManager AdminLogger = default!;
-    [Dependency] private   readonly ITileDefinitionManager _tileDefManager = default!;
-    [Dependency] private   readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private   readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] protected readonly SharedInteractionSystem InteractionSystem = default!;
-    [Dependency] protected readonly ItemToggleSystem ItemToggle = default!;
-    [Dependency] private   readonly SharedMapSystem _maps = default!;
-    [Dependency] private   readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainerSystem = default!;
-    [Dependency] private   readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private   readonly TileSystem _tiles = default!;
-    [Dependency] private   readonly TurfSystem _turfs = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
+    [Dependency] private ITileDefinitionManager _tileDefManager = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] protected SharedInteractionSystem InteractionSystem = default!;
+    [Dependency] protected ItemToggleSystem ItemToggle = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] protected SharedSolutionContainerSystem SolutionContainerSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private TileSystem _tiles = default!;
+    [Dependency] private TurfSystem _turfs = default!;
 
     public const string CutQuality = "Cutting";
     public const string PulseQuality = "Pulsing";
@@ -78,7 +77,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         // Loop through tool qualities and add localized names to the list
         foreach (var toolQuality in ent.Comp.Qualities)
         {
-            if (_protoMan.TryIndex<ToolQualityPrototype>(toolQuality ?? string.Empty, out var protoToolQuality))
+            if (_protoMan.TryIndex(toolQuality, out var protoToolQuality))
             {
                 toolQualities.Add(Loc.GetString(protoToolQuality.Name));
             }
@@ -123,7 +122,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         float doAfterDelay,
-        [ForbidLiteral] IEnumerable<string> toolQualitiesNeeded,
+        [ForbidLiteral] IEnumerable<ProtoId<ToolQualityPrototype>> toolQualitiesNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
         ToolComponent? toolComponent = null)
@@ -162,7 +161,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         TimeSpan delay,
-        [ForbidLiteral] IEnumerable<string> toolQualitiesNeeded,
+        [ForbidLiteral] IEnumerable<ProtoId<ToolQualityPrototype>> toolQualitiesNeeded,
         DoAfterEvent doAfterEv,
         out DoAfterId? id,
         float fuel = 0,
@@ -221,7 +220,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         float doAfterDelay,
-        [ForbidLiteral] string toolQualityNeeded,
+        [ForbidLiteral] ProtoId<ToolQualityPrototype> toolQualityNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
         ToolComponent? toolComponent = null,
@@ -250,18 +249,18 @@ public abstract partial class SharedToolSystem : EntitySystem
     ///     Whether a tool entity has all specified qualities or not.
     /// </summary>
     [PublicAPI]
-    public bool HasAllQualities(EntityUid uid, [ForbidLiteral] IEnumerable<string> qualities, ToolComponent? tool = null)
+    public bool HasAllQualities(EntityUid uid, [ForbidLiteral] IEnumerable<ProtoId<ToolQualityPrototype>> qualities, ToolComponent? tool = null)
     {
-        return Resolve(uid, ref tool, false) && tool.Qualities.ContainsAll(qualities);
+        return Resolve(uid, ref tool, false) && tool.Qualities.IsSupersetOf(qualities);
     }
 
-    private bool CanStartToolUse(EntityUid tool, EntityUid user, EntityUid? target, float fuel, IEnumerable<string> toolQualitiesNeeded, ToolComponent? toolComponent = null)
+    private bool CanStartToolUse(EntityUid tool, EntityUid user, EntityUid? target, float fuel, IEnumerable<ProtoId<ToolQualityPrototype>> toolQualitiesNeeded, ToolComponent? toolComponent = null)
     {
         if (!Resolve(tool, ref toolComponent))
             return false;
 
         // check if the tool can do what's required
-        if (!toolComponent.Qualities.ContainsAny(toolQualitiesNeeded))
+        if (!toolComponent.Qualities.Overlaps(toolQualitiesNeeded))
             return false;
 
         // check if the user allows using the tool

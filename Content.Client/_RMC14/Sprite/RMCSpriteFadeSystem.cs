@@ -17,7 +17,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client._RMC14.Sprite;
 
-public sealed class RMCSpriteFadeSystem : EntitySystem
+public sealed partial class RMCSpriteFadeSystem : EntitySystem
 {
     /*
     * If the player entity is obstructed under the specified components then it will drop the alpha for that entity
@@ -25,15 +25,15 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
     * Supports fading entire sprite or individual layers based on component configuration.
     */
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
 
     private List<(MapCoordinates Point, bool ExcludeBoundingBox)> _points = new();
     private readonly HashSet<RMCFadingSpriteComponent> _comps = new();

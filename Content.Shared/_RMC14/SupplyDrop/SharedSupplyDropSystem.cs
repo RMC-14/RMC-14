@@ -32,31 +32,31 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.SupplyDrop;
 
-public abstract class SharedSupplyDropSystem : EntitySystem
+public abstract partial class SharedSupplyDropSystem : EntitySystem
 {
     private const float LandingDamageBoundsPaddingFactor = 0.33f;
 
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly ARESCoreSystem _core = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedParaDropSystem _paradrop = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcpulling = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private ARESCoreSystem _core = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedCrashLandSystem _crashLand = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedParaDropSystem _paradrop = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private RMCCameraShakeSystem _rmcCameraShake = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCPullingSystem _rmcpulling = default!;
 
     private int _supplyDropCount;
     private MapId? _supplyDropMap;
@@ -359,12 +359,12 @@ public abstract class SharedSupplyDropSystem : EntitySystem
 
                 foreach (var tile in footprint)
                 {
-                    dropping.LandingEffects.Add(Spawn(effect, _map.GridTileToLocal(grid, gridComponent, tile.GridIndices)));
+                    dropping.LandingEffects.Add(SpawnAttachedTo(effect, _map.GridTileToLocal(grid, gridComponent, tile.GridIndices)));
                 }
             }
 
             if (dropping.LandingEffects.Count == 0)
-                dropping.LandingEffects.Add(Spawn(effect, dropEntityCoordinates));
+                dropping.LandingEffects.Add(SpawnAttachedTo(effect, dropEntityCoordinates));
         }
 
         dropping.LandingDamage = landingDamage;

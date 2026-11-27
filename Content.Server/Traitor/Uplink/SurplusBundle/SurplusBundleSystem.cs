@@ -8,11 +8,11 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Traitor.Uplink.SurplusBundle;
 
-public sealed class SurplusBundleSystem : EntitySystem
+public sealed partial class SurplusBundleSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityStorageSystem _entityStorage = default!;
+    [Dependency] private StoreSystem _store = default!;
 
     public override void Initialize()
     {
@@ -35,7 +35,7 @@ public sealed class SurplusBundleSystem : EntitySystem
         var content = GetRandomContent(ent);
         foreach (var item in content)
         {
-            var dode = Spawn(item.ProductEntity, cords);
+            var dode = SpawnAttachedTo(item.ProductEntity, cords);
             _entityStorage.Insert(dode, ent);
         }
     }

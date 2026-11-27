@@ -20,4 +20,4 @@ public sealed partial class RMCClothingFoldableComponent : Component
 /// </summary>
 [DataRecord]
 [Serializable, NetSerializable]
-public readonly record struct FoldableType(string Prefix, LocId Name, int Priority, string? BlacklistedPrefix, LocId? BlacklistPopup, bool HideAccessories = false);
+public readonly partial record struct FoldableType(string Prefix, LocId Name, int Priority, string? BlacklistedPrefix, LocId? BlacklistPopup, bool HideAccessories = false);

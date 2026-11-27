@@ -4,9 +4,9 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Magazine;
 
-public sealed class RMCMagazineSystem : EntitySystem
+public sealed partial class RMCMagazineSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

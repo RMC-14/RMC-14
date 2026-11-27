@@ -7,9 +7,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.EntityList
 {
     [AdminCommand(AdminFlags.Spawn)]
-    public sealed class SpawnEntityListCommand : LocalizedEntityCommands
+    public sealed partial class SpawnEntityListCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
 
         public override string Command => "spawnentitylist";
 
@@ -45,7 +45,7 @@ namespace Content.Server.EntityList
 
             foreach (var entity in prototype.Entities(_prototypeManager))
             {
-                EntityManager.SpawnEntity(entity.ID, EntityManager.GetComponent<TransformComponent>(attached).Coordinates);
+                EntityManager.SpawnAttachedTo(entity.ID, EntityManager.GetComponent<TransformComponent>(attached).Coordinates);
                 i++;
             }
 

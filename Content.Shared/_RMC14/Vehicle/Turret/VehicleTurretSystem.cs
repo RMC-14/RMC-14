@@ -17,18 +17,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class VehicleTurretSystem : EntitySystem
+public sealed partial class VehicleTurretSystem : EntitySystem
 {
     private static readonly EntProtoId TurretVisual = "VehicleTurretVisual";
 
     private const float PixelsPerMeter = 32f;
     private const float FireAlignmentToleranceDegrees = 2f;
 
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -173,7 +173,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (turret.VisualEntity is { } existing && Exists(existing))
             return;
 
-        var visual = Spawn(TurretVisual, new EntityCoordinates(vehicle, Vector2.Zero));
+        var visual = SpawnAttachedTo(TurretVisual, new EntityCoordinates(vehicle, Vector2.Zero));
         var visualComp = EnsureComp<VehicleTurretVisualComponent>(visual);
         visualComp.Turret = GetNetEntity(turretUid);
         Dirty(visual, visualComp);
@@ -357,9 +357,9 @@ public sealed class VehicleTurretSystem : EntitySystem
             return turret.PixelOffset;
 
         var baseOffset = turret.PixelOffset;
-        var normalized = facing.Theta % MathHelper.TwoPi;
+        var normalized = facing.Theta % MathF.Tau;
         if (normalized < 0)
-            normalized += MathHelper.TwoPi;
+            normalized += MathF.Tau;
 
         var dir = GetDirectionalDir((float) normalized);
         return baseOffset + GetDirectionalOffset(turret, dir);

@@ -4,9 +4,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.PlayingCards;
 
-public sealed class PlayingCardSystem : SharedPlayingCardSystem
+public sealed partial class PlayingCardSystem : SharedPlayingCardSystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private static readonly EntProtoId CardProto = "RMCPlayingCard";
     private static readonly EntProtoId CardHandProto = "RMCPlayingCardHand";

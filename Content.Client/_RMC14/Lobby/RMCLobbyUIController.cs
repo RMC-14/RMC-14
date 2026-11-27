@@ -14,11 +14,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Lobby;
 
-public sealed class RMCLobbyUIController : UIController, IOnSystemChanged<FaxResponderSystem>
+public sealed partial class RMCLobbyUIController : UIController, IOnSystemChanged<FaxResponderSystem>
 {
-    [Dependency] private readonly JobRequirementsManager _jobRequirements = default!;
-    [Dependency] private readonly IClientPreferencesManager _preferences = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private JobRequirementsManager _jobRequirements = default!;
+    [Dependency] private IClientPreferencesManager _preferences = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private JoinXenoWindow? _joinXenoWindow;
     private JoinFaxResponderWindow? _joinFaxResponderWindow;

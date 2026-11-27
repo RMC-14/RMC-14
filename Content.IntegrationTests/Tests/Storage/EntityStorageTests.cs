@@ -36,8 +36,8 @@ public sealed class EntityStorageTests
 
         EntityUid box = default;
         EntityUid crowbar = default;
-        await server.WaitPost(() => box = server.EntMan.SpawnEntity("EntityStorageTest", map.GridCoords));
-        await server.WaitPost(() => crowbar = server.EntMan.SpawnEntity("Crowbar", map.GridCoords));
+        await server.WaitPost(() => box = server.EntMan.SpawnAttachedTo("EntityStorageTest", map.GridCoords));
+        await server.WaitPost(() => crowbar = server.EntMan.SpawnAttachedTo("Crowbar", map.GridCoords));
 
         // Initially the crowbar is not in a contaienr.
         var sys = server.System<SharedContainerSystem>();

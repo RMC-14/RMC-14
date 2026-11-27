@@ -13,10 +13,10 @@ using JukeboxComponent = Content.Shared.Audio.Jukebox.JukeboxComponent;
 namespace Content.Server.Audio.Jukebox;
 
 
-public sealed class JukeboxSystem : SharedJukeboxSystem
+public sealed partial class JukeboxSystem : SharedJukeboxSystem
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
 
     public override void Initialize()
     {
@@ -130,7 +130,7 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
         }
     }
 
-    private void OnComponentShutdown(EntityUid uid, JukeboxComponent component, ComponentShutdown args)
+    private void OnComponentShutdown(EntityUid uid, JukeboxComponent component, ref ComponentShutdown args)
     {
         component.AudioStream = Audio.Stop(component.AudioStream);
     }

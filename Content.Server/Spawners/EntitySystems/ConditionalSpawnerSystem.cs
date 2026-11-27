@@ -10,11 +10,11 @@ using Robust.Shared.Random;
 namespace Content.Server.Spawners.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class ConditionalSpawnerSystem : EntitySystem
+    public sealed partial class ConditionalSpawnerSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _robustRandom = default!;
-        [Dependency] private readonly GameTicker _ticker = default!;
-        [Dependency] private readonly EntityTableSystem _entityTable = default!;
+        [Dependency] private IRobustRandom _robustRandom = default!;
+        [Dependency] private GameTicker _ticker = default!;
+        [Dependency] private EntityTableSystem _entityTable = default!;
 
         public override void Initialize()
         {
@@ -89,14 +89,14 @@ namespace Content.Server.Spawners.EntitySystems
             }
 
             if (!Deleted(uid))
-                Spawn(_robustRandom.Pick(component.Prototypes), Transform(uid).Coordinates);
+                SpawnAttachedTo(_robustRandom.Pick(component.Prototypes), Transform(uid).Coordinates);
         }
 
         private void Spawn(EntityUid uid, RandomSpawnerComponent component)
         {
             if (component.RarePrototypes.Count > 0 && (component.RareChance == 1.0f || _robustRandom.Prob(component.RareChance)))
             {
-                Spawn(_robustRandom.Pick(component.RarePrototypes), Transform(uid).Coordinates);
+                SpawnAttachedTo(_robustRandom.Pick(component.RarePrototypes), Transform(uid).Coordinates);
                 return;
             }
 
@@ -118,7 +118,7 @@ namespace Content.Server.Spawners.EntitySystems
 
             var coordinates = Transform(uid).Coordinates.Offset(new Vector2(xOffset, yOffset));
 
-            Spawn(_robustRandom.Pick(component.Prototypes), coordinates);
+            SpawnAttachedTo(_robustRandom.Pick(component.Prototypes), coordinates);
         }
 
         private void Spawn(Entity<EntityTableSpawnerComponent> ent)

@@ -11,9 +11,9 @@ using Robust.Shared.Toolshed.TypeParsers;
 namespace Content.Server._RMC14.Toolshed.TileCommands;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Query)]
-internal sealed class TileTypeCommand : ToolshedCommand
+internal sealed partial class TileTypeCommand : ToolshedCommand
 {
-    [Dependency] private readonly ITileDefinitionManager _tileDefinition = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinition = default!;
 
 
     [CommandImplementation("FromProtoId")]

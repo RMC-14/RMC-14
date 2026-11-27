@@ -4,11 +4,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Aura;
 
-public abstract class SharedAuraSystem : EntitySystem
+public abstract partial class SharedAuraSystem : EntitySystem
 {
 
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
 
     /// <summary>
     /// Gives an entity the aura component, and replaces any previous auras

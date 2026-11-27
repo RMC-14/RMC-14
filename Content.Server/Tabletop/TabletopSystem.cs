@@ -21,12 +21,12 @@ namespace Content.Server.Tabletop
     [UsedImplicitly]
     public sealed partial class TabletopSystem : SharedTabletopSystem
     {
-        [Dependency] private readonly SharedMapSystem _map = default!;
-        [Dependency] private readonly EyeSystem _eye = default!;
-        [Dependency] private readonly HandsSystem _hands = default!;
-        [Dependency] private readonly ViewSubscriberSystem _viewSubscriberSystem = default!;
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private SharedMapSystem _map = default!;
+        [Dependency] private EyeSystem _eye = default!;
+        [Dependency] private HandsSystem _hands = default!;
+        [Dependency] private ViewSubscriberSystem _viewSubscriberSystem = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
         public override void Initialize()
         {
@@ -153,7 +153,7 @@ namespace Content.Server.Tabletop
             OpenSessionFor(actor.PlayerSession, uid);
         }
 
-        private void OnGameShutdown(EntityUid uid, TabletopGameComponent component, ComponentShutdown args)
+        private void OnGameShutdown(EntityUid uid, TabletopGameComponent component, ref ComponentShutdown args)
         {
             CleanupSession(uid);
         }
@@ -169,7 +169,7 @@ namespace Content.Server.Tabletop
                 CloseSessionFor(args.Player, component.Tabletop);
         }
 
-        private void OnGamerShutdown(EntityUid uid, TabletopGamerComponent component, ComponentShutdown args)
+        private void OnGamerShutdown(EntityUid uid, TabletopGamerComponent component, ref ComponentShutdown args)
         {
             if (!TryComp(uid, out ActorComponent? actor))
                 return;

@@ -4,9 +4,9 @@ using Robust.Shared.Enums;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Auto;
 
-public sealed class ShowAutoFireOverlay : Overlay
+public sealed partial class ShowAutoFireOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] private IEntityManager _entity = default!;
 
     private readonly GunToggleableAutoFireSystem _autoFire;
 

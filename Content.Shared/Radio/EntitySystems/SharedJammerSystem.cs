@@ -6,11 +6,11 @@ using Content.Shared.DeviceNetwork.Systems;
 
 namespace Content.Shared.Radio.EntitySystems;
 
-public abstract class SharedJammerSystem : EntitySystem
+public abstract partial class SharedJammerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedDeviceNetworkJammerSystem _jammer = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedDeviceNetworkJammerSystem _jammer = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
     public override void Initialize()
     {

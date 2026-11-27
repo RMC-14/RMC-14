@@ -18,9 +18,9 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.Sentry.Laptop;
 
 [UsedImplicitly]
-public sealed class SentryLaptopBui : BoundUserInterface
+public sealed partial class SentryLaptopBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     private SentryLaptopWindow? _window;
     private readonly Dictionary<NetEntity, SentryCard> _sentryCards = new();
@@ -87,7 +87,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (_window == null)
             return;
 
-        _window.GlobalFactionContainer.DisposeAllChildren();
+        _window.GlobalFactionContainer.RemoveAllChildren();
 
         if (State is not SentryLaptopBuiState state || state.AllFactions.Count == 0)
             return;
@@ -490,7 +490,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
     private void PopulateSentryFactionControls(SentryCard card, SentryInfo info)
     {
-        card.FactionContainer.DisposeAllChildren();
+        card.FactionContainer.RemoveAllChildren();
 
         if (State is not SentryLaptopBuiState state)
             return;
@@ -677,7 +677,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (mapUid == EntityUid.Invalid)
             return;
 
-        _cameraEntity = _entities.SpawnEntity(null, new EntityCoordinates(mapUid, sentryXform.WorldPosition));
+        _cameraEntity = _entities.SpawnAttachedTo(null, new EntityCoordinates(mapUid, sentryXform.WorldPosition));
 
         if (!_entities.TryGetComponent<TransformComponent>(_cameraEntity.Value, out var camXform))
             return;

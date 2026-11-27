@@ -7,10 +7,10 @@ using Robust.Shared.Map;
 
 namespace Content.Server.Spider;
 
-public sealed class SpiderSystem : SharedSpiderSystem
+public sealed partial class SpiderSystem : SharedSpiderSystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     /// <summary>
     ///     A recycled hashset used to check turfs for spiderwebs.
@@ -44,7 +44,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
         // Spawn web in center
         if (!IsTileBlockedByWeb(coords))
         {
-            Spawn(component.WebPrototype, coords);
+            SpawnAttachedTo(component.WebPrototype, coords);
             result = true;
         }
 
@@ -56,7 +56,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
 
             if (!IsTileBlockedByWeb(coords))
             {
-                Spawn(component.WebPrototype, coords);
+                SpawnAttachedTo(component.WebPrototype, coords);
                 result = true;
             }
         }

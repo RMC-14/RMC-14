@@ -15,16 +15,16 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Lifesteal;
 
-public sealed class XenoLifestealSystem : EntitySystem
+public sealed partial class XenoLifestealSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
+    [Dependency] private INetManager _net = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _targets = new();
 

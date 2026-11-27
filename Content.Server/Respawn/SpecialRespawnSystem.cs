@@ -14,16 +14,16 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Respawn;
 
-public sealed class SpecialRespawnSystem : SharedSpecialRespawnSystem
+public sealed partial class SpecialRespawnSystem : SharedSpecialRespawnSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -134,7 +134,7 @@ public sealed class SpecialRespawnSystem : SharedSpecialRespawnSystem
     /// <param name="coords">The place where it will be spawned</param>
     private void Respawn(EntityUid oldEntity, string prototype, EntityCoordinates coords)
     {
-        var entity = Spawn(prototype, coords);
+        var entity = SpawnAttachedTo(prototype, coords);
         _adminLog.Add(LogType.Respawn, LogImpact.Extreme, $"{ToPrettyString(oldEntity)} was deleted and was respawned at {_transform.ToMapCoordinates(coords)} as {ToPrettyString(entity)}");
         _chat.SendAdminAlert($"{MetaData(oldEntity).EntityName} was deleted and was respawned as {ToPrettyString(entity)}");
     }

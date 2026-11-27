@@ -21,15 +21,15 @@ namespace Content.Shared.Rootable;
 /// Adds an action to toggle rooting to the ground, primarily for the Diona species.
 /// Being rooted prevents weighlessness and slipping, but causes any floor contents to transfer its reagents to the bloodstream.
 /// </summary>
-public abstract class SharedRootableSystem : EntitySystem
+public abstract partial class SharedRootableSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     protected EntityQuery<PuddleComponent> PuddleQuery;
     protected EntityQuery<PhysicsComponent> PhysicsQuery;

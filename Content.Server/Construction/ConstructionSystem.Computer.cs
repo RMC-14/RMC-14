@@ -8,7 +8,7 @@ namespace Content.Server.Construction;
 
 public sealed partial class ConstructionSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     private void InitializeComputer()
     {
@@ -51,7 +51,7 @@ public sealed partial class ConstructionSystem
             AddContainer(ent, "board", construction);
 
         // We don't do anything if this is null or empty.
-        if (string.IsNullOrEmpty(component.BoardPrototype))
+        if (string.IsNullOrEmpty(component.BoardPrototype?.Id))
             return;
 
         var container = _container.EnsureContainer<Container>(ent, "board");
@@ -60,7 +60,7 @@ public sealed partial class ConstructionSystem
         if (container.ContainedEntities.Count != 0)
             return;
 
-        var board = Spawn(component.BoardPrototype, Transform(ent).Coordinates);
+        var board = SpawnAttachedTo(component.BoardPrototype, Transform(ent).Coordinates);
 
         if (!_container.Insert(board, container))
             Log.Warning($"Couldn't insert board {board} to computer {ent}!");

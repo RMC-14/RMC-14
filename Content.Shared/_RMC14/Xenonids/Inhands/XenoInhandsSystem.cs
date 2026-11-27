@@ -4,10 +4,10 @@ using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared._RMC14.Xenonids.Inhands;
 
-public sealed class XenoInhandsSystem : EntitySystem
+public sealed partial class XenoInhandsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

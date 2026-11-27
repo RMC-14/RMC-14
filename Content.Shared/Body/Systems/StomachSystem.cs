@@ -11,13 +11,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Body.Systems
 {
-    public sealed class StomachSystem : EntitySystem
+    public sealed partial class StomachSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
         // RMC14
-        [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
+        [Dependency] private RMCReagentSystem _rmcReagent = default!;
 
         public const string DefaultSolutionName = "stomach";
 

@@ -14,11 +14,11 @@ using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Sprite;
 
-public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
+public sealed partial class RMCSpriteSystem : SharedRMCSpriteSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly SpriteTreeSystem _spriteTree = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SpriteTreeSystem _spriteTree = default!;
 
     public override void Initialize()
     {

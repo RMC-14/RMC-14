@@ -158,7 +158,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
            _clueTabs[category] = tab;
         }
 
-        tab.Container.DisposeAllChildren();
+        tab.Container.RemoveAllChildren();
 
         var sortedClues = clues.OrderBy(c => StripMarkup(c).ToLowerInvariant());
 

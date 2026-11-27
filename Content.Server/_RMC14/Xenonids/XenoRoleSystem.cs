@@ -23,21 +23,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids;
 
-public sealed class XenoRoleSystem : EntitySystem
+public sealed partial class XenoRoleSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private readonly RMCPlayTimeManager _rmcPlaytime = default!;
-    [Dependency] private readonly QueenEyeSystem _queenEye = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private PlayTimeTrackingSystem _playTime = default!;
+    [Dependency] private PlayTimeTrackingManager _playTimeManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private RMCPlayTimeManager _rmcPlaytime = default!;
+    [Dependency] private QueenEyeSystem _queenEye = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private TimeSpan _disconnectedXenoGhostRoleTime;
     private float _larvaRankScaleFactor = 1.0f;

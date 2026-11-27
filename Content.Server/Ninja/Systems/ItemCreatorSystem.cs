@@ -7,11 +7,11 @@ using Content.Shared.Popups;
 
 namespace Content.Server.Ninja.Systems;
 
-public sealed class ItemCreatorSystem : SharedItemCreatorSystem
+public sealed partial class ItemCreatorSystem : SharedItemCreatorSystem
 {
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -42,7 +42,7 @@ public sealed class ItemCreatorSystem : SharedItemCreatorSystem
             return;
 
         // try to put throwing star in hand, otherwise it goes on the ground
-        var star = Spawn(comp.SpawnedPrototype, Transform(user).Coordinates);
+        var star = SpawnAttachedTo(comp.SpawnedPrototype, Transform(user).Coordinates);
         _hands.TryPickupAnyHand(user, star);
     }
 

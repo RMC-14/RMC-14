@@ -10,9 +10,9 @@ using JetBrains.Annotations;
 namespace Content.Client._RMC14.TacticalMap;
 
 [UsedImplicitly]
-public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
+public sealed partial class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
     private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
 
     protected override TacticalMapWindow? Window { get; set; }

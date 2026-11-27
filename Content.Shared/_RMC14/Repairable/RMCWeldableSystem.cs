@@ -3,9 +3,9 @@ using Content.Shared.Tools.Systems;
 
 namespace Content.Shared._RMC14.Repairable;
 
-public sealed class RMCWeldableSystem : EntitySystem
+public sealed partial class RMCWeldableSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
 
     public override void Initialize()
     {
@@ -19,7 +19,7 @@ public sealed class RMCWeldableSystem : EntitySystem
             return;
 
         var baseFuel = MetaData(ent).EntityPrototype is { } proto &&
-                       proto.TryGetComponent<WeldableComponent>(out var protoWeldable, _compFactory)
+                       proto.TryComp<WeldableComponent>(out var protoWeldable, _compFactory)
             ? protoWeldable.Fuel
             : ent.Comp.Fuel;
 

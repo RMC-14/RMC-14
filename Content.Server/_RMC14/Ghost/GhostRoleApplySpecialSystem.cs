@@ -13,13 +13,13 @@ namespace Content.Server._RMC14.Ghost;
 
 public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly LoadoutSystem _loadout = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly RankSystem _rank = default!;
-    [Dependency] private readonly MarineSystem _marine = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private LoadoutSystem _loadout = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SquadSystem _squad = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private RankSystem _rank = default!;
+    [Dependency] private MarineSystem _marine = default!;
 
     public override void Initialize()
     {

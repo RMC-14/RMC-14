@@ -5,9 +5,9 @@ namespace Content.Server._RMC14.GMRequest;
 /// <summary>
 /// Handles system events the GM Request Manager needs to know about.
 /// </summary>
-public sealed class GMRequestSystem : EntitySystem
+public sealed partial class GMRequestSystem : EntitySystem
 {
-    [Dependency] private readonly GMRequestManager _manager = default!;
+    [Dependency] private GMRequestManager _manager = default!;
     public override void Initialize()
     {
         base.Initialize();

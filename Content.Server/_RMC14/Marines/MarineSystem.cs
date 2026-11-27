@@ -7,10 +7,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Marines;
 
-public sealed class MarineSystem : SharedMarineSystem
+public sealed partial class MarineSystem : SharedMarineSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IdCardSystem _idCard = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
 
 
     public override void Initialize()

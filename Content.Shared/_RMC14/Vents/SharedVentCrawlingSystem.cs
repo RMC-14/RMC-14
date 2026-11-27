@@ -29,23 +29,24 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared._RMC14.Actions;
 
 namespace Content.Shared._RMC14.Vents;
-public abstract class SharedVentCrawlingSystem : EntitySystem
+public abstract partial class SharedVentCrawlingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCMapSystem _rmcmap = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private SharedDoAfterSystem _doafter = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private RMCMapSystem _rmcmap = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private MobStateSystem _mob = default!;
 
+    private readonly HashSet<EntityUid> _unanchoredVents = new();
     private bool _relativeMovement;
     public override void Initialize()
     {
@@ -56,7 +57,6 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         SubscribeLocalEvent<VentExitComponent, VentExitDoafterEvent>(OnVentExitDoafter);
 
         SubscribeLocalEvent<VentCrawlableComponent, MapInitEvent>(OnVentDuctInit);
-        SubscribeLocalEvent<VentCrawlableComponent, ReAnchorEvent>(OnVentReanchor);
         SubscribeLocalEvent<VentCrawlableComponent, MoveEvent>(OnVentDuctMove);
         SubscribeLocalEvent<VentCrawlableComponent, AnchorStateChangedEvent>(OnVentAnchorChanged);
         SubscribeLocalEvent<VentCrawlableComponent, RMCContainerDestructionEmptyEvent>(OnVentContainerDeletionEmpty);
@@ -103,30 +103,32 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         Dirty(vent);
     }
 
-    private void OnVentReanchor(Entity<VentCrawlableComponent> vent, ref ReAnchorEvent args)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (vent.Comp.TravelDirection == PipeDirection.Fourway)
-            return;
-
-        vent.Comp.TravelDirection = vent.Comp.OriginalTravelDirection.RotatePipeDirection(Transform(vent).LocalRotation);
-        Dirty(vent);
-    }
-
     private void OnVentDuctMove(Entity<VentCrawlableComponent> vent, ref MoveEvent args)
     {
-        if (vent.Comp.TravelDirection == PipeDirection.Fourway)
+        if (_net.IsClient || args.Entity.Comp2.EntityLifeStage < EntityLifeStage.MapInitialized)
             return;
 
-        vent.Comp.TravelDirection = vent.Comp.TravelDirection.RotatePipeDirection(args.NewRotation);
+        if (!args.ParentChanged && args.OldRotation == args.NewRotation)
+            return;
+
+        if (vent.Comp.OriginalTravelDirection == PipeDirection.Fourway)
+            return;
+
+        vent.Comp.TravelDirection = vent.Comp.OriginalTravelDirection.RotatePipeDirection(args.NewRotation);
         Dirty(vent);
     }
 
     private void OnVentAnchorChanged(Entity<VentCrawlableComponent> vent, ref AnchorStateChangedEvent args)
     {
-        EmptyVent(vent);
+        if (args.Detaching)
+        {
+            EmptyVent(vent);
+            return;
+        }
+
+        // Grid splits briefly unanchor vents before moving and anchoring them on the new grid.
+        if (!args.Anchored)
+            _unanchoredVents.Add(vent);
     }
 
     private void OnVentContainerDeletionEmpty(Entity<VentCrawlableComponent> vent, ref RMCContainerDestructionEmptyEvent args)
@@ -353,6 +355,14 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        foreach (var vent in _unanchoredVents)
+        {
+            if (!TerminatingOrDeleted(vent) && TryComp(vent, out TransformComponent? xform) && !xform.Anchored)
+                EmptyVent(vent);
+        }
+
+        _unanchoredVents.Clear();
+
         var time = _timing.CurTime;
 
         var query = EntityQueryEnumerator<VentCrawlingComponent, VentCrawlerComponent>();

@@ -9,11 +9,11 @@ namespace Content.Server.Holiday.Christmas;
 /// <summary>
 /// This handles handing out items from item givers.
 /// </summary>
-public sealed class LimitedItemGiverSystem : EntitySystem
+public sealed partial class LimitedItemGiverSystem : EntitySystem
 {
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly HolidaySystem _holiday = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private HolidaySystem _holiday = default!;
+    [Dependency] private PopupSystem _popup = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -25,7 +25,7 @@ public sealed class LimitedItemGiverSystem : EntitySystem
         if (!TryComp<ActorComponent>(args.User, out var actor))
             return;
 
-        if (component.GrantedPlayers.Contains(actor.PlayerSession.UserId) || (component.RequiredHoliday is not null && !_holiday.IsCurrentlyHoliday(component.RequiredHoliday)))
+        if (component.GrantedPlayers.Contains(actor.PlayerSession.UserId) || (component.RequiredHoliday is { } holiday && !_holiday.IsCurrentlyHoliday(holiday)))
         {
             _popup.PopupEntity(Loc.GetString(component.DeniedPopup), uid, args.User);
             return;
@@ -39,7 +39,7 @@ public sealed class LimitedItemGiverSystem : EntitySystem
             if (item is null)
                 continue;
 
-            var spawned = Spawn(item, coords);
+            var spawned = SpawnAttachedTo(item, coords);
             _hands.PickupOrDrop(args.User, spawned);
         }
 

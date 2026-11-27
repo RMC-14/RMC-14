@@ -25,19 +25,19 @@ namespace Content.Shared._RMC14.Stamina;
 
 public sealed partial class RMCStaminaSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedStutteringSystem _stutter = default!;
-    [Dependency] private readonly RMCDazedSystem _daze = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly TemporarySpeedModifiersSystem _temporarySpeed = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedStutteringSystem _stutter = default!;
+    [Dependency] private RMCDazedSystem _daze = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private TemporarySpeedModifiersSystem _temporarySpeed = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
 
     public override void Initialize()
     {

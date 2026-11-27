@@ -10,9 +10,9 @@ namespace Content.Server.Power.EntitySystems;
 
 public sealed partial class CableSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private void InitializeCablePlacer()
     {
@@ -48,7 +48,7 @@ public sealed partial class CableSystem
         if (TryComp<StackComponent>(placer, out var stack) && !_stack.Use(placer, 1, stack))
             return;
 
-        var newCable = Spawn(component.CablePrototypeId, _map.GridTileToLocal(gridUid, grid, snapPos));
+        var newCable = SpawnAttachedTo(component.CablePrototypeId, _map.GridTileToLocal(gridUid, grid, snapPos));
         _adminLogger.Add(LogType.Construction, LogImpact.Low,
             $"{ToPrettyString(args.User):player} placed {ToPrettyString(newCable):cable} at {Transform(newCable).Coordinates}");
         args.Handled = true;

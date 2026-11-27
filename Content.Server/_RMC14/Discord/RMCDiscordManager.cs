@@ -9,10 +9,10 @@ using LogMessage = Discord.LogMessage;
 
 namespace Content.Server._RMC14.Discord;
 
-public sealed class RMCDiscordManager : IPostInjectInit
+public sealed partial class RMCDiscordManager : IPostInjectInit
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private ILogManager _logManager = default!;
 
     private DiscordSocketClient _client = default!;
     private ulong _adminChannelId;

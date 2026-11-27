@@ -8,9 +8,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Xenonids.HiveTeam;
 
 [UsedImplicitly]
-public sealed class HiveTeamMemberBui : BoundUserInterface
+public sealed partial class HiveTeamMemberBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
     private HiveTeamMemberWindow? _window;

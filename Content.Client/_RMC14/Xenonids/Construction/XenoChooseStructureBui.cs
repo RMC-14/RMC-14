@@ -9,9 +9,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Xenonids.Construction;
 
 [UsedImplicitly]
-public sealed class XenoChooseStructureBui : BoundUserInterface
+public sealed partial class XenoChooseStructureBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly SharedXenoConstructionSystem _xenoConstruction;

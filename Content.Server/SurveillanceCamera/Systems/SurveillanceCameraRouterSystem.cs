@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DeviceNetwork;
@@ -11,12 +12,12 @@ using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.SurveillanceCamera;
 
-public sealed class SurveillanceCameraRouterSystem : EntitySystem
+public sealed partial class SurveillanceCameraRouterSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<SurveillanceCameraRouterComponent, ComponentInit>(OnInitialize);
@@ -158,7 +159,7 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
         }
 
         var state = new SurveillanceCameraSetupBoundUiState(router.SubnetName, deviceNet.ReceiveFrequency ?? 0,
-            router.AvailableNetworks, true, router.SubnetFrequencyId != null);
+            router.AvailableNetworks.Select(id => id.Id).ToList(), true, router.SubnetFrequencyId != null);
         _userInterface.SetUiState(uid, SurveillanceCameraSetupUiKey.Router, state);
     }
 
@@ -189,7 +190,7 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
         var payload = new NetworkPayload()
         {
             { DeviceNetworkConstants.Command, SurveillanceCameraSystem.CameraSubnetData },
-            { SurveillanceCameraSystem.CameraSubnetData, router.SubnetFrequencyId }
+            { SurveillanceCameraSystem.CameraSubnetData, router.SubnetFrequencyId.Value.Id }
         };
 
         _deviceNetworkSystem.QueuePacket(uid, origin, payload);

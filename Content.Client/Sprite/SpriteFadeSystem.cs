@@ -12,21 +12,21 @@ using Robust.Shared.Physics;
 
 namespace Content.Client.Sprite;
 
-public sealed class SpriteFadeSystem : EntitySystem
+public sealed partial class SpriteFadeSystem : EntitySystem
 {
     /*
      * If the player entity is obstructed under the specified components then it will drop the alpha for that entity
      * so the player is still visible.
      */
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private List<(MapCoordinates Point, bool ExcludeBoundingBox)> _points = new();
 
@@ -52,7 +52,7 @@ public sealed class SpriteFadeSystem : EntitySystem
         SubscribeLocalEvent<FadingSpriteComponent, ComponentShutdown>(OnFadingShutdown);
     }
 
-    private void OnFadingShutdown(EntityUid uid, FadingSpriteComponent component, ComponentShutdown args)
+    private void OnFadingShutdown(EntityUid uid, FadingSpriteComponent component, ref ComponentShutdown args)
     {
         if (MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating || !TryComp<SpriteComponent>(uid, out var sprite))
             return;

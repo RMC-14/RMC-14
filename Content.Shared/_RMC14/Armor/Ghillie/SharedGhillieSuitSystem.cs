@@ -22,15 +22,15 @@ namespace Content.Shared._RMC14.Armor.Ghillie;
 /// <summary>
 /// Handles the ghillie suit's prepare position ability.
 /// </summary>
-public sealed class SharedGhillieSuitSystem : EntitySystem
+public sealed partial class SharedGhillieSuitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ThermalCloakSystem _thermalCloak = default!;
+    [Dependency] private RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {

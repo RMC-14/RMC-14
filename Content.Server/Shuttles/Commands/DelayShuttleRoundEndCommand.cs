@@ -12,9 +12,9 @@ namespace Content.Server.Shuttles.Commands;
 // "Disabled" because it does nothing and IK for a fact someones gonna run this accidentally.
 [AdminCommand(AdminFlags.Host)]
 // RMC14
-public sealed class DelayRoundEndCommand : LocalizedEntityCommands
+public sealed partial class DelayRoundEndCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly EmergencyShuttleSystem _shuttleSystem = default!;
+    [Dependency] private EmergencyShuttleSystem _shuttleSystem = default!;
 
     public override string Command => "delayroundend";
 

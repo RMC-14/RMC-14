@@ -4,9 +4,9 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.RoundEnd;
 
-public sealed class NoEorgPopupSystem : EntitySystem
+public sealed partial class NoEorgPopupSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private NoEorgPopup? _window;
 

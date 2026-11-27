@@ -9,10 +9,10 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Areas;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Host)]
-public sealed class AreasCommand : ToolshedCommand
+public sealed partial class AreasCommand : ToolshedCommand
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private MapSystem? _map;
 
@@ -70,7 +70,7 @@ public sealed class AreasCommand : ToolshedCommand
                 if (!_prototypes.TryIndex(protoId, out var proto))
                     continue;
 
-                if (!proto.TryGetComponent(out AreaComponent? areaComp, _compFactory))
+                if (!proto.TryComp(out AreaComponent? areaComp, _compFactory))
                     continue;
 
                 if (!predicate(areaComp))

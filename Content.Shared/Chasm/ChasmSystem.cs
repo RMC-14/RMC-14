@@ -16,13 +16,13 @@ namespace Content.Shared.Chasm;
 /// <summary>
 ///     Handles making entities fall into chasms when stepped on.
 /// </summary>
-public sealed class ChasmSystem : EntitySystem
+public sealed partial class ChasmSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -46,10 +46,10 @@ public sealed class ChasmSystem : EntitySystem
         {
             if (_timing.CurTime < chasm.NextDeletionTime)
                 continue;
-                
+
             if(TryComp<MobStateComponent>(uid, out var comp))
 				_mobState.ChangeMobState(uid, MobState.Dead, comp);
-    
+
             QueueDel(uid);
         }
     }

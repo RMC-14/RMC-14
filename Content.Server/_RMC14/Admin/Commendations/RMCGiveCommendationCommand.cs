@@ -20,17 +20,17 @@ using Content.Server._RMC14.Commendations;
 namespace Content.Server._RMC14.Admin.Commendations;
 
 [AdminCommand(AdminFlags.Commendations)]
-public sealed class RMCGiveCommendationCommand : LocalizedCommands
+public sealed partial class RMCGiveCommendationCommand : LocalizedCommands
 {
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly CommendationManager _commendation = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private CommendationManager _commendation = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     private LocalizedDatasetPrototype? _jelliesDataset;
     private LocalizedDatasetPrototype? _jelliesSpecialDataset;

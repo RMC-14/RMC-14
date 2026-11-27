@@ -13,15 +13,15 @@ using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Projectiles.StoppingPower;
 
-public sealed class RMCStoppingPowerSystem : EntitySystem
+public sealed partial class RMCStoppingPowerSystem : EntitySystem
 {
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly RMCStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _cameraRecoil = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private RMCStaminaSystem _stamina = default!;
+    [Dependency] private SharedCameraRecoilSystem _cameraRecoil = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {

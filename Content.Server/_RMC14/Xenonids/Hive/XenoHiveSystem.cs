@@ -30,20 +30,20 @@ using IConfigurationManager = Robust.Shared.Configuration.IConfigurationManager;
 
 namespace Content.Server._RMC14.Xenonids.Hive;
 
-public sealed class XenoHiveSystem : SharedXenoHiveSystem
+public sealed partial class XenoHiveSystem : SharedXenoHiveSystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private SharedRMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private XenoAnnounceSystem _xenoAnnounce = default!;
 
     private readonly List<string> _announce = [];
     private readonly EntProtoId _defaultHive = "CMXenoHive";
@@ -126,13 +126,13 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         ent.Comp.ReplaceAt = _timing.CurTime + ent.Comp.Duration;
         Dirty(ent);
 
-        EntityManager.RemoveComponent<DamageableComponent>(ent);
-        EntityManager.RemoveComponent<DestructibleComponent>(ent);
-        EntityManager.RemoveComponent<RMCWallExplosionDeletableComponent>(ent);
-        EntityManager.RemoveComponent<XenoConstructionRequiresSupportComponent>(ent);
+        RemComp<DamageableComponent>(ent);
+        RemComp<DestructibleComponent>(ent);
+        RemComp<RMCWallExplosionDeletableComponent>(ent);
+        RemComp<XenoConstructionRequiresSupportComponent>(ent);
 
         if (ent.Comp.BlockerId != null)
-            ent.Comp.Blocker = Spawn(ent.Comp.BlockerId, ent.Owner.ToCoordinates());
+            ent.Comp.Blocker = SpawnAttachedTo(ent.Comp.BlockerId, ent.Owner.ToCoordinates());
 
         _rmcSprite.SetColor(ent.Owner, ent.Comp.Color);
     }
@@ -307,16 +307,16 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
                 _metaData.SetEntityName(ent, replace.Name);
 
-                if (replace.TryGetComponent(out DamageableComponent? damageable, _compFactory))
+                if (replace.TryComp(out DamageableComponent? damageable, _compFactory))
                     AddComp(ent, _serialization.CreateCopy(damageable, notNullableOverride: true), true);
 
-                if (replace.TryGetComponent(out DestructibleComponent? destructible, _compFactory))
+                if (replace.TryComp(out DestructibleComponent? destructible, _compFactory))
                     AddComp(ent, _serialization.CreateCopy(destructible, notNullableOverride: true), true);
 
-                if (replace.TryGetComponent(out RMCWallExplosionDeletableComponent? wallDeletable, _compFactory))
+                if (replace.TryComp(out RMCWallExplosionDeletableComponent? wallDeletable, _compFactory))
                     AddComp(ent, _serialization.CreateCopy(wallDeletable, notNullableOverride: true), true);
 
-                if (replace.TryGetComponent(out XenoConstructionRequiresSupportComponent? requiresSupport, _compFactory))
+                if (replace.TryComp(out XenoConstructionRequiresSupportComponent? requiresSupport, _compFactory))
                     AddComp(ent, _serialization.CreateCopy(requiresSupport, notNullableOverride: true), true);
             }
         }

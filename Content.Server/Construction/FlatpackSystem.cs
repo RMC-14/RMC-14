@@ -11,11 +11,11 @@ using Robust.Shared.Timing;
 namespace Content.Server.Construction;
 
 /// <inheritdoc/>
-public sealed class FlatpackSystem : SharedFlatpackSystem
+public sealed partial class FlatpackSystem : SharedFlatpackSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AmbientSoundSystem _ambientSound = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -87,11 +87,13 @@ public sealed class FlatpackSystem : SharedFlatpackSystem
             cost = GetFlatpackCreationCost(ent, (board, machine));
             proto = machine.Prototype;
         }
-        else if (TryComp<ComputerBoardComponent>(board, out var computer) && computer.Prototype != null)
+        // RMC14
+        else if (TryComp<ComputerBoardComponent>(board, out var computer) && computer.Prototype is { } computerPrototype)
         {
             cost = GetFlatpackCreationCost(ent, null);
-            proto = computer.Prototype;
+            proto = computerPrototype;
         }
+        // RMC14
         else
         {
             Log.Error($"Encountered invalid flatpack board while packing: {ToPrettyString(board)}");
@@ -101,7 +103,7 @@ public sealed class FlatpackSystem : SharedFlatpackSystem
         if (!MaterialStorage.TryChangeMaterialAmount((ent, null), cost))
             return;
 
-        var flatpack = Spawn(comp.BaseFlatpackPrototype, Transform(ent).Coordinates);
+        var flatpack = SpawnAttachedTo(comp.BaseFlatpackPrototype, Transform(ent).Coordinates);
         SetupFlatpack(flatpack, proto, board);
         Del(board);
     }

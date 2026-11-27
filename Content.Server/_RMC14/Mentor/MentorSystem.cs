@@ -4,9 +4,9 @@ using Content.Shared.Follower;
 
 namespace Content.Server._RMC14.Mentor;
 
-public sealed class MentorSystem : EntitySystem
+public sealed partial class MentorSystem : EntitySystem
 {
-    [Dependency] private readonly FollowerSystem _follower = default!;
+    [Dependency] private FollowerSystem _follower = default!;
 
     public override void Initialize()
     {

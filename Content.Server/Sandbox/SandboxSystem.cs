@@ -18,17 +18,17 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Sandbox
 {
-    public sealed class SandboxSystem : SharedSandboxSystem
+    public sealed partial class SandboxSystem : SharedSandboxSystem
     {
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IPlacementManager _placementManager = default!;
-        [Dependency] private readonly IConGroupController _conGroupController = default!;
-        [Dependency] private readonly IServerConsoleHost _host = default!;
-        [Dependency] private readonly SharedAccessSystem _access = default!;
-        [Dependency] private readonly InventorySystem _inventory = default!;
-        [Dependency] private readonly ItemSlotsSystem _slots = default!;
-        [Dependency] private readonly GameTicker _ticker = default!;
-        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IPlacementManager _placementManager = default!;
+        [Dependency] private IConGroupController _conGroupController = default!;
+        [Dependency] private IServerConsoleHost _host = default!;
+        [Dependency] private SharedAccessSystem _access = default!;
+        [Dependency] private InventorySystem _inventory = default!;
+        [Dependency] private ItemSlotsSystem _slots = default!;
+        [Dependency] private GameTicker _ticker = default!;
+        [Dependency] private SharedHandsSystem _handsSystem = default!;
 
         private bool _isSandboxEnabled;
 
@@ -162,7 +162,7 @@ namespace Content.Server.Sandbox
 
             EntityUid CreateFreshId()
             {
-                var card = Spawn("CaptainIDCard", Transform(attached).Coordinates);
+                var card = SpawnAttachedTo("CaptainIDCard", Transform(attached).Coordinates);
                 UpgradeId(card);
 
                 Comp<IdCardComponent>(card).FullName = MetaData(attached).EntityName;

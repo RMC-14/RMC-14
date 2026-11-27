@@ -13,10 +13,10 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Figurines;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Host)]
-public sealed class FigurineCommand : ToolshedCommand
+public sealed partial class FigurineCommand : ToolshedCommand
 {
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     [CommandImplementation("openslots")]
     public void OpenSlots()

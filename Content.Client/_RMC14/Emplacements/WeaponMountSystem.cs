@@ -7,9 +7,9 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Emplacements;
 
-public sealed class WeaponMountSystem : SharedWeaponMountSystem
+public sealed partial class WeaponMountSystem : SharedWeaponMountSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const string FoldedLayer = "foldedLayer";
 

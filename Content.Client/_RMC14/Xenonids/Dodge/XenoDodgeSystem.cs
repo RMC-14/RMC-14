@@ -6,11 +6,11 @@ using System.Numerics;
 
 namespace Content.Client._RMC14.Xenonids.Dodge;
 
-public sealed class XenoDodgeSystem : SharedXenoDodgeSystem
+public sealed partial class XenoDodgeSystem : SharedXenoDodgeSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void Initialize()
     {

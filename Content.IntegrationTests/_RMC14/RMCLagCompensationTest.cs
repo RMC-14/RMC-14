@@ -89,9 +89,9 @@
 //
 //     public sealed class RMCLagCompensationTestSystem : EntitySystem
 //     {
-//         [Dependency] private readonly INetManager _net = default!;
-//         [Dependency] private readonly ISharedPlayerManager _player = default!;
-//         [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
+//         [Dependency] private INetManager _net = default!;
+//         [Dependency] private ISharedPlayerManager _player = default!;
+//         [Dependency] private SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 //
 //         public EntityCoordinates? Coordinates;
 //

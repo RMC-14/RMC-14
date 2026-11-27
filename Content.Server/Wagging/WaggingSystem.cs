@@ -12,11 +12,11 @@ namespace Content.Server.Wagging;
 /// <summary>
 /// Adds an action to toggle wagging animation for tails markings that supporting this
 /// </summary>
-public sealed class WaggingSystem : EntitySystem
+public sealed partial class WaggingSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearance = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private HumanoidAppearanceSystem _humanoidAppearance = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -33,7 +33,7 @@ public sealed class WaggingSystem : EntitySystem
         _actions.AddAction(uid, ref component.ActionEntity, component.Action, uid);
     }
 
-    private void OnWaggingShutdown(EntityUid uid, WaggingComponent component, ComponentShutdown args)
+    private void OnWaggingShutdown(EntityUid uid, WaggingComponent component, ref ComponentShutdown args)
     {
         _actions.RemoveAction(uid, component.ActionEntity);
     }

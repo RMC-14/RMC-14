@@ -12,12 +12,12 @@ using System.Linq;
 
 namespace Content.Shared.Implants;
 
-public abstract class SharedSubdermalImplantSystem : EntitySystem
+public abstract partial class SharedSubdermalImplantSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     public const string BaseStorageId = "storagebase";
 
@@ -53,7 +53,7 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
                 if (_tag.HasTag(implant, MicroBombTag))
                 {
                     _container.Remove(implant, implantContainer);
-                    PredictedQueueDel(implant);
+                    QueueDel(implant);
                 }
             }
         }
@@ -91,7 +91,7 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
     /// Add a list of implants to a person.
     /// Logs any implant ids that don't have <see cref="SubdermalImplantComponent"/>.
     /// </summary>
-    public void AddImplants(EntityUid uid, IEnumerable<String> implants)
+    public void AddImplants(EntityUid uid, IEnumerable<EntProtoId> implants)
     {
         foreach (var id in implants)
         {
@@ -109,7 +109,7 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
     public EntityUid? AddImplant(EntityUid uid, String implantId)
     {
         var coords = Transform(uid).Coordinates;
-        var ent = Spawn(implantId, coords);
+        var ent = SpawnAttachedTo(implantId, coords);
 
         if (TryComp<SubdermalImplantComponent>(ent, out var implant))
         {

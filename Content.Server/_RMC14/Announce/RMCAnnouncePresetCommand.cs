@@ -12,11 +12,11 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._RMC14.Announce;
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class RMCAnnouncePresetCommand : LocalizedEntityCommands
+public sealed partial class RMCAnnouncePresetCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly RMCAnnouncementOverlaySystem _announcementOverlay = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private RMCAnnouncementOverlaySystem _announcementOverlay = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private static readonly string[] Targets = ["all", "marines", "xenos"];
 
@@ -61,7 +61,7 @@ public sealed class RMCAnnouncePresetCommand : LocalizedEntityCommands
         {
             1 => CompletionResult.FromHintOptions(
                 _prototypes.EnumeratePrototypes<EntityPrototype>()
-                    .Where(p => p.TryGetComponent(out RMCAnnouncementPresetComponent? _, _compFactory))
+                    .Where(p => p.TryComp(out RMCAnnouncementPresetComponent? _, _compFactory))
                     .Select(p => p.ID),
                 Loc.GetString("cmd-announcepreset-hint-preset")),
             2 => CompletionResult.FromHint(Loc.GetString("cmd-announcepreset-hint-message")),

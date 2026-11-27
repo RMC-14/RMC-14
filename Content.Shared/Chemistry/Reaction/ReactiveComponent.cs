@@ -1,7 +1,6 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Chemistry.Reaction;
 
@@ -11,10 +10,8 @@ public sealed partial class ReactiveComponent : Component
     /// <summary>
     ///     A dictionary of reactive groups -> methods that work on them.
     /// </summary>
-    [DataField("groups", readOnly: true, serverOnly: true,
-        customTypeSerializer:
-        typeof(PrototypeIdDictionarySerializer<HashSet<ReactionMethod>, ReactiveGroupPrototype>))]
-    public Dictionary<string, HashSet<ReactionMethod>>? ReactiveGroups;
+    [DataField("groups", readOnly: true, serverOnly: true)]
+    public Dictionary<ProtoId<ReactiveGroupPrototype>, HashSet<ReactionMethod>>? ReactiveGroups;
 
     /// <summary>
     ///     Special reactions that this prototype can specify, outside of any that reagents already apply.
@@ -30,13 +27,12 @@ public sealed partial class ReactiveReagentEffectEntry
     [DataField("methods")]
     public HashSet<ReactionMethod> Methods = default!;
 
-    [DataField("reagents", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<ReagentPrototype>))]
-    public HashSet<string>? Reagents = null;
+    [DataField("reagents")]
+    public HashSet<ProtoId<ReagentPrototype>>? Reagents = null;
 
     [DataField("effects", required: true)]
     public List<EntityEffect> Effects = default!;
 
-    [DataField("groups", readOnly: true, serverOnly: true,
-        customTypeSerializer:typeof(PrototypeIdDictionarySerializer<HashSet<ReactionMethod>, ReactiveGroupPrototype>))]
-    public Dictionary<string, HashSet<ReactionMethod>>? ReactiveGroups { get; private set; }
+    [DataField("groups", readOnly: true, serverOnly: true)]
+    public Dictionary<ProtoId<ReactiveGroupPrototype>, HashSet<ReactionMethod>>? ReactiveGroups { get; private set; }
 }

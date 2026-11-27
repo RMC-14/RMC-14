@@ -24,14 +24,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Ghost;
 
-public sealed class RMCGhostAppearanceSystem : EntitySystem
+public sealed partial class RMCGhostAppearanceSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ItemCamouflageSystem _itemCamouflage = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private ItemCamouflageSystem _itemCamouflage = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> SynthDamageColorGroup = "Brute";
 

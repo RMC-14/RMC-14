@@ -2,9 +2,9 @@ using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Marines;
 
-public sealed class WarshipSystem : EntitySystem
+public sealed partial class WarshipSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public bool TryGetWarshipMap(EntityUid reference, out MapId mapId)
     {

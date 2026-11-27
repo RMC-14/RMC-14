@@ -10,13 +10,13 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Alerts;
 
 [UsedImplicitly]
-public sealed class ClientAlertsSystem : AlertsSystem
+public sealed partial class ClientAlertsSystem : AlertsSystem
 {
     public AlertOrderPrototype? AlertOrder { get; set; }
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     public event EventHandler? ClearAlerts;
     public event EventHandler<IReadOnlyDictionary<AlertKey, AlertState>>? SyncAlerts;
@@ -105,9 +105,9 @@ public sealed class ClientAlertsSystem : AlertsSystem
         SyncAlerts?.Invoke(this, component.Alerts);
     }
 
-    protected override void HandleComponentShutdown(EntityUid uid, AlertsComponent component, ComponentShutdown args)
+    protected override void HandleComponentShutdown(EntityUid uid, AlertsComponent component, ref ComponentShutdown args)
     {
-        base.HandleComponentShutdown(uid, component, args);
+        base.HandleComponentShutdown(uid, component, ref args);
 
         if (_playerManager.LocalEntity != uid)
             return;

@@ -14,14 +14,14 @@ namespace Content.Shared.Species;
 
 public sealed partial class ReformSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private SharedStunSystem _stunSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
 
     public override void Initialize()
     {
@@ -54,7 +54,7 @@ public sealed partial class ReformSystem : EntitySystem
         }
     }
 
-    private void OnCompRemove(EntityUid uid, ReformComponent comp, ComponentShutdown args)
+    private void OnCompRemove(EntityUid uid, ReformComponent comp, ref ComponentShutdown args)
     {
         _actionsSystem.RemoveAction(uid, comp.ActionEntity);
     }
@@ -90,7 +90,7 @@ public sealed partial class ReformSystem : EntitySystem
 
         // Spawn a new entity
         // This is, to an extent, taken from polymorph. I don't use polymorph for various reasons- most notably that this is permanent.
-        var child = Spawn(comp.ReformPrototype, Transform(uid).Coordinates);
+        var child = SpawnAttachedTo(comp.ReformPrototype, Transform(uid).Coordinates);
 
         // This transfers the mind to the new entity
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
@@ -106,7 +106,7 @@ public sealed partial class ReformSystem : EntitySystem
     }
 
     public sealed partial class ReformEvent : InstantActionEvent { }
-    
+
     [Serializable, NetSerializable]
     public sealed partial class ReformDoAfterEvent : SimpleDoAfterEvent { }
 }

@@ -29,17 +29,17 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 
 public sealed partial class DesignerConstructNodeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hiveSystem = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
-    [Dependency] private readonly WeedboundWallSystem _weedbound = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedXenoHiveSystem _hiveSystem = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private WeedboundWallSystem _weedbound = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoPlasmaComponent> _plasmaQuery;
@@ -187,7 +187,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         var effectId = isThickVariant ? node.Comp.ConstructAnimationEffectThick : node.Comp.ConstructAnimationEffect;
         if (_prototype.HasIndex(effectId))
         {
-            var effect = Spawn(effectId, coords);
+            var effect = SpawnAttachedTo(effectId, coords);
             build.AnimationEffect = effect;
             if (TryGetNetEntity(effect, out var netEffect) && TryGetNetEntity(user, out var netUser))
             {
@@ -247,7 +247,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         // Weeds must still exist for the weedbound structure to be built.
         if (nodeComp.BoundWeed is not { } boundWeed || !Exists(boundWeed) || !HasComp<Content.Shared._RMC14.Xenonids.Weeds.XenoWeedsComponent>(boundWeed))
         {
-            EntityManager.DeleteEntity(nodeUid);
+            Del(nodeUid);
             return;
         }
 
@@ -264,14 +264,14 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
             isThickVariant |= _weeds.IsOnHiveWeeds((gridUid, gridComp!), coords);
 
         var proto = isThickVariant ? nodeComp.ConstructWeedboundThick : nodeComp.ConstructWeedbound;
-        var spawned = EntityManager.SpawnEntity(proto, coords);
+        var spawned = SpawnAttachedTo(proto, coords);
 
         var weedbound = EnsureComp<WeedboundWallComponent>(spawned);
         weedbound.IsThickVariant = isThickVariant;
 
         _weedbound.RegisterWeedboundStructure(spawned, boundWeed);
 
-        EntityManager.DeleteEntity(nodeUid);
+        Del(nodeUid);
         _popup.PopupClient(Loc.GetString("rmc-xeno-designer-infuse-node"), user, user, PopupType.Small);
     }
 

@@ -8,10 +8,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Cuffs;
 
-public sealed class CuffableSystem : SharedCuffableSystem
+public sealed partial class CuffableSystem : SharedCuffableSystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -21,7 +21,7 @@ public sealed class CuffableSystem : SharedCuffableSystem
         SubscribeLocalEvent<CuffableComponent, ComponentHandleState>(OnCuffableHandleState);
     }
 
-    private void OnCuffableShutdown(EntityUid uid, CuffableComponent component, ComponentShutdown args)
+    private void OnCuffableShutdown(EntityUid uid, CuffableComponent component, ref ComponentShutdown args)
     {
         if (TryComp<SpriteComponent>(uid, out var sprite))
             _sprite.LayerSetVisible((uid, sprite), HumanoidVisualLayers.Handcuffs, false);

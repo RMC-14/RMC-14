@@ -11,17 +11,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Paralyzing;
 
-public sealed class XenoParalyzingSlashSystem : EntitySystem
+public sealed partial class XenoParalyzingSlashSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly RMCDazedSystem _daze = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private RMCDazedSystem _daze = default!;
 
     public override void Initialize()
     {

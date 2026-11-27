@@ -26,9 +26,9 @@ public partial class SharedBodySystem
      * - Each "connection" is a body part (e.g. arm, hand, etc.) and each part can also contain organs.
      */
 
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly GibbingSystem _gibbingSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private GibbingSystem _gibbingSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
 
     private const float GibletLaunchImpulse = 8;
     private const float GibletLaunchImpulseVariance = 3;
@@ -163,7 +163,7 @@ public partial class SharedBodySystem
                 // Spawn the entity on the target
                 // then get the body part type, create the slot, and finally
                 // we can insert it into the container.
-                var childPart = Spawn(connectionSlot.Part, new EntityCoordinates(parentEntity, Vector2.Zero));
+                var childPart = SpawnAttachedTo(connectionSlot.Part, new EntityCoordinates(parentEntity, Vector2.Zero));
                 cameFromEntities[connection] = childPart;
 
                 var childPartComponent = Comp<BodyPartComponent>(childPart);

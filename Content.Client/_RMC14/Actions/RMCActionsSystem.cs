@@ -12,12 +12,12 @@ using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 
 namespace Content.Client._RMC14.Actions;
 
-public sealed class RMCActionsSystem : SharedRMCActionsSystem
+public sealed partial class RMCActionsSystem : SharedRMCActionsSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IStateManager _stateManager = default!;
 
     private EntityUid? _sortEnt;
 

@@ -7,9 +7,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Station;
 
-public sealed class RMCStationSpawningSystem : SharedRMCStationSpawningSystem
+public sealed partial class RMCStationSpawningSystem : SharedRMCStationSpawningSystem
 {
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
 
     public override EntityUid? SpawnPlayerMob(EntityCoordinates coordinates,
         ProtoId<JobPrototype>? job,

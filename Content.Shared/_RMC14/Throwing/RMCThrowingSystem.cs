@@ -1,4 +1,5 @@
 using Content.Shared.Damage.Components;
+using Content.Shared._RMC14.Deferred;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
@@ -6,21 +7,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Throwing;
 
-public sealed class RMCThrowingSystem : EntitySystem
+public sealed partial class RMCThrowingSystem : EntitySystem
 {
-    [Dependency] private readonly ThrownItemSystem _thrown = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private EntityQuery<ThrownItemComponent> _thrownItemQuery;
+    [Dependency] private RMCDeferredPhysicsSystem _deferredPhysics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
-        _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
-
         SubscribeLocalEvent<DamageOtherOnHitComponent, ThrownEvent>(OnDamageOtherOnHitThrown);
+
+        SubscribeLocalEvent<ThrownLimitHitsComponent, RMCThrowHitAttemptEvent>(OnThrownLimitHitsHitAttempt);
         SubscribeLocalEvent<ThrownLimitHitsComponent, ThrowDoHitEvent>(OnThrownLimitHitsDoHit);
-        SubscribeLocalEvent<ThrownLimitHitsComponent, LandEvent>(OnThrownLimitHitsLand);
         SubscribeLocalEvent<ThrownLimitHitsComponent, StopThrowEvent>(OnThrownLimitHitsStopThrow);
 
         SubscribeLocalEvent<RMCThrowCooldownComponent, ThrowItemAttemptEvent>(OnThrowCooldownThrowAttempt);
@@ -33,19 +31,24 @@ public sealed class RMCThrowingSystem : EntitySystem
         Dirty(ent, limit);
     }
 
-    private void OnThrownLimitHitsLand(Entity<ThrownLimitHitsComponent> ent, ref LandEvent args)
+    private void OnThrownLimitHitsHitAttempt(Entity<ThrownLimitHitsComponent> ent, ref RMCThrowHitAttemptEvent args)
     {
-        ent.Comp.Hit = false;
+        if (args.Cancelled)
+            return;
+
+        if (ent.Comp.Hit)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        ent.Comp.Hit = true;
         Dirty(ent);
     }
 
     private void OnThrownLimitHitsDoHit(Entity<ThrownLimitHitsComponent> ent, ref ThrowDoHitEvent args)
     {
-        ent.Comp.Hit = true;
-        Dirty(ent);
-
-        if (_thrownItemQuery.TryComp(ent, out var thrown))
-            _thrown.StopThrow(ent, thrown);
+        _deferredPhysics.TryQueueStopThrow(ent);
     }
 
     private void OnThrownLimitHitsStopThrow(Entity<ThrownLimitHitsComponent> ent, ref StopThrowEvent args)

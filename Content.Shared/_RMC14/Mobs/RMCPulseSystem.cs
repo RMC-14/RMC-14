@@ -8,11 +8,11 @@ using static Content.Shared._RMC14.Mobs.RMCPulseComponent;
 
 namespace Content.Shared._RMC14.Mobs;
 
-public sealed class RMCPulseSystem : EntitySystem
+public sealed partial class RMCPulseSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

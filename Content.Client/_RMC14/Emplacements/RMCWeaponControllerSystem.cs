@@ -6,7 +6,7 @@ namespace Content.Client._RMC14.Emplacements;
 
 public sealed partial class RMCWeaponControllerSystem : RMCSharedWeaponControllerSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public bool TryGetControllingWeapon([NotNullWhen(true)] out EntityUid? weapon)
     {

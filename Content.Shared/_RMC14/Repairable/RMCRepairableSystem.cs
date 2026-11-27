@@ -27,21 +27,22 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Repairable;
 
-public sealed class RMCRepairableSystem : EntitySystem
+public sealed partial class RMCRepairableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly RMCWeldEffectSystem _weldEffect = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private TagSystem _tags = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RMCWeldEffectSystem _weldEffect = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly ProtoId<StackPrototype> SteelStack = "CMSteel";
@@ -254,10 +255,11 @@ public sealed class RMCRepairableSystem : EntitySystem
                 var rotation = xform.LocalRotation;
                 var anchored = xform.Anchored;
 
-                var restored = Spawn(replace.Prototype, coords);
+                var restored = SpawnAttachedTo(replace.Prototype, coords);
                 var restoredXform = Transform(restored);
-                restoredXform.LocalRotation = rotation;
-                restoredXform.Anchored = anchored;
+                _transform.TryAnchor((restored, restoredXform), anchored);
+                // Spawning may snap to the tile center, restore the original position without unanchoring.
+                _transform.SetCoordinates(restored, restoredXform, coords, rotation, unanchor: false);
                 QueueDel(repairable);
             }
 

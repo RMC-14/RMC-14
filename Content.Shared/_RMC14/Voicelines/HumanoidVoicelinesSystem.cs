@@ -7,9 +7,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Voicelines;
 
-public sealed class HumanoidVoicelinesSystem : EntitySystem
+public sealed partial class HumanoidVoicelinesSystem : EntitySystem
 {
-    [Dependency] private readonly INetConfigurationManager _config = default!;
+    [Dependency] private INetConfigurationManager _config = default!;
 
     private static readonly ProtoId<SpeciesPrototype> ArachnidSpecies = "Arachnid";
     private static readonly ProtoId<SpeciesPrototype> DionaSpecies = "Diona";

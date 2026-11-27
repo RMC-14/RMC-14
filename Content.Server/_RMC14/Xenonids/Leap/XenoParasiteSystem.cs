@@ -11,13 +11,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Xenonids.Leap;
 
-public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
+public sealed partial class XenoParasiteSystem : SharedXenoParasiteSystem
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly GhostSystem _ghostSystem = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly HTNSystem _htn = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private GhostSystem _ghostSystem = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private HTNSystem _htn = default!;
 
     private static readonly ProtoId<HTNCompoundPrototype> ActiveTask = "RMCParasiteActiveCompound";
 

@@ -25,11 +25,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Medical.Scanner;
 
-public sealed class HealthScannerUiData
+public sealed partial class HealthScannerUiData
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     private HealthScannerWindow? _holocardWindow;
     private NetEntity _lastTarget;
@@ -159,7 +159,7 @@ public sealed class HealthScannerUiData
                 panel.BackgroundColor = Color.Transparent;
         }
 
-        window.ChemicalsContainer.DisposeAllChildren();
+        window.ChemicalsContainer.RemoveAllChildren();
 
         var anyChemicals = false;
         var anyUnknown = false;
@@ -233,7 +233,7 @@ public sealed class HealthScannerUiData
         pulseMsg.AddText(uiState.Pulse);
         window.PulseLabel.SetMessage(pulseMsg);
 
-        window.AdviceContainer.DisposeAllChildren();
+        window.AdviceContainer.RemoveAllChildren();
         // Medication Advice
         if (!isPermaDead)
         {

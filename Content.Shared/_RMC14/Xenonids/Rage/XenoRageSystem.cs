@@ -11,17 +11,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rage;
 
-public sealed class XenoRageSystem : EntitySystem
+public sealed partial class XenoRageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private SharedMeleeWeaponSystem _meleeWeapon = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private SharedXenoHealSystem _xenoHeal = default!;
+    [Dependency] private SharedAuraSystem _aura = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private CMArmorSystem _armor = default!;
 
     public override void Initialize()
     {

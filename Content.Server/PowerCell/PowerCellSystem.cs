@@ -20,13 +20,13 @@ namespace Content.Server.PowerCell;
 /// </summary>
 public sealed partial class PowerCellSystem : SharedPowerCellSystem
 {
-    [Dependency] private readonly ActivatableUISystem _activatable = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _sharedAppearanceSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RiggableSystem _riggableSystem = default!;
+    [Dependency] private ActivatableUISystem _activatable = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private SharedAppearanceSystem _sharedAppearanceSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RiggableSystem _riggableSystem = default!;
 
     public override void Initialize()
     {

@@ -11,14 +11,14 @@ using Content.Shared.Physics;
 
 namespace Content.Shared._RMC14.AegisCrate;
 
-public abstract class SharedAegisCrateSystem : EntitySystem
+public abstract partial class SharedAegisCrateSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     protected readonly TimeSpan OpeningSpeed = TimeSpan.FromSeconds(1.5);
 

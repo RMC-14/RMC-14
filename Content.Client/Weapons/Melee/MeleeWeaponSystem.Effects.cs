@@ -38,7 +38,7 @@ public sealed partial class MeleeWeaponSystem
         if (!_xformQuery.TryGetComponent(user, out var userXform) || userXform.MapID == MapId.Nullspace)
             return;
 
-        var animationUid = Spawn(animation, userXform.Coordinates);
+        var animationUid = SpawnAttachedTo(animation, userXform.Coordinates);
 
         if (!TryComp<SpriteComponent>(animationUid, out var sprite)
             || !TryComp<WeaponArcVisualsComponent>(animationUid, out var arcComponent))

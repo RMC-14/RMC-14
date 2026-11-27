@@ -27,7 +27,7 @@ namespace Content.IntegrationTests.Tests.Networking
     // the tick where the server *should* have, but did not, acknowledge the state change.
     // Finally, we run two events inside the prediction area to ensure reconciling does for incremental stuff.
     [TestFixture]
-    public sealed class SimplePredictReconcileTest
+    public sealed partial class SimplePredictReconcileTest
     {
         [Test]
         public async Task Test()
@@ -36,7 +36,6 @@ namespace Content.IntegrationTests.Tests.Networking
             var server = pair.Server;
             var client = pair.Client;
 
-            var sMapManager = server.ResolveDependency<IMapManager>();
             var sEntityManager = server.ResolveDependency<IEntityManager>();
             var cEntityManager = client.ResolveDependency<IEntityManager>();
             var sGameTiming = server.ResolveDependency<IGameTiming>();
@@ -57,7 +56,7 @@ namespace Content.IntegrationTests.Tests.Networking
             {
                 // Spawn dummy component entity.
                 sMapSys.CreateMap(out var map);
-                serverEnt = sEntityManager.SpawnEntity(null, new MapCoordinates(new Vector2(0, 0), map));
+                serverEnt = sEntityManager.Spawn(null, new MapCoordinates(new Vector2(0, 0), map));
                 serverComponent = sEntityManager.AddComponent<PredictionTestComponent>(serverEnt);
             });
 
@@ -389,7 +388,7 @@ namespace Content.IntegrationTests.Tests.Networking
             await pair.CleanReturnAsync();
         }
 
-        public sealed class PredictionTestEntitySystem : EntitySystem
+        public sealed partial class PredictionTestEntitySystem : EntitySystem
         {
             public bool Allow { get; set; } = true;
 
@@ -397,7 +396,7 @@ namespace Content.IntegrationTests.Tests.Networking
             public List<(GameTick tick, bool firstPredict, bool old, bool @new, bool value)> EventTriggerList { get; } =
                 new();
 
-            [Dependency] private readonly IGameTiming _gameTiming = default!;
+            [Dependency] private IGameTiming _gameTiming = default!;
 
             public override void Initialize()
             {

@@ -7,9 +7,9 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Xenonids.Hide;
 
-public sealed class XenoHideVisualizerSystem : VisualizerSystem<XenoHideComponent>
+public sealed partial class XenoHideVisualizerSystem : VisualizerSystem<XenoHideComponent>
 {
-    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private RMCSpriteSystem _rmcSprite = default!;
 
     public override void Initialize()
     {

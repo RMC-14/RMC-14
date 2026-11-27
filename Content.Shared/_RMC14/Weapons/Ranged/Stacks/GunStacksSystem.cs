@@ -11,15 +11,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Stacks;
 
-public sealed class GunStacksSystem : EntitySystem
+public sealed partial class GunStacksSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly CMArmorSystem _rmcArmor = default!;
-    [Dependency] private readonly CMGunSystem _rmcGun = default!;
-    [Dependency] private readonly RMCSelectiveFireSystem _rmcSelectiveFire = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private CMArmorSystem _rmcArmor = default!;
+    [Dependency] private CMGunSystem _rmcGun = default!;
+    [Dependency] private RMCSelectiveFireSystem _rmcSelectiveFire = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private EntityQuery<GunStacksComponent> _gunStacksQuery;
     private EntityQuery<RMCSelectiveFireComponent> _selectiveFireQuery;

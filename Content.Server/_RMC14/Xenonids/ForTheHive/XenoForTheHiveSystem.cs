@@ -12,10 +12,10 @@ using Content.Server._RMC14.Xenonids.Respawn;
 
 namespace Content.Server._RMC14.Xenonids.ForTheHive;
 
-public sealed class XenoForTheHiveSystem : SharedXenoForTheHiveSystem
+public sealed partial class XenoForTheHiveSystem : SharedXenoForTheHiveSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly XenoRespawnSystem _xenoRespawn = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private XenoRespawnSystem _xenoRespawn = default!;
 
     protected override void ForTheHiveShout(EntityUid xeno)
     {

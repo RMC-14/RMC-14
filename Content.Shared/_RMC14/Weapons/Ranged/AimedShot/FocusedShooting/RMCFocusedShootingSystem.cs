@@ -3,9 +3,9 @@ using Content.Shared._RMC14.Targeting.Focused;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
 
-public sealed class RMCFocusedShootingSystem : EntitySystem
+public sealed partial class RMCFocusedShootingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

@@ -39,7 +39,7 @@ public sealed partial class RMCProjectileDamageFalloffComponent : Component
 }
 
 [DataRecord, Serializable, NetSerializable]
-public record struct DamageFalloffThreshold(
+public partial record struct DamageFalloffThreshold(
     /// <summary>
     /// The range at which falloff starts to take effect.
     /// Conversion from 13: effective_range_max

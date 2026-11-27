@@ -13,11 +13,11 @@ namespace Content.Client._RMC14.ParaDrop;
 
 public sealed partial class ParaDropSystem : SharedParaDropSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AnimationPlayerSystem _animPlayer = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private const string DroppingAnimationKey = "dropping-animation";
     private const string SkyFallingAnimationKey = "sky-falling-animation";
@@ -135,7 +135,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
 
     private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier, Vector2 offset = new())
     {
-        var animationEnt = Spawn(paraDroppable.ParachutePrototype, coordinates);
+        var animationEnt = SpawnAttachedTo(paraDroppable.ParachutePrototype, coordinates);
         if (TryComp(animationEnt, out SpriteComponent? sprite))
             _sprite.SetScale((animationEnt, sprite), sprite.Scale * paraDroppable.ParachuteScale);
 
@@ -160,7 +160,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         {
             var offset = new Vector2();
             var fallOffset = new Vector2(0f, adjustedHeight);
-            if (EntityManager.TryGetComponent(fallingUid, out SpriteComponent? sprite))
+            if (TryComp(fallingUid, out SpriteComponent? sprite))
             {
                 offset = sprite.Offset;
                 fallOffset = GetFallOffset(fallingUid, sprite, adjustedHeight);

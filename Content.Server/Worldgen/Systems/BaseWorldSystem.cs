@@ -9,10 +9,10 @@ namespace Content.Server.Worldgen.Systems;
 ///     Exists primarily for convenience and to avoid code duplication.
 /// </summary>
 [PublicAPI]
-public abstract class BaseWorldSystem : EntitySystem
+public abstract partial class BaseWorldSystem : EntitySystem
 {
-    [Dependency] private readonly WorldControllerSystem _worldController = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private WorldControllerSystem _worldController = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     /// <summary>
     ///     Gets a chunk's coordinates in chunk space as an integer value.

@@ -14,5 +14,5 @@ public sealed partial class StorageStoreSkillRequiredComponent : Component
 
     [DataRecord]
     [Serializable, NetSerializable]
-    public readonly record struct Entry(EntityWhitelist Whitelist, SkillWhitelist Skills);
+    public readonly partial record struct Entry(EntityWhitelist Whitelist, SkillWhitelist Skills);
 }

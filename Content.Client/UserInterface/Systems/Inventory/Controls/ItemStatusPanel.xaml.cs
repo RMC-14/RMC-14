@@ -15,10 +15,10 @@ namespace Content.Client.UserInterface.Systems.Inventory.Controls;
 [GenerateTypedNameReferences]
 public sealed partial class ItemStatusPanel : Control
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     // RMC14
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
 
     [ViewVariables] private EntityUid? _entity;

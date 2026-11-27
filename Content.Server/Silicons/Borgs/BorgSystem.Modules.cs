@@ -194,12 +194,14 @@ public sealed partial class BorgSystem
 
             if (!component.ItemsCreated)
             {
-                item = Spawn(itemProto, xform.Coordinates);
+                item = SpawnAttachedTo(itemProto, xform.Coordinates);
             }
             else
             {
+                // RMC14
                 item = component.ProvidedContainer.ContainedEntities
-                    .FirstOrDefault(ent => Prototype(ent)?.ID == itemProto);
+                    .FirstOrDefault(ent => Prototype(ent)?.ID == itemProto.Id);
+                // RMC14
                 if (!item.IsValid())
                 {
                     Log.Debug($"no items found: {component.ProvidedContainer.ContainedEntities.Count}");

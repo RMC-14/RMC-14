@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Physics;
 using Robust.Shared.Map;
+using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared.Spawning
@@ -13,12 +14,11 @@ namespace Content.Shared.Spawning
             EntityCoordinates coordinates,
             CollisionGroup collisionLayer,
             in Box2? box = null,
-            SharedPhysicsSystem? physicsManager = null)
+            EntityLookupSystem? lookup = null)
         {
-            physicsManager ??= entityManager.System<SharedPhysicsSystem>();
             var mapCoordinates = entityManager.System<SharedTransformSystem>().ToMapCoordinates(coordinates);
 
-            return entityManager.SpawnIfUnobstructed(prototypeName, mapCoordinates, collisionLayer, box, physicsManager);
+            return entityManager.SpawnIfUnobstructed(prototypeName, mapCoordinates, collisionLayer, box, lookup);
         }
 
         public static EntityUid? SpawnIfUnobstructed(
@@ -27,28 +27,29 @@ namespace Content.Shared.Spawning
             MapCoordinates coordinates,
             CollisionGroup collisionLayer,
             in Box2? box = null,
-            SharedPhysicsSystem? collision = null)
+            EntityLookupSystem? lookup = null)
         {
             var boxOrDefault = box.GetValueOrDefault(Box2.UnitCentered).Translated(coordinates.Position);
-            collision ??= entityManager.System<SharedPhysicsSystem>();
+            lookup ??= entityManager.System<EntityLookupSystem>();
 
-            foreach (var body in collision.GetCollidingEntities(coordinates.MapId, in boxOrDefault))
+            // RMC14
+            var query = new FixtureQueryArgs(
+                new QueryFilter
+                {
+                    LayerBits = -1L,
+                    MaskBits = -1L,
+                    Flags = QueryFlags.Dynamic | QueryFlags.Static | QueryFlags.Sensors,
+                },
+                Approximate: true);
+
+            if (!lookup.ForEachFixtureIntersecting(coordinates.MapId, boxOrDefault, ref collisionLayer,
+                    new SpawnCollisionCallback(), query))
             {
-                if (!body.Hard)
-                {
-                    continue;
-                }
-
-                // TODO: wtf fix this
-                if (collisionLayer == 0 || (body.CollisionMask & (int) collisionLayer) == 0)
-                {
-                    continue;
-                }
-
                 return null;
             }
+            // RMC14
 
-            return entityManager.SpawnEntity(prototypeName, coordinates);
+            return entityManager.Spawn(prototypeName, coordinates);
         }
 
         public static bool TrySpawnIfUnobstructed(
@@ -58,9 +59,9 @@ namespace Content.Shared.Spawning
             CollisionGroup collisionLayer,
             [NotNullWhen(true)] out EntityUid? entity,
             Box2? box = null,
-            SharedPhysicsSystem? physicsManager = null)
+            EntityLookupSystem? lookup = null)
         {
-            entity = entityManager.SpawnIfUnobstructed(prototypeName, coordinates, collisionLayer, box, physicsManager);
+            entity = entityManager.SpawnIfUnobstructed(prototypeName, coordinates, collisionLayer, box, lookup);
 
             return entity != null;
         }
@@ -72,11 +73,26 @@ namespace Content.Shared.Spawning
             CollisionGroup collisionLayer,
             [NotNullWhen(true)] out EntityUid? entity,
             in Box2? box = null,
-            SharedPhysicsSystem? physicsManager = null)
+            EntityLookupSystem? lookup = null)
         {
-            entity = entityManager.SpawnIfUnobstructed(prototypeName, coordinates, collisionLayer, box, physicsManager);
+            entity = entityManager.SpawnIfUnobstructed(prototypeName, coordinates, collisionLayer, box, lookup);
 
             return entity != null;
         }
+
+        // RMC14
+        private readonly struct SpawnCollisionCallback : IFixtureQueryCallback<CollisionGroup>
+        {
+            public bool Invoke(ref CollisionGroup collisionLayer, in FixtureProxy fixture)
+            {
+                var body = fixture.Body;
+                if (!body.Hard)
+                    return true;
+
+                // TODO: wtf fix this
+                return collisionLayer == 0 || (body.CollisionMask & (int) collisionLayer) == 0;
+            }
+        }
+        // RMC14
     }
 }

@@ -4,11 +4,11 @@ using Robust.Shared.Console;
 namespace Content.Server.Ghost;
 
 [AnyCommand]
-internal sealed class GhostFollowEntityCommand : IConsoleCommand
+internal sealed partial class GhostFollowEntityCommand : IConsoleCommand
 {
     public const string CommandName = "ghost_follow_entity";
 
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     public string Command => CommandName;
     public string Description => string.Empty;

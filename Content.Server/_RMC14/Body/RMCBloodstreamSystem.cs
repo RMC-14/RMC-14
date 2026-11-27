@@ -6,9 +6,9 @@ using Content.Shared.Chemistry.EntitySystems;
 
 namespace Content.Server._RMC14.Body;
 
-public sealed class RMCBloodstreamSystem : SharedRMCBloodstreamSystem
+public sealed partial class RMCBloodstreamSystem : SharedRMCBloodstreamSystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     public override bool TryGetBloodSolution(EntityUid uid, [NotNullWhen(true)] out Solution? solution)
     {

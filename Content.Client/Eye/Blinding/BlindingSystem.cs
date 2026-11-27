@@ -6,10 +6,10 @@ using Robust.Shared.Player;
 
 namespace Content.Client.Eye.Blinding;
 
-public sealed class BlindingSystem : EntitySystem
+public sealed partial class BlindingSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
     [Dependency] ILightManager _lightManager = default!;
 
 
@@ -47,7 +47,7 @@ public sealed class BlindingSystem : EntitySystem
             _overlayMan.AddOverlay(_overlay);
     }
 
-    private void OnBlindShutdown(EntityUid uid, BlindableComponent component, ComponentShutdown args)
+    private void OnBlindShutdown(EntityUid uid, BlindableComponent component, ref ComponentShutdown args)
     {
         if (_player.LocalEntity == uid)
         {

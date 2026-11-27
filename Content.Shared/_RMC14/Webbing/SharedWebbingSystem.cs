@@ -19,17 +19,17 @@ using static Content.Shared._RMC14.Webbing.WebbingTransferComponent;
 
 namespace Content.Shared._RMC14.Webbing;
 
-public abstract class SharedWebbingSystem : EntitySystem
+public abstract partial class SharedWebbingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private TagSystem _tag = default!;
     private ProtoId<TagPrototype> ArmorWebbingTag = "ArmorWebbing";
 
     public override void Initialize()

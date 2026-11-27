@@ -4,10 +4,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Weapons.Marker;
 
-public sealed class DamageMarkerSystem : SharedDamageMarkerSystem
+public sealed partial class DamageMarkerSystem : SharedDamageMarkerSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -25,7 +25,7 @@ public sealed class DamageMarkerSystem : SharedDamageMarkerSystem
         _sprite.LayerSetRsi((uid, sprite), layer, component.Effect.RsiPath, component.Effect.RsiState);
     }
 
-    private void OnMarkerShutdown(EntityUid uid, DamageMarkerComponent component, ComponentShutdown args)
+    private void OnMarkerShutdown(EntityUid uid, DamageMarkerComponent component, ref ComponentShutdown args)
     {
         if (!_timing.ApplyingState || !TryComp<SpriteComponent>(uid, out var sprite) || !_sprite.LayerMapTryGet((uid, sprite), DamageMarkerKey.Key, out var weh, false))
             return;

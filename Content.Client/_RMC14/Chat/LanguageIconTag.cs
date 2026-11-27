@@ -15,10 +15,10 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Chat;
 
 [UsedImplicitly]
-public sealed class LanguageIconTag : IMarkupTagHandler
+public sealed partial class LanguageIconTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public string Name => "langicon";
 

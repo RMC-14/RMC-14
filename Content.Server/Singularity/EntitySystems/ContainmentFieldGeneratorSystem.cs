@@ -15,15 +15,15 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Server.Singularity.EntitySystems;
 
-public sealed class ContainmentFieldGeneratorSystem : EntitySystem
+public sealed partial class ContainmentFieldGeneratorSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly AppearanceSystem _visualizer = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedPointLightSystem _light = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private AppearanceSystem _visualizer = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedPointLightSystem _light = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private TagSystem _tags = default!;
 
     public override void Initialize()
     {
@@ -33,7 +33,6 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, AnchorStateChangedEvent>(OnAnchorChanged);
-        SubscribeLocalEvent<ContainmentFieldGeneratorComponent, ReAnchorEvent>(OnReanchorEvent);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, ComponentRemove>(OnComponentRemoved);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, EventHorizonAttemptConsumeEntityEvent>(PreventBreach);
@@ -114,11 +113,8 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
     {
         if (!args.Anchored)
             RemoveConnections(generator);
-    }
-
-    private void OnReanchorEvent(Entity<ContainmentFieldGeneratorComponent> generator, ref ReAnchorEvent args)
-    {
-        GridCheck(generator);
+        else
+            GridCheck(generator);
     }
 
     private void OnUnanchorAttempt(EntityUid uid, ContainmentFieldGeneratorComponent component,
@@ -317,7 +313,7 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
         while (currentOffset.Length() < stopDist)
         {
             var currentCoords = gen1Coords.Offset(currentOffset);
-            var newField = Spawn(firstGen.Comp.CreatedField, currentCoords);
+            var newField = SpawnAttachedTo(firstGen.Comp.CreatedField, currentCoords);
 
             var fieldXForm = Transform(newField);
             _transformSystem.SetParent(newField, fieldXForm, firstGen);

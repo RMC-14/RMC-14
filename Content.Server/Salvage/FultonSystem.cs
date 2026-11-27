@@ -9,9 +9,9 @@ namespace Content.Server.Salvage;
 /// <summary>
 /// Transports attached entities to the linked beacon after a timer has elapsed.
 /// </summary>
-public sealed class FultonSystem : SharedFultonSystem
+public sealed partial class FultonSystem : SharedFultonSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -20,7 +20,7 @@ public sealed class FultonSystem : SharedFultonSystem
         SubscribeLocalEvent<FultonedComponent, ComponentShutdown>(OnFultonedShutdown);
     }
 
-    private void OnFultonedShutdown(EntityUid uid, FultonedComponent component, ComponentShutdown args)
+    private void OnFultonedShutdown(EntityUid uid, FultonedComponent component, ref ComponentShutdown args)
     {
         Del(component.Effect);
         component.Effect = EntityUid.Invalid;
@@ -31,7 +31,7 @@ public sealed class FultonSystem : SharedFultonSystem
         if (Exists(component.Effect))
             return;
 
-        component.Effect = Spawn(EffectProto, new EntityCoordinates(uid, EffectOffset));
+        component.Effect = SpawnAttachedTo(EffectProto, new EntityCoordinates(uid, EffectOffset));
         Dirty(uid, component);
     }
 

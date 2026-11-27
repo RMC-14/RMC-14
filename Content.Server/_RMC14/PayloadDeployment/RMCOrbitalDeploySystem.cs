@@ -19,21 +19,20 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.PayloadDeployment;
 
-public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
+public sealed partial class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
 {
     private static readonly EntProtoId? DirectDropLandingEffect = "RMCEffectAlert";
     private static readonly SoundSpecifier DirectDropLaunchSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/bamf.ogg");
     private static readonly SoundSpecifier DirectDropArrivingSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Techpod/techpod_drill.ogg");
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly RMCPayloadDeploymentSystem _payloadDeployment = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedCrashLandSystem _crashLand = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private RMCPayloadDeploymentSystem _payloadDeployment = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly List<OrbitalDropJob> _jobs = [];
     private readonly HashSet<EntityUid> _reservedPayloads = [];
@@ -226,7 +225,7 @@ public sealed class RMCOrbitalDeploySystem : SharedRMCOrbitalDeploySystem
         }
 
         var deliveries = request.UseDropPods ? preparedPods : payload;
-        if (!_mapManager.TryFindGridAt(request.Target, out var grid, out var gridComponent))
+        if (!_map.TryFindGridAt(request.Target, out var grid, out var gridComponent))
         {
             CleanupEntities(preparedPods);
             CleanupEntities(spawnedPayload);

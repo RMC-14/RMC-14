@@ -11,13 +11,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.CombatMode.Pacification;
 
-public sealed class PacificationSystem : EntitySystem
+public sealed partial class PacificationSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedCombatModeSystem _combatSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -115,7 +115,7 @@ public sealed class PacificationSystem : EntitySystem
         _alertsSystem.ShowAlert(uid, component.PacifiedAlert);
     }
 
-    private void OnShutdown(EntityUid uid, PacifiedComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, PacifiedComponent component, ref ComponentShutdown args)
     {
         if (!TryComp<CombatModeComponent>(uid, out var combatMode))
             return;

@@ -6,9 +6,9 @@ using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Medical.IV;
 
-public sealed class IVDripOverlay : Overlay
+public sealed partial class IVDripOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] private IEntityManager _entity = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
 

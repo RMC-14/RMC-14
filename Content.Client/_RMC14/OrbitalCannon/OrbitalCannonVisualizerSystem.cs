@@ -3,9 +3,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.OrbitalCannon;
 
-public sealed class OrbitalCannonVisualizerSystem : EntitySystem
+public sealed partial class OrbitalCannonVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

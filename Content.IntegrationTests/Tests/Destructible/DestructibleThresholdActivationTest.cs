@@ -42,7 +42,7 @@ namespace Content.IntegrationTests.Tests.Destructible
             {
                 var coordinates = testMap.GridCoords;
 
-                sDestructibleEntity = sEntityManager.SpawnEntity(DestructibleEntityId, coordinates);
+                sDestructibleEntity = sEntityManager.SpawnAttachedTo(DestructibleEntityId, coordinates);
                 sDamageableComponent = sEntityManager.GetComponent<DamageableComponent>(sDestructibleEntity);
                 sDestructibleComponent = sEntityManager.GetComponent<DestructibleComponent>(sDestructibleEntity);
 

@@ -6,15 +6,15 @@ using Content.Shared.Tag;
 
 namespace Content.Shared.Whitelist;
 
-public sealed class EntityWhitelistSystem : EntitySystem
+public sealed partial class EntityWhitelistSystem : EntitySystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
 
     // RMC14
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
+    [Dependency] private SkillsSystem _skills = default!;
+    [Dependency] private RMCSizeStunSystem _rmcSizeStun = default!;
 
     public override void Initialize()
     {

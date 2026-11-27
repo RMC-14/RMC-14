@@ -9,12 +9,12 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Commendations;
 
-public sealed class CommendationManager : IPostInjectInit
+public sealed partial class CommendationManager : IPostInjectInit
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private UserDbDataManager _userDb = default!;
 
     private readonly Dictionary<NetUserId, (List<Commendation> Received, List<Commendation> Given)> _commendations = new();
 

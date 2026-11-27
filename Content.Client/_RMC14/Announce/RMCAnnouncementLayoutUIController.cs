@@ -13,13 +13,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Announce;
 
-public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateExited<GameplayState>
+public sealed partial class RMCAnnouncementLayoutUIController : UIController, IOnStateExited<GameplayState>
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private const float WheelScaleStep = 0.1f;
 
@@ -116,7 +116,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
         _presets.Clear();
         foreach (var prototype in _prototype.EnumeratePrototypes<EntityPrototype>())
         {
-            if (!prototype.TryGetComponent(out RMCAnnouncementPresetComponent? preset, _compFactory) ||
+            if (!prototype.TryComp(out RMCAnnouncementPresetComponent? preset, _compFactory) ||
                 !preset.ShowInLayoutEditor)
             {
                 continue;
@@ -231,7 +231,7 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
                 return;
             }
 
-            if (Color.TryFromHex(text) is { } color)
+            if (Color.TryFromHex(text, out var color))
                 Change(apply(color));
             else
                 Populate();
@@ -364,9 +364,11 @@ public sealed class RMCAnnouncementLayoutUIController : UIController, IOnStateEx
 
         var preset = Preset;
         var local = _player.LocalEntity;
-        var text = string.Join('\n',
+        var text = string.Join('\n', new[]
+        {
             Loc.GetString("rmc-ui-options-announcements-layout-preview-line-1", ("name", preset.Name)),
-            Loc.GetString("rmc-ui-options-announcements-layout-preview-line-2"));
+            Loc.GetString("rmc-ui-options-announcements-layout-preview-line-2"),
+        });
 
         var speakerName = Loc.GetString("rmc-ui-options-announcements-layout-preview-speaker");
         string? job = null;

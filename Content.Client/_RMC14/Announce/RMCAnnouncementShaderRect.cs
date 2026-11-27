@@ -4,9 +4,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Announce;
 
-public sealed class RMCAnnouncementShaderRect : Control
+public sealed partial class RMCAnnouncementShaderRect : Control
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly Dictionary<string, Color> _colorParameters = new();
     private readonly Dictionary<string, (float Value, bool UiScaled)> _floatParameters = new();

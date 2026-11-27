@@ -12,16 +12,16 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.AcidMine;
 
-public sealed class XenoAcidMineSystem : EntitySystem
+public sealed partial class XenoAcidMineSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
 
     public override void Initialize()
@@ -96,7 +96,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
         {
             for (var y = -1; y <= 1; y++)
             {
-                var blastUid = Spawn(protoId, new EntityCoordinates(args.Target.EntityId, center + new Vector2(x, y)));
+                var blastUid = SpawnAttachedTo(protoId, new EntityCoordinates(args.Target.EntityId, center + new Vector2(x, y)));
                 var blast = EnsureComp<XenoAcidBlastComponent>(blastUid);
                 if (x != 0 || y != 0)
                     blast.ExplosionSound = null;

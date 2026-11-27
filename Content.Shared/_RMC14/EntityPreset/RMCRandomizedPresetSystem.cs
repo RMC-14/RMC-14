@@ -9,15 +9,15 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.EntityPreset;
 
-public sealed class RMCRandomizedPresetSystem : EntitySystem
+public sealed partial class RMCRandomizedPresetSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private RMCStorageSystem _rmcStorage = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public void ApplyPreset(EntityUid entity, IRMCRandomizedPreset preset)
     {
@@ -102,7 +102,7 @@ public sealed class RMCRandomizedPresetSystem : EntitySystem
     private void Equip(EntityUid entity, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false, bool tryEquip = true, string? slotName = null)
     {
         var coordinates = _transform.GetMoverCoordinates(entity);
-        var spawn = Spawn(toSpawn, coordinates);
+        var spawn = SpawnAttachedTo(toSpawn, coordinates);
 
         if (tryEquip)
         {

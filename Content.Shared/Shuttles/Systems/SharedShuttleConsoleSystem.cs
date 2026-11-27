@@ -6,9 +6,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Shuttles.Systems
 {
-    public abstract class SharedShuttleConsoleSystem : EntitySystem
+    public abstract partial class SharedShuttleConsoleSystem : EntitySystem
     {
-        [Dependency] protected readonly ActionBlockerSystem ActionBlockerSystem = default!;
+        [Dependency] protected ActionBlockerSystem ActionBlockerSystem = default!;
 
         public override void Initialize()
         {
@@ -29,7 +29,7 @@ namespace Content.Shared.Shuttles.Systems
             }
         }
 
-        protected virtual void HandlePilotShutdown(EntityUid uid, PilotComponent component, ComponentShutdown args)
+        protected virtual void HandlePilotShutdown(EntityUid uid, PilotComponent component, ref ComponentShutdown args)
         {
             ActionBlockerSystem.UpdateCanMove(uid);
         }

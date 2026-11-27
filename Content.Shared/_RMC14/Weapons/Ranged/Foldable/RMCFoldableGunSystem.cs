@@ -13,12 +13,12 @@ using Content.Shared.Sprite;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Foldable;
 
-public sealed class RMCFoldableGunSystem : EntitySystem
+public sealed partial class RMCFoldableGunSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -103,7 +103,7 @@ public sealed class RMCFoldableGunSystem : EntitySystem
         _popup.PopupPredicted(selfText, othersText, user, user);
         _audio.PlayPredicted(ent.Comp.ToggleFoldSound, user, user);
 
-        PredictedQueueDel(ent.Owner);
+        QueueDel(ent.Owner);
 
         args.Handled = true;
     }

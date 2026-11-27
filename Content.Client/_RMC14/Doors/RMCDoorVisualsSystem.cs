@@ -5,9 +5,9 @@ using static Robust.Client.Animations.AnimationTrackSpriteFlick;
 
 namespace Content.Client._RMC14.Doors;
 
-public sealed class RMCDoorVisualsSystem : EntitySystem
+public sealed partial class RMCDoorVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
 
     private const string ButtonAnimationKey = "rmc_pod_door_button_animation";
     private readonly TimeSpan _buttonAnimationLength = TimeSpan.FromSeconds(1.25);

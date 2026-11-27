@@ -13,18 +13,18 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class HardpointSlotSystem : EntitySystem
+public sealed partial class HardpointSlotSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly HardpointSystem _hardpoints = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private HardpointSystem _hardpoints = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PowerLoaderSystem _powerLoader = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private readonly HashSet<(EntityUid Owner, string SlotId)> _completingRemovals = new();
 
@@ -185,7 +185,7 @@ public sealed class HardpointSlotSystem : EntitySystem
             return true;
         }
 
-        if (EntityManager.IsClientSide(ent.Owner))
+        if (IsClientSide(ent.Owner))
             return true;
 
         if (targetLocation.State.PendingInserts.ContainsValue(user))
@@ -230,7 +230,7 @@ public sealed class HardpointSlotSystem : EntitySystem
 
         args.Handled = true;
 
-        if (EntityManager.IsClientSide(args.Target))
+        if (IsClientSide(args.Target))
             return;
 
         if (targetLocation.Definition.InsertDelay <= 0f)

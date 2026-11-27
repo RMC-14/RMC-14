@@ -31,19 +31,19 @@ namespace Content.Server.Light.EntitySystems
     /// <summary>
     ///     System for the PoweredLightComponents
     /// </summary>
-    public sealed class PoweredLightSystem : EntitySystem
+    public sealed partial class PoweredLightSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly SharedAmbientSoundSystem _ambientSystem = default!;
-        [Dependency] private readonly LightBulbSystem _bulbSystem = default!;
-        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-        [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly PointLightSystem _pointLight = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly DamageOnInteractSystem _damageOnInteractSystem = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private SharedAmbientSoundSystem _ambientSystem = default!;
+        [Dependency] private LightBulbSystem _bulbSystem = default!;
+        [Dependency] private SharedHandsSystem _handsSystem = default!;
+        [Dependency] private DeviceLinkSystem _signalSystem = default!;
+        [Dependency] private SharedContainerSystem _containerSystem = default!;
+        [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private PointLightSystem _pointLight = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private DamageOnInteractSystem _damageOnInteractSystem = default!;
 
         private static readonly TimeSpan ThunkDelay = TimeSpan.FromSeconds(2);
         public const string LightBulbContainer = "light_bulb";
@@ -79,7 +79,7 @@ namespace Content.Server.Light.EntitySystems
             // TODO: Use ContainerFill dog
             if (light.HasLampOnSpawn != null)
             {
-                var entity = Spawn(light.HasLampOnSpawn, Comp<TransformComponent>(uid).Coordinates);
+                var entity = SpawnAttachedTo(light.HasLampOnSpawn, Comp<TransformComponent>(uid).Coordinates);
                 _containerSystem.Insert(entity, light.LightBulbContainer);
             }
             // need this to update visualizers
@@ -325,8 +325,11 @@ namespace Content.Server.Light.EntitySystems
             light.LastGhostBlink = time;
 
             ToggleBlinkingLight(uid, light, true);
-            uid.SpawnTimer(light.GhostBlinkingTime, () =>
+            Timer.Spawn(light.GhostBlinkingTime, () =>
             {
+                if (TerminatingOrDeleted(uid))
+                    return;
+
                 ToggleBlinkingLight(uid, light, false);
             });
 

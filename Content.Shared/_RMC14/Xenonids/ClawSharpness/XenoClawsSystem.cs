@@ -7,9 +7,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.ClawSharpness;
 
-public sealed class XenoClawsSystem : EntitySystem
+public sealed partial class XenoClawsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoClawsComponent> _xenoClawsQuery;
