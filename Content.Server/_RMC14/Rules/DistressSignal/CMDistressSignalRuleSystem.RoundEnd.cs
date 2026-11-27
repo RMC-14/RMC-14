@@ -285,8 +285,16 @@ public sealed partial class CMDistressSignalRuleSystem
                 _ => throw new ArgumentOutOfRangeException(),
             };
 
+            if (adjust != _autoBalanceLastAdjustment)
+            {
+                _config.SetCVar(RMCCVars.RMCAutoBalanceLastAdjustment, adjust);
+                // If streak only is enabled, don't make an adjustment because this adjustment was different from the previous attempt.
+                if (_autoBalanceStreakOnly)
+                    break;
+            }
+
             if (adjust == 0)
-                continue;
+                break;
 
             var value = _marinesPerXeno;
             value += adjust * _autoBalanceStep;
@@ -306,7 +314,7 @@ public sealed partial class CMDistressSignalRuleSystem
     /// </summary>
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result, LocId? customMessage = null)
     {
-        if (!rule.AutoEnd)
+        if (!rule.AutoEnd || _disableAutoEnd)
             return;
 
         // TODO RMC14: Refactor round end timing

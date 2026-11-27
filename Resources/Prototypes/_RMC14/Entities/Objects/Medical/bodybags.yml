@@ -233,7 +233,7 @@
     state: reactivetarp_closed
   - type: RMCPassiveStealth
     toggleable: true
-    minOpacity: 0.30
+    minOpacity: 0.19608 # 50/255
     delay: 15
     unCloakDelay: 3
     whitelist:
@@ -277,7 +277,7 @@
     state: scouttarp_closed
   - type: RMCPassiveStealth
     toggleable: true
-    minOpacity: 0.05
+    minOpacity: 0.03922 # 10/255
     delay: 1.5
     unCloakDelay: 1.5
     whitelist:

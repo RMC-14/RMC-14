@@ -29,6 +29,13 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: MarineOrders
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: wy_pilot
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
@@ -42,6 +49,9 @@
     shoes: RMCShoesLaceup
     jumpsuit: RMCJumpsuitLiaisonPilot
     outerClothing: RMCCoatWeYaPilot
+  storage:
+    back:
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: RMCSurvivorPresetCorporate

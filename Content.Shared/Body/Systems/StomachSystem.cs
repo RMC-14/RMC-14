@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Body.Organ;
@@ -14,6 +15,9 @@ namespace Content.Shared.Body.Systems
     {
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+
+        // RMC14
+        [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
 
         public const string DefaultSolutionName = "stomach";
 
@@ -76,7 +80,11 @@ namespace Content.Shared.Body.Systems
                                 reagent = new(reagent.Reagent, delta.ReagentQuantity.Quantity);
 
                             stomachSolution.RemoveReagent(reagent);
-                            transferSolution.AddReagent(reagent);
+
+                            // RMC14
+                            if (_rmcReagent.CanBeIngested(reagent.Reagent))
+                                transferSolution.AddReagent(reagent);
+                            // RMC14
                         }
 
                         queue.Add(delta);

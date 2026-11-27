@@ -25,10 +25,12 @@ using Content.Shared.Doors.Components;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.Hands;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Jittering;
@@ -85,6 +87,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly RMCTemporaryInvincibilitySystem _invincibility = default!;
 
     private const CollisionGroup LeapCollisionGroup = CollisionGroup.InteractImpassable;
     private const CollisionGroup ThrownCollisionGroup = CollisionGroup.InteractImpassable | CollisionGroup.BarricadeImpassable;
@@ -114,6 +117,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, XenoLeapStoppedEvent>(OnParasiteLeapStopped);
         SubscribeLocalEvent<XenoParasiteComponent, ThrownEvent>(OnParasiteThrown);
         SubscribeLocalEvent<XenoParasiteComponent, LandEvent>(OnParasiteLand);
+        SubscribeLocalEvent<XenoParasiteComponent, DroppedEvent>(OnParasiteDrop);
 
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
@@ -203,7 +207,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (args.Cancelled || args.Handled || args.Target == null)
             return;
 
-        if (Infect(ent, args.Target.Value))
+        if (Infect(ent, args.Target.Value, user: args.User))
             args.Handled = true;
     }
 
@@ -325,6 +329,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-leap-blocked"), Transform(ent).Coordinates, ent);
                 args.Cancelled = true;
+                _tagSystem.RemoveTag(ent, ParasiteIsPreparingLeapProtoID);
+                _rmcSprite.UpdateDrawDepth(ent);
+
+                foreach (var action in _rmcActions.GetActionsWithEvent<XenoHideActionEvent>(ent))
+                {
+                    _action.SetEnabled(action.AsNullable(), true);
+                }
                 return;
             }
         }
@@ -494,9 +505,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (!CanInfectPopup(parasite, victim, user))
             return false;
 
-        if (_net.IsServer && TryComp<ActorComponent>(user, out var actor))
-            parasite.Comp.PendingInfectorUserId = actor.PlayerSession.UserId;
-
         var ev = new AttachParasiteDoAfterEvent();
         var delay = parasite.Comp.ManualAttachDelay;
 
@@ -569,7 +577,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         return true;
     }
 
-    public bool Infect(Entity<XenoParasiteComponent> parasite, EntityUid victim, bool popup = true, bool force = false)
+    public bool Infect(Entity<XenoParasiteComponent> parasite, EntityUid victim, bool popup = true, bool force = false, EntityUid? user = null)
     {
         if (!CanInfectPopup(parasite, victim, parasite, popup, force))
             return false;
@@ -577,8 +585,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (!TryComp(victim, out InfectableComponent? infectable))
             return false;
 
-        if (_net.IsServer && TryComp<ActorComponent>(parasite, out var infector))
-            parasite.Comp.PendingInfectorUserId = infector.PlayerSession.UserId;
+        if (_net.IsServer)
+        {
+            var direct = user == null || user == parasite.Owner;
+            parasite.Comp.PendingInfectorUserId = direct && TryComp<ActorComponent>(parasite, out var infector)
+                ? infector.PlayerSession.UserId
+                : null;
+        }
 
         if (_net.IsServer)
         {
@@ -764,8 +777,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
             {
                 SpawnLarva((uid, infected), out var spawnedLarva);
+                var burstVictimUserId = HasComp<XenoNestedComponent>(uid) ? infected.VictimUserId : null;
                 var priorityEv = new XenoBurstPriorityEvent(
-                    infected.VictimUserId,
+                    burstVictimUserId,
                     infected.InfectorUserId,
                     GetNetEntity(infected.Hive),
                     GetNetEntity(spawnedLarva));
@@ -995,9 +1009,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             foreach (var larva in container.ContainedEntities)
             {
                 RemCompDeferred<BursterComponent>(larva);
-                var invc = EnsureComp<RMCTemporaryInvincibilityComponent>(larva);
-                invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
-                Dirty(larva, invc);
+                _invincibility.GiveInvincibility(larva, ent.Comp.LarvaInvincibilityTime);
             }
 
             _container.EmptyContainer(container, destination: coords);
@@ -1129,6 +1141,16 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         EnsureComp<BursterComponent>(spawned, out var burster);
         burster.BurstFrom = victim.Owner;
         Dirty(spawned, burster);
+    }
+
+    private void OnParasiteDrop(Entity<XenoParasiteComponent> ent, ref DroppedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.User))
+            return;
+
+        var cooldown = EnsureComp<ParasiteDropCooldownComponent>(args.User);
+        cooldown.NextDropTime = _timing.CurTime + ent.Comp.DropCooldown;
+        Dirty(args.User, cooldown);
     }
 }
 

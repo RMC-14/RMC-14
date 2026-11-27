@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Stealth;
 
@@ -7,9 +7,6 @@ public sealed partial class EntityTurnInvisibleComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Enabled;
-
-    [DataField, AutoNetworkedField]
-    public float Opacity = 1f;
 
     [DataField, AutoNetworkedField]
     public bool RestrictWeapons;

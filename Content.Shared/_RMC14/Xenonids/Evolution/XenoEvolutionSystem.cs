@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.JoinXeno;
@@ -76,6 +77,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private TimeSpan _evolutionAccumulatePointsBefore;
     private TimeSpan _evolveSameCasteCooldown;
     private TimeSpan _earlyEvoBoostBefore;
+    private TimeSpan _queenRequirementGracePeriod;
     private const string RaffleGraceHealth = "rmc-xeno-evolution-raffle-grace-health";
 
     private readonly TimeSpan _raffleGracePeriod = TimeSpan.FromSeconds(30);
@@ -131,6 +133,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEvolveSameCasteCooldownSeconds, v => _evolveSameCasteCooldown = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEarlyEvoPointBoostBeforeMinutes, v => _earlyEvoBoostBefore = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCXenoQueenRequirementGracePeriodMinutes, v => _queenRequirementGracePeriod = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -244,6 +247,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             Log.Warning($"{ToPrettyString(actor)} sent an invalid strain choice: {args.Choice}.");
             return;
         }
+
+        if (!BanishedCheckPopup(xeno, false))
+            return;
 
         if (!ContainedCheckPopup(xeno))
             return;
@@ -385,7 +391,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
     }
 
-    private bool ContainedCheckPopup(EntityUid xeno, bool doPopup = true)
+    public bool ContainedCheckPopup(EntityUid xeno, bool doPopup = true)
     {
         if (!_container.IsEntityInContainer(xeno))
             return true;
@@ -396,7 +402,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
-    private bool DamagedCheckPopup(EntityUid xeno, bool predicted = true, bool doPopup = true)
+    public bool DamagedCheckPopup(EntityUid xeno, bool predicted = true, bool doPopup = true)
     {
         if (!TryComp(xeno, out DamageableComponent? damageable) ||
             damageable.TotalDamage <= 1)
@@ -410,8 +416,27 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
+    private bool BanishedCheckPopup(EntityUid xeno, bool predicted = true, bool doPopup = true)
+    {
+        if (!HasComp<XenoBanishComponent>(xeno))
+            return true;
+
+        if (!doPopup)
+            return false;
+
+        if (predicted)
+            _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-failed-banished"), xeno, xeno, PopupType.MediumCaution);
+        else
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-banished"), xeno, xeno, PopupType.MediumCaution);
+
+        return false;
+    }
+
     private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true, bool ignoreEvolvesTo = false, List<XenoTierReservation>? reserved = null, bool ignoreFixable = false)
     {
+        if (!BanishedCheckPopup(xeno, false, doPopup))
+            return false;
+
         var isEarlyEvo = xeno.Comp.EarlyEvolvesTo.Contains(newXeno);
         if (!ignoreEvolvesTo &&
             !xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno) && !isEarlyEvo)
@@ -437,11 +462,43 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!ignoreFixable && !ContainedCheckPopup(xeno, doPopup))
             return false;
 
-        if (prototype.HasComponent<XenoEvolutionGranterComponent>(_compFactory) && HiveHasLivingQueen(xeno.Owner))
+        if (prototype.HasComponent<XenoEvolutionGranterComponent>(_compFactory))
         {
-            if (doPopup)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-queen-exists"), xeno, xeno, PopupType.MediumCaution);
-            return false;
+            if (HiveHasLivingQueen(xeno.Owner))
+            {
+                if (doPopup)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-queen-exists"), xeno, xeno, PopupType.MediumCaution);
+                return false;
+            }
+
+            var queenEvolvableAt = _xenoHive.GetHive(xeno.Owner) is { } hive
+                ? hive.Comp.NewQueenAt ?? _gameTicker.RoundStartTimeSpan
+                : _gameTicker.RoundStartTimeSpan;
+
+            var graceLeft = queenEvolvableAt + _queenRequirementGracePeriod - _timing.CurTime;
+            if (graceLeft > TimeSpan.Zero)
+            {
+                var allowedEv = new XenoEvolveQueenAllowedEvent(xeno.Owner);
+                RaiseLocalEvent(ref allowedEv);
+                if (!allowedEv.Allowed)
+                {
+                    if (doPopup)
+                    {
+                        var msg = Loc.GetString("rmc-xeno-evolution-failed-queen-requirement-minutes",
+                            ("minutes", graceLeft.Minutes),
+                            ("seconds", graceLeft.Seconds));
+                        if (graceLeft.Minutes == 0)
+                        {
+                            msg = Loc.GetString("rmc-xeno-evolution-failed-queen-requirement-seconds",
+                                ("seconds", graceLeft.Seconds));
+                        }
+
+                        _popup.PopupEntity(msg, xeno, xeno, PopupType.MediumCaution);
+                    }
+
+                    return false;
+                }
+            }
         }
 
         // TODO RMC14 revive jelly when added should not bring back dead queens
@@ -565,8 +622,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return true;
 
         var existing = 0;
-        var total = Math.Sqrt(hive.Comp.BurrowedLarva * hive.Comp.BurrowedLarvaSlotFactor);
-        total = Math.Min(total, hive.Comp.BurrowedLarva);
+        var total = hive.Comp.BurrowedLarva;
 
         var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
         var slotCount = hive.Comp.FreeSlots.ToDictionary();
@@ -984,7 +1040,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             Dirty(cand);
             reserved.Add(reservation);
             _popup.PopupEntity(
-                Loc.GetString(reason, ("seconds", (int) _raffleGracePeriod.TotalSeconds)),
+                Loc.GetString(reason, ("seconds", (int)_raffleGracePeriod.TotalSeconds)),
                 cand.Owner,
                 cand.Owner,
                 PopupType.LargeCaution);
@@ -1318,6 +1374,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)
     {
+        if (!BanishedCheckPopup(xeno))
+            return;
+
         if (damagedCheck && !DamagedCheckPopup(xeno))
             return;
 
@@ -1333,13 +1392,19 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return null;
         }
 
+        return DevolveInto(xeno, to);
+    }
+
+    /// Devolves a xeno into any prototype, without checking its <see cref="XenoDevolveComponent.DevolvesTo"/>.
+    public EntityUid DevolveInto(EntityUid xeno, EntProtoId to)
+    {
         var newXeno = TransferXeno(xeno, to);
         var ev = new XenoDevolvedEvent(xeno, newXeno);
         RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
 
-        Del(xeno.Owner);
+        Del(xeno);
 
         var afterEv = new AfterNewXenoEvolvedEvent();
         RaiseLocalEvent(newXeno, ref afterEv);

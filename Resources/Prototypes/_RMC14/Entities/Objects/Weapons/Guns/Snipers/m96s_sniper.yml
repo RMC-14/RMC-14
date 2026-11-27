@@ -87,6 +87,11 @@
       Urban: _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
   - type: RMCGunChamber
     enabled: false
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-m96s
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BaseItem
@@ -126,6 +131,13 @@
   - type: Clothing
     slots:
     - suitStorage
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: CMMagazineSniperM96SEmpty
+  suffix: empty
+  components:
+    - type: RMCEmptyMag
 
 - type: entity
   parent: CMMagazineSniperM96S
@@ -214,6 +226,8 @@
   - type: AimedShotEffect
     extraHits: 2
   - type: IgnoreSwiftSteps
+  - type: ProjectileCoverInteraction
+    ignoreCover: true
 
 - type: entity
   parent: CMBulletSniper10x28mm

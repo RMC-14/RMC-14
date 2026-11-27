@@ -197,7 +197,7 @@
   id: RMCCommandingOfficerEssentialsBundle
   categories: [ HideSpawnMenu ]
   name: Commanding Officer Essentials kit
-  description: Contains a laser designator, whistle, and a disabler.
+  description: Contains a laser designator, whistle and a disabler.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -215,7 +215,7 @@
   id: RMCVendorBundleCrewCombatCorrespondent
   categories: [ HideSpawnMenu ]
   name: Essential Reporter's Set
-  description: Contains a flashlight, binoculars, a clipboard, and a pen. #TODO a tape recorder, a notepad, and a pen
+  description: Contains a flashlight, binoculars, a clipboard, and a pen.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
@@ -225,7 +225,7 @@
     - RMCFlashlight
     - CMPen
     - RMCBinoculars
-    - CMClipboard # notepad
+    - CMClipboard #TODO RMC14 Notepad
     - RMCUniversalRecorder
 
 - type: entity

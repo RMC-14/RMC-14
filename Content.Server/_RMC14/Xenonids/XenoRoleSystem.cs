@@ -1,10 +1,13 @@
+using Content.Server._RMC14.PlayTimeTracking;
 using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared._RMC14.Xenonids.Rank;
@@ -31,11 +34,15 @@ public sealed class XenoRoleSystem : EntitySystem
     [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private readonly RMCPlayTimeManager _rmcPlaytime = default!;
+    [Dependency] private readonly QueenEyeSystem _queenEye = default!;
     [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private TimeSpan _disconnectedXenoGhostRoleTime;
+    private float _larvaRankScaleFactor = 1.0f;
 
+    // TODO RMC14 you know what you have to do
     private TimeSpan _rankTwoTime;
     private TimeSpan _rankThreeTime;
     private TimeSpan _rankFourTime;
@@ -46,6 +53,8 @@ public sealed class XenoRoleSystem : EntitySystem
     private TimeSpan _rankNineTime;
 
     private readonly List<Entity<XenoComponent>> _toUpdate = new();
+
+    private readonly ProtoId<JobPrototype> _larvaJobProtoId = "CMXenoLarva";
 
     public override void Initialize()
     {
@@ -61,6 +70,9 @@ public sealed class XenoRoleSystem : EntitySystem
 
         SubscribeLocalEvent<XenoRankComponent, RefreshNameModifiersEvent>(OnRankRefreshName, before: new[] { typeof(SharedXenoNameSystem) });
 
+        SubscribeLocalEvent<XenoEvolveQueenAllowedEvent>(OnXenoEvolveQueenAllowed);
+
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeLarvaRankScaleFactor, v => _larvaRankScaleFactor = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _rankTwoTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _rankFourTime = TimeSpan.FromHours(v), true);
@@ -114,6 +126,8 @@ public sealed class XenoRoleSystem : EntitySystem
 
         if (args.Hive is {} newHive)
             _pvsOverride.AddForceSend(newHive, session);
+
+        _queenEye.ReconcileViewerToActiveEyes(ent.Owner);
     }
 
     private void OnRankRefreshName(Entity<XenoRankComponent> ent, ref RefreshNameModifiersEvent args)
@@ -132,13 +146,34 @@ public sealed class XenoRoleSystem : EntitySystem
         args.AddModifier(rank.Value);
     }
 
+    private void OnXenoEvolveQueenAllowed(ref XenoEvolveQueenAllowedEvent ev)
+    {
+        if (!TryComp(ev.Xeno, out ActorComponent? actor))
+            return;
+
+        if (!_playTime.IsAllowed(actor.PlayerSession, "CMXenoQueen"))
+            ev.Allowed = false;
+    }
+
     private void UpdateRank(EntityUid xeno, ICommonSession player, string jobId, HumanoidCharacterProfile profile)
     {
         if (!HasComp<XenoComponent>(xeno))
             return;
 
         var time = TimeSpan.Zero;
-        if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
+        if (jobId == _larvaJobProtoId)
+        {
+            // Larva's rank is determined by TOTAL xeno playtime, NOT larva playtime, adjusted by scale factor
+            try
+            {
+                time = _rmcPlaytime.GetTotalXenoPlaytime(player) / _larvaRankScaleFactor;
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error reading total xeno playtime:\n{e}");
+            }
+        }
+        else if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
             _playTimeManager.TryGetTrackerTime(player, job.PlayTimeTracker, out var nullableTime))
         {
             time = nullableTime.Value;

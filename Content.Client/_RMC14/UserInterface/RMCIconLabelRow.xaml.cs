@@ -13,9 +13,9 @@ public sealed partial class RMCIconLabelRow : BoxContainer
         RobustXamlLoader.Load(this);
     }
 
-    public void SetIcon(string path)
+    public void SetIcon(string icon)
     {
-        Icon.SetIcon(path);
+        Icon.SetIcon(icon);
     }
 
     public void SetHovered(bool hovered)
