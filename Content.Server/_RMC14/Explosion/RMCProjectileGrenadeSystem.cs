@@ -2,9 +2,9 @@ using Content.Server.Explosion.Components;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Mobs.Components;
@@ -61,11 +61,13 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
         if (ent.Comp.DirectHit && args.ShootCount == 0)
         {
             _hitEntities.Clear();
-            var directHit = DirectHit(ent, args.ContentUid, args.TotalCount);
+            //Pass in unspawned count only - doesn't work for contained stuff
+            var directHit = DirectHit(ent, args.ContentUid, ent.Comp.UnspawnedCount);
             if (directHit != null)
             {
+                args.ProjectDirectHitted = _hitEntities.Count > 0;
                 args.HitEntities = _hitEntities;
-                args.TotalCount = directHit.Value;
+                args.TotalCount = args.TotalCount + (directHit.Value - args.UnSpawnedCount);
             }
         }
 
@@ -92,9 +94,11 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     }
 
     // Directly hit any entities close enough to the grenade.
-    private int? DirectHit(Entity<ProjectileGrenadeComponent> ent, EntityUid payloadUid,  int projectileCount)
+    private int? DirectHit(Entity<ProjectileGrenadeComponent> ent, EntityUid payloadUid, int projectileCount)
     {
-        if (!TryComp(payloadUid, out ProjectileComponent? projectile))
+        var possibleDirectHits = ent.Comp.DirectHitProjectiles - 1; //Minus one to count ourselves
+
+        if (!TryComp(payloadUid, out ProjectileComponent? projectile) || possibleDirectHits <= 0)
             return null;
 
         var nearbyEntities = _entityLookup.GetEntitiesInRange<MobStateComponent>(Transform(ent).Coordinates, 0.5f);
@@ -105,20 +109,29 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
             if (_mobState.IsDead(entity))
                 continue;
 
-            // Deal damage directly and remove projectiles from the grenade
-            // -1 as the currently spawned projectile counts
-            var newProjectileCount = projectileCount - ent.Comp.DirectHitProjectiles - 1;
-            var damage = projectile.Damage * ent.Comp.DirectHitProjectiles;
-            if (newProjectileCount < 0)
-                damage += projectile.Damage * newProjectileCount;
+            var directHitProjectileCount = Math.Min(projectileCount, possibleDirectHits);
+
+            projectileCount -= directHitProjectileCount;
+            ent.Comp.UnspawnedCount = projectileCount;
 
             if (TryComp(payloadUid, out CMArmorPiercingComponent? armorPiercingComp))
                 armorPiercing = armorPiercingComp.Amount;
 
-            projectileCount = Math.Max(newProjectileCount, 0);
+            var damage = projectile.Damage;
 
-            if (!HasComp<XenoProjectileComponent>(ent) || !_hive.FromSameHive(ent.Owner, entity.Owner))
-                _damage.TryChangeDamage(entity, damage, armorPiercing: armorPiercing);
+            var rev = new RMCClusterDirectHitEvent(payloadUid, entity, ent);
+            RaiseLocalEvent(ent, ref rev);
+
+            for (int i = 0; i < directHitProjectileCount; i++)
+            {
+                var ev = new ProjectileHitEvent(damage, entity, projectile.Shooter);
+                RaiseLocalEvent(payloadUid, ref ev);
+
+                if (ev.Handled)
+                    continue;
+
+                _damage.TryChangeDamage(entity, ev.Damage, armorPiercing: armorPiercing, origin: projectile.Shooter, tool: ent);
+            }
 
             // Make sure the leftover projectiles don't hit the entity that was hit directly
             if (!TryComp(entity, out UserLimitHitsComponent? limit))
@@ -126,9 +139,9 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
 
             _hitEntities.Add(entity);
             limit.HitBy.Add(new Hit(ent.Owner.Id, _timing.CurTime + limit.Expire, null));
-            Dirty(entity,limit);
+            Dirty(entity, limit);
 
-            if(projectileCount == 0)
+            if (projectileCount == 0)
                 break;
         }
 
@@ -149,4 +162,4 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
 ///     Raised when a projectile grenade is being triggered
 /// </summary>
 [ByRefEvent]
-public record struct FragmentIntoProjectilesEvent(EntityUid ContentUid, int TotalCount, Angle Angle, int ShootCount, List<EntityUid> HitEntities, bool Handled = false);
+public record struct FragmentIntoProjectilesEvent(EntityUid ContentUid, int TotalCount, int UnSpawnedCount, Angle Angle, int ShootCount, List<EntityUid> HitEntities, bool Handled = false, bool ProjectDirectHitted = false);

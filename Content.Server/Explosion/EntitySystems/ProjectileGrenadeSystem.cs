@@ -66,7 +66,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
 
         // RMC14 it was sometimes dividing by 0.
-        if(totalCount <= 0)
+        if (totalCount <= 0)
             return;
 
         var hitEntities = new List<EntityUid>();
@@ -75,7 +75,9 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
         {
+            //RMC14
             _spawned.Add(contentUid);
+
             Angle angle;
             if (component.RandomAngle)
                 angle = _random.NextAngle();
@@ -85,20 +87,13 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 var angleMax = segmentAngle * (shootCount + 1);
                 angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
 
-                // RMC14
-                var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, angle, shootCount, hitEntities);
+                // RMC14 - only works for spawner grenades
+                var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, component.UnspawnedCount, angle, shootCount, hitEntities);
                 RaiseLocalEvent(uid, ref ev);
 
+                if (ev.TotalCount <= 0 || ev.ProjectDirectHitted)
+                    continue;
 
-                // RMC14 Note: breaks for container projectile nades that don't just
-                // spawn stuff
-                // this probably should be refactored to work better at some point
-                // this is needed so the spawn contents code doesn't keep running after a direct hit
-                // eats them all
-                component.UnspawnedCount = ev.TotalCount;
-
-                if (ev.TotalCount <= 0)
-                    break;
                 if (ev.Handled)
                 {
                     hitEntities = ev.HitEntities;
