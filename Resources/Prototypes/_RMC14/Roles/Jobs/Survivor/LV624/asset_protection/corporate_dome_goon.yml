@@ -6,8 +6,6 @@
   playTimeTracker: CMJobSurvivor
   spawnMenuRoleName: We-Ya Goon (LV624 Special Survivor)
   icon: "RMCJobIconPMCGoonStandard"
-  ranks:
-    RMCRankCivilianOfficer: []
   greeting: rmc-job-greeting-corporate-dome-goon
 
 - type: entity

@@ -1,3 +1,23 @@
+# Corporate Security (Goonsquad)
+- type: rank
+  id: RMCRankWeYaSecurity
+  name: Corporate Security Officer
+  prefix: Off.
+  paygrade: WY-SEC
+
+- type: rank
+  id: RMCRankWeYaSeniorSecurity
+  name: Senior Corporate Security Officer
+  prefix: Sr. Off.
+  paygrade: WY-SEC-SPEC
+
+- type: rank
+  id: RMCRankWeYaSecurityLead
+  name: Corporate Security Sergeant
+  prefix: CSSgt.
+  paygrade: WY-SEC-LEAD
+
+# Executive Bodyguard
 - type: rank
   id: RMCRankWeYaBodyguardTPPO
   name: Trainee Personal Protection Officer

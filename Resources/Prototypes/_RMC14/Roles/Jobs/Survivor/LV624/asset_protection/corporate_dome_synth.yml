@@ -10,7 +10,7 @@
   greeting: rmc-job-greeting-corporate-dome-goon
   hasIcon: true
   ranks:
-    RMCRankCivilianOfficer: []
+    RMCRankWeYaSeniorSecurity: []
   special:
   - !type:AddComponentSpecial
     components:
