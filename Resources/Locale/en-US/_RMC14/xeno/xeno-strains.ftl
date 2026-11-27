@@ -212,6 +212,7 @@ rmc-xeno-destrain-cooldown = We lack the strength to reset our strain. We will b
 rmc-xeno-witch-name = Witch
 rmc-xeno-witch-description = You shall make a stew so wicked and shrew! Command your army of cursed children to turn talls into your greatest brew!
 rmc-xeno-witch-popup = Muwahahahah!
+
 rmc-xeno-bloodqueen-name = Blood Queen
 rmc-xeno-bloodqueen-description = You lose:
   - Your queen level pheromones are replaced with strong pheromones.
