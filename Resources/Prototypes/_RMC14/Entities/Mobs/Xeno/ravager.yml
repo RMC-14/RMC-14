@@ -307,9 +307,6 @@
     maxDeviation: 60
   - type: XenoShard
   - type: Appearance
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 1.8
-    baseSprintSpeed: 3.2
   - type: MeleeWeapon
     damage:
       groups:
