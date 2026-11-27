@@ -100,7 +100,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCCondimentCornOil
+    - id: RMCCondimentCornmeal
       amount: 7
 
 - type: entity
