@@ -133,6 +133,11 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
                 _damage.TryChangeDamage(entity, ev.Damage, armorPiercing: armorPiercing, origin: projectile.Shooter, tool: payloadUid);
             }
 
+            // For direct hits ignore the payload counting towards a limit
+            // As it should hit this entity after the cluster logic is done
+            var limitHits = EnsureComp<ProjectileLimitHitsComponent>(payloadUid);
+            limitHits.IgnoredEntities.Add(entity);
+
             // Make sure the leftover projectiles don't hit the entity that was hit directly
             if (!TryComp(entity, out UserLimitHitsComponent? limit))
                 continue;

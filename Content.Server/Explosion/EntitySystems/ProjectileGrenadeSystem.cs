@@ -86,22 +86,22 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 var angleMin = segmentAngle * shootCount;
                 var angleMax = segmentAngle * (shootCount + 1);
                 angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+            }
 
-                // RMC14 - only works for spawner grenades
-                var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, component.UnspawnedCount, angle, shootCount++, hitEntities);
-                RaiseLocalEvent(uid, ref ev);
+            // RMC14 - only works for spawner grenades
+            var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, component.UnspawnedCount, angle, shootCount++, hitEntities);
+            RaiseLocalEvent(uid, ref ev);
 
-                if (ev.TotalCount <= 0)
-                    break;
+            if (ev.TotalCount <= 0)
+                break;
 
-                if (ev.ProjectDirectHitted)
-                    continue;
+            if (ev.ProjectDirectHitted)
+                continue;
 
-                if (ev.Handled)
-                {
-                    hitEntities = ev.HitEntities;
-                    angle = ev.Angle;
-                }
+            if (ev.Handled)
+            {
+                hitEntities = ev.HitEntities;
+                angle = ev.Angle;
             }
 
             // RMC14
