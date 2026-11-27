@@ -1591,7 +1591,6 @@ RMCCartridgeRifleM16: RMCCartridgeRifleCR16
 RMCSpawnPointSurvivorHalcyonDynamicsLiaison: RMCSpawnPointSurvivorHalcyonLiaison
 
 #2026-11-28
-CMRoyalMarinesTeamlead: CMRoyalMarinesTeamLeader
 CMSpawnPointRCMPVEMedicalTechnician: CMSpawnPointRCMPVEMedicalAssistant
 RMCBackpackRCMSmallPVPTeamlead: RMCBackpackRCMSmallPVPTeamLeader
 RMCDecalTSETeamLead: RMCDecalTSETeamLeader

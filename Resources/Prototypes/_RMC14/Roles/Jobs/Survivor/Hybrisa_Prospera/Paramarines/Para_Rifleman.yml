@@ -37,7 +37,7 @@
       - type: AssignSquad
         squad: SquadPara
       - type: JobPrefix
-        prefix: rmc-job-prefix-paramarine
+        prefix: rmc-job-prefix-rcm-commando
       - type: EquipSurvivorPreset
         preset: RMCGearSurvivorPresetPara
   hidden: true

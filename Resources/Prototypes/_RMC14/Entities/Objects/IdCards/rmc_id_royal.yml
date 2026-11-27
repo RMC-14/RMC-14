@@ -179,7 +179,7 @@
   name: Medical Assistant's dogtags
   components:
   - type: PresetIdCard
-    job: RMCSurvivorParaMedicalTechnician
+    job: RMCSurvivorParaMedicalAssistant
 
 - type: entity
   parent: RMCIDRoyalMarines
