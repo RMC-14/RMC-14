@@ -530,4 +530,5 @@ public enum LogType
     RMCMentorHelp = RMCMarineAnnounce + 48,
     RMCXenoBanish = RMCMarineAnnounce + 49,
     RMCXenoReadmit = RMCMarineAnnounce + 50,
+    RMCDropshipAutopilot = RMCMarineAnnounce + 51,
 }

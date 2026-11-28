@@ -12,6 +12,20 @@ rmc-dropship-no-remote-control = This dropship does not have remote-control enab
 rmc-dropship-busy = This dropship is currently busy. Please try again later.
 rmc-dropship-now-on-its-way = This dropship is now on its way.
 
+rmc-dropship-autopilot-enabled = Dropship autopilot enabled.
+rmc-dropship-autopilot-disabled = Dropship autopilot disabled.
+rmc-dropship-autopilot-error-occupied = Selected landing zone is occupied.
+rmc-dropship-autopilot-status-detail-hangar-occupied = Selected hangar is occupied.
+rmc-dropship-autopilot-status-detail-select-lz = Select a valid planet landing zone.
+rmc-dropship-autopilot-status-detail-lz-occupied = Selected landing zone is occupied.
+rmc-dropship-remote-on-way = This dropship is now on its way.
+rmc-dropship-remote-route-not-set = Not set
+rmc-dropship-remote-ui-flight-status = Selected Dropship
+rmc-dropship-remote-ui-mode = Mode
+rmc-dropship-remote-ui-enable = Enable autopilot
+rmc-dropship-remote-ui-from = Route hangar: {$hangar}
+rmc-dropship-remote-ui-autopilot-status = Autopilot: {$status} - {$details}
+rmc-dropship-remote-ui-autopilot-status-simple = Autopilot: {$status}
 rmc-dropship-weapons-title = Weapons Console
 
 rmc-dropship-weapons-main-screen-text = U.N.M.C.

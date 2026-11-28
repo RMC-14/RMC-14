@@ -188,6 +188,18 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCDropshipHijackTravelTimeSeconds =
         CVarDef.Create("rmc.dropship_hijack_travel_time_seconds", 180, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCDropshipAutopilotDefaultDelaySeconds =
+        CVarDef.Create("rmc.dropship_autopilot_default_delay_seconds", 30, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipAutopilotMinDelaySeconds =
+        CVarDef.Create("rmc.dropship_autopilot_min_delay_seconds", 10, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipAutopilotMaxDelaySeconds =
+        CVarDef.Create("rmc.dropship_autopilot_max_delay_seconds", 120, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipAutopilotRetrySeconds =
+        CVarDef.Create("rmc.dropship_autopilot_retry_seconds", 10, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<bool> RMCEntitiesLogDelete =
         CVarDef.Create("rmc.entities_log_delete", false, CVar.SERVER | CVar.SERVERONLY);
 
@@ -714,6 +726,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCGhostPropCalling =
         CVarDef.Create("rmc.ghost_prop_calling", false, CVar.SERVER | CVar.SERVERONLY);
 
+    public static readonly CVarDef<bool> RMCCrtThemeEnabled =
+        CVarDef.Create("rmc.crt_theme_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCCrtEffectsEnabled =
+        CVarDef.Create("rmc.crt_effects_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<float> BurrowedLarvaHiveCoreInvincibilityTimeSeconds =
         CVarDef.Create("rmc.burrowed_larva_hive_core_invincibility_time_seconds", 1f, CVar.REPLICATED | CVar.SERVER);
 
@@ -722,6 +740,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> BurrowedLarvaFallbackInvincibilityTimeSeconds =
         CVarDef.Create("rmc.burrowed_larva_fallback_invincibility_time_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
+
     /// <summary>
     /// How many entities to damage/delete per tick after nukemap/scuttle.
     /// </summary>

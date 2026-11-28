@@ -56,6 +56,11 @@
     light_whitepoint: 1.0
 
 - type: shader
+  id: RMCCrtUiEffects
+  kind: source
+  path: "/Textures/_RMC14/Shaders/crt_ui.swsl"
+
+- type: shader
   id: RMCMarineAnnouncementGrid
   kind: source
   path: "/Textures/_RMC14/Shaders/marine_announce_grid.swsl"
