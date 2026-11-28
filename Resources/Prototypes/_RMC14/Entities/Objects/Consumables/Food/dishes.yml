@@ -10,7 +10,7 @@
     storedRotation: -90
   - type: Food
   - type: Sprite
-    sprite: _RMC14\Objects\Consumable\Food\testing.rsi
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
   - type: SolutionContainerManager
     solutions:
       food:
