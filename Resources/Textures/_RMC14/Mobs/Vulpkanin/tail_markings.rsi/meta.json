@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/DeltaV-Station/Delta-v/commit/65d35d0b3c20aa4e8a0e749a4de8392e53051e86, tail-wag-icon and corgi and dalmation created by PursuitInAshes based off of 'vulp'. Fluffy created by Skarletto (Github), wagging animation by TiniestShark (Github)",
+  "copyright": "Taken from https://github.com/DeltaV-Station/Delta-v/commit/65d35d0b3c20aa4e8a0e749a4de8392e53051e86, tail-wag-icon and corgi and dalmation created by PursuitInAshes based off of 'vulp'. Fluffy created by Skarletto (Github), wagging animation from Aurora's Song by TiniestShark (Github)",
   "size": {"x": 32, "y": 32},
   "states": [
     {
@@ -137,11 +137,52 @@
       "name": "fluffy",
       "directions": 4
     },
-
     {
-        "name": "fluffy-wag",
-       "directions": 4,
-       "delays":  [[0.2, 0.2, 0.2, 0.2, 0.2, 0.2], [0.2, 0.2, 0.2, 0.2, 0.2, 0.2], [0.2, 0.2, 0.2, 0.2, 0.2, 0.2], [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]]    },
+          "name": "fluffy_wag",
+          "directions": 4,
+          "delays": [
+              [
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3
+              ],
+              [
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3
+              ],
+              [
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3
+              ],
+              [
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3,
+                  0.3
+              ]
+          ]
+      },
     {
       "name": "dalmatian_wag",
       "directions": 4,
