@@ -41,7 +41,6 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     {
         base.Initialize();
         SubscribeLocalEvent<OverwatchConsoleComponent, AfterAutoHandleStateEvent>(OnOverwatchAfterState);
-        SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIClosedEvent>(OnBUIClosed);
 
         SubscribeLocalEvent<OverwatchCameraAdjustOffsetMsg>(OnCameraAdjustOffset);
         SubscribeLocalEvent<OverwatchRelayedSoundComponent, ComponentRemove>(OnRelayedRemove);
@@ -100,10 +99,14 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         }
     }
 
-    private void OnBUIClosed(Entity<OverwatchConsoleComponent> ent, ref BoundUIClosedEvent args)
+    protected override void OnBUIClosed(Entity<OverwatchConsoleComponent> ent, ref BoundUIClosedEvent args)
     {
-        if (_player.LocalEntity is not { } local || _player.LocalSession is not { } session)
+        if (args.UiKey is not OverwatchConsoleUI.Key ||
+            _player.LocalEntity is not { } local || args.Actor != local ||
+            _player.LocalSession is not { } session)
+        {
             return;
+        }
 
         // Reset camera zoom/offset if pulled away from the overwatch console
         if (HasComp<BeingPulledComponent>(local))

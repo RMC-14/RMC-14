@@ -173,7 +173,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         RefreshConsoleState(ent);
     }
 
-    private void OnBUIClosed(Entity<OverwatchConsoleComponent> ent, ref BoundUIClosedEvent args)
+    protected virtual void OnBUIClosed(Entity<OverwatchConsoleComponent> ent, ref BoundUIClosedEvent args)
     {
         if (_net.IsClient || args.UiKey is not OverwatchConsoleUI.Key ||
             !TryComp(args.Actor, out ActorComponent? actor) ||
