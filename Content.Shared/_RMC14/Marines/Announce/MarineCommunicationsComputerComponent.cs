@@ -41,6 +41,15 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
     public EntProtoId<RMCAnnouncementPresetComponent>? AnnouncementOverlay = "RMCAnnouncementMarineCommand";
 
     [DataField, AutoNetworkedField]
+    public bool CanTransmitDistress = true;
+
+    [AutoNetworkedField]
+    public bool DistressBeaconEnabled;
+
+    [DataField, AutoNetworkedField]
+    public int DistressReasonLimit = 200;
+
+    [DataField, AutoNetworkedField]
     public string? AnnounceName;
 
     [DataField, AutoNetworkedField]

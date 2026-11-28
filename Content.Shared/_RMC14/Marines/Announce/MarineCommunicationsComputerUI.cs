@@ -18,6 +18,9 @@ public sealed class MarineCommunicationsEchoSquadMsg : BoundUserInterfaceMessage
 public sealed class MarineCommunicationsOverwatchMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class MarineCommunicationsDistressBeaconMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class MarineCommunicationsComputerMsg(string text) : BoundUserInterfaceMessage
 {
     public readonly string Text = text;

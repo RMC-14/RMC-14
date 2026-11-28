@@ -430,7 +430,7 @@
     contents:
     - id: RMCArmorProvostFlexi
     - id: RMCProvostClipboard
-    # TODO RMC14 provost office handheld beacon
+    - id: RMCHandheldDistressBeaconProvost
 
 - type: entity
   parent: CMSatchelSecurity
@@ -452,7 +452,7 @@
     contents:
     - id: RMCArmorProvostMarshal
     - id: RMCProvostClipboard
-    # TODO RMC14 provost office handheld beacon
+    - id: RMCHandheldDistressBeaconProvost
 
 - type: entity
   parent: CMSatchelSecurity
@@ -463,8 +463,8 @@
     contents:
     - id: RMCArmorProvostMarshal
     - id: RMCProvostClipboard
+    - id: RMCHandheldDistressBeaconProvost
     - id: RMCTabletCO
-    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -475,8 +475,8 @@
     contents:
     - id: RMCArmorProvostMarshal
     - id: RMCProvostClipboard
+    - id: RMCHandheldDistressBeaconProvost
     - id: RMCTabletCO
-    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity

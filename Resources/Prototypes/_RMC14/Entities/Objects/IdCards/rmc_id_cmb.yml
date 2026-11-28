@@ -33,6 +33,8 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/cmb_marshal.rsi
+  - type: PresetIdCard
+    job: CMBureauMarshal
 
 # for survs
 - type: entity

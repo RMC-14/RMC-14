@@ -220,7 +220,7 @@ entities:
     - type: Transform
       pos: 3.5,5.5
       parent: 2
-- proto: CMNormandyDoorAft
+- proto: RMCNormandyDoorAftMobileDock
   entities:
   - uid: 24
     components:

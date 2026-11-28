@@ -22,12 +22,11 @@ public sealed class DialogSystem : EntitySystem
 
     private void OnDialogOption(Entity<DialogComponent> ent, ref DialogOptionBuiMsg args)
     {
-        _ui.CloseUi(ent.Owner, DialogUiKey.Key);
-
         var index = args.Index;
-        if (index < 0 || !ent.Comp.Options.TryGetValue(index, out var option))
+        if (ent.Comp.DialogType != DialogType.Options || index < 0 || !ent.Comp.Options.TryGetValue(index, out var option))
             return;
 
+        _ui.CloseUi(ent.Owner, DialogUiKey.Key);
         var ev = new DialogChosenEvent(args.Actor, index);
         RaiseLocalEvent(ent, ref ev);
 
@@ -37,23 +36,27 @@ public sealed class DialogSystem : EntitySystem
 
     private void OnDialogInput(Entity<DialogComponent> ent, ref DialogInputBuiMsg args)
     {
-        _ui.CloseUi(ent.Owner, DialogUiKey.Key);
+        if (ent.Comp.DialogType != DialogType.Input)
+            return;
 
-        if (ent.Comp.InputEvent == null)
+        var inputEvent = ent.Comp.InputEvent;
+        _ui.CloseUi(ent.Owner, DialogUiKey.Key);
+        if (inputEvent == null)
             return;
 
         var msg = TrimToLimit(args.Input, ent.Comp.CharacterLimit, ent.Comp.SmartCheck);
-
-        ent.Comp.InputEvent = ent.Comp.InputEvent with { Message = msg };
-        RaiseLocalEvent(ent, (object) ent.Comp.InputEvent);
+        RaiseLocalEvent(ent, (object) (inputEvent with { Message = msg }));
     }
 
     private void OnDialogConfirm(Entity<DialogComponent> ent, ref DialogConfirmBuiMsg args)
     {
-        _ui.CloseUi(ent.Owner, DialogUiKey.Key);
+        if (ent.Comp.DialogType != DialogType.Confirm)
+            return;
 
-        if (ent.Comp.ConfirmEvent != null)
-            RaiseLocalEvent(ent, ent.Comp.ConfirmEvent);
+        var confirmEvent = ent.Comp.ConfirmEvent;
+        _ui.CloseUi(ent.Owner, DialogUiKey.Key);
+        if (confirmEvent != null)
+            RaiseLocalEvent(ent, confirmEvent);
     }
 
     private void OnDialogClosed(Entity<DialogComponent> ent, ref BoundUIClosedEvent args)
@@ -71,6 +74,9 @@ public sealed class DialogSystem : EntitySystem
         dialog.Message = new DialogOption(message);
         dialog.DialogType = DialogType.Options;
         dialog.Options = options;
+        dialog.Event = null;
+        dialog.InputEvent = null;
+        dialog.ConfirmEvent = null;
         dialog.EnableSearch = enableSearch;
         Dirty(target, dialog);
 
@@ -86,7 +92,9 @@ public sealed class DialogSystem : EntitySystem
     {
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Input;
-        dialog.Message = new DialogOption(message, ev);
+        dialog.Message = new DialogOption(message);
+        dialog.Event = null;
+        dialog.ConfirmEvent = null;
         dialog.InputEvent = ev;
         dialog.LargeInput = largeInput;
         dialog.CharacterLimit = characterLimit;
@@ -109,7 +117,9 @@ public sealed class DialogSystem : EntitySystem
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Confirm;
         dialog.Title = title;
-        dialog.Message = new DialogOption(message, ev);
+        dialog.Message = new DialogOption(message);
+        dialog.Event = null;
+        dialog.InputEvent = null;
         dialog.ConfirmEvent = ev;
         Dirty(target, dialog);
 
