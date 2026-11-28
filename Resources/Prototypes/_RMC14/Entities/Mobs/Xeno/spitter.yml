@@ -12,6 +12,11 @@
   description: A gross, oozing alien of some kind.
   abstract: true
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoSpit ]
+      XenoPrimaryTwo: [ ActionXenoChargeSpit ]
+      XenoPrimaryThree: [ ActionXenoSprayAcid ]
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Spitter/spitter.rsi
   - type: MobState

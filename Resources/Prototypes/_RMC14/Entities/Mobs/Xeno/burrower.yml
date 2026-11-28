@@ -11,6 +11,13 @@
   name: Burrower
   description: A beefy alien with sharp claws.
   components:
+  - type: RMCKeybindActions
+    actions:
+      XenoPrimaryOne: [ ActionXenoPlantWeeds ]
+      XenoPrimaryTwo: [ ActionXenoResinHole ]
+      XenoPrimaryThree: [ ActionXenoBurrow ]
+      XenoPrimaryFour: [ ActionXenoTremor ]
+      XenoPrimaryFive: [ ActionXenoOrderConstruction ]
   - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:

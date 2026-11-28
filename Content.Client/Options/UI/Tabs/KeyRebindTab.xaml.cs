@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._RMC14.Input;
 using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Input;
 using Content.Shared.CCVar;
@@ -136,12 +137,14 @@ namespace Content.Client.Options.UI.Tabs
                 });
             }
 
-            void AddButton(BoundKeyFunction function)
+            // RMC14
+            void AddButton(BoundKeyFunction function, string? description = null)
             {
-                var control = new KeyControl(this, function);
+                var control = new KeyControl(this, function, description);
                 KeybindsContainer.AddChild(control);
                 _keyControls.Add(function, control);
             }
+            // RMC14
 
             void AddCheckBox(string checkBoxName, bool currentState, Action<BaseButton.ButtonToggledEventArgs>? callBackOnClick)
             {
@@ -164,37 +167,17 @@ namespace Content.Client.Options.UI.Tabs
                 KeybindsContainer.AddChild(newCheckBox);
             }
 
-            AddHeader("ui-options-header-rmc");
-            AddButton(CMKeyFunctions.RMCActivateAttachableBarrel);
-            AddButton(CMKeyFunctions.RMCActivateAttachableRail);
-            AddButton(CMKeyFunctions.RMCActivateAttachableStock);
-            AddButton(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
-            AddButton(CMKeyFunctions.RMCFieldStripHeldItem);
-            AddButton(CMKeyFunctions.RMCCycleFireMode);
-            AddButton(CMKeyFunctions.RMCToggleShotgunTube);
-            AddButton(CMKeyFunctions.CMUniqueAction);
-            AddButton(CMKeyFunctions.CMHolsterPrimary);
-            AddButton(CMKeyFunctions.CMHolsterSecondary);
-            AddButton(CMKeyFunctions.CMHolsterTertiary);
-            AddButton(CMKeyFunctions.CMHolsterQuaternary);
-            AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
-            AddButton(CMKeyFunctions.RMCInteractWithOtherHand);
-            // RMC14 start
-            AddButton(CMKeyFunctions.RMCPushup);
-            AddButton(CMKeyFunctions.RMCPushupRoutine);
-            AddButton(CMKeyFunctions.RMCWeakPushup);
-            // RMC14 end
-            AddButton(CMKeyFunctions.RMCRest);
-            AddButton(CMKeyFunctions.RMCResist);
-            AddButton(CMKeyFunctions.RMCOpenLanguageMenu);
-            AddButton(CMKeyFunctions.RMCCycleLanguage);
-
-            AddHeader("ui-options-header-rmc-xeno");
-            AddButton(CMKeyFunctions.CMXenoWideSwing);
-            AddButton(CMKeyFunctions.RMCXenoRest);
-            AddButton(CMKeyFunctions.RMCXenoPheromonesRecovery);
-            AddButton(CMKeyFunctions.RMCXenoPheromonesWarding);
-            AddButton(CMKeyFunctions.RMCXenoPheromonesFrenzy);
+            // RMC14
+            foreach (var category in RMCKeybindCatalog.Categories)
+            {
+                AddHeader(category.Header);
+                foreach (var function in category.Functions)
+                {
+                    var description = RMCKeybindCatalog.GetDescription(function);
+                    AddButton(function, Loc.TryGetString(description, out _) ? description : null);
+                }
+            }
+            // RMC14
 
             AddHeader("ui-options-header-rmc-vehicle");
             AddButton(CMKeyFunctions.RMCVehicleHorn);
@@ -581,7 +564,8 @@ namespace Content.Client.Options.UI.Tabs
             public readonly BindButton BindButton2;
             public readonly Button ResetButton;
 
-            public KeyControl(KeyRebindTab parent, BoundKeyFunction function)
+            // RMC14
+            public KeyControl(KeyRebindTab parent, BoundKeyFunction function, string? description = null)
             {
                 Function = function;
                 var name = new Label
@@ -589,7 +573,8 @@ namespace Content.Client.Options.UI.Tabs
                     Text = Loc.GetString(
                         $"ui-options-function-{CaseConversion.PascalToKebab(function.FunctionName)}"),
                     HorizontalExpand = true,
-                    HorizontalAlignment = HAlignment.Left
+                    HorizontalAlignment = HAlignment.Left,
+                    ToolTip = description == null ? null : Loc.GetString(description),
                 };
 
                 BindButton1 = new BindButton(parent, this, StyleBase.ButtonOpenRight);
@@ -621,6 +606,7 @@ namespace Content.Client.Options.UI.Tabs
 
                 AddChild(hBox);
             }
+            // RMC14
         }
 
         private sealed class BindButton : Control
