@@ -341,6 +341,7 @@
   - type: RMCObstacleSlamCauserImmune
   - type: MobCollision
   - type: RMCMobCollision
+  - type: RMCMobCollisionMass
   - type: RMCRest
   - type: RMCPushup
   - type: RMCMeleeDamageSkill
