@@ -241,6 +241,7 @@ public sealed class FollowerSystem : EntitySystem
 
         RaiseLocalEvent(follower, followerEv);
         RaiseLocalEvent(entity, entityEv);
+        RaiseLocalEvent(entityEv);
         Dirty(entity, followedComp);
         Dirty(follower, followerComp);
     }
@@ -275,6 +276,7 @@ public sealed class FollowerSystem : EntitySystem
         Dirty(target, followed);
         RaiseLocalEvent(uid, uidEv);
         RaiseLocalEvent(target, targetEv);
+        RaiseLocalEvent(targetEv);
 
         if (!deparent || !TryComp(uid, out TransformComponent? xform))
             return;

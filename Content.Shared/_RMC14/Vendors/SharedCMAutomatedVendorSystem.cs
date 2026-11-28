@@ -732,8 +732,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             overrideComp.IsAppendSquadRoleName = entry.IsAppendSquadRoleName;
             overrideComp.GiveIcon = entry.GiveIcon;
             Dirty(actor, overrideComp);
-
-            _squads.UpdateSquadTitle(actor);
         }
 
         if (entry.GiveMapBlip != null)
@@ -741,6 +739,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(actor);
             mapBlip.Icon = entry.GiveMapBlip;
             Dirty(actor, mapBlip);
+        }
+
+        if (entry.GiveSquadRoleName != null || entry.GiveIcon != null)
+        {
+            _squads.UpdateSquadTitle(actor);
+            _squads.NotifyMemberUpdated(actor);
         }
 
         if (entry.GivePrefix != null)

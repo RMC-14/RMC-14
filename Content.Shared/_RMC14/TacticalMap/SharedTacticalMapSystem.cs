@@ -120,6 +120,42 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         _ui.TryOpenUi(user.Owner, TacticalMapUserUi.Key, user);
     }
 
+    public void SetIcon(
+        Entity<TacticalMapIconComponent?> entity,
+        Robust.Shared.Utility.SpriteSpecifier.Rsi? icon)
+    {
+        if (!Resolve(entity, ref entity.Comp, false) ||
+            Equals(entity.Comp.Icon, icon))
+        {
+            return;
+        }
+
+        entity.Comp.Icon = icon;
+        Dirty(entity);
+        RaiseIconChanged((entity, entity.Comp));
+    }
+
+    public void SetBackground(
+        Entity<TacticalMapIconComponent?> entity,
+        Robust.Shared.Utility.SpriteSpecifier.Rsi? background)
+    {
+        if (!Resolve(entity, ref entity.Comp, false) ||
+            Equals(entity.Comp.Background, background))
+        {
+            return;
+        }
+
+        entity.Comp.Background = background;
+        Dirty(entity);
+        RaiseIconChanged((entity, entity.Comp));
+    }
+
+    private void RaiseIconChanged(Entity<TacticalMapIconComponent> entity)
+    {
+        var ev = new TacticalMapIconChangedEvent();
+        RaiseLocalEvent(entity, ev);
+    }
+
     public virtual bool HasValidPosition(EntityUid ent, ref Vector2i indices)
     {
         return false;
