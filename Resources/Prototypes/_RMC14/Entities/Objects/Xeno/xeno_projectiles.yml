@@ -544,6 +544,9 @@
     bigXenoMultiplier: 1
     thickMembraneMultiplier: 10
     membraneMultiplier: 10
+    barricadeMultiplier: 10
+    vehicleMultiplier: 10
+    nonMobMultiplier: 10
     fixedDamageLoss: 24.75
     deleteOnZeroDamage: true
 
@@ -613,6 +616,7 @@
     enhance: true
     maxTier: 2
     stunOnEnhance: 2
+  - type: IgnorePredictionHide
 
 - type: entity
   parent: XenoSpitProjectileDissolverAcidBlobSmall
@@ -650,9 +654,10 @@
   - type: ProjectileGrenade
     evenSpread: true
     rebounds: false
+    directHit: true
     fillPrototype: XenoSpitProjectileDissolverAcidBlobSmall
     capacity: 4
     spreadAngle: 40
-    directHitProjectiles: 4
+    directHitProjectiles: 5
     projectileSpeed: 30
-  - type: IgnorePredictionHide
+  - type: DeleteOnTrigger

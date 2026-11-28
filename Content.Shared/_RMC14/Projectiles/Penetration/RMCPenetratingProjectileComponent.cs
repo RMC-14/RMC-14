@@ -75,4 +75,22 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool DeleteAfterHit = false;
+
+    /// <summary>
+    ///     The multiplier for range and damage loss if a barricade is hit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float BarricadeMultiplier = 1.5f;
+
+    /// <summary>
+    ///     The multiplier for range and damage loss if a vehicle is hit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float VehicleMultiplier = 1f;
+
+    /// <summary>
+    ///     The multiplier for range and damage loss if a non-mob that doesn't fall into any other category is hit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float NonMobMultiplier = 1f;
 }

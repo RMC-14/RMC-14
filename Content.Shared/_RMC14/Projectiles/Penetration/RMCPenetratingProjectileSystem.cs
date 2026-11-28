@@ -1,8 +1,11 @@
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 
@@ -100,6 +103,21 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
         {
             rangeLoss *= ent.Comp.BigXenoMultiplier;
             damageLoss *= ent.Comp.BigXenoMultiplier;
+        }
+        else if (HasComp<BarricadeComponent>(args.Target))
+        {
+            rangeLoss *= ent.Comp.BarricadeMultiplier;
+            damageLoss *= ent.Comp.BarricadeMultiplier;
+        }
+        else if (HasComp<VehicleComponent>(args.Target))
+        {
+            rangeLoss *= ent.Comp.VehicleMultiplier;
+            damageLoss *= ent.Comp.VehicleMultiplier;
+        }
+        else if (!HasComp<MobStateComponent>(args.Target))
+        {
+            rangeLoss *= ent.Comp.NonMobMultiplier;
+            damageLoss *= ent.Comp.NonMobMultiplier;
         }
 
         ent.Comp.Range -= rangeLoss;
