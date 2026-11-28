@@ -1,15 +1,10 @@
-using Content.Server.Explosion.EntitySystems;
-using Content.Shared._RMC14.Explosion;
-using Content.Shared.Explosion.Components;
 using Content.Shared.Sticky;
-using Robust.Server.GameObjects;
 
-namespace Content.Server._RMC14.Explosion;
+namespace Content.Shared._RMC14.Explosion;
 
 public sealed class RMCBreachingChargeSystem : EntitySystem
 {
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -17,7 +12,6 @@ public sealed class RMCBreachingChargeSystem : EntitySystem
 
         SubscribeLocalEvent<RMCBreachingChargeComponent, AttemptEntityStickEvent>(OnAttemptStick);
         SubscribeLocalEvent<RMCBreachingChargeComponent, EntityStuckEvent>(OnStuck);
-        SubscribeLocalEvent<RMCBreachingChargeComponent, TriggerEvent>(OnTrigger);
     }
 
     private void OnAttemptStick(Entity<RMCBreachingChargeComponent> ent, ref AttemptEntityStickEvent args)
@@ -33,16 +27,7 @@ public sealed class RMCBreachingChargeSystem : EntitySystem
 
         _transform.SetWorldRotation(ent, direction);
         ent.Comp.DirectionSet = true;
-    }
-
-    private void OnTrigger(Entity<RMCBreachingChargeComponent> ent, ref TriggerEvent args)
-    {
-        if (!ent.Comp.DirectionSet || !TryComp(ent, out ExplosiveComponent? explosive))
-            return;
-
-        var throwDirection = _transform.GetWorldRotation(ent).ToWorldVec();
-        _explosion.TriggerExplosive(ent, explosive, user: args.User, throwDirection: throwDirection);
-        args.Handled = true;
+        Dirty(ent);
     }
 
     private bool TryGetPlantingDirection(EntityUid user, EntityUid target, out Angle direction)
@@ -58,7 +43,7 @@ public sealed class RMCBreachingChargeSystem : EntitySystem
         if (delta.IsLengthZero())
             return false;
 
-        direction = delta.ToWorldAngle().GetDir().ToAngle();
+        direction = delta.ToWorldAngle().GetCardinalDir().ToAngle();
         return true;
     }
 }

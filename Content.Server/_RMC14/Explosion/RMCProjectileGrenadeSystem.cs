@@ -288,7 +288,18 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
 ///     Raised when a projectile grenade is being triggered
 /// </summary>
 [ByRefEvent]
-public record struct FragmentIntoProjectilesEvent(EntityUid ContentUid, int TotalCount, int UnSpawnedCount, Angle Angle, int ShootCount, List<EntityUid> HitEntities, bool Handled = false, bool ProjectDirectHitted = false);
+public record struct FragmentIntoProjectilesEvent(
+    EntityUid ContentUid,
+    int TotalCount,
+    int UnSpawnedCount,
+    Angle Angle,
+    int ShootCount,
+    List<EntityUid> HitEntities,
+    bool Handled = false,
+    bool ProjectDirectHitted = false)
+{
+    public List<EntityUid> HitEntities { get; } = HitEntities;
+}
 
 /// <summary>
 ///     Lets a grenade consume payload slots before spawning the fragments.
