@@ -223,7 +223,7 @@
     solutions:
       food:
         reagents:
-        - ReagentId: Oliveoil
+        - ReagentId: OilOlive
           Quantity: 50
 
 # Rice

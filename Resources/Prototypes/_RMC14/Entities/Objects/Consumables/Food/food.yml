@@ -562,7 +562,7 @@
         - ReagentId: Protein
           Quantity: 4
   - type: Construction
-    graph: FoodMeatSausage
+    graph: RMCFoodMeatSausage
     node: start
 
 - type: entity

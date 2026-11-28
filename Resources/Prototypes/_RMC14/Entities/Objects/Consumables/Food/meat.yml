@@ -621,7 +621,7 @@
     solutions:
       food:
         reagents:
-        - ReagentId: RMCSulfuricAcid
+        - ReagentId: RMCSulphuricAcid
           Quantity: 20
 
 - type: entity
