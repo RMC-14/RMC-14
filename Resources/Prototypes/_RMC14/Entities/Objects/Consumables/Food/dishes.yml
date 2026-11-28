@@ -224,6 +224,34 @@
     - Meat
 
 - type: entity
+  name: plain burger
+  parent: FoodBurgerBase
+  id: RMCFoodBurgerPlain
+  description: A boring, dry burger.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - bun
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: Burger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 3
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
   name: stewed soy meat
   parent: FoodMealBase
   id: RMCFoodStewedSoyMeat
@@ -940,3 +968,4 @@
   - type: Tag
     tags:
     - FoodSnack
+
