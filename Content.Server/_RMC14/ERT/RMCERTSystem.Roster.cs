@@ -29,6 +29,7 @@ using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Buckle;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Ghost.Roles.Components;
@@ -409,13 +410,13 @@ public sealed partial class RMCERTSystem
         // Prefer the highest-priority compatible seat so command and specialist slots claim their reserved positions first.
         var bestSeat = EntityUid.Invalid;
         var bestPriority = int.MinValue;
-        var query = EntityQueryEnumerator<RMCERTSeatComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var seat, out var xform))
+        var query = EntityQueryEnumerator<RMCERTSeatComponent, StrapComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var seat, out var strap, out var xform))
         {
             if (xform.GridUid != shuttleUid)
                 continue;
 
-            if (seat.OccupiedBy != null)
+            if (strap.BuckledEntities.Count > 0)
                 continue;
 
             var roleMatch = MatchesAny(seat.ReservedRoleTags, slot.RoleTags);
@@ -433,15 +434,9 @@ public sealed partial class RMCERTSystem
         if (!bestSeat.Valid)
             return false;
 
-        var bestSeatComp = Comp<RMCERTSeatComponent>(bestSeat);
-        bestSeatComp.OccupiedBy = GetNetEntity(member);
-        bestSeatComp.ReservationExpires = null;
-        Dirty(bestSeat, bestSeatComp);
-
         var coordinates = Transform(bestSeat).Coordinates;
         _transform.SetCoordinates(member, coordinates);
-        _buckle.TryBuckle(member, null, bestSeat, popup: false);
-        return true;
+        return _buckle.TryBuckle(member, null, bestSeat, popup: false);
     }
 
     private EntityCoordinates GetSpawnCoordinates(RMCERTRequest request, EntityUid? shuttle, RMCERTRosterSlot slot)

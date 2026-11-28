@@ -1,5 +1,4 @@
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.ERT;
 
@@ -26,16 +25,4 @@ public sealed partial class RMCERTSeatComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int Priority;
-
-    /// <summary>
-    /// Responder currently assigned to this seat.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public NetEntity? OccupiedBy;
-
-    /// <summary>
-    /// Round time when a temporary seat reservation expires.
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    public TimeSpan? ReservationExpires;
 }

@@ -50,7 +50,7 @@ public sealed class RMCERTAdminEui : BaseEui
 
     public override EuiStateBase GetNewState()
     {
-        return _ert.CreateAdminState(CanForceCalls());
+        return _ert.CreateAdminState(HasAdminAccess());
     }
 
     public override void HandleMessage(EuiMessageBase msg)
@@ -114,9 +114,6 @@ public sealed class RMCERTAdminEui : BaseEui
                 StateDirty();
                 break;
             case RMCERTAdminForceCallMsg force:
-                if (!CanForceCalls())
-                    return;
-
                 var canAdminForceCall = _ert.GetCallOptions(new RMCERTCallQueryArgs
                 {
                     EnabledOnly = true,
@@ -158,11 +155,6 @@ public sealed class RMCERTAdminEui : BaseEui
 
     private bool HasAdminAccess()
     {
-        return _admin.IsAdmin(Player);
-    }
-
-    private bool CanForceCalls()
-    {
-        return _admin.HasAdminFlag(Player, AdminFlags.Spawn);
+        return _admin.HasAdminFlag(Player, AdminFlags.Fun);
     }
 }
