@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Evasion;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Crest;
@@ -226,6 +227,7 @@ public sealed class XenoRestSystem : EntitySystem
 
         var other = args.OtherEntity;
         if (HasComp<ProjectileComponent>(other) &&
+            !HasComp<RMCIgnoreRequiredProjectileTargetComponent>(other) &&
             CompOrNull<TargetedProjectileComponent>(other)?.Target != ent)
         {
             args.Cancelled = true;

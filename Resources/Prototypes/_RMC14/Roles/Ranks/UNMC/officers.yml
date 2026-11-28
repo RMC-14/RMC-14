@@ -57,3 +57,10 @@
   name: Warrant Officer
   prefix: WarOff.
   paygrade: O0-1
+
+- type: rank
+  id: RMCRankWarrantOfficerDCCRankUp
+  name: Warrant Officer
+  prefix: WarOff.
+  paygrade: O0-1
+  jobIcon: RMCJobIconDCCRankUpWO

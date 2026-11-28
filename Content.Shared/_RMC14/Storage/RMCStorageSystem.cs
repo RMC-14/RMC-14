@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.CPR;
+using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.ShakeStun;
@@ -24,7 +25,6 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Lock;
 using Content.Shared.Nutrition.EntitySystems;
-using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Storage;
@@ -262,7 +262,7 @@ public sealed class RMCStorageSystem : EntitySystem
             return;
 
         if (!HasComp<NoStunOnExitComponent>(args.Container.Owner))
-            _stun.TryStun(ent, _stunStorage, true);
+            _stun.TryStun(ent, CompOrNull<StunOnExitDurationComponent>(args.Container.Owner)?.StunDuration ?? _stunStorage, true);
 
         if (HasComp<SkyFallingComponent>(args.Container.Owner) || HasComp<CrashLandingComponent>(args.Container.Owner))
         {

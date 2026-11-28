@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.UserInterface;
@@ -24,7 +25,36 @@ public sealed partial class VehicleWeaponsSystem
         UpdateWeaponsUiForAllOperators(vehicle, weapons);
     }
 
-    private void OnWeaponsUiOpened(Entity<VehicleWeaponsSeatComponent> ent, ref BoundUIOpenedEvent args)
+    private void OnHudSeatStrapped(Entity<VehicleHudSeatComponent> ent, ref StrappedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        _ui.OpenUi(ent.Owner, VehicleWeaponsUiKey.Key, args.Buckle.Owner);
+        RefreshHudSeatVehicle(ent.Owner);
+    }
+
+    private void OnHudSeatUnstrapped(Entity<VehicleHudSeatComponent> ent, ref UnstrappedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        _ui.CloseUi(ent.Owner, VehicleWeaponsUiKey.Key, args.Buckle.Owner);
+    }
+
+    private void RefreshHudSeatVehicle(EntityUid seat)
+    {
+        if (!_vehicle.TryGetVehicleFromInterior(seat, out var vehicle) ||
+            vehicle is not { } vehicleUid ||
+            !TryComp(vehicleUid, out VehicleWeaponsComponent? weapons))
+        {
+            return;
+        }
+
+        UpdateWeaponsUiForAllOperators(vehicleUid, weapons);
+    }
+
+    private void OnWeaponsUiOpened(Entity<VehicleHudSeatComponent> ent, ref BoundUIOpenedEvent args)
     {
         if (!Equals(args.UiKey, VehicleWeaponsUiKey.Key))
             return;
@@ -41,12 +71,6 @@ public sealed partial class VehicleWeaponsSystem
             return;
 
         UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, operatorUid: viewer);
-    }
-
-    private void OnWeaponsUiClosed(Entity<VehicleWeaponsSeatComponent> ent, ref BoundUIClosedEvent args)
-    {
-        if (!Equals(args.UiKey, VehicleWeaponsUiKey.Key))
-            return;
     }
 
     private void OnWeaponsSelect(Entity<VehicleWeaponsSeatComponent> ent, ref VehicleWeaponsSelectMessage args)
@@ -158,7 +182,7 @@ public sealed partial class VehicleWeaponsSystem
         if (_net.IsClient)
             return;
 
-        if (!TryComp(seat, out VehicleWeaponsSeatComponent? seatComp))
+        if (!TryComp(seat, out VehicleHudSeatComponent? seatComp))
             return;
 
         if (!Resolve(vehicle, ref weapons, logMissing: false))
@@ -197,9 +221,19 @@ public sealed partial class VehicleWeaponsSystem
         var mountedSlots = _topology.GetMountedSlots(vehicle, hardpoints, itemSlots);
         var entries = new List<VehicleWeaponsUiEntry>(mountedSlots.Count);
         var canUseHardpointActions = operatorUid == null || CanUseHardpointActions(operatorUid.Value, forUi: true);
+        var hasStabilization = false;
 
         foreach (var mountedSlot in mountedSlots)
         {
+            if (!hasStabilization &&
+                mountedSlot.Item is { } mountedItem &&
+                HasComp<VehicleTurretComponent>(mountedItem) &&
+                _turret.TryResolveRotationTarget(mountedItem, out _, out var rotationTarget) &&
+                rotationTarget.RotateToCursor)
+            {
+                hasStabilization = true;
+            }
+
             entries.Add(CreateMountedSlotUiEntry(
                 mountedSlot,
                 weapons,
@@ -235,6 +269,7 @@ public sealed partial class VehicleWeaponsSystem
         seatComp.Ui = new VehicleWeaponsUiState(
             GetNetEntity(vehicle),
             entries,
+            hasStabilization,
             canToggleStabilization,
             stabilizationEnabled,
             canToggleAuto,
@@ -369,19 +404,31 @@ public sealed partial class VehicleWeaponsSystem
         ItemSlotsComponent? itemSlots = null,
         bool refreshActions = false)
     {
-        var query = EntityQueryEnumerator<VehicleWeaponsOperatorComponent>();
-        while (query.MoveNext(out var operatorUid, out var operatorComp))
+        if (refreshActions)
         {
-            if (operatorComp.Vehicle != vehicle)
-                continue;
+            var operators = EntityQueryEnumerator<VehicleWeaponsOperatorComponent>();
+            while (operators.MoveNext(out var operatorUid, out var operatorComp))
+            {
+                if (operatorComp.Vehicle != vehicle)
+                    continue;
 
-            if (!TryGetUserWeaponsSeat(operatorUid, out var seat, out _))
-                continue;
+                if (!TryGetUserWeaponsSeat(operatorUid, out _, out _))
+                    continue;
 
-            if (refreshActions)
                 RefreshHardpointActions(operatorUid, vehicle, weapons, operatorComp, hardpoints, itemSlots);
+            }
+        }
 
-            UpdateWeaponsUi(seat, vehicle, weapons, hardpoints, itemSlots, operatorUid);
+        var seats = EntityQueryEnumerator<VehicleHudSeatComponent, StrapComponent>();
+        while (seats.MoveNext(out var seat, out _, out var strap))
+        {
+            if (strap.BuckledEntities.Count == 0)
+                continue;
+
+            if (!_vehicle.TryGetVehicleFromInterior(seat, out var seatVehicle) || seatVehicle != vehicle)
+                continue;
+
+            UpdateWeaponsUi(seat, vehicle, weapons, hardpoints, itemSlots, strap.BuckledEntities.First());
         }
     }
 }

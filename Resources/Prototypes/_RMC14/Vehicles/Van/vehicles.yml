@@ -5,6 +5,10 @@
   name: van
   description: A rugged transport van.
   components:
+  - type: VehicleSafety
+    icon:
+      sprite: _RMC14/Interface/map_blips_large.rsi
+      state: van
   - type: VehicleLock
     access: []
   - type: RequireProjectileTarget

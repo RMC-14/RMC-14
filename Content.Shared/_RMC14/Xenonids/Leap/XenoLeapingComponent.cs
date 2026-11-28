@@ -60,7 +60,4 @@ public sealed partial class XenoLeapingComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2 Direction;
-
-    [DataField, AutoNetworkedField]
-    public HashSet<string> IgnoreFixtureIds = ["flammable"];
 }
