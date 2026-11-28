@@ -28,6 +28,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -106,6 +107,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         SubscribeLocalEvent<HiveLeaderComponent, XenoToggleChargingCollideEvent>(OnLeaderCollide);
 
         Subs.CVar(_config, CCVars.RelativeMovement, v => _relativeMovement = v, true);
+
+        UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
     private void OnChargingDamageCollide(Entity<XenoToggleChargingDamageComponent> damage,
@@ -134,10 +137,7 @@ public sealed class XenoToggleChargingSystem : EntitySystem
                 );
             }
 
-            if (_net.IsClient)
-                _transform.DetachEntity(damage, Transform(damage));
-            else
-                QueueDel(damage);
+            PredictedQueueDel(damage.Owner);
         }
         else
         {
@@ -193,7 +193,7 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             damage.Comp.DestroyDamage > FixedPoint2.Zero &&
             damageable.TotalDamage >= damage.Comp.DestroyDamage)
         {
-            _transform.DetachEntity(damage, Transform(damage));
+            PredictedQueueDel(damage.Owner);
         }
 
         if (damage.Comp.Unanchor &&
@@ -369,6 +369,7 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             return;
         }
 
+        // TODO RMC14 it seems this if block doesn't do anything, and I don't know what it was meant to do
         if (ent.Comp.Direction != DirectionFlag.None)
         {
             var perpendiculars = ent.Comp.Direction.AsDir().GetPerpendiculars();
@@ -385,6 +386,7 @@ public sealed class XenoToggleChargingSystem : EntitySystem
 
         ResetCharging(ent);
         ent.Comp.Direction = direction;
+        Dirty(ent);
     }
 
     private void OnActiveToggleChargingMove(Entity<ActiveXenoToggleChargingComponent> ent, ref MoveEvent args)
@@ -513,6 +515,10 @@ public sealed class XenoToggleChargingSystem : EntitySystem
     private void ResetCharging(Entity<ActiveXenoToggleChargingComponent> xeno, bool resetInput = true)
     {
         ResetStage(xeno);
+
+        if (xeno.Comp.DeviatedDistance == 0 && (!resetInput || xeno.Comp.Direction == DirectionFlag.None))
+            return;
+
         xeno.Comp.DeviatedDistance = 0;
 
         if (resetInput)
@@ -524,6 +530,9 @@ public sealed class XenoToggleChargingSystem : EntitySystem
 
     private void ResetStage(Entity<ActiveXenoToggleChargingComponent> xeno)
     {
+        if (xeno.Comp.Steps == 0 && xeno.Comp.SoundSteps == 0 && xeno.Comp.Stage == 0)
+            return;
+
         xeno.Comp.Steps = 0;
         xeno.Comp.SoundSteps = 0;
         xeno.Comp.Stage = 0;
@@ -586,19 +595,21 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             else
                 damage = defaults.StructureDamagePerStage;
 
+            var popupString = Loc.GetString("rmc-xeno-charge-smashes", ("xeno", crusher), ("target", target));
+            var popupFallbackLocation = Transform(target).Coordinates;
+
             _damageable.TryChangeDamage(target, damage * stage * mult, shouldIgnoreClawLogic: true);
 
             // Target may have been deleted by the damage call
             if (!TerminatingOrDeleted(target))
             {
-                _popup.PopupEntity(
-                    Loc.GetString("rmc-xeno-charge-smashes", ("xeno", crusher), ("target", target)),
-                    target,
-                    PopupType.SmallCaution
-                );
-
-            if (defaults.Sound != null)
+                _popup.PopupEntity(popupString, target, PopupType.SmallCaution);
                 _audio.PlayPvs(defaults.Sound, target);
+            }
+            else
+            {
+                _popup.PopupCoordinates(popupString, popupFallbackLocation, PopupType.SmallCaution);
+                _audio.PlayPvs(defaults.Sound, popupFallbackLocation);
             }
         }
 
