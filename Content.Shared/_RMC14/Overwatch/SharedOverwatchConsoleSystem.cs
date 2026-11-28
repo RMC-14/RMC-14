@@ -1,5 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.AntiAir;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
@@ -48,6 +49,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly RMCShipAntiAirSystem _antiAir = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;
@@ -100,6 +102,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<OrbitalCannonChangedEvent>(OnOrbitalCannonChanged);
         SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
+        SubscribeLocalEvent<RMCShipAntiAirChangedEvent>(OnAntiAirChanged);
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
@@ -160,6 +163,24 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         {
             console.NextOrbitalLaunch = _timing.CurTime + ev.Cooldown;
             Dirty(uid, console);
+        }
+    }
+
+    private void OnAntiAirChanged(ref RMCShipAntiAirChangedEvent ev)
+    {
+        if (_net.IsClient)
+            return;
+
+        var consoles = EntityQueryEnumerator<OverwatchConsoleComponent>();
+        while (consoles.MoveNext(out var uid, out var console))
+        {
+            if (!console.ShowAntiAirStatus)
+                continue;
+
+            if (!_ui.IsUiOpen(uid, OverwatchConsoleUI.Key))
+                continue;
+
+            RefreshConsoleState((uid, console));
         }
     }
 
@@ -832,7 +853,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
 
         var (squads, marines) = GetOverwatchData(console.Comp);
-        _ui.SetUiState(console.Owner, OverwatchConsoleUI.Key, new OverwatchConsoleBuiState(squads, marines));
+        var antiAir = console.Comp.ShowAntiAirStatus ? _antiAir.GetStatus(console.Owner) : default;
+        _ui.SetUiState(console.Owner, OverwatchConsoleUI.Key, new OverwatchConsoleBuiState(squads, marines, antiAir));
     }
 
     public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)

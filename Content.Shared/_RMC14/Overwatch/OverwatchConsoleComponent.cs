@@ -49,6 +49,9 @@ public sealed partial class OverwatchConsoleComponent : Component
     public EntProtoId<RMCAnnouncementPresetComponent>? AnnouncementOverlay = "RMCAnnouncementOverwatch";
 
     [DataField, AutoNetworkedField]
+    public bool ShowAntiAirStatus;
+
+    [DataField, AutoNetworkedField]
     public bool HasOrbital;
 
     [DataField, AutoNetworkedField]
