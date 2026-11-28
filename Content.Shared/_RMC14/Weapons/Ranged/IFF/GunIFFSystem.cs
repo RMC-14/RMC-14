@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -20,6 +20,7 @@ public sealed class GunIFFSystem : EntitySystem
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _factionBuffer = new();
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _factionBuffer2 = new();
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _iffEventBuffer = new();
 
     public override void Initialize()
@@ -27,6 +28,8 @@ public sealed class GunIFFSystem : EntitySystem
         _userIFFQuery = GetEntityQuery<UserIFFComponent>();
 
         SubscribeLocalEvent<UserIFFComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);
+        SubscribeLocalEvent<UserIFFComponent, CheckMeleeTargetEvent>(OnUserIFFCheckMeleeTarget);
+        SubscribeLocalEvent<UserIFFComponent, CheckGunTargetEvent>(OnUserIFFCheckGunTarget);
         SubscribeLocalEvent<InventoryComponent, GetIFFFactionEvent>(OnInventoryIFFGetFaction);
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
@@ -38,6 +41,38 @@ public sealed class GunIFFSystem : EntitySystem
     private void OnUserIFFGetFaction(Entity<UserIFFComponent> ent, ref GetIFFFactionEvent args)
     {
         args.Factions.UnionWith(ent.Comp.Factions);
+    }
+
+    private void OnUserIFFCheckMeleeTarget(Entity<UserIFFComponent> ent, ref CheckMeleeTargetEvent args)
+    {
+        if (args.Skip || args.Defer)
+            return;
+
+        // IFF system is not involved in self harm
+        if (args.Target == ent.Owner)
+            return;
+
+        // IFF users prefer not to melee entities they share an IFF faction with
+        if (!args.Disarm && HaveCommonFaction(args.Target, ent.AsNullable()))
+        {
+            args.Defer = true;
+        }
+    }
+
+    private void OnUserIFFCheckGunTarget(Entity<UserIFFComponent> ent, ref CheckGunTargetEvent args)
+    {
+        if (args.Skip || args.Defer)
+            return;
+
+        // IFF system is not involved in self harm
+        if (args.Target == ent.Owner)
+            return;
+
+        // IFF users prefer not to shoot entities they share an IFF faction with
+        if (HaveCommonFaction(args.Target, ent.AsNullable()))
+        {
+            args.Defer = true;
+        }
     }
 
     private void OnInventoryIFFGetFaction(Entity<InventoryComponent> ent, ref GetIFFFactionEvent args)
@@ -293,6 +328,13 @@ public sealed class GunIFFSystem : EntitySystem
         if (!TryComp<ItemIFFComponent>(uid, out var itemIff))
             return false;
         return itemIff.Factions.Contains(faction);
+    }
+
+    public bool HaveCommonFaction(Entity<UserIFFComponent?> a, Entity<UserIFFComponent?> b)
+    {
+        return TryGetFactions(a, _factionBuffer)
+            && TryGetFactions(b, _factionBuffer2)
+            && _factionBuffer.Overlaps(_factionBuffer2);
     }
 }
 

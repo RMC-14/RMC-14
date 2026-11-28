@@ -1,16 +1,20 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Electrocution;
 using Content.Server.Emp;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Kitchen.Components;
 using Content.Server.Lathe.Components;
+using Content.Server.Materials;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
 using Content.Server.Wires;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Power;
+using Content.Shared.Audio;
 using Content.Shared.Examine;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
@@ -56,13 +60,18 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
 
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
+    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private readonly RMCPortableGeneratorSystem _portableGenerator = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -70,6 +79,7 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly WiresSystem _wires = default!;
 
+    private readonly Dictionary<EntityUid, float> _portableGenPower = new();
     private readonly Dictionary<RMCPowerNetworkKey, EntityUid> _networkEntities = new();
     private readonly Dictionary<RMCPowerNetworkKey, RMCPowerNetworkStats> _networkStats = new();
     private readonly HashSet<EntityUid> _trackedApcs = new();
@@ -147,6 +157,8 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
         SubscribeLocalEvent<RMCPowerUsageDisplayComponent, ExaminedEvent>(OnUsageDisplayEvent);
 
         Subs.CVar(_config, RMCCVars.RMCPowerUpdateEverySeconds, OnUpdateEveryChanged, true);
+        SubscribeLocalEvent<RMCPortableGeneratorComponent, RMCGeneratorEmpty>(OnGeneratorEmpty);
+
         Subs.CVar(_config, RMCCVars.RMCPowerLoadMultiplier, OnPowerLoadMultiplierChanged, true);
     }
 
@@ -503,6 +515,113 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
         return changed;
     }
 
+    private void OnGeneratorEmpty(Entity<RMCPortableGeneratorComponent> ent, ref RMCGeneratorEmpty args)
+    {
+        _materialStorage.EjectAllMaterial(ent);
+        Dirty(ent);
+    }
+
+    private void UpdatePortableGenerators(float deltaTime)
+    {
+        _portableGenPower.Clear();
+
+        var portableGens = EntityQueryEnumerator<RMCPortableGeneratorComponent, TransformComponent>();
+        while (portableGens.MoveNext(out var uid, out var gen, out var xform))
+        {
+            if (!gen.On)
+            {
+                if (gen.Heat > 0)
+                {
+                    gen.Heat = Math.Max(gen.Heat - 2f, 0f);
+                    Dirty(uid, gen);
+                }
+
+                continue;
+            }
+
+            if (!xform.Anchored)
+            {
+                _portableGenerator.StopPortableGenerator((uid, gen));
+                continue;
+            }
+
+            if (_materialStorage.GetMaterialAmount(uid, gen.Material) <= 0 && gen.FractionalMaterial <= 0f)
+            {
+                _portableGenerator.StopPortableGenerator((uid, gen));
+                continue;
+            }
+
+            var setting = gen.PowerGenPercent / 100f;
+            var consumeThisFrame = (gen.MaterialPerSheet / gen.TimePerSheet) * deltaTime * setting;
+            gen.FractionalMaterial -= consumeThisFrame;
+
+            if (gen.FractionalMaterial < 0f)
+            {
+                var consumeWhole = Math.Min(
+                    -(int)MathF.Floor(gen.FractionalMaterial),
+                    _materialStorage.GetMaterialAmount(uid, gen.Material));
+
+                if (consumeWhole > 0 && !_materialStorage.TryChangeMaterialAmount(uid, gen.Material, -consumeWhole))
+                {
+                    gen.FractionalMaterial = 0f;
+                    _portableGenerator.StopPortableGenerator((uid, gen));
+                    continue;
+                }
+
+                gen.FractionalMaterial += consumeWhole;
+            }
+
+            var lowerLimit = 56f + setting * 10f;
+            var upperLimit = 76f + setting * 10f;
+            var bias = 0f;
+
+            if (setting > 4)
+            {
+                upperLimit = 400f;
+                bias = setting * 3;
+            }
+
+            if (gen.Heat < lowerLimit)
+            {
+                gen.Heat += 3f;
+            }
+            else
+            {
+                gen.Heat += _random.NextFloat(-7 + bias, 8 + bias);
+
+                if (gen.Heat < lowerLimit)
+                    gen.Heat = lowerLimit;
+
+                if (gen.Heat > upperLimit)
+                    gen.Heat = upperLimit;
+            }
+
+            // This can't ever happen under normal gameplay circumstances
+            if (gen.Heat > gen.OverheatThreshold)
+            {
+                _explosion.QueueExplosion(
+                    uid,
+                    ExplosionSystem.DefaultExplosionPrototypeId,
+                    gen.ExplosionIntensity,
+                    gen.ExplosionSlope,
+                    gen.ExplosionMaxIntensity);
+
+                QueueDel(uid);
+                continue;
+            }
+
+            if (_area.TryGetArea(uid, out var areaEnt, out _) &&
+                _areaPowerQuery.TryComp(areaEnt.Value, out _))
+            {
+                var area = areaEnt.Value;
+                _portableGenPower[area] = _portableGenPower.GetValueOrDefault(area) + gen.Watts * setting;
+            }
+
+            _ambientSound.SetAmbience(uid, true);
+            Dirty(uid, gen);
+        }
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -529,6 +648,7 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
         UpdateReactors(now);
         RestoreSmes(now);
         RestoreApcs(now);
+        UpdatePortableGenerators(deltaTime);
 
         var networks = BuildNetworks(deltaTime);
         foreach (var network in networks.Values.OrderBy(network => network.Key.Map).ThenBy(network => network.Key.PowerNet))
@@ -945,6 +1065,8 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
             var entry = new Apc(uid, apc, (apc.Area.Value, area), cell);
             network.Apcs.Add(entry);
             network.ApcsByArea.Add(apc.Area.Value, entry);
+            if (_portableGenPower.TryGetValue(entry.Area, out var localPower) && localPower > 0)
+                network.LocalSources.GetOrNew(entry.Area).Add(new Source(entry.Area, null, localPower));
         }
 
         foreach (var network in networks.Values)
@@ -982,7 +1104,7 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
     private void PrepareApcs(Network network, float deltaTime)
     {
         var hasNetworkPower = network.Sources.Any(source => source.Available > 0) ||
-                              network.LocalSources.Values.SelectMany(source => source).Any(source => source.Available > 0) ||
+                              network.LocalSources.Values.SelectMany(source => source).Any(source => source.Component != null && source.Available > 0) ||
                               network.Storages.Any(StorageCanOutput);
 
         foreach (var apc in network.Apcs)
@@ -1017,7 +1139,9 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
             var stableExternalPower = allAutomaticChannelsOn &&
                                       apc.Component.PowerStatus == RMCApcPowerStatus.External &&
                                       apc.Component.DeliveredPower + 0.01f >= apc.Component.RequestedPower;
-            var available = hasNetworkPower || battery.Comp.CurrentCharge > 0;
+            var available = hasNetworkPower ||
+                            _portableGenPower.GetValueOrDefault(apc.Area) > 0 ||
+                            battery.Comp.CurrentCharge > 0;
             var equipmentAuto = ShouldEnableApcAutoChannel(
                 apc.Component.Channels[(int) RMCPowerChannel.Equipment].On,
                 charge,
@@ -1105,7 +1229,12 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
             apc.LoadAllocated += used;
             apc.Component.LocalGeneration = used;
             DistributeSources(localSources, used, false);
-            apc.Component.ExportedPower = Math.Max(0, localAvailable - used);
+            apc.Component.ExportedPower = localSources
+                .Where(source => source.Component != null)
+                .Sum(source => Math.Max(0, source.Available - source.Used));
+            var portable = localSources.Find(source => source.Component == null);
+            if (portable != null)
+                apc.LocalChargeSurplus = Math.Max(0, portable.Available - portable.Used);
         }
 
         RefreshSourceExportAvailable(allSources);
@@ -1140,15 +1269,29 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
         }
 
         var liveSurplusAfterLoads = allSources.Sum(source => source.ExportAvailable);
+        foreach (var apc in network.Apcs)
+        {
+            if (apc.LocalChargeSurplus <= 0 || apc.ChargeRequest <= 0)
+                continue;
+
+            var portable = network.LocalSources[apc.Area].Find(source => source.Component == null);
+            if (portable == null)
+                continue;
+
+            apc.ChargeAllocated = Math.Min(apc.ChargeRequest, apc.LocalChargeSurplus);
+            portable.Used += apc.ChargeAllocated;
+        }
+
         var chargeRequests = network.Apcs
-            .Select(apc => (Uid: apc.Uid, Request: apc.ChargeRequest))
+            .Select(apc => (Uid: apc.Uid, Request: apc.ChargeRequest - apc.ChargeAllocated))
             .ToList();
         var chargeAllocations = AllocateMaxMin(chargeRequests, liveSurplusAfterLoads);
         var liveChargeUsed = 0f;
         foreach (var apc in network.Apcs)
         {
-            apc.ChargeAllocated = chargeAllocations.GetValueOrDefault(apc.Uid);
-            liveChargeUsed += apc.ChargeAllocated;
+            var allocated = chargeAllocations.GetValueOrDefault(apc.Uid);
+            apc.ChargeAllocated += allocated;
+            liveChargeUsed += allocated;
         }
 
         DistributeSources(allSources, liveChargeUsed, true);
@@ -1162,7 +1305,7 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
         foreach (var apc in network.Apcs)
         {
             var loadSatisfied = apc.Component.DeliveredPower + 0.01f >= apc.Load;
-            if (loadSatisfied && liveSurplusAfterLoads > 0.01f)
+            if (loadSatisfied && liveSurplusAfterLoads + apc.LocalChargeSurplus > 0.01f)
                 apc.Component.SurplusCycles++;
             else
                 apc.Component.SurplusCycles = 0;
@@ -1190,6 +1333,9 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
 
         foreach (var source in network.LocalSources.Values.SelectMany(sources => sources).Concat(network.Sources))
         {
+            if (source.Component == null)
+                continue;
+
             source.Component.CurrentPower = source.Used;
             Dirty(source.Uid, source.Component);
         }
@@ -1199,7 +1345,7 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
     {
         foreach (var source in sources)
         {
-            source.ExportAvailable = Math.Max(0, source.Available - source.Used);
+            source.ExportAvailable = source.Component != null ? Math.Max(0, source.Available - source.Used) : 0;
         }
     }
 
@@ -1534,12 +1680,13 @@ public sealed partial class RMCPowerSystem : SharedRMCPowerSystem
         public float ChargeRequest;
         public float Load;
         public float LoadAllocated;
+        public float LocalChargeSurplus;
     }
 
-    private sealed class Source(EntityUid uid, RMCPowerSourceComponent component, float available)
+    private sealed class Source(EntityUid uid, RMCPowerSourceComponent? component, float available)
     {
         public readonly float Available = available;
-        public readonly RMCPowerSourceComponent Component = component;
+        public readonly RMCPowerSourceComponent? Component = component;
         public readonly EntityUid Uid = uid;
         public float ExportAvailable;
         public float Used;

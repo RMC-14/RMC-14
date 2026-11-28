@@ -272,6 +272,28 @@
   - type: IntelDataTerminalCandidate
 
 - type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCComputerIntelDatabase
+  name: intel database computer
+  description: A UNMC intel computer used for consulting the current intel database.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal1_old
+    layers: []
+  - type: ActivatableUI
+    key: enum.ViewIntelObjectivesUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
+  - type: ViewIntelObjectives
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
   id: RMCIntelTechTree
   name: intel tech tree
   categories: [ HideSpawnMenu ]
@@ -351,7 +373,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadExplosive
+            object: RMCCrateOBHE
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-he
@@ -365,7 +387,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadIncendiary
+            object: RMCCrateOBIncendiary
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-incendiary
@@ -379,7 +401,7 @@
           repurchasable: true
           events:
           - !type:TechLogisticsDeliveryEvent
-            object: RMCOrbitalCannonWarheadCluster
+            object: RMCCrateOBCluster
           - !type:TechAnnounceEvent
             author: rmc-intel-tech-announcement-special-assets-author
             message: rmc-intel-tech-announcement-ob-cluster

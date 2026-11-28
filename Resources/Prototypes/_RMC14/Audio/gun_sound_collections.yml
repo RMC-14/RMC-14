@@ -53,12 +53,6 @@
   - /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower3.ogg
 
 - type: soundCollection
-  id: RMCSSG45Shoot
-  files:
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_1.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_2.ogg
-
-- type: soundCollection
   id: RMCType77Shoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type77.ogg
@@ -87,6 +81,7 @@
   id: RMCType71Shoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type71.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type71_2.ogg
 
 - type: soundCollection
   id: RMCFlamerColonyShoot

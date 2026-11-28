@@ -15,11 +15,13 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -28,6 +30,8 @@ public abstract partial class SharedXenoParasiteSystem
     [Dependency] private readonly SharedRMCNPCSystem _rmcNpc = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
 
     public void IntializeAI()
     {
@@ -39,6 +43,7 @@ public abstract partial class SharedXenoParasiteSystem
         SubscribeLocalEvent<ParasiteAIComponent, ExaminedEvent>(OnAIExamined);
         SubscribeLocalEvent<ParasiteAIComponent, DroppedEvent>(OnAIDropPickup);
         SubscribeLocalEvent<ParasiteAIComponent, EntGotInsertedIntoContainerMessage>(OnAIDropPickup);
+        SubscribeLocalEvent<ParasiteAIComponent, StatusEffectEndedEvent>(OnAIStatusEffectEnd);
 
         SubscribeLocalEvent<XenoParasiteComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
 
@@ -151,6 +156,12 @@ public abstract partial class SharedXenoParasiteSystem
         GoIdle(para);
     }
 
+    private void OnAIStatusEffectEnd(Entity<ParasiteAIComponent> para, ref StatusEffectEndedEvent args)
+    {
+        if (args.Key == Stun && para.Comp.Mode == ParasiteMode.Active)
+            para.Comp.NextJump = _timing.CurTime + para.Comp.JumpTime;
+    }
+
     public void HandleDeathTimer(Entity<ParasiteAIComponent> para)
     {
         if (_container.TryGetContainingContainer((para, null, null), out var carry) && HasComp<XenoNurturingComponent>(carry.Owner))
@@ -221,7 +232,8 @@ public abstract partial class SharedXenoParasiteSystem
         if (HasComp<TrapParasiteComponent>(para))
             RemCompDeferred<TrapParasiteComponent>(para);
 
-        para.Comp.NextActiveTime = _timing.CurTime + TimeSpan.FromSeconds(_random.Next(para.Comp.MinIdleTime, para.Comp.MaxIdleTime + 1));
+        para.Comp.NextActiveTime = _timing.CurTime +
+            TimeSpan.FromSeconds((para.Comp.MinIdleTime == para.Comp.MaxIdleTime ? para.Comp.MinIdleTime : _random.NextFloat(para.Comp.MinIdleTime, para.Comp.MaxIdleTime + 0.01f)));
 
         Dirty(para);
     }

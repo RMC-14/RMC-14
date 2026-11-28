@@ -38,7 +38,8 @@
     channel: Equipment
   - type: DragInsertContainer
     containerId: body_scanner
-  - type: NoStunOnExit # Custom stun exit behavior + sound in SharedBodyScannerSystem
+  - type: StunOnExitDuration
+    stunDuration: 2
   - type: ContainerContainer
     containers:
       body_scanner: !type:ContainerSlot {}

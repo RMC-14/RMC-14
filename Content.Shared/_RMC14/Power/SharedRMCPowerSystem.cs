@@ -1,10 +1,12 @@
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
@@ -47,7 +49,6 @@ public abstract partial class SharedRMCPowerSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     [Dependency] protected readonly SharedPointLightSystem Pointlight = default!;
-
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;

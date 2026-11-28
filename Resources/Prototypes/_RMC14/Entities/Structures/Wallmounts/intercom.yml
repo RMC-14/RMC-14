@@ -10,21 +10,30 @@
     powerLoad: 0
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 0
-    activeLoad: 0
-    # CM13 intercoms check Equipment power but do not add an area load.
+    idleLoad: 5
+    activeLoad: 10
     channel: Equipment
   - type: Electrified
     enabled: false
     usesApcPower: true
   - type: RadioMicrophone
+    broadcastChannel: MarineCommon
+    enabled: false
     powerRequired: true
     unobstructedRequired: true
     listenRange: 2
     toggleOnInteract: false
   - type: RadioSpeaker
+    channels:
+    - MarineCommon
+    enabled: true
     toggleOnInteract: false
   - type: Intercom
+    currentChannel: MarineCommon
+    microphoneEnabled: false
+    speakerEnabled: true
+  - type: RMCIntercom
+  - type: TelecomExempt
   - type: Speech
     speechVerb: Robotic
   - type: ExtensionCableReceiver
@@ -254,7 +263,13 @@
   suffix: Colony
   components:
   - type: Intercom
+    currentChannel: Colony
     supportedChannels:
+    - Colony
+  - type: RadioMicrophone
+    broadcastChannel: Colony
+  - type: RadioSpeaker
+    channels:
     - Colony
 
 - type: entity

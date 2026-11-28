@@ -582,7 +582,7 @@ entities:
     - type: Transform
       pos: 2.5,1.5
       parent: 1
-- proto: RMCLightFixtureDouble
+- proto: RMCLightFixtureDoubleOffset
   entities:
   - uid: 48
     components:
@@ -621,7 +621,7 @@ entities:
     - type: Transform
       pos: 8.5,6.5
       parent: 1
-- proto: RMCSpawnerCorpseColonist
+- proto: RMCSpawnerCorpseColonistShivaBurst
   entities:
   - uid: 69
     components:

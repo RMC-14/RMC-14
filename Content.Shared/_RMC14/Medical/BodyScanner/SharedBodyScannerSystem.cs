@@ -1,13 +1,11 @@
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Power;
-using Content.Shared._RMC14.Storage;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
-using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -24,7 +22,6 @@ public abstract class SharedBodyScannerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -205,9 +202,6 @@ public abstract class SharedBodyScannerSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-
-        if (scanner.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(scanner))
-            _stun.TryStun(occupant, scanner.Comp.ExitStun, true);
 
         if (_net.IsClient)
             return;

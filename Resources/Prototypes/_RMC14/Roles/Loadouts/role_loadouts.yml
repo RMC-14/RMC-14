@@ -152,7 +152,7 @@
   id: JobCMCommandingOfficer
   points: 7
   groups:
-  - MarineLeatherBackpack
+  - MarineSecureBackpack
   - CommandingOfficerIDRMC
   - CommandingOfficerWeaponRMC
   - CommandingOfficerRoleSpecificRMC
@@ -609,12 +609,14 @@
   groups:
   - ProvostSecurityBackpack
   - ProvostRoleSpecificOuterwearRMC
+  - ProvostWeaponRMC
+  - ProvostRoleSpecificHeadRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
   - AccessoriesRMC
-  - WatchesBasicRMC
+  - WatchesCommandingOfficerRMC
   - PaperworkRMC
   - RecreationalRMC
   - PlushiesRMC
@@ -787,6 +789,7 @@
   points: 7
   groups:
   - ExecutiveSecurityGuardBackpack
+  - BodyguardRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC

@@ -39,7 +39,6 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_civillian
-  hasIcon: false
 
 - type: job
   parent: RMCJobRibbonBase
@@ -55,7 +54,7 @@
   ranks:
     RMCRankCorporal: []
   startingGear: CMGearCombatCorrespondent
-  icon: "RMCJobIconCorrespondent"
+  icon: "RMCJobIconCombatCorrespondent"
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-commander
   accessGroups:
@@ -79,8 +78,7 @@
         state: correspondent
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background
-  hasIcon: false
+        state: background_shipside
 
 - type: startingGear
   id: CMGearCorrespondent
@@ -90,7 +88,6 @@
     shoes: RMCShoesLaceup
     id: CMIDCardCorrespondent
     ears: CMHeadsetReporter
-    back: CMSatchel
     #    belt: CMCamera TODO RMC14
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCCorrespondentMicrophone
@@ -104,7 +101,6 @@
     id: CMDogtagCombatCorrespondent
     ears: CMHeadsetReporter
     belt: RMCM1984BeltFilled
-    back: CMSatchelMarine
     pocket1: RMCPouchGeneralMedium
     pocket2: RMCPouchGeneralMedium
 

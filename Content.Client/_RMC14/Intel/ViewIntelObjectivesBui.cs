@@ -12,6 +12,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
     private ViewIntelObjectivesWindow? _window;
 
     private readonly List<(string PlainClue, Control Row, Control? AreaLabel)> _allClueRows = new();
+    private readonly Dictionary<string, (ScrollContainer Scroll, BoxContainer Container)> _clueTabs = new();
     private bool _hideAreas;
 
     protected override void Open()
@@ -44,15 +45,12 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         _window.ColonyPowerLabel.Text = Loc.GetString("rmc-ui-intel-colony-status", ("online", tree.ColonyPower));
 
         _allClueRows.Clear();
-        if (_window.CluesSearchBar != null)
-            _window.CluesSearchBar.Text = string.Empty;
 
-        _window.CluesContainer.DisposeAllChildren();
         if (comp.PersonalClues.Count > 0)
-            AddClueTab("rmc-intel-personal", comp.PersonalClues.Values);
+            UpdateClueTab("rmc-intel-personal", comp.PersonalClues.Values);
 
         foreach (var (category, clues) in comp.Tree.Clues)
-            AddClueTab(category, clues.Values);
+            UpdateClueTab(category, clues.Values);
 
         if (_window.CluesSearchBar != null)
         {
@@ -67,6 +65,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
             UpdateHideAreasButton();
         }
 
+        ApplyFilter(_window.CluesSearchBar?.Text.Trim() ?? string.Empty);
         ApplyAreaVisibility();
     }
 
@@ -87,7 +86,9 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         if (_window?.HideAreasButton == null)
             return;
 
-        _window.HideAreasButton.Text = _hideAreas ? "Show Areas" : "Hide Areas";
+        _window.HideAreasButton.Text = Loc.GetString(_hideAreas
+            ? "rmc-ui-intel-show-areas"
+            : "rmc-ui-intel-hide-areas");
     }
 
     private void ApplyFilter(string query)
@@ -130,12 +131,14 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         return result.ToString();
     }
 
-    private void AddClueTab(string category, IEnumerable<string> clues)
+    private void UpdateClueTab(string category, IEnumerable<string> clues)
     {
         if (_window is not { IsOpen: true })
             return;
 
-        var scroll = new ScrollContainer
+        if (!_clueTabs.TryGetValue(category, out var tab))
+        {
+            var scroll = new ScrollContainer
         {
             HScrollEnabled = false,
             VScrollEnabled = true,
@@ -147,18 +150,24 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
             Margin = new Thickness(4),
         };
 
+           scroll.AddChild(container);
+           _window.CluesContainer.AddChild(scroll);
+           TabContainer.SetTabTitle(scroll, Loc.GetString(category));
+
+           tab = (scroll, container);
+           _clueTabs[category] = tab;
+        }
+
+        tab.Container.DisposeAllChildren();
+
         var sortedClues = clues.OrderBy(c => StripMarkup(c).ToLowerInvariant());
 
         foreach (var clue in sortedClues)
         {
             var (row, areaLabel) = BuildClueRow(clue);
-            container.AddChild(row);
+            tab.Container.AddChild(row);
             _allClueRows.Add((StripMarkup(clue), row, areaLabel));
         }
-
-        scroll.AddChild(container);
-        _window.CluesContainer.AddChild(scroll);
-        TabContainer.SetTabTitle(scroll, Loc.GetString(category));
     }
 
     private static (Control Row, Control? AreaLabel) BuildClueRow(string clue)
@@ -170,8 +179,8 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
             HorizontalExpand = true,
         };
 
-        const string separator = " in ";
-        var splitIndex = clue.LastIndexOf(separator, StringComparison.OrdinalIgnoreCase);
+        var separator = $" {Loc.GetString("rmc-ui-intel-clue-area-preposition")} ";
+        var splitIndex = clue.IndexOf(separator, StringComparison.OrdinalIgnoreCase);
 
         if (splitIndex < 0)
         {
