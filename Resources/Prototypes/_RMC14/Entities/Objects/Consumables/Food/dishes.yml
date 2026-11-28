@@ -350,7 +350,7 @@
     - pasta
     - meaty
   - type: Sprite
-    sprite: _RMC14\Objects\Consumable\Food\dishes.rsi
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
     state: meatballspagetti
   - type: SolutionContainerManager
     solutions:
