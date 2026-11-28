@@ -1031,6 +1031,26 @@
       scatterFlat: -4
 
 - type: entity
+  parent: RMCAttachmentL91Bipod
+  id: RMCAttachmentL58Bipod
+  categories: [ HideSpawnMenu ]
+  name: "L58 integrated bipod"
+  description: "Cor... it just came right off..."
+  components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL58Bipod
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.5
+      burstScatterAddMult: -0.75
+      scatterFlat: -4
+
+- type: entity
   parent: RMCAttachmentU1GrenadeLauncher
   id: RMCAttachmentL90GL
   name: L90U3 grenade launcher
@@ -1255,6 +1275,9 @@
 
 - type: Tag
   id: RMCAttachmentL91Bipod
+
+- type: Tag
+  id: RMCAttachmentL58Bipod
 
 - type: Tag
   id: RMCAttachmentL88Grip

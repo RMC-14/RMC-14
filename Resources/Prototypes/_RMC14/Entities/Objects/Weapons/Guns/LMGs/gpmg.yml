@@ -1,0 +1,164 @@
+- type: entity
+  parent: RMCBaseWeaponLMG
+  id: RMCWeaponLMGL58GPMG
+  name: L58 general purpose machine gun
+  description:
+  components:
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    recoilWielded: 5
+    recoilUnwielded: 5
+    scatterWielded: 4
+    scatterUnwielded: 20
+    scatterDecay: 20
+    burstScatterMult: 2
+    baseFireRate: 6.67
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 8
+        useBurstScatterMult: true
+        shotsToMaxScatter: 5
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
+    - state: bolt-open
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: cover-closed
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/gpmg.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponLMGL58GPMG
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineLMGL58GPMGHT
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineLMGL58GPMGHT
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  # - type: UniqueAction
+  # - type: BreechLoaded
+  #   needOpenClose: false
+  # - type: Appearance
+  # - type: GenericVisualizer
+  #   visuals:
+  #     enum.BreechVisuals.Open:
+  #       enum.BreechVisuals.Open:
+  #         True: { state: cover-open }
+  #         False: { state: cover-closed }
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentL58Bipod
+        whitelist:
+          tags:
+          - RMCAttachmentL58Bipod
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: RMCMagneticItem
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.25, 0
+      rmc-aslot-underbarrel: 0.56, -0.25
+
+- type: entity
+  parent: RMCMagazineLMGBase
+  id: RMCMagazineLMGL58GPMGHT
+  name: "L58 GPMG drum (4.85x49mm)"
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineLMG
+    - RMCMagazineLMGL58GPMGHT
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeLMGL58GPMGHT
+    proto: RMCCartridgeLMGL58GPMGHT
+    capacity: 200
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/qyj_72.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeLMGL58GPMGHT
+  name: cartridge (4.85x49mm)
+  description: A 7.62x54mmR cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeLMGL58GPMGHT
+  - type: CartridgeAmmo
+    proto: RMCBulletLMGL58GPMGHT
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletLMGL58GPMGHT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: HoloTargeting
+    stacks: 15
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 15
+      falloff: 2
+    - range: 30
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 10
+  - type: RMCProjectileAccuracy
+    accuracy: 150
+    thresholds:
+    - range: 15
+      falloff: 10
+
+- type: Tag
+  id: RMCWeaponLMGL58GPMG
+
+- type: Tag
+  id: RMCMagazineLMGL58GPMGHT
+
+- type: Tag
+  id: RMCCartridgeLMGL58GPMGHT
