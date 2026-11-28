@@ -65,6 +65,7 @@ public sealed class RMCWaterSystem : EntitySystem
 
     private readonly List<WaterActivation> _pendingActivations = new();
     private readonly HashSet<Entity<ItemComponent>> _items = new();
+    private readonly HashSet<EntityUid> _damagedWater = new();
 
     public override void Initialize()
     {
@@ -456,34 +457,38 @@ public sealed class RMCWaterSystem : EntitySystem
 
     private void UpdateToxicVehicles(TimeSpan time)
     {
-        var toxicWater = EntityQueryEnumerator<ToxicWaterComponent>();
-        while (toxicWater.MoveNext(out var uid, out var toxic))
+        _damagedWater.Clear();
+
+        var vehicles = EntityQueryEnumerator<VehicleWeakComponent>();
+        while (vehicles.MoveNext(out var vehicle, out _))
         {
-            if (time < toxic.NextVehicleDamageAt)
+            // GridVehicleMoverSystem already applies corrosive terrain damage.
+            if (HasComp<GridVehicleMoverComponent>(vehicle))
+                continue;
+
+            foreach (var water in _physics.GetEntitiesIntersectingBody(vehicle, (int) CollisionGroup.SlipLayer))
+            {
+                if (!TryComp(water, out ToxicWaterComponent? toxic) ||
+                    time < toxic.NextVehicleDamageAt ||
+                    !IsHazardous(water) ||
+                    !IsActiveWater(water, vehicle))
+                {
+                    continue;
+                }
+
+                _vehicleWheels.DamageWheels(vehicle, toxic.VehicleDamage);
+                _damagedWater.Add(water);
+            }
+        }
+
+        foreach (var water in _damagedWater)
+        {
+            if (!TryComp(water, out ToxicWaterComponent? toxic))
                 continue;
 
             toxic.NextVehicleDamageAt = time + toxic.VehicleDamageEvery;
-            Dirty(uid, toxic);
-
-            if (!IsHazardous(uid))
-                continue;
-
-            var playedSound = false;
-            foreach (var vehicle in _physics.GetEntitiesIntersectingBody(uid, (int) CollisionGroup.Vehicle))
-            {
-                // Grid vehicles already receive corrosive damage through GridVehicleMoverSystem,
-                // including the acid resistance of their wheels.
-                if (HasComp<GridVehicleMoverComponent>(vehicle) ||
-                    !HasComp<VehicleWeakComponent>(vehicle) ||
-                    !IsActiveWater(uid, vehicle))
-                    continue;
-
-                _vehicleWheels.DamageWheels(vehicle, toxic.VehicleDamage);
-                playedSound = true;
-            }
-
-            if (playedSound)
-                _audio.PlayPvs(ToxicWaterSound, uid);
+            Dirty(water, toxic);
+            _audio.PlayPvs(ToxicWaterSound, water);
         }
     }
 
