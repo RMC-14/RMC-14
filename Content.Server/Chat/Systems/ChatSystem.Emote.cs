@@ -1,4 +1,5 @@
 using System.Collections.Frozen;
+using Content.Shared._RMC14.Audio.Mute;
 using Content.Shared._RMC14.Voicelines;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Speech;
@@ -15,6 +16,7 @@ public partial class ChatSystem
     private FrozenDictionary<string, EmotePrototype> _wordEmoteDict = FrozenDictionary<string, EmotePrototype>.Empty;
 
     [Dependency] private readonly HumanoidVoicelinesSystem _humanoidVoicelines = default!;
+    [Dependency] private readonly RMCMutedSoundsSystem _rmcMutedSounds = default!;
 
     protected override void OnPrototypeReload(PrototypesReloadedEventArgs obj)
     {
@@ -159,6 +161,7 @@ public partial class ChatSystem
 
         // RMC14
         var filter = Filter.Pvs(uid).RemoveWhere(s => !_humanoidVoicelines.ShouldPlayEmote(uid, s));
+        _rmcMutedSounds.RemoveMuted(filter, sound);
         if (filter.Count == 0)
             return false;
 

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Audio.Mute;
 using Content.Shared.Audio;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
@@ -38,6 +39,9 @@ public abstract class SharedEmitSoundSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    // RMC14
+    [Dependency] private readonly RMCMutedSoundsSystem _rmcMutedSounds = default!;
+    // RMC14
 
     public override void Initialize()
     {
@@ -205,7 +209,9 @@ public abstract class SharedEmitSoundSystem : EntitySystem
                 _audioSystem.PlayPredicted(component.Sound, coords, user);
             else if (_netMan.IsServer)
                 // don't predict sounds that client couldn't have played already
-                _audioSystem.PlayPvs(component.Sound, coords);
+                // RMC14
+                _rmcMutedSounds.PlayPvs(component.Sound, coords);
+                // RMC14
         }
         else
         {
@@ -213,7 +219,9 @@ public abstract class SharedEmitSoundSystem : EntitySystem
                 _audioSystem.PlayPredicted(component.Sound, uid, user);
             else if (_netMan.IsServer)
                 // don't predict sounds that client couldn't have played already
-                _audioSystem.PlayPvs(component.Sound, uid);
+                // RMC14
+                _rmcMutedSounds.PlayPvs(component.Sound, uid);
+                // RMC14
         }
     }
 

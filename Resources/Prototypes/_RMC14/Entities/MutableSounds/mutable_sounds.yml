@@ -1,0 +1,74 @@
+# Sounds mutable under voicelines settings tab
+
+- type: entity
+  abstract: true
+  id: RMCMutableSoundBase
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: RMCMutableSoundBase
+  id: RMCMutableSoundSnoring
+  name: snoring
+  components:
+  - type: RMCMutableSound
+    collections:
+    - Snores
+
+- type: entity
+  parent: RMCMutableSoundBase
+  id: RMCMutableSoundWhistling
+  name: whistling
+  components:
+  - type: RMCMutableSound
+    collections:
+    - Whistles
+
+- type: entity
+  parent: RMCMutableSoundBase
+  id: RMCMutableSoundSneezing
+  name: sneezing
+  components:
+  - type: RMCMutableSound
+    collections:
+    - MaleSneezes
+    - FemaleSneezes
+
+- type: entity
+  parent: RMCMutableSoundBase
+  id: RMCMutableSoundCoughing
+  name: coughing
+  components:
+  - type: RMCMutableSound
+    collections:
+    - MaleCoughs
+    - FemaleCoughs
+
+- type: entity
+  parent: RMCMutableSoundBase
+  id: RMCMutableSoundYawning
+  name: yawning
+  components:
+  - type: RMCMutableSound
+    collections:
+    - MaleYawn
+    - FemaleYawn
+
+- type: entity
+  parent: RMCMutableSoundBase
+  id: RMCMutableSoundSighing
+  name: sighing
+  components:
+  - type: RMCMutableSound
+    collections:
+    - MaleSigh
+    - FemaleSigh
+
+- type: entity
+  parent: RMCMutableSoundBase
+  id: RMCMutableSoundCrying
+  name: crying
+  components:
+  - type: RMCMutableSound
+    collections:
+    - MaleCry
+    - FemaleCry
