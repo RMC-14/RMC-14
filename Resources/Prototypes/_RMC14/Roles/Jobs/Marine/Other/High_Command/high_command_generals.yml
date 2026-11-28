@@ -1,0 +1,227 @@
+- type: job
+  parent: CMJobBase
+  id: CMUNMCBrigadierGeneral
+  name: rmc-job-name-unmc-general
+  description: rmc-job-description-unmc-general
+  playTimeTracker: RMCJobUNMCGeneral
+  ranks:
+    RMCRankBrigadierGeneral: []
+  startingGear: RMCGearUNMCBrigadierGeneral
+  icon: "RMCJobIconUNMCBrigadierGeneral"
+  joinNotifyCrew: false
+  spawnMenuRoleName: UNMC O7 - Brigadier General (High Command)
+  accessGroups:
+  - ShipMasterAccess
+  - Colony
+  - Corp
+  - RMCWeYa
+  access:
+  - CMAccessHighCommand
+  - CMAccessXenoQueen
+  - CMAccessXeno
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetHCGeneral
+    - type: MarineOrders
+    - type: Language
+      preset: RMCLanguagePresetAllEarth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: aso
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_hc_com
+  hidden: true
+
+- type: startingGear
+  id: RMCGearUNMCBrigadierGeneral
+  equipment:
+    jumpsuit: CMJumpsuitGeneral
+    outerClothing: RMCCoatJacketGeneralFilled
+    shoes: RMCBootsCBRN
+    head: RMCHeadCapGeneral
+    id: RMCIDCardUNMCBrigadierGeneral
+    ears: CMHeadsetHighCommand
+    eyes: RMCSunglasses
+    gloves: RMCHandsVeteranCBRN
+    back: RMCSatchelLightpack
+    belt: RMCMatebaBeltLuxuriousFilled
+    pocket1: RMCPouchMagazinePistolLargeFilledHighCommand
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+    - RMCHeadBeretGeneral
+  storage:
+    back:
+    - RMCGrenadeWhitePhosphorusCompound
+    - RMCGrenadeFlashBang
+    - RMCTabletCO
+    - RMCLaserDesignator
+    - RMCArmorM3General
+    - CMArmorHelmetM11CGeneral
+    - RMCMatebaCustomizationCaseLuxury
+
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardUNMCBrigadierGeneral
+  name: brigadier general ID card
+  suffix: Admin
+  description: Issued to members of UNMC High Command.
+  components:
+  - type: PresetIdCard
+    job: CMUNMCBrigadierGeneral
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/general.rsi
+    state: general
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/general.rsi
+  - type: Item
+    heldPrefix: green
+
+- type: playTimeTracker
+  id: RMCJobUNMCGeneral
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconUNMCBrigadierGeneral
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/high_command.rsi
+    state: hudsquad_general
+
+- type: job
+  parent: CMUNMCBrigadierGeneral
+  id: RMCUNMCMajorGeneral
+  ranks:
+    RMCRankMajorGeneral: []
+  spawnMenuRoleName: UNMC O8 - Major General (High Command)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetHCGeneral
+    - type: MarineOrders
+    - type: Language
+      preset: RMCLanguagePresetAllEarth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: general1
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_hc_com
+  hidden: true
+
+- type: job
+  parent: CMUNMCBrigadierGeneral
+  id: RMCUNMCLieutenantGeneral
+  ranks:
+    RMCRankLieutenantGeneral: []
+  spawnMenuRoleName: UNMC O9 - Lieutenant General (High Command)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetHCGeneral
+    - type: MarineOrders
+    - type: Language
+      preset: RMCLanguagePresetAllEarth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: general2
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_hc_com
+  hidden: true
+
+- type: job
+  parent: CMUNMCBrigadierGeneral
+  id: RMCUNMCGeneral
+  ranks:
+    RMCRankGeneral: []
+  spawnMenuRoleName: UNMC O10 - General (High Command)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetHCGeneral
+    - type: MarineOrders
+    - type: Language
+      preset: RMCLanguagePresetAllEarth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: general3
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_hc_com
+  hidden: true
+
+- type: job
+  parent: CMUNMCBrigadierGeneral
+  id: RMCUNMCAssistantCommandant
+  name: rmc-job-name-unmc-acmc
+  ranks:
+    RMCRankAssistantCommandant: []
+  spawnMenuRoleName: UNMC O10-C - Assistant Commandant of the Marine Corps (High Command)
+  icon: "RMCJobIconUNMCAssistantCommandant"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetHCGeneral
+    - type: MarineOrders
+    - type: Language
+      preset: RMCLanguagePresetAllEarth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: xo
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_hc_com
+  hidden: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconUNMCAssistantCommandant
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/high_command.rsi
+    state: hudsquad_acmc
+
+- type: job
+  parent: CMUNMCBrigadierGeneral
+  id: RMCUNMCCommandant
+  name: rmc-job-name-unmc-cmc
+  ranks:
+    RMCRankCommandant: []
+  spawnMenuRoleName: UNMC O10-S - Commandant of the Marine Corps (High Command)
+  icon: "RMCJobIconUNMCCommandant"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetHCGeneral
+    - type: MarineOrders
+    - type: Language
+      preset: RMCLanguagePresetAllEarth
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: co
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_hc_com
+  hidden: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconUNMCCommandant
+  icon:
+    sprite: _RMC14/Interface/job_icons/UNMC/high_command.rsi
+    state: hudsquad_cmc
