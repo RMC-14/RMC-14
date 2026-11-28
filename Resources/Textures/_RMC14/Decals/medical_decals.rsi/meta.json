@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3930ec0698c7acdda76e24cd226ed5a4e1e24d0d/icons/effects/medical_decals.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/42e7cc5a1eb5300278597c387bec6bad8b6312fb/icons/effects/medical_decals.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -83,6 +83,114 @@
     },
     {
       "name": "triage_bottom_left"
+    },
+    {
+      "name": "white_triagedecalleftup"
+    },
+    {
+      "name": "white_broken_cryocell1decal"
+    },
+    {
+      "name": "white_broken_cryocell4decal"
+    },
+    {
+      "name": "white_broken_triagedecal"
+    },
+    {
+      "name": "white_triagedecaldir"
+    },
+    {
+      "name": "white_broken_docdecal2"
+    },
+    {
+      "name": "white_docstriping"
+    },
+    {
+      "name": "white_docdecal3"
+    },
+    {
+      "name": "white_cryomid"
+    },
+    {
+      "name": "white_broken_triagedecaldir"
+    },
+    {
+      "name": "white_cryotop"
+    },
+    {
+      "name": "white_broken_cryotop"
+    },
+    {
+      "name": "white_broken_triagedecaltop"
+    },
+    {
+      "name": "white_broken_triagedecalbottomleft"
+    },
+    {
+      "name": "white_broken_docdecal4"
+    },
+    {
+      "name": "white_triagedecalleft"
+    },
+    {
+      "name": "white_broken_triagedecalleft"
+    },
+    {
+      "name": "white_broken_cryomid"
+    },
+    {
+      "name": "white_triagedecaltop"
+    },
+    {
+      "name": "white_broken_cryocell2deval"
+    },
+    {
+      "name": "white_broken_docdecal1"
+    },
+    {
+      "name": "white_broken_cryocell3decal"
+    },
+    {
+      "name": "white_triagedecal"
+    },
+    {
+      "name": "white_triagedecalbottomright"
+    },
+    {
+      "name": "white_broken_docstriping"
+    },
+    {
+      "name": "white_cryocell2deval"
+    },
+    {
+      "name": "white_broken_triagedecalleftup"
+    },
+    {
+      "name": "white_cryocell4decal"
+    },
+    {
+      "name": "white_triagedecalbottom"
+    },
+    {
+      "name": "white_broken_docdecal3"
+    },
+    {
+      "name": "white_cryocell3decal"
+    },
+    {
+      "name": "white_docdecal4"
+    },
+    {
+      "name": "white_docdecal1"
+    },
+    {
+      "name": "white_cryocell1decal"
+    },
+    {
+      "name": "white_broken_triagedecalbottom"
+    },
+    {
+      "name": "white_docdecal2"
     }
   ]
 }

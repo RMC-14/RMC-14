@@ -94,6 +94,10 @@ rmc-ui-intel-recover-corpses = [color=#5B88B0]Recover corpses:[/color]
 rmc-ui-intel-colony-comms = [color=#5B88B0]Colony communications:[/color]
 rmc-ui-intel-colony-power = [color=#5B88B0]Colony power:[/color]
 rmc-ui-intel-clues = [bold]Clues[/bold]
+rmc-ui-intel-search-placeholder = Search clues...
+rmc-ui-intel-hide-areas = Hide Areas
+rmc-ui-intel-show-areas = Show Areas
+rmc-ui-intel-clue-area-preposition = in
 rmc-ui-intel-points-value = { $value }
 rmc-ui-intel-tier-value = { $value }
 rmc-ui-intel-total-credits = Total earned credits: { $value }
@@ -159,3 +163,9 @@ rmc-intel-tech-announcement-wake-troops = Additional troops are being taken out 
 rmc-intel-tech-announcement-wake-specialist = An additional specialist is being taken out of cryo.
 rmc-intel-tech-announcement-tier-4 = THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4. LEVEL 4 assets have been authorised to handle the situation.
 rmc-intel-tech-announcement-nuclear-device = The deployment of Nuclear Ordnance has been authorized and will be delivered to the Requisitions Department via ASRS.
+
+rmc-intel-detector-not-on = Turn the data detector on first.
+rmc-intel-detector-has-intel = The data detector has detected intelligence on your person.
+rmc-intel-detector-no-intel = The data detector does not react.
+rmc-intel-detector-cooldown = The data detector needs to cool down before another self-scan can be performed.
+rmc-intel-detector-self-check-examine = Use the data detector on yourself to perform a self-scan for intelligence.

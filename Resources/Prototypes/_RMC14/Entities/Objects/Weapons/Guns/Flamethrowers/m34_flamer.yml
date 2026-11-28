@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCWeaponFlamer
   name: M34 incinerator unit
@@ -27,7 +27,7 @@
     - Back
   - type: Gun
     cameraRecoilScalar: 0
-    fireRate: 0.333
+    fireRate: 0.286
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -97,6 +97,11 @@
     - RMCWeaponIncineratorM34
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-flamethrower
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCWeaponFlamer
@@ -209,6 +214,17 @@
 
 - type: entity
   parent: RMCTankFlamer
+  id: RMCTankFlamerEmpty
+  suffix: Empty
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents: [ ]
+
+- type: entity
+  parent: RMCTankFlamer
   id: RMCTankFlamerCustom
   name: M34 custom incinerator tank
   description: A fuel tank for use in the M34 incinerator unit.
@@ -264,6 +280,8 @@
   name: LZR-N flame tank
   description: A fuel tank for the LZR-N flame unit. Handle with care.
   components:
+  - type: RMCFlushableSolution
+    canFlush: false
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:
@@ -271,9 +289,23 @@
         reagents:
         - ReagentId: RMCNapalmUTTank
           Quantity: 150
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    targetWhitelist:
+      tags:
+      - VehicleFlamerTankLZRN
+  - type: ReagentTank
+  - type: DrainableSolution
+    solution: rmc_flamer_tank
+  - type: Tag
+    tags:
+    - VehicleFlamerTankLZRN
 
 - type: Tag
   id: RMCTankFlamer
+
+- type: Tag
+  id: VehicleFlamerTankLZRN
 
 - type: entity
   parent: RMCGunCaseBase

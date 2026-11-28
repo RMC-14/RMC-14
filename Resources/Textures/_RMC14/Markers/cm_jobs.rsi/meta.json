@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Cultist and silicon textures taken from https://cm-ss13.com/wiki/Marines, Chief MP texture from RMC14 submitted by sifb26, Provost Marshal and Commanding Officer texture from RMC14 and submited by drmichael, Researcher texture from RMC14 submitted by anzuneth, all other textures from RMC14 and created by BreakpointDebug123",
+  "copyright": "Cultist and silicon textures taken from https://cm-ss13.com/wiki/Marines, Chief MP texture from RMC14 submitted by sifb26, Provost Marshal and Commanding Officer texture from RMC14 and submited by drmichael, Researcher texture from RMC14 submitted by anzuneth, survivor variant textures from RMC14 submitted by Ozehk (Github), all other textures from RMC14 and created by BreakpointDebug123",
   "size": {
     "x": 32,
     "y": 32
@@ -93,6 +93,30 @@
     },
     {
       "name": "survivor"
+    },
+    {
+      "name": "survivor_civilian"
+    },
+    {
+      "name": "survivor_corporate"
+    },
+    {
+      "name": "survivor_doctor"
+    },
+    {
+      "name": "survivor_scientist"
+    },
+    {
+      "name": "survivor_engineer"
+    },
+    {
+      "name": "survivor_security"
+    },
+    {
+      "name": "survivor_commander"
+    },
+    {
+      "name": "survivor_synthetic"
     },
     {
       "name": "synth"

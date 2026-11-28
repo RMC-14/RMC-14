@@ -1,7 +1,6 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/53b8f7f634ef16422e463bd75eeaa16dccab25ab/icons/obj/structures/props/semiotic_standard.dmi, new Semiotics made by SharkSnake98 on GitHub",
+  "copyright": "Sprites by @inspector_jeleshka for RMC14, firestation taken from https://github.com/cmss13-devs/cmss13/blob/6313cf13a9575bc8c52296d8644d9e9cc9644f4f/icons/obj/structures/props/wall_decorations/semiotic_standard.dmi, commonarea, airoom, hydroponics, dockingport, alcoholstorage, and bedroom by SharkSnake98 on GitHub",
   "size": {
     "x": 32,
     "y": 32
@@ -57,6 +56,9 @@
     },
     {
       "name": "bulkheaddoor"
+    },
+    {
+      "name": "chemhaz"
     },
     {
       "name": "chemlab"
@@ -173,6 +175,9 @@
       "name": "medical"
     },
     {
+      "name": "memorial"
+    },
+    {
       "name": "nonpresszerog"
     },
     {
@@ -186,6 +191,9 @@
     },
     {
       "name": "opensup"
+    },
+    {
+      "name": "orbitalcannon"
     },
     {
       "name": "outpatient"
@@ -300,6 +308,9 @@
     },
     {
       "name": "9"
+    },
+    {
+      "name": "firestation"
     }
   ]
 }

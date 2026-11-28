@@ -67,6 +67,8 @@ namespace Content.Client.Lobby.UI
         private FlavorText.FlavorText? _flavorText;
         private TextEdit? _flavorTextEdit;
 
+        private bool _lowestRankSelectable; //RMC14
+
         // One at a time.
         private LoadoutWindow? _loadoutWindow;
 
@@ -149,6 +151,7 @@ namespace Content.Client.Lobby.UI
 
             _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
             _allowFlavorText = _cfgManager.GetCVar(CCVars.FlavorText);
+            _lowestRankSelectable = _cfgManager.GetCVar(RMCCVars.RMCLoadoutLowestRankSelectable);
 
             ImportButton.OnPressed += args =>
             {
@@ -1161,6 +1164,10 @@ namespace Content.Client.Lobby.UI
                                 loadout = new RoleLoadout(roleLoadoutProto.ID);
                                 loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
                             }
+                            else
+                            {
+                                loadout.RecalculatePoints(_prototypeManager); // RMC14 Loadout Fix
+                            }
 
                             OpenLoadout(job, loadout, roleLoadoutProto);
                         };
@@ -1195,7 +1202,9 @@ namespace Content.Client.Lobby.UI
                             }
                         }
 
-                        rankOptions.SetItemDisabled(rankOptions.ItemCount - 1, true);
+                        if (!_lowestRankSelectable)
+                            rankOptions.SetItemDisabled(rankOptions.ItemCount - 1, true);
+
                         // If the job only has 1 rank there is nothing to choose.
                         if (rankProtoIds.Count <= 2)
                             rankOptions.Disabled = true;
@@ -1713,7 +1722,7 @@ namespace Content.Client.Lobby.UI
                 if (selectedIndex < 0)
                     selectedIndex = 0;
 
-                if (preferredRank is { } rank && rank == rankIds.Last())
+                if (!_lowestRankSelectable && preferredRank is { } rank && rank == rankIds.Last())
                 {
                     Profile = Profile?.WithRankPreference(jobID, null);
                     preferenceAdjusted = true;

@@ -1,0 +1,20 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomBarrel
+  name: random barrel spawner
+  description: This is a random barrel.
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Markers/landmarks.rsi
+          state: random_barrel
+    - type: RandomSpawner
+      prototypes:
+        - RMCBarrelBlue
+        - RMCBarrelGreen
+        - RMCBarrelRed
+        - RMCBarrelYellow
+        - RMCBarrelWhite
+        - RMCBarrelBlack
+        - RMCBarrelBrown
+      offset: 0

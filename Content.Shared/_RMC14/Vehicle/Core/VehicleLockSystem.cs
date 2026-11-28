@@ -1,32 +1,25 @@
 using System;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
-using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.NPC.Components;
 using Content.Shared.Popups;
-using Content.Shared.Tools.Systems;
 using Content.Shared.Vehicle.Components;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleLockSystem : EntitySystem
 {
+    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly VehicleSystem _vehicle = default!;
 
     public override void Initialize()
@@ -39,8 +32,39 @@ public sealed class VehicleLockSystem : EntitySystem
 
         SubscribeLocalEvent<VehicleLockActionComponent, VehicleLockActionEvent>(OnLockAction);
         SubscribeLocalEvent<VehicleLockActionComponent, ComponentShutdown>(OnLockActionShutdown);
-        SubscribeLocalEvent<VehicleLockComponent, VehicleLockBreakDoAfterEvent>(OnLockBreakDoAfter);
-        SubscribeLocalEvent<VehicleLockComponent, VehicleLockRepairDoAfterEvent>(OnLockRepairDoAfter);
+    }
+
+    public bool CanPassLock(Entity<VehicleLockComponent?> vehicle, EntityUid user)
+    {
+        if (!Resolve(vehicle, ref vehicle.Comp, false) || !vehicle.Comp.Locked)
+            return true;
+
+        if (HasComp<XenoComponent>(user) || _vehicle.IsVehicleFrameDestroyed(vehicle))
+            return true;
+
+        if (vehicle.Comp.Access.Count > 0)
+        {
+            foreach (var tag in _accessReader.FindAccessTags(user))
+            {
+                if (vehicle.Comp.Access.Contains(tag))
+                    return true;
+            }
+
+            return false;
+        }
+
+        return TryComp(user, out NpcFactionMemberComponent? member) &&
+               vehicle.Comp.Factions.Overlaps(member.Factions);
+    }
+
+    public void SetFactionFromOccupant(EntityUid vehicle, EntityUid user)
+    {
+        var lockComp = EnsureComp<VehicleLockComponent>(vehicle);
+        lockComp.Factions.Clear();
+        if (TryComp(user, out NpcFactionMemberComponent? member))
+            lockComp.Factions.UnionWith(member.Factions);
+
+        Dirty(vehicle, lockComp);
     }
 
     private void OnVehicleMapInit(Entity<VehicleEnterComponent> ent, ref MapInitEvent args)
@@ -147,13 +171,6 @@ public sealed class VehicleLockSystem : EntitySystem
         }
 
         var lockComp = EnsureComp<VehicleLockComponent>(vehicle);
-        if (lockComp.Broken)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-vehicle-lock-broken-attempt"), ent.Owner, ent.Owner, PopupType.SmallCaution);
-            RefreshLockAction(vehicle, lockComp, ent.Comp);
-            return;
-        }
-
         lockComp.Locked = !lockComp.Locked;
         Dirty(vehicle, lockComp);
         RefreshLockAction(vehicle, lockComp, ent.Comp);
@@ -170,85 +187,10 @@ public sealed class VehicleLockSystem : EntitySystem
         if (_net.IsClient || args.Handled)
             return;
 
-        var lockComp = EnsureComp<VehicleLockComponent>(ent.Owner);
-
-        if (TryComp(args.Used, out VehicleKeyComponent? keyComp))
-        {
-            args.Handled = TryUseKeyOnVehicle((args.Used, keyComp), ent.Owner, args.User);
-            return;
-        }
-
-        if (!lockComp.Broken)
-        {
-            if (!_tool.HasQuality(args.Used, lockComp.BreakToolQuality))
-                return;
-
-            var doAfter = new DoAfterArgs(EntityManager, args.User, (float) lockComp.BreakDelay.TotalSeconds, new VehicleLockBreakDoAfterEvent(), ent.Owner, ent.Owner, args.Used)
-            {
-                BreakOnMove = true,
-                BreakOnDamage = true,
-                BreakOnHandChange = true,
-                NeedHand = true,
-                RequireCanInteract = true,
-                DuplicateCondition = DuplicateConditions.SameTool | DuplicateConditions.SameTarget,
-            };
-
-            if (!_doAfter.TryStartDoAfter(doAfter))
-                return;
-
-            StartBreakAlarm(ent.Owner, lockComp);
-            args.Handled = true;
-            return;
-        }
-
-        if (!_tool.HasQuality(args.Used, lockComp.RepairToolQuality))
+        if (!TryComp(args.Used, out VehicleKeyComponent? keyComp))
             return;
 
-        var repairDoAfter = new DoAfterArgs(EntityManager, args.User, (float) lockComp.RepairDelay.TotalSeconds, new VehicleLockRepairDoAfterEvent(), ent.Owner, ent.Owner, args.Used)
-        {
-            BreakOnMove = true,
-            BreakOnDamage = true,
-            BreakOnHandChange = true,
-            NeedHand = true,
-            RequireCanInteract = true,
-            DuplicateCondition = DuplicateConditions.SameTool | DuplicateConditions.SameTarget,
-        };
-
-        if (!_doAfter.TryStartDoAfter(repairDoAfter))
-            return;
-
-        args.Handled = true;
-    }
-
-    private void OnLockBreakDoAfter(Entity<VehicleLockComponent> ent, ref VehicleLockBreakDoAfterEvent args)
-    {
-        if (_net.IsClient || args.Handled)
-            return;
-
-        StopBreakAlarm(ent.Comp);
-
-        if (args.Cancelled || ent.Comp.Broken)
-            return;
-
-        args.Handled = true;
-        ent.Comp.Broken = true;
-        ent.Comp.Locked = false;
-        Dirty(ent);
-        RefreshLockAction(ent.Owner, ent.Comp);
-        _popup.PopupEntity(Loc.GetString("rmc-vehicle-lock-broken-success"), args.User, args.User, PopupType.Small);
-    }
-
-    private void OnLockRepairDoAfter(Entity<VehicleLockComponent> ent, ref VehicleLockRepairDoAfterEvent args)
-    {
-        if (_net.IsClient || args.Cancelled || args.Handled || !ent.Comp.Broken)
-            return;
-
-        args.Handled = true;
-        ent.Comp.Broken = false;
-        ent.Comp.Locked = false;
-        Dirty(ent);
-        RefreshLockAction(ent.Owner, ent.Comp);
-        _popup.PopupEntity(Loc.GetString("rmc-vehicle-lock-repaired"), args.User, args.User, PopupType.Small);
+        args.Handled = TryUseKeyOnVehicle((args.Used, keyComp), ent.Owner, args.User);
     }
 
     private void OnKeyInteractUsing(Entity<VehicleKeyComponent> ent, ref InteractUsingEvent args)
@@ -360,13 +302,14 @@ public sealed class VehicleLockSystem : EntitySystem
             return true;
         }
 
-        if (vehicleLock.Broken)
+        vehicleLock.Locked = !vehicleLock.Locked;
+        if (vehicleLock.Locked &&
+            TryComp(user, out NpcFactionMemberComponent? member) &&
+            !vehicleLock.Factions.SetEquals(member.Factions))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-vehicle-lock-broken-attempt"), user, user, PopupType.SmallCaution);
-            return true;
+            SetFactionFromOccupant(vehicle, user);
         }
 
-        vehicleLock.Locked = !vehicleLock.Locked;
         Dirty(vehicle, vehicleLock);
         RefreshLockAction(vehicle, vehicleLock);
         _popup.PopupEntity(
@@ -402,65 +345,5 @@ public sealed class VehicleLockSystem : EntitySystem
         }
 
         _meta.SetEntityName(key.Owner, Loc.GetString(copied ? "rmc-vehicle-key-name-copy" : "rmc-vehicle-key-name"));
-    }
-
-    private void StartBreakAlarm(EntityUid vehicle, VehicleLockComponent lockComp)
-    {
-        StopBreakAlarm(lockComp);
-        lockComp.AlarmToken = _random.Next();
-        var token = lockComp.AlarmToken;
-        var interval = lockComp.BreakAlarmInterval;
-        if (interval <= TimeSpan.Zero)
-            interval = TimeSpan.FromSeconds(5);
-
-        for (var elapsed = interval; elapsed < lockComp.BreakDelay; elapsed += interval)
-        {
-            var delay = elapsed;
-            Timer.Spawn(delay, () => PulseBreakAlarm(vehicle, token));
-        }
-    }
-
-    private static void StopBreakAlarm(VehicleLockComponent lockComp)
-    {
-        lockComp.AlarmToken++;
-    }
-
-    private void PulseBreakAlarm(EntityUid vehicle, int token)
-    {
-        if (_net.IsClient ||
-            !TryComp(vehicle, out VehicleLockComponent? lockComp) ||
-            lockComp.AlarmToken != token ||
-            lockComp.Broken)
-        {
-            return;
-        }
-
-        if (TryComp(vehicle, out VehicleSoundComponent? sound) && sound.HornSound != null)
-        {
-            sound.NextHornSound = _timing.CurTime + TimeSpan.FromSeconds(sound.HornCooldown);
-            _audio.PlayPvs(sound.HornSound, vehicle);
-            Dirty(vehicle, sound);
-        }
-
-        SharedPointLightComponent? light = null;
-        if (!_lights.ResolveLight(vehicle, ref light))
-            return;
-
-        var restoreEnabled = light.Enabled;
-        _lights.SetEnabled(vehicle, true, light);
-
-        var flashDuration = lockComp.BreakAlarmFlashDuration;
-        Timer.Spawn(flashDuration, () =>
-        {
-            if (!TryComp(vehicle, out VehicleLockComponent? liveLock) ||
-                liveLock.AlarmToken != token)
-            {
-                return;
-            }
-
-            SharedPointLightComponent? liveLight = null;
-            if (_lights.ResolveLight(vehicle, ref liveLight))
-                _lights.SetEnabled(vehicle, restoreEnabled, liveLight);
-        });
     }
 }

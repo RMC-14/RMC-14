@@ -230,3 +230,20 @@
     back:
     - RMCHelmetGarbMovieTicket
 
+- type: loadout
+  id: HelmetGarbXM43E1RMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbXM43E1
+
+- type: loadout
+  id: HelmetGarbRabbitsFootRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbRabbitsFoot
+
+
+
+

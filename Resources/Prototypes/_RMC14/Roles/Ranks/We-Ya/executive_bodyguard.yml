@@ -1,0 +1,48 @@
+- type: rank
+  id: RMCRankWeYaBodyguardTPPO
+  name: Trainee Personal Protection Officer
+  prefix: TPPO.
+  paygrade: WY-SEC-1
+  jobIcon: RMCJobIconExecutiveBodyguardTPPO
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPO
+  name: Personal Protection Officer
+  prefix: PPO.
+  paygrade: WY-SEC-2
+  jobIcon: RMCJobIconExecutiveBodyguard
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPS
+  name: Personal Protection Specialist
+  prefix: PPS.
+  paygrade: WY-SEC-3
+  jobIcon: RMCJobIconExecutiveBodyguardPPS
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPC
+  name: Personal Protection Coordinator
+  prefix: PPC.
+  paygrade: WY-SEC-4
+  jobIcon: RMCJobIconExecutiveBodyguardPPC
+
+- type: rank
+  id: RMCRankWeYaBodyguardDPO
+  name: Directorate Protection Officer
+  prefix: DPO.
+  paygrade: WY-SEC-5
+  jobIcon: RMCJobIconExecutiveBodyguardDPO
+
+- type: rank
+  id: RMCRankWeYaBodyguardDPS
+  name: Directorate Protection Specialist
+  prefix: DPS.
+  paygrade: WY-SEC-6
+  jobIcon: RMCJobIconExecutiveBodyguardDPS
+
+- type: rank
+  id: RMCRankWeYaBodyguardDPC
+  name: Directorate Protection Coordinator
+  prefix: DPC.
+  paygrade: WY-SEC-7
+  jobIcon: RMCJobIconExecutiveBodyguardDPC

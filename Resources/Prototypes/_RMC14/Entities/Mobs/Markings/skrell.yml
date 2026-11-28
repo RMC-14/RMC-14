@@ -128,7 +128,7 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_left_emo_long
-  
+
 - type: marking
   id: RMCHairSkrellLooseBraid
   bodyPart: HeadTop
@@ -288,6 +288,42 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/markings.rsi
       state: skr-axiori-eyes
+
+- type: marking
+  id: RMCEyesSkrellAbyssal
+  bodyPart: Eyes
+  markingCategory: Head
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/markings.rsi
+      state: skr-abyssal-eyes
+
+- type: marking
+  id: RMCEyesSkrellCruciform
+  bodyPart: Eyes
+  markingCategory: Head
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/markings.rsi
+      state: skr-t-eyes
+
+- type: marking
+  id: RMCMouthSkrellPout
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/markings.rsi
+      state: skr-pout-mouth
+
+- type: marking
+  id: RMCMouthSkrellWide
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/markings.rsi
+      state: skr-wide-mouth
 
 # Spots
 - type: marking

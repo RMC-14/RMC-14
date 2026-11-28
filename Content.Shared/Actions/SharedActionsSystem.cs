@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Timing;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
@@ -39,6 +40,7 @@ public abstract class SharedActionsSystem : EntitySystem
     // RMC14
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private readonly RMCTimingSystem _rmcTiming = default!;
 
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<ActionsComponent> _actionsQuery;
@@ -126,10 +128,25 @@ public abstract class SharedActionsSystem : EntitySystem
         return (ent, ent.Comp);
     }
 
-    public void SetCooldown(Entity<ActionComponent?>? action, TimeSpan start, TimeSpan end)
+    public void SetCooldown(Entity<ActionComponent?>? action, TimeSpan start, TimeSpan end, bool applyModifications = false)
     {
         if (GetAction(action) is not {} ent)
             return;
+
+        // RMC14 start
+        if (applyModifications)
+        {
+            var ev = new SettingCooldownEvent()
+            {
+                InitialDelay = end - start,
+                Start = start,
+                End = end
+            };
+            RaiseLocalEvent(ent, ref ev);
+            start = ev.Start;
+            end = ev.End;
+        }
+        // RMC14 end
 
         ent.Comp.Cooldown = new ActionCooldown
         {
@@ -151,10 +168,10 @@ public abstract class SharedActionsSystem : EntitySystem
     /// <summary>
     /// Starts a cooldown starting now, lasting for <c>cooldown</c> seconds.
     /// </summary>
-    public void SetCooldown(Entity<ActionComponent?>? action, TimeSpan cooldown)
+    public void SetCooldown(Entity<ActionComponent?>? action, TimeSpan cooldown, bool applyModifications = true)
     {
         var start = GameTiming.CurTime;
-        SetCooldown(action, start, start + cooldown);
+        SetCooldown(action, start, start + cooldown, applyModifications);
     }
 
     public void ClearCooldown(Entity<ActionComponent?>? action)
@@ -176,13 +193,30 @@ public abstract class SharedActionsSystem : EntitySystem
     /// <summary>
     ///     Sets the cooldown for this action only if it is bigger than the one it already has.
     /// </summary>
-    public void SetIfBiggerCooldown(Entity<ActionComponent?>? action, TimeSpan cooldown)
+    public void SetIfBiggerCooldown(Entity<ActionComponent?>? action, TimeSpan cooldown, bool applyModifications = true)
     {
         if (GetAction(action) is not {} ent || cooldown < TimeSpan.Zero)
             return;
 
         var start = GameTiming.CurTime;
         var end = start + cooldown;
+
+        // RMC14 start
+        if (applyModifications)
+        {
+            // We need to apply modifications before checking if it's bigger
+            var ev = new SettingCooldownEvent()
+            {
+                InitialDelay = end - start,
+                Start = start,
+                End = end
+            };
+            RaiseLocalEvent(ent, ref ev);
+            start = ev.Start;
+            end = ev.End;
+        }
+        // RMC14 end
+
         if (ent.Comp.Cooldown?.End > end)
             return;
 
@@ -198,18 +232,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (GetAction(action) is not {} ent || ent.Comp.UseDelay is not {} delay)
             return;
 
-        // RMC14 start
-        var ev = new StartUseDelayEvent()
-        {
-            Delay = delay,
-            Start = GameTiming.CurTime,
-            End = GameTiming.CurTime + delay
-        };
-        RaiseLocalEvent(ent, ref ev);
-        SetCooldown((ent, ent), ev.Start, ev.End);
-        // RMC14 end
-
-        //SetCooldown((ent, ent), delay); // RMC14 replaced by above
+        SetCooldown((ent, ent), delay);
     }
 
     public void SetUseDelay(Entity<ActionComponent?>? action, TimeSpan? delay)
@@ -889,7 +912,8 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!comp.Enabled)
             return false;
 
-        var curTime = GameTiming.CurTime;
+        var curTime = _rmcTiming.GetInSimulationTime(); // RMC14
+
         if (comp.Cooldown.HasValue && comp.Cooldown.Value.End > curTime)
             return false;
 
@@ -1077,9 +1101,9 @@ public abstract class SharedActionsSystem : EntitySystem
 
 // RMC14
 [ByRefEvent]
-public struct StartUseDelayEvent
+public struct SettingCooldownEvent
 {
-    public TimeSpan Delay;
+    public TimeSpan InitialDelay { get; init; }
     public TimeSpan Start;
     public TimeSpan End;
 }
