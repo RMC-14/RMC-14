@@ -1,7 +1,6 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by @inspector_jeleshka for RMC14, firestation taken from https://github.com/cmss13-devs/cmss13/blob/6313cf13a9575bc8c52296d8644d9e9cc9644f4f/icons/obj/structures/props/wall_decorations/semiotic_standard.dmi",
+  "copyright": "Sprites by @inspector_jeleshka for RMC14, firestation taken from https://github.com/cmss13-devs/cmss13/blob/6313cf13a9575bc8c52296d8644d9e9cc9644f4f/icons/obj/structures/props/wall_decorations/semiotic_standard.dmi, commonarea, airoom, hydroponics, dockingport, alcoholstorage, and bedroom by SharkSnake98 on GitHub",
   "size": {
     "x": 32,
     "y": 32
@@ -11,7 +10,13 @@
       "name": "airlock"
     },
     {
+      "name": "airoom"
+    },
+    {
       "name": "airtraffictower"
+    },
+    {
+      "name": "alcoholstorage"
     },
     {
       "name": "ammo"
@@ -36,6 +41,9 @@
     },
     {
       "name": "bathwomens"
+    },
+    {
+      "name": "bedroom"
     },
     {
       "name": "biohazard"
@@ -65,6 +73,9 @@
       "name": "commlineconnection"
     },
     {
+      "name": "commonarea"
+    },
+    {
       "name": "confroom"
     },
     {
@@ -75,6 +86,9 @@
     },
     {
       "name": "distpipe"
+    },
+    {
+      "name": "dockingport"
     },
     {
       "name": "east"
@@ -126,6 +140,9 @@
     },
     {
       "name": "hvacold"
+    },
+    {
+      "name": "hydroponics"
     },
     {
       "name": "ladder"
@@ -194,6 +211,9 @@
       "name": "radshield"
     },
     {
+      "name": "reactor"
+    },
+    {
       "name": "radiorad"
     },
     {
@@ -219,6 +239,9 @@
     },
     {
       "name": "security"
+    },
+    {
+      "name": "shuttlebay"
     },
     {
       "name": "south"
@@ -288,5 +311,6 @@
     },
     {
       "name": "firestation"
-    }  ]
+    }
+  ]
 }

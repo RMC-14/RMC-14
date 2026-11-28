@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/aa27782cdbf449796c9b7f8e73cfffd2958308cd/icons/obj/structures/props/atm.dmi, edited by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "atm",
+      "delays": [
+        [
+          0.35,
+          0.35,
+          0.35,
+          0.35
+        ]
+      ]
+    },
+    {
+      "name": "atm_off"
+    }
+  ]
+}
