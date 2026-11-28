@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleCR16 # TODO: Make the M16 grenadier rifle when impact nades exist
   name: CR16 rifle
-  description: The Combat Rifle, Model 16 - an old but reliable design that still finds use across the colonies by security forces and rebels alike. Chambered in 5.56x45mm.
+  description: The Combat Rifle, Model 16 - an old but reliable design that still finds use across the colonies by security forces and rebels alike. Chambered in 5.56x45mm and accepts UNSTAC magazines.
   suffix: Filled
   components:
   - type: Sprite
@@ -142,7 +142,7 @@
   id: RMCWeaponRifleCR16A5
   name: CR16A5 Rifle
   suffix: Filled
-  description: A modernised version of the Combat Rifle, Model 16. Chambered in 5.56x45mm.
+  description: A modernised version of the Combat Rifle, Model 16, sacrificing the carry handle for a lower height over bore using optics and shortening the barrel length for improved ergonomics. Chambered in 5.56x45mm and accepts UNSTAC magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/cr16a5.rsi
@@ -164,8 +164,8 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleCR16
-  name: "CR16 magazine (5.56x45mm)"
-  description: A twenty-round magazine of 5.56x45mm cartridges, machined to fit CR16-pattern rifles.
+  name: "UNSTAC magazine (5.56x45mm)"
+  description: A twenty-round magazine of 5.56x45mm cartridges, machined to fit rifles compliant with the United Nations Standardisation Accords.
   components:
   - type: Tag
     tags:
@@ -190,8 +190,8 @@
 - type: entity
   parent: RMCMagazineRifleCR16
   id: RMCMagazineRifleCR16Ext
-  name: "CR16 extended magazine (5.56x45mm)"
-  description: A thirty-round extended magazine of 5.56x45mm cartridges, machined to fit CR16-pattern rifles.
+  name: "UNSTAC extended magazine (5.56x45mm)"
+  description: A thirty-round extended magazine of 5.56x45mm cartridges, machined to fit rifles compliant with the United Nations Standardisation Accords.
   components:
   - type: Tag
     tags:
