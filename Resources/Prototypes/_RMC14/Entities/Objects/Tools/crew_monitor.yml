@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPortableCrewMonitor
+  name: crew monitor
+  description: A compact device used to locate personnel through their uniform sensors.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/crew_monitor.rsi
+    state: crew_monitor
+  - type: Item
+    size: Small
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - belt
+    - suitstorage
+  - type: ActivatableUI
+    key: enum.RMCPortableCrewMonitorUIKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.RMCPortableCrewMonitorUIKey.Key:
+        type: RMCPortableCrewMonitorBui
+  - type: RMCPortableCrewMonitor
+    npcFactions:
+    - UNMC
+    iffFactions:
+    - FactionMarine
+  - type: RMCPortableCrewMonitorTracking
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
