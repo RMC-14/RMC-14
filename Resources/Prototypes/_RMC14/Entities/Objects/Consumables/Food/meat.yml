@@ -441,7 +441,7 @@
     - Cutlet
     - Meat
   - type: Sprite
-    sprite: Objects/Consumable/Food/meat.rsi #TODO: RMC-style cutlet sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
     state: cutlet
   - type: SolutionContainerManager
     solutions:
@@ -463,7 +463,40 @@
     - Raw
     - Meat
   - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+    state: rawmeatball
+
+- type: entity
+  name: meatball
+  parent: RMCFoodMeatBase
+  id: RMCFoodMeatMeatballCooked
+  description: A cooked meatball. Perfect to add to other dishes... except fruity ones.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
     state: meatball
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Protein
+          Quantity: 5
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatBall
+      Taco: MeatBall
+  - type: Construction
+    graph: MeatMeatballCooked
+    node: meatball cooked
+  - type: Item
+    heldPrefix: meatball
+
 
 - type: entity
   name: raw bear meat
