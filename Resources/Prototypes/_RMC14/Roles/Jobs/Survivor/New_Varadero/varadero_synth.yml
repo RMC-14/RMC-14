@@ -1,6 +1,6 @@
 - type: job
   parent: RMCSyntheticColony
-  id: RMCSurvivorUNMCSynth
+  id: RMCSurvivorNewVaraderoSynth
   name: rmc-job-name-survivor-varadero-synth
   ranks:
     RMCRankChiefWarrantOfficer:

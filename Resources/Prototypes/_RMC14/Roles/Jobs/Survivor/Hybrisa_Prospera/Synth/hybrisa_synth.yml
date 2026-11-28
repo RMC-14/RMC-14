@@ -38,6 +38,7 @@
   components:
   - type: EntityPreset
     randomOutfits:
+    ## Civilian
     # WeYa mart employee
     - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, CMSatchel, RMCShoesLaceup ]
     # Sanitation
