@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites and edits by TheFairyKings. acid_barrage edited from acid_shotgun by Aleksh",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    { "name": "acid_barrage" },
+    { "name": "caustic_embrace" },
+    { "name": "oozing_wounds" },
+    { "name": "catalyze" }
+  ]
+}

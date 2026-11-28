@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by TheFairyKings",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    { "name": "hypertension_0" },
+    { "name": "hypertension_1" },
+    { "name": "hypertension_2" },
+    { "name": "hypertension_3" },
+    { "name": "hypertension_4" }
+  ]
+}

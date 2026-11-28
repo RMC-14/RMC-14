@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by TheFairyKings",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    { "name": "alive", "directions": 4 },
+    { "name": "sleeping" },
+    { "name": "crit" },
+    { "name": "dead" },
+    { "name": "despoiler_walk_0", "directions": 4 },
+    { "name": "despoiler_walk_1", "directions": 4 },
+    { "name": "despoiler_walk_2", "directions": 4 },
+    { "name": "despoiler_walk_3", "directions": 4 },
+    { "name": "despoiler_rest_0" },
+    { "name": "despoiler_rest_1" },
+    { "name": "despoiler_rest_2" },
+    { "name": "despoiler_rest_3" },
+    { "name": "despoiler_downed_0" },
+    { "name": "despoiler_downed_1" },
+    { "name": "despoiler_downed_2" },
+    { "name": "despoiler_downed_3" },
+    { "name": "hypertension_alive_1" },
+    { "name": "hypertension_alive_2" },
+    { "name": "hypertension_alive_3" },
+    { "name": "hypertension_alive_4" },
+    { "name": "hypertension_downed_1" },
+    { "name": "hypertension_downed_2" },
+    { "name": "hypertension_downed_3" },
+    { "name": "hypertension_downed_4" },
+    { "name": "hypertension_rest_1" },
+    { "name": "hypertension_rest_2" },
+    { "name": "hypertension_rest_3" },
+    { "name": "hypertension_rest_4" }
+  ]
+}
