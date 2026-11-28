@@ -140,6 +140,14 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#e2da00"
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
 
 - type: entity
   parent: CMCartridgePistol45ACP
@@ -170,6 +178,14 @@
         minMobSize: VerySmallXeno
       maxRange: 4.5
       stunTime: 1
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
 
 - type: Tag
   id: RMCMagazinePistolM1911HIAP

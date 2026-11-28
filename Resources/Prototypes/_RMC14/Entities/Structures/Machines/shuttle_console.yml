@@ -351,6 +351,7 @@
   - type: DropshipDestination
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: CrashLandingBlocked
 
 - type: entity
   parent: CMDropshipDestination

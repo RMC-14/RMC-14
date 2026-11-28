@@ -12,6 +12,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    pointsType: RFNVenderPoints
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -216,6 +217,8 @@
         points: 15
       - id: RMCWhistle
         points: 5
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 15
     - name: Binoculars
       entries:
       - id: RMCBinoculars

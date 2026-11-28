@@ -150,6 +150,9 @@ public sealed partial class VehicleWeaponsUiState
     public List<VehicleWeaponsUiEntry> Hardpoints;
 
     [DataField]
+    public bool HasStabilization;
+
+    [DataField]
     public bool CanToggleStabilization;
 
     [DataField]
@@ -169,6 +172,7 @@ public sealed partial class VehicleWeaponsUiState
     public VehicleWeaponsUiState(
         NetEntity vehicle,
         List<VehicleWeaponsUiEntry> hardpoints,
+        bool hasStabilization,
         bool canToggleStabilization,
         bool stabilizationEnabled,
         bool canToggleAuto,
@@ -176,6 +180,7 @@ public sealed partial class VehicleWeaponsUiState
     {
         Vehicle = vehicle;
         Hardpoints = hardpoints;
+        HasStabilization = hasStabilization;
         CanToggleStabilization = canToggleStabilization;
         StabilizationEnabled = stabilizationEnabled;
         CanToggleAuto = canToggleAuto;
