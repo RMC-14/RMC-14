@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Maths;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -49,6 +50,24 @@ public sealed partial class XenoChargeComponent : Component
 
     [DataField, AutoNetworkedField]
     public float Strength = 20;
+
+    /// <summary>
+    /// How much plasma to refund when hitting something that's not blacklisted
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 HitRefundPlasma = 10;
+
+    /// <summary>
+    /// How much to reduce cooldown when hitting something that's not blacklisted
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan HitRefundCooldown = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// Blacklist for entities that don't give a refund on hit
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? HitRefundBlacklist;
 
     [DataField]
     public HashSet<EntityUid> AlreadyHit = new();

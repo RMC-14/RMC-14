@@ -1,8 +1,7 @@
-using System.Numerics;
 using Content.Client._RMC14.ParaDrop;
 using Content.Client._RMC14.Sprite;
 using Content.Shared._RMC14.CrashLand;
-using Content.Shared.ParaDrop;
+using Content.Shared._RMC14.ParaDrop;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.CrashLand;
@@ -12,7 +11,6 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
     [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
     [Dependency] private readonly ParaDropSystem _paraDrop = default!;
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private const string CrashingAnimationKey = "crashing-animation";
 
@@ -28,17 +26,7 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
             return;
 
         if (TryComp(ent, out AnimationPlayerComponent? animation))
-            _animPlayer.Stop((ent, animation),CrashingAnimationKey);
-
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        var offset = new Vector2();
-
-        if (TryComp(ent, out CrashLandableComponent? crashLandable))
-            offset = crashLandable.OriginalSpriteOffset;
-
-        _sprite.SetOffset(ent.Owner, offset);
+            _animPlayer.Stop((ent, animation), CrashingAnimationKey);
     }
 
     public override void Update(float frameTime)
@@ -51,11 +39,11 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
             {
                 if (!_animPlayer.HasRunningAnimation(uid, CrashingAnimationKey) && crashLandable.LastCrash != null)
                 {
-                    crashLandable.OriginalSpriteOffset = sprite.Offset;
+                    crashLanding.OriginalSpriteOffset = sprite.Offset;
                     _paraDrop.PlayFallAnimation(uid, crashLandable.CrashDuration, crashLanding.RemainingTime, crashLandable.FallHeight, CrashingAnimationKey);
                 }
 
-                _rmcSprite.UpdatePosition(uid);
+                _rmcSprite.UpdateSpriteTree(uid);
             }
         }
     }

@@ -18,9 +18,6 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
 
-    // RMC14
-    private readonly List<EntityUid> _spawned = new();
-
     public override void Initialize()
     {
         base.Initialize();
@@ -59,6 +56,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     /// Spawns projectiles at the coordinates of the grenade upon triggering
     /// Can customize the angle and velocity the projectiles come out at
     /// </summary>
+    // RMC14
     private void FragmentIntoProjectiles(EntityUid uid, ProjectileGrenadeComponent component, EntityUid? user)
     {
         var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
@@ -80,72 +78,69 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         if (totalCount <= 0)
             return;
 
-        if (!TrySpawnContents(spawnCoordinates, component, out var firstContentUid))
-            return;
-
         var shooter = component.TriggerUserIsShooter ? user : null;
-        var prepareEv = new PrepareFragmentIntoProjectilesEvent(firstContentUid, totalCount, spawnCoordinates, shooter);
-        RaiseLocalEvent(uid, ref prepareEv);
-
-        prepareEv.ConsumedProjectileIndices.RemoveWhere(index => index < 0 || index >= totalCount);
-        var consumed = prepareEv.ConsumedProjectileIndices.Count;
-        EntityUid? pendingContentUid = firstContentUid;
-        if (consumed > 0)
+        var remainingIndices = new List<int>(totalCount);
+        for (var index = 0; index < totalCount; index++)
         {
-            QueueDel(firstContentUid);
-            ConsumeContents(component, consumed - 1);
-            pendingContentUid = null;
+            remainingIndices.Add(index);
         }
 
-        var hitEntities = prepareEv.HitEntities;
-        var segmentAngle = 360 / totalCount;
-        var shootCount = 0;
-
-        _spawned.Clear();
-        while (true)
+        var hitEntities = new List<EntityUid>();
+        var spawned = new List<EntityUid>(totalCount);
+        EntityUid? pendingContent = null;
+        if (component.DirectHit && component.DirectHitChance != null)
         {
-            while (prepareEv.ConsumedProjectileIndices.Contains(shootCount))
-                shootCount++;
+            if (!TrySpawnContents(spawnCoordinates, component, out var sample))
+                return;
 
-            if (shootCount >= totalCount)
-                break;
+            var prepare = new PrepareFragmentIntoProjectilesEvent(
+                sample, spawnCoordinates, shooter, remainingIndices, hitEntities);
+            RaiseLocalEvent(uid, ref prepare);
 
-            EntityUid contentUid;
-            if (pendingContentUid is { } pending)
+            var consumed = totalCount - remainingIndices.Count;
+            if (consumed > 0)
             {
+                QueueDel(sample);
+                ConsumeContents(component, consumed - 1);
+            }
+            else
+            {
+                pendingContent = sample;
+            }
+        }
+
+        var segmentAngle = 360 / totalCount;
+        foreach (var shootIndex in remainingIndices)
+        {
+            EntityUid contentUid;
+            if (pendingContent is { } pending)
+            {
+                pendingContent = null;
                 contentUid = pending;
-                pendingContentUid = null;
             }
             else if (!TrySpawnContents(spawnCoordinates, component, out contentUid))
             {
                 break;
             }
 
-            Angle angle;
-            if (component.RandomAngle)
-                angle = _random.NextAngle();
-            else
-            {
-                var angleMin = segmentAngle * shootCount;
-                var angleMax = segmentAngle * (shootCount + 1);
-                angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+            spawned.Add(contentUid);
+            var angle = component.RandomAngle
+                ? _random.NextAngle()
+                : Angle.FromDegrees(_random.Next(segmentAngle * shootIndex, segmentAngle * (shootIndex + 1)));
 
-                // RMC14
-                var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, angle, shootCount, hitEntities);
-                RaiseLocalEvent(uid, ref ev);
+            var ev = new FragmentIntoProjectilesEvent(
+                contentUid, totalCount, component.UnspawnedCount, angle, shootIndex, hitEntities);
+            RaiseLocalEvent(uid, ref ev);
 
-                if (ev.TotalCount <= 0)
-                    return;
-                if (ev.Handled)
-                {
-                    hitEntities = ev.HitEntities;
-                    angle = ev.Angle;
-                }
-            }
+            if (ev.TotalCount <= 0)
+                break;
 
-            shootCount++;
+            if (ev.ProjectDirectHitted)
+                continue;
 
-            // RMC14
+            if (ev.Handled)
+                angle = ev.Angle;
+
             EntityUid? gunUid = shooter == null ? null : uid;
             var shooterUid = shooter;
 
@@ -181,15 +176,14 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             }
 
             _gun.ShootProjectile(contentUid, direction, velocity, gunUid, shooterUid, speed);
-            _spawned.Add(contentUid);
         }
 
-        var clusterEv = new CMClusterSpawnedEvent(_spawned, hitEntities, uid);
+        var clusterEv = new CMClusterSpawnedEvent(spawned, hitEntities, uid);
         RaiseLocalEvent(uid, ref clusterEv);
         RaiseLocalEvent(uid,
             new AmmoShotEvent
             {
-                FiredProjectiles = _spawned,
+                FiredProjectiles = spawned,
             });
         QueueDel(uid);
     }
@@ -212,6 +206,8 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             count--;
         }
     }
+
+    // RMC14
 
     /// <summary>
     /// Spawns one instance of the fill prototype or contained entity at the coordinate indicated

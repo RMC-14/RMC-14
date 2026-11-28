@@ -59,8 +59,7 @@
     autoEject: true
   - type: RMCNameItemOnVend
     item: Sidearm
-  - type: GunUnskilledPenalty
-    angleIncrease: 5
+  - type: GunUnskilledUsable
   - type: GunPointBlank
   - type: GunDualWielding
     weaponGroup: Handgun
@@ -84,6 +83,11 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-pistol
+    whitelist:
+      components:
+      - Xeno
   - type: RMCGunChamber
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg

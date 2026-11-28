@@ -35,7 +35,8 @@
         RMCSkillFirearms: 1
     - type: CMVendorUser
       id: CMRifleman
-      points: 45
+      extraPoints:
+        RFNVenderPoints: 45
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-rifleman
@@ -137,6 +138,22 @@
     description: cm-job-description-rifleman
     rules: ghost-role-information-nonantagonist-rules
     reregister: false
+    raffle:
+      settings: default
+    job: CMRifleman
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 1
+
+- type: entity
+  id: RMCNewGhostRifleman
+  abstract: true
+  components:
+  - type: GhostRole
+    name: cm-job-name-rifleman
+    description: cm-job-description-rifleman
+    rules: ghost-role-information-nonantagonist-rules
     raffle:
       settings: default
     job: CMRifleman

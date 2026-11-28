@@ -51,7 +51,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Biocidic
-        potency: 1
+        level: 1
 
 - type: reagent
   parent: RMCReagentElement
@@ -85,7 +85,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Toxic
-        potency: 1
+        level: 1
       - !type:HealthChange #TODO PROPERTY_NEUTRALIZING = 1
         damage:
           groups:
@@ -151,7 +151,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Hemogenic
-        potency: 3
+        level: 3
 
 - type: reagent
   parent: RMCReagentElement
@@ -195,17 +195,17 @@
   flavor: metallic
   color: "#484848"
   unknown: true
+  overdose: 30 # No overdose_critical
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:GenericStatusEffect
-        key: Stutter
-        component: ScrambledAccent
-#TODO brain damage, OD more brain damage and jitter, COD applies neuro
-#Chance to paralyze/stun, lowers body temp on OD and brain damage on COD
-#Message on processing, brain damage on OD, paralyze on COD
-#Each diff property
+      - !type:Neurotoxic
+        level: 4
+      #- !type:Neurocryogenic
+      #  level: 1
+      #- !type:Disrupting
+      #  level: 1
 
 - type: reagent
   parent: RMCReagentElement
@@ -259,8 +259,9 @@
       metabolismRate: 0.1
       effects:
       - !type:Carcinogenic
-        potency: 2
-#TODO causes internal bleeding, OD organ damage, critical causes even more #PROPERTY_HEMORRAGING = 1
+        level: 2
+      - !type:Hemorrhaging
+        level: 1
 
 - type: reagent
   parent: RMCReagentElement
@@ -345,7 +346,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Carcinogenic
-        potency: 2
+        level: 2
 
 - type: reagent
   parent: RMCReagentElement
@@ -364,6 +365,7 @@
       effects:
       - !type:ChemVomit
         probability: 0
+# PROPERTY_OXIDIZING = 2
 
 - type: reagent
   parent: RMCReagentElement
@@ -449,7 +451,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Nutritious
-        potency: 1
+        level: 1
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/sugarglass.rsi
     state: icon_empty
@@ -474,9 +476,9 @@
       metabolismRate: 0.05
       effects:
       - !type:Toxic
-        potency: 1
+        level: 1
       - !type:Corrosive
-        potency: 3
+        level: 3
 
 - type: reagent
   parent: RMCReagentElement

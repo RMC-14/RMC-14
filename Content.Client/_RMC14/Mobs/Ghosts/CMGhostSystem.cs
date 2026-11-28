@@ -58,7 +58,7 @@ namespace Content.Client._RMC14.Mobs.Ghosts
                 return false;
             }
 
-            return GameTiming.CurTime < mutedUntil;
+            return GameTiming.ServerTime < mutedUntil;
         }
     }
 }

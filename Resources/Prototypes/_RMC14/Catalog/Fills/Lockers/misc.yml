@@ -60,6 +60,19 @@
       - id: CMPackFlare
 
 - type: entity
+  id: RMCWallClosetFireSafetyFilled
+  parent: RMCWallClosetFireSafety
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCHardhatRed
+      - id: RMCSuitFirefighter
+      - id: RMCReagentGasTankOxygen
+      - id: CMFireExtinguisher
+      - id: CMPackFlare
+
+- type: entity
   parent: CMLockerCommanderSecure
   id: CMLockerCommanderSecureFilled
   suffix: Filled
@@ -120,11 +133,26 @@
     - id: RMCSynthResetKeySMART
     - id: RMCMREWeYa
     - id: RMCMREWeYa
-      # ToDo: RMC14 Platinum Coin
+    - id: RMCCoinPlatinum
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000
     - id: RMCBackpackRTOBagPhone
     - id: RMCShoulderHolsterPK7
+
+- type: entity
+  parent: RMCLockerSecureSafeCO
+  id: RMCLockerSecureSafeCOFilled
+  suffix: Commanding Officer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMoneybag
+    - id: RMCCoinChallenge
+    - id: RMCGlassesMonocle
+    - id: RMCZippoGold
+      # ToDo: RMC14 Almayer code book
+    - id: RMCHollowCane
+    - id: RMCTelescopicBaton
 
 - type: entity
   parent: RMCLockerFieldDoctor

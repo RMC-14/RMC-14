@@ -21,6 +21,9 @@
       time: 50 # seconds
       dps: 7.2
       expendableLightDps: 2.5
+    deferBlacklist:
+      components:
+      - MobState
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -36,16 +39,7 @@
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
   description: Melts down a structure or item over time.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
       strength: Weak
@@ -60,16 +54,7 @@
   name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
   description: Melts down a structure or item over time.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
@@ -84,16 +69,7 @@
   name: Strong Corrosive Acid (100 acid)
   description: Melts down barricades or items over time. You cannot melt structures.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: corrosive_acid
-    checkCanInteract: false
-  - type: TargetAction
-    repeat: true
   - type: EntityTargetAction
-    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
@@ -144,6 +120,8 @@
   - type: RMCDazeableAction
   - type: ActionInRangeUnobstructed
     range: 2.5
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoTailSlam
@@ -400,6 +378,8 @@
   - type: WorldTargetAction
     event: !type:XenoSlowingSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoParatoxinSpit
@@ -438,6 +418,8 @@
   - type: WorldTargetAction
     event: !type:XenoScatteredSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -468,6 +450,8 @@
   - type: WorldTargetAction
     event: !type:XenoSpitActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   id: ActionXenoQueenSpitAcid
@@ -705,8 +689,14 @@
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
+    priorityWhitelist:
+      components:
+      - Xeno
+      - Marine   
   - type: WorldTargetAction
     event: !type:XenoBoneChipsActionEvent
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -833,6 +823,12 @@
     range: 2
   - type: EntityTargetAction
     event: !type:XenoGutActionEvent
+    whitelist:
+      components:
+      - Body
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: ActionXenoStomp
@@ -1175,6 +1171,7 @@
     ids:
     - ActionXenoCleaveFling
     cooldown: 12
+  - type: XenoOffensiveAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1208,6 +1205,7 @@
     ids:
     - ActionXenoCleaveRoot
     cooldown: 12
+  - type: XenoOffensiveAction
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1336,6 +1334,8 @@
   - type: WorldTargetAction
     event: !type:XenoTailSeizeActionEvent
   - type: ActionBlockIfResting
+  - type: ActionTargetHiveAlly
+    defer: true
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1785,3 +1785,63 @@
   - type: EntityTargetAction
     event: !type:XenoDrainingBiteActionEvent
   - type: XenoOffensiveAction
+
+- type: entity
+  id: ActionXenoSpitDissolverCorrosive
+  parent: ActionXenoSpit
+  name: Corrosive Spit (45)
+  description: Launches a strong projectile after a 0.6s that pierces through one enemy or ally and covers them with acid. You can change targets during the windup. Loses damage for each mob pierced, and hits downed targets even when not aimed. At 4 stored acid, pierces though an additional mob, loses less damage per pierce, and extra armor piercing. At 5 stored acid, pierces though another additional mob, loses much less damage per pierce, and even more armor piercing.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_xeno_acid
+  - type: TargetAction
+  - type: EntityTargetAction
+  - type: WorldTargetAction
+    event: !type:XenoDissolverBombardActionEvent
+      spitTypePerChargeLevel: [XenoChargedSpitProjectileDissolverCorrosive, XenoChargedSpitProjectileDissolverCorrosive, XenoChargedSpitProjectileDissolverCorrosive, XenoChargedSpitProjectileDissolverCorrosive, XenoChargedSpitProjectileDissolverCorrosiveTwoCharge, XenoChargedSpitProjectileDissolverCorrosiveThreeCharge]
+
+- type: entity
+  id: ActionXenoSpitDissolverAcidBlob
+  parent: ActionXenoSpit
+  name: Acid Blob (65)
+  description: Launches a projectile after a 0.8s windup that explodes forward into smaller projectiles on reaching its target or on collision. You can change targets during the windup. Strengthens weak acid on enemies and stuns them.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_acid_ball
+  - type: TargetAction
+  - type: EntityTargetAction
+  - type: WorldTargetAction
+    event: !type:XenoDissolverBombardActionEvent
+      baseSpit: XenoSpitProjectileDissolverAcidBlob
+      windup: 0.8
+      speed: 20
+      plasmaCost: 65
+      maxDistance: 6.206
+
+- type: entity
+  id: ActionXenoSpitDissolverEnzymaticBreath
+  parent: ActionXenoSpit
+  name: Enzymatic Breath (55)
+  description: Launches 5 weak projectiles after a 1s windup that cover enemies with acid and slows them down, or roots if they are already slow. You can change targets during the windup. Windup is reduced by 0.1s per stored acid.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_shotgun
+  - type: TargetAction
+  - type: EntityTargetAction
+  - type: WorldTargetAction
+    event: !type:XenoDissolverBombardActionEvent
+      baseSpit: XenoChargedSpitProjectileDissolverEnzymatic
+      windup: 1
+      extraProjectiles: 4
+      scatter: 60
+      windupReductionPerStack: 0.1
+      plasmaCost: 55
