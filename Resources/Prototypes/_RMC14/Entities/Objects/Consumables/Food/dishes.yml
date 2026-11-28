@@ -1,0 +1,986 @@
+# Contents of dishes.rsi
+
+- type: entity
+  parent: FoodInjectableBase
+  id: RMCFoodMealBase
+  abstract: true
+  description: A delicious meal, cooked with love.
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Food
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 26
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+
+- type: entity
+  name: berry clafoutis
+  parent: FoodPieBase
+  id: RMCFoodPieClafoutis
+  description: No black birds, this is a good sign.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - berry
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: berryclafoutis
+  - type: SliceableFood
+    slice: RMCFoodPieClafoutisSlice
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+
+- type: entity
+  name: slice of berry clafoutis
+  parent: FoodPieSliceBase
+  id: RMCFoodPieClafoutisSlice
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - berry
+  - type: Sprite
+    layers:
+    - state: plain-slice
+    - state: alpha-slice-filling
+      color: pink
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+    - Slice
+
+- type: entity
+  name: loaded baked potato
+  parent: RMCFoodMealBase
+  id: RMCFoodMealPotatoLoaded
+  description: Totally baked.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - cheesy
+    - potatoes
+  - type: Sprite
+    state: loadedbakedpotato
+
+- type: entity
+  name: space fries
+  parent: FoodMealBase
+  id: RMCFoodMealFries
+  description: AKA, French Fries, Freedom Fries, etc.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - potatoes
+    - salty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: fries
+
+- type: entity
+  name: cheesy fries
+  parent: FoodMealBase
+  id: RMCFoodMealFriesCheesy
+  description: Fries. Covered in cheese. Duh.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - potatoes
+    - salty
+    - cheesy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: cheesyfries
+
+- type: entity
+  name: carrot fries
+  parent: FoodMealBase
+  id: RMCFoodMealFriesCarrot
+  description: Tasty fries from fresh carrots.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - carrots
+    - salty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: carrotfries
+  - type: Tag
+    tags:
+    - CarrotFries
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 26
+        reagents:
+        - ReagentId: JuiceCarrot
+          Quantity: 20
+
+- type: entity
+  name: fried egg
+  parent: FoodMealBase
+  id: RMCFoodMealFriedegg
+  description: A fried egg, with a touch of salt and pepper.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - egg
+    - salty
+    - peppery
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: friedegg
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 1
+        - ReagentId: Blackpepper
+          Quantity: 1
+  - type: Tag
+    tags:
+    - Meat
+    - Egg
+  - type: FoodSequenceElement
+    entries:
+      Burger: MealFriedEgg
+      Taco: MealFriedEgg
+
+- type: entity
+  name: eggplant parmigiana
+  parent: FoodMealBase
+  id: RMCFoodMealEggplantParm
+  description: The only good recipe for eggplant.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - eggplant
+    - cheesy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: eggplantparm
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: Tag
+    tags:
+    - Fruit
+
+- type: entity
+  name: enchiladas
+  parent: FoodMealBase
+  id: RMCFoodMealEnchiladas
+  description: Viva La Mexico!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: enchiladas
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 35
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: Protein
+          Quantity: 5
+        - ReagentId: CapsaicinOil
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 6
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: cheese omelette
+  parent: FoodMealBase
+  id: RMCFoodMealOmelette
+  description: Cheesy.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - egg
+    - cheesy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: omelette
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: plain burger
+  parent: FoodMealBase
+  id: RMCFoodBurgerPlain
+  description: A boring, dry burger.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - bun
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: hamburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 3
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: stewed soy meat
+  parent: FoodMealBase
+  id: RMCFoodStewedSoyMeat
+  description: Even non-vegetarians will LOVE this!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - soy
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: stewedsoymeat
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 6
+
+- type: entity
+  name: soy dope
+  parent: FoodMealBase
+  id: RMCFoodSoydope
+  description: Dope from a soy.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - soy
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: soydope
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 6
+
+- type: entity
+  name: wing fang chu
+  parent: FoodBowlBase
+  id: RMCFoodSoupWingFangChu
+  description: A savory dish of alien wing wang in soy.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - salty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: wingfangchu
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Protein
+          Quantity: 15
+        - ReagentId: RMCSoysauce
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 10
+
+# Pasta
+
+- type: entity
+  name: spaghetti and meatballs
+  parent: FoodNoodlesBase
+  id: RMCFoodNoodlesMeatball
+  description: Now that's a nice-a meatball!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - pasta
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: meatballspagetti
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Protein
+          Quantity: 6
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: boiled spaghetti
+  parent: FoodNoodlesBase
+  id: RMCFoodNoodlesBoiled
+  description: A plain dish of noodles, this needs more ingredients.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - pasta
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: spagettiboiled
+
+- type: entity
+  name: spaghetti
+  parent: FoodNoodlesBase
+  id: RMCFoodNoodles
+  description: Spaghetti and crushed tomatoes. Just like your abusive father used to make!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - pasta
+    - tomato
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: pastatomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 35
+  - type: Tag
+    tags:
+    - Fruit
+
+- type: entity
+  name: spesslaw
+  parent: FoodNoodlesBase
+  id: RMCFoodNoodlesSpesslaw
+  description: A lawyer's favourite.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - pasta
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: spesslaw
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 6
+
+#Content from soups_salads.rsi
+
+- type: entity
+  parent: FoodInjectableBase
+  id: RMCFoodBowlBase
+  abstract: true
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Food
+    trash:
+    - FoodBowlBig
+    utensil: Spoon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+  - type: Spillable
+    solution: food
+  # soup weapon!
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Tag
+    tags:
+    - Soup
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -8
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodBowlBigTrash:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+
+- type: entity
+  name: aesir salad
+  parent: RMCFoodBowlBase
+  id: RMCFoodSaladAesir
+  description: Probably too incredible for mortals to fully enjoy.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - leafy
+  - type: Sprite
+    state: aesirsalad
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 6
+        - ReagentId: CMTricordrazine
+          Quantity: 8
+  - type: Tag
+    tags:
+    - Soup
+    - Fruit
+
+- type: entity
+  name: herb salad
+  parent: RMCFoodBowlBase
+  id: RMCFoodSaladHerb
+  description: A tasty salad with apples on top.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - leafy
+    - apple
+  - type: Sprite
+    state: herbsalad
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 70
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: CMKelotane
+          Quantity: 12
+        - ReagentId: CMBicaridine
+          Quantity: 12
+        - ReagentId: Vitamin
+          Quantity: 20
+  - type: Tag
+    tags:
+    - Fruit
+    - Soup
+
+- type: entity
+  name: valid salad
+  parent: RMCFoodBowlBase
+  id: RMCFoodSaladValid
+  description: It's just an herb salad with meatballs and fried potato slices. Nothing suspicious about it.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - leafy
+    - meaty
+    - potatoes
+    - validhunting
+  - type: Sprite
+    state: validsalad
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 25
+        - ReagentId: DoctorsDelight
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Meat
+    - Fruit
+    - Soup
+
+- type: entity
+  name: boiled rice
+  parent: RMCFoodBowlBase
+  id: RMCFoodRiceBoiled
+  description: A warm bowl of rice.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - rice
+  - type: Sprite
+    state: boiledrice
+
+- type: entity
+  name: meatball soup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupMeatball
+  description: You've got balls kid, BALLS!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meatballs
+  - type: Sprite
+    state: meatballsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 17
+        - ReagentId: Water
+          Quantity: 5
+  - type: Tag
+    tags:
+    - Meat
+    - Soup
+
+- type: entity
+  name: tomato soup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupTomato
+  description: Drinking this feels like being a vampire! A tomato vampire...
+  components:
+  - type: FlavorProfile
+    flavors:
+    - tomato
+  - type: Sprite
+    state: tomatosoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Vitamin
+          Quantity: 20
+        - ReagentId: Water
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Fruit
+    - Soup
+
+- type: entity
+  name: beet soup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupBeet
+  description: Wait, how do you spell it again..?
+  components:
+  - type: Sprite
+    state: beetsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 7
+        - ReagentId: Water
+          Quantity: 10
+
+- type: entity
+  name: clown's tears
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupClown
+  description: Not very funny.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - bad-joke
+  - type: Sprite
+    state: clownstears
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 55
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Vitamin
+          Quantity: 9
+        - ReagentId: Water
+          Quantity: 10
+
+- type: entity
+  name: bowl of hot chili
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupChiliHot
+  description: A Texan five-alarm chili!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - spicy
+  - type: Sprite
+    state: hotchili
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: CapsaicinOil
+          Quantity: 5
+        - ReagentId: Vitamin
+          Quantity: 20
+        - ReagentId: Allicin
+          Quantity: 3
+  - type: Tag
+    tags:
+    - ChiliBowl
+
+
+- type: entity
+  name: cold chili
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupChiliCold
+  description: This slush is barely a liquid!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - minty
+    - tomato
+  - type: Sprite
+    state: coldchili
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 25
+  - type: Tag
+    tags:
+    - ChiliBowl
+
+- type: entity
+  name: milosoup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupMilo
+  description: The universes best soup! Yum!!!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - miso
+  - type: Food
+    trash:
+    - FoodBowlFancy
+  - type: Sprite
+    state: milosoup
+      #rip milo
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: Vitamin
+          Quantity: 3
+        - ReagentId: Water
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Meat
+    - Soup
+
+- type: entity
+  name: mushroom soup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupMushroom
+  description: A delicious and hearty mushroom soup.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+  - type: Sprite
+    state: mushroomsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Vitamin
+          Quantity: 20
+        - ReagentId: Water
+          Quantity: 5
+        - ReagentId: Milk
+          Quantity: 5
+
+- type: entity
+  name: rice pudding
+  parent: RMCFoodBowlBase
+  id: RMCFoodRicePudding
+  description: Where's the Jam!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - rice
+    - sweet
+  - type: Sprite
+    state: rpudding
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: Vitamin
+          Quantity: 3
+        - ReagentId: Milk
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 5
+
+- type: entity
+  name: nettle soup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupNettle
+  description: To think, the botanist would've beat you to death with one of these.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - nettles
+  - type: Sprite
+    state: nettlesoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Vitamin
+          Quantity: 15
+        - ReagentId: Water
+          Quantity: 10
+        - ReagentId: CMTricordrazine
+          Quantity: 5
+        - ReagentId: Histamine
+          Quantity: 4
+
+- type: entity
+  name: mystery soup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupMystery
+  description: The mystery is, why aren't you eating it?
+  components:
+  - type: FlavorProfile
+    flavors:
+    - chaos
+  - type: Sprite
+    state: mysterysoup
+
+- type: entity
+  name: stew
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupStew
+  description: A nice and warm stew. Healthy and strong.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - tomato
+    - carrot
+  - type: Sprite
+    state: stew
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Protein
+          Quantity: 20
+        - ReagentId: Vitamin
+          Quantity: 15
+  - type: Tag
+    tags:
+    - Meat
+    - Fruit
+    - Soup
+
+- type: entity
+  name: vegetable soup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupVegetable
+  description: A true vegan meal.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - vegetables
+    - sadness
+  - type: Sprite
+    state: vegetablesoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Vitamin
+          Quantity: 15
+        - ReagentId: Water
+          Quantity: 10
+        - ReagentId: CMImidazoline
+          Quantity: 4
+
+- type: entity
+  name: wish soup
+  parent: RMCFoodBowlBase
+  id: RMCFoodSoupWish
+  description: I wish this was soup.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - water
+  - type: Sprite
+    state: wishsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Water
+          Quantity: 20
+  - type: Tag
+    tags:
+    - Soup
+
+#Contents from candies.rsi
+
+- type: entity
+  name: chocolate bar
+  parent: BaseItem
+  id: RMCFoodSnackChocolate
+  description: Such sweet, fattening food.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: chocolatebar
+  - type: Item
+    heldPrefix: chocolatebar
+    size: Tiny
+  - type: Tag
+    tags:
+    - FoodSnack
+
+- type: entity
+  name: candied apple
+  parent: BaseItem
+  id: RMCFoodSnackCandiedApple
+  description: An apple coated in sugary sweetness.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: candiedapple
+  - type: Tag
+    tags:
+    - FoodSnack
+
+- type: entity
+  name: candy corn
+  parent: BaseItem
+  id: RMCFoodSnackCandyCorn
+  description: It's a handful of candy corn. Cannot be stored in a detective's hat, alas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: candy_corn
+  - type: Tag
+    tags:
+    - FoodSnack
+

@@ -1,0 +1,115 @@
+#Contents from food_ingredients.rsi
+
+- type: entity
+  abstract: true
+  parent: FoodBase
+  id: RMCFoodBakingBase
+  description: Used in various recipes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 18
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+  - type: Tag
+    tags:
+    - Ingredient
+
+- type: entity
+  name: dough
+  parent: RMCFoodBakingBase
+  id: RMCFoodDough
+  description: A piece of dough.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: Sprite
+    state: dough
+  - type: SliceableFood
+    count: 3
+    slice: RMCFoodDoughSlice
+  - type: Construction
+    graph: Pizza
+    node: start
+
+- type: entity
+  name: dough slice
+  parent: RMCFoodBakingBase
+  id: RMCFoodDoughSlice
+  description: A slice of dough. Can be cooked into a bun.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: Sprite
+    state: doughslice
+  - type: Tag
+    tags:
+    - Slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+
+- type: entity
+  name: flat dough
+  parent: RMCFoodBakingBase
+  id: RMCFoodDoughFlat
+  description: A flattened dough.
+  components:
+  - type: Sprite
+    state: flat_dough
+  - type: SliceableFood
+    count: 3
+    slice: FoodCroissantRaw
+
+- type: entity
+  name: flatbread
+  parent: RMCFoodBakingBase
+  id: RMCFoodFlatbread
+  description: Bland but filling.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - bread
+  - type: Sprite
+    state: flatbread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+
+- type: entity
+  name: bun
+  parent: RMCFoodBakingBase
+  id: RMCFoodBreadBun
+  description: A hamburger bun. Round and convenient to hold.
+  components:
+  - type: Food
+  - type: Sprite
+    state: bun
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6.66 # 1/3 of a loaf of bread, technically losing 0.01 nutriment per batch of three buns over making bread loaves/slices
+  - type: Butcherable
+    butcherDelay: 1
+    spawned:
+    - id: FoodBreadBunTop
+      amount: 1
+    - id: FoodBreadBunBottom
+      amount: 1

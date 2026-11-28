@@ -1,0 +1,856 @@
+# Contents of bakery.rsi
+- type: entity
+  name: chawanmushi
+  parent: CMFoodBase
+  id: RMCFoodChawanmushi
+  description: A legendary egg custard that makes friends out of enemies. Probably too hot for a cat to eat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: chawanmushi
+  - type: FlavorProfile
+    flavors:
+    - creamy
+    - bread
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+
+- type: entity
+  name: cookie
+  parent: FoodBakedBase
+  id: RMCFoodBakedCookie
+  description: COOKIE!!!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: COOKIE!!!
+
+- type: entity
+  name: plump helmet biscuit
+  parent: FoodBakedBase
+  id: RMCFoodBakedPHelmBiscuit
+  description: This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced dwarven wheat flour.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: phelmbiscuit
+
+- type: entity
+  name: muffin
+  parent: FoodInjectableBase
+  id: RMCFoodBakedMuffin
+  description: A little muffin. Spongy, moist, and delicious.
+  components:
+  - type: Food
+    trash:
+    - FoodPlateMuffinTin
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: muffin
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: Item
+    size: Tiny
+
+- type: entity
+  name: golden apple streusel tart
+  parent: FoodPieBase
+  id: RMCFoodTartGapple
+  description: A tasty dessert that won't make it through a metal detector.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - apple
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: gappletart
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+
+- type: entity
+  name: pancakes
+  parent: CMFoodBase
+  id: RMCFoodPancakes
+  description: Golden brown creamy pancakes fresh from the griddle. Drizzled with maple syrup and topped with a slice of butter.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: pancakes
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+
+- type: entity
+  parent: FoodDonkpocket
+  id: RMCFoodDonkpocket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: donkpocket
+  - type: Item
+    size: Small
+
+# Pies
+
+- type: entity
+  name: apple pie
+  parent: FoodPieBase
+  id: RMCFoodPieApple
+  description: A pie containing sweet, sweet love... or apple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: applepie
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - apple
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+
+- type: entity
+  name: cherry pie
+  parent: FoodPieBase
+  id: RMCFoodPieCherry
+  description: Taste so good, make a grown man cry.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: cherrypie
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - cherry
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+
+- type: entity
+  name: meat pie
+  parent: FoodPieBase
+  id: RMCFoodPieMeat
+  description: An old barber recipe, very delicious!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: meatpie
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Meat
+    - Pie
+
+- type: entity
+  name: pumpkin pie
+  parent: FoodPieBase
+  id: RMCFoodPiePumpkin
+  description: Someone should turn this into a latte!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - pumpkin
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: pumpkinpie
+  - type: SliceableFood
+    slice: FoodPiePumpkinSlice
+  - type: Tag
+    tags:
+    - Pie
+
+- type: entity
+  name: slice of pumpkin pie
+  parent: FoodPieSliceBase
+  id: RMCFoodPiePumpkinSlice
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - pumpkin
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: pumpkinpieslice
+  - type: Tag
+    tags:
+    - Pie
+    - Slice
+
+- type: entity
+  name: xeno-pie
+  parent: FoodPieBase
+  id: RMCFoodPieXeno
+  description: A delicious meatpie. Probably heretical.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: xenomeatpie
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - acid
+  - type: SliceableFood
+    slice: FoodPieAppleSlice
+  - type: Tag
+    tags:
+    - Meat
+    - Pie
+
+- type: entity
+  name: banana cream pie
+  parent: FoodPieBase
+  id: RMCFoodPieBananaCream
+  description: Just like back home, on clown planet! HONK!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - banana
+    - creamy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: pie
+  - type: CreamPie
+  - type: ThrowingAngle
+    angle: 180
+  - type: LandAtCursor
+  - type: ContainerContainer
+    containers:
+      payloadSlot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      payloadSlot:
+        whitelist:
+          components:
+          - OnUseTimerTrigger
+        insertSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        ejectSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        swap: false
+        disableEject: true
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+  - type: SliceableFood
+    slice: FoodPieBananaCreamSlice
+
+
+# Waffles
+- type: entity
+  name: waffles
+  parent: FoodBakedBase
+  id: RMCFoodWaffle
+  description: Mmm, waffles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: waffles
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  name: soy waffles
+  parent: RMCFoodWaffle
+  id: RMCFoodWaffleSoy
+  description: You feel healthier and - more feminine?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: soylent_yellow
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  name: soylent waffles
+  parent: RMCFoodWaffle
+  id: RMCFoodWaffleSoylent
+  description: Not made of people. Honest. # Definitely people
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: soylent_green
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  name: roffle waffles
+  parent: RMCFoodWaffle
+  id: RMCFoodWaffleRoffle
+  description: Waffles from Roffle. Co.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: rofflewaffles
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+
+#Contents of cakes.rsi
+
+- type: entity
+  parent: FoodInjectableBase
+  id: RMCFoodCakeBase
+  abstract: true
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: Food
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 55 # flavored cakes have less room for spiking
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 40
+        - ReagentId: Vitamin
+          Quantity: 10
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - Cake
+  - type: SecretStash
+    maxItemSize: "Normal"
+    secretStashName: secret-stash-cake
+    damageEatenItemInside:
+      types:
+        Slash: 7.5
+  - type: ToolOpenable
+    openToolQualityNeeded: Slicing
+    closeToolQualityNeeded: Slicing
+    verbOnly: true
+  - type: ContainerContainer
+    containers:
+      stash: !type:ContainerSlot {}
+
+- type: entity
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeSliceBase
+  abstract: true
+  description: Just a slice of cake, it is enough for everyone.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: Food
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 12
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - Cake
+    - Slice
+
+- type: entity
+  name: carrot cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeCarrot
+  description: A favorite desert of a certain wascally wabbit.
+  components:
+  - type: Sprite
+    state: carrotcake
+  - type: SliceableFood
+    slice: RMCFoodCakeCarrotSlice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: JuiceCarrot
+          Quantity: 15
+        - ReagentId: Sugar
+          Quantity: 5
+        - ReagentId: Vitamin
+          Quantity: 5
+  - type: Tag
+    tags:
+    - Cake
+    - Vegetable
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-inhand-left
+        color: "#f8e0af"
+      - state: alpha-filling-inhand-left
+        color: "#ffbd2f"
+      right:
+      - state: plain-inhand-right
+        color: "#f8e0af"
+      - state: alpha-filling-inhand-right
+        color: "#ffbd2f"
+
+- type: entity
+  name: slice of carrot cake
+  parent: RMCFoodCakeSliceBase
+  id: RMCFoodCakeCarrotSlice
+  description: Carrotty slice of carrot cake. Carrots are good for your eyes!
+  components:
+  - type: Sprite
+    state: carrotcake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: JuiceCarrot
+          Quantity: 3
+        - ReagentId: Sugar
+          Quantity: 1
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: Tag
+    tags:
+    - Cake
+    - Vegetable
+    - Slice
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-slice-inhand-left
+        color: "#f8e0af"
+      - state: alpha-slice-filling-inhand-left
+        color: "#ffbd2f"
+      right:
+      - state: plain-slice-inhand-right
+        color: "#f8e0af"
+      - state: alpha-slice-filling-inhand-right
+        color: "#ffbd2f"
+
+- type: entity
+  name: brain cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeBrain
+  description: A squishy cake-thing.
+  components:
+  - type: Sprite
+    state: braincake
+  - type: SliceableFood
+    slice: RMCFoodCakeBrainSlice
+  - type: Tag
+    tags:
+    - Cake
+    - Meat
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: alpha-inhand-left
+        color: "#ff5b7a"
+      - state: alpha-filling-inhand-left
+        color: "#ff5b7a"
+      right:
+      - state: alpha-inhand-right
+        color: "#ff5b7a"
+      - state: alpha-filling-inhand-right
+        color: "#ff5b7a"
+
+- type: entity
+  name: slice of brain cake
+  parent: RMCFoodCakeSliceBase
+  id: RMCFoodCakeBrainSlice
+  description: Lemme tell you something about prions. THEY'RE DELICIOUS.
+  components:
+  - type: Sprite
+    state: braincakeslice
+  - type: Tag
+    tags:
+    - Cake
+    - Meat
+    - Slice
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: alpha-slice-inhand-left
+        color: "#ff5b7a"
+      - state: alpha-slice-filling-inhand-left
+        color: "#ff5b7a"
+      right:
+      - state: alpha-slice-inhand-right
+        color: "#ff5b7a"
+      - state: alpha-slice-filling-inhand-right
+        color: "#ff5b7a"
+
+- type: entity
+  name: cheese cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeCheese
+  description: DANGEROUSLY cheesy.
+  components:
+  - type: Sprite
+    state: cheesecake
+  - type: SliceableFood
+    slice: RMCFoodCakeCheeseSlice
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-inhand-left
+      - state: alpha-filling-inhand-left
+        color: "#ffffff"
+      right:
+      - state: plain-inhand-right
+      - state: alpha-filling-inhand-right
+        color: "#ffffff"
+
+- type: entity
+  name: slice of cheese cake
+  parent: RMCFoodCakeSliceBase
+  id: RMCFoodCakeCheeseSlice
+  description: Slice of pure cheestisfaction.
+  components:
+  - type: Sprite
+    state: cheesecake_slice
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-slice-inhand-left
+      - state: alpha-filling-inhand-left
+        color: "#ffffff"
+      right:
+      - state: plain-inhand-right
+      - state: alpha-slice-filling-inhand-right
+        color: "#ffffff"
+
+- type: entity
+  name: orange cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeOrange
+  description: A cake with added orange.
+  components:
+  - type: Sprite
+    layers:
+    - state: orangecake
+  - type: SliceableFood
+    slice: RMCFoodCakeOrangeSlice
+  - type: Tag
+    tags:
+    - Cake
+    - Fruit
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-inhand-left
+      - state: alpha-filling-inhand-left
+        color: "#ff9900"
+      right:
+      - state: plain-inhand-right
+      - state: alpha-filling-inhand-right
+        color: "#ff9900"
+
+- type: entity
+  name: slice of orange cake
+  parent: RMCFoodCakeSliceBase
+  id: RMCFoodCakeOrangeSlice
+  components:
+  - type: Sprite
+    layers:
+    - state: orangecake_slice
+  - type: Tag
+    tags:
+    - Cake
+    - Fruit
+    - Slice
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-slice-inhand-left
+      - state: alpha-slice-filling-inhand-left
+        color: "#ff9900"
+      right:
+      - state: plain-slice-inhand-right
+      - state: alpha-slice-filling-inhand-right
+        color: "#ff9900"
+
+- type: entity
+  name: lime cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeLime
+  description: A cake with added lime.
+  components:
+  - type: Sprite
+    layers:
+    - state: limecake
+  - type: SliceableFood
+    slice: RMCFoodCakeLimeSlice
+  - type: Tag
+    tags:
+    - Cake
+    - Fruit
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-inhand-left
+      - state: alpha-filling-inhand-left
+        color: "#00ff00"
+      right:
+      - state: plain-inhand-right
+      - state: alpha-filling-inhand-right
+        color: "#00ff00"
+
+- type: entity
+  name: slice of lime cake
+  parent: RMCFoodCakeSliceBase
+  id: RMCFoodCakeLimeSlice
+  components:
+  - type: Sprite
+    layers:
+    - state: limecake_slice
+  - type: Tag
+    tags:
+    - Cake
+    - Fruit
+    - Slice
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-slice-inhand-left
+      - state: alpha-slice-filling-inhand-left
+        color: "#00ff00"
+      right:
+      - state: plain-slice-inhand-right
+      - state: alpha-slice-filling-inhand-right
+        color: "#00ff00"
+
+- type: entity
+  name: lemon cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeLemon
+  description: A cake with added lemon.
+  components:
+  - type: Sprite
+    layers:
+    - state: lemoncake
+  - type: SliceableFood
+    slice: RMCFoodCakeLemonSlice
+  - type: Tag
+    tags:
+    - Cake
+    - Fruit
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-inhand-left
+      - state: alpha-filling-inhand-left
+        color: "#ffff00"
+      right:
+      - state: plain-inhand-right
+      - state: alpha-filling-inhand-right
+        color: "#ffff00"
+
+- type: entity
+  name: slice of lemon cake
+  parent: RMCFoodCakeSliceBase
+  id: RMCFoodCakeLemonSlice
+  components:
+  - type: Sprite
+    layers:
+    - state: lemoncake_slice
+  - type: Tag
+    tags:
+    - Cake
+    - Fruit
+    - Slice
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: plain-slice-inhand-left
+      - state: alpha-slice-filling-inhand-left
+        color: "#ffff00"
+      right:
+      - state: plain-slice-inhand-right
+      - state: alpha-slice-filling-inhand-right
+        color: "#ffff00"
+
+- type: entity
+  name: cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakePlain
+  description: A plain cake, not a lie.
+  components:
+  - type: Sprite
+    state: plaincake
+  - type: SliceableFood
+    slice: RMCFoodCakePlainSlice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 55
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: Vitamin
+          Quantity: 5
+  - type: Item
+    heldPrefix: plain
+
+- type: entity
+  name: slice of cake
+  parent: RMCFoodCakeSliceBase
+  id: RMCFoodCakePlainSlice
+  components:
+  - type: Sprite
+    state: plaincake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: Item
+    heldPrefix: plain-slice
+
+- type: entity
+  name: birthday cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeBirthday
+  description: Happy Birthday little clown...
+  components:
+  - type: Sprite
+    state: birthdaycake
+  - type: SliceableFood
+    slice: RMCFoodCakeBirthdaySlice
+  - type: Item
+    heldPrefix: birthday
+
+- type: entity
+  name: slice of birthday cake
+  parent: FoodCakeSliceBase
+  id: RMCFoodCakeBirthdaySlice
+  description: A slice of your birthday.
+  components:
+  - type: Sprite
+    state: birthday-slice
+  - type: Item
+    heldPrefix: birthday-slice
+
+- type: entity
+  name: chocolate cake
+  parent: RMCFoodCakeBase
+  id: RMCFoodCakeChocolate
+  description: A cake with added chocolate.
+  components:
+  - type: Sprite
+    state: chocolatecake
+  - type: SliceableFood
+    slice: RMCFoodCakeChocolateSlice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 55
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 40
+        - ReagentId: Theobromine
+          Quantity: 5
+        - ReagentId: Vitamin
+          Quantity: 5
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: alpha-inhand-left
+        color: "#ba672e"
+      right:
+      - state: alpha-inhand-right
+        color: "#ba672e"
+
+- type: entity
+  name: slice of chocolate cake
+  parent: RMCFoodCakeSliceBase
+  id: RMCFoodCakeChocolateSlice
+  components:
+  - type: Sprite
+    state: chocolatecake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Theobromine
+          Quantity: 1
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: alpha-slice-inhand-left
+        color: "#ba672e"
+      right:
+      - state: alpha-slice-inhand-right
+        color: "#ba672e"

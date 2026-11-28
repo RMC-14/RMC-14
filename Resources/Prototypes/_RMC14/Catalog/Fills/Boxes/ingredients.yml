@@ -26,7 +26,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: FoodMeatSausage
+    - id: RMCFoodMeatSausage
       amount: 7
 
 - type: entity

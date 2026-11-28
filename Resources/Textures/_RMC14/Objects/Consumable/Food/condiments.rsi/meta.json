@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/food/condiments.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f2693b6908216176a7e8a655bb80e3555bb6f848/icons/obj/items/food/condiments.dmi, Large Salt and Pepper recolors by SurfinNinja",
   "size": {
     "x": 32,
     "y": 32
@@ -35,25 +35,7 @@
       "name": "coldsauce_cole"
     },
     {
-      "name": "hotsauce_sriracha"
-    },
-    {
-      "name": "hotsauce_cholula"
-    },
-    {
-      "name": "hotsauce"
-    },
-    {
-      "name": "hotsauce_tabasco"
-    },
-    {
-      "name": "emptycondiment",
-      "delays": [
-        [
-          0.1,
-          0.1
-        ]
-      ]
+      "name": "emptycondiment"
     },
     {
       "name": "mixedcondiments"
@@ -69,6 +51,9 @@
     },
     {
       "name": "oliveoil"
+    },
+    {
+      "name": "chocolate_syrup"
     }
   ]
 }

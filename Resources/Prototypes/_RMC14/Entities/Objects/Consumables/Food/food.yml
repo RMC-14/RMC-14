@@ -295,7 +295,7 @@
 - type: entity
   name: meatball sub
   parent: CMFoodBase
-  id: FoodMeatballSub
+  id: RMCFoodMeatballSub
   description: Made with the secrets of Death Kwon Do!
   components:
   - type: Sprite
@@ -319,13 +319,13 @@
         - ReagentId: Protein
           Quantity: 10
   - type: SliceableFood
-    slice: FoodMeatballSubHalf
+    slice: RMCFoodMeatballSubHalf
     count: 2
 
 - type: entity
   name: meatball sub half
   parent: CMFoodBase
-  id: FoodMeatballSubHalf
+  id: RMCFoodMeatballSubHalf
   description: It's enough to make a grown marine cry.
   components:
   - type: Sprite
@@ -543,7 +543,7 @@
 - type: entity
   name: uncooked sausage
   parent: CMFoodBase
-  id: FoodMeatSausage
+  id: RMCFoodMeatSausage
   description: A piece of mixed, long meat.
   components:
   - type: Sprite
@@ -562,13 +562,13 @@
         - ReagentId: Protein
           Quantity: 4
   - type: Construction
-    graph: FoodMeatSausage
+    graph: RMCFoodMeatSausage
     node: start
 
 - type: entity
   name: cooked sausage
   parent: CMFoodBase
-  id: FoodMeatSausageCooked
+  id: RMCFoodMeatSausageCooked
   description: This snagger looks like it just came off the barbie!
   components:
   - type: Sprite
@@ -806,7 +806,7 @@
       - fishy
       - oily
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/misc.rsi 
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
     state: bouillabaisse
   - type: SolutionContainerManager
     solutions:
@@ -835,4 +835,4 @@
         maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 30          
+          Quantity: 30
