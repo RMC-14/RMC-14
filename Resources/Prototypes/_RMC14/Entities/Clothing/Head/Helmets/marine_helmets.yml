@@ -82,6 +82,16 @@
     - RMCVisorMedicalAdvancedIntegrated
 
 - type: entity
+  parent: RMCArmorHelmetM10SO
+  id: RMCArmorHelmetM10CELO
+  suffix: CE, LO
+  components:
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorMedicalIntegrated
+
+- type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Medic
   name: M10 medic helmet
@@ -329,6 +339,29 @@
     - RMCVisorSquadIntegrated
     - RMCVisorPilotBlack
 
+- type: entity
+  parent: CMArmorHelmetM30
+  id: RMCArmorHelmetM30NoVisor
+  components:
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
+
+# HDU-44
+- type: entity
+  parent: CMArmorHelmetM30
+  id: CMArmorHelmetHDU44
+  name: HDU-44/P Aerospace Helmet System
+  description: The HDU-44/P is a flight helmet specifically tailored to the needs of Marine F-44 Aerofighter pilots. It features a reinforced graphite shell, an experimental dual comfort helmet liner, and an integrated microprocessor which allows compatible fighters, ships, and ground networks to feed information directly to the pilot's eyepiece, perfect for those who often operate under dangerous and high-G conditions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/hdu44p.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/hdu44p.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # Press
 - type: entity
   parent: ArmorHelmetM10
@@ -553,3 +586,59 @@
     visorsToAdd:
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
+
+# CF5
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetCF5
+  name: CF5 pattern helmet
+  description: An uncommon sight in the Marine Corps, the CF5 notably lacks the extra padding of later-generation helmets like the M10 or the M12, as it was primarily designed for use by support units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCArmorHelmetCF5
+  id: RMCArmorHelmetCF5Medic
+  name: CF5 pattern medic helmet
+  components:
+  - type: IntegratedVisors
+    startToggled: true
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
+
+- type: entity
+  parent: RMCArmorHelmetCF5
+  id: RMCArmorHelmetCF5Utility
+  name: CF5-U pattern flight helmet
+  description: An uncommon sight in the Marine Corps, the CF5 notably lacks the extra padding of later-generation helmets like the M10 or the M12, as it was primarily designed for use by support units. The 'U' variant comes equipped with inbuilt hearing protection, and is often issued to air crews. This one has a green cover.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility.rsi
+
+- type: entity
+  parent: RMCArmorHelmetCF5Utility
+  id: RMCArmorHelmetCF5UtilityRed
+  description: An uncommon sight in the Marine Corps, the CF5 notably lacks the extra padding of later-generation helmets like the M10 or the M12, as it was primarily designed for use by support units. The 'U' variant comes equipped with inbuilt hearing protection, and is often issued to air crews. This one has a red cover.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_red.rsi
+
+- type: entity
+  parent: RMCArmorHelmetCF5Utility
+  id: RMCArmorHelmetCF5UtilityWhite
+  description: An uncommon sight in the Marine Corps, the CF5 notably lacks the extra padding of later-generation helmets like the M10 or the M12, as it was primarily designed for use by support units. The 'U' variant comes equipped with inbuilt hearing protection, and is often issued to air crews. This one has a white cover.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cf5/cf5_utility_white.rsi

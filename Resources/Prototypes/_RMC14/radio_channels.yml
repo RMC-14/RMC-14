@@ -1,3 +1,8 @@
+# Used as a chat routing sentinel for :i, .i, and #i. It is not a selectable radio channel.
+- type: radioChannel
+  id: RMCIntercom
+  name: chat-radio-intercom
+
 # High Command
 - type: radioChannel #UNMC High Command, for events and such, basically CentComm channel
   id: MarineHighCommand
@@ -143,7 +148,7 @@
   name: chat-radio-marine-sof
   keycode: "k"
   frequency: 1724
-  color: "#851524"
+  color: "#b7faf5"
   longRange: true
   tower: true
 
@@ -153,7 +158,7 @@
   name: chat-radio-marine-survivor
   keycode: "@"
   frequency: 1724
-  color: "#349c30"
+  color: "#3b62a7"
   longRange: true
   tower: true
 

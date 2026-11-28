@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8f06b5c01c388e38097b2667f649fd2bc2a8002f/icons/obj/structures/props/fences/dark_fence_alt_door.dmi",
+  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/407574d02b03fb7265b29414a6a634378a4373e4/icons/obj/structures/props/fences/dark_fence_alt_door.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -24,6 +24,12 @@
           0.1,
           0.1,
           0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
           0.1,
           0.2
         ],
@@ -32,19 +38,9 @@
           0.1,
           0.1,
           0.1,
-          0.1,
           0.2
         ],
         [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ],
-        [
-          0.1,
           0.1,
           0.1,
           0.1,

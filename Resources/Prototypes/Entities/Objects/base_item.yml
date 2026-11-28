@@ -44,8 +44,11 @@
     noRot: false
   - type: Pullable
   - type: DamageExaminable
+  # RMC14
   - type: RMCItemPickup
+  - type: RMCThrowCooldown
   - type: RMCMesonsNonviewable
+  # RMC14
   - type: DestroyedByExplosion
     isExplodable: false # Not parity, but we opt in for now instead of opt out.
 

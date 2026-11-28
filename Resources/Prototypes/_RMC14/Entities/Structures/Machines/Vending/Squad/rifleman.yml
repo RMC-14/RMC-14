@@ -3,7 +3,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechEquipment
-  name: ColMarTech automated marine equipment rack
+  name: ASRS marine equipment rack
   description: An automated rack hooked up to a colossal storage of Marine Rifleman standard-issue equipment.
   components:
   - type: AccessReader
@@ -12,6 +12,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    pointsType: RFNVenderPoints
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -216,6 +217,8 @@
         points: 15
       - id: RMCWhistle
         points: 5
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 15
     - name: Binoculars
       entries:
       - id: RMCBinoculars
