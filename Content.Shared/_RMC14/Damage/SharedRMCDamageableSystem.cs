@@ -22,6 +22,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Radiation.Events;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Melee.Events;
@@ -694,6 +695,8 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             }
 
             var damagingContacts = 0;
+            var highestRadiation = 0f;
+            EntityUid? radiationSource = null;
             _mergedDamage.DamageDict.Clear();
             _mergedArmorPiercingDamage.DamageDict.Clear();
             _mergedEmotes.Clear();
@@ -773,12 +776,21 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 MergeHigherSpecifiers(_mergedDamage, damage.Damage, scale);
                 MergeHigherSpecifiers(_mergedArmorPiercingDamage, damage.ArmorPiercingDamage, scale);
 
+                if (damage.RadiationPerSecond is { } radiationPerSecond &&
+                    radiationPerSecond > highestRadiation &&
+                    _entityWhitelist.IsWhitelistPassOrNull(damage.RadiationWhitelist, user))
+                {
+                    highestRadiation = radiationPerSecond;
+                    radiationSource = contact;
+                }
+
                 if (damage.Emotes is { Count: > 0 } emotes)
                 {
                     _mergedEmotes.UnionWith(emotes);
                 }
 
-                if (damage.Popup is { } popup)
+                if (damage.Popup is { } popup &&
+                    !_entityWhitelist.IsWhitelistPass(damage.PopupBlacklist, user))
                 {
                     _mergedPopups.Add(popup);
                 }
@@ -802,6 +814,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
                 if (_mergedArmorPiercingDamage.AnyPositive())
                     _damageable.TryChangeDamage(user, _mergedArmorPiercingDamage, true);
+
+                if (radiationSource is { } source)
+                    RaiseLocalEvent(user, new OnIrradiatedEvent((float)userDamage.DamageEvery.TotalSeconds, highestRadiation, source));
 
                 if (_mergedEmotes.Count > 0)
                 {
