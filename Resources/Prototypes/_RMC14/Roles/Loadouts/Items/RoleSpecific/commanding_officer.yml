@@ -56,7 +56,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
+      time: 252000 # 70 hours
   equipment:
     belt: RMCMatebaBeltLuxuriousFilled
   storage:
@@ -71,7 +71,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
+      time: 252000 # 70 hours
   equipment:
     belt: RMCMatebaBeltLuxuriousFilledSilver
   storage:
@@ -86,7 +86,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
+      time: 252000 # 70 hours
   equipment:
     belt: RMCGoldHandcannonBeltFilled
 
@@ -130,7 +130,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
+      time: 252000 # 70 hours
   dummyEntity: RMCWeaponRevolverMateba2006MGold
   equipment:
     belt: RMCMatebaBeltFilled2006MGold
@@ -142,7 +142,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
+      time: 252000 # 70 hours
   dummyEntity: RMCWeaponRevolverMateba2006MBlackGold
   equipment:
     belt: RMCMatebaBeltFilled2006MBlackGold
@@ -154,7 +154,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
+      time: 252000 # 70 hours
   dummyEntity: RMCWeaponRevolverMateba2006MSilver
   equipment:
     belt: RMCMatebaBeltFilled2006MSilver
