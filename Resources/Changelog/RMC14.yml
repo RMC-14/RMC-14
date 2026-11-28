@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Added pry sound to expanding a acid hole
-    type: Add
-  - message: Added acid sound to acid hole creation from acid
-    type: Add
-  id: 3474
-  time: '2026-07-03T01:39:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10302
 - author: Aurallianz
   changes:
   - message: CL safe being an Intel objective
@@ -4339,5 +4330,12 @@
   id: 3973
   time: '2026-11-27T17:33:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11225
+- author: Vermidia
+  changes:
+  - message: Fixed m2c not using up fuel on repair.
+    type: Fix
+  id: 3974
+  time: '2026-11-28T12:37:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11253
 Name: RMC14
 Order: -1
