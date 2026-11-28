@@ -18,8 +18,10 @@
       tags:
       - RMCSpeedLoaderM44
       - RMCSpeedLoader44Marksman
+      - RMCSpeedLoader44Rubber
       - RMCCartridgeRevolver44
       - RMCCartridgeRevolver44Marksman
+      - RMCCartridgeRevolver44Rubber
     proto: RMCCartridgeRevolver44
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
