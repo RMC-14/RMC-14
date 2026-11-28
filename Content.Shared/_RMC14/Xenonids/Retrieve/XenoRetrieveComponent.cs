@@ -15,7 +15,7 @@ public sealed partial class XenoRetrieveComponent : Component
     public RMCSizes SizeLimit = RMCSizes.Big;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(0.6);
+    public TimeSpan Delay = TimeSpan.FromSeconds(0.2);
 
     [DataField, AutoNetworkedField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(10);
