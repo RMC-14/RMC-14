@@ -114,7 +114,7 @@ rmc-xeno-maid-description = You trade your dignity.
 rmc-xeno-maid-popup = Rawr :3
 
 rmc-xeno-vampire-name = Vampire
-rmc-xeno-vampire-description = You lose all of your abilities and you forfeit a chunk of your health and damage in exchange for a large amount of armor, a little bit of movement speed, increased attack speed, and brand new abilities that make you an assassin.
+rmc-xeno-vampire-description = You lose all of your abilities and you forfeit a chunk of your health and damage in exchange for a large amount of armor, extra speed on weeds, increased attack speed, and brand new abilities that make you an assassin.
   You gain the ability to:
   - Rush on your opponent to disorient them.
   - Flurry to unleash a forward cleave that can hit and slow three talls and heal you for every tall you hit.
@@ -137,7 +137,7 @@ rmc-xeno-berserker-description = You lose:
   - Some health.
   - The ability to fully benefit from 'strong' or better frenzy pheromones
   You gain:
-  - Movement speed, a slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
+  - A slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
   - The ability to heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
   - Apprehend to increase your movement speed and apply a slow on the next target you slash.
   - Eviscerate to unleash a devastating windmill attack that heals you for every enemy you hit after an immobilizing wind-up.
@@ -155,7 +155,7 @@ rmc-xeno-charger-description = In exchange for:
 
     You gain:
     - A considerable amount of health.
-    - Some speed.
+    - Some extra speed on weeds.
     - Your stomp does extra damage when stomping over a grounded tall.
     - Your charge is now manually-controlled and momentum-based; the further you go, the more damage and speed you will gain until you achieve maximum momentum, indicated by your roar.
     - Your armor is now directional, being the toughest on the front, weaker on the sides, and weakest from the back.
@@ -167,10 +167,10 @@ rmc-xeno-hedgehog-name = Hedgehog
 # TODO RMC14 limb damage shrapnel and causing damage when they move
 rmc-xeno-hedgehog-description = You lose:
   - Your empower, charge, and scissor cut abilities.
-  - Some movement speed and attack speed.
+  - Some slash damage.
   - Your plasma system is replaced with bone shards (max 300).
   You gain:
-  - Increased health and armor that scales with shard count (+2.5 armor per 50 shards).
+  - Increased explosive armor, and gain extra armor that scales with shard count (+2.5 armor per 50 shards).
   - Fire Spikes: Launch 8 spikes that embed in targets, slowing them. (75 shards, 10s cooldown).
   - Spike Shield: Temporary shield that damages nearby enemies when hit (150 shards, 2s duration, 11s cooldown).
   - Spike Shed: Launch all shards in all directions for massive damage, gain speed boost but lose shard generation for 30s (min 50 shards, 30s cooldown).
@@ -212,6 +212,7 @@ rmc-xeno-destrain-cooldown = We lack the strength to reset our strain. We will b
 rmc-xeno-witch-name = Witch
 rmc-xeno-witch-description = You shall make a stew so wicked and shrew! Command your army of cursed children to turn talls into your greatest brew!
 rmc-xeno-witch-popup = Muwahahahah!
+
 rmc-xeno-bloodqueen-name = Blood Queen
 rmc-xeno-bloodqueen-description = You lose:
   - Your queen level pheromones are replaced with strong pheromones.

@@ -24,7 +24,7 @@ public sealed partial class XenoRageComponent : Component
     public float SpeedBuffPerRage = 0.028f;
 
     [DataField, AutoNetworkedField]
-    public float AttackSpeedPerRage = 0.28f;
+    public float AttackSpeedPerRage = 0.1111f;
 
     [DataField, AutoNetworkedField]
     public TimeSpan RageDecayTime = TimeSpan.FromSeconds(3);

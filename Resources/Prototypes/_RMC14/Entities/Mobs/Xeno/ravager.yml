@@ -71,7 +71,7 @@
   - type: XenoClaws
     clawType: VerySharp
   - type: MeleeWeapon
-    attackRate: 1.05
+    attackRate: 1.1111
     damage:
       groups:
         Brute: 45
@@ -270,11 +270,6 @@
     - ActionXenoSpikeShield
     - ActionXenoSpikeShed
     - ActionXenoDevolve
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      650: Critical
-      750: Dead
   - type: CMArmor
     xenoArmor: 25
     explosionArmor: 100
@@ -307,11 +302,7 @@
     maxDeviation: 60
   - type: XenoShard
   - type: Appearance
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 1.8
-    baseSprintSpeed: 3.2
   - type: MeleeWeapon
-    attackRate: 0.9
     damage:
       groups:
         Brute: 35
