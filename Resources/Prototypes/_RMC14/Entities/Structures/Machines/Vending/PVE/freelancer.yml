@@ -33,6 +33,15 @@
       - id: RMCJumpsuitFreelancerBlackPants
         name: Black Pants
         amount: 15
+      - id: RMCJumpsuitFreelancerDPM
+        name: DPM Pants
+        amount: 15
+      - id: RMCJumpsuitFreelancerDPNU
+        name: DPNU Pants
+        amount: 15
+      - id: RMCJumpsuitFreelancerFlecktarn
+        name: Flecktarn Pants
+        amount: 15
     - name: Hats
       entries:
       - id: RMCHeadCapFlippable

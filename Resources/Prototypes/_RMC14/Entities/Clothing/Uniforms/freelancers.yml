@@ -41,3 +41,55 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/oliveshirt_blackpants.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/oliveshirt_blackpants.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerBluePants
+  id: RMCJumpsuitFreelancerDPM
+  name: mercenary's outfit
+  description: Surplus fatigues in a long-forgotten camouflage paired with a black turtleneck. Smells like mothballs and polish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/dpm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/dpm.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerBluePants
+  id: RMCJumpsuitFreelancerDPNU
+  name: mercenary's outfit
+  description: Surplus fatigues in a long-forgotten camouflage paired with a brown turtleneck. Smells like salt and grease.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/dpnu.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/dpnu.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerBluePants
+  id: RMCJumpsuitFreelancerFlecktarn
+  name: mercenary's outfit
+  description: Surplus fatigues in a long-forgotten camouflage paired with an olive turtleneck. Smells like pine and mud.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/flecktarn.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/flecktarn.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerBluePants
+  id: RMCJumpsuitFreelancerMedic
+  name: mercenary's medical outfit
+  description: Olive drab cargo pants and a dark tactical shirt with faded medical IR patches on both shoulders. Why exactly are the medical patches IR? The answer seems to be not easy to see.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/medic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Freelancer/medic.rsi
+
+- type: entity
+  parent: RMCJumpsuitFreelancerMedic
+  id: RMCJumpsuitFreelancerMedicFilled
+  suffix: Surgical Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSurgicalGreen
