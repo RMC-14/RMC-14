@@ -1114,11 +1114,12 @@
   - type: CMItemSlots
     startingItem: RMCCartridge458SOCOM
 
-# CR16
+# CR16 / UNSTAC
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleCR16Empty
-  name: magazine box (CR16 x 12)
+  name: magazine box (UNSTAC x 12)
+  description: A box of magazines produce in compliance with the UN Standardisation Accords.
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1132,7 +1133,7 @@
     - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffc000"
-    - state: rifle_box_16
+    - state: rifle_box_ac
       color: "#ffcb26"
     - state: rifle_box_marking
       color: "#7c4c1b"
@@ -1157,6 +1158,49 @@
   - type: CMItemSlots
     startingItem: RMCMagazineRifleCR16
     count: 12
+
+# CR16/UNSTAC Ext
+
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleCR16ExtEmpty
+  name: magazine box (Ext UNSTAC x 10)
+  description: A box of extended magazines produce in compliance with the UN Standardisation Accords.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#485c63"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_ac
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#ffcb26"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#485c63"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#ffcb26"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleCR16Ext
+
+- type: entity
+  parent: RMCBoxMagazineRifleCR16ExtEmpty
+  id: RMCBoxMagazineRifleCR16Ext
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleCR16Ext
+    count: 10
 
 # M20
 - type: entity
