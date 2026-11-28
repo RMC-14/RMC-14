@@ -15,3 +15,5 @@
   - type: BlockMovement
   - type: Item
     size: Small
+  - type: BlackMarketValue
+    value: 25

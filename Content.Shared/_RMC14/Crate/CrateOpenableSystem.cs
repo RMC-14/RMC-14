@@ -39,6 +39,9 @@ public sealed class CrateOpenableSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        var ev = new CrateUnpackedEvent(args.User);
+        RaiseLocalEvent(ent, ref ev);
+
         QueueDel(ent);
 
         var spawns = EntitySpawnCollection.GetSpawns(ent.Comp.Spawn, _random);

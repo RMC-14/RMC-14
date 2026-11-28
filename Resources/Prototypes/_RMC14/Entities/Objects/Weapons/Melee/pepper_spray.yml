@@ -1,0 +1,47 @@
+- type: entity
+  parent: SprayBottle
+  id: RMCPepperSpray
+  name: pepperspray
+  description: Manufactured by UhangInc, used to blind and down an opponent quickly.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/pepper_spray.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Melee/pepper_spray.rsi
+    size: Small
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 40
+        reagents:
+        - ReagentId: RMCCondensedCapsaicin
+          Quantity: 40
+  - type: SolutionTransfer
+    canChangeTransferAmount: false
+    maxTransferAmount: 10
+    transferAmount: 10
+  - type: Spray
+    transferAmount: 10
+    sprayDistance: 3
+    sprayVelocity: 3
+    spraySound:
+      path: /Audio/Effects/spray2.ogg
+  - type: ItemToggle
+    activated: false
+    soundActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.125
+        volume: -4
+    soundDeactivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.125
+        volume: -4
+  - type: SpraySafety
+    popup: rmc-pepper-spray-safety-on
+  - type: Tag
+    tags:
+    - Spray

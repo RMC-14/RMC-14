@@ -598,6 +598,22 @@
 
 - type: entity
   parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbSpaceJamTickets
+  name: Tickets to Space Jam
+  description: Two original, crisp, orange tickets to the one and only Space Jam of 2181. And what a jam it was.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/spacejam_tickets.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/spacejam_tickets.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/spacejam_tickets.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
   id: RMCHelmetGarbRabbitsFoot
   name: Rabbit's Foot
   description: Lucky for you, but not the rabbit, didn't really do it much good.

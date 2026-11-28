@@ -74,7 +74,6 @@
     soundGroups:
       Brute:
         collection: GlassSmash
-  - type: CargoOrderConsole
   - type: ActivatableUI
     key: enum.RequisitionsUIKey.Key
   - type: ActivatableUIRequiresAccess

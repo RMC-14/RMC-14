@@ -249,6 +249,35 @@
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-red-hot-bottle
 
+- type: reagent
+  id: RMCMachoSauce
+  parent: Hotsauce
+  name: reagent-name-rmc-macho-sauce
+  desc: reagent-desc-rmc-macho-sauce
+  color: "#d1001c"
+  overdose: 30
+  criticalOverdose: 50
+  metabolisms:
+    Poison:
+      metabolismRate: 0.5
+      effects:
+      - !type:AdjustTemperature
+        amount: 800
+
+- type: entity
+  parent: RMCCondimentHotsauceFranks
+  id: RMCCondimentHotsauceFranksMacho
+  name: Frank's ULTRA Hot bottle
+  description: A bottle of Weston-Yamada brand Frank's ULTRA Hot sauce, taken off the market after reports of what was described as 'something closer to ignition than digestion' happening to those who drink it.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 60
+        reagents:
+        - ReagentId: RMCMachoSauce
+          Quantity: 60
+
 - type: entity
   parent: RMCCondimentHotsauce
   id: RMCCondimentHotsauceSriracha

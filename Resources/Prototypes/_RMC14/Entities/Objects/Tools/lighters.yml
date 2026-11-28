@@ -82,6 +82,8 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/execzippo.rsi
       state: helmet
+  - type: BlackMarketValue
+    value: 40
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:
@@ -108,6 +110,8 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/goldzippo.rsi
       state: helmet
+  - type: BlackMarketValue
+    value: 30
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:

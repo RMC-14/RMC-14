@@ -73,6 +73,7 @@
   storage:
     back:
     - RMCBusinessCardHolderFilled
+    - RMCSpaceCash1000Counterfeit
 
 - type: playTimeTracker
   id: RMCJobCorporateLegalSupervisor

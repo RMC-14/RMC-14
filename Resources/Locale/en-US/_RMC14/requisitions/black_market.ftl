@@ -1,0 +1,15 @@
+rmc-black-market-clf-materials = It's a bunch of building materials!
+rmc-black-market-clf-elite-gear = It's some strange elite gear!
+rmc-black-market-clf-pistols = It's a Type 64 and an old service revolver!
+rmc-black-market-clf-smgs = It's some CLF submachine guns!
+rmc-black-market-clf-rations = It's some rations!
+rmc-black-market-clf-grenades = It's a package of assorted CLF grenades!
+rmc-black-market-clf-explosives = It's a stockpile of grenades!
+rmc-black-market-clf-molotovs = It's some firebombs and supplies to make more!
+rmc-black-market-clf-clf-gear = It's a spare set of CLF equipment!
+rmc-black-market-clf-junk = It's a bunch of junk!
+rmc-black-market-clf-parts = It's some old equipment and spare parts.
+rmc-black-market-clf-corpse = IT'S A CORPSE!
+rmc-black-market-clf-corpse-name = CLF soldier
+rmc-black-market-clf-trap = It was booby trapped! RUN!
+rmc-black-market-clf-super-trap = It's full of armed mines! RUN!

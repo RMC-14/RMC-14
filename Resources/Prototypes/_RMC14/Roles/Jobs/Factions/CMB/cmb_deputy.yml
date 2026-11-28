@@ -99,6 +99,9 @@
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchShotgunLargeCMBDeputyERTFilled
     suitstorage: RMCWeaponShotgunM12
+  storage:
+    back:
+    - RMCBlackMarketTradebandDevice
 
 - type: playTimeTracker
   id: RMCJobBureauDeputy

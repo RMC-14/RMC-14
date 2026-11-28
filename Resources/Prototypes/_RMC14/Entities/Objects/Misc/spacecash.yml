@@ -34,6 +34,8 @@
   - type: PhysicalComposition
     materialComposition:
       Dollar: 1
+  - type: BlackMarketValue
+    value: 1
   - type: Appearance
 
 - type: entity
@@ -130,3 +132,31 @@
   - type: Stack
     stackType: Dollar
     count: 1000
+
+- type: entity
+  parent: RMCSpaceCash1000
+  id: RMCSpaceCash1000Counterfeit
+  suffix: Counterfeit
+  components:
+  - type: RMCBlackMarketCounterfeitCash
+  - type: Stack
+    stackType: STCounterfeitDollar
+  - type: BlackMarketValue
+    value: 0
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: STSpaceCash1Counterfeit
+  suffix: Counterfeit
+  components:
+  - type: RMCBlackMarketCounterfeitCash
+  - type: Stack
+    stackType: STCounterfeitDollar
+  - type: BlackMarketValue
+    value: 0
+
+- type: stack
+  id: STCounterfeitDollar
+  name: 1 dollar bill
+  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash }
+  spawn: STSpaceCash1Counterfeit

@@ -243,6 +243,8 @@
         enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_on }
           False: { state: scalpel_laser }
+  - type: BlackMarketValue
+    value: 15
 
 # - - Improved
 - type: entity
@@ -261,6 +263,8 @@
         enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_2_on }
           False: { state: scalpel_laser_2 }
+  - type: BlackMarketValue
+    value: 20
 
 # - - Advanced
 - type: entity
@@ -279,6 +283,8 @@
         enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_3_on }
           False: { state: scalpel_laser_3 }
+  - type: BlackMarketValue
+    value: 25
 
 # - Pict System
 - type: entity
@@ -289,6 +295,8 @@
   components:
   - type: Sprite
     state: pict_system
+  - type: BlackMarketValue
+    value: 25
 
 # - Manager
 - type: entity
@@ -299,6 +307,8 @@
   components:
   - type: Sprite
     state: scalpel_manager
+  - type: BlackMarketValue
+    value: 25
 
 
 
@@ -389,6 +399,8 @@
     state: wound_clamp
   - type: Item
     sprite: _RMC14/Objects/Medical/Surgery/wound_clamp.rsi
+  - type: BlackMarketValue
+    value: 15
 
 
 

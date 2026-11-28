@@ -41,6 +41,54 @@
     - CMPottedPlant30
     chance: 1
 
+- type: entity
+  parent: CMPottedPlantBase
+  id: RMCPottedPlantRandomUnanchored
+  name: potted plant
+  suffix: RMC, Random, Unanchored
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/potted_plants.rsi
+    layers:
+    - state: applebush
+      map: [ "randomPlant" ]
+  - type: RandomSprite
+    available:
+    - randomPlant:
+        applebush: ""
+        pottedplant_1: ""
+        pottedplant_2: ""
+        pottedplant_3: ""
+        pottedplant_4: ""
+        pottedplant_5: ""
+        pottedplant_6: ""
+        pottedplant_7: ""
+        pottedplant_8: ""
+        pottedplant_9: ""
+        pottedplant_10: ""
+        pottedplant_11: ""
+        pottedplant_12: ""
+        pottedplant_13: ""
+        pottedplant_14: ""
+        pottedplant_15: ""
+        pottedplant_16: ""
+        pottedplant_17: ""
+        pottedplant_18: ""
+        pottedplant_19: ""
+        pottedplant_20: ""
+        pottedplant_21: ""
+        pottedplant_22: ""
+        pottedplant_23: ""
+        pottedplant_24: ""
+        pottedplant_25: ""
+        pottedplant_26: ""
+        pottedplant_27: ""
+        pottedplant_28: ""
+        pottedplant_29: ""
+        pottedplant_30: ""
+
 # Plants
 - type: entity
   parent: PottedPlantBase

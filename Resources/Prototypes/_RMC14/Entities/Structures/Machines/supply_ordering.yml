@@ -1,0 +1,19 @@
+- type: entity
+  parent: CMASRSConsole
+  id: RMCSupplyOrderingConsole
+  name: supply ordering console
+  description: Prints supply requisition forms.
+  components:
+  - type: RequisitionsComputer
+    requestOnly: true
+  - type: AccessReader
+    access: []
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - map: ["base"]
+      state: request0
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: request
+  - type: Computer
+    board: RMCSupplyOrderingCircuitboard
