@@ -671,6 +671,17 @@
 
 - type: entity
   parent: RMCMatebaBeltLuxurious
+  id: RMCMatebaBeltLuxuriousFilledSanta
+  suffix: Filled, Festeba, Santa
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHE
+      amount: 5
+    - id: RMCWeaponRevolverMatebaFesteba
+
+- type: entity
+  parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilledWEYA
   suffix: Filled, Golden, WEYA Director
   components:

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e9b299d266c2be727403751c3474e085803b5934/icons/mob/humans/onmob/inhands/clothing/suits_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/e9b299d266c2be727403751c3474e085803b5934/icons/mob/humans/onmob/inhands/clothing/suits_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/e9b299d266c2be727403751c3474e085803b5934/icons/mob/humans/onmob/clothing/suits/misc_ert.dmi, https://github.com/cmss13-devs/cmss13/blob/e9b299d266c2be727403751c3474e085803b5934/icons/obj/items/clothing/suits/misc_ert.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

@@ -232,6 +232,67 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCWeaponRevolverMatebaGold
+  id: RMCWeaponRevolverMatebaFesteba
+  name: Festeba
+  description: The Unica used by SANTA himself. Rumoured to be loaded with explosive ammunition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
+    color: "#FF3333"
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
+  - type: Gun
+    soundGunshot:
+      collection: RMCSoundFestebaGunshot
+  - type: AttachableHolder
+    slots:
+      rmc-bslot-barrel:
+        startingAttachable: RMCAttachmentMatebaStandardGolden
+        whitelist:
+          tags:
+          - RMCAttachmentMatebaStandardGolden
+          - RMCAttachmentMatebaMarksmanGolden
+          - RMCAttachmentMatebaSnubNoseGolden
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentBarrelCharger
+
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-bslot-barrel: 0.215, 0.19
+      rmc-aslot-barrel: 0.215, 0.19
+      rmc-aslot-rail: -0.11, 0.22
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoaderMateba
+      - RMCSpeedLoaderMatebaHE
+      - RMCSpeedLoaderMatebaHIAP
+      - RMCSpeedLoaderMatebaHighImpact
+      - RMCCartridgeRevolverMatebaHE
+      - RMCCartridgeRevolverMatebaHIAP
+      - RMCCartridgeRevolverMatebaHighImpact
+      - RMCCartridgeRevolverMateba
+    proto: RMCCartridgeRevolverMatebaHE
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMatebaFesteba
+  - type: GunIDLock
+
+- type: entity
   parent: RMCWeaponRevolverMateba
   id: RMCWeaponRevolverMateba2006M
   name: Spearhead 2006M autorevolver
@@ -406,7 +467,7 @@
 
 - type: entity
   parent: RMCBaseSpeedLoaderMateba
-  id: RMCSpeedLoaderMatebaHE #High Explosive (Brig gen+ people only like commander of the marine corps)
+  id: RMCSpeedLoaderMatebaHE #High Explosive (ONLY admin roles should have this as it uses SADAR HE rocket stats which means it's just a pocket sadar) RMC14 TODO: Use parity stats
   name: Mateba explosive speed loader (.454).
   description: A formidable .454 speedloader, made exclusively for the Mateba autorevolver. There's an impact charge built into the bullet tip. Firing this at anything will result in a powerful explosion. Use with EXTREME caution.
   components:
@@ -475,7 +536,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRevolverMatebaHIAP
+    - RMCCartridgeRevolverMatebaHE
   - type: CartridgeAmmo
     proto: RMCBulletMatebaHighExplosive
 
@@ -539,13 +600,33 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletMatebaHighExplosive #Explosive
-  name: bullet (.454) HIAP
+  name: bullet (.454) High Explosive
   categories: [ HideSpawnMenu ]
   components:
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.12
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        restitution: 0.0
+        density: 20
   - type: Projectile
+    deleteOnCollide: false
+    impactEffect: BulletImpactEffect
     damage:
       types:
         Piercing: 100
+    queueDeletion: true
   - type: CMArmorPiercing
     amount: 50
   - type: RMCStunOnHit
@@ -556,6 +637,24 @@
       stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
+  - type: TriggerOnCollide
+    fixtureID: projectile
+  - type: ExplodeOnTrigger
+  - type: DeleteOnTrigger
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 30
+    intensitySlope: 10
+    totalIntensity: 290
+    maxTileBreak: 0
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect
+  - type: PointLight
+    radius: 3.5
+    color: orange
+    energy: 0.5
+  - type: VehicleDamageMultiplier
+    multiplier: 5
 
 - type: entity
   parent: BaseStorageItem
@@ -739,3 +838,7 @@
 
 - type: Tag
   id: RMCMatebaSpecial
+
+- type: Tag
+  id: RMCMatebaFesteba
+

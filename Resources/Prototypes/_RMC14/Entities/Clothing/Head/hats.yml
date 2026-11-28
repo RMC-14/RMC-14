@@ -1311,3 +1311,29 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/foil.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCSuperTopHat
+  name: collectable super top hat
+  description: A super top hat worn by only the highest echelon of hat collectors.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/super_top_hat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/super_top_hat.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        offset: "0, 0.19"
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCSantaHat
+  name: santa's hat
+  description: Ho ho ho. Merrry X-mas!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/santa_hat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/santa_hat.rsi

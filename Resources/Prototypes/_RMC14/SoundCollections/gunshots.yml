@@ -12,3 +12,9 @@
     - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_1.ogg
     - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_2.ogg
     - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_rattle.ogg
+
+- type: soundCollection
+  id: RMCSoundFestebaGunshot
+  files:
+  - /Audio/_RMC14/Xeno/alien_queen_xmas.ogg
+  - /Audio/_RMC14/Xeno/alien_queen_xmas_2.ogg

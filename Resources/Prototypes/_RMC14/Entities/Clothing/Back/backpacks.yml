@@ -659,3 +659,23 @@
     isCorrodible: false
   - type: RMCUnstrippable
     policeCanStrip: false
+
+- type: entity
+  parent: RMCSatchelPMC
+  id: RMCBackpackSantasGiftBag
+  name: santa's gift bag
+  description: Space Santa uses this to deliver toys to all the nice children in space in Christmas! Wow, it's pretty big!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Other/santas_gift_bag.rsi
+  - type: Storage
+    grid:
+    - 0,0,13,9 # 30
+    whitelist:
+      tags:
+      - RMCMarinePresent
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCUnstrippable
+    policeCanStrip: false
+
