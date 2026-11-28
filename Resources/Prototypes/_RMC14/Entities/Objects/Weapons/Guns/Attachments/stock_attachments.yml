@@ -1028,10 +1028,10 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM44MagnumSharpshooterStock
-  - type: AttachableToggleablePreventShoot
-    message: You need to extend the stock first!
+  # - type: AttachableToggleablePreventShoot # CM13 said this is dumb
+  #   message: You need to extend the stock first!
   - type: AttachableToggleable
-    doAfter: 1.5
+    doAfter: 0.5
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: 44stock
@@ -1047,12 +1047,12 @@
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
-  - type: AttachableSpeedMods
-    modifiers:
-    - conditions:
-        wieldedOnly: true
-      walk: -0.059
-      sprint: -0.101
+  # - type: AttachableSpeedMods # Removed, CM13 parity
+  #   modifiers:
+  #   - conditions:
+  #       wieldedOnly: true
+  #     walk: -0.059
+  #     sprint: -0.101
   - type: AttachableWeaponMeleeMods
     modifiers:
     - bonusDamage:
@@ -1062,11 +1062,13 @@
     modifiers:
     - conditions:
         wieldedOnly: true
+        activeOnly: true
       accuracyAddMult: 0.35
       recoilFlat: -2
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
+        activeOnly: true
       accuracyAddMult: -0.10
       recoilFlat: 2
       scatterFlat: 6

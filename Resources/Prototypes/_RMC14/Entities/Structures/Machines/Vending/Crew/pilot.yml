@@ -207,7 +207,7 @@
       - id: CMMagazineRifleM54CExt
         points: 10
       - id: RMCSpeedLoader44Marksman
-        points: 10
+        points: 5 # in CM13 they have heavy but they cut the cost to 5 vendor-wide so...
     - name: Utilities
       entries:
       # - id: CMPOFlightsuit # TODO: Port Flightsuit (not the uniform they normally wear)
