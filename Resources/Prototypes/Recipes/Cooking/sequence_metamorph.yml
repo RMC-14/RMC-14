@@ -14,7 +14,6 @@
   - !type:IngredientsWithTags # 1 meat cutlet
     tags:
     - Cooked
-    - Cutlet
     - Meat
     count:
       min: 1
@@ -296,6 +295,33 @@
   - !type:IngredientsWithTags # 1 brain
     tags:
     - Brain
+    count:
+      min: 1
+      max: 2
+  - !type:LastElementHasTags # last bun
+    tags:
+    - Bun
+
+- type: metamorphRecipe
+  id: FoodBurgerCarp
+  key: Burger
+  result: FoodBurgerCarp
+  rules:
+  - !type:SequenceLength
+    range:
+      min: 3
+      max: 4
+  - !type:IngredientsWithTags # 1 grilled fish fillet
+    tags:
+    - Cooked
+    - Meat
+    - Fish
+    count:
+      min: 1
+      max: 2
+  - !type:IngredientsWithTags # 1 cheese
+    tags:
+    - Cheese
     count:
       min: 1
       max: 2

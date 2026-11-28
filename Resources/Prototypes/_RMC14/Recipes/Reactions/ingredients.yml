@@ -1,12 +1,24 @@
 ﻿#Put it in here because the other 2 yml files didnt sound right for this
 
+# Condiments
+
+- type: reaction
+  id: RMCSoysauce
+  reactants:
+    RMCSulphuricAcid:
+      amount: 1
+    MilkSoy:
+      amount: 2
+  products:
+    RMCSoysauce: 3
+
 - type: reaction
   id: RMCCherryJelly
   minTemp: 342
   reactants:
     JuiceCherry:
       amount: 1
-    Sugar:
+    RMCSugar:
       amount: 1
   products:
     RMCCherryJelly: 2
@@ -42,12 +54,12 @@
   reactants:
     Enzyme:
       amount: 1
-    RMCBlackGoo: # TODO RMC14 remove this later
-      amount: 0.5
     JuiceBerry:
       amount: 1
   products:
     Grenadine: 2
+
+# Alcohol Recipes
 
 - type: reaction
   id: BlueCuracao
@@ -94,7 +106,7 @@
       amount: 0.5
     Coffee:
       amount: 1
-    Sugar:
+    RMCSugar:
       amount: 1
   products:
     CoffeeLiqueur: 2
@@ -123,6 +135,8 @@
   products:
     Wine: 2
 
+# RMC Drinks
+
 - type: reaction
   id: RMCMilkshake
   requiredMixerCategories:
@@ -142,7 +156,7 @@
   reactants:
     Water:
       amount: 2
-    Sugar:
+    RMCSugar:
       amount: 1
     RMCJuiceMango:
       amount: 2
@@ -222,20 +236,6 @@
     SwissLemonade: 5
 
 - type: reaction
-  id: CreateMeat
-  impact: Low
-  quantized: true
-  conserveEnergy: false
-  reactants:
-    CMClonexadone:
-      amount: 1
-    Blood:
-      amount: 5
-  effects:
-  - !type:CreateEntityReactionEffect
-    entity: FoodMeat
-
-- type: reaction
   id: CreateFriedEgg
   impact: Low
   quantized: true
@@ -250,6 +250,8 @@
   effects:
   - !type:CreateEntityReactionEffect
     entity: FoodMealFriedegg
+
+# Instant powder drinks
 
 - type: reaction
   id: RMCInstantOrange
