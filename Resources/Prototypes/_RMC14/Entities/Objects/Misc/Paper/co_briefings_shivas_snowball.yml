@@ -1,0 +1,33 @@
+# Shiva's Snowball
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingShivasUnaligned
+  suffix: Shiva's Snowball, Unaligned
+  components:
+  - type: Paper
+    content: rmc-co-briefing-shivas-unaligned
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingShivasHawks
+  suffix: Shiva's Snowball, Hawks
+  components:
+  - type: Paper
+    content: rmc-co-briefing-shivas-hawks
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingShivasDoves
+  suffix: Shiva's Snowball, Doves
+  components:
+  - type: Paper
+    content: rmc-co-briefing-shivas-doves
+
+- type: entity
+  parent: RMCPaperCOBriefingBase
+  id: RMCPaperCOBriefingShivasMagpies
+  suffix: Shiva's Snowball, Magpies
+  components:
+  - type: Paper
+    content: rmc-co-briefing-shivas-magpies
