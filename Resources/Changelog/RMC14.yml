@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: CL safe being an Intel objective
-    type: Fix
-  - message: Incind mags being reloadable by normal 10x24
-    type: Fix
-  - message: Pouch, webbing, armour, backpack, helmet, smart equip keybinds
-    type: Add
-  - message: Armour vest can be defibbed through (this is because it's supposed to
-      be equivalent to jackets, etc.)
-    type: Fix
-  id: 3475
-  time: '2026-07-03T01:39:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10303
 - author: IceNoobXD
   changes:
   - message: Fixed floor safe not having a storage and there by not being able to
@@ -4337,5 +4323,14 @@
   id: 3974
   time: '2026-11-28T12:37:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11253
+- author: MidZik
+  changes:
+  - message: Fixed use delay mispredicts, where actions such as opening or closing
+      a breech or wielding a gun would be undone if you did it right as the cooldown
+      ran out.
+    type: Fix
+  id: 3975
+  time: '2026-11-28T12:40:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11239
 Name: RMC14
 Order: -1
