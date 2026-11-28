@@ -795,6 +795,17 @@
   loadouts:
   - CMPPeakedCapRMC
 
+# Mess Technician
+
+- type: loadoutGroup
+  id: MessTechRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - RMCCoatMessTechBlack
+  - RMCChefPaperHat
+
 # Synthetic
 - type: loadoutGroup
   id: SynthUniformRMC

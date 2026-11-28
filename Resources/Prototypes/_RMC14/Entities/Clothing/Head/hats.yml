@@ -1311,3 +1311,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/foil.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapChefPaperHat
+  name: soda jerk hat
+  description: The special hat of all diner cooks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/chefpaperhat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/chefpaperhat.rsi

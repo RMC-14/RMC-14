@@ -814,6 +814,7 @@
   id: JobCMMessTech
   points: 7
   groups:
+  - MessTechRoleSpecificRMC
   - MarineBackpack
   - HeadwearRMC
   - EyewearRMC

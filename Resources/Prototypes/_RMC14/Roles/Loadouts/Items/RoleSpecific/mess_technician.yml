@@ -1,0 +1,29 @@
+# Mess Technician
+
+## Outerwear
+
+- type: loadout
+  id: RMCCoatMessTechBlack
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 36000 # 10 hours
+  equipment:
+    outerClothing: RMCCoatMessTechBlack
+
+## Headwear
+
+- type: loadout
+  id: RMCChefPaperHat
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 3600 # 1 hour
+  equipment:
+    head: RMCHeadCapChefPaperHat
