@@ -1,5 +1,8 @@
 using System.Numerics;
 using Content.Server._RMC14.Dropship;
+using Content.Server.Chat.Systems;
+using Content.Server.Explosion.Components;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
@@ -12,7 +15,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using static Content.Shared.Popups.PopupType;
-using Content.Server.Chat.Systems;
 
 namespace Content.Server._RMC14.Mortar;
 
@@ -28,6 +30,19 @@ public sealed class MortarSystem : SharedMortarSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly TriggerSystem _trigger = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<ProjectileGrenadeComponent, MortarShellLandEvent>(OnProjectileGrenadeLand);
+    }
+
+    private void OnProjectileGrenadeLand(Entity<ProjectileGrenadeComponent> shell, ref MortarShellLandEvent args)
+    {
+        _trigger.Trigger(shell, args.User);
+    }
 
     protected override bool CanLoadPopup(
         Entity<MortarComponent> mortar,

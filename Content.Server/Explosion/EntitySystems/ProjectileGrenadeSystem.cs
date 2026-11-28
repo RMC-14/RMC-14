@@ -18,9 +18,6 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
 
-    // RMC14
-    private readonly List<EntityUid> _spawned = new();
-
     public override void Initialize()
     {
         base.Initialize();
@@ -51,7 +48,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     /// </summary>
     private void OnFragTrigger(Entity<ProjectileGrenadeComponent> entity, ref TriggerEvent args)
     {
-        FragmentIntoProjectiles(entity.Owner, entity.Comp);
+        FragmentIntoProjectiles(entity.Owner, entity.Comp, args.User);
         args.Handled = true;
     }
 
@@ -59,37 +56,80 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     /// Spawns projectiles at the coordinates of the grenade upon triggering
     /// Can customize the angle and velocity the projectiles come out at
     /// </summary>
-    private void FragmentIntoProjectiles(EntityUid uid, ProjectileGrenadeComponent component)
+    // RMC14
+    private void FragmentIntoProjectiles(EntityUid uid, ProjectileGrenadeComponent component, EntityUid? user)
     {
         var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
-        var shootCount = 0;
+        var projectileRotation = _transformSystem.GetWorldRotation(uid) + Angle.FromDegrees(component.DirectionAngle);
+        var spawnDirection = projectileRotation.ToVec();
+        if (component.TileAlignedSpawnOffset)
+        {
+            var largestAxis = MathF.Max(MathF.Abs(spawnDirection.X), MathF.Abs(spawnDirection.Y));
+            if (largestAxis > 0)
+                spawnDirection /= largestAxis;
+        }
+
+        var spawnCoordinates = new MapCoordinates(
+            grenadeCoord.Position + spawnDirection * component.SpawnOffset,
+            grenadeCoord.MapId);
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
 
         // RMC14 it was sometimes dividing by 0.
         if (totalCount <= 0)
             return;
 
-        var hitEntities = new List<EntityUid>();
-        var segmentAngle = 360 / totalCount;
-
-        _spawned.Clear();
-        while (TrySpawnContents(grenadeCoord, component, out var contentUid))
+        var shooter = component.TriggerUserIsShooter ? user : null;
+        var remainingIndices = new List<int>(totalCount);
+        for (var index = 0; index < totalCount; index++)
         {
-            //RMC14
-            _spawned.Add(contentUid);
+            remainingIndices.Add(index);
+        }
 
-            Angle angle;
-            if (component.RandomAngle)
-                angle = _random.NextAngle();
+        var hitEntities = new List<EntityUid>();
+        var spawned = new List<EntityUid>(totalCount);
+        EntityUid? pendingContent = null;
+        if (component.DirectHit && component.DirectHitChance != null)
+        {
+            if (!TrySpawnContents(spawnCoordinates, component, out var sample))
+                return;
+
+            var prepare = new PrepareFragmentIntoProjectilesEvent(
+                sample, spawnCoordinates, shooter, remainingIndices, hitEntities);
+            RaiseLocalEvent(uid, ref prepare);
+
+            var consumed = totalCount - remainingIndices.Count;
+            if (consumed > 0)
+            {
+                QueueDel(sample);
+                ConsumeContents(component, consumed - 1);
+            }
             else
             {
-                var angleMin = segmentAngle * shootCount;
-                var angleMax = segmentAngle * (shootCount + 1);
-                angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+                pendingContent = sample;
+            }
+        }
+
+        var segmentAngle = 360 / totalCount;
+        foreach (var shootIndex in remainingIndices)
+        {
+            EntityUid contentUid;
+            if (pendingContent is { } pending)
+            {
+                pendingContent = null;
+                contentUid = pending;
+            }
+            else if (!TrySpawnContents(spawnCoordinates, component, out contentUid))
+            {
+                break;
             }
 
-            // RMC14 - only works for spawner grenades
-            var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, component.UnspawnedCount, angle, shootCount++, hitEntities);
+            spawned.Add(contentUid);
+            var angle = component.RandomAngle
+                ? _random.NextAngle()
+                : Angle.FromDegrees(_random.Next(segmentAngle * shootIndex, segmentAngle * (shootIndex + 1)));
+
+            var ev = new FragmentIntoProjectilesEvent(
+                contentUid, totalCount, component.UnspawnedCount, angle, shootIndex, hitEntities);
             RaiseLocalEvent(uid, ref ev);
 
             if (ev.TotalCount <= 0)
@@ -99,37 +139,75 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 continue;
 
             if (ev.Handled)
-            {
-                hitEntities = ev.HitEntities;
                 angle = ev.Angle;
-            }
 
-            // RMC14
-            EntityUid? gunUid = null;
-            EntityUid? user = null;
+            EntityUid? gunUid = shooter == null ? null : uid;
+            var shooterUid = shooter;
 
             if (TryComp(uid, out ProjectileComponent? clusterProjectile))
             {
                 gunUid = clusterProjectile.Weapon;
-                user = clusterProjectile.Shooter;
+                shooterUid = clusterProjectile.Shooter;
             }
 
             // velocity is randomized to make the projectiles look
             // slightly uneven, doesn't really change much, but it looks better
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, gunUid, user, component.ProjectileSpeed);
+            var speedVariance = Math.Clamp(component.ProjectileSpeedVariance, 0, 1);
+            var speed = component.ProjectileSpeed;
+            if (speedVariance > 0)
+                speed *= _random.NextFloat(1 - speedVariance, 1 + speedVariance);
+
+            var minDamageMultiplier = MathF.Max(0, MathF.Min(
+                component.MinProjectileDamageMultiplier,
+                component.MaxProjectileDamageMultiplier));
+            var maxDamageMultiplier = MathF.Max(0, MathF.Max(
+                component.MinProjectileDamageMultiplier,
+                component.MaxProjectileDamageMultiplier));
+            if (TryComp(contentUid, out ProjectileComponent? projectile))
+            {
+                var damageMultiplier = minDamageMultiplier;
+                if (minDamageMultiplier != maxDamageMultiplier)
+                    damageMultiplier = _random.NextFloat(minDamageMultiplier, maxDamageMultiplier);
+
+                if (damageMultiplier != 1f)
+                    projectile.Damage *= damageMultiplier;
+            }
+
+            _gun.ShootProjectile(contentUid, direction, velocity, gunUid, shooterUid, speed);
         }
 
-        var clusterEv = new CMClusterSpawnedEvent(_spawned, hitEntities, uid);
+        var clusterEv = new CMClusterSpawnedEvent(spawned, hitEntities, uid);
         RaiseLocalEvent(uid, ref clusterEv);
         RaiseLocalEvent(uid,
             new AmmoShotEvent
             {
-                FiredProjectiles = _spawned,
+                FiredProjectiles = spawned,
             });
         QueueDel(uid);
     }
+
+    private void ConsumeContents(ProjectileGrenadeComponent component, int count)
+    {
+        while (count > 0 && component.UnspawnedCount > 0)
+        {
+            component.UnspawnedCount--;
+            count--;
+        }
+
+        while (count > 0 && component.Container.ContainedEntities.Count > 0)
+        {
+            var contentUid = component.Container.ContainedEntities[0];
+            if (!_container.Remove(contentUid, component.Container))
+                break;
+
+            QueueDel(contentUid);
+            count--;
+        }
+    }
+
+    // RMC14
 
     /// <summary>
     /// Spawns one instance of the fill prototype or contained entity at the coordinate indicated
@@ -151,6 +229,8 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
 
             if (!_container.Remove(contentUid, component.Container))
                 return false;
+
+            _transformSystem.SetMapCoordinates(contentUid, spawnCoordinates);
 
             return true;
         }
