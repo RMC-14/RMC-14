@@ -29,8 +29,9 @@ public sealed class ForcePlanetMapCommand : ToolshedCommand
         }
 
         var planetSys = Sys<CMDistressSignalRuleSystem>();
-        planetSys.CancelPlanetVote();
         planetSys.SetPlanet(first.Value);
+
+        planetSys.CancelPlanetVote();
         ctx.WriteLine($"The next round's planet has been set to {first.Value}");
     }
 }

@@ -63,6 +63,11 @@ namespace Content.Server.Database
         public DbSet<RMCPlayerStats> RMCPlayerStats { get; set; } = default!;
         public DbSet<RMCPlayerActionOrder> RMCPlayerActionOrder { get; set; } = default!;
         public DbSet<RMCChatBans> RMCPlayerChatBans { get; set; } = default!;
+        // RMC14 start
+        public DbSet<RMCDistressSignalServerState> RMCDistressSignalStates { get; set; } = default!;
+        public DbSet<RMCDistressSignalRound> RMCDistressSignalRounds { get; set; } = default!;
+        public DbSet<RMCDistressSignalCarryoverVote> RMCDistressSignalCarryoverVotes { get; set; } = default!;
+        // RMC14 end
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -541,6 +546,26 @@ namespace Content.Server.Database
                 .OwnsOne(b => b.HWId)
                 .Property(h => h.Type)
                 .HasDefaultValue(HwidType.Legacy);
+
+            // RMC14 start
+            modelBuilder.Entity<RMCDistressSignalServerState>()
+                .HasOne(s => s.Server)
+                .WithOne()
+                .HasForeignKey<RMCDistressSignalServerState>(s => s.ServerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCDistressSignalRound>()
+                .HasOne(r => r.Round)
+                .WithOne()
+                .HasForeignKey<RMCDistressSignalRound>(r => r.RoundId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCDistressSignalCarryoverVote>()
+                .HasOne(v => v.Server)
+                .WithMany()
+                .HasForeignKey(v => v.ServerId)
+                .OnDelete(DeleteBehavior.Cascade);
+            // RMC14 end
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)

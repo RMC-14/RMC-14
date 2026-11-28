@@ -297,3 +297,56 @@ public sealed class RMCChatBans
     public Player? LastEditedBy { get; set; }
     public DateTime? LastEditedAt { get; set; }
 }
+
+[Table("rmc_distress_signal_state")]
+public sealed class RMCDistressSignalServerState
+{
+    [Key]
+    [ForeignKey(nameof(Server))]
+    public int ServerId { get; set; }
+
+    public Server Server { get; set; } = default!;
+
+    public float MarinesPerXeno { get; set; }
+
+    public string? SelectedPlanetId { get; set; }
+
+    public DateTime UpdatedAt { get; set; }
+}
+
+[Table("rmc_distress_signal_rounds")]
+[Index(nameof(PlanetId))]
+public sealed class RMCDistressSignalRound
+{
+    [Key]
+    [ForeignKey(nameof(Round))]
+    public int RoundId { get; set; }
+
+    public Round Round { get; set; } = default!;
+
+    public string PlanetId { get; set; } = default!;
+
+    public int? Result { get; set; }
+
+    public float MarinesPerXenoBefore { get; set; }
+
+    public float? MarinesPerXenoAfter { get; set; }
+
+    public DateTime StartedAt { get; set; }
+
+    public DateTime? FinishedAt { get; set; }
+}
+
+[Table("rmc_distress_signal_carryover_votes")]
+[PrimaryKey(nameof(ServerId), nameof(PlanetId))]
+public sealed class RMCDistressSignalCarryoverVote
+{
+    [ForeignKey(nameof(Server))]
+    public int ServerId { get; set; }
+
+    public Server Server { get; set; } = default!;
+
+    public string PlanetId { get; set; } = default!;
+
+    public int Votes { get; set; }
+}
