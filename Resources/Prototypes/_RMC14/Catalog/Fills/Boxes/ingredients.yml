@@ -80,7 +80,6 @@
     - id: RMCDrinkSoyMilkCarton
       amount: 7
 
-
 # Condiments
 
 - type: entity
