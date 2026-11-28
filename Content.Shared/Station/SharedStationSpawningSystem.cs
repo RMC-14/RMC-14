@@ -26,6 +26,9 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
 
+    // RMC14
+    [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
+
     private EntityQuery<HandsComponent> _handsQuery;
     private EntityQuery<InventoryComponent> _inventoryQuery;
     private EntityQuery<StorageComponent> _storageQuery;
@@ -138,7 +141,10 @@ public abstract class SharedStationSpawningSystem : EntitySystem
                 if (!string.IsNullOrEmpty(equipmentStr))
                 {
                     var equipmentEntity = Spawn(equipmentStr, xform.Coordinates);
-                    InventorySystem.TryEquip(entity, equipmentEntity, slot.Name, silent: true, force: true);
+                    // RMC14
+                    if (!InventorySystem.TryEquip(entity, equipmentEntity, slot.Name, silent: true, force: true))
+                        _rmcStorage.TryInsertInBackStorage(entity, equipmentEntity);
+                    // RMC14
                 }
             }
         }
@@ -176,11 +182,13 @@ public abstract class SharedStationSpawningSystem : EntitySystem
                     foreach (var entProto in entProtos)
                     {
                         var spawnedEntity = Spawn(entProto, coords);
+                        // RMC14
                         if (TryComp(spawnedEntity, out ItemComponent? item))
                         {
-                            var ev = new CMStorageItemFillEvent((spawnedEntity, item), storage);
+                            var ev = new CMStorageItemFillEvent((spawnedEntity, item), storage, startingGear);
                             RaiseLocalEvent(slotEnt.Value, ref ev);
                         }
+                        // RMC14
 
                         _storage.Insert(slotEnt.Value, spawnedEntity, out _, storageComp: storage, playSound: false);
                     }

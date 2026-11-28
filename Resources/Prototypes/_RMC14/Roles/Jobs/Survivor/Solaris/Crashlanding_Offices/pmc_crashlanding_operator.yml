@@ -65,7 +65,6 @@
   storage:
     back:
     - CMSheetMetal20
-    outerClothing:
     - RMCMREWeYa
 
 - type: entity
