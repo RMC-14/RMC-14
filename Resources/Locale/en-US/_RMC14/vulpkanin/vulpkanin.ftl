@@ -164,7 +164,7 @@ marking-VulpTailOtie-otie = Otie tail
 marking-VulpTailOtie = Vulpkanin Otie (no wag)
 
 marking-VulpTailFluffy-fluffy = Fluffy tail
-marking-VulpTailFluffy = Vulpkanin Fluffy (no wag)
+marking-VulpTailFluffy = Vulpkanin Fluffy
 
 marking-VulpTailDalmation = Dalmation
 
