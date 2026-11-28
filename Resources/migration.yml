@@ -1564,6 +1564,7 @@ CMIV: RMCIVStand
 
 # 2026-11-09
 RMCSpawnerCorpseUNMCMilitaryPoliceRandom: RMCSpawnerCorpseUNMCVeteranRiflemanRandom
+LockerAtmospherics: RMCLockerEngineerAtmos
 
 # 2026-11-20
 WeaponSMGMP5: RMCWeaponSMGPCAC5A4

@@ -25,7 +25,6 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -75,6 +74,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
         SubscribeLocalEvent<XenoProjectileComponent, CMClusterSpawnedEvent>(OnClusterSpawned);
+        SubscribeLocalEvent<XenoProjectileComponent, RMCClusterDirectHitEvent>(OnClusterDirectHit);
         SubscribeLocalEvent<XenoProjectileComponent, StartCollideEvent>(OnClusterProjectileStartCollide);
 
         UpdatesBefore.Add(typeof(SharedPhysicsSystem));
@@ -353,7 +353,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (ent.Comp.DeleteOnFriendlyXeno || ent.Comp.StopOnFriendlyXeno)
             return;
 
-        if (_hive.FromSameHive(ent.Owner, args.OtherEntity) &&
+        if (ent.Comp.CancelSameHiveCollide && _hive.FromSameHive(ent.Owner, args.OtherEntity) &&
             (HasComp<XenoComponent>(args.OtherEntity) || HasComp<HiveCoreComponent>(args.OtherEntity)) &&
             !HasComp<XenoConstructComponent>(args.OtherEntity))
             args.Cancelled = true;
@@ -396,6 +396,13 @@ public sealed class XenoProjectileSystem : EntitySystem
         }
     }
 
+    private void OnClusterDirectHit(Entity<XenoProjectileComponent> ent, ref RMCClusterDirectHitEvent args)
+    {
+        if (_hive.GetHive(ent.Owner) is not { } hive)
+            return;
+
+        _hive.SetHive(args.DirectHitProjectile, hive);
+    }
     private void OnClusterProjectileStartCollide(Entity<XenoProjectileComponent> ent, ref StartCollideEvent args)
     {
         var shouldStop = _hive.FromSameHive(ent.Owner, args.OtherEntity)
@@ -472,7 +479,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno, plasma))
             return false;
 
-        _audio.PlayPredicted(sound, xeno, xeno);
+        _audio.PlayPredicted(sound, xeno, predicted ? xeno : null);
         if (_net.IsClient && !_gunPrediction.GunPrediction || !_timing.IsFirstTimePredicted)
             return true;
 

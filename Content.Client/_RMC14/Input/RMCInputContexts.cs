@@ -30,6 +30,8 @@ public static class RMCInputContexts
         CMKeyFunctions.RMCMarineSpecialistOne,
         CMKeyFunctions.RMCMarineSpecialistTwo,
         CMKeyFunctions.RMCPickUpDroppedItems,
+        CMKeyFunctions.RMCPushup,
+        CMKeyFunctions.RMCPushupRoutine,
         CMKeyFunctions.RMCQuickEquipInventory,
         CMKeyFunctions.RMCRest,
         CMKeyFunctions.RMCResist,
@@ -37,6 +39,11 @@ public static class RMCInputContexts
         CMKeyFunctions.RMCToggleIff,
         CMKeyFunctions.RMCToggleShotgunTube,
         CMKeyFunctions.RMCUnloadWeapon,
+        CMKeyFunctions.RMCVehicleHorn,
+        CMKeyFunctions.RMCVehicleOvercharge,
+        CMKeyFunctions.RMCVehicleSpotlight,
+        CMKeyFunctions.RMCVehicleSafety,
+        CMKeyFunctions.RMCWeakPushup,
     ];
 
     public static readonly IReadOnlyList<BoundKeyFunction> XenoFunctions =
@@ -90,6 +97,13 @@ public static class RMCInputContexts
     {
         var human = contexts.New("rmc-human", "human");
         AddFunctions(human, HumanFunctions);
+
+        var overwatch = contexts.New("overwatch", human);
+        overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustNorth);
+        overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustWest);
+        overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustSouth);
+        overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustEast);
+        overwatch.AddFunction(CMKeyFunctions.RMCCameraReset);
 
         var xenonid = contexts.New("xenonid", "common");
         AddFunctions(xenonid, XenoInteractionFunctions);

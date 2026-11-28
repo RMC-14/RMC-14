@@ -11,6 +11,9 @@ public static class RMCKeybindCatalog
         new("ui-options-header-rmc-human",
         [
             CMKeyFunctions.RMCRest,
+            CMKeyFunctions.RMCPushup,
+            CMKeyFunctions.RMCPushupRoutine,
+            CMKeyFunctions.RMCWeakPushup,
             CMKeyFunctions.RMCResist,
             CMKeyFunctions.RMCMarineIssueOrder,
             CMKeyFunctions.RMCMarineIssueOrderMove,

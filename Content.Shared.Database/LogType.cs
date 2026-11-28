@@ -528,4 +528,6 @@ public enum LogType
     RMCXenoPsychic = RMCMarineAnnounce + 46,
     RMCElevatorLaunched = RMCMarineAnnounce + 47,
     RMCMentorHelp = RMCMarineAnnounce + 48,
+    RMCXenoBanish = RMCMarineAnnounce + 49,
+    RMCXenoReadmit = RMCMarineAnnounce + 50,
 }

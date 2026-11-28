@@ -28,14 +28,24 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCMarineSpecialistTwo = "RMCMarineSpecialistTwo";
     public static readonly BoundKeyFunction RMCPickUpDroppedItems = "RMCPickUpDroppedItems";
     public static readonly BoundKeyFunction RMCQuickEquipInventory = "RMCQuickEquipInventory";
+    public static readonly BoundKeyFunction RMCPushup = "RMCPushup";
+    public static readonly BoundKeyFunction RMCPushupRoutine = "RMCPushupRoutine";
     public static readonly BoundKeyFunction RMCRest = "RMCRest";
     public static readonly BoundKeyFunction RMCResist = "RMCResist";
     public static readonly BoundKeyFunction RMCToggleAutoEject = "RMCToggleAutoEject";
     public static readonly BoundKeyFunction RMCToggleIff = "RMCToggleIff";
     public static readonly BoundKeyFunction RMCToggleShotgunTube = "RMCToggleShotgunTube";
     public static readonly BoundKeyFunction RMCUnloadWeapon = "RMCUnloadWeapon";
+    public static readonly BoundKeyFunction RMCWeakPushup = "RMCWeakPushup";
     public static readonly BoundKeyFunction RMCOpenLanguageMenu = "RMCOpenLanguageMenu";
     public static readonly BoundKeyFunction RMCCycleLanguage = "RMCCycleLanguage";
+
+    // Overwatch camera controls
+    public static readonly BoundKeyFunction RMCCameraAdjustNorth = "RMCCameraAdjustNorth";
+    public static readonly BoundKeyFunction RMCCameraAdjustWest = "RMCCameraAdjustWest";
+    public static readonly BoundKeyFunction RMCCameraAdjustSouth = "RMCCameraAdjustSouth";
+    public static readonly BoundKeyFunction RMCCameraAdjustEast = "RMCCameraAdjustEast";
+    public static readonly BoundKeyFunction RMCCameraReset = "RMCCameraReset";
 
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
@@ -56,4 +66,10 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCXenoScreech = "RMCXenoScreech";
     public static readonly BoundKeyFunction RMCXenoTailStab = "RMCXenoTailStab";
     public static readonly BoundKeyFunction RMCXenoWordQueen = "RMCXenoWordQueen";
+
+    // Vehicle
+    public static readonly BoundKeyFunction RMCVehicleHorn = "RMCVehicleHorn";
+    public static readonly BoundKeyFunction RMCVehicleOvercharge = "RMCVehicleOvercharge";
+    public static readonly BoundKeyFunction RMCVehicleSpotlight = "RMCVehicleSpotlight";
+    public static readonly BoundKeyFunction RMCVehicleSafety = "RMCVehicleSafety";
 }
