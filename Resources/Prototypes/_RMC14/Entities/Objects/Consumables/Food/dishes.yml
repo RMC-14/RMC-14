@@ -1,0 +1,383 @@
+# Contents of dishes.rsi
+
+- type: entity
+  name: berry clafoutis
+  parent: FoodPieBase
+  id: RMCFoodPieClafoutis
+  description: No black birds, this is a good sign.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - berry
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: berryclafoutis
+  - type: SliceableFood
+    slice: RMCFoodPieClafoutisSlice
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+
+- type: entity
+  name: slice of berry clafoutis
+  parent: FoodPieSliceBase
+  id: RMCFoodPieClafoutisSlice
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - berry
+  - type: Sprite
+    layers:
+    - state: plain-slice
+    - state: alpha-slice-filling
+      color: pink
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie
+    - Slice
+
+- type: entity
+  name: loaded baked potato
+  parent: FoodMealBase
+  id: RMCFoodMealPotatoLoaded
+  description: Totally baked.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - cheesy
+    - potatoes
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: loadedbakedpotato
+# Tastes like potato.
+
+- type: entity
+  name: space fries
+  parent: FoodMealBase
+  id: RMCFoodMealFries
+  description: AKA, French Fries, Freedom Fries, etc.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - potatoes
+    - salty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: fries
+# Tastes like fries, salt.
+
+- type: entity
+  name: cheesy fries
+  parent: FoodMealBase
+  id: RMCFoodMealFriesCheesy
+  description: Fries. Covered in cheese. Duh.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - potatoes
+    - salty
+    - cheesy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: cheesyfries
+# Tastes like fries, cheese.
+
+- type: entity
+  name: carrot fries
+  parent: FoodMealBase
+  id: RMCFoodMealFriesCarrot
+  description: Tasty fries from fresh carrots.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - carrots
+    - salty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: carrotfries
+  - type: Tag
+    tags:
+    - CarrotFries
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 26
+        reagents:
+        - ReagentId: JuiceCarrot
+          Quantity: 20
+
+- type: entity
+  name: fried egg
+  parent: FoodMealBase
+  id: RMCFoodMealFriedegg
+  description: A fried egg, with a touch of salt and pepper.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - egg
+    - salty
+    - peppery
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: friedegg
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 1
+        - ReagentId: Blackpepper
+          Quantity: 1
+  - type: Tag
+    tags:
+    - Meat
+    - Egg
+  - type: FoodSequenceElement
+    entries:
+      Burger: MealFriedEgg
+      Taco: MealFriedEgg
+
+- type: entity
+  name: eggplant parmigiana
+  parent: FoodMealBase
+  id: RMCFoodMealEggplantParm
+  description: The only good recipe for eggplant.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - eggplant
+    - cheesy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: eggplantparm
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: Tag
+    tags:
+    - Fruit
+
+- type: entity
+  name: enchiladas
+  parent: FoodMealBase
+  id: RMCFoodMealEnchiladas
+  description: Viva La Mexico!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: enchiladas
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 35
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: Protein
+          Quantity: 5
+        - ReagentId: CapsaicinOil
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 6
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: cheese omelette
+  parent: FoodMealBase
+  id: RMCFoodMealOmelette
+  description: Cheesy.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - egg
+    - cheesy
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: omelette
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: stewed soy meat
+  parent: FoodMealBase
+  id: RMCFoodStewedSoyMeat
+  description: Even non-vegetarians will LOVE this!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - soy
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: stewedsoymeat
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 6
+
+- type: entity
+  name: soy dope
+  parent: FoodMealBase
+  id: RMCFoodStewedSoydope
+  description: Dope from a soy.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - soy
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: soydope
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 6
+
+- type: entity
+  name: wing fang chu
+  parent: FoodBowlBase
+  id: RMCFoodSoupWingFangChu
+  description: A savory dish of alien wing wang in soy.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - salty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: wingfangchu
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Protein
+          Quantity: 15
+        - ReagentId: RMCSoysauce
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 10
+
+# Pasta
+
+- type: entity
+  name: spaghetti and meatballs
+  parent: FoodNoodlesBase
+  id: RMCFoodNoodlesMeatball
+  description: Now that's a nice-a meatball!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - pasta
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: meatballspagetti
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Protein
+          Quantity: 6
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: boiled spaghetti
+  parent: FoodNoodlesBase
+  id: RMCFoodNoodlesBoiled
+  description: A plain dish of noodles, this needs more ingredients.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - pasta
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: spagettiboiled
+
+- type: entity
+  name: spaghetti
+  parent: FoodNoodlesBase
+  id: RMCFoodNoodles
+  description: Spaghetti and crushed tomatoes. Just like your abusive father used to make!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - pasta
+    - tomato
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: pastatomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 35
+  - type: Tag
+    tags:
+    - Fruit
+
+- type: entity
+  name: spesslaw
+  parent: FoodNoodlesBase
+  id: RMCFoodNoodlesSpesslaw
+  description: A lawyer's favourite.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - pasta
+    - meaty
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: spesslaw
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 6
