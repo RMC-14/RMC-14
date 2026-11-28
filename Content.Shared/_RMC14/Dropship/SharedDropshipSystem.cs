@@ -770,6 +770,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         EnsureComp<RMCTrackableComponent>(lz);
         RefreshUI();
 
+        var changed = new PrimaryLandingZoneChangedEvent(lz, actor);
+        RaiseLocalEvent(ref changed);
+
         var message = Loc.GetString("rmc-announcement-ares-lz-designated", ("name", Name(lz)));
         var overlayText = Loc.GetString("rmc-announcement-lz-designated-overlay", ("name", Name(lz)));
         var overlay = Exists(actor)

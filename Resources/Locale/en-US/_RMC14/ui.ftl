@@ -132,6 +132,9 @@ rmc-tacmap-alert-no-area = Unknown area
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
 
 rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads
+rmc-ui-options-crt-theme = Use the CRT interface theme
+rmc-ui-options-crt-effects = Use CRT visual effects
+
 rmc-ui-options-announcements-max-visible = Simultaneous announcements
 rmc-ui-options-announcements-layout = Announcement layout
 rmc-ui-options-announcements-layout-open-editor = Open layout editor

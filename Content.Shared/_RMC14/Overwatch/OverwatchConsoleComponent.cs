@@ -52,6 +52,9 @@ public sealed partial class OverwatchConsoleComponent : Component
     public bool HasOrbital;
 
     [DataField, AutoNetworkedField]
+    public bool OrbitalSafetyEngaged;
+
+    [DataField, AutoNetworkedField]
     public Vector2i OrbitalCoordinates;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]

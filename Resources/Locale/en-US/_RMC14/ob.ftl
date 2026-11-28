@@ -20,6 +20,7 @@ rmc-ob-target-protected = The target zone has strong biological protection. The 
 rmc-ob-target-underground = The target zone is deep underground. The orbital strike cannot reach here.
 rmc-ob-request-accepted = Orbital bombardment request accepted. Orbital cannons are now calibrating.
 rmc-ob-launched = Orbital bombardment launched!
+rmc-ob-safety-engaged = A remote safety lock has been placed on the orbital cannon.
 
 ### Orbital Cannon Announcements
 rmc-ob-launch-detected = [font size=16][color=red]Orbital bombardment launch command detected![/color][/font]

@@ -171,6 +171,12 @@ public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUse
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleSendLeaderMessageBuiMsg(string message) : BoundUserInterfaceMessage
+{
+    public readonly string Message = message;
+}
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleSendMessageResultBuiMsg(bool sent) : BoundUserInterfaceMessage
 {
     public readonly bool Sent = sent;

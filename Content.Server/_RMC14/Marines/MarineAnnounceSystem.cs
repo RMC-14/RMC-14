@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.GroundsideOperations;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Chat;
@@ -50,6 +51,11 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             {
                 subs.Event<MarineCommunicationsDesignatePrimaryLZMsg>(OnMarineCommunicationsDesignatePrimaryLZMsg);
             });
+        Subs.BuiEvents<GroundsideOperationsConsoleComponent>(GroundsideOperationsConsoleUi.Key,
+            subs =>
+            {
+                subs.Event<MarineCommunicationsDesignatePrimaryLZMsg>(OnGroundsideOperationsDesignatePrimaryLZMsg);
+            });
     }
 
     private void OnMapInit(Entity<MarineCommunicationsComputerComponent> computer, ref MapInitEvent args)
@@ -82,8 +88,18 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             return;
         }
 
-        _dropship.TryDesignatePrimaryLZ(user, lz.Value);
-        _core.CreateARESLog(computer, LogCat, $"{Name(args.Actor)} designated Primary LZ as: {Name(lz.Value)}");
+        if (!_dropship.TryDesignatePrimaryLZ(user, lz.Value))
+            return;
+
+        _core.CreateARESLog(computer, LogCat, (string)$"{Name(args.Actor)} designated Primary LZ as: {Name(lz.Value)}");
+    }
+
+    private void OnGroundsideOperationsDesignatePrimaryLZMsg(
+        Entity<GroundsideOperationsConsoleComponent> ent,
+        ref MarineCommunicationsDesignatePrimaryLZMsg args)
+    {
+        if (TryComp(ent, out MarineCommunicationsComputerComponent? communications))
+            OnMarineCommunicationsDesignatePrimaryLZMsg((ent.Owner, communications), ref args);
     }
 
     private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)

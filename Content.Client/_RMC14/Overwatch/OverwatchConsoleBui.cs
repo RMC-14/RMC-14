@@ -135,7 +135,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 int Sorting(OverwatchMarine marine)
                 {
                     if (squad.Leader == marine.Id)
-                        return 1000;
+                        return int.MinValue;
 
                     if (marine.Role is not { } role)
                         return 0;
@@ -295,6 +295,9 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     window.OpenCentered();
                 };
 
+                monitor.MessageLeaderButton.OnPressed += _ =>
+                    OpenMessageInput(message => new OverwatchConsoleSendLeaderMessageBuiMsg(message));
+
                 monitor.SquadObjectivesButton.OnPressed += _ =>
                 {
                     if (!EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch) ||
@@ -351,11 +354,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, overwatch.CanOrbitalBombardment);
                     monitor.MessageSquadButton.Visible = overwatch.CanMessageSquad;
+                    monitor.MessageLeaderButton.Visible = overwatch.CanMessageSquad;
                 }
                 else
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, false);
                     monitor.MessageSquadButton.Visible = false;
+                    monitor.MessageLeaderButton.Visible = false;
                 }
 
                 _squadViews[squad.Id] = monitor;
@@ -533,12 +538,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     if (marine.Role != null && squadRows.TryFirstOrNull(r => r.Key != marine.Id && r.Value.RoleId == marine.Role, out var first))
                     {
                         var position = first.Value.Value.Name.Panel.GetPositionInParent() + 1;
-                        row.Name.Panel.SetPositionInParent(position);
-                        row.Role.Panel.SetPositionInParent(position);
-                        row.State.Panel.SetPositionInParent(position);
-                        row.Location.Panel.SetPositionInParent(position);
-                        row.Distance.Panel.SetPositionInParent(position);
-                        row.Buttons.Container.SetPositionInParent(position);
+                        row.SetPosition(position);
                     }
                 }
 
@@ -593,17 +593,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     row.Buttons.Hide.ToolTip = Loc.GetString("rmc-overwatch-console-hide-marine");
                 }
 
-                if (squad.Leader == marine.Id)
-                {
-                    row.Buttons.Hide.Visible = false;
-                    row.Buttons.Promote.Visible = false;
-                }
-                else
-                {
-                    row.Buttons.Hide.Visible = true;
-                    row.Buttons.Promote.Visible = true;
-                }
+                var isLeader = squad.Leader == marine.Id;
+                row.Buttons.Hide.Visible = !isLeader;
+                row.Buttons.Promote.Visible = !isLeader;
             }
+
+            if (squad.Leader is { } leaderId && squadRows.TryGetValue(leaderId, out var leaderRow))
+                leaderRow.SetPosition(0);
 
             var rolesList = new List<(string Role, HashSet<OverwatchMarine> Deployed, HashSet<OverwatchMarine> Alive, HashSet<OverwatchMarine> All, bool DisplayName, int Priority)>();
             foreach (var (id, (deployed, alive, all)) in roles)
@@ -678,7 +674,14 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     Margin = new Thickness(0, 3, 0, 3)
                 };
-                roleNameLabel.SetMarkupPermissive($"[bold]{role.OverwatchRoleName}[/bold]");
+                var overwatchRoleName = role.LocalizedName;
+                if (role.OverwatchRoleName is { } roleName &&
+                    _localization.TryGetString(roleName, out var localizedRoleName))
+                {
+                    overwatchRoleName = localizedRoleName;
+                }
+
+                roleNameLabel.SetMarkupPermissive($"[bold]{overwatchRoleName}[/bold]");
 
                 roleNamePanel.AddChild(new BoxContainer
                 {
@@ -904,6 +907,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             );
 
             squad.HasOrbital = console.HasOrbital;
+            squad.OrbitalSafetyEngaged = console.OrbitalSafetyEngaged;
             squad.NextOrbitalAt = console.NextOrbitalLaunch;
         }
     }
@@ -1146,6 +1150,22 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         onComment(index, comment);
     }
 
+    private void OpenMessageInput(Func<string, BoundUserInterfaceMessage> messageFactory)
+    {
+        var window = new OverwatchTextInputWindow();
+
+        void SendMessage()
+        {
+            SendPredictedMessage(messageFactory(window.MessageBox.Text));
+            window.Close();
+        }
+
+        window.MessageBox.OnTextEntered += _ => SendMessage();
+        window.OkButton.OnPressed += _ => SendMessage();
+        window.CancelButton.OnPressed += _ => window.Close();
+        window.OpenCentered();
+    }
+
     public void Refresh()
     {
         if (State is OverwatchConsoleBuiState s)
@@ -1207,6 +1227,16 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         (PanelContainer Panel, RichTextLabel Label) State,
         (PanelContainer Panel, RichTextLabel Label) Location,
         (PanelContainer Panel, Label Label) Distance,
-        (BoxContainer Container, Button Hide, Button Promote) Buttons
-    );
+        (BoxContainer Container, Button Hide, Button Promote) Buttons)
+    {
+        public void SetPosition(int position)
+        {
+            Name.Panel.SetPositionInParent(position);
+            Role.Panel.SetPositionInParent(position);
+            State.Panel.SetPositionInParent(position);
+            Location.Panel.SetPositionInParent(position);
+            Distance.Panel.SetPositionInParent(position);
+            Buttons.Container.SetPositionInParent(position);
+        }
+    }
 }

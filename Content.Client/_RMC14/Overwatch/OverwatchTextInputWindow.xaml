@@ -13,8 +13,8 @@
         <BoxContainer Orientation="Vertical" Margin="5">
             <LineEdit Name="MessageBox" Access="Public" Margin="0 0 0 5" />
             <BoxContainer Orientation="Horizontal">
-                <Button Name="OkButton" Access="Public" Text="Ok" HorizontalExpand="True" StyleClasses="OpenBoth" />
-                <Button Name="CancelButton" Access="Public" Text="Cancel" HorizontalExpand="True" StyleClasses="OpenBoth" />
+                <Button Name="OkButton" Access="Public" Text="{Loc rmc-overwatch-console-confirm}" HorizontalExpand="True" StyleClasses="OpenBoth" />
+                <Button Name="CancelButton" Access="Public" Text="{Loc rmc-overwatch-console-objective-cancel}" HorizontalExpand="True" StyleClasses="OpenBoth" />
             </BoxContainer>
         </BoxContainer>
     </PanelContainer>

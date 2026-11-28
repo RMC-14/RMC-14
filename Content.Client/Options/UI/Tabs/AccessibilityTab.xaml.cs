@@ -32,6 +32,12 @@ public sealed partial class AccessibilityTab : Control
         Control.AddOptionCheckBox(RMCCVars.RMCUseAlternateSprites, RMCUseAlternateSpritesCheckBox); // RMC14
         Control.AddOptionCheckBox(RMCCVars.RMCChatSquadColorMode, RMCChatSquadColorModeCheckBox); // RMC14
         RMCAnnouncementOptions.Register(Control); // RMC14
+        // RMC14
+        var crtTheme = Control.AddOptionCheckBox(RMCCVars.RMCCrtThemeEnabled, RMCCrtThemeEnabledCheckBox);
+        Control.AddOptionCheckBox(RMCCVars.RMCCrtEffectsEnabled, RMCCrtEffectsEnabledCheckBox);
+        crtTheme.ImmediateValueChanged += _ => UpdateCrtEffectsDisabled();
+        Control.ValuesReset += UpdateCrtEffectsDisabled;
+        // RMC14
         Control.AddOptionCheckBox(RMCCVars.RMCXenoAbilityPreviews, XenoAbilityPreviewsCheckBox); // RMC14
         Control.AddOptionCheckBox(RMCCVars.RMCMarineEquipmentPreviews, MarineEquipmentPreviewsCheckBox); // RMC14
         Control.AddOptionDropDown(
@@ -57,6 +63,16 @@ public sealed partial class AccessibilityTab : Control
     }
 
     // RMC14
+    private void UpdateCrtEffectsDisabled()
+    {
+        RMCCrtEffectsEnabledCheckBox.Disabled = ShouldDisableCrtEffects(RMCCrtThemeEnabledCheckBox.Pressed);
+    }
+
+    internal static bool ShouldDisableCrtEffects(bool themeEnabled)
+    {
+        return !themeEnabled;
+    }
+
     private void OnPostDeathChatMuteChanged(bool enabled)
     {
         if (enabled)
