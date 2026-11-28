@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
-using Content.Shared._RMC14.Campfire;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
@@ -9,14 +8,9 @@ using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Announce;
-using Content.Shared.Atmos.Components;
-using Content.Shared.Damage;
-using Content.Shared.Decals;
 using Content.Shared.Ghost;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weather;
 using Robust.Shared.Audio;
@@ -32,13 +26,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weather;
 
-public sealed class RMCWeatherSystem : EntitySystem
+public sealed partial class RMCWeatherSystem : EntitySystem
 {
     private static readonly TimeSpan WeatherEffectInterval = TimeSpan.FromSeconds(1);
     private static readonly TimeSpan WeatherCleanInterval = TimeSpan.FromSeconds(5);
     private static readonly TimeSpan WeatherEffectMessageMinDelay = TimeSpan.FromSeconds(30);
     private static readonly TimeSpan WeatherEffectMessageMaxDelay = TimeSpan.FromSeconds(120);
-    private const float CleanDecalChance = 0.05f;
     private const float WeatherSirenPopupRange = 7f;
 
     private static readonly SoundSpecifier MarineWeatherWarningSound =
@@ -58,12 +51,8 @@ public sealed class RMCWeatherSystem : EntitySystem
     [Dependency] private readonly RMCAmbientLightSystem _rmcLight = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedRMCFlammableSystem _flammable = default!;
     [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedDecalSystem _decals = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -71,7 +60,6 @@ public sealed class RMCWeatherSystem : EntitySystem
     private EntityQuery<BlockWeatherComponent> _blockQuery;
     // RMC weather blockers can protect only part of a tile, so cache the lookup set for point-in-bounds checks.
     private readonly HashSet<Entity<RMCBlockWeatherComponent>> _weatherBlockers = new();
-    private readonly List<(EntityUid GridUid, uint DecalId)> _decalsToRemove = new();
 
     public override void Initialize()
     {
@@ -79,6 +67,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         _blockQuery = GetEntityQuery<BlockWeatherComponent>();
 
         SubscribeLocalEvent<RMCWeatherCycleComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RMCWeatherCycleComponent, ComponentShutdown>(OnCycleShutdown);
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
     }
 
@@ -406,22 +395,7 @@ public sealed class RMCWeatherSystem : EntitySystem
             ent.Comp.LightningCooldown = weatherEvent.LightningCooldownDuration;
         }
 
-        ent.Comp.EffectCooldown -= delta;
-        if (ent.Comp.EffectCooldown <= TimeSpan.Zero)
-        {
-            ProcessGameplayEffects(ent, weatherEvent);
-            ent.Comp.EffectCooldown = WeatherEffectInterval;
-        }
-
-        if (!weatherEvent.CleansDecals || !ent.Comp.FirstDropComplete)
-            return;
-
-        ent.Comp.CleanCooldown -= delta;
-        if (ent.Comp.CleanCooldown > TimeSpan.Zero)
-            return;
-
-        ProcessWeatherCleaning(ent, weatherEvent);
-        ent.Comp.CleanCooldown = WeatherCleanInterval;
+        UpdateWeatherWork(ent, weatherEvent, delta);
     }
 
     private void UpdateCooldown(Entity<RMCWeatherCycleComponent> ent, TimeSpan delta)
@@ -519,6 +493,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void EndWeather(Entity<RMCWeatherCycleComponent> ent)
     {
+        _weatherWork.Remove(ent);
         var mapId = Transform(ent).MapID;
         var hasEvent = TryGetCurrentEvent(ent.Comp, out var weatherEvent);
         var elapsed = hasEvent && ent.Comp.EventStartedAt > TimeSpan.Zero
@@ -748,121 +723,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         }
     }
 
-    private void ProcessGameplayEffects(Entity<RMCWeatherCycleComponent> ent, RMCWeatherEvent weatherEvent)
-    {
-        var mapId = Transform(ent).MapID;
-
-        // Gameplay effects are CMSS13-style side effects layered over Robust weather visuals.
-        if (weatherEvent.FireSmotheringStrength > 0)
-        {
-            ProcessBurningEntities(mapId, weatherEvent.FireSmotheringStrength);
-            ProcessTileFires(mapId, weatherEvent.FireSmotheringStrength);
-            ProcessCampfires(mapId, weatherEvent.FireSmotheringStrength);
-            ProcessAcidDilution(mapId, weatherEvent, ent.Comp.EventSequence);
-        }
-
-        if (!weatherEvent.ExposureDamage.Empty || weatherEvent.EffectMessage != null)
-            ProcessMobEffects(mapId, weatherEvent);
-    }
-
-    private void ProcessBurningEntities(MapId mapId, int fireSmotheringStrength)
-    {
-        // Burning mobs lose fire stacks each effect tick while exposed.
-        var query = EntityQueryEnumerator<FlammableComponent, OnFireComponent>();
-        while (query.MoveNext(out var uid, out var flammable, out _))
-        {
-            if (!flammable.OnFire || Transform(uid).MapID != mapId || !IsWeatherExposed(uid, mapId))
-                continue;
-
-            _flammable.AdjustStacks((uid, flammable), -fireSmotheringStrength);
-        }
-    }
-
-    private void ProcessTileFires(MapId mapId, int fireSmotheringStrength)
-    {
-        // Tile fires are duration-based, so smothering removes seconds from their remaining burn time.
-        var reduction = TimeSpan.FromSeconds(fireSmotheringStrength);
-        var query = EntityQueryEnumerator<TileFireComponent>();
-        while (query.MoveNext(out var uid, out var fire))
-        {
-            if (Transform(uid).MapID != mapId || !IsWeatherExposed(uid, mapId))
-                continue;
-
-            var remaining = fire.SpawnedAt + fire.Duration - _timing.CurTime;
-            if (remaining <= reduction)
-            {
-                QueueDel(uid);
-                continue;
-            }
-
-            fire.Duration -= reduction;
-            Dirty(uid, fire);
-        }
-    }
-
-    private void ProcessCampfires(MapId mapId, int fireSmotheringStrength)
-    {
-        // Campfires own their fuel timing; raise an event instead of reaching into that state here.
-        var reduction = TimeSpan.FromSeconds(fireSmotheringStrength);
-        var query = EntityQueryEnumerator<CampfireComponent>();
-        while (query.MoveNext(out var uid, out var campfire))
-        {
-            if (!campfire.Lit || Transform(uid).MapID != mapId || !IsWeatherExposed(uid, mapId))
-                continue;
-
-            var ev = new CampfireWeatherSmotherEvent(reduction);
-            RaiseLocalEvent(uid, ref ev);
-        }
-    }
-
-    private void ProcessAcidDilution(MapId mapId, RMCWeatherEvent weatherEvent, int eventSequence)
-    {
-        // Acid should be diluted once per weather event, not once per effect tick.
-        var multiplier = Math.Clamp(
-            1 - weatherEvent.FireSmotheringStrength * weatherEvent.AcidDilutionPerFireSmotheringStrength,
-            0,
-            1);
-        if (multiplier >= 1)
-            return;
-
-        var timedQuery = EntityQueryEnumerator<TimedCorrodingComponent>();
-        while (timedQuery.MoveNext(out var uid, out var timed))
-        {
-            if (!TryMarkAcidDiluted(uid, mapId, eventSequence))
-                continue;
-
-            if (multiplier <= 0)
-            {
-                _acid.RemoveAcid(uid);
-                continue;
-            }
-
-            timed.CorrodesAt = _timing.CurTime + (timed.CorrodesAt - _timing.CurTime) * multiplier;
-            timed.Dps *= multiplier;
-            timed.LightDps *= multiplier;
-            Dirty(uid, timed);
-        }
-
-        var damageableQuery = EntityQueryEnumerator<DamageableCorrodingComponent>();
-        while (damageableQuery.MoveNext(out var uid, out var damageable))
-        {
-            if (!TryMarkAcidDiluted(uid, mapId, eventSequence))
-                continue;
-
-            if (multiplier <= 0)
-            {
-                _acid.RemoveAcid(uid);
-                continue;
-            }
-
-            damageable.AcidExpiresAt = _timing.CurTime + (damageable.AcidExpiresAt - _timing.CurTime) * multiplier;
-            damageable.Dps *= multiplier;
-            damageable.Damage = damageable.Damage * multiplier;
-            Dirty(uid, damageable);
-        }
-    }
-
-    private bool TryMarkAcidDiluted(EntityUid uid, MapId mapId, int eventSequence)
+    private bool TryMarkAcidDiluted(EntityUid uid, int eventSequence)
     {
         if (TryComp(uid, out RMCWeatherDilutedAcidComponent? weatherAcid) &&
             weatherAcid.LastWeatherSequence == eventSequence)
@@ -870,49 +731,11 @@ public sealed class RMCWeatherSystem : EntitySystem
             return false;
         }
 
-        if (Transform(uid).MapID != mapId)
-            return false;
-
-        if (!IsWeatherExposed(uid, mapId))
-            return false;
-
         weatherAcid ??= EnsureComp<RMCWeatherDilutedAcidComponent>(uid);
 
         weatherAcid.LastWeatherSequence = eventSequence;
         Dirty(uid, weatherAcid);
         return true;
-    }
-
-    private void ProcessMobEffects(MapId mapId, RMCWeatherEvent weatherEvent)
-    {
-        // Exposure damage and flavor messages only affect living mobs currently exposed to the storm.
-        var query = EntityQueryEnumerator<MobStateComponent, DamageableComponent>();
-        while (query.MoveNext(out var uid, out var mobState, out var damageable))
-        {
-            if (!_mobState.IsAlive(uid, mobState) ||
-                HasComp<GhostComponent>(uid) ||
-                Transform(uid).MapID != mapId ||
-                !IsWeatherExposed(uid, mapId))
-            {
-                continue;
-            }
-
-            if (!weatherEvent.ExposureDamage.Empty)
-            {
-                var xenoMultiplier = Math.Max(weatherEvent.XenoExposureDamageMultiplier, 0f);
-                var damage = HasComp<XenoComponent>(uid)
-                    ? weatherEvent.ExposureDamage * xenoMultiplier
-                    : weatherEvent.ExposureDamage;
-
-                _damageable.TryChangeDamage(uid, damage, true, false, damageable);
-            }
-
-            if (weatherEvent.EffectMessage is { } effectMessage &&
-                CanShowWeatherEffectMessage(uid, weatherEvent))
-            {
-                _popup.PopupEntity(Loc.GetString(effectMessage), uid, uid, PopupType.Small);
-            }
-        }
     }
 
     private bool CanShowWeatherEffectMessage(EntityUid uid, RMCWeatherEvent weatherEvent)
@@ -933,43 +756,6 @@ public sealed class RMCWeatherSystem : EntitySystem
         cooldown ??= EnsureComp<RMCWeatherEffectPopupCooldownComponent>(uid);
         cooldown.NextPopupAt = _timing.CurTime + _random.Next(WeatherEffectMessageMinDelay, WeatherEffectMessageMaxDelay);
         return true;
-    }
-
-    private void ProcessWeatherCleaning(Entity<RMCWeatherCycleComponent> ent, RMCWeatherEvent weatherEvent)
-    {
-        var mapId = Transform(ent).MapID;
-        var grids = EntityQueryEnumerator<MapGridComponent, DecalGridComponent>();
-        while (grids.MoveNext(out var gridUid, out var mapGrid, out var decalGrid))
-        {
-            if (Transform(gridUid).MapID != mapId)
-                continue;
-
-            _decalsToRemove.Clear();
-            foreach (var chunk in decalGrid.ChunkCollection.ChunkCollection.Values)
-            {
-                foreach (var (decalId, decal) in chunk.Decals)
-                {
-                    if (!decal.Cleanable)
-                        continue;
-
-                    var coords = new EntityCoordinates(gridUid, decal.Coordinates);
-                    if (!_mapSystem.TryGetTileRef(gridUid, mapGrid, coords, out var tile) ||
-                        !_weather.CanWeatherAffect(gridUid, mapGrid, tile) ||
-                        IsRMCWeatherBlocked(mapId, _transform.ToMapCoordinates(coords).Position))
-                    {
-                        continue;
-                    }
-
-                    if (_random.Prob(CleanDecalChance))
-                        _decalsToRemove.Add((gridUid, decalId));
-                }
-            }
-
-            foreach (var (removeGrid, decalId) in _decalsToRemove)
-            {
-                _decals.RemoveDecal(removeGrid, decalId);
-            }
-        }
     }
 
     private bool IsWeatherExposed(EntityUid uid, MapId mapId)
