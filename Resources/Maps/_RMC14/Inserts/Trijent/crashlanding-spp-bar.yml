@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 10/22/2026 22:13:02
-  entityCount: 671
+  entityCount: 672
 maps: []
 grids:
 - 1
@@ -4174,6 +4174,13 @@ entities:
     components:
     - type: Transform
       pos: 9.5,-5.5
+      parent: 1
+- proto: RMCSpawnPointSPPSpetsnazTrjientCommander
+  entities:
+  - uid: 672
+    components:
+    - type: Transform
+      pos: 8.5,-6.5
       parent: 1
 - proto: RMCStool
   entities:

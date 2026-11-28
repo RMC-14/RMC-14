@@ -1,0 +1,101 @@
+- type: job
+  parent: RMCSurvivorSPPSpetsnazTrijentBase
+  id: RMCSurvivorSPPSpetsnazTrjientCommander
+  name: rmc-job-name-trijent-spetsnaz-commander
+  startingGear: RMCGearSPPSpetsnazTrijentCommander
+  ranks:
+    RMCRankSPPMayjor: []
+  icon: "RMCJobIconSurvivorSPPSpetsnazTrjientCommander"
+  playTimeTracker: RMCJobSurvivorCO
+  spawnMenuRoleName: SPP Spetsnaz D/SRU Commander (Trijent Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPCommander
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      currentLanguage: Russian
+      defaultLanguage: Russian
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-trijent-spetsnaz-commander
+    - type: RMCTrackable
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPSpetsnazWeaponOnly
+    - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSpetsnazTrijentBase
+  id: RMCGearSPPSpetsnazTrijentCommander
+  equipment:
+    ears: RMCHeadsetSPPSpetsnazCrashlandTrijentSL
+    back: CMSatchelSecureStandard
+    belt: RMCBeltHolsterPistolSPP
+    outerClothing: RMCCoatSPP
+    id: RMCIDCardGoldSPPSpetsnazCommander
+    head: CMHeadCapSPPPeaked
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchDocument
+  storage:
+    back: # They're supposed to get a cyanide pill, but I don't trust survivors to not accidentally swallow it
+    - RMCRadioHandheldColony
+    pocket2:
+    - CMClipboard
+    belt:
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCMagazinePistolT73
+    - RMCWeaponPistolT74
+    outerClothing:
+    - RMCBinoculars
+    - CMCrowbar
+    - RMCHandcuffs
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSpetsnazTrjientCommander
+  name: special survivor spp spetsnaz commander spawn point
+  suffix: Trijent
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSpetsnazTrjientCommander
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorSPPSpetsnazTrjientCommander
+  icon:
+    sprite: _RMC14/Interface/job_icons/SPP/spetsnaz.rsi
+    state: spp_sptz_co
