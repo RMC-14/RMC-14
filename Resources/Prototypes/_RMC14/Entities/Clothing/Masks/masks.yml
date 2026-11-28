@@ -159,6 +159,21 @@
   - type: Item
     size: Small
 
+- type: entity
+  parent: CMBaseMask
+  id: RMCCarbonMask
+  name: riot mask
+  description: A mask of colony riot control department, with red laser shield lenses for eye protection. Riot gear is also often seen in hands of CLF extremists, due to large surplus of it being captured in colony rebellions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/carbon_mask.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/carbon_mask.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
+
 # Coifs
 - type: entity
   parent: [ClothingMaskBase, BaseFoldable]
