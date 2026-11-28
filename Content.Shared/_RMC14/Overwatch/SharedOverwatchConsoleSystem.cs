@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Areas;
@@ -62,6 +62,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedRMCOverwatchTripodCameraSystem _tripod = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly SharedSupplyDropSystem _supplyDrop = default!;
     [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
@@ -102,6 +103,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
+        SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIClosedEvent>(OnBUIClosed);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSquadEvent>(OnTransferMarineSquad);
 
@@ -169,6 +171,19 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
 
         RefreshConsoleState(ent);
+    }
+
+    protected virtual void OnBUIClosed(Entity<OverwatchConsoleComponent> ent, ref BoundUIClosedEvent args)
+    {
+        if (_net.IsClient || args.UiKey is not OverwatchConsoleUI.Key ||
+            !TryComp(args.Actor, out ActorComponent? actor) ||
+            !TryComp(args.Actor, out EyeComponent? eye))
+        {
+            return;
+        }
+
+        if (TryComp(args.Actor, out OverwatchWatchingComponent? watching) && watching.Watching is not null)
+            Unwatch((args.Actor, eye), actor.PlayerSession);
     }
 
     private void OnTransferMarineSelected(Entity<OverwatchConsoleComponent> ent, ref OverwatchTransferMarineSelectedEvent args)
@@ -386,7 +401,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnOverwatchWatchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleWatchBuiMsg args)
     {
-        if (args.Target == default || !TryGetEntity(args.Target, out var target))
+        if (!args.UiKey.Equals(OverwatchConsoleUI.Key) || args.Target == default)
             return;
 
         if (HasComp<ScopingComponent>(args.Actor))
@@ -400,14 +415,48 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         if (_net.IsClient)
         {
-            // When trying to watch someone who's on a different map or just far away, the camera component isn't detected right away.
-            // So without this Watch(), you need to click twice to watch a marine before actually getting "overwatch" context.
             Watch(args.Actor, default);
             return;
         }
 
-        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
+        if (!TryGetEntity(args.Target, out var target))
             return;
+
+        if (ent.Comp.Squad is not { } selectedSquad)
+            return;
+
+        var targetNet = args.Target;
+        var state = GetOverwatchBuiState(ent);
+        var validMarineCamera = state.Marines.TryGetValue(selectedSquad, out var selectedMarines) &&
+                                selectedMarines.Any(marine => marine.Id == targetNet && marine.Camera != default);
+        var validTripodCamera = state.Cameras.TryGetValue(selectedSquad, out var selectedCameras) &&
+                                selectedCameras.Any(camera => camera.Id == targetNet);
+
+        if (!validMarineCamera && !validTripodCamera)
+            return;
+
+        Entity<OverwatchCameraComponent?> camera;
+        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out camera))
+        {
+            if (!TryComp(target, out RMCOverwatchTripodCameraComponent? tripod) ||
+                !tripod.Deployed ||
+                tripod.Squad != GetEntity(selectedSquad) ||
+                !TryComp(target, out OverwatchCameraComponent? tripodCamera))
+            {
+                return;
+            }
+
+            camera = (target.Value, tripodCamera);
+        }
+
+        if (TryComp(args.Actor, out OverwatchWatchingComponent? watching) &&
+            watching.Watching == camera.Owner &&
+            TryComp(args.Actor, out ActorComponent? actor) &&
+            TryComp(args.Actor, out EyeComponent? eye))
+        {
+            Unwatch((args.Actor, eye), actor.PlayerSession);
+            return;
+        }
 
         Watch(args.Actor, camera);
     }
@@ -764,8 +813,20 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _eye.SetTarget(watcher, null);
     }
 
-    protected virtual void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args)
+    public OverwatchConsoleBuiState GetOverwatchBuiState(Entity<OverwatchConsoleComponent> console)
     {
+        return GetOverwatchBuiState(console.Comp);
+    }
+
+    private void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args, EntitySessionEventArgs session)
+    {
+        if (session.SenderSession.AttachedEntity is not { } actor ||
+            GetNetEntity(actor) != args.Actor ||
+            !HasComp<OverwatchWatchingComponent>(actor))
+        {
+            return;
+        }
+
         ApplyCameraOffset(args.Actor, args.Direction);
     }
 
@@ -826,13 +887,53 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         return (squads, marines);
     }
 
+    private OverwatchConsoleBuiState GetOverwatchBuiState(OverwatchConsoleComponent console)
+    {
+        var (squads, marines) = GetOverwatchData(console);
+        var cameras = new Dictionary<NetEntity, List<OverwatchTripodCamera>>();
+        var cameraQuery = EntityQueryEnumerator<RMCOverwatchTripodCameraComponent>();
+        while (cameraQuery.MoveNext(out var cameraId, out var camera))
+        {
+            if (!camera.Deployed ||
+                !HasComp<OverwatchCameraComponent>(cameraId) ||
+                camera.Squad is not { } squad ||
+                !TryComp(squad, out SquadTeamComponent? team))
+            {
+                continue;
+            }
+
+            if (console.Group != "ADMINISTRATOR" && team.Group != console.Group)
+                continue;
+
+            var squadId = GetNetEntity(squad);
+            if (!squads.Any(s => s.Id == squadId))
+                continue;
+
+            var coordinates = TransformSystem.GetMapCoordinates(cameraId);
+            if (!_map.TryGetMap(coordinates.MapId, out var map))
+                continue;
+
+            var location = _planetQuery.HasComp(map)
+                ? OverwatchLocation.Planet
+                : OverwatchLocation.Ship;
+            var areaName = _area.TryGetArea(coordinates, out _, out var area) ? area.Name : string.Empty;
+            cameras.GetOrNew(squadId).Add(
+                new OverwatchTripodCamera(
+                    GetNetEntity(cameraId),
+                    _tripod.GetDisplayLabel((cameraId, camera)),
+                    areaName,
+                    location));
+        }
+
+        return new OverwatchConsoleBuiState(squads, marines, cameras);
+    }
+
     private void RefreshConsoleState(Entity<OverwatchConsoleComponent> console)
     {
         if (_net.IsClient)
             return;
 
-        var (squads, marines) = GetOverwatchData(console.Comp);
-        _ui.SetUiState(console.Owner, OverwatchConsoleUI.Key, new OverwatchConsoleBuiState(squads, marines));
+        _ui.SetUiState(console.Owner, OverwatchConsoleUI.Key, GetOverwatchBuiState(console));
     }
 
     public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)
@@ -968,13 +1069,20 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         _nextUpdateTime = time + _updateEvery;
 
+        var states = new Dictionary<string, OverwatchConsoleBuiState>();
         var query = EntityQueryEnumerator<OverwatchConsoleComponent>();
         while (query.MoveNext(out var uid, out var console))
         {
             if (!_ui.IsUiOpen(uid, OverwatchConsoleUI.Key))
                 continue;
 
-            RefreshConsoleState((uid, console));
+            if (!states.TryGetValue(console.Group, out var state))
+            {
+                state = GetOverwatchBuiState(console);
+                states[console.Group] = state;
+            }
+
+            _ui.SetUiState(uid, OverwatchConsoleUI.Key, state);
         }
     }
 

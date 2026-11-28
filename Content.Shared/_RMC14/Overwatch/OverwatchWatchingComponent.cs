@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Overwatch;
 
@@ -11,8 +12,7 @@ public sealed partial class OverwatchWatchingComponent : Component
 
     // List of overridden entities from tiles within cameraRadius to be loaded for the watcher
     public List<EntityUid>? OverriddenEntities;
-    // Keeps track of which entities are overridden to be loaded for which watcher, so that entities are unloaded for the correct watcher
-    public bool IsOverridden;
+    public ICommonSession? WatchingSession;
     public const float OffsetAmount = 10f; // 10f matches binoculars offset
     public const float ZoomAmount = 1.5f; // 1.5f matches binoculars zoom
 

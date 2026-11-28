@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CMSS13 at https://github.com/cmss13-devs/cmss13/blob/e0ee5c1725141d549a82c36ae60244b4ab06d05c/icons/obj/structures/machinery/defenses/overwatch.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "undeployed"
+    },
+    {
+      "name": "deployed",
+      "directions": 4
+    }
+  ]
+}
