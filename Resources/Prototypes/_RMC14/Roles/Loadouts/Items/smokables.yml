@@ -5,6 +5,7 @@
   storage:
     back:
     - RMCCigarettePackLuckySloths
+  groupBy: "smoke"
 
 - type: loadout
   id: ArcturianAcePackRMC
@@ -12,6 +13,7 @@
   storage:
     back:
     - RMCCigarettePackArcturianAce
+  groupBy: "smoke"
 
 - type: loadout
   id: LadyFingersPackRMC
@@ -19,6 +21,7 @@
   storage:
     back:
     - RMCCigarettePackLadyFingers
+  groupBy: "smoke"
 
 - type: loadout
   id: EmeraldGreensPackRMC
@@ -26,6 +29,7 @@
   storage:
     back:
     - RMCCigarettePackEmeraldGreens
+  groupBy: "smoke"
 
 - type: loadout
   id: ElectroGoldsPackRMC
@@ -33,6 +37,7 @@
   storage:
     back:
     - RMCCigarettePackElectroGolds
+  groupBy: "smoke"
 
 - type: loadout
   id: TurquoiseSolRedsPackRMC
@@ -40,6 +45,7 @@
   storage:
     back:
     - RMCCigarettePackSolRedsTurquoise
+  groupBy: "smoke"
 
 - type: loadout
   id: YellowSolRedsPackRMC
@@ -47,6 +53,7 @@
   storage:
     back:
     - RMCCigarettePackSolRedsYellow
+  groupBy: "smoke"
 
 - type: loadout
   id: WeYaGoldPackRMC
@@ -54,6 +61,7 @@
   storage:
     back:
     - RMCCigarettePackWeYaGold
+  groupBy: "smoke"
 
 - type: loadout
   id: ExecutiveSelectPackRMC
@@ -61,6 +69,7 @@
   storage:
     back:
     - RMCCigarettePackExecutiveSelect
+  groupBy: "smoke"
 
 - type: loadout
   id: TarbackTubeRMC
@@ -103,6 +112,7 @@
   storage:
     back:
     - RMCZippo
+  groupBy: "lighters"
 
 - type: loadout
   id: ZippoExecRMC
@@ -110,6 +120,7 @@
   storage:
     back:
     - RMCZippoExec
+  groupBy: "lighters"
 
 - type: loadout
   id: ZippoGoldRMC
@@ -117,6 +128,7 @@
   storage:
     back:
     - RMCZippoGold
+  groupBy: "lighters"
 
 - type: loadout
   id: CheapLighterRMC
@@ -124,6 +136,7 @@
   storage:
     back:
     - RMCLighter
+  groupBy: "lighters"
 
 - type: loadout
   id: MatchboxRMC
@@ -131,3 +144,4 @@
   storage:
     back:
     - RMCMatchboxFull
+  groupBy: "lighters"

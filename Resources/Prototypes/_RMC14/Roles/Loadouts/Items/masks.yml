@@ -4,18 +4,21 @@
   cost: 2
   equipment:
     mask: RMCMaskBalaclava
+  groupBy: "mask"
 
 - type: loadout
   id: BalaclavaGreenRMC
   cost: 2
   equipment:
     mask: RMCMaskBalaclavaGreen
+  groupBy: "mask"
 
 - type: loadout
   id: CoifRMC
   cost: 2
   equipment:
     mask: CMMaskCoif
+  groupBy: "mask"
 
 - type: loadout
   id: GasMaskRMC
@@ -41,190 +44,221 @@
   storage:
     back:
     - RMCMaskScarfSquad
+  groupBy: "wrap"
 
 - type: loadout
   id: MaskScarfRedRMC
   cost: 2
   equipment:
     mask: RMCMaskScarfRed
-
+  groupBy: "wrap"
 
 - type: loadout
   id: MaskScarfBlackRMC
   cost: 2
   equipment:
     mask: RMCMaskScarfBlack
+  groupBy: "wrap"
 
 - type: loadout
   id: MaskScarfGrayRMC
   cost: 2
   equipment:
     mask: RMCMaskScarfGray
+  groupBy: "wrap"
 
 - type: loadout
   id: MaskScarfGreenRMC
   cost: 2
   equipment:
     mask: RMCMaskScarfGreen
+  groupBy: "wrap"
 
 - type: loadout
   id: MaskScarfTanRMC
   cost: 2
   equipment:
     mask: RMCMaskScarfTan
+  groupBy: "wrap"
 
 - type: loadout
   id: NeckerchiefSquadRMC
   cost: 2
   equipment:
     mask: RMCMaskNeckerchiefSquad
+  groupBy: "neckerchief"
 
 - type: loadout
   id: NeckerchiefTanRMC
   cost: 2
   equipment:
     mask: RMCMaskNeckerchiefTan
+  groupBy: "neckerchief"
 
 - type: loadout
   id: NeckerchiefBlackRMC
   cost: 2
   equipment:
     mask: RMCMaskNeckerchiefBlack
+  groupBy: "neckerchief"
 
 - type: loadout
   id: NeckerchiefGrayRMC
   cost: 2
   equipment:
     mask: RMCMaskNeckerchiefGray
+  groupBy: "neckerchief"
 
 - type: loadout
   id: NeckerchiefGreenRMC
   cost: 2
   equipment:
     mask: RMCMaskNeckerchiefGreen
+  groupBy: "neckerchief"
 
 - type: loadout
   id: NeckerchiefWhiteRMC
   cost: 2
   equipment:
     mask: RMCMaskNeckerchiefWhite
+  groupBy: "neckerchief"
 
 - type: loadout
   id: NeckerchiefRedRMC
   cost: 2
   equipment:
     mask: RMCMaskNeckerchiefRed
+  groupBy: "neckerchief"
 
 - type: loadout
   id: TornScarfBlackRMC
   cost: 2
   equipment:
     mask: RMCMaskTornScarfBlack
+  groupBy: "scarf"
 
 - type: loadout
   id: TornScarfDesertRMC
   cost: 2
   equipment:
     mask: RMCMaskTornScarfDesert
+  groupBy: "scarf"
 
 - type: loadout
   id: TornScarfGreenRMC
   cost: 2
   equipment:
     mask: RMCMaskTornScarfGreen
+  groupBy: "scarf"
 
 - type: loadout
   id: TornScarfGreyRMC
   cost: 2
   equipment:
     mask: RMCMaskTornScarfGrey
+  groupBy: "scarf"
 
 - type: loadout
   id: TornScarfUrbanRMC
   cost: 2
   equipment:
     mask: RMCMaskTornScarfUrban
+  groupBy: "scarf"
 
 - type: loadout
   id: TornScarfSnowRMC
   cost: 2
   equipment:
     mask: RMCMaskTornScarfSnow
+  groupBy: "scarf"
 
 - type: loadout
   id: SmockRMC
   cost: 2
   equipment:
     mask: RMCMaskSmockBlack
+  groupBy: "smock"
 
 - type: loadout
   id: SmockCamoRMC
   cost: 2
   equipment:
     mask: RMCMaskSmockCamo
+  groupBy: "smock"
 
 - type: loadout
   id: CoifGreenRMC
   cost: 2
   equipment:
     mask: RMCMaskCoifGreen
+  groupBy: "mask"
 
 - type: loadout
   id: CoifGreyRMC
   cost: 2
   equipment:
     mask: RMCMaskCoifGrey
+  groupBy: "mask"
 
 - type: loadout
   id: CoifTanRMC
   cost: 2
   equipment:
     mask: RMCMaskCoifTan
+  groupBy: "mask"
 
 - type: loadout
   id: KeffiyehRMC
   cost: 2
   equipment:
     mask: RMCMaskKeffiyeh
+  groupBy: "keffiyeh"
 
 - type: loadout
   id: KeffiyehBlackRMC
   cost: 2
   equipment:
     mask: RMCMaskKeffiyehBlack
+  groupBy: "keffiyeh"
 
 - type: loadout
   id: KeffiyehBlueRMC
   cost: 2
   equipment:
     mask: RMCMaskKeffiyehBlue
+  groupBy: "keffiyeh"
 
 - type: loadout
   id: KeffiyehGreenRMC
   cost: 2
   equipment:
     mask: RMCMaskKeffiyehGreen
+  groupBy: "keffiyeh"
 
 - type: loadout
   id: KeffiyehWhiteRMC
   cost: 2
   equipment:
     mask: RMCMaskKeffiyehWhite
+  groupBy: "keffiyeh"
 
 - type: loadout
   id: KeffiyehRedRMC
   cost: 2
   equipment:
     mask: RMCMaskKeffiyehRed
+  groupBy: "keffiyeh"
 
 - type: loadout
   id: BalaclavaSkullBlueRMC
   cost: 4
   equipment:
     mask: RMCMaskBalaclavaSkullBlue
+  groupBy: "mask"
 
 - type: loadout
   id: BalaclavaSkullBlackRMC
   cost: 4
   equipment:
     mask: RMCMaskBalaclavaSkullBlack
+  groupBy: "mask"

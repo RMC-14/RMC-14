@@ -4,36 +4,42 @@
   cost: 2
   equipment:
     head: RMCHeadBeretSquad
+  groupBy: "beret"
 
 - type: loadout
   id: GreenBeretRMC
   cost: 2
   equipment:
     head: RMCHeadBeretGreen
+  groupBy: "beret"
 
 - type: loadout
   id: TanBeretRMC
   cost: 2
   equipment:
     head: CMHeadBeretTan
+  groupBy: "beret"
 
 - type: loadout
   id: CamoBeretRMC
   cost: 2
   equipment:
     head: RMCHeadBeret
+  groupBy: "beret"
 
 - type: loadout
   id: BoonieRMC
   cost: 2
   equipment:
     head: RMCBoonie
+  groupBy: "boonie"
 
 - type: loadout
   id: BoonieTanRMC
   cost: 2
   equipment:
     head: RMCBoonieTan
+  groupBy: "boonie"
 
 - type: loadout
   id: CapRMC
@@ -58,60 +64,70 @@
   cost: 2
   equipment:
     head: CMHeadBandBrown
+  groupBy: "headband"
 
 - type: loadout
   id: GreenHeadbandRMC
   cost: 2
   equipment:
     head: CMHeadBandGreen
+  groupBy: "headband"
 
 - type: loadout
   id: GrayHeadbandRMC
   cost: 2
   equipment:
     head: CMHeadBandGray
+  groupBy: "headband"
 
 - type: loadout
   id: RedHeadbandRMC
   cost: 2
   equipment:
     head: CMHeadBandRed
+  groupBy: "headband"
 
 - type: loadout
   id: TanHeadbandRMC
   cost: 2
   equipment:
     head: CMHeadBandTan
+  groupBy: "headband"
 
 - type: loadout
   id: SquadHeadbandRMC
   cost: 2
   equipment:
     head: RMCHeadBandSquad
+  groupBy: "headband"
 
 - type: loadout
   id: HeadBeanieRMC
   cost: 2
   equipment:
     head: RMCHeadBeanie
+  groupBy: "beanie"
 
 - type: loadout
   id: HeadBeanieTanRMC
   cost: 2
   equipment:
     head: RMCHeadBeanieTan
+  groupBy: "beanie"
 
 - type: loadout
   id: HeadBeanieGreenRMC
   cost: 2
   equipment:
     head: RMCHeadBeanieGreen
+  groupBy: "beanie"
 
 - type: loadout
   id: HeadBeanieGrayRMC
   cost: 2
   equipment:
     head: RMCHeadBeanieGray
+  groupBy: "beanie"
 
 - type: loadout
   id: UNMCHeadsetRMC
@@ -132,21 +148,25 @@
   cost: 2
   equipment:
     head: RMCHeadDurag
+  groupBy: "durag"
 
 - type: loadout
   id: HeadDuragBlackRMC
   cost: 2
   equipment:
     head: RMCHeadDuragBlack
+  groupBy: "durag"
 
 - type: loadout
   id: HeadBandanaRMC
   cost: 2
   equipment:
     head: RMCHeadBandana
+  groupBy: "bandana"
 
 - type: loadout
   id: HeadBandanaTanRMC
   cost: 2
   equipment:
     head: RMCHeadBandanaTan
+  groupBy: "bandana"

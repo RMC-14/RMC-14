@@ -12,6 +12,7 @@
   storage:
     back:
     - CMBootsJungleFilled
+  groupBy: "boots"
 
 - type: loadout
   id: BootsUrbanFilledRMC
@@ -19,6 +20,7 @@
   storage:
     back:
     - CMBootsUrbanFilled
+  groupBy: "boots"
 
 - type: loadout
   id: BootsBrownFilledRMC
@@ -26,6 +28,7 @@
   storage:
     back:
     - CMBootsBrownFilled
+  groupBy: "boots"
 
 - type: loadout
   id: BootsGreyFilledRMC
@@ -33,6 +36,7 @@
   storage:
     back:
     - CMBootsGreyFilled
+  groupBy: "boots"
 
 - type: loadout
   id: HandsGreyMarineRMC
@@ -40,6 +44,7 @@
   storage:
     back:
     - RMCHandsGreyMarine
+  groupBy: "gloves"
 
 - type: loadout
   id: HandsBrownMarineRMC
@@ -47,6 +52,7 @@
   storage:
     back:
     - RMCHandsBrownMarine
+  groupBy: "gloves"
 
 - type: loadout
   id: PestSprayRMC

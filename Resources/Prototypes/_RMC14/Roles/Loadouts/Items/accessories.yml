@@ -13,6 +13,7 @@
   storage:
     back:
     - RMCPatchMedic
+  groupBy: "patch"
 
 - type: loadout
   id: SquadArmbandRMC
