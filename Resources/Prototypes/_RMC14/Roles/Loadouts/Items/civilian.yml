@@ -132,3 +132,10 @@
   cost: 2
   equipment:
     head: CMHeadBandRebel
+
+# Mask
+- type: loadout
+  id: MaskGasCivilianRMC
+  cost: 2
+  equipment:
+    mask: RMCMaskGasCivilian
