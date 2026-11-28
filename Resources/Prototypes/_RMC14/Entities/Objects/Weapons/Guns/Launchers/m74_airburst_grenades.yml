@@ -104,6 +104,7 @@
     tags:
     - Grenade
     - LauncherCompatibleGrenade
+    - RMCGrenadeRiot
   - type: InheritAcid
   - type: FixedIdentity
     name: cm-chatsan-word-replacement-batong
