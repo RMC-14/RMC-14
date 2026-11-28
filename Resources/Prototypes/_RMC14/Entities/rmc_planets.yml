@@ -564,7 +564,7 @@
         RMCSyntheticColony:
         - RMCSurvivorParaSupportSynthetic: 1
         CMSurvivorDoctor:
-        - RMCSurvivorParaMedicalTechnician: 1
+        - RMCSurvivorParaMedicalAssistant: 1
         CMSurvivorEngineer:
         - RMCSurvivorParaAssaultEngineer: 1
         CMSurvivorSecurity:

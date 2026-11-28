@@ -9,7 +9,7 @@
   startingGear: RMCGearParaCommander
   icon: RMCJobIconParaCommander
   playTimeTracker: RMCJobSurvivorCO
-  spawnMenuRoleName: Royal Paramarine Commander (Hybrisa Special Survivor)
+  spawnMenuRoleName: RCM Paramarine Commander (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -59,7 +59,7 @@
     eyes: RMCGlassesAviators
     outerClothing: RMCJacketParaCOJacketFilled
     gloves: RMCHandsVeteranRoyalMarine
-    belt: RMCBeltHolsterPistolParaCustom
+    belt: RMCBeltHolsterPistolParaCustomFilled
     back: RMCSatchelBlackFillParaCO
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneralLargeFilledParaCO

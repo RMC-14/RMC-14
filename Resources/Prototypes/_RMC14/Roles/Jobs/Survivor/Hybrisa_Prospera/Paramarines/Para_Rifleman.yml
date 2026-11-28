@@ -1,10 +1,10 @@
 - type: job
   parent: RMCSurvivorParaBase
   id: RMCSurvivorParamarine
-  name: rmc-job-name-paramarine
+  name: rmc-job-name-rcm-commando
   icon: RMCJobIconParamarine
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Royal Paramarine Rifleman (Hybrisa Special Survivor)
+  spawnMenuRoleName: RCM Paramarine Rifleman (Hybrisa Special Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -37,7 +37,7 @@
       - type: AssignSquad
         squad: SquadPara
       - type: JobPrefix
-        prefix: rmc-job-prefix-paramarine
+        prefix: rmc-job-prefix-rcm-commando
       - type: EquipSurvivorPreset
         preset: RMCGearSurvivorPresetPara
   hidden: true

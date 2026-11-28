@@ -18,7 +18,6 @@
   id: RMCJumpsuitMarineRoyal
   name: royal crown marine uniform
   description: The field uniform of the Royal Crown Marines, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  suffix: RCM
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
@@ -32,7 +31,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalL189
-  suffix: RCM, Filled L189
+  suffix: Holster, L189
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingHolsterRCML189
@@ -40,7 +39,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalMedic
-  suffix: RCM, Filled Medic
+  suffix: Surgical Webbing
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingSurgicalRCMFilled
@@ -48,22 +47,22 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalDropPouch
-  suffix: RCM, Filled Drop Pouch
+  suffix: Drop Pouch, ERT Gear
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingDropPouchRCMFilled
 
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
-  id: RMCJumpsuitMarineRoyalTeamlead
-  name: royal crown marine team lead uniform
+  id: RMCJumpsuitMarineRoyalTeamLeader
+  name: royal crown marine team leader uniform
   description: The field uniform of Royal Crown Marine officers and NCOs, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  suffix: RCM, Team Lead, Filled Drop Pouch
+  suffix: Team Leader, Drop Pouch, ERT
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/team_lead.rsi
   - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRCMFilledTeamlead
+    startingWebbing: RMCWebbingDropPouchRCMFilledTeamLeader
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
@@ -74,7 +73,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalPVE
-  suffix: PVE, RCM
+  suffix: PVE
   components:
   - type: UniformAccessoryHolder
     startingAccessories:
@@ -89,7 +88,6 @@
   id: RMCJumpsuitMarineRoyalService
   name: royal crown marine service uniform
   description: A formal service uniform worn by commissioned officers of the Royal Crown Marines. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
-  suffix: Royal, Formal
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/service.rsi
@@ -108,7 +106,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyalService
   id: RMCJumpsuitMarineRoyalServicePVE
-  suffix: PVE, Royal, Formal
+  suffix: PVE
   components:
   - type: UniformAccessoryHolder
     startingAccessories:
@@ -122,7 +120,7 @@
   id: RMCJumpsuitMarinePara
   name: paramarine battle dress uniform
   description: No.8 Pattern BDU used by the RCM's Paramarine regiments. Identical in cut and protection to standard issue uniforms, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
-  suffix: Survivor, Paramarine
+  suffix: RCM Para
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para.rsi
@@ -144,7 +142,7 @@
 - type: entity
   parent: RMCJumpsuitMarinePara
   id: RMCJumpsuitMarineParaL88
-  suffix: Survivor, Paramarine, Webbing, L88
+  suffix: RCM Para, Webbing, L88
   components:
     - type: WebbingClothing
       startingWebbing: RMCParaWebbingL88
@@ -152,7 +150,7 @@
 - type: entity
   parent: RMCJumpsuitMarinePara
   id: RMCJumpsuitMarineParaPDW90
-  suffix: Survivor, Paramarine, Webbing. PDW90AP
+  suffix: RCM Para, Webbing, PDW90AP
   components:
     - type: WebbingClothing
       startingWebbing: RMCParaWebbingPDW90AP
@@ -161,8 +159,8 @@
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
   id: RMCJumpsuitMarineParaService
   name: paramarine service uniform
-  description: A formal No.2 service uniform worn by RCM-P officers. Features the same upper torso cut as the No.8 BDU, but paired with pressed khaki trousers. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
-  suffix: Survivor, Paramarine
+  description: A formal No.2 service uniform worn by officers of the RCM's Paramarine regiments. Features the same upper torso cut as the No.8 BDU, but paired with pressed khaki trousers. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
+  suffix: RCM Para
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para_officer.rsi

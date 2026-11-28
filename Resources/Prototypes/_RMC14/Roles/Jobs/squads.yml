@@ -263,7 +263,7 @@
 - type: entity
   parent: SquadBase
   id: SquadRoyalMarines
-  name: Royal Marines
+  name: RCM
   components:
   - type: SquadTeam
     color: "#3D6F43"
@@ -325,7 +325,7 @@
 - type: entity
   parent: SquadBase
   id: SquadPara
-  name: Royal Paramarines
+  name: 24/PARA
   components:
   - type: SquadTeam
     color: "#3D6F43"

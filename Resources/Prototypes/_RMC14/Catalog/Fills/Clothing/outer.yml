@@ -26,6 +26,25 @@
     - id: RMCTacticalPrybar
 
 - type: entity
+  parent: RMCJacketParaCOJacket
+  id: RMCJacketParaCOJacketFilled
+  suffix: RCM Para, Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCTacticalPrybar
+
+- type: entity
+  parent: RMCArmorParaSynthVest
+  id: RMCArmorParaSynthVestFill
+  suffix: RCM Para, Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCFlashlight
+        - id: CMScrewdriver
+
+- type: entity
   parent: CMArmorM4Tyrargo
   id: CMArmorM4TyrargoSurvivorFill
   suffix: Survivor, Filled

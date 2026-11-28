@@ -67,7 +67,6 @@
   id: RMCSurgicalCaseRCM
   name: RCM surgical case
   description: An improved surgical case used by the Royal Crown Marines, capable of fitting more tools.
-  suffix: RCM
   components:
   - type: Storage
     grid:

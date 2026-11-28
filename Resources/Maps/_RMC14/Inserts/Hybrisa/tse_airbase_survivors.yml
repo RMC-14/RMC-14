@@ -7738,7 +7738,7 @@ entities:
     - type: Transform
       pos: 3.5,14.5
       parent: 1
-- proto: RMCSpawnPointParaMedicalTechnician
+- proto: RMCSpawnPointParaMedicalAssistant
   entities:
   - uid: 1209
     components:

@@ -31,7 +31,7 @@ chat-radio-spp-med = SPP Med
 chat-radio-spp-cct = SPP CCT
 chat-radio-halcyon = Halcyon
 
-chat-radio-royal-marine = Royal Marine
+chat-radio-royal-marine = RCM
 chat-radio-tse = TSE
 
 chat-radio-hivemind = Hivemind

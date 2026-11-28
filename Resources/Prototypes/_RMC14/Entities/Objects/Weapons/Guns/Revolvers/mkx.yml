@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverMkX
   name: Warwick MkX TBR
-  suffix: PVE, RCM, CO, Filled
+  suffix: PVE, RCM, CO
   description: "For centuries, throughout peacetime and war, the Warwick has been the choice sidearm of the TSE's armed forces. The Mark 10 top-break revolver, chambered in .454, carries the Warwick's legacy into the modern age."
   components:
   - type: Sprite

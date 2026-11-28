@@ -252,20 +252,17 @@ rmc-job-greeting-para = You are a member of the RCM's 24th Paramarine Regiment!
 rmc-job-name-para = Paramarine Survivor
 rmc-job-description-para = You are a stranded TSE RCM Paramarine. Your dropship is out of fuel and you are stranded on the planet. Do what it takes to survive!
 
-rmc-job-name-paramarine = Rifleman
 rmc-job-name-para-pilot = Fleet Air Arm Pilot
-rmc-job-name-para-engineer = Assault Engineer
-rmc-job-name-para-medic =  Medical Technician
-rmc-job-prefix-paramarine = 24/PARA
+rmc-job-prefix-para-pilot = Pilot
 
-rmc-job-name-para-team-leader = Team Leader
-rmc-job-prefix-para-team-leader = 24/PARA TL
+rmc-job-name-para-engineer = Assault Engineer
+rmc-job-prefix-para-engineer = AE
 
 rmc-job-name-para-synth = Support Synthetic
-rmc-job-prefix-para-synth = 24/PARA Syn
+rmc-job-prefix-para-synth = Syn
 
 rmc-job-name-para-commander = Commander
-rmc-job-prefix-para-commander = 24/PARA CDR
+rmc-job-prefix-para-commander = Cdr
 
 # Sorokyne Strata Survs
 

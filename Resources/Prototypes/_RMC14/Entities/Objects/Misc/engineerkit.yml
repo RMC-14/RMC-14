@@ -56,7 +56,7 @@
 - type: entity
   parent: RMCEngineerKit
   id: RMCEngineerKitRCMPVEFilled
-  suffix: Filled, RCM, PVE
+  suffix: RCM, PVE, Filled
   components:
   - type: StorageFill
     contents:

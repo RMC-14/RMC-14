@@ -17,6 +17,21 @@
     - id: CMMultitool
 
 - type: entity
+  parent: RMCBeltUtilityRCM
+  id: RMCBeltUtilityRCMFilled
+  suffix: RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
+- type: entity
   parent: CMBeltUtilityCombat
   id: CMBeltUtilityCombatFilled
   suffix: Filled
@@ -164,6 +179,48 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     # TODO RMC14 tramadol and perixadon pills, splint
+
+- type: entity
+  parent: RMCMedicalL75RCM
+  id: RMCMedicalL75RCMFilled
+  suffix: RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterKelotane
+    # - id: CMPillCanisterTramadol
+    # - id: CMPillCanisterTramadol
+    - id: CMPillCanisterDylovene
+    # - id: CMPillCanisterPeridaxon
+    - id: CMPillCanisterDexalin
+    # - id: CMPillCanisterAlkysine
+    - id: RMCPillCanisterImidazoline
+    - id: CMTraumaKit10
+      amount: 3
+    - id: CMBurnKit10
+      amount: 3
+    # - id: RMCSplint
+    - id: CMDexalinPlusAutoInjector
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCMedicalL75RCM
+  id: RMCMedicalL75RCMFillPara
+  suffix: RCM, Para Survivor
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMPillCanisterBicaridine
+        - id: CMPillCanisterKelotane
+        # - id: CMPillCanisterTramadol
+        - id: CMPillCanisterTricordrazine
+        - id: CMTraumaKit10
+        - id: CMBurnKit10
+        # - id: 5 splints
+        - id: CMHealthAnalyzer
 
 - type: entity
   parent: RMCBeltGrenade
@@ -810,6 +867,89 @@
     - id: RMCWeaponRevolverMateba
 
 - type: entity
+  parent: RMCMkXBelt
+  id: RMCMkXBeltFilled
+  suffix: PVE, RCM, CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 3
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMkX
+
+- type: entity
+  parent: RMCBeltHolsterPistolRCM
+  id: RMCBeltHolsterPistolRCMFilled
+  suffix: PVE, RCM, L14
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL14
+      amount: 1
+    - id: RMCMagazinePistolL14
+      amount: 6
+
+- type: entity
+  parent: RMCBeltHolsterPistolRCM
+  id: RMCBeltHolsterPistolRCML189
+  suffix: RCM, L189
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80RCM
+
+- type: entity
+  parent: RMCBeltHolsterPistolRCM
+  id: RMCBeltHolsterPistolRCML54
+  suffix: RCM, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolL54
+      amount: 6
+    - id: RMCWeaponPistolL54
+
+- type: entity
+  parent: RMCBeltHolsterPistolParaCustom
+  id: RMCBeltHolsterPistolParaCustomFilled
+  suffix: RCM Para, L54 Custom
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCMagazinePistolL54Custom
+          amount: 7
+        - id: RMCWeaponPistolL54Custom
+
+- type: entity
+  parent: RMCBeltHolsterPistolPara
+  id: RMCBeltHolsterPistolParaM44
+  suffix: RCM Para, Warwick
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCSpeedLoaderM44
+          amount: 7
+        - id: RMCWeaponRevolverWarwickMkVII
+
+- type: entity
+  parent: RMCBeltHolsterPistolPara
+  id: RMCBeltHolsterPistolParaM44Random
+  suffix: RCM Para, Survivor, Warwick
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCSpeedLoaderM44
+        - id: RMCSpeedLoaderM44
+          prob: 0.66
+        - id: RMCSpeedLoaderM44
+          prob: 0.33
+        - id: RMCWeaponRevolverWarwickMkVII
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCMK80BeltFilled
   suffix: Filled
@@ -819,32 +959,6 @@
     - id: CMMagazinePistolMK80
       amount: 6
     - id: RMCMK80
-
-- type: entity
-  parent: RMCBeltHolsterPistolRCM
-  id: RMCBeltHolsterPistolRCML189
-  suffix: RCM, Filled L189
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolMK80
-      amount: 6
-    - id: RMCMK80RCM
-
-- type: entity
-  parent: RMCBeltUtilityRCM
-  id: RMCBeltUtilityRCMFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMScrewdriver
-    - id: CMWrench
-    - id: CMWelder
-    - id: CMCrowbar
-    - id: CMWirecutter
-    - id: RMCCableCoil30
-    - id: CMMultitool
 
 - type: entity
   parent: RMCBeltHolsterPistolWeYa
@@ -1018,7 +1132,7 @@
 - type: entity
   parent: RMCBeltRCM
   id: RMCBeltRCML24
-  suffix: RCM, Filled L24
+  suffix: RCM, L24
   components:
   - type: StorageFill
     contents:
@@ -1028,7 +1142,7 @@
 - type: entity
   parent: RMCBeltRCM
   id: RMCBeltRCML83A3
-  suffix: RCM, Filled L83A3
+  suffix: RCM, L83A3
   components:
   - type: StorageFill
     contents:
@@ -1038,7 +1152,7 @@
 - type: entity
   parent: RMCBeltUtilityGeneralRCM
   id: RMCBeltUtilityGeneralRCMFilled
-  suffix: PVP, RCM, Filled Breacher
+  suffix: PVP, RCM, Brch.
   components:
   - type: StorageFill
     contents:
@@ -1047,17 +1161,6 @@
     - id: CMShellShotgunBuckshot
       amount: 3
     - id: RMCPackFlareL96
-
-- type: entity
-  parent: RMCBeltHolsterPistolRCM
-  id: RMCBeltHolsterPistolRCML54
-  suffix: RCM, Filled L54
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCMagazinePistolL54
-      amount: 6
-    - id: RMCWeaponPistolL54
 
 - type: entity
   parent: RMCBeltSmartGunOperatorPistolPMC
@@ -1112,126 +1215,6 @@
       amount: 2
 
 - type: entity
-  parent: RMCMedicalL75RCM
-  id: RMCMedicalL75RCMFilled
-  suffix: RCM, Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMPillCanisterBicaridine
-    - id: CMPillCanisterBicaridine
-    - id: CMPillCanisterKelotane
-    - id: CMPillCanisterKelotane
-    # - id: CMPillCanisterTramadol
-    # - id: CMPillCanisterTramadol
-    - id: CMPillCanisterDylovene
-    # - id: CMPillCanisterPeridaxon
-    - id: CMPillCanisterDexalin
-    # - id: CMPillCanisterAlkysine
-    - id: RMCPillCanisterImidazoline
-    - id: CMTraumaKit10
-      amount: 3
-    - id: CMBurnKit10
-      amount: 3
-    # - id: RMCSplint
-    - id: CMDexalinPlusAutoInjector
-    - id: CMHealthAnalyzer
-
-- type: entity
-  parent: RMCMedicalL75RCM
-  id: RMCMedicalL75RCMFillPara
-  suffix: Paramarine, Survivor, Filled, Medical
-  components:
-    - type: StorageFill
-      contents:
-        - id: CMPillCanisterBicaridine
-        - id: CMPillCanisterKelotane
-        # - id: CMPillCanisterTramadol
-        - id: CMPillCanisterTricordrazine
-        - id: CMTraumaKit10
-        - id: CMBurnKit10
-        # - id: 5 splints
-        - id: CMHealthAnalyzer
-
-- type: entity
-  parent: RMCBeltHolsterPistolPara
-  id: RMCBeltHolsterPistolParaM44
-  suffix: Paramarine, Survivor, Filled, Warwick
-  components:
-    - type: StorageFill
-      contents:
-        - id: RMCWeaponRevolverWarwickMkVII
-        - id: RMCSpeedLoaderM44
-          amount: 7
-
-- type: entity
-  parent: RMCBeltHolsterPistolPara
-  id: RMCBeltHolsterPistolParaM44Random
-  suffix: Paramarine, Survivor, Random, Warwick
-  components:
-    - type: StorageFill
-      contents:
-        - id: RMCWeaponRevolverWarwickMkVII
-        - id: RMCSpeedLoaderM44
-        - id: RMCSpeedLoaderM44
-          prob: 0.66
-        - id: RMCSpeedLoaderM44
-          prob: 0.33
-
-- type: entity
-  parent: RMCBeltHolsterPistolPara
-  id: RMCBeltHolsterPistolParaCustom
-  name: paramarine custom load-bearing rig
-  description: A modified RCM Paramarine belt featuring a black leather holster with gold inlay, a large utility pouch, and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
-  suffix: Paramarine, Survivor, Filled, L54 Custom
-  components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
-      layers:
-      - state: icon
-      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-        state: warwick
-        map: [ "warwick_fill" ]
-        visible: false
-      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-        state: l54
-        map: [ "l54_fill" ]
-      - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
-        state: icon-front
-        map: [ "holstered" ]
-      - state: half
-        map: [ "openLayer" ]
-      - state: full
-        map: [ "closedLayer" ]
-    - type: Clothing
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
-    - type: ItemCamouflage
-      camouflageVariations: { }
-    - type: StorageFill
-      contents:
-        - id: RMCWeaponPistolL54Custom
-        - id: RMCMagazinePistolL54Custom
-          amount: 7
-    - type: ItemMapper
-      spriteLayers:
-        - holstered
-        - warwick_fill
-        - l54_fill
-      mapLayers:
-        holstered:
-          whitelist:
-            tags:
-              - Sidearm
-        warwick_fill:
-          whitelist:
-            tags:
-              - RMCWeaponRevolverWarwickMkVII
-        l54_fill:
-          whitelist:
-            tags:
-              - RMCWeaponPistolL54
-
-- type: entity
   parent: RMCBeltHolsterRevolver
   id: RMCBeltHolsterRevolverSpearheadFill
   suffix: Filled
@@ -1277,61 +1260,9 @@
 # PVE
 ## RCM
 - type: entity
-  parent: CMBeltBaseStorage
-  id: RMCBeltRoyalMortar
-  name: L79 pattern load-bearing rig # RMC14 TODO: This needs to be turned into a proper parent/base, remove its fill, and then make its fill a proper separate entity.
-  description: An L79 pattern load-bearing rig configured to carry support ammunition for either the light mortar or L989A2 multiple grenade launcher, along with a sidearm & magazine. Made of special rot-resistant fabric.
-  suffix: PVE, RCM, Filled
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
-    layers:
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m1984 # TODO RMC14 per-gun underlay
-      offset: 0.375, 0
-      map: [ "enum.CMHolsterLayers.Fill" ]
-      visible: false
-    - state: icon
-    - state: half
-      map: [ "openLayer" ]
-    - state: full
-      map: [ "closedLayer" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
-  - type: Storage
-    maxItemSize: Huge
-    grid:
-    - 0,0,17,1
-    whitelist:
-      components:
-      - MortarShell
-      tags:
-      - Sidearm
-      - RMCGrenadePacket20mm
-      - RMCGrenade20mm
-      - CMMagazinePistol
-  #      - # TODO RMC14 pistol, revolver, flaregun
-  - type: FixedItemSizeStorage
-  - type: LimitedStorage
-    limits:
-    - popup: rmc-storage-limit-one-gun
-      whitelist:
-        components:
-        - Gun
-    - popup: rmc-storage-limit-max-shells
-      count: 10
-      whitelist:
-        components:
-        - MortarShell
-  - type: CMHolster
-    whitelist:
-      components:
-      - Gun
-
-- type: entity
   parent: RMCBeltRoyalMortar
   id: RMCBeltRoyalMortarFilledGrenades
-  suffix: PVE, RCM, Filled Grenades
+  suffix: PVE, RCM, Grenades
   components:
   - type: StorageFill
     contents:
@@ -1347,7 +1278,7 @@
 - type: entity
   parent: RMCBeltRoyalMortar
   id: RMCBeltRoyalMortarFilledMortarShells
-  suffix: PVE, RCM, Filled Mortar
+  suffix: PVE, RCM, Mortars
   components:
   - type: StorageFill
     contents:
@@ -1357,28 +1288,3 @@
       amount: 1
     - id: RMCMortarShellHE
       amount: 3
-
-- type: entity
-  parent: RMCBeltHolsterPistolRCM
-  id: RMCBeltHolsterPistolRCMFilled
-  suffix: PVE, RCM, Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCWeaponPistolL14
-      amount: 1
-    - id: RMCMagazinePistolL14
-      amount: 6
-
-- type: entity
-  parent: RMCMkXBelt
-  id: RMCMkXBeltFilled
-  suffix: PVE, CO, Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCSpeedLoaderMatebaHIAP
-      amount: 3
-    - id: RMCSpeedLoaderMatebaHighImpact
-      amount: 3
-    - id: RMCWeaponRevolverMkX

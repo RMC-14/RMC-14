@@ -356,13 +356,13 @@
   - type: EncryptionKeyHolder
     defaultChannel: MarineSurvivor
 
-# Paramarine Hybrisa survivor insert
+# RCM Paramarines - Hybrisa Prospera TSE Airbase insert
 - type: entity
   parent: RMCHeadsetIconsPara
   id: RMCHeadsetPara
   name: paramarine headset
   description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
-  suffix: Survivor, Paramarine
+  suffix: RCM Para
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -382,10 +382,10 @@
 
 - type: entity
   parent: RMCHeadsetPara
-  id: RMCHeadsetParaTeamLead
+  id: RMCHeadsetParaTeamLeader
   name: paramarine team leader's headset
   description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
-  suffix: Survivor, Paramarine
+  suffix: RCM Para
   components:
     - type: RMCHeadset
       channels:
@@ -399,7 +399,7 @@
   id: RMCHeadsetParaOfficer
   name: paramarine officer's headset
   description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear. This one is heavier with the weight of responsibility.
-  suffix: Survivor, Paramarine
+  suffix: RCM Para
   components:
     - type: RMCHeadset
       channels:

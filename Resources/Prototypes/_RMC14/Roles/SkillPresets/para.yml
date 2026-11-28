@@ -1,7 +1,7 @@
 # Survivor Skills
 - type: entity
   id: RMCSkillPresetParamarine
-  name: Royal Paramarine Rifleman
+  name: RCM Paramarine Rifleman
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -21,7 +21,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaPilot
-  name: Royal Paramarine Pilot
+  name: RCM Paramarine Pilot
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -31,7 +31,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaEngineer
-  name: Royal Paramarine Engineer
+  name: RCM Paramarine Engineer
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -43,7 +43,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaMedic
-  name: Royal Paramarine Medic
+  name: RCM Paramarine Medic
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -55,7 +55,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaLeader
-  name: Royal Paramarine Squad Leader
+  name: RCM Paramarine Squad Leader
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -69,7 +69,7 @@
 
 - type: entity
   id: RMCSkillPresetParaSynth
-  name: Royal Paramarine Synthetic
+  name: RCM Paramarine Synthetic
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -95,7 +95,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaCommander
-  name: Royal Paramarine Commander
+  name: RCM Paramarine Commander
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset

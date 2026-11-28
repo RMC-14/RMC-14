@@ -75,6 +75,26 @@
     - id: RMCSpeedLoader38
       amount: 2
 
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledRCM
+  suffix: RCM, ERT
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHeadRoyalBeret
+    - id: RMCMaskGasRCM
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledParaCO
+  suffix: RCM Para, Survivor CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMClipboard #notepad
+        - id: CMPenFountain 
+
 # Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
@@ -235,7 +255,7 @@
 - type: entity
   parent: RMCPouchFlareL96
   id: RMCPouchFlareL96Filled
-  suffix: Filled, RCM
+  suffix: RCM, Filled
   components:
   - type: CMItemSlots
     startingItem: RMCFlareL96
@@ -311,6 +331,33 @@
     - id: CMWrench
     - id: RMCExplosivePlastic
       amount: 2
+
+- type: entity
+  parent: RMCPouchTools
+  id: RMCPouchToolsFilledRCM
+  suffix: RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMFireExtinguisherPortable
+    - id: CMMultitool
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocRCMPVEAssaultEngi
+  suffix: PVE, RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMEntrenchingTool
+    - id: RMCExplosivePlastic
+      amount: 3
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: RMCNailgunCompact
 
 # Smartgun Pouch
 - type: entity

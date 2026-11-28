@@ -10,7 +10,7 @@
 - type: entity
   parent: CMIDCardStandardDogtag
   id: RMCIDRoyalMarines
-  name: royal marine dogtags
+  name: royal crown marine dogtags
   components:
   - type: ItemIFF
     factions:
@@ -23,7 +23,7 @@
 - type: entity
   parent: CMIDCardGold
   id: RMCIDCardGoldRoyalMarines
-  name: royal marine commanding officer ID card
+  name: royal crown marine commanding officer ID card
   components:
   - type: ItemIFF
     factions:
@@ -32,7 +32,7 @@
 - type: entity
   parent: RMCIDRoyalMarines
   id: RMCIDRoyalMarinesCommando
-  name: Commando's dogtags
+  name: Rifleman's dogtags
   components:
   - type: PresetIdCard
     job: CMRoyalMarinesCommando
@@ -64,18 +64,18 @@
 - type: entity
   parent: RMCIDRoyalMarines
   id: RMCIDRoyalMarinesMedic
-  name: Medic's dogtags
+  name: Medical Assistant's dogtags
   components:
   - type: PresetIdCard
     job: CMRoyalMarinesMedic
 
 - type: entity
   parent: RMCIDRoyalMarines
-  id: RMCIDRoyalMarinesTeamlead
+  id: RMCIDRoyalMarinesTeamLeader
   name: Team Leader's dogtags
   components:
   - type: PresetIdCard
-    job: CMRoyalMarinesTeamlead
+    job: CMRoyalMarinesTeamLeader
 
 - type: entity
   parent: RMCIDRoyalMarines
@@ -175,11 +175,11 @@
 
 - type: entity
   parent: RMCIDRoyalMarines
-  id: RMCIDRoyalParamarinesMedicalTechnician
-  name: Medical Technician's dogtags
+  id: RMCIDRoyalParamarinesMedicalAssistant
+  name: Medical Assistant's dogtags
   components:
   - type: PresetIdCard
-    job: RMCSurvivorParaMedicalTechnician
+    job: RMCSurvivorParaMedicalAssistant
 
 - type: entity
   parent: RMCIDRoyalMarines
