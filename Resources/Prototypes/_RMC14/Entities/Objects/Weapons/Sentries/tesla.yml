@@ -117,6 +117,13 @@
     whitelist:
       components:
       - Xeno
+  - type: RMCDeployableEquipment
+    placementRestrictions:
+    - radius: 0
+      blacklist:
+        components:
+        - WeaponMount
+        - RMCDeployableEquipment
 
 - type: entity
   parent: RMCBaseTesla
