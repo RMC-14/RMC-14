@@ -147,7 +147,7 @@
 # Flour
 - type: entity
   parent: RMCCondiment
-  id: RMCCondimentEnzyme
+  id: RMCCondimentFlour
   name: box of flour
   description: A big bag of flour. Good for baking!
   components:
