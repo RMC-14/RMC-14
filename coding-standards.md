@@ -5,6 +5,11 @@ Make sure that your editor is correctly reading the project's .editorconfig file
 
 This will automatically format and give warnings for code that needs fixing.
 
+## AI Usage
+Usage of AI models or LLMs for code writing, asset creation, content review, issue creation, etc. is not allowed. This is enforced to the best of the ability of the volunteer hosts and maintainers.
+
+The usage of AI-generated work shifts responsibility for quality assurance and code familiarity from the author to maintainers and contributors attempting to work with them, which is an unrealistic and unreasonable expectation.
+
 ## Variables
 
 * Variables should be implicitly typed with `var` where possible.
