@@ -49,21 +49,6 @@
     id: CMIDCardCommandingOfficer
 
 - type: loadout
-  id: GoldMatebaRMC
-  dummyEntity: RMCWeaponRevolverMatebaGold
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
-  equipment:
-    belt: RMCMatebaBeltLuxuriousFilled
-  storage:
-    back:
-    - RMCMatebaCustomizationCaseLuxury
-
-- type: loadout
   id: SilverMatebaRMC
   dummyEntity: RMCWeaponRevolverMatebaSilver
   effects:
@@ -71,24 +56,12 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
+      time: 252000 # 70 hrs
   equipment:
     belt: RMCMatebaBeltLuxuriousFilledSilver
   storage:
     back:
     - RMCMatebaCustomizationCaseSilver
-
-- type: loadout
-  id: GoldHandcannonRMC
-  dummyEntity: RMCWeaponPistolHandcannonGold
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
-  equipment:
-    belt: RMCGoldHandcannonBeltFilled
 
 - type: loadout
   id: MatebaRMC
@@ -100,64 +73,10 @@
     - RMCMatebaCustomizationCase
 
 - type: loadout
-  id: MatebaSpecialRMC
-  dummyEntity: RMCWeaponRevolverMatebaSpecial
-  equipment:
-    belt: RMCMatebaBeltSpecialFilled
-
-- type: loadout
   id: HandcannonRMC
   dummyEntity: RMCWeaponPistolHandcannonCustom
   equipment:
     belt: RMCPeregrineHandcannonBeltFilled
-
-- type: loadout
-  id: HandcannonPolishedRMC
-  dummyEntity: RMCWeaponPistolHandcannonPolished
-  equipment:
-    belt: RMCPolishedHandcannonBeltFilled
-
-- type: loadout
-  id: Mateba2006MRMC
-  dummyEntity: RMCWeaponRevolverMateba2006M
-  equipment:
-    belt: RMCMatebaBeltFilled2006M
-
-- type: loadout
-  id: Mateba2006MRMCGold
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
-  dummyEntity: RMCWeaponRevolverMateba2006MGold
-  equipment:
-    belt: RMCMatebaBeltFilled2006MGold
-
-- type: loadout
-  id: Mateba2006MRMCBlackGold
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
-  dummyEntity: RMCWeaponRevolverMateba2006MBlackGold
-  equipment:
-    belt: RMCMatebaBeltFilled2006MBlackGold
-
-- type: loadout
-  id: Mateba2006MRMCSilver
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: CMJobCommandingOfficer
-      time: 900000 # 250 hrs
-  dummyEntity: RMCWeaponRevolverMateba2006MSilver
-  equipment:
-    belt: RMCMatebaBeltFilled2006MSilver
 
 - type: loadout
   id: M1911CRMC
