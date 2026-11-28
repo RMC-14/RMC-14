@@ -20,9 +20,18 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    public override void Announce(EntityUid source, Filter filter, string message, string wrapped, SoundSpecifier? sound = null, PopupType? popup = null, bool needsQueen = false, RMCAnnouncementOverlay? overlay = null)
+    public override void Announce(
+        EntityUid source,
+        Filter filter,
+        string message,
+        string wrapped,
+        SoundSpecifier? sound = null,
+        PopupType? popup = null,
+        bool needsQueen = false,
+        RMCAnnouncementOverlay? overlay = null,
+        bool includeGhosts = true)
     {
-        base.Announce(source, filter, message, wrapped, sound, popup, needsQueen, overlay);
+        base.Announce(source, filter, message, wrapped, sound, popup, needsQueen, overlay, includeGhosts);
 
         if (needsQueen)
         {
@@ -37,7 +46,8 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
             }
         }
 
-        filter.AddWhereAttachedEntity(HasComp<GhostComponent>);
+        if (includeGhosts)
+            filter.AddWhereAttachedEntity(HasComp<GhostComponent>);
 
         if (source.IsValid())
             _adminLogs.Add(LogType.RMCXenoAnnounce, $"{ToPrettyString(source):source} xeno announced message: {message}");

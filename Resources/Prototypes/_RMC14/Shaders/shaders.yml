@@ -56,6 +56,11 @@
     light_whitepoint: 1.0
 
 - type: shader
+  id: RMCWeatherPersonalOverlay
+  kind: source
+  path: "/Textures/_RMC14/Shaders/weather_personal_overlay.swsl"
+
+- type: shader
   id: RMCMarineAnnouncementGrid
   kind: source
   path: "/Textures/_RMC14/Shaders/marine_announce_grid.swsl"
