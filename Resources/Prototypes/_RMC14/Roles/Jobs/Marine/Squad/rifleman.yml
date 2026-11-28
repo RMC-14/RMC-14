@@ -35,7 +35,8 @@
         RMCSkillFirearms: 1
     - type: CMVendorUser
       id: CMRifleman
-      points: 45
+      extraPoints:
+        RFNVenderPoints: 45
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-rifleman
