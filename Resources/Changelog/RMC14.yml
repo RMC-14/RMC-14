@@ -1,53 +1,4 @@
 ﻿Entries:
-- author: SabreML
-  changes:
-  - message: Fixed observers being unable to hear xenos talking if 'Ghost Hearing'
-      was disabled.
-    type: Fix
-  id: 3468
-  time: '2026-07-03T01:32:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10291
-- author: Thereisabear
-  changes:
-  - message: Console should have less Can't resolve Entity 0 now.
-    type: Fix
-  id: 3469
-  time: '2026-07-03T01:34:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10295
-- author: Dygon
-  changes:
-  - message: You can no longer turn on a sentry through the sentry laptop if there
-      is an already turned on sentry nearby.
-    type: Fix
-  id: 3470
-  time: '2026-07-03T01:37:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10299
-- author: Dygon
-  changes:
-  - message: Area damage now always applies the visual hit effect on damaged targets.
-    type: Fix
-  - message: Area damage no longer hits entities inside containers.
-    type: Fix
-  id: 3471
-  time: '2026-07-03T01:36:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10298
-- author: MidZik
-  changes:
-  - message: Spammable xeno announcements (such as traps being destroyed) will use
-      the repeated message system when possible to reduce how much the chat window
-      gets flooded with messages, such as during an orbital bombardment.
-    type: Tweak
-  id: 3472
-  time: '2026-07-03T01:40:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10309
-- author: Dygon
-  changes:
-  - message: Xenonid players not on the dropship when a hijack is initiated now automatically
-      get added to the front of the larva queue.
-    type: Fix
-  id: 3473
-  time: '2026-07-03T01:40:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10307
 - author: Vixting
   changes:
   - message: Added pry sound to expanding a acid hole
@@ -4340,5 +4291,53 @@
   id: 3967
   time: '2026-11-24T08:43:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11072
+- author: Thereisabear
+  changes:
+  - message: Fixed reinforced barricades not having the proper acid coefficient. 1
+      -> 1.15
+    type: Fix
+  id: 3968
+  time: '2026-11-24T22:03:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11194
+- author: yagwog
+  changes:
+  - message: Brains can no longer speak to you in LOOC
+    type: Fix
+  id: 3969
+  time: '2026-11-24T22:14:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11197
+- author: GrigoriyGalintano
+  changes:
+  - message: Fixed hardcoded text in the intel objectives window.
+    type: Fix
+  id: 3970
+  time: '2026-11-24T22:30:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10376
+- author: MidZik
+  changes:
+  - message: Fixed un-shootable sprites getting in the way of shooting guns at sprites
+      underneath them, such as vines on top of eggs.
+    type: Fix
+  - message: Marines prefer to target enemies when shooting guns, in cases where sprites
+      are overlapping. (This does not mean you can shoot through allies!)
+    type: Tweak
+  id: 3971
+  time: '2026-11-25T01:20:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11201
+- author: Simon
+  changes:
+  - message: Fixed oversight that allows size to be used within markup tags
+    type: Fix
+  id: 3972
+  time: '2026-11-25T20:49:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11212
+- author: Ian321
+  changes:
+  - message: Lifeboats and escape pods should no longer crash-land out of bounds on
+      most maps.
+    type: Fix
+  id: 3973
+  time: '2026-11-27T17:33:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11225
 Name: RMC14
 Order: -1

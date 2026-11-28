@@ -8,7 +8,6 @@ using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.State;
-using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 
@@ -16,7 +15,6 @@ namespace Content.Client._RMC14.Weapons.Melee;
 
 public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;

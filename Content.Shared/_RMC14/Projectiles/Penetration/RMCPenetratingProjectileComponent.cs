@@ -1,3 +1,4 @@
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
@@ -59,4 +60,19 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float MembraneMultiplier = 1f;
+
+    /// <summary>
+    ///     If the projectile lose a specific amount of damage instead of a percent.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2? FixedDamageLoss;
+
+    /// <summary>
+    ///     If the projectile gets deleted at 0 damage left.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DeleteOnZeroDamage = false;
+
+    [DataField, AutoNetworkedField]
+    public bool DeleteAfterHit = false;
 }

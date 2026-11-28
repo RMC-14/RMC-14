@@ -7,13 +7,11 @@
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
   - RMCXenoVentCrawler
-  id: CMXenoSpitter
+  id: RMCXenoSpitterBase
   name: Spitter
   description: A gross, oozing alien of some kind.
+  abstract: true
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleSpitter
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Spitter/spitter.rsi
   - type: MobState
@@ -32,16 +30,6 @@
     - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSpitter
-    actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStabCorrosive
-    - ActionXenoAcidNormal
-    - ActionXenoSpit
-    - ActionXenoChargeSpit
-    - ActionXenoSprayAcid
-    - ActionXenoDevolve
     tier: 2
     hudOffset: -0.15,0.025
     hudRankIconScale: 0.95
@@ -70,8 +58,6 @@
       types:
         Heat: 5
   - type: XenoTailStab
-    inject:
-      RMCMolecularAcid: 2
     tailDamage:
       groups:
         Brute: 36
@@ -122,3 +108,90 @@
     ventCrawlIcon: spitter
   - type: RMCActionOrder
     id: CMXenoSpitter
+
+- type: entity
+  parent: RMCXenoSpitterBase
+  id: CMXenoSpitter
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSpitter
+  - type: Xeno
+    role: CMXenoSpitter
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStabCorrosive
+    - ActionXenoAcidNormal
+    - ActionXenoSpit
+    - ActionXenoChargeSpit
+    - ActionXenoSprayAcid
+    - ActionXenoDevolve
+    tier: 2
+    hudOffset: -0.15,0.025
+    hudRankIconScale: 0.95
+    hudRankIconOffset: 0,0.15
+  - type: XenoSpit
+  - type: XenoChargeSpit
+  - type: XenoScatteredSpit
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 5
+  - type: XenoTailStab
+    inject:
+      RMCMolecularAcid: 2
+  - type: XenoEvolution
+    strains:
+    - RMCXenoSpitterDissolver
+
+- type: entity
+  parent: RMCXenoSpitterBase
+  id: RMCXenoSpitterDissolver
+  suffix: Dissolver
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Spitter/dissolver_spitter.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    - ActionXenoSpitDissolverCorrosive
+    - ActionXenoSpitDissolverAcidBlob
+    - ActionXenoSpitDissolverEnzymaticBreath
+    - ActionXenoStoreAcid
+    - ActionXenoDevolve
+  - type: XenoStrain
+    name: rmc-xeno-dissolver-name
+    description: rmc-xeno-dissolver-description
+    popup: rmc-xeno-dissolver-popup
+  - type: XenoDestrain
+    destrainTo: CMXenoSpitter
+  - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoSpitterDissolver
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+  - type: CMArmor
+    xenoArmor: 25
+    explosionArmor: 20
+  - type: XenoPlasma
+    plasmaRegenOnWeeds: 4.5
+  - type: XenoDissolverBombard
+  - type: VentCrawler
+    ventCrawlIcon: dissolver_spitter
