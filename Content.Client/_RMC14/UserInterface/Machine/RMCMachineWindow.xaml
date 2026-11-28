@@ -1,0 +1,24 @@
+<machine:RMCMachineWindow
+    xmlns="https://spacestation14.io"
+    xmlns:machine="clr-namespace:Content.Client._RMC14.UserInterface.Machine"
+    MouseFilter="Stop">
+    <PanelContainer Name="WindowBackground" />
+    <BoxContainer Orientation="Vertical">
+        <PanelContainer Name="TitleBar" MinHeight="26">
+            <BoxContainer Orientation="Horizontal">
+                <Label Name="TitleLabel" HorizontalExpand="True" VAlign="Center" Margin="10 0 0 0" ClipText="True" />
+                <TextureRect Name="TitleLogo"
+                             TexturePath="/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
+                             Stretch="KeepAspectCentered"
+                             SetSize="52 20"
+                             ModulateSelfOverride="#FFFFFF6E"
+                             VerticalAlignment="Center"
+                             Margin="0 0 4 0" />
+                <ContainerButton Name="CloseButton" SetSize="36 26">
+                    <Label Name="CloseLabel" Text="×" Align="Center" VAlign="Center" />
+                </ContainerButton>
+            </BoxContainer>
+        </PanelContainer>
+        <Control Name="ContentsContainer" VerticalExpand="True" RectClipContent="True" />
+    </BoxContainer>
+</machine:RMCMachineWindow>
