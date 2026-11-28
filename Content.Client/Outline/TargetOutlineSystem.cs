@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared.Interaction;
 using Content.Shared.Whitelist;
 using Robust.Client.GameObjects;
@@ -131,10 +132,15 @@ public sealed class TargetOutlineSystem : EntitySystem
         var bounds = new Box2(mousePos - LookupVector, mousePos + LookupVector);
         var pvsEntities = _lookup.GetEntitiesIntersecting(_eyeManager.CurrentEye.Position.MapId, bounds, LookupFlags.Approximate | LookupFlags.Static);
         var spriteQuery = GetEntityQuery<SpriteComponent>();
+        var invisQuery = GetEntityQuery<EntityActiveInvisibleComponent>(); // RMC14
 
         foreach (var entity in pvsEntities)
         {
             if (!spriteQuery.TryGetComponent(entity, out var sprite) || !sprite.Visible)
+                continue;
+
+            // RMC14 do not highlight invisible entities
+            if (invisQuery.HasComp(entity))
                 continue;
 
             // Check the predicate

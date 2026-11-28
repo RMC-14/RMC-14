@@ -250,6 +250,7 @@ public sealed class RadioSystem : EntitySystem
             var hasActiveServer = HasActiveServer(sourceMapId, channel.ID);
             var sourceServerExempt = _exemptQuery.HasComp(radioSource);
 
+            var speakerRelays = new List<EntityUid>(); // RMC14
             var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
             while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
             {
@@ -321,10 +322,17 @@ public sealed class RadioSystem : EntitySystem
                     repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
 
                 var chatMsg = new MsgChatMessage { Message = chat };
-                var ev = new RadioReceiveEvent(actualMessage, messageSource, channel, radioSource, chatMsg, currentLanguage);
                 // RMC14
+                var ev = new RadioReceiveEvent(actualMessage, messageSource, channel, radioSource, chatMsg, currentLanguage)
+                {
+                    SpeakerRelays = speakerRelays,
+                };
                 RaiseLocalEvent(receiver, ref ev);
             }
+
+            if (speakerRelays.Count > 0)
+                _chat.SendRadioSpeakersWhisperWithLanguage(speakerRelays, message, currentLanguage, name, messageSource);
+            // RMC14
 
             if (canSend &&
                 !HasComp<XenoComponent>(messageSource) &&

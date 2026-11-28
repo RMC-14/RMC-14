@@ -39,9 +39,6 @@ public sealed partial class AutodocComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillRequired = new() { ["RMCSkillSurgery"] = 1 };
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
-
-    [DataField, AutoNetworkedField]
     public bool IsSurgeryInProgress;
 
     [DataField, AutoNetworkedField]

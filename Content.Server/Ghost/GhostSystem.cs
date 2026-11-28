@@ -214,7 +214,7 @@ namespace Content.Server.Ghost
             }
 
             _eye.RefreshVisibilityMask(uid);
-            var time = _gameTiming.CurTime;
+            var time = _gameTiming.RealTime;
             component.TimeOfDeath = time;
         }
 
@@ -253,9 +253,11 @@ namespace Content.Server.Ghost
                 return;
 
             var timeSinceDeath = _gameTiming.RealTime.Subtract(component.TimeOfDeath);
-            var deathTimeInfo = timeSinceDeath.Minutes > 0
-                ? Loc.GetString("comp-ghost-examine-time-minutes", ("minutes", timeSinceDeath.Minutes))
+            // RMC14 Use TotalMinutes because TimeSpan.Minutes only goes up to 59.
+            var deathTimeInfo = timeSinceDeath.TotalMinutes >= 1
+                ? Loc.GetString("comp-ghost-examine-time-minutes", ("minutes", (int) timeSinceDeath.TotalMinutes))
                 : Loc.GetString("comp-ghost-examine-time-seconds", ("seconds", timeSinceDeath.Seconds));
+            // RMC14
 
             args.PushMarkup(deathTimeInfo);
         }
@@ -521,10 +523,7 @@ namespace Content.Server.Ghost
             var ghostComponent = Comp<GhostComponent>(ghost);
 
             // RMC
-            if (appearanceSource is { } source)
-            {
-                _rmcGhostAppearance.CopyDeathAppearance(source, ghost);
-            }
+            _rmcGhostAppearance.ApplyDeathAppearance(ghost, mind.Owner, appearanceSource);
             // RMC
 
             // Try setting the ghost entity name to either the character name or the player name.

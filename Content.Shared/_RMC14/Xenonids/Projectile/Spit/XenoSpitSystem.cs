@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.OnCollide;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Synth;
@@ -106,6 +107,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
 
         SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, ProjectileHitEvent>(OnShieldOnHit, after: [typeof(CMClusterGrenadeSystem)]);
         SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, CMClusterSpawnedEvent>(OnShieldOnHitClusterSpawned);
+        SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, RMCClusterDirectHitEvent>(OnShieldOnHitClusterDirectHit);
 
         InitializeAcid();
 
@@ -313,7 +315,10 @@ public sealed partial class XenoSpitSystem : EntitySystem
 
         if (spit.Comp.Slow > TimeSpan.Zero)
         {
-            if (spit.Comp.SuperSlow)
+            if (spit.Comp.RootIfAlreadySlowed &&
+                ((spit.Comp.SuperSlow ? HasComp<RMCSuperSlowdownComponent>(target) : HasComp<RMCSlowdownComponent>(target))))
+                _slow.TryRoot(target, spit.Comp.Slow);
+            else if (spit.Comp.SuperSlow)
                 _slow.TrySuperSlowdown(target, spit.Comp.Slow);
             else
                 _slow.TrySlowdown(target, spit.Comp.Slow);
@@ -417,6 +422,18 @@ public sealed partial class XenoSpitSystem : EntitySystem
                 projectile.Shooter = shooter;
                 Dirty(spawned, projectile);
             }
+        }
+    }
+
+    private void OnShieldOnHitClusterDirectHit(Entity<XenoProjectileShieldOnHitComponent> ent, ref RMCClusterDirectHitEvent args)
+    {
+        var shooter = _projectileQuery.CompOrNull(ent)?.Shooter;
+        EnsureComp<XenoProjectileShieldOnHitComponent>(args.DirectHitProjectile);
+        if (shooter != null)
+        {
+            var projectile = EnsureComp<ProjectileComponent>(args.DirectHitProjectile);
+            projectile.Shooter = shooter;
+            Dirty(args.DirectHitProjectile, projectile);
         }
     }
 

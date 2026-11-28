@@ -1,4 +1,4 @@
-﻿using Content.Server._RMC14.Explosion;
+using Content.Server._RMC14.Explosion;
 using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
@@ -66,7 +66,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
 
         // RMC14 it was sometimes dividing by 0.
-        if(totalCount <= 0)
+        if (totalCount <= 0)
             return;
 
         var hitEntities = new List<EntityUid>();
@@ -75,6 +75,9 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
         {
+            //RMC14
+            _spawned.Add(contentUid);
+
             Angle angle;
             if (component.RandomAngle)
                 angle = _random.NextAngle();
@@ -83,19 +86,22 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 var angleMin = segmentAngle * shootCount;
                 var angleMax = segmentAngle * (shootCount + 1);
                 angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+            }
 
-                // RMC14
-                var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, angle, shootCount, hitEntities);
-                RaiseLocalEvent(uid, ref ev);
+            // RMC14 - only works for spawner grenades
+            var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, component.UnspawnedCount, angle, shootCount++, hitEntities);
+            RaiseLocalEvent(uid, ref ev);
 
-                if(ev.TotalCount <= 0)
-                    return;
-                if (ev.Handled)
-                {
-                    hitEntities = ev.HitEntities;
-                    angle = ev.Angle;
-                }
-                shootCount++;
+            if (ev.TotalCount <= 0)
+                break;
+
+            if (ev.ProjectDirectHitted)
+                continue;
+
+            if (ev.Handled)
+            {
+                hitEntities = ev.HitEntities;
+                angle = ev.Angle;
             }
 
             // RMC14
@@ -113,7 +119,6 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
             _gun.ShootProjectile(contentUid, direction, velocity, gunUid, user, component.ProjectileSpeed);
-            _spawned.Add(contentUid);
         }
 
         var clusterEv = new CMClusterSpawnedEvent(_spawned, hitEntities, uid);

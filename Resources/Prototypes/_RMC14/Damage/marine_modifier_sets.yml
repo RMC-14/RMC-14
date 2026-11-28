@@ -34,6 +34,7 @@
     Blunt: 0.75
     Slash: 0.75
     Piercing: 0.75
+    Heat: 1.15
 
 # Used in sandbags
 - type: damageModifierSet
