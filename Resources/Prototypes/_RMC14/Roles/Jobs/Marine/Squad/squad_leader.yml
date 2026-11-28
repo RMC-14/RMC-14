@@ -3,6 +3,7 @@
   id: CMSquadLeader
   name: cm-job-name-squad-leader
   description: cm-job-description-squad-leader
+  newToJobInfo: rmc-new-to-job-squad-leader
   playTimeTracker: CMJobSquadLeader
   requirements:
   - !type:RoleTimeRequirement
@@ -30,6 +31,7 @@
   startingGear: CMGearSquadLeader
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
+  requireAdminNotify: true
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-commander
   marineAuthorityLevel: 2
@@ -161,6 +163,22 @@
     description: cm-job-description-squad-leader
     rules: ghost-role-information-nonantagonist-rules
     reregister: false
+    raffle:
+      settings: default
+    job: CMSquadLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 1
+
+- type: entity
+  id: RMCNewGhostSquadLeader
+  abstract: true
+  components:
+  - type: GhostRole
+    name: cm-job-name-squad-leader
+    description: cm-job-description-squad-leader
+    rules: ghost-role-information-nonantagonist-rules
     raffle:
       settings: default
     job: CMSquadLeader

@@ -71,7 +71,7 @@ public sealed class SynthSystem : SharedSynthSystem
         if (args.Handled)
             return;
 
-        if (!HasComp<SynthComponent>(args.User))
+        if (!TryComp<SynthComponent>(args.User, out var synth) || synth.CanUseGuns)
             return;
 
         if (!_tags.HasTag(ent.Owner, GrenadeTag))

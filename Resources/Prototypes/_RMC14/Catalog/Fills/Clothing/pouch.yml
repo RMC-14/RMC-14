@@ -19,6 +19,7 @@
     - id: RMCCigarettePackWeYaGold
     - id: RMCZippo
     - id: RMCSpaceCash1000
+    - id: RMCSpaceCash1000
     - id: RMCUniversalRecorder
 
 - type: entity
@@ -77,22 +78,22 @@
 # Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledMP5
-  suffix: Filled, MP5
+  id: RMCPouchMagazineFilledPCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 3
 
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledM16
-  suffix: Filled, M16
+  id: RMCPouchMagazineFilledCR16
+  suffix: Filled, CR16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleCR16
       amount: 3
 
 - type: entity
@@ -128,12 +129,12 @@
 # Large Magazine Pouch
 - type: entity
   parent: RMCPouchMagazineLarge
-  id: RMCPouchMagazineLargeMP5
-  suffix: Filled, MP5
+  id: RMCPouchMagazineLargePCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 4
 
 - type: entity
@@ -304,7 +305,7 @@
     contents:
     - id: CMScrewdriver
     - id: CMWirecutter
-    - id: CMCrowbar
+    - id: RMCTacticalPrybar
     - id: RMCCableCoil
     - id: CMMultitool
     - id: CMWrench

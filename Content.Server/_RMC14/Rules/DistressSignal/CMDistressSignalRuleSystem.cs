@@ -64,6 +64,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Roles;
+using Robust.Server.GameStates;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -154,16 +155,15 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
-
-    private readonly HashSet<string> _operationNames = new();
-    private readonly HashSet<string> _operationPrefixes = new();
-    private readonly HashSet<string> _operationSuffixes = new();
+    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
 
     private float _marinesPerXeno;
     private bool _autoBalance;
     private float _autoBalanceStep;
     private float _autoBalanceMax;
     private float _autoBalanceMin;
+    private int _autoBalanceLastAdjustment;
+    private bool _autoBalanceStreakOnly;
     private float _marinesPerSurvivor;
     private float _maximumSurvivors;
     private float _minimumSurvivors;
@@ -177,7 +177,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     private float _hijackShipWeight;
     private int _hijackMinBurrowed;
     private int _xenosMinimum;
-    private bool _usingCustomOperationName;
+    private bool _disableAutoEnd;
     private bool _queenBuildingBoostEnabled;
     private TimeSpan _queenBoostDuration;
     private float _queenBoostSpeedMultiplier;
@@ -249,15 +249,15 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<LoadingMapsEvent>(OnMapLoading);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
              before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
+        SubscribeLocalEvent<DropshipHijackLaunchedEvent>(OnDropshipHijackLaunched);
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
+        SubscribeLocalEvent<EvacuationProgressEvent>(OnEvacuationProgress);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorCanOverloadEvent>(OnFusionReactorCanOverload);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadStatusEvent>(OnFusionReactorOverloadStatus);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadChangedEvent>(OnFusionReactorOverloadChanged);
@@ -277,6 +277,8 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceLastAdjustment, v => _autoBalanceLastAdjustment = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceStreakOnly, v => _autoBalanceStreakOnly = v, true);
         Subs.CVar(_config, RMCCVars.RMCMarinesPerSurvivor, v => _marinesPerSurvivor = v, true);
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMaximum, v => _maximumSurvivors = v, true);
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMinimum, v => _minimumSurvivors = v, true);
@@ -291,18 +293,11 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCHijackShipWeight, v => _hijackShipWeight = v, true);
         Subs.CVar(_config, RMCCVars.RMCMinimumHijackBurrowed, v => _hijackMinBurrowed = v, true);
         Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDistressDisableAutoEnd, v => _disableAutoEnd = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoost, v => _queenBuildingBoostEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostDurationMinutes, v => _queenBoostDuration = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostSpeedMultiplier, v => _queenBoostSpeedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostRemoteRange, v => _queenBoostRemoteRange = v, true);
-
-        ReloadPrototypes();
-    }
-
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
-    {
-        if (ev.WasModified<EntityPrototype>())
-            ReloadPrototypes();
     }
 
     private void OnMapLoading(LoadingMapsEvent ev)
@@ -415,7 +410,6 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     public void SetCustomOperationName(string customname)
     {
         OperationName = customname;
-        _usingCustomOperationName = true;
     }
 
     private void EndRoundForQueenDeath(CMDistressSignalRuleComponent component)

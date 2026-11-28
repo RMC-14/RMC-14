@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
@@ -9,7 +11,6 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
@@ -17,9 +18,9 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
-using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -27,13 +28,13 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Charge;
 
 public sealed class XenoChargeSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -46,7 +47,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
@@ -59,11 +60,11 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleWheelSystem _vehicleWheels = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-
-    private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
+    [Dependency] private readonly CMArmorSystem _armor = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -81,6 +82,8 @@ public sealed class XenoChargeSystem : EntitySystem
         SubscribeLocalEvent<XenoChargeComponent, StopThrowEvent>(OnXenoChargeStop);
         SubscribeLocalEvent<XenoChargeComponent, PreventCollideEvent>(OnXenoChargePreventCollide);
         SubscribeLocalEvent<XenoChargingComponent, PreventCollideEvent>(OnXenoChargingPreventCollide);
+
+        SubscribeLocalEvent<XenoChargeWindupComponent, CMGetArmorEvent>(OnXenoWindupChargeGetArmor);
     }
 
     private void OnXenoChargeAction(Entity<XenoChargeComponent> xeno, ref XenoChargeActionEvent args)
@@ -106,12 +109,16 @@ public sealed class XenoChargeSystem : EntitySystem
             Hidden = true,
         };
 
+        EnsureComp<XenoChargeWindupComponent>(xeno);
+        _armor.UpdateArmorValue(xeno.Owner);
         _stun.TrySlowdown(xeno, TimeSpan.FromSeconds(1.75f), false, 0f, 0f);
         _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
     {
+        RemCompDeferred<XenoChargeWindupComponent>(xeno);
+        _armor.UpdateArmorValue(xeno.Owner);
         if (args.Cancelled)
             return;
 
@@ -194,6 +201,20 @@ public sealed class XenoChargeSystem : EntitySystem
         var isVehicle = HasComp<VehicleWheelSlotsComponent>(targetId);
 
         StopCrusherCharge(xeno);
+
+        if (_whitelist.IsBlacklistFailOrNull(xeno.Comp.HitRefundBlacklist, targetId))
+        {
+            _xenoPlasma.RegenPlasma(xeno.Owner, xeno.Comp.HitRefundPlasma);
+            foreach (var (actionId, action) in _rmcActions.GetActionsWithEvent<XenoChargeActionEvent>(xeno))
+            {
+                if (action.Cooldown is { } cooldown)
+                {
+                    _actions.SetCooldown(actionId,
+                        cooldown.Start - xeno.Comp.HitRefundCooldown,
+                        cooldown.End - xeno.Comp.HitRefundCooldown);
+                }
+            }
+        }
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
@@ -334,5 +355,11 @@ public sealed class XenoChargeSystem : EntitySystem
     {
         if (_xenoChargeDontHitQuery.HasComp(args.OtherEntity))
             args.Cancelled = true;
+    }
+
+    private void OnXenoWindupChargeGetArmor(Entity<XenoChargeWindupComponent> xeno, ref CMGetArmorEvent args)
+    {
+        if (xeno.Comp.Running)
+            args.FrontalArmor += xeno.Comp.FrontalArmor;
     }
 }

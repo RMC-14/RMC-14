@@ -146,6 +146,7 @@
       choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
+      - id: RMCCoatAllWeather
     - name: Backpack
       choices: { CMBag: 1 }
       entries:
@@ -318,6 +319,8 @@
       - id: CMPackFlare
         amount: 20
         recommended: true
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 5
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

@@ -42,6 +42,10 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_mp
+    - type: AssignSquad
+      squad: SquadMP
+    - type: SquadNameOverride
+      name: rmc-job-name-riot-control
 
 - type: startingGear
   parent: CMGearMilitaryPolice

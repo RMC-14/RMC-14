@@ -3,11 +3,14 @@
   id: RMCSurvivorNewVaraderoResearchDirector
   name: rmc-job-name-survivor-new-varadero-rd
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorNewVaraderoResearchDirector
   greeting: rmc-job-greeting-varadero
   spawnMenuRoleName: New Varadero Research Director (NV Survivor)
   ranks:
+    RMCRankCivilianRegentsProfessor:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorScientist
+      time: 252000 # 70 hours
     RMCRankCivilianProfessor: []
   hasIcon: false
   accessGroups:
@@ -61,12 +64,13 @@
     mask: CMMaskSterile
     gloves: CMHandsLatex
     eyes: RMCGlassesReagentHUDGlasses
-    shoes: CMBootsBlackFilled
+    shoes: CMBootsUrbanFilled
   storage:
     back:
     - CMSheetMetal20
     - CMClipboard
     - CMPenClicky
+    - RMCBusinessCardHolderFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

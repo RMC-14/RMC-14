@@ -1544,3 +1544,48 @@ RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: RMCSpawnPointSu
 
 # 2026-08-26
 CMAttachmentXMVESG1FlamerNozzle: RMCAttachmentXMVESG1FlamerNozzle
+
+#2026-09-22
+ChessBoard: RMCChessBoard
+CheckerBoard: RMCCheckerBoard
+
+# 2026-10-22
+RMCJumpsuitSPPSOF: RMCJumpsuitSPPSpetsnaz
+RMCArmorSPPSOF: RMCArmorSPPSpetsnaz
+RMCArmorSPPSOFHeavy: RMCArmorSPPSpetsnazHeavy
+RMCArmorSPPSOFPlated: RMCArmorSPPSpetsnazPlated
+RMCHeadCapSPPSOF: RMCHeadCapSPPSpetsnaz
+RMCArmorHelmetSPPSOF: RMCArmorHelmetSPPSpetsnaz
+RMCMapInsertSorokyneSPPSOF: RMCMapInsertSorokyneSPPSpetsnaz
+RMCMapInsertSorokyneSPPSOFAlt: RMCMapInsertSorokyneSPPSpetsnazAlt
+
+# 2026-10-25
+CMIV: RMCIVStand
+
+# 2026-11-09
+RMCSpawnerCorpseUNMCMilitaryPoliceRandom: RMCSpawnerCorpseUNMCVeteranRiflemanRandom
+LockerAtmospherics: RMCLockerEngineerAtmos
+
+# 2026-11-20
+WeaponSMGMP5: RMCWeaponSMGPCAC5A4
+WeaponSMGMP5Alt: RMCWeaponSMGPCAC5A5
+CMMagazineSMGMP5: RMCMagazineSMGPCAC5
+CMBeltMarineMP5: RMCBeltMarinePCAC5
+RMCPouchMagazineFilledMP5: RMCPouchMagazineFilledPCAC5
+RMCPouchMagazineLargeMP5: RMCPouchMagazineLargePCAC5
+RMCAttachmentMP5AltStockCollapsible: RMCAttachmentStockPCAC5Collapsible
+
+WeaponRifleM16: RMCWeaponRifleCR16
+RMCWeaponRifleM16A5: RMCWeaponRifleCR16A5
+RMCMagazineRifleM16: RMCMagazineRifleCR16
+CMBeltMarineM16: RMCBeltMarineCR16
+RMCM17BeltFilled: RMCBeltMarineCR16
+RMCBeltNVFilledM16: RMCBeltNVFilledCR16
+RMCPouchMagazineFilledM16: RMCPouchMagazineFilledCR16
+RMCBoxMagazineRifleM16Empty: RMCBoxMagazineRifleCR16Empty
+RMCBoxMagazineRifleM16: RMCBoxMagazineRifleCR16
+RMCAttachmentM16Stock: RMCAttachmentCR16Stock
+RMCAttachmentM16StockCollapsible: RMCAttachmentCR16StockCollapsible
+RMCCartridgeRifleM16: RMCCartridgeRifleCR16
+
+RMCSpawnPointSurvivorHalcyonDynamicsLiaison: RMCSpawnPointSurvivorHalcyonLiaison

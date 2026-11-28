@@ -1,7 +1,6 @@
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Nutrition.Components;
@@ -13,9 +12,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Hemogenic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
-    private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
+    public override string Abbreviation => "HMG";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -24,55 +21,44 @@ public sealed partial class Hemogenic : RMCChemicalEffect
                        $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
                        $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] additional nutrient loss";
 
-        return ActualPotency > 3
+        return Potency > 3
             ? $"Deals [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond * 2}[/color] airloss damage, and slows you down.\n{baseText}"
             : baseText;
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var entityManager = args.EntityManager;
-        var target = args.TargetEntity;
-        var hungerSystem = entityManager.System<HungerSystem>();
-
-        if (!entityManager.TryGetComponent<HungerComponent>(target, out var hungerComponent) ||
-            hungerSystem.GetHunger(hungerComponent) < 200)
+        var hunger = System<HungerSystem>(args);
+        if (!TryComp<HungerComponent>(args, out var hungerComponent) || hunger.GetHunger(hungerComponent) < 200)
             return;
 
-        hungerSystem.ModifyHunger(target, -PotencyPerSecond); // TODO RMC14 Yuatja get no hunger drain.
+        hunger.ModifyHunger(args.TargetEntity, -PotencyPerSecond); // TODO RMC14 No hunger drain for Yuatjas.
 
-        if (entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream))
+        if (TryComp<BloodstreamComponent>(args, out var bloodstreamComponent))
         {
-            var bloodstreamSystem = entityManager.System<SharedBloodstreamSystem>();
-            bloodstreamSystem.TryModifyBloodLevel((target, bloodstream), potency);
+            var bloodstream = System<SharedBloodstreamSystem>(args);
+            bloodstream.TryModifyBloodLevel((args.TargetEntity, bloodstreamComponent), potency);
         }
 
-        var rmcBloodstreamSystem = entityManager.System<SharedRMCBloodstreamSystem>();
-        var shouldApplyDamage = ActualPotency > 3 &&
-                                rmcBloodstreamSystem.TryGetBloodSolution(target, out var bloodSolution) &&
-                                bloodSolution.Volume > 570; // TODO RMC14 Also check if they're not a Yautja.
-        if (!shouldApplyDamage)
-            return;
-        var damage = new DamageSpecifier();
-        damage.DamageDict[BluntType] = potency;
-        damage.DamageDict[AsphyxiationType] = potency * 2;
-        damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
-        // TODO RMC14 M.reagent_move_delay_modifier += potency
+        var rmcBloodstream = System<SharedRMCBloodstreamSystem>(args);
+        if (Potency > 3 &&
+            rmcBloodstream.TryGetBloodSolution(args.TargetEntity, out var bloodSolution) &&
+            bloodSolution.Volume > 570) // TODO RMC14 Also check if they're not a Yautja.
+        {
+            TryChangeDamage(args, BluntType, potency);
+            TryChangeDamage(args, AsphyxiationType, potency * 2);
+            // TODO RMC14 M.reagent_move_delay_modifier += potency
+        }
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var damage = new DamageSpecifier();
-        damage.DamageDict[PoisonType] = potency;
-        damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
+        TryChangeDamage(args, PoisonType, potency);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var entityManager = args.EntityManager;
-        var target = args.TargetEntity;
-        var hungerSystem = entityManager.System<HungerSystem>();
-
-        hungerSystem.ModifyHunger(target, PotencyPerSecond * -5);
+        var hunger = System<HungerSystem>(args);
+        hunger.ModifyHunger(args.TargetEntity, PotencyPerSecond * -5);
     }
 }

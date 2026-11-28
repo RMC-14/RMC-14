@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/hud/actions_xeno.dmi, new sprites by Aleksh",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/hud/actions_xeno.dmi, new sprites by Aleksh. xeno_spit_neuro, shift_spit_neurotoxin, and shift_spit_xeno_acid modified by Vermidia (Github). store_acid 0-5 made by Vermidia (Github).",
     "size": {
         "x": 32,
         "y": 32
@@ -537,6 +537,27 @@
         },
         {
             "name": "gas_mine_empowered"
+        },
+        {
+            "name": "xeno_spit_neuro"
+        },
+        {
+            "name": "store_acid_0"
+        },
+        {
+            "name": "store_acid_1"
+        },
+        {
+            "name": "store_acid_2"
+        },
+        {
+            "name": "store_acid_3"
+        },
+        {
+            "name": "store_acid_4"
+        },
+        {
+            "name": "store_acid_5"
         }
     ]
 }
