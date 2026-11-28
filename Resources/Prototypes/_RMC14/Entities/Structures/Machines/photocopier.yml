@@ -46,7 +46,7 @@
   - type: Icon
     sprite: _RMC14/Structures/Machines/photocopier.rsi
     state: bigscanner
-  # - type: ActivatableUIRequiresPower TODO RMC14 UI
+  - type: ActivatableUIRequiresPower
 
 - type: entity
   parent: RMCPhotocopier

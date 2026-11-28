@@ -17,6 +17,9 @@ public sealed partial class RMCDoorButtonComponent : Component
     public TimeSpan Cooldown = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
+    public float OneOffEnergy = 5;
+
+    [DataField, AutoNetworkedField]
     public string OffState = "doorctrl";
 
     [DataField, AutoNetworkedField]

@@ -4,6 +4,12 @@
   name: exosuit fabricator
   suffix: Prop, RMC
   components:
+  - type: ApcPowerReceiver
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+    # Decorative exosuit fabricator prop with upstream power explicitly disabled.
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: null

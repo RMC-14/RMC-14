@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Construction.Prototypes;
 using Content.Shared._RMC14.Prototypes;
+using Content.Shared.Interaction;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -23,4 +24,7 @@ public sealed partial class ConstructionPrototype : IInheritingPrototype, ICMSpe
 
     [DataField]
     public Color IconColor = Color.FromHex("#ffffff");
+
+    [DataField]
+    public float InteractionRange = SharedInteractionSystem.InteractionRange;
 }
