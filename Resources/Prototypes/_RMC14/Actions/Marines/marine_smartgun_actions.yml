@@ -33,6 +33,24 @@
 
 - type: entity
   parent: ActionMarineToggleable
+  id: RMCActionToggleAimAssist
+  name: Toggle Aim Assist
+  description: Redirect your shots to the nearest visible enemy within two tiles of your cursor. Redirected shots lose 25% accuracy on standard smart guns. Enabling this substantially increases battery drain.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: aimassist
+    iconOn:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: aimassist_off
+    useDelay: 0.25
+    itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:GunToggleAimAssistActionEvent
+
+- type: entity
+  parent: ActionMarineToggleable
   id: RMCActionToggleRecoil
   name: Toggle Recoil Compensation
   description: Removes all recoil when firing this gun.
