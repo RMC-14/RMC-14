@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by @inspector_jeleshka for RMC14",
+  "copyright": "Sprites by @inspector_jeleshka for RMC14, firestation taken from https://github.com/cmss13-devs/cmss13/blob/6313cf13a9575bc8c52296d8644d9e9cc9644f4f/icons/obj/structures/props/wall_decorations/semiotic_standard.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -285,6 +285,8 @@
     },
     {
       "name": "9"
-    }
-  ]
+    },
+    {
+      "name": "firestation"
+    }  ]
 }

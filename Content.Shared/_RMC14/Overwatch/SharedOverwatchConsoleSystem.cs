@@ -87,6 +87,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
+    private float _offsetAmount = OverwatchWatchingComponent.OffsetAmount;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
 
@@ -110,6 +111,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
 
+        SubscribeNetworkEvent<OverwatchCameraAdjustOffsetEvent>(OnCameraAdjustOffsetEvent);
+
         Subs.BuiEvents<OverwatchConsoleComponent>(OverwatchConsoleUI.Key, subs =>
         {
             subs.Event<OverwatchConsoleSelectSquadBuiMsg>(OnOverwatchSelectSquadBui);
@@ -127,12 +130,12 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleSupplyDropLatitudeBuiMsg>(OnOverwatchSupplyDropLatitudeBui);
             subs.Event<OverwatchConsoleSupplyDropLaunchBuiMsg>(OnOverwatchSupplyDropLaunchBui);
             subs.Event<OverwatchConsoleSupplyDropSaveBuiMsg>(OnOverwatchSupplyDropSaveBui);
-            subs.Event<OverwatchConsoleLocationCommentBuiMsg>(OnOverwatchSupplyDropCommentBui);
+            subs.Event<OverwatchConsoleSupplyDropCommentBuiMsg>(OnOverwatchSupplyDropCommentBui);
             subs.Event<OverwatchConsoleOrbitalLongitudeBuiMsg>(OnOverwatchOrbitalCoordinatesBui);
             subs.Event<OverwatchConsoleOrbitalLatitudeBuiMsg>(OnOverwatchOrbitalCoordinatesBui);
             subs.Event<OverwatchConsoleOrbitalLaunchBuiMsg>(OnOverwatchOrbitalLaunchBui);
-            // subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
-            // subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
+            subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
+            subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
             subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnOverwatchSendMessageBui);
             subs.Event<OverwatchConsoleSendLeaderMessageBuiMsg>(OnOverwatchSendLeaderMessageBui);
             subs.Event<OverwatchConsoleSetSquadObjectiveBuiMsg>(OnOverwatchSetSquadObjectiveBui);
@@ -420,9 +423,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (args.Target == default || !TryGetEntity(args.Target, out var target))
             return;
 
-        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
-            return;
-
         if (HasComp<ScopingComponent>(args.Actor))
         {
             if (_net.IsServer)
@@ -431,6 +431,17 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             }
             return;
         }
+
+        if (_net.IsClient)
+        {
+            // When trying to watch someone who's on a different map or just far away, the camera component isn't detected right away.
+            // So without this Watch(), you need to click twice to watch a marine before actually getting "overwatch" context.
+            Watch(args.Actor, default);
+            return;
+        }
+
+        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
+            return;
 
         Watch(args.Actor, camera);
     }
@@ -505,35 +516,15 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnOverwatchSupplyDropSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropSaveBuiMsg args)
     {
-        var locations = ent.Comp.SavedLocations;
-        if (locations.Length == 0)
+        if (_net.IsClient)
             return;
 
-        ref var last = ref ent.Comp.LastLocation;
-        if (last >= locations.Length)
-            last = 0;
-
-        locations[last] = new OverwatchSavedLocation(args.Longitude, args.Latitude, string.Empty);
-
-        last++;
-        Dirty(ent);
+        SaveLocation(ent, ent.Comp.SavedSupplyDropLocations, args.Longitude, args.Latitude);
     }
 
-    private void OnOverwatchSupplyDropCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleLocationCommentBuiMsg args)
+    private void OnOverwatchSupplyDropCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropCommentBuiMsg args)
     {
-        var locations = ent.Comp.SavedLocations;
-        if (args.Index < 0 || args.Index >= locations.Length)
-            return;
-
-        if (locations[args.Index] is not { } location)
-            return;
-
-        var comment = args.Comment;
-        if (comment.Length > 50)
-            comment = comment[..50];
-
-        locations[args.Index] = location with { Comment = comment };
-        Dirty(ent);
+        SaveLocationComment(ent, ent.Comp.SavedSupplyDropLocations, args.Index, args.Comment);
     }
 
     private void OnOverwatchOrbitalCoordinatesBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalLongitudeBuiMsg args)
@@ -563,15 +554,68 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _orbitalCannon.Fire(cannon, ent.Comp.OrbitalCoordinates, args.Actor, squad);
     }
 
-    // private void OnOverwatchOrbitalSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalSaveBuiMsg args)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    //
-    // private void OnOverwatchOrbitalCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalCommentBuiMsg args)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    private void OnOverwatchOrbitalSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalSaveBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        SaveLocation(ent, ent.Comp.SavedOrbitalLocations, args.Longitude, args.Latitude);
+    }
+
+    private void OnOverwatchOrbitalCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalCommentBuiMsg args)
+    {
+        SaveLocationComment(ent, ent.Comp.SavedOrbitalLocations, args.Index, args.Comment);
+    }
+
+    private void SaveLocation(
+        Entity<OverwatchConsoleComponent> ent,
+        OverwatchSavedLocation?[] locations,
+        int longitude,
+        int latitude)
+    {
+        if (locations.Length == 0)
+            return;
+
+        if (locations.Any(location =>
+                location is { } saved &&
+                saved.Longitude == longitude &&
+                saved.Latitude == latitude))
+        {
+            return;
+        }
+
+        var index = Array.IndexOf(locations, null);
+        if (index < 0)
+        {
+            Array.Copy(locations, 1, locations, 0, locations.Length - 1);
+            index = locations.Length - 1;
+        }
+
+        locations[index] = new OverwatchSavedLocation(longitude, latitude, string.Empty);
+        Dirty(ent);
+    }
+
+    private void SaveLocationComment(
+        Entity<OverwatchConsoleComponent> ent,
+        OverwatchSavedLocation?[] locations,
+        int index,
+        string comment)
+    {
+        if (index < 0 || index >= locations.Length)
+            return;
+
+        if (locations[index] is not { } location)
+            return;
+
+        if (comment.Length > 50)
+            comment = comment[..50];
+
+        if (location.Comment == comment)
+            return;
+
+        locations[index] = location with { Comment = comment };
+        Dirty(ent);
+    }
 
     private void OnOverwatchSendMessageBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSendMessageBuiMsg args)
     {
@@ -800,7 +844,44 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
+        _eye.SetOffset(watcher, Vector2.Zero);
         _eye.SetTarget(watcher, null);
+    }
+
+    protected virtual void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args)
+    {
+        ApplyCameraOffset(args.Actor, args.Direction);
+    }
+
+    private void ApplyCameraOffset(NetEntity actorNetEntity, OverwatchDirection direction)
+    {
+        if (!TryGetEntity(actorNetEntity, out var watchedUid) ||
+            !EntityManager.TryGetComponent<EyeComponent>(watchedUid.Value, out var eye) ||
+            !HasComp<OverwatchWatchingComponent>(GetEntity(actorNetEntity)))
+            return;
+
+        Vector2 offsetDelta = direction switch
+        {
+            OverwatchDirection.North => new Vector2(0, _offsetAmount),
+            OverwatchDirection.South => new Vector2(0, -_offsetAmount),
+            OverwatchDirection.East => new Vector2(_offsetAmount, 0),
+            OverwatchDirection.West => new Vector2(-_offsetAmount, 0),
+            _ => Vector2.Zero
+        };
+
+        if (offsetDelta == Vector2.Zero)
+        {
+            _eye.SetOffset(eye.Owner, Vector2.Zero);
+            return;
+        }
+
+        var offsetLimit = new Vector2(_offsetAmount, _offsetAmount);
+        offsetDelta = new Vector2(
+            Math.Clamp(offsetDelta.X, -offsetLimit.X, offsetLimit.X),
+            Math.Clamp(offsetDelta.Y, -offsetLimit.Y, offsetLimit.Y)
+        );
+
+        _eye.SetOffset(eye.Owner, offsetDelta);
     }
 
     private (List<OverwatchSquad> Squads, Dictionary<NetEntity, List<OverwatchMarine>> Marines) GetOverwatchData(OverwatchConsoleComponent console)

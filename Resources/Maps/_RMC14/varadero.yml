@@ -228739,18 +228739,6 @@ entities:
     - type: Transform
       pos: 16.5,77.5
       parent: 1
-    - type: Gun
-      soundGunshot: !type:SoundCollectionSpecifier
-        params:
-          variation: null
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: 0
-        collection: CMM54CShoot
 - proto: RMCWeaponShotgunM3717
   entities:
   - uid: 31976

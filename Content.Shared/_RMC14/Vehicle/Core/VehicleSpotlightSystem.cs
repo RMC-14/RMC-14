@@ -1,8 +1,7 @@
+using Content.Shared._RMC14.Input;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Input;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
@@ -24,30 +23,18 @@ public sealed class VehicleSpotlightSystem : EntitySystem
         if (_net.IsClient)
         {
             CommandBinds.Builder
-                .Bind(ContentKeyFunctions.FlipObject, InputCmdHandler.FromDelegate(session =>
-                {
-                    if (session?.AttachedEntity is not { } user)
-                        return;
-
-                    EntityUid? vehicleUid = null;
-                    if (TryComp<VehicleOperatorComponent>(user, out var op) && op.Vehicle != null)
-                    {
-                        vehicleUid = op.Vehicle.Value;
-                    }
-                    else if (_rmcVehicles.TryGetVehicleFromInterior(user, out var interiorVehicle) && interiorVehicle != null)
-                    {
-                        vehicleUid = interiorVehicle.Value;
-                    }
-
-                    if (vehicleUid == null)
-                        return;
-
-                    RaiseNetworkEvent(new VehicleSpotlightToggleRequestEvent(GetNetEntity(vehicleUid.Value)));
-                }, handle: true))
+                .Bind(CMKeyFunctions.RMCVehicleSpotlight, new VehicleOperatorInputCmdHandler(_rmcVehicles,
+                    vehicle => RaiseNetworkEvent(new VehicleSpotlightToggleRequestEvent(GetNetEntity(vehicle)))))
                 .Register<VehicleSpotlightSystem>();
         }
 
         SubscribeNetworkEvent<VehicleSpotlightToggleRequestEvent>(OnSpotlightToggleRequest);
+    }
+
+    public override void Shutdown()
+    {
+        if (_net.IsClient)
+            CommandBinds.Unregister<VehicleSpotlightSystem>();
     }
 
     private void OnSpotlightStartup(Entity<VehicleSpotlightComponent> ent, ref ComponentStartup args)

@@ -12,6 +12,8 @@ using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Telephone;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -134,6 +136,7 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, CheckMeleeTargetEvent>(OnXenoCheckMeleeTarget);
+        SubscribeLocalEvent<XenoComponent, CheckGunTargetEvent>(OnXenoCheckGunTarget);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
         SubscribeLocalEvent<XenoComponent, MeleeAttackAttemptEvent>(OnXenoMeleeAttackAttempt);
         SubscribeLocalEvent<XenoComponent, XenoHealAttemptEvent>(OnHealAttempt);
@@ -259,7 +262,29 @@ public sealed partial class XenoSystem : EntitySystem
         if (args.Defer)
             return;
 
-        // Xenos prefer to attack or tackle non-allies.
+        // Xenos prefer not to attack or tackle allies.
+        if (_hive.FromSameHiveOrAlly(xeno.Owner, args.Target))
+        {
+            args.Defer = true;
+        }
+    }
+
+    // Oh god who taught xenos how to shoot guns?!
+    private void OnXenoCheckGunTarget(Entity<XenoComponent> xeno, ref CheckGunTargetEvent args)
+    {
+        if (args.Skip)
+            return;
+
+        // Xenos can never shoot themselves
+        if (xeno.Owner == args.Target)
+        {
+            args.Skip = true;
+        }
+
+        if (args.Defer)
+            return;
+
+        // Xenos prefer not to shoot allies
         if (_hive.FromSameHiveOrAlly(xeno.Owner, args.Target))
         {
             args.Defer = true;
@@ -568,6 +593,13 @@ public sealed partial class XenoSystem : EntitySystem
         // hiveless xenos can attack eachother
         if (_hive.FromSameHive(xeno, target))
             return false;
+
+        // banished xenos can't harm the hive they were banished from, the hive can still harm them
+        if (TryComp(xeno, out XenoBanishComponent? banish) &&
+            _hive.IsMember(target, banish.OriginalHive))
+        {
+            return false;
+        }
 
         if (_mobState.IsDead(target))
             return false;

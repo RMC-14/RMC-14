@@ -76,6 +76,11 @@
   - type: Tag
     tags:
     - RMCMetalBarricade
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-barricades
+    whitelist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCMetalBarricade
@@ -291,6 +296,19 @@
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHandrailStoneAlt
+  components:
+  - type: Sprite
+    color: "#bbbaae"
+    layers:
+    - state: handrail_stone_b
+    - map: [ "acided" ]
+  - type: Construction
+    graph: BarricadeHandrailGraph
+    node: nodeHandrail
 
 - type: entity
   parent: RMCBarricadeHandrailAlt
@@ -551,3 +569,8 @@
   - type: RMCOpenOnlyWhenUnanchored
   - type: RMCFoldingBarricadeLinking
     linkable: false
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-folding-barricade
+    whitelist:
+      components:
+      - Xeno

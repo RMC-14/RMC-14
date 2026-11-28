@@ -16,6 +16,15 @@
     bullet: 30
     bio: 25
     # armor_energy = 15
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorNightVisionAdvanced
+    # TODO RMC14 security visor
 
 # Dutch's Dozen
 - type: entity
