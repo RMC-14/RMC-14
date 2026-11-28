@@ -5,19 +5,19 @@ using Content.Shared._RMC14.Xenonids.Projectile.Spit.Dissolver;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Robust.Shared.Utility;
-using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsComponent;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
 public sealed class XenoDissolverBombardSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -36,7 +36,7 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
             return;
 
         //Can't use during windups
-        if (xeno.Comp.BombardDoafter != null || xeno.Comp.StoredAcid >= xeno.Comp.MaxStoredAcid)
+        if (_doafter.IsRunning(xeno.Comp.BombardDoafter) || xeno.Comp.StoredAcid >= xeno.Comp.MaxStoredAcid)
             return;
 
         if (!_rmcActions.TryUseAction(args))
@@ -57,7 +57,7 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
 
         // Do retargeting if doafter is currently running
         // TODO RMC14 allow changing target on mouse drag
-        if (xeno.Comp.BombardDoafter != null)
+        if (_doafter.IsRunning(xeno.Comp.BombardDoafter))
         {
             xeno.Comp.TargetCoordinates = args.Target;
             xeno.Comp.TargetEnt = args.Entity;
@@ -84,9 +84,6 @@ public sealed class XenoDissolverBombardSystem : EntitySystem
 
     private void OnXenoDissolverBombardDoAfterEvent(Entity<XenoDissolverBombardComponent> xeno, ref XenoDissolverBombardDoAfterEvent args)
     {
-        xeno.Comp.BombardDoafter = null;
-        Dirty(xeno);
-
         if (args.Handled || args.Cancelled || xeno.Comp.TargetCoordinates == null)
             return;
 
