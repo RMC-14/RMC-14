@@ -7,6 +7,12 @@
   spawnMenuRoleName: We-Ya Goon (Survivor)
   icon: "RMCJobIconPMCGoonStandard"
   hasIcon: true
+  ranks:
+    RMCRankWeYaSeniorSecurity:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
+    RMCRankWeYaSecurity: []
   accessGroups:
   - ColonistAllAccessNoArmory
   - ColonistCorporate

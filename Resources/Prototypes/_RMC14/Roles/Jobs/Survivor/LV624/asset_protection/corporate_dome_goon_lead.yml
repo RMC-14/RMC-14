@@ -8,7 +8,7 @@
   icon: "RMCJobIconPMCGoonLead"
   hasIcon: true
   ranks:
-    RMCRankCivilianSeniorOfficer: []
+    RMCRankWeYaSecurityLead: []
   special:
   - !type:AddComponentSpecial
     components:
