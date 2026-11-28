@@ -27,7 +27,6 @@ public sealed partial class CMDistressSignalRuleSystem
     private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
         var planet = SelectRandomPlanet();
-        TrackPlayedPlanet(planet.Proto.ID);
 
         if (!_mapLoader.TryLoadMap(planet.Comp.Map, out var mapNullable, out var grids))
             return false;
@@ -45,6 +44,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (grids.Count > 1)
             Log.Error("Multiple planet-side grids found");
 
+        TrackPlayedPlanet(planet.Proto.ID);
         rule.Comp.XenoMap = grids.First();
         _mapSystem.InitializeMap((map, map));
 
@@ -109,9 +109,9 @@ public sealed partial class CMDistressSignalRuleSystem
     /// Forces the selected planet for the current round, overriding random selection or voting.
     /// </summary>
     /// <param name="planet">The planet to use for this round.</param>
-    public bool SetPlanet(RMCPlanet planet)
+    public void SetPlanet(RMCPlanet planet)
     {
-        return TryPersistVotingState(planet, _carryoverVotes, keepPendingOnFailure: false);
+        ApplyAndQueueVotingState(planet, _carryoverVotes);
     }
 
     /// <summary>
@@ -119,9 +119,11 @@ public sealed partial class CMDistressSignalRuleSystem
     /// </summary>
     private void StartPlanetVote()
     {
-        if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote) || !TryPreparePersistence())
+        if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
             return;
 
+        UpdatePersistence();
+        _hasLocalVotingState = true;
         var planets = _rmcPlanet.GetCandidatesInRotation();
         if (!_useCarryoverVoting)
         {
@@ -131,7 +133,11 @@ public sealed partial class CMDistressSignalRuleSystem
             }
         }
 
-        planets.RemoveAll(p => _lastPlanetMaps.Contains(p.Proto.ID));
+        var eligible = planets.Where(planet => !_lastPlanetMaps.Contains(planet.Proto.ID)).ToList();
+        if (eligible.Count > 0)
+            planets = eligible;
+        if (planets.Count == 0)
+            return;
 
         var options = new List<(string text, object data)>();
         foreach (var planet in planets)
@@ -208,7 +214,7 @@ public sealed partial class CMDistressSignalRuleSystem
             }
 
             carryoverVotes[picked.Proto.ID] = 0;
-            TryPersistVotingState(picked, carryoverVotes, keepPendingOnFailure: true, sb.ToString());
+            ApplyAndQueueVotingState(picked, carryoverVotes, sb.ToString());
         };
         _currentVote.OnCancelled += _ => _currentVote = null;
     }

@@ -72,7 +72,6 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
-using Robust.Shared.Asynchronous;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -161,7 +160,6 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly ServerDbEntryManager _dbEntry = default!;
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
-    [Dependency] private readonly ITaskManager _task = default!;
 
     private float _marinesPerXeno;
     private bool _autoBalance;
@@ -312,10 +310,16 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
     private void OnMapLoading(LoadingMapsEvent ev)
     {
-        if (TryPreparePersistence())
-            SelectRandomPlanet();
+        UpdatePersistence();
+        SelectRandomPlanet();
 
         GameTicker.UpdateInfoText();
+    }
+
+    public override void Update(float frameTime)
+    {
+        UpdatePersistence();
+        base.Update(frameTime);
     }
 
     /// <summary>

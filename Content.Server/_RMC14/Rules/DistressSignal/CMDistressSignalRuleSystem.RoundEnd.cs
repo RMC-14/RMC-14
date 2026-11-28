@@ -239,7 +239,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (distress == null)
             return;
 
-        if (distress.Result is not { } result || result == DistressSignalRuleResult.None)
+        if (distress.Result is not { } result)
             return;
 
         var audio = result switch
@@ -260,10 +260,7 @@ public sealed partial class CMDistressSignalRuleSystem
             DistressSignalRuleResult.MajorMarineVictory => -1,
             DistressSignalRuleResult.MinorMarineVictory => -1,
             DistressSignalRuleResult.MajorXenoVictory => 1,
-            DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die or timeout happens
-            DistressSignalRuleResult.AllDied => 0,
-            DistressSignalRuleResult.SelfDestruct => 0,
-            _ => throw new ArgumentOutOfRangeException(),
+            _ => 0,
         };
 
         var value = _marinesPerXeno;
