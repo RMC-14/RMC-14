@@ -67,6 +67,7 @@
         choices: { CMHelmet: 1 }
         entries:
         - id: RMCHeadCapExecutiveBodyguard
+        - id: RMCArmorHelmetPMCBlack
         - id: RMCArmorHelmetExecutiveBodyguard
       - name: Mask
         choices: { CMMask: 1 }

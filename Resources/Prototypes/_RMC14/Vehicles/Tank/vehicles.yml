@@ -5,6 +5,10 @@
   name: tank
   description: A heavy armored tank built for battlefield dominance.
   components:
+  - type: VehicleSafety
+    icon:
+      sprite: _RMC14/Interface/map_blips_large.rsi
+      state: tank
   - type: VehicleLock
     access:
     - CMAccessCrewman
@@ -174,6 +178,11 @@
     - offset: 0,2
       radius: 1
       interiorCoords: 0.5,-1
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-tank
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: VehicleTankBase
