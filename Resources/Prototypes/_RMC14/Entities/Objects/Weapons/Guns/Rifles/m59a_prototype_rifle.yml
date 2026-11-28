@@ -157,7 +157,7 @@
       gun_chamber: !type:ContainerSlot
   - type: Gun
     soundGunshot:
-      collection: RMCSSG45Shoot
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m20a.ogg
       params:
         pitch: 0.95
   - type: GunIDLock

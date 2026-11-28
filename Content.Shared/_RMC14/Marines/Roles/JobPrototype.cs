@@ -49,6 +49,9 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     [DataField]
     public readonly string? SpawnMenuRoleName;
 
+    [ViewVariables(VVAccess.ReadOnly)]
+    public string? SpawnMenuRoleNameLocalized => SpawnMenuRoleName is { } ? Loc.GetString(SpawnMenuRoleName) : null;
+
     [DataField]
     public readonly string? NewToJobInfo;
 
@@ -95,4 +98,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// </summary>
     [DataField]
     public readonly Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
+
+    [DataField]
+    public readonly LocId? FirstDeploymentAssignment;
 }

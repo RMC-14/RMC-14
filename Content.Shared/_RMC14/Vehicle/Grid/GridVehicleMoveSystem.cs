@@ -61,6 +61,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly VehicleSafetySystem _vehicleSafety = default!;
     [Dependency] private readonly VehicleWheelSystem _wheels = default!;
 
     private EntityQuery<MapGridComponent> gridQ;

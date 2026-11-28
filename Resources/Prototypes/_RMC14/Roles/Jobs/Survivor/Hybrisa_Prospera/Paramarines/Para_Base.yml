@@ -27,10 +27,10 @@
     id: RMCIDRoyalParamarinesRifleman
     ears: RMCHeadsetPara
     belt: RMCBeltHolsterPistolParaM44Random
-    pocket1: RMCPouchFirstAidSplintsGauzeOintment 
+    pocket1: RMCPouchFirstAidRCMFirstAidSplintsGauzeOintment
     pocket2: RMCPouchFlareL96Filled
     suitstorage: RMCWeaponRifleL88A2Filled
-    
+
 - type: entity
   id: RMCGearSurvivorPresetPara
   name: para preset

@@ -207,7 +207,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (args.Cancelled || args.Handled || args.Target == null)
             return;
 
-        if (Infect(ent, args.Target.Value))
+        if (Infect(ent, args.Target.Value, user: args.User))
             args.Handled = true;
     }
 
@@ -510,9 +510,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (!CanInfectPopup(parasite, victim, user))
             return false;
 
-        if (_net.IsServer && TryComp<ActorComponent>(user, out var actor))
-            parasite.Comp.PendingInfectorUserId = actor.PlayerSession.UserId;
-
         var ev = new AttachParasiteDoAfterEvent();
         var delay = parasite.Comp.ManualAttachDelay;
 
@@ -585,7 +582,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         return true;
     }
 
-    public bool Infect(Entity<XenoParasiteComponent> parasite, EntityUid victim, bool popup = true, bool force = false)
+    public bool Infect(Entity<XenoParasiteComponent> parasite, EntityUid victim, bool popup = true, bool force = false, EntityUid? user = null)
     {
         if (!CanInfectPopup(parasite, victim, parasite, popup, force))
             return false;
@@ -593,8 +590,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (!TryComp(victim, out InfectableComponent? infectable))
             return false;
 
-        if (_net.IsServer && TryComp<ActorComponent>(parasite, out var infector))
-            parasite.Comp.PendingInfectorUserId = infector.PlayerSession.UserId;
+        if (_net.IsServer)
+        {
+            var direct = user == null || user == parasite.Owner;
+            parasite.Comp.PendingInfectorUserId = direct && TryComp<ActorComponent>(parasite, out var infector)
+                ? infector.PlayerSession.UserId
+                : null;
+        }
 
         if (_net.IsServer)
         {

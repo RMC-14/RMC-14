@@ -1,10 +1,9 @@
-﻿# TODO RMC14 other effects
-- type: reagent
+﻿- type: reagent
   parent: [ CMReagentMedicine, Dylovene ]
   id: CMDylovene
   name: reagent-name-cmdylovene
   desc: reagent-desc-cmdylovene
-  color: "#3fc92a"
+  color: "#3EA72A"
   overdose: 30
   criticalOverdose: 50
   metabolisms:
@@ -12,11 +11,10 @@
       metabolismRate: 0.1
       effects:
       - !type:Antitoxic
-        potency: 2
+        level: 2
       - !type:Antihallucinogenic
-        potency: 2
+        level: 2
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Ethylredoxrazine ]
   id: CMEthylredoxrazine
@@ -30,15 +28,14 @@
       metabolismRate: 0.1
       effects:
       - !type:Focusing
-        potency: 3
+        level: 3
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Arithrazine ]
   id: CMArithrazine
   name: reagent-name-cmarithrazine
   desc: reagent-desc-cmarithrazine
-  color: "#3c8529"
+  color: "#3C8529"
   overdose: 15
   criticalOverdose: 25
   metabolisms:
@@ -46,16 +43,16 @@
       metabolismRate: 0.03
       effects:
       - !type:Antitoxic
-        potency: 1
+        level: 1
       - !type:Biocidic
-        potency: 1
+        level: 1
 
 - type: reagent
   parent: [ CMReagentMedicine, Bicaridine ]
   id: CMBicaridine
   name: reagent-name-cmbicaridine
   desc: reagent-desc-cmbicaridine
-  color: "#ed4847"
+  color: "#E7554A"
   overdose: 30
   criticalOverdose: 50
   metabolisms:
@@ -63,14 +60,14 @@
       metabolismRate: 0.1
       effects:
       - !type:Neogenetic
-        potency: 2
+        level: 2
 
 - type: reagent
   parent: [ CMReagentMedicine, Stimulants ]
   id: RMCUltrazine
   name: reagent-name-rmcultrazine
   desc: reagent-desc-rmcultrazine
-  color: "#ffe043"
+  color: "#FFE043"
   overdose: 30
   criticalOverdose: 50
   metabolisms:
@@ -86,34 +83,43 @@
         time: 3
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Cryoxadone ]
   id: CMCryoxadone
   name: reagent-name-cmcryoxadone
   desc: reagent-desc-cmcryoxadone
-  color: "#4acaca"
+  color: "#4ACACA"
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
+      - !type:Cryometabolizing
+        level: 2
+      - !type:Neogenetic
+        level: 1
+      - !type:Anticorrosive
+        level: 1
+      - !type:Antitoxic
+        level: 1
+      - !type:Anticarcinogenic
+        level: 1
       - !type:EqualHealthChange
         conditions:
         - !type:Temperature
-          max: 170
+          max: 210
         damage:
-        - Brute: -1
-        - Burn: -1
-        - Toxin: -1.5
+        - Brute: -0.5
+        - Burn: -0.5
+        - Toxin: -0.5
         - Airloss: -0.5
-        - Genetic: -1
+        - Genetic: -0.5
 
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
   id: CMDermaline
   name: reagent-name-cmdermaline
   desc: reagent-desc-cmdermaline
-  color: "#e2972e"
+  color: "#E2972E"
   overdose: 15
   criticalOverdose: 25
   metabolisms:
@@ -121,14 +127,14 @@
       metabolismRate: 0.1
       effects:
       - !type:Anticorrosive
-        potency: 3
+        level: 3
 
 - type: reagent
   parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
   name: reagent-name-cmdexalin
   desc: reagent-desc-cmdexalin
-  color: "#1f28a7"
+  color: "#1F28A7"
   overdose: 30
   criticalOverdose: 50
   metabolisms:
@@ -136,14 +142,14 @@
       metabolismRate: 0.1
       effects:
       - !type:Oxygenating
-        potency: 4
+        level: 4
 
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
   name: reagent-name-cmdexalinplus
   desc: reagent-desc-cmdexalinplus
-  color: "#5887D5"
+  color: "#4D5CDB"
   overdose: 15
   criticalOverdose: 25
   metabolisms:
@@ -151,16 +157,15 @@
       metabolismRate: 0.1
       effects:
       - !type:Oxygenating
-        potency: 6
+        level: 6
 
-# TODO RMC14 other effects (pain)
-# TODO RMC14 injected only
+# TODO RMC14 PROPERTY_PAINKILLING = 0.75
 - type: reagent
   parent: [ CMReagentMedicine, Epinephrine ]
   id: CMEpinephrine
   name: reagent-name-cmepinephrine
   desc: reagent-desc-cmepinephrine
-  color: "#6bd43c"
+  color: "#FFF0B9"
   overdose: 10.5
   criticalOverdose: 20
   metabolisms:
@@ -168,7 +173,9 @@
       metabolismRate: 0.2
       effects:
       - !type:Electrogenetic
-        potency: 2
+        level: 2
+      - !type:Intravenous
+        level: 1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -185,57 +192,28 @@
             Asphyxiation: 1.5
 
 # TODO RMC14 other effects (heart damage) (pain)
-# TODO RMC14 allow breathing in crit instead of reducing asphyxiation
+# TODO RMC14 allow breathing in crit
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
   id: CMInaprovaline
   name: reagent-name-cminaprovaline
   desc: reagent-desc-cminaprovaline
-  color: "#fe33cb"
+  color: "#E688B7"
   overdose: 60
   criticalOverdose: 100
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
-        damage:
-          types:
-            Asphyxiation: -1
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        key: Unconscious
-        component: RMCUnconscious # Change to Knockdown+Stun refresh: true
-        time: 40
-        type: Add
-        refresh: true
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold #0.25 heart damage/s
-          min: 100               #5% chance emote twitch, blink_r, shiver
-        # TODO RMC14 Drowsiness. if drowsiness > 10 5% change to paralyze(knockout) for 10 seconds.
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: true
+      - !type:Cardiostabilizing
+        level: 3
 
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]
   id: CMKelotane
   name: reagent-name-cmkelotane
   desc: reagent-desc-cmkelotane
-  color: "#f5e123"
+  color: "#D8B343"
   overdose: 30
   criticalOverdose: 50
   metabolisms:
@@ -243,9 +221,8 @@
       metabolismRate: 0.1
       effects:
       - !type:Anticorrosive
-        potency: 2
+        level: 2
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Leporazine ]
   id: CMLeporazine
@@ -259,15 +236,14 @@
       metabolismRate: 0.1
       effects:
       - !type:Thermostabilizing
-        potency: 2
+        level: 2
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Tricordrazine ]
   id: CMTricordrazine
   name: reagent-name-cmtricordrazine
   desc: reagent-desc-cmtricordrazine
-  color: "#d87f2b"
+  color: "#D87F2B"
   overdose: 30
   criticalOverdose: 50
   metabolisms:
@@ -275,20 +251,20 @@
       metabolismRate: 0.1
       effects:
       - !type:Neogenetic
-        potency: 1
+        level: 1
       - !type:Anticorrosive
-        potency: 1
+        level: 1
       - !type:Antitoxic
-        potency: 1
+        level: 1
       - !type:Oxygenating
-        potency: 1
+        level: 1
 
 - type: reagent
   parent: [ CMReagentMedicine, CMBicaridine ]
   id: CMMeralyne
   name: reagent-name-cmmeralyne
   desc: reagent-desc-cmmeralyne
-  color: "#b40000"
+  color: "#B40000"
   overdose: 15
   criticalOverdose: 25
   metabolisms:
@@ -296,9 +272,9 @@
       metabolismRate: 0.1
       effects:
       - !type:Neogenetic
-        potency: 3
+        level: 3
 
-# TODO RMC14 other effects
+# TODO RMC14 PROPERTY_OCULOPEUTIC = 2
 # TODO RMC14 progressive eye healing
 # TODO RMC14 brain damage over 50u
 - type: reagent
@@ -324,35 +300,34 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 50 #TODO 0.5 brain damage/s
+          min: 50
         damage:
           groups:
             Brute: 0.5
             Burn: 0.5
             Toxin: 1.5
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, CMCryoxadone ]
   id: CMClonexadone
   name: reagent-name-cmclonexadone
   desc: reagent-desc-cmclonexadone
-  color: "#51b4db"
+  color: "#51B4DB"
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        conditions:
-        - !type:Temperature
-          max: 170
-        damage:
-        - Brute: -2.25
-        - Burn: -2.25
-        - Toxin: -3
-        - Genetic: -1.5
+      - !type:Cryometabolizing
+        level: 6
+      - !type:Neogenetic
+        level: 3
+      - !type:Anticorrosive
+        level: 3
+      - !type:Antitoxic
+        level: 3
+      - !type:Anticarcinogenic
+        level: 3
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, CMArithrazine ]
   id: RMCRussianRed
@@ -366,9 +341,9 @@
       metabolismRate: 0.5
       effects:
       - !type:Antitoxic
-        potency: 1
+        level: 1
       - !type:Biocidic
-        potency: 2
+        level: 2
 
 # Antidepressants/ADHD meds
 - type: reagent
@@ -383,7 +358,7 @@
     Medicine:
       metabolismRate: 0.01 # 1, 200 seconds is 0.005, but fixed point 2
       effects:
-      - !type:PopupMessage #TODO -2 confusion stat and message in 5 min intervals
+      - !type:PopupMessage # TODO PROPERTY_PSYCHOSTIMULATING = 4
         type: Local
         messages: [ "antidepressant-effect-rmcmethylphenidate" ]
         probability: 0.05
@@ -398,7 +373,7 @@
     Medicine:
       metabolismRate: 0.01 # 1, 200 seconds
       effects:
-      - !type:PopupMessage #TODO -1 confusion stat and message in 5 min intervals
+      - !type:PopupMessage # TODO PROPERTY_PSYCHOSTIMULATING = 2
         type: Local
         messages: [ "antidepressant-effect-rmccitalopram" ]
         probability: 0.05
@@ -413,20 +388,12 @@
     Medicine:
       metabolismRate: 0.01 # 1, 200 seconds
       effects:
-      - !type:PopupMessage #TODO -3 confusion stat and message in 5 min intervals
+      - !type:PopupMessage # TODO PROPERTY_PSYCHOSTIMULATING = 6
         type: Local
         messages: [ "antidepressant-effect-rmcparoxetine" ]
         probability: 0.05
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectSeeingRainbow
-        type: Add
-        time: 1.5 #TODO max 30
-        refresh: false
-      - !type:Jitter
-      - !type:Emote
-        emote: Laugh #TODO twitches, drools, moans.
-        showInChat: true
-        probability: 0.05
+      - !type:Hallucinogenic
+        level: 6
 
 # Zombie Cure
 - type: reagent
@@ -459,4 +426,4 @@
       metabolismRate: 0.1
       effects:
       - !type:Ketogenic
-        potency: 4
+        level: 4

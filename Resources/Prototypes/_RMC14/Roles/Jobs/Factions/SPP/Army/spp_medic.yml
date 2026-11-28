@@ -113,7 +113,7 @@
     shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponSMGType64
     id: RMCIDSPP
-    belt: CMBeltMedicBagFilled
+    belt: RMCBeltMedicBagSPPFilled
     back: RMCSatchelSPPMedic
     pocket1: RMCPouchMedkitFillSPP
     pocket2: RMCPouchMagazineType64

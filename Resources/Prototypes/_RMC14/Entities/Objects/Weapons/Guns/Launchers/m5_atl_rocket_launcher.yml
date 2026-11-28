@@ -61,6 +61,11 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
       state: all
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rocket-launcher
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: [RMCBaseWeaponLauncher, RMCBaseAttachableHolder]
@@ -87,6 +92,11 @@
   - type: Corrodible
     isCorrodible: false
   - type: RMCMagneticItem
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-m5atl
+    whitelist:
+      components:
+      - Xeno
 
 # 84mm HE
 - type: entity
@@ -114,6 +124,11 @@
     suffix: false
   - type: IgnorePredictionHide
   - type: AssistedReloadAmmo
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rocket
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   id: RMCBaseProjectileRocket84mm
@@ -288,6 +303,11 @@
     state: m5_84mm_wp
     suffix: false
   - type: IgnorePredictionHide
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rocket-wp
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseProjectileRocket84mm
@@ -323,8 +343,8 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmokeWhitePhosphorusNoSpread
-  categories: [ HideSpawnMenu ]
+  id: RMCSmokeWhitePhosphorus
+  suffix: White Phosphorus
   components:
   - type: Transform
     anchored: true
@@ -345,12 +365,6 @@
     burnColor: "#00b8ff"
   - type: EdgeSpreader
     id: Smoke
-
-- type: entity
-  parent: RMCSmokeWhitePhosphorusNoSpread
-  id: RMCSmokeWhitePhosphorus
-  components:
   - type: EvenSmoke
-    spawn: RMCSmokeWhitePhosphorusNoSpread
     initialSpread: 3
     range: 3
