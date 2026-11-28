@@ -6,6 +6,26 @@
   components:
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
   - type: Clothing
@@ -58,6 +78,26 @@
   components:
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
     layers:
@@ -113,6 +153,26 @@
   components:
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
     layers:
@@ -145,6 +205,26 @@
   components:
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
     layers:
@@ -180,6 +260,26 @@
   components:
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/experimental_meson_hud.rsi
     layers:
@@ -217,6 +317,26 @@
   components:
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud/medicalhudold.rsi
   - type: Clothing
@@ -277,6 +397,26 @@
   components:
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/securityhud.rsi
   - type: Clothing
@@ -313,6 +453,26 @@
   components:
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/reagenthud.rsi
   - type: Clothing
@@ -367,6 +527,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
+      state: equipped-EYES
   - type: Tag
     tags:
     - RMCPrescriptionGlasses
@@ -387,6 +551,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
@@ -416,6 +584,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -440,6 +612,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/black_ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/black_ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -464,6 +640,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -488,6 +668,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/red_ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/red_ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -512,6 +696,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -536,6 +724,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/purple_ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/purple_ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -560,6 +752,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/yellow_ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/yellow_ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -584,6 +780,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -608,6 +808,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -632,12 +836,21 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
   id: RMCGogglesPrescriptionBallistic # TODO make this actually prescription
   name: prescription marine ballistic goggles
   description: Standard issue UNMC goggles. Mostly used to decorate one's helmet. Contains prescription lenses in case you weren't sure if they were lame or not.
+  components:
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -662,6 +875,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: ClothingEyesBase
@@ -714,6 +931,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
@@ -744,6 +965,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm_rp.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm_rp.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
@@ -774,6 +999,10 @@
     hatToggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm_tint.rsi
       state: hat-down
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm_tint.rsi
+      state: equipped-EYES
 
 # Identical to upstream ones, sans the name and description
 - type: entity
@@ -794,12 +1023,21 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/sunglasses.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/sunglasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCSunglasses
   id: RMCPrescriptionSunglasses
   name: prescription sunglasses
   description: A mixture of coolness and the inherent nerdiness of a prescription. Somehow manages to conceal both.
+  components:
+    - type: GlassesAccessory
+      rsi:
+        sprite: _RMC14/Objects/Clothing/Eyes/Glasses/sunglasses.rsi
+        state: equipped-EYES
 
 # Identical to upstream ones, sans the name and description
 - type: entity
@@ -822,6 +1060,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCEyepatch
@@ -877,6 +1119,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses.rsi
+      state: equipped-EYES
 
 
 - type: entity
@@ -895,6 +1141,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGlassesTriMaxYellow
@@ -908,6 +1158,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGlassesTriMaxYellow
@@ -922,6 +1176,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCSunglasses
@@ -941,6 +1199,10 @@
     - EYES
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-trimex-personal-shades
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCSunglassesBigFake
@@ -1001,6 +1263,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGlassesTriMaxYellowFake
@@ -1010,6 +1276,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCGlassesTriMaxYellowFake
@@ -1020,6 +1290,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: ClothingEyesBase
@@ -1040,6 +1314,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators.rsi
+      state: equipped-EYES
 
 
 - type: entity
@@ -1056,6 +1334,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: ClothingEyesBase
@@ -1076,6 +1358,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hipster.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hipster.rsi
+      state: equipped-EYES
 
 # Hippie Glasses
 
@@ -1092,6 +1378,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCHippieGlasses
@@ -1107,6 +1397,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -1121,6 +1415,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -1135,6 +1433,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -1149,6 +1451,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -1163,6 +1469,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -1177,6 +1487,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -1191,6 +1505,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
       state: helmet
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: ClothingEyesBase
@@ -1223,6 +1541,26 @@
     - RMCWeldingGoggle
   - type: Item
     storedRotation: 0
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      whitelist:
+        components:
+        - GlassesAccessory
+  - type: GlassesAccessoryHolder
+    isHat: false
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
@@ -1269,6 +1607,10 @@
     slots:
     - MASK
     - EYES
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/kutjevo_goggles.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: ClothingEyesBase
@@ -1285,6 +1627,10 @@
     slots:
     - MASK
     - EYES
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/jensen_shades.rsi
+      state: equipped-EYES
 
 - type: entity
   parent: ClothingEyesBase
@@ -1301,3 +1647,7 @@
     slots:
     - MASK
     - EYES
+  - type: GlassesAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/monocle.rsi
+      state: equipped-EYES
