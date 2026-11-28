@@ -896,3 +896,47 @@
   - type: Tag
     tags:
     - Soup
+
+#Contents from candies.rsi
+
+- type: entity
+  name: chocolate bar
+  parent: BaseItem
+  id: RMCFoodSnackChocolate
+  description: Such sweet, fattening food.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: chocolatebar
+  - type: Item
+    heldPrefix: chocolatebar
+    size: Tiny
+  - type: Tag
+    tags:
+    - FoodSnack
+
+- type: entity
+  name: candied apple
+  parent: BaseItem
+  id: RMCFoodSnackCandiedApple
+  description: An apple coated in sugary sweetness.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: candiedapple
+  - type: Tag
+    tags:
+    - FoodSnack
+
+- type: entity
+  name: candy corn
+  parent: BaseItem
+  id: RMCFoodSnackCandiedApple
+  description: It's a handful of candy corn. Cannot be stored in a detective's hat, alas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: candy_corn
+  - type: Tag
+    tags:
+    - FoodSnack
