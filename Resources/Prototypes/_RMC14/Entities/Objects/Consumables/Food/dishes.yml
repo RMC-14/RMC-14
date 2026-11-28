@@ -1,6 +1,25 @@
 # Contents of dishes.rsi
 
 - type: entity
+  parent: FoodInjectableBase
+  id: RMCFoodMealBase
+  abstract: true
+  description: A delicious meal, cooked with love.
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Food
+  - type: Sprite
+    sprite: _RMC14\Objects\Consumable\Food\testing.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 26
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+
+- type: entity
   name: berry clafoutis
   parent: FoodPieBase
   id: RMCFoodPieClafoutis
@@ -42,7 +61,7 @@
 
 - type: entity
   name: loaded baked potato
-  parent: FoodMealBase
+  parent: RMCFoodMealBase
   id: RMCFoodMealPotatoLoaded
   description: Totally baked.
   components:
@@ -51,9 +70,7 @@
     - cheesy
     - potatoes
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
     state: loadedbakedpotato
-# Tastes like potato.
 
 - type: entity
   name: space fries
@@ -68,7 +85,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
     state: fries
-# Tastes like fries, salt.
 
 - type: entity
   name: cheesy fries
@@ -84,7 +100,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
     state: cheesyfries
-# Tastes like fries, cheese.
 
 - type: entity
   name: carrot fries
@@ -225,7 +240,7 @@
 
 - type: entity
   name: plain burger
-  parent: FoodBurgerBase
+  parent: FoodMealBase
   id: RMCFoodBurgerPlain
   description: A boring, dry burger.
   components:
@@ -235,7 +250,7 @@
     - meaty
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
-    state: Burger
+    state: hamburger
   - type: SolutionContainerManager
     solutions:
       food:
@@ -335,7 +350,7 @@
     - pasta
     - meaty
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    sprite: _RMC14\Objects\Consumable\Food\dishes.rsi
     state: meatballspagetti
   - type: SolutionContainerManager
     solutions:
@@ -959,7 +974,7 @@
 - type: entity
   name: candy corn
   parent: BaseItem
-  id: RMCFoodSnackCandiedApple
+  id: RMCFoodSnackCandyCorn
   description: It's a handful of candy corn. Cannot be stored in a detective's hat, alas.
   components:
   - type: Sprite
