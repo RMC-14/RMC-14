@@ -6,7 +6,8 @@ loadout-name-edit-tooltip = {$max} characters max. If no name is specified a ran
 # Restrictions
 loadout-restrictions = Restrictions
 loadouts-min-limit = Min count: {$count}
-loadouts-max-limit = Max count: {$count}
+loadouts-max-limit = Max selections: {$count} / {$max}
+loadouts-max-limit-reached = Maximum selections reached
 loadouts-points-limit = Points: {$count} / {$max}
 
 loadouts-count-items-in-group = {$item} and {$count} other {$count ->
