@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed being able to learn language whilst dead
-    type: Fix
-  id: 3477
-  time: '2026-07-03T01:43:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/10329
 - author: kleinerstation13
   changes:
   - message: Replaced the ship master comms encryption key with a damaged CMB encryption
@@ -4336,5 +4329,13 @@
   id: 3976
   time: '2026-11-28T12:42:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/11237
+- author: MidZik
+  changes:
+  - message: Fixed some stuttering Charger Crusher encountered when they hit something
+      during a charge.
+    type: Fix
+  id: 3977
+  time: '2026-11-28T12:51:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/11219
 Name: RMC14
 Order: -1
