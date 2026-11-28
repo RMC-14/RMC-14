@@ -50,7 +50,7 @@
     heal: 40
     skill: RMCSkillConstruction
     delay: 8
-    fuelUsed : 2
+    fuelUsed: 2
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
