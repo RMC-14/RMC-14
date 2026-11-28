@@ -14,6 +14,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
 
@@ -23,13 +24,15 @@ public sealed partial class VehicleWeaponsMenu : FancyWindow
     public event Action<NetEntity?>? OnSelect;
     public event Action<bool>? OnToggleStabilization;
     public event Action<bool>? OnToggleAutoTurret;
+    public event Action? OnToggleSafety;
+
+    private static readonly SpriteSpecifier StabilizationSprite = new SpriteSpecifier.Rsi(VehicleHudToggleButton.IconRsi, "stabilization");
+    private static readonly SpriteSpecifier AutoTurretSprite = new SpriteSpecifier.Rsi(VehicleHudToggleButton.IconRsi, "auto_turret");
 
     private readonly IEntityManager _entManager = IoCManager.Resolve<IEntityManager>();
     private readonly IGameTiming _timing = IoCManager.Resolve<IGameTiming>();
     private readonly List<VehicleWeaponsUiEntry> _hardpoints = new();
 
-    private bool _suppressStabilization;
-    private bool _suppressAuto;
     private NetEntity? _selectedMountedEntity;
     private float _selectedCooldownRemaining;
     private float _selectedCooldownTotal;
@@ -43,21 +46,13 @@ public sealed partial class VehicleWeaponsMenu : FancyWindow
         ApplyWindowChromeStyle();
         ContentsContainer.Margin = new Thickness(0f);
 
-        StabilizationToggle.OnToggled += args =>
-        {
-            if (_suppressStabilization)
-                return;
+        SafetyToggle.OnPressed += _ => OnToggleSafety?.Invoke();
 
-            OnToggleStabilization?.Invoke(args.Pressed);
-        };
+        StabilizationToggle.SetIcon(StabilizationSprite);
+        StabilizationToggle.OnPressed += _ => OnToggleStabilization?.Invoke(!StabilizationToggle.Enabled);
 
-        AutoTurretToggle.OnToggled += args =>
-        {
-            if (_suppressAuto)
-                return;
-
-            OnToggleAutoTurret?.Invoke(args.Pressed);
-        };
+        AutoTurretToggle.SetIcon(AutoTurretSprite);
+        AutoTurretToggle.OnPressed += _ => OnToggleAutoTurret?.Invoke(!AutoTurretToggle.Enabled);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -67,31 +62,28 @@ public sealed partial class VehicleWeaponsMenu : FancyWindow
     }
 
     public void Update(
-        NetEntity vehicle,
         IReadOnlyList<VehicleWeaponsUiEntry> hardpoints,
+        bool hasStabilization,
         bool canToggleStabilization,
         bool stabilizationEnabled,
         bool canToggleAuto,
         bool autoEnabled)
     {
-        _ = vehicle;
+        StabilizationToggle.Visible = hasStabilization;
+        StabilizationToggle.Update(
+            stabilizationEnabled,
+            canToggleStabilization,
+            stabilizationEnabled
+                ? Loc.GetString("rmc-vehicle-weapons-ui-stabilization-on")
+                : Loc.GetString("rmc-vehicle-weapons-ui-stabilization-off"));
 
-        _suppressStabilization = true;
-        StabilizationToggle.Disabled = !canToggleStabilization;
-        StabilizationToggle.Pressed = stabilizationEnabled;
-        StabilizationToggle.Text = stabilizationEnabled
-            ? Loc.GetString("rmc-vehicle-weapons-ui-stabilization-on")
-            : Loc.GetString("rmc-vehicle-weapons-ui-stabilization-off");
-        _suppressStabilization = false;
-
-        _suppressAuto = true;
         AutoTurretToggle.Visible = canToggleAuto;
-        AutoTurretToggle.Disabled = !canToggleAuto;
-        AutoTurretToggle.Pressed = autoEnabled;
-        AutoTurretToggle.Text = autoEnabled
-            ? Loc.GetString("rmc-vehicle-weapons-ui-auto-on")
-            : Loc.GetString("rmc-vehicle-weapons-ui-auto-off");
-        _suppressAuto = false;
+        AutoTurretToggle.Update(
+            autoEnabled,
+            canToggleAuto,
+            autoEnabled
+                ? Loc.GetString("rmc-vehicle-weapons-ui-auto-on")
+                : Loc.GetString("rmc-vehicle-weapons-ui-auto-off"));
 
         _hardpoints.Clear();
         _hardpoints.AddRange(hardpoints);
@@ -99,6 +91,27 @@ public sealed partial class VehicleWeaponsMenu : FancyWindow
         SyncSelectedSlot();
         RebuildHardpointButtons();
         UpdateSelectedInfo();
+    }
+
+    public void UpdateSafety(SpriteSpecifier? icon, SpriteSpecifier? overlay, bool enabled, bool canToggle)
+    {
+        if (icon == null)
+        {
+            SafetyToggle.Visible = false;
+            return;
+        }
+
+        SafetyToggle.Visible = true;
+        SafetyToggle.SetIcon(icon);
+        if (overlay != null)
+            SafetyToggle.SetOverlay(overlay);
+
+        SafetyToggle.Update(
+            enabled,
+            canToggle,
+            enabled
+                ? "Safety mode is on. The vehicle will stop instead of smashing through things."
+                : "Safety mode is off.");
     }
 
     private void ApplyWindowChromeStyle()

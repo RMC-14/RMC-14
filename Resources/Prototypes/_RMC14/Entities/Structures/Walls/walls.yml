@@ -722,6 +722,7 @@
     state: pwall
   - type: Icon
     state: pwall
+  - type: CrashLandingBlocked
 
 - type: entity
   parent: CMWallShuttleBlack

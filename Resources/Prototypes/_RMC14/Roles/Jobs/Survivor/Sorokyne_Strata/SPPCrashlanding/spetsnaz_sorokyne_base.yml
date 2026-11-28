@@ -1,0 +1,43 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorSPPSpetsnazBase
+  name: rmc-job-name-spetsnaz
+  description: rmc-job-description-soro-spetsnaz
+  ranks:
+    RMCRankSPPMladshiySerzhant:
+    - !type:RoleTimeRequirement
+      role: RMCJobSurvivorMilitary
+      time: 252000 # 70 hours
+    RMCRankSPPEfreitor: []
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - Colonist
+  joinNotifyCrew: false
+  startingGear: RMCGearSPPSpetsnazBase
+  hasIcon: true
+  greeting: rmc-job-greeting-soro-spetsnaz
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: SPP Spetsnaz B/SRU (Sorokyne Special Survivor - Base)
+  useLoadoutOfJob: CMSurvivor
+  basePlaytimeTracker: true
+  abstract: true
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSPPSpetsnazBase
+  equipment:
+    jumpsuit: RMCJumpsuitSPPSpetsnaz
+    outerClothing: RMCArmorSPPSpetsnazFilled
+    back: RMCSatchelLightpackBlack
+    shoes: RMCBootsSPPFilled
+    head: RMCArmorHelmetSPPSpetsnaz
+    gloves: RMCHandsVeteranSPP
+    suitstorage: RMCWeaponRifleType77
+    belt: RMCBeltHolsterPistolSPPT73
+    id: RMCIDSPP
+    ears: RMCHeadsetSPPSpetsnazCrashland
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchFlareR44Filled
+  storage:
+    back:
+    - CMSheetMetal20

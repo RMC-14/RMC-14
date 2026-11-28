@@ -5,6 +5,9 @@
   name: plasteel barricade
   description: A sturdy and easily assembled barricade made of reinforced plasteel plates, the pinnacle of strongpoints. Use a blowtorch to repair.
   components:
+  - type: VehicleSmashable
+    minDestroyWeightClass: Light
+    minContinueWeightClass: Medium
   - type: Climbable
   - type: Anchorable
   - type: MeleeSound
@@ -86,6 +89,11 @@
   - type: Tag
     tags:
     - RMCPlasteelBarricade
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-plasteel-barricade
+    whitelist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCPlasteelBarricade
@@ -318,3 +326,8 @@
   - type: Construction
     graph: BarricadePlasteelDoorGraph
     node: nodeBarricadePlasteelDoor
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-folding-plasteel-barricade
+    whitelist:
+      components:
+      - Xeno

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "vixting, based on the map_blips_large & auto turret icons from cmss13",
+  "size": {
+    "x": 11,
+    "y": 11
+  },
+  "states": [
+    {
+      "name": "outline"
+    },
+    {
+      "name": "stabilization"
+    },
+    {
+      "name": "auto_turret"
+    }
+  ]
+}

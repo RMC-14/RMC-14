@@ -60,8 +60,8 @@
 - type: alert
   parent: XenoEnergyBase
   id: XenoEnergyHealer
-  name: Transferred health
-  description: Your total health transferred. If full you'll revive after using sacrifice.
+  name: Total Healing Done
+  description: If full, you'll respawn as a larva after using the sacrifice ability.
 
 - type: alert
   parent: XenoEnergyBase

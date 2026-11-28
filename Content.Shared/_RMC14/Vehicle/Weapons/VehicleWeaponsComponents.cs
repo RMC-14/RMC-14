@@ -69,9 +69,6 @@ public sealed partial class VehicleWeaponsSeatComponent : Component
 
     [DataField]
     public float BaseViewCursorPvsIncrease;
-
-    [AutoNetworkedField]
-    public VehicleWeaponsUiState Ui = new(default, new List<VehicleWeaponsUiEntry>(), false, false, false, false);
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

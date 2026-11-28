@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server._RMC14.Xenonids;
 
-[AdminCommand(AdminFlags.Moderator)]
+[AdminCommand(AdminFlags.Fun)]
 public sealed class XenoAnnounceCommand : IConsoleCommand
 {
     public string Command => "xenoannounce";

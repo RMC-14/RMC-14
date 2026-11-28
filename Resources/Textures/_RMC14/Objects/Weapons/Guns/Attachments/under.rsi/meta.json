@@ -232,6 +232,9 @@
       "name": "masterkey_a"
     },
     {
+      "name": "masterkey_a_alt"
+    },
+    {
       "name": "flamer_nozzle_a"
     },
     {
@@ -266,6 +269,33 @@
     },
     {
       "name": "laserlight-on"
+    },
+    {
+      "name": "flamethrower_intense-on",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "flamethrower_intense",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "flamethrower_intense_a",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
     },
     {
       "name": "qyj72_bipod"
