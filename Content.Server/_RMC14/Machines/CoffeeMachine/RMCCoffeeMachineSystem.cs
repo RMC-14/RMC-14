@@ -166,12 +166,32 @@ public sealed class RMCCoffeeMachineSystem : EntitySystem
     private void UpdateVisuals(Entity<RMCCoffeeMachineComponent> ent)
     {
         bool hasCup = false;
+        RMCCoffeeMachineCupType cupType = RMCCoffeeMachineCupType.Generic;
         if (_itemSlots.TryGetSlot(ent, ent.Comp.SlotId, out var slot))
         {
             hasCup = slot.ContainerSlot?.ContainedEntity != null;
+            if (hasCup && slot.ContainerSlot?.ContainedEntity is { } contained)
+            {
+                var prototypeId = MetaData(contained).EntityPrototype?.ID;
+                if (prototypeId != null)
+                {
+                    cupType = prototypeId switch
+                    {
+                        "RMCCoffeeCup" => RMCCoffeeMachineCupType.CoffeeMug,
+                        "RMCWestonYamadaCup" => RMCCoffeeMachineCupType.WestonYamada,
+                        "RMCMarineCorpsCup" => RMCCoffeeMachineCupType.UNMC,
+                        "RMCUnitedNationsCup" => RMCCoffeeMachineCupType.UnitedNations,
+                        "RMCSocialistPPCup" => RMCCoffeeMachineCupType.SocialistPP,
+                        "RMCThreeSunEmpireCup" => RMCCoffeeMachineCupType.ThreeSunEmpire,
+                        "RMCColonyLiberationFrontCup" => RMCCoffeeMachineCupType.ColonyLiberationFront,
+                        _ => RMCCoffeeMachineCupType.Generic
+                    };
+                }
+            }
         }
 
         _appearance.SetData(ent, RMCCoffeeMachineVisuals.HasCup, hasCup);
         _appearance.SetData(ent, RMCCoffeeMachineVisuals.IsBrewing, ent.Comp.IsBrewing);
+        _appearance.SetData(ent, RMCCoffeeMachineVisuals.CupType, cupType);
     }
 }
