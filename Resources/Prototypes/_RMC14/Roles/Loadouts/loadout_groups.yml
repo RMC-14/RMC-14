@@ -1089,3 +1089,15 @@
   loadouts:
   - RMCHeadBeretProvostGold
   - RMCHeadBeretProvostBlue
+
+
+# Doctor
+- type: loadoutGroup
+  id: DoctorRoleSpecificRoleChangeRMC
+  name: rmc-loadout-group-doctor-rolechange
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - RMCSurgeonRoleChange
+  - RMCPharmaRoleChange
+
