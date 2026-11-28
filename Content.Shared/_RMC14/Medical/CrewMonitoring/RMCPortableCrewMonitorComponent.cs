@@ -49,6 +49,8 @@ public sealed partial class RMCPortableCrewMonitorComponent : Component
 
     public readonly Dictionary<EntityUid, EntityUid> Sensors = new();
 
+    public EntityUid? ScanningUser;
+
     public EntityUid? SelectedTarget;
 
     public EntityUid? SelectedSensor;

@@ -19,10 +19,19 @@ public sealed class RMCPortableCrewMonitorSystem : SharedRMCPortableCrewMonitorS
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
+    private const int SensorsPerUpdate = 32;
+
     private readonly HashSet<EntityUid> _open = new();
     private readonly HashSet<EntityUid> _scanning = new();
     private readonly HashSet<EntityUid> _remove = new();
-    private readonly Dictionary<EntityUid, Entity<SuitSensorComponent>> _sensors = new();
+    private readonly Queue<EntityUid> _readyScans = new();
+    private readonly List<EntityUid> _scanCandidates = new();
+    private readonly List<RMCPortableCrewMonitorEntry> _scanSignals = new();
+    private readonly Dictionary<EntityUid, EntityUid> _scanSensors = new();
+
+    private EntityUid? _activeScan;
+    private int _nextCandidate;
+    private MapId _scanMap;
 
     public override void Initialize()
     {
@@ -65,10 +74,13 @@ public sealed class RMCPortableCrewMonitorSystem : SharedRMCPortableCrewMonitorS
 
     private void OnScan(Entity<RMCPortableCrewMonitorComponent> ent, ref RMCPortableCrewMonitorScanBuiMsg args)
     {
-        if (ent.Comp.Scanning || _hands.GetActiveItem(args.Actor) != ent.Owner)
+        if (!args.UiKey.Equals(RMCPortableCrewMonitorUIKey.Key) ||
+            ent.Comp.Scanning ||
+            _hands.GetActiveItem(args.Actor) != ent.Owner)
             return;
 
         ent.Comp.Scanning = true;
+        ent.Comp.ScanningUser = args.Actor;
         ent.Comp.ScanEndsAt = _timing.CurTime + ent.Comp.ScanDuration;
         _scanning.Add(ent);
         Dirty(ent);
@@ -77,7 +89,8 @@ public sealed class RMCPortableCrewMonitorSystem : SharedRMCPortableCrewMonitorS
     private void OnSelect(Entity<RMCPortableCrewMonitorComponent> ent, ref RMCPortableCrewMonitorSelectBuiMsg args)
     {
         var targetNet = args.Target;
-        if (_hands.GetActiveItem(args.Actor) != ent.Owner ||
+        if (!args.UiKey.Equals(RMCPortableCrewMonitorUIKey.Key) ||
+            _hands.GetActiveItem(args.Actor) != ent.Owner ||
             !TryGetEntity(targetNet, out var target) ||
             !ent.Comp.Sensors.TryGetValue(target.Value, out var sensor) ||
             !ent.Comp.Signals.Exists(entry => entry.Id == targetNet))
@@ -111,12 +124,13 @@ public sealed class RMCPortableCrewMonitorSystem : SharedRMCPortableCrewMonitorS
             if (time < monitor.ScanEndsAt)
                 continue;
 
-            CompleteScan((uid, monitor));
+            _readyScans.Enqueue(uid);
             _remove.Add(uid);
         }
 
         _scanning.ExceptWith(_remove);
         _remove.Clear();
+        ProcessScans();
 
         foreach (var uid in _open)
         {
@@ -136,37 +150,83 @@ public sealed class RMCPortableCrewMonitorSystem : SharedRMCPortableCrewMonitorS
         _open.ExceptWith(_remove);
     }
 
+    private void ProcessScans()
+    {
+        if (_activeScan is null && _readyScans.TryDequeue(out var next))
+        {
+            _activeScan = next;
+            _scanCandidates.Clear();
+            _scanSensors.Clear();
+            _scanSignals.Clear();
+            _nextCandidate = 0;
+
+            if (TryComp(next, out RMCPortableCrewMonitorComponent? monitor))
+            {
+                _scanMap = _transform.GetMapCoordinates(next).MapId;
+                if (_data.IsValidMap(_scanMap))
+                {
+                    var sensors = EntityQueryEnumerator<SuitSensorComponent>();
+                    while (sensors.MoveNext(out var sensor, out _))
+                        _scanCandidates.Add(sensor);
+                }
+            }
+        }
+
+        if (_activeScan is not { } uid)
+            return;
+
+        if (!TryComp(uid, out RMCPortableCrewMonitorComponent? component))
+        {
+            _activeScan = null;
+            return;
+        }
+
+        var ent = new Entity<RMCPortableCrewMonitorComponent>(uid, component);
+        if (component.ScanningUser is not { } actor ||
+            _hands.GetActiveItem(actor) != uid ||
+            _transform.GetMapCoordinates(uid).MapId != _scanMap)
+        {
+            EndScan(ent);
+            return;
+        }
+
+        var end = Math.Min(_nextCandidate + SensorsPerUpdate, _scanCandidates.Count);
+        for (; _nextCandidate < end; _nextCandidate++)
+        {
+            var sensorUid = _scanCandidates[_nextCandidate];
+            if (!TryComp(sensorUid, out SuitSensorComponent? sensor) ||
+                sensor.Mode < SuitSensorMode.SensorCords ||
+                sensor.User is not { } user ||
+                _scanSensors.ContainsKey(user) ||
+                !TryComp(user, out MobStateComponent? state) ||
+                !_data.IsTrackedSensor((sensorUid, sensor), user, component.NpcFactions, component.IffFactions, _scanMap))
+            {
+                continue;
+            }
+
+            var identity = _data.GetIdentity(user);
+            _scanSignals.Add(new RMCPortableCrewMonitorEntry(
+                GetNetEntity(user),
+                identity.Name,
+                identity.JobTitle,
+                identity.JobIcon,
+                state.CurrentState));
+            _scanSensors.Add(user, sensorUid);
+        }
+
+        if (end == _scanCandidates.Count)
+            CompleteScan(ent);
+    }
+
     private void CompleteScan(Entity<RMCPortableCrewMonitorComponent> ent)
     {
-        ent.Comp.Scanning = false;
         ent.Comp.HasScanned = true;
         ent.Comp.Signals.Clear();
+        ent.Comp.Signals.AddRange(_scanSignals);
         ent.Comp.Sensors.Clear();
-
-        var coordinates = _transform.GetMapCoordinates(ent.Owner);
-        if (_data.IsValidMap(coordinates.MapId))
+        foreach (var (user, sensor) in _scanSensors)
         {
-            _data.CollectSensors(
-                ent.Comp.NpcFactions,
-                ent.Comp.IffFactions,
-                SuitSensorMode.SensorCords,
-                _sensors,
-                coordinates.MapId);
-
-            foreach (var (user, sensor) in _sensors)
-            {
-                if (!TryComp(user, out MobStateComponent? state))
-                    continue;
-
-                var identity = _data.GetIdentity(user);
-                ent.Comp.Signals.Add(new RMCPortableCrewMonitorEntry(
-                    GetNetEntity(user),
-                    identity.Name,
-                    identity.JobTitle,
-                    identity.JobIcon,
-                    state.CurrentState));
-                ent.Comp.Sensors[user] = sensor.Owner;
-            }
+            ent.Comp.Sensors.Add(user, sensor);
         }
 
         ent.Comp.Signals.Sort(static (left, right) =>
@@ -182,8 +242,17 @@ public sealed class RMCPortableCrewMonitorSystem : SharedRMCPortableCrewMonitorS
         else
             ent.Comp.SelectedSensor = null;
 
+        EndScan(ent);
+        if (_open.Contains(ent))
+            UpdateTracking(ent);
+    }
+
+    private void EndScan(Entity<RMCPortableCrewMonitorComponent> ent)
+    {
+        _activeScan = null;
+        ent.Comp.Scanning = false;
+        ent.Comp.ScanningUser = null;
         Dirty(ent);
-        UpdateTracking(ent);
     }
 
     private void UpdateTracking(Entity<RMCPortableCrewMonitorComponent> ent)
