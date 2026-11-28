@@ -60,6 +60,19 @@
     - spawn: "/Maps/_RMC14/Inserts/Varadero/engi_hold.yml"
       probability: 0.33
 
+- type: entity
+  parent: RMCMapInsertVaraderoBase
+  id: RMCMapInsertVaraderoPoolParty
+  name: Varadero Pool Party
+  suffix: Insert Varadero
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/varadero_pool_party.yml"
+      probability: 0.15
 
 # Survivor Scenario Inserts
 - type: entity

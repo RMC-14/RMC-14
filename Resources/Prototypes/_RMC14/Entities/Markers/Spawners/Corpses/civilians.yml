@@ -139,6 +139,38 @@
 
 - type: entity
   parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseBeachBum
+  name: Corpse Spawner - Beach Bum
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistBeachBum
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseVaraderoTechnician
+  name: Corpse Spawner - New Varadero Technician
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseVaraderoTechnician
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseVaraderoCargoTechnician
+  name: Corpse Spawner - New Varadero Cargo Technician
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseCargoTechnician
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNPeacekeeper
+  name: Corpse Spawner - UN Peacekeeper
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNPeacekeeper
+
+- type: entity
+  parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseCLF
   name: Corpse Spawner - CLF Soldier
   components:
