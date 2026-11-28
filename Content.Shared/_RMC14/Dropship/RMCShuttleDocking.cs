@@ -21,19 +21,26 @@ public enum RMCShuttleDockingClass
     Big,
 }
 
+public enum RMCShuttleLandingClass
+{
+    Internal,
+    ExternalSide,
+    ExternalHangar,
+}
+
 /// <summary>
-/// Maps an abstract shuttle profile to concrete landing class tags.
+/// Maps a shuttle profile to compatible landing pad classes.
 /// </summary>
 public static class RMCShuttleDocking
 {
-    private static readonly string[] SmallDockClasses = ["internal", "external_side"];
-    private static readonly string[] StandardDockClasses = ["internal"];
-    private static readonly string[] BigDockClasses = ["external_hangar"];
+    private static readonly RMCShuttleLandingClass[] SmallDockClasses = [RMCShuttleLandingClass.Internal, RMCShuttleLandingClass.ExternalSide];
+    private static readonly RMCShuttleLandingClass[] StandardDockClasses = [RMCShuttleLandingClass.Internal];
+    private static readonly RMCShuttleLandingClass[] BigDockClasses = [RMCShuttleLandingClass.ExternalHangar];
 
     /// <summary>
     /// Returns the landing classes the shuttle may use for automatic routing and nav-console validation.
     /// </summary>
-    public static string[] GetAllowedDockClasses(RMCShuttleDockingClass dockingClass)
+    public static RMCShuttleLandingClass[] GetAllowedDockClasses(RMCShuttleDockingClass dockingClass)
     {
         return dockingClass switch
         {

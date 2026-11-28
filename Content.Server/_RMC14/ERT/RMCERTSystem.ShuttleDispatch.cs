@@ -70,7 +70,7 @@ public sealed partial class RMCERTSystem
         if (request.State != RMCERTRequestState.PendingDispatch)
             return;
 
-        if (request.SelectedCall is not { } callId || !_prototypes.TryIndex(callId, out var call))
+        if (request.SelectedCall is not { } callId || !_calls.TryGetValue(callId, out var call))
         {
             FailRequest(request, Loc.GetString("rmc-ert-error-selected-call-missing"));
             return;
@@ -90,7 +90,7 @@ public sealed partial class RMCERTSystem
         request.PlannedRoster.Clear();
         request.SpawnedGhostRoles.Clear();
 
-        if (call.ShuttleCargo.Count > 0 && !SpawnShuttleCargo(request, call, shuttle, out error))
+        if (call.Comp.ShuttleCargo.Count > 0 && !SpawnShuttleCargo(request, call, shuttle, out error))
         {
             FailRequest(request, error);
             return;
@@ -106,7 +106,7 @@ public sealed partial class RMCERTSystem
                 request,
                 "system",
                 call,
-                $"cargo={call.ShuttleCargoCount}, shuttle={FormatEntity(shuttle)}");
+                $"cargo={call.Comp.ShuttleCargoCount}, shuttle={FormatEntity(shuttle)}");
             if (request.SourceEntity is { Valid: true } cargoBeacon &&
                 TryComp(cargoBeacon, out RMCERTDistressBeaconComponent? cargoBeaconComp) &&
                 cargoBeaconComp.SingleUse)
@@ -132,17 +132,17 @@ public sealed partial class RMCERTSystem
         }
 
         request.State = RMCERTRequestState.Recruiting;
-        request.RecruitmentEndsAt = _timing.CurTime + call.Requirements.RecruitmentDuration;
+        request.RecruitmentEndsAt = _timing.CurTime + call.Comp.Requirements.RecruitmentDuration;
         request.NextAutoLaunchAttempt = request.RecruitmentEndsAt.Value;
-        Log.Info($"ERT request {request.Id} recruiting {request.PlannedRoster.Count} slots for {call.ID}. " +
-                 $"RecruitmentDuration={call.Requirements.RecruitmentDuration}, " +
-                 $"AutoLaunch={call.AutoLaunch}, MinRequiredSlots={call.Requirements.MinRequiredSlots}");
+        Log.Info($"ERT request {request.Id} recruiting {request.PlannedRoster.Count} slots for {call.Id}. " +
+                 $"RecruitmentDuration={call.Comp.Requirements.RecruitmentDuration}, " +
+                 $"AutoLaunch={call.Comp.AutoLaunch}, MinRequiredSlots={call.Comp.Requirements.MinRequiredSlots}");
         AddERTRequestLog(LogImpact.Medium,
             "recruiting started",
             request,
             "system",
             call,
-            $"slots={request.PlannedRoster.Count}, recruitmentDuration={call.Requirements.RecruitmentDuration.TotalSeconds:0}s, autoLaunch={call.AutoLaunch}");
+            $"slots={request.PlannedRoster.Count}, recruitmentDuration={call.Comp.Requirements.RecruitmentDuration.TotalSeconds:0}s, autoLaunch={call.Comp.AutoLaunch}");
 
         if (request.SourceEntity is { Valid: true } beacon &&
             TryComp(beacon, out RMCERTDistressBeaconComponent? beaconComp) &&
@@ -158,15 +158,15 @@ public sealed partial class RMCERTSystem
         // retry timer from a timer callback can snowball if the server has a long frame.
     }
 
-    private static bool IsCargoOnlyShuttle(RMCERTCallPrototype call)
+    private static bool IsCargoOnlyShuttle(RMCERTCall call)
     {
-        return call.Roles.Count == 0 &&
-               call.ShuttleCargo.Count > 0;
+        return call.Comp.Roles.Count == 0 &&
+               call.Comp.ShuttleCargo.Count > 0;
     }
 
     private bool TryPrepareRequestForDispatch(
         RMCERTRequest request,
-        RMCERTCallPrototype call,
+        RMCERTCall call,
         bool approving,
         out string error)
     {
@@ -181,7 +181,7 @@ public sealed partial class RMCERTSystem
         if (!TryFindNavigationComputer(shuttleUid, out var computer))
         {
             error = Loc.GetString("rmc-ert-error-no-navigation-computer");
-            Log.Warning($"ERT request {request.Id} preflight failed for {call.ID}: no navigation computer.");
+            Log.Warning($"ERT request {request.Id} preflight failed for {call.Id}: no navigation computer.");
 
             if (loadedForPreflight)
                 DiscardPreflightShuttle(request, shuttleUid);
@@ -208,7 +208,7 @@ public sealed partial class RMCERTSystem
 
     private bool TryEnsureShuttleLoaded(
         RMCERTRequest request,
-        RMCERTCallPrototype call,
+        RMCERTCall call,
         out EntityUid? shuttle,
         out bool loadedForPreflight,
         out string error)
@@ -245,7 +245,7 @@ public sealed partial class RMCERTSystem
             QueueDel(shuttle);
     }
 
-    private bool TryLoadShuttle(RMCERTRequest request, RMCERTCallPrototype call, out EntityUid? shuttle, out string error)
+    private bool TryLoadShuttle(RMCERTRequest request, RMCERTCall call, out EntityUid? shuttle, out string error)
     {
         shuttle = null;
         error = string.Empty;
@@ -274,7 +274,7 @@ public sealed partial class RMCERTSystem
         if (GetShuttleSpawnMarkerId(call) is { } spawnMarker)
         {
             Log.Warning($"ERT request {request.Id} found no free placed shuttle spawn marker " +
-                        $"{spawnMarker.Id} for {call.ID}; falling back to hidden ERT map spawn.");
+                        $"{spawnMarker.Id} for {call.Id}; falling back to hidden ERT map spawn.");
         }
 
         if (_ertMap is not { } targetMap || !_map.MapExists(targetMap))
@@ -302,7 +302,7 @@ public sealed partial class RMCERTSystem
 
     private bool TryLoadShuttleAtPlacedMarker(
         RMCERTRequest request,
-        RMCERTCallPrototype call,
+        RMCERTCall call,
         ResPath shuttleMapPath,
         out EntityUid? shuttle,
         out string error)
@@ -339,7 +339,7 @@ public sealed partial class RMCERTSystem
 
         if (TryFindShuttleSpawnObstacle(shuttle.Value, marker, markerXform.MapUid.Value, spawnPosition, rotation, out var obstacle))
         {
-            Log.Warning($"ERT request {request.Id} could not load shuttle {ToPrettyString(shuttle.Value)} for {call.ID} " +
+            Log.Warning($"ERT request {request.Id} could not load shuttle {ToPrettyString(shuttle.Value)} for {call.Id} " +
                         $"at placed marker {ToPrettyString(marker)} because it would intersect {ToPrettyString(obstacle)}. " +
                         $"markerPosition={coordinates.Position}, spawnPosition={spawnPosition}; " +
                         "falling back to hidden ERT map spawn.");
@@ -355,7 +355,7 @@ public sealed partial class RMCERTSystem
         request.ShuttleHomeVisualCoordinates = coordinates;
         request.ShuttleHomeReturnCoordinates = new MapCoordinates(spawnPosition, markerXform.MapID);
         request.ShuttleHomeRotation = rotation;
-        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle.Value)} for {call.ID} " +
+        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle.Value)} for {call.Id} " +
                  $"at placed marker {ToPrettyString(marker)}.");
         return true;
     }
@@ -449,7 +449,7 @@ public sealed partial class RMCERTSystem
 
     private bool TryFindShuttleSpawnMarker(
         RMCERTRequest request,
-        RMCERTCallPrototype call,
+        RMCERTCall call,
         out EntityUid marker,
         out Vector2 markerOffset,
         out bool centerShuttleOnMarker)
@@ -511,9 +511,9 @@ public sealed partial class RMCERTSystem
         return true;
     }
 
-    private static EntProtoId? GetShuttleSpawnMarkerId(RMCERTCallPrototype call)
+    private static EntProtoId? GetShuttleSpawnMarkerId(RMCERTCall call)
     {
-        return call.ShuttleSpawnMarker ?? call.ShuttleSpawner;
+        return call.Comp.ShuttleSpawnMarker ?? call.Comp.ShuttleSpawner;
     }
 
     private bool IsShuttleSpawnMarkerReserved(EntityUid marker)
@@ -535,7 +535,7 @@ public sealed partial class RMCERTSystem
         return false;
     }
 
-    private void ConfigureLoadedShuttle(RMCERTRequest request, RMCERTCallPrototype call, EntityUid shuttle)
+    private void ConfigureLoadedShuttle(RMCERTRequest request, RMCERTCall call, EntityUid shuttle)
     {
         var shuttleComp = EnsureComp<RMCERTShuttleComponent>(shuttle);
         shuttleComp.RequestId = request.Id;
@@ -554,12 +554,12 @@ public sealed partial class RMCERTSystem
                 !shuttleComp.NoHijack,
                 false,
                 true,
-                call.LandingTags,
-                call.DeniedLandingTags);
+                call.Comp.LandingTags,
+                call.Comp.DeniedLandingTags);
         }
 
         ApplyShuttleDoorConsoleLocks(shuttle);
-        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle)} for {call.ID}.");
+        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle)} for {call.Id}.");
     }
 
     private int ApplyShuttleDoorConsoleLocks(EntityUid shuttle)
@@ -688,12 +688,12 @@ public sealed partial class RMCERTSystem
         SetShuttlePlayerRouteLock(shuttle, home);
     }
 
-    private bool TryGetShuttleMapPath(RMCERTCallPrototype call, out ResPath? shuttleMap, out string error)
+    private bool TryGetShuttleMapPath(RMCERTCall call, out ResPath? shuttleMap, out string error)
     {
-        shuttleMap = call.ShuttleMap;
+        shuttleMap = call.Comp.ShuttleMap;
         error = string.Empty;
 
-        if (call.ShuttleSpawner is not { } shuttleSpawner)
+        if (call.Comp.ShuttleSpawner is not { } shuttleSpawner)
             return true;
 
         if (!_prototypes.TryIndex(shuttleSpawner, out var spawnerPrototype))

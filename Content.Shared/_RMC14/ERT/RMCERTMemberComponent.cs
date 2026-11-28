@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.ERT;
 
@@ -18,7 +19,7 @@ public sealed partial class RMCERTMemberComponent : Component
     /// Prototype id of the ERT call this member belongs to.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string Call = string.Empty;
+    public EntProtoId<RMCERTCallComponent>? Call;
 
     /// <summary>
     /// Roster role id assigned to this member.

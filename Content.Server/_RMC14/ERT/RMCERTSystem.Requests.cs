@@ -155,10 +155,10 @@ public sealed partial class RMCERTSystem
     public RMCERTRequestResult ForceCall(RMCERTForceCallArgs args)
     {
         var callId = args.Call;
-        var reason = args.Reason.Trim();
+        var reason = _dialog.TrimToLimit(args.Reason, 200).Trim();
         var actorText = GetAdminActorText(args.Actor, args.ActorName);
 
-        if (!_prototypes.TryIndex(callId, out var call, false))
+        if (!_calls.TryGetValue(callId, out var call))
         {
             var unknownCallError = Loc.GetString("rmc-ert-error-unknown-call", ("id", callId.Id));
             _adminLog.Add(LogType.RMCAdminCommandLogging,
@@ -167,12 +167,12 @@ public sealed partial class RMCERTSystem
             return ResultFailure(Guid.Empty, null, unknownCallError);
         }
 
-        if (!call.Enabled)
+        if (!call.Comp.Enabled)
         {
             var notForceCallableError = Loc.GetString("rmc-ert-error-call-disabled", ("call", call.Name));
             _adminLog.Add(LogType.RMCAdminCommandLogging,
                 LogImpact.Medium,
-                $"ERT force call failed: actor={FormatLogValue(actorText)}, call={FormatLogValue(call.Name)}, prototype={call.ID}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(notForceCallableError)}\"");
+                $"ERT force call failed: actor={FormatLogValue(actorText)}, call={FormatLogValue(call.Name)}, prototype={call.Id}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(notForceCallableError)}\"");
             return ResultFailure(Guid.Empty, null, notForceCallableError);
         }
 
@@ -252,7 +252,7 @@ public sealed partial class RMCERTSystem
 
     private RMCERTRequestResult ApproveSpecificRequest(
         Guid id,
-        ProtoId<RMCERTCallPrototype> callId,
+        EntProtoId<RMCERTCallComponent> callId,
         EntityUid? admin,
         string? adminName,
         bool randomSelection,
@@ -261,7 +261,7 @@ public sealed partial class RMCERTSystem
         if (!TryGetPending(id, out var request))
             return RequestUnavailable(id);
 
-        if (!_prototypes.TryIndex(callId, out var call, false))
+        if (!_calls.TryGetValue(callId, out var call))
         {
             var unknownCallError = Loc.GetString("rmc-ert-error-unknown-call", ("id", callId.Id));
             FailRequest(request, unknownCallError);
@@ -275,7 +275,7 @@ public sealed partial class RMCERTSystem
             return ResultFailure(request.Id, request.State, notAllowedError);
         }
 
-        if (!call.Enabled)
+        if (!call.Comp.Enabled)
         {
             var disabledError = Loc.GetString("rmc-ert-error-call-disabled", ("call", call.Name));
             FailRequest(request, disabledError);
@@ -313,19 +313,19 @@ public sealed partial class RMCERTSystem
             _sourceCooldowns[cooldownSource] = _timing.CurTime;
 
         var adminText = GetAdminActorText(admin, adminName);
-        Log.Info($"ERT request {request.Id} approved as {call.ID} by {adminText}");
+        Log.Info($"ERT request {request.Id} approved as {call.Id} by {adminText}");
         AddERTRequestLog(forced ? LogImpact.High : LogImpact.Medium,
             forced ? "force approved" : "approved",
             request,
             adminText,
             call,
-            $"selection={(randomSelection ? "random" : "specific")}, dispatchDelay={call.LaunchDelay:0}s");
+            $"selection={(randomSelection ? "random" : "specific")}, dispatchDelay={call.Comp.LaunchDelay:0}s");
 
         if (request.Source == RMCERTRequestSource.Admin)
             AnnounceRequestCreated(request, call);
 
         DirtyState(request);
-        Timer.Spawn(TimeSpan.FromSeconds(call.LaunchDelay), () => Dispatch(request.Id));
+        Timer.Spawn(TimeSpan.FromSeconds(call.Comp.LaunchDelay), () => Dispatch(request.Id));
         return ResultSuccess(request);
     }
 
@@ -359,7 +359,7 @@ public sealed partial class RMCERTSystem
         var adminText = GetAdminActorText(args.Actor, args.ActorName);
         AddERTRequestLog(LogImpact.Medium, "denied", request, adminText);
 
-        if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
+        if (request.SelectedCall is { } callId && _calls.TryGetValue(callId, out var call))
             AnnounceNoResponse(request, call);
         else
             AnnounceNoResponse(request, null);
@@ -392,8 +392,8 @@ public sealed partial class RMCERTSystem
         var adminText = GetAdminActorText(args.Actor, args.ActorName);
         AddERTRequestLog(LogImpact.High, "cancelled", request, adminText);
 
-        if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
-            Announce(call.Announcements.Cancelled, request, call);
+        if (request.SelectedCall is { } callId && _calls.TryGetValue(callId, out var call))
+            Announce(call.Comp.Announcements.Cancelled, request, call);
 
         DirtyState(request);
         return ResultSuccess(request);
@@ -444,11 +444,11 @@ public sealed partial class RMCERTSystem
         return ResultSuccess(request);
     }
 
-    private bool CheckRequirements(RMCERTRequest request, RMCERTCallPrototype call, out string error)
+    private bool CheckRequirements(RMCERTRequest request, RMCERTCall call, out string error)
     {
         error = string.Empty;
 
-        if (call.Requirements.MinRoundTime is { } minRound && _timing.CurTime < minRound)
+        if (call.Comp.Requirements.MinRoundTime is { } minRound && _timing.CurTime < minRound)
         {
             error = Loc.GetString("rmc-ert-error-min-round-time",
                 ("call", call.Name),
@@ -458,10 +458,10 @@ public sealed partial class RMCERTSystem
 
         var dispatched = _requests.Values.Count(r =>
             r.Id != request.Id &&
-            r.SelectedCall?.Id == call.ID &&
+            r.SelectedCall == call.Id &&
             r.State is RMCERTRequestState.PendingDispatch or RMCERTRequestState.Recruiting or RMCERTRequestState.Spawning or RMCERTRequestState.Launching or RMCERTRequestState.Arrived or RMCERTRequestState.Completed);
 
-        if (call.Requirements.MaxCallsPerRound > 0 && dispatched >= call.Requirements.MaxCallsPerRound)
+        if (call.Comp.Requirements.MaxCallsPerRound > 0 && dispatched >= call.Comp.Requirements.MaxCallsPerRound)
         {
             error = Loc.GetString("rmc-ert-error-max-calls-reached", ("call", call.Name));
             return false;
@@ -469,7 +469,7 @@ public sealed partial class RMCERTSystem
 
         if (request.SourceEntity is { Valid: true } source &&
             _sourceCooldowns.TryGetValue(source, out var last) &&
-            _timing.CurTime < last + call.Requirements.Cooldown)
+            _timing.CurTime < last + call.Comp.Requirements.Cooldown)
         {
             error = Loc.GetString("rmc-ert-error-source-cooldown", ("call", call.Name));
             return false;

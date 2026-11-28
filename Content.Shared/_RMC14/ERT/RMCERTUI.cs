@@ -1,4 +1,5 @@
 using Content.Shared.Eui;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.ERT;
@@ -18,7 +19,7 @@ namespace Content.Shared._RMC14.ERT;
 /// <param name="AdminButtonLabel">Optional localized force-call button label.</param>
 [Serializable, NetSerializable]
 public readonly record struct RMCERTCallOption(
-    string Id,
+    EntProtoId<RMCERTCallComponent> Id,
     string Name,
     string Organization,
     string Category,
@@ -51,7 +52,7 @@ public readonly record struct RMCERTRequestOption(
     string RequesterName,
     string Reason,
     string? SelectedCall,
-    List<string> AllowedCalls,
+    List<EntProtoId<RMCERTCallComponent>> AllowedCalls,
     bool AllowRandomSelection,
     bool AllowSpecificSelection,
     string CreatedAt,
@@ -119,7 +120,7 @@ public sealed class RMCERTAdminApproveRandomMsg(Guid request) : EuiMessageBase
 /// <param name="request">Runtime request id to approve.</param>
 /// <param name="call">Prototype id of the call to dispatch.</param>
 [Serializable, NetSerializable]
-public sealed class RMCERTAdminApproveSpecificMsg(Guid request, string call) : EuiMessageBase
+public sealed class RMCERTAdminApproveSpecificMsg(Guid request, EntProtoId<RMCERTCallComponent> call) : EuiMessageBase
 {
     /// <summary>
     /// Runtime request id to approve.
@@ -129,7 +130,7 @@ public sealed class RMCERTAdminApproveSpecificMsg(Guid request, string call) : E
     /// <summary>
     /// Prototype id of the call to dispatch.
     /// </summary>
-    public readonly string Call = call;
+    public readonly EntProtoId<RMCERTCallComponent> Call = call;
 }
 
 /// <summary>
@@ -177,12 +178,12 @@ public sealed class RMCERTAdminLaunchMsg(Guid request) : EuiMessageBase
 /// <param name="call">Prototype id of the call to force dispatch.</param>
 /// <param name="reason">Admin supplied reason for the force call.</param>
 [Serializable, NetSerializable]
-public sealed class RMCERTAdminForceCallMsg(string call, string reason) : EuiMessageBase
+public sealed class RMCERTAdminForceCallMsg(EntProtoId<RMCERTCallComponent> call, string reason) : EuiMessageBase
 {
     /// <summary>
     /// Prototype id of the call to force dispatch.
     /// </summary>
-    public readonly string Call = call;
+    public readonly EntProtoId<RMCERTCallComponent> Call = call;
 
     /// <summary>
     /// Admin supplied reason for the force call.

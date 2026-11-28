@@ -20,6 +20,7 @@ using Content.Server.Shuttles.Events;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.ActionBlocker;
 using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
@@ -51,6 +52,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Enums;
+using Robust.Shared.Localization;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -73,6 +75,7 @@ public sealed partial class RMCERTSystem : EntitySystem
     [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -90,6 +93,7 @@ public sealed partial class RMCERTSystem : EntitySystem
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly ILocalizationManager _loc = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -102,6 +106,7 @@ public sealed partial class RMCERTSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly WarshipSystem _warship = default!;
 
+    private readonly Dictionary<EntProtoId<RMCERTCallComponent>, RMCERTCall> _calls = new();
     private readonly Dictionary<Guid, RMCERTRequest> _requests = new();
     private readonly Dictionary<EntityUid, TimeSpan> _sourceCooldowns = new();
     private readonly HashSet<ICommonSession> _queuedPendingAdminNotifications = [];
@@ -171,10 +176,10 @@ public sealed partial class RMCERTSystem : EntitySystem
             if (request.State != RMCERTRequestState.Recruiting)
                 continue;
 
-            if (request.SelectedCall is not { } callId || !_prototypes.TryIndex(callId, out var call))
+            if (request.SelectedCall is not { } callId || !_calls.TryGetValue(callId, out var call))
                 continue;
 
-            if (!call.AutoLaunch)
+            if (!call.Comp.AutoLaunch)
                 continue;
 
             if (_timing.CurTime < request.NextAutoLaunchAttempt)
@@ -196,7 +201,7 @@ public sealed partial class RMCERTSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
     {
-        if (ev.WasModified<RMCERTCallPrototype>() || ev.WasModified<EntityPrototype>())
+        if (ev.WasModified<EntityPrototype>())
             ValidatePrototypes();
     }
 }

@@ -345,25 +345,37 @@ rmc-ert-announcement-pizza-arrival = 'That'll be... sixteen orders of cheesy fri
 rmc-ert-announcement-supply-drop-dispatch = We-Ya Automated Supply Drop 334-Q signal received. Docking procedures have commenced.
 rmc-ert-announcement-supply-drop-arrival = We-Ya Automated Supply Drop 334-Q has docked aboard the warship.
 
-rmc-ert-beacon-request-title-handheld = handheld distress beacon
-rmc-ert-beacon-request-title-cmb = CMB distress beacon
-rmc-ert-beacon-request-title-weya = We-Ya distress beacon
-rmc-ert-beacon-request-title-weya-bodyguard = We-Ya bodyguard distress beacon
-rmc-ert-beacon-request-title-weya-lawyer = We-Ya legal distress beacon
-rmc-ert-beacon-request-title-provost = Provost Office handheld beacon
-rmc-ert-beacon-request-title-foreign = foreign distress beacon
 
-rmc-ert-recipient-high-command = High Command
-rmc-ert-recipient-anchorpoint = Anchorpoint Station
-rmc-ert-recipient-weya-command = We-Ya emergency response command
-rmc-ert-recipient-weya-security = We-Ya Corporate Security Division
-rmc-ert-recipient-weya-affairs = We-Ya Corporate Affairs Division
-rmc-ert-recipient-provost = the Superintendent
-rmc-ert-recipient-allied = allied response command
-rmc-ert-recipient-pizza = Pizza Galaxy dispatch
 
-rmc-ert-beacon-request-title-pizza = pizza delivery distress beacon
 
 rmc-ert-objective-pizza-tip = Make sure you get a tip!
 rmc-ert-objective-provost-enforce-marine-law = Deploy to the {$ship} and enforce Marine Law.
 rmc-ert-feature-pizza-wrong-place = You're PRETTY sure this is the right place.
+
+ent-RMCERTCallCBRN = { rmc-ert-call-cbrn-name }
+ent-RMCERTCallCLF = { rmc-ert-call-clf-name }
+ent-RMCERTCallCMB = { rmc-ert-call-cmb-name }
+ent-RMCERTCallCMBBlackMarket = { rmc-ert-call-cmb-black-market-name }
+ent-RMCERTCallCMBRiot = { rmc-ert-call-cmb-riot-name }
+ent-RMCERTCallContractors = { rmc-ert-call-contractors-name }
+ent-RMCERTCallContractorsCovert = { rmc-ert-call-contractors-covert-name }
+ent-RMCERTCallFeralXenos = { rmc-ert-call-feral-xenos-name }
+ent-RMCERTCallFreelancersFriendly = { rmc-ert-call-freelancers-friendly-name }
+ent-RMCERTCallFreelancersHostile = { rmc-ert-call-freelancers-hostile-name }
+ent-RMCERTCallPMC = { rmc-ert-call-pmc-name }
+ent-RMCERTCallPMCPlatoon = { rmc-ert-call-pmc-platoon-name }
+ent-RMCERTCallPizza = { rmc-ert-call-pizza-name }
+ent-RMCERTCallProvost = { rmc-ert-call-provost-name }
+ent-RMCERTCallSPPFriendly = { rmc-ert-call-spp-friendly-name }
+ent-RMCERTCallSPPHostile = { rmc-ert-call-spp-hostile-name }
+ent-RMCERTCallSupplyDrop = { rmc-ert-call-supply-drop-name }
+ent-RMCERTCallTSE = { rmc-ert-call-tse-name }
+ent-RMCERTCallWYCommando = { rmc-ert-call-wy-commando-name }
+ent-RMCERTCallWeYaBodyguard = { rmc-ert-call-weya-bodyguard-name }
+ent-RMCERTCallWeYaBodyguardCommando = { rmc-ert-call-weya-bodyguard-commando-name }
+ent-RMCERTCallWeYaBodyguardGoon = { rmc-ert-call-weya-bodyguard-goon-name }
+ent-RMCERTCallWeYaBodyguardPMC = { rmc-ert-call-weya-bodyguard-pmc-name }
+ent-RMCERTCallWeYaBodyguardPMCEnforcer = { rmc-ert-call-weya-bodyguard-pmc-enforcer-name }
+ent-RMCERTCallWeYaLawyers = { rmc-ert-call-weya-lawyers-name }
+ent-RMCERTCallXenos = { rmc-ert-call-xenos-name }
+ent-RMCERTCallZombies = { rmc-ert-call-zombies-name }

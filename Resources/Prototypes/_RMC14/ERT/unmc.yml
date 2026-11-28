@@ -71,82 +71,85 @@
 # - minRequiredSlots: minimum recruited required slots before launch.
 # - maxSlots: maximum planned roster slots for this call.
 
-- type: rmcERTCall
+- type: entity
   id: RMCERTCallCBRN
-  name: rmc-ert-call-cbrn-name
-  organization: rmc-ert-organization-unmc
-  npcFactions: [ UNMC ]
-  accessGroups: [ ShipMasterAccess, RMCERT ]
-  iffFaction: FactionMarine
-  category: rmc-ert-category-military
-  enabled: true
-  adminSelectable: true
-  adminButtonLabel: rmc-ert-admin-button-cbrn
-  randomWeight: 10
-  allowedSources: [ Console, Admin ]
-  # TODO RMC14 replace with an exact CBRN/UNMC response shuttle once ported.
-  shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
-  shuttleSpawner: RMCSpawnerERTShuttle
-  shuttleSpawnMarker: RMCERTShuttleStartPadUNMC
-  autoLaunch: true
-  shuttleTravelTime: 40s
-  landingTags: [ mainship ]
-  roles:
-  - id: leader
-    name: rmc-ert-role-cbrn-leader
-    job: RMCCBRNSquadLeader
-    ghostRoleEntityPool:
-    - entity: RMCRandomHumanoidCBRNSquadLeader
-      weight: 100
-    min: 1
-    max: 1
-    leader: true
-    roleTags: [ leader, command ]
-    seatTags: [ command ]
-    priority: 100
-  - id: rifleman
-    name: rmc-ert-role-cbrn-rifleman
-    job: RMCCBRNRifleman
-    ghostRoleEntityPool:
-    - entity: RMCRandomHumanoidCBRNRifleman
-      weight: 50
-    - entity: RMCRandomHumanoidCBRNRiflemanFlamer
-      weight: 50
-    min: 2
-    max: 2
-    roleTags: [ rifleman ]
-    seatTags: [ troop ]
-  - id: medic
-    name: rmc-ert-role-cbrn-medic
-    job: RMCCBRNMedic
-    ghostRoleEntityPool:
-    - entity: RMCRandomHumanoidCBRNMedic
-      weight: 100
-    min: 0
-    max: 1
-    required: false
-    roleTags: [ medic ]
-    seatTags: [ medic, troop ]
-    priority: 50
-  - id: engineer
-    name: rmc-ert-role-cbrn-engineer
-    job: RMCCBRNCombatTech
-    ghostRoleEntityPool:
-    - entity: RMCRandomHumanoidCBRNCombatTech
-      weight: 100
-    min: 0
-    max: 1
-    required: false
-    roleTags: [ engineer ]
-    seatTags: [ engineer, troop ]
-    priority: 40
-  announcements:
-    arrival:
-      title: rmc-ert-announcement-title-intercepted-transmission
-      message: rmc-ert-announcement-cbrn-arrival
-  requirements:
-    cooldown: 10m
-    recruitmentDuration: 1m
-    maxCallsPerRound: 1
-    minRequiredSlots: 3
-    maxSlots: 5
+  name: "UNMC CBRN Response Team"
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCERTCall
+    organization: rmc-ert-organization-unmc
+    npcFactions: [ UNMC ]
+    accessGroups: [ ShipMasterAccess, RMCERT ]
+    iffFaction: FactionMarine
+    category: rmc-ert-category-military
+    enabled: true
+    adminSelectable: true
+    adminButtonLabel: rmc-ert-admin-button-cbrn
+    randomWeight: 10
+    allowedSources: [ Console, Admin ]
+    # TODO RMC14 replace with an exact CBRN/UNMC response shuttle once ported.
+    shuttleMap: /Maps/_RMC14/Shuttles/ERT/ert_response_shuttle.yml
+    shuttleSpawner: RMCSpawnerERTShuttle
+    shuttleSpawnMarker: RMCERTShuttleStartPadUNMC
+    autoLaunch: true
+    shuttleTravelTime: 40s
+    landingTags: [ mainship ]
+    roles:
+    - id: leader
+      name: rmc-ert-role-cbrn-leader
+      job: RMCCBRNSquadLeader
+      ghostRoleEntityPool:
+      - entity: RMCRandomHumanoidCBRNSquadLeader
+        weight: 100
+      min: 1
+      max: 1
+      leader: true
+      roleTags: [ leader, command ]
+      seatTags: [ command ]
+      priority: 100
+    - id: rifleman
+      name: rmc-ert-role-cbrn-rifleman
+      job: RMCCBRNRifleman
+      ghostRoleEntityPool:
+      - entity: RMCRandomHumanoidCBRNRifleman
+        weight: 50
+      - entity: RMCRandomHumanoidCBRNRiflemanFlamer
+        weight: 50
+      min: 2
+      max: 2
+      roleTags: [ rifleman ]
+      seatTags: [ troop ]
+    - id: medic
+      name: rmc-ert-role-cbrn-medic
+      job: RMCCBRNMedic
+      ghostRoleEntityPool:
+      - entity: RMCRandomHumanoidCBRNMedic
+        weight: 100
+      min: 0
+      max: 1
+      required: false
+      roleTags: [ medic ]
+      seatTags: [ medic, troop ]
+      priority: 50
+    - id: engineer
+      name: rmc-ert-role-cbrn-engineer
+      job: RMCCBRNCombatTech
+      ghostRoleEntityPool:
+      - entity: RMCRandomHumanoidCBRNCombatTech
+        weight: 100
+      min: 0
+      max: 1
+      required: false
+      roleTags: [ engineer ]
+      seatTags: [ engineer, troop ]
+      priority: 40
+    announcements:
+      arrival:
+        title: rmc-ert-announcement-title-intercepted-transmission
+        message: rmc-ert-announcement-cbrn-arrival
+    requirements:
+      cooldown: 10m
+      recruitmentDuration: 1m
+      maxCallsPerRound: 1
+      minRequiredSlots: 3
+      maxSlots: 5

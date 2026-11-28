@@ -81,7 +81,7 @@ public sealed partial class RMCERTSystem
                 r.RequesterName,
                 r.Reason,
                 GetSelectedCallLabel(r),
-                r.AllowedCalls.Select(c => c.Id).ToList(),
+                r.AllowedCalls.ToList(),
                 r.AllowRandomSelection,
                 r.AllowSpecificSelection,
                 FormatRoundTime(r.CreatedAt),
@@ -113,25 +113,25 @@ public sealed partial class RMCERTSystem
     /// <returns>Sorted call options suitable for admin UI, commands, or preparing <see cref="RMCERTCreateRequestArgs.AllowedCalls"/>.</returns>
     public List<RMCERTCallOption> GetCallOptions(RMCERTCallQueryArgs args)
     {
-        return _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
-            .Where(c => !args.EnabledOnly || c.Enabled)
-            .Where(c => !args.AdminSelectableOnly || c.AdminSelectable)
-            .Where(c => args.Source == null || c.AllowedSources.Contains(args.Source.Value))
+        return _calls.Values
+            .Where(c => !args.EnabledOnly || c.Comp.Enabled)
+            .Where(c => !args.AdminSelectableOnly || c.Comp.AdminSelectable)
+            .Where(c => args.Source == null || c.Comp.AllowedSources.Contains(args.Source.Value))
             .OrderBy(c => c.Category)
             .ThenBy(c => c.Name)
             .Select(ToCallOption)
             .ToList();
     }
 
-    private RMCERTCallOption ToCallOption(RMCERTCallPrototype call)
+    private RMCERTCallOption ToCallOption(RMCERTCall call)
     {
         return new RMCERTCallOption(
-            call.ID,
+            call.Id,
             call.Name,
             GetOrganizationLabel(call),
             call.Category,
-            call.RandomWeight,
-            call.AdminSelectable,
+            call.Comp.RandomWeight,
+            call.Comp.AdminSelectable,
             call.AdminButtonLabel);
     }
 

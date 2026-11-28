@@ -121,7 +121,7 @@ public sealed class RMCERTAdminEui : BaseEui
                 }).Any(c => c.Id == force.Call);
                 if (!canAdminForceCall)
                 {
-                    _chat.DispatchServerMessage(Player, Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", force.Call)));
+                    _chat.DispatchServerMessage(Player, Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", force.Call.Id)));
                     return;
                 }
 

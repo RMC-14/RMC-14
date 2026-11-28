@@ -63,79 +63,89 @@ public sealed partial class RMCERTSystem
 
     private void ValidatePrototypes()
     {
-        foreach (var call in _prototypes.EnumeratePrototypes<RMCERTCallPrototype>())
+        _calls.Clear();
+        foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (call.Roles.Count == 0 &&
+            if (prototype.Abstract || !prototype.TryGetComponent<RMCERTCallComponent>(out var component, _componentFactory))
+                continue;
+
+            var call = new RMCERTCall(prototype, component);
+            _calls.Add(call.Id, call);
+        }
+
+        foreach (var call in _calls.Values)
+        {
+            if (call.Comp.Roles.Count == 0 &&
                 !IsCargoOnlyShuttle(call))
             {
-                Log.Error($"ERT call {call.ID} has no roles configured.");
+                Log.Error($"ERT call {call.Id} has no roles configured.");
             }
 
             if (!TryGetShuttleMapPath(call, out _, out var shuttleError))
-                Log.Error($"ERT call {call.ID} has invalid shuttle configuration: {shuttleError}");
+                Log.Error($"ERT call {call.Id} has invalid shuttle configuration: {shuttleError}");
 
-            if (call.ShuttleCargo.Count > 0 || call.ShuttleCargoCount > 0)
+            if (call.Comp.ShuttleCargo.Count > 0 || call.Comp.ShuttleCargoCount > 0)
             {
-                if (call.ShuttleCargo.Count == 0)
-                    Log.Error($"ERT call {call.ID} has shuttleCargoCount but no shuttle cargo prototypes.");
+                if (call.Comp.ShuttleCargo.Count == 0)
+                    Log.Error($"ERT call {call.Id} has shuttleCargoCount but no shuttle cargo prototypes.");
 
-                foreach (var cargo in call.ShuttleCargo)
+                foreach (var cargo in call.Comp.ShuttleCargo)
                 {
                     if (!_prototypes.HasIndex<EntityPrototype>(cargo))
-                        Log.Error($"ERT call {call.ID} references missing shuttle cargo entity {cargo}.");
+                        Log.Error($"ERT call {call.Id} references missing shuttle cargo entity {cargo}.");
                 }
             }
 
-            if (call.ShuttleSpawnMarker is { } spawnMarker)
+            if (call.Comp.ShuttleSpawnMarker is { } spawnMarker)
             {
                 if (!_prototypes.TryIndex(spawnMarker, out var spawnMarkerPrototype))
                 {
-                    Log.Error($"ERT call {call.ID} references missing shuttle spawn marker {spawnMarker.Id}.");
+                    Log.Error($"ERT call {call.Id} references missing shuttle spawn marker {spawnMarker.Id}.");
                 }
                 else if (!spawnMarkerPrototype.HasComponent<RMCERTShuttleStartPadComponent>(_componentFactory) &&
                          !spawnMarkerPrototype.HasComponent<GridSpawnerComponent>(_componentFactory))
                 {
-                    Log.Error($"ERT call {call.ID} shuttle spawn marker {spawnMarker.Id} is missing RMCERTShuttleStartPadComponent.");
+                    Log.Error($"ERT call {call.Id} shuttle spawn marker {spawnMarker.Id} is missing RMCERTShuttleStartPadComponent.");
                 }
             }
 
             if (string.IsNullOrWhiteSpace(call.Organization) &&
-                call.NpcFactions.Count == 0 &&
-                call.IffFaction == null)
+                call.Comp.NpcFactions.Count == 0 &&
+                call.Comp.IffFaction == null)
             {
-                Log.Error($"ERT call {call.ID} is missing organization, NPC factions, and IFF faction metadata.");
+                Log.Error($"ERT call {call.Id} is missing organization, NPC factions, and IFF faction metadata.");
             }
 
-            foreach (var role in call.Roles)
+            foreach (var role in call.Comp.Roles)
             {
                 if (role.GhostRoleEntityPool.Count == 0)
-                    Log.Error($"ERT call {call.ID} role {role.Id} has no ghost role entity pool entries.");
+                    Log.Error($"ERT call {call.Id} role {role.Id} has no ghost role entity pool entries.");
 
                 foreach (var entry in role.GhostRoleEntityPool)
                 {
                     if (entry.Weight <= 0)
-                        Log.Error($"ERT call {call.ID} role {role.Id} has non-positive ghost role entity pool weight {entry.Weight} for {entry.Entity}.");
+                        Log.Error($"ERT call {call.Id} role {role.Id} has non-positive ghost role entity pool weight {entry.Weight} for {entry.Entity}.");
 
                     if (!_prototypes.HasIndex<EntityPrototype>(entry.Entity))
-                        Log.Error($"ERT call {call.ID} role {role.Id} references missing pooled ghost role entity {entry.Entity}.");
+                        Log.Error($"ERT call {call.Id} role {role.Id} references missing pooled ghost role entity {entry.Entity}.");
                 }
 
                 if (role.Max < role.Min)
-                    Log.Error($"ERT call {call.ID} role {role.Id} has max {role.Max} lower than min {role.Min}.");
+                    Log.Error($"ERT call {call.Id} role {role.Id} has max {role.Max} lower than min {role.Min}.");
             }
 
-            var totalMax = call.Roles.Sum(GetRoleMaximumCount);
-            var requiredMinimum = Math.Max(call.Requirements.MinRequiredSlots, call.Roles.Sum(GetRoleMinimumCount));
-            var effectiveMax = call.Requirements.MaxSlots > 0
-                ? Math.Min(totalMax, call.Requirements.MaxSlots)
+            var totalMax = call.Comp.Roles.Sum(GetRoleMaximumCount);
+            var requiredMinimum = Math.Max(call.Comp.Requirements.MinRequiredSlots, call.Comp.Roles.Sum(GetRoleMinimumCount));
+            var effectiveMax = call.Comp.Requirements.MaxSlots > 0
+                ? Math.Min(totalMax, call.Comp.Requirements.MaxSlots)
                 : totalMax;
 
-            if (call.Requirements.MaxSlots < 0)
-                Log.Error($"ERT call {call.ID} has negative maxSlots {call.Requirements.MaxSlots}.");
+            if (call.Comp.Requirements.MaxSlots < 0)
+                Log.Error($"ERT call {call.Id} has negative maxSlots {call.Comp.Requirements.MaxSlots}.");
 
             if (requiredMinimum > effectiveMax)
             {
-                Log.Error($"ERT call {call.ID} requires at least {requiredMinimum} roster slots, but only {effectiveMax} are available.");
+                Log.Error($"ERT call {call.Id} requires at least {requiredMinimum} roster slots, but only {effectiveMax} are available.");
             }
         }
     }

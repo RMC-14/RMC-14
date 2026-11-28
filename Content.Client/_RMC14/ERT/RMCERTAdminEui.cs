@@ -311,9 +311,9 @@ public sealed class RMCERTAdminEui : BaseEui
                 });
 
                 var meta = string.IsNullOrWhiteSpace(call.Organization)
-                    ? Loc.GetString("rmc-ert-admin-force-row-id", ("id", call.Id))
+                    ? Loc.GetString("rmc-ert-admin-force-row-id", ("id", call.Id.Id))
                     : Loc.GetString("rmc-ert-admin-force-row-compact-meta",
-                        ("id", call.Id),
+                        ("id", call.Id.Id),
                         ("organization", call.Organization));
                 details.AddChild(new Label
                 {

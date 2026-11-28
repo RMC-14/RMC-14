@@ -84,12 +84,12 @@ public sealed class RMCERTRequest
     /// <summary>
     /// Call prototype selected for this request after approval.
     /// </summary>
-    public ProtoId<RMCERTCallPrototype>? SelectedCall;
+    public EntProtoId<RMCERTCallComponent>? SelectedCall;
 
     /// <summary>
     /// Call prototypes this request is allowed to dispatch.
     /// </summary>
-    public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
+    public List<EntProtoId<RMCERTCallComponent>> AllowedCalls = [];
 
     /// <summary>
     /// Whether admins may approve this request by weighted-random selection.
@@ -206,7 +206,7 @@ public sealed class RMCERTCreateRequestArgs
     /// The caller is responsible for preparing this list; use <c>GetCallOptions</c> first when source/enabled filtering is desired.
     /// A single entry means this request is constrained to one call.
     /// </summary>
-    public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
+    public List<EntProtoId<RMCERTCallComponent>> AllowedCalls = [];
 
     /// <summary>
     /// Whether admins may approve this request by weighted-random selection from enabled calls in <see cref="AllowedCalls"/>.
@@ -235,7 +235,7 @@ public sealed class RMCERTForceCallArgs
     /// Specific ERT call prototype to create and approve immediately.
     /// The call must exist and be enabled; admin-facing adapters may add their own <c>AdminSelectable</c> restriction before calling.
     /// </summary>
-    public ProtoId<RMCERTCallPrototype> Call;
+    public EntProtoId<RMCERTCallComponent> Call;
 
     /// <summary>
     /// Optional entity performing the force call, usually the admin's attached entity.
@@ -270,7 +270,7 @@ public sealed class RMCERTApproveRequestArgs
     /// Specific approval requires the request to allow specific selection and the call to be present in the request's allowed set.
     /// Random approval requires the request to allow random selection.
     /// </summary>
-    public ProtoId<RMCERTCallPrototype>? Call;
+    public EntProtoId<RMCERTCallComponent>? Call;
 
     /// <summary>
     /// Optional entity approving the request, usually the admin's attached entity.
@@ -314,7 +314,7 @@ public sealed class RMCERTRequestActionArgs
 public sealed class RMCERTCallQueryArgs
 {
     /// <summary>
-    /// When true, return only call prototypes with <see cref="RMCERTCallPrototype.Enabled"/> set.
+    /// When true, return only call prototypes with <see cref="RMCERTCallComponent.Enabled"/> set.
     /// When false, include disabled calls as well.
     /// </summary>
     public bool EnabledOnly;

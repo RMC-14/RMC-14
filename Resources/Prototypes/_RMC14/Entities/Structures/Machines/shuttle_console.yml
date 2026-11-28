@@ -389,7 +389,7 @@
   - type: DropshipDestination
     dockBounds: "-4,-8.5,4,6.5"
     reserved: true
-    landingClasses: [ internal ]
+    landingClasses: [ Internal ]
     landingTags: [ mainship, ert, internal ]
 
 - type: entity
@@ -421,7 +421,7 @@
   - type: DropshipDestination
     dockBounds: "-5,-9.5,5,7.5"
     reserved: true
-    landingClasses: [ external_side ]
+    landingClasses: [ ExternalSide ]
     landingTags: [ mainship, ert, external_side ]
   - type: RMCDockingPortAirlockControl
     airlockTags: [ RMCShuttleAirlockExternalSide ]
@@ -435,7 +435,7 @@
   - type: DropshipDestination
     dockBounds: "-6,-10.5,6,8.5"
     reserved: true
-    landingClasses: [ external_hangar ]
+    landingClasses: [ ExternalHangar ]
     landingTags: [ mainship, ert, external_hangar ]
   - type: RMCDockingPortAirlockControl
     airlockTags: [ RMCShuttleAirlockExternalHangar ]

@@ -3,8 +3,7 @@
 # - autoResolution: omit for admin approval; delay: 0s resolves immediately, positive delay allows admin review first.
 # - autoResolution.approvalChance: 0..1, default 1; 1 guarantees approval, intermediate values roll for a response.
 # - A single eligible call is selected directly; larger automatic pools use the calls' randomWeight values.
-# - requestTitle: loc id for the title shown in the reason prompt and admin request text.
-# - recipient: loc id for the authority or organization receiving the request.
+# - recipient: fallback name of the authority or organization receiving the request.
 # - reasonRequired: whether the user must enter a non-empty reason.
 # - singleUse: whether the beacon becomes spent after a successful request.
 # - resetOnDeny: whether denial clears the spent/cooldown state for reuse.
@@ -48,8 +47,7 @@
   suffix: CMB
   components:
   - type: RMCERTDistressBeacon
-    recipient: rmc-ert-recipient-anchorpoint
-    requestTitle: rmc-ert-beacon-request-title-cmb
+    recipient: Anchorpoint Station
     allowedCalls:
     - RMCERTCallCMB
     - RMCERTCallCMBRiot
@@ -75,8 +73,7 @@
   - type: AccessReader
     access: [ [ "RMCAccessWeYa" ] ]
   - type: RMCERTDistressBeacon
-    recipient: rmc-ert-recipient-weya-command
-    requestTitle: rmc-ert-beacon-request-title-weya
+    recipient: We-Ya emergency response command
     allowedCalls:
     - RMCERTCallPMC
     - RMCERTCallWeYaBodyguard
@@ -93,8 +90,7 @@
   suffix: We-Ya, Bodyguard
   components:
   - type: RMCERTDistressBeacon
-    recipient: rmc-ert-recipient-weya-security
-    requestTitle: rmc-ert-beacon-request-title-weya-bodyguard
+    recipient: We-Ya Corporate Security Division
     allowedCalls:
     - RMCERTCallWeYaBodyguard
     - RMCERTCallWeYaBodyguardGoon
@@ -109,8 +105,7 @@
   suffix: We-Ya, Lawyer
   components:
   - type: RMCERTDistressBeacon
-    recipient: rmc-ert-recipient-weya-affairs
-    requestTitle: rmc-ert-beacon-request-title-weya-lawyer
+    recipient: We-Ya Corporate Affairs Division
     allowedCalls:
     - RMCERTCallWeYaLawyers
 
@@ -121,8 +116,7 @@
   suffix: Provost
   components:
   - type: RMCERTDistressBeacon
-    recipient: rmc-ert-recipient-provost
-    requestTitle: rmc-ert-beacon-request-title-provost
+    recipient: the Superintendent
     allowedCalls:
     - RMCERTCallProvost
 
@@ -133,8 +127,7 @@
   suffix: SPP, TSE
   components:
   - type: RMCERTDistressBeacon
-    recipient: rmc-ert-recipient-allied
-    requestTitle: rmc-ert-beacon-request-title-foreign
+    recipient: allied response command
     allowedCalls:
     - RMCERTCallSPPFriendly
     - RMCERTCallTSE
@@ -146,7 +139,6 @@
   suffix: Pizza
   components:
   - type: RMCERTDistressBeacon
-    recipient: rmc-ert-recipient-pizza
-    requestTitle: rmc-ert-beacon-request-title-pizza
+    recipient: Pizza Galaxy dispatch
     allowedCalls:
     - RMCERTCallPizza

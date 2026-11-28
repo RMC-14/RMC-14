@@ -740,7 +740,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         var allowedDockClasses = RMCShuttleDocking.GetAllowedDockClasses(computer.Comp.ShuttleDockingClass);
 
         if (allowedDockClasses.Length > 0 &&
-            !MatchesAny(destinationComp.LandingClasses, allowedDockClasses))
+            !destinationComp.LandingClasses.Any(allowedDockClasses.Contains))
         {
             reason = Loc.GetString("rmc-dropship-destination-invalid-class");
             return false;

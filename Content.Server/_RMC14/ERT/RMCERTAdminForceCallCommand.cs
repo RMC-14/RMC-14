@@ -31,7 +31,7 @@ public sealed class RMCERTAdminForceCallCommand : LocalizedCommands
         {
             EnabledOnly = true,
             AdminSelectableOnly = true,
-        }).Any(c => c.Id == args[0]);
+        }).Any(c => c.Id.Id == args[0]);
         if (!canAdminForceCall)
         {
             shell.WriteError(Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", args[0])));
@@ -66,7 +66,7 @@ public sealed class RMCERTAdminForceCallCommand : LocalizedCommands
                     EnabledOnly = true,
                     AdminSelectableOnly = true,
                 })
-                .Select(c => c.Id);
+                .Select(c => c.Id.Id);
             return CompletionResult.FromHintOptions(options, Loc.GetString("rmc-ert-admin-command-force-call-hint"));
         }
 

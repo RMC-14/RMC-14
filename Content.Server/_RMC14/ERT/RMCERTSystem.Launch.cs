@@ -91,7 +91,7 @@ public sealed partial class RMCERTSystem
             }
 
             if (request.SelectedCall is { } callId &&
-                _prototypes.TryIndex(callId, out var call))
+                _calls.TryGetValue(callId, out var call))
             {
                 MarkArrived(request, call);
             }
@@ -167,7 +167,7 @@ public sealed partial class RMCERTSystem
         if (request.State != RMCERTRequestState.Recruiting)
             return false;
 
-        if (request.SelectedCall is not { } callId || !_prototypes.TryIndex(callId, out var call))
+        if (request.SelectedCall is not { } callId || !_calls.TryGetValue(callId, out var call))
         {
             FailRequest(request, Loc.GetString("rmc-ert-error-selected-call-missing"));
             return false;
@@ -202,30 +202,30 @@ public sealed partial class RMCERTSystem
         return TryLaunchRequest(request, call, launcher);
     }
 
-    private bool TryLaunchRequest(RMCERTRequest request, RMCERTCallPrototype call, string launcher)
+    private bool TryLaunchRequest(RMCERTRequest request, RMCERTCall call, string launcher)
     {
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
 
         var acceptedCount = FinalizeRecruitment(request);
-        Log.Info($"ERT request {request.Id} launching {call.ID}: accepted={acceptedCount}, " +
-                 $"required={call.Requirements.MinRequiredSlots}, planned={request.PlannedRoster.Count}, " +
+        Log.Info($"ERT request {request.Id} launching {call.Id}: accepted={acceptedCount}, " +
+                 $"required={call.Comp.Requirements.MinRequiredSlots}, planned={request.PlannedRoster.Count}, " +
                  $"spawnedGhostRoles={request.SpawnedGhostRoles.Count}, launcher={launcher}");
 
-        if (acceptedCount < call.Requirements.MinRequiredSlots)
+        if (acceptedCount < call.Comp.Requirements.MinRequiredSlots)
         {
             FailRequest(request,
                 acceptedCount == 0
                     ? Loc.GetString("rmc-ert-error-no-volunteers")
                     : Loc.GetString("rmc-ert-error-not-enough-volunteers",
                         ("accepted", acceptedCount),
-                        ("required", call.Requirements.MinRequiredSlots)),
+                        ("required", call.Comp.Requirements.MinRequiredSlots)),
                 announceNoResponse: true);
             return false;
         }
 
-        foreach (var role in call.Roles)
+        foreach (var role in call.Comp.Roles)
         {
             if (!role.Required)
                 continue;
@@ -253,7 +253,7 @@ public sealed partial class RMCERTSystem
                 request,
                 launcher,
                 call,
-                $"accepted={acceptedCount}, required={call.Requirements.MinRequiredSlots}");
+                $"accepted={acceptedCount}, required={call.Comp.Requirements.MinRequiredSlots}");
             AnnounceDispatch(request, call);
             MarkArrived(request, call, Loc.GetString("rmc-ert-arrived-detail-no-shuttle", ("launcher", launcher)));
             return true;
@@ -273,7 +273,7 @@ public sealed partial class RMCERTSystem
             return false;
         }
 
-        var shuttleTravelTime = call.ShuttleTravelTime is { } travelTime
+        var shuttleTravelTime = call.Comp.ShuttleTravelTime is { } travelTime
             ? (float) travelTime.TotalSeconds
             : (float?) null;
 
@@ -290,7 +290,7 @@ public sealed partial class RMCERTSystem
             request,
             launcher,
             call,
-            $"destination={FormatEntity(destination)}, accepted={acceptedCount}, required={call.Requirements.MinRequiredSlots}");
+            $"destination={FormatEntity(destination)}, accepted={acceptedCount}, required={call.Comp.Requirements.MinRequiredSlots}");
         DirtyState(request);
         return true;
     }
@@ -313,7 +313,7 @@ public sealed partial class RMCERTSystem
 
     private bool TryFindLandingZone(
         RMCERTRequest request,
-        RMCERTCallPrototype call,
+        RMCERTCall call,
         Entity<DropshipNavigationComputerComponent> computer,
         out EntityUid destination,
         out string error)
@@ -373,23 +373,23 @@ public sealed partial class RMCERTSystem
         return sourceXform.MapUid;
     }
 
-    private bool TryPickRandomCall(RMCERTRequest request, out ProtoId<RMCERTCallPrototype>? callId, out string error)
+    private bool TryPickRandomCall(RMCERTRequest request, out EntProtoId<RMCERTCallComponent>? callId, out string error)
     {
         callId = null;
         error = string.Empty;
 
-        var calls = new List<RMCERTCallPrototype>();
+        var calls = new List<RMCERTCall>();
         var total = 0;
         foreach (var id in request.AllowedCalls)
         {
-            if (!_prototypes.TryIndex(id, out var call, false))
+            if (!_calls.TryGetValue(id, out var call))
                 continue;
 
-            if (!call.Enabled || call.RandomWeight <= 0 ||
+            if (!call.Comp.Enabled || call.Comp.RandomWeight <= 0 ||
                 !CheckRequirements(request, call, out _))
                 continue;
 
-            total += call.RandomWeight;
+            total += call.Comp.RandomWeight;
             calls.Add(call);
         }
 
@@ -403,11 +403,11 @@ public sealed partial class RMCERTSystem
         var cursor = 0;
         foreach (var call in calls)
         {
-            cursor += call.RandomWeight;
+            cursor += call.Comp.RandomWeight;
             if (roll >= cursor)
                 continue;
 
-            callId = new ProtoId<RMCERTCallPrototype>(call.ID);
+            callId = call.Id;
             return true;
         }
 
@@ -415,14 +415,14 @@ public sealed partial class RMCERTSystem
         return false;
     }
 
-    private void MarkArrived(RMCERTRequest request, RMCERTCallPrototype call, string? detail = null)
+    private void MarkArrived(RMCERTRequest request, RMCERTCall call, string? detail = null)
     {
         request.State = RMCERTRequestState.Arrived;
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
         MakeReturnRouteAvailable(request);
         UpdateSourceVisual(request, false);
-        Announce(call.Announcements.Arrival, request, call);
+        Announce(call.Comp.Announcements.Arrival, request, call);
         AddERTRequestLog(LogImpact.Medium,
             "arrived",
             request,

@@ -87,7 +87,7 @@ public sealed partial class RMCERTSystem
             extra: $"previousState={previousState}, error=\"{FormatLogValue(error)}\"");
 
         if (request.SelectedCall is { } callId &&
-            _prototypes.TryIndex(callId, out var call) &&
+            _calls.TryGetValue(callId, out var call) &&
             announceNoResponse)
         {
             AnnounceNoResponse(request, call);
@@ -96,11 +96,11 @@ public sealed partial class RMCERTSystem
         DirtyState(request);
     }
 
-    private void AnnounceRequestCreated(RMCERTRequest request, RMCERTCallPrototype? call = null)
+    private void AnnounceRequestCreated(RMCERTRequest request, RMCERTCall? call = null)
     {
-        if (call?.Announcements.Request != null)
+        if (call?.Comp.Announcements.Request != null)
         {
-            Announce(call.Announcements.Request, request, call);
+            Announce(call.Comp.Announcements.Request, request, call);
             return;
         }
 
@@ -118,7 +118,7 @@ public sealed partial class RMCERTSystem
         AnnounceERTToMarines(title, message, DistressBeaconSound);
     }
 
-    private void AnnounceNoResponse(RMCERTRequest request, RMCERTCallPrototype? call)
+    private void AnnounceNoResponse(RMCERTRequest request, RMCERTCall? call)
     {
         var announcement = new RMCERTStageAnnouncement
         {
@@ -150,12 +150,12 @@ public sealed partial class RMCERTSystem
         };
     }
 
-    private void AnnounceDispatch(RMCERTRequest request, RMCERTCallPrototype call)
+    private void AnnounceDispatch(RMCERTRequest request, RMCERTCall call)
     {
-        Announce(call.Announcements.Dispatch ?? CreateDefaultDispatchAnnouncement(), request, call);
+        Announce(call.Comp.Announcements.Dispatch ?? CreateDefaultDispatchAnnouncement(), request, call);
     }
 
-    private void Announce(RMCERTStageAnnouncement? announcement, RMCERTRequest request, RMCERTCallPrototype call)
+    private void Announce(RMCERTStageAnnouncement? announcement, RMCERTRequest request, RMCERTCall call)
     {
         if (announcement == null)
             return;
@@ -190,7 +190,7 @@ public sealed partial class RMCERTSystem
         string action,
         RMCERTRequest request,
         string actor,
-        RMCERTCallPrototype? call = null,
+        RMCERTCall? call = null,
         string? extra = null)
     {
         var selected = call?.Name ?? GetSelectedCallLabel(request) ?? "none";
@@ -243,26 +243,26 @@ public sealed partial class RMCERTSystem
             ("source", sourceLabel),
             ("reason", request.Reason));
         if (request.AllowedCalls.Count != 1 ||
-            !_prototypes.TryIndex(request.AllowedCalls[0], out var call) ||
-            call.Announcements.RequestAdmin == null)
+            !_calls.TryGetValue(request.AllowedCalls[0], out var call) ||
+            call.Comp.Announcements.RequestAdmin == null)
         {
             return baseText;
         }
 
-        var extra = FormatCallText(call.Announcements.RequestAdmin.Value, request, call);
+        var extra = FormatCallText(call.Comp.Announcements.RequestAdmin.Value, request, call);
         return Loc.GetString("rmc-ert-admin-request-with-extra", ("base", baseText), ("extra", extra));
     }
 
-    private RMCERTCallPrototype? GetRequestAnnouncementCall(RMCERTRequest request)
+    private RMCERTCall? GetRequestAnnouncementCall(RMCERTRequest request)
     {
         if (request.SelectedCall is { } selectedCallId &&
-            _prototypes.TryIndex(selectedCallId, out var selectedCall))
+            _calls.TryGetValue(selectedCallId, out var selectedCall))
         {
             return selectedCall;
         }
 
         if (request.AllowedCalls.Count == 1 &&
-            _prototypes.TryIndex(request.AllowedCalls[0], out var onlyCall))
+            _calls.TryGetValue(request.AllowedCalls[0], out var onlyCall))
         {
             return onlyCall;
         }
@@ -275,7 +275,14 @@ public sealed partial class RMCERTSystem
         if (source == RMCERTRequestSource.Handheld &&
             TryComp(sourceEntity, out RMCERTDistressBeaconComponent? beacon))
         {
-            return Loc.GetString("rmc-ert-success-handheld", ("recipient", beacon.Recipient));
+            var recipient = beacon.Recipient;
+            if (MetaData(sourceEntity).EntityPrototype is { } prototype &&
+                _loc.GetEntityData(prototype.ID).Attributes.TryGetValue("ert-recipient", out var localized))
+            {
+                recipient = localized;
+            }
+
+            return Loc.GetString("rmc-ert-success-handheld", ("recipient", recipient));
         }
 
         return Loc.GetString("rmc-ert-success-console");
@@ -307,18 +314,18 @@ public sealed partial class RMCERTSystem
     {
         if (request.Source == RMCERTRequestSource.Handheld &&
             request.SourceEntity is { Valid: true } source &&
-            TryComp(source, out RMCERTDistressBeaconComponent? beacon))
+            HasComp<RMCERTDistressBeaconComponent>(source))
         {
-            return beacon.RequestTitle;
+            return Name(source);
         }
 
         return RMCERTLoc.GetSource(request.Source);
     }
 
-    private string BuildMemberBriefing(RMCERTRequest request, RMCERTCallPrototype call)
+    private string BuildMemberBriefing(RMCERTRequest request, RMCERTCall call)
     {
-        if (call.Objectives.Count == 0 &&
-            call.Features.Count == 0 &&
+        if (call.Comp.Objectives.Count == 0 &&
+            call.Comp.Features.Count == 0 &&
             string.IsNullOrWhiteSpace(request.Reason))
         {
             return string.Empty;
@@ -330,20 +337,20 @@ public sealed partial class RMCERTSystem
         if (!string.IsNullOrWhiteSpace(request.Reason))
             builder.AppendLine(Loc.GetString("rmc-ert-briefing-reason", ("reason", request.Reason)));
 
-        if (call.Objectives.Count > 0)
+        if (call.Comp.Objectives.Count > 0)
         {
             builder.AppendLine(Loc.GetString("rmc-ert-briefing-objectives"));
-            foreach (var objective in call.Objectives)
+            foreach (var objective in call.Comp.Objectives)
             {
                 builder.Append(Loc.GetString("rmc-ert-briefing-bullet"));
                 builder.AppendLine(FormatCallText(objective, request, call));
             }
         }
 
-        if (call.Features.Count > 0)
+        if (call.Comp.Features.Count > 0)
         {
             builder.AppendLine(Loc.GetString("rmc-ert-briefing-features"));
-            foreach (var feature in call.Features)
+            foreach (var feature in call.Comp.Features)
             {
                 builder.Append(Loc.GetString("rmc-ert-briefing-bullet"));
                 builder.AppendLine(FormatCallText(feature, request, call));
@@ -353,7 +360,7 @@ public sealed partial class RMCERTSystem
         return builder.ToString().TrimEnd();
     }
 
-    private string FormatCallText(LocId text, RMCERTRequest request, RMCERTCallPrototype call)
+    private string FormatCallText(LocId text, RMCERTRequest request, RMCERTCall call)
     {
         return Loc.GetString(text,
             ("ship", GetRequestShipName(request)),
@@ -391,15 +398,15 @@ public sealed partial class RMCERTSystem
         return true;
     }
 
-    private static string GetOrganizationLabel(RMCERTCallPrototype call)
+    private static string GetOrganizationLabel(RMCERTCall call)
     {
         if (!string.IsNullOrWhiteSpace(call.Organization))
             return call.Organization;
 
-        if (call.NpcFactions.Count > 0)
-            return call.NpcFactions[0].Id;
+        if (call.Comp.NpcFactions.Count > 0)
+            return call.Comp.NpcFactions[0].Id;
 
-        if (call.IffFaction is { } iffFaction)
+        if (call.Comp.IffFaction is { } iffFaction)
             return iffFaction.Id;
 
         return call.Name;
@@ -410,7 +417,7 @@ public sealed partial class RMCERTSystem
         if (request.SelectedCall is not { } callId)
             return null;
 
-        if (_prototypes.TryIndex(callId, out var call))
+        if (_calls.TryGetValue(callId, out var call))
             return call.Name;
 
         return callId.Id;

@@ -33,7 +33,7 @@ public sealed partial class DropshipDestinationComponent : Component
     /// Docking class tags describing which shuttle profiles may use this destination.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<string> LandingClasses = [];
+    public List<RMCShuttleLandingClass> LandingClasses = [];
 
     /// <summary>
     /// Whether this destination is reserved by a pending launch or routing operation.

@@ -11,38 +11,11 @@ namespace Content.Shared._RMC14.ERT;
 /// <summary>
 /// Data-driven definition of an ERT option, including roster, shuttle source, announcements and request checks.
 /// </summary>
-[Prototype("rmcERTCall")]
-public sealed partial class RMCERTCallPrototype : IPrototype
+[RegisterComponent]
+public sealed partial class RMCERTCallComponent : Component
 {
-    /// <summary>
-    /// Prototype id referenced by requests, admin messages, beacons and other ERT configuration.
-    /// </summary>
-    [IdDataField]
-    public string ID { get; private set; } = default!;
-
-    /// <summary>
-    /// Localization id for the response team name shown in admin UI and responder briefings.
-    /// </summary>
-    [DataField("name", required: true)]
-    private LocId _name = default!;
-
-    /// <summary>
-    /// Localized display name for this ERT call.
-    /// </summary>
-    public string Name => Loc.GetString(_name);
-
-    /// <summary>
-    /// Optional localization id for the organization responsible for this response team.
-    /// </summary>
-    [DataField("organization")]
-    private LocId? _organization;
-
-    /// <summary>
-    /// Localized organization label, or an empty string when this call has no organization.
-    /// </summary>
-    public string Organization => _organization == null
-        ? string.Empty
-        : Loc.GetString(_organization.Value);
+    [DataField]
+    public LocId? Organization;
 
     /// <summary>
     /// NPC factions assigned to responders spawned for this call.
@@ -65,13 +38,8 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     /// <summary>
     /// Localization id for the admin UI category this call is grouped under.
     /// </summary>
-    [DataField("category")]
-    private LocId _category = "rmc-ert-category-response";
-
-    /// <summary>
-    /// Localized admin UI category label for this call.
-    /// </summary>
-    public string Category => Loc.GetString(_category);
+    [DataField]
+    public LocId Category = "rmc-ert-category-response";
 
     /// <summary>
     /// Whether the call can currently be selected or randomly chosen.
@@ -88,15 +56,8 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     /// <summary>
     /// Optional localization id overriding the force-call button label in the admin UI.
     /// </summary>
-    [DataField("adminButtonLabel")]
-    private LocId? _adminButtonLabel;
-
-    /// <summary>
-    /// Localized force-call button label, or null to use the call name.
-    /// </summary>
-    public string? AdminButtonLabel => _adminButtonLabel == null
-        ? null
-        : Loc.GetString(_adminButtonLabel.Value);
+    [DataField]
+    public LocId? AdminButtonLabel;
 
     /// <summary>
     /// Weighted-random selection weight when admins approve a request without choosing a specific call.

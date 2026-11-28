@@ -63,11 +63,11 @@ namespace Content.Server._RMC14.ERT;
 public sealed partial class RMCERTSystem
 {
 
-    private bool BuildRoster(RMCERTRequest request, RMCERTCallPrototype call, out string error)
+    private bool BuildRoster(RMCERTRequest request, RMCERTCall call, out string error)
     {
         error = string.Empty;
         // Required slots are guaranteed first, then optional slots fill out the SS13 mob_max equivalent.
-        var roles = call.Roles
+        var roles = call.Comp.Roles
             .OrderByDescending(r => r.Leader)
             .ThenByDescending(r => r.Priority)
             .ToList();
@@ -82,7 +82,7 @@ public sealed partial class RMCERTSystem
                 error = Loc.GetString("rmc-ert-error-empty-ghost-role-pool",
                     ("role", role.Id),
                     ("call", call.Name));
-                Log.Error($"ERT call {call.ID} role {role.Id} has no ghost role entity pool entries.");
+                Log.Error($"ERT call {call.Id} role {role.Id} has no ghost role entity pool entries.");
                 return false;
             }
 
@@ -95,7 +95,7 @@ public sealed partial class RMCERTSystem
                         ("role", role.Id),
                         ("call", call.Name),
                         ("weight", entry.Weight));
-                    Log.Error($"ERT call {call.ID} role {role.Id} has invalid ghost role entity pool weight {entry.Weight} for {entry.Entity}.");
+                    Log.Error($"ERT call {call.Id} role {role.Id} has invalid ghost role entity pool weight {entry.Weight} for {entry.Entity}.");
                     return false;
                 }
 
@@ -123,10 +123,10 @@ public sealed partial class RMCERTSystem
             }
         }
 
-        var targetMin = Math.Max(minTotal, call.Requirements.MinRequiredSlots);
+        var targetMin = Math.Max(minTotal, call.Comp.Requirements.MinRequiredSlots);
         var targetMax = maxTotal;
-        if (call.Requirements.MaxSlots > 0)
-            targetMax = Math.Min(targetMax, call.Requirements.MaxSlots);
+        if (call.Comp.Requirements.MaxSlots > 0)
+            targetMax = Math.Min(targetMax, call.Comp.Requirements.MaxSlots);
 
         if (targetMin > targetMax)
         {
@@ -189,7 +189,7 @@ public sealed partial class RMCERTSystem
         return request.PlannedRoster.Count > 0;
     }
 
-    private bool SpawnRosterSlots(RMCERTRequest request, RMCERTCallPrototype call, EntityUid? shuttle, out string error)
+    private bool SpawnRosterSlots(RMCERTRequest request, RMCERTCall call, EntityUid? shuttle, out string error)
     {
         error = string.Empty;
 
@@ -211,7 +211,7 @@ public sealed partial class RMCERTSystem
         return request.SpawnedGhostRoles.Count > 0;
     }
 
-    private bool SpawnShuttleCargo(RMCERTRequest request, RMCERTCallPrototype call, EntityUid? shuttle, out string error)
+    private bool SpawnShuttleCargo(RMCERTRequest request, RMCERTCall call, EntityUid? shuttle, out string error)
     {
         error = string.Empty;
         if (shuttle is not { Valid: true } shuttleUid || !Exists(shuttleUid))
@@ -220,24 +220,24 @@ public sealed partial class RMCERTSystem
             return false;
         }
 
-        if (call.ShuttleCargo.Count == 0)
+        if (call.Comp.ShuttleCargo.Count == 0)
         {
             error = Loc.GetString("rmc-ert-error-missing-shuttle-cargo", ("call", call.Name));
             return false;
         }
 
-        var cargoCount = call.ShuttleCargoCount > 0
-            ? call.ShuttleCargoCount
-            : call.ShuttleCargo.Count;
+        var cargoCount = call.Comp.ShuttleCargoCount > 0
+            ? call.Comp.ShuttleCargoCount
+            : call.Comp.ShuttleCargo.Count;
         var coordinates = GetShuttleCargoCoordinates(shuttleUid);
-        var cargoPool = call.ShuttleCargo.ToList();
+        var cargoPool = call.Comp.ShuttleCargo.ToList();
         var coordinatePool = coordinates.ToList();
         var spawnedCargo = new List<EntityUid>();
 
         for (var i = 0; i < cargoCount; i++)
         {
             if (cargoPool.Count == 0)
-                cargoPool = call.ShuttleCargo.ToList();
+                cargoPool = call.Comp.ShuttleCargo.ToList();
             if (coordinatePool.Count == 0)
                 coordinatePool = coordinates.ToList();
 
@@ -279,7 +279,7 @@ public sealed partial class RMCERTSystem
 
     private bool TryAddRosterSlot(
         RMCERTRequest request,
-        RMCERTCallPrototype call,
+        RMCERTCall call,
         RMCERTRoleEntry role,
         out string error)
     {
@@ -301,7 +301,7 @@ public sealed partial class RMCERTSystem
     }
 
     private bool TryPickGhostRoleEntity(
-        RMCERTCallPrototype call,
+        RMCERTCall call,
         RMCERTRoleEntry role,
         out EntProtoId ghostRoleEntity,
         out string error)
@@ -314,7 +314,7 @@ public sealed partial class RMCERTSystem
             error = Loc.GetString("rmc-ert-error-empty-ghost-role-pool",
                 ("role", role.Id),
                 ("call", call.Name));
-            Log.Error($"ERT call {call.ID} role {role.Id} has no ghost role entity pool entries.");
+            Log.Error($"ERT call {call.Id} role {role.Id} has no ghost role entity pool entries.");
             return false;
         }
 
@@ -327,7 +327,7 @@ public sealed partial class RMCERTSystem
             error = Loc.GetString("rmc-ert-error-empty-ghost-role-pool",
                 ("role", role.Id),
                 ("call", call.Name));
-            Log.Error($"ERT call {call.ID} role {role.Id} has no positive ghost role entity pool weights.");
+            Log.Error($"ERT call {call.Id} role {role.Id} has no positive ghost role entity pool weights.");
             return false;
         }
 
@@ -353,7 +353,7 @@ public sealed partial class RMCERTSystem
 
     private EntityUid SpawnResponseMember(
         RMCERTRequest request,
-        RMCERTCallPrototype call,
+        RMCERTCall call,
         RMCERTRosterSlot slot,
         EntityCoordinates coordinates)
     {
@@ -375,7 +375,7 @@ public sealed partial class RMCERTSystem
             var briefing = BuildMemberBriefing(request, call);
             ghostRole = _ghostRoles.CreateTakeoverRole(spawned,
                 slot.RoleName,
-                string.IsNullOrWhiteSpace(briefing) ? Loc.GetString(call.Name) : briefing,
+                string.IsNullOrWhiteSpace(briefing) ? call.Name : briefing,
                 makeSentient: false,
                 reregisterOnGhost: false);
         }
@@ -386,7 +386,7 @@ public sealed partial class RMCERTSystem
 
         var member = EnsureComp<RMCERTMemberComponent>(spawned);
         member.RequestId = request.Id;
-        member.Call = call.ID;
+        member.Call = call.Id;
         member.Role = slot.RoleId;
         member.Team = call.Name;
         Dirty(spawned, member);
@@ -394,12 +394,12 @@ public sealed partial class RMCERTSystem
         return spawned;
     }
 
-    private void ApplyResponderAccess(EntityUid responder, RMCERTCallPrototype call)
+    private void ApplyResponderAccess(EntityUid responder, RMCERTCall call)
     {
-        if (call.AccessGroups.Count == 0 || !_idCards.TryFindIdCard(responder, out var card))
+        if (call.Comp.AccessGroups.Count == 0 || !_idCards.TryFindIdCard(responder, out var card))
             return;
 
-        _idAccess.TryAddGroups(card, call.AccessGroups);
+        _idAccess.TryAddGroups(card, call.Comp.AccessGroups);
     }
 
     private bool TryAssignSeat(EntityUid member, EntityUid? shuttle, RMCERTRosterSlot slot, bool reservedOnly)

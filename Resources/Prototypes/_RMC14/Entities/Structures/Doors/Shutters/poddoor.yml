@@ -125,7 +125,7 @@
   - type: DropshipDestination
     dockBounds: "-6,-10.5,6,8.5"
     reserved: true
-    landingClasses: [ external_hangar ]
+    landingClasses: [ ExternalHangar ]
     landingTags: [ mainship, ert, external_hangar ]
   - type: FTLSmashImmune
   - type: NoFTL

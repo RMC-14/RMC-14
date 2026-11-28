@@ -41,6 +41,7 @@ using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
+using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -64,6 +65,9 @@ public sealed partial class RMCERTSystem
 
     private void OnMarineCommunicationsDistressBeacon(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsDistressBeaconMsg args)
     {
+        if (!CanInteractWithDistressConsole(ent, args.Actor))
+            return;
+
         if (!CanUseConsoleDistress(ent, out var reason))
         {
             _popup.PopupEntity(reason, ent, args.Actor, PopupType.MediumCaution);
@@ -78,8 +82,7 @@ public sealed partial class RMCERTSystem
     {
         if (!TryGetEntity(args.Console, out var consoleUid) ||
             !TryComp(consoleUid.Value, out MarineCommunicationsComputerComponent? consoleComp) ||
-            !_ui.IsUiOpen(consoleUid.Value, MarineCommunicationsComputerUI.Key, ent.Owner) ||
-            !_interaction.InRangeUnobstructed(ent.Owner, consoleUid.Value))
+            !CanInteractWithDistressConsole(consoleUid.Value, ent.Owner))
         {
             return;
         }
@@ -92,6 +95,22 @@ public sealed partial class RMCERTSystem
         }
 
         CreateConsoleDistressRequest(console, ent.Owner, args.Message);
+    }
+
+    private bool CanInteractWithDistressConsole(EntityUid console, EntityUid user)
+    {
+        if (!_ui.IsUiOpen(console, MarineCommunicationsComputerUI.Key, user) ||
+            !_blocker.CanInteract(user, console) ||
+            !_interaction.InRangeUnobstructed(user, console))
+        {
+            return false;
+        }
+
+        var userAttempt = new UserOpenActivatableUIAttemptEvent(user, console);
+        RaiseLocalEvent(user, userAttempt);
+        var consoleAttempt = new ActivatableUIOpenAttemptEvent(user);
+        RaiseLocalEvent(console, consoleAttempt);
+        return !userAttempt.Cancelled && !consoleAttempt.Cancelled;
     }
 
     private bool CanUseConsoleDistress(Entity<MarineCommunicationsComputerComponent> console, out string reason)
@@ -118,7 +137,7 @@ public sealed partial class RMCERTSystem
     {
         if (!TryComp(ent, out ActorComponent? actor) ||
             !_requests.TryGetValue(ent.Comp.RequestId, out var request) ||
-            !_prototypes.TryIndex(new ProtoId<RMCERTCallPrototype>(ent.Comp.Call), out var call))
+            ent.Comp.Call is not { } callId || !_calls.TryGetValue(callId, out var call))
         {
             return;
         }
@@ -153,7 +172,7 @@ public sealed partial class RMCERTSystem
         if (ent.Comp.ReasonRequired)
         {
             var ev = new RMCERTHandheldDistressReasonEvent(GetNetEntity(ent.Owner));
-            _dialog.OpenInput(args.User, Loc.GetString("rmc-ert-prompt-handheld-reason", ("title", ent.Comp.RequestTitle)), ev, true, ent.Comp.ReasonLimit);
+            _dialog.OpenInput(args.User, Loc.GetString("rmc-ert-prompt-handheld-reason", ("title", Name(ent))), ev, true, ent.Comp.ReasonLimit);
         }
         else
         {
@@ -169,7 +188,7 @@ public sealed partial class RMCERTSystem
             !TryComp(beaconUid.Value, out RMCERTDistressBeaconComponent? beacon))
             return;
 
-        if (!_hands.IsHolding(ent.Owner, beaconUid.Value))
+        if (!_hands.IsHolding(ent.Owner, beaconUid.Value) || !_blocker.CanInteract(ent.Owner, beaconUid.Value))
         {
             _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-not-held"), ent, ent, PopupType.MediumCaution);
             return;
@@ -191,7 +210,7 @@ public sealed partial class RMCERTSystem
         {
             EnabledOnly = true,
             Source = RMCERTRequestSource.Console,
-        }).Select(c => new ProtoId<RMCERTCallPrototype>(c.Id)).ToList();
+        }).Select(c => c.Id).ToList();
         var autoResolution = GetConsoleAutoResolutionOptions();
 
         var result = CreateRequest(new RMCERTCreateRequestArgs
@@ -262,16 +281,16 @@ public sealed partial class RMCERTSystem
         Entity<RMCERTDistressBeaconComponent> beacon,
         EntityUid user,
         string reason,
-        out List<ProtoId<RMCERTCallPrototype>> calls,
+        out List<EntProtoId<RMCERTCallComponent>> calls,
         out string error)
     {
-        calls = new List<ProtoId<RMCERTCallPrototype>>();
+        calls = new List<EntProtoId<RMCERTCallComponent>>();
         error = Loc.GetString("rmc-ert-error-beacon-no-teams");
 
         var configuredCalls = beacon.Comp.AllowedCalls.Count == 0
-            ? _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
-                .Where(c => c.Enabled && c.AllowedSources.Contains(RMCERTRequestSource.Handheld))
-                .Select(c => new ProtoId<RMCERTCallPrototype>(c.ID))
+            ? _calls.Values
+                .Where(c => c.Comp.Enabled && c.Comp.AllowedSources.Contains(RMCERTRequestSource.Handheld))
+                .Select(c => c.Id)
                 .ToList()
             : beacon.Comp.AllowedCalls.ToList();
 
@@ -291,10 +310,10 @@ public sealed partial class RMCERTSystem
 
         foreach (var callId in configuredCalls)
         {
-            if (!_prototypes.TryIndex(callId, out var call))
+            if (!_calls.TryGetValue(callId, out var call))
                 continue;
 
-            if (!call.Enabled || !call.AllowedSources.Contains(RMCERTRequestSource.Handheld))
+            if (!call.Comp.Enabled || !call.Comp.AllowedSources.Contains(RMCERTRequestSource.Handheld))
                 continue;
 
             if (!CheckRequirements(request, call, out var requirementError))
