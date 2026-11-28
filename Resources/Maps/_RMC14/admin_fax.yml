@@ -10745,7 +10745,8 @@ entities:
       pos: 47.5,-13.5
       parent: 2
     - type: Ladder
-      id: Fax_CLF
+      level: 1
+      groupId: Fax_CLF
     - type: Fixtures
       fixtures: {}
   - uid: 1279
@@ -10754,7 +10755,8 @@ entities:
       pos: 3.5,-11.5
       parent: 2
     - type: Ladder
-      id: Fax_HC
+      level: 1
+      groupId: Fax_HC
     - type: Fixtures
       fixtures: {}
   - uid: 1461
@@ -10763,7 +10765,8 @@ entities:
       pos: 1.5,-27.5
       parent: 2
     - type: Ladder
-      id: Fax_SPP
+      level: 1
+      groupId: Fax_SPP
     - type: Fixtures
       fixtures: {}
   - uid: 1462
@@ -10772,7 +10775,8 @@ entities:
       pos: 21.5,-2.5
       parent: 2
     - type: Ladder
-      id: Fax_CMB
+      level: 1
+      groupId: Fax_CMB
     - type: Fixtures
       fixtures: {}
   - uid: 1499
@@ -10781,7 +10785,8 @@ entities:
       pos: 7.5,-11.5
       parent: 2
     - type: Ladder
-      id: Fax_Provost
+      level: 1
+      groupId: Fax_Provost
     - type: Fixtures
       fixtures: {}
   - uid: 1638
@@ -10790,7 +10795,8 @@ entities:
       pos: 17.5,-36.5
       parent: 2
     - type: Ladder
-      id: Fax_TSE
+      level: 1
+      groupId: Fax_TSE
     - type: Fixtures
       fixtures: {}
   - uid: 1892
@@ -10799,7 +10805,8 @@ entities:
       pos: 40.5,-32.5
       parent: 2
     - type: Ladder
-      id: Fax_WeYa
+      level: 1
+      groupId: Fax_WeYa
     - type: Fixtures
       fixtures: {}
   - uid: 2093
@@ -10808,7 +10815,8 @@ entities:
       pos: 45.5,-35.5
       parent: 2
     - type: Ladder
-      id: Fax_Press
+      level: 1
+      groupId: Fax_Press
     - type: Fixtures
       fixtures: {}
 - proto: RMCLadderUp
@@ -10821,7 +10829,7 @@ entities:
       pos: 25.5,-20.5
       parent: 2
     - type: Ladder
-      id: Fax_CMB
+      groupId: Fax_CMB
     - type: Fixtures
       fixtures: {}
   - uid: 772
@@ -10832,7 +10840,7 @@ entities:
       pos: 25.5,-21.5
       parent: 2
     - type: Ladder
-      id: Fax_WeYa
+      groupId: Fax_WeYa
     - type: Fixtures
       fixtures: {}
   - uid: 948
@@ -10843,7 +10851,7 @@ entities:
       pos: 37.5,-20.5
       parent: 2
     - type: Ladder
-      id: Fax_CLF
+      groupId: Fax_CLF
     - type: Fixtures
       fixtures: {}
   - uid: 949
@@ -10854,7 +10862,7 @@ entities:
       pos: 37.5,-21.5
       parent: 2
     - type: Ladder
-      id: Fax_Press
+      groupId: Fax_Press
     - type: Fixtures
       fixtures: {}
   - uid: 950
@@ -10865,7 +10873,7 @@ entities:
       pos: 13.5,-20.5
       parent: 2
     - type: Ladder
-      id: Fax_Provost
+      groupId: Fax_Provost
     - type: Fixtures
       fixtures: {}
   - uid: 951
@@ -10876,7 +10884,7 @@ entities:
       pos: 13.5,-21.5
       parent: 2
     - type: Ladder
-      id: Fax_TSE
+      groupId: Fax_TSE
     - type: Fixtures
       fixtures: {}
   - uid: 1540
@@ -10887,7 +10895,7 @@ entities:
       pos: 1.5,-21.5
       parent: 2
     - type: Ladder
-      id: Fax_SPP
+      groupId: Fax_SPP
     - type: Fixtures
       fixtures: {}
   - uid: 1541
@@ -10898,7 +10906,7 @@ entities:
       pos: 1.5,-20.5
       parent: 2
     - type: Ladder
-      id: Fax_HC
+      groupId: Fax_HC
     - type: Fixtures
       fixtures: {}
 - proto: RMCLamp

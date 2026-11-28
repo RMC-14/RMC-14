@@ -114811,7 +114811,8 @@ entities:
       pos: 89.5,99.5
       parent: 1
     - type: Ladder
-      id: hatch
+      level: 1
+      groupId: hatch
     - type: Fixtures
       fixtures: {}
   - uid: 9182
@@ -114820,7 +114821,7 @@ entities:
       pos: 33.5,42.5
       parent: 1
     - type: Ladder
-      id: hatch
+      groupId: hatch
     - type: Fixtures
       fixtures: {}
 - proto: RMCLamp
