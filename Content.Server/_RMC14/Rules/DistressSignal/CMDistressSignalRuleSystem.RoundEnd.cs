@@ -314,7 +314,7 @@ public sealed partial class CMDistressSignalRuleSystem
     /// </summary>
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result, LocId? customMessage = null)
     {
-        if (!rule.AutoEnd)
+        if (!rule.AutoEnd || _disableAutoEnd)
             return;
 
         // TODO RMC14: Refactor round end timing

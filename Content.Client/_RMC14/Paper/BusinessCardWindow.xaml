@@ -10,8 +10,8 @@
             <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"/>
         </PanelContainer>
 
-        <!-- Card background -->
-        <PanelContainer Name="CardBackground" HorizontalExpand="True" VerticalExpand="True">
+        <!-- Card background, clips text that doesn't fit so it isn't drawn outside the card -->
+        <PanelContainer Name="CardBackground" HorizontalExpand="True" VerticalExpand="True" RectClipContent="True">
             <PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat BackgroundColor="White" />
             </PanelContainer.PanelOverride>

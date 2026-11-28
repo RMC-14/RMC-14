@@ -39,9 +39,9 @@
   source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/gun_m4a3_5.ogg"
 
 - files: ["gun_44mag.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/gun_44mag_v4.ogg"
+  license: "CC-BY-4.0"
+  copyright: "Taken from Pixabay and converted to mono by kleinerstation13 (Github) (content license at https://pixabay.com/service/license-summary/)"
+  source: "https://pixabay.com/sound-effects/film-special-effects-revovler-sound-328431/"
 
 - files: ["gun_mk80.ogg"]
   license: "CC-BY-SA-3.0"
@@ -53,9 +53,14 @@
   copyright: "Taken from cmss13. Mixed with CC0-1.0 sample from https://freesound.org/people/areniporgen/sounds/702225/ by Serithi (discord)"
   source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m4ra.ogg"
 
-- files: ["gun_m16.ogg"]
+- files: ["gun_cr16.ogg"]
   license: "CC-BY-SA-3.0"
-  copyright: "Made by WebKnight"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/gun_m16.ogg"
+
+- files: ["gun_cr16a5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13. Mixed with CC0-1.0 sample from https://freesound.org/people/hyperix6/sounds/676588/ by kleinerstation13 (Github)"
   source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/gun_m16.ogg"
 
 - files: ["gun_m63.ogg"]
@@ -227,16 +232,6 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_boltaction.ogg"
-
-- files: ["gun_ssg45_1.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken CMSS13, and from michorvath (Freesound, https://freesound.org/s/427596/). Edited by SharkSnake98 on GitHub"
-  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_1.ogg"
-
-- files: ["gun_ssg45_2.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken CMSS13, and from michorvath (Freesound, https://freesound.org/s/427596/). Edited by SharkSnake98 on GitHub"
-  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_1.ogg"
 
 - files: ["gun_type64.ogg"]
   license: "CC-BY-SA-3.0"

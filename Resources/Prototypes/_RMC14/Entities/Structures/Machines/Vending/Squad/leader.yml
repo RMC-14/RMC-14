@@ -46,14 +46,15 @@
         points: 15
     - name: Utilities
       entries:
-      - id: RMCWhistle
-        points: 3
       - id: CMFireExtinguisherPortable
         points: 3
       - id: RMCMotionDetector
         points: 5
       - id: RMCFulton20
         points: 5
+      - id: RMCGlassesMedicalHUDGlassesOld
+        points: 4
+        recommended: true
     - name: Binoculars
       entries:
       - id: RMCRangefinder
@@ -330,6 +331,7 @@
     - RMCPackFlareCAS
     - RMCLaserDesignator
     - CMFireExtinguisherPortable
+    - RMCWhistle
 
 - type: entity
   parent: RMCKitBase

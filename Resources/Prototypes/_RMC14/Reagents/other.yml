@@ -10,7 +10,7 @@
       metabolismRate: 0.1
       effects:
       - !type:Nutritious
-        potency: 2
+        level: 2
         nutFactor: 2
         nutMetabolism: 0.1
 

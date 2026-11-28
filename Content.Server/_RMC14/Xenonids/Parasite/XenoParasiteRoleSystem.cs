@@ -1,6 +1,7 @@
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -28,6 +29,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
     private int _parasiteSpawnScale;
 
     [Dependency] private readonly ActorSystem _actor = default!;
+    [Dependency] private readonly SharedXenoBanishSystem _banish = default!;
     [Dependency] private readonly XenoEggSystem _eggSystem = default!;
     [Dependency] private readonly XenoParasiteThrowerSystem _throwerSystem = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolutionSystem = default!;
@@ -174,7 +176,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
         if (HasComp<InfectionSuccessComponent>(user))
             return true;
 
-        var timeSinceDeath = _gameTiming.CurTime.Subtract(ghostComp.TimeOfDeath);
+        var timeSinceDeath = _gameTiming.RealTime.Subtract(ghostComp.TimeOfDeath);
 
         // Must have been dead for 3 minutes
         if (timeSinceDeath < TimeSpan.FromMinutes(3))
@@ -189,6 +191,13 @@ public sealed class XenoEggRoleSystem : EntitySystem
     {
         //TODO RMC14 parasite bans should be checked here
         _ui.CloseUi(ent, XenoParasiteGhostUI.Key);
+
+        if (_actor.TryGetSession(user, out var session) &&
+            session != null &&
+            !_banish.CanJoinHivePopup(session, ent))
+        {
+            return false;
+        }
 
         return UserCheck(user);
     }

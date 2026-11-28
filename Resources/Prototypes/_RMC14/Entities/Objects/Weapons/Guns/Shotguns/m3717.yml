@@ -43,9 +43,7 @@
     accuracyMultiplierUnwielded: 0.5
   - type: PumpAction
     sound:
-      path: /Audio/_RMC14/Weapons/Guns/Cock/gun_cocked2.ogg
-      params:
-        volume: 10
+      path: //Audio/_RMC14/Weapons/Guns/Pump/shotgunpump3.ogg
   - type: GunDamageModifier
     multiplier: 1.15
   - type: AttachableHolder

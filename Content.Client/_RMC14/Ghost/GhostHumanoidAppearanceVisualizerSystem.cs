@@ -206,13 +206,11 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
                 var index = ResolveLayerIndex((ent.Owner, ent.Comp1), snapshot.Slot, renderKey, insertionIndices);
                 _sprite.LayerSetData((ent.Owner, ent.Comp1), index, layerCopy);
                 ent.Comp2.RenderedLayers.Add(renderKey);
-                ent.Comp2.BoostedLayers.Add(renderKey);
 
                 if (snapshot.Displacement != null &&
                     _displacement.TryAddDisplacement(snapshot.Displacement, (ent.Owner, ent.Comp1), index, renderKey, out var dispKey))
                 {
                     ent.Comp2.RenderedLayers.Add(dispKey);
-                    ent.Comp2.BoostedLayers.Add(dispKey);
 
                     Entity<SpriteComponent?> spriteEnt = (ent.Owner, ent.Comp1);
                     if (_sprite.LayerMapTryGet(spriteEnt, dispKey, out var dispIdx, false))
@@ -243,7 +241,6 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         var index = ResolveLayerIndex((ent.Owner, ent.Comp1), accessory.BookmarkKey, renderKey, insertionIndices);
         _sprite.LayerSetData((ent.Owner, ent.Comp1), index, layer);
         ent.Comp2.RenderedLayers.Add(renderKey);
-        ent.Comp2.BoostedLayers.Add(renderKey);
     }
 
     private void AddWebbingLayer(
@@ -266,7 +263,6 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         var index = ResolveLayerIndex((ent.Owner, ent.Comp1), webbing.BookmarkKey, renderKey, insertionIndices);
         _sprite.LayerSetData((ent.Owner, ent.Comp1), index, layer);
         ent.Comp2.RenderedLayers.Add(renderKey);
-        ent.Comp2.BoostedLayers.Add(renderKey);
     }
 
     private void AddHeldItemLayers(
@@ -331,13 +327,11 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
             var index = ResolveLayerIndex((ent.Owner, ent.Comp1), null, renderKey, insertionIndices);
             _sprite.LayerSetData((ent.Owner, ent.Comp1), index, layerCopy);
             ent.Comp2.RenderedLayers.Add(renderKey);
-            ent.Comp2.BoostedLayers.Add(renderKey);
 
             if (snapshot.Displacement != null &&
                 _displacement.TryAddDisplacement(snapshot.Displacement, (ent.Owner, ent.Comp1), index, renderKey, out var dispKey))
             {
                 ent.Comp2.RenderedLayers.Add(dispKey);
-                ent.Comp2.BoostedLayers.Add(dispKey);
             }
 
             i++;
@@ -536,7 +530,6 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         }
 
         ent.Comp2.RenderedLayers.Clear();
-        ent.Comp2.BoostedLayers.Clear();
     }
 
     private sealed class CachedClothingData

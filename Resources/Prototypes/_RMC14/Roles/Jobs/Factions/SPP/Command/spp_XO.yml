@@ -81,7 +81,7 @@
     - RMCMegaphone
     - RMCMotionDetector
     - CMFireExtinguisher
-    - CMMRE
+    - RMCMRESPP
 
 - type: playTimeTracker
   id: CMJobSPPXO
