@@ -338,7 +338,7 @@
   description: Standard Stock for the M890 tactical shotgun.
   components:
   - type: Sprite
-    state: tactical_stock_221
+    state: tactical_stock_890
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
@@ -375,13 +375,13 @@
   description: Standard Stock for the M890 tactical shotgun. Coated in a glossy red finish to signify its use with Military Police Honor Guards.
   components:
   - type: Sprite
-    state: tactical_stock_221_guard
+    state: tactical_stock_890_guard
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentMK221Stock
-  name: MK221 tactical stock
-  description: A metal stock made for the MK221 tactical shotgun.
+  id: RMCAttachmentXM38Stock
+  name: XM38 tactical stock
+  description: A metal stock made for the XM38 tactical shotgun.
   components:
   - type: Sprite
     state: tactical_stock
@@ -390,7 +390,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentMK221Stock
+    - RMCAttachmentXM38Stock
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -1383,7 +1383,7 @@
   id: RMCAttachmentXM88Stock
 
 - type: Tag
-  id: RMCAttachmentMK221Stock
+  id: RMCAttachmentXM38Stock
 
 - type: Tag
   id: RMCAttachmentM54C2StockCollapsible
